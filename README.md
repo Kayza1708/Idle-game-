@@ -98,12 +98,12 @@ Du brauchst einmalig [Node.js 20 LTS](https://nodejs.org/) und die App **Termina
 ```bash
 git clone https://github.com/Kayza1708/Idle-game-.git
 cd Idle-game-
-git switch feature/browser-prototype
+git switch codex/implementiere-ersten-codex-auftrag
 npm install
 npm run dev
 ```
 
-Terminal zeigt danach eine Adresse wie `http://localhost:5173/`. Halte die Befehlstaste **⌘** gedrückt und klicke auf diese Adresse. Zum Beenden gehst du zurück ins Terminal und drückst **Ctrl+C**. Beim nächsten Start genügen `cd Idle-game-`, `git switch feature/browser-prototype`, `npm install` und `npm run dev`.
+Terminal zeigt danach eine Adresse wie `http://localhost:5173/`. Halte die Befehlstaste **⌘** gedrückt und klicke auf diese Adresse. Zum Beenden gehst du zurück ins Terminal und drückst **Ctrl+C**. Beim nächsten Start genügen `cd Idle-game-`, `git switch codex/implementiere-ersten-codex-auftrag`, `npm install` und `npm run dev`.
 
 ## Fünf einfache Prüfschritte
 

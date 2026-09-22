@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { advance, blockCost, bulkCost, buyHardware, creditRate, newGame, trainingGoal } from './economy';
+import { advance, advanceTo, blockCost, bulkCost, buyHardware, creditRate, newGame, trainingGoal } from './economy';
 
 describe('economy', () => {
   it('uses the unrounded exponential next-block cost and exact bulk sum', () => {
@@ -30,5 +30,7 @@ describe('economy', () => {
     expect(advance(state, -5).state.credits).toBe(0);
     expect(advance(state, 1e9).state.credits).toBeCloseTo(advance(state, 86400).state.credits);
     expect(advance(state, 1).state.credits).toBeCloseTo(creditRate(1, 0));
+    const futureDated = { ...state, savedAt: 5_000 };
+    expect(advanceTo(futureDated, 1_000).state).toEqual(futureDated);
   });
 });

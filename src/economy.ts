@@ -48,3 +48,10 @@ export function advance(state: GameState, seconds: number): { state: GameState; 
   }
   return { state: next, levels };
 }
+
+/** Advances to a wall-clock instant and keeps state and timestamp in lockstep. */
+export function advanceTo(state: GameState, now: number): { state: GameState; levels: number } {
+  const result = advance(state, (now - state.savedAt) / 1000);
+  result.state.savedAt = Math.max(state.savedAt, now);
+  return result;
+}

@@ -1,24 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { advance, blockCost, buyHardware, computeRate, creditRate, GameState, trainingGoal } from './economy';
-import { restore, SAVE_KEY, serialize } from './storage';
+import { advanceTo, blockCost, buyHardware, computeRate, creditRate, GameState, trainingGoal } from './economy';
+import { browserStorage, LoadResult, loadGame, persistGame, removeGame } from './storage';
 import { Hardware } from './Hardware';
 import './style.css';
 
 const num = (n: number, digits = 1) => new Intl.NumberFormat('de-DE', { maximumFractionDigits: digits, notation: n >= 1e6 ? 'compact' : 'standard' }).format(n);
 function App() {
-  const loaded = useRef(restore(localStorage.getItem(SAVE_KEY)));
+  const loaded = useRef<LoadResult | null>(null);
+  const [storage] = useState(browserStorage);
+  if (!loaded.current) loaded.current = loadGame(storage);
   const now = Date.now();
   const elapsed = Math.max(0, (now - loaded.current.state.savedAt) / 1000);
-  const resumed = advance(loaded.current.state, elapsed);
-  resumed.state.savedAt = now;
+  const resumed = advanceTo(loaded.current.state, now);
   const [game, setGame] = useState<GameState>(resumed.state);
   const [saveError, setSaveError] = useState(loaded.current.error);
+  const [saveStatus, setSaveStatus] = useState<'pending' | 'saved' | 'failed'>('pending');
   const [offline, setOffline] = useState(elapsed > 10 ? { seconds: Math.min(elapsed, 86400), credits: resumed.state.credits - loaded.current.state.credits, levels: resumed.levels } : null);
   const [effects, setEffects] = useState(true);
   const [pulse, setPulse] = useState(0);
   const [levelFlash, setLevelFlash] = useState(resumed.levels > 0 ? 1 : 0);
   const gameRef = useRef(game); gameRef.current = game;
+  const writable = useRef(loaded.current.writable);
   const stage = game.hardware >= 25 ? 3 : game.hardware >= 10 ? 2 : 1;
 
   useEffect(() => {
@@ -26,8 +29,7 @@ function App() {
     const tick = () => {
       if (!document.hidden) {
         const tickNow = Date.now();
-        const result = advance(gameRef.current, (tickNow - gameRef.current.savedAt) / 1000);
-        result.state.savedAt = tickNow;
+        const result = advanceTo(gameRef.current, tickNow);
         if (result.levels) setLevelFlash(x => x + 1);
         setGame(result.state);
       }
@@ -37,18 +39,33 @@ function App() {
     return () => cancelAnimationFrame(frame);
   }, []);
   useEffect(() => {
-    if (saveError) return;
-    const save = () => localStorage.setItem(SAVE_KEY, serialize({ ...gameRef.current, savedAt: Date.now() }));
+    if (!writable.current) return;
+    const save = () => {
+      const result = persistGame(storage, gameRef.current, Date.now());
+      gameRef.current = result.state;
+      setGame(result.state);
+      setSaveStatus(result.saved ? 'saved' : 'failed');
+      setSaveError(result.error);
+    };
     const timer = window.setInterval(save, 5000);
     window.addEventListener('pagehide', save);
     return () => { window.clearInterval(timer); window.removeEventListener('pagehide', save); };
-  }, [saveError]);
+  }, []);
 
   const buy = () => {
-    const next = buyHardware(game);
-    if (next !== game) { next.savedAt = Date.now(); setGame(next); if (!saveError) localStorage.setItem(SAVE_KEY, serialize(next)); setPulse(x => x + 1); }
+    const now = Date.now();
+    const current = advanceTo(gameRef.current, now).state;
+    const next = buyHardware(current);
+    if (next !== current) {
+      const result = writable.current ? persistGame(storage, next, now) : { state: next, saved: false };
+      gameRef.current = result.state;
+      setGame(result.state);
+      setSaveStatus(result.saved ? 'saved' : 'failed');
+      setSaveError('error' in result ? result.error : undefined);
+      setPulse(x => x + 1);
+    }
   };
-  const reset = () => { if (confirm('Wirklich neu starten? Dein gesamter Fortschritt wird gelöscht.')) { localStorage.removeItem(SAVE_KEY); location.reload(); } };
+  const reset = () => { if (confirm('Wirklich neu starten? Dein gesamter Fortschritt wird gelöscht.')) { const error = removeGame(storage); if (error) { setSaveError(error); setSaveStatus('failed'); } else location.reload(); } };
   const cost = blockCost(game.hardware);
   const progress = Math.min(100, game.training / trainingGoal(game.level) * 100);
   return <main className={`${effects ? '' : 'effects-off'}`}>
@@ -70,8 +87,8 @@ function App() {
       <div className="bar"><i style={{width:`${progress}%`}}/></div>
       <div className="training-meta"><span>{num(game.training, 0)} / {num(trainingGoal(game.level), 0)} Arbeit</span><span>Qualität ×{num(1.08 ** game.level, 2)}</span></div>
     </section>
-    <button className="buy" disabled={game.credits < cost || !!saveError} onClick={buy}><span>Hardwareblock kaufen<small>Mehr Leistung für die Werkstatt</small></span><strong>{num(cost, 1)} C</strong></button>
-    <footer><span>Automatisch gespeichert</span><button onClick={reset}>Spielstand zurücksetzen</button></footer>
+    <button className="buy" disabled={game.credits < cost || !writable.current} onClick={buy}><span>Hardwareblock kaufen<small>Mehr Leistung für die Werkstatt</small></span><strong>{num(cost, 1)} C</strong></button>
+    <footer><span className={saveStatus}>{saveStatus === 'saved' ? 'Automatisch gespeichert' : saveStatus === 'failed' ? 'Nicht gespeichert' : 'Speichern ausstehend'}</span><button onClick={reset}>Spielstand zurücksetzen</button></footer>
   </main>;
 }
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App/></React.StrictMode>);
