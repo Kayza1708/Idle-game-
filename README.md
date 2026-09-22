@@ -90,3 +90,35 @@ Keine Tests oder Screenshots als durchgeführt behaupten, die nicht ausgeführt 
 ## Quellen zur technischen Grundlage
 - https://vite.dev/guide/
 - https://capacitorjs.com/docs
+
+## Browser-Prototyp lokal auf einem Mac starten
+
+Du brauchst einmalig [Node.js 20 LTS](https://nodejs.org/) und die App **Terminal** (sie ist auf jedem Mac vorhanden). Kopiere anschließend jeden dieser Befehle einzeln ins Terminal und drücke jeweils die Eingabetaste:
+
+```bash
+git clone https://github.com/Kayza1708/Idle-game-.git
+cd Idle-game-
+git switch feature/browser-prototype
+npm install
+npm run dev
+```
+
+Terminal zeigt danach eine Adresse wie `http://localhost:5173/`. Halte die Befehlstaste **⌘** gedrückt und klicke auf diese Adresse. Zum Beenden gehst du zurück ins Terminal und drückst **Ctrl+C**. Beim nächsten Start genügen `cd Idle-game-`, `git switch feature/browser-prototype`, `npm install` und `npm run dev`.
+
+## Fünf einfache Prüfschritte
+
+1. **Start prüfen:** Öffne die Adresse. Du solltest 0 Credits, einen Hardwareblock und Modelllevel 0 sehen. Credits und der violette Trainingsbalken müssen von allein steigen.
+2. **Kauf prüfen:** Warte, bis der goldene Kaufen-Knopf aktiv wird (der erste Kauf kostet 29,5 Credits), und klicke ihn. Der Knopf drückt sich ein, ein kurzer Licht-/Partikeleffekt erscheint und die Blockzahl steigt auf 2.
+3. **Training prüfen:** Lass das Spiel geöffnet, bis der Trainingsbalken voll ist. Danach muss „Modelllevel 1“ erscheinen, der neue Balken wieder unten beginnen und das Einkommen pro Sekunde höher sein.
+4. **Speichern prüfen:** Lade die Seite mit **⌘+R** neu. Credits, Hardware und Modelllevel müssen erhalten bleiben. Nach einer längeren Pause erscheint zusätzlich eine verständliche Rückkehr-Zusammenfassung.
+5. **Darstellung und Reset prüfen:** Verkleinere das Browserfenster ungefähr auf Handybreite und prüfe, dass nichts abgeschnitten ist. Schalte oben rechts „FX“ aus und wieder an. Klicke ganz unten auf „Spielstand zurücksetzen“, brich die erste Nachfrage ab und bestätige sie erst beim zweiten Versuch; danach beginnt das Spiel wieder bei den Startwerten.
+
+## Entwicklung und Qualitätschecks
+
+```bash
+npm run typecheck
+npm test
+npm run build
+```
+
+Der Prototyp ist mobile-first und im Browser für ungefähr 390 × 844 Pixel sowie Desktop ausgelegt. Echte iOS-/Android-Gerätetests, native Verpackung, Prestige, Items, Gems, Werbung und Ranglisten stehen noch aus. Die vorläufige Balance ist in [`docs/economy.md`](docs/economy.md), die Gestaltung in [`docs/art-direction.md`](docs/art-direction.md) dokumentiert.

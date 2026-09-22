@@ -1,0 +1,9 @@
+export function Hardware({ stage, pulse }: { stage: number; pulse: number }) {
+  return <svg key={pulse} className={`hardware stage-${stage}`} viewBox="0 0 360 235" role="img" aria-label={stage === 1 ? 'Leuchtender Heimrechner' : stage === 2 ? 'Heimrechner mit GPU-Aufbau' : 'Ausgebautes Server-Rack'}>
+    <defs><linearGradient id="case" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#233052"/><stop offset="1" stopColor="#0a1023"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+    <ellipse cx="180" cy="210" rx="130" ry="14" fill="#050817" opacity=".7"/>
+    {stage === 3 && <g className="rack"><path d="M88 28h184l15 171H74z" fill="url(#case)" stroke="#50638d" strokeWidth="3"/>{[55,87,119,151].map(y=><g key={y}><path d={`M96 ${y}h168l3 24H93z`} fill="#111a32" stroke="#43547a"/><circle cx="244" cy={y+12} r="4" fill="#60f4ec"/><path d={`M111 ${y+10}h92`} stroke="#7687aa" strokeWidth="4"/></g>)}</g>}
+    {stage < 3 && <g><path d="M80 62l160-22 38 33-9 120-161 17-37-31z" fill="url(#case)" stroke="#50638d" strokeWidth="3"/><path d="M93 76l137-18 28 22-8 94-135 15-25-20z" fill="#090f22" stroke="#2fdddc"/><circle cx="172" cy="127" r="42" fill="#0e1930" stroke="#52688f" strokeWidth="6"/><circle cx="172" cy="127" r="25" fill="none" stroke="#54eee8" strokeWidth="5" strokeDasharray="18 10" className="fan"/><circle cx="172" cy="127" r="7" fill="#b7fffb" filter="url(#glow)"/>{stage === 2 && <g><path d="M111 72l114-15 1 27-112 14z" fill="#182749" stroke="#a873ff" strokeWidth="3"/><path d="M125 81l70-9" stroke="#c8a8ff" strokeWidth="5"/><circle cx="211" cy="72" r="5" fill="#ffd166"/></g>}</g>}
+    <path d="M57 213h250" stroke="#56e8e4" strokeWidth="2" opacity=".3"/>
+  </svg>;
+}
