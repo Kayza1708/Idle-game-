@@ -19,7 +19,7 @@ Die angezeigte Adresse (meist `http://localhost:5173`) im Browser öffnen. `Ctrl
 ## Was implementiert ist
 
 - Mobile Navigation: Werkstatt, Forschung, Inventar, Prestige und Missionen.
-- Versionierter Save (v2), Migration des Prototyp-Saves, Importprüfung und maximal 24 Stunden Offline-Simulation.
+- Versionierter Save (v3), Migration der Prototyp- und Alpha-v2-Saves, Importprüfung, konsistente Testuhr und maximal 24 Stunden Offline-Simulation.
 - Prestige mit Umsatzstatistiken, 18 Knoten, optionaler Rückverteilung und permanentem Faktor.
 - Drei Experimente, Warteschlange/Wiederholung, drei Durchbrüche und einmalige Abschlussbelohnungen.
 - Neun illustrierte Itemtypen, fünf Seltenheiten, Pity, Crafting, Upgrade, Sperren, Zerlegen und drei Slots.

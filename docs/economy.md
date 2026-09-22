@@ -20,6 +20,8 @@ Tagesperioden verwenden UTC, Wochen beginnen Montag 00:00 UTC. Achievement-Schwe
 
 Die ereignisorientierte Simulation teilt an Training, 10-Sekunden-Autokauf, Experimentabschluss und Boost-Ende. Offline sind je echter Abwesenheit maximal 24 Stunden möglich. Aktive Missionszeit entsteht nur bei sichtbarer Seite.
 
+Entwickler-Zeitsprünge laufen auf einer dauerhaft gespeicherten Simulationsuhr. Ihr Offset gilt gemeinsam für Produktion, Experimente, Boost-Endzeiten und UTC-Missionsperioden. Dadurch läuft die Simulation nach einem Sprung, Prestige, Speichern oder Neuladen mit der nächsten realen Sekunde weiter, ohne Zeitstempel einzeln zurückzusetzen oder Zeit doppelt anzurechnen.
+
 ## Alpha-Vereinfachungen
 
 - Zufall nutzt aktuell den Browser-Zufallsgenerator; die resultierenden Items werden sofort gespeichert.

@@ -40,7 +40,7 @@ export type Item = { id: string; type: ItemTypeId; rarity: Rarity; level: number
 export type Experiment = { id: string; type: ExperimentId; startedAt: number; endsAt: number };
 export type MissionPeriod = { key: string; activeSeconds: number; hardware: number; training: number; days: string[]; claims: string[] };
 export type GameState = {
-  credits:number; hardware:number; level:number; training:number; savedAt:number;
+  credits:number; hardware:number; level:number; training:number; savedAt:number; clockOffsetMs:number;
   runCreditsEarned:number; lifetimeCreditsEarned:number; totalInsightEarned:number; unspentInsight:number; prestigeCount:number;
   nodes:string[]; gems:number; welcomeGiftClaimed:boolean; components:number; componentRemainder:number; researchFragments:number; blueprintFragments:number;
   breakthroughs:BreakthroughId[]; inventory:Item[]; equipped:Partial<Record<ItemSlot,string>>; pity:{rare:number;epic:number;legendary:number};
@@ -53,7 +53,7 @@ export type GameState = {
 export const dayKey=(ms:number)=>new Date(ms).toISOString().slice(0,10);
 export const weekKey=(ms:number)=>{const d=new Date(ms); const day=(d.getUTCDay()+6)%7; d.setUTCDate(d.getUTCDate()-day); return dayKey(d.getTime())};
 const period=(key:string):MissionPeriod=>({key,activeSeconds:0,hardware:0,training:0,days:[],claims:[]});
-export const newGame=(now=Date.now()):GameState=>({credits:0,hardware:1,level:0,training:0,savedAt:now,runCreditsEarned:0,lifetimeCreditsEarned:0,totalInsightEarned:0,unspentInsight:0,prestigeCount:0,nodes:[],gems:50,welcomeGiftClaimed:true,components:0,componentRemainder:0,researchFragments:0,blueprintFragments:0,breakthroughs:[],inventory:[],equipped:{},pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false},automation:{enabled:false,reserve:0,elapsed:0},missions:{daily:period(dayKey(now)),weekly:period(weekKey(now)),mailbox:[]},achievementClaims:[],achievementPoints:0,trainingBoostUntil:0,creditBoostUntil:0,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true},testSave:false,nextId:1});
+export const newGame=(now=Date.now()):GameState=>({credits:0,hardware:1,level:0,training:0,savedAt:now,clockOffsetMs:0,runCreditsEarned:0,lifetimeCreditsEarned:0,totalInsightEarned:0,unspentInsight:0,prestigeCount:0,nodes:[],gems:50,welcomeGiftClaimed:true,components:0,componentRemainder:0,researchFragments:0,blueprintFragments:0,breakthroughs:[],inventory:[],equipped:{},pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false},automation:{enabled:false,reserve:0,elapsed:0},missions:{daily:period(dayKey(now)),weekly:period(weekKey(now)),mailbox:[]},achievementClaims:[],achievementPoints:0,trainingBoostUntil:0,creditBoostUntil:0,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true},testSave:false,nextId:1});
 
 export const hasNode=(s:GameState,b:PrestigeBranch,t:number)=>s.nodes.includes(`${b}-${t}`);
 export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemSlot;effect:ItemEffect}>={
