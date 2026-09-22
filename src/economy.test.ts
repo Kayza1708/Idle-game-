@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { advance, advanceTo, blockCost, bulkCost, buyHardware, creditRate, newGame, trainingGoal } from './economy';
+import { blockCost, bulkCost, buyHardware, creditRate, newGame, trainingGoal } from './economy';
+import { advance, advanceTo } from './simulation';
 
 describe('economy', () => {
   it('uses the unrounded exponential next-block cost and exact bulk sum', () => {
@@ -13,7 +14,7 @@ describe('economy', () => {
   it('retains overflow across several training completions', () => {
     const state = { ...newGame(0), hardware: 25 };
     const result = advance(state, 100);
-    expect(result.levels).toBeGreaterThan(1);
+    expect(result.report.levels).toBeGreaterThan(1);
     expect(result.state.training).toBeGreaterThanOrEqual(0);
     expect(result.state.training).toBeLessThan(trainingGoal(result.state.level));
   });
