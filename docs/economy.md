@@ -1,30 +1,44 @@
-# Alpha-Economy 0.2
+# Economy Phase 1
 
-Alle abstimmbaren Zahlen stehen in `src/economy.ts` (`BALANCE`). Andere Module enthalten ausschließlich Regeln und stabile IDs.
+Alle abstimmbaren Zahlen stehen ausschließlich in `src/economy.ts`. UI, Simulation und Tests verwenden diese Funktionen ohne duplizierte Konstanten.
 
-## Basis und Prestige
+## Hardware
 
-Die Basisformeln bleiben: Blockpreis `25 × 1,18^n`, Compute `10 × n × 2^floor(n/25)`, Qualität `1,08^L`, Effizienz `1,04^L`, Credits/s `Compute × 0,1 × Qualität × Effizienz`, Training `Compute × 0,05` und Trainingsziel `300 × 1,8^L`. Mehrfachkäufe summieren jeden Einzelpreis.
+| Klasse | Basiskosten | Wachstum | Compute |
+|---|---:|---:|---:|
+| Taschenrechner | 10 | 1,15 | 1 |
+| Einplatinencomputer | 180 | 1,15 | 12 |
+| Heim-PC | 2.400 | 1,15 | 120 |
+| Gaming-GPU | 32.000 | 1,15 | 1.200 |
+| GPU-Rig | 450.000 | 1,15 | 12.000 |
 
-Prestige-Anspruch ist `floor(3 × (Run-Umsatz / 1.000.000)^0,45)`, neue Erkenntnisse sind Anspruch minus jemals verdiente Erkenntnisse. Der permanente Faktor `1 + 0,35 × Erkenntnisse^0,7` wirkt je einmal auf Credits und Training. Der 18-Knoten-Baum hat sechs Äste und Kosten 1/3/10. Boni einer Familie addieren, Item-, Prestige-, Achievement- und Durchbruchsfamilien multiplizieren.
+`C_i(n)=b_i×r_i^n×d_i`. Bulk-Kosten verwenden die geschlossene geometrische Summe. Max-Kauf wird logarithmisch geschätzt und gegen dieselbe Bulk-Funktion korrigiert. Klassen werden bei 10 Einheiten der vorherigen Klasse entdeckt und bleiben sichtbar. Bei 10/25/50 Einheiten verdoppelt sich der Compute der Klasse jeweils. Das einmalige Run-Upgrade ab 15 Einheiten kostet `C_i(15)` und verdoppelt nur diese Klasse. Die alte globale 25-Block-Verdopplung existiert nicht mehr.
 
-## Forschung und Items
+Gesamtcompute ist die Summe `n_i×p_i×M_i×U_i`, danach einmal multipliziert mit globalem Compute. Infrastruktur-Knoten sind eine additive, permanente Compute-Familie; ausgerüstete Compute-Items sind eine separate additive Itemfamilie und werden damit multipliziert. Klassen-Upgrades und Bestände werden beim Prestige zurückgesetzt, Entdeckungen bleiben.
 
-Experimente dauern beim Start vier Stunden geteilt durch den dann gültigen Geschwindigkeitsfaktor. **Die gespeicherte Endzeit bleibt danach unverändert**. Belohnungen: Hardware 45 Komponenten + 1 Bauplan, Architektur 20 Komponenten + 2 Forschungsfragmente, Artefakt 20 Komponenten + 2 Baupläne und 20 % Itemchance. Komponentenreste werden als Bruchteil gespeichert.
+## Einkommen, Training, Tap und Overclock
 
-Items haben Seltenheiten Common/Uncommon/Rare/Epic/Legendary (60/25/10/4/1 %) und Faktoren 1/1,15/1,35/1,65/2. Effekt: `5 % × Faktor × (1 + 0,1 × Level)`. Upgrade: `ceil(60 × 1,35^Level)`, maximal 10. Crafting und Zerlegung entsprechen den Alpha-Vorgaben. Zufallsfunde besitzen unabhängige Rare-/Epic-/Legendary-Zähler (20/50/100).
+- `R_passive = 1,0 × H × 1,08^L × 1,04^L × G_prestige × G_achievement × G_credit × F_credit_temp`.
+- `T_passive = 0,12 × H × G_prestige × G_training × F_training_temp`.
+- Trainingsziel: `40 × 1,65^L`; Überlauf bleibt erhalten.
+- Tap: `max(1; 0,20 × R_passive ohne temporäre Boni)`. Tap zählt als regulärer, prestige-berechtigter Umsatz.
+- Overclock: 30 gültige Taps, eine Ladung, 15 Sekunden +100 % Credits und Training, 90 Sekunden Cooldown ab Aktivierung.
+- Temporäre Boni addieren innerhalb des Kanals: Werbe-Credit + Overclock ergibt `1+1+1=×3`; Gem-Training + Overclock ebenso. Tap erhält keinen temporären Multiplikator.
 
-## Missionen, Boosts und Simulation
+Bonusfamilien: Prestige und Achievements sind permanent und bleiben; Modell- und Spezialisierungs-Credit/Training sind innerhalb ihres Kanals additiv; Items bilden je Effekt eine additive Familie; unterschiedliche Familien werden gezielt multipliziert. Der Prestigefaktor wirkt je einmal auf Credits und Training, nie zusätzlich auf Compute.
 
-Tagesperioden verwenden UTC, Wochen beginnen Montag 00:00 UTC. Achievement-Schwellen 10⁴ bis 10⁹ vergeben je 20 Gems und 10 Punkte; Faktor `1 + 0,02 × Punkte^0,7`. Gem-Boosts verlängern bis 24 Stunden. Mock-Belohnungen werden erst nach Erfolg und je Transaktions-ID einmal vergeben.
+## Prestige
 
-Die ereignisorientierte Simulation teilt an Training, 10-Sekunden-Autokauf, Experimentabschluss und Boost-Ende. Offline sind je echter Abwesenheit maximal 24 Stunden möglich. Aktive Missionszeit entsteht nur bei sichtbarer Seite.
+Nur passive Produktion und Taps erhöhen `lifetimeEligibleCredits`. Debug-, Auftrags-, Gem- und Werbe-Credits sind ausgeschlossen. `C(E)=floor(3×(E/13.000.000.000)^0,45)`, Anspruch ist `C(E)-prestigeEntitlementClaimed`. Der hohe kalibrierte Nenner folgt aus der stark beschleunigenden Fünf-Klassen-Economy; das aktive ROI-Profil erreichte den ersten Reset nach 24:41 Minuten. Erster Reset benötigt 3, folgende 1. Der Faktor bleibt `1+0,35×totalInsightEarned^0,7`.
 
-Entwickler-Zeitsprünge laufen auf einer dauerhaft gespeicherten Simulationsuhr. Ihr Offset gilt gemeinsam für Produktion, Experimente, Boost-Endzeiten und UTC-Missionsperioden. Dadurch läuft die Simulation nach einem Sprung, Prestige, Speichern oder Neuladen mit der nächsten realen Sekunde weiter, ohne Zeitstempel einzeln zurückzusetzen oder Zeit doppelt anzurechnen.
+KI-Assistent gibt +25 % im permanenten Creditkanal. Coding-KI setzt Preise auf ×0,90 und gibt +10 % Training. Forschungs-KI gibt +25 % Experimenttempo und +10 % Training. Die Wahl bleibt bis zum nächsten kostenlosen Wechsel beim Prestige.
 
-## Alpha-Vereinfachungen
+## Forschung, Items und Aufträge
 
-- Zufall nutzt aktuell den Browser-Zufallsgenerator; die resultierenden Items werden sofort gespeichert.
-- Der Belohnungsbericht fasst Credits, Trainings, Experimente und Autokäufe zusammen, ohne Einzel-Pop-ups.
-- Die Daily-Komplettprämie ist in der Oberfläche noch nicht separat beanspruchbar; Einzelmissionen, Weekly-Missionen und das dauerhafte Postfach sind aktiv.
-- Filter und detaillierter Vorher-/Nachher-Vergleich des Inventars sind für eine folgende UX-Runde vorgesehen; Ausrüsten aktualisiert Werte bereits sofort.
+Das einmalige 60-Sekunden-Einführungsexperiment garantiert genau ein Common-Item. Kurze Experimente dauern 10 Minuten, geben 1/24 der Materialien und haben `p_lang/24`; Bruchteile aller Materialien werden gespeichert. Lange Experimente dauern 4 Stunden. Die beim Start berechnete Endzeit bleibt fest.
+
+Acht accountweite Aufträge speichern Erfüllung und Claim getrennt. Creditbelohnungen erhöhen nur das Guthaben, niemals Produktionsumsatz, Achievement-Umsatz oder Prestige-Anspruch. Crafting-/Itemwerte bleiben wie in Alpha 0.2.
+
+## Zeit und Migration
+
+Offline sind höchstens 24 Stunden je tatsächlicher Abwesenheit erlaubt. Eine persistente Simulationsuhr hält Debug-Sprünge, Experimente, Boosts, Cooldowns und UTC-Perioden zusammen. Save v4 legt vor Migration ein Backup ab. Alte aggregierte Hardware wird konservativ vollständig auf Taschenrechner abgebildet; Metaressourcen bleiben erhalten. Historischer Formelanspruch wird mindestens auf bereits gewährte Erkenntnisse gesetzt, damit Migration keine alten Punkte erneut auszahlt. Nicht rekonstruierbare alte Credit-Herkunft wird nur konservativ als bisheriger Lifetime-Wert übernommen.

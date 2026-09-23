@@ -1,6 +1,7 @@
-import { BALANCE, addCredits, GameState, trainingGoal, trainingRate, creditRate, bulkCost, buyHardware } from './economy';
+import { BALANCE, addCredits, GameState, trainingGoal, trainingRate, creditRate, hardwareIds, hardwareCost, classCompute, buyHardwareClass } from './economy';
 import { completeExperiment } from './experiments';
 import { achievementCheck, rollPeriods } from './missions';
+import { updateOnboarding } from './onboarding';
 
 export type AdvanceReport = { credits:number; levels:number; experiments:number; hardware:number; seconds:number };
 
@@ -20,9 +21,9 @@ function cloneForSimulation(state:GameState):GameState {
 
 function autobuy(state:GameState) {
   if (!state.prestigeCount || !state.automation.enabled) return state;
-  let count=0;
-  while(count<10000 && state.credits-bulkCost(state.hardware,count+1,state)>=state.automation.reserve) count++;
-  return count ? buyHardware(state,count) : state;
+  const candidates=(state.automation.target?[state.automation.target]:state.discovered).map(id=>{const cost=hardwareCost(id,state.hardwareCounts[id],state);const gain=classCompute(state,id,state.hardwareCounts[id]+1)-classCompute(state,id);return{id,cost,score:gain/cost}}).sort((a,b)=>b.score-a.score);
+  const pick=candidates.find(x=>state.credits-x.cost>=state.automation.reserve);
+  return pick?buyHardwareClass(state,pick.id,1):state;
 }
 
 export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
@@ -33,7 +34,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     const toLevel=(goal-next.training)/rate;
     const toAuto=next.automation.enabled?BALANCE.simulationStep-next.automation.elapsed:Infinity;
     const toExperiment=next.experiments.active?Math.max(0,(next.experiments.active.endsAt-now)/1000):Infinity;
-    const toBoost=Math.min(next.trainingBoostUntil>now?(next.trainingBoostUntil-now)/1000:Infinity,next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity);
+    const toBoost=Math.min(next.trainingBoostUntil>now?(next.trainingBoostUntil-now)/1000:Infinity,next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
     let slice=Math.min(left,toLevel,toAuto,toExperiment,toBoost);
     if(slice<1e-8) slice=Math.min(left,1e-6);
     next=addCredits(next,creditRate(next.hardware,next.level,next,now)*slice);
@@ -42,7 +43,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng);if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
   }
-  next=achievementCheck(rollPeriods(next,next.savedAt));
+  next=updateOnboarding(achievementCheck(rollPeriods(next,next.savedAt)));
   if(active){next.missions.daily.activeSeconds+=total;const day=new Date(next.savedAt).toISOString().slice(0,10);if(!next.missions.weekly.days.includes(day))next.missions.weekly.days.push(day);}
   return {state:next,report:{credits:next.credits-state.credits,levels,experiments,hardware,seconds:total}};
 }

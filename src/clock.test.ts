@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { newGame } from './economy';
+import { GameState, newGame } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige } from './prestige';
 import { advance, advanceTo, debugAdvance, simulationNow } from './simulation';
@@ -12,7 +12,7 @@ class MemoryStorage implements StorageLike {
   removeItem(){this.value=null;}
 }
 
-const prestigeReady=(now:number)=>({...newGame(now),credits:2_000_000,runCreditsEarned:2_000_000,lifetimeCreditsEarned:2_000_000});
+const prestigeReady=(now:number)=>({...newGame(now),credits:13_000_000_000,runCreditsEarned:13_000_000_000,lifetimeCreditsEarned:13_000_000_000,lifetimeEligibleCredits:13_000_000_000,specialization:'assistant' as const});
 
 describe('simulation clock regressions',()=>{
   it('produces for ten seconds immediately after a normal prestige',()=>{
@@ -43,7 +43,7 @@ describe('simulation clock regressions',()=>{
   });
 
   it('preserves experiment and boost remaining time across a jump',()=>{
-    let state={...newGame(1_000),prestigeCount:1,trainingBoostUntil:3_601_000};
+    let state:GameState={...newGame(1_000),prestigeCount:1,discovered:['calculator','sbc'] as ('calculator'|'sbc')[],trainingBoostUntil:3_601_000};
     state=queueExperiment(state,'hardware',1_000);
     const beforeExperiment=state.experiments.active!.endsAt-state.savedAt;
     const jumped=debugAdvance(state,600,1_000).state;
@@ -53,7 +53,7 @@ describe('simulation clock regressions',()=>{
   });
 
   it('does not mutate nested data in the input state',()=>{
-    const state={...newGame(0),prestigeCount:1,automation:{enabled:true,reserve:0,elapsed:3},missions:{...newGame(0).missions,daily:{...newGame(0).missions.daily,training:2},weekly:{...newGame(0).missions.weekly,training:4}}};
+    const state={...newGame(0),prestigeCount:1,automation:{enabled:true,reserve:0,elapsed:3,target:null},missions:{...newGame(0).missions,daily:{...newGame(0).missions.daily,training:2},weekly:{...newGame(0).missions.weekly,training:4}}};
     const snapshot=structuredClone(state);
     advance(state,100);
     expect(state).toEqual(snapshot);
@@ -68,7 +68,7 @@ describe('simulation clock regressions',()=>{
     const final=persistGame(storage,loaded,10_000).state;
     expect(sameInstant.credits).toBeCloseTo(first.credits);
     expect(final.credits).toBeCloseTo(10);
-    expect(final.training).toBeCloseTo(5);
+    expect(final.training).toBeCloseTo(1.2);
   });
 
   it('repairs future-dated v2 saves without losing permanent state',()=>{
