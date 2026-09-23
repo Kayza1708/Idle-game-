@@ -7,3 +7,4 @@
 - Nutze eigene SVG-/CSS-Grafik und respektiere `prefers-reduced-motion`.
 - Vor einem Pull Request: `npm run typecheck`, `npm test` und `npm run build` ausführen.
 - Keine Veröffentlichung, kein Merge und keine nativen, Werbe- oder Kauf-SDKs ohne neuen Auftrag.
+- Pflege bei jedem abgeschlossenen Arbeitsauftrag `docs/ROADMAP.md` und `docs/NEXT_STEPS.md`; markiere nur nachweislich erfüllte Abnahmekriterien als erledigt.

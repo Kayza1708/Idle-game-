@@ -1,53 +1,12 @@
-import { advanceTo, GameState, newGame } from './economy';
-
-export const SAVE_KEY = 'ai-singularity.save';
-export const SAVE_VERSION = 1;
-type Envelope = { version: number; state: GameState };
-const valid = (s: GameState) => [s.credits, s.hardware, s.level, s.training, s.savedAt].every(Number.isFinite) && s.credits >= 0 && s.hardware >= 1 && s.level >= 0 && s.training >= 0;
-
-export function serialize(state: GameState) { return JSON.stringify({ version: SAVE_VERSION, state } satisfies Envelope); }
-export function restore(raw: string | null, now = Date.now()): { state: GameState; error?: string } {
-  if (!raw) return { state: newGame(now) };
-  try {
-    const data = JSON.parse(raw) as Envelope;
-    if (data.version !== SAVE_VERSION) return { state: newGame(now), error: 'Der Spielstand stammt aus einer anderen Version und wurde sicher aufbewahrt.' };
-    if (!data.state || !valid(data.state)) throw new Error('invalid');
-    return { state: data.state };
-  } catch {
-    return { state: newGame(now), error: 'Der lokale Spielstand ist beschädigt. Er wurde nicht überschrieben.' };
-  }
-}
-
-export type StorageLike = Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
-export type LoadResult = { state: GameState; error?: string; writable: boolean };
-
-export function browserStorage(): StorageLike | undefined {
-  try { return window.localStorage; }
-  catch { return undefined; }
-}
-
-export function loadGame(storage: StorageLike | undefined, now = Date.now()): LoadResult {
-  try {
-    if (!storage) throw new Error('unavailable');
-    const result = restore(storage.getItem(SAVE_KEY), now);
-    return { ...result, writable: !result.error };
-  } catch {
-    return { state: newGame(now), error: 'Der lokale Speicher konnte nicht gelesen werden. Dein Fortschritt wird nicht überschrieben.', writable: false };
-  }
-}
-
-export function persistGame(storage: StorageLike | undefined, state: GameState, now = Date.now()): { state: GameState; saved: boolean; error?: string } {
-  const synchronized = advanceTo(state, now).state;
-  try {
-    if (!storage) throw new Error('unavailable');
-    storage.setItem(SAVE_KEY, serialize(synchronized));
-    return { state: synchronized, saved: true };
-  } catch {
-    return { state: synchronized, saved: false, error: 'Speichern ist in diesem Browser gerade nicht möglich. Das Spiel läuft weiter, aber dieser Fortschritt ist noch nicht gesichert.' };
-  }
-}
-
-export function removeGame(storage: StorageLike | undefined): string | undefined {
-  try { if (!storage) throw new Error('unavailable'); storage.removeItem(SAVE_KEY); }
-  catch { return 'Der lokale Spielstand konnte nicht gelöscht werden.'; }
-}
+import { BALANCE, GameState, newGame, trainingCost, trainingWork } from './economy';import { advanceTo } from './simulation';
+export const SAVE_KEY='ai-singularity.save';export const BACKUP_KEY='ai-singularity.save.backup-v4';export const SAVE_VERSION=5;type Envelope={version:number;state:GameState};
+const finite=(v:unknown,min=0)=>typeof v==='number'&&Number.isFinite(v)&&v>=min;
+export function validate(s:unknown):s is GameState{if(!s||typeof s!=='object')return false;const x=s as GameState;return [x.credits,x.hardware,x.level,x.qualityLevel,x.efficiencyLevel,x.training,x.savedAt,x.clockOffsetMs,x.lifetimeEligibleCredits,x.prestigeEntitlementClaimed,x.gems,x.components,x.runCreditsEarned,x.lifetimeCreditsEarned].every(v=>finite(v))&&Number.isInteger(x.hardware)&&x.hardware>=1&&Array.isArray(x.inventory)&&Array.isArray(x.nodes)&&!!x.hardwareCounts&&Array.isArray(x.discovered)&&Array.isArray(x.classUpgrades)&&!!x.missions&&!!x.experiments;}
+export function serialize(state:GameState){return JSON.stringify({version:SAVE_VERSION,state} satisfies Envelope);}
+export function restore(raw:string|null,now=Date.now()):{state:GameState;error?:string;migrated?:boolean}{if(!raw)return{state:newGame(now)};try{const data=JSON.parse(raw),old=data.state;if(data.version===1){if(!old||![old.credits,old.hardware,old.level,old.training,old.savedAt].every((v:unknown)=>finite(v)))throw Error();return{state:{...newGame(old.savedAt),credits:old.credits,hardware:old.hardware,hardwareCounts:{...newGame(old.savedAt).hardwareCounts,calculator:old.hardware},qualityLevel:Math.ceil(old.level/2),efficiencyLevel:Math.floor(old.level/2),level:old.level},migrated:true};}if(data.version>=2&&data.version<=4){if(!old||![old.credits,old.hardware,old.level,old.training,old.savedAt].every((v:unknown)=>finite(v)))throw Error();const base=newGame(old.savedAt),calculator=Math.max(1,Math.floor(old.hardware)),claimed=Math.max(old.totalInsightEarned??0,old.prestigeEntitlementClaimed??0),qualityLevel=old.qualityLevel??Math.ceil(old.level/2),efficiencyLevel=old.efficiencyLevel??Math.floor(old.level/2);let migrated:GameState={...base,...old,qualityLevel,efficiencyLevel,activeTraining:null,training:0,clockOffsetMs:data.version===2?Math.max(0,old.savedAt-now):(old.clockOffsetMs??0),hardwareCounts:old.hardwareCounts??{...base.hardwareCounts,calculator},classUpgrades:old.classUpgrades??[],discovered:old.discovered??(calculator>=10?['calculator','sbc']:['calculator']),lifetimeEligibleCredits:old.lifetimeEligibleCredits??old.lifetimeCreditsEarned??0,prestigeEntitlementClaimed:claimed,researchRemainder:old.researchRemainder??0,blueprintRemainder:old.blueprintRemainder??0,overclock:old.overclock??base.overclock,onboarding:old.onboarding??base.onboarding,specialization:old.specialization??null,automation:{...base.automation,...old.automation},settings:{...base.settings,...old.settings},experiments:{...old.experiments,active:old.experiments?.active?{length:'long',...old.experiments.active}:null}};if(old.training>0){const fraction=Math.min(1,old.training/(BALANCE.legacyTrainingBase*BALANCE.legacyTrainingGrowth**old.level)),work=trainingWork(migrated);migrated={...migrated,training:fraction*work,activeTraining:{track:'quality',workRequired:work,creditCost:trainingCost(migrated,'quality')}};}if(!validate(migrated))throw Error();return{state:migrated,migrated:true};}if(data.version!==SAVE_VERSION)return{state:newGame(now),error:'Der Spielstand stammt aus einer anderen Version und wurde nicht überschrieben.'};if(!validate(data.state))throw Error();return{state:data.state};}catch{return{state:newGame(now),error:'Der lokale Spielstand ist beschädigt. Er wurde nicht überschrieben.'};}}
+export type StorageLike=Pick<Storage,'getItem'|'setItem'|'removeItem'>;export type LoadResult={state:GameState;error?:string;writable:boolean;migrated?:boolean};
+export function browserStorage():StorageLike|undefined{try{return window.localStorage}catch{return undefined}}
+export function loadGame(storage:StorageLike|undefined,now=Date.now()):LoadResult{try{if(!storage)throw Error();const raw=storage.getItem(SAVE_KEY),r=restore(raw,now);if(r.migrated&&raw)storage.setItem(BACKUP_KEY,raw);return{...r,writable:!r.error};}catch{return{state:newGame(now),error:'Der lokale Speicher konnte nicht gelesen werden. Dein Fortschritt wird nicht überschrieben.',writable:false};}}
+export function persistGame(storage:StorageLike|undefined,state:GameState,now=Date.now()){const synchronized=advanceTo(state,now).state;try{if(!storage)throw Error();storage.setItem(SAVE_KEY,serialize(synchronized));return{state:synchronized,saved:true as const};}catch{return{state:synchronized,saved:false as const,error:'Speichern ist in diesem Browser gerade nicht möglich.'};}}
+export function importGame(raw:string){const r=restore(raw);if(r.error)throw new Error(r.error);return r.state;}
+export function removeGame(storage:StorageLike|undefined){try{if(!storage)throw Error();storage.removeItem(SAVE_KEY);return undefined}catch{return'Der lokale Spielstand konnte nicht gelöscht werden.'}}
