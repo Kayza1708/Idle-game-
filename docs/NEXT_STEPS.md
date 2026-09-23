@@ -7,6 +7,7 @@ Phase 1 ist funktional implementiert: fünf Hardwareklassen, geometrische Käufe
 - Visuelle Browserprüfung bei 390×844 und Desktop war in der Arbeitsumgebung wegen blockierter npm-Registry nicht möglich.
 - Das bestehende Lockfile aus dem Ausgangsstand ist unvollständig; `npm ci` kann dies erst nach Registry-Zugriff zuverlässig neu erzeugen.
 - Die aktive Balance-Simulation ist ein intensives Profil, keine Aussage über durchschnittliche Spielweise. UI-Halte-/Fokusverhalten benötigt zusätzlich einen echten Browsertest.
+- Die drei gemeldeten Merge-Regressionen sind im Code behoben; der vollständige Vitest-Lauf bleibt ausschließlich wegen der HTTP-403-Paketsperre ausstehend.
 
 ## Nächste drei priorisierte Aufgaben
 1. In einer Umgebung mit Registry- und Browserzugriff Lockfile regenerieren, CI vollständig ausführen und mobile Bedienung aufnehmen.
@@ -14,7 +15,7 @@ Phase 1 ist funktional implementiert: fünf Hardwareklassen, geometrische Käufe
 3. Phase 2 entwerfen: drei besondere Item-Builds mit Tests und klaren Trade-offs.
 
 ## Letzter tatsächlich ausgeführter Teststand
-Siehe Abschlussbericht des aktuellen Commits und `docs/balance-report.md`. Core-TypeScript und kompilierte Simulationen wurden lokal ausgeführt; npm-Prüfungen sind durch HTTP 403 der Registry blockiert.
+Am 23. September 2026 bestanden Core-TypeScript sowie eine kompilierte Ausführung der drei Regressionen: Taschenrechnerpreis 11,5, Trainingsüberlauf mit 25 konsistenten Taschenrechnern und exakte Materialgleichheit von 24 kurzen gegenüber einem langen Experiment für alle drei Typen. `npm ci`, Typecheck, Vitest und Build bleiben durch HTTP 403 der Registry blockiert; keine Prüfung wird als ausgeführt behauptet.
 
 ## Offene Designentscheidungen
 - Wie stark Spieler neue Klassen gegenüber Meilensteinen subjektiv bevorzugen.

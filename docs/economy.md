@@ -37,6 +37,8 @@ KI-Assistent gibt +25 % im permanenten Creditkanal. Coding-KI setzt Preise auf �
 
 Das einmalige 60-Sekunden-Einführungsexperiment garantiert genau ein Common-Item. Kurze Experimente dauern 10 Minuten, geben 1/24 der Materialien und haben `p_lang/24`; Bruchteile aller Materialien werden gespeichert. Lange Experimente dauern 4 Stunden. Die beim Start berechnete Endzeit bleibt fest.
 
+Beim Übertrag von Materialbruchteilen werden Werte, die höchstens 16 skalierte Maschinen-Epsilon von einer ganzen Zahl entfernt liegen, auf genau diese ganze Zahl normalisiert. Dadurch ergeben 24 kurze Experimente exakt dieselben Materialmengen wie ein langes Experiment, ohne echte Bruchteile wie `0,999` vorzeitig auszuzahlen. Die Regel bleibt bei aufgeteilten Simulationen deterministisch.
+
 Acht accountweite Aufträge speichern Erfüllung und Claim getrennt. Creditbelohnungen erhöhen nur das Guthaben, niemals Produktionsumsatz, Achievement-Umsatz oder Prestige-Anspruch. Crafting-/Itemwerte bleiben wie in Alpha 0.2.
 
 ## Zeit und Migration

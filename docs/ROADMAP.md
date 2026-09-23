@@ -9,7 +9,7 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 
 **Abhängigkeiten:** Browser-Prototyp, zentrale Economy, Save-Migration v4.
 
-**Abnahmekriterien:** Kernmechaniken sind integriert; Formeln und Migration sind getestet; reproduzierbarer 60-Minuten- und 7-Tage-Balancebericht liegt vor; Typecheck, Tests und Build laufen in CI. Die visuelle Browserabnahme 390×844 bleibt offen, bis ein Browser mit installierten Paketen verfügbar ist.
+**Abnahmekriterien:** Kernmechaniken sind integriert; Formeln und Migration sind getestet; reproduzierbarer 60-Minuten- und 7-Tage-Balancebericht liegt vor. Die drei Merge-Regressionen für Taschenrechnerkosten, Multi-Hardware-Training und 24× Kurzexperiment sind korrigiert und durch gezielte Core-Ausführung verifiziert. Vollständiges `npm ci`, Vitest, Build und die visuelle Browserabnahme bleiben offen, bis die Paket-Registry erreichbar ist.
 
 **Nicht enthalten:** Hardware 6–15, Energie/Wärme/Nachfrage, Meta-Prestige, echte Werbung oder Käufe.
 
