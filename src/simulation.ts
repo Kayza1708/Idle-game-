@@ -30,8 +30,8 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
   const total=Math.max(0,Math.min(seconds,BALANCE.maxOfflineSeconds));
   let left=total,levels=0,experiments=0,hardware=0,next=cloneForSimulation(state);
   while(left>1e-9) {
-    const now=next.savedAt,goal=trainingGoal(next.level),rate=trainingRate(next.hardware,next,now);
-    const toLevel=(goal-next.training)/rate;
+    const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;
+    const toLevel=next.activeTraining?(goal-next.training)/rate:Infinity;
     const toAuto=next.automation.enabled?BALANCE.simulationStep-next.automation.elapsed:Infinity;
     const toExperiment=next.experiments.active?Math.max(0,(next.experiments.active.endsAt-now)/1000):Infinity;
     const toBoost=Math.min(next.trainingBoostUntil>now?(next.trainingBoostUntil-now)/1000:Infinity,next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
@@ -39,7 +39,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     if(slice<1e-8) slice=Math.min(left,1e-6);
     next=addCredits(next,creditRate(next.hardware,next.level,next,now)*slice);
     next.training+=rate*slice; next.savedAt+=slice*1000; next.automation.elapsed+=slice; left-=slice;
-    if(next.training+1e-7>=goal){next.training=Math.max(0,next.training-goal);next.level++;levels++;next.missions.daily.training++;next.missions.weekly.training++;}
+    if(next.activeTraining&&next.training+1e-7>=goal){const track=next.activeTraining.track;next.training=0;next.activeTraining=null;next.level++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next.missions.daily.training++;next.missions.weekly.training++;}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng);if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
   }

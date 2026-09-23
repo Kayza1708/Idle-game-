@@ -7,9 +7,9 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 
 **Features:** Hardwareklassen 1–5, Mengenmeilensteine, Klassen-Upgrades, Tap/Halten, Overclock, acht Einführungsaufträge, frühe Experimente/Items, kumulatives Prestige, drei Spezialisierungen, Autokauf und belastbare Save-/Zeitlogik.
 
-**Abhängigkeiten:** Browser-Prototyp, zentrale Economy, Save-Migration v4.
+**Abhängigkeiten:** Browser-Prototyp, zentrale Economy, Save-Migration v5.
 
-**Abnahmekriterien:** Kernmechaniken sind integriert; Formeln und Migration sind getestet; reproduzierbarer 60-Minuten- und 7-Tage-Balancebericht liegt vor. Die drei Merge-Regressionen für Taschenrechnerkosten, Multi-Hardware-Training und 24× Kurzexperiment sind korrigiert und durch gezielte Core-Ausführung verifiziert. Vollständiges `npm ci`, Vitest, Build und die visuelle Browserabnahme bleiben offen, bis die Paket-Registry erreichbar ist.
+**Abnahmekriterien:** Kernmechaniken sind integriert; Formeln und Migration sind getestet; reproduzierbarer 60-Minuten- und 7-Tage-Balancebericht liegt vor. Manuelles abflachendes Training, kontrollierte Meilensteine und Produktionszerlegung sind implementiert und mit Zeitpartitionierungs-/Migrationstests versehen. Vollständiges `npm ci`, Vitest, Build und die visuelle Browserabnahme bleiben offen, bis die Paket-Registry erreichbar ist.
 
 **Nicht enthalten:** Hardware 6–15, Energie/Wärme/Nachfrage, Meta-Prestige, echte Werbung oder Käufe.
 

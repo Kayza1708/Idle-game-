@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buyHardware, creditRate, hardwareBulkCost, hardwareCost, newGame, trainingGoal } from './economy';
+import { buyHardware, creditRate, hardwareBulkCost, hardwareCost, newGame, startTraining, trainingGoal } from './economy';
 import { advance, advanceTo } from './simulation';
 
 describe('economy', () => {
@@ -12,14 +12,17 @@ describe('economy', () => {
     expect(buyHardware(state)).toBe(state);
   });
   it('retains overflow across several training completions', () => {
-    const state = { ...newGame(0), hardware: 25, hardwareCounts: { ...newGame(0).hardwareCounts, calculator: 25 } };
+    const ready = { ...newGame(0), credits: 1000, hardware: 25, hardwareCounts: { ...newGame(0).hardwareCounts, calculator: 25 } };
+    const state = startTraining(ready, 'quality');
     const result = advance(state, 100);
-    expect(result.report.levels).toBeGreaterThan(1);
+    expect(result.report.levels).toBe(1);
+    expect(result.state.activeTraining).toBeNull();
     expect(result.state.training).toBeGreaterThanOrEqual(0);
-    expect(result.state.training).toBeLessThan(trainingGoal(result.state.level));
+    expect(result.state.training).toBe(0);
   });
   it('accounts for level-dependent income identically when time is split', () => {
-    const state = { ...newGame(0), hardware: 10, hardwareCounts: { ...newGame(0).hardwareCounts, calculator: 10 } };
+    const ready = { ...newGame(0), credits: 1000, hardware: 10, hardwareCounts: { ...newGame(0).hardwareCounts, calculator: 10 } };
+    const state = startTraining(ready, 'efficiency');
     const whole = advance(state, 1000).state;
     const half = advance(advance(state, 500).state, 500).state;
     expect(half.level).toBe(whole.level);

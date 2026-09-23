@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { GameState, newGame } from './economy';
+import { GameState, newGame, startTraining } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige } from './prestige';
 import { advance, advanceTo, debugAdvance, simulationNow } from './simulation';
@@ -17,16 +17,18 @@ const prestigeReady=(now:number)=>({...newGame(now),credits:13_000_000_000,runCr
 describe('simulation clock regressions',()=>{
   it('produces for ten seconds immediately after a normal prestige',()=>{
     const reset=prestige(prestigeReady(1_000));
-    const next=advanceTo(reset,11_000).state;
-    expect(next.credits).toBeGreaterThan(reset.credits);
-    expect(next.training).toBeGreaterThan(reset.training);
+    const training=startTraining({...reset,credits:1000},'quality');
+    const next=advanceTo(training,11_000).state;
+    expect(next.credits).toBeGreaterThan(training.credits);
+    expect(next.training).toBeGreaterThan(training.training);
   });
 
   it('produces immediately after debug fast-forward and prestige',()=>{
     const jumped=debugAdvance(prestigeReady(1_000),3600,1_000).state;
     const reset=prestige(jumped);
-    const next=advanceTo(reset,11_000).state;
-    expect(next.credits).toBeGreaterThan(reset.credits);
+    const training=startTraining({...reset,credits:1000},'efficiency');
+    const next=advanceTo(training,11_000).state;
+    expect(next.credits).toBeGreaterThan(training.credits);
     expect(next.training).toBeGreaterThan(0);
     expect(next.savedAt).toBe(simulationNow(next,11_000));
   });
@@ -37,9 +39,10 @@ describe('simulation clock regressions',()=>{
     const reset=prestige(jumped);
     expect(persistGame(storage,reset,1_000).saved).toBe(true);
     const loaded=loadGame(storage,1_000).state;
-    const next=advanceTo(loaded,11_000).state;
-    expect(next.credits).toBeGreaterThan(loaded.credits);
-    expect(next.training).toBeGreaterThan(loaded.training);
+    const training=startTraining({...loaded,credits:1000},'quality');
+    const next=advanceTo(training,11_000).state;
+    expect(next.credits).toBeGreaterThan(training.credits);
+    expect(next.training).toBeGreaterThan(training.training);
   });
 
   it('preserves experiment and boost remaining time across a jump',()=>{
@@ -49,7 +52,7 @@ describe('simulation clock regressions',()=>{
     const jumped=debugAdvance(state,600,1_000).state;
     expect(jumped.experiments.active!.endsAt-jumped.savedAt).toBeCloseTo(beforeExperiment-600_000);
     expect(jumped.trainingBoostUntil-jumped.savedAt).toBeCloseTo(3_000_000);
-    expect(advanceTo(jumped,11_000).state.training).toBeGreaterThan(jumped.training);
+    const training=startTraining({...jumped,credits:1000},'quality');expect(advanceTo(training,11_000).state.training).toBeGreaterThan(training.training);
   });
 
   it('does not mutate nested data in the input state',()=>{
@@ -68,7 +71,7 @@ describe('simulation clock regressions',()=>{
     const final=persistGame(storage,loaded,10_000).state;
     expect(sameInstant.credits).toBeCloseTo(first.credits);
     expect(final.credits).toBeCloseTo(10);
-    expect(final.training).toBeCloseTo(1.2);
+    expect(final.training).toBe(0);
   });
 
   it('repairs future-dated v2 saves without losing permanent state',()=>{
