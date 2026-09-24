@@ -23,7 +23,7 @@ Die angezeigte Adresse (typisch `http://localhost:5173`) öffnen. Für den Produ
 - Zugängliche Laborfläche: Tap und Tastatur, Halten mit drei Impulsen/s, gemeinsames Limit fünf/s, Overclock nach 30 Taps.
 - Acht einmalige Aufträge, 60-Sekunden-Einführungsexperiment, garantierter Einstieg-Itemfund sowie kurze und lange Experimente.
 - Kumulativer INT-Anspruch aus berechtigtem Lifetime-Umsatz, funktionsorientierte INT-Upgrades und rendite-/zielbasierter Autokauf.
-- Save v9 mit verlustfreier Erkenntnis→INT-Migration, Rückzahlung alter Knoten, konservativer Migration übriger Hardware-/Meta-Spielstände, lokaler Run-Telemetrie und gespeichertem Mira-Tutorialfortschritt.
+- Save v10 mit verlustfreier v9-Labormigration und Erkenntnis→INT-Migration, Rückzahlung alter Knoten, konservativer Migration übriger Hardware-/Meta-Spielstände, lokaler Run-Telemetrie und gespeichertem Mira-Tutorialfortschritt.
 - Sechs individuelle Meilensteine je Klasse (90 insgesamt) und ein exponentiell bepreister, funktionsorientierter INT-Baum ohne Spezialisierungsmenü.
 
 Die zentrale Mathematik steht in [`docs/economy.md`](docs/economy.md), tatsächliche Simulationsergebnisse in [`docs/balance-report.md`](docs/balance-report.md), die verbindliche Planung in [`docs/ROADMAP.md`](docs/ROADMAP.md) und die Übergabe in [`docs/NEXT_STEPS.md`](docs/NEXT_STEPS.md).

@@ -82,3 +82,11 @@ Save v9 migriert v1–v8. Erkenntnis wird vollständig in INT übertragen. Berei
 ## Bewusste Grenzen
 
 Der spielbare Prioritätspfad reicht vom Start bis zum ersten Prestige. Drei Modulsockel, vier vollständige Loadouts, fünf deterministische Durchbruchswahlen, Prototyp-Rarität, mittlere/späte Rezepte und der Axiom-Reset sind noch nicht implementiert und werden deshalb weder in UI noch Roadmap als fertig markiert.
+
+## Zeitbasierte Labore (Save v10)
+
+Forschungsprojekte werden beim ausdrücklichen Start genau einmal bezahlt. Ihre Basisdauer ist zentral `180 s × 1,30^Rang`; die drei aktuellen Ränge 0, 8 und 20 ergeben 3 Minuten, rund 24 Minuten und rund 9,5 Stunden. Fortschritt verwendet ausschließlich die persistierte Simulationszeit (`startedAt`/`endsAt`) und wird deshalb online und offline identisch abgeschlossen. Ein Labor ist von Beginn an verfügbar, das zweite folgt über **Labor-Kopplung**, das dritte ist eine einmalige Komfortfreischaltung für 125 Gems. Ein Projekt kann weder parallel doppelt gestartet noch doppelt belohnt werden.
+
+Training bleibt eine aktive Entscheidung und bezahlt Credits plus `2 × (Modellstufe + 1)` Daten. Die Arbeitskurve `30 × (Stufe + 1)^1,25` wächst polynomial; die tatsächliche Dauer ergibt sich aus Arbeit geteilt durch die im Betriebsprofil zugewiesene Compute-Trainingsrate. Qualitäts- und Effizienzgewinne besitzen weiterhin ihre dokumentierten Softcaps.
+
+Animierte Ressourcenzahlen interpolieren nur den zuletzt gerenderten Anzeigewert über 350 ms. Economy, Kosten, Speicherdaten und Simulation verwenden unverändert den echten Zustandswert; bei Reduced Motion oder verborgenem Dokument wird sofort auf den echten Wert gesprungen.

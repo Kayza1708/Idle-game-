@@ -12,7 +12,8 @@ export const simulationNow = (state:GameState, wallNow=Date.now()) => wallNow + 
 function cloneForSimulation(state:GameState):GameState {
   return {
     ...state,
-    nodes:[...state.nodes], breakthroughs:[...state.breakthroughs], inventory:state.inventory.map(item=>({...item})), equipped:{...state.equipped}, pity:{...state.pity},
+    nodes:[...state.nodes], completedResearch:[...state.completedResearch], breakthroughs:[...state.breakthroughs], inventory:state.inventory.map(item=>({...item})), equipped:{...state.equipped}, pity:{...state.pity},
+    researchLabs:state.researchLabs.map(lab=>lab?{...lab}:null),
     experiments:{...state.experiments,active:state.experiments.active?{...state.experiments.active}:null,queue:[...state.experiments.queue],completedIds:[...state.experiments.completedIds]},
     automation:{...state.automation},
     missions:{daily:{...state.missions.daily,days:[...state.missions.daily.days],claims:[...state.missions.daily.claims]},weekly:{...state.missions.weekly,days:[...state.missions.weekly.days],claims:[...state.missions.weekly.claims]},mailbox:state.missions.mailbox.map(entry=>({...entry}))},
@@ -37,8 +38,9 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     const toLevel=next.activeTraining?(goal-next.training)/rate:Infinity;
     const toAuto=next.automation.enabled?BALANCE.simulationStep-next.automation.elapsed:Infinity;
     const toExperiment=next.experiments.active?Math.max(0,(next.experiments.active.endsAt-now)/1000):Infinity;
+    const toResearch=Math.min(...next.researchLabs.map(lab=>lab?Math.max(0,(lab.endsAt-now)/1000):Infinity));
     const toBoost=Math.min(next.trainingBoostUntil>now?(next.trainingBoostUntil-now)/1000:Infinity,next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
-    let slice=Math.min(left,toLevel,toAuto,toExperiment,toBoost);
+    let slice=Math.min(left,toLevel,toAuto,toExperiment,toResearch,toBoost);
     if(slice<1e-8) slice=Math.min(left,1e-6);
     const credits=creditRate(next.hardware,next.level,next,now)*slice,data=dataRate(next)*slice,research=researchRate(next)*slice;generatedCredits+=credits;generatedData+=data;generatedResearch+=research;
     next=addCredits(next,credits);next.data+=data;next.researchPoints+=research;
@@ -46,6 +48,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     if(next.activeTraining&&next.training+1e-7>=goal){const track=next.activeTraining.track;next.training=0;next.activeTraining=null;next.level++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next.missions.daily.training++;next.missions.weekly.training++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level});}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng);if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
+    next.researchLabs=next.researchLabs.map(lab=>{if(!lab||lab.endsAt>next.savedAt+.1)return lab;if(!next.completedResearch.includes(lab.id)){next.completedResearch.push(lab.id);next=addEvent(next,'research-complete',next.savedAt,{id:lab.id});}return null;});
   }
   next=updateOnboarding(achievementCheck(rollPeriods(next,next.savedAt)));
   if(active){next.missions.daily.activeSeconds+=total;const day=new Date(next.savedAt).toISOString().slice(0,10);if(!next.missions.weekly.days.includes(day))next.missions.weekly.days.push(day);}

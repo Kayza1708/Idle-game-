@@ -36,6 +36,8 @@ describe('save format', () => {
 
   it('migrates v7 saves with explicitly unavailable earlier telemetry',()=>{const old=newGame(100) as any;delete old.telemetry;const restored=restore(JSON.stringify({version:7,state:old}),200);expect(restored.migrated).toBe(true);expect(restored.state.telemetry.historicalDataAvailable).toBe(false);expect(restored.state.credits).toBe(old.credits)});
 
+  it('migrates v9 saves to empty research labs without changing resources',()=>{const old=newGame(100) as any;delete old.researchLabs;delete old.purchasedResearchLabs;old.credits=4321;const restored=restore(JSON.stringify({version:9,state:old}),200);expect(restored.migrated).toBe(true);expect(restored.state.credits).toBe(4321);expect(restored.state.researchLabs).toEqual([null,null,null]);expect(restored.state.purchasedResearchLabs).toBe(0)});
+
   it('does not lose or duplicate time across background, save, close and reload', () => {
     const storage = new MemoryStorage();
     const started = newGame(0);
