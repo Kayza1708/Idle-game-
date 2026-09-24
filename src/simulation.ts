@@ -18,6 +18,7 @@ function cloneForSimulation(state:GameState):GameState {
     missions:{daily:{...state.missions.daily,days:[...state.missions.daily.days],claims:[...state.missions.daily.claims]},weekly:{...state.missions.weekly,days:[...state.missions.weekly.days],claims:[...state.missions.weekly.claims]},mailbox:state.missions.mailbox.map(entry=>({...entry}))},
     achievementClaims:[...state.achievementClaims], ads:{...state.ads,counts:{...state.ads.counts},transactions:[...state.ads.transactions]}, settings:{...state.settings},
     telemetry:{...state.telemetry,recentEvents:[...state.telemetry.recentEvents],permanentEvents:[...state.telemetry.permanentEvents],metrics:state.telemetry.metrics.map(bucket=>({...bucket,income:{...bucket.income},offlineRewards:{...bucket.offlineRewards}})),archivedMetrics:{...state.telemetry.archivedMetrics,income:{...state.telemetry.archivedMetrics.income},offlineRewards:{...state.telemetry.archivedMetrics.offlineRewards}},prestigeHistory:[...state.telemetry.prestigeHistory]},
+    story:{...state.story,queue:[...state.story.queue],seen:[...state.story.seen]},
   };
 }
 

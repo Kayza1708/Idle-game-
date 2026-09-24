@@ -2,15 +2,11 @@
 
 ## Aktueller Stand
 
-Save v8 ergänzt sechs individuelle Meilensteine pro Hardwareklasse, additive INT-Progression, einen funktionsorientierten INT-Baum und eine begrenzte lokale Run-Telemetrie. Alle 90 Meilensteine liegen in der zentralen Hardwarekonfiguration.
+Save v9 ergänzt sechs individuelle Meilensteine pro Hardwareklasse, additive INT-Progression, einen funktionsorientierten INT-Baum, lokale Run-Telemetrie und gespeicherten Story-/Tutorialfortschritt. Alle 90 Meilensteine liegen in der zentralen Hardwarekonfiguration.
 
 ## Letzter abgeschlossener Arbeitsauftrag
 
-Der lokale Balancebericht exportiert Kampagne, Runs, Zustandsdaten, Prestige-Snapshots, Ereignisse sowie verdichtete Aktivitäts-, Einkommens- und Offlinewerte als manuell heruntergeladene JSON-Datei. Save v7 wird verlustfrei auf v8 migriert; nicht gespeicherte Vergangenheit bleibt ausdrücklich als nicht verfügbar markiert. Es findet keine automatische Übertragung statt.
-
-## Letzter abgeschlossener Arbeitsauftrag
-
-Die fünf gelieferten PNG-Grafiken wurden aus dem Repository-Root nach `public/assets/game/` verschoben. Das frühe Labor ist in der Werkstatt sichtbar; die Atlaszellen sind als 4×4-Hardware-, 4×2-Ressourcen-, 4×3-Item- und 4×4-Prestige-Raster in den zugehörigen Ansichten eingebunden. Der anschließende visuelle Pass ersetzte die Neon-Dashboard-Anmutung durch ein ruhiges, dunkles Pixel-Art-Layout und verdichtete Hardware, Forschung und Inventar für mobile sowie breite Ansichten. Economy, Mechanik und Save-Schema blieben unverändert.
+Der kurze Mira-Prolog, das überspringbare handlungsbasierte Tutorial, einmalige Fortschrittsdialoge und Miras Journal sind implementiert. Dialoge werden einzeln geordnet, blockieren die Simulation nicht und bestehende Saves überspringen den Prolog bei der v9-Migration.
 
 ## Bekannte Einschränkungen
 
@@ -18,6 +14,7 @@ Die fünf gelieferten PNG-Grafiken wurden aus dem Repository-Root nach `public/a
 - Klassen 6–15 besitzen eigene Illustrationen, Rollen und Meilensteine; die Nebeneffekte Automation, Overclock, Offline und Synergie sind teilweise erst als Konfigurationsvertrag vorbereitet.
 - Die aktuellen Tabellen in `balance-report.md` sind eine Vergleichsbasis der vorherigen Phase-1.1-Kurve; nach der Compute-Aufteilung ist ein neuer vollständiger Simulationslauf erforderlich.
 - Für vor Save v8 liegende Kampagnenabschnitte existieren keine nachträglich rekonstruierbaren Ereignis-, Quellen- oder Offlinewerte; Exporte markieren diese Bereiche als nicht verfügbar.
+- `mira-voss.png` war im bereitgestellten Repository-Stand weder im Root noch an anderer Stelle im Dateisystem vorhanden. Die Dialogkomponente verweist bereits ausschließlich auf den geforderten Zielpfad `public/assets/game/mira-voss.png`; die Originaldatei muss dort noch ergänzt werden, bevor die visuelle Abnahme erfüllt ist.
 - Registry-Zugriff auf `vitest` antwortet in dieser Umgebung mit HTTP 403. Deshalb konnten `npm ci`, Vitest, Production-Build, Audit und Browser-Screenshots nicht ehrlich abgeschlossen werden. TypeScript-Typecheck lief erfolgreich.
 
 ## Nächste drei priorisierte Aufgaben

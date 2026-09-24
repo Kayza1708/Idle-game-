@@ -198,3 +198,20 @@ footer { display: flex; max-width: 720px; margin: auto; padding: 18px 0; justify
 .export-report [role="status"] { display: block; margin-top: 5px; color: var(--warm-light); font-size: 12px; }
 .export-report button { flex: 0 0 auto; }
 @media (max-width: 520px) { .export-report { align-items: stretch; flex-direction: column; } .export-report button { width: 100%; } }
+
+.story-dialogue { position: fixed; z-index: 8; left: 50%; bottom: calc(78px + env(safe-area-inset-bottom)); display: grid; width: min(calc(100% - 18px), 700px); transform: translateX(-50%); grid-template-columns: 1fr; filter: drop-shadow(0 7px 8px #0009); }
+.story-dialogue.has-mira { grid-template-columns: clamp(92px, 24vw, 170px) 1fr; align-items: end; }
+.mira-sprite { display: block; z-index: 1; width: 100%; height: min(42vh, 330px); object-fit: contain; object-position: center bottom; align-self: end; image-rendering: auto; }
+.story-copy { min-width: 0; padding: 13px; border: 1px solid #75634b; border-radius: 3px; background: #171713f5; box-shadow: 0 3px 0 #090a08; }
+.story-dialogue.has-mira .story-copy { margin-left: -12px; }
+.story-copy > strong { display: inline-block; margin: -25px 0 4px; padding: 4px 9px; border: 1px solid #75634b; background: #302b22; color: var(--warm-light); font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; }
+.story-copy p { min-height: 2.9em; margin: 5px 0 11px; color: var(--ink); }
+.story-actions { display: flex; justify-content: flex-end; gap: 7px; }
+.story-actions .story-next { border-color: #8f7145; background: #a8783f; color: #17120c; font-weight: 800; }
+.story-journal { margin-top: 12px; border: 1px solid var(--line); border-radius: 4px; background: var(--panel); }
+.story-journal summary { min-height: 44px; padding: 12px; cursor: pointer; color: var(--warm-light); }
+.story-journal > div { display: grid; gap: 6px; padding: 0 8px 8px; }
+.story-journal button { text-align: left; }
+.story-journal button b,.story-journal button small { display: block; }
+@media (max-width: 520px) { .story-dialogue { bottom: calc(74px + env(safe-area-inset-bottom)); } .story-dialogue.has-mira { grid-template-columns: 96px 1fr; } .mira-sprite { height: min(34vh, 240px); } .story-copy { padding: 10px; } .story-copy p { font-size: 13px; } }
+@media (prefers-reduced-motion: reduce) { .story-dialogue { filter: none; } }
