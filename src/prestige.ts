@@ -1,9 +1,14 @@
-import { BALANCE, newGame, BreakthroughId, canPrestige, GameState, hasNode, newInsight, PrestigeBranch } from './economy';
-export const branches:Record<PrestigeBranch,string[]>= {
- infrastructure:['+10 % Hardware-Compute','Hardwarepreise −5 %','+20 % Hardware-Compute'], models:['+10 % Trainingsrate','+10 % Credit-Produktion','+20 % Trainingsrate'],
- research:['+10 % Experimentgeschwindigkeit','+10 % Forschungsfragmente','+20 % Experimentgeschwindigkeit'], automation:['Zweiter Experimentplatz','Dritter Experimentplatz','Automatische Wiederholung'],
- artifacts:['+10 % Komponenten aus Experimenten','Item-Upgrades −5 %','+20 % Itemeffekte'], recursion:['Zusätzlicher kostenloser Startblock','Kostenloses Start-Modelllevel','+100 Start-Credits']};
-export function buyNode(s:GameState,branch:PrestigeBranch,tier:number){if(tier<1||tier>3||hasNode(s,branch,tier)||(tier>1&&!hasNode(s,branch,tier-1)))return s; const cost=BALANCE.prestigeNodeCosts[tier-1]; return s.unspentInsight<cost?s:{...s,unspentInsight:s.unspentInsight-cost,nodes:[...s.nodes,`${branch}-${tier}`]};}
-export function refundNodes(s:GameState){const refund=s.nodes.reduce((n,id)=>n+BALANCE.prestigeNodeCosts[Number(id.at(-1))-1],0);return {...s,nodes:[],unspentInsight:s.unspentInsight+refund};}
-export function prestige(s:GameState,refund=false){if(!canPrestige(s)||!s.specialization)return s; const base=refund?refundNodes(s):s,gain=newInsight(base),calculators=1+(hasNode(base,'recursion',1)?1:0),startLevel=hasNode(base,'recursion',2)?1:0; return {...base,credits:hasNode(base,'recursion',3)?100:0,data:0,hardware:calculators,hardwareCounts:{...newGame(base.savedAt).hardwareCounts,calculator:calculators},classUpgrades:[],level:startLevel,qualityLevel:startLevel,efficiencyLevel:0,training:0,activeTraining:null,runCreditsEarned:0,totalInsightEarned:base.totalInsightEarned+gain,unspentInsight:base.unspentInsight+gain,prestigeEntitlementClaimed:base.prestigeEntitlementClaimed+gain,prestigeCount:base.prestigeCount+1,onboarding:{...base.onboarding,completed:[...new Set([...base.onboarding.completed,'first-prestige'])]}};}
+import { BALANCE, newGame, BreakthroughId, canPrestige, GameState, newINT, PrestigeUpgradeId, prestigeUpgradeCost, upgradeLevel } from './economy';
+
+export const prestigeUpgrades=BALANCE.prestigeUpgrades;
+export function buyNode(s:GameState,id:PrestigeUpgradeId,_legacyTier?:number){
+ const level=upgradeLevel(s,id),definition=BALANCE.prestigeUpgrades[id],cost=prestigeUpgradeCost(id,level);
+ if(level>=definition.maxLevel||s.unspentINT<cost||(definition.requires&&upgradeLevel(s,definition.requires)<1))return s;
+ return {...s,unspentINT:s.unspentINT-cost,spentINT:s.spentINT+cost,nodes:[...s.nodes.filter(x=>!x.startsWith(`${id}:`)),`${id}:${level+1}`]};
+}
+export function prestige(s:GameState){
+ if(!canPrestige(s))return s;
+ const gain=newINT(s),calculators=1+upgradeLevel(s,'coldStart'),startData=25*upgradeLevel(s,'researchGate');
+ return {...s,credits:0,data:startData,hardware:calculators,hardwareCounts:{...newGame(s.savedAt).hardwareCounts,calculator:calculators},classUpgrades:[],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,runCreditsEarned:0,totalINTEarned:s.totalINTEarned+gain,unspentINT:s.unspentINT+gain,prestigeEntitlementClaimed:s.prestigeEntitlementClaimed+gain,prestigeCount:s.prestigeCount+1,onboarding:{...s.onboarding,completed:[...new Set([...s.onboarding.completed,'first-prestige'])]}};
+}
 export function buyBreakthrough(s:GameState,id:BreakthroughId){const cost=BALANCE.breakthroughs[id][0];return s.breakthroughs.includes(id)||s.researchFragments<cost?s:{...s,researchFragments:s.researchFragments-cost,breakthroughs:[...s.breakthroughs,id]};}

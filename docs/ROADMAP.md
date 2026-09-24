@@ -5,9 +5,9 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 ## Phase 1 – Spielbarer Kern — In Arbeit
 **Ziel:** Ein abwechslungsreicher, stabiler erster Run mit aktiven und passiven Entscheidungen.
 
-**Features:** Hardwareklassen 1–5, Mengenmeilensteine, Klassen-Upgrades, Tap/Halten, Overclock, acht Einführungsaufträge, frühe Experimente/Items, kumulatives Prestige, drei Spezialisierungen, Autokauf und belastbare Save-/Zeitlogik.
+**Features:** 15 Hardwareklassen mit je sechs individuellen Mengenmeilensteinen, Klassen-Upgrades, Tap/Halten, Overclock, frühe Experimente/Items, kumulatives INT-Prestige, funktionsorientierte INT-Upgrades, Autokauf und belastbare Save-/Zeitlogik.
 
-**Abhängigkeiten:** Browser-Prototyp, zentrale Economy, Save-Migration v6.
+**Abhängigkeiten:** Browser-Prototyp, zentrale Economy, Save-Migration v7.
 
 **Abnahmekriterien:** Start-zu-Prestige-Pfad, Profile, Daten/Forschung, 15 datengetriebene Klassen, kontrollierte Modellsoftcaps und Migration v6 sind integriert. Offen bleiben reproduzierbare neue 60-Minuten-/7-Tage-Messungen, vollständige Browserabnahme sowie die unten als Phase 2/3 geführten Build- und Metasysteme.
 

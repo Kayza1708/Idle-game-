@@ -30,6 +30,8 @@ describe('save format', () => {
     expect(migrated.state.training).toBeGreaterThan(0);
   });
 
+  it('migrates Erkenntnis and inactive specialization to INT without loss',()=>{const old={...newGame(0),totalInsightEarned:9,unspentInsight:4,specialization:'coding',nodes:['infrastructure-1']};const restored=restore(JSON.stringify({version:6,state:old}),0);expect(restored.migrated).toBe(true);expect(restored.state.totalINTEarned).toBe(9);expect(restored.state.unspentINT).toBe(9);expect(restored.state.spentINT).toBe(0);expect(restored.state.legacySpecialization).toBe('coding');expect(restored.state.nodes).toEqual([])});
+
   it('does not lose or duplicate time across background, save, close and reload', () => {
     const storage = new MemoryStorage();
     const started = newGame(0);

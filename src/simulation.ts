@@ -1,4 +1,4 @@
-import { BALANCE, addCredits, GameState, trainingRate, creditRate, dataRate, researchRate, hardwareCost, classCompute, buyHardwareClass, hasNode } from './economy';
+import { BALANCE, addCredits, GameState, trainingRate, creditRate, dataRate, researchRate, hardwareCost, classCompute, buyHardwareClass, hasNode, milestoneBonus } from './economy';
 import { completeExperiment } from './experiments';
 import { achievementCheck, rollPeriods } from './missions';
 import { updateOnboarding } from './onboarding';
@@ -20,14 +20,14 @@ function cloneForSimulation(state:GameState):GameState {
 }
 
 function autobuy(state:GameState) {
-  if (!state.prestigeCount || !state.automation.enabled) return state;
+  if ((!state.prestigeCount&&!milestoneBonus(state,'automation')) || !state.automation.enabled) return state;
   const candidates=(state.automation.target?[state.automation.target]:state.discovered).map(id=>{const cost=hardwareCost(id,state.hardwareCounts[id],state);const gain=classCompute(state,id,state.hardwareCounts[id]+1)-classCompute(state,id);return{id,cost,score:gain/cost}}).sort((a,b)=>b.score-a.score);
   const pick=candidates.find(x=>state.credits-x.cost>=state.automation.reserve);
   return pick?buyHardwareClass(state,pick.id,1):state;
 }
 
 export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
-  const limit=hasNode(state,'automation',1)?BALANCE.maxOfflineSeconds:BALANCE.baseOfflineSeconds,total=Math.max(0,Math.min(seconds,limit));
+  const limit=Math.min(BALANCE.maxOfflineSeconds,(hasNode(state,'autoRoute',1)?BALANCE.maxOfflineSeconds:BALANCE.baseOfflineSeconds)*(1+milestoneBonus(state,'offline'))),total=Math.max(0,Math.min(seconds,limit));
   let left=total,levels=0,experiments=0,hardware=0,next=cloneForSimulation(state);
   while(left>1e-9) {
     const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;
@@ -51,7 +51,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
 export function advanceTo(state:GameState,wallNow:number,active=false) {
   const now=simulationNow(state,wallNow);
   const result=advance(state,(now-state.savedAt)/1000,active);
-  const limit=hasNode(state,'automation',1)?BALANCE.maxOfflineSeconds:BALANCE.baseOfflineSeconds;if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
+  const limit=Math.min(BALANCE.maxOfflineSeconds,(hasNode(state,'autoRoute',1)?BALANCE.maxOfflineSeconds:BALANCE.baseOfflineSeconds)*(1+milestoneBonus(state,'offline')));if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
   return result;
 }
 

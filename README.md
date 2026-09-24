@@ -22,8 +22,9 @@ Die angezeigte Adresse (typisch `http://localhost:5173`) öffnen. Für den Produ
 - Ausgewogenes, Trainings- und Entdeckungsprofil teilen Compute sichtbar auf Nutzer, Modelltraining und Forschung auf. Nutzer erzeugen Credits und Daten; Forschung erzeugt Forschungspunkte.
 - Zugängliche Laborfläche: Tap und Tastatur, Halten mit drei Impulsen/s, gemeinsames Limit fünf/s, Overclock nach 30 Taps.
 - Acht einmalige Aufträge, 60-Sekunden-Einführungsexperiment, garantierter Einstieg-Itemfund sowie kurze und lange Experimente.
-- Kumulativer Prestigeanspruch aus berechtigtem Lifetime-Umsatz, drei Spezialisierungen und rendite-/zielbasierter Autokauf.
-- Save v6 mit Backup und konservativer Migration alter Hardware-/Meta-Spielstände; konsistente Debug-/Offline-Uhr.
+- Kumulativer INT-Anspruch aus berechtigtem Lifetime-Umsatz, funktionsorientierte INT-Upgrades und rendite-/zielbasierter Autokauf.
+- Save v7 mit verlustfreier Erkenntnis→INT-Migration, Rückzahlung alter Knoten und konservativer Migration übriger Hardware-/Meta-Spielstände.
+- Sechs individuelle Meilensteine je Klasse (90 insgesamt) und ein exponentiell bepreister, funktionsorientierter INT-Baum ohne Spezialisierungsmenü.
 
 Die zentrale Mathematik steht in [`docs/economy.md`](docs/economy.md), tatsächliche Simulationsergebnisse in [`docs/balance-report.md`](docs/balance-report.md), die verbindliche Planung in [`docs/ROADMAP.md`](docs/ROADMAP.md) und die Übergabe in [`docs/NEXT_STEPS.md`](docs/NEXT_STEPS.md).
 
@@ -36,7 +37,7 @@ Die zentrale Mathematik steht in [`docs/economy.md`](docs/economy.md), tatsächl
 5. Das 60-Sekunden-Einführungsexperiment abschließen, das garantierte Item im Inventar ausrüsten und die Auftragsbelohnung einmal abholen.
 6. 15 Einheiten einer Klasse kaufen, das Klassen-Upgrade erwerben und den verdoppelten Klassen-Compute prüfen.
 7. Im Entwicklermenü eine Stunde springen, Prestige durchführen und prüfen, dass reale Sekunden sofort wieder Credits/Training geben.
-8. Spezialisierung wählen, Prestige bestätigen und prüfen: Entdeckungen/Items bleiben, Bestände/Run-Upgrades starten neu.
+8. Prestige-Vorschau prüfen und neu starten: INT, Entdeckungen und Items bleiben, Bestände und Run-Upgrades starten neu.
 9. Seite neu laden sowie Tab verstecken/öffnen; Timer, Offline-Bericht und Fortschritt dürfen weder stehen bleiben noch doppelt zählen.
 
 ## Qualitätschecks

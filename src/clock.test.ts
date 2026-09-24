@@ -12,7 +12,7 @@ class MemoryStorage implements StorageLike {
   removeItem(){this.value=null;}
 }
 
-const prestigeReady=(now:number)=>({...newGame(now),credits:13_000_000_000,runCreditsEarned:13_000_000_000,lifetimeCreditsEarned:13_000_000_000,lifetimeEligibleCredits:13_000_000_000,specialization:'assistant' as const});
+const prestigeReady=(now:number)=>({...newGame(now),credits:13_000_000_000,runCreditsEarned:13_000_000_000,lifetimeCreditsEarned:13_000_000_000,lifetimeEligibleCredits:13_000_000_000});
 
 describe('simulation clock regressions',()=>{
   it('produces for ten seconds immediately after a normal prestige',()=>{
@@ -75,13 +75,13 @@ describe('simulation clock regressions',()=>{
   });
 
   it('repairs future-dated v2 saves without losing permanent state',()=>{
-    const old={...newGame(3_601_000),gems:321,totalInsightEarned:8,researchFragments:17,inventory:[{id:'kept',type:'quantum-chip' as const,rarity:'rare' as const,level:2,locked:true}]};
+    const old={...newGame(3_601_000),gems:321,totalINTEarned:8,researchFragments:17,inventory:[{id:'kept',type:'quantum-chip' as const,rarity:'rare' as const,level:2,locked:true}]};
     const raw=JSON.stringify({version:2,state:Object.fromEntries(Object.entries(old).filter(([key])=>key!=='clockOffsetMs'))});
     const repaired=restore(raw,1_000);
     expect(repaired.migrated).toBe(true);
     expect(repaired.state.clockOffsetMs).toBe(3_600_000);
     expect(repaired.state.gems).toBe(321);
-    expect(repaired.state.totalInsightEarned).toBe(8);
+    expect(repaired.state.totalINTEarned).toBe(8);
     expect(repaired.state.researchFragments).toBe(17);
     expect(repaired.state.inventory[0].id).toBe('kept');
     expect(restore(serialize(repaired.state),1_000).state).toEqual(repaired.state);

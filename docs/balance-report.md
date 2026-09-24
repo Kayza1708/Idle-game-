@@ -2,6 +2,17 @@
 
 > **Status v6:** Die folgenden Messwerte stammen aus dem unmittelbar vorherigen Kern ohne Betriebsprofile/Daten/Forschungsaufteilung. Sie bleiben als überprüfbare Baseline erhalten, sind aber keine behaupteten Resultate der neuen v6-Kurve. Eine erneute Simulation ist in `NEXT_STEPS.md` ausdrücklich offen; mangels installierbarer Vitest/Vite-Abhängigkeiten wurden keine Zahlen erfunden.
 
+## v7-Kontrolllauf – 24. September 2026
+
+Der echte kompilierte Economy-Kern wurde sekündlich ausgeführt. **Aktiv** kaufte alle 10 Sekunden nach bestem marginalem Compute/Preis und gab 3 Taps/s; **passiv** kaufte alle 60 Sekunden ohne Taps. Gems, Werbung, Debug und Training wurden nicht verwendet. Dieser isolierte Kontrolllauf prüft Kostenwände und ersten INT-Anspruch, nicht die komplette UI-Simulation.
+
+| Profil | erste INT | Freischaltungen nach 2 h | INT nach 2 h |
+|---|---:|---|---:|
+| Aktiv | 22:52 | SBC 1:30, PC 3:30, GPU 5:40, Workstation 8:10, Server 13:00, Farm 17:50, Campus 22:50, Cloud 30:20, Kühlung 49:20 | 25 |
+| Passiv | 115:15 | SBC 9:00, PC 21:00, GPU 34:00, Workstation 49:00, Server 78:00, Farm 107:00 | 1 |
+
+Nach 24 Stunden waren beim aktiven und passiven ROI-Profil jeweils 55 beziehungsweise 53 INT verfügbar; die Untersee-Klasse erschien aktiv nach 3:42 h und passiv nach 5:07 h, die Orbitalklasse nach 12:28 h beziehungsweise 7:49 h. Der aktive erste Prestige liegt damit im Zielkorridor. Die aktive Kurve erreicht frühe Klassen weiterhin schnell; zusätzliche Forschungsbedingungen für spätere Klassen bleiben eine offene Balanceaufgabe.
+
 Stand: 23. September 2026. Gemessen wurde mit dem echten Economy-/Simulationskern, ohne Gems, Werbung oder Debug. Training wurde bei jeder Kaufentscheidung abwechselnd als Qualität/Effizienz gestartet, sofern bezahlbar. **ROI** kauft die beste unmittelbare Compute/Kosten-Relation; **Neu** bevorzugt die neueste bezahlbare Klasse. Profil A entscheidet alle 10 Sekunden, tappt 3/s und aktiviert Overclock. Profil B entscheidet alle 60 Sekunden ohne Taps.
 
 ## Zwei Stunden

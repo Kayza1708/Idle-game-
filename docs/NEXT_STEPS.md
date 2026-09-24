@@ -2,24 +2,24 @@
 
 ## Aktueller Stand
 
-Save v6 erweitert den vorhandenen Phase-1-Kern ohne Rewrite: drei Compute-Profile, Nutzer, Daten, Forschungspunkte, drei bezahlbare Projekte, Softcap-Training und der vollständige 15-Klassen-Katalog sind mit der bestehenden Simulation, UI und Migration verbunden. Der erste Run bis Singularität bleibt die priorisierte spielbare Strecke.
+Save v7 ergänzt sechs individuelle Meilensteine pro Hardwareklasse, additive INT-Progression und einen funktionsorientierten INT-Baum ohne Spezialisierungsmenü. Alle 90 Meilensteine liegen in der zentralen Hardwarekonfiguration.
 
 ## Bekannte Einschränkungen
 
 - Module/Loadouts, deterministische Durchbruchswahlen, Prototyp-Items und Axiome sind dokumentierte Folgeschritte, keine fertigen Menüpunkte.
-- Klassen 6–15 besitzen IDs, Rollen und Economy-Werte, aber ihr Langzeitbalancing und individuelle Synergien sind noch nicht abgenommen.
+- Klassen 6–15 besitzen eigene Illustrationen, Rollen und Meilensteine; die Nebeneffekte Automation, Overclock, Offline und Synergie sind teilweise erst als Konfigurationsvertrag vorbereitet.
 - Die aktuellen Tabellen in `balance-report.md` sind eine Vergleichsbasis der vorherigen Phase-1.1-Kurve; nach der Compute-Aufteilung ist ein neuer vollständiger Simulationslauf erforderlich.
 - Registry-Zugriff auf `vitest` antwortet in dieser Umgebung mit HTTP 403. Deshalb konnten `npm ci`, Vitest, Production-Build, Audit und Browser-Screenshots nicht ehrlich abgeschlossen werden. TypeScript-Typecheck lief erfolgreich.
 
 ## Nächste drei priorisierte Aufgaben
 
 1. Vollständiges Lockfile in einer Umgebung mit Registry-Zugriff erzeugen, `npm ci`, Audit, Tests und Build ausführen und erst danach Browserbilder bei 390×844/Desktop aufnehmen.
-2. Eine eingecheckte Simulation für aktiv/gelegentlich/offline sowie vier Builds ergänzen und Prestige-Schwelle/Projektkosten anhand der Ergebnisse kalibrieren.
+2. Den ausgeführten v7-Kontrolllauf als eingechecktes Simulationswerkzeug ausbauen und Forschungsbedingungen der späteren Klassen kalibrieren.
 3. Phase 2 mit drei Modulsockeln, gespeicherten Loadouts und deterministischen Durchbruchswahlen implementieren.
 
 ## Letzter tatsächlich ausgeführter Teststand
 
-Am 24. September 2026 war `npm run typecheck` erfolgreich. `npm ci` scheiterte reproduzierbar am Registry-HTTP-403 für die direkte Entwicklungsabhängigkeit `vitest`; dadurch waren `npm test` und `npm run build` nicht ausführbar. Ein erzwungenes Audit-Fix wurde nicht eingesetzt.
+Am 24. September 2026 waren Typecheck und der kompilierte v7-Economy-Kontrolllauf erfolgreich. Der Kontrolllauf maß erste INT nach 22:52 aktiv beziehungsweise 115:15 passiv. Vitest/Build bleiben vom Registry-HTTP-403 abhängig; kein erzwungenes Audit-Fix wurde eingesetzt.
 
 ## Offene Designentscheidungen
 

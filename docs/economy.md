@@ -1,4 +1,4 @@
-# Economy v6 – Compute-Aufteilung und kontrolliertes Modellwachstum
+# Economy v7 – Hardwareidentität und INT
 
 Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und Tests rufen dieselben Funktionen auf; angezeigte Preise werden nicht separat nachgebaut.
 
@@ -11,19 +11,19 @@ Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und 
 | Daten | entstehen durch Nutzer; Training und Projekte | zurückgesetzt |
 | Forschungspunkte | entstehen aus Forschungs-Compute; Projekte | bleiben erhalten |
 | Komponenten/Baupläne | Items und Crafting | bleiben erhalten |
-| Erkenntnis | Singularitätsbaum | bleibt erhalten |
+| INT / Intelligence | Singularitätsbaum und dauerhafter Creditbonus | bleibt erhalten |
 | Axiome | reserviertes Feld für den späteren Meta-Layer | bleibt erhalten; noch nicht spielbar |
 | Gems | Missionen/Achievements und Komfortangebote | bleibt erhalten |
 
 ## Hardware und Betriebsprofile
 
-Der datengetriebene Katalog enthält 15 stabile IDs. Die ersten fünf bilden den spielbaren ersten Abschnitt; die Klassen 6–15 werden sequentiell sichtbar und bereiten Langzeitinhalte vor. Für Klasse `i` gilt:
+Der datengetriebene Katalog enthält 15 stabile IDs. Jede Klasse definiert in ihrer eigenen Konfiguration die sechs Schwellen **10, 25, 50, 100, 250 und 500**, einen individuellen Namen sowie einen klassentypischen Nebeneffekt (Tap, Daten, Nutzer, Overclock, Training, Automation, Forschung, Offline oder Synergie). Für Klasse `i` gilt:
 
 `nextCost(i,n)=baseCost(i)×growth(i)^n`
 
 `bulkCost(i,n,k)=baseCost(i)×growth(i)^n×(growth(i)^k−1)/(growth(i)−1)`
 
-Max-Kauf wird logarithmisch geschätzt und danach in beide Richtungen gegen `bulkCost` korrigiert. Meilensteine bei 10/25/50 multiplizieren Klassen-Compute mit 1,5/1,5/1,75 (gesamt höchstens 3,9375); ein gekauftes Klassen-Upgrade verdoppelt ausschließlich diese Klasse.
+Max-Kauf wird logarithmisch geschätzt und danach in beide Richtungen gegen `bulkCost` korrigiert. Die sechs Meilensteine erhöhen den Compute der jeweiligen Klasse kontrolliert um +12 %, +16 %, +22 %, +30 %, +42 % und +60 % multiplikativ. Sie sind ausdrücklich keine generische Verdopplung. Ein Klassen-Upgrade verdoppelt weiterhin ausschließlich diese Klasse.
 
 `totalCompute = Σ(count × classCompute × milestones × classUpgrade) × globalComputeFamily`
 
@@ -61,7 +61,7 @@ Die drei ersten Projekte verbrauchen gemeinsam Credits, Daten und Forschungspunk
 
 Gleichartige Prozente innerhalb von Compute-, Credit-, Training-, Forschungs- oder temporären Familien werden addiert. Erst zwischen benannten Familien wird multipliziert. Prestige wirkt einmal auf Credits und einmal auf Training, niemals nochmals auf Compute.
 
-## Prestige
+## Prestige und INT
 
 Nur reguläre Produktion und Taps erhöhen `lifetimeEligibleCredits`. Missionen, Debug, Werbung und Auftragsbelohnungen tun das nicht.
 
@@ -69,13 +69,15 @@ Nur reguläre Produktion und Taps erhöhen `lifetimeEligibleCredits`. Missionen,
 
 `claimable = floor(raw) − prestigeEntitlementClaimed`
 
-Der erste Reset braucht drei, spätere einen Anspruch. Der bereits abgeholte Formelanspruch ist unabhängig von verfügbaren/ausgegebenen Erkenntnissen. Der dauerhafte Faktor bleibt `1 + 0,35×totalInsightEarned^0,7`.
+Jeder Reset ist ab mindestens **1 INT** möglich. Insgesamt verdiente, verfügbare und ausgegebene INT werden getrennt gespeichert. Der permanente Creditfaktor ist additiv: `1 + 0,10 × totalINTEarned`; Ausgeben reduziert ihn nicht.
+
+Der alte Spezialisierungsdialog wurde entfernt. Sechs regelverändernde INT-Upgrades verwenden `ceil(baseCost × growthRate^level)`: Impulsarchiv, Warmer Neustart, Labor-Kopplung, Autonome Beschaffung, Artefakt-Bus und Rekursives Labor. Voraussetzungen, Effekttext, Kosten und Maximalstufe liegen zentral in `BALANCE.prestigeUpgrades`.
 
 ## Zeit, Offline und Migration
 
 Simulation verwendet zehnsekündige Ereignisschritte und absolute Endzeitpunkte. Das Grund-Offline-Limit beträgt acht Stunden; ein später Automationsknoten erhöht es auf maximal 24 Stunden. Debug-Zeitsprünge verschieben die gesamte Timeline, nicht nur `savedAt`.
 
-Save v6 ergänzt Daten, Forschungspunkte, Axiome, Profil, Projekte und alle Hardware-IDs. Migrationen v1–v5 werden vor dem Schreiben gesichert. Bestehende Hardware, Items, Gems, Erkenntnisse, Forschung und Timer bleiben erhalten. Alte Modelllevel werden konservativ auf Qualität/Effizienz verteilt. Unbekannte oder beschädigte Saves werden nicht überschrieben.
+Save v7 migriert v1–v6. Erkenntnis wird vollständig in INT übertragen. Bereits in alte pauschale Knoten investierte Punkte werden bei der v6-Migration kostenfrei in verfügbares INT zurückgezahlt; die frühere Spezialisierung bleibt nur als inaktives Migrationsfeld erhalten. Hardware, Items, Gems, Forschung und Timer bleiben erhalten. Unbekannte oder beschädigte Saves werden nicht überschrieben.
 
 ## Bewusste Grenzen
 
