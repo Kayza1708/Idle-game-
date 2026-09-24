@@ -65,3 +65,24 @@ Die bestehende v7-Kontrollmessung bleibt die letzte reproduzierbare Langmessung:
 Save v14 migriert v13 ohne Verlust von Gems oder Achievement-Punkten und ergänzt konservativ neue Lifetime-Zähler. Der Browser bietet ausschließlich Käufe mit erspielten Gems. Echtgeldpakete besitzen stabile IDs, aber absichtlich weder Preis noch aktiven Kaufpfad: Native Hülle, Store-SDK, Account und verifizierender Server fehlen.
 
 Das rechnerische Vollteilnahmebudget beträgt bei 30 Tagen rund 675 Gems/Monat. Der erste 900-Gem-Laborplatz liegt ohne einmalige Achievements bei ungefähr 40 Tagen. Als nächstes sind reale mobile Abschlussquoten und die Zeit bis 900 Gems zu messen; erst danach Ziele oder Preise ändern.
+
+
+## Übergabe 24. September 2026 – Stabilität, Training und Analyse
+
+Training verwendet reale Arbeitszeit und exponentielle Ziele ab 90 Sekunden; beide Pfade haben getrennte Kosten. Saves werden temporär geschrieben, vollständig validiert und mit drei Generationen abgesichert. Große Zeiträume laufen iterativ in höchstens 60-Sekunden-Schritten. Der lokale ZIP-Bericht enthält elf Analyse-Dateien ohne Upload. Die mobile INT-Ansicht verwendet eine kompakte Leiterplatte und ein touchfreundliches Detailfenster. Offen bleibt die tatsächliche fünfminütige Browser-/Geräteabnahme.
+
+## Korrektur nach Langzeit-Reproduktion – 24. September 2026
+
+Ein automatisierter Kernlauf mit 36 Käufen, 34 Trainings, wechselnder Online-/Offline-
+Simulation, Save/Reload, Backup-Recovery und ZIP-Export simulierte 981.240 Sekunden.
+Ein vollständiger UI-Freeze ließ sich ohne echten Browser nicht reproduzieren. Es wurde
+aber eine konkrete Main-Thread-Last identifiziert: 11.692 vollständige Snapshots machten
+den Save 7,28 MB und den ZIP-Export 4,18 MB groß; Simulation plus Export benötigten
+21,28 Sekunden. Die begrenzte, ältere Daten automatisch ausdünnende Snapshot-Reihe
+reduziert denselben Lauf auf 1.692 Snapshots, 1,51 MB Save, 1,19 MB ZIP und 13,04
+Sekunden bei 35,04 MB Heap-Zuwachs. Damit ist die Datenexplosion korrigiert; eine reale
+fünfminütige Browserprüfung bleibt offen.
+
+Python `zipfile` und `unzip -t` lasen alle elf Dateien und bestätigten sämtliche CRCs.
+Die Ursache des zuvor defekten Archivs waren falsch dimensionierte bzw. falsch belegte
+Central-Directory-Header im handgeschriebenen ZIP-Writer.
