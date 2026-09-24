@@ -81,4 +81,4 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 
 ## Grafik-Integration — Erledigt
 
-Die bereitgestellte frühe Laboransicht sowie die geprüften Hardware-, Ressourcen-, Item- und Prestige-Atlanten sind den bestehenden Spielansichten zugeordnet. Dieser Grafikpass ändert weder Economy noch Spielmechanik oder Speicherdaten.
+Die bereitgestellte frühe Laboransicht sowie die geprüften Hardware-, Ressourcen-, Item- und Prestige-Atlanten sind den bestehenden Spielansichten zugeordnet. Die Oberfläche verwendet nun einen ruhigen, dunklen Pixel-Art-Stil mit kompakten Hardwarezeilen, flachen Bedienelementen, responsiven Inhaltsrastern und reduzierten Effekten. Dieser Grafikpass ändert weder Economy noch Spielmechanik oder Speicherdaten.

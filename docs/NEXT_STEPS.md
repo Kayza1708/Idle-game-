@@ -6,7 +6,7 @@ Save v7 ergänzt sechs individuelle Meilensteine pro Hardwareklasse, additive IN
 
 ## Letzter abgeschlossener Arbeitsauftrag
 
-Die fünf gelieferten PNG-Grafiken wurden aus dem Repository-Root nach `public/assets/game/` verschoben. Das frühe Labor ist in der Werkstatt sichtbar; die Atlaszellen sind als 4×4-Hardware-, 4×2-Ressourcen-, 4×3-Item- und 4×4-Prestige-Raster in den zugehörigen Ansichten eingebunden. Economy, Mechanik und Save-Schema blieben unverändert.
+Die fünf gelieferten PNG-Grafiken wurden aus dem Repository-Root nach `public/assets/game/` verschoben. Das frühe Labor ist in der Werkstatt sichtbar; die Atlaszellen sind als 4×4-Hardware-, 4×2-Ressourcen-, 4×3-Item- und 4×4-Prestige-Raster in den zugehörigen Ansichten eingebunden. Der anschließende visuelle Pass ersetzte die Neon-Dashboard-Anmutung durch ein ruhiges, dunkles Pixel-Art-Layout und verdichtete Hardware, Forschung und Inventar für mobile sowie breite Ansichten. Economy, Mechanik und Save-Schema blieben unverändert.
 
 ## Bekannte Einschränkungen
 
