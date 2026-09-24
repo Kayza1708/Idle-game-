@@ -10,6 +10,8 @@ class MemoryStorage implements StorageLike {
 }
 
 describe('save format', () => {
+  it('assigns a persistent anonymous campaign id to a fresh local game',()=>{const storage=new MemoryStorage(),first=loadGame(storage,100).state;expect(first.telemetry.campaignId).not.toBe('unassigned');persistGame(storage,first,100);expect(loadGame(storage,100).state.telemetry.campaignId).toBe(first.telemetry.campaignId)});
+
   it('round-trips a versioned game state', () => {
     const state = { ...newGame(123), credits: 42.25, level: 3, training: 17 };
     expect(restore(serialize(state), 999)).toEqual({ state });
@@ -31,6 +33,8 @@ describe('save format', () => {
   });
 
   it('migrates Erkenntnis and inactive specialization to INT without loss',()=>{const old={...newGame(0),totalInsightEarned:9,unspentInsight:4,specialization:'coding',nodes:['infrastructure-1']};const restored=restore(JSON.stringify({version:6,state:old}),0);expect(restored.migrated).toBe(true);expect(restored.state.totalINTEarned).toBe(9);expect(restored.state.unspentINT).toBe(9);expect(restored.state.spentINT).toBe(0);expect(restored.state.legacySpecialization).toBe('coding');expect(restored.state.nodes).toEqual([])});
+
+  it('migrates v7 saves with explicitly unavailable earlier telemetry',()=>{const old=newGame(100) as any;delete old.telemetry;const restored=restore(JSON.stringify({version:7,state:old}),200);expect(restored.migrated).toBe(true);expect(restored.state.telemetry.historicalDataAvailable).toBe(false);expect(restored.state.credits).toBe(old.credits)});
 
   it('does not lose or duplicate time across background, save, close and reload', () => {
     const storage = new MemoryStorage();

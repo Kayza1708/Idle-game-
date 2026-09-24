@@ -77,7 +77,7 @@ Der alte Spezialisierungsdialog wurde entfernt. Sechs regelverändernde INT-Upgr
 
 Simulation verwendet zehnsekündige Ereignisschritte und absolute Endzeitpunkte. Das Grund-Offline-Limit beträgt acht Stunden; ein später Automationsknoten erhöht es auf maximal 24 Stunden. Debug-Zeitsprünge verschieben die gesamte Timeline, nicht nur `savedAt`.
 
-Save v7 migriert v1–v6. Erkenntnis wird vollständig in INT übertragen. Bereits in alte pauschale Knoten investierte Punkte werden bei der v6-Migration kostenfrei in verfügbares INT zurückgezahlt; die frühere Spezialisierung bleibt nur als inaktives Migrationsfeld erhalten. Hardware, Items, Gems, Forschung und Timer bleiben erhalten. Unbekannte oder beschädigte Saves werden nicht überschrieben.
+Save v8 migriert v1–v7. Erkenntnis wird vollständig in INT übertragen. Bereits in alte pauschale Knoten investierte Punkte werden bei der v6-Migration kostenfrei in verfügbares INT zurückgezahlt; die frühere Spezialisierung bleibt nur als inaktives Migrationsfeld erhalten. Hardware, Items, Gems, Forschung und Timer bleiben erhalten. Bei älteren Saves beginnt die lokale Run-Telemetrie erst mit der Migration; fehlende Vergangenheit wird nicht rekonstruiert. Unbekannte oder beschädigte Saves werden nicht überschrieben.
 
 ## Bewusste Grenzen
 

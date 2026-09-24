@@ -191,3 +191,10 @@ footer { display: flex; max-width: 720px; margin: auto; padding: 18px 0; justify
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .tap-pop { display: none; }
 }
+
+.export-report { display: flex; max-width: 720px; margin: 18px auto 0; align-items: center; justify-content: space-between; gap: 12px; }
+.export-report div { min-width: 0; }
+.export-report small { margin-top: 3px; }
+.export-report [role="status"] { display: block; margin-top: 5px; color: var(--warm-light); font-size: 12px; }
+.export-report button { flex: 0 0 auto; }
+@media (max-width: 520px) { .export-report { align-items: stretch; flex-direction: column; } .export-report button { width: 100%; } }
