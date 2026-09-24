@@ -1,7 +1,9 @@
 import type { GameState } from './economy';
+import { creditRate,computeRate,dataRate,newINT,researchRate } from './economy';
 import { SAVE_VERSION } from './storage';
 
 export const REPORT_VERSION=1;
+export const EXPORT_VERSION=2;
 export const GAME_VERSION='0.1.0';
 
 function safeValue(value:unknown):unknown{
@@ -38,7 +40,40 @@ export function createBalanceReport(state:GameState,exportedAt=Date.now()){
 
 export function serializeBalanceReport(state:GameState,exportedAt=Date.now()){return JSON.stringify(createBalanceReport(state,exportedAt),null,2);}
 
+const csvCell=(value:unknown)=>`"${String(value??'').replaceAll('"','""')}"`;
+const csv=(headers:string[],rows:unknown[][])=>[headers.map(csvCell).join(','),...rows.map(row=>row.map(csvCell).join(','))].join('\r\n');
+export function createBalanceExportFiles(state:GameState,exportedAt=Date.now()):Record<string,string>{
+  const report=createBalanceReport(state,exportedAt),events=[...state.telemetry.permanentEvents,...state.telemetry.recentEvents].sort((a,b)=>a.at-b.at);
+  const timeline=events.map(event=>({utc:new Date(event.at).toISOString(),runId:`${state.telemetry.campaignId}:${event.run}`,sessionId:`local-${state.telemetry.campaignId}`,eventType:event.type,values:event.details,resourcesAfter:event.resources}));
+  const eventRows=timeline.map(x=>[x.utc,x.runId,x.sessionId,x.eventType,JSON.stringify(x.values),JSON.stringify(x.resourcesAfter)]);
+  const purchases=events.filter(x=>x.type==='hardware-purchase').map(x=>[new Date(x.at).toISOString(),x.details.id,x.details.amount,x.details.unitCost??'',x.details.cost??'',x.details.creditsBefore??'',x.details.creditsAfter??'',x.details.computeBefore??'',x.details.computeAfter??'',x.details.rateBefore??'',x.details.rateAfter??'',x.details.nextMilestone??'',x.details.paybackSeconds??'']);
+  const milestones=events.filter(x=>x.type==='hardware-milestone').map(x=>[new Date(x.at).toISOString(),x.run,x.details.id,x.details.threshold,x.details.effect??'',x.details.computeBefore??'',x.details.computeAfter??'']);
+  const training=events.filter(x=>x.type==='training-start'||x.type==='training-complete').map(x=>[new Date(x.at).toISOString(),x.type,x.details.track,x.details.level??'',x.details.creditCost??'',x.details.dataCost??'',x.details.baseDuration??'',x.details.effectiveRate??'',x.details.expectedDuration??'',x.details.actualDuration??'',x.details.onlineWork??'',x.details.offlineWork??'']);
+  const research=events.filter(x=>x.type==='research-start'||x.type==='research-complete').map(x=>[new Date(x.at).toISOString(),x.type,x.details.id??'',x.details.labId??'',x.details.duration??'',x.details.creditCost??'',x.details.researchPointCost??'',x.details.materials??'',x.details.breakthrough??'']);
+  const prestigeRows=state.telemetry.prestigeHistory.map(x=>[new Date(x.at).toISOString(),x.run,x.durationSeconds,x.before.runCreditsEarned,x.intEarned,JSON.stringify(x.before.hardwareCounts),x.before.level,x.before.completedResearch.length,x.before.breakthroughs.join('|')]);
+  const snapshotRows=state.telemetry.snapshots.map(x=>[x.runSeconds,x.credits,x.creditsPerSecond,x.compute,x.computePerSecond,x.users,x.data,x.dataPerSecond,x.research,x.researchPerSecond,x.gems,...Object.values(x.hardwareCounts),x.modelLevel,x.qualityLevel,x.efficiencyLevel,x.activeTraining,x.activeResearch,x.prestigeClaim,x.activeLabs]);
+  const diagnostics={...state.telemetry.diagnostics,browser:typeof navigator==='undefined'?null:navigator.userAgent,build:GAME_VERSION};
+  return{
+    'summary.json':JSON.stringify({...report,exportVersion:EXPORT_VERSION,runId:`${state.telemetry.campaignId}:${state.prestigeCount}`,anonymousInstallationId:state.telemetry.campaignId,locale:typeof navigator==='undefined'?'unknown':navigator.language,timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone},null,2),
+    'timeline.json':JSON.stringify(timeline,null,2),'timeline.csv':csv(['utc','runId','sessionId','eventType','values','resourcesAfter'],eventRows),
+    'snapshots.csv':csv(['relativeRunSeconds','credits','creditsPerSecond','compute','computePerSecond','users','data','dataPerSecond','research','researchPerSecond','gems',...Object.keys(state.hardwareCounts),'modelLevel','quality','efficiency','activeTraining','activeResearch','prestigeClaim','activeLabs'],snapshotRows),
+    'purchases.csv':csv(['utc','class','quantity','unitPrice','bulkCost','creditsBefore','creditsAfter','computeBefore','computeAfter','creditsPerSecondBefore','creditsPerSecondAfter','nextMilestone','paybackSeconds'],purchases),
+    'milestones.csv':csv(['utc','run','class','owned','effect','computeBefore','computeAfter'],milestones),
+    'training.csv':csv(['utc','event','track','modelLevel','creditCost','dataCost','baseDuration','effectiveRate','expectedDuration','actualDuration','onlineWork','offlineWork'],training),
+    'research.csv':csv(['utc','event','project','labId','duration','creditCost','researchPoints','materials','breakthrough'],research),
+    'prestige.csv':csv(['utc','run','runDuration','lifetimeCredits','intClaimed','hardware','modelLevel','researchCount','nodes'],prestigeRows),
+    'sessions.csv':csv(['sessionStart','sessionEnd','activeSeconds','offlineSeconds','taps','purchases','trainings','research','prestige'],[[state.telemetry.campaignStartedAt?new Date(state.telemetry.campaignStartedAt).toISOString():'',new Date(exportedAt).toISOString(),state.lifetime.activeSeconds,state.telemetry.metrics.reduce((n,x)=>n+x.offlineSeconds,0),state.lifetime.taps,purchases.length,state.lifetime.trainingCompleted,state.lifetime.researchCompleted,state.prestigeCount]]),
+    'diagnostics.json':JSON.stringify({...diagnostics,currentRates:{credits:creditRate(state.hardware,state.level,state,state.savedAt),compute:computeRate(state.hardware,state),data:dataRate(state),research:researchRate(state),prestigeClaim:newINT(state)}},null,2)
+  };
+}
+
+const crcTable=Array.from({length:256},(_,n)=>{let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;return c>>>0});
+const crc32=(bytes:Uint8Array)=>{let c=0xffffffff;for(const b of bytes)c=crcTable[(c^b)&255]^(c>>>8);return(c^0xffffffff)>>>0};
+const concat=(chunks:Uint8Array[])=>{const out=new Uint8Array(chunks.reduce((n,x)=>n+x.length,0));let offset=0;for(const chunk of chunks){out.set(chunk,offset);offset+=chunk.length;}return out;};
+const header=(size:number,write:(view:DataView)=>void)=>{const bytes=new Uint8Array(size);write(new DataView(bytes.buffer));return bytes;};
+export function createBalanceZip(state:GameState,exportedAt=Date.now()){const encoder=new TextEncoder(),locals:Uint8Array[]=[],central:Uint8Array[]=[],files=Object.entries(createBalanceExportFiles(state,exportedAt));let offset=0;for(const[name,content]of files){const fileName=encoder.encode(name),data=encoder.encode(content),crc=crc32(data),localHeader=header(30,v=>{v.setUint32(0,0x04034b50,true);v.setUint16(4,20,true);v.setUint16(6,0x0800,true);v.setUint16(8,0,true);v.setUint32(14,crc,true);v.setUint32(18,data.length,true);v.setUint32(22,data.length,true);v.setUint16(26,fileName.length,true);}),centralHeader=header(46,v=>{v.setUint32(0,0x02014b50,true);v.setUint16(4,20,true);v.setUint16(6,20,true);v.setUint16(8,0x0800,true);v.setUint16(10,0,true);v.setUint32(16,crc,true);v.setUint32(20,data.length,true);v.setUint32(24,data.length,true);v.setUint16(28,fileName.length,true);v.setUint32(42,offset,true);});locals.push(localHeader,fileName,data);central.push(centralHeader,fileName);offset+=localHeader.length+fileName.length+data.length;}const centralData=concat(central),end=header(22,v=>{v.setUint32(0,0x06054b50,true);v.setUint16(8,files.length,true);v.setUint16(10,files.length,true);v.setUint32(12,centralData.length,true);v.setUint32(16,offset,true);});return concat([...locals,centralData,end]);}
+
 export function downloadBalanceReport(state:GameState,exportedAt=Date.now()){
-  const blob=new Blob([serializeBalanceReport(state,exportedAt)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');
-  link.href=url;link.download=`ai-singularity-balance-${new Date(exportedAt).toISOString().replace(/[:.]/g,'-')}.json`;link.click();URL.revokeObjectURL(url);
+  const blob=new Blob([createBalanceZip(state,exportedAt) as BlobPart],{type:'application/zip'}),url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download=`ai-singularity-balance-${new Date(exportedAt).toISOString().replace(/[:.]/g,'-')}.zip`;link.click();URL.revokeObjectURL(url);
 }

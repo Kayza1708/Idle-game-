@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { newGame } from './economy';
-import { BACKUP_KEY, loadGame, persistGame, RECOVERY_KEY, restore, serialize, StorageLike } from './storage';
+import { BACKUP_KEY, SAVE_KEY, TEMP_KEY, loadGame, persistGame, RECOVERY_KEY, restore, serialize, StorageLike } from './storage';
 
 class MemoryStorage implements StorageLike {
   value: string | null = null;
@@ -70,4 +70,17 @@ describe('save format', () => {
     expect(result.saved).toBe(false);
     expect(result.error).toMatch(/nicht möglich/);
   });
+});
+
+describe('transactional backup saves',()=>{
+ it('restores the newest valid backup when the primary is corrupt',()=>{const values=new Map<string,string>(),storage:StorageLike={getItem:k=>values.get(k)??null,setItem:(k,v)=>{values.set(k,v)},removeItem:k=>{values.delete(k)}};values.set(BACKUP_KEY,serialize({...newGame(0),credits:77}));values.set('ai-singularity.save','{broken');const loaded=loadGame(storage,100);expect(loaded.state.credits).toBe(77);expect(loaded.error).toMatch(/Backup/);expect(loaded.writable).toBe(true);});
+ it('refuses a non-finite snapshot without replacing the valid save',()=>{const values=new Map<string,string>(),storage:StorageLike={getItem:k=>values.get(k)??null,setItem:(k,v)=>{values.set(k,v)},removeItem:k=>{values.delete(k)}};const valid=serialize(newGame(0));values.set('ai-singularity.save',valid);const result=persistGame(storage,{...newGame(0),credits:Infinity},0);expect(result.saved).toBe(false);expect(values.get('ai-singularity.save')).toBe(valid);});
+});
+
+it('migrates v14 telemetry into persistent snapshots and diagnostics',()=>{const old:any=newGame(0);delete old.telemetry.snapshots;delete old.telemetry.diagnostics;for(const event of old.telemetry.recentEvents)delete event.resources;const restored=restore(JSON.stringify({version:14,state:old}),100);expect(restored.migrated).toBe(true);expect(restored.state.telemetry.snapshots).toEqual([]);expect(restored.state.telemetry.diagnostics.recoveries).toBe(0);});
+
+describe('save-stage diagnostics and quota recovery',()=>{
+ class QuotaStorage implements StorageLike {values=new Map<string,string>();constructor(readonly limit:number){}getItem(k:string){return this.values.get(k)??null}removeItem(k:string){this.values.delete(k)}setItem(k:string,v:string){const used=[...this.values].filter(([key])=>key!==k).reduce((n,[,value])=>n+value.length,0);if(used+v.length>this.limit)throw new DOMException(`quota ${used+v.length}/${this.limit}`,'QuotaExceededError');this.values.set(k,v)}seed(k:string,v:string){this.values.set(k,v)} }
+ it('identifies the fifth full-size temporary copy as QuotaExceededError and retries without losing the primary',()=>{const state={...newGame(0),credits:123},raw=serialize(state),storage=new QuotaStorage(Math.ceil(raw.length*4.2));storage.seed('ai-singularity.save',raw);storage.seed(BACKUP_KEY,raw);storage.seed(`${BACKUP_KEY}.2`,raw);storage.seed(`${BACKUP_KEY}.3`,raw);const result=persistGame(storage,state,0);expect(result.saved).toBe(true);expect(result.quotaRecovery?.name).toBe('QuotaExceededError');expect(loadGame(storage,0).state.credits).toBe(123);expect(storage.getItem(`${BACKUP_KEY}.3`)).toBeTruthy()});
+ it('reports the exact failing stage, name, message and sizes while preserving the valid primary',()=>{const valid=serialize({...newGame(0),credits:77}),storage:StorageLike={getItem:key=>key===SAVE_KEY?valid:null,setItem:(key)=>{if(key===TEMP_KEY)throw new DOMException('test quota','QuotaExceededError')},removeItem:()=>{}};const result=persistGame(storage,newGame(0),0);expect(result.saved).toBe(false);if(result.saved)return;expect(result.failure).toMatchObject({stage:'temp-write',name:'QuotaExceededError',message:'test quota'});expect(result.failure.sizes.main).toBe(valid.length);expect(storage.getItem(SAVE_KEY)).toBe(valid)});
 });

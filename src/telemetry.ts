@@ -1,23 +1,31 @@
 import type { GameState, HardwareId } from './economy';
 
 export type TelemetryEventType = 'hardware-purchase'|'hardware-milestone'|'training-start'|'training-complete'|'research-start'|'research-complete'|'experiment-complete'|'breakthrough'|'item-create'|'item-equip'|'item-upgrade'|'item-lock'|'item-salvage'|'achievement'|'mission-claim'|'prestige';
-export type TelemetryEvent = { at:number; run:number; type:TelemetryEventType; details:Record<string,string|number|boolean|null> };
+export type ResourceSnapshot={credits:number;data:number;researchPoints:number;gems:number;compute:number|null};
+export type TelemetryEvent = { at:number; run:number; type:TelemetryEventType; details:Record<string,string|number|boolean|null>;resources:ResourceSnapshot };
+export type RunSnapshot={at:number;runSeconds:number;credits:number;creditsPerSecond:number;compute:number;computePerSecond:number;users:number;data:number;dataPerSecond:number;research:number;researchPerSecond:number;gems:number;hardwareCounts:Record<HardwareId,number>;modelLevel:number;qualityLevel:number;efficiencyLevel:number;activeTraining:string|null;activeResearch:string;prestigeClaim:number;activeLabs:number};
+export type PersistentDiagnostics={lastSuccessfulTick:number|null;lastSuccessfulSave:number|null;lastSuccessfulLoad:number|null;discardedTicks:number;nonFiniteWarnings:number;longTicks:number;watchdogEvents:number;saveErrors:number;recoveries:number;lastWarning:string|null};
 export type MetricBucket = { start:number; end:number; taps:number; activeSeconds:number; offlineSeconds:number; income:{tap:number;passive:number;offline:number;other:number}; offlineRewards:{credits:number;data:number;research:number} };
 export type ArchivedMetrics = { through:number|null;taps:number;activeSeconds:number;offlineSeconds:number;income:{tap:number;passive:number;offline:number;other:number};offlineRewards:{credits:number;data:number;research:number} };
 export type PrestigeSnapshot = { at:number; run:number; durationSeconds:number|null; intEarned:number; before:{credits:number;data:number;researchPoints:number;hardwareCounts:Record<HardwareId,number>;classUpgrades:HardwareId[];level:number;qualityLevel:number;efficiencyLevel:number;runCreditsEarned:number;inventoryCount:number;breakthroughs:string[];completedResearch:string[]}; };
-export type LocalTelemetry = { campaignId:string;campaignStartedAt:number|null;runStartedAt:number|null;recentEvents:TelemetryEvent[];permanentEvents:TelemetryEvent[];metrics:MetricBucket[];archivedMetrics:ArchivedMetrics;prestigeHistory:PrestigeSnapshot[];historicalDataAvailable:boolean };
+export type LocalTelemetry = { campaignId:string;campaignStartedAt:number|null;runStartedAt:number|null;recentEvents:TelemetryEvent[];permanentEvents:TelemetryEvent[];metrics:MetricBucket[];snapshots:RunSnapshot[];diagnostics:PersistentDiagnostics;archivedMetrics:ArchivedMetrics;prestigeHistory:PrestigeSnapshot[];historicalDataAvailable:boolean };
 
-const WINDOW_MS=15*60*1000, MAX_BUCKETS=96*31, MAX_RECENT_EVENTS=500;
+const WINDOW_MS=15*60*1000, MAX_BUCKETS=96*31, MAX_RECENT_EVENTS=500,MAX_SNAPSHOTS=300;
 const finite=(n:number)=>Number.isFinite(n)?n:0;
 export const anonymousCampaignId=()=>globalThis.crypto?.randomUUID?.()??`campaign-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 const emptyArchive=():ArchivedMetrics=>({through:null,taps:0,activeSeconds:0,offlineSeconds:0,income:{tap:0,passive:0,offline:0,other:0},offlineRewards:{credits:0,data:0,research:0}});
-export const newTelemetry=(now:number,campaignId='unassigned'):LocalTelemetry=>({campaignId,campaignStartedAt:now,runStartedAt:now,recentEvents:[],permanentEvents:[],metrics:[],archivedMetrics:emptyArchive(),prestigeHistory:[],historicalDataAvailable:true});
+const emptyDiagnostics=():PersistentDiagnostics=>({lastSuccessfulTick:null,lastSuccessfulSave:null,lastSuccessfulLoad:null,discardedTicks:0,nonFiniteWarnings:0,longTicks:0,watchdogEvents:0,saveErrors:0,recoveries:0,lastWarning:null});
+export const newTelemetry=(now:number,campaignId='unassigned'):LocalTelemetry=>({campaignId,campaignStartedAt:now,runStartedAt:now,recentEvents:[],permanentEvents:[],metrics:[],snapshots:[],diagnostics:emptyDiagnostics(),archivedMetrics:emptyArchive(),prestigeHistory:[],historicalDataAvailable:true});
 export const migratedTelemetry=():LocalTelemetry=>({...newTelemetry(Date.now(),anonymousCampaignId()),campaignStartedAt:null,runStartedAt:null,historicalDataAvailable:false});
 
 export function addEvent(s:GameState,type:TelemetryEventType,at:number,details:TelemetryEvent['details']={},permanent=false):GameState{
-  const event={at,run:s.prestigeCount,type,details};
-  return permanent?{...s,telemetry:{...s.telemetry,permanentEvents:[...s.telemetry.permanentEvents,event]}}:{...s,telemetry:{...s.telemetry,recentEvents:[...s.telemetry.recentEvents,event].slice(-MAX_RECENT_EVENTS)}};
+  const event:TelemetryEvent={at,run:s.prestigeCount,type,details:{...details},resources:{credits:s.credits,data:s.data,researchPoints:s.researchPoints,gems:s.gems,compute:null}};
+  const next=permanent?{...s,telemetry:{...s.telemetry,permanentEvents:[...s.telemetry.permanentEvents,event]}}:{...s,telemetry:{...s.telemetry,recentEvents:[...s.telemetry.recentEvents,event].slice(-MAX_RECENT_EVENTS)}};
+  const previous=s.telemetry.snapshots.at(-1),compute=Number(details.computeAfter??previous?.compute??0),creditsPerSecond=Number(details.rateAfter??previous?.creditsPerSecond??0);event.resources.compute=compute;
+  return addSnapshot(next,{at,runSeconds:Math.max(0,(at-(s.telemetry.runStartedAt??at))/1000),credits:s.credits,creditsPerSecond,compute,computePerSecond:compute,users:previous?.users??0,data:s.data,dataPerSecond:previous?.dataPerSecond??0,research:s.researchPoints,researchPerSecond:previous?.researchPerSecond??0,gems:s.gems,hardwareCounts:{...s.hardwareCounts},modelLevel:s.level,qualityLevel:s.qualityLevel,efficiencyLevel:s.efficiencyLevel,activeTraining:s.activeTraining?.track??null,activeResearch:s.researchLabs.filter(Boolean).map(x=>x!.id).join('|'),prestigeClaim:previous?.prestigeClaim??0,activeLabs:s.researchLabs.filter(Boolean).length},true);
 }
+
+export function addSnapshot(s:GameState,snapshot:RunSnapshot,force=false):GameState{const previous=s.telemetry.snapshots.at(-1);if(!force&&previous&&snapshot.at-previous.at<30_000)return s;let snapshots=[...s.telemetry.snapshots,snapshot];if(snapshots.length>MAX_SNAPSHOTS){const keep=snapshots.slice(-MAX_SNAPSHOTS/2),older=snapshots.slice(0,-MAX_SNAPSHOTS/2).filter((_,i)=>i%2===0);snapshots=[...older.slice(-MAX_SNAPSHOTS/2),...keep];}return{...s,telemetry:{...s.telemetry,snapshots}};}
 
 type MetricDelta={taps?:number;activeSeconds?:number;offlineSeconds?:number;tap?:number;passive?:number;offline?:number;other?:number;offlineCredits?:number;offlineData?:number;offlineResearch?:number};
 export function addMetrics(s:GameState,at:number,d:MetricDelta):GameState{
@@ -35,6 +43,6 @@ export function addMetrics(s:GameState,at:number,d:MetricDelta):GameState{
 export function recordPrestige(before:GameState,after:GameState,gain:number):GameState{
   const at=before.savedAt,duration=before.telemetry.runStartedAt===null?null:Math.max(0,(at-before.telemetry.runStartedAt)/1000);
   const snapshot:PrestigeSnapshot={at,run:before.prestigeCount,durationSeconds:duration,intEarned:gain,before:{credits:before.credits,data:before.data,researchPoints:before.researchPoints,hardwareCounts:{...before.hardwareCounts},classUpgrades:[...before.classUpgrades],level:before.level,qualityLevel:before.qualityLevel,efficiencyLevel:before.efficiencyLevel,runCreditsEarned:before.runCreditsEarned,inventoryCount:before.inventory.length,breakthroughs:[...before.breakthroughs],completedResearch:[...before.completedResearch]}};
-  const event:TelemetryEvent={at,run:before.prestigeCount,type:'prestige',details:{intEarned:gain,durationSeconds:duration}};
+  const event:TelemetryEvent={at,run:before.prestigeCount,type:'prestige',details:{intEarned:gain,durationSeconds:duration},resources:{credits:before.credits,data:before.data,researchPoints:before.researchPoints,gems:before.gems,compute:null}};
   return {...after,telemetry:{...before.telemetry,runStartedAt:at,prestigeHistory:[...before.telemetry.prestigeHistory,snapshot],permanentEvents:[...before.telemetry.permanentEvents,event]}};
 }

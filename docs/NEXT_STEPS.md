@@ -65,3 +65,65 @@ Die bestehende v7-Kontrollmessung bleibt die letzte reproduzierbare Langmessung:
 Save v14 migriert v13 ohne Verlust von Gems oder Achievement-Punkten und ergänzt konservativ neue Lifetime-Zähler. Der Browser bietet ausschließlich Käufe mit erspielten Gems. Echtgeldpakete besitzen stabile IDs, aber absichtlich weder Preis noch aktiven Kaufpfad: Native Hülle, Store-SDK, Account und verifizierender Server fehlen.
 
 Das rechnerische Vollteilnahmebudget beträgt bei 30 Tagen rund 675 Gems/Monat. Der erste 900-Gem-Laborplatz liegt ohne einmalige Achievements bei ungefähr 40 Tagen. Als nächstes sind reale mobile Abschlussquoten und die Zeit bis 900 Gems zu messen; erst danach Ziele oder Preise ändern.
+
+
+## Übergabe 24. September 2026 – Stabilität, Training und Analyse
+
+Training verwendet reale Arbeitszeit und exponentielle Ziele ab 90 Sekunden; beide Pfade haben getrennte Kosten. Saves werden temporär geschrieben, vollständig validiert und mit drei Generationen abgesichert. Große Zeiträume laufen iterativ in höchstens 60-Sekunden-Schritten. Der lokale ZIP-Bericht enthält elf Analyse-Dateien ohne Upload. Die mobile INT-Ansicht verwendet eine kompakte Leiterplatte und ein touchfreundliches Detailfenster. Offen bleibt die tatsächliche fünfminütige Browser-/Geräteabnahme.
+
+## Korrektur nach Langzeit-Reproduktion – 24. September 2026
+
+Ein automatisierter Kernlauf mit 36 Käufen, 34 Trainings, wechselnder Online-/Offline-
+Simulation, Save/Reload, Backup-Recovery und ZIP-Export simulierte 981.240 Sekunden.
+Ein vollständiger UI-Freeze ließ sich ohne echten Browser nicht reproduzieren. Es wurde
+aber eine konkrete Main-Thread-Last identifiziert: 11.692 vollständige Snapshots machten
+den Save 7,28 MB und den ZIP-Export 4,18 MB groß; Simulation plus Export benötigten
+21,28 Sekunden. Die begrenzte, ältere Daten automatisch ausdünnende Snapshot-Reihe
+reduziert denselben Lauf auf 1.692 Snapshots, 1,51 MB Save, 1,19 MB ZIP und 13,04
+Sekunden bei 35,04 MB Heap-Zuwachs. Damit ist die Datenexplosion korrigiert; eine reale
+fünfminütige Browserprüfung bleibt offen.
+
+Python `zipfile` und `unzip -t` lasen alle elf Dateien und bestätigten sämtliche CRCs.
+Die Ursache des zuvor defekten Archivs waren falsch dimensionierte bzw. falsch belegte
+Central-Directory-Header im handgeschriebenen ZIP-Writer.
+
+## Übergabe Crash-Diagnose und Lifecycle – 24. September 2026
+
+- Ein vom Game-Save unabhängiger, hart begrenzter Crash-Bericht überlebt beschädigte
+  Spielstände und kennzeichnet ungewöhnlich beendete Sitzungen beim nächsten Start.
+- Fehlerquellen werden als Exception, langsamer Tick, langer Save, Heartbeat-Ausfall,
+  Savefehler oder unbekannte Ursache unterschieden. Begin-/End-Marker vermeiden falsche
+  Kausalitätsbehauptungen.
+- Ein Worker kann einen zeitweise blockierten Hauptthread nach dessen Erholung erkennen.
+  Einen vollständigen Browser-/Prozessabsturz kann auch er nicht garantiert protokollieren.
+- Der Bericht ist in der Meldung nach ungewöhnlichem Ende und dauerhaft unten über
+  „Crash-Bericht exportieren“ erreichbar.
+- Gemessene synchrone Save-Last wurde durch maximal 300 adaptive Snapshots sowie
+  verzögerte, zusammengefasste Ereignis-Saves reduziert. Eine echte 30-Minuten-
+  Browserabnahme bleibt mangels startbarer Browser-Toolchain offen.
+
+## Übergabe konkreter Save-Fehler – 24. September 2026
+
+Der reproduzierte Fehler ist `QuotaExceededError` in `temp-write`, nicht blockiertes
+`localStorage`: Hauptsave, drei Backups und der temporäre Vollsave erzeugten eine fünfte
+Kopie. Ein 2.000-Snapshot-Teststand maß 1.159.161 Byte vor und 179.011 Byte nach der
+Save-seitigen Kompaktierung auf 300 Snapshots. Der neue Ablauf räumt bei Quota-Druck nur
+alte Backup-Generationen, löscht den validierten Temp-Key vor der Rotation und bewahrt
+den bisherigen Hauptsave bis zum Commit. Jeder Fehler meldet Stufe, Error-Name,
+Error-Text und Key-/Loggrößen; die UI bietet dann den lokalen Spielstandexport an.
+
+## Übergabe IndexedDB und Tick-Korrelation – 24. September 2026
+
+- Das Origin-Inventar erfasst alle localStorage-Keynamen und Größen, aber keine Inhalte;
+  unbekannte Daten werden niemals gelöscht.
+- Bekannte lokale Save-Generationen werden bytegleich verifiziert in IndexedDB
+  archiviert, bevor ausschließlich ihre bekannten localStorage-Keys freigegeben werden.
+- Aktuelle Saves plus drei Backups werden atomar in IndexedDB rotiert und nach dem
+  Schreiben erneut validiert. Dadurch hängt sicheres Speichern nicht mehr von freier
+  localStorage-Quota ab.
+- Die Diagnose trennt Visibility-Wechsel, Worker-/UI-Heartbeat, Tick und gehaltene
+  Tap-Gesten. Der alte Bericht beweist keine sichtbare Main-Thread-Blockade; eine
+  spätere Save-Zeit ist ohne Session-/Load-Grenze kein Gegenbeweis zu früheren Fehlern.
+- Offen bleibt die geforderte reale 30-Minuten-Browserabnahme, da die bereitgestellten
+  Crash-/ZIP-Dateien nicht im Arbeitsverzeichnis liegen und die lokale Browser-
+  Toolchain weiterhin nicht startbar ist.

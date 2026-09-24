@@ -1,0 +1,9 @@
+import {describe,expect,it} from 'vitest';
+import {compactDurableState,rotateDurableValues} from './durableStorage';
+import {newGame} from './economy';
+import {restore,serialize,storageInventory,type StorageLike} from './storage';
+describe('durable save generations',()=>{
+ it('rotates three independent generations and every generation restores',()=>{const raws=[1,2,3,4].map(credits=>serialize({...newGame(0),credits}));let values:(string|undefined)[]=[];for(const raw of raws){const rotated=rotateDurableValues(values,raw);values=[rotated.current,...rotated.backups]}expect(values).toEqual([raws[3],raws[2],raws[1],raws[0]]);expect(values.map(raw=>restore(raw!).state.credits)).toEqual([4,3,2,1])});
+ it('compacts already-grown logs before durable persistence',()=>{const state=newGame(0),snapshot={at:0,runSeconds:0,credits:0,creditsPerSecond:0,compute:0,computePerSecond:0,users:0,data:0,dataPerSecond:0,research:0,researchPerSecond:0,gems:0,hardwareCounts:{...state.hardwareCounts},modelLevel:0,qualityLevel:0,efficiencyLevel:0,activeTraining:null,activeResearch:'',prestigeClaim:0,activeLabs:0},grown={...state,telemetry:{...state.telemetry,snapshots:Array.from({length:1000},(_,i)=>({...snapshot,at:i}))}};expect(compactDurableState(grown).telemetry.snapshots).toHaveLength(300)});
+ it('inventories every origin key by name and size without deleting unknown data',()=>{const values=new Map([['unrelated-user-key','secret'],['ai-singularity.save','save']]),storage:StorageLike&Pick<Storage,'length'|'key'>={get length(){return values.size},key:i=>[...values.keys()][i]??null,getItem:k=>values.get(k)??null,setItem:(k,v)=>{values.set(k,v)},removeItem:k=>{values.delete(k)}};expect(storageInventory(storage)).toEqual([{key:'ai-singularity.save',bytes:4,known:true},{key:'unrelated-user-key',bytes:6,known:false}]);expect(values.get('unrelated-user-key')).toBe('secret')});
+});
