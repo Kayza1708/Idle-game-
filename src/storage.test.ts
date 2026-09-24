@@ -71,3 +71,8 @@ describe('save format', () => {
     expect(result.error).toMatch(/nicht möglich/);
   });
 });
+
+describe('transactional backup saves',()=>{
+ it('restores the newest valid backup when the primary is corrupt',()=>{const values=new Map<string,string>(),storage:StorageLike={getItem:k=>values.get(k)??null,setItem:(k,v)=>{values.set(k,v)},removeItem:k=>{values.delete(k)}};values.set(BACKUP_KEY,serialize({...newGame(0),credits:77}));values.set('ai-singularity.save','{broken');const loaded=loadGame(storage,100);expect(loaded.state.credits).toBe(77);expect(loaded.error).toMatch(/Backup/);expect(loaded.writable).toBe(true);});
+ it('refuses a non-finite snapshot without replacing the valid save',()=>{const values=new Map<string,string>(),storage:StorageLike={getItem:k=>values.get(k)??null,setItem:(k,v)=>{values.set(k,v)},removeItem:k=>{values.delete(k)}};const valid=serialize(newGame(0));values.set('ai-singularity.save',valid);const result=persistGame(storage,{...newGame(0),credits:Infinity},0);expect(result.saved).toBe(false);expect(values.get('ai-singularity.save')).toBe(valid);});
+});
