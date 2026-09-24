@@ -1,0 +1,13 @@
+import {describe,expect,it} from 'vitest';
+import {creditRate,newGame,productionBreakdown,quality,efficiency,softcap,startTraining,trainingCost,trainingWork} from './economy';
+import {advance} from './simulation';
+
+describe('manual model training',()=>{
+  it('reproduces and explains the reported legacy 3,720 compute state',()=>{const compute=3*1200+120,legacyModel=1.08**11*1.04**11,remainingFamily=13824/(compute*legacyModel);expect(compute).toBe(3720);expect(legacyModel).toBeCloseTo(3.5894511119);expect(compute*legacyModel*remainingFamily).toBeCloseTo(13824)});
+  it('does not progress before the player buys a training run',()=>{const state=newGame(0),next=advance(state,600).state;expect(next.training).toBe(0);expect(next.qualityLevel).toBe(0);expect(next.efficiencyLevel).toBe(0)});
+  it('charges the displayed price and completes only the selected track',()=>{const ready={...newGame(0),credits:1000,data:1000,hardware:25,hardwareCounts:{...newGame(0).hardwareCounts,calculator:25}},cost=trainingCost(ready,'quality'),work=trainingWork(ready),started=startTraining(ready,'quality');expect(started.credits).toBe(1000-cost);expect(started.activeTraining).toEqual({track:'quality',creditCost:cost,workRequired:work});const done=advance(started,100).state;expect(done.activeTraining).toBeNull();expect(done.qualityLevel).toBe(1);expect(done.efficiencyLevel).toBe(0);expect(done.training).toBe(0)});
+  it('uses the documented continuous softcap',()=>{expect(softcap(.5,1)).toBe(.5);expect(softcap(2,1)).toBe(2);expect(softcap(3.25,1)).toBe(2.5);expect(quality(25)).toBe(2);expect(efficiency(25)).toBe(1.75)});
+  it('gives smaller gains for equal level steps beyond the softcap',()=>{expect(quality(50)-quality(49)).toBeLessThan(quality(26)-quality(25))});
+  it('partitions active training and income identically',()=>{const base={...newGame(0),credits:1000,data:1000,hardware:10,hardwareCounts:{...newGame(0).hardwareCounts,calculator:10}},state=startTraining(base,'efficiency'),whole=advance(state,30).state,split=advance(advance(state,12).state,18).state;expect(split.training).toBeCloseTo(whole.training,10);expect(split.credits).toBeCloseTo(whole.credits,10)});
+  it('exposes an auditable production decomposition',()=>{const state={...newGame(0),hardware:4,hardwareCounts:{...newGame(0).hardwareCounts,calculator:0,sbc:0,pc:1,gpu:3},qualityLevel:6,efficiencyLevel:5},parts=productionBreakdown(state);expect(parts.rawCompute).toBe(3720);expect(parts.passive).toBeCloseTo(creditRate(state.hardware,state.level,state));expect(parts.hardware.reduce((n,row)=>n+row.compute,0)).toBe(parts.rawCompute)});
+});
