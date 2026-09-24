@@ -29,7 +29,7 @@ describe('Mira story and tutorial',()=>{
  it('does not send existing v8 campaigns back to the prologue',()=>{
   const old:any={...newGame(0)};delete old.story;
   const restored=restore(JSON.stringify({version:8,state:old}),100);
-  expect(restored.migrated).toBe(true);expect(restored.state.story).toEqual(migratedStory());
+  expect(restored.migrated).toBe(true);expect(restored.state.story).toEqual(migratedStory());expect(restored.state.aiName).toBe('AURA');
  });
 
  it('skips a tutorial action that is already fulfilled',()=>{
@@ -44,6 +44,8 @@ describe('Mira story and tutorial',()=>{
   expect(next.story.queue).toEqual(expect.arrayContaining(['first-training','first-research','first-milestone','prestige-ready']));
   expect(new Set([next.story.open,...next.story.queue]).size).toBe(1+next.story.queue.length);
  });
+
+ it('keeps the chosen AI name through reload and prestige',()=>{let state:GameState={...newGame(0),aiName:'Nova',credits:13e9,runCreditsEarned:13e9,lifetimeCreditsEarned:13e9,lifetimeEligibleCredits:13e9};state=restore(serialize(state),10).state;expect(prestige(state).aiName).toBe('Nova')});
 
  it('uses the actual first prestige reward in the saved dialogue state',()=>{
   const before={...newGame(0),story:migratedStory(),credits:13e9,runCreditsEarned:13e9,lifetimeCreditsEarned:13e9,lifetimeEligibleCredits:13e9};

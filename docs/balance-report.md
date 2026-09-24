@@ -43,3 +43,11 @@ Im aktiven Profil erfolgen Kauf-/Trainingsentscheidungen im 10-Sekunden-Raster; 
 ## Offene Balancearbeit
 
 Zielkorridor für den ersten aktiven Prestige ist vorerst 40–60 Minuten, gelegentlich 90–120 Minuten. Damit bleiben Hardwarekauf, Trainingswahl und Overclock mehrere Zyklen relevant. Menschliche Browsertests müssen bestätigen, dass zwischen bezahlbaren Käufen keine mehrminütigen Leerphasen entstehen. Der Rückkehrerpfad und die Strategiedifferenz bleiben offen; die Roadmap markiert Phase 1 deshalb nicht als vollständig abgenommen.
+
+## Diagnose des ersten echten Exports (Save v12)
+
+Der gemeldete Lauf (rund 32,5 Minuten, 9 INT, 39 Trainingsstufen, Cloud, etwa 1,08 Mio. Forschungspunkte, ein Projekt, kein Item) ist ein wertvoller Einzelpunkt, aber keine Grundlage für eine Kurvenänderung. Die hohe Forschungssumme ist mit dem aktuellen System grundsätzlich erklärbar: Jedes Betriebsprofil weist Compute dauerhaft der Forschung zu; `researchRate` skaliert sublinear mit diesem Compute und leicht mit dem Datenbestand. Forschungspunkte bleiben über Prestige erhalten, während die derzeit drei Projekte zusammen nur 525 Punkte verbrauchen. Der Engpass ist daher sichtbar zu wenig Forschungsausgabe, nicht nachgewiesen eine fehlerhafte Erzeugung. Weitere Projektsenken werden erst nach mehreren Exporten vorgeschlagen.
+
+Exportformat v1 ergänzt deshalb nun eine verständliche Herkunftsbeschreibung, aktuellen und durch protokollierte Projektstarts ausgegebenen FP-Bestand sowie Zähler für Hardwarekäufe, Trainingsstarts/-abschlüsse, Forschungsstarts/-abschlüsse, Erfolge und Prestige. Neue Starts erfassen Zeitpunkt und tatsächliche Kosten lokal. Alte, vor Telemetrie entstandene Historie bleibt weiterhin ausdrücklich als nicht verfügbar markiert.
+
+Die reproduzierbaren aktiven/gelegentlichen Kontrollläufe oben verwenden den echten Economy-/Simulationscode. Sie zeigen weiterhin die dokumentierten Engpässe: eine starke Strategiedifferenz, einen langsamen Rückkehrerpfad und einen sehr großen Abstand zwischen passiver Forschungsproduktion und den nur drei kleinen Ausgaben. Produktions- und Prestigekurven wurden für diesen Einzel-Export nicht verändert.
