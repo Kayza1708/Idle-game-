@@ -138,7 +138,15 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 
 - [x] Lineare Compute-Kopplung des Trainings durch eine gedeckelte fünfte Wurzel ersetzt.
 - [x] ZIP Local- und Central-Directory-Header mit Standardlesern und CRC-Prüfung validiert.
-- [x] 30-Sekunden-Snapshots mit adaptiver, auf 2.000 Einträge begrenzter Historie ergänzt.
+- [x] 30-Sekunden-Snapshots mit adaptiver, auf 300 Einträge begrenzter Historie ergänzt.
 - [x] Event-Ressourcen, Kaufdetails, Trainingsdauer und persistente Diagnose in Save v15 ergänzt.
 - [x] Automatisierter Kernlanglauf inklusive Save/Reload und Abbruch-Recovery ausgeführt.
 - [ ] Browser-UI-Langlauf und macOS-Archivprogramm manuell verifizieren.
+
+### Crash-Diagnose und Lifecycle — In Arbeit (24. September 2026)
+
+- [x] Separater begrenzter Crash-Bericht, Begin-/End-Marker und JSON-Download.
+- [x] JavaScript-, Promise-, React-, Long-Task-, Tick-, Save- und Worker-Heartbeat-Diagnose.
+- [x] Recovery-Test: gültiger Save, unterbrochener Folgesave, Reload aus Backup bei erhaltener Diagnose.
+- [x] Synchrone Ereignis-Saves coalesziert und Snapshot-Historie auf 300 adaptive Einträge begrenzt.
+- [ ] 30-Minuten-Abnahme in einem echten Browser mit Performance-/Memory-Profil und Reload während Save.

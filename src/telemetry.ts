@@ -10,7 +10,7 @@ export type ArchivedMetrics = { through:number|null;taps:number;activeSeconds:nu
 export type PrestigeSnapshot = { at:number; run:number; durationSeconds:number|null; intEarned:number; before:{credits:number;data:number;researchPoints:number;hardwareCounts:Record<HardwareId,number>;classUpgrades:HardwareId[];level:number;qualityLevel:number;efficiencyLevel:number;runCreditsEarned:number;inventoryCount:number;breakthroughs:string[];completedResearch:string[]}; };
 export type LocalTelemetry = { campaignId:string;campaignStartedAt:number|null;runStartedAt:number|null;recentEvents:TelemetryEvent[];permanentEvents:TelemetryEvent[];metrics:MetricBucket[];snapshots:RunSnapshot[];diagnostics:PersistentDiagnostics;archivedMetrics:ArchivedMetrics;prestigeHistory:PrestigeSnapshot[];historicalDataAvailable:boolean };
 
-const WINDOW_MS=15*60*1000, MAX_BUCKETS=96*31, MAX_RECENT_EVENTS=500,MAX_SNAPSHOTS=2_000;
+const WINDOW_MS=15*60*1000, MAX_BUCKETS=96*31, MAX_RECENT_EVENTS=500,MAX_SNAPSHOTS=300;
 const finite=(n:number)=>Number.isFinite(n)?n:0;
 export const anonymousCampaignId=()=>globalThis.crypto?.randomUUID?.()??`campaign-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 const emptyArchive=():ArchivedMetrics=>({through:null,taps:0,activeSeconds:0,offlineSeconds:0,income:{tap:0,passive:0,offline:0,other:0},offlineRewards:{credits:0,data:0,research:0}});

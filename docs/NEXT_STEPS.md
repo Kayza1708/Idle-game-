@@ -86,3 +86,18 @@ fünfminütige Browserprüfung bleibt offen.
 Python `zipfile` und `unzip -t` lasen alle elf Dateien und bestätigten sämtliche CRCs.
 Die Ursache des zuvor defekten Archivs waren falsch dimensionierte bzw. falsch belegte
 Central-Directory-Header im handgeschriebenen ZIP-Writer.
+
+## Übergabe Crash-Diagnose und Lifecycle – 24. September 2026
+
+- Ein vom Game-Save unabhängiger, hart begrenzter Crash-Bericht überlebt beschädigte
+  Spielstände und kennzeichnet ungewöhnlich beendete Sitzungen beim nächsten Start.
+- Fehlerquellen werden als Exception, langsamer Tick, langer Save, Heartbeat-Ausfall,
+  Savefehler oder unbekannte Ursache unterschieden. Begin-/End-Marker vermeiden falsche
+  Kausalitätsbehauptungen.
+- Ein Worker kann einen zeitweise blockierten Hauptthread nach dessen Erholung erkennen.
+  Einen vollständigen Browser-/Prozessabsturz kann auch er nicht garantiert protokollieren.
+- Der Bericht ist in der Meldung nach ungewöhnlichem Ende und dauerhaft unten über
+  „Crash-Bericht exportieren“ erreichbar.
+- Gemessene synchrone Save-Last wurde durch maximal 300 adaptive Snapshots sowie
+  verzögerte, zusammengefasste Ereignis-Saves reduziert. Eine echte 30-Minuten-
+  Browserabnahme bleibt mangels startbarer Browser-Toolchain offen.

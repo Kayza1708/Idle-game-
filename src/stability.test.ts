@@ -19,7 +19,7 @@ describe('long-running core stability',()=>{
   }
   state=advance(state,Math.max(0,475_346-state.savedAt/1000),false).state;
   expect(state.qualityLevel).toBe(17);expect(state.efficiencyLevel).toBe(17);
-  expect(state.telemetry.snapshots.length).toBeGreaterThan(100);expect(state.telemetry.snapshots.length).toBeLessThanOrEqual(2_000);
+  expect(state.telemetry.snapshots.length).toBeGreaterThan(100);expect(state.telemetry.snapshots.length).toBeLessThanOrEqual(300);
   const saved=persistGame(storage,state,state.savedAt);expect(saved.saved).toBe(true);const valid=storage.getItem(SAVE_KEY)!;persistGame(storage,{...state,credits:state.credits+1},state.savedAt);expect(storage.getItem(BACKUP_KEY)).toBe(valid);
   storage.setItem(SAVE_KEY,'{interrupted');const recovered=loadGame(storage,state.savedAt);expect(recovered.error).toMatch(/Backup/);expect(recovered.state.credits).toBeCloseTo(state.credits);
   const files=createBalanceExportFiles(recovered.state,state.savedAt);expect(files['purchases.csv']).toContain('creditsBefore');expect(files['training.csv']).toContain('actualDuration');expect(createBalanceZip(recovered.state).length).toBeGreaterThan(1_000);
