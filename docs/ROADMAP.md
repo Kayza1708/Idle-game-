@@ -78,3 +78,7 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 **Abnahmekriterien:** Crash-/Save-Ziele, Release-Checkliste, Support- und Rollbackplan.
 
 **Nicht enthalten:** unangekündigte Mechanik- oder Monetarisierungsänderungen.
+
+## Grafik-Integration — Erledigt
+
+Die bereitgestellte frühe Laboransicht sowie die geprüften Hardware-, Ressourcen-, Item- und Prestige-Atlanten sind den bestehenden Spielansichten zugeordnet. Dieser Grafikpass ändert weder Economy noch Spielmechanik oder Speicherdaten.
