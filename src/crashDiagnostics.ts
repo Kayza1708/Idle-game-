@@ -3,7 +3,7 @@ export const CRASH_PREVIOUS_KEY='ai-singularity.crash-diagnostics-v1.previous';
 export type CrashCause='unhandled-exception'|'slow-simulation-tick'|'long-save'|'ui-heartbeat-missed'|'save-failed'|'unexpected-session-end'|'unknown';
 type Mark={at:number;name:string;phase:'begin'|'end';durationMs?:number;result?:string;size?:number;runId?:string;sessionId:string};
 type Failure={at:number;kind:CrashCause;message:string;stack?:string};
-export type CrashDiagnostics={version:1;sessionId:string;runId:string|null;sessionStartedAt:number;sessionEndedAt:number|null;cleanExit:boolean;lastUiHeartbeat:number|null;renderCount:number;actions:Mark[];ticks:Mark[];saves:Mark[];failures:Failure[];longTasks:{at:number;durationMs:number}[];telemetry:{events:number;snapshots:number;saveBytes:number} | null;userAgent:string|null};
+export type CrashDiagnostics={version:1;sessionId:string;runId:string|null;sessionStartedAt:number;sessionEndedAt:number|null;cleanExit:boolean;lastUiHeartbeat:number|null;renderCount:number;actions:Mark[];ticks:Mark[];saves:Mark[];failures:Failure[];longTasks:{at:number;durationMs:number}[];telemetry:{events:number;snapshots:number;saveBytes:number;storageSizes?:unknown} | null;userAgent:string|null};
 const cap=<T,>(items:T[],limit:number)=>items.slice(-limit);
 const fallback=():CrashDiagnostics=>({version:1,sessionId:`session-${Date.now().toString(36)}`,runId:null,sessionStartedAt:Date.now(),sessionEndedAt:null,cleanExit:false,lastUiHeartbeat:null,renderCount:0,actions:[],ticks:[],saves:[],failures:[],longTasks:[],telemetry:null,userAgent:typeof navigator==='undefined'?null:navigator.userAgent});
 const safeParse=(raw:string|null)=>{try{if(!raw)return null;const x=JSON.parse(raw) as CrashDiagnostics;return x?.version===1&&Array.isArray(x.actions)&&Array.isArray(x.failures)?x:null}catch{return null}};
@@ -18,7 +18,7 @@ export class CrashRecorder{
  heartbeat(renderCount:number){this.state={...this.state,lastUiHeartbeat:Date.now(),renderCount};this.write()}
  setRunId(runId:string){if(this.state.runId===runId)return;this.state={...this.state,runId};this.write()}
  longTask(durationMs:number){this.state={...this.state,longTasks:cap([...this.state.longTasks,{at:Date.now(),durationMs}],20)};this.write()}
- counts(events:number,snapshots:number,saveBytes:number){this.state={...this.state,telemetry:{events,snapshots,saveBytes}};this.write()}
+ counts(events:number,snapshots:number,saveBytes:number,storageSizes?:unknown){this.state={...this.state,telemetry:{events,snapshots,saveBytes,storageSizes}};this.write()}
  cleanExit(){this.state={...this.state,cleanExit:true,sessionEndedAt:Date.now()};this.write()}
  report(){return JSON.parse(JSON.stringify(this.state)) as CrashDiagnostics}
  private downloadReport(report:CrashDiagnostics){try{const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`ai-singularity-crash-${new Date().toISOString().replace(/[:.]/g,'-')}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),0)}catch(error){this.failure('unknown',error)}}

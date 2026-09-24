@@ -150,3 +150,11 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Recovery-Test: gültiger Save, unterbrochener Folgesave, Reload aus Backup bei erhaltener Diagnose.
 - [x] Synchrone Ereignis-Saves coalesziert und Snapshot-Historie auf 300 adaptive Einträge begrenzt.
 - [ ] 30-Minuten-Abnahme in einem echten Browser mit Performance-/Memory-Profil und Reload während Save.
+
+### Save-Quota-Fehler — In Arbeit (24. September 2026)
+
+- [x] `QuotaExceededError` beim fünften Vollsave im Schritt `temp-write` reproduziert.
+- [x] Stufengenaue Save-Fehler und Größenmessung ohne Konsolen-Ausgabe des Spielstands.
+- [x] Save-seitige Logkompaktierung und quota-bewusste Temp-/Backup-Reihenfolge.
+- [x] Lokaler Spielstandexport nach Save-Fehler sowie fehlende React-Keys/Favicon bereinigt.
+- [ ] 30-Minuten-Abnahme im echten Browser bleibt in dieser Umgebung offen.

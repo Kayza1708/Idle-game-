@@ -101,3 +101,13 @@ Central-Directory-Header im handgeschriebenen ZIP-Writer.
 - Gemessene synchrone Save-Last wurde durch maximal 300 adaptive Snapshots sowie
   verzögerte, zusammengefasste Ereignis-Saves reduziert. Eine echte 30-Minuten-
   Browserabnahme bleibt mangels startbarer Browser-Toolchain offen.
+
+## Übergabe konkreter Save-Fehler – 24. September 2026
+
+Der reproduzierte Fehler ist `QuotaExceededError` in `temp-write`, nicht blockiertes
+`localStorage`: Hauptsave, drei Backups und der temporäre Vollsave erzeugten eine fünfte
+Kopie. Ein 2.000-Snapshot-Teststand maß 1.159.161 Byte vor und 179.011 Byte nach der
+Save-seitigen Kompaktierung auf 300 Snapshots. Der neue Ablauf räumt bei Quota-Druck nur
+alte Backup-Generationen, löscht den validierten Temp-Key vor der Rotation und bewahrt
+den bisherigen Hauptsave bis zum Commit. Jeder Fehler meldet Stufe, Error-Name,
+Error-Text und Key-/Loggrößen; die UI bietet dann den lokalen Spielstandexport an.

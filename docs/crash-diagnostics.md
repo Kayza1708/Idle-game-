@@ -37,3 +37,22 @@ waren es 230 Snapshots, 449.851 Byte Savegröße, 22,52 ms Savezeit, 745.220 Byt
 Ein echter Browserfreeze wurde in dieser Umgebung mangels lauffähiger Browser-
 Toolchain nicht reproduziert; die synchrone Speicherlast ist eine konkrete gemessene
 Blockadequelle, aber nicht als alleinige Ursache jedes Feldabsturzes behauptet.
+
+## Konkreter Speicherfehler und Save-Stufen
+
+Der direkte `localStorage`-Probezugriff war nicht der fehlerhafte Schritt. Reproduziert
+wurde ein `DOMException` mit `name = "QuotaExceededError"` beim Schritt `temp-write`:
+Der bisherige Ablauf hielt Hauptsave plus drei vollständige Backups und versuchte danach,
+vor dem Freigeben einer Kopie einen fünften vollständigen temporären Save anzulegen. Ein
+realistisch aufgeblähter v15-Zustand mit 2.000 Snapshots war 1.159.161 Byte groß; fünf
+Kopien benötigen etwa 5,80 MB und überschreiten damit eine typische 5-MiB-Origin-Quota,
+obwohl ein kleiner `setItem/getItem/removeItem`-Test funktioniert.
+
+Vor jeder Persistierung werden Diagnose-/Balanceverläufe nun auch für bereits geladene
+Altstände hart kompaktiert. Derselbe Zustand sank auf 300 Snapshots und 179.011 Byte.
+Zusätzlich gibt der Save-Pfad die genaue Stufe, den echten Error-Namen, die Meldung sowie
+Größen von Snapshot, Hauptsave, temporärem Save, jedem Backup und Logs zurück. Bei
+Quota-Druck entfernt er zuerst nur die ältesten Backup-Generationen, validiert den
+Temporärstand, hält dessen String im Speicher, löscht die fünfte Storage-Kopie und rotiert
+erst dann die Backups. Der gültige Hauptsave bleibt bis zum atomaren finalen `setItem`
+unverändert.

@@ -16,6 +16,30 @@ export function loadGame(storage:StorageLike|undefined,now=Date.now()):LoadResul
  if(restored.migrated&&raw)try{storage.setItem(BACKUP_KEY,raw)}catch{return{...restored,writable:false,recoveryRaw:raw,error:'Der Spielstand wurde geladen, aber die Migrationskopie konnte nicht gespeichert werden. Bitte sichere den Originalstand.'};}
  return{...restored,state:{...restored.state,telemetry:{...restored.state.telemetry,diagnostics:{...restored.state.telemetry.diagnostics,lastSuccessfulLoad:now}}},writable:true};
 }
-export function persistGame(storage:StorageLike|undefined,state:GameState,now=Date.now()){let synchronized=advanceTo(state,now).state;synchronized={...synchronized,telemetry:{...synchronized.telemetry,diagnostics:{...synchronized.telemetry.diagnostics,lastSuccessfulSave:now}}};try{if(!storage)throw Error();if(!validate(synchronized))throw Error('invalid snapshot');const snapshot=serialize(synchronized);storage.setItem(TEMP_KEY,snapshot);const pending=storage.getItem(TEMP_KEY);if(!pending||restore(pending,now).error)throw Error('invalid pending snapshot');const previous=storage.getItem(SAVE_KEY);if(previous&&!restore(previous,now).error){for(let i=BACKUP_KEYS.length-1;i>0;i--){const older=storage.getItem(BACKUP_KEYS[i-1]);if(older)storage.setItem(BACKUP_KEYS[i],older);}storage.setItem(BACKUP_KEYS[0],previous);}storage.removeItem(TEMP_KEY);storage.setItem(SAVE_KEY,pending);return{state:synchronized,saved:true as const,bytes:snapshot.length};}catch{return{state:synchronized,saved:false as const,bytes:0,error:'Speichern ist in diesem Browser gerade nicht möglich; der letzte gültige Stand bleibt erhalten.'};}}
+export type SaveStage='snapshot'|'serialize'|'validate'|'temp-write'|'temp-read'|'temp-validate'|'backup-rotation'|'commit'|'cleanup';
+export type SaveFailure={stage:SaveStage;name:string;message:string;sizes:{snapshot:number;main:number;temp:number;backups:number[];events:number;snapshots:number}};
+const errorInfo=(error:unknown)=>error instanceof Error?{name:error.name,message:error.message}:{name:'UnknownError',message:String(error)};
+const storedSize=(storage:StorageLike,key:string)=>{try{return storage.getItem(key)?.length??0}catch{return-1}};
+function compactTelemetry(state:GameState):GameState{const telemetry=state.telemetry;if(telemetry.snapshots.length<=300&&telemetry.recentEvents.length<=500&&telemetry.permanentEvents.length<=500&&telemetry.prestigeHistory.length<=200)return state;return{...state,telemetry:{...telemetry,snapshots:telemetry.snapshots.slice(-300),recentEvents:telemetry.recentEvents.slice(-500),permanentEvents:telemetry.permanentEvents.slice(-500),prestigeHistory:telemetry.prestigeHistory.slice(-200)}};}
+export function persistGame(storage:StorageLike|undefined,state:GameState,now=Date.now()){
+ let stage:SaveStage='snapshot',synchronized=state,snapshot='',quotaRecovery:{name:string;message:string}|undefined;
+ const sizes=()=>({snapshot:snapshot.length,main:storage?storedSize(storage,SAVE_KEY):0,temp:storage?storedSize(storage,TEMP_KEY):0,backups:storage?BACKUP_KEYS.map(key=>storedSize(storage,key)):[],events:(synchronized.telemetry?.recentEvents?.length??0)+(synchronized.telemetry?.permanentEvents?.length??0),snapshots:synchronized.telemetry?.snapshots?.length??0});
+ try{
+  if(!storage)throw new DOMException('localStorage ist nicht verfügbar.','NotSupportedError');
+  synchronized=compactTelemetry(advanceTo(state,now).state);synchronized={...synchronized,telemetry:{...synchronized.telemetry,diagnostics:{...synchronized.telemetry.diagnostics,lastSuccessfulSave:now}}};
+  if(!validate(synchronized)){stage='validate';throw new TypeError('Der erzeugte Snapshot enthält ungültige oder nicht endliche Werte.');}
+  stage='serialize';snapshot=serialize(synchronized);
+  stage='temp-write';
+  try{storage.setItem(TEMP_KEY,snapshot)}catch(error){if(errorInfo(error).name!=='QuotaExceededError')throw error;quotaRecovery=errorInfo(error);for(let i=BACKUP_KEYS.length-1;i>=1;i--){storage.removeItem(BACKUP_KEYS[i]);try{storage.setItem(TEMP_KEY,snapshot);break}catch(retry){if(i===1)throw retry}}}
+  stage='temp-read';const pending=storage.getItem(TEMP_KEY);if(!pending)throw new Error('Temporärer Save konnte nicht zurückgelesen werden.');
+  stage='temp-validate';if(restore(pending,now).error)throw new Error('Temporärer Save hat die Wiederherstellungsprüfung nicht bestanden.');
+  // Keep the validated string in memory, then free the fifth full-size copy before rotating backups.
+  stage='cleanup';storage.removeItem(TEMP_KEY);
+  const previous=storage.getItem(SAVE_KEY);
+  stage='backup-rotation';if(previous&&!restore(previous,now).error){storage.removeItem(BACKUP_KEYS.at(-1)!);for(let i=BACKUP_KEYS.length-1;i>0;i--){const older=storage.getItem(BACKUP_KEYS[i-1]);if(older)storage.setItem(BACKUP_KEYS[i],older);}storage.setItem(BACKUP_KEYS[0],previous);}
+  stage='commit';storage.setItem(SAVE_KEY,pending);
+  return{state:synchronized,saved:true as const,bytes:snapshot.length,sizes:sizes(),quotaRecovery};
+ }catch(error){try{storage?.removeItem(TEMP_KEY)}catch{/* Preserve the original failure. */}const detail:SaveFailure={stage,...errorInfo(error),sizes:sizes()};return{state:synchronized,saved:false as const,bytes:snapshot.length,sizes:detail.sizes,failure:detail,error:`Speichern fehlgeschlagen (${detail.stage}: ${detail.name}). Der letzte gültige Stand bleibt erhalten.`};}
+}
 export function importGame(raw:string){const r=restore(raw);if(r.error)throw new Error(r.error);return r.state;}
 export function removeGame(storage:StorageLike|undefined){try{if(!storage)throw Error();storage.removeItem(SAVE_KEY);return undefined}catch{return'Der lokale Spielstand konnte nicht gelöscht werden.'}}
