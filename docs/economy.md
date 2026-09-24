@@ -1,18 +1,84 @@
-# Economy – Prototyp 0.1
+# Economy v7 – Hardwareidentität und INT
 
-Diese Werte sind **vorläufig** und gelten nur für den ersten spielbaren Prototyp.
+Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und Tests rufen dieselben Funktionen auf; angezeigte Preise werden nicht separat nachgebaut.
 
-| Größe | Regel |
-|---|---|
-| Start | 1 Hardwareblock, 0 Credits, Modelllevel 0 |
-| Preis des nächsten Blocks | `25 × 1,18^n` Credits, intern ungerundet |
-| Compute/s | `10 × n × 2^floor(n/25)` |
-| Qualität | `1,08^L` |
-| Effizienz | `1,04^L` |
-| Credits/s | `Compute/s × 0,1 × Qualität × Effizienz` |
-| Trainingsrate | `Compute/s × 0,05` Arbeit/s, ohne Abzug vom Betrieb |
-| Trainingsziel | `300 × 1,8^L` Arbeit |
+## Ressourcen
 
-Training wiederholt sich automatisch, übernimmt überschüssige Arbeit und berechnet Einkommen abschnittsweise mit dem jeweils aktuellen Level. Hardware wird einzeln gekauft. Zeitdifferenzen unter null zählen als null; Offline-Fortschritt ist auf 24 Stunden begrenzt.
+| Ressource | Verwendung | Prestige |
+|---|---|---|
+| Credits | Hardware, Training, Forschung, Crafting | zurückgesetzt |
+| Compute | Leistung aus Hardware; wird vom Betriebsprofil aufgeteilt | Hardwarebestand zurückgesetzt |
+| Daten | entstehen durch Nutzer; Training und Projekte | zurückgesetzt |
+| Forschungspunkte | entstehen aus Forschungs-Compute; Projekte | bleiben erhalten |
+| Komponenten/Baupläne | Items und Crafting | bleiben erhalten |
+| INT / Intelligence | Singularitätsbaum und dauerhafter Creditbonus | bleibt erhalten |
+| Axiome | reserviertes Feld für den späteren Meta-Layer | bleibt erhalten; noch nicht spielbar |
+| Gems | Missionen/Achievements und Komfortangebote | bleibt erhalten |
 
-Bewusst nicht enthalten: Prestige, Achievements, Items, Crafting, Gems, Werbung, Ranglisten und die umfassende 30-Tage-Balance.
+## Hardware und Betriebsprofile
+
+Der datengetriebene Katalog enthält 15 stabile IDs. Jede Klasse definiert in ihrer eigenen Konfiguration die sechs Schwellen **10, 25, 50, 100, 250 und 500**, einen individuellen Namen sowie einen klassentypischen Nebeneffekt (Tap, Daten, Nutzer, Overclock, Training, Automation, Forschung, Offline oder Synergie). Für Klasse `i` gilt:
+
+`nextCost(i,n)=baseCost(i)×growth(i)^n`
+
+`bulkCost(i,n,k)=baseCost(i)×growth(i)^n×(growth(i)^k−1)/(growth(i)−1)`
+
+Max-Kauf wird logarithmisch geschätzt und danach in beide Richtungen gegen `bulkCost` korrigiert. Die sechs Meilensteine erhöhen den Compute der jeweiligen Klasse kontrolliert um +12 %, +16 %, +22 %, +30 %, +42 % und +60 % multiplikativ. Sie sind ausdrücklich keine generische Verdopplung. Ein Klassen-Upgrade verdoppelt weiterhin ausschließlich diese Klasse.
+
+`totalCompute = Σ(count × classCompute × milestones × classUpgrade) × globalComputeFamily`
+
+Die Profile summieren sich jeweils exakt zu 1:
+
+| Profil | Nutzer | Training | Forschung |
+|---|---:|---:|---:|
+| Ausgewogen | 75 % | 15 % | 10 % |
+| Training | 60 % | 30 % | 10 % |
+| Entdeckung | 65 % | 10 % | 25 % |
+
+`users = inferenceCompute × efficiency / computePerUser`
+
+`credits/s = users × 1,35 × quality × Prestige × Achievement × Creditfamilie × Items × temporäre Creditfamilie`
+
+`data/s = users × 0,08`
+
+`research/s = 0,12 × (researchCompute/10)^0,65 × (1 + 0,05×ln(1+data/100))`
+
+## Modelltraining und Softcaps
+
+Training beginnt nur nach einer bezahlten Wahl (Qualität oder Effizienz), kostet `25×1,7^(q+e)` Credits sowie `2×(Gesamtlevel+1)` Daten und benötigt `30×(Gesamtlevel+1)^1,25` Arbeit. Nur der Trainingsanteil des Profils erzeugt Arbeit. Ein Lauf arbeitet online/offline, behält Überlauf innerhalb des Abschlussereignisses und startet nie ungefragt den nächsten Lauf.
+
+`softcap(x,k) = x` für `x≤k`, sonst `k + sqrt(k×(x−k))`.
+
+`quality = 1 + softcap(0,04×q, 1,0)`
+
+`efficiency = 1 + softcap(0,03×e, 0,75)`
+
+Damit wurde die alte doppelte Exponentialwirkung `1,08^L×1,04^L` entfernt. Der gemeldete Altstand war **3 Gaming-GPUs + 1 Heim-PC = 3.720 Compute**; Level 11 lieferte bereits `3,58945` Modellfaktor und war der Hauptgrund für 13.824 Credits/s.
+
+## Forschung, aktive Aktionen und Bonusfamilien
+
+Die drei ersten Projekte verbrauchen gemeinsam Credits, Daten und Forschungspunkte. Ihre Freischaltwirkung ist absichtlich noch klein; Module, Durchbruchswahlen und Rezepte bleiben als nächste Ausbaustufe in der Roadmap. Tap-Ertrag ist `max(1, 20 % der passiven Rate ohne temporäre Boni × Qualitäts-Tapfaktor)` und auf fünf vergütete Impulse/s begrenzt. Overclock addiert +100 % in der temporären Credit- und Trainingsfamilie.
+
+Gleichartige Prozente innerhalb von Compute-, Credit-, Training-, Forschungs- oder temporären Familien werden addiert. Erst zwischen benannten Familien wird multipliziert. Prestige wirkt einmal auf Credits und einmal auf Training, niemals nochmals auf Compute.
+
+## Prestige und INT
+
+Nur reguläre Produktion und Taps erhöhen `lifetimeEligibleCredits`. Missionen, Debug, Werbung und Auftragsbelohnungen tun das nicht.
+
+`raw = 3 × max(0, log10(1 + eligible / 1.400.000.000))^1,5`
+
+`claimable = floor(raw) − prestigeEntitlementClaimed`
+
+Jeder Reset ist ab mindestens **1 INT** möglich. Insgesamt verdiente, verfügbare und ausgegebene INT werden getrennt gespeichert. Der permanente Creditfaktor ist additiv: `1 + 0,10 × totalINTEarned`; Ausgeben reduziert ihn nicht.
+
+Der alte Spezialisierungsdialog wurde entfernt. Sechs regelverändernde INT-Upgrades verwenden `ceil(baseCost × growthRate^level)`: Impulsarchiv, Warmer Neustart, Labor-Kopplung, Autonome Beschaffung, Artefakt-Bus und Rekursives Labor. Voraussetzungen, Effekttext, Kosten und Maximalstufe liegen zentral in `BALANCE.prestigeUpgrades`.
+
+## Zeit, Offline und Migration
+
+Simulation verwendet zehnsekündige Ereignisschritte und absolute Endzeitpunkte. Das Grund-Offline-Limit beträgt acht Stunden; ein später Automationsknoten erhöht es auf maximal 24 Stunden. Debug-Zeitsprünge verschieben die gesamte Timeline, nicht nur `savedAt`.
+
+Save v7 migriert v1–v6. Erkenntnis wird vollständig in INT übertragen. Bereits in alte pauschale Knoten investierte Punkte werden bei der v6-Migration kostenfrei in verfügbares INT zurückgezahlt; die frühere Spezialisierung bleibt nur als inaktives Migrationsfeld erhalten. Hardware, Items, Gems, Forschung und Timer bleiben erhalten. Unbekannte oder beschädigte Saves werden nicht überschrieben.
+
+## Bewusste Grenzen
+
+Der spielbare Prioritätspfad reicht vom Start bis zum ersten Prestige. Drei Modulsockel, vier vollständige Loadouts, fünf deterministische Durchbruchswahlen, Prototyp-Rarität, mittlere/späte Rezepte und der Axiom-Reset sind noch nicht implementiert und werden deshalb weder in UI noch Roadmap als fertig markiert.

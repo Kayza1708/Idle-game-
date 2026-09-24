@@ -18,18 +18,32 @@ describe('save format', () => {
     expect(restore('{nope', 50).error).toMatch(/beschädigt/);
     expect(restore('{"version":99,"state":{}}', 50).error).toMatch(/anderen Version/);
   });
+  it('migrates automatic model levels and partial work into manual tracks',()=>{
+    const old={...newGame(1000),level:5,training:20};
+    const raw=JSON.stringify({version:4,state:Object.fromEntries(Object.entries(old).filter(([key])=>!['qualityLevel','efficiencyLevel','activeTraining'].includes(key)))});
+    const migrated=restore(raw,1000);
+    expect(migrated.migrated).toBe(true);
+    expect(migrated.state.qualityLevel).toBe(3);
+    expect(migrated.state.efficiencyLevel).toBe(2);
+    expect(migrated.state.level).toBe(5);
+    expect(migrated.state.activeTraining?.track).toBe('quality');
+    expect(migrated.state.training).toBeGreaterThan(0);
+  });
+
+  it('migrates Erkenntnis and inactive specialization to INT without loss',()=>{const old={...newGame(0),totalInsightEarned:9,unspentInsight:4,specialization:'coding',nodes:['infrastructure-1']};const restored=restore(JSON.stringify({version:6,state:old}),0);expect(restored.migrated).toBe(true);expect(restored.state.totalINTEarned).toBe(9);expect(restored.state.unspentINT).toBe(9);expect(restored.state.spentINT).toBe(0);expect(restored.state.legacySpecialization).toBe('coding');expect(restored.state.nodes).toEqual([])});
 
   it('does not lose or duplicate time across background, save, close and reload', () => {
     const storage = new MemoryStorage();
     const started = newGame(0);
     const saved = persistGame(storage, started, 30_000);
     expect(saved.saved).toBe(true);
-    expect(saved.state.credits).toBeCloseTo(30);
+    expect(saved.state.credits).toBeCloseTo(30.375);
     expect(saved.state.savedAt).toBe(30_000);
+    expect(saved.state.training).toBe(0);
 
     const loaded = loadGame(storage, 50_000);
     const resumed = persistGame(storage, loaded.state, 50_000);
-    expect(resumed.state.credits).toBeCloseTo(50);
+    expect(resumed.state.credits).toBeCloseTo(50.625);
     expect(resumed.state.savedAt).toBe(50_000);
   });
 
