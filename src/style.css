@@ -215,3 +215,8 @@ footer { display: flex; max-width: 720px; margin: auto; padding: 18px 0; justify
 .story-journal button b,.story-journal button small { display: block; }
 @media (max-width: 520px) { .story-dialogue { bottom: calc(74px + env(safe-area-inset-bottom)); } .story-dialogue.has-mira { grid-template-columns: 96px 1fr; } .mira-sprite { height: min(34vh, 240px); } .story-copy { padding: 10px; } .story-copy p { font-size: 13px; } }
 @media (prefers-reduced-motion: reduce) { .story-dialogue { filter: none; } }
+.audio-settings { position: relative; }
+.audio-settings summary { min-height: 44px; display: grid; place-items: center; padding: 0 .75rem; cursor: pointer; }
+.audio-settings[open] { position: absolute; z-index: 20; top: .5rem; right: .5rem; width: min(19rem, calc(100vw - 1rem)); padding: .75rem; background: #111a32; border: 1px solid #56e8e4; border-radius: .5rem; }
+.audio-settings label { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
+.audio-settings input[type="range"] { min-height: 44px; width: 9rem; }

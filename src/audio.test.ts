@@ -1,0 +1,6 @@
+import{describe,expect,it,vi}from'vitest';import{actionSound,AudioPlayer}from'./audio';import{buyHardwareClass,newGame}from'./economy';import{prestige}from'./prestige';
+describe('audio',()=>{
+ it('uses distinct purchase, unlock and prestige triggers',()=>{const base={...newGame(0),credits:1e12};const bought=buyHardwareClass(base,'calculator',1);expect(actionSound('buy-class',base,bought)).toBe('purchase');const unlocked=buyHardwareClass(base,'calculator',9);expect(actionSound('buy-class',base,unlocked)).toBe('unlock');const ready={...base,lifetimeEligibleCredits:1e15};expect(actionSound('prestige',ready,prestige(ready))).toBe('prestige')});
+ it('persists safe audio defaults in a new game',()=>expect(newGame(0).settings).toMatchObject({musicEnabled:false,musicVolume:.35,sfxMuted:false,sfxVolume:.55}));
+ it('debounces rapid UI clicks and respects mute',()=>{const play=vi.fn(()=>Promise.resolve()),fake=()=>({canPlayType:()=> 'probably',play,pause:vi.fn(),src:'',volume:1,loop:false} as unknown as HTMLAudioElement),p=new AudioPlayer(fake),settings=newGame(0).settings;p.play('ui-click',settings);p.play('ui-click',settings);p.play('purchase',{...settings,sfxMuted:true});expect(play).toHaveBeenCalledTimes(1)});
+});

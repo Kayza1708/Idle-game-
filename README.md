@@ -54,3 +54,7 @@ npm run build
 ```
 
 GitHub Actions führt dieselben Schritte aus. Keine echten Werbe-, Kauf- oder nativen SDKs sind enthalten. Es wird weder automatisch gemergt noch veröffentlicht.
+
+## Integriertes Audio
+
+Die acht eigens erstellten Sounds liegen jeweils als OGG, MP3-Fallback und unkomprimiertes WAV-Master unter `public/assets/audio/`. Das Spiel lädt für die Wiedergabe OGG beziehungsweise MP3, nicht die WAV-Master. Musik ist standardmäßig aus und beginnt erst nach dem Einschalten durch die spielende Person. Musik- und Effektlautstärke sowie Stummschaltung werden im versionierten Spielstand gespeichert.
