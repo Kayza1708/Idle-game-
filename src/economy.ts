@@ -24,7 +24,8 @@ export const BALANCE = {
   hardwareMilestones:[10,25,50,100,250,500], hardwareUnlockCount:10, classUpgradeCount:15, classUpgradeCostFactor:1,
   computePerUser:1,baseRevenuePerUser:1.35,baseDataPerUser:.08,researchBaseRate:.12,researchComputeScale:10,dataScale:100,
   modelQualityPerLevel:.04,modelEfficiencyPerLevel:.03,qualitySoftcap:1,efficiencySoftcap:.75,tapQualityCoefficient:.04,
-  trainingBase: 30, trainingPower:1.25, trainingCreditBase:25, trainingCreditGrowth:1.7,trainingDataBase:2,legacyTrainingBase:40,legacyTrainingGrowth:1.65,
+  trainingGoalBaseSeconds:90,trainingGoalGrowth:1.7,baseTrainingRate:1,trainingBaseCompute:.15,trainingBonusSoftcap:.35,
+  trainingCreditBase:25, trainingCreditGrowth:1.7,trainingDataBase:2,legacyTrainingBase:40,legacyTrainingGrowth:1.65,
   baseOfflineSeconds:28800,maxOfflineSeconds:86400, simulationStep: 10,
   prestigeThreshold:1_400_000_000,prestigeScale:3,prestigePower:1.5,
   intCreditPerPoint:.10,
@@ -71,7 +72,7 @@ export type HardwareId=keyof typeof BALANCE.hardware;
 export type OperatingProfileId=keyof typeof BALANCE.operatingProfiles;
 export type ResearchProjectId=keyof typeof BALANCE.researchProjects;
 export type TrainingTrack='quality'|'efficiency';
-export type ActiveTraining={track:TrainingTrack;workRequired:number;creditCost:number};
+export type ActiveTraining={track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
 export type ActiveResearch={id:ResearchProjectId;startedAt:number;endsAt:number};
 export type OverclockChannel='credits'|'training'|'research';
 export type Item = { id: string; type: ItemTypeId; rarity: Rarity; level: number; locked: boolean };
@@ -134,11 +135,15 @@ export const creditMultiplierFromINT=(s:GameState)=>1+BALANCE.intCreditPerPoint*
 export const permanentFactor=creditMultiplierFromINT;
 export const creditRate=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>(s?usersRate(s):hardware)*BALANCE.baseRevenuePerUser*quality(s?s.qualityLevel:level)*(s?creditMultiplierFromINT(s)*(1+(s.breakthroughs.includes('distillation')?.15:0))*(1+equippedBonus(s,'credits')+itemCombinationBonus(s,'credits'))*(temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='credits'?1:0):1):1);
 export function productionBreakdown(s:GameState,now=s.savedAt){const hardware=hardwareIds.map(id=>({id,count:s.hardwareCounts[id],milestone:milestoneFactor(id,s.hardwareCounts[id]),compute:classCompute(s,id)})),rawCompute=hardware.reduce((n,row)=>n+row.compute,0),computeGlobal=rawCompute?computeRate(s.hardware,s)/rawCompute:1,modelQuality=quality(s.qualityLevel),modelEfficiency=efficiency(s.efficiencyLevel),prestige=permanentFactor(s),achievement=1+Math.min(BALANCE.achievementResearchCap,Math.floor(s.achievementPoints/10)*BALANCE.achievementResearchPerTen),creditFamily=1+(s.breakthroughs.includes('distillation')?.15:0),items=1+equippedBonus(s,'credits'),temporary=1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now?1:0);return{hardware,rawCompute,computeGlobal,modelQuality,modelEfficiency,prestige,achievement,creditFamily,items,temporary,passive:creditRate(s.hardware,s.level,s,now),tap:tapCredits(s,now)};}
-export const trainingRate=(hardware:number,s?:GameState,now=0,temporary=true)=>(s?computeAllocation(s).training:hardware)*(s?(1+(s.breakthroughs.includes('graph')?.2:0)+milestoneBonus(s,'training'))*(1+equippedBonus(s,'training'))*(temporary?1+(s.trainingBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='training'?1:0):1):1);
-export const trainingGoal=(level:number)=>BALANCE.trainingBase*(level+1)**BALANCE.trainingPower;
-export const trainingCost=(s:GameState,track:TrainingTrack)=>BALANCE.trainingCreditBase*BALANCE.trainingCreditGrowth**(s.qualityLevel+s.efficiencyLevel+(track==='quality'?0:0));
-export const trainingWork=(s:GameState)=>trainingGoal(s.qualityLevel+s.efficiencyLevel);
-export function startTraining(s:GameState,track:TrainingTrack){if(s.activeTraining)return s;const cost=trainingCost(s,track),dataCost=BALANCE.trainingDataBase*(s.level+1);return s.credits<cost||s.data<dataCost?s:addEvent({...s,credits:s.credits-cost,data:s.data-dataCost,training:0,activeTraining:{track,creditCost:cost,workRequired:trainingWork(s)},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{track,creditCost:cost,dataCost,level:s.level});}
+/** Additional training bonuses are deliberately bounded; even enormous future bonuses cannot make a run instant. */
+export const trainingBonusSoftcap=(bonus:number)=>1+Math.max(0,bonus)/(1+BALANCE.trainingBonusSoftcap*Math.max(0,bonus));
+export const trainingRate=(hardware:number,s?:GameState,now=0,temporary=true)=>{if(!s)return Math.max(0,hardware);const computeMultiplier=Math.max(.01,computeAllocation(s).training/BALANCE.trainingBaseCompute),modelBonus=s.breakthroughs.includes('graph')?.2:0,extra=milestoneBonus(s,'training')+equippedBonus(s,'training'),timed=temporary?1+(s.trainingBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='training'?1:0):1;return BALANCE.baseTrainingRate*computeMultiplier*(1+modelBonus)*trainingBonusSoftcap(extra)*timed;};
+export const trainingGoalSeconds=(level:number)=>Math.round(BALANCE.trainingGoalBaseSeconds*BALANCE.trainingGoalGrowth**Math.max(0,level-1));
+export const trainingGoal=(level:number)=>trainingGoalSeconds(level+1);
+export const trainingCost=(s:GameState,track:TrainingTrack)=>BALANCE.trainingCreditBase*BALANCE.trainingCreditGrowth**(track==='quality'?s.qualityLevel:s.efficiencyLevel);
+export const trainingDataCost=(s:GameState,track:TrainingTrack)=>BALANCE.trainingDataBase*((track==='quality'?s.qualityLevel:s.efficiencyLevel)+1);
+export const trainingWork=(s:GameState,track?:TrainingTrack)=>trainingGoalSeconds((track==='quality'?s.qualityLevel:track==='efficiency'?s.efficiencyLevel:s.level)+1);
+export function startTraining(s:GameState,track:TrainingTrack){if(s.activeTraining)return s;const cost=trainingCost(s,track),dataCost=trainingDataCost(s,track),workRequired=trainingWork(s,track),rate=trainingRate(s.hardware,s,s.savedAt);return s.credits<cost||s.data<dataCost?s:addEvent({...s,credits:Math.max(0,s.credits-cost),data:Math.max(0,s.data-dataCost),training:0,activeTraining:{track,creditCost:cost,workRequired},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{track,creditCost:cost,dataCost,level:s.level,baseDuration:workRequired,trainingRate:rate});}
 export const prestigeClaim=(s:GameState)=>Math.floor(BALANCE.prestigeScale*Math.max(0,Math.log10(1+s.lifetimeEligibleCredits/BALANCE.prestigeThreshold))**BALANCE.prestigePower+1e-12);
 export const newINT=(s:GameState)=>Math.max(0,prestigeClaim(s)-s.prestigeEntitlementClaimed);
 export const newInsight=newINT;

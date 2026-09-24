@@ -31,9 +31,10 @@ function autobuy(state:GameState) {
 }
 
 export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
+  if(!Number.isFinite(seconds)||seconds<=0)return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};
   const limit=Math.min(BALANCE.maxOfflineSeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline'))),total=Math.max(0,Math.min(seconds,limit));
-  let left=total,levels=0,experiments=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,next=rollPeriods(cloneForSimulation(state),state.savedAt);
-  while(left>1e-9) {
+  let left=total,iterations=0,levels=0,experiments=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,next=rollPeriods(cloneForSimulation(state),state.savedAt);
+  while(left>1e-9&&iterations++<200_000) {
     const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;
     const toLevel=next.activeTraining?(goal-next.training)/rate:Infinity;
     const toAuto=next.automation.enabled?BALANCE.simulationStep-next.automation.elapsed:Infinity;
@@ -41,16 +42,17 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     const toResearch=Math.min(...next.researchLabs.map(lab=>lab?Math.max(0,(lab.endsAt-now)/1000):Infinity));
     const toPeriod=Math.min(...(['daily','weekly','monthly'] as const).map(kind=>Math.max(0,(next.missions[kind].endsAt-now)/1000)));
     const toBoost=Math.min(next.trainingBoostUntil>now?(next.trainingBoostUntil-now)/1000:Infinity,next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
-    let slice=Math.min(left,toLevel,toAuto,toExperiment,toResearch,toPeriod,toBoost);
+    let slice=Math.min(left,60,toLevel,toAuto,toExperiment,toResearch,toPeriod,toBoost);
     if(slice<1e-8) slice=Math.min(left,1e-6);
-    const credits=creditRate(next.hardware,next.level,next,now)*slice,data=dataRate(next)*slice,research=researchRate(next,now)*slice;generatedCredits+=credits;generatedData+=data;generatedResearch+=research;
+    const credits=creditRate(next.hardware,next.level,next,now)*slice,data=dataRate(next)*slice,research=researchRate(next,now)*slice;if(![slice,credits,data,research,rate].every(Number.isFinite))return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};generatedCredits+=credits;generatedData+=data;generatedResearch+=research;
     next=addCredits(next,credits);next.data+=data;next.researchPoints+=research;next.lifetime.regularData+=data;const activeLabs=next.researchLabs.filter(Boolean).length;next.lifetime.labSeconds+=activeLabs*slice;if(next.labBoostUntil>now)next.researchLabs=next.researchLabs.map(lab=>lab?{...lab,endsAt:lab.endsAt-slice*1000}:null);
-    next.training+=rate*slice; next.savedAt+=slice*1000;next=rollPeriods(next,next.savedAt); next.automation.elapsed+=slice; left-=slice;
+    const trainingWork=rate*slice;next.training+=trainingWork;if(next.activeTraining){const key=active?'onlineWork':'offlineWork';next.activeTraining={...next.activeTraining,[key]:(next.activeTraining[key]??0)+trainingWork};} next.savedAt+=slice*1000;next=rollPeriods(next,next.savedAt); next.automation.elapsed+=slice; left-=slice;
     if(next.activeTraining&&next.training+1e-7>=goal){const track=next.activeTraining.track;next.training=0;next.activeTraining=null;next.level++;next.lifetime.trainingCompleted++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level});}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng);if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
     next.researchLabs=next.researchLabs.map(lab=>{if(!lab||lab.endsAt>next.savedAt+.1)return lab;if(!next.completedResearch.includes(lab.id))next.completedResearch.push(lab.id);next.lifetime.researchCompleted++;next=addEvent(next,'research-complete',next.savedAt,{id:lab.id});return null;});if(next.researchQueue&&hasNode(next,'labAssistant',1)){const queued=next.researchQueue,started=startResearchProject(next,queued);if(started!==next)next={...started,researchQueue:null};}
   }
+  if(left>1e-9)return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};
   next=updateOnboarding(rollPeriods(next,next.savedAt));
   if(active)next.lifetime.activeSeconds+=total;
   const offline=!active&&total>10;

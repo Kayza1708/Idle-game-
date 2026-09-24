@@ -65,3 +65,8 @@ Die bestehende v7-Kontrollmessung bleibt die letzte reproduzierbare Langmessung:
 Save v14 migriert v13 ohne Verlust von Gems oder Achievement-Punkten und ergänzt konservativ neue Lifetime-Zähler. Der Browser bietet ausschließlich Käufe mit erspielten Gems. Echtgeldpakete besitzen stabile IDs, aber absichtlich weder Preis noch aktiven Kaufpfad: Native Hülle, Store-SDK, Account und verifizierender Server fehlen.
 
 Das rechnerische Vollteilnahmebudget beträgt bei 30 Tagen rund 675 Gems/Monat. Der erste 900-Gem-Laborplatz liegt ohne einmalige Achievements bei ungefähr 40 Tagen. Als nächstes sind reale mobile Abschlussquoten und die Zeit bis 900 Gems zu messen; erst danach Ziele oder Preise ändern.
+
+
+## Übergabe 24. September 2026 – Stabilität, Training und Analyse
+
+Training verwendet reale Arbeitszeit und exponentielle Ziele ab 90 Sekunden; beide Pfade haben getrennte Kosten. Saves werden temporär geschrieben, vollständig validiert und mit drei Generationen abgesichert. Große Zeiträume laufen iterativ in höchstens 60-Sekunden-Schritten. Der lokale ZIP-Bericht enthält elf Analyse-Dateien ohne Upload. Die mobile INT-Ansicht verwendet eine kompakte Leiterplatte und ein touchfreundliches Detailfenster. Offen bleibt die tatsächliche fünfminütige Browser-/Geräteabnahme.
