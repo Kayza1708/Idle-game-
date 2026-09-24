@@ -2,13 +2,18 @@
 
 ## Aktueller Stand
 
-Save v7 ergänzt sechs individuelle Meilensteine pro Hardwareklasse, additive INT-Progression und einen funktionsorientierten INT-Baum ohne Spezialisierungsmenü. Alle 90 Meilensteine liegen in der zentralen Hardwarekonfiguration.
+Save v8 ergänzt sechs individuelle Meilensteine pro Hardwareklasse, additive INT-Progression, einen funktionsorientierten INT-Baum und eine begrenzte lokale Run-Telemetrie. Alle 90 Meilensteine liegen in der zentralen Hardwarekonfiguration.
+
+## Letzter abgeschlossener Arbeitsauftrag
+
+Der lokale Balancebericht exportiert Kampagne, Runs, Zustandsdaten, Prestige-Snapshots, Ereignisse sowie verdichtete Aktivitäts-, Einkommens- und Offlinewerte als manuell heruntergeladene JSON-Datei. Save v7 wird verlustfrei auf v8 migriert; nicht gespeicherte Vergangenheit bleibt ausdrücklich als nicht verfügbar markiert. Es findet keine automatische Übertragung statt.
 
 ## Bekannte Einschränkungen
 
 - Module/Loadouts, deterministische Durchbruchswahlen, Prototyp-Items und Axiome sind dokumentierte Folgeschritte, keine fertigen Menüpunkte.
 - Klassen 6–15 besitzen eigene Illustrationen, Rollen und Meilensteine; die Nebeneffekte Automation, Overclock, Offline und Synergie sind teilweise erst als Konfigurationsvertrag vorbereitet.
 - Die aktuellen Tabellen in `balance-report.md` sind eine Vergleichsbasis der vorherigen Phase-1.1-Kurve; nach der Compute-Aufteilung ist ein neuer vollständiger Simulationslauf erforderlich.
+- Für vor Save v8 liegende Kampagnenabschnitte existieren keine nachträglich rekonstruierbaren Ereignis-, Quellen- oder Offlinewerte; Exporte markieren diese Bereiche als nicht verfügbar.
 - Registry-Zugriff auf `vitest` antwortet in dieser Umgebung mit HTTP 403. Deshalb konnten `npm ci`, Vitest, Production-Build, Audit und Browser-Screenshots nicht ehrlich abgeschlossen werden. TypeScript-Typecheck lief erfolgreich.
 
 ## Nächste drei priorisierte Aufgaben

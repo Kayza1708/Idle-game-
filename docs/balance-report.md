@@ -1,5 +1,11 @@
 # Balancebericht Phase 1.1 – historische Vergleichsbasis
 
+## Lokaler Berichtsexport ab Save v8
+
+Die Oberfläche bietet den manuellen Download `Balancebericht exportieren`. Das JSON-Format v1 enthält Spiel-/Save-Version, eine zufällige anonyme Kampagnen-ID, den aktuellen Run, den auswertbaren Spielzustand, Prestige-Snapshots, Schlüsselereignisse und 15-Minuten-Aggregate für Taps, aktive beziehungsweise Offline-Zeit, Einnahmequellen und Offline-Belohnungen. Es werden weder Account-/Geräteinformationen ergänzt noch Daten automatisch übertragen.
+
+Häufige Werte wachsen nicht unbegrenzt: Detailereignisse sind auf die jüngsten 500 Einträge begrenzt, 15-Minuten-Fenster auf 31 Tage. Ältere Fenster werden in einer Kampagnensumme verdichtet; Prestige- und Hardware-Meilensteinereignisse bleiben dauerhaft erhalten. Migrierte ältere Spielstände kennzeichnen nicht vorhandene historische Dauer-, Ereignis- und Quellenwerte als `null` beziehungsweise in `unavailable`, statt sie zu schätzen.
+
 > **Status v6:** Die folgenden Messwerte stammen aus dem unmittelbar vorherigen Kern ohne Betriebsprofile/Daten/Forschungsaufteilung. Sie bleiben als überprüfbare Baseline erhalten, sind aber keine behaupteten Resultate der neuen v6-Kurve. Eine erneute Simulation ist in `NEXT_STEPS.md` ausdrücklich offen; mangels installierbarer Vitest/Vite-Abhängigkeiten wurden keine Zahlen erfunden.
 
 ## v7-Kontrolllauf – 24. September 2026
