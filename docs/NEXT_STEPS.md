@@ -1,23 +1,28 @@
 # Übergabe und nächste Schritte
 
 ## Aktueller Stand
-Phase 1 ist funktional implementiert: fünf Hardwareklassen, geometrische Käufe, Meilensteine, Klassen-Upgrades, Tap/Halten, Overclock, frühe Aufträge, kurze/lange Experimente, kumulatives Prestige, Spezialisierungen, Autokauf und Save v5. Der Produktionsstillstand-Test bleibt abgedeckt.
 
-## Bekannte Fehler und Einschränkungen
-- Visuelle Browserprüfung bei 390×844 und Desktop war in der Arbeitsumgebung wegen blockierter npm-Registry nicht möglich.
-- Das bestehende Lockfile aus dem Ausgangsstand ist unvollständig; `npm ci` kann dies erst nach Registry-Zugriff zuverlässig neu erzeugen.
-- Die aktive Balance-Simulation ist ein intensives Profil, keine Aussage über durchschnittliche Spielweise. UI-Halte-/Fokusverhalten benötigt zusätzlich einen echten Browsertest.
-- Training ist manuell und abflachend; reale Mobile-/Desktop-Screenshots und Bedienprüfung stehen mangels startbarer npm-Installation aus.
+Save v6 erweitert den vorhandenen Phase-1-Kern ohne Rewrite: drei Compute-Profile, Nutzer, Daten, Forschungspunkte, drei bezahlbare Projekte, Softcap-Training und der vollständige 15-Klassen-Katalog sind mit der bestehenden Simulation, UI und Migration verbunden. Der erste Run bis Singularität bleibt die priorisierte spielbare Strecke.
+
+## Bekannte Einschränkungen
+
+- Module/Loadouts, deterministische Durchbruchswahlen, Prototyp-Items und Axiome sind dokumentierte Folgeschritte, keine fertigen Menüpunkte.
+- Klassen 6–15 besitzen IDs, Rollen und Economy-Werte, aber ihr Langzeitbalancing und individuelle Synergien sind noch nicht abgenommen.
+- Die aktuellen Tabellen in `balance-report.md` sind eine Vergleichsbasis der vorherigen Phase-1.1-Kurve; nach der Compute-Aufteilung ist ein neuer vollständiger Simulationslauf erforderlich.
+- Registry-Zugriff auf `vitest` antwortet in dieser Umgebung mit HTTP 403. Deshalb konnten `npm ci`, Vitest, Production-Build, Audit und Browser-Screenshots nicht ehrlich abgeschlossen werden. TypeScript-Typecheck lief erfolgreich.
 
 ## Nächste drei priorisierte Aufgaben
-1. In einer Umgebung mit Registry- und Browserzugriff Lockfile regenerieren, CI vollständig ausführen und mobile Bedienung aufnehmen.
-2. Phase-1-Zielzeiten mit echten Spieltests validieren und ausschließlich zentral dokumentierte Werte iterieren.
-3. Phase 2 entwerfen: drei besondere Item-Builds mit Tests und klaren Trade-offs.
+
+1. Vollständiges Lockfile in einer Umgebung mit Registry-Zugriff erzeugen, `npm ci`, Audit, Tests und Build ausführen und erst danach Browserbilder bei 390×844/Desktop aufnehmen.
+2. Eine eingecheckte Simulation für aktiv/gelegentlich/offline sowie vier Builds ergänzen und Prestige-Schwelle/Projektkosten anhand der Ergebnisse kalibrieren.
+3. Phase 2 mit drei Modulsockeln, gespeicherten Loadouts und deterministischen Durchbruchswahlen implementieren.
 
 ## Letzter tatsächlich ausgeführter Teststand
-Am 24. September 2026 wurde der Quadratwurzel-Regressionstest auf gleich breite Levelintervalle korrigiert, ohne die Formel oder Balance zu verändern. `npm ci`, Typecheck, Vitest, Build und der aktuelle Audit-Endpunkt bleiben durch HTTP 403 der Registry blockiert; keine Prüfung wird als erfolgreich ausgeführt behauptet. Die lokal zwischengespeicherten Advisories betreffen mit Vite und Vitest direkte Entwicklungsabhängigkeiten sowie mit `@vitest/mocker` eine indirekte Vitest-Abhängigkeit; vor einem Update müssen Registry-Audit und Kompatibilität erneut geprüft werden.
+
+Am 24. September 2026 war `npm run typecheck` erfolgreich. `npm ci` scheiterte reproduzierbar am Registry-HTTP-403 für die direkte Entwicklungsabhängigkeit `vitest`; dadurch waren `npm test` und `npm run build` nicht ausführbar. Ein erzwungenes Audit-Fix wurde nicht eingesetzt.
 
 ## Offene Designentscheidungen
-- Wie stark Spieler neue Klassen gegenüber Meilensteinen subjektiv bevorzugen.
-- Ob Klassen-Upgrades langfristig mehrere Stufen erhalten sollen.
-- Welche drei verhaltensändernden Item-Builds Phase 2 eröffnen.
+
+- Rollen/Synergien und Freischaltbedingungen der Klassen 6–15 nach echten Langzeitmessungen.
+- Konkrete Opportunitätskosten der vier geplanten Labor-Builds.
+- Anforderungen und Resetumfang des späteren Axiom-Layers.

@@ -35,13 +35,13 @@ describe('save format', () => {
     const started = newGame(0);
     const saved = persistGame(storage, started, 30_000);
     expect(saved.saved).toBe(true);
-    expect(saved.state.credits).toBeCloseTo(30);
+    expect(saved.state.credits).toBeCloseTo(30.375);
     expect(saved.state.savedAt).toBe(30_000);
     expect(saved.state.training).toBe(0);
 
     const loaded = loadGame(storage, 50_000);
     const resumed = persistGame(storage, loaded.state, 50_000);
-    expect(resumed.state.credits).toBeCloseTo(50);
+    expect(resumed.state.credits).toBeCloseTo(50.625);
     expect(resumed.state.savedAt).toBe(50_000);
   });
 

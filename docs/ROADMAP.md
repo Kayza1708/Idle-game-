@@ -7,11 +7,11 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 
 **Features:** Hardwareklassen 1–5, Mengenmeilensteine, Klassen-Upgrades, Tap/Halten, Overclock, acht Einführungsaufträge, frühe Experimente/Items, kumulatives Prestige, drei Spezialisierungen, Autokauf und belastbare Save-/Zeitlogik.
 
-**Abhängigkeiten:** Browser-Prototyp, zentrale Economy, Save-Migration v5.
+**Abhängigkeiten:** Browser-Prototyp, zentrale Economy, Save-Migration v6.
 
-**Abnahmekriterien:** Kernmechaniken sind integriert; Formeln und Migration sind getestet; reproduzierbarer 60-Minuten- und 7-Tage-Balancebericht liegt vor. Manuelles abflachendes Training, kontrollierte Meilensteine und Produktionszerlegung sind implementiert und mit Zeitpartitionierungs-/Migrationstests versehen; der Quadratwurzeltest vergleicht mathematisch aussagekräftige gleich breite Intervalle. Vollständiges `npm ci`, Vitest, Build, Audit und die visuelle Browserabnahme bleiben offen, bis die Paket-Registry erreichbar ist.
+**Abnahmekriterien:** Start-zu-Prestige-Pfad, Profile, Daten/Forschung, 15 datengetriebene Klassen, kontrollierte Modellsoftcaps und Migration v6 sind integriert. Offen bleiben reproduzierbare neue 60-Minuten-/7-Tage-Messungen, vollständige Browserabnahme sowie die unten als Phase 2/3 geführten Build- und Metasysteme.
 
-**Nicht enthalten:** Hardware 6–15, Energie/Wärme/Nachfrage, Meta-Prestige, echte Werbung oder Käufe.
+**Nicht enthalten:** Vollständiges Balancing/Freischaltcontent für Hardware 6–15, Energie/Wärme/Nachfrage, Meta-Prestige, echte Werbung oder Käufe.
 
 ## Phase 2 – Builds und Sammlung — Geplant
 **Ziel:** Runs über sammelbare Builds unterscheidbar machen.

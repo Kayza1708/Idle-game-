@@ -1,6 +1,6 @@
 # AI Singularity – Phase-1-Alpha
 
-Die Browser-Alpha verbindet fünf Hardwareklassen, aktives Tappen, Overclock, Training, frühe Forschung und Items, accountweite Einführungsaufträge sowie kumulatives Prestige mit dem bestehenden Inventar-, Gem-, Missions- und Mock-Angebotssystem.
+Die Browser-Alpha verbindet einen datengetriebenen Hardwarekatalog, Compute-Profile, Nutzer, Daten, aktives Tappen, Overclock, manuelles Training, frühe Forschung und Items sowie kumulatives Prestige mit dem bestehenden Inventar-, Gem- und Missionssystem.
 
 ## Auf einem Mac starten
 
@@ -9,7 +9,7 @@ Node.js 20 LTS und Git installieren, dann in Terminal:
 ```bash
 git clone https://github.com/Kayza1708/Idle-game-.git
 cd Idle-game-
-git switch work
+git switch feat/core-loop-profiles
 npm ci
 npm run dev
 ```
@@ -18,11 +18,12 @@ Die angezeigte Adresse (typisch `http://localhost:5173`) öffnen. Für den Produ
 
 ## Phase 1
 
-- Taschenrechner, Einplatinencomputer, Heim-PC, Gaming-GPU und GPU-Rig mit eigenen SVGs, Preisen, Compute, Anteilen, ×1/×10/Max, Meilensteinen 10/25/50 und Klassen-Upgrades.
+- 15 vorbereitete Hardwareklassen mit stabilen IDs; der erste Run nutzt die frühen Klassen mit Preisen, Compute, Anteilen, ×1/×10/Max, Meilensteinen und Klassen-Upgrades.
+- Ausgewogenes, Trainings- und Entdeckungsprofil teilen Compute sichtbar auf Nutzer, Modelltraining und Forschung auf. Nutzer erzeugen Credits und Daten; Forschung erzeugt Forschungspunkte.
 - Zugängliche Laborfläche: Tap und Tastatur, Halten mit drei Impulsen/s, gemeinsames Limit fünf/s, Overclock nach 30 Taps.
 - Acht einmalige Aufträge, 60-Sekunden-Einführungsexperiment, garantierter Einstieg-Itemfund sowie kurze und lange Experimente.
 - Kumulativer Prestigeanspruch aus berechtigtem Lifetime-Umsatz, drei Spezialisierungen und rendite-/zielbasierter Autokauf.
-- Save v4 mit Backup und konservativer Migration alter Hardware-/Meta-Spielstände; konsistente Debug-/Offline-Uhr.
+- Save v6 mit Backup und konservativer Migration alter Hardware-/Meta-Spielstände; konsistente Debug-/Offline-Uhr.
 
 Die zentrale Mathematik steht in [`docs/economy.md`](docs/economy.md), tatsächliche Simulationsergebnisse in [`docs/balance-report.md`](docs/balance-report.md), die verbindliche Planung in [`docs/ROADMAP.md`](docs/ROADMAP.md) und die Übergabe in [`docs/NEXT_STEPS.md`](docs/NEXT_STEPS.md).
 

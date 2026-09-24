@@ -4,15 +4,26 @@ export const BALANCE = {
     calculator:{name:'Taschenrechner',description:'Bescheidener Start für die erste lokale KI.',baseCost:10,growth:1.15,compute:1},
     sbc:{name:'Einplatinencomputer',description:'Kompakte Parallelverarbeitung im Miniaturformat.',baseCost:180,growth:1.15,compute:12},
     pc:{name:'Heim-PC',description:'Mehr Kerne für ernsthafte Modelle.',baseCost:2400,growth:1.15,compute:120},
-    gpu:{name:'Gaming-GPU',description:'Massiv paralleles Training.',baseCost:32000,growth:1.15,compute:1200},
-    rig:{name:'GPU-Rig',description:'Ein ganzes Rack aus Beschleunigern.',baseCost:450000,growth:1.15,compute:12000},
+    gpu:{name:'Gaming-GPU',description:'Aktive Impulse und parallele Inferenz.',baseCost:32000,growth:1.15,compute:1200,role:'Aktivbonus'},
+    rig:{name:'KI-Workstation',description:'Beschleunigt gewählte Trainingsläufe.',baseCost:450000,growth:1.16,compute:9000,role:'Training'},
+    server:{name:'Server-Rack',description:'Stabile Basis für Automation.',baseCost:6000000,growth:1.16,compute:75000,role:'Automation'},
+    farm:{name:'GPU-Farm',description:'Gebündelte rohe Compute-Produktion.',baseCost:80000000,growth:1.17,compute:650000,role:'Compute'},
+    campus:{name:'Modularer Rechenzentrumscampus',description:'Verbindet frühe Hardwareklassen.',baseCost:1.2e9,growth:1.17,compute:5e6,role:'Synergien'},
+    cloud:{name:'Hyperscale-Cloud',description:'Skaliert die Nutzerkapazität.',baseCost:2e10,growth:1.18,compute:4e7,role:'Nutzer'},
+    liquid:{name:'Flüssigkeitsgekühlte Compute-Anlage',description:'Lenkt Compute in Training und Forschung.',baseCost:4e11,growth:1.18,compute:3e8,role:'Labor'},
+    subsea:{name:'Untersee-Rechenzentrum',description:'Verbessert spätere Offline-Systeme.',baseCost:8e12,growth:1.19,compute:2e9,role:'Offline'},
+    orbital:{name:'Orbitales Rechenzentrum',description:'Öffnet Entdeckungsforschung.',baseCost:2e14,growth:1.19,compute:1.5e10,role:'Entdeckung'},
+    lunar:{name:'Lunarer KI-Forschungskomplex',description:'Zugang zu späten Forschungszweigen.',baseCost:5e15,growth:1.2,compute:1e11,role:'Forschung'},
+    dyson:{name:'Fusionsbetriebener Dyson-Schwarm',description:'Spezialisierte Endgame-Produktion.',baseCost:2e17,growth:1.21,compute:8e11,role:'Endgame'},
+    matrioshka:{name:'Matrioshka-Gehirn',description:'Bereitet die spätere Axiom-Ebene vor.',baseCost:1e19,growth:1.22,compute:7e12,role:'Meta'},
   },
-  futureHardwareCatalog:['KI-Workstation','Server-Rack','GPU-Cluster','Hyperscale-Rechenzentrum','Photonik-Cluster','Quantenbeschleuniger','Autonome KI-Fabrik','Untersee-Rechenzentrum','Orbitales Rechenzentrum','Dyson-Rechenschwarm'],
+  operatingProfiles:{balanced:{name:'Ausgewogen',inference:.75,training:.15,research:.10},training:{name:'Training',inference:.60,training:.30,research:.10},discovery:{name:'Entdeckung',inference:.65,training:.10,research:.25}},
   hardwareMilestones:[10,25,50], hardwareMilestoneFactors:[1.5,1.5,1.75], hardwareUnlockCount:10, classUpgradeCount:15, classUpgradeCostFactor:1,
-  creditPerCompute: 1, modelCoefficient:.08, tapQualityCoefficient:.04,
-  trainingPerCompute: .12, trainingBase: 30, trainingGrowth: 1.55, trainingCreditBase:25, trainingCreditGrowth:1.7, legacyTrainingBase:40, legacyTrainingGrowth:1.65,
-  maxOfflineSeconds: 86400, simulationStep: 10,
-  prestigeBase: 13_000_000_000, prestigeScale: 3, prestigePower: .45,
+  computePerUser:1,baseRevenuePerUser:1.35,baseDataPerUser:.08,researchBaseRate:.12,researchComputeScale:10,dataScale:100,
+  modelQualityPerLevel:.04,modelEfficiencyPerLevel:.03,qualitySoftcap:1,efficiencySoftcap:.75,tapQualityCoefficient:.04,
+  trainingBase: 30, trainingPower:1.25, trainingCreditBase:25, trainingCreditGrowth:1.7,trainingDataBase:2,legacyTrainingBase:40,legacyTrainingGrowth:1.65,
+  baseOfflineSeconds:28800,maxOfflineSeconds:86400, simulationStep: 10,
+  prestigeThreshold:1_400_000_000,prestigeScale:3,prestigePower:1.5,
   insightBase: .35, insightPower: .7,
   experimentSeconds: 14400, shortExperimentSeconds:600, introExperimentSeconds:60,
   tapRateFraction:.2, tapLimitPerSecond:5, overclockTaps:30, overclockSeconds:15, overclockCooldownSeconds:90,
@@ -38,6 +49,7 @@ export const BALANCE = {
   achievementThresholds: [1e4, 1e5, 1e6, 1e7, 1e8, 1e9], achievementGems: 20, achievementPoints: 10,
   dailyMissionRewards: { active: 5, hardware: 5, training: 10, all: 10 }, weeklyMissionReward: 70,
   adLimits: { creditBoost: 8, trainingPulse: 8, components: 12, creditDrop: 12 },
+  researchProjects:{operations:{name:'Labor-Automation',credits:5000,data:250,points:25,description:'Bereitet automatische Laborabläufe vor.'},blueprints:{name:'Offene Baupläne',credits:25000,data:1000,points:100,description:'Schaltet fortgeschrittene Rezepte frei.'},alignment:{name:'Interpretierbare Modelle',credits:150000,data:5000,points:400,description:'Bereitet den Interpretierbarkeits-Durchbruch vor.'}},
 } as const;
 
 export type Rarity = keyof typeof BALANCE.rarity;
@@ -48,6 +60,8 @@ export type ExperimentId = keyof typeof BALANCE.experimentRewards;
 export type BreakthroughId = keyof typeof BALANCE.breakthroughs;
 export type PrestigeBranch = 'infrastructure'|'models'|'research'|'automation'|'artifacts'|'recursion';
 export type HardwareId=keyof typeof BALANCE.hardware;
+export type OperatingProfileId=keyof typeof BALANCE.operatingProfiles;
+export type ResearchProjectId=keyof typeof BALANCE.researchProjects;
 export type Specialization='assistant'|'coding'|'research'|null;
 export type TrainingTrack='quality'|'efficiency';
 export type ActiveTraining={track:TrainingTrack;workRequired:number;creditCost:number};
@@ -56,7 +70,7 @@ export type ExperimentLength='intro'|'short'|'long';
 export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number };
 export type MissionPeriod = { key: string; activeSeconds: number; hardware: number; training: number; days: string[]; claims: string[] };
 export type GameState = {
-  credits:number; hardware:number; hardwareCounts:Record<HardwareId,number>; classUpgrades:HardwareId[]; discovered:HardwareId[]; level:number; qualityLevel:number; efficiencyLevel:number; training:number; activeTraining:ActiveTraining|null; savedAt:number; clockOffsetMs:number;
+  credits:number;data:number;researchPoints:number;axioms:number;operatingProfile:OperatingProfileId;completedResearch:ResearchProjectId[]; hardware:number; hardwareCounts:Record<HardwareId,number>; classUpgrades:HardwareId[]; discovered:HardwareId[]; level:number; qualityLevel:number; efficiencyLevel:number; training:number; activeTraining:ActiveTraining|null; savedAt:number; clockOffsetMs:number;
   runCreditsEarned:number; lifetimeCreditsEarned:number; lifetimeEligibleCredits:number; prestigeEntitlementClaimed:number; totalInsightEarned:number; unspentInsight:number; prestigeCount:number;
   nodes:string[]; gems:number; welcomeGiftClaimed:boolean; components:number; componentRemainder:number; researchRemainder:number; blueprintRemainder:number; researchFragments:number; blueprintFragments:number;
   breakthroughs:BreakthroughId[]; inventory:Item[]; equipped:Partial<Record<ItemSlot,string>>; pity:{rare:number;epic:number;legendary:number};
@@ -70,7 +84,7 @@ export type GameState = {
 export const dayKey=(ms:number)=>new Date(ms).toISOString().slice(0,10);
 export const weekKey=(ms:number)=>{const d=new Date(ms); const day=(d.getUTCDay()+6)%7; d.setUTCDate(d.getUTCDate()-day); return dayKey(d.getTime())};
 const period=(key:string):MissionPeriod=>({key,activeSeconds:0,hardware:0,training:0,days:[],claims:[]});
-export const newGame=(now=Date.now()):GameState=>({credits:0,hardware:1,hardwareCounts:{calculator:1,sbc:0,pc:0,gpu:0,rig:0},classUpgrades:[],discovered:['calculator'],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,savedAt:now,clockOffsetMs:0,runCreditsEarned:0,lifetimeCreditsEarned:0,lifetimeEligibleCredits:0,prestigeEntitlementClaimed:0,totalInsightEarned:0,unspentInsight:0,prestigeCount:0,nodes:[],gems:50,welcomeGiftClaimed:true,components:0,componentRemainder:0,researchRemainder:0,blueprintRemainder:0,researchFragments:0,blueprintFragments:0,breakthroughs:[],inventory:[],equipped:{},pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false},automation:{enabled:false,reserve:0,elapsed:0,target:null},missions:{daily:period(dayKey(now)),weekly:period(weekKey(now)),mailbox:[]},achievementClaims:[],achievementPoints:0,trainingBoostUntil:0,creditBoostUntil:0,overclock:{taps:0,charged:false,activeUntil:0,cooldownUntil:0},onboarding:{completed:[],claimed:[]},specialization:null,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true,buyMode:1},testSave:false,nextId:1});
+export const newGame=(now=Date.now()):GameState=>({credits:0,data:0,researchPoints:0,axioms:0,operatingProfile:'balanced',completedResearch:[],hardware:1,hardwareCounts:{calculator:1,sbc:0,pc:0,gpu:0,rig:0,server:0,farm:0,campus:0,cloud:0,liquid:0,subsea:0,orbital:0,lunar:0,dyson:0,matrioshka:0},classUpgrades:[],discovered:['calculator'],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,savedAt:now,clockOffsetMs:0,runCreditsEarned:0,lifetimeCreditsEarned:0,lifetimeEligibleCredits:0,prestigeEntitlementClaimed:0,totalInsightEarned:0,unspentInsight:0,prestigeCount:0,nodes:[],gems:50,welcomeGiftClaimed:true,components:0,componentRemainder:0,researchRemainder:0,blueprintRemainder:0,researchFragments:0,blueprintFragments:0,breakthroughs:[],inventory:[],equipped:{},pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false},automation:{enabled:false,reserve:0,elapsed:0,target:null},missions:{daily:period(dayKey(now)),weekly:period(weekKey(now)),mailbox:[]},achievementClaims:[],achievementPoints:0,trainingBoostUntil:0,creditBoostUntil:0,overclock:{taps:0,charged:false,activeUntil:0,cooldownUntil:0},onboarding:{completed:[],claimed:[]},specialization:null,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true,buyMode:1},testSave:false,nextId:1});
 
 export const hasNode=(s:GameState,b:PrestigeBranch,t:number)=>s.nodes.includes(`${b}-${t}`);
 export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemSlot;effect:ItemEffect}>={
@@ -90,26 +104,34 @@ export const computeRate=(_hardware:number,s?:GameState)=>s?hardwareIds.reduce((
 /** Legacy helpers retained for v1 tests/imports and mapped to calculators. */
 export const blockCost=(owned:number,s?:GameState)=>hardwareCost('calculator',owned,s);
 export const bulkCost=(owned:number,count:number,s?:GameState)=>hardwareBulkCost('calculator',owned,count,s);
-export const quality=(level:number)=>1+BALANCE.modelCoefficient*Math.sqrt(Math.max(0,level));
-export const efficiency=(level:number)=>1+BALANCE.modelCoefficient*Math.sqrt(Math.max(0,level));
+export const softcap=(x:number,k:number)=>x<=k?x:k+Math.sqrt(k*(x-k));
+export const quality=(level:number)=>1+softcap(BALANCE.modelQualityPerLevel*Math.max(0,level),BALANCE.qualitySoftcap);
+export const efficiency=(level:number)=>1+softcap(BALANCE.modelEfficiencyPerLevel*Math.max(0,level),BALANCE.efficiencySoftcap);
+export const profileShares=(s:GameState)=>BALANCE.operatingProfiles[s.operatingProfile];
+export function computeAllocation(s:GameState){const total=computeRate(s.hardware,s),profile=profileShares(s);return{total,inference:total*profile.inference,training:total*profile.training,research:total*profile.research};}
+export const usersRate=(s:GameState)=>computeAllocation(s).inference*efficiency(s.efficiencyLevel)/BALANCE.computePerUser;
+export const dataRate=(s:GameState)=>usersRate(s)*BALANCE.baseDataPerUser;
+export const researchRate=(s:GameState)=>{const compute=computeAllocation(s).research;return compute<=0?0:BALANCE.researchBaseRate*(compute/BALANCE.researchComputeScale)**.65*(1+.05*Math.log1p(s.data/BALANCE.dataScale));};
 export const permanentFactor=(s:GameState)=>1+BALANCE.insightBase*s.totalInsightEarned**BALANCE.insightPower;
 export const achievementFactor=(s:GameState)=>1+.02*s.achievementPoints**.7;
-export const creditRate=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>computeRate(hardware,s)*BALANCE.creditPerCompute*quality(s?s.qualityLevel:level)*efficiency(s?s.efficiencyLevel:level)*(s?permanentFactor(s)*achievementFactor(s)*(1+(hasNode(s,'models',2)?.1:0)+(s.breakthroughs.includes('distillation')?.15:0)+(s.specialization==='assistant'?BALANCE.specialization.assistantCredit:0))*(1+equippedBonus(s,'credits'))*(temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now?1:0):1):1);
+export const creditRate=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>(s?usersRate(s):hardware)*BALANCE.baseRevenuePerUser*quality(s?s.qualityLevel:level)*(s?permanentFactor(s)*achievementFactor(s)*(1+(hasNode(s,'models',2)?.1:0)+(s.breakthroughs.includes('distillation')?.15:0)+(s.specialization==='assistant'?BALANCE.specialization.assistantCredit:0))*(1+equippedBonus(s,'credits'))*(temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now?1:0):1):1);
 export function productionBreakdown(s:GameState,now=s.savedAt){const hardware=hardwareIds.map(id=>({id,count:s.hardwareCounts[id],milestone:milestoneFactor(s.hardwareCounts[id]),compute:classCompute(s,id)})),rawCompute=hardware.reduce((n,row)=>n+row.compute,0),computeGlobal=rawCompute?computeRate(s.hardware,s)/rawCompute:1,modelQuality=quality(s.qualityLevel),modelEfficiency=efficiency(s.efficiencyLevel),prestige=permanentFactor(s),achievement=achievementFactor(s),creditFamily=1+(hasNode(s,'models',2)?.1:0)+(s.breakthroughs.includes('distillation')?.15:0)+(s.specialization==='assistant'?BALANCE.specialization.assistantCredit:0),items=1+equippedBonus(s,'credits'),temporary=1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now?1:0);return{hardware,rawCompute,computeGlobal,modelQuality,modelEfficiency,prestige,achievement,creditFamily,items,temporary,passive:creditRate(s.hardware,s.level,s,now),tap:tapCredits(s,now)};}
-export const trainingRate=(hardware:number,s?:GameState,now=0,temporary=true)=>computeRate(hardware,s)*BALANCE.trainingPerCompute*(s?permanentFactor(s)*(1+(hasNode(s,'models',1)?.1:0)+(hasNode(s,'models',3)?.2:0)+(s.breakthroughs.includes('graph')?.2:0)+((s.specialization==='coding'||s.specialization==='research')?BALANCE.specialization.codingTraining:0))*(1+equippedBonus(s,'training'))*(temporary?1+(s.trainingBoostUntil>now?1:0)+(s.overclock.activeUntil>now?1:0):1):1);
-export const trainingGoal=(level:number)=>BALANCE.trainingBase*BALANCE.trainingGrowth**level;
+export const trainingRate=(hardware:number,s?:GameState,now=0,temporary=true)=>(s?computeAllocation(s).training:hardware)*(s?permanentFactor(s)*(1+(hasNode(s,'models',1)?.1:0)+(hasNode(s,'models',3)?.2:0)+(s.breakthroughs.includes('graph')?.2:0)+((s.specialization==='coding'||s.specialization==='research')?BALANCE.specialization.codingTraining:0))*(1+equippedBonus(s,'training'))*(temporary?1+(s.trainingBoostUntil>now?1:0)+(s.overclock.activeUntil>now?1:0):1):1);
+export const trainingGoal=(level:number)=>BALANCE.trainingBase*(level+1)**BALANCE.trainingPower;
 export const trainingCost=(s:GameState,track:TrainingTrack)=>BALANCE.trainingCreditBase*BALANCE.trainingCreditGrowth**(s.qualityLevel+s.efficiencyLevel+(track==='quality'?0:0));
 export const trainingWork=(s:GameState)=>trainingGoal(s.qualityLevel+s.efficiencyLevel);
-export function startTraining(s:GameState,track:TrainingTrack){if(s.activeTraining)return s;const cost=trainingCost(s,track);return s.credits<cost?s:{...s,credits:s.credits-cost,training:0,activeTraining:{track,creditCost:cost,workRequired:trainingWork(s)}};}
-export const prestigeClaim=(s:GameState)=>Math.floor(BALANCE.prestigeScale*(s.lifetimeEligibleCredits/BALANCE.prestigeBase)**BALANCE.prestigePower);
+export function startTraining(s:GameState,track:TrainingTrack){if(s.activeTraining)return s;const cost=trainingCost(s,track),dataCost=BALANCE.trainingDataBase*(s.level+1);return s.credits<cost||s.data<dataCost?s:{...s,credits:s.credits-cost,data:s.data-dataCost,training:0,activeTraining:{track,creditCost:cost,workRequired:trainingWork(s)}};}
+export const prestigeClaim=(s:GameState)=>Math.floor(BALANCE.prestigeScale*Math.max(0,Math.log10(1+s.lifetimeEligibleCredits/BALANCE.prestigeThreshold))**BALANCE.prestigePower);
 export const newInsight=(s:GameState)=>Math.max(0,prestigeClaim(s)-s.prestigeEntitlementClaimed);
 export const canPrestige=(s:GameState)=>newInsight(s)>=(s.prestigeCount?1:3);
-export const nextPrestigeThreshold=(s:GameState)=>BALANCE.prestigeBase*((s.prestigeEntitlementClaimed+1)/BALANCE.prestigeScale)**(1/BALANCE.prestigePower);
+export const nextPrestigeThreshold=(s:GameState)=>BALANCE.prestigeThreshold*(10**(((s.prestigeEntitlementClaimed+1)/BALANCE.prestigeScale)**(1/BALANCE.prestigePower))-1);
+export function selectOperatingProfile(s:GameState,id:OperatingProfileId){return BALANCE.operatingProfiles[id]?{...s,operatingProfile:id}:s;}
+export function buyResearchProject(s:GameState,id:ResearchProjectId){const p=BALANCE.researchProjects[id];if(!p||s.completedResearch.includes(id)||s.credits<p.credits||s.data<p.data||s.researchPoints<p.points)return s;return{...s,credits:s.credits-p.credits,data:s.data-p.data,researchPoints:s.researchPoints-p.points,completedResearch:[...s.completedResearch,id]};}
 export function buyHardwareClass(s:GameState,id:HardwareId,count:number|'max'=1){if(!s.discovered.includes(id))return s;const owned=s.hardwareCounts[id],amount=count==='max'?maxAffordable(id,owned,s.credits,s):count,cost=hardwareBulkCost(id,owned,amount,s);if(amount<1||s.credits+1e-9<cost)return s;const counts={...s.hardwareCounts,[id]:owned+amount},index=hardwareIds.indexOf(id),next=hardwareIds[index+1],discovered=next&&counts[id]>=BALANCE.hardwareUnlockCount&&!s.discovered.includes(next)?[...s.discovered,next]:s.discovered,completed=[...s.onboarding.completed];for(const event of ['first-buy',...(counts.calculator>=10?['ten-calculators']:[]),...(discovered.includes('sbc')?['discover-sbc']:[])])if(!completed.includes(event))completed.push(event);return{...s,credits:Math.max(0,s.credits-cost),hardware:Object.values(counts).reduce((a,b)=>a+b,0),hardwareCounts:counts,discovered,onboarding:{...s.onboarding,completed},missions:{...s.missions,daily:{...s.missions.daily,hardware:s.missions.daily.hardware+amount}}};}
 export function buyHardware(s:GameState,count=1){return buyHardwareClass(s,'calculator',count)}
 export const classUpgradeCost=(id:HardwareId,s:GameState)=>hardwareCost(id,BALANCE.classUpgradeCount,s)*BALANCE.classUpgradeCostFactor;
 export function buyClassUpgrade(s:GameState,id:HardwareId){const cost=classUpgradeCost(id,s);return s.hardwareCounts[id]<BALANCE.classUpgradeCount||s.classUpgrades.includes(id)||s.credits<cost?s:{...s,credits:s.credits-cost,classUpgrades:[...s.classUpgrades,id],onboarding:{...s.onboarding,completed:[...new Set([...s.onboarding.completed,'class-upgrade'])]}};}
 export function addCredits(s:GameState,value:number,eligible=true){return {...s,credits:s.credits+value,runCreditsEarned:s.runCreditsEarned+(eligible?value:0),lifetimeCreditsEarned:s.lifetimeCreditsEarned+(eligible?value:0),lifetimeEligibleCredits:s.lifetimeEligibleCredits+(eligible?value:0)};}
-export const tapCredits=(s:GameState,now=s.savedAt)=>Math.max(1,BALANCE.tapRateFraction*creditRate(s.hardware,s.level,s,now,false)*(1+BALANCE.tapQualityCoefficient*Math.sqrt(s.qualityLevel)));
+export const tapCredits=(s:GameState,now=s.savedAt)=>Math.max(1,BALANCE.tapRateFraction*creditRate(s.hardware,s.level,s,now,false)*(1+BALANCE.tapQualityCoefficient*softcap(s.qualityLevel,25)));
 export function registerTap(s:GameState,now:number){const reward=tapCredits(s,now),canCharge=now>=s.overclock.cooldownUntil&&!s.overclock.charged,taps=canCharge?Math.min(BALANCE.overclockTaps,s.overclock.taps+1):s.overclock.taps;return addCredits({...s,overclock:{...s.overclock,taps,charged:taps>=BALANCE.overclockTaps}},reward,true);}
 export function activateOverclock(s:GameState,now:number){return !s.overclock.charged||now<s.overclock.cooldownUntil?s:{...s,overclock:{taps:0,charged:false,activeUntil:now+BALANCE.overclockSeconds*1000,cooldownUntil:now+BALANCE.overclockCooldownSeconds*1000}};}
