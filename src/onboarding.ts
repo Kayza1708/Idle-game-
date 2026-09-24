@@ -1,4 +1,5 @@
 import { BALANCE, GameState, addCredits } from './economy';
+import { addMetrics } from './telemetry';
 
 export const onboardingSteps=[
   {id:'first-buy',title:'Erste Erweiterung',text:'Kaufe deine erste Hardware.',reward:'25 Credits'},
@@ -19,7 +20,7 @@ export function updateOnboarding(s:GameState):GameState{
 export function claimOnboarding(s:GameState,id:string):GameState{
   const index=onboardingSteps.findIndex(step=>step.id===id);if(index<0||!s.onboarding.completed.includes(id)||s.onboarding.claimed.includes(id))return s;
   let next={...s,onboarding:{...s.onboarding,claimed:[...s.onboarding.claimed,id]}};
-  if(id==='equip-item')next={...next,components:next.components+75};else if(BALANCE.introRewards[index])next=addCredits(next,BALANCE.introRewards[index],false);
+  if(id==='equip-item')next={...next,components:next.components+75};else if(BALANCE.introRewards[index])next=addMetrics(addCredits(next,BALANCE.introRewards[index],false),s.savedAt,{other:BALANCE.introRewards[index]});
   return next;
 }
 export const currentOnboarding=(s:GameState)=>onboardingSteps.find(step=>!s.onboarding.claimed.includes(step.id));

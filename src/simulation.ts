@@ -2,6 +2,7 @@ import { BALANCE, addCredits, GameState, trainingRate, creditRate, dataRate, res
 import { completeExperiment } from './experiments';
 import { achievementCheck, rollPeriods } from './missions';
 import { updateOnboarding } from './onboarding';
+import { addEvent, addMetrics } from './telemetry';
 
 export type AdvanceReport = { credits:number; data:number; research:number; levels:number; experiments:number; hardware:number; seconds:number };
 
@@ -16,6 +17,8 @@ function cloneForSimulation(state:GameState):GameState {
     automation:{...state.automation},
     missions:{daily:{...state.missions.daily,days:[...state.missions.daily.days],claims:[...state.missions.daily.claims]},weekly:{...state.missions.weekly,days:[...state.missions.weekly.days],claims:[...state.missions.weekly.claims]},mailbox:state.missions.mailbox.map(entry=>({...entry}))},
     achievementClaims:[...state.achievementClaims], ads:{...state.ads,counts:{...state.ads.counts},transactions:[...state.ads.transactions]}, settings:{...state.settings},
+    telemetry:{...state.telemetry,recentEvents:[...state.telemetry.recentEvents],permanentEvents:[...state.telemetry.permanentEvents],metrics:state.telemetry.metrics.map(bucket=>({...bucket,income:{...bucket.income},offlineRewards:{...bucket.offlineRewards}})),archivedMetrics:{...state.telemetry.archivedMetrics,income:{...state.telemetry.archivedMetrics.income},offlineRewards:{...state.telemetry.archivedMetrics.offlineRewards}},prestigeHistory:[...state.telemetry.prestigeHistory]},
+    story:{...state.story,queue:[...state.story.queue],seen:[...state.story.seen]},
   };
 }
 
@@ -28,7 +31,7 @@ function autobuy(state:GameState) {
 
 export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
   const limit=Math.min(BALANCE.maxOfflineSeconds,(hasNode(state,'autoRoute',1)?BALANCE.maxOfflineSeconds:BALANCE.baseOfflineSeconds)*(1+milestoneBonus(state,'offline'))),total=Math.max(0,Math.min(seconds,limit));
-  let left=total,levels=0,experiments=0,hardware=0,next=cloneForSimulation(state);
+  let left=total,levels=0,experiments=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,next=cloneForSimulation(state);
   while(left>1e-9) {
     const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;
     const toLevel=next.activeTraining?(goal-next.training)/rate:Infinity;
@@ -37,20 +40,24 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     const toBoost=Math.min(next.trainingBoostUntil>now?(next.trainingBoostUntil-now)/1000:Infinity,next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
     let slice=Math.min(left,toLevel,toAuto,toExperiment,toBoost);
     if(slice<1e-8) slice=Math.min(left,1e-6);
-    next=addCredits(next,creditRate(next.hardware,next.level,next,now)*slice);next.data+=dataRate(next)*slice;next.researchPoints+=researchRate(next)*slice;
+    const credits=creditRate(next.hardware,next.level,next,now)*slice,data=dataRate(next)*slice,research=researchRate(next)*slice;generatedCredits+=credits;generatedData+=data;generatedResearch+=research;
+    next=addCredits(next,credits);next.data+=data;next.researchPoints+=research;
     next.training+=rate*slice; next.savedAt+=slice*1000; next.automation.elapsed+=slice; left-=slice;
-    if(next.activeTraining&&next.training+1e-7>=goal){const track=next.activeTraining.track;next.training=0;next.activeTraining=null;next.level++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next.missions.daily.training++;next.missions.weekly.training++;}
+    if(next.activeTraining&&next.training+1e-7>=goal){const track=next.activeTraining.track;next.training=0;next.activeTraining=null;next.level++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next.missions.daily.training++;next.missions.weekly.training++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level});}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng);if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
   }
   next=updateOnboarding(achievementCheck(rollPeriods(next,next.savedAt)));
   if(active){next.missions.daily.activeSeconds+=total;const day=new Date(next.savedAt).toISOString().slice(0,10);if(!next.missions.weekly.days.includes(day))next.missions.weekly.days.push(day);}
+  const offline=!active&&total>10;
+  next=addMetrics(next,next.savedAt,{activeSeconds:active?total:0,offlineSeconds:offline?total:0,passive:offline?0:generatedCredits,offline:offline?generatedCredits:0,offlineCredits:offline?generatedCredits:0,offlineData:offline?generatedData:0,offlineResearch:offline?generatedResearch:0});
   return {state:next,report:{credits:next.credits-state.credits,data:next.data-state.data,research:next.researchPoints-state.researchPoints,levels,experiments,hardware,seconds:total}};
 }
 
 export function advanceTo(state:GameState,wallNow:number,active=false) {
   const now=simulationNow(state,wallNow);
-  const result=advance(state,(now-state.savedAt)/1000,active);
+  const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advance(state,elapsed,active);
+  if(!active&&elapsed>10&&elapsed>result.report.seconds)result.state=addMetrics(result.state,result.state.savedAt,{offlineSeconds:elapsed-result.report.seconds});
   const limit=Math.min(BALANCE.maxOfflineSeconds,(hasNode(state,'autoRoute',1)?BALANCE.maxOfflineSeconds:BALANCE.baseOfflineSeconds)*(1+milestoneBonus(state,'offline')));if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
   return result;
 }
