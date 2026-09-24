@@ -17,8 +17,7 @@ const itemCells: Record<ItemTypeId, [number, number]> = {
 };
 
 const prestigeCells: Record<PrestigeUpgradeId, [number, number]> = {
-  tapArchive: [0, 0], coldStart: [1, 0], labLink: [2, 0],
-  autoRoute: [3, 0], artifactBus: [0, 1], researchGate: [1, 1],
+impulseNetwork: [0, 0], hardwareAtlas: [1, 0], parallelLab: [2, 0], shoppingAgent: [3, 0], componentScanner: [0, 1], overclockSwitch: [1, 1], computeNetwork: [2, 1], labQueue: [3, 1], shoppingPlan: [0, 2], feedback: [1, 2], milestoneRecycling: [2, 2], labAssistant: [3, 2], secondSocket: [0, 3]
 };
 
 export type ResourceArtId = 'credits' | 'gems' | 'compute' | 'int' | 'research' | 'blueprints' | 'components' | 'data';

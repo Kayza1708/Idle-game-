@@ -53,3 +53,15 @@ Am 24. September 2026 waren Typecheck und der kompilierte v7-Economy-Kontrolllau
 - Beschädigte und inkompatible Daten bleiben unangetastet. Recovery bietet Originaldownload und validierten manuellen Import; erst nach erfolgreichem Import wird Schreiben wieder aktiviert.
 - Offen: weitere reale Exporte sammeln, bevor zusätzliche Forschungsprojekte oder größere Kurvenänderungen beschlossen werden. Die 1,08 Mio. FP sind wegen dauerhaft zugewiesenem Forschungs-Compute und nur 525 FP bestehender Projektausgaben plausibel, zeigen aber eine Inhaltslücke.
 - Die vorgeschriebenen Abhängigkeitschecks sind in dieser Umgebung weiterhin durch Registry-HTTP-403 für `vitest` begrenzt; TypeScript konnte vor dem fehlgeschlagenen `npm ci` erfolgreich ausgeführt werden.
+
+## Übergabe 24. September 2026 – neuer INT-Baum
+
+Die Spezifikation wurde seriös bis einschließlich Stufe 3 vertikal umgesetzt (13 funktionierende Knoten). Der alte Baum wird in Save v13 entfernt und vollständig zurückerstattet. Stufen 4–7 sind bewusst nicht als Buttons vorhanden. Nächster Ausbau ist Stufe 4 mit ROI-Agent, echter Run-Durchbruchswahl und zwei Challenges; erst danach Stufe 5.
+
+Die bestehende v7-Kontrollmessung bleibt die letzte reproduzierbare Langmessung: erste INT nach **22:52 aktiv** bzw. **115:15 passiv**. Die neuen Knoten wirken erst nach einem Prestige und verändern diese erste Anspruchsschwelle daher nicht. Vor dem ersten Prestige lag die reguläre Kurve im frühen Hardwarebereich; die 20-Mrd.-Credit-Cloudklasse liegt über dem für 1 INT nötigen berechtigten Umsatz und soll nicht regulär davor erreicht werden. Neue Mehrprestige-Messwerte konnten in diesem Auftrag nicht ehrlich erzeugt werden, weil `npm ci` weiterhin am Registry-403 für Vitest scheitert und dabei die lokalen Build-Werkzeuge entfernt. Dies ist eine Messlücke, kein Nachweis von Spielspaß.
+
+## Übergabe 24. September 2026 – Achievements, Aufträge und Gems
+
+Save v14 migriert v13 ohne Verlust von Gems oder Achievement-Punkten und ergänzt konservativ neue Lifetime-Zähler. Der Browser bietet ausschließlich Käufe mit erspielten Gems. Echtgeldpakete besitzen stabile IDs, aber absichtlich weder Preis noch aktiven Kaufpfad: Native Hülle, Store-SDK, Account und verifizierender Server fehlen.
+
+Das rechnerische Vollteilnahmebudget beträgt bei 30 Tagen rund 675 Gems/Monat. Der erste 900-Gem-Laborplatz liegt ohne einmalige Achievements bei ungefähr 40 Tagen. Als nächstes sind reale mobile Abschlussquoten und die Zeit bis 900 Gems zu messen; erst danach Ziele oder Preise ändern.
