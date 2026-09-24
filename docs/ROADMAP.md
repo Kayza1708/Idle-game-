@@ -78,3 +78,7 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 **Abnahmekriterien:** Crash-/Save-Ziele, Release-Checkliste, Support- und Rollbackplan.
 
 **Nicht enthalten:** unangekündigte Mechanik- oder Monetarisierungsänderungen.
+
+## Grafik-Integration — Erledigt
+
+Die bereitgestellte frühe Laboransicht sowie die geprüften Hardware-, Ressourcen-, Item- und Prestige-Atlanten sind den bestehenden Spielansichten zugeordnet. Die Oberfläche verwendet nun einen ruhigen, dunklen Pixel-Art-Stil mit kompakten Hardwarezeilen, flachen Bedienelementen, responsiven Inhaltsrastern und reduzierten Effekten. Dieser Grafikpass ändert weder Economy noch Spielmechanik oder Speicherdaten.
