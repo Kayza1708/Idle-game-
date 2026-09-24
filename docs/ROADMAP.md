@@ -158,3 +158,11 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Save-seitige Logkompaktierung und quota-bewusste Temp-/Backup-Reihenfolge.
 - [x] Lokaler Spielstandexport nach Save-Fehler sowie fehlende React-Keys/Favicon bereinigt.
 - [ ] 30-Minuten-Abnahme im echten Browser bleibt in dieser Umgebung offen.
+
+### IndexedDB-Savepfad und Tick-Korrelation — In Arbeit (24. September 2026)
+
+- [x] Vollständiges localStorage-Origin-Inventar aus Keynamen und Größen ergänzt.
+- [x] Bytegleich geprüfte Archivierung bekannter Legacy-Saves ohne Löschen unbekannter Keys.
+- [x] Atomarer IndexedDB-Hauptsave mit drei validierten Generationen und Reload-Auswahl.
+- [x] Visibility- sowie Hold-Begin/-End-Diagnose zur Trennung von Pause und Blockade.
+- [ ] 30-Minuten-Browserlauf und Auswertung der konkret genannten Crash-/ZIP-Dateien offen.

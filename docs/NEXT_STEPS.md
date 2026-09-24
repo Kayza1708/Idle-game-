@@ -111,3 +111,19 @@ Save-seitigen Kompaktierung auf 300 Snapshots. Der neue Ablauf räumt bei Quota-
 alte Backup-Generationen, löscht den validierten Temp-Key vor der Rotation und bewahrt
 den bisherigen Hauptsave bis zum Commit. Jeder Fehler meldet Stufe, Error-Name,
 Error-Text und Key-/Loggrößen; die UI bietet dann den lokalen Spielstandexport an.
+
+## Übergabe IndexedDB und Tick-Korrelation – 24. September 2026
+
+- Das Origin-Inventar erfasst alle localStorage-Keynamen und Größen, aber keine Inhalte;
+  unbekannte Daten werden niemals gelöscht.
+- Bekannte lokale Save-Generationen werden bytegleich verifiziert in IndexedDB
+  archiviert, bevor ausschließlich ihre bekannten localStorage-Keys freigegeben werden.
+- Aktuelle Saves plus drei Backups werden atomar in IndexedDB rotiert und nach dem
+  Schreiben erneut validiert. Dadurch hängt sicheres Speichern nicht mehr von freier
+  localStorage-Quota ab.
+- Die Diagnose trennt Visibility-Wechsel, Worker-/UI-Heartbeat, Tick und gehaltene
+  Tap-Gesten. Der alte Bericht beweist keine sichtbare Main-Thread-Blockade; eine
+  spätere Save-Zeit ist ohne Session-/Load-Grenze kein Gegenbeweis zu früheren Fehlern.
+- Offen bleibt die geforderte reale 30-Minuten-Browserabnahme, da die bereitgestellten
+  Crash-/ZIP-Dateien nicht im Arbeitsverzeichnis liegen und die lokale Browser-
+  Toolchain weiterhin nicht startbar ist.

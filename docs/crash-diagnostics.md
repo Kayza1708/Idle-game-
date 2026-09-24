@@ -56,3 +56,43 @@ Quota-Druck entfernt er zuerst nur die ältesten Backup-Generationen, validiert 
 Temporärstand, hält dessen String im Speicher, löscht die fünfte Storage-Kopie und rotiert
 erst dann die Backups. Der gültige Hauptsave bleibt bis zum atomaren finalen `setItem`
 unverändert.
+
+## Origin-Inventar und dauerhafter Speicherpfad
+
+Der neue Diagnoseeintrag `storageInventory` listet **alle** für JavaScript sichtbaren
+`localStorage`-Keys des Origins mit Zeichenanzahl und der Kennzeichnung `known`; Inhalte
+werden niemals protokolliert. Unbekannte Keys werden weder verändert noch gelöscht.
+Die im Auftrag erwähnten 0-Byte-Werte bezogen sich nur auf die damals abgefragten
+aktuellen Spiel-Keys und belegten deshalb nicht, dass der gesamte Origin leer war.
+
+Vollständige Saves und ihre drei Generationen liegen nun in der transaktionalen
+IndexedDB `ai-singularity-durable-v1`. Beim ersten Start werden Hauptsave, Backups,
+Temp- und Recovery-Key aus `localStorage` vollständig als `legacy:<key>` in IndexedDB
+archiviert. Jede Kopie wird zurückgelesen und bytegleich geprüft; erst danach werden
+**nur diese bekannten Spiel-Keys** aus `localStorage` entfernt. Gültige Generationen
+werden zusätzlich als `current` und `backup-1` bis `backup-3` übernommen. Unbekannte
+Origin-Daten bleiben unangetastet. Jeder neue IndexedDB-Save rotiert drei Generationen
+in einer atomaren Transaktion und wird anschließend erneut mit der normalen
+Save-Validierung gelesen.
+
+## Tick-Aussetzer
+
+Der alte Bericht reicht für eine kausale Zuordnung nicht aus: Er enthielt weder
+Visibility-Wechsel noch Beginn/Ende einer gehaltenen Tap-Geste. Dass Tap-Aktionen nach
+dem letzten gespeicherten Heartbeat auftauchten, beweist eine vollständige
+Main-Thread-Blockade gerade nicht; Eventhandler konnten zu diesen Zeitpunkten noch
+laufen. Ebenso kann ein späterer erfolgreicher Save nur zusammen mit Session-ID,
+Load-Aktion und Visibility-Zeitlinie einer Wiederaufnahme oder einem Reload zugeordnet
+werden. Die Diagnose führt deshalb jetzt eine begrenzte Visibility-Zeitlinie und
+separate Hold-Begin/-End-Marker. Simulationstakte werden bei `document.hidden`
+absichtlich ausgelassen und beim Sichtbarwerden über verstrichene Zeit nachgeholt.
+
+## 30-Minuten-Kernprofil (kein Browser-Abnahmetest)
+
+Ein deterministischer sichtbarer 1.800-Sekunden-Kernlauf führte 5.400 gehaltenen Taps,
+30 Käufe, wiederholte Trainingsstarts und 120 Save-Rotationen aus. Er maß maximal
+7,42 ms und durchschnittlich 0,30 ms pro Simulationstakt, maximal 13,89 ms für
+Kompaktierung/Serialisierung/Rotation/Validierung, 87.413 Byte aktuellen Save,
+98 Snapshots, 42 Events und 8,61 MiB Heap-Zuwachs. Alle vier Generationen ließen sich
+wiederherstellen. Das ist ein Core-Lasttest, kein Ersatz für die geforderte reale
+Browserabnahme oder eine Messung echter IndexedDB-Transaktionslatenz.
