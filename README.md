@@ -1,20 +1,24 @@
-# AI Singularity – Phase-1-Alpha
+# AI Singularity – Audio Pack v1
 
-Die Browser-Alpha verbindet einen datengetriebenen Hardwarekatalog, Compute-Profile, Nutzer, Daten, aktives Tappen, Overclock, manuelles Training, frühe Forschung und Items sowie kumulatives Prestige mit dem bestehenden Inventar-, Gem- und Missionssystem.
+Original, procedurally composed audio for the cozy retro-pixel idle game. No samples or third-party music are used.
 
-## Auf einem Mac starten
+## Files
 
-Node.js 20 LTS und Git installieren, dann in Terminal:
+| File | Use |
+|---|---|
+| `idle-loop.ogg` / `.mp3` | 48-second seamless background loop; loop continuously while enabled |
+| `ui-click.ogg` / `.mp3` | Soft button tap |
+| `purchase.ogg` / `.mp3` | Hardware/item purchase |
+| `unlock.ogg` / `.mp3` | New feature or milestone unlocked |
+| `research-complete.ogg` / `.mp3` | Research project completed |
+| `prestige.ogg` / `.mp3` | Longer prestige celebration |
+| `gem-pickup.ogg` / `.mp3` | Gem/reward pickup |
+| `error.ogg` / `.mp3` | Invalid action or insufficient resources |
+| `*.wav` | Uncompressed masters |
 
-```bash
-git clone https://github.com/Kayza1708/Idle-game-.git
-cd Idle-game-
-git switch feat/core-loop-profiles
-npm ci
-npm run dev
-```
+## Suggested integration paths
 
-Die angezeigte Adresse (typisch `http://localhost:5173`) öffnen. Für den Production-Build: `npm run build` und danach `npm run preview`; das startbare Ergebnis liegt in `dist/`.
+Copy the compressed files to `public/assets/audio/`. Use OGG first and MP3 as fallback. Start the music only after a user gesture, persist music/SFX volume and mute settings, pause when the app/tab is hidden, and respect reduced-motion/accessibility settings. Debounce repeated click sounds so tapping quickly does not become harsh. Do not play the prestige sound for ordinary purchases.
 
 ## Phase 1
 
