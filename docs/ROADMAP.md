@@ -123,3 +123,38 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Drei stabile native Produkt-IDs werden ohne Preis und ohne Browser-Kaufbutton angezeigt; Integrationsvertrag dokumentiert fehlende native/Backend-Infrastruktur.
 - [ ] StoreKit/Play Billing, Accounts, serverseitige Verifikation, Gerätewechsel und Erstattungen bleiben bis zu einem eigenen nativen Auftrag offen.
 - [ ] Moderierte mobile Browserabnahme und reale Abschlussquoten bleiben offen.
+
+
+## Stabilitäts-, Trainings- und Analysepass — In Arbeit (24. September 2026)
+
+- [x] Exponentielle, getrennt bepreiste Quality-/Efficiency-Pfade mit Bonus-Softcap.
+- [x] Transaktionales Speichern, drei Backups und automatische Wiederherstellung.
+- [x] 60-Sekunden-Simulationsschritte, Endlichkeitsprüfung und Watchdog.
+- [x] Lokaler ZIP-Export mit elf Analysedateien.
+- [x] Mobile Prestige-Leiterplatte mit Detailfenster.
+- [ ] Fünfminütige reale Browser-/Geräteabnahme.
+
+### Langlauf-Korrektur — In Arbeit (24. September 2026)
+
+- [x] Lineare Compute-Kopplung des Trainings durch eine gedeckelte fünfte Wurzel ersetzt.
+- [x] ZIP Local- und Central-Directory-Header mit Standardlesern und CRC-Prüfung validiert.
+- [x] 30-Sekunden-Snapshots mit adaptiver, auf 300 Einträge begrenzter Historie ergänzt.
+- [x] Event-Ressourcen, Kaufdetails, Trainingsdauer und persistente Diagnose in Save v15 ergänzt.
+- [x] Automatisierter Kernlanglauf inklusive Save/Reload und Abbruch-Recovery ausgeführt.
+- [ ] Browser-UI-Langlauf und macOS-Archivprogramm manuell verifizieren.
+
+### Crash-Diagnose und Lifecycle — In Arbeit (24. September 2026)
+
+- [x] Separater begrenzter Crash-Bericht, Begin-/End-Marker und JSON-Download.
+- [x] JavaScript-, Promise-, React-, Long-Task-, Tick-, Save- und Worker-Heartbeat-Diagnose.
+- [x] Recovery-Test: gültiger Save, unterbrochener Folgesave, Reload aus Backup bei erhaltener Diagnose.
+- [x] Synchrone Ereignis-Saves coalesziert und Snapshot-Historie auf 300 adaptive Einträge begrenzt.
+- [ ] 30-Minuten-Abnahme in einem echten Browser mit Performance-/Memory-Profil und Reload während Save.
+
+### Save-Quota-Fehler — In Arbeit (24. September 2026)
+
+- [x] `QuotaExceededError` beim fünften Vollsave im Schritt `temp-write` reproduziert.
+- [x] Stufengenaue Save-Fehler und Größenmessung ohne Konsolen-Ausgabe des Spielstands.
+- [x] Save-seitige Logkompaktierung und quota-bewusste Temp-/Backup-Reihenfolge.
+- [x] Lokaler Spielstandexport nach Save-Fehler sowie fehlende React-Keys/Favicon bereinigt.
+- [ ] 30-Minuten-Abnahme im echten Browser bleibt in dieser Umgebung offen.
