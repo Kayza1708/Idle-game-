@@ -58,3 +58,7 @@ GitHub Actions führt dieselben Schritte aus. Keine echten Werbe-, Kauf- oder na
 ## Integriertes Audio
 
 Die acht eigens erstellten Sounds liegen jeweils als OGG, MP3-Fallback und unkomprimiertes WAV-Master unter `public/assets/audio/`. Das Spiel lädt für die Wiedergabe OGG beziehungsweise MP3, nicht die WAV-Master. Musik ist standardmäßig aus und beginnt erst nach dem Einschalten durch die spielende Person. Musik- und Effektlautstärke sowie Stummschaltung werden im versionierten Spielstand gespeichert.
+
+## Lokaler Spielstand und KI-Name
+
+Neue Kampagnen benennen die KI vor dem Prolog (Vorschlag `AURA`); der Name wird ausschließlich im lokalen, versionierten Save gespeichert und bleibt über Reload und Prestige bestehen. Save v12 überschreibt beschädigte, inkompatible oder nicht sicher migrierbare Originaldaten nicht. Die Warnung bietet stattdessen einen Download des Originalinhalts und einen geprüften manuellen Import zur Wiederherstellung.

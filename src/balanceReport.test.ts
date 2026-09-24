@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createBalanceReport, serializeBalanceReport } from './balanceReport';
+import { addEvent } from './telemetry';
 import { newGame } from './economy';
 import { prestige } from './prestige';
 import { restore } from './storage';
@@ -40,6 +41,9 @@ describe('local balance report',()=>{
     expect(report.currentState.resources.data).toBeNull();
     expect(json).not.toMatch(/NaN|Infinity/);
   });
+
+
+  it('explains research stock and summarizes decision events',()=>{let state=newGame(0);state={...state,researchPoints:80};state=addEvent(state,'research-start',10,{researchPointCost:20});state=addEvent(state,'training-start',20,{track:'quality'});const report=createBalanceReport(state,100);expect(report.currentState.diagnostics.researchPoints).toMatchObject({current:80,spentOnProjects:20});expect(report.currentState.diagnostics.eventCounts).toMatchObject({researchStarts:1,trainingStarts:1})});
 
   it('does not mutate the game state while exporting',()=>{
     const state=newGame(123),before=JSON.stringify(state);

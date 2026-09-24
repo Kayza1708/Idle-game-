@@ -1,6 +1,6 @@
 import type { GameState, HardwareId } from './economy';
 
-export type TelemetryEventType = 'hardware-purchase'|'hardware-milestone'|'training-complete'|'research-complete'|'experiment-complete'|'breakthrough'|'item-create'|'item-equip'|'item-upgrade'|'item-lock'|'item-salvage'|'achievement'|'mission-claim'|'prestige';
+export type TelemetryEventType = 'hardware-purchase'|'hardware-milestone'|'training-start'|'training-complete'|'research-start'|'research-complete'|'experiment-complete'|'breakthrough'|'item-create'|'item-equip'|'item-upgrade'|'item-lock'|'item-salvage'|'achievement'|'mission-claim'|'prestige';
 export type TelemetryEvent = { at:number; run:number; type:TelemetryEventType; details:Record<string,string|number|boolean|null> };
 export type MetricBucket = { start:number; end:number; taps:number; activeSeconds:number; offlineSeconds:number; income:{tap:number;passive:number;offline:number;other:number}; offlineRewards:{credits:number;data:number;research:number} };
 export type ArchivedMetrics = { through:number|null;taps:number;activeSeconds:number;offlineSeconds:number;income:{tap:number;passive:number;offline:number;other:number};offlineRewards:{credits:number;data:number;research:number} };

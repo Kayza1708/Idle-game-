@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { newGame } from './economy';
-import { loadGame, persistGame, restore, serialize, StorageLike } from './storage';
+import { BACKUP_KEY, loadGame, persistGame, RECOVERY_KEY, restore, serialize, StorageLike } from './storage';
 
 class MemoryStorage implements StorageLike {
   value: string | null = null;
@@ -39,6 +39,11 @@ describe('save format', () => {
   it('migrates v9 saves to empty research labs without changing resources',()=>{const old=newGame(100) as any;delete old.researchLabs;delete old.purchasedResearchLabs;old.credits=4321;const restored=restore(JSON.stringify({version:9,state:old}),200);expect(restored.migrated).toBe(true);expect(restored.state.credits).toBe(4321);expect(restored.state.researchLabs).toEqual([null,null,null]);expect(restored.state.purchasedResearchLabs).toBe(0)});
 
   it('migrates v10 audio settings without changing progress',()=>{const current=newGame(100),old={...current,credits:4321,settings:{effects:false,buyMode:10 as const}};const restored=restore(JSON.stringify({version:10,state:old}),200);expect(restored.migrated).toBe(true);expect(restored.state.credits).toBe(4321);expect(restored.state.settings).toMatchObject({effects:false,buyMode:10,musicEnabled:false,sfxMuted:false})});
+
+
+  it('loads a valid migration even when writing its backup fails, without overwriting it',()=>{const old=newGame(100) as any;delete old.aiName;const raw=JSON.stringify({version:11,state:old});const writes:string[]=[];const storage:StorageLike={getItem:()=>raw,setItem:(key)=>{writes.push(key);throw new Error('quota')},removeItem:()=>{}};const result=loadGame(storage,200);expect(result.state.aiName).toBe('AURA');expect(result.error).toMatch(/Migrationskopie/);expect(result.writable).toBe(false);expect(result.recoveryRaw).toBe(raw);expect(writes).toEqual([BACKUP_KEY])});
+
+  it('preserves corrupt original data for explicit recovery and never enables autosave',()=>{const raw='{broken';const saved:Record<string,string>={};const storage:StorageLike={getItem:()=>raw,setItem:(key,value)=>{saved[key]=value},removeItem:()=>{}};const result=loadGame(storage,200);expect(result.writable).toBe(false);expect(result.recoveryRaw).toBe(raw);expect(saved[RECOVERY_KEY]).toBe(raw)});
 
   it('does not lose or duplicate time across background, save, close and reload', () => {
     const storage = new MemoryStorage();

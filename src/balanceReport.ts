@@ -13,6 +13,7 @@ function safeValue(value:unknown):unknown{
 
 export function createBalanceReport(state:GameState,exportedAt=Date.now()){
   const telemetry=state.telemetry,campaignDuration=telemetry.campaignStartedAt===null?null:Math.max(0,(exportedAt-telemetry.campaignStartedAt)/1000),runDuration=telemetry.runStartedAt===null?null:Math.max(0,(exportedAt-telemetry.runStartedAt)/1000);
+  const allEvents=[...telemetry.permanentEvents,...telemetry.recentEvents],eventCount=(type:string)=>allEvents.filter(event=>event.type===type).length,researchSpent=allEvents.filter(event=>event.type==='research-start').reduce((sum,event)=>sum+Number(event.details.researchPointCost??0),0);
   const report={
     reportVersion:REPORT_VERSION,gameVersion:GAME_VERSION,saveVersion:SAVE_VERSION,exportedAt,
     privacy:{localExport:true,automaticUpload:false,accountOrDeviceDataIncluded:false},
@@ -25,7 +26,7 @@ export function createBalanceReport(state:GameState,exportedAt=Date.now()){
       research:{completedProjects:[...state.completedResearch],breakthroughs:[...state.breakthroughs],experiments:{active:state.experiments.active,queued:[...state.experiments.queue],completedCount:state.experiments.completedIds.length}},
       items:{inventory:state.inventory.map(item=>({...item})),equipped:{...state.equipped}},
       int:{totalEarned:state.totalINTEarned,unspent:state.unspentINT,spent:state.spentINT,prestigeCount:state.prestigeCount,nodes:[...state.nodes]},
-      achievements:{claimed:[...state.achievementClaims],points:state.achievementPoints},missions:{daily:state.missions.daily,weekly:state.missions.weekly},
+      achievements:{claimed:[...state.achievementClaims],points:state.achievementPoints},diagnostics:{researchPoints:{current:state.researchPoints,spentOnProjects:researchSpent,source:'Passiv aus dem Forschungsanteil des gewählten Betriebsprofils; Ausgabe beim Projektstart.'},eventCounts:{hardwarePurchases:eventCount('hardware-purchase'),trainingStarts:eventCount('training-start'),trainingCompletions:eventCount('training-complete'),researchStarts:eventCount('research-start'),researchCompletions:eventCount('research-complete'),achievements:eventCount('achievement'),prestiges:eventCount('prestige')}},missions:{daily:state.missions.daily,weekly:state.missions.weekly},
     },
     prestigeHistory:telemetry.prestigeHistory,
     events:{permanent:telemetry.permanentEvents,recent:telemetry.recentEvents},

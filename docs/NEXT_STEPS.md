@@ -46,3 +46,10 @@ Am 24. September 2026 waren Typecheck und der kompilierte v7-Economy-Kontrolllau
 - `idle-loop` sowie sieben Ereigniseffekte liegen in OGG, MP3 und WAV unter `public/assets/audio/`; die Laufzeit verwendet OGG mit MP3-Fallback und lädt WAV nicht regulär.
 - Musik startet nur über den Audio-Schalter, pausiert bei verborgenem Tab und ist separat regelbar. Effektlautstärke und Stummschaltung sind ebenfalls in Save v11 gespeichert; v10 wird mit sicheren Standardwerten migriert.
 - Kauf, Freischaltung, Forschungsabschluss, Prestige, Gem-Abholung und Fehler sind getrennt zugeordnet. UI-Klicks werden gedrosselt; Simulations-Ticks und bloße Ressourcenänderungen lösen keinen Sound aus.
+
+## Übergabe 24. September 2026 – Save v12 und Diagnose
+
+- Reproduzierter konkreter Fehlerpfad: Ein gültiger v11-Spielstand wurde migriert, doch ein Fehler beim Schreiben der Backup-Kopie fiel in denselben äußeren `catch` wie `getItem` und zeigte fälschlich „konnte nicht gelesen werden“. Laden und Backup sind nun getrennt; bei fehlender Sicherungsmöglichkeit bleibt Autosave gesperrt und das Original kann heruntergeladen werden.
+- Beschädigte und inkompatible Daten bleiben unangetastet. Recovery bietet Originaldownload und validierten manuellen Import; erst nach erfolgreichem Import wird Schreiben wieder aktiviert.
+- Offen: weitere reale Exporte sammeln, bevor zusätzliche Forschungsprojekte oder größere Kurvenänderungen beschlossen werden. Die 1,08 Mio. FP sind wegen dauerhaft zugewiesenem Forschungs-Compute und nur 525 FP bestehender Projektausgaben plausibel, zeigen aber eine Inhaltslücke.
+- Die vorgeschriebenen Abhängigkeitschecks sind in dieser Umgebung weiterhin durch Registry-HTTP-403 für `vitest` begrenzt; TypeScript konnte vor dem fehlgeschlagenen `npm ci` erfolgreich ausgeführt werden.

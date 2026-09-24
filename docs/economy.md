@@ -90,3 +90,9 @@ Forschungsprojekte werden beim ausdrücklichen Start genau einmal bezahlt. Ihre 
 Training bleibt eine aktive Entscheidung und bezahlt Credits plus `2 × (Modellstufe + 1)` Daten. Die Arbeitskurve `30 × (Stufe + 1)^1,25` wächst polynomial; die tatsächliche Dauer ergibt sich aus Arbeit geteilt durch die im Betriebsprofil zugewiesene Compute-Trainingsrate. Qualitäts- und Effizienzgewinne besitzen weiterhin ihre dokumentierten Softcaps.
 
 Animierte Ressourcenzahlen interpolieren nur den zuletzt gerenderten Anzeigewert über 350 ms. Economy, Kosten, Speicherdaten und Simulation verwenden unverändert den echten Zustandswert; bei Reduced Motion oder verborgenem Dokument wird sofort auf den echten Wert gesprungen.
+
+## Save v12, Benennung und präzise INT-Effekte
+
+Neue Kampagnen speichern vor dem Prolog einen ausschließlich lokal validierten KI-Namen; `AURA` ist der Vorschlag. Der Name ist kein Balancewert, bleibt bei Prestige erhalten und wird bei bestehenden Saves als `AURA` migriert, ohne das Tutorial erneut zu starten. Save v12 trennt Lese-, Validierungs- und Backupfehler: ungültige Originaldaten sperren Autosave, werden nach Möglichkeit separat gesichert und bleiben als manueller Recovery-Download verfügbar.
+
+Die INT-Karte zeigt nun ausschließlich tatsächlich angewandte Wirkungen: Impulsarchiv speichert je Stufe Daten anhand des Tap-Meilensteinbonus, Warmer Neustart gibt je Stufe einen Taschenrechner, Labor-Kopplung öffnet auf Stufe 1 Labor 2, Autonome Beschaffung öffnet Autokauf und das 24-Stunden-Offline-Limit, Artefakt-Bus verstärkt ausgerüstete Itemeffekte je Stufe um 10 %, und Rekursives Labor gibt je Stufe 25 Startdaten. Kosten und Mathematik wurden nicht verändert.
