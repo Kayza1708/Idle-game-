@@ -133,3 +133,12 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Lokaler ZIP-Export mit elf Analysedateien.
 - [x] Mobile Prestige-Leiterplatte mit Detailfenster.
 - [ ] Fünfminütige reale Browser-/Geräteabnahme.
+
+### Langlauf-Korrektur — In Arbeit (24. September 2026)
+
+- [x] Lineare Compute-Kopplung des Trainings durch eine gedeckelte fünfte Wurzel ersetzt.
+- [x] ZIP Local- und Central-Directory-Header mit Standardlesern und CRC-Prüfung validiert.
+- [x] 30-Sekunden-Snapshots mit adaptiver, auf 2.000 Einträge begrenzter Historie ergänzt.
+- [x] Event-Ressourcen, Kaufdetails, Trainingsdauer und persistente Diagnose in Save v15 ergänzt.
+- [x] Automatisierter Kernlanglauf inklusive Save/Reload und Abbruch-Recovery ausgeführt.
+- [ ] Browser-UI-Langlauf und macOS-Archivprogramm manuell verifizieren.

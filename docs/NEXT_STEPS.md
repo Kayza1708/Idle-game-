@@ -70,3 +70,19 @@ Das rechnerische Vollteilnahmebudget beträgt bei 30 Tagen rund 675 Gems/Monat. 
 ## Übergabe 24. September 2026 – Stabilität, Training und Analyse
 
 Training verwendet reale Arbeitszeit und exponentielle Ziele ab 90 Sekunden; beide Pfade haben getrennte Kosten. Saves werden temporär geschrieben, vollständig validiert und mit drei Generationen abgesichert. Große Zeiträume laufen iterativ in höchstens 60-Sekunden-Schritten. Der lokale ZIP-Bericht enthält elf Analyse-Dateien ohne Upload. Die mobile INT-Ansicht verwendet eine kompakte Leiterplatte und ein touchfreundliches Detailfenster. Offen bleibt die tatsächliche fünfminütige Browser-/Geräteabnahme.
+
+## Korrektur nach Langzeit-Reproduktion – 24. September 2026
+
+Ein automatisierter Kernlauf mit 36 Käufen, 34 Trainings, wechselnder Online-/Offline-
+Simulation, Save/Reload, Backup-Recovery und ZIP-Export simulierte 981.240 Sekunden.
+Ein vollständiger UI-Freeze ließ sich ohne echten Browser nicht reproduzieren. Es wurde
+aber eine konkrete Main-Thread-Last identifiziert: 11.692 vollständige Snapshots machten
+den Save 7,28 MB und den ZIP-Export 4,18 MB groß; Simulation plus Export benötigten
+21,28 Sekunden. Die begrenzte, ältere Daten automatisch ausdünnende Snapshot-Reihe
+reduziert denselben Lauf auf 1.692 Snapshots, 1,51 MB Save, 1,19 MB ZIP und 13,04
+Sekunden bei 35,04 MB Heap-Zuwachs. Damit ist die Datenexplosion korrigiert; eine reale
+fünfminütige Browserprüfung bleibt offen.
+
+Python `zipfile` und `unzip -t` lasen alle elf Dateien und bestätigten sämtliche CRCs.
+Die Ursache des zuvor defekten Archivs waren falsch dimensionierte bzw. falsch belegte
+Central-Directory-Header im handgeschriebenen ZIP-Writer.

@@ -130,3 +130,19 @@ Regelmäßige vollständige Teilnahme erreicht den ersten Gem-Laborplatz rechner
 Quality und Efficiency sind unabhängige, manuell gestartete Pfade. Das Arbeitsziel der nächsten Stufe ist zentral als `round(90 × 1,7^(level − 1))` Sekunden definiert. Kosten skalieren nur mit der Stufe des ausgewählten Pfads. Quality erhöht Umsatz pro Nutzer; Efficiency senkt Compute pro Nutzer.
 
 Die Arbeitsrate kombiniert Basisrate, relativen Trainings-Compute, Modellbonus und `1 + B / (1 + 0,35 × B)` als Softcap zusätzlicher Boni. Online- und Offline-Zeit verwenden dieselbe elapsed-time-basierte Simulation. Interne Schritte sind auf 60 Sekunden begrenzt; nicht endliche Schritte werden verworfen.
+
+## Trainings-Compute-Kopplung und gemessene Laufzeiten (Korrektur)
+
+Das Arbeitsziel bleibt `round(90 × 1,7^(level − 1))`. Roher Trainings-Compute wird
+aber nicht mehr linear als Multiplikator verwendet. Die Compute-Komponente lautet nun
+`min(3, max(1, (Trainings-Compute / 0,15)^0,2))`. Die fünfte Wurzel erhält erkennbare
+Hardwareverbesserungen, begrenzt sie aber mathematisch auf Faktor 3. Item-, Meilenstein-
+und Modellboni werden anschließend über ihre bestehende Softcap angewendet.
+
+Der gemeldete alte Fall `90 / 37,44` dauerte rechnerisch **2,40 Sekunden**. Im
+reproduzierbaren Kontrolllauf mit 36 frühen Hardwarekäufen dauerte das erste Training
+nach der Korrektur rechnerisch **41,48 Sekunden**. Training 17 lag bei **2.893,65
+Sekunden**, Training 34 bei **201.859,86 Sekunden**. Die tatsächlichen
+Simulationsabschlusszeiten lagen wegen der bewusst groben 60-Sekunden-Testaufrufe bei
+60, 2.940 und 201.900 Sekunden; der Spieltick selbst berechnet den Abschluss innerhalb
+eines Aufrufs exakt.
