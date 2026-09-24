@@ -15,7 +15,7 @@ Phase 1 ist funktional implementiert: fünf Hardwareklassen, geometrische Käufe
 3. Phase 2 entwerfen: drei besondere Item-Builds mit Tests und klaren Trade-offs.
 
 ## Letzter tatsächlich ausgeführter Teststand
-Am 23. September 2026 bestanden Core-TypeScript und reproduzierbare Zwei-Stunden-/Sieben-Tage-Simulationen mit manuellem Training. Die Produktionszerlegung reproduzierte 3.720 Hardware-Compute; Zeitpartitionierung und v5-Migration wurden gezielt geprüft. `npm ci`, Typecheck, Vitest und Build bleiben durch HTTP 403 der Registry blockiert; keine Prüfung wird als ausgeführt behauptet.
+Am 24. September 2026 wurde der Quadratwurzel-Regressionstest auf gleich breite Levelintervalle korrigiert, ohne die Formel oder Balance zu verändern. `npm ci`, Typecheck, Vitest, Build und der aktuelle Audit-Endpunkt bleiben durch HTTP 403 der Registry blockiert; keine Prüfung wird als erfolgreich ausgeführt behauptet. Die lokal zwischengespeicherten Advisories betreffen mit Vite und Vitest direkte Entwicklungsabhängigkeiten sowie mit `@vitest/mocker` eine indirekte Vitest-Abhängigkeit; vor einem Update müssen Registry-Audit und Kompatibilität erneut geprüft werden.
 
 ## Offene Designentscheidungen
 - Wie stark Spieler neue Klassen gegenüber Meilensteinen subjektiv bevorzugen.
