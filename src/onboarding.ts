@@ -13,7 +13,7 @@ export const onboardingSteps=[
 ] as const;
 
 export function updateOnboarding(s:GameState):GameState{
-  const met:Record<string,boolean>={'first-buy':s.missions.daily.hardware>0,'ten-calculators':s.hardwareCounts.calculator>=10,'discover-sbc':s.discovered.includes('sbc'),'first-level':s.level>=1,'intro-experiment':s.experiments.completedIds.includes('intro'),'equip-item':Object.keys(s.equipped).length>0,'class-upgrade':s.classUpgrades.length>0,'first-prestige':s.prestigeCount>0};
+  const met:Record<string,boolean>={'first-buy':s.lifetime.hardwareBought>0,'ten-calculators':s.hardwareCounts.calculator>=10,'discover-sbc':s.discovered.includes('sbc'),'first-level':s.level>=1,'intro-experiment':s.experiments.completedIds.includes('intro'),'equip-item':Object.keys(s.equipped).length>0,'class-upgrade':s.classUpgrades.length>0,'first-prestige':s.prestigeCount>0};
   const completed=[...s.onboarding.completed];for(const step of onboardingSteps)if(met[step.id]&&!completed.includes(step.id))completed.push(step.id);
   return completed.length===s.onboarding.completed.length?s:{...s,onboarding:{...s.onboarding,completed}};
 }

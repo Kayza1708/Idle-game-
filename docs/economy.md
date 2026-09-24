@@ -111,3 +111,15 @@ Der frühere sechsteilige, exponentiell bepreiste Entwurf wurde ersetzt. Alte Au
 - **Zweiter Modellsockel:** Die bereits vorhandenen Item-Slots werden integriert statt dupliziert. Bei mindestens einem ausgerüsteten Compute- und Credit-Item entstehen +5 % in der Credit-Itemfamilie; Training plus Experiment/Forschung gibt +10 % Forschung. Beide Kombinationen sind additiv in ihrer Familie und multiplizieren erst mit anderen benannten Familien.
 
 Die Reihenfolge ist: Klassenbasis + begrenzter Rechenverbund → Klassenmeilensteine/Upgrade → Summe aller Klassen → additive globale Compute-Familie → Atlasfamilie → Profilaufteilung → Modell/INT/Item/temporäre Familien. Kein Ergebnis wird erneut als Eingang derselben Formel verwendet.
+
+## Save v14 – Achievements, Aufträge und Gem-Shop
+
+Lifetime-Zähler erfassen tatsächlich gekaufte Stückzahlen (einschließlich ×10/Max), jemals besessene Klassen, Meilensteine, Prestiges/INT, Trainings- und Forschungsereignisse, gezielt hergestellte beziehungsweise entdeckte Items, vergütete Taps, Overclocks sowie regulär produzierte Credits und Daten. Debug-Gaben verändern diese Produktionszähler nicht. Laborarbeitszeit ist die Summe aktiver Slots: Zwei gleichzeitig laufende Labore liefern in zehn Sekunden 20 Laborsekunden, online wie offline.
+
+Achievement-Stufen geben einmalig 2/4/8/12 Gems und 2/4/8/12 Punkte. `researchAchievement = 1 + min(0,20; floor(Punkte/10) × 0,01)`. Dieser Faktor gehört zur Forschungsfamilie und beeinflusst Credits nicht. Abgeschlossene Projekte dürfen gegen ihre unveränderten Kosten wiederholt werden; ihre Freischaltwirkung wird nur beim ersten Abschluss eingetragen, jeder echte Laborabschluss zählt jedoch für Langzeitziele.
+
+Aufträge speichern bei Ausgabe Ziel und Zähler-Baseline. Daily besitzt vier Aufgaben/3er-Bonus (4×2 + 4 = 12 Gems), Weekly fünf/4er-Bonus (5×5 + 20 = 45), Monthly fünf/4er-Bonus (5×15 + 45 = 120). Ein optional aktiver Auftrag darf vorkommen, ist wegen der Bonusgrenze aber nie Pflicht. Bei vollständiger Teilnahme ergeben sich in einem 30-Tage-Monat ungefähr **675 Gems** (360 Daily + rund 195 Weekly + 120 Monthly). Beim UTC-Wechsel werden erfüllte, nicht abgeholte Einzelaufgaben und ein erreichter Bonus genau einmal direkt gutgeschrieben.
+
+Gem-Sinks: permanente Laborplätze kosten 900/2.700 Gems. Basisplatz + Parallel-Labor + zwei Gem-Plätze sind additiv bis maximal vier. Training 60 Gems/60 Minuten, Labor 80/60 Minuten und 120 garantierte Komponenten für 120 Gems sind wiederholbar. Boost-Restzeiten werden addiert und bei 24 Stunden gedeckelt. Der Laborboost zieht während seiner Laufzeit eine zusätzliche reale Sekunde von aktiven Projekttimern ab und funktioniert daher auch in Offline-Simulationsschritten.
+
+Regelmäßige vollständige Teilnahme erreicht den ersten Gem-Laborplatz rechnerisch nach rund 40 Tagen ohne Achievement-Gems; gelegentliche Teilnahme mit nur Daily-Boni dauert deutlich länger. Damit konkurrieren kleinere Boosts sichtbar mit dem Sparziel, ohne eine Progressionsvoraussetzung zu sein.

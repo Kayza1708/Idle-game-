@@ -61,4 +61,4 @@ Die acht eigens erstellten Sounds liegen jeweils als OGG, MP3-Fallback und unkom
 
 ## Lokaler Spielstand und KI-Name
 
-Neue Kampagnen benennen die KI vor dem Prolog (Vorschlag `AURA`); der Name wird ausschließlich im lokalen, versionierten Save gespeichert und bleibt über Reload und Prestige bestehen. Save v13 migriert den ersetzten INT-Baum mit vollständiger Rückerstattung und überschreibt beschädigte, inkompatible oder nicht sicher migrierbare Originaldaten nicht. Die Warnung bietet stattdessen einen Download des Originalinhalts und einen geprüften manuellen Import zur Wiederherstellung.
+Neue Kampagnen benennen die KI vor dem Prolog (Vorschlag `AURA`); der Name wird ausschließlich im lokalen, versionierten Save gespeichert und bleibt über Reload und Prestige bestehen. Save v14 erweitert Lifetime-Achievements, UTC-Aufträge und den Browser-Gem-Shop, migriert den ersetzten INT-Baum mit vollständiger Rückerstattung und überschreibt beschädigte, inkompatible oder nicht sicher migrierbare Originaldaten nicht. Die Warnung bietet stattdessen einen Download des Originalinhalts und einen geprüften manuellen Import zur Wiederherstellung.
