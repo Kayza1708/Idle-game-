@@ -185,3 +185,12 @@ Bonus `Stufe × 0,08` läuft durch denselben zentralen Softcap mit Schwelle 0,8:
 `1 + softcap(Stufe × 0,08; 0,8)`. Daten bleiben über Training, Forschung und Analysen
 mehrfach verwendbar, ohne dass hohe Forschungsstufen die Datenrate linear entkoppeln.
 Werte ab `1e15` werden in der UI konsistent wissenschaftlich dargestellt.
+
+## V18 – Daten, Prestige und Fertigung
+- Datenforschung: `1 + min(0.50, 0.02 × level)`; der Bonus ist additiv gedeckelt.
+- Prestige: fünf Äste mit drei seriellen Knoten. Basiskosten 100/1.000/10.000 INT, multipliziert mit `10^branchIndex`.
+- Datenarchiv: +10/+20/+30 % Datenproduktion. Compute-Netz: +2/+3/+5 % Compute je freigeschalteter Hardwareklasse. Analyse: +10/+20/+30 % Komponentenfunde, Stufe III garantiert mindestens einen seltenen Fund.
+- Labore: zweiter Slot, Queue mit zwei Plätzen, Autostart der Queue. Fertigung: zweiter Sockel, −15 % Upgrade-Kosten, Modulrezepte.
+- Komponenten → Module → Items: Compute-Bus und Daten-Gitter sind dauerhafte Zwischenprodukte. Item-Crafts und Rarity-Upgrades verbrauchen Daten atomar.
+- Item-Raritäten reichen Common → Uncommon → Rare → Epic → Legendary → Mythic.
+- Prestige bricht laufende Forschung und Analysen ohne Refund ab und setzt normale Forschung zurück; Komponenten, Module und Items bleiben erhalten.
