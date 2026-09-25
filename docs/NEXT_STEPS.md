@@ -148,6 +148,14 @@ Error-Text und Key-/Loggrößen; die UI bietet dann den lokalen Spielstandexport
 
 ## Übergabe 25. September 2026 – Komponenten und Analyseexport
 
-Der Arbeitsbranch `work` enthält Save v16 mit sechs typisierten Komponenten, zentralen Quellen/Rezepten, dem realen Komponentenatlas sowie dem erweiterten ZIP-Vertrag. Das Repository besitzt keinen konfigurierten Git-Remote und keinen lokalen `main`-Ref; ein Fetch oder Abgleich mit `main` war deshalb nicht möglich. Der Atlas lag bereits im Branch und wurde nicht ersetzt.
+Der Arbeitsbranch `work` enthält Save v16 mit sechs typisierten Komponenten, zentralen Quellen/Rezepten, dem realen Komponentenatlas sowie dem erweiterten ZIP-Vertrag. Der Remote ist inzwischen als `origin` konfiguriert; ein Fetch oder Abgleich mit `main` bleibt wegen `CONNECT tunnel failed, response 403` in dieser Umgebung nicht möglich. Der Atlas lag bereits im Branch und wurde nicht ersetzt.
 
 Als Nächstes sind ein gerenderter Mobile-Browsertest (Bestand, Funddarstellung, lange Rezeptzeilen, 44-px-Ziele) und der vollständige CI-Lauf nach Wiederherstellung des Registry-Zugriffs erforderlich. `npm ci` scheiterte konkret mit HTTP 403 beim Abruf von Vitest und entfernte die vorher nur teilweise vorhandenen Module. Die bestehenden historischen aktiven/passiven v7-Messungen bleiben deshalb unverändert; es wurden keine neuen Langlaufzahlen erfunden.
+
+## Übergabe 25. September 2026 – Forschung v17
+
+Branch `work` im verifizierten Repository `Kayza1708/Idle-game-` enthält fünf echte Forschungsstufen, drei konkrete Baupläne, garantierte aktive/offline Analysequellen für alle sechs Komponenten, Atlasdarstellung in Bestand/Quellen/Rezepten sowie schrittweisen Export mit Abbruch. Der vorhandene Forschungsabschluss-Fix bleibt Grundlage: Slotentfernung geschieht vor Belohnung, nun auch für Ziellevel; Phasenzähler und Exactly-once-Ereignis wurden ergänzt.
+
+`origin` zeigt auf das richtige GitHub-Repository, der Fetch bleibt aber durch `CONNECT tunnel failed, response 403` blockiert. Der lokale Atlas liegt als 1536×1024-RGBA-PNG mit sechs 512×512-Zellen vor und wurde direkt sowie als Gesamtbild geprüft. Eine gerenderte Mobile-UI-Prüfung war nicht möglich: der Offline-npm-Cache enthält TypeScript/React, aber nicht die ausführbaren Abhängigkeiten von Vitest/Rollup. Typecheck und kompilierte Kernsimulation liefen erfolgreich.
+
+Gemessene offene Balancepunkte: Nach dem frühen Spiel explodiert die Datenrate, sodass Forschungsdauer statt Datenpreis dominiert; alle drei Baupläne werden in der aktuellen festen Analysestrategie nahezu gleichzeitig nach rund 12,6–12,8 Stunden craftbar. Missionen und eigenständige passive Hardwarefunde sind noch keine implementierten Komponentenquellen. Als Nächstes sind reale Browserabnahme, vollständige CI sowie eine getrennte Mehrprestige-Kalibrierung von Datenkurve und Rezeptdifferenzierung erforderlich.

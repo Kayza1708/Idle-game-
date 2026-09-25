@@ -119,3 +119,5 @@ describe('simulation clock regressions',()=>{
     expect(restore(serialize(repaired.state),1_000).state).toEqual(repaired.state);
   });
 });
+
+it('records each repeatable research completion phase once without duplicate reward',()=>{const started=startResearchProject({...newGame(0),credits:1e6,data:1e6,researchPoints:1e6,discovered:['calculator','sbc']},'dataGeneration'),atEnd={...started,savedAt:started.researchLabs[0]!.endsAt},steps:ResearchCompletionStep[]=[];const done=settleResearchCompletions(atEnd,step=>steps.push(step));expect(done.researchLevels.dataGeneration).toBe(1);expect(steps).toEqual(['project-complete','reward-applied','unlock-applied','queue-checked','missions-achievements-ready','state-ready-for-save-render']);expect(done.telemetry.diagnostics.researchCompletionPhases['state-ready-for-save-render']).toBe(1);const again=settleResearchCompletions(done);expect(again.researchLevels.dataGeneration).toBe(1);expect(again.telemetry.recentEvents.filter(event=>event.type==='research-complete')).toHaveLength(1)});

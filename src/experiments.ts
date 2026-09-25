@@ -1,9 +1,9 @@
-import { BALANCE, ComponentId, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode } from './economy';
+import { BALANCE, ComponentId, equippedBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode } from './economy';
 import { createItem, randomItem } from './inventory';
 import { addEvent } from './telemetry';
 
 export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanalyse',architecture:'Architekturstudie',artifact:'Artefaktsuche'};
-export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0);}
+export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
 export const experimentDuration=(length:ExperimentLength)=>length==='intro'?BALANCE.introExperimentSeconds:length==='short'?BALANCE.shortExperimentSeconds:BALANCE.experimentSeconds;
 /** Split accumulated fractional rewards without losing values infinitesimally below an integer. */
 export function splitMaterialReward(value:number){
@@ -19,16 +19,16 @@ export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:
   if(!s.discovered.includes('sbc')||s.experiments.queue.length+(s.experiments.active?1:0)>=cap)return s;
   return s.experiments.active?{...s,experiments:{...s.experiments,queue:[...s.experiments.queue,type]}}:start(s,type,now,length);
 }
-export function completeExperiment(s:GameState,now:number,rng=Math.random):GameState{
+export function completeExperiment(s:GameState,now:number,rng=Math.random,mode:'active'|'offline'='active'):GameState{
   const active=s.experiments.active;if(!active||active.endsAt>now||s.experiments.completedIds.includes(active.id))return s;
   if(active.length==='intro'){
     let next=createItem({...s,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true},onboarding:{...s.onboarding,completed:[...new Set([...s.onboarding.completed,'intro-experiment'])]}},'quantum-chip','common');
     return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length});
   }
-  const reward=BALANCE.experimentRewards[active.type],scale=active.length==='short'?1/24:1,components=splitMaterialReward(reward.components*scale*(1+(hasNode(s,'artifactBus',1)?.1:0))+s.componentRemainder),research=splitMaterialReward(reward.research*scale*(1+(hasNode(s,'labLink',2)?.1:0))+s.researchRemainder),blueprints=splitMaterialReward(reward.blueprints*scale+s.blueprintRemainder);
+  const reward=BALANCE.experimentRewards[active.type],scale=active.length==='short'?1/24:1,components=splitMaterialReward(reward.components*scale*(1+(hasNode(s,'artifactBus',1)?.1:0)+s.researchLevels.materialAnalysis*BALANCE.repeatableResearch.materialAnalysis.effectPerLevel)+s.componentRemainder),research=splitMaterialReward(reward.research*scale*(1+(hasNode(s,'labLink',2)?.1:0))+s.researchRemainder),blueprints=splitMaterialReward(reward.blueprints*scale*(1+s.researchLevels.blueprintAnalysis*BALANCE.repeatableResearch.blueprintAnalysis.effectPerLevel)+s.blueprintRemainder);
   const found=componentGrant(s,active.type,components.whole);let next:GameState=grantComponents({...s,componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true}},found);
   if(reward.itemChance*scale&&rng()<reward.itemChance*scale)next=randomItem(next,rng);
   const queued=next.experiments.queue[0],type=queued??(hasNode(next,'autoRoute',3)?next.experiments.repeat??undefined:undefined),queue=next.experiments.queue.slice(queued?1:0);
   if(type)next=start({...next,experiments:{...next.experiments,queue}},type,active.endsAt,'long');
-  next=addEvent(next,'component-found',now,{source:`experiment:${active.type}`,components:JSON.stringify(found),total:components.whole});return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length});
+  next=addEvent(next,'component-found',now,{source:`experiment:${active.type}`,mode,components:JSON.stringify(found),total:components.whole});return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length,mode});
 }
