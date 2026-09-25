@@ -202,3 +202,6 @@ Werte ab `1e15` werden in der UI konsistent wissenschaftlich dargestellt.
 - Jeder neu überschrittene Hardware-Meilenstein gibt 1 Titan-Schraube; Gaming-GPU-Meilensteine geben zusätzlich 1 Laser. Damit haben die frühen Komponenten neben Analysen erreichbare Grind-Quellen.
 - Ausrüstung: Sockel 1 wird mit dem ersten Prestige dauerhaft aktiv; `Fertigung I` schaltet Sockel 2 frei. Ausrüstungsboni auf Daten und Forschung werden in die Produktionsraten eingerechnet.
 - Save-Schema 19 ergänzt den persistenten passiven Komponentenfortschritt; v18 wird explizit migriert.
+
+### Scientific-number arithmetic boundary (v19 follow-up)
+Hardware single/bulk cost math now has a normalized mantissa/exponent representation (`ScientificNumber`) before conversion into legacy UI/state numbers. This prevents overflow inside geometric cost/power calculations and gives max-buy an overflow-safe comparison path. Hardware counts are rejected if a purchase would exceed JavaScript's safe-integer range. Persisted resource balances are still numeric in save v19; therefore this is an arithmetic-boundary migration, not yet the final arbitrary-precision save schema.

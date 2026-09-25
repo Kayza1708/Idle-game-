@@ -182,3 +182,8 @@ Gemessene offene Balancepunkte: Nach dem frühen Spiel explodiert die Datenrate,
 ## 2026-09-25 – Economy completion pass
 
 Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltkreisfunde, Titan-/GPU-Laser-Meilensteinfunde, Equipment-Sockelvertrag (1. Prestige / Fertigung I), Daten-/Forschungs-Itemeffekte und Save-v19-Migration. Noch offen für die vollständige A–H-Abnahme: zentraler Präzisions-/Big-Number-Pfad, deterministische 7-/30-Tage-Balance-Simulation mit fünf Prestiges sowie finale Simulator-Exports und komplette CI-Abnahme.
+
+### Precision follow-up after v19
+- Added `ScientificNumber` mantissa/exponent arithmetic for hardware costs, geometric bulk costs and max-buy comparisons.
+- Hardware purchases now reject unsafe integer counts instead of silently rounding them.
+- Remaining precision work: migrate persisted Credits/Data/INT and telemetry resource snapshots away from raw `number` before claiming full arbitrary-precision economy support.

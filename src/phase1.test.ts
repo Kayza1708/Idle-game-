@@ -32,3 +32,13 @@ it('keeps huge economy math finite for costs, bulk buys and credit accumulation'
  expect(Number.isFinite(hardwareCost('matrioshka',500,newGame(0)))).toBe(true);
  expect(Number.isFinite(hardwareBulkCost('matrioshka',500,500,newGame(0)))).toBe(true);
 });
+
+it('uses scientific arithmetic for extreme hardware costs without unsafe counts',async()=>{
+ const {hardwareCostScientific,hardwareBulkCostScientific,maxAffordable}=await import('./economy');
+ const single=hardwareCostScientific('matrioshka',10_000,newGame(0));
+ const bulk=hardwareBulkCostScientific('matrioshka',10_000,500,newGame(0));
+ expect(single.exponent).toBeGreaterThan(300);
+ expect(bulk.compare(single)).toBeGreaterThan(0);
+ expect(single.toNumber()).toBe((await import('./economy')).MAX_ECONOMY_VALUE);
+ expect(maxAffordable('calculator',Number.MAX_SAFE_INTEGER,1e300,newGame(0))).toBe(0);
+});
