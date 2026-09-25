@@ -253,3 +253,11 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Spielerprofil mit Collection, Season-Historie, Stats, Inbox/Patch Notes und Settings-Grundfläche.
 - [x] Persistenz/Migration auf Save v22 und zentrale Inbox-/Quest-/Season-Badges.
 - [ ] Premium-Track bleibt absichtlich deaktiviert, bis native Käufe/Server-Verifikation separat beauftragt werden.
+
+### Retention Progression v23
+- [x] Hardware-Mastery nach 500 für alle 15 Klassen mit persistenten XP und Compute-Boni.
+- [x] Challenge-Star-System mit langfristigen Account-Zielen und einmaligen Claims.
+- [x] Collection um Hardware, Komponenten, Items, Artifacts und Mastery erweitert.
+- [x] Tiefe Prestige-Tiers an Achievement Points, Mastery und Challenge Stars gekoppelt.
+- [ ] Echte regelverändernde Challenge-Runs (No Tap / No Items / eingeschränkte Hardware) als nächster Ausbau.
+- [ ] 90-/180-Tage-Simulator kalibriert die neuen Gates und Mastery-Kurven.

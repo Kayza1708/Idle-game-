@@ -233,3 +233,8 @@ Progression V2 erweitert den Content-Horizont: 19 langfristige Achievement-Famil
 ## Nach Progression V2 · Season/Profile
 - Mission Hub, 30-Tage-Season und Profilgrundsystem sind implementiert. Nächster Content-Block: Challenges, Collection-Ausbau und Hardware-Mastery-Level nach 500.
 - Vor Merge auf einem Rechner mit installierten Dependencies `npm run typecheck`, `npm test` und `npm run build` ausführen; diese Umgebung enthält kein `node_modules`.
+
+## Nach Retention v23
+- Regelverändernde Challenge-Runs auf dem neuen Challenge-Star-Ledger aufbauen.
+- 90- und 180-Tage-Simulation mit Mastery, Challenge Stars, Season-Historie und Prestige-Gates erweitern.
+- Danach Singularity-Layer anhand gemessener Langzeitkurven festlegen; nicht vor der Simulation balancen.

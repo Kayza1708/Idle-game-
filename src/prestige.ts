@@ -1,11 +1,13 @@
 import { BALANCE, newGame, BreakthroughId, canPrestige, GameState, newINT, PrestigeUpgradeId, prestigeUpgradeCost, upgradeLevel, exactEconomyValue, hasNode, MAX_ECONOMY_VALUE } from './economy';
 import {ScientificNumber} from './scientificNumber';
 import { addEvent, recordPrestige } from './telemetry';
+import {prestigeGate} from './retention';
 
 export const prestigeUpgrades=BALANCE.prestigeUpgrades;
 export function buyNode(s:GameState,id:PrestigeUpgradeId,_legacyTier?:number){
  const level=upgradeLevel(s,id),definition=BALANCE.prestigeUpgrades[id],cost=prestigeUpgradeCost(id,level);
- if(level||s.unspentINT<cost||!definition.requires.every(required=>upgradeLevel(s,required as PrestigeUpgradeId)>=1))return s;
+ const gate=prestigeGate(s,definition.depth);
+ if(level||s.unspentINT<cost||(gate&&!gate.ok)||!definition.requires.every(required=>upgradeLevel(s,required as PrestigeUpgradeId)>=1))return s;
  const unspent=exactEconomyValue(s,'unspentINT').subtract(ScientificNumber.from(cost)),spent=exactEconomyValue(s,'spentINT').add(ScientificNumber.from(cost));
  return addEvent({...s,unspentINT:unspent.toNumber(MAX_ECONOMY_VALUE),spentINT:spent.toNumber(MAX_ECONOMY_VALUE),exactEconomy:{...s.exactEconomy,unspentINT:unspent.toJSON(),spentINT:spent.toJSON()},nodes:[...s.nodes,id]},'prestige-node-buy',s.savedAt,{id,cost,branch:definition.branch,depth:definition.depth,effect:definition.effect});
 }

@@ -249,3 +249,9 @@ The authoritative large-value resource ledger remains serialized as normalized m
 - Eine Neural Season dauert 30 Tage, besitzt 50 Level à 1.000 XP und erhält XP aus Missions-Claims/Periodenboni. Rewards sind Gems, garantierte Komponenten und auf Level 50 ein permanentes Season-Core-Artifact.
 - Season-Artifacts, abgeschlossene Seasons, Inbox-Lesestatus und Profilname sind permanent im Save gespeichert und überstehen Prestige.
 - Profilansicht bündelt Collection, Season-Historie, Lifetime-Statistiken, Inbox/Patch Notes und Einstellungen. Keine neue Season-Währung wird eingeführt.
+
+## Retention progression v23
+- Jede der 15 Hardwareklassen wechselt ab 500 Besitz in permanente Hardware-Mastery. Käufe oberhalb 500 erzeugen klassenspezifische Mastery-XP; `floor(sqrt(xp / 250))` bestimmt das Level. Jedes Level gibt +1 % Klassen-Compute bis maximal +50 %.
+- Challenges sind permanente Account-Ziele mit Challenge Stars. Stars werden nur einmal beansprucht und bleiben über Prestige erhalten.
+- Tiefe Prestige-Knoten erhalten zusätzliche Account-Gates: Tiefe 5 = 100 Achievement Points, Tiefe 6 = 10 Gesamt-Mastery, Tiefe 7 = 10 Challenge Stars, Tiefe 8 = 500 AP + 50 Mastery + 25 Stars.
+- Collection/Profil zeigt Hardware-, Komponenten-, Item-, Season- und Artifact-Fortschritt sowie alle 15 Mastery-Level.
