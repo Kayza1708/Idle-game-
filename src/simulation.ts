@@ -39,6 +39,14 @@ function autobuy(state:GameState) {
  * writes the mapped array to the stale object (the assignment target is evaluated
  * before the callback). The completed lab then survives and is completed forever.
  */
+/** Starts the oldest queued project as soon as Labore III can actually pay and a lab is free. */
+export function startQueuedResearchIfAffordable(state:GameState):GameState {
+  if(!hasNode(state,'labs3',1)||state.researchQueue.length===0)return state;
+  const queued=state.researchQueue[0],started=startResearchProject(state,queued);
+  const didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!state.researchLabs.some(lab=>lab?.id===queued);
+  return didStart?{...started,researchQueue:started.researchQueue.slice(1)}:state;
+}
+
 export function settleResearchCompletions(state:GameState,trace:((step:ResearchCompletionStep)=>void)=()=>{}):GameState {
   const finished=state.researchLabs.filter((lab):lab is NonNullable<typeof lab>=>!!lab&&lab.endsAt<=state.savedAt+.1);
   if(!finished.length)return state;
@@ -53,10 +61,7 @@ export function settleResearchCompletions(state:GameState,trace:((step:ResearchC
     next=addEvent(next,'research-complete',next.savedAt,{id:lab.id,level:lab.level,dataCost:lab.dataCost,durationSeconds:lab.durationSeconds,startedAt:lab.startedAt,endsAt:lab.endsAt,actualDurationSeconds:(lab.endsAt-lab.startedAt)/1000});
   }
   mark('queue-checked');
-  if(next.researchQueue.length>0&&hasNode(next,'labs3',1)){
-    const queued=next.researchQueue[0],started=startResearchProject(next,queued);
-    const didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!next.researchLabs.some(lab=>lab?.id===queued);next=didStart?{...started,researchQueue:started.researchQueue.slice(1)}:started;
-  }
+  next=startQueuedResearchIfAffordable(next);
   mark('missions-achievements-ready');
   mark('state-ready-for-save-render');
   return {...next,telemetry:{...next.telemetry,diagnostics:{...next.telemetry.diagnostics,researchCompletionPhases:phases}}};
@@ -77,7 +82,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     let slice=Math.min(left,30,toLevel,toAuto,toExperiment,toResearch,toPeriod,toBoost);
     if(slice<1e-8) slice=Math.min(left,1e-6);
     const credits=creditRate(next.hardware,next.level,next,now)*slice,data=dataRate(next)*slice,research=researchRate(next,now)*slice;if(![slice,credits,data,research,rate].every(Number.isFinite))return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};generatedCredits+=credits;generatedData+=data;generatedResearch+=research;
-    next=addData(addCredits(next,credits),data);next.researchPoints=safeEconomyAdd(next.researchPoints,research);const circuitProgress=next.passiveCircuitProgress+passiveCircuitRate(next)*slice,circuits=Math.floor(circuitProgress);next={...next,passiveCircuitProgress:circuitProgress-circuits};if(circuits>0)next=addEvent(grantComponents(next,{circuits}),'component-found',now,{source:'passive-hardware',mode:active?'active':'offline',component:'circuits',total:circuits});const activeLabs=next.researchLabs.filter(Boolean).length;next.lifetime.labSeconds+=activeLabs*slice;if(next.labBoostUntil>now)next.researchLabs=next.researchLabs.map(lab=>lab?{...lab,endsAt:lab.endsAt-slice*1000}:null);
+    next=startQueuedResearchIfAffordable(addData(addCredits(next,credits),data));next.researchPoints=safeEconomyAdd(next.researchPoints,research);const circuitProgress=next.passiveCircuitProgress+passiveCircuitRate(next)*slice,circuits=Math.floor(circuitProgress);next={...next,passiveCircuitProgress:circuitProgress-circuits};if(circuits>0)next=addEvent(grantComponents(next,{circuits}),'component-found',now,{source:'passive-hardware',mode:active?'active':'offline',component:'circuits',total:circuits});const activeLabs=next.researchLabs.filter(Boolean).length;next.lifetime.labSeconds+=activeLabs*slice;if(next.labBoostUntil>now)next.researchLabs=next.researchLabs.map(lab=>lab?{...lab,endsAt:lab.endsAt-slice*1000}:null);
     const trainingWork=rate*slice;next.training+=trainingWork;if(next.activeTraining){const key=active?'onlineWork':'offlineWork';next.activeTraining={...next.activeTraining,[key]:(next.activeTraining[key]??0)+trainingWork};} next.savedAt+=slice*1000;next=rollPeriods(next,next.savedAt); next.automation.elapsed+=slice; left-=slice;
     if(next.activeTraining&&next.training+1e-7>=goal){const completed=next.activeTraining,track=completed.track,actualDuration=completed.startedAt===undefined?null:(next.savedAt-completed.startedAt)/1000;next.training=0;next.activeTraining=null;next.level++;next.lifetime.trainingCompleted++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level,creditCost:completed.creditCost,dataCost:completed.dataCost??0,baseDuration:completed.baseDuration??completed.workRequired,effectiveRate:completed.startingRate??0,expectedDuration:(completed.baseDuration??completed.workRequired)/(completed.startingRate??1),actualDuration,onlineWork:completed.onlineWork??0,offlineWork:completed.offlineWork??0});}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}

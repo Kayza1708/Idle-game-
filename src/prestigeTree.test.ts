@@ -11,3 +11,10 @@ describe('five-branch prestige tree',()=>{
 });
 
 it('updates exact INT ledgers when a prestige node is purchased',async()=>{const {ScientificNumber}=await import('./scientificNumber');let s={...newGame(0),unspentINT:1000,exactEconomy:{...newGame(0).exactEconomy,unspentINT:ScientificNumber.from(1000).toJSON()}};const next=buyNode(s,'dataArchive1');expect(next.unspentINT).toBe(900);expect(ScientificNumber.fromJSON(next.exactEconomy.unspentINT).toNumber()).toBe(900);expect(ScientificNumber.fromJSON(next.exactEconomy.spentINT).toNumber()).toBe(100)});
+
+it('Labore III retries an initially unaffordable queued project after data production makes it payable',async()=>{
+ const {advance}=await import('./simulation');
+ const base=newGame(0),s={...base,nodes:['labs1','labs2','labs3'],discovered:['calculator','sbc'] as import('./economy').HardwareId[],hardwareCounts:{...base.hardwareCounts,calculator:10,sbc:10},hardware:20,data:0,researchQueue:['dataGeneration' as const]};
+ const next=advance(s,3600).state;
+ expect(next.researchQueue).toEqual([]);expect(next.researchLabs.some(lab=>lab?.id==='dataGeneration')).toBe(true);
+});

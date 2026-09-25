@@ -204,3 +204,7 @@ Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltk
 - [x] Prestige und INT-Knotenkäufe aktualisieren die Präzisionsspur atomar.
 - [x] Save v19 → v20 migriert die Präzisionswerte; Export schreibt sie anonym mit aus.
 - [ ] UI und Telemetrie verwenden weiterhin endliche `number`-Projektionen für Darstellung/Diagramme; diese sind bewusst nicht die autoritative Präzisionsquelle.
+
+## A–H-Abnahmefortschritt v20.1
+
+Dieser Durchgang schließt drei zuvor nur teilweise erfüllte Punkte: Labore III startet eine wegen Datenmangel wartende Queue nun später automatisch; die UI zeigt den letzten real verbuchten Analysefund; und der Balance-Export trennt Analysen, Komponenten, Crafting/Itemeffekte und Prestige-Knotenkäufe in eigene CSVs. Die zugehörigen Regressionstests wurden ergänzt. Offen bleiben die vollständige npm/Vitest-/Vite-Abnahme in einer Umgebung mit installierten Dependencies sowie eine erneute dokumentierte Langzeitsimulation auf genau diesem Stand.

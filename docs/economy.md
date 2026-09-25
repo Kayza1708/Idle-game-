@@ -216,3 +216,10 @@ Credit-/Datenkosten für Training, Forschung, Analysen, Hardware und Fertigung l
 
 ### Save v20: persistente Präzisionsspur
 Credits, Daten sowie die Prestige-/INT-Summen besitzen zusätzlich zu den UI-kompatiblen `number`-Projektionen eine serialisierte `{m,e}`-Darstellung (`exactEconomy`). Alle zentralen Credit-/Daten-Transaktionen und INT-Käufe/Prestige-Buchungen aktualisieren diese Präzisionsspur. Save v19 wird beim Laden verlustfrei aus den vorhandenen endlichen Werten nach v20 migriert. Balance-Exporte enthalten die exakten Mantissen/Exponenten zusätzlich zu den lesbaren Projektionen.
+
+## A–H-Abnahmeblock v20.1
+
+- **Labore III ist jetzt wirklich automatisch:** eine vorgemerkte Forschung wird nicht nur direkt nach einem Forschungsabschluss geprüft, sondern bei jedem Simulationsschritt erneut. War sie beim Vormerken/Abschluss wegen Datenmangel unbezahlbar, startet sie exakt dann, wenn Datenbestand und freier Slot reichen.
+- Die Analyseansicht zeigt den letzten tatsächlich verbuchten Komponentenfund aus dem Abschlussereignis; Startkosten, Restzeit und laufender Status bleiben sichtbar.
+- Der lokale Balance-Export enthält zusätzlich `analyses.csv`, `components.csv`, `crafting.csv` und `prestige-nodes.csv`. Damit sind Analysefunde, Komponentenquellen/-mengen, Herstellung/Upgrades/Itemeffekte und tatsächliche INT-Knotenkäufe getrennt auswertbar.
+- Prestige-Knotenkäufe erzeugen dafür ein lokales `prestige-node-buy`-Ereignis mit Kosten, Ast, Tiefe und Effekt. Es findet kein Upload statt.

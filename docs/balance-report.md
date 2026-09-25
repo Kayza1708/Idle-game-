@@ -126,3 +126,15 @@ Der bestehende Simulator wurde um `simulateBalance()` erweitert; er verwendet di
 Hardware-Erstkäufe im aktiven 30-Tage-Run: Taschenrechner 5 min, SBC 10 min, PC 15 min, Gaming-GPU 20 min, Workstation 25 min, Server 35 min, GPU-Farm 45 min, Campus 1 h 30 min, Cloud 4 h 20 min, Flüssigkeitsanlage 4 h 40 min, Untersee 5 h 15 min, Orbital 12 h 30 min, Lunar 33 h 25 min, Dyson 6 d 14 h 50 min. Matrioshka wurde innerhalb von 30 Tagen entdeckt, aber in der protokollierten Erstkaufkarte nicht vor Simulationsende gekauft. Keine Klasse wurde durch den Freischaltpfad übersprungen.
 
 Hinweis: Die fünf Prestige-Zeitpunkte sind sehr früh. Da der Auftrag keine Zielzeit für Prestige vorgibt, wurde der verbindliche Prestige-Anspruch nicht willkürlich verschoben; der Bericht macht dieses Messergebnis stattdessen explizit sichtbar.
+
+## Deterministische A–H-Abnahme – v20.1, Seed 1708
+
+Der bestehende Simulator wurde auf dem aktuellen Economy-Code kompiliert und mit 300-Sekunden-Entscheidungsschritten ausgeführt. Die Simulation verwendet echte Käufe, Forschung, Analysen und Prestige-Resetregeln; `invalid=false` in allen drei Läufen.
+
+| Lauf | erste Forschung | erstes Item | Prestige 1 | Prestige 2 | Prestige 3 | Prestige 4 | Prestige 5 | Hardwareklassen |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 7 Tage aktiv | 10 min | 50 h 45 min | 50 min | 1 h 30 min | 2 h 15 min | 2 h 50 min | 3 h 35 min | 14/15 |
+| 7 Tage passiv | 10 min | 50 h 20 min | 1 h | 1 h 45 min | 2 h 35 min | 3 h 25 min | 4 h 10 min | 14/15 |
+| 30 Tage aktiv | 10 min | 50 h 45 min | 50 min | 1 h 30 min | 2 h 15 min | 2 h 50 min | 3 h 35 min | 15/15 |
+
+Die Erstfreischaltungen der Hardwareklassen waren in allen Läufen streng in Klassenreihenfolge; es wurde keine Klasse übersprungen. Im 30-Tage-Aktivlauf wurden alle 15 Klassen erreicht. Die ersten fünf Prestiges liegen weiterhin sehr früh. Das ist jetzt als konkrete Balanceauffälligkeit dokumentiert; der Auftrag definiert keinen Zielkorridor, deshalb wurde die INT-Kurve nicht willkürlich verschoben.
