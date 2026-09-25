@@ -270,3 +270,9 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Save v24 migriert v23 um Challenge-Run-State.
 - [x] Bestehenden Simulator um 7/30/90/180-Tage-Suite erweitert und Langlauf-Telemetrie kompaktiert.
 - [ ] Balanceziel für Singularity erst nach reproduzierbarer 180-Tage-Abnahme festlegen.
+
+## Retro UI & Localization Foundation v25
+- Einheitliche Retro-/Pixel-UI-Tokens, kantige Panels/Buttons, Pixel-Icon-Komponente und crisp-pixel Asset-Regel eingeführt.
+- Mission Hub, Season und Profil nutzen die neue Retro-Oberfläche; Claim-/Inbox-Badges bleiben zentral sichtbar.
+- Lokalisierungsgrundlage für EN/DE/ES/FR/PT/IT/PL mit englischem Fallback, persistenter Spracheinstellung und lokalisiertem Zahlenformat.
+- Save v25 migriert bestehende v24-Settings verlustfrei. Finale Hardware-/Komponenten-/Artifact-Sprites bleiben der nächste Asset-Pass.

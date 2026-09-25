@@ -94,3 +94,5 @@ describe('save v21 progression migration',()=>{
 });
 
 describe('v24 retention migration',()=>{it('adds challenge run persistence to v23 saves',()=>{const old=newGame(1000) as any;delete old.retention.activeRun;delete old.retention.runCompletions;delete old.retention.runBestSeconds;const r=restore(JSON.stringify({version:23,state:old}),2000);expect(r.error).toBeUndefined();expect(r.migrated).toBe(true);expect(r.state.retention.activeRun).toBeNull();expect(r.state.retention.runCompletions).toEqual({});expect(r.state.retention.runBestSeconds).toEqual({});});});
+
+describe('v25 localization migration',()=>{it('adds language and number format to v24 saves without losing settings',()=>{const old=newGame(1000) as any;old.settings={effects:false,buyMode:10,musicEnabled:true,musicVolume:.4,sfxMuted:true,sfxVolume:.2};const r=restore(JSON.stringify({version:24,state:old}),2000);expect(r.error).toBeUndefined();expect(r.migrated).toBe(true);expect(r.state.settings).toMatchObject({effects:false,buyMode:10,language:'de',numberFormat:'auto'});});});

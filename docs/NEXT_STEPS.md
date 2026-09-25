@@ -242,3 +242,11 @@ Progression V2 erweitert den Content-Horizont: 19 langfristige Achievement-Famil
 ## Retention v24 – aktueller Stand
 
 Challenge-Runs sind jetzt echte modifizierte Runs statt reine Lifetime-Checklisten. Fünf Regeln greifen direkt in Tap-, Item-, Hardwarekosten/-zugang- und Datenpfade ein; Abschluss bei 1 INT vergibt permanente Stars und speichert Clears/Bestzeit. Der vorhandene Simulator enthält eine deterministische 7/30/90/180-Tage-Suite. Ein tatsächlich ausgeführter 90-Tage-Aktivlauf mit Seed 1708 blieb endlich (`invalid=false`), erreichte alle 15 Hardwareklassen und 132 Prestiges; gleichzeitig zeigte er 0 Mastery-XP, 0 Achievement Points und 0 Challenge Stars, weil die bisherige Simulatorstrategie sofort bei jedem verfügbaren INT prestiged und Meta-Rewards nicht aktiv claimed. Das ist ein gemessener Balance-/Bot-Policy-Befund und muss vor einer belastbaren Singularity-Zeitmarke korrigiert werden. Der 180-Tage-Lauf überschritt in dieser Arbeitsumgebung das 45-Sekunden-Ausführungsfenster und wird daher nicht als erfolgreich gemessen behauptet.
+
+## Retro UI / Localization v25
+- [x] Retro-Typografie-Stack und wiederverwendbare Pixel-UI-Tokens für Buttons, Panels, Tabs, Badges und Progression.
+- [x] Wiederverwendbares Pixel-Icon-System als Grundlage für Quests, Ressourcen, Season, Challenges und Profil.
+- [x] EN/DE/ES/FR/PT/IT/PL-Sprachwahl im Profil; Sprache und Zahlenformat werden gespeichert.
+- [x] Save-v24→v25-Migration und Lokalisierungs-/Format-Regressionstests.
+- [ ] Alle historischen Gameplay-Texte schrittweise aus Komponenten in Translation Keys verschieben; Missionen fallen außerhalb DE vorerst auf vorhandenes Englisch zurück.
+- [ ] Finales Pixel-Asset-Kit: 15 Hardware-Sprites, 6 Komponenten, Item/Module, Challenge-Icons, Season-Key-Art und einzigartige Artifact-Sprites.
