@@ -280,3 +280,10 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 
 ## UI stability v26
 Season/Mission Hub and Prestige received crash fixes after browser playtesting. The obsolete introduction experiment was removed from onboarding, and the player profile modal received a responsive layout pass. Deep prestige nodes reuse deterministic atlas cells until unique sprites are produced.
+
+## Quest-, Season-Pass- und Profil-UI — Erledigt (25. September 2026)
+
+- [x] Der Season Pass zeigt Saisonname, Level, XP zum nächsten Level sowie eine horizontal touchbedienbare kostenlose und klar gesperrte Premium-Spur mit lokaler Pixel-Art.
+- [x] Daily-, Weekly- und Monthly-Quests besitzen Tabs, Fortschrittsbalken, sichtbare Belohnungen, Status und eine hervorgehobene Abholaktion.
+- [x] Das Profil bleibt durch begrenzte Grid-Kinder, viewportgebundene Breite, Safe-Area-Abstände und internen Inhalts-Scroll auf Mobil- und Desktopbreiten vollständig erreichbar.
+- [x] Season-Status, Abholbarkeit, Sperre und einmalige Abholung sind durch Vitest-Fälle abgedeckt.
