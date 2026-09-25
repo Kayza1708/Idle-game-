@@ -276,3 +276,7 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - Mission Hub, Season und Profil nutzen die neue Retro-Oberfläche; Claim-/Inbox-Badges bleiben zentral sichtbar.
 - Lokalisierungsgrundlage für EN/DE/ES/FR/PT/IT/PL mit englischem Fallback, persistenter Spracheinstellung und lokalisiertem Zahlenformat.
 - Save v25 migriert bestehende v24-Settings verlustfrei. Finale Hardware-/Komponenten-/Artifact-Sprites bleiben der nächste Asset-Pass.
+
+
+## UI stability v26
+Season/Mission Hub and Prestige received crash fixes after browser playtesting. The obsolete introduction experiment was removed from onboarding, and the player profile modal received a responsive layout pass. Deep prestige nodes reuse deterministic atlas cells until unique sprites are produced.

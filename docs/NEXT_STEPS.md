@@ -250,3 +250,10 @@ Challenge-Runs sind jetzt echte modifizierte Runs statt reine Lifetime-Checklist
 - [x] Save-v24→v25-Migration und Lokalisierungs-/Format-Regressionstests.
 - [ ] Alle historischen Gameplay-Texte schrittweise aus Komponenten in Translation Keys verschieben; Missionen fallen außerhalb DE vorerst auf vorhandenes Englisch zurück.
 - [ ] Finales Pixel-Asset-Kit: 15 Hardware-Sprites, 6 Komponenten, Item/Module, Challenge-Icons, Season-Key-Art und einzigartige Artifact-Sprites.
+
+
+## UI stability v26
+- [x] Removed the obsolete introduction-experiment onboarding gate; onboarding now points to the first real research completion.
+- [x] Fixed Mission Hub/Season rendering crash caused by translation helper shadowing.
+- [x] Prestige art now handles all deep prestige nodes instead of crashing on atlas entries that only cover the original 15 nodes.
+- [x] Reworked profile modal sizing, tab navigation and settings layout for desktop/mobile.
