@@ -1,4 +1,4 @@
-import { BALANCE, addCredits,addData, GameState, trainingRate, creditRate, dataRate, researchRate, researchLabCount, hardwareCost, classCompute, buyHardwareClass, maxAffordable, hasNode, isRepeatableResearch, milestoneBonus, startResearchProject,computeRate,usersRate,newINT,newGame,tapCredits,startTraining,passiveCircuitRate,grantComponents,safeEconomyAdd } from './economy';
+import { BALANCE, addCredits,addData, GameState, trainingRate, creditRate, dataRate, researchRate, researchLabCount, hardwareCost, classCompute, buyHardwareClass, maxAffordable, hasNode, isRepeatableResearch, milestoneBonus, startResearchProject,computeRate,usersRate,newINT,newGame,tapCredits,startTraining,passiveCircuitRate,grantComponents,safeEconomyAdd,hardwareIds,hardwareAutobuyerUnlocked } from './economy';
 import { completeExperiment, queueExperiment } from './experiments';
 import { rollPeriods } from './missions';
 import { updateOnboarding } from './onboarding';
@@ -25,10 +25,13 @@ function cloneForSimulation(state:GameState):GameState {
 }
 
 function autobuy(state:GameState) {
-  if ((!hasNode(state,'shoppingAgent',1)&&!milestoneBonus(state,'automation')) || !state.automation.enabled) return state;
-  const planned=hasNode(state,'shoppingPlan',1),targets=planned?(state.automation.target?[state.automation.target]:state.discovered):(['calculator'] as const),candidates=targets.map(id=>{const cost=hardwareCost(id,state.hardwareCounts[id],state);const gain=classCompute(state,id,state.hardwareCounts[id]+1)-classCompute(state,id);return{id,cost,score:gain/cost}}).sort((a,b)=>b.score-a.score);
-  const pick=candidates.find(x=>state.credits-x.cost>=state.automation.reserve);
-  return pick?buyHardwareClass(state,pick.id,1):state;
+  let next=state;
+  const masteryTargets=hardwareIds.filter(id=>hardwareAutobuyerUnlocked(next,id)&&next.hardwareAutoBuyers[id]);
+  for(const id of masteryTargets){const cost=hardwareCost(id,next.hardwareCounts[id],next);if(next.credits-cost>=next.automation.reserve)next=buyHardwareClass(next,id,1);}
+  if ((!hasNode(next,'shoppingAgent',1)&&!milestoneBonus(next,'automation')) || !next.automation.enabled) return next;
+  const planned=hasNode(next,'shoppingPlan',1),targets=planned?(next.automation.target?[next.automation.target]:next.discovered):(['calculator'] as const),candidates=targets.map(id=>{const cost=hardwareCost(id,next.hardwareCounts[id],next);const gain=classCompute(next,id,next.hardwareCounts[id]+1)-classCompute(next,id);return{id,cost,score:gain/cost}}).sort((a,b)=>b.score-a.score);
+  const pick=candidates.find(x=>next.credits-x.cost>=next.automation.reserve);
+  return pick?buyHardwareClass(next,pick.id,1):next;
 }
 
 /**
@@ -74,7 +77,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
   while(left>1e-9&&iterations++<200_000) {
     const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;
     const toLevel=next.activeTraining?(goal-next.training)/rate:Infinity;
-    const toAuto=next.automation.enabled?BALANCE.simulationStep-next.automation.elapsed:Infinity;
+    const autoActive=next.automation.enabled||Object.values(next.hardwareAutoBuyers).some(Boolean);const autoInterval=Object.values(next.hardwareAutoBuyers).some(Boolean)?BALANCE.hardwareAutobuyerInterval:BALANCE.simulationStep;const toAuto=autoActive?autoInterval-next.automation.elapsed:Infinity;
     const toExperiment=next.experiments.active?Math.max(0,(next.experiments.active.endsAt-now)/1000):Infinity;
     const toResearch=Math.min(...next.researchLabs.map(lab=>lab?Math.max(0,(lab.endsAt-now)/1000):Infinity));
     const toPeriod=Math.min(...(['daily','weekly','monthly'] as const).map(kind=>Math.max(0,(next.missions[kind].endsAt-now)/1000)));
@@ -85,7 +88,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     next=startQueuedResearchIfAffordable(addData(addCredits(next,credits),data));next.researchPoints=safeEconomyAdd(next.researchPoints,research);const circuitProgress=next.passiveCircuitProgress+passiveCircuitRate(next)*slice,circuits=Math.floor(circuitProgress);next={...next,passiveCircuitProgress:circuitProgress-circuits};if(circuits>0)next=addEvent(grantComponents(next,{circuits}),'component-found',now,{source:'passive-hardware',mode:active?'active':'offline',component:'circuits',total:circuits});const activeLabs=next.researchLabs.filter(Boolean).length;next.lifetime.labSeconds+=activeLabs*slice;if(next.labBoostUntil>now)next.researchLabs=next.researchLabs.map(lab=>lab?{...lab,endsAt:lab.endsAt-slice*1000}:null);
     const trainingWork=rate*slice;next.training+=trainingWork;if(next.activeTraining){const key=active?'onlineWork':'offlineWork';next.activeTraining={...next.activeTraining,[key]:(next.activeTraining[key]??0)+trainingWork};} next.savedAt+=slice*1000;next=rollPeriods(next,next.savedAt); next.automation.elapsed+=slice; left-=slice;
     if(next.activeTraining&&next.training+1e-7>=goal){const completed=next.activeTraining,track=completed.track,actualDuration=completed.startedAt===undefined?null:(next.savedAt-completed.startedAt)/1000;next.training=0;next.activeTraining=null;next.level++;next.lifetime.trainingCompleted++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level,creditCost:completed.creditCost,dataCost:completed.dataCost??0,baseDuration:completed.baseDuration??completed.workRequired,effectiveRate:completed.startingRate??0,expectedDuration:(completed.baseDuration??completed.workRequired)/(completed.startingRate??1),actualDuration,onlineWork:completed.onlineWork??0,offlineWork:completed.offlineWork??0});}
-    if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
+    if(autoActive&&next.automation.elapsed+1e-7>=autoInterval){next.automation.elapsed%=autoInterval;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng,active?'active':'offline');if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
     next=settleResearchCompletions(next);
     if(next.researchQueue.length>0&&hasNode(next,'labs3',1)&&next.researchLabs.some((lab,index)=>index<researchLabCount(next)&&!lab)){const queued=next.researchQueue[0],started=startResearchProject(next,queued),didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!next.researchLabs.some(lab=>lab?.id===queued);next=didStart?{...started,researchQueue:started.researchQueue.slice(1)}:started;}
@@ -129,6 +132,7 @@ export function simulateBalance(days:number,active:boolean,seed=1708,prestigeLim
   for(const id of [...state.discovered].reverse()){const amount=maxAffordable(id,state.hardwareCounts[id],state.credits,state);if(amount>0){const before=state.hardwareCounts[id];state=buyHardwareClass(state,id,amount);if(state.hardwareCounts[id]>before&&hardware[id]===undefined)hardware[id]=elapsed;}}
   if(firstItem===null&&state.inventory.length)firstItem=elapsed;
   if(newINT(state)>=1&&prestiges.length<prestigeLimit){const {prestige}=requirePrestigeForSimulation();state=prestige(state);prestiges.push(elapsed);if(firstPrestige===null)firstPrestige=elapsed;}
+  if(state.telemetry.snapshots.length>24)state={...state,telemetry:{...state.telemetry,snapshots:state.telemetry.snapshots.slice(-24)}};
   const numeric=[state.credits,state.data,state.researchPoints,state.lifetimeEligibleCredits,computeRate(state.hardware,state),creditRate(state.hardware,state.level,state,state.savedAt),dataRate(state)];if(!numeric.every(Number.isFinite)){invalid=true;break;}
  }
  return{days,active,prestiges:prestiges.length,final:state,milestones:{firstResearch,firstItem,firstPrestige,prestiges,hardware},invalid};
@@ -136,3 +140,6 @@ export function simulateBalance(days:number,active:boolean,seed=1708,prestigeLim
 // Kept behind a tiny indirection so production simulation remains tree-shakeable in the UI bundle.
 import { prestige as simulationPrestige } from './prestige';
 function requirePrestigeForSimulation(){return{prestige:simulationPrestige};}
+
+export type LongTermBalanceSuite={seed:number;runs:BalanceSimulationResult[]};
+export function simulateLongTermSuite(seed=1708):LongTermBalanceSuite{return{seed,runs:[7,30,90,180].flatMap(days=>[simulateBalance(days,true,seed),simulateBalance(days,false,seed)])};}

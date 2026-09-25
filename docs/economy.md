@@ -235,3 +235,29 @@ Credits, Daten sowie die Prestige-/INT-Summen besitzen zusätzlich zu den UI-kom
 The binding economy contract is now represented in code rather than only in roadmap notes: 15 hardware classes each retain milestones 10/25/50/100/250/500; component source labels match their implemented passive/milestone/analysis paths; prestige reset/retention has an explicit regression; and every positive component ingredient used by an item recipe maps to an implemented source. Balance export also records upgrade component consumption explicitly (`upgradeComponent`, `upgradeComponentCost`) instead of only the data cost.
 
 The authoritative large-value resource ledger remains serialized as normalized mantissa/exponent values while finite `number` projections are retained for rendering and charts. This is intentional: JavaScript Number is not integer-exact beyond `2^53 - 1`, so gameplay-critical balances and max-buy decisions must not depend on the projection.
+
+## Progression V2 (Save v21)
+- Achievement-Familien sind langfristige, dynamische Karten mit bis zu zehn Stufen. Eine abgeschlossene Stufe wird nicht als neue Karte dupliziert; dieselbe Karte zeigt das nächste Ziel und übernimmt den Lifetime-Fortschritt.
+- Missionsumfang: 6 Daily, 12 Weekly, 30 Monthly. Der Generator verwendet freigeschaltete Metriken und progressive Wiederholungen derselben Quest-Familie (Stufe II+ mit höherem Ziel), statt 48 isolierte Mechaniken zu benötigen.
+- Hardware-Mastery: jede der 15 Klassen behält die Schwellen 10/25/50/100/250/500. Ab 100 Einheiten wird der individuelle Autobuyer dieser Klasse dauerhaft nutzbar; er kauft alle 5 Sekunden und respektiert die globale Credit-Reserve.
+- Der INT-Baum wurde von 15 auf 40 Knoten erweitert. Die bestehenden fünf Äste bleiben das Fundament und reichen nun bis Tiefe 8. Späte Knoten skalieren Daten, Compute, Analyse- und Forschungsgeschwindigkeit sowie Itemeffekte; Labore V lässt die Forschungsqueue Prestige überleben und Fertigung V öffnet den dritten Item-Sockel.
+- Die neuen Tiefen kosten bis 1e19 INT und sind bewusst als Monatsziele angelegt. Ein zweiter Prestige-Layer (Singularity/Axiom) bleibt eine spätere Ebene und ist in v21 noch nicht implementiert.
+- Der alte einmalige ×2-Klassenkauf bei 15 Einheiten wird in v21 nicht mehr angeboten. Bestehende Legacy-Saves behalten bereits gekaufte Klassen-Upgrades zur Rückwärtskompatibilität; neue Progression läuft ausschließlich über 10/25/50/100/250/500-Mastery.
+
+## Mission Hub, Neural Seasons und Profil (v22)
+- Home/Werkstatt besitzt einen ausklappbaren Mission Hub mit Daily/Weekly/Monthly-Tabs und zentralem Claim-Badge.
+- Eine Neural Season dauert 30 Tage, besitzt 50 Level à 1.000 XP und erhält XP aus Missions-Claims/Periodenboni. Rewards sind Gems, garantierte Komponenten und auf Level 50 ein permanentes Season-Core-Artifact.
+- Season-Artifacts, abgeschlossene Seasons, Inbox-Lesestatus und Profilname sind permanent im Save gespeichert und überstehen Prestige.
+- Profilansicht bündelt Collection, Season-Historie, Lifetime-Statistiken, Inbox/Patch Notes und Einstellungen. Keine neue Season-Währung wird eingeführt.
+
+## Retention progression v23
+- Jede der 15 Hardwareklassen wechselt ab 500 Besitz in permanente Hardware-Mastery. Käufe oberhalb 500 erzeugen klassenspezifische Mastery-XP; `floor(sqrt(xp / 250))` bestimmt das Level. Jedes Level gibt +1 % Klassen-Compute bis maximal +50 %.
+- Challenges sind permanente Account-Ziele mit Challenge Stars. Stars werden nur einmal beansprucht und bleiben über Prestige erhalten.
+- Tiefe Prestige-Knoten erhalten zusätzliche Account-Gates: Tiefe 5 = 100 Achievement Points, Tiefe 6 = 10 Gesamt-Mastery, Tiefe 7 = 10 Challenge Stars, Tiefe 8 = 500 AP + 50 Mastery + 25 Stars.
+- Collection/Profil zeigt Hardware-, Komponenten-, Item-, Season- und Artifact-Fortschritt sowie alle 15 Mastery-Level.
+
+## Challenge Runs und Langzeitsimulation (v24)
+
+Fünf optionale Challenge-Runs verwenden dieselbe Run-Economy mit echten Einschränkungen: `no-taps` deaktiviert Tap-Credits, `no-items` ignoriert ausgerüstete Itemeffekte, `five-hardware` begrenzt Käufe auf die ersten fünf Klassen, `data-crunch` multipliziert Datenproduktion mit 0,10 und `inflation` multipliziert Hardwarepreise mit 100. Ziel ist jeweils ein Anspruch von mindestens 1 INT. Abschluss gibt permanente Challenge Stars; Bestzeit und Clears bleiben über normale Prestiges erhalten.
+
+Der bestehende Acceptance-Simulator bietet zusätzlich `simulateLongTermSuite(1708)` für 7/30/90/180 Tage aktiv und passiv. Simulator-Telemetrie wird während Langläufen auf die letzten 24 Snapshots kompaktiert, damit die Messung nicht quadratisch durch Diagnosehistorie wächst; die Economy-Regeln selbst bleiben identisch.

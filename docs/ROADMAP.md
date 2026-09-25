@@ -237,3 +237,42 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Every item-recipe component ingredient checked against an implemented acquisition path.
 - [x] Balance export includes item-upgrade component consumption as well as crafting ingredients/data costs.
 - [ ] External acceptance only: run the repository scripts (`typecheck`, `test`, `build`) once dependencies can be installed; this environment timed out during `npm ci` and therefore does not claim those scripts passed.
+
+## Progression V2 — 2026-09
+- [x] Dynamische Achievement-Familien auf langfristige 10-Stufen-Ziele erweitert.
+- [x] 6 Daily / 12 Weekly / 30 Monthly mit progressiven Quest-Stufen.
+- [x] Individuelle Hardware-Autobuyer für alle 15 Klassen ab 100 Einheiten.
+- [x] INT-Baum auf 40 tatsächlich wirksame Knoten / Tiefe 8 erweitert.
+- [x] Save v21 mit Migration der neuen Automation-State-Felder.
+- [ ] 90-Tage-Balance nach vollständigem npm-Testlauf kalibrieren; Ziel ist Monatsprogression statt Abschluss in Stunden.
+- [ ] Zweiten Prestige-Layer erst nach gemessener v21-Langzeitbalance implementieren.
+
+### Progression V2 · Mission Hub / Seasons / Profil
+- [x] Ausklappbarer Mission Hub in der Werkstatt mit Daily/Weekly/Monthly und Claim-Badges.
+- [x] 30-Tage Neural Season mit 50 Levels, Missions-XP, Gems, Komponenten und permanentem Season Artifact.
+- [x] Spielerprofil mit Collection, Season-Historie, Stats, Inbox/Patch Notes und Settings-Grundfläche.
+- [x] Persistenz/Migration auf Save v22 und zentrale Inbox-/Quest-/Season-Badges.
+- [ ] Premium-Track bleibt absichtlich deaktiviert, bis native Käufe/Server-Verifikation separat beauftragt werden.
+
+### Retention Progression v23
+- [x] Hardware-Mastery nach 500 für alle 15 Klassen mit persistenten XP und Compute-Boni.
+- [x] Challenge-Star-System mit langfristigen Account-Zielen und einmaligen Claims.
+- [x] Collection um Hardware, Komponenten, Items, Artifacts und Mastery erweitert.
+- [x] Tiefe Prestige-Tiers an Achievement Points, Mastery und Challenge Stars gekoppelt.
+- [ ] Echte regelverändernde Challenge-Runs (No Tap / No Items / eingeschränkte Hardware) als nächster Ausbau.
+- [ ] 90-/180-Tage-Simulator kalibriert die neuen Gates und Mastery-Kurven.
+
+## Retention v24 – Challenge Runs
+
+- [x] Fünf echte Challenge-Runs: No Taps, No Items, erste fünf Hardwareklassen, 10 % Daten, 100× Hardwarekosten.
+- [x] Start/Abbruch/Abschluss, persistente Clears, Bestzeiten und Challenge-Star-Rewards.
+- [x] Challenge-UI im Profil mit aktivem Run und Abschlussstatus.
+- [x] Save v24 migriert v23 um Challenge-Run-State.
+- [x] Bestehenden Simulator um 7/30/90/180-Tage-Suite erweitert und Langlauf-Telemetrie kompaktiert.
+- [ ] Balanceziel für Singularity erst nach reproduzierbarer 180-Tage-Abnahme festlegen.
+
+## Retro UI & Localization Foundation v25
+- Einheitliche Retro-/Pixel-UI-Tokens, kantige Panels/Buttons, Pixel-Icon-Komponente und crisp-pixel Asset-Regel eingeführt.
+- Mission Hub, Season und Profil nutzen die neue Retro-Oberfläche; Claim-/Inbox-Badges bleiben zentral sichtbar.
+- Lokalisierungsgrundlage für EN/DE/ES/FR/PT/IT/PL mit englischem Fallback, persistenter Spracheinstellung und lokalisiertem Zahlenformat.
+- Save v25 migriert bestehende v24-Settings verlustfrei. Finale Hardware-/Komponenten-/Artifact-Sprites bleiben der nächste Asset-Pass.

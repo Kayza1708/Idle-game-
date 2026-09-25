@@ -226,3 +226,27 @@ The older V18/V19 open-item notes above are historical and are superseded by thi
 - **F Prestige reset:** complete — run resources/training/research reset, active work cancelled without refund, durable INT/nodes/components/modules/items/blueprints/achievements/lab upgrades retained, confirmation UI lists both sides.
 - **G Balance acceptance:** complete for deterministic simulator/export — 7d active, 7d passive, 30d active, five real prestiges, ordered hardware progression and invalid-number checks; exports cover purchases, milestones, rates, research, analyses, component finds/consumption, crafting/item effects, INT and nodes.
 - **H Repository acceptance:** implementation/docs/tests are present. The only unresolved verification is environmental: `npm ci` timed out in this sandbox, so full `npm run typecheck`, `npm test` and `npm run build` are not claimed as passed here. Run them on the developer machine before merge; fix any resulting failures rather than weakening tests.
+
+## Progression V2 – aktueller Stand
+Progression V2 erweitert den Content-Horizont: 19 langfristige Achievement-Familien mit bis zu zehn Stufen, 6/12/30 Daily-/Weekly-/Monthly-Aufträge, 15 individuelle Hardware-Autobuyer und ein 40-Knoten-INT-Baum. Als nächstes muss der vorhandene Simulator auf 90 Tage gegen diese Progression gefahren und die INT-/Quest-Kurve anhand der Messwerte nachkalibriert werden. Singularity bleibt bewusst außerhalb dieses Patches.
+
+## Nach Progression V2 · Season/Profile
+- Mission Hub, 30-Tage-Season und Profilgrundsystem sind implementiert. Nächster Content-Block: Challenges, Collection-Ausbau und Hardware-Mastery-Level nach 500.
+- Vor Merge auf einem Rechner mit installierten Dependencies `npm run typecheck`, `npm test` und `npm run build` ausführen; diese Umgebung enthält kein `node_modules`.
+
+## Nach Retention v23
+- Regelverändernde Challenge-Runs auf dem neuen Challenge-Star-Ledger aufbauen.
+- 90- und 180-Tage-Simulation mit Mastery, Challenge Stars, Season-Historie und Prestige-Gates erweitern.
+- Danach Singularity-Layer anhand gemessener Langzeitkurven festlegen; nicht vor der Simulation balancen.
+
+## Retention v24 – aktueller Stand
+
+Challenge-Runs sind jetzt echte modifizierte Runs statt reine Lifetime-Checklisten. Fünf Regeln greifen direkt in Tap-, Item-, Hardwarekosten/-zugang- und Datenpfade ein; Abschluss bei 1 INT vergibt permanente Stars und speichert Clears/Bestzeit. Der vorhandene Simulator enthält eine deterministische 7/30/90/180-Tage-Suite. Ein tatsächlich ausgeführter 90-Tage-Aktivlauf mit Seed 1708 blieb endlich (`invalid=false`), erreichte alle 15 Hardwareklassen und 132 Prestiges; gleichzeitig zeigte er 0 Mastery-XP, 0 Achievement Points und 0 Challenge Stars, weil die bisherige Simulatorstrategie sofort bei jedem verfügbaren INT prestiged und Meta-Rewards nicht aktiv claimed. Das ist ein gemessener Balance-/Bot-Policy-Befund und muss vor einer belastbaren Singularity-Zeitmarke korrigiert werden. Der 180-Tage-Lauf überschritt in dieser Arbeitsumgebung das 45-Sekunden-Ausführungsfenster und wird daher nicht als erfolgreich gemessen behauptet.
+
+## Retro UI / Localization v25
+- [x] Retro-Typografie-Stack und wiederverwendbare Pixel-UI-Tokens für Buttons, Panels, Tabs, Badges und Progression.
+- [x] Wiederverwendbares Pixel-Icon-System als Grundlage für Quests, Ressourcen, Season, Challenges und Profil.
+- [x] EN/DE/ES/FR/PT/IT/PL-Sprachwahl im Profil; Sprache und Zahlenformat werden gespeichert.
+- [x] Save-v24→v25-Migration und Lokalisierungs-/Format-Regressionstests.
+- [ ] Alle historischen Gameplay-Texte schrittweise aus Komponenten in Translation Keys verschieben; Missionen fallen außerhalb DE vorerst auf vorhandenes Englisch zurück.
+- [ ] Finales Pixel-Asset-Kit: 15 Hardware-Sprites, 6 Komponenten, Item/Module, Challenge-Icons, Season-Key-Art und einzigartige Artifact-Sprites.
