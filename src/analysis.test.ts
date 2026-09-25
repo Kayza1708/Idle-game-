@@ -37,3 +37,5 @@ describe('transactional component analyses',()=>{
   expect(queueExperiment(repaired,'hardware',repaired.savedAt,'short').experiments.active).not.toBeNull();
  });
 });
+
+it('persists an active analysis across reload and rewards it exactly once offline',()=>{const base=playable(),started=queueExperiment(base,'hardware',0,'short'),restored=restore(serialize(started)).state,end=restored.experiments.active!.endsAt;const done=advance(restored,(end-restored.savedAt)/1000,false,()=>1).state;const components=done.components;expect(done.experiments.active).toBeNull();expect(done.experiments.completedIds).toContain(started.experiments.active!.id);expect(completeExperiment(done,done.savedAt,()=>0).components).toBe(components)});

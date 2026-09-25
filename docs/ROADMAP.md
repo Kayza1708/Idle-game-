@@ -199,3 +199,11 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Datenforschungsbonus softgecappt und Analysekosten in den lokalen Economy-Export aufgenommen.
 - [ ] Neuer vollständiger 7-/30-Tage-Lauf sowie gerenderte mobile Browserabnahme bleiben offen.
 - [ ] Spätere Prestige-Stufen 4–7 und weiterführende Automationsregeln bleiben ausdrücklich Zukunftsinhalte.
+
+## 2026-09-25 – Economy V18
+- [x] Datenforschungs-Softcap auf +50 % begrenzt.
+- [x] Fünf Prestige-Äste mit je drei seriellen Knoten zentral konfiguriert.
+- [x] Analysebonus, zweiter Laborslot, 2er-Forschungsqueue und Autostart implementiert.
+- [x] Zwei Module, datenpflichtiges Item-Crafting und Mythic-Upgrades implementiert.
+- [x] Prestige-Abbruch laufender Forschung/Analyse und dauerhafter Erhalt von Komponenten/Modulen/Items umgesetzt.
+- [ ] Vollständige Big-Number-Migration und Langzeit-Balanceabnahme ausführen.

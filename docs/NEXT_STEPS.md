@@ -172,3 +172,9 @@ Gemessene offene Balancepunkte: Nach dem frühen Spiel explodiert die Datenrate,
   Abbruch und wissenschaftliche Notation. Kein Screenshot wurde ohne Browser erzeugt.
 - Prestige-Stufen 4–7, gezielte Komponentenquellen und Automationsreserven bleiben
   geplant und dürfen bis zur Implementierung nicht als kaufbare Knoten erscheinen.
+
+## Offene technische Abnahme V18
+1. Vollständigen Big-Number-Typ für alle Economy-, Save-, Prestige- und Exportpfade einführen; aktuelle Number-Pfade schützen vor NaN/Infinity, sind oberhalb 2^53 aber nicht integer-exakt.
+2. Passive Hardwarefunde und dedizierte Gaming-GPU-Laser-Meilensteinquelle ergänzen.
+3. 7-/30-Tage-Balanceexport mit mindestens fünf realen Prestiges erneut ausführen, sobald das Linux-Rollup-Optional-Paket verfügbar ist; im aktuellen Checkout blockiert `@rollup/rollup-linux-x64-gnu` Vitest/Vite.
+4. Produktionszerlegung im UI um explizite Item-Effektzeilen und die klickbare KI-Modell-Ausrüstungsansicht erweitern.
