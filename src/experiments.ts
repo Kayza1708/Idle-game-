@@ -1,4 +1,4 @@
-import { BALANCE, ComponentId, equippedBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, rates } from './economy';
+import { BALANCE, ComponentId, equippedBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, dataRate } from './economy';
 import { createItem, randomItem } from './inventory';
 import { addEvent } from './telemetry';
 
@@ -6,7 +6,7 @@ export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanal
 export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
 export const experimentDuration=(length:ExperimentLength)=>length==='intro'?BALANCE.introExperimentSeconds:length==='short'?BALANCE.shortExperimentSeconds:BALANCE.experimentSeconds;
 export function analysisCost(type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){return BALANCE.analysisCosts[type][length]}
-export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),missingCredits=Math.max(0,cost.credits-s.credits),missingData=Math.max(0,cost.data-s.data),production=rates(s);return{cost,balance:{credits:s.credits,data:s.data},missing:{credits:missingCredits,data:missingData},secondsToData:missingData<=0?0:production.dataPerSecond>0?missingData/production.dataPerSecond:Infinity};}
+export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),missingCredits=Math.max(0,cost.credits-s.credits),missingData=Math.max(0,cost.data-s.data),rate=dataRate(s);return{cost,balance:{credits:s.credits,data:s.data},missing:{credits:missingCredits,data:missingData},secondsToData:missingData<=0?0:rate>0?missingData/rate:Infinity};}
 export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){
   const cost=analysisCost(type,length);
   if(!s.discovered.includes('sbc'))return 'Einplatinencomputer noch nicht entdeckt.';

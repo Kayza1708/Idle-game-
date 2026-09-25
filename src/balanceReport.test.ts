@@ -64,3 +64,12 @@ it('exports immutable event resources, populated purchases, and 30-second snapsh
 it('supports cancellation without mutating the state',async()=>{const state=newGame(123),before=JSON.stringify(state),controller=new AbortController();controller.abort();await expect(createBalanceZipAsync(state,456,controller.signal)).rejects.toMatchObject({name:'AbortError'});expect(JSON.stringify(state)).toBe(before)});
 
 it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {createBalanceExportFiles}=await import('./balanceReport');let state:GameState={...newGame(0),aiName:'PrivateName'};for(let i=0;i<520;i++)state=addEvent(state,'action-blocked',i,{action:'research-start',missingData:1});const files=createBalanceExportFiles(state,1000);expect(JSON.parse(files['economy.json']).formulas.repeatableResearchDuration).toContain('1.22');expect(JSON.parse(files['diagnostics.json']).droppedEvents).toBeGreaterThan(0);expect(JSON.stringify(files)).not.toContain('PrivateName')});
+
+describe('deterministic long-run acceptance simulation',()=>{
+ it('covers 7d active/passive, 30d active and five real prestige resets without invalid numbers',async()=>{
+  const {simulateBalance}=await import('./simulation');
+  const active7=simulateBalance(7,true,1708,5),passive7=simulateBalance(7,false,1708,5),active30=simulateBalance(30,true,1708,5);
+  for(const run of [active7,passive7,active30]){expect(run.invalid).toBe(false);expect(run.prestiges).toBe(5);expect(run.milestones.firstPrestige).not.toBeNull();}
+  expect(active7.final.level).toBeGreaterThan(passive7.final.level);expect(active30.final.discovered.length).toBe(15);
+ });
+});

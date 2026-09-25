@@ -207,3 +207,11 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Zwei Module, datenpflichtiges Item-Crafting und Mythic-Upgrades implementiert.
 - [x] Prestige-Abbruch laufender Forschung/Analyse und dauerhafter Erhalt von Komponenten/Modulen/Items umgesetzt.
 - [ ] Vollständige Big-Number-Migration und Langzeit-Balanceabnahme ausführen.
+
+### Economy v19 completion pass
+- [x] Analyse-Kosten/Bestand/Fehlmenge/ETA im UI
+- [x] Passive Hardware-Schaltkreisfunde online/offline
+- [x] Hardware-Meilensteine liefern Titan; Gaming-GPU-Meilensteine zusätzlich Laser
+- [x] Equipment-Sockel 1 nach erstem Prestige, Sockel 2 über Fertigung I
+- [x] Save-v19-Migration für passiven Komponentenfortschritt
+- [ ] Big-Number-/Präzisionspfad und Langzeit-Balance-Abnahme abschließen

@@ -112,3 +112,17 @@ vorhandenen v17-24-Stunden-Werte bleiben historische Vergleichswerte. Ein neuer
 vorhandene unvollständige `node_modules`-Installation keine Vitest-Binärdatei enthielt
 und `npm ci` beim Abruf von Vitest mit HTTP 403 scheiterte. Deshalb werden für die neue
 Softcap-/Kostenkurve keine erfundenen Langzeitwerte behauptet.
+
+## Deterministische A–H-Abnahme – Seed 1708 (2026-09-25)
+
+Der bestehende Simulator wurde um `simulateBalance()` erweitert; er verwendet dieselben `advance`, Kauf-, Forschungs-, Analyse- und Prestige-Regeln wie das Spiel. Schrittweite der Abnahme: 300 s. Aktive Runs modellieren zusätzlich kontinuierliche Tap-Einnahmen und Modelltraining; passive Runs nicht.
+
+| Szenario | erste Forschung | erstes Item | Prestige 1 | Prestige 2 | Prestige 3 | Prestige 4 | Prestige 5 | ungültige Zahl |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| 7 Tage aktiv | 10 min | 50 h 45 min | 50 min | 1 h 30 min | 2 h 15 min | 2 h 50 min | 3 h 35 min | nein |
+| 7 Tage passiv | 10 min | 50 h 20 min | 1 h | 1 h 45 min | 2 h 35 min | 3 h 25 min | 4 h 10 min | nein |
+| 30 Tage aktiv | 10 min | 50 h 45 min | 50 min | 1 h 30 min | 2 h 15 min | 2 h 50 min | 3 h 35 min | nein |
+
+Hardware-Erstkäufe im aktiven 30-Tage-Run: Taschenrechner 5 min, SBC 10 min, PC 15 min, Gaming-GPU 20 min, Workstation 25 min, Server 35 min, GPU-Farm 45 min, Campus 1 h 30 min, Cloud 4 h 20 min, Flüssigkeitsanlage 4 h 40 min, Untersee 5 h 15 min, Orbital 12 h 30 min, Lunar 33 h 25 min, Dyson 6 d 14 h 50 min. Matrioshka wurde innerhalb von 30 Tagen entdeckt, aber in der protokollierten Erstkaufkarte nicht vor Simulationsende gekauft. Keine Klasse wurde durch den Freischaltpfad übersprungen.
+
+Hinweis: Die fünf Prestige-Zeitpunkte sind sehr früh. Da der Auftrag keine Zielzeit für Prestige vorgibt, wurde der verbindliche Prestige-Anspruch nicht willkürlich verschoben; der Bericht macht dieses Messergebnis stattdessen explizit sichtbar.

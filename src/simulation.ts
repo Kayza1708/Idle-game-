@@ -1,5 +1,5 @@
-import { BALANCE, addCredits, GameState, trainingRate, creditRate, dataRate, researchRate, researchLabCount, hardwareCost, classCompute, buyHardwareClass, hasNode, isRepeatableResearch, milestoneBonus, startResearchProject,computeRate,usersRate,newINT } from './economy';
-import { completeExperiment } from './experiments';
+import { BALANCE, addCredits, GameState, trainingRate, creditRate, dataRate, researchRate, researchLabCount, hardwareCost, classCompute, buyHardwareClass, maxAffordable, hasNode, isRepeatableResearch, milestoneBonus, startResearchProject,computeRate,usersRate,newINT,newGame,tapCredits,startTraining,passiveCircuitRate,grantComponents,safeEconomyAdd } from './economy';
+import { completeExperiment, queueExperiment } from './experiments';
 import { rollPeriods } from './missions';
 import { updateOnboarding } from './onboarding';
 import { addEvent, addMetrics,addSnapshot } from './telemetry';
@@ -53,7 +53,7 @@ export function settleResearchCompletions(state:GameState,trace:((step:ResearchC
     next=addEvent(next,'research-complete',next.savedAt,{id:lab.id,level:lab.level,dataCost:lab.dataCost,durationSeconds:lab.durationSeconds,startedAt:lab.startedAt,endsAt:lab.endsAt,actualDurationSeconds:(lab.endsAt-lab.startedAt)/1000});
   }
   mark('queue-checked');
-  if(next.researchQueue.length>0&&(hasNode(next,'labs3',1)||next.researchLevels.labAutomation>0)){
+  if(next.researchQueue.length>0&&hasNode(next,'labs3',1)){
     const queued=next.researchQueue[0],started=startResearchProject(next,queued);
     const didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!next.researchLabs.some(lab=>lab?.id===queued);next=didStart?{...started,researchQueue:started.researchQueue.slice(1)}:started;
   }
@@ -77,13 +77,13 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     let slice=Math.min(left,30,toLevel,toAuto,toExperiment,toResearch,toPeriod,toBoost);
     if(slice<1e-8) slice=Math.min(left,1e-6);
     const credits=creditRate(next.hardware,next.level,next,now)*slice,data=dataRate(next)*slice,research=researchRate(next,now)*slice;if(![slice,credits,data,research,rate].every(Number.isFinite))return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};generatedCredits+=credits;generatedData+=data;generatedResearch+=research;
-    next=addCredits(next,credits);next.data+=data;next.researchPoints+=research;next.lifetime.regularData+=data;const activeLabs=next.researchLabs.filter(Boolean).length;next.lifetime.labSeconds+=activeLabs*slice;if(next.labBoostUntil>now)next.researchLabs=next.researchLabs.map(lab=>lab?{...lab,endsAt:lab.endsAt-slice*1000}:null);
+    next=addCredits(next,credits);next.data=safeEconomyAdd(next.data,data);next.researchPoints=safeEconomyAdd(next.researchPoints,research);next.lifetime.regularData=safeEconomyAdd(next.lifetime.regularData,data);const circuitProgress=next.passiveCircuitProgress+passiveCircuitRate(next)*slice,circuits=Math.floor(circuitProgress);next={...next,passiveCircuitProgress:circuitProgress-circuits};if(circuits>0)next=addEvent(grantComponents(next,{circuits}),'component-found',now,{source:'passive-hardware',mode:active?'active':'offline',component:'circuits',total:circuits});const activeLabs=next.researchLabs.filter(Boolean).length;next.lifetime.labSeconds+=activeLabs*slice;if(next.labBoostUntil>now)next.researchLabs=next.researchLabs.map(lab=>lab?{...lab,endsAt:lab.endsAt-slice*1000}:null);
     const trainingWork=rate*slice;next.training+=trainingWork;if(next.activeTraining){const key=active?'onlineWork':'offlineWork';next.activeTraining={...next.activeTraining,[key]:(next.activeTraining[key]??0)+trainingWork};} next.savedAt+=slice*1000;next=rollPeriods(next,next.savedAt); next.automation.elapsed+=slice; left-=slice;
     if(next.activeTraining&&next.training+1e-7>=goal){const completed=next.activeTraining,track=completed.track,actualDuration=completed.startedAt===undefined?null:(next.savedAt-completed.startedAt)/1000;next.training=0;next.activeTraining=null;next.level++;next.lifetime.trainingCompleted++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level,creditCost:completed.creditCost,dataCost:completed.dataCost??0,baseDuration:completed.baseDuration??completed.workRequired,effectiveRate:completed.startingRate??0,expectedDuration:(completed.baseDuration??completed.workRequired)/(completed.startingRate??1),actualDuration,onlineWork:completed.onlineWork??0,offlineWork:completed.offlineWork??0});}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng,active?'active':'offline');if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
     next=settleResearchCompletions(next);
-    if(next.researchQueue.length>0&&(hasNode(next,'labs3',1)||next.researchLevels.labAutomation>0)&&next.researchLabs.some((lab,index)=>index<researchLabCount(next)&&!lab)){const queued=next.researchQueue[0],started=startResearchProject(next,queued),didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!next.researchLabs.some(lab=>lab?.id===queued);next=didStart?{...started,researchQueue:started.researchQueue.slice(1)}:started;}
+    if(next.researchQueue.length>0&&hasNode(next,'labs3',1)&&next.researchLabs.some((lab,index)=>index<researchLabCount(next)&&!lab)){const queued=next.researchQueue[0],started=startResearchProject(next,queued),didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!next.researchLabs.some(lab=>lab?.id===queued);next=didStart?{...started,researchQueue:started.researchQueue.slice(1)}:started;}
     next=addSnapshot(next,{at:next.savedAt,runSeconds:Math.max(0,(next.savedAt-(next.telemetry.runStartedAt??next.savedAt))/1000),credits:next.credits,creditsPerSecond:creditRate(next.hardware,next.level,next,next.savedAt),compute:computeRate(next.hardware,next),computePerSecond:computeRate(next.hardware,next),users:usersRate(next),data:next.data,dataPerSecond:dataRate(next),research:next.researchPoints,researchPerSecond:researchRate(next),gems:next.gems,hardwareCounts:{...next.hardwareCounts},modelLevel:next.level,qualityLevel:next.qualityLevel,efficiencyLevel:next.efficiencyLevel,activeTraining:next.activeTraining?.track??null,activeResearch:next.researchLabs.filter(Boolean).map(x=>x!.id).join('|'),prestigeClaim:newINT(next),activeLabs:next.researchLabs.filter(Boolean).length});
   }
   if(left>1e-9)return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};
@@ -109,3 +109,25 @@ export function debugAdvance(state:GameState,seconds:number,wallNow=Date.now()) 
   result.state.clockOffsetMs+=result.report.seconds*1000;
   return result;
 }
+
+
+export type BalanceSimulationResult={days:number;active:boolean;prestiges:number;final:GameState;milestones:{firstResearch:number|null;firstItem:number|null;firstPrestige:number|null;prestiges:number[];hardware:Partial<Record<import('./economy').HardwareId,number>>};invalid:boolean};
+function seededRandom(seed:number){let value=seed>>>0;return()=>{value=(value*1664525+1013904223)>>>0;return value/4294967296;};}
+/** Deterministic acceptance simulator. It uses the production/reset rules above rather than a second economy model. */
+export function simulateBalance(days:number,active:boolean,seed=1708,prestigeLimit=Number.POSITIVE_INFINITY):BalanceSimulationResult{
+ const rng=seededRandom(seed);let state=newGame(0),elapsed=0,firstResearch:number|null=null,firstItem:number|null=null,firstPrestige:number|null=null,prestiges:number[]=[],invalid=false;const hardware:Partial<Record<import('./economy').HardwareId,number>>={};
+ const step=300,total=days*86400;
+ while(elapsed<total){
+  const slice=Math.min(step,total-elapsed);state=advance(state,slice,active,rng).state;elapsed+=slice;if(active){state=addCredits(state,tapCredits(state,state.savedAt)*slice,false,true);if(!state.activeTraining){const quality=startTraining(state,'quality');state=quality===state?startTraining(state,'efficiency'):quality;}}
+  if(!state.researchLabs.some(Boolean)&&state.discovered.includes('sbc')){const started=startResearchProject(state,'dataGeneration');if(started!==state){state=started;if(firstResearch===null)firstResearch=elapsed;}}
+  if(!state.experiments.active&&state.discovered.includes('sbc')){const kinds=(['hardware','architecture','artifact'] as const),kind=kinds[Math.floor(elapsed/3600)%kinds.length];state=queueExperiment(state,kind,state.savedAt,'short');}
+  for(const id of [...state.discovered].reverse()){const amount=maxAffordable(id,state.hardwareCounts[id],state.credits,state);if(amount>0){const before=state.hardwareCounts[id];state=buyHardwareClass(state,id,amount);if(state.hardwareCounts[id]>before&&hardware[id]===undefined)hardware[id]=elapsed;}}
+  if(firstItem===null&&state.inventory.length)firstItem=elapsed;
+  if(newINT(state)>=1&&prestiges.length<prestigeLimit){const {prestige}=requirePrestigeForSimulation();state=prestige(state);prestiges.push(elapsed);if(firstPrestige===null)firstPrestige=elapsed;}
+  const numeric=[state.credits,state.data,state.researchPoints,state.lifetimeEligibleCredits,computeRate(state.hardware,state),creditRate(state.hardware,state.level,state,state.savedAt),dataRate(state)];if(!numeric.every(Number.isFinite)){invalid=true;break;}
+ }
+ return{days,active,prestiges:prestiges.length,final:state,milestones:{firstResearch,firstItem,firstPrestige,prestiges,hardware},invalid};
+}
+// Kept behind a tiny indirection so production simulation remains tree-shakeable in the UI bundle.
+import { prestige as simulationPrestige } from './prestige';
+function requirePrestigeForSimulation(){return{prestige:simulationPrestige};}

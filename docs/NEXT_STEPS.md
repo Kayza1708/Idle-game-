@@ -178,3 +178,7 @@ Gemessene offene Balancepunkte: Nach dem frühen Spiel explodiert die Datenrate,
 2. Passive Hardwarefunde und dedizierte Gaming-GPU-Laser-Meilensteinquelle ergänzen.
 3. 7-/30-Tage-Balanceexport mit mindestens fünf realen Prestiges erneut ausführen, sobald das Linux-Rollup-Optional-Paket verfügbar ist; im aktuellen Checkout blockiert `@rollup/rollup-linux-x64-gnu` Vitest/Vite.
 4. Produktionszerlegung im UI um explizite Item-Effektzeilen und die klickbare KI-Modell-Ausrüstungsansicht erweitern.
+
+## 2026-09-25 – Economy completion pass
+
+Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltkreisfunde, Titan-/GPU-Laser-Meilensteinfunde, Equipment-Sockelvertrag (1. Prestige / Fertigung I), Daten-/Forschungs-Itemeffekte und Save-v19-Migration. Noch offen für die vollständige A–H-Abnahme: zentraler Präzisions-/Big-Number-Pfad, deterministische 7-/30-Tage-Balance-Simulation mit fünf Prestiges sowie finale Simulator-Exports und komplette CI-Abnahme.

@@ -194,3 +194,11 @@ Werte ab `1e15` werden in der UI konsistent wissenschaftlich dargestellt.
 - Komponenten → Module → Items: Compute-Bus und Daten-Gitter sind dauerhafte Zwischenprodukte. Item-Crafts und Rarity-Upgrades verbrauchen Daten atomar.
 - Item-Raritäten reichen Common → Uncommon → Rare → Epic → Legendary → Mythic.
 - Prestige bricht laufende Forschung und Analysen ohne Refund ab und setzt normale Forschung zurück; Komponenten, Module und Items bleiben erhalten.
+
+## Economy completion pass (Save v19)
+
+- Komponentenanalysen bleiben vollständig vom Forschungslabor getrennt. Datenkosten werden beim Start einmalig abgezogen; die UI zeigt Bestand, Fehlmenge und Daten-Ansparzeit.
+- Passive Hardwarefunde: pro freigeschalteter Hardwareklasse entsteht 1 Schaltkreis je 3.600 Sekunden. Der Fortschritt wird als `passiveCircuitProgress` gespeichert und funktioniert online/offline deterministisch.
+- Jeder neu überschrittene Hardware-Meilenstein gibt 1 Titan-Schraube; Gaming-GPU-Meilensteine geben zusätzlich 1 Laser. Damit haben die frühen Komponenten neben Analysen erreichbare Grind-Quellen.
+- Ausrüstung: Sockel 1 wird mit dem ersten Prestige dauerhaft aktiv; `Fertigung I` schaltet Sockel 2 frei. Ausrüstungsboni auf Daten und Forschung werden in die Produktionsraten eingerechnet.
+- Save-Schema 19 ergänzt den persistenten passiven Komponentenfortschritt; v18 wird explizit migriert.
