@@ -237,3 +237,12 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Every item-recipe component ingredient checked against an implemented acquisition path.
 - [x] Balance export includes item-upgrade component consumption as well as crafting ingredients/data costs.
 - [ ] External acceptance only: run the repository scripts (`typecheck`, `test`, `build`) once dependencies can be installed; this environment timed out during `npm ci` and therefore does not claim those scripts passed.
+
+## Progression V2 — 2026-09
+- [x] Dynamische Achievement-Familien auf langfristige 10-Stufen-Ziele erweitert.
+- [x] 6 Daily / 12 Weekly / 30 Monthly mit progressiven Quest-Stufen.
+- [x] Individuelle Hardware-Autobuyer für alle 15 Klassen ab 100 Einheiten.
+- [x] INT-Baum auf 40 tatsächlich wirksame Knoten / Tiefe 8 erweitert.
+- [x] Save v21 mit Migration der neuen Automation-State-Felder.
+- [ ] 90-Tage-Balance nach vollständigem npm-Testlauf kalibrieren; Ziel ist Monatsprogression statt Abschluss in Stunden.
+- [ ] Zweiten Prestige-Layer erst nach gemessener v21-Langzeitbalance implementieren.

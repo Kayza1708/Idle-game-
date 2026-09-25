@@ -88,3 +88,7 @@ describe('save-stage diagnostics and quota recovery',()=>{
 it('migrates v16 research and fixed running durations losslessly',()=>{const old:any=newGame(100);delete old.researchLevels;old.researchLabs[0]={id:'operations',startedAt:100,endsAt:180100};const result=restore(JSON.stringify({version:16,state:old}),200);expect(result.migrated).toBe(true);expect(result.state.researchLevels.dataGeneration).toBe(0);expect(result.state.researchLabs[0]).toMatchObject({level:1,durationSeconds:180})});
 
 it('migrates v19 resource projections into v20 scientific balances',()=>{const old:any={...newGame(0),credits:1.25e20,data:9.5e18,unspentINT:12345};delete old.exactEconomy;const result=restore(JSON.stringify({version:19,state:old}),0);expect(result.migrated).toBe(true);expect(result.state.exactEconomy.credits).toMatchObject({e:20});expect(result.state.exactEconomy.data).toMatchObject({e:18});expect(result.state.exactEconomy.unspentINT).toMatchObject({e:4});expect(restore(serialize(result.state),0).state.exactEconomy).toEqual(result.state.exactEconomy)});
+
+describe('save v21 progression migration',()=>{
+ it('adds per-class autobuyer state to v20 saves without losing progress',()=>{const base=newGame(1234),legacy:any={...base};delete legacy.hardwareAutoBuyers;const restored=restore(JSON.stringify({version:20,state:legacy}),2000);expect(restored.error).toBeUndefined();expect(restored.migrated).toBe(true);expect(restored.state.hardwareAutoBuyers).toEqual({});expect(restored.state.savedAt).toBe(1234);});
+});
