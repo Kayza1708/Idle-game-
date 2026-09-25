@@ -95,3 +95,20 @@ Für Datenerzeugung ergeben die zentralen Funktionen:
 Beim ersten aktiven Start betrug die echte Datenrate 4,732416/s, entsprechend etwa 8,45 s Ansparzeit für Stufe 1; passiv begann die Stufe nach fünf Minuten. Nach 24 Stunden betrugen die simulierten Datenraten etwa 63,86 Mrd./s aktiv und 1,58 Mrd./s passiv. Ansparzeiten später Stufen sind in diesen Läufen deshalb gegenüber der gespeicherten Forschungsdauer vernachlässigbar: Die Dauer, nicht Daten, wird zum Engpass. Das starke Wachstum der Datenproduktion und der Verlust strategischer Datenknappheit nach frühem Spiel sind als konkretes Balanceproblem bestätigt; die Werte wurden in diesem Auftrag nicht ohne weitere Mehrprestige-Messungen verschärft.
 
 Die Ereignisgrenze griff erwartungsgemäß: 500 Detailereignisse blieben erhalten, 1.310 aktive beziehungsweise 1.044 passive Ereignisse wurden geordnet verworfen und in `diagnostics.droppedEvents` gezählt. Der Export arbeitet jetzt dateiweise, gibt zwischen Dateien den Eventloop frei, meldet Fortschritt, akzeptiert `AbortSignal` und erstellt ihn aus einem geklonten Zustand.
+
+## Analyse-Regression und offener Langlauf – 25. September 2026
+
+Der reproduzierte Defekt bestand aus zwei zusammenwirkenden Pfaden: Analyseaktionen
+waren nicht Teil der sofort gespeicherten Transaktionen und die Oberfläche zeigte den
+bereits belegten separaten Slot überhaupt nicht. Ein Reload direkt nach Start ließ den
+Auftrag deshalb verschwinden; ein unterbrochener Altzustand mit derselben ID in
+`active` und `completedIds` blockierte den Slot dauerhaft. Der Kern repariert diesen
+Zustand nun deterministisch, und Startkosten sowie Slot werden atomar reserviert.
+
+Die neuen Kosten entsprechen bei 24 Kurzläufen bewusst einer höheren Summe als ein
+vierstündiger Vertrag; der lange Vertrag belohnt Planung, der kurze Flexibilität. Die
+vorhandenen v17-24-Stunden-Werte bleiben historische Vergleichswerte. Ein neuer
+7-/30-Tage-Lauf konnte in diesem Checkout nicht seriös ausgeführt werden, weil die
+vorhandene unvollständige `node_modules`-Installation keine Vitest-Binärdatei enthielt
+und `npm ci` beim Abruf von Vitest mit HTTP 403 scheiterte. Deshalb werden für die neue
+Softcap-/Kostenkurve keine erfundenen Langzeitwerte behauptet.

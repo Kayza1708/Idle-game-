@@ -159,3 +159,16 @@ Branch `work` im verifizierten Repository `Kayza1708/Idle-game-` enthält fünf 
 `origin` zeigt auf das richtige GitHub-Repository, der Fetch bleibt aber durch `CONNECT tunnel failed, response 403` blockiert. Der lokale Atlas liegt als 1536×1024-RGBA-PNG mit sechs 512×512-Zellen vor und wurde direkt sowie als Gesamtbild geprüft. Eine gerenderte Mobile-UI-Prüfung war nicht möglich: der Offline-npm-Cache enthält TypeScript/React, aber nicht die ausführbaren Abhängigkeiten von Vitest/Rollup. Typecheck und kompilierte Kernsimulation liefen erfolgreich.
 
 Gemessene offene Balancepunkte: Nach dem frühen Spiel explodiert die Datenrate, sodass Forschungsdauer statt Datenpreis dominiert; alle drei Baupläne werden in der aktuellen festen Analysestrategie nahezu gleichzeitig nach rund 12,6–12,8 Stunden craftbar. Missionen und eigenständige passive Hardwarefunde sind noch keine implementierten Komponentenquellen. Als Nächstes sind reale Browserabnahme, vollständige CI sowie eine getrennte Mehrprestige-Kalibrierung von Datenkurve und Rezeptdifferenzierung erforderlich.
+
+## Übergabe Komponentenanalysen und Datenkurve (25. September 2026)
+
+- In einer Umgebung mit vollständigem npm-Cache zuerst `npm ci`, danach Typecheck,
+  Vitest und Production-Build erneut ausführen. Der Typecheck lief vor dem fehlgeschlagenen
+  Neuaufbau von `node_modules` erfolgreich; Vitest/Build sind nicht als bestanden markiert.
+- Den festen aktiven/passiven Seedlauf für 1 Stunde, 1/7/30 Tage mit den neuen
+  Analysekosten und dem Datensoftcap wiederholen. Hardware-Meilensteine, mehrere
+  Prestiges und alle drei Rezepte getrennt protokollieren.
+- Mobile Ansicht bei 320/375/430 px prüfen: laufender Analyseslot, Fehlmengentexte,
+  Abbruch und wissenschaftliche Notation. Kein Screenshot wurde ohne Browser erzeugt.
+- Prestige-Stufen 4–7, gezielte Komponentenquellen und Automationsreserven bleiben
+  geplant und dürfen bis zur Implementierung nicht als kaufbare Knoten erscheinen.

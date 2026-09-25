@@ -5,6 +5,15 @@ import { addEvent } from './telemetry';
 export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanalyse',architecture:'Architekturstudie',artifact:'Artefaktsuche'};
 export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
 export const experimentDuration=(length:ExperimentLength)=>length==='intro'?BALANCE.introExperimentSeconds:length==='short'?BALANCE.shortExperimentSeconds:BALANCE.experimentSeconds;
+export function analysisCost(type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){return BALANCE.analysisCosts[type][length]}
+export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){
+  const cost=analysisCost(type,length);
+  if(!s.discovered.includes('sbc'))return 'Einplatinencomputer noch nicht entdeckt.';
+  if(s.experiments.active)return `Analyseslot belegt durch ${experimentNames[s.experiments.active.type]}.`;
+  if(s.credits<cost.credits)return `${Math.ceil(cost.credits-s.credits)} Credits fehlen.`;
+  if(s.data<cost.data)return `${Math.ceil(cost.data-s.data)} Daten fehlen.`;
+  return null;
+}
 /** Split accumulated fractional rewards without losing values infinitesimally below an integer. */
 export function splitMaterialReward(value:number){
   const nearest=Math.round(value),tolerance=Number.EPSILON*Math.max(1,Math.abs(value))*16;
@@ -12,15 +21,17 @@ export function splitMaterialReward(value:number){
   return {whole,remainder:normalized-whole};
 }
 function componentGrant(s:GameState,type:ExperimentId,count:number){const source=BALANCE.componentSources[type],sequence=(Object.entries(source) as [ComponentId,number][]).flatMap(([id,amount])=>Array(amount).fill(id) as ComponentId[]),prior=s.telemetry.recentEvents.filter(event=>event.type==='component-found'&&event.details.source===`experiment:${type}`).length,grant:Partial<Record<ComponentId,number>>={};for(let i=0;i<count;i++){const id=sequence[(prior+i)%sequence.length];grant[id]=(grant[id]??0)+1;}return grant;}
-const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>({...s,experiments:{...s.experiments,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+experimentDuration(length)*1000/experimentSpeed(s)}},nextId:s.nextId+1});
+const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(length)/experimentSpeed(s),cost=length==='intro'?{credits:0,data:0}:analysisCost(type,length);return addEvent({...s,credits:s.credits-cost.credits,data:s.data-cost.data,experiments:{...s.experiments,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:cost.credits,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:cost.credits,dataCost:cost.data,durationSeconds});};
 export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:ExperimentLength='long'){
   if(length==='intro'){if(s.onboarding.completed.includes('intro-experiment')||s.experiments.active)return s;return start(s,type,now,length);}
-  const cap=1+(hasNode(s,'autoRoute',1)?1:0)+(hasNode(s,'autoRoute',2)?1:0);
-  if(!s.discovered.includes('sbc')||s.experiments.queue.length+(s.experiments.active?1:0)>=cap)return s;
-  return s.experiments.active?{...s,experiments:{...s.experiments,queue:[...s.experiments.queue,type]}}:start(s,type,now,length);
+  const reason=analysisBlockReason(s,type,length);
+  if(reason)return addEvent(s,'action-blocked',now,{action:'experiment-start',type,length,reason});
+  return start(s,type,now,length);
 }
+export function cancelExperiment(s:GameState,now=s.savedAt){const active=s.experiments.active;if(!active)return s;return addEvent({...s,experiments:{...s.experiments,active:null}},'experiment-cancel',now,{id:active.id,type:active.type,length:active.length,refundCredits:0,refundData:0});}
 export function completeExperiment(s:GameState,now:number,rng=Math.random,mode:'active'|'offline'='active'):GameState{
-  const active=s.experiments.active;if(!active||active.endsAt>now||s.experiments.completedIds.includes(active.id))return s;
+  const active=s.experiments.active;if(!active||active.endsAt>now)return s;
+  if(s.experiments.completedIds.includes(active.id))return {...s,experiments:{...s.experiments,active:null}};
   if(active.length==='intro'){
     let next=createItem({...s,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true},onboarding:{...s.onboarding,completed:[...new Set([...s.onboarding.completed,'intro-experiment'])]}},'quantum-chip','common');
     return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length});
