@@ -210,3 +210,6 @@ Hardware single/bulk cost math now has a normalized mantissa/exponent representa
 Werkstattaktionen verwenden jetzt denselben Transparenzvertrag wie Analysen/Forschung: Module, Item-Crafts und Item-Upgrades zeigen Datenkosten, aktuellen Datenbestand, Fehlmenge und aus der aktuellen Datenrate berechnete Ansparzeit. Item-Crafts berücksichtigen beim Aktivieren des Buttons zusätzlich fehlende Module, Komponenten und Bauplanfragmente. `itemUpgradeCost` ist die zentrale Kostenfunktion für Common → Uncommon → Rare → Epic → Legendary → Mythic und wendet Fertigung II auf Komponenten **und** Daten an.
 
 `ScientificNumber` unterstützt zusätzlich Addition, Subtraktion, Division und JSON-Roundtrips als `{m,e}`. Damit steht die notwendige Arithmetik für die noch ausstehende persistente Ressourcenmigration bereit, ohne Werte > `1e308` in `Infinity` umzuwandeln.
+
+### Atomare Ressourcenbuchungen
+Credit-/Datenkosten für Training, Forschung, Analysen, Hardware und Fertigung laufen über `canAffordResources`/`spendResources`. Die Buchung prüft beide Währungen vorab und zieht sie gemeinsam über `ScientificNumber`-Subtraktion ab; Teilabbuchungen bei fehlenden Daten sind damit ausgeschlossen. Produktionsdaten werden über `addData` auf demselben sicheren Additionspfad verbucht.

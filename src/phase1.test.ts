@@ -26,9 +26,9 @@ it('finds circuits passively from unlocked hardware online and offline',()=>{
 });
 
 it('keeps huge economy math finite for costs, bulk buys and credit accumulation',async()=>{
- const {MAX_ECONOMY_VALUE,safeEconomyAdd,safeEconomyMul}=await import('./economy');
+ const {MAX_ECONOMY_VALUE,safeEconomyAdd,safeEconomyMul,canAffordResources,spendResources}=await import('./economy');
  expect(safeEconomyAdd(1e300,1e300)).toBe(MAX_ECONOMY_VALUE);
- expect(safeEconomyMul(1e250,1e100)).toBe(MAX_ECONOMY_VALUE);
+ expect(safeEconomyMul,canAffordResources,spendResources(1e250,1e100)).toBe(MAX_ECONOMY_VALUE);
  expect(Number.isFinite(hardwareCost('matrioshka',500,newGame(0)))).toBe(true);
  expect(Number.isFinite(hardwareBulkCost('matrioshka',500,500,newGame(0)))).toBe(true);
 });
@@ -46,4 +46,6 @@ it('uses scientific arithmetic for extreme hardware costs without unsafe counts'
 describe('scientific-number arithmetic',()=>{
  it('adds, subtracts and serializes values beyond IEEE exponent range without Infinity',async()=>{const {ScientificNumber}=await import('./scientificNumber');const a=ScientificNumber.fromParts(9.5,420),b=ScientificNumber.fromParts(2.5,420),sum=a.add(b),back=ScientificNumber.fromJSON(JSON.parse(JSON.stringify(sum)));expect(sum.toScientificString(3)).toBe('1.20e+421');expect(sum.subtract(b).toScientificString(3)).toBe('9.50e+420');expect(back.compare(sum)).toBe(0);expect(JSON.stringify(sum)).not.toMatch(/Infinity|NaN/)});
  it('keeps tiny additions deterministic at the available significant precision',async()=>{const {ScientificNumber}=await import('./scientificNumber');const huge=ScientificNumber.fromParts(1,400),tiny=ScientificNumber.fromParts(1,1);expect(huge.add(tiny).compare(huge)).toBe(0)});
+
+ it('spends credit and data costs atomically through the shared precision path',()=>{const s={...newGame(0),credits:1000,data:100};expect(canAffordResources(s,{credits:900,data:101})).toBe(false);expect(spendResources(s,{credits:900,data:101})).toBe(s);const paid=spendResources(s,{credits:900,data:40});expect(paid.credits).toBeCloseTo(100);expect(paid.data).toBeCloseTo(60);});
 });

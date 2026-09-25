@@ -194,3 +194,6 @@ Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltk
 - [x] Fertigung-II-Rabatt zentral getestet für Komponenten- und Daten-Upgrade-Kosten.
 - [x] ScientificNumber um Add/Subtract/Divide und JSON-Roundtrip erweitert.
 - [ ] Persistente Credits/Data/INT vollständig auf ScientificNumber migrieren; bis dahin bleibt der Legacy-`number`-State der dokumentierte Precision-Blocker.
+
+- [x] Credit-/Daten-Ausgaben der Kernsysteme auf einen gemeinsamen atomaren ScientificNumber-Pfad vereinheitlicht (Training, Forschung, Analysen, Hardware, Crafting/Upgrades); Datenproduktion nutzt denselben Additionspfad.
+- [ ] Persistente Credits/Data/INT vollständig von Legacy-`number` auf serialisierte Mantisse/Exponent-Werte migrieren; der gemeinsame Buchungspfad ist dafür vorbereitet, aber die GameState-Felder selbst sind noch `number`.

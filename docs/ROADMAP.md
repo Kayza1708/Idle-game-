@@ -215,3 +215,5 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Equipment-Sockel 1 nach erstem Prestige, Sockel 2 über Fertigung I
 - [x] Save-v19-Migration für passiven Komponentenfortschritt
 - [ ] Big-Number-/Präzisionspfad und Langzeit-Balance-Abnahme abschließen
+
+- v19.4: Atomare Credit-/Datenbuchungen über den zentralen ScientificNumber-Pfad für Kern-Economy-Aktionen; verhindert Teilabbuchungen und vereinheitlicht Produktionsaddition.
