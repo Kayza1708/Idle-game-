@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { createBalanceReport, serializeBalanceReport, createBalanceZip } from './balanceReport';
+import { createBalanceReport, serializeBalanceReport, createBalanceZip, createBalanceZipAsync } from './balanceReport';
 import { addEvent } from './telemetry';
-import { newGame } from './economy';
+import { newGame, type GameState } from './economy';
 import { prestige } from './prestige';
 import { restore } from './storage';
 
@@ -53,9 +53,14 @@ describe('local balance report',()=>{
 });
 
 describe('analysis archive',()=>{
- it('contains every documented local analysis file and no direct personal fields',async()=>{const {createBalanceExportFiles,createBalanceZip}=await import('./balanceReport');const files=createBalanceExportFiles(newGame(0),1000);expect(Object.keys(files).sort()).toEqual(['diagnostics.json','milestones.csv','prestige.csv','purchases.csv','research.csv','sessions.csv','snapshots.csv','summary.json','timeline.csv','timeline.json','training.csv']);expect(createBalanceZip(newGame(0),1000).slice(0,2)).toEqual(new Uint8Array([80,75]));expect(JSON.stringify(files)).not.toMatch(/email|ipAddress|realName/i);});
+ it('contains every documented local analysis file and no direct personal fields',async()=>{const {createBalanceExportFiles,createBalanceZip}=await import('./balanceReport');const files=createBalanceExportFiles(newGame(0),1000);expect(Object.keys(files).sort()).toEqual(['diagnostics.json','economy.json','events.csv','events.jsonl','manifest.json','milestones.csv','prestige.csv','purchases.csv','research.csv','sessions.csv','snapshots.csv','summary.json','timeline.csv','timeline.json','training.csv']);expect(createBalanceZip(newGame(0),1000).slice(0,2)).toEqual(new Uint8Array([80,75]));expect(JSON.stringify(files)).not.toMatch(/email|ipAddress|realName/i);});
 });
 
-it('writes ZIP central directory offsets and CRC-compatible stored entries',()=>{const zip=createBalanceZip(newGame(0),1000),view=new DataView(zip.buffer,zip.byteOffset,zip.byteLength),end=zip.length-22;expect(view.getUint32(0,true)).toBe(0x04034b50);expect(view.getUint32(end,true)).toBe(0x06054b50);const centralOffset=view.getUint32(end+16,true);expect(view.getUint32(centralOffset,true)).toBe(0x02014b50);expect(view.getUint16(end+8,true)).toBe(11);expect(view.getUint16(end+10,true)).toBe(11);});
+it('writes ZIP central directory offsets and CRC-compatible stored entries',()=>{const zip=createBalanceZip(newGame(0),1000),view=new DataView(zip.buffer,zip.byteOffset,zip.byteLength),end=zip.length-22;expect(view.getUint32(0,true)).toBe(0x04034b50);expect(view.getUint32(end,true)).toBe(0x06054b50);const centralOffset=view.getUint32(end+16,true);expect(view.getUint32(centralOffset,true)).toBe(0x02014b50);expect(view.getUint16(end+8,true)).toBe(15);expect(view.getUint16(end+10,true)).toBe(15);});
 
 it('exports immutable event resources, populated purchases, and 30-second snapshots',async()=>{const {buyHardwareClass}=await import('./economy'),{advance}=await import('./simulation'),{createBalanceExportFiles}=await import('./balanceReport');let state={...newGame(0),credits:1000};state=buyHardwareClass(state,'calculator',2);const purchase=state.telemetry.recentEvents.find(x=>x.type==='hardware-purchase')!;const eventCredits=purchase.resources.credits;state=advance(state,95,true).state;expect(purchase.resources.credits).toBe(eventCredits);expect(state.telemetry.snapshots.length).toBeGreaterThanOrEqual(3);const files=createBalanceExportFiles(state);expect(files['purchases.csv']).toContain('2');expect(files['purchases.csv']).not.toMatch(/"undefined"/);expect(files['snapshots.csv'].split('\r\n').length).toBeGreaterThanOrEqual(4);});
+
+
+it('supports cancellation without mutating the state',async()=>{const state=newGame(123),before=JSON.stringify(state),controller=new AbortController();controller.abort();await expect(createBalanceZipAsync(state,456,controller.signal)).rejects.toMatchObject({name:'AbortError'});expect(JSON.stringify(state)).toBe(before)});
+
+it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {createBalanceExportFiles}=await import('./balanceReport');let state:GameState={...newGame(0),aiName:'PrivateName'};for(let i=0;i<520;i++)state=addEvent(state,'action-blocked',i,{action:'research-start',missingData:1});const files=createBalanceExportFiles(state,1000);expect(JSON.parse(files['economy.json']).formulas.repeatableResearchDuration).toContain('1.22');expect(JSON.parse(files['diagnostics.json']).droppedEvents).toBeGreaterThan(0);expect(JSON.stringify(files)).not.toContain('PrivateName')});

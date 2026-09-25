@@ -1,4 +1,4 @@
-import { BALANCE, addCredits, GameState, trainingRate, creditRate, dataRate, researchRate, hardwareCost, classCompute, buyHardwareClass, hasNode, milestoneBonus, startResearchProject,computeRate,usersRate,newINT } from './economy';
+import { BALANCE, addCredits, GameState, trainingRate, creditRate, dataRate, researchRate, researchLabCount, hardwareCost, classCompute, buyHardwareClass, hasNode, isRepeatableResearch, milestoneBonus, startResearchProject,computeRate,usersRate,newINT } from './economy';
 import { completeExperiment } from './experiments';
 import { rollPeriods } from './missions';
 import { updateOnboarding } from './onboarding';
@@ -13,7 +13,7 @@ export const simulationNow = (state:GameState, wallNow=Date.now()) => wallNow + 
 function cloneForSimulation(state:GameState):GameState {
   return {
     ...state,
-    nodes:[...state.nodes],scannerRewards:[...state.scannerRewards],runRecyclingRewards:[...state.runRecyclingRewards],runMilestoneClasses:[...state.runMilestoneClasses],lifetime:{...state.lifetime,hardwareClasses:[...state.lifetime.hardwareClasses],itemTypes:[...state.lifetime.itemTypes]},gemLedger:[...state.gemLedger],processedGemPurchases:[...state.processedGemPurchases], completedResearch:[...state.completedResearch], breakthroughs:[...state.breakthroughs], inventory:state.inventory.map(item=>({...item})), equipped:{...state.equipped}, pity:{...state.pity},
+    nodes:[...state.nodes],scannerRewards:[...state.scannerRewards],runRecyclingRewards:[...state.runRecyclingRewards],runMilestoneClasses:[...state.runMilestoneClasses],lifetime:{...state.lifetime,hardwareClasses:[...state.lifetime.hardwareClasses],itemTypes:[...state.lifetime.itemTypes]},gemLedger:[...state.gemLedger],processedGemPurchases:[...state.processedGemPurchases], completedResearch:[...state.completedResearch],researchLevels:{...state.researchLevels}, breakthroughs:[...state.breakthroughs], inventory:state.inventory.map(item=>({...item})), equipped:{...state.equipped}, pity:{...state.pity},
     researchLabs:state.researchLabs.map(lab=>lab?{...lab}:null),
     experiments:{...state.experiments,active:state.experiments.active?{...state.experiments.active}:null,queue:[...state.experiments.queue],completedIds:[...state.experiments.completedIds]},
     automation:{...state.automation},
@@ -44,22 +44,22 @@ export function settleResearchCompletions(state:GameState,trace:((step:ResearchC
   if(!finished.length)return state;
   const finishedIds=new Set(finished.map(lab=>lab.id));
   let next:GameState={...state,researchLabs:state.researchLabs.map(lab=>lab&&finishedIds.has(lab.id)?null:lab)};
+  const phases={...state.telemetry.diagnostics.researchCompletionPhases};const mark=(step:ResearchCompletionStep)=>{trace(step);phases[step]=(phases[step]??0)+1;};
   for(const lab of finished){
-    trace('project-complete');
-    if(next.completedResearch.includes(lab.id))continue;
-    next={...next,completedResearch:[...next.completedResearch,lab.id],lifetime:{...next.lifetime,researchCompleted:next.lifetime.researchCompleted+1}};
-    trace('reward-applied');
-    trace('unlock-applied');
-    next=addEvent(next,'research-complete',next.savedAt,{id:lab.id});
+    mark('project-complete');
+    if(isRepeatableResearch(lab.id)){if(next.researchLevels[lab.id]>=lab.level)continue;next={...next,researchLevels:{...next.researchLevels,[lab.id]:lab.level},lifetime:{...next.lifetime,researchCompleted:next.lifetime.researchCompleted+1}};}else{if(next.completedResearch.includes(lab.id))continue;next={...next,completedResearch:[...next.completedResearch,lab.id],lifetime:{...next.lifetime,researchCompleted:next.lifetime.researchCompleted+1}};}
+    mark('reward-applied');
+    mark('unlock-applied');
+    next=addEvent(next,'research-complete',next.savedAt,{id:lab.id,level:lab.level,dataCost:lab.dataCost,durationSeconds:lab.durationSeconds,startedAt:lab.startedAt,endsAt:lab.endsAt,actualDurationSeconds:(lab.endsAt-lab.startedAt)/1000});
   }
-  trace('queue-checked');
-  if(next.researchQueue&&hasNode(next,'labAssistant',1)){
+  mark('queue-checked');
+  if(next.researchQueue&&(hasNode(next,'labAssistant',1)||next.researchLevels.labAutomation>0)){
     const queued=next.researchQueue,started=startResearchProject(next,queued);
-    if(started!==next)next={...started,researchQueue:null};
+    const didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!next.researchLabs.some(lab=>lab?.id===queued);next=didStart?{...started,researchQueue:null}:started;
   }
-  trace('missions-achievements-ready');
-  trace('state-ready-for-save-render');
-  return next;
+  mark('missions-achievements-ready');
+  mark('state-ready-for-save-render');
+  return {...next,telemetry:{...next.telemetry,diagnostics:{...next.telemetry.diagnostics,researchCompletionPhases:phases}}};
 }
 
 export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
@@ -81,8 +81,9 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     const trainingWork=rate*slice;next.training+=trainingWork;if(next.activeTraining){const key=active?'onlineWork':'offlineWork';next.activeTraining={...next.activeTraining,[key]:(next.activeTraining[key]??0)+trainingWork};} next.savedAt+=slice*1000;next=rollPeriods(next,next.savedAt); next.automation.elapsed+=slice; left-=slice;
     if(next.activeTraining&&next.training+1e-7>=goal){const completed=next.activeTraining,track=completed.track,actualDuration=completed.startedAt===undefined?null:(next.savedAt-completed.startedAt)/1000;next.training=0;next.activeTraining=null;next.level++;next.lifetime.trainingCompleted++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level,creditCost:completed.creditCost,dataCost:completed.dataCost??0,baseDuration:completed.baseDuration??completed.workRequired,effectiveRate:completed.startingRate??0,expectedDuration:(completed.baseDuration??completed.workRequired)/(completed.startingRate??1),actualDuration,onlineWork:completed.onlineWork??0,offlineWork:completed.offlineWork??0});}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
-    if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng);if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
+    if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng,active?'active':'offline');if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
     next=settleResearchCompletions(next);
+    if(next.researchQueue&&(hasNode(next,'labAssistant',1)||next.researchLevels.labAutomation>0)&&next.researchLabs.some((lab,index)=>index<researchLabCount(next)&&!lab)){const queued=next.researchQueue,started=startResearchProject(next,queued),didStart=started.researchLabs.some(lab=>lab?.id===queued)&&!next.researchLabs.some(lab=>lab?.id===queued);next=didStart?{...started,researchQueue:null}:started;}
     next=addSnapshot(next,{at:next.savedAt,runSeconds:Math.max(0,(next.savedAt-(next.telemetry.runStartedAt??next.savedAt))/1000),credits:next.credits,creditsPerSecond:creditRate(next.hardware,next.level,next,next.savedAt),compute:computeRate(next.hardware,next),computePerSecond:computeRate(next.hardware,next),users:usersRate(next),data:next.data,dataPerSecond:dataRate(next),research:next.researchPoints,researchPerSecond:researchRate(next),gems:next.gems,hardwareCounts:{...next.hardwareCounts},modelLevel:next.level,qualityLevel:next.qualityLevel,efficiencyLevel:next.efficiencyLevel,activeTraining:next.activeTraining?.track??null,activeResearch:next.researchLabs.filter(Boolean).map(x=>x!.id).join('|'),prestigeClaim:newINT(next),activeLabs:next.researchLabs.filter(Boolean).length});
   }
   if(left>1e-9)return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};

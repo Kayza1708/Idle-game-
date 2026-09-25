@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react';
-import type { HardwareId, ItemTypeId, PrestigeUpgradeId } from './economy';
+import { BALANCE, type ComponentId, type HardwareId, type ItemTypeId, type PrestigeUpgradeId } from './economy';
 
 type SpriteStyle = CSSProperties & {'--sprite-x': string; '--sprite-y': string};
 
@@ -45,3 +45,4 @@ export function PrestigeArt({id}:{id:PrestigeUpgradeId}) {
 export function ResourceArt({id}:{id:ResourceArtId}) {
   return <span className="atlas-sprite resource-art" style={cellStyle(resourceCells[id], 1)} aria-hidden="true"/>;
 }
+export function ComponentArt({id}:{id:ComponentId}){const [column,row]=BALANCE.components[id].atlasCell;return <span className="atlas-sprite component-art" style={{'--sprite-x':`${column*50}%`,'--sprite-y':`${row*100}%`} as SpriteStyle} aria-hidden="true"/>;}

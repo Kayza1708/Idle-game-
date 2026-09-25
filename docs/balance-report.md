@@ -51,3 +51,47 @@ Der gemeldete Lauf (rund 32,5 Minuten, 9 INT, 39 Trainingsstufen, Cloud, etwa 1,
 Exportformat v1 ergänzt deshalb nun eine verständliche Herkunftsbeschreibung, aktuellen und durch protokollierte Projektstarts ausgegebenen FP-Bestand sowie Zähler für Hardwarekäufe, Trainingsstarts/-abschlüsse, Forschungsstarts/-abschlüsse, Erfolge und Prestige. Neue Starts erfassen Zeitpunkt und tatsächliche Kosten lokal. Alte, vor Telemetrie entstandene Historie bleibt weiterhin ausdrücklich als nicht verfügbar markiert.
 
 Die reproduzierbaren aktiven/gelegentlichen Kontrollläufe oben verwenden den echten Economy-/Simulationscode. Sie zeigen weiterhin die dokumentierten Engpässe: eine starke Strategiedifferenz, einen langsamen Rückkehrerpfad und einen sehr großen Abstand zwischen passiver Forschungsproduktion und den nur drei kleinen Ausgaben. Produktions- und Prestigekurven wurden für diesen Einzel-Export nicht verändert.
+
+## Export-/Komponentenprüfung – 25. September 2026
+
+Der lokale ZIP-Export enthält jetzt zusätzlich die ausdrücklich maschinenlesbaren Kerndateien `manifest.json`, `events.csv`, `events.jsonl` und `economy.json`; `summary.json`, `snapshots.csv` und `diagnostics.json` bleiben erhalten. Das Manifest dokumentiert Version, Datenschutz und Grenzen. Die Economy-Datei exportiert die zentrale Forschungs- und Komponenten-Konfiguration, nicht den vollständigen Save. Die Summary aggregiert aktive/offline Zeit, Abschlusszahlen, Produktionsraten, aktuelle Daten/Projektkosten und Komponentenfunde nach Quelle. Ereignisse und Snapshots bleiben auf 500 beziehungsweise 300 Einträge begrenzt.
+
+Die Atlasdatei wurde direkt als PNG geprüft: 1536 × 1024 Pixel, RGBA (8 Bit), nicht interlaced und exakt in sechs 512-×-512-Zellen teilbar. Die Reihenfolge entspricht Schaltkreise, Laser, Graphen / Titan-Schrauben, Nanoröhrchen, Quantenkerne. Alle Zellen besitzen sichtbare Alpha-Pixel. Der Atlas wurde als Ganzes visuell geprüft; ein gerenderter Browser-Screenshot war wegen der blockierten Paketinstallation nicht möglich.
+
+Die bereits vorhandene Forschungsabschlusskorrektur wurde nicht dupliziert. Ihr Regressionstest prüft weiterhin aktive/offline Abschlüsse, Queue, Reload unmittelbar vor Abschluss, die instrumentierte Phasenfolge und genau ein Abschlussereignis. Die gemessene feste Laufzeit des ersten Projekts ist 180 Sekunden; die nachfolgenden zentral berechneten Laufzeiten sind rund 24,48 Minuten (Rang 8) und 9,50 Stunden (Rang 20; 34.209 Sekunden). Der in der vorhandenen Diagnose dokumentierte frühere Fehlerpfad erreichte bis zu 200.000 Mikroiterationen; nach dem Fix wird der Slot vor Belohnung/Ereignis entfernt.
+
+### Reproduzierbare Abschlussmessung
+
+Ein am 25. September 2026 direkt aus den TypeScript-Kernmodulen kompilierter Lauf maß für Operationen/Blueprints/Alignment feste 180/1.468/34.209 Sekunden und exakt 250/1.000/5.000 Daten Startkosten. Die reine Abschlussfunktion benötigte in diesem Lauf 0,170/0,061/0,057 ms und erzeugte jeweils genau ein Abschlussereignis. Der 181-Sekunden-Gesamtlauf des ersten Projekts benötigte aktiv 7,34 ms und offline 2,69 ms; in beiden Fällen waren Slot leer, Zähler eins und Ereigniszahl eins. Diese Wall-Zeiten sind Maschinenmessungen des Kernlaufs, keine Browser-Frametimes.
+
+## Reproduzierbare v17-Kernsimulation – 25. September 2026
+
+Die Simulation verwendete ausschließlich `newGame`, `advance`, Hardwarekauf, Tap, Forschungsstart, Experiment, Crafting und Prestige aus dem Spielcode sowie den festen RNG-Wert 0,424242. Das aktive Profil entschied alle 10 Sekunden und tappte dreimal pro Sekunde; das passive Profil entschied alle 60 Sekunden ohne Taps. Beide liefen 86.400 simulierte Sekunden. Die Teststrategie hielt die fünf Forschungen möglichst auf gleicher Stufe und startete lange Analysen in fester Rotation.
+
+| Messwert | Aktiv | Passiv |
+|---|---:|---:|
+| Datenerzeugung Stufe 1 gestartet | 2:50 | 5:00 |
+| Materialanalyse Stufe 1 | 6:20 | 12:00 |
+| Bauplananalyse Stufe 1 | 11:10 | 15:00 |
+| Modellarchitektur Stufe 1 | 14:50 | 19:00 |
+| Laborautomation Stufe 1 | 19:50 | 28:00 |
+| erster Prestige | 56:30 | 6:16:00 |
+| erster Quantenchip | 12:36:40 | 12:46:00 |
+| Forschungsstand nach 24 h | 15/15/14/14/14 | 15/14/14/14/14 |
+| Titan-Schrauben nach Crafting | 35 | 35 |
+
+Alle drei Baupläne wurden in getrennten, ansonsten identischen Läufen craftbar: aktiv jeweils nach 45.400 s, passiv nach 45.960 s. Der gemeinsame Zeitpunkt entsteht durch den ersten vollständigen garantierten Analysezyklus und genügend Bauplanfragmente; das ist ein messbarer Analyse-/Zeitengpass, kein seltener Zufallsdrop. Das gemeinsame Craftingfenster ist noch wenig differenziert und bleibt ein offener Balancingpunkt.
+
+Für Datenerzeugung ergeben die zentralen Funktionen:
+
+| Ziellevel | feste Dauer | Datenkosten |
+|---:|---:|---:|
+| 1 | 90 s | 40 |
+| 5 | 199,3801104 s | 108 |
+| 10 | 538,866252 s | 369 |
+| 20 | 3.936,219353 s | 4.356 |
+| 50 | 259.200 s (72-h-Cap) | 7.167.184 |
+
+Beim ersten aktiven Start betrug die echte Datenrate 4,732416/s, entsprechend etwa 8,45 s Ansparzeit für Stufe 1; passiv begann die Stufe nach fünf Minuten. Nach 24 Stunden betrugen die simulierten Datenraten etwa 63,86 Mrd./s aktiv und 1,58 Mrd./s passiv. Ansparzeiten später Stufen sind in diesen Läufen deshalb gegenüber der gespeicherten Forschungsdauer vernachlässigbar: Die Dauer, nicht Daten, wird zum Engpass. Das starke Wachstum der Datenproduktion und der Verlust strategischer Datenknappheit nach frühem Spiel sind als konkretes Balanceproblem bestätigt; die Werte wurden in diesem Auftrag nicht ohne weitere Mehrprestige-Messungen verschärft.
+
+Die Ereignisgrenze griff erwartungsgemäß: 500 Detailereignisse blieben erhalten, 1.310 aktive beziehungsweise 1.044 passive Ereignisse wurden geordnet verworfen und in `diagnostics.droppedEvents` gezählt. Der Export arbeitet jetzt dateiweise, gibt zwischen Dateien den Eventloop frei, meldet Fortschritt, akzeptiert `AbortSignal` und erstellt ihn aus einem geklonten Zustand.
