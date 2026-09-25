@@ -1,10 +1,10 @@
 import { BALANCE, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, dataRate, spendResources } from './economy';
-import { createItem, randomItem } from './inventory';
+import { randomItem } from './inventory';
 import { addEvent } from './telemetry';
 
 export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanalyse',architecture:'Architekturstudie',artifact:'Artefaktsuche'};
 export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+deepPrestigeBonus(s,'analysis')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
-export const experimentDuration=(length:ExperimentLength)=>length==='intro'?BALANCE.introExperimentSeconds:length==='short'?BALANCE.shortExperimentSeconds:BALANCE.experimentSeconds;
+export const experimentDuration=(length:ExperimentLength)=>length==='intro'?0:length==='short'?BALANCE.shortExperimentSeconds:BALANCE.experimentSeconds;
 export function analysisCost(type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){return BALANCE.analysisCosts[type][length]}
 export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),missingCredits=Math.max(0,cost.credits-s.credits),missingData=Math.max(0,cost.data-s.data),rate=dataRate(s);return{cost,balance:{credits:s.credits,data:s.data},missing:{credits:missingCredits,data:missingData},secondsToData:missingData<=0?0:rate>0?missingData/rate:Infinity};}
 export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){
@@ -25,7 +25,7 @@ function componentGrant(s:GameState,type:ExperimentId,count:number){const source
 function guaranteeRare(found:Partial<Record<ComponentId,number>>,type:ExperimentId){if((found.graphene??0)+(found.nanotubes??0)+(found.quantumCores??0)>0)return;const id:ComponentId=type==='artifact'?'quantumCores':type==='architecture'?'graphene':'graphene';found[id]=(found[id]??0)+1;}
 const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(length)/experimentSpeed(s),cost=length==='intro'?{credits:0,data:0}:analysisCost(type,length);const paid=spendResources(s,cost);return addEvent({...paid,experiments:{...s.experiments,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:cost.credits,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:cost.credits,dataCost:cost.data,durationSeconds});};
 export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:ExperimentLength='long'){
-  if(length==='intro'){if(s.onboarding.completed.includes('intro-experiment')||s.experiments.active)return s;return start(s,type,now,length);}
+  if(length==='intro')return s; // removed legacy tutorial experiment; never start a new one
   const reason=analysisBlockReason(s,type,length);
   if(reason)return addEvent(s,'action-blocked',now,{action:'experiment-start',type,length,reason});
   return start(s,type,now,length);
@@ -35,8 +35,9 @@ export function completeExperiment(s:GameState,now:number,rng=Math.random,mode:'
   const active=s.experiments.active;if(!active||active.endsAt>now)return s;
   if(s.experiments.completedIds.includes(active.id))return {...s,experiments:{...s.experiments,active:null}};
   if(active.length==='intro'){
-    const next=createItem({...s,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true},onboarding:{...s.onboarding,completed:[...new Set([...s.onboarding.completed,'intro-experiment'])]}},'quantum-chip','common');
-    return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length});
+    // Migration safety for old saves: retire an already-running legacy intro without reward or progression gate.
+    const next={...s,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id]}};
+    return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length,legacy:true});
   }
   const reward=BALANCE.experimentRewards[active.type],scale=active.length==='short'?1/24:1,components=splitMaterialReward(reward.components*scale*(1+(hasNode(s,'analysis3',1)?.30:hasNode(s,'analysis2',1)?.20:hasNode(s,'analysis1',1)?.10:0)+s.researchLevels.materialAnalysis*BALANCE.repeatableResearch.materialAnalysis.effectPerLevel)+s.componentRemainder),research=splitMaterialReward(reward.research*scale+s.researchRemainder),blueprints=splitMaterialReward(reward.blueprints*scale*(1+s.researchLevels.blueprintAnalysis*BALANCE.repeatableResearch.blueprintAnalysis.effectPerLevel)+s.blueprintRemainder);
   const found=componentGrant(s,active.type,components.whole);if(hasNode(s,'analysis3',1))guaranteeRare(found,active.type);let next:GameState=grantComponents({...s,componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true}},found);

@@ -26,8 +26,16 @@ const resourceCells: Record<ResourceArtId, [number, number]> = {
   research: [0, 1], blueprints: [1, 1], components: [2, 1], data: [3, 1],
 };
 
-function cellStyle([column, row]: [number, number], lastRow: number): SpriteStyle {
+function cellStyle(cell: [number, number] | undefined, lastRow: number): SpriteStyle {
+  const [column, row] = cell ?? [0, 0];
   return {'--sprite-x': `${column * 100 / 3}%`, '--sprite-y': `${row * 100 / lastRow}%`};
+}
+
+function prestigeCell(id: PrestigeUpgradeId): [number, number] {
+  const configured=prestigeCells[id];
+  if(configured)return configured;
+  const node=BALANCE.prestigeUpgrades[id];
+  return [node.branch % 4, Math.min(3, Math.max(0, (node.depth - 1) % 4))];
 }
 
 export function HardwareArt({id}:{id:HardwareId}) {
@@ -39,7 +47,7 @@ export function ItemArt({type}:{type:ItemTypeId}) {
 }
 
 export function PrestigeArt({id}:{id:PrestigeUpgradeId}) {
-  return <span className="atlas-sprite prestige-art" style={cellStyle(prestigeCells[id], 3)} aria-hidden="true"/>;
+  return <span className="atlas-sprite prestige-art" style={cellStyle(prestigeCell(id), 3)} aria-hidden="true"/>;
 }
 
 export function ResourceArt({id}:{id:ResourceArtId}) {
