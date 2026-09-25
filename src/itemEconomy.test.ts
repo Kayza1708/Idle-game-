@@ -32,3 +32,12 @@ describe('data affordability contracts',()=>{
  it('reports exact data/component/module shortages before crafting',()=>{const s={...newGame(0),data:100,blueprintFragments:0};const a=craftAffordability(s,'quantum-chip');expect(a.data.cost).toBe(BALANCE.itemRecipes['quantum-chip'].data);expect(a.data.balance).toBe(100);expect(a.data.missing).toBe(BALANCE.itemRecipes['quantum-chip'].data-100);expect(a.missingBlueprints).toBe(BALANCE.itemRecipes['quantum-chip'].blueprints);expect(a.missingModules.computeBus).toBe(1);expect(a.missingComponents.circuits).toBe(18)});
  it('applies the manufacturing-II discount to both item upgrade costs',()=>{const item={id:'x',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false};const base=itemUpgradeCost(newGame(0),item)!;const discounted=itemUpgradeCost({...newGame(0),nodes:['manufacturing1','manufacturing2']},item)!;expect(discounted.componentCost).toBe(Math.ceil(base.componentCost*.85));expect(discounted.dataCost).toBe(Math.ceil(base.dataCost*.85))});
 });
+
+it('exposes every equipped item effect in the production breakdown',async()=>{
+ const {productionBreakdown}=await import('./economy'),base=newGame(0),items=[
+  {id:'c',type:'neural-asic' as const,rarity:'common' as const,level:0,locked:false},
+  {id:'d',type:'data-prism' as const,rarity:'common' as const,level:0,locked:false}
+ ];
+ const s={...base,prestigeCount:1,nodes:['manufacturing1'],inventory:items,equipped:{processor:'c',utility:'d'}};
+ const breakdown=productionBreakdown(s);expect(breakdown.itemBonuses.credits).toBeGreaterThan(0);expect(breakdown.itemBonuses.data).toBeGreaterThan(0);
+});

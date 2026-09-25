@@ -208,3 +208,8 @@ Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltk
 ## A–H-Abnahmefortschritt v20.1
 
 Dieser Durchgang schließt drei zuvor nur teilweise erfüllte Punkte: Labore III startet eine wegen Datenmangel wartende Queue nun später automatisch; die UI zeigt den letzten real verbuchten Analysefund; und der Balance-Export trennt Analysen, Komponenten, Crafting/Itemeffekte und Prestige-Knotenkäufe in eigene CSVs. Die zugehörigen Regressionstests wurden ergänzt. Offen bleiben die vollständige npm/Vitest-/Vite-Abnahme in einer Umgebung mit installierten Dependencies sowie eine erneute dokumentierte Langzeitsimulation auf genau diesem Stand.
+
+## A–H Abschlussprüfung v20.2
+- [x] Max-Hardwarekäufe vergleichen und belasten Credits oberhalb `1e300` gegen das persistente Scientific-Ledger statt gegen die UI-Projektion.
+- [x] Produktionszerlegung zeigt die real angewendeten ausgerüsteten Itemeffekte getrennt nach Credits, Compute, Daten, Forschung, Training und Analyse.
+- [ ] Vollständige npm-Abnahme (`typecheck`, `test`, `build`) erneut ausführen, sobald die npm-Abhängigkeiten lokal verfügbar sind; im übergebenen ZIP ist `node_modules` absichtlich ausgeschlossen.

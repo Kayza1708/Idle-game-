@@ -1,5 +1,5 @@
 import {describe,expect,it} from 'vitest';
-import {activateOverclock,BALANCE,GameState,buyClassUpgrade,buyHardwareClass,classCompute,hardwareBulkCost,hardwareCost,maxAffordable,milestoneFactor,newGame,newInsight,newINT,canPrestige,hardwareIds,reachedMilestones,prestigeUpgradeCost,creditMultiplierFromINT,registerTap,tapCredits} from './economy';
+import {activateOverclock,BALANCE,GameState,buyClassUpgrade,buyHardwareClass,classCompute,exactEconomyValue,hardwareBulkCost,hardwareBulkCostScientific,hardwareCost,maxAffordable,milestoneFactor,newGame,newInsight,newINT,canPrestige,hardwareIds,reachedMilestones,prestigeUpgradeCost,creditMultiplierFromINT,registerTap,tapCredits} from './economy';
 import {completeExperiment,queueExperiment,splitMaterialReward} from './experiments';
 import {prestige} from './prestige';
 import {advance} from './simulation';
@@ -51,3 +51,11 @@ describe('scientific-number arithmetic',()=>{
 });
 
 it('keeps an authoritative scientific balance beyond the UI number projection',async()=>{const {addCredits,exactEconomyValue}=await import('./economy');let s=newGame(0);for(let i=0;i<4;i++)s=addCredits(s,1e300);expect(Number.isFinite(s.credits)).toBe(true);expect(s.credits).toBe(1e300);expect(exactEconomyValue(s,'credits').toScientificString(3)).toContain('4.00e+300')});
+
+it('uses the exact scientific credit ledger for max hardware purchases beyond the UI projection cap',async()=>{
+ const {ScientificNumber}=await import('./scientificNumber');
+ const base=newGame(0),huge=ScientificNumber.fromParts(5,320),s={...base,credits:1e300,exactEconomy:{...base.exactEconomy,credits:huge.toJSON()}};
+ const owned=s.hardwareCounts.calculator,count=maxAffordable('calculator',owned,s.credits,s);expect(count).toBeGreaterThan(0);
+ const cost=hardwareBulkCostScientific('calculator',owned,count,s);expect(cost.compare(huge)).toBeLessThanOrEqual(0);
+ const bought=buyHardwareClass(s,'calculator','max');expect(bought.hardwareCounts.calculator).toBe(owned+count);expect(exactEconomyValue(bought,'credits').compare(huge)).toBeLessThan(0);
+});

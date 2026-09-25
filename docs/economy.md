@@ -223,3 +223,9 @@ Credits, Daten sowie die Prestige-/INT-Summen besitzen zusätzlich zu den UI-kom
 - Die Analyseansicht zeigt den letzten tatsächlich verbuchten Komponentenfund aus dem Abschlussereignis; Startkosten, Restzeit und laufender Status bleiben sichtbar.
 - Der lokale Balance-Export enthält zusätzlich `analyses.csv`, `components.csv`, `crafting.csv` und `prestige-nodes.csv`. Damit sind Analysefunde, Komponentenquellen/-mengen, Herstellung/Upgrades/Itemeffekte und tatsächliche INT-Knotenkäufe getrennt auswertbar.
 - Prestige-Knotenkäufe erzeugen dafür ein lokales `prestige-node-buy`-Ereignis mit Kosten, Ast, Tiefe und Effekt. Es findet kein Upload statt.
+
+### A–H Abschlussprüfung v20.2
+
+- Hardware-Max-Käufe verwenden nun das autoritative `exactEconomy.credits`-Ledger auch oberhalb der auf `1e300` begrenzten UI-Projektion. Die Suche nach der maximal kaufbaren Menge erfolgt deterministisch per exponentieller Eingrenzung plus Binärsuche; der exakte Scientific-Preis wird vom Ledger abgezogen.
+- Hardware-Telemetrie protokolliert zusätzlich `exactCost` in wissenschaftlicher Schreibweise, damit ein UI-Cap nicht als echter Kaufpreis exportiert wird.
+- Die Produktionszerlegung weist Itemboni getrennt für Credits, Compute, Daten, Forschung, Training und Analyse aus.
