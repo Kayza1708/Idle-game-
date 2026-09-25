@@ -229,3 +229,7 @@ The older V18/V19 open-item notes above are historical and are superseded by thi
 
 ## Progression V2 – aktueller Stand
 Progression V2 erweitert den Content-Horizont: 19 langfristige Achievement-Familien mit bis zu zehn Stufen, 6/12/30 Daily-/Weekly-/Monthly-Aufträge, 15 individuelle Hardware-Autobuyer und ein 40-Knoten-INT-Baum. Als nächstes muss der vorhandene Simulator auf 90 Tage gegen diese Progression gefahren und die INT-/Quest-Kurve anhand der Messwerte nachkalibriert werden. Singularity bleibt bewusst außerhalb dieses Patches.
+
+## Nach Progression V2 · Season/Profile
+- Mission Hub, 30-Tage-Season und Profilgrundsystem sind implementiert. Nächster Content-Block: Challenges, Collection-Ausbau und Hardware-Mastery-Level nach 500.
+- Vor Merge auf einem Rechner mit installierten Dependencies `npm run typecheck`, `npm test` und `npm run build` ausführen; diese Umgebung enthält kein `node_modules`.

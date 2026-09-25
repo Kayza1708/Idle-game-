@@ -246,3 +246,10 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Save v21 mit Migration der neuen Automation-State-Felder.
 - [ ] 90-Tage-Balance nach vollständigem npm-Testlauf kalibrieren; Ziel ist Monatsprogression statt Abschluss in Stunden.
 - [ ] Zweiten Prestige-Layer erst nach gemessener v21-Langzeitbalance implementieren.
+
+### Progression V2 · Mission Hub / Seasons / Profil
+- [x] Ausklappbarer Mission Hub in der Werkstatt mit Daily/Weekly/Monthly und Claim-Badges.
+- [x] 30-Tage Neural Season mit 50 Levels, Missions-XP, Gems, Komponenten und permanentem Season Artifact.
+- [x] Spielerprofil mit Collection, Season-Historie, Stats, Inbox/Patch Notes und Settings-Grundfläche.
+- [x] Persistenz/Migration auf Save v22 und zentrale Inbox-/Quest-/Season-Badges.
+- [ ] Premium-Track bleibt absichtlich deaktiviert, bis native Käufe/Server-Verifikation separat beauftragt werden.

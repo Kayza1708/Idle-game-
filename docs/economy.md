@@ -243,3 +243,9 @@ The authoritative large-value resource ledger remains serialized as normalized m
 - Der INT-Baum wurde von 15 auf 40 Knoten erweitert. Die bestehenden fünf Äste bleiben das Fundament und reichen nun bis Tiefe 8. Späte Knoten skalieren Daten, Compute, Analyse- und Forschungsgeschwindigkeit sowie Itemeffekte; Labore V lässt die Forschungsqueue Prestige überleben und Fertigung V öffnet den dritten Item-Sockel.
 - Die neuen Tiefen kosten bis 1e19 INT und sind bewusst als Monatsziele angelegt. Ein zweiter Prestige-Layer (Singularity/Axiom) bleibt eine spätere Ebene und ist in v21 noch nicht implementiert.
 - Der alte einmalige ×2-Klassenkauf bei 15 Einheiten wird in v21 nicht mehr angeboten. Bestehende Legacy-Saves behalten bereits gekaufte Klassen-Upgrades zur Rückwärtskompatibilität; neue Progression läuft ausschließlich über 10/25/50/100/250/500-Mastery.
+
+## Mission Hub, Neural Seasons und Profil (v22)
+- Home/Werkstatt besitzt einen ausklappbaren Mission Hub mit Daily/Weekly/Monthly-Tabs und zentralem Claim-Badge.
+- Eine Neural Season dauert 30 Tage, besitzt 50 Level à 1.000 XP und erhält XP aus Missions-Claims/Periodenboni. Rewards sind Gems, garantierte Komponenten und auf Level 50 ein permanentes Season-Core-Artifact.
+- Season-Artifacts, abgeschlossene Seasons, Inbox-Lesestatus und Profilname sind permanent im Save gespeichert und überstehen Prestige.
+- Profilansicht bündelt Collection, Season-Historie, Lifetime-Statistiken, Inbox/Patch Notes und Einstellungen. Keine neue Season-Währung wird eingeführt.
