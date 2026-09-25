@@ -261,3 +261,12 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Tiefe Prestige-Tiers an Achievement Points, Mastery und Challenge Stars gekoppelt.
 - [ ] Echte regelverändernde Challenge-Runs (No Tap / No Items / eingeschränkte Hardware) als nächster Ausbau.
 - [ ] 90-/180-Tage-Simulator kalibriert die neuen Gates und Mastery-Kurven.
+
+## Retention v24 – Challenge Runs
+
+- [x] Fünf echte Challenge-Runs: No Taps, No Items, erste fünf Hardwareklassen, 10 % Daten, 100× Hardwarekosten.
+- [x] Start/Abbruch/Abschluss, persistente Clears, Bestzeiten und Challenge-Star-Rewards.
+- [x] Challenge-UI im Profil mit aktivem Run und Abschlussstatus.
+- [x] Save v24 migriert v23 um Challenge-Run-State.
+- [x] Bestehenden Simulator um 7/30/90/180-Tage-Suite erweitert und Langlauf-Telemetrie kompaktiert.
+- [ ] Balanceziel für Singularity erst nach reproduzierbarer 180-Tage-Abnahme festlegen.

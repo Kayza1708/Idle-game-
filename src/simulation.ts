@@ -132,6 +132,7 @@ export function simulateBalance(days:number,active:boolean,seed=1708,prestigeLim
   for(const id of [...state.discovered].reverse()){const amount=maxAffordable(id,state.hardwareCounts[id],state.credits,state);if(amount>0){const before=state.hardwareCounts[id];state=buyHardwareClass(state,id,amount);if(state.hardwareCounts[id]>before&&hardware[id]===undefined)hardware[id]=elapsed;}}
   if(firstItem===null&&state.inventory.length)firstItem=elapsed;
   if(newINT(state)>=1&&prestiges.length<prestigeLimit){const {prestige}=requirePrestigeForSimulation();state=prestige(state);prestiges.push(elapsed);if(firstPrestige===null)firstPrestige=elapsed;}
+  if(state.telemetry.snapshots.length>24)state={...state,telemetry:{...state.telemetry,snapshots:state.telemetry.snapshots.slice(-24)}};
   const numeric=[state.credits,state.data,state.researchPoints,state.lifetimeEligibleCredits,computeRate(state.hardware,state),creditRate(state.hardware,state.level,state,state.savedAt),dataRate(state)];if(!numeric.every(Number.isFinite)){invalid=true;break;}
  }
  return{days,active,prestiges:prestiges.length,final:state,milestones:{firstResearch,firstItem,firstPrestige,prestiges,hardware},invalid};
@@ -139,3 +140,6 @@ export function simulateBalance(days:number,active:boolean,seed=1708,prestigeLim
 // Kept behind a tiny indirection so production simulation remains tree-shakeable in the UI bundle.
 import { prestige as simulationPrestige } from './prestige';
 function requirePrestigeForSimulation(){return{prestige:simulationPrestige};}
+
+export type LongTermBalanceSuite={seed:number;runs:BalanceSimulationResult[]};
+export function simulateLongTermSuite(seed=1708):LongTermBalanceSuite{return{seed,runs:[7,30,90,180].flatMap(days=>[simulateBalance(days,true,seed),simulateBalance(days,false,seed)])};}

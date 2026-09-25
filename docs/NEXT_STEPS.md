@@ -238,3 +238,7 @@ Progression V2 erweitert den Content-Horizont: 19 langfristige Achievement-Famil
 - Regelverändernde Challenge-Runs auf dem neuen Challenge-Star-Ledger aufbauen.
 - 90- und 180-Tage-Simulation mit Mastery, Challenge Stars, Season-Historie und Prestige-Gates erweitern.
 - Danach Singularity-Layer anhand gemessener Langzeitkurven festlegen; nicht vor der Simulation balancen.
+
+## Retention v24 – aktueller Stand
+
+Challenge-Runs sind jetzt echte modifizierte Runs statt reine Lifetime-Checklisten. Fünf Regeln greifen direkt in Tap-, Item-, Hardwarekosten/-zugang- und Datenpfade ein; Abschluss bei 1 INT vergibt permanente Stars und speichert Clears/Bestzeit. Der vorhandene Simulator enthält eine deterministische 7/30/90/180-Tage-Suite. Ein tatsächlich ausgeführter 90-Tage-Aktivlauf mit Seed 1708 blieb endlich (`invalid=false`), erreichte alle 15 Hardwareklassen und 132 Prestiges; gleichzeitig zeigte er 0 Mastery-XP, 0 Achievement Points und 0 Challenge Stars, weil die bisherige Simulatorstrategie sofort bei jedem verfügbaren INT prestiged und Meta-Rewards nicht aktiv claimed. Das ist ein gemessener Balance-/Bot-Policy-Befund und muss vor einer belastbaren Singularity-Zeitmarke korrigiert werden. Der 180-Tage-Lauf überschritt in dieser Arbeitsumgebung das 45-Sekunden-Ausführungsfenster und wird daher nicht als erfolgreich gemessen behauptet.

@@ -255,3 +255,9 @@ The authoritative large-value resource ledger remains serialized as normalized m
 - Challenges sind permanente Account-Ziele mit Challenge Stars. Stars werden nur einmal beansprucht und bleiben über Prestige erhalten.
 - Tiefe Prestige-Knoten erhalten zusätzliche Account-Gates: Tiefe 5 = 100 Achievement Points, Tiefe 6 = 10 Gesamt-Mastery, Tiefe 7 = 10 Challenge Stars, Tiefe 8 = 500 AP + 50 Mastery + 25 Stars.
 - Collection/Profil zeigt Hardware-, Komponenten-, Item-, Season- und Artifact-Fortschritt sowie alle 15 Mastery-Level.
+
+## Challenge Runs und Langzeitsimulation (v24)
+
+Fünf optionale Challenge-Runs verwenden dieselbe Run-Economy mit echten Einschränkungen: `no-taps` deaktiviert Tap-Credits, `no-items` ignoriert ausgerüstete Itemeffekte, `five-hardware` begrenzt Käufe auf die ersten fünf Klassen, `data-crunch` multipliziert Datenproduktion mit 0,10 und `inflation` multipliziert Hardwarepreise mit 100. Ziel ist jeweils ein Anspruch von mindestens 1 INT. Abschluss gibt permanente Challenge Stars; Bestzeit und Clears bleiben über normale Prestiges erhalten.
+
+Der bestehende Acceptance-Simulator bietet zusätzlich `simulateLongTermSuite(1708)` für 7/30/90/180 Tage aktiv und passiv. Simulator-Telemetrie wird während Langläufen auf die letzten 24 Snapshots kompaktiert, damit die Messung nicht quadratisch durch Diagnosehistorie wächst; die Economy-Regeln selbst bleiben identisch.

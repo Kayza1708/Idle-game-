@@ -92,3 +92,5 @@ it('migrates v19 resource projections into v20 scientific balances',()=>{const o
 describe('save v21 progression migration',()=>{
  it('adds per-class autobuyer state to v20 saves without losing progress',()=>{const base=newGame(1234),legacy:any={...base};delete legacy.hardwareAutoBuyers;const restored=restore(JSON.stringify({version:20,state:legacy}),2000);expect(restored.error).toBeUndefined();expect(restored.migrated).toBe(true);expect(restored.state.hardwareAutoBuyers).toEqual({});expect(restored.state.savedAt).toBe(1234);});
 });
+
+describe('v24 retention migration',()=>{it('adds challenge run persistence to v23 saves',()=>{const old=newGame(1000) as any;delete old.retention.activeRun;delete old.retention.runCompletions;delete old.retention.runBestSeconds;const r=restore(JSON.stringify({version:23,state:old}),2000);expect(r.error).toBeUndefined();expect(r.migrated).toBe(true);expect(r.state.retention.activeRun).toBeNull();expect(r.state.retention.runCompletions).toEqual({});expect(r.state.retention.runBestSeconds).toEqual({});});});
