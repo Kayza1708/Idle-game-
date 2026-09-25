@@ -162,3 +162,26 @@ Save v17 ergänzt fünf persistente Forschungslevel. Für ein Ziellevel `L` wird
 Die Effekte verwenden bestehende Mechaniken: Datenerzeugung multipliziert Nutzerdaten, Material- und Bauplananalyse erhöhen garantierte Analyseerträge, Modellarchitektur multipliziert Nutzerumsatz, Laborautomation erhöht Analysetempo und öffnet ab Stufe 1 die bestehende Einzelwarteschlange. Komponenten- und Forschungslevel bleiben beim INT-Prestige erhalten.
 
 Drei konkrete Baupläne ersetzen das generische Rezept für alle Items: Quantenchip (Compute), Neural-ASIC (Credits) und Feldscanner (Analyse). Zutaten und Bauplanfragmente werden atomar geprüft und abgezogen. Titan-Schrauben sind garantiert über jede lange Hardwareanalyse (17 von 45 Basiskomponenten) sowie nach Freischaltung über Meilenstein-Recycling erreichbar; sie hängen nicht von einem Zufallswurf ab. Missionen und eigenständige passive Hardwarefunde sind weiterhin angekündigte, aber noch nicht implementierte Zusatzquellen. Offline abgeschlossene Analysen verwenden dagegen denselben garantierten Grantpfad wie aktive Analysen.
+
+## Transaktionale Komponentenanalyse und Datensoftcap – 25. September 2026
+
+Komponentenanalysen besitzen einen **eigenen einzelnen Analyseslot** und belegen keinen
+Forschungslaborplatz. Ein Start prüft und reserviert Credit- und Datenkosten in derselben
+reinen Zustandsoperation. Kurzanalysen kosten je nach Quelle 750/60, 1.500/120 oder
+3.000/240 Credits/Daten; die langen Verträge kosten 12.000/900, 24.000/1.800 oder
+48.000/3.600. Laufzeit, Kosten, Start und Ende werden im aktiven Vertrag gespeichert.
+Ein Abbruch gibt bewusst nichts zurück. Ein bereits als abgeschlossen markierter,
+aber durch einen alten/unterbrochenen Save noch aktiver Vertrag wird beim nächsten
+Simulationsschritt entfernt und blockiert den Slot nicht dauerhaft.
+
+Die Analyseoberfläche zeigt für beide Längen vorhandene und benötigte Ressourcen,
+exakte Fehlmengen, effektive Dauer, garantierte Quellen und den Slotstatus. Forschung
+und Analyse können parallel laufen. Analyse-Start und -Abbruch lösen außerdem sofort
+einen transaktionalen Ereignis-Save aus; dadurch ging ein direkt nach dem Klick
+neu geladener Start zuvor bis zum nächsten Autosave verloren.
+
+Der Forschungsbonus auf Datenerzeugung ist nicht mehr unbegrenzt linear. Der rohe
+Bonus `Stufe × 0,08` läuft durch denselben zentralen Softcap mit Schwelle 0,8:
+`1 + softcap(Stufe × 0,08; 0,8)`. Daten bleiben über Training, Forschung und Analysen
+mehrfach verwendbar, ohne dass hohe Forschungsstufen die Datenrate linear entkoppeln.
+Werte ab `1e15` werden in der UI konsistent wissenschaftlich dargestellt.

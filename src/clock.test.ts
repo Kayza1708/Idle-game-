@@ -78,7 +78,7 @@ describe('simulation clock regressions',()=>{
   });
 
   it('preserves experiment and boost remaining time across a jump',()=>{
-    let state:GameState={...newGame(1_000),prestigeCount:1,discovered:['calculator','sbc'] as ('calculator'|'sbc')[],trainingBoostUntil:3_601_000};
+    let state:GameState={...newGame(1_000),prestigeCount:1,discovered:['calculator','sbc'] as ('calculator'|'sbc')[],credits:1e9,data:1e9,trainingBoostUntil:3_601_000};
     state=queueExperiment(state,'hardware',1_000);
     const beforeExperiment=state.experiments.active!.endsAt-state.savedAt;
     const jumped=debugAdvance(state,600,1_000).state;

@@ -191,3 +191,11 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Aktiver und passiver 24-Stunden-Kernlauf mit festem RNG und echten Spielaktionen ausgeführt.
 - [ ] Vitest-Gesamtlauf und Vite-Production-Bundle bleiben wegen unvollständigem Offline-npm-Cache offen.
 - [ ] Gerenderte mobile Browserabnahme, Missionserträge und eigenständige passive Hardwarefunde bleiben offen.
+
+### Transaktionale Komponentenanalysen – In Arbeit (25. September 2026)
+
+- [x] Separater Analyseslot, atomare Credit-/Datenreservierung, gespeicherter Vertrag, Abbruch und konkrete Sperrgründe.
+- [x] Regression für verlorenen Reload-Start und festhängende bereits abgeschlossene Analyse ergänzt.
+- [x] Datenforschungsbonus softgecappt und Analysekosten in den lokalen Economy-Export aufgenommen.
+- [ ] Neuer vollständiger 7-/30-Tage-Lauf sowie gerenderte mobile Browserabnahme bleiben offen.
+- [ ] Spätere Prestige-Stufen 4–7 und weiterführende Automationsregeln bleiben ausdrücklich Zukunftsinhalte.

@@ -30,6 +30,11 @@ export const BALANCE = {
   prestigeThreshold:1_400_000_000,prestigeScale:3,prestigePower:1.5,
   intCreditPerPoint:.10,
   experimentSeconds: 14400, shortExperimentSeconds:600, introExperimentSeconds:60,
+  analysisCosts:{
+    hardware:{short:{credits:750,data:60},long:{credits:12_000,data:900}},
+    architecture:{short:{credits:1_500,data:120},long:{credits:24_000,data:1_800}},
+    artifact:{short:{credits:3_000,data:240},long:{credits:48_000,data:3_600}},
+  },
   tapRateFraction:.2, tapLimitPerSecond:5, overclockTaps:30, overclockSeconds:15, overclockCooldownSeconds:90,
   introRewards:[25,60,120,100,0,75,250,0],
   prestigeUpgrades:{
@@ -101,7 +106,7 @@ export type ActiveResearch={id:ResearchId;level:number;startedAt:number;endsAt:n
 export type OverclockChannel='credits'|'training'|'research';
 export type Item = { id: string; type: ItemTypeId; rarity: Rarity; level: number; locked: boolean };
 export type ExperimentLength='intro'|'short'|'long';
-export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number };
+export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number };
 export type ProgressMetric='hardwareBought'|'milestones'|'trainingStarted'|'trainingCompleted'|'researchStarted'|'researchCompleted'|'componentsEarned'|'itemsCrafted'|'regularCredits'|'regularData'|'taps'|'overclocks'|'prestiges'|'activeSeconds';
 export type MissionTask={id:string;metric:ProgressMetric;goal:number;baseline:number;reward:number;claimed:boolean;de:string;en:string};
 export type MissionPeriod={key:string;endsAt:number;tasks:MissionTask[];required:number;bonus:number;bonusClaimed:boolean};
@@ -161,7 +166,8 @@ export const repeatableResearchIds=Object.keys(BALANCE.repeatableResearch) as Re
 export const isRepeatableResearch=(id:ResearchId):id is RepeatableResearchId=>repeatableResearchIds.includes(id as RepeatableResearchId);
 export const repeatableResearchDuration=(id:RepeatableResearchId,level:number)=>Math.min(BALANCE.repeatableResearch[id].baseSeconds*BALANCE.repeatableResearchDurationGrowth**Math.max(0,level-1),BALANCE.repeatableResearchDurationCapSeconds);
 export const repeatableResearchDataCost=(id:RepeatableResearchId,level:number)=>Math.ceil(BALANCE.repeatableResearch[id].baseDataCost*BALANCE.repeatableResearchDataGrowth**Math.max(0,level-1));
-export const dataRate=(s:GameState)=>usersRate(s)*BALANCE.baseDataPerUser*(1+milestoneBonus(s,'data'))*(1+s.researchLevels.dataGeneration*BALANCE.repeatableResearch.dataGeneration.effectPerLevel);
+export const dataResearchMultiplier=(level:number)=>1+softcap(Math.max(0,level)*BALANCE.repeatableResearch.dataGeneration.effectPerLevel,.8);
+export const dataRate=(s:GameState)=>usersRate(s)*BALANCE.baseDataPerUser*(1+milestoneBonus(s,'data'))*dataResearchMultiplier(s.researchLevels.dataGeneration);
 export const researchRate=(s:GameState,now=s.savedAt)=>{const compute=computeAllocation(s).research;return compute<=0?0:BALANCE.researchBaseRate*(compute/BALANCE.researchComputeScale)**.65*(1+.05*Math.log1p(s.data/BALANCE.dataScale))*(1+milestoneBonus(s,'research'))*(1+Math.min(BALANCE.achievementResearchCap,Math.floor(s.achievementPoints/10)*BALANCE.achievementResearchPerTen))*(1+itemCombinationBonus(s,'research'))*(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='research'?2:1)};
 export const creditMultiplierFromINT=(s:GameState)=>1+BALANCE.intCreditPerPoint*s.totalINTEarned;
 export const permanentFactor=creditMultiplierFromINT;
