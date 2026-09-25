@@ -42,3 +42,8 @@ it('uses scientific arithmetic for extreme hardware costs without unsafe counts'
  expect(single.toNumber()).toBe((await import('./economy')).MAX_ECONOMY_VALUE);
  expect(maxAffordable('calculator',Number.MAX_SAFE_INTEGER,1e300,newGame(0))).toBe(0);
 });
+
+describe('scientific-number arithmetic',()=>{
+ it('adds, subtracts and serializes values beyond IEEE exponent range without Infinity',async()=>{const {ScientificNumber}=await import('./scientificNumber');const a=ScientificNumber.fromParts(9.5,420),b=ScientificNumber.fromParts(2.5,420),sum=a.add(b),back=ScientificNumber.fromJSON(JSON.parse(JSON.stringify(sum)));expect(sum.toScientificString(3)).toBe('1.20e+421');expect(sum.subtract(b).toScientificString(3)).toBe('9.50e+420');expect(back.compare(sum)).toBe(0);expect(JSON.stringify(sum)).not.toMatch(/Infinity|NaN/)});
+ it('keeps tiny additions deterministic at the available significant precision',async()=>{const {ScientificNumber}=await import('./scientificNumber');const huge=ScientificNumber.fromParts(1,400),tiny=ScientificNumber.fromParts(1,1);expect(huge.add(tiny).compare(huge)).toBe(0)});
+});

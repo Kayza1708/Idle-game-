@@ -187,3 +187,10 @@ Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltk
 - Added `ScientificNumber` mantissa/exponent arithmetic for hardware costs, geometric bulk costs and max-buy comparisons.
 - Hardware purchases now reject unsafe integer counts instead of silently rounding them.
 - Remaining precision work: migrate persisted Credits/Data/INT and telemetry resource snapshots away from raw `number` before claiming full arbitrary-precision economy support.
+
+## Economy completion v19.3
+- [x] Datenkosten/Bestand/Fehlmenge/Ansparzeit in Werkstatt für Module, Items und Upgrades sichtbar.
+- [x] Craft-Buttons prüfen Daten, Module, Komponenten und Bauplanfragmente konsistent mit der Domainlogik.
+- [x] Fertigung-II-Rabatt zentral getestet für Komponenten- und Daten-Upgrade-Kosten.
+- [x] ScientificNumber um Add/Subtract/Divide und JSON-Roundtrip erweitert.
+- [ ] Persistente Credits/Data/INT vollständig auf ScientificNumber migrieren; bis dahin bleibt der Legacy-`number`-State der dokumentierte Precision-Blocker.

@@ -1,6 +1,6 @@
 import {describe,expect,it} from 'vitest';
-import {buyHardwareClass,newGame} from './economy';
-import {craft,craftModule,equip,upgrade} from './inventory';
+import {BALANCE,buyHardwareClass,newGame} from './economy';
+import {craft,craftAffordability,craftModule,equip,itemUpgradeCost,upgrade} from './inventory';
 describe('module and item economy',()=>{
  it('crafts modules atomically from data and components',()=>{const b=newGame(0),s={...b,nodes:['manufacturing3'],data:1000,componentInventory:{...b.componentInventory,circuits:20,laser:10,titaniumBolts:10},components:40};const n=craftModule(s,'computeBus');expect(n.modules.computeBus).toBe(1);expect(n.data).toBe(750);expect(n.componentInventory.circuits).toBe(10)});
  it('requires module and data for item craft',()=>{const b=newGame(0),s={...b,data:5000,blueprintFragments:10,modules:{computeBus:1,dataLattice:0},componentInventory:{circuits:50,laser:20,graphene:20,titaniumBolts:20,nanotubes:10,quantumCores:5},components:125};const n=craft(s,'quantum-chip','common');expect(n.inventory).toHaveLength(1);expect(n.modules.computeBus).toBe(0);expect(n.data).toBe(3800)});
@@ -26,4 +26,9 @@ describe('durable equipment sockets and component sources',()=>{
 it('reports data affordability with a finite ETA when production exists',async()=>{
  const {dataAffordability}=await import('./economy'),base=newGame(0),s={...base,hardwareCounts:{...base.hardwareCounts,calculator:10},hardware:10};
  const quote=dataAffordability(s,100);expect(quote.cost).toBe(100);expect(quote.balance).toBe(0);expect(quote.missing).toBe(100);expect(quote.secondsToAfford).toBeGreaterThan(0);
+});
+
+describe('data affordability contracts',()=>{
+ it('reports exact data/component/module shortages before crafting',()=>{const s={...newGame(0),data:100,blueprintFragments:0};const a=craftAffordability(s,'quantum-chip');expect(a.data.cost).toBe(BALANCE.itemRecipes['quantum-chip'].data);expect(a.data.balance).toBe(100);expect(a.data.missing).toBe(BALANCE.itemRecipes['quantum-chip'].data-100);expect(a.missingBlueprints).toBe(BALANCE.itemRecipes['quantum-chip'].blueprints);expect(a.missingModules.computeBus).toBe(1);expect(a.missingComponents.circuits).toBe(18)});
+ it('applies the manufacturing-II discount to both item upgrade costs',()=>{const item={id:'x',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false};const base=itemUpgradeCost(newGame(0),item)!;const discounted=itemUpgradeCost({...newGame(0),nodes:['manufacturing1','manufacturing2']},item)!;expect(discounted.componentCost).toBe(Math.ceil(base.componentCost*.85));expect(discounted.dataCost).toBe(Math.ceil(base.dataCost*.85))});
 });
