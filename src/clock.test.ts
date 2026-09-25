@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { GameState, newGame, startTraining } from './economy';
+import { GameState, newGame, queueResearchProject, startResearchProject, startTraining } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige } from './prestige';
-import { advance, advanceTo, debugAdvance, simulationNow } from './simulation';
+import { advance, advanceTo, debugAdvance, settleResearchCompletions, simulationNow, type ResearchCompletionStep } from './simulation';
 import { persistGame, loadGame, restore, serialize, StorageLike } from './storage';
 
 class MemoryStorage implements StorageLike {
@@ -15,6 +15,38 @@ class MemoryStorage implements StorageLike {
 const prestigeReady=(now:number)=>({...newGame(now),credits:13_000_000_000,runCreditsEarned:13_000_000_000,lifetimeCreditsEarned:13_000_000_000,lifetimeEligibleCredits:13_000_000_000});
 
 describe('simulation clock regressions',()=>{
+  const researchReady=(now=0)=>({...newGame(now),credits:1_000_000,data:1_000_000,researchPoints:1_000_000});
+
+  it('settles the first research exactly once and returns a save/render-ready state',()=>{
+    const started=startResearchProject(researchReady(),'operations'),atEnd={...started,savedAt:started.researchLabs[0]!.endsAt},steps:ResearchCompletionStep[]=[];
+    const done=settleResearchCompletions(atEnd,step=>steps.push(step));
+    expect(steps).toEqual(['project-complete','reward-applied','unlock-applied','queue-checked','missions-achievements-ready','state-ready-for-save-render']);
+    expect(done.researchLabs[0]).toBeNull();expect(done.completedResearch).toEqual(['operations']);expect(done.lifetime.researchCompleted).toBe(1);
+    const again=advance(done,1,true).state;
+    expect(again.completedResearch).toEqual(['operations']);expect(again.lifetime.researchCompleted).toBe(1);
+    expect(again.telemetry.recentEvents.filter(event=>event.type==='research-complete')).toHaveLength(1);
+  });
+
+  it.each([true,false])('completes first research during %s simulation without a queue',(active)=>{
+    const started=startResearchProject(researchReady(),'operations'),done=advance(started,181,active).state;
+    expect(done.savedAt).toBe(181_000);expect(done.researchLabs[0]).toBeNull();expect(done.completedResearch).toEqual(['operations']);expect(done.lifetime.researchCompleted).toBe(1);
+  });
+
+  it('starts one queued successor with positive remaining time and completes it once',()=>{
+    let started=startResearchProject({...researchReady(),nodes:['labQueue','labAssistant']},'operations');started=queueResearchProject(started,'blueprints');
+    const first=advance(started,181).state;
+    expect(first.completedResearch).toEqual(['operations']);expect(first.researchLabs[0]?.id).toBe('blueprints');expect(first.researchLabs[0]!.endsAt).toBeGreaterThan(first.savedAt);
+    const done=advance(first,10_000).state;
+    expect(done.completedResearch).toEqual(['operations','blueprints']);expect(done.lifetime.researchCompleted).toBe(2);expect(done.researchLabs.every(lab=>lab===null)).toBe(true);
+  });
+
+  it('reloads immediately before completion and persists the single reward',()=>{
+    const storage=new MemoryStorage(),started=startResearchProject(researchReady(),'operations'),near=advance(started,179.9).state;
+    persistGame(storage,near,near.savedAt);const loaded=loadGame(storage,near.savedAt).state,done=advance(loaded,.2).state;
+    expect(done.completedResearch).toEqual(['operations']);expect(done.lifetime.researchCompleted).toBe(1);expect(done.researchLabs[0]).toBeNull();
+    persistGame(storage,done,done.savedAt);const reloaded=loadGame(storage,done.savedAt).state;
+    expect(reloaded.completedResearch).toEqual(['operations']);expect(reloaded.lifetime.researchCompleted).toBe(1);
+  });
   it('produces for ten seconds immediately after a normal prestige',()=>{
     const reset=prestige(prestigeReady(1_000));
     const training=startTraining({...reset,credits:1000,data:1000},'quality');

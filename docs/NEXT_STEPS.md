@@ -19,9 +19,27 @@ Der kurze Mira-Prolog, das überspringbare handlungsbasierte Tutorial, einmalige
 
 ## Nächste drei priorisierte Aufgaben
 
-1. Vollständiges Lockfile in einer Umgebung mit Registry-Zugriff erzeugen, `npm ci`, Audit, Tests und Build ausführen und erst danach Browserbilder bei 390×844/Desktop aufnehmen.
+1. Den Forschungsabschluss-Fix zusätzlich auf einem betroffenen Mac in Safari verifizieren und den dortigen Crash-Bericht mit der neuen Abschlussphasenfolge vergleichen.
 2. Den ausgeführten v7-Kontrolllauf als eingechecktes Simulationswerkzeug ausbauen und Forschungsbedingungen der späteren Klassen kalibrieren.
 3. Phase 2 mit drei Modulsockeln, gespeicherten Loadouts und deterministischen Durchbruchswahlen implementieren.
+
+## Übergabe Forschungsabschluss-Freeze – 24. September 2026
+
+Der konkrete Stillstand lag im Abschlussblock des Simulationskerns. Bei
+`next.researchLabs = next.researchLabs.map(...)` wurde das Zuweisungsziel vor dem
+Callback ausgewertet. Der Callback ersetzte `next` beim Schreiben des Telemetrie-
+Ereignisses; das anschließend erzeugte Array mit leerem Slot landete deshalb auf dem
+alten Objekt. Im aktuellen Zustand blieb das abgelaufene Projekt aktiv, erzeugte in
+jeder Mikroiteration erneut Zähler und Ereignis und erreichte nach 200.000 Iterationen
+den Sicherheitsabbruch, der den ursprünglichen Zustand zurückgab. Das sah im Browser
+wie ein reproduzierbarer Freeze genau beim ersten Forschungsabschluss aus.
+
+Der Abschluss entfernt nun alle fälligen Slots zuerst in einem neuen Zustand und
+vergibt Freischaltung/Zähler/Ereignis danach genau einmal. Eine explizite Phasenfolge
+deckt Projektende, Belohnung, Freischaltung, Queue, Missionen/Achievements und Übergabe
+an Save/Render ab. Direkter und automatischer Neustart bereits abgeschlossener Projekte
+ist gesperrt. Regressionstests decken aktive und Offline-Zeit, Queue, Reload kurz vor
+Ende sowie genau ein Abschlussereignis ab.
 
 ## Letzter tatsächlich ausgeführter Teststand
 
