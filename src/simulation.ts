@@ -5,6 +5,7 @@ import { updateOnboarding } from './onboarding';
 import { addEvent, addMetrics,addSnapshot } from './telemetry';
 
 export type AdvanceReport = { credits:number; data:number; research:number; levels:number; experiments:number; hardware:number; seconds:number };
+export type ResearchCompletionStep = 'project-complete'|'reward-applied'|'unlock-applied'|'queue-checked'|'missions-achievements-ready'|'state-ready-for-save-render';
 
 /** Convert wall time to the save's explicit simulation timeline. */
 export const simulationNow = (state:GameState, wallNow=Date.now()) => wallNow + state.clockOffsetMs;
@@ -30,6 +31,37 @@ function autobuy(state:GameState) {
   return pick?buyHardwareClass(state,pick.id,1):state;
 }
 
+/**
+ * Settles every lab that ended at or before the current simulation time.
+ *
+ * Keep removal and reward on the same newly-created state. Assigning the result of
+ * `labs.map()` to `next.researchLabs` while reassigning `next` inside that callback
+ * writes the mapped array to the stale object (the assignment target is evaluated
+ * before the callback). The completed lab then survives and is completed forever.
+ */
+export function settleResearchCompletions(state:GameState,trace:((step:ResearchCompletionStep)=>void)=()=>{}):GameState {
+  const finished=state.researchLabs.filter((lab):lab is NonNullable<typeof lab>=>!!lab&&lab.endsAt<=state.savedAt+.1);
+  if(!finished.length)return state;
+  const finishedIds=new Set(finished.map(lab=>lab.id));
+  let next:GameState={...state,researchLabs:state.researchLabs.map(lab=>lab&&finishedIds.has(lab.id)?null:lab)};
+  for(const lab of finished){
+    trace('project-complete');
+    if(next.completedResearch.includes(lab.id))continue;
+    next={...next,completedResearch:[...next.completedResearch,lab.id],lifetime:{...next.lifetime,researchCompleted:next.lifetime.researchCompleted+1}};
+    trace('reward-applied');
+    trace('unlock-applied');
+    next=addEvent(next,'research-complete',next.savedAt,{id:lab.id});
+  }
+  trace('queue-checked');
+  if(next.researchQueue&&hasNode(next,'labAssistant',1)){
+    const queued=next.researchQueue,started=startResearchProject(next,queued);
+    if(started!==next)next={...started,researchQueue:null};
+  }
+  trace('missions-achievements-ready');
+  trace('state-ready-for-save-render');
+  return next;
+}
+
 export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
   if(!Number.isFinite(seconds)||seconds<=0)return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};
   const limit=Math.min(BALANCE.maxOfflineSeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline'))),total=Math.max(0,Math.min(seconds,limit));
@@ -50,7 +82,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     if(next.activeTraining&&next.training+1e-7>=goal){const completed=next.activeTraining,track=completed.track,actualDuration=completed.startedAt===undefined?null:(next.savedAt-completed.startedAt)/1000;next.training=0;next.activeTraining=null;next.level++;next.lifetime.trainingCompleted++;if(track==='quality')next.qualityLevel++;else next.efficiencyLevel++;levels++;next=addEvent(next,'training-complete',next.savedAt,{track,level:next.level,creditCost:completed.creditCost,dataCost:completed.dataCost??0,baseDuration:completed.baseDuration??completed.workRequired,effectiveRate:completed.startingRate??0,expectedDuration:(completed.baseDuration??completed.workRequired)/(completed.startingRate??1),actualDuration,onlineWork:completed.onlineWork??0,offlineWork:completed.offlineWork??0});}
     if(next.automation.elapsed+1e-7>=BALANCE.simulationStep){next.automation.elapsed%=BALANCE.simulationStep;const before=next.hardware;next=autobuy(next);hardware+=next.hardware-before;}
     if(next.experiments.active&&next.experiments.active.endsAt<=next.savedAt+.1){const id=next.experiments.active.id;next=completeExperiment(next,next.savedAt,rng);if(!next.experiments.active||next.experiments.active.id!==id)experiments++;}
-    next.researchLabs=next.researchLabs.map(lab=>{if(!lab||lab.endsAt>next.savedAt+.1)return lab;if(!next.completedResearch.includes(lab.id))next.completedResearch.push(lab.id);next.lifetime.researchCompleted++;next=addEvent(next,'research-complete',next.savedAt,{id:lab.id});return null;});if(next.researchQueue&&hasNode(next,'labAssistant',1)){const queued=next.researchQueue,started=startResearchProject(next,queued);if(started!==next)next={...started,researchQueue:null};}
+    next=settleResearchCompletions(next);
     next=addSnapshot(next,{at:next.savedAt,runSeconds:Math.max(0,(next.savedAt-(next.telemetry.runStartedAt??next.savedAt))/1000),credits:next.credits,creditsPerSecond:creditRate(next.hardware,next.level,next,next.savedAt),compute:computeRate(next.hardware,next),computePerSecond:computeRate(next.hardware,next),users:usersRate(next),data:next.data,dataPerSecond:dataRate(next),research:next.researchPoints,researchPerSecond:researchRate(next),gems:next.gems,hardwareCounts:{...next.hardwareCounts},modelLevel:next.level,qualityLevel:next.qualityLevel,efficiencyLevel:next.efficiencyLevel,activeTraining:next.activeTraining?.track??null,activeResearch:next.researchLabs.filter(Boolean).map(x=>x!.id).join('|'),prestigeClaim:newINT(next),activeLabs:next.researchLabs.filter(Boolean).length});
   }
   if(left>1e-9)return{state,report:{credits:0,data:0,research:0,levels:0,experiments:0,hardware:0,seconds:0}};
