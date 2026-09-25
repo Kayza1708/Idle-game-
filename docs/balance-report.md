@@ -138,3 +138,7 @@ Der bestehende Simulator wurde auf dem aktuellen Economy-Code kompiliert und mit
 | 30 Tage aktiv | 10 min | 50 h 45 min | 50 min | 1 h 30 min | 2 h 15 min | 2 h 50 min | 3 h 35 min | 15/15 |
 
 Die Erstfreischaltungen der Hardwareklassen waren in allen Läufen streng in Klassenreihenfolge; es wurde keine Klasse übersprungen. Im 30-Tage-Aktivlauf wurden alle 15 Klassen erreicht. Die ersten fünf Prestiges liegen weiterhin sehr früh. Das ist jetzt als konkrete Balanceauffälligkeit dokumentiert; der Auftrag definiert keinen Zielkorridor, deshalb wurde die INT-Kurve nicht willkürlich verschoben.
+
+## v20.3 acceptance note
+
+The v20.1 deterministic measurements above remain the current measured balance baseline because v20.2/v20.3 change precision, metadata, export completeness and acceptance tests rather than central pacing constants. No new timing values are invented. The export now makes item-upgrade component consumption explicit in `crafting.csv` in addition to recipe ingredient consumption. The only unverified acceptance item is the full npm script suite: dependency installation timed out in the sandbox before the scripts could be run.

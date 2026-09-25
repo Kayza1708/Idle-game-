@@ -41,3 +41,16 @@ it('exposes every equipped item effect in the production breakdown',async()=>{
  const s={...base,prestigeCount:1,nodes:['manufacturing1'],inventory:items,equipped:{processor:'c',utility:'d'}};
  const breakdown=productionBreakdown(s);expect(breakdown.itemBonuses.credits).toBeGreaterThan(0);expect(breakdown.itemBonuses.data).toBeGreaterThan(0);
 });
+
+describe('A-H component recipe reachability',()=>{
+ it('keeps every ingredient of every item recipe connected to an implemented source',()=>{
+  const sourceable=new Set(['circuits','laser','titaniumBolts','graphene','nanotubes','quantumCores']);
+  for(const recipe of Object.values(BALANCE.itemRecipes))for(const [component,amount] of Object.entries(recipe.ingredients))if((amount??0)>0)expect(sourceable.has(component)).toBe(true);
+  expect(BALANCE.components.circuits.source).toContain('passive');
+  expect(BALANCE.components.laser.source).toContain('Gaming-GPU');
+  expect(BALANCE.components.titaniumBolts.source).toContain('Hardware-Meilensteine');
+  expect(BALANCE.components.graphene.source).toContain('Architektur');
+  expect(BALANCE.components.nanotubes.source).toContain('Architektur');
+  expect(BALANCE.components.quantumCores.source).toContain('Artefakt');
+ });
+});

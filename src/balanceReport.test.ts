@@ -80,3 +80,12 @@ it('exports analyses, component flows, crafting and prestige-node purchases as d
  for(const name of ['analyses.csv','components.csv','crafting.csv','prestige-nodes.csv'])expect(files[name]).toBeDefined();
  expect(files['analyses.csv']).toContain('foundTotal');expect(files['components.csv']).toContain('source');expect(files['crafting.csv']).toContain('itemEffect');expect(files['prestige-nodes.csv']).toContain('effect');
 });
+
+it('exports component consumption for crafting and item upgrades',async()=>{
+ const {createBalanceExportFiles}=await import('./balanceReport');
+ const {upgrade}=await import('./inventory');
+ const base=newGame(0),item={id:'u',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false};
+ const upgraded=upgrade({...base,data:10000,componentInventory:{...base.componentInventory,circuits:1000},components:1000,inventory:[item]},'u');
+ const csv=createBalanceExportFiles(upgraded,1000)['crafting.csv'];
+ expect(csv).toContain('upgradeComponentCost');expect(csv).toContain('circuits');
+});

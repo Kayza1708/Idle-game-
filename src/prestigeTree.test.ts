@@ -18,3 +18,13 @@ it('Labore III retries an initially unaffordable queued project after data produ
  const next=advance(s,3600).state;
  expect(next.researchQueue).toEqual([]);expect(next.researchLabs.some(lab=>lab?.id==='dataGeneration')).toBe(true);
 });
+
+describe('A-H prestige reset retention contract',()=>{
+ it('resets run state while retaining all specified durable systems',()=>{
+  const base=newGame(0),s={...base,lifetimeEligibleCredits:13e9,credits:123,data:456,hardware:99,level:4,qualityLevel:3,efficiencyLevel:2,completedResearch:['operations' as const],researchLevels:{...base.researchLevels,dataGeneration:4},purchasedResearchLabs:2,nodes:['dataArchive1'],componentInventory:{...base.componentInventory,circuits:9},components:9,modules:{computeBus:1,dataLattice:1},inventory:[{id:'durable',type:'data-prism' as const,rarity:'rare' as const,level:2,locked:false}],blueprintFragments:7,achievementClaims:['x:0'],achievementPoints:2};
+  const after=prestige(s);
+  expect({credits:after.credits,data:after.data,level:after.level,quality:after.qualityLevel,efficiency:after.efficiencyLevel}).toEqual({credits:0,data:0,level:0,quality:0,efficiency:0});
+  expect(after.completedResearch).toEqual([]);expect(after.researchLevels.dataGeneration).toBe(0);
+  expect(after.nodes).toEqual(s.nodes);expect(after.componentInventory.circuits).toBe(9);expect(after.modules).toEqual(s.modules);expect(after.inventory).toEqual(s.inventory);expect(after.blueprintFragments).toBe(7);expect(after.achievementClaims).toEqual(s.achievementClaims);expect(after.purchasedResearchLabs).toBe(2);
+ });
+});
