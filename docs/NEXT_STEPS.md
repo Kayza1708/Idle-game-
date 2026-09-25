@@ -197,3 +197,10 @@ Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltk
 
 - [x] Credit-/Daten-Ausgaben der Kernsysteme auf einen gemeinsamen atomaren ScientificNumber-Pfad vereinheitlicht (Training, Forschung, Analysen, Hardware, Crafting/Upgrades); Datenproduktion nutzt denselben Additionspfad.
 - [ ] Persistente Credits/Data/INT vollständig von Legacy-`number` auf serialisierte Mantisse/Exponent-Werte migrieren; der gemeinsame Buchungspfad ist dafür vorbereitet, aber die GameState-Felder selbst sind noch `number`.
+
+### Präzisionsmigration v20
+- [x] Credits und Daten werden in zentralen Transaktionen zusätzlich als serialisierte ScientificNumber geführt.
+- [x] Run-/Lifetime-Credits und INT-Bestände/-Ansprüche besitzen persistente `{m,e}`-Werte.
+- [x] Prestige und INT-Knotenkäufe aktualisieren die Präzisionsspur atomar.
+- [x] Save v19 → v20 migriert die Präzisionswerte; Export schreibt sie anonym mit aus.
+- [ ] UI und Telemetrie verwenden weiterhin endliche `number`-Projektionen für Darstellung/Diagramme; diese sind bewusst nicht die autoritative Präzisionsquelle.

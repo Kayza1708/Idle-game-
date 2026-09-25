@@ -1,5 +1,5 @@
 import type { GameState } from './economy';
-import { BALANCE, creditRate,computeRate,dataRate,itemTypes,newINT,researchRate } from './economy';
+import { BALANCE, creditRate,computeRate,dataRate,itemTypes,newINT,researchRate,exactEconomyJSON } from './economy';
 import { SAVE_VERSION } from './storage';
 
 export const REPORT_VERSION=1;
@@ -58,7 +58,7 @@ export function createBalanceExportFiles(state:GameState,exportedAt=Date.now()):
   const economy={formulas:{repeatableResearchDuration:'min(baseSeconds * 1.22^(level - 1), 259200)',repeatableResearchDataCost:'ceil(baseDataCost * 1.28^(level - 1))',fixedAtStart:true},hardware:BALANCE.hardware,operatingProfiles:BALANCE.operatingProfiles,researchProjects:BALANCE.researchProjects,repeatableResearch:BALANCE.repeatableResearch,components:BALANCE.components,componentSources:BALANCE.componentSources,analysisCosts:BALANCE.analysisCosts,itemRecipes:BALANCE.itemRecipes,itemTypes};
   return{
     'manifest.json':JSON.stringify(manifest,null,2),'economy.json':JSON.stringify(economy,null,2),
-    'summary.json':JSON.stringify({...report,exportVersion:EXPORT_VERSION,runId:`${state.telemetry.campaignId}:${state.prestigeCount}`,time:{activeSeconds,offlineSeconds},progress:{trainingCompletions:state.lifetime.trainingCompleted,researchCompletions:state.lifetime.researchCompleted,prestiges:state.prestigeCount},production:{creditsPerSecond:creditRate(state.hardware,state.level,state,state.savedAt),dataPerSecond:dataRate(state),researchPerSecond:researchRate(state)},dataSaving:{currentData:state.data,nextResearchCosts:Object.fromEntries(Object.entries(BALANCE.researchProjects).map(([id,p])=>[id,p.data]))},componentSources,researchLevels:{...state.researchLevels},bottlenecks:events.filter(event=>event.type==='action-blocked').map(event=>event.details)},null,2),
+    'summary.json':JSON.stringify({...report,exportVersion:EXPORT_VERSION,runId:`${state.telemetry.campaignId}:${state.prestigeCount}`,time:{activeSeconds,offlineSeconds},progress:{trainingCompletions:state.lifetime.trainingCompleted,researchCompletions:state.lifetime.researchCompleted,prestiges:state.prestigeCount},production:{creditsPerSecond:creditRate(state.hardware,state.level,state,state.savedAt),dataPerSecond:dataRate(state),researchPerSecond:researchRate(state)},dataSaving:{currentData:state.data,exactEconomy:exactEconomyJSON(state),nextResearchCosts:Object.fromEntries(Object.entries(BALANCE.researchProjects).map(([id,p])=>[id,p.data]))},componentSources,researchLevels:{...state.researchLevels},bottlenecks:events.filter(event=>event.type==='action-blocked').map(event=>event.details)},null,2),
     'events.csv':csv(['utc','runId','sessionId','eventType','values','resourcesAfter'],eventRows),'events.jsonl':timeline.map(event=>JSON.stringify(event)).join('\n'),
     'timeline.json':JSON.stringify(timeline,null,2),'timeline.csv':csv(['utc','runId','sessionId','eventType','values','resourcesAfter'],eventRows),
     'snapshots.csv':csv(['relativeRunSeconds','credits','creditsPerSecond','compute','computePerSecond','users','data','dataPerSecond','research','researchPerSecond','gems',...Object.keys(state.hardwareCounts),'modelLevel','quality','efficiency','activeTraining','activeResearch','prestigeClaim','activeLabs'],snapshotRows),
@@ -68,7 +68,7 @@ export function createBalanceExportFiles(state:GameState,exportedAt=Date.now()):
     'research.csv':csv(['utc','event','project','labId','durationSeconds','startedAt','endsAt','actualDurationSeconds','creditCost','dataCost','researchPoints','materials','breakthrough'],research),
     'prestige.csv':csv(['utc','run','runDuration','lifetimeCredits','intClaimed','hardware','modelLevel','researchCount','nodes'],prestigeRows),
     'sessions.csv':csv(['sessionStart','sessionEnd','activeSeconds','offlineSeconds','taps','purchases','trainings','research','prestige'],[[state.telemetry.campaignStartedAt?new Date(state.telemetry.campaignStartedAt).toISOString():'',new Date(exportedAt).toISOString(),state.lifetime.activeSeconds,state.telemetry.metrics.reduce((n,x)=>n+x.offlineSeconds,0),state.lifetime.taps,purchases.length,state.lifetime.trainingCompleted,state.lifetime.researchCompleted,state.prestigeCount]]),
-    'diagnostics.json':JSON.stringify({...diagnostics,currentRates:{credits:creditRate(state.hardware,state.level,state,state.savedAt),compute:computeRate(state.hardware,state),data:dataRate(state),research:researchRate(state),prestigeClaim:newINT(state)}},null,2)
+    'diagnostics.json':JSON.stringify({...diagnostics,exactEconomy:exactEconomyJSON(state),currentRates:{credits:creditRate(state.hardware,state.level,state,state.savedAt),compute:computeRate(state.hardware,state),data:dataRate(state),research:researchRate(state),prestigeClaim:newINT(state)}},null,2)
   };
 }
 

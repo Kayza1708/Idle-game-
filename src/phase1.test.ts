@@ -49,3 +49,5 @@ describe('scientific-number arithmetic',()=>{
 
  it('spends credit and data costs atomically through the shared precision path',()=>{const s={...newGame(0),credits:1000,data:100};expect(canAffordResources(s,{credits:900,data:101})).toBe(false);expect(spendResources(s,{credits:900,data:101})).toBe(s);const paid=spendResources(s,{credits:900,data:40});expect(paid.credits).toBeCloseTo(100);expect(paid.data).toBeCloseTo(60);});
 });
+
+it('keeps an authoritative scientific balance beyond the UI number projection',async()=>{const {addCredits,exactEconomyValue}=await import('./economy');let s=newGame(0);for(let i=0;i<4;i++)s=addCredits(s,1e300);expect(Number.isFinite(s.credits)).toBe(true);expect(s.credits).toBe(1e300);expect(exactEconomyValue(s,'credits').toScientificString(3)).toContain('4.00e+300')});

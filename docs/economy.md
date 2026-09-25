@@ -213,3 +213,6 @@ Werkstattaktionen verwenden jetzt denselben Transparenzvertrag wie Analysen/Fors
 
 ### Atomare Ressourcenbuchungen
 Credit-/Datenkosten für Training, Forschung, Analysen, Hardware und Fertigung laufen über `canAffordResources`/`spendResources`. Die Buchung prüft beide Währungen vorab und zieht sie gemeinsam über `ScientificNumber`-Subtraktion ab; Teilabbuchungen bei fehlenden Daten sind damit ausgeschlossen. Produktionsdaten werden über `addData` auf demselben sicheren Additionspfad verbucht.
+
+### Save v20: persistente Präzisionsspur
+Credits, Daten sowie die Prestige-/INT-Summen besitzen zusätzlich zu den UI-kompatiblen `number`-Projektionen eine serialisierte `{m,e}`-Darstellung (`exactEconomy`). Alle zentralen Credit-/Daten-Transaktionen und INT-Käufe/Prestige-Buchungen aktualisieren diese Präzisionsspur. Save v19 wird beim Laden verlustfrei aus den vorhandenen endlichen Werten nach v20 migriert. Balance-Exporte enthalten die exakten Mantissen/Exponenten zusätzlich zu den lesbaren Projektionen.
