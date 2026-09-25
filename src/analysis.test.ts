@@ -1,6 +1,6 @@
 import {describe,expect,it} from 'vitest';
 import {BALANCE,GameState,newGame,startResearchProject} from './economy';
-import {analysisBlockReason,cancelExperiment,completeExperiment,queueExperiment} from './experiments';
+import {analysisAffordability,analysisBlockReason,cancelExperiment,completeExperiment,queueExperiment} from './experiments';
 import {advance} from './simulation';
 import {restore,serialize} from './storage';
 
@@ -39,3 +39,10 @@ describe('transactional component analyses',()=>{
 });
 
 it('persists an active analysis across reload and rewards it exactly once offline',()=>{const base=playable(),started=queueExperiment(base,'hardware',0,'short'),restored=restore(serialize(started)).state,end=restored.experiments.active!.endsAt;const done=advance(restored,(end-restored.savedAt)/1000,false,()=>1).state;const components=done.components;expect(done.experiments.active).toBeNull();expect(done.experiments.completedIds).toContain(started.experiments.active!.id);expect(completeExperiment(done,done.savedAt,()=>0).components).toBe(components)});
+
+it('reports affordability including data ETA and grants rare component from Analyse III',()=>{
+ const poor={...playable(),data:0},quote=analysisAffordability(poor,'artifact','short');
+ expect(quote.missing.data).toBe(BALANCE.analysisCosts.artifact.short.data);expect(quote.secondsToData).toBeGreaterThan(0);
+ const started=queueExperiment({...playable(),nodes:['analysis3']},'artifact',0,'short'),done=completeExperiment(started,started.experiments.active!.endsAt,()=>1);
+ expect(done.componentInventory.quantumCores).toBeGreaterThanOrEqual(1);
+});

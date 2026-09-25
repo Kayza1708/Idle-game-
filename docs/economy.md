@@ -194,3 +194,44 @@ Werte ab `1e15` werden in der UI konsistent wissenschaftlich dargestellt.
 - Komponenten → Module → Items: Compute-Bus und Daten-Gitter sind dauerhafte Zwischenprodukte. Item-Crafts und Rarity-Upgrades verbrauchen Daten atomar.
 - Item-Raritäten reichen Common → Uncommon → Rare → Epic → Legendary → Mythic.
 - Prestige bricht laufende Forschung und Analysen ohne Refund ab und setzt normale Forschung zurück; Komponenten, Module und Items bleiben erhalten.
+
+## Economy completion pass (Save v19)
+
+- Komponentenanalysen bleiben vollständig vom Forschungslabor getrennt. Datenkosten werden beim Start einmalig abgezogen; die UI zeigt Bestand, Fehlmenge und Daten-Ansparzeit.
+- Passive Hardwarefunde: pro freigeschalteter Hardwareklasse entsteht 1 Schaltkreis je 3.600 Sekunden. Der Fortschritt wird als `passiveCircuitProgress` gespeichert und funktioniert online/offline deterministisch.
+- Jeder neu überschrittene Hardware-Meilenstein gibt 1 Titan-Schraube; Gaming-GPU-Meilensteine geben zusätzlich 1 Laser. Damit haben die frühen Komponenten neben Analysen erreichbare Grind-Quellen.
+- Ausrüstung: Sockel 1 wird mit dem ersten Prestige dauerhaft aktiv; `Fertigung I` schaltet Sockel 2 frei. Ausrüstungsboni auf Daten und Forschung werden in die Produktionsraten eingerechnet.
+- Save-Schema 19 ergänzt den persistenten passiven Komponentenfortschritt; v18 wird explizit migriert.
+
+### Scientific-number arithmetic boundary (v19 follow-up)
+Hardware single/bulk cost math now has a normalized mantissa/exponent representation (`ScientificNumber`) before conversion into legacy UI/state numbers. This prevents overflow inside geometric cost/power calculations and gives max-buy an overflow-safe comparison path. Hardware counts are rejected if a purchase would exceed JavaScript's safe-integer range. Persisted resource balances are still numeric in save v19; therefore this is an arithmetic-boundary migration, not yet the final arbitrary-precision save schema.
+
+### Datenpflichtige Fertigung – Abnahme v19.3
+Werkstattaktionen verwenden jetzt denselben Transparenzvertrag wie Analysen/Forschung: Module, Item-Crafts und Item-Upgrades zeigen Datenkosten, aktuellen Datenbestand, Fehlmenge und aus der aktuellen Datenrate berechnete Ansparzeit. Item-Crafts berücksichtigen beim Aktivieren des Buttons zusätzlich fehlende Module, Komponenten und Bauplanfragmente. `itemUpgradeCost` ist die zentrale Kostenfunktion für Common → Uncommon → Rare → Epic → Legendary → Mythic und wendet Fertigung II auf Komponenten **und** Daten an.
+
+`ScientificNumber` unterstützt zusätzlich Addition, Subtraktion, Division und JSON-Roundtrips als `{m,e}`. Damit steht die notwendige Arithmetik für die noch ausstehende persistente Ressourcenmigration bereit, ohne Werte > `1e308` in `Infinity` umzuwandeln.
+
+### Atomare Ressourcenbuchungen
+Credit-/Datenkosten für Training, Forschung, Analysen, Hardware und Fertigung laufen über `canAffordResources`/`spendResources`. Die Buchung prüft beide Währungen vorab und zieht sie gemeinsam über `ScientificNumber`-Subtraktion ab; Teilabbuchungen bei fehlenden Daten sind damit ausgeschlossen. Produktionsdaten werden über `addData` auf demselben sicheren Additionspfad verbucht.
+
+### Save v20: persistente Präzisionsspur
+Credits, Daten sowie die Prestige-/INT-Summen besitzen zusätzlich zu den UI-kompatiblen `number`-Projektionen eine serialisierte `{m,e}`-Darstellung (`exactEconomy`). Alle zentralen Credit-/Daten-Transaktionen und INT-Käufe/Prestige-Buchungen aktualisieren diese Präzisionsspur. Save v19 wird beim Laden verlustfrei aus den vorhandenen endlichen Werten nach v20 migriert. Balance-Exporte enthalten die exakten Mantissen/Exponenten zusätzlich zu den lesbaren Projektionen.
+
+## A–H-Abnahmeblock v20.1
+
+- **Labore III ist jetzt wirklich automatisch:** eine vorgemerkte Forschung wird nicht nur direkt nach einem Forschungsabschluss geprüft, sondern bei jedem Simulationsschritt erneut. War sie beim Vormerken/Abschluss wegen Datenmangel unbezahlbar, startet sie exakt dann, wenn Datenbestand und freier Slot reichen.
+- Die Analyseansicht zeigt den letzten tatsächlich verbuchten Komponentenfund aus dem Abschlussereignis; Startkosten, Restzeit und laufender Status bleiben sichtbar.
+- Der lokale Balance-Export enthält zusätzlich `analyses.csv`, `components.csv`, `crafting.csv` und `prestige-nodes.csv`. Damit sind Analysefunde, Komponentenquellen/-mengen, Herstellung/Upgrades/Itemeffekte und tatsächliche INT-Knotenkäufe getrennt auswertbar.
+- Prestige-Knotenkäufe erzeugen dafür ein lokales `prestige-node-buy`-Ereignis mit Kosten, Ast, Tiefe und Effekt. Es findet kein Upload statt.
+
+### A–H Abschlussprüfung v20.2
+
+- Hardware-Max-Käufe verwenden nun das autoritative `exactEconomy.credits`-Ledger auch oberhalb der auf `1e300` begrenzten UI-Projektion. Die Suche nach der maximal kaufbaren Menge erfolgt deterministisch per exponentieller Eingrenzung plus Binärsuche; der exakte Scientific-Preis wird vom Ledger abgezogen.
+- Hardware-Telemetrie protokolliert zusätzlich `exactCost` in wissenschaftlicher Schreibweise, damit ein UI-Cap nicht als echter Kaufpreis exportiert wird.
+- Die Produktionszerlegung weist Itemboni getrennt für Credits, Compute, Daten, Forschung, Training und Analyse aus.
+
+## A–H acceptance closure v20.3
+
+The binding economy contract is now represented in code rather than only in roadmap notes: 15 hardware classes each retain milestones 10/25/50/100/250/500; component source labels match their implemented passive/milestone/analysis paths; prestige reset/retention has an explicit regression; and every positive component ingredient used by an item recipe maps to an implemented source. Balance export also records upgrade component consumption explicitly (`upgradeComponent`, `upgradeComponentCost`) instead of only the data cost.
+
+The authoritative large-value resource ledger remains serialized as normalized mantissa/exponent values while finite `number` projections are retained for rendering and charts. This is intentional: JavaScript Number is not integer-exact beyond `2^53 - 1`, so gameplay-critical balances and max-buy decisions must not depend on the projection.

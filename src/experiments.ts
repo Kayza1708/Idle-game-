@@ -1,4 +1,4 @@
-import { BALANCE, ComponentId, equippedBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, rates } from './economy';
+import { BALANCE, ComponentId, equippedBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, dataRate, spendResources } from './economy';
 import { createItem, randomItem } from './inventory';
 import { addEvent } from './telemetry';
 
@@ -6,7 +6,7 @@ export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanal
 export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
 export const experimentDuration=(length:ExperimentLength)=>length==='intro'?BALANCE.introExperimentSeconds:length==='short'?BALANCE.shortExperimentSeconds:BALANCE.experimentSeconds;
 export function analysisCost(type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){return BALANCE.analysisCosts[type][length]}
-export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),missingCredits=Math.max(0,cost.credits-s.credits),missingData=Math.max(0,cost.data-s.data),production=rates(s);return{cost,balance:{credits:s.credits,data:s.data},missing:{credits:missingCredits,data:missingData},secondsToData:missingData<=0?0:production.dataPerSecond>0?missingData/production.dataPerSecond:Infinity};}
+export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),missingCredits=Math.max(0,cost.credits-s.credits),missingData=Math.max(0,cost.data-s.data),rate=dataRate(s);return{cost,balance:{credits:s.credits,data:s.data},missing:{credits:missingCredits,data:missingData},secondsToData:missingData<=0?0:rate>0?missingData/rate:Infinity};}
 export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){
   const cost=analysisCost(type,length);
   if(!s.discovered.includes('sbc'))return 'Einplatinencomputer noch nicht entdeckt.';
@@ -23,7 +23,7 @@ export function splitMaterialReward(value:number){
 }
 function componentGrant(s:GameState,type:ExperimentId,count:number){const source=BALANCE.componentSources[type],sequence=(Object.entries(source) as [ComponentId,number][]).flatMap(([id,amount])=>Array(amount).fill(id) as ComponentId[]),prior=s.telemetry.recentEvents.filter(event=>event.type==='component-found'&&event.details.source===`experiment:${type}`).length,grant:Partial<Record<ComponentId,number>>={};for(let i=0;i<count;i++){const id=sequence[(prior+i)%sequence.length];grant[id]=(grant[id]??0)+1;}return grant;}
 function guaranteeRare(found:Partial<Record<ComponentId,number>>,type:ExperimentId){if((found.graphene??0)+(found.nanotubes??0)+(found.quantumCores??0)>0)return;const id:ComponentId=type==='artifact'?'quantumCores':type==='architecture'?'graphene':'graphene';found[id]=(found[id]??0)+1;}
-const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(length)/experimentSpeed(s),cost=length==='intro'?{credits:0,data:0}:analysisCost(type,length);return addEvent({...s,credits:s.credits-cost.credits,data:s.data-cost.data,experiments:{...s.experiments,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:cost.credits,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:cost.credits,dataCost:cost.data,durationSeconds});};
+const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(length)/experimentSpeed(s),cost=length==='intro'?{credits:0,data:0}:analysisCost(type,length);const paid=spendResources(s,cost);return addEvent({...paid,experiments:{...s.experiments,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:cost.credits,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:cost.credits,dataCost:cost.data,durationSeconds});};
 export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:ExperimentLength='long'){
   if(length==='intro'){if(s.onboarding.completed.includes('intro-experiment')||s.experiments.active)return s;return start(s,type,now,length);}
   const reason=analysisBlockReason(s,type,length);

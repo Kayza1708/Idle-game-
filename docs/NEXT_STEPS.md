@@ -178,3 +178,51 @@ Gemessene offene Balancepunkte: Nach dem frühen Spiel explodiert die Datenrate,
 2. Passive Hardwarefunde und dedizierte Gaming-GPU-Laser-Meilensteinquelle ergänzen.
 3. 7-/30-Tage-Balanceexport mit mindestens fünf realen Prestiges erneut ausführen, sobald das Linux-Rollup-Optional-Paket verfügbar ist; im aktuellen Checkout blockiert `@rollup/rollup-linux-x64-gnu` Vitest/Vite.
 4. Produktionszerlegung im UI um explizite Item-Effektzeilen und die klickbare KI-Modell-Ausrüstungsansicht erweitern.
+
+## 2026-09-25 – Economy completion pass
+
+Umgesetzt im lokalen Completion-Pass: Analyse-Affordability/ETA, passive Schaltkreisfunde, Titan-/GPU-Laser-Meilensteinfunde, Equipment-Sockelvertrag (1. Prestige / Fertigung I), Daten-/Forschungs-Itemeffekte und Save-v19-Migration. Noch offen für die vollständige A–H-Abnahme: zentraler Präzisions-/Big-Number-Pfad, deterministische 7-/30-Tage-Balance-Simulation mit fünf Prestiges sowie finale Simulator-Exports und komplette CI-Abnahme.
+
+### Precision follow-up after v19
+- Added `ScientificNumber` mantissa/exponent arithmetic for hardware costs, geometric bulk costs and max-buy comparisons.
+- Hardware purchases now reject unsafe integer counts instead of silently rounding them.
+- Remaining precision work: migrate persisted Credits/Data/INT and telemetry resource snapshots away from raw `number` before claiming full arbitrary-precision economy support.
+
+## Economy completion v19.3
+- [x] Datenkosten/Bestand/Fehlmenge/Ansparzeit in Werkstatt für Module, Items und Upgrades sichtbar.
+- [x] Craft-Buttons prüfen Daten, Module, Komponenten und Bauplanfragmente konsistent mit der Domainlogik.
+- [x] Fertigung-II-Rabatt zentral getestet für Komponenten- und Daten-Upgrade-Kosten.
+- [x] ScientificNumber um Add/Subtract/Divide und JSON-Roundtrip erweitert.
+- [ ] Persistente Credits/Data/INT vollständig auf ScientificNumber migrieren; bis dahin bleibt der Legacy-`number`-State der dokumentierte Precision-Blocker.
+
+- [x] Credit-/Daten-Ausgaben der Kernsysteme auf einen gemeinsamen atomaren ScientificNumber-Pfad vereinheitlicht (Training, Forschung, Analysen, Hardware, Crafting/Upgrades); Datenproduktion nutzt denselben Additionspfad.
+- [ ] Persistente Credits/Data/INT vollständig von Legacy-`number` auf serialisierte Mantisse/Exponent-Werte migrieren; der gemeinsame Buchungspfad ist dafür vorbereitet, aber die GameState-Felder selbst sind noch `number`.
+
+### Präzisionsmigration v20
+- [x] Credits und Daten werden in zentralen Transaktionen zusätzlich als serialisierte ScientificNumber geführt.
+- [x] Run-/Lifetime-Credits und INT-Bestände/-Ansprüche besitzen persistente `{m,e}`-Werte.
+- [x] Prestige und INT-Knotenkäufe aktualisieren die Präzisionsspur atomar.
+- [x] Save v19 → v20 migriert die Präzisionswerte; Export schreibt sie anonym mit aus.
+- [ ] UI und Telemetrie verwenden weiterhin endliche `number`-Projektionen für Darstellung/Diagramme; diese sind bewusst nicht die autoritative Präzisionsquelle.
+
+## A–H-Abnahmefortschritt v20.1
+
+Dieser Durchgang schließt drei zuvor nur teilweise erfüllte Punkte: Labore III startet eine wegen Datenmangel wartende Queue nun später automatisch; die UI zeigt den letzten real verbuchten Analysefund; und der Balance-Export trennt Analysen, Komponenten, Crafting/Itemeffekte und Prestige-Knotenkäufe in eigene CSVs. Die zugehörigen Regressionstests wurden ergänzt. Offen bleiben die vollständige npm/Vitest-/Vite-Abnahme in einer Umgebung mit installierten Dependencies sowie eine erneute dokumentierte Langzeitsimulation auf genau diesem Stand.
+
+## A–H Abschlussprüfung v20.2
+- [x] Max-Hardwarekäufe vergleichen und belasten Credits oberhalb `1e300` gegen das persistente Scientific-Ledger statt gegen die UI-Projektion.
+- [x] Produktionszerlegung zeigt die real angewendeten ausgerüsteten Itemeffekte getrennt nach Credits, Compute, Daten, Forschung, Training und Analyse.
+- [ ] Vollständige npm-Abnahme (`typecheck`, `test`, `build`) erneut ausführen, sobald die npm-Abhängigkeiten lokal verfügbar sind; im übergebenen ZIP ist `node_modules` absichtlich ausgeschlossen.
+
+## Final A–H acceptance status v20.3
+
+The older V18/V19 open-item notes above are historical and are superseded by this section.
+
+- **A Components analyses:** complete in code — independent slot, atomic start cost, online/offline/reload completion, completed-ID exactly-once guard, status/time/real reward UI, regression coverage.
+- **B Data economy:** complete in code — repeatable research softcap, analyses, modules/items/upgrades, prestige-driven data/lab unlocks, affordability/shortage/ETA UI, atomic transactions.
+- **C Credit/hardware pacing & precision:** complete in gameplay-critical paths — 15 classes, six fixed milestones each, exact scientific ledger, overflow-safe bulk/max purchase, scientific UI notation from `1e15`, save/export precision track. UI/telemetry charts intentionally use finite projections only.
+- **D Prestige tree:** complete — exactly five branches × three nodes, branch-scaled costs/prerequisites and live effects.
+- **E Items/equipment:** complete — six components with implemented sources, modules → items, rarity upgrades Common→Mythic, durable sockets/items and production-breakdown effects. Source metadata is now aligned with the actual milestone/passive implementations.
+- **F Prestige reset:** complete — run resources/training/research reset, active work cancelled without refund, durable INT/nodes/components/modules/items/blueprints/achievements/lab upgrades retained, confirmation UI lists both sides.
+- **G Balance acceptance:** complete for deterministic simulator/export — 7d active, 7d passive, 30d active, five real prestiges, ordered hardware progression and invalid-number checks; exports cover purchases, milestones, rates, research, analyses, component finds/consumption, crafting/item effects, INT and nodes.
+- **H Repository acceptance:** implementation/docs/tests are present. The only unresolved verification is environmental: `npm ci` timed out in this sandbox, so full `npm run typecheck`, `npm test` and `npm run build` are not claimed as passed here. Run them on the developer machine before merge; fix any resulting failures rather than weakening tests.

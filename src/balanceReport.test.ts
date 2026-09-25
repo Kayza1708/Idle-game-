@@ -53,7 +53,7 @@ describe('local balance report',()=>{
 });
 
 describe('analysis archive',()=>{
- it('contains every documented local analysis file and no direct personal fields',async()=>{const {createBalanceExportFiles,createBalanceZip}=await import('./balanceReport');const files=createBalanceExportFiles(newGame(0),1000);expect(Object.keys(files).sort()).toEqual(['diagnostics.json','economy.json','events.csv','events.jsonl','manifest.json','milestones.csv','prestige.csv','purchases.csv','research.csv','sessions.csv','snapshots.csv','summary.json','timeline.csv','timeline.json','training.csv']);expect(createBalanceZip(newGame(0),1000).slice(0,2)).toEqual(new Uint8Array([80,75]));expect(JSON.stringify(files)).not.toMatch(/email|ipAddress|realName/i);});
+ it('contains every documented local analysis file and no direct personal fields',async()=>{const {createBalanceExportFiles,createBalanceZip}=await import('./balanceReport');const files=createBalanceExportFiles(newGame(0),1000);expect(Object.keys(files).sort()).toEqual(['analyses.csv','components.csv','crafting.csv','diagnostics.json','economy.json','events.csv','events.jsonl','manifest.json','milestones.csv','prestige-nodes.csv','prestige.csv','purchases.csv','research.csv','sessions.csv','snapshots.csv','summary.json','timeline.csv','timeline.json','training.csv']);expect(createBalanceZip(newGame(0),1000).slice(0,2)).toEqual(new Uint8Array([80,75]));expect(JSON.stringify(files)).not.toMatch(/email|ipAddress|realName/i);});
 });
 
 it('writes ZIP central directory offsets and CRC-compatible stored entries',()=>{const zip=createBalanceZip(newGame(0),1000),view=new DataView(zip.buffer,zip.byteOffset,zip.byteLength),end=zip.length-22;expect(view.getUint32(0,true)).toBe(0x04034b50);expect(view.getUint32(end,true)).toBe(0x06054b50);const centralOffset=view.getUint32(end+16,true);expect(view.getUint32(centralOffset,true)).toBe(0x02014b50);expect(view.getUint16(end+8,true)).toBe(15);expect(view.getUint16(end+10,true)).toBe(15);});
@@ -64,3 +64,28 @@ it('exports immutable event resources, populated purchases, and 30-second snapsh
 it('supports cancellation without mutating the state',async()=>{const state=newGame(123),before=JSON.stringify(state),controller=new AbortController();controller.abort();await expect(createBalanceZipAsync(state,456,controller.signal)).rejects.toMatchObject({name:'AbortError'});expect(JSON.stringify(state)).toBe(before)});
 
 it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {createBalanceExportFiles}=await import('./balanceReport');let state:GameState={...newGame(0),aiName:'PrivateName'};for(let i=0;i<520;i++)state=addEvent(state,'action-blocked',i,{action:'research-start',missingData:1});const files=createBalanceExportFiles(state,1000);expect(JSON.parse(files['economy.json']).formulas.repeatableResearchDuration).toContain('1.22');expect(JSON.parse(files['diagnostics.json']).droppedEvents).toBeGreaterThan(0);expect(JSON.stringify(files)).not.toContain('PrivateName')});
+
+describe('deterministic long-run acceptance simulation',()=>{
+ it('covers 7d active/passive, 30d active and five real prestige resets without invalid numbers',async()=>{
+  const {simulateBalance}=await import('./simulation');
+  const active7=simulateBalance(7,true,1708,5),passive7=simulateBalance(7,false,1708,5),active30=simulateBalance(30,true,1708,5);
+  for(const run of [active7,passive7,active30]){expect(run.invalid).toBe(false);expect(run.prestiges).toBe(5);expect(run.milestones.firstPrestige).not.toBeNull();}
+  expect(active7.final.level).toBeGreaterThan(passive7.final.level);expect(active30.final.discovered.length).toBe(15);
+ });
+});
+
+it('exports analyses, component flows, crafting and prestige-node purchases as dedicated local tables',async()=>{
+ const {createBalanceExportFiles}=await import('./balanceReport');
+ const files=createBalanceExportFiles(newGame(0),1000);
+ for(const name of ['analyses.csv','components.csv','crafting.csv','prestige-nodes.csv'])expect(files[name]).toBeDefined();
+ expect(files['analyses.csv']).toContain('foundTotal');expect(files['components.csv']).toContain('source');expect(files['crafting.csv']).toContain('itemEffect');expect(files['prestige-nodes.csv']).toContain('effect');
+});
+
+it('exports component consumption for crafting and item upgrades',async()=>{
+ const {createBalanceExportFiles}=await import('./balanceReport');
+ const {upgrade}=await import('./inventory');
+ const base=newGame(0),item={id:'u',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false};
+ const upgraded=upgrade({...base,data:10000,componentInventory:{...base.componentInventory,circuits:1000},components:1000,inventory:[item]},'u');
+ const csv=createBalanceExportFiles(upgraded,1000)['crafting.csv'];
+ expect(csv).toContain('upgradeComponentCost');expect(csv).toContain('circuits');
+});

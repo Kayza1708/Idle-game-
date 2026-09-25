@@ -207,3 +207,33 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - [x] Zwei Module, datenpflichtiges Item-Crafting und Mythic-Upgrades implementiert.
 - [x] Prestige-Abbruch laufender Forschung/Analyse und dauerhafter Erhalt von Komponenten/Modulen/Items umgesetzt.
 - [ ] Vollständige Big-Number-Migration und Langzeit-Balanceabnahme ausführen.
+
+### Economy v19 completion pass
+- [x] Analyse-Kosten/Bestand/Fehlmenge/ETA im UI
+- [x] Passive Hardware-Schaltkreisfunde online/offline
+- [x] Hardware-Meilensteine liefern Titan; Gaming-GPU-Meilensteine zusätzlich Laser
+- [x] Equipment-Sockel 1 nach erstem Prestige, Sockel 2 über Fertigung I
+- [x] Save-v19-Migration für passiven Komponentenfortschritt
+- [ ] Big-Number-/Präzisionspfad und Langzeit-Balance-Abnahme abschließen
+
+- v19.4: Atomare Credit-/Datenbuchungen über den zentralen ScientificNumber-Pfad für Kern-Economy-Aktionen; verhindert Teilabbuchungen und vereinheitlicht Produktionsaddition.
+
+- **v20 Economy Precision:** persistente ScientificNumber-Spur für Credits, Daten und INT inklusive v19-Migration, Prestige-Buchungen und Balance-Export umgesetzt. UI/Telemetry bleiben auf endlichen Projektionen, während Economy-Transaktionen die exakte Spur führen.
+
+## Abschlussblock v20.1
+
+- [x] Labore-III-Autostart wartet bei Datenmangel und startet später automatisch bei Bezahlbarkeit.
+- [x] Tatsächliche Analysefundmenge wird in der Forschungsansicht aus dem verbuchten Abschluss angezeigt.
+- [x] Balance-Export besitzt getrennte Tabellen für Analysen, Komponentenflüsse, Crafting/Itemeffekte und Prestige-Knotenkäufe.
+
+### v20.2 · A–H Precision/Equipment-Abnahme
+- Exact-Credit-Ledger bis in Max-Hardwarekäufe durchgezogen; UI-Projektionscap beeinflusst den Kauf nicht mehr.
+- Produktionszerlegung für alle Item-Effektfamilien vervollständigt und mit Regressionstests abgesichert.
+
+## v20.3 · A–H acceptance closure
+- [x] 15 hardware classes × required six milestones covered by a regression contract.
+- [x] Component source metadata aligned with implemented passive hardware, GPU milestone, hardware milestone and analysis sources.
+- [x] Full prestige reset/retention list covered by regression, including durable purchased lab slots.
+- [x] Every item-recipe component ingredient checked against an implemented acquisition path.
+- [x] Balance export includes item-upgrade component consumption as well as crafting ingredients/data costs.
+- [ ] External acceptance only: run the repository scripts (`typecheck`, `test`, `build`) once dependencies can be installed; this environment timed out during `npm ci` and therefore does not claim those scripts passed.

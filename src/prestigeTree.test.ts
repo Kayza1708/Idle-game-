@@ -9,3 +9,22 @@ describe('five-branch prestige tree',()=>{
  it('unlocks second lab and two-entry queue',()=>{let s={...newGame(0),nodes:['labs1','labs2']};expect(researchLabCount(s)).toBe(2);s=queueResearchProject(s,'operations');s=queueResearchProject(s,'blueprints');s=queueResearchProject(s,'alignment');expect(s.researchQueue).toEqual(['operations','blueprints'])});
  it('prestige cancels running labs/analysis and retains durable inventory',()=>{const base=newGame(0);const s={...base,lifetimeEligibleCredits:13e9,componentInventory:{...base.componentInventory,circuits:7},components:7,modules:{computeBus:2,dataLattice:1},inventory:[{id:'kept',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false}],researchQueue:['operations' as const],researchLabs:[{id:'operations' as const,level:1,startedAt:0,endsAt:100,durationSeconds:100,dataCost:1},null,null,null]};const after=prestige(s);expect(after.researchLabs.every(x=>x===null)).toBe(true);expect(after.researchQueue).toEqual([]);expect(after.components).toBe(7);expect(after.modules.computeBus).toBe(2);expect(after.inventory).toEqual(s.inventory)});
 });
+
+it('updates exact INT ledgers when a prestige node is purchased',async()=>{const {ScientificNumber}=await import('./scientificNumber');let s={...newGame(0),unspentINT:1000,exactEconomy:{...newGame(0).exactEconomy,unspentINT:ScientificNumber.from(1000).toJSON()}};const next=buyNode(s,'dataArchive1');expect(next.unspentINT).toBe(900);expect(ScientificNumber.fromJSON(next.exactEconomy.unspentINT).toNumber()).toBe(900);expect(ScientificNumber.fromJSON(next.exactEconomy.spentINT).toNumber()).toBe(100)});
+
+it('Labore III retries an initially unaffordable queued project after data production makes it payable',async()=>{
+ const {advance}=await import('./simulation');
+ const base=newGame(0),s={...base,nodes:['labs1','labs2','labs3'],discovered:['calculator','sbc'] as import('./economy').HardwareId[],hardwareCounts:{...base.hardwareCounts,calculator:10,sbc:10},hardware:20,data:0,researchQueue:['dataGeneration' as const]};
+ const next=advance(s,3600).state;
+ expect(next.researchQueue).toEqual([]);expect(next.researchLabs.some(lab=>lab?.id==='dataGeneration')).toBe(true);
+});
+
+describe('A-H prestige reset retention contract',()=>{
+ it('resets run state while retaining all specified durable systems',()=>{
+  const base=newGame(0),s={...base,lifetimeEligibleCredits:13e9,credits:123,data:456,hardware:99,level:4,qualityLevel:3,efficiencyLevel:2,completedResearch:['operations' as const],researchLevels:{...base.researchLevels,dataGeneration:4},purchasedResearchLabs:2,nodes:['dataArchive1'],componentInventory:{...base.componentInventory,circuits:9},components:9,modules:{computeBus:1,dataLattice:1},inventory:[{id:'durable',type:'data-prism' as const,rarity:'rare' as const,level:2,locked:false}],blueprintFragments:7,achievementClaims:['x:0'],achievementPoints:2};
+  const after=prestige(s);
+  expect({credits:after.credits,data:after.data,level:after.level,quality:after.qualityLevel,efficiency:after.efficiencyLevel}).toEqual({credits:0,data:0,level:0,quality:0,efficiency:0});
+  expect(after.completedResearch).toEqual([]);expect(after.researchLevels.dataGeneration).toBe(0);
+  expect(after.nodes).toEqual(s.nodes);expect(after.componentInventory.circuits).toBe(9);expect(after.modules).toEqual(s.modules);expect(after.inventory).toEqual(s.inventory);expect(after.blueprintFragments).toBe(7);expect(after.achievementClaims).toEqual(s.achievementClaims);expect(after.purchasedResearchLabs).toBe(2);
+ });
+});
