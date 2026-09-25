@@ -145,3 +145,9 @@ Error-Text und Key-/Loggrößen; die UI bietet dann den lokalen Spielstandexport
 - Offen bleibt die geforderte reale 30-Minuten-Browserabnahme, da die bereitgestellten
   Crash-/ZIP-Dateien nicht im Arbeitsverzeichnis liegen und die lokale Browser-
   Toolchain weiterhin nicht startbar ist.
+
+## Übergabe 25. September 2026 – Komponenten und Analyseexport
+
+Der Arbeitsbranch `work` enthält Save v16 mit sechs typisierten Komponenten, zentralen Quellen/Rezepten, dem realen Komponentenatlas sowie dem erweiterten ZIP-Vertrag. Das Repository besitzt keinen konfigurierten Git-Remote und keinen lokalen `main`-Ref; ein Fetch oder Abgleich mit `main` war deshalb nicht möglich. Der Atlas lag bereits im Branch und wurde nicht ersetzt.
+
+Als Nächstes sind ein gerenderter Mobile-Browsertest (Bestand, Funddarstellung, lange Rezeptzeilen, 44-px-Ziele) und der vollständige CI-Lauf nach Wiederherstellung des Registry-Zugriffs erforderlich. `npm ci` scheiterte konkret mit HTTP 403 beim Abruf von Vitest und entfernte die vorher nur teilweise vorhandenen Module. Die bestehenden historischen aktiven/passiven v7-Messungen bleiben deshalb unverändert; es wurden keine neuen Langlaufzahlen erfunden.
