@@ -146,3 +146,11 @@ Sekunden**, Training 34 bei **201.859,86 Sekunden**. Die tatsächlichen
 Simulationsabschlusszeiten lagen wegen der bewusst groben 60-Sekunden-Testaufrufe bei
 60, 2.940 und 201.900 Sekunden; der Spieltick selbst berechnet den Abschluss innerhalb
 eines Aufrufs exakt.
+
+## Typisierte Komponenten und feste Forschungsaufträge (25. September 2026)
+
+Die sechs Komponenten **Schaltkreise, Laser, Graphen, Titan-Schrauben, Nanoröhrchen und Quantenkerne** besitzen nun getrennte, persistente Bestände. Hardwareanalysen liefern Schaltkreise/Laser/Titan-Schrauben, Architekturstudien Graphen/Nanoröhrchen und Artefaktsuchen Graphen/Nanoröhrchen/Quantenkerne. Damit hat jede Rezeptzutat einen im normalen Spiel erreichbaren Grant-Pfad. Die exakten Quellengewichte und Rezepte je Seltenheit liegen ausschließlich in `BALANCE.components`, `BALANCE.componentSources` und `BALANCE.craftingRecipes` in `src/economy.ts`. Herstellen zieht jede angezeigte Zutat und Bauplanfragmente atomar ab; Funde und Crafting werden mit Quelle beziehungsweise Zutaten protokolliert.
+
+Save v16 migriert den alten untypisierten Komponentenbestand verlustfrei zu Schaltkreisen. Komponenten und Items bleiben – wie schon zuvor – beim INT-Prestige erhalten; nur ausdrücklich laufbezogene Recycling-Schlüssel werden zurückgesetzt.
+
+Forschungsprojekte behalten ihre zentralen Credit-, Daten- und FP-Kosten. Ein Start verlangt alle drei Bestände und zieht sie vollständig genau einmal ab. `startedAt` und das aus der zentralen Rangformel berechnete `endsAt` werden beim Start gespeichert; spätere Forschungsboni ändern den laufenden Auftrag nicht rückwirkend. Die drei Projekte sind einmalig und die Oberfläche benennt ihre Freischaltwirkung entsprechend.

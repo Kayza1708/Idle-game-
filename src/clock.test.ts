@@ -27,7 +27,7 @@ describe('simulation clock regressions',()=>{
     expect(again.telemetry.recentEvents.filter(event=>event.type==='research-complete')).toHaveLength(1);
   });
 
-  it.each([true,false])('completes first research during %s simulation without a queue',(active)=>{
+  it.each([true,false])('completes first research during %s simulation without a queue',(active:boolean)=>{
     const started=startResearchProject(researchReady(),'operations'),done=advance(started,181,active).state;
     expect(done.savedAt).toBe(181_000);expect(done.researchLabs[0]).toBeNull();expect(done.completedResearch).toEqual(['operations']);expect(done.lifetime.researchCompleted).toBe(1);
   });

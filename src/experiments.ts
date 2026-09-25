@@ -1,4 +1,4 @@
-import { BALANCE, ExperimentId, ExperimentLength, GameState, hasNode } from './economy';
+import { BALANCE, ComponentId, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode } from './economy';
 import { createItem, randomItem } from './inventory';
 import { addEvent } from './telemetry';
 
@@ -11,6 +11,7 @@ export function splitMaterialReward(value:number){
   const normalized=Math.abs(value-nearest)<=tolerance?nearest:value,whole=Math.floor(normalized);
   return {whole,remainder:normalized-whole};
 }
+function componentGrant(s:GameState,type:ExperimentId,count:number){const source=BALANCE.componentSources[type],sequence=(Object.entries(source) as [ComponentId,number][]).flatMap(([id,amount])=>Array(amount).fill(id) as ComponentId[]),prior=s.telemetry.recentEvents.filter(event=>event.type==='component-found'&&event.details.source===`experiment:${type}`).length,grant:Partial<Record<ComponentId,number>>={};for(let i=0;i<count;i++){const id=sequence[(prior+i)%sequence.length];grant[id]=(grant[id]??0)+1;}return grant;}
 const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>({...s,experiments:{...s.experiments,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+experimentDuration(length)*1000/experimentSpeed(s)}},nextId:s.nextId+1});
 export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:ExperimentLength='long'){
   if(length==='intro'){if(s.onboarding.completed.includes('intro-experiment')||s.experiments.active)return s;return start(s,type,now,length);}
@@ -25,9 +26,9 @@ export function completeExperiment(s:GameState,now:number,rng=Math.random):GameS
     return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length});
   }
   const reward=BALANCE.experimentRewards[active.type],scale=active.length==='short'?1/24:1,components=splitMaterialReward(reward.components*scale*(1+(hasNode(s,'artifactBus',1)?.1:0))+s.componentRemainder),research=splitMaterialReward(reward.research*scale*(1+(hasNode(s,'labLink',2)?.1:0))+s.researchRemainder),blueprints=splitMaterialReward(reward.blueprints*scale+s.blueprintRemainder);
-  let next:GameState={...s,components:s.components+components.whole,lifetime:{...s.lifetime,componentsEarned:s.lifetime.componentsEarned+components.whole},componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true}};
+  const found=componentGrant(s,active.type,components.whole);let next:GameState=grantComponents({...s,componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true}},found);
   if(reward.itemChance*scale&&rng()<reward.itemChance*scale)next=randomItem(next,rng);
   const queued=next.experiments.queue[0],type=queued??(hasNode(next,'autoRoute',3)?next.experiments.repeat??undefined:undefined),queue=next.experiments.queue.slice(queued?1:0);
   if(type)next=start({...next,experiments:{...next.experiments,queue}},type,active.endsAt,'long');
-  return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length});
+  next=addEvent(next,'component-found',now,{source:`experiment:${active.type}`,components:JSON.stringify(found),total:components.whole});return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length});
 }
