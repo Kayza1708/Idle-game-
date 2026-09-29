@@ -1,3 +1,9 @@
+## Übergabe Save-Koordination – 29. September 2026
+
+Der Fortschrittsverlust entstand dadurch, dass Event- und Autosaves nach ihrem `await` den beim Start gespeicherten Snapshot erneut in React-State und State-Ref schrieben. Ein zentraler Koordinator führt nun höchstens einen Schreibvorgang aus, fasst Überlappungen zu genau einem anschließenden Save des neuesten In-Memory-Zustands zusammen und schreibt Save-Ergebnisse nie zurück ins laufende Spiel. Laden ist eine explizite Barriere vor Simulation, Eingaben und Autosave. Inkompatible Saves bleiben unangetastet und sichtbar; ein IndexedDB-Zugriffsfehler wird separat gemeldet.
+
+Offen bleibt die manuelle Lifecycle-Abnahme in Safari auf einem Mac (Event-Save plus Kauf, Tabwechsel/Visibility und Reload).
+
 # Übergabe und nächste Schritte
 
 ## Nach der Stabilisierung vom 29. September 2026
