@@ -1,3 +1,27 @@
+## Übergabe KI-Ausrüstung – 29. September 2026
+
+Die Modellkarte öffnet nun einen eigenen Dialog mit KI-Name, Modelllevel, dauerhaftem Platzstatus, kategoriekonformer Itemauswahl und echter Produktionsvorschau. Platz 1 folgt dem ersten Prestige; Platz 2/3 kosten 1e9/1e20 Credits oder werden durch Fertigung I/V kostenlos gewährt. Käufe rechnen vollständig im ScientificNumber-Pfad. Ausrüsten, Ersetzen und Entfernen laufen über bestehende Domain-/Event-Save-Pfade, löschen keine Iteminstanz und erlauben keine Doppelbelegung.
+
+## Übergabe Drop- und Analysefeedback – 29. September 2026
+
+Signal-Drops erzeugen nach der tatsächlichen Buchung kompakte, zusammengefasste Fundkarten; maximal drei Meldungen bleiben gleichzeitig sichtbar und verschwinden nach vier Sekunden. Analyseabschlüsse speichern ihre reale Material-/Fragmentzusammensetzung für Ergebnisansicht und Reload, während erneuter Start weiterhin den normalen Kosten- und Slotpfad nutzt. Offline-Berichte aggregieren nur während des Zeitraums gebuchte Komponenten und Abschlüsse. Die Rare-Garantie erkennt Seltenheit über das zentrale Register und ergänzt bei Bedarf genau ein Graphen, niemals automatisch einen Quantenkern.
+
+Das vorhandene Komponentenatlas ist als 3×2-Raster eingebunden und deckt Schaltkreise bis Graphen ab. Für Nanoröhrchen, Supraleiter, Neuralkristalle und Quantenkerne fehlen eigene Rasterzellen; die UI zeigt dafür bewusst einen neutralen, beschrifteten Fallback statt falscher Bildkoordinaten.
+
+## Übergabe Challenge-Run und Onboarding – 29. September 2026
+
+Challenge-Bereitschaft wird nicht mehr aus dem gesamten Account-Anspruch berechnet. Jeder Start speichert Run-ID und exakten Ausgangswert des prestigeberechtigten Lifetime-Umsatzes; die unveränderte Prestigeformel wird nur auf die positive Differenz angewandt. Nicht prestigeberechtigte Reward-/Debug-Credits bleiben ausgeschlossen. Sterne gibt es nur beim ersten Abschluss einer Challenge, Wiederholungen können die Bestzeit verbessern. Das unerfüllbare Klassen-Upgrade-Onboarding wurde ohne Wiedereinführung dieses Altsystems auf den zentral definierten 25-Taschenrechner-Meilenstein umgestellt.
+
+## Übergabe Komponentenbelohnungen – 29. September 2026
+
+Die drei unspezifischen Belohnungspfade schreiben nicht länger nur in den veralteten Gesamtzähler: Shop (120), Onboarding (75) und Rewarded-Ad-Testpfad (2) vergeben Schaltkreise über den bestehenden zentralen Grant-Helfer, halten `componentInventory`, Gesamt- und Lifetime-Zähler konsistent und protokollieren Quelle, Typ und Menge im vorhandenen `component-found`-Ereignis. Anzeigen nennen die konkrete Belohnung mit vorhandenem Schaltkreis-Icon. Preise, Rezepte, Drop-Tabellen und Werbeintegration wurden nicht verändert.
+
+## Übergabe Save-Koordination – 29. September 2026
+
+Der Fortschrittsverlust entstand dadurch, dass Event- und Autosaves nach ihrem `await` den beim Start gespeicherten Snapshot erneut in React-State und State-Ref schrieben. Ein zentraler Koordinator führt nun höchstens einen Schreibvorgang aus, fasst Überlappungen zu genau einem anschließenden Save des neuesten In-Memory-Zustands zusammen und schreibt Save-Ergebnisse nie zurück ins laufende Spiel. Laden ist eine explizite Barriere vor Simulation, Eingaben und Autosave. Inkompatible Saves bleiben unangetastet und sichtbar; ein IndexedDB-Zugriffsfehler wird separat gemeldet.
+
+Offen bleibt die manuelle Lifecycle-Abnahme in Safari auf einem Mac (Event-Save plus Kauf, Tabwechsel/Visibility und Reload).
+
 # Übergabe und nächste Schritte
 
 ## Nach der Stabilisierung vom 29. September 2026
@@ -273,3 +297,5 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - 7-/30-Tage-Balanceexport auf realen Saves erneut prüfen und Legacy-/Item-Multiplikatoren bei zu schnellen oder zu langsamen Sprüngen zentral in `BALANCE.scalingSynergy` nachziehen.
 - Zweite Meta-Prestige-Ebene erst auf Basis der stabilisierten Prestige-I-/Item-Builds implementieren.
 - Item-Affixe und Build-Loadouts für Legendary/Mythic als nächsten Item-Vertiefungspass spezifizieren.
+
+- Werkbank: Mobilansicht bei 390 px und Abschluss-Feedback im Browser manuell prüfen; Kernlogik, Persistenz und Queue-Grenzen sind automatisiert abgedeckt.

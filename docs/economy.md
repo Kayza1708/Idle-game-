@@ -281,3 +281,14 @@ Der bestehende Acceptance-Simulator bietet zusätzlich `simulateLongTermSuite(17
 - Ausgerüstete Items besitzen weiterhin einen klaren Basiseffekt, skalieren nun aber zusätzlich mit freigeschalteten Hardwareklassen, erreichten Meilensteinen, Rarität und Item-Level. Datenprisma-Builds erhalten zusätzlich Synergie aus gehaltenen seltenen Komponententypen.
 - Komponentenanalysen zeigen die normalisierten Drop-Gewichte jeder möglichen Komponente sowie den aktuellen Fundbonus und die implementierte Quelle.
 - Crafting-Buttons nennen bei Blockade die konkret fehlenden Komponenten, Module, Daten oder Bauplanfragmente.
+
+## Challenge-Run-Abgrenzung (29. September 2026)
+
+Die bestehende Prestigeformel und ihre Balancewerte bleiben unverändert. Challenge-Fortschritt wendet dieselbe Formel ausschließlich auf den seit Challenge-Start zusätzlich erzielten prestigeberechtigten Lifetime-Umsatz an; nicht berechtigte Reward- und Debug-Credits tragen weiterhin nichts bei.
+
+## Dauerhafte KI-Ausrüstungsplätze (29. September 2026)
+
+Nach dem ersten Prestige ist Platz 1 kostenlos. Platz 2 kostet **1e9 Credits**, Platz 3 nach Platz 2 **1e20 Credits**. Beide Käufe prüfen und subtrahieren mit `ScientificNumber`. Fertigung I beziehungsweise Fertigung V gewähren denselben zweiten beziehungsweise dritten Platz kostenlos; insgesamt bleiben höchstens drei Plätze aktiv.
+
+## Zeitbasierte Werkbank (vorläufig)
+Zwischenprodukte benötigen 60 Sekunden je Stück. Itemrezepte verwenden feste, rezeptgebundene Zeiten: Common 5 Minuten, Uncommon 15 Minuten, Rare 1 Stunde, Epic 4 Stunden, Legendary 12 Stunden und Mythic 24 Stunden. Zutaten werden beim Einreihen reserviert; die Werkbank verarbeitet einen aktiven und höchstens drei wartende Aufträge.

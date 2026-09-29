@@ -1,0 +1,10 @@
+import {useEffect} from 'react';
+import {BALANCE,componentIds,type ComponentId,type GameState} from './economy';
+import {ComponentArt} from './GameArt';
+import {componentText} from './gameplayI18n';
+
+export type FindCard={id:string;source:string;createdAt:number;items:Partial<Record<ComponentId,number>>};
+export function componentFind(before:GameState,after:GameState,source:string,createdAt=Date.now()):FindCard|null{const items:FindCard['items']={};for(const id of componentIds){const amount=after.componentInventory[id]-before.componentInventory[id];if(amount>0)items[id]=amount}return Object.keys(items).length?{id:`${source}:${createdAt}`,source,createdAt,items}:null}
+export function addFindCard(cards:FindCard[],incoming:FindCard){const same=cards.findIndex(card=>card.source===incoming.source&&incoming.createdAt-card.createdAt<1000);if(same>=0){const merged={...cards[same],createdAt:incoming.createdAt,items:{...cards[same].items}};for(const id of componentIds)if(incoming.items[id])merged.items[id]=(merged.items[id]??0)+incoming.items[id]!;return [...cards.slice(0,same),merged,...cards.slice(same+1)].slice(-3)}return[...cards,incoming].slice(-3)}
+const rarity=(items:FindCard['items'])=>componentIds.reduce((best,id)=>Math.max(best,items[id]?['häufig','ungewöhnlich','selten','episch','legendär','mythisch'].indexOf(BALANCE.components[id].rarity):-1),0);
+export function RewardFeedback({card,language,onDismiss}:{card:FindCard;language:GameState['settings']['language'];onDismiss:()=>void}){useEffect(()=>{const timer=setTimeout(onDismiss,4000);return()=>clearTimeout(timer)},[card.createdAt,onDismiss]);return <article className={`find-card rarity-${rarity(card.items)}`}><button aria-label={language==='de'?'Fundmeldung schließen':'Dismiss find'} onClick={onDismiss}>×</button><small>{language==='de'?'Fund aus':'Found from'} {card.source}</small>{componentIds.filter(id=>card.items[id]).map(id=><div key={id}><ComponentArt id={id}/><b>{componentText(id,language).name}</b><strong>+{card.items[id]}</strong></div>)}</article>}

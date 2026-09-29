@@ -27,13 +27,12 @@ export function splitMaterialReward(value:number){
   return {whole,remainder:normalized-whole};
 }
 function componentGrant(_s:GameState,type:ExperimentId,count:number,rng=Math.random){const source=BALANCE.componentSources[type],entries=Object.entries(source) as [ComponentId,number][],total=entries.reduce((n,[,w])=>n+w,0),grant:Partial<Record<ComponentId,number>>={};for(let i=0;i<count;i++){let roll=rng()*total,id=entries[entries.length-1][0];for(const [candidate,w] of entries){roll-=w;if(roll<=0){id=candidate;break}}grant[id]=(grant[id]??0)+1;}return grant;}
-function guaranteeRare(found:Partial<Record<ComponentId,number>>,type:ExperimentId){
-  if((found.graphene??0)+(found.nanotubes??0)+(found.quantumCores??0)>0)return;
-  const id:ComponentId=type==='artifact'?'quantumCores':type==='architecture'?'graphene':'graphene';
-  found[id]=(found[id]??0)+1;
+export function guaranteeRare(found:Partial<Record<ComponentId,number>>){
+  const hasRare=(Object.keys(BALANCE.components) as ComponentId[]).some(id=>!['häufig','ungewöhnlich'].includes(BALANCE.components[id].rarity)&&(found[id]??0)>0);
+  if(!hasRare)found.graphene=(found.graphene??0)+1;
 }
 export const analysisGuaranteesRare=(s:GameState)=>hasNode(s,'analysis3',1);
-const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(length)/experimentSpeed(s),cost=length==='intro'?{credits:0,data:0}:analysisCost(type,length);const paid=spendResources(s,cost);return addEvent({...paid,experiments:{...s.experiments,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:cost.credits,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:cost.credits,dataCost:cost.data,durationSeconds});};
+const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(length)/experimentSpeed(s),cost=length==='intro'?{credits:0,data:0}:analysisCost(type,length);const paid=spendResources(s,cost);return addEvent({...paid,experiments:{...s.experiments,lastResult:null,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:cost.credits,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:cost.credits,dataCost:cost.data,durationSeconds});};
 export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:ExperimentLength='long'){
   if(length==='intro')return s; // removed legacy tutorial experiment; never start a new one
   const reason=analysisBlockReason(s,type,length);
@@ -50,9 +49,9 @@ export function completeExperiment(s:GameState,now:number,rng=Math.random,mode:'
     return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length,legacy:true});
   }
   const reward=BALANCE.experimentRewards[active.type],scale=active.length==='short'?1/24:1,components=splitMaterialReward(reward.components*scale*(1+(hasNode(s,'analysis3',1)?.30:hasNode(s,'analysis2',1)?.20:hasNode(s,'analysis1',1)?.10:0)+s.researchLevels.materialAnalysis*BALANCE.repeatableResearch.materialAnalysis.effectPerLevel)+s.componentRemainder),research=splitMaterialReward(reward.research*scale+s.researchRemainder),blueprints=splitMaterialReward(reward.blueprints*scale*(1+s.researchLevels.blueprintAnalysis*BALANCE.repeatableResearch.blueprintAnalysis.effectPerLevel)+s.blueprintRemainder);
-  const found=componentGrant(s,active.type,components.whole,rng);if(analysisGuaranteesRare(s))guaranteeRare(found,active.type);let next:GameState=grantComponents({...s,componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true}},found);
+  const found=componentGrant(s,active.type,components.whole,rng);if(analysisGuaranteesRare(s))guaranteeRare(found);const result={id:active.id,type:active.type,length:active.length,at:now,mode,components:{...found},blueprintFragments:blueprints.whole,researchFragments:research.whole} as const;let next:GameState=grantComponents({...s,componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true,lastResult:result}},found);
   if(reward.itemChance*scale&&rng()<reward.itemChance*scale)next=randomItem(next,rng);
   const queued=next.experiments.queue[0],type=queued??undefined,queue=next.experiments.queue.slice(queued?1:0);
   if(type)next=start({...next,experiments:{...next.experiments,queue}},type,active.endsAt,'long');
-  const total=Object.values(found).reduce((sum,n)=>sum+(n??0),0);next=addEvent(next,'component-found',now,{source:`experiment:${active.type}`,mode,components:JSON.stringify(found),total});return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length,mode,components:JSON.stringify(found),total});
+  const total=Object.values(found).reduce((sum,n)=>sum+(n??0),0);next=addEvent(next,'component-found',now,{source:`experiment:${active.type}`,mode,components:JSON.stringify(found),total});return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length,mode,components:JSON.stringify(found),total,blueprintFragments:blueprints.whole,researchFragments:research.whole});
 }
