@@ -309,3 +309,9 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Erfolgreiche asynchrone Saves ersetzen den maßgeblichen In-Memory-Zustand nicht mehr durch ihren älteren Snapshot.
 - [x] Simulation, Interaktionen und Autosave beginnen erst nach abgeschlossener IndexedDB-Ladeinitialisierung.
 - [x] Schreibfehler behalten den aktuellen Run und erlauben einen späteren neuen Save-Versuch; inkompatible Daten und Speicherzugriffsfehler bleiben unterscheidbar.
+
+## Komponentenbelohnungen – 29. September 2026
+
+- [x] Gem-Shop, Ausrüstungs-Onboarding und Rewarded-Ad-Testpfad vergeben ihre bisherigen Mengen als nutzbare Schaltkreise über `grantComponents`.
+- [x] Claim-/Transaktionsschutz, Gems, typisierter Bestand, Gesamtzähler, Lifetime-Zähler und bestehende Komponenten-Telemetrie bleiben atomar konsistent.
+- [x] Shop- und Onboarding-Anzeigen benennen Schaltkreise auf Deutsch und Englisch und verwenden das bestehende Komponenten-Icon.

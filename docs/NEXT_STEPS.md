@@ -1,3 +1,7 @@
+## Übergabe Komponentenbelohnungen – 29. September 2026
+
+Die drei unspezifischen Belohnungspfade schreiben nicht länger nur in den veralteten Gesamtzähler: Shop (120), Onboarding (75) und Rewarded-Ad-Testpfad (2) vergeben Schaltkreise über den bestehenden zentralen Grant-Helfer, halten `componentInventory`, Gesamt- und Lifetime-Zähler konsistent und protokollieren Quelle, Typ und Menge im vorhandenen `component-found`-Ereignis. Anzeigen nennen die konkrete Belohnung mit vorhandenem Schaltkreis-Icon. Preise, Rezepte, Drop-Tabellen und Werbeintegration wurden nicht verändert.
+
 ## Übergabe Save-Koordination – 29. September 2026
 
 Der Fortschrittsverlust entstand dadurch, dass Event- und Autosaves nach ihrem `await` den beim Start gespeicherten Snapshot erneut in React-State und State-Ref schrieben. Ein zentraler Koordinator führt nun höchstens einen Schreibvorgang aus, fasst Überlappungen zu genau einem anschließenden Save des neuesten In-Memory-Zustands zusammen und schreibt Save-Ergebnisse nie zurück ins laufende Spiel. Laden ist eine explizite Barriere vor Simulation, Eingaben und Autosave. Inkompatible Saves bleiben unangetastet und sichtbar; ein IndexedDB-Zugriffsfehler wird separat gemeldet.
