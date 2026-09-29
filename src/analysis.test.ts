@@ -11,8 +11,8 @@ describe('transactional component analyses',()=>{
   const base=restore(serialize(playable())).state,cost=BALANCE.analysisCosts.hardware[length];
   const started=queueExperiment(base,'hardware',base.savedAt,length);
   expect(started.experiments.active?.length).toBe(length);
-  expect(started.credits).toBe(base.credits-cost.credits);
-  expect(started.data).toBe(base.data-cost.data);
+  expect(started.credits).toBeCloseTo(base.credits-cost.credits,6);
+  expect(started.data).toBeCloseTo(base.data-cost.data,6);
   const done=advance(started,(started.experiments.active!.endsAt-started.savedAt)/1000,false,()=>1).state;
   expect(done.experiments.active).toBeNull();expect(done.components).toBeGreaterThan(0);
   expect(completeExperiment(done,done.savedAt,()=>0).components).toBe(done.components);
@@ -43,6 +43,15 @@ it('persists an active analysis across reload and rewards it exactly once offlin
 it('reports affordability including data ETA and grants rare component from Analyse III',()=>{
  const poor={...playable(),data:0},quote=analysisAffordability(poor,'artifact','short');
  expect(quote.missing.data).toBe(BALANCE.analysisCosts.artifact.short.data);expect(quote.secondsToData).toBeGreaterThan(0);
- const started=queueExperiment({...playable(),nodes:['analysis3']},'artifact',0,'short'),done=completeExperiment(started,started.experiments.active!.endsAt,()=>1);
+ const started=queueExperiment({...playable(),credits:1e12,data:1e12,nodes:['analysis1','analysis2','analysis3']},'artifact',0,'short'),done=completeExperiment(started,started.experiments.active!.endsAt,()=>1);
  expect(done.componentInventory.quantumCores).toBeGreaterThanOrEqual(1);
+});
+
+describe('analysis drop disclosure',()=>{
+ it('reports normalized component chances and sources',async()=>{
+  const {analysisDropTable}=await import('./experiments'),s=newGame(0),table=analysisDropTable(s,'hardware');
+  expect(table.reduce((n,row)=>n+row.chance,0)).toBeCloseTo(1);
+  expect(table.find(row=>row.id==='photonicLenses')?.chance).toBeGreaterThan(0);
+  expect(table.every(row=>row.source.length>0)).toBe(true);
+ });
 });

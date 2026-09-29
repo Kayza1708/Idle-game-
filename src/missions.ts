@@ -1,6 +1,7 @@
 import {BALANCE,dayKey,GameState,MissionPeriod,MissionTask,ProgressMetric,weekKey} from './economy';
 import {addEvent} from './telemetry';
 import {addSeasonXP,questSeasonXP,rollSeason} from './season';
+import type {Language} from './i18n';
 export type MissionKind='daily'|'weekly'|'monthly';
 const monthKey=(ms:number)=>new Date(ms).toISOString().slice(0,7);
 const dayEnd=(ms:number)=>{const d=new Date(ms);return Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()+1)};
@@ -9,8 +10,64 @@ const monthEnd=(ms:number)=>{const d=new Date(ms);return Date.UTC(d.getUTCFullYe
 export const metricValue=(s:GameState,m:ProgressMetric)=>s.lifetime[m] as number;
 type Template={id:string;metric:ProgressMetric;de:string;en:string;base:[number,number,number];available:(s:GameState)=>boolean};
 const templates:Template[]=[
- {id:'hardware',metric:'hardwareBought',de:'Hardware kaufen',en:'Buy hardware',base:[25,300,2500],available:()=>true},{id:'milestones',metric:'milestones',de:'Hardware-Meilensteine erreichen',en:'Reach hardware milestones',base:[2,12,50],available:()=>true},{id:'train-start',metric:'trainingStarted',de:'Training starten',en:'Start training',base:[2,15,60],available:()=>true},{id:'train-done',metric:'trainingCompleted',de:'Training abschließen',en:'Complete training',base:[1,10,40],available:()=>true},{id:'research-start',metric:'researchStarted',de:'Forschung starten',en:'Start research',base:[1,10,40],available:s=>s.discovered.includes('sbc')},{id:'research-done',metric:'researchCompleted',de:'Forschung abschließen',en:'Complete research',base:[1,7,30],available:s=>s.discovered.includes('sbc')},{id:'components',metric:'componentsEarned',de:'Komponenten erhalten',en:'Gain components',base:[25,250,1500],available:s=>s.prestigeCount>0||s.experiments.firstReward},{id:'craft',metric:'itemsCrafted',de:'Items herstellen',en:'Craft items',base:[1,5,20],available:s=>s.blueprintFragments>0||s.lifetime.itemsCrafted>0},{id:'credits',metric:'regularCredits',de:'Credits produzieren',en:'Produce credits',base:[1e4,1e7,1e10],available:()=>true},{id:'data',metric:'regularData',de:'Daten produzieren',en:'Produce data',base:[250,5000,50000],available:()=>true},{id:'taps',metric:'taps',de:'Vergütete Taps ausführen',en:'Perform rewarded taps',base:[250,5000,50000],available:()=>true},{id:'overclock',metric:'overclocks',de:'Overclock aktivieren',en:'Activate overclock',base:[2,20,100],available:()=>true},{id:'prestige',metric:'prestiges',de:'Prestige durchführen',en:'Perform prestige',base:[1,3,10],available:s=>s.prestigeCount>0||s.lifetimeEligibleCredits>=1e8},{id:'active',metric:'activeSeconds',de:'Aktiv spielen',en:'Play actively',base:[600,7200,36000],available:()=>true},
+ {id:'hardware',metric:'hardwareBought',de:'Hardware kaufen',en:'Buy hardware',base:[25,300,2500],available:()=>true},{id:'milestones',metric:'milestones',de:'Hardware-Meilensteine erreichen',en:'Reach hardware milestones',base:[2,12,50],available:()=>true},{id:'train-start',metric:'trainingStarted',de:'Training starten',en:'Start training',base:[2,15,60],available:()=>true},{id:'train-done',metric:'trainingCompleted',de:'Training abschließen',en:'Complete training',base:[1,10,40],available:()=>true},{id:'research-start',metric:'researchStarted',de:'Forschung starten',en:'Start research',base:[1,10,40],available:s=>s.discovered.includes('sbc')},{id:'research-done',metric:'researchCompleted',de:'Forschung abschließen',en:'Complete research',base:[1,7,30],available:s=>s.discovered.includes('sbc')},{id:'components',metric:'componentsEarned',de:'Komponenten erhalten',en:'Gain components',base:[25,250,1500],available:s=>s.prestigeCount>0||s.experiments.firstReward},{id:'craft',metric:'itemsCrafted',de:'Items herstellen',en:'Craft items',base:[1,5,20],available:s=>s.blueprintFragments>0||s.lifetime.itemsCrafted>0},{id:'drops',metric:'dropsClaimed',de:'Signal-Drops einsammeln',en:'Claim signal drops',base:[5,60,250],available:s=>s.discovered.includes('sbc')},{id:'fusion',metric:'itemsFused',de:'Items fusionieren',en:'Fuse items',base:[1,5,20],available:s=>s.lifetime.itemsCrafted>=3},{id:'forge',metric:'forgeUpgrades',de:'Schmiede-Upgrades durchführen',en:'Forge item upgrades',base:[1,8,30],available:s=>s.lifetime.itemsCrafted>0},{id:'credits',metric:'regularCredits',de:'Credits produzieren',en:'Produce credits',base:[1e4,1e7,1e10],available:()=>true},{id:'data',metric:'regularData',de:'Daten produzieren',en:'Produce data',base:[250,5000,50000],available:()=>true},{id:'taps',metric:'taps',de:'Vergütete Taps ausführen',en:'Perform rewarded taps',base:[250,5000,50000],available:()=>true},{id:'overclock',metric:'overclocks',de:'Overclock aktivieren',en:'Activate overclock',base:[2,20,100],available:()=>true},{id:'prestige',metric:'prestiges',de:'Prestige durchführen',en:'Perform prestige',base:[1,3,10],available:s=>s.prestigeCount>0||s.lifetimeEligibleCredits>=1e8},{id:'active',metric:'activeSeconds',de:'Aktiv spielen',en:'Play actively',base:[600,7200,36000],available:()=>true},
 ];
+const missionTranslations={
+ hardware:{en:'Buy hardware',de:'Hardware kaufen',es:'Comprar hardware',fr:'Acheter du matériel',pt:'Comprar hardware',it:'Acquistare hardware',pl:'Kup sprzęt'},
+ milestones:{en:'Reach hardware milestones',de:'Hardware-Meilensteine erreichen',es:'Alcanzar hitos de hardware',fr:'Atteindre des paliers de matériel',pt:'Alcançar marcos de hardware',it:'Raggiungere traguardi hardware',pl:'Osiągnij kamienie milowe sprzętu'},
+ 'train-start':{en:'Start training',de:'Training starten',es:'Iniciar entrenamiento',fr:'Démarrer un entraînement',pt:'Iniciar treino',it:'Avviare addestramento',pl:'Rozpocznij trening'},
+ 'train-done':{en:'Complete training',de:'Training abschließen',es:'Completar entrenamiento',fr:'Terminer un entraînement',pt:'Concluir treino',it:'Completare addestramento',pl:'Ukończ trening'},
+ 'research-start':{en:'Start research',de:'Forschung starten',es:'Iniciar investigación',fr:'Démarrer une recherche',pt:'Iniciar pesquisa',it:'Avviare ricerca',pl:'Rozpocznij badania'},
+ 'research-done':{en:'Complete research',de:'Forschung abschließen',es:'Completar investigación',fr:'Terminer une recherche',pt:'Concluir pesquisa',it:'Completare ricerca',pl:'Ukończ badania'},
+ components:{en:'Gain components',de:'Komponenten erhalten',es:'Obtener componentes',fr:'Obtenir des composants',pt:'Obter componentes',it:'Ottenere componenti',pl:'Zdobywaj komponenty'},
+ craft:{en:'Craft items',de:'Items herstellen',es:'Fabricar objetos',fr:'Fabriquer des objets',pt:'Fabricar itens',it:'Creare oggetti',pl:'Wytwarzaj przedmioty'},
+ drops:{en:'Claim signal drops',de:'Signal-Drops einsammeln',es:'Recoger señales',fr:'Récupérer des signaux',pt:'Coletar sinais',it:'Raccogliere segnali',pl:'Zbieraj zrzuty sygnału'},
+ fusion:{en:'Fuse items',de:'Items fusionieren',es:'Fusionar objetos',fr:'Fusionner des objets',pt:'Fundir itens',it:'Fondere oggetti',pl:'Łącz przedmioty'},
+ forge:{en:'Forge item upgrades',de:'Schmiede-Upgrades durchführen',es:'Mejorar objetos en la forja',fr:'Améliorer des objets à la forge',pt:'Melhorar itens na forja',it:'Potenziare oggetti nella forgia',pl:'Ulepszaj przedmioty w kuźni'},
+ credits:{en:'Produce credits',de:'Credits produzieren',es:'Producir créditos',fr:'Produire des crédits',pt:'Produzir créditos',it:'Produrre crediti',pl:'Produkuj kredyty'},
+ data:{en:'Produce data',de:'Daten produzieren',es:'Producir datos',fr:'Produire des données',pt:'Produzir dados',it:'Produrre dati',pl:'Produkuj dane'},
+ taps:{en:'Perform rewarded taps',de:'Vergütete Taps ausführen',es:'Realizar toques recompensados',fr:'Effectuer des taps récompensés',pt:'Realizar toques recompensados',it:'Eseguire tap ricompensati',pl:'Wykonuj nagradzane tapnięcia'},
+ overclock:{en:'Activate overclock',de:'Overclock aktivieren',es:'Activar overclock',fr:"Activer l'overclock",pt:'Ativar overclock',it:"Attivare l'overclock",pl:'Aktywuj overclock'},
+ prestige:{en:'Perform prestige',de:'Prestige durchführen',es:'Realizar prestigio',fr:'Effectuer un prestige',pt:'Realizar prestígio',it:'Eseguire prestigio',pl:'Wykonaj prestiż'},
+ active:{en:'Play actively',de:'Aktiv spielen',es:'Jugar activamente',fr:'Jouer activement',pt:'Jogar ativamente',it:'Giocare attivamente',pl:'Graj aktywnie'},
+} as const;
+
+type MissionTranslationId=keyof typeof missionTranslations;
+
+const missionTemplateId=(task:MissionTask):MissionTranslationId|undefined=>{
+  const ids=Object.keys(missionTranslations) as MissionTranslationId[];
+  return ids
+    .sort((a,b)=>b.length-a.length)
+    .find(id=>task.id.includes(`-${id}-`));
+};
+
+export function missionText(task:MissionTask,language:Language){
+  const id=missionTemplateId(task);
+
+  if(!id)
+    return language==='de' ? task.de : task.en;
+
+  const base=missionTranslations[id][language] ?? missionTranslations[id].en;
+
+  const tierMatch=task.en.match(/ · Tier (\d+)$/);
+  const stageMatch=task.de.match(/ · Stufe (\d+)$/);
+  const stage=Number(tierMatch?.[1]??stageMatch?.[1]??1);
+
+  if(stage<=1)return base;
+
+  const suffix:Record<Language,string>={
+    en:`Tier ${stage}`,
+    de:`Stufe ${stage}`,
+    es:`Nivel ${stage}`,
+    fr:`Niveau ${stage}`,
+    pt:`Nível ${stage}`,
+    it:`Livello ${stage}`,
+    pl:`Poziom ${stage}`,
+  };
+
+  return `${base} · ${suffix[language]}`;
+}
+
 const counts={daily:6,weekly:12,monthly:30} as const;
 const required={daily:4,weekly:8,monthly:20} as const;
 function makePeriod(s:GameState,kind:MissionKind,now:number):MissionPeriod{const index=kind==='daily'?0:kind==='weekly'?1:2,count=counts[kind],reward=BALANCE.missionRewards[kind],key=kind==='daily'?dayKey(now):kind==='weekly'?weekKey(now):monthKey(now),endsAt=kind==='daily'?dayEnd(now):kind==='weekly'?weekEnd(now):monthEnd(now);const available=templates.filter(t=>t.available(s)),seed=[...key].reduce((n,c)=>n+c.charCodeAt(0),0),tasks:MissionTask[]=[];for(let i=0;i<count;i++){const t=available[(seed+i)%available.length],stage=Math.floor(i/available.length),multiplier=stage===0?1:5**stage;tasks.push({id:`${key}-${t.id}-${i}`,metric:t.metric,goal:t.base[index]*multiplier,baseline:metricValue(s,t.metric),reward:reward.task*(stage+1),claimed:false,de:`${t.de}${stage?` · Stufe ${stage+1}`:''}`,en:`${t.en}${stage?` · Tier ${stage+1}`:''}`});}return{key,endsAt,tasks,required:required[kind],bonus:reward.bonus,bonusClaimed:false};}

@@ -287,3 +287,11 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Daily-, Weekly- und Monthly-Quests besitzen Tabs, Fortschrittsbalken, sichtbare Belohnungen, Status und eine hervorgehobene Abholaktion.
 - [x] Das Profil bleibt durch begrenzte Grid-Kinder, viewportgebundene Breite, Safe-Area-Abstände und internen Inhalts-Scroll auf Mobil- und Desktopbreiten vollständig erreichbar.
 - [x] Season-Status, Abholbarkeit, Sperre und einmalige Abholung sind durch Vitest-Fälle abgedeckt.
+
+### Scaling & Synergy Pass
+- [x] Alte Hardware über Ownership- und Legacy-Multiplikatoren erneut relevant machen.
+- [x] Hardware-Mastery an alle Käufe koppeln.
+- [x] Itemeffekte an Hardwareklassen, Meilensteine, Rarität und Upgrades koppeln.
+- [x] Analyse-Dropchancen und Quellen im UI offenlegen.
+- [x] Crafting-Blocker konkret im Herstellbutton anzeigen.
+- [ ] Zweite Meta-Prestige-Ebene / Axiom-System als separaten Endgame-Pass umsetzen.

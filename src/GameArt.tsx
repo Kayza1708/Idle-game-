@@ -16,7 +16,7 @@ const itemCells: Record<ItemTypeId, [number, number]> = {
   'field-scanner': [2, 1], 'lab-drone': [3, 1], 'data-prism': [0, 2],
 };
 
-const prestigeCells: Record<PrestigeUpgradeId, [number, number]> = {
+const prestigeCells: Partial<Record<PrestigeUpgradeId, [number, number]>> = {
 dataArchive1: [0, 0], computeNet1: [1, 0], analysis1: [2, 0], labs1: [3, 0], manufacturing1: [0, 1], dataArchive2: [1, 1], computeNet2: [2, 1], analysis2: [3, 1], labs2: [0, 2], manufacturing2: [1, 2], dataArchive3: [2, 2], computeNet3: [3, 2], analysis3: [0, 3], labs3: [1, 3], manufacturing3: [2, 3]
 };
 

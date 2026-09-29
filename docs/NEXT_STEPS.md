@@ -263,3 +263,8 @@ Challenge-Runs sind jetzt echte modifizierte Runs statt reine Lifetime-Checklist
 Der kompakte Missionsdrawer zeigt nun eine lesbare Season-Übersicht mit XP-Fortschritt und zwei eindeutig beschrifteten Belohnungsspuren. Kostenlose Belohnungen nutzen die vorhandenen Ressourcen- und Komponenten-Atlanten; die Premium-Vorschau ist rein visuell, immer gesperrt und fügt weder Kaufpfad noch Save- oder Economy-Zustand hinzu. Questkarten zeigen Ziel, Fortschrittsbalken, Gems/XP und Status in Daily-/Weekly-/Monthly-Tabs.
 
 Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen mit der breiten Tabzeile. Dialog und sämtliche Tabinhalte besitzen nun `min-width: 0`, viewportgebundene Breiten, einen eigenen vertikalen Scrollbereich sowie Safe-Area-Abstände; die Tabs bleiben horizontal scrollbar und 44 px hoch. Als nächster Schritt bleibt eine moderierte Touch-/Screenreader-Prüfung auf realen iOS-/Android-Geräten; es wurden keine Economy-, Save- oder Spielmechanikwerte geändert.
+
+## Nach Scaling & Synergy
+- 7-/30-Tage-Balanceexport auf realen Saves erneut prüfen und Legacy-/Item-Multiplikatoren bei zu schnellen oder zu langsamen Sprüngen zentral in `BALANCE.scalingSynergy` nachziehen.
+- Zweite Meta-Prestige-Ebene erst auf Basis der stabilisierten Prestige-I-/Item-Builds implementieren.
+- Item-Affixe und Build-Loadouts für Legendary/Mythic als nächsten Item-Vertiefungspass spezifizieren.

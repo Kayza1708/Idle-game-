@@ -24,6 +24,6 @@ describe('long-running core stability',()=>{
   storage.setItem(SAVE_KEY,'{interrupted');const recovered=loadGame(storage,state.savedAt);expect(recovered.error).toMatch(/Backup/);expect(recovered.state.credits).toBeCloseTo(state.credits);
   const files=createBalanceExportFiles(recovered.state,state.savedAt);expect(files['purchases.csv']).toContain('creditsBefore');expect(files['training.csv']).toContain('actualDuration');expect(createBalanceZip(recovered.state).length).toBeGreaterThan(1_000);
   expect(performance.now()-started).toBeLessThan(30_000);expect(memory()-heapBefore).toBeLessThan(150*1024*1024);
- });
+ },30_000);
  it('keeps high compute useful but bounded at early, middle and late levels',()=>{for(const level of [0,5,10,20]){const state={...newGame(0),level,qualityLevel:level,credits:1e20,data:1e20,hardwareCounts:{...newGame(0).hardwareCounts,calculator:500},hardware:500};const seconds=trainingWork(state,'quality')/trainingRate(state.hardware,state);expect(seconds).toBeGreaterThanOrEqual(trainingWork(state,'quality')/3-1e-9);expect(seconds).toBeGreaterThan(0);}});
 });

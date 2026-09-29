@@ -33,7 +33,7 @@ describe('simulation clock regressions',()=>{
   });
 
   it('starts one queued successor with positive remaining time and completes it once',()=>{
-    let started=startResearchProject({...researchReady(),nodes:['labQueue','labAssistant']},'operations');started=queueResearchProject(started,'blueprints');
+    let started=startResearchProject({...researchReady(),nodes:['labs2','labs3']},'operations');started=queueResearchProject(started,'blueprints');
     const first=advance(started,181).state;
     expect(first.completedResearch).toEqual(['operations']);expect(first.researchLabs[0]?.id).toBe('blueprints');expect(first.researchLabs[0]!.endsAt).toBeGreaterThan(first.savedAt);
     const done=advance(first,10_000).state;

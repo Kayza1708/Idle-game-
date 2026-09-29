@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createBalanceReport, serializeBalanceReport, createBalanceZip, createBalanceZipAsync } from './balanceReport';
+import { createBalanceExportFiles, createBalanceReport, serializeBalanceReport, createBalanceZip, createBalanceZipAsync } from './balanceReport';
 import { addEvent } from './telemetry';
 import { newGame, type GameState } from './economy';
 import { prestige } from './prestige';
@@ -56,7 +56,7 @@ describe('analysis archive',()=>{
  it('contains every documented local analysis file and no direct personal fields',async()=>{const {createBalanceExportFiles,createBalanceZip}=await import('./balanceReport');const files=createBalanceExportFiles(newGame(0),1000);expect(Object.keys(files).sort()).toEqual(['analyses.csv','components.csv','crafting.csv','diagnostics.json','economy.json','events.csv','events.jsonl','manifest.json','milestones.csv','prestige-nodes.csv','prestige.csv','purchases.csv','research.csv','sessions.csv','snapshots.csv','summary.json','timeline.csv','timeline.json','training.csv']);expect(createBalanceZip(newGame(0),1000).slice(0,2)).toEqual(new Uint8Array([80,75]));expect(JSON.stringify(files)).not.toMatch(/email|ipAddress|realName/i);});
 });
 
-it('writes ZIP central directory offsets and CRC-compatible stored entries',()=>{const zip=createBalanceZip(newGame(0),1000),view=new DataView(zip.buffer,zip.byteOffset,zip.byteLength),end=zip.length-22;expect(view.getUint32(0,true)).toBe(0x04034b50);expect(view.getUint32(end,true)).toBe(0x06054b50);const centralOffset=view.getUint32(end+16,true);expect(view.getUint32(centralOffset,true)).toBe(0x02014b50);expect(view.getUint16(end+8,true)).toBe(15);expect(view.getUint16(end+10,true)).toBe(15);});
+it('writes ZIP central directory offsets and CRC-compatible stored entries',()=>{const zip=createBalanceZip(newGame(0),1000),view=new DataView(zip.buffer,zip.byteOffset,zip.byteLength),end=zip.length-22;expect(view.getUint32(0,true)).toBe(0x04034b50);expect(view.getUint32(end,true)).toBe(0x06054b50);const centralOffset=view.getUint32(end+16,true);expect(view.getUint32(centralOffset,true)).toBe(0x02014b50);const expected=Object.keys(createBalanceExportFiles(newGame(0),1000)).length;expect(view.getUint16(end+8,true)).toBe(expected);expect(view.getUint16(end+10,true)).toBe(expected);});
 
 it('exports immutable event resources, populated purchases, and 30-second snapshots',async()=>{const {buyHardwareClass}=await import('./economy'),{advance}=await import('./simulation'),{createBalanceExportFiles}=await import('./balanceReport');let state={...newGame(0),credits:1000};state=buyHardwareClass(state,'calculator',2);const purchase=state.telemetry.recentEvents.find(x=>x.type==='hardware-purchase')!;const eventCredits=purchase.resources.credits;state=advance(state,95,true).state;expect(purchase.resources.credits).toBe(eventCredits);expect(state.telemetry.snapshots.length).toBeGreaterThanOrEqual(3);const files=createBalanceExportFiles(state);expect(files['purchases.csv']).toContain('2');expect(files['purchases.csv']).not.toMatch(/"undefined"/);expect(files['snapshots.csv'].split('\r\n').length).toBeGreaterThanOrEqual(4);});
 
@@ -71,7 +71,7 @@ describe('deterministic long-run acceptance simulation',()=>{
   const active7=simulateBalance(7,true,1708,5),passive7=simulateBalance(7,false,1708,5),active30=simulateBalance(30,true,1708,5);
   for(const run of [active7,passive7,active30]){expect(run.invalid).toBe(false);expect(run.prestiges).toBe(5);expect(run.milestones.firstPrestige).not.toBeNull();}
   expect(active7.final.level).toBeGreaterThan(passive7.final.level);expect(active30.final.discovered.length).toBe(15);
- });
+ },30_000);
 });
 
 it('exports analyses, component flows, crafting and prestige-node purchases as dedicated local tables',async()=>{

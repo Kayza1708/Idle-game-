@@ -261,3 +261,11 @@ The authoritative large-value resource ledger remains serialized as normalized m
 Fünf optionale Challenge-Runs verwenden dieselbe Run-Economy mit echten Einschränkungen: `no-taps` deaktiviert Tap-Credits, `no-items` ignoriert ausgerüstete Itemeffekte, `five-hardware` begrenzt Käufe auf die ersten fünf Klassen, `data-crunch` multipliziert Datenproduktion mit 0,10 und `inflation` multipliziert Hardwarepreise mit 100. Ziel ist jeweils ein Anspruch von mindestens 1 INT. Abschluss gibt permanente Challenge Stars; Bestzeit und Clears bleiben über normale Prestiges erhalten.
 
 Der bestehende Acceptance-Simulator bietet zusätzlich `simulateLongTermSuite(1708)` für 7/30/90/180 Tage aktiv und passiv. Simulator-Telemetrie wird während Langläufen auf die letzten 24 Snapshots kompaktiert, damit die Messung nicht quadratisch durch Diagnosehistorie wächst; die Economy-Regeln selbst bleiben identisch.
+
+## Scaling & Synergy Pass
+- Alte Hardware bleibt relevant: je 100 gehaltene Hardwareeinheiten erhöht ein gedeckelter Ownership-Faktor die Credit-Produktion; Klassen ab 500 Einheiten bilden zusätzlich einen multiplikativen Legacy-Infrastruktur-Faktor.
+- Hardware-Mastery sammelt nun bei jedem Kauf XP statt erst oberhalb von 500 Einheiten. Der Mastery-Bonus wirkt direkt auf den Klassen-Compute.
+- Compute-Netz IV/V verstärken die Legacy-Infrastruktur zusätzlich. Damit koppelt Prestige bewusst an breite Hardware-Builds.
+- Ausgerüstete Items besitzen weiterhin einen klaren Basiseffekt, skalieren nun aber zusätzlich mit freigeschalteten Hardwareklassen, erreichten Meilensteinen, Rarität und Item-Level. Datenprisma-Builds erhalten zusätzlich Synergie aus gehaltenen seltenen Komponententypen.
+- Komponentenanalysen zeigen die normalisierten Drop-Gewichte jeder möglichen Komponente sowie den aktuellen Fundbonus und die implementierte Quelle.
+- Crafting-Buttons nennen bei Blockade die konkret fehlenden Komponenten, Module, Daten oder Bauplanfragmente.
