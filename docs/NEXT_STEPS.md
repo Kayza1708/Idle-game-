@@ -1,5 +1,10 @@
 # Übergabe und nächste Schritte
 
+## Nach der Stabilisierung vom 29. September 2026
+
+- Reale 30-/60-/90-Tage-Balanceläufe mit der reparierten partitionsinvarianten Integration erneut messen.
+- Erst danach geplante Drop-Änderungen separat spezifizieren und implementieren; sie sind nicht Teil dieses Stabilisierungspatches.
+
 ## Aktueller Stand
 
 Save v9 ergänzt sechs individuelle Meilensteine pro Hardwareklasse, additive INT-Progression, einen funktionsorientierten INT-Baum, lokale Run-Telemetrie und gespeicherten Story-/Tutorialfortschritt. Alle 90 Meilensteine liegen in der zentralen Hardwarekonfiguration.

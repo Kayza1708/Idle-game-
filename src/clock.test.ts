@@ -97,12 +97,13 @@ describe('simulation clock regressions',()=>{
   it('autosave-style synchronization neither duplicates nor loses progress',()=>{
     const storage=new MemoryStorage();
     const initial=newGame(0);
+    const expected=advance(initial,10).state;
     const first=persistGame(storage,initial,5_000).state;
     const sameInstant=persistGame(storage,first,5_000).state;
     const loaded=loadGame(storage,5_000).state;
     const final=persistGame(storage,loaded,10_000).state;
     expect(sameInstant.credits).toBeCloseTo(first.credits);
-    expect(final.credits).toBeCloseTo(10.125);
+    expect(final.credits).toBeCloseTo(expected.credits);
     expect(final.training).toBe(0);
   });
 

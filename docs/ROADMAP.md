@@ -2,6 +2,13 @@
 
 Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEPS.md` werden am Ende jedes Auftrags aktualisiert; unerledigte Kriterien bleiben offen.
 
+## Stabilisierung 29. September 2026 — Erledigt
+
+- [x] Zeitpartitionierung für Training, passive Produktion und Save/Reload regressionsfest gemacht.
+- [x] Dokumentierten kontinuierlichen Quality-/Efficiency-Softcap wiederhergestellt.
+- [x] Kumulative INT-Entitlement-Formel einschließlich Erstanspruch und Exactly-once-Claim korrigiert.
+- [x] Forschungstests an die aktuelle zentrale BALANCE-Konfiguration gebunden.
+
 ## Phase 1 – Spielbarer Kern — In Arbeit
 **Ziel:** Ein abwechslungsreicher, stabiler erster Run mit aktiven und passiven Entscheidungen.
 

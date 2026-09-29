@@ -53,6 +53,13 @@ Training beginnt nur nach einer bezahlten Wahl (Qualität oder Effizienz), koste
 
 `efficiency = 1 + softcap(0,03×e, 0,75)`
 
+Die Modellfaktoren werden in sämtlichen Produktionspfaden aus genau dieser
+kontinuierlichen Abbildung berechnet; die später ergänzten Synergiefamilien ersetzen
+den Softcap nicht. Zeitintervalle integrieren außerdem die während des Intervalls
+anwachsende Lifetime-Datensynergie über eine deterministische, vom absoluten
+Intervall unabhängige Stammfunktion. Dadurch liefern ein großer Simulationsaufruf und
+beliebige Teilaufrufe dieselben Credits, auch wenn ein Save mitten im Schritt liegt.
+
 Damit wurde die alte doppelte Exponentialwirkung `1,08^L×1,04^L` entfernt. Der gemeldete Altstand war **3 Gaming-GPUs + 1 Heim-PC = 3.720 Compute**; Level 11 lieferte bereits `3,58945` Modellfaktor und war der Hauptgrund für 13.824 Credits/s.
 
 ## Forschung, aktive Aktionen und Bonusfamilien
@@ -158,6 +165,11 @@ Forschungsprojekte behalten ihre zentralen Credit-, Daten- und FP-Kosten. Ein St
 ## Wiederholbare Forschung und Baupläne – 25. September 2026
 
 Save v17 ergänzt fünf persistente Forschungslevel. Für ein Ziellevel `L` wird die beim Start unveränderlich gespeicherte Dauer als `min(baseSeconds × 1,22^(L−1), 259.200 s)` und der einmalig abgezogene Datenpreis als `ceil(baseDataCost × 1,28^(L−1))` berechnet. Die Basen liegen ausschließlich in `BALANCE.repeatableResearch`: Datenerzeugung 90 s/40 Daten, Materialanalyse 150 s/80, Bauplananalyse 210 s/140, Modellarchitektur 300 s/220 und Laborautomation 420 s/360. Laufende Slots speichern Ziellevel, präzise Dauer, Datenpreis, Start und Ende; spätere Boni verändern diese Werte nicht.
+
+**Aktuelle Konfiguration (stabilisiert am 29. September 2026):** Der historische
+v17-Absatz beschreibt nicht mehr die heutige Progression. Maßgeblich sind zentral
+`1,16^(L−1)` für die Dauer mit einem Cap von 48 Stunden sowie `1,32^(L−1)` für
+den Datenpreis. Tests leiten Wachstum und Cap direkt aus `BALANCE` ab.
 
 Die Effekte verwenden bestehende Mechaniken: Datenerzeugung multipliziert Nutzerdaten, Material- und Bauplananalyse erhöhen garantierte Analyseerträge, Modellarchitektur multipliziert Nutzerumsatz, Laborautomation erhöht Analysetempo und öffnet ab Stufe 1 die bestehende Einzelwarteschlange. Komponenten- und Forschungslevel bleiben beim INT-Prestige erhalten.
 

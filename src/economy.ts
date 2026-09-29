@@ -319,6 +319,21 @@ export const hardwareOwnershipSynergyScientific=(s:GameState)=>{let result=Scien
 export const lifetimeDataMagnitude=(s:GameState)=>{const exact=exactEconomyValue(s,'lifetimeDataGenerated');if(exact.isZero())return 0;const log=exact.log10();return log<12?Math.log10(1+exact.toNumber()):Math.max(0,log);};
 export const dataSynergyPower=(s:GameState)=>BALANCE.scalingSynergy.dataPowerBase+s.researchLevels.dataGeneration*BALANCE.scalingSynergy.dataPowerResearchPerLevel+BALANCE.scalingSynergy.dataPowerPrestige.reduce<number>((n,v,i)=>n+(hasNode(s,`dataArchive${i+1}`,1)?v:0),0);
 export const dataSynergyScientific=(s:GameState)=>{const d=lifetimeDataMagnitude(s);let x=ScientificNumber.fromParts(1,Math.max(0,dataSynergyPower(s)*d**.72));const exponent=1+(hasNode(s,'dataArchive4',1)?.05:0)+(hasNode(s,'dataArchive5',1)?.05:0)+(hasNode(s,'dataArchive7',1)?.05:0)+(hasNode(s,'dataArchive8',1)?.10:0);return x.pow(exponent*milestoneSynergy(s).dataExponent*(1+s.researchLevels.dataFlywheel*BALANCE.repeatableResearch.dataFlywheel.effectPerLevel));};
+/** Mean lifetime-data multiplier over a linear data-production interval.
+ *
+ * Evaluating the multiplier only at the beginning of a frame made earned
+ * credits depend on how callers partitioned elapsed time.  This deterministic
+ * antiderivative approximation is always evaluated from the same zero origin,
+ * so differences are additive across save/tick boundaries.
+ */
+export function averageDataSynergy(s:GameState,dataGain:number,current=dataSynergyScientific(s)){
+ const start=exactEconomyValue(s,'lifetimeDataGenerated').toNumber(MAX_ECONOMY_VALUE),end=safeEconomyAdd(start,dataGain);
+ if(!(dataGain>0)||!Number.isFinite(start)||!Number.isFinite(end)||end>=1e100)return current.toNumber(MAX_ECONOMY_VALUE);
+ const magnitude=Math.log10(1+start)**.72;
+ const power=magnitude>0?current.log10()/magnitude:dataSynergyPower(s)*(1+(hasNode(s,'dataArchive4',1)?.05:0)+(hasNode(s,'dataArchive5',1)?.05:0)+(hasNode(s,'dataArchive7',1)?.05:0)+(hasNode(s,'dataArchive8',1)?.10:0))*milestoneSynergy(s).dataExponent*(1+s.researchLevels.dataFlywheel*BALANCE.repeatableResearch.dataFlywheel.effectPerLevel);
+ const primitive=(data:number)=>{const x=Math.log1p(data),steps=8,h=x/steps,value=(u:number)=>Math.exp(u+Math.LN10*power*(u/Math.LN10)**.72);let sum=value(0)+value(x);for(let i=1;i<steps;i++)sum+=(i%2?4:2)*value(i*h);return sum*h/3;};
+ return Math.max(1,(primitive(end)-primitive(start))/dataGain);
+}
 export const modelSynergyBase=(s:GameState)=>BALANCE.scalingSynergy.modelGlobalBase+s.researchLevels.modelArchitecture*BALANCE.scalingSynergy.modelResearchBasePerLevel;
 export const modelSynergyScientific=(s:GameState)=>ScientificNumber.from(modelSynergyBase(s)).pow(Math.max(0,s.level)).pow(milestoneSynergy(s).modelExponent*(1+s.researchLevels.recursiveLearning*BALANCE.repeatableResearch.recursiveLearning.effectPerLevel));
 export const intSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.intBase).pow(Math.sqrt(Math.max(0,s.totalINTEarned)));
@@ -334,8 +349,8 @@ export const computeRate=(_hardware:number,s?:GameState)=>computeRateScientific(
 export const blockCost=(owned:number,s?:GameState)=>hardwareCost('calculator',owned,s);
 export const bulkCost=(owned:number,count:number,s?:GameState)=>hardwareBulkCost('calculator',owned,count,s);
 export const softcap=(x:number,k:number)=>x<=k?x:k+Math.sqrt(k*(x-k));
-export const quality=(level:number)=>BALANCE.scalingSynergy.qualityBase**Math.max(0,level);
-export const efficiency=(level:number)=>BALANCE.scalingSynergy.efficiencyBase**Math.max(0,level);
+export const quality=(level:number)=>1+softcap(BALANCE.modelQualityPerLevel*Math.max(0,level),BALANCE.qualitySoftcap);
+export const efficiency=(level:number)=>1+softcap(BALANCE.modelEfficiencyPerLevel*Math.max(0,level),BALANCE.efficiencySoftcap);
 export const profileShares=(s:GameState)=>BALANCE.operatingProfiles[s.operatingProfile];
 export function computeAllocationScientific(s:GameState){const total=computeRateScientific(s.hardware,s),profile=profileShares(s);return{total,inference:total.multiplyNumber(profile.inference),training:total.multiplyNumber(profile.training),research:total.multiplyNumber(profile.research)};}
 export function computeAllocation(s:GameState){const x=computeAllocationScientific(s);return{total:x.total.toNumber(MAX_ECONOMY_VALUE),inference:x.inference.toNumber(MAX_ECONOMY_VALUE),training:x.training.toNumber(MAX_ECONOMY_VALUE),research:x.research.toNumber(MAX_ECONOMY_VALUE)};}
@@ -374,7 +389,7 @@ export const trainingDataCostScientific=(s:GameState,track:TrainingTrack)=>Scien
 export const trainingDataCost=(s:GameState,track:TrainingTrack)=>trainingDataCostScientific(s,track).toNumber(MAX_ECONOMY_VALUE);
 export const trainingWork=(s:GameState,track?:TrainingTrack)=>trainingGoalSeconds((track==='quality'?s.qualityLevel:track==='efficiency'?s.efficiencyLevel:s.level)+1);
 export function startTraining(s:GameState,track:TrainingTrack){if(s.activeTraining)return s;const costExact=trainingCostScientific(s,track),dataCostExact=trainingDataCostScientific(s,track),cost=costExact.toNumber(MAX_ECONOMY_VALUE),dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),workRequired=trainingWork(s,track),rate=trainingRate(s.hardware,s,s.savedAt);if(!canAffordScientificResources(s,costExact,dataCostExact))return s;const paid=spendScientificResources(s,costExact,dataCostExact);return addEvent({...paid,training:0,activeTraining:{track,creditCost:cost,dataCost,workRequired,startedAt:s.savedAt,baseDuration:workRequired,startingRate:rate,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{track,creditCost:cost,dataCost,level:s.level,baseDuration:workRequired,effectiveRate:rate,expectedDuration:workRequired/rate});}
-export const prestigeClaim=(s:GameState)=>{const eligible=exactEconomyValue(s,'lifetimeEligibleCredits');if(eligible.compare(ScientificNumber.from(BALANCE.prestigeThreshold))<0)return 0;const ratioLog=Math.max(0,eligible.log10()-Math.log10(BALANCE.prestigeThreshold));return Math.floor(BALANCE.prestigeScale*ratioLog**BALANCE.prestigePower+1e-12);};
+export const prestigeClaim=(s:GameState)=>{const eligible=exactEconomyValue(s,'lifetimeEligibleCredits'),ratioLog=eligible.log10()-Math.log10(BALANCE.prestigeThreshold);const logWithOne=ratioLog>15?ratioLog:Math.log10(1+10**ratioLog);return Math.floor(BALANCE.prestigeScale*Math.max(0,logWithOne)**BALANCE.prestigePower+1e-12);};
 export const newINT=(s:GameState)=>Math.max(0,prestigeClaim(s)-exactEconomyValue(s,'prestigeEntitlementClaimed').toNumber(MAX_ECONOMY_VALUE));
 export const newInsight=newINT;
 export const canPrestige=(s:GameState)=>newINT(s)>=1;

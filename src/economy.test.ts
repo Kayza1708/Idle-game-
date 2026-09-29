@@ -41,7 +41,9 @@ describe('economy', () => {
     const state = newGame(0);
     expect(advance(state, -5).state.credits).toBe(0);
     expect(advance(state, 1e9).state.credits).toBeCloseTo(advance(state, 28800).state.credits);
-    expect(advance(state, 1).state.credits).toBeCloseTo(creditRate(1, 0, state));
+    const oneSecond=advance(state,1).state,splitSecond=advance(advance(state,.4).state,.6).state;
+    expect(oneSecond.credits).toBeGreaterThan(creditRate(1,0,state));
+    expect(splitSecond.credits).toBeCloseTo(oneSecond.credits,10);
     const futureDated = { ...state, savedAt: 5_000 };
     expect(advanceTo(futureDated, 1_000).state).toEqual(futureDated);
   });
@@ -60,7 +62,7 @@ describe('fixed research contracts',()=>{
 
 
 describe('repeatable research progression',()=>{
- it('uses precise duration growth, deterministic data growth and the 72 hour cap',()=>{expect(repeatableResearchDuration('dataGeneration',1)).toBe(90);expect(repeatableResearchDuration('dataGeneration',5)).toBeCloseTo(90*1.22**4);expect(repeatableResearchDuration('dataGeneration',50)).toBe(72*3600);expect(repeatableResearchDataCost('dataGeneration',5)).toBe(Math.ceil(40*1.28**4))});
+ it('uses the configured duration growth, deterministic data growth and configured cap',()=>{const rule=BALANCE.repeatableResearch.dataGeneration;expect(repeatableResearchDuration('dataGeneration',1)).toBe(rule.baseSeconds);expect(repeatableResearchDuration('dataGeneration',5)).toBeCloseTo(rule.baseSeconds*BALANCE.repeatableResearchDurationGrowth**4);expect(repeatableResearchDuration('dataGeneration',500)).toBe(BALANCE.repeatableResearchDurationCapSeconds);expect(repeatableResearchDataCost('dataGeneration',5)).toBeCloseTo(rule.baseDataCost*BALANCE.repeatableResearchDataGrowth**4)});
  it('charges once, survives reload and completes exactly one level offline',()=>{let s={...newGame(0),credits:1e6,data:1e6,discovered:['calculator','sbc'] as GameState['discovered']};s=startResearchProject(s,'dataGeneration');const lab=s.researchLabs[0]!;expect(lab.durationSeconds).toBe(90);expect(s.data).toBe(1e6-40);s=restore(serialize(advance(s,89).state),89_000).state;const done=advance(s,2,false).state;expect(done.researchLevels.dataGeneration).toBe(1);expect(done.telemetry.recentEvents.filter(e=>e.type==='research-complete')).toHaveLength(1)});
 });
 
