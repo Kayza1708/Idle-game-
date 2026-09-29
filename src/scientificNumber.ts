@@ -22,9 +22,13 @@ export class ScientificNumber {
   multiply(other:ScientificNumber){if(this.isZero()||other.isZero())return ScientificNumber.zero();return new ScientificNumber(this.mantissa*other.mantissa,this.exponent+other.exponent)}
   multiplyNumber(value:number){return this.multiply(ScientificNumber.from(value))}
   divide(other:ScientificNumber){if(this.isZero()||other.isZero())return ScientificNumber.zero();return new ScientificNumber(this.mantissa/other.mantissa,this.exponent-other.exponent)}
+  divideNumber(value:number){return value>0&&Number.isFinite(value)?this.divide(ScientificNumber.from(value)):ScientificNumber.zero()}
+  log10(){return this.isZero()?-Infinity:Math.log10(this.mantissa)+this.exponent}
+  sqrt(){return this.pow(.5)}
   pow(exponent:number){if(this.isZero()||!Number.isFinite(exponent))return ScientificNumber.zero();const log=(Math.log10(this.mantissa)+this.exponent)*exponent,whole=Math.floor(log);return new ScientificNumber(10**(log-whole),whole)}
   /** Convert only for legacy/UI paths. The cap makes overflow explicit instead of Infinity. */
   toNumber(cap=1e300){if(this.isZero())return 0;const capLog=Math.log10(cap),log=Math.log10(this.mantissa)+this.exponent;if(log>=capLog)return cap;return this.mantissa*10**this.exponent}
   toScientificString(digits=6){if(this.isZero())return '0';return `${this.mantissa.toPrecision(Math.max(1,digits))}e${this.exponent>=0?'+':''}${this.exponent}`}
+  toDisplayString(digits=2,engineering=false){if(this.isZero())return '0';const d=Math.max(0,Math.floor(digits));if(engineering){const e=Math.floor(this.exponent/3)*3,m=this.mantissa*10**(this.exponent-e);return `${m.toFixed(d)}e${e>=0?'+':''}${e}`;}return `${this.mantissa.toFixed(d)}e${this.exponent>=0?'+':''}${this.exponent}`}
   toJSON():ScientificJSON{return {m:this.mantissa,e:this.exponent}}
 }

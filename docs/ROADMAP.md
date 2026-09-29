@@ -276,3 +276,22 @@ Alle acht gelieferten Sounds sind als OGG, MP3 und WAV unter `public/assets/audi
 - Mission Hub, Season und Profil nutzen die neue Retro-Oberfläche; Claim-/Inbox-Badges bleiben zentral sichtbar.
 - Lokalisierungsgrundlage für EN/DE/ES/FR/PT/IT/PL mit englischem Fallback, persistenter Spracheinstellung und lokalisiertem Zahlenformat.
 - Save v25 migriert bestehende v24-Settings verlustfrei. Finale Hardware-/Komponenten-/Artifact-Sprites bleiben der nächste Asset-Pass.
+
+
+## UI stability v26
+Season/Mission Hub and Prestige received crash fixes after browser playtesting. The obsolete introduction experiment was removed from onboarding, and the player profile modal received a responsive layout pass. Deep prestige nodes reuse deterministic atlas cells until unique sprites are produced.
+
+## Quest-, Season-Pass- und Profil-UI — Erledigt (25. September 2026)
+
+- [x] Der Season Pass zeigt Saisonname, Level, XP zum nächsten Level sowie eine horizontal touchbedienbare kostenlose und klar gesperrte Premium-Spur mit lokaler Pixel-Art.
+- [x] Daily-, Weekly- und Monthly-Quests besitzen Tabs, Fortschrittsbalken, sichtbare Belohnungen, Status und eine hervorgehobene Abholaktion.
+- [x] Das Profil bleibt durch begrenzte Grid-Kinder, viewportgebundene Breite, Safe-Area-Abstände und internen Inhalts-Scroll auf Mobil- und Desktopbreiten vollständig erreichbar.
+- [x] Season-Status, Abholbarkeit, Sperre und einmalige Abholung sind durch Vitest-Fälle abgedeckt.
+
+### Scaling & Synergy Pass
+- [x] Alte Hardware über Ownership- und Legacy-Multiplikatoren erneut relevant machen.
+- [x] Hardware-Mastery an alle Käufe koppeln.
+- [x] Itemeffekte an Hardwareklassen, Meilensteine, Rarität und Upgrades koppeln.
+- [x] Analyse-Dropchancen und Quellen im UI offenlegen.
+- [x] Crafting-Blocker konkret im Herstellbutton anzeigen.
+- [ ] Zweite Meta-Prestige-Ebene / Axiom-System als separaten Endgame-Pass umsetzen.

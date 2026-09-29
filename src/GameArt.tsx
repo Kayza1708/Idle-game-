@@ -16,7 +16,7 @@ const itemCells: Record<ItemTypeId, [number, number]> = {
   'field-scanner': [2, 1], 'lab-drone': [3, 1], 'data-prism': [0, 2],
 };
 
-const prestigeCells: Record<PrestigeUpgradeId, [number, number]> = {
+const prestigeCells: Partial<Record<PrestigeUpgradeId, [number, number]>> = {
 dataArchive1: [0, 0], computeNet1: [1, 0], analysis1: [2, 0], labs1: [3, 0], manufacturing1: [0, 1], dataArchive2: [1, 1], computeNet2: [2, 1], analysis2: [3, 1], labs2: [0, 2], manufacturing2: [1, 2], dataArchive3: [2, 2], computeNet3: [3, 2], analysis3: [0, 3], labs3: [1, 3], manufacturing3: [2, 3]
 };
 
@@ -26,8 +26,16 @@ const resourceCells: Record<ResourceArtId, [number, number]> = {
   research: [0, 1], blueprints: [1, 1], components: [2, 1], data: [3, 1],
 };
 
-function cellStyle([column, row]: [number, number], lastRow: number): SpriteStyle {
+function cellStyle(cell: [number, number] | undefined, lastRow: number): SpriteStyle {
+  const [column, row] = cell ?? [0, 0];
   return {'--sprite-x': `${column * 100 / 3}%`, '--sprite-y': `${row * 100 / lastRow}%`};
+}
+
+function prestigeCell(id: PrestigeUpgradeId): [number, number] {
+  const configured=prestigeCells[id];
+  if(configured)return configured;
+  const node=BALANCE.prestigeUpgrades[id];
+  return [node.branch % 4, Math.min(3, Math.max(0, (node.depth - 1) % 4))];
 }
 
 export function HardwareArt({id}:{id:HardwareId}) {
@@ -39,7 +47,7 @@ export function ItemArt({type}:{type:ItemTypeId}) {
 }
 
 export function PrestigeArt({id}:{id:PrestigeUpgradeId}) {
-  return <span className="atlas-sprite prestige-art" style={cellStyle(prestigeCells[id], 3)} aria-hidden="true"/>;
+  return <span className="atlas-sprite prestige-art" style={cellStyle(prestigeCell(id), 3)} aria-hidden="true"/>;
 }
 
 export function ResourceArt({id}:{id:ResourceArtId}) {

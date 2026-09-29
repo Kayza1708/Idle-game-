@@ -250,3 +250,21 @@ Challenge-Runs sind jetzt echte modifizierte Runs statt reine Lifetime-Checklist
 - [x] Save-v24→v25-Migration und Lokalisierungs-/Format-Regressionstests.
 - [ ] Alle historischen Gameplay-Texte schrittweise aus Komponenten in Translation Keys verschieben; Missionen fallen außerhalb DE vorerst auf vorhandenes Englisch zurück.
 - [ ] Finales Pixel-Asset-Kit: 15 Hardware-Sprites, 6 Komponenten, Item/Module, Challenge-Icons, Season-Key-Art und einzigartige Artifact-Sprites.
+
+
+## UI stability v26
+- [x] Removed the obsolete introduction-experiment onboarding gate; onboarding now points to the first real research completion.
+- [x] Fixed Mission Hub/Season rendering crash caused by translation helper shadowing.
+- [x] Prestige art now handles all deep prestige nodes instead of crashing on atlas entries that only cover the original 15 nodes.
+- [x] Reworked profile modal sizing, tab navigation and settings layout for desktop/mobile.
+
+## Übergabe 25. September 2026 – Quest-, Season-Pass- und Profil-UI
+
+Der kompakte Missionsdrawer zeigt nun eine lesbare Season-Übersicht mit XP-Fortschritt und zwei eindeutig beschrifteten Belohnungsspuren. Kostenlose Belohnungen nutzen die vorhandenen Ressourcen- und Komponenten-Atlanten; die Premium-Vorschau ist rein visuell, immer gesperrt und fügt weder Kaufpfad noch Save- oder Economy-Zustand hinzu. Questkarten zeigen Ziel, Fortschrittsbalken, Gems/XP und Status in Daily-/Weekly-/Monthly-Tabs.
+
+Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen mit der breiten Tabzeile. Dialog und sämtliche Tabinhalte besitzen nun `min-width: 0`, viewportgebundene Breiten, einen eigenen vertikalen Scrollbereich sowie Safe-Area-Abstände; die Tabs bleiben horizontal scrollbar und 44 px hoch. Als nächster Schritt bleibt eine moderierte Touch-/Screenreader-Prüfung auf realen iOS-/Android-Geräten; es wurden keine Economy-, Save- oder Spielmechanikwerte geändert.
+
+## Nach Scaling & Synergy
+- 7-/30-Tage-Balanceexport auf realen Saves erneut prüfen und Legacy-/Item-Multiplikatoren bei zu schnellen oder zu langsamen Sprüngen zentral in `BALANCE.scalingSynergy` nachziehen.
+- Zweite Meta-Prestige-Ebene erst auf Basis der stabilisierten Prestige-I-/Item-Builds implementieren.
+- Item-Affixe und Build-Loadouts für Legendary/Mythic als nächsten Item-Vertiefungspass spezifizieren.
