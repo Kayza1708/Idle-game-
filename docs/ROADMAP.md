@@ -302,3 +302,10 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Analyse-Dropchancen und Quellen im UI offenlegen.
 - [x] Crafting-Blocker konkret im Herstellbutton anzeigen.
 - [ ] Zweite Meta-Prestige-Ebene / Axiom-System als separaten Endgame-Pass umsetzen.
+
+## Save-Rennen und Ladebarriere – 29. September 2026
+
+- [x] Event-, Auto-, Visibility- und Pagehide-Saves laufen über einen einzelnen, zusammenfassenden Save-Koordinator.
+- [x] Erfolgreiche asynchrone Saves ersetzen den maßgeblichen In-Memory-Zustand nicht mehr durch ihren älteren Snapshot.
+- [x] Simulation, Interaktionen und Autosave beginnen erst nach abgeschlossener IndexedDB-Ladeinitialisierung.
+- [x] Schreibfehler behalten den aktuellen Run und erlauben einen späteren neuen Save-Versuch; inkompatible Daten und Speicherzugriffsfehler bleiben unterscheidbar.
