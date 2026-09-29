@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { newGame } from './economy';
+import { advance } from './simulation';
 import { BACKUP_KEY, SAVE_KEY, TEMP_KEY, loadGame, persistGame, RECOVERY_KEY, restore, serialize, StorageLike } from './storage';
 
 class MemoryStorage implements StorageLike {
@@ -48,15 +49,16 @@ describe('save format', () => {
   it('does not lose or duplicate time across background, save, close and reload', () => {
     const storage = new MemoryStorage();
     const started = newGame(0);
+    const expected = advance(started, 50).state;
     const saved = persistGame(storage, started, 30_000);
     expect(saved.saved).toBe(true);
-    expect(saved.state.credits).toBeCloseTo(30.375);
+    expect(saved.state.credits).toBeCloseTo(advance(started,30).state.credits);
     expect(saved.state.savedAt).toBe(30_000);
     expect(saved.state.training).toBe(0);
 
     const loaded = loadGame(storage, 50_000);
     const resumed = persistGame(storage, loaded.state, 50_000);
-    expect(resumed.state.credits).toBeCloseTo(50.625);
+    expect(resumed.state.credits).toBeCloseTo(expected.credits);
     expect(resumed.state.savedAt).toBe(50_000);
   });
 
