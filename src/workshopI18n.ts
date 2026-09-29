@@ -171,7 +171,7 @@ const onboarding:Record<OnboardingId,OnboardingCopy>={
   'equip-item':{
     title:l('Equip the Lab','Labor ausrüsten','Equipar el laboratorio','Équiper le laboratoire','Equipar o laboratório','Equipaggia il laboratorio','Wyposaż laboratorium'),
     text:l('Equip an item.','Rüste ein Item aus.','Equipa un objeto.','Équipez un objet.','Equipa um item.','Equipaggia un oggetto.','Wyposaż przedmiot.'),
-    reward:l('75 Components','75 Komponenten','75 componentes','75 composants','75 componentes','75 componenti','75 komponentów')
+    reward:l('75 Circuits','75 Schaltkreise','75 circuitos','75 circuits','75 circuitos','75 circuiti','75 obwodów')
   },
   'class-upgrade':{
     title:l('Specialized Hardware','Spezialisierte Hardware','Hardware especializado','Matériel spécialisé','Hardware especializado','Hardware specializzato','Wyspecjalizowany sprzęt'),
