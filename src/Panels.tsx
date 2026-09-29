@@ -32,7 +32,7 @@ export function Workshop({s,act}:{s:GameState;act:Action}){
 }
 
 export function Research({s,act}:{s:GameState;act:Action}){
- const language=s.settings.language,unlocked=s.discovered.includes('sbc'),slots=researchLabCount(s),repeatableIds=Object.keys(BALANCE.repeatableResearch) as RepeatableResearchId[],lastAnalysis=[...s.telemetry.recentEvents].reverse().find(event=>event.type==='experiment-complete'&&event.details.total!==undefined);
+ const language=s.settings.language,unlocked=s.discovered.includes('sbc'),slots=researchLabCount(s),repeatableIds=Object.keys(BALANCE.repeatableResearch) as RepeatableResearchId[];
  const projectName=(id:ResearchId)=>isRepeatableResearch(id)?researchText(id,language).name:projectText(id,language).name;
  return <div className="panel">
   <h2>{g(language,'researchLab')}</h2>
@@ -78,7 +78,12 @@ export function Research({s,act}:{s:GameState;act:Action}){
 
   {unlocked&&<>
    <h3>{g(language,'componentAnalysis')}</h3>
-   {lastAnalysis&&<p className="analysis-result"><b>{g(language,'lastFind')}:</b> {String(lastAnalysis.details.total)} {g(language,'components')}</p>}
+   {!s.experiments.active&&s.experiments.lastResult&&<section className="card analysis-result-card">
+    <b>{language==='de'?'Analyse abgeschlossen':'Analysis complete'} · {experimentText(s.experiments.lastResult.type,language)}</b>
+    <small>{language==='de'?'Quelle':'Source'}: {experimentText(s.experiments.lastResult.type,language)} · {s.experiments.lastResult.mode==='offline'?(language==='de'?'offline':'offline'):(language==='de'?'aktiv':'active')}</small>
+    <div className="result-items">{componentIds.filter(id=>(s.experiments.lastResult?.components[id]??0)>0).map(id=><div key={id}><ComponentArt id={id}/><span>{componentText(id,language).name}</span><strong>+{s.experiments.lastResult?.components[id]}</strong></div>)}{s.experiments.lastResult.blueprintFragments>0&&<div><ResourceArt id="blueprints"/><span>{g(language,'blueprintFragments')}</span><strong>+{s.experiments.lastResult.blueprintFragments}</strong></div>}</div>
+    <div className="result-actions"><button onClick={()=>act('experiment',s.experiments.lastResult!.type,s.experiments.lastResult!.length)}>{language==='de'?'Erneut starten':'Start again'}</button><button onClick={()=>act('open-inventory')}>{language==='de'?'Inventar':'Inventory'}</button></div>
+   </section>}
    {s.experiments.active&&<section className="card analysis-active">
     <b>{g(language,'analysisOccupied')} · {experimentText(s.experiments.active.type,language)}</b>
     <div className="bar"><i style={{width:`${Math.min(100,Math.max(0,(s.savedAt-s.experiments.active.startedAt)/(s.experiments.active.endsAt-s.experiments.active.startedAt)*100))}%`}}/></div>
@@ -118,6 +123,14 @@ export function Inventory({s,act}:{s:GameState;act:Action}){
    <div className="grid">{s.lootDrops.map(drop=><button className="loot-drop" key={drop.id} onClick={()=>act('loot-drop',drop.id)}>✦ SIGNAL CACHE · {num(Math.max(0,drop.expiresAt-s.savedAt)/1000,0)} s</button>)}</div>
   </section>}
 
+  <h2>{language==='de'?'Werkbank':'Workbench'}</h2>
+  <section className="card workbench">
+   {s.crafting.active?(()=>{const j=s.crafting.active!,remaining=Math.max(0,((j.endsAt??s.savedAt)-s.savedAt)/1000),progress=Math.max(0,Math.min(1,1-remaining/j.durationPerUnit));return <><h3>{language==='de'?'Aktiver Auftrag':'Active job'} · {String(j.recipeId)}</h3><progress value={progress}/><p>{j.completed}/{j.quantity} · {language==='de'?'Restzeit':'Remaining'} {num(remaining,0)} s</p><small>{language==='de'?'Aktive Aufträge können nicht abgebrochen werden.':'Active jobs cannot be cancelled.'}</small></>})():<p>{language==='de'?'Herstellungsplatz frei.':'Crafting slot available.'}</p>}
+   <h3>{language==='de'?'Warteschlange':'Queue'} · {s.crafting.queue.length}/3</h3>
+   {s.crafting.queue.map(j=><div className="workbench-row" key={j.id}><span>{String(j.recipeId)} × {j.quantity} · {num(j.durationPerUnit*j.quantity,0)} s</span><button onClick={()=>act('craft-cancel',j.id)}>{language==='de'?'Entfernen':'Remove'}</button></div>)}
+   {s.crafting.queue.length>=3&&<p>{language==='de'?'Warteschlange voll: Warte oder entferne einen wartenden Auftrag.':'Queue full: wait or remove a queued job.'}</p>}
+  </section>
+
   <h2>{g(language,'equipment')} · {Object.values(s.equipped).filter(Boolean).length}/{equipmentSlotCount(s)} {g(language,'slots')}</h2>
   <p>{g(language,'itemEffects')}: Credits +{num(productionBreakdown(s).itemBonuses.credits*100,1)} % · Compute +{num(productionBreakdown(s).itemBonuses.compute*100,1)} % · {g(language,'data')} +{num(productionBreakdown(s).itemBonuses.data*100,1)} % · {g(language,'research')} +{num(productionBreakdown(s).itemBonuses.research*100,1)} %</p>
 
@@ -149,10 +162,10 @@ export function Inventory({s,act}:{s:GameState;act:Action}){
    const m=BALANCE.modules[id],a=moduleAffordability(s,id),missingData=a.data.missing,missingComponents=Object.values(a.missingComponents).reduce((sum,n)=>sum+Number(n),0);
    return <article className="card" key={id}>
     <h3>{moduleText(id,language)} · {s.modules[id]}</h3>
-    <p>{effectText(m.effect,language)}</p>
+    <p>{effectText(m.effect,language)} · {BALANCE.craftingSeconds.module} s</p>
     <small>{g(language,'cost')} {num(m.data)} {g(language,'data')} · {g(language,'inventory')} {num(s.data)} · {g(language,'shortage')} {num(missingData)} · {g(language,'savingTime')} {eta(missingData)}</small>
     <small>{Object.entries(m.ingredients).map(([c,n])=>`${n} ${componentText(c as keyof typeof BALANCE.components,language).name}`).join(', ')}</small>
-    <button disabled={!a.unlocked||missingComponents>0||missingData>0} onClick={()=>act('craft-module',id)}>{!a.unlocked?`${g(language,'requirement')}: Manufacturing III`:g(language,'craftModule')}</button>
+    <button disabled={!a.unlocked||missingComponents>0||missingData>0||s.crafting.queue.length>=3} onClick={()=>act('craft-module',id,1)}>{!a.unlocked?`${g(language,'requirement')}: Manufacturing III`:g(language,'craftModule')}</button>
    </article>
   })}</section>
 
@@ -162,12 +175,12 @@ export function Inventory({s,act}:{s:GameState;act:Action}){
    return <article className="card" key={type}>
     <ItemArt type={type}/>
     <h3>{recipeText(type,language)}</h3>
-    <p>{g(language,'result')}: {itemText(type,language)} · {effectText(itemTypes[type].effect,language)}</p>
+    <p>{g(language,'result')}: {itemText(type,language)} · {rarityText(recipe.rarity,language)} · {num(BALANCE.craftingSeconds[recipe.rarity],0)} s · {effectText(itemTypes[type].effect,language)}</p>
     <div className="recipe-parts">{componentIds.filter(id=>(recipe.ingredients[id]??0)>0).map(id=>{const need=recipe.ingredients[id]??0,short=Math.max(0,need-s.componentInventory[id]);return <div className={short?'missing':''} key={id}><ComponentArt id={id}/><small>{componentText(id,language).name}<br/>{s.componentInventory[id]} / {need}{short?` · ${short} ${g(language,'missing')}`:''}</small></div>})}</div>
     <small>{g(language,'data')}: {g(language,'cost')} {num(recipe.data)} · {g(language,'inventory')} {num(s.data)} · {g(language,'shortage')} {num(a.data.missing)} · {g(language,'savingTime')} {eta(a.data.missing)}</small>
     <small>{g(language,'modules')}: {Object.entries(recipe.modules).map(([id,n])=>`${n} ${moduleText(id as 'computeBus'|'dataLattice',language)}`).join(', ')}{missingModules>0?` · ${g(language,'modulesMissing')}`:''}</small>
     <small>{g(language,'blueprintFragments')}: {s.blueprintFragments} / {recipe.blueprints}{a.missingBlueprints>0?` · ${a.missingBlueprints} ${g(language,'missing')}`:''}</small>
-    <button disabled={missing.length>0||missingModules>0||a.data.missing>0||a.missingBlueprints>0} onClick={()=>act('craft',type,'common')}>{missing.length?`${g(language,'missing')}: ${missing.map(id=>`${Math.max(0,(recipe.ingredients[id]??0)-s.componentInventory[id])} ${componentText(id,language).name}`).join(' · ')}`:missingModules>0?g(language,'modulesMissing'):a.data.missing>0?`${num(a.data.missing)} ${g(language,'data')} · ${g(language,'missing')}`:a.missingBlueprints>0?`${a.missingBlueprints} ${g(language,'blueprintFragments')} · ${g(language,'missing')}`:g(language,'craftPermanent')}</button>
+    <button disabled={missing.length>0||missingModules>0||a.data.missing>0||a.missingBlueprints>0||s.crafting.queue.length>=3} onClick={()=>act('craft',type,recipe.rarity,1)}>{missing.length?`${g(language,'missing')}: ${missing.map(id=>`${Math.max(0,(recipe.ingredients[id]??0)-s.componentInventory[id])} ${componentText(id,language).name}`).join(' · ')}`:missingModules>0?g(language,'modulesMissing'):a.data.missing>0?`${num(a.data.missing)} ${g(language,'data')} · ${g(language,'missing')}`:a.missingBlueprints>0?`${a.missingBlueprints} ${g(language,'blueprintFragments')} · ${g(language,'missing')}`:g(language,'craftPermanent')}</button>
    </article>
   })}</section>
  </div>

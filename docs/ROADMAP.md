@@ -315,3 +315,23 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Gem-Shop, Ausrüstungs-Onboarding und Rewarded-Ad-Testpfad vergeben ihre bisherigen Mengen als nutzbare Schaltkreise über `grantComponents`.
 - [x] Claim-/Transaktionsschutz, Gems, typisierter Bestand, Gesamtzähler, Lifetime-Zähler und bestehende Komponenten-Telemetrie bleiben atomar konsistent.
 - [x] Shop- und Onboarding-Anzeigen benennen Schaltkreise auf Deutsch und Englisch und verwenden das bestehende Komponenten-Icon.
+
+## Challenge-Run und Onboarding-Meilenstein – 29. September 2026
+
+- [x] Challenge-Runs besitzen eine eindeutige Run-ID und messen 1 INT ausschließlich aus seit Run-Start erwirtschaftetem, prestigeberechtigtem Umsatz.
+- [x] Erstabschluss vergibt Sterne genau einmal; Wiederholungen aktualisieren nur Abschlusszahl und Bestzeit, Abbruch vergibt nichts.
+- [x] Das ehemalige Klassen-Upgrade-Onboarding erkennt stattdessen den echten 25-Taschenrechner-Meilenstein und behält die einmalige bestehende Belohnung.
+
+## Drop- und Analysefeedback – 29. September 2026
+
+- [x] Tatsächlich gebuchte Signal-Drop-Funde erscheinen gruppiert in höchstens drei zeitlich begrenzten Fundkarten.
+- [x] Analyseergebnisse bleiben mit realen Materialien und Bauplanfragmenten bis zum nächsten regulären Start gespeichert; Online-/Offline-Abschluss bleibt genau einmalig.
+- [x] Rückkehrberichte führen Komponenten und Analysen des konkreten Offline-Zeitraums, und die Seltenheitsgarantie verwendet das zentrale Komponentenregister ohne garantierten Quantenkern.
+
+## KI-Ausrüstungsdialog – 29. September 2026
+
+- [x] Die Modellkarte öffnet einen fokussierten, mobilen Ausrüstungsdialog mit drei dauerhaften, zentral gezählten Plätzen.
+- [x] Ausrüsten, Ersetzen und Entfernen erhalten Iteminstanzen, erzwingen bestehende Kategorien und zeigen eine Vorschau aus der echten Economy.
+- [x] Platzkäufe verwenden exakte ScientificNumber-Prüfung/-Subtraktion und bleiben zusammen mit gültiger Ausrüstung über Reload und Prestige erhalten.
+
+- [x] Zeitbasierte, offlinefähige Werkbank für bestehende Module und Itemrezepte mit einem aktiven und drei wartenden Aufträgen.

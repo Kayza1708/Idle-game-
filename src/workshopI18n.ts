@@ -1,9 +1,11 @@
 import type {Language} from './i18n';
-import type {HardwareId,OperatingProfileId} from './economy';
+import {BALANCE,type HardwareId,type OperatingProfileId} from './economy';
 
 type L=Record<Language,string>;
 
 const l=(en:string,de:string,es:string,fr:string,pt:string,it:string,pl:string):L=>({en,de,es,fr,pt,it,pl});
+const calculator25=BALANCE.hardware.calculator.milestones.find(milestone=>milestone.threshold===25)!;
+const calculator25Compute=calculator25.compute*100,calculator25Tap=calculator25.value*100;
 
 export const workshopCopy={
   credits:l('Credits','Credits','Créditos','Crédits','Créditos','Crediti','Kredyty'),
@@ -174,8 +176,8 @@ const onboarding:Record<OnboardingId,OnboardingCopy>={
     reward:l('75 Circuits','75 Schaltkreise','75 circuitos','75 circuits','75 circuitos','75 circuiti','75 obwodów')
   },
   'class-upgrade':{
-    title:l('Specialized Hardware','Spezialisierte Hardware','Hardware especializado','Matériel spécialisé','Hardware especializado','Hardware specializzato','Wyspecjalizowany sprzęt'),
-    text:l('Buy a class upgrade.','Kaufe ein Klassen-Upgrade.','Compra una mejora de clase.','Achetez une amélioration de classe.','Compra uma melhoria de classe.','Acquista un potenziamento di classe.','Kup ulepszenie klasy.'),
+    title:l('Tap Coupling','Tap-Kopplung','Acoplamiento de toque','Couplage de tap','Acoplamento de toque','Accoppiamento tap','Sprzężenie tapnięć'),
+    text:l(`Reach 25 calculators: +${calculator25Compute}% class Compute and +${calculator25Tap}% tap income.`,`Erreiche 25 Taschenrechner: +${calculator25Compute} % Klassen-Compute und +${calculator25Tap} % Tap-Ertrag.`,'Alcanza 25 calculadoras: +16 % de cómputo de clase y +6 % de toques.','Atteins 25 calculatrices : +16 % de calcul de classe et +6 % de taps.','Alcança 25 calculadoras: +16% de computação de classe e +6% de toques.','Raggiungi 25 calcolatrici: +16% Compute di classe e +6% tap.','Osiągnij 25 kalkulatorów: +16% mocy klasy i +6% z tapnięć.'),
     reward:l('250 Credits','250 Credits','250 créditos','250 crédits','250 créditos','250 crediti','250 kredytów')
   },
   'first-prestige':{

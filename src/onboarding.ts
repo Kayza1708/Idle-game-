@@ -1,6 +1,9 @@
 import { BALANCE, GameState, addCredits, grantComponents } from './economy';
 import { addEvent, addMetrics } from './telemetry';
 
+const calculator25Milestone=BALANCE.hardware.calculator.milestones.find(milestone=>milestone.threshold===25)!;
+const calculator25Effect=`+${calculator25Milestone.compute*100} % Klassen-Compute und +${calculator25Milestone.value*100} % Tap-Ertrag`;
+
 export const onboardingSteps=[
   {id:'first-buy',title:'Erste Erweiterung',text:'Kaufe deine erste Hardware.',reward:'25 Credits'},
   {id:'ten-calculators',title:'Rechenkollektiv',text:'Besitze 10 Taschenrechner.',reward:'60 Credits'},
@@ -8,12 +11,13 @@ export const onboardingSteps=[
   {id:'first-level',title:'Lernendes Modell',text:'Erreiche Modelllevel 1.',reward:'100 Credits'},
   {id:'first-research',title:'Forschung beginnt',text:'Schließe dein erstes Forschungsprojekt ab.',reward:'100 Credits'},
   {id:'equip-item',title:'Labor ausrüsten',text:'Rüste ein Item aus.',reward:'75 Schaltkreise'},
-  {id:'class-upgrade',title:'Spezialisierte Hardware',text:'Kaufe ein Klassen-Upgrade.',reward:'250 Credits'},
+  {id:'class-upgrade',title:'Tap-Kopplung',text:`Erreiche 25 Taschenrechner: ${calculator25Effect}.`,reward:'250 Credits'},
   {id:'first-prestige',title:'Neustart des Labors',text:'Führe den ersten Prestige durch.',reward:'Abgeschlossen'},
 ] as const;
 
 export function updateOnboarding(s:GameState):GameState{
-  const met:Record<string,boolean>={'first-buy':s.lifetime.hardwareBought>0,'ten-calculators':s.hardwareCounts.calculator>=10,'discover-sbc':s.discovered.includes('sbc'),'first-level':s.level>=1,'first-research':s.lifetime.researchCompleted>0,'equip-item':Object.keys(s.equipped).length>0,'class-upgrade':s.classUpgrades.length>0,'first-prestige':s.prestigeCount>0};
+  const calculator25=s.hardwareCounts.calculator>=25||s.telemetry.permanentEvents.some(event=>event.type==='hardware-milestone'&&event.details.id==='calculator'&&event.details.threshold===25);
+  const met:Record<string,boolean>={'first-buy':s.lifetime.hardwareBought>0,'ten-calculators':s.hardwareCounts.calculator>=10,'discover-sbc':s.discovered.includes('sbc'),'first-level':s.level>=1,'first-research':s.lifetime.researchCompleted>0,'equip-item':Object.keys(s.equipped).length>0,'class-upgrade':calculator25,'first-prestige':s.prestigeCount>0};
   const completed=[...s.onboarding.completed];for(const step of onboardingSteps)if(met[step.id]&&!completed.includes(step.id))completed.push(step.id);
   return completed.length===s.onboarding.completed.length?s:{...s,onboarding:{...s.onboarding,completed}};
 }

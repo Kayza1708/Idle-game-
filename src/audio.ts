@@ -6,7 +6,7 @@ const sources=(id:SoundId|'idle-loop')=>[`/assets/audio/${id}.ogg`,`/assets/audi
 export function actionSound(action:string,before:GameState,after:GameState):SoundId|null{
  if(after.discovered.length>before.discovered.length)return'unlock';
  if(action==='prestige'&&after.prestigeCount>before.prestigeCount)return'prestige';
- if(['buy-class','class-upgrade','buy','research-lab','node','breakthrough','gem-components','gem-boost'].includes(action)&&after!==before)return'purchase';
+ if(['buy-class','class-upgrade','buy','research-lab','node','breakthrough','gem-components','gem-boost','equipment-slot'].includes(action)&&after!==before)return'purchase';
  if(['claim','mail','claim-intro'].includes(action)&&after.gems>before.gems)return'gem-pickup';
  if(action==='research-project'&&after===before)return'error';
  return null;

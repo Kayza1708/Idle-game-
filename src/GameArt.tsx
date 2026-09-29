@@ -53,4 +53,4 @@ export function PrestigeArt({id}:{id:PrestigeUpgradeId}) {
 export function ResourceArt({id}:{id:ResourceArtId}) {
   return <span className="atlas-sprite resource-art" style={cellStyle(resourceCells[id], 1)} aria-hidden="true"/>;
 }
-export function ComponentArt({id}:{id:ComponentId}){const [column,row]=BALANCE.components[id].atlasCell;return <span className="atlas-sprite component-art" style={{'--sprite-x':`${column*50}%`,'--sprite-y':`${row*100}%`} as SpriteStyle} aria-hidden="true"/>;}
+export function ComponentArt({id}:{id:ComponentId}){const [column,row]=BALANCE.components[id].atlasCell;if(column>=3||row>=2)return <span className="component-art component-art-missing" title={`Kein Bild-Asset: ${BALANCE.components[id].name}`} aria-label={BALANCE.components[id].name}>◇</span>;return <span className="atlas-sprite component-art" style={{'--sprite-x':`${column*50}%`,'--sprite-y':`${row*100}%`} as SpriteStyle} aria-hidden="true"/>;}
