@@ -96,7 +96,7 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
     const toExperiment=next.experiments.active?Math.max(0,(next.experiments.active.endsAt-now)/1000):Infinity;
     const toResearch=Math.min(...next.researchLabs.map(lab=>lab?Math.max(0,(lab.endsAt-now)/1000):Infinity));
     const toPeriod=Math.min(...(['daily','weekly','monthly'] as const).map(kind=>Math.max(0,(next.missions[kind].endsAt-now)/1000)));
-    const toBoost=Math.min(next.trainingBoostUntil>now?(next.trainingBoostUntil-now)/1000:Infinity,next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
+    const toBoost=Math.min(next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
     // Keep integration boundaries on the persistent timeline. Otherwise an
     // external save/advance split creates a new Euler step and changes rates
     // that depend on resources produced during the preceding step.
@@ -314,7 +314,7 @@ function runSessionDecisions(state:GameState,rng:()=>number,trainingTrack:'quali
  let next=claimSessionRewards(state,rng),nextTrack=trainingTrack;
  const nodeIds=(Object.keys(BALANCE.prestigeUpgrades) as PrestigeUpgradeId[]).sort((a,b)=>BALANCE.prestigeUpgrades[a].depth-BALANCE.prestigeUpgrades[b].depth||a.localeCompare(b));
  for(const id of nodeIds){const candidate=buyNode(next,id);if(candidate!==next){next=candidate;break;}}
- if(!next.activeTraining){const started=startTraining(next,nextTrack);if(started!==next){next=started;nextTrack=nextTrack==='quality'?'efficiency':'quality';}else waits.credits+=10;}
+ if(!next.activeTraining){const started=startTraining(next,nextTrack);if(started!==next){next=started;nextTrack=nextTrack==='quality'?'efficiency':'quality';}else waits.data+=10;}
  if(next.discovered.includes('sbc')){
    const catalog=[...'operations blueprints alignment'.split(' '),...repeatableResearchIds] as import('./economy').ResearchId[];
    let started=false;
@@ -324,7 +324,7 @@ function runSessionDecisions(state:GameState,rng:()=>number,trainingTrack:'quali
    else waits.slots+=10;
  }
  const candidates=next.discovered.map(id=>{const before=creditRate(next.hardware,next.level,next,next.savedAt),cost=hardwareCost(id,next.hardwareCounts[id],next),afterState=buyHardwareClass(next,id,1),after=afterState===next?before:creditRate(afterState.hardware,afterState.level,afterState,afterState.savedAt);return{id,cost,payback:after>before?cost/(after-before):Infinity,afterState};}).filter(x=>x.afterState!==next).sort((a,b)=>a.payback-b.payback||hardwareIds.indexOf(a.id)-hardwareIds.indexOf(b.id));
- if(candidates[0])next=candidates[0].afterState;else waits.credits+=10;
+ if(candidates[0])next=candidates[0].afterState;else waits.data+=10;
  if(!next.crafting.active&&next.crafting.queue.length===0&&next.completedResearch.includes('blueprints')){
    for(const type of Object.keys(BALANCE.itemRecipes) as (keyof typeof BALANCE.itemRecipes)[]){
      const quote=craftAffordability(next,type);

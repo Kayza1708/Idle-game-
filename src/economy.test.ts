@@ -5,7 +5,7 @@ import {restore,serialize} from './storage';
 
 describe('economy', () => {
   it('uses the calculator balance and exact geometric bulk sum', () => {
-    expect(hardwareCost('calculator', 1)).toBeCloseTo(11.5, 12);
+    expect(hardwareCost('calculator', 1)).toBeCloseTo(17.55, 12);
     expect(hardwareBulkCost('calculator', 1, 3)).toBeCloseTo(hardwareCost('calculator', 1) + hardwareCost('calculator', 2) + hardwareCost('calculator', 3), 12);
   });
   it('does not buy with insufficient credits', () => {

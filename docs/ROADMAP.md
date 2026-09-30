@@ -372,3 +372,20 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Fünf zweitseitige Kapitel reagieren einmalig auf Quality-Abschluss, 1.000 gleichzeitige Nutzer, Prestige, ausgerüstetes Item und Server-Rack-Kauf.
 - [x] Bestehende Dialogwarteschlange priorisiert Tutorialtexte und ordnet gleichzeitig erreichte Kapitel deterministisch.
 - [x] Journal, getrennte Story-Einstellung, Altspielstand-Abgleich sowie deutsche und englische Texte sind umgesetzt.
+
+## Schicht-1-Economy-Kalibrierung – 30. September 2026
+
+- [x] Alle 15 Hardwareklassen sind credit-only und ohne Progressionsvoraussetzungen kaufbar; spätere Klassen bleiben mit Preis und Sparfortschritt aufklappbar sichtbar.
+- [x] ScientificNumber-Einzel-/Bulk-/Max-Käufe, exakter Abzug und einmalige Meilensteinkanten sind getestet.
+- [x] Reproduzierbare Vorher-/Nachher-Messungen für Strategie A/B sowie eine Kontrollmessung mit allen Systemen sind dokumentiert.
+- [x] Erstkauf-Zeitfenster Klassen 1–5, Klasse 6 frühestens nach drei Stunden sowie Rate-/Anteilsgrenzen sind nachgewiesen.
+- [ ] Zwei einzelne 2–5-Minuten-Sparphasen vor Klasse 5; die ROI-Strategie unterbricht sie derzeit durch rentable Zwischenkäufe.
+
+## Schicht-2-Economy – Data und Modelltraining (30. September 2026)
+
+- [x] Data-Grundrate auf `0,1 × sqrt(users)` und sämtliche zusätzlichen Data-Prozentboni auf einen gemeinsamen, unter ×5 abgeflachten Multiplikator umgestellt.
+- [x] Quality-/Efficiency-Kosten und -Dauern sind getrennt, data-only, beim Start fest gespeichert und unabhängig von Compute, Taps und späteren Beschleunigern.
+- [x] Online-/Offline-/Reload-Abschluss, Doppelklickschutz, exakter Abzug, große Zahlen und unveränderte Hardwareparameter sind getestet.
+- [x] Basis-, aktiver, passiver und Research-/Analyse-Kontrolllauf sind reproduzierbar dokumentiert.
+- [ ] Ziel „erstes Training nach 3–5 aktiven Minuten“: gemessen sind 75 Sekunden.
+- [ ] Steigende reine Ansparpausen: im aggressiven 24-h-Hardwarelauf durch schneller wachsende Nutzer-/Data-Rate nicht monoton erfüllt.

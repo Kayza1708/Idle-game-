@@ -1,0 +1,14 @@
+import {writeFile} from 'node:fs/promises';
+import {hardwareIds,layerOneProfile,legacyLayerOneProfile} from '../src/economy';
+import {simulateLayerOne} from '../src/layerOneSimulation';
+import {simulateBalance} from '../src/simulation';
+const before={A:simulateLayerOne(legacyLayerOneProfile(),'A'),B:simulateLayerOne(legacyLayerOneProfile(),'B')};
+const after={A:simulateLayerOne(layerOneProfile(),'A'),B:simulateLayerOne(layerOneProfile(),'B')};
+const control=simulateBalance(1,true,1708);
+const fmt=(seconds:number|undefined)=>seconds===undefined?'nicht erreicht':`${seconds.toFixed(1)} s`;
+const rows=hardwareIds.map(id=>`| ${id} | ${fmt(before.A.firstPurchases[id])} | ${fmt(after.A.firstPurchases[id])} | ${fmt(before.B.firstPurchases[id])} | ${fmt(after.B.firstPurchases[id])} |`);
+const detail=(name:string,run:typeof after.A)=>[`### ${name}`,'',`Meilensteine: ${run.milestones.length?run.milestones.map(x=>`${x.id} ${x.threshold} @ ${fmt(x.at)}`).join('; '):'nicht erreicht'}.`,`Längste Sparphasen: ${run.longestWaits.map(x=>fmt(x)).join(', ')}.`,`Erstkäufe/Anteile/Amortisation: ${run.purchases.filter(x=>(x.id==='calculator'&&x.owned===2)||(x.id!=='calculator'&&x.owned===1)).map(x=>`${x.id}: ${fmt(x.at)}, ${(x.share*100).toFixed(1)} %, ${fmt(x.paybackSeconds)}`).join('; ')}.`,''];
+const md=['# Schicht-1-Balance-Messung','',`Reproduzierbarer 24-h-Basisloop; Start mit einem Taschenrechner, ohne Training, Forschung, Items, Questbelohnungen, Taps und Prestigeeffekte. Strategie A kauft den bezahlbaren Einzelkauf mit kürzester Amortisation (Tie-Break: Klassen-ID); Strategie B spart nach jedem Erstkauf direkt auf die nächste Klasse.`,'','| Klasse | Vorher A | Nachher A | Vorher B | Nachher B |','|---|---:|---:|---:|---:|',...rows,'',...detail('Vorher · Strategie A',before.A),...detail('Nachher · Strategie A',after.A),...detail('Vorher · Strategie B',before.B),...detail('Nachher · Strategie B',after.B),'### Kontrollmessung mit allen bisherigen Systemen','',`1 Tag aktiv, Seed 1708: ${Object.keys(control.milestones.hardware).length} erreichte Hardwareklassen, ${control.prestiges} Prestiges, invalid=${control.invalid}. Die Parameter anderer Systeme wurden nicht verändert.`,'','Klassen ohne Zeitangabe sind im Messhorizont ausdrücklich **nicht erreicht**. Die zwei geforderten 2–5-Minuten-Sparphasen vor Klasse 5 wurden von Strategie A nicht erreicht; kontinuierlich rentable Kleinkäufe zerlegen das Sparen in kürzere Intervalle. Dieser Zielkonflikt wird nicht als Erfolg gewertet.'];
+await writeFile('docs/layer-one-balance.json',JSON.stringify({version:1,horizonSeconds:86400,before,after,control:{hardware:control.milestones.hardware,prestiges:control.prestiges,invalid:control.invalid}},null,2)+'\n');
+await writeFile('docs/layer-one-balance.md',md.join('\n')+'\n');
+console.log('Wrote docs/layer-one-balance.{json,md}');
