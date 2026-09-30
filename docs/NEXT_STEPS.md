@@ -332,3 +332,9 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Der Rückkehrbericht wird erst ab fünf Minuten geöffnet, bucht nichts erneut und wird vor weiteren Dialogen angezeigt; ein unmittelbar gespeicherter Offline-Abschluss verhindert doppelte Vergabe nach Reload.
 - Die Zielkarte nutzt vorhandene Registerreihenfolgen und verlinkt nur auf echte UI-Ziele. Hardware-Ziele verwenden ausschließlich 10/25/50/100/250/500.
 - [ ] Rückkehrfenster, Zielnavigation und Quest-/Season-Badge bei 390 px und Desktop mit einem produktionsnahen Save manuell prüfen.
+
+## Übergabe: Mira-Fortschrittskapitel – 30. September 2026
+
+- [x] Kapitel werden aus echten Zustandsübergängen abgeleitet, gespeichert und nach Reload nicht erneut automatisch geöffnet.
+- [x] Deaktivierte Story schaltet erreichte Kapitel weiterhin im Journal frei; Wiederlesen bleibt ohne Fortschritts- oder Belohnungseffekt.
+- [ ] Dialogfolge und Journal bei 390 px mit einem produktionsnahen Spielstand auf einem realen Touch-Gerät gegenprüfen.

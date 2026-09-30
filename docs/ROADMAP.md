@@ -366,3 +366,9 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Rückkehrberichte zeigen ab fünf Minuten echte, offline gebuchte ScientificNumber-Erträge, Komponenten, Abschlüsse sowie berücksichtigte und verlorene Zeit.
 - [x] Die Werkstatt priorisiert Tutorial, abholbares Onboarding, Ausrüstung, bezahlbares Crafting, startbare Forschung und feste Hardware-Meilensteine ohne automatische Aktionen.
 - [x] Quest-/Season-Badges basieren ausschließlich auf tatsächlich abholbaren Belohnungen einschließlich Periodenbonus.
+
+## Mira-Fortschrittskapitel – 30. September 2026
+
+- [x] Fünf zweitseitige Kapitel reagieren einmalig auf Quality-Abschluss, 1.000 gleichzeitige Nutzer, Prestige, ausgerüstetes Item und Server-Rack-Kauf.
+- [x] Bestehende Dialogwarteschlange priorisiert Tutorialtexte und ordnet gleichzeitig erreichte Kapitel deterministisch.
+- [x] Journal, getrennte Story-Einstellung, Altspielstand-Abgleich sowie deutsche und englische Texte sind umgesetzt.
