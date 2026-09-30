@@ -207,6 +207,7 @@ footer { display: flex; max-width: 720px; margin: auto; padding: 18px 0; justify
 .story-copy { min-width: 0; padding: 13px; border: 1px solid #75634b; border-radius: 3px; background: #171713f5; box-shadow: 0 3px 0 #090a08; }
 .story-dialogue.has-mira .story-copy { margin-left: -12px; }
 .story-copy > strong { display: inline-block; margin: -25px 0 4px; padding: 4px 9px; border: 1px solid #75634b; background: #302b22; color: var(--warm-light); font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; }
+.story-copy h2 { margin: 3px 0 6px; color: var(--warm-light); font-size: clamp(16px, 4vw, 21px); }
 .story-copy p { min-height: 2.9em; margin: 5px 0 11px; color: var(--ink); }
 .story-actions { display: flex; justify-content: flex-end; gap: 7px; }
 .story-actions .story-next { border-color: #8f7145; background: #a8783f; color: #17120c; font-weight: 800; }
@@ -215,6 +216,9 @@ footer { display: flex; max-width: 720px; margin: auto; padding: 18px 0; justify
 .story-journal > div { display: grid; gap: 6px; padding: 0 8px 8px; }
 .story-journal button { text-align: left; }
 .story-journal button b,.story-journal button small { display: block; }
+.story-setting { display: flex; min-height: 44px; align-items: center; gap: 10px; padding: 6px 9px; border: 1px solid var(--line); border-radius: 3px; }
+.story-setting input { width: 22px; height: 22px; flex: 0 0 auto; }
+.story-setting span,.story-setting b,.story-setting small { display: block; }
 @media (max-width: 520px) { .story-dialogue { bottom: calc(74px + env(safe-area-inset-bottom)); } .story-dialogue.has-mira { grid-template-columns: 96px 1fr; } .mira-sprite { height: min(34vh, 240px); } .story-copy { padding: 10px; } .story-copy p { font-size: 13px; } }
 @media (prefers-reduced-motion: reduce) { .story-dialogue { filter: none; } }
 .audio-settings { position: relative; }
