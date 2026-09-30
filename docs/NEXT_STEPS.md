@@ -299,3 +299,18 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Item-Affixe und Build-Loadouts für Legendary/Mythic als nächsten Item-Vertiefungspass spezifizieren.
 
 - Werkbank: Mobilansicht bei 390 px und Abschluss-Feedback im Browser manuell prüfen; Kernlogik, Persistenz und Queue-Grenzen sind automatisiert abgedeckt.
+
+## Übergabe: Forschungsarbeitsplatz (2026-09-30)
+
+- [x] Datenbestand/-rate, freigeschaltete und kompakte gesperrte Labore sowie einmalige/wiederholbare Projektgruppen sind sichtbar.
+- [x] Materialanalysen laufen in einem eigenen Slot parallel zur Forschung; Kurz/Lang zeigen Kosten, Dauer, garantierte Basis und Zufallsfunde.
+- [x] Durchbrüche erscheinen genau einmal mit Fragmentkosten und Wirkung; es wurden keine Themen, Drop-Raten oder Prestige-Knoten ergänzt.
+- [x] Deutsche und englische Bedienpfade, Tastatur-Tabs, fokussierbare Details und 390-px-Einspaltenlayout sind umgesetzt.
+- [ ] Manuelle Browserprüfung mit produktionsnahem Langzeitspielstand nach dem Review wiederholen.
+
+## Übergabe: Balance-Simulator – 30. September 2026
+
+- [x] Maschinenlesbarer 1-/7-Tage-Export und Kurzbericht für Seeds 1708, 42 und 2026 erzeugt.
+- [x] Reproduzierbarkeit, Sitzungsgrenzen, Tap-Zähler, Prestige-Verfügbarkeit, Exactly-once-Abschlüsse, Scientific-Exponenten und Offline-Limit automatisiert geprüft.
+- [ ] Optional `npm run balance:simulate -- --days=30,90` in einem Langlauf ausführen; diese Horizonte sind noch nicht gemessen.
+- [ ] Nächster Balance-Auftrag: Materialzugang bis zum ersten Zwischenprodukt, Slotwartezeit und aktives/passives Prestigegefälle isoliert bewerten.

@@ -167,8 +167,8 @@ const onboarding:Record<OnboardingId,OnboardingCopy>={
   },
   'first-research':{
     title:l('Research Begins','Forschung beginnt','Comienza la investigación','La recherche commence','A pesquisa começa','Inizia la ricerca','Początek badań'),
-    text:l('Complete your first research project.','Schließe dein erstes Forschungsprojekt ab.','Completa tu primer proyecto de investigación.','Terminez votre premier projet de recherche.','Conclui o teu primeiro projeto de pesquisa.','Completa il tuo primo progetto di ricerca.','Ukończ pierwszy projekt badawczy.'),
-    reward:l('100 Credits','100 Credits','100 créditos','100 crédits','100 créditos','100 crediti','100 kredytów')
+    text:l('Complete Data Generation level 1.','Schließe Datenerzeugung Stufe 1 ab.','Completa tu primer proyecto de investigación.','Terminez votre premier projet de recherche.','Conclui o teu primeiro projeto de pesquisa.','Completa il tuo primo progetto di ricerca.','Ukończ pierwszy projekt badawczy.'),
+    reward:l('Common Quantum Chip','Gewöhnlicher Quantenchip','Chip cuántico común','Puce quantique commune','Chip quântico comum','Chip quantistico comune','Zwykły chip kwantowy')
   },
   'equip-item':{
     title:l('Equip the Lab','Labor ausrüsten','Equipar el laboratorio','Équiper le laboratoire','Equipar o laboratório','Equipaggia il laboratorio','Wyposaż laboratorium'),

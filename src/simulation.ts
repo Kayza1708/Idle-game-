@@ -1,4 +1,4 @@
-import { BALANCE, addCredits,addData,addCreditsScientific,addDataScientific,addResearchScientific, averageDataSynergy, GameState, trainingRate, creditRate,creditRateScientific, dataRate,dataRateScientific, researchRate,researchRateScientific, researchLabCount, hardwareCost, classCompute, buyHardwareClass, maxAffordable, hasNode, isRepeatableResearch, milestoneBonus,tapDropMultiplier, startResearchProject,computeRate,usersRate,newINT,newGame,tapCredits,startTraining,passiveCircuitRate,grantComponents,safeEconomyAdd,MAX_ECONOMY_VALUE,hardwareIds,hardwareCostScientific,canAffordScientificCreditCost,hardwareAutobuyerUnlocked,repeatableResearchIds,PrestigeUpgradeId,ItemTypeId,Rarity,prestigeUpgradeCost,upgradeLevel,dataSynergyScientific } from './economy';
+import { BALANCE, addCredits,addData,addCreditsScientific,addDataScientific,addResearchScientific, averageDataSynergy, GameState, trainingRate, creditRate,creditRateScientific, dataRate,dataRateScientific, researchRate,researchRateScientific, researchLabCount, hardwareCost, classCompute, buyHardwareClass, maxAffordable, hasNode, isRepeatableResearch, milestoneBonus,tapDropMultiplier, startResearchProject,computeRate,computeRateScientific,usersRate,newINT,newGame,tapCredits,startTraining,passiveCircuitRate,grantComponents,safeEconomyAdd,MAX_ECONOMY_VALUE,hardwareIds,registerTap,permanentFactor,hardwareCostScientific,canAffordScientificCreditCost,hardwareAutobuyerUnlocked,repeatableResearchIds,PrestigeUpgradeId,ItemTypeId,Rarity,prestigeUpgradeCost,upgradeLevel,dataSynergyScientific } from './economy';
 import { completeExperiment, queueExperiment } from './experiments';
 import { rollPeriods,claimMission,claimMissionBonus,MissionKind } from './missions';
 import { achievements,claimAchievement } from './achievements';
@@ -120,9 +120,9 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
   return {state:next,report:{credits:next.credits-state.credits,data:next.data-state.data,research:next.researchPoints-state.researchPoints,levels,experiments,hardware,seconds:total,components,analysisResults}};
 }
 
-export function advanceTo(state:GameState,wallNow:number,active=false) {
+export function advanceTo(state:GameState,wallNow:number,active=false,rng=Math.random) {
   const now=simulationNow(state,wallNow);
-  const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advance(state,elapsed,active);
+  const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advance(state,elapsed,active,rng);
   if(!active&&elapsed>10&&elapsed>result.report.seconds)result.state=addMetrics(result.state,result.state.savedAt,{offlineSeconds:elapsed-result.report.seconds});
   const limit=Math.min(BALANCE.maxOfflineSeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline')));if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
   return result;
@@ -231,6 +231,8 @@ export type BalanceSimulationResult={
   checkpoints:BalanceCheckpoint[];
   invalid:boolean;
   diagnostics:BalanceDiagnostics;
+  evaluation?:SimulationEvaluation;
+  exactFinal?:ReturnType<typeof simulationScientificSnapshot>;
 };
 
 function seededRandom(seed:number){
@@ -289,144 +291,85 @@ function makeBalanceCheckpoint(state:GameState,elapsed:number):BalanceCheckpoint
   };
 }
 
-/** A deterministic player agent that exercises the real progression systems instead of only the core economy. */
-function runSimulationPlayerActions(state:GameState,active:boolean,rng:()=>number):GameState{
-  let next=state;
+export type SimulationProfile='active'|'passive';
+export type SimulationWaits={credits:number;data:number;materials:number;slots:number};
+export type SimulationTiming={scheduledSeconds:number;onlineSeconds:number;offlineSeconds:number;creditedOfflineSeconds:number;lostOfflineSeconds:number;manualActionsOutsideSessions:number;taps:number;decisionTicks:number};
+export type SimulationEvaluation={firstPrestigeAvailable:number|null;waits:SimulationWaits;timing:SimulationTiming;componentsBySource:Record<string,number>;firstIntermediate:number|null;hardwareClasses:Partial<Record<import('./economy').HardwareId,number>>;hardwareMilestones:Record<string,number>;timeout:string|null};
 
-  // Active players collect every currently visible world drop.
-  if(active){for(const drop of [...next.lootDrops])next=claimLootDrop(next,drop.id,rng);}
-
-  // Claim progression rewards as soon as they are available.
-  for(const kind of ['daily','weekly','monthly'] as MissionKind[]){
-    for(const task of next.missions[kind].tasks)next=claimMission(next,kind,task.id);
-    next=claimMissionBonus(next,kind);
-  }
-  for(const achievement of achievements){
-    for(let tier=0;tier<achievement.thresholds.length;tier++)next=claimAchievement(next,achievement.id,tier);
-  }
-  for(const challenge of challenges)next=claimChallenge(next,challenge.id);
-  for(let level=1;level<=seasonLevel(next);level++)next=claimSeasonReward(next,level);
-
-  // Buy affordable prestige nodes in dependency/depth order. Gates in buyNode remain authoritative.
-  const nodeIds=(Object.keys(BALANCE.prestigeUpgrades) as PrestigeUpgradeId[])
-    .sort((a,b)=>BALANCE.prestigeUpgrades[a].depth-BALANCE.prestigeUpgrades[b].depth||BALANCE.prestigeUpgrades[a].cost-BALANCE.prestigeUpgrades[b].cost);
-  let nodeProgress=true;
-  while(nodeProgress){
-    nodeProgress=false;
-    for(const id of nodeIds){const bought=buyNode(next,id);if(bought!==next){next=bought;nodeProgress=true;}}
-  }
-
-  // Research: progression projects get first access to labs. Repeatables only use remaining slots.
-  // V5 filled the only early lab with repeatables forever, so `blueprints` never completed and
-  // manufacturing could never unlock even after weeks of simulated play.
-  if(next.discovered.includes('sbc')){
-    for(const id of ['operations','blueprints','alignment'] as const){
-      if(!next.completedResearch.includes(id)&&!next.researchLabs.some(lab=>lab?.id===id))next=startResearchProject(next,id);
-    }
-    for(const id of repeatableResearchIds){
-      if(!next.researchLabs.some(lab=>lab?.id===id))next=startResearchProject(next,id);
-    }
-  }
-
-  // Manufacturing V7: modules are intermediates, not a resource sink.
-  // V6 crafted 4 of every module on every agent tick before attempting an item. That produced
-  // hundreds of unused modules (e.g. 786 Compute-Buses by day 30) and continuously consumed
-  // the same components required by item recipes, so firstCraft could remain `never`.
-  // V7 only manufactures the exact missing modules when the COMPLETE item can be funded.
-  const craftable=Object.keys(BALANCE.itemRecipes) as ItemTypeId[];
-  for(const type of craftable){
-    const recipe=BALANCE.itemRecipes[type as keyof typeof BALANCE.itemRecipes];
-    const quote=craftAffordability(next,type);
-    if(quote.missingBlueprints>0)continue;
-
-    const moduleNeeds=Object.entries(recipe.modules) as [keyof typeof next.modules,number][];
-    const missingModuleCounts=moduleNeeds.map(([id,need])=>[id,Math.max(0,(need??0)-next.modules[id])] as const);
-    let totalData=recipe.data;
-    const totalComponents:Partial<Record<keyof typeof next.componentInventory,number>>={...recipe.ingredients};
-    for(const [moduleId,count] of missingModuleCounts){
-      const moduleRecipe=BALANCE.modules[moduleId];
-      totalData+=moduleRecipe.data*count;
-      for(const [component,amount] of Object.entries(moduleRecipe.ingredients)){
-        const id=component as keyof typeof next.componentInventory;
-        totalComponents[id]=(totalComponents[id]??0)+(amount??0)*count;
-      }
-    }
-    if(next.data<totalData)continue;
-    if(Object.entries(totalComponents).some(([id,need])=>next.componentInventory[id as keyof typeof next.componentInventory]<(need??0)))continue;
-
-    for(const [moduleId,count] of missingModuleCounts){
-      for(let i=0;i<count;i++)next=craftModule(next,moduleId);
-    }
-    next=craft(next,type,'common' as Rarity);
-  }
-
-  // Equip owned items, forge useful equipped items, then fuse spare triples.
-  for(const item of next.inventory)next=equip(next,item.id);
-  for(const id of Object.values(next.equipped).filter((x):x is string=>!!x))next=forgeItem(next,id);
-  const rarityOrder:Rarity[]=['common','uncommon','rare','epic','legendary','mythic'];
-  for(const type of [...new Set(next.inventory.map(i=>i.type))]){
-    for(const rarity of rarityOrder.slice(0,-1)){
-      const spare=next.inventory.filter(i=>i.type===type&&i.rarity===rarity&&!i.locked&&!Object.values(next.equipped).includes(i.id));
-      while(spare.length>=3){const ids=spare.splice(0,3).map(i=>i.id);next=fuseItems(next,ids);}
-    }
-  }
-  return next;
+function claimVisibleDrops(state:GameState,rng:()=>number){let next=state;for(const drop of [...next.lootDrops])next=claimLootDrop(next,drop.id,rng);return next;}
+function claimSessionRewards(state:GameState,rng:()=>number){
+ let next=claimVisibleDrops(state,rng);
+ for(const kind of ['daily','weekly','monthly'] as MissionKind[]){for(const task of next.missions[kind].tasks)next=claimMission(next,kind,task.id);next=claimMissionBonus(next,kind);}
+ for(const achievement of achievements)for(let tier=0;tier<achievement.thresholds.length;tier++)next=claimAchievement(next,achievement.id,tier);
+ for(const challenge of challenges)next=claimChallenge(next,challenge.id);
+ for(let level=1;level<=seasonLevel(next);level++)next=claimSeasonReward(next,level);
+ return next;
 }
 
-/**
- * Deterministic long-term simulator using the real production economy and a deterministic player agent.
- * Five-minute decisions are intentionally granular; production advance() remains the single source of truth.
- */
+/** Applies one manual decision tick. Every operation delegates to the same gameplay function as the UI. */
+function runSessionDecisions(state:GameState,rng:()=>number,trainingTrack:'quality'|'efficiency',waits:SimulationWaits){
+ let next=claimSessionRewards(state,rng),nextTrack=trainingTrack;
+ const nodeIds=(Object.keys(BALANCE.prestigeUpgrades) as PrestigeUpgradeId[]).sort((a,b)=>BALANCE.prestigeUpgrades[a].depth-BALANCE.prestigeUpgrades[b].depth||a.localeCompare(b));
+ for(const id of nodeIds){const candidate=buyNode(next,id);if(candidate!==next){next=candidate;break;}}
+ if(!next.activeTraining){const started=startTraining(next,nextTrack);if(started!==next){next=started;nextTrack=nextTrack==='quality'?'efficiency':'quality';}else waits.credits+=10;}
+ if(next.discovered.includes('sbc')){
+   const catalog=[...'operations blueprints alignment'.split(' '),...repeatableResearchIds] as import('./economy').ResearchId[];
+   let started=false;
+   for(const id of catalog){const candidate=startResearchProject(next,id);if(candidate!==next){next=candidate;started=true;break;}}
+   if(!started){if(!next.researchLabs.some((lab,index)=>index<researchLabCount(next)&&!lab))waits.slots+=10;else waits.data+=10;}
+   if(!next.experiments.active){const candidate=queueExperiment(next,'hardware',next.savedAt,'short');if(candidate!==next)next=candidate;else if(next.credits<BALANCE.analysisCosts.hardware.short.credits)waits.credits+=10;else if(next.data<BALANCE.analysisCosts.hardware.short.data)waits.data+=10;}
+   else waits.slots+=10;
+ }
+ const candidates=next.discovered.map(id=>{const before=creditRate(next.hardware,next.level,next,next.savedAt),cost=hardwareCost(id,next.hardwareCounts[id],next),afterState=buyHardwareClass(next,id,1),after=afterState===next?before:creditRate(afterState.hardware,afterState.level,afterState,afterState.savedAt);return{id,cost,payback:after>before?cost/(after-before):Infinity,afterState};}).filter(x=>x.afterState!==next).sort((a,b)=>a.payback-b.payback||hardwareIds.indexOf(a.id)-hardwareIds.indexOf(b.id));
+ if(candidates[0])next=candidates[0].afterState;else waits.credits+=10;
+ if(!next.crafting.active&&next.crafting.queue.length===0&&next.completedResearch.includes('blueprints')){
+   for(const type of Object.keys(BALANCE.itemRecipes) as (keyof typeof BALANCE.itemRecipes)[]){
+     const quote=craftAffordability(next,type);
+     if(quote.missingBlueprints>0){waits.materials+=10;continue;}
+     const requiredModules=BALANCE.itemRecipes[type].modules as Partial<typeof next.modules>,missingModule=(Object.keys(requiredModules) as (keyof typeof next.modules)[]).find(id=>next.modules[id]<(requiredModules[id]??0));
+     const candidate=missingModule?craftModule(next,missingModule):craft(next,type,'common');
+     if(candidate!==next){next=candidate;break;}
+     if(quote.data.missing>0)waits.data+=10;else waits.materials+=10;
+   }
+ }
+ for(const item of next.inventory){const equipped=equip(next,item.id);if(equipped!==next){next=equipped;break;}}
+ return{state:next,trainingTrack:nextTrack};
+}
+
+const sessionWindows=(profile:SimulationProfile,day:number)=>profile==='active'?[8*3600,13*3600,20*3600].map(start=>({start:day*86400+start,end:day*86400+start+20*60})):[8*3600,20*3600].map(start=>({start:day*86400+start,end:day*86400+start+5*60}));
+export const simulationScientificSnapshot=(s:GameState)=>({credits:{...s.exactEconomy.credits},data:{...s.exactEconomy.data},researchPoints:{...s.exactEconomy.researchPoints},creditsPerSecond:creditRateScientific(s.hardware,s.level,s,s.savedAt).toJSON(),dataPerSecond:dataRateScientific(s).toJSON(),computePerSecond:computeRateScientific(s.hardware,s).toJSON()});
+
+/** Deterministic fixed-schedule balance simulator. Offline spans use advanceTo; online spans run at one-second resolution. */
 export function simulateBalance(days:number,active:boolean,seed=1708,prestigeLimit=Number.POSITIVE_INFINITY):BalanceSimulationResult{
-  const rng=seededRandom(seed);let state=newGame(0),elapsed=0;
-  let firstResearch:number|null=null,firstResearchCompleted:number|null=null,firstItem:number|null=null,firstCraft:number|null=null,firstPrestige:number|null=null;
-  const prestiges:number[]=[],hardware:Partial<Record<import('./economy').HardwareId,number>>={},researchCompleted:{at:number;total:number}[]=[],modelLevels:{at:number;level:number;quality:number;efficiency:number}[]=[],items:{at:number;count:number}[]=[],componentDiscoveries:{at:number;type:string}[]=[],checkpoints:BalanceCheckpoint[]=[];
-  let invalid=false,previousResearchCompleted=0,previousModelLevel=0,previousInventory=0,previousItemsCrafted=0,nextCheckpoint=3600;
-  const knownComponents=new Set<string>(),step=300,total=days*86400;
-  const checkpointInterval=(seconds:number)=>seconds<86400?3600:seconds<7*86400?21600:seconds<30*86400?86400:604800;
-
-  while(elapsed<total){
-    const slice=Math.min(step,total-elapsed);state=advance(state,slice,active,rng).state;elapsed+=slice;
-
-    if(active){
-      // Approximate one rewarded tap per second of active simulation time.
-      state=addCredits(state,tapCredits(state,state.savedAt)*slice,false,true);
-      if(!state.activeTraining){const track=state.qualityLevel<=state.efficiencyLevel?'quality':'efficiency';const started=startTraining(state,track);state=started===state?startTraining(state,track==='quality'?'efficiency':'quality'):started;}
-    }
-
-    state=runSimulationPlayerActions(state,active,rng);
-    if(firstResearch===null&&state.lifetime.researchStarted>0)firstResearch=elapsed;
-
-    if(!state.experiments.active&&state.discovered.includes('sbc')){
-      const kinds=(['hardware','architecture','artifact'] as const),kind=kinds[Math.floor(elapsed/3600)%kinds.length];state=queueExperiment(state,kind,state.savedAt,'short');
-    }
-
-    // Spend available credits on the newest discovered hardware first.
-    for(const id of [...state.discovered].reverse()){
-      const amount=maxAffordable(id,state.hardwareCounts[id],state.credits,state);if(amount>0){const before=state.hardwareCounts[id];state=buyHardwareClass(state,id,amount);if(state.hardwareCounts[id]>before&&hardware[id]===undefined)hardware[id]=elapsed;}
-    }
-
-    if(state.lifetime.researchCompleted>previousResearchCompleted){researchCompleted.push({at:elapsed,total:state.lifetime.researchCompleted});if(firstResearchCompleted===null)firstResearchCompleted=elapsed;previousResearchCompleted=state.lifetime.researchCompleted;}
-    if(state.level>previousModelLevel){modelLevels.push({at:elapsed,level:state.level,quality:state.qualityLevel,efficiency:state.efficiencyLevel});previousModelLevel=state.level;}
-    if(state.inventory.length>previousInventory){items.push({at:elapsed,count:state.inventory.length});if(firstItem===null)firstItem=elapsed;previousInventory=state.inventory.length;}
-    if(state.lifetime.itemsCrafted>previousItemsCrafted){if(firstCraft===null)firstCraft=elapsed;previousItemsCrafted=state.lifetime.itemsCrafted;}
-    for(const [type,amount] of Object.entries(state.componentInventory))if(amount>0&&!knownComponents.has(type)){knownComponents.add(type);componentDiscoveries.push({at:elapsed,type});}
-
-    // Avoid the old pathological "prestige every time 1 INT exists" behavior. Require a growing gain.
-    const prestigeTargetRate=prestiges.length<7?0.10:prestiges.length<11?0.045:0.025;
-    const prestigeTarget=Math.max(1,Math.ceil(Math.max(1,state.totalINTEarned)*prestigeTargetRate));
-    const lastPrestige=prestiges.at(-1)??0;
-    const minRunSeconds=prestiges.length===0?45*60:Math.min(24*3600,(4+prestiges.length*0.85)*3600);
-    const prestigeCadenceReady=elapsed-lastPrestige>=minRunSeconds;
-    if(prestigeCadenceReady&&newINT(state)>=prestigeTarget&&prestiges.length<prestigeLimit){state=simulationPrestige(state);prestiges.push(elapsed);if(firstPrestige===null)firstPrestige=elapsed;}
-
-    if(elapsed>=nextCheckpoint||elapsed>=total){checkpoints.push(makeBalanceCheckpoint(state,elapsed));nextCheckpoint+=checkpointInterval(elapsed);}
-    if(state.telemetry.snapshots.length>24)state={...state,telemetry:{...state.telemetry,snapshots:state.telemetry.snapshots.slice(-24)}};
-    const numeric=[state.credits,state.data,state.researchPoints,state.lifetimeEligibleCredits,state.totalINTEarned,state.unspentINT,computeRate(state.hardware,state),creditRate(state.hardware,state.level,state,state.savedAt),dataRate(state),researchRate(state,state.savedAt)];
-    if(!numeric.every(Number.isFinite)||numeric.some(value=>value<0)){invalid=true;break;}
-  }
-  if(checkpoints.length===0||checkpoints.at(-1)!.elapsed!==elapsed)checkpoints.push(makeBalanceCheckpoint(state,elapsed));
-  return{days,active,prestiges:prestiges.length,final:state,milestones:{firstResearch,firstResearchCompleted,firstItem,firstCraft,firstPrestige,prestiges,hardware,researchCompleted,modelLevels,items,componentDiscoveries},checkpoints,invalid,diagnostics:diagnoseBalanceState(state)};
+ const profile:SimulationProfile=active?'active':'passive',rng=seededRandom(seed),startAt=Date.UTC(2026,0,1),total=Math.max(0,Math.floor(days*86400));let state=newGame(startAt),elapsed=0,trainingTrack:'quality'|'efficiency'='quality',iterations=0;
+ let firstResearch:number|null=null,firstResearchCompleted:number|null=null,firstItem:number|null=null,firstCraft:number|null=null,firstPrestige:number|null=null,firstPrestigeAvailable:number|null=null,firstIntermediate:number|null=null,invalid=false,timeout:string|null=null;
+ const prestiges:number[]=[],hardware:Partial<Record<import('./economy').HardwareId,number>>={},researchCompleted:{at:number;total:number}[]=[],modelLevels:{at:number;level:number;quality:number;efficiency:number}[]=[],items:{at:number;count:number}[]=[],componentDiscoveries:{at:number;type:string}[]=[],checkpoints:BalanceCheckpoint[]=[];
+ const waits:SimulationWaits={credits:0,data:0,materials:0,slots:0},timing:SimulationTiming={scheduledSeconds:total,onlineSeconds:0,offlineSeconds:0,creditedOfflineSeconds:0,lostOfflineSeconds:0,manualActionsOutsideSessions:0,taps:0,decisionTicks:0},componentsBySource:Record<string,number>={};
+ let previousResearch=0,previousLevel=0,previousInventory=0,previousCraft=0,previousModules=0,nextCheckpoint=3600;const knownComponents=new Set<string>(),knownHardware=new Set(state.discovered),hardwareMilestones:Record<string,number>={};
+ const record=()=>{if(firstPrestigeAvailable===null&&newINT(state)>=1)firstPrestigeAvailable=elapsed;if(firstResearch===null&&state.lifetime.researchStarted>0)firstResearch=elapsed;if(state.lifetime.researchCompleted>previousResearch){if(firstResearchCompleted===null)firstResearchCompleted=elapsed;researchCompleted.push({at:elapsed,total:state.lifetime.researchCompleted});previousResearch=state.lifetime.researchCompleted;}if(state.level>previousLevel){modelLevels.push({at:elapsed,level:state.level,quality:state.qualityLevel,efficiency:state.efficiencyLevel});previousLevel=state.level;}if(state.inventory.length>previousInventory){if(firstItem===null)firstItem=elapsed;items.push({at:elapsed,count:state.inventory.length});previousInventory=state.inventory.length;}if(state.lifetime.itemsCrafted>previousCraft){if(firstCraft===null)firstCraft=elapsed;previousCraft=state.lifetime.itemsCrafted;}const moduleTotal=Object.values(state.modules).reduce((a,b)=>a+b,0);if(firstIntermediate===null&&moduleTotal>previousModules)firstIntermediate=elapsed;previousModules=moduleTotal;for(const [type,amount] of Object.entries(state.componentInventory))if(amount>0&&!knownComponents.has(type)){knownComponents.add(type);componentDiscoveries.push({at:elapsed,type});}for(const id of state.discovered)if(!knownHardware.has(id)){knownHardware.add(id);hardware[id]=elapsed;}for(const id of state.discovered)for(const milestone of BALANCE.hardware[id].milestones)if(state.hardwareCounts[id]>=milestone.threshold&&!hardwareMilestones[`${id}:${milestone.threshold}`])hardwareMilestones[`${id}:${milestone.threshold}`]=elapsed;};
+ const windows=Array.from({length:Math.ceil(days)},(_,day)=>sessionWindows(profile,day)).flat().filter(w=>w.start<total);
+ for(const window of windows){
+   if(iterations++>2_000_000){timeout=`iteration limit at ${elapsed}s`;break;}
+   const offline=Math.max(0,Math.min(total,window.start)-elapsed);
+   if(offline){const before=simulationComponentTotal(state),result=advanceTo(state,state.savedAt+offline*1000,false,rng);state=result.state;if(state.telemetry.snapshots.length>24)state={...state,telemetry:{...state.telemetry,snapshots:state.telemetry.snapshots.slice(-24)}};elapsed+=offline;timing.offlineSeconds+=offline;timing.creditedOfflineSeconds+=result.report.seconds;timing.lostOfflineSeconds+=offline-result.report.seconds;const analysisFound=result.report.analysisResults.reduce((sum,row)=>sum+Object.values(row.components).reduce((a,b)=>a+(b??0),0),0),gain=Math.max(0,simulationComponentTotal(state)-before);componentsBySource.analysis=(componentsBySource.analysis??0)+analysisFound;componentsBySource['passive-hardware']=(componentsBySource['passive-hardware']??0)+Math.max(0,gain-analysisFound);record();}
+   const end=Math.min(total,window.end);
+   while(elapsed<end){
+     if(iterations++>2_000_000){timeout=`iteration limit at ${elapsed}s`;break;}
+     const beforeDrops=state.lifetime.dropsClaimed,untilDecision=10-((elapsed-window.start)%10||10),slice=Math.min(5,end-elapsed,untilDecision||5),sliceStart=state.savedAt,advanced=advance(state,slice,true,rng);state=advanced.state;if(state.telemetry.snapshots.length>24)state={...state,telemetry:{...state.telemetry,snapshots:state.telemetry.snapshots.slice(-24)}};const analysisFound=advanced.report.analysisResults.reduce((sum,row)=>sum+Object.values(row.components).reduce((a,b)=>a+(b??0),0),0),reportedComponents=Object.values(advanced.report.components).reduce((a,b)=>a+(b??0),0);componentsBySource.analysis=(componentsBySource.analysis??0)+analysisFound;componentsBySource['passive-hardware']=(componentsBySource['passive-hardware']??0)+Math.max(0,reportedComponents-analysisFound);elapsed+=slice;timing.onlineSeconds+=slice;
+     if(profile==='active')for(let second=1;second<=slice;second++){state=registerTap(state,sliceStart+second*1000);timing.taps++;}
+     const beforeWorld=simulationComponentTotal(state);state=claimVisibleDrops(state,rng);if(state.lifetime.dropsClaimed>beforeDrops)componentsBySource['world-drop']=(componentsBySource['world-drop']??0)+Math.max(0,simulationComponentTotal(state)-beforeWorld);
+     if((elapsed-window.start)%10===0){timing.decisionTicks++;const decision=runSessionDecisions(state,rng,trainingTrack,waits);state=decision.state;trainingTrack=decision.trainingTrack;
+       const gain=newINT(state),before=permanentFactor(state),after=1+BALANCE.intCreditPerPoint*(state.totalINTEarned+gain);if(gain>=1&&after/before>=1.25&&prestiges.length<prestigeLimit){state=simulationPrestige(state);prestiges.push(elapsed);if(firstPrestige===null)firstPrestige=elapsed;}
+     }
+     record();if(elapsed>=nextCheckpoint){checkpoints.push(makeBalanceCheckpoint(state,elapsed));nextCheckpoint+=3600;}
+   }
+   if(timeout)break;
+ }
+ if(!timeout&&elapsed<total){const offline=total-elapsed,result=advanceTo(state,state.savedAt+offline*1000,false,rng);state=result.state;elapsed=total;timing.offlineSeconds+=offline;timing.creditedOfflineSeconds+=result.report.seconds;timing.lostOfflineSeconds+=offline-result.report.seconds;record();}
+ if(checkpoints.at(-1)?.elapsed!==elapsed)checkpoints.push(makeBalanceCheckpoint(state,elapsed));
+ const numeric=[state.credits,state.data,state.researchPoints,state.totalINTEarned];invalid=!numeric.every(Number.isFinite)||numeric.some(n=>n<0)||!!timeout;
+ const result={days,active,prestiges:prestiges.length,final:state,milestones:{firstResearch,firstResearchCompleted,firstItem,firstCraft,firstPrestige,prestiges,hardware,researchCompleted,modelLevels,items,componentDiscoveries},checkpoints,invalid,diagnostics:diagnoseBalanceState(state),evaluation:{firstPrestigeAvailable,waits,timing,componentsBySource,firstIntermediate,hardwareClasses:hardware,hardwareMilestones,timeout},exactFinal:simulationScientificSnapshot(state)};
+ return result as BalanceSimulationResult;
 }
 
 // Kept behind a tiny indirection so production simulation remains tree-shakeable.
