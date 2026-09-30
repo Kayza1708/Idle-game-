@@ -338,3 +338,16 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - [x] Kapitel werden aus echten Zustandsübergängen abgeleitet, gespeichert und nach Reload nicht erneut automatisch geöffnet.
 - [x] Deaktivierte Story schaltet erreichte Kapitel weiterhin im Journal frei; Wiederlesen bleibt ohne Fortschritts- oder Belohnungseffekt.
 - [ ] Dialogfolge und Journal bei 390 px mit einem produktionsnahen Spielstand auf einem realen Touch-Gerät gegenprüfen.
+
+## Übergabe: Schicht-1-Economy – 30. September 2026
+
+- Die isolierte Messung und der vollständige Kontrolllauf sind mit `npm run balance:layer-one` reproduzierbar; spätere Klassen ab Campus sind im 24-Stunden-Basisprofil ausdrücklich nicht erreicht und nicht als Langzeitbalance freigegeben.
+- Offen bleibt genau das Sparphasen-Kriterium: vor Klasse 5 entstehen bei Strategie A keine zwei einzelnen 2–5-Minuten-Kaufpausen, weil günstigere rentable Käufe verfügbar bleiben. Nur in einem eigenen Folgeauftrag nachkalibrieren; keine künstlichen Sperren oder Wartezeiten einführen.
+- [ ] Hardwareliste bei 390 px und Desktop manuell prüfen: Aufklapper, Spartext sowie Kauf 1/10/Max mit sehr kleinem und sehr großem Creditbestand.
+
+## Übergabe: Schicht-2-Economy – 30. September 2026
+
+- `npm run balance:layer-two` reproduziert Data-Stützstellen, Trainingslevel 1/5/10/20/30, Basis-/Trainingslauf, passives Sitzungsprofil und Data-Konkurrenz durch Forschung/Analysen.
+- Das erste Training startet nach 75 Sekunden und damit zu früh gegenüber dem Ziel 3–5 Minuten. Spätere Ansparpausen steigen im aggressiven Hardwarelauf nicht monoton. Diese Konflikte dürfen nur in einem Folgeauftrag gelöst werden, weil Data-Basisformel, Trainingsformel und Schicht-1-Hardwarekurve in diesem Auftrag fest vorgegeben sind.
+- Alte Prestige-, Item-, Hardwaremeilenstein-, Overclock-, Tap-, Ad- und Gem-Trainingsbeschleuniger verändern die feste Trainingsdauer nicht mehr; UI-Texte benennen Legacy-Effekte entsprechend. Data-Effekte derselben Systeme bleiben erhalten, laufen aber gemeinsam durch den abflachenden Multiplikator.
+- [ ] Manuell bei 390 px und Desktop prüfen: Datenbonus-Hinweis, beide Trainingskarten, Fehlmengen sowie Fortschritt/Restzeit nach Reload und Offline-Rückkehr.
