@@ -1,0 +1,1509 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-30T06:45:08.467Z",
+  "configuration": {
+    "start": "2026-01-01T00:00:00.000Z",
+    "days": [
+      1,
+      7
+    ],
+    "seeds": [
+      1708,
+      42,
+      2026
+    ],
+    "profiles": {
+      "active": "08:00/13:00/20:00 UTC, 20 min, 1 tap/s, decisions every 10s",
+      "passive": "08:00/20:00 UTC, 5 min, no taps, decisions every 10s"
+    }
+  },
+  "groups": [
+    {
+      "days": 1,
+      "profile": "active",
+      "firstPrestigeAvailable": {
+        "min": 46800,
+        "median": 46800,
+        "max": 46800,
+        "reached": 3,
+        "total": 3
+      },
+      "prestiges": {
+        "min": 2,
+        "median": 2,
+        "max": 2,
+        "reached": 3,
+        "total": 3
+      },
+      "firstItem": {
+        "min": "nicht erreicht",
+        "median": "nicht erreicht",
+        "max": "nicht erreicht",
+        "reached": 0,
+        "total": 3
+      },
+      "firstIntermediate": {
+        "min": "nicht erreicht",
+        "median": "nicht erreicht",
+        "max": "nicht erreicht",
+        "reached": 0,
+        "total": 3
+      },
+      "creditsWait": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "reached": 3,
+        "total": 3
+      },
+      "dataWait": {
+        "min": 20,
+        "median": 20,
+        "max": 20,
+        "reached": 3,
+        "total": 3
+      },
+      "materialsWait": {
+        "min": 9600,
+        "median": 9600,
+        "max": 9600,
+        "reached": 3,
+        "total": 3
+      },
+      "slotWait": {
+        "min": 6720,
+        "median": 6720,
+        "max": 6720,
+        "reached": 3,
+        "total": 3
+      }
+    },
+    {
+      "days": 1,
+      "profile": "passive",
+      "firstPrestigeAvailable": {
+        "min": 86400,
+        "median": 86400,
+        "max": 86400,
+        "reached": 3,
+        "total": 3
+      },
+      "prestiges": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "reached": 3,
+        "total": 3
+      },
+      "firstItem": {
+        "min": "nicht erreicht",
+        "median": "nicht erreicht",
+        "max": "nicht erreicht",
+        "reached": 0,
+        "total": 3
+      },
+      "firstIntermediate": {
+        "min": "nicht erreicht",
+        "median": "nicht erreicht",
+        "max": "nicht erreicht",
+        "reached": 0,
+        "total": 3
+      },
+      "creditsWait": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "reached": 3,
+        "total": 3
+      },
+      "dataWait": {
+        "min": 0,
+        "median": 0,
+        "max": 0,
+        "reached": 3,
+        "total": 3
+      },
+      "materialsWait": {
+        "min": 1200,
+        "median": 1200,
+        "max": 1200,
+        "reached": 3,
+        "total": 3
+      },
+      "slotWait": {
+        "min": 970,
+        "median": 970,
+        "max": 970,
+        "reached": 3,
+        "total": 3
+      }
+    },
+    {
+      "days": 7,
+      "profile": "active",
+      "firstPrestigeAvailable": {
+        "min": 46800,
+        "median": 46800,
+        "max": 46800,
+        "reached": 3,
+        "total": 3
+      },
+      "prestiges": {
+        "min": 7,
+        "median": 7,
+        "max": 7,
+        "reached": 3,
+        "total": 3
+      },
+      "firstItem": {
+        "min": 133215,
+        "median": 375390,
+        "max": "nicht erreicht",
+        "reached": 2,
+        "total": 3
+      },
+      "firstIntermediate": {
+        "min": "nicht erreicht",
+        "median": "nicht erreicht",
+        "max": "nicht erreicht",
+        "reached": 0,
+        "total": 3
+      },
+      "creditsWait": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "reached": 3,
+        "total": 3
+      },
+      "dataWait": {
+        "min": 50,
+        "median": 60,
+        "max": 60,
+        "reached": 3,
+        "total": 3
+      },
+      "materialsWait": {
+        "min": 96000,
+        "median": 96000,
+        "max": 96000,
+        "reached": 3,
+        "total": 3
+      },
+      "slotWait": {
+        "min": 48810,
+        "median": 48880,
+        "max": 48880,
+        "reached": 3,
+        "total": 3
+      }
+    },
+    {
+      "days": 7,
+      "profile": "passive",
+      "firstPrestigeAvailable": {
+        "min": 115200,
+        "median": 115200,
+        "max": 115200,
+        "reached": 3,
+        "total": 3
+      },
+      "prestiges": {
+        "min": 3,
+        "median": 3,
+        "max": 3,
+        "reached": 3,
+        "total": 3
+      },
+      "firstItem": {
+        "min": "nicht erreicht",
+        "median": "nicht erreicht",
+        "max": "nicht erreicht",
+        "reached": 0,
+        "total": 3
+      },
+      "firstIntermediate": {
+        "min": "nicht erreicht",
+        "median": "nicht erreicht",
+        "max": "nicht erreicht",
+        "reached": 0,
+        "total": 3
+      },
+      "creditsWait": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "reached": 3,
+        "total": 3
+      },
+      "dataWait": {
+        "min": 10,
+        "median": 10,
+        "max": 10,
+        "reached": 3,
+        "total": 3
+      },
+      "materialsWait": {
+        "min": 15600,
+        "median": 15600,
+        "max": 15600,
+        "reached": 3,
+        "total": 3
+      },
+      "slotWait": {
+        "min": 7680,
+        "median": 7680,
+        "max": 7680,
+        "reached": 3,
+        "total": 3
+      }
+    }
+  ],
+  "runs": [
+    {
+      "days": 1,
+      "profile": "active",
+      "seed": 1708,
+      "firstPrestigeAvailable": 46800,
+      "prestiges": [
+        46810,
+        72010
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 29190,
+        "rig": 29470,
+        "server": 30000
+      },
+      "researchLevels": {
+        "dataGeneration": 8,
+        "materialAnalysis": 0,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 5,
+        "efficiency": 5
+      },
+      "components": {
+        "circuits": 280,
+        "copperCoils": 62,
+        "siliconWafers": 20,
+        "titaniumBolts": 28,
+        "photonicLenses": 11,
+        "graphene": 2,
+        "nanotubes": 2,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 9,
+        "passive-hardware": 81,
+        "world-drop": 164
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 5.588346899145235,
+          "e": 12
+        },
+        "data": {
+          "m": 7.473327408070296,
+          "e": 9
+        },
+        "researchPoints": {
+          "m": 6.012717665062153,
+          "e": 6
+        },
+        "creditsPerSecond": {
+          "m": 3.4624130661675556,
+          "e": 8
+        },
+        "dataPerSecond": {
+          "m": 5.5940246900841215,
+          "e": 5
+        },
+        "computePerSecond": {
+          "m": 1.2001708453385904,
+          "e": 6
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 20,
+        "materials": 9600,
+        "slots": 6720
+      },
+      "timing": {
+        "scheduledSeconds": 86400,
+        "onlineSeconds": 3600,
+        "offlineSeconds": 82800,
+        "creditedOfflineSeconds": 82800,
+        "lostOfflineSeconds": 0,
+        "manualActionsOutsideSessions": 0,
+        "taps": 3600,
+        "decisionTicks": 360
+      },
+      "timeout": null
+    },
+    {
+      "days": 1,
+      "profile": "active",
+      "seed": 42,
+      "firstPrestigeAvailable": 46800,
+      "prestiges": [
+        46810,
+        72010
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 29190,
+        "rig": 29470,
+        "server": 30000
+      },
+      "researchLevels": {
+        "dataGeneration": 8,
+        "materialAnalysis": 0,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 5,
+        "efficiency": 5
+      },
+      "components": {
+        "circuits": 271,
+        "copperCoils": 58,
+        "siliconWafers": 24,
+        "titaniumBolts": 35,
+        "photonicLenses": 13,
+        "graphene": 3,
+        "nanotubes": 1,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 9,
+        "passive-hardware": 81,
+        "world-drop": 164
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 5.588346899145235,
+          "e": 12
+        },
+        "data": {
+          "m": 7.473327408070296,
+          "e": 9
+        },
+        "researchPoints": {
+          "m": 6.012717665062153,
+          "e": 6
+        },
+        "creditsPerSecond": {
+          "m": 3.4624130661675556,
+          "e": 8
+        },
+        "dataPerSecond": {
+          "m": 5.5940246900841215,
+          "e": 5
+        },
+        "computePerSecond": {
+          "m": 1.2001708453385904,
+          "e": 6
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 20,
+        "materials": 9600,
+        "slots": 6720
+      },
+      "timing": {
+        "scheduledSeconds": 86400,
+        "onlineSeconds": 3600,
+        "offlineSeconds": 82800,
+        "creditedOfflineSeconds": 82800,
+        "lostOfflineSeconds": 0,
+        "manualActionsOutsideSessions": 0,
+        "taps": 3600,
+        "decisionTicks": 360
+      },
+      "timeout": null
+    },
+    {
+      "days": 1,
+      "profile": "active",
+      "seed": 2026,
+      "firstPrestigeAvailable": 46800,
+      "prestiges": [
+        46810,
+        72010
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 29190,
+        "rig": 29470,
+        "server": 30000
+      },
+      "researchLevels": {
+        "dataGeneration": 8,
+        "materialAnalysis": 0,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 5,
+        "efficiency": 5
+      },
+      "components": {
+        "circuits": 270,
+        "copperCoils": 60,
+        "siliconWafers": 25,
+        "titaniumBolts": 29,
+        "photonicLenses": 15,
+        "graphene": 4,
+        "nanotubes": 1,
+        "superconductors": 1,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 9,
+        "passive-hardware": 81,
+        "world-drop": 164
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 5.588346899145235,
+          "e": 12
+        },
+        "data": {
+          "m": 7.473327408070296,
+          "e": 9
+        },
+        "researchPoints": {
+          "m": 6.012717665062153,
+          "e": 6
+        },
+        "creditsPerSecond": {
+          "m": 3.4624130661675556,
+          "e": 8
+        },
+        "dataPerSecond": {
+          "m": 5.5940246900841215,
+          "e": 5
+        },
+        "computePerSecond": {
+          "m": 1.2001708453385904,
+          "e": 6
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 20,
+        "materials": 9600,
+        "slots": 6720
+      },
+      "timing": {
+        "scheduledSeconds": 86400,
+        "onlineSeconds": 3600,
+        "offlineSeconds": 82800,
+        "creditedOfflineSeconds": 82800,
+        "lostOfflineSeconds": 0,
+        "manualActionsOutsideSessions": 0,
+        "taps": 3600,
+        "decisionTicks": 360
+      },
+      "timeout": null
+    },
+    {
+      "days": 1,
+      "profile": "passive",
+      "seed": 1708,
+      "firstPrestigeAvailable": 86400,
+      "prestiges": [],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 72090
+      },
+      "researchLevels": {
+        "dataGeneration": 0,
+        "materialAnalysis": 0,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 4,
+        "efficiency": 4
+      },
+      "components": {
+        "circuits": 90,
+        "copperCoils": 6,
+        "siliconWafers": 2,
+        "titaniumBolts": 7,
+        "photonicLenses": 5,
+        "graphene": 1,
+        "nanotubes": 0,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 1,
+        "passive-hardware": 32,
+        "world-drop": 19
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 4.388641947325639,
+          "e": 9
+        },
+        "data": {
+          "m": 2.924595263561343,
+          "e": 7
+        },
+        "researchPoints": {
+          "m": 1.4878251331217704,
+          "e": 5
+        },
+        "creditsPerSecond": {
+          "m": 2.75118442407531,
+          "e": 5
+        },
+        "dataPerSecond": {
+          "m": 1.8431946099163705,
+          "e": 3
+        },
+        "computePerSecond": {
+          "m": 2.211010740217701,
+          "e": 4
+        }
+      },
+      "waits": {
+        "credits": 0,
+        "data": 0,
+        "materials": 1200,
+        "slots": 970
+      },
+      "timing": {
+        "scheduledSeconds": 86400,
+        "onlineSeconds": 600,
+        "offlineSeconds": 85800,
+        "creditedOfflineSeconds": 71700,
+        "lostOfflineSeconds": 14100,
+        "manualActionsOutsideSessions": 0,
+        "taps": 0,
+        "decisionTicks": 60
+      },
+      "timeout": null
+    },
+    {
+      "days": 1,
+      "profile": "passive",
+      "seed": 42,
+      "firstPrestigeAvailable": 86400,
+      "prestiges": [],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 72090
+      },
+      "researchLevels": {
+        "dataGeneration": 0,
+        "materialAnalysis": 0,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 4,
+        "efficiency": 4
+      },
+      "components": {
+        "circuits": 90,
+        "copperCoils": 5,
+        "siliconWafers": 3,
+        "titaniumBolts": 7,
+        "photonicLenses": 5,
+        "graphene": 0,
+        "nanotubes": 1,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 1,
+        "passive-hardware": 32,
+        "world-drop": 19
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 4.388641947325639,
+          "e": 9
+        },
+        "data": {
+          "m": 2.924595263561343,
+          "e": 7
+        },
+        "researchPoints": {
+          "m": 1.4878251331217704,
+          "e": 5
+        },
+        "creditsPerSecond": {
+          "m": 2.75118442407531,
+          "e": 5
+        },
+        "dataPerSecond": {
+          "m": 1.8431946099163705,
+          "e": 3
+        },
+        "computePerSecond": {
+          "m": 2.211010740217701,
+          "e": 4
+        }
+      },
+      "waits": {
+        "credits": 0,
+        "data": 0,
+        "materials": 1200,
+        "slots": 970
+      },
+      "timing": {
+        "scheduledSeconds": 86400,
+        "onlineSeconds": 600,
+        "offlineSeconds": 85800,
+        "creditedOfflineSeconds": 71700,
+        "lostOfflineSeconds": 14100,
+        "manualActionsOutsideSessions": 0,
+        "taps": 0,
+        "decisionTicks": 60
+      },
+      "timeout": null
+    },
+    {
+      "days": 1,
+      "profile": "passive",
+      "seed": 2026,
+      "firstPrestigeAvailable": 86400,
+      "prestiges": [],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 72090
+      },
+      "researchLevels": {
+        "dataGeneration": 0,
+        "materialAnalysis": 0,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 4,
+        "efficiency": 4
+      },
+      "components": {
+        "circuits": 90,
+        "copperCoils": 6,
+        "siliconWafers": 4,
+        "titaniumBolts": 4,
+        "photonicLenses": 6,
+        "graphene": 0,
+        "nanotubes": 0,
+        "superconductors": 1,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 1,
+        "passive-hardware": 32,
+        "world-drop": 19
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 4.388641947325639,
+          "e": 9
+        },
+        "data": {
+          "m": 2.924595263561343,
+          "e": 7
+        },
+        "researchPoints": {
+          "m": 1.4878251331217704,
+          "e": 5
+        },
+        "creditsPerSecond": {
+          "m": 2.75118442407531,
+          "e": 5
+        },
+        "dataPerSecond": {
+          "m": 1.8431946099163705,
+          "e": 3
+        },
+        "computePerSecond": {
+          "m": 2.211010740217701,
+          "e": 4
+        }
+      },
+      "waits": {
+        "credits": 0,
+        "data": 0,
+        "materials": 1200,
+        "slots": 970
+      },
+      "timing": {
+        "scheduledSeconds": 86400,
+        "onlineSeconds": 600,
+        "offlineSeconds": 85800,
+        "creditedOfflineSeconds": 71700,
+        "lostOfflineSeconds": 14100,
+        "manualActionsOutsideSessions": 0,
+        "taps": 0,
+        "decisionTicks": 60
+      },
+      "timeout": null
+    },
+    {
+      "days": 7,
+      "profile": "active",
+      "seed": 1708,
+      "firstPrestigeAvailable": 46800,
+      "prestiges": [
+        46810,
+        72010,
+        116180,
+        158410,
+        219610,
+        306010,
+        460810
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 29190,
+        "rig": 29470,
+        "server": 30000,
+        "farm": 115830,
+        "campus": 288260
+      },
+      "researchLevels": {
+        "dataGeneration": 33,
+        "materialAnalysis": 27,
+        "blueprintAnalysis": 4,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 10,
+        "efficiency": 9
+      },
+      "components": {
+        "circuits": 1798,
+        "copperCoils": 425,
+        "siliconWafers": 204,
+        "titaniumBolts": 242,
+        "photonicLenses": 72,
+        "graphene": 20,
+        "nanotubes": 13,
+        "superconductors": 1,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 221,
+        "passive-hardware": 1000,
+        "world-drop": 1220
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": 133215,
+      "rates": {
+        "credits": {
+          "m": 1.2954427122072987,
+          "e": 20
+        },
+        "data": {
+          "m": 1.878187331333208,
+          "e": 16
+        },
+        "researchPoints": {
+          "m": 4.158518019202896,
+          "e": 9
+        },
+        "creditsPerSecond": {
+          "m": 3.219891198785736,
+          "e": 15
+        },
+        "dataPerSecond": {
+          "m": 8.039747437889417,
+          "e": 11
+        },
+        "computePerSecond": {
+          "m": 7.232441902324619,
+          "e": 9
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 50,
+        "materials": 96000,
+        "slots": 48810
+      },
+      "timing": {
+        "scheduledSeconds": 604800,
+        "onlineSeconds": 25200,
+        "offlineSeconds": 579600,
+        "creditedOfflineSeconds": 500400,
+        "lostOfflineSeconds": 79200,
+        "manualActionsOutsideSessions": 0,
+        "taps": 25200,
+        "decisionTicks": 2520
+      },
+      "timeout": null
+    },
+    {
+      "days": 7,
+      "profile": "active",
+      "seed": 42,
+      "firstPrestigeAvailable": 46800,
+      "prestiges": [
+        46810,
+        72010,
+        116180,
+        158410,
+        219610,
+        306010,
+        460810
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 29190,
+        "rig": 29470,
+        "server": 30000,
+        "farm": 115830,
+        "campus": 288260
+      },
+      "researchLevels": {
+        "dataGeneration": 33,
+        "materialAnalysis": 27,
+        "blueprintAnalysis": 4,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 10,
+        "efficiency": 9
+      },
+      "components": {
+        "circuits": 1727,
+        "copperCoils": 414,
+        "siliconWafers": 210,
+        "titaniumBolts": 244,
+        "photonicLenses": 67,
+        "graphene": 18,
+        "nanotubes": 19,
+        "superconductors": 3,
+        "neuralCrystals": 1,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 177,
+        "passive-hardware": 1000,
+        "world-drop": 1192
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": 375390,
+      "rates": {
+        "credits": {
+          "m": 1.0637367150744281,
+          "e": 20
+        },
+        "data": {
+          "m": 1.6120508963257165,
+          "e": 16
+        },
+        "researchPoints": {
+          "m": 3.7089862802639297,
+          "e": 9
+        },
+        "creditsPerSecond": {
+          "m": 2.671881212827129,
+          "e": 15
+        },
+        "dataPerSecond": {
+          "m": 6.944992006713505,
+          "e": 11
+        },
+        "computePerSecond": {
+          "m": 6.247615561148821,
+          "e": 9
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 60,
+        "materials": 96000,
+        "slots": 48880
+      },
+      "timing": {
+        "scheduledSeconds": 604800,
+        "onlineSeconds": 25200,
+        "offlineSeconds": 579600,
+        "creditedOfflineSeconds": 500400,
+        "lostOfflineSeconds": 79200,
+        "manualActionsOutsideSessions": 0,
+        "taps": 25200,
+        "decisionTicks": 2520
+      },
+      "timeout": null
+    },
+    {
+      "days": 7,
+      "profile": "active",
+      "seed": 2026,
+      "firstPrestigeAvailable": 46800,
+      "prestiges": [
+        46810,
+        72010,
+        116180,
+        158410,
+        219610,
+        306010,
+        460810
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 29190,
+        "rig": 29470,
+        "server": 30000,
+        "farm": 115830,
+        "campus": 288260
+      },
+      "researchLevels": {
+        "dataGeneration": 33,
+        "materialAnalysis": 27,
+        "blueprintAnalysis": 4,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 10,
+        "efficiency": 9
+      },
+      "components": {
+        "circuits": 1757,
+        "copperCoils": 412,
+        "siliconWafers": 195,
+        "titaniumBolts": 244,
+        "photonicLenses": 58,
+        "graphene": 16,
+        "nanotubes": 8,
+        "superconductors": 1,
+        "neuralCrystals": 2,
+        "quantumCores": 1
+      },
+      "componentsBySource": {
+        "analysis": 177,
+        "passive-hardware": 1000,
+        "world-drop": 1183
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 1.01733564714199,
+          "e": 20
+        },
+        "data": {
+          "m": 1.606825449192061,
+          "e": 16
+        },
+        "researchPoints": {
+          "m": 3.7022034620636983,
+          "e": 9
+        },
+        "creditsPerSecond": {
+          "m": 2.6713412543964266,
+          "e": 15
+        },
+        "dataPerSecond": {
+          "m": 6.944992006713505,
+          "e": 11
+        },
+        "computePerSecond": {
+          "m": 6.247615561148821,
+          "e": 9
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 60,
+        "materials": 96000,
+        "slots": 48880
+      },
+      "timing": {
+        "scheduledSeconds": 604800,
+        "onlineSeconds": 25200,
+        "offlineSeconds": 579600,
+        "creditedOfflineSeconds": 500400,
+        "lostOfflineSeconds": 79200,
+        "manualActionsOutsideSessions": 0,
+        "taps": 25200,
+        "decisionTicks": 2520
+      },
+      "timeout": null
+    },
+    {
+      "days": 7,
+      "profile": "passive",
+      "seed": 1708,
+      "firstPrestigeAvailable": 115200,
+      "prestiges": [
+        158410,
+        288010,
+        460810
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 72090,
+        "rig": 115270,
+        "server": 460810
+      },
+      "researchLevels": {
+        "dataGeneration": 17,
+        "materialAnalysis": 7,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 6,
+        "efficiency": 5
+      },
+      "components": {
+        "circuits": 783,
+        "copperCoils": 79,
+        "siliconWafers": 40,
+        "titaniumBolts": 43,
+        "photonicLenses": 21,
+        "graphene": 6,
+        "nanotubes": 0,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 27,
+        "passive-hardware": 533,
+        "world-drop": 209
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 3.552321499685302,
+          "e": 13
+        },
+        "data": {
+          "m": 6.495252222063127,
+          "e": 10
+        },
+        "researchPoints": {
+          "m": 1.2902278117435775,
+          "e": 7
+        },
+        "creditsPerSecond": {
+          "m": 1.0589294104973523,
+          "e": 9
+        },
+        "dataPerSecond": {
+          "m": 2.524958265772665,
+          "e": 6
+        },
+        "computePerSecond": {
+          "m": 1.2142391897706672,
+          "e": 6
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 10,
+        "materials": 15600,
+        "slots": 7680
+      },
+      "timing": {
+        "scheduledSeconds": 604800,
+        "onlineSeconds": 4200,
+        "offlineSeconds": 600600,
+        "creditedOfflineSeconds": 417300,
+        "lostOfflineSeconds": 183300,
+        "manualActionsOutsideSessions": 0,
+        "taps": 0,
+        "decisionTicks": 420
+      },
+      "timeout": null
+    },
+    {
+      "days": 7,
+      "profile": "passive",
+      "seed": 42,
+      "firstPrestigeAvailable": 115200,
+      "prestiges": [
+        158410,
+        288010,
+        460810
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 72090,
+        "rig": 115270,
+        "server": 460810
+      },
+      "researchLevels": {
+        "dataGeneration": 17,
+        "materialAnalysis": 7,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 6,
+        "efficiency": 5
+      },
+      "components": {
+        "circuits": 782,
+        "copperCoils": 83,
+        "siliconWafers": 29,
+        "titaniumBolts": 47,
+        "photonicLenses": 24,
+        "graphene": 5,
+        "nanotubes": 2,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 27,
+        "passive-hardware": 533,
+        "world-drop": 209
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 3.552321499685302,
+          "e": 13
+        },
+        "data": {
+          "m": 6.495252222063127,
+          "e": 10
+        },
+        "researchPoints": {
+          "m": 1.2902278117435775,
+          "e": 7
+        },
+        "creditsPerSecond": {
+          "m": 1.0589294104973523,
+          "e": 9
+        },
+        "dataPerSecond": {
+          "m": 2.524958265772665,
+          "e": 6
+        },
+        "computePerSecond": {
+          "m": 1.2142391897706672,
+          "e": 6
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 10,
+        "materials": 15600,
+        "slots": 7680
+      },
+      "timing": {
+        "scheduledSeconds": 604800,
+        "onlineSeconds": 4200,
+        "offlineSeconds": 600600,
+        "creditedOfflineSeconds": 417300,
+        "lostOfflineSeconds": 183300,
+        "manualActionsOutsideSessions": 0,
+        "taps": 0,
+        "decisionTicks": 420
+      },
+      "timeout": null
+    },
+    {
+      "days": 7,
+      "profile": "passive",
+      "seed": 2026,
+      "firstPrestigeAvailable": 115200,
+      "prestiges": [
+        158410,
+        288010,
+        460810
+      ],
+      "hardwareClasses": {
+        "sbc": 28890,
+        "pc": 29020,
+        "gpu": 72090,
+        "rig": 115270,
+        "server": 460810
+      },
+      "researchLevels": {
+        "dataGeneration": 17,
+        "materialAnalysis": 7,
+        "blueprintAnalysis": 0,
+        "modelArchitecture": 0,
+        "computeOptimization": 0,
+        "userScaling": 0,
+        "hardwareIntegration": 0,
+        "labAutomation": 0,
+        "commercialization": 0,
+        "networkEffects": 0,
+        "parallelArchitecture": 0,
+        "hardwareCoDesign": 0,
+        "syntheticData": 0,
+        "dataFlywheel": 0,
+        "recursiveLearning": 0,
+        "autonomousScience": 0,
+        "tapAmplification": 0,
+        "dropProtocols": 0
+      },
+      "training": {
+        "quality": 6,
+        "efficiency": 5
+      },
+      "components": {
+        "circuits": 793,
+        "copperCoils": 67,
+        "siliconWafers": 37,
+        "titaniumBolts": 47,
+        "photonicLenses": 20,
+        "graphene": 5,
+        "nanotubes": 0,
+        "superconductors": 3,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "componentsBySource": {
+        "analysis": 27,
+        "passive-hardware": 533,
+        "world-drop": 209
+      },
+      "firstIntermediate": "nicht erreicht",
+      "firstItem": "nicht erreicht",
+      "rates": {
+        "credits": {
+          "m": 3.552321499685302,
+          "e": 13
+        },
+        "data": {
+          "m": 6.495252222063127,
+          "e": 10
+        },
+        "researchPoints": {
+          "m": 1.2902278117435775,
+          "e": 7
+        },
+        "creditsPerSecond": {
+          "m": 1.0589294104973523,
+          "e": 9
+        },
+        "dataPerSecond": {
+          "m": 2.524958265772665,
+          "e": 6
+        },
+        "computePerSecond": {
+          "m": 1.2142391897706672,
+          "e": 6
+        }
+      },
+      "waits": {
+        "credits": 10,
+        "data": 10,
+        "materials": 15600,
+        "slots": 7680
+      },
+      "timing": {
+        "scheduledSeconds": 604800,
+        "onlineSeconds": 4200,
+        "offlineSeconds": 600600,
+        "creditedOfflineSeconds": 417300,
+        "lostOfflineSeconds": 183300,
+        "manualActionsOutsideSessions": 0,
+        "taps": 0,
+        "decisionTicks": 420
+      },
+      "timeout": null
+    }
+  ]
+}

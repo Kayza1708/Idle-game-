@@ -335,3 +335,17 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Platzkäufe verwenden exakte ScientificNumber-Prüfung/-Subtraktion und bleiben zusammen mit gültiger Ausrüstung über Reload und Prestige erhalten.
 
 - [x] Zeitbasierte, offlinefähige Werkbank für bestehende Module und Itemrezepte mit einem aktiven und drei wartenden Aufträgen.
+
+## Forschungsarbeitsplatz – Bedienpfade (2026-09-30)
+
+- [x] Mobile-first Forschungsarbeitsplatz mit den getrennten Tabs Forschung, Materialanalysen und Durchbrüche umgesetzt.
+- [x] Forschung auf reine Datenkosten umgestellt; feste Laufzeitverträge sowie sichere Abschluss-/Reload-Pfade beibehalten.
+- [x] Separaten Analyseslot, konkrete Startsperren, Ergebniswiederholung und bestehende Fragment-Durchbrüche in der Ansicht zusammengeführt.
+- [x] Onboarding-Ziel „Forschung beginnt“ auf Datenerzeugung Stufe 1 umgestellt und einmalige Common-Item-Belohnung ergänzt.
+
+## Deterministischer Balance-Simulator – 30. September 2026
+
+- [x] Feste aktive und passive Sitzungsprofile verwenden echte Tap-, Kauf-, Training-, Forschungs-, Analyse-, Crafting-, Claim- und Prestige-Funktionen.
+- [x] 1-/7-Tage-Läufe über drei feste Seeds exportieren Min/Median/Max, Scientific-Werte und Zeit-/Engpassdiagnostik.
+- [x] Offline-Limit, Ereignisgrenzen, Prestige-Verfügbarkeit und abgeschlossene Craftingresultate werden getrennt ausgewertet.
+- [ ] Economy-Anpassungen erst in einem eigenen Folgeauftrag aus den gemessenen Material-/Slotengpässen ableiten.

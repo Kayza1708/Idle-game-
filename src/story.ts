@@ -16,7 +16,7 @@ export const dialogues:Record<string,Dialogue>={
  'first-hardware':{speaker:'Mira',text:s=>`Erste Hardware online. ${s.hardware} Geräte liefern zusammen Compute; daraus entstehen Nutzer, und Nutzer erzeugen Credits sowie Daten.`},
  'tutorial-training':{speaker:'Mira',text:s=>`Als Nächstes trainieren wir dein Modell. Qualität steigert Nutzerwert und Taps; Effizienz bringt mehr Nutzer je Hardware. Der nächste Lauf kostet ab ${Math.min(trainingCost(s,'quality'),trainingCost(s,'efficiency')).toLocaleString('de-DE')} Credits plus Daten.`},
  'first-training':{speaker:'Mira',text:s=>`Training abgeschlossen. Dein Modell steht jetzt bei Qualität ${s.qualityLevel} und Effizienz ${s.efficiencyLevel}.`},
- 'tutorial-research':{speaker:'Mira',text:s=>s.discovered.includes('sbc')?'Öffne Forschung. Starte dort ein bezahlbares Forschungsprojekt als nächsten Schritt.':'Forschung wird mit dem Einplatinencomputer zugänglich. Baue die aktuelle Hardware weiter aus; der Forschungsreiter zeigt dir die nächste Voraussetzung.'},
+ 'tutorial-research':{speaker:'Mira',text:s=>s.discovered.includes('sbc')?'Öffne Forschung und starte Datenerzeugung. Forschung benötigt Daten; Analysen sammeln Materialien unabhängig davon in einem separaten Slot.':'Forschung wird mit dem Einplatinencomputer zugänglich. Baue die aktuelle Hardware weiter aus; der Forschungsreiter zeigt dir die nächste Voraussetzung.'},
  'first-research':{speaker:'Mira',text:()=> 'Der erste Forschungsabschluss steht. Ab jetzt gehen wir Schritt für Schritt schwierigere Fragen an.'},
  'first-milestone':{speaker:'Mira',text:()=> 'Ein echter Hardware-Meilenstein. Große Stückzahlen verbessern nicht nur die Klasse selbst, sondern prägen die Leistung des ganzen Labors.'},
  'prestige-ready':{speaker:'Mira',text:s=>`${newINT(s)} INT wären jetzt erreichbar. Der Neustart geschieht nur, wenn du ihn im Prestige-Reiter selbst bestätigst.`},
@@ -38,7 +38,7 @@ export function syncStory(before:GameState,after:GameState):GameState{
   if(after.story.target==='tap'&&totalTaps(after)>totalTaps(before))next=append(next,'tutorial-tap-result');
   if(after.story.target==='hardware'&&after.hardware>before.hardware)next=append(next,'first-hardware');
   if(after.story.target==='training'&&after.level>before.level)next=append(next,'first-training');
-  if(after.story.target==='research'&&(after.completedResearch.length>before.completedResearch.length||after.breakthroughs.length>before.breakthroughs.length||after.experiments.completedIds.length>before.experiments.completedIds.length))next=append(next,'first-research');
+  if(after.story.target==='research'&&after.researchLevels.dataGeneration>before.researchLevels.dataGeneration)next=append(next,'first-research');
  }
  if(after.hardware>before.hardware)next=append(next,'first-hardware');
  if(after.level>before.level)next=append(next,'first-training');

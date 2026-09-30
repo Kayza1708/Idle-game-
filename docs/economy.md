@@ -292,3 +292,9 @@ Nach dem ersten Prestige ist Platz 1 kostenlos. Platz 2 kostet **1e9 Credits**, 
 
 ## Zeitbasierte Werkbank (vorläufig)
 Zwischenprodukte benötigen 60 Sekunden je Stück. Itemrezepte verwenden feste, rezeptgebundene Zeiten: Common 5 Minuten, Uncommon 15 Minuten, Rare 1 Stunde, Epic 4 Stunden, Legendary 12 Stunden und Mythic 24 Stunden. Zutaten werden beim Einreihen reserviert; die Werkbank verarbeitet einen aktiven und höchstens drei wartende Aufträge.
+
+## Forschungsansicht und Datenkosten (2026-09-30)
+
+- Forschungsprojekte – einmalig wie wiederholbar – reservieren beim erfolgreichen Start ausschließlich ihre bereits definierte Datenmenge. Frühere Credit- und Forschungspunkt-Komponenten wurden aus dem zentralen Balance-Vertrag entfernt; Analysen behalten ihre unveränderten Credit-/Datenkosten, Durchbrüche ihre Fragmentkosten.
+- Der Startvertrag prüft Voraussetzung, freien Forschungsslot, bereits laufende/abgeschlossene Projekte und den exakten Datenbestand, zieht Daten genau einmal ab und speichert die beim Start berechnete Dauer im Laborauftrag. Ein erneuter Start desselben laufenden Projekts ist zustandsneutral.
+- Der Analyseslot ist weiterhin unabhängig von sämtlichen Forschungslaboren. Kurz-/Langverträge, Belohnungsmengen, Fundgewichte und Drop-Raten wurden nicht verändert.

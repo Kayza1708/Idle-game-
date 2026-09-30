@@ -50,14 +50,14 @@ describe('economy', () => {
 });
 
 describe('persistent research laboratories',()=>{
-  it('charges once and completes from elapsed offline time',()=>{const base={...newGame(0),credits:10_000,data:1_000,researchPoints:100,discovered:['calculator','sbc'] as GameState['discovered']},started=startResearchProject(base,'operations');expect(started.credits).toBe(5_000);expect(started.data).toBe(750);expect(started.researchPoints).toBe(75);expect(started.researchLabs[0]?.endsAt).toBe(180_000);const done=advance(started,180).state;expect(done.completedResearch).toContain('operations');expect(done.researchLabs[0]).toBeNull();expect(done.credits).toBeGreaterThan(5_000)});
+  it('charges once and completes from elapsed offline time',()=>{const base={...newGame(0),credits:10_000,data:1_000,researchPoints:100,discovered:['calculator','sbc'] as GameState['discovered']},started=startResearchProject(base,'operations');expect(started.credits).toBe(10_000);expect(started.data).toBe(750);expect(started.researchPoints).toBe(100);expect(started.researchLabs[0]?.endsAt).toBe(180_000);const done=advance(started,180).state;expect(done.completedResearch).toContain('operations');expect(done.researchLabs[0]).toBeNull();expect(done.credits).toBeGreaterThan(5_000)});
   it('cannot start or charge the same project twice, including after completion',()=>{const base={...newGame(0),credits:10_000,data:1_000,researchPoints:100},once=startResearchProject(base,'operations');expect(startResearchProject(once,'operations')).toBe(once);const done=advance(once,180).state;expect(startResearchProject(done,'operations')).toBe(done)});
   it('keeps the base lab available without paid slots',()=>{expect(researchLabCount(newGame(0))).toBe(1)});
 });
 
 describe('fixed research contracts',()=>{
   it('stores the configured duration at start and charges all data exactly once',()=>{const base={...newGame(0),credits:1e6,data:1e6,researchPoints:1e6},duration=researchDuration('operations'),started=startResearchProject(base,'operations');expect(started.researchLabs[0]).toMatchObject({startedAt:0,endsAt:duration*1000});expect(base.data-started.data).toBe(BALANCE.researchProjects.operations.data);expect(startResearchProject(started,'operations')).toBe(started)});
-  it('refuses a start when one unit of data is missing',()=>{const project=BALANCE.researchProjects.operations,base={...newGame(0),credits:project.credits,data:project.data-1,researchPoints:project.points};expect(startResearchProject(base,'operations').telemetry.recentEvents.at(-1)?.type).toBe('action-blocked')});
+  it('refuses a start when one unit of data is missing',()=>{const project=BALANCE.researchProjects.operations,base={...newGame(0),credits:0,data:project.data-1,researchPoints:0};expect(startResearchProject(base,'operations')).toBe(base)});
 });
 
 
@@ -71,4 +71,9 @@ describe('A-H hardware acceptance contract',()=>{
   expect(Object.keys(BALANCE.hardware)).toHaveLength(15);
   for(const hardware of Object.values(BALANCE.hardware))expect(hardware.milestones.map(m=>m.threshold)).toEqual([10,25,50,100,250,500]);
  });
+});
+
+describe('data-only research starts',()=>{
+ it('starts repeatable and one-time research without credits or research points',()=>{const repeatable={...newGame(0),discovered:['calculator','sbc'] as GameState['discovered'],data:1000,credits:0,researchPoints:0},a=startResearchProject(repeatable,'dataGeneration');expect(a.researchLabs[0]?.id).toBe('dataGeneration');expect(a.credits).toBe(0);expect(a.researchPoints).toBe(0);const oneTime={...repeatable,data:1000},b=startResearchProject(oneTime,'operations');expect(b.researchLabs[0]?.id).toBe('operations');expect(b.credits).toBe(0);expect(b.researchPoints).toBe(0)});
+ it('leaves state untouched without enough data and charges exactly once under a double click',()=>{const poor={...newGame(0),discovered:['calculator','sbc'] as GameState['discovered'],data:39,credits:0,researchPoints:0};expect(startResearchProject(poor,'dataGeneration')).toBe(poor);const ready={...poor,data:40},once=startResearchProject(ready,'dataGeneration');expect(once.data).toBe(0);expect(startResearchProject(once,'dataGeneration')).toBe(once)});
 });
