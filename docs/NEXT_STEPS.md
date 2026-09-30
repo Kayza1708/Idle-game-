@@ -314,3 +314,21 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - [x] Reproduzierbarkeit, Sitzungsgrenzen, Tap-Zähler, Prestige-Verfügbarkeit, Exactly-once-Abschlüsse, Scientific-Exponenten und Offline-Limit automatisiert geprüft.
 - [ ] Optional `npm run balance:simulate -- --days=30,90` in einem Langlauf ausführen; diese Horizonte sind noch nicht gemessen.
 - [ ] Nächster Balance-Auftrag: Materialzugang bis zum ersten Zwischenprodukt, Slotwartezeit und aktives/passives Prestigegefälle isoliert bewerten.
+
+## Übergabe: Pixel-Art-Atlanten – 30. September 2026
+
+- [x] Alle zehn Komponenten sowie passende bestehende Items nutzen explizite Atlaszellen; fünf nicht vorhandene Itemmotive sind dokumentiert und ungenutzt.
+- [x] Aktivitäten und Meta-Abschnittsbilder sind eingebunden, ohne Questzeilen zu wiederholen oder Spielmechanik zu ändern.
+- [ ] Visuelle Prüfung bei 390 px und Desktop in einem verfügbaren Browser durchführen; in der aktuellen Umgebung steht kein Browser bereit.
+
+## Übergabe: Mira-Benutzerführung – 30. September 2026
+
+- Die Führung wertet ausschließlich echte Kauf-, Trainings-, Forschungs-, Analyse-, Crafting- und Ausrüstungszustände aus; bestehende Onboarding-Claims bleiben separat und unverändert.
+- „Zeig mir wo“ navigiert einmalig auf Wunsch, während freie Tabwechsel und normales Spielen möglich bleiben. Gesperrte Ziele nennen ihre tatsächlichen Voraussetzungen und fehlenden Ressourcen.
+- [ ] Mira-Hilfekarte, Dialogfokus und alle acht Ziele mit einem produktionsnahen Spielstand bei 390 px sowie Desktop manuell prüfen.
+
+## Übergabe: Rückkehrübersicht und Zielkarte – 30. September 2026
+
+- Der Rückkehrbericht wird erst ab fünf Minuten geöffnet, bucht nichts erneut und wird vor weiteren Dialogen angezeigt; ein unmittelbar gespeicherter Offline-Abschluss verhindert doppelte Vergabe nach Reload.
+- Die Zielkarte nutzt vorhandene Registerreihenfolgen und verlinkt nur auf echte UI-Ziele. Hardware-Ziele verwenden ausschließlich 10/25/50/100/250/500.
+- [ ] Rückkehrfenster, Zielnavigation und Quest-/Season-Badge bei 390 px und Desktop mit einem produktionsnahen Save manuell prüfen.

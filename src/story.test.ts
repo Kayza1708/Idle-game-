@@ -11,7 +11,7 @@ describe('Mira story and tutorial',()=>{
   let state=reachTapPrompt();expect(state.story.open).toBe('tutorial-tap');
   state=continueDialogue(state);expect(state.story.target).toBe('tap');expect(state.story.open).toBeNull();
   const tapped=registerTap(state,state.savedAt);state=syncStory(state,tapped);
-  expect(state.story.open).toBe('tutorial-tap-result');
+  expect(state.story.open).toBe('tutorial-calculator');expect(state.story.target).toBe('calculator');
  });
 
  it('persists tutorial progress through save and reload',()=>{
@@ -34,7 +34,7 @@ describe('Mira story and tutorial',()=>{
 
  it('skips a tutorial action that is already fulfilled',()=>{
   let state=reachTapPrompt(),tapped=registerTap(state,state.savedAt);state={...tapped,story:state.story};
-  state=continueDialogue(state);expect(state.story.open).toBe('tutorial-tap-result');
+  state=continueDialogue(state);expect(state.story.open).toBe('tutorial-calculator');expect(state.story.target).toBe('calculator');
  });
 
  it('queues simultaneous first-time events instead of stacking dialogues',()=>{

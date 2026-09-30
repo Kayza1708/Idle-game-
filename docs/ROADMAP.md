@@ -349,3 +349,20 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] 1-/7-Tage-Läufe über drei feste Seeds exportieren Min/Median/Max, Scientific-Werte und Zeit-/Engpassdiagnostik.
 - [x] Offline-Limit, Ereignisgrenzen, Prestige-Verfügbarkeit und abgeschlossene Craftingresultate werden getrennt ausgewertet.
 - [ ] Economy-Anpassungen erst in einem eigenen Folgeauftrag aus den gemessenen Material-/Slotengpässen ableiten.
+
+## Pixel-Art-Atlanten – 30. September 2026
+
+- [x] Vier neue Pixel-Art-Atlanten mit expliziten Komponenten-, passenden Item-, Meta- und Aktivitäten-Zuordnungen integriert; unpassende Itemmotive bleiben reserviert.
+- [x] Darstellung nutzt atlaseigene Raster, rechteckige Kacheln für eingebrannte Hintergründe und keine Blend-Modi oder Farbfilter.
+
+## Mira-Benutzerführung – 30. September 2026
+
+- [x] Das bestehende Mira-Tutorial führt über acht echte Aktionen und Abschlüsse vom Labor-Impuls bis zum ersten ausgerüsteten Item.
+- [x] Stabile Ziel-IDs, freiwillige Tab-Navigation, nicht blockierende Wartehinweise und ressourcenbasierte Voraussetzungen sind mobil und tastaturbedienbar umgesetzt.
+- [x] Überspringen entfernt die Führung ohne Rewards zu verändern; Fortsetzen ist über Miras Journal möglich.
+
+## Rückkehrübersicht und nächstes Ziel – 30. September 2026
+
+- [x] Rückkehrberichte zeigen ab fünf Minuten echte, offline gebuchte ScientificNumber-Erträge, Komponenten, Abschlüsse sowie berücksichtigte und verlorene Zeit.
+- [x] Die Werkstatt priorisiert Tutorial, abholbares Onboarding, Ausrüstung, bezahlbares Crafting, startbare Forschung und feste Hardware-Meilensteine ohne automatische Aktionen.
+- [x] Quest-/Season-Badges basieren ausschließlich auf tatsächlich abholbaren Belohnungen einschließlich Periodenbonus.
