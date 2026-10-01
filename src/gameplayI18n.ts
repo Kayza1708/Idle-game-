@@ -352,6 +352,7 @@ const rarities:Record<Rarity,L>={
 export const rarityText=(id:Rarity,language:Language)=>pick(rarities[id],language);
 
 const itemNames:Record<ItemTypeId,L>={
+ 'impulse-relay':l('Impulse Relay','Impulsrelais','Relé de impulso','Relais d’impulsion','Relé de impulso','Relè d’impulso','Przekaźnik impulsowy'),
  'quantum-chip':l('Quantum Chip','Quantenchip','Chip cuántico','Puce quantique','Chip quântico','Chip quantistico','Chip kwantowy'),
  'neural-asic':l('Neural ASIC','Neural-ASIC','ASIC neuronal','ASIC neuronal','ASIC neural','ASIC neurale','Neuralny ASIC'),
  'photonic-array':l('Photonic Array','Photonenfeld','Matriz fotónica','Réseau photonique','Matriz fotônica','Array fotonico','Macierz fotoniczna'),
@@ -366,6 +367,7 @@ const itemNames:Record<ItemTypeId,L>={
 export const itemText=(id:ItemTypeId,language:Language)=>pick(itemNames[id],language);
 
 const effects:Record<ItemEffect,L>={
+ relay:l('Every 10th paid tap: +2 seconds of Credits','Jeder 10. vergütete Tap: +2 Sekunden Credits','Cada 10.º toque pagado: +2 segundos de créditos','Chaque 10e impulsion payée : +2 secondes de crédits','Cada 10.º toque pago: +2 segundos de créditos','Ogni 10° tap pagato: +2 secondi di crediti','Co 10. płatne kliknięcie: +2 sekundy kredytów'),
  compute:l('Compute','Compute','Cómputo','Calcul','Computação','Compute','Obliczenia'),
  credits:l('Credits','Credits','Créditos','Crédits','Créditos','Crediti','Kredyty'),
  data:l('Data','Daten','Datos','Données','Dados','Dati','Dane'),

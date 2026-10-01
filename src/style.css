@@ -384,3 +384,4 @@ img.pixel-art,canvas.pixel-art,.pixel-art img{image-rendering:pixelated}
 @media(prefers-reduced-motion:reduce){.return-report,.next-goal-card{scroll-behavior:auto}}
 .hardware-late > summary { min-height:44px; display:flex; align-items:center; cursor:pointer; color:var(--cyan,#60f4ec); font-weight:700; }
 .hardware-late[open] > summary { margin-bottom:.75rem; }
+.impulse-relay-art{display:grid;place-items:center;min-width:64px;min-height:64px;border:3px solid #72f1b8;border-radius:14px;background:radial-gradient(circle,#173b42,#09151d);color:#ffe66d;font-size:42px;font-weight:900;text-shadow:0 0 10px #ffe66d}

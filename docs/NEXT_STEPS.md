@@ -351,3 +351,22 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Das erste Training startet nach 75 Sekunden und damit zu früh gegenüber dem Ziel 3–5 Minuten. Spätere Ansparpausen steigen im aggressiven Hardwarelauf nicht monoton. Diese Konflikte dürfen nur in einem Folgeauftrag gelöst werden, weil Data-Basisformel, Trainingsformel und Schicht-1-Hardwarekurve in diesem Auftrag fest vorgegeben sind.
 - Alte Prestige-, Item-, Hardwaremeilenstein-, Overclock-, Tap-, Ad- und Gem-Trainingsbeschleuniger verändern die feste Trainingsdauer nicht mehr; UI-Texte benennen Legacy-Effekte entsprechend. Data-Effekte derselben Systeme bleiben erhalten, laufen aber gemeinsam durch den abflachenden Multiplikator.
 - [ ] Manuell bei 390 px und Desktop prüfen: Datenbonus-Hinweis, beide Trainingskarten, Fehlmengen sowie Fortschritt/Restzeit nach Reload und Offline-Rückkehr.
+
+## Übergabe: Schicht-3-Economy – 1. Oktober 2026
+
+- `npm run balance:layer-three` erzeugt den 1-/7-Tage-Vergleich für Training→Forschung→Analyse und Analyse→Forschung→Training mit Seed 1708 und den bestehenden aktiven/passiven Sitzungsprofilen.
+- Historischer Hinweis: Diese Werte stammten aus dem fehlerhaften Lauf mit vorgeschalteten acht Offline-Stunden und sind durch die unten dokumentierte Messkorrektur verworfen.
+- Konkreter Folgeansatz: erste Sitzungsgrenze beziehungsweise Entscheidungsreihenfolge gegen die neue Offline-Data-Produktion prüfen. Nicht ohne neuen Auftrag Hardware-, Training-, Item-, Prestige- oder die vorgegebenen Forschungs-/Analysekosten ändern.
+- [ ] Manuell bei 390 px und Desktop prüfen: gemeinsamer Data-Hinweis, Kurz-/Lang-Karten, Fehlmengen, feste Restzeit nach Bonusänderung und erneuter Analyseabzug.
+
+## Übergabe: korrigierte Schicht-3-Messung – 1. Oktober 2026
+
+- Für den Prestige-Auftrag prüfen, wann freiwilliges Prestige gegenüber laufender Data-, Bauplan- und Werkbankprogression angeboten beziehungsweise vom Simulator gewählt werden soll. Der Messsimulator wartet jetzt bewusst bis zum ersten natürlichen Craft.
+- Forschung startet im korrigierten Aktivlauf nach 130 aktiven Sekunden, Analyse nach 390 Sekunden; beide vorläufigen Zeitziele bleiben verfehlt und dürfen nicht durch verdeckte Parameteränderungen korrigiert werden.
+- Manuell prüfen: neuer Spielstand erzeugt vor dem ersten Tick keine Offline-Erträge; Analyse-/Forschungsdauer bleibt nach Bonuswechsel fest; Quantenchip kann über echte Artefaktsuchen, Compute-Bus und Werkbank gefertigt werden.
+
+## Übergabe: Schicht 3 v3 – 1. Oktober 2026
+
+- Im folgenden Prestige-Auftrag prüfen, ob der erste normale Prestigeentscheid bei 1.050 Sekunden die Einführung des Impulsrelais verständlich unterbricht; die Vergleichsläufe verändern die normale Empfehlung nicht.
+- Das Impulsrelais ist wegen vorhandener Komponenten bereits nach 30 statt 45–75 aktiven Minuten fertig. Eine spätere Korrektur darf nur gezielt erfolgen, da Rezept, fünf Minuten Dauer und Drop-Raten in diesem Auftrag ausdrücklich fest beziehungsweise unverändert waren.
+- [ ] Manuell prüfen: Bauplan erscheint erst nach Analyseabschluss, Item zeigt vor Prestige den Ausrüstungshinweis, und der zehnte vergütete Tap zeigt den zusätzlichen Creditbetrag ohne zweiten Tap-Effekt.

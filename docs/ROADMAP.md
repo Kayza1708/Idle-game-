@@ -389,3 +389,30 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Basis-, aktiver, passiver und Research-/Analyse-Kontrolllauf sind reproduzierbar dokumentiert.
 - [ ] Ziel „erstes Training nach 3–5 aktiven Minuten“: gemessen sind 75 Sekunden.
 - [ ] Steigende reine Ansparpausen: im aggressiven 24-h-Hardwarelauf durch schneller wachsende Nutzer-/Data-Rate nicht monoton erfüllt.
+
+## Schicht-3-Economy – Forschung und Analysen (1. Oktober 2026)
+
+- [x] Alle wiederholbaren und einmaligen Forschungen verwenden vier zentrale Kategorien, reine Data-Kosten, ×1,85 Kostenwachstum, ×1,35 Dauerwachstum und den 72-h-Cap.
+- [x] Analysen verwenden ihren unabhängigen Slot, die sechs vorgegebenen Data-/Dauerverträge und keine Creditkosten.
+- [x] Startdauer, exakter Abzug, parallele Slots, Wiederholung sowie Online-/Offline-/Reload-Abschluss sind getestet.
+- [x] Reproduzierbare 1-/7-Tage-Läufe für beide Prioritäten und aktive/passive Sitzungsprofile sind dokumentiert.
+- [ ] Erste Forschung nach 5–10 aktiven Minuten: gemessen sind 20 Sekunden.
+- [ ] Erste Hardwareanalyse nach 15–30 aktiven Minuten: gemessen sind 20 Sekunden.
+- [ ] Frühe Data-Priorisierung: durch acht Stunden Produktion vor der ersten Sitzung aktuell nicht erzwungen.
+
+## Schicht-3-Messkorrektur (1. Oktober 2026)
+
+- [x] Kampagnenstart bei `t=0` ohne vorgeschaltete Offline-Produktion simuliert.
+- [x] 90-Minuten-Aktivlauf, Rückkehrlauf sowie 1-/7-Tage-Profile trennen aktive, abwesende und gutgeschriebene Zeit.
+- [x] Data-Entscheidungen und Abschlüsse reproduzierbar protokolliert.
+- [x] Crafting-Blockade pro Rezept und vollständiger Zutatenkette diagnostiziert.
+- [x] Erstes Katalogrezept ohne Zuschüsse, neue Quellen oder Drop-Erhöhungen natürlich herstellbar.
+- [ ] Frühziele für Forschung und Analyse: mit 130 beziehungsweise 390 aktiven Sekunden weiterhin verfehlt; keine Parameteränderung in diesem Auftrag.
+
+## Schicht 3 v3 – Frühstart und Impulsrelais (1. Oktober 2026)
+
+- [x] Minimale ganzzahlige Kosten 363/57.623 über echte Entscheidungstimeline reproduzierbar bestimmt.
+- [x] Forschungs- und Hardwareanalysefenster in Strategien A/B sowie Seeds 1708/42/2026 erreicht.
+- [x] Impulsrelais mit permanentem Hardwareanalyse-Bauplan, echtem Rezept und fünf Minuten Werkbankzeit ergänzt.
+- [x] Persistenter ScientificNumber-Tapbonus, Prestigeerhalt und Ausrüstungssperre getestet.
+- [ ] Herstellungsziel 45–75 aktive Minuten: tatsächlich 30 Minuten; feste Vorgaben und Drops wurden nicht verändert.
