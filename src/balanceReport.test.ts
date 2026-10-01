@@ -6,6 +6,7 @@ import { prestige } from './prestige';
 import { restore } from './storage';
 
 describe('local balance report',()=>{
+  it('exports early prestige settings and queued training',()=>{const base=newGame(0),state={...base,nodes:['shoppingAgent','trainingPlan','componentScanner'],hardwareAutoBuyers:{calculator:true},scannerTarget:'circuits' as const,automation:{...base.automation,reservePercent:.25},trainingQueue:[{track:'quality' as const,targetLevel:1}]},report=createBalanceReport(state,0);expect(report.currentState.model.trainingQueue).toEqual(state.trainingQueue);expect(report.currentState.int.earlyUnlockSettings).toEqual({hardwareAutoBuyers:{calculator:true},reservePercent:.25,scannerTarget:'circuits'});});
   it('preserves finite large idle numbers',()=>{
     const state={...newGame(100),credits:1e300,lifetimeCreditsEarned:9.87654321e250};
     const json=serializeBalanceReport(state,1_000),report=JSON.parse(json);
@@ -14,14 +15,14 @@ describe('local balance report',()=>{
   });
 
   it('keeps snapshots for multiple completed runs',()=>{
-    let state={...newGame(1_000),savedAt:11_000,credits:13e9,runCreditsEarned:13e9,lifetimeCreditsEarned:13e9,lifetimeEligibleCredits:13e9};
+    let state={...newGame(1_000),savedAt:11_000,credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15};
     state=prestige(state);
-    state={...state,savedAt:31_000,credits:40e9,runCreditsEarned:27e9,lifetimeCreditsEarned:40e9,lifetimeEligibleCredits:40e9};
+    state={...state,savedAt:31_000,credits:2e15,runCreditsEarned:1e15,lifetimeCreditsEarned:2e15,lifetimeEligibleCredits:2e15};
     state=prestige(state);
     const report=createBalanceReport(state,41_000);
     expect(report.prestigeHistory).toHaveLength(2);
     expect(report.prestigeHistory.map(run=>run.run)).toEqual([0,1]);
-    expect(report.prestigeHistory[0].before.credits).toBe(13e9);
+    expect(report.prestigeHistory[0].before.credits).toBe(1e15);
     expect(report.currentRun.number).toBe(3);
   });
 

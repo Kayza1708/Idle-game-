@@ -416,3 +416,32 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Impulsrelais mit permanentem Hardwareanalyse-Bauplan, echtem Rezept und fünf Minuten Werkbankzeit ergänzt.
 - [x] Persistenter ScientificNumber-Tapbonus, Prestigeerhalt und Ausrüstungssperre getestet.
 - [ ] Herstellungsziel 45–75 aktive Minuten: tatsächlich 30 Minuten; feste Vorgaben und Drops wurden nicht verändert.
+
+## Implementierungs-Audit – 1. Oktober 2026
+
+- [x] Save-Koordinator, Komponentenpfade, Challenges, Forschung/Analysen, Crafting/Equipment und Rückkehrabrechnung mit Code und Tests geprüft.
+- [x] Drei nachgewiesene Restfehler behoben: gesperrtes Tutorial-Rezeptziel, falscher Impulsrelais-Prozenttext, veralteter Itemtypen-Gesamtzähler.
+- [ ] Vollständiger Browserlauf und 390-px-Sichtprüfung: in dieser Umgebung kein Browser verfügbar.
+- [ ] Langzeitsuite in einer Umgebung mit ausreichendem Zeitbudget vollständig abschließen.
+## Prestige-Vorschau und Reset-Sicherheit – 1. Oktober 2026
+
+- [x] Reine zentrale Vorschau und tatsächlichen Reset auf denselben Vertrag gestellt.
+- [x] Mobiles Bestätigungsfenster mit INT, Bonus, Reset/Erhalt und laufenden Aufträgen ergänzt.
+- [x] Doppelklick/Reload, dauerhaften INT-Bonus, Auftragserhalt und ersten Equipment-Platz getestet.
+- [x] Aktive 90-Minuten-Vergleichsmessung ohne Änderung der Prestigeparameter dokumentiert.
+- [ ] Bestätigungsfenster und direkter Equipment-Weg bei 390 px in einem echten Browser prüfen.
+
+## INT-Anspruchskurve – 1. Oktober 2026
+
+- [x] Ausschließlich die Umsatzschwelle der bestehenden kumulativen INT-Formel kalibriert.
+- [x] Kleinsten ganzzahligen Schwellenwert für einen normalen Entscheid bei 45 Minuten deterministisch bestimmt.
+- [x] Seeds 1708/42/2026, Vergleich ohne Prestige und zweiten Run dokumentiert.
+- [x] Anspruch, Vorschau, Reset und Export verwenden weiterhin dieselbe zentrale Formel.
+- [ ] Spürbaren Nutzen des zweiten Runs im folgenden Prestige-Unlock-Auftrag untersuchen; keine Ersatzboni in dieser Kalibrierung.
+
+## Frühe Prestige-Unlocks – 1. Oktober 2026
+
+- [x] `shoppingAgent`, `trainingPlan` und `componentScanner` als unabhängige Einstiegswurzeln ergänzt.
+- [x] ScientificNumber-Reserve, persistente Trainingsqueue und normalisierte passive Scannergewichte implementiert.
+- [x] Reset, Reload, Online/Offline und Schutz vor doppelter Knotenwirkung getestet.
+- [ ] Kompakte Automation und Knotendetails bei 390 px manuell prüfen.

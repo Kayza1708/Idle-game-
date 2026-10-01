@@ -370,3 +370,26 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Im folgenden Prestige-Auftrag prüfen, ob der erste normale Prestigeentscheid bei 1.050 Sekunden die Einführung des Impulsrelais verständlich unterbricht; die Vergleichsläufe verändern die normale Empfehlung nicht.
 - Das Impulsrelais ist wegen vorhandener Komponenten bereits nach 30 statt 45–75 aktiven Minuten fertig. Eine spätere Korrektur darf nur gezielt erfolgen, da Rezept, fünf Minuten Dauer und Drop-Raten in diesem Auftrag ausdrücklich fest beziehungsweise unverändert waren.
 - [ ] Manuell prüfen: Bauplan erscheint erst nach Analyseabschluss, Item zeigt vor Prestige den Ausrüstungshinweis, und der zehnte vergütete Tap zeigt den zusätzlichen Creditbetrag ohne zweiten Tap-Effekt.
+
+## Übergabe: Implementierungs-Audit – 1. Oktober 2026
+
+- Höchste Priorität bleibt ein echter Browserlauf für IndexedDB/Pagehide und den kompletten neuen Spielweg.
+- Danach Profil, Dialoge, Navigation und Tutorial-Fokus bei exakt 390 px visuell und per Tastatur/Pointer prüfen.
+- Langzeitsimulation separat in CI mit größerem Timeout ausführen; keinen Timeout als erfolgreichen Stabilitätsnachweis werten.
+## Übergabe: Prestige-Vorschau – 1. Oktober 2026
+
+- In einem echten mobilen Browser bei 390 px den Dialog mit gleichzeitig laufendem Training, Forschung, Analyse und Crafting auf Scrollbarkeit und Fokus prüfen.
+- Ersten Prestige mit vorhandenem kompatiblem Item durchführen, Miras Erklärung schließen und den direkten Weg „Item ausrüsten“ prüfen.
+- IndexedDB-Save unmittelbar nach Prestige und nach schnellem Doppeltap neu laden; der zweite Aufruf muss ohne zusätzliche INT wirkungslos bleiben.
+
+## Übergabe: INT-Kurve – 1. Oktober 2026
+
+- Der zweite Run erreicht frühe Meilensteine nur 0–30 Sekunden früher und den nächsten normalen Entscheid nach 52 Minuten; im folgenden Unlock-Auftrag gezielt den wahrnehmbaren Neustartnutzen prüfen.
+- Manuell bestätigen, dass die UI Prestige bereits bei 1 INT ab 35:15 erlaubt und den 45-Minuten-Messentscheid nicht als Sperre darstellt.
+- Economy-Export bei sehr großen Umsätzen prüfen: Anspruch, Vorschau und exportierter `prestigeClaim` müssen identisch bleiben.
+
+## Übergabe: frühe Prestige-Unlocks – 1. Oktober 2026
+
+- Bei 390 px Einkaufsagent, Reserveauswahl, Trainingsqueue und Scanner-Chancen auf Touchziele und Scrollbarkeit prüfen.
+- Einen Offline-Zeitsprung mit beiden Einkaufsagent-Klassen und 25-%-Reserve gegen denselben Online-Zeitraum vergleichen.
+- Vor Prestige zwei Trainingsaufträge vormerken und bestätigen, dass Vorschau beide Abbrüche nennt und der Reset die Queue löscht.

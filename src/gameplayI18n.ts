@@ -411,6 +411,9 @@ const branches=[
 const roman=['','I','II','III','IV','V','VI','VII','VIII'];
 
 const prestigeEffects:Record<PrestigeUpgradeId,L>={
+ shoppingAgent:l('Per-class calculator and single-board computer autobuyers with a shared reserve.','Klassenweise Autobuyer für Taschenrechner und Einplatinencomputer mit gemeinsamer Reserve.','','','','',''),
+ trainingPlan:l('Queue two model training jobs; data is charged only when each job starts.','Zwei Modelltrainings vormerken; Daten werden erst beim jeweiligen Start abgezogen.','','','','',''),
+ componentScanner:l('Double one accessible passive component weight without adding finds.','Verdoppelt ein zugängliches passives Komponentengewicht, ohne zusätzliche Funde zu erzeugen.','','','','',''),
  dataArchive1:l('×1.25 data production.','×1,25 Datenproduktion.','×1,25 producción de datos.','×1,25 production de données.','×1,25 produção de dados.','×1,25 produzione dati.','×1,25 produkcji danych.'),
  dataArchive2:l('×1.60 data production.','×1,60 Datenproduktion.','×1,60 producción de datos.','×1,60 production de données.','×1,60 produção de dados.','×1,60 produzione dati.','×1,60 produkcji danych.'),
  dataArchive3:l('×2.25 data production.','×2,25 Datenproduktion.','×2,25 producción de datos.','×2,25 production de données.','×2,25 produção de dados.','×2,25 produzione dati.','×2,25 produkcji danych.'),
@@ -458,6 +461,7 @@ const prestigeEffects:Record<PrestigeUpgradeId,L>={
 };
 
 export const prestigeText=(id:PrestigeUpgradeId,language:Language)=>{
+ if(id==='shoppingAgent'||id==='trainingPlan'||id==='componentScanner')return{name:pick(id==='shoppingAgent'?l('Shopping Agent','Einkaufsagent','','','','',''):id==='trainingPlan'?l('Training Plan','Trainingsplan','','','','',''):l('Component Scanner','Komponentenscanner','','','','',''),language),effect:pick(prestigeEffects[id],language)};
  const depth=Number(id.match(/([1-8])$/)?.[1]??1);
  const branch=id.startsWith('dataArchive')?0:id.startsWith('computeNet')?1:id.startsWith('analysis')?2:id.startsWith('labs')?3:4;
  return {

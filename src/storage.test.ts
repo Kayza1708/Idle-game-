@@ -11,6 +11,7 @@ class MemoryStorage implements StorageLike {
 }
 
 describe('save format', () => {
+  it('migrates v31 saves with safe defaults for early prestige settings',()=>{const old:any=newGame(123);delete old.trainingQueue;delete old.scannerTarget;delete old.automation.reservePercent;delete old.automation.shoppingElapsed;const restored=restore(JSON.stringify({version:31,state:old}),456);expect(restored.error).toBeUndefined();expect(restored.state.trainingQueue).toEqual([]);expect(restored.state.scannerTarget).toBeNull();expect(restored.state.automation).toMatchObject({reservePercent:0,shoppingElapsed:0});});
   it('assigns a persistent anonymous campaign id to a fresh local game',()=>{const storage=new MemoryStorage(),first=loadGame(storage,100).state;expect(first.telemetry.campaignId).not.toBe('unassigned');persistGame(storage,first,100);expect(loadGame(storage,100).state.telemetry.campaignId).toBe(first.telemetry.campaignId)});
 
   it('round-trips a versioned game state', () => {
