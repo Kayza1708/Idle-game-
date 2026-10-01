@@ -1,4 +1,4 @@
-import {exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible} from './economy';
+import {exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import type {Language} from './i18n';
 export type Challenge={id:string;name:string;description:string;stars:number;check:(s:GameState)=>boolean};
@@ -257,6 +257,6 @@ export const runChallengeReady=(s:GameState)=>!!s.retention.activeRun&&runChalle
 export function completeRunChallenge(s:GameState){const active=s.retention.activeRun,c=active&&runChallenges.find(x=>x.id===active.id);if(!active||!c||!active.runId||!runChallengeReady(s))return s;const seconds=Math.max(0,(s.savedAt-active.startedAt)/1000),previous=s.retention.runCompletions[c.id]??0,count=previous+1,best=Math.min(s.retention.runBestSeconds[c.id]??Infinity,seconds),reset=resetRun(s);return{...reset,retention:{...reset.retention,activeRun:null,challengeStars:reset.retention.challengeStars+(previous===0?c.stars:0),runCompletions:{...reset.retention.runCompletions,[c.id]:count},runBestSeconds:{...reset.retention.runBestSeconds,[c.id]:best}}};}
 export function abortRunChallenge(s:GameState){if(!s.retention.activeRun)return s;const reset=resetRun(s);return{...reset,retention:{...reset.retention,activeRun:null}};}
 export const totalMastery=(s:GameState)=>hardwareIds.reduce((n,id)=>n+hardwareMasteryLevel(s,id),0);
-export const collectionSummary=(s:GameState)=>({hardware:s.lifetime.hardwareClasses.length,hardwareTotal:hardwareIds.length,components:Object.values(s.componentInventory).filter(v=>v>0).length,componentsTotal:Object.keys(s.componentInventory).length,itemTypes:s.lifetime.itemTypes.length,itemTypesTotal:9,artifacts:s.profile.artifacts.length,seasons:s.profile.completedSeasons.length});
+export const collectionSummary=(s:GameState)=>({hardware:s.lifetime.hardwareClasses.length,hardwareTotal:hardwareIds.length,components:Object.values(s.componentInventory).filter(v=>v>0).length,componentsTotal:Object.keys(s.componentInventory).length,itemTypes:s.lifetime.itemTypes.length,itemTypesTotal:Object.keys(itemTypes).length,artifacts:s.profile.artifacts.length,seasons:s.profile.completedSeasons.length});
 export const prestigeGate=(s:GameState,depth:number)=>depth<=4?null:depth===5?{ok:s.achievementPoints>=100,label:'100 Achievement Points'}:depth===6?{ok:totalMastery(s)>=10,label:'10 Hardware Mastery'}:depth===7?{ok:s.retention.challengeStars>=10,label:'10 Challenge Stars'}:{ok:s.achievementPoints>=500&&totalMastery(s)>=50&&s.retention.challengeStars>=25,label:'500 AP · 50 Mastery · 25 Stars'};
 export const masteryName=(id:HardwareId)=>id;

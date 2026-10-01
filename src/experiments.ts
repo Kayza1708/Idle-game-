@@ -1,23 +1,24 @@
-import { BALANCE, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, dataRate, spendResources } from './economy';
+import { BALANCE, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, dataRate, exactEconomyValue, spendScientificResources } from './economy';
+import {ScientificNumber} from './scientificNumber';
 import { randomItem } from './inventory';
 import { addEvent } from './telemetry';
 
 export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanalyse',architecture:'Architekturstudie',artifact:'Artefaktsuche'};
 export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+deepPrestigeBonus(s,'analysis')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
-export const experimentDuration=(length:ExperimentLength)=>length==='intro'?0:length==='short'?BALANCE.shortExperimentSeconds:BALANCE.experimentSeconds;
+export const experimentDuration=(type:ExperimentId,length:ExperimentLength)=>length==='intro'?0:BALANCE.analysisCosts[type][length].duration;
 export function analysisCost(type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){return BALANCE.analysisCosts[type][length]}
-export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),missingCredits=Math.max(0,cost.credits-s.credits),missingData=Math.max(0,cost.data-s.data),rate=dataRate(s);return{cost,balance:{credits:s.credits,data:s.data},missing:{credits:missingCredits,data:missingData},secondsToData:missingData<=0?0:rate>0?missingData/rate:Infinity};}
+export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),missingData=Math.max(0,cost.data-s.data),rate=dataRate(s);return{cost,balance:{data:s.data},missing:{data:missingData},secondsToData:missingData<=0?0:rate>0?missingData/rate:Infinity};}
 
 export function analysisDropTable(s:GameState,type:ExperimentId){
  const source=BALANCE.componentSources[type],total=Object.values(source).reduce((n,v)=>n+v,0),findBonus=1+(hasNode(s,'analysis3',1)?.30:hasNode(s,'analysis2',1)?.20:hasNode(s,'analysis1',1)?.10:0)+s.researchLevels.materialAnalysis*BALANCE.repeatableResearch.materialAnalysis.effectPerLevel;
  return (Object.entries(source) as [ComponentId,number][]).map(([id,weight])=>({id,weight,chance:weight/total,findBonus,source:BALANCE.components[id].source}));
 }
-export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){
+export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>,language:'de'|'en'='de'){
   const cost=analysisCost(type,length);
-  if(!s.discovered.includes('sbc'))return 'Einplatinencomputer noch nicht entdeckt.';
-  if(s.experiments.active)return `Analyseslot belegt durch ${experimentNames[s.experiments.active.type]}.`;
-  if(s.credits<cost.credits)return `${Math.ceil(cost.credits-s.credits)} Credits fehlen.`;
-  if(s.data<cost.data)return `${Math.ceil(cost.data-s.data)} Daten fehlen.`;
+  if(!s.discovered.includes('sbc'))return language==='de'?'Einplatinencomputer noch nicht entdeckt.':'Single-board computer not discovered yet.';
+  if(s.experiments.active)return language==='de'?`Analyseslot belegt durch ${experimentNames[s.experiments.active.type]}.`:`Analysis slot occupied by ${experimentNames[s.experiments.active.type]}.`;
+  const dataCost=ScientificNumber.from(cost.data);
+  if(exactEconomyValue(s,'data').compare(dataCost)<0)return language==='de'?`${Math.ceil(cost.data-s.data)} Daten fehlen.`:`${Math.ceil(cost.data-s.data)} Data missing.`;
   return null;
 }
 /** Split accumulated fractional rewards without losing values infinitesimally below an integer. */
@@ -32,7 +33,7 @@ export function guaranteeRare(found:Partial<Record<ComponentId,number>>){
   if(!hasRare)found.graphene=(found.graphene??0)+1;
 }
 export const analysisGuaranteesRare=(s:GameState)=>hasNode(s,'analysis3',1);
-const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(length)/experimentSpeed(s),cost=length==='intro'?{credits:0,data:0}:analysisCost(type,length);const paid=spendResources(s,cost);return addEvent({...paid,experiments:{...s.experiments,lastResult:null,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:cost.credits,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:cost.credits,dataCost:cost.data,durationSeconds});};
+const start=(s:GameState,type:ExperimentId,now:number,length:ExperimentLength)=>{const durationSeconds=experimentDuration(type,length)/experimentSpeed(s),cost=length==='intro'?{data:0}:analysisCost(type,length),dataCost=ScientificNumber.from(cost.data),paid=spendScientificResources(s,ScientificNumber.zero(),dataCost);return addEvent({...paid,experiments:{...s.experiments,lastResult:null,active:{id:length==='intro'?'intro':`exp-${s.nextId}`,type,length,startedAt:now,endsAt:now+durationSeconds*1000,durationSeconds,creditCost:0,dataCost:cost.data}},nextId:s.nextId+1},'experiment-start',now,{type,length,creditCost:0,dataCost:cost.data,durationSeconds});};
 export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:ExperimentLength='long'){
   if(length==='intro')return s; // removed legacy tutorial experiment; never start a new one
   const reason=analysisBlockReason(s,type,length);
@@ -49,7 +50,7 @@ export function completeExperiment(s:GameState,now:number,rng=Math.random,mode:'
     return addEvent(next,'experiment-complete',now,{id:active.id,type:active.type,length:active.length,legacy:true});
   }
   const reward=BALANCE.experimentRewards[active.type],scale=active.length==='short'?1/24:1,components=splitMaterialReward(reward.components*scale*(1+(hasNode(s,'analysis3',1)?.30:hasNode(s,'analysis2',1)?.20:hasNode(s,'analysis1',1)?.10:0)+s.researchLevels.materialAnalysis*BALANCE.repeatableResearch.materialAnalysis.effectPerLevel)+s.componentRemainder),research=splitMaterialReward(reward.research*scale+s.researchRemainder),blueprints=splitMaterialReward(reward.blueprints*scale*(1+s.researchLevels.blueprintAnalysis*BALANCE.repeatableResearch.blueprintAnalysis.effectPerLevel)+s.blueprintRemainder);
-  const found=componentGrant(s,active.type,components.whole,rng);if(analysisGuaranteesRare(s))guaranteeRare(found);const result={id:active.id,type:active.type,length:active.length,at:now,mode,components:{...found},blueprintFragments:blueprints.whole,researchFragments:research.whole} as const;let next:GameState=grantComponents({...s,componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true,lastResult:result}},found);
+  const found=componentGrant(s,active.type,components.whole,rng);if(analysisGuaranteesRare(s))guaranteeRare(found);const result={id:active.id,type:active.type,length:active.length,at:now,mode,components:{...found},blueprintFragments:blueprints.whole,researchFragments:research.whole} as const;let next:GameState=grantComponents({...s,impulseRelayBlueprint:s.impulseRelayBlueprint||active.type==='hardware',componentRemainder:components.remainder,researchFragments:s.researchFragments+research.whole,researchRemainder:research.remainder,blueprintFragments:s.blueprintFragments+blueprints.whole,blueprintRemainder:blueprints.remainder,experiments:{...s.experiments,active:null,completedIds:[...s.experiments.completedIds,active.id],firstReward:true,lastResult:result}},found);
   if(reward.itemChance*scale&&rng()<reward.itemChance*scale)next=randomItem(next,rng);
   const queued=next.experiments.queue[0],type=queued??undefined,queue=next.experiments.queue.slice(queued?1:0);
   if(type)next=start({...next,experiments:{...next.experiments,queue}},type,active.endsAt,'long');

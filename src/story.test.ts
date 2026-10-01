@@ -38,17 +38,17 @@ describe('Mira story and tutorial',()=>{
  });
 
  it('queues simultaneous first-time events instead of stacking dialogues',()=>{
-  const before={...newGame(0),story:migratedStory()},after={...before,hardware:10,hardwareCounts:{...before.hardwareCounts,calculator:10},level:1,qualityLevel:1,completedResearch:['operations'] as GameState['completedResearch'],lifetimeEligibleCredits:13e9};
+  const before={...newGame(0),story:migratedStory()},after={...before,hardware:10,hardwareCounts:{...before.hardwareCounts,calculator:10},level:1,qualityLevel:1,completedResearch:['operations'] as GameState['completedResearch'],lifetimeEligibleCredits:1e15};
   const next=syncStory(before,after);
   expect(next.story.open).toBe('first-hardware');
   expect(next.story.queue).toEqual(expect.arrayContaining(['first-training','first-research','first-milestone','prestige-ready']));
   expect(new Set([next.story.open,...next.story.queue]).size).toBe(1+next.story.queue.length);
  });
 
- it('keeps the chosen AI name through reload and prestige',()=>{let state:GameState={...newGame(0),aiName:'Nova',credits:13e9,runCreditsEarned:13e9,lifetimeCreditsEarned:13e9,lifetimeEligibleCredits:13e9};state=restore(serialize(state),10).state;expect(prestige(state).aiName).toBe('Nova')});
+ it('keeps the chosen AI name through reload and prestige',()=>{let state:GameState={...newGame(0),aiName:'Nova',credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15};state=restore(serialize(state),10).state;expect(prestige(state).aiName).toBe('Nova')});
 
  it('uses the actual first prestige reward in the saved dialogue state',()=>{
-  const before={...newGame(0),story:migratedStory(),credits:13e9,runCreditsEarned:13e9,lifetimeCreditsEarned:13e9,lifetimeEligibleCredits:13e9};
+  const before={...newGame(0),story:migratedStory(),credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15};
   const after=syncStory(before,prestige(before));
   expect(after.story.seen).toContain('first-prestige');expect(after.telemetry.prestigeHistory.at(-1)?.intEarned).toBeGreaterThan(0);
  });

@@ -11,12 +11,15 @@ class MemoryStorage implements StorageLike {
 }
 
 describe('save format', () => {
+  it('migrates v31 saves with safe defaults for early prestige settings',()=>{const old:any=newGame(123);delete old.trainingQueue;delete old.scannerTarget;delete old.automation.reservePercent;delete old.automation.shoppingElapsed;const restored=restore(JSON.stringify({version:31,state:old}),456);expect(restored.error).toBeUndefined();expect(restored.state.trainingQueue).toEqual([]);expect(restored.state.scannerTarget).toBeNull();expect(restored.state.automation).toMatchObject({reservePercent:0,shoppingElapsed:0});});
   it('assigns a persistent anonymous campaign id to a fresh local game',()=>{const storage=new MemoryStorage(),first=loadGame(storage,100).state;expect(first.telemetry.campaignId).not.toBe('unassigned');persistGame(storage,first,100);expect(loadGame(storage,100).state.telemetry.campaignId).toBe(first.telemetry.campaignId)});
 
   it('round-trips a versioned game state', () => {
     const state = { ...newGame(123), credits: 42.25, level: 3, training: 17 };
     expect(restore(serialize(state), 999)).toEqual({ state });
   });
+  it('migrates v29 training progress to the fixed elapsed-time contract',()=>{const old={...newGame(0),training:45,activeTraining:{track:'quality' as const,workRequired:180,creditCost:25,dataCost:2,baseDuration:180,startingRate:2}};const result=restore(JSON.stringify({version:29,state:old}),0);expect(result.migrated).toBe(true);expect(result.state.activeTraining).toMatchObject({track:'quality',workRequired:90,creditCost:0,startingRate:1});expect(result.state.training).toBe(22.5);expect(result.state.trainingBoostUntil).toBe(0);});
+
   it('rejects corrupt and incompatible saves without throwing', () => {
     expect(restore('{nope', 50).error).toMatch(/beschädigt/);
     expect(restore('{"version":99,"state":{}}', 50).error).toMatch(/anderen Version/);
@@ -98,3 +101,5 @@ describe('save v21 progression migration',()=>{
 describe('v24 retention migration',()=>{it('adds challenge run persistence to v23 saves',()=>{const old=newGame(1000) as any;delete old.retention.activeRun;delete old.retention.runCompletions;delete old.retention.runBestSeconds;const r=restore(JSON.stringify({version:23,state:old}),2000);expect(r.error).toBeUndefined();expect(r.migrated).toBe(true);expect(r.state.retention.activeRun).toBeNull();expect(r.state.retention.runCompletions).toEqual({});expect(r.state.retention.runBestSeconds).toEqual({});});});
 
 describe('v25 localization migration',()=>{it('adds language and number format to v24 saves without losing settings',()=>{const old=newGame(1000) as any;old.settings={effects:false,buyMode:10,musicEnabled:true,musicVolume:.4,sfxMuted:true,sfxVolume:.2};const r=restore(JSON.stringify({version:24,state:old}),2000);expect(r.error).toBeUndefined();expect(r.migrated).toBe(true);expect(r.state.settings).toMatchObject({effects:false,buyMode:10,language:'de',numberFormat:'auto'});});});
+
+it('migrates v30 saves with persistent relay progress safely',()=>{const old:any=newGame(1000);delete old.impulseRelayBlueprint;old.inventory=[{id:'legacy-relay',type:'impulse-relay',rarity:'common',level:0,locked:false}];const r=restore(JSON.stringify({version:30,state:old}),2000);expect(r.error).toBeUndefined();expect(r.migrated).toBe(true);expect(r.state.impulseRelayBlueprint).toBe(false);expect(r.state.inventory[0].relayTaps).toBe(0);});

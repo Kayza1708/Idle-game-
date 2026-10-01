@@ -269,7 +269,7 @@ const breakthroughs:Record<BreakthroughId,{name:L;effect:L}>={
  },
  graph:{
   name:l('Optimized Training Graph','Optimierter Trainingsgraph','Grafo de entrenamiento optimizado','Graphe d’entraînement optimisé','Grafo de treinamento otimizado','Grafo di training ottimizzato','Zoptymalizowany graf treningu'),
-  effect:l('+20% Training','+20 % Training','+20 % Entrenamiento','+20 % Entraînement','+20 % Treinamento','+20 % Training','+20 % Treningu')
+  effect:l('Legacy effect: fixed training durations are not accelerated','Legacy-Effekt: feste Trainingszeiten werden nicht beschleunigt','Efecto heredado: la duración fija no se acelera','Effet historique : la durée fixe n’est pas accélérée','Efeito legado: a duração fixa não é acelerada','Effetto legacy: la durata fissa non viene accelerata','Efekt historyczny: stały czas treningu nie jest przyspieszany')
  },
  planning:{
   name:l('Autonomous Lab Planning','Autonome Laborplanung','Planificación autónoma de laboratorio','Planification autonome du laboratoire','Planejamento autônomo de laboratório','Pianificazione autonoma laboratorio','Autonomiczne planowanie laboratorium'),
@@ -352,6 +352,7 @@ const rarities:Record<Rarity,L>={
 export const rarityText=(id:Rarity,language:Language)=>pick(rarities[id],language);
 
 const itemNames:Record<ItemTypeId,L>={
+ 'impulse-relay':l('Impulse Relay','Impulsrelais','Relé de impulso','Relais d’impulsion','Relé de impulso','Relè d’impulso','Przekaźnik impulsowy'),
  'quantum-chip':l('Quantum Chip','Quantenchip','Chip cuántico','Puce quantique','Chip quântico','Chip quantistico','Chip kwantowy'),
  'neural-asic':l('Neural ASIC','Neural-ASIC','ASIC neuronal','ASIC neuronal','ASIC neural','ASIC neurale','Neuralny ASIC'),
  'photonic-array':l('Photonic Array','Photonenfeld','Matriz fotónica','Réseau photonique','Matriz fotônica','Array fotonico','Macierz fotoniczna'),
@@ -366,11 +367,12 @@ const itemNames:Record<ItemTypeId,L>={
 export const itemText=(id:ItemTypeId,language:Language)=>pick(itemNames[id],language);
 
 const effects:Record<ItemEffect,L>={
+ relay:l('Every 10th paid tap: +2 seconds of Credits','Jeder 10. vergütete Tap: +2 Sekunden Credits','Cada 10.º toque pagado: +2 segundos de créditos','Chaque 10e impulsion payée : +2 secondes de crédits','Cada 10.º toque pago: +2 segundos de créditos','Ogni 10° tap pagato: +2 secondi di crediti','Co 10. płatne kliknięcie: +2 sekundy kredytów'),
  compute:l('Compute','Compute','Cómputo','Calcul','Computação','Compute','Obliczenia'),
  credits:l('Credits','Credits','Créditos','Crédits','Créditos','Crediti','Kredyty'),
  data:l('Data','Daten','Datos','Données','Dados','Dati','Dane'),
  research:l('Research','Forschung','Investigación','Recherche','Pesquisa','Ricerca','Badania'),
- training:l('Training','Training','Entrenamiento','Entraînement','Treinamento','Training','Trening'),
+ training:l('Legacy training bonus (fixed duration unchanged)','Legacy-Trainingsbonus (feste Dauer unverändert)','Bono de entrenamiento heredado (duración fija)','Bonus d’entraînement historique (durée fixe)','Bônus legado de treino (duração fixa)','Bonus training legacy (durata fissa)','Historyczny bonus treningu (stały czas)'),
  experiment:l('Analysis','Analyse','Análisis','Analyse','Análise','Analisi','Analiza'),
  components:l('Components','Komponenten','Componentes','Composants','Componentes','Componenti','Komponenty'),
  tap:l('Tap','Tap','Toque','Impulsion','Toque','Tap','Kliknięcie'),
@@ -409,6 +411,9 @@ const branches=[
 const roman=['','I','II','III','IV','V','VI','VII','VIII'];
 
 const prestigeEffects:Record<PrestigeUpgradeId,L>={
+ shoppingAgent:l('Per-class calculator and single-board computer autobuyers with a shared reserve.','Klassenweise Autobuyer für Taschenrechner und Einplatinencomputer mit gemeinsamer Reserve.','','','','',''),
+ trainingPlan:l('Queue two model training jobs; data is charged only when each job starts.','Zwei Modelltrainings vormerken; Daten werden erst beim jeweiligen Start abgezogen.','','','','',''),
+ componentScanner:l('Double one accessible passive component weight without adding finds.','Verdoppelt ein zugängliches passives Komponentengewicht, ohne zusätzliche Funde zu erzeugen.','','','','',''),
  dataArchive1:l('×1.25 data production.','×1,25 Datenproduktion.','×1,25 producción de datos.','×1,25 production de données.','×1,25 produção de dados.','×1,25 produzione dati.','×1,25 produkcji danych.'),
  dataArchive2:l('×1.60 data production.','×1,60 Datenproduktion.','×1,60 producción de datos.','×1,60 production de données.','×1,60 produção de dados.','×1,60 produzione dati.','×1,60 produkcji danych.'),
  dataArchive3:l('×2.25 data production.','×2,25 Datenproduktion.','×2,25 producción de datos.','×2,25 production de données.','×2,25 produção de dados.','×2,25 produzione dati.','×2,25 produkcji danych.'),
@@ -456,6 +461,7 @@ const prestigeEffects:Record<PrestigeUpgradeId,L>={
 };
 
 export const prestigeText=(id:PrestigeUpgradeId,language:Language)=>{
+ if(id==='shoppingAgent'||id==='trainingPlan'||id==='componentScanner')return{name:pick(id==='shoppingAgent'?l('Shopping Agent','Einkaufsagent','','','','',''):id==='trainingPlan'?l('Training Plan','Trainingsplan','','','','',''):l('Component Scanner','Komponentenscanner','','','','',''),language),effect:pick(prestigeEffects[id],language)};
  const depth=Number(id.match(/([1-8])$/)?.[1]??1);
  const branch=id.startsWith('dataArchive')?0:id.startsWith('computeNet')?1:id.startsWith('analysis')?2:id.startsWith('labs')?3:4;
  return {

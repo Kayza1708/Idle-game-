@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { GameState, newGame, queueResearchProject, startResearchProject, startTraining } from './economy';
+import { GameState, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige } from './prestige';
 import { advance, advanceTo, debugAdvance, settleResearchCompletions, simulationNow, type ResearchCompletionStep } from './simulation';
@@ -28,20 +28,20 @@ describe('simulation clock regressions',()=>{
   });
 
   it.each([true,false])('completes first research during %s simulation without a queue',(active:boolean)=>{
-    const started=startResearchProject(researchReady(),'operations'),done=advance(started,181,active).state;
-    expect(done.savedAt).toBe(181_000);expect(done.researchLabs[0]).toBeNull();expect(done.completedResearch).toEqual(['operations']);expect(done.lifetime.researchCompleted).toBe(1);
+    const duration=researchDuration('operations'),started=startResearchProject(researchReady(),'operations'),done=advance(started,duration+1,active).state;
+    expect(done.savedAt).toBe((duration+1)*1000);expect(done.researchLabs[0]).toBeNull();expect(done.completedResearch).toEqual(['operations']);expect(done.lifetime.researchCompleted).toBe(1);
   });
 
   it('starts one queued successor with positive remaining time and completes it once',()=>{
     let started=startResearchProject({...researchReady(),nodes:['labs2','labs3']},'operations');started=queueResearchProject(started,'blueprints');
-    const first=advance(started,181).state;
+    const first=advance(started,researchDuration('operations')+1).state;
     expect(first.completedResearch).toEqual(['operations']);expect(first.researchLabs[0]?.id).toBe('blueprints');expect(first.researchLabs[0]!.endsAt).toBeGreaterThan(first.savedAt);
     const done=advance(first,10_000).state;
     expect(done.completedResearch).toEqual(['operations','blueprints']);expect(done.lifetime.researchCompleted).toBe(2);expect(done.researchLabs.every(lab=>lab===null)).toBe(true);
   });
 
   it('reloads immediately before completion and persists the single reward',()=>{
-    const storage=new MemoryStorage(),started=startResearchProject(researchReady(),'operations'),near=advance(started,179.9).state;
+    const storage=new MemoryStorage(),started=startResearchProject(researchReady(),'operations'),duration=researchDuration('operations'),near=advance(started,duration-.1).state;
     persistGame(storage,near,near.savedAt);const loaded=loadGame(storage,near.savedAt).state,done=advance(loaded,.2).state;
     expect(done.completedResearch).toEqual(['operations']);expect(done.lifetime.researchCompleted).toBe(1);expect(done.researchLabs[0]).toBeNull();
     persistGame(storage,done,done.savedAt);const reloaded=loadGame(storage,done.savedAt).state;

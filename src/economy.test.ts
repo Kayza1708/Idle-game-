@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { BALANCE, GameState, buyHardware, computeAllocation, creditRate, dataRate, hardwareBulkCost, hardwareCost, newGame, researchRate, researchDuration, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, trainingGoal, startResearchProject, researchLabCount } from './economy';
+import { BALANCE, GameState, buyHardware, computeAllocation, creditRate, dataRate, hardwareBulkCost, hardwareCost, newGame, researchRate, researchDuration, researchProjectDataCost, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, trainingGoal, startResearchProject, researchLabCount } from './economy';
 import { advance, advanceTo } from './simulation';
 import {restore,serialize} from './storage';
 
 describe('economy', () => {
   it('uses the calculator balance and exact geometric bulk sum', () => {
-    expect(hardwareCost('calculator', 1)).toBeCloseTo(11.5, 12);
+    expect(hardwareCost('calculator', 1)).toBeCloseTo(17.55, 12);
     expect(hardwareBulkCost('calculator', 1, 3)).toBeCloseTo(hardwareCost('calculator', 1) + hardwareCost('calculator', 2) + hardwareCost('calculator', 3), 12);
   });
   it('does not buy with insufficient credits', () => {
@@ -50,20 +50,20 @@ describe('economy', () => {
 });
 
 describe('persistent research laboratories',()=>{
-  it('charges once and completes from elapsed offline time',()=>{const base={...newGame(0),credits:10_000,data:1_000,researchPoints:100,discovered:['calculator','sbc'] as GameState['discovered']},started=startResearchProject(base,'operations');expect(started.credits).toBe(10_000);expect(started.data).toBe(750);expect(started.researchPoints).toBe(100);expect(started.researchLabs[0]?.endsAt).toBe(180_000);const done=advance(started,180).state;expect(done.completedResearch).toContain('operations');expect(done.researchLabs[0]).toBeNull();expect(done.credits).toBeGreaterThan(5_000)});
+  it('charges once and completes from elapsed offline time',()=>{const base={...newGame(0),credits:10_000,data:1_000,researchPoints:100,discovered:['calculator','sbc'] as GameState['discovered']},cost=researchProjectDataCost('operations'),duration=researchDuration('operations'),started=startResearchProject(base,'operations');expect(started.credits).toBe(10_000);expect(started.data).toBe(1_000-cost);expect(started.researchPoints).toBe(100);expect(started.researchLabs[0]?.endsAt).toBe(duration*1000);const done=advance(started,duration).state;expect(done.completedResearch).toContain('operations');expect(done.researchLabs[0]).toBeNull();expect(done.credits).toBeGreaterThan(5_000)});
   it('cannot start or charge the same project twice, including after completion',()=>{const base={...newGame(0),credits:10_000,data:1_000,researchPoints:100},once=startResearchProject(base,'operations');expect(startResearchProject(once,'operations')).toBe(once);const done=advance(once,180).state;expect(startResearchProject(done,'operations')).toBe(done)});
   it('keeps the base lab available without paid slots',()=>{expect(researchLabCount(newGame(0))).toBe(1)});
 });
 
 describe('fixed research contracts',()=>{
-  it('stores the configured duration at start and charges all data exactly once',()=>{const base={...newGame(0),credits:1e6,data:1e6,researchPoints:1e6},duration=researchDuration('operations'),started=startResearchProject(base,'operations');expect(started.researchLabs[0]).toMatchObject({startedAt:0,endsAt:duration*1000});expect(base.data-started.data).toBe(BALANCE.researchProjects.operations.data);expect(startResearchProject(started,'operations')).toBe(started)});
-  it('refuses a start when one unit of data is missing',()=>{const project=BALANCE.researchProjects.operations,base={...newGame(0),credits:0,data:project.data-1,researchPoints:0};expect(startResearchProject(base,'operations')).toBe(base)});
+  it('stores the configured duration at start and charges all data exactly once',()=>{const base={...newGame(0),credits:1e6,data:1e6,researchPoints:1e6},duration=researchDuration('operations'),started=startResearchProject(base,'operations');expect(started.researchLabs[0]).toMatchObject({startedAt:0,endsAt:duration*1000});expect(base.data-started.data).toBe(researchProjectDataCost('operations'));expect(startResearchProject(started,'operations')).toBe(started)});
+  it('refuses a start when one unit of data is missing',()=>{const cost=researchProjectDataCost('operations'),base={...newGame(0),credits:0,data:cost-1,researchPoints:0};expect(startResearchProject(base,'operations')).toBe(base)});
 });
 
 
 describe('repeatable research progression',()=>{
- it('uses the configured duration growth, deterministic data growth and configured cap',()=>{const rule=BALANCE.repeatableResearch.dataGeneration;expect(repeatableResearchDuration('dataGeneration',1)).toBe(rule.baseSeconds);expect(repeatableResearchDuration('dataGeneration',5)).toBeCloseTo(rule.baseSeconds*BALANCE.repeatableResearchDurationGrowth**4);expect(repeatableResearchDuration('dataGeneration',500)).toBe(BALANCE.repeatableResearchDurationCapSeconds);expect(repeatableResearchDataCost('dataGeneration',5)).toBeCloseTo(rule.baseDataCost*BALANCE.repeatableResearchDataGrowth**4)});
- it('charges once, survives reload and completes exactly one level offline',()=>{let s={...newGame(0),credits:1e6,data:1e6,discovered:['calculator','sbc'] as GameState['discovered']};s=startResearchProject(s,'dataGeneration');const lab=s.researchLabs[0]!;expect(lab.durationSeconds).toBe(90);expect(s.data).toBe(1e6-40);s=restore(serialize(advance(s,89).state),89_000).state;const done=advance(s,2,false).state;expect(done.researchLevels.dataGeneration).toBe(1);expect(done.telemetry.recentEvents.filter(e=>e.type==='research-complete')).toHaveLength(1)});
+ it('uses the configured duration growth, deterministic data growth and configured cap',()=>{const rule=BALANCE.researchCategories.data;expect(repeatableResearchDuration('dataGeneration',1)).toBe(rule.baseDuration);expect(repeatableResearchDuration('dataGeneration',5)).toBeCloseTo(rule.baseDuration*BALANCE.researchDurationGrowth**4);expect(repeatableResearchDuration('dataGeneration',500)).toBe(BALANCE.researchDurationCapSeconds);expect(repeatableResearchDataCost('dataGeneration',5)).toBeCloseTo(Math.ceil(rule.baseData*BALANCE.researchDataGrowth**4),10)});
+ it('charges once, survives reload and completes exactly one level offline',()=>{let s={...newGame(0),credits:1e6,data:1e6,discovered:['calculator','sbc'] as GameState['discovered']};s=startResearchProject(s,'dataGeneration');const lab=s.researchLabs[0]!;expect(lab.durationSeconds).toBe(180);expect(s.data).toBe(1e6-BALANCE.researchCategories.data.baseData);s=restore(serialize(advance(s,179).state),179_000).state;const done=advance(s,2,false).state;expect(done.researchLevels.dataGeneration).toBe(1);expect(done.telemetry.recentEvents.filter(e=>e.type==='research-complete')).toHaveLength(1)});
 });
 
 describe('A-H hardware acceptance contract',()=>{
@@ -75,5 +75,5 @@ describe('A-H hardware acceptance contract',()=>{
 
 describe('data-only research starts',()=>{
  it('starts repeatable and one-time research without credits or research points',()=>{const repeatable={...newGame(0),discovered:['calculator','sbc'] as GameState['discovered'],data:1000,credits:0,researchPoints:0},a=startResearchProject(repeatable,'dataGeneration');expect(a.researchLabs[0]?.id).toBe('dataGeneration');expect(a.credits).toBe(0);expect(a.researchPoints).toBe(0);const oneTime={...repeatable,data:1000},b=startResearchProject(oneTime,'operations');expect(b.researchLabs[0]?.id).toBe('operations');expect(b.credits).toBe(0);expect(b.researchPoints).toBe(0)});
- it('leaves state untouched without enough data and charges exactly once under a double click',()=>{const poor={...newGame(0),discovered:['calculator','sbc'] as GameState['discovered'],data:39,credits:0,researchPoints:0};expect(startResearchProject(poor,'dataGeneration')).toBe(poor);const ready={...poor,data:40},once=startResearchProject(ready,'dataGeneration');expect(once.data).toBe(0);expect(startResearchProject(once,'dataGeneration')).toBe(once)});
+ it('leaves state untouched without enough data and charges exactly once under a double click',()=>{const poor={...newGame(0),discovered:['calculator','sbc'] as GameState['discovered'],data:BALANCE.researchCategories.data.baseData-1,credits:0,researchPoints:0};expect(startResearchProject(poor,'dataGeneration')).toBe(poor);const ready={...poor,data:BALANCE.researchCategories.data.baseData},once=startResearchProject(ready,'dataGeneration');expect(once.data).toBe(0);expect(startResearchProject(once,'dataGeneration')).toBe(once)});
 });

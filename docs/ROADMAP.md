@@ -372,3 +372,76 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Fünf zweitseitige Kapitel reagieren einmalig auf Quality-Abschluss, 1.000 gleichzeitige Nutzer, Prestige, ausgerüstetes Item und Server-Rack-Kauf.
 - [x] Bestehende Dialogwarteschlange priorisiert Tutorialtexte und ordnet gleichzeitig erreichte Kapitel deterministisch.
 - [x] Journal, getrennte Story-Einstellung, Altspielstand-Abgleich sowie deutsche und englische Texte sind umgesetzt.
+
+## Schicht-1-Economy-Kalibrierung – 30. September 2026
+
+- [x] Alle 15 Hardwareklassen sind credit-only und ohne Progressionsvoraussetzungen kaufbar; spätere Klassen bleiben mit Preis und Sparfortschritt aufklappbar sichtbar.
+- [x] ScientificNumber-Einzel-/Bulk-/Max-Käufe, exakter Abzug und einmalige Meilensteinkanten sind getestet.
+- [x] Reproduzierbare Vorher-/Nachher-Messungen für Strategie A/B sowie eine Kontrollmessung mit allen Systemen sind dokumentiert.
+- [x] Erstkauf-Zeitfenster Klassen 1–5, Klasse 6 frühestens nach drei Stunden sowie Rate-/Anteilsgrenzen sind nachgewiesen.
+- [ ] Zwei einzelne 2–5-Minuten-Sparphasen vor Klasse 5; die ROI-Strategie unterbricht sie derzeit durch rentable Zwischenkäufe.
+
+## Schicht-2-Economy – Data und Modelltraining (30. September 2026)
+
+- [x] Data-Grundrate auf `0,1 × sqrt(users)` und sämtliche zusätzlichen Data-Prozentboni auf einen gemeinsamen, unter ×5 abgeflachten Multiplikator umgestellt.
+- [x] Quality-/Efficiency-Kosten und -Dauern sind getrennt, data-only, beim Start fest gespeichert und unabhängig von Compute, Taps und späteren Beschleunigern.
+- [x] Online-/Offline-/Reload-Abschluss, Doppelklickschutz, exakter Abzug, große Zahlen und unveränderte Hardwareparameter sind getestet.
+- [x] Basis-, aktiver, passiver und Research-/Analyse-Kontrolllauf sind reproduzierbar dokumentiert.
+- [ ] Ziel „erstes Training nach 3–5 aktiven Minuten“: gemessen sind 75 Sekunden.
+- [ ] Steigende reine Ansparpausen: im aggressiven 24-h-Hardwarelauf durch schneller wachsende Nutzer-/Data-Rate nicht monoton erfüllt.
+
+## Schicht-3-Economy – Forschung und Analysen (1. Oktober 2026)
+
+- [x] Alle wiederholbaren und einmaligen Forschungen verwenden vier zentrale Kategorien, reine Data-Kosten, ×1,85 Kostenwachstum, ×1,35 Dauerwachstum und den 72-h-Cap.
+- [x] Analysen verwenden ihren unabhängigen Slot, die sechs vorgegebenen Data-/Dauerverträge und keine Creditkosten.
+- [x] Startdauer, exakter Abzug, parallele Slots, Wiederholung sowie Online-/Offline-/Reload-Abschluss sind getestet.
+- [x] Reproduzierbare 1-/7-Tage-Läufe für beide Prioritäten und aktive/passive Sitzungsprofile sind dokumentiert.
+- [ ] Erste Forschung nach 5–10 aktiven Minuten: gemessen sind 20 Sekunden.
+- [ ] Erste Hardwareanalyse nach 15–30 aktiven Minuten: gemessen sind 20 Sekunden.
+- [ ] Frühe Data-Priorisierung: durch acht Stunden Produktion vor der ersten Sitzung aktuell nicht erzwungen.
+
+## Schicht-3-Messkorrektur (1. Oktober 2026)
+
+- [x] Kampagnenstart bei `t=0` ohne vorgeschaltete Offline-Produktion simuliert.
+- [x] 90-Minuten-Aktivlauf, Rückkehrlauf sowie 1-/7-Tage-Profile trennen aktive, abwesende und gutgeschriebene Zeit.
+- [x] Data-Entscheidungen und Abschlüsse reproduzierbar protokolliert.
+- [x] Crafting-Blockade pro Rezept und vollständiger Zutatenkette diagnostiziert.
+- [x] Erstes Katalogrezept ohne Zuschüsse, neue Quellen oder Drop-Erhöhungen natürlich herstellbar.
+- [ ] Frühziele für Forschung und Analyse: mit 130 beziehungsweise 390 aktiven Sekunden weiterhin verfehlt; keine Parameteränderung in diesem Auftrag.
+
+## Schicht 3 v3 – Frühstart und Impulsrelais (1. Oktober 2026)
+
+- [x] Minimale ganzzahlige Kosten 363/57.623 über echte Entscheidungstimeline reproduzierbar bestimmt.
+- [x] Forschungs- und Hardwareanalysefenster in Strategien A/B sowie Seeds 1708/42/2026 erreicht.
+- [x] Impulsrelais mit permanentem Hardwareanalyse-Bauplan, echtem Rezept und fünf Minuten Werkbankzeit ergänzt.
+- [x] Persistenter ScientificNumber-Tapbonus, Prestigeerhalt und Ausrüstungssperre getestet.
+- [ ] Herstellungsziel 45–75 aktive Minuten: tatsächlich 30 Minuten; feste Vorgaben und Drops wurden nicht verändert.
+
+## Implementierungs-Audit – 1. Oktober 2026
+
+- [x] Save-Koordinator, Komponentenpfade, Challenges, Forschung/Analysen, Crafting/Equipment und Rückkehrabrechnung mit Code und Tests geprüft.
+- [x] Drei nachgewiesene Restfehler behoben: gesperrtes Tutorial-Rezeptziel, falscher Impulsrelais-Prozenttext, veralteter Itemtypen-Gesamtzähler.
+- [ ] Vollständiger Browserlauf und 390-px-Sichtprüfung: in dieser Umgebung kein Browser verfügbar.
+- [ ] Langzeitsuite in einer Umgebung mit ausreichendem Zeitbudget vollständig abschließen.
+## Prestige-Vorschau und Reset-Sicherheit – 1. Oktober 2026
+
+- [x] Reine zentrale Vorschau und tatsächlichen Reset auf denselben Vertrag gestellt.
+- [x] Mobiles Bestätigungsfenster mit INT, Bonus, Reset/Erhalt und laufenden Aufträgen ergänzt.
+- [x] Doppelklick/Reload, dauerhaften INT-Bonus, Auftragserhalt und ersten Equipment-Platz getestet.
+- [x] Aktive 90-Minuten-Vergleichsmessung ohne Änderung der Prestigeparameter dokumentiert.
+- [ ] Bestätigungsfenster und direkter Equipment-Weg bei 390 px in einem echten Browser prüfen.
+
+## INT-Anspruchskurve – 1. Oktober 2026
+
+- [x] Ausschließlich die Umsatzschwelle der bestehenden kumulativen INT-Formel kalibriert.
+- [x] Kleinsten ganzzahligen Schwellenwert für einen normalen Entscheid bei 45 Minuten deterministisch bestimmt.
+- [x] Seeds 1708/42/2026, Vergleich ohne Prestige und zweiten Run dokumentiert.
+- [x] Anspruch, Vorschau, Reset und Export verwenden weiterhin dieselbe zentrale Formel.
+- [ ] Spürbaren Nutzen des zweiten Runs im folgenden Prestige-Unlock-Auftrag untersuchen; keine Ersatzboni in dieser Kalibrierung.
+
+## Frühe Prestige-Unlocks – 1. Oktober 2026
+
+- [x] `shoppingAgent`, `trainingPlan` und `componentScanner` als unabhängige Einstiegswurzeln ergänzt.
+- [x] ScientificNumber-Reserve, persistente Trainingsqueue und normalisierte passive Scannergewichte implementiert.
+- [x] Reset, Reload, Online/Offline und Schutz vor doppelter Knotenwirkung getestet.
+- [ ] Kompakte Automation und Knotendetails bei 390 px manuell prüfen.
