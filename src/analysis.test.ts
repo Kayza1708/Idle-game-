@@ -1,17 +1,17 @@
 import {describe,expect,it} from 'vitest';
-import {BALANCE,GameState,newGame,startResearchProject} from './economy';
-import {analysisAffordability,analysisBlockReason,cancelExperiment,completeExperiment,queueExperiment} from './experiments';
+import {BALANCE,exactEconomyValue,GameState,newGame,startResearchProject} from './economy';
+import {analysisAffordability,analysisBlockReason,cancelExperiment,experimentDuration,experimentSpeed,completeExperiment,queueExperiment} from './experiments';
 import {advance} from './simulation';
 import {restore,serialize} from './storage';
 
-const playable=(now=0):GameState=>({...newGame(now),discovered:['calculator','sbc'],credits:100_000,data:10_000,researchPoints:1_000});
+const playable=(now=0):GameState=>({...newGame(now),discovered:['calculator','sbc'],credits:100_000,data:100_000,researchPoints:1_000});
 
 describe('transactional component analyses',()=>{
  it.each(['short','long'] as const)('starts and completes a %s hardware analysis from a realistic save',length=>{
   const base=restore(serialize(playable())).state,cost=BALANCE.analysisCosts.hardware[length];
   const started=queueExperiment(base,'hardware',base.savedAt,length);
   expect(started.experiments.active?.length).toBe(length);
-  expect(started.credits).toBeCloseTo(base.credits-cost.credits,6);
+  expect(started.credits).toBe(base.credits);
   expect(started.data).toBeCloseTo(base.data-cost.data,6);
   const done=advance(started,(started.experiments.active!.endsAt-started.savedAt)/1000,false,()=>1).state;
   expect(done.experiments.active).toBeNull();expect(done.components).toBeGreaterThan(0);
@@ -24,7 +24,7 @@ describe('transactional component analyses',()=>{
  });
  it('reports exact shortages, rejects double starts, and cancels without refund',()=>{
   const poor={...playable(),credits:1,data:2},cost=BALANCE.analysisCosts.artifact.short;
-  expect(analysisBlockReason(poor,'artifact','short')).toBe(`${cost.credits-1} Credits fehlen.`);
+  expect(analysisBlockReason(poor,'artifact','short')).toBe(`${cost.data-2} Daten fehlen.`);
   const started=queueExperiment(playable(),'hardware',0,'short'),again=queueExperiment(started,'artifact',0,'long');
   expect(again.experiments.active?.id).toBe(started.experiments.active?.id);expect(again.credits).toBe(started.credits);
   const cancelled=cancelExperiment(started);expect(cancelled.experiments.active).toBeNull();expect(cancelled.credits).toBe(started.credits);
@@ -64,3 +64,10 @@ it('keeps deterministic online/offline result details and does not rebook them o
 it('repeat start uses normal resource and occupied-slot checks',()=>{const base=playable(),started=queueExperiment(base,'hardware',0,'short'),end=started.experiments.active!.endsAt,done=completeExperiment(started,end,()=>.2),poor={...done,credits:0,data:0},blocked=queueExperiment(poor,done.experiments.lastResult!.type,end,done.experiments.lastResult!.length);expect(blocked.experiments.active).toBeNull();expect(blocked.experiments.lastResult).toEqual(done.experiments.lastResult);expect(queueExperiment(started,'hardware',1,'short').experiments.active?.id).toBe(started.experiments.active?.id)});
 
 it('offline report contains only component and analysis gains from that interval',()=>{const seeded={...playable(),componentInventory:{...playable().componentInventory,circuits:99},components:99},started=queueExperiment(seeded,'hardware',0,'short'),seconds=started.experiments.active!.endsAt/1000,{state,report}=advance(started,seconds,false,()=>.1);expect(report.analysisResults).toHaveLength(1);expect(report.components).toEqual(report.analysisResults[0].components);expect(report.components.circuits).not.toBe(state.componentInventory.circuits);expect(report.analysisResults[0].mode).toBe('offline')});
+
+describe('data-only analysis contracts',()=>{
+ it('uses the configured per-type short and long durations and no credits',()=>{const base={...playable(),data:1e6};for(const type of ['hardware','architecture','artifact'] as const)for(const length of ['short','long'] as const){const cost=BALANCE.analysisCosts[type][length],started=queueExperiment(base,type,0,length);expect(started.credits).toBe(base.credits);expect(started.data).toBe(base.data-cost.data);expect(started.experiments.active?.durationSeconds).toBeCloseTo(cost.duration/experimentSpeed(base));}});
+ it('subtracts an exactly funded analysis cost to zero',()=>{const base=playable(),cost=BALANCE.analysisCosts.hardware.short.data,funded={...base,data:cost,exactEconomy:{...base.exactEconomy,data:{m:cost,e:0}}},started=queueExperiment(funded,'hardware',0,'short');expect(exactEconomyValue(started,'data').isZero()).toBe(true);expect(started.credits).toBe(funded.credits);});
+ it('freezes the start-time analysis speed when bonuses change later',()=>{const boosted={...playable(),researchLevels:{...playable().researchLevels,labAutomation:4}},started=queueExperiment(boosted,'hardware',0,'long'),ends=started.experiments.active!.endsAt,changed={...started,researchLevels:{...started.researchLevels,labAutomation:0}};expect(advance(changed,60).state.experiments.active?.endsAt).toBe(ends);});
+ it('starts research and analysis in parallel without overdrawing shared Data',()=>{const total=BALANCE.researchCategories.data.baseData+BALANCE.analysisCosts.hardware.short.data,base={...playable(),data:total},research=startResearchProject(base,'dataGeneration'),analysis=queueExperiment(research,'hardware',0,'short');expect(research.researchLabs.some(Boolean)).toBe(true);expect(analysis.experiments.active).not.toBeNull();expect(exactEconomyValue(analysis,'data').toNumber()).toBeCloseTo(0,8);expect(queueExperiment({...research,data:BALANCE.analysisCosts.hardware.short.data-1},'hardware',0,'short').experiments.active).toBeNull();});
+});
