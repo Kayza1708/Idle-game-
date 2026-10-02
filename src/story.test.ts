@@ -1,6 +1,7 @@
+import {ScientificNumber} from './scientificNumber';
 import { describe, expect, it } from 'vitest';
 import { type GameState, newGame, registerTap, usersRate } from './economy';
-import { prestige } from './prestige';
+import { prestige,axiomReset } from './prestige';
 import { continueDialogue, dialogues, migratedStory, prepareStoryOnLoad, reopenChapter, skipTutorial, syncStory, toggleStory } from './story';
 import { restore, serialize } from './storage';
 
@@ -38,17 +39,17 @@ describe('Mira story and tutorial',()=>{
  });
 
  it('queues simultaneous first-time events instead of stacking dialogues',()=>{
-  const before={...newGame(0),story:migratedStory()},after={...before,hardware:10,hardwareCounts:{...before.hardwareCounts,calculator:10},level:1,qualityLevel:1,completedResearch:['operations'] as GameState['completedResearch'],lifetimeEligibleCredits:1e15};
+  const before={...newGame(0),story:migratedStory()},after={...before,hardware:10,hardwareCounts:{...before.hardwareCounts,calculator:10},level:1,qualityLevel:1,completedResearch:['operations'] as GameState['completedResearch'],lifetimeEligibleCredits:1e15,cycleEligibleCredits:1e15};
   const next=syncStory(before,after);
   expect(next.story.open).toBe('first-hardware');
   expect(next.story.queue).toEqual(expect.arrayContaining(['first-training','first-research','first-milestone','prestige-ready']));
   expect(new Set([next.story.open,...next.story.queue]).size).toBe(1+next.story.queue.length);
  });
 
- it('keeps the chosen AI name through reload and prestige',()=>{let state:GameState={...newGame(0),aiName:'Nova',credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15};state=restore(serialize(state),10).state;expect(prestige(state).aiName).toBe('Nova')});
+ it('keeps the chosen AI name through reload and prestige',()=>{let state:GameState={...newGame(0),aiName:'Nova',credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15,cycleEligibleCredits:1e15};state=restore(serialize(state),10).state;expect(prestige(state).aiName).toBe('Nova')});
 
  it('uses the actual first prestige reward in the saved dialogue state',()=>{
-  const before={...newGame(0),story:migratedStory(),credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15};
+  const before={...newGame(0),story:migratedStory(),credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15,cycleEligibleCredits:1e15};
   const after=syncStory(before,prestige(before));
   expect(after.story.seen).toContain('first-prestige');expect(after.telemetry.prestigeHistory.at(-1)?.intEarned).toBeGreaterThan(0);
  });
@@ -100,3 +101,5 @@ describe('Mira story and tutorial',()=>{
   expect(dialogues['aura-customers-1'].text(en)).toContain('<Nova & Co>');
  });
 });
+
+it('shows the first axiom explanation exactly once',()=>{const before={...newGame(0),story:migratedStory(),cycleINTEarned:1e300,totalINTEarned:1e300,unspentINT:1e300,exactEconomy:{...newGame(0).exactEconomy,cycleINTEarned:{m:1,e:1000000000000000},totalINTEarned:{m:1,e:1000000000000000},unspentINT:{m:1,e:1000000000000000}}},first=syncStory(before,axiomReset(before));expect(first.story.seen).toContain('first-axiom');const again=syncStory(first,{...first,axiomResetCount:2});expect(again.story.queue.filter(id=>id==='first-axiom')).toHaveLength(0)});

@@ -1,0 +1,35 @@
+import {describe,expect,it} from 'vitest';
+import {BALANCE,addCreditsScientific,creditMultiplierFromINT,creditRateScientific,productionBreakdown,exactEconomyValue,intYieldFactor,newGame,newINTScientific,prestigeClaimForEligibleScientific,prestigeUpgradeCost,prestigeUpgradeCostScientific,type GameState} from './economy';
+import {ScientificNumber} from './scientificNumber';
+import {buyNode,prestige,runPrestigeAgent} from './prestige';
+import {createItem,equip} from './inventory';
+import {advance} from './simulation';
+import {axiomReset} from './prestige';
+import {restore,serialize} from './storage';
+
+describe('long-term weighted INT economy',()=>{
+ it('uses the square-root entitlement monotonically at scientific scale',()=>{const b=BALANCE.prestigeBaseRevenue;expect(prestigeClaimForEligibleScientific(ScientificNumber.from(b*9)).toNumber()).toBe(3);expect(prestigeClaimForEligibleScientific(ScientificNumber.from(b*16)).toNumber()).toBe(4);expect(prestigeClaimForEligibleScientific(ScientificNumber.fromParts(1,300)).compare(prestigeClaimForEligibleScientific(ScientificNumber.fromParts(1,200)))).toBeGreaterThan(0)});
+ it('weights only new eligible income at the factor effective when earned',()=>{const base=newGame(0),first=addCreditsScientific(base,ScientificNumber.from(100)),boosted={...first,nodes:['milestoneMemory'],runMilestoneEdges:Array.from({length:10},(_,i)=>String(i))},second=addCreditsScientific(boosted,ScientificNumber.from(100));expect(exactEconomyValue(first,'cycleEligibleCredits').toNumber()).toBe(100);expect(exactEconomyValue(second,'cycleEligibleCredits').toNumber()).toBeCloseTo(220);expect(intYieldFactor(boosted)).toBeCloseTo(1.2)});
+ it('does not revalue old income when the archive item is equipped',()=>{let s={...newGame(0),prestigeCount:1,insightArchiveBlueprint:true};s=createItem(s,'insight-archive','common');const before=addCreditsScientific(s,ScientificNumber.from(100)),equipped=equip(before,before.inventory[0].id),after=addCreditsScientific(equipped,ScientificNumber.from(100));expect(exactEconomyValue(equipped,'cycleEligibleCredits').toNumber()).toBe(100);expect(exactEconomyValue(after,'cycleEligibleCredits').toNumber()).toBe(225)});
+ it('uses depth prices and exact scientific purchase checks',()=>{expect([1,2,3,4,5,6,7,8].map(depth=>prestigeUpgradeCost(`dataArchive${depth}` as any))).toEqual([1,10,100,1000,10000,100000,1e6,1e7]);expect(prestigeUpgradeCost('milestoneMemory')).toBe(100);const base=newGame(0),huge=ScientificNumber.fromParts(1,20),s={...base,unspentINT:huge.toNumber(),exactEconomy:{...base.exactEconomy,unspentINT:huge.toJSON()}};expect(prestigeUpgradeCostScientific('dataArchive8').compare(exactEconomyValue(s,'unspentINT'))).toBeLessThan(0)});
+ it('resets run counters on normal prestige but retains weighted cycle revenue',()=>{const base=newGame(0),eligible=ScientificNumber.from(BALANCE.prestigeBaseRevenue*9),s=addCreditsScientific({...base,runMilestoneEdges:['a'],runTrainingCompleted:2,runResearchCompleted:3},eligible),after=prestige(s);expect(after.runMilestoneEdges).toEqual([]);expect(after.runTrainingCompleted).toBe(0);expect(after.runResearchCompleted).toBe(0);expect(exactEconomyValue(after,'cycleEligibleCredits').compare(eligible)).toBeGreaterThanOrEqual(0)});
+});
+
+describe('prestige agent',()=>{
+ const ready=()=>{const base=newGame(0),s=addCreditsScientific(base,ScientificNumber.from(BALANCE.prestigeBaseRevenue*9));return {...s,axiomUpgrades:['prestigeAgent' as const],prestigeAgent:{enabled:true,minimumReward:{m:3,e:0},minimumRunMinutes:15 as const,waitForJobs:true,elapsed:10},savedAt:15*60_000}};
+ it('honors reward, duration, and wait option',()=>{const s=ready(),busy={...s,activeTraining:{track:'quality' as const,workRequired:10,creditCost:0}};const young={...s,savedAt:14*60_000};expect(runPrestigeAgent(young)).toBe(young);expect(runPrestigeAgent(busy)).toBe(busy);expect(runPrestigeAgent({...busy,prestigeAgent:{...busy.prestigeAgent,waitForJobs:false}}).prestigeCount).toBe(1)});
+ it('runs through the shared offline clock and at most once per checkpoint',()=>{const s=ready(),after=advance({...s,savedAt:0,runStartedAt:0},901,false,()=>.5).state;expect(after.prestigeCount).toBe(1);expect(after.prestigeAgent.enabled).toBe(true)});
+ it('does not run during an Axiom reset transaction',()=>{const s=ready(),threshold=ScientificNumber.fromParts(1,1000000000000000),reset=axiomReset({...s,cycleINTEarned:1e300,exactEconomy:{...s.exactEconomy,cycleINTEarned:threshold.toJSON()}});expect(reset.prestigeCount).toBe(0);expect(reset.prestigeAgent.enabled).toBe(true)});
+ it('survives reload and cannot recursively prestige at one checkpoint',()=>{const s=restore(serialize(ready()),0).state,once=runPrestigeAgent(s);expect(once.prestigeCount).toBe(1);expect(runPrestigeAgent(once)).toBe(once);expect(newINTScientific(once).isZero()).toBe(true)});
+});
+
+describe('prestige economy diagnostics',()=>{
+ it('records the exact ledgers and applied versus removed INT multipliers',async()=>{const {simulateBalance}=await import('./simulation'),run=simulateBalance(90/1440,true,1708,Infinity,'training-first',[{start:0,end:5400}]),trace=run.prestigeEconomyTrace[0];expect(trace).toBeDefined();expect(trace.weightedEligibleRevenue).toEqual(trace.eligibleRevenue);expect(trace.claimableINT).toEqual({m:3,e:0});expect(trace.intCreditMultiplierBefore).toBe(1);expect(trace.intCreditMultiplierAfter).toBeCloseTo(1+.5*Math.log10(4));expect(trace.multipliersAfter?.synergies.int).toBe(1);expect(trace.legacyIntSynergyAfter.m).toBeGreaterThanOrEqual(1)},10_000);
+});
+
+describe('logarithmic cycle INT credit bonus',()=>{
+ const withINT=(amount:ScientificNumber)=>{const s=newGame(0);return {...s,cycleINTEarned:amount.toNumber(),unspentINT:amount.toNumber(),exactEconomy:{...s.exactEconomy,cycleINTEarned:amount.toJSON(),unspentINT:amount.toJSON()}}};
+ it('matches 0/9/99/999 examples and scientific values',()=>{expect(creditMultiplierFromINT(withINT(ScientificNumber.zero()))).toBe(1);expect(creditMultiplierFromINT(withINT(ScientificNumber.from(9)))).toBeCloseTo(1.5);expect(creditMultiplierFromINT(withINT(ScientificNumber.from(99)))).toBeCloseTo(2);expect(creditMultiplierFromINT(withINT(ScientificNumber.from(999)))).toBeCloseTo(2.5);expect(creditMultiplierFromINT(withINT(ScientificNumber.fromParts(1,300)))).toBeCloseTo(151)});
+ it('uses earned cycle INT once and ignores spending',()=>{const earned=withINT(ScientificNumber.from(99)),spent={...earned,unspentINT:0,exactEconomy:{...earned.exactEconomy,unspentINT:{m:0,e:0}}};expect(creditMultiplierFromINT(spent)).toBe(creditMultiplierFromINT(earned));const noINT=newGame(0),ratio=creditRateScientific(earned.hardware,earned.level,earned).divide(creditRateScientific(noINT.hardware,noINT.level,noINT)).toNumber();expect(ratio).toBeCloseTo(2);expect(productionBreakdown(earned).synergies.int).toBe(1)});
+ it('returns to one only on an Axiom reset',()=>{const threshold=ScientificNumber.fromParts(1,1000000000000000),s={...withINT(threshold),totalINTEarned:1e300},reset=axiomReset(s);expect(creditMultiplierFromINT(reset)).toBe(1)});
+});

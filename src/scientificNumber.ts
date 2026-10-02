@@ -13,6 +13,7 @@ export class ScientificNumber {
   }
   static zero(){return new ScientificNumber(0,0)}
   static from(value:number){if(!Number.isFinite(value)||value<=0)return ScientificNumber.zero();const exponent=Math.floor(Math.log10(value));return new ScientificNumber(value/10**exponent,exponent)}
+  static fromString(value:string){const match=value.trim().match(/^([+]?(?:\d+(?:\.\d*)?|\.\d+))(?:e([+-]?\d+))?$/i);if(!match)return ScientificNumber.zero();const coefficient=Number(match[1]),exponent=Number(match[2]??0);return coefficient>0&&Number.isFinite(coefficient)&&Number.isSafeInteger(exponent)?ScientificNumber.fromParts(coefficient,exponent):ScientificNumber.zero()}
   static fromParts(mantissa:number,exponent:number){return new ScientificNumber(mantissa,exponent)}
   static fromJSON(value:unknown){if(!value||typeof value!=='object')return ScientificNumber.zero();const x=value as Partial<ScientificJSON>;return typeof x.m==='number'&&typeof x.e==='number'?ScientificNumber.fromParts(x.m,x.e):ScientificNumber.zero()}
   isZero(){return this.mantissa===0}
