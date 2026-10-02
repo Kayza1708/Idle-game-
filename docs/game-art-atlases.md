@@ -8,3 +8,12 @@ Die Darstellung verwendet vier getrennte Raster ohne Modulo-Zuordnung. Alle Koor
 - `activities-atlas-v1.png` (1536 × 1024 px, RGBA, 3 × 2): geschlossene/geöffnete Drop-Kapsel, Hardwareanalyse, Architekturstudie, Artefaktsuche und Werkbank.
 
 Die Komponenten besitzen transparente Zellhintergründe. Items, Meta und Aktivitäten werden als vollständige rechteckige Kacheln dargestellt, damit deren eingebrannte Hintergründe erhalten bleiben; es werden weder Blend-Modi noch Farbfilter verwendet.
+# Prestige node fallback
+
+The prestige atlas currently has dedicated motifs for the first three levels of the five main branches. `shoppingAgent`, `trainingPlan`, `componentScanner`, and all later branch levels intentionally share the neutral symbol at atlas cell `(3, 3)`. This explicit fallback avoids random or branch/depth-derived artwork until matching illustrations are available.
+
+Für die Axiom-Grundseite fehlt ein eigenes Axiom-Motiv. Sie verwendet daher bewusst das vorhandene INT-Ressourcensymbol mit violetter UI-Akzentuierung; es wird keine neue oder zufällige Atlaszelle zugeordnet.
+
+- Die Axiom-Upgradekarten verwenden vorhandene Motive: `shoppingAgent`, Hardwareanalyse und Quantenchip. Es existiert kein eigenes Atlasmotiv für Analyse- oder Werkbankplaner; bis zu einer gezielten Art-Produktion dienen diese semantisch passenden vorhandenen Motive als dokumentierter Fallback.
+
+- Für das neue Erkenntnisarchiv fehlt eine passende Illustration. Es verwendet deshalb ein neutrales, CSS-gezeichnetes `INT`-Knotensymbol und ausdrücklich keine fremde oder zufällig zugeordnete Atlaszelle.

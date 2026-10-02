@@ -393,3 +393,23 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Bei 390 px Einkaufsagent, Reserveauswahl, Trainingsqueue und Scanner-Chancen auf Touchziele und Scrollbarkeit prüfen.
 - Einen Offline-Zeitsprung mit beiden Einkaufsagent-Klassen und 25-%-Reserve gegen denselben Online-Zeitraum vergleichen.
 - Vor Prestige zwei Trainingsaufträge vormerken und bestätigen, dass Vorschau beide Abbrüche nennt und der Reset die Queue löscht.
+# Prestige tree follow-up
+
+- Manually regression-check long localized node names whenever new languages or catalog nodes are added.
+- Replace the documented neutral prestige symbol only when purpose-built atlas art exists for the special and late-game nodes.
+
+## Axiom-Folgeschritte
+
+- Die alte Schwelle 1.000 erreichte in den festen 7-/30-Tage-Profilen kein Axiom; die neue Schwelle 117 ist nur als erste prüfbare Kalibrierung bestätigt. Vor weiteren Balanceänderungen längere, weiterhin begrenzte Messläufe und reale Telemetriedaten auswerten.
+- Erst nach bestätigter Langzeitbalance über Axiom-Ausgaben oder Skill-Knoten entscheiden; die Grundlage enthält bewusst keine funktionslosen Käufe.
+
+## Axiom-Kalibrierung – offener Konflikt
+
+- Seed 2026 erreicht bei der kleinsten gemeinsamen 30-Tage-Schwelle 117 das erste Axiom bereits an Tag 16,55; ohne Änderung anderer Economyparameter existiert kein gemeinsamer Wert für Tag 21–30.
+- Die echten aktiven Folgezyklen über Tag 30 mit optimiertem, fortsetzbarem Simulator messen; keine Neustarthilfe ergänzen, bevor diese Daten vorliegen.
+
+- Mehrwöchige, zeitbegrenzte Folgezyklusmessung der drei Axiom-Upgrades aus einem natürlich erspielten Vorreset-Snapshot fortsetzen; insbesondere manuelle Aktionen und Seed-2026-Stagnation quantitativ vergleichen, ohne Parameter anzupassen.
+
+- Die getrennten aktiven/passiven 7-/30-/60-Tage-Läufe für Schwelle `{m:1,e:1000000000000000}` mit größerem externem Zeitbudget abschließen; das 42–56-Tage-Ziel nur nach vollständig beendeten Seeds als erfüllt markieren.
+
+- Nach den abgeschlossenen 1-/7-Tage-Läufen die optimierten 30-/60-Tage-Profile vollständig messen und erst danach die unkalibrierte ScientificNumber-Axiomschwelle auf das 42–56-Tage-Ziel setzen.
