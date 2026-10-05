@@ -468,3 +468,7 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 ## Final mobile device checks
 - Verify the active-first tutorial cadence and automatic Overclock feedback with real touch/hold input on iPhone.
 - Validate the three-column prestige network connector rhythm and item/equipment sheets with late-game production saves.
+
+## Nach dem finalen Mobile-UX-Fix (2026-10-05)
+- [ ] Auf einem physischen iPhone Pinch-/Pan-Trägheit, VoiceOver-Reihenfolge der Prestige-Nodes und Dynamic Type abschließend prüfen.
+- [ ] Store-Inhalte erst mit einem separaten Monetarisierungsauftrag erweitern; aktuell werden ausschließlich vorhandene Gem-Angebote dargestellt.

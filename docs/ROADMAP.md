@@ -540,3 +540,8 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Item collection, AI equipment, research, analyses, breakthroughs, prestige nodes, missions and season rewards use dense mobile layouts.
 - [x] Gameplay screens no longer render reset, crash, save, balance or debug utilities.
 - [ ] Final physical-device haptic, VoiceOver and Dynamic Type acceptance remains open.
+
+## Finaler Mobile-UX-Fix (2026-10-05)
+- [x] Prestige als innerhalb des Viewports geclippte, zoombare und verschiebbare 2D-Netzkarte mit echten Abhängigkeitslinien umgesetzt.
+- [x] Fünf mobile Hauptziele einschließlich vorbereitetem Shop sowie Freischaltsperre für Prestige umgesetzt.
+- [x] Missionszeilen, Forschung, Hardware-Kaufaktion, Ressourcenformatierung und Settings/Reset für iPhone-Breiten stabilisiert.
