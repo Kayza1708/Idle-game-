@@ -517,3 +517,10 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Save v40 erhält bestehende Lautstärken und ergänzt Haptik standardmäßig deaktiviert.
 - [x] Fehlende eigenständige Audiomotive dokumentiert; keine nicht vorhandenen Pfade eingebunden.
 - [ ] Hör- und Haptikabnahme auf realen iOS-/Android-Geräten bleibt offen.
+
+## Mobile-first interface (2026-10-05)
+- [x] Compact safe-area resource bar and four-item bottom navigation implemented.
+- [x] Workshop reordered around an interactive AI core, compact model controls, and visual hardware rows.
+- [x] Profile, season, missions, achievements, audio, effects, and language moved behind the meta menu.
+- [x] Research, inventory, prestige, missions, and reusable detail overlays received mobile density and touch-target treatment.
+- [ ] Final VoiceOver and physical-device usability review remains outstanding.
