@@ -18,11 +18,12 @@ describe('final mobile interaction contracts',()=>{
   expect(panels).toContain('clampScale');
   expect(panels).toContain('<svg className="prestige-links"');
   expect(css).toContain('.prestige-map-shell{position:relative;width:100%;max-width:100%;min-width:0');
-  expect(css).toContain('overflow:hidden!important;touch-action:none');
+  expect(css).toContain('overflow:hidden;touch-action:none');
  });
- it.each([375,390,393,402,430])('uses a stable four-column mission row at %ipx',width=>{
+ it.each([375,390,393,402,430])('uses an explicit flexible mission row at %ipx',width=>{
   expect(width).toBeGreaterThanOrEqual(375);
-  expect(css).toContain('grid-template-columns:28px minmax(0,1fr) 45px 56px!important');
+  expect(panels).toContain('className="mission-content"');
+  expect(css).toContain('flex:1 1 auto;min-width:0');
   expect(css).toContain('word-break:normal;hyphens:none');
  });
  it('does not render anonymous research artwork placeholders',()=>{
