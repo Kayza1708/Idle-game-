@@ -464,3 +464,7 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 ## Pass 2 device validation
 - Verify the new portrait prestige branches and full-screen profile with late-game saves on physical iPhones.
 - Complete VoiceOver focus-order, Dynamic Type, and reduced-motion review for every bottom sheet.
+
+## Final mobile device checks
+- Verify the active-first tutorial cadence and automatic Overclock feedback with real touch/hold input on iPhone.
+- Validate the three-column prestige network connector rhythm and item/equipment sheets with late-game production saves.

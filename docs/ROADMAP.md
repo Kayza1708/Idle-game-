@@ -531,3 +531,12 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Reusable bottom-sheet architecture introduced for secondary information and actions.
 - [x] Redundant Research Data, Mission Gem account, repeated component sources and empty crafting/equipment diagnostics removed from overviews.
 - [ ] Physical-device VoiceOver and Dynamic Type acceptance remains open.
+
+## Final mobile UX and active-first opening (2026-10-05)
+- [x] Fresh saves begin at zero hardware and zero passive income; the first Calculator is earned from core impulses.
+- [x] Every 100 active impulses automatically triggers the existing 15-second Overclock boost.
+- [x] Drop rewards resolve inside the core scene without interruptive cards or dismiss buttons.
+- [x] One compact hardware list exposes all classes and moves mastery/milestone detail into a sheet.
+- [x] Item collection, AI equipment, research, analyses, breakthroughs, prestige nodes, missions and season rewards use dense mobile layouts.
+- [x] Gameplay screens no longer render reset, crash, save, balance or debug utilities.
+- [ ] Final physical-device haptic, VoiceOver and Dynamic Type acceptance remains open.
