@@ -3,7 +3,8 @@ import app from './App.tsx?raw';
 import panels from './Panels.tsx?raw';
 import meta from './MetaHub.tsx?raw';
 import {readFileSync} from 'node:fs';
-const css=readFileSync(new URL('./style.css',import.meta.url),'utf8');
+import {resolve} from 'node:path';
+const css=readFileSync(resolve(process.cwd(),'src/style.css'),'utf8');
 
 describe('final mobile interaction contracts',()=>{
  it('has five destinations and locks prestige with the canonical predicate',()=>{
