@@ -69,6 +69,7 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 - [x] Capacitor-Konfiguration mit App-Name, Bundle-ID, gemeinsamem `dist/`-Build, Safe-Area-/Keyboard-Regeln und Browser-freier Assetbasis angelegt.
 - [x] Native und Browser-Lebenszyklen über einen deduplizierten Save-/Offline-/Audio-Pfad verbunden; Android-Zurück schließt Overlays vor der Navigation.
 - [x] Bestehende Haptikverwaltung an einen defensiven Capacitor-Haptics-Bridge angebunden und Beta-Export-/Import-/Diagnose-/Testreset-Bedienung ergänzt.
+- [x] TypeScript-Blocker durch eindeutig benannte Gem-Shop-UI/Logikmodule behoben und die Capacitor-8-Pakete sowie Node 22 im Projektmanifest verankert.
 - [ ] `android/` und `ios/` generieren, synchronisieren und nativ bauen; die Paketinstallation ist in dieser Umgebung durch HTTP 403 der npm-Registry blockiert.
 - [ ] Reale Gerätecheckliste aus `docs/mobile-beta.md` vollständig durchführen; kein SDK-, Signierungs- oder Gerätetest wird vorab als bestanden markiert.
 

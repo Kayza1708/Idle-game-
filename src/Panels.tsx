@@ -9,7 +9,7 @@ import { currentOnboarding } from './onboarding';
 import {achievements,achievementReady,achievementResearchBonus,currentAchievementTier} from './achievements';
 import {missionProgress,missionText} from './missions';
 import { craftAffordability, itemUpgradeCost, moduleAffordability } from './inventory';
-import {GemShop} from './GemShop';
+import {GemShop} from './GemShopPanel';
 import { dialogues, storyChapters } from './story';
 import { hardwareText, localeFor } from './i18n';
 import { wt, hardwareMilestoneText, operatingProfileText, onboardingText } from './workshopI18n';
