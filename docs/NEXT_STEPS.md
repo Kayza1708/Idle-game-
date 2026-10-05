@@ -460,3 +460,7 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Run the portrait checklist on physical 375–430 px iPhones, including VoiceOver, Dynamic Type, and home-indicator clearance.
 - Validate long late-game scientific values and every supported language with production save files.
 - Consider splitting the historically large `Panels.tsx` into screen modules after the visual migration stabilizes.
+
+## Pass 2 device validation
+- Verify the new portrait prestige branches and full-screen profile with late-game saves on physical iPhones.
+- Complete VoiceOver focus-order, Dynamic Type, and reduced-motion review for every bottom sheet.
