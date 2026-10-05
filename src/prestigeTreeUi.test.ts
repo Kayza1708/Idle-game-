@@ -32,6 +32,13 @@ describe('prestige tree presentation contract',()=>{
     expect(bought.unspentINT).toBe(19);
   });
 
+  it('does not present retention-gated deep nodes as purchasable',()=>{
+    const id=ids.find(candidate=>BALANCE.prestigeUpgrades[candidate].depth===5)!;
+    const node=BALANCE.prestigeUpgrades[id],base=newGame(0),funded={...base,nodes:[...node.requires] as PrestigeUpgradeId[],unspentINT:1e6,exactEconomy:{...base.exactEconomy,unspentINT:{m:1,e:6}}};
+    expect(prestigeNodeState(funded,id)).toBe('locked');
+    expect(buyNode(funded,id)).toBe(funded);
+  });
+
   it('places the independent entry unlocks directly below the core',()=>{
     const entry=['shoppingAgent','trainingPlan','componentScanner'] as const;
     expect(entry.map(id=>BALANCE.prestigeUpgrades[id].requires)).toEqual([[],[],[]]);

@@ -548,3 +548,40 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 
 ## Mobile-Test-Harness-Fix (2026-10-05)
 - [x] CSS-Source-Contracts lesen `src/style.css` direkt aus dem Dateisystem, statt den leeren Vitest-CSS-Modulwert zu prüfen.
+
+## Strukturierter Mobile-UX- und Layout-Pass (5. Oktober 2026)
+- [x] Werkstatt als feste Ressourcen-/Core-/Navigations-Shell mit ausschließlich intern scrollender Hardwarefläche umgesetzt.
+- [x] Core-Szene auf kompakten CSS-Dark-Tech-Hintergrund umgestellt und Modell/Training in ein Detail-Sheet verlagert.
+- [x] Permanentes „Nächstes Ziel“-Panel entfernt; Mira-Coach und hervorgehobene Aktionsziele bleiben handlungsführend.
+- [x] Nächsten Labor-Unlock inline, Gem-Shop als kompakte Tiles und Prestige-Kopf als Summary mit Detail-Sheet umgesetzt.
+- [x] Missionszeile strukturell in Icon, flexiblen Inhalt, Reward und Claim bei begrenzter Höhe zerlegt.
+- [ ] Reale iPhone-16-Pro-Simulator-Abnahme dieses Passes steht aus.
+
+## Shop-Copy-Korrektur (5. Oktober 2026)
+- [x] Die erklärende Lootbox-/Monetarisierungszeile wurde vollständig aus der sichtbaren Gem-Shop-Komponente entfernt.
+
+## Mobile Meta-System Polish (5. Oktober 2026)
+- [x] Gemeinsame Safe-Area-Shell für feste ResourceBar/BottomNav und scrollenden Screeninhalt nachgeschärft.
+- [x] Core-Zentrierung, Research-Tabs, kompakte Kurz-Materialanalyse und lesbare Missions-Claims stabilisiert.
+- [x] Permanenten Crash-Hinweis entfernt; Diagnoseexport ausschließlich in den Einstellungen belassen.
+- [x] Profil und Einstellungen als getrennte Menümodi konsolidiert; Settings gruppiert und dynamische Prozentwerte stabilisiert.
+- [x] Kanonisches Gem-Artwork für Missionen, Shop, Achievements und Laborpreise vereinheitlicht.
+- [x] Season-Header, Countdown, Free/Premium-Erklärung und konkrete Reward-Vorschauen verdichtet.
+- [x] Native Store-, Ads- und Notification-Grenzen ehrlich dokumentiert; keine Fake-Käufe, Fake-Ads oder erfundenen Rewards ergänzt.
+- [ ] Daily-Shop-Rotation bleibt bis zu einer genehmigten zentralen Reward-Tabelle und versioniertem Claim-State offen.
+
+## Gameplay-UX und Progression-Pass (5. Oktober 2026)
+- [x] Normaler Prestige- und Axiom-Reset starten wieder mit exakt null Hardware; Regressionstest ergänzt.
+- [x] Prestige-Tree nutzt den verfügbaren mobilen Raum mit größerem Startzoom, klaren Kosten und kompaktem Node-Sheet.
+- [x] Prestige-Bestätigung auf Bonus, Reset, Erhalt und einen sicheren CTA verdichtet.
+- [x] Hardwarezeilen zeigen autoritative aktuelle Klassenproduktion und Kaufmodus-abhängigen Produktionsgewinn.
+- [x] Core-Hierarchie und Impulsanzeige vereinfacht; Model-Sheet zeigt echte Quality-/Efficiency-Werte und verweist auf bestehende Core-Research-Progression.
+- [x] Research Rows vollständig tappbar gemacht und Startaktionen in ein gemeinsames Detail-Sheet verschoben.
+- [ ] Reale Touch-/Pinch-/Safe-Area-Abnahme auf iPhone bleibt erforderlich.
+
+## Verifikations-Nachschärfung (5. Oktober 2026)
+- [x] Reset-Verträge auf Reload/Offline-Fortschritt, alle Hardwareklassen und null Hardware-Compute erweitert.
+- [x] Hardwareanzeige auf denselben globalen Compute-Pfad wie die Economy umgestellt; ×10/MAX werden gegen den echten Zustandsdelta geprüft.
+- [x] Retention-Gates in Tree-State und Node-Sheet vereinheitlicht; konkrete Sperrgründe ergänzt.
+- [x] Labore zu einer kompakten Statusgruppe verdichtet und bestehende Core-Research-Einträge direkt verlinkt.
+- [ ] Ausführung der vollständigen Toolchain steht in dieser Umgebung wegen nicht installierbarer npm-Abhängigkeiten aus.

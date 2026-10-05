@@ -1,4 +1,5 @@
 import {BALANCE,exactEconomyValue,prestigeUpgradeCostScientific,type GameState,type PrestigeUpgradeId} from './economy';
+import {prestigeGate} from './retention';
 
 export type PrestigeNodeState='locked'|'ready'|'affordable'|'owned';
 export type PrestigePoint={x:number;y:number};
@@ -28,6 +29,7 @@ export function validatePrestigeCatalog(){
 export function prestigeNodeState(s:GameState,id:PrestigeUpgradeId):PrestigeNodeState{
   const node=BALANCE.prestigeUpgrades[id];
   if(s.nodes.includes(id))return'owned';
-  if(node.requires.some(requirement=>!s.nodes.includes(requirement as PrestigeUpgradeId))||('requiresPrestige'in node&&node.requiresPrestige&&s.prestigeCount<1))return'locked';
+  const gate=prestigeGate(s,node.depth);
+  if(node.requires.some(requirement=>!s.nodes.includes(requirement as PrestigeUpgradeId))||('requiresPrestige'in node&&node.requiresPrestige&&s.prestigeCount<1)||(gate&&!gate.ok))return'locked';
   return exactEconomyValue(s,'unspentINT').compare(prestigeUpgradeCostScientific(id))>=0?'affordable':'ready';
 }
