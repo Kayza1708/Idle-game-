@@ -9,8 +9,8 @@ describe('portrait mobile layout contract',()=>{
   expect(width).toBeGreaterThanOrEqual(375);
   expect(css).toMatch(/html,body,#root\{[^}]*width:100%[^}]*max-width:100%[^}]*min-width:0[^}]*overflow-x:clip/);
   expect(css).toContain('.prestige-map-shell{position:relative');
-  expect(css).toContain('overflow:hidden!important;touch-action:none');
-  expect(css).toContain('min-width:0!important');
+  expect(css).toContain('overflow:hidden;touch-action:none');
+  expect(css).toContain('min-width:0');
   expect(css).not.toContain(`width:${width+1}px`);
  });
  it('uses five core navigation destinations and internal mobile subscreens',()=>{

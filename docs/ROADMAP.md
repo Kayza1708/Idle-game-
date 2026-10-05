@@ -548,3 +548,11 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 
 ## Mobile-Test-Harness-Fix (2026-10-05)
 - [x] CSS-Source-Contracts lesen `src/style.css` direkt aus dem Dateisystem, statt den leeren Vitest-CSS-Modulwert zu prüfen.
+
+## Strukturierter Mobile-UX- und Layout-Pass (5. Oktober 2026)
+- [x] Werkstatt als feste Ressourcen-/Core-/Navigations-Shell mit ausschließlich intern scrollender Hardwarefläche umgesetzt.
+- [x] Core-Szene auf kompakten CSS-Dark-Tech-Hintergrund umgestellt und Modell/Training in ein Detail-Sheet verlagert.
+- [x] Permanentes „Nächstes Ziel“-Panel entfernt; Mira-Coach und hervorgehobene Aktionsziele bleiben handlungsführend.
+- [x] Nächsten Labor-Unlock inline, Gem-Shop als kompakte Tiles und Prestige-Kopf als Summary mit Detail-Sheet umgesetzt.
+- [x] Missionszeile strukturell in Icon, flexiblen Inhalt, Reward und Claim bei begrenzter Höhe zerlegt.
+- [ ] Reale iPhone-16-Pro-Simulator-Abnahme dieses Passes steht aus.
