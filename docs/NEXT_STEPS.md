@@ -481,3 +481,6 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - [ ] Mira-Schritte mit echten Touch-Eingaben vollständig durchspielen; Fokus, Core-Tap und Rechnerkauf dürfen nicht vom Coach verdeckt werden.
 - [ ] Missionen mit kurzen und langen deutschen Titeln sowie großen Fortschrittswerten im Simulator prüfen.
 - [ ] Inline-Laborkauf, Shop-Zustände, Prestige-Detail-Sheet, Safe Areas, VoiceOver und Dynamic Type real abnehmen.
+
+## Nach der Shop-Copy-Korrektur (5. Oktober 2026)
+- [ ] Die bereits offene reale iPhone-Simulator-Abnahme des kompakten Shops bleibt unverändert erforderlich.

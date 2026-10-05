@@ -556,3 +556,6 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Nächsten Labor-Unlock inline, Gem-Shop als kompakte Tiles und Prestige-Kopf als Summary mit Detail-Sheet umgesetzt.
 - [x] Missionszeile strukturell in Icon, flexiblen Inhalt, Reward und Claim bei begrenzter Höhe zerlegt.
 - [ ] Reale iPhone-16-Pro-Simulator-Abnahme dieses Passes steht aus.
+
+## Shop-Copy-Korrektur (5. Oktober 2026)
+- [x] Die erklärende Lootbox-/Monetarisierungszeile wurde vollständig aus der sichtbaren Gem-Shop-Komponente entfernt.
