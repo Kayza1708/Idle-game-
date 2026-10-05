@@ -475,3 +475,19 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 
 ## Nach dem Mobile-Test-Harness-Fix (2026-10-05)
 - [ ] Künftige CSS-Source-Contract-Tests ebenfalls per direktem UTF-8-Dateizugriff statt über Vites CSS-Modultransformation anbinden.
+
+## Abnahme nach strukturellem Mobile-UX-Pass (5. Oktober 2026)
+- [ ] Auf iPhone 16 Pro sowie 375/390/393/402/430 px prüfen, dass nur die Werkstattliste scrollt und mehrere Hardwarezeilen direkt sichtbar sind.
+- [ ] Mira-Schritte mit echten Touch-Eingaben vollständig durchspielen; Fokus, Core-Tap und Rechnerkauf dürfen nicht vom Coach verdeckt werden.
+- [ ] Missionen mit kurzen und langen deutschen Titeln sowie großen Fortschrittswerten im Simulator prüfen.
+- [ ] Inline-Laborkauf, Shop-Zustände, Prestige-Detail-Sheet, Safe Areas, VoiceOver und Dynamic Type real abnehmen.
+
+## Nach der Shop-Copy-Korrektur (5. Oktober 2026)
+- [ ] Die bereits offene reale iPhone-Simulator-Abnahme des kompakten Shops bleibt unverändert erforderlich.
+
+## Nach dem Mobile Meta-System Polish (5. Oktober 2026)
+- [ ] Gemeinsame Shell, Core, Research-Tabs, Analyse, Mission Claims, Profil, Settings, Shop und Season bei 375/390/393/402/430 px im iPhone-Simulator abnehmen.
+- [ ] Native Notification-Berechtigungen und Scheduling erst nach Auswahl eines Plattform-Adapters integrieren.
+- [ ] StoreKit-Adapter mit signierten Entitlements, Produktmetadaten und Restore implementieren, bevor Premium oder Gem Packs kaufbar werden.
+- [ ] Rewarded-Ad-Provider anbinden und Rewards ausschließlich nach bestätigtem nativen Success-Callback abrechnen.
+- [ ] Daily-Shop erst mit versioniertem Claim-State und zentral freigegebenen bestehenden Reward-/Preiswerten implementieren.
