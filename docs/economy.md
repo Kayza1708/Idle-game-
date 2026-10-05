@@ -423,3 +423,8 @@ Beim Season-Wechsel werden keine XP übertragen. Die unmittelbar vorherige Seaso
 Alle neuen Preise und Mengen liegen in `BALANCE.gemShop`: Labor 3/4 kosten 500/1.500 Gems; Offline-Kapazität steigt sequenziell für 250/500/1.000 Gems auf 12/16/24 Stunden; Crafting-Verkürzungen kosten maximal 20/120 Gems für 30 Minuten/4 Stunden; Training maximal 15/45 Gems für 15 Minuten/1 Stunde; 50 Schaltkreise kosten 30 Gems und 10 Kupferspulen plus 10 Siliziumwafer kosten 60 Gems. Bei kürzerer realer Restzeit wird `ceil(Listenpreis × angewandte Sekunden / Angebotssekunden)` berechnet. Forschung besitzt bewusst keinen Verkürzungskauf.
 
 Bestehende Besitzstände in `purchasedResearchLabs` bleiben erhalten und werden als Labor 3/4 interpretiert; beide Prestigearten erhalten gekaufte Laborplätze und Offline-Kapazität. Der bestehende Laborzeitbonus bleibt als unverändertes sonstiges Angebot erhalten. Das alte 120-Gem-Schaltkreispaket wurde durch das geforderte 30-Gem-Paket ersetzt; der bereits stillgelegte Training-Boost bleibt aus dem Katalog entfernt.
+
+## Early active start and automatic Overclock (2026-10-05)
+- New saves begin with zero owned hardware and therefore zero passive Credit production; existing versioned saves are unchanged.
+- A base active impulse grants 1 Credit before existing tap, research, item, critical, and prestige multipliers so the first Calculator can be earned actively.
+- Overclock now triggers automatically every 100 paid active impulses and retains the existing 15-second ×2 Credit effect; the counter immediately starts its next cycle.
