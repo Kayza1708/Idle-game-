@@ -1,4 +1,14 @@
-import React from 'react';import{createRoot}from'react-dom/client';import{App}from'./App';import{CrashBoundary}from'./CrashBoundary';import{CrashRecorder}from'./crashDiagnostics';import{browserStorage}from'./storage';import'./style.css';
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {App} from './App';
+import {CrashBoundary} from './CrashBoundary';
+import {CrashRecorder} from './crashDiagnostics';
+import {installMobileIntegration} from './mobileIntegration';
+import {browserStorage} from './storage';
+import './style.css';
+
+const uninstallMobile=installMobileIntegration();
+window.addEventListener('pagehide',uninstallMobile,{once:true});
 export const crashRecorder=new CrashRecorder(browserStorage(),null);
 window.addEventListener('error',event=>crashRecorder.failure('unhandled-exception',event.error??event.message));
 window.addEventListener('unhandledrejection',event=>crashRecorder.failure('unhandled-exception',event.reason));

@@ -1,0 +1,13 @@
+{
+  "appId": "com.kayza1708.aisingularity",
+  "appName": "AI Singularity",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "backgroundColor": "#0b1210",
+  "plugins": {
+    "Keyboard": {
+      "resize": "body",
+      "resizeOnFullScreen": true
+    }
+  }
+}

@@ -1,23 +1,21 @@
-import type { GameState } from './economy';
-
+import type {GameState} from './economy';
 export type SoundId='ui-click'|'purchase'|'unlock'|'research-complete'|'prestige'|'gem-pickup'|'error';
-const sources=(id:SoundId|'idle-loop')=>[`/assets/audio/${id}.ogg`,`/assets/audio/${id}.mp3`];
-
-export function actionSound(action:string,before:GameState,after:GameState):SoundId|null{
- if(after.discovered.length>before.discovered.length)return'unlock';
- if(action==='prestige'&&after.prestigeCount>before.prestigeCount)return'prestige';
- if(['buy-class','class-upgrade','buy','research-lab','node','breakthrough','gem-components','gem-boost','equipment-slot'].includes(action)&&after!==before)return'purchase';
- if(['claim','mail','claim-intro'].includes(action)&&after.gems>before.gems)return'gem-pickup';
- if(action==='research-project'&&after===before)return'error';
- return null;
-}
-
-export class AudioPlayer{
- private music?:HTMLAudioElement;private lastClick=0;
- constructor(private create:(src:string)=>HTMLAudioElement=(src)=>new Audio(src)){}
- private audio(id:SoundId|'idle-loop'){const a=this.create(sources(id)[0]);if(!a.canPlayType?.('audio/ogg'))a.src=sources(id)[1];return a}
- play(id:SoundId,settings:GameState['settings']){if(settings.sfxMuted||settings.sfxVolume<=0)return;if(id==='ui-click'){const now=Date.now();if(now-this.lastClick<90)return;this.lastClick=now}const a=this.audio(id);a.volume=settings.sfxVolume;void a.play().catch(()=>undefined)}
- syncMusic(settings:GameState['settings'],userGesture=false){if(!this.music)this.music=this.audio('idle-loop');this.music.loop=true;this.music.volume=settings.musicVolume;if(!settings.musicEnabled||document.hidden){this.music.pause();return}if(userGesture)void this.music.play().catch(()=>undefined)}
- handleVisibility(settings:GameState['settings']){if(document.hidden)this.music?.pause();else if(settings.musicEnabled)void this.music?.play().catch(()=>undefined)}
- dispose(){this.music?.pause()}
-}
+export type HapticPattern='short'|'double'|'strong';
+export const AUDIO_ASSETS:Record<SoundId|'idle-loop',readonly [string,string]>={
+ 'ui-click':['/assets/audio/ui-click.ogg','/assets/audio/ui-click.mp3'],purchase:['/assets/audio/purchase.ogg','/assets/audio/purchase.mp3'],unlock:['/assets/audio/unlock.ogg','/assets/audio/unlock.mp3'],'research-complete':['/assets/audio/research-complete.ogg','/assets/audio/research-complete.mp3'],prestige:['/assets/audio/prestige.ogg','/assets/audio/prestige.mp3'],'gem-pickup':['/assets/audio/gem-pickup.ogg','/assets/audio/gem-pickup.mp3'],error:['/assets/audio/error.ogg','/assets/audio/error.mp3'],'idle-loop':['/assets/audio/idle-loop.ogg','/assets/audio/idle-loop.mp3']};
+export function actionSound(action:string,before:GameState,after:GameState):SoundId|null{if(after===before)return null;
+ if(action==='axiom-reset'&&after.axiomResetCount>before.axiomResetCount)return'prestige';if(action==='prestige'&&after.prestigeCount>before.prestigeCount)return'prestige';
+ if(action!=='foreground-tick'&&(after.lifetime.milestones>before.lifetime.milestones||after.discovered.length>before.discovered.length))return'unlock';
+ if(after.lifetime.trainingCompleted>before.lifetime.trainingCompleted||after.lifetime.researchCompleted>before.lifetime.researchCompleted||after.experiments.completedIds.length>before.experiments.completedIds.length||after.lifetime.itemsCrafted>before.lifetime.itemsCrafted||after.telemetry.recentEvents.filter(e=>e.type==='crafting_completed').length>before.telemetry.recentEvents.filter(e=>e.type==='crafting_completed').length)return'research-complete';
+ if(['claim','claim-bonus','season-claim','achievement','claim-intro','challenge-claim'].includes(action)&&(after.gems>before.gems||after.components>before.components||after.season.claimed.length>before.season.claimed.length))return'gem-pickup';
+ if(action==='loot-drop'&&after.components>before.components)return'gem-pickup';
+ if(['buy-class','class-upgrade','buy','node','breakthrough','gem-offer','equipment-slot'].includes(action))return'purchase';return null;}
+export function actionHaptic(action:string,before:GameState,after:GameState):HapticPattern|null{if(after===before)return null;if((action==='axiom-reset'&&after.axiomResetCount>before.axiomResetCount)||(action==='prestige'&&after.prestigeCount>before.prestigeCount))return'strong';if(after.lifetime.milestones>before.lifetime.milestones||after.inventory.length>before.inventory.length)return'double';if(['buy-class','class-upgrade','buy','gem-offer','claim','claim-bonus','season-claim','achievement','claim-intro'].includes(action))return'short';return null;}
+export function haptic(pattern:HapticPattern,settings:GameState['settings'],nav:Navigator=globalThis.navigator){if(!settings.hapticsEnabled)return false;const values=pattern==='short'?[18]:pattern==='double'?[18,45,18]:[35,35,55];try{const bridge=(globalThis as any).NativeHaptics;if(typeof bridge?.vibrate==='function'){bridge.vibrate(values);return true}return typeof nav?.vibrate==='function'?nav.vibrate(values):false}catch{return false}}
+export class AudioPlayer{private music?:HTMLAudioElement;private unlocked=false;private lastEffect=0;private active=new Set<HTMLAudioElement>();constructor(private create:(src:string)=>HTMLAudioElement=(src)=>new Audio(src),private now:()=>number=()=>Date.now()){}
+ private audio(id:SoundId|'idle-loop'){const [ogg,mp3]=AUDIO_ASSETS[id],a=this.create(ogg);if(!a.canPlayType?.('audio/ogg'))a.src=mp3;return a}
+ unlock(settings:GameState['settings']){if(this.unlocked)return;this.unlocked=true;this.syncMusic(settings,true)}
+ play(id:SoundId,settings:GameState['settings']){if(!this.unlocked||settings.sfxMuted||settings.sfxVolume<=0||this.active.size>=4)return false;const now=this.now();if((id==='ui-click'||id==='purchase')&&now-this.lastEffect<100)return false;if(id==='ui-click'||id==='purchase')this.lastEffect=now;const a=this.audio(id);a.volume=settings.sfxVolume;this.active.add(a);const done=()=>this.active.delete(a);a.addEventListener?.('ended',done,{once:true});a.addEventListener?.('error',done,{once:true});void a.play().catch(()=>done());return true}
+ syncMusic(settings:GameState['settings'],userGesture=false){if(userGesture)this.unlocked=true;if(!this.music)this.music=this.audio('idle-loop');this.music.loop=true;this.music.volume=settings.musicVolume;if(!settings.musicEnabled||!this.unlocked||document.hidden){this.music.pause();return}if(userGesture)void this.music.play().catch(()=>undefined)}
+ handleVisibility(settings:GameState['settings'],hidden=document.hidden){if(hidden)this.music?.pause();else if(this.unlocked&&settings.musicEnabled)void this.music?.play().catch(()=>undefined)}
+ dispose(){this.music?.pause();this.active.clear()}}

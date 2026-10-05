@@ -59,6 +59,7 @@ export const workshopCopy={
   reached:l('Reached','Erreicht','Alcanzados','Atteints','Alcançados','Raggiunti','Osiągnięte'),
   noneYet:l('none yet','noch keiner','ninguno todavía','aucun','nenhum ainda','nessuno','jeszcze żaden'),
 
+  purchaseDetails:l('Purchase details','Kaufdetails','Detalles de compra','Détails d’achat','Detalhes da compra','Dettagli acquisto','Szczegóły zakupu'),
   buy:l('Buy','Kaufe','Comprar','Acheter','Comprar','Acquista','Kup'),
   affordableIn:l('affordable in','bezahlbar in','disponible en','abordable dans','disponível em','acquistabile tra','dostępne za'),
   paysBackIn:l('pays back in','amortisiert in','se amortiza en','amorti en','retorno em','si ripaga in','zwrot za'),

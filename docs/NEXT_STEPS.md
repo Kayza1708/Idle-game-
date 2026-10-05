@@ -423,3 +423,35 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 
 - Die komplette Führung auf einem realen Mobilgerät bei 390 × 844 prüfen: Zielpfeile, Bildschirmtastatur beim Namen und Dialogposition über der Navigation.
 - Englische und deutsche Kampagne einmal ohne Debug-Zuschüsse bis zur Prestige-Vorschau durchspielen und Textlängen beobachten.
+
+## Nach der Mobile-UI-Vereinheitlichung vom 5. Oktober 2026
+
+1. Die Werkstatt, den geöffneten Quest-/Season-Hub und das Profil in einem echten Browser bei 360, 390 und 430 px sowie Desktop visuell prüfen; insbesondere lange deutsche Hardwaretexte und Softkeyboard-Verhalten im Profilnamen kontrollieren.
+2. Die dokumentierten Motive `ai-model-card.png` und `season-premium-chest.png` gezielt produzieren und erst nach Prüfung ihrer Maße einer festen Sprite-/Asset-Zuordnung hinzufügen.
+3. Fokus- und Abholpfade zusätzlich mit einem Browser-E2E-Test automatisieren; Economy- und Belohnungswerte bleiben dabei unverändert.
+
+## Manuelle Abnahme Rückkehr und Ziele (5. Oktober 2026)
+
+- In einem Browser einen Save mit laufendem Training, Forschung, Analyse und Crafting schließen, die Systemzeit um mehr als 60 Sekunden vorsetzen und prüfen, dass der Bericht nur tatsächlich fertiggestellte Vorgänge nennt.
+- Im Rückkehrbericht „Belohnungen ansehen“ sowie nach einem fertigen Item „Inventar öffnen“ testen; danach neu laden und bestätigen, dass weder Bericht noch Gutschrift doppelt erscheinen.
+- Je ein Hardware-, Forschungs-, Rezept- und Prestigeziel anheften, neu laden und Fortschritt, Fehlmenge, ETA sowie Bereichssprung bei 360/390/430 px prüfen.
+- Einen 30-Tage-Wechsel und Claims der archivierten Season innerhalb sowie außerhalb der siebentägigen Nachfrist mit einem Testsave visuell prüfen.
+
+## Offene Gem-Shop-Integration (5. Oktober 2026)
+
+- Die vorbereiteten Produkt-IDs erst in einem gesonderten Auftrag mit nativer Store-Signaturprüfung, serverseitiger Transaktionsvalidierung und Restore-Purchases verbinden. Bis dahin bleiben alle Echtgeldbuttons deaktiviert und ohne Preis.
+- Shop-Bestätigung, lange Sperrgründe und die drei Bereiche bei 360/390/430 px sowie Desktop in einem echten Browser prüfen; insbesondere den Übergang eines durch Verkürzung gerade abgeschlossenen Crafting-Auftrags kontrollieren.
+
+## Offene Geräteprüfung Audio/Haptik (5. Oktober 2026)
+
+- Auf iOS und Android Musikfreigabe nach erster Interaktion, Hintergrundpause/Rückkehr und Ablehnung von Autoplay prüfen.
+- Lautstärkeregler, Stummschaltung, Soundtest und gespeicherte Haptik-Einstellung nach Reload verifizieren.
+- Kauf-/Claim-, Doppelimpuls- und Prestige-/Axiom-Muster auf einem nativen Host sowie Browser-Vibration prüfen; nicht unterstützte Geräte müssen still bleiben.
+- Fehlende Einzelmotive aus `docs/audio.md` erst nach gezielter Audioproduktion einbinden.
+
+## Mobile-Beta-Übergabe (5. Oktober 2026)
+
+- In einer Umgebung mit Zugriff auf die Capacitor-Pakete die Installations-, `cap add`- und `cap sync`-Befehle aus `docs/mobile-beta.md` ausführen und die generierten Android-/iOS-Projekte einchecken.
+- Portraitvorgaben in AndroidManifest und iOS Info.plist setzen; Android-Debug-APK tatsächlich mit Gradle und iOS tatsächlich in Xcode bauen, bevor diese Builds als bestanden gelten.
+- Die vollständige reale Gerätecheckliste einschließlich Doppellebenszyklus, Flugmodus, App-Kill/Reload, Zurück-Taste, Softkeyboard, Audio und Haptik auf mindestens einem Android- und einem iOS-Gerät abnehmen.
+- Profil, Shop und Prestige sind weiterhin Teil der historisch gewachsenen großen UI-Module; nach der Gerätebasis gezielt in eigenständige Lazy-Chunks trennen. Der Balancebericht wird bereits erst beim Export dynamisch geladen.
