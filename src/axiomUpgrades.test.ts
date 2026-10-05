@@ -1,0 +1,26 @@
+import {describe,expect,it} from 'vitest';
+import {addCreditsScientific,axiomThresholdScientific,creditMultiplierFromAxioms,exactEconomyValue,intYieldFactor,newGame,type GameState} from './economy';
+import {axiomReset,buyAxiomUpgrade,prestigeAgentStatus,runPrestigeAgent} from './prestige';
+import {advance} from './simulation';
+import {restore,serialize} from './storage';
+import {ScientificNumber} from './scientificNumber';
+
+const funded=(axioms=20)=>({...newGame(0),axioms,availableAxioms:axioms,totalAxiomsEarned:axioms});
+const readyReset=()=>{const base=funded(),amount=axiomThresholdScientific();return {...base,cycleINTEarned:amount.toNumber(),exactEconomy:{...base.exactEconomy,cycleINTEarned:amount.toJSON()}}};
+const withClaim=(state:GameState,claim=3)=>{const eligible=ScientificNumber.from(442_493_746_168).multiplyNumber(claim**2);return {...state,cycleEligibleCredits:eligible.toNumber(),exactEconomy:{...state.exactEconomy,cycleEligibleCredits:eligible.toJSON()}}};
+
+describe('permanent Axiom nodes',()=>{
+ it('charges resonance exactly once per level, caps at ten, and never lowers the permanent credit bonus',()=>{let state=funded(20),before=creditMultiplierFromAxioms(state);for(let i=0;i<10;i++)state=buyAxiomUpgrade(state,'axiomResonance');const capped=buyAxiomUpgrade(state,'axiomResonance');expect(state.availableAxioms).toBe(10);expect(state.axiomUpgradeLevels.axiomResonance).toBe(10);expect(capped).toBe(state);expect(creditMultiplierFromAxioms(state)).toBe(before)});
+ it('charges automation and archive exactly once and persists all levels through reload/reset',()=>{let state=buyAxiomUpgrade(funded(10),'axiomAutomation');state=buyAxiomUpgrade(state,'axiomArchive');expect(state.availableAxioms).toBe(3);expect(buyAxiomUpgrade(state,'axiomArchive')).toBe(state);const reset=axiomReset({...restore(serialize({...state,...readyReset(),availableAxioms:state.availableAxioms,totalAxiomsEarned:state.totalAxiomsEarned,axiomUpgrades:state.axiomUpgrades,axiomUpgradeLevels:state.axiomUpgradeLevels}),0).state});expect(reset.axiomUpgradeLevels).toEqual(state.axiomUpgradeLevels)});
+ it('resonance weights only future eligible revenue and is not applied twice',()=>{let state=buyAxiomUpgrade(funded(),'axiomResonance');const before=exactEconomyValue(state,'cycleEligibleCredits');state=addCreditsScientific(state,ScientificNumber.from(100));expect(intYieldFactor(state)).toBeCloseTo(1.21);expect(exactEconomyValue(state,'cycleEligibleCredits').subtract(before).toNumber()).toBeCloseTo(121)});
+ it('archive adds 25% passive components by duplicating existing outcomes without extra RNG calls',()=>{let state=buyAxiomUpgrade(funded(),'axiomArchive'),calls=0;state={...state,discovered:['calculator','sbc']};const after=advance(state,4*3600,false,()=>{calls++;return .1}).state;expect(calls).toBe(8);expect(after.components).toBe(10)});
+});
+
+describe('Axiom prestige agent',()=>{
+ const agent=()=>{let state=buyAxiomUpgrade(funded(),'axiomAutomation');return {...state,savedAt:16*60_000,prestigeAgent:{...state.prestigeAgent,enabled:true,minimumReward:{m:3,e:0},minimumRunMinutes:15 as const,waitForTraining:true,waitForAnalysis:true,elapsed:10}}};
+ it('requires runtime and claimable INT and uses the normal transaction once',()=>{const base=agent();expect(prestigeAgentStatus(base)).toBe('insufficient-int');const ready=withClaim(base);expect(prestigeAgentStatus(ready)).toBe('ready');const reset=runPrestigeAgent(ready);expect(reset.prestigeCount).toBe(1);expect(runPrestigeAgent(reset).prestigeCount).toBe(1)});
+ it('waits independently for training and analysis',()=>{const ready=withClaim(agent()),training={...ready,activeTraining:{track:'quality' as const,workRequired:100,creditCost:0}},analysis={...ready,experiments:{...ready.experiments,active:{id:'x',type:'hardware' as const,length:'short' as const,startedAt:0,endsAt:99,dataCost:0}}};expect(prestigeAgentStatus(training)).toBe('training-active');expect(prestigeAgentStatus(analysis)).toBe('analysis-active')});
+ it('survives reload, runs through offline advance, and never triggers Axiom reset',()=>{const loaded=restore(serialize(withClaim(agent())),16*60_000).state,after=advance(loaded,10,false,()=>.5).state;expect(after.prestigeCount).toBe(1);expect(after.axiomResetCount).toBe(0);expect(after.axiomUpgradeLevels.axiomAutomation).toBe(1)});
+});
+
+it('migrates the previous prestige agent and refunds retired planner purchases',()=>{const old:any=newGame(0);old.axioms=0;old.availableAxioms=0;old.totalAxiomsEarned=5;old.axiomUpgrades=['anchoredShoppingAgent','analysisPlanner','craftingPlanner','prestigeAgent'];old.prestigeAgent={...old.prestigeAgent,waitForJobs:false};delete old.axiomUpgradeLevels;delete old.prestigeAgent.waitForTraining;delete old.prestigeAgent.waitForAnalysis;delete old.prestigeAgent.lastReason;const migrated=restore(JSON.stringify({version:35,state:old}),0);expect(migrated.error).toBeUndefined();expect(migrated.state.availableAxioms).toBe(3);expect(migrated.state.axiomUpgradeLevels.axiomAutomation).toBe(1);expect(migrated.state.prestigeAgent.waitForTraining).toBe(false);expect(migrated.state.prestigeAgent.waitForAnalysis).toBe(false)});

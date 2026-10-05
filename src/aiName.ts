@@ -1,14 +1,9 @@
-const MIN_LENGTH=2,MAX_LENGTH=20;
-
-const fold=(value:string)=>value.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[013457@$!|]/g,char=>({0:'o',1:'i',3:'e',4:'a',5:'s',7:'t','@':'a','$':'s','!':'i','|':'i'}[char]??char)).replace(/[^a-z]/g,'');
+import type {Language} from './i18n';
+export const AI_NAME_MIN_LENGTH=2,AI_NAME_MAX_LENGTH=20;
+const substitutions:Record<string,string>={0:'o',1:'i',3:'e',4:'a',5:'s',7:'t','@':'a','$':'s','!':'i','|':'i'};
+const fold=(value:string)=>value.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[013457@$!|]/g,char=>substitutions[char]??char).replace(/[^a-z]/g,'');
 const blocked=['nazi','hitler','nigger','nigga','faggot','kike','spic','chink','retard','hurensohn','fotze','schlampe','kanake','neger','schwuchtel'];
-
-export type NameValidation={ok:true;name:string}|{ok:false;message:string};
-export function validateAiName(input:string):NameValidation{
- const name=input.trim().replace(/\s+/g,' ');
- if(name.length<MIN_LENGTH||name.length>MAX_LENGTH)return{ok:false,message:'Bitte wähle einen Namen mit 2 bis 20 Zeichen.'};
- if(!/^[\p{L}\p{N} _-]+$/u.test(name))return{ok:false,message:'Erlaubt sind Buchstaben, Zahlen, Leerzeichen, Bindestriche und Unterstriche.'};
- const normalized=fold(name);
- if(blocked.some(term=>normalized.includes(term)))return{ok:false,message:'Bitte wähle einen anderen Namen.'};
- return{ok:true,name};
-}
+export type AiNameError='length'|'characters'|'blocked';
+export type NameValidation={ok:true;name:string}|{ok:false;error:AiNameError};
+export function validateAiName(input:string):NameValidation{const name=input.trim().replace(/\s+/g,' ');if(name.length<AI_NAME_MIN_LENGTH||name.length>AI_NAME_MAX_LENGTH)return{ok:false,error:'length'};if(!/^[\p{L}\p{N} _-]+$/u.test(name))return{ok:false,error:'characters'};if(blocked.some(term=>fold(name).includes(term)))return{ok:false,error:'blocked'};return{ok:true,name}}
+export const aiNameCopy=(language:Language)=>{const de=language==='de';return{eyebrow:de?'LOKALES KI-PROFIL':'LOCAL AI PROFILE',title:de?'Wie soll deine KI heißen?':'What should your AI be called?',privacy:de?'Der Name bleibt nur in deinem Spielstand auf diesem Gerät.':'The name remains only in your save on this device.',label:de?'Name':'Name',hint:de?'2–20 Zeichen: Buchstaben, Zahlen, Leerzeichen, - und _':'2–20 characters: letters, numbers, spaces, - and _',submit:de?'Mit diesem Namen starten':'Start with this name',errors:{length:de?'Bitte wähle einen Namen mit 2 bis 20 Zeichen.':'Choose a name between 2 and 20 characters.',characters:de?'Bitte verwende nur Buchstaben, Zahlen, Leerzeichen, - oder _.':'Use only letters, numbers, spaces, - or _.',blocked:de?'Bitte wähle einen anderen Namen.':'Please choose a different name.'} satisfies Record<AiNameError,string>}};

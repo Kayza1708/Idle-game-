@@ -40,6 +40,7 @@ export function queueExperiment(s:GameState,type:ExperimentId,now:number,length:
   if(reason)return addEvent(s,'action-blocked',now,{action:'experiment-start',type,length,reason});
   return start(s,type,now,length);
 }
+export function runAnalysisPlanner(s:GameState,now=s.savedAt){if(!s.axiomUpgrades.includes('analysisPlanner')||!s.analysisPlanner.enabled||s.experiments.active||analysisBlockReason(s,s.analysisPlanner.type,s.analysisPlanner.length,'en'))return s;return queueExperiment(s,s.analysisPlanner.type,now,s.analysisPlanner.length);}
 export function cancelExperiment(s:GameState,now=s.savedAt){const active=s.experiments.active;if(!active)return s;return addEvent({...s,experiments:{...s.experiments,active:null}},'experiment-cancel',now,{id:active.id,type:active.type,length:active.length,refundCredits:0,refundData:0});}
 export function completeExperiment(s:GameState,now:number,rng=Math.random,mode:'active'|'offline'='active'):GameState{
   const active=s.experiments.active;if(!active||active.endsAt>now)return s;

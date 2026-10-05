@@ -12,8 +12,21 @@ Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und 
 | Forschungspunkte | entstehen aus Forschungs-Compute; Projekte | bleiben erhalten |
 | Komponenten/Baupläne | Items und Crafting | bleiben erhalten |
 | INT / Intelligence | Singularitätsbaum und dauerhafter Creditbonus | bleibt erhalten |
-| Axiome | reserviertes Feld für den späteren Meta-Layer | bleibt erhalten; noch nicht spielbar |
+| Axiome | `floor(sqrt(cycleINTEarned / threshold))` | bleiben erhalten; permanenter Creditfaktor `1 + 0,5 × totalAxiomsEarned` |
 | Gems | Missionen/Achievements und Komfortangebote | bleibt erhalten |
+
+## Axiom-Resetvertrag
+
+Nur durch bestätigte normale Prestiges erhaltene INT erhöhen `cycleINTEarned`. Verfügbares, ausgegebenes, hypothetisch beanspruchbares oder per Debug gesetztes INT zählt nicht. Historisch verdiente INT (`totalINTEarned`) bleiben getrennt erhalten; der normale INT-Creditbonus und die INT-Synergie verwenden ausschließlich `cycleINTEarned`. Der Axiom-Faktor wird separat mit dem normalen INT-Faktor multipliziert und beeinflusst weder Data noch Drops oder Forschungszeiten.
+
+Ein Axiom-Reset löscht die normale Lauf-Economy, Training und Analysen, alle INT-Bestände und INT-Knoten sowie den Zyklus-Umsatz und dessen Anspruch. Aktive Forschung bleibt bestehen; die ohne `labs2` nicht mehr gültige Forschungsqueue wird entfernt. Sammlung, Module, Fragmente, Baupläne, Items, Ausrüstung und Plätze, reservierte Crafting-Aufträge, Forschung, Gems/Laborplätze sowie Meta-, Profil- und Storyfortschritt bleiben erhalten. Autobuyer-/Scanner-Einstellungen bleiben gespeichert, sind ohne ihren verlorenen Knoten aber wirkungslos.
+
+### Aufgelöste Altmechaniken
+
+- Das bisherige Feld `axioms` war ein ungenutzter Platzhalter. Es wird aus Kompatibilitätsgründen als Spiegel von `availableAxioms` fortgeführt; maßgeblich sind nun `availableAxioms`, `totalAxiomsEarned` und `axiomResetCount`.
+- Der bisher kumulative `lifetimeEligibleCredits` darf wegen seines Statistikvertrags nicht zurückgesetzt werden. Der neue exakte Zähler `cycleEligibleCredits` ist deshalb die Grundlage des normalen INT-Anspruchs und verhindert, dass historischer Umsatz nach einem Axiom-Reset erneut INT erzeugt.
+- `totalINTEarned` speicherte zuvor zugleich Historie und bonuswirksames INT. Es bleibt nun die Historie; `cycleINTEarned` steuert den aktuellen normalen Bonus.
+- Die vorhandenen „Deep Prestige“-Funktionen sind tatsächlich späte INT-Knoten (`dataArchive4` usw.), kein zweiter Reset. Sie werden beim Axiom-Reset zusammen mit allen INT-Knoten entfernt.
 
 ## Hardware und Betriebsprofile
 
@@ -221,7 +234,7 @@ Hardware single/bulk cost math now has a normalized mantissa/exponent representa
 ### Datenpflichtige Fertigung – Abnahme v19.3
 Werkstattaktionen verwenden jetzt denselben Transparenzvertrag wie Analysen/Forschung: Module, Item-Crafts und Item-Upgrades zeigen Datenkosten, aktuellen Datenbestand, Fehlmenge und aus der aktuellen Datenrate berechnete Ansparzeit. Item-Crafts berücksichtigen beim Aktivieren des Buttons zusätzlich fehlende Module, Komponenten und Bauplanfragmente. `itemUpgradeCost` ist die zentrale Kostenfunktion für Common → Uncommon → Rare → Epic → Legendary → Mythic und wendet Fertigung II auf Komponenten **und** Daten an.
 
-`ScientificNumber` unterstützt zusätzlich Addition, Subtraktion, Division und JSON-Roundtrips als `{m,e}`. Damit steht die notwendige Arithmetik für die noch ausstehende persistente Ressourcenmigration bereit, ohne Werte > `1e308` in `Infinity` umzuwandeln.
+`ScientificNumber` unterstützt zusätzlich Addition, Subtraktion, Division und JSON-Roundtrips als `{m,e}`. Damit steht die notwendige Arithmetik für die noch ausstehende persistente Ressourcenmigration bereit, ohne Werte > `1000000000000000` in `Infinity` umzuwandeln.
 
 ### Atomare Ressourcenbuchungen
 Credit-/Datenkosten für Training, Forschung, Analysen, Hardware und Fertigung laufen über `canAffordResources`/`spendResources`. Die Buchung prüft beide Währungen vorab und zieht sie gemeinsam über `ScientificNumber`-Subtraktion ab; Teilabbuchungen bei fehlenden Daten sind damit ausgeschlossen. Produktionsdaten werden über `addData` auf demselben sicheren Additionspfad verbucht.
@@ -362,3 +375,39 @@ Die einzige geänderte Konstante ist `prestigeThreshold`: **1.400.000.000 → 42
 - `trainingPlan` (3 INT): zwei persistente Vormerkungen zusätzlich zum aktiven Training. Track und Ziellevel werden gespeichert; Data wird erst beim echten Start erneut geprüft und einmal abgezogen. Der erste unbezahlbare Auftrag blockiert die Folge. Prestige löscht die Vormerkungen gemäß Resetvertrag.
 - `componentScanner` (3 INT): verdoppelt das Gewicht eines aktuell über freigeschaltete Hardware zugänglichen passiven Materials und normalisiert die Tabelle. Fundintervalle und Fundzahl bleiben gleich; Analysen und Weltdrops bleiben unberührt. Die frühere, gleichnamige Meilenstein-Zusatzbelohnung wurde entfernt, damit keine Doppelwirkung entsteht.
 - Alle drei IDs sind unabhängige Wurzelknoten, erst nach dem ersten Prestige kaufbar und bleiben einschließlich ihrer Einstellungen über weitere Prestiges erhalten. Die INT-Kurve und sämtliche Produktions-, Trainings-, Forschungs- und Craftingkurven sind unverändert.
+
+## Axiom-Schwellenkalibrierung v34
+
+Historische v34-Konfiguration: `BALANCE.axiom.threshold` wurde von **1.000 auf 117** geändert; dieser Wert ist durch v35 unten ausdrücklich abgelöst. Die Formel, der Grundbonus, die normale INT-Kurve und alle übrigen Economyparameter bleiben unverändert. Die Drei-Seed-Suche und echte Resetverläufe stehen in `docs/axiom-measurement.md`; Seed 2026 verhindert einen gemeinsamen Wert für das gewünschte 21–30-Tage-Fenster.
+
+## Permanente Axiom-Upgrades v34 (2. Oktober 2026)
+
+Die drei unabhängigen Einmalkäufe `anchoredShoppingAgent`, `analysisPlanner` und `craftingPlanner` kosten zentral jeweils `BALANCE.axiom.upgradeCost = 1`. Ein Kauf reduziert ausschließlich `availableAxioms` (und den kompatiblen Spiegel `axioms`); `totalAxiomsEarned`, die damalige Schwelle **117** und die damalige Anspruchsformel und der permanente Faktor `1 + 0,5 × totalAxiomsEarned` bleiben unverändert.
+
+Der verankerte Einkaufsagent erweitert die zentrale effektive Unlock-Prüfung des vorhandenen Rechner-/SBC-Autobuyers. Analyse- und Werkbankplaner prüfen höchstens alle zehn Sekunden und rufen ausschließlich die bestehenden Start- beziehungsweise Reservierungstransaktionen auf. Fehlende Data/Zutaten, belegte Slots und volle Queues führen nur zum Warten. Planerwahl und Aktivierung bleiben über beide Resetebenen erhalten; normale Axiom-Resetabbrüche werden nicht umgangen.
+
+## Gewichtete Langzeit-INT-Economy v35 (2. Oktober 2026)
+
+Die alte logarithmische Anspruchskurve ist durch `floor(sqrt(weightedEligibleRevenue / 14.178.653.052))` ersetzt. Die Kalibrierung ergibt im kontinuierlichen aktiven 90-Minuten-Startlauf für Seeds 1708, 42 und 2026 den ersten Vergleichs-Prestige bei Minute 45; dabei werden mindestens 3 INT beansprucht. Berechtigte Credits werden beim Eingang unveränderlich mit dem dann aktiven INT-Ertragsfaktor im ScientificNumber-Ledger verbucht. Reward-, Shop- und Debug-Credits bleiben ausgeschlossen.
+
+Der additive Faktor besteht aus Milestone Memory (+2 % je unterschiedlicher Run-Meilensteinkante, maximal +100 %), Model Synthesis (+3 % je Run-Training, maximal +150 %), Research Archive (+5 % je Run-Forschungsabschluss, maximal +200 %) und einem ausgerüsteten Erkenntnisarchiv (+25 %). Die drei Knoten kosten explizit 100/1.000/10.000 INT. Alle anderen bestehenden Knoten kosten nach Katalogtiefe 1/10/100/1.000/10.000/100.000/1e6/1e7; die frühen Werkzeugknoten bleiben 1/3/3. Diese Staffel ist eine Messgrundlage, keine bestätigte Endgame-Balance.
+
+Das Common-Item Erkenntnisarchiv wird beim Kauf von Research Archive dauerhaft als Bauplan freigeschaltet. Es kostet 100 Schaltkreise, 20 Siliziumwafer und 5 Neuralkristalle, benötigt 3.600 Sekunden und verstärkt ausschließlich künftig verbuchte berechtigte Einnahmen. Run-Zähler werden beim normalen Prestige zurückgesetzt; das gewichtete Zyklusledger läuft weiter und wird nur beim Axiom-Reset geleert.
+
+Die Axiomschwelle ist wegen der wissenschaftlichen INT-Größenordnung als ScientificNumber `{m:1,e:1000000000000000}` konfiguriert. Der Prestige-Agent kostet 2 Axiome, prüft im gemeinsamen Zeitfortschritt höchstens alle zehn Sekunden und ruft nur den normalen Prestige-Transaktionspfad auf. Mindestbelohnung, 15/30/60/120 Minuten sowie die Warteoption für Training/Analyse bleiben über Axiom-Resets erhalten. Er löst niemals einen Axiom-Reset aus.
+
+## Credits–INT-Rückkopplung v36 (2. Oktober 2026)
+
+Die Diagnose der echten Prestige-Timeline zeigte zwei gleichzeitige INT-Creditfaktoren: den linearen Faktor `1 + 0,1 × cycleINTEarned` und zusätzlich `intSynergy = 1,08^sqrt(cycleINTEarned)` im selben `creditRateScientific`-Produkt. Die dadurch beschleunigte Creditproduktion erhöhte den Wurzelanspruch, der folgende Prestige erhöhte wiederum beide Faktoren. Alte Einnahmen wurden dabei **nicht** neu bewertet: `addCreditsScientific` schreibt weiterhin ausschließlich den neu eingehenden Betrag mit dem zu diesem Zeitpunkt aktiven `intYieldFactor` ins gewichtete Ledger. Der Fehler war die doppelte, positive Rückkopplung auf zukünftige Credits.
+
+Der einzige aktive normale INT-Creditbonus lautet nun `1 + 0,5 × log10(1 + cycleINTEarned)`. Der Logarithmus liest direkt das ScientificNumber-Feld `exactEconomy.cycleINTEarned`; der vollständige INT-Bestand wird nicht in `Number` umgewandelt. Damit ergeben 0/9/99/999 INT exakt ×1/×1,5/×2/×2,5. Ausgeben verändert die Basis nicht, ein Axiom-Reset setzt sie auf null. Der frühere `intSynergy` wird zu Diagnosezwecken noch berechnet, aber nicht mehr auf Credits angewendet.
+
+Nach Entfernen der Doppelanwendung wurde ausschließlich `prestigeBaseRevenue` von **14.178.653.052** auf **442.493.746.168** kalibriert. Im kontinuierlichen aktiven Profil haben alle Seeds bei 2.690 Sekunden 2 INT und bei 2.700 Sekunden 3 INT; der erste Vergleichs-Prestige liegt damit ohne Economy-Zeitgate bei Minute 45. Anspruchsformel, gewichtete Ertragsfaktoren, Hardware/Data/Forschung/Drops und Baumpreise sind unverändert.
+
+## Axiom-Knoten und kalibrierter Meta-Reset v37 (4. Oktober 2026)
+
+Die Axiom-Anspruchsformel bleibt `floor(sqrt(cycleINTEarned / threshold))`; ausschließlich die zentrale ScientificNumber-Schwelle wird aus vollständigen 42-/56-Tage-Läufen kalibriert. Der Axiom-Reset leert atomar Credits, Data, Hardware/Klassen-Upgrades, Modell und Training samt Queue, Analysen, das normale INT-Entitlement, verfügbare/ausgegebene Zyklus-INT, INT-Knoten sowie Zyklusumsatz und Run-Zähler. Historische Axiome und Axiom-Knoten, Sammlung, Komponenten/Module/Baupläne/Items/Ausrüstung, permanente Slots, abgeschlossene und laufende Forschung, reservierte Crafting-Aufträge sowie Meta-, Profil- und Storyfortschritt bleiben erhalten. Die Forschungsqueue wird geleert, laufende Forschung behält ihre gespeicherten Endzeiten.
+
+Die permanenten Knoten sind: `axiomResonance` (1 Axiom je Stufe, maximal 10), `axiomAutomation` (2 Axiome, einmalig) und `axiomArchive` (5 Axiome, einmalig). Resonanz schreibt ausschließlich neue berechtigte Einnahmen mit dem Quadrat von `1 + 0,1 × Stufe` ins gewichtete Ledger; nach der unveränderten Wurzelformel entspricht das +10 % künftigem Anspruch je Stufe und bewertet Altumsatz nicht neu. Das Archiv dupliziert deterministisch jeden vierten bereits ausgewürfelten passiven Komponentenfund und erzeugt dadurch keine zusätzlichen Fundwürfe. Automation nutzt alle zehn Sekunden ausschließlich den normalen Prestige-Transaktionspfad, mit separaten Warteoptionen für Training und Analyse; sie löst niemals Axiom-Prestige aus.
+
+Die v37-Kalibrierung setzt `BALANCE.axiom.threshold` ausschließlich auf ScientificNumber `{m: 3, e: 3}` (3.000 Cycle-INT). Dies ist die kleinste ganzzahlige konservative Schwelle oberhalb der vor Tag 42 gemessenen 2.999 INT von Seed 2026. Ein gemeinsames 42–56-Tage-Fenster existiert nicht: Seed 1708 erreicht bis Tag 56 nur 2.825 INT. Die Schwelle bevorzugt deshalb ausdrücklich „nicht zu früh“ gegenüber einer künstlichen Angleichung der Seeds; Axiomformel, Axiombonus sowie Hardware-, Data-, Research- und Itemkurven blieben unverändert.

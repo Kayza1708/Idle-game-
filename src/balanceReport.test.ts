@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createBalanceExportFiles, createBalanceReport, serializeBalanceReport, createBalanceZip, createBalanceZipAsync } from './balanceReport';
 import { addEvent } from './telemetry';
-import { newGame, type GameState } from './economy';
+import { BALANCE, newGame, type GameState } from './economy';
 import { prestige } from './prestige';
 import { restore } from './storage';
 
@@ -15,9 +15,9 @@ describe('local balance report',()=>{
   });
 
   it('keeps snapshots for multiple completed runs',()=>{
-    let state={...newGame(1_000),savedAt:11_000,credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15};
+    let state={...newGame(1_000),savedAt:11_000,credits:1e15,runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15,cycleEligibleCredits:1e15};
     state=prestige(state);
-    state={...state,savedAt:31_000,credits:2e15,runCreditsEarned:1e15,lifetimeCreditsEarned:2e15,lifetimeEligibleCredits:2e15};
+    state={...state,savedAt:31_000,credits:2e15,runCreditsEarned:1e15,lifetimeCreditsEarned:2e15,lifetimeEligibleCredits:2e15,cycleEligibleCredits:2e15};
     state=prestige(state);
     const report=createBalanceReport(state,41_000);
     expect(report.prestigeHistory).toHaveLength(2);
@@ -64,13 +64,13 @@ it('exports immutable event resources, populated purchases, and 30-second snapsh
 
 it('supports cancellation without mutating the state',async()=>{const state=newGame(123),before=JSON.stringify(state),controller=new AbortController();controller.abort();await expect(createBalanceZipAsync(state,456,controller.signal)).rejects.toMatchObject({name:'AbortError'});expect(JSON.stringify(state)).toBe(before)});
 
-it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {createBalanceExportFiles}=await import('./balanceReport');let state:GameState={...newGame(0),aiName:'PrivateName'};for(let i=0;i<520;i++)state=addEvent(state,'action-blocked',i,{action:'research-start',missingData:1});const files=createBalanceExportFiles(state,1000);expect(JSON.parse(files['economy.json']).formulas.repeatableResearchDuration).toContain('1.35');expect(JSON.parse(files['diagnostics.json']).droppedEvents).toBeGreaterThan(0);expect(JSON.stringify(files)).not.toContain('PrivateName')});
+it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {createBalanceExportFiles}=await import('./balanceReport');let state:GameState={...newGame(0),aiName:'PrivateName'};for(let i=0;i<520;i++)state=addEvent(state,'action-blocked',i,{action:'research-start',missingData:1});const files=createBalanceExportFiles(state,1000);const economy=JSON.parse(files['economy.json']);expect(economy.formulas.repeatableResearchDuration).toContain('1.35');expect(economy.formulas.axiomReward.threshold).toEqual(BALANCE.axiom.threshold);expect(economy.formulas.axiomUpgrades.axiomArchive.passiveComponentMultiplier).toBe(1.25);expect(JSON.parse(files['diagnostics.json']).droppedEvents).toBeGreaterThan(0);expect(JSON.stringify(files)).not.toContain('PrivateName')});
 
 it('keeps simulator exports as mantissa/exponent beyond the numeric projection cap',async()=>{const {simulationScientificSnapshot}=await import('./simulation');const base=newGame(0),snapshot=simulationScientificSnapshot({...base,exactEconomy:{...base.exactEconomy,credits:{m:1.25,e:420}}});expect(snapshot.credits).toEqual({m:1.25,e:420});});
 
 describe('fixed-profile balance simulation',()=>{
  it('uses session-only actions, regular taps and deterministic seeds',async()=>{const {simulateBalance}=await import('./simulation'),a=simulateBalance(.34,true,1708),again=simulateBalance(.34,true,1708),passive=simulateBalance(.34,false,1708);expect(a.evaluation?.timing.manualActionsOutsideSessions).toBe(0);expect(passive.evaluation?.timing.manualActionsOutsideSessions).toBe(0);expect(a.evaluation?.timing.taps).toBe(a.final.lifetime.taps);expect(a.evaluation?.timing.taps).toBe(a.evaluation?.timing.onlineSeconds);expect(passive.final.lifetime.taps).toBe(0);expect(a.exactFinal).toEqual(again.exactFinal);expect(a.milestones).toEqual(again.milestones);expect(new Set(a.final.experiments.completedIds).size).toBe(a.final.experiments.completedIds.length);expect(a.final.lifetime.researchCompleted).toBe(new Set(a.final.telemetry.recentEvents.filter(e=>e.type==='research-complete').map(e=>`${e.details.id}:${e.details.level}`)).size);},30_000);
- it('records availability before discretionary prestige and applies the offline cap',async()=>{const {simulateBalance}=await import('./simulation'),active=simulateBalance(1,true,42),passive=simulateBalance(1,false,42);expect(active.evaluation?.firstPrestigeAvailable).toBeNull();expect(active.milestones.firstPrestige).toBeNull();expect(passive.evaluation?.timing.lostOfflineSeconds).toBeGreaterThan(0);expect(passive.evaluation!.timing.creditedOfflineSeconds+passive.evaluation!.timing.lostOfflineSeconds).toBe(passive.evaluation!.timing.offlineSeconds);expect(active.exactFinal?.credits).toEqual(active.final.exactEconomy.credits);},30_000);
+ it('records availability before discretionary prestige and applies the offline cap',async()=>{const {simulateBalance}=await import('./simulation'),active=simulateBalance(1,true,42),passive=simulateBalance(1,false,42);expect(active.evaluation?.firstPrestigeAvailable).toBeGreaterThan(0);expect(active.milestones.firstPrestige).toBeGreaterThanOrEqual(45*60);expect(passive.evaluation?.timing.lostOfflineSeconds).toBeGreaterThan(0);expect(passive.evaluation!.timing.creditedOfflineSeconds+passive.evaluation!.timing.lostOfflineSeconds).toBe(passive.evaluation!.timing.offlineSeconds);expect(active.exactFinal?.credits).toEqual(active.final.exactEconomy.credits);},30_000);
 });
 
 it('exports analyses, component flows, crafting and prestige-node purchases as dedicated local tables',async()=>{

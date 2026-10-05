@@ -1,0 +1,7 @@
+# Mira-Einstiegskampagne
+
+Neue Kampagnen beginnen mit der lokalen Namenswahl. Version-36-Spielstände ohne Namen werden bei der Migration neutral auf `AURA` gesetzt und nicht nachträglich blockiert. Der Name wird ausschließlich als React-Text gerendert, auf 2–20 erlaubte Zeichen begrenzt und nach normalisierten deutschen/englischen Sperrbegriffen geprüft.
+
+Die Führung beobachtet in fester Reihenfolge echte Zustandsänderungen: Name, Credit-Tap, Hardwarekauf, daraus entstandene Nutzer/Compute, 25 vorhandene Credits, Trainingsstart, Forschungsstart, Analyse beziehungsweise passive Komponentenbeschaffung, Item/Crafting-Auftrag und mindestens 1 tatsächlich beanspruchbares INT. Jeder Aktionsschritt besitzt eine stabile DOM-Ziel-ID. Die kompakte Leiste kann zum Ziel navigieren, nennt aktuelle Sperrgründe und ergänzt den Farbrahmen durch einen Pfeil. Bei `prefers-reduced-motion` bleiben Rahmen und Pfeil statisch.
+
+Mira reagiert außerdem genau einmal auf erstes Labor, lernenden Prototyp, erste Hardwareklasse, Training, Forschung, Analyse, Item, Automation, normales Prestige und Axiom. Gleichzeitige Ereignisse werden in einer einzelnen Dialogqueue serialisiert. Übersprungene oder abgeschlossene Führungen können in Miras Journal ohne Belohnung neu geöffnet werden. Prestige- und Axiomtexte beschreiben ausschließlich den bestehenden Resetvertrag; die Kampagne verändert keine Economywerte oder Transaktionen.

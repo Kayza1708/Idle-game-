@@ -352,6 +352,7 @@ const rarities:Record<Rarity,L>={
 export const rarityText=(id:Rarity,language:Language)=>pick(rarities[id],language);
 
 const itemNames:Record<ItemTypeId,L>={
+ 'insight-archive':l('Insight Archive','Erkenntnisarchiv','','','','',''),
  'impulse-relay':l('Impulse Relay','Impulsrelais','Relé de impulso','Relais d’impulsion','Relé de impulso','Relè d’impulso','Przekaźnik impulsowy'),
  'quantum-chip':l('Quantum Chip','Quantenchip','Chip cuántico','Puce quantique','Chip quântico','Chip quantistico','Chip kwantowy'),
  'neural-asic':l('Neural ASIC','Neural-ASIC','ASIC neuronal','ASIC neuronal','ASIC neural','ASIC neurale','Neuralny ASIC'),
@@ -367,6 +368,7 @@ const itemNames:Record<ItemTypeId,L>={
 export const itemText=(id:ItemTypeId,language:Language)=>pick(itemNames[id],language);
 
 const effects:Record<ItemEffect,L>={
+ 'int-yield':l('+25% weighted INT revenue for future eligible income','+25 % gewichteter INT-Einnahmewert für zukünftige berechtigte Einnahmen','','','','',''),
  relay:l('Every 10th paid tap: +2 seconds of Credits','Jeder 10. vergütete Tap: +2 Sekunden Credits','Cada 10.º toque pagado: +2 segundos de créditos','Chaque 10e impulsion payée : +2 secondes de crédits','Cada 10.º toque pago: +2 segundos de créditos','Ogni 10° tap pagato: +2 secondi di crediti','Co 10. płatne kliknięcie: +2 sekundy kredytów'),
  compute:l('Compute','Compute','Cómputo','Calcul','Computação','Compute','Obliczenia'),
  credits:l('Credits','Credits','Créditos','Crédits','Créditos','Crediti','Kredyty'),
@@ -414,6 +416,9 @@ const prestigeEffects:Record<PrestigeUpgradeId,L>={
  shoppingAgent:l('Per-class calculator and single-board computer autobuyers with a shared reserve.','Klassenweise Autobuyer für Taschenrechner und Einplatinencomputer mit gemeinsamer Reserve.','','','','',''),
  trainingPlan:l('Queue two model training jobs; data is charged only when each job starts.','Zwei Modelltrainings vormerken; Daten werden erst beim jeweiligen Start abgezogen.','','','','',''),
  componentScanner:l('Double one accessible passive component weight without adding finds.','Verdoppelt ein zugängliches passives Komponentengewicht, ohne zusätzliche Funde zu erzeugen.','','','','',''),
+ milestoneMemory:l('+2% weighted INT revenue per distinct hardware milestone edge this run, up to +100%.','+2 % gewichteter INT-Einnahmewert je unterschiedlicher Hardware-Meilensteinkante dieses Runs, maximal +100 %.','','','','',''),
+ modelSynthesis:l('+3% weighted INT revenue per completed training this run, up to +150%.','+3 % gewichteter INT-Einnahmewert je abgeschlossenem Training dieses Runs, maximal +150 %.','','','','',''),
+ researchArchive:l('+5% weighted INT revenue per completed research job this run, up to +200%.','+5 % gewichteter INT-Einnahmewert je abgeschlossenem Forschungsauftrag dieses Runs, maximal +200 %.','','','','',''),
  dataArchive1:l('×1.25 data production.','×1,25 Datenproduktion.','×1,25 producción de datos.','×1,25 production de données.','×1,25 produção de dados.','×1,25 produzione dati.','×1,25 produkcji danych.'),
  dataArchive2:l('×1.60 data production.','×1,60 Datenproduktion.','×1,60 producción de datos.','×1,60 production de données.','×1,60 produção de dados.','×1,60 produzione dati.','×1,60 produkcji danych.'),
  dataArchive3:l('×2.25 data production.','×2,25 Datenproduktion.','×2,25 producción de datos.','×2,25 production de données.','×2,25 produção de dados.','×2,25 produzione dati.','×2,25 produkcji danych.'),

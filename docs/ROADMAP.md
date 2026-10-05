@@ -301,7 +301,7 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Itemeffekte an Hardwareklassen, Meilensteine, Rarität und Upgrades koppeln.
 - [x] Analyse-Dropchancen und Quellen im UI offenlegen.
 - [x] Crafting-Blocker konkret im Herstellbutton anzeigen.
-- [ ] Zweite Meta-Prestige-Ebene / Axiom-System als separaten Endgame-Pass umsetzen.
+- [x] Grundlage der zweiten Meta-Prestige-Ebene „Axiome“ mit Anspruch, Resetvertrag, persistenten Zählern, Vorschau und Messung umsetzen; Langzeitbalance bleibt ausdrücklich unbestätigt.
 
 ## Save-Rennen und Ladebarriere – 29. September 2026
 
@@ -445,3 +445,27 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] ScientificNumber-Reserve, persistente Trainingsqueue und normalisierte passive Scannergewichte implementiert.
 - [x] Reset, Reload, Online/Offline und Schutz vor doppelter Knotenwirkung getestet.
 - [ ] Kompakte Automation und Knotendetails bei 390 px manuell prüfen.
+# Prestige tree presentation (completed)
+
+- [x] The complete prestige catalog is rendered from one deterministic layout register.
+- [x] Catalog prerequisites drive validated connector lines; node states and the mobile/desktop detail surface are accessible without changing economy values.
+
+## Axiom-Kalibrierung 1. Oktober 2026 — Erledigt
+
+- [x] Ausschließlich die Axiom-Schwelle auf 117 kalibriert, Drei-Seed-Zielkonflikt dokumentiert und echte Sofort-/2-Axiom-Resetpfade bis zum jeweils vollständig messbaren Horizont geprüft.
+
+- [x] Drei permanente Axiom-Einmalkäufe nutzen die vorhandenen Shopping-, Analyse- und Crafting-Transaktionspfade; Besitz und Einstellungen überleben beide Prestigeebenen.
+
+- [x] Gewichtetes ScientificNumber-INT-Ledger, tiefenbasierte Baumpreise, drei INT-Ertragsknoten, Erkenntnisarchiv und permanenter Prestige-Agent sind in die bestehenden Transaktionspfade integriert.
+
+- [x] Doppelte Credits–INT-Rückkopplung entfernt und normalen INT-Creditbonus logarithmisch auf dem exakten Zyklus-INT-Ledger berechnet.
+
+## Axiom-Metaebene v37
+
+- [x] Atomaren Axiom-Resetvertrag und drei wirksame, persistente Axiom-Knoten in bestehende Ledger-, Komponenten- und Prestige-Pfade integriert.
+- [x] Prestige-Agent mit ScientificNumber-Mindestanspruch, Laufzeit und getrennten Training-/Analyse-Warteoptionen über denselben Online-/Offline-Pfad geführt.
+
+## Mira-Einstiegskampagne v38
+
+- [x] Namenswahl, echte zehnstufige Aktionsführung und Meilensteindialoge vom Garagenlabor bis zur AI-Company integriert.
+- [x] Persistente Tutorialziele, mobile Zielmarkierung, Journal-Neustart, Dialogqueue und Reduced-Motion-Verhalten automatisiert geprüft.
