@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { createBalanceExportFiles, createBalanceReport, serializeBalanceReport, createBalanceZip, createBalanceZipAsync } from './balanceReport';
 import { addEvent } from './telemetry';
-import { newGame, type GameState } from './economy';
+import { BALANCE, newGame, type GameState } from './economy';
 import { prestige } from './prestige';
 import { restore } from './storage';
 
@@ -64,7 +64,7 @@ it('exports immutable event resources, populated purchases, and 30-second snapsh
 
 it('supports cancellation without mutating the state',async()=>{const state=newGame(123),before=JSON.stringify(state),controller=new AbortController();controller.abort();await expect(createBalanceZipAsync(state,456,controller.signal)).rejects.toMatchObject({name:'AbortError'});expect(JSON.stringify(state)).toBe(before)});
 
-it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {createBalanceExportFiles}=await import('./balanceReport');let state:GameState={...newGame(0),aiName:'PrivateName'};for(let i=0;i<520;i++)state=addEvent(state,'action-blocked',i,{action:'research-start',missingData:1});const files=createBalanceExportFiles(state,1000);expect(JSON.parse(files['economy.json']).formulas.repeatableResearchDuration).toContain('1.35');expect(JSON.parse(files['diagnostics.json']).droppedEvents).toBeGreaterThan(0);expect(JSON.stringify(files)).not.toContain('PrivateName')});
+it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {createBalanceExportFiles}=await import('./balanceReport');let state:GameState={...newGame(0),aiName:'PrivateName'};for(let i=0;i<520;i++)state=addEvent(state,'action-blocked',i,{action:'research-start',missingData:1});const files=createBalanceExportFiles(state,1000);const economy=JSON.parse(files['economy.json']);expect(economy.formulas.repeatableResearchDuration).toContain('1.35');expect(economy.formulas.axiomReward.threshold).toEqual(BALANCE.axiom.threshold);expect(economy.formulas.axiomUpgrades.axiomArchive.passiveComponentMultiplier).toBe(1.25);expect(JSON.parse(files['diagnostics.json']).droppedEvents).toBeGreaterThan(0);expect(JSON.stringify(files)).not.toContain('PrivateName')});
 
 it('keeps simulator exports as mantissa/exponent beyond the numeric projection cap',async()=>{const {simulationScientificSnapshot}=await import('./simulation');const base=newGame(0),snapshot=simulationScientificSnapshot({...base,exactEconomy:{...base.exactEconomy,credits:{m:1.25,e:420}}});expect(snapshot.credits).toEqual({m:1.25,e:420});});
 

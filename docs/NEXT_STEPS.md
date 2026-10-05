@@ -413,3 +413,13 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Die getrennten aktiven/passiven 7-/30-/60-Tage-Läufe für Schwelle `{m:1,e:1000000000000000}` mit größerem externem Zeitbudget abschließen; das 42–56-Tage-Ziel nur nach vollständig beendeten Seeds als erfüllt markieren.
 
 - Nach den abgeschlossenen 1-/7-Tage-Läufen die optimierten 30-/60-Tage-Profile vollständig messen und erst danach die unkalibrierte ScientificNumber-Axiomschwelle auf das 42–56-Tage-Ziel setzen.
+
+## Axiom-Langzeitbalance v37
+
+- Die 42–56-Tage-Kalibrierung weiterhin mit festen Seeds wiederholen, wenn Simulator- oder Entscheidungslogik geändert wird; passive Profile und zweite Axiome getrennt ausweisen.
+- Reale Spieltelemetrie vor weiteren Änderungen an Schwelle, Axiombonus oder Upgrade-Kosten auswerten; keine nicht abgeschlossenen Langzeitläufe hochrechnen.
+
+## Mira-Kampagne – manuelle Abnahme
+
+- Die komplette Führung auf einem realen Mobilgerät bei 390 × 844 prüfen: Zielpfeile, Bildschirmtastatur beim Namen und Dialogposition über der Navigation.
+- Englische und deutsche Kampagne einmal ohne Debug-Zuschüsse bis zur Prestige-Vorschau durchspielen und Textlängen beobachten.

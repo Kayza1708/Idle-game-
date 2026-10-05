@@ -1,5 +1,5 @@
 import {describe,expect,it} from 'vitest';
-import {BALANCE,addCreditsScientific,creditMultiplierFromINT,creditRateScientific,productionBreakdown,exactEconomyValue,intYieldFactor,newGame,newINTScientific,prestigeClaimForEligibleScientific,prestigeUpgradeCost,prestigeUpgradeCostScientific,type GameState} from './economy';
+import {BALANCE,addCreditsScientific,creditMultiplierFromINT,creditRateScientific,productionBreakdown,exactEconomyValue,intYieldFactor,newGame,newINTScientific,prestigeClaimForEligibleScientific,prestigeUpgradeCost,prestigeUpgradeCostScientific,axiomThresholdScientific,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {buyNode,prestige,runPrestigeAgent} from './prestige';
 import {createItem,equip} from './inventory';
@@ -16,10 +16,10 @@ describe('long-term weighted INT economy',()=>{
 });
 
 describe('prestige agent',()=>{
- const ready=()=>{const base=newGame(0),s=addCreditsScientific(base,ScientificNumber.from(BALANCE.prestigeBaseRevenue*9));return {...s,axiomUpgrades:['prestigeAgent' as const],prestigeAgent:{enabled:true,minimumReward:{m:3,e:0},minimumRunMinutes:15 as const,waitForJobs:true,elapsed:10},savedAt:15*60_000}};
- it('honors reward, duration, and wait option',()=>{const s=ready(),busy={...s,activeTraining:{track:'quality' as const,workRequired:10,creditCost:0}};const young={...s,savedAt:14*60_000};expect(runPrestigeAgent(young)).toBe(young);expect(runPrestigeAgent(busy)).toBe(busy);expect(runPrestigeAgent({...busy,prestigeAgent:{...busy.prestigeAgent,waitForJobs:false}}).prestigeCount).toBe(1)});
+ const ready=()=>{const base=newGame(0),s=addCreditsScientific(base,ScientificNumber.from(BALANCE.prestigeBaseRevenue*9));return {...s,axiomUpgrades:['axiomAutomation' as const],axiomUpgradeLevels:{axiomResonance:0,axiomAutomation:1,axiomArchive:0},prestigeAgent:{enabled:true,minimumReward:{m:3,e:0},minimumRunMinutes:15 as const,waitForTraining:true,waitForAnalysis:true,lastReason:'ready',elapsed:10},savedAt:15*60_000}};
+ it('honors reward, duration, and wait option',()=>{const s=ready(),busy={...s,activeTraining:{track:'quality' as const,workRequired:10,creditCost:0}};const young={...s,savedAt:14*60_000};expect(runPrestigeAgent(young)).toBe(young);expect(runPrestigeAgent(busy)).toBe(busy);expect(runPrestigeAgent({...busy,prestigeAgent:{...busy.prestigeAgent,waitForTraining:false,waitForAnalysis:false,lastReason:'ready'}}).prestigeCount).toBe(1)});
  it('runs through the shared offline clock and at most once per checkpoint',()=>{const s=ready(),after=advance({...s,savedAt:0,runStartedAt:0},901,false,()=>.5).state;expect(after.prestigeCount).toBe(1);expect(after.prestigeAgent.enabled).toBe(true)});
- it('does not run during an Axiom reset transaction',()=>{const s=ready(),threshold=ScientificNumber.fromParts(1,1000000000000000),reset=axiomReset({...s,cycleINTEarned:1e300,exactEconomy:{...s.exactEconomy,cycleINTEarned:threshold.toJSON()}});expect(reset.prestigeCount).toBe(0);expect(reset.prestigeAgent.enabled).toBe(true)});
+ it('does not run during an Axiom reset transaction',()=>{const s=ready(),threshold=axiomThresholdScientific(),reset=axiomReset({...s,cycleINTEarned:1e300,exactEconomy:{...s.exactEconomy,cycleINTEarned:threshold.toJSON()}});expect(reset.prestigeCount).toBe(0);expect(reset.prestigeAgent.enabled).toBe(true)});
  it('survives reload and cannot recursively prestige at one checkpoint',()=>{const s=restore(serialize(ready()),0).state,once=runPrestigeAgent(s);expect(once.prestigeCount).toBe(1);expect(runPrestigeAgent(once)).toBe(once);expect(newINTScientific(once).isZero()).toBe(true)});
 });
 
@@ -31,5 +31,5 @@ describe('logarithmic cycle INT credit bonus',()=>{
  const withINT=(amount:ScientificNumber)=>{const s=newGame(0);return {...s,cycleINTEarned:amount.toNumber(),unspentINT:amount.toNumber(),exactEconomy:{...s.exactEconomy,cycleINTEarned:amount.toJSON(),unspentINT:amount.toJSON()}}};
  it('matches 0/9/99/999 examples and scientific values',()=>{expect(creditMultiplierFromINT(withINT(ScientificNumber.zero()))).toBe(1);expect(creditMultiplierFromINT(withINT(ScientificNumber.from(9)))).toBeCloseTo(1.5);expect(creditMultiplierFromINT(withINT(ScientificNumber.from(99)))).toBeCloseTo(2);expect(creditMultiplierFromINT(withINT(ScientificNumber.from(999)))).toBeCloseTo(2.5);expect(creditMultiplierFromINT(withINT(ScientificNumber.fromParts(1,300)))).toBeCloseTo(151)});
  it('uses earned cycle INT once and ignores spending',()=>{const earned=withINT(ScientificNumber.from(99)),spent={...earned,unspentINT:0,exactEconomy:{...earned.exactEconomy,unspentINT:{m:0,e:0}}};expect(creditMultiplierFromINT(spent)).toBe(creditMultiplierFromINT(earned));const noINT=newGame(0),ratio=creditRateScientific(earned.hardware,earned.level,earned).divide(creditRateScientific(noINT.hardware,noINT.level,noINT)).toNumber();expect(ratio).toBeCloseTo(2);expect(productionBreakdown(earned).synergies.int).toBe(1)});
- it('returns to one only on an Axiom reset',()=>{const threshold=ScientificNumber.fromParts(1,1000000000000000),s={...withINT(threshold),totalINTEarned:1e300},reset=axiomReset(s);expect(creditMultiplierFromINT(reset)).toBe(1)});
+ it('returns to one only on an Axiom reset',()=>{const threshold=axiomThresholdScientific(),s={...withINT(threshold),totalINTEarned:1e300},reset=axiomReset(s);expect(creditMultiplierFromINT(reset)).toBe(1)});
 });

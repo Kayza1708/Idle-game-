@@ -52,7 +52,7 @@ Der vollständige aktive 7-Tage-Lauf ohne Axiom-Reset (Seed 1708) endete nach 12
 | aktiv, Seeds 1708/42/2026 | 7 / 2 / 5 | 305 / 14 / 15 | ca. 1,29e14 / 7,91e9 s⁻¹ | 244.810 s (2,83 Tage) |
 | passiv, alle Seeds | 0 / 0 / 0 | 19 / 5 / 8 | ca. 3,76e9 / 2,30e5 s⁻¹ | nicht erreicht |
 
-1.000 und 10.000 Zyklus-INT wurden bis Tag 7 nicht erreicht. Die vorherige Schwelle `10^(10^15)` bleibt bis zu abgeschlossenen 30-/60-Tage-Läufen ausdrücklich unkalibriert; aus Teilständen wird keine neue Axiomschwelle hochgerechnet.
+1.000 und 10.000 Zyklus-INT wurden bis Tag 7 nicht erreicht. Die damalige Schwelle `10^(10^15)` blieb in v36 bis zu abgeschlossenen Läufen unkalibriert; sie wird durch die vollständige v37-Messung unten abgelöst.
 
 Der optimierte aktive 30-Tage-Lauf für Seed 1708 schloss in 168 Sekunden ab: 1.782 Zyklus-INT, 61 normale Prestiges und 20 gekaufte Knoten; 100 INT wurden an Tag 2,83 und 1.000 INT an Tag 16,83 erreicht, 10.000 INT nicht. Der Endzeitpunkt lag kurz nach einem Prestige bei 1,34e10 Credits und 8,08e5 Credits/s. Diese Momentaufnahme wird nicht als Maximalrate interpretiert.
 
@@ -72,3 +72,31 @@ Credits und Rate sind Endzeitpunktwerte und schwanken abhängig davon, wie kurz 
 Der aktive 60-Tage-Lauf Seed 1708 schloss innerhalb des 420-Sekunden-Limits nach 345,8 Sekunden ab: 2.919 Zyklus-INT, 136 normale Prestiges, 21 Knoten, 2,39e16 Credits und 1,27e12 Credits/s am Endzeitpunkt. 10.000 INT wurden nicht erreicht. Die zwei weiteren aktiven Seeds und passive 60-Tage-Profile sind noch nicht als abgeschlossene Messwerte ausgewiesen; für sie wird keine Hochrechnung verwendet.
 
 Drei parallel gestartete aktive 42-Tage-Läufe überschritten jeweils das 330-Sekunden-Prozesslimit ohne abgeschlossenen Bericht; parallele CPU-Sättigung war dabei der gemessene Engpass. Die Berichtslast wurde daraufhin begrenzt: vollständige Multiplikatorzerlegung nur für die ersten acht Prestiges, höchstens 256 kompakte Prestigezeilen. Ein einzelner 60-Tage-Lauf schloss damit ab, die drei 42-Tage-Seeds jedoch nicht innerhalb desselben Parallel-Limits. Deshalb bleibt die Axiomschwelle in diesem Auftrag **unverändert und unkalibriert**. Eine Schwelle aus den Tag-30-/Tag-60-Endpunkten abzuleiten wäre eine Hochrechnung und wird ausdrücklich nicht vorgenommen.
+
+## Konservative Meta-Schwelle und Axiom-Knoten v37 (4. Oktober 2026)
+
+Nach dem Rückkopplungsfix wurden die unveränderten aktiven und passiven Sitzungsprofile erneut ab `t=0` mit Seeds 1708, 42 und 2026 ausgeführt. Die Suche betrachtet ganzzahlige Cycle-INT-Schwellen, da normale Prestiges ausschließlich ganze INT gutschreiben. Seed 2026 hatte kurz vor Tag 42 bereits 2.999 Cycle-INT (84 normale Prestiges); Seed 1708 erreichte selbst am Ende des vollständigen 56-Tage-Laufs nur 2.825. Damit existiert kein Schwellenwert, der gleichzeitig bei keinem Seed vor Tag 42 auslöst und bei allen Seeds spätestens an Tag 56 erreichbar ist. Gemäß dem konservativen Auftrag wird deshalb **3.000 INT** (`{m: 3, e: 3}`) gewählt: der kleinste ganzzahlige Wert oberhalb des gemessenen Vor-Tag-42-Maximums von 2.999 INT. Die übrigen Economyparameter blieben unverändert.
+
+Die passiven 56-Tage-Vergleiche erreichten kein Axiom und damit auch keinen zweiten Anspruch:
+
+| Seed | Cycle-INT | normale Prestiges | Credits am Ende | Creditrate am Ende |
+|---:|---:|---:|---:|---:|
+| 1708 | 198 | 41 | 4,04e10 | 2,35e6/s |
+| 42 | 192 | 41 | 6,81e13 | 3,97e9/s |
+| 2026 | 191 | 40 | 6,29e14 | 1,65e10/s |
+
+Die starken Endzeitpunktunterschiede bei Credits und Rate entstehen daraus, wie kurz vor dem Messende das letzte normale Prestige stattfand; Cycle-INT und Prestigezahl sind die robusteren Vergleichswerte. Ein zweites Axiom wurde in keinem abgeschlossenen 56-Tage-Lauf erreicht und wird nicht hochgerechnet.
+
+Mit der konservativen Schwelle liefen die echten Axiom-Transaktionen für die erreichenden Seeds bis Tag 56 weiter:
+
+| Seed | erste Verfügbarkeit/Reset | normale Prestiges bis Reset | Cycle-INT beim Reset | Credits / Rate unmittelbar davor | Stand Tag 56 nach Reset |
+|---:|---:|---:|---:|---:|---:|
+| 42 | Tag 42,833 | 87 | 3.018 | 0 / 2,92e4 s⁻¹ | 1 Axiom, 794 neue Cycle-INT, 139 Prestiges gesamt |
+| 2026 | Tag 42,333 | 85 | 3.064 | 0 / 2,66e4 s⁻¹ | 1 Axiom, 764 neue Cycle-INT, 139 Prestiges gesamt |
+| 1708 | nicht bis Tag 56 | 124 bis Messende | 2.825 am Ende | 1,15e16 / 6,62e11 s⁻¹ am Messende | 0 Axiome |
+
+Die Credits sind unmittelbar vor dem atomaren Axiom-Reset null, weil die normale Prestige-Transaktion, welche die Schwelle überschreitet, im selben deterministischen Entscheidungstakt direkt vorher Credits/Hardware zurücksetzt. Die Axiom-Transaktion selbst wurde dennoch ausschließlich über `axiomReset` ausgeführt. Bei beiden Resets wechselte der Axiom-Creditfaktor genau einmal von ×1 auf ×1,5; Zyklusumsatz, normaler Anspruch, Cycle-INT und INT-Knoten waren danach null. Forschung, Sammlung und reservierte Crafting-Aufträge blieben unverändert. Der erste 10er-Hardwaremeilenstein folgte jeweils nach 160 Sekunden. Ein zweites Axiom wurde bis Tag 56 nicht erreicht.
+
+### Prüflimits
+
+Die drei aktiven und drei passiven 56-Tage-Läufe sowie die echten Resetläufe für Seeds 42/2026 schlossen ohne internen Simulator-Timeout ab. Der separate historische `longTermSimulation.test.ts` überschritt dagegen ein externes 180-Sekunden-Testlimit und wurde nicht als bestanden gemeldet; alle übrigen Testdateien einschließlich der gezielten Axiom-, Save-, Export- und Layer-Three-Suiten schlossen ab. Dieser bestehende breit angelegte Langzeittest bleibt als Laufzeitproblem offen, nicht als hochgerechnetes Balanceergebnis.

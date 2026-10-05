@@ -403,3 +403,9 @@ img.pixel-art,canvas.pixel-art,.pixel-art img{image-rendering:pixelated}
 .early-automation,.training-queue{display:grid;gap:8px}.early-automation button,.early-automation select,.training-queue button{min-height:44px}.early-automation label{display:grid;gap:4px}.early-automation small{overflow-wrap:anywhere}
 .axiom-upgrades{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0}.axiom-upgrade-card{display:grid;grid-template-columns:64px 1fr;gap:10px;align-items:start;padding:12px;border:2px solid #776746;background:#111822}.axiom-upgrade-card.available{border-color:#c99b49}.axiom-upgrade-card.owned{border-color:#42cbd0}.axiom-upgrade-card>button,.axiom-planner-settings{grid-column:1/-1}.axiom-upgrade-card p{margin:.35rem 0}.axiom-planner-settings{display:flex;flex-wrap:wrap;gap:8px}.axiom-planner-settings label{display:grid;gap:4px;min-width:140px;flex:1}.axiom-planner-settings button,.axiom-planner-settings select,.axiom-upgrade-card>button{min-height:44px}.axiom-bonus-note{color:#83dadd}
 .branch-5 i{background:#c58cff}.prestige-node.branch-5{--branch:#a66ee8}.insight-archive-art{display:grid;place-items:center;border:2px solid #b889dc;background:#181020;color:#e4c4ff;font:700 12px monospace}
+
+/* Guided campaign target: stable aura plus a non-color arrow indicator. */
+.tutorial-focus::after{content:'➜';position:absolute;z-index:8;right:8px;top:8px;display:grid;place-items:center;min-width:28px;min-height:28px;border:2px solid #17120c;background:#f1bf65;color:#17120c;font-size:20px;font-weight:900;pointer-events:none;animation:tutorial-arrow 1.8s ease-in-out infinite}
+@keyframes tutorial-arrow{50%{transform:translateX(-4px)}}
+@media(max-width:520px){.tutorial-focus::after{right:4px;top:4px}}
+@media(prefers-reduced-motion:reduce){.tutorial-focus::after{animation:none}}

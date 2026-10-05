@@ -6,7 +6,7 @@ import {onboardingSteps} from './onboarding';
 import {tutorialGuide} from './tutorialGuide';
 import {effectText,itemText,projectText,researchText} from './gameplayI18n';
 
-export type NextGoal={kind:'tutorial'|'onboarding'|'equipment'|'recipe'|'research'|'hardware'|'complete';title:string;progress:string;benefit:string;tab:'workshop'|'research'|'inventory';subtab?:string;targetId:string};
+export type NextGoal={kind:'tutorial'|'onboarding'|'equipment'|'recipe'|'research'|'hardware'|'complete';title:string;progress:string;benefit:string;tab:'workshop'|'research'|'inventory'|'prestige';subtab?:string;targetId:string};
 const recipeReady=(s:GameState,type:RecipeId)=>{const a=craftAffordability(s,type);return a.unlocked&&!a.data.missing&&!a.missingBlueprints&&!Object.keys(a.missingComponents).length&&!Object.keys(a.missingModules).length};
 export function nextGoal(s:GameState):NextGoal{
  const de=s.settings.language==='de',guide=s.story.tutorial==='active'?tutorialGuide(s):null;

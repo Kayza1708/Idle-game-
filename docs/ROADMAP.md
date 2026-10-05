@@ -459,3 +459,13 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Gewichtetes ScientificNumber-INT-Ledger, tiefenbasierte Baumpreise, drei INT-Ertragsknoten, Erkenntnisarchiv und permanenter Prestige-Agent sind in die bestehenden Transaktionspfade integriert.
 
 - [x] Doppelte Credits–INT-Rückkopplung entfernt und normalen INT-Creditbonus logarithmisch auf dem exakten Zyklus-INT-Ledger berechnet.
+
+## Axiom-Metaebene v37
+
+- [x] Atomaren Axiom-Resetvertrag und drei wirksame, persistente Axiom-Knoten in bestehende Ledger-, Komponenten- und Prestige-Pfade integriert.
+- [x] Prestige-Agent mit ScientificNumber-Mindestanspruch, Laufzeit und getrennten Training-/Analyse-Warteoptionen über denselben Online-/Offline-Pfad geführt.
+
+## Mira-Einstiegskampagne v38
+
+- [x] Namenswahl, echte zehnstufige Aktionsführung und Meilensteindialoge vom Garagenlabor bis zur AI-Company integriert.
+- [x] Persistente Tutorialziele, mobile Zielmarkierung, Journal-Neustart, Dialogqueue und Reduced-Motion-Verhalten automatisiert geprüft.
