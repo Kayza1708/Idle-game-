@@ -455,3 +455,12 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Portraitvorgaben in AndroidManifest und iOS Info.plist setzen; Android-Debug-APK tatsächlich mit Gradle und iOS tatsächlich in Xcode bauen, bevor diese Builds als bestanden gelten.
 - Die vollständige reale Gerätecheckliste einschließlich Doppellebenszyklus, Flugmodus, App-Kill/Reload, Zurück-Taste, Softkeyboard, Audio und Haptik auf mindestens einem Android- und einem iOS-Gerät abnehmen.
 - Profil, Shop und Prestige sind weiterhin Teil der historisch gewachsenen großen UI-Module; nach der Gerätebasis gezielt in eigenständige Lazy-Chunks trennen. Der Balancebericht wird bereits erst beim Export dynamisch geladen.
+
+## Mobile UI follow-up (2026-10-05)
+- Run the portrait checklist on physical 375–430 px iPhones, including VoiceOver, Dynamic Type, and home-indicator clearance.
+- Validate long late-game scientific values and every supported language with production save files.
+- Consider splitting the historically large `Panels.tsx` into screen modules after the visual migration stabilizes.
+
+## Pass 2 device validation
+- Verify the new portrait prestige branches and full-screen profile with late-game saves on physical iPhones.
+- Complete VoiceOver focus-order, Dynamic Type, and reduced-motion review for every bottom sheet.
