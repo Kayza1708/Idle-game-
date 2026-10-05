@@ -64,6 +64,14 @@ Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEP
 
 **Nicht enthalten:** Monetarisierung und öffentlicher Launch.
 
+### Lokale Mobile-Beta — In Arbeit (5. Oktober 2026)
+
+- [x] Capacitor-Konfiguration mit App-Name, Bundle-ID, gemeinsamem `dist/`-Build, Safe-Area-/Keyboard-Regeln und Browser-freier Assetbasis angelegt.
+- [x] Native und Browser-Lebenszyklen über einen deduplizierten Save-/Offline-/Audio-Pfad verbunden; Android-Zurück schließt Overlays vor der Navigation.
+- [x] Bestehende Haptikverwaltung an einen defensiven Capacitor-Haptics-Bridge angebunden und Beta-Export-/Import-/Diagnose-/Testreset-Bedienung ergänzt.
+- [ ] `android/` und `ios/` generieren, synchronisieren und nativ bauen; die Paketinstallation ist in dieser Umgebung durch HTTP 403 der npm-Registry blockiert.
+- [ ] Reale Gerätecheckliste aus `docs/mobile-beta.md` vollständig durchführen; kein SDK-, Signierungs- oder Gerätetest wird vorab als bestanden markiert.
+
 ## Phase 6 – Monetarisierung und Soft Launch — Geplant
 **Ziel:** Faire optionale Finanzierung in einer begrenzten Testregion.
 
@@ -469,3 +477,42 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 
 - [x] Namenswahl, echte zehnstufige Aktionsführung und Meilensteindialoge vom Garagenlabor bis zur AI-Company integriert.
 - [x] Persistente Tutorialziele, mobile Zielmarkierung, Journal-Neustart, Dialogqueue und Reduced-Motion-Verhalten automatisiert geprüft.
+
+## Mobile Cozy-Pixel-Oberfläche — abgeschlossen (5. Oktober 2026)
+
+- [x] Werkstatt-Ressourcen priorisieren Credits und Data; Compute/Users sind kompakte Sekundärwerte.
+- [x] KI-Modellkarte öffnet weiterhin den bestehenden Ausrüstungsdialog und zeigt Name, Q/E-Level sowie Platzbelegung.
+- [x] Training zeigt begrenzten Fortschritt und eine aus verbleibender Arbeit und realer Rate berechnete Restzeit.
+- [x] Hardwarekarten nutzen echte Atlaszuordnungen; Amortisation und Ansparzeit liegen in aufklappbaren Kaufdetails.
+- [x] Quest-/Season-Hub ist kompakt, zeigt nur echte Abholindikatoren, begrenzte Fortschritte, Resetzeit und beide Belohnungsspuren.
+- [x] Profil nutzt fünf erreichbare Hauptbereiche und echte Profilwerte; Dialogfokus, Escape, Fokuswiederherstellung und Scrollsperre sind umgesetzt.
+- [x] Mobile Safe-Area, 44-px-Ziele, interne Scrollbereiche und Reduced Motion bleiben berücksichtigt.
+- [ ] Gerenderte Browserabnahme bei 360/390/430 px und Desktop ausführen, sobald eine Browser-Runtime verfügbar ist.
+
+## Rückkehr, Ziele und Season-Archiv — abgeschlossen (5. Oktober 2026)
+
+- [x] Rückkehrbericht ab 60 Sekunden mit tatsächlicher/gutgeschriebener/verlorener Zeit, echten Ressourcen, gruppierten Komponenten, Abschlüssen und neu abholbaren Belohnungen erweitert.
+- [x] Gemeinsame Zielpriorität Tutorial → abholbare Belohnung → angeheftetes Ziel → nächste Hardwareklasse umgesetzt; genau ein Hardware-, Forschungs-, Rezept- oder Prestigeziel wird in Save v38 gespeichert.
+- [x] Zielkarten zeigen Fortschritt, konkrete Fehlmenge, verlässliche ETA und Bereichsaktion, ohne Käufe oder Claims automatisch auszuführen.
+- [x] Nicht mehr verfügbare Questaktionen werden im laufenden Zeitraum durch die erreichbare Credit-Produktion mit unveränderter Gem-Belohnung ersetzt; Periodenbaselines bleiben zeitlich getrennt.
+- [x] Season-Wechsel archiviert höchstens eine vorherige Season sieben Tage, bewahrt Artefakte und verhindert doppelte Claims.
+- [x] Lokale, begrenzte Telemetrie erfasst Rückkehr, Zielwahl/-abschluss, Quest-Claims und Season-Wechsel; der Balance-Export enthält Ziel- und Seasonstatus.
+
+## Zentraler Gem-Shop — abgeschlossen (5. Oktober 2026)
+
+- [x] Laborplätze 3/4, dreistufige Offline-Kapazität, anteilige Crafting-/Trainingsverkürzung und freischaltungsabhängige Materialpakete zentral konfiguriert.
+- [x] Kaufprüfung, atomarer Gem-Abzug, Doppelklickschutz, kanonische Komponentenbuchung und einmaliger Auftragsabschluss getestet.
+- [x] Permanente Käufe über normalen Prestige, Axiom-Reset und Save-v39-Reload erhalten.
+- [x] Mobile Shopbereiche mit Sperrgründen, Bestätigung und Gem-Bestand vorher/nachher umgesetzt.
+- [x] Lokalen Gem-Export nach Einnahmequelle und Angebot ergänzt und 30-Tage-Lauf ohne Echtgeld dokumentiert.
+- [ ] Native Store-Anbindung und Browser-Screenshotabnahme bleiben ausdrücklich offen.
+
+## Retro-Audio und optionale Haptik — abgeschlossen (5. Oktober 2026)
+
+- [x] Vorhandene OGG-/MP3-Dateien zentral und erfolgsabhängig Navigation, Käufen, Meilensteinen, Funden, Abschlüssen, Claims sowie beiden Resetarten zugeordnet.
+- [x] Eine entsperrbare Idle-Loop-Instanz mit Hintergrundpause, Musik-/Effektlautstärke und robuster Play-Ablehnung umgesetzt.
+- [x] Gemeinsame optionale Native-/Browser-Haptik mit drei Mustern integriert; automatische und Offline-Aktionen bleiben stumm.
+- [x] 100-ms-Drossel, Vier-Effekt-Limit, Tap-Begrenzung und Tests gegen doppelte Auslösung ergänzt.
+- [x] Save v40 erhält bestehende Lautstärken und ergänzt Haptik standardmäßig deaktiviert.
+- [x] Fehlende eigenständige Audiomotive dokumentiert; keine nicht vorhandenen Pfade eingebunden.
+- [ ] Hör- und Haptikabnahme auf realen iOS-/Android-Geräten bleibt offen.

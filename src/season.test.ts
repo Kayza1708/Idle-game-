@@ -41,3 +41,21 @@ describe('30 day season',()=>{
     expect(state.profile.completedSeasons).toContain('season-01');
   });
 });
+
+describe('season archive grace period',()=>{
+  it('keeps one previous season claimable for seven days and grants it once',()=>{
+    let state=addSeasonXP(newGame(0),2000,'test');
+    state=rollSeason(state,SEASON_DAYS*86400000+1);
+    expect(state.previousSeason?.id).toBe('season-01');
+    state=claimSeasonReward(state,1,'season-01');
+    const gems=state.gems;
+    expect(claimSeasonReward(state,1,'season-01').gems).toBe(gems);
+  });
+  it('expires the archive and never retains more than one previous season',()=>{
+    let state=addSeasonXP(newGame(0),1000,'test');
+    state=rollSeason(state,(SEASON_DAYS+8)*86400000);
+    expect(state.previousSeason).toBeNull();
+    const again=rollSeason(state,SEASON_DAYS*3*86400000);
+    expect(again.previousSeason===null||again.previousSeason.id!==state.season.id).toBe(true);
+  });
+});

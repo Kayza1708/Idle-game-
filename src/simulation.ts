@@ -1,17 +1,18 @@
 import { BALANCE, addCredits,addData,addCreditsScientific,addDataScientific,addResearchScientific, averageDataSynergy, GameState, trainingRate,trainingDataCost, creditRate,creditRateScientific, dataRate,dataRateScientific, researchRate,researchRateScientific, researchLabCount, hardwareCost, classCompute, buyHardwareClass, maxAffordable, hasNode, isRepeatableResearch, milestoneBonus,tapDropMultiplier, startResearchProject,startQueuedTrainingIfAffordable,rollPassiveComponent,computeRate,computeRateScientific,usersRate,newINT,newINTScientific,newGame,tapCredits,startTraining,queueTraining,selectScannerTarget,passiveCircuitRate,grantComponents,safeEconomyAdd,MAX_ECONOMY_VALUE,hardwareIds,registerTap,permanentFactor,creditMultiplierFromINT,creditMultiplierFromAxioms,hardwareCostScientific,canAffordScientificCreditCost,hardwareAutobuyerUnlocked,shoppingAgentUnlocked,exactEconomyValue,repeatableResearchIds,repeatableResearchDataCost,researchProjectDataCost,PrestigeUpgradeId,ItemTypeId,ComponentId,ExperimentId,Rarity,prestigeUpgradeCost,upgradeLevel,dataSynergyScientific,intSynergyScientific,productionBreakdown } from './economy';
 import { completeExperiment, queueExperiment,runAnalysisPlanner } from './experiments';
-import { rollPeriods,claimMission,claimMissionBonus,MissionKind } from './missions';
+import { rollPeriods,claimMission,claimMissionBonus,missionRewardClaimable,MissionKind } from './missions';
 import { achievements,claimAchievement } from './achievements';
-import { claimSeasonReward,seasonLevel } from './season';
+import { claimSeasonReward,seasonClaimable,seasonLevel } from './season';
 import { challenges,claimChallenge,prestigeGate,totalMastery } from './retention';
 import { craft,craftModule,craftAffordability,equip,forgeItem,fuseItems,claimLootDrop,settleCrafting,runCraftingPlanner } from './inventory';
 import { buyNode } from './prestige';
 import { updateOnboarding } from './onboarding';
 import { addEvent, addMetrics,addSnapshot } from './telemetry';
 import {ScientificNumber,type ScientificJSON} from './scientificNumber';
+import {resolvePinnedGoal} from './nextGoal';
 
-export type AdvanceReport = { credits:number; data:number; research:number; exactCredits:ScientificJSON;exactData:ScientificJSON;levels:number;researchCompleted:number;experiments:number;craftingCompleted:number;hardware:number;seconds:number;elapsedSeconds:number;lostSeconds:number;components:Partial<GameState['componentInventory']>; analysisResults:NonNullable<GameState['experiments']['lastResult']>[] };
-const emptyReport=():AdvanceReport=>({credits:0,data:0,research:0,exactCredits:{m:0,e:0},exactData:{m:0,e:0},levels:0,researchCompleted:0,experiments:0,craftingCompleted:0,hardware:0,seconds:0,elapsedSeconds:0,lostSeconds:0,components:{},analysisResults:[]});
+export type AdvanceReport = { credits:number; data:number; research:number; exactCredits:ScientificJSON;exactData:ScientificJSON;levels:number;researchCompleted:number;experiments:number;craftingCompleted:number;hardware:number;seconds:number;elapsedSeconds:number;lostSeconds:number;components:Partial<GameState['componentInventory']>;newQuestRewards:number;newSeasonRewards:number; analysisResults:NonNullable<GameState['experiments']['lastResult']>[] };
+const emptyReport=():AdvanceReport=>({credits:0,data:0,research:0,exactCredits:{m:0,e:0},exactData:{m:0,e:0},levels:0,researchCompleted:0,experiments:0,craftingCompleted:0,hardware:0,seconds:0,elapsedSeconds:0,lostSeconds:0,components:{},newQuestRewards:0,newSeasonRewards:0,analysisResults:[]});
 export type ResearchCompletionStep = 'project-complete'|'reward-applied'|'unlock-applied'|'queue-checked'|'missions-achievements-ready'|'state-ready-for-save-render';
 
 /** Convert wall time to the save's explicit simulation timeline. */
@@ -88,8 +89,8 @@ function autoStartModelTraining(state:GameState):GameState {
 
 export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
   if(!Number.isFinite(seconds)||seconds<=0)return{state,report:emptyReport()};
-  const limit=Math.min(BALANCE.maxOfflineSeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline'))),total=Math.max(0,Math.min(seconds,limit));
-  let left=total,iterations=0,levels=0,experiments=0,craftingCompleted=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,generatedCreditsExact=ScientificNumber.zero(),generatedDataExact=ScientificNumber.zero(),components:Partial<GameState['componentInventory']>={},analysisResults:NonNullable<GameState['experiments']['lastResult']>[]=[],next=rollPeriods(cloneForSimulation(state),state.savedAt);
+  const limit=Math.min(BALANCE.maxOfflineSeconds,Math.max(state.offlineCapacitySeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline')))),total=Math.max(0,Math.min(seconds,limit));
+  const pinnedReachedBefore=state.pinnedGoal?resolvePinnedGoal(state,state.pinnedGoal)?.reached??false:false,questReadyBefore=(['daily','weekly','monthly'] as MissionKind[]).filter(k=>missionRewardClaimable(state,k)).length,seasonReadyBefore=seasonClaimable(state);let left=total,iterations=0,levels=0,experiments=0,craftingCompleted=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,generatedCreditsExact=ScientificNumber.zero(),generatedDataExact=ScientificNumber.zero(),components:Partial<GameState['componentInventory']>={},analysisResults:NonNullable<GameState['experiments']['lastResult']>[]=[],next=rollPeriods(cloneForSimulation(state),state.savedAt);
   while(left>1e-9&&iterations++<200_000) {
     next=autoStartModelTraining(next);
     const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;
@@ -125,7 +126,8 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
   if(active){next.lifetime.activeSeconds+=total;const dropMult=tapDropMultiplier(next);const interval=Math.max(8,BALANCE.worldDropSeconds/dropMult);const progress=(next.worldDropProgress??0)+total;const spawn=Math.floor(progress/interval);next.worldDropProgress=progress-spawn*interval;next.lootDrops=(next.lootDrops??[]).filter(d=>d.expiresAt>next.savedAt);for(let i=0;i<spawn&&next.lootDrops.length<3;i++){const seed=next.nextId++;next.lootDrops.push({id:`drop-${seed}`,spawnedAt:next.savedAt,expiresAt:next.savedAt+8000,x:8+(seed*37)%84,y:12+(seed*53)%68,variant:seed%17===0?'core':seed%5===0?'cache':'coin'});}}
   const offline=!active&&total>10;
   next=addMetrics(next,next.savedAt,{activeSeconds:active?total:0,offlineSeconds:offline?total:0,passive:offline?0:generatedCredits,offline:offline?generatedCredits:0,offlineCredits:offline?generatedCredits:0,offlineData:offline?generatedData:0,offlineResearch:offline?generatedResearch:0});
-  return {state:next,report:{credits:generatedCredits,data:generatedData,research:generatedResearch,exactCredits:generatedCreditsExact.toJSON(),exactData:generatedDataExact.toJSON(),levels,researchCompleted:next.lifetime.researchCompleted-state.lifetime.researchCompleted,experiments,craftingCompleted,hardware,seconds:total,elapsedSeconds:seconds,lostSeconds:Math.max(0,seconds-total),components,analysisResults}};
+  const pinnedReachedAfter=next.pinnedGoal?resolvePinnedGoal(next,next.pinnedGoal)?.reached??false:false;if(!pinnedReachedBefore&&pinnedReachedAfter)next=addEvent(next,'goal-completed',next.savedAt,{goal:JSON.stringify(next.pinnedGoal)});
+  if(seconds>=60)next=addEvent(next,'offline-return',next.savedAt,{elapsedSeconds:seconds,creditedSeconds:total,lostSeconds:Math.max(0,seconds-total)});return {state:next,report:{credits:generatedCredits,data:generatedData,research:generatedResearch,exactCredits:generatedCreditsExact.toJSON(),exactData:generatedDataExact.toJSON(),levels,researchCompleted:next.lifetime.researchCompleted-state.lifetime.researchCompleted,experiments,craftingCompleted,hardware,seconds:total,elapsedSeconds:seconds,lostSeconds:Math.max(0,seconds-total),components,newQuestRewards:Math.max(0,(['daily','weekly','monthly'] as MissionKind[]).filter(k=>missionRewardClaimable(next,k)).length-questReadyBefore),newSeasonRewards:Number(seasonClaimable(next)&&!seasonReadyBefore),analysisResults}};
 }
 
 export function advanceTo(state:GameState,wallNow:number,active=false,rng=Math.random) {
@@ -133,7 +135,7 @@ export function advanceTo(state:GameState,wallNow:number,active=false,rng=Math.r
   const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advance(state,elapsed,active,rng);
   result.report.elapsedSeconds=elapsed;result.report.lostSeconds=Math.max(0,elapsed-result.report.seconds);
   if(!active&&elapsed>10&&elapsed>result.report.seconds)result.state=addMetrics(result.state,result.state.savedAt,{offlineSeconds:elapsed-result.report.seconds});
-  const limit=Math.min(BALANCE.maxOfflineSeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline')));if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
+  const limit=Math.min(BALANCE.maxOfflineSeconds,Math.max(state.offlineCapacitySeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline'))));if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
   return result;
 }
 

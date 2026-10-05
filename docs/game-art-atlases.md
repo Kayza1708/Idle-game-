@@ -17,3 +17,10 @@ Für die Axiom-Grundseite fehlt ein eigenes Axiom-Motiv. Sie verwendet daher bew
 - Die Axiom-Upgradekarten verwenden vorhandene Motive: `shoppingAgent`, Hardwareanalyse und Quantenchip. Es existiert kein eigenes Atlasmotiv für Analyse- oder Werkbankplaner; bis zu einer gezielten Art-Produktion dienen diese semantisch passenden vorhandenen Motive als dokumentierter Fallback.
 
 - Für das neue Erkenntnisarchiv fehlt eine passende Illustration. Es verwendet deshalb ein neutrales, CSS-gezeichnetes `INT`-Knotensymbol und ausdrücklich keine fremde oder zufällig zugeordnete Atlaszelle.
+
+## Offene Motive für die mobile UI (5. Oktober 2026)
+
+Die aktuelle Überarbeitung verwendet ausschließlich die oben verifizierten Zuordnungen. Für folgende Motive existiert noch keine semantisch passende Atlaszelle:
+
+- `public/assets/game/ai-model-card.png` – Portrait der KI auf der anklickbaren Modell-/Ausrüstungskarte in der Werkstatt. Bis dahin bleibt dort der vorhandene CSS-Modellkern.
+- `public/assets/game/season-premium-chest.png` – Premium-Spur im Season-Pass. Bis zur Bereitstellung zeigt die gesperrte Spur bewusst nur das vorhandene Schloss-Symbol und erfindet keine Belohnung.
