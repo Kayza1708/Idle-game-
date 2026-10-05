@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { GameState, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining } from './economy';
+import { GameState, addCredits, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige } from './prestige';
 import { advance, advanceTo, debugAdvance, settleResearchCompletions, simulationNow, type ResearchCompletionStep } from './simulation';
@@ -12,7 +12,7 @@ class MemoryStorage implements StorageLike {
   removeItem(){this.value=null;}
 }
 
-const prestigeReady=(now:number)=>({...newGame(now),credits:13_000_000_000,runCreditsEarned:13_000_000_000,lifetimeCreditsEarned:13_000_000_000,lifetimeEligibleCredits:13_000_000_000});
+const prestigeReady=(now:number)=>addCredits(newGame(now),1_000_000_000_000_000);
 
 describe('simulation clock regressions',()=>{
   const researchReady=(now=0)=>({...newGame(now),credits:1_000_000,data:1_000_000,researchPoints:1_000_000});

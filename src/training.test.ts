@@ -1,5 +1,5 @@
 import {describe,expect,it} from 'vitest';
-import {BALANCE,baseDataRateScientific,creditRate,dataMultiplierScientific,dataRateScientific,efficiency,exactEconomyValue,newGame,productionBreakdown,quality,registerTap,softcap,startTraining,trainingDataCost,trainingDataCostForLevelScientific,trainingDurationSeconds,trainingWork,usersRateScientific} from './economy';
+import {type GameState,BALANCE,baseDataRateScientific,creditRate,dataMultiplierScientific,dataRateScientific,efficiency,exactEconomyValue,newGame,productionBreakdown,quality,registerTap,softcap,startTraining,trainingDataCost,trainingDataCostForLevelScientific,trainingDurationSeconds,trainingWork,usersRateScientific} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {advance} from './simulation';
 import {restore,serialize} from './storage';
@@ -8,7 +8,7 @@ const withData=(amount:ScientificNumber|number)=>{const value=typeof amount==='n
 describe('data production',()=>{
  it('uses 0.1 × sqrt(users) and therefore grows sublinearly',()=>{for(const users of [1,100,10_000,1_000_000])expect(baseDataRateScientific(ScientificNumber.from(users)).toNumber()).toBeCloseTo(.1*Math.sqrt(users),12);expect(baseDataRateScientific(ScientificNumber.from(1e12)).divide(baseDataRateScientific(ScientificNumber.from(1e6))).toNumber()).toBeCloseTo(1000);});
  it('starts at multiplier one, flattens, and remains below five',()=>{expect(dataMultiplierScientific(ScientificNumber.zero()).toNumber()).toBe(1);for(const bonus of [.1,1,10,1e12]){const multiplier=dataMultiplierScientific(ScientificNumber.from(bonus)).toNumber();expect(multiplier).toBeGreaterThanOrEqual(1);expect(multiplier).toBeLessThan(5);}});
- it('keeps large user values in scientific arithmetic',()=>{expect(baseDataRateScientific(ScientificNumber.fromParts(1,400)).toJSON()).toEqual({m:1,e:199});const s=newGame(0);expect(dataRateScientific(s).compare(ScientificNumber.zero())).toBeGreaterThan(0);expect(usersRateScientific(s).compare(ScientificNumber.zero())).toBeGreaterThan(0);});
+ it('keeps large user values in scientific arithmetic',()=>{expect(baseDataRateScientific(ScientificNumber.fromParts(1,400)).toJSON()).toEqual({m:1,e:199});const fresh=newGame(0),s={...fresh,hardware:1,hardwareCounts:{...fresh.hardwareCounts,calculator:1},discovered:['calculator'] as GameState['discovered']};expect(dataRateScientific(s).compare(ScientificNumber.zero())).toBeGreaterThan(0);expect(usersRateScientific(s).compare(ScientificNumber.zero())).toBeGreaterThan(0);});
 });
 
 describe('fixed model training',()=>{

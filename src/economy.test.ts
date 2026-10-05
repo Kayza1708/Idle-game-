@@ -14,7 +14,7 @@ describe('economy', () => {
   });
   it('uses normalized profiles from the central configuration',()=>{
     for(const profile of Object.values(BALANCE.operatingProfiles))expect(profile.inference+profile.training+profile.research).toBeCloseTo(1,12);
-    const balanced=newGame(0),training=selectOperatingProfile(balanced,'training');
+    const fresh=newGame(0),balanced={...fresh,hardware:1,hardwareCounts:{...fresh.hardwareCounts,calculator:1},discovered:['calculator'] as GameState['discovered']},training=selectOperatingProfile(balanced,'training');
     expect(computeAllocation(training).training).toBeGreaterThan(computeAllocation(balanced).training);
     expect(creditRate(training.hardware,training.level,training)).toBeLessThan(creditRate(balanced.hardware,balanced.level,balanced));
     expect(dataRate(balanced)).toBeGreaterThan(0);expect(researchRate(balanced)).toBeGreaterThan(0);
@@ -38,7 +38,7 @@ describe('economy', () => {
     expect(half.credits).toBeCloseTo(whole.credits, 8);
   });
   it('clamps negative time and default offline time beyond eight hours', () => {
-    const state = newGame(0);
+    const fresh=newGame(0),state={...fresh,hardware:1,hardwareCounts:{...fresh.hardwareCounts,calculator:1},discovered:['calculator'] as GameState['discovered']};
     expect(advance(state, -5).state.credits).toBe(0);
     expect(advance(state, 1e9).state.credits).toBeCloseTo(advance(state, 28800).state.credits);
     const oneSecond=advance(state,1).state,splitSecond=advance(advance(state,.4).state,.6).state;
