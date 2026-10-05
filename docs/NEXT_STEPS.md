@@ -472,3 +472,6 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 ## Nach dem finalen Mobile-UX-Fix (2026-10-05)
 - [ ] Auf einem physischen iPhone Pinch-/Pan-Trägheit, VoiceOver-Reihenfolge der Prestige-Nodes und Dynamic Type abschließend prüfen.
 - [ ] Store-Inhalte erst mit einem separaten Monetarisierungsauftrag erweitern; aktuell werden ausschließlich vorhandene Gem-Angebote dargestellt.
+
+## Nach dem Mobile-Test-Harness-Fix (2026-10-05)
+- [ ] Künftige CSS-Source-Contract-Tests ebenfalls per direktem UTF-8-Dateizugriff statt über Vites CSS-Modultransformation anbinden.

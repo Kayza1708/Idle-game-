@@ -545,3 +545,6 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Prestige als innerhalb des Viewports geclippte, zoombare und verschiebbare 2D-Netzkarte mit echten Abhängigkeitslinien umgesetzt.
 - [x] Fünf mobile Hauptziele einschließlich vorbereitetem Shop sowie Freischaltsperre für Prestige umgesetzt.
 - [x] Missionszeilen, Forschung, Hardware-Kaufaktion, Ressourcenformatierung und Settings/Reset für iPhone-Breiten stabilisiert.
+
+## Mobile-Test-Harness-Fix (2026-10-05)
+- [x] CSS-Source-Contracts lesen `src/style.css` direkt aus dem Dateisystem, statt den leeren Vitest-CSS-Modulwert zu prüfen.
