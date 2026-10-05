@@ -451,7 +451,7 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 
 ## Mobile-Beta-Übergabe (5. Oktober 2026)
 
-- In einer Umgebung mit Zugriff auf die Capacitor-Pakete die Installations-, `cap add`- und `cap sync`-Befehle aus `docs/mobile-beta.md` ausführen und die generierten Android-/iOS-Projekte einchecken.
+- Nach erfolgreicher Installation der in `package.json` fixierten Capacitor-8-Pakete als Nächstes `npx cap add ios` und `npx cap sync ios` ausführen und das generierte iOS-Projekt separat prüfen und einchecken.
 - Portraitvorgaben in AndroidManifest und iOS Info.plist setzen; Android-Debug-APK tatsächlich mit Gradle und iOS tatsächlich in Xcode bauen, bevor diese Builds als bestanden gelten.
 - Die vollständige reale Gerätecheckliste einschließlich Doppellebenszyklus, Flugmodus, App-Kill/Reload, Zurück-Taste, Softkeyboard, Audio und Haptik auf mindestens einem Android- und einem iOS-Gerät abnehmen.
 - Profil, Shop und Prestige sind weiterhin Teil der historisch gewachsenen großen UI-Module; nach der Gerätebasis gezielt in eigenständige Lazy-Chunks trennen. Der Balancebericht wird bereits erst beim Export dynamisch geladen.
