@@ -484,3 +484,10 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 
 ## Nach der Shop-Copy-Korrektur (5. Oktober 2026)
 - [ ] Die bereits offene reale iPhone-Simulator-Abnahme des kompakten Shops bleibt unverändert erforderlich.
+
+## Nach dem Mobile Meta-System Polish (5. Oktober 2026)
+- [ ] Gemeinsame Shell, Core, Research-Tabs, Analyse, Mission Claims, Profil, Settings, Shop und Season bei 375/390/393/402/430 px im iPhone-Simulator abnehmen.
+- [ ] Native Notification-Berechtigungen und Scheduling erst nach Auswahl eines Plattform-Adapters integrieren.
+- [ ] StoreKit-Adapter mit signierten Entitlements, Produktmetadaten und Restore implementieren, bevor Premium oder Gem Packs kaufbar werden.
+- [ ] Rewarded-Ad-Provider anbinden und Rewards ausschließlich nach bestätigtem nativen Success-Callback abrechnen.
+- [ ] Daily-Shop erst mit versioniertem Claim-State und zentral freigegebenen bestehenden Reward-/Preiswerten implementieren.
