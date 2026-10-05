@@ -29,8 +29,9 @@ describe('final mobile interaction contracts',()=>{
  it('does not render anonymous research artwork placeholders',()=>{
   const research=panels.slice(panels.indexOf('export function Research'),panels.indexOf('export function Inventory'));
   expect(research).not.toContain('research-placeholder');
-  expect(research).toContain('<summary><span aria-hidden="true">ⓘ</span><span>');
-  expect(css).toContain('background:transparent;color:#79c9bf');
+  expect(research).toContain('onClick={()=>setSelectedResearch(id)}');
+  expect(research).toContain('<MobileDetailSheet title={copy.name}');
+  expect(research).not.toContain('<details><summary>');
  });
  it('offers a confirmed unrestricted local reset',()=>{
   expect(meta).toContain('setResetConfirm(true)');
@@ -40,8 +41,9 @@ describe('final mobile interaction contracts',()=>{
   expect(app).toContain('await removeDurableGame();removeGame(storage.current);location.reload()');
  });
  it('shows selected-purchase output and a compact buy action',()=>{
-  expect(panels).toContain('classCompute(s,id,owned+count)-output');
-  expect(panels).toContain("'beim Kauf'");
+  expect(panels).toContain('hardwarePurchaseComputeGain(s,id,count)');
+  expect(panels).toContain("'Nächster Kauf'");
+  expect(panels).toContain('className="hardware-output"');
   expect(panels).toContain("'KAUFEN'");
   expect(panels).not.toContain('className="hardware-buy" disabled={!affordable} onClick={()=>act(\'buy-class\',id)} aria-label={`${hardwareText(id,language).name} kaufen`}>+</button>');
  });

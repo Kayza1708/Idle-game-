@@ -491,3 +491,13 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - [ ] StoreKit-Adapter mit signierten Entitlements, Produktmetadaten und Restore implementieren, bevor Premium oder Gem Packs kaufbar werden.
 - [ ] Rewarded-Ad-Provider anbinden und Rewards ausschließlich nach bestätigtem nativen Success-Callback abrechnen.
 - [ ] Daily-Shop erst mit versioniertem Claim-State und zentral freigegebenen bestehenden Reward-/Preiswerten implementieren.
+
+## Nach dem Gameplay-UX und Progression-Pass (5. Oktober 2026)
+- [ ] Prestige-Tree bei 375/390/393/402/430 px mit Pan, Pinch, Fit, Node-Kauf und Confirmation auf einem iPhone prüfen.
+- [ ] Hardwareanzeigen für ×1, ×10 und MAX mit späten Multiplikatoren und großen Zahlen visuell abnehmen.
+- [ ] Core-Tap/Hold, Impulsmeter, Model-Training und Research-Detail-Sheets mit VoiceOver und Dynamic Type prüfen.
+
+## Nach der Verifikations-Nachschärfung (5. Oktober 2026)
+- [ ] In einer Umgebung mit installiertem `node_modules` Typecheck, gezielte Suites, Build und den vollständigen Long-Term-Testlauf ausführen.
+- [ ] Im iPhone-Simulator Tree-Pan/Pinch/Fit, alle Node-Sperrgründe, Sheet-Kauf-CTA und den kompakten Laborblock bei 375–430 px abnehmen.
+- [ ] ×1/×10/MAX-Hardwarewerte sowie Model→Research-Deep-Links mit realen Early-/Late-Game-Saves durchspielen.
