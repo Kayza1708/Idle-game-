@@ -17,7 +17,7 @@ describe('mobile gameplay shell and information architecture',()=>{
  });
  it('keeps the core compact and independent of the old lab image',()=>{
   expect(panels).not.toContain('early-lab-pixel-art.png');
-  expect(css).toMatch(/\.workshop-action \.tap-surface\{[^}]*height:202px/);
+  expect(css).toMatch(/\.core-hero \.tap-surface\{[^}]*height:214px/);
   expect(css).toContain('repeating-radial-gradient');
  });
  it('removes the permanent next-goal panel and uses the Mira coach',()=>{

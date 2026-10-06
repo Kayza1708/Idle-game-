@@ -49,7 +49,7 @@ describe('final mobile interaction contracts',()=>{
  });
  it('uses localized header suffixes without ellipsis',()=>{
   expect(panels).toContain("[1e12,'Bio.'],[1e9,'Mrd.'],[1e6,'Mio.'],[1e3,'Tsd.']");
-  expect(css).toContain('.resource-bar b{font-size:clamp');
-  expect(css).not.toMatch(/\.resource-bar b\{[^}]*text-overflow:ellipsis/);
+  expect(css).toContain('.resource-cell>b{font-size:clamp');
+  expect(css).not.toMatch(/\.resource-cell>b\{[^}]*text-overflow:ellipsis/);
  });
 });

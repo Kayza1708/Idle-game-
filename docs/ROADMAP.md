@@ -585,3 +585,16 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Retention-Gates in Tree-State und Node-Sheet vereinheitlicht; konkrete Sperrgründe ergänzt.
 - [x] Labore zu einer kompakten Statusgruppe verdichtet und bestehende Core-Research-Einträge direkt verlinkt.
 - [ ] Ausführung der vollständigen Toolchain steht in dieser Umgebung wegen nicht installierbarer npm-Abhängigkeiten aus.
+
+## Resource-Header und Workshop-Hero (6. Oktober 2026)
+- [x] ResourceBar strukturell in vier identische ResourceCells zwischen symmetrischen 44-px-Seitenbereichen organisiert.
+- [x] Workshop-Action-Area in getrennte Core-Interaktion, Tap-Ertrag, Impulsfortschritt und kompakte Model-Metriken gegliedert.
+- [x] Sichtbare Model-Werte verwenden weiterhin die autoritativen Quality-/Efficiency-Funktionen.
+- [ ] Visuelle Xcode-Abnahme für 375×667 bis 430×932 steht aus.
+
+## Mobile-Sheet Release-Blocker (6. Oktober 2026)
+- [x] Detail-Sheets aus den geclippten Screen-Scrollern in ein Body-Portal verschoben und auf festen Header, ausschließlich scrollenden Body und festen Action-Footer konsolidiert.
+- [x] Verfügbare Overlay-Höhe zieht BottomNav und iOS-Bottom-Safe-Area über eine gemeinsame Shell-Variable ab.
+- [x] Prestige- und Research-Aktionen bleiben für verfügbare, gesperrte, laufende und abgeschlossene Zustände im Footer sichtbar.
+- [x] Offline-Report verwendet dieselbe Header-/Body-/Footer-Höhenlogik.
+- [ ] Reale CTA-Sichtbarkeit und Tappbarkeit auf den sechs Ziel-iPhone-Viewports bleibt in Xcode abzunehmen.

@@ -501,3 +501,14 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - [ ] In einer Umgebung mit installiertem `node_modules` Typecheck, gezielte Suites, Build und den vollständigen Long-Term-Testlauf ausführen.
 - [ ] Im iPhone-Simulator Tree-Pan/Pinch/Fit, alle Node-Sperrgründe, Sheet-Kauf-CTA und den kompakten Laborblock bei 375–430 px abnehmen.
 - [ ] ×1/×10/MAX-Hardwarewerte sowie Model→Research-Deep-Links mit realen Early-/Late-Game-Saves durchspielen.
+
+## Nach Resource-Header-/Workshop-Hero-Pass (6. Oktober 2026)
+- [ ] ResourceBar mit langen deutschen Zahlen und großen Produktionswerten bei 375/390/393/402/430 px im iPhone-Simulator prüfen.
+- [ ] Core-Zentrierung, Tap/Hold, Floating Rewards, Impuls/Overclock und Model-Card auf allen sechs Ziel-Viewports visuell abnehmen.
+- [ ] Sicherstellen, dass auf 375×667 weiterhin mindestens die erste Hardwarezeile sinnvoll sichtbar und erreichbar ist.
+
+## Abnahme des Mobile-Sheet Release-Blockers (6. Oktober 2026)
+- [ ] Auf 375×667 zuerst Prestige-Node-Kauf, Research-Start und beide Offline-Report-Aktionen vollständig ausführen.
+- [ ] Anschließend dieselben Flows bei 375×812, 390×844, 393×852, 402×874 und 430×932 prüfen.
+- [ ] Lange Model-, Item-, Season-, Prestige- und Research-Details scrollen; Header, Close und Footer müssen stehen bleiben.
+- [ ] Mit eingeblendeter iOS-Tastatur prüfen, dass `dvh` schrumpft und kein Overlay-CTA hinter Keyboard oder BottomNav gerät.

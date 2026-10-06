@@ -44,7 +44,7 @@ describe('mobile prestige and research interaction',()=>{
   expect(panels).toContain("act('node',selected)");
   expect(panels).toContain('className="prestige-node-values"');
   expect(css).toMatch(/\.node-buy-action\{[^}]*min-height:48px/);
-  expect(css).toMatch(/\.mobile-detail-sheet>footer\{[^}]*safe-area-inset-bottom/);
+  expect(css).toMatch(/--overlay-bottom-reserve:calc\(var\(--nav-height\) \+ env\(safe-area-inset-bottom\)\)/);
  });
  it('makes each research row the detail trigger without a details control',()=>{
   const research=panels.slice(panels.indexOf('export function Research'),panels.indexOf('export function Inventory'));
