@@ -561,3 +561,12 @@ Eigener Folgebranch `codex/isolated-challenge-runs` ab `06d39de`, abhängig von 
 Kurze gezielte Abnahme und reproduzierbare Vorher/Nachher-Fälle stehen im [Audit](challenge-isolation-audit.md); finale Commit-ID und Prüfergebnisse im abhängigen Folge-PR. Kein Merge. Keine Gesamtsuite oder FAST-/DEEP-/Langzeitkampagne für diesen Auftrag. Die bekannten Schicht-3-Abweichungen 361/313 und 57700/59132 bleiben unverändert; die optionale Langzeitbalancebewertung bleibt ausdrücklich separat offen. Keine bestätigte Langzeitbalance aus grünen Techniktests ableiten.
 
 Der bestehende PR-CI-Workflow würde pauschal `npm test` starten. `[skip ci]` verhindert für diesen Folge-PR die laut Auftrag ausgeschlossenen automatischen Langläufe; die gezielten lokalen Prüfungen ersetzen keinen grünen vollständigen CI-Status. Workflow und Testdefinitionen wurden dafür nicht verändert.
+
+## Übergabe Auftrag 5
+
+Gemeinsame Vorschauen, tatsächliche Produktionszerlegung und begrenzter lokaler
+Export sind auf dem Folgebranch umgesetzt. PR #67 ist bereits in der Main-Basis
+enthalten; keine offene Branch-Abhängigkeit. Details, Reproduktionen, numerische
+Präzision und Exportlücken: `preview-export-audit.md`.
+Die optionalen Langzeitmessungen und Schicht-3-Referenzentscheidungen bleiben ein
+separater Auftrag; dafür keine Referenzen oder Economy-Parameter geändert.

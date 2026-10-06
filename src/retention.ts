@@ -1,3 +1,4 @@
+import {archiveChallengeTelemetry,addEvent} from './telemetry';
 import {advanceTo,emptyReport} from './simulation';
 import {exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
 import {ScientificNumber} from './scientificNumber';
@@ -255,10 +256,10 @@ export function claimChallenge(s:GameState,id:string){const c=challenges.find(x=
 export function startRunChallenge(s:GameState,id:string):GameState{
  if(s.retention.activeRun||s.challengeSession||!runChallenges.some(c=>c.id===id))return s;
  const fresh=newGame(s.savedAt,s.telemetry.campaignId),runId=`${s.telemetry.campaignId}:${id}:${crypto.randomUUID()}`;
- return {...fresh,aiName:s.aiName,profile:{...fresh.profile,playerName:s.profile.playerName},settings:{...s.settings},clockOffsetMs:s.clockOffsetMs,gems:0,
+ return addEvent({...fresh,aiName:s.aiName,profile:{...fresh.profile,playerName:s.profile.playerName},settings:{...s.settings},clockOffsetMs:s.clockOffsetMs,gems:0,
   story:{...fresh.story,tutorial:'skipped',target:null,open:null,queue:[],enabled:false},
   retention:{...fresh.retention,activeRun:{id,runId,startedAt:s.savedAt,eligibleAtStart:fresh.exactEconomy.lifetimeEligibleCredits}},
-  challengeSession:{main:s,anchor:s.savedAt,report:emptyReport()}};
+  challengeSession:{main:s,anchor:s.savedAt,report:emptyReport()}},'challenge-start',s.savedAt,{source:'challenge-start',jobId:runId,challengeId:id,startCapital:fresh.credits,startCapitalIsIncome:false});
 }
 export const runChallengeEligibleRevenue=(s:GameState)=>s.retention.activeRun?exactEconomyValue(s,'lifetimeEligibleCredits').subtract(ScientificNumber.fromJSON(s.retention.activeRun.eligibleAtStart)):ScientificNumber.zero();
 export const runChallengeProgress=(s:GameState)=>prestigeClaimForEligible(runChallengeEligibleRevenue(s));
@@ -272,7 +273,7 @@ function returnToMain(s:GameState,success:boolean):GameState{
  const retention=success?{...main.retention,challengeStars:main.retention.challengeStars+(previous===0?challenge!.stars:0),
   runCompletions:{...main.retention.runCompletions,[run.id]:previous+1},
   runBestSeconds:{...main.retention.runBestSeconds,[run.id]:Math.min(main.retention.runBestSeconds[run.id]??Infinity,(settled.savedAt-run.startedAt)/1000)}}:main.retention;
- return {...main,clockOffsetMs:s.clockOffsetMs,retention,challengeReturn:{runId:run.runId,success,report:session.report}};
+ return addEvent({...archiveChallengeTelemetry(main,settled),clockOffsetMs:s.clockOffsetMs,retention,challengeReturn:{runId:run.runId,success,report:session.report}},'challenge-return',settled.savedAt,{source:'challenge-return',jobId:run.runId,challengeId:run.id,success,starsAwarded:retention.challengeStars-main.retention.challengeStars});
 }
 export function completeRunChallenge(s:GameState):GameState{return runChallengeReady(s)?returnToMain(s,true):s;}
 export function abortRunChallenge(s:GameState):GameState{return returnToMain(s,false);}

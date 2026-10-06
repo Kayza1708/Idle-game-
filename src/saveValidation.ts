@@ -45,6 +45,7 @@ function report(value:unknown){
  for(const r of value.analysisResults as GameState['experiments']['lastResult'][]){if(!r||!Object.hasOwn(BALANCE.experimentRewards,r.type)||!['short','long'].includes(r.length)||!id(r.id)||!time(r.at)||!['active','offline'].includes(r.mode)||!integer(r.blueprintFragments)||!integer(r.researchFragments))fail('challenge.report','ungültiges Analyseergebnis');counts(r!.components,componentIds,'challenge.report.analysisResults.components',true);}
 }
 /** Called after existing version migrations and before simulation or any save write. */
+function savedScientificCost(value:unknown,native:number|undefined,field:string){if(value===undefined)return;if(!ScientificNumber.isValidJSON(value)||native===undefined||ScientificNumber.fromJSON(value).toNumber(1e300)!==native)fail(field,'ungültige wissenschaftliche Auftragskosten');}
 export function assertDomainState(value:unknown):asserts value is GameState{
  if(!object(value))fail('Spielstand','kein Zustandsobjekt');
  const s=value as GameState;
@@ -114,10 +115,10 @@ export function assertDomainState(value:unknown):asserts value is GameState{
  if(s.crafting.active!==null)job(s.crafting.active,false);for(const queued of s.crafting.queue)job(queued,true);
  if(!Array.isArray(s.researchLabs))fail('researchLabs','Labore fehlen');
  const researchIds=[...Object.keys(BALANCE.researchProjects),...Object.keys(BALANCE.repeatableResearch)];
- for(const lab of s.researchLabs)if(lab!==null){if(!object(lab)||!researchIds.includes(lab.id)||!integer(lab.level,1)||!finite(lab.dataCost)||!finite(lab.durationSeconds,Number.MIN_VALUE))fail('researchLabs','ungültiger Forschungsauftrag');timing(lab,'researchLabs');}
+ for(const lab of s.researchLabs)if(lab!==null){if(!object(lab)||!researchIds.includes(lab.id)||!integer(lab.level,1)||!finite(lab.dataCost)||!finite(lab.durationSeconds,Number.MIN_VALUE))fail('researchLabs','ungültiger Forschungsauftrag');timing(lab,'researchLabs');savedScientificCost(lab.dataCostExact,lab.dataCost,'researchLabs.dataCostExact');}
  if(!Array.isArray(s.trainingQueue))fail('trainingQueue','Trainingsliste fehlt');
  for(const queued of s.trainingQueue)if(!object(queued)||!['quality','efficiency'].includes(queued.track)||!integer(queued.targetLevel,1))fail('trainingQueue','ungültiger Trainingsauftrag');
- if(s.activeTraining!==null){const j=s.activeTraining;if(!object(j)||!['quality','efficiency'].includes(j.track)||!finite(j.workRequired,Number.MIN_VALUE)||!finite(j.creditCost)||(j.dataCost!==undefined&&!finite(j.dataCost))||(j.startedAt!==undefined&&!time(j.startedAt))||(j.baseDuration!==undefined&&!finite(j.baseDuration,Number.MIN_VALUE))||(j.startingRate!==undefined&&!finite(j.startingRate,Number.MIN_VALUE))||(j.onlineWork!==undefined&&!finite(j.onlineWork))||(j.offlineWork!==undefined&&!finite(j.offlineWork))||s.training>j.workRequired+.1)fail('activeTraining','ungültiger Trainingsauftrag');}
+ if(s.activeTraining!==null){const j=s.activeTraining;if(!object(j)||!['quality','efficiency'].includes(j.track)||!finite(j.workRequired,Number.MIN_VALUE)||!finite(j.creditCost)||(j.dataCost!==undefined&&!finite(j.dataCost))||(j.startedAt!==undefined&&!time(j.startedAt))||(j.baseDuration!==undefined&&!finite(j.baseDuration,Number.MIN_VALUE))||(j.startingRate!==undefined&&!finite(j.startingRate,Number.MIN_VALUE))||(j.onlineWork!==undefined&&!finite(j.onlineWork))||(j.offlineWork!==undefined&&!finite(j.offlineWork))||s.training>j.workRequired+.1)fail('activeTraining','ungültiger Trainingsauftrag');savedScientificCost(j.dataCostExact,j.dataCost,'activeTraining.dataCostExact');}
  if(!object(s.experiments))fail('experiments','Analysen fehlen');
  const experimentIds=Object.keys(BALANCE.experimentRewards);ids(s.experiments.queue,experimentIds,'experiments.queue');
  if(s.experiments.repeat!==null&&!experimentIds.includes(s.experiments.repeat))fail('experiments.repeat','unbekanntes Rezept');
