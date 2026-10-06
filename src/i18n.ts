@@ -76,7 +76,7 @@ const hardwareTranslations:Record<HardwareTranslationId,Record<Language,Hardware
     pl:{name:'GPU gamingowe',description:'Aktywne impulsy i równoległe wnioskowanie.'}
   },
   rig:{
-    en:{name:'AI Workstation',description:'Accelerates selected training runs.'},
+    en:{name:'AI Workstation',description:'Training milestones reduce future Data start costs; duration stays fixed.'},
     de:{name:'KI-Workstation',description:'Beschleunigt gewählte Trainingsläufe.'},
     es:{name:'Estación de trabajo de IA',description:'Acelera los entrenamientos seleccionados.'},
     fr:{name:'Station de travail IA',description:'Accélère les entraînements sélectionnés.'},

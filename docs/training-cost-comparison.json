@@ -1,0 +1,159 @@
+{
+  "baseline": "39a503f0190fe8e14380bfed7fbd213dcc87bc66",
+  "before": [
+    {
+      "name": "none",
+      "cost": "1.500000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": null
+    },
+    {
+      "name": "graph",
+      "cost": "1.500000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": null
+    },
+    {
+      "name": "common-item",
+      "cost": "1.500000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": null
+    },
+    {
+      "name": "upgraded-forged-item",
+      "cost": "1.500000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": null
+    },
+    {
+      "name": "temporary-boost",
+      "cost": "1.500000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": null
+    },
+    {
+      "name": "combined",
+      "cost": "1.500000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": null
+    }
+  ],
+  "after": [
+    {
+      "name": "none",
+      "cost": "1.500000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": {
+        "targetLevel": 1,
+        "baseDataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "factor": 1,
+        "bonusTotal": 0,
+        "sources": {}
+      }
+    },
+    {
+      "name": "graph",
+      "cost": "1.300000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": {
+        "targetLevel": 1,
+        "baseDataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "factor": 0.8333333333333334,
+        "bonusTotal": 0.2,
+        "sources": {
+          "breakthrough:graph": 0.2
+        }
+      }
+    },
+    {
+      "name": "common-item",
+      "cost": "1.400000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": {
+        "targetLevel": 1,
+        "baseDataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "factor": 0.9259259259259258,
+        "bonusTotal": 0.08,
+        "sources": {
+          "item:item-1:photonic-array": 0.08
+        }
+      }
+    },
+    {
+      "name": "upgraded-forged-item",
+      "cost": "1.400000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": {
+        "targetLevel": 1,
+        "baseDataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "factor": 0.8915936273167169,
+        "bonusTotal": 0.1215872,
+        "sources": {
+          "item:item-1:photonic-array": 0.1215872
+        }
+      }
+    },
+    {
+      "name": "temporary-boost",
+      "cost": "8.000000000000000e+0",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": {
+        "targetLevel": 1,
+        "baseDataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "factor": 0.5,
+        "bonusTotal": 1,
+        "sources": {
+          "temporary:trainingBoost": 1
+        }
+      }
+    },
+    {
+      "name": "combined",
+      "cost": "1.000000000000000e+1",
+      "duration": 90,
+      "creditCost": 0,
+      "basis": {
+        "targetLevel": 1,
+        "baseDataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "factor": 0.655307994757536,
+        "bonusTotal": 0.526,
+        "sources": {
+          "item:item-1:photonic-array": 0.086,
+          "milestone:rig:10": 0.05,
+          "milestone:rig:25": 0.1,
+          "milestone:lunar:10": 0.09,
+          "breakthrough:graph": 0.2
+        }
+      }
+    }
+  ]
+}

@@ -6,7 +6,7 @@ Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und 
 
 | Ressource | Verwendung | Prestige |
 |---|---|---|
-| Credits | Hardware, Training, Forschung, Crafting | zurückgesetzt |
+| Credits | Hardware und vorhandene Crafting-/Kaufaktionen; kein Training | zurückgesetzt |
 | Compute | Produktionsrate aus Hardware; vollständig für Users genutzt | Hardwarebestand zurückgesetzt |
 | Daten | entstehen durch Nutzer; Training und Projekte | zurückgesetzt |
 | Forschungspunkte | entstehen aus Forschungs-Compute; Projekte | bleiben erhalten |
@@ -64,7 +64,13 @@ Alte gespeicherte Betriebsprofile bleiben gültig, haben aber keine Produktionsw
 
 ## Modelltraining und Softcaps
 
-Training beginnt nur nach einer bezahlten Wahl (Qualität oder Effizienz), kostet `25×1,7^(q+e)` Credits sowie `2×(Gesamtlevel+1)` Daten und benötigt `30×(Gesamtlevel+1)^1,25` Arbeit. Die vorhandene feste Trainingsrate beträgt 1; keine Compute-Zuweisung beeinflusst sie. Ein Lauf arbeitet online/offline, behält Überlauf innerhalb des Abschlussereignisses und startet nie ungefragt den nächsten Lauf.
+Training für Qualität oder Effizienz kostet ausschließlich Data: ungerundete Basis `15 × 1,75^(Ziellevel−1)`, feste Dauer `min(90 × 1,35^(Ziellevel−1), 72 Stunden)`. Ziellevel wird pro Track berechnet. `trainingRate = 1`; Hardware, Taps, Items und temporäre Boni verändern die laufende Dauer nicht.
+
+Seit Auftrag 7B gilt zentral `B = Summe vorhandener wirksamer Trainingskostenbeiträge`, `Faktor = max(0,5; 1/(1+B))`, `Startkosten = ceil(ungerundete Basis × Faktor)`. +20 % Beitrag ergibt Faktor 1/1,2, nicht −20 % Kosten. Keine einzelnen Beiträge oder Basiskosten vorab runden. Der Deckel betrifft den Faktor; nach Aufrundung kann die tatsächliche Preisersparnis kleiner sein (15 Data × 0,5 → 8 Data).
+
+Ausgerüstete Trainings-Items samt vorhandener Qualitäts-/Level-/Schmiede-/Prestigeskalierung, Rig-/Lunar-Trainingsmeilensteine, Graph-Durchbruch sowie aktive Trainingsboosts/Trainings-Overclock tragen genau einmal bei. Keine neuen Bonusquellen. Quelle für Quelle und Vorher/Nachher: [Trainingskosten-Audit](training-cost-audit.md).
+
+Vorschau und Start verwenden `trainingCostQuote`; der Start reserviert Data einmal und speichert Basis, Quellen, Faktor und wissenschaftliche Kosten. Queues reservieren nichts und prüfen erst beim regulären tatsächlichen Start. Bestehende aktive Jobs bleiben auch nach Itemwechsel, Upgrade, Ablauf, Reload oder Import unverändert; historische Jobs ohne Kostenbasis bleiben ladbar, ihre nicht gemessene Rabattbasis wird nicht erfunden. Explizite Gem-Zeitverkürzungen bleiben separate bezahlte Aktionen.
 
 `softcap(x,k) = x` für `x≤k`, sonst `k + sqrt(k×(x−k))`.
 
@@ -83,9 +89,9 @@ Damit wurde die alte doppelte Exponentialwirkung `1,08^L×1,04^L` entfernt. Der 
 
 ## Forschung, aktive Aktionen und Bonusfamilien
 
-Die drei ersten Projekte verbrauchen gemeinsam Credits, Daten und Forschungspunkte. Ihre Freischaltwirkung ist absichtlich noch klein; Module, Durchbruchswahlen und Rezepte bleiben als nächste Ausbaustufe in der Roadmap. Tap-Ertrag ist `max(1, 20 % der passiven Rate ohne temporäre Boni × Qualitäts-Tapfaktor)` und auf fünf vergütete Impulse/s begrenzt. Overclock addiert +100 % in der temporären Credit- und Trainingsfamilie.
+Die drei ersten Projekte verbrauchen gemeinsam Credits, Daten und Forschungspunkte. Ihre Freischaltwirkung ist absichtlich noch klein; Module, Durchbruchswahlen und Rezepte bleiben als nächste Ausbaustufe in der Roadmap. Tap-Ertrag ist `max(1, 20 % der passiven Rate ohne temporäre Boni × Qualitäts-Tapfaktor)` und auf fünf vergütete Impulse/s begrenzt. Overclock addiert +100 % im gewählten Kanal; Training-Overclock trägt ausschließlich zu neuen Data-Startkosten bei.
 
-Gleichartige Prozente innerhalb von Compute-, Credit-, Training-, Forschungs- oder temporären Familien werden addiert. Erst zwischen benannten Familien wird multipliziert. Prestige wirkt einmal auf Credits und einmal auf Training, niemals nochmals auf Compute.
+Gleichartige Prozente innerhalb von Compute-, Credit-, Training-, Forschungs- oder temporären Familien werden addiert. Erst zwischen benannten Familien wird multipliziert. Trainingskosten summieren ausschließlich die dokumentierten wirksamen Beiträge, einschließlich vorhandener Itemverstärkungen; kein zusätzlich erfundener Prestige-Trainingsmultiplikator.
 
 ## Prestige und INT
 
@@ -113,7 +119,7 @@ Der spielbare Prioritätspfad reicht vom Start bis zum ersten Prestige. Drei Mod
 
 Forschungsprojekte werden beim ausdrücklichen Start genau einmal bezahlt. Ihre Basisdauer ist zentral `180 s × 1,30^Rang`; die drei aktuellen Ränge 0, 8 und 20 ergeben 3 Minuten, rund 24 Minuten und rund 9,5 Stunden. Fortschritt verwendet ausschließlich die persistierte Simulationszeit (`startedAt`/`endsAt`) und wird deshalb online und offline identisch abgeschlossen. Ein Labor ist von Beginn an verfügbar, das zweite folgt über **Labor-Kopplung**, das dritte ist eine einmalige Komfortfreischaltung für 125 Gems. Ein Projekt kann weder parallel doppelt gestartet noch doppelt belohnt werden.
 
-Training bleibt eine aktive Entscheidung und bezahlt Credits plus `2 × (Modellstufe + 1)` Daten. Die Arbeitskurve `30 × (Stufe + 1)^1,25` wächst polynomial; die tatsächliche Dauer ergibt sich aus Arbeit geteilt durch die feste Trainingsrate 1. Wirkungslose zusätzliche Trainingsboni bleiben für Auftrag 7B offen. Qualitäts- und Effizienzgewinne besitzen weiterhin ihre dokumentierten Softcaps.
+Training bleibt zeitbasiert und bezahlt ausschließlich die Data-Startkosten des zentralen Helfers. Bestehende Quality-/Efficiency-Softcaps bleiben unverändert. Trainingsboni wirken seit Auftrag 7B auf zukünftige Startkosten, nicht auf die Dauer; Relay-/Archiv-Skalierung bleibt separat offen.
 
 Animierte Ressourcenzahlen interpolieren nur den zuletzt gerenderten Anzeigewert über 350 ms. Economy, Kosten, Speicherdaten und Simulation verwenden unverändert den echten Zustandswert; bei Reduced Motion oder verborgenem Dokument wird sofort auf den echten Wert gesprungen.
 

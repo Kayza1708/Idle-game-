@@ -1,3 +1,4 @@
+import {TrainingItemCostComparison} from "./TrainingCostDetails";
 import { itemImprovementHasEffect } from "./itemMechanics";
 import { useState } from "react";
 import {
@@ -64,12 +65,8 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
     <ul>
       {[...new Set(itemEffectProfile(entry))].map((e) => (
         <li key={e}>
-          {effectText(e, language)}:{" "}
-          {e === "training"
-            ? de
-              ? "Derzeit ohne Trainingswirkung (Rate 1)"
-              : "Currently no training effect (rate 1)"
-            : e === "relay" || e === "int-yield"
+          {effectText(e, language)}{e === "training" ? " (B)" : ""}:{" "}
+          {e === "relay" || e === "int-yield"
               ? effectText(e, language)
               : `+${(itemEffectFor(s, entry, e) * (1 + deepPrestigeBonus(s, "manufacturing")) * 100).toFixed(2)} %`}
         </li>
@@ -487,6 +484,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                   · {de ? "Schmiedestufe" : "Forge level"} {q.result.forge ?? 0}
                 </p>
                 {q.allowed && effect(q.result)}
+                {itemEffectProfile(item).includes("training") && <TrainingItemCostComparison s={s} before={item} after={q.result}/>}
                 {!effective && (
                   <p>
                     {de
