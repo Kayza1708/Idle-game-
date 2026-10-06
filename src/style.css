@@ -644,3 +644,5 @@ html[data-native-platform] body{padding:0}
 .core-loop-note{margin:8px 0;color:#b9c5c0;font-size:.8rem;overflow-wrap:anywhere}
 
 .training-cost-details{display:block;font-size:.8rem;overflow-wrap:anywhere;margin-top:4px}
+
+.research-area-preview{padding:12px;border:1px solid #466c62;border-radius:12px;margin:12px 0;overflow-wrap:anywhere}.research-area-preview button{min-height:44px}.research-catalog h2{overflow-wrap:anywhere}.research-completed{margin:12px 0}

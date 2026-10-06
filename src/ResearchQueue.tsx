@@ -1,3 +1,4 @@
+import {visibleResearchIds} from './researchAreas';
 import {
   BALANCE,
   type GameState,
@@ -24,6 +25,7 @@ export function ResearchQueue({
       : projectText(id, language).name;
   const labels: Record<string, string> = {
     unknown: de ? "Unbekanntes Projekt" : "Unknown project",
+    area: de ? "Forschungsbereich gesperrt" : "Research area locked",
     locked: de
       ? "Forschungsplan im Prestige-Baum benötigt"
       : "Research plan in prestige tree required",
@@ -61,12 +63,7 @@ export function ResearchQueue({
       </ol>
       <details>
         <summary>{de ? "Projekt vormerken" : "Queue a project"}</summary>
-        {(
-          [
-            ...Object.keys(BALANCE.researchProjects),
-            ...Object.keys(BALANCE.repeatableResearch),
-          ] as ResearchId[]
-        ).map((id) => {
+        {visibleResearchIds(s).map((id) => {
           const q = researchQueuePreview(s, id);
           return (
             <div className="queue-option" data-research-id={id} key={id}>

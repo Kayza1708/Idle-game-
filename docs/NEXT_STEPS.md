@@ -599,3 +599,9 @@ Reproduzierbare vorbereitete Vergleiche und tatsächliche kurze Prüfergebnisse:
 PR #72 gemergt; Basis Main `39a503f`, eigener Branch `codex/training-data-cost-bonuses`, keine offene Abhängigkeit. Vorhandene Trainingsboni wirken ausschließlich auf neue Data-Startkosten. Laufende Aufträge bleiben unverändert; Queue prüft bei tatsächlichem Start. Historische Aufträge ohne Kostenbasis bleiben erhalten.
 
 Quelleninventar, Vorher/Nachher und kurze tatsächliche Tests: [training-cost-audit.md](training-cost-audit.md), `scripts/training-cost-comparison.ts`. Training-Itemverbesserungen sind wirksam, aber Rundung/50-%-Deckel können aktuelle Preise gleich lassen; UI behauptet dann keine sofortige Ersparnis. Explizite Gem-Zeitverkürzungen bleiben getrennt. Relay-/Archiv-Skalierung weiterhin offen. Keine Gesamtsuite oder Langzeitbalance; `[skip ci]` vermeidet die verbotene CI-Kampagne. Bekannte Schicht-3-Referenzabweichungen unverändert.
+
+## Übergabe Auftrag 7C
+
+PR #73 gemergt; Main-Basis `002aae8`, eigener Branch `codex/permanent-research-areas`, keine offene Abhängigkeit. Permanente Bereiche öffnen durch bestehende Node-Käufe. INT-Nodewirkungen behalten ihre Resetregeln; nur der Forschungszugang bleibt beim Axiom-Reset. Legacy-Migration leitet Zugang ausschließlich aus vorhandenen Belegen ab und behandelt Challenge-Hauptspiel separat.
+
+Matrix, Resetvertrag und tatsächlich kurze Prüfungen: [research-area-audit.md](research-area-audit.md). Browsernachweise 390 px DE/EN: `screenshots/research-areas/`, Reproduktion `scripts/browser-research-areas.py`. `node` ist jetzt im bestehenden unmittelbaren Savepfad, damit erfolgreicher Zugangskauf bei Reload erhalten bleibt. Keine Preise/Kosten/Zeiten/Effekte kalibriert. Keine Gesamtsuite/FAST/DEEP/Langzeitbalance; `[skip ci]` verhindert den pauschalen CI-Gesamtlauf. Bekannte Referenzabweichungen und Relay-/Archiv-Skalierung unverändert offen.

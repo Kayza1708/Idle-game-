@@ -467,3 +467,20 @@ Challenges starten unabhängig mit dem zentralen Startvertrag 50 Credits/0 Hardw
 Das Hauptspiel läuft mit der vorhandenen Simulation passiv (`active=false`) und seiner bestehenden Offline-Kapazität weiter. Aktualisierter Hauptzustand und Zeitanker werden gemeinsam gespeichert; Rückkehr/Reload buchen Zeit nicht doppelt. Erfolg übernimmt nur die bestehenden Sterne/Abschlussmetadaten, Abbruch keine Belohnung. Challenge-Bestände werden nicht übertragen. Hauptspiel-Resets, Gem-Shop und Hauptspiel-Claims sind während des Runs gesperrt.
 
 Save v41 validiert beide Zustände inklusive Reservierungen und Uhr gemeinsam. Alte Challenge-Saves ohne historischen Hauptzustand werden ohne Erfolgsbelohnung beendet und behalten ihren noch bekannten gültigen Stand, mit ausdrücklicher DE/EN-Warnung; verlorener Fortschritt wird nicht erfunden. Details, kurze Tests und Grenzen: [Challenge-Isolationsaudit](challenge-isolation-audit.md). Die bekannten Schicht-3-Ressourcenreferenzen und die offene Langzeitbalance bleiben unverändert und sind durch diese gezielte technische Abnahme nicht bestätigt.
+
+## Permanente Forschungsbereiche (Auftrag 7C)
+
+Neue Accounts sehen nur `dataGeneration`, `modelArchitecture` und `blueprints`. Interne Projektvoraussetzungen bleiben bestehen; Offene Baupläne und die unabhängige Hardwareanalyse bleiben vor Prestige erreichbar. Weitere vorhandene Forschungs-IDs sind exakt einem Bereich zugeordnet:
+
+| Regulärer Node-Kauf | Permanenter Bereich | Vorhandene Projekte |
+|---|---|---|
+| `dataArchive1` | Datenwissenschaft | syntheticData, dataFlywheel |
+| `computeNet1` | Modell-/Systemarchitektur | computeOptimization, userScaling, hardwareIntegration, commercialization, networkEffects, parallelArchitecture, hardwareCoDesign, recursiveLearning, tapAmplification, alignment |
+| `analysis1` | Material-/Bauplanforschung | materialAnalysis, blueprintAnalysis, dropProtocols |
+| `labs1` | Laborautomation | operations, labAutomation, autonomousScience |
+
+`researchAccess` prüft denselben Bereich für Domainstart, Queue, regulären Autostart, Vorschau und UI. Ein erfolgreicher bezahlter Node-Kauf fügt das permanente Accountfeld `researchAreas` einmal hinzu. Normaler Prestige und Axiom-Reset erhalten diesen Zugang. Die übrigen Nodewirkungen behalten ihren bestehenden Vertrag: insbesondere verliert ein Axiom-Reset INT-Nodes samt deren Produktions-/Slot-/Queuewirkungen. Ein erneuter Kauf öffnet denselben Bereich nicht nochmals und erzeugt keinen zusätzlichen Forschungsbonus.
+
+Save v41 erhält das additive optionale Feld ohne Versionswechsel. Die gemeinsame Load-/Import-Migration erkennt fehlende alte Felder und öffnet nur durch Nodes, positive Forschungsstufen, abgeschlossene Projekte, aktive Jobs oder Queueeinträge belegte Bereiche. Kosten, Bestände und gespeicherte Endzeiten bleiben erhalten. Ein gespeichertes Challenge-Hauptspiel wird separat migriert; neue Challenge-Runs erben keinen Accountzugang. Unbekannte oder doppelte Bereichs-IDs werden abgewiesen.
+
+Die UI bündelt freigeschaltete Bereiche, einmalige Abschlüsse kompakt und genau eine deterministische Vorschau (Daten → Architektur → Material → Automation) mit direktem Node-Detail-Link. Alle bisherigen Forschungszeiten, Kosten, Effekte und Nodepreise/-voraussetzungen bleiben unverändert. [Audit und kurze Abnahme](research-area-audit.md).

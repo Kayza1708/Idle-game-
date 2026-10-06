@@ -1,0 +1,23 @@
+{
+  "durationSeconds": 8.79,
+  "results": [
+    {
+      "language": "de",
+      "width": 390,
+      "initialCards": 3,
+      "regularNodePurchases": 4,
+      "reload": true,
+      "hardwareAnalysis": true,
+      "pageErrors": []
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "initialCards": 3,
+      "regularNodePurchases": 4,
+      "reload": true,
+      "hardwareAnalysis": true,
+      "pageErrors": []
+    }
+  ]
+}

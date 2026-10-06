@@ -1,10 +1,11 @@
+import {buyNode} from './prestige';
 import {describe,expect,it} from 'vitest';
 import {BALANCE,exactEconomyValue,newGame,repeatableResearchDataCost,repeatableResearchDuration,researchDuration,researchDurationAtStart,researchProjectDataCost,researchProjectDataCostScientific,startResearchProject} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {advance} from './simulation';
 import {restore,serialize} from './storage';
 
-const funded=(data:ScientificNumber|number)=>{const value=typeof data==='number'?ScientificNumber.from(data):data,base=newGame(0);return{...base,data:value.toNumber(),exactEconomy:{...base.exactEconomy,data:value.toJSON()}}};
+const funded=(data:ScientificNumber|number)=>{const value=typeof data==='number'?ScientificNumber.from(data):data,base=buyNode({...newGame(0),unspentINT:10,exactEconomy:{...newGame(0).exactEconomy,unspentINT:{m:1,e:1}}},'labs1');return{...base,data:value.toNumber(),exactEconomy:{...base.exactEconomy,data:value.toJSON()}}};
 describe('category research contracts',()=>{
  it('assigns every project to an existing central category',()=>{for(const project of Object.values(BALANCE.researchProjects))expect(BALANCE.researchCategories[project.balanceCategory]).toBeDefined();for(const project of Object.values(BALANCE.repeatableResearch))expect(BALANCE.researchCategories[project.balanceCategory]).toBeDefined();});
  it('uses category formulas with L=1 and the 72-hour duration cap',()=>{for(const [id,project] of Object.entries(BALANCE.repeatableResearch)){const category=BALANCE.researchCategories[project.balanceCategory];expect(repeatableResearchDataCost(id as keyof typeof BALANCE.repeatableResearch,1)).toBe(category.baseData);expect(repeatableResearchDataCost(id as keyof typeof BALANCE.repeatableResearch,5)).toBeCloseTo(Math.ceil(category.baseData*1.85**4),10);expect(repeatableResearchDuration(id as keyof typeof BALANCE.repeatableResearch,5)).toBeCloseTo(category.baseDuration*1.35**4);expect(repeatableResearchDuration(id as keyof typeof BALANCE.repeatableResearch,100)).toBe(72*3600);}});

@@ -1,3 +1,4 @@
+import {unlockResearchAreaForNode} from './researchAreas';
 import { BALANCE, newGame, initializeRun,runStartContract,automaticRestartAvailable, BreakthroughId, canPrestige, GameState, newINT,newINTScientific, prestigeClaim, PrestigeUpgradeId, prestigeUpgradeCost,prestigeUpgradeCostScientific, upgradeLevel, exactEconomyValue, hasNode,axiomThresholdScientific, MAX_ECONOMY_VALUE,creditMultiplierFromAxioms,creditMultiplierFromINT,type AxiomUpgradeId,axiomUpgradeCost } from './economy';
 import {ScientificNumber} from './scientificNumber';
 import { addEvent, recordPrestige } from './telemetry';
@@ -27,7 +28,7 @@ export function buyNode(s:GameState,id:PrestigeUpgradeId,_legacyTier?:number){if
  const gate=prestigeGate(s,definition.depth);
  if(level||('requiresPrestige' in definition&&definition.requiresPrestige&&s.prestigeCount<1)||exactEconomyValue(s,'unspentINT').compare(costExact)<0||(gate&&!gate.ok)||!definition.requires.every(required=>upgradeLevel(s,required as PrestigeUpgradeId)>=1))return s;
  const unspent=exactEconomyValue(s,'unspentINT').subtract(costExact),spent=exactEconomyValue(s,'spentINT').add(costExact);
- return addEvent({...s,unspentINT:Math.round(unspent.toNumber(MAX_ECONOMY_VALUE)),spentINT:Math.round(spent.toNumber(MAX_ECONOMY_VALUE)),exactEconomy:{...s.exactEconomy,unspentINT:unspent.toJSON(),spentINT:spent.toJSON()},nodes:[...s.nodes,id],insightArchiveBlueprint:s.insightArchiveBlueprint||id==='researchArchive'},'prestige-node-buy',s.savedAt,{id,cost,branch:definition.branch,depth:definition.depth,effect:definition.effect});
+ return addEvent({...unlockResearchAreaForNode(s,id),unspentINT:Math.round(unspent.toNumber(MAX_ECONOMY_VALUE)),spentINT:Math.round(spent.toNumber(MAX_ECONOMY_VALUE)),exactEconomy:{...s.exactEconomy,unspentINT:unspent.toJSON(),spentINT:spent.toJSON()},nodes:[...s.nodes,id],insightArchiveBlueprint:s.insightArchiveBlueprint||id==='researchArchive'},'prestige-node-buy',s.savedAt,{id,cost,branch:definition.branch,depth:definition.depth,effect:definition.effect});
 }
 export function prestige(s:GameState){if(s.retention.activeRun)return s;
  if(!canPrestige(s))return s;
