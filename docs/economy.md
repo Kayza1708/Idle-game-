@@ -457,3 +457,11 @@ Bestehende Besitzstände in `purchasedResearchLabs` bleiben erhalten und werden 
 | 1000 | ×2.500 | ×4.800 | +92.0 % |
 
 Die 50 Season-Level verwenden weiterhin nur vorhandene Reward-Typen (Gems, Komponenten und das bestehende Boot-Sequence-Artefakt). Free-Claims bleiben anhand der bisherigen Levelnummern gespeichert. Premium ist weiterhin nur Vorschau und nicht claimbar, solange keine verifizierte native Entitlement-Integration existiert. Die zentralen Mengen und Komponentenfolgen liegen in `BALANCE.seasonRewards`.
+
+## Isolierte Challenge-Runs (Auftrag 4, Save v41)
+
+Challenges starten unabhängig mit dem zentralen Startvertrag 50 Credits/0 Hardware. Startkapital ist keine Produktion, kein berechtigter Umsatz, kein INT- oder Questfortschritt. Hauptspielressourcen, Forschung, Jobs, Items und Ausrüstung bleiben separat erhalten. Es werden ausschließlich kosmetische Einstellungen/Namen, Kampagnenidentität und Uhr übernommen; der vorhandene Challenge-Katalog definiert keine geerbten Economy-Boni. Die bisherigen fünf Einschränkungen, Zielanspruch 1 INT, ersten Sterne, Clears und Bestzeiten bleiben unverändert. Keine Preis-, Produktions-, Forschungs-, Analyse-, Prestige- oder Drop-Parameter geändert.
+
+Das Hauptspiel läuft mit der vorhandenen Simulation passiv (`active=false`) und seiner bestehenden Offline-Kapazität weiter. Aktualisierter Hauptzustand und Zeitanker werden gemeinsam gespeichert; Rückkehr/Reload buchen Zeit nicht doppelt. Erfolg übernimmt nur die bestehenden Sterne/Abschlussmetadaten, Abbruch keine Belohnung. Challenge-Bestände werden nicht übertragen. Hauptspiel-Resets, Gem-Shop und Hauptspiel-Claims sind während des Runs gesperrt.
+
+Save v41 validiert beide Zustände inklusive Reservierungen und Uhr gemeinsam. Alte Challenge-Saves ohne historischen Hauptzustand werden ohne Erfolgsbelohnung beendet und behalten ihren noch bekannten gültigen Stand, mit ausdrücklicher DE/EN-Warnung; verlorener Fortschritt wird nicht erfunden. Details, kurze Tests und Grenzen: [Challenge-Isolationsaudit](challenge-isolation-audit.md). Die bekannten Schicht-3-Ressourcenreferenzen und die offene Langzeitbalance bleiben unverändert und sind durch diese gezielte technische Abnahme nicht bestätigt.

@@ -647,3 +647,15 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Ausschließlich die beiden Strategie-Analyseuntergrenzen geändert; echte Simulation, Ressourcenprüfungen und Start bei `t=0` ohne vorgeschaltete Offline-Produktion erhalten.
 - [ ] Nun erreichte Ressourcen-Kalibrierungsassertions separat entscheiden: Forschungsgrenze 361 statt erwartet 313; zusätzlich gemessene Analysegrenze 57700 statt erwartet 59132. Diese Erwartungen bleiben in diesem Auftrag unverändert.
 - Abschlussprüfungen auf dem finalen Commit und tatsächliche Ergebnisse im bestehenden Draft-PR #66 dokumentieren. Technische Testvalidität und optionale Langzeit-Balancebewertung bleiben getrennt; keine bestätigte Langzeitbalance aus einer grünen Suite ableiten.
+
+## Auftrag 4 – Challenge-Isolation / Folge-PR zu #66
+
+- [x] Eigener Branch ab `06d39de`; #66 noch offen, deshalb abhängiger PR gegen `codex/run-start-auto-prestige`; Vorgängerbranch unverändert.
+- [x] Vollständiges Hauptspiel separat erhalten; Challenge startet mit 50 Credits/0 Hardware ohne Einnahmen-/INT-/Quest-Gutschrift.
+- [x] Gemeinsame bestehende Simulation, passiver Hauptfortschritt und persistenter einmal konsumierter Zeitanker; reguläre Jobs/Reservierungen bleiben erhalten.
+- [x] Erfolgssterne einmal, Abbruch ohne Belohnung, keine Challenge-Ressourcenübernahme; Reset-/Shop-/Claim-Sperren und DE/EN-Rückkehranzeige mit Abbruchbestätigung.
+- [x] Save v41 mit gemeinsamer Validierung und transparenter Legacy-Wiederherstellung des noch bekannten Standes; beschädigte Imports und Originale geschützt.
+- [x] Kurze gezielte Domain-/Save-/Lifecycle-/UI-Regressionen sowie mobiler Browsernachweis; keine Gesamtabnahme behauptet.
+- [ ] Schicht-3-Referenzabweichungen und Langzeitbalance bleiben separat offen. Historisch verlorene Hauptstände alter Challenge-Saves können nicht rekonstruiert werden.
+
+Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](challenge-isolation-audit.md).
