@@ -56,7 +56,7 @@ describe('final mobile presentation contracts',()=>{
  });
  it('uses compact resource values instead of ellipsis',()=>{
   expect(panelSource).toContain('compactHeaderValue');
-  expect(cssSource).toContain('.resource-bar b{font-size:clamp(11px,3.2vw,15px);text-overflow:clip');
+  expect(cssSource).toContain('.resource-cell>b{font-size:clamp(10px,2.8vw,14px);text-overflow:clip');
  });
  it('keeps the prestige network inside three bounded columns',()=>{
   expect(cssSource).toContain('grid-template-columns:repeat(3,minmax(0,1fr))!important');
