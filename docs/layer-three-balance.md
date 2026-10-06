@@ -2,6 +2,8 @@
 
 Seeds 1708, 42, 2026, Start 2026-01-01T00:00:00.000Z. Version 3 ersetzt die früheren Schicht-3-Messwerte. Keine Offline-Produktion vor t=0.
 
+Aktueller Zielvertrag nach dem bewusst eingeführten 50-Credit-Start: **14–30 aktive Minuten (840–1800 s)** für die erste Hardwareanalyse, statt des übergeordneten 15–30-Minuten-Ziels. Die beiden Strategie-Tests verwendeten bisher 880–1800 s und maßen vor dem Startkapital 890 s; jetzt messen beide mit Seed 1708 870 s innerhalb des akzeptierten 840–1800-s-Fensters. Die nachfolgenden Tabellen bleiben historische v3-Messungen, keine neu erzeugten Ergebnisse. Produktions-, Preis-, Forschungs-, Analyse-, Prestige- und Drop-Parameter bleiben unverändert; die Langzeit-Balancebewertung bleibt unabhängig von dieser Early-Game-Entscheidung.
+
 ## Deterministische Kostenkalibrierung
 
 Gesuchtes kleinstes ganzzahliges Paar: Datenerzeugung 363 Data, kurze Hardwareanalyse 57623 Data. Die Suche liest die Data-Bestände an den 10-Sekunden-Entscheidungsgrenzen aus: 362 Data erlauben Forschung bereits bei 290 s, 363 erst bei 300 s; 57.622 Data erlauben die Hardwareanalyse bei 890 s, 57.623 erst bei 900 s. Beide Strategien wurden anschließend separat verifiziert.
@@ -39,7 +41,7 @@ Gesuchtes kleinstes ganzzahliges Paar: Datenerzeugung 363 Data, kurze Hardwarean
 ## Zielstatus
 
 - Forschung startet in beiden Strategien und allen Seeds nach 300 aktiven Sekunden: Ziel 5–10 Minuten erreicht.
-- Die erste Hardwareanalyse startet in beiden Strategien und allen Seeds nach 900 aktiven Sekunden: Ziel 15–30 Minuten erreicht.
+- Die erste Hardwareanalyse startet in diesem historischen Bericht in beiden Strategien und allen Seeds nach 900 aktiven Sekunden. Das aktuelle Ziel beträgt 14–30 aktive Minuten; zum Vertragswechsel und den neueren 870-s-Messungen siehe oben.
 - Das Impulsrelais wird im 90-Minuten-Lauf nach 1.800 aktiven Sekunden fertig. Das Ziel 45–75 Minuten wird verfehlt: Analyseabschluss bei 1.500 s plus feste 300-s-Herstellung ergeben bereits 30 Minuten, und die vorhandenen echten Komponenten reichen zu diesem Zeitpunkt aus. Drop-Raten und Rezept wurden nicht verändert.
 - Normales und bis zum fertigen Einstiegsitem verschobenes Prestige werden getrennt gezeigt. Das normale Entscheidungsverhalten wurde nicht automatisiert geändert.
 

@@ -406,7 +406,7 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Startdauer, exakter Abzug, parallele Slots, Wiederholung sowie Online-/Offline-/Reload-Abschluss sind getestet.
 - [x] Reproduzierbare 1-/7-Tage-Läufe für beide Prioritäten und aktive/passive Sitzungsprofile sind dokumentiert.
 - [ ] Erste Forschung nach 5–10 aktiven Minuten: gemessen sind 20 Sekunden.
-- [ ] Erste Hardwareanalyse nach 15–30 aktiven Minuten: gemessen sind 20 Sekunden.
+- [ ] Erste Hardwareanalyse nach 14–30 aktiven Minuten (früheres Ziel 15–30): in diesem historischen Lauf gemessen sind 20 Sekunden; aktueller Vertragswechsel siehe unten.
 - [ ] Frühe Data-Priorisierung: durch acht Stunden Produktion vor der ersten Sitzung aktuell nicht erzwungen.
 
 ## Schicht-3-Messkorrektur (1. Oktober 2026)
@@ -639,5 +639,11 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Vite-URL-/SSR-Transformursache in beiden mobilen Suiten entfernt; alle 24 ursprünglichen UI-Tests ausgeführt und bestanden.
 - [x] Synchrone Langzeitsimulation vom Runner-Kontrollloop getrennt, Horizonte/Profile unverändert und sequenziell; Heartbeat und vollständige Domain-Parität getestet.
 - [x] Minimaler Neustart mit einzigem Shopping-Knoten, echtem ersten Kauf und positiver Produktion; Kommerzialisierung-250-Verlauf als technischer Ablaufnachweis gekennzeichnet.
-- [x] Zwei unveränderte Analyse-Timingfehler reproduziert: 870 s statt mindestens 880 s; 50-Credit-Start als Ursache, Balanceentscheidung separat offen.
-- [ ] Grüne Gesamtsuite bleibt wegen dieser Timinggrenzen offen. Finale technische Abschlusszahlen stehen in Draft-PR #66 und der Übergabe; kein Merge, kein zusätzlicher PR.
+- [x] Zwei damalige Analyse-Timingfehler reproduziert: 870 s statt mindestens 880 s; 50-Credit-Start als Ursache. Die damalige offene Entscheidung wird durch den unten dokumentierten neuen Zielvertrag ersetzt.
+- Finale technische Abschlusszahlen stehen in Draft-PR #66 und der Übergabe; kein Merge, kein zusätzlicher PR. Die frühere Abnahme auf `22bc6fb` hatte 699 bestandene und zwei fehlgeschlagene Timingtests.
+
+## Akzeptierter Analyse-Zielvertrag / PR #66
+- [x] Nutzerentscheidung: übergeordnetes Early-Game-Ziel von 15–30 auf 14–30 aktive Minuten angepasst; Testfenster bisher 880–1800 s (zuvor gemessen 890), jetzt 840–1800 s (gemessen 870).
+- [x] Ausschließlich die beiden Strategie-Analyseuntergrenzen geändert; echte Simulation, Ressourcenprüfungen und Start bei `t=0` ohne vorgeschaltete Offline-Produktion erhalten.
+- [ ] Nun erreichte Ressourcen-Kalibrierungsassertions separat entscheiden: Forschungsgrenze 361 statt erwartet 313; zusätzlich gemessene Analysegrenze 57700 statt erwartet 59132. Diese Erwartungen bleiben in diesem Auftrag unverändert.
+- Abschlussprüfungen auf dem finalen Commit und tatsächliche Ergebnisse im bestehenden Draft-PR #66 dokumentieren. Technische Testvalidität und optionale Langzeit-Balancebewertung bleiben getrennt; keine bestätigte Langzeitbalance aus einer grünen Suite ableiten.
