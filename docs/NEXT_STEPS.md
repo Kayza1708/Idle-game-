@@ -593,3 +593,9 @@ Suite-/CI-/Balance-Nachweis; `[skip ci]` verhindert hier verbotene Langkampagnen
 PR #71 ist in Main `af9575c` enthalten; eigener Folgebranch `codex/full-compute-user-capacity`, keine offene Abhängigkeit. Volle Hardwareleistung bedient Users; Jobs laufen parallel. Alte Profilwerte bleiben ladbar und wirkungslos. Wissenschaftliche gemeinsame Zerlegung zeigt 100 % Kapazitätsnutzung; Export trennt historische Profil-IDs von aktiven Parametern.
 
 Reproduzierbare vorbereitete Vergleiche und tatsächliche kurze Prüfergebnisse: [core-loop-audit.md](core-loop-audit.md), `scripts/core-loop-comparison.ts`. Keine Gesamtsuite/FAST/DEEP/Langkampagnen; `[skip ci]` verhindert diese im pauschalen CI-Workflow. Keine bestätigte Langzeitbalance. Auftrag 7B muss wirkungslose Trainingsboni separat prüfen; Schicht-3-Referenzabweichungen und Langzeitziele bleiben unverändert offen.
+
+## Übergabe Auftrag 7B
+
+PR #72 gemergt; Basis Main `39a503f`, eigener Branch `codex/training-data-cost-bonuses`, keine offene Abhängigkeit. Vorhandene Trainingsboni wirken ausschließlich auf neue Data-Startkosten. Laufende Aufträge bleiben unverändert; Queue prüft bei tatsächlichem Start. Historische Aufträge ohne Kostenbasis bleiben erhalten.
+
+Quelleninventar, Vorher/Nachher und kurze tatsächliche Tests: [training-cost-audit.md](training-cost-audit.md), `scripts/training-cost-comparison.ts`. Training-Itemverbesserungen sind wirksam, aber Rundung/50-%-Deckel können aktuelle Preise gleich lassen; UI behauptet dann keine sofortige Ersparnis. Explizite Gem-Zeitverkürzungen bleiben getrennt. Relay-/Archiv-Skalierung weiterhin offen. Keine Gesamtsuite oder Langzeitbalance; `[skip ci]` vermeidet die verbotene CI-Kampagne. Bekannte Schicht-3-Referenzabweichungen unverändert.

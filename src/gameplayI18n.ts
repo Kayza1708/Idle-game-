@@ -269,7 +269,7 @@ const breakthroughs:Record<BreakthroughId,{name:L;effect:L}>={
  },
  graph:{
   name:l('Optimized Training Graph','Optimierter Trainingsgraph','Grafo de entrenamiento optimizado','Graphe d’entraînement optimisé','Grafo de treinamento otimizado','Grafo di training ottimizzato','Zoptymalizowany graf treningu'),
-  effect:l('Legacy effect: fixed training durations are not accelerated','Legacy-Effekt: feste Trainingszeiten werden nicht beschleunigt','Efecto heredado: la duración fija no se acelera','Effet historique : la durée fixe n’est pas accélérée','Efeito legado: a duração fixa não é acelerada','Effetto legacy: la durata fissa non viene accelerata','Efekt historyczny: stały czas treningu nie jest przyspieszany')
+  effect:l('Training Data-cost contribution +20%; fixed duration unchanged','Trainingskostenbeitrag +20 %; feste Dauer unverändert','Efecto heredado: la duración fija no se acelera','Effet historique : la durée fixe n’est pas accélérée','Efeito legado: a duração fixa não é acelerada','Effetto legacy: la durata fissa non viene accelerata','Efekt historyczny: stały czas treningu nie jest przyspieszany')
  },
  planning:{
   name:l('Autonomous Lab Planning','Autonome Laborplanung','Planificación autónoma de laboratorio','Planification autonome du laboratoire','Planejamento autônomo de laboratório','Pianificazione autonoma laboratorio','Autonomiczne planowanie laboratorium'),
@@ -374,7 +374,7 @@ const effects:Record<ItemEffect,L>={
  credits:l('Credits','Credits','Créditos','Crédits','Créditos','Crediti','Kredyty'),
  data:l('Data','Daten','Datos','Données','Dados','Dati','Dane'),
  research:l('Research','Forschung','Investigación','Recherche','Pesquisa','Ricerca','Badania'),
- training:l('Legacy training bonus (fixed duration unchanged)','Legacy-Trainingsbonus (feste Dauer unverändert)','Bono de entrenamiento heredado (duración fija)','Bonus d’entraînement historique (durée fixe)','Bônus legado de treino (duração fixa)','Bonus training legacy (durata fissa)','Historyczny bonus treningu (stały czas)'),
+ training:l('Training needs less Data','Training benötigt weniger Data','Bono de entrenamiento heredado (duración fija)','Bonus d’entraînement historique (durée fixe)','Bônus legado de treino (duração fixa)','Bonus training legacy (durata fissa)','Historyczny bonus treningu (stały czas)'),
  experiment:l('Analysis','Analyse','Análisis','Analyse','Análise','Analisi','Analiza'),
  components:l('Components','Komponenten','Componentes','Composants','Componentes','Componenti','Komponenty'),
  tap:l('Tap','Tap','Toque','Impulsion','Toque','Tap','Kliknięcie'),

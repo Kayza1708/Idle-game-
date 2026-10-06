@@ -1,5 +1,5 @@
 import {useEffect,useRef,useState} from 'react';
-import {BALANCE,computeRate,dataRate,equipmentSlotCount,equipmentSlots,exactEconomyValue,formatScientific,itemEffectFor,itemEffectProfile,itemTypes,type GameState,type ItemSlot} from './economy';
+import {BALANCE,computeRate,dataRate,equipmentSlotCount,equipmentSlots,exactEconomyValue,formatScientific,deepPrestigeBonus,itemEffectFor,itemEffectProfile,itemTypes,type GameState,type ItemSlot} from './economy';
 import {creditRate} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {ItemArt} from './GameArt';
@@ -7,7 +7,7 @@ import {effectText,itemText,rarityText} from './gameplayI18n';
 
 type Action=(name:string,...args:any[])=>void;
 const slotName=(slot:ItemSlot,de:boolean)=>de?({processor:'Prozessor',core:'Kern',research:'Forschung'}[slot]):({processor:'Processor',core:'Core',research:'Research'}[slot]);
-export const equipmentEffectCopy=(s:GameState,item:GameState['inventory'][number])=>item.type==='impulse-relay'?effectText('relay',s.settings.language):item.type==='insight-archive'?effectText('int-yield',s.settings.language):itemEffectProfile(item).map(effect=>effect==='training'?(s.settings.language==='de'?'Training: derzeit ohne Wirkung (Rate 1)':'Training: currently no effect (rate 1)'):`${effectText(effect,s.settings.language)} +${(itemEffectFor(s,item,effect)*100).toFixed(1)} %`).join(' · ');
+export const equipmentEffectCopy=(s:GameState,item:GameState['inventory'][number])=>item.type==='impulse-relay'?effectText('relay',s.settings.language):item.type==='insight-archive'?effectText('int-yield',s.settings.language):itemEffectProfile(item).map(effect=>`${effectText(effect,s.settings.language)}${effect==='training'?' (B)':''} +${(itemEffectFor(s,item,effect)*(1+deepPrestigeBonus(s,'manufacturing'))*100).toFixed(1)} %`).join(' · ');
 export function equipmentPreview(s:GameState,id:string){const item=s.inventory.find(entry=>entry.id===id);if(!item)return null;const slot=itemTypes[item.type].slot,next={...s,equipped:{...s.equipped,[slot]:id}};return{before:{credits:creditRate(s.hardware,s.level,s,s.savedAt),compute:computeRate(s.hardware,s),data:dataRate(s)},after:{credits:creditRate(next.hardware,next.level,next,next.savedAt),compute:computeRate(next.hardware,next),data:dataRate(next)},state:next};}
 export function EquipmentDialog({s,act,onClose}:{s:GameState;act:Action;onClose:()=>void}){
  const de=s.settings.language==='de',[selected,setSelected]=useState<ItemSlot>('processor'),close=useRef<HTMLButtonElement>(null),count=equipmentSlotCount(s),costFor=(target:2|3)=>ScientificNumber.from(BALANCE.equipmentSlotCosts[target-2]);

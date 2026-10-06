@@ -27,7 +27,7 @@ export const BALANCE = {
   hardwareMilestones:[10,25,50,100,250,500], hardwareUnlockCount:10, hardwareUnlockINT:[0,0,0,0,0,0,0,3,8,18,45,80,130,220,350], classUpgradeCount:15, classUpgradeCostFactor:1, // legacy v20 class-upgrade fields are migration-only; no new ×2 purchase is offered
   computePerUser:1,baseRevenuePerUser:1.35,baseDataPerSecond:.1,dataBonusScale:4,researchBaseRate:.12,researchComputeScale:10,dataScale:100,
   modelQualityPerLevel:.04,modelEfficiencyPerLevel:.03,qualitySoftcap:1,efficiencySoftcap:.75,tapQualityCoefficient:.04,
-  trainingDurationBaseSeconds:90,trainingDurationGrowth:1.35,trainingDurationCapSeconds:72*60*60,trainingDataBase:15,trainingDataGrowth:1.75,
+  trainingDurationBaseSeconds:90,trainingDurationGrowth:1.35,trainingDurationCapSeconds:72*60*60,trainingDataBase:15,trainingDataGrowth:1.75,trainingCostFloor:.5,
   legacyTrainingBase:40,legacyTrainingGrowth:1.65,
   baseOfflineSeconds:28800,maxOfflineSeconds:86400, simulationStep: 10,
   prestigeBaseRevenue:442_493_746_168,prestigeThreshold:428_273_652_944,prestigeScale:3,prestigePower:1.5,prestigeBonusLogScale:.55,
@@ -208,7 +208,8 @@ export type ResearchProjectId=keyof typeof BALANCE.researchProjects;
 export type RepeatableResearchId=keyof typeof BALANCE.repeatableResearch;
 export type ResearchId=ResearchProjectId|RepeatableResearchId;
 export type TrainingTrack='quality'|'efficiency';
-export type ActiveTraining={track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;dataCostExact?:ScientificJSON;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
+export type TrainingCostBasis={targetLevel:number;baseDataCostExact:ScientificJSON;factor:number;bonusTotal:number;sources:Record<string,number>};
+export type ActiveTraining={costBasis?:TrainingCostBasis;track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;dataCostExact?:ScientificJSON;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
 export type QueuedTraining={track:TrainingTrack;targetLevel:number};
 export type ActiveResearch={id:ResearchId;level:number;startedAt:number;endsAt:number;durationSeconds:number;dataCost:number;dataCostExact?:ScientificJSON};
 export type OverclockChannel='credits'|'training'|'research';
@@ -486,15 +487,32 @@ export const trainingGoalSeconds=trainingDurationSeconds;
 export const trainingGoal=(level:number)=>trainingDurationSeconds(level+1);
 export const trainingCostScientific=(_s:GameState,_track:TrainingTrack)=>ScientificNumber.zero();
 export const trainingCost=(_s:GameState,_track:TrainingTrack)=>0;
-export const trainingDataCostForLevelScientific=(level:number)=>scientificCeilGeometric(BALANCE.trainingDataBase,BALANCE.trainingDataGrowth,Math.max(0,level-1));
-export const trainingDataCostScientific=(s:GameState,track:TrainingTrack)=>trainingDataCostForLevelScientific((track==='quality'?s.qualityLevel:s.efficiencyLevel)+1);
+export const trainingDataCostForLevelScientific=(level:number)=>scientificCeil(trainingBaseDataCostScientific(Math.max(1,level)));
+/** Existing training effects become additive cost bonuses, never elapsed-time multipliers. */
+export function trainingCostBonusSources(s:GameState,now=s.savedAt){
+ const sources:Record<string,number>={};
+ if(s.retention.activeRun?.id!=='no-items')for(const item of equippedItems(s)){const value=itemEffectFor(s,item,'training')*(1+deepPrestigeBonus(s,'manufacturing'));if(value>0)sources[`item:${item.id}:${item.type}`]=value;}
+ for(const id of hardwareIds)for(const milestone of reachedMilestones(id,s.hardwareCounts[id]))if(milestone.effect==='training')sources[`milestone:${id}:${milestone.threshold}`]=milestone.value;
+ if(s.breakthroughs.includes('graph'))sources['breakthrough:graph']=BALANCE.breakthroughs.graph[1];
+ if(s.trainingBoostUntil>now)sources['temporary:trainingBoost']=1;
+ if(s.overclock.activeUntil>now&&s.overclock.channel==='training')sources['temporary:trainingOverclock']=1;
+ return sources;
+}
+/** At exponent 16 and above, unit rounding is below binary64 representation precision. */
+export const scientificCeil=(value:ScientificNumber)=>value.isZero()||value.exponent>=16?value:ScientificNumber.from(Math.ceil(value.toNumber()));
+export const trainingBaseDataCostScientific=(targetLevel:number)=>ScientificNumber.from(BALANCE.trainingDataBase).multiply(ScientificNumber.from(BALANCE.trainingDataGrowth).pow(targetLevel-1));
+export function trainingCostQuote(s:GameState,track:TrainingTrack,now=s.savedAt){
+ const targetLevel=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,sources=trainingCostBonusSources(s,now),bonusTotal=Object.values(sources).reduce((sum,value)=>sum+value,0),factor=Math.max(BALANCE.trainingCostFloor,1/(1+bonusTotal)),baseCost=trainingBaseDataCostScientific(targetLevel),cost=scientificCeil(baseCost.multiplyNumber(factor));
+ return{targetLevel,sources,bonusTotal,factor,baseCost,cost,discount:1-factor};
+}
+export const trainingDataCostScientific=(s:GameState,track:TrainingTrack)=>trainingCostQuote(s,track).cost;
 export const trainingDataCost=(s:GameState,track:TrainingTrack)=>trainingDataCostScientific(s,track).toNumber(MAX_ECONOMY_VALUE);
 export const trainingWork=(s:GameState,track?:TrainingTrack)=>trainingDurationSeconds((track==='quality'?s.qualityLevel:track==='efficiency'?s.efficiencyLevel:s.level)+1);
 export function trainingPreview(s:GameState,track:TrainingTrack){
- const valid=track==='quality'||track==='efficiency',level=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,cost=valid?trainingDataCostScientific(s,track):ScientificNumber.zero(),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),reason=!ledgerValid?'invalid-resources':!valid?'invalid-track':s.activeTraining?'training-active':!resources.affordable?'data':null;
- return{track,level,cost,duration:trainingWork(s,track),resources,reason,allowed:reason===null,effect:track==='quality'?quality(level)/quality(level-1):efficiency(level)/efficiency(level-1)};
+ const valid=track==='quality'||track==='efficiency',level=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,quote=trainingCostQuote(s,track),cost=valid?quote.cost:ScientificNumber.zero(),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),reason=!ledgerValid?'invalid-resources':!valid?'invalid-track':s.activeTraining?'training-active':!resources.affordable?'data':null;
+ return{...quote,track,level,cost,duration:trainingWork(s,track),resources,reason,allowed:reason===null,effect:track==='quality'?quality(level)/quality(level-1):efficiency(level)/efficiency(level-1)};
 }
-export function startTraining(s:GameState,track:TrainingTrack){const preview=trainingPreview(s,track);if(!preview.allowed)return s;const dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),duration=preview.duration;const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,training:0,activeTraining:{track,creditCost:0,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{track,creditCost:0,dataCost,level:track==='quality'?s.qualityLevel:s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
+export function startTraining(s:GameState,track:TrainingTrack){const preview=trainingPreview(s,track);if(!preview.allowed)return s;const dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),duration=preview.duration;const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,training:0,activeTraining:{track,costBasis:{targetLevel:preview.targetLevel,baseDataCostExact:preview.baseCost.toJSON(),factor:preview.factor,bonusTotal:preview.bonusTotal,sources:preview.sources},creditCost:0,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{track,baseDataCostExact:preview.baseCost.toScientificString(16),trainingCostFactor:preview.factor,trainingBonusTotal:preview.bonusTotal,trainingBonusSources:JSON.stringify(preview.sources),creditCost:0,dataCost,level:track==='quality'?s.qualityLevel:s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
 export function queueTraining(s:GameState,track:TrainingTrack){if(!hasNode(s,'trainingPlan',1)||s.trainingQueue.length>=2)return s;const base=track==='quality'?s.qualityLevel:s.efficiencyLevel,active=s.activeTraining?.track===track?1:0,planned=s.trainingQueue.filter(job=>job.track===track).length,targetLevel=base+active+planned+1;return{...s,trainingQueue:[...s.trainingQueue,{track,targetLevel}]};}
 export function removeQueuedTraining(s:GameState,index:number){if(index<0||index>=s.trainingQueue.length)return s;const removed=s.trainingQueue[index],queue=s.trainingQueue.filter((job,i)=>i<index||job.track!==removed.track);return{...s,trainingQueue:queue};}
 export function startQueuedTrainingIfAffordable(s:GameState){if(s.activeTraining||!s.trainingQueue.length)return s;const job=s.trainingQueue[0],level=job.track==='quality'?s.qualityLevel:s.efficiencyLevel;if(job.targetLevel!==level+1)return s;const started=startTraining(s,job.track);return started===s?s:{...started,trainingQueue:s.trainingQueue.slice(1)};}

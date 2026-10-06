@@ -685,3 +685,12 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Gemeinsame Domain-/UI-/Exportzerlegung, volle Auslastung und DE/EN-Hinweis; alte Profile save-kompatibel.
 - [x] Kurze echte Domainregressionen und vorbereiteter Vorher/Nachher-Vergleich; siehe [Audit](core-loop-audit.md).
 - [ ] Wirkungslose Trainingsboni für Auftrag 7B, bekannte Schicht-3-Referenzabweichungen und Langzeitbalance bleiben separat offen.
+
+## Auftrag 7B – wirksame Trainingskostenboni
+
+- [x] Gemeinsame wissenschaftliche Data-Startkosten: vorhandene Beiträge addiert, Faktor max(0,5; 1/(1+B)), erst Endkosten aufgerundet.
+- [x] Tatsächliche Item-/Meilenstein-/Graph-/temporäre Trainingswerte angebunden; keine erfundenen Quellen.
+- [x] Kostenbasis gespeichert/protokolliert, Queue prüft beim Start; laufende Jobs und Zeiten bleiben unverändert, Legacy-Saves erhalten.
+- [x] DE/EN-Kosten-/Rabatt-/Itemvergleich, wirksame Verbesserungen bedienbar; Snapshot und Export identisch.
+- [x] Kurze echte Transaktions-/Queue-/Reload-/Großzahltests, Typecheck, Build und Diffprüfung; [Audit](training-cost-audit.md).
+- [ ] Relay-/Archiv-Skalierung, Schicht-3-Referenzabweichungen und Langzeitbalance bleiben separat offen.

@@ -132,10 +132,9 @@ describe("existing mechanics exposed through their domain contracts", () => {
     expect(fuseItems(s, [ids[1], ids[1], ids[2]])).toBe(s);
     expect(fuseItems(s, [ids[1], ids[2], "missing"])).toBe(s);
   });
-  it("documents fixed training and type rewards instead of offering ineffective scaling", () => {
+  it("keeps fixed relay and archive rewards unavailable for ineffective scaling", () => {
     let s = ready();
     for (const type of [
-      "photonic-array",
       "impulse-relay",
       "insight-archive",
     ] as const) {
