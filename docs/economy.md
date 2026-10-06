@@ -7,7 +7,7 @@ Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und 
 | Ressource | Verwendung | Prestige |
 |---|---|---|
 | Credits | Hardware, Training, Forschung, Crafting | zurückgesetzt |
-| Compute | Leistung aus Hardware; wird vom Betriebsprofil aufgeteilt | Hardwarebestand zurückgesetzt |
+| Compute | Produktionsrate aus Hardware; vollständig für Users genutzt | Hardwarebestand zurückgesetzt |
 | Daten | entstehen durch Nutzer; Training und Projekte | zurückgesetzt |
 | Forschungspunkte | entstehen aus Forschungs-Compute; Projekte | bleiben erhalten |
 | Komponenten/Baupläne | Items und Crafting | bleiben erhalten |
@@ -50,25 +50,21 @@ Max-Kauf wird logarithmisch geschätzt und danach in beide Richtungen gegen `bul
 
 `totalCompute = Σ(count × classCompute × milestones × classUpgrade) × globalComputeFamily`
 
-Die Profile summieren sich jeweils exakt zu 1:
+Seit Auftrag 7A bedient die gesamte wirksame Hardwareleistung Nutzer. Compute ist eine Rate, keine auszugebende Währung. Training, Forschung und Analysen laufen parallel; ihre bezahlten Startkosten und festen Endzeiten bleiben unverändert.
 
-| Profil | Nutzer | Training | Forschung |
-|---|---:|---:|---:|
-| Ausgewogen | 75 % | 15 % | 10 % |
-| Training | 60 % | 30 % | 10 % |
-| Entdeckung | 65 % | 10 % | 25 % |
+`users = totalCompute × efficiency × bestehende Kapazitätsmodifikatoren / computePerUser`
 
-`users = inferenceCompute × efficiency / computePerUser`
+`credits/s = users × baseRevenuePerUser × bestehende Quality-/Creditfaktoren`
 
-`credits/s = users × 1,35 × quality × Prestige × Achievement × Creditfamilie × Items × temporäre Creditfamilie`
+`data/s = sqrt(users) × baseDataPerSecond × bestehende komprimierte Data-Boni × Challenge-Faktor`
 
-`data/s = users × 0,08`
+Die Forschungsrate nutzt ebenfalls die volle Compute-Rate als Eingang ihrer bestehenden Potenzformel. Das verändert weder die festen Forschungszeiten noch Startkosten. Jeder additive, multiplikative oder exponentielle Beitrag bleibt in seiner bestehenden Faktorposition. Der gemeinsame `economySnapshot` rekonstruiert Compute, Users und Credits mit denselben Operanden; Users entsprechen immer der vollständig genutzten Kapazität (100 %).
 
-`research/s = 0,12 × (researchCompute/10)^0,65 × (1 + 0,05×ln(1+data/100))`
+Alte gespeicherte Betriebsprofile bleiben gültig, haben aber keine Produktionswirkung. Ihre historischen Anteile sind nur Kompatibilitätsdaten und keine aktiven Exportparameter. Die Oberfläche zeigt stattdessen: „Die gesamte Hardware bedient Nutzer. Training und Forschung laufen parallel.“ Vorher/Nachher und Grenzen: [Core-Loop-Audit](core-loop-audit.md).
 
 ## Modelltraining und Softcaps
 
-Training beginnt nur nach einer bezahlten Wahl (Qualität oder Effizienz), kostet `25×1,7^(q+e)` Credits sowie `2×(Gesamtlevel+1)` Daten und benötigt `30×(Gesamtlevel+1)^1,25` Arbeit. Nur der Trainingsanteil des Profils erzeugt Arbeit. Ein Lauf arbeitet online/offline, behält Überlauf innerhalb des Abschlussereignisses und startet nie ungefragt den nächsten Lauf.
+Training beginnt nur nach einer bezahlten Wahl (Qualität oder Effizienz), kostet `25×1,7^(q+e)` Credits sowie `2×(Gesamtlevel+1)` Daten und benötigt `30×(Gesamtlevel+1)^1,25` Arbeit. Die vorhandene feste Trainingsrate beträgt 1; keine Compute-Zuweisung beeinflusst sie. Ein Lauf arbeitet online/offline, behält Überlauf innerhalb des Abschlussereignisses und startet nie ungefragt den nächsten Lauf.
 
 `softcap(x,k) = x` für `x≤k`, sonst `k + sqrt(k×(x−k))`.
 
@@ -117,7 +113,7 @@ Der spielbare Prioritätspfad reicht vom Start bis zum ersten Prestige. Drei Mod
 
 Forschungsprojekte werden beim ausdrücklichen Start genau einmal bezahlt. Ihre Basisdauer ist zentral `180 s × 1,30^Rang`; die drei aktuellen Ränge 0, 8 und 20 ergeben 3 Minuten, rund 24 Minuten und rund 9,5 Stunden. Fortschritt verwendet ausschließlich die persistierte Simulationszeit (`startedAt`/`endsAt`) und wird deshalb online und offline identisch abgeschlossen. Ein Labor ist von Beginn an verfügbar, das zweite folgt über **Labor-Kopplung**, das dritte ist eine einmalige Komfortfreischaltung für 125 Gems. Ein Projekt kann weder parallel doppelt gestartet noch doppelt belohnt werden.
 
-Training bleibt eine aktive Entscheidung und bezahlt Credits plus `2 × (Modellstufe + 1)` Daten. Die Arbeitskurve `30 × (Stufe + 1)^1,25` wächst polynomial; die tatsächliche Dauer ergibt sich aus Arbeit geteilt durch die im Betriebsprofil zugewiesene Compute-Trainingsrate. Qualitäts- und Effizienzgewinne besitzen weiterhin ihre dokumentierten Softcaps.
+Training bleibt eine aktive Entscheidung und bezahlt Credits plus `2 × (Modellstufe + 1)` Daten. Die Arbeitskurve `30 × (Stufe + 1)^1,25` wächst polynomial; die tatsächliche Dauer ergibt sich aus Arbeit geteilt durch die feste Trainingsrate 1. Wirkungslose zusätzliche Trainingsboni bleiben für Auftrag 7B offen. Qualitäts- und Effizienzgewinne besitzen weiterhin ihre dokumentierten Softcaps.
 
 Animierte Ressourcenzahlen interpolieren nur den zuletzt gerenderten Anzeigewert über 350 ms. Economy, Kosten, Speicherdaten und Simulation verwenden unverändert den echten Zustandswert; bei Reduced Motion oder verborgenem Dokument wird sofort auf den echten Wert gesprungen.
 
@@ -140,7 +136,7 @@ Der frühere sechsteilige, exponentiell bepreiste Entwurf wurde ersetzt. Alte Au
 - **Rückkopplung:** Ein vergüteter Tap gibt während eines bezahlten Trainings höchstens eine Sekunde der regulären Trainingsrate. Ein 60-s-Fenster begrenzt alle Tap-Arbeit zusammen auf 30 Sekunden der regulären Rate; Offline-Zeit simuliert keine Taps.
 - **Zweiter Modellsockel:** Die bereits vorhandenen Item-Slots werden integriert statt dupliziert. Bei mindestens einem ausgerüsteten Compute- und Credit-Item entstehen +5 % in der Credit-Itemfamilie; Training plus Experiment/Forschung gibt +10 % Forschung. Beide Kombinationen sind additiv in ihrer Familie und multiplizieren erst mit anderen benannten Familien.
 
-Die Reihenfolge ist: Klassenbasis + begrenzter Rechenverbund → Klassenmeilensteine/Upgrade → Summe aller Klassen → additive globale Compute-Familie → Atlasfamilie → Profilaufteilung → Modell/INT/Item/temporäre Familien. Kein Ergebnis wird erneut als Eingang derselben Formel verwendet.
+Die Reihenfolge ist: Klassenbasis + begrenzter Rechenverbund → Klassenmeilensteine/Upgrade → Summe aller Klassen → additive globale Compute-Familie → Atlasfamilie → volle Users-Kapazität → Modell/INT/Item/temporäre Familien. Kein Ergebnis wird erneut als Eingang derselben Formel verwendet.
 
 ## Save v14 – Achievements, Aufträge und Gem-Shop
 

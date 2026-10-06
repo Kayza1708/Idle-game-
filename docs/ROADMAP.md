@@ -677,3 +677,11 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Kurze gezielte Tests, Typecheck, Build und Diffprüfung; siehe `mechanics-ui-audit.md`.
 - [ ] Trainings- und feste Typbelohnungen ohne Verbesserungsskalierung bleiben ausdrücklich offen; keine Ersatzmechanik erfunden.
 - [ ] Dedizierte Modulillustrationen, Schicht-3-Referenzentscheidungen und Langzeitbalance bleiben separat offen.
+
+## Auftrag 7A – Core Loop und Compute-Nutzung
+
+- [x] Volle Compute-Rate für Users; keine Profilaufteilung oder konkurrierende Kapazitätsformel.
+- [x] Training/Forschung/Analysen parallel bei unveränderten Kosten und festen Zeiten.
+- [x] Gemeinsame Domain-/UI-/Exportzerlegung, volle Auslastung und DE/EN-Hinweis; alte Profile save-kompatibel.
+- [x] Kurze echte Domainregressionen und vorbereiteter Vorher/Nachher-Vergleich; siehe [Audit](core-loop-audit.md).
+- [ ] Wirkungslose Trainingsboni für Auftrag 7B, bekannte Schicht-3-Referenzabweichungen und Langzeitbalance bleiben separat offen.
