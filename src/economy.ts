@@ -254,7 +254,21 @@ export const safeEconomyMul=(a:number,b:number)=>{a=safeEconomy(a);b=safeEconomy
 export const safeEconomyPow=(base:number,exponent:number)=>{if(base<=0)return 0;const log=Math.log10(base)*exponent;return log>=300?MAX_ECONOMY_VALUE:safeEconomy(base**exponent);};
 export type ExactEconomy={credits:ScientificJSON;data:ScientificJSON;researchPoints:ScientificJSON;lifetimeDataGenerated:ScientificJSON;runCreditsEarned:ScientificJSON;lifetimeCreditsEarned:ScientificJSON;lifetimeEligibleCredits:ScientificJSON;cycleEligibleCredits:ScientificJSON;prestigeEntitlementClaimed:ScientificJSON;totalINTEarned:ScientificJSON;cycleINTEarned:ScientificJSON;unspentINT:ScientificJSON;spentINT:ScientificJSON};
 export type ResourceCost={credits?:number;data?:number};
-const exactFrom=(s:Partial<GameState>,key:keyof ExactEconomy,fallback:number)=>{const stored=s.exactEconomy?.[key]?ScientificNumber.fromJSON(s.exactEconomy[key]):null;if(!stored)return ScientificNumber.from(fallback);const projected=stored.toNumber(MAX_ECONOMY_VALUE);const withinProjection=stored.exponent<300||(stored.exponent===300&&stored.mantissa<=1);return withinProjection&&Number.isFinite(fallback)&&Math.abs(projected-fallback)>Math.max(1,Math.abs(fallback))*1e-12?ScientificNumber.from(fallback):stored;};
+export const exactEconomyKeys=(['credits','data','researchPoints','lifetimeDataGenerated','runCreditsEarned','lifetimeCreditsEarned','lifetimeEligibleCredits','cycleEligibleCredits','prestigeEntitlementClaimed','totalINTEarned','cycleINTEarned','unspentINT','spentINT'] as const) satisfies readonly (keyof ExactEconomy)[];
+const validResourceNumber=(value:unknown):value is number=>typeof value==='number'&&Number.isFinite(value)&&value>=0;
+const exactFrom=(s:Partial<GameState>,key:keyof ExactEconomy,fallback:number)=>{
+ if(!validResourceNumber(fallback))throw new RangeError(`Invalid ${key} projection`);
+ const raw=s.exactEconomy?.[key];
+ if(raw===undefined)return ScientificNumber.from(fallback);
+ const stored=ScientificNumber.fromJSON(raw);
+ // An old noncanonical pair must retain its value even if its native shadow was stale.
+ if(raw.m!==stored.mantissa||raw.e!==stored.exponent)return stored;
+ // Compatibility for legacy callers that replace scalar fields. Never replace a
+ // scientific value beyond the projection cap with its capped native shadow.
+ if(stored.exponent>300||(stored.exponent===300&&stored.mantissa>1))return stored;
+ const projected=stored.toNumber(MAX_ECONOMY_VALUE);
+ return Math.abs(projected-fallback)>Math.max(1,Math.abs(fallback))*1e-12?ScientificNumber.from(fallback):stored;
+};
 const exactSet=(s:GameState,key:keyof ExactEconomy,value:ScientificNumber):GameState=>{
  const projected=value.toNumber(MAX_ECONOMY_VALUE);
  const nearest=Math.round(projected);
@@ -262,6 +276,9 @@ const exactSet=(s:GameState,key:keyof ExactEconomy,value:ScientificNumber):GameS
  if(key==='lifetimeDataGenerated')return {...s,exactEconomy:{...s.exactEconomy,[key]:value.toJSON()}};return {...s,[key]:normalized,exactEconomy:{...s.exactEconomy,[key]:value.toJSON()}};
 };
 export function exactEconomyValue(s:GameState,key:keyof ExactEconomy){const fallback=key==='lifetimeDataGenerated'?s.lifetime.regularData:(s[key as keyof GameState] as number);return exactFrom(s,key,fallback)}
+const validEconomyValues=(s:GameState,keys:readonly (keyof ExactEconomy)[])=>{try{return keys.every(key=>ScientificNumber.isValid(exactEconomyValue(s,key)));}catch{return false;}};
+/** Normalize valid historical ledger pairs without changing the save schema. */
+export function normalizeExactEconomy(s:GameState){let next=s;for(const key of exactEconomyKeys)next=exactSet(next,key,exactEconomyValue(s,key));return next;}
 
 export function formatScientific(value:ScientificNumber,digits=2,mode:'auto'|'scientific'|'engineering'='auto'){
  if(value.isZero())return '0';
@@ -270,17 +287,17 @@ export function formatScientific(value:ScientificNumber,digits=2,mode:'auto'|'sc
  return value.toDisplayString(digits,mode==='engineering');
 }
 export function formatExactEconomy(s:GameState,key:keyof ExactEconomy,digits=2){return formatScientific(exactEconomyValue(s,key),digits,s.settings.numberFormat)}
-export function canAffordScientificCreditCost(s:GameState,cost:ScientificNumber,reserve=0){return exactEconomyValue(s,'credits').compare(cost.add(ScientificNumber.from(Math.max(0,reserve))))>=0}
+export function canAffordScientificCreditCost(s:GameState,cost:ScientificNumber,reserve=0){return ScientificNumber.isValid(cost)&&validResourceNumber(reserve)&&validEconomyValues(s,['credits'])&&exactEconomyValue(s,'credits').compare(cost.add(ScientificNumber.from(reserve)))>=0}
 export const scientificProduct=(...values:(ScientificNumber|number)[])=>values.reduce<ScientificNumber>((out,value)=>out.multiply(typeof value==='number'?ScientificNumber.from(Math.max(0,value)):value),ScientificNumber.from(1));
-export function exactEconomyJSON(s:GameState){return Object.fromEntries((Object.keys(s.exactEconomy) as (keyof ExactEconomy)[]).map(key=>[key,exactEconomyValue(s,key).toJSON()])) as unknown as ExactEconomy}
-export function canAffordResources(s:Pick<GameState,'credits'|'data'|'exactEconomy'>,cost:ResourceCost){const credits=safeEconomy(cost.credits??0),data=safeEconomy(cost.data??0);return exactFrom(s,'credits',s.credits).compare(ScientificNumber.from(credits))>=0&&exactFrom(s,'data',s.data).compare(ScientificNumber.from(data))>=0;}
-export function spendResources<T extends GameState>(s:T,cost:ResourceCost):T{const credits=safeEconomy(cost.credits??0),data=safeEconomy(cost.data??0);if(!canAffordResources(s,{credits,data}))return s;let next=exactSet(s,'credits',exactEconomyValue(s,'credits').subtract(ScientificNumber.from(credits)));next=exactSet(next,'data',exactEconomyValue(s,'data').subtract(ScientificNumber.from(data)));return next as T;}
-export function spendScientificCredits<T extends GameState>(s:T,cost:ScientificNumber):T{if(exactEconomyValue(s,'credits').compare(cost)<0)return s;return exactSet(s,'credits',exactEconomyValue(s,'credits').subtract(cost)) as T;}
-export function canAffordScientificResources(s:GameState,credits=ScientificNumber.zero(),data=ScientificNumber.zero()){return exactEconomyValue(s,'credits').compare(credits)>=0&&exactEconomyValue(s,'data').compare(data)>=0;}
+export function exactEconomyJSON(s:GameState){return Object.fromEntries(exactEconomyKeys.map(key=>[key,exactEconomyValue(s,key).toJSON()])) as unknown as ExactEconomy}
+export function canAffordResources(s:Pick<GameState,'credits'|'data'|'exactEconomy'>,cost:ResourceCost){if(!cost||typeof cost!=='object'||Array.isArray(cost)||(cost.credits!==undefined&&!validResourceNumber(cost.credits))||(cost.data!==undefined&&!validResourceNumber(cost.data)))return false;try{return exactFrom(s,'credits',s.credits).compare(ScientificNumber.from(cost.credits??0))>=0&&exactFrom(s,'data',s.data).compare(ScientificNumber.from(cost.data??0))>=0;}catch{return false;}}
+export function spendResources<T extends GameState>(s:T,cost:ResourceCost):T{if(!canAffordResources(s,cost))return s;return spendScientificResources(s,ScientificNumber.from(cost.credits??0),ScientificNumber.from(cost.data??0));}
+export function spendScientificCredits<T extends GameState>(s:T,cost:ScientificNumber):T{if(!canAffordScientificCreditCost(s,cost))return s;return exactSet(s,'credits',exactEconomyValue(s,'credits').subtract(cost)) as T;}
+export function canAffordScientificResources(s:GameState,credits=ScientificNumber.zero(),data=ScientificNumber.zero()){return ScientificNumber.isValid(credits)&&ScientificNumber.isValid(data)&&validEconomyValues(s,['credits','data'])&&exactEconomyValue(s,'credits').compare(credits)>=0&&exactEconomyValue(s,'data').compare(data)>=0;}
 export function spendScientificResources<T extends GameState>(s:T,credits=ScientificNumber.zero(),data=ScientificNumber.zero()):T{if(!canAffordScientificResources(s,credits,data))return s;let next=exactSet(s,'credits',exactEconomyValue(s,'credits').subtract(credits));next=exactSet(next,'data',exactEconomyValue(next,'data').subtract(data));return next as T;}
-export function addDataScientific(s:GameState,gain:ScientificNumber){let next=exactSet(s,'data',exactEconomyValue(s,'data').add(gain));next=exactSet(next,'lifetimeDataGenerated',exactEconomyValue(s,'lifetimeDataGenerated').add(gain));return {...next,lifetime:{...s.lifetime,regularData:safeEconomyAdd(s.lifetime.regularData,gain.toNumber(MAX_ECONOMY_VALUE))}};}
-export function addData(s:GameState,value:number){return addDataScientific(s,ScientificNumber.from(Math.max(0,value)));}
-export function addResearchScientific(s:GameState,gain:ScientificNumber){return exactSet(s,'researchPoints',exactEconomyValue(s,'researchPoints').add(gain));}
+export function addDataScientific(s:GameState,gain:ScientificNumber){if(!ScientificNumber.isValid(gain)||!validEconomyValues(s,['data','lifetimeDataGenerated']))return s;let next=exactSet(s,'data',exactEconomyValue(s,'data').add(gain));next=exactSet(next,'lifetimeDataGenerated',exactEconomyValue(s,'lifetimeDataGenerated').add(gain));return {...next,lifetime:{...s.lifetime,regularData:safeEconomyAdd(s.lifetime.regularData,gain.toNumber(MAX_ECONOMY_VALUE))}};}
+export function addData(s:GameState,value:number){return validResourceNumber(value)?addDataScientific(s,ScientificNumber.from(value)):s;}
+export function addResearchScientific(s:GameState,gain:ScientificNumber){return ScientificNumber.isValid(gain)&&validEconomyValues(s,['researchPoints'])?exactSet(s,'researchPoints',exactEconomyValue(s,'researchPoints').add(gain)):s;}
 
 export const dayKey=(ms:number)=>new Date(ms).toISOString().slice(0,10);
 export const weekKey=(ms:number)=>{const d=new Date(ms); const day=(d.getUTCDay()+6)%7; d.setUTCDate(d.getUTCDate()-day); return dayKey(d.getTime())};
@@ -331,11 +348,29 @@ export const milestoneBonus=(s:GameState,effect:MilestoneEffect)=>hardwareIds.re
 export type MilestoneSynergy={compute:number;revenue:number;data:number;research:number;users:number;infrastructureExponent:number;dataExponent:number;modelExponent:number;itemExponent:number};
 export const milestoneSynergy=(s:GameState):MilestoneSynergy=>{const out:MilestoneSynergy={compute:1,revenue:1,data:1,research:1,users:1,infrastructureExponent:1,dataExponent:1,modelExponent:1,itemExponent:1};for(const [index,id] of hardwareIds.entries()){const count=s.hardwareCounts[id];for(const threshold of [10,25,50,100,250,500] as const){if(count<threshold)continue;const tier=index+1,late=Math.max(0,index-6);if(threshold===10)out.compute*=1+0.04+tier*.004;if(threshold===25)out.compute*=1+0.06+tier*.005;if(threshold===50){out.compute*=1+0.08+tier*.006;out.users*=1+0.02+tier*.003;}if(threshold===100){out.revenue*=1+0.08+tier*.008;out.data*=1+0.04+tier*.004;}if(threshold===250){out.research*=1+0.10+tier*.01;out.data*=1+0.06+tier*.005;}if(threshold===500){out.revenue*=1+0.12+tier*.012;out.compute*=1+0.10+tier*.01;if(late>0)out.infrastructureExponent+=late*BALANCE.scalingSynergy.milestoneLateExponentPerTier/9;if(index>=10)out.dataExponent+=.01+(index-10)*.005;if(index>=11)out.modelExponent+=.008+(index-11)*.004;if(index>=12)out.itemExponent+=.006+(index-12)*.004;}}}return out;};
 export const costModifier=(s?:GameState)=>s?.retention.activeRun?.id==='inflation'?100:1;
-export const hardwareCostScientific=(id:HardwareId,owned:number,s?:GameState)=>ScientificNumber.from(BALANCE.hardware[id].baseCost*costModifier(s)).multiply(ScientificNumber.from(BALANCE.hardware[id].growth).pow(owned));
+export const hardwareCostScientific=(id:HardwareId,owned:number,s?:GameState)=>{if(!hardwareIds.includes(id)||!Number.isSafeInteger(owned)||owned<0)throw new RangeError('Invalid hardware price request');return ScientificNumber.from(BALANCE.hardware[id].baseCost*costModifier(s)).multiply(ScientificNumber.from(BALANCE.hardware[id].growth).pow(owned));};
 export const hardwareCost=(id:HardwareId,owned:number,s?:GameState)=>hardwareCostScientific(id,owned,s).toNumber(MAX_ECONOMY_VALUE);
-export const hardwareBulkCostScientific=(id:HardwareId,owned:number,count:number,s?:GameState)=>{if(!Number.isSafeInteger(count)||count<=0)return ScientificNumber.zero();const h=BALANCE.hardware[id],first=hardwareCostScientific(id,owned,s);if(count===1)return first;const logGrowth=count*Math.log(h.growth),factor=logGrowth>690?ScientificNumber.fromParts(1,Math.floor(logGrowth/Math.LN10)).multiplyNumber(Math.exp(logGrowth%Math.LN10)/(h.growth-1)):ScientificNumber.from(Math.expm1(logGrowth)/(h.growth-1));return first.multiply(factor);};
+export const hardwareBulkCostScientific=(id:HardwareId,owned:number,count:number,s?:GameState)=>{
+ if(!Number.isSafeInteger(count)||count<0||!Number.isSafeInteger(owned+count))throw new RangeError('Invalid hardware quantity');
+ const h=BALANCE.hardware[id],first=hardwareCostScientific(id,owned,s);
+ if(count===0)return ScientificNumber.zero();if(count===1)return first;
+ const growth:number=h.growth;if(growth===1)return first.multiplyNumber(count);
+ const logGrowth=count*Math.log(h.growth),factor=logGrowth>690?ScientificNumber.from(h.growth).pow(count).subtract(ScientificNumber.from(1)).divideNumber(h.growth-1):ScientificNumber.from(Math.expm1(logGrowth)/(h.growth-1));return first.multiply(factor);
+};
 export const hardwareBulkCost=(id:HardwareId,owned:number,count:number,s?:GameState)=>hardwareBulkCostScientific(id,owned,count,s).toNumber(MAX_ECONOMY_VALUE);
-export function maxAffordable(id:HardwareId,owned:number,credits:number,s?:GameState){if(!Number.isSafeInteger(owned)||owned<0)return 0;const budget=s&&credits===s.credits?exactEconomyValue(s,'credits'):ScientificNumber.from(credits),limit=Number.MAX_SAFE_INTEGER-owned;if(limit<=0||hardwareCostScientific(id,owned,s).compare(budget)>0)return 0;let low=1,high=1;while(high<limit&&hardwareBulkCostScientific(id,owned,high,s).compare(budget)<=0){low=high;high=Math.min(limit,high*2);if(high===low)break;}if(high===limit&&hardwareBulkCostScientific(id,owned,high,s).compare(budget)<=0)return high;while(low+1<high){const mid=low+Math.floor((high-low)/2);if(hardwareBulkCostScientific(id,owned,mid,s).compare(budget)<=0)low=mid;else high=mid;}return low;}
+export function maxAffordable(id:HardwareId,owned:number,credits:number,s?:GameState){
+ if(!hardwareIds.includes(id)||!Number.isSafeInteger(owned)||owned<0||!validResourceNumber(credits)||(s&&!validEconomyValues(s,['credits'])))return 0;
+ const budget=s&&credits===s.credits?exactEconomyValue(s,'credits'):ScientificNumber.from(credits),limit=Number.MAX_SAFE_INTEGER-owned;
+ if(limit<=0||hardwareCostScientific(id,owned,s).compare(budget)>0)return 0;
+ const affordable=(count:number)=>hardwareBulkCostScientific(id,owned,count,s).compare(budget)<=0;
+ let low=1,high=1;while(high<limit&&affordable(high)){low=high;high=Math.min(limit,high*2);if(high===low)break;}
+ if(high===limit&&affordable(high))low=high;
+ else while(low+1<high){const mid=low+Math.floor((high-low)/2);if(affordable(mid))low=mid;else high=mid;}
+ // Verify the result with the same geometric sum used by preview and debit.
+ while(low>0&&!affordable(low))low--;
+ while(low<limit&&affordable(low+1))low++;
+ return low;
+}
 export const hardwareMasteryLevel=(s:GameState,id:HardwareId)=>Math.floor(Math.sqrt(Math.max(0,s.retention.hardwareMasteryXp[id]??0)/250));
 export const hardwareMasteryBonus=(s:GameState,id:HardwareId)=>Math.min(BALANCE.scalingSynergy.masteryCap,hardwareMasteryLevel(s,id)*BALANCE.scalingSynergy.masteryPerLevel);
 export const legacyInfrastructureMultiplier=(s:GameState)=>{
@@ -466,9 +501,17 @@ export function startResearchProject(s:GameState,id:ResearchId){const slot=s.res
 export const buyResearchProject=startResearchProject;
 export function buyResearchLab(s:GameState){return s;}
 export function buyHardwareClass(s:GameState,id:HardwareId,count:number|'max'=1){
- if(s.retention.activeRun?.id==='five-hardware'&&hardwareIds.indexOf(id)>=5)return s;const owned=s.hardwareCounts[id],requested=count==='max'?maxAffordable(id,owned,s.credits,s):count,amount=Number.isSafeInteger(requested)&&requested>0&&Number.isSafeInteger(owned+requested)?requested:0,costExact=hardwareBulkCostScientific(id,owned,amount,s),cost=costExact.toNumber(MAX_ECONOMY_VALUE),creditsBefore=s.credits,computeBefore=computeRate(s.hardware,s),rateBefore=creditRate(s.hardware,s.level,s,s.savedAt);if(amount<1||exactEconomyValue(s,'credits').compare(costExact)<0)return s;
+ if(!hardwareIds.includes(id)||!Number.isSafeInteger(s.hardware)||s.hardware<0||!Number.isSafeInteger(s.hardwareCounts[id])||s.hardwareCounts[id]<0||!validEconomyValues(s,['credits']))return s;
+ if(s.retention.activeRun?.id==='five-hardware'&&hardwareIds.indexOf(id)>=5)return s;
+ const owned=s.hardwareCounts[id],amount=count==='max'?maxAffordable(id,owned,s.credits,s):count;
+ if(!Number.isSafeInteger(amount)||amount<=0||!Number.isSafeInteger(owned+amount))return s;
+ const costExact=hardwareBulkCostScientific(id,owned,amount,s);
+ if(!canAffordScientificCreditCost(s,costExact))return s;
+ const paid=spendScientificCredits(s,costExact);
+ if(paid===s)return s;
+ const cost=costExact.toNumber(MAX_ECONOMY_VALUE),creditsBefore=s.credits,computeBefore=computeRate(s.hardware,s),rateBefore=creditRate(s.hardware,s.level,s,s.savedAt);
  const counts={...s.hardwareCounts,[id]:owned+amount},discovered=s.discovered.includes(id)?s.discovered:[...s.discovered,id],completed=[...s.onboarding.completed];for(const event of ['first-buy',...(counts.calculator>=10?['ten-calculators']:[]),...(discovered.includes('sbc')?['discover-sbc']:[]),...(counts.calculator>=25?['class-upgrade']:[])])if(!completed.includes(event))completed.push(event);
- const classes=s.lifetime.hardwareClasses.includes(id)?s.lifetime.hardwareClasses:[...s.lifetime.hardwareClasses,id],masteryGain=amount;const paid=spendScientificCredits(s,costExact);let next:GameState={...paid,hardware:Object.values(counts).reduce((a,b)=>a+b,0),hardwareCounts:counts,discovered,onboarding:{...s.onboarding,completed},retention:{...s.retention,hardwareMasteryXp:{...s.retention.hardwareMasteryXp,[id]:(s.retention.hardwareMasteryXp[id]??0)+masteryGain}},lifetime:{...s.lifetime,hardwareBought:s.lifetime.hardwareBought+amount,calculatorsBought:s.lifetime.calculatorsBought+(id==='calculator'?amount:0),hardwareClasses:classes}};
+ const classes=s.lifetime.hardwareClasses.includes(id)?s.lifetime.hardwareClasses:[...s.lifetime.hardwareClasses,id],masteryGain=amount;let next:GameState={...paid,hardware:Object.values(counts).reduce((a,b)=>a+b,0),hardwareCounts:counts,discovered,onboarding:{...s.onboarding,completed},retention:{...s.retention,hardwareMasteryXp:{...s.retention.hardwareMasteryXp,[id]:(s.retention.hardwareMasteryXp[id]??0)+masteryGain}},lifetime:{...s.lifetime,hardwareBought:s.lifetime.hardwareBought+amount,calculatorsBought:s.lifetime.calculatorsBought+(id==='calculator'?amount:0),hardwareClasses:classes}};
  const computeAfter=computeRate(next.hardware,next),rateAfter=creditRate(next.hardware,next.level,next,next.savedAt),nextMilestone=BALANCE.hardware[id].milestones.find(m=>m.threshold>counts[id])?.threshold??null;
  next=addEvent(next,'hardware-purchase',s.savedAt,{id,amount,unitCost:amount?cost/amount:0,cost,exactCost:costExact.toScientificString(8),creditsBefore,creditsAfter:next.credits,computeBefore,computeAfter,rateBefore,rateAfter,nextMilestone,paybackSeconds:rateAfter>rateBefore?cost/(rateAfter-rateBefore):null,ownedAfter:counts[id]});
  for(const milestone of BALANCE.hardware[id].milestones)if(owned<milestone.threshold&&counts[id]>=milestone.threshold){next={...next,lifetime:{...next.lifetime,milestones:next.lifetime.milestones+1},runMilestoneClasses:next.runMilestoneClasses.includes(id)?next.runMilestoneClasses:[...next.runMilestoneClasses,id]};next=addEvent(next,'hardware-milestone',s.savedAt,{id,threshold:milestone.threshold,label:milestone.label,effect:milestone.effect,effectValue:milestone.value,computeBefore,computeAfter},true);const key=`${id}:${milestone.threshold}`;if(!next.runMilestoneEdges.includes(key))next={...next,runMilestoneEdges:[...next.runMilestoneEdges,key]};next=addEvent(grantComponents(next,{titaniumBolts:BALANCE.hardwareMilestoneTitanium,...(id==='gpu'?{photonicLenses:BALANCE.gamingGpuMilestoneLaser}:{})}),'component-found',s.savedAt,{source:id==='gpu'?'gaming-gpu-milestone':'hardware-milestone',mode:'active',titaniumBolts:BALANCE.hardwareMilestoneTitanium,photonicLenses:id==='gpu'?BALANCE.gamingGpuMilestoneLaser:0,total:BALANCE.hardwareMilestoneTitanium+(id==='gpu'?BALANCE.gamingGpuMilestoneLaser:0)});if((milestone.threshold===25||milestone.threshold===50)&&hasNode(next,'milestoneRecycling',1)&&!next.runRecyclingRewards.includes(key))next=addEvent(grantComponents({...next,runRecyclingRewards:[...next.runRecyclingRewards,key]},{titaniumBolts:BALANCE.recyclingRewards[milestone.threshold]}),'component-found',s.savedAt,{source:'milestone-recycling',mode:'active',component:'titaniumBolts',total:BALANCE.recyclingRewards[milestone.threshold]});}
@@ -480,8 +523,8 @@ export function toggleHardwareAutobuyer(s:GameState,id:HardwareId){return hardwa
 export function buyHardware(s:GameState,count=1){return buyHardwareClass(s,'calculator',count)}
 export const classUpgradeCost=(id:HardwareId,s:GameState)=>hardwareCost(id,BALANCE.classUpgradeCount,s)*BALANCE.classUpgradeCostFactor;
 export function buyClassUpgrade(s:GameState,_id:HardwareId){return s;} // v21: replaced by milestone mastery; kept for old action/save compatibility
-export function addCreditsScientific(s:GameState,delta:ScientificNumber,eligible=true,production=eligible){let next=exactSet(s,'credits',exactEconomyValue(s,'credits').add(delta));if(eligible){next=exactSet(next,'runCreditsEarned',exactEconomyValue(s,'runCreditsEarned').add(delta));next=exactSet(next,'lifetimeCreditsEarned',exactEconomyValue(s,'lifetimeCreditsEarned').add(delta));next=exactSet(next,'lifetimeEligibleCredits',exactEconomyValue(s,'lifetimeEligibleCredits').add(delta));next=exactSet(next,'cycleEligibleCredits',exactEconomyValue(s,'cycleEligibleCredits').add(delta.multiplyNumber(intYieldFactor(s))));}return {...next,lifetime:production?{...s.lifetime,regularCredits:safeEconomyAdd(s.lifetime.regularCredits,delta.toNumber(MAX_ECONOMY_VALUE))}:s.lifetime};}
-export function addCredits(s:GameState,value:number,eligible=true,production=eligible){return addCreditsScientific(s,ScientificNumber.from(Math.max(0,value)),eligible,production);}
+export function addCreditsScientific(s:GameState,delta:ScientificNumber,eligible=true,production=eligible){if(!ScientificNumber.isValid(delta)||!validEconomyValues(s,eligible?['credits','runCreditsEarned','lifetimeCreditsEarned','lifetimeEligibleCredits','cycleEligibleCredits']:['credits'])||(production&&!validResourceNumber(s.lifetime.regularCredits)))return s;let next=exactSet(s,'credits',exactEconomyValue(s,'credits').add(delta));if(eligible){next=exactSet(next,'runCreditsEarned',exactEconomyValue(s,'runCreditsEarned').add(delta));next=exactSet(next,'lifetimeCreditsEarned',exactEconomyValue(s,'lifetimeCreditsEarned').add(delta));next=exactSet(next,'lifetimeEligibleCredits',exactEconomyValue(s,'lifetimeEligibleCredits').add(delta));next=exactSet(next,'cycleEligibleCredits',exactEconomyValue(s,'cycleEligibleCredits').add(delta.multiplyNumber(intYieldFactor(s))));}return {...next,lifetime:production?{...s.lifetime,regularCredits:safeEconomyAdd(s.lifetime.regularCredits,delta.toNumber(MAX_ECONOMY_VALUE))}:s.lifetime};}
+export function addCredits(s:GameState,value:number,eligible=true,production=eligible){return validResourceNumber(value)?addCreditsScientific(s,ScientificNumber.from(value),eligible,production):s;}
 export const impulseNetworkBonus=(s:GameState,now=s.savedAt)=>hasNode(s,'impulseNetwork',1)?creditRate(s.hardware,s.level,s,now,false)*Math.min(BALANCE.impulseNetworkCap,Math.floor(s.hardwareCounts.calculator/10)*BALANCE.impulseNetworkPerTen):0;
 export const tapPrestigeMultiplier=(s:GameState)=>1+(hasNode(s,'computeNet2',1)?.35:hasNode(s,'computeNet1',1)?.15:0)+(hasNode(s,'computeNet4',1)?.50:0)+(hasNode(s,'computeNet7',1)?.75:0);
 export const tapDropMultiplier=(s:GameState)=>Math.max(.25,(1+s.researchLevels.dropProtocols*BALANCE.repeatableResearch.dropProtocols.effectPerLevel)*(1+equippedBonus(s,'drop'))*(1+(hasNode(s,'analysis4',1)?.25:0)+(hasNode(s,'analysis7',1)?.50:0)));

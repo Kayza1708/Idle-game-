@@ -518,3 +518,10 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - [ ] Prestige-Confirmation bei 375×667 und 430×932 auf Hierarchie, CTA und Overlay-Safe-Area prüfen.
 - [ ] ResourceBar bei 375/390/393/402/430 px mit langen deutschen Zahlen prüfen.
 - [ ] Alle 50 Season-Level scrollen; Free/Premium-Unterschiede, 5er-Meilensteine, Level 30 und Level 50 visuell prüfen.
+
+## Übergabe ScientificNumber-/Kaufreparatur (6. Oktober 2026)
+- Ursachenanalyse, werttreue Normalisierung, strikte Transaktionsgrenzen und reproduzierbare Vorher/Nachher-Zahlen stehen in `docs/scientific-purchase-audit.md`.
+- Typecheck, 222 betroffene Tests, Production-Build und die echte UI-Prüfung des unterdeckten Kaufs bestehen. Die vollständige Suite ist abgeschlossen: 559 Tests bestanden, drei bestehende Clock-Fehler, zwei Vite-Ladefehler und ein Vitest-RPC-Timeout; alle 115 neuen Regressionen bestanden.
+- Bereits vorhandene Clock-Assertions erwarten Credits ohne Hardware; zwei mobile Suiten scheitern an einem Vite-SSR-Transform von `import.meta.url`. Diese unabhängigen Probleme bleiben separat zu bearbeiten.
+- Git-Fetch/Main-Abgleich ist erfolgreich. PR-Erstellung benötigt den aktuell blockierten API-Zugriff auf `api.github.com`; keine Tokens im Chat hinterlegen.
+- Zutatenreservierungen, Challenge-Isolation, Startercredits und Auto-Prestige werden in späteren Aufträgen behandelt.

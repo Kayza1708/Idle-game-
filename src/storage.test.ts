@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { newGame } from './economy';
+import { addCredits, newGame } from './economy';
 import { advance } from './simulation';
 import { BACKUP_KEY, SAVE_KEY, TEMP_KEY, loadGame, persistGame, RECOVERY_KEY, restore, serialize, StorageLike } from './storage';
 
@@ -15,7 +15,7 @@ describe('save format', () => {
   it('assigns a persistent anonymous campaign id to a fresh local game',()=>{const storage=new MemoryStorage(),first=loadGame(storage,100).state;expect(first.telemetry.campaignId).not.toBe('unassigned');persistGame(storage,first,100);expect(loadGame(storage,100).state.telemetry.campaignId).toBe(first.telemetry.campaignId)});
 
   it('round-trips a versioned game state', () => {
-    const state = { ...newGame(123), credits: 42.25, level: 3, training: 17 };
+    const state = { ...addCredits(newGame(123),42.25,false), level: 3, training: 17 };
     expect(restore(serialize(state), 999)).toEqual({ state });
   });
   it('migrates v29 training progress to the fixed elapsed-time contract',()=>{const old={...newGame(0),training:45,activeTraining:{track:'quality' as const,workRequired:180,creditCost:25,dataCost:2,baseDuration:180,startingRate:2}};const result=restore(JSON.stringify({version:29,state:old}),0);expect(result.migrated).toBe(true);expect(result.state.activeTraining).toMatchObject({track:'quality',workRequired:90,creditCost:0,startingRate:1});expect(result.state.training).toBe(22.5);expect(result.state.trainingBoostUntil).toBe(0);});
