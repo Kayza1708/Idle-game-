@@ -150,3 +150,16 @@ Der reparierte Simulator verwendet ausschließlich echte Gameplay-Aktionen und e
 Die Messung zeigt als klare Engpässe Material- und freie Slot-Wartezeiten: Im aktiven 7-Tage-Profil liegen die Medianwerte bei rund 26,67 beziehungsweise 13,58 Stunden, während Credit- und Datenwartezeit nahezu verschwinden. Zwei der drei aktiven Seeds erreichen nach sieben Tagen kein Item; kein Profil erzeugt in diesem Zeitraum ein regulär abgeschlossenes Zwischenprodukt. Das passive Profil verliert durch das echte Offline-Limit innerhalb von sieben Tagen 183.300 Sekunden potenziellen Fortschritt. Diese Werte rechtfertigen noch keine Kurvenänderung, sondern einen separaten nächsten Balance-Auftrag zur Material-/Crafting-Freischaltung und zur Interpretation der Slotbelegung.
 
 Behobene Simulatorfehler: Taps laufen jetzt über `registerTap`; manuelle Aktionen sind auf die festen Sitzungen begrenzt; Prestige-Verfügbarkeit wird unabhängig vom späteren Reset erfasst; Crafting konsumiert Resultate erst nach tatsächlichem Abschluss; Scientific-Werte werden als Mantisse/Exponent exportiert; Online-Segmente und Offline-Abschlüsse respektieren Ereignisgrenzen. Für den nächsten Balance-Auftrag sollten zuerst die Materialquellen bis zum ersten Zwischenprodukt, die Forschungs-/Analyseslot-Wartezeiten und das aktive/passive Prestigegefälle bewertet werden – ohne gleichzeitig Kosten, Multiplikatoren und Drop-Raten zu verändern.
+
+## Gemeinsame Vorschauen / Export v3 – 6. Oktober 2026
+
+Der aktuelle lokale Export verwendet den reinen `economySnapshot` mit denselben
+Faktoren wie die Produktion. Wissenschaftliche Guthaben, aktuelle Kosten/Raten,
+reservierte Zutaten und gespeicherte Auftragsendzeiten bleiben darstellbar über
+1e308. Hauptspiel- und Challenge-Ereignisse sind getrennt zugeordnet, alte
+unzuordenbare Ereignisse bleiben unklassifiziert. 50 Startcredits sind Startkapital,
+keine Einnahme. Verwerfungszähler und Messlücken verhindern die Interpretation
+begrenzter Daten als vollständigen Verlauf oder Inventarbestände als Fundrate.
+ZIP, Datenschutz, Fortschritt und Abbruch bleiben bestehen; Downloadgrenze 8 MiB.
+Kein Save-Upload. Reproduktionen und tatsächliche gezielte Prüfungen stehen in
+`preview-export-audit.md`; Langzeitbalance wird dadurch nicht bestätigt.

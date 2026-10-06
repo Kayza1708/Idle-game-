@@ -633,3 +633,5 @@ html[data-native-platform] body{padding:0}
 .challenge-run-panel{margin:12px;padding:14px;border:1px solid #71b8cd;border-radius:12px;background:#122330;color:#edf9ff}.challenge-run-panel h2{font-size:1.1rem;margin:0}.challenge-run-panel p{margin:8px 0}.challenge-run-panel div{display:flex;flex-wrap:wrap;gap:8px}.challenge-run-panel button{min-height:44px;padding:8px 12px}
 
 .game-shell>.challenge-content{overflow-y:auto;overscroll-behavior:contain}.challenge-content .workshop-screen{height:auto;overflow:visible;grid-template-rows:auto auto}.challenge-content .workshop-scroll{overflow:visible}
+
+.production-details,.job-details{margin:12px 0;padding:12px;border:1px solid var(--line,#34435d);border-radius:12px;overflow-wrap:anywhere}.production-details summary,.job-details summary{min-height:44px;display:flex;align-items:center;cursor:pointer}.production-details dl>div{display:flex;justify-content:space-between;gap:12px}.production-details dd{margin:0;text-align:right}.craft-list article>small{grid-column:1/-1}

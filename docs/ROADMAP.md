@@ -659,3 +659,11 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [ ] Schicht-3-Referenzabweichungen und Langzeitbalance bleiben separat offen. Historisch verlorene Hauptstände alter Challenge-Saves können nicht rekonstruiert werden.
 
 Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](challenge-isolation-audit.md).
+
+## Auftrag 5 – gemeinsame Vorschauen und Balanceexport
+
+- [x] Reine gemeinsame Kosten-/Ressourcenhelfer und echte Transaktionsregressionen.
+- [x] Produktionsfaktoren aus derselben Berechnung, wissenschaftlicher Snapshot für UI/Diagnose/Export.
+- [x] Lokaler ZIP-Export mit Kontext-/Auftragszuordnung, Reservierungen, Startkapital und Messlücken.
+- [x] Kurze gezielte Prüfungen und mobile DE/EN-Details; siehe `preview-export-audit.md`.
+- [ ] Gesamtabnahme/Langzeitbalance und bekannte Schicht-3-Referenzabweichungen bleiben separat offen.
