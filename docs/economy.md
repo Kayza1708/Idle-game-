@@ -15,6 +15,16 @@ Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und 
 | Axiome | `floor(sqrt(cycleINTEarned / threshold))` | bleiben erhalten; permanenter Creditfaktor `1 + 0,5 × totalAxiomsEarned` |
 | Gems | Missionen/Achievements und Komfortangebote | bleibt erhalten |
 
+## Einheitlicher Run-Start
+
+`BALANCE.runStartCredits = 50` ist das Startkapital eines neuen Spielstands, eines normalen Prestiges und eines Axiom-Resets. `runStartContract`/`initializeRun` setzen native Credits und das kanonische ScientificNumber-Ledger gemeinsam auf 50 sowie sämtliche Hardwarebestände auf null. Die Vorschauen verwenden denselben Vertrag. Diese Zuweisung ist keine Einnahme: Produktions-, Umsatz-, INT-, Quest- und Telemetrie-Einnahmezähler erhalten keinen Zuschlag. Laden und Offline-Fortschritt initialisieren gültige bestehende Spielstände nicht erneut.
+
+Ein wirksam freigeschalteter und aktivierter Taschenrechner-Autobuyer bezahlt den ersten Taschenrechner im vorhandenen Einkaufsintervall über `buyHardwareClass`. Nur bei vollständig leerem Hardwarebestand entfällt für diesen Kauf die prozentuale Creditreserve; danach gelten wieder die üblichen Reserven. Es gibt keine kostenlose Hardware. Ein Reset beginnt auch die Einkaufstimer neu.
+
+Der Prestige-Agent benötigt neben seiner Axiom-Freischaltung und Aktivierung einen wirksamen, aktivierten Einkaufsagenten für den ersten Taschenrechner. Er prüft den aktuellen wissenschaftlichen INT-Anspruch, den normalen Mindestanspruch von einem INT, Mindestlaufzeit und die vorhandenen getrennten Warteoptionen. Er ruft ausschließlich `prestige` auf. Hardware wird erst bei einem späteren regulären Einkaufstermin gekauft. Axiom-Resets entfernen INT-Freischaltungen; gespeicherte Autobuyer-Schalter allein aktivieren sie nicht wieder. Die bestehende effektive Freischaltungsabfrage berücksichtigt erhaltene permanente Freischaltungen.
+
+Hardwarepreise, Produktionskurven, Prestigeformeln, Rezepte, Drops und alle übrigen Resetregeln sind unverändert. Das vorgeschriebene Startkapital verschiebt zwei bestehende enge Analyse-Kalibrierungstests: erste Analyse 870 statt 890 Sekunden; die unveränderte Untergrenze 880 Sekunden wird unterschritten. Es wurde keine Gegenkalibrierung vorgenommen.
+
 ## Axiom-Resetvertrag
 
 Nur durch bestätigte normale Prestiges erhaltene INT erhöhen `cycleINTEarned`. Verfügbares, ausgegebenes, hypothetisch beanspruchbares oder per Debug gesetztes INT zählt nicht. Historisch verdiente INT (`totalINTEarned`) bleiben getrennt erhalten; der normale INT-Creditbonus und die INT-Synergie verwenden ausschließlich `cycleINTEarned`. Der Axiom-Faktor wird separat mit dem normalen INT-Faktor multipliziert und beeinflusst weder Data noch Drops oder Forschungszeiten.

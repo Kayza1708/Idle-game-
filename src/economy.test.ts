@@ -9,7 +9,7 @@ describe('economy', () => {
     expect(hardwareBulkCost('calculator', 1, 3)).toBeCloseTo(hardwareCost('calculator', 1) + hardwareCost('calculator', 2) + hardwareCost('calculator', 3), 12);
   });
   it('does not buy with insufficient credits', () => {
-    const state = newGame(0);
+    const state = {...newGame(0),credits:14};
     expect(buyHardware(state)).toBe(state);
   });
   it('uses normalized profiles from the central configuration',()=>{
@@ -39,7 +39,7 @@ describe('economy', () => {
   });
   it('clamps negative time and default offline time beyond eight hours', () => {
     const fresh=newGame(0),state={...fresh,hardware:1,hardwareCounts:{...fresh.hardwareCounts,calculator:1},discovered:['calculator'] as GameState['discovered']};
-    expect(advance(state, -5).state.credits).toBe(0);
+    expect(advance(state, -5).state).toBe(state);
     expect(advance(state, 1e9).state.credits).toBeCloseTo(advance(state, 28800).state.credits);
     const oneSecond=advance(state,1).state,splitSecond=advance(advance(state,.4).state,.6).state;
     expect(oneSecond.credits).toBeGreaterThan(creditRate(1,0,state));

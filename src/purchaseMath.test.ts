@@ -4,13 +4,13 @@ import {ScientificNumber} from './scientificNumber';
 import {loadGame, persistGame, restore, SAVE_KEY, SAVE_VERSION, serialize, type StorageLike} from './storage';
 
 const funded=(balance:ScientificNumber,owned=0):GameState=>{
-  const state=addCreditsScientific(newGame(0),balance,false);
+  const fresh=newGame(0),state={...fresh,credits:balance.toNumber(),exactEconomy:{...fresh.exactEconomy,credits:balance.toJSON()}};
   return {...state,hardware:owned,hardwareCounts:{...state.hardwareCounts,calculator:owned}};
 };
 
 describe('scientific hardware purchase regressions', () => {
   it('refuses the audited 12.589-credit balance for a 15-credit calculator', () => {
-    const state = addCreditsScientific(newGame(0), ScientificNumber.fromParts(1, 1.1));
+    const state = funded(ScientificNumber.fromParts(1, 1.1));
     const cost = hardwareBulkCostScientific('calculator', 0, 1, state);
     const result = buyHardwareClass(state, 'calculator');
     console.log('Audit reproduction:', JSON.stringify({
@@ -165,7 +165,7 @@ describe('scientific hardware purchase regressions', () => {
   });
 
   it('does not use an underflowed native cost projection as a free scientific cost', () => {
-    const state=newGame(0),cost=ScientificNumber.fromParts(1,-1000);
+    const state=funded(ScientificNumber.zero()),cost=ScientificNumber.fromParts(1,-1000);
     expect(cost.toNumber()).toBe(0); // Only the native display is below its range.
     expect(cost.isZero()).toBe(false);
     expect(canAffordScientificCreditCost(state,cost)).toBe(false);

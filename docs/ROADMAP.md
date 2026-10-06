@@ -622,3 +622,14 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Typecheck, 257 betroffene Tests einschließlich 71 neuer Regressionen, Production-Build und `git diff --check` bestanden.
 - [x] Vollständige Abschluss-Suite durchgeführt und dokumentiert: 630 Tests bestanden; dieselben drei Clock-Assertions, zwei Vite-Ladefehler und ein RPC-Timeout wie im vollständigen Ausgangslauf. Keine grüne Gesamtabnahme behauptet.
 - [ ] Grüne Gesamtsuite nach separaten Reparaturen der belegten Clock-, Vite- und RPC-Probleme.
+
+## Einheitlicher Run-Start und Auto-Prestige (6. Oktober 2026)
+- [x] Auftrag 1 (`47d706d`) und Auftrag 2 (`d9c8bb3`) auf tatsächlich aktualisiertem Main `484b5cb` bestätigt; eigener Branch ohne offene PR-Abhängigkeit.
+- [x] Automatischen Stillstand mit echten Domainfunktionen reproduziert: nach Reset und 60 Sekunden weiterhin null Credits/null Hardware.
+- [x] Zentraler Startvertrag für neue Spielstände, normales Prestige und Axiom-Reset: exakt 50 Credits, wissenschaftliches Ledger konsistent, null Hardware, keine Einnahme-/Umsatz-/INT-/Questbuchung.
+- [x] Regulärer bezahlter erster Taschenrechnerkauf trotz 75-%-Reserve; danach normale Reserven. Freischaltung/Deaktivierung und verlorene INT-Unlocks nach Axiom-Reset bleiben wirksam.
+- [x] Auto-Prestige ausschließlich über normale Transaktion und bei wirksamem automatischem Neustart; Mindestanspruch/-laufzeit, Warteoptionen, Timer, Offline-Gleichheit und Reload geprüft.
+- [x] Zwei automatische Folgezyklen ohne Taps, Grants oder vorgekaufte Hardware ab Start des gemessenen Verlaufs nachgewiesen und vorbereitetes legales Account-Setup dokumentiert.
+- [x] Deutsche/englische Vorschauen und konkrete Agent-Sperrgründe ergänzt; Typecheck, 335 betroffene Tests und Production-Build bestanden.
+- [x] Vollständige Suite einschließlich Langzeitsimulation abgeschlossen und ehrlich dokumentiert: 658 Tests bestanden, fünf fehlgeschlagen, zwei Vite-Ladefehler und ein RPC-Timeout. Produktionscode unverändert; historische Test-Fixture danach separat verstärkt/nachgeprüft.
+- [ ] Grüne Gesamtsuite: bestehende Clock-/Vite-/RPC-Probleme und zwei durch den vorgeschriebenen 50-Credit-Start neu verletzte Analyse-Kalibrierungsgrenzen. Keine Gegenkalibrierung oder Abschwächung der Tests.

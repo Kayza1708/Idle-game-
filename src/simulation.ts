@@ -36,7 +36,7 @@ function autobuy(state:GameState,shoppingDue:boolean,otherDue:boolean) {
   let next=state;
   const targets=hardwareIds.filter(id=>hardwareAutobuyerUnlocked(next,id)&&next.hardwareAutoBuyers[id]&&(shoppingAgentUnlocked(next)&&(id==='calculator'||id==='sbc')?shoppingDue:otherDue));
   for(const id of targets){
-    const cost=hardwareCostScientific(id,next.hardwareCounts[id],next),reserve=shoppingAgentUnlocked(next)&&(id==='calculator'||id==='sbc')?exactEconomyValue(next,'credits').multiplyNumber((next.automation.reservePercent??0)):ScientificNumber.from(next.automation.reserve);
+    const firstCalculator=id==='calculator'&&hardwareIds.every(type=>next.hardwareCounts[type]===0),cost=hardwareCostScientific(id,next.hardwareCounts[id],next),reserve=shoppingAgentUnlocked(next)&&(id==='calculator'||id==='sbc')?exactEconomyValue(next,'credits').multiplyNumber(firstCalculator?0:(next.automation.reservePercent??0)):ScientificNumber.from(next.automation.reserve);
     if(exactEconomyValue(next,'credits').subtract(cost).compare(reserve)>=0)next=buyHardwareClass(next,id,1);
   }
   if(!otherDue||shoppingAgentUnlocked(next)||!next.automation.enabled||!milestoneBonus(next,'automation'))return next;
