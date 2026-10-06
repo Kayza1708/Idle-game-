@@ -605,3 +605,10 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] ResourceBar nutzt ohne künstlichen linken Spacer die gesamte Breite vor dem 44-px-Menübereich.
 - [x] Free- und Premium-Season-Vorschauen über alle 50 Level getrennt; 5er-Meilensteine und Finale hervorgehoben.
 - [ ] Neue Balance und visuelle Season-/Prestige-Hierarchie im iPhone-Simulator abnehmen.
+
+## ScientificNumber und Kaufmathematik (6. Oktober 2026)
+- [x] Unterdeckten 12,589-/15-Credit-Kauf mit den echten Domainfunktionen reproduziert und durch werttreue Normalisierung gebrochener Exponenten behoben.
+- [x] Wissenschaftliche Kaufprüfung/Abbuchung, geometrische Summen, ×10, MAX, Safe-Integer-Limits und ungültige Eingaben durch Regressionstests geprüft.
+- [x] Gültige ältere Ledger-Paare bei Save/Reload normalisiert; beschädigte Saves bleiben geschützt, Saveversion und Economy-Regeln unverändert.
+- [x] Typecheck und 222 betroffene Tests bestanden; numerische Präzision und Vorher/Nachher-Ergebnisse in `docs/scientific-purchase-audit.md` dokumentiert.
+- [x] Production-Build und echte UI-Prüfung bestanden; vollständige Suite ausgeführt und Ergebnis dokumentiert: 559 bestandene Tests, drei bestehende Clock-Fehler, zwei bestehende Vite-Ladefehler und ein Runner-RPC-Timeout. Keine grüne Gesamtabnahme behauptet.
