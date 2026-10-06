@@ -612,3 +612,13 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Gültige ältere Ledger-Paare bei Save/Reload normalisiert; beschädigte Saves bleiben geschützt, Saveversion und Economy-Regeln unverändert.
 - [x] Typecheck und 222 betroffene Tests bestanden; numerische Präzision und Vorher/Nachher-Ergebnisse in `docs/scientific-purchase-audit.md` dokumentiert.
 - [x] Production-Build und echte UI-Prüfung bestanden; vollständige Suite ausgeführt und Ergebnis dokumentiert: 559 bestandene Tests, drei bestehende Clock-Fehler, zwei bestehende Vite-Ladefehler und ein Runner-RPC-Timeout. Keine grüne Gesamtabnahme behauptet.
+
+## Atomare Zutatenreservierung und sichere Spielstände (6. Oktober 2026)
+- [x] Voraussetzung `47d706d` auf frisch abgerufenem `main` nachgewiesen; PR #64 ist gemergt. Eigener Folgebranch ohne offene PR-Abhängigkeit.
+- [x] Fünferauftrag mit nur einem Compute-Bus und 1800 Data sowie importbedingten Produktionsabsturz mit echten Domainfunktionen reproduziert und behoben.
+- [x] Gemeinsame Gesamtrezeptberechnung für Vorschau, Ressourcenprüfung, manuelle Reservierung, Queue, Planer und Validierung vorhandener Reservierungen.
+- [x] Gültige Aufträge, Teilabschluss, Offline-Fortschritt, Stornierung/Erstattung und Ergebnisvergabe ohne Doppelvergabe durch Regressionen geprüft; Saveversion 40 unverändert.
+- [x] Gemeinsame Save-/Load-/Importvalidierung gegen Kataloge, eindeutige IDs, Ausrüstungsreferenzen, Mengen und Zeitdaten; fehlgeschlagener Import erhält Spielstand und Savegenerationen.
+- [x] Typecheck, 257 betroffene Tests einschließlich 71 neuer Regressionen, Production-Build und `git diff --check` bestanden.
+- [x] Vollständige Abschluss-Suite durchgeführt und dokumentiert: 630 Tests bestanden; dieselben drei Clock-Assertions, zwei Vite-Ladefehler und ein RPC-Timeout wie im vollständigen Ausgangslauf. Keine grüne Gesamtabnahme behauptet.
+- [ ] Grüne Gesamtsuite nach separaten Reparaturen der belegten Clock-, Vite- und RPC-Probleme.

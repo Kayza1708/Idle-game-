@@ -523,5 +523,11 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - Ursachenanalyse, werttreue Normalisierung, strikte Transaktionsgrenzen und reproduzierbare Vorher/Nachher-Zahlen stehen in `docs/scientific-purchase-audit.md`.
 - Typecheck, 222 betroffene Tests, Production-Build und die echte UI-Prüfung des unterdeckten Kaufs bestehen. Die vollständige Suite ist abgeschlossen: 559 Tests bestanden, drei bestehende Clock-Fehler, zwei Vite-Ladefehler und ein Vitest-RPC-Timeout; alle 115 neuen Regressionen bestanden.
 - Bereits vorhandene Clock-Assertions erwarten Credits ohne Hardware; zwei mobile Suiten scheitern an einem Vite-SSR-Transform von `import.meta.url`. Diese unabhängigen Probleme bleiben separat zu bearbeiten.
-- Git-Fetch/Main-Abgleich ist erfolgreich. PR-Erstellung benötigt den aktuell blockierten API-Zugriff auf `api.github.com`; keine Tokens im Chat hinterlegen.
+- Die Zahlenreparatur wurde inzwischen mit PR #64 gemergt; Auftrag 2 hat den erfolgreichen Main-Fetch und die enthaltene Reparatur nachgewiesen. GitHub-API-Zugriff ist wieder verfügbar.
 - Zutatenreservierungen, Challenge-Isolation, Startercredits und Auto-Prestige werden in späteren Aufträgen behandelt.
+
+## Übergabe Zutatenreservierung / Savevalidierung (6. Oktober 2026)
+- Eigener Branch `codex/atomic-crafting-save-validation` auf `main` (`530b2e3`); Zahlenreparatur aus PR #64 ist bereits gemergt.
+- Ursache, konkrete Vorher/Nachher-Werte, gemeinsamer Rezept-/Validierungspfad und Speichervertrag stehen in `docs/crafting-save-audit.md`.
+- Typecheck, 257 betroffene Tests, Production-Build und `git diff --check` bestehen. Die vollständige Abschluss-Suite ist beendet: 630 Tests bestanden, dieselben drei Clock-Assertions, zwei Vite-Ladefehler und derselbe `onTaskUpdate`-RPC-Timeout wie im vorher ausgeführten Ausgangslauf auf `530b2e3`. Alle 71 neuen Regressionen bestehen. Eine grüne Gesamtabnahme bleibt für diese getrennten Fehler offen.
+- Keine Economy-, Rezept-, Drop-, Produktions- oder Resetänderungen. Startercredits, Auto-Prestige und Challenge-Isolation bleiben eigene Folgeaufträge.

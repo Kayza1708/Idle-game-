@@ -276,7 +276,7 @@ const exactSet=(s:GameState,key:keyof ExactEconomy,value:ScientificNumber):GameS
  if(key==='lifetimeDataGenerated')return {...s,exactEconomy:{...s.exactEconomy,[key]:value.toJSON()}};return {...s,[key]:normalized,exactEconomy:{...s.exactEconomy,[key]:value.toJSON()}};
 };
 export function exactEconomyValue(s:GameState,key:keyof ExactEconomy){const fallback=key==='lifetimeDataGenerated'?s.lifetime.regularData:(s[key as keyof GameState] as number);return exactFrom(s,key,fallback)}
-const validEconomyValues=(s:GameState,keys:readonly (keyof ExactEconomy)[])=>{try{return keys.every(key=>ScientificNumber.isValid(exactEconomyValue(s,key)));}catch{return false;}};
+export const validEconomyValues=(s:GameState,keys:readonly (keyof ExactEconomy)[]=exactEconomyKeys)=>{try{return keys.every(key=>ScientificNumber.isValid(exactEconomyValue(s,key)));}catch{return false;}};
 /** Normalize valid historical ledger pairs without changing the save schema. */
 export function normalizeExactEconomy(s:GameState){let next=s;for(const key of exactEconomyKeys)next=exactSet(next,key,exactEconomyValue(s,key));return next;}
 
@@ -296,6 +296,8 @@ export function spendScientificCredits<T extends GameState>(s:T,cost:ScientificN
 export function canAffordScientificResources(s:GameState,credits=ScientificNumber.zero(),data=ScientificNumber.zero()){return ScientificNumber.isValid(credits)&&ScientificNumber.isValid(data)&&validEconomyValues(s,['credits','data'])&&exactEconomyValue(s,'credits').compare(credits)>=0&&exactEconomyValue(s,'data').compare(data)>=0;}
 export function spendScientificResources<T extends GameState>(s:T,credits=ScientificNumber.zero(),data=ScientificNumber.zero()):T{if(!canAffordScientificResources(s,credits,data))return s;let next=exactSet(s,'credits',exactEconomyValue(s,'credits').subtract(credits));next=exactSet(next,'data',exactEconomyValue(next,'data').subtract(data));return next as T;}
 export function addDataScientific(s:GameState,gain:ScientificNumber){if(!ScientificNumber.isValid(gain)||!validEconomyValues(s,['data','lifetimeDataGenerated']))return s;let next=exactSet(s,'data',exactEconomyValue(s,'data').add(gain));next=exactSet(next,'lifetimeDataGenerated',exactEconomyValue(s,'lifetimeDataGenerated').add(gain));return {...next,lifetime:{...s.lifetime,regularData:safeEconomyAdd(s.lifetime.regularData,gain.toNumber(MAX_ECONOMY_VALUE))}};}
+/** Restore reserved Data without counting a cancellation as newly produced Data. */
+export function refundDataScientific(s:GameState,value:ScientificNumber){return ScientificNumber.isValid(value)&&validEconomyValues(s,['data'])?exactSet(s,'data',exactEconomyValue(s,'data').add(value)):s;}
 export function addData(s:GameState,value:number){return validResourceNumber(value)?addDataScientific(s,ScientificNumber.from(value)):s;}
 export function addResearchScientific(s:GameState,gain:ScientificNumber){return ScientificNumber.isValid(gain)&&validEconomyValues(s,['researchPoints'])?exactSet(s,'researchPoints',exactEconomyValue(s,'researchPoints').add(gain)):s;}
 
