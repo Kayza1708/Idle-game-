@@ -1,3 +1,4 @@
+import {advanceTo,emptyReport} from './simulation';
 import {exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import type {Language} from './i18n';
@@ -247,15 +248,34 @@ export function challengeText(
   };
 }
 
-export const challengeClaimable=(s:GameState,c:Challenge)=>c.check(s)&&!s.retention.claimedChallenges.includes(c.id);
-export function claimChallenge(s:GameState,id:string){const c=challenges.find(x=>x.id===id);if(!c||!challengeClaimable(s,c))return s;return{...s,retention:{...s.retention,challengeStars:s.retention.challengeStars+c.stars,claimedChallenges:[...s.retention.claimedChallenges,id]}};}
-const resetRun=(s:GameState)=>{const b=newGame(s.savedAt);return{...s,credits:0,data:0,researchPoints:0,hardware:1,hardwareCounts:b.hardwareCounts,classUpgrades:[],discovered:['calculator'] as HardwareId[],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,completedResearch:[],researchLevels:b.researchLevels,researchLabs:[null,null,null,null] as GameState['researchLabs'],researchQueue:[],experiments:{...s.experiments,active:null,queue:[]},runCreditsEarned:0,runMilestoneClasses:[],exactEconomy:{...s.exactEconomy,credits:{m:0,e:0},data:{m:0,e:0},runCreditsEarned:{m:0,e:0}}};};
-export function startRunChallenge(s:GameState,id:string){if(s.retention.activeRun||!runChallenges.some(c=>c.id===id))return s;const reset=resetRun(s),runId=`${s.telemetry.campaignId}:${id}:${s.nextId}`;return{...reset,nextId:s.nextId+1,retention:{...reset.retention,activeRun:{id,runId,startedAt:s.savedAt,eligibleAtStart:exactEconomyValue(s,'lifetimeEligibleCredits').toJSON()}}};}
+export const challengeClaimable=(s:GameState,c:Challenge)=>!s.retention.activeRun&&c.check(s)&&!s.retention.claimedChallenges.includes(c.id);
+export function claimChallenge(s:GameState,id:string){const c=challenges.find(x=>x.id===id);if(s.retention.activeRun||!c||!challengeClaimable(s,c))return s;return{...s,retention:{...s.retention,challengeStars:s.retention.challengeStars+c.stars,claimedChallenges:[...s.retention.claimedChallenges,id]}};}
+/** No inherited economy bonuses or account stock are permitted. Only cosmetic
+ * preferences, the campaign identity and the existing clock cross this boundary. */
+export function startRunChallenge(s:GameState,id:string):GameState{
+ if(s.retention.activeRun||s.challengeSession||!runChallenges.some(c=>c.id===id))return s;
+ const fresh=newGame(s.savedAt,s.telemetry.campaignId),runId=`${s.telemetry.campaignId}:${id}:${crypto.randomUUID()}`;
+ return {...fresh,aiName:s.aiName,profile:{...fresh.profile,playerName:s.profile.playerName},settings:{...s.settings},clockOffsetMs:s.clockOffsetMs,gems:0,
+  story:{...fresh.story,tutorial:'skipped',target:null,open:null,queue:[],enabled:false},
+  retention:{...fresh.retention,activeRun:{id,runId,startedAt:s.savedAt,eligibleAtStart:fresh.exactEconomy.lifetimeEligibleCredits}},
+  challengeSession:{main:s,anchor:s.savedAt,report:emptyReport()}};
+}
 export const runChallengeEligibleRevenue=(s:GameState)=>s.retention.activeRun?exactEconomyValue(s,'lifetimeEligibleCredits').subtract(ScientificNumber.fromJSON(s.retention.activeRun.eligibleAtStart)):ScientificNumber.zero();
 export const runChallengeProgress=(s:GameState)=>prestigeClaimForEligible(runChallengeEligibleRevenue(s));
 export const runChallengeReady=(s:GameState)=>!!s.retention.activeRun&&runChallengeProgress(s)>=1;
-export function completeRunChallenge(s:GameState){const active=s.retention.activeRun,c=active&&runChallenges.find(x=>x.id===active.id);if(!active||!c||!active.runId||!runChallengeReady(s))return s;const seconds=Math.max(0,(s.savedAt-active.startedAt)/1000),previous=s.retention.runCompletions[c.id]??0,count=previous+1,best=Math.min(s.retention.runBestSeconds[c.id]??Infinity,seconds),reset=resetRun(s);return{...reset,retention:{...reset.retention,activeRun:null,challengeStars:reset.retention.challengeStars+(previous===0?c.stars:0),runCompletions:{...reset.retention.runCompletions,[c.id]:count},runBestSeconds:{...reset.retention.runBestSeconds,[c.id]:best}}};}
-export function abortRunChallenge(s:GameState){if(!s.retention.activeRun)return s;const reset=resetRun(s);return{...reset,retention:{...reset.retention,activeRun:null}};}
+function returnToMain(s:GameState,success:boolean):GameState{
+ if(!s.retention.activeRun||!s.challengeSession)return s;
+ const settled=advanceTo(s,s.savedAt-s.clockOffsetMs).state,session=settled.challengeSession!,run=settled.retention.activeRun!,main=session.main;
+ const challenge=runChallenges.find(c=>c.id===run.id);
+ if(success&&(!challenge||!runChallengeReady(settled)))return s;
+ const previous=main.retention.runCompletions[run.id]??0;
+ const retention=success?{...main.retention,challengeStars:main.retention.challengeStars+(previous===0?challenge!.stars:0),
+  runCompletions:{...main.retention.runCompletions,[run.id]:previous+1},
+  runBestSeconds:{...main.retention.runBestSeconds,[run.id]:Math.min(main.retention.runBestSeconds[run.id]??Infinity,(settled.savedAt-run.startedAt)/1000)}}:main.retention;
+ return {...main,clockOffsetMs:s.clockOffsetMs,retention,challengeReturn:{runId:run.runId,success,report:session.report}};
+}
+export function completeRunChallenge(s:GameState):GameState{return runChallengeReady(s)?returnToMain(s,true):s;}
+export function abortRunChallenge(s:GameState):GameState{return returnToMain(s,false);}
 export const totalMastery=(s:GameState)=>hardwareIds.reduce((n,id)=>n+hardwareMasteryLevel(s,id),0);
 export const collectionSummary=(s:GameState)=>({hardware:s.lifetime.hardwareClasses.length,hardwareTotal:hardwareIds.length,components:Object.values(s.componentInventory).filter(v=>v>0).length,componentsTotal:Object.keys(s.componentInventory).length,itemTypes:s.lifetime.itemTypes.length,itemTypesTotal:Object.keys(itemTypes).length,artifacts:s.profile.artifacts.length,seasons:s.profile.completedSeasons.length});
 export const prestigeGate=(s:GameState,depth:number)=>depth<=4?null:depth===5?{ok:s.achievementPoints>=100,label:'100 Achievement Points'}:depth===6?{ok:totalMastery(s)>=10,label:'10 Hardware Mastery'}:depth===7?{ok:s.retention.challengeStars>=10,label:'10 Challenge Stars'}:{ok:s.achievementPoints>=500&&totalMastery(s)>=50&&s.retention.challengeStars>=25,label:'500 AP · 50 Mastery · 25 Stars'};

@@ -20,7 +20,7 @@ export function gemOfferQuote(s:GameState,id:GemOfferId):GemQuote{let cost=0,ena
  else if(id==='materials-circuits')cost=BALANCE.gemShop.materials.circuits.cost;
  else if(id==='materials-advanced'){cost=BALANCE.gemShop.materials.advanced.cost;if(!s.discovered.includes('pc')){enabled=false;reason='locked-materials'}}
  else if(id==='lab-boost'){cost=BALANCE.gemShop.labBoost[0];const remaining=Math.max(0,s.labBoostUntil-s.savedAt);if(remaining>=BALANCE.gemShop.boostCap*1000){enabled=false;reason='cap'}}
- if(enabled&&s.gems<cost){enabled=false;reason='gems'}return{cost,enabled,reason,remainingSeconds,appliedSeconds,owned};}
+ if(enabled&&s.gems<cost){enabled=false;reason='gems'}return{cost,enabled:s.retention.activeRun?false:enabled,reason:s.retention.activeRun?'challenge':reason,remainingSeconds,appliedSeconds,owned};}
 function spend(s:GameState,id:GemOfferId,cost:number,now:number,apply:(s:GameState)=>GameState){const purchase=`${id}:${now}`;if(cost<=0||s.gems<cost||s.processedGemPurchases.includes(purchase))return s;const granted=apply(s);if(granted===s)return s;return addEvent({...granted,gems:s.gems-cost,processedGemPurchases:[...s.processedGemPurchases,purchase],gemLedger:[...s.gemLedger,{id:purchase,at:now,amount:-cost,source:id}]},'gem-purchase',now,{offer:id,cost});}
 export function buyGemOffer(s:GameState,id:GemOfferId,now=s.savedAt){if(id==='training-boost')return s;if(id==='components')id='materials-circuits';const q=gemOfferQuote(s,id);if(!q.enabled)return s;
  if(id==='lab-slot-1'||id==='lab-slot-2')return spend(s,id,q.cost,now,x=>({...x,purchasedResearchLabs:x.purchasedResearchLabs+1}));

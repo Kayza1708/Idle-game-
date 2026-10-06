@@ -22,7 +22,7 @@ export function updateOnboarding(s:GameState):GameState{
   const completed=[...s.onboarding.completed];for(const step of onboardingSteps)if(met[step.id]&&!completed.includes(step.id))completed.push(step.id);
   return completed.length===s.onboarding.completed.length?s:{...s,onboarding:{...s.onboarding,completed}};
 }
-export function claimOnboarding(s:GameState,id:string):GameState{
+export function claimOnboarding(s:GameState,id:string):GameState{if(s.retention.activeRun)return s;
   const index=onboardingSteps.findIndex(step=>step.id===id);if(index<0||!s.onboarding.completed.includes(id)||s.onboarding.claimed.includes(id))return s;
   let next={...s,onboarding:{...s.onboarding,claimed:[...s.onboarding.claimed,id]}};
   if(id==='first-research')next=createItem(next,'quantum-chip','common');else if(id==='equip-item')next=addEvent(grantComponents(next,{circuits:75}),'component-found',s.savedAt,{source:'onboarding',component:'circuits',amount:75});else if(BALANCE.introRewards[index])next=addMetrics(addCredits(next,BALANCE.introRewards[index],false),s.savedAt,{other:BALANCE.introRewards[index]});

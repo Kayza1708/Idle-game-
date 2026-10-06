@@ -406,7 +406,7 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Startdauer, exakter Abzug, parallele Slots, Wiederholung sowie Online-/Offline-/Reload-Abschluss sind getestet.
 - [x] Reproduzierbare 1-/7-Tage-Läufe für beide Prioritäten und aktive/passive Sitzungsprofile sind dokumentiert.
 - [ ] Erste Forschung nach 5–10 aktiven Minuten: gemessen sind 20 Sekunden.
-- [ ] Erste Hardwareanalyse nach 15–30 aktiven Minuten: gemessen sind 20 Sekunden.
+- [ ] Erste Hardwareanalyse nach 14–30 aktiven Minuten (früheres Ziel 15–30): in diesem historischen Lauf gemessen sind 20 Sekunden; aktueller Vertragswechsel siehe unten.
 - [ ] Frühe Data-Priorisierung: durch acht Stunden Produktion vor der ersten Sitzung aktuell nicht erzwungen.
 
 ## Schicht-3-Messkorrektur (1. Oktober 2026)
@@ -622,3 +622,40 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Typecheck, 257 betroffene Tests einschließlich 71 neuer Regressionen, Production-Build und `git diff --check` bestanden.
 - [x] Vollständige Abschluss-Suite durchgeführt und dokumentiert: 630 Tests bestanden; dieselben drei Clock-Assertions, zwei Vite-Ladefehler und ein RPC-Timeout wie im vollständigen Ausgangslauf. Keine grüne Gesamtabnahme behauptet.
 - [ ] Grüne Gesamtsuite nach separaten Reparaturen der belegten Clock-, Vite- und RPC-Probleme.
+
+## Einheitlicher Run-Start und Auto-Prestige (6. Oktober 2026)
+- [x] Auftrag 1 (`47d706d`) und Auftrag 2 (`d9c8bb3`) auf tatsächlich aktualisiertem Main `484b5cb` bestätigt; eigener Branch ohne offene PR-Abhängigkeit.
+- [x] Automatischen Stillstand mit echten Domainfunktionen reproduziert: nach Reset und 60 Sekunden weiterhin null Credits/null Hardware.
+- [x] Zentraler Startvertrag für neue Spielstände, normales Prestige und Axiom-Reset: exakt 50 Credits, wissenschaftliches Ledger konsistent, null Hardware, keine Einnahme-/Umsatz-/INT-/Questbuchung.
+- [x] Regulärer bezahlter erster Taschenrechnerkauf trotz 75-%-Reserve; danach normale Reserven. Freischaltung/Deaktivierung und verlorene INT-Unlocks nach Axiom-Reset bleiben wirksam.
+- [x] Auto-Prestige ausschließlich über normale Transaktion und bei wirksamem automatischem Neustart; Mindestanspruch/-laufzeit, Warteoptionen, Timer, Offline-Gleichheit und Reload geprüft.
+- [x] Zwei automatische Folgezyklen ohne Taps, Grants oder vorgekaufte Hardware ab Start des gemessenen Verlaufs nachgewiesen und vorbereitetes legales Account-Setup dokumentiert.
+- [x] Deutsche/englische Vorschauen und konkrete Agent-Sperrgründe ergänzt; Typecheck, 335 betroffene Tests und Production-Build bestanden.
+- [x] Vollständige Suite einschließlich Langzeitsimulation abgeschlossen und ehrlich dokumentiert: 658 Tests bestanden, fünf fehlgeschlagen, zwei Vite-Ladefehler und ein RPC-Timeout. Produktionscode unverändert; historische Test-Fixture danach separat verstärkt/nachgeprüft.
+- [ ] Grüne Gesamtsuite: bestehende Clock-/Vite-/RPC-Probleme und zwei durch den vorgeschriebenen 50-Credit-Start neu verletzte Analyse-Kalibrierungsgrenzen. Keine Gegenkalibrierung oder Abschwächung der Tests.
+
+## Technische Nachbesserung Run-Start / PR #66
+- [x] Drei Clock-Fixtures mit echten bezahlten Hardwarekäufen repariert; tatsächliche Zeitdeltas, Offline-Limit, Reload und fehlende Produktion ohne Hardware geprüft (15 Tests).
+- [x] Vite-URL-/SSR-Transformursache in beiden mobilen Suiten entfernt; alle 24 ursprünglichen UI-Tests ausgeführt und bestanden.
+- [x] Synchrone Langzeitsimulation vom Runner-Kontrollloop getrennt, Horizonte/Profile unverändert und sequenziell; Heartbeat und vollständige Domain-Parität getestet.
+- [x] Minimaler Neustart mit einzigem Shopping-Knoten, echtem ersten Kauf und positiver Produktion; Kommerzialisierung-250-Verlauf als technischer Ablaufnachweis gekennzeichnet.
+- [x] Zwei damalige Analyse-Timingfehler reproduziert: 870 s statt mindestens 880 s; 50-Credit-Start als Ursache. Die damalige offene Entscheidung wird durch den unten dokumentierten neuen Zielvertrag ersetzt.
+- Finale technische Abschlusszahlen stehen in Draft-PR #66 und der Übergabe; kein Merge, kein zusätzlicher PR. Die frühere Abnahme auf `22bc6fb` hatte 699 bestandene und zwei fehlgeschlagene Timingtests.
+
+## Akzeptierter Analyse-Zielvertrag / PR #66
+- [x] Nutzerentscheidung: übergeordnetes Early-Game-Ziel von 15–30 auf 14–30 aktive Minuten angepasst; Testfenster bisher 880–1800 s (zuvor gemessen 890), jetzt 840–1800 s (gemessen 870).
+- [x] Ausschließlich die beiden Strategie-Analyseuntergrenzen geändert; echte Simulation, Ressourcenprüfungen und Start bei `t=0` ohne vorgeschaltete Offline-Produktion erhalten.
+- [ ] Nun erreichte Ressourcen-Kalibrierungsassertions separat entscheiden: Forschungsgrenze 361 statt erwartet 313; zusätzlich gemessene Analysegrenze 57700 statt erwartet 59132. Diese Erwartungen bleiben in diesem Auftrag unverändert.
+- Abschlussprüfungen auf dem finalen Commit und tatsächliche Ergebnisse im bestehenden Draft-PR #66 dokumentieren. Technische Testvalidität und optionale Langzeit-Balancebewertung bleiben getrennt; keine bestätigte Langzeitbalance aus einer grünen Suite ableiten.
+
+## Auftrag 4 – Challenge-Isolation / Folge-PR zu #66
+
+- [x] Eigener Branch ab `06d39de`; #66 noch offen, deshalb abhängiger PR gegen `codex/run-start-auto-prestige`; Vorgängerbranch unverändert.
+- [x] Vollständiges Hauptspiel separat erhalten; Challenge startet mit 50 Credits/0 Hardware ohne Einnahmen-/INT-/Quest-Gutschrift.
+- [x] Gemeinsame bestehende Simulation, passiver Hauptfortschritt und persistenter einmal konsumierter Zeitanker; reguläre Jobs/Reservierungen bleiben erhalten.
+- [x] Erfolgssterne einmal, Abbruch ohne Belohnung, keine Challenge-Ressourcenübernahme; Reset-/Shop-/Claim-Sperren und DE/EN-Rückkehranzeige mit Abbruchbestätigung.
+- [x] Save v41 mit gemeinsamer Validierung und transparenter Legacy-Wiederherstellung des noch bekannten Standes; beschädigte Imports und Originale geschützt.
+- [x] Kurze gezielte Domain-/Save-/Lifecycle-/UI-Regressionen sowie mobiler Browsernachweis; keine Gesamtabnahme behauptet.
+- [ ] Schicht-3-Referenzabweichungen und Langzeitbalance bleiben separat offen. Historisch verlorene Hauptstände alter Challenge-Saves können nicht rekonstruiert werden.
+
+Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](challenge-isolation-audit.md).

@@ -1,12 +1,14 @@
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
 import app from './App.tsx?raw';
 import panels from './Panels.tsx?raw';
 import meta from './MetaHub.tsx?raw';
 import shop from './GemShopPanel.tsx?raw';
 import art from './GameArt.tsx?raw';
 import commerce from './nativeCommerce.ts?raw';
-const css=readFileSync(new URL('./style.css',import.meta.url),'utf8');
+// Avoid overlapping Vite asset-URL and SSR import.meta rewrites; read real CSS.
+const css=readFileSync(resolve('src/style.css'),'utf8');
 
 describe('shared mobile shell and diagnostics',()=>{
  it('keeps resources and navigation outside the common screen scroller',()=>{

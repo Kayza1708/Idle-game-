@@ -15,6 +15,16 @@ Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und 
 | Axiome | `floor(sqrt(cycleINTEarned / threshold))` | bleiben erhalten; permanenter Creditfaktor `1 + 0,5 × totalAxiomsEarned` |
 | Gems | Missionen/Achievements und Komfortangebote | bleibt erhalten |
 
+## Einheitlicher Run-Start
+
+`BALANCE.runStartCredits = 50` ist das Startkapital eines neuen Spielstands, eines normalen Prestiges und eines Axiom-Resets. `runStartContract`/`initializeRun` setzen native Credits und das kanonische ScientificNumber-Ledger gemeinsam auf 50 sowie sämtliche Hardwarebestände auf null. Die Vorschauen verwenden denselben Vertrag. Diese Zuweisung ist keine Einnahme: Produktions-, Umsatz-, INT-, Quest- und Telemetrie-Einnahmezähler erhalten keinen Zuschlag. Laden und Offline-Fortschritt initialisieren gültige bestehende Spielstände nicht erneut.
+
+Ein wirksam freigeschalteter und aktivierter Taschenrechner-Autobuyer bezahlt den ersten Taschenrechner im vorhandenen Einkaufsintervall über `buyHardwareClass`. Nur bei vollständig leerem Hardwarebestand entfällt für diesen Kauf die prozentuale Creditreserve; danach gelten wieder die üblichen Reserven. Es gibt keine kostenlose Hardware. Ein Reset beginnt auch die Einkaufstimer neu.
+
+Der Prestige-Agent benötigt neben seiner Axiom-Freischaltung und Aktivierung einen wirksamen, aktivierten Einkaufsagenten für den ersten Taschenrechner. Er prüft den aktuellen wissenschaftlichen INT-Anspruch, den normalen Mindestanspruch von einem INT, Mindestlaufzeit und die vorhandenen getrennten Warteoptionen. Er ruft ausschließlich `prestige` auf. Hardware wird erst bei einem späteren regulären Einkaufstermin gekauft. Axiom-Resets entfernen INT-Freischaltungen; gespeicherte Autobuyer-Schalter allein aktivieren sie nicht wieder. Die bestehende effektive Freischaltungsabfrage berücksichtigt erhaltene permanente Freischaltungen.
+
+Hardwarepreise, Produktionskurven, Prestigeformeln, Rezepte, Drops und alle übrigen Resetregeln sind unverändert. Das bewusst eingeführte 50-Credit-Startkapital verschiebt die erste Hardwareanalyse von zuvor gemessenen 890 auf 870 aktive Sekunden. Die ausdrücklich akzeptierte Designentscheidung passt deshalb das übergeordnete Ziel von 15–30 auf **14–30 aktive Minuten** an: bisheriger Testvertrag **880–1800 Sekunden**, jetzt **840–1800 Sekunden**. Beide echten Simulationsstrategien starten weiterhin bei `t=0` ohne vorgeschaltete Offline-Produktion; geändert wird ausschließlich die Analyse-Timinguntergrenze, keine Economy-Parameter oder weiteren Ressourcenprüfungen. Eine grüne technische Suite bestätigt keine Langzeitbalance; deren optionale Bewertung bleibt separat sichtbar.
+
 ## Axiom-Resetvertrag
 
 Nur durch bestätigte normale Prestiges erhaltene INT erhöhen `cycleINTEarned`. Verfügbares, ausgegebenes, hypothetisch beanspruchbares oder per Debug gesetztes INT zählt nicht. Historisch verdiente INT (`totalINTEarned`) bleiben getrennt erhalten; der normale INT-Creditbonus und die INT-Synergie verwenden ausschließlich `cycleINTEarned`. Der Axiom-Faktor wird separat mit dem normalen INT-Faktor multipliziert und beeinflusst weder Data noch Drops oder Forschungszeiten.
@@ -447,3 +457,11 @@ Bestehende Besitzstände in `purchasedResearchLabs` bleiben erhalten und werden 
 | 1000 | ×2.500 | ×4.800 | +92.0 % |
 
 Die 50 Season-Level verwenden weiterhin nur vorhandene Reward-Typen (Gems, Komponenten und das bestehende Boot-Sequence-Artefakt). Free-Claims bleiben anhand der bisherigen Levelnummern gespeichert. Premium ist weiterhin nur Vorschau und nicht claimbar, solange keine verifizierte native Entitlement-Integration existiert. Die zentralen Mengen und Komponentenfolgen liegen in `BALANCE.seasonRewards`.
+
+## Isolierte Challenge-Runs (Auftrag 4, Save v41)
+
+Challenges starten unabhängig mit dem zentralen Startvertrag 50 Credits/0 Hardware. Startkapital ist keine Produktion, kein berechtigter Umsatz, kein INT- oder Questfortschritt. Hauptspielressourcen, Forschung, Jobs, Items und Ausrüstung bleiben separat erhalten. Es werden ausschließlich kosmetische Einstellungen/Namen, Kampagnenidentität und Uhr übernommen; der vorhandene Challenge-Katalog definiert keine geerbten Economy-Boni. Die bisherigen fünf Einschränkungen, Zielanspruch 1 INT, ersten Sterne, Clears und Bestzeiten bleiben unverändert. Keine Preis-, Produktions-, Forschungs-, Analyse-, Prestige- oder Drop-Parameter geändert.
+
+Das Hauptspiel läuft mit der vorhandenen Simulation passiv (`active=false`) und seiner bestehenden Offline-Kapazität weiter. Aktualisierter Hauptzustand und Zeitanker werden gemeinsam gespeichert; Rückkehr/Reload buchen Zeit nicht doppelt. Erfolg übernimmt nur die bestehenden Sterne/Abschlussmetadaten, Abbruch keine Belohnung. Challenge-Bestände werden nicht übertragen. Hauptspiel-Resets, Gem-Shop und Hauptspiel-Claims sind während des Runs gesperrt.
+
+Save v41 validiert beide Zustände inklusive Reservierungen und Uhr gemeinsam. Alte Challenge-Saves ohne historischen Hauptzustand werden ohne Erfolgsbelohnung beendet und behalten ihren noch bekannten gültigen Stand, mit ausdrücklicher DE/EN-Warnung; verlorener Fortschritt wird nicht erfunden. Details, kurze Tests und Grenzen: [Challenge-Isolationsaudit](challenge-isolation-audit.md). Die bekannten Schicht-3-Ressourcenreferenzen und die offene Langzeitbalance bleiben unverändert und sind durch diese gezielte technische Abnahme nicht bestätigt.

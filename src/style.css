@@ -629,3 +629,7 @@ html[data-native-platform] body{padding:0}
 
 /* Season reward hierarchy: milestone and premium value remain legible while locked. */
 .reward-tier.milestone{padding:6px;border-radius:12px;background:linear-gradient(90deg,#2b241455,#21152d66)}.reward-tier.milestone .reward-level{color:#f0ca79}.reward-level small{display:block;margin-top:2px;color:#b98be0;font-size:.42rem;letter-spacing:.08em}.reward-card.premium{border-color:#9a6bc0;background:linear-gradient(145deg,#291b35,#171020);box-shadow:inset 0 0 18px #a66bd022}.reward-tier.milestone .reward-card.premium{border-color:#d0a35b;box-shadow:inset 0 0 22px #b57ae033,0 0 12px #d3a45722}.reward-card.premium.locked{opacity:.92}
+
+.challenge-run-panel{margin:12px;padding:14px;border:1px solid #71b8cd;border-radius:12px;background:#122330;color:#edf9ff}.challenge-run-panel h2{font-size:1.1rem;margin:0}.challenge-run-panel p{margin:8px 0}.challenge-run-panel div{display:flex;flex-wrap:wrap;gap:8px}.challenge-run-panel button{min-height:44px;padding:8px 12px}
+
+.game-shell>.challenge-content{overflow-y:auto;overscroll-behavior:contain}.challenge-content .workshop-screen{height:auto;overflow:visible;grid-template-rows:auto auto}.challenge-content .workshop-scroll{overflow:visible}

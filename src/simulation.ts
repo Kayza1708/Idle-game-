@@ -11,8 +11,8 @@ import { addEvent, addMetrics,addSnapshot } from './telemetry';
 import {ScientificNumber,type ScientificJSON} from './scientificNumber';
 import {resolvePinnedGoal} from './nextGoal';
 
-export type AdvanceReport = { credits:number; data:number; research:number; exactCredits:ScientificJSON;exactData:ScientificJSON;levels:number;researchCompleted:number;experiments:number;craftingCompleted:number;hardware:number;seconds:number;elapsedSeconds:number;lostSeconds:number;components:Partial<GameState['componentInventory']>;newQuestRewards:number;newSeasonRewards:number; analysisResults:NonNullable<GameState['experiments']['lastResult']>[] };
-const emptyReport=():AdvanceReport=>({credits:0,data:0,research:0,exactCredits:{m:0,e:0},exactData:{m:0,e:0},levels:0,researchCompleted:0,experiments:0,craftingCompleted:0,hardware:0,seconds:0,elapsedSeconds:0,lostSeconds:0,components:{},newQuestRewards:0,newSeasonRewards:0,analysisResults:[]});
+export type AdvanceReport = { context?:'challenge';credits:number; data:number; research:number; exactCredits:ScientificJSON;exactData:ScientificJSON;levels:number;researchCompleted:number;experiments:number;craftingCompleted:number;hardware:number;seconds:number;elapsedSeconds:number;lostSeconds:number;components:Partial<GameState['componentInventory']>;newQuestRewards:number;newSeasonRewards:number; analysisResults:NonNullable<GameState['experiments']['lastResult']>[] };
+export const emptyReport=():AdvanceReport=>({credits:0,data:0,research:0,exactCredits:{m:0,e:0},exactData:{m:0,e:0},levels:0,researchCompleted:0,experiments:0,craftingCompleted:0,hardware:0,seconds:0,elapsedSeconds:0,lostSeconds:0,components:{},newQuestRewards:0,newSeasonRewards:0,analysisResults:[]});
 export type ResearchCompletionStep = 'project-complete'|'reward-applied'|'unlock-applied'|'queue-checked'|'missions-achievements-ready'|'state-ready-for-save-render';
 
 /** Convert wall time to the save's explicit simulation timeline. */
@@ -36,7 +36,7 @@ function autobuy(state:GameState,shoppingDue:boolean,otherDue:boolean) {
   let next=state;
   const targets=hardwareIds.filter(id=>hardwareAutobuyerUnlocked(next,id)&&next.hardwareAutoBuyers[id]&&(shoppingAgentUnlocked(next)&&(id==='calculator'||id==='sbc')?shoppingDue:otherDue));
   for(const id of targets){
-    const cost=hardwareCostScientific(id,next.hardwareCounts[id],next),reserve=shoppingAgentUnlocked(next)&&(id==='calculator'||id==='sbc')?exactEconomyValue(next,'credits').multiplyNumber((next.automation.reservePercent??0)):ScientificNumber.from(next.automation.reserve);
+    const firstCalculator=id==='calculator'&&hardwareIds.every(type=>next.hardwareCounts[type]===0),cost=hardwareCostScientific(id,next.hardwareCounts[id],next),reserve=shoppingAgentUnlocked(next)&&(id==='calculator'||id==='sbc')?exactEconomyValue(next,'credits').multiplyNumber(firstCalculator?0:(next.automation.reservePercent??0)):ScientificNumber.from(next.automation.reserve);
     if(exactEconomyValue(next,'credits').subtract(cost).compare(reserve)>=0)next=buyHardwareClass(next,id,1);
   }
   if(!otherDue||shoppingAgentUnlocked(next)||!next.automation.enabled||!milestoneBonus(next,'automation'))return next;
@@ -87,7 +87,7 @@ function autoStartModelTraining(state:GameState):GameState {
   return startTraining(state,track);
 }
 
-export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
+function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
   if(!Number.isFinite(seconds)||seconds<=0)return{state,report:emptyReport()};
   const limit=Math.min(BALANCE.maxOfflineSeconds,Math.max(state.offlineCapacitySeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline')))),total=Math.max(0,Math.min(seconds,limit));
   const pinnedReachedBefore=state.pinnedGoal?resolvePinnedGoal(state,state.pinnedGoal)?.reached??false:false,questReadyBefore=(['daily','weekly','monthly'] as MissionKind[]).filter(k=>missionRewardClaimable(state,k)).length,seasonReadyBefore=seasonClaimable(state);let left=total,iterations=0,levels=0,experiments=0,craftingCompleted=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,generatedCreditsExact=ScientificNumber.zero(),generatedDataExact=ScientificNumber.zero(),components:Partial<GameState['componentInventory']>={},analysisResults:NonNullable<GameState['experiments']['lastResult']>[]=[],next=rollPeriods(cloneForSimulation(state),state.savedAt);
@@ -130,13 +130,32 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
   if(seconds>=60)next=addEvent(next,'offline-return',next.savedAt,{elapsedSeconds:seconds,creditedSeconds:total,lostSeconds:Math.max(0,seconds-total)});return {state:next,report:{credits:generatedCredits,data:generatedData,research:generatedResearch,exactCredits:generatedCreditsExact.toJSON(),exactData:generatedDataExact.toJSON(),levels,researchCompleted:next.lifetime.researchCompleted-state.lifetime.researchCompleted,experiments,craftingCompleted,hardware,seconds:total,elapsedSeconds:seconds,lostSeconds:Math.max(0,seconds-total),components,newQuestRewards:Math.max(0,(['daily','weekly','monthly'] as MissionKind[]).filter(k=>missionRewardClaimable(next,k)).length-questReadyBefore),newSeasonRewards:Number(seasonClaimable(next)&&!seasonReadyBefore),analysisResults}};
 }
 
+/** Both runs use the existing simulator. The main ledger consumes the same timeline
+ * once, including discarded offline time, and never receives active input. */
+function settleChallengeMain(result:{state:GameState;report:AdvanceReport},before:GameState,at:number,rng:()=>number){
+ const session=before.challengeSession;
+ if(!session)return result;
+ const passive=advanceTo(session.main,at-session.main.clockOffsetMs,false,rng),previous=session.report;
+ const report:AdvanceReport={...previous,components:{...previous.components},analysisResults:[...previous.analysisResults,...passive.report.analysisResults]};
+ for(const key of ['credits','data','research','levels','researchCompleted','experiments','craftingCompleted','hardware','seconds','elapsedSeconds','lostSeconds','newQuestRewards','newSeasonRewards'] as const)report[key]=safeEconomyAdd(previous[key],passive.report[key]);
+ report.exactCredits=ScientificNumber.fromJSON(previous.exactCredits).add(ScientificNumber.fromJSON(passive.report.exactCredits)).toJSON();
+ report.exactData=ScientificNumber.fromJSON(previous.exactData).add(ScientificNumber.fromJSON(passive.report.exactData)).toJSON();
+ for(const [id,amount] of Object.entries(passive.report.components)){const key=id as keyof GameState['componentInventory'];report.components[key]=(report.components[key]??0)+(amount??0);}
+ result.state={...result.state,challengeSession:{main:passive.state,anchor:passive.state.savedAt,report}};
+ return result;
+}
+export function advance(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport}{
+ const result=advanceSingle(state,seconds,active,rng);
+ return settleChallengeMain(result,state,result.state.savedAt,rng);
+}
+
 export function advanceTo(state:GameState,wallNow:number,active=false,rng=Math.random) {
   const now=simulationNow(state,wallNow);
-  const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advance(state,elapsed,active,rng);
+  const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advanceSingle(state,elapsed,active,rng);
   result.report.elapsedSeconds=elapsed;result.report.lostSeconds=Math.max(0,elapsed-result.report.seconds);
   if(!active&&elapsed>10&&elapsed>result.report.seconds)result.state=addMetrics(result.state,result.state.savedAt,{offlineSeconds:elapsed-result.report.seconds});
   const limit=Math.min(BALANCE.maxOfflineSeconds,Math.max(state.offlineCapacitySeconds,BALANCE.baseOfflineSeconds*(1+milestoneBonus(state,'offline'))));if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
-  return result;
+  return settleChallengeMain(result,state,now,rng);
 }
 
 /** Fast-forward on the same persistent timeline; subsequent wall seconds remain immediately productive. */

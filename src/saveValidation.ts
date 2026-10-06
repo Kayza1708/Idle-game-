@@ -1,3 +1,5 @@
+import {runChallenges,challenges} from './retention';
+import {ScientificNumber} from './scientificNumber';
 import {BALANCE,componentIds,hardwareIds,itemTypes,equipmentSlots,equipmentSlotCount,validEconomyValues,type GameState,type CraftingJob,type CraftingReservation} from './economy';
 import {craftingRecipe,sameReservation} from './craftingRecipes';
 
@@ -23,10 +25,44 @@ function reservation(value:unknown,path:string):asserts value is CraftingReserva
  counts(r.components,componentIds,`${path}.components`,true);counts(r.modules,Object.keys(BALANCE.modules),`${path}.modules`,true);
  if(!integer(r.data)||!integer(r.blueprints))fail(path,'ungültige reservierte Data/Fragmente');
 }
+export function assertChallengeRun(value:unknown):asserts value is NonNullable<GameState['retention']['activeRun']>{
+ if(!object(value)||!runChallenges.some(c=>c.id===value.id)||!id(value.runId)||!time(value.startedAt)||!ScientificNumber.isValidJSON(value.eligibleAtStart)||ScientificNumber.fromJSON(value.eligibleAtStart as {m:number;e:number}).compare(ScientificNumber.zero())<0)fail('retention.activeRun','unbekannte Challenge oder ungültiger Run/Zeit/Umsatz');
+}
+/** v24 originally stored only id/startedAt. Later saves added both revenue
+ * baseline and run ID; accept either known shape only while ending a legacy run. */
+export function assertLegacyChallengeRun(value:unknown){
+ if(!object(value)||!runChallenges.some(c=>c.id===value.id)||!time(value.startedAt))fail('retention.activeRun','unbekannte Challenge oder ungültige Startzeit');
+ const run=value as Record<string,unknown>;
+ if(run.runId===undefined&&run.eligibleAtStart===undefined)return;
+ assertChallengeRun(value);
+}
+function report(value:unknown){
+ if(!object(value))return fail('challenge.report','Rückkehrbericht fehlt');
+ const numbers=['credits','data','research','levels','researchCompleted','experiments','craftingCompleted','hardware','seconds','elapsedSeconds','lostSeconds','newQuestRewards','newSeasonRewards'];
+ if(numbers.some(key=>!finite(value[key]))||!ScientificNumber.isValidJSON(value.exactCredits)||!ScientificNumber.isValidJSON(value.exactData)||ScientificNumber.fromJSON(value.exactCredits as {m:number;e:number}).compare(ScientificNumber.zero())<0||ScientificNumber.fromJSON(value.exactData as {m:number;e:number}).compare(ScientificNumber.zero())<0)fail('challenge.report','ungültige Ressourcen/Zeit');
+ counts(value.components,componentIds,'challenge.report.components',true);
+ if(!Array.isArray(value.analysisResults))fail('challenge.report','Analyseergebnisse fehlen');
+ for(const r of value.analysisResults as GameState['experiments']['lastResult'][]){if(!r||!Object.hasOwn(BALANCE.experimentRewards,r.type)||!['short','long'].includes(r.length)||!id(r.id)||!time(r.at)||!['active','offline'].includes(r.mode)||!integer(r.blueprintFragments)||!integer(r.researchFragments))fail('challenge.report','ungültiges Analyseergebnis');counts(r!.components,componentIds,'challenge.report.analysisResults.components',true);}
+}
 /** Called after existing version migrations and before simulation or any save write. */
 export function assertDomainState(value:unknown):asserts value is GameState{
  if(!object(value))fail('Spielstand','kein Zustandsobjekt');
  const s=value as GameState;
+ if(!object(s.retention))fail('retention','Challenge-Fortschritt fehlt');
+ const retention=s.retention;
+ counts(retention.hardwareMasteryXp,hardwareIds,'retention.hardwareMasteryXp');
+ if(!integer(retention.challengeStars))fail('retention.challengeStars','ungültige Sterne');
+ ids(retention.claimedChallenges,challenges.map(c=>c.id),'retention.claimedChallenges');
+ counts(retention.runCompletions,runChallenges.map(c=>c.id),'retention.runCompletions',true);
+ if(!object(retention.runBestSeconds)||Object.entries(retention.runBestSeconds).some(([key,v])=>!runChallenges.some(c=>c.id===key)||!finite(v)))fail('retention.runBestSeconds','unbekannte Challenge oder ungültige Bestzeit');
+ if(retention.activeRun!==null){assertChallengeRun(retention.activeRun);if(retention.activeRun.startedAt>s.savedAt||!s.challengeSession)fail('challengeSession','Hauptspiel fehlt oder Startzeit widersprüchlich');}
+ if(s.challengeSession!==undefined){
+  const session=s.challengeSession;
+  if(!object(session)||!retention.activeRun||!object(session.main)||session.main.challengeSession!==undefined||session.main.retention?.activeRun!==null||!time(session.anchor)||session.anchor!==session.main.savedAt||session.anchor>s.savedAt||session.anchor<retention.activeRun.startedAt)fail('challengeSession','widersprüchlicher Hauptspiel-/Zeitanker');
+  assertDomainState(session.main);report(session.report);
+ }
+ if(s.challengeReturn!==undefined){const result=s.challengeReturn;if(!object(result)||!id(result.runId)||typeof result.success!=='boolean')fail('challengeReturn','ungültige Rückkehr');report(result.report);}
+ if(s.challengeMigrationNotice!==undefined&&s.challengeMigrationNotice!=='legacy-challenge-recovered')fail('challengeMigrationNotice','ungültiger Hinweis');
  if(!validEconomyValues(s))fail('ScientificNumber-Ledger','ungültiger Ressourcenwert');
  counts(s.componentInventory,componentIds,'componentInventory');counts(s.modules,Object.keys(BALANCE.modules),'modules');
  counts(s.hardwareCounts,hardwareIds,'hardwareCounts');counts(s.researchLevels,Object.keys(BALANCE.repeatableResearch),'researchLevels');
