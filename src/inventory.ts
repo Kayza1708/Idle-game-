@@ -1,3 +1,4 @@
+import {componentText,moduleText} from './gameplayI18n';
 import { MAX_ECONOMY_VALUE, componentTotal, canAffordScientificResources, validEconomyValues, refundDataScientific, type CraftingJob, BALANCE, GameState, grantComponents, Item, itemTypes,equipmentSlotCount,equipmentSlots,exactEconomyValue,spendScientificResources, ItemTypeId, ModuleId, Rarity, spendComponents, spendResources, hasNode, tapDropMultiplier, addCreditsScientific, addDataScientific, creditRateScientific, dataRateScientific } from './economy';
 import { addEvent } from './telemetry';
 import {ScientificNumber} from './scientificNumber';
@@ -19,6 +20,24 @@ export function craftingAffordability(s:GameState,kind:CraftingJob['kind'],id:st
 export function moduleAffordability(s:GameState,id:ModuleId,quantity=1){return craftingAffordability(s,'module',id,quantity);}
 export function craftAffordability(s:GameState,type:ItemTypeId,quantity=1){return craftingAffordability(s,'item',type,quantity);}
 export function itemUpgradeCost(s:GameState,item:Item){if(item.rarity==='mythic')return null;const order:Rarity[]=['common','uncommon','rare','epic','legendary','mythic'],next=order[order.indexOf(item.rarity)+1],discount=hasNode(s,'manufacturing2',1)?.85:1,step=order.indexOf(next);return {next,componentCost:Math.ceil(BALANCE.upgradeBase*BALANCE.upgradeGrowth**step*discount),dataCost:Math.ceil(250*3**step*discount)};}
+/** Quotes share the transaction guards; they never reserve or draw randomness. */
+export function itemImprovementPreview(s:GameState,id:string,action:'upgrade'|'forge'){
+ const item=s.inventory.find(i=>i.id===id);
+ if(!item)return null;
+ const upgradeCost=action==='upgrade'?itemUpgradeCost(s,item):null,forge=item.forge??0,rank=rarities.indexOf(item.rarity);
+ const capped=action==='upgrade'?!upgradeCost:forge>=20;
+ const componentCost=action==='upgrade'?(upgradeCost?.componentCost??0):Math.ceil(25*1.7**forge*(1+rank));
+ const dataCost=action==='upgrade'?(upgradeCost?.dataCost??0):Math.ceil(1000*2**forge*(1+rank));
+ const data=dataAffordability(s,dataCost),missingComponents=Math.max(0,componentCost-s.componentInventory.circuits);
+ const reason=capped?'maximum':!validEconomyValues(s,['credits','data'])?'invalid-resources':missingComponents?'circuits':!canAffordScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(dataCost))?'data':null;
+ const result=capped?item:{...item,...(action==='upgrade'&&upgradeCost?{rarity:upgradeCost.next,level:item.level+1}:{forge:forge+1})};
+ return{item,result,componentCost,dataCost,data,missingComponents,reason,allowed:reason===null};
+}
+export function fusionPreview(s:GameState,ids:string[]){
+ const items=Array.isArray(ids)?ids.map(id=>s.inventory.find(i=>i.id===id)):[];
+ const first=items[0],reason=!Array.isArray(ids)||ids.length!==3||new Set(ids).size!==3||items.some(i=>!i)?'three-items':items.some(i=>i!.locked||Object.values(s.equipped).includes(i!.id))?'protected':items.some(i=>i!.type!==first!.type||i!.rarity!==first!.rarity)?'matching':first!.rarity==='mythic'?'maximum':null;
+ return{allowed:reason===null,reason,consumed:ids,result:!reason&&first?{type:first.type,rarity:rarities[rarities.indexOf(first.rarity)+1]}:null};
+}
 export function createItem(s:GameState,type:ItemTypeId,rarity:Rarity){
  if(!Object.hasOwn(itemTypes,type)||!Object.hasOwn(BALANCE.rarity,rarity)||!Number.isSafeInteger(s.nextId)||s.nextId<1||!Number.isSafeInteger(s.nextId+1)||s.inventory.some(item=>item.id===`item-${s.nextId}`))return s;
  const item:Item={id:`item-${s.nextId}`,type,rarity,level:0,locked:false,relayTaps:type==='impulse-relay'?0:undefined},collectedTypes=s.lifetime.itemTypes.includes(type)?s.lifetime.itemTypes:[...s.lifetime.itemTypes,type];
@@ -57,17 +76,19 @@ export function cancelCrafting(s:GameState,id:string){
 }
 export function settleCrafting(s:GameState){let next=s,guard=0;while(next.crafting.active&&next.crafting.active.endsAt!==null&&next.crafting.active.endsAt<=next.savedAt+.1&&guard++<10000){const job={...next.crafting.active,endsAt:next.crafting.active.endsAt as number};let completed=job.completed+1;if(job.kind==='module'){const id=job.result.id as ModuleId;next={...next,modules:{...next.modules,[id]:next.modules[id]+1}};}else{next=createItem({...next,lifetime:{...next.lifetime,itemsCrafted:next.lifetime.itemsCrafted+1}},job.result.id as ItemTypeId,job.result.rarity!);}next=addEvent(next,'crafting_completed',job.endsAt, {...jobDetails(job),completed,resultQuantity:1});if(completed<job.quantity){next={...next,crafting:{...next.crafting,active:{...job,completed,startedAt:job.endsAt,endsAt:job.endsAt+job.durationPerUnit*1000}}};}else{const [following,...queue]=next.crafting.queue;next={...next,crafting:{active:null,queue}};if(following)next=startCraftingJob(next,following,job.endsAt);}}
 return next;}
-export function equip(s:GameState,id:string){const item=s.inventory.find(i=>i.id===id);if(!item||s.prestigeCount<1||Object.values(s.equipped).includes(id))return s;const slot=itemTypes[item.type].slot,current=s.equipped[slot],equippedCount=Object.values(s.equipped).filter(Boolean).length;if(!current&&equippedCount>=equipmentSlotCount(s))return addEvent(s,'action-blocked',s.savedAt,{action:'item-equip',id,reason:'no-socket',slot});const replaced=s.equipped[slot]??null;return addEvent({...s,equipped:{...s.equipped,[slot]:id},onboarding:{...s.onboarding,completed:[...new Set([...s.onboarding.completed,'equip-item'])]}},'item-equip',s.savedAt,{id,type:item.type,slot,replaced});}
+export function equipmentEligibility(s:GameState,id:string){const item=s.inventory.find(i=>i.id===id),slot=item&&Object.hasOwn(itemTypes,item.type)?itemTypes[item.type].slot:null,reason=!slot?'unknown':s.prestigeCount<1?'prestige':Object.values(s.equipped).includes(id)?'equipped':!s.equipped[slot]&&Object.values(s.equipped).filter(Boolean).length>=equipmentSlotCount(s)?'no-socket':null;return{item,slot,reason,allowed:reason===null};}
+export function equip(s:GameState,id:string){const quote=equipmentEligibility(s,id),item=quote.item;if(!quote.allowed||!item||!quote.slot)return quote.reason==='no-socket'?addEvent(s,'action-blocked',s.savedAt,{action:'item-equip',id,reason:'no-socket',slot:quote.slot}):s;const slot=quote.slot,replaced=s.equipped[slot]??null;return addEvent({...s,equipped:{...s.equipped,[slot]:id},onboarding:{...s.onboarding,completed:[...new Set([...s.onboarding.completed,'equip-item'])]}},'item-equip',s.savedAt,{id,type:item.type,slot,replaced});}
+
 export function unequip(s:GameState,slot:typeof equipmentSlots[number]){const id=s.equipped[slot];if(!id)return s;const equipped={...s.equipped};delete equipped[slot];return addEvent({...s,equipped},'item-equip',s.savedAt,{id,slot,action:'remove'});}
 export function buyEquipmentSlot(s:GameState,target:2|3){const count=equipmentSlotCount(s);if(s.prestigeCount<1||count>=target||target!==count+1)return s;const cost=ScientificNumber.from(BALANCE.equipmentSlotCosts[target-2]);if(exactEconomyValue(s,'credits').compare(cost)<0)return s;const paid=spendScientificResources(s,cost);return addEvent({...paid,purchasedEquipmentSlots:Math.max(s.purchasedEquipmentSlots??0,target-1)},'equipment-slot-buy',s.savedAt,{target,cost:cost.toScientificString()});}
 export function toggleLock(s:GameState,id:string){const item=s.inventory.find(i=>i.id===id);return !item?s:addEvent({...s,inventory:s.inventory.map(i=>i.id===id?{...i,locked:!i.locked}:i)},'item-lock',s.savedAt,{id,locked:!item.locked});}
 export function salvage(s:GameState,id:string){const item=s.inventory.find(i=>i.id===id);if(!item||item.locked||Object.values(s.equipped).includes(id))return s;const gained=BALANCE.rarity[item.rarity].salvage,next=grantComponents({...s,inventory:s.inventory.filter(i=>i.id!==id)},{circuits:gained});return addEvent(next,'item-salvage',s.savedAt,{id,type:item.type,rarity:item.rarity,component:'circuits',amount:gained});}
-export function upgrade(s:GameState,id:string){const item=s.inventory.find(i=>i.id===id);if(!item)return s;const cost=itemUpgradeCost(s,item);if(!cost)return s;const {next,componentCost,dataCost}=cost;if(!validEconomyValues(s,['credits','data']))return s;if(!canAffordScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(dataCost)))return s;const paid=spendComponents(s,{circuits:componentCost});if(paid===s)return s;const resources=spendResources(paid,{data:dataCost});if(resources===paid)return s;return addEvent({...resources,inventory:paid.inventory.map(i=>i.id===id?{...i,rarity:next,level:i.level+1}:i)},'item-upgrade',s.savedAt,{id,rarity:next,component:'circuits',componentCost,dataCost});}
+export function upgrade(s:GameState,id:string){const quote=itemImprovementPreview(s,id,'upgrade');if(!quote?.allowed)return s;const paid=spendComponents(s,{circuits:quote.componentCost});if(paid===s)return s;const resources=spendResources(paid,{data:quote.dataCost});if(resources===paid)return s;return addEvent({...resources,inventory:resources.inventory.map(i=>i.id===id?quote.result:i)},'item-upgrade',s.savedAt,{id,rarity:quote.result.rarity,component:'circuits',componentCost:quote.componentCost,dataCost:quote.dataCost});}
 
 
 /** Fuse three identical items into one item of the next rarity. This is the long-tail item sink. */
 export function fuseItems(s:GameState,ids:string[]){
- if(!Array.isArray(ids)||ids.length!==3||new Set(ids).size!==3)return s;
+ if(!fusionPreview(s,ids).allowed)return s;
  const unique=[...new Set(ids)],items=unique.map(id=>s.inventory.find(i=>i.id===id)).filter((i):i is Item=>!!i);
  if(items.length!==3||items.some(i=>i.locked||Object.values(s.equipped).includes(i.id)))return s;
  const first=items[0];if(items.some(i=>i.type!==first.type||i.rarity!==first.rarity)||first.rarity==='mythic')return s;
@@ -76,7 +97,8 @@ export function fuseItems(s:GameState,ids:string[]){
  return addEvent(made,'item-craft',s.savedAt,{action:'fusion',type:first.type,rarity,consumed:unique.join(',')});
 }
 /** Forge upgrades improve the scaling of one item without replacing rarity progression. */
-export function forgeItem(s:GameState,id:string){const item=s.inventory.find(i=>i.id===id);if(!item)return s;const forge=item.forge??0;if(forge>=20)return s;const rank=(['common','uncommon','rare','epic','legendary','mythic'] as Rarity[]).indexOf(item.rarity),dataCost=Math.ceil(1000*2**forge*(1+rank)),cost=Math.ceil(25*1.7**forge*(1+rank));if(!canAffordScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(dataCost)))return s;const paid=spendComponents(s,{circuits:cost});if(paid===s)return s;const resources=spendResources(paid,{data:dataCost});if(resources===paid)return s;return addEvent({...resources,inventory:resources.inventory.map(i=>i.id===id?{...i,forge:forge+1}:i),lifetime:{...resources.lifetime,forgeUpgrades:resources.lifetime.forgeUpgrades+1}},'item-upgrade',s.savedAt,{id,forge:forge+1,dataCost,componentCost:cost});}
+export function forgeItem(s:GameState,id:string){const quote=itemImprovementPreview(s,id,'forge');if(!quote?.allowed)return s;const paid=spendComponents(s,{circuits:quote.componentCost});if(paid===s)return s;const resources=spendResources(paid,{data:quote.dataCost});if(resources===paid)return s;return addEvent({...resources,inventory:resources.inventory.map(i=>i.id===id?quote.result:i),lifetime:{...resources.lifetime,forgeUpgrades:resources.lifetime.forgeUpgrades+1}},'item-upgrade',s.savedAt,{id,forge:quote.result.forge??0,dataCost:quote.dataCost,componentCost:quote.componentCost});}
+
 /** Active world loot: common signals give a small production burst, caches improve component quality,
  * and rare cores are short jackpot moments. Drop research/items/prestige affect both frequency and quality. */
 export function claimLootDrop(s:GameState,id:string,rng=Math.random){
@@ -98,4 +120,4 @@ export function claimLootDrop(s:GameState,id:string,rng=Math.random){
  return addEvent(next,'component-found',s.savedAt,{source:'world-drop',variant,draws,components:Object.entries(grant).map(([k,v])=>`${k}:${v}`).join(','),creditSeconds,dataSeconds,itemDropped,quality});
 }
 
-export function craftingMissingText(quote:ReturnType<typeof craftingAffordability>,language:string){const de=language==='de';return quote.reasons.map(reason=>reason==='invalid-quantity'?(de?'Ungültige Menge':'Invalid quantity'):reason==='recipe-locked'?(de?'Bauplan gesperrt':'Recipe locked'):reason==='queue-full'?(de?'Warteschlange voll':'Queue full'):reason==='data'?`${quote.data.missingExact.toScientificString()} Data`:reason==='blueprints'?`${quote.missingBlueprints} ${de?'Bauplanfragmente':'blueprint fragments'}`:reason.startsWith('component:')?`${reason.slice(10)} ×${quote.missingComponents[reason.slice(10) as keyof typeof quote.missingComponents]}`:`${reason.slice(7)} ×${quote.missingModules[reason.slice(7) as keyof typeof quote.missingModules]}`).join(' · ');}
+export function craftingMissingText(quote:ReturnType<typeof craftingAffordability>,language:string){const de=language==='de';return quote.reasons.map(reason=>reason==='invalid-quantity'?(de?'Ungültige Menge':'Invalid quantity'):reason==='recipe-locked'?(de?'Bauplan gesperrt':'Recipe locked'):reason==='queue-full'?(de?'Warteschlange voll':'Queue full'):reason==='data'?`${quote.data.missingExact.toScientificString()} Data`:reason==='blueprints'?`${quote.missingBlueprints} ${de?'Bauplanfragmente':'blueprint fragments'}`:reason.startsWith('component:')?`${componentText(reason.slice(10) as keyof typeof quote.missingComponents,de?'de':'en').name} ×${quote.missingComponents[reason.slice(10) as keyof typeof quote.missingComponents]}`:`${moduleText(reason.slice(7) as ModuleId,de?'de':'en')} ×${quote.missingModules[reason.slice(7) as keyof typeof quote.missingModules]}`).join(' · ');}

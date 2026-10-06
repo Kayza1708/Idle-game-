@@ -141,10 +141,10 @@ select, input[type="number"] { width: 100%; padding: 8px; border: 1px solid #555
 .return { border: 1px solid #5d7069; background: #23302c; }
 .return button { position: absolute; top: 0; right: 2px; border: 0; background: transparent; box-shadow: none; font-size: 22px; }
 
-nav { position: fixed; z-index: 5; bottom: 0; left: 50%; display: grid; width: min(100%, 720px); padding: 5px; transform: translateX(-50%); grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-bottom: 0; border-radius: 5px 5px 0 0; background: #181916f5; box-shadow: 0 -3px 10px #0006; }
-nav button { padding: 4px 2px; border: 0; background: transparent; box-shadow: none; font-size: 10px; }
-nav button span { display: block; font-size: 20px; }
-nav .active { color: var(--warm-light); background: #302b22; }
+.bottom-nav { position: fixed; z-index: 5; bottom: 0; left: 50%; display: grid; width: min(100%, 720px); padding: 5px; transform: translateX(-50%); grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); border-bottom: 0; border-radius: 5px 5px 0 0; background: #181916f5; box-shadow: 0 -3px 10px #0006; }
+.bottom-nav button { padding: 4px 2px; border: 0; background: transparent; box-shadow: none; font-size: 10px; }
+.bottom-nav button span { display: block; font-size: 20px; }
+.bottom-nav .active { color: var(--warm-light); background: #302b22; }
 .debug { max-width: 720px; margin: 22px auto; padding: 10px; border: 1px dashed #755; }
 .debug button { margin: 4px; }
 footer { display: flex; max-width: 720px; margin: auto; padding: 18px 0; justify-content: space-between; color: #858175; font-size: 11px; }
@@ -635,3 +635,8 @@ html[data-native-platform] body{padding:0}
 .game-shell>.challenge-content{overflow-y:auto;overscroll-behavior:contain}.challenge-content .workshop-screen{height:auto;overflow:visible;grid-template-rows:auto auto}.challenge-content .workshop-scroll{overflow:visible}
 
 .production-details,.job-details{margin:12px 0;padding:12px;border:1px solid var(--line,#34435d);border-radius:12px;overflow-wrap:anywhere}.production-details summary,.job-details summary{min-height:44px;display:flex;align-items:center;cursor:pointer}.production-details dl>div{display:flex;justify-content:space-between;gap:12px}.production-details dd{margin:0;text-align:right}.craft-list article>small{grid-column:1/-1}
+
+/* Existing mechanics: contained touch controls and an unobscured prestige header. */
+.inventory-segments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.inventory-segments button{min-width:0;min-height:44px;white-space:normal}
+.recipe-list{display:grid;gap:12px}.recipe-card,.improvement-card,.research-queue-panel{min-width:0;padding:12px;margin:10px 0;border:1px solid #344b42;border-radius:12px;overflow-wrap:anywhere}.recipe-card>ul{padding-left:18px}.recipe-card .item-art,.recipe-card .activity-art{width:64px}.ingredient-link{width:100%;text-align:left;white-space:normal}.craft-quantity{display:flex;align-items:center;gap:12px}.craft-quantity input{width:100px;min-height:44px}.queue-option,.research-queue-panel li{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0}.queue-option small{display:block}.queue-option>span{min-width:0}.queue-option button{flex-shrink:0}.research-queue-panel summary{min-height:44px;display:flex;align-items:center}.fusion-choice{display:flex;align-items:center;gap:10px;min-height:44px;overflow-wrap:anywhere}.fusion-choice input{width:24px;height:24px;flex-shrink:0}.contract-option{padding:10px 0;border-top:1px solid #344b42}.analysis-copy,.contract-option{min-width:0;overflow-wrap:anywhere}.analysis-copy small{display:block}.inventory-screen button,.research-queue-panel button,.contract-option button,.training-entry{min-height:44px}.training-entry{width:100%;margin:6px 0}
+.prestige-screen{height:auto;min-height:100%;grid-template-rows:auto auto auto auto auto minmax(330px,1fr);overflow:visible;padding-bottom:max(16px,env(safe-area-inset-bottom))}.prestige-mobile-header{position:sticky;top:0;z-index:8;background:#07110f;min-height:48px}.prestige-mobile-header .prestige-layer-tabs{position:static;inset:auto;display:flex;width:auto;transform:none}.prestige-mobile-header .prestige-layer-tabs button,.axiom-panel .prestige-layer-tabs button{min-height:44px;min-width:64px}.axiom-panel{padding-bottom:max(20px,env(safe-area-inset-bottom))}.mobile-detail-sheet__body button{min-height:44px}.mobile-detail-sheet__body{overflow-wrap:anywhere}.mobile-equipment{max-height:calc(100dvh - var(--overlay-top-gap) - var(--overlay-bottom-reserve))}.equipment-backdrop{padding-bottom:var(--overlay-bottom-reserve)}

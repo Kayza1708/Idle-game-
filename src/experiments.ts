@@ -1,3 +1,4 @@
+import {experimentText} from './gameplayI18n';
 import { BALANCE, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, validEconomyValues, dataRate, dataAffordability, formatScientific, exactEconomyValue, spendScientificResources } from './economy';
 import {ScientificNumber} from './scientificNumber';
 import { randomItem } from './inventory';
@@ -17,7 +18,7 @@ export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude
   const cost=analysisCost(type,length);
   if(!validEconomyValues(s,['credits','data']))return language==='de'?'Ungültige Ressourcenwerte.':'Invalid resource values.';
   if(!s.discovered.includes('sbc'))return language==='de'?'Einplatinencomputer noch nicht entdeckt.':'Single-board computer not discovered yet.';
-  if(s.experiments.active)return language==='de'?`Analyseslot belegt durch ${experimentNames[s.experiments.active.type]}.`:`Analysis slot occupied by ${experimentNames[s.experiments.active.type]}.`;
+  if(s.experiments.active)return language==='de'?`Analyseslot belegt durch ${experimentText(s.experiments.active.type,language)}.`:`Analysis slot occupied by ${experimentText(s.experiments.active.type,language)}.`;
   const dataCost=ScientificNumber.from(cost.data);
   if(exactEconomyValue(s,'data').compare(dataCost)<0)return language==='de'?`${formatScientific(analysisAffordability(s,type,length).missingExact,1)} Daten fehlen.`:`${formatScientific(analysisAffordability(s,type,length).missingExact,1)} Data missing.`;
   return null;

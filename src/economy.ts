@@ -525,7 +525,10 @@ export const researchProjectDataCostScientific=(id:ResearchProjectId)=>researchD
 export const researchProjectDataCost=(id:ResearchProjectId)=>researchProjectDataCostScientific(id).toNumber(MAX_ECONOMY_VALUE);
 export const researchLabCount=(s:GameState)=>Math.min(BALANCE.researchLabMax,1+(hasNode(s,'labs1',1)?1:0)+s.purchasedResearchLabs);
 export function researchRequirement(s:GameState,id:ResearchId){if(!isRepeatableResearch(id))return null;const required=BALANCE.repeatableResearch[id].requires;return required&&s.researchLevels[required]<1?required:null;}
-export function queueResearchProject(s:GameState,id:ResearchId){const enabled=hasNode(s,'labs2',1);if(!enabled||(!isRepeatableResearch(id)&&s.completedResearch.includes(id))||!!researchRequirement(s,id)||s.researchLabs.some(x=>x?.id===id)||s.researchQueue.includes(id))return s;return s.researchQueue.length>=2?s:{...s,researchQueue:[...s.researchQueue,id]};}
+export function researchQueuePreview(s:GameState,id:ResearchId){const quote=researchPreview(s,id),reason=!quote?'unknown':!hasNode(s,'labs2',1)?'locked':quote.done?'completed':quote.requirement?'requirement':quote.running?'running':s.researchQueue.includes(id)?'queued':s.researchQueue.length>=2?'full':null;return{allowed:reason===null,reason,level:quote?.level??1};}
+export function queueResearchProject(s:GameState,id:ResearchId){return researchQueuePreview(s,id).allowed?{...s,researchQueue:[...s.researchQueue,id]}:s;}
+export function removeQueuedResearch(s:GameState,target:number|string){const index=typeof target==='string'?s.researchQueue.findIndex(id=>id===target):target;return !Number.isSafeInteger(index)||index<0||index>=s.researchQueue.length?s:{...s,researchQueue:s.researchQueue.filter((_,i)=>i!==index)};}
+
 export function researchPreview(s:GameState,id:ResearchId){
  const repeat=isRepeatableResearch(id),known=repeat||Object.hasOwn(BALANCE.researchProjects,id);
  if(!known)return null;

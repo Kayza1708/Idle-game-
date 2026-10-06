@@ -41,7 +41,8 @@ describe('final mobile interaction contracts',()=>{
   expect(app).toContain('await removeDurableGame();removeGame(storage.current);location.reload()');
  });
  it('shows selected-purchase output and a compact buy action',()=>{
-  expect(panels).toContain('hardwarePurchaseComputeGain(s,id,count)');
+  expect(panels).toContain('hardwarePurchasePreview(s,id,mode)');
+  expect(panels).toContain('preview.computeGain.toNumber(MAX_ECONOMY_VALUE)');
   expect(panels).toContain("'Nächster Kauf'");
   expect(panels).toContain('className="hardware-output"');
   expect(panels).toContain("'KAUFEN'");
