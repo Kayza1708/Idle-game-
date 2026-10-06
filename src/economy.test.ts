@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BALANCE, GameState, buyHardware, computeAllocation, creditRate, dataRate, hardwareBulkCost, hardwareCost, newGame, researchRate, researchDuration, researchProjectDataCost, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, trainingGoal, startResearchProject, researchLabCount } from './economy';
+import { BALANCE, GameState, buyHardware, creditRate, dataRate, hardwareBulkCost, hardwareCost, newGame, researchRate, researchDuration, researchProjectDataCost, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, trainingGoal, startResearchProject, researchLabCount } from './economy';
 import { advance, advanceTo } from './simulation';
 import {restore,serialize} from './storage';
 
@@ -12,12 +12,11 @@ describe('economy', () => {
     const state = {...newGame(0),credits:14};
     expect(buyHardware(state)).toBe(state);
   });
-  it('uses normalized profiles from the central configuration',()=>{
-    for(const profile of Object.values(BALANCE.operatingProfiles))expect(profile.inference+profile.training+profile.research).toBeCloseTo(1,12);
-    const fresh=newGame(0),balanced={...fresh,hardware:1,hardwareCounts:{...fresh.hardwareCounts,calculator:1},discovered:['calculator'] as GameState['discovered']},training=selectOperatingProfile(balanced,'training');
-    expect(computeAllocation(training).training).toBeGreaterThan(computeAllocation(balanced).training);
-    expect(creditRate(training.hardware,training.level,training)).toBeLessThan(creditRate(balanced.hardware,balanced.level,balanced));
-    expect(dataRate(balanced)).toBeGreaterThan(0);expect(researchRate(balanced)).toBeGreaterThan(0);
+  it('preserves legacy profile values without changing production',()=>{
+    const balanced=buyHardware(newGame(0)),training=selectOperatingProfile(balanced,'training');
+    expect(training.operatingProfile).toBe('training');
+    expect(creditRate(training.hardware,training.level,training)).toBe(creditRate(balanced.hardware,balanced.level,balanced));
+    expect(dataRate(training)).toBe(dataRate(balanced));expect(researchRate(training)).toBe(researchRate(balanced));
   });
   it('retains overflow across several training completions', () => {
     const ready = { ...newGame(0), credits: 1000, data: 1000, hardware: 25, hardwareCounts: { ...newGame(0).hardwareCounts, calculator: 25 } };

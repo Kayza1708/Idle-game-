@@ -587,3 +587,9 @@ Module sind echte Rezeptzutaten, keine Produktionsmultiplikatoren. Dedizierte
 Modulgrafiken fehlen; bestehendes Werkbankmotiv verwendet. Bekannte Schicht-3-
 Referenzabweichungen und Langzeitbalance bleiben unverändert. Kein vollständiger
 Suite-/CI-/Balance-Nachweis; `[skip ci]` verhindert hier verbotene Langkampagnen.
+
+## Übergabe Auftrag 7A
+
+PR #71 ist in Main `af9575c` enthalten; eigener Folgebranch `codex/full-compute-user-capacity`, keine offene Abhängigkeit. Volle Hardwareleistung bedient Users; Jobs laufen parallel. Alte Profilwerte bleiben ladbar und wirkungslos. Wissenschaftliche gemeinsame Zerlegung zeigt 100 % Kapazitätsnutzung; Export trennt historische Profil-IDs von aktiven Parametern.
+
+Reproduzierbare vorbereitete Vergleiche und tatsächliche kurze Prüfergebnisse: [core-loop-audit.md](core-loop-audit.md), `scripts/core-loop-comparison.ts`. Keine Gesamtsuite/FAST/DEEP/Langkampagnen; `[skip ci]` verhindert diese im pauschalen CI-Workflow. Keine bestätigte Langzeitbalance. Auftrag 7B muss wirkungslose Trainingsboni separat prüfen; Schicht-3-Referenzabweichungen und Langzeitziele bleiben unverändert offen.

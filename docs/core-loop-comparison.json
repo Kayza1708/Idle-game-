@@ -1,0 +1,151 @@
+{
+  "baseline": "af9575ce612b5980b400b3b2f0bf2dfe3e8f5284",
+  "before": [
+    {
+      "name": "early",
+      "profile": "balanced",
+      "compute": "1.105500000000000e+0",
+      "users": "8.491182624621405e-1",
+      "credits": "1.260940619756279e+0",
+      "data": "9.214761323344955e-2"
+    },
+    {
+      "name": "early",
+      "profile": "training",
+      "compute": "1.105500000000000e+0",
+      "users": "6.792946099697123e-1",
+      "credits": "1.008752495805023e+0",
+      "data": "8.241933086174093e-2"
+    },
+    {
+      "name": "early",
+      "profile": "discovery",
+      "compute": "1.105500000000000e+0",
+      "users": "7.359024941338551e-1",
+      "credits": "1.092815203788775e+0",
+      "data": "8.578475937681793e-2"
+    },
+    {
+      "name": "hardware",
+      "profile": "balanced",
+      "compute": "5.894517675585551e+1",
+      "users": "4.636666720387111e+1",
+      "credits": "1.748348349699425e+2",
+      "data": "6.809307395313500e-1"
+    },
+    {
+      "name": "hardware",
+      "profile": "training",
+      "compute": "5.894517675585551e+1",
+      "users": "3.709333376309688e+1",
+      "credits": "1.398678679759540e+2",
+      "data": "6.090429686245206e-1"
+    },
+    {
+      "name": "hardware",
+      "profile": "discovery",
+      "compute": "5.894517675585551e+1",
+      "users": "4.018444491002162e+1",
+      "credits": "1.515235236406168e+2",
+      "data": "6.339120199997916e-1"
+    },
+    {
+      "name": "bonuses",
+      "profile": "balanced",
+      "compute": "1.009977331722306e+2",
+      "users": "1.125396170550766e+2",
+      "credits": "2.468761895257974e+3",
+      "data": "1.110872352161274e+0"
+    },
+    {
+      "name": "bonuses",
+      "profile": "training",
+      "compute": "1.009977331722306e+2",
+      "users": "9.003169364406130e+1",
+      "credits": "1.975009516206378e+3",
+      "data": "9.935944375030779e-1"
+    },
+    {
+      "name": "bonuses",
+      "profile": "discovery",
+      "compute": "1.009977331722306e+2",
+      "users": "9.753433478106640e+1",
+      "credits": "2.139593642556909e+3",
+      "data": "1.034165878904417e+0"
+    }
+  ],
+  "after": [
+    {
+      "name": "early",
+      "profile": "balanced",
+      "compute": "1.105500000000000e+0",
+      "users": "1.132157683282854e+0",
+      "credits": "1.681254159675038e+0",
+      "data": "1.064028986110272e-1"
+    },
+    {
+      "name": "early",
+      "profile": "training",
+      "compute": "1.105500000000000e+0",
+      "users": "1.132157683282854e+0",
+      "credits": "1.681254159675038e+0",
+      "data": "1.064028986110272e-1"
+    },
+    {
+      "name": "early",
+      "profile": "discovery",
+      "compute": "1.105500000000000e+0",
+      "users": "1.132157683282854e+0",
+      "credits": "1.681254159675038e+0",
+      "data": "1.064028986110272e-1"
+    },
+    {
+      "name": "hardware",
+      "profile": "balanced",
+      "compute": "5.894517675585551e+1",
+      "users": "6.182222293849481e+1",
+      "credits": "2.331131132932567e+2",
+      "data": "7.862710915358317e-1"
+    },
+    {
+      "name": "hardware",
+      "profile": "training",
+      "compute": "5.894517675585551e+1",
+      "users": "6.182222293849481e+1",
+      "credits": "2.331131132932567e+2",
+      "data": "7.862710915358317e-1"
+    },
+    {
+      "name": "hardware",
+      "profile": "discovery",
+      "compute": "5.894517675585551e+1",
+      "users": "6.182222293849481e+1",
+      "credits": "2.331131132932567e+2",
+      "data": "7.862710915358317e-1"
+    },
+    {
+      "name": "bonuses",
+      "profile": "balanced",
+      "compute": "1.009977331722306e+2",
+      "users": "1.500528227401022e+2",
+      "credits": "3.291682527010631e+3",
+      "data": "1.282724903111249e+0"
+    },
+    {
+      "name": "bonuses",
+      "profile": "training",
+      "compute": "1.009977331722306e+2",
+      "users": "1.500528227401022e+2",
+      "credits": "3.291682527010631e+3",
+      "data": "1.282724903111249e+0"
+    },
+    {
+      "name": "bonuses",
+      "profile": "discovery",
+      "compute": "1.009977331722306e+2",
+      "users": "1.500528227401022e+2",
+      "credits": "3.291682527010631e+3",
+      "data": "1.282724903111249e+0"
+    }
+  ]
+}
