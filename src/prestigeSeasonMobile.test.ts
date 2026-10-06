@@ -1,9 +1,12 @@
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
 import panels from './Panels.tsx?raw';
 import meta from './MetaHub.tsx?raw';
 
-const css=readFileSync(new URL('./style.css',import.meta.url),'utf8');
+// Avoid overlapping Vite asset-URL and SSR import.meta rewrites; read real CSS.
+const css=readFileSync(resolve('src/style.css'),'utf8');
+
 
 describe('mobile prestige confirmation',()=>{
  it('uses one dominant full-width action followed by secondary cancellation',()=>{const confirmation=panels.slice(panels.indexOf('{confirming&&'),panels.indexOf('<div className="tree-heading'));expect(confirmation).toContain('className="prestige-confirm-hero"');expect(confirmation.indexOf('prestige-confirm-primary')).toBeLessThan(confirmation.indexOf('prestige-confirm-cancel'));expect(css).toMatch(/\.prestige-confirm\.compact \.prestige-confirm-actions\{[^}]*display:flex[^}]*flex-direction:column/);expect(css).toMatch(/\.prestige-confirm-primary\{[^}]*order:1/);expect(css).toMatch(/\.prestige-confirm-cancel\{[^}]*order:2/);});

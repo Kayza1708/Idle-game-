@@ -78,3 +78,37 @@ Node 22.23.3/npm 10.9.9, unveränderte Manifeste, Lockfile und Testkonfiguration
 - Keine erforderliche Prüfung war durch Umgebung oder Zugriff blockiert. Eine grüne Gesamtabnahme bleibt wegen der dokumentierten Fehler offen.
 
 Keine Tests deaktiviert. Kein Merge und keine Veröffentlichung.
+
+## Technische Nachbesserung auf Draft-PR #66
+
+Ausgangspunkt ist der saubere PR-Branch `codex/run-start-auto-prestige`, Commit `94b1550`, nicht ein neuer Branch oder PR. PR #66 bleibt Draft. Die nachfolgenden Befunde ersetzen die oben dokumentierten technischen Altfehler; die historische Abnahme bleibt nachvollziehbar.
+
+### Clock: fehlende Hardware in den Fixtures
+
+Vorher reproduziert `npm test -- src/clock.test.ts src/mobileMetaPolish.test.ts src/prestigeSeasonMobile.test.ts` auf diesem Ausgangsstand drei Clock-Assertions `1000 > 1000` und zwei Transformfehler vor Testausführung. Die Clock läuft bereits korrekt: Prestige entfernt Hardware, folglich ist die Produktion null. Die drei Tests kaufen jetzt über `buyHardwareClass` einen Taschenrechner aus dem echten 50-Credit-Startbudget und prüfen denselben wissenschaftlichen Kostenabzug: 50 − 15 = 35. Lediglich die benötigte Training-Data wird in der Vorbereitung über den Ledger-Helfer bereitgestellt; Hardware und Produktionszuwachs werden weder eingesetzt noch erfunden.
+
+Nachher bleiben alle ursprünglichen Produktions-/Training-Assertions erhalten. Zusätzlich werden tatsächlich verstrichene und gutgeschriebene 10 Sekunden, 10.000 ms SavedAt-Differenz und null verlorene Zeit geprüft, auch nach Debug-Zeitsprung und Reload. Autosave prüft nun echte Produktion bezahlter Hardware. Neue Gegenproben bestätigen null Produktion ohne Hardware sowie eine Abwesenheit von 10 Stunden: 8 Stunden werden gutgeschrieben, 2 gehen gemäß unveränderter Offline-Grenze verloren; erneutes Synchronisieren desselben Zeitpunkts produziert nichts erneut. Alle 15 Clock-Tests bestehen. Kein Produktions-/Clock-Code musste verändert werden.
+
+### Vite: überlappende Asset-URL-/SSR-Transformation
+
+`readFileSync(new URL('./style.css', import.meta.url), ...)` löste in beiden mobilen Dateien einen überlappenden Vite-7-Asset-URL-/SSR-Rewrite aus: `Cannot split a chunk that has already been edited ... import.meta`. Die CSS-Datei wird nun mit `readFileSync(resolve('src/style.css'), 'utf8')` aus dem Vitest-Projektroot gelesen. Dadurch entfällt nur die problematische URL-Transformation. Ein geprüfter CSS-`?raw`-Import war hier keine Lösung, weil die Vitest-CSS-Transformation einen leeren String lieferte; er wurde verworfen. Alle ursprünglichen UI-Assertions bleiben unverändert und laufen gegen die tatsächlichen Quelltexte: 14 + 10 Tests bestehen. Keine Datei ausgeschlossen, kein leerer Ersatztest.
+
+### RPC: synchrone Simulation blockierte die Runner-Ereignisschleife
+
+Der belegte vollständige Ausgangslauf meldete `Timeout calling "onTaskUpdate"`, obwohl die Langzeitassertions bestanden. Die betreffende Funktion und `maxWorkers: 1` sind auf `94b1550` identisch: nicht zu viele parallele Tests, sondern eine einzige synchrone `simulateDiagnosticSuite`-Prüfung mit zehn Läufen blockierte den Kontroll-Worker rund 1.421 Sekunden. Vitests installierter RPC-Transport hat einen unveränderten 60-Sekunden-Timeout; während der synchronen Domainarbeit kann der Worker ausstehende RPC-Antworten nicht bearbeiten.
+
+`longTermSimulation.test.ts` prüft dieselben FAST-Horizonte 1/7/30/60/90 Tage (DEEP weiterhin 1/3/7/14/30/60/90/180/365), jeweils aktive/passive Profile mit Seed 1708, jetzt einzeln und ausdrücklich sequenziell. Die tatsächliche `simulateBalance`-Funktion läuft über ViteNode in einem Node-Rechen-Worker. Der Vitest-Kontroll-Worker wartet asynchron und kann RPC-Nachrichten bearbeiten. Alle ursprünglichen Einzel- und Gesamtassertions sowie die optionale strikte Balancebewertung bleiben erhalten. Kein höherer RPC-Timeout, keine neuen Abhängigkeiten, keine Änderung der Domain, Zeitauflösung, simulierten Zeit, Offline-Regeln oder Economy.
+
+Ein separater Regressionstest zählt Heartbeats erst ab Beginn der tatsächlichen synchronen Simulation im Rechen-Worker. Gleichzeitig vergleicht er das vollständige Ergebnis eines unabhängigen zehnminütigen Prüflaufs mit dem direkten Aufruf derselben Domainfunktion, einschließlich Zuständen, Ledgern, Entscheidungen und Diagnosen. Er besteht; dies ersetzt nicht den vollständigen FAST-Abnahmelauf.
+
+### Neustartnachweis und getrennte Balanceentscheidung
+
+Der Verlauf mit **Kommerzialisierung 250 ist ausdrücklich ein technischer Ablaufnachweis, keine natürliche Progressions- oder Timingmessung**. Sein vorbereiteter Account und alle bisherigen Assertions bleiben erhalten. Ein zusätzlicher kleiner Nachweis verwendet nur den tatsächlich gekauften INT-Knoten `shoppingAgent` und den aktivierten Taschenrechner-Autobuyer; sämtliche Forschungs- und Axiomupgradelevel sind null, Auto-Prestige ist ausgeschaltet. Echter Reset → 50 Credits/null Hardware → bei 9 s unverändert → bei 10 s bezahlter erster Taschenrechner/35 Credits → weitere 10 s positive Produktion und berechtigter Umsatz, ohne Taps, nachträgliche Grants oder zweiten Prestige. Alle 30 Run-Start-Tests bestehen.
+
+Die unveränderten Kalibrierungstests wurden erneut ausgeführt: beide Strategien scheitern ausschließlich an erster Analyse bei **870 s**, erwartet **880–1800 s**; die übrigen fünf Tests bestehen. Die Vergleichsmessung vor dem 50-Credit-Start betrug **890 s**, erste Forschung 310 s. Das neue Startkapital ermöglicht früheren Hardwarekauf und damit früheren Data-Aufbau; kein Clock- oder Ledgerfehler. Mindestgrenze und sämtliche Economy-Parameter bleiben unverändert. Diese Balanceentscheidung ist weiterhin offen und die Gesamtsuite darf deshalb nicht als grün gelten.
+
+### Reproduzierbare Abschlussabnahme
+
+Auf dem finalen Nachbesserungscommit ausführen: `npm run typecheck`; `npm test -- src/clock.test.ts src/mobileMetaPolish.test.ts src/prestigeSeasonMobile.test.ts src/runStart.test.ts src/simulationWorker.test.ts src/layerThreeSimulation.test.ts`; `npm test`; `npm run build`; `git diff --check`. Die technische Vorprüfung bestand mit 70 Tests in fünf Dateien; die Analyseprüfung reproduzierte separat zwei Fehlschläge und fünf bestandene Tests. Vollständige Abschlusszahlen und Commit-ID werden in der aktualisierten Beschreibung von [Draft-PR #66](https://github.com/Kayza1708/Idle-game-/pull/66) und der Übergabe festgehalten. Die unveränderten Timing-Assertions bleiben als offene Abnahme sichtbar; keine grüne Gesamtsuite behaupten.
+
+Zusätzlich geänderte Dateien: `src/clock.test.ts`, `src/mobileMetaPolish.test.ts`, `src/prestigeSeasonMobile.test.ts`, `src/longTermSimulation.test.ts`, `src/runStart.test.ts`, `src/simulationWorker.test.ts`, `src/testSupport/runSimulationWorker.ts`, `scripts/test-simulation-worker.mjs` und die drei Übergabedokumente. Produktionsdateien und Balancewerte bleiben gegenüber `94b1550` unverändert.

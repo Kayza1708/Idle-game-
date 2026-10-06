@@ -633,3 +633,11 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Deutsche/englische Vorschauen und konkrete Agent-Sperrgründe ergänzt; Typecheck, 335 betroffene Tests und Production-Build bestanden.
 - [x] Vollständige Suite einschließlich Langzeitsimulation abgeschlossen und ehrlich dokumentiert: 658 Tests bestanden, fünf fehlgeschlagen, zwei Vite-Ladefehler und ein RPC-Timeout. Produktionscode unverändert; historische Test-Fixture danach separat verstärkt/nachgeprüft.
 - [ ] Grüne Gesamtsuite: bestehende Clock-/Vite-/RPC-Probleme und zwei durch den vorgeschriebenen 50-Credit-Start neu verletzte Analyse-Kalibrierungsgrenzen. Keine Gegenkalibrierung oder Abschwächung der Tests.
+
+## Technische Nachbesserung Run-Start / PR #66
+- [x] Drei Clock-Fixtures mit echten bezahlten Hardwarekäufen repariert; tatsächliche Zeitdeltas, Offline-Limit, Reload und fehlende Produktion ohne Hardware geprüft (15 Tests).
+- [x] Vite-URL-/SSR-Transformursache in beiden mobilen Suiten entfernt; alle 24 ursprünglichen UI-Tests ausgeführt und bestanden.
+- [x] Synchrone Langzeitsimulation vom Runner-Kontrollloop getrennt, Horizonte/Profile unverändert und sequenziell; Heartbeat und vollständige Domain-Parität getestet.
+- [x] Minimaler Neustart mit einzigem Shopping-Knoten, echtem ersten Kauf und positiver Produktion; Kommerzialisierung-250-Verlauf als technischer Ablaufnachweis gekennzeichnet.
+- [x] Zwei unveränderte Analyse-Timingfehler reproduziert: 870 s statt mindestens 880 s; 50-Credit-Start als Ursache, Balanceentscheidung separat offen.
+- [ ] Grüne Gesamtsuite bleibt wegen dieser Timinggrenzen offen. Finale technische Abschlusszahlen stehen in Draft-PR #66 und der Übergabe; kein Merge, kein zusätzlicher PR.

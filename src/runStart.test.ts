@@ -18,6 +18,7 @@ function expectStart(s:GameState){
 // A legally reachable post-prestige account: shopping node bought from earned INT,
 // Axiom Automation bought from 3 historical Axioms (unchanged cost: 2); completed Data Generation I,
 // Model Architecture I and Commercialization 250 persist from earlier runs.
+// Technical automation flow proof, NOT a natural progression/timing measurement.
 // The measured trajectory starts with 50 credits and no hardware; no grants/actions
 // are applied during it. These research levels have no cap and finite scientific costs.
 function integrationStart(){
@@ -58,6 +59,20 @@ describe('one run start contract',()=>{
 });
 
 describe('first automatic paid purchase',()=>{
+ it('restarts and produces with only the shopping node and enabled calculator buyer',()=>{
+  const reset=shopping();expectStart(reset);expect(reset.nodes).toEqual(['shoppingAgent']);
+  expect(Object.values(reset.researchLevels).every(level=>level===0)).toBe(true);
+  expect(Object.values(reset.axiomUpgradeLevels).every(level=>level===0)).toBe(true);
+  expect(reset.prestigeAgent.enabled).toBe(false);
+  const waiting=advance(reset,9,false,()=>.5).state;expectStart(waiting);
+  const bought=advance(waiting,1,false,()=>.5).state;
+  expect(bought.hardwareCounts.calculator).toBe(1);expect(bought.credits).toBe(35);
+  expect(exactEconomyValue(bought,'credits').compare(exactEconomyValue(reset,'credits').subtract(hardwareCostScientific('calculator',0,reset)))).toBe(0);
+  const productive=advance(bought,10,false,()=>.5);
+  expect(productive.report.credits).toBeGreaterThan(0);expect(productive.state.credits).toBeGreaterThan(bought.credits);
+  expect(productive.state.lifetime.regularCredits).toBeGreaterThan(bought.lifetime.regularCredits);
+  expect(productive.state.lifetime.taps).toBe(reset.lifetime.taps);expect(productive.state.prestigeCount).toBe(reset.prestigeCount);
+ });
  it.each([0,.25,.75])('pays the actual scientific price at reserve %s, only on the next shopping tick',reservePercent=>{
   const s=shopping(),start={...s,automation:{...s.automation,reservePercent}},before=exactEconomyValue(start,'credits'),cost=hardwareCostScientific('calculator',0,start);
   expect(advance(start,9,false,()=>.5).state.hardware).toBe(0);
@@ -115,7 +130,7 @@ describe('guarded normal auto prestige',()=>{
   expectStart(reset);expect(reset.prestigeCount).toBe(s.prestigeCount+1);expect(reset.runStartedAt).toBe(s.savedAt);expect(reset.telemetry.runStartedAt).toBe(s.savedAt);expect(reset.runTrainingCompleted).toBe(0);expect(reset.runResearchCompleted).toBe(0);expect(reset.runMilestoneEdges).toEqual([]);expect(reset.prestigeAgent.elapsed).toBe(0);expect(reset.automation.shoppingElapsed).toBe(0);expect(runPrestigeAgent(reset)).toBe(reset);
   expect(advance(reset,9,false,()=>.5).state.hardware).toBe(0);expect(advance(reset,10,false,()=>.5).state.hardware).toBe(1);expect(reset.axiomResetCount).toBe(s.axiomResetCount);
  });
- it('completes two consecutive automatic prestige cycles without taps, grants or starting hardware',()=>{
+ it('technically completes two automatic cycles with prepared Commercialization 250, not natural progression',()=>{
   const start=integrationStart();expectStart(start);expect(start.availableAxioms).toBe(3-BALANCE.axiom.automationCost);expect(exactEconomyValue(start,'lifetimeEligibleCredits').compare(axiomThresholdScientific().multiplyNumber(9).pow(2).multiplyNumber(BALANCE.prestigeBaseRevenue))).toBeGreaterThanOrEqual(0);expect(restore(serialize(start),start.savedAt).error).toBeUndefined();
   const first=advance(start,900,true,()=>.5).state;expect(first.prestigeCount).toBe(start.prestigeCount+1);expectStart(first);expect(first.runStartedAt).toBe(900_000);
   const second=advance(first,900,true,()=>.5).state;expect(second.prestigeCount).toBe(start.prestigeCount+2);expectStart(second);expect(second.runStartedAt).toBe(1_800_000);expect(second.lifetime.taps).toBe(start.lifetime.taps);expect(second.lifetime.hardwareBought).toBeGreaterThan(first.lifetime.hardwareBought);expect(second.telemetry.prestigeHistory.at(-1)?.before.runCreditsEarned).toBeGreaterThan(0);

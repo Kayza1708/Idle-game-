@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { GameState, addCredits, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining } from './economy';
+import { BALANCE, GameState, addCredits, addData, buyHardwareClass, exactEconomyValue, hardwareCostScientific, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining, trainingDataCost, type TrainingTrack } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige } from './prestige';
 import { advance, advanceTo, debugAdvance, settleResearchCompletions, simulationNow, type ResearchCompletionStep } from './simulation';
@@ -13,6 +13,25 @@ class MemoryStorage implements StorageLike {
 }
 
 const prestigeReady=(now:number)=>addCredits(newGame(now),1_000_000_000_000_000);
+
+function productiveTraining(reset:GameState,track:TrainingTrack){
+  expect(reset.hardware).toBe(0);expect(reset.credits).toBe(50);
+  const budget=exactEconomyValue(reset,'credits'),price=hardwareCostScientific('calculator',0,reset);
+  const bought=buyHardwareClass(reset,'calculator',1);
+  expect(bought.hardwareCounts.calculator).toBe(1);
+  expect(exactEconomyValue(bought,'credits').compare(budget.subtract(price))).toBe(0);
+  // Prepare only the training ingredient; production requires the paid hardware.
+  const training=startTraining(addData(bought,trainingDataCost(bought,track)),track);
+  expect(training.activeTraining?.track).toBe(track);
+  return training;
+}
+
+function expectTenSeconds(training:GameState,result:ReturnType<typeof advanceTo>){
+  expect(result.report.elapsedSeconds).toBe(10);expect(result.report.seconds).toBe(10);expect(result.report.lostSeconds).toBe(0);
+  expect(result.state.savedAt-training.savedAt).toBe(10_000);
+  expect(result.report.credits).toBeGreaterThan(0);
+  expect(exactEconomyValue(result.state,'credits').compare(exactEconomyValue(training,'credits'))).toBe(1);
+}
 
 describe('simulation clock regressions',()=>{
   const researchReady=(now=0)=>({...newGame(now),credits:1_000_000,data:1_000_000,researchPoints:1_000_000});
@@ -49,8 +68,8 @@ describe('simulation clock regressions',()=>{
   });
   it('produces for ten seconds immediately after a normal prestige',()=>{
     const reset=prestige(prestigeReady(1_000));
-    const training=startTraining({...reset,credits:1000,data:1000},'quality');
-    const next=advanceTo(training,11_000).state;
+    const training=productiveTraining(reset,'quality');
+    const result=advanceTo(training,11_000),next=result.state;expectTenSeconds(training,result);
     expect(next.credits).toBeGreaterThan(training.credits);
     expect(next.training).toBeGreaterThan(training.training);
   });
@@ -58,8 +77,8 @@ describe('simulation clock regressions',()=>{
   it('produces immediately after debug fast-forward and prestige',()=>{
     const jumped=debugAdvance(prestigeReady(1_000),3600,1_000).state;
     const reset=prestige(jumped);
-    const training=startTraining({...reset,credits:1000,data:1000},'efficiency');
-    const next=advanceTo(training,11_000).state;
+    const training=productiveTraining(reset,'efficiency');
+    const result=advanceTo(training,11_000),next=result.state;expectTenSeconds(training,result);
     expect(next.credits).toBeGreaterThan(training.credits);
     expect(next.training).toBeGreaterThan(0);
     expect(next.savedAt).toBe(simulationNow(next,11_000));
@@ -71,8 +90,8 @@ describe('simulation clock regressions',()=>{
     const reset=prestige(jumped);
     expect(persistGame(storage,reset,1_000).saved).toBe(true);
     const loaded=loadGame(storage,1_000).state;
-    const training=startTraining({...loaded,credits:1000,data:1000},'quality');
-    const next=advanceTo(training,11_000).state;
+    const training=productiveTraining(loaded,'quality');
+    const result=advanceTo(training,11_000),next=result.state;expectTenSeconds(training,result);
     expect(next.credits).toBeGreaterThan(training.credits);
     expect(next.training).toBeGreaterThan(training.training);
   });
@@ -96,7 +115,7 @@ describe('simulation clock regressions',()=>{
 
   it('autosave-style synchronization neither duplicates nor loses progress',()=>{
     const storage=new MemoryStorage();
-    const initial=newGame(0);
+    const initial=buyHardwareClass(newGame(0),'calculator',1);
     const expected=advance(initial,10).state;
     const first=persistGame(storage,initial,5_000).state;
     const sameInstant=persistGame(storage,first,5_000).state;
@@ -104,7 +123,25 @@ describe('simulation clock regressions',()=>{
     const final=persistGame(storage,loaded,10_000).state;
     expect(sameInstant.credits).toBeCloseTo(first.credits);
     expect(final.credits).toBeCloseTo(expected.credits);
+    expect(final.credits).toBeGreaterThan(initial.credits);
+    expect(final.savedAt-initial.savedAt).toBe(10_000);
     expect(final.training).toBe(0);
+  });
+
+  it('advances time without inventing production when a reset has no hardware',()=>{
+    const reset=prestige(prestigeReady(1_000)),result=advanceTo(reset,11_000);
+    expect(result.state.savedAt-reset.savedAt).toBe(10_000);expect(result.report.seconds).toBe(10);
+    expect(result.report.credits).toBe(0);expect(result.state.exactEconomy.credits).toEqual(reset.exactEconomy.credits);
+  });
+
+  it('credits only the offline capacity after a longer absence and does not replay lost time',()=>{
+    const initial=buyHardwareClass(newGame(1_000),'calculator',1),cap=BALANCE.baseOfflineSeconds,wallNow=1_000+(cap+7200)*1000;
+    const result=advanceTo(initial,wallNow,false,()=>.5),expected=advance(initial,cap,false,()=>.5);
+    expect(result.report.elapsedSeconds).toBe(cap+7200);expect(result.report.seconds).toBe(cap);expect(result.report.lostSeconds).toBe(7200);
+    expect(result.state.savedAt).toBe(wallNow);expect(result.report.credits).toBeGreaterThan(0);
+    expect(result.state.exactEconomy).toEqual(expected.state.exactEconomy);
+    const again=advanceTo(result.state,wallNow,false,()=>.5);
+    expect(again.report.seconds).toBe(0);expect(again.report.credits).toBe(0);expect(again.state.exactEconomy).toEqual(result.state.exactEconomy);
   });
 
   it('repairs future-dated v2 saves without losing permanent state',()=>{
