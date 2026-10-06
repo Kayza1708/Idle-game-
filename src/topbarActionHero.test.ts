@@ -8,11 +8,11 @@ const tapSurface=panels.slice(panels.indexOf('function TapSurface'),panels.index
 const workshop=panels.slice(panels.indexOf('export function Workshop'),panels.indexOf('export function Research'));
 
 describe('symmetric mobile resource header',()=>{
- it('uses four identical resource cells between equal balance rails',()=>{
+ it('uses four identical resource cells across all space left of the menu',()=>{
   expect(resourceBar.match(/<ResourceCell /g)).toHaveLength(4);
-  expect(resourceBar).toContain('className="resource-bar-balance"');
+  expect(resourceBar).not.toContain('resource-bar-balance');
   expect(resourceBar).toContain('className="resource-grid"');
-  expect(css).toMatch(/\.resource-bar\{[^}]*grid-template-columns:44px minmax\(0,1fr\) 44px/);
+  expect(css).toMatch(/\.resource-bar\{[^}]*grid-template-columns:minmax\(0,1fr\) 44px/);
   expect(css).toMatch(/\.resource-grid\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
  });
  it('reserves stable numeric rows and a 44px menu target',()=>{

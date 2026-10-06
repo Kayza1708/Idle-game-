@@ -5,7 +5,7 @@ import {PixelIcon,type PixelIconName} from './PixelIcon';
 import {challenges,challengeClaimable,collectionSummary,totalMastery,runChallenges,runChallengeReady,runChallengeProgress,challengeText} from './retention';
 import {GameState,hardwareIds,hardwareMasteryLevel,BALANCE} from './economy';import {ComponentArt,GemAmount,MetaArt,ResourceArt} from './GameArt';import {missionProgress,missionRewardClaimable,missionText} from './missions';import {achievements,currentAchievementTier} from './achievements';
 import {MobileDetailSheet} from './MobileDetailSheet';
-import {seasonClaimable,seasonLevel,seasonProgress,seasonRewards,SEASON_LEVELS,SEASON_XP_PER_LEVEL} from './season';
+import {seasonClaimable,seasonLevel,seasonProgress,seasonRewards,seasonRewardTiers,SEASON_LEVELS,SEASON_XP_PER_LEVEL,type SeasonReward} from './season';
 const num=(s:GameState,v:number,d=0)=>formatLocalized(v,s.settings.language,s.settings.numberFormat,d);
 type Action=(name:string,...args:any[])=>void;
 const kinds=['daily','weekly','monthly'] as const;
@@ -14,7 +14,7 @@ const questIcon=(metric:string):PixelIconName=>questIcons[metric]??'challenge';
 export function MissionHub({s,act,variant='combined'}:{s:GameState;act:Action;variant?:'combined'|'season'}) {
   const [open,setOpen]=useState(variant==='season');
   const [premiumOpen,setPremiumOpen]=useState(false);
-  const [rewardDetail,setRewardDetail]=useState<(typeof seasonRewards)[number]|null>(null);
+  const [rewardDetail,setRewardDetail]=useState<SeasonReward|null>(null);
   const [kind,setKind]=useState<'daily'|'weekly'|'monthly'>('daily');
   const claimable=(questKind:(typeof kinds)[number])=>missionRewardClaimable(s,questKind);
   const level=seasonLevel(s);
@@ -24,16 +24,12 @@ export function MissionHub({s,act,variant='combined'}:{s:GameState;act:Action;va
   const remaining=(end:number)=>{const seconds=Math.max(0,Math.ceil((end-s.savedAt)/1000));const hours=Math.floor(seconds/3600),minutes=Math.floor(seconds%3600/60);return hours?`${hours} h ${minutes} min`:`${minutes} min`;};
   const seasonRemaining=(()=>{const seconds=Math.max(0,Math.ceil((s.season.endsAt-s.savedAt)/1000)),days=Math.floor(seconds/86400),hours=Math.floor(seconds%86400/3600);return `${days} T ${hours} H`;})();
   useEffect(()=>{if(open)requestAnimationFrame(()=>currentReward.current?.scrollIntoView({inline:'center',block:'nearest'}))},[open,level]);
-  const rewardArt=(reward:(typeof seasonRewards)[number])=>reward.artifact
+  const rewardArt=(reward:SeasonReward)=>reward.artifact
     ? <span className="season-core-art" aria-hidden="true"><i/></span>
     : reward.component
       ? <ComponentArt id={reward.component}/>
       : <ResourceArt id="gems"/>;
-  const rewardLabel=(reward:(typeof seasonRewards)[number])=>reward.artifact
-    ? t(s.settings.language,'artifact')
-    : reward.component
-      ? `${reward.amount} ${BALANCE.components[reward.component].name}`
-      : `${reward.gems} Gems`;
+  const rewardLabel=(reward:SeasonReward)=>[reward.artifact?t(s.settings.language,'artifact'):null,reward.component?`${reward.amount} ${BALANCE.components[reward.component].name}`:null,reward.gems?`${reward.gems} Gems`:null].filter(Boolean).join(' · ');
 
   return <section className={`mission-hub ${variant==='season'?'season-standalone':''}`}>
     {variant==='combined'&&<button className="mission-hub-toggle" aria-expanded={open} aria-controls="mission-drawer" onClick={()=>setOpen(!open)}>
@@ -49,12 +45,12 @@ export function MissionHub({s,act,variant='combined'}:{s:GameState;act:Action;va
         <section className="pass-status"><div><b>FREE PASS</b><small>✓ {s.settings.language==='de'?'Aktiv':'Active'}</small></div><div data-premium-state="unavailable"><b>PREMIUM PASS</b><small>{s.settings.language==='de'?'Nicht aktiviert':'Not activated'}</small></div><button onClick={()=>setPremiumOpen(true)}>{s.settings.language==='de'?'PREMIUM FREISCHALTEN':'UNLOCK PREMIUM'}</button></section>
         <div className="reward-legend"><span><i className="free-marker"/> {t(s.settings.language,'free')}</span><span><i className="premium-marker"/> {t(s.settings.language,'premiumInactive')}</span></div>
         <div className="season-reward-track" aria-label={t(s.settings.language,'rewardTrack')}>
-          {seasonRewards.map(reward=>{const unlocked=reward.level<=level,claimed=s.season.claimed.includes(reward.level),available=unlocked&&!claimed;return <article ref={reward.level===level?node=>{currentReward.current=node}:undefined} className={`reward-tier ${available?'available':''} ${claimed?'claimed':''}`} key={reward.level}>
-            <b className="reward-level">LV {reward.level}</b>
-            <button className="reward-card free" disabled={!available} onClick={()=>act('season-claim',reward.level)} aria-label={`${t(s.settings.language,'level')} ${reward.level}: ${rewardLabel(reward)}. ${claimed?t(s.settings.language,'claimed'):available?t(s.settings.language,'claimable'):t(s.settings.language,'locked')}`}>
+          {seasonRewardTiers.map(tier=>{const reward=tier.free,premium=tier.premium,unlocked=tier.level<=level,claimed=s.season.claimed.includes(tier.level),available=unlocked&&!claimed;return <article ref={tier.level===level?node=>{currentReward.current=node}:undefined} className={`reward-tier ${tier.milestone?'milestone':''} ${available?'available':''} ${claimed?'claimed':''}`} key={tier.level}>
+            <b className="reward-level">LV {tier.level}{tier.milestone&&<small>MILESTONE</small>}</b>
+            <button className="reward-card free" disabled={!available} onClick={()=>act('season-claim',tier.level)} aria-label={`${t(s.settings.language,'level')} ${tier.level}: ${rewardLabel(reward)}. ${claimed?t(s.settings.language,'claimed'):available?t(s.settings.language,'claimable'):t(s.settings.language,'locked')}`}>
               {rewardArt(reward)}<span>{rewardLabel(reward)}</span><small>{claimed?`✓ ${t(s.settings.language,'claimed')}`:available?t(s.settings.language,'claim'):t(s.settings.language,'stillLocked')}</small>
             </button>
-            <button className="reward-card premium locked" onClick={()=>setRewardDetail(reward)} aria-label={t(s.settings.language,'premiumRewardLocked',{level:reward.level})}>{rewardArt(reward)}<span>{rewardLabel(reward)}</span><small>PREMIUM · {t(s.settings.language,'passInactive')}</small></button>
+            <button className="reward-card premium locked" onClick={()=>setRewardDetail(premium)} aria-label={t(s.settings.language,'premiumRewardLocked',{level:tier.level})}>{rewardArt(premium)}<span>{rewardLabel(premium)}</span><small>PREMIUM · {t(s.settings.language,'passInactive')}</small></button>
           </article>})}
         </div>
       </section>

@@ -512,3 +512,9 @@ Die Profilursache lag in nicht konsequent begrenzten Grid-/Flex-Kindern zusammen
 - [ ] Anschließend dieselben Flows bei 375×812, 390×844, 393×852, 402×874 und 430×932 prüfen.
 - [ ] Lange Model-, Item-, Season-, Prestige- und Research-Details scrollen; Header, Close und Footer müssen stehen bleiben.
 - [ ] Mit eingeblendeter iOS-Tastatur prüfen, dass `dvh` schrumpft und kein Overlay-CTA hinter Keyboard oder BottomNav gerät.
+
+## Abnahme Prestige-/Season-Pass (6. Oktober 2026)
+- [ ] Prestige mit 1/5/10/25/50/100+ Zyklus-INT im Simulator vergleichen; neuer Run muss deutlich schneller wirken.
+- [ ] Prestige-Confirmation bei 375×667 und 430×932 auf Hierarchie, CTA und Overlay-Safe-Area prüfen.
+- [ ] ResourceBar bei 375/390/393/402/430 px mit langen deutschen Zahlen prüfen.
+- [ ] Alle 50 Season-Level scrollen; Free/Premium-Unterschiede, 5er-Meilensteine, Level 30 und Level 50 visuell prüfen.

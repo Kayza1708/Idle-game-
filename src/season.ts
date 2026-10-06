@@ -1,8 +1,12 @@
-import {GameState,ComponentId,SeasonState} from './economy';
+import {BALANCE,GameState,ComponentId,SeasonState} from './economy';
 import {addEvent} from './telemetry';
 export const SEASON_DAYS=30,SEASON_LEVELS=50,SEASON_XP_PER_LEVEL=1000,SEASON_GRACE_DAYS=7;
 export type SeasonReward={level:number;gems?:number;component?:ComponentId;amount?:number;artifact?:string};
-export const seasonRewards:SeasonReward[]=Array.from({length:SEASON_LEVELS},(_,i)=>{const level=i+1;if(level===50)return{level,artifact:'boot-sequence-core',gems:250};if(level%10===0)return{level,gems:100,component:level>=40?'quantumCores':level>=30?'nanotubes':'graphene',amount:Math.max(1,level/10)};if(level%5===0)return{level,gems:40,component:level>=25?'graphene':'photonicLenses',amount:level>=25?2:5};return{level,gems:10+(level%3)*5,component:level>20?'titaniumBolts':'circuits',amount:level>20?3:8};});
+export type SeasonRewardTier={level:number;free:SeasonReward;premium:SeasonReward;milestone:boolean};
+const rewardFor=(level:number,track:'free'|'premium'):SeasonReward=>{const config=BALANCE.seasonRewards[track],milestone=level%5===0;if(milestone){const index=level/5-1;return{level,gems:config.milestoneGems[index],component:config.milestoneComponents[index] as ComponentId,amount:config.milestoneAmounts[index],...(level===SEASON_LEVELS?{artifact:'boot-sequence-core'}:{})}}const band=Math.min(4,Math.floor((level-1)/10));return{level,gems:config.regularGems[band]+level%3*2,component:config.regularComponents[band] as ComponentId,amount:config.regularAmounts[band]+level%3}};
+export const seasonRewardTiers:SeasonRewardTier[]=Array.from({length:SEASON_LEVELS},(_,i)=>{const level=i+1;return{level,free:rewardFor(level,'free'),premium:rewardFor(level,'premium'),milestone:level%5===0}});
+/** Existing claims and saves continue to address the free track by level. */
+export const seasonRewards:SeasonReward[]=seasonRewardTiers.map(tier=>tier.free);
 const levelFor=(season:SeasonState)=>Math.min(SEASON_LEVELS,Math.floor(season.xp/SEASON_XP_PER_LEVEL));
 export const seasonLevel=(s:GameState)=>levelFor(s.season);
 export const seasonProgress=(s:GameState)=>s.season.xp>=SEASON_LEVELS*SEASON_XP_PER_LEVEL?1:(s.season.xp%SEASON_XP_PER_LEVEL)/SEASON_XP_PER_LEVEL;

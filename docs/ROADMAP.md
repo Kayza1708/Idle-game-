@@ -598,3 +598,10 @@ Season/Mission Hub and Prestige received crash fixes after browser playtesting. 
 - [x] Prestige- und Research-Aktionen bleiben für verfügbare, gesperrte, laufende und abgeschlossene Zustände im Footer sichtbar.
 - [x] Offline-Report verwendet dieselbe Header-/Body-/Footer-Höhenlogik.
 - [ ] Reale CTA-Sichtbarkeit und Tappbarkeit auf den sechs Ziel-iPhone-Viewports bleibt in Xcode abzunehmen.
+
+## Prestige- und Season-Wertigkeit (6. Oktober 2026)
+- [x] Permanenten INT-Bonus auf eine stärkere, weiterhin logarithmisch abflachende autoritative Kurve umgestellt.
+- [x] Prestige-Confirmation als goldbetonten Mobile-Moment mit breitem Primär-CTA und sekundärem Abbrechen neu gegliedert.
+- [x] ResourceBar nutzt ohne künstlichen linken Spacer die gesamte Breite vor dem 44-px-Menübereich.
+- [x] Free- und Premium-Season-Vorschauen über alle 50 Level getrennt; 5er-Meilensteine und Finale hervorgehoben.
+- [ ] Neue Balance und visuelle Season-/Prestige-Hierarchie im iPhone-Simulator abnehmen.
