@@ -46,7 +46,7 @@ describe('persistent authoritative action states',()=>{
  it('always renders research available, blocked, running and completed states',()=>{
   const research=panels.slice(panels.indexOf('export function Research'),panels.indexOf('export function Inventory'));
   expect(research).toContain("ctaState=done?'completed':running?'running'");
-  expect(research).toContain("!freeLab?'lab':s.data<cost?'data':'available'");
+  expect(research).toContain("preview.reason==='lab'?'lab':!preview.resources.affordable?'data':'available'");
   expect(research).toContain('data-cta-state={ctaState} disabled={!!reason}');
   expect(research).toContain("act('research-project',id)");
  });

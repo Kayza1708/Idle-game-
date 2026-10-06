@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import app from './App.tsx?raw';
 import panels from './Panels.tsx?raw';
+import contracts from './AnalysisContracts.tsx?raw';
 import meta from './MetaHub.tsx?raw';
 import shop from './GemShopPanel.tsx?raw';
 import art from './GameArt.tsx?raw';
@@ -31,13 +32,15 @@ describe('mobile interaction polish',()=>{
   expect(css).toMatch(/\.workshop-action \.core-construct\{[^}]*left:50%[^}]*transform:translate\(-50%,-50%\)/);
   expect(css).toMatch(/\.workshop-action \.tap-surface\{[^}]*contain:layout paint/);
  });
- it('anchors research tabs to the shared scroller and offers only short analysis actions',()=>{
+ it('anchors research tabs to the shared scroller and exposes both real analysis contracts',()=>{
   expect(css).toContain('.research-tabs{top:0');
   const analysis=panels.slice(panels.indexOf("{view==='analysis'"),panels.indexOf("{view==='breakthroughs'"));
-  expect(analysis).not.toContain("'long'");
-  expect(analysis).not.toContain('Analyseslot');
-  expect(analysis).toContain("act('experiment',id,'short')");
-  expect(analysis).toContain("'ANALYSE STARTEN'");
+  expect(analysis).toContain('<AnalysisContracts s={s} act={act}/>');
+  expect(contracts).toMatch(/\[["']short["'],\s*["']long["']\]/);
+  expect(contracts).toMatch(/analysisAffordability\(\s*s,\s*id,\s*length\s*\)/);
+  expect(contracts).toMatch(/analysisBlockReason\(\s*s,\s*id,\s*length/);
+  expect(contracts).toMatch(/act\(["']experiment["'],\s*id,\s*length\)/);
+  expect(contracts).toContain('ANALYSE STARTEN');
  });
  it.each([375,390,393,402,430])('keeps claim and dynamic values bounded at %ipx',width=>{
   expect(width).toBeGreaterThanOrEqual(375);

@@ -570,3 +570,20 @@ enthalten; keine offene Branch-Abhängigkeit. Details, Reproduktionen, numerisch
 Präzision und Exportlücken: `preview-export-audit.md`.
 Die optionalen Langzeitmessungen und Schicht-3-Referenzentscheidungen bleiben ein
 separater Auftrag; dafür keine Referenzen oder Economy-Parameter geändert.
+
+## Übergabe Auftrag 6
+
+PR #70 ist bereits in Main `9340b1a` enthalten. Eigener Branch
+`codex/existing-mechanics-ui`, keine offene PR-Abhängigkeit. Bedienwege für Module,
+Iteminstanzen/Verbesserungen/Fusion, Forschungsqueue und beide Analyseverträge
+sind mit echten Domainaktionen verbunden. Die globale Navigation-CSS-Ursache der
+Axiom-Überdeckung ist beseitigt. Audit, Vorher/Nachher und kurze Tests:
+[mechanics-ui-audit.md](mechanics-ui-audit.md); Browsernachweise:
+`screenshots/mechanics-ui/` und `scripts/browser-mechanics.py`.
+
+Feste Trainingsrate und feste Relay-/Archive-Typbelohnungen erhalten keine neue
+Upgrade-Mathematik. Wirkungslose Skalierungswege bleiben klar gesperrt und offen.
+Module sind echte Rezeptzutaten, keine Produktionsmultiplikatoren. Dedizierte
+Modulgrafiken fehlen; bestehendes Werkbankmotiv verwendet. Bekannte Schicht-3-
+Referenzabweichungen und Langzeitbalance bleiben unverändert. Kein vollständiger
+Suite-/CI-/Balance-Nachweis; `[skip ci]` verhindert hier verbotene Langkampagnen.

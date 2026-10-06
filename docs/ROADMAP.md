@@ -667,3 +667,13 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Lokaler ZIP-Export mit Kontext-/Auftragszuordnung, Reservierungen, Startkapital und Messlücken.
 - [x] Kurze gezielte Prüfungen und mobile DE/EN-Details; siehe `preview-export-audit.md`.
 - [ ] Gesamtabnahme/Langzeitbalance und bekannte Schicht-3-Referenzabweichungen bleiben separat offen.
+
+## Auftrag 6 – vorhandene Mechaniken bedienen
+
+- [x] Vier Inventarbereiche, Modulrezepte/Reservierungen und konkrete Zutatenquellen.
+- [x] Einzelne Itemdetails, bezahlte wirksame Verbesserungen, bestätigte Fusion mit Instanzschutz.
+- [x] Vorhandene Forschungsqueue mit Reload/Entfernen; Kurz-/Langanalysen und unabhängiger Slot.
+- [x] Werkstatt → Equipment; Axiom-Navigation, 44-px-Ziele und Browsermatrix 360/390/430 DE/EN mit Screenshots.
+- [x] Kurze gezielte Tests, Typecheck, Build und Diffprüfung; siehe `mechanics-ui-audit.md`.
+- [ ] Trainings- und feste Typbelohnungen ohne Verbesserungsskalierung bleiben ausdrücklich offen; keine Ersatzmechanik erfunden.
+- [ ] Dedizierte Modulillustrationen, Schicht-3-Referenzentscheidungen und Langzeitbalance bleiben separat offen.

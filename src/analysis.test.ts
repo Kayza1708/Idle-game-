@@ -1,8 +1,9 @@
 import {describe,expect,it} from 'vitest';
-import {BALANCE,exactEconomyValue,GameState,newGame,startResearchProject} from './economy';
+import {BALANCE,exactEconomyValue,GameState,newGame,startResearchProject,buyHardwareClass,formatScientific} from './economy';
 import {analysisAffordability,analysisBlockReason,cancelExperiment,experimentDuration,experimentSpeed,completeExperiment,queueExperiment} from './experiments';
 import {advance} from './simulation';
 import {restore,serialize} from './storage';
+import {ScientificNumber} from './scientificNumber';
 
 const playable=(now=0):GameState=>({...newGame(now),discovered:['calculator','sbc'],credits:100_000,data:100_000,researchPoints:1_000});
 
@@ -24,7 +25,7 @@ describe('transactional component analyses',()=>{
  });
  it('reports exact shortages, rejects double starts, and cancels without refund',()=>{
   const poor={...playable(),credits:1,data:2},cost=BALANCE.analysisCosts.artifact.short;
-  expect(analysisBlockReason(poor,'artifact','short')).toBe(`${cost.data-2} Daten fehlen.`);
+  expect(analysisBlockReason(poor,'artifact','short')).toBe(`${formatScientific(ScientificNumber.from(cost.data-2),1)} Daten fehlen.`);
   const started=queueExperiment(playable(),'hardware',0,'short'),again=queueExperiment(started,'artifact',0,'long');
   expect(again.experiments.active?.id).toBe(started.experiments.active?.id);expect(again.credits).toBe(started.credits);
   const cancelled=cancelExperiment(started);expect(cancelled.experiments.active).toBeNull();expect(cancelled.credits).toBe(started.credits);
@@ -42,7 +43,8 @@ it('persists an active analysis across reload and rewards it exactly once offlin
 
 it('reports affordability including data ETA and grants rare component from Analyse III',()=>{
  const poor={...playable(),data:0},quote=analysisAffordability(poor,'artifact','short');
- expect(quote.missing.data).toBe(BALANCE.analysisCosts.artifact.short.data);expect(quote.secondsToData).toBeGreaterThan(0);
+ expect(quote.missing.data).toBe(BALANCE.analysisCosts.artifact.short.data);expect(quote.secondsToData).toBeNull();
+ const producing=buyHardwareClass(poor,'calculator',1),fundedQuote=analysisAffordability(producing,'artifact','short');expect(producing.hardwareCounts.calculator).toBe(1);expect(exactEconomyValue(producing,'credits').compare(exactEconomyValue(poor,'credits'))).toBeLessThan(0);expect(fundedQuote.secondsToData).toBeGreaterThan(0);
  const started=queueExperiment({...playable(),credits:1e12,data:1e12,nodes:['analysis1','analysis2','analysis3']},'artifact',0,'short'),done=completeExperiment(started,started.experiments.active!.endsAt,()=>1);
  expect(done.componentInventory.quantumCores).toBeGreaterThanOrEqual(1);
 });
