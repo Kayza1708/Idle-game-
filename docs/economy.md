@@ -428,3 +428,22 @@ Bestehende Besitzstände in `purchasedResearchLabs` bleiben erhalten und werden 
 - New saves begin with zero owned hardware and therefore zero passive Credit production; existing versioned saves are unchanged.
 - A base active impulse grants 1 Credit before existing tap, research, item, critical, and prestige multipliers so the first Calculator can be earned actively.
 - Overclock now triggers automatically every 100 paid active impulses and retains the existing 15-second ×2 Credit effect; the counter immediately starts its next cycle.
+
+
+## Prestige-Bonus- und Season-Kurve (6. Oktober 2026)
+- Alte INT-Bonusformel: `1 + 0,5 × log10(1 + Zyklus-INT)`.
+- Neue INT-Bonusformel: `1 + 0,55 × ln(1 + Zyklus-INT)`. Die Kurve ist weiterhin logarithmisch und verwendet ausschließlich tatsächlich im aktuellen Axiom-Zyklus verdiente INT; Ausgeben im Baum reduziert sie nicht.
+
+| INT | Alt | Neu | Verbesserung |
+|---:|---:|---:|---:|
+| 1 | ×1.151 | ×1.381 | +20.1 % |
+| 5 | ×1.389 | ×1.985 | +42.9 % |
+| 10 | ×1.521 | ×2.319 | +52.5 % |
+| 25 | ×1.707 | ×2.792 | +63.5 % |
+| 50 | ×1.854 | ×3.163 | +70.6 % |
+| 100 | ×2.002 | ×3.538 | +76.7 % |
+| 250 | ×2.200 | ×4.039 | +83.6 % |
+| 500 | ×2.350 | ×4.419 | +88.1 % |
+| 1000 | ×2.500 | ×4.800 | +92.0 % |
+
+Die 50 Season-Level verwenden weiterhin nur vorhandene Reward-Typen (Gems, Komponenten und das bestehende Boot-Sequence-Artefakt). Free-Claims bleiben anhand der bisherigen Levelnummern gespeichert. Premium ist weiterhin nur Vorschau und nicht claimbar, solange keine verifizierte native Entitlement-Integration existiert. Die zentralen Mengen und Komponentenfolgen liegen in `BALANCE.seasonRewards`.

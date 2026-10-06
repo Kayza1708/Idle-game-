@@ -18,18 +18,20 @@ describe('final mobile interaction contracts',()=>{
   expect(panels).toContain('clampScale');
   expect(panels).toContain('<svg className="prestige-links"');
   expect(css).toContain('.prestige-map-shell{position:relative;width:100%;max-width:100%;min-width:0');
-  expect(css).toContain('overflow:hidden!important;touch-action:none');
+  expect(css).toContain('overflow:hidden;touch-action:none');
  });
- it.each([375,390,393,402,430])('uses a stable four-column mission row at %ipx',width=>{
+ it.each([375,390,393,402,430])('uses an explicit flexible mission row at %ipx',width=>{
   expect(width).toBeGreaterThanOrEqual(375);
-  expect(css).toContain('grid-template-columns:28px minmax(0,1fr) 45px 56px!important');
+  expect(panels).toContain('className="mission-content"');
+  expect(css).toContain('flex:1 1 auto;min-width:0');
   expect(css).toContain('word-break:normal;hyphens:none');
  });
  it('does not render anonymous research artwork placeholders',()=>{
   const research=panels.slice(panels.indexOf('export function Research'),panels.indexOf('export function Inventory'));
   expect(research).not.toContain('research-placeholder');
-  expect(research).toContain('<summary><span aria-hidden="true">ⓘ</span><span>');
-  expect(css).toContain('background:transparent;color:#79c9bf');
+  expect(research).toContain('onClick={()=>setSelectedResearch(id)}');
+  expect(research).toContain('<MobileDetailSheet title={copy.name}');
+  expect(research).not.toContain('<details><summary>');
  });
  it('offers a confirmed unrestricted local reset',()=>{
   expect(meta).toContain('setResetConfirm(true)');
@@ -39,14 +41,15 @@ describe('final mobile interaction contracts',()=>{
   expect(app).toContain('await removeDurableGame();removeGame(storage.current);location.reload()');
  });
  it('shows selected-purchase output and a compact buy action',()=>{
-  expect(panels).toContain('classCompute(s,id,owned+count)-output');
-  expect(panels).toContain("'beim Kauf'");
+  expect(panels).toContain('hardwarePurchaseComputeGain(s,id,count)');
+  expect(panels).toContain("'Nächster Kauf'");
+  expect(panels).toContain('className="hardware-output"');
   expect(panels).toContain("'KAUFEN'");
   expect(panels).not.toContain('className="hardware-buy" disabled={!affordable} onClick={()=>act(\'buy-class\',id)} aria-label={`${hardwareText(id,language).name} kaufen`}>+</button>');
  });
  it('uses localized header suffixes without ellipsis',()=>{
   expect(panels).toContain("[1e12,'Bio.'],[1e9,'Mrd.'],[1e6,'Mio.'],[1e3,'Tsd.']");
-  expect(css).toContain('.resource-bar b{font-size:clamp');
-  expect(css).not.toMatch(/\.resource-bar b\{[^}]*text-overflow:ellipsis/);
+  expect(css).toContain('.resource-cell>b{font-size:clamp');
+  expect(css).not.toMatch(/\.resource-cell>b\{[^}]*text-overflow:ellipsis/);
  });
 });
