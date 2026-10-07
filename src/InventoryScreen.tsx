@@ -1,3 +1,4 @@
+import {RecipeIngredient} from './RecipeIngredient';
 import {blueprintQuote} from './blueprints';
 import {specialItemEffectText,specialItemComparisonText} from './specialItemText';
 import {TrainingItemCostComparison} from "./TrainingCostDetails";
@@ -122,43 +123,25 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 rarityText(recipe.result.rarity, language)}{" "}
               · {recipe.durationPerUnit * recipe.quantity} s
             </p>
-            <p>
-              {formatScientific(
+            <p className="manufacturing-cost">
+              {de?'Herstellungskosten':'Manufacturing costs'}: {formatScientific(
                 ScientificNumber.from(recipe.ingredients.data),
                 1,
               )}{" "}
               Data
             </p>
-            <ul>
+            <ul className="recipe-ingredients">
               {Object.entries(recipe.ingredients.components).map(([key, n]) => (
-                <li key={key}>
-                  <button
-                    className="ingredient-link"
-                    onClick={() =>
-                      q.missingComponents[key as ComponentId]
-                        ? source()
-                        : setComponent(key as ComponentId)
-                    }
-                  >
-                    {componentText(key as ComponentId, language).name} ×{n}
-                    {q.missingComponents[key as ComponentId]
-                      ? ` · ${de ? "Fehlt" : "Missing"} ${q.missingComponents[key as ComponentId]}`
-                      : ""}
-                  </button>
-                </li>
+                <RecipeIngredient key={key} name={componentText(key as ComponentId,language).name}
+                  icon={<ComponentArt id={key as ComponentId}/>} balance={s.componentInventory[key as ComponentId]}
+                  required={n??0} missing={q.missingComponents[key as ComponentId]??0} de={de}
+                  onClick={()=>q.missingComponents[key as ComponentId]?source():setComponent(key as ComponentId)}/>
               ))}
               {Object.entries(recipe.ingredients.modules).map(([key, n]) => (
-                <li key={key}>
-                  <button
-                    className="ingredient-link"
-                    onClick={() => moduleLink(key as ModuleId)}
-                  >
-                    {moduleText(key as ModuleId, language)} ×{n}
-                    {q.missingModules[key as ModuleId]
-                      ? ` · ${de ? "Fehlt" : "Missing"} ${q.missingModules[key as ModuleId]}`
-                      : ""}
-                  </button>
-                </li>
+                <RecipeIngredient key={key} name={moduleText(key as ModuleId,language)}
+                  icon={<ActivityArt id="workbench"/>} balance={s.modules[key as ModuleId]}
+                  required={n??0} missing={q.missingModules[key as ModuleId]??0} de={de}
+                  onClick={()=>moduleLink(key as ModuleId)}/>
               ))}
             </ul>
           </>

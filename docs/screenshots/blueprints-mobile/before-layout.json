@@ -1,0 +1,547 @@
+{
+  "sourceCommit": "adc4bd594f92031fce4c94581100ef3d8c16db45",
+  "width": 390,
+  "language": "en",
+  "ingredients": [
+    {
+      "text": "Circuits \u00d730",
+      "rect": {
+        "x": 43,
+        "y": 128.6875,
+        "width": 322,
+        "height": 44,
+        "top": 128.6875,
+        "right": 365,
+        "bottom": 172.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 139.6875,
+          "width": 78.0625,
+          "height": 22,
+          "top": 139.6875,
+          "right": 134.0625,
+          "bottom": 161.6875,
+          "left": 56
+        },
+        {
+          "x": 134.0625,
+          "y": 139.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 139.6875,
+          "right": 148.5,
+          "bottom": 161.6875,
+          "left": 134.0625
+        },
+        {
+          "x": 148.5,
+          "y": 139.6875,
+          "width": 19.4375,
+          "height": 22,
+          "top": 139.6875,
+          "right": 167.9375,
+          "bottom": 161.6875,
+          "left": 148.5
+        }
+      ]
+    },
+    {
+      "text": "Copper Coils \u00d712",
+      "rect": {
+        "x": 43,
+        "y": 172.6875,
+        "width": 322,
+        "height": 44,
+        "top": 172.6875,
+        "right": 365,
+        "bottom": 216.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 183.6875,
+          "width": 119.796875,
+          "height": 22,
+          "top": 183.6875,
+          "right": 175.796875,
+          "bottom": 205.6875,
+          "left": 56
+        },
+        {
+          "x": 175.796875,
+          "y": 183.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 183.6875,
+          "right": 190.234375,
+          "bottom": 205.6875,
+          "left": 175.796875
+        },
+        {
+          "x": 190.234375,
+          "y": 183.6875,
+          "width": 19.4375,
+          "height": 22,
+          "top": 183.6875,
+          "right": 209.671875,
+          "bottom": 205.6875,
+          "left": 190.234375
+        }
+      ]
+    },
+    {
+      "text": "Silicon Wafers \u00d718",
+      "rect": {
+        "x": 43,
+        "y": 216.6875,
+        "width": 322,
+        "height": 44,
+        "top": 216.6875,
+        "right": 365,
+        "bottom": 260.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 227.6875,
+          "width": 140.921875,
+          "height": 22,
+          "top": 227.6875,
+          "right": 196.921875,
+          "bottom": 249.6875,
+          "left": 56
+        },
+        {
+          "x": 196.921875,
+          "y": 227.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 227.6875,
+          "right": 211.359375,
+          "bottom": 249.6875,
+          "left": 196.921875
+        },
+        {
+          "x": 211.359375,
+          "y": 227.6875,
+          "width": 19.4375,
+          "height": 22,
+          "top": 227.6875,
+          "right": 230.796875,
+          "bottom": 249.6875,
+          "left": 211.359375
+        }
+      ]
+    },
+    {
+      "text": "Titanium Alloy \u00d78",
+      "rect": {
+        "x": 43,
+        "y": 260.6875,
+        "width": 322,
+        "height": 44,
+        "top": 260.6875,
+        "right": 365,
+        "bottom": 304.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 271.6875,
+          "width": 144.453125,
+          "height": 22,
+          "top": 271.6875,
+          "right": 200.453125,
+          "bottom": 293.6875,
+          "left": 56
+        },
+        {
+          "x": 200.453125,
+          "y": 271.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 271.6875,
+          "right": 214.890625,
+          "bottom": 293.6875,
+          "left": 200.453125
+        },
+        {
+          "x": 214.890625,
+          "y": 271.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 271.6875,
+          "right": 224.609375,
+          "bottom": 293.6875,
+          "left": 214.890625
+        }
+      ]
+    },
+    {
+      "text": "Photonic Lenses \u00d72",
+      "rect": {
+        "x": 43,
+        "y": 304.6875,
+        "width": 322,
+        "height": 44,
+        "top": 304.6875,
+        "right": 365,
+        "bottom": 348.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 315.6875,
+          "width": 155.8125,
+          "height": 22,
+          "top": 315.6875,
+          "right": 211.8125,
+          "bottom": 337.6875,
+          "left": 56
+        },
+        {
+          "x": 211.8125,
+          "y": 315.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 315.6875,
+          "right": 226.25,
+          "bottom": 337.6875,
+          "left": 211.8125
+        },
+        {
+          "x": 226.25,
+          "y": 315.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 315.6875,
+          "right": 235.96875,
+          "bottom": 337.6875,
+          "left": 226.25
+        }
+      ]
+    },
+    {
+      "text": "Graphene \u00d71",
+      "rect": {
+        "x": 43,
+        "y": 348.6875,
+        "width": 322,
+        "height": 44,
+        "top": 348.6875,
+        "right": 365,
+        "bottom": 392.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 359.6875,
+          "width": 90.890625,
+          "height": 22,
+          "top": 359.6875,
+          "right": 146.890625,
+          "bottom": 381.6875,
+          "left": 56
+        },
+        {
+          "x": 146.890625,
+          "y": 359.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 359.6875,
+          "right": 161.328125,
+          "bottom": 381.6875,
+          "left": 146.890625
+        },
+        {
+          "x": 161.328125,
+          "y": 359.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 359.6875,
+          "right": 171.046875,
+          "bottom": 381.6875,
+          "left": 161.328125
+        }
+      ]
+    },
+    {
+      "text": "Nanotubes \u00d70",
+      "rect": {
+        "x": 43,
+        "y": 392.6875,
+        "width": 322,
+        "height": 44,
+        "top": 392.6875,
+        "right": 365,
+        "bottom": 436.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 403.6875,
+          "width": 104.25,
+          "height": 22,
+          "top": 403.6875,
+          "right": 160.25,
+          "bottom": 425.6875,
+          "left": 56
+        },
+        {
+          "x": 160.25,
+          "y": 403.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 403.6875,
+          "right": 174.6875,
+          "bottom": 425.6875,
+          "left": 160.25
+        },
+        {
+          "x": 174.6875,
+          "y": 403.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 403.6875,
+          "right": 184.40625,
+          "bottom": 425.6875,
+          "left": 174.6875
+        }
+      ]
+    },
+    {
+      "text": "Superconductors \u00d70",
+      "rect": {
+        "x": 43,
+        "y": 436.6875,
+        "width": 322,
+        "height": 44,
+        "top": 436.6875,
+        "right": 365,
+        "bottom": 480.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 447.6875,
+          "width": 169.6875,
+          "height": 22,
+          "top": 447.6875,
+          "right": 225.6875,
+          "bottom": 469.6875,
+          "left": 56
+        },
+        {
+          "x": 225.6875,
+          "y": 447.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 447.6875,
+          "right": 240.125,
+          "bottom": 469.6875,
+          "left": 225.6875
+        },
+        {
+          "x": 240.125,
+          "y": 447.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 447.6875,
+          "right": 249.84375,
+          "bottom": 469.6875,
+          "left": 240.125
+        }
+      ]
+    },
+    {
+      "text": "Neural Crystals \u00d70",
+      "rect": {
+        "x": 43,
+        "y": 480.6875,
+        "width": 322,
+        "height": 44,
+        "top": 480.6875,
+        "right": 365,
+        "bottom": 524.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 491.6875,
+          "width": 153.859375,
+          "height": 22,
+          "top": 491.6875,
+          "right": 209.859375,
+          "bottom": 513.6875,
+          "left": 56
+        },
+        {
+          "x": 209.859375,
+          "y": 491.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 491.6875,
+          "right": 224.296875,
+          "bottom": 513.6875,
+          "left": 209.859375
+        },
+        {
+          "x": 224.296875,
+          "y": 491.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 491.6875,
+          "right": 234.015625,
+          "bottom": 513.6875,
+          "left": 224.296875
+        }
+      ]
+    },
+    {
+      "text": "Quantum Cores \u00d70",
+      "rect": {
+        "x": 43,
+        "y": 524.6875,
+        "width": 322,
+        "height": 44,
+        "top": 524.6875,
+        "right": 365,
+        "bottom": 568.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 535.6875,
+          "width": 147.5625,
+          "height": 22,
+          "top": 535.6875,
+          "right": 203.5625,
+          "bottom": 557.6875,
+          "left": 56
+        },
+        {
+          "x": 203.5625,
+          "y": 535.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 535.6875,
+          "right": 218,
+          "bottom": 557.6875,
+          "left": 203.5625
+        },
+        {
+          "x": 218,
+          "y": 535.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 535.6875,
+          "right": 227.71875,
+          "bottom": 557.6875,
+          "left": 218
+        }
+      ]
+    },
+    {
+      "text": "Compute Bus \u00d71",
+      "rect": {
+        "x": 43,
+        "y": 568.6875,
+        "width": 322,
+        "height": 44,
+        "top": 568.6875,
+        "right": 365,
+        "bottom": 612.6875,
+        "left": 43
+      },
+      "font": "Inter, ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "align": "left",
+      "transform": "none",
+      "indent": "0px",
+      "range": [
+        {
+          "x": 56,
+          "y": 579.6875,
+          "width": 120.0625,
+          "height": 22,
+          "top": 579.6875,
+          "right": 176.0625,
+          "bottom": 601.6875,
+          "left": 56
+        },
+        {
+          "x": 176.0625,
+          "y": 579.6875,
+          "width": 14.4375,
+          "height": 22,
+          "top": 579.6875,
+          "right": 190.5,
+          "bottom": 601.6875,
+          "left": 176.0625
+        },
+        {
+          "x": 190.5,
+          "y": 579.6875,
+          "width": 9.71875,
+          "height": 22,
+          "top": 579.6875,
+          "right": 200.21875,
+          "bottom": 601.6875,
+          "left": 190.5
+        }
+      ]
+    }
+  ],
+  "observation": "Text DOM ranges stay inside buttons although screenshot glyphs are partly clipped."
+}

@@ -747,4 +747,11 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] 174 kurze gezielte Tests, Typecheck, Build, Diffprüfung und mobile 390 DE/EN mit Lernen/zwei bezahlten Aufträgen; [Audit](blueprint-learning-audit.md).
 - [ ] Keine natürliche Progression oder Langzeit-/Axiombalance bestätigt; bekannte Schicht-3-Abweichungen bleiben offen.
 
-- [ ] 9B: Teilweise links beschnittene englische Zutatenbeschriftungen in mobilen Screenshots gesondert untersuchen; Aktionsabnahme ist keine vollständige visuelle Fehlerfreiheit.
+- [x] 9B.1: Alte englische Screenshotabweichung reproduziert; responsive Zutatenkarten mit Icons/Name/Bestand/Bedarf/Fehlmenge, 360/390/430 DE/EN und alle sechs Item-/zwei Modulrezepte geprüft. [Audit und Diagnosegrenze](blueprint-learning-audit.md#auftrag-9b1--mobile-zutatenkarten).
+
+## Auftrag 9B.1 – mobile Zutatenbeschriftungen
+
+- [x] Darstellung auf gemeinsamem reinem Ingredient-Baustein: eigener Icon-/Texttrack, min-width:0, vollständiger Umbruch, eine/zwei Spalten bei 390 px.
+- [x] 438 reguläre Karten-Geometrieprüfungen und 390 lange Anzeigetextprüfungen; echte Lern-/Item-/Modulaktionen in sechs mobilen Kombinationen.
+- [x] Sechs kurze UI-Tests, Typecheck, Build, Diffprüfung; Vorher/Nachher-Screenshots und Audit ergänzt, bestehender PR #78 aktualisiert.
+- [ ] Der ursprüngliche browserinterne Paintauslöser ist nicht vollständig isoliert; keine unbewiesene DOM-Overflow-Ursache behaupten. Bekannte Balancegrenzen unverändert.
