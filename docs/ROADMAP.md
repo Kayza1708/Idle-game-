@@ -737,3 +737,14 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Gemeinsame DE/EN-Quotes/Before-After in Details/Equipment/Export, getrennte Haupt-/Challenge-Kontexte und begrenzte aktuelle Quotezeilen.
 - [x] 92 gezielte Tests, Typecheck, Build, Diffprüfung; mobile 390 px DE/EN mit tatsächlicher Verbesserung bestanden. [Audit](special-items-audit.md).
 - [ ] Schicht-3-Referenzabweichungen und optionale Langzeit-/Axiombalance bleiben offen; technische Verbesserung bestätigt keine natürliche Progression.
+
+## Auftrag 9B – permanente gelernte Baupläne
+
+- [x] Unveränderte Katalogwerte als einmaliger Lernpreis; reine gemeinsame Quote und atomare explizite Lernaktion mit Doppelklickschutz.
+- [x] Fragmentfreie Herstellung bei unveränderten Komponenten-/Modul-/Data-/Zeitkosten; Queue/Planer verlangen Besitz und lernen nichts ungefragt.
+- [x] Save 42: belegte Altbesitzmigration einschließlich reservierter Aufträge, dauerhafter Reset-Erhalt, getrennte Challenge-/Hauptkontexte und beschädigte Saves geschützt.
+- [x] DE/EN-Lernbestätigung/Status und getrennte Exportereignisse/Besitz-/Herstellungskosten; bestehende Grenzen erhalten.
+- [x] 174 kurze gezielte Tests, Typecheck, Build, Diffprüfung und mobile 390 DE/EN mit Lernen/zwei bezahlten Aufträgen; [Audit](blueprint-learning-audit.md).
+- [ ] Keine natürliche Progression oder Langzeit-/Axiombalance bestätigt; bekannte Schicht-3-Abweichungen bleiben offen.
+
+- [ ] 9B: Teilweise links beschnittene englische Zutatenbeschriftungen in mobilen Screenshots gesondert untersuchen; Aktionsabnahme ist keine vollständige visuelle Fehlerfreiheit.

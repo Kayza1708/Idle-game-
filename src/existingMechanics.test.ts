@@ -1,3 +1,4 @@
+import {learnBlueprint} from './blueprints';
 import {buyNode} from "./prestige";
 import { itemImprovementHasEffect } from "./itemMechanics";
 import { describe, it, expect, vi } from "vitest";
@@ -72,7 +73,7 @@ describe("existing mechanics exposed through their domain contracts", () => {
       savedAt: started.crafting.active!.endsAt!,
     });
     expect(finished.modules.computeBus).toBe(1);
-    const chip = craft(finished, "quantum-chip");
+    const chip = craft(learnBlueprint(finished, "quantum-chip"), "quantum-chip");
     expect(chip.modules.computeBus).toBe(0);
     expect(chip.crafting.active?.ingredients.modules.computeBus).toBe(1);
     expect(chip.crafting.active?.quantity).toBe(1);

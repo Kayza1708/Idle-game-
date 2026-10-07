@@ -1,3 +1,4 @@
+import {blueprintQuote} from './blueprints';
 import {specialItemEffectText,specialItemComparisonText} from './specialItemText';
 import {TrainingItemCostComparison} from "./TrainingCostDetails";
 import { itemImprovementHasEffect } from "./itemMechanics";
@@ -77,6 +78,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
   const recipeCard = (kind: "module" | "item", id: string) => {
     const q = craftingAffordability(s, kind, id, quantity),
       recipe = q.recipe,
+      blueprint = kind==='item'?blueprintQuote(s,id):null,
       name =
         kind === "module"
           ? moduleText(id as ModuleId, language)
@@ -125,8 +127,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 ScientificNumber.from(recipe.ingredients.data),
                 1,
               )}{" "}
-              Data · {recipe.ingredients.blueprints}{" "}
-              {de ? "Bauplanfragmente" : "Blueprint fragments"}
+              Data
             </p>
             <ul>
               {Object.entries(recipe.ingredients.components).map(([key, n]) => (
@@ -173,7 +174,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
         {!q.affordable && (
           <p role="status">{craftingMissingText(q, language)}</p>
         )}
-        {!q.unlocked && (
+        {(kind==='module'?!q.unlocked:!blueprint?.prerequisite) && (
           <button
             onClick={() =>
               kind === "module"
@@ -196,7 +197,16 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                   : "Blueprint: Research Archive in prestige tree"}
           </button>
         )}
-        {q.missingBlueprints > 0 && (
+        {blueprint?.prerequisite && blueprint.price>0 && (
+          <section className="blueprint-learning">
+            <p>{blueprint.learned?(de?'Bauplan dauerhaft gelernt':'Blueprint permanently learned'):
+              `${de?'Einmaliger Lernpreis':'One-time learning price'}: ${blueprint.price} · ${de?'Bestand':'Balance'}: ${blueprint.balance} · ${de?'Fehlt':'Missing'}: ${blueprint.missing}`}</p>
+            {!blueprint.learned && <button disabled={!blueprint.canLearn} onClick={()=>{
+              if(confirm(`${de?'Bauplan lernen':'Learn blueprint'}: ${name}\n${de?'Bauplanfragmente vorher → nachher':'Blueprint fragments before → after'}: ${blueprint.balance} → ${blueprint.balance-blueprint.price}`))act('blueprint-learn',id);
+            }}>{de?'Bauplan lernen':'Learn blueprint'}</button>}
+          </section>
+        )}
+        {(blueprint?.missing??0) > 0 && (
           <button onClick={() => source()}>
             {de
               ? "Bauplanfragmente: Hardwareanalyse"
@@ -318,6 +328,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             <div className="queue-option" key={job.id}>
               <span>
                 {job.recipeId} ×{job.quantity}
+                {job.fragmentContract==='legacy-reserved'&&<small>{de?' · Historische Fragmente bleiben ausgegeben':' · Historical fragments remain spent'}</small>}
               </span>
               <button onClick={() => act("craft-cancel", job.id)}>
                 {de ? "Abbrechen / erstatten" : "Cancel / refund"}

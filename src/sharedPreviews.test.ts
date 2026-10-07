@@ -1,3 +1,4 @@
+import {recipeIds} from './blueprints';
 import {buyNode} from './prestige';
 import * as telemetry from './telemetry';
 import {describe,it,expect,vi} from 'vitest';
@@ -11,7 +12,7 @@ import {ProductionDetails} from './ProductionDetails';
 import {JobDetails} from './JobDetails';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {createElement} from 'react';
-const ready=()=>{let s=addData(addCredits(newGame(0,'preview'),1e6,false),1e6);s=buyHardwareClass(s,'calculator',25);s=buyHardwareClass(s,'sbc');return {...s,completedResearch:['blueprints' as const],blueprintFragments:100,modules:{computeBus:10,dataLattice:10},components:10000,componentInventory:Object.fromEntries(Object.keys(BALANCE.components).map(id=>[id,1000])) as GameState['componentInventory']};};
+const ready=()=>{let s=addData(addCredits(newGame(0,'preview'),1e6,false),1e6);s=buyHardwareClass(s,'calculator',25);s=buyHardwareClass(s,'sbc');return {...s,learnedRecipes:recipeIds,completedResearch:['blueprints' as const],blueprintFragments:100,modules:{computeBus:10,dataLattice:10},components:10000,componentInventory:Object.fromEntries(Object.keys(BALANCE.components).map(id=>[id,1000])) as GameState['componentInventory']};};
 describe('shared domain previews',()=>{
  it('matches real hardware purchases and rechecks changed balances',()=>{const s=newGame(0),q=hardwarePurchasePreview(s,'calculator'),next=buyHardwareClass(s,'calculator');expect(q.allowed).toBe(true);expect(q.cost.toNumber()).toBe(15);expect(exactEconomyValue(next,'credits').toJSON()).toEqual(exactEconomyValue(s,'credits').subtract(q.cost).toJSON());const spent={...s,credits:0,exactEconomy:{...s.exactEconomy,credits:{m:0,e:0}}};expect(buyHardwareClass(spent,'calculator')).toBe(spent);expect(hardwarePurchasePreview(spent,'calculator').resources.missingExact.toNumber()).toBe(15);});
  it('matches training cost, effect, and fixed duration',()=>{const s=ready(),q=trainingPreview(s,'quality'),next=startTraining(s,'quality');expect(q.allowed).toBe(true);expect(next.activeTraining?.dataCost).toBe(q.cost.toNumber());expect(next.activeTraining?.workRequired).toBe(q.duration);expect(exactEconomyValue(next,'data').toJSON()).toEqual(exactEconomyValue(s,'data').subtract(q.cost).toJSON());expect(startTraining({...s,data:0,exactEconomy:{...s.exactEconomy,data:{m:0,e:0}}},'quality').activeTraining).toBeNull();});

@@ -1,3 +1,4 @@
+import {recipeIds} from './blueprints';
 import {researchAreaOrder} from './researchAreas';
 import {runChallenges,challenges} from './retention';
 import {ScientificNumber} from './scientificNumber';
@@ -65,6 +66,7 @@ export function assertDomainState(value:unknown):asserts value is GameState{
  }
  if(s.challengeReturn!==undefined){const result=s.challengeReturn;if(!object(result)||!id(result.runId)||typeof result.success!=='boolean')fail('challengeReturn','ungültige Rückkehr');report(result.report);}
  if(s.challengeMigrationNotice!==undefined&&s.challengeMigrationNotice!=='legacy-challenge-recovered')fail('challengeMigrationNotice','ungültiger Hinweis');
+ if(s.learnedRecipes!==undefined){ids(s.learnedRecipes,recipeIds,'learnedRecipes');if(new Set(s.learnedRecipes).size!==s.learnedRecipes.length)fail('learnedRecipes','doppelter Bauplanbesitz');}
  if(!validEconomyValues(s))fail('ScientificNumber-Ledger','ungültiger Ressourcenwert');
  counts(s.componentInventory,componentIds,'componentInventory');counts(s.modules,Object.keys(BALANCE.modules),'modules');
  counts(s.hardwareCounts,hardwareIds,'hardwareCounts');counts(s.researchLevels,Object.keys(BALANCE.repeatableResearch),'researchLevels');
@@ -105,8 +107,10 @@ export function assertDomainState(value:unknown):asserts value is GameState{
  if(!object(s.crafting)||!Array.isArray(s.crafting.queue)||s.crafting.queue.length>3||(s.crafting.active===null&&s.crafting.queue.length>0))fail('crafting','ungültige Warteschlange');
  function job(value:unknown,queued:boolean){
   if(!object(value))fail('crafting','Auftragsobjekt fehlt');
-  const j=value as CraftingJob,recipe=craftingRecipe(j.kind,j.recipeId,j.quantity);
+  const j=value as CraftingJob,recipe=craftingRecipe(j.kind,j.recipeId,j.quantity,j.fragmentContract==='legacy-reserved'||s.learnedRecipes===undefined);
+  if(j.fragmentContract!==undefined&&j.fragmentContract!=='legacy-reserved')fail('crafting.fragmentContract','unbekannter Reservierungsvertrag');
   if(!recipe)return fail('crafting','unbekanntes Rezept oder ungültige Menge');
+  if(s.learnedRecipes!==undefined&&j.kind==='item'&&BALANCE.itemRecipes[j.recipeId as keyof typeof BALANCE.itemRecipes].blueprints>0&&!s.learnedRecipes.includes(j.recipeId as keyof typeof BALANCE.itemRecipes))fail('crafting','Bauplan für reservierten Auftrag nicht gelernt');
   if(!integer(j.completed)||j.completed>=j.quantity||j.durationPerUnit!==recipe.durationPerUnit)fail('crafting','ungültige Menge oder Laufzeit');
   claim(j.id,'crafting.id');reservation(j.ingredients,'crafting.ingredients');
   if(!sameReservation(j.ingredients,recipe.ingredients))fail('crafting.ingredients','Reservierung entspricht nicht der gesamten Rezeptmenge');
