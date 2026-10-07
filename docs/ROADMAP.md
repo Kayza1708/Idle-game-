@@ -703,3 +703,12 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] DE/EN-Bereiche, kompakte Abschlüsse und eine deterministische Preview mit echtem Node-Detail-Link; erste Analyse/Crafting erreichbar.
 - [x] Kurze gezielte Tests, Typecheck, Build, Diffprüfung und Browser 390 px DE/EN; [Audit](research-area-audit.md).
 - [ ] Schicht-3-Referenzabweichungen, Relay-/Archiv-Skalierung und Langzeitbalance bleiben separat offen.
+
+## Auftrag 8A – Credit-Hardware und Sparziele
+
+- [x] Alle 15 Klassen mit tatsächlichem Preis erreichbar; Kauf allein gegen Credits, Discovery und Klassenfolgen erst bei realem Kauf; bestehende Challenge-/Automationregeln erhalten.
+- [x] Gemeinsame wissenschaftliche Klassen-/Meilenstein-Sparziele, Fehlmenge/finite ETA/echte Wirkung und richtige Detailnavigation.
+- [x] Frische Domainmessung A/B, exakt drei begrenzte Preisrunden; nur fünf baseCost geändert. A: SBC 3:30, PC 13:10, GPU 31:50, Rig 52:50 im neuen Fenster.
+- [ ] Server ≥90 Min nicht erreicht: 52:30; unveränderter Farm-Preis/Compute erzeugt Konflikt. Keine zusätzliche Sperre eingeführt.
+- [x] Kurze gezielte Tests, Typecheck, Build, Diffprüfung; Browser 360/390/430 DE/EN. [Audit und Daten](hardware-early-audit.md).
+- [ ] Schicht-3-Referenzabweichungen, Relay-/Archiv-Skalierung und Langzeitbalance unverändert separat offen; keine Gesamtabnahme.
