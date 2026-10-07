@@ -1,0 +1,1260 @@
+{
+  "parameters": {
+    "calculator": 15,
+    "sbc": 6000,
+    "pc": 300000,
+    "gpu": 10000000,
+    "rig": 60000000,
+    "server": 79000000,
+    "farm": 80000000,
+    "campus": 100000000000000,
+    "cloud": 100000000000000000000,
+    "liquid": 1e+28,
+    "subsea": 1e+38,
+    "orbital": 1e+52,
+    "lunar": 1e+70,
+    "dyson": 1e+95,
+    "matrioshka": 1e+125
+  },
+  "runtimeMilliseconds": 5177.856796,
+  "cumulativeRuntimeMilliseconds": 11535.279465,
+  "round": 1,
+  "profile": "t=0 decision; 5400 one-second active advances and taps; decisions every 10s; alternating affordable Q/E then dataGeneration<=2; fixed RNG=.5; no claims/items/analyses/resets",
+  "results": [
+    {
+      "strategy": "A",
+      "firstBuys": {
+        "calculator": 0,
+        "sbc": 210,
+        "pc": 1310,
+        "gpu": 3300,
+        "rig": 4520,
+        "farm": 4570,
+        "server": 4590
+      },
+      "firstPrestige": 4783,
+      "events": [
+        {
+          "second": 0,
+          "id": "calculator",
+          "owned": 1,
+          "cost": "1.500000000000000e+1",
+          "creditRate": "1.681254159675038e+0",
+          "sinceLastPurchaseSeconds": 0,
+          "milestone": null
+        },
+        {
+          "second": 90,
+          "id": "calculator",
+          "owned": 10,
+          "cost": "6.162600499031777e+1",
+          "creditRate": "2.638385661241615e+1",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 10
+        },
+        {
+          "second": 210,
+          "id": "sbc",
+          "owned": 1,
+          "cost": "6.000000000000000e+3",
+          "creditRate": "2.394638600360854e+2",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": null
+        },
+        {
+          "second": 250,
+          "id": "calculator",
+          "owned": 25,
+          "cost": "6.494593012822457e+2",
+          "creditRate": "3.299868946622111e+2",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 25
+        },
+        {
+          "second": 500,
+          "id": "sbc",
+          "owned": 10,
+          "cost": "2.661272315490796e+4",
+          "creditRate": "1.825723115076692e+3",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 10
+        },
+        {
+          "second": 620,
+          "id": "calculator",
+          "owned": 50,
+          "cost": "3.290019595371778e+4",
+          "creditRate": "2.819845948776025e+3",
+          "sinceLastPurchaseSeconds": 20,
+          "milestone": 50
+        },
+        {
+          "second": 1310,
+          "id": "pc",
+          "owned": 1,
+          "cost": "3.000000000000000e+5",
+          "creditRate": "1.241702513254793e+4",
+          "sinceLastPurchaseSeconds": 50,
+          "milestone": null
+        },
+        {
+          "second": 1370,
+          "id": "sbc",
+          "owned": 25,
+          "cost": "3.186540376172690e+5",
+          "creditRate": "1.690201410302618e+4",
+          "sinceLastPurchaseSeconds": 30,
+          "milestone": 25
+        },
+        {
+          "second": 1940,
+          "id": "pc",
+          "owned": 10,
+          "cost": "1.435634568937342e+6",
+          "creditRate": "7.686243811089965e+4",
+          "sinceLastPurchaseSeconds": 30,
+          "milestone": 10
+        },
+        {
+          "second": 3300,
+          "id": "gpu",
+          "owned": 1,
+          "cost": "1.000000000000000e+7",
+          "creditRate": "3.041020134647086e+5",
+          "sinceLastPurchaseSeconds": 70,
+          "milestone": null
+        },
+        {
+          "second": 3820,
+          "id": "pc",
+          "owned": 25,
+          "cost": "1.950959833228513e+7",
+          "creditRate": "8.190755874702122e+5",
+          "sinceLastPurchaseSeconds": 30,
+          "milestone": 25
+        },
+        {
+          "second": 3850,
+          "id": "sbc",
+          "owned": 50,
+          "cost": "1.996961115232495e+7",
+          "creditRate": "9.370030886427591e+5",
+          "sinceLastPurchaseSeconds": 30,
+          "milestone": 50
+        },
+        {
+          "second": 4430,
+          "id": "gpu",
+          "owned": 10,
+          "cost": "5.159780351999999e+7",
+          "creditRate": "2.239007088996438e+6",
+          "sinceLastPurchaseSeconds": 30,
+          "milestone": 10
+        },
+        {
+          "second": 4520,
+          "id": "rig",
+          "owned": 1,
+          "cost": "6.000000000000000e+7",
+          "creditRate": "4.600322265349024e+6",
+          "sinceLastPurchaseSeconds": 30,
+          "milestone": null
+        },
+        {
+          "second": 4570,
+          "id": "farm",
+          "owned": 1,
+          "cost": "8.000000000000000e+7",
+          "creditRate": "1.534822424524023e+8",
+          "sinceLastPurchaseSeconds": 20,
+          "milestone": null
+        },
+        {
+          "second": 4590,
+          "id": "server",
+          "owned": 1,
+          "cost": "7.900000000000000e+7",
+          "creditRate": "4.080334376562319e+8",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": null
+        },
+        {
+          "second": 4670,
+          "id": "farm",
+          "owned": 10,
+          "cost": "5.155086891741066e+8",
+          "creditRate": "2.846245139730150e+9",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 10
+        },
+        {
+          "second": 4870,
+          "id": "server",
+          "owned": 10,
+          "cost": "4.730048211629552e+8",
+          "creditRate": "6.244392077043083e+9",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 10
+        },
+        {
+          "second": 5020,
+          "id": "rig",
+          "owned": 10,
+          "cost": "3.335950388095339e+8",
+          "creditRate": "8.265670456272296e+9",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 10
+        },
+        {
+          "second": 5230,
+          "id": "farm",
+          "owned": 25,
+          "cost": "1.150304083574200e+10",
+          "creditRate": "1.533064314730444e+10",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 25
+        },
+        {
+          "second": 5320,
+          "id": "calculator",
+          "owned": 100,
+          "cost": "8.442898571585610e+7",
+          "creditRate": "1.735996017135150e+10",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 100
+        }
+      ],
+      "checkpoints": [
+        {
+          "second": 0,
+          "counts": {
+            "calculator": 1,
+            "sbc": 0,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "3.500000000000000e+1",
+          "creditRate": "1.681254159675038e+0"
+        },
+        {
+          "second": 300,
+          "counts": {
+            "calculator": 28,
+            "sbc": 3,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "4.363800724621672e+3",
+          "creditRate": "5.846807454235605e+2"
+        },
+        {
+          "second": 600,
+          "counts": {
+            "calculator": 49,
+            "sbc": 11,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "2.008214659828766e+3",
+          "creditRate": "2.334064961033174e+3"
+        },
+        {
+          "second": 900,
+          "counts": {
+            "calculator": 57,
+            "sbc": 18,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.349749849963059e+4",
+          "creditRate": "5.346198214032328e+3"
+        },
+        {
+          "second": 1200,
+          "counts": {
+            "calculator": 61,
+            "sbc": 23,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "8.881880991206568e+4",
+          "creditRate": "7.624303909967089e+3"
+        },
+        {
+          "second": 1500,
+          "counts": {
+            "calculator": 66,
+            "sbc": 26,
+            "pc": 3,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "3.446752391159738e+4",
+          "creditRate": "2.439638278882664e+4"
+        },
+        {
+          "second": 1800,
+          "counts": {
+            "calculator": 70,
+            "sbc": 30,
+            "pc": 8,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "4.308629468082090e+5",
+          "creditRate": "4.923178153885448e+4"
+        },
+        {
+          "second": 2100,
+          "counts": {
+            "calculator": 73,
+            "sbc": 36,
+            "pc": 11,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.378224621950590e+6",
+          "creditRate": "8.522296202516976e+4"
+        },
+        {
+          "second": 2400,
+          "counts": {
+            "calculator": 78,
+            "sbc": 39,
+            "pc": 14,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.716069029650971e+5",
+          "creditRate": "1.170839927849251e+5"
+        },
+        {
+          "second": 2700,
+          "counts": {
+            "calculator": 81,
+            "sbc": 41,
+            "pc": 17,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "6.819500986245233e+5",
+          "creditRate": "1.392072007533581e+5"
+        },
+        {
+          "second": 3000,
+          "counts": {
+            "calculator": 83,
+            "sbc": 43,
+            "pc": 19,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "4.963106870578153e+6",
+          "creditRate": "1.708453780375526e+5"
+        },
+        {
+          "second": 3300,
+          "counts": {
+            "calculator": 85,
+            "sbc": 45,
+            "pc": 20,
+            "gpu": 1,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.459161310807233e+5",
+          "creditRate": "3.041020134647086e+5"
+        },
+        {
+          "second": 3600,
+          "counts": {
+            "calculator": 87,
+            "sbc": 47,
+            "pc": 23,
+            "gpu": 3,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.433094545217228e+4",
+          "creditRate": "5.499186597179018e+5"
+        },
+        {
+          "second": 3900,
+          "counts": {
+            "calculator": 90,
+            "sbc": 50,
+            "pc": 25,
+            "gpu": 5,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "5.472332836341742e+6",
+          "creditRate": "1.162144184402052e+6"
+        },
+        {
+          "second": 4200,
+          "counts": {
+            "calculator": 94,
+            "sbc": 53,
+            "pc": 28,
+            "gpu": 8,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "5.144504544749662e+5",
+          "creditRate": "1.635921136607736e+6"
+        },
+        {
+          "second": 4500,
+          "counts": {
+            "calculator": 96,
+            "sbc": 56,
+            "pc": 31,
+            "gpu": 10,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.887665476712344e+7",
+          "creditRate": "2.267889269268649e+6"
+        },
+        {
+          "second": 4800,
+          "counts": {
+            "calculator": 97,
+            "sbc": 56,
+            "pc": 31,
+            "gpu": 10,
+            "rig": 4,
+            "server": 7,
+            "farm": 15,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "5.022099269779259e+11",
+          "creditRate": "4.895929114226669e+9"
+        },
+        {
+          "second": 5100,
+          "counts": {
+            "calculator": 97,
+            "sbc": 56,
+            "pc": 34,
+            "gpu": 17,
+            "rig": 10,
+            "server": 14,
+            "farm": 22,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "2.308251258915426e+12",
+          "creditRate": "9.342344892520662e+9"
+        },
+        {
+          "second": 5400,
+          "counts": {
+            "calculator": 100,
+            "sbc": 62,
+            "pc": 39,
+            "gpu": 21,
+            "rig": 14,
+            "server": 18,
+            "farm": 26,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "5.894164192247725e+12",
+          "creditRate": "2.031312557975526e+10"
+        }
+      ],
+      "final": {
+        "credits": "5.894164192247725e+12",
+        "counts": {
+          "calculator": 100,
+          "sbc": 62,
+          "pc": 39,
+          "gpu": 21,
+          "rig": 14,
+          "server": 18,
+          "farm": 26,
+          "campus": 0,
+          "cloud": 0,
+          "liquid": 0,
+          "subsea": 0,
+          "orbital": 0,
+          "lunar": 0,
+          "dyson": 0,
+          "matrioshka": 0
+        },
+        "quality": 8,
+        "efficiency": 8,
+        "dataGeneration": 2,
+        "taps": 5400,
+        "prestiges": 0
+      }
+    },
+    {
+      "strategy": "B",
+      "firstBuys": {
+        "calculator": 0,
+        "sbc": 250,
+        "pc": 690,
+        "gpu": 1680,
+        "rig": 2380,
+        "server": 2500,
+        "farm": 2510
+      },
+      "firstPrestige": 2800,
+      "events": [
+        {
+          "second": 0,
+          "id": "calculator",
+          "owned": 1,
+          "cost": "1.500000000000000e+1",
+          "creditRate": "1.681254159675038e+0",
+          "sinceLastPurchaseSeconds": 0,
+          "milestone": null
+        },
+        {
+          "second": 90,
+          "id": "calculator",
+          "owned": 10,
+          "cost": "6.162600499031777e+1",
+          "creditRate": "2.638385661241615e+1",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 10
+        },
+        {
+          "second": 240,
+          "id": "calculator",
+          "owned": 25,
+          "cost": "6.494593012822457e+2",
+          "creditRate": "2.010413417480061e+2",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 25
+        },
+        {
+          "second": 250,
+          "id": "sbc",
+          "owned": 1,
+          "cost": "6.000000000000000e+3",
+          "creditRate": "3.291053394966557e+2",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": null
+        },
+        {
+          "second": 460,
+          "id": "sbc",
+          "owned": 10,
+          "cost": "2.661272315490796e+4",
+          "creditRate": "1.568847786441466e+3",
+          "sinceLastPurchaseSeconds": 30,
+          "milestone": 10
+        },
+        {
+          "second": 690,
+          "id": "pc",
+          "owned": 1,
+          "cost": "3.000000000000000e+5",
+          "creditRate": "4.239746515351020e+3",
+          "sinceLastPurchaseSeconds": 230,
+          "milestone": null
+        },
+        {
+          "second": 1350,
+          "id": "pc",
+          "owned": 10,
+          "cost": "1.435634568937342e+6",
+          "creditRate": "3.755727536815008e+4",
+          "sinceLastPurchaseSeconds": 70,
+          "milestone": 10
+        },
+        {
+          "second": 1680,
+          "id": "gpu",
+          "owned": 1,
+          "cost": "1.000000000000000e+7",
+          "creditRate": "9.610054033836505e+4",
+          "sinceLastPurchaseSeconds": 330,
+          "milestone": null
+        },
+        {
+          "second": 2380,
+          "id": "rig",
+          "owned": 1,
+          "cost": "6.000000000000000e+7",
+          "creditRate": "8.326585552434908e+5",
+          "sinceLastPurchaseSeconds": 700,
+          "milestone": null
+        },
+        {
+          "second": 2500,
+          "id": "server",
+          "owned": 1,
+          "cost": "7.900000000000000e+7",
+          "creditRate": "8.849254155237169e+6",
+          "sinceLastPurchaseSeconds": 120,
+          "milestone": null
+        },
+        {
+          "second": 2510,
+          "id": "farm",
+          "owned": 1,
+          "cost": "8.000000000000000e+7",
+          "creditRate": "8.264974024357437e+7",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": null
+        },
+        {
+          "second": 2600,
+          "id": "farm",
+          "owned": 10,
+          "cost": "5.155086891741066e+8",
+          "creditRate": "1.027059737646914e+9",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 10
+        },
+        {
+          "second": 2750,
+          "id": "farm",
+          "owned": 25,
+          "cost": "1.150304083574200e+10",
+          "creditRate": "4.388952662827307e+9",
+          "sinceLastPurchaseSeconds": 10,
+          "milestone": 25
+        },
+        {
+          "second": 4080,
+          "id": "farm",
+          "owned": 50,
+          "cost": "2.034419207707002e+12",
+          "creditRate": "2.073364589330889e+10",
+          "sinceLastPurchaseSeconds": 190,
+          "milestone": 50
+        }
+      ],
+      "checkpoints": [
+        {
+          "second": 0,
+          "counts": {
+            "calculator": 1,
+            "sbc": 0,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "3.500000000000000e+1",
+          "creditRate": "1.681254159675038e+0"
+        },
+        {
+          "second": 300,
+          "counts": {
+            "calculator": 25,
+            "sbc": 3,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "5.572219953560233e+3",
+          "creditRate": "5.489254050736910e+2"
+        },
+        {
+          "second": 600,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 0,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.832383038292992e+5",
+          "creditRate": "1.781164661325714e+3"
+        },
+        {
+          "second": 900,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 3,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.469258512801509e+5",
+          "creditRate": "9.019395431993111e+3"
+        },
+        {
+          "second": 1200,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 7,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "8.119147527170814e+5",
+          "creditRate": "2.037631314176737e+4"
+        },
+        {
+          "second": 1500,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 0,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "4.576725756086834e+6",
+          "creditRate": "3.812257373593317e+4"
+        },
+        {
+          "second": 1800,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "9.555096398142929e+6",
+          "creditRate": "9.710509061693704e+4"
+        },
+        {
+          "second": 2100,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 0,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "3.464978153509318e+7",
+          "creditRate": "1.090444157344578e+5"
+        },
+        {
+          "second": 2400,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 0,
+            "farm": 0,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.282339771719072e+7",
+          "creditRate": "8.343825917542631e+5"
+        },
+        {
+          "second": 2700,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 20,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.308256797760489e+11",
+          "creditRate": "2.200350696895646e+9"
+        },
+        {
+          "second": 3000,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 40,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "2.052548184142663e+11",
+          "creditRate": "7.620672512175439e+9"
+        },
+        {
+          "second": 3300,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 44,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "5.103384963900840e+11",
+          "creditRate": "9.628692564956486e+9"
+        },
+        {
+          "second": 3600,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 47,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "3.641426120105681e+11",
+          "creditRate": "1.053015681797506e+10"
+        },
+        {
+          "second": 3900,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 49,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.581338872571934e+11",
+          "creditRate": "1.227562886016673e+10"
+        },
+        {
+          "second": 4200,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 50,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "2.117501876671322e+12",
+          "creditRate": "2.084009544950166e+10"
+        },
+        {
+          "second": 4500,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 50,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "7.470006964665719e+12",
+          "creditRate": "2.106465969697606e+10"
+        },
+        {
+          "second": 4800,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 50,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.335052832298287e+13",
+          "creditRate": "2.349978352832474e+10"
+        },
+        {
+          "second": 5100,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 50,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "1.944668235758358e+13",
+          "creditRate": "2.367186689649654e+10"
+        },
+        {
+          "second": 5400,
+          "counts": {
+            "calculator": 25,
+            "sbc": 10,
+            "pc": 10,
+            "gpu": 1,
+            "rig": 1,
+            "server": 1,
+            "farm": 50,
+            "campus": 0,
+            "cloud": 0,
+            "liquid": 0,
+            "subsea": 0,
+            "orbital": 0,
+            "lunar": 0,
+            "dyson": 0,
+            "matrioshka": 0
+          },
+          "credits": "2.575247119182273e+13",
+          "creditRate": "2.618025973345089e+10"
+        }
+      ],
+      "final": {
+        "credits": "2.575247119182273e+13",
+        "counts": {
+          "calculator": 25,
+          "sbc": 10,
+          "pc": 10,
+          "gpu": 1,
+          "rig": 1,
+          "server": 1,
+          "farm": 50,
+          "campus": 0,
+          "cloud": 0,
+          "liquid": 0,
+          "subsea": 0,
+          "orbital": 0,
+          "lunar": 0,
+          "dyson": 0,
+          "matrioshka": 0
+        },
+        "quality": 8,
+        "efficiency": 8,
+        "dataGeneration": 2,
+        "taps": 5400,
+        "prestiges": 0
+      }
+    }
+  ]
+}

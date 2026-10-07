@@ -40,7 +40,7 @@ function autobuy(state:GameState,shoppingDue:boolean,otherDue:boolean) {
     if(exactEconomyValue(next,'credits').subtract(cost).compare(reserve)>=0)next=buyHardwareClass(next,id,1);
   }
   if(!otherDue||shoppingAgentUnlocked(next)||!next.automation.enabled||!milestoneBonus(next,'automation'))return next;
-  const targetsLegacy=next.automation.target?[next.automation.target]:next.discovered,candidates=targetsLegacy.map(id=>{const cost=hardwareCost(id,next.hardwareCounts[id],next);const gain=classCompute(next,id,next.hardwareCounts[id]+1)-classCompute(next,id);return{id,cost,score:gain/cost}}).sort((a,b)=>b.score-a.score),pick=candidates.find(x=>canAffordScientificCreditCost(next,hardwareCostScientific(x.id,next.hardwareCounts[x.id],next),next.automation.reserve));
+  const targetsLegacy=next.automation.target?[next.automation.target]:hardwareIds,candidates=targetsLegacy.map(id=>{const cost=hardwareCost(id,next.hardwareCounts[id],next);const gain=classCompute(next,id,next.hardwareCounts[id]+1)-classCompute(next,id);return{id,cost,score:gain/cost}}).sort((a,b)=>b.score-a.score),pick=candidates.find(x=>canAffordScientificCreditCost(next,hardwareCostScientific(x.id,next.hardwareCounts[x.id],next),next.automation.reserve));
   return pick?buyHardwareClass(next,pick.id,1):next;
 }
 

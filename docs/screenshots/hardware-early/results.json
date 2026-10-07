@@ -1,0 +1,53 @@
+{
+  "runtimeSeconds": 13.201179357000001,
+  "checks": [
+    {
+      "language": "de",
+      "width": 360,
+      "classes": 15,
+      "calculatorPurchased": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 360,
+      "classes": 15,
+      "calculatorPurchased": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "language": "de",
+      "width": 390,
+      "classes": 15,
+      "calculatorPurchased": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "classes": 15,
+      "calculatorPurchased": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "language": "de",
+      "width": 430,
+      "classes": 15,
+      "calculatorPurchased": true,
+      "overflow": false,
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 430,
+      "classes": 15,
+      "calculatorPurchased": true,
+      "overflow": false,
+      "errors": []
+    }
+  ]
+}
