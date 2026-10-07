@@ -1,5 +1,5 @@
 import {componentText,moduleText} from './gameplayI18n';
-import { MAX_ECONOMY_VALUE, componentTotal, canAffordScientificResources, validEconomyValues, refundDataScientific, type CraftingJob, BALANCE, GameState, grantComponents, Item, itemTypes,equipmentSlotCount,equipmentSlots,exactEconomyValue,spendScientificResources, ItemTypeId, ModuleId, Rarity, spendComponents, spendResources, hasNode, tapDropMultiplier, addCreditsScientific, addDataScientific, creditRateScientific, dataRateScientific } from './economy';
+import { specialItemEffectQuote, MAX_ECONOMY_VALUE, componentTotal, canAffordScientificResources, validEconomyValues, refundDataScientific, type CraftingJob, BALANCE, GameState, grantComponents, Item, itemTypes,equipmentSlotCount,equipmentSlots,exactEconomyValue,spendScientificResources, ItemTypeId, ModuleId, Rarity, spendComponents, spendResources, hasNode, tapDropMultiplier, addCreditsScientific, addDataScientific, creditRateScientific, dataRateScientific } from './economy';
 import { addEvent } from './telemetry';
 import {ScientificNumber} from './scientificNumber';
 import {dataAffordability as economyDataAffordability} from './economy';
@@ -31,7 +31,7 @@ export function itemImprovementPreview(s:GameState,id:string,action:'upgrade'|'f
  const data=dataAffordability(s,dataCost),missingComponents=Math.max(0,componentCost-s.componentInventory.circuits);
  const reason=capped?'maximum':!validEconomyValues(s,['credits','data'])?'invalid-resources':missingComponents?'circuits':!canAffordScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(dataCost))?'data':null;
  const result=capped?item:{...item,...(action==='upgrade'&&upgradeCost?{rarity:upgradeCost.next,level:item.level+1}:{forge:forge+1})};
- return{item,result,componentCost,dataCost,data,missingComponents,reason,allowed:reason===null};
+ return{item,result,effects:{before:specialItemEffectQuote(s,item),after:specialItemEffectQuote(s,result)},componentCost,dataCost,data,missingComponents,reason,allowed:reason===null};
 }
 export function fusionPreview(s:GameState,ids:string[]){
  const items=Array.isArray(ids)?ids.map(id=>s.inventory.find(i=>i.id===id)):[];

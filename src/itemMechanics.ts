@@ -1,16 +1,18 @@
 import {
   itemEffectProfile,
   itemEffectFor,
+  specialItemEffectQuote,
   type GameState,
   type Item,
 } from "./economy";
-/** Training effects reduce future Data costs; relay and archive rewards are fixed by type.
- * Higher rarity/level/forge on relay and archive effects has no applied scaling. */
+/** Improvement relevance uses the same applied special-effect quote as the domain. */
 export function itemImprovementHasEffect(
   s: GameState,
   before: Item,
   after: Item,
 ) {
+  const beforeSpecial=specialItemEffectQuote(s,before),afterSpecial=specialItemEffectQuote(s,after);
+  if(beforeSpecial&&afterSpecial)return beforeSpecial.bonusSeconds!==afterSpecial.bonusSeconds||beforeSpecial.intWeightContribution!==afterSpecial.intWeightContribution;
   return itemEffectProfile(after).some(
     (effect) =>
       !["relay", "int-yield"].includes(effect) &&

@@ -135,7 +135,7 @@ describe("existing mechanics exposed through their domain contracts", () => {
     expect(fuseItems(s, [ids[1], ids[1], ids[2]])).toBe(s);
     expect(fuseItems(s, [ids[1], ids[2], "missing"])).toBe(s);
   });
-  it("keeps fixed relay and archive rewards unavailable for ineffective scaling", () => {
+  it("enables relay and archive improvements with actual special-effect scaling", () => {
     let s = ready();
     for (const type of [
       "impulse-relay",
@@ -144,7 +144,7 @@ describe("existing mechanics exposed through their domain contracts", () => {
       s = createItem(s, type, "common");
       const item = s.inventory.at(-1)!,
         q = itemImprovementPreview(s, item.id, "forge")!;
-      expect(itemImprovementHasEffect(s, item, q.result)).toBe(false);
+      expect(itemImprovementHasEffect(s, item, q.result)).toBe(true);
     }
     const q = itemImprovementPreview(
       items(),

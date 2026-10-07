@@ -1,3 +1,4 @@
+import {specialItemEffectText,specialItemComparisonText} from './specialItemText';
 import {TrainingItemCostComparison} from "./TrainingCostDetails";
 import { itemImprovementHasEffect } from "./itemMechanics";
 import { useState } from "react";
@@ -67,7 +68,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
         <li key={e}>
           {effectText(e, language)}{e === "training" ? " (B)" : ""}:{" "}
           {e === "relay" || e === "int-yield"
-              ? effectText(e, language)
+              ? specialItemEffectText(s,entry)
               : `+${(itemEffectFor(s, entry, e) * (1 + deepPrestigeBonus(s, "manufacturing")) * 100).toFixed(2)} %`}
         </li>
       ))}
@@ -483,7 +484,8 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                   {rarityText(q.result.rarity, language)} · Lv {q.result.level}{" "}
                   · {de ? "Schmiedestufe" : "Forge level"} {q.result.forge ?? 0}
                 </p>
-                {q.allowed && effect(q.result)}
+                {effect(q.result)}
+                {specialItemComparisonText(s,item,q.result)&&<p className="special-item-comparison">{specialItemComparisonText(s,item,q.result)}</p>}
                 {itemEffectProfile(item).includes("training") && <TrainingItemCostComparison s={s} before={item} after={q.result}/>}
                 {!effective && (
                   <p>
