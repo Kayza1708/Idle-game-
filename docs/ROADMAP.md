@@ -712,3 +712,20 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [ ] Server ≥90 Min nicht erreicht: 52:30; unveränderter Farm-Preis/Compute erzeugt Konflikt. Keine zusätzliche Sperre eingeführt.
 - [x] Kurze gezielte Tests, Typecheck, Build, Diffprüfung; Browser 360/390/430 DE/EN. [Audit und Daten](hardware-early-audit.md).
 - [ ] Schicht-3-Referenzabweichungen, Relay-/Archiv-Skalierung und Langzeitbalance unverändert separat offen; keine Gesamtabnahme.
+
+## Auftrag 8B – Server/Farm-Sparphasen
+
+- [x] Nur zwei Basispreise geändert; sämtliche anderen Economy-/Kaufregeln unverändert.
+- [x] Drei begrenzte Preisrunden, 180-Minuten-Domainmessung A/B; A Rig 52:10 / Server 116:30 / Farm 171:40, B Server 76:40 / Farm 140:10: alle neuen Vorgaben im Messprofil erfüllt.
+- [x] Getrennte Ziel-Sparfenster und Kaufabstände, echte Ratenzuwächse/Meilensteine/1-und-3-INT-Beobachtung ohne Reset; Ratenzeitparameter korrigiert.
+- [x] 81 gezielte Hardware-/Vorschau-/ScientificNumber-Tests, Typecheck, Build und Diffprüfung bestanden.
+- [ ] Keine Langzeitbalance: Schicht-3-Referenzabweichungen und Relay-/Archiv-Skalierung bleiben offen.
+
+## Auftrag 8C – Integration 8B und erster attraktiver Prestige
+
+- [x] Neuer Branch auf gefetchtem main 600ca6d; fehlende 8B-Nachbesserung konfliktfrei übernommen, Server/Farm 15 Mrd./120 Mrd., Vorgänger/geschlossenen PR #75 unverändert.
+- [x] Ausschließlich prestigeBaseRevenue aus echtem SCI-Umsatz bei 60:00 ÷9 abgeleitet; keine Anspruchs-/Bonus-/Baum-/Axiomformel verändert.
+- [x] Gleicher Parameter und echter gemeinsamer No-Prestige-Profilpfad: A 3 INT 60:00, B 59:14; 1 INT 45:14/44:56 ohne Zeitgate.
+- [x] Regulärer 3-INT-Reset, Einkaufsagent regulär für 1 INT, 25-%-Reserve, bezahlte Autobuyer-Käufe und frühe 10er-Meilensteine im kurzen neuen Run; [Audit](first-prestige-audit.md).
+- [ ] Keine bestätigte Langzeit-/Axiombalance; Schicht-3-Referenzen und Relay-/Archiv-Skalierung bleiben separat offen.
+- [x] 91 gezielte Prestige-/Reset-/SCI-/Hardwaretests, Typecheck, Build und Diffprüfung bestanden; kein pauschales npm test.
