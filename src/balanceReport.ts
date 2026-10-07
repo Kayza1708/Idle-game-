@@ -1,5 +1,5 @@
 import {economySnapshot} from './economySnapshot';
-import {balanceContexts,balanceEvents,savedJobs,telemetryCoverage,measuredEconomy} from './balanceSnapshot';
+import {specialItemEffects,balanceContexts,balanceEvents,savedJobs,telemetryCoverage,measuredEconomy} from './balanceSnapshot';
 import {TELEMETRY_LIMITS} from './telemetry';
 import type { GameState } from './economy';
 import { BALANCE, creditRate,computeRate,dataRate,itemTypes,newINT,researchRate,exactEconomyJSON,researchProjectDataCost } from './economy';
@@ -26,6 +26,8 @@ export function createBalanceReport(state:GameState,exportedAt=Date.now()){
     privacy:{localExport:true,automaticUpload:false,accountOrDeviceDataIncluded:false},
     campaign:{id:telemetry.campaignId,startedAt:telemetry.campaignStartedAt,durationSeconds:campaignDuration,historicalDataAvailable:telemetry.historicalDataAvailable},
     currentRun:{number:state.prestigeCount+1,startedAt:telemetry.runStartedAt,durationSeconds:runDuration,creditsEarned:state.runCreditsEarned},
+    specialItemsOmitted:specialItemEffects(state).omitted,
+    specialItemEffects:specialItemEffects(state).items,
     currentState:{
       resources:{credits:state.credits,data:state.data,researchPoints:state.researchPoints,components:{total:state.components,inventory:{...state.componentInventory}},researchFragments:state.researchFragments,blueprintFragments:state.blueprintFragments,gems:state.gems,axioms:{available:state.availableAxioms,totalEarned:state.totalAxiomsEarned,resets:state.axiomResetCount,upgrades:[...state.axiomUpgrades],upgradeLevels:{...state.axiomUpgradeLevels},analysisPlanner:{...state.analysisPlanner},craftingPlanner:{...state.craftingPlanner},prestigeAgent:{...state.prestigeAgent}}},
       hardware:{total:state.hardware,counts:{...state.hardwareCounts},classUpgrades:[...state.classUpgrades],discovered:[...state.discovered]},

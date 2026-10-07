@@ -369,8 +369,8 @@ const itemNames:Record<ItemTypeId,L>={
 export const itemText=(id:ItemTypeId,language:Language)=>pick(itemNames[id],language);
 
 const effects:Record<ItemEffect,L>={
- 'int-yield':l('+25% weighted INT revenue for future eligible income','+25 % gewichteter INT-Einnahmewert für zukünftige berechtigte Einnahmen','','','','',''),
- relay:l('Every 10th paid tap: +2 seconds of Credits','Jeder 10. vergütete Tap: +2 Sekunden Credits','Cada 10.º toque pagado: +2 segundos de créditos','Chaque 10e impulsion payée : +2 secondes de crédits','Cada 10.º toque pago: +2 segundos de créditos','Ogni 10° tap pagato: +2 secondi di crediti','Co 10. płatne kliknięcie: +2 sekundy kredytów'),
+ 'int-yield':l('INT weighting for future eligible income','INT-Gewichtung für zukünftige berechtigte Einnahmen','','','','',''),
+ relay:l('Manual tap relay','Relais für manuelle Taps','Cada 10.º toque pagado: +2 segundos de créditos','Chaque 10e impulsion payée : +2 secondes de crédits','Cada 10.º toque pago: +2 segundos de créditos','Ogni 10° tap pagato: +2 secondi di crediti','Co 10. płatne kliknięcie: +2 sekundy kredytów'),
  compute:l('Compute','Compute','Cómputo','Calcul','Computação','Compute','Obliczenia'),
  credits:l('Credits','Credits','Créditos','Crédits','Créditos','Crediti','Kredyty'),
  data:l('Data','Daten','Datos','Données','Dados','Dati','Dane'),

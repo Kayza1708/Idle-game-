@@ -729,3 +729,11 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Regulärer 3-INT-Reset, Einkaufsagent regulär für 1 INT, 25-%-Reserve, bezahlte Autobuyer-Käufe und frühe 10er-Meilensteine im kurzen neuen Run; [Audit](first-prestige-audit.md).
 - [ ] Keine bestätigte Langzeit-/Axiombalance; Schicht-3-Referenzen und Relay-/Archiv-Skalierung bleiben separat offen.
 - [x] 91 gezielte Prestige-/Reset-/SCI-/Hardwaretests, Typecheck, Build und Diffprüfung bestanden; kein pauschales npm test.
+
+## Auftrag 9A – Impulsrelais/Erkenntnisarchiv
+
+- [x] Feste Spezialwerte durch kanonischen Common-Level-0-Forge-0-Quotienten ersetzt; Relais vergüteter Tap 10 / Archiv nur zukünftige berechtigte Buchungen.
+- [x] Tatsächliche Ausrüstung/No-Items und bestehende Stapelungs-/Reset-/Fusionsregeln erhalten; bezahlte Upgrade-/Forgewege jetzt wirksam bedienbar.
+- [x] Gemeinsame DE/EN-Quotes/Before-After in Details/Equipment/Export, getrennte Haupt-/Challenge-Kontexte und begrenzte aktuelle Quotezeilen.
+- [x] 92 gezielte Tests, Typecheck, Build, Diffprüfung; mobile 390 px DE/EN mit tatsächlicher Verbesserung bestanden. [Audit](special-items-audit.md).
+- [ ] Schicht-3-Referenzabweichungen und optionale Langzeit-/Axiombalance bleiben offen; technische Verbesserung bestätigt keine natürliche Progression.

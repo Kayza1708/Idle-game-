@@ -1,0 +1,285 @@
+{
+  "meaning": "prepared fixtures; real paid upgrade/forge; no natural progression measurement",
+  "results": [
+    {
+      "type": "impulse-relay",
+      "action": "common",
+      "item": {
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "before": {
+        "bonusSeconds": 2,
+        "intWeightContribution": 0,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "impulse-relay",
+        "effect": "relay",
+        "active": true,
+        "scale": 1,
+        "effectiveValue": 0.08,
+        "baselineValue": 0.08,
+        "triggerInterval": 10,
+        "bonusSeconds": 2,
+        "intWeightContribution": 0,
+        "appliedBonusSeconds": 2,
+        "appliedIntWeightContribution": 0,
+        "futureIncomeOnly": false
+      }
+    },
+    {
+      "type": "impulse-relay",
+      "action": "forge1",
+      "item": {
+        "rarity": "common",
+        "level": 0,
+        "forge": 1
+      },
+      "before": {
+        "bonusSeconds": 2,
+        "intWeightContribution": 0,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "impulse-relay",
+        "effect": "relay",
+        "active": true,
+        "scale": 1.12,
+        "effectiveValue": 0.08960000000000001,
+        "baselineValue": 0.08,
+        "triggerInterval": 10,
+        "bonusSeconds": 2.24,
+        "intWeightContribution": 0,
+        "appliedBonusSeconds": 2.24,
+        "appliedIntWeightContribution": 0,
+        "futureIncomeOnly": false
+      }
+    },
+    {
+      "type": "impulse-relay",
+      "action": "upgrade1",
+      "item": {
+        "rarity": "uncommon",
+        "level": 1,
+        "forge": 0
+      },
+      "before": {
+        "bonusSeconds": 2,
+        "intWeightContribution": 0,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "impulse-relay",
+        "effect": "relay",
+        "active": true,
+        "scale": 1.3569999999999998,
+        "effectiveValue": 0.10855999999999999,
+        "baselineValue": 0.08,
+        "triggerInterval": 10,
+        "bonusSeconds": 2.7139999999999995,
+        "intWeightContribution": 0,
+        "appliedBonusSeconds": 2.7139999999999995,
+        "appliedIntWeightContribution": 0,
+        "futureIncomeOnly": false
+      }
+    },
+    {
+      "type": "impulse-relay",
+      "action": "upgrade1-forge1",
+      "item": {
+        "rarity": "uncommon",
+        "level": 1,
+        "forge": 1
+      },
+      "before": {
+        "bonusSeconds": 2,
+        "intWeightContribution": 0,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "impulse-relay",
+        "effect": "relay",
+        "active": true,
+        "scale": 1.51984,
+        "effectiveValue": 0.1215872,
+        "baselineValue": 0.08,
+        "triggerInterval": 10,
+        "bonusSeconds": 3.03968,
+        "intWeightContribution": 0,
+        "appliedBonusSeconds": 3.03968,
+        "appliedIntWeightContribution": 0,
+        "futureIncomeOnly": false
+      }
+    },
+    {
+      "type": "impulse-relay",
+      "action": "upgrade2",
+      "item": {
+        "rarity": "rare",
+        "level": 2,
+        "forge": 0
+      },
+      "before": {
+        "bonusSeconds": 2,
+        "intWeightContribution": 0,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "impulse-relay",
+        "effect": "relay",
+        "active": true,
+        "scale": 2.0563200000000004,
+        "effectiveValue": 0.16450560000000003,
+        "baselineValue": 0.08,
+        "triggerInterval": 10,
+        "bonusSeconds": 4.112640000000001,
+        "intWeightContribution": 0,
+        "appliedBonusSeconds": 4.112640000000001,
+        "appliedIntWeightContribution": 0,
+        "futureIncomeOnly": false
+      }
+    },
+    {
+      "type": "insight-archive",
+      "action": "common",
+      "item": {
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "before": {
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.25,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "insight-archive",
+        "effect": "int-yield",
+        "active": true,
+        "scale": 1,
+        "effectiveValue": 0.08,
+        "baselineValue": 0.08,
+        "triggerInterval": null,
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.25,
+        "appliedBonusSeconds": 0,
+        "appliedIntWeightContribution": 0.25,
+        "futureIncomeOnly": true
+      }
+    },
+    {
+      "type": "insight-archive",
+      "action": "forge1",
+      "item": {
+        "rarity": "common",
+        "level": 0,
+        "forge": 1
+      },
+      "before": {
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.25,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "insight-archive",
+        "effect": "int-yield",
+        "active": true,
+        "scale": 1.12,
+        "effectiveValue": 0.08960000000000001,
+        "baselineValue": 0.08,
+        "triggerInterval": null,
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.28,
+        "appliedBonusSeconds": 0,
+        "appliedIntWeightContribution": 0.28,
+        "futureIncomeOnly": true
+      }
+    },
+    {
+      "type": "insight-archive",
+      "action": "upgrade1",
+      "item": {
+        "rarity": "uncommon",
+        "level": 1,
+        "forge": 0
+      },
+      "before": {
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.25,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "insight-archive",
+        "effect": "int-yield",
+        "active": true,
+        "scale": 1.3569999999999998,
+        "effectiveValue": 0.10855999999999999,
+        "baselineValue": 0.08,
+        "triggerInterval": null,
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.33924999999999994,
+        "appliedBonusSeconds": 0,
+        "appliedIntWeightContribution": 0.33924999999999994,
+        "futureIncomeOnly": true
+      }
+    },
+    {
+      "type": "insight-archive",
+      "action": "upgrade1-forge1",
+      "item": {
+        "rarity": "uncommon",
+        "level": 1,
+        "forge": 1
+      },
+      "before": {
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.25,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "insight-archive",
+        "effect": "int-yield",
+        "active": true,
+        "scale": 1.51984,
+        "effectiveValue": 0.1215872,
+        "baselineValue": 0.08,
+        "triggerInterval": null,
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.37996,
+        "appliedBonusSeconds": 0,
+        "appliedIntWeightContribution": 0.37996,
+        "futureIncomeOnly": true
+      }
+    },
+    {
+      "type": "insight-archive",
+      "action": "upgrade2",
+      "item": {
+        "rarity": "rare",
+        "level": 2,
+        "forge": 0
+      },
+      "before": {
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.25,
+        "source": "721db56 fixed domain constants"
+      },
+      "after": {
+        "type": "insight-archive",
+        "effect": "int-yield",
+        "active": true,
+        "scale": 2.0563200000000004,
+        "effectiveValue": 0.16450560000000003,
+        "baselineValue": 0.08,
+        "triggerInterval": null,
+        "bonusSeconds": 0,
+        "intWeightContribution": 0.5140800000000001,
+        "appliedBonusSeconds": 0,
+        "appliedIntWeightContribution": 0.5140800000000001,
+        "futureIncomeOnly": true
+      }
+    }
+  ]
+}

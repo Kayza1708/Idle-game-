@@ -1,0 +1,21 @@
+{
+  "runtimeSeconds": 11.83578076799995,
+  "checks": [
+    {
+      "language": "de",
+      "width": 390,
+      "details": 2,
+      "paidUpgrades": 2,
+      "paidForges": 2,
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "details": 2,
+      "paidUpgrades": 2,
+      "paidForges": 2,
+      "errors": []
+    }
+  ]
+}

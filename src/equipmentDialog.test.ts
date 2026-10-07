@@ -12,7 +12,7 @@ describe('persistent AI equipment slots',()=>{
  it('honors free prestige-node slots without exceeding three',()=>{const base={...newGame(0),prestigeCount:1,nodes:['manufacturing1','manufacturing5']};expect(equipmentSlotCount(base)).toBe(3);expect(equipmentSlotCount({...base,purchasedEquipmentSlots:2})).toBe(3)});
 });
 
-it('describes the impulse relay without a misleading rarity percentage',()=>{let s=createItem({...newGame(0),prestigeCount:1,settings:{...newGame(0).settings,language:'en'}},'impulse-relay','common');const copy=equipmentEffectCopy(s,s.inventory[0]);expect(copy).toContain('Every 10th paid tap');expect(copy).not.toContain('+8.0 %');});
+it('describes the impulse relay without a misleading rarity percentage',()=>{let s=createItem({...newGame(0),prestigeCount:1,settings:{...newGame(0).settings,language:'en'}},'impulse-relay','common');const copy=equipmentEffectCopy(s,s.inventory[0]);expect(copy).toContain('Every 10th paid manual tap');expect(copy).not.toContain('+8.0 %');});
 
 describe('equipment transactions and preview',()=>{
  const stocked=()=>{let s:GameState={...newGame(0),prestigeCount:1,purchasedEquipmentSlots:2};s=createItem(s,'quantum-chip','common');s=createItem(s,'neural-asic','rare');s=createItem(s,'memory-crystal','common');return s};
