@@ -1,7 +1,8 @@
+import {prepareEarlyHardwareDecision} from './early-hardware-profile';
 /** Bounded active 180-minute hardware comparison. No grants, claims or resets. */
 import {writeFileSync,readFileSync,existsSync} from 'node:fs';
 import {performance} from 'node:perf_hooks';
-import {BALANCE,newGame,registerTap,startTraining,startResearchProject,hardwareIds,hardwarePurchasePreview,buyHardwareClass,creditRateScientific,newINTScientific,exactEconomyValue,type HardwareId,type TrainingTrack} from '../src/economy';
+import {BALANCE,newGame,registerTap,hardwareIds,hardwarePurchasePreview,buyHardwareClass,creditRateScientific,newINTScientific,exactEconomyValue,type HardwareId,type TrainingTrack} from '../src/economy';
 import {advance} from '../src/simulation';
 const started=performance.now(),path=process.argv[2];
 if(!path)throw Error('Output JSON path required');
@@ -23,17 +24,7 @@ function run(strategy:'A'|'B'){
   if(newINTScientific(s).compare(ScientificNumber.from(3))>=0&&firstThreeINT===null)firstThreeINT=t;
   for(const id of ['server','farm'] as const){const goal=saving[id],previous=hardwareIds[hardwareIds.indexOf(id)-1];if(goal.boughtAt===null&&s.hardwareCounts[previous]>0){if(goal.goalStartedAt===null)goal.goalStartedAt=t;const q=hardwarePurchasePreview(s,id);if(q.allowed&&goal.firstAffordableAt===null)goal.firstAffordableAt=t;else if(!q.allowed&&t>goal.goalStartedAt)goal.unaffordableSeconds++;}}
   if(t%10===0){
-   const trained=startTraining(s,track);if(trained!==s){s=trained;track=track==='quality'?'efficiency':'quality';}
-   if(s.researchLevels.dataGeneration<2)s=startResearchProject(s,'dataGeneration');
-   let pick:HardwareId|undefined;
-   if(strategy==='A'){
-    const quotes=hardwareIds.map(id=>hardwarePurchasePreview(s,id));
-    pick=quotes.filter(q=>q.allowed&&!q.creditGain.isZero()).sort((a,b)=>b.creditGain.divide(b.cost).compare(a.creditGain.divide(a.cost))||hardwareIds.indexOf(a.id)-hardwareIds.indexOf(b.id))[0]?.id;
-   }else{
-    const index=hardwareIds.findLastIndex(id=>s.hardwareCounts[id]>0);
-    if(index<0)pick='calculator';else{const id=hardwareIds[index],threshold=[10,25,50].find(n=>n>s.hardwareCounts[id]),next=hardwareIds[index+1];
-     if(!threshold)pick=next;else{const remaining=hardwarePurchasePreview(s,id,threshold-s.hardwareCounts[id]);pick=next&&hardwarePurchasePreview(s,next).cost.compare(remaining.cost)<0?next:id;}}
-   }
+   const prepared=prepareEarlyHardwareDecision(s,track,strategy);s=prepared.state;track=prepared.track;const pick=prepared.pick;
    if(strategy==='B'){const blocked=pick&&(pick==='server'||pick==='farm')&&!hardwarePurchasePreview(s,pick).allowed?pick:null;if(waitingTarget&&blocked!==waitingTarget){targetSelectionWaits[waitingTarget].push({startedAt:waitingAt!,endedAt:t,seconds:t-waitingAt!});waitingTarget=null;waitingAt=null;}if(blocked&&!waitingTarget){waitingTarget=blocked;waitingAt=t;}}
    if(pick){const before=s,quote=hardwarePurchasePreview(s,pick);s=buyHardwareClass(s,pick);if(s!==before){const owned=s.hardwareCounts[pick],milestone=BALANCE.hardware[pick].milestones.find(m=>m.threshold===owned);if(owned===1){firstBuys[pick]=t;if(pick==='server'||pick==='farm'){const goal=saving[pick];goal.boughtAt=t;goal.goalWindowSeconds=goal.goalStartedAt===null?null:t-goal.goalStartedAt;}}if(owned===1||milestone)events.push({second:t,id:pick,owned,cost:quote.cost.toScientificString(16),creditRate:creditRateScientific(s.hardware,s.level,s,s.savedAt).toScientificString(16),creditRateBefore:creditRateScientific(before.hardware,before.level,before,before.savedAt).toScientificString(16),creditRateGain:quote.creditGain.toScientificString(16),milestonesBeforeSwitch:before.runMilestoneEdges,sinceLastPurchaseSeconds:t-lastBuy,milestone:milestone?.threshold??null});lastBuy=t;}}
   }

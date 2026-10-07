@@ -720,3 +720,12 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Getrennte Ziel-Sparfenster und Kaufabstände, echte Ratenzuwächse/Meilensteine/1-und-3-INT-Beobachtung ohne Reset; Ratenzeitparameter korrigiert.
 - [x] 81 gezielte Hardware-/Vorschau-/ScientificNumber-Tests, Typecheck, Build und Diffprüfung bestanden.
 - [ ] Keine Langzeitbalance: Schicht-3-Referenzabweichungen und Relay-/Archiv-Skalierung bleiben offen.
+
+## Auftrag 8C – Integration 8B und erster attraktiver Prestige
+
+- [x] Neuer Branch auf gefetchtem main 600ca6d; fehlende 8B-Nachbesserung konfliktfrei übernommen, Server/Farm 15 Mrd./120 Mrd., Vorgänger/geschlossenen PR #75 unverändert.
+- [x] Ausschließlich prestigeBaseRevenue aus echtem SCI-Umsatz bei 60:00 ÷9 abgeleitet; keine Anspruchs-/Bonus-/Baum-/Axiomformel verändert.
+- [x] Gleicher Parameter und echter gemeinsamer No-Prestige-Profilpfad: A 3 INT 60:00, B 59:14; 1 INT 45:14/44:56 ohne Zeitgate.
+- [x] Regulärer 3-INT-Reset, Einkaufsagent regulär für 1 INT, 25-%-Reserve, bezahlte Autobuyer-Käufe und frühe 10er-Meilensteine im kurzen neuen Run; [Audit](first-prestige-audit.md).
+- [ ] Keine bestätigte Langzeit-/Axiombalance; Schicht-3-Referenzen und Relay-/Archiv-Skalierung bleiben separat offen.
+- [x] 91 gezielte Prestige-/Reset-/SCI-/Hardwaretests, Typecheck, Build und Diffprüfung bestanden; kein pauschales npm test.

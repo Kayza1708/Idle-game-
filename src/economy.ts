@@ -31,7 +31,7 @@ export const BALANCE = {
   trainingDurationBaseSeconds:90,trainingDurationGrowth:1.35,trainingDurationCapSeconds:72*60*60,trainingDataBase:15,trainingDataGrowth:1.75,trainingCostFloor:.5,
   legacyTrainingBase:40,legacyTrainingGrowth:1.65,
   baseOfflineSeconds:28800,maxOfflineSeconds:86400, simulationStep: 10,
-  prestigeBaseRevenue:442_493_746_168,prestigeThreshold:428_273_652_944,prestigeScale:3,prestigePower:1.5,prestigeBonusLogScale:.55,
+  prestigeBaseRevenue:765100329.5513278,prestigeThreshold:428_273_652_944,prestigeScale:3,prestigePower:1.5,prestigeBonusLogScale:.55,
   seasonRewards:{
     free:{regularComponents:['circuits','copperCoils','siliconWafers','titaniumBolts','photonicLenses'],regularAmounts:[6,5,4,4,3],regularGems:[5,8,10,12,15],milestoneGems:[25,40,50,65,80,100,125,150,180,250],milestoneComponents:['copperCoils','siliconWafers','titaniumBolts','photonicLenses','graphene','nanotubes','superconductors','neuralCrystals','quantumCores','quantumCores'],milestoneAmounts:[10,9,8,7,6,6,5,4,4,5]},
     premium:{regularComponents:['copperCoils','siliconWafers','titaniumBolts','photonicLenses','graphene'],regularAmounts:[10,8,7,6,5],regularGems:[15,20,25,30,40],milestoneGems:[50,75,100,125,150,200,250,300,400,600],milestoneComponents:['siliconWafers','titaniumBolts','photonicLenses','graphene','nanotubes','superconductors','neuralCrystals','quantumCores','quantumCores','quantumCores'],milestoneAmounts:[15,14,12,10,9,8,7,6,6,8]}
