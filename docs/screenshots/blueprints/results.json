@@ -1,0 +1,41 @@
+{
+  "runtimeSeconds": 7.885080783000149,
+  "checks": [
+    {
+      "language": "de",
+      "width": 390,
+      "preparedResources": true,
+      "paidLearningFragments": 4,
+      "paidOrders": 2,
+      "dataPaid": 3600,
+      "computeBusPaid": 2,
+      "circuitsPaid": 60,
+      "fragmentReservations": [
+        0,
+        0
+      ],
+      "confirmation": [
+        "Bauplan lernen: Quantenchip\nBauplanfragmente vorher \u2192 nachher: 4 \u2192 0"
+      ],
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "preparedResources": true,
+      "paidLearningFragments": 4,
+      "paidOrders": 2,
+      "dataPaid": 3600,
+      "computeBusPaid": 2,
+      "circuitsPaid": 60,
+      "fragmentReservations": [
+        0,
+        0
+      ],
+      "confirmation": [
+        "Learn blueprint: Quantum Chip\nBlueprint fragments before \u2192 after: 4 \u2192 0"
+      ],
+      "errors": []
+    }
+  ]
+}

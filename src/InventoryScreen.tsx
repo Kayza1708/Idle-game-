@@ -1,3 +1,5 @@
+import {RecipeIngredient} from './RecipeIngredient';
+import {blueprintQuote} from './blueprints';
 import {specialItemEffectText,specialItemComparisonText} from './specialItemText';
 import {TrainingItemCostComparison} from "./TrainingCostDetails";
 import { itemImprovementHasEffect } from "./itemMechanics";
@@ -77,6 +79,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
   const recipeCard = (kind: "module" | "item", id: string) => {
     const q = craftingAffordability(s, kind, id, quantity),
       recipe = q.recipe,
+      blueprint = kind==='item'?blueprintQuote(s,id):null,
       name =
         kind === "module"
           ? moduleText(id as ModuleId, language)
@@ -120,44 +123,25 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 rarityText(recipe.result.rarity, language)}{" "}
               · {recipe.durationPerUnit * recipe.quantity} s
             </p>
-            <p>
-              {formatScientific(
+            <p className="manufacturing-cost">
+              {de?'Herstellungskosten':'Manufacturing costs'}: {formatScientific(
                 ScientificNumber.from(recipe.ingredients.data),
                 1,
               )}{" "}
-              Data · {recipe.ingredients.blueprints}{" "}
-              {de ? "Bauplanfragmente" : "Blueprint fragments"}
+              Data
             </p>
-            <ul>
+            <ul className="recipe-ingredients">
               {Object.entries(recipe.ingredients.components).map(([key, n]) => (
-                <li key={key}>
-                  <button
-                    className="ingredient-link"
-                    onClick={() =>
-                      q.missingComponents[key as ComponentId]
-                        ? source()
-                        : setComponent(key as ComponentId)
-                    }
-                  >
-                    {componentText(key as ComponentId, language).name} ×{n}
-                    {q.missingComponents[key as ComponentId]
-                      ? ` · ${de ? "Fehlt" : "Missing"} ${q.missingComponents[key as ComponentId]}`
-                      : ""}
-                  </button>
-                </li>
+                <RecipeIngredient key={key} name={componentText(key as ComponentId,language).name}
+                  icon={<ComponentArt id={key as ComponentId}/>} balance={s.componentInventory[key as ComponentId]}
+                  required={n??0} missing={q.missingComponents[key as ComponentId]??0} de={de}
+                  onClick={()=>q.missingComponents[key as ComponentId]?source():setComponent(key as ComponentId)}/>
               ))}
               {Object.entries(recipe.ingredients.modules).map(([key, n]) => (
-                <li key={key}>
-                  <button
-                    className="ingredient-link"
-                    onClick={() => moduleLink(key as ModuleId)}
-                  >
-                    {moduleText(key as ModuleId, language)} ×{n}
-                    {q.missingModules[key as ModuleId]
-                      ? ` · ${de ? "Fehlt" : "Missing"} ${q.missingModules[key as ModuleId]}`
-                      : ""}
-                  </button>
-                </li>
+                <RecipeIngredient key={key} name={moduleText(key as ModuleId,language)}
+                  icon={<ActivityArt id="workbench"/>} balance={s.modules[key as ModuleId]}
+                  required={n??0} missing={q.missingModules[key as ModuleId]??0} de={de}
+                  onClick={()=>moduleLink(key as ModuleId)}/>
               ))}
             </ul>
           </>
@@ -173,7 +157,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
         {!q.affordable && (
           <p role="status">{craftingMissingText(q, language)}</p>
         )}
-        {!q.unlocked && (
+        {(kind==='module'?!q.unlocked:!blueprint?.prerequisite) && (
           <button
             onClick={() =>
               kind === "module"
@@ -196,7 +180,16 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                   : "Blueprint: Research Archive in prestige tree"}
           </button>
         )}
-        {q.missingBlueprints > 0 && (
+        {blueprint?.prerequisite && blueprint.price>0 && (
+          <section className="blueprint-learning">
+            <p>{blueprint.learned?(de?'Bauplan dauerhaft gelernt':'Blueprint permanently learned'):
+              `${de?'Einmaliger Lernpreis':'One-time learning price'}: ${blueprint.price} · ${de?'Bestand':'Balance'}: ${blueprint.balance} · ${de?'Fehlt':'Missing'}: ${blueprint.missing}`}</p>
+            {!blueprint.learned && <button disabled={!blueprint.canLearn} onClick={()=>{
+              if(confirm(`${de?'Bauplan lernen':'Learn blueprint'}: ${name}\n${de?'Bauplanfragmente vorher → nachher':'Blueprint fragments before → after'}: ${blueprint.balance} → ${blueprint.balance-blueprint.price}`))act('blueprint-learn',id);
+            }}>{de?'Bauplan lernen':'Learn blueprint'}</button>}
+          </section>
+        )}
+        {(blueprint?.missing??0) > 0 && (
           <button onClick={() => source()}>
             {de
               ? "Bauplanfragmente: Hardwareanalyse"
@@ -318,6 +311,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             <div className="queue-option" key={job.id}>
               <span>
                 {job.recipeId} ×{job.quantity}
+                {job.fragmentContract==='legacy-reserved'&&<small>{de?' · Historische Fragmente bleiben ausgegeben':' · Historical fragments remain spent'}</small>}
               </span>
               <button onClick={() => act("craft-cancel", job.id)}>
                 {de ? "Abbrechen / erstatten" : "Cancel / refund"}

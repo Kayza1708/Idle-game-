@@ -1,8 +1,9 @@
+import {recipeIds} from './blueprints';
 import {describe,it,expect} from 'vitest';
 import {BALANCE,newGame,type GameState} from './economy';
 import {cancelCrafting,craft,craftModule} from './inventory';
 import {advance} from './simulation';
-const rich=()=>({...newGame(0),completedResearch:['blueprints' as const],data:1e6,exactEconomy:{...newGame(0).exactEconomy,data:{m:1,e:6}},blueprintFragments:100,modules:{computeBus:10,dataLattice:10},components:10000,componentInventory:{circuits:1000,copperCoils:1000,siliconWafers:1000,titaniumBolts:1000,photonicLenses:1000,graphene:1000,nanotubes:1000,superconductors:1000,neuralCrystals:1000,quantumCores:1000}} as GameState);
+const rich=()=>({...newGame(0),learnedRecipes:recipeIds,completedResearch:['blueprints' as const],data:1e6,exactEconomy:{...newGame(0).exactEconomy,data:{m:1,e:6}},blueprintFragments:100,modules:{computeBus:10,dataLattice:10},components:10000,componentInventory:{circuits:1000,copperCoils:1000,siliconWafers:1000,titaniumBolts:1000,photonicLenses:1000,graphene:1000,nanotubes:1000,superconductors:1000,neuralCrystals:1000,quantumCores:1000}} as GameState);
 describe('time based crafting',()=>{
  it('reserves once and completes each unit exactly once',()=>{const a=craftModule(rich(),'computeBus',2);expect(a.modules.computeBus).toBe(10);expect(a.componentInventory.circuits).toBe(980);expect(advance(a,59).state.modules.computeBus).toBe(10);const done=advance(a,120).state;expect(done.modules.computeBus).toBe(12);expect(done.crafting.active).toBeNull();expect(advance(done,120).state.modules.computeBus).toBe(12)});
  it('limits waiting jobs and refunds a cancelled waiting job',()=>{let s=craftModule(rich(),'computeBus');for(let i=0;i<3;i++)s=craftModule(s,'dataLattice');const before=s.componentInventory.graphene;s=craftModule(s,'dataLattice');expect(s.crafting.queue).toHaveLength(3);expect(s.componentInventory.graphene).toBe(before);const id=s.crafting.queue[0].id,n=cancelCrafting(s,id);expect(n.crafting.queue).toHaveLength(2);expect(n.componentInventory.graphene).toBe(s.componentInventory.graphene+6)});

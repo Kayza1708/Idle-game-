@@ -647,3 +647,14 @@ html[data-native-platform] body{padding:0}
 
 .research-area-preview{padding:12px;border:1px solid #466c62;border-radius:12px;margin:12px 0;overflow-wrap:anywhere}.research-area-preview button{min-height:44px}.research-catalog h2{overflow-wrap:anywhere}.research-completed{margin:12px 0}
 .hardware-savings-goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.hardware-savings-goals article{min-width:0;padding:10px;border:1px solid #425571;border-radius:12px;background:#111c30;overflow-wrap:anywhere}.hardware-savings-goals button{width:100%;min-height:44px;white-space:normal}.hardware-savings-goals p{font-size:12px;margin:6px 0}.hardware-savings-goals small{font-size:11px;display:block}
+
+/* Recipe ingredients keep icon, complete name and quote quantities in separate tracks. */
+.recipe-card>ul.recipe-ingredients{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:0;list-style:none}
+.recipe-ingredients>.recipe-ingredient{min-width:0;margin:0}
+.recipe-ingredient>.ingredient-link{display:grid;grid-template-columns:32px minmax(0,1fr);align-items:start;gap:8px;width:100%;min-width:0;min-height:44px;height:100%;padding:8px;text-align:left;white-space:normal;text-transform:none}
+.recipe-ingredient .ingredient-icon{display:block;width:32px;min-width:0}
+.recipe-ingredient .ingredient-icon :is(.component-art,.activity-art){display:block;width:32px;min-width:0;height:32px;float:none}
+.recipe-ingredient .ingredient-copy,.recipe-ingredient .ingredient-name,.recipe-ingredient .ingredient-amounts,.recipe-ingredient .ingredient-amounts>span{display:block;min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+.recipe-ingredient .ingredient-name{font-size:.78rem;line-height:1.3;text-transform:none}
+.recipe-ingredient .ingredient-amounts{margin-top:5px;font-size:.68rem;line-height:1.4;font-weight:400;letter-spacing:normal}
+@media(min-width:390px){.recipe-card>ul.recipe-ingredients{grid-template-columns:repeat(2,minmax(0,1fr))}}

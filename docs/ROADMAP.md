@@ -737,3 +737,21 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Gemeinsame DE/EN-Quotes/Before-After in Details/Equipment/Export, getrennte Haupt-/Challenge-Kontexte und begrenzte aktuelle Quotezeilen.
 - [x] 92 gezielte Tests, Typecheck, Build, Diffprüfung; mobile 390 px DE/EN mit tatsächlicher Verbesserung bestanden. [Audit](special-items-audit.md).
 - [ ] Schicht-3-Referenzabweichungen und optionale Langzeit-/Axiombalance bleiben offen; technische Verbesserung bestätigt keine natürliche Progression.
+
+## Auftrag 9B – permanente gelernte Baupläne
+
+- [x] Unveränderte Katalogwerte als einmaliger Lernpreis; reine gemeinsame Quote und atomare explizite Lernaktion mit Doppelklickschutz.
+- [x] Fragmentfreie Herstellung bei unveränderten Komponenten-/Modul-/Data-/Zeitkosten; Queue/Planer verlangen Besitz und lernen nichts ungefragt.
+- [x] Save 42: belegte Altbesitzmigration einschließlich reservierter Aufträge, dauerhafter Reset-Erhalt, getrennte Challenge-/Hauptkontexte und beschädigte Saves geschützt.
+- [x] DE/EN-Lernbestätigung/Status und getrennte Exportereignisse/Besitz-/Herstellungskosten; bestehende Grenzen erhalten.
+- [x] 174 kurze gezielte Tests, Typecheck, Build, Diffprüfung und mobile 390 DE/EN mit Lernen/zwei bezahlten Aufträgen; [Audit](blueprint-learning-audit.md).
+- [ ] Keine natürliche Progression oder Langzeit-/Axiombalance bestätigt; bekannte Schicht-3-Abweichungen bleiben offen.
+
+- [x] 9B.1: Alte englische Screenshotabweichung reproduziert; responsive Zutatenkarten mit Icons/Name/Bestand/Bedarf/Fehlmenge, 360/390/430 DE/EN und alle sechs Item-/zwei Modulrezepte geprüft. [Audit und Diagnosegrenze](blueprint-learning-audit.md#auftrag-9b1--mobile-zutatenkarten).
+
+## Auftrag 9B.1 – mobile Zutatenbeschriftungen
+
+- [x] Darstellung auf gemeinsamem reinem Ingredient-Baustein: eigener Icon-/Texttrack, min-width:0, vollständiger Umbruch, eine/zwei Spalten bei 390 px.
+- [x] 438 reguläre Karten-Geometrieprüfungen und 390 lange Anzeigetextprüfungen; echte Lern-/Item-/Modulaktionen in sechs mobilen Kombinationen.
+- [x] Sechs kurze UI-Tests, Typecheck, Build, Diffprüfung; Vorher/Nachher-Screenshots und Audit ergänzt, bestehender PR #78 aktualisiert.
+- [ ] Der ursprüngliche browserinterne Paintauslöser ist nicht vollständig isoliert; keine unbewiesene DOM-Overflow-Ursache behaupten. Bekannte Balancegrenzen unverändert.
