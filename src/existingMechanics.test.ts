@@ -1,3 +1,4 @@
+import {buyNode} from "./prestige";
 import { itemImprovementHasEffect } from "./itemMechanics";
 import { describe, it, expect, vi } from "vitest";
 import { ScientificNumber } from "./scientificNumber";
@@ -33,10 +34,12 @@ import {
 import { serialize, importGame } from "./storage";
 const ready = (): GameState => {
   let s = addData(newGame(0), 1e9);
+  s = buyNode({...s,unspentINT:100,exactEconomy:{...s.exactEconomy,unspentINT:{m:1,e:2}}},"labs1");
+  s = buyNode(s,"analysis1");
   return {
     ...s,
     prestigeCount: 1,
-    nodes: ["labs1", "labs2"],
+    nodes: [...s.nodes, "labs2"],
     completedResearch: ["blueprints"],
     discovered: ["calculator", "sbc"],
     blueprintFragments: 100,

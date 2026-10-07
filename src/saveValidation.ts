@@ -1,3 +1,4 @@
+import {researchAreaOrder} from './researchAreas';
 import {runChallenges,challenges} from './retention';
 import {ScientificNumber} from './scientificNumber';
 import {BALANCE,componentIds,hardwareIds,itemTypes,equipmentSlots,equipmentSlotCount,trainingBaseDataCostScientific,scientificCeil,validEconomyValues,type GameState,type CraftingJob,type CraftingReservation} from './economy';
@@ -72,6 +73,7 @@ export function assertDomainState(value:unknown):asserts value is GameState{
  for(const key of ['components','training','componentRemainder','researchRemainder','blueprintRemainder','passiveCircuitProgress','worldDropProgress','gems'] as const)if(!finite(s[key]))fail(key,'ungültiger oder negativer Bestand/Fortschritt');
  if(!time(s.savedAt)||!finite(s.clockOffsetMs))fail('Spielzeit','ungültige Zeit');
  ids(s.discovered,hardwareIds,'discovered');ids(s.classUpgrades,hardwareIds,'classUpgrades');
+ if(s.researchAreas!==undefined){ids(s.researchAreas,researchAreaOrder,'researchAreas');if(new Set(s.researchAreas).size!==s.researchAreas.length)fail('researchAreas','doppelte Freischaltung');}
  ids(s.completedResearch,Object.keys(BALANCE.researchProjects),'completedResearch');ids(s.researchQueue,[...Object.keys(BALANCE.researchProjects),...Object.keys(BALANCE.repeatableResearch)],'researchQueue');
  ids(s.breakthroughs,Object.keys(BALANCE.breakthroughs),'breakthroughs');
  if(!Array.isArray(s.nodes)||s.nodes.some(key=>typeof key!=='string'||!Object.hasOwn(BALANCE.prestigeUpgrades,key.replace(/:1$/,''))))fail('nodes','unbekannte Prestige-ID');

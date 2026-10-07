@@ -1,3 +1,4 @@
+import {researchUnlockText} from './researchAreaText';
 import type {Language} from './i18n';
 import type {
   BreakthroughId,
@@ -471,6 +472,6 @@ export const prestigeText=(id:PrestigeUpgradeId,language:Language)=>{
  const branch=id.startsWith('dataArchive')?0:id.startsWith('computeNet')?1:id.startsWith('analysis')?2:id.startsWith('labs')?3:4;
  return {
   name:`${pick(branches[branch],language)} ${roman[depth]}`,
-  effect:pick(prestigeEffects[id],language),
+  effect:[pick(prestigeEffects[id],language),researchUnlockText(id,language)].filter(Boolean).join(' '),
  };
 };

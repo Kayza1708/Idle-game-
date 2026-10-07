@@ -694,3 +694,12 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] DE/EN-Kosten-/Rabatt-/Itemvergleich, wirksame Verbesserungen bedienbar; Snapshot und Export identisch.
 - [x] Kurze echte Transaktions-/Queue-/Reload-/Großzahltests, Typecheck, Build und Diffprüfung; [Audit](training-cost-audit.md).
 - [ ] Relay-/Archiv-Skalierung, Schicht-3-Referenzabweichungen und Langzeitbalance bleiben separat offen.
+
+## Auftrag 7C – permanente Forschungsbereiche
+
+- [x] Anfangsbereich mit drei Projekten; alle 21 Research-IDs eindeutig vorhandenen Bereichen/Nodes zugeordnet.
+- [x] Regulärer Node-Kauf öffnet Accountzugang einmal; gemeinsame Prüfung in Domain/Queue/Autostart/Vorschau/UI.
+- [x] Zugang bleibt bei Prestige/Axiom/Reload; evidenzbasierte Legacy-Migration samt Challenge-Hauptzustand, keine Challenge-Vererbung.
+- [x] DE/EN-Bereiche, kompakte Abschlüsse und eine deterministische Preview mit echtem Node-Detail-Link; erste Analyse/Crafting erreichbar.
+- [x] Kurze gezielte Tests, Typecheck, Build, Diffprüfung und Browser 390 px DE/EN; [Audit](research-area-audit.md).
+- [ ] Schicht-3-Referenzabweichungen, Relay-/Archiv-Skalierung und Langzeitbalance bleiben separat offen.

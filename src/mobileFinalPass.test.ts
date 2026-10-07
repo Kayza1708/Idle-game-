@@ -1,6 +1,7 @@
 import {describe,expect,it} from 'vitest';
 import app from './App.tsx?raw';
 import panels from './Panels.tsx?raw';
+import researchCatalog from './ResearchCatalog.tsx?raw';
 import meta from './MetaHub.tsx?raw';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -29,7 +30,9 @@ describe('final mobile interaction contracts',()=>{
  it('does not render anonymous research artwork placeholders',()=>{
   const research=panels.slice(panels.indexOf('export function Research'),panels.indexOf('export function Inventory'));
   expect(research).not.toContain('research-placeholder');
-  expect(research).toContain('onClick={()=>setSelectedResearch(id)}');
+  expect(research).toContain('onSelect={setSelectedResearch}');
+  expect(researchCatalog).toContain('onClick={() => onSelect(id)}');
+  expect(researchCatalog).not.toContain('research-placeholder');
   expect(research).toContain('<MobileDetailSheet title={copy.name}');
   expect(research).not.toContain('<details><summary>');
  });

@@ -1,3 +1,4 @@
+import {migrateResearchAreas} from './researchAreas';
 import {assertDomainState,assertLegacyChallengeRun} from './saveValidation';
 import { BALANCE, GameState, newGame, trainingCost, trainingWork, normalizeExactEconomy, exactEconomyKeys } from './economy';import {ScientificNumber} from './scientificNumber';import { advanceTo } from './simulation';import { anonymousCampaignId, migratedTelemetry } from './telemetry';import { migratedStory } from './story';
 export const SAVE_KEY='ai-singularity.save';export const TEMP_KEY='ai-singularity.save.pending';export const BACKUP_KEY='ai-singularity.save.backup-v15';export const BACKUP_KEYS=[BACKUP_KEY,`${BACKUP_KEY}.2`,`${BACKUP_KEY}.3`] as const;export const RECOVERY_KEY='ai-singularity.save.recovery';export const SAVE_VERSION=41;type Envelope={version:number;state:GameState};
@@ -28,7 +29,7 @@ if(old&&data.version!==SAVE_VERSION){const base=newGame(old.savedAt);old.setting
 export function restore(raw:string|null,now=Date.now()):{state:GameState;error?:string;migrated?:boolean}{
  const result=restoreVersioned(raw,now);
  if(result.error)return result;
- try{assertValidState(result.state);return {...result,state:normalizeChallengeEconomy(result.state)};}
+ try{const original=raw?JSON.parse(raw).state:result.state,state=migrateResearchAreas(result.state,original);assertValidState(state);return {...result,...(state!==result.state?{migrated:true}:{}),state:normalizeChallengeEconomy(state)};}
  catch(error){return {state:newGame(now,anonymousCampaignId()),error:`Der lokale Spielstand ist beschädigt. Er wurde nicht überschrieben.${error instanceof Error?' '+error.message:''}`};}
 }
 export type StorageLike=Pick<Storage,'getItem'|'setItem'|'removeItem'>;export type LoadResult={state:GameState;error?:string;writable:boolean;migrated?:boolean;recoveryRaw?:string};
