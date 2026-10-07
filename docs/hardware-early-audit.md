@@ -60,3 +60,7 @@ Ein vorhandener Tutorial-Quelltexttest suchte drei inzwischen ausgelagerte Ziele
 Finale Prüfung: **9 Testdateien / 165 Tests bestanden**, 5,18 s: hardwareCreditOnly, sharedPreviews, runStart, tutorialGuide, tutorialUi, onboarding, mobileFinalPass, storage, scientificNumber. `npm run typecheck`, `npm run build` und `git diff --check` bestanden. Production-Build 1,41 s, vorhandene Vite-Chunkgrößenwarnung (Hauptchunk 653,37 kB), kein Buildfehler. Kein pauschales npm test/FAST/DEEP/Tages-/Monatslauf. Die beiden neuen Legacy-Autobuyer-/Invalidquote-Tests wurden vor dieser finalen Prüfung ergänzt.
 
 Prestige nur beobachtet: Anspruch ≥1 INT vorher A 33:56 / B 14:04, final A 56:21 / B 44:51. Kein Reset in irgendeiner Messung. Beide finalen Runs enden mit Quality 8 / Efficiency 8 / Datenerzeugung 2 und genau 5.400 Taps; der unterschiedliche Hardwarepfad wurde nicht durch vorbereitete Forschung ausgeglichen.
+
+## Nachtrag 8B
+
+Die hier beschriebenen 8A-Preise/90-Minuten-Messungen bleiben historisch. Auftrag 8B hebt die frühere Farm-Preisbeschränkung ausdrücklich auf; finale Preise Server 15 Mrd./Farm 120 Mrd. erfüllen im unveränderten Profil alle neuen 180-Minuten-Vorgaben. Ratenlogs berücksichtigen nun den tatsächlichen Simulationszeitpunkt einschließlich Overclock. [Neue Messung, Sparzeiten, INT und technische Abnahme](hardware-early-8b-audit.md). Keine Langzeitbalance bestätigt.

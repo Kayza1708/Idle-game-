@@ -712,3 +712,11 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [ ] Server ≥90 Min nicht erreicht: 52:30; unveränderter Farm-Preis/Compute erzeugt Konflikt. Keine zusätzliche Sperre eingeführt.
 - [x] Kurze gezielte Tests, Typecheck, Build, Diffprüfung; Browser 360/390/430 DE/EN. [Audit und Daten](hardware-early-audit.md).
 - [ ] Schicht-3-Referenzabweichungen, Relay-/Archiv-Skalierung und Langzeitbalance unverändert separat offen; keine Gesamtabnahme.
+
+## Auftrag 8B – Server/Farm-Sparphasen
+
+- [x] Nur zwei Basispreise geändert; sämtliche anderen Economy-/Kaufregeln unverändert.
+- [x] Drei begrenzte Preisrunden, 180-Minuten-Domainmessung A/B; A Rig 52:10 / Server 116:30 / Farm 171:40, B Server 76:40 / Farm 140:10: alle neuen Vorgaben im Messprofil erfüllt.
+- [x] Getrennte Ziel-Sparfenster und Kaufabstände, echte Ratenzuwächse/Meilensteine/1-und-3-INT-Beobachtung ohne Reset; Ratenzeitparameter korrigiert.
+- [x] 81 gezielte Hardware-/Vorschau-/ScientificNumber-Tests, Typecheck, Build und Diffprüfung bestanden.
+- [ ] Keine Langzeitbalance: Schicht-3-Referenzabweichungen und Relay-/Archiv-Skalierung bleiben offen.
