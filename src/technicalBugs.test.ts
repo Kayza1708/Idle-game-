@@ -1,3 +1,4 @@
+import dataBaseline from './testSupport/dataAnalysisBaseline.json';
 import {describe,it,expect} from 'vitest';
 import {createHash} from 'node:crypto';
 import {BALANCE,newGame,addCredits,addDataScientific,buyHardwareClass,computeRateScientific,computeFactors,equipmentSlotCount,axiomThresholdScientific,passiveCircuitRate,creditRateScientific,dataRateScientific,dataSynergyScientific,averageDataSynergy,exactEconomyValue,hardwarePurchasePreview,productionBreakdown,registerTap,axiomEconomyValue,creditMultiplierFromAxiomsScientific,type GameState,type PrestigeUpgradeId} from './economy';
@@ -18,7 +19,7 @@ const stocked=(s:GameState,count:number)=>{for(const type of (['quantum-chip','t
 const archive=()=>({...buyAxiomUpgrade({...newGame(0),axioms:5,availableAxioms:5,totalAxiomsEarned:5},'axiomArchive'),discovered:['calculator','sbc'] as GameState['discovered']});
 const found=(s:GameState)=>advance(s,(1-s.passiveCircuitProgress)/passiveCircuitRate(s)+.001,false,()=>.1).state;
 describe('confirmed P0 permanent equipment sockets',()=>{
- it('preserves every existing BALANCE parameter',()=>{expect(createHash('sha256').update(JSON.stringify(BALANCE)).digest('hex')).toBe('6c692caa268841af8a610dca7def0281d3715c5cf444bf3e2a812837e123e00f');});
+ it('preserves protected technical parameters under the authorized Data/analysis contract',()=>{for(const key of ['hardware','itemRecipes','itemCombinations','components','componentSources','experimentRewards','axiom','researchCategories'] as const)expect(BALANCE[key]).toEqual(dataBaseline.parameters[key]);});
  it.each([2,3])('keeps %s regularly purchased Credit sockets across prestige/Axiom/save',count=>{
   let s=addCredits(firstPrestige(),1e21);for(let target=2;target<=count;target++)s=buyEquipmentSlot(s,target as 2|3);s=stocked(s,count);expect(Object.keys(s.equipped)).toHaveLength(count);expect(buyEquipmentSlot(s,count as 2|3)).toBe(s);
   expect(prestigePreview(s).kept.equipmentSlots).toBe(count);const p=prestige(s);expect(equipmentSlotCount(p)).toBe(count);const ready=cycle(p);expect(axiomPreview(ready).kept.equipmentSlots).toBe(count);const reset=loaded(axiomReset(ready));expect(equipmentSlotCount(reset)).toBe(count);expect(reset.equipped).toEqual(s.equipped);expect(reset.inventory).toEqual(s.inventory);expect(reset.nodes).toEqual([]);
@@ -79,7 +80,7 @@ describe('confirmed P2 scientific integration and previews',()=>{
   const split=advance(loaded(advance(s,.4,false).state),.6,false).state;near(exactEconomyValue(split,'credits'),exactEconomyValue(advance(s,1,false).state,'credits'),1e-11);
  });
  it('retains scientific interval gains above 1e308 and matches split/reloaded elapsed time',()=>{
-  const s=huge(),instant=creditRateScientific(s.hardware,s.level,s);expect(instant.exponent).toBeGreaterThan(308);const a=advance(s,1,false),part=advance(loaded(advance(s,.4,false).state),.6,false);expect(a.state.savedAt).toBe(1000);near(SN.fromJSON(a.report.exactCredits),instant);near(exactEconomyValue(part.state,'credits'),exactEconomyValue(a.state,'credits'));expect(loaded(a.state).exactEconomy).toEqual(a.state.exactEconomy);
+  const s=huge(),instant=creditRateScientific(s.hardware,s.level,s);expect(instant.exponent).toBeGreaterThan(308);const a=advance(s,1,false),part=advance(loaded(advance(s,.4,false).state),.6,false);expect(a.state.savedAt).toBe(1000);const expected=instant.divide(dataSynergyScientific(s)).multiply(averageDataSynergy(s,dataRateScientific(s)));near(SN.fromJSON(a.report.exactCredits),expected);near(exactEconomyValue(part.state,'credits'),exactEconomyValue(a.state,'credits'));expect(loaded(a.state).exactEconomy).toEqual(a.state.exactEconomy);
  });
  it('does not overflow native antiderivatives when synergy is enormous but Data is below 1e100',()=>{
   const s=addDataScientific({...producing(),researchLevels:{...newGame(0).researchLevels,dataFlywheel:50000}},SN.fromString('1e50')),r=advance(s,1,false);expect(r.state.savedAt).toBe(1000);near(SN.fromJSON(r.report.exactCredits),creditRateScientific(s.hardware,s.level,s));

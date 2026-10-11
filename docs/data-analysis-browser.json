@@ -1,0 +1,293 @@
+{
+  "fixture": "explicit prepared Data, discovered SBC; regular paid UI actions; no natural progression claim",
+  "results": [
+    {
+      "width": 360,
+      "language": "de",
+      "contracts": 6,
+      "paidJob": {
+        "id": "exp-1",
+        "type": "hardware",
+        "length": "short",
+        "startedAt": 1791720005100,
+        "endsAt": 1791720605100,
+        "durationSeconds": 600,
+        "creditCost": 0,
+        "dataCost": 250,
+        "combinationFactor": 1,
+        "rewardFactor": 0.041666666666666664,
+        "contractVersion": 2
+      },
+      "pipelineJob": {
+        "id": "exp-1",
+        "type": "architecture",
+        "length": "short",
+        "startedAt": 1791720005300,
+        "endsAt": 1791721805300,
+        "durationSeconds": 1800,
+        "creditCost": 0,
+        "dataCost": 400,
+        "combinationFactor": 1,
+        "rewardFactor": 0.0625,
+        "contractVersion": 2
+      },
+      "reloadIdentical": true,
+      "shortageDisabled": true,
+      "relativeDataPreview": "Data/s: 0,11 \u2192 0,13 \u00b7 Tats\u00e4chlicher Zuwachs: +18 %",
+      "touchHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": {
+        "page": 360,
+        "viewport": 360,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 360,
+      "language": "en",
+      "contracts": 6,
+      "paidJob": {
+        "id": "exp-1",
+        "type": "hardware",
+        "length": "short",
+        "startedAt": 1791720005100,
+        "endsAt": 1791720605100,
+        "durationSeconds": 600,
+        "creditCost": 0,
+        "dataCost": 250,
+        "combinationFactor": 1,
+        "rewardFactor": 0.041666666666666664,
+        "contractVersion": 2
+      },
+      "pipelineJob": {
+        "id": "exp-1",
+        "type": "architecture",
+        "length": "short",
+        "startedAt": 1791720005300,
+        "endsAt": 1791721805300,
+        "durationSeconds": 1800,
+        "creditCost": 0,
+        "dataCost": 400,
+        "combinationFactor": 1,
+        "rewardFactor": 0.0625,
+        "contractVersion": 2
+      },
+      "reloadIdentical": true,
+      "shortageDisabled": true,
+      "relativeDataPreview": "Data/s: 0,11 \u2192 0,13 \u00b7 Actual gain: +18 %",
+      "touchHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": {
+        "page": 360,
+        "viewport": 360,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "language": "de",
+      "contracts": 6,
+      "paidJob": {
+        "id": "exp-1",
+        "type": "hardware",
+        "length": "short",
+        "startedAt": 1791720005100,
+        "endsAt": 1791720605100,
+        "durationSeconds": 600,
+        "creditCost": 0,
+        "dataCost": 250,
+        "combinationFactor": 1,
+        "rewardFactor": 0.041666666666666664,
+        "contractVersion": 2
+      },
+      "pipelineJob": {
+        "id": "exp-1",
+        "type": "architecture",
+        "length": "short",
+        "startedAt": 1791720005300,
+        "endsAt": 1791721805300,
+        "durationSeconds": 1800,
+        "creditCost": 0,
+        "dataCost": 400,
+        "combinationFactor": 1,
+        "rewardFactor": 0.0625,
+        "contractVersion": 2
+      },
+      "reloadIdentical": true,
+      "shortageDisabled": true,
+      "relativeDataPreview": "Data/s: 0,11 \u2192 0,13 \u00b7 Tats\u00e4chlicher Zuwachs: +18 %",
+      "touchHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": {
+        "page": 390,
+        "viewport": 390,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "language": "en",
+      "contracts": 6,
+      "paidJob": {
+        "id": "exp-1",
+        "type": "hardware",
+        "length": "short",
+        "startedAt": 1791720005100,
+        "endsAt": 1791720605100,
+        "durationSeconds": 600,
+        "creditCost": 0,
+        "dataCost": 250,
+        "combinationFactor": 1,
+        "rewardFactor": 0.041666666666666664,
+        "contractVersion": 2
+      },
+      "pipelineJob": {
+        "id": "exp-1",
+        "type": "architecture",
+        "length": "short",
+        "startedAt": 1791720005300,
+        "endsAt": 1791721805300,
+        "durationSeconds": 1800,
+        "creditCost": 0,
+        "dataCost": 400,
+        "combinationFactor": 1,
+        "rewardFactor": 0.0625,
+        "contractVersion": 2
+      },
+      "reloadIdentical": true,
+      "shortageDisabled": true,
+      "relativeDataPreview": "Data/s: 0,11 \u2192 0,13 \u00b7 Actual gain: +18 %",
+      "touchHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": {
+        "page": 390,
+        "viewport": 390,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 430,
+      "language": "de",
+      "contracts": 6,
+      "paidJob": {
+        "id": "exp-1",
+        "type": "hardware",
+        "length": "short",
+        "startedAt": 1791720005100,
+        "endsAt": 1791720605100,
+        "durationSeconds": 600,
+        "creditCost": 0,
+        "dataCost": 250,
+        "combinationFactor": 1,
+        "rewardFactor": 0.041666666666666664,
+        "contractVersion": 2
+      },
+      "pipelineJob": {
+        "id": "exp-1",
+        "type": "architecture",
+        "length": "short",
+        "startedAt": 1791720005300,
+        "endsAt": 1791721805300,
+        "durationSeconds": 1800,
+        "creditCost": 0,
+        "dataCost": 400,
+        "combinationFactor": 1,
+        "rewardFactor": 0.0625,
+        "contractVersion": 2
+      },
+      "reloadIdentical": true,
+      "shortageDisabled": true,
+      "relativeDataPreview": "Data/s: 0,11 \u2192 0,13 \u00b7 Tats\u00e4chlicher Zuwachs: +18 %",
+      "touchHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": {
+        "page": 430,
+        "viewport": 430,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 430,
+      "language": "en",
+      "contracts": 6,
+      "paidJob": {
+        "id": "exp-1",
+        "type": "hardware",
+        "length": "short",
+        "startedAt": 1791720005100,
+        "endsAt": 1791720605100,
+        "durationSeconds": 600,
+        "creditCost": 0,
+        "dataCost": 250,
+        "combinationFactor": 1,
+        "rewardFactor": 0.041666666666666664,
+        "contractVersion": 2
+      },
+      "pipelineJob": {
+        "id": "exp-1",
+        "type": "architecture",
+        "length": "short",
+        "startedAt": 1791720005300,
+        "endsAt": 1791721805300,
+        "durationSeconds": 1800,
+        "creditCost": 0,
+        "dataCost": 400,
+        "combinationFactor": 1,
+        "rewardFactor": 0.0625,
+        "contractVersion": 2
+      },
+      "reloadIdentical": true,
+      "shortageDisabled": true,
+      "relativeDataPreview": "Data/s: 0,11 \u2192 0,13 \u00b7 Actual gain: +18 %",
+      "touchHeights": [
+        44,
+        44,
+        44,
+        44,
+        44,
+        44
+      ],
+      "overflow": {
+        "page": 430,
+        "viewport": 430,
+        "wide": []
+      },
+      "errors": []
+    }
+  ]
+}

@@ -44,9 +44,9 @@ export const BALANCE = {
   researchKeyPricePower:24,researchKeyDurationSeconds:86400,researchMinimumSeconds:60,researchAutonomousPerLevel:.02,researchAlignmentFactor:.90,researchTransferFactor:.50,researchTransferStarts:6,researchAnalysisCostFactor:.80,researchRecyclingFraction:.05,researchAutomationInterval:10,
   researchDataGrowth:1.85,researchDurationGrowth:1.35,researchDurationCapSeconds:72*60*60,
   analysisCosts:{
-    hardware:{short:{data:57623,duration:600},long:{data:900,duration:4*3600}},
-    architecture:{short:{data:300,duration:30*60},long:{data:3600,duration:8*3600}},
-    artifact:{short:{data:1200,duration:2*3600},long:{data:14400,duration:24*3600}},
+    hardware:{short:{data:250,duration:600},long:{data:4800,duration:4*3600}},
+    architecture:{short:{data:500,duration:30*60},long:{data:6400,duration:8*3600}},
+    artifact:{short:{data:2000,duration:2*3600},long:{data:19200,duration:24*3600}},
   },
   baseTapCredits:1, tapRateFraction:.2, tapLimitPerSecond:5, tapCritBase:.05, tapCritMultiplier:3, tapComboPerTap:.015, tapComboCap:50, dropBaseMultiplier:1, overclockTaps:100, overclockSeconds:15, overclockCooldownSeconds:90,
   introRewards:[25,60,120,100,100,75,250,0],
@@ -54,9 +54,9 @@ export const BALANCE = {
     shoppingAgent:{name:'Einkaufsagent',cost:1,depth:1,branch:5,requires:[],requiresPrestige:true,effect:'Autobuyer für Taschenrechner und Einplatinencomputer; je Klasse schaltbar.'},
     trainingPlan:{name:'Trainingsplan',cost:3,depth:1,branch:6,requires:[],requiresPrestige:true,effect:'Zwei wartende Quality-/Efficiency-Aufträge zusätzlich zum aktiven Training.'},
     componentScanner:{name:'Komponentenscanner',cost:3,depth:1,branch:7,requires:[],requiresPrestige:true,effect:'Verdoppelt das Gewicht eines zugänglichen passiven Komponentenfunds.'},
-    dataArchive1:{name:'Datenarchiv I',cost:3,depth:1,branch:0,requires:[],effect:'×1,25 Datenproduktion. Dauerhafter Forschungszugang: Datenwissenschaft.'},
-    dataArchive2:{name:'Datenarchiv II',cost:9,depth:2,branch:0,requires:['dataArchive1'],effect:'×1,60 Datenproduktion.'},
-    dataArchive3:{name:'Datenarchiv III',cost:14,depth:3,branch:0,requires:['dataArchive2'],effect:'×2,25 Datenproduktion.'},
+    dataArchive1:{name:'Datenarchiv I',cost:3,depth:1,branch:0,requires:[],effect:'Gemeinsamer Data-Bonus +0,25 (B); höchste Archivstufe ersetzt niedrigere. Dauerhafter Forschungszugang: Datenwissenschaft.'},
+    dataArchive2:{name:'Datenarchiv II',cost:9,depth:2,branch:0,requires:['dataArchive1'],effect:'Gemeinsamer Data-Bonus +0,60 (B); ersetzt +0,25.'},
+    dataArchive3:{name:'Datenarchiv III',cost:14,depth:3,branch:0,requires:['dataArchive2'],effect:'Gemeinsamer Data-Bonus +1,25 (B); ersetzt +0,60.'},
     computeNet1:{name:'Compute-Netz I',cost:4,depth:1,branch:1,requires:[],effect:'+8 % globaler Compute je freigeschalteter Hardwareklasse. Dauerhafter Forschungszugang: Modell-/Systemarchitektur.'},
     computeNet2:{name:'Compute-Netz II',cost:11,depth:2,branch:1,requires:['computeNet1'],effect:'+15 % globaler Compute je freigeschalteter Hardwareklasse.'},
     computeNet3:{name:'Compute-Netz III',cost:18,depth:3,branch:1,requires:['computeNet2'],effect:'+30 % globaler Compute je freigeschalteter Hardwareklasse.'},
@@ -71,9 +71,9 @@ export const BALANCE = {
     manufacturing3:{name:'Fertigung III',cost:30,depth:3,branch:4,requires:['manufacturing2'],effect:'Vertieft die Fertigungsinfrastruktur; Basis-Module werden bereits durch Offene Baupläne freigeschaltet.'},
     dataArchive4:{name:'Datenarchiv IV',cost:28,depth:4,branch:0,requires:['dataArchive3'],effect:'Data Synergy ^1,05; Daten-Items skalieren mit seltenen Komponenten.'},
     dataArchive5:{name:'Datenarchiv V',cost:48,depth:5,branch:0,requires:['dataArchive4'],effect:'Data Synergy ^1,10.'},
-    dataArchive6:{name:'Datenarchiv VI',cost:80,depth:6,branch:0,requires:['dataArchive5'],effect:'Lifetime-Daten verstärken DataPower; Datenproduktion ×2,5.'},
-    dataArchive7:{name:'Datenarchiv VII',cost:130,depth:7,branch:0,requires:['dataArchive6'],effect:'Data Synergy ^1,05 zusätzlich; Datenproduktion ×3,5.'},
-    dataArchive8:{name:'Datenarchiv VIII',cost:210,depth:8,branch:0,requires:['dataArchive7'],effect:'Data Synergy ^1,10 zusätzlich; Datenproduktion ×5.'},
+    dataArchive6:{name:'Datenarchiv VI',cost:80,depth:6,branch:0,requires:['dataArchive5'],effect:'Lifetime-Daten verstärken DataPower; gemeinsamer Data-Bonusbeitrag +1,5 (B).'},
+    dataArchive7:{name:'Datenarchiv VII',cost:130,depth:7,branch:0,requires:['dataArchive6'],effect:'Data Synergy ^1,05 zusätzlich; gemeinsamer Data-Bonusbeitrag +2,5 (B).'},
+    dataArchive8:{name:'Datenarchiv VIII',cost:210,depth:8,branch:0,requires:['dataArchive7'],effect:'Data Synergy ^1,10 zusätzlich; gemeinsamer Data-Bonusbeitrag +4 (B).'},
     computeNet4:{name:'Compute-Netz IV',cost:34,depth:4,branch:1,requires:['computeNet3'],effect:'Hardware-Besitzsynergie ^1,05; Legacy-Infrastruktur ab 500 Stück je Klasse wird aktiv.'},
     computeNet5:{name:'Compute-Netz V',cost:58,depth:5,branch:1,requires:['computeNet4'],effect:'Klassen-Diversität wird stärker; jede Legacy-Klasse verstärkt globalen Output.'},
     computeNet6:{name:'Compute-Netz VI',cost:95,depth:6,branch:1,requires:['computeNet5'],effect:'Klassen-Diversität wächst stärker; globaler Compute ×2.'},
@@ -239,7 +239,7 @@ export type OverclockChannel='credits'|'training'|'research';
 export type Item = { id: string; type: ItemTypeId; rarity: Rarity; level: number; locked: boolean; forge?:number;relayTaps?:number };
 export type LootDrop={id:string;spawnedAt:number;expiresAt:number;x?:number;y?:number;variant?:'coin'|'cache'|'core'};
 export type ExperimentLength='intro'|'short'|'long';
-export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number };
+export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number; rewardFactor?:number; contractVersion?:1|2 };
 export type AnalysisResult={id:string;type:ExperimentId;length:Exclude<ExperimentLength,'intro'>;at:number;mode:'active'|'offline';components:Partial<ComponentInventory>;blueprintFragments:number;researchFragments:number};
 export type ProgressMetric='hardwareBought'|'milestones'|'trainingStarted'|'trainingCompleted'|'researchStarted'|'researchCompleted'|'componentsEarned'|'itemsCrafted'|'dropsClaimed'|'itemsFused'|'forgeUpgrades'|'regularCredits'|'regularData'|'taps'|'overclocks'|'prestiges'|'activeSeconds';
 export type MissionTask={id:string;metric:ProgressMetric;goal:number;baseline:number;reward:number;claimed:boolean;de:string;en:string};
@@ -519,10 +519,13 @@ export const dataResearchMultiplier=(level:number)=>Math.min(1e120,1.18**Math.ma
 export const prestigeDataBonus=(s:GameState)=>hasNode(s,'dataArchive3',1)?1.25:hasNode(s,'dataArchive2',1)?.60:hasNode(s,'dataArchive1',1)?.25:0;
 export const dataBonusTerms=(s:GameState)=>({milestones:ScientificNumber.from(Math.max(0,milestoneBonus(s,'data'))),dataGeneration:ScientificNumber.from(1.18).pow(Math.max(0,s.researchLevels.dataGeneration)).subtract(ScientificNumber.from(1)),syntheticData:ScientificNumber.from(1+BALANCE.repeatableResearch.syntheticData.effectPerLevel).pow(s.researchLevels.syntheticData*Math.max(0,s.level)).subtract(ScientificNumber.from(1)),milestoneSynergy:ScientificNumber.from(Math.max(0,milestoneSynergy(s).data-1)),prestige:ScientificNumber.from(Math.max(0,prestigeDataBonus(s))),deepPrestige:ScientificNumber.from(Math.max(0,deepPrestigeBonus(s,'data'))),items:ScientificNumber.from(1+equippedBonus(s,'data')).pow(itemSynergyExponent(s)).subtract(ScientificNumber.from(1)),model:modelSynergyScientific(s).pow(.10).subtract(ScientificNumber.from(1))});
 export const dataRawBonusScientific=(s:GameState)=>Object.values(dataBonusTerms(s)).reduce((sum,bonus)=>sum.add(bonus),ScientificNumber.zero());
-export const dataMultiplierScientific=(rawBonus:ScientificNumber)=>{const value=ScientificNumber.from(1).add(rawBonus.multiplyNumber(BALANCE.dataBonusScale).divide(rawBonus.add(ScientificNumber.from(BALANCE.dataBonusScale)))),cap=ScientificNumber.from(4.999999999999999);return value.compare(cap)>0?cap:value;};
+export const dataSoftBonusScientific=(rawBonus:ScientificNumber)=>{const threshold=ScientificNumber.from(BALANCE.dataBonusScale);return rawBonus.compare(threshold)<=0?rawBonus:threshold.add(rawBonus.subtract(threshold).multiply(threshold).sqrt());};
+export const dataMultiplierScientific=(rawBonus:ScientificNumber)=>ScientificNumber.from(1).add(dataSoftBonusScientific(rawBonus));
 export const dataMultiplier=(s:GameState)=>dataMultiplierScientific(dataRawBonusScientific(s)).toNumber();
 export const baseDataRateScientific=(users:ScientificNumber)=>users.pow(.5).multiplyNumber(BALANCE.baseDataPerSecond);
-export const dataRateScientific=(s:GameState)=>scientificProduct(baseDataRateScientific(usersRateScientific(s)),dataMultiplierScientific(dataRawBonusScientific(s)),s.retention.activeRun?.id==='data-crunch'?.1:1);
+export function dataProductionQuote(s:GameState){const sources=dataBonusTerms(s),rawBonus=Object.values(sources).reduce((sum,v)=>sum.add(v),ScientificNumber.zero()),baseRate=baseDataRateScientific(usersRateScientific(s)),multiplier=dataMultiplierScientific(rawBonus),challengeFactor=s.retention.activeRun?.id==='data-crunch'?.1:1;return{baseRate,sources,rawBonus,multiplier,challengeFactor,rate:scientificProduct(baseRate,multiplier,challengeFactor)};}
+export const dataRateScientific=(s:GameState)=>dataProductionQuote(s).rate;
+export function dataProductionComparison(before:GameState,after:GameState){const a=dataProductionQuote(before),b=dataProductionQuote(after);return{before:a,after:b,direction:b.rate.compare(a.rate),relativeGain:a.rate.isZero()?null:b.rate.compare(a.rate)>=0?b.rate.divide(a.rate).subtract(ScientificNumber.from(1)):ScientificNumber.from(1).subtract(b.rate.divide(a.rate)),sameRoundedDisplay:formatScientific(a.rate,2)===formatScientific(b.rate,2)};}
 export const dataRate=(s:GameState)=>dataRateScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const passiveCircuitRate=(s:GameState)=>s.discovered.length/BALANCE.passiveCircuitSecondsPerClass;
 const unavailableAffordability=(cost:ScientificNumber)=>({balanceExact:ScientificNumber.zero(),costExact:cost,missingExact:ScientificNumber.zero(),affordable:false,secondsToAfford:null,valid:false});
@@ -681,7 +684,7 @@ export function buyResearchLab(s:GameState){return s;}
 export function hardwarePurchasePreview(s:GameState,id:HardwareId,count:number|'max'=1){
  const known=hardwareIds.includes(id),owned=known?s.hardwareCounts[id]:0,amount=known&&count==='max'?maxAffordable(id,owned,s.credits,s):count==='max'?0:count,valid=known&&Number.isSafeInteger(s.hardware)&&s.hardware>=0&&Number.isSafeInteger(owned)&&owned>=0&&Number.isSafeInteger(amount)&&(amount>0||(count==='max'&&amount===0))&&Number.isSafeInteger(owned+amount)&&validEconomyValues(s,['credits']),restricted=s.retention.activeRun?.id==='five-hardware'&&hardwareIds.indexOf(id)>=5;
  const cost=valid?hardwareBulkCostScientific(id,owned,amount||1,s):ScientificNumber.zero(),resources=valid?scientificAffordability(exactEconomyValue(s,'credits'),cost):unavailableAffordability(cost),reason=!valid?'invalid-quantity':restricted?'challenge-rule':amount===0||!canAffordScientificCreditCost(s,cost)?'credits':null;
- const result=valid&&amount>0?{...s,...hardwareOwnershipAfter(s,id,amount)}:null;return{id,owned,amount,cost,resources,reason,allowed:reason===null,computeGain:result?computeRateScientific(result.hardware,result).subtract(computeRateScientific(s.hardware,s)):ScientificNumber.zero(),creditGain:result?creditRateScientific(result.hardware,result.level,result,result.savedAt).subtract(creditRateScientific(s.hardware,s.level,s,s.savedAt)):ScientificNumber.zero()};
+ const result=valid&&amount>0?{...s,...hardwareOwnershipAfter(s,id,amount)}:null;return{id,owned,amount,cost,resources,reason,allowed:reason===null,dataComparison:result?dataProductionComparison(s,result):null,computeGain:result?computeRateScientific(result.hardware,result).subtract(computeRateScientific(s.hardware,s)):ScientificNumber.zero(),creditGain:result?creditRateScientific(result.hardware,result.level,result,result.savedAt).subtract(creditRateScientific(s.hardware,s.level,s,s.savedAt)):ScientificNumber.zero()};
 }
 export function buyHardwareClass(s:GameState,id:HardwareId,count:number|'max'=1){
  const preview=hardwarePurchasePreview(s,id,count);if(!preview.allowed)return s;const {owned,amount}=preview,costExact=preview.cost;
