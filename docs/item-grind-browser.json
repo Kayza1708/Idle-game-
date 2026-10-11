@@ -1,0 +1,761 @@
+{
+  "fixture": "explicit prepared resources, prerequisite and initial regular paid craft; real paid UI actions, no natural progression claim",
+  "results": [
+    {
+      "width": 360,
+      "language": "de",
+      "upgradeBefore": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "upgradeAfter": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false
+      },
+      "upgradeQuote": {
+        "item": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "common",
+          "level": 0,
+          "locked": false
+        },
+        "result": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "uncommon",
+          "level": 1,
+          "locked": false
+        },
+        "effects": {
+          "before": null,
+          "after": null
+        },
+        "effectChanges": [
+          {
+            "effect": "compute",
+            "before": 0.0848,
+            "after": 0.1150736
+          }
+        ],
+        "componentCosts": {
+          "circuits": 81,
+          "siliconWafers": 4
+        },
+        "dataCostExact": {
+          "mantissa": 7.5,
+          "exponent": 2
+        },
+        "componentCost": 81,
+        "dataCost": 750,
+        "data": {
+          "valid": true,
+          "balanceExact": {
+            "mantissa": 9.982,
+            "exponent": 5
+          },
+          "costExact": {
+            "mantissa": 7.5,
+            "exponent": 2
+          },
+          "missingExact": {
+            "mantissa": 0,
+            "exponent": 0
+          },
+          "affordable": true,
+          "secondsToAfford": 0,
+          "cost": 750,
+          "balance": 998200,
+          "missing": 0
+        },
+        "missingComponents": 0,
+        "missingMaterials": {},
+        "reason": null,
+        "allowed": true
+      },
+      "touchHeights": [
+        44,
+        44
+      ],
+      "masteryPaid": 10,
+      "craftReservation": {
+        "id": "craft-3",
+        "kind": "item",
+        "recipeId": "quantum-chip",
+        "quantity": 1,
+        "completed": 0,
+        "durationPerUnit": 300,
+        "startedAt": 1791720005500,
+        "endsAt": 1791720305500,
+        "ingredients": {
+          "components": {
+            "circuits": 29,
+            "copperCoils": 12,
+            "siliconWafers": 18,
+            "titaniumBolts": 8,
+            "photonicLenses": 2,
+            "graphene": 1,
+            "nanotubes": 0,
+            "superconductors": 0,
+            "neuralCrystals": 0,
+            "quantumCores": 0
+          },
+          "modules": {
+            "computeBus": 1
+          },
+          "data": 1800,
+          "blueprints": 0
+        },
+        "result": {
+          "kind": "item",
+          "id": "quantum-chip",
+          "rarity": "common"
+        },
+        "masteryLevel": 1
+      },
+      "completedExactlyOnce": true,
+      "overflow": {
+        "page": 360,
+        "viewport": 360,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 360,
+      "language": "en",
+      "upgradeBefore": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "upgradeAfter": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false
+      },
+      "upgradeQuote": {
+        "item": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "common",
+          "level": 0,
+          "locked": false
+        },
+        "result": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "uncommon",
+          "level": 1,
+          "locked": false
+        },
+        "effects": {
+          "before": null,
+          "after": null
+        },
+        "effectChanges": [
+          {
+            "effect": "compute",
+            "before": 0.0848,
+            "after": 0.1150736
+          }
+        ],
+        "componentCosts": {
+          "circuits": 81,
+          "siliconWafers": 4
+        },
+        "dataCostExact": {
+          "mantissa": 7.5,
+          "exponent": 2
+        },
+        "componentCost": 81,
+        "dataCost": 750,
+        "data": {
+          "valid": true,
+          "balanceExact": {
+            "mantissa": 9.982,
+            "exponent": 5
+          },
+          "costExact": {
+            "mantissa": 7.5,
+            "exponent": 2
+          },
+          "missingExact": {
+            "mantissa": 0,
+            "exponent": 0
+          },
+          "affordable": true,
+          "secondsToAfford": 0,
+          "cost": 750,
+          "balance": 998200,
+          "missing": 0
+        },
+        "missingComponents": 0,
+        "missingMaterials": {},
+        "reason": null,
+        "allowed": true
+      },
+      "touchHeights": [
+        44,
+        44
+      ],
+      "masteryPaid": 10,
+      "craftReservation": {
+        "id": "craft-3",
+        "kind": "item",
+        "recipeId": "quantum-chip",
+        "quantity": 1,
+        "completed": 0,
+        "durationPerUnit": 300,
+        "startedAt": 1791720005500,
+        "endsAt": 1791720305500,
+        "ingredients": {
+          "components": {
+            "circuits": 29,
+            "copperCoils": 12,
+            "siliconWafers": 18,
+            "titaniumBolts": 8,
+            "photonicLenses": 2,
+            "graphene": 1,
+            "nanotubes": 0,
+            "superconductors": 0,
+            "neuralCrystals": 0,
+            "quantumCores": 0
+          },
+          "modules": {
+            "computeBus": 1
+          },
+          "data": 1800,
+          "blueprints": 0
+        },
+        "result": {
+          "kind": "item",
+          "id": "quantum-chip",
+          "rarity": "common"
+        },
+        "masteryLevel": 1
+      },
+      "completedExactlyOnce": true,
+      "overflow": {
+        "page": 360,
+        "viewport": 360,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "language": "de",
+      "upgradeBefore": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "upgradeAfter": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false
+      },
+      "upgradeQuote": {
+        "item": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "common",
+          "level": 0,
+          "locked": false
+        },
+        "result": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "uncommon",
+          "level": 1,
+          "locked": false
+        },
+        "effects": {
+          "before": null,
+          "after": null
+        },
+        "effectChanges": [
+          {
+            "effect": "compute",
+            "before": 0.0848,
+            "after": 0.1150736
+          }
+        ],
+        "componentCosts": {
+          "circuits": 81,
+          "siliconWafers": 4
+        },
+        "dataCostExact": {
+          "mantissa": 7.5,
+          "exponent": 2
+        },
+        "componentCost": 81,
+        "dataCost": 750,
+        "data": {
+          "valid": true,
+          "balanceExact": {
+            "mantissa": 9.982,
+            "exponent": 5
+          },
+          "costExact": {
+            "mantissa": 7.5,
+            "exponent": 2
+          },
+          "missingExact": {
+            "mantissa": 0,
+            "exponent": 0
+          },
+          "affordable": true,
+          "secondsToAfford": 0,
+          "cost": 750,
+          "balance": 998200,
+          "missing": 0
+        },
+        "missingComponents": 0,
+        "missingMaterials": {},
+        "reason": null,
+        "allowed": true
+      },
+      "touchHeights": [
+        44,
+        44
+      ],
+      "masteryPaid": 10,
+      "craftReservation": {
+        "id": "craft-3",
+        "kind": "item",
+        "recipeId": "quantum-chip",
+        "quantity": 1,
+        "completed": 0,
+        "durationPerUnit": 300,
+        "startedAt": 1791720005500,
+        "endsAt": 1791720305500,
+        "ingredients": {
+          "components": {
+            "circuits": 29,
+            "copperCoils": 12,
+            "siliconWafers": 18,
+            "titaniumBolts": 8,
+            "photonicLenses": 2,
+            "graphene": 1,
+            "nanotubes": 0,
+            "superconductors": 0,
+            "neuralCrystals": 0,
+            "quantumCores": 0
+          },
+          "modules": {
+            "computeBus": 1
+          },
+          "data": 1800,
+          "blueprints": 0
+        },
+        "result": {
+          "kind": "item",
+          "id": "quantum-chip",
+          "rarity": "common"
+        },
+        "masteryLevel": 1
+      },
+      "completedExactlyOnce": true,
+      "overflow": {
+        "page": 390,
+        "viewport": 390,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "language": "en",
+      "upgradeBefore": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "upgradeAfter": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false
+      },
+      "upgradeQuote": {
+        "item": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "common",
+          "level": 0,
+          "locked": false
+        },
+        "result": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "uncommon",
+          "level": 1,
+          "locked": false
+        },
+        "effects": {
+          "before": null,
+          "after": null
+        },
+        "effectChanges": [
+          {
+            "effect": "compute",
+            "before": 0.0848,
+            "after": 0.1150736
+          }
+        ],
+        "componentCosts": {
+          "circuits": 81,
+          "siliconWafers": 4
+        },
+        "dataCostExact": {
+          "mantissa": 7.5,
+          "exponent": 2
+        },
+        "componentCost": 81,
+        "dataCost": 750,
+        "data": {
+          "valid": true,
+          "balanceExact": {
+            "mantissa": 9.982,
+            "exponent": 5
+          },
+          "costExact": {
+            "mantissa": 7.5,
+            "exponent": 2
+          },
+          "missingExact": {
+            "mantissa": 0,
+            "exponent": 0
+          },
+          "affordable": true,
+          "secondsToAfford": 0,
+          "cost": 750,
+          "balance": 998200,
+          "missing": 0
+        },
+        "missingComponents": 0,
+        "missingMaterials": {},
+        "reason": null,
+        "allowed": true
+      },
+      "touchHeights": [
+        44,
+        44
+      ],
+      "masteryPaid": 10,
+      "craftReservation": {
+        "id": "craft-3",
+        "kind": "item",
+        "recipeId": "quantum-chip",
+        "quantity": 1,
+        "completed": 0,
+        "durationPerUnit": 300,
+        "startedAt": 1791720005500,
+        "endsAt": 1791720305500,
+        "ingredients": {
+          "components": {
+            "circuits": 29,
+            "copperCoils": 12,
+            "siliconWafers": 18,
+            "titaniumBolts": 8,
+            "photonicLenses": 2,
+            "graphene": 1,
+            "nanotubes": 0,
+            "superconductors": 0,
+            "neuralCrystals": 0,
+            "quantumCores": 0
+          },
+          "modules": {
+            "computeBus": 1
+          },
+          "data": 1800,
+          "blueprints": 0
+        },
+        "result": {
+          "kind": "item",
+          "id": "quantum-chip",
+          "rarity": "common"
+        },
+        "masteryLevel": 1
+      },
+      "completedExactlyOnce": true,
+      "overflow": {
+        "page": 390,
+        "viewport": 390,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 430,
+      "language": "de",
+      "upgradeBefore": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "upgradeAfter": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false
+      },
+      "upgradeQuote": {
+        "item": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "common",
+          "level": 0,
+          "locked": false
+        },
+        "result": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "uncommon",
+          "level": 1,
+          "locked": false
+        },
+        "effects": {
+          "before": null,
+          "after": null
+        },
+        "effectChanges": [
+          {
+            "effect": "compute",
+            "before": 0.0848,
+            "after": 0.1150736
+          }
+        ],
+        "componentCosts": {
+          "circuits": 81,
+          "siliconWafers": 4
+        },
+        "dataCostExact": {
+          "mantissa": 7.5,
+          "exponent": 2
+        },
+        "componentCost": 81,
+        "dataCost": 750,
+        "data": {
+          "valid": true,
+          "balanceExact": {
+            "mantissa": 9.982,
+            "exponent": 5
+          },
+          "costExact": {
+            "mantissa": 7.5,
+            "exponent": 2
+          },
+          "missingExact": {
+            "mantissa": 0,
+            "exponent": 0
+          },
+          "affordable": true,
+          "secondsToAfford": 0,
+          "cost": 750,
+          "balance": 998200,
+          "missing": 0
+        },
+        "missingComponents": 0,
+        "missingMaterials": {},
+        "reason": null,
+        "allowed": true
+      },
+      "touchHeights": [
+        44,
+        44
+      ],
+      "masteryPaid": 10,
+      "craftReservation": {
+        "id": "craft-3",
+        "kind": "item",
+        "recipeId": "quantum-chip",
+        "quantity": 1,
+        "completed": 0,
+        "durationPerUnit": 300,
+        "startedAt": 1791720005500,
+        "endsAt": 1791720305500,
+        "ingredients": {
+          "components": {
+            "circuits": 29,
+            "copperCoils": 12,
+            "siliconWafers": 18,
+            "titaniumBolts": 8,
+            "photonicLenses": 2,
+            "graphene": 1,
+            "nanotubes": 0,
+            "superconductors": 0,
+            "neuralCrystals": 0,
+            "quantumCores": 0
+          },
+          "modules": {
+            "computeBus": 1
+          },
+          "data": 1800,
+          "blueprints": 0
+        },
+        "result": {
+          "kind": "item",
+          "id": "quantum-chip",
+          "rarity": "common"
+        },
+        "masteryLevel": 1
+      },
+      "completedExactlyOnce": true,
+      "overflow": {
+        "page": 430,
+        "viewport": 430,
+        "wide": []
+      },
+      "errors": []
+    },
+    {
+      "width": 430,
+      "language": "en",
+      "upgradeBefore": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "upgradeAfter": {
+        "id": "item-2",
+        "type": "quantum-chip",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false
+      },
+      "upgradeQuote": {
+        "item": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "common",
+          "level": 0,
+          "locked": false
+        },
+        "result": {
+          "id": "item-2",
+          "type": "quantum-chip",
+          "rarity": "uncommon",
+          "level": 1,
+          "locked": false
+        },
+        "effects": {
+          "before": null,
+          "after": null
+        },
+        "effectChanges": [
+          {
+            "effect": "compute",
+            "before": 0.0848,
+            "after": 0.1150736
+          }
+        ],
+        "componentCosts": {
+          "circuits": 81,
+          "siliconWafers": 4
+        },
+        "dataCostExact": {
+          "mantissa": 7.5,
+          "exponent": 2
+        },
+        "componentCost": 81,
+        "dataCost": 750,
+        "data": {
+          "valid": true,
+          "balanceExact": {
+            "mantissa": 9.982,
+            "exponent": 5
+          },
+          "costExact": {
+            "mantissa": 7.5,
+            "exponent": 2
+          },
+          "missingExact": {
+            "mantissa": 0,
+            "exponent": 0
+          },
+          "affordable": true,
+          "secondsToAfford": 0,
+          "cost": 750,
+          "balance": 998200,
+          "missing": 0
+        },
+        "missingComponents": 0,
+        "missingMaterials": {},
+        "reason": null,
+        "allowed": true
+      },
+      "touchHeights": [
+        44,
+        44
+      ],
+      "masteryPaid": 10,
+      "craftReservation": {
+        "id": "craft-3",
+        "kind": "item",
+        "recipeId": "quantum-chip",
+        "quantity": 1,
+        "completed": 0,
+        "durationPerUnit": 300,
+        "startedAt": 1791720005500,
+        "endsAt": 1791720305500,
+        "ingredients": {
+          "components": {
+            "circuits": 29,
+            "copperCoils": 12,
+            "siliconWafers": 18,
+            "titaniumBolts": 8,
+            "photonicLenses": 2,
+            "graphene": 1,
+            "nanotubes": 0,
+            "superconductors": 0,
+            "neuralCrystals": 0,
+            "quantumCores": 0
+          },
+          "modules": {
+            "computeBus": 1
+          },
+          "data": 1800,
+          "blueprints": 0
+        },
+        "result": {
+          "kind": "item",
+          "id": "quantum-chip",
+          "rarity": "common"
+        },
+        "masteryLevel": 1
+      },
+      "completedExactlyOnce": true,
+      "overflow": {
+        "page": 430,
+        "viewport": 430,
+        "wide": []
+      },
+      "errors": []
+    }
+  ]
+}

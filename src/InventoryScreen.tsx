@@ -1,3 +1,4 @@
+import {BlueprintMasteryDetails,ComponentSources} from './ItemProgressDetails';
 import {DataItemComparison} from './DataComparison';
 import {ResearchItemComparison} from './ResearchItemComparison';
 import {RecipeIngredient} from './RecipeIngredient';
@@ -117,6 +118,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             </p>
           </>
         )}
+        {kind==='item'&&<><BlueprintMasteryDetails s={s} id={id as ItemTypeId} act={act}/><button onClick={()=>act('pin-goal',{kind:'item-craft',id,target:s.craftedItemCounts[id as ItemTypeId]+1})}>{de?'Herstellung anheften':'Pin crafting'}</button></>}
         {recipe && (
           <>
             <p>
@@ -142,7 +144,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 <RecipeIngredient key={key} name={componentText(key as ComponentId,language).name}
                   icon={<ComponentArt id={key as ComponentId}/>} balance={s.componentInventory[key as ComponentId]}
                   required={n??0} missing={q.missingComponents[key as ComponentId]??0} de={de}
-                  onClick={()=>q.missingComponents[key as ComponentId]?source():setComponent(key as ComponentId)}/>
+                  onClick={()=>setComponent(key as ComponentId)}/>
               ))}
               {Object.entries(recipe.ingredients.modules).map(([key, n]) => (
                 <RecipeIngredient key={key} name={moduleText(key as ModuleId,language)}
@@ -243,6 +245,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
           (id) => (
             <button
               key={id}
+              id={`tutorial-subtab-${id}`}
               role="tab"
               aria-selected={view === id}
               onClick={() => setView(id)}
@@ -358,6 +361,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               <button
                 className={`item-tile rarity-${entry.rarity}`}
                 key={entry.id}
+                id={`item-detail-${entry.id}`}
                 onClick={() => {
                   setItemId(entry.id);
                   setFusion([]);
@@ -383,7 +387,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
           onClose={() => setComponent(null)}
         >
           <p>×{s.componentInventory[component]}</p>
-          <p>{componentText(component, language).source}</p>
+          <p>{componentText(component, language).source}</p><ComponentSources s={s} id={component} act={act}/>
           <button onClick={() => source()}>
             {de ? "Zur Hardwareanalyse" : "Go to hardware analysis"}
           </button>
@@ -478,10 +482,10 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                       ? "Schmieden"
                       : "Forge"}
                 </h3>
-                <p>
-                  {q.componentCost} {componentText("circuits", language).name} ·{" "}
-                  {formatScientific(ScientificNumber.from(q.dataCost), 1)} Data
-                </p>
+                <p>{formatScientific(q.dataCostExact,1)} Data · {de?'Fehlt':'Missing'} {formatScientific(q.data.missingExact,1)}</p>
+                <ul className="recipe-ingredients">{Object.entries(q.componentCosts).map(([id,n])=><RecipeIngredient key={id} name={componentText(id as ComponentId,language).name} icon={<ComponentArt id={id as ComponentId}/>} balance={s.componentInventory[id as ComponentId]} required={n!} missing={q.missingMaterials[id]??0} de={de} onClick={()=>{setItemId(null);setComponent(id as ComponentId)}}/>)}</ul>
+                {Object.keys(q.componentCosts).filter(id=>id!=='circuits').map(id=><ComponentSources key={id} s={s} id={id as ComponentId} act={act}/>)}
+                <dl>{q.effectChanges.map(change=><div key={change.effect}><dt>{effectText(change.effect,language)} {de?'Beitrag bei Ausrüstung':'Contribution when equipped'}</dt><dd>{change.before.toFixed(6)} → {change.after.toFixed(6)}</dd></div>)}</dl>
                 <p>
                   {de ? "Ergebnis" : "Result"}:{" "}
                   {rarityText(q.result.rarity, language)} · Lv {q.result.level}{" "}
@@ -505,6 +509,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                       ? de
                         ? "Maximalstufe erreicht"
                         : "Maximum reached"
+                      : q.reason === "materials" ? Object.entries(q.missingMaterials).map(([id,n])=>`${n} ${componentText(id as ComponentId,language).name} ${de?'fehlen':'missing'}`).join(', ')
                       : q.reason === "circuits"
                         ? `${q.missingComponents} ${componentText("circuits", language).name} ${de ? "fehlen" : "missing"}`
                         : q.reason === "data"
@@ -519,10 +524,10 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                   onClick={() => {
                     if (
                       confirm(
-                        `${de ? "Kosten bestätigen" : "Confirm costs"}: ${q.componentCost} ${componentText("circuits", language).name}, ${q.dataCost} Data · ${item.id}`,
+                        `${de ? "Kosten bestätigen" : "Confirm costs"}: ${Object.entries(q.componentCosts).map(([id,n])=>`${n} ${componentText(id as ComponentId,language).name}`).join(', ')}, ${q.dataCost} Data · ${item.id}`,
                       )
                     )
-                      act(action, item.id);
+                      act(action, item.id,{rarity:item.rarity,level:item.level,forge:item.forge??0});
                   }}
                 >
                   {action === "upgrade"
@@ -536,6 +541,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               </section>
             );
           })}
+          {item.rarity!=='mythic'&&<button onClick={()=>act('pin-goal',{kind:'item-upgrade',id:item.id,target:rarities.indexOf(item.rarity)+1})}>{de?'Nächste Aufwertung anheften':'Pin next upgrade'}</button>}
           <section className="improvement-card">
             <h3>
               {de

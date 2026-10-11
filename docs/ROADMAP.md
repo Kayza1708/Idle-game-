@@ -802,3 +802,18 @@ Auftrag-2-Implementierungscommit `e9f9e35`, Draft-PR [#82](https://github.com/Ka
 - [ ] Natürliche Langzeitbalance, vollständige Gesamtabnahme, reale Safari-/Native-Prüfung.
 
 Abhängig von PR #82 `d8d5a29`; keine automatische Integration. Nachweis: `data-analysis-audit.md` und Rohmessungen.
+
+## Auftrag 4 — Item-Grind und Bauplan-Meisterschaft — technische Integration und begrenzter Spielerpfad
+
+- [x] Quellenmatrix für alle elf kanonischen Itemtypen vor der Implementierung erfasst; explizite Familienzuordnung und feste Zusatzpreise je Zielseltenheit zentral.
+- [x] Atomare ScientificNumber-Aufwertung mit vollständigen Fehlmengen/Effektquotes; bisherige Schaltkreis-/Dataformeln, Forge und geschützte Fusion erhalten.
+- [x] Permanente Meisterschaft 0–4 (10/25/60/150 Fragmente), nach regulärem Craft; Rundung je Exemplar, eingefrorene Reservierungen und Recycling aus tatsächlich bezahlten Mengen.
+- [x] Manuelle 10:1-Fragmentumwandlung erst nach allen drei regulären Durchbrüchen; sichere Mengen, aktuelle Bestände und Revision gegen veraltete/doppelte Tickets.
+- [x] Bestehende Fünf-Typen-Sammlerwirkung verwendet tatsächliche permanente Materialentdeckungen; keine zusätzliche Wirkung oder Änderung der Dropquellen.
+- [x] Bestehende DE/EN-Details mit Quellen, Kurz-/Langanalyse, einzelnen Zielen und erhaltenen Instanzen; gebündelte Online-/Offline-Anzeige, bestehendes Audio/Haptik.
+- [x] Save 46, konservative Altbelege, beide tatsächlichen Resets/Reload und Challenge-Isolation; zentrale Exportquotes mit bestehenden Schutzgrenzen.
+- [x] Gezielte Tests, Typecheck/Production-Build/Diffcheck; Browser 360/390/430 px DE/EN mit bezahlter Aufwertung, Meisterschaft und Herstellung, Reload und mindestens 44 px für neue Touchziele.
+- [x] Genau zwei frische 120-Minuten-Profile ohne Grants/freie Freischaltungen; beide erste Relaisherstellung, Gesamtrechenzeit 36,160 s.
+- [ ] Natürliche Erreichbarkeit aller Meisterschaften/seltenen Builds und langfristige Data-/Fragment-/Monatsbalance. Beide Profile erreichen Meisterschaft 1 nicht: zehn Fragmente fehlen; Data am Ende reichlich vorhanden.
+
+[Quellen, Verträge, konkrete Vorher/Nachher-Werte und Grenzen](item-grind-audit.md). Basis finaler offener #83-Head, abhängig von #83 und #82; Vorgänger unverändert, kein Merge.
