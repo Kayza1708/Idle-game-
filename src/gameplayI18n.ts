@@ -172,7 +172,7 @@ const research:Record<RepeatableResearchId,ResearchCopy>={
  labAutomation:rc(
   l('Lab Automation','Laborautomation','Automatización de laboratorio','Automatisation du laboratoire','Automação de laboratório','Automazione laboratorio','Automatyzacja laboratorium'),
   l('Automation','Automation','Automatización','Automatisation','Automação','Automazione','Automatyzacja'),
-  l('Speeds up analyses; level 1 unlocks the research queue.','Beschleunigt Analysen; Stufe 1 schaltet die Forschungswarteschlange frei.','Acelera los análisis; nivel 1 desbloquea la cola de investigación.','Accélère les analyses ; niveau 1 débloque la file de recherche.','Acelera análises; nível 1 desbloqueia a fila de pesquisa.','Accelera le analisi; il livello 1 sblocca la coda di ricerca.','Przyspiesza analizy; poziom 1 odblokowuje kolejkę badań.')
+  l('Speeds up analyses.','Beschleunigt Analysen.','Acelera los análisis; nivel 1 desbloquea la cola de investigación.','Accélère les analyses ; niveau 1 débloque la file de recherche.','Acelera análises; nível 1 desbloqueia a fila de pesquisa.','Accelera le analisi; il livello 1 sblocca la coda di ricerca.','Przyspiesza analizy; poziom 1 odblokowuje kolejkę badań.')
  ),
  commercialization:rc(
   l('Commercialization','Kommerzialisierung','Comercialización','Commercialisation','Comercialização','Commercializzazione','Komercjalizacja'),
@@ -212,7 +212,7 @@ const research:Record<RepeatableResearchId,ResearchCopy>={
  autonomousScience:rc(
   l('Autonomous Science','Autonome Wissenschaft','Ciencia autónoma','Science autonome','Ciência autônoma','Scienza autonoma','Autonomiczna nauka'),
   l('Automation','Automation','Automatización','Automatisation','Automação','Automazione','Automatyzacja'),
-  l('Research also scales with model level and reduces long-term micromanagement.','Forschung skaliert zusätzlich mit Model-Level und reduziert langfristig Mikromanagement.','La investigación también escala con el nivel del modelo y reduce la microgestión.','La recherche évolue aussi avec le niveau du modèle et réduit la microgestion.','A pesquisa também escala com o nível do modelo e reduz a microgestão.','La ricerca scala anche con il livello modello e riduce la microgestione.','Badania dodatkowo skalują się z poziomem modelu i ograniczają mikrozarządzanie.')
+  l('+0.02 laboratory bonus per level; required for the research director.','+0,02 Laborleistungsbonus je Level; Voraussetzung des Forschungsdirektors.','La investigación también escala con el nivel del modelo y reduce la microgestión.','La recherche évolue aussi avec le niveau du modèle et réduit la microgestion.','A pesquisa também escala com o nível do modelo e reduz a microgestão.','La ricerca scala anche con il livello modello e riduce la microgestione.','Badania dodatkowo skalują się z poziomem modelu i ograniczają mikrozarządzanie.')
  ),
  tapAmplification:rc(
   l('Impulse Amplification','Impulsverstärkung','Amplificación de impulso','Amplification des impulsions','Amplificação de impulso','Amplificazione impulso','Wzmocnienie impulsu'),
@@ -232,17 +232,23 @@ export const researchText=(id:RepeatableResearchId,language:Language)=>{
 };
 
 const projects:Record<ResearchProjectId,{name:L;effect:L}>={
+ dataPipeline:{name:l('Data Pipeline','Datenpipeline','Data Pipeline','Data Pipeline','Data Pipeline','Data Pipeline','Data Pipeline'),effect:l('Future analyses cost 80% of regular Data, rounded up.','Zukünftige Analysen kosten 80 % der regulären Data, aufgerundet.','Future analyses cost 80% of regular Data, rounded up.','Future analyses cost 80% of regular Data, rounded up.','Future analyses cost 80% of regular Data, rounded up.','Future analyses cost 80% of regular Data, rounded up.','Future analyses cost 80% of regular Data, rounded up.')},
+ distributedInference:{name:l('Distributed Inference','Verteilte Inferenz','Distributed Inference','Distributed Inference','Distributed Inference','Distributed Inference','Distributed Inference'),effect:l('25 predecessor units boost up to ten adjacent successor units.','25 Einheiten der Vorgängerklasse verstärken bis zu zehn benachbarte Nachfolger.','25 predecessor units boost up to ten adjacent successor units.','25 predecessor units boost up to ten adjacent successor units.','25 predecessor units boost up to ten adjacent successor units.','25 predecessor units boost up to ten adjacent successor units.','25 predecessor units boost up to ten adjacent successor units.')},
+ modelTransfer:{name:l('Model Transfer','Modelltransfer','Model Transfer','Model Transfer','Model Transfer','Model Transfer','Model Transfer'),effect:l('First six successful training starts each run: base duration ×0.50.','Erste sechs erfolgreiche Trainingsstarts je Run: Grunddauer ×0,50.','First six successful training starts each run: base duration ×0.50.','First six successful training starts each run: base duration ×0.50.','First six successful training starts each run: base duration ×0.50.','First six successful training starts each run: base duration ×0.50.','First six successful training starts each run: base duration ×0.50.')},
+ materialRecycling:{name:l('Material Recycling','Materialrecycling','Material Recycling','Material Recycling','Material Recycling','Material Recycling','Material Recycling'),effect:l('Returns 5% of reserved components per crafted item, with separate fractional remainders.','5 % der reservierten Komponenten je hergestelltem Item zurück; getrennte Bruchteilreste.','Returns 5% of reserved components per crafted item, with separate fractional remainders.','Returns 5% of reserved components per crafted item, with separate fractional remainders.','Returns 5% of reserved components per crafted item, with separate fractional remainders.','Returns 5% of reserved components per crafted item, with separate fractional remainders.','Returns 5% of reserved components per crafted item, with separate fractional remainders.')},
+ researchScheduling:{name:l('Research Scheduling','Forschungsplanung','Research Scheduling','Research Scheduling','Research Scheduling','Research Scheduling','Research Scheduling'),effect:l('Enables the research director together with labs4; regular paid research only.','Schaltet mit labs4 den Forschungsdirektor frei; ausschließlich regulär bezahlte Forschung.','Enables the research director together with labs4; regular paid research only.','Enables the research director together with labs4; regular paid research only.','Enables the research director together with labs4; regular paid research only.','Enables the research director together with labs4; regular paid research only.','Enables the research director together with labs4; regular paid research only.')},
+
  operations:{
-  name:l('Lab Automation','Labor-Automation','Automatización de laboratorio','Automatisation du laboratoire','Automação de laboratório','Automazione laboratorio','Automatyzacja laboratorium'),
-  effect:l('Unlocks Lab Automation as a research breakthrough.','Schaltet Labor-Automation als Forschungsdurchbruch frei.','Desbloquea Automatización de laboratorio como avance.','Débloque Automatisation du laboratoire comme percée.','Desbloqueia Automação de laboratório como avanço.','Sblocca Automazione laboratorio come scoperta.','Odblokowuje Automatyzację laboratorium jako przełom.')
+  name:l('Lab Organization','Labororganisation','Automatización de laboratorio','Automatisation du laboratoire','Automação de laboratório','Automazione laboratorio','Automatyzacja laboratorium'),
+  effect:l('Expands the labs2 queue from two to four waiting projects.','Erweitert die labs2-Queue von zwei auf vier wartende Aufträge.','Desbloquea Automatización de laboratorio como avance.','Débloque Automatisation du laboratoire comme percée.','Desbloqueia Automação de laboratório como avanço.','Sblocca Automazione laboratorio come scoperta.','Odblokowuje Automatyzację laboratorium jako przełom.')
  },
  blueprints:{
   name:l('Open Blueprints','Offene Baupläne','Planos abiertos','Plans ouverts','Projetos abertos','Progetti aperti','Otwarte schematy'),
   effect:l('Unlocks advanced item recipes.','Schaltet fortgeschrittene Itemrezepte frei.','Desbloquea recetas avanzadas.','Débloque les recettes avancées.','Desbloqueia receitas avançadas.','Sblocca ricette avanzate.','Odblokowuje zaawansowane receptury.')
  },
  alignment:{
-  name:l('Interpretable Models','Interpretierbare Modelle','Modelos interpretables','Modèles interprétables','Modelos interpretáveis','Modelli interpretabili','Interpretowalne modele'),
-  effect:l('Unlocks the Interpretability prestige option.','Schaltet die Prestige-Option Interpretierbarkeit frei.','Desbloquea la opción de prestigio Interpretabilidad.','Débloque l’option de prestige Interprétabilité.','Desbloqueia a opção de prestígio Interpretabilidade.','Sblocca l’opzione prestigio Interpretabilità.','Odblokowuje opcję prestiżu Interpretowalność.')
+  name:l('Reproducible Models','Reproduzierbare Modelle','Modelos interpretables','Modèles interprétables','Modelos interpretáveis','Modelli interpretabili','Interpretowalne modele'),
+  effect:l('Future training base duration ×0.90.','Grunddauer zukünftiger Trainings ×0,90.','Desbloquea la opción de prestigio Interpretabilidad.','Débloque l’option de prestige Interprétabilité.','Desbloqueia a opção de prestígio Interpretabilidade.','Sblocca l’opzione prestigio Interpretabilità.','Odblokowuje opcję prestiżu Interpretowalność.')
  }
 };
 
@@ -467,11 +473,13 @@ const prestigeEffects:Record<PrestigeUpgradeId,L>={
 };
 
 export const prestigeText=(id:PrestigeUpgradeId,language:Language)=>{
+ const researchCopy:Partial<Record<PrestigeUpgradeId,[string,string]>>={labs2:['Two waiting projects; regular automatic queue starts. Operations expands capacity to four.','Zwei wartende Aufträge; regulärer automatischer Queue-Start. Labororganisation erweitert auf vier.'],labs3:['One repeatable project with an explicit target level; manual queue takes priority.','Ein wiederholbares Projekt mit explizitem Ziellevel; manuelle Queue hat Vorrang.'],labs4:['Permanent laboratory performance contribution. Research director also requires Research Scheduling.','Dauerhafter Laborleistungsbeitrag. Der Forschungsdirektor benötigt zusätzlich Forschungsplanung.'],labs5:['Queue configuration is retained through normal prestige.','Queue-Konfiguration bleibt bei normalem Prestige erhalten.'],labs6:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.'],labs7:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.'],labs8:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.']};
+
  if(id==='shoppingAgent'||id==='trainingPlan'||id==='componentScanner')return{name:pick(id==='shoppingAgent'?l('Shopping Agent','Einkaufsagent','','','','',''):id==='trainingPlan'?l('Training Plan','Trainingsplan','','','','',''):l('Component Scanner','Komponentenscanner','','','','',''),language),effect:pick(prestigeEffects[id],language)};
  const depth=Number(id.match(/([1-8])$/)?.[1]??1);
  const branch=id.startsWith('dataArchive')?0:id.startsWith('computeNet')?1:id.startsWith('analysis')?2:id.startsWith('labs')?3:4;
  return {
   name:`${pick(branches[branch],language)} ${roman[depth]}`,
-  effect:[pick(prestigeEffects[id],language),researchUnlockText(id,language)].filter(Boolean).join(' '),
+  effect:[researchCopy[id]&&['de','en'].includes(language)?researchCopy[id]![language==='de'?1:0]:pick(prestigeEffects[id],language),researchUnlockText(id,language)].filter(Boolean).join(' '),
  };
 };

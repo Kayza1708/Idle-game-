@@ -1,0 +1,1043 @@
+{
+  "fixture": "explicitly prepared Data/INT/levels; actual domain node purchases and paid UI starts; not natural unlock timing",
+  "checks": [
+    {
+      "width": 360,
+      "language": "de",
+      "initialCards": 3,
+      "compactAreaPreviews": 5,
+      "newKeyCards": 5,
+      "actualInitialDebit": 363,
+      "actualKeyJob": {
+        "id": "dataPipeline",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 1,
+        "startedAt": 1791720005100,
+        "endsAt": 1791786461291.6802,
+        "durationSeconds": 66456.19168005542,
+        "dataCost": 937622687,
+        "dataCostExact": {
+          "m": 9.37622687,
+          "e": 8
+        }
+      },
+      "configuredDirector": {
+        "enabled": false,
+        "entries": [
+          {
+            "id": "dataGeneration",
+            "targetLevel": 6
+          }
+        ],
+        "reservePercent": 0.5,
+        "budget": {
+          "m": 1,
+          "e": 6
+        },
+        "spent": {
+          "m": 0,
+          "e": 0
+        },
+        "mode": "strict",
+        "elapsed": 0
+      },
+      "actualAutomatedJob": {
+        "id": "dataGeneration",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 807.1260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 6,
+        "startedAt": 1791720015400,
+        "endsAt": 1791720636216.22,
+        "durationSeconds": 620.8162200464122,
+        "dataCost": 7867,
+        "dataCostExact": {
+          "m": 7.867,
+          "e": 3
+        }
+      },
+      "actualDirectorSpend": {
+        "m": 7.867,
+        "e": 3
+      },
+      "touchTargets": [
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 193.65625
+        },
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 145.953125
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 296
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        }
+      ],
+      "pageWidth": 360,
+      "errors": []
+    },
+    {
+      "width": 360,
+      "language": "en",
+      "initialCards": 3,
+      "compactAreaPreviews": 5,
+      "newKeyCards": 5,
+      "actualInitialDebit": 363,
+      "actualKeyJob": {
+        "id": "dataPipeline",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 1,
+        "startedAt": 1791720005100,
+        "endsAt": 1791786461291.6802,
+        "durationSeconds": 66456.19168005542,
+        "dataCost": 937622687,
+        "dataCostExact": {
+          "m": 9.37622687,
+          "e": 8
+        }
+      },
+      "configuredDirector": {
+        "enabled": false,
+        "entries": [
+          {
+            "id": "dataGeneration",
+            "targetLevel": 6
+          }
+        ],
+        "reservePercent": 0.5,
+        "budget": {
+          "m": 1,
+          "e": 6
+        },
+        "spent": {
+          "m": 0,
+          "e": 0
+        },
+        "mode": "strict",
+        "elapsed": 0
+      },
+      "actualAutomatedJob": {
+        "id": "dataGeneration",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 807.1260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 6,
+        "startedAt": 1791720015400,
+        "endsAt": 1791720636216.22,
+        "durationSeconds": 620.8162200464122,
+        "dataCost": 7867,
+        "dataCostExact": {
+          "m": 7.867,
+          "e": 3
+        }
+      },
+      "actualDirectorSpend": {
+        "m": 7.867,
+        "e": 3
+      },
+      "touchTargets": [
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 128.90625
+        },
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 147.21875
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 296
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 336
+        }
+      ],
+      "pageWidth": 360,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "language": "de",
+      "initialCards": 3,
+      "compactAreaPreviews": 5,
+      "newKeyCards": 5,
+      "actualInitialDebit": 363,
+      "actualKeyJob": {
+        "id": "dataPipeline",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 1,
+        "startedAt": 1791720005100,
+        "endsAt": 1791786461291.6802,
+        "durationSeconds": 66456.19168005542,
+        "dataCost": 937622687,
+        "dataCostExact": {
+          "m": 9.37622687,
+          "e": 8
+        }
+      },
+      "configuredDirector": {
+        "enabled": false,
+        "entries": [
+          {
+            "id": "dataGeneration",
+            "targetLevel": 6
+          }
+        ],
+        "reservePercent": 0.5,
+        "budget": {
+          "m": 1,
+          "e": 6
+        },
+        "spent": {
+          "m": 0,
+          "e": 0
+        },
+        "mode": "strict",
+        "elapsed": 0
+      },
+      "actualAutomatedJob": {
+        "id": "dataGeneration",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 807.1260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 6,
+        "startedAt": 1791720015400,
+        "endsAt": 1791720636216.22,
+        "durationSeconds": 620.8162200464122,
+        "dataCost": 7867,
+        "dataCostExact": {
+          "m": 7.867,
+          "e": 3
+        }
+      },
+      "actualDirectorSpend": {
+        "m": 7.867,
+        "e": 3
+      },
+      "touchTargets": [
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 193.65625
+        },
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 145.953125
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 326
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        }
+      ],
+      "pageWidth": 390,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "language": "en",
+      "initialCards": 3,
+      "compactAreaPreviews": 5,
+      "newKeyCards": 5,
+      "actualInitialDebit": 363,
+      "actualKeyJob": {
+        "id": "dataPipeline",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 1,
+        "startedAt": 1791720005100,
+        "endsAt": 1791786461291.6802,
+        "durationSeconds": 66456.19168005542,
+        "dataCost": 937622687,
+        "dataCostExact": {
+          "m": 9.37622687,
+          "e": 8
+        }
+      },
+      "configuredDirector": {
+        "enabled": false,
+        "entries": [
+          {
+            "id": "dataGeneration",
+            "targetLevel": 6
+          }
+        ],
+        "reservePercent": 0.5,
+        "budget": {
+          "m": 1,
+          "e": 6
+        },
+        "spent": {
+          "m": 0,
+          "e": 0
+        },
+        "mode": "strict",
+        "elapsed": 0
+      },
+      "actualAutomatedJob": {
+        "id": "dataGeneration",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 807.1260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 6,
+        "startedAt": 1791720015400,
+        "endsAt": 1791720636216.22,
+        "durationSeconds": 620.8162200464122,
+        "dataCost": 7867,
+        "dataCostExact": {
+          "m": 7.867,
+          "e": 3
+        }
+      },
+      "actualDirectorSpend": {
+        "m": 7.867,
+        "e": 3
+      },
+      "touchTargets": [
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 128.90625
+        },
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 147.21875
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 326
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 366
+        }
+      ],
+      "pageWidth": 390,
+      "errors": []
+    },
+    {
+      "width": 430,
+      "language": "de",
+      "initialCards": 3,
+      "compactAreaPreviews": 5,
+      "newKeyCards": 5,
+      "actualInitialDebit": 363,
+      "actualKeyJob": {
+        "id": "dataPipeline",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 1,
+        "startedAt": 1791720005100,
+        "endsAt": 1791786461291.6802,
+        "durationSeconds": 66456.19168005542,
+        "dataCost": 937622687,
+        "dataCostExact": {
+          "m": 9.37622687,
+          "e": 8
+        }
+      },
+      "configuredDirector": {
+        "enabled": false,
+        "entries": [
+          {
+            "id": "dataGeneration",
+            "targetLevel": 6
+          }
+        ],
+        "reservePercent": 0.5,
+        "budget": {
+          "m": 1,
+          "e": 6
+        },
+        "spent": {
+          "m": 0,
+          "e": 0
+        },
+        "mode": "strict",
+        "elapsed": 0
+      },
+      "actualAutomatedJob": {
+        "id": "dataGeneration",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 807.1260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 6,
+        "startedAt": 1791720015400,
+        "endsAt": 1791720636216.22,
+        "durationSeconds": 620.8162200464122,
+        "dataCost": 7867,
+        "dataCostExact": {
+          "m": 7.867,
+          "e": 3
+        }
+      },
+      "actualDirectorSpend": {
+        "m": 7.867,
+        "e": 3
+      },
+      "touchTargets": [
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 193.65625
+        },
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 145.953125
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        }
+      ],
+      "pageWidth": 430,
+      "errors": []
+    },
+    {
+      "width": 430,
+      "language": "en",
+      "initialCards": 3,
+      "compactAreaPreviews": 5,
+      "newKeyCards": 5,
+      "actualInitialDebit": 363,
+      "actualKeyJob": {
+        "id": "dataPipeline",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 1,
+        "startedAt": 1791720005100,
+        "endsAt": 1791786461291.6802,
+        "durationSeconds": 66456.19168005542,
+        "dataCost": 937622687,
+        "dataCostExact": {
+          "m": 9.37622687,
+          "e": 8
+        }
+      },
+      "configuredDirector": {
+        "enabled": false,
+        "entries": [
+          {
+            "id": "dataGeneration",
+            "targetLevel": 6
+          }
+        ],
+        "reservePercent": 0.5,
+        "budget": {
+          "m": 1,
+          "e": 6
+        },
+        "spent": {
+          "m": 0,
+          "e": 0
+        },
+        "mode": "strict",
+        "elapsed": 0
+      },
+      "actualAutomatedJob": {
+        "id": "dataGeneration",
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 807.1260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "level": 6,
+        "startedAt": 1791720015400,
+        "endsAt": 1791720636216.22,
+        "durationSeconds": 620.8162200464122,
+        "dataCost": 7867,
+        "dataCostExact": {
+          "m": 7.867,
+          "e": 3
+        }
+      },
+      "actualDirectorSpend": {
+        "m": 7.867,
+        "e": 3
+      },
+      "touchTargets": [
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 128.90625
+        },
+        {
+          "tag": "SUMMARY",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 147.21875
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        },
+        {
+          "tag": "INPUT",
+          "height": 44,
+          "width": 366
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "BUTTON",
+          "height": 44,
+          "width": 44
+        },
+        {
+          "tag": "SELECT",
+          "height": 44,
+          "width": 406
+        }
+      ],
+      "pageWidth": 430,
+      "errors": []
+    }
+  ]
+}

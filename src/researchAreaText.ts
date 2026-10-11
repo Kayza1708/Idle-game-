@@ -1,4 +1,6 @@
-import { researchAreas, researchAreaOrder } from "./researchAreas";
+import {isRepeatableResearch,type ResearchId} from './economy';
+import {researchText,projectText} from './gameplayI18n';
+import { researchAreas, researchAreaOrder, researchNodeAccess } from "./researchAreas";
 const copy = {
   initial: [
     "Anfangsbereich",
@@ -13,20 +15,21 @@ const copy = {
     "Existing synthetic Data and Data Flywheel research.",
   ],
   architecture: [
-    "Modell-/Systemarchitektur",
-    "Model / system architecture",
+    "Systemarchitektur",
+    "System architecture",
     "Vorhandene Compute-, Kapazitäts-, Umsatz- und Modellforschung.",
     "Existing compute, capacity, revenue and model research.",
   ],
+  model: ["Modellwissenschaft","Model science","Umsatz, Modelle und Training.","Revenue, models and training."],
   materials: [
-    "Material-/Bauplanforschung",
-    "Material / blueprint research",
+    "Materialwissenschaft",
+    "Material science",
     "Vorhandene Material-, Bauplan- und Signalprotokollforschung.",
     "Existing material, blueprint and drop-protocol research.",
   ],
   automation: [
-    "Laborautomation",
-    "Lab automation",
+    "Labororganisation",
+    "Lab organization",
     "Vorhandene Laborautomation und autonome Wissenschaft.",
     "Existing lab automation and autonomous science.",
   ],
@@ -39,10 +42,6 @@ export const researchAreaText = (
   return { name: copy[area][de ? 0 : 1], benefit: copy[area][de ? 2 : 3] };
 };
 export function researchUnlockText(node: string, language: string) {
-  const area = researchAreaOrder.find(
-    (area) => researchAreas[area].node === node,
-  );
-  return area
-    ? `${language === "de" ? "Dauerhafter Forschungszugang" : "Permanent research access"}: ${researchAreaText(area, language).name}.`
-    : "";
+  const ids=Object.entries(researchNodeAccess).filter(([,n])=>n===node).map(([id])=>isRepeatableResearch(id as ResearchId)?researchText(id as never,language as never).name:projectText(id as ResearchId as never,language as never).name);
+  return ids.length?`${language==='de'?'Dauerhafter Projektzugang':'Permanent project access'}: ${ids.join(', ')}.`:'';
 }

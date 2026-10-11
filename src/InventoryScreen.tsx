@@ -1,3 +1,4 @@
+import {ResearchItemComparison} from './ResearchItemComparison';
 import {RecipeIngredient} from './RecipeIngredient';
 import {blueprintQuote} from './blueprints';
 import {specialItemEffectText,specialItemComparisonText} from './specialItemText';
@@ -68,7 +69,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
     <ul>
       {[...new Set(itemEffectProfile(entry))].map((e) => (
         <li key={e}>
-          {effectText(e, language)}{e === "training" ? " (B)" : ""}:{" "}
+          {e==="research"?(de?"Laborleistung (B, vor Synergiepotenz)":"Laboratory contribution (B, before synergy power)"):effectText(e, language)}{e === "training" ? " (B)" : ""}:{" "}
           {e === "relay" || e === "int-yield"
               ? specialItemEffectText(s,entry)
               : `+${(itemEffectFor(s, entry, e) * (1 + deepPrestigeBonus(s, "manufacturing")) * 100).toFixed(2)} %`}
@@ -151,6 +152,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             </ul>
           </>
         )}
+        {q.recycling.fraction>0&&<p>{de?'Materialrecycling bei jedem Item-Abschluss: 5 % der reservierten Komponenten; Bruchteile werden je Typ gespeichert. Keine Module oder Data zurück.':'Material recycling at each item completion: 5% of reserved components; fractions are stored separately per type. No modules or Data returned.'}</p>}
         {Object.keys(q.missingComponents).length > 0 &&
           !s.discovered.includes("sbc") && (
             <p>
@@ -486,6 +488,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 </p>
                 {effect(q.result)}
                 {specialItemComparisonText(s,item,q.result)&&<p className="special-item-comparison">{specialItemComparisonText(s,item,q.result)}</p>}
+                {itemEffectProfile(item).includes("research") && <ResearchItemComparison s={s} before={item} after={q.result}/>}
                 {itemEffectProfile(item).includes("training") && <TrainingItemCostComparison s={s} before={item} after={q.result}/>}
                 {!effective && (
                   <p>

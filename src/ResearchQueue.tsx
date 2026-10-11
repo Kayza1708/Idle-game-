@@ -5,6 +5,7 @@ import {
   type ResearchId,
   hasNode,
   isRepeatableResearch,
+  researchQueueCapacity,
   researchQueuePreview,
   researchPreview,
 } from "./economy";
@@ -38,7 +39,7 @@ export function ResearchQueue({
   return (
     <section className="research-queue-panel">
       <h2>
-        {de ? "Forschungsqueue" : "Research queue"} · {s.researchQueue.length}/2
+        {de ? "Forschungsqueue" : "Research queue"} · {s.researchQueue.length}/{researchQueueCapacity(s)}
       </h2>
       <p>
         {de
@@ -73,7 +74,7 @@ export function ResearchQueue({
                   <small>
                     {labels[q.reason]}
                     {q.reason === "requirement" &&
-                      `: ${name(researchPreview(s, id)!.requirement!)} 1`}
+                      `: ${researchPreview(s,id)!.requirements.map(r=>`${name(r.id)} ${r.level}`).join(', ')}`}
                   </small>
                 )}
               </span>

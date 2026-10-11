@@ -1,7 +1,7 @@
 import {ItemCombinations} from './ItemCombinations';
 import {specialItemEffectText} from './specialItemText';
 import {useEffect,useRef,useState} from 'react';
-import {BALANCE,computeRate,dataRate,equipmentSlotCount,equipmentSlots,exactEconomyValue,formatScientific,deepPrestigeBonus,itemEffectFor,itemEffectProfile,itemTypes,type GameState,type ItemSlot} from './economy';
+import {BALANCE,researchPerformanceQuote,computeRate,dataRate,equipmentSlotCount,equipmentSlots,exactEconomyValue,formatScientific,deepPrestigeBonus,itemEffectFor,itemEffectProfile,itemTypes,type GameState,type ItemSlot} from './economy';
 import {creditRate} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {ItemArt} from './GameArt';
@@ -9,7 +9,8 @@ import {effectText,itemText,rarityText} from './gameplayI18n';
 
 type Action=(name:string,...args:any[])=>void;
 const slotName=(slot:ItemSlot,de:boolean)=>de?({processor:'Prozessor',core:'Kern',research:'Forschung'}[slot]):({processor:'Processor',core:'Core',research:'Research'}[slot]);
-export const equipmentEffectCopy=(s:GameState,item:GameState['inventory'][number])=>specialItemEffectText(s,item)??itemEffectProfile(item).map(effect=>`${effectText(effect,s.settings.language)}${effect==='training'?' (B)':''} +${(itemEffectFor(s,item,effect)*(1+deepPrestigeBonus(s,'manufacturing'))*100).toFixed(1)} %`).join(' · ');
+export const equipmentEffectCopy=(s:GameState,item:GameState['inventory'][number])=>specialItemEffectText(s,item)??itemEffectProfile(item).map(effect=>{if(effect==='research'){const before=researchPerformanceQuote(s),after=researchPerformanceQuote({...s,equipped:{...s.equipped,[itemTypes[item.type].slot]:item.id}});return`${s.settings.language==='de'?'Laborfaktor bei Ausrüstung':'Laboratory factor when equipped'} ×${before.laborFactor.toFixed(4)} → ×${after.laborFactor.toFixed(4)}`;}return`${effectText(effect,s.settings.language)}${effect==='training'?' (B)':''} +${(itemEffectFor(s,item,effect)*(1+deepPrestigeBonus(s,'manufacturing'))*100).toFixed(1)} %`;}).join(' · ');
+
 export function equipmentPreview(s:GameState,id:string){const item=s.inventory.find(entry=>entry.id===id);if(!item)return null;const slot=itemTypes[item.type].slot,next={...s,equipped:{...s.equipped,[slot]:id}};return{before:{credits:creditRate(s.hardware,s.level,s,s.savedAt),compute:computeRate(s.hardware,s),data:dataRate(s)},after:{credits:creditRate(next.hardware,next.level,next,next.savedAt),compute:computeRate(next.hardware,next),data:dataRate(next)},state:next};}
 export function EquipmentDialog({s,act,onClose}:{s:GameState;act:Action;onClose:()=>void}){
  const de=s.settings.language==='de',[selected,setSelected]=useState<ItemSlot>('processor'),close=useRef<HTMLButtonElement>(null),count=equipmentSlotCount(s),costFor=(target:2|3)=>ScientificNumber.from(BALANCE.equipmentSlotCosts[target-2]);

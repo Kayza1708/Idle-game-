@@ -55,7 +55,7 @@ export function AnalysisContracts({
                           : "Long contract"}
                     </b>
                     <p>
-                      {formatScientific(q.costExact, 1)} Data ·{" "}
+                      {formatScientific(q.costExact, 1)} Data {q.dataFactor<1&&<small>{de?'Datenpipeline':'Data pipeline'}: {q.baseCost.data} ×{q.dataFactor}, {de?'aufgerundet':'rounded up'}</small>} ·{" "}
                       {(q.duration / 60).toFixed(1)} min
                     </p>
                     {reason && <p role="status">{reason}</p>}

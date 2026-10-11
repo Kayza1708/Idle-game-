@@ -1,4 +1,5 @@
 import {
+  trainingDurationQuote,
   trainingCostQuote,
   trainingDataCostForLevelScientific,
   itemTypes,
@@ -14,13 +15,13 @@ export function TrainingCostDetails({
   s: GameState;
   track: TrainingTrack;
 }) {
-  const q = trainingCostQuote(s, track),
+  const duration=trainingDurationQuote(s,track),q = trainingCostQuote(s, track),
     de = s.settings.language === "de",
     baseline = trainingDataCostForLevelScientific(q.targetLevel),
     actualDiscount = 1 - q.cost.divide(baseline).toNumber();
   return (
     <span className="training-cost-details">
-      {track}: {de ? "Basis" : "Base"} {formatScientific(q.baseCost, 3)} Data →{" "}
+      {de?'Grunddauer → Startdauer':'Base → start duration'}: {duration.baseDuration.toFixed(1)} → {duration.duration.toFixed(1)} s (alignment ×{duration.alignment}; modelTransfer ×{duration.modelTransfer}, {de?'Start':'start'} {duration.runStart}) · {track}: {de ? "Basis" : "Base"} {formatScientific(q.baseCost, 3)} Data →{" "}
       {formatScientific(q.cost, 3)} Data · {de ? "Kostenfaktor" : "Cost factor"}{" "}
       {q.factor.toFixed(4)} ·{" "}
       {de ? "Faktorrabatt vor Aufrundung" : "Factor discount before rounding"}{" "}

@@ -1,0 +1,1608 @@
+{
+  "baselineCommit": "99c10ee",
+  "preparedTechnicalComparisons": true,
+  "naturalProgressionMeasurement": false,
+  "before": {
+    "basis": "Explicitly prepared Data/INT/research levels, regular node purchases, quotes and paid domain starts. Completion clock placed at saved end time through settleResearchCompletions. No natural unlock timing, day/month campaign or balance claim.",
+    "projects": [
+      {
+        "id": "dataGeneration",
+        "cost": {
+          "m": 7.867,
+          "e": 3
+        },
+        "paid": {
+          "m": 7.867000000327806,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 807.1260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "materialAnalysis",
+        "cost": {
+          "m": 2.167,
+          "e": 3
+        },
+        "paid": {
+          "m": 2.166999999442254,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 2690.420062500001,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "blueprintAnalysis",
+        "cost": {
+          "m": 2.167,
+          "e": 3
+        },
+        "paid": {
+          "m": 2.166999999442254,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 2690.420062500001,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "modelArchitecture",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "computeOptimization",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "userScaling",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "hardwareIntegration",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "labAutomation",
+        "cost": {
+          "m": 1.3002,
+          "e": 4
+        },
+        "paid": {
+          "m": 1.300199999887397,
+          "e": 4
+        },
+        "baseDuration": null,
+        "effectiveDuration": 16142.520375000006,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "commercialization",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "networkEffects",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "parallelArchitecture",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "hardwareCoDesign",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "syntheticData",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "dataFlywheel",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "recursiveLearning",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "autonomousScience",
+        "cost": {
+          "m": 1.3002,
+          "e": 4
+        },
+        "paid": {
+          "m": 1.300199999887397,
+          "e": 4
+        },
+        "baseDuration": null,
+        "effectiveDuration": 16142.520375000006,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "tapAmplification",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 8071.260187500003,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "dropProtocols",
+        "cost": {
+          "m": 2.167,
+          "e": 3
+        },
+        "paid": {
+          "m": 2.166999999442254,
+          "e": 3
+        },
+        "baseDuration": null,
+        "effectiveDuration": 2690.420062500001,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "operations",
+        "cost": {
+          "m": 6,
+          "e": 2
+        },
+        "paid": {
+          "m": 5.999999996841865,
+          "e": 2
+        },
+        "baseDuration": null,
+        "effectiveDuration": 3600,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "blueprints",
+        "cost": {
+          "m": 1,
+          "e": 2
+        },
+        "paid": {
+          "m": 1.0000000050247593,
+          "e": 2
+        },
+        "baseDuration": null,
+        "effectiveDuration": 600,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "alignment",
+        "cost": {
+          "m": 2.5,
+          "e": 2
+        },
+        "paid": {
+          "m": 2.4999999848063226,
+          "e": 2
+        },
+        "baseDuration": null,
+        "effectiveDuration": 1800,
+        "jobId": null,
+        "quoteBasis": null,
+        "completed": 1,
+        "afterReload": 1
+      }
+    ],
+    "lab": {
+      "beforeDuration": 3600,
+      "afterHardwareAchievementOverclockLabBoost": 1800,
+      "performance": null,
+      "researchPointsRate": {
+        "m": 3.272722108386244,
+        "e": 6
+      }
+    },
+    "training": {
+      "regularBase": 90,
+      "quoted": 90,
+      "stored": {
+        "track": "quality",
+        "costBasis": {
+          "targetLevel": 1,
+          "baseDataCostExact": {
+            "m": 1.5,
+            "e": 1
+          },
+          "factor": 1,
+          "bonusTotal": 0,
+          "sources": {}
+        },
+        "creditCost": 0,
+        "dataCost": 15,
+        "dataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "workRequired": 90,
+        "startedAt": 0,
+        "baseDuration": 90,
+        "startingRate": 1,
+        "onlineWork": 0,
+        "offlineWork": 0
+      },
+      "paid": {
+        "m": 1.4999999020659516,
+        "e": 1
+      }
+    },
+    "analysis": {
+      "base": 57623,
+      "quoted": 57623,
+      "stored": 57623
+    },
+    "distributedInference": {
+      "terms": {
+        "ownedCompute": 200,
+        "linkedCompute": 0,
+        "milestone": 1.12,
+        "classUpgrade": 1,
+        "mastery": 1
+      },
+      "compute": {
+        "m": 2.376800380304156,
+        "e": 3
+      }
+    },
+    "recycling": {
+      "quantity": 5,
+      "reserved": {
+        "components": {
+          "circuits": 100,
+          "copperCoils": 40,
+          "siliconWafers": 60,
+          "titaniumBolts": 0,
+          "photonicLenses": 30,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 5
+        },
+        "data": 6000,
+        "blueprints": 0
+      },
+      "returnedCircuits": 0,
+      "returnedLenses": 0,
+      "remainders": null,
+      "items": 5
+    }
+  },
+  "after": {
+    "basis": "Explicitly prepared Data/INT/research levels, regular node purchases, quotes and paid domain starts. Completion clock placed at saved end time through settleResearchCompletions. No natural unlock timing, day/month campaign or balance claim.",
+    "projects": [
+      {
+        "id": "dataGeneration",
+        "cost": {
+          "m": 7.867,
+          "e": 3
+        },
+        "paid": {
+          "m": 7.867000000327806,
+          "e": 3
+        },
+        "baseDuration": 807.1260187500003,
+        "effectiveDuration": 620.8162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 807.1260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "materialAnalysis",
+        "cost": {
+          "m": 2.167,
+          "e": 3
+        },
+        "paid": {
+          "m": 2.166999999442254,
+          "e": 3
+        },
+        "baseDuration": 2690.420062500001,
+        "effectiveDuration": 2069.3874001547074,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 2690.420062500001,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "blueprintAnalysis",
+        "cost": {
+          "m": 2.167,
+          "e": 3
+        },
+        "paid": {
+          "m": 2.166999999442254,
+          "e": 3
+        },
+        "baseDuration": 2690.420062500001,
+        "effectiveDuration": 2069.3874001547074,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 2690.420062500001,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "modelArchitecture",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "computeOptimization",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "userScaling",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "hardwareIntegration",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "labAutomation",
+        "cost": {
+          "m": 1.3002,
+          "e": 4
+        },
+        "paid": {
+          "m": 1.300199999887397,
+          "e": 4
+        },
+        "baseDuration": 16142.520375000006,
+        "effectiveDuration": 12416.324400928244,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 16142.520375000006,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "commercialization",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "networkEffects",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "parallelArchitecture",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "hardwareCoDesign",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "syntheticData",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "dataFlywheel",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "recursiveLearning",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "autonomousScience",
+        "cost": {
+          "m": 1.3002,
+          "e": 4
+        },
+        "paid": {
+          "m": 1.300199999887397,
+          "e": 4
+        },
+        "baseDuration": 16142.520375000006,
+        "effectiveDuration": 12416.324400928244,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 16142.520375000006,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "tapAmplification",
+        "cost": {
+          "m": 5.418,
+          "e": 3
+        },
+        "paid": {
+          "m": 5.417999999757228,
+          "e": 3
+        },
+        "baseDuration": 8071.260187500003,
+        "effectiveDuration": 6208.162200464122,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 8071.260187500003,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "dropProtocols",
+        "cost": {
+          "m": 2.167,
+          "e": 3
+        },
+        "paid": {
+          "m": 2.166999999442254,
+          "e": 3
+        },
+        "baseDuration": 2690.420062500001,
+        "effectiveDuration": 2069.3874001547074,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 2690.420062500001,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "operations",
+        "cost": {
+          "m": 6,
+          "e": 2
+        },
+        "paid": {
+          "m": 5.999999996841865,
+          "e": 2
+        },
+        "baseDuration": 3600,
+        "effectiveDuration": 2769.0079866689753,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 3600,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "blueprints",
+        "cost": {
+          "m": 1,
+          "e": 2
+        },
+        "paid": {
+          "m": 1.0000000050247593,
+          "e": 2
+        },
+        "baseDuration": 600,
+        "effectiveDuration": 461.5013311114959,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 600,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "alignment",
+        "cost": {
+          "m": 2.5,
+          "e": 2
+        },
+        "paid": {
+          "m": 2.4999999848063226,
+          "e": 2
+        },
+        "baseDuration": 1800,
+        "effectiveDuration": 1384.5039933344876,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 1800,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "dataPipeline",
+        "cost": {
+          "m": 9.37622687,
+          "e": 8
+        },
+        "paid": {
+          "m": 9.376226870000004,
+          "e": 8
+        },
+        "baseDuration": 86400,
+        "effectiveDuration": 66456.19168005542,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "distributedInference",
+        "cost": {
+          "m": 6.45745652,
+          "e": 8
+        },
+        "paid": {
+          "m": 6.4574565200000045,
+          "e": 8
+        },
+        "baseDuration": 86400,
+        "effectiveDuration": 66456.19168005542,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "modelTransfer",
+        "cost": {
+          "m": 6.45745652,
+          "e": 8
+        },
+        "paid": {
+          "m": 6.4574565200000045,
+          "e": 8
+        },
+        "baseDuration": 86400,
+        "effectiveDuration": 66456.19168005542,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "materialRecycling",
+        "cost": {
+          "m": 2.58298261,
+          "e": 8
+        },
+        "paid": {
+          "m": 2.5829826099999953,
+          "e": 8
+        },
+        "baseDuration": 86400,
+        "effectiveDuration": 66456.19168005542,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      },
+      {
+        "id": "researchScheduling",
+        "cost": {
+          "m": 1.549789564,
+          "e": 9
+        },
+        "paid": {
+          "m": 1.5497895640000003,
+          "e": 9
+        },
+        "baseDuration": 86400,
+        "effectiveDuration": 66456.19168005542,
+        "jobId": "research-1",
+        "quoteBasis": {
+          "baseDuration": 86400,
+          "sources": {
+            "prestige:deep-labs": {
+              "m": 2.5,
+              "e": -1
+            },
+            "autonomousScience": {
+              "m": 1,
+              "e": -1
+            }
+          },
+          "bonusTotal": {
+            "m": 3.5,
+            "e": -1
+          },
+          "laborFactor": 1.3001045924503383,
+          "temporaryFactors": {
+            "labBoost": 1,
+            "overclock": 1
+          },
+          "minimumApplied": false
+        },
+        "completed": 1,
+        "afterReload": 1
+      }
+    ],
+    "lab": {
+      "beforeDuration": 2769.0079866689753,
+      "afterHardwareAchievementOverclockLabBoost": 593.740719909578,
+      "performance": {
+        "sources": {
+          "hardware:liquid:10": {
+            "m": 7.5,
+            "e": -2
+          },
+          "hardware:liquid:25": {
+            "m": 1.5,
+            "e": -1
+          },
+          "achievements": {
+            "m": 1,
+            "e": -1
+          },
+          "prestige:deep-labs": {
+            "m": 2.5,
+            "e": -1
+          },
+          "autonomousScience": {
+            "m": 1,
+            "e": -1
+          }
+        },
+        "bonusTotal": {
+          "m": 6.75,
+          "e": -1
+        },
+        "laborFactor": 1.51581316527703,
+        "temporaryFactors": {
+          "labBoost": 2,
+          "overclock": 2
+        }
+      },
+      "researchPointsRate": {
+        "m": 0,
+        "e": 0
+      }
+    },
+    "training": {
+      "regularBase": 90,
+      "quoted": 40.5,
+      "stored": {
+        "track": "quality",
+        "durationBasis": {
+          "baseDuration": 90,
+          "alignment": 0.9,
+          "modelTransfer": 0.5,
+          "runStart": 1,
+          "duration": 40.5
+        },
+        "costBasis": {
+          "targetLevel": 1,
+          "baseDataCostExact": {
+            "m": 1.5,
+            "e": 1
+          },
+          "factor": 1,
+          "bonusTotal": 0,
+          "sources": {}
+        },
+        "creditCost": 0,
+        "dataCost": 15,
+        "dataCostExact": {
+          "m": 1.5,
+          "e": 1
+        },
+        "workRequired": 40.5,
+        "startedAt": 0,
+        "baseDuration": 40.5,
+        "startingRate": 1,
+        "onlineWork": 0,
+        "offlineWork": 0
+      },
+      "paid": {
+        "m": 1.4999999020659516,
+        "e": 1
+      }
+    },
+    "analysis": {
+      "base": 57623,
+      "quoted": 46099,
+      "stored": 46099
+    },
+    "distributedInference": {
+      "terms": {
+        "ownedCompute": 200,
+        "linkedCompute": 25,
+        "milestone": 1.12,
+        "classUpgrade": 1,
+        "mastery": 1
+      },
+      "compute": {
+        "m": 2.636276404354828,
+        "e": 3
+      }
+    },
+    "recycling": {
+      "quantity": 5,
+      "reserved": {
+        "components": {
+          "circuits": 100,
+          "copperCoils": 40,
+          "siliconWafers": 60,
+          "titaniumBolts": 0,
+          "photonicLenses": 30,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 5
+        },
+        "data": 6000,
+        "blueprints": 0
+      },
+      "returnedCircuits": 5,
+      "returnedLenses": 1,
+      "remainders": {
+        "circuits": 0,
+        "copperCoils": 0,
+        "siliconWafers": 0,
+        "titaniumBolts": 0,
+        "photonicLenses": 0.5000000000000002,
+        "graphene": 0,
+        "nanotubes": 0,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "items": 5
+    }
+  }
+}

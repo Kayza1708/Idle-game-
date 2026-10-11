@@ -1,7 +1,7 @@
 import {
   researchAreas,
   researchAreaOrder,
-  nextResearchArea,
+  researchAccess, nextResearchStage,
 } from "./researchAreas";
 import { researchAreaText } from "./researchAreaText";
 import {
@@ -28,31 +28,30 @@ export function ResearchCatalog({
 }) {
   const de = s.settings.language === "de",
     language = s.settings.language,
-    next = nextResearchArea(s),
     name = (id: ResearchId) =>
       isRepeatableResearch(id)
         ? researchText(id, language)
         : projectText(id, language);
   return (
     <div className="research-catalog">
-      {(["initial", ...researchAreaOrder] as const)
+      {researchAreaOrder
         .filter(
           (area) =>
-            area === "initial" || (s.researchAreas ?? []).includes(area),
+            researchAreas[area].ids.some(id=>researchAccess(s,id).allowed),
         )
         .map((area) => {
           const ids = researchAreas[area].ids as readonly ResearchId[];
           return (
             <section data-research-area={area} key={area}>
               <h2>{researchAreaText(area, language).name}</h2>
-              {area !== "initial" && (
+              {(s.researchAccessIds.some(id=>ids.includes(id))||ids.some(id=>researchAccess(s,id).node&&researchAccess(s,id).allowed)) && (
                 <small>
                   {de ? "Dauerhaft freigeschaltet" : "Permanently unlocked"}
                 </small>
               )}
               <div className="research-projects">
                 {ids
-                  .filter((id) => !researchPreview(s, id)!.done)
+                  .filter((id) => researchAccess(s,id).allowed && !researchPreview(s, id)!.done)
                   .map((id) => {
                     const q = researchPreview(s, id)!,
                       copy = name(id),
@@ -85,7 +84,7 @@ export function ResearchCatalog({
                               ? ` · Lv ${s.researchLevels[id]}`
                               : ""}
                           </h3>
-                          <p>{copy.effect}</p>
+                          <small>{isRepeatableResearch(id)?(de?'Wiederholbare Grundlagenforschung':'Repeatable fundamentals'):(de?'Einmaliges Schlüsselprojekt':'One-time key project')}</small><p>{copy.effect}</p>{isRepeatableResearch(id)&&<span className="research-marks" aria-label={de?'Fortschrittsmarken ohne zusätzliche Belohnung':'Progress marks without extra rewards'}>{[5,10,25,50,100].map(mark=><i className={s.researchLevels[id]>=mark?'reached':''} key={mark}>{mark}</i>)}</span>}
                           <small>
                             {formatScientific(q.cost, 1)} Data ·{" "}
                             {(q.duration / 60).toFixed(1)} min
@@ -100,28 +99,7 @@ export function ResearchCatalog({
             </section>
           );
         })}
-      {next && (
-        <section
-          className="research-area-preview"
-          data-research-area-preview={next}
-        >
-          <h2>
-            {de ? "Nächster Forschungsbereich" : "Next research area"}:{" "}
-            {researchAreaText(next, language).name}
-          </h2>
-          <p>{researchAreaText(next, language).benefit}</p>
-          <p>
-            {de ? "Dauerhaft zugänglich durch" : "Permanent access through"}{" "}
-            {prestigeText(researchAreas[next].node, language).name}
-          </p>
-          <button
-            type="button"
-            onClick={() => act("open-prestige-node", researchAreas[next].node)}
-          >
-            {de ? "Prestige-Node ansehen" : "View prestige node"}
-          </button>
-        </section>
-      )}
+      {researchAreaOrder.map(area=>{const node=nextResearchStage(s,area);return node&&<section className="research-area-preview" data-research-area-preview={area} key={area}><h3>{researchAreaText(area,language).name}</h3><p>{de?'Nächste Gebietsstufe':'Next area stage'}: {prestigeText(node,language).name}</p><button onClick={()=>act('open-prestige-node',node)}>{de?'Prestige-Node ansehen':'View prestige node'}</button></section>})}
       {s.completedResearch.length > 0 && (
         <details className="research-completed">
           <summary>

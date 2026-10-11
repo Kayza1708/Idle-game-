@@ -13,8 +13,11 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
-        if: github.head_ref != 'codex/confirmed-technical-bugs'
+        if: github.head_ref != 'codex/confirmed-technical-bugs' && github.head_ref != 'codex/research-integration'
       - name: Scoped technical bug regressions (maximum 300 seconds)
         if: github.head_ref == 'codex/confirmed-technical-bugs'
         run: timeout 300 npm test -- src/technicalBugs.test.ts src/coreLoop.test.ts src/mobileIntegration.test.ts src/prestigePreview.test.ts src/saveValidation.test.ts src/purchaseMath.test.ts src/axiomUpgrades.test.ts src/clock.test.ts src/challengeIsolation.test.ts src/durableStorage.test.ts
+      - name: Scoped research integration regressions (maximum 300 seconds)
+        if: github.head_ref == 'codex/research-integration'
+        run: timeout 300 npm test -- src/researchIntegration.test.ts src/researchEconomy.test.ts src/researchAreas.test.tsx src/trainingCosts.test.ts src/analysis.test.ts src/atomicCrafting.test.ts src/itemCombinations.test.tsx src/challengeIsolation.test.ts src/saveValidation.test.ts src/clock.test.ts src/balanceExportContracts.test.ts src/blueprints.test.ts
       - run: npm run build
