@@ -767,11 +767,11 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [ ] Natürliche Erreichbarkeit und Balance des vorgegebenen Ausgangskatalogs nicht bestätigt; keine Parametersuche. Draft prüfen, nicht mergen.
 
 
-## Auftrag 9D – wirksame Item-Builds (11. Oktober 2026)
+## Auftrag 1 – bestätigte technische Bugs (11. Oktober 2026)
 
-- [x] Zentrales Register und reine gemeinsame Equipmentquote: drei feste neue Beiträge und zwei unveränderte bestehende Kombinationen.
-- [x] Compute einmal ×1,20/Core Loop, Training B +0,50 mit erhaltenem Deckel/Rundung und gespeicherter Analysefaktor ×1,25 mit per-Art-Abrundung.
-- [x] Tatsächliche kompatible Ausrüstung/Common/No-Items und getrennte Kontexte; alte Aufträge/Einzelwirkungen/Zufallsfunde/sonstige Economyparameter erhalten.
-- [x] Kompakter DE/EN-Equipmentbereich und gemeinsamer Economy-Export; 390px reale Ausrüstung, aktiv/unvollständig, 13→9 Data/Deckel 8→8, keine Textabschneidung oder horizontale Überbreite in finalen Aufnahmen.
-- [x] 152 gezielte Tests, Typecheck/Build/Diffcheck und vorbereitete echte Domainvergleiche. [Audit](item-builds-audit.md).
-- [ ] Feste Ausgangswerte nicht kalibriert; natürliche Progression und Langzeit-/Axiombalance weiterhin offen. Draft prüfen, nicht mergen.
+- [x] Fünf Befunde auf aktuellem main 7b265cb zuerst mit Domainfunktionen reproduziert; neuer Branch ohne Vorgängeränderung.
+- [x] Dauerhafte belegte Slots aus Node-/Creditkäufen, gemeinsame Slotfunktion, Axiom/Prestige/Serialize/Reload und getrennte Migration.
+- [x] Aktions-/Lifecycle-/Savezeit einmal aktiv/passiv; höchste Hardware-Discovery, unabhängiger Archivzähler mit jedem vierten Duplikat.
+- [x] Wissenschaftliche zeitabhängige Intervallgutschrift und Prestige-/Axiomvorschauen/Payout/Käufe, valide Fixtures über 1e308 ohne wirtschaftliche Clamps.
+- [x] Gezielte kurze Domain-/App-Regressionen, Typecheck, Production-Build und Diffcheck; unveränderte BALANCE-JSON. CI dieses PRs kurz begrenzt, Typecheck/Build erhalten. [Audit](technical-bugs-audit.md).
+- [ ] Historisch unbelegbarer Slotbesitz/Itemverlust nicht rekonstruierbar; bestehende Mantissen-/Bundle-/Balancegrenzen erhalten. Draft prüfen, nicht mergen.

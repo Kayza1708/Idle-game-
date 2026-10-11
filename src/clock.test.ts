@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { BALANCE, GameState, addCredits, addData, buyHardwareClass, exactEconomyValue, hardwareCostScientific, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining, trainingDataCost, type TrainingTrack } from './economy';
 import { queueExperiment } from './experiments';
-import { prestige } from './prestige';
+import { prestige, buyNode } from './prestige';
 import { advance, advanceTo, debugAdvance, settleResearchCompletions, simulationNow, type ResearchCompletionStep } from './simulation';
 import { persistGame, loadGame, restore, serialize, StorageLike } from './storage';
 
@@ -34,7 +34,7 @@ function expectTenSeconds(training:GameState,result:ReturnType<typeof advanceTo>
 }
 
 describe('simulation clock regressions',()=>{
-  const researchReady=(now=0)=>({...newGame(now),credits:1_000_000,data:1_000_000,researchPoints:1_000_000});
+  const researchReady=(now=0)=>({...buyNode(prestige(prestigeReady(now)),'labs1'),credits:1_000_000,data:1_000_000,researchPoints:1_000_000});
 
   it('settles the first research exactly once and returns a save/render-ready state',()=>{
     const started=startResearchProject(researchReady(),'operations'),atEnd={...started,savedAt:started.researchLabs[0]!.endsAt},steps:ResearchCompletionStep[]=[];
