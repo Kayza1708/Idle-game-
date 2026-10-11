@@ -1,3 +1,4 @@
+import {DataItemComparison} from './DataComparison';
 import {ResearchItemComparison} from './ResearchItemComparison';
 import {RecipeIngredient} from './RecipeIngredient';
 import {blueprintQuote} from './blueprints';
@@ -69,7 +70,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
     <ul>
       {[...new Set(itemEffectProfile(entry))].map((e) => (
         <li key={e}>
-          {e==="research"?(de?"Laborleistung (B, vor Synergiepotenz)":"Laboratory contribution (B, before synergy power)"):effectText(e, language)}{e === "training" ? " (B)" : ""}:{" "}
+          {e==="research"?(de?"Laborleistung (B, vor Synergiepotenz)":"Laboratory contribution (B, before synergy power)"):e==="data"?(de?"Gemeinsamer Data-Bonusbeitrag (B)":"Shared Data bonus contribution (B)"):effectText(e, language)}{e === "training" ? " (B)" : ""}:{" "}
           {e === "relay" || e === "int-yield"
               ? specialItemEffectText(s,entry)
               : `+${(itemEffectFor(s, entry, e) * (1 + deepPrestigeBonus(s, "manufacturing")) * 100).toFixed(2)} %`}
@@ -488,6 +489,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 </p>
                 {effect(q.result)}
                 {specialItemComparisonText(s,item,q.result)&&<p className="special-item-comparison">{specialItemComparisonText(s,item,q.result)}</p>}
+                {itemEffectProfile(item).includes("data") && <DataItemComparison s={s} before={item} after={q.result}/>}
                 {itemEffectProfile(item).includes("research") && <ResearchItemComparison s={s} before={item} after={q.result}/>}
                 {itemEffectProfile(item).includes("training") && <TrainingItemCostComparison s={s} before={item} after={q.result}/>}
                 {!effective && (

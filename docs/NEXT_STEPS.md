@@ -659,3 +659,13 @@ Vorbereitetes Vorher/Nachher: Laborauftrag 3.600→2.769,008 s, mit aufgeführte
 Mobile Chromium 360/390/430 px DE/EN: drei Startkarten, fünf Schlüsselprojektkarten, Fach-/Budget-Sperrgründe, bezahlte manuelle Starts/Reload und tatsächlicher Direktorstart nach expliziter Budget-/Reserve-/Zielkonfiguration. Geprüfte neue Touchziele mindestens 44 px, keine Seitenüberbreite/Quotenbeschnitte/Browserfehler. Bestehende Research-Grafik neutral verwendet.
 
 Offen: natürliche Erreichbarkeit, Spezialisierungsbalance und Monatsbalance; bestehende Mantissenpräzision, Bundlegröße und reale Safari-/Native-Abnahme. Eine beim Merge von #80 verlorene bestehende Compute-Kombination wurde ohne Wertänderung wieder angeschlossen. Keine neue Parameterkalibrierung oder Langkampagne. 256 gezielte Tests in 12 Dateien bestanden (14,38 s); verschärfter Parametervergleich separat erneut geprüft. Typecheck, Production-Build und Diffcheck bestanden. Nur diese kurze Auswahl läuft in der Branch-CI; keine Gesamtsuite oder Langkampagne. Implementierungscommit `e9f9e35`; Draft-PR [#82](https://github.com/Kayza1708/Idle-game-/pull/82) gegen main erstellt, offen und nicht gemergt.
+
+## Übergabe Auftrag 3 — 11. Oktober 2026
+
+Branch `codex/data-analysis-contracts`, ausdrücklich abhängig vom finalen Head `d8d5a29` des offenen PR #82; frisch gefetchtes main war `99c10ee`. Keine Vorgängerbranches verändert, nichts gemergt.
+
+Data bisher unter ×5 gedeckelt, jetzt `1+B` bis B=4, danach `5+sqrt(4(B−4))`. Vorhandene Quellen einmalig, Lifetime-Data und Credit-/Userformeln unverändert. Zentrale wissenschaftliche Quote und tatsächliche DE/EN-Vorschauen statt irreführender Archivmultiplikatoren. Analysepreise kurz/lang 250/4.800, 500/6.400, 2.000/19.200; Kurzfaktoren 1/24, 1/16, 1/12, Langrabatt 20 %, Pipeline danach. Save 45 erhält alte Kosten/Endzeiten/1/24-Verträge; Reste und Hauptspiel/Challenge unabhängig, gespeicherte Verträge im Export.
+
+298 gezielte Tests in elf Dateien, Typecheck, Production-Build und Diffcheck sowie Browser 360/390/430 px DE/EN bestanden. Ausdrücklich keine Gesamtsuite, FAST/DEEP oder Langkampagne. Audit `data-analysis-audit.md`, Rohwerte `data-analysis-proof.json`, Browser `data-analysis-browser.json`.
+
+Frische Profile (90 aktive Minuten, 5.400 echte Taps, keine Grants/Claims/Items): erste Hardwareanalyse Modell-zuerst 7:30 / Analyse-zuerst 6:40; erste Forschung 11:20 / 11:40. Endbestand 653.652 / 568.826 Data. Frühe Prioritäten sind real, **dauerhafte Data-Knappheit und alle vier konkurrierenden Ausgabefamilien bleiben offen**. Keine Parameter nachjustiert. Herstellungszugang in diesen begrenzten Policies nicht erreicht, spätere Vergleichsquoten ausdrücklich vorbereitete Fixtures. Keine natürliche Wochen-/Monatsbalance behauptet.

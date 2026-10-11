@@ -1,8 +1,11 @@
+import {queueExperiment} from '../src/experiments';
 import {BALANCE,startTraining,startResearchProject,hardwareIds,hardwarePurchasePreview,type GameState,type TrainingTrack,type HardwareId} from '../src/economy';
 /** Shared genuine 8A/8B decision profile; no grants, claims or reset. */
-export function prepareEarlyHardwareDecision(s:GameState,track:TrainingTrack,strategy:'A'|'B'){
-   const trained=startTraining(s,track);if(trained!==s){s=trained;track=track==='quality'?'efficiency':'quality';}
-   if(s.researchLevels.dataGeneration<2)s=startResearchProject(s,'dataGeneration');
+export function prepareEarlyHardwareDecision(s:GameState,track:TrainingTrack,strategy:'A'|'B',options?:{dataPriority:'model-first'|'analysis-first';includeAnalysis:true}){
+   const analysis=()=>{if(options&&!s.experiments.active&&!s.experiments.completedIds.length)s=queueExperiment(s,'hardware',s.savedAt,'short');};
+   const model=()=>{const trained=startTraining(s,track);if(trained!==s){s=trained;track=track==='quality'?'efficiency':'quality';}
+    if(s.researchLevels.dataGeneration<2)s=startResearchProject(s,'dataGeneration');else if(options&&s.researchLevels.modelArchitecture<1)s=startResearchProject(s,'modelArchitecture');};
+   if(options?.dataPriority==='analysis-first'){analysis();if(s.experiments.active||s.experiments.completedIds.length)model();}else{model();analysis();}
    let pick:HardwareId|undefined;
    if(strategy==='A'){
     const quotes=hardwareIds.map(id=>hardwarePurchasePreview(s,id));

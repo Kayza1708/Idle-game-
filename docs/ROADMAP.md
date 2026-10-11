@@ -789,3 +789,16 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 [Audit und Rohdaten](research-integration-audit.md). Technischer Abschluss bedeutet keine grüne Langzeitbalance.
 
 Auftrag-2-Implementierungscommit `e9f9e35`, Draft-PR [#82](https://github.com/Kayza1708/Idle-game-/pull/82) gegen main; nicht gemergt.
+
+## Auftrag 3 — Data-Economy und Analyseverträge — technische Integration erledigt, Konkurrenzziel offen
+
+- [x] Unbegrenzte wissenschaftliche Data-Softbonusformel, zentrale Quote und tatsächliche DE/EN-Vergleiche.
+- [x] Sechs festgelegte Analysepreise, Kurzfaktoren nach Grunddauerverhältnis, separate Pipeline/Garantien, persistente Bruchteile.
+- [x] Save 45: historische Verträge unverändert, Hauptspiel/Challenge getrennt, ungültige aktuelle Verträge abgewiesen.
+- [x] Vorhandener Director/Budget/Reserve geschützt; gemeinsamer Data-Bestand erklärt.
+- [x] Erste Forschung und kurze Hardwareanalyse in zwei echten frischen Profilen binnen 90 aktiven Minuten, eine Tapaktion pro Sekunde.
+- [x] 298 gezielte Regressionen und DE/EN-Browserprüfung 360/390/430 px ohne horizontale Überbreite.
+- [ ] Dauerhaft knappe Data und Konkurrenz aller vier Ausgabefamilien: nicht bestätigt; Profile enden mit 653.652 / 568.826 Data, Crafting in dieser Policy nicht erreicht.
+- [ ] Natürliche Langzeitbalance, vollständige Gesamtabnahme, reale Safari-/Native-Prüfung.
+
+Abhängig von PR #82 `d8d5a29`; keine automatische Integration. Nachweis: `data-analysis-audit.md` und Rohmessungen.
