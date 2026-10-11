@@ -1,0 +1,21 @@
+/** Prepared technical fixtures; no natural progression measurement. */
+import {createHash} from 'node:crypto';
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {dirname} from 'node:path';
+import {BALANCE,newGame,addCredits,addDataScientific,buyHardwareClass,computeRate,computeFactors,equipmentSlotCount,axiomThresholdScientific,passiveCircuitRate,creditRateScientific,exactEconomyValue,type GameState} from '../src/economy';
+import {prestige,buyNode,axiomReset,buyAxiomUpgrade,prestigePreview,axiomPreview} from '../src/prestige';
+import {createItem,equip} from '../src/inventory';
+import {advance,advanceTo} from '../src/simulation';
+import {serialize} from '../src/storage';
+import {ScientificNumber as SN} from '../src/scientificNumber';
+const phase=process.argv[3]??'after',output=process.argv[2]??'work/technical-bugs-after.json';
+const result:any={basisCommit:'7b265cb',phase,preparedFixtures:true,naturalProgressionMeasurement:false,balanceSha256:createHash('sha256').update(JSON.stringify(BALANCE)).digest('hex')};
+let slots=buyNode(prestige(addCredits(newGame(0),1e12)),'manufacturing1');slots=createItem(createItem(slots,'quantum-chip','common'),'tensor-core','common');for(const i of slots.inventory)slots=equip(slots,i.id);const amount=axiomThresholdScientific();slots={...slots,cycleINTEarned:amount.toNumber(),exactEconomy:{...slots.exactEconomy,cycleINTEarned:amount.toJSON()}};const reset=axiomReset(slots);try{serialize(reset);result.slots={before:equipmentSlotCount(slots),after:equipmentSlotCount(reset),error:null}}catch(e){result.slots={before:equipmentSlotCount(slots),after:equipmentSlotCount(reset),error:String(e)}}
+let actions=newGame(0);for(let at=100;at<=30000;at+=100)actions=buyHardwareClass(advanceTo(actions,at,phase==='after').state,'calculator',1);actions=advanceTo(actions,30000,true).state;result.activeTime={idle:advanceTo(newGame(0),30000,true).state.lifetime.activeSeconds,frequentActions:actions.lifetime.activeSeconds};
+let hardware={...addCredits(newGame(0),1e100),researchLevels:{...newGame(0).researchLevels,hardwareIntegration:1}};hardware=buyHardwareClass(hardware,'cloud',1);const cloud=computeRate(hardware.hardware,hardware),factor=computeFactors(hardware).hardwareIntegration.toNumber();hardware=buyHardwareClass(hardware,'calculator',1);result.hardware={before:cloud,after:computeRate(hardware.hardware,hardware),factorBefore:factor,factorAfter:computeFactors(hardware).hardwareIntegration.toNumber()};
+let archive=buyAxiomUpgrade({...newGame(0),axioms:5,availableAxioms:5,totalAxiomsEarned:5},'axiomArchive');archive={...archive,discovered:['calculator'],componentRemainder:.75};const found=advance(archive,1/passiveCircuitRate(archive)+.001,false,()=>.1).state;result.archive={analysisRemainderBefore:.75,after:found.componentRemainder,firstPassiveFound:found.components};
+const huge=addDataScientific({...buyHardwareClass(addCredits(newGame(0),1e6),'calculator',1),researchLevels:{...newGame(0).researchLevels,dataGeneration:20000}},SN.fromString('1e400'));try{const r=advance(huge,1,false);result.scientific={rate:creditRateScientific(huge.hardware,huge.level,huge).toJSON(),advanceCredit:exactEconomyValue(r.state,'credits').subtract(exactEconomyValue(huge,'credits')).toJSON(),error:null}}catch(e){result.scientific={error:String(e)}}
+const overflow=addDataScientific({...buyHardwareClass(addCredits(newGame(0),1e6),'calculator',1),researchLevels:{...newGame(0).researchLevels,dataFlywheel:50000}},SN.fromString('1e50'));try{advance(overflow,1,false);result.integrationOverflow={error:null}}catch(e){result.integrationOverflow={error:String(e)}}
+const wealthy={...newGame(0),cycleEligibleCredits:1e300,cycleINTEarned:1e300,exactEconomy:{...newGame(0).exactEconomy,cycleEligibleCredits:SN.fromString('1e800').toJSON(),cycleINTEarned:SN.fromString('1e800').toJSON()}};try{result.prestigePreview={nextRevenue:prestigePreview(wealthy).eligibleRevenueToNextINT,error:null}}catch(e){result.prestigePreview={error:String(e)}}
+try{result.axiomPreview={nextThreshold:axiomPreview(wealthy).nextThreshold,error:null}}catch(e){result.axiomPreview={error:String(e)}}
+mkdirSync(dirname(output),{recursive:true});writeFileSync(output,JSON.stringify(result,(_k,v)=>typeof v==='number'&&!Number.isFinite(v)?String(v):v,2)+'\n');console.log(result);

@@ -71,6 +71,9 @@ export function assertDomainState(value:unknown):asserts value is GameState{
  counts(s.componentInventory,componentIds,'componentInventory');counts(s.modules,Object.keys(BALANCE.modules),'modules');
  counts(s.hardwareCounts,hardwareIds,'hardwareCounts');counts(s.researchLevels,Object.keys(BALANCE.repeatableResearch),'researchLevels');
  for(const key of ['hardware','level','qualityLevel','efficiencyLevel','prestigeCount','purchasedResearchLabs','researchFragments','blueprintFragments','nextId'] as const)if(!integer(s[key],key==='nextId'?1:0))fail(key,'ungültige sichere Ganzzahl');
+ if(!integer(s.unlockedEquipmentSlots)||s.unlockedEquipmentSlots>3)fail('unlockedEquipmentSlots','ungültiger permanenter Slotbesitz');
+ if(!integer(s.archivePassiveFindCount)||s.archivePassiveFindCount>3)fail('archivePassiveFindCount','ungültiger Archivzähler');
+ if(!object(s.exactAxioms)||!ScientificNumber.isValidJSON(s.exactAxioms.available)||!ScientificNumber.isValidJSON(s.exactAxioms.total))fail('exactAxioms','ungültige wissenschaftliche Axiomwerte');
  if(s.purchasedEquipmentSlots!==undefined&&!integer(s.purchasedEquipmentSlots))fail('purchasedEquipmentSlots','ungültige Ganzzahl');
  for(const key of ['components','training','componentRemainder','researchRemainder','blueprintRemainder','passiveCircuitProgress','worldDropProgress','gems'] as const)if(!finite(s[key]))fail(key,'ungültiger oder negativer Bestand/Fortschritt');
  if(!time(s.savedAt)||!finite(s.clockOffsetMs))fail('Spielzeit','ungültige Zeit');

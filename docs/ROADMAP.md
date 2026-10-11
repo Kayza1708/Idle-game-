@@ -765,3 +765,13 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] DE/EN mit Common-Ergebniseffekten und responsive Zutatenkarten aus #78; 390px alle fünf Karten, Sperren/Lernen und tatsächlicher Craft/Reload, keine Zutatenabschneidung oder horizontale Überbreite.
 - [x] 174 gezielte Tests, Typecheck/Build/Diffcheck, vorbereiteter regulärer technischer Nachweis für alle fünf; tatsächliche Quellen für alle Zutaten dokumentiert. [Audit und Prüfabweichung](item-recipes-audit.md).
 - [ ] Natürliche Erreichbarkeit und Balance des vorgegebenen Ausgangskatalogs nicht bestätigt; keine Parametersuche. Draft prüfen, nicht mergen.
+
+
+## Auftrag 1 – bestätigte technische Bugs (11. Oktober 2026)
+
+- [x] Fünf Befunde auf aktuellem main 7b265cb zuerst mit Domainfunktionen reproduziert; neuer Branch ohne Vorgängeränderung.
+- [x] Dauerhafte belegte Slots aus Node-/Creditkäufen, gemeinsame Slotfunktion, Axiom/Prestige/Serialize/Reload und getrennte Migration.
+- [x] Aktions-/Lifecycle-/Savezeit einmal aktiv/passiv; höchste Hardware-Discovery, unabhängiger Archivzähler mit jedem vierten Duplikat.
+- [x] Wissenschaftliche zeitabhängige Intervallgutschrift und Prestige-/Axiomvorschauen/Payout/Käufe, valide Fixtures über 1e308 ohne wirtschaftliche Clamps.
+- [x] Gezielte kurze Domain-/App-Regressionen, Typecheck, Production-Build und Diffcheck; unveränderte BALANCE-JSON. CI dieses PRs kurz begrenzt, Typecheck/Build erhalten. [Audit](technical-bugs-audit.md).
+- [ ] Historisch unbelegbarer Slotbesitz/Itemverlust nicht rekonstruierbar; bestehende Mantissen-/Bundle-/Balancegrenzen erhalten. Draft prüfen, nicht mergen.

@@ -1,0 +1,99 @@
+{
+  "before": {
+    "basisCommit": "7b265cb",
+    "phase": "before",
+    "preparedFixtures": true,
+    "naturalProgressionMeasurement": false,
+    "balanceSha256": "6c692caa268841af8a610dca7def0281d3715c5cf444bf3e2a812837e123e00f",
+    "slots": {
+      "before": 2,
+      "after": 1,
+      "error": "TypeError: equipped: mehr Instanzen als freigeschaltete Sockel"
+    },
+    "activeTime": {
+      "idle": 30,
+      "frequentActions": 0
+    },
+    "hardware": {
+      "before": 51367680,
+      "after": 50817886.57044713,
+      "factorBefore": 1.12,
+      "factorAfter": 1
+    },
+    "archive": {
+      "analysisRemainderBefore": 0.75,
+      "after": 0,
+      "firstPassiveFound": 2
+    },
+    "scientific": {
+      "rate": {
+        "m": 8.632863895678305,
+        "e": 5985
+      },
+      "advanceCredit": {
+        "m": 1.6812541596750383,
+        "e": 300
+      },
+      "error": null
+    },
+    "integrationOverflow": {
+      "error": "RangeError: Invalid scientific number"
+    },
+    "prestigePreview": {
+      "nextRevenue": "Infinity",
+      "error": null
+    },
+    "axiomPreview": {
+      "error": "RangeError: Invalid scientific number"
+    }
+  },
+  "after": {
+    "basisCommit": "7b265cb",
+    "phase": "after",
+    "preparedFixtures": true,
+    "naturalProgressionMeasurement": false,
+    "balanceSha256": "6c692caa268841af8a610dca7def0281d3715c5cf444bf3e2a812837e123e00f",
+    "slots": {
+      "before": 2,
+      "after": 2,
+      "error": null
+    },
+    "activeTime": {
+      "idle": 30,
+      "frequentActions": 30.000000000000156
+    },
+    "hardware": {
+      "before": 51367680,
+      "after": 56916032.958900794,
+      "factorBefore": 1.12,
+      "factorAfter": 1.12
+    },
+    "archive": {
+      "analysisRemainderBefore": 0.75,
+      "after": 0.75,
+      "firstPassiveFound": 1
+    },
+    "scientific": {
+      "rate": {
+        "m": 8.632863895678305,
+        "e": 5985
+      },
+      "advanceCredit": {
+        "m": 8.632863895678305,
+        "e": 5985
+      },
+      "error": null
+    },
+    "integrationOverflow": {
+      "error": null
+    },
+    "prestigePreview": {
+      "nextRevenue": 0,
+      "error": null
+    },
+    "axiomPreview": {
+      "nextThreshold": 1e+300,
+      "error": null
+    }
+  }
+}

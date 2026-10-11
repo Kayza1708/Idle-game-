@@ -1,0 +1,22 @@
+{
+  "preparedFixture": true,
+  "naturalProgressionMeasurement": false,
+  "results": [
+    {
+      "busy": false,
+      "activeBeforeBackground": 3,
+      "activeAfterResume": 3.5,
+      "resumeActiveDelta": 0.5,
+      "actualPaidTaps": 0,
+      "errors": []
+    },
+    {
+      "busy": true,
+      "activeBeforeBackground": 3.0000000000000013,
+      "activeAfterResume": 3.5000000000000013,
+      "resumeActiveDelta": 0.5,
+      "actualPaidTaps": 15,
+      "errors": []
+    }
+  ]
+}

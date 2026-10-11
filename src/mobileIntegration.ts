@@ -5,7 +5,7 @@ export const MOBILE_BACKGROUND_EVENT='ai-singularity:native-background';
 export const MOBILE_FOREGROUND_EVENT='ai-singularity:native-foreground';
 export const MOBILE_BACK_EVENT='ai-singularity:native-back';
 export const MOBILE_EXIT_EVENT='ai-singularity:native-exit';
-export function createLifecycleGate(initiallyBackgrounded:boolean,onBackground:()=>void,onForeground:()=>void){let backgrounded=initiallyBackgrounded;return{background(){if(backgrounded)return false;backgrounded=true;onBackground();return true},foreground(){if(!backgrounded)return false;backgrounded=false;onForeground();return true}}}
+export function createLifecycleGate(initiallyBackgrounded:boolean,onBackground:()=>void,onForeground:()=>void){let backgrounded=initiallyBackgrounded;return{get active(){return !backgrounded},background(){if(backgrounded)return false;backgrounded=true;onBackground();return true},foreground(){if(!backgrounded)return false;backgrounded=false;onForeground();return true}}}
 export function installMobileIntegration(target:Window=window){const capacitor=(target as any).Capacitor as CapacitorGlobal|undefined;if(!capacitor?.isNativePlatform?.())return()=>{};const plugins=capacitor.Plugins??{},app=plugins.App,haptics=plugins.Haptics,handles:PluginListener[]=[];let disposed=false;
  const add=async(name:string,callback:(event:any)=>void)=>{try{const handle=await app?.addListener?.(name,callback);if(handle&&!disposed)handles.push(handle);else await handle?.remove()}catch{/* Native lifecycle must never crash gameplay. */}};
  void add('appStateChange',({isActive}:{isActive:boolean})=>target.dispatchEvent(new Event(isActive?MOBILE_FOREGROUND_EVENT:MOBILE_BACKGROUND_EVENT)));
