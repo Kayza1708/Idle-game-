@@ -1,6 +1,6 @@
 # Auftrag 9D – wirksame Item-Builds
 
-Stand: 11. Oktober 2026. Basis frisch gefetchtes `origin/main` **7b265cb**, gemergter PR #79. Neuer Branch `codex/9d-effective-item-builds`; Vorgängerbranches unverändert, kein Merge. Draft-PR gegen main wird unten verlinkt.
+Stand: 11. Oktober 2026. Basis frisch gefetchtes `origin/main` **7b265cb**, gemergter PR #79. Neuer Branch `codex/9d-effective-item-builds`; Vorgängerbranches unverändert, kein Merge. Draft-PR [#80](https://github.com/Kayza1708/Idle-game-/pull/80) gegen main erstellt; offen, Draft, nicht gemergt.
 
 ## Vertrag und Integration
 
