@@ -1,6 +1,6 @@
 # Auftrag 9C – fünf fehlende Itemrezepte
 
-Stand: 11. Oktober 2026. Ausschließlich `Kayza1708/Idle-game-`. Basis frisch gefetchtes `origin/main` **d7c4889fd49f8af5d1b9b71b53f89495d21bd3da**, gemergter PR #78, `864a60e` als Vorfahr geprüft. Neuer Branch `codex/9c-complete-item-recipes`, Draft gegen main, keine Vorgängerbranchänderungen und kein Merge.
+Stand: 11. Oktober 2026. Ausschließlich `Kayza1708/Idle-game-`. Basis frisch gefetchtes `origin/main` **d7c4889fd49f8af5d1b9b71b53f89495d21bd3da**, gemergter PR #78, `864a60e` als Vorfahr geprüft. Neuer Branch `codex/9c-complete-item-recipes`, [Draft-PR #79](https://github.com/Kayza1708/Idle-game-/pull/79) gegen main, keine Vorgängerbranchänderungen und kein Merge.
 
 ## Vollständiger Katalog
 
