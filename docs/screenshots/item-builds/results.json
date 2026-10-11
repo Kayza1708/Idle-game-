@@ -1,0 +1,627 @@
+{
+  "runtimeSeconds": 47.36684291499978,
+  "checks": [
+    {
+      "language": "de",
+      "width": 390,
+      "height": 844,
+      "build": "parallel-architecture",
+      "preparedResourcesAndItems": true,
+      "slotsRegularlyPurchased": true,
+      "realEquipClicks": 2,
+      "incomplete": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nUnvollst\u00e4ndig\nCompute auf ausger\u00fcstetem Item \u00b7 Fehlt\nCredits auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Credit-Itemfamilie: +0.08 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Forschung\nUnvollst\u00e4ndig\nTraining ben\u00f6tigt weniger Data auf ausger\u00fcstetem Item \u00b7 Fehlt\nForschung auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Forschungs-Itemfamilie: +0.12 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallelarchitektur\nUnvollst\u00e4ndig\nProzessor: Quantenchip \u00b7 Fehlt\nKern: Tensor-Kern \u00b7 Fehlt\n\nRegul\u00e4rer Compute \u00d71.20 \u00b7 tats\u00e4chlich \u00d71.00\n\nNutzer und Credits folgen \u00fcber den Core Loop. Kein direkter Credit-/Data-Faktor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Lernpipeline\nUnvollst\u00e4ndig\nProzessor: Photonenfeld \u00b7 Fehlt\nKern: Logik-Saat \u00b7 Fehlt\n\nB +0.50 \u00b7 tats\u00e4chlich +0.00\n\nN\u00e4chster Start, ohne \u2192 mit aktivem Kombinationsbeitrag (Einzelwirkungen bleiben):\n\nQualit\u00e4t: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nEffizienz: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nNur zuk\u00fcnftige Trainingsstarts; laufende Kosten und Dauer bleiben fest.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Materialkartierung\nUnvollst\u00e4ndig\nForschung: Feldscanner \u00b7 Fehlt\nKern: Speicherkristall \u00b7 Fehlt\n\nGarantierte Komponenten je positiver Endmenge: floor(n \u00d71.25) \u00b7 tats\u00e4chlich \u00d71.00\n\nBei Analysestart festgelegt; Ausr\u00fcstungswechsel ver\u00e4ndert diesen Auftrag nicht.",
+          "errors": []
+        }
+      ],
+      "active": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nUnvollst\u00e4ndig\nCompute auf ausger\u00fcstetem Item \u00b7 Quantenchip \u00b7 \u2713\nCredits auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Credit-Itemfamilie: +0.08 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Forschung\nUnvollst\u00e4ndig\nTraining ben\u00f6tigt weniger Data auf ausger\u00fcstetem Item \u00b7 Fehlt\nForschung auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Forschungs-Itemfamilie: +0.12 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "true",
+          "text": "Parallelarchitektur\nAktiv\nProzessor: Quantenchip \u00b7 \u2713\nKern: Tensor-Kern \u00b7 \u2713\n\nRegul\u00e4rer Compute \u00d71.20 \u00b7 tats\u00e4chlich \u00d71.20\n\nNutzer und Credits folgen \u00fcber den Core Loop. Kein direkter Credit-/Data-Faktor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Lernpipeline\nUnvollst\u00e4ndig\nProzessor: Photonenfeld \u00b7 Fehlt\nKern: Logik-Saat \u00b7 Fehlt\n\nB +0.50 \u00b7 tats\u00e4chlich +0.00\n\nN\u00e4chster Start, ohne \u2192 mit aktivem Kombinationsbeitrag (Einzelwirkungen bleiben):\n\nQualit\u00e4t: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nEffizienz: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nNur zuk\u00fcnftige Trainingsstarts; laufende Kosten und Dauer bleiben fest.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Materialkartierung\nUnvollst\u00e4ndig\nForschung: Feldscanner \u00b7 Fehlt\nKern: Speicherkristall \u00b7 Fehlt\n\nGarantierte Komponenten je positiver Endmenge: floor(n \u00d71.25) \u00b7 tats\u00e4chlich \u00d71.00\n\nBei Analysestart festgelegt; Ausr\u00fcstungswechsel ver\u00e4ndert diesen Auftrag nicht.",
+          "errors": []
+        }
+      ],
+      "quote": {
+        "id": "parallel-architecture",
+        "kind": "compute-factor",
+        "legacy": false,
+        "neededItems": [
+          {
+            "slot": "processor",
+            "type": "quantum-chip",
+            "effect": null,
+            "instanceId": "item-1",
+            "matched": true
+          },
+          {
+            "slot": "core",
+            "type": "tensor-core",
+            "effect": null,
+            "instanceId": "item-2",
+            "matched": true
+          }
+        ],
+        "missingEquipment": [],
+        "active": true,
+        "disabled": false,
+        "configuredValue": 1.2,
+        "contribution": 1.2
+      },
+      "trainingPrices": null,
+      "actualTrainingDataCost": null,
+      "errors": []
+    },
+    {
+      "language": "de",
+      "width": 390,
+      "height": 844,
+      "build": "learning-pipeline",
+      "preparedResourcesAndItems": true,
+      "slotsRegularlyPurchased": true,
+      "realEquipClicks": 2,
+      "incomplete": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nUnvollst\u00e4ndig\nCompute auf ausger\u00fcstetem Item \u00b7 Fehlt\nCredits auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Credit-Itemfamilie: +0.08 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Forschung\nUnvollst\u00e4ndig\nTraining ben\u00f6tigt weniger Data auf ausger\u00fcstetem Item \u00b7 Fehlt\nForschung auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Forschungs-Itemfamilie: +0.12 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallelarchitektur\nUnvollst\u00e4ndig\nProzessor: Quantenchip \u00b7 Fehlt\nKern: Tensor-Kern \u00b7 Fehlt\n\nRegul\u00e4rer Compute \u00d71.20 \u00b7 tats\u00e4chlich \u00d71.00\n\nNutzer und Credits folgen \u00fcber den Core Loop. Kein direkter Credit-/Data-Faktor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Lernpipeline\nUnvollst\u00e4ndig\nProzessor: Photonenfeld \u00b7 Fehlt\nKern: Logik-Saat \u00b7 Fehlt\n\nB +0.50 \u00b7 tats\u00e4chlich +0.00\n\nN\u00e4chster Start, ohne \u2192 mit aktivem Kombinationsbeitrag (Einzelwirkungen bleiben):\n\nQualit\u00e4t: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nEffizienz: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nNur zuk\u00fcnftige Trainingsstarts; laufende Kosten und Dauer bleiben fest.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Materialkartierung\nUnvollst\u00e4ndig\nForschung: Feldscanner \u00b7 Fehlt\nKern: Speicherkristall \u00b7 Fehlt\n\nGarantierte Komponenten je positiver Endmenge: floor(n \u00d71.25) \u00b7 tats\u00e4chlich \u00d71.00\n\nBei Analysestart festgelegt; Ausr\u00fcstungswechsel ver\u00e4ndert diesen Auftrag nicht.",
+          "errors": []
+        }
+      ],
+      "active": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nUnvollst\u00e4ndig\nCompute auf ausger\u00fcstetem Item \u00b7 Fehlt\nCredits auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Credit-Itemfamilie: +0.08 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Forschung\nUnvollst\u00e4ndig\nTraining ben\u00f6tigt weniger Data auf ausger\u00fcstetem Item \u00b7 Photonenfeld \u00b7 \u2713\nForschung auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Forschungs-Itemfamilie: +0.12 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallelarchitektur\nUnvollst\u00e4ndig\nProzessor: Quantenchip \u00b7 Fehlt\nKern: Tensor-Kern \u00b7 Fehlt\n\nRegul\u00e4rer Compute \u00d71.20 \u00b7 tats\u00e4chlich \u00d71.00\n\nNutzer und Credits folgen \u00fcber den Core Loop. Kein direkter Credit-/Data-Faktor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "true",
+          "text": "Lernpipeline\nAktiv\nProzessor: Photonenfeld \u00b7 \u2713\nKern: Logik-Saat \u00b7 \u2713\n\nB +0.50 \u00b7 tats\u00e4chlich +0.50\n\nN\u00e4chster Start, ohne \u2192 mit aktivem Kombinationsbeitrag (Einzelwirkungen bleiben):\n\nQualit\u00e4t: 13 \u2192 9 Data \u00b7 B 0.17 \u2192 0.67 \u00b7 Faktor 0.5989 \u00b7 Rabattdeckel 50 %\n\nEffizienz: 13 \u2192 9 Data \u00b7 B 0.17 \u2192 0.67 \u00b7 Faktor 0.5989 \u00b7 Rabattdeckel 50 %\n\nNur zuk\u00fcnftige Trainingsstarts; laufende Kosten und Dauer bleiben fest.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Materialkartierung\nUnvollst\u00e4ndig\nForschung: Feldscanner \u00b7 Fehlt\nKern: Speicherkristall \u00b7 Fehlt\n\nGarantierte Komponenten je positiver Endmenge: floor(n \u00d71.25) \u00b7 tats\u00e4chlich \u00d71.00\n\nBei Analysestart festgelegt; Ausr\u00fcstungswechsel ver\u00e4ndert diesen Auftrag nicht.",
+          "errors": []
+        }
+      ],
+      "quote": {
+        "id": "learning-pipeline",
+        "kind": "training-bonus",
+        "legacy": false,
+        "neededItems": [
+          {
+            "slot": "processor",
+            "type": "photonic-array",
+            "effect": null,
+            "instanceId": "item-3",
+            "matched": true
+          },
+          {
+            "slot": "core",
+            "type": "logic-seed",
+            "effect": null,
+            "instanceId": "item-4",
+            "matched": true
+          }
+        ],
+        "missingEquipment": [],
+        "active": true,
+        "disabled": false,
+        "configuredValue": 0.5,
+        "contribution": 0.5
+      },
+      "trainingPrices": {
+        "before": 13,
+        "after": 9,
+        "factor": 0.5989458552946814,
+        "capped": false
+      },
+      "actualTrainingDataCost": 9,
+      "errors": []
+    },
+    {
+      "language": "de",
+      "width": 390,
+      "height": 844,
+      "build": "material-mapping",
+      "preparedResourcesAndItems": true,
+      "slotsRegularlyPurchased": true,
+      "realEquipClicks": 2,
+      "incomplete": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nUnvollst\u00e4ndig\nCompute auf ausger\u00fcstetem Item \u00b7 Fehlt\nCredits auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Credit-Itemfamilie: +0.08 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Forschung\nUnvollst\u00e4ndig\nTraining ben\u00f6tigt weniger Data auf ausger\u00fcstetem Item \u00b7 Fehlt\nForschung auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Forschungs-Itemfamilie: +0.12 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallelarchitektur\nUnvollst\u00e4ndig\nProzessor: Quantenchip \u00b7 Fehlt\nKern: Tensor-Kern \u00b7 Fehlt\n\nRegul\u00e4rer Compute \u00d71.20 \u00b7 tats\u00e4chlich \u00d71.00\n\nNutzer und Credits folgen \u00fcber den Core Loop. Kein direkter Credit-/Data-Faktor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Lernpipeline\nUnvollst\u00e4ndig\nProzessor: Photonenfeld \u00b7 Fehlt\nKern: Logik-Saat \u00b7 Fehlt\n\nB +0.50 \u00b7 tats\u00e4chlich +0.00\n\nN\u00e4chster Start, ohne \u2192 mit aktivem Kombinationsbeitrag (Einzelwirkungen bleiben):\n\nQualit\u00e4t: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nEffizienz: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nNur zuk\u00fcnftige Trainingsstarts; laufende Kosten und Dauer bleiben fest.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Materialkartierung\nUnvollst\u00e4ndig\nForschung: Feldscanner \u00b7 Fehlt\nKern: Speicherkristall \u00b7 Fehlt\n\nGarantierte Komponenten je positiver Endmenge: floor(n \u00d71.25) \u00b7 tats\u00e4chlich \u00d71.00\n\nBei Analysestart festgelegt; Ausr\u00fcstungswechsel ver\u00e4ndert diesen Auftrag nicht.",
+          "errors": []
+        }
+      ],
+      "active": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nUnvollst\u00e4ndig\nCompute auf ausger\u00fcstetem Item \u00b7 Fehlt\nCredits auf ausger\u00fcstetem Item \u00b7 Speicherkristall \u00b7 \u2713\n\nBestehende Credit-Itemfamilie: +0.08 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Forschung\nUnvollst\u00e4ndig\nTraining ben\u00f6tigt weniger Data auf ausger\u00fcstetem Item \u00b7 Fehlt\nForschung auf ausger\u00fcstetem Item \u00b7 Fehlt\n\nBestehende Forschungs-Itemfamilie: +0.12 \u00b7 tats\u00e4chlich +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallelarchitektur\nUnvollst\u00e4ndig\nProzessor: Quantenchip \u00b7 Fehlt\nKern: Tensor-Kern \u00b7 Fehlt\n\nRegul\u00e4rer Compute \u00d71.20 \u00b7 tats\u00e4chlich \u00d71.00\n\nNutzer und Credits folgen \u00fcber den Core Loop. Kein direkter Credit-/Data-Faktor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Lernpipeline\nUnvollst\u00e4ndig\nProzessor: Photonenfeld \u00b7 Fehlt\nKern: Logik-Saat \u00b7 Fehlt\n\nB +0.50 \u00b7 tats\u00e4chlich +0.00\n\nN\u00e4chster Start, ohne \u2192 mit aktivem Kombinationsbeitrag (Einzelwirkungen bleiben):\n\nQualit\u00e4t: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nEffizienz: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Faktor 1.0000 \u00b7 Rabattdeckel 50 %\n\nNur zuk\u00fcnftige Trainingsstarts; laufende Kosten und Dauer bleiben fest.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "true",
+          "text": "Materialkartierung\nAktiv\nForschung: Feldscanner \u00b7 \u2713\nKern: Speicherkristall \u00b7 \u2713\n\nGarantierte Komponenten je positiver Endmenge: floor(n \u00d71.25) \u00b7 tats\u00e4chlich \u00d71.25\n\nBei Analysestart festgelegt; Ausr\u00fcstungswechsel ver\u00e4ndert diesen Auftrag nicht.",
+          "errors": []
+        }
+      ],
+      "quote": {
+        "id": "material-mapping",
+        "kind": "analysis-components-factor",
+        "legacy": false,
+        "neededItems": [
+          {
+            "slot": "research",
+            "type": "field-scanner",
+            "effect": null,
+            "instanceId": "item-5",
+            "matched": true
+          },
+          {
+            "slot": "core",
+            "type": "memory-crystal",
+            "effect": null,
+            "instanceId": "item-6",
+            "matched": true
+          }
+        ],
+        "missingEquipment": [],
+        "active": true,
+        "disabled": false,
+        "configuredValue": 1.25,
+        "contribution": 1.25
+      },
+      "trainingPrices": null,
+      "actualTrainingDataCost": null,
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "height": 844,
+      "build": "parallel-architecture",
+      "preparedResourcesAndItems": true,
+      "slotsRegularlyPurchased": true,
+      "realEquipClicks": 2,
+      "incomplete": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nIncomplete\nCompute on an equipped item \u00b7 Missing\nCredits on an equipped item \u00b7 Missing\n\nExisting credit item family: +0.08 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Research\nIncomplete\nTraining needs less Data on an equipped item \u00b7 Missing\nResearch on an equipped item \u00b7 Missing\n\nExisting research item family: +0.12 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallel Architecture\nIncomplete\nProcessor: Quantum Chip \u00b7 Missing\nCore: Tensor Core \u00b7 Missing\n\nRegular compute \u00d71.20 \u00b7 actual \u00d71.00\n\nUsers and Credits follow through the core loop. No direct Credit/Data factor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Learning Pipeline\nIncomplete\nProcessor: Photonic Array \u00b7 Missing\nCore: Logic Seed \u00b7 Missing\n\nB +0.50 \u00b7 actual +0.00\n\nNext start, without \u2192 with active combination contribution (individual effects retained):\n\nQuality: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nEfficiency: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nFuture training starts only; running costs and duration stay fixed.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Material Mapping\nIncomplete\nResearch: Field Scanner \u00b7 Missing\nCore: Memory Crystal \u00b7 Missing\n\nGuaranteed components per positive final quantity: floor(n \u00d71.25) \u00b7 actual \u00d71.00\n\nFixed at analysis start; equipment changes do not change this job.",
+          "errors": []
+        }
+      ],
+      "active": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nIncomplete\nCompute on an equipped item \u00b7 Quantum Chip \u00b7 \u2713\nCredits on an equipped item \u00b7 Missing\n\nExisting credit item family: +0.08 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Research\nIncomplete\nTraining needs less Data on an equipped item \u00b7 Missing\nResearch on an equipped item \u00b7 Missing\n\nExisting research item family: +0.12 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "true",
+          "text": "Parallel Architecture\nActive\nProcessor: Quantum Chip \u00b7 \u2713\nCore: Tensor Core \u00b7 \u2713\n\nRegular compute \u00d71.20 \u00b7 actual \u00d71.20\n\nUsers and Credits follow through the core loop. No direct Credit/Data factor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Learning Pipeline\nIncomplete\nProcessor: Photonic Array \u00b7 Missing\nCore: Logic Seed \u00b7 Missing\n\nB +0.50 \u00b7 actual +0.00\n\nNext start, without \u2192 with active combination contribution (individual effects retained):\n\nQuality: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nEfficiency: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nFuture training starts only; running costs and duration stay fixed.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Material Mapping\nIncomplete\nResearch: Field Scanner \u00b7 Missing\nCore: Memory Crystal \u00b7 Missing\n\nGuaranteed components per positive final quantity: floor(n \u00d71.25) \u00b7 actual \u00d71.00\n\nFixed at analysis start; equipment changes do not change this job.",
+          "errors": []
+        }
+      ],
+      "quote": {
+        "id": "parallel-architecture",
+        "kind": "compute-factor",
+        "legacy": false,
+        "neededItems": [
+          {
+            "slot": "processor",
+            "type": "quantum-chip",
+            "effect": null,
+            "instanceId": "item-1",
+            "matched": true
+          },
+          {
+            "slot": "core",
+            "type": "tensor-core",
+            "effect": null,
+            "instanceId": "item-2",
+            "matched": true
+          }
+        ],
+        "missingEquipment": [],
+        "active": true,
+        "disabled": false,
+        "configuredValue": 1.2,
+        "contribution": 1.2
+      },
+      "trainingPrices": null,
+      "actualTrainingDataCost": null,
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "height": 844,
+      "build": "learning-pipeline",
+      "preparedResourcesAndItems": true,
+      "slotsRegularlyPurchased": true,
+      "realEquipClicks": 2,
+      "incomplete": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nIncomplete\nCompute on an equipped item \u00b7 Missing\nCredits on an equipped item \u00b7 Missing\n\nExisting credit item family: +0.08 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Research\nIncomplete\nTraining needs less Data on an equipped item \u00b7 Missing\nResearch on an equipped item \u00b7 Missing\n\nExisting research item family: +0.12 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallel Architecture\nIncomplete\nProcessor: Quantum Chip \u00b7 Missing\nCore: Tensor Core \u00b7 Missing\n\nRegular compute \u00d71.20 \u00b7 actual \u00d71.00\n\nUsers and Credits follow through the core loop. No direct Credit/Data factor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Learning Pipeline\nIncomplete\nProcessor: Photonic Array \u00b7 Missing\nCore: Logic Seed \u00b7 Missing\n\nB +0.50 \u00b7 actual +0.00\n\nNext start, without \u2192 with active combination contribution (individual effects retained):\n\nQuality: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nEfficiency: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nFuture training starts only; running costs and duration stay fixed.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Material Mapping\nIncomplete\nResearch: Field Scanner \u00b7 Missing\nCore: Memory Crystal \u00b7 Missing\n\nGuaranteed components per positive final quantity: floor(n \u00d71.25) \u00b7 actual \u00d71.00\n\nFixed at analysis start; equipment changes do not change this job.",
+          "errors": []
+        }
+      ],
+      "active": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nIncomplete\nCompute on an equipped item \u00b7 Missing\nCredits on an equipped item \u00b7 Missing\n\nExisting credit item family: +0.08 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Research\nIncomplete\nTraining needs less Data on an equipped item \u00b7 Photonic Array \u00b7 \u2713\nResearch on an equipped item \u00b7 Missing\n\nExisting research item family: +0.12 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallel Architecture\nIncomplete\nProcessor: Quantum Chip \u00b7 Missing\nCore: Tensor Core \u00b7 Missing\n\nRegular compute \u00d71.20 \u00b7 actual \u00d71.00\n\nUsers and Credits follow through the core loop. No direct Credit/Data factor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "true",
+          "text": "Learning Pipeline\nActive\nProcessor: Photonic Array \u00b7 \u2713\nCore: Logic Seed \u00b7 \u2713\n\nB +0.50 \u00b7 actual +0.50\n\nNext start, without \u2192 with active combination contribution (individual effects retained):\n\nQuality: 13 \u2192 9 Data \u00b7 B 0.17 \u2192 0.67 \u00b7 Factor 0.5989 \u00b7 Discount cap 50%\n\nEfficiency: 13 \u2192 9 Data \u00b7 B 0.17 \u2192 0.67 \u00b7 Factor 0.5989 \u00b7 Discount cap 50%\n\nFuture training starts only; running costs and duration stay fixed.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Material Mapping\nIncomplete\nResearch: Field Scanner \u00b7 Missing\nCore: Memory Crystal \u00b7 Missing\n\nGuaranteed components per positive final quantity: floor(n \u00d71.25) \u00b7 actual \u00d71.00\n\nFixed at analysis start; equipment changes do not change this job.",
+          "errors": []
+        }
+      ],
+      "quote": {
+        "id": "learning-pipeline",
+        "kind": "training-bonus",
+        "legacy": false,
+        "neededItems": [
+          {
+            "slot": "processor",
+            "type": "photonic-array",
+            "effect": null,
+            "instanceId": "item-3",
+            "matched": true
+          },
+          {
+            "slot": "core",
+            "type": "logic-seed",
+            "effect": null,
+            "instanceId": "item-4",
+            "matched": true
+          }
+        ],
+        "missingEquipment": [],
+        "active": true,
+        "disabled": false,
+        "configuredValue": 0.5,
+        "contribution": 0.5
+      },
+      "trainingPrices": {
+        "before": 13,
+        "after": 9,
+        "factor": 0.5989458552946814,
+        "capped": false
+      },
+      "actualTrainingDataCost": 9,
+      "errors": []
+    },
+    {
+      "language": "en",
+      "width": 390,
+      "height": 844,
+      "build": "material-mapping",
+      "preparedResourcesAndItems": true,
+      "slotsRegularlyPurchased": true,
+      "realEquipClicks": 2,
+      "incomplete": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nIncomplete\nCompute on an equipped item \u00b7 Missing\nCredits on an equipped item \u00b7 Missing\n\nExisting credit item family: +0.08 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Research\nIncomplete\nTraining needs less Data on an equipped item \u00b7 Missing\nResearch on an equipped item \u00b7 Missing\n\nExisting research item family: +0.12 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallel Architecture\nIncomplete\nProcessor: Quantum Chip \u00b7 Missing\nCore: Tensor Core \u00b7 Missing\n\nRegular compute \u00d71.20 \u00b7 actual \u00d71.00\n\nUsers and Credits follow through the core loop. No direct Credit/Data factor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Learning Pipeline\nIncomplete\nProcessor: Photonic Array \u00b7 Missing\nCore: Logic Seed \u00b7 Missing\n\nB +0.50 \u00b7 actual +0.00\n\nNext start, without \u2192 with active combination contribution (individual effects retained):\n\nQuality: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nEfficiency: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nFuture training starts only; running costs and duration stay fixed.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "false",
+          "text": "Material Mapping\nIncomplete\nResearch: Field Scanner \u00b7 Missing\nCore: Memory Crystal \u00b7 Missing\n\nGuaranteed components per positive final quantity: floor(n \u00d71.25) \u00b7 actual \u00d71.00\n\nFixed at analysis start; equipment changes do not change this job.",
+          "errors": []
+        }
+      ],
+      "active": [
+        {
+          "id": "compute-credit-link",
+          "active": "false",
+          "text": "Compute + Credits\nIncomplete\nCompute on an equipped item \u00b7 Missing\nCredits on an equipped item \u00b7 Memory Crystal \u00b7 \u2713\n\nExisting credit item family: +0.08 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "training-research-link",
+          "active": "false",
+          "text": "Training + Research\nIncomplete\nTraining needs less Data on an equipped item \u00b7 Missing\nResearch on an equipped item \u00b7 Missing\n\nExisting research item family: +0.12 \u00b7 actual +0.00",
+          "errors": []
+        },
+        {
+          "id": "parallel-architecture",
+          "active": "false",
+          "text": "Parallel Architecture\nIncomplete\nProcessor: Quantum Chip \u00b7 Missing\nCore: Tensor Core \u00b7 Missing\n\nRegular compute \u00d71.20 \u00b7 actual \u00d71.00\n\nUsers and Credits follow through the core loop. No direct Credit/Data factor.",
+          "errors": []
+        },
+        {
+          "id": "learning-pipeline",
+          "active": "false",
+          "text": "Learning Pipeline\nIncomplete\nProcessor: Photonic Array \u00b7 Missing\nCore: Logic Seed \u00b7 Missing\n\nB +0.50 \u00b7 actual +0.00\n\nNext start, without \u2192 with active combination contribution (individual effects retained):\n\nQuality: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nEfficiency: 15 \u2192 15 Data \u00b7 B 0.00 \u2192 0.00 \u00b7 Factor 1.0000 \u00b7 Discount cap 50%\n\nFuture training starts only; running costs and duration stay fixed.",
+          "errors": []
+        },
+        {
+          "id": "material-mapping",
+          "active": "true",
+          "text": "Material Mapping\nActive\nResearch: Field Scanner \u00b7 \u2713\nCore: Memory Crystal \u00b7 \u2713\n\nGuaranteed components per positive final quantity: floor(n \u00d71.25) \u00b7 actual \u00d71.25\n\nFixed at analysis start; equipment changes do not change this job.",
+          "errors": []
+        }
+      ],
+      "quote": {
+        "id": "material-mapping",
+        "kind": "analysis-components-factor",
+        "legacy": false,
+        "neededItems": [
+          {
+            "slot": "research",
+            "type": "field-scanner",
+            "effect": null,
+            "instanceId": "item-5",
+            "matched": true
+          },
+          {
+            "slot": "core",
+            "type": "memory-crystal",
+            "effect": null,
+            "instanceId": "item-6",
+            "matched": true
+          }
+        ],
+        "missingEquipment": [],
+        "active": true,
+        "disabled": false,
+        "configuredValue": 1.25,
+        "contribution": 1.25
+      },
+      "trainingPrices": null,
+      "actualTrainingDataCost": null,
+      "errors": []
+    }
+  ]
+}

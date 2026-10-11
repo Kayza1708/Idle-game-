@@ -1,0 +1,24 @@
+/** Prepared technical comparisons, not a natural progression measurement. */
+import assert from 'node:assert/strict';
+import baseline from '../src/testSupport/itemBuildsBaseline.json';
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {newGame,addData,addCredits,buyHardwareClass,itemCombinationQuote,computeRate,usersRate,creditRate,dataRate,trainingCombinationComparison,startTraining,exactEconomyValue,trainingCostQuote,type GameState,type ItemTypeId} from '../src/economy';
+import {createItem,equip,unequip,buyEquipmentSlot} from '../src/inventory';
+import {queueExperiment,completeExperiment} from '../src/experiments';
+import {restore,serialize} from '../src/storage';
+const output=process.argv[2]??'work/item-builds-proof.json';
+const prepared=()=>{let s:GameState={...addCredits(addData(newGame(0,'9d-proof'),1e6),1e21),prestigeCount:1,discovered:['calculator','sbc']};s=buyHardwareClass(s,'calculator',1);s=buyEquipmentSlot(s,2);s=buyEquipmentSlot(s,3);return s;};
+const stock=(a:ItemTypeId,b:ItemTypeId)=>createItem(createItem(prepared(),a,'common'),b,'common');
+const rates=(s:GameState)=>({compute:computeRate(s.hardware,s),users:usersRate(s),credits:creditRate(s.hardware,s.level,s),data:dataRate(s)});
+const all=(s:GameState)=>s.inventory.reduce((state,item)=>equip(state,item.id),s);
+const computeInventory=stock('quantum-chip','tensor-core'),computeSingle=equip(computeInventory,computeInventory.inventory[0].id),computePair=equip(computeSingle,computeSingle.inventory[1].id);
+const compute={beforeSingle:rates(computeSingle),afterPair:rates(computePair),quote:itemCombinationQuote(computePair,'parallel-architecture'),withIndividualEffectsWithoutAdditionalBuild:baseline.compute,baselineSource:baseline.sourceCommit,comparisonNote:'Single -> pair includes the retained tensor-core effect; isolated additional build factor is exactly 1.20. Data follows the existing Users formula, with no direct build factor.'};
+assert.ok(Math.abs(compute.afterPair.compute/baseline.compute.compute-1.2)<1e-12);
+const trainingPair=all(stock('photonic-array','logic-seed')),training=trainingCombinationComparison(trainingPair,'quality'),paid=startTraining(trainingPair,'quality'),paidData=exactEconomyValue(trainingPair,'data').subtract(exactEconomyValue(paid,'data')).toNumber();
+assert.ok(Math.abs(paidData-training.after.cost.toNumber())<1e-8);assert.equal(training.after.sources['combination:learning-pipeline'],.5);
+const capped=trainingCombinationComparison({...trainingPair,trainingBoostUntil:1000},'quality');assert.equal(capped.after.factor,.5);assert.equal(capped.after.cost.compare(capped.before.cost),0);
+const analysisPair=all(stock('field-scanner','memory-crystal')),a=queueExperiment(unequip(analysisPair,'core'),'hardware',0,'long'),b=queueExperiment(analysisPair,'hardware',0,'long'),end=b.experiments.active!.endsAt;
+const regular=completeExperiment(a,end,()=>.25),swapped=unequip(b,'core'),loaded=restore(serialize(swapped),0);assert.equal(loaded.error,undefined);
+const boosted=completeExperiment(loaded.state,end,()=>.25,'offline');assert.equal(regular.experiments.lastResult!.components.circuits,45);assert.equal(boosted.experiments.lastResult!.components.circuits,56);assert.equal(completeExperiment(boosted,end).componentInventory.circuits,56);
+const proof={preparedResourcesAndPrestige:true,naturalProgressionMeasurement:false,slotsRegularlyPurchased:true,compute,training:{withoutBuild:training.before,withBuild:training.after,paidData,durationSeconds:paid.activeTraining!.workRequired,capped:{withoutBuild:capped.before,withBuild:capped.after},runningCostAfterUnequip:unequip(paid,'processor').activeTraining!.dataCost},analysis:{startFactor:b.experiments.active!.combinationFactor,afterUnequipAndReloadFactor:loaded.state.experiments.active!.combinationFactor,regular:regular.experiments.lastResult,boosted:boosted.experiments.lastResult,exactlyOnce:true}};
+mkdirSync(output.slice(0,output.lastIndexOf('/')),{recursive:true});writeFileSync(output,JSON.stringify(proof,null,2)+'\n');console.log(JSON.stringify(proof,null,2));
