@@ -100,3 +100,5 @@ git diff --check
 node_modules/.bin/vite-node --script scripts/data-analysis-proof.ts docs/data-analysis-proof.json
 python scripts/browser-data-analysis.py /workspace/work/data-analysis/browser-final.json
 ```
+
+Implementierungscommit: `83547f2090b985085f46e76143fd96e3d21cb77d`. [Draft-PR #83](https://github.com/Kayza1708/Idle-game-/pull/83), gegen main, abhängig von [PR #82](https://github.com/Kayza1708/Idle-game-/pull/82), nicht gemergt.

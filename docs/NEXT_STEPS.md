@@ -669,3 +669,5 @@ Data bisher unter ×5 gedeckelt, jetzt `1+B` bis B=4, danach `5+sqrt(4(B−4))`.
 298 gezielte Tests in elf Dateien, Typecheck, Production-Build und Diffcheck sowie Browser 360/390/430 px DE/EN bestanden. Ausdrücklich keine Gesamtsuite, FAST/DEEP oder Langkampagne. Audit `data-analysis-audit.md`, Rohwerte `data-analysis-proof.json`, Browser `data-analysis-browser.json`.
 
 Frische Profile (90 aktive Minuten, 5.400 echte Taps, keine Grants/Claims/Items): erste Hardwareanalyse Modell-zuerst 7:30 / Analyse-zuerst 6:40; erste Forschung 11:20 / 11:40. Endbestand 653.652 / 568.826 Data. Frühe Prioritäten sind real, **dauerhafte Data-Knappheit und alle vier konkurrierenden Ausgabefamilien bleiben offen**. Keine Parameter nachjustiert. Herstellungszugang in diesen begrenzten Policies nicht erreicht, spätere Vergleichsquoten ausdrücklich vorbereitete Fixtures. Keine natürliche Wochen-/Monatsbalance behauptet.
+
+Implementierungscommit: `83547f2090b985085f46e76143fd96e3d21cb77d`. [Draft-PR #83](https://github.com/Kayza1708/Idle-game-/pull/83), gegen main, abhängig von [PR #82](https://github.com/Kayza1708/Idle-game-/pull/82), nicht gemergt.
