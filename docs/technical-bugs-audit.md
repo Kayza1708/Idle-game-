@@ -43,6 +43,10 @@ Fünf bestehende `clock.test.ts`-Fälle schlugen auch auf unverändertem main fe
 
 CI: Für genau diesen Branch ersetzt ein bedingter Schritt den pauschalen `npm test` durch dieselben gezielten Regressionen mit 300-s-Limit. Bestehende Installation, Typecheck und Build bleiben aktiv; andere PRs behalten ihren bisherigen Testschritt. Keine `[skip ci]`-Pauschalsperre. Keine Gesamtsuite, FAST/DEEP oder Tages-/Monatskampagne ausgelöst.
 
+### CI-Installationsabweichung
+
+Der erste kurze CI-Lauf brach vor allen Prüfungen bei `npm ci` ab: Die bereits in package.json deklarierten Capacitor-Pakete fehlten als Paket-Einträge im Lockfile. Außerdem verwendete .nvmrc Node 20, während das vorhandene Projekt/Capacitor CLI Node 22 fordert. Lockfile mit den vorhandenen Erklärungen synchronisiert, .nvmrc auf die bestehende 22.x-Vorgabe ausgerichtet. 99 fehlende Lockeinträge ergänzt; keine vorhandene gelockte Paketversion geändert oder entfernt und package.json unverändert. Keine neuen SDK-Erklärungen oder nativen Features eingeführt. Typecheck und Build bleiben ungekürzt; die Tests dieses Branches bleiben auf 300 Sekunden begrenzt.
+
 ## Offene Grenzen
 
 Keine verbleibende reproduzierte Fehlfunktion aus den fünf beauftragten Befunden nach der gezielten Abnahme. Nicht mehr belegbarer historischer Slotbesitz und verlorene Items werden nicht erfunden. Bestehende wissenschaftliche Mantissenpräzision, Bundlewarnung und frühere nicht beauftragte Balance-/Referenzabweichungen bleiben offen. Keine Langzeitbalance oder natürliche Erreichbarkeit bestätigt.
