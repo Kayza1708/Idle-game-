@@ -817,3 +817,5 @@ Abhängig von PR #82 `d8d5a29`; keine automatische Integration. Nachweis: `data-
 - [ ] Natürliche Erreichbarkeit aller Meisterschaften/seltenen Builds und langfristige Data-/Fragment-/Monatsbalance. Beide Profile erreichen Meisterschaft 1 nicht: zehn Fragmente fehlen; Data am Ende reichlich vorhanden.
 
 [Quellen, Verträge, konkrete Vorher/Nachher-Werte und Grenzen](item-grind-audit.md). Basis finaler offener #83-Head, abhängig von #83 und #82; Vorgänger unverändert, kein Merge.
+
+[Draft-PR #84](https://github.com/Kayza1708/Idle-game-/pull/84), Implementierung `23659632f4de6ba74aee92f877db81984f4dcc48`; kurze CI am Implementierungscommit grün. Weiterhin abhängig von #83/#82, nicht gemergt.

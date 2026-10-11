@@ -76,3 +76,5 @@ Alle benötigten Familienkomponenten besitzen tatsächlich implementierte Analys
 - `timeout 300 npx vite-node --script scripts/item-grind-proof.ts docs/item-grind-profiles.json`: nur die oben beschriebenen zwei Profile, keine Gesamtsuite, FAST/DEEP-, Tages- oder Monatskampagne.
 
 Die neue Branch erhält ausschließlich den kurzen betroffenen CI-Testpfad, keine pauschale Test-Suite oder manuell ausgelösten Langzeitjobs. Frühere branchspezifische Checks bleiben bestehen. Abschließend erneut gefetchtes main bleibt `99c10ee`; #82/#83 weiterhin offen mit denselben Heads. Draft-Abhängigkeit bleibt nötig.
+
+Implementierungscommit `23659632f4de6ba74aee92f877db81984f4dcc48`; [Draft-PR #84 gegen main](https://github.com/Kayza1708/Idle-game-/pull/84), ausdrücklich abhängig von #83/#82, nicht gemergt. [Kurzer CI-Lauf am Implementierungscommit](https://github.com/Kayza1708/Idle-game-/actions/runs/38168156866) erfolgreich.
