@@ -755,3 +755,13 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] 438 reguläre Karten-Geometrieprüfungen und 390 lange Anzeigetextprüfungen; echte Lern-/Item-/Modulaktionen in sechs mobilen Kombinationen.
 - [x] Sechs kurze UI-Tests, Typecheck, Build, Diffprüfung; Vorher/Nachher-Screenshots und Audit ergänzt, bestehender PR #78 aktualisiert.
 - [ ] Der ursprüngliche browserinterne Paintauslöser ist nicht vollständig isoliert; keine unbewiesene DOM-Overflow-Ursache behaupten. Bekannte Balancegrenzen unverändert.
+
+
+## Auftrag 9C – vollständiger Itemrezeptkatalog (11. Oktober 2026)
+
+- [x] Alle elf Itemtypen besitzen genau ein gültiges Rezept; ausschließlich fünf neue Rezepte in festgelegter Reihenfolge/Werten. Sechs alte Rezepte und alle Itemeffekte gegen origin/main geprüft.
+- [x] Offene Baupläne abgeschlossen / einmaliges Lernen / dauerhafter Besitz getrennt; zentrale atomare Herstellung, Queue, Planer, Zielanheftung und Export.
+- [x] Historische Altbesitz-Migration über vollständigen Katalog; aktuelle Funde lernen nichts, Inventarinstanzen und Haupt-/Challenge-Isolation erhalten.
+- [x] DE/EN mit Common-Ergebniseffekten und responsive Zutatenkarten aus #78; 390px alle fünf Karten, Sperren/Lernen und tatsächlicher Craft/Reload, keine Zutatenabschneidung oder horizontale Überbreite.
+- [x] 174 gezielte Tests, Typecheck/Build/Diffcheck, vorbereiteter regulärer technischer Nachweis für alle fünf; tatsächliche Quellen für alle Zutaten dokumentiert. [Audit und Prüfabweichung](item-recipes-audit.md).
+- [ ] Natürliche Erreichbarkeit und Balance des vorgegebenen Ausgangskatalogs nicht bestätigt; keine Parametersuche. Draft prüfen, nicht mergen.

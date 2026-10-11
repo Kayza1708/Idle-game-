@@ -1,10 +1,11 @@
 import {describe,expect,it} from 'vitest';
+import {blueprintQuote,learnBlueprint} from './blueprints';
 import {BALANCE,buyHardwareClass,newGame} from './economy';
 import {advance} from './simulation';
 import {craft,craftAffordability,craftModule,equip,itemUpgradeCost,upgrade} from './inventory';
 describe('module and item economy',()=>{
  it('crafts modules atomically from data and components',()=>{const b=newGame(0),s={...b,completedResearch:['blueprints' as const],data:1000,componentInventory:{...b.componentInventory,circuits:20,copperCoils:10,siliconWafers:10,titaniumBolts:10},components:50};const queued=craftModule(s,'computeBus');expect(queued.data).toBe(750);const n=advance(queued,BALANCE.craftingSeconds.module).state;expect(n.modules.computeBus).toBe(1);expect(n.componentInventory.circuits).toBe(10);expect(n.componentInventory.copperCoils).toBe(4);expect(n.componentInventory.siliconWafers).toBe(6);expect(n.componentInventory.titaniumBolts).toBe(6)});
- it('requires module and data for item craft',()=>{const b=newGame(0),s={...b,data:5000,blueprintFragments:10,modules:{computeBus:1,dataLattice:0},componentInventory:{circuits:50,copperCoils:20,siliconWafers:20,titaniumBolts:20,photonicLenses:20,graphene:20,nanotubes:10,superconductors:5,neuralCrystals:5,quantumCores:5},components:125};const queued=craft(s,'quantum-chip','common');expect(queued.modules.computeBus).toBe(0);expect(queued.data).toBe(3200);const n=advance(queued,BALANCE.craftingSeconds.common).state;expect(n.inventory).toHaveLength(1)});
+ it('requires module and data for item craft',()=>{const b=newGame(0),s={...b,data:5000,blueprintFragments:10,modules:{computeBus:1,dataLattice:0},componentInventory:{circuits:50,copperCoils:20,siliconWafers:20,titaniumBolts:20,photonicLenses:20,graphene:20,nanotubes:10,superconductors:5,neuralCrystals:5,quantumCores:5},components:125};const queued=craft(learnBlueprint(s,'quantum-chip'),'quantum-chip','common');expect(queued.modules.computeBus).toBe(0);expect(queued.data).toBe(3200);const n=advance(queued,BALANCE.craftingSeconds.common).state;expect(n.inventory).toHaveLength(1)});
  it('promotes rarity and applies manufacturing discount',()=>{const b=newGame(0),item={id:'x',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false},s={...b,nodes:['manufacturing2'],data:10000,componentInventory:{...b.componentInventory,circuits:1000},components:1000,inventory:[item]};const n=upgrade(s,'x');expect(n.inventory[0].rarity).toBe('uncommon');expect(n.data).toBeLessThan(s.data)});
 });
 
@@ -30,7 +31,7 @@ it('reports data affordability with a finite ETA when production exists',async()
 });
 
 describe('data affordability contracts',()=>{
- it('reports exact data/component/module shortages before crafting',()=>{const s={...newGame(0),data:100,blueprintFragments:0};const a=craftAffordability(s,'quantum-chip');expect(a.data.cost).toBe(BALANCE.itemRecipes['quantum-chip'].data);expect(a.data.balance).toBe(100);expect(a.data.missing).toBe(BALANCE.itemRecipes['quantum-chip'].data-100);expect(a.missingBlueprints).toBe(BALANCE.itemRecipes['quantum-chip'].blueprints);expect(a.missingModules.computeBus).toBe(1);expect(a.missingComponents.circuits).toBe(30)});
+ it('reports exact data/component/module shortages before crafting',()=>{const s={...newGame(0),data:100,blueprintFragments:0};const a=craftAffordability(s,'quantum-chip');expect(a.data.cost).toBe(BALANCE.itemRecipes['quantum-chip'].data);expect(a.data.balance).toBe(100);expect(a.data.missing).toBe(BALANCE.itemRecipes['quantum-chip'].data-100);expect(a.missingBlueprints).toBe(0);expect(blueprintQuote(s,'quantum-chip').missing).toBe(BALANCE.itemRecipes['quantum-chip'].blueprints);expect(a.missingModules.computeBus).toBe(1);expect(a.missingComponents.circuits).toBe(30)});
  it('applies the manufacturing-II discount to both item upgrade costs',()=>{const item={id:'x',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false};const base=itemUpgradeCost(newGame(0),item)!;const discounted=itemUpgradeCost({...newGame(0),nodes:['manufacturing1','manufacturing2']},item)!;expect(discounted.componentCost).toBe(Math.ceil(base.componentCost*.85));expect(discounted.dataCost).toBe(Math.ceil(base.dataCost*.85))});
 });
 

@@ -122,7 +122,12 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               {recipe.result.rarity &&
                 rarityText(recipe.result.rarity, language)}{" "}
               · {recipe.durationPerUnit * recipe.quantity} s
+              {kind==="item" && " · Level 0 · Forge 0"}
             </p>
+            {kind==="item" && <section className="recipe-result-effects">
+              <p>{de?"Common-Effekte nach Ausrüsten":"Common effects when equipped"}</p>
+              {effect({id:`preview-${id}`,type:id as ItemTypeId,rarity:recipe.result.rarity!,level:0,forge:0,locked:false})}
+            </section>}
             <p className="manufacturing-cost">
               {de?'Herstellungskosten':'Manufacturing costs'}: {formatScientific(
                 ScientificNumber.from(recipe.ingredients.data),
@@ -157,17 +162,18 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
         {!q.affordable && (
           <p role="status">{craftingMissingText(q, language)}</p>
         )}
+        {kind==='item' && 'research' in BALANCE.itemRecipes[id as keyof typeof BALANCE.itemRecipes] && <p className="recipe-prerequisite">{de?'Voraussetzung: Offene Baupläne abgeschlossen':'Prerequisite: Open Blueprints completed'} · {blueprint?.prerequisite?(de?'Abgeschlossen':'Completed'):(de?'Noch nicht abgeschlossen':'Not completed')}</p>}
         {(kind==='module'?!q.unlocked:!blueprint?.prerequisite) && (
           <button
             onClick={() =>
-              kind === "module"
+              kind === "module" || (kind==='item' && 'research' in BALANCE.itemRecipes[id as keyof typeof BALANCE.itemRecipes])
                 ? act("open-research", "blueprints")
                 : id === "impulse-relay"
                   ? source()
                   : act("open-prestige-node", "researchArchive")
             }
           >
-            {kind === "module"
+            {kind === "module" || (kind==='item' && 'research' in BALANCE.itemRecipes[id as keyof typeof BALANCE.itemRecipes])
               ? de
                 ? "Offene Baupläne erforschen"
                 : "Research Open Blueprints"
@@ -180,10 +186,10 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                   : "Blueprint: Research Archive in prestige tree"}
           </button>
         )}
-        {blueprint?.prerequisite && blueprint.price>0 && (
+        {blueprint && blueprint.price>0 && (
           <section className="blueprint-learning">
-            <p>{blueprint.learned?(de?'Bauplan dauerhaft gelernt':'Blueprint permanently learned'):
-              `${de?'Einmaliger Lernpreis':'One-time learning price'}: ${blueprint.price} · ${de?'Bestand':'Balance'}: ${blueprint.balance} · ${de?'Fehlt':'Missing'}: ${blueprint.missing}`}</p>
+            <p>{`${de?'Einmaliger Lernpreis':'One-time learning price'}: ${blueprint.price} ${de?'Bauplanfragmente':'blueprint fragments'} · ${de?'Bestand':'Balance'}: ${blueprint.balance} · ${de?'Fehlt':'Missing'}: ${blueprint.missing}`}</p>
+            {blueprint.learned && <p>{de?'Bauplan dauerhaft gelernt':'Blueprint permanently learned'}</p>}
             {!blueprint.learned && <button disabled={!blueprint.canLearn} onClick={()=>{
               if(confirm(`${de?'Bauplan lernen':'Learn blueprint'}: ${name}\n${de?'Bauplanfragmente vorher → nachher':'Blueprint fragments before → after'}: ${blueprint.balance} → ${blueprint.balance-blueprint.price}`))act('blueprint-learn',id);
             }}>{de?'Bauplan lernen':'Learn blueprint'}</button>}

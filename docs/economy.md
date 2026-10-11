@@ -512,3 +512,10 @@ Commonbasis unverändert 2 s/+25 %. Forge 1: 2,24 s/+28 %; reguläre erste Aufwe
 ## Auftrag 9B – einmaliges Bauplanlernen
 
 Die unveränderten Rezeptwerte `blueprints` sind jetzt einmalige Lernpreise: Quantenchip 4, Neural-ASIC/Feldscanner/Datenprisma je 5. Herstellung kostet anschließend 0 Fragmente bei unveränderten anderen Zutaten, Zeiten und Ergebnissen. Preis-0-Rezepte behalten ihre bisherigen Zugangsflags. Gelernte stabile Rezept-IDs bleiben über normalen Prestige/Axiom erhalten, getrennt je Haupt-/Challenge-Kontext. Save 42 migriert nur belegten alten Besitz; historische Fragmentreservierungen bleiben bezahlt und werden nicht nachträglich erstattet. [Vollständiger Vertrag, Migration und technische Abnahme](blueprint-learning-audit.md). Keine Drop-/Produktions-/Preis-/Kurvenänderung.
+
+
+## Auftrag 9C – vollständiger Itemrezeptkatalog (11. Oktober 2026)
+
+Die sechs bestehenden Rezepte bleiben bytegleich in ihrem Katalogvertrag. Hinter ihnen folgen `photonic-array`, `memory-crystal`, `logic-seed`, `tensor-core`, `lab-drone`. Ihre Werte stehen ausschließlich in `BALANCE.itemRecipes` in `src/economy.ts`; [festgelegter Katalog, Quellen und technische Abnahme](item-recipes-audit.md). Alle fünf verlangen den abgeschlossenen Forschungsdurchbruch `blueprints` (Offene Baupläne), einmaliges Lernen gegen 6/6/6/8/10 Fragmente und anschließend 0 Herstellungsfragmente/0 Credits. Data: 1200/1800/1500/3000/3600; Dauer: 900/1200/900/1800/1800 Sekunden. Ergebnis je Einheit Common, Level 0, effektiver Forge 0. Alle nicht genannten Zutaten bleiben 0; die bestehenden pluralen Inventar-IDs `neuralCrystals`/`quantumCores` werden verwendet.
+
+Dies ist ein vorgegebener Ausgangskatalog, keine bestätigte Balance. Keine Parametersuche; bestehende Itemeffekte, Dropraten, Module und Economy-Kurven unverändert. Alle Zutaten besitzen implementierte Quellen. Technischer Nachweis mit vorbereiteten Ressourcen, kein Beleg natürlicher Erreichbarkeit.

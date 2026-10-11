@@ -1,0 +1,2272 @@
+{
+  "technicalPreparedFixture": true,
+  "naturalReachabilityClaim": false,
+  "checks": [
+    {
+      "id": "photonic-array",
+      "prepared": {
+        "components": {
+          "circuits": 30,
+          "copperCoils": 14,
+          "siliconWafers": 16,
+          "titaniumBolts": 4,
+          "photonicLenses": 6,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "data": 1550,
+        "fragments": 6,
+        "completedResearch": [
+          "blueprints"
+        ]
+      },
+      "modulesRegularlyCrafted": true,
+      "beforeItem": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 8,
+          "siliconWafers": 12,
+          "titaniumBolts": 0,
+          "photonicLenses": 6,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 0
+        },
+        "data": 1300,
+        "credits": 50
+      },
+      "reservation": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 8,
+          "siliconWafers": 12,
+          "titaniumBolts": 0,
+          "photonicLenses": 6,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 1
+        },
+        "data": 1200,
+        "blueprints": 0
+      },
+      "afterPayment": {
+        "components": {
+          "circuits": 0,
+          "copperCoils": 0,
+          "siliconWafers": 0,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 0,
+          "dataLattice": 0
+        },
+        "data": 100,
+        "fragments": 0,
+        "credits": 50
+      },
+      "completedAt": 960000,
+      "result": {
+        "id": "item-3",
+        "type": "photonic-array",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "effectiveForge": 0,
+      "learnedRecipes": [
+        "photonic-array"
+      ],
+      "events": [
+        {
+          "at": 0,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-photonic-array:main:0:0",
+          "source": "manual-blueprint-learning",
+          "jobId": null,
+          "type": "blueprint-learn",
+          "details": {
+            "recipe": "photonic-array",
+            "paidFragments": 6,
+            "source": "manual-blueprint-learning"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 1550,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.55,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 1.55,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 60000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-photonic-array:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-1",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-1",
+            "recipe": "computeBus",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":10,\"copperCoils\":6,\"siliconWafers\":4,\"titaniumBolts\":4},\"modules\":{},\"data\":250,\"blueprints\":0}",
+            "duration": 60,
+            "result": "computeBus",
+            "startedAt": 0,
+            "endsAt": 60000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "2.500000000000000e+2"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 1300,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.3,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 1.55,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 960000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-photonic-array:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-2",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-2",
+            "recipe": "photonic-array",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":20,\"copperCoils\":8,\"siliconWafers\":12,\"titaniumBolts\":0,\"photonicLenses\":6,\"graphene\":0,\"nanotubes\":0,\"superconductors\":0,\"neuralCrystals\":0,\"quantumCores\":0},\"modules\":{\"computeBus\":1},\"data\":1200,\"blueprints\":0}",
+            "duration": 900,
+            "result": "photonic-array",
+            "startedAt": 60000,
+            "endsAt": 960000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "1.200000000000000e+3"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 100,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.0000000000000009,
+                "e": 2
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 1.55,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        }
+      ]
+    },
+    {
+      "id": "memory-crystal",
+      "prepared": {
+        "components": {
+          "circuits": 24,
+          "copperCoils": 0,
+          "siliconWafers": 16,
+          "titaniumBolts": 0,
+          "photonicLenses": 4,
+          "graphene": 12,
+          "nanotubes": 3,
+          "superconductors": 0,
+          "neuralCrystals": 2,
+          "quantumCores": 0
+        },
+        "data": 2400,
+        "fragments": 6,
+        "completedResearch": [
+          "blueprints"
+        ]
+      },
+      "modulesRegularlyCrafted": true,
+      "beforeItem": {
+        "components": {
+          "circuits": 16,
+          "copperCoils": 0,
+          "siliconWafers": 16,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 6,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 2,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 0,
+          "dataLattice": 1
+        },
+        "data": 1900,
+        "credits": 50
+      },
+      "reservation": {
+        "components": {
+          "circuits": 16,
+          "copperCoils": 0,
+          "siliconWafers": 16,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 6,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 2,
+          "quantumCores": 0
+        },
+        "modules": {
+          "dataLattice": 1
+        },
+        "data": 1800,
+        "blueprints": 0
+      },
+      "afterPayment": {
+        "components": {
+          "circuits": 0,
+          "copperCoils": 0,
+          "siliconWafers": 0,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 0,
+          "dataLattice": 0
+        },
+        "data": 100,
+        "fragments": 0,
+        "credits": 50
+      },
+      "completedAt": 1260000,
+      "result": {
+        "id": "item-3",
+        "type": "memory-crystal",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "effectiveForge": 0,
+      "learnedRecipes": [
+        "memory-crystal"
+      ],
+      "events": [
+        {
+          "at": 0,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-memory-crystal:main:0:0",
+          "source": "manual-blueprint-learning",
+          "jobId": null,
+          "type": "blueprint-learn",
+          "details": {
+            "recipe": "memory-crystal",
+            "paidFragments": 6,
+            "source": "manual-blueprint-learning"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 2400,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 2.4,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 2.4,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 60000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-memory-crystal:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-1",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-1",
+            "recipe": "dataLattice",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"graphene\":6,\"nanotubes\":3,\"photonicLenses\":4,\"circuits\":8},\"modules\":{},\"data\":500,\"blueprints\":0}",
+            "duration": 60,
+            "result": "dataLattice",
+            "startedAt": 0,
+            "endsAt": 60000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "5.000000000000000e+2"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 1900,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.9,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 2.4,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 1260000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-memory-crystal:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-2",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-2",
+            "recipe": "memory-crystal",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":16,\"copperCoils\":0,\"siliconWafers\":16,\"titaniumBolts\":0,\"photonicLenses\":0,\"graphene\":6,\"nanotubes\":0,\"superconductors\":0,\"neuralCrystals\":2,\"quantumCores\":0},\"modules\":{\"dataLattice\":1},\"data\":1800,\"blueprints\":0}",
+            "duration": 1200,
+            "result": "memory-crystal",
+            "startedAt": 60000,
+            "endsAt": 1260000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "1.800000000000000e+3"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 100,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 9.999999999999988,
+                "e": 1
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 2.4,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        }
+      ]
+    },
+    {
+      "id": "logic-seed",
+      "prepared": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 0,
+          "siliconWafers": 10,
+          "titaniumBolts": 0,
+          "photonicLenses": 4,
+          "graphene": 10,
+          "nanotubes": 5,
+          "superconductors": 0,
+          "neuralCrystals": 1,
+          "quantumCores": 0
+        },
+        "data": 2100,
+        "fragments": 6,
+        "completedResearch": [
+          "blueprints"
+        ]
+      },
+      "modulesRegularlyCrafted": true,
+      "beforeItem": {
+        "components": {
+          "circuits": 12,
+          "copperCoils": 0,
+          "siliconWafers": 10,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 4,
+          "nanotubes": 2,
+          "superconductors": 0,
+          "neuralCrystals": 1,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 0,
+          "dataLattice": 1
+        },
+        "data": 1600,
+        "credits": 50
+      },
+      "reservation": {
+        "components": {
+          "circuits": 12,
+          "copperCoils": 0,
+          "siliconWafers": 10,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 4,
+          "nanotubes": 2,
+          "superconductors": 0,
+          "neuralCrystals": 1,
+          "quantumCores": 0
+        },
+        "modules": {
+          "dataLattice": 1
+        },
+        "data": 1500,
+        "blueprints": 0
+      },
+      "afterPayment": {
+        "components": {
+          "circuits": 0,
+          "copperCoils": 0,
+          "siliconWafers": 0,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 0,
+          "dataLattice": 0
+        },
+        "data": 100,
+        "fragments": 0,
+        "credits": 50
+      },
+      "completedAt": 960000,
+      "result": {
+        "id": "item-3",
+        "type": "logic-seed",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "effectiveForge": 0,
+      "learnedRecipes": [
+        "logic-seed"
+      ],
+      "events": [
+        {
+          "at": 0,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-logic-seed:main:0:0",
+          "source": "manual-blueprint-learning",
+          "jobId": null,
+          "type": "blueprint-learn",
+          "details": {
+            "recipe": "logic-seed",
+            "paidFragments": 6,
+            "source": "manual-blueprint-learning"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 2100,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 2.1,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 2.1,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 60000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-logic-seed:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-1",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-1",
+            "recipe": "dataLattice",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"graphene\":6,\"nanotubes\":3,\"photonicLenses\":4,\"circuits\":8},\"modules\":{},\"data\":500,\"blueprints\":0}",
+            "duration": 60,
+            "result": "dataLattice",
+            "startedAt": 0,
+            "endsAt": 60000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "5.000000000000000e+2"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 1600,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.6,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 2.1,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 960000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-logic-seed:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-2",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-2",
+            "recipe": "logic-seed",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":12,\"copperCoils\":0,\"siliconWafers\":10,\"titaniumBolts\":0,\"photonicLenses\":0,\"graphene\":4,\"nanotubes\":2,\"superconductors\":0,\"neuralCrystals\":1,\"quantumCores\":0},\"modules\":{\"dataLattice\":1},\"data\":1500,\"blueprints\":0}",
+            "duration": 900,
+            "result": "logic-seed",
+            "startedAt": 60000,
+            "endsAt": 960000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "1.500000000000000e+3"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 100,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.0000000000000009,
+                "e": 2
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 2.1,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        }
+      ]
+    },
+    {
+      "id": "tensor-core",
+      "prepared": {
+        "components": {
+          "circuits": 54,
+          "copperCoils": 6,
+          "siliconWafers": 24,
+          "titaniumBolts": 16,
+          "photonicLenses": 4,
+          "graphene": 12,
+          "nanotubes": 7,
+          "superconductors": 2,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "data": 3850,
+        "fragments": 8,
+        "completedResearch": [
+          "blueprints"
+        ]
+      },
+      "modulesRegularlyCrafted": true,
+      "beforeItem": {
+        "components": {
+          "circuits": 36,
+          "copperCoils": 0,
+          "siliconWafers": 20,
+          "titaniumBolts": 12,
+          "photonicLenses": 0,
+          "graphene": 6,
+          "nanotubes": 4,
+          "superconductors": 2,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 3100,
+        "credits": 50
+      },
+      "reservation": {
+        "components": {
+          "circuits": 36,
+          "copperCoils": 0,
+          "siliconWafers": 20,
+          "titaniumBolts": 12,
+          "photonicLenses": 0,
+          "graphene": 6,
+          "nanotubes": 4,
+          "superconductors": 2,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 3000,
+        "blueprints": 0
+      },
+      "afterPayment": {
+        "components": {
+          "circuits": 0,
+          "copperCoils": 0,
+          "siliconWafers": 0,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 0,
+          "dataLattice": 0
+        },
+        "data": 100,
+        "fragments": 0,
+        "credits": 50
+      },
+      "completedAt": 1920000,
+      "result": {
+        "id": "item-4",
+        "type": "tensor-core",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "effectiveForge": 0,
+      "learnedRecipes": [
+        "tensor-core"
+      ],
+      "events": [
+        {
+          "at": 0,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-tensor-core:main:0:0",
+          "source": "manual-blueprint-learning",
+          "jobId": null,
+          "type": "blueprint-learn",
+          "details": {
+            "recipe": "tensor-core",
+            "paidFragments": 8,
+            "source": "manual-blueprint-learning"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 3850,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 3.85,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 3.85,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 60000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-tensor-core:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-1",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-1",
+            "recipe": "computeBus",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":10,\"copperCoils\":6,\"siliconWafers\":4,\"titaniumBolts\":4},\"modules\":{},\"data\":250,\"blueprints\":0}",
+            "duration": 60,
+            "result": "computeBus",
+            "startedAt": 0,
+            "endsAt": 60000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "2.500000000000000e+2"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 3600,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 3.6,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 3.85,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 120000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-tensor-core:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-2",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-2",
+            "recipe": "dataLattice",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"graphene\":6,\"nanotubes\":3,\"photonicLenses\":4,\"circuits\":8},\"modules\":{},\"data\":500,\"blueprints\":0}",
+            "duration": 60,
+            "result": "dataLattice",
+            "startedAt": 60000,
+            "endsAt": 120000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "5.000000000000000e+2"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 3100,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 3.1,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 3.85,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 1920000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-tensor-core:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-3",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-3",
+            "recipe": "tensor-core",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":36,\"copperCoils\":0,\"siliconWafers\":20,\"titaniumBolts\":12,\"photonicLenses\":0,\"graphene\":6,\"nanotubes\":4,\"superconductors\":2,\"neuralCrystals\":0,\"quantumCores\":0},\"modules\":{\"computeBus\":1,\"dataLattice\":1},\"data\":3000,\"blueprints\":0}",
+            "duration": 1800,
+            "result": "tensor-core",
+            "startedAt": 120000,
+            "endsAt": 1920000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "3.000000000000000e+3"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 100,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.0000000000000009,
+                "e": 2
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 3.85,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        }
+      ]
+    },
+    {
+      "id": "lab-drone",
+      "prepared": {
+        "components": {
+          "circuits": 42,
+          "copperCoils": 18,
+          "siliconWafers": 4,
+          "titaniumBolts": 20,
+          "photonicLenses": 12,
+          "graphene": 6,
+          "nanotubes": 7,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 1
+        },
+        "data": 4450,
+        "fragments": 10,
+        "completedResearch": [
+          "blueprints"
+        ]
+      },
+      "modulesRegularlyCrafted": true,
+      "beforeItem": {
+        "components": {
+          "circuits": 24,
+          "copperCoils": 12,
+          "siliconWafers": 0,
+          "titaniumBolts": 16,
+          "photonicLenses": 8,
+          "graphene": 0,
+          "nanotubes": 4,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 1
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 3700,
+        "credits": 50
+      },
+      "reservation": {
+        "components": {
+          "circuits": 24,
+          "copperCoils": 12,
+          "siliconWafers": 0,
+          "titaniumBolts": 16,
+          "photonicLenses": 8,
+          "graphene": 0,
+          "nanotubes": 4,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 1
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 3600,
+        "blueprints": 0
+      },
+      "afterPayment": {
+        "components": {
+          "circuits": 0,
+          "copperCoils": 0,
+          "siliconWafers": 0,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "modules": {
+          "computeBus": 0,
+          "dataLattice": 0
+        },
+        "data": 100,
+        "fragments": 0,
+        "credits": 50
+      },
+      "completedAt": 1920000,
+      "result": {
+        "id": "item-4",
+        "type": "lab-drone",
+        "rarity": "common",
+        "level": 0,
+        "locked": false
+      },
+      "effectiveForge": 0,
+      "learnedRecipes": [
+        "lab-drone"
+      ],
+      "events": [
+        {
+          "at": 0,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-lab-drone:main:0:0",
+          "source": "manual-blueprint-learning",
+          "jobId": null,
+          "type": "blueprint-learn",
+          "details": {
+            "recipe": "lab-drone",
+            "paidFragments": 10,
+            "source": "manual-blueprint-learning"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 4450,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 4.45,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 4.45,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 60000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-lab-drone:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-1",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-1",
+            "recipe": "computeBus",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":10,\"copperCoils\":6,\"siliconWafers\":4,\"titaniumBolts\":4},\"modules\":{},\"data\":250,\"blueprints\":0}",
+            "duration": 60,
+            "result": "computeBus",
+            "startedAt": 0,
+            "endsAt": 60000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "2.500000000000000e+2"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 4200,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 4.2,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 4.45,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 120000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-lab-drone:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-2",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-2",
+            "recipe": "dataLattice",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"graphene\":6,\"nanotubes\":3,\"photonicLenses\":4,\"circuits\":8},\"modules\":{},\"data\":500,\"blueprints\":0}",
+            "duration": 60,
+            "result": "dataLattice",
+            "startedAt": 60000,
+            "endsAt": 120000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "5.000000000000000e+2"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 3700,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 3.7,
+                "e": 3
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 4.45,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        },
+        {
+          "at": 1920000,
+          "run": 0,
+          "context": "main",
+          "runId": "9c-proof-lab-drone:main:0:0",
+          "source": "crafting_completed",
+          "jobId": "craft-3",
+          "type": "crafting_completed",
+          "details": {
+            "jobId": "craft-3",
+            "recipe": "lab-drone",
+            "quantity": 1,
+            "ingredients": "{\"components\":{\"circuits\":24,\"copperCoils\":12,\"siliconWafers\":0,\"titaniumBolts\":16,\"photonicLenses\":8,\"graphene\":0,\"nanotubes\":4,\"superconductors\":0,\"neuralCrystals\":0,\"quantumCores\":1},\"modules\":{\"computeBus\":1,\"dataLattice\":1},\"data\":3600,\"blueprints\":0}",
+            "duration": 1800,
+            "result": "lab-drone",
+            "startedAt": 120000,
+            "endsAt": 1920000,
+            "completed": 1,
+            "resultQuantity": 1,
+            "exactDataCost": "3.600000000000000e+3"
+          },
+          "resources": {
+            "credits": 50,
+            "data": 100,
+            "researchPoints": 0,
+            "gems": 50,
+            "compute": 0,
+            "exactEconomy": {
+              "credits": {
+                "m": 5,
+                "e": 1
+              },
+              "data": {
+                "m": 1.0000000000000009,
+                "e": 2
+              },
+              "researchPoints": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeDataGenerated": {
+                "m": 4.45,
+                "e": 3
+              },
+              "runCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeCreditsEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "lifetimeEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleEligibleCredits": {
+                "m": 0,
+                "e": 0
+              },
+              "prestigeEntitlementClaimed": {
+                "m": 0,
+                "e": 0
+              },
+              "totalINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "cycleINTEarned": {
+                "m": 0,
+                "e": 0
+              },
+              "unspentINT": {
+                "m": 0,
+                "e": 0
+              },
+              "spentINT": {
+                "m": 0,
+                "e": 0
+              }
+            },
+            "scientificRates": {
+              "credits": {
+                "m": 0,
+                "e": 0
+              },
+              "compute": {
+                "m": 0,
+                "e": 0
+              },
+              "users": {
+                "m": 0,
+                "e": 0
+              },
+              "data": {
+                "m": 0,
+                "e": 0
+              },
+              "research": {
+                "m": 0,
+                "e": 0
+              }
+            }
+          },
+          "scientificMeasurementsAvailable": true,
+          "missingMeasurements": []
+        }
+      ]
+    }
+  ]
+}
