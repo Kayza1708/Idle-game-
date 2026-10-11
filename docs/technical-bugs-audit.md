@@ -1,6 +1,6 @@
 # Auftrag 1 – bestätigte technische Bugs
 
-11. Oktober 2026. Basis frisch gefetchtes `origin/main` **7b265cb**. Neuer Branch `codex/confirmed-technical-bugs`, Vorgängerbranches unverändert. Alle fünf Befunde auf unverändertem main durch tatsächliche Domainfunktionen reproduziert. Kein Merge, keine Economy-Kalibrierung oder Designänderung. Draft-PR wird nach Erstellung verlinkt.
+11. Oktober 2026. Basis frisch gefetchtes `origin/main` **7b265cb**. Neuer Branch `codex/confirmed-technical-bugs`, Vorgängerbranches unverändert. Alle fünf Befunde auf unverändertem main durch tatsächliche Domainfunktionen reproduziert. Kein Merge, keine Economy-Kalibrierung oder Designänderung. Draft-PR [#81](https://github.com/Kayza1708/Idle-game-/pull/81) erstellt, offen und nicht gemergt. Implementierungscommit `decf74a`.
 
 ## Ursachen und tatsächliche Vorher-/Nachherwerte
 
