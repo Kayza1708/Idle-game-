@@ -765,3 +765,13 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] DE/EN mit Common-Ergebniseffekten und responsive Zutatenkarten aus #78; 390px alle fünf Karten, Sperren/Lernen und tatsächlicher Craft/Reload, keine Zutatenabschneidung oder horizontale Überbreite.
 - [x] 174 gezielte Tests, Typecheck/Build/Diffcheck, vorbereiteter regulärer technischer Nachweis für alle fünf; tatsächliche Quellen für alle Zutaten dokumentiert. [Audit und Prüfabweichung](item-recipes-audit.md).
 - [ ] Natürliche Erreichbarkeit und Balance des vorgegebenen Ausgangskatalogs nicht bestätigt; keine Parametersuche. Draft prüfen, nicht mergen.
+
+
+## Auftrag 9D – wirksame Item-Builds (11. Oktober 2026)
+
+- [x] Zentrales Register und reine gemeinsame Equipmentquote: drei feste neue Beiträge und zwei unveränderte bestehende Kombinationen.
+- [x] Compute einmal ×1,20/Core Loop, Training B +0,50 mit erhaltenem Deckel/Rundung und gespeicherter Analysefaktor ×1,25 mit per-Art-Abrundung.
+- [x] Tatsächliche kompatible Ausrüstung/Common/No-Items und getrennte Kontexte; alte Aufträge/Einzelwirkungen/Zufallsfunde/sonstige Economyparameter erhalten.
+- [x] Kompakter DE/EN-Equipmentbereich und gemeinsamer Economy-Export; 390px reale Ausrüstung, aktiv/unvollständig, 13→9 Data/Deckel 8→8, keine Textabschneidung oder horizontale Überbreite in finalen Aufnahmen.
+- [x] 152 gezielte Tests, Typecheck/Build/Diffcheck und vorbereitete echte Domainvergleiche. [Audit](item-builds-audit.md).
+- [ ] Feste Ausgangswerte nicht kalibriert; natürliche Progression und Langzeit-/Axiombalance weiterhin offen. Draft prüfen, nicht mergen.

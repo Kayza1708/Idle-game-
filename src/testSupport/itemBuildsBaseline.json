@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "7b265cb",
+  "parametersSha256": "6c692caa268841af8a610dca7def0281d3715c5cf444bf3e2a812837e123e00f",
+  "compute": {
+    "compute": 1.42229208,
+    "users": 1.4917125181863293,
+    "credits": 5.624801773933195,
+    "data": 0.1221356834912029
+  },
+  "training": {
+    "bonusTotal": 0.1696,
+    "cost": {
+      "m": 1.3,
+      "e": 1
+    }
+  },
+  "analysis": {
+    "id": "exp-3",
+    "type": "hardware",
+    "length": "long",
+    "at": 13274336.283185842,
+    "mode": "active",
+    "components": {
+      "circuits": 45
+    },
+    "blueprintFragments": 1,
+    "researchFragments": 0
+  }
+}
