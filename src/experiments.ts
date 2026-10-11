@@ -1,5 +1,5 @@
 import {experimentText} from './gameplayI18n';
-import { BALANCE, itemCombinationQuote, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, validEconomyValues, dataRate, dataAffordability, formatScientific, exactEconomyValue, spendScientificResources } from './economy';
+import { BALANCE, researchModifiers, itemCombinationQuote, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, validEconomyValues, dataRate, dataAffordability, formatScientific, exactEconomyValue, spendScientificResources } from './economy';
 import {ScientificNumber} from './scientificNumber';
 import { randomItem } from './inventory';
 import { addEvent } from './telemetry';
@@ -8,14 +8,14 @@ export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanal
 export function experimentSpeed(s:GameState){return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+deepPrestigeBonus(s,'analysis')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
 export const experimentDuration=(type:ExperimentId,length:ExperimentLength)=>length==='intro'?0:BALANCE.analysisCosts[type][length].duration;
 export function analysisCost(type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){return BALANCE.analysisCosts[type][length]}
-export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const cost=analysisCost(type,length),resources=dataAffordability(s,cost.data);return{...resources,cost,balance:{data:s.data},missing:{data:resources.missing},secondsToData:resources.secondsToAfford,duration:experimentDuration(type,length)/experimentSpeed(s)};}
+export function analysisAffordability(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){const baseCost=analysisCost(type,length),cost={...baseCost,data:Math.ceil(baseCost.data*researchModifiers(s).analysisCost)},resources=dataAffordability(s,cost.data);return{...resources,baseCost,cost,dataFactor:researchModifiers(s).analysisCost,balance:{data:s.data},missing:{data:resources.missing},secondsToData:resources.secondsToAfford,duration:experimentDuration(type,length)/experimentSpeed(s)};}
 
 export function analysisDropTable(s:GameState,type:ExperimentId){
  const source=BALANCE.componentSources[type],total=Object.values(source).reduce((n,v)=>n+v,0),findBonus=1+(hasNode(s,'analysis3',1)?.30:hasNode(s,'analysis2',1)?.20:hasNode(s,'analysis1',1)?.10:0)+s.researchLevels.materialAnalysis*BALANCE.repeatableResearch.materialAnalysis.effectPerLevel;
  return (Object.entries(source) as [ComponentId,number][]).map(([id,weight])=>({id,weight,chance:weight/total,findBonus,source:BALANCE.components[id].source}));
 }
 export function analysisBlockReason(s:GameState,type:ExperimentId,length:Exclude<ExperimentLength,'intro'>,language:'de'|'en'='de'){
-  const cost=analysisCost(type,length);
+  const cost=analysisAffordability(s,type,length).cost;
   if(!validEconomyValues(s,['credits','data']))return language==='de'?'Ungültige Ressourcenwerte.':'Invalid resource values.';
   if(!s.discovered.includes('sbc'))return language==='de'?'Einplatinencomputer noch nicht entdeckt.':'Single-board computer not discovered yet.';
   if(s.experiments.active)return language==='de'?`Analyseslot belegt durch ${experimentText(s.experiments.active.type,language)}.`:`Analysis slot occupied by ${experimentText(s.experiments.active.type,language)}.`;

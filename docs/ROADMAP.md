@@ -775,3 +775,17 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [x] Wissenschaftliche zeitabhängige Intervallgutschrift und Prestige-/Axiomvorschauen/Payout/Käufe, valide Fixtures über 1e308 ohne wirtschaftliche Clamps.
 - [x] Gezielte kurze Domain-/App-Regressionen, Typecheck, Production-Build und Diffcheck; unveränderte BALANCE-JSON. CI dieses PRs kurz begrenzt, Typecheck/Build erhalten. [Audit](technical-bugs-audit.md).
 - [ ] Historisch unbelegbarer Slotbesitz/Itemverlust nicht rekonstruierbar; bestehende Mantissen-/Bundle-/Balancegrenzen erhalten. Draft prüfen, nicht mergen.
+
+## Auftrag 2 – vollständige Forschungsintegration, 11. Oktober 2026 — Erledigt (technische Abnahme)
+
+- [x] 26 IDs, fünf Themen, genau drei Startprojekte; dauerhafte projektgenaue Prestige-Zugänge und getrennte Legacy-/Challenge-Migration.
+- [x] Gemeinsamer wissenschaftlicher researchQuote mit angewendeten Laborquellen, Mindestdauer und eingefrorenen bezahlten Aufträgen; historischer Research-Points-Bestand ohne weitere Produktion.
+- [x] operations/alignment/labAutomation/autonomousScience und alle fünf vorgegebenen Schlüsselprojekte haben tatsächliche zentrale Verbraucher.
+- [x] Reguläre labs2-Queue, endliche labs3-Wiederholung und labs4-Forschungsdirektor mit explizitem Budget/Reserve/Priorität im gemeinsamen Zeitpfad.
+- [x] Training-/Analyse-/Craftingquotes, Recyclingreste, Resetvertrag, Save 44, Ziele und Economy-Export integriert; übrige Parameter geschützt.
+- [x] Alle 26 bezahlten Domainstarts/Reload/Abschlüsse in vorbereiteten Fixtures; kurze Regressionen, Typecheck, Build, Diffcheck und Browser 360/390/430 px DE/EN.
+- [ ] Natürliche Erreichbarkeit und Monatsbalance der vorläufigen Schlüsselpreise nicht bestätigt; keine Langkampagne beauftragt oder ausgeführt.
+
+[Audit und Rohdaten](research-integration-audit.md). Technischer Abschluss bedeutet keine grüne Langzeitbalance.
+
+Auftrag-2-Implementierungscommit `e9f9e35`, Draft-PR [#82](https://github.com/Kayza1708/Idle-game-/pull/82) gegen main; nicht gemergt.

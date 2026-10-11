@@ -1,0 +1,24 @@
+import {BALANCE,isRepeatableResearch,researchQueueCapacity,researchDataCostForLevelScientific,researchCategory,repeatableResearchDataCostScientific,researchProjectDataCostScientific,type GameState} from './economy';
+import {ScientificNumber} from './scientificNumber';
+const fail=(path:string):never=>{throw new TypeError(`Forschungsvertrag: ungültig ${path}`)};
+const object=(v:unknown):v is Record<string,unknown>=>!!v&&typeof v==='object'&&!Array.isArray(v);
+const integer=(v:unknown,min=0)=>typeof v==='number'&&Number.isSafeInteger(v)&&v>=min;
+const finite=(v:unknown,min=0)=>typeof v==='number'&&Number.isFinite(v)&&v>=min;
+const known=(id:unknown):id is keyof typeof BALANCE.researchProjects|keyof typeof BALANCE.repeatableResearch=>typeof id==='string'&&(Object.hasOwn(BALANCE.researchProjects,id)||Object.hasOwn(BALANCE.repeatableResearch,id));
+const exact=(v:unknown)=>ScientificNumber.isValidJSON(v);
+export function assertResearchState(s:GameState){
+ if(!Array.isArray(s.researchAccessIds)||s.researchAccessIds.length>26||s.researchAccessIds.some(id=>!known(id))||new Set(s.researchAccessIds).size!==s.researchAccessIds.length)fail('researchAccessIds');
+ if(!integer(s.runTrainingStarted))fail('runTrainingStarted');
+ const r=s.researchRepeat;if(!object(r)||typeof r.enabled!=='boolean'||(r.id!==null&&!isRepeatableResearch(r.id))||!integer(r.targetLevel,1))fail('researchRepeat');
+ const d=s.researchDirector;if(!object(d)||typeof d.enabled!=='boolean'||!Array.isArray(d.entries)||d.entries.length>6||d.entries.some(e=>!object(e)||!known(e.id)||!integer(e.targetLevel,1)||(!isRepeatableResearch(e.id)&&e.targetLevel!==1))||new Set(d.entries.map(e=>e.id)).size!==d.entries.length||![0,.25,.5,.75].includes(d.reservePercent)||!['strict','affordable'].includes(d.mode)||(d.budget!==null&&!exact(d.budget))||!exact(d.spent)||!finite(d.elapsed)||d.elapsed>=BALANCE.researchAutomationInterval)fail('researchDirector');
+ if(!object(s.craftingRecycleRemainders)||Object.keys(s.craftingRecycleRemainders).length!==Object.keys(BALANCE.components).length||Object.keys(s.craftingRecycleRemainders).some(k=>!Object.hasOwn(BALANCE.components,k))||Object.values(s.craftingRecycleRemainders).some(v=>!finite(v)||v>=1))fail('craftingRecycleRemainders');
+ if(s.researchQueue.length>researchQueueCapacity(s)||new Set(s.researchQueue).size!==s.researchQueue.length)fail('researchQueue');
+ const labs=s.researchLabs.filter(lab=>lab!==null);if(new Set(labs.map(l=>l.id)).size!==labs.length||new Set(labs.filter(l=>l.jobId).map(l=>l.jobId)).size!==labs.filter(l=>l.jobId).length)fail('researchLabs duplicates');
+ for(const j of labs){if(j.jobId!==undefined&&(typeof j.jobId!=='string'||!j.jobId.length||j.jobId.length>100))fail('research jobId');if(j.quoteBasis===undefined)continue;
+  const b=j.quoteBasis;if(!object(b)||!finite(b.baseDuration,60)||!object(b.sources)||Object.keys(b.sources).length>100||Object.keys(b.sources).some(k=>k.length>200)||Object.values(b.sources).some(v=>!exact(v))||!exact(b.bonusTotal)||!finite(b.laborFactor,1)||typeof b.minimumApplied!=='boolean'||!object(b.temporaryFactors)||![1,2].includes(b.temporaryFactors.labBoost)||![1,2].includes(b.temporaryFactors.overclock))fail('research quoteBasis');
+  const sum=Object.values(b.sources).reduce((n,v)=>n.add(ScientificNumber.fromJSON(v)),ScientificNumber.zero()),factor=1+sum.add(ScientificNumber.from(1)).log10()*Math.LN10,raw=b.baseDuration/factor/b.temporaryFactors.labBoost/b.temporaryFactors.overclock,duration=Math.max(BALANCE.researchMinimumSeconds,raw);
+  const expectedCost=isRepeatableResearch(j.id)?repeatableResearchDataCostScientific(j.id,j.level):researchProjectDataCostScientific(j.id);if(ScientificNumber.fromJSON(j.dataCostExact!).compare(expectedCost)!==0)fail('research frozen cost');
+  if(sum.compare(ScientificNumber.fromJSON(b.bonusTotal))!==0||factor!==b.laborFactor||b.minimumApplied!==(raw<=BALANCE.researchMinimumSeconds)||duration!==j.durationSeconds||Math.abs((j.endsAt-j.startedAt)/1000-j.durationSeconds)>1e-5||!j.jobId||!j.dataCostExact)fail('research frozen basis consistency');
+ }
+ if(s.activeTraining?.durationBasis){const j=s.activeTraining,b=j.durationBasis!;if(!finite(b.baseDuration,Number.MIN_VALUE)||![1,BALANCE.researchAlignmentFactor].includes(b.alignment)||![1,BALANCE.researchTransferFactor].includes(b.modelTransfer)||!integer(b.runStart,1)||b.baseDuration*b.alignment*b.modelTransfer!==j.workRequired)fail('training durationBasis');}
+}

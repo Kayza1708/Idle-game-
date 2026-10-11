@@ -1,3 +1,4 @@
+import {assertResearchState} from './researchValidation';
 import {recipeIds} from './blueprints';
 import {researchAreaOrder} from './researchAreas';
 import {runChallenges,challenges} from './retention';
@@ -80,6 +81,7 @@ export function assertDomainState(value:unknown):asserts value is GameState{
  ids(s.discovered,hardwareIds,'discovered');ids(s.classUpgrades,hardwareIds,'classUpgrades');
  if(s.researchAreas!==undefined){ids(s.researchAreas,researchAreaOrder,'researchAreas');if(new Set(s.researchAreas).size!==s.researchAreas.length)fail('researchAreas','doppelte Freischaltung');}
  ids(s.completedResearch,Object.keys(BALANCE.researchProjects),'completedResearch');ids(s.researchQueue,[...Object.keys(BALANCE.researchProjects),...Object.keys(BALANCE.repeatableResearch)],'researchQueue');
+ assertResearchState(s);
  ids(s.breakthroughs,Object.keys(BALANCE.breakthroughs),'breakthroughs');
  if(!Array.isArray(s.nodes)||s.nodes.some(key=>typeof key!=='string'||!Object.hasOwn(BALANCE.prestigeUpgrades,key.replace(/:1$/,''))))fail('nodes','unbekannte Prestige-ID');
  if(s.pinnedGoal!==null){const goal=s.pinnedGoal;if(!object(goal)||!['hardware','research','recipe','prestige'].includes(goal.kind))fail('pinnedGoal','ungültiges Ziel');const catalog=goal.kind==='hardware'?BALANCE.hardware:goal.kind==='research'?{...BALANCE.researchProjects,...BALANCE.repeatableResearch}:goal.kind==='recipe'?BALANCE.itemRecipes:BALANCE.prestigeUpgrades;if(!Object.hasOwn(catalog,goal.id)||(goal.target!==undefined&&!integer(goal.target,1)))fail('pinnedGoal','unbekannte Ziel-ID/Menge');}
