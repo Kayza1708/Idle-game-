@@ -15,7 +15,7 @@ Bisher multiplizierte `craftingRecipe` den Katalogwert `blueprints` mit der Auft
 | data-prism | 5 |
 | insight-archive | 0, bestehende Forschungsarchiv-Freischaltung |
 
-Das ist der vollständige aktuelle Rezeptkatalog. Preis-0-Rezepte benötigen keine Lerntransaktion. Die bisherigen Domainvoraussetzungen bleiben erhalten: Module benötigen Offene Baupläne; die beiden Spezialrezepte ihre ausdrücklichen Flags. Für die vier kostenpflichtigen Itemrezepte bestand zuvor keine zusätzliche Forschungsbedingung in der Domain; hier wird keine erfunden.
+Das war der vollständige Rezeptkatalog zum Abschluss von 9B. Auftrag 9C ergänzt ausschließlich fünf weitere Rezepte; siehe [aktuellen Katalog und Abnahme](item-recipes-audit.md). Preis-0-Rezepte benötigen keine Lerntransaktion. Die bisherigen Domainvoraussetzungen bleiben erhalten: Module benötigen Offene Baupläne; die beiden Spezialrezepte ihre ausdrücklichen Flags. Für die vier kostenpflichtigen Itemrezepte bestand zuvor keine zusätzliche Forschungsbedingung in der Domain; hier wird keine erfunden.
 
 `learnedRecipes` speichert stabile IDs dauerhaft im jeweiligen Spielkontext. Normaler Prestige und Axiom behalten sie über ihren bestehenden Zustandserhalt. Neue Challenge-Runs beginnen ohne übernommenen Besitz. Komponenten, Module, wissenschaftliche Data-Abbuchung, Zeiten, Common-Ergebnisqualität und atomare Reservierung bleiben unverändert. Fragmente sind eine diskrete sichere Ganzzahl; Data verbleibt im bestehenden ScientificNumber-Ledger mit dessen dokumentierter Darstellungspräzision.
 

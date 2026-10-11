@@ -1,0 +1,1058 @@
+[
+  {
+    "type": "impulse-relay",
+    "rarity": "common",
+    "profile": [
+      "relay"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "impulse-relay",
+    "rarity": "uncommon",
+    "profile": [
+      "relay"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "impulse-relay",
+    "rarity": "rare",
+    "profile": [
+      "relay",
+      "relay"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.12096000000000003
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.7878245760000001
+    ]
+  },
+  {
+    "type": "impulse-relay",
+    "rarity": "epic",
+    "profile": [
+      "relay",
+      "relay"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.16368000000000002
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.9931447680000001
+    ]
+  },
+  {
+    "type": "impulse-relay",
+    "rarity": "legendary",
+    "profile": [
+      "relay",
+      "relay",
+      "relay"
+    ],
+    "base": [
+      0.2176,
+      0.2176,
+      0.2176
+    ],
+    "advanced": [
+      1.2404761600000003,
+      1.2404761600000003,
+      1.2404761600000003
+    ]
+  },
+  {
+    "type": "impulse-relay",
+    "rarity": "mythic",
+    "profile": [
+      "relay",
+      "relay",
+      "relay"
+    ],
+    "base": [
+      0.30784,
+      0.30784,
+      0.30784
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.6602826240000002,
+      1.6602826240000002
+    ]
+  },
+  {
+    "type": "insight-archive",
+    "rarity": "common",
+    "profile": [
+      "int-yield"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "insight-archive",
+    "rarity": "uncommon",
+    "profile": [
+      "int-yield"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "insight-archive",
+    "rarity": "rare",
+    "profile": [
+      "int-yield",
+      "int-yield"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.12096000000000003
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.7878245760000001
+    ]
+  },
+  {
+    "type": "insight-archive",
+    "rarity": "epic",
+    "profile": [
+      "int-yield",
+      "int-yield"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.16368000000000002
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.9931447680000001
+    ]
+  },
+  {
+    "type": "insight-archive",
+    "rarity": "legendary",
+    "profile": [
+      "int-yield",
+      "int-yield",
+      "int-yield"
+    ],
+    "base": [
+      0.2176,
+      0.2176,
+      0.2176
+    ],
+    "advanced": [
+      1.2404761600000003,
+      1.2404761600000003,
+      1.2404761600000003
+    ]
+  },
+  {
+    "type": "insight-archive",
+    "rarity": "mythic",
+    "profile": [
+      "int-yield",
+      "int-yield",
+      "int-yield"
+    ],
+    "base": [
+      0.30784,
+      0.30784,
+      0.30784
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.6602826240000002,
+      1.6602826240000002
+    ]
+  },
+  {
+    "type": "quantum-chip",
+    "rarity": "common",
+    "profile": [
+      "compute"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.7943936000000001
+    ]
+  },
+  {
+    "type": "quantum-chip",
+    "rarity": "uncommon",
+    "profile": [
+      "compute"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.9135526400000001
+    ]
+  },
+  {
+    "type": "quantum-chip",
+    "rarity": "rare",
+    "profile": [
+      "compute",
+      "tap"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      1.0971797760000002,
+      0.7131668544000002
+    ]
+  },
+  {
+    "type": "quantum-chip",
+    "rarity": "epic",
+    "profile": [
+      "compute",
+      "tap"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      1.371245568,
+      0.8913096192
+    ]
+  },
+  {
+    "type": "quantum-chip",
+    "rarity": "legendary",
+    "profile": [
+      "compute",
+      "tap",
+      "research"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.6987801600000003,
+      1.1042071040000003,
+      0.6795120640000002
+    ]
+  },
+  {
+    "type": "quantum-chip",
+    "rarity": "mythic",
+    "profile": [
+      "compute",
+      "tap",
+      "research"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      2.256077824,
+      1.4664505856,
+      0.9024311296
+    ]
+  },
+  {
+    "type": "neural-asic",
+    "rarity": "common",
+    "profile": [
+      "credits"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.7702013796720129
+    ]
+  },
+  {
+    "type": "neural-asic",
+    "rarity": "uncommon",
+    "profile": [
+      "credits"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.8857315866228148
+    ]
+  },
+  {
+    "type": "neural-asic",
+    "rarity": "rare",
+    "profile": [
+      "credits",
+      "compute"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      1.0645202785572174,
+      0.6919381810621914
+    ]
+  },
+  {
+    "type": "neural-asic",
+    "rarity": "epic",
+    "profile": [
+      "credits",
+      "compute"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      1.3313284044588212,
+      0.8653634628982337
+    ]
+  },
+  {
+    "type": "neural-asic",
+    "rarity": "legendary",
+    "profile": [
+      "credits",
+      "compute",
+      "tap"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.6503957193440257,
+      1.0727572175736169,
+      0.6601582877376103
+    ]
+  },
+  {
+    "type": "neural-asic",
+    "rarity": "mythic",
+    "profile": [
+      "credits",
+      "compute",
+      "tap"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      2.1931780511472336,
+      1.425565733245702,
+      0.8772712204588935
+    ]
+  },
+  {
+    "type": "photonic-array",
+    "rarity": "common",
+    "profile": [
+      "training"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "photonic-array",
+    "rarity": "uncommon",
+    "profile": [
+      "training"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "photonic-array",
+    "rarity": "rare",
+    "profile": [
+      "training",
+      "tap"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.5120859744000001
+    ]
+  },
+  {
+    "type": "photonic-array",
+    "rarity": "epic",
+    "profile": [
+      "training",
+      "tap"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.6455440992000001
+    ]
+  },
+  {
+    "type": "photonic-array",
+    "rarity": "legendary",
+    "profile": [
+      "training",
+      "tap",
+      "credits"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.2404761600000003,
+      0.8063095040000002,
+      0.4961904640000001
+    ]
+  },
+  {
+    "type": "photonic-array",
+    "rarity": "mythic",
+    "profile": [
+      "training",
+      "tap",
+      "credits"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.0791837056000002,
+      0.6641130496000001
+    ]
+  },
+  {
+    "type": "memory-crystal",
+    "rarity": "common",
+    "profile": [
+      "credits"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "memory-crystal",
+    "rarity": "uncommon",
+    "profile": [
+      "credits"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "memory-crystal",
+    "rarity": "rare",
+    "profile": [
+      "credits",
+      "data"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.5120859744000001
+    ]
+  },
+  {
+    "type": "memory-crystal",
+    "rarity": "epic",
+    "profile": [
+      "credits",
+      "data"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.6455440992000001
+    ]
+  },
+  {
+    "type": "memory-crystal",
+    "rarity": "legendary",
+    "profile": [
+      "credits",
+      "data",
+      "research"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.2404761600000003,
+      0.8063095040000002,
+      0.4961904640000001
+    ]
+  },
+  {
+    "type": "memory-crystal",
+    "rarity": "mythic",
+    "profile": [
+      "credits",
+      "data",
+      "research"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.0791837056000002,
+      0.6641130496000001
+    ]
+  },
+  {
+    "type": "logic-seed",
+    "rarity": "common",
+    "profile": [
+      "training"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "logic-seed",
+    "rarity": "uncommon",
+    "profile": [
+      "training"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "logic-seed",
+    "rarity": "rare",
+    "profile": [
+      "training",
+      "research"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.5120859744000001
+    ]
+  },
+  {
+    "type": "logic-seed",
+    "rarity": "epic",
+    "profile": [
+      "training",
+      "research"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.6455440992000001
+    ]
+  },
+  {
+    "type": "logic-seed",
+    "rarity": "legendary",
+    "profile": [
+      "training",
+      "research",
+      "tap"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.2404761600000003,
+      0.8063095040000002,
+      0.4961904640000001
+    ]
+  },
+  {
+    "type": "logic-seed",
+    "rarity": "mythic",
+    "profile": [
+      "training",
+      "research",
+      "tap"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.0791837056000002,
+      0.6641130496000001
+    ]
+  },
+  {
+    "type": "tensor-core",
+    "rarity": "common",
+    "profile": [
+      "compute"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "tensor-core",
+    "rarity": "uncommon",
+    "profile": [
+      "compute"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "tensor-core",
+    "rarity": "rare",
+    "profile": [
+      "compute",
+      "training"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.5120859744000001
+    ]
+  },
+  {
+    "type": "tensor-core",
+    "rarity": "epic",
+    "profile": [
+      "compute",
+      "training"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.6455440992000001
+    ]
+  },
+  {
+    "type": "tensor-core",
+    "rarity": "legendary",
+    "profile": [
+      "compute",
+      "training",
+      "credits"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.2404761600000003,
+      0.8063095040000002,
+      0.4961904640000001
+    ]
+  },
+  {
+    "type": "tensor-core",
+    "rarity": "mythic",
+    "profile": [
+      "compute",
+      "training",
+      "credits"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.0791837056000002,
+      0.6641130496000001
+    ]
+  },
+  {
+    "type": "field-scanner",
+    "rarity": "common",
+    "profile": [
+      "experiment"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "field-scanner",
+    "rarity": "uncommon",
+    "profile": [
+      "experiment"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "field-scanner",
+    "rarity": "rare",
+    "profile": [
+      "experiment",
+      "drop"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.5120859744000001
+    ]
+  },
+  {
+    "type": "field-scanner",
+    "rarity": "epic",
+    "profile": [
+      "experiment",
+      "drop"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.6455440992000001
+    ]
+  },
+  {
+    "type": "field-scanner",
+    "rarity": "legendary",
+    "profile": [
+      "experiment",
+      "drop",
+      "research"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.2404761600000003,
+      0.8063095040000002,
+      0.4961904640000001
+    ]
+  },
+  {
+    "type": "field-scanner",
+    "rarity": "mythic",
+    "profile": [
+      "experiment",
+      "drop",
+      "research"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.0791837056000002,
+      0.6641130496000001
+    ]
+  },
+  {
+    "type": "lab-drone",
+    "rarity": "common",
+    "profile": [
+      "research"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "lab-drone",
+    "rarity": "uncommon",
+    "profile": [
+      "research"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "lab-drone",
+    "rarity": "rare",
+    "profile": [
+      "research",
+      "data"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.5120859744000001
+    ]
+  },
+  {
+    "type": "lab-drone",
+    "rarity": "epic",
+    "profile": [
+      "research",
+      "data"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.6455440992000001
+    ]
+  },
+  {
+    "type": "lab-drone",
+    "rarity": "legendary",
+    "profile": [
+      "research",
+      "data",
+      "drop"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.2404761600000003,
+      0.8063095040000002,
+      0.4961904640000001
+    ]
+  },
+  {
+    "type": "lab-drone",
+    "rarity": "mythic",
+    "profile": [
+      "research",
+      "data",
+      "drop"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.0791837056000002,
+      0.6641130496000001
+    ]
+  },
+  {
+    "type": "data-prism",
+    "rarity": "common",
+    "profile": [
+      "data"
+    ],
+    "base": [
+      0.08
+    ],
+    "advanced": [
+      0.5652416000000001
+    ]
+  },
+  {
+    "type": "data-prism",
+    "rarity": "uncommon",
+    "profile": [
+      "data"
+    ],
+    "base": [
+      0.092
+    ],
+    "advanced": [
+      0.65002784
+    ]
+  },
+  {
+    "type": "data-prism",
+    "rarity": "rare",
+    "profile": [
+      "data",
+      "credits"
+    ],
+    "base": [
+      0.12096000000000003,
+      0.07862400000000001
+    ],
+    "advanced": [
+      0.7878245760000001,
+      0.5120859744000001
+    ]
+  },
+  {
+    "type": "data-prism",
+    "rarity": "epic",
+    "profile": [
+      "data",
+      "credits"
+    ],
+    "base": [
+      0.16368000000000002,
+      0.10639200000000001
+    ],
+    "advanced": [
+      0.9931447680000001,
+      0.6455440992000001
+    ]
+  },
+  {
+    "type": "data-prism",
+    "rarity": "legendary",
+    "profile": [
+      "data",
+      "credits",
+      "research"
+    ],
+    "base": [
+      0.2176,
+      0.14144,
+      0.08704
+    ],
+    "advanced": [
+      1.2404761600000003,
+      0.8063095040000002,
+      0.4961904640000001
+    ]
+  },
+  {
+    "type": "data-prism",
+    "rarity": "mythic",
+    "profile": [
+      "data",
+      "credits",
+      "research"
+    ],
+    "base": [
+      0.30784,
+      0.200096,
+      0.12313600000000001
+    ],
+    "advanced": [
+      1.6602826240000002,
+      1.0791837056000002,
+      0.6641130496000001
+    ]
+  }
+]

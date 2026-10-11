@@ -1,0 +1,127 @@
+{
+  "impulse-relay": {
+    "rarity": "common",
+    "name": "Impulsrelais-Bauplan",
+    "ingredients": {
+      "circuits": 12,
+      "copperCoils": 2,
+      "siliconWafers": 0,
+      "titaniumBolts": 0,
+      "photonicLenses": 0,
+      "graphene": 0,
+      "nanotubes": 0,
+      "superconductors": 0,
+      "neuralCrystals": 0,
+      "quantumCores": 0
+    },
+    "blueprints": 0,
+    "data": 0,
+    "modules": {},
+    "duration": 300
+  },
+  "quantum-chip": {
+    "rarity": "common",
+    "name": "Quantenchip-Bauplan",
+    "ingredients": {
+      "circuits": 30,
+      "copperCoils": 12,
+      "siliconWafers": 18,
+      "titaniumBolts": 8,
+      "photonicLenses": 2,
+      "graphene": 1,
+      "nanotubes": 0,
+      "superconductors": 0,
+      "neuralCrystals": 0,
+      "quantumCores": 0
+    },
+    "blueprints": 4,
+    "data": 1800,
+    "modules": {
+      "computeBus": 1
+    }
+  },
+  "neural-asic": {
+    "rarity": "common",
+    "name": "Neural-ASIC-Bauplan",
+    "ingredients": {
+      "circuits": 40,
+      "copperCoils": 12,
+      "siliconWafers": 24,
+      "titaniumBolts": 10,
+      "photonicLenses": 5,
+      "graphene": 8,
+      "nanotubes": 4,
+      "superconductors": 0,
+      "neuralCrystals": 1,
+      "quantumCores": 0
+    },
+    "blueprints": 5,
+    "data": 2400,
+    "modules": {
+      "dataLattice": 1
+    }
+  },
+  "field-scanner": {
+    "rarity": "common",
+    "name": "Feldscanner-Bauplan",
+    "ingredients": {
+      "circuits": 20,
+      "copperCoils": 14,
+      "siliconWafers": 10,
+      "titaniumBolts": 12,
+      "photonicLenses": 14,
+      "graphene": 8,
+      "nanotubes": 5,
+      "superconductors": 1,
+      "neuralCrystals": 0,
+      "quantumCores": 0
+    },
+    "blueprints": 5,
+    "data": 3000,
+    "modules": {
+      "computeBus": 1,
+      "dataLattice": 1
+    }
+  },
+  "data-prism": {
+    "rarity": "common",
+    "name": "Datenprisma-Bauplan",
+    "ingredients": {
+      "circuits": 20,
+      "copperCoils": 8,
+      "siliconWafers": 14,
+      "titaniumBolts": 8,
+      "photonicLenses": 10,
+      "graphene": 12,
+      "nanotubes": 4,
+      "superconductors": 1,
+      "neuralCrystals": 0,
+      "quantumCores": 0
+    },
+    "blueprints": 5,
+    "data": 2800,
+    "modules": {
+      "dataLattice": 1
+    }
+  },
+  "insight-archive": {
+    "rarity": "common",
+    "name": "Erkenntnisarchiv-Bauplan",
+    "ingredients": {
+      "circuits": 100,
+      "copperCoils": 0,
+      "siliconWafers": 20,
+      "titaniumBolts": 0,
+      "photonicLenses": 0,
+      "graphene": 0,
+      "nanotubes": 0,
+      "superconductors": 0,
+      "neuralCrystals": 5,
+      "quantumCores": 0
+    },
+    "blueprints": 0,
+    "data": 0,
+    "modules": {},
+    "duration": 3600
+  }
+}
