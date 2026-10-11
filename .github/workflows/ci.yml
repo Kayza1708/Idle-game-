@@ -13,7 +13,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
-        if: github.head_ref != 'codex/confirmed-technical-bugs' && github.head_ref != 'codex/research-integration' && github.head_ref != 'codex/data-analysis-contracts'
+        if: github.head_ref != 'codex/confirmed-technical-bugs' && github.head_ref != 'codex/research-integration' && github.head_ref != 'codex/data-analysis-contracts' && github.head_ref != 'codex/item-grind-mastery'
       - name: Scoped technical bug regressions (maximum 300 seconds)
         if: github.head_ref == 'codex/confirmed-technical-bugs'
         run: timeout 300 npm test -- src/technicalBugs.test.ts src/coreLoop.test.ts src/mobileIntegration.test.ts src/prestigePreview.test.ts src/saveValidation.test.ts src/purchaseMath.test.ts src/axiomUpgrades.test.ts src/clock.test.ts src/challengeIsolation.test.ts src/durableStorage.test.ts
@@ -23,4 +23,7 @@ jobs:
       - name: Scoped Data and analysis contracts (maximum 300 seconds)
         if: github.head_ref == 'codex/data-analysis-contracts'
         run: timeout 300 npm test -- src/dataAnalysisContracts.test.tsx src/analysis.test.ts src/training.test.ts src/researchIntegration.test.ts src/trainingCosts.test.ts src/technicalBugs.test.ts src/saveValidation.test.ts src/challengeIsolation.test.ts src/balanceExportContracts.test.ts src/durableStorage.test.ts src/purchaseMath.test.ts
+      - name: Scoped item progression contracts (maximum 300 seconds)
+        if: github.head_ref == 'codex/item-grind-mastery'
+        run: timeout 300 npm test -- --maxWorkers=2 src/itemGrind.test.ts src/atomicCrafting.test.ts src/blueprints.test.ts src/specialItems.test.ts src/itemEconomy.test.ts src/itemCombinations.test.tsx src/saveValidation.test.ts src/challengeIsolation.test.ts src/balanceExportContracts.test.ts src/dataAnalysisContracts.test.tsx src/audio.test.ts src/crafting.test.ts src/RewardFeedback.test.ts src/returnOverview.test.ts src/durableStorage.test.ts src/storage.test.ts
       - run: npm run build

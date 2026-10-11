@@ -672,3 +672,11 @@ html[data-native-platform] body{padding:0}
 .research-marks{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.research-marks i{font-style:normal;padding:3px 8px;border:1px solid #60778e;border-radius:8px}.research-marks .reached{background:#166b59}.research-automation label{display:flex;flex-direction:column;gap:6px;margin:10px 0}.research-automation input,.research-automation select{width:100%;max-width:100%;min-width:0;min-height:44px;box-sizing:border-box}.research-automation li{overflow-wrap:anywhere;margin:10px 0}.research-automation small{display:block}.research-performance dl>div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}.research-performance dt{overflow-wrap:anywhere}.research-performance dd{margin:0}.research-quote-details{overflow-wrap:anywhere}.research-automation details{margin:10px 0}
 
 .research-automation summary,.research-completed summary{min-height:44px;padding:10px 0;box-sizing:border-box;cursor:pointer}.research-automation button{min-width:44px}
+/* Item progression remains in existing details and uses the responsive ingredient grid. */
+.blueprint-mastery,.fragment-conversion,.component-sources{min-width:0;overflow-wrap:anywhere;margin-block:12px;padding:10px;border:1px solid var(--border,#4a6590);border-radius:10px}
+.blueprint-mastery button,.fragment-conversion button,.component-sources button,.component-sources summary,.fragment-conversion input{min-height:44px;max-width:100%;white-space:normal}
+.component-sources summary{cursor:pointer;display:flex;align-items:center}
+.fragment-conversion label{display:grid;gap:8px}.fragment-conversion input{width:100%;box-sizing:border-box}
+.item-receipts{position:fixed;z-index:130;bottom:90px;left:12px;right:12px;max-height:45vh;overflow:auto;background:#101828;border:1px solid #4a6590;border-radius:12px;padding:12px}
+.item-receipts>button{min-width:44px;min-height:44px;float:right}
+.item-receipt{display:flex;gap:12px;align-items:flex-start;min-width:0;overflow-wrap:anywhere}.item-receipt>div{min-width:0}.item-receipt p{margin:4px 0}.item-receipt .item-art{flex-shrink:0}
