@@ -787,3 +787,5 @@ Ursache, Zeit-/Zustandsvertrag, tatsächlicher Prüfumfang und Grenzen: [Audit](
 - [ ] Natürliche Erreichbarkeit und Monatsbalance der vorläufigen Schlüsselpreise nicht bestätigt; keine Langkampagne beauftragt oder ausgeführt.
 
 [Audit und Rohdaten](research-integration-audit.md). Technischer Abschluss bedeutet keine grüne Langzeitbalance.
+
+Auftrag-2-Implementierungscommit `e9f9e35`, Draft-PR [#82](https://github.com/Kayza1708/Idle-game-/pull/82) gegen main; nicht gemergt.

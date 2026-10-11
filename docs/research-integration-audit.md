@@ -113,3 +113,5 @@ timeout 300 python scripts/browser-research.py http://127.0.0.1:5181 /workspace/
 ```
 
 Der unveränderte main-Vergleich lief mit demselben Domain-Probeskript im separaten main-Worktree. Der lokale Browser-Server bindet ausschließlich 127.0.0.1.
+
+Implementierungscommit: `e9f9e35`. Draft-PR [#82](https://github.com/Kayza1708/Idle-game-/pull/82) gegen main; nicht mergen.
