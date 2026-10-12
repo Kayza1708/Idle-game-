@@ -1,3 +1,11 @@
+## Feste Loadouts und Questökonomie gemessen – 12. Oktober 2026
+
+27 natürliche Zwei-Stunden-Profile, 150,41 Sekunden: feste Relais-/Chipbelegung, 0/1/3 Taps/s, zwei Besuchsmuster mit gleichem 900-Sekunden-Budget, echte Quest-/Achievementclaims. Relais gewinnt bei drei Taps/s, Chip bei null/einem; zusätzliche Forschung ist noch kein eigenständiger fairer dritter Build. Kurze Besuche erreichen weiterhin keinen ersten INT/Prestige im Horizont. Aktive Wochenziele sind binnen zwei Stunden vollständig, 8–10 Monatsziele ebenfalls; Season-XP 13.300–16.300. Kein Monatsbonus. Rohdaten, Zusammenfassung und Einschränkungen: `build-quest-progression-findings.md`.
+
+Lokale Abnahme: 1.282 Standardtests, App-/CLI-Typecheck, Build und Diffcheck grün; acht neue Mess-/Bonusverträge, 27 vollständige Profile und Sourcehash-/Gem-/Season-XP-Abgleich. Keine Browser-/Geräteprüfung.
+
+Behebung: leere Questperioden dürfen keinen Bonus/Season-XP buchen; akzeptierte Profile ohne Gratisbonus zu Zeit null. Keine Balance-/Saveänderung. Nächster Schritt: weniger duplizierte Wochen-/Monatsproduktion und konservatives Zukunftsband prüfen, Achievement-Punktwirkung isolieren, danach gleiche Forschungsfreiheit und echte Midgame-Slots für drei Builds. Diese Messung beweist keine Wochen-/Monatskalibrierung oder Geräteabnahme.
+
 ## Achievements und Quests V1 integriert – 12. Oktober 2026
 
 Implementiert: sieben neue permanente Erfolgsfamilien für 20 Materialien, 28 bezahlte Baupläne, 30 selbst gefertigte Itemtypen, fünf Materialfamilien, 15 Schmiede-Ausbaustufen und Challenge-Erstabschlüsse/-Tiefe. Höhere spätere Schwellen; doppelte Item-Endstufe entfernt. Neue Quests verwenden sechs Hardwarefortschrittsbänder, feste Produktionsbudgets und optionale neue Systemziele. Kein neuer Start-/Abbruch-Farm, keine verpflichtende Fusion oder Prestige. Save v50 behält alte Claims und laufende Quests; Hauptspiel und Challenges bleiben isoliert. Vertragsdokument: `achievements-quests-v1.md`.
