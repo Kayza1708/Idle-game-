@@ -589,3 +589,7 @@ Schwellen und Missionsbasismengen zentral in BALANCE. Itementdeckung bis 30; bez
 ## Messung fester früher Loadouts und Questclaims – 12. Oktober 2026
 
 27 begrenzte natürliche Zwei-Stunden-Profile; keine Änderung an Schwellen, Preisen, XP-/Gembudgets oder Formeln. Leere Questperioden (kein Aufgabenpool/required=0) dürfen keinen Bonus buchen; bestehende ausgezahlte Rewards unverändert. Frühe Wochen-/Monatsproduktion und Achievement-Produktionsrückkopplung bleiben Kalibrierungsbedarf. Ergebnisse, mathematische Wirkung, Reset-/Claimvertrag und konkrete Folgeschritte: `build-quest-progression-findings.md`.
+
+## Wochen-/Monatskapitel und Achievementkurve – 12. Oktober 2026
+
+Neue Perioden: eine Produktionsaufgabe pro Metric; Mindestband 0/2/2, Bandvorgriff 0/+1/+2 (max5), Frontierstride 0/4/2. Längere wiederholte Arbeitsziele reservieren zusätzliche Lifetime-Abschnitte, Größen ×2. Normale Anzahl/Bonusschwellen und Gem-/Material-/XPbudgets unverändert. Achievement-Produktionsfaktor ersetzt durch `1+0.25*ln(1+P/100)`; Forschungsbonus bleibt separat auf20% begrenzt. Auch Altaccounts verwenden neuen Faktor, ihre Claims/Gems/Punkte und laufenden Quests bleiben. Save v51 für konkrete Hardwaretargets. Kleine natürliche Gegenmessung belegt weniger frühe Ausschüttung; echte Wochen-/Monats-ETA weiter offen. Vollständige Verträge: `quest-chapters-and-achievements.md`.

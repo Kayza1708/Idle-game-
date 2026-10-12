@@ -739,7 +739,7 @@ export const BALANCE = {
     ownershipBases:[.005,.006,.008,.010,.013,.017,.022,.030,.040,.055,.075,.10,.14,.20,.30],
     dataPowerBase:.10,dataPowerResearchPerLevel:.004,dataPowerPrestige:[0,0,.02,.04,.07,.10,.14,.20],
     modelGlobalBase:1.06,qualityBase:1.12,efficiencyBase:1.10,modelResearchBasePerLevel:.0015,
-    intBase:1.10,achievementPer25:1.10,achievementPer100:1.25,
+    intBase:1.10,
     itemClassScaling:.03,itemMilestoneScaling:.025,itemRareScaling:.08,ownedHundredsCap:4,ownedHundredsCredit:.025,
     milestoneLateExponentPerTier:.0125,artifactBase:1.25,breakthroughBase:1.35,
   },
@@ -857,7 +857,8 @@ export const BALANCE = {
   },
   missionCounts:{daily:6,weekly:12,monthly:30},missionRequired:{daily:4,weekly:8,monthly:20},
   missionBaseGoals:{'hardware':[25,300,2500],'milestones':[2,12,50],'train-done':[1,10,40],'research-done':[1,7,30],'components':[25,250,1500],'craft':[1,5,20],'drops':[5,60,250],'fusion':[1,5,20],'forge':[1,8,30],'credits':[1e4,1e7,1e10],'data':[250,5000,50000],'taps':[250,5000,50000],'overclock':[2,20,100],'prestige':[1,3,10],'active':[600,7200,36000]},
-  missionProgression:{bandClasses:[3,6,9,12,15],bandMultipliers:[1,2,4,8,16,32],repeatMultiplier:2,productionSeconds:[7200,50400,216000],objectiveGoals:{blueprints:[1,2,4],foundries:[1,1,2],challenges:[1,3,9]},},
+  achievementProduction:{logStrength:.25,pointScale:100},
+  missionProgression:{frontierStrides:[0,4,2],minimumBands:[0,2,2],futureBandOffsets:[0,1,2],productionTasksPerMetric:1,bandClasses:[3,6,9,12,15],bandMultipliers:[1,2,4,8,16,32],repeatMultiplier:2,productionSeconds:[7200,50400,216000],objectiveGoals:{blueprints:[1,2,4],foundries:[1,1,2],challenges:[1,3,9]},},
   achievementTierGems:[2,4,8,12],achievementPointsPerTier:[2,4,8,12],achievementResearchPerTen:.01,achievementResearchCap:.20,
   missionRewards:{daily:{task:2,bonus:6},weekly:{task:5,bonus:30},monthly:{task:15,bonus:120}},
   hardwareAutobuyerUnlock:100,hardwareAutobuyerInterval:5,
@@ -927,8 +928,8 @@ export type ExperimentLength='intro'|'short'|'long';
 export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number; rewardFactor?:number; contractVersion?:1|2|3;materialContract?:import('./materialEconomy').MaterialContract };
 export type AnalysisResult={id:string;type:ExperimentId;length:Exclude<ExperimentLength,'intro'>;at:number;mode:'active'|'offline';components:Partial<ComponentInventory>;blueprintFragments:number;researchFragments:number};
 export type ProgressMetric='hardwareBought'|'milestones'|'trainingStarted'|'trainingCompleted'|'researchStarted'|'researchCompleted'|'componentsEarned'|'itemsCrafted'|'dropsClaimed'|'itemsFused'|'forgeUpgrades'|'regularCredits'|'regularData'|'taps'|'overclocks'|'prestiges'|'activeSeconds';
-export type MissionObjective='blueprints'|'foundries'|'challenges';
-export type MissionTask={rewardTier?:number;objective?:MissionObjective;id:string;metric:ProgressMetric;goal:number;baseline:number;reward:number;claimed:boolean;de:string;en:string};
+export type MissionObjective='blueprints'|'foundries'|'challenges'|'hardware-class';
+export type MissionTask={targetHardware?:HardwareId;rewardTier?:number;objective?:MissionObjective;id:string;metric:ProgressMetric;goal:number;baseline:number;reward:number;claimed:boolean;de:string;en:string};
 export type MissionPeriod={key:string;endsAt:number;tasks:MissionTask[];required:number;bonus:number;bonusClaimed:boolean};
 export type LifetimeStats={calculatorsBought:number;hardwareBought:number;hardwareClasses:HardwareId[];milestones:number;prestiges:number;intEarned:number;labSeconds:number;researchStarted:number;researchCompleted:number;trainingStarted:number;trainingCompleted:number;itemsCrafted:number;itemTypes:ItemTypeId[];taps:number;overclocks:number;componentsEarned:number;dropsClaimed:number;itemsFused:number;forgeUpgrades:number;regularCredits:number;regularData:number;activeSeconds:number};
 export type GemLedgerEntry={id:string;at:number;amount:number;source:string};
@@ -1169,7 +1170,7 @@ export function averageDataSynergy(s:GameState,dataGain:ScientificNumber,current
 export const modelSynergyBase=(s:GameState)=>BALANCE.scalingSynergy.modelGlobalBase+s.researchLevels.modelArchitecture*BALANCE.scalingSynergy.modelResearchBasePerLevel;
 export const modelSynergyScientific=(s:GameState)=>ScientificNumber.from(modelSynergyBase(s)).pow(Math.max(0,s.level)).pow(milestoneSynergy(s).modelExponent*(1+s.researchLevels.recursiveLearning*BALANCE.repeatableResearch.recursiveLearning.effectPerLevel));
 export const intSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.intBase).pow(Math.sqrt(Math.max(0,s.cycleINTEarned)));
-export const achievementSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.achievementPer25).pow(Math.floor(s.achievementPoints/25)).multiply(ScientificNumber.from(BALANCE.scalingSynergy.achievementPer100).pow(Math.floor(s.achievementPoints/100)));
+export const achievementSynergyScientific=(s:GameState)=>ScientificNumber.from(1+BALANCE.achievementProduction.logStrength*Math.log1p(s.achievementPoints/BALANCE.achievementProduction.pointScale));
 export const artifactSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.artifactBase).pow(s.profile.artifacts.length).pow(1+Math.min(.5,s.profile.artifacts.length*.03));
 export const breakthroughSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.breakthroughBase).pow(s.breakthroughs.length).pow(1+Math.min(.35,s.breakthroughs.length*.04));
 export function classComputeTerms(s:GameState,id:HardwareId,count=s.hardwareCounts[id]){const index=hardwareIds.indexOf(id);return{ownedCompute:count*BALANCE.hardware[id].compute,linkedCompute:researchModifiers(s).distributedInference&&index>0&&challengeNetworkLinkAllowed(s,index)&&s.hardwareCounts[hardwareIds[index-1]]>=25?Math.min(count,10)*BALANCE.hardware[id].compute*BALANCE.computeNetworkBonus*(1+challengeFamilyBonus(s,'fragmented-network'))*(1+deviceBonus(s,'neighbor')+(index>=hardwareIds.indexOf('campus')?deviceBonus(s,'lateNeighbor'):0)):0,milestone:1+(milestoneFactor(id,count)-1)*(1+((id==='calculator'||id==='sbc')?challengeFamilyBonus(s,'five-hardware'):0)),classUpgrade:(s.classUpgrades.includes(id)?2:1)*((id==='calculator'||id==='sbc')&&count>=10?1+deviceBonus(s,'legacy')*(1+challengeFamilyBonus(s,'five-hardware')):1),mastery:1+hardwareMasteryBonus(s,id)*(1+challengeFamilyBonus(s,'no-items'))};}
