@@ -1,7 +1,7 @@
 import type {TelemetryEvent} from '../src/telemetry';
 /** Bounded observations of the real domain; no grants, debug stocks or free unlocks. */
 import {performance} from 'node:perf_hooks';
-import {newGame,registerTap,startTraining,startResearchProject,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,newINTScientific,toggleHardwareAutobuyer,type GameState,type TrainingTrack,type ItemTypeId,type ResearchId} from '../src/economy';
+import {newGame,registerTap,startTraining,startResearchProject,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,newINTScientific,creditRateScientific,computeRateScientific,dataRateScientific,tapCreditsScientific,specialItemEffectQuote,toggleHardwareAutobuyer,type GameState,type TrainingTrack,type ItemTypeId,type ResearchId} from '../src/economy';
 import {ScientificNumber} from '../src/scientificNumber';
 import {queueExperiment,analysisQuote} from '../src/experiments';
 import {craft,craftModule,craftAffordability,claimLootDrop,equip} from '../src/inventory';
@@ -16,6 +16,7 @@ export function runNaturalProfile(config:ProfileConfig){
  const wallStart=performance.now(),budget=config.budgetMs??60_000;
  let s=newGame(0,`natural-${config.play}-${config.priority}-${config.seed}`),random=config.seed,track:TrainingTrack='quality',onlineSeconds=0,offlineSeconds=0;
  const rng=()=>{random=(Math.imul(random,1664525)+1013904223)>>>0;return random/4294967296;};
+ let earnedBuildComparison:unknown=null;
  const initial={credits:exactEconomyValue(s,'credits').toJSON(),hardware:s.hardware,data:s.data,components:s.components,gems:s.gems};
  const first:Record<string,number>={},blocks:Record<string,Record<string,number>>={},actions:{at:number;family:string;detail:string;credits:ReturnType<ScientificNumber['toJSON']>;data:ReturnType<ScientificNumber['toJSON']>}[]=[];
  const seenEvents=new WeakSet<TelemetryEvent>(),bookedCosts:Record<string,{credits:ScientificNumber;data:ScientificNumber;events:number}>={};
@@ -40,6 +41,10 @@ export function runNaturalProfile(config:ProfileConfig){
   if(newINTScientific(s).compare(ScientificNumber.from(3))>=0)first.claimableINT3??=at;
   for(const item of s.inventory)first[`item:${item.type}`]??=at;
   for(const id of s.craftedItemTypes)first[`crafted:${id}`]??=at;
+  if(s.completedResearch.includes('blueprints'))first.blueprintsResearchComplete??=at;
+  if(s.blueprintResearchReward==='consumed')first.blueprintRewardConsumed??=at;
+  const chip=s.inventory.find(item=>item.type==='quantum-chip'),relay=s.inventory.find(item=>item.type==='impulse-relay');
+  if(!earnedBuildComparison&&s.prestigeCount&&s.hardware>0&&chip&&relay){const chipBuild=equip(s,chip.id),relayBuild=equip(s,relay.id);const quote=(build:GameState)=>({compute:computeRateScientific(build.hardware,build).toJSON(),credits:creditRateScientific(build.hardware,build.level,build).toJSON(),data:dataRateScientific(build).toJSON(),tap:tapCreditsScientific(build).toJSON()});const chipRates=quote(chipBuild),relayRates=quote(relayBuild);earnedBuildComparison={at,actualRegularlyCraftedItems:true,scope:'Instant same-hardware/equal-account equipment contrast; separate copies only, no changes to controller. Relay burst behavior remains in its actual special-effect quote.',chip:chipRates,relay:relayRates,chipEffects:specialItemEffectQuote(chipBuild,chip),relayEffects:specialItemEffectQuote(relayBuild,relay)};}
   if(s.lifetime.researchCompleted)first.researchComplete??=at;
   if(s.lifetime.trainingCompleted)first.trainingComplete??=at;
   if(s.experiments.completedIds.length)first.analysisComplete??=at;
@@ -89,7 +94,7 @@ export function runNaturalProfile(config:ProfileConfig){
   if(elapsed%600===0||elapsed===config.seconds)checkpoints.push({second:elapsed,credits:exactEconomyValue(s,'credits').toJSON(),data:exactEconomyValue(s,'data').toJSON(),generatedData:exactEconomyValue(s,'lifetimeDataGenerated').toJSON(),claimableINT:newINTScientific(s).toJSON(),prestiges:s.prestigeCount,hardware:{...s.hardwareCounts},families:[...s.materials.families],crafted:{...s.craftedItemCounts},components:{...s.componentInventory},fragments:s.blueprintFragments});
  }
  const loaded=restore(serialize(s),s.savedAt);if(loaded.error)throw Error(loaded.error);
- const gameplay=(state:GameState)=>({credits:exactEconomyValue(state,'credits').toJSON(),data:exactEconomyValue(state,'data').toJSON(),hardware:state.hardwareCounts,components:state.componentInventory,modules:state.modules,materials:state.materials,crafted:state.craftedItemCounts,learned:state.learnedRecipes,nodes:state.nodes,research:state.researchLevels,completed:state.completedResearch,prestiges:state.prestigeCount});
+ const gameplay=(state:GameState)=>({credits:exactEconomyValue(state,'credits').toJSON(),data:exactEconomyValue(state,'data').toJSON(),hardware:state.hardwareCounts,components:state.componentInventory,modules:state.modules,materials:state.materials,crafted:state.craftedItemCounts,learned:state.learnedRecipes,nodes:state.nodes,research:state.researchLevels,completed:state.completedResearch,prestiges:state.prestigeCount,blueprintResearchReward:state.blueprintResearchReward});
  if(JSON.stringify(gameplay(s))!==JSON.stringify(gameplay(loaded.state)))throw Error('Profile reload changed gameplay');
  const unmet=['claimableINT1','claimableINT3','prestige','family:semiconductor','family:photonic','family:frontier','family:quantum','crafted:impulse-relay','crafted:quantum-chip','extendedBlueprint'].filter(id=>first[id]===undefined);
  const dataSpent=Object.values(bookedCosts).reduce((sum,cost)=>sum.add(cost.data),ScientificNumber.zero()),generated=exactEconomyValue(s,'lifetimeDataGenerated'),accounted=exactEconomyValue(s,'data').add(resetData).add(dataSpent);
@@ -97,7 +102,7 @@ export function runNaturalProfile(config:ProfileConfig){
  if(relativeDataError>1e-10)throw Error(`Profile Data ledger incomplete: ${relativeDataError}`);
  const balances={allBookedData:generated.toJSON(),dropData:dropData.toJSON(),passivelyProducedData:generated.subtract(dropData).toJSON(),dropCredits:dropCredits.toJSON(),spentData:dataSpent.toJSON(),resetData:resetData.toJSON(),relativeDataError};
  const finalCraft=craftAffordability(s,'quantum-chip'),learning=blueprintQuote(s,'quantum-chip');
- return{config,initial,first,unmet,balances,bookedCosts:Object.fromEntries(Object.entries(bookedCosts).map(([type,cost])=>[type,{credits:cost.credits.toJSON(),data:cost.data.toJSON(),events:cost.events}])),finalChipBlock:{blueprint:learning,reasons:finalCraft.reasons,missingComponents:finalCraft.missingComponents,missingModules:finalCraft.missingModules,missingData:finalCraft.data.missingExact.toJSON()},onlineSeconds,offlineSeconds,taps:s.lifetime.taps,resets,manualActionDebits:Object.fromEntries(Object.entries(spending).map(([family,sum])=>[family,{credits:sum.credits.toJSON(),data:sum.data.toJSON()}])),blocks,actions,checkpoints,final:{...gameplay(s),items:s.inventory.map(i=>({type:i.type,rarity:i.rarity,level:i.level,forge:i.forge??0})),equipped:Object.values(s.equipped).map(id=>s.inventory.find(i=>i.id===id)?.type),trainingCompleted:s.lifetime.trainingCompleted,researchCompleted:s.lifetime.researchCompleted,fragments:s.blueprintFragments,knownBlueprints:s.materials.knownBlueprints,claimableINT:newINTScientific(s).toJSON()},reload:true};
+ return{config,initial,first,unmet,earnedBuildComparison,balances,bookedCosts:Object.fromEntries(Object.entries(bookedCosts).map(([type,cost])=>[type,{credits:cost.credits.toJSON(),data:cost.data.toJSON(),events:cost.events}])),finalChipBlock:{blueprint:learning,reasons:finalCraft.reasons,missingComponents:finalCraft.missingComponents,missingModules:finalCraft.missingModules,missingData:finalCraft.data.missingExact.toJSON()},onlineSeconds,offlineSeconds,taps:s.lifetime.taps,resets,manualActionDebits:Object.fromEntries(Object.entries(spending).map(([family,sum])=>[family,{credits:sum.credits.toJSON(),data:sum.data.toJSON()}])),blocks,actions,checkpoints,final:{...gameplay(s),items:s.inventory.map(i=>({type:i.type,rarity:i.rarity,level:i.level,forge:i.forge??0})),equipped:Object.values(s.equipped).map(id=>s.inventory.find(i=>i.id===id)?.type),trainingCompleted:s.lifetime.trainingCompleted,researchCompleted:s.lifetime.researchCompleted,fragments:s.blueprintFragments,knownBlueprints:s.materials.knownBlueprints,claimableINT:newINTScientific(s).toJSON()},reload:true};
 }
 /** Persist bounded trace samples; costs and session assertions use the complete trace. */
 export function summarizeNaturalProfile({actions,...profile}:ReturnType<typeof runNaturalProfile>){

@@ -1,3 +1,4 @@
+import {BlueprintResearchRewardNotice} from './ResearchQuoteDetails';
 import {
   researchAreas,
   researchAreaOrder,
@@ -34,6 +35,7 @@ export function ResearchCatalog({
         : projectText(id, language);
   return (
     <div className="research-catalog">
+      <BlueprintResearchRewardNotice s={s}/>
       {researchAreaOrder
         .filter(
           (area) =>

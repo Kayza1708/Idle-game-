@@ -1,3 +1,11 @@
+## Einmalige Forschung→Crafting-Brücke – 12. Oktober 2026
+
+`BALANCE.firstBlueprintResearchFragments = 4`: Der erste tatsächlich bezahlte Hauptspielabschluss von `blueprints` vergibt vier vorhandene Bauplanfragmente. Dauerhafter Save-v49-Nachweis (`unearned` → `pending` → `consumed`), kein zweiter Grant bei Prestige/Axiom/Reload/Challenge. Bereits abgeschlossene Altprojekte bekommen keine nachträgliche Gutschrift; bezahlte noch laufende Altprojekte bleiben berechtigt. Sicherer Ganzzahlbestand: bei fehlender Kapazität bleibt die ganze Auszahlung pending bis nach einem Verbrauch.
+
+Blueprint-Lernen, Module, Materialien, 1.800 Data und Chipzeit bleiben regulär zu bezahlen. Keine Preis-/Zeit-/Produktions-/Prestigeformeländerung. In den acht erneuten natürlichen Zwei-Stunden-Profilen wird der Chip in allen vier aktiven Runs nach 67:30–68:30 Minuten fertig; passive Sitzungsruns erreichen das Projekt noch nicht. Kontrollierter Itemvergleich: +10,4 % passive Credits/s gegenüber dem Relais, dessen Tapbursts separat bestehen bleiben. Kein Nachweis allgemeiner Builddominanz oder Monatsbalance.
+
+Vollständiger Vertrag und Grenzen: `blueprint-research-bridge.md`; Messdaten: `blueprint-bridge-profiles.json` und `blueprint-bridge-comparison.json`.
+
 # Economy v7 – Hardwareidentität und INT
 
 Alle abstimmbaren Werte stehen in `src/economy.ts`. Oberfläche, Simulation und Tests rufen dieselben Funktionen auf; angezeigte Preise werden nicht separat nachgebaut.

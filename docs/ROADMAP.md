@@ -2,6 +2,18 @@
 
 Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEPS.md` werden am Ende jedes Auftrags aktualisiert; unerledigte Kriterien bleiben offen.
 
+## Bezahlte Forschung→Crafting-Brücke 12. Oktober 2026 — Erledigt
+
+- [x] Einmalige vier Lernfragmente an ersten bezahlten Hauptspielabschluss von Offene Baupläne gebunden; keine gratis Items/Zutaten/Module.
+- [x] Save v49, unabhängige Main-/Challenge-Migration und permanente Receipt-/Kapazitäts-/Resetverträge integriert.
+- [x] Forschungsfeedback, sieben Projektübersetzungen und auditierbarer Export/CSV angebunden.
+- [x] 20 gezielte Tests sowie vollständiger Standardlauf (1.257 Tests), Typecheck und Build lokal grün.
+- [x] Gleiche acht natürliche Profile neu gemessen; Chip in vier aktiven Fällen nach 67:30–68:30; echte passive Itemquote verglichen.
+- [ ] Passive Kadenz/Taps isolieren und feste Relais-/Chiploadouts inklusive Bursteinkommen vergleichen.
+- [ ] Natürliches Midgame, Forge-/Challenge-Kapitel, Browser/Geräte und Langzeitbalance abnehmen.
+
+Details und Grenzen: `blueprint-research-bridge.md`. Diese Brücke löst das nachgewiesene aktive Lernfragmentgate, nicht die gesamte passive oder monatelange Progression.
+
 ## Begrenzte natürliche Einstiegsmessung 12. Oktober 2026 — Erledigt
 
 - [x] Gemergten PR #87 und grüne Node-22-CI bestätigt.

@@ -1,3 +1,4 @@
+import {earnBlueprintResearchReward,settleBlueprintResearchReward} from './blueprintResearchReward';
 import {offlineTimeLimit} from './economy';
 import {automationFeatureUnlocked,researchRepeatUnlocked} from './economy';
 import {addChallengeMetrics,challengeFamilyBonus} from './challengeStages';
@@ -65,6 +66,7 @@ function autobuy(state:GameState,shoppingDue:boolean,otherDue:boolean) {
 export const startQueuedResearchIfAffordable=startManualResearchQueue;
 
 export function settleResearchCompletions(state:GameState,trace:((step:ResearchCompletionStep)=>void)=()=>{}):GameState {
+  state=settleBlueprintResearchReward(state);
   const finished=state.researchLabs.filter((lab):lab is NonNullable<typeof lab>=>!!lab&&lab.endsAt<=state.savedAt+.1);
   if(!finished.length)return state;
   const finishedIds=new Set(finished.map(lab=>lab.id));
@@ -74,6 +76,7 @@ export function settleResearchCompletions(state:GameState,trace:((step:ResearchC
     mark('project-complete');
     if(isRepeatableResearch(lab.id)){if(next.researchLevels[lab.id]>=lab.level)continue;next={...next,researchLevels:{...next.researchLevels,[lab.id]:lab.level},lifetime:{...next.lifetime,researchCompleted:next.lifetime.researchCompleted+1},runResearchCompleted:next.runResearchCompleted+1};}else{if(next.completedResearch.includes(lab.id))continue;next={...next,completedResearch:[...next.completedResearch,lab.id],lifetime:{...next.lifetime,researchCompleted:next.lifetime.researchCompleted+1},runResearchCompleted:next.runResearchCompleted+1};}
     mark('reward-applied');if(next.retention.activeRun){const m=next.retention.activeRun.metrics!,area=researchAreaFor(lab.id);next=addChallengeMetrics(next,{research:m.research+1,researchDataSpent:ScientificNumber.fromJSON(m.researchDataSpent??{m:0,e:0}).add(lab.dataCostExact?ScientificNumber.fromJSON(lab.dataCostExact):ScientificNumber.from(lab.dataCost??0)).toJSON(),researchAreas:[...new Set([...m.researchAreas,...(area?[area]:[])])]});}if((lab.dataCost??0)>0||lab.dataCostExact&&ScientificNumber.fromJSON(lab.dataCostExact).compare(ScientificNumber.zero())>0)next=blueprintResearchCompletion(next,lab.id);
+    next=earnBlueprintResearchReward(next,lab);
     mark('unlock-applied');
     next=addEvent(next,'research-complete',next.savedAt,{id:lab.id,jobId:lab.jobId??`${lab.id}:${lab.level}:${lab.startedAt}`,quoteBasis:lab.quoteBasis?JSON.stringify(lab.quoteBasis):null,level:lab.level,labId:state.researchLabs.indexOf(lab),exactDataCost:lab.dataCostExact?ScientificNumber.fromJSON(lab.dataCostExact).toScientificString(16):null,dataCost:lab.dataCost,durationSeconds:lab.durationSeconds,startedAt:lab.startedAt,endsAt:lab.endsAt,actualDurationSeconds:(lab.endsAt-lab.startedAt)/1000});
   }
