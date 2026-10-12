@@ -680,3 +680,11 @@ html[data-native-platform] body{padding:0}
 .item-receipts{position:fixed;z-index:130;bottom:90px;left:12px;right:12px;max-height:45vh;overflow:auto;background:#101828;border:1px solid #4a6590;border-radius:12px;padding:12px}
 .item-receipts>button{min-width:44px;min-height:44px;float:right}
 .item-receipt{display:flex;gap:12px;align-items:flex-start;min-width:0;overflow-wrap:anywhere}.item-receipt>div{min-width:0}.item-receipt p{margin:4px 0}.item-receipt .item-art{flex-shrink:0}
+/* Integrated material/build progression: no additional menu, neutral missing artwork. */
+.foundry-manager,.progression-card,.material-focus,.device-effect,.recovery-details,.challenge-stage{min-width:0;max-width:100%;overflow-wrap:anywhere;padding:12px;margin-block:12px;border:1px solid #42635b;border-radius:12px}
+.foundry-manager button,.progression-card button,.material-focus select,.challenge-stage button,.challenge-stage select,.challenge-stage label,.device-effect button,.recovery-details button{min-height:44px;max-width:100%;white-space:normal}
+.material-focus{grid-column:1/-1}.material-focus label,.challenge-stage label{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.challenge-stage fieldset{min-width:0;max-width:100%;padding:8px}.challenge-stage fieldset label{display:flex}.challenge-stage input[type=checkbox]{min-width:24px;min-height:24px}.challenge-stage .item-art{width:36px;flex-shrink:0}
+.neutral-device-art,.neutral-material-art{display:grid;place-items:center;aspect-ratio:1;border:1px solid #729989;border-radius:10px;background:#14241f;color:#b6dfd1;font-size:32px;flex-shrink:0}
+.device-effect p,.recovery-details li{overflow-wrap:anywhere}.recovery-details li{display:flex;align-items:center;gap:8px}.recovery-details .component-art{width:32px}
+
+[data-planner]{grid-column:1/-1}[data-planner] label{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:44px}[data-planner] select{max-width:100%;min-height:44px}

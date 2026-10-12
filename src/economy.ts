@@ -1,10 +1,637 @@
-import {researchAccess,type ResearchAreaId} from './researchAreas';
+import {activeChallengeRules,challengeFamilyBonus,addChallengeMetrics} from './challengeStages';
+import {classUpgradePackageQuote,hardwarePurchaseMaterialQuote,hardwareMaterialQuote,grantPaidHardwareMilestone,unlockPaidHardwareMaterials} from './materialEconomy';
+import {deviceBonus} from './deviceEffects';
+import {researchAccess,researchAreaFor,type ResearchAreaId} from './researchAreas';
 import {ScientificNumber,type ScientificJSON} from './scientificNumber';
 import { addEvent, addMetrics, newTelemetry, type LocalTelemetry } from './telemetry';
 import { newStory, type StoryState } from './story';
 
 /** All tunable alpha balance lives in this file. Domain modules consume these values. */
+export const extendedItemCatalog = {
+  "inference-router": {
+    "name": "Inferenz-Router",
+    "en": "Inference router",
+    "slot": "processor",
+    "role": "neighbor",
+    "effect": "neighbor",
+    "area": "architecture",
+    "access": "server",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "aktive bezahlte Nachbarschaft",
+    "secondary": "compute",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "common",
+      "name": "Inferenz-Router-Bauplan",
+      "ingredients": {
+        "circuits": 40,
+        "copperCoils": 10,
+        "siliconWafers": 14,
+        "goldContacts": 7
+      },
+      "blueprints": 6,
+      "data": 2400,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 1200
+    },
+    "enTrigger": "Increase existing active paid hardware-neighbor contributions."
+  },
+  "burst-processor": {
+    "name": "Burst-Prozessor",
+    "en": "Burst processor",
+    "slot": "processor",
+    "role": "burst",
+    "effect": "burst",
+    "area": "architecture",
+    "access": "prestige",
+    "family": "base",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "bestehendes Overclock-Fenster",
+    "secondary": "compute",
+    "tertiary": "tap",
+    "recipe": {
+      "rarity": "common",
+      "name": "Burst-Prozessor-Bauplan",
+      "ingredients": {
+        "circuits": 20,
+        "copperCoils": 8,
+        "ceramicCapacitors": 4
+      },
+      "blueprints": 4,
+      "data": 1000,
+      "modules": {},
+      "duration": 600
+    },
+    "enTrigger": "Increase the existing active credit overclock window bonus."
+  },
+  "legacy-controller": {
+    "name": "Legacy-Controller",
+    "en": "Legacy controller",
+    "slot": "processor",
+    "role": "legacy",
+    "effect": "legacy",
+    "area": "architecture",
+    "access": "prestige",
+    "family": "base",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "calculator/sbc mit mindestens 10 Einheiten",
+    "secondary": "credits",
+    "tertiary": "compute",
+    "recipe": {
+      "rarity": "common",
+      "name": "Legacy-Controller-Bauplan",
+      "ingredients": {
+        "circuits": 8,
+        "copperCoils": 6,
+        "ferriteCores": 4
+      },
+      "blueprints": 4,
+      "data": 1000,
+      "modules": {},
+      "duration": 600
+    },
+    "enTrigger": "Support calculators and single-board computers with at least ten units."
+  },
+  "sparse-decoder": {
+    "name": "Sparse-Decoder",
+    "en": "Sparse decoder",
+    "slot": "processor",
+    "role": "sparse",
+    "effect": "sparse",
+    "area": "architecture",
+    "access": "prestige",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "1–3 besessene Klassen",
+    "secondary": "compute",
+    "tertiary": "training",
+    "recipe": {
+      "rarity": "common",
+      "name": "Sparse-Decoder-Bauplan",
+      "ingredients": {
+        "circuits": 20,
+        "copperCoils": 6,
+        "siliconWafers": 8,
+        "ceramicSubstrates": 4
+      },
+      "blueprints": 4,
+      "data": 1000,
+      "modules": {},
+      "duration": 600
+    },
+    "enTrigger": "Compute bonus while owning one to three hardware classes."
+  },
+  "photonic-matrix": {
+    "name": "Photonik-Matrix",
+    "en": "Photonic matrix",
+    "slot": "processor",
+    "role": "photonicCompute",
+    "effect": "photonicCompute",
+    "area": "architecture",
+    "access": "campus",
+    "family": "photonic",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "aktiver Overclock",
+    "secondary": "compute",
+    "tertiary": "data",
+    "recipe": {
+      "rarity": "common",
+      "name": "Photonik-Matrix-Bauplan",
+      "ingredients": {
+        "circuits": 60,
+        "copperCoils": 14,
+        "photonicLenses": 20,
+        "photonicCircuits": 10
+      },
+      "blueprints": 8,
+      "data": 6000,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 2400
+    },
+    "enTrigger": "Additional compute only while overclock is active."
+  },
+  "quantum-coupler": {
+    "name": "Quantenkoppler",
+    "en": "Quantum coupler",
+    "slot": "processor",
+    "role": "lateNeighbor",
+    "effect": "lateNeighbor",
+    "area": "architecture",
+    "access": "matrioshka",
+    "family": "quantum",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "aktive Nachbarn ab campus",
+    "secondary": "compute",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "common",
+      "name": "Quantenkoppler-Bauplan",
+      "ingredients": {
+        "circuits": 80,
+        "copperCoils": 18,
+        "quantumCores": 26,
+        "cryogenicResonators": 13
+      },
+      "blueprints": 10,
+      "data": 12000,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Support existing active neighbor links from campus onward."
+  },
+  "distillation-module": {
+    "name": "Distillationsmodul",
+    "en": "Distillation module",
+    "slot": "core",
+    "role": "pairs",
+    "effect": "pairs",
+    "area": "model",
+    "access": "campus",
+    "family": "photonic",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "abgeschlossene Q/E-Paare im Run, höchstens 5",
+    "secondary": "training",
+    "tertiary": "compute",
+    "recipe": {
+      "rarity": "common",
+      "name": "Distillationsmodul-Bauplan",
+      "ingredients": {
+        "circuits": 60,
+        "copperCoils": 14,
+        "graphene": 20,
+        "opticalFibers": 10
+      },
+      "blueprints": 8,
+      "data": 6000,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 2400
+    },
+    "enTrigger": "Compute bonus after completed Q/E pairs in this run; at most five pairs."
+  },
+  "curriculum-module": {
+    "name": "Curriculum-Modul",
+    "en": "Curriculum module",
+    "slot": "core",
+    "role": "curriculum",
+    "effect": "curriculum",
+    "area": "model",
+    "access": "prestige",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "Trackwechsel beim nächsten Trainingsstart",
+    "secondary": "training",
+    "tertiary": "data",
+    "recipe": {
+      "rarity": "common",
+      "name": "Curriculum-Modul-Bauplan",
+      "ingredients": {
+        "circuits": 20,
+        "copperCoils": 6,
+        "siliconWafers": 8,
+        "ceramicSubstrates": 4
+      },
+      "blueprints": 4,
+      "data": 1000,
+      "modules": {},
+      "duration": 600
+    },
+    "enTrigger": "Add a training-cost bonus on the next start after changing track."
+  },
+  "long-term-memory": {
+    "name": "Langzeitspeicher",
+    "en": "Long-term memory",
+    "slot": "core",
+    "role": "memory",
+    "effect": "memory",
+    "area": "data",
+    "access": "prestige",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "passive Produktion, Runzeit bis 3600 s",
+    "secondary": "data",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "common",
+      "name": "Langzeitspeicher-Bauplan",
+      "ingredients": {
+        "circuits": 20,
+        "copperCoils": 6,
+        "siliconWafers": 8,
+        "goldContacts": 4
+      },
+      "blueprints": 4,
+      "data": 1000,
+      "modules": {},
+      "duration": 600
+    },
+    "enTrigger": "Bounded passive credit bonus rising with run time, up to one hour."
+  },
+  "cryocontroller": {
+    "name": "Kryocontroller",
+    "en": "Cryocontroller",
+    "slot": "core",
+    "role": "overclockDuration",
+    "effect": "overclockDuration",
+    "area": "architecture",
+    "access": "matrioshka",
+    "family": "quantum",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "zukünftige Overclockstarts",
+    "secondary": "research",
+    "tertiary": "compute",
+    "recipe": {
+      "rarity": "common",
+      "name": "Kryocontroller-Bauplan",
+      "ingredients": {
+        "circuits": 80,
+        "copperCoils": 18,
+        "quantumCores": 26,
+        "cryogenicResonators": 13
+      },
+      "blueprints": 10,
+      "data": 12000,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Increase the duration of future overclock starts."
+  },
+  "manufacturing-controller": {
+    "name": "Fertigungscontroller",
+    "en": "Manufacturing controller",
+    "slot": "core",
+    "role": "recovery",
+    "effect": "recovery",
+    "area": "materials",
+    "access": "server",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "Craft-Recycling, Gesamtrückgewinnung höchstens 60 %",
+    "secondary": "compute",
+    "tertiary": "training",
+    "recipe": {
+      "rarity": "common",
+      "name": "Fertigungscontroller-Bauplan",
+      "ingredients": {
+        "circuits": 40,
+        "copperCoils": 10,
+        "titaniumBolts": 14,
+        "thermalInterface": 7
+      },
+      "blueprints": 6,
+      "data": 2400,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 1200
+    },
+    "enTrigger": "Increase crafting recycling within the overall 60% recovery budget."
+  },
+  "diagnostic-adapter": {
+    "name": "Diagnoseadapter",
+    "en": "Diagnostic adapter",
+    "slot": "research",
+    "role": "hardwarePackage",
+    "effect": "hardwarePackage",
+    "area": "materials",
+    "access": "prestige",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "bezahlte Hardwarekanten",
+    "secondary": "experiment",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "common",
+      "name": "Diagnoseadapter-Bauplan",
+      "ingredients": {
+        "circuits": 20,
+        "copperCoils": 6,
+        "siliconWafers": 8,
+        "goldContacts": 4
+      },
+      "blueprints": 4,
+      "data": 1000,
+      "modules": {},
+      "duration": 600
+    },
+    "enTrigger": "Increase packages earned by actual paid hardware milestone edges."
+  },
+  "experiment-controller": {
+    "name": "Versuchscontroller",
+    "en": "Experiment controller",
+    "slot": "research",
+    "role": "areaSwitch",
+    "effect": "areaSwitch",
+    "area": "automation",
+    "access": "server",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "zukünftiger Forschungsstart nach Bereichswechsel",
+    "secondary": "research",
+    "tertiary": "experiment",
+    "recipe": {
+      "rarity": "common",
+      "name": "Versuchscontroller-Bauplan",
+      "ingredients": {
+        "circuits": 40,
+        "copperCoils": 10,
+        "siliconWafers": 14,
+        "opticalFibers": 7
+      },
+      "blueprints": 6,
+      "data": 2400,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 1200
+    },
+    "enTrigger": "Improve future research starts after changing research area."
+  },
+  "precision-scanner": {
+    "name": "Präzisionsscanner",
+    "en": "Precision scanner",
+    "slot": "research",
+    "role": "focus",
+    "effect": "focus",
+    "area": "materials",
+    "access": "server",
+    "family": "photonic",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "zukünftige fokussierte Materialanalysen",
+    "secondary": "experiment",
+    "tertiary": "drop",
+    "recipe": {
+      "rarity": "common",
+      "name": "Präzisionsscanner-Bauplan",
+      "ingredients": {
+        "circuits": 40,
+        "copperCoils": 10,
+        "photonicLenses": 14,
+        "opticalFibers": 7
+      },
+      "blueprints": 6,
+      "data": 2400,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 1200
+    },
+    "enTrigger": "Increase the selected family weight of future focused analyses."
+  },
+  "recycling-probe": {
+    "name": "Recycling-Sonde",
+    "en": "Recycling probe",
+    "slot": "research",
+    "role": "fragment",
+    "effect": "fragment",
+    "area": "materials",
+    "access": "server",
+    "family": "photonic",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "Rare+-Zerlegung, Chance gedeckelt 60 %",
+    "secondary": "experiment",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "common",
+      "name": "Recycling-Sonde-Bauplan",
+      "ingredients": {
+        "circuits": 40,
+        "copperCoils": 10,
+        "graphene": 14,
+        "photonicCircuits": 7
+      },
+      "blueprints": 6,
+      "data": 2400,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 1200
+    },
+    "enTrigger": "Improve rare+ salvage fragment chance, capped at 60%."
+  },
+  "blueprint-archive": {
+    "name": "Bauplanarchiv",
+    "en": "Blueprint archive",
+    "slot": "research",
+    "role": "blueprintProgress",
+    "effect": "blueprintProgress",
+    "area": "materials",
+    "access": "campus",
+    "family": "frontier",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "bezahlter Forschungsabschluss",
+    "secondary": "research",
+    "tertiary": "experiment",
+    "recipe": {
+      "rarity": "common",
+      "name": "Bauplanarchiv-Bauplan",
+      "ingredients": {
+        "circuits": 60,
+        "copperCoils": 14,
+        "neuralCrystals": 20,
+        "spintronicDevices": 10
+      },
+      "blueprints": 8,
+      "data": 6000,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 2400
+    },
+    "enTrigger": "Improve blueprint progress from paid research completions."
+  },
+  "protocol-controller": {
+    "name": "Protokollcontroller",
+    "en": "Protocol controller",
+    "slot": "research",
+    "role": "planning",
+    "effect": "planning",
+    "area": "automation",
+    "access": "server",
+    "family": "semiconductor",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "bezahlter automatischer Start, einmalige Bonuszeit; keine Gratisaufträge",
+    "secondary": "research",
+    "tertiary": "training",
+    "recipe": {
+      "rarity": "common",
+      "name": "Protokollcontroller-Bauplan",
+      "ingredients": {
+        "circuits": 40,
+        "copperCoils": 10,
+        "goldContacts": 14,
+        "ceramicSubstrates": 7
+      },
+      "blueprints": 6,
+      "data": 2400,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 1200
+    },
+    "enTrigger": "Shorten newly paid automatic research starts by up to 10% of the item contribution; no free jobs."
+  },
+  "photonic-analyzer": {
+    "name": "Photonik-Analysator",
+    "en": "Photonic analyzer",
+    "slot": "research",
+    "role": "photonicYield",
+    "effect": "photonicYield",
+    "area": "materials",
+    "access": "campus",
+    "family": "photonic",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "Photonikfunde aus neuen Analysen/Paketen",
+    "secondary": "experiment",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "common",
+      "name": "Photonik-Analysator-Bauplan",
+      "ingredients": {
+        "circuits": 60,
+        "copperCoils": 14,
+        "photonicLenses": 20,
+        "photonicCircuits": 10
+      },
+      "blueprints": 8,
+      "data": 6000,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 2400
+    },
+    "enTrigger": "Improve photonic material yield from new analyses and paid hardware packages."
+  },
+  "quantum-diagnostic-module": {
+    "name": "Quanten-Diagnosemodul",
+    "en": "Quantum diagnostic module",
+    "slot": "research",
+    "role": "quantumYield",
+    "effect": "quantumYield",
+    "area": "materials",
+    "access": "matrioshka",
+    "family": "quantum",
+    "cap": 0.6,
+    "strength": 1,
+    "trigger": "Quantenfunde aus neuen Analysen/Paketen",
+    "secondary": "experiment",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "common",
+      "name": "Quanten-Diagnosemodul-Bauplan",
+      "ingredients": {
+        "circuits": 80,
+        "copperCoils": 18,
+        "quantumCores": 26,
+        "cryogenicResonators": 13
+      },
+      "blueprints": 10,
+      "data": 12000,
+      "modules": {
+        "computeBus": 1,
+        "dataLattice": 1
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Improve quantum material yield from new analyses and paid hardware packages."
+  }
+} as const;
 export const BALANCE = {
+  extendedItems:extendedItemCatalog,
+  materialFamilies:{base:{name:'Basis',en:'Basic',hardware:null,ids:['circuits','copperCoils','ceramicCapacitors','ferriteCores']},semiconductor:{name:'Halbleiter',en:'Semiconductors',hardware:'pc',ids:['siliconWafers','titaniumBolts','goldContacts','ceramicSubstrates','thermalInterface']},photonic:{name:'Photonik',en:'Photonics',hardware:'server',ids:['photonicLenses','graphene','nanotubes','opticalFibers','photonicCircuits']},frontier:{name:'Frontier',en:'Frontier',hardware:'campus',ids:['superconductors','neuralCrystals','diamondSubstrates','spintronicDevices']},quantum:{name:'Quanten',en:'Quantum',hardware:'matrioshka',ids:['quantumCores','cryogenicResonators']}},
+  hardwareMaterialPairs:{calculator:['circuits','copperCoils'],sbc:['circuits','copperCoils'],pc:['siliconWafers','thermalInterface'],gpu:['siliconWafers','thermalInterface'],rig:['goldContacts','opticalFibers'],server:['goldContacts','opticalFibers'],farm:['photonicLenses','opticalFibers'],campus:['graphene','photonicCircuits'],cloud:['superconductors','diamondSubstrates'],liquid:['neuralCrystals','spintronicDevices'],subsea:['superconductors','diamondSubstrates'],orbital:['photonicCircuits','spintronicDevices'],lunar:['photonicCircuits','spintronicDevices'],dyson:['quantumCores','cryogenicResonators'],matrioshka:['quantumCores','cryogenicResonators']},
+  classUpgradeMinimum:50,
+  hardwareMaterialAmounts:{10:[4,1],25:[10,3],50:[24,6],100:[60,15],250:[150,40],500:[400,100]},frontierMaterialFactor:.1,materialFocusWeight:3,materialFocusQuantity:.8,
+  materialQualityPowers:{circuits:0,copperCoils:.125,siliconWafers:.25,titaniumBolts:.375,photonicLenses:.5,graphene:.625,nanotubes:.75,superconductors:.875,neuralCrystals:1,quantumCores:1.125,ceramicCapacitors:.125,ferriteCores:.125,goldContacts:.25,ceramicSubstrates:.25,opticalFibers:.5,thermalInterface:.25,diamondSubstrates:.875,spintronicDevices:1,photonicCircuits:.75,cryogenicResonators:1.125},
+  newMaterialWeights:{ceramicCapacitors:10000,ferriteCores:8000,goldContacts:4000,ceramicSubstrates:4000,opticalFibers:3000,thermalInterface:4000,diamondSubstrates:1200,spintronicDevices:500,photonicCircuits:1000,cryogenicResonators:40},
+  materialFamilyPriority:['quantum','frontier','photonic','semiconductor','base'],
+  craftingPlannerTargets:[1,5,10],
+  materialPackages:{base:{cost:40,amount:12},semiconductor:{cost:80,amount:8},photonic:{cost:120,amount:6},frontier:{cost:180,amount:3},quantum:{cost:250,amount:1}},
+  recoveryFraction:.6,recoveryNumerator:3,recoveryDenominator:5,legacyItemRecovery:{common:2,uncommon:3,rare:5,epic:8,legendary:12,mythic:20},salvageFragmentChance:{common:0,uncommon:0,rare:.05,epic:.10,legendary:.20,mythic:.30},salvageFragmentCap:.6,blueprintDropChance:.01,blueprintResearchThreshold:10,
+  forgeSpeeds:[1,1.25,1.6,2.1,2.8],forgeLimits:[4,8,12,16,20],forgeMultipliers:[1,2,4],forgeCosts:[{circuits:200,copperCoils:40,titaniumBolts:20},{circuits:600,ceramicSubstrates:80,goldContacts:40},{circuits:1800,graphene:120,nanotubes:80,superconductors:30},{circuits:5400,superconductors:150,thermalInterface:80,diamondSubstrates:40},{circuits:16200,neuralCrystals:120,cryogenicResonators:60,quantumCores:30}],forgeBaseSeconds:600,forgeDurationGrowth:1.35,forgeMinimumSeconds:60,forgeFamilyFrom:5,forgeRareFrom:9,forgeBaseMaterialsPerLevel:4,
+  extendedItemCap:.6,extendedItemPlanningTime:.1,extendedItemRunTimeCap:3600,extendedItemPairCap:5,
+  challengeCatalog:{version:1,stages:69,chapters:[10,20,30,45,60,69],credits:{base:'1e6',growth:.30},data:{base:'1e3',growth:.20},compute:{base:'1e2',growth:.25},users:{base:'1e2',growth:.25},int:{base:'1',growth:.15},rewardCoefficient:.08,prestigeMaximum:10,prestigeInterval:7,compactLimits:[5,5,4,4,3,3],dataFactors:[.1,.08,.06,.04,.02,.01],inflationFactors:[100,150,225,350,500,750],networkLimits:[5,4,3,2,1,1],earlyMilestones:[10,25,50,100,250,500],minimumMilestones:[1,2,3,4,5,6],trainingTargets:[1,2,3,4,5,6],researchTargets:[1,2,3,4,5,6],areaTargets:[1,2,3,4,5,5],craftedTargets:[1,2,3,4,5,6],rarityTargets:[0,1,2,3,4,5],classPurchaseTargets:[1,2,3,4,5,6],milestones:{7:'research-queue',14:'training-queue',21:'research-repeat',35:'analysis-planner',49:'crafting-planner',69:'prestige-agent'},families:{'no-taps':{name:'Hands Off',factor:1,reward:'overclock'},'no-items':{name:'Bare Metal',factor:1,reward:'neighbors'},'five-hardware':{name:'Compact Stack',factor:1,reward:'legacy'},'data-crunch':{name:'Data Drought',factor:1,reward:'data'},inflation:{name:'Brutal Inflation',factor:1,reward:'ownership'},'quality-lock':{name:'Quality Lock',factor:1,reward:'quality'},'efficiency-lock':{name:'Efficiency Lock',factor:1,reward:'efficiency'},'serial-science':{name:'Serial Science',factor:1,reward:'research'},'closed-supply-chain':{name:'Closed Supply Chain',factor:1,reward:'recycling'},'fragmented-network':{name:'Fragmented Network',factor:1,reward:'neighbors'}}},
+
   runStartCredits:50,
   hardware: {
     calculator:{name:'Taschenrechner',description:'Bescheidener Start für die erste lokale KI.',baseCost:15,growth:1.17,compute:1,role:'Tap',milestones:[{threshold:10,compute:0.12,effect:'tap',value:0.03,label:'Tap Impuls'},{threshold:25,compute:0.16,effect:'tap',value:0.06,label:'Tap Kopplung'},{threshold:50,compute:0.22,effect:'tap',value:0.09,label:'Tap Protokoll'},{threshold:100,compute:0.3,effect:'tap',value:0.12,label:'Tap Netz'},{threshold:250,compute:0.42,effect:'tap',value:0.15,label:'Tap Matrix'},{threshold:500,compute:0.6,effect:'tap',value:0.18,label:'Tap Singularität'}]},
@@ -123,24 +750,34 @@ export const BALANCE = {
     mythic: { chance: 0, factor: 2.6, salvage: 100, craft: [2400, 180] },
   },
   components:{
-    circuits:{name:'Schaltkreise',rarity:'häufig',atlasCell:[0,0],source:'Alle Drops und Analysen · häufig',description:'Logik und Steuerung für frühe Baupläne.'},
-    copperCoils:{name:'Kupferspulen',rarity:'häufig',atlasCell:[1,0],source:'Alle Drops und Analysen · häufig',description:'Leistungsführung und Magnetik.'},
-    siliconWafers:{name:'Siliziumwafer',rarity:'ungewöhnlich',atlasCell:[2,0],source:'Alle Drops und Analysen · ungewöhnlich',description:'Substrat für dichte Rechenlogik.'},
-    titaniumBolts:{name:'Titanlegierung',rarity:'ungewöhnlich',atlasCell:[0,1],source:'Alle Drops und Analysen · ungewöhnlich',description:'Hochfeste Struktur für Fertigung.'},
-    photonicLenses:{name:'Photonische Linsen',rarity:'selten',atlasCell:[1,1],source:'Alle Drops und Analysen · selten',description:'Optische Kopplung für schnelle Systeme.'},
-    graphene:{name:'Graphen',rarity:'selten',atlasCell:[2,1],source:'Alle Drops und Analysen · selten',description:'Leitfähige, leichte Struktur.'},
-    nanotubes:{name:'Nanoröhrchen',rarity:'episch',atlasCell:[0,2],source:'Alle Drops und Analysen · sehr selten',description:'Dichte nanoskalige Leiter.'},
-    superconductors:{name:'Supraleiter',rarity:'episch',atlasCell:[1,2],source:'Alle Drops und Analysen · extrem selten',description:'Verlustarme Hochleistungsverbindungen.'},
-    neuralCrystals:{name:'Neuralkristalle',rarity:'legendär',atlasCell:[2,2],source:'Alle Drops und Analysen · Jackpot',description:'Seltene adaptive Rechenmatrix.'},
-    quantumCores:{name:'Quantenkerne',rarity:'mythisch',atlasCell:[3,2],source:'Alle Drops und Analysen · Ultra-Jackpot',description:'Extrem seltener Kern für Endgame-Fertigung.'},
+    circuits:{name:"Leiterplatten",en:"Circuit boards",rarity:'häufig',atlasCell:[0,0],source:'Alle Drops und Analysen · häufig',description:'Logik und Steuerung für frühe Baupläne.'},
+    copperCoils:{name:"Kupferspulen",en:"Copper coils",rarity:'häufig',atlasCell:[1,0],source:'Alle Drops und Analysen · häufig',description:'Leistungsführung und Magnetik.'},
+    siliconWafers:{name:"Siliziumwafer",en:"Silicon wafers",rarity:'ungewöhnlich',atlasCell:[2,0],source:'Alle Drops und Analysen · ungewöhnlich',description:'Substrat für dichte Rechenlogik.'},
+    titaniumBolts:{name:"Titanbefestigungen",en:"Titanium fasteners",rarity:'ungewöhnlich',atlasCell:[0,1],source:'Alle Drops und Analysen · ungewöhnlich',description:'Hochfeste Struktur für Fertigung.'},
+    photonicLenses:{name:"Photonische Linsen",en:"Photonic lenses",rarity:'selten',atlasCell:[1,1],source:'Alle Drops und Analysen · selten',description:'Optische Kopplung für schnelle Systeme.'},
+    graphene:{name:"Graphen",en:"Graphene",rarity:'selten',atlasCell:[2,1],source:'Alle Drops und Analysen · selten',description:'Leitfähige, leichte Struktur.'},
+    nanotubes:{name:"Kohlenstoffnanoröhren",en:"Carbon nanotubes",rarity:'episch',atlasCell:[0,2],source:'Alle Drops und Analysen · sehr selten',description:'Dichte nanoskalige Leiter.'},
+    superconductors:{name:"Supraleitende Leiter",en:"Superconducting wires",rarity:'episch',atlasCell:[1,2],source:'Alle Drops und Analysen · extrem selten',description:'Verlustarme Hochleistungsverbindungen.'},
+    neuralCrystals:{name:"Memristor-Arrays",en:"Memristor arrays",rarity:'legendär',atlasCell:[2,2],source:'Alle Drops und Analysen · Jackpot',description:'Seltene adaptive Rechenmatrix.'},
+    quantumCores:{name:"Quantenprozessorkerne",en:"Quantum processor cores",rarity:'mythisch',atlasCell:[3,2],source:'Alle Drops und Analysen · Ultra-Jackpot',description:'Extrem seltener Kern für Endgame-Fertigung.'},
+    ceramicCapacitors:{name:"Keramikkondensatoren",en:"Ceramic capacitors",rarity:"häufig",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    ferriteCores:{name:"Ferritkerne",en:"Ferrite cores",rarity:"häufig",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    goldContacts:{name:"Goldkontakte",en:"Gold contacts",rarity:"ungewöhnlich",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    ceramicSubstrates:{name:"Keramiksubstrate",en:"Ceramic substrates",rarity:"ungewöhnlich",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    opticalFibers:{name:"Glasfasern",en:"Optical fibers",rarity:"selten",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    thermalInterface:{name:"Wärmeleitmaterial",en:"Thermal interface material",rarity:"ungewöhnlich",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    diamondSubstrates:{name:"Diamantsubstrate",en:"Diamond substrates",rarity:"episch",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    spintronicDevices:{name:"Spintronik-Bauteile",en:"Spintronic devices",rarity:"legendär",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    photonicCircuits:{name:"Photonische Schaltkreise",en:"Photonic circuits",rarity:"selten",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
+    cryogenicResonators:{name:"Kryogene Resonatoren",en:"Cryogenic resonators",rarity:"mythisch",source:'Bezahlte Hardware, zugängliche Analysen und Drops',description:'Material für Geräte und Schmieden.'},
   },
   // Jede Quelle enthält jede Komponente. Progression verschiebt nur Gewichte; nichts wird hart gegated.
   componentSources:{
-    hardware:{circuits:450000,copperCoils:300000,siliconWafers:140000,titaniumBolts:70000,photonicLenses:25000,graphene:9000,nanotubes:4000,superconductors:1500,neuralCrystals:450,quantumCores:50},
-    architecture:{circuits:180000,copperCoils:160000,siliconWafers:190000,titaniumBolts:130000,photonicLenses:90000,graphene:55000,nanotubes:24000,superconductors:9000,neuralCrystals:1800,quantumCores:200},
-    artifact:{circuits:80000,copperCoils:70000,siliconWafers:90000,titaniumBolts:80000,photonicLenses:100000,graphene:110000,nanotubes:70000,superconductors:30000,neuralCrystals:9000,quantumCores:1000},
+    hardware:{circuits:450000,copperCoils:300000,siliconWafers:140000,titaniumBolts:70000,photonicLenses:25000,graphene:9000,nanotubes:4000,superconductors:1500,neuralCrystals:450,quantumCores:50,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},
+    architecture:{circuits:180000,copperCoils:160000,siliconWafers:190000,titaniumBolts:130000,photonicLenses:90000,graphene:55000,nanotubes:24000,superconductors:9000,neuralCrystals:1800,quantumCores:200,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},
+    artifact:{circuits:80000,copperCoils:70000,siliconWafers:90000,titaniumBolts:80000,photonicLenses:100000,graphene:110000,nanotubes:70000,superconductors:30000,neuralCrystals:9000,quantumCores:1000,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},
   },
-  worldDropWeights:{circuits:450000,copperCoils:300000,siliconWafers:140000,titaniumBolts:70000,photonicLenses:25000,graphene:9000,nanotubes:4000,superconductors:1500,neuralCrystals:450,quantumCores:50},
+  worldDropWeights:{circuits:450000,copperCoils:300000,siliconWafers:140000,titaniumBolts:70000,photonicLenses:25000,graphene:9000,nanotubes:4000,superconductors:1500,neuralCrystals:450,quantumCores:50,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},
   worldDropSeconds:45,
   passiveCircuitSecondsPerClass:3600, hardwareMilestoneTitanium:1, gamingGpuMilestoneLaser:1,
   modules:{computeBus:{name:'Compute-Bus',ingredients:{circuits:10,copperCoils:6,siliconWafers:4,titaniumBolts:4},data:250,effect:'compute'},dataLattice:{name:'Daten-Gitter',ingredients:{graphene:6,nanotubes:3,photonicLenses:4,circuits:8},data:500,effect:'data'}},
@@ -150,6 +787,7 @@ export const BALANCE = {
     'quantum-chip':{base:'siliconWafers',rare:'superconductors'},'neural-asic':{base:'siliconWafers',rare:'superconductors'},'memory-crystal':{base:'siliconWafers',rare:'superconductors'},'tensor-core':{base:'siliconWafers',rare:'superconductors'},
     'photonic-array':{base:'photonicLenses',rare:'neuralCrystals'},'logic-seed':{base:'photonicLenses',rare:'neuralCrystals'},'lab-drone':{base:'photonicLenses',rare:'neuralCrystals'},'data-prism':{base:'photonicLenses',rare:'neuralCrystals'},
     'field-scanner':{base:'graphene',rare:'quantumCores'},
+    ...({"inference-router":{"base":"siliconWafers","rare":"superconductors"},"burst-processor":{"base":"copperCoils","rare":"superconductors"},"legacy-controller":{"base":"copperCoils","rare":"superconductors"},"sparse-decoder":{"base":"siliconWafers","rare":"superconductors"},"photonic-matrix":{"base":"photonicLenses","rare":"neuralCrystals"},"quantum-coupler":{"base":"quantumCores","rare":"cryogenicResonators"},"distillation-module":{"base":"photonicLenses","rare":"neuralCrystals"},"curriculum-module":{"base":"siliconWafers","rare":"superconductors"},"long-term-memory":{"base":"siliconWafers","rare":"superconductors"},"cryocontroller":{"base":"quantumCores","rare":"cryogenicResonators"},"manufacturing-controller":{"base":"siliconWafers","rare":"superconductors"},"diagnostic-adapter":{"base":"siliconWafers","rare":"superconductors"},"experiment-controller":{"base":"siliconWafers","rare":"superconductors"},"precision-scanner":{"base":"photonicLenses","rare":"neuralCrystals"},"recycling-probe":{"base":"photonicLenses","rare":"neuralCrystals"},"blueprint-archive":{"base":"neuralCrystals","rare":"quantumCores"},"protocol-controller":{"base":"siliconWafers","rare":"superconductors"},"photonic-analyzer":{"base":"photonicLenses","rare":"neuralCrystals"},"quantum-diagnostic-module":{"base":"quantumCores","rare":"cryogenicResonators"}} as const),
   },
   itemUpgradeMaterials:{uncommon:{base:4,rare:0},rare:{base:12,rare:0},epic:{base:30,rare:2},legendary:{base:75,rare:8},mythic:{base:180,rare:25}},
   blueprintMasteryCosts:[10,25,60,150],blueprintMasteryFactors:[1,.95,.90,.85,.80],researchFragmentConversionRate:10,
@@ -175,6 +813,7 @@ export const BALANCE = {
     'logic-seed':{rarity:'common' as const,name:'Logik-Saat-Bauplan',research:'blueprints' as const,ingredients:{circuits:12,copperCoils:0,siliconWafers:10,titaniumBolts:0,photonicLenses:0,graphene:4,nanotubes:2,superconductors:0,neuralCrystals:1,quantumCores:0},blueprints:6,data:1500,modules:{dataLattice:1},duration:900},
     'tensor-core':{rarity:'common' as const,name:'Tensor-Kern-Bauplan',research:'blueprints' as const,ingredients:{circuits:36,copperCoils:0,siliconWafers:20,titaniumBolts:12,photonicLenses:0,graphene:6,nanotubes:4,superconductors:2,neuralCrystals:0,quantumCores:0},blueprints:8,data:3000,modules:{computeBus:1,dataLattice:1},duration:1800},
     'lab-drone':{rarity:'common' as const,name:'Labordrohne-Bauplan',research:'blueprints' as const,ingredients:{circuits:24,copperCoils:12,siliconWafers:0,titaniumBolts:16,photonicLenses:8,graphene:0,nanotubes:4,superconductors:0,neuralCrystals:0,quantumCores:1},blueprints:10,data:3600,modules:{computeBus:1,dataLattice:1},duration:1800},
+    ...({"inference-router":{"rarity":"common","name":"Inferenz-Router-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"siliconWafers":14,"goldContacts":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"burst-processor":{"rarity":"common","name":"Burst-Prozessor-Bauplan","ingredients":{"circuits":20,"copperCoils":8,"ceramicCapacitors":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"legacy-controller":{"rarity":"common","name":"Legacy-Controller-Bauplan","ingredients":{"circuits":8,"copperCoils":6,"ferriteCores":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"sparse-decoder":{"rarity":"common","name":"Sparse-Decoder-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"ceramicSubstrates":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"photonic-matrix":{"rarity":"common","name":"Photonik-Matrix-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"photonicLenses":20,"photonicCircuits":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"quantum-coupler":{"rarity":"common","name":"Quantenkoppler-Bauplan","ingredients":{"circuits":80,"copperCoils":18,"quantumCores":26,"cryogenicResonators":13},"blueprints":10,"data":12000,"modules":{"computeBus":1,"dataLattice":1},"duration":3600},"distillation-module":{"rarity":"common","name":"Distillationsmodul-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"graphene":20,"opticalFibers":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"curriculum-module":{"rarity":"common","name":"Curriculum-Modul-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"ceramicSubstrates":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"long-term-memory":{"rarity":"common","name":"Langzeitspeicher-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"goldContacts":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"cryocontroller":{"rarity":"common","name":"Kryocontroller-Bauplan","ingredients":{"circuits":80,"copperCoils":18,"quantumCores":26,"cryogenicResonators":13},"blueprints":10,"data":12000,"modules":{"computeBus":1,"dataLattice":1},"duration":3600},"manufacturing-controller":{"rarity":"common","name":"Fertigungscontroller-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"titaniumBolts":14,"thermalInterface":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"diagnostic-adapter":{"rarity":"common","name":"Diagnoseadapter-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"goldContacts":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"experiment-controller":{"rarity":"common","name":"Versuchscontroller-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"siliconWafers":14,"opticalFibers":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"precision-scanner":{"rarity":"common","name":"Präzisionsscanner-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"photonicLenses":14,"opticalFibers":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"recycling-probe":{"rarity":"common","name":"Recycling-Sonde-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"graphene":14,"photonicCircuits":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"blueprint-archive":{"rarity":"common","name":"Bauplanarchiv-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"neuralCrystals":20,"spintronicDevices":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"protocol-controller":{"rarity":"common","name":"Protokollcontroller-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"goldContacts":14,"ceramicSubstrates":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"photonic-analyzer":{"rarity":"common","name":"Photonik-Analysator-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"photonicLenses":20,"photonicCircuits":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"quantum-diagnostic-module":{"rarity":"common","name":"Quanten-Diagnosemodul-Bauplan","ingredients":{"circuits":80,"copperCoils":18,"quantumCores":26,"cryogenicResonators":13},"blueprints":10,"data":12000,"modules":{"computeBus":1,"dataLattice":1},"duration":3600}} as const),
   },
   experimentRewards: {
     hardware: { components: 45, blueprints: 1, research: 0, itemChance: 0 },
@@ -225,8 +864,10 @@ export type ComponentInventory=Record<ComponentId,number>;
 export type ModuleId=keyof typeof BALANCE.modules;
 export type ModuleInventory=Record<ModuleId,number>;
 export type ItemSlot = 'processor' | 'core' | 'research';
-export type ItemEffect = 'relay'|'int-yield'|'compute' | 'credits' | 'data' | 'research' | 'training' | 'experiment' | 'components' | 'tap' | 'drop';
-export type ItemTypeId = 'impulse-relay'|'insight-archive'|'quantum-chip'|'neural-asic'|'photonic-array'|'memory-crystal'|'logic-seed'|'tensor-core'|'field-scanner'|'lab-drone'|'data-prism';
+export type ItemEffect = ExpandedItemRole | 'relay'|'int-yield'|'compute' | 'credits' | 'data' | 'research' | 'training' | 'experiment' | 'components' | 'tap' | 'drop';
+export type ExpandedItemId=keyof typeof extendedItemCatalog;
+export type ExpandedItemRole=typeof extendedItemCatalog[ExpandedItemId]['role'];
+export type ItemTypeId = ExpandedItemId | 'impulse-relay'|'insight-archive'|'quantum-chip'|'neural-asic'|'photonic-array'|'memory-crystal'|'logic-seed'|'tensor-core'|'field-scanner'|'lab-drone'|'data-prism';
 export type ExperimentId = keyof typeof BALANCE.experimentRewards;
 export type BreakthroughId = keyof typeof BALANCE.breakthroughs;
 export type PrestigeUpgradeId=keyof typeof BALANCE.prestigeUpgrades;
@@ -239,15 +880,15 @@ export type TrainingTrack='quality'|'efficiency';
 export type TrainingCostBasis={targetLevel:number;baseDataCostExact:ScientificJSON;factor:number;bonusTotal:number;sources:Record<string,number>};
 export type ActiveTraining={durationBasis?:{baseDuration:number;alignment:number;modelTransfer:number;runStart:number};costBasis?:TrainingCostBasis;track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;dataCostExact?:ScientificJSON;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
 export type QueuedTraining={track:TrainingTrack;targetLevel:number};
-export type ResearchStartBasis={baseDuration:number;sources:Record<string,ScientificJSON>;bonusTotal:ScientificJSON;laborFactor:number;temporaryFactors:{labBoost:number;overclock:number};minimumApplied:boolean};
+export type ResearchStartBasis={planningFactor?:number;baseDuration:number;sources:Record<string,ScientificJSON>;bonusTotal:ScientificJSON;laborFactor:number;temporaryFactors:{labBoost:number;overclock:number;deviceSwitch?:number};minimumApplied:boolean};
 export type ResearchTarget={id:ResearchId;targetLevel:number};
 export type ResearchDirector={enabled:boolean;entries:ResearchTarget[];reservePercent:0|.25|.5|.75;budget:ScientificJSON|null;spent:ScientificJSON;mode:'strict'|'affordable';elapsed:number};
 export type ActiveResearch={jobId?:string;quoteBasis?:ResearchStartBasis;id:ResearchId;level:number;startedAt:number;endsAt:number;durationSeconds:number;dataCost:number;dataCostExact?:ScientificJSON};
 export type OverclockChannel='credits'|'training'|'research';
-export type Item = { id: string; type: ItemTypeId; rarity: Rarity; level: number; locked: boolean; forge?:number;relayTaps?:number };
+export type Item = { id: string; type: ItemTypeId; rarity: Rarity; level: number; locked: boolean; forge?:number;relayTaps?:number;challengeCopy?:true;materialBasis?:Partial<ComponentInventory>;recoveryUsed?:Partial<ComponentInventory> };
 export type LootDrop={id:string;spawnedAt:number;expiresAt:number;x?:number;y?:number;variant?:'coin'|'cache'|'core'};
 export type ExperimentLength='intro'|'short'|'long';
-export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number; rewardFactor?:number; contractVersion?:1|2 };
+export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number; rewardFactor?:number; contractVersion?:1|2|3;materialContract?:import('./materialEconomy').MaterialContract };
 export type AnalysisResult={id:string;type:ExperimentId;length:Exclude<ExperimentLength,'intro'>;at:number;mode:'active'|'offline';components:Partial<ComponentInventory>;blueprintFragments:number;researchFragments:number};
 export type ProgressMetric='hardwareBought'|'milestones'|'trainingStarted'|'trainingCompleted'|'researchStarted'|'researchCompleted'|'componentsEarned'|'itemsCrafted'|'dropsClaimed'|'itemsFused'|'forgeUpgrades'|'regularCredits'|'regularData'|'taps'|'overclocks'|'prestiges'|'activeSeconds';
 export type MissionTask={id:string;metric:ProgressMetric;goal:number;baseline:number;reward:number;claimed:boolean;de:string;en:string};
@@ -259,7 +900,7 @@ export type PreviousSeason=SeasonState&{claimUntil:number};
 export type PinnedGoalState={kind:'hardware'|'research'|'recipe'|'prestige'|'item-craft'|'item-upgrade'|'blueprint-mastery';id:string;target?:number};
 export type ProfileMessage={id:string;title:string;body:string;at:number};
 export type PlayerProfile={playerName:string;artifacts:string[];completedSeasons:string[];readMessages:string[];inbox:ProfileMessage[]};
-export type ChallengeRunState={id:string;runId:string;startedAt:number;eligibleAtStart:ScientificJSON};
+export type ChallengeRunState={id:string;runId:string;startedAt:number;eligibleAtStart:ScientificJSON;stage?:number;catalogVersion?:0|1;metrics?:import('./challengeStages').ChallengeMetrics;loadout?:Item[]};
 export type RetentionState={hardwareMasteryXp:Record<HardwareId,number>;challengeStars:number;claimedChallenges:string[];activeRun:ChallengeRunState|null;runCompletions:Record<string,number>;runBestSeconds:Record<string,number>};
 export type CraftingReservation={components:Partial<ComponentInventory>;modules:Partial<ModuleInventory>;data:number;blueprints:number};
 export type CraftingJob={masteryLevel?:number;fragmentContract?:'legacy-reserved';id:string;kind:'module'|'item';recipeId:ModuleId|ItemTypeId;quantity:number;completed:number;durationPerUnit:number;startedAt:number|null;endsAt:number|null;ingredients:CraftingReservation;result:{kind:'module'|'item';id:ModuleId|ItemTypeId;rarity?:Rarity}};
@@ -270,6 +911,7 @@ export type AxiomUpgradeLevels=Record<'axiomResonance'|'axiomAutomation'|'axiomA
 export const axiomUpgradeCost=(id:AxiomUpgradeId)=>id==='axiomResonance'?BALANCE.axiom.resonanceCost:id==='axiomAutomation'||id==='prestigeAgent'?BALANCE.axiom.automationCost:id==='axiomArchive'?BALANCE.axiom.archiveCost:1;
 export type ChallengeSession={main:GameState;anchor:number;report:import('./simulation').AdvanceReport};
 export type GameState = {
+  materials:import('./materialEconomy').MaterialProgress;foundries:import('./foundries').FoundryState[];deviceProgress:import('./deviceEffects').DeviceProgress;challengeStages:Record<string,number>;challengeUnlocks:string[];
   challengeSession?:ChallengeSession;challengeReturn?:{runId:string;success:boolean;report:import('./simulation').AdvanceReport};challengeMigrationNotice?:'legacy-challenge-recovered';
   researchAccessIds:ResearchId[];researchRepeat:{enabled:boolean;id:RepeatableResearchId|null;targetLevel:number};researchDirector:ResearchDirector;runTrainingStarted:number;craftingRecycleRemainders:ComponentInventory;
   blueprintMastery:Record<ItemTypeId,number>;craftedItemCounts:Record<ItemTypeId,number>;craftedItemTypes:ItemTypeId[];discoveredComponents:ComponentId[];fragmentConversionRevision:number;
@@ -348,16 +990,20 @@ export const runStartContract=()=>({credits:BALANCE.runStartCredits,hardware:0,h
 export const initializeRun=(s:GameState):GameState=>{const start=runStartContract();return {...s,credits:start.credits,hardware:start.hardware,hardwareCounts:start.hardwareCounts,automation:{...s.automation,elapsed:0,shoppingElapsed:0},exactEconomy:{...s.exactEconomy,credits:start.creditLedger}};};
 /** Effective route to the first paid calculator, including permanent legacy unlocks. */
 export const automaticRestartAvailable=(s:GameState)=>shoppingAgentUnlocked(s)&&s.hardwareAutoBuyers.calculator===true;
-export const newGame=(now=Date.now(),campaignId='unassigned'):GameState=>initializeRun({blueprintMastery:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemCounts:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemTypes:[],discoveredComponents:[],fragmentConversionRevision:0,researchAccessIds:[],researchRepeat:{enabled:false,id:null,targetLevel:1},researchDirector:{enabled:false,entries:[],reservePercent:0,budget:null,spent:{m:0,e:0},mode:'strict',elapsed:0},runTrainingStarted:0,craftingRecycleRemainders:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0},learnedRecipes:[],researchAreas:[],aiName:null,credits:0,data:0,researchPoints:0,axioms:0,availableAxioms:0,totalAxiomsEarned:0,axiomResetCount:0,axiomUpgrades:[],axiomUpgradeLevels:{axiomResonance:0,axiomAutomation:0,axiomArchive:0},exactAxioms:{available:{m:0,e:0},total:{m:0,e:0}},analysisPlanner:{enabled:false,type:'hardware',length:'short',elapsed:0},craftingPlanner:{enabled:false,recipeId:'quantum-chip',target:1,elapsed:0},prestigeAgent:{enabled:false,minimumReward:{m:3,e:0},minimumRunMinutes:60,waitForTraining:true,waitForAnalysis:true,elapsed:0,lastReason:'disabled'},runStartedAt:now,runMilestoneEdges:[],runTrainingCompleted:0,runResearchCompleted:0,insightArchiveBlueprint:false,operatingProfile:'balanced',completedResearch:[],researchLevels:{dataGeneration:0,materialAnalysis:0,blueprintAnalysis:0,modelArchitecture:0,computeOptimization:0,userScaling:0,hardwareIntegration:0,labAutomation:0,commercialization:0,networkEffects:0,parallelArchitecture:0,hardwareCoDesign:0,syntheticData:0,dataFlywheel:0,recursiveLearning:0,autonomousScience:0,tapAmplification:0,dropProtocols:0},researchLabs:[null,null,null,null],researchQueue:[],purchasedResearchLabs:0,hardware:0,hardwareCounts:{calculator:0,sbc:0,pc:0,gpu:0,rig:0,server:0,farm:0,campus:0,cloud:0,liquid:0,subsea:0,orbital:0,lunar:0,dyson:0,matrioshka:0},classUpgrades:[],discovered:[],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,trainingQueue:[],offlineCapacitySeconds:BALANCE.baseOfflineSeconds,savedAt:now,clockOffsetMs:0,runCreditsEarned:0,lifetimeCreditsEarned:0,lifetimeEligibleCredits:0,cycleEligibleCredits:0,prestigeEntitlementClaimed:0,totalINTEarned:0,cycleINTEarned:0,unspentINT:0,spentINT:0,prestigeCount:0,exactEconomy:{credits:{m:0,e:0},data:{m:0,e:0},researchPoints:{m:0,e:0},lifetimeDataGenerated:{m:0,e:0},runCreditsEarned:{m:0,e:0},lifetimeCreditsEarned:{m:0,e:0},lifetimeEligibleCredits:{m:0,e:0},cycleEligibleCredits:{m:0,e:0},prestigeEntitlementClaimed:{m:0,e:0},totalINTEarned:{m:0,e:0},cycleINTEarned:{m:0,e:0},unspentINT:{m:0,e:0},spentINT:{m:0,e:0}},nodes:[],modules:{computeBus:0,dataLattice:0},scannerRewards:[],runRecyclingRewards:[],gems:50,welcomeGiftClaimed:true,components:0,componentInventory:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0},componentRemainder:0,archivePassiveFindCount:0,passiveCircuitProgress:0,worldDropProgress:0,lootDrops:[],researchRemainder:0,blueprintRemainder:0,researchFragments:0,blueprintFragments:0,impulseRelayBlueprint:false,breakthroughs:[],inventory:[],equipped:{},purchasedEquipmentSlots:0,unlockedEquipmentSlots:0,pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false,lastResult:null},crafting:{active:null,queue:[]},automation:{enabled:false,reserve:0,reservePercent:0,shoppingElapsed:0,elapsed:0,target:null},hardwareAutoBuyers:{},scannerTarget:null,retention:{hardwareMasteryXp:Object.fromEntries(hardwareIds.map(id=>[id,0])) as Record<HardwareId,number>,challengeStars:0,claimedChallenges:[],activeRun:null,runCompletions:{},runBestSeconds:{}},season:{id:'season-01',startedAt:now,endsAt:now+30*86400000,xp:0,claimed:[]},previousSeason:null,pinnedGoal:null,profile:{playerName:'Operator',artifacts:[],completedSeasons:[],readMessages:[],inbox:[{id:'progression-v2',title:'Progression V2',body:'Langzeit-Achievements, 6/12/30 Missionen, Hardware-Mastery und der erweiterte INT-Baum sind live.',at:now},{id:'season-01',title:'Season 01 · Boot Sequence',body:'Die erste 30-Tage Neural Season ist gestartet. Erledige Missionen, sammle Season XP und sichere dir das Boot Sequence Core Artifact.',at:now}]},missions:{daily:emptyPeriod(dayKey(now),now),weekly:emptyPeriod(weekKey(now),now),monthly:emptyPeriod('',now),mailbox:[]},lifetime:lifetime(),runMilestoneClasses:[],achievementClaims:[],achievementPoints:0,gemLedger:[],processedGemPurchases:[],trainingBoostUntil:0,labBoostUntil:0,creditBoostUntil:0,overclock:{taps:0,charged:false,activeUntil:0,cooldownUntil:0,channel:'credits'},feedback:{windowStartedAt:now,work:0},onboarding:{completed:[],claimed:[]},legacySpecialization:null,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true,buyMode:1,musicEnabled:false,musicVolume:.25,sfxMuted:false,sfxVolume:.5,hapticsEnabled:false,language:'de',numberFormat:'auto'},testSave:false,nextId:1,telemetry:newTelemetry(now,campaignId),story:newStory()});
+export const newGame=(now=Date.now(),campaignId='unassigned'):GameState=>initializeRun({materials:{families:[],legacyMaterials:[],milestones:[],classUpgrades:[],hardwareRemainders:emptyComponentInventory(),salvageRemainders:emptyComponentInventory(),knownBlueprints:[],researchProgress:{data:0,architecture:0,model:0,materials:0,automation:0},focus:null},foundries:[],deviceProgress:{qualityCompletions:0,efficiencyCompletions:0,lastTrack:null,lastResearchArea:null},challengeStages:{},challengeUnlocks:[],blueprintMastery:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemCounts:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemTypes:[],discoveredComponents:[],fragmentConversionRevision:0,researchAccessIds:[],researchRepeat:{enabled:false,id:null,targetLevel:1},researchDirector:{enabled:false,entries:[],reservePercent:0,budget:null,spent:{m:0,e:0},mode:'strict',elapsed:0},runTrainingStarted:0,craftingRecycleRemainders:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},learnedRecipes:[],researchAreas:[],aiName:null,credits:0,data:0,researchPoints:0,axioms:0,availableAxioms:0,totalAxiomsEarned:0,axiomResetCount:0,axiomUpgrades:[],axiomUpgradeLevels:{axiomResonance:0,axiomAutomation:0,axiomArchive:0},exactAxioms:{available:{m:0,e:0},total:{m:0,e:0}},analysisPlanner:{enabled:false,type:'hardware',length:'short',elapsed:0},craftingPlanner:{enabled:false,recipeId:'quantum-chip',target:1,elapsed:0},prestigeAgent:{enabled:false,minimumReward:{m:3,e:0},minimumRunMinutes:60,waitForTraining:true,waitForAnalysis:true,elapsed:0,lastReason:'disabled'},runStartedAt:now,runMilestoneEdges:[],runTrainingCompleted:0,runResearchCompleted:0,insightArchiveBlueprint:false,operatingProfile:'balanced',completedResearch:[],researchLevels:{dataGeneration:0,materialAnalysis:0,blueprintAnalysis:0,modelArchitecture:0,computeOptimization:0,userScaling:0,hardwareIntegration:0,labAutomation:0,commercialization:0,networkEffects:0,parallelArchitecture:0,hardwareCoDesign:0,syntheticData:0,dataFlywheel:0,recursiveLearning:0,autonomousScience:0,tapAmplification:0,dropProtocols:0},researchLabs:[null,null,null,null],researchQueue:[],purchasedResearchLabs:0,hardware:0,hardwareCounts:{calculator:0,sbc:0,pc:0,gpu:0,rig:0,server:0,farm:0,campus:0,cloud:0,liquid:0,subsea:0,orbital:0,lunar:0,dyson:0,matrioshka:0},classUpgrades:[],discovered:[],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,trainingQueue:[],offlineCapacitySeconds:BALANCE.baseOfflineSeconds,savedAt:now,clockOffsetMs:0,runCreditsEarned:0,lifetimeCreditsEarned:0,lifetimeEligibleCredits:0,cycleEligibleCredits:0,prestigeEntitlementClaimed:0,totalINTEarned:0,cycleINTEarned:0,unspentINT:0,spentINT:0,prestigeCount:0,exactEconomy:{credits:{m:0,e:0},data:{m:0,e:0},researchPoints:{m:0,e:0},lifetimeDataGenerated:{m:0,e:0},runCreditsEarned:{m:0,e:0},lifetimeCreditsEarned:{m:0,e:0},lifetimeEligibleCredits:{m:0,e:0},cycleEligibleCredits:{m:0,e:0},prestigeEntitlementClaimed:{m:0,e:0},totalINTEarned:{m:0,e:0},cycleINTEarned:{m:0,e:0},unspentINT:{m:0,e:0},spentINT:{m:0,e:0}},nodes:[],modules:{computeBus:0,dataLattice:0},scannerRewards:[],runRecyclingRewards:[],gems:50,welcomeGiftClaimed:true,components:0,componentInventory:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},componentRemainder:0,archivePassiveFindCount:0,passiveCircuitProgress:0,worldDropProgress:0,lootDrops:[],researchRemainder:0,blueprintRemainder:0,researchFragments:0,blueprintFragments:0,impulseRelayBlueprint:false,breakthroughs:[],inventory:[],equipped:{},purchasedEquipmentSlots:0,unlockedEquipmentSlots:0,pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false,lastResult:null},crafting:{active:null,queue:[]},automation:{enabled:false,reserve:0,reservePercent:0,shoppingElapsed:0,elapsed:0,target:null},hardwareAutoBuyers:{},scannerTarget:null,retention:{hardwareMasteryXp:Object.fromEntries(hardwareIds.map(id=>[id,0])) as Record<HardwareId,number>,challengeStars:0,claimedChallenges:[],activeRun:null,runCompletions:{},runBestSeconds:{}},season:{id:'season-01',startedAt:now,endsAt:now+30*86400000,xp:0,claimed:[]},previousSeason:null,pinnedGoal:null,profile:{playerName:'Operator',artifacts:[],completedSeasons:[],readMessages:[],inbox:[{id:'progression-v2',title:'Progression V2',body:'Langzeit-Achievements, 6/12/30 Missionen, Hardware-Mastery und der erweiterte INT-Baum sind live.',at:now},{id:'season-01',title:'Season 01 · Boot Sequence',body:'Die erste 30-Tage Neural Season ist gestartet. Erledige Missionen, sammle Season XP und sichere dir das Boot Sequence Core Artifact.',at:now}]},missions:{daily:emptyPeriod(dayKey(now),now),weekly:emptyPeriod(weekKey(now),now),monthly:emptyPeriod('',now),mailbox:[]},lifetime:lifetime(),runMilestoneClasses:[],achievementClaims:[],achievementPoints:0,gemLedger:[],processedGemPurchases:[],trainingBoostUntil:0,labBoostUntil:0,creditBoostUntil:0,overclock:{taps:0,charged:false,activeUntil:0,cooldownUntil:0,channel:'credits'},feedback:{windowStartedAt:now,work:0},onboarding:{completed:[],claimed:[]},legacySpecialization:null,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true,buyMode:1,musicEnabled:false,musicVolume:.25,sfxMuted:false,sfxVolume:.5,hapticsEnabled:false,language:'de',numberFormat:'auto'},testSave:false,nextId:1,telemetry:newTelemetry(now,campaignId),story:newStory()});
 
 export const upgradeLevel=(s:GameState,id:PrestigeUpgradeId)=>s.nodes.includes(id)||s.nodes.includes(`${id}:1`)?1:0;
 export const hasNode=(s:GameState,b:string,t:number)=>upgradeLevel(s,b as PrestigeUpgradeId)>=t;
+export const researchQueueUnlocked=(s:GameState)=>hasNode(s,'labs2',1)||s.challengeUnlocks.includes('research-queue');
+export const researchRepeatUnlocked=(s:GameState)=>hasNode(s,'labs3',1)||s.challengeUnlocks.includes('research-repeat');
+export const trainingQueueUnlocked=(s:GameState)=>hasNode(s,'trainingPlan',1)||s.challengeUnlocks.includes('training-queue');
+export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
 export const deepPrestigeBonus=(s:GameState,branch:'data'|'compute'|'analysis'|'labs'|'manufacturing')=>{const tiers=branch==='data'?['dataArchive4','dataArchive5','dataArchive6','dataArchive7','dataArchive8']:branch==='compute'?['computeNet4','computeNet5','computeNet6','computeNet7','computeNet8']:branch==='analysis'?['analysis4','analysis5','analysis6','analysis7','analysis8']:branch==='labs'?['labs4','labs6','labs7','labs8']:['manufacturing4','manufacturing6','manufacturing7','manufacturing8'];const values=branch==='data'?[.5,1,1.5,2.5,4]:branch==='compute'?[.25,.5,1,1.5,2.5]:branch==='analysis'?[.25,.5,1,1.5,2.5]:branch==='labs'?[.25,.5,1,2]:[.2,.4,.75,1.25];return tiers.reduce((sum,id,i)=>sum+(hasNode(s,id,1)?values[i]:0),0);};
 export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemSlot;effect:ItemEffect}>={
  'impulse-relay':{name:'Impulsrelais',slot:'processor',effect:'relay'},'insight-archive':{name:'Erkenntnisarchiv',slot:'research',effect:'int-yield'},
  'quantum-chip':{name:'Quantenchip',slot:'processor',effect:'compute'},'neural-asic':{name:'Neural-ASIC',slot:'processor',effect:'credits'},'photonic-array':{name:'Photonenfeld',slot:'processor',effect:'training'},
  'memory-crystal':{name:'Speicherkristall',slot:'core',effect:'credits'},'logic-seed':{name:'Logik-Saat',slot:'core',effect:'training'},'tensor-core':{name:'Tensor-Kern',slot:'core',effect:'compute'},
- 'field-scanner':{name:'Feldscanner',slot:'research',effect:'experiment'},'lab-drone':{name:'Labordrohne',slot:'research',effect:'research'},'data-prism':{name:'Datenprisma',slot:'research',effect:'data'}};
+ 'field-scanner':{name:'Feldscanner',slot:'research',effect:'experiment'},'lab-drone':{name:'Labordrohne',slot:'research',effect:'research'},'data-prism':{name:'Datenprisma',slot:'research',effect:'data'},...Object.fromEntries(Object.entries(extendedItemCatalog).map(([id,v])=>[id,{name:v.name,slot:v.slot,effect:v.role}]))} as Record<ItemTypeId,{name:string;slot:ItemSlot;effect:ItemEffect}>;
 export const rarityRank=(r:Rarity)=>(['common','uncommon','rare','epic','legendary','mythic'] as Rarity[]).indexOf(r);
 export const itemEffect=(i:Item)=>BALANCE.itemBaseEffect*BALANCE.rarity[i.rarity].factor*(1+.18*i.level)*(1+.12*(i.forge??0));
 export const equippedItems=(s:GameState)=>Object.values(s.equipped).map(id=>s.inventory.find(i=>i.id===id)).filter((i):i is Item=>!!i);
@@ -372,10 +1018,10 @@ export const itemScalingMultiplier=(s:GameState,i:Item)=>{
 };
 /** Rarity controls effect count: common/uncommon=1, rare/epic=2, legendary/mythic=3. */
 export const itemEffectProfile=(i:Item):ItemEffect[]=>{
- const primary=itemTypes[i.type].effect,rank=rarityRank(i.rarity);
- const secondary:Record<ItemTypeId,ItemEffect>={'impulse-relay':'relay','insight-archive':'int-yield','quantum-chip':'tap','neural-asic':'compute','photonic-array':'tap','memory-crystal':'data','logic-seed':'research','tensor-core':'training','field-scanner':'drop','lab-drone':'data','data-prism':'credits'};
- const tertiary:Record<ItemTypeId,ItemEffect>={'impulse-relay':'relay','insight-archive':'int-yield','quantum-chip':'research','neural-asic':'tap','photonic-array':'credits','memory-crystal':'research','logic-seed':'tap','tensor-core':'credits','field-scanner':'research','lab-drone':'drop','data-prism':'research'};
- return [primary,...(rank>=2?[secondary[i.type]]:[]),...(rank>=4?[tertiary[i.type]]:[])];
+ const primary=itemTypes[i.type].effect,rank=rarityRank(i.rarity),extended=BALANCE.extendedItems[i.type as keyof typeof BALANCE.extendedItems];if(extended)return [primary,...(rank>=2?[extended.secondary]:[]),...(rank>=4?[extended.tertiary]:[])];
+ const secondary:Partial<Record<ItemTypeId,ItemEffect>>={'impulse-relay':'relay','insight-archive':'int-yield','quantum-chip':'tap','neural-asic':'compute','photonic-array':'tap','memory-crystal':'data','logic-seed':'research','tensor-core':'training','field-scanner':'drop','lab-drone':'data','data-prism':'credits'};
+ const tertiary:Partial<Record<ItemTypeId,ItemEffect>>={'impulse-relay':'relay','insight-archive':'int-yield','quantum-chip':'research','neural-asic':'tap','photonic-array':'credits','memory-crystal':'research','logic-seed':'tap','tensor-core':'credits','field-scanner':'research','lab-drone':'drop','data-prism':'research'};
+ return [primary,...(rank>=2?[secondary[i.type]!] :[]),...(rank>=4?[tertiary[i.type]!] :[])];
 };
 export const itemEffectFor=(s:GameState,i:Item,e:ItemEffect)=>{const effects=itemEffectProfile(i);if(!effects.includes(e))return 0;const position=effects.indexOf(e),baseWeight=position===0?1:position===1?.65:.40,prestigeWeight=position===1?(hasNode(s,'analysis6',1)?1.25:1):position===2?(hasNode(s,'analysis7',1)?1.35:1):1;return itemEffect(i)*itemScalingMultiplier(s,i)*baseWeight*prestigeWeight;};
 export const equippedBonus=(s:GameState,e:ItemEffect)=>s.retention.activeRun?.id==='no-items'?0:equippedItems(s).reduce((n,i)=>n+itemEffectFor(s,i,e),0)*(1+deepPrestigeBonus(s,'manufacturing'));
@@ -404,6 +1050,7 @@ export const itemCombinationQuotes=(s:GameState)=>(Object.keys(BALANCE.itemCombi
 export const itemCombinationBonus=(s:GameState,e:'credits'|'research')=>itemCombinationQuote(s,e==='credits'?'compute-credit-link':'training-research-link').contribution;
 
 export const componentIds=Object.keys(BALANCE.components) as ComponentId[];
+export function emptyComponentInventory():ComponentInventory{return Object.fromEntries(componentIds.map(id=>[id,0])) as ComponentInventory;}
 export const componentTotal=(inventory:ComponentInventory)=>componentIds.reduce((sum,id)=>sum+inventory[id],0);
 export function grantComponents(s:GameState,grant:Partial<ComponentInventory>){const componentInventory={...s.componentInventory};for(const id of componentIds)componentInventory[id]+=Math.max(0,Math.floor(grant[id]??0));const gained=componentTotal(componentInventory)-componentTotal(s.componentInventory);const discoveredComponents=[...s.discoveredComponents];for(const id of componentIds)if(componentInventory[id]>s.componentInventory[id]&&!discoveredComponents.includes(id))discoveredComponents.push(id);return{...s,discoveredComponents,componentInventory,components:componentTotal(componentInventory),lifetime:{...s.lifetime,componentsEarned:s.lifetime.componentsEarned+gained}};}
 export function spendComponents(s:GameState,cost:Partial<ComponentInventory>){if(componentIds.some(id=>s.componentInventory[id]<(cost[id]??0)))return s;const componentInventory={...s.componentInventory};for(const id of componentIds)componentInventory[id]-=cost[id]??0;return{...s,componentInventory,components:componentTotal(componentInventory)};}
@@ -449,7 +1096,7 @@ export const legacyInfrastructureMultiplier=(s:GameState)=>{
 export const hardwareOwnershipCreditMultiplier=(s:GameState)=>1+Math.min(BALANCE.scalingSynergy.ownedHundredsCap,hardwareIds.reduce((n,id)=>n+Math.floor(s.hardwareCounts[id]/100),0)*BALANCE.scalingSynergy.ownedHundredsCredit);
 export const infrastructureSynergyBase=(s:GameState)=>BALANCE.scalingSynergy.classSynergyBase+s.researchLevels.hardwareIntegration*BALANCE.scalingSynergy.classSynergyResearchPerLevel+(hasNode(s,'computeNet4',1)?.015:0)+(hasNode(s,'computeNet5',1)?.025:0)+(hasNode(s,'computeNet6',1)?.04:0)+(hasNode(s,'computeNet7',1)?.06:0)+(hasNode(s,'computeNet8',1)?.09:0);
 export const infrastructureSynergyScientific=(s:GameState)=>ScientificNumber.from(infrastructureSynergyBase(s)).pow(s.discovered.length).pow(milestoneSynergy(s).infrastructureExponent);
-export const hardwareOwnershipSynergyScientific=(s:GameState)=>{let result=ScientificNumber.from(1);hardwareIds.forEach((id,index)=>{const count=Math.max(0,s.hardwareCounts[id]),base=BALANCE.scalingSynergy.ownershipBases[index]??.005;if(count>0)result=result.multiply(ScientificNumber.from(1+base).pow(Math.sqrt(count)));});const exponent=1+(hasNode(s,'computeNet4',1)?.05:0)+(hasNode(s,'computeNet7',1)?.05:0)+(hasNode(s,'computeNet8',1)?.10:0);return result.pow(exponent);};
+export const hardwareOwnershipSynergyScientific=(s:GameState)=>{let result=ScientificNumber.from(1);hardwareIds.forEach((id,index)=>{const count=Math.max(0,s.hardwareCounts[id]),base=(BALANCE.scalingSynergy.ownershipBases[index]??.005)*(1+challengeFamilyBonus(s,'inflation'));if(count>0)result=result.multiply(ScientificNumber.from(1+base).pow(Math.sqrt(count)));});const exponent=1+(hasNode(s,'computeNet4',1)?.05:0)+(hasNode(s,'computeNet7',1)?.05:0)+(hasNode(s,'computeNet8',1)?.10:0);return result.pow(exponent);};
 export const lifetimeDataMagnitude=(s:GameState)=>{const exact=exactEconomyValue(s,'lifetimeDataGenerated');if(exact.isZero())return 0;const log=exact.log10();return log<12?Math.log10(1+exact.toNumber()):Math.max(0,log);};
 export const dataSynergyPower=(s:GameState)=>BALANCE.scalingSynergy.dataPowerBase+s.researchLevels.dataGeneration*BALANCE.scalingSynergy.dataPowerResearchPerLevel+BALANCE.scalingSynergy.dataPowerPrestige.reduce<number>((n,v,i)=>n+(hasNode(s,`dataArchive${i+1}`,1)?v:0),0);
 export const dataSynergyScientific=(s:GameState)=>{const d=lifetimeDataMagnitude(s);let x=ScientificNumber.fromParts(1,Math.max(0,dataSynergyPower(s)*d**.72));const exponent=1+(hasNode(s,'dataArchive4',1)?.05:0)+(hasNode(s,'dataArchive5',1)?.05:0)+(hasNode(s,'dataArchive7',1)?.05:0)+(hasNode(s,'dataArchive8',1)?.10:0);return x.pow(exponent*milestoneSynergy(s).dataExponent*(1+s.researchLevels.dataFlywheel*BALANCE.repeatableResearch.dataFlywheel.effectPerLevel));};
@@ -487,11 +1134,11 @@ export const intSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.s
 export const achievementSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.achievementPer25).pow(Math.floor(s.achievementPoints/25)).multiply(ScientificNumber.from(BALANCE.scalingSynergy.achievementPer100).pow(Math.floor(s.achievementPoints/100)));
 export const artifactSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.artifactBase).pow(s.profile.artifacts.length).pow(1+Math.min(.5,s.profile.artifacts.length*.03));
 export const breakthroughSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.breakthroughBase).pow(s.breakthroughs.length).pow(1+Math.min(.35,s.breakthroughs.length*.04));
-export function classComputeTerms(s:GameState,id:HardwareId,count=s.hardwareCounts[id]){const index=hardwareIds.indexOf(id);return{ownedCompute:count*BALANCE.hardware[id].compute,linkedCompute:researchModifiers(s).distributedInference&&index>0&&s.hardwareCounts[hardwareIds[index-1]]>=25?Math.min(count,10)*BALANCE.hardware[id].compute*BALANCE.computeNetworkBonus:0,milestone:milestoneFactor(id,count),classUpgrade:s.classUpgrades.includes(id)?2:1,mastery:1+hardwareMasteryBonus(s,id)};}
+export function classComputeTerms(s:GameState,id:HardwareId,count=s.hardwareCounts[id]){const index=hardwareIds.indexOf(id);return{ownedCompute:count*BALANCE.hardware[id].compute,linkedCompute:researchModifiers(s).distributedInference&&index>0&&index<=(activeChallengeRules(s)?.networkLimit??14)&&s.hardwareCounts[hardwareIds[index-1]]>=25?Math.min(count,10)*BALANCE.hardware[id].compute*BALANCE.computeNetworkBonus*(1+challengeFamilyBonus(s,'no-items')+challengeFamilyBonus(s,'fragmented-network'))*(1+deviceBonus(s,'neighbor')+(index>=hardwareIds.indexOf('campus')?deviceBonus(s,'lateNeighbor'):0)):0,milestone:1+(milestoneFactor(id,count)-1)*(1+((id==='calculator'||id==='sbc')?challengeFamilyBonus(s,'five-hardware'):0)),classUpgrade:(s.classUpgrades.includes(id)?2:1)*((id==='calculator'||id==='sbc')&&count>=10?1+deviceBonus(s,'legacy')*(1+challengeFamilyBonus(s,'five-hardware')):1),mastery:1+hardwareMasteryBonus(s,id)};}
 export const classCompute=(s:GameState,id:HardwareId,count=s.hardwareCounts[id])=>{const terms=classComputeTerms(s,id,count);return(terms.ownedCompute+terms.linkedCompute)*terms.milestone*terms.classUpgrade*terms.mastery;};
 export const prestigeComputePerClass=(s:GameState)=>hasNode(s,'computeNet3',1)?.30:hasNode(s,'computeNet2',1)?.15:hasNode(s,'computeNet1',1)?.08:0;
 export const classComputeScientific=(s:GameState,id:HardwareId,count=s.hardwareCounts[id])=>ScientificNumber.from(Math.max(0,classCompute(s,id,count)));
-export function computeFactors(s:GameState){const tier=Math.max(0,Math.max(0,...s.discovered.map(id=>hardwareIds.indexOf(id)))-7);return {itemCombination:itemCombinationQuote(s,'parallel-architecture').contribution,itemAndMilestoneAdditive:1+equippedBonus(s,'compute')+milestoneBonus(s,'compute')+milestoneBonus(s,'synergy'),prestigePerClass:1+prestigeComputePerClass(s)*s.discovered.length,deepPrestige:1+deepPrestigeBonus(s,'compute'),computeOptimization:ScientificNumber.from(1.16).pow(Math.max(0,s.researchLevels.computeOptimization)),hardwareIntegration:ScientificNumber.from(1.12).pow(Math.max(0,s.researchLevels.hardwareIntegration)*tier),parallelArchitecture:ScientificNumber.from(1+BALANCE.repeatableResearch.parallelArchitecture.effectPerLevel).pow(s.researchLevels.parallelArchitecture*s.discovered.length),hardwareCoDesign:ScientificNumber.from(1+BALANCE.repeatableResearch.hardwareCoDesign.effectPerLevel).pow(s.researchLevels.hardwareCoDesign*Math.max(0,s.level)*s.discovered.length),milestoneSynergy:milestoneSynergy(s).compute,legacyInfrastructure:legacyInfrastructureMultiplier(s),hardwareOwnership:hardwareOwnershipSynergyScientific(s),infrastructure:infrastructureSynergyScientific(s),model:modelSynergyScientific(s).pow(.20)};}
+export function computeFactors(s:GameState){const tier=Math.max(0,Math.max(0,...s.discovered.map(id=>hardwareIds.indexOf(id)))-7);return {deviceCompute:1+deviceBonus(s,'sparse')+deviceBonus(s,'photonicCompute')+deviceBonus(s,'pairs'),itemCombination:itemCombinationQuote(s,'parallel-architecture').contribution,itemAndMilestoneAdditive:1+equippedBonus(s,'compute')+milestoneBonus(s,'compute')+milestoneBonus(s,'synergy'),prestigePerClass:1+prestigeComputePerClass(s)*s.discovered.length,deepPrestige:1+deepPrestigeBonus(s,'compute'),computeOptimization:ScientificNumber.from(1.16).pow(Math.max(0,s.researchLevels.computeOptimization)),hardwareIntegration:ScientificNumber.from(1.12).pow(Math.max(0,s.researchLevels.hardwareIntegration)*tier),parallelArchitecture:ScientificNumber.from(1+BALANCE.repeatableResearch.parallelArchitecture.effectPerLevel).pow(s.researchLevels.parallelArchitecture*s.discovered.length),hardwareCoDesign:ScientificNumber.from(1+BALANCE.repeatableResearch.hardwareCoDesign.effectPerLevel).pow(s.researchLevels.hardwareCoDesign*Math.max(0,s.level)*s.discovered.length),milestoneSynergy:milestoneSynergy(s).compute,legacyInfrastructure:legacyInfrastructureMultiplier(s),hardwareOwnership:hardwareOwnershipSynergyScientific(s),infrastructure:infrastructureSynergyScientific(s),model:modelSynergyScientific(s).pow(.20)};}
 export const computeRateScientific=(_hardware:number,s?:GameState)=>{if(!s)return ScientificNumber.from(Math.max(0,_hardware));let base=ScientificNumber.zero();for(const id of hardwareIds)base=base.add(classComputeScientific(s,id));return scientificProduct(base,...Object.values(computeFactors(s)));};
 export const computeRate=(_hardware:number,s?:GameState)=>computeRateScientific(_hardware,s).toNumber(MAX_ECONOMY_VALUE);
 /** Legacy helpers retained for v1 tests/imports and mapped to calculators. */
@@ -500,7 +1147,7 @@ export const bulkCost=(owned:number,count:number,s?:GameState)=>hardwareBulkCost
 export const softcap=(x:number,k:number)=>x<=k?x:k+Math.sqrt(k*(x-k));
 export const quality=(level:number)=>1+softcap(BALANCE.modelQualityPerLevel*Math.max(0,level),BALANCE.qualitySoftcap);
 export const efficiency=(level:number)=>1+softcap(BALANCE.modelEfficiencyPerLevel*Math.max(0,level),BALANCE.efficiencySoftcap);
-export const usersFactors=(s:GameState)=>({efficiencyPerCompute:efficiency(s.efficiencyLevel)/BALANCE.computePerUser,milestoneUsers:1+milestoneBonus(s,'users'),userScaling:ScientificNumber.from(1.14).pow(Math.max(0,s.researchLevels.userScaling)),infrastructure:infrastructureSynergyScientific(s).pow(.25),milestoneSynergy:milestoneSynergy(s).users});
+export const usersFactors=(s:GameState)=>({efficiencyPerCompute:(1+(efficiency(s.efficiencyLevel)-1)*(1+challengeFamilyBonus(s,'efficiency-lock')))/BALANCE.computePerUser,milestoneUsers:1+milestoneBonus(s,'users'),userScaling:ScientificNumber.from(1.14).pow(Math.max(0,s.researchLevels.userScaling)),infrastructure:infrastructureSynergyScientific(s).pow(.25),milestoneSynergy:milestoneSynergy(s).users});
 export const usersRateScientific=(s:GameState)=>scientificProduct(computeRateScientific(s.hardware,s),...Object.values(usersFactors(s)));
 export const usersRate=(s:GameState)=>usersRateScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const repeatableResearchIds=Object.keys(BALANCE.repeatableResearch) as RepeatableResearchId[];
@@ -526,13 +1173,13 @@ export const repeatableResearchDataCostScientific=(id:RepeatableResearchId,level
 export const repeatableResearchDataCost=(id:RepeatableResearchId,level:number)=>repeatableResearchDataCostScientific(id,level).toNumber(MAX_ECONOMY_VALUE);
 export const dataResearchMultiplier=(level:number)=>Math.min(1e120,1.18**Math.max(0,level));
 export const prestigeDataBonus=(s:GameState)=>hasNode(s,'dataArchive3',1)?1.25:hasNode(s,'dataArchive2',1)?.60:hasNode(s,'dataArchive1',1)?.25:0;
-export const dataBonusTerms=(s:GameState)=>({milestones:ScientificNumber.from(Math.max(0,milestoneBonus(s,'data'))),dataGeneration:ScientificNumber.from(1.18).pow(Math.max(0,s.researchLevels.dataGeneration)).subtract(ScientificNumber.from(1)),syntheticData:ScientificNumber.from(1+BALANCE.repeatableResearch.syntheticData.effectPerLevel).pow(s.researchLevels.syntheticData*Math.max(0,s.level)).subtract(ScientificNumber.from(1)),milestoneSynergy:ScientificNumber.from(Math.max(0,milestoneSynergy(s).data-1)),prestige:ScientificNumber.from(Math.max(0,prestigeDataBonus(s))),deepPrestige:ScientificNumber.from(Math.max(0,deepPrestigeBonus(s,'data'))),items:ScientificNumber.from(1+equippedBonus(s,'data')).pow(itemSynergyExponent(s)).subtract(ScientificNumber.from(1)),model:modelSynergyScientific(s).pow(.10).subtract(ScientificNumber.from(1))});
+export const dataBonusTerms=(s:GameState)=>({milestones:ScientificNumber.from(Math.max(0,milestoneBonus(s,'data'))*(1+challengeFamilyBonus(s,'data-crunch'))),dataGeneration:ScientificNumber.from(1.18).pow(Math.max(0,s.researchLevels.dataGeneration)).subtract(ScientificNumber.from(1)),syntheticData:ScientificNumber.from(1+BALANCE.repeatableResearch.syntheticData.effectPerLevel).pow(s.researchLevels.syntheticData*Math.max(0,s.level)).subtract(ScientificNumber.from(1)),milestoneSynergy:ScientificNumber.from(Math.max(0,milestoneSynergy(s).data-1)),prestige:ScientificNumber.from(Math.max(0,prestigeDataBonus(s))),deepPrestige:ScientificNumber.from(Math.max(0,deepPrestigeBonus(s,'data'))),items:ScientificNumber.from(1+equippedBonus(s,'data')).pow(itemSynergyExponent(s)).subtract(ScientificNumber.from(1)),model:modelSynergyScientific(s).pow(.10).subtract(ScientificNumber.from(1))});
 export const dataRawBonusScientific=(s:GameState)=>Object.values(dataBonusTerms(s)).reduce((sum,bonus)=>sum.add(bonus),ScientificNumber.zero());
 export const dataSoftBonusScientific=(rawBonus:ScientificNumber)=>{const threshold=ScientificNumber.from(BALANCE.dataBonusScale);return rawBonus.compare(threshold)<=0?rawBonus:threshold.add(rawBonus.subtract(threshold).multiply(threshold).sqrt());};
 export const dataMultiplierScientific=(rawBonus:ScientificNumber)=>ScientificNumber.from(1).add(dataSoftBonusScientific(rawBonus));
 export const dataMultiplier=(s:GameState)=>dataMultiplierScientific(dataRawBonusScientific(s)).toNumber();
 export const baseDataRateScientific=(users:ScientificNumber)=>users.pow(.5).multiplyNumber(BALANCE.baseDataPerSecond);
-export function dataProductionQuote(s:GameState){const sources=dataBonusTerms(s),rawBonus=Object.values(sources).reduce((sum,v)=>sum.add(v),ScientificNumber.zero()),baseRate=baseDataRateScientific(usersRateScientific(s)),multiplier=dataMultiplierScientific(rawBonus),challengeFactor=s.retention.activeRun?.id==='data-crunch'?.1:1;return{baseRate,sources,rawBonus,multiplier,challengeFactor,rate:scientificProduct(baseRate,multiplier,challengeFactor)};}
+export function dataProductionQuote(s:GameState){const sources=dataBonusTerms(s),rawBonus=Object.values(sources).reduce((sum,v)=>sum.add(v),ScientificNumber.zero()),baseRate=baseDataRateScientific(usersRateScientific(s)),multiplier=dataMultiplierScientific(rawBonus),challengeFactor=activeChallengeRules(s)?.dataFactor??1;return{baseRate,sources,rawBonus,multiplier,challengeFactor,rate:scientificProduct(baseRate,multiplier,challengeFactor)};}
 export const dataRateScientific=(s:GameState)=>dataProductionQuote(s).rate;
 export function dataProductionComparison(before:GameState,after:GameState){const a=dataProductionQuote(before),b=dataProductionQuote(after);return{before:a,after:b,direction:b.rate.compare(a.rate),relativeGain:a.rate.isZero()?null:b.rate.compare(a.rate)>=0?b.rate.divide(a.rate).subtract(ScientificNumber.from(1)):ScientificNumber.from(1).subtract(b.rate.divide(a.rate)),sameRoundedDisplay:formatScientific(a.rate,2)===formatScientific(b.rate,2)};}
 export const dataRate=(s:GameState)=>dataRateScientific(s).toNumber(MAX_ECONOMY_VALUE);
@@ -569,7 +1216,7 @@ export const creditMultiplierFromAxiomsScientific=(s:GameState)=>axiomEconomyVal
 /** Bounded compatibility/display projection; production uses the scientific value. */
 export const creditMultiplierFromAxioms=(s:GameState)=>creditMultiplierFromAxiomsScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const permanentFactor=creditMultiplierFromINT;
-export function creditFactors(s:GameState,now=s.savedAt,temporary=true){const architecture=ScientificNumber.from(1+BALANCE.repeatableResearch.modelArchitecture.effectPerLevel).pow(Math.max(0,s.researchLevels.modelArchitecture));const itemCredits=ScientificNumber.from(1+equippedBonus(s,'credits')+itemCombinationBonus(s,'credits')).pow(itemSynergyExponent(s)*milestoneSynergy(s).itemExponent);const commercialization=ScientificNumber.from(1+BALANCE.repeatableResearch.commercialization.effectPerLevel).pow(s.researchLevels.commercialization),userLog=Math.max(0,usersRateScientific(s).log10()),network=ScientificNumber.fromParts(1,Math.max(0,BALANCE.repeatableResearch.networkEffects.effectPerLevel*s.researchLevels.networkEffects*userLog**.8));return {baseRevenuePerUser:BALANCE.baseRevenuePerUser,quality:quality(s.qualityLevel),INT:creditMultiplierFromINT(s),axioms:creditMultiplierFromAxiomsScientific(s),modelArchitecture:architecture,commercialization:commercialization,networkEffects:network,milestoneRevenue:milestoneSynergy(s).revenue,items:itemCredits,hardwareOwnership:hardwareOwnershipCreditMultiplier(s),infrastructure:infrastructureSynergyScientific(s),lifetimeData:dataSynergyScientific(s),model:modelSynergyScientific(s),achievements:achievementSynergyScientific(s),artifacts:artifactSynergyScientific(s),breakthroughs:breakthroughSynergyScientific(s),temporary:temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='credits'?1:0):1};}
+export function creditFactors(s:GameState,now=s.savedAt,temporary=true){const architecture=ScientificNumber.from(1+BALANCE.repeatableResearch.modelArchitecture.effectPerLevel).pow(Math.max(0,s.researchLevels.modelArchitecture));const itemCredits=ScientificNumber.from(1+equippedBonus(s,'credits')+itemCombinationBonus(s,'credits')).pow(itemSynergyExponent(s)*milestoneSynergy(s).itemExponent);const commercialization=ScientificNumber.from(1+BALANCE.repeatableResearch.commercialization.effectPerLevel).pow(s.researchLevels.commercialization),userLog=Math.max(0,usersRateScientific(s).log10()),network=ScientificNumber.fromParts(1,Math.max(0,BALANCE.repeatableResearch.networkEffects.effectPerLevel*s.researchLevels.networkEffects*userLog**.8));return {baseRevenuePerUser:BALANCE.baseRevenuePerUser,quality:1+(quality(s.qualityLevel)-1)*(1+challengeFamilyBonus(s,'quality-lock')),INT:creditMultiplierFromINT(s),axioms:creditMultiplierFromAxiomsScientific(s),modelArchitecture:architecture,commercialization:commercialization,networkEffects:network,milestoneRevenue:milestoneSynergy(s).revenue,items:itemCredits,hardwareOwnership:hardwareOwnershipCreditMultiplier(s),infrastructure:infrastructureSynergyScientific(s),lifetimeData:dataSynergyScientific(s),model:modelSynergyScientific(s),achievements:achievementSynergyScientific(s),artifacts:artifactSynergyScientific(s),breakthroughs:breakthroughSynergyScientific(s),devicePassive:1+deviceBonus(s,'memory'),temporary:temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='credits'?1+deviceBonus(s,'burst'):0):1};}
 export const creditRateScientific=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>{if(!s)return ScientificNumber.from(Math.max(0,hardware*BALANCE.baseRevenuePerUser*quality(level)));return scientificProduct(usersRateScientific(s),...Object.values(creditFactors(s,now,temporary)));};
 export const creditRate=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>creditRateScientific(hardware,level,s,now,temporary).toNumber(MAX_ECONOMY_VALUE);
 export const equipmentSlots=['processor','core','research'] as const;
@@ -604,7 +1251,7 @@ export function trainingCostBonusSources(s:GameState,now=s.savedAt){
 export const scientificCeil=(value:ScientificNumber)=>value.isZero()||value.exponent>=16?value:ScientificNumber.from(Math.ceil(value.toNumber()));
 export const trainingBaseDataCostScientific=(targetLevel:number)=>ScientificNumber.from(BALANCE.trainingDataBase).multiply(ScientificNumber.from(BALANCE.trainingDataGrowth).pow(targetLevel-1));
 export function trainingCostQuote(s:GameState,track:TrainingTrack,now=s.savedAt){
- const targetLevel=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,sources=trainingCostBonusSources(s,now),bonusTotal=Object.values(sources).reduce((sum,value)=>sum+value,0),factor=Math.max(BALANCE.trainingCostFloor,1/(1+bonusTotal)),baseCost=trainingBaseDataCostScientific(targetLevel),cost=scientificCeil(baseCost.multiplyNumber(factor));
+ const targetLevel=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,sources:Record<string,number>={...trainingCostBonusSources(s,now),...(s.deviceProgress.lastTrack&&s.deviceProgress.lastTrack!==track?{'device:curriculum':deviceBonus(s,'curriculum')}:{})},bonusTotal=Object.values(sources).reduce((sum,value)=>sum+value,0),factor=Math.max(BALANCE.trainingCostFloor,1/(1+bonusTotal)),baseCost=trainingBaseDataCostScientific(targetLevel),cost=scientificCeil(baseCost.multiplyNumber(factor));
  return{targetLevel,sources,bonusTotal,factor,baseCost,cost,discount:1-factor,capped:factor===BALANCE.trainingCostFloor};
 }
 /** Same rounded prices with only the additional build contribution removed; individual effects stay. */
@@ -617,14 +1264,14 @@ export const trainingDataCost=(s:GameState,track:TrainingTrack)=>trainingDataCos
 export function trainingDurationQuote(s:GameState,track?:TrainingTrack){const baseDuration=trainingDurationSeconds((track==='quality'?s.qualityLevel:track==='efficiency'?s.efficiencyLevel:s.level)+1),modifiers=researchModifiers(s),alignment=modifiers.alignment,modelTransfer=modifiers.modelTransfer;return{baseDuration,alignment,modelTransfer,runStart:s.runTrainingStarted+1,duration:baseDuration*alignment*modelTransfer};}
 export const trainingWork=(s:GameState,track?:TrainingTrack)=>trainingDurationQuote(s,track).duration;
 export function trainingPreview(s:GameState,track:TrainingTrack){
- const valid=track==='quality'||track==='efficiency',level=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,quote=trainingCostQuote(s,track),cost=valid?quote.cost:ScientificNumber.zero(),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),reason=!ledgerValid?'invalid-resources':!valid?'invalid-track':s.activeTraining?'training-active':!resources.affordable?'data':null;
+ const valid=track==='quality'||track==='efficiency',level=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,quote=trainingCostQuote(s,track),cost=valid?quote.cost:ScientificNumber.zero(),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),reason=track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked?'challenge-rule':!ledgerValid?'invalid-resources':!valid?'invalid-track':s.activeTraining?'training-active':!resources.affordable?'data':null;
  return{...quote,durationBasis:trainingDurationQuote(s,track),track,level,cost,duration:trainingWork(s,track),resources,reason,allowed:reason===null,effect:track==='quality'?quality(level)/quality(level-1):efficiency(level)/efficiency(level-1)};
 }
-export function startTraining(s:GameState,track:TrainingTrack){const preview=trainingPreview(s,track);if(!preview.allowed)return s;const dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),duration=preview.duration;const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,runTrainingStarted:s.runTrainingStarted+1,training:0,activeTraining:{track,durationBasis:preview.durationBasis,costBasis:{targetLevel:preview.targetLevel,baseDataCostExact:preview.baseCost.toJSON(),factor:preview.factor,bonusTotal:preview.bonusTotal,sources:preview.sources},creditCost:0,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{track,baseDataCostExact:preview.baseCost.toScientificString(16),trainingCostFactor:preview.factor,trainingBonusTotal:preview.bonusTotal,trainingBonusSources:JSON.stringify(preview.sources),creditCost:0,dataCost,level:track==='quality'?s.qualityLevel:s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
-export function queueTraining(s:GameState,track:TrainingTrack){if(!hasNode(s,'trainingPlan',1)||s.trainingQueue.length>=2)return s;const base=track==='quality'?s.qualityLevel:s.efficiencyLevel,active=s.activeTraining?.track===track?1:0,planned=s.trainingQueue.filter(job=>job.track===track).length,targetLevel=base+active+planned+1;return{...s,trainingQueue:[...s.trainingQueue,{track,targetLevel}]};}
+export function startTraining(s:GameState,track:TrainingTrack){if(track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked)return s;const preview=trainingPreview(s,track);if(!preview.allowed)return s;const dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),duration=preview.duration;const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,deviceProgress:{...s.deviceProgress,lastTrack:track},runTrainingStarted:s.runTrainingStarted+1,training:0,activeTraining:{track,durationBasis:preview.durationBasis,costBasis:{targetLevel:preview.targetLevel,baseDataCostExact:preview.baseCost.toJSON(),factor:preview.factor,bonusTotal:preview.bonusTotal,sources:preview.sources},creditCost:0,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{track,baseDataCostExact:preview.baseCost.toScientificString(16),trainingCostFactor:preview.factor,trainingBonusTotal:preview.bonusTotal,trainingBonusSources:JSON.stringify(preview.sources),creditCost:0,dataCost,level:track==='quality'?s.qualityLevel:s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
+export function queueTraining(s:GameState,track:TrainingTrack){if(!trainingQueueUnlocked(s)||s.trainingQueue.length>=2)return s;const base=track==='quality'?s.qualityLevel:s.efficiencyLevel,active=s.activeTraining?.track===track?1:0,planned=s.trainingQueue.filter(job=>job.track===track).length,targetLevel=base+active+planned+1;return{...s,trainingQueue:[...s.trainingQueue,{track,targetLevel}]};}
 export function removeQueuedTraining(s:GameState,index:number){if(index<0||index>=s.trainingQueue.length)return s;const removed=s.trainingQueue[index],queue=s.trainingQueue.filter((job,i)=>i<index||job.track!==removed.track);return{...s,trainingQueue:queue};}
 export function startQueuedTrainingIfAffordable(s:GameState){if(s.activeTraining||!s.trainingQueue.length)return s;const job=s.trainingQueue[0],level=job.track==='quality'?s.qualityLevel:s.efficiencyLevel;if(job.targetLevel!==level+1)return s;const started=startTraining(s,job.track);return started===s?s:{...started,trainingQueue:s.trainingQueue.slice(1)};}
-export function passiveComponentWeights(s:GameState){const accessible=componentIds.slice(0,Math.max(1,Math.min(componentIds.length,s.discovered.length))),target=hasNode(s,'componentScanner',1)&&s.scannerTarget&&accessible.includes(s.scannerTarget)?s.scannerTarget:null,total=accessible.reduce((sum,id)=>sum+BALANCE.componentSources.hardware[id]*(id===target?2:1),0);return accessible.map(id=>({id,weight:BALANCE.componentSources.hardware[id]*(id===target?2:1),chance:BALANCE.componentSources.hardware[id]*(id===target?2:1)/total,source:BALANCE.components[id].source}));}
+export function passiveComponentWeights(s:GameState){const accessible=(['circuits','copperCoils','siliconWafers','titaniumBolts','photonicLenses','graphene','nanotubes','superconductors','neuralCrystals','quantumCores'] as ComponentId[]).slice(0,Math.max(1,Math.min(componentIds.length,s.discovered.length))),target=hasNode(s,'componentScanner',1)&&s.scannerTarget&&accessible.includes(s.scannerTarget)?s.scannerTarget:null,total=accessible.reduce((sum,id)=>sum+BALANCE.componentSources.hardware[id]*(id===target?2:1),0);return accessible.map(id=>({id,weight:BALANCE.componentSources.hardware[id]*(id===target?2:1),chance:BALANCE.componentSources.hardware[id]*(id===target?2:1)/total,source:BALANCE.components[id].source}));}
 export function rollPassiveComponent(s:GameState,rng=Math.random){const table=passiveComponentWeights(s);let roll=rng(),picked=table.at(-1)!.id;for(const row of table){roll-=row.chance;if(roll<=0){picked=row.id;break;}}return picked;}
 export function selectScannerTarget(s:GameState,target:ComponentId|null){return !hasNode(s,'componentScanner',1)||target!==null&&!passiveComponentWeights({...s,scannerTarget:null}).some(row=>row.id===target)?s:{...s,scannerTarget:target};}
 export const axiomThresholdScientific=()=>ScientificNumber.fromJSON(BALANCE.axiom.threshold);
@@ -647,10 +1294,10 @@ export const newResearchKeys=['dataPipeline','distributedInference','modelTransf
 export const researchDuration=(id:ResearchProjectId)=>newResearchKeys.includes(id as typeof newResearchKeys[number])?BALANCE.researchKeyDurationSeconds:researchDurationForLevel(researchCategory(id),1);
 export const researchProjectDataCostScientific=(id:ResearchProjectId)=>researchDataCostForLevelScientific(researchCategory(id),newResearchKeys.includes(id as typeof newResearchKeys[number])?BALANCE.researchKeyPricePower+1:1);
 export const researchProjectDataCost=(id:ResearchProjectId)=>researchProjectDataCostScientific(id).toNumber(MAX_ECONOMY_VALUE);
-export const researchLabCount=(s:GameState)=>Math.min(BALANCE.researchLabMax,1+(hasNode(s,'labs1',1)?1:0)+s.purchasedResearchLabs);
-export function researchModifiers(s:GameState){return{alignment:s.completedResearch.includes('alignment')?BALANCE.researchAlignmentFactor:1,modelTransfer:s.completedResearch.includes('modelTransfer')&&s.runTrainingStarted<BALANCE.researchTransferStarts?BALANCE.researchTransferFactor:1,analysisCost:s.completedResearch.includes('dataPipeline')?BALANCE.researchAnalysisCostFactor:1,distributedInference:s.completedResearch.includes('distributedInference')||hasNode(s,'computeNetwork',1),materialRecycling:s.completedResearch.includes('materialRecycling')?BALANCE.researchRecyclingFraction:0,queueCapacity:s.completedResearch.includes('operations')?4:2,director:hasNode(s,'labs4',1)&&s.completedResearch.includes('researchScheduling')};}
+export const researchLabCount=(s:GameState)=>Math.min(activeChallengeRules(s)?.labs??BALANCE.researchLabMax,1+(hasNode(s,'labs1',1)?1:0)+s.purchasedResearchLabs);
+export function researchModifiers(s:GameState){return{alignment:s.completedResearch.includes('alignment')?BALANCE.researchAlignmentFactor:1,modelTransfer:s.completedResearch.includes('modelTransfer')&&s.runTrainingStarted<BALANCE.researchTransferStarts?BALANCE.researchTransferFactor:1,analysisCost:s.completedResearch.includes('dataPipeline')?BALANCE.researchAnalysisCostFactor:1,distributedInference:s.completedResearch.includes('distributedInference')||hasNode(s,'computeNetwork',1),materialRecycling:s.completedResearch.includes('materialRecycling')?Math.min(BALANCE.recoveryFraction,BALANCE.researchRecyclingFraction*(1+challengeFamilyBonus(s,'closed-supply-chain'))):0,queueCapacity:s.completedResearch.includes('operations')?4:2,director:hasNode(s,'labs4',1)&&s.completedResearch.includes('researchScheduling')};}
 /** Applied permanent contributions only; economic magnitudes stay scientific. */
-export function researchPerformanceQuote(s:GameState,now=s.savedAt){
+export function researchPerformanceQuote(s:GameState,now=s.savedAt,id?:ResearchId){
  const sources:Record<string,ScientificNumber>={};
  if(s.retention.activeRun?.id!=='no-items'){
   const amplifier=1+deepPrestigeBonus(s,'manufacturing');
@@ -662,11 +1309,11 @@ export function researchPerformanceQuote(s:GameState,now=s.savedAt){
  }
  for(const id of hardwareIds)for(const m of reachedMilestones(id,s.hardwareCounts[id]))if(m.effect==='research')sources[`hardware:${id}:${m.threshold}`]=ScientificNumber.from(m.value);
  // The existing generic research milestone contribution is a separate permanent source.
- const milestone=milestoneSynergy(s).research-1;if(milestone>0)sources['hardware:milestone-synergy']=ScientificNumber.from(milestone);
+ const milestone=milestoneSynergy(s).research-1;if(milestone>0)sources['hardware:milestone-synergy']=ScientificNumber.from(milestone*(1+challengeFamilyBonus(s,'serial-science')));
  const achievement=Math.min(BALANCE.achievementResearchCap,Math.floor(s.achievementPoints/10)*BALANCE.achievementResearchPerTen);if(achievement>0)sources.achievements=ScientificNumber.from(achievement);
  const labs=deepPrestigeBonus(s,'labs');if(labs>0)sources['prestige:deep-labs']=ScientificNumber.from(labs);
  if(s.researchLevels.autonomousScience>0)sources.autonomousScience=ScientificNumber.from(s.researchLevels.autonomousScience).multiplyNumber(BALANCE.researchAutonomousPerLevel);
- const bonusTotal=Object.values(sources).reduce((sum,v)=>sum.add(v),ScientificNumber.zero()),laborFactor=1+bonusTotal.add(ScientificNumber.from(1)).log10()*Math.LN10,temporaryFactors={labBoost:s.labBoostUntil>now?2:1,overclock:s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='research'?2:1};
+ const bonusTotal=Object.values(sources).reduce((sum,v)=>sum.add(v),ScientificNumber.zero()),laborFactor=1+bonusTotal.add(ScientificNumber.from(1)).log10()*Math.LN10,temporaryFactors={deviceSwitch:id&&s.deviceProgress.lastResearchArea&&researchAreaFor(id)!==s.deviceProgress.lastResearchArea?1+deviceBonus(s,'areaSwitch'):1,labBoost:s.labBoostUntil>now?2:1,overclock:s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='research'?2:1};
  return{sources,bonusTotal,laborFactor,temporaryFactors};
 }
 export function researchPrerequisites(id:ResearchId):{id:ResearchId;level:number}[]{
@@ -678,22 +1325,22 @@ export const researchMissingRequirements=(s:GameState,id:ResearchId)=>researchPr
 export const researchRequirement=(s:GameState,id:ResearchId)=>researchMissingRequirements(s,id)[0]?.id??null;
 export function researchQuote(s:GameState,id:ResearchId){
  const repeat=isRepeatableResearch(id),known=repeat||Object.hasOwn(BALANCE.researchProjects,id);if(!known)return null;
- const level=repeat?s.researchLevels[id]+1:1,slot=s.researchLabs.findIndex((x,i)=>i<researchLabCount(s)&&x===null),requirements=researchMissingRequirements(s,id),requirement=requirements[0]?.id??null,running=s.researchLabs.find(x=>x?.id===id),done=!repeat&&s.completedResearch.includes(id),cost=repeat?repeatableResearchDataCostScientific(id,level):researchProjectDataCostScientific(id),access=researchAccess(s,id),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),performance=researchPerformanceQuote(s),baseDuration=repeat?repeatableResearchDuration(id,level):researchDuration(id),rawDuration=baseDuration/performance.laborFactor/performance.temporaryFactors.labBoost/performance.temporaryFactors.overclock,duration=Math.max(BALANCE.researchMinimumSeconds,rawDuration),reason=!ledgerValid?'invalid-resources':!access.allowed?'area':requirement?'requirement':done?'completed':running?'running':slot<0?'lab':!resources.affordable?'data':null;
+ const level=repeat?s.researchLevels[id]+1:1,slot=s.researchLabs.findIndex((x,i)=>i<researchLabCount(s)&&x===null),requirements=researchMissingRequirements(s,id),requirement=requirements[0]?.id??null,running=s.researchLabs.find(x=>x?.id===id),done=!repeat&&s.completedResearch.includes(id),cost=repeat?repeatableResearchDataCostScientific(id,level):researchProjectDataCostScientific(id),access=researchAccess(s,id),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),performance=researchPerformanceQuote(s,s.savedAt,id),baseDuration=repeat?repeatableResearchDuration(id,level):researchDuration(id),rawDuration=baseDuration/performance.laborFactor/performance.temporaryFactors.labBoost/performance.temporaryFactors.overclock/performance.temporaryFactors.deviceSwitch,duration=Math.max(BALANCE.researchMinimumSeconds,rawDuration),reason=!ledgerValid?'invalid-resources':!access.allowed?'area':requirement?'requirement':done?'completed':running?'running':slot<0?'lab':!resources.affordable?'data':null;
  return{id,access,level,slot,requirements,requirement,running,done,cost,resources,baseDuration,...performance,minimumApplied:rawDuration<=BALANCE.researchMinimumSeconds,duration,reason,allowed:reason===null};
 }
 export const researchPreview=researchQuote;
 export const researchDurationAtStart=(s:GameState,id:ResearchId,_level:number)=>researchQuote(s,id)!.duration;
 export const researchQueueCapacity=(s:GameState)=>researchModifiers(s).queueCapacity;
-export function researchQueuePreview(s:GameState,id:ResearchId){const quote=researchQuote(s,id),reason=!quote?'unknown':!hasNode(s,'labs2',1)?'locked':!quote.access.allowed?'area':quote.done?'completed':quote.requirement?'requirement':quote.running?'running':s.researchQueue.includes(id)?'queued':s.researchQueue.length>=researchQueueCapacity(s)?'full':null;return{allowed:reason===null,reason,level:quote?.level??1};}
+export function researchQueuePreview(s:GameState,id:ResearchId){const quote=researchQuote(s,id),reason=!quote?'unknown':!researchQueueUnlocked(s)?'locked':!quote.access.allowed?'area':quote.done?'completed':quote.requirement?'requirement':quote.running?'running':s.researchQueue.includes(id)?'queued':s.researchQueue.length>=researchQueueCapacity(s)?'full':null;return{allowed:reason===null,reason,level:quote?.level??1};}
 export function queueResearchProject(s:GameState,id:ResearchId){return researchQueuePreview(s,id).allowed?{...s,researchQueue:[...s.researchQueue,id]}:s;}
 export function removeQueuedResearch(s:GameState,target:number|string){const index=typeof target==='string'?s.researchQueue.findIndex(id=>id===target):target;return !Number.isSafeInteger(index)||index<0||index>=s.researchQueue.length?s:{...s,researchQueue:s.researchQueue.filter((_,i)=>i!==index)};}
-export function startResearchProject(s:GameState,id:ResearchId){const preview=researchQuote(s,id);if(!preview?.allowed)return s;const {slot,level,duration}=preview,dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),jobId=`research-${s.nextId}`,quoteBasis:ResearchStartBasis={baseDuration:preview.baseDuration,sources:Object.fromEntries(Object.entries(preview.sources).map(([id,v])=>[id,v.toJSON()])),bonusTotal:preview.bonusTotal.toJSON(),laborFactor:preview.laborFactor,temporaryFactors:preview.temporaryFactors,minimumApplied:preview.minimumApplied};const labs=[...s.researchLabs];labs[slot]={id,jobId,quoteBasis,level,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,durationSeconds:duration,dataCost,dataCostExact:dataCostExact.toJSON()};const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,nextId:s.nextId+1,researchLabs:labs,lifetime:{...s.lifetime,researchStarted:s.lifetime.researchStarted+1}},'research-start',s.savedAt,{id,jobId,level,labId:slot,dataCost,durationSeconds:duration,baseDuration:preview.baseDuration,quoteBasis:JSON.stringify(quoteBasis),startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
+export function startResearchProject(s:GameState,id:ResearchId){const preview=researchQuote(s,id);if(!preview?.allowed)return s;const {slot,level,duration}=preview,dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),jobId=`research-${s.nextId}`,quoteBasis:ResearchStartBasis={baseDuration:preview.baseDuration,sources:Object.fromEntries(Object.entries(preview.sources).map(([id,v])=>[id,v.toJSON()])),bonusTotal:preview.bonusTotal.toJSON(),laborFactor:preview.laborFactor,temporaryFactors:preview.temporaryFactors,minimumApplied:preview.minimumApplied};const labs=[...s.researchLabs];labs[slot]={id,jobId,quoteBasis,level,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,durationSeconds:duration,dataCost,dataCostExact:dataCostExact.toJSON()};const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,deviceProgress:{...s.deviceProgress,lastResearchArea:researchAreaFor(id)??null},nextId:s.nextId+1,researchLabs:labs,lifetime:{...s.lifetime,researchStarted:s.lifetime.researchStarted+1}},'research-start',s.savedAt,{id,jobId,level,labId:slot,dataCost,durationSeconds:duration,baseDuration:preview.baseDuration,quoteBasis:JSON.stringify(quoteBasis),startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
 export const buyResearchProject=startResearchProject;
 export function buyResearchLab(s:GameState){return s;}
 export function hardwarePurchasePreview(s:GameState,id:HardwareId,count:number|'max'=1){
- const known=hardwareIds.includes(id),owned=known?s.hardwareCounts[id]:0,amount=known&&count==='max'?maxAffordable(id,owned,s.credits,s):count==='max'?0:count,valid=known&&Number.isSafeInteger(s.hardware)&&s.hardware>=0&&Number.isSafeInteger(owned)&&owned>=0&&Number.isSafeInteger(amount)&&(amount>0||(count==='max'&&amount===0))&&Number.isSafeInteger(owned+amount)&&validEconomyValues(s,['credits']),restricted=s.retention.activeRun?.id==='five-hardware'&&hardwareIds.indexOf(id)>=5;
+ const known=hardwareIds.includes(id),owned=known?s.hardwareCounts[id]:0,amount=known&&count==='max'?maxAffordable(id,owned,s.credits,s):count==='max'?0:count,valid=known&&Number.isSafeInteger(s.hardware)&&s.hardware>=0&&Number.isSafeInteger(owned)&&owned>=0&&Number.isSafeInteger(amount)&&(amount>0||(count==='max'&&amount===0))&&Number.isSafeInteger(owned+amount)&&validEconomyValues(s,['credits']),restricted=!!activeChallengeRules(s)&&hardwareIds.indexOf(id)>=activeChallengeRules(s)!.classLimit;
  const cost=valid?hardwareBulkCostScientific(id,owned,amount||1,s):ScientificNumber.zero(),resources=valid?scientificAffordability(exactEconomyValue(s,'credits'),cost):unavailableAffordability(cost),reason=!valid?'invalid-quantity':restricted?'challenge-rule':amount===0||!canAffordScientificCreditCost(s,cost)?'credits':null;
- const result=valid&&amount>0?{...s,...hardwareOwnershipAfter(s,id,amount)}:null;return{id,owned,amount,cost,resources,reason,allowed:reason===null,dataComparison:result?dataProductionComparison(s,result):null,computeGain:result?computeRateScientific(result.hardware,result).subtract(computeRateScientific(s.hardware,s)):ScientificNumber.zero(),creditGain:result?creditRateScientific(result.hardware,result.level,result,result.savedAt).subtract(creditRateScientific(s.hardware,s.level,s,s.savedAt)):ScientificNumber.zero()};
+ const result=valid&&amount>0?{...s,...hardwareOwnershipAfter(s,id,amount)}:null;const materialQuote=valid&&amount>0?hardwarePurchaseMaterialQuote(s,id,amount):null,predicted=result&&materialQuote?{...result,discoveredComponents:[...new Set([...s.discoveredComponents,...Object.entries(materialQuote.components).filter(([,n])=>Number(n)>0).map(([id])=>id as ComponentId)])]}:result;return{materials:materialQuote,id,owned,amount,cost,resources,reason,allowed:reason===null,dataComparison:result?dataProductionComparison(s,predicted!):null,computeGain:result?computeRateScientific(predicted!.hardware,predicted!).subtract(computeRateScientific(s.hardware,s)):ScientificNumber.zero(),creditGain:result?creditRateScientific(predicted!.hardware,predicted!.level,predicted!,predicted!.savedAt).subtract(creditRateScientific(s.hardware,s.level,s,s.savedAt)):ScientificNumber.zero()};
 }
 export function buyHardwareClass(s:GameState,id:HardwareId,count:number|'max'=1){
  const preview=hardwarePurchasePreview(s,id,count);if(!preview.allowed)return s;const {owned,amount}=preview,costExact=preview.cost;
@@ -704,7 +1351,9 @@ export function buyHardwareClass(s:GameState,id:HardwareId,count:number|'max'=1)
  const classes=s.lifetime.hardwareClasses.includes(id)?s.lifetime.hardwareClasses:[...s.lifetime.hardwareClasses,id];let next:GameState={...paid,...ownership,onboarding:{...s.onboarding,completed},lifetime:{...s.lifetime,hardwareBought:s.lifetime.hardwareBought+amount,calculatorsBought:s.lifetime.calculatorsBought+(id==='calculator'?amount:0),hardwareClasses:classes}};
  const computeAfter=computeRate(next.hardware,next),rateAfter=creditRate(next.hardware,next.level,next,next.savedAt),nextMilestone=BALANCE.hardware[id].milestones.find(m=>m.threshold>counts[id])?.threshold??null;
  next=addEvent(next,'hardware-purchase',s.savedAt,{id,amount,unitCost:hardwareCostScientific(id,owned,s).toNumber(MAX_ECONOMY_VALUE),exactUnitCost:hardwareCostScientific(id,owned,s).toScientificString(16),cost,exactCost:costExact.toScientificString(16),creditsBefore,creditsAfter:next.credits,computeBefore,computeAfter,rateBefore,rateAfter,nextMilestone,paybackSeconds:rateAfter>rateBefore?cost/(rateAfter-rateBefore):null,ownedAfter:counts[id]});
- for(const milestone of BALANCE.hardware[id].milestones)if(owned<milestone.threshold&&counts[id]>=milestone.threshold){next={...next,lifetime:{...next.lifetime,milestones:next.lifetime.milestones+1},runMilestoneClasses:next.runMilestoneClasses.includes(id)?next.runMilestoneClasses:[...next.runMilestoneClasses,id]};next=addEvent(next,'hardware-milestone',s.savedAt,{id,threshold:milestone.threshold,label:milestone.label,effect:milestone.effect,effectValue:milestone.value,computeBefore,computeAfter},true);const key=`${id}:${milestone.threshold}`;if(!next.runMilestoneEdges.includes(key))next={...next,runMilestoneEdges:[...next.runMilestoneEdges,key]};next=addEvent(grantComponents(next,{titaniumBolts:BALANCE.hardwareMilestoneTitanium,...(id==='gpu'?{photonicLenses:BALANCE.gamingGpuMilestoneLaser}:{})}),'component-found',s.savedAt,{source:id==='gpu'?'gaming-gpu-milestone':'hardware-milestone',mode:'active',titaniumBolts:BALANCE.hardwareMilestoneTitanium,photonicLenses:id==='gpu'?BALANCE.gamingGpuMilestoneLaser:0,total:BALANCE.hardwareMilestoneTitanium+(id==='gpu'?BALANCE.gamingGpuMilestoneLaser:0)});if((milestone.threshold===25||milestone.threshold===50)&&hasNode(next,'milestoneRecycling',1)&&!next.runRecyclingRewards.includes(key))next=addEvent(grantComponents({...next,runRecyclingRewards:[...next.runRecyclingRewards,key]},{titaniumBolts:BALANCE.recyclingRewards[milestone.threshold]}),'component-found',s.savedAt,{source:'milestone-recycling',mode:'active',component:'titaniumBolts',total:BALANCE.recyclingRewards[milestone.threshold]});}
+ if(next.retention.activeRun){const m=next.retention.activeRun.metrics!;next=addChallengeMetrics(next,{hardwarePurchases:m.hardwarePurchases+1});}next=unlockPaidHardwareMaterials(next,id);
+ for(const milestone of BALANCE.hardware[id].milestones)if(owned<milestone.threshold&&counts[id]>=milestone.threshold){next={...next,lifetime:{...next.lifetime,milestones:next.lifetime.milestones+1},runMilestoneClasses:next.runMilestoneClasses.includes(id)?next.runMilestoneClasses:[...next.runMilestoneClasses,id]};next=addEvent(next,'hardware-milestone',s.savedAt,{id,threshold:milestone.threshold,label:milestone.label,effect:milestone.effect,effectValue:milestone.value,computeBefore,computeAfter},true);const key=`${id}:${milestone.threshold}`;if(!next.runMilestoneEdges.includes(key))next={...next,runMilestoneEdges:[...next.runMilestoneEdges,key]};next=grantPaidHardwareMilestone(next,id,milestone.threshold);if(next.retention.activeRun)next=addChallengeMetrics(next,{milestones:next.retention.activeRun.metrics!.milestones+1});}
+
  return next;
 }
 export const shoppingAgentUnlocked=(s:GameState)=>hasNode(s,'shoppingAgent',1)||s.axiomUpgrades.includes('anchoredShoppingAgent');
@@ -712,7 +1361,8 @@ export const hardwareAutobuyerUnlocked=(s:GameState,id:HardwareId)=>s.hardwareCo
 export function toggleHardwareAutobuyer(s:GameState,id:HardwareId){return hardwareAutobuyerUnlocked(s,id)?{...s,hardwareAutoBuyers:{...s.hardwareAutoBuyers,[id]:!s.hardwareAutoBuyers[id]}}:s;}
 export function buyHardware(s:GameState,count=1){return buyHardwareClass(s,'calculator',count)}
 export const classUpgradeCost=(id:HardwareId,s:GameState)=>hardwareCost(id,BALANCE.classUpgradeCount,s)*BALANCE.classUpgradeCostFactor;
-export function buyClassUpgrade(s:GameState,_id:HardwareId){return s;} // v21: replaced by milestone mastery; kept for old action/save compatibility
+export function classUpgradePreview(s:GameState,id:HardwareId){const valid=hardwareIds.includes(id),cost=valid?hardwareCostScientific(id,BALANCE.classUpgradeCount,s).multiplyNumber(BALANCE.classUpgradeCostFactor):ScientificNumber.zero(),materials=valid?classUpgradePackageQuote(s,id):null,reason=!valid?'unknown':s.classUpgrades.includes(id)||s.materials.classUpgrades.includes(id)?'owned':s.hardwareCounts[id]<BALANCE.classUpgradeMinimum?'milestone':hardwareIds.indexOf(id)>=(activeChallengeRules(s)?.classLimit??15)?'challenge-rule':!canAffordScientificCreditCost(s,cost)?'credits':null;return{id,cost,materials,reason,allowed:reason===null};}
+export function buyClassUpgrade(s:GameState,id:HardwareId){const q=classUpgradePreview(s,id);if(!q.allowed||!q.materials?.allowed)return s;const paid=spendScientificCredits(s,q.cost);if(paid===s)return s;return addEvent(grantComponents({...paid,classUpgrades:[...s.classUpgrades,id],materials:{...s.materials,classUpgrades:[...s.materials.classUpgrades,id],hardwareRemainders:q.materials.remainders}},q.materials.components),'component-found',s.savedAt,{source:'paid-class-upgrade',hardware:id,components:JSON.stringify(q.materials.components),exactCreditCost:q.cost.toScientificString(16)},true);}
 export function addCreditsScientific(s:GameState,delta:ScientificNumber,eligible=true,production=eligible){if(!ScientificNumber.isValid(delta)||!validEconomyValues(s,eligible?['credits','runCreditsEarned','lifetimeCreditsEarned','lifetimeEligibleCredits','cycleEligibleCredits']:['credits'])||(production&&!validResourceNumber(s.lifetime.regularCredits)))return s;let next=exactSet(s,'credits',exactEconomyValue(s,'credits').add(delta));if(eligible){next=exactSet(next,'runCreditsEarned',exactEconomyValue(s,'runCreditsEarned').add(delta));next=exactSet(next,'lifetimeCreditsEarned',exactEconomyValue(s,'lifetimeCreditsEarned').add(delta));next=exactSet(next,'lifetimeEligibleCredits',exactEconomyValue(s,'lifetimeEligibleCredits').add(delta));next=exactSet(next,'cycleEligibleCredits',exactEconomyValue(s,'cycleEligibleCredits').add(delta.multiplyNumber(intYieldFactor(s))));}return {...next,lifetime:production?{...s.lifetime,regularCredits:safeEconomyAdd(s.lifetime.regularCredits,delta.toNumber(MAX_ECONOMY_VALUE))}:s.lifetime};}
 export function addCredits(s:GameState,value:number,eligible=true,production=eligible){return validResourceNumber(value)?addCreditsScientific(s,ScientificNumber.from(value),eligible,production):s;}
 export const impulseNetworkBonus=(s:GameState,now=s.savedAt)=>hasNode(s,'impulseNetwork',1)?creditRate(s.hardware,s.level,s,now,false)*Math.min(BALANCE.impulseNetworkCap,Math.floor(s.hardwareCounts.calculator/10)*BALANCE.impulseNetworkPerTen):0;
@@ -720,9 +1370,9 @@ export const tapPrestigeMultiplier=(s:GameState)=>1+(hasNode(s,'computeNet2',1)?
 export const tapDropMultiplier=(s:GameState)=>Math.max(.25,(1+s.researchLevels.dropProtocols*BALANCE.repeatableResearch.dropProtocols.effectPerLevel)*(1+equippedBonus(s,'drop'))*(1+(hasNode(s,'analysis4',1)?.25:0)+(hasNode(s,'analysis7',1)?.50:0)));
 export const tapCreditsScientific=(s:GameState,now=s.savedAt)=>{if(s.retention.activeRun?.id==='no-taps')return ScientificNumber.zero();const activeScaling=ScientificNumber.from(1+BALANCE.tapQualityCoefficient*softcap(s.qualityLevel,25)+milestoneBonus(s,'tap')+equippedBonus(s,'tap'));const research=ScientificNumber.from(1+BALANCE.repeatableResearch.tapAmplification.effectPerLevel).pow(s.researchLevels.tapAmplification);const combo=1+Math.min(BALANCE.tapComboCap,s.overclock.taps)*BALANCE.tapComboPerTap;const crit=(s.lifetime.taps+1)%Math.max(2,Math.round(1/BALANCE.tapCritBase))===0?BALANCE.tapCritMultiplier:1;return creditRateScientific(s.hardware,s.level,s,now,false).multiplyNumber(BALANCE.tapRateFraction).add(ScientificNumber.from(BALANCE.baseTapCredits)).multiply(activeScaling).multiply(research).multiplyNumber(tapPrestigeMultiplier(s)*combo*crit).add(ScientificNumber.from(impulseNetworkBonus(s,now)));};
 export const tapCredits=(s:GameState,now=s.savedAt)=>tapCreditsScientific(s,now).toNumber(MAX_ECONOMY_VALUE);
-export function registerTap(s:GameState,now:number){const base=tapCreditsScientific(s,now),relayId=s.equipped.processor,candidate=s.inventory.find(i=>i.id===relayId&&i.type==='impulse-relay'),quote=candidate?specialItemEffectQuote(s,candidate):null,relay=quote?.active?candidate:undefined,paid=!base.isZero(),relayCount=(relay?.relayTaps??0)+(paid?1:0),relayBonus=relay&&paid&&relayCount%(quote!.triggerInterval as number)===0?creditRateScientific(s.hardware,s.level,s,now,false).multiplyNumber(quote!.appliedBonusSeconds):ScientificNumber.zero(),total=base.add(relayBonus),reward=total.toNumber(MAX_ECONOMY_VALUE),inventory=relay&&paid?s.inventory.map(i=>i.id===relay.id?{...i,relayTaps:relayCount}:i):s.inventory,nextTaps=s.overclock.taps+1,triggered=nextTaps>=BALANCE.overclockTaps,duration=BALANCE.overclockSeconds*(1+milestoneBonus(s,'overclock')),overclock=triggered?{...s.overclock,taps:0,charged:false,activeUntil:now+duration*1000,cooldownUntil:now+duration*1000}:{...s.overclock,taps:nextTaps,charged:false};const feedback=now-s.feedback.windowStartedAt>=60000?{windowStartedAt:now,work:0}:s.feedback;return addMetrics(addCreditsScientific({...s,inventory,lifetime:{...s.lifetime,taps:s.lifetime.taps+1,overclocks:s.lifetime.overclocks+(triggered?1:0)},feedback,overclock},total,true,false),now,{taps:1,tap:reward});}
+export function registerTap(s:GameState,now:number){if(s.retention.activeRun?.id==='no-taps')return s;const base=tapCreditsScientific(s,now),relayId=s.equipped.processor,candidate=s.inventory.find(i=>i.id===relayId&&i.type==='impulse-relay'),quote=candidate?specialItemEffectQuote(s,candidate):null,relay=quote?.active?candidate:undefined,paid=!base.isZero(),relayCount=(relay?.relayTaps??0)+(paid?1:0),relayBonus=relay&&paid&&relayCount%(quote!.triggerInterval as number)===0?creditRateScientific(s.hardware,s.level,s,now,false).multiplyNumber(quote!.appliedBonusSeconds):ScientificNumber.zero(),total=base.add(relayBonus),reward=total.toNumber(MAX_ECONOMY_VALUE),inventory=relay&&paid?s.inventory.map(i=>i.id===relay.id?{...i,relayTaps:relayCount}:i):s.inventory,nextTaps=s.overclock.taps+1,triggered=nextTaps>=BALANCE.overclockTaps,duration=BALANCE.overclockSeconds*(1+milestoneBonus(s,'overclock')*(1+challengeFamilyBonus(s,'no-taps')))*(1+deviceBonus(s,'overclockDuration')),overclock=triggered?{...s.overclock,taps:0,charged:false,activeUntil:now+duration*1000,cooldownUntil:now+duration*1000}:{...s.overclock,taps:nextTaps,charged:false};const feedback=now-s.feedback.windowStartedAt>=60000?{windowStartedAt:now,work:0}:s.feedback;return addMetrics(addCreditsScientific({...s,inventory,lifetime:{...s.lifetime,taps:s.lifetime.taps+1,overclocks:s.lifetime.overclocks+(triggered?1:0)},feedback,overclock},total,true,false),now,{taps:1,tap:reward});}
 export function selectOverclockChannel(s:GameState,channel:OverclockChannel){return hasNode(s,'overclockSwitch',1)&&s.overclock.activeUntil<=s.savedAt?{...s,overclock:{...s.overclock,channel}}:s}
-export function activateOverclock(s:GameState,now:number){const duration=BALANCE.overclockSeconds*(1+milestoneBonus(s,'overclock'));return !s.overclock.charged||now<s.overclock.cooldownUntil?s:{...s,lifetime:{...s.lifetime,overclocks:s.lifetime.overclocks+1},overclock:{...s.overclock,taps:0,charged:false,activeUntil:now+duration*1000,cooldownUntil:now+BALANCE.overclockCooldownSeconds*1000}};}
+export function activateOverclock(s:GameState,now:number){if(s.retention.activeRun?.id==='no-taps')return s;const duration=BALANCE.overclockSeconds*(1+milestoneBonus(s,'overclock')*(1+challengeFamilyBonus(s,'no-taps')))*(1+deviceBonus(s,'overclockDuration'));return !s.overclock.charged||now<s.overclock.cooldownUntil?s:{...s,lifetime:{...s.lifetime,overclocks:s.lifetime.overclocks+1},overclock:{...s.overclock,taps:0,charged:false,activeUntil:now+duration*1000,cooldownUntil:now+BALANCE.overclockCooldownSeconds*1000}};}
 
 /** Reproducible layer-one measurement: no taps, training, research, items, quests or prestige. */
 export type LayerOneProfile={baseCosts:readonly number[];growth:readonly number[];compute:readonly number[]};

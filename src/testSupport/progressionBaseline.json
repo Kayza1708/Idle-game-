@@ -1,0 +1,2638 @@
+{
+  "head": "14bcdd3",
+  "parameters": {
+    "runStartCredits": 50,
+    "hardware": {
+      "calculator": {
+        "name": "Taschenrechner",
+        "description": "Bescheidener Start für die erste lokale KI.",
+        "baseCost": 15,
+        "growth": 1.17,
+        "compute": 1,
+        "role": "Tap",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "tap",
+            "value": 0.03,
+            "label": "Tap Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "tap",
+            "value": 0.06,
+            "label": "Tap Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "tap",
+            "value": 0.09,
+            "label": "Tap Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "tap",
+            "value": 0.12,
+            "label": "Tap Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "tap",
+            "value": 0.15,
+            "label": "Tap Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "tap",
+            "value": 0.18,
+            "label": "Tap Singularität"
+          }
+        ]
+      },
+      "sbc": {
+        "name": "Einplatinencomputer",
+        "description": "Kompakte Parallelverarbeitung im Miniaturformat.",
+        "baseCost": 6000,
+        "growth": 1.18,
+        "compute": 10,
+        "role": "Daten",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "data",
+            "value": 0.035,
+            "label": "Daten Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "data",
+            "value": 0.07,
+            "label": "Daten Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "data",
+            "value": 0.105,
+            "label": "Daten Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "data",
+            "value": 0.14,
+            "label": "Daten Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "data",
+            "value": 0.175,
+            "label": "Daten Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "data",
+            "value": 0.21,
+            "label": "Daten Singularität"
+          }
+        ]
+      },
+      "pc": {
+        "name": "Heim-PC",
+        "description": "Mehr Kerne für ernsthafte Modelle.",
+        "baseCost": 100000,
+        "growth": 1.19,
+        "compute": 100,
+        "role": "Nutzer",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "users",
+            "value": 0.04,
+            "label": "Nutzer Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "users",
+            "value": 0.08,
+            "label": "Nutzer Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "users",
+            "value": 0.12,
+            "label": "Nutzer Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "users",
+            "value": 0.16,
+            "label": "Nutzer Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "users",
+            "value": 0.2,
+            "label": "Nutzer Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "users",
+            "value": 0.24,
+            "label": "Nutzer Singularität"
+          }
+        ]
+      },
+      "gpu": {
+        "name": "Gaming-GPU",
+        "description": "Aktive Impulse und parallele Inferenz.",
+        "baseCost": 4000000,
+        "growth": 1.2,
+        "compute": 1000,
+        "role": "Overclock",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "overclock",
+            "value": 0.045,
+            "label": "Overclock Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "overclock",
+            "value": 0.09,
+            "label": "Overclock Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "overclock",
+            "value": 0.135,
+            "label": "Overclock Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "overclock",
+            "value": 0.18,
+            "label": "Overclock Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "overclock",
+            "value": 0.225,
+            "label": "Overclock Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "overclock",
+            "value": 0.27,
+            "label": "Overclock Singularität"
+          }
+        ]
+      },
+      "rig": {
+        "name": "KI-Workstation",
+        "description": "Liefert Compute für Modelle; Trainingszeiten bleiben fest.",
+        "baseCost": 75000000,
+        "growth": 1.21,
+        "compute": 10000,
+        "role": "Training",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "training",
+            "value": 0.05,
+            "label": "Training Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "training",
+            "value": 0.1,
+            "label": "Training Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "training",
+            "value": 0.15,
+            "label": "Training Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "training",
+            "value": 0.2,
+            "label": "Training Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "training",
+            "value": 0.25,
+            "label": "Training Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "training",
+            "value": 0.3,
+            "label": "Training Singularität"
+          }
+        ]
+      },
+      "server": {
+        "name": "Server-Rack",
+        "description": "Stabile Basis für Automation.",
+        "baseCost": 15000000000,
+        "growth": 1.22,
+        "compute": 90000,
+        "role": "Automation",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "automation",
+            "value": 0.055,
+            "label": "Automation Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "automation",
+            "value": 0.11,
+            "label": "Automation Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "automation",
+            "value": 0.165,
+            "label": "Automation Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "automation",
+            "value": 0.22,
+            "label": "Automation Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "automation",
+            "value": 0.275,
+            "label": "Automation Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "automation",
+            "value": 0.33,
+            "label": "Automation Singularität"
+          }
+        ]
+      },
+      "farm": {
+        "name": "GPU-Farm",
+        "description": "Gebündelte rohe Compute-Produktion.",
+        "baseCost": 120000000000,
+        "growth": 1.23,
+        "compute": 650000,
+        "role": "Compute",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "compute",
+            "value": 0.06,
+            "label": "Compute Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "compute",
+            "value": 0.12,
+            "label": "Compute Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "compute",
+            "value": 0.18,
+            "label": "Compute Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "compute",
+            "value": 0.24,
+            "label": "Compute Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "compute",
+            "value": 0.3,
+            "label": "Compute Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "compute",
+            "value": 0.36,
+            "label": "Compute Singularität"
+          }
+        ]
+      },
+      "campus": {
+        "name": "Modularer Rechenzentrumscampus",
+        "description": "Verbindet frühe Hardwareklassen.",
+        "baseCost": 100000000000000,
+        "growth": 1.24,
+        "compute": 5000000,
+        "role": "Synergie",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "synergy",
+            "value": 0.065,
+            "label": "Synergie Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "synergy",
+            "value": 0.13,
+            "label": "Synergie Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "synergy",
+            "value": 0.195,
+            "label": "Synergie Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "synergy",
+            "value": 0.26,
+            "label": "Synergie Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "synergy",
+            "value": 0.325,
+            "label": "Synergie Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "synergy",
+            "value": 0.39,
+            "label": "Synergie Singularität"
+          }
+        ]
+      },
+      "cloud": {
+        "name": "Hyperscale-Cloud",
+        "description": "Skaliert die Nutzerkapazität.",
+        "baseCost": 100000000000000000000,
+        "growth": 1.25,
+        "compute": 40000000,
+        "role": "Nutzer",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "users",
+            "value": 0.07,
+            "label": "Nutzer Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "users",
+            "value": 0.14,
+            "label": "Nutzer Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "users",
+            "value": 0.21,
+            "label": "Nutzer Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "users",
+            "value": 0.28,
+            "label": "Nutzer Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "users",
+            "value": 0.35,
+            "label": "Nutzer Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "users",
+            "value": 0.42,
+            "label": "Nutzer Singularität"
+          }
+        ]
+      },
+      "liquid": {
+        "name": "Flüssigkeitsgekühlte Compute-Anlage",
+        "description": "Lenkt Compute in Training und Forschung.",
+        "baseCost": 1e+28,
+        "growth": 1.26,
+        "compute": 300000000,
+        "role": "Labor",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "research",
+            "value": 0.075,
+            "label": "Labor Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "research",
+            "value": 0.15,
+            "label": "Labor Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "research",
+            "value": 0.225,
+            "label": "Labor Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "research",
+            "value": 0.3,
+            "label": "Labor Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "research",
+            "value": 0.375,
+            "label": "Labor Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "research",
+            "value": 0.45,
+            "label": "Labor Singularität"
+          }
+        ]
+      },
+      "subsea": {
+        "name": "Untersee-Rechenzentrum",
+        "description": "Verbessert spätere Offline-Systeme.",
+        "baseCost": 1e+38,
+        "growth": 1.27,
+        "compute": 2000000000,
+        "role": "Offline",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "offline",
+            "value": 0.08,
+            "label": "Offline Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "offline",
+            "value": 0.16,
+            "label": "Offline Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "offline",
+            "value": 0.24,
+            "label": "Offline Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "offline",
+            "value": 0.32,
+            "label": "Offline Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "offline",
+            "value": 0.4,
+            "label": "Offline Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "offline",
+            "value": 0.48,
+            "label": "Offline Singularität"
+          }
+        ]
+      },
+      "orbital": {
+        "name": "Orbitales Rechenzentrum",
+        "description": "Öffnet Entdeckungsforschung.",
+        "baseCost": 1e+52,
+        "growth": 1.28,
+        "compute": 1000000000000000,
+        "role": "Entdeckung",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "research",
+            "value": 0.085,
+            "label": "Entdeckung Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "research",
+            "value": 0.17,
+            "label": "Entdeckung Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "research",
+            "value": 0.255,
+            "label": "Entdeckung Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "research",
+            "value": 0.34,
+            "label": "Entdeckung Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "research",
+            "value": 0.425,
+            "label": "Entdeckung Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "research",
+            "value": 0.51,
+            "label": "Entdeckung Singularität"
+          }
+        ]
+      },
+      "lunar": {
+        "name": "Lunarer KI-Forschungskomplex",
+        "description": "Zugang zu späten Forschungszweigen.",
+        "baseCost": 1e+70,
+        "growth": 1.29,
+        "compute": 1e+22,
+        "role": "Forschung",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "training",
+            "value": 0.09,
+            "label": "Forschung Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "training",
+            "value": 0.18,
+            "label": "Forschung Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "training",
+            "value": 0.27,
+            "label": "Forschung Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "training",
+            "value": 0.36,
+            "label": "Forschung Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "training",
+            "value": 0.45,
+            "label": "Forschung Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "training",
+            "value": 0.54,
+            "label": "Forschung Singularität"
+          }
+        ]
+      },
+      "dyson": {
+        "name": "Fusionsbetriebener Dyson-Schwarm",
+        "description": "Spezialisierte Endgame-Produktion.",
+        "baseCost": 1e+95,
+        "growth": 1.3,
+        "compute": 1e+35,
+        "role": "Energie",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "compute",
+            "value": 0.095,
+            "label": "Energie Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "compute",
+            "value": 0.19,
+            "label": "Energie Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "compute",
+            "value": 0.285,
+            "label": "Energie Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "compute",
+            "value": 0.38,
+            "label": "Energie Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "compute",
+            "value": 0.475,
+            "label": "Energie Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "compute",
+            "value": 0.57,
+            "label": "Energie Singularität"
+          }
+        ]
+      },
+      "matrioshka": {
+        "name": "Matrioshka-Gehirn",
+        "description": "Bereitet die spätere Axiom-Ebene vor.",
+        "baseCost": 1e+125,
+        "growth": 1.31,
+        "compute": 1e+55,
+        "role": "Meta",
+        "milestones": [
+          {
+            "threshold": 10,
+            "compute": 0.12,
+            "effect": "research",
+            "value": 0.1,
+            "label": "Meta Impuls"
+          },
+          {
+            "threshold": 25,
+            "compute": 0.16,
+            "effect": "research",
+            "value": 0.2,
+            "label": "Meta Kopplung"
+          },
+          {
+            "threshold": 50,
+            "compute": 0.22,
+            "effect": "research",
+            "value": 0.3,
+            "label": "Meta Protokoll"
+          },
+          {
+            "threshold": 100,
+            "compute": 0.3,
+            "effect": "research",
+            "value": 0.4,
+            "label": "Meta Netz"
+          },
+          {
+            "threshold": 250,
+            "compute": 0.42,
+            "effect": "research",
+            "value": 0.5,
+            "label": "Meta Matrix"
+          },
+          {
+            "threshold": 500,
+            "compute": 0.6,
+            "effect": "research",
+            "value": 0.6,
+            "label": "Meta Singularität"
+          }
+        ]
+      }
+    },
+    "operatingProfiles": {
+      "balanced": {
+        "name": "Ausgewogen",
+        "inference": 0.75,
+        "training": 0.15,
+        "research": 0.1
+      },
+      "training": {
+        "name": "Training",
+        "inference": 0.6,
+        "training": 0.3,
+        "research": 0.1
+      },
+      "discovery": {
+        "name": "Entdeckung",
+        "inference": 0.65,
+        "training": 0.1,
+        "research": 0.25
+      }
+    },
+    "hardwareMilestones": [
+      10,
+      25,
+      50,
+      100,
+      250,
+      500
+    ],
+    "hardwareUnlockCount": 10,
+    "hardwareUnlockINT": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      8,
+      18,
+      45,
+      80,
+      130,
+      220,
+      350
+    ],
+    "classUpgradeCount": 15,
+    "classUpgradeCostFactor": 1,
+    "computePerUser": 1,
+    "baseRevenuePerUser": 1.35,
+    "baseDataPerSecond": 0.1,
+    "dataBonusScale": 4,
+    "researchBaseRate": 0.12,
+    "researchComputeScale": 10,
+    "dataScale": 100,
+    "modelQualityPerLevel": 0.04,
+    "modelEfficiencyPerLevel": 0.03,
+    "qualitySoftcap": 1,
+    "efficiencySoftcap": 0.75,
+    "tapQualityCoefficient": 0.04,
+    "trainingDurationBaseSeconds": 90,
+    "trainingDurationGrowth": 1.35,
+    "trainingDurationCapSeconds": 259200,
+    "trainingDataBase": 15,
+    "trainingDataGrowth": 1.75,
+    "trainingCostFloor": 0.5,
+    "legacyTrainingBase": 40,
+    "legacyTrainingGrowth": 1.65,
+    "baseOfflineSeconds": 28800,
+    "maxOfflineSeconds": 86400,
+    "simulationStep": 10,
+    "prestigeBaseRevenue": 765100329.5513278,
+    "prestigeThreshold": 428273652944,
+    "prestigeScale": 3,
+    "prestigePower": 1.5,
+    "prestigeBonusLogScale": 0.55,
+    "seasonRewards": {
+      "free": {
+        "regularComponents": [
+          "circuits",
+          "copperCoils",
+          "siliconWafers",
+          "titaniumBolts",
+          "photonicLenses"
+        ],
+        "regularAmounts": [
+          6,
+          5,
+          4,
+          4,
+          3
+        ],
+        "regularGems": [
+          5,
+          8,
+          10,
+          12,
+          15
+        ],
+        "milestoneGems": [
+          25,
+          40,
+          50,
+          65,
+          80,
+          100,
+          125,
+          150,
+          180,
+          250
+        ],
+        "milestoneComponents": [
+          "copperCoils",
+          "siliconWafers",
+          "titaniumBolts",
+          "photonicLenses",
+          "graphene",
+          "nanotubes",
+          "superconductors",
+          "neuralCrystals",
+          "quantumCores",
+          "quantumCores"
+        ],
+        "milestoneAmounts": [
+          10,
+          9,
+          8,
+          7,
+          6,
+          6,
+          5,
+          4,
+          4,
+          5
+        ]
+      },
+      "premium": {
+        "regularComponents": [
+          "copperCoils",
+          "siliconWafers",
+          "titaniumBolts",
+          "photonicLenses",
+          "graphene"
+        ],
+        "regularAmounts": [
+          10,
+          8,
+          7,
+          6,
+          5
+        ],
+        "regularGems": [
+          15,
+          20,
+          25,
+          30,
+          40
+        ],
+        "milestoneGems": [
+          50,
+          75,
+          100,
+          125,
+          150,
+          200,
+          250,
+          300,
+          400,
+          600
+        ],
+        "milestoneComponents": [
+          "siliconWafers",
+          "titaniumBolts",
+          "photonicLenses",
+          "graphene",
+          "nanotubes",
+          "superconductors",
+          "neuralCrystals",
+          "quantumCores",
+          "quantumCores",
+          "quantumCores"
+        ],
+        "milestoneAmounts": [
+          15,
+          14,
+          12,
+          10,
+          9,
+          8,
+          7,
+          6,
+          6,
+          8
+        ]
+      }
+    },
+    "axiom": {
+      "threshold": {
+        "m": 3,
+        "e": 3
+      },
+      "creditPerTotal": 0.5,
+      "resonanceCost": 1,
+      "resonanceMax": 10,
+      "automationCost": 2,
+      "archiveCost": 5
+    },
+    "experimentSeconds": 14400,
+    "shortExperimentSeconds": 600,
+    "introExperimentSeconds": 60,
+    "researchCategories": {
+      "data": {
+        "baseData": 363,
+        "baseDuration": 180
+      },
+      "analysis": {
+        "baseData": 100,
+        "baseDuration": 600
+      },
+      "model": {
+        "baseData": 250,
+        "baseDuration": 1800
+      },
+      "automation": {
+        "baseData": 600,
+        "baseDuration": 3600
+      }
+    },
+    "researchKeyPricePower": 24,
+    "researchKeyDurationSeconds": 86400,
+    "researchMinimumSeconds": 60,
+    "researchAutonomousPerLevel": 0.02,
+    "researchAlignmentFactor": 0.9,
+    "researchTransferFactor": 0.5,
+    "researchTransferStarts": 6,
+    "researchAnalysisCostFactor": 0.8,
+    "researchRecyclingFraction": 0.05,
+    "researchAutomationInterval": 10,
+    "researchDataGrowth": 1.85,
+    "researchDurationGrowth": 1.35,
+    "researchDurationCapSeconds": 259200,
+    "analysisCosts": {
+      "hardware": {
+        "short": {
+          "data": 250,
+          "duration": 600
+        },
+        "long": {
+          "data": 4800,
+          "duration": 14400
+        }
+      },
+      "architecture": {
+        "short": {
+          "data": 500,
+          "duration": 1800
+        },
+        "long": {
+          "data": 6400,
+          "duration": 28800
+        }
+      },
+      "artifact": {
+        "short": {
+          "data": 2000,
+          "duration": 7200
+        },
+        "long": {
+          "data": 19200,
+          "duration": 86400
+        }
+      }
+    },
+    "baseTapCredits": 1,
+    "tapRateFraction": 0.2,
+    "tapLimitPerSecond": 5,
+    "tapCritBase": 0.05,
+    "tapCritMultiplier": 3,
+    "tapComboPerTap": 0.015,
+    "tapComboCap": 50,
+    "dropBaseMultiplier": 1,
+    "overclockTaps": 100,
+    "overclockSeconds": 15,
+    "overclockCooldownSeconds": 90,
+    "introRewards": [
+      25,
+      60,
+      120,
+      100,
+      100,
+      75,
+      250,
+      0
+    ],
+    "prestigeUpgrades": {
+      "shoppingAgent": {
+        "name": "Einkaufsagent",
+        "cost": 1,
+        "depth": 1,
+        "branch": 5,
+        "requires": [],
+        "requiresPrestige": true,
+        "effect": "Autobuyer für Taschenrechner und Einplatinencomputer; je Klasse schaltbar."
+      },
+      "trainingPlan": {
+        "name": "Trainingsplan",
+        "cost": 3,
+        "depth": 1,
+        "branch": 6,
+        "requires": [],
+        "requiresPrestige": true,
+        "effect": "Zwei wartende Quality-/Efficiency-Aufträge zusätzlich zum aktiven Training."
+      },
+      "componentScanner": {
+        "name": "Komponentenscanner",
+        "cost": 3,
+        "depth": 1,
+        "branch": 7,
+        "requires": [],
+        "requiresPrestige": true,
+        "effect": "Verdoppelt das Gewicht eines zugänglichen passiven Komponentenfunds."
+      },
+      "dataArchive1": {
+        "name": "Datenarchiv I",
+        "cost": 3,
+        "depth": 1,
+        "branch": 0,
+        "requires": [],
+        "effect": "Gemeinsamer Data-Bonus +0,25 (B); höchste Archivstufe ersetzt niedrigere. Dauerhafter Forschungszugang: Datenwissenschaft."
+      },
+      "dataArchive2": {
+        "name": "Datenarchiv II",
+        "cost": 9,
+        "depth": 2,
+        "branch": 0,
+        "requires": [
+          "dataArchive1"
+        ],
+        "effect": "Gemeinsamer Data-Bonus +0,60 (B); ersetzt +0,25."
+      },
+      "dataArchive3": {
+        "name": "Datenarchiv III",
+        "cost": 14,
+        "depth": 3,
+        "branch": 0,
+        "requires": [
+          "dataArchive2"
+        ],
+        "effect": "Gemeinsamer Data-Bonus +1,25 (B); ersetzt +0,60."
+      },
+      "computeNet1": {
+        "name": "Compute-Netz I",
+        "cost": 4,
+        "depth": 1,
+        "branch": 1,
+        "requires": [],
+        "effect": "+8 % globaler Compute je freigeschalteter Hardwareklasse. Dauerhafter Forschungszugang: Modell-/Systemarchitektur."
+      },
+      "computeNet2": {
+        "name": "Compute-Netz II",
+        "cost": 11,
+        "depth": 2,
+        "branch": 1,
+        "requires": [
+          "computeNet1"
+        ],
+        "effect": "+15 % globaler Compute je freigeschalteter Hardwareklasse."
+      },
+      "computeNet3": {
+        "name": "Compute-Netz III",
+        "cost": 18,
+        "depth": 3,
+        "branch": 1,
+        "requires": [
+          "computeNet2"
+        ],
+        "effect": "+30 % globaler Compute je freigeschalteter Hardwareklasse."
+      },
+      "analysis1": {
+        "name": "Analyse I",
+        "cost": 5,
+        "depth": 1,
+        "branch": 2,
+        "requires": [],
+        "effect": "+10 % Komponentenfunde aus Analysen. Dauerhafter Forschungszugang: Material-/Bauplanforschung."
+      },
+      "analysis2": {
+        "name": "Analyse II",
+        "cost": 13,
+        "depth": 2,
+        "branch": 2,
+        "requires": [
+          "analysis1"
+        ],
+        "effect": "+20 % Komponentenfunde aus Analysen."
+      },
+      "analysis3": {
+        "name": "Analyse III",
+        "cost": 22,
+        "depth": 3,
+        "branch": 2,
+        "requires": [
+          "analysis2"
+        ],
+        "effect": "+30 % Komponentenfunde; jede Analyse garantiert mindestens eine seltene Komponente."
+      },
+      "labs1": {
+        "name": "Labore I",
+        "cost": 6,
+        "depth": 1,
+        "branch": 3,
+        "requires": [],
+        "effect": "Zweiter Forschungsslot. Dauerhafter Forschungszugang: Laborautomation."
+      },
+      "labs2": {
+        "name": "Labore II",
+        "cost": 15,
+        "depth": 2,
+        "branch": 3,
+        "requires": [
+          "labs1"
+        ],
+        "effect": "Forschungsschlange mit 2 Plätzen."
+      },
+      "labs3": {
+        "name": "Labore III",
+        "cost": 26,
+        "depth": 3,
+        "branch": 3,
+        "requires": [
+          "labs2"
+        ],
+        "effect": "Startet die nächste Forschung automatisch, sobald die Datenmenge bezahlbar ist."
+      },
+      "manufacturing1": {
+        "name": "Fertigung I",
+        "cost": 7,
+        "depth": 1,
+        "branch": 4,
+        "requires": [],
+        "effect": "Zweiter Item-Sockel."
+      },
+      "manufacturing2": {
+        "name": "Fertigung II",
+        "cost": 17,
+        "depth": 2,
+        "branch": 4,
+        "requires": [
+          "manufacturing1"
+        ],
+        "effect": "Item-Upgrade-Kosten −15 %."
+      },
+      "manufacturing3": {
+        "name": "Fertigung III",
+        "cost": 30,
+        "depth": 3,
+        "branch": 4,
+        "requires": [
+          "manufacturing2"
+        ],
+        "effect": "Vertieft die Fertigungsinfrastruktur; Basis-Module werden bereits durch Offene Baupläne freigeschaltet."
+      },
+      "dataArchive4": {
+        "name": "Datenarchiv IV",
+        "cost": 28,
+        "depth": 4,
+        "branch": 0,
+        "requires": [
+          "dataArchive3"
+        ],
+        "effect": "Data Synergy ^1,05; Daten-Items skalieren mit seltenen Komponenten."
+      },
+      "dataArchive5": {
+        "name": "Datenarchiv V",
+        "cost": 48,
+        "depth": 5,
+        "branch": 0,
+        "requires": [
+          "dataArchive4"
+        ],
+        "effect": "Data Synergy ^1,10."
+      },
+      "dataArchive6": {
+        "name": "Datenarchiv VI",
+        "cost": 80,
+        "depth": 6,
+        "branch": 0,
+        "requires": [
+          "dataArchive5"
+        ],
+        "effect": "Lifetime-Daten verstärken DataPower; gemeinsamer Data-Bonusbeitrag +1,5 (B)."
+      },
+      "dataArchive7": {
+        "name": "Datenarchiv VII",
+        "cost": 130,
+        "depth": 7,
+        "branch": 0,
+        "requires": [
+          "dataArchive6"
+        ],
+        "effect": "Data Synergy ^1,05 zusätzlich; gemeinsamer Data-Bonusbeitrag +2,5 (B)."
+      },
+      "dataArchive8": {
+        "name": "Datenarchiv VIII",
+        "cost": 210,
+        "depth": 8,
+        "branch": 0,
+        "requires": [
+          "dataArchive7"
+        ],
+        "effect": "Data Synergy ^1,10 zusätzlich; gemeinsamer Data-Bonusbeitrag +4 (B)."
+      },
+      "computeNet4": {
+        "name": "Compute-Netz IV",
+        "cost": 34,
+        "depth": 4,
+        "branch": 1,
+        "requires": [
+          "computeNet3"
+        ],
+        "effect": "Hardware-Besitzsynergie ^1,05; Legacy-Infrastruktur ab 500 Stück je Klasse wird aktiv."
+      },
+      "computeNet5": {
+        "name": "Compute-Netz V",
+        "cost": 58,
+        "depth": 5,
+        "branch": 1,
+        "requires": [
+          "computeNet4"
+        ],
+        "effect": "Klassen-Diversität wird stärker; jede Legacy-Klasse verstärkt globalen Output."
+      },
+      "computeNet6": {
+        "name": "Compute-Netz VI",
+        "cost": 95,
+        "depth": 6,
+        "branch": 1,
+        "requires": [
+          "computeNet5"
+        ],
+        "effect": "Klassen-Diversität wächst stärker; globaler Compute ×2."
+      },
+      "computeNet7": {
+        "name": "Compute-Netz VII",
+        "cost": 150,
+        "depth": 7,
+        "branch": 1,
+        "requires": [
+          "computeNet6"
+        ],
+        "effect": "Hardware-Besitzsynergie ^1,05 zusätzlich; Compute ×2,5."
+      },
+      "computeNet8": {
+        "name": "Compute-Netz VIII",
+        "cost": 240,
+        "depth": 8,
+        "branch": 1,
+        "requires": [
+          "computeNet7"
+        ],
+        "effect": "Hardware- und Infrastruktur-Synergien werden zu Late-Game-Wallbreakern."
+      },
+      "analysis4": {
+        "name": "Analyse IV",
+        "cost": 40,
+        "depth": 4,
+        "branch": 2,
+        "requires": [
+          "analysis3"
+        ],
+        "effect": "+25 % Analysegeschwindigkeit."
+      },
+      "analysis5": {
+        "name": "Analyse V",
+        "cost": 68,
+        "depth": 5,
+        "branch": 2,
+        "requires": [
+          "analysis4"
+        ],
+        "effect": "+50 % Analysegeschwindigkeit."
+      },
+      "analysis6": {
+        "name": "Analyse VI",
+        "cost": 110,
+        "depth": 6,
+        "branch": 2,
+        "requires": [
+          "analysis5"
+        ],
+        "effect": "Seltene Item-Sekundäreffekte ×1,25; Analysegeschwindigkeit ×2."
+      },
+      "analysis7": {
+        "name": "Analyse VII",
+        "cost": 170,
+        "depth": 7,
+        "branch": 2,
+        "requires": [
+          "analysis6"
+        ],
+        "effect": "Legendäre/mythische Tertiäreffekte ×1,35; Analysegeschwindigkeit ×2,5."
+      },
+      "analysis8": {
+        "name": "Analyse VIII",
+        "cost": 270,
+        "depth": 8,
+        "branch": 2,
+        "requires": [
+          "analysis7"
+        ],
+        "effect": "Item-Synergien profitieren zusätzlich von seltenen Komponenten."
+      },
+      "labs4": {
+        "name": "Labore IV",
+        "cost": 46,
+        "depth": 4,
+        "branch": 3,
+        "requires": [
+          "labs3"
+        ],
+        "effect": "Research Synergy ^1,05 und stärkere Model↔Research-Kopplung."
+      },
+      "labs5": {
+        "name": "Labore V",
+        "cost": 78,
+        "depth": 5,
+        "branch": 3,
+        "requires": [
+          "labs4"
+        ],
+        "effect": "Modell-Autopilot: trainiert Qualität und Effizienz automatisch im Wechsel."
+      },
+      "labs6": {
+        "name": "Labore VI",
+        "cost": 125,
+        "depth": 6,
+        "branch": 3,
+        "requires": [
+          "labs5"
+        ],
+        "effect": "Research Synergy ×1,5; permanente Forschung skaliert mit Model-Level."
+      },
+      "labs7": {
+        "name": "Labore VII",
+        "cost": 190,
+        "depth": 7,
+        "branch": 3,
+        "requires": [
+          "labs6"
+        ],
+        "effect": "Research Synergy ^1,05; Forschung ×2."
+      },
+      "labs8": {
+        "name": "Labore VIII",
+        "cost": 300,
+        "depth": 8,
+        "branch": 3,
+        "requires": [
+          "labs7"
+        ],
+        "effect": "Research Synergy ^1,10; Forschung ×3."
+      },
+      "manufacturing4": {
+        "name": "Fertigung IV",
+        "cost": 52,
+        "depth": 4,
+        "branch": 4,
+        "requires": [
+          "manufacturing3"
+        ],
+        "effect": "Item-Synergien ^1,05; Items skalieren mit Hardware, Model und Daten."
+      },
+      "manufacturing5": {
+        "name": "Fertigung V",
+        "cost": 88,
+        "depth": 5,
+        "branch": 4,
+        "requires": [
+          "manufacturing4"
+        ],
+        "effect": "Dritter Item-Sockel."
+      },
+      "manufacturing6": {
+        "name": "Fertigung VI",
+        "cost": 140,
+        "depth": 6,
+        "branch": 4,
+        "requires": [
+          "manufacturing5"
+        ],
+        "effect": "Sekundäre Itemeffekte stärker; Item-Synergie ^1,05."
+      },
+      "manufacturing7": {
+        "name": "Fertigung VII",
+        "cost": 210,
+        "depth": 7,
+        "branch": 4,
+        "requires": [
+          "manufacturing6"
+        ],
+        "effect": "Tertiäre Itemeffekte stärker; Item-Synergie ^1,07."
+      },
+      "manufacturing8": {
+        "name": "Fertigung VIII",
+        "cost": 330,
+        "depth": 8,
+        "branch": 4,
+        "requires": [
+          "manufacturing7"
+        ],
+        "effect": "Item-Synergie ^1,10; Forge/Fusion werden echte Endgame-Skalierer."
+      },
+      "milestoneMemory": {
+        "name": "Milestone Memory",
+        "cost": 100,
+        "depth": 1,
+        "branch": 5,
+        "requires": [],
+        "effect": "+2 % INT-Ertragswert je unterschiedlicher Hardware-Meilensteinkante dieses Runs, maximal +100 %."
+      },
+      "modelSynthesis": {
+        "name": "Model Synthesis",
+        "cost": 1000,
+        "depth": 2,
+        "branch": 5,
+        "requires": [
+          "milestoneMemory"
+        ],
+        "effect": "+3 % INT-Ertragswert je abgeschlossenem Training dieses Runs, maximal +150 %."
+      },
+      "researchArchive": {
+        "name": "Research Archive",
+        "cost": 10000,
+        "depth": 3,
+        "branch": 5,
+        "requires": [
+          "modelSynthesis"
+        ],
+        "effect": "+5 % INT-Ertragswert je abgeschlossenem Forschungsauftrag dieses Runs, maximal +200 %."
+      }
+    },
+    "prestigeBranches": [
+      "Datenarchiv",
+      "Compute-Netz",
+      "Analyse",
+      "Labore",
+      "Fertigung",
+      "INT-Ertrag"
+    ],
+    "dataArchiveBonus": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "computeNetworkPerClass": [
+      0.02,
+      0.03,
+      0.05
+    ],
+    "analysisFindBonus": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "impulseNetworkPerTen": 0.01,
+    "impulseNetworkCap": 0.2,
+    "atlasPerClass": 0.1,
+    "computeNetworkBonus": 0.25,
+    "feedbackMinuteCap": 0.5,
+    "recyclingRewards": {
+      "25": 2,
+      "50": 4
+    },
+    "scannerComponents": 3,
+    "scannerBlueprints": 1,
+    "upgradeBase": 60,
+    "upgradeGrowth": 1.35,
+    "maxUpgrade": 10,
+    "itemBaseEffect": 0.08,
+    "scalingSynergy": {
+      "legacyThreshold": 500,
+      "legacyPerClass": 0.12,
+      "legacyCapClasses": 15,
+      "masteryPerLevel": 0.025,
+      "masteryCap": 2.5,
+      "classSynergyBase": 1.1,
+      "classSynergyResearchPerLevel": 0.0025,
+      "classSynergyPrestige": [
+        0.015,
+        0.025,
+        0.04,
+        0.06,
+        0.09
+      ],
+      "ownershipBases": [
+        0.005,
+        0.006,
+        0.008,
+        0.01,
+        0.013,
+        0.017,
+        0.022,
+        0.03,
+        0.04,
+        0.055,
+        0.075,
+        0.1,
+        0.14,
+        0.2,
+        0.3
+      ],
+      "dataPowerBase": 0.1,
+      "dataPowerResearchPerLevel": 0.004,
+      "dataPowerPrestige": [
+        0,
+        0,
+        0.02,
+        0.04,
+        0.07,
+        0.1,
+        0.14,
+        0.2
+      ],
+      "modelGlobalBase": 1.06,
+      "qualityBase": 1.12,
+      "efficiencyBase": 1.1,
+      "modelResearchBasePerLevel": 0.0015,
+      "intBase": 1.1,
+      "achievementPer25": 1.1,
+      "achievementPer100": 1.25,
+      "itemClassScaling": 0.03,
+      "itemMilestoneScaling": 0.025,
+      "itemRareScaling": 0.08,
+      "ownedHundredsCap": 4,
+      "ownedHundredsCredit": 0.025,
+      "milestoneLateExponentPerTier": 0.0125,
+      "artifactBase": 1.25,
+      "breakthroughBase": 1.35
+    },
+    "rarity": {
+      "common": {
+        "chance": 0.6,
+        "factor": 1,
+        "salvage": 10,
+        "craft": [
+          30,
+          0
+        ]
+      },
+      "uncommon": {
+        "chance": 0.25,
+        "factor": 1.15,
+        "salvage": 15,
+        "craft": [
+          60,
+          2
+        ]
+      },
+      "rare": {
+        "chance": 0.1,
+        "factor": 1.35,
+        "salvage": 25,
+        "craft": [
+          120,
+          10
+        ]
+      },
+      "epic": {
+        "chance": 0.04,
+        "factor": 1.65,
+        "salvage": 40,
+        "craft": [
+          360,
+          30
+        ]
+      },
+      "legendary": {
+        "chance": 0.01,
+        "factor": 2,
+        "salvage": 60,
+        "craft": [
+          1080,
+          90
+        ]
+      },
+      "mythic": {
+        "chance": 0,
+        "factor": 2.6,
+        "salvage": 100,
+        "craft": [
+          2400,
+          180
+        ]
+      }
+    },
+    "components": {
+      "circuits": {
+        "name": "Schaltkreise",
+        "rarity": "häufig",
+        "atlasCell": [
+          0,
+          0
+        ],
+        "source": "Alle Drops und Analysen · häufig",
+        "description": "Logik und Steuerung für frühe Baupläne."
+      },
+      "copperCoils": {
+        "name": "Kupferspulen",
+        "rarity": "häufig",
+        "atlasCell": [
+          1,
+          0
+        ],
+        "source": "Alle Drops und Analysen · häufig",
+        "description": "Leistungsführung und Magnetik."
+      },
+      "siliconWafers": {
+        "name": "Siliziumwafer",
+        "rarity": "ungewöhnlich",
+        "atlasCell": [
+          2,
+          0
+        ],
+        "source": "Alle Drops und Analysen · ungewöhnlich",
+        "description": "Substrat für dichte Rechenlogik."
+      },
+      "titaniumBolts": {
+        "name": "Titanlegierung",
+        "rarity": "ungewöhnlich",
+        "atlasCell": [
+          0,
+          1
+        ],
+        "source": "Alle Drops und Analysen · ungewöhnlich",
+        "description": "Hochfeste Struktur für Fertigung."
+      },
+      "photonicLenses": {
+        "name": "Photonische Linsen",
+        "rarity": "selten",
+        "atlasCell": [
+          1,
+          1
+        ],
+        "source": "Alle Drops und Analysen · selten",
+        "description": "Optische Kopplung für schnelle Systeme."
+      },
+      "graphene": {
+        "name": "Graphen",
+        "rarity": "selten",
+        "atlasCell": [
+          2,
+          1
+        ],
+        "source": "Alle Drops und Analysen · selten",
+        "description": "Leitfähige, leichte Struktur."
+      },
+      "nanotubes": {
+        "name": "Nanoröhrchen",
+        "rarity": "episch",
+        "atlasCell": [
+          0,
+          2
+        ],
+        "source": "Alle Drops und Analysen · sehr selten",
+        "description": "Dichte nanoskalige Leiter."
+      },
+      "superconductors": {
+        "name": "Supraleiter",
+        "rarity": "episch",
+        "atlasCell": [
+          1,
+          2
+        ],
+        "source": "Alle Drops und Analysen · extrem selten",
+        "description": "Verlustarme Hochleistungsverbindungen."
+      },
+      "neuralCrystals": {
+        "name": "Neuralkristalle",
+        "rarity": "legendär",
+        "atlasCell": [
+          2,
+          2
+        ],
+        "source": "Alle Drops und Analysen · Jackpot",
+        "description": "Seltene adaptive Rechenmatrix."
+      },
+      "quantumCores": {
+        "name": "Quantenkerne",
+        "rarity": "mythisch",
+        "atlasCell": [
+          3,
+          2
+        ],
+        "source": "Alle Drops und Analysen · Ultra-Jackpot",
+        "description": "Extrem seltener Kern für Endgame-Fertigung."
+      }
+    },
+    "componentSources": {
+      "hardware": {
+        "circuits": 450000,
+        "copperCoils": 300000,
+        "siliconWafers": 140000,
+        "titaniumBolts": 70000,
+        "photonicLenses": 25000,
+        "graphene": 9000,
+        "nanotubes": 4000,
+        "superconductors": 1500,
+        "neuralCrystals": 450,
+        "quantumCores": 50
+      },
+      "architecture": {
+        "circuits": 180000,
+        "copperCoils": 160000,
+        "siliconWafers": 190000,
+        "titaniumBolts": 130000,
+        "photonicLenses": 90000,
+        "graphene": 55000,
+        "nanotubes": 24000,
+        "superconductors": 9000,
+        "neuralCrystals": 1800,
+        "quantumCores": 200
+      },
+      "artifact": {
+        "circuits": 80000,
+        "copperCoils": 70000,
+        "siliconWafers": 90000,
+        "titaniumBolts": 80000,
+        "photonicLenses": 100000,
+        "graphene": 110000,
+        "nanotubes": 70000,
+        "superconductors": 30000,
+        "neuralCrystals": 9000,
+        "quantumCores": 1000
+      }
+    },
+    "worldDropWeights": {
+      "circuits": 450000,
+      "copperCoils": 300000,
+      "siliconWafers": 140000,
+      "titaniumBolts": 70000,
+      "photonicLenses": 25000,
+      "graphene": 9000,
+      "nanotubes": 4000,
+      "superconductors": 1500,
+      "neuralCrystals": 450,
+      "quantumCores": 50
+    },
+    "worldDropSeconds": 45,
+    "passiveCircuitSecondsPerClass": 3600,
+    "hardwareMilestoneTitanium": 1,
+    "gamingGpuMilestoneLaser": 1,
+    "modules": {
+      "computeBus": {
+        "name": "Compute-Bus",
+        "ingredients": {
+          "circuits": 10,
+          "copperCoils": 6,
+          "siliconWafers": 4,
+          "titaniumBolts": 4
+        },
+        "data": 250,
+        "effect": "compute"
+      },
+      "dataLattice": {
+        "name": "Daten-Gitter",
+        "ingredients": {
+          "graphene": 6,
+          "nanotubes": 3,
+          "photonicLenses": 4,
+          "circuits": 8
+        },
+        "data": 500,
+        "effect": "data"
+      }
+    },
+    "craftingSeconds": {
+      "module": 60,
+      "common": 300,
+      "uncommon": 900,
+      "rare": 3600,
+      "epic": 14400,
+      "legendary": 43200,
+      "mythic": 86400
+    },
+    "itemMaterialFamilies": {
+      "impulse-relay": {
+        "base": "copperCoils",
+        "rare": "superconductors"
+      },
+      "insight-archive": {
+        "base": "neuralCrystals",
+        "rare": "quantumCores"
+      },
+      "quantum-chip": {
+        "base": "siliconWafers",
+        "rare": "superconductors"
+      },
+      "neural-asic": {
+        "base": "siliconWafers",
+        "rare": "superconductors"
+      },
+      "memory-crystal": {
+        "base": "siliconWafers",
+        "rare": "superconductors"
+      },
+      "tensor-core": {
+        "base": "siliconWafers",
+        "rare": "superconductors"
+      },
+      "photonic-array": {
+        "base": "photonicLenses",
+        "rare": "neuralCrystals"
+      },
+      "logic-seed": {
+        "base": "photonicLenses",
+        "rare": "neuralCrystals"
+      },
+      "lab-drone": {
+        "base": "photonicLenses",
+        "rare": "neuralCrystals"
+      },
+      "data-prism": {
+        "base": "photonicLenses",
+        "rare": "neuralCrystals"
+      },
+      "field-scanner": {
+        "base": "graphene",
+        "rare": "quantumCores"
+      }
+    },
+    "itemUpgradeMaterials": {
+      "uncommon": {
+        "base": 4,
+        "rare": 0
+      },
+      "rare": {
+        "base": 12,
+        "rare": 0
+      },
+      "epic": {
+        "base": 30,
+        "rare": 2
+      },
+      "legendary": {
+        "base": 75,
+        "rare": 8
+      },
+      "mythic": {
+        "base": 180,
+        "rare": 25
+      }
+    },
+    "blueprintMasteryCosts": [
+      10,
+      25,
+      60,
+      150
+    ],
+    "blueprintMasteryFactors": [
+      1,
+      0.95,
+      0.9,
+      0.85,
+      0.8
+    ],
+    "researchFragmentConversionRate": 10,
+    "itemCombinations": {
+      "compute-credit-link": {
+        "kind": "credits-bonus",
+        "effects": [
+          "compute",
+          "credits"
+        ],
+        "value": 0.08,
+        "legacy": true
+      },
+      "training-research-link": {
+        "kind": "research-bonus",
+        "effects": [
+          "training",
+          "research"
+        ],
+        "value": 0.12,
+        "legacy": true
+      },
+      "parallel-architecture": {
+        "kind": "compute-factor",
+        "items": [
+          {
+            "slot": "processor",
+            "type": "quantum-chip"
+          },
+          {
+            "slot": "core",
+            "type": "tensor-core"
+          }
+        ],
+        "value": 1.2,
+        "legacy": false
+      },
+      "learning-pipeline": {
+        "kind": "training-bonus",
+        "items": [
+          {
+            "slot": "processor",
+            "type": "photonic-array"
+          },
+          {
+            "slot": "core",
+            "type": "logic-seed"
+          }
+        ],
+        "value": 0.5,
+        "legacy": false
+      },
+      "material-mapping": {
+        "kind": "analysis-components-factor",
+        "items": [
+          {
+            "slot": "research",
+            "type": "field-scanner"
+          },
+          {
+            "slot": "core",
+            "type": "memory-crystal"
+          }
+        ],
+        "value": 1.25,
+        "legacy": false
+      }
+    },
+    "itemRecipes": {
+      "impulse-relay": {
+        "rarity": "common",
+        "name": "Impulsrelais-Bauplan",
+        "ingredients": {
+          "circuits": 12,
+          "copperCoils": 2,
+          "siliconWafers": 0,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "blueprints": 0,
+        "data": 0,
+        "modules": {},
+        "duration": 300
+      },
+      "quantum-chip": {
+        "rarity": "common",
+        "name": "Quantenchip-Bauplan",
+        "ingredients": {
+          "circuits": 30,
+          "copperCoils": 12,
+          "siliconWafers": 18,
+          "titaniumBolts": 8,
+          "photonicLenses": 2,
+          "graphene": 1,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "blueprints": 4,
+        "data": 1800,
+        "modules": {
+          "computeBus": 1
+        }
+      },
+      "neural-asic": {
+        "rarity": "common",
+        "name": "Neural-ASIC-Bauplan",
+        "ingredients": {
+          "circuits": 40,
+          "copperCoils": 12,
+          "siliconWafers": 24,
+          "titaniumBolts": 10,
+          "photonicLenses": 5,
+          "graphene": 8,
+          "nanotubes": 4,
+          "superconductors": 0,
+          "neuralCrystals": 1,
+          "quantumCores": 0
+        },
+        "blueprints": 5,
+        "data": 2400,
+        "modules": {
+          "dataLattice": 1
+        }
+      },
+      "field-scanner": {
+        "rarity": "common",
+        "name": "Feldscanner-Bauplan",
+        "ingredients": {
+          "circuits": 20,
+          "copperCoils": 14,
+          "siliconWafers": 10,
+          "titaniumBolts": 12,
+          "photonicLenses": 14,
+          "graphene": 8,
+          "nanotubes": 5,
+          "superconductors": 1,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "blueprints": 5,
+        "data": 3000,
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        }
+      },
+      "data-prism": {
+        "rarity": "common",
+        "name": "Datenprisma-Bauplan",
+        "ingredients": {
+          "circuits": 20,
+          "copperCoils": 8,
+          "siliconWafers": 14,
+          "titaniumBolts": 8,
+          "photonicLenses": 10,
+          "graphene": 12,
+          "nanotubes": 4,
+          "superconductors": 1,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "blueprints": 5,
+        "data": 2800,
+        "modules": {
+          "dataLattice": 1
+        }
+      },
+      "insight-archive": {
+        "rarity": "common",
+        "name": "Erkenntnisarchiv-Bauplan",
+        "ingredients": {
+          "circuits": 100,
+          "copperCoils": 0,
+          "siliconWafers": 20,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 5,
+          "quantumCores": 0
+        },
+        "blueprints": 0,
+        "data": 0,
+        "modules": {},
+        "duration": 3600
+      },
+      "photonic-array": {
+        "rarity": "common",
+        "name": "Photonenfeld-Bauplan",
+        "research": "blueprints",
+        "ingredients": {
+          "circuits": 20,
+          "copperCoils": 8,
+          "siliconWafers": 12,
+          "titaniumBolts": 0,
+          "photonicLenses": 6,
+          "graphene": 0,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "blueprints": 6,
+        "data": 1200,
+        "modules": {
+          "computeBus": 1
+        },
+        "duration": 900
+      },
+      "memory-crystal": {
+        "rarity": "common",
+        "name": "Speicherkristall-Bauplan",
+        "research": "blueprints",
+        "ingredients": {
+          "circuits": 16,
+          "copperCoils": 0,
+          "siliconWafers": 16,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 6,
+          "nanotubes": 0,
+          "superconductors": 0,
+          "neuralCrystals": 2,
+          "quantumCores": 0
+        },
+        "blueprints": 6,
+        "data": 1800,
+        "modules": {
+          "dataLattice": 1
+        },
+        "duration": 1200
+      },
+      "logic-seed": {
+        "rarity": "common",
+        "name": "Logik-Saat-Bauplan",
+        "research": "blueprints",
+        "ingredients": {
+          "circuits": 12,
+          "copperCoils": 0,
+          "siliconWafers": 10,
+          "titaniumBolts": 0,
+          "photonicLenses": 0,
+          "graphene": 4,
+          "nanotubes": 2,
+          "superconductors": 0,
+          "neuralCrystals": 1,
+          "quantumCores": 0
+        },
+        "blueprints": 6,
+        "data": 1500,
+        "modules": {
+          "dataLattice": 1
+        },
+        "duration": 900
+      },
+      "tensor-core": {
+        "rarity": "common",
+        "name": "Tensor-Kern-Bauplan",
+        "research": "blueprints",
+        "ingredients": {
+          "circuits": 36,
+          "copperCoils": 0,
+          "siliconWafers": 20,
+          "titaniumBolts": 12,
+          "photonicLenses": 0,
+          "graphene": 6,
+          "nanotubes": 4,
+          "superconductors": 2,
+          "neuralCrystals": 0,
+          "quantumCores": 0
+        },
+        "blueprints": 8,
+        "data": 3000,
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "duration": 1800
+      },
+      "lab-drone": {
+        "rarity": "common",
+        "name": "Labordrohne-Bauplan",
+        "research": "blueprints",
+        "ingredients": {
+          "circuits": 24,
+          "copperCoils": 12,
+          "siliconWafers": 0,
+          "titaniumBolts": 16,
+          "photonicLenses": 8,
+          "graphene": 0,
+          "nanotubes": 4,
+          "superconductors": 0,
+          "neuralCrystals": 0,
+          "quantumCores": 1
+        },
+        "blueprints": 10,
+        "data": 3600,
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "duration": 1800
+      }
+    },
+    "experimentRewards": {
+      "hardware": {
+        "components": 45,
+        "blueprints": 1,
+        "research": 0,
+        "itemChance": 0
+      },
+      "architecture": {
+        "components": 20,
+        "blueprints": 0,
+        "research": 2,
+        "itemChance": 0
+      },
+      "artifact": {
+        "components": 20,
+        "blueprints": 2,
+        "research": 0,
+        "itemChance": 0.06
+      }
+    },
+    "breakthroughs": {
+      "distillation": [
+        10,
+        0.15
+      ],
+      "graph": [
+        20,
+        0.2
+      ],
+      "planning": [
+        30,
+        0.2
+      ]
+    },
+    "gemShop": {
+      "labSlots": [
+        500,
+        1500
+      ],
+      "offline": [
+        {
+          "hours": 12,
+          "cost": 250
+        },
+        {
+          "hours": 16,
+          "cost": 500
+        },
+        {
+          "hours": 24,
+          "cost": 1000
+        }
+      ],
+      "crafting": [
+        {
+          "seconds": 1800,
+          "cost": 20
+        },
+        {
+          "seconds": 14400,
+          "cost": 120
+        }
+      ],
+      "training": [
+        {
+          "seconds": 900,
+          "cost": 15
+        },
+        {
+          "seconds": 3600,
+          "cost": 45
+        }
+      ],
+      "materials": {
+        "circuits": {
+          "cost": 30,
+          "amount": 50
+        },
+        "advanced": {
+          "cost": 60,
+          "copperCoils": 10,
+          "siliconWafers": 10
+        }
+      },
+      "labBoost": [
+        80,
+        3600
+      ],
+      "boostCap": 86400
+    },
+    "researchLabMax": 4,
+    "equipmentSlotCosts": [
+      1000000000,
+      100000000000000000000
+    ],
+    "achievementTierGems": [
+      2,
+      4,
+      8,
+      12
+    ],
+    "achievementPointsPerTier": [
+      2,
+      4,
+      8,
+      12
+    ],
+    "achievementResearchPerTen": 0.01,
+    "achievementResearchCap": 0.2,
+    "missionRewards": {
+      "daily": {
+        "task": 2,
+        "bonus": 6
+      },
+      "weekly": {
+        "task": 5,
+        "bonus": 30
+      },
+      "monthly": {
+        "task": 15,
+        "bonus": 120
+      }
+    },
+    "hardwareAutobuyerUnlock": 100,
+    "hardwareAutobuyerInterval": 5,
+    "adLimits": {
+      "creditBoost": 8,
+      "components": 12,
+      "creditDrop": 12
+    },
+    "researchProjects": {
+      "operations": {
+        "name": "Labororganisation",
+        "balanceCategory": "automation",
+        "effect": "Erweitert die durch labs2 freigeschaltete Queue von zwei auf vier wartende Aufträge."
+      },
+      "blueprints": {
+        "name": "Offene Baupläne",
+        "balanceCategory": "analysis",
+        "effect": "Schaltet fortgeschrittene Itemrezepte frei."
+      },
+      "alignment": {
+        "name": "Reproduzierbare Modelle",
+        "balanceCategory": "model",
+        "effect": "Grunddauer zukünftiger Trainings ×0,90."
+      },
+      "dataPipeline": {
+        "name": "Datenpipeline",
+        "balanceCategory": "data",
+        "effect": "Zukünftige Analysen bezahlen 80 % ihrer regulären Data-Kosten."
+      },
+      "distributedInference": {
+        "name": "Verteilte Inferenz",
+        "balanceCategory": "model",
+        "effect": "Verbindet benachbarte Hardwareklassen: 25 Vorgänger verstärken bis zu zehn Nachfolger."
+      },
+      "modelTransfer": {
+        "name": "Modelltransfer",
+        "balanceCategory": "model",
+        "effect": "Die ersten sechs Trainingsstarts jedes Runs: Grunddauer ×0,50."
+      },
+      "materialRecycling": {
+        "name": "Materialrecycling",
+        "balanceCategory": "analysis",
+        "effect": "5 % der reservierten Komponenten je hergestelltem Item zurück."
+      },
+      "researchScheduling": {
+        "name": "Forschungsplanung",
+        "balanceCategory": "automation",
+        "effect": "Schaltet zusammen mit labs4 den Forschungsdirektor frei."
+      }
+    },
+    "repeatableResearch": {
+      "dataGeneration": {
+        "name": "Datenerzeugung",
+        "category": "Infrastruktur",
+        "balanceCategory": "data",
+        "effectPerLevel": 0.02,
+        "requires": null,
+        "effect": "Mehr Daten aus bestehenden Nutzern."
+      },
+      "materialAnalysis": {
+        "name": "Materialanalyse",
+        "category": "Analyse",
+        "balanceCategory": "analysis",
+        "effectPerLevel": 0.08,
+        "requires": "dataGeneration",
+        "effect": "Mehr garantierte Komponenten aus Analysen."
+      },
+      "blueprintAnalysis": {
+        "name": "Bauplananalyse",
+        "category": "Analyse",
+        "balanceCategory": "analysis",
+        "effectPerLevel": 0.1,
+        "requires": "materialAnalysis",
+        "effect": "Mehr Bauplanfragmente aus Analysen."
+      },
+      "modelArchitecture": {
+        "name": "Modellarchitektur",
+        "category": "Modelle",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.18,
+        "requires": "dataGeneration",
+        "effect": "Multiplikativer Umsatz-Sprung pro Stufe; skaliert dauerhaft über Prestiges."
+      },
+      "computeOptimization": {
+        "name": "Compute-Optimierung",
+        "category": "Infrastruktur",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.16,
+        "requires": "modelArchitecture",
+        "effect": "Multiplikativer globaler Compute-Bonus pro Stufe."
+      },
+      "userScaling": {
+        "name": "Nutzer-Skalierung",
+        "category": "Modelle",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.14,
+        "requires": "computeOptimization",
+        "effect": "Multiplikative Nutzerkapazität pro Stufe."
+      },
+      "hardwareIntegration": {
+        "name": "Hardware-Integration",
+        "category": "Infrastruktur",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.12,
+        "requires": "userScaling",
+        "effect": "Verstärkt späte Hardwareklassen exponentiell."
+      },
+      "labAutomation": {
+        "name": "Laborautomation",
+        "category": "Automation",
+        "balanceCategory": "automation",
+        "effectPerLevel": 0.05,
+        "requires": "blueprintAnalysis",
+        "effect": "Beschleunigt Analysen."
+      },
+      "commercialization": {
+        "name": "Kommerzialisierung",
+        "category": "Ökonomie",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.15,
+        "requires": "modelArchitecture",
+        "effect": "Multiplikativer Umsatz pro Nutzer; verbindet Modellqualität mit Monetarisierung."
+      },
+      "networkEffects": {
+        "name": "Netzwerkeffekte",
+        "category": "Ökonomie",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.018,
+        "requires": "commercialization",
+        "effect": "Nutzerzahl erzeugt einen logarithmisch skalierenden Umsatzmultiplikator."
+      },
+      "parallelArchitecture": {
+        "name": "Parallele Architektur",
+        "category": "Compute",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.035,
+        "requires": "computeOptimization",
+        "effect": "Jede freigeschaltete Hardwareklasse verstärkt Compute pro Forschungsstufe."
+      },
+      "hardwareCoDesign": {
+        "name": "Hardware-Co-Design",
+        "category": "Compute",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.006,
+        "requires": "parallelArchitecture",
+        "effect": "Model-Level und Hardwareklassen verstärken gemeinsam den Compute."
+      },
+      "syntheticData": {
+        "name": "Synthetische Daten",
+        "category": "Daten",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.012,
+        "requires": "dataGeneration",
+        "effect": "Model-Level verstärkt die Datenerzeugung."
+      },
+      "dataFlywheel": {
+        "name": "Data Flywheel",
+        "category": "Daten",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.01,
+        "requires": "syntheticData",
+        "effect": "Exponentiert die gesamte Data-Synergy pro Stufe."
+      },
+      "recursiveLearning": {
+        "name": "Rekursives Lernen",
+        "category": "Modelle",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.008,
+        "requires": "modelArchitecture",
+        "effect": "Exponentiert die globale Model-Synergy pro Stufe."
+      },
+      "autonomousScience": {
+        "name": "Autonome Wissenschaft",
+        "category": "Automation",
+        "balanceCategory": "automation",
+        "effectPerLevel": 0.02,
+        "requires": "labAutomation",
+        "effect": "+0,02 Laborleistungsbonus je Level; Voraussetzung des Forschungsdirektors."
+      },
+      "tapAmplification": {
+        "name": "Impulsverstärkung",
+        "category": "Aktiv",
+        "balanceCategory": "model",
+        "effectPerLevel": 0.12,
+        "requires": "computeOptimization",
+        "effect": "Jede Stufe verstärkt aktive Taps multiplikativ."
+      },
+      "dropProtocols": {
+        "name": "Signalprotokolle",
+        "category": "Aktiv",
+        "balanceCategory": "analysis",
+        "effectPerLevel": 0.08,
+        "requires": "materialAnalysis",
+        "effect": "Erhöht Häufigkeit und Qualität aktiver Signal-Drops."
+      }
+    }
+  },
+  "itemTypes": {
+    "impulse-relay": {
+      "name": "Impulsrelais",
+      "slot": "processor",
+      "effect": "relay"
+    },
+    "insight-archive": {
+      "name": "Erkenntnisarchiv",
+      "slot": "research",
+      "effect": "int-yield"
+    },
+    "quantum-chip": {
+      "name": "Quantenchip",
+      "slot": "processor",
+      "effect": "compute"
+    },
+    "neural-asic": {
+      "name": "Neural-ASIC",
+      "slot": "processor",
+      "effect": "credits"
+    },
+    "photonic-array": {
+      "name": "Photonenfeld",
+      "slot": "processor",
+      "effect": "training"
+    },
+    "memory-crystal": {
+      "name": "Speicherkristall",
+      "slot": "core",
+      "effect": "credits"
+    },
+    "logic-seed": {
+      "name": "Logik-Saat",
+      "slot": "core",
+      "effect": "training"
+    },
+    "tensor-core": {
+      "name": "Tensor-Kern",
+      "slot": "core",
+      "effect": "compute"
+    },
+    "field-scanner": {
+      "name": "Feldscanner",
+      "slot": "research",
+      "effect": "experiment"
+    },
+    "lab-drone": {
+      "name": "Labordrohne",
+      "slot": "research",
+      "effect": "research"
+    },
+    "data-prism": {
+      "name": "Datenprisma",
+      "slot": "research",
+      "effect": "data"
+    }
+  }
+}

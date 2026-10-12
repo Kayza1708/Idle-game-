@@ -819,3 +819,20 @@ Abhängig von PR #82 `d8d5a29`; keine automatische Integration. Nachweis: `data-
 [Quellen, Verträge, konkrete Vorher/Nachher-Werte und Grenzen](item-grind-audit.md). Basis finaler offener #83-Head, abhängig von #83 und #82; Vorgänger unverändert, kein Merge.
 
 [Draft-PR #84](https://github.com/Kayza1708/Idle-game-/pull/84), Implementierung `23659632f4de6ba74aee92f877db81984f4dcc48`; kurze CI am Implementierungscommit grün. Weiterhin abhängig von #83/#82, nicht gemergt.
+
+
+## Auftrag 5 — Materialwirtschaft, 30 Geräte, Schmieden, Challenge-Stufen — technisch erledigt (12.10.2026)
+
+- [x] 20 stabile Materialien, bezahlte dauerhafte Zugänge, alte Bestände/Quellen erhalten; zentrale Fokus-/Paket-/Quellenquotes.
+- [x] 15 Klassen ×6 bezahlte Kanten, Bulk-/Run-/Reload-/Migrationsschutz und zusätzlicher bezahlter Klassenupgrade ohne neue Preisformel.
+- [x] Belegte Komponentenbasis, Fusion ohne Vervielfachung, 60-%-Gesamtbudget einschließlich Craft-Recycling; 3/5-Budget auch am maximalen sicheren Integer exakt zerlegt.
+- [x] 30 Itemtypen mit realen Verbrauchern; 19 neue Rezepte/Entdeckungen, Lernen und Meisterschaft getrennt und permanent.
+- [x] Drei permanente Schmieden ×5 Stufen, eingefrorene bezahlte Aufträge, zwei unbezahlte Wartestellen, Reseterhalt.
+- [x] Zehn Familien ×69 wissenschaftliche versionierte Ziele, Kapitelregeln, erlaubte kopierte Loadouts, getrennte Produktion, einmalige Rewards und sichtbare vorhandene Automationsoptionen.
+- [x] Save v47/Migration, Resetvorschauen, Auftrags-/Quellen-/Zielanzeigen, DE/EN, Export, bestehende Audio/Haptik integriert.
+- [x] 531 unterschiedliche gezielte Regressionstests in 23 Dateien (528 im abgegrenzten Lauf/57,11 s, anschließend 97 im Nachlauf/3,83 s einschließlich drei neuer Ausrüstungs-Bulkregrressionen); Typecheck, Production-Build, Diffcheck; Browser 360/390/430 px DE/EN ohne Seitenüberbreite.
+- [ ] Natürliche Material-/Schmiede-/69-Stufen-Progression und Langzeitbalance kalibrieren (kein Nachweis dieses Auftrags).
+- [ ] Eigene Grafiken für 19 neue Geräte, zehn neue Materialien und umbenannte Memristor-Arrays; aktuell ehrliche neutrale Symbole.
+- [ ] Echter Bonuskistenfluss separat spezifizieren; dieser Auftrag bereitet nur den zentralen Grant vor.
+
+Nachweise und ausdrücklich dokumentierte Ausgangswerte: [Audit](material-builds-audit.md), [vollständiger Katalog](material-builds-catalog.json), [Domain](material-builds-proof.json), [Browser](material-builds-browser.json).

@@ -36,7 +36,7 @@ describe('isolated challenge runs with short real simulations',()=>{
   expect(run.credits).toBe(50);expect(exactEconomyValue(run,'credits').toNumber()).toBe(50);expect(run.hardware).toBe(0);
   expect(Object.values(run.hardwareCounts).every(n=>n===0)).toBe(true);
   expect(run.runCreditsEarned).toBe(0);expect(run.lifetimeEligibleCredits).toBe(0);expect(run.totalINTEarned).toBe(0);expect(run.lifetime.regularCredits).toBe(0);
-  expect(run.inventory).toEqual([]);expect(run.equipped).toEqual({});expect(run.nodes).toEqual([]);expect(run.completedResearch).toEqual([]);
+  expect(run.inventory).toHaveLength(main.inventory.length);expect(run.inventory[0]).toMatchObject({type:main.inventory[0].type,rarity:main.inventory[0].rarity,challengeCopy:true,locked:true});expect(run.equipped.processor).toBe(run.inventory[0].id);expect(run.nodes).toEqual(main.nodes);expect(run.completedResearch).toEqual(main.completedResearch);
   const bought=buyHardwareClass(run,'calculator',1);
   expect(bought.hardwareCounts.calculator).toBe(1);expect(bought.credits).toBe(35);expect(bought.challengeSession?.main.credits).toBe(main.credits);
   const progressed=advance(bought,30,true,rng).state;expect(progressed.credits).toBeGreaterThan(35);expect(main.lifetime.taps).toBe(0);
@@ -51,8 +51,8 @@ describe('isolated challenge runs with short real simulations',()=>{
   expect(advanced.state.challengeSession?.main.lifetime.activeSeconds).toBe(main.lifetime.activeSeconds);
  });
  it.each(['abort','success'] as const)('returns the advanced main game after %s, retaining research, equipment and jobs',kind=>{
-  const main=preparedMain(),expected=advance(main,300,false,rng),run=advance(startRunChallenge(main,'no-taps'),300,true,rng).state;
-  const ready=kind==='success'?addCredits(run,BALANCE.prestigeBaseRevenue):run;
+  const main=preparedMain(),expected=advance(main,300,false,rng),run=advance(kind==='success'?buyHardwareClass(addCredits(startRunChallenge(main,'no-taps'),1e60,false),'gpu',500):startRunChallenge(main,'no-taps'),300,true,rng).state;
+  const ready=run;
   const returned=kind==='success'?completeRunChallenge(ready):abortRunChallenge(ready);
   expect(returned.inventory).toEqual(expected.state.inventory);expect(returned.equipped).toEqual(main.equipped);expect(returned.completedResearch).toContain('blueprints');
   expect(returned.researchLevels).toEqual(expected.state.researchLevels);expect(returned.modules).toEqual(expected.state.modules);
@@ -89,19 +89,19 @@ describe('isolated challenge runs with short real simulations',()=>{
  });
  it('consumes nonproductive elapsed time once without granting another starter budget',()=>{
   const idle=newGame(0),wall=60000;
-  const run=advanceTo(startRunChallenge(idle,'no-taps'),wall,false,rng).state;
+  const run=advanceTo(startRunChallenge(idle,'no-items'),wall,false,rng).state;
   expect(run.challengeSession?.report.seconds).toBe(60);
   expect(run.challengeSession?.report.lostSeconds).toBe(0);expect(run.challengeSession?.anchor).toBe(wall);
   const again=advanceTo(run,wall,false,rng).state;
   expect(again.challengeSession?.report).toEqual(run.challengeSession?.report);expect(abortRunChallenge(again).credits).toBe(50);
  });
  it('transfers only the existing first-clear stars, once even after reload or a repeated run',()=>{
-  const main=preparedMain(),run=addCredits(buyHardwareClass(startRunChallenge(main,'no-taps'),'calculator',1),BALANCE.prestigeBaseRevenue);
+  const main=preparedMain(),expected=advance(main,300,false,rng).state,run=advance(buyHardwareClass(addCredits(startRunChallenge(main,'no-taps'),1e60,false),'gpu',500),300,false,rng).state;
   expect(runChallengeReady(run)).toBe(true);const returned=completeRunChallenge(run);
-  expect(returned.credits).toBe(main.credits);expect(returned.inventory).toEqual(main.inventory);expect(returned.data).toBe(main.data);
+  expect(returned.credits).toBe(expected.credits);expect(returned.inventory).toEqual(expected.inventory);expect(returned.data).toBe(expected.data);
   expect(returned.retention.runCompletions['no-taps']).toBe(1);expect(returned.retention.challengeStars).toBe(2);
   const reloaded=restore(serialize(returned),0).state;expect(completeRunChallenge(reloaded)).toBe(reloaded);
-  const again=completeRunChallenge(addCredits(startRunChallenge(reloaded,'no-taps'),BALANCE.prestigeBaseRevenue));
+  const again=completeRunChallenge(advance(buyHardwareClass(addCredits(startRunChallenge(reloaded,'no-taps'),1e60,false),'gpu',500),300,false,rng).state);
   expect(again.retention.runCompletions['no-taps']).toBe(2);expect(again.retention.challengeStars).toBe(2);
  });
  it('blocks resets, the gem shop and main-game claims through real domain transactions',()=>{
@@ -109,7 +109,7 @@ describe('isolated challenge runs with short real simulations',()=>{
   const run={...funded,gems:1000,cycleINTEarned:1e12,exactEconomy:{...funded.exactEconomy,cycleINTEarned:{m:1,e:12}},season:{...funded.season,xp:1000},lifetime:{...funded.lifetime,hardwareBought:25},onboarding:{completed:['first-buy'],claimed:[]}};
   expect(prestige({...run,retention:{...run.retention,activeRun:null}})).not.toBe(run);
   expect(axiomReset({...run,retention:{...run.retention,activeRun:null}}).axiomResetCount).toBeGreaterThan(run.axiomResetCount);
-  expect(prestige(run)).toBe(run);expect(axiomReset(run)).toBe(run);expect(buyGemOffer(run,'materials-circuits')).toBe(run);
+  const reset=prestige(run);expect(reset.prestigeCount).toBe(run.prestigeCount+1);expect(reset.challengeSession!.main).toBe(run.challengeSession!.main);expect(axiomReset(run)).toBe(run);expect(buyGemOffer(run,'materials-circuits')).toBe(run);
   expect(gemOfferQuote(run,'materials-circuits')).toMatchObject({enabled:false,reason:'challenge'});
   expect(claimMission(run,'daily',run.missions.daily.tasks[0].id)).toBe(run);expect(claimMissionBonus(run,'daily')).toBe(run);
   expect(claimSeasonReward(run,1)).toBe(run);expect(claimAchievement(run,'hardware',0)).toBe(run);expect(claimOnboarding(run,'first-buy')).toBe(run);

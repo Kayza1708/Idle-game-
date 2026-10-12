@@ -1,3 +1,4 @@
+import {BALANCE} from './economy';
 import {researchUnlockText} from './researchAreaText';
 import type {Language} from './i18n';
 import type {
@@ -325,7 +326,7 @@ const rareSource=l(
  'Wszystkie dropy i analizy · rzadkie'
 );
 
-const components:Record<ComponentId,ComponentCopy>={
+const components:Partial<Record<ComponentId,ComponentCopy>>={
  circuits:{name:l('Circuits','Schaltkreise','Circuitos','Circuits','Circuitos','Circuiti','Obwody'),source:commonSource},
  copperCoils:{name:l('Copper Coils','Kupferspulen','Bobinas de cobre','Bobines de cuivre','Bobinas de cobre','Bobine di rame','Cewki miedziane'),source:commonSource},
  siliconWafers:{name:l('Silicon Wafers','Siliziumwafer','Obleas de silicio','Plaquettes de silicium','Wafers de silício','Wafer di silicio','Wafle krzemowe'),source:uncommonSource},
@@ -338,10 +339,8 @@ const components:Record<ComponentId,ComponentCopy>={
  quantumCores:{name:l('Quantum Cores','Quantenkerne','Núcleos cuánticos','Cœurs quantiques','Núcleos quânticos','Nuclei quantistici','Rdzenie kwantowe'),source:l('All drops and analyses · ultra jackpot','Alle Drops und Analysen · Ultra-Jackpot','Todos los drops y análisis · ultra jackpot','Tous les drops et analyses · ultra jackpot','Todos os drops e análises · ultra jackpot','Tutti i drop e analisi · ultra jackpot','Wszystkie dropy i analizy · ultra jackpot')}
 };
 
-export const componentText=(id:ComponentId,language:Language)=>({
- name:pick(components[id].name,language),
- source:pick(components[id].source,language),
-});
+const materialDisplayNames={"circuits": ["Leiterplatten", "Circuit boards"], "titaniumBolts": ["Titanbefestigungen", "Titanium fasteners"], "nanotubes": ["Kohlenstoffnanoröhren", "Carbon nanotubes"], "superconductors": ["Supraleitende Leiter", "Superconducting wires"], "neuralCrystals": ["Memristor-Arrays", "Memristor arrays"], "quantumCores": ["Quantenprozessorkerne", "Quantum processor cores"]} as const;
+export const componentText=(id:ComponentId,language:Language)=>{const renamed=materialDisplayNames[id as keyof typeof materialDisplayNames],raw=BALANCE.components[id],copy=components[id];return{name:renamed?renamed[language==='de'?0:1]:copy?pick(copy.name,language):language==='de'?raw.name:String(raw.en),source:copy?pick(copy.source,language):language==='de'?'Bezahlte Hardwarepakete und zugängliche Analysen / Drops':'Paid hardware packages and accessible analyses / drops'};};
 
 /* =========================================================
    ITEMS / MODULES
@@ -358,7 +357,7 @@ const rarities:Record<Rarity,L>={
 
 export const rarityText=(id:Rarity,language:Language)=>pick(rarities[id],language);
 
-const itemNames:Record<ItemTypeId,L>={
+const itemNames:Partial<Record<ItemTypeId,L>>={
  'insight-archive':l('Insight Archive','Erkenntnisarchiv','','','','',''),
  'impulse-relay':l('Impulse Relay','Impulsrelais','Relé de impulso','Relais d’impulsion','Relé de impulso','Relè d’impulso','Przekaźnik impulsowy'),
  'quantum-chip':l('Quantum Chip','Quantenchip','Chip cuántico','Puce quantique','Chip quântico','Chip quantistico','Chip kwantowy'),
@@ -372,9 +371,9 @@ const itemNames:Record<ItemTypeId,L>={
  'data-prism':l('Data Prism','Datenprisma','Prisma de datos','Prisme de données','Prisma de dados','Prisma dati','Pryzmat danych')
 };
 
-export const itemText=(id:ItemTypeId,language:Language)=>pick(itemNames[id],language);
+export const itemText=(id:ItemTypeId,language:Language)=>itemNames[id]?pick(itemNames[id]!,language):language==='de'?BALANCE.extendedItems[id as keyof typeof BALANCE.extendedItems].name:BALANCE.extendedItems[id as keyof typeof BALANCE.extendedItems].en;
 
-const effects:Record<ItemEffect,L>={
+const effects:Partial<Record<ItemEffect,L>>={
  'int-yield':l('INT weighting for future eligible income','INT-Gewichtung für zukünftige berechtigte Einnahmen','','','','',''),
  relay:l('Manual tap relay','Relais für manuelle Taps','Cada 10.º toque pagado: +2 segundos de créditos','Chaque 10e impulsion payée : +2 secondes de crédits','Cada 10.º toque pago: +2 segundos de créditos','Ogni 10° tap pagato: +2 secondi di crediti','Co 10. płatne kliknięcie: +2 sekundy kredytów'),
  compute:l('Compute','Compute','Cómputo','Calcul','Computação','Compute','Obliczenia'),
@@ -388,7 +387,7 @@ const effects:Record<ItemEffect,L>={
  drop:l('Drop','Drop','Drop','Drop','Drop','Drop','Drop')
 };
 
-export const effectText=(id:ItemEffect,language:Language)=>pick(effects[id],language);
+export const effectText=(id:ItemEffect,language:Language)=>effects[id]?pick(effects[id]!,language):(language==='de'?Object.values(BALANCE.extendedItems).find(d=>d.role===id)?.trigger:Object.values(BALANCE.extendedItems).find(d=>d.role===id)?.enTrigger)??id;
 
 export const moduleText=(id:'computeBus'|'dataLattice',language:Language)=>{
  const names={

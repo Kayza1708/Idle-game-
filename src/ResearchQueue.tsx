@@ -1,3 +1,4 @@
+import {researchQueueUnlocked,researchRepeatUnlocked} from './economy';
 import {visibleResearchIds} from './researchAreas';
 import {
   BALANCE,
@@ -19,7 +20,7 @@ export function ResearchQueue({
 }) {
   const de = s.settings.language === "de",
     language = s.settings.language;
-  if (!hasNode(s, "labs2", 1)) return null;
+  if (!researchQueueUnlocked(s)) return null;
   const name = (id: ResearchId) =>
     isRepeatableResearch(id)
       ? researchText(id, language).name
