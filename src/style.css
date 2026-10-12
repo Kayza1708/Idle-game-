@@ -688,3 +688,7 @@ html[data-native-platform] body{padding:0}
 .device-effect p,.recovery-details li{overflow-wrap:anywhere}.recovery-details li{display:flex;align-items:center;gap:8px}.recovery-details .component-art{width:32px}
 
 [data-planner]{grid-column:1/-1}[data-planner] label{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:44px}[data-planner] select{max-width:100%;min-height:44px}
+
+.bonus-box-card { border:1px solid var(--border,#344153); border-radius:12px; padding:12px; margin-block:12px; min-width:0; }
+.bonus-box-card h3,.bonus-box-card p { margin-block:6px; overflow-wrap:anywhere; }
+.bonus-box-card button { display:block; width:100%; min-height:44px; margin-block:6px; white-space:normal; overflow-wrap:anywhere; }

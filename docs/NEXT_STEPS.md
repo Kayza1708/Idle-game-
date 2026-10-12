@@ -1,3 +1,11 @@
+## Bonuskisten als echter Ablauf integriert – 12. Oktober 2026
+
+Tagesbonus verdient eine Kiste statt seines sofortigen Materialpakets; Gems/200 XP unverändert. Familie und 1%-Blueprintwurf werden beim Verdienen eingefroren, beim Öffnen einmalig gebucht. Inventarkarte mit Empfangsbeleg und Tagesbonus-Verweis in sieben Sprachen; kein Login-/Timer-/SDKgenerator. Höchstens 32 Pendingkisten, neuer Overflow automatisch geöffnet; unsicherer Ganzzahlgrant rollt den kompletten Overflowbonus zurück. Save v52, leere Legacy-Migration ohne Nachzahlungen, Prestige/Axiom erhalten Kisten, Challenges getrennt/blockiert. Audit/Savepfad aktualisiert. Vertrag: `bonus-box-flow.md`.
+
+Lokale Abnahme: 1.328 Standardtests, 15 neue Kistenverträge, Typecheck, Build und Diffcheck grün. Ein kurzer natürlicher 600s-Verlauf verdient eine echte Tageskiste ohne vorbereitete Ressourcen/Quests. Alle Sprachen per Renderingvertrag geprüft; keine Browser-/Geräteabnahme oder Monatsökonomie-/Retentionkalibrierung.
+
+Dieser Block liegt separat auf Draft-PR #94 auf; Vorgängerbranch bleibt unverändert. Nächster V1-Block: Rückkehr-/Freischaltungsführung und Mobileabnahme der vollständigen Abläufe. Späterer dritter Equipmentplatz/Buildbalance, Langzeitquests, native Monetarisierung/Analytics, Geräte-/Storeabnahme bleiben offen.
+
 ## Buildeinstieg und Ausrüstung integriert – 12. Oktober 2026
 
 Kategorie-/Eigentums-/Sockelprüfung für sämtliche Itemeffekte vereinheitlicht; leere andere Plätze umgehen keine Sperren. Historische Items/Referenzen bleiben, gesperrte Effekte erst nach regulärem Erwerb aktiv. Photonenfeld-Bauplan 6 → 4 Fragmente: gleiche bezahlte Einstiegsauswahl wie Chip, kein Extra-Grant. Vorschau zeigt Training-Data Q/E und neuen Laborfaktor; laufende Forschungszeiten bleiben. Details: `build-equipment-integration.md`.

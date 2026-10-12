@@ -1,3 +1,4 @@
+import {BonusBoxes} from './BonusBoxes';
 import {MaterialBuildAutomation} from './MaterialBuildAutomation';
 import {FoundryDetails,ItemForgeDetails,DeviceDetails,RecoveryDetails} from './ProgressionDetails';
 import {BlueprintMasteryDetails,ComponentSources} from './ItemProgressDetails';
@@ -242,6 +243,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
           {equipmentSlotCount(s)}
         </button>
       </header>
+      <BonusBoxes s={s} act={act}/>
       <div className="mobile-segments inventory-segments" role="tablist">
         {(["components", "modules", "workbench", "items"] as const).map(
           (id) => (
