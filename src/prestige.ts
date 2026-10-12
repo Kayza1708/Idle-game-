@@ -33,7 +33,7 @@ export function buyNode(s:GameState,id:PrestigeUpgradeId,_legacyTier?:number){if
  const unspent=exactEconomyValue(s,'unspentINT').subtract(costExact),spent=exactEconomyValue(s,'spentINT').add(costExact);
  return addEvent({...unlockResearchAreaForNode(s,id),unspentINT:Math.round(unspent.toNumber(MAX_ECONOMY_VALUE)),spentINT:Math.round(spent.toNumber(MAX_ECONOMY_VALUE)),exactEconomy:{...s.exactEconomy,unspentINT:unspent.toJSON(),spentINT:spent.toJSON()},nodes:[...s.nodes,id],unlockedEquipmentSlots:Math.max(s.unlockedEquipmentSlots??0,equipmentSlotCount({...s,nodes:[...s.nodes,id]})),insightArchiveBlueprint:s.insightArchiveBlueprint||id==='researchArchive'},'prestige-node-buy',s.savedAt,{id,cost,branch:definition.branch,depth:definition.depth,effect:definition.effect});
 }
-export function prestige(s:GameState){if(s.retention.activeRun){const q=challengeCatalogQuote(s.retention.activeRun.id as ChallengeFamily,s.retention.activeRun.stage??1)!;if(newINTScientific(s).compare(q.minimumINT)<0)return s;}
+export function prestige(s:GameState){if(s.retention.activeRun){const q=challengeCatalogQuote(s.retention.activeRun.id as ChallengeFamily,s.retention.activeRun.stage??1,s.retention.activeRun.catalogVersion===2?2:1)!;if(newINTScientific(s).compare(q.minimumINT)<0)return s;}
  if(!canPrestige(s))return s;
  const gainExact=newINTScientific(s),gain=gainExact.toNumber(MAX_ECONOMY_VALUE),reset=prestigeReset(s,gainExact);
  let recorded=recordPrestige(s,reset,gain);if(s.retention.activeRun){const m=s.retention.activeRun.metrics!;recorded=addChallengeMetrics(recorded,{prestiges:m.prestiges+1,minimumINT:m.prestiges===0?gainExact.toJSON():ScientificNumber.fromJSON(m.minimumINT).compare(gainExact)<0?m.minimumINT:gainExact.toJSON()});}return recorded;

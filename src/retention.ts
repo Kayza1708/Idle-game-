@@ -1,4 +1,4 @@
-import {challengeStartQuote,challengeCompletionQuote,challengeCatalogQuote,type ChallengeFamily,emptyChallengeMetrics} from './challengeStages';
+import {challengeAutomationUnlocks,challengeStartQuote,challengeCompletionQuote,challengeCatalogQuote,type ChallengeFamily,emptyChallengeMetrics} from './challengeStages';
 import {archiveChallengeTelemetry,addEvent} from './telemetry';
 import {advanceTo,emptyReport} from './simulation';
 import {BALANCE,equipmentSlots,equipmentSlotCount,exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
@@ -248,13 +248,13 @@ export function challengeText(
 export const challengeClaimable=(s:GameState,c:Challenge)=>!s.retention.activeRun&&c.check(s)&&!s.retention.claimedChallenges.includes(c.id);
 export function claimChallenge(s:GameState,id:string){const c=challenges.find(x=>x.id===id);if(s.retention.activeRun||!c||!challengeClaimable(s,c))return s;return{...s,retention:{...s.retention,challengeStars:s.retention.challengeStars+c.stars,claimedChallenges:[...s.retention.claimedChallenges,id]}};}
 /** Only permanent bonuses/knowledge and immutable equipment copies cross this boundary. */
-export function startRunChallenge(s:GameState,id:string,stage=1,itemIds?:string[]):GameState{
- const q=challengeStartQuote(s,id,stage,itemIds??(id==='no-items'?[]:Object.values(s.equipped).filter((x):x is string=>!!x)));if(!q.allowed)return s;
+export function startRunChallenge(s:GameState,id:string,stage=1,itemIds?:string[],networkLinks?:HardwareId[]):GameState{
+ const q=challengeStartQuote(s,id,stage,itemIds??(id==='no-items'?[]:Object.values(s.equipped).filter((x):x is string=>!!x)),networkLinks);if(!q.allowed)return s;
  const fresh=newGame(s.savedAt,s.telemetry.campaignId),runId=`${s.telemetry.campaignId}:${id}:${crypto.randomUUID()}`,inventory=q.loadout.map((item,index)=>({...item,id:`loadout-${index}`,materialBasis:undefined,recoveryUsed:undefined})),equipped=Object.fromEntries(inventory.map(i=>[itemTypes[i.type].slot,i.id]));
  return addEvent({...fresh,aiName:s.aiName,profile:{...fresh.profile,playerName:s.profile.playerName},settings:{...s.settings},clockOffsetMs:s.clockOffsetMs,gems:0,nodes:[...s.nodes],axiomUpgrades:[...s.axiomUpgrades],axiomUpgradeLevels:{...s.axiomUpgradeLevels},availableAxioms:0,totalAxiomsEarned:s.totalAxiomsEarned,axioms:0,exactAxioms:{available:{m:0,e:0},total:s.exactAxioms?.total??{m:s.totalAxiomsEarned,e:0}},totalINTEarned:s.totalINTEarned,prestigeCount:s.prestigeCount,unlockedEquipmentSlots:equipmentSlotCount(s),completedResearch:[...s.completedResearch],researchLevels:{...s.researchLevels},researchAccessIds:[...s.researchAccessIds],purchasedResearchLabs:s.purchasedResearchLabs,inventory,equipped,challengeStages:{...s.challengeStages},challengeUnlocks:[...s.challengeUnlocks],learnedRecipes:[],blueprintMastery:{...fresh.blueprintMastery},craftedItemTypes:[],craftedItemCounts:{...fresh.craftedItemCounts},materials:{...fresh.materials},hardwareAutoBuyers:{...s.hardwareAutoBuyers},automation:{...fresh.automation,enabled:s.automation.enabled},
   exactEconomy:{...fresh.exactEconomy,totalINTEarned:s.exactEconomy.totalINTEarned},
   story:{...fresh.story,tutorial:'skipped',target:null,open:null,queue:[],enabled:false},
-  retention:{...fresh.retention,activeRun:{id,stage,catalogVersion:1,loadout:inventory,metrics:emptyChallengeMetrics(),runId,startedAt:s.savedAt,eligibleAtStart:fresh.exactEconomy.lifetimeEligibleCredits}},challengeSession:{main:s,anchor:s.savedAt,report:emptyReport()}},'challenge-start',s.savedAt,{source:'challenge-start',jobId:runId,challengeId:id,stage,startCapital:fresh.credits,startCapitalIsIncome:false});
+  retention:{...fresh.retention,activeRun:{id,stage,catalogVersion:2,networkLinks:id==='fragmented-network'?q.networkLinks:undefined,loadout:inventory,metrics:emptyChallengeMetrics(),runId,startedAt:s.savedAt,eligibleAtStart:fresh.exactEconomy.lifetimeEligibleCredits}},challengeSession:{main:s,anchor:s.savedAt,report:emptyReport()}},'challenge-start',s.savedAt,{source:'challenge-start',jobId:runId,challengeId:id,stage,startCapital:fresh.credits,startCapitalIsIncome:false});
 }
 export const runChallengeEligibleRevenue=(s:GameState)=>s.retention.activeRun?exactEconomyValue(s,'lifetimeEligibleCredits').subtract(ScientificNumber.fromJSON(s.retention.activeRun.eligibleAtStart)):ScientificNumber.zero();
 export const runChallengeProgress=(s:GameState)=>prestigeClaimForEligible(runChallengeEligibleRevenue(s));
@@ -265,10 +265,11 @@ function returnToMain(s:GameState,success:boolean):GameState{
  const challenge=runChallenges.find(c=>c.id===run.id);
  if(success&&(!challenge||!runChallengeReady(settled)))return s;
  const previous=main.retention.runCompletions[run.id]??0;
- const stage=run.stage??1,paid=(main.challengeStages[run.id]??0)>=stage,unlock=challengeCatalogQuote(run.id as ChallengeFamily,stage)?.unlock;const retention=success?{...main.retention,challengeStars:main.retention.challengeStars+(!paid?challenge!.stars:0),
+ const stage=run.stage??1,paid=(main.challengeStages[run.id]??0)>=stage,unlock=challengeCatalogQuote(run.id as ChallengeFamily,stage,run.catalogVersion===2?2:1)?.unlock;const retention=success?{...main.retention,challengeStars:main.retention.challengeStars+(!paid?challenge!.stars:0),
   runCompletions:{...main.retention.runCompletions,[run.id]:previous+1},
   runBestSeconds:{...main.retention.runBestSeconds,[run.id]:Math.min(main.retention.runBestSeconds[run.id]??Infinity,(settled.savedAt-run.startedAt)/1000)}}:main.retention;
- return addEvent({...archiveChallengeTelemetry(main,settled),clockOffsetMs:s.clockOffsetMs,retention,challengeStages:success&&!paid?{...main.challengeStages,[run.id]:Math.max(stage,main.challengeStages[run.id]??0)}:main.challengeStages,challengeUnlocks:success&&!paid&&unlock?[...new Set([...main.challengeUnlocks,unlock])]:main.challengeUnlocks,challengeReturn:{runId:run.runId,success,report:session.report}},'challenge-return',settled.savedAt,{source:'challenge-return',jobId:run.runId,challengeId:run.id,success,starsAwarded:retention.challengeStars-main.retention.challengeStars});
+ const nextStages=success&&!paid?{...main.challengeStages,[run.id]:Math.max(stage,main.challengeStages[run.id]??0)}:main.challengeStages,sharedUnlocks=success?challengeAutomationUnlocks({...main,challengeStages:nextStages}):[];
+ return addEvent({...archiveChallengeTelemetry(main,settled),clockOffsetMs:s.clockOffsetMs,retention,challengeStages:success&&!paid?{...main.challengeStages,[run.id]:Math.max(stage,main.challengeStages[run.id]??0)}:main.challengeStages,challengeUnlocks:success?[...new Set([...main.challengeUnlocks,...sharedUnlocks,...(unlock&&!paid?[unlock]:[])])]:main.challengeUnlocks,challengeReturn:{runId:run.runId,success,report:session.report}},'challenge-return',settled.savedAt,{source:'challenge-return',jobId:run.runId,challengeId:run.id,success,starsAwarded:retention.challengeStars-main.retention.challengeStars});
 }
 export function completeRunChallenge(s:GameState):GameState{return runChallengeReady(s)?returnToMain(s,true):s;}
 export function abortRunChallenge(s:GameState):GameState{return returnToMain(s,false);}

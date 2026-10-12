@@ -836,3 +836,17 @@ Abhängig von PR #82 `d8d5a29`; keine automatische Integration. Nachweis: `data-
 - [ ] Echter Bonuskistenfluss separat spezifizieren; dieser Auftrag bereitet nur den zentralen Grant vor.
 
 Nachweise und ausdrücklich dokumentierte Ausgangswerte: [Audit](material-builds-audit.md), [vollständiger Katalog](material-builds-catalog.json), [Domain](material-builds-proof.json), [Browser](material-builds-browser.json).
+
+## PR #85 correction — challenge contracts and recovery
+
+- [x] Fusion retains the explicitly selected first base instance, level/Forge/counter and paid material receipts.
+- [x] New analysis contracts retain fractional yields per material across reload and resets; old pending contracts retain payout policy.
+- [x] New catalogue v2 uses bounded Quality/Efficiency prerequisites, distinct science/supply objectives, real entry progress and selectable network edges. Running v0/v1 challenges remain intact.
+- [x] Shared automation depends on total first completions; prior options are retained. Passive, Mastery and network rewards differ.
+- [x] Save v48, quotes, DE/EN rendering, regression coverage and economy documentation updated.
+- [x] Two genuine two-hour early profiles: first Relay 22:30 / 21:30; no grants or claims. Three equal prepared build comparisons expose tradeoffs, not natural unlock timing.
+- [ ] All 690 natural completions, late item/foundry timings and long-term build dominance remain uncalibrated.
+- [ ] New visual/mobile browser validation remains open (Chromium download unavailable).
+- [ ] Existing main-wide regression failures remain: broad baseline comparison has the same 30 failures and no new failures; both full-suite attempts timed out at 300 seconds.
+
+See [correction contracts](challenge-corrections.md), [checks](challenge-correction-checks.json), [early profiles](challenge-correction-early-profiles.json) and [prepared build comparison](challenge-correction-build-comparison.json). No merge/release or new SDKs.

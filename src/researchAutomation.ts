@@ -21,7 +21,7 @@ export function researchRepeatQuote(s:GameState){const r=s.researchRepeat,q=r.id
 export function researchQueueStatus(s:GameState){
  if(!researchQueueUnlocked(s))return{candidate:null,reason:'unlock'};
  let skippedReason:string|null=null;
- for(const id of s.researchQueue){const q=researchQuote(s,id);if(!q||q.done||q.reason==='area'||q.reason==='requirement'||q.reason==='running'){skippedReason??=q?.reason??'unknown';continue;}return{candidate:q.allowed?id:null,reason:q.reason,quote:q};}
+ for(const id of s.researchQueue){const q=researchQuote(s,id);if(!q||q.done||q.reason==='area'||q.reason==='requirement'||q.reason==='running'||q.reason==='challenge-rule'){skippedReason??=q?.reason??'unknown';continue;}return{candidate:q.allowed?id:null,reason:q.reason,quote:q};}
  return{candidate:null,reason:skippedReason??'empty'};
 }
 export function startManualResearchQueue(state:GameState){let next=state;if(!researchQueueUnlocked(next))return next;

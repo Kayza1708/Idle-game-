@@ -1,3 +1,4 @@
+import {withChallengeAccess} from './testSupport/challengeAccount';
 import progressionBaseline from './testSupport/progressionBaseline.json';
 import {predecessorProjection} from './testSupport/protectedProgression';
 import itemGrindBaseline from './testSupport/itemGrindBaseline.json';
@@ -91,7 +92,7 @@ describe('9D analysis reward contract',()=>{
 });
 describe('9D contexts, disclosure and export',()=>{
  it('quotes and exports main/challenge independently, with No-Items disabling all three new builds',()=>{
-  const main=complete(stocked('parallel-architecture')),challenge=startRunChallenge(main,'no-items');expect(challenge.challengeSession).toBeDefined();expect(itemCombinationQuote(challenge,'parallel-architecture').active).toBe(false);expect(itemCombinationQuote(challenge.challengeSession!.main,'parallel-architecture').active).toBe(true);
+  const main=complete(stocked('parallel-architecture')),challenge=startRunChallenge(withChallengeAccess(main),'no-items');expect(challenge.challengeSession).toBeDefined();expect(itemCombinationQuote(challenge,'parallel-architecture').active).toBe(false);expect(itemCombinationQuote(challenge.challengeSession!.main,'parallel-architecture').active).toBe(true);
   const contexts=balanceContexts(reload(challenge));expect(contexts[0].itemCombinations.find(q=>q.id==='parallel-architecture')!.contribution).toBe(1.2);expect(contexts[1].itemCombinations.find(q=>q.id==='parallel-architecture')!.contribution).toBe(1);expect(abortRunChallenge(reload(challenge)).equipped).toEqual(main.equipped);
   const exported=JSON.parse(createBalanceExportFiles(challenge,0)['economy.json']);expect(exported.itemCombinations).toEqual(BALANCE.itemCombinations);expect(exported.itemCombinationContexts[0].itemCombinations).toEqual(contexts[0].itemCombinations);
  });
