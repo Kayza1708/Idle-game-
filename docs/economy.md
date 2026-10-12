@@ -585,3 +585,7 @@ Hands Off rewards offline budget and the existing memory-item bonus; Bare Metal 
 ## Achievements/Quests V1 – 12. Oktober 2026
 
 Schwellen und Missionsbasismengen zentral in BALANCE. Itementdeckung bis 30; bezahlte Baupläne bis 28; sieben neue permanente Sammlungs-/Infrastruktur-/Challengefamilien. Spätere Credits-/Data-/Crafting-/Training-/Forschungsstufen erhöht; Start-Farming-Familien aus Katalog entfernt, Claims erhalten. Neue Missionsmengen skalieren in sechs Hardware-Entdeckungsbändern mit 1/2/4/8/16/32; Wiederholungsstufen ×2. Produktionsbudget 2/14/60 Stunden ohne temporären Boost, fix bei Erzeugung. Optionale neue Objectives, feste neue Task-Gems statt Multiplikation nach Wiederholungsstufe. Neue Gem-Maxima mit Periodenbonus 18/90/570. Save v50 erhält alte laufende Aufgaben und Claims. Verträge, Zahlen und nicht kalibrierte Annahmen: `achievements-quests-v1.md`.
+
+## Messung fester früher Loadouts und Questclaims – 12. Oktober 2026
+
+27 begrenzte natürliche Zwei-Stunden-Profile; keine Änderung an Schwellen, Preisen, XP-/Gembudgets oder Formeln. Leere Questperioden (kein Aufgabenpool/required=0) dürfen keinen Bonus buchen; bestehende ausgezahlte Rewards unverändert. Frühe Wochen-/Monatsproduktion und Achievement-Produktionsrückkopplung bleiben Kalibrierungsbedarf. Ergebnisse, mathematische Wirkung, Reset-/Claimvertrag und konkrete Folgeschritte: `build-quest-progression-findings.md`.
