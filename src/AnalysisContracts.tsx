@@ -1,3 +1,5 @@
+import {MaterialBuildAutomation} from './MaterialBuildAutomation';
+import {MaterialFocus} from './ProgressionDetails';
 import { type GameState, type ExperimentId, formatScientific } from "./economy";
 import {
   analysisAffordability,
@@ -16,7 +18,7 @@ export function AnalysisContracts({
   const de = s.settings.language === "de",
     language = s.settings.language;
   return (
-    <section className="analysis-grid">
+    <section className="analysis-grid"><MaterialFocus s={s} act={act}/><MaterialBuildAutomation s={s} kind="analysis" act={act}/>
       <h2>{de ? "Unabhängiger Analyseslot" : "Independent analysis slot"}</h2>
       {(["hardware", "architecture", "artifact"] as ExperimentId[]).map(
         (id) => (

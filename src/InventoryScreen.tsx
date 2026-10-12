@@ -1,3 +1,5 @@
+import {MaterialBuildAutomation} from './MaterialBuildAutomation';
+import {FoundryDetails,ItemForgeDetails,DeviceDetails,RecoveryDetails} from './ProgressionDetails';
 import {BlueprintMasteryDetails,ComponentSources} from './ItemProgressDetails';
 import {DataItemComparison} from './DataComparison';
 import {ResearchItemComparison} from './ResearchItemComparison';
@@ -330,7 +332,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               </button>
             </div>
           ))}
-          <section className="recipe-list">
+          <FoundryDetails s={s} act={(name,...args)=>{if(name==='open-material')setComponent(args[0]);else act(name,...args)}}/><MaterialBuildAutomation s={s} kind="crafting" act={act}/><p>{de?'Neue Baupläne: zehn bezahlte Forschungsabschlüsse je Bereich oder 1-%-Chance aus echten Materialdrops. Danach regulär lernen.':'New blueprints: ten paid research completions per area or a 1% chance from actual material drops. Then learn normally.'}</p><section className="recipe-list">
             {view === "modules"
               ? (Object.keys(BALANCE.modules) as ModuleId[]).map((id) =>
                   recipeCard("module", id),
@@ -468,7 +470,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 ? "Sperren"
                 : "Lock"}
           </button>
-          {(["upgrade", "forge"] as const).map((action) => {
+          {(["upgrade"] as const).map((action) => {
             const q = itemImprovementPreview(s, item.id, action)!,
               effective = itemImprovementHasEffect(s, item, q.result);
             return (
@@ -541,7 +543,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               </section>
             );
           })}
-          {item.rarity!=='mythic'&&<button onClick={()=>act('pin-goal',{kind:'item-upgrade',id:item.id,target:rarities.indexOf(item.rarity)+1})}>{de?'Nächste Aufwertung anheften':'Pin next upgrade'}</button>}
+          <DeviceDetails s={s} item={item}/><ItemForgeDetails s={s} item={item} act={(name,...args)=>{if(name==='open-material'){setItemId(null);setComponent(args[0]);}else act(name,...args)}}/><RecoveryDetails s={s} item={item} act={act}/>{item.rarity!=='mythic'&&<button onClick={()=>act('pin-goal',{kind:'item-upgrade',id:item.id,target:rarities.indexOf(item.rarity)+1})}>{de?'Nächste Aufwertung anheften':'Pin next upgrade'}</button>}
           <section className="improvement-card">
             <h3>
               {de
@@ -641,21 +643,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               {de ? "Fusion bestätigen" : "Confirm fusion"}
             </button>
           </section>
-          <button
-            disabled={item.locked || equipped(item.id)}
-            onClick={() => {
-              if (
-                confirm(
-                  `${de ? "Verbrauchen" : "Consume"} ${item.id} → ${BALANCE.rarity[item.rarity].salvage} ${componentText("circuits", language).name}?`,
-                )
-              ) {
-                act("salvage", item.id);
-                setItemId(null);
-              }
-            }}
-          >
-            {de ? "Zerlegen" : "Salvage"}
-          </button>
+
         </MobileDetailSheet>
       )}
     </div>

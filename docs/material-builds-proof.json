@@ -1,0 +1,582 @@
+{
+  "fixture": "Explicitly prepared prerequisite, discovery and resource stocks. Actual paid domain learning/crafting/forging/salvage; no natural progression or elapsed production profile.",
+  "crafts": [
+    {
+      "id": "inference-router",
+      "learningFragments": 6,
+      "reservation": {
+        "components": {
+          "circuits": 40,
+          "copperCoils": 10,
+          "siliconWafers": 14,
+          "goldContacts": 7
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 2400,
+        "blueprints": 0
+      },
+      "durationSeconds": 1200,
+      "result": {
+        "type": "inference-router",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 2400,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "burst-processor",
+      "learningFragments": 4,
+      "reservation": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 8,
+          "ceramicCapacitors": 4
+        },
+        "modules": {},
+        "data": 1000,
+        "blueprints": 0
+      },
+      "durationSeconds": 600,
+      "result": {
+        "type": "burst-processor",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 1000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "legacy-controller",
+      "learningFragments": 4,
+      "reservation": {
+        "components": {
+          "circuits": 8,
+          "copperCoils": 6,
+          "ferriteCores": 4
+        },
+        "modules": {},
+        "data": 1000,
+        "blueprints": 0
+      },
+      "durationSeconds": 600,
+      "result": {
+        "type": "legacy-controller",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 1000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "sparse-decoder",
+      "learningFragments": 4,
+      "reservation": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 6,
+          "siliconWafers": 8,
+          "ceramicSubstrates": 4
+        },
+        "modules": {},
+        "data": 1000,
+        "blueprints": 0
+      },
+      "durationSeconds": 600,
+      "result": {
+        "type": "sparse-decoder",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 1000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "photonic-matrix",
+      "learningFragments": 8,
+      "reservation": {
+        "components": {
+          "circuits": 60,
+          "copperCoils": 14,
+          "photonicLenses": 20,
+          "photonicCircuits": 10
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 6000,
+        "blueprints": 0
+      },
+      "durationSeconds": 2400,
+      "result": {
+        "type": "photonic-matrix",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 6000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "quantum-coupler",
+      "learningFragments": 10,
+      "reservation": {
+        "components": {
+          "circuits": 80,
+          "copperCoils": 18,
+          "quantumCores": 26,
+          "cryogenicResonators": 13
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 12000,
+        "blueprints": 0
+      },
+      "durationSeconds": 3600,
+      "result": {
+        "type": "quantum-coupler",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 12000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "distillation-module",
+      "learningFragments": 8,
+      "reservation": {
+        "components": {
+          "circuits": 60,
+          "copperCoils": 14,
+          "graphene": 20,
+          "opticalFibers": 10
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 6000,
+        "blueprints": 0
+      },
+      "durationSeconds": 2400,
+      "result": {
+        "type": "distillation-module",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 6000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "curriculum-module",
+      "learningFragments": 4,
+      "reservation": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 6,
+          "siliconWafers": 8,
+          "ceramicSubstrates": 4
+        },
+        "modules": {},
+        "data": 1000,
+        "blueprints": 0
+      },
+      "durationSeconds": 600,
+      "result": {
+        "type": "curriculum-module",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 1000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "long-term-memory",
+      "learningFragments": 4,
+      "reservation": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 6,
+          "siliconWafers": 8,
+          "goldContacts": 4
+        },
+        "modules": {},
+        "data": 1000,
+        "blueprints": 0
+      },
+      "durationSeconds": 600,
+      "result": {
+        "type": "long-term-memory",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 1000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "cryocontroller",
+      "learningFragments": 10,
+      "reservation": {
+        "components": {
+          "circuits": 80,
+          "copperCoils": 18,
+          "quantumCores": 26,
+          "cryogenicResonators": 13
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 12000,
+        "blueprints": 0
+      },
+      "durationSeconds": 3600,
+      "result": {
+        "type": "cryocontroller",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 12000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "manufacturing-controller",
+      "learningFragments": 6,
+      "reservation": {
+        "components": {
+          "circuits": 40,
+          "copperCoils": 10,
+          "titaniumBolts": 14,
+          "thermalInterface": 7
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 2400,
+        "blueprints": 0
+      },
+      "durationSeconds": 1200,
+      "result": {
+        "type": "manufacturing-controller",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 2400,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "diagnostic-adapter",
+      "learningFragments": 4,
+      "reservation": {
+        "components": {
+          "circuits": 20,
+          "copperCoils": 6,
+          "siliconWafers": 8,
+          "goldContacts": 4
+        },
+        "modules": {},
+        "data": 1000,
+        "blueprints": 0
+      },
+      "durationSeconds": 600,
+      "result": {
+        "type": "diagnostic-adapter",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 1000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "experiment-controller",
+      "learningFragments": 6,
+      "reservation": {
+        "components": {
+          "circuits": 40,
+          "copperCoils": 10,
+          "siliconWafers": 14,
+          "opticalFibers": 7
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 2400,
+        "blueprints": 0
+      },
+      "durationSeconds": 1200,
+      "result": {
+        "type": "experiment-controller",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 2400,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "precision-scanner",
+      "learningFragments": 6,
+      "reservation": {
+        "components": {
+          "circuits": 40,
+          "copperCoils": 10,
+          "photonicLenses": 14,
+          "opticalFibers": 7
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 2400,
+        "blueprints": 0
+      },
+      "durationSeconds": 1200,
+      "result": {
+        "type": "precision-scanner",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 2400,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "recycling-probe",
+      "learningFragments": 6,
+      "reservation": {
+        "components": {
+          "circuits": 40,
+          "copperCoils": 10,
+          "graphene": 14,
+          "photonicCircuits": 7
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 2400,
+        "blueprints": 0
+      },
+      "durationSeconds": 1200,
+      "result": {
+        "type": "recycling-probe",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 2400,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "blueprint-archive",
+      "learningFragments": 8,
+      "reservation": {
+        "components": {
+          "circuits": 60,
+          "copperCoils": 14,
+          "neuralCrystals": 20,
+          "spintronicDevices": 10
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 6000,
+        "blueprints": 0
+      },
+      "durationSeconds": 2400,
+      "result": {
+        "type": "blueprint-archive",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 6000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "protocol-controller",
+      "learningFragments": 6,
+      "reservation": {
+        "components": {
+          "circuits": 40,
+          "copperCoils": 10,
+          "goldContacts": 14,
+          "ceramicSubstrates": 7
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 2400,
+        "blueprints": 0
+      },
+      "durationSeconds": 1200,
+      "result": {
+        "type": "protocol-controller",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 2400,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "photonic-analyzer",
+      "learningFragments": 8,
+      "reservation": {
+        "components": {
+          "circuits": 60,
+          "copperCoils": 14,
+          "photonicLenses": 20,
+          "photonicCircuits": 10
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 6000,
+        "blueprints": 0
+      },
+      "durationSeconds": 2400,
+      "result": {
+        "type": "photonic-analyzer",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 6000,
+      "completedExactlyOnceAfterReload": true
+    },
+    {
+      "id": "quantum-diagnostic-module",
+      "learningFragments": 10,
+      "reservation": {
+        "components": {
+          "circuits": 80,
+          "copperCoils": 18,
+          "quantumCores": 26,
+          "cryogenicResonators": 13
+        },
+        "modules": {
+          "computeBus": 1,
+          "dataLattice": 1
+        },
+        "data": 12000,
+        "blueprints": 0
+      },
+      "durationSeconds": 3600,
+      "result": {
+        "type": "quantum-diagnostic-module",
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "paidData": 12000,
+      "completedExactlyOnceAfterReload": true
+    }
+  ],
+  "forge": {
+    "job": {
+      "id": "forge-3",
+      "itemId": "item-2",
+      "target": 1,
+      "before": {
+        "rarity": "common",
+        "level": 0,
+        "forge": 0
+      },
+      "startedAt": 300000,
+      "endsAt": 900000,
+      "duration": 600,
+      "components": {
+        "circuits": 25
+      },
+      "dataCost": 1000
+    },
+    "result": {
+      "id": "item-2",
+      "type": "quantum-chip",
+      "rarity": "common",
+      "level": 0,
+      "locked": false,
+      "materialBasis": {
+        "circuits": 55,
+        "copperCoils": 12,
+        "siliconWafers": 18,
+        "titaniumBolts": 8,
+        "photonicLenses": 2,
+        "graphene": 1,
+        "nanotubes": 0,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "recoveryUsed": {
+        "circuits": 0,
+        "copperCoils": 0,
+        "siliconWafers": 0,
+        "titaniumBolts": 0,
+        "photonicLenses": 0,
+        "graphene": 0,
+        "nanotubes": 0,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "forge": 1
+    },
+    "recovery": {
+      "components": {
+        "circuits": 33,
+        "copperCoils": 7,
+        "siliconWafers": 10,
+        "titaniumBolts": 4,
+        "photonicLenses": 1,
+        "graphene": 0,
+        "nanotubes": 0,
+        "superconductors": 0,
+        "neuralCrystals": 0,
+        "quantumCores": 0
+      },
+      "fragmentChance": 0,
+      "refundData": 0,
+      "refundModules": 0,
+      "refundLearning": 0
+    },
+    "duplicateSalvageNoReward": true
+  },
+  "training": {
+    "before": {
+      "m": 2.47,
+      "e": 2
+    },
+    "after": {
+      "m": 2.28,
+      "e": 2
+    }
+  },
+  "overclock": {
+    "beforeSeconds": 15,
+    "afterSeconds": 16.200000000000003
+  }
+}

@@ -1,3 +1,5 @@
+import progressionBaseline from './testSupport/progressionBaseline.json';
+import {predecessorProjection} from './testSupport/protectedProgression';
 import itemGrindBaseline from './testSupport/itemGrindBaseline.json';
 import {createHash} from 'node:crypto';
 import baseline from './testSupport/itemBuildsBaseline.json';
@@ -21,7 +23,7 @@ const complete=(s:GameState)=>s.inventory.reduce((state,item)=>equip(state,item.
 const reload=(s:GameState)=>{const r=restore(serialize(s),s.savedAt);expect(r.error).toBeUndefined();return r.state;};
 const ratio=(a:ReturnType<typeof computeRateScientific>,b:typeof a)=>a.divide(b).toNumber();
 describe('9D central equipment build quote',()=>{
- it('preserves the merged/dependent Data-analysis head including all existing build values',()=>{const actual=structuredClone(BALANCE) as any;for(const key of ['itemMaterialFamilies','itemUpgradeMaterials','blueprintMasteryCosts','blueprintMasteryFactors','researchFragmentConversionRate'])delete actual[key];expect(actual).toEqual(itemGrindBaseline.parameters);});
+ it('preserves predecessor economic values and original build registry while catalogs expand',()=>{expect(predecessorProjection(BALANCE,progressionBaseline.parameters)).toEqual(progressionBaseline.parameters);});
  it('registers five stable unique IDs and retains existing combination values',()=>{expect(Object.keys(BALANCE.itemCombinations)).toEqual(['compute-credit-link','training-research-link',...ids]);expect(BALANCE.itemCombinations['compute-credit-link'].value).toBe(.08);expect(BALANCE.itemCombinations['training-research-link'].value).toBe(.12);});
  it.each(ids)('%s requires matching equipped instances in unlocked compatible slots, never mere inventory',id=>{
   const s=stocked(id),before=structuredClone(s),spy=vi.spyOn(Math,'random');expect(itemCombinationQuote(s,id).active).toBe(false);expect(itemCombinationQuote(s,id).missingEquipment).toHaveLength(2);expect(spy).not.toHaveBeenCalled();spy.mockRestore();expect(s).toEqual(before);
@@ -61,7 +63,7 @@ describe('9D applied production and training',()=>{
  });
 });
 describe('9D analysis reward contract',()=>{
- it('rounds each positive final guaranteed component separately; zero and absent entries stay zero/absent',()=>{expect(analysisCombinationGrant({circuits:1,copperCoils:3,siliconWafers:4,graphene:7,quantumCores:0},1.25)).toEqual({circuits:1,copperCoils:3,siliconWafers:5,graphene:8,quantumCores:0});});
+ it('rounds each positive final guaranteed component separately; zero and absent entries stay zero/absent',()=>{expect(analysisCombinationGrant({circuits:1,copperCoils:3,siliconWafers:4,graphene:7,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},1.25)).toEqual({circuits:1,copperCoils:3,siliconWafers:5,graphene:8,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0});});
  it.each(['hardware','architecture','artifact'] as const)('freezes %s start factor; RNG calls, fragments, items and remainders are unchanged',type=>{
   const s=complete(stocked('material-mapping')),plain=unequip(s,'core'),a=queueExperiment(plain,type,0,'long'),b=queueExperiment(s,type,0,'long');expect(a.experiments.active!.combinationFactor).toBe(1);expect(b.experiments.active!.combinationFactor).toBe(1.25);
   const ra=vi.fn(()=>.25),rb=vi.fn(()=>.25),end=b.experiments.active!.endsAt,doneA=completeExperiment(a,end,ra),doneB=completeExperiment(unequip(b,'core'),end,rb);

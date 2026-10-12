@@ -1,3 +1,4 @@
+import {materialTable} from './materialEconomy';
 import {describe,expect,it} from 'vitest';
 import {blueprintQuote,learnBlueprint} from './blueprints';
 import {BALANCE,buyHardwareClass,newGame} from './economy';
@@ -5,7 +6,7 @@ import {advance} from './simulation';
 import {craft,craftAffordability,craftModule,equip,itemUpgradeCost,upgrade} from './inventory';
 describe('module and item economy',()=>{
  it('crafts modules atomically from data and components',()=>{const b=newGame(0),s={...b,completedResearch:['blueprints' as const],data:1000,componentInventory:{...b.componentInventory,circuits:20,copperCoils:10,siliconWafers:10,titaniumBolts:10},components:50};const queued=craftModule(s,'computeBus');expect(queued.data).toBe(750);const n=advance(queued,BALANCE.craftingSeconds.module).state;expect(n.modules.computeBus).toBe(1);expect(n.componentInventory.circuits).toBe(10);expect(n.componentInventory.copperCoils).toBe(4);expect(n.componentInventory.siliconWafers).toBe(6);expect(n.componentInventory.titaniumBolts).toBe(6)});
- it('requires module and data for item craft',()=>{const b=newGame(0),s={...b,data:5000,blueprintFragments:10,modules:{computeBus:1,dataLattice:0},componentInventory:{circuits:50,copperCoils:20,siliconWafers:20,titaniumBolts:20,photonicLenses:20,graphene:20,nanotubes:10,superconductors:5,neuralCrystals:5,quantumCores:5},components:125};const queued=craft(learnBlueprint(s,'quantum-chip'),'quantum-chip','common');expect(queued.modules.computeBus).toBe(0);expect(queued.data).toBe(3200);const n=advance(queued,BALANCE.craftingSeconds.common).state;expect(n.inventory).toHaveLength(1)});
+ it('requires module and data for item craft',()=>{const b=newGame(0),s={...b,data:5000,blueprintFragments:10,modules:{computeBus:1,dataLattice:0},componentInventory:{circuits:50,copperCoils:20,siliconWafers:20,titaniumBolts:20,photonicLenses:20,graphene:20,nanotubes:10,superconductors:5,neuralCrystals:5,quantumCores:5,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},components:125};const queued=craft(learnBlueprint(s,'quantum-chip'),'quantum-chip','common');expect(queued.modules.computeBus).toBe(0);expect(queued.data).toBe(3200);const n=advance(queued,BALANCE.craftingSeconds.common).state;expect(n.inventory).toHaveLength(1)});
  it('promotes rarity and applies manufacturing discount',()=>{const b=newGame(0),item={id:'x',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false},s={...b,nodes:['manufacturing2'],data:10000,componentInventory:{...b.componentInventory,circuits:1000,siliconWafers:4},components:1004,inventory:[item]};const n=upgrade(s,'x');expect(n.inventory[0].rarity).toBe('uncommon');expect(n.data).toBeLessThan(s.data)});
 });
 
@@ -47,7 +48,7 @@ it('exposes every equipped item effect in the production breakdown',async()=>{
 describe('component recipe reachability',()=>{
  it('keeps every recipe component reachable through every analysis source',()=>{
   const componentIds=Object.keys(BALANCE.components);
-  expect(componentIds).toHaveLength(10);
+  expect(componentIds).toHaveLength(20);
 
   for(const recipe of Object.values(BALANCE.itemRecipes)){
    for(const [component,amount] of Object.entries(recipe.ingredients)){
@@ -55,14 +56,14 @@ describe('component recipe reachability',()=>{
    }
   }
 
-  for(const source of Object.values(BALANCE.componentSources)){
+  const unlocked={...newGame(0),materials:{...newGame(0).materials,families:['base','semiconductor','photonic','frontier','quantum'] as import('./materialEconomy').MaterialFamily[]}};for(const sourceId of Object.keys(BALANCE.componentSources) as import('./economy').ExperimentId[]){const source=Object.fromEntries(materialTable(unlocked,sourceId).map(row=>[row.id,row.weight]));
    for(const component of componentIds){
     expect(source[component as keyof typeof source]).toBeGreaterThan(0);
    }
   }
 
   for(const component of componentIds){
-   expect(BALANCE.worldDropWeights[component as keyof typeof BALANCE.worldDropWeights]).toBeGreaterThan(0);
+   expect(materialTable(unlocked,'world').find(row=>row.id===component)!.weight).toBeGreaterThan(0);
   }
  });
 });

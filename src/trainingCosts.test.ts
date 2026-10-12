@@ -1,3 +1,4 @@
+import {settleFoundries} from './foundries';
 import { describe, it, expect } from "vitest";
 import {
   newGame,
@@ -45,11 +46,12 @@ const ready = () =>
     },
     { circuits: 10000 },
   );
+const finishForge=(s:GameState)=>{const paid=forgeItem(s,s.inventory[0].id);return settleFoundries({...paid,savedAt:paid.foundries[0].active!.endsAt});};
 const withItem = (
   type: "logic-seed" | "photonic-array" | "tensor-core" = "logic-seed",
   rarity: "common" | "rare" = "common",
 ) => {
-  const s = createItem(ready(), type, rarity);
+  const s = createItem({...grantComponents(ready(),{siliconWafers:1000,photonicLenses:1000,superconductors:100,neuralCrystals:100}),foundries:[{level:1,active:null,queue:[]}]}, type, rarity);
   return equip(s, s.inventory[0].id);
 };
 describe("training Data cost bonuses", () => {
@@ -119,7 +121,7 @@ describe("training Data cost bonuses", () => {
       14,
     );
     s = upgrade(s, s.inventory[0].id);
-    s = forgeItem(s, s.inventory[0].id);
+    s = finishForge(s);
     const q = trainingCostQuote(s, "quality");
     expect(q.bonusTotal).toBeGreaterThan(before.bonusTotal);
     expect(q.bonusTotal).toBeCloseTo(
@@ -153,7 +155,7 @@ describe("training Data cost bonuses", () => {
     const s = withItem("photonic-array"),
       p = itemImprovementPreview(s, s.inventory[0].id, "forge")!;
     expect(itemImprovementHasEffect(s, p.item, p.result)).toBe(true);
-    expect(forgeItem(s, p.item.id).inventory[0].forge).toBe(1);
+    expect(finishForge(s).inventory[0].forge).toBe(1);
     for (const language of ["de", "en"] as const) {
       const state = { ...s, settings: { ...s.settings, language } },
         html = renderToStaticMarkup(

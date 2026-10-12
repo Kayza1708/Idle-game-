@@ -9,7 +9,7 @@ import {restore,serialize,persistGame,loadGame,type StorageLike} from './storage
 function supplies(type:keyof typeof BALANCE.itemRecipes='quantum-chip',quantity=5):GameState{
  const recipe=BALANCE.itemRecipes[type],base=addData(newGame(0),recipe.data*quantity);
  let s=grantComponents(base,Object.fromEntries(Object.entries(recipe.ingredients).map(([id,n])=>[id,n*quantity])));
- s={...s,completedResearch:['blueprints'],impulseRelayBlueprint:true,insightArchiveBlueprint:true,blueprintFragments:recipe.blueprints,modules:{...s.modules,...Object.fromEntries(Object.entries(recipe.modules).map(([id,n])=>[id,n*quantity]))}};
+ s={...s,prestigeCount:1,materials:{...s.materials,families:['base','semiconductor','photonic','frontier','quantum'],knownBlueprints:Object.keys(BALANCE.extendedItems) as ItemTypeId[]},completedResearch:['blueprints'],impulseRelayBlueprint:true,insightArchiveBlueprint:true,blueprintFragments:recipe.blueprints,modules:{...s.modules,...Object.fromEntries(Object.entries(recipe.modules).map(([id,n])=>[id,n*quantity]))}};
  return learnBlueprint(s,type);
 }
 function moduleSupplies(id:ModuleId,quantity=5){const recipe=BALANCE.modules[id];return grantComponents({...addData(newGame(0),recipe.data*quantity),completedResearch:['blueprints']},Object.fromEntries(Object.entries(recipe.ingredients).map(([key,n])=>[key,n*quantity])));}

@@ -1,6 +1,7 @@
+import {challengeStartQuote,challengeCompletionQuote,challengeCatalogQuote,type ChallengeFamily,emptyChallengeMetrics} from './challengeStages';
 import {archiveChallengeTelemetry,addEvent} from './telemetry';
 import {advanceTo,emptyReport} from './simulation';
-import {exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
+import {BALANCE,equipmentSlots,equipmentSlotCount,exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import type {Language} from './i18n';
 export type Challenge={id:string;name:string;description:string;stars:number;check:(s:GameState)=>boolean};
@@ -18,12 +19,7 @@ export const challenges:Challenge[]=[
 {id:'mastery-100',name:'Hardware Savant',description:'Erreiche insgesamt 100 Hardware-Mastery-Level.',stars:8,check:s=>hardwareIds.reduce((n,id)=>n+hardwareMasteryLevel(s,id),0)>=100},
 {id:'all-mastered',name:'Machine Civilization',description:'Erreiche Mastery 5 mit allen 15 Hardwareklassen.',stars:12,check:s=>hardwareIds.every(id=>hardwareMasteryLevel(s,id)>=5)}];
 export type RunChallenge={id:string;name:string;description:string;stars:number};
-export const runChallenges:RunChallenge[]=[
-{id:'no-taps',name:'Hands Off',description:'Erreiche 1 INT ohne Tap-Credits.',stars:2},
-{id:'no-items',name:'Bare Metal',description:'Erreiche 1 INT ohne ausgerüstete Itemeffekte.',stars:2},
-{id:'five-hardware',name:'Compact Stack',description:'Erreiche 1 INT nur mit den ersten fünf Hardwareklassen.',stars:3},
-{id:'data-crunch',name:'Data Drought',description:'Erreiche 1 INT mit nur 10 % Datenproduktion.',stars:3},
-{id:'inflation',name:'Brutal Inflation',description:'Erreiche 1 INT bei 100× Hardwarepreisen.',stars:5}];
+export const runChallenges:RunChallenge[]=Object.entries(BALANCE.challengeCatalog.families).map(([id,d])=>({id,name:d.name,description:'69 versionierte Stufen; Regeln und tatsächliche Ziele in der Vorschau.',stars:id==='inflation'?5:2}));
 
 type ChallengeCopy={
   name:string;
@@ -251,29 +247,28 @@ export function challengeText(
 
 export const challengeClaimable=(s:GameState,c:Challenge)=>!s.retention.activeRun&&c.check(s)&&!s.retention.claimedChallenges.includes(c.id);
 export function claimChallenge(s:GameState,id:string){const c=challenges.find(x=>x.id===id);if(s.retention.activeRun||!c||!challengeClaimable(s,c))return s;return{...s,retention:{...s.retention,challengeStars:s.retention.challengeStars+c.stars,claimedChallenges:[...s.retention.claimedChallenges,id]}};}
-/** No inherited economy bonuses or account stock are permitted. Only cosmetic
- * preferences, the campaign identity and the existing clock cross this boundary. */
-export function startRunChallenge(s:GameState,id:string):GameState{
- if(s.retention.activeRun||s.challengeSession||!runChallenges.some(c=>c.id===id))return s;
- const fresh=newGame(s.savedAt,s.telemetry.campaignId),runId=`${s.telemetry.campaignId}:${id}:${crypto.randomUUID()}`;
- return addEvent({...fresh,aiName:s.aiName,profile:{...fresh.profile,playerName:s.profile.playerName},settings:{...s.settings},clockOffsetMs:s.clockOffsetMs,gems:0,
+/** Only permanent bonuses/knowledge and immutable equipment copies cross this boundary. */
+export function startRunChallenge(s:GameState,id:string,stage=1,itemIds?:string[]):GameState{
+ const q=challengeStartQuote(s,id,stage,itemIds??(id==='no-items'?[]:Object.values(s.equipped).filter((x):x is string=>!!x)));if(!q.allowed)return s;
+ const fresh=newGame(s.savedAt,s.telemetry.campaignId),runId=`${s.telemetry.campaignId}:${id}:${crypto.randomUUID()}`,inventory=q.loadout.map((item,index)=>({...item,id:`loadout-${index}`,materialBasis:undefined,recoveryUsed:undefined})),equipped=Object.fromEntries(inventory.map(i=>[itemTypes[i.type].slot,i.id]));
+ return addEvent({...fresh,aiName:s.aiName,profile:{...fresh.profile,playerName:s.profile.playerName},settings:{...s.settings},clockOffsetMs:s.clockOffsetMs,gems:0,nodes:[...s.nodes],axiomUpgrades:[...s.axiomUpgrades],axiomUpgradeLevels:{...s.axiomUpgradeLevels},availableAxioms:0,totalAxiomsEarned:s.totalAxiomsEarned,axioms:0,exactAxioms:{available:{m:0,e:0},total:s.exactAxioms?.total??{m:s.totalAxiomsEarned,e:0}},totalINTEarned:s.totalINTEarned,prestigeCount:s.prestigeCount,unlockedEquipmentSlots:equipmentSlotCount(s),completedResearch:[...s.completedResearch],researchLevels:{...s.researchLevels},researchAccessIds:[...s.researchAccessIds],purchasedResearchLabs:s.purchasedResearchLabs,inventory,equipped,challengeStages:{...s.challengeStages},challengeUnlocks:[...s.challengeUnlocks],learnedRecipes:[],blueprintMastery:{...fresh.blueprintMastery},craftedItemTypes:[],craftedItemCounts:{...fresh.craftedItemCounts},materials:{...fresh.materials},hardwareAutoBuyers:{...s.hardwareAutoBuyers},automation:{...fresh.automation,enabled:s.automation.enabled},
+  exactEconomy:{...fresh.exactEconomy,totalINTEarned:s.exactEconomy.totalINTEarned},
   story:{...fresh.story,tutorial:'skipped',target:null,open:null,queue:[],enabled:false},
-  retention:{...fresh.retention,activeRun:{id,runId,startedAt:s.savedAt,eligibleAtStart:fresh.exactEconomy.lifetimeEligibleCredits}},
-  challengeSession:{main:s,anchor:s.savedAt,report:emptyReport()}},'challenge-start',s.savedAt,{source:'challenge-start',jobId:runId,challengeId:id,startCapital:fresh.credits,startCapitalIsIncome:false});
+  retention:{...fresh.retention,activeRun:{id,stage,catalogVersion:1,loadout:inventory,metrics:emptyChallengeMetrics(),runId,startedAt:s.savedAt,eligibleAtStart:fresh.exactEconomy.lifetimeEligibleCredits}},challengeSession:{main:s,anchor:s.savedAt,report:emptyReport()}},'challenge-start',s.savedAt,{source:'challenge-start',jobId:runId,challengeId:id,stage,startCapital:fresh.credits,startCapitalIsIncome:false});
 }
 export const runChallengeEligibleRevenue=(s:GameState)=>s.retention.activeRun?exactEconomyValue(s,'lifetimeEligibleCredits').subtract(ScientificNumber.fromJSON(s.retention.activeRun.eligibleAtStart)):ScientificNumber.zero();
 export const runChallengeProgress=(s:GameState)=>prestigeClaimForEligible(runChallengeEligibleRevenue(s));
-export const runChallengeReady=(s:GameState)=>!!s.retention.activeRun&&runChallengeProgress(s)>=1;
+export const runChallengeReady=(s:GameState)=>challengeCompletionQuote(s).allowed;
 function returnToMain(s:GameState,success:boolean):GameState{
  if(!s.retention.activeRun||!s.challengeSession)return s;
  const settled=advanceTo(s,s.savedAt-s.clockOffsetMs).state,session=settled.challengeSession!,run=settled.retention.activeRun!,main=session.main;
  const challenge=runChallenges.find(c=>c.id===run.id);
  if(success&&(!challenge||!runChallengeReady(settled)))return s;
  const previous=main.retention.runCompletions[run.id]??0;
- const retention=success?{...main.retention,challengeStars:main.retention.challengeStars+(previous===0?challenge!.stars:0),
+ const stage=run.stage??1,paid=(main.challengeStages[run.id]??0)>=stage,unlock=challengeCatalogQuote(run.id as ChallengeFamily,stage)?.unlock;const retention=success?{...main.retention,challengeStars:main.retention.challengeStars+(!paid?challenge!.stars:0),
   runCompletions:{...main.retention.runCompletions,[run.id]:previous+1},
   runBestSeconds:{...main.retention.runBestSeconds,[run.id]:Math.min(main.retention.runBestSeconds[run.id]??Infinity,(settled.savedAt-run.startedAt)/1000)}}:main.retention;
- return addEvent({...archiveChallengeTelemetry(main,settled),clockOffsetMs:s.clockOffsetMs,retention,challengeReturn:{runId:run.runId,success,report:session.report}},'challenge-return',settled.savedAt,{source:'challenge-return',jobId:run.runId,challengeId:run.id,success,starsAwarded:retention.challengeStars-main.retention.challengeStars});
+ return addEvent({...archiveChallengeTelemetry(main,settled),clockOffsetMs:s.clockOffsetMs,retention,challengeStages:success&&!paid?{...main.challengeStages,[run.id]:Math.max(stage,main.challengeStages[run.id]??0)}:main.challengeStages,challengeUnlocks:success&&!paid&&unlock?[...new Set([...main.challengeUnlocks,unlock])]:main.challengeUnlocks,challengeReturn:{runId:run.runId,success,report:session.report}},'challenge-return',settled.savedAt,{source:'challenge-return',jobId:run.runId,challengeId:run.id,success,starsAwarded:retention.challengeStars-main.retention.challengeStars});
 }
 export function completeRunChallenge(s:GameState):GameState{return runChallengeReady(s)?returnToMain(s,true):s;}
 export function abortRunChallenge(s:GameState):GameState{return returnToMain(s,false);}
