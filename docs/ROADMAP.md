@@ -830,7 +830,7 @@ Abhängig von PR #82 `d8d5a29`; keine automatische Integration. Nachweis: `data-
 - [x] Drei permanente Schmieden ×5 Stufen, eingefrorene bezahlte Aufträge, zwei unbezahlte Wartestellen, Reseterhalt.
 - [x] Zehn Familien ×69 wissenschaftliche versionierte Ziele, Kapitelregeln, erlaubte kopierte Loadouts, getrennte Produktion, einmalige Rewards und sichtbare vorhandene Automationsoptionen.
 - [x] Save v47/Migration, Resetvorschauen, Auftrags-/Quellen-/Zielanzeigen, DE/EN, Export, bestehende Audio/Haptik integriert.
-- [x] 528 gezielte Regressionstests in 23 Dateien, 57,11 s; Typecheck, Production-Build, Diffcheck; Browser 360/390/430 px DE/EN ohne Seitenüberbreite.
+- [x] 531 unterschiedliche gezielte Regressionstests in 23 Dateien (528 im abgegrenzten Lauf/57,11 s, anschließend 97 im Nachlauf/3,83 s einschließlich drei neuer Ausrüstungs-Bulkregrressionen); Typecheck, Production-Build, Diffcheck; Browser 360/390/430 px DE/EN ohne Seitenüberbreite.
 - [ ] Natürliche Material-/Schmiede-/69-Stufen-Progression und Langzeitbalance kalibrieren (kein Nachweis dieses Auftrags).
 - [ ] Eigene Grafiken für 19 neue Geräte, zehn neue Materialien und umbenannte Memristor-Arrays; aktuell ehrliche neutrale Symbole.
 - [ ] Echter Bonuskistenfluss separat spezifizieren; dieser Auftrag bereitet nur den zentralen Grant vor.
