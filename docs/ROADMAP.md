@@ -1,3 +1,11 @@
+## Passive Rückkehr und bezahlte Automation geprüft – 12. Oktober 2026
+
+Zwölf natürliche Profile: acht kurze Besuchsverläufe bis 15h mit einem echten Offlineabschnitt pro Pause, vier aktive Zwei-Stunden-Vergleiche mit maximal zwei Prestiges. Erstprestige bei Rückkehr nach 6h/12h; zweiter aktiv bei 80:10/80:20, passiv noch nicht erreicht. Nachtpause: 8h angerechnet, 55min verworfen. Nach bezahltem Erstreset: 102 automatische Hardwarekäufe gegen Credits, drei Offline-Trainingsabschlüsse; Zwei-Job-Queue danach leer. Keine Balance-/Save-/UIänderung. Befunde und Grenzen: `passive-return-findings.md`.
+
+Lokale Abnahme: 1.301 Standardtests, sechs neue Mess-/Obserververträge; App-/strikter CLI-Typecheck, Build und Diffcheck grün. Zwölf Profile in 49,33 Sekunden; Sourcehashes, Data-/Tap-, Gem-/Season-XP-Buchungen und Reload geprüft. Keine Browser-/Geräteabnahme; keine Wochen-/Monatskalibrierung.
+
+Nächster Block: bei gleichen kurzen Besuchen Erstreset ab 1 versus 3 INT vergleichen und beiden INT-Kaufreihenfolgen denselben Offlineabschnitt nach dem Reset geben. Erst dann Preis/Freischaltung/Rückkehrführung anpassen; danach echte weitere Buildslots und gleiche Forschungsfreiheit prüfen. Die endliche Queue ist bisher kein starker eigenständiger passiver Build.
+
 ## Wochen-/Monatskapitel und Punktkurve umgesetzt – 12. Oktober 2026
 
 Neue Perioden: höchstens ein Credit-/Dataziel, getrennte Arbeitsabschnitte statt mehrfach genutzter Zähler, Zukunftsbänder für längere Perioden und konkrete optionale Hardwarefrontiers. 6/12/30 und Rewardbudgets erhalten. Achievement-Produktion jetzt logarithmisch; Gems, Punkte und Claims bleiben, auch Altaccounts erhalten aber den schwächeren neuen Faktor. Save v51 erhält laufende Altquests bis zum Periodenwechsel. Verträge und Gegenmessung: `quest-chapters-and-achievements.md`.

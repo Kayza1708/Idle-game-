@@ -94,12 +94,16 @@ function autoStartModelTraining(state:GameState):GameState {
   return startTraining(state,track);
 }
 
-function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.random):{state:GameState;report:AdvanceReport} {
+/** Measurement-only boundary observer. Read state synchronously; do not mutate or retain it.
+ * Observes the primary run only, before bounded telemetry can discard paid receipts. */
+export type AdvanceObserver=(state:Readonly<GameState>)=>void;
+function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.random,observe?:AdvanceObserver):{state:GameState;report:AdvanceReport} {
   if(!Number.isFinite(seconds)||seconds<=0)return{state,report:emptyReport()};
   const limit=offlineTimeLimit(state),total=Math.max(0,Math.min(seconds,limit));
   const pinnedReachedBefore=state.pinnedGoal?resolvePinnedGoal(state,state.pinnedGoal)?.reached??false:false,questReadyBefore=(['daily','weekly','monthly'] as MissionKind[]).filter(k=>missionRewardClaimable(state,k)).length,seasonReadyBefore=seasonClaimable(state);let left=total,iterations=0,levels=0,experiments=0,craftingCompleted=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,generatedCreditsExact=ScientificNumber.zero(),generatedDataExact=ScientificNumber.zero(),components:Partial<GameState['componentInventory']>={},analysisResults:NonNullable<GameState['experiments']['lastResult']>[]=[],next=rollPeriods(cloneForSimulation(state),state.savedAt);
   while(left>1e-9&&iterations++<200_000) {
     next=settleFoundries(startManualResearchQueue(autoStartModelTraining(next)));
+    observe?.(next);
     const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;
     const toLevel=next.activeTraining?(goal-next.training)/rate:Infinity;
     const shoppingActive=shoppingAgentUnlocked(next)&&(['calculator','sbc'] as const).some(id=>next.hardwareAutoBuyers[id]),otherAutoActive=next.automation.enabled||hardwareIds.some(id=>next.hardwareAutoBuyers[id]&&!(shoppingAgentUnlocked(next)&&(id==='calculator'||id==='sbc'))),autoActive=shoppingActive||otherAutoActive,autoInterval=otherAutoActive?(Object.values(next.hardwareAutoBuyers).some(Boolean)?BALANCE.hardwareAutobuyerInterval:BALANCE.simulationStep):Infinity,toAuto=Math.min(otherAutoActive?autoInterval-next.automation.elapsed:Infinity,shoppingActive?10-(next.automation.shoppingElapsed??0):Infinity);
@@ -139,6 +143,7 @@ function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.rand
   const offline=!active&&total>10;
   next=addMetrics(next,next.savedAt,{activeSeconds:active?total:0,offlineSeconds:offline?total:0,passive:offline?0:generatedCredits,offline:offline?generatedCredits:0,offlineCredits:offline?generatedCredits:0,offlineData:offline?generatedData:0,offlineResearch:offline?generatedResearch:0});
   const pinnedReachedAfter=next.pinnedGoal?resolvePinnedGoal(next,next.pinnedGoal)?.reached??false:false;if(!pinnedReachedBefore&&pinnedReachedAfter)next=addEvent(next,'goal-completed',next.savedAt,{goal:JSON.stringify(next.pinnedGoal)});
+  observe?.(next);
   if(seconds>=60)next=addEvent(next,'offline-return',next.savedAt,{elapsedSeconds:seconds,creditedSeconds:total,lostSeconds:Math.max(0,seconds-total)});return {state:next,report:{itemResults:bundleItems(receivedItems(state,next)),credits:generatedCredits,data:generatedData,research:generatedResearch,exactCredits:generatedCreditsExact.toJSON(),exactData:generatedDataExact.toJSON(),levels,researchCompleted:next.lifetime.researchCompleted-state.lifetime.researchCompleted,experiments,craftingCompleted,hardware,seconds:total,elapsedSeconds:seconds,lostSeconds:Math.max(0,seconds-total),components,newQuestRewards:Math.max(0,(['daily','weekly','monthly'] as MissionKind[]).filter(k=>missionRewardClaimable(next,k)).length-questReadyBefore),newSeasonRewards:Number(seasonClaimable(next)&&!seasonReadyBefore),analysisResults}};
 }
 
@@ -161,9 +166,9 @@ export function advance(state:GameState,seconds:number,active=false,rng=Math.ran
  return settleChallengeMain(result,state,result.state.savedAt,rng);
 }
 
-export function advanceTo(state:GameState,wallNow:number,active=false,rng=Math.random) {
+export function advanceTo(state:GameState,wallNow:number,active=false,rng=Math.random,observe?:AdvanceObserver) {
   const now=simulationNow(state,wallNow);
-  const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advanceSingle(state,elapsed,active,rng);
+  const elapsed=Math.max(0,(now-state.savedAt)/1000),result=advanceSingle(state,elapsed,active,rng,observe);
   result.report.elapsedSeconds=elapsed;result.report.lostSeconds=Math.max(0,elapsed-result.report.seconds);
   if(!active&&elapsed>10&&elapsed>result.report.seconds)result.state=addMetrics(result.state,result.state.savedAt,{offlineSeconds:elapsed-result.report.seconds});
   const limit=offlineTimeLimit(state);if(now>state.savedAt&&now-state.savedAt>limit*1000) result.state.savedAt=now;
