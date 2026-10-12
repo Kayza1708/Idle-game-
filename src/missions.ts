@@ -1,8 +1,8 @@
 import {grantMaterialPackage,type MaterialFamily} from './materialEconomy';
-import {BALANCE,MAX_ECONOMY_VALUE,creditRateScientific,dataRateScientific,dayKey,GameState,MissionPeriod,MissionTask,MissionObjective,ProgressMetric,weekKey} from './economy';
+import {BALANCE,hardwareIds,MAX_ECONOMY_VALUE,creditRateScientific,dataRateScientific,dayKey,GameState,MissionPeriod,MissionTask,MissionObjective,ProgressMetric,weekKey} from './economy';
 import {addEvent} from './telemetry';
 import {addSeasonXP,questSeasonXP,rollSeason} from './season';
-import type {Language} from './i18n';
+import {hardwareText,type Language} from './i18n';
 import {blueprintQuote} from './blueprints';
 export type MissionKind='daily'|'weekly'|'monthly';
 const monthKey=(ms:number)=>new Date(ms).toISOString().slice(0,7);
@@ -10,9 +10,9 @@ const dayEnd=(ms:number)=>{const d=new Date(ms);return Date.UTC(d.getUTCFullYear
 const weekEnd=(ms:number)=>{const d=new Date(ms),day=(d.getUTCDay()+6)%7;return Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()-day+7)};
 const monthEnd=(ms:number)=>{const d=new Date(ms);return Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1)};
 export const metricValue=(s:GameState,m:ProgressMetric)=>s.lifetime[m] as number;
-type Template={objective?:MissionObjective;id:string;metric:ProgressMetric;de:string;en:string;base:readonly [number,number,number];available:(s:GameState)=>boolean};
-export const objectiveValue=(s:GameState,objective:MissionObjective)=>objective==='blueprints'?new Set(s.learnedRecipes).size:objective==='foundries'?s.foundries.reduce((n,f)=>n+f.level,0):Object.values(s.challengeStages).reduce((n,v)=>n+v,0);
-const taskValue=(s:GameState,t:Pick<MissionTask,'metric'|'objective'>)=>t.objective?objectiveValue(s,t.objective):metricValue(s,t.metric);
+type Template={targetHardware?:MissionTask['targetHardware'];objective?:MissionObjective;id:string;metric:ProgressMetric;de:string;en:string;base:readonly [number,number,number];available:(s:GameState)=>boolean};
+export const objectiveValue=(s:GameState,objective:MissionObjective)=>objective==='blueprints'?new Set(s.learnedRecipes).size:objective==='hardware-class'?new Set(s.lifetime.hardwareClasses).size:objective==='foundries'?s.foundries.reduce((n,f)=>n+f.level,0):Object.values(s.challengeStages).reduce((n,v)=>n+v,0);
+const taskValue=(s:GameState,t:Pick<MissionTask,'metric'|'objective'|'targetHardware'>)=>t.objective==='hardware-class'?(s.lifetime.hardwareClasses.includes(t.targetHardware!)?1:0):t.objective?objectiveValue(s,t.objective):metricValue(s,t.metric);
 const templates:Template[]=[
  {id:'hardware',metric:'hardwareBought',de:'Hardware kaufen',en:'Buy hardware',base:BALANCE.missionBaseGoals['hardware'],available:()=>true},{id:'milestones',metric:'milestones',de:'Hardware-Meilensteine erreichen',en:'Reach hardware milestones',base:BALANCE.missionBaseGoals['milestones'],available:()=>true},{id:'train-done',metric:'trainingCompleted',de:'Training abschließen',en:'Complete training',base:BALANCE.missionBaseGoals['train-done'],available:()=>true},{id:'research-done',metric:'researchCompleted',de:'Forschung abschließen',en:'Complete research',base:BALANCE.missionBaseGoals['research-done'],available:s=>s.discovered.includes('sbc')},{id:'components',metric:'componentsEarned',de:'Komponenten erhalten',en:'Gain components',base:BALANCE.missionBaseGoals['components'],available:s=>s.prestigeCount>0||s.experiments.firstReward},{id:'craft',metric:'itemsCrafted',de:'Items herstellen',en:'Craft items',base:BALANCE.missionBaseGoals['craft'],available:s=>s.lifetime.itemsCrafted>0},{id:'drops',metric:'dropsClaimed',de:'Signal-Drops einsammeln',en:'Claim signal drops',base:BALANCE.missionBaseGoals['drops'],available:s=>s.discovered.includes('sbc')},{id:'fusion',metric:'itemsFused',de:'Items fusionieren',en:'Fuse items',base:BALANCE.missionBaseGoals['fusion'],available:()=>false},{id:'forge',metric:'forgeUpgrades',de:'Schmiede-Upgrades durchführen',en:'Forge item upgrades',base:BALANCE.missionBaseGoals['forge'],available:s=>s.foundries.length>0&&s.lifetime.forgeUpgrades>0},{id:'credits',metric:'regularCredits',de:'Credits produzieren',en:'Produce credits',base:BALANCE.missionBaseGoals['credits'],available:s=>s.lifetime.regularCredits<MAX_ECONOMY_VALUE},{id:'data',metric:'regularData',de:'Daten produzieren',en:'Produce data',base:BALANCE.missionBaseGoals['data'],available:s=>s.lifetime.regularData<MAX_ECONOMY_VALUE},{id:'taps',metric:'taps',de:'Vergütete Taps ausführen',en:'Perform rewarded taps',base:BALANCE.missionBaseGoals['taps'],available:()=>true},{id:'overclock',metric:'overclocks',de:'Overclocks auslösen',en:'Trigger overclocks',base:BALANCE.missionBaseGoals['overclock'],available:()=>true},{id:'prestige',metric:'prestiges',de:'Prestige durchführen',en:'Perform prestige',base:BALANCE.missionBaseGoals['prestige'],available:()=>false},{id:'active',metric:'activeSeconds',de:'Aktiv spielen',en:'Play actively',base:BALANCE.missionBaseGoals['active'],available:()=>true},
  {id:'blueprints',objective:'blueprints',metric:'itemsCrafted',de:'Neue Itembaupläne lernen',en:'Learn new item blueprints',base:BALANCE.missionProgression.objectiveGoals.blueprints,available:s=>s.completedResearch.includes('blueprints')&&Object.keys(BALANCE.itemRecipes).some(id=>blueprintQuote(s,id).price>0&&!(s.learnedRecipes??[]).includes(id as never)&&blueprintQuote(s,id).prerequisite)},
@@ -52,6 +52,7 @@ const missionTemplateId=(task:MissionTask):MissionTranslationId|undefined=>{
 };
 
 export function missionText(task:MissionTask,language:Language){
+  if(task.objective==='hardware-class'&&task.targetHardware){const verb:Record<Language,string>={de:'Neue Hardwareklasse erschließen',en:'Discover a new hardware class',es:'Descubrir una nueva clase de hardware',fr:'Découvrir une nouvelle classe de matériel',pt:'Descobrir uma nova classe de hardware',it:'Scoprire una nuova classe di hardware',pl:'Odkryj nową klasę sprzętu'};return `${verb[language]} · ${hardwareText(task.targetHardware,language).name}`;}
   const id=missionTemplateId(task);
 
   if(!id)
@@ -80,11 +81,12 @@ export function missionText(task:MissionTask,language:Language){
 
 const counts=BALANCE.missionCounts;
 const required=BALANCE.missionRequired;
-export function missionProgressionBand(s:GameState){return BALANCE.missionProgression.bandClasses.filter(n=>s.lifetime.hardwareClasses.length>=n).length;}
+export function missionProgressionBand(s:GameState,index=0){const b=BALANCE.missionProgression,current=b.bandClasses.filter(n=>s.lifetime.hardwareClasses.length>=n).length;return Math.max(b.minimumBands[index],Math.min(b.bandMultipliers.length-1,current+b.futureBandOffsets[index]));}
 function missionGoal(s:GameState,t:Template,index:number,stage:number){
- const balance=BALANCE.missionProgression,band=missionProgressionBand(s);
+ const balance=BALANCE.missionProgression,band=missionProgressionBand(s,index);
+ if(t.objective==='hardware-class')return 1;
  if(t.objective){const remaining=t.objective==='blueprints'?Object.values(BALANCE.itemRecipes).filter(r=>r.blueprints>0).length-objectiveValue(s,t.objective):t.objective==='foundries'?15-objectiveValue(s,t.objective):690-objectiveValue(s,t.objective);return Math.min(remaining,t.base[index]);}
- const scalable=['hardwareBought','milestones','trainingCompleted','researchCompleted','itemsCrafted','componentsEarned'].includes(t.metric);
+ const scalable=['hardwareBought','milestones','trainingCompleted','researchCompleted','itemsCrafted','componentsEarned','regularCredits','regularData'].includes(t.metric);
  let goal=t.base[index]*(scalable?balance.bandMultipliers[band]:1)*balance.repeatMultiplier**stage;
  if(t.metric==='regularCredits'||t.metric==='regularData'){
   const permanent={...s,creditBoostUntil:0,overclock:{...s.overclock,activeUntil:0}};
@@ -95,15 +97,16 @@ function missionGoal(s:GameState,t:Template,index:number,stage:number){
 }
 function makePeriod(s:GameState,kind:MissionKind,now:number):MissionPeriod{
  const index=kind==='daily'?0:kind==='weekly'?1:2,count=counts[kind],reward=BALANCE.missionRewards[kind],key=kind==='daily'?dayKey(now):kind==='weekly'?weekKey(now):monthKey(now),endsAt=kind==='daily'?dayEnd(now):kind==='weekly'?weekEnd(now):monthEnd(now);
- const available=templates.filter(t=>t.available(s)),seed=[...key].reduce((n,c)=>n+c.charCodeAt(0),0),tasks:MissionTask[]=[],uses=new Map<string,number>();
+ const frontier:Template[]=kind==='daily'?[]:hardwareIds.filter(id=>!s.lifetime.hardwareClasses.includes(id)&&id!=='calculator').filter((_,i)=>(i+1)%BALANCE.missionProgression.frontierStrides[index]===0).map(id=>({id:`hardware-frontier-${id}`,metric:'hardwareBought',objective:'hardware-class',targetHardware:id,de:`Neue Hardwareklasse erschließen · ${hardwareText(id,'de').name}`,en:`Discover a new hardware class · ${hardwareText(id,'en').name}`,base:[1,1,1],available:()=>true}));
+ const available=[...templates.filter(t=>t.available(s)),...frontier],seed=[...key].reduce((n,c)=>n+c.charCodeAt(0),0),tasks:MissionTask[]=[],uses=new Map<string,number>();
  // Hardware and production always provide passive alternatives. Scarce finite objectives occur once.
  const rotated=[...available.slice(seed%available.length),...available.slice(0,seed%available.length)];
  const pool=[...available.filter(t=>['hardware','credits'].includes(t.id)),...rotated.filter(t=>!['hardware','credits'].includes(t.id))];
- let cursor=0;
- while(tasks.length<count){const t=pool[cursor++%pool.length],stage=uses.get(t.id)??0;if(t.objective&&(stage>0||tasks.filter(x=>x.objective).length>=count-required[kind]))continue;uses.set(t.id,stage+1);const i=tasks.length;
-  tasks.push({id:`${key}-${t.id}-${i}`,metric:t.metric,...(t.objective?{objective:t.objective}:{}),goal:missionGoal(s,t,index,stage),baseline:taskValue(s,t),reward:reward.task,rewardTier:1,claimed:false,de:`${t.de}${stage?` · Stufe ${stage+1}`:''}`,en:`${t.en}${stage?` · Tier ${stage+1}`:''}`});
+ let cursor=0;const allocated=new Map<string,number>();
+ while(tasks.length<count&&cursor<count*pool.length){const t=pool[cursor++%pool.length],stage=uses.get(t.id)??0;if(['regularCredits','regularData'].includes(t.metric)&&stage>=BALANCE.missionProgression.productionTasksPerMetric)continue;if(t.objective&&(stage>0||tasks.filter(x=>x.objective).length>=count-required[kind]))continue;const original=taskValue(s,t),offset=kind==='daily'||t.objective?0:allocated.get(t.metric)??0,baseline=original+offset,goal=Math.min(missionGoal(s,t,index,stage),MAX_ECONOMY_VALUE-baseline);if(goal<=0)continue;uses.set(t.id,stage+1);if(!t.objective)allocated.set(t.metric,offset+goal);const i=tasks.length;
+  tasks.push({id:`${key}-${t.id}-${i}`,metric:t.metric,...(t.objective?{objective:t.objective}:{}),...(t.targetHardware?{targetHardware:t.targetHardware}:{}),goal,baseline,reward:reward.task,rewardTier:1,claimed:false,de:`${t.de}${stage?` · Stufe ${stage+1}`:''}`,en:`${t.en}${stage?` · Tier ${stage+1}`:''}`});
  }
- return{key,endsAt,tasks,required:required[kind],bonus:reward.bonus,bonusClaimed:false};
+ return{key,endsAt,tasks,required:Math.min(required[kind],tasks.length),bonus:tasks.length?reward.bonus:0,bonusClaimed:false};
 }
 const completed=(s:GameState,t:MissionTask)=>taskValue(s,t)-t.baseline>=t.goal;
 function settle(s:GameState,kind:MissionKind,p:MissionPeriod){if(s.retention.activeRun||s.challengeSession)return s;const taskGems=p.tasks.filter(t=>completed(s,t)&&!t.claimed).reduce((n,t)=>n+t.reward,0),done=p.tasks.filter(t=>completed(s,t)).length,bonus=done>=p.required&&!p.bonusClaimed?p.bonus:0,total=taskGems+bonus;if(!total)return s;return{...s,gems:s.gems+total,gemLedger:[...s.gemLedger,{id:`mission-expiry-${kind}-${p.key}`,at:s.savedAt,amount:total,source:`mission-${kind}-expiry`}]};}

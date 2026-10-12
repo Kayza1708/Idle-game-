@@ -1,3 +1,11 @@
+## Wochen-/Monatskapitel und Punktkurve umgesetzt – 12. Oktober 2026
+
+Neue Perioden: höchstens ein Credit-/Dataziel, getrennte Arbeitsabschnitte statt mehrfach genutzter Zähler, Zukunftsbänder für längere Perioden und konkrete optionale Hardwarefrontiers. 6/12/30 und Rewardbudgets erhalten. Achievement-Produktion jetzt logarithmisch; Gems, Punkte und Claims bleiben, auch Altaccounts erhalten aber den schwächeren neuen Faktor. Save v51 erhält laufende Altquests bis zum Periodenwechsel. Verträge und Gegenmessung: `quest-chapters-and-achievements.md`.
+
+Lokale Abnahme: 1.295 Standardtests (13 neue Kapitel-/Kurvenverträge), App-/CLI-Typecheck, Build und Diffcheck grün. Finale acht Profile in 45,32 Sekunden; Quellhashes sowie Gem-/Season-XP-Buchungen geprüft. Keine Browser-/Geräteabnahme.
+
+Acht gematchte Zwei-Stunden-Profile: kein Wochenbonus; bei einem Tap/s sechs statt zwölf Wochenziele und vier statt acht Monatsziele fertig, XP 14.500 → 6.900. Prestige 37:30 → 47:30, Chip weiter bei 60:10; kurze Besuche behalten Tagesabschluss/169 Gems, weiterhin kein Prestige. Wochen-/Monatsabschlussquoten und Geräteabnahme offen. Nächster Block: passive Rückkehr, zweiter Prestige und erste echte Automation/Buildslots, danach längere Perioden an diesem Fortschritt prüfen.
+
 ## Feste Loadouts und Questökonomie gemessen – 12. Oktober 2026
 
 27 natürliche Zwei-Stunden-Profile, 150,41 Sekunden: feste Relais-/Chipbelegung, 0/1/3 Taps/s, zwei Besuchsmuster mit gleichem 900-Sekunden-Budget, echte Quest-/Achievementclaims. Relais gewinnt bei drei Taps/s, Chip bei null/einem; zusätzliche Forschung ist noch kein eigenständiger fairer dritter Build. Kurze Besuche erreichen weiterhin keinen ersten INT/Prestige im Horizont. Aktive Wochenziele sind binnen zwei Stunden vollständig, 8–10 Monatsziele ebenfalls; Season-XP 13.300–16.300. Kein Monatsbonus. Rohdaten, Zusammenfassung und Einschränkungen: `build-quest-progression-findings.md`.
