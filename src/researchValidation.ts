@@ -7,6 +7,7 @@ const finite=(v:unknown,min=0)=>typeof v==='number'&&Number.isFinite(v)&&v>=min;
 const known=(id:unknown):id is keyof typeof BALANCE.researchProjects|keyof typeof BALANCE.repeatableResearch=>typeof id==='string'&&(Object.hasOwn(BALANCE.researchProjects,id)||Object.hasOwn(BALANCE.repeatableResearch,id));
 const exact=(v:unknown)=>ScientificNumber.isValidJSON(v);
 export function assertResearchState(s:GameState){
+ if(!['unearned','pending','consumed'].includes(s.blueprintResearchReward)||(s.blueprintResearchReward==='pending'&&!s.completedResearch.includes('blueprints')))fail('blueprintResearchReward');
  if(!Array.isArray(s.researchAccessIds)||s.researchAccessIds.length>26||s.researchAccessIds.some(id=>!known(id))||new Set(s.researchAccessIds).size!==s.researchAccessIds.length)fail('researchAccessIds');
  if(!integer(s.runTrainingStarted))fail('runTrainingStarted');
  const r=s.researchRepeat;if(!object(r)||typeof r.enabled!=='boolean'||(r.id!==null&&!isRepeatableResearch(r.id))||!integer(r.targetLevel,1))fail('researchRepeat');

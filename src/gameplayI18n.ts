@@ -245,7 +245,7 @@ const projects:Record<ResearchProjectId,{name:L;effect:L}>={
  },
  blueprints:{
   name:l('Open Blueprints','Offene Baupläne','Planos abiertos','Plans ouverts','Projetos abertos','Progetti aperti','Otwarte schematy'),
-  effect:l('Unlocks advanced item recipes.','Schaltet fortgeschrittene Itemrezepte frei.','Desbloquea recetas avanzadas.','Débloque les recettes avancées.','Desbloqueia receitas avançadas.','Sblocca ricette avanzate.','Odblokowuje zaawansowane receptury.')
+  effect:l('Unlocks advanced item recipes. First paid main-game completion grants {fragments} blueprint fragments once per account.','Schaltet fortgeschrittene Itemrezepte frei. Der erste bezahlte Abschluss im Hauptspiel gibt einmalig {fragments} Bauplanfragmente pro Account.','Desbloquea recetas avanzadas. La primera finalización pagada en la partida principal otorga {fragments} fragmentos de plano una vez por cuenta.','Débloque les recettes avancées. La première réalisation payée dans la partie principale donne {fragments} fragments de plan une seule fois par compte.','Desbloqueia receitas avançadas. A primeira conclusão paga no jogo principal concede {fragments} fragmentos de projeto uma vez por conta.','Sblocca ricette avanzate. Il primo completamento pagato nella partita principale concede {fragments} frammenti di progetto una volta per account.','Odblokowuje zaawansowane receptury. Pierwsze płatne ukończenie w grze głównej daje {fragments} fragmenty schematu raz na konto.')
  },
  alignment:{
   name:l('Reproducible Models','Reproduzierbare Modelle','Modelos interpretables','Modèles interprétables','Modelos interpretáveis','Modelli interpretabili','Interpretowalne modele'),
@@ -255,7 +255,7 @@ const projects:Record<ResearchProjectId,{name:L;effect:L}>={
 
 export const projectText=(id:ResearchProjectId,language:Language)=>({
  name:pick(projects[id].name,language),
- effect:pick(projects[id].effect,language),
+ effect:pick(projects[id].effect,language).replace('{fragments}',String(BALANCE.firstBlueprintResearchFragments)),
 });
 
 /* =========================================================

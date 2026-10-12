@@ -1,3 +1,11 @@
+## Einmaliger bezahlter Forschungsabschluss → Crafting – 12. Oktober 2026
+
+Implementiert: Offene Baupläne vergibt beim ersten bezahlten Hauptspielabschluss einmalig vier Bauplanfragmente; permanente Quittung, Save v49, strikte Migration sowie doppelte Completion-/Reload-/Prestige-/Axiom-/Challenge-Sicherung. Laufende bezahlte Altjobs bleiben berechtigt, abgeschlossene Altforschung wird nicht nachvergütet. UI meldet tatsächliche Buchung; Diagnose/CSV protokollieren Status und Grant. Keine kostenlose Item-/Modul-/Materialerzeugung und keine übrigen Balanceänderungen.
+
+Gleiche acht natürliche Zwei-Stunden-Profile erneut gemessen (38,89 Sekunden): Quantenchip jetzt in allen vier aktiven Fällen nach 67:30/68:30, zuvor nie innerhalb des Horizonts. Erstes Relais, erster claimbarer INT und Prestigezeit bleiben gleich. Kurze Sitzungen erreichen die Offenen Baupläne noch nicht. Kontrollierter Wechsel derselben tatsächlichen Prozessoren: Chip +10,4 % passive Credits/s; Relais behält Tapbursts. Der bestehende Controller wechselt verfügbare Prozessoren; gesamte Runwerte sind deshalb kein optimierter fester Buildvergleich.
+
+Lokale Abnahme: 1.257 Standardtests, Typecheck und Build grün; 20 neue Grant-/Migrations-/UI-/Exporttests. Vertragsdokument: `blueprint-research-bridge.md`, Rohprofile und Vergleich daneben. Keine Browser-/Geräteprüfung oder Monatskampagnen. Nächster Schritt: passive Kadenz/Taps getrennt sowie feste Loadouts mit verbuchten Bursteinkünften messen, anschließend breitere vorhandene Forschungs-Sinks. Midgame/Forge/Challenges und Langzeitbalance weiter offen.
+
 ## Natürliche frühe Progression – 12. Oktober 2026
 
 PR #87 ist gemergt; Node-22-CI grün. Acht korrigierte natürliche Zwei-Stunden-Profile mit zwei Seeds, kontinuierlichem Spiel/kurzen Sitzungen und Modell-/Materialpriorität wurden in 36,25 Sekunden gemessen. Keine Grants, vorbereiteten Unlocks, Shop-/Ad-Käufe oder Monatskampagnen. Artefakt und konkrete Entscheidungsvorlage: `natural-progression-baseline.json` und `natural-progression-findings.md`.
