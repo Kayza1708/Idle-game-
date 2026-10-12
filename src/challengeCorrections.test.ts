@@ -1,3 +1,5 @@
+import {Research} from './Panels';
+import {researchPreview} from './economy';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {ChallengeStagePicker} from './ChallengeStagePicker';
@@ -71,6 +73,8 @@ describe('review corrections with persisted paid contracts',()=>{
  it('requires alternating research in new science chapters and counts only paid completed research',()=>{
   let s=addData(startRunChallenge(account(),'serial-science',11),100000);s=startResearchProject(s,'dataGeneration');expect(s.researchLabs[0]).not.toBeNull();expect(s.retention.activeRun!.metrics!.researchDataSpent!.m).toBe(0);
   s=settleResearchCompletions({...s,savedAt:s.researchLabs[0]!.endsAt});expect(ScientificNumber.fromJSON(s.retention.activeRun!.metrics!.researchDataSpent!).toNumber()).toBe(363);
+  expect(researchPreview(s,'dataGeneration')?.reason).toBe('challenge-rule');
+  for(const language of ['de','en'] as const){const html=renderToStaticMarkup(createElement(Research,{s:{...s,settings:{...s.settings,language}},act:()=>{}}));expect(html).toContain(language==='de'?'Challenge: Forschungsbereich wechseln.':'Challenge: switch research area.');expect(html).toMatch(/id="research-dataGeneration" class="research-card locked"/);}
   expect(startResearchProject(s,'dataGeneration')).toBe(s);expect(startResearchProject(s,'modelArchitecture')).not.toBe(s);
  });
  it.each(['de','en'] as const)('renders stage prerequisites, selectable network and active v2 objectives in %s',language=>{

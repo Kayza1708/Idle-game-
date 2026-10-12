@@ -1,3 +1,7 @@
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {Workshop} from './Panels';
+import {hardwareIds} from './economy';
 import {describe,expect,it} from 'vitest';
 import {BALANCE,buyHardwareClass,creditRate,hardwareCost,newGame,registerTap} from './economy';
 import {rollPeriods} from './missions';
@@ -45,7 +49,8 @@ describe('final mobile presentation contracts',()=>{
   expect(panelSource).toContain("act('loot-drop',drop.id)");
  });
  it('renders every hardware class through one list and no later-hardware section',()=>{
-  expect(panelSource).toContain('hardwareIds.map((id,index)');
+  const html=renderToStaticMarkup(createElement(Workshop,{s:newGame(0),act:()=>{}}));
+  for(const id of hardwareIds)expect(html.match(new RegExp(`id="hardware-${id}"`,'g'))).toHaveLength(1);
   expect(panelSource).not.toContain('Spätere Hardwareklassen');
   expect(panelSource).not.toContain('hardware-late');
  });

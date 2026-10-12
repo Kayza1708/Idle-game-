@@ -1,0 +1,23 @@
+name: Manual balance campaigns
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Simulation horizons
+        type: choice
+        options: [FAST, DEEP]
+        default: FAST
+jobs:
+  campaigns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run test:campaigns
+        env:
+          SIM_MODE: ${{ inputs.mode }}

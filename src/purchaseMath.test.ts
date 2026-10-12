@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {addCredits, addCreditsScientific, addData, buyClassUpgrade, buyHardwareClass, canAffordResources, canAffordScientificCreditCost, exactEconomyValue, hardwareBulkCostScientific, hardwareCostScientific, hardwareIds, maxAffordable, newGame, spendResources, spendScientificCredits, spendScientificResources, type GameState} from './economy';
+import {addCredits, addCreditsScientific, addData, buyClassUpgrade, classUpgradePreview, buyHardwareClass, canAffordResources, canAffordScientificCreditCost, exactEconomyValue, hardwareBulkCostScientific, hardwareCostScientific, hardwareIds, maxAffordable, newGame, spendResources, spendScientificCredits, spendScientificResources, type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {loadGame, persistGame, restore, SAVE_KEY, SAVE_VERSION, serialize, type StorageLike} from './storage';
 
@@ -172,9 +172,16 @@ describe('scientific hardware purchase regressions', () => {
     expect(spendScientificCredits(state,cost)).toBe(state);
   });
 
-  it.each(hardwareIds)('keeps the existing disabled %s class-upgrade action unchanged', id => {
-    const state=funded(ScientificNumber.fromString('1e1000'),500);
-    expect(buyClassUpgrade(state,id)).toBe(state);
+  it.each(hardwareIds)('pays the quoted scientific Credit price for the %s class upgrade once', id => {
+    const base=funded(ScientificNumber.fromString('1e1000'));
+    const state={...base,hardware:50,hardwareCounts:{...base.hardwareCounts,[id]:50}};
+    const quote=classUpgradePreview(state,id),next=buyClassUpgrade(state,id);
+    expect(quote.allowed).toBe(true);
+    expect(next.classUpgrades).toContain(id);
+    expect(exactEconomyValue(next,'credits').toJSON()).toEqual(exactEconomyValue(state,'credits').subtract(quote.cost).toJSON());
+    expect(buyClassUpgrade(next,id)).toBe(next);
+    const poor={...state,credits:0,exactEconomy:{...state.exactEconomy,credits:{m:0,e:0}}};
+    expect(buyClassUpgrade(poor,id)).toBe(poor);
   });
 });
 

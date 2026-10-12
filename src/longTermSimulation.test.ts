@@ -10,7 +10,7 @@ describe.sequential('long-term deterministic balance',()=>{
   // Same horizons, profiles, seed and domain calls as simulateDiagnosticSuite.
   // Cases remain sequential; only CPU work moves off Vitest's RPC event loop.
   it.each(horizons.flatMap(days=>[true,false].map(active=>({days,active}))))('validates $days days, active=$active',async({days,active})=>{
-      const run=await runSimulationWorker([days,active,suite.seed]);suite.runs.push(run);
+      const run=await runSimulationWorker([days,active,suite.seed],undefined,110_000);suite.runs.push(run);
       expect(run.invalid).toBe(false);
       expect(Number.isFinite(run.final.credits)).toBe(true);
       expect(Number.isFinite(run.final.data)).toBe(true);
@@ -22,7 +22,7 @@ describe.sequential('long-term deterministic balance',()=>{
       expect(run.checkpoints.length).toBeGreaterThan(0);
       expect(run.diagnostics.prestige.length).toBeGreaterThan(0);
       expect(run.diagnostics.crafting.length).toBeGreaterThan(0);
-  },0);
+  },120_000);
 
   it('reports deterministic FAST/DEEP V10 balance diagnostics',()=>{
     // All original per-run and aggregate assertions remain in place.
@@ -35,5 +35,5 @@ describe.sequential('long-term deterministic balance',()=>{
     console.log(`SIMULATION MODE: ${mode}`);
     console.log(formatLongTermReport(suite));
     if(process.env.BALANCE_STRICT==='1')expect(diagnosis.overall,'V10 balance diagnosis must not FAIL in strict mode').not.toBe('FAIL');
-  },0);
+  },120_000);
 });
