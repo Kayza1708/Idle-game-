@@ -43,6 +43,7 @@ const ready = () =>
     {
       ...buyHardwareClass(addData(newGame(0), 1e6), "calculator"),
       prestigeCount: 1,
+      unlockedEquipmentSlots: 3,
     },
     { circuits: 10000 },
   );

@@ -15,7 +15,7 @@ import {startRunChallenge,abortRunChallenge} from './retention';
 
 // Independent acceptance catalogue: singular names in the brief map to existing plural inventory IDs.
 const expected={
- 'photonic-array':{components:{circuits:20,copperCoils:8,siliconWafers:12,photonicLenses:6},modules:{computeBus:1},data:1200,price:6,seconds:900,effect:'training'},
+ 'photonic-array':{components:{circuits:20,copperCoils:8,siliconWafers:12,photonicLenses:6},modules:{computeBus:1},data:1200,price:4,seconds:900,effect:'training'},
  'memory-crystal':{components:{circuits:16,siliconWafers:16,graphene:6,neuralCrystals:2},modules:{dataLattice:1},data:1800,price:6,seconds:1200,effect:'credits'},
  'logic-seed':{components:{circuits:12,siliconWafers:10,graphene:4,nanotubes:2,neuralCrystals:1},modules:{dataLattice:1},data:1500,price:6,seconds:900,effect:'training'},
  'tensor-core':{components:{circuits:36,siliconWafers:20,titaniumBolts:12,graphene:6,nanotubes:4,superconductors:2},modules:{computeBus:1,dataLattice:1},data:3000,price:8,seconds:1800,effect:'compute'},

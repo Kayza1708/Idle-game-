@@ -810,7 +810,7 @@ export const BALANCE = {
     'data-prism':{rarity:'common' as const,name:'Datenprisma-Bauplan',ingredients:{circuits:20,copperCoils:8,siliconWafers:14,titaniumBolts:8,photonicLenses:10,graphene:12,nanotubes:4,superconductors:1,neuralCrystals:0,quantumCores:0},blueprints:5,data:2800,modules:{dataLattice:1}},
     'insight-archive':{rarity:'common' as const,name:'Erkenntnisarchiv-Bauplan',ingredients:{circuits:100,copperCoils:0,siliconWafers:20,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:5,quantumCores:0},blueprints:0,data:0,modules:{},duration:3600},
     // Auftrag 9C: fixed starting catalogue; balance has not been established.
-    'photonic-array':{rarity:'common' as const,name:'Photonenfeld-Bauplan',research:'blueprints' as const,ingredients:{circuits:20,copperCoils:8,siliconWafers:12,titaniumBolts:0,photonicLenses:6,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0},blueprints:6,data:1200,modules:{computeBus:1},duration:900},
+    'photonic-array':{rarity:'common' as const,name:'Photonenfeld-Bauplan',research:'blueprints' as const,ingredients:{circuits:20,copperCoils:8,siliconWafers:12,titaniumBolts:0,photonicLenses:6,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0},blueprints:4,data:1200,modules:{computeBus:1},duration:900},
     'memory-crystal':{rarity:'common' as const,name:'Speicherkristall-Bauplan',research:'blueprints' as const,ingredients:{circuits:16,copperCoils:0,siliconWafers:16,titaniumBolts:0,photonicLenses:0,graphene:6,nanotubes:0,superconductors:0,neuralCrystals:2,quantumCores:0},blueprints:6,data:1800,modules:{dataLattice:1},duration:1200},
     'logic-seed':{rarity:'common' as const,name:'Logik-Saat-Bauplan',research:'blueprints' as const,ingredients:{circuits:12,copperCoils:0,siliconWafers:10,titaniumBolts:0,photonicLenses:0,graphene:4,nanotubes:2,superconductors:0,neuralCrystals:1,quantumCores:0},blueprints:6,data:1500,modules:{dataLattice:1},duration:900},
     'tensor-core':{rarity:'common' as const,name:'Tensor-Kern-Bauplan',research:'blueprints' as const,ingredients:{circuits:36,copperCoils:0,siliconWafers:20,titaniumBolts:12,photonicLenses:0,graphene:6,nanotubes:4,superconductors:2,neuralCrystals:0,quantumCores:0},blueprints:8,data:3000,modules:{computeBus:1,dataLattice:1},duration:1800},
@@ -1044,7 +1044,9 @@ export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemSlot;effect:ItemE
  'field-scanner':{name:'Feldscanner',slot:'research',effect:'experiment'},'lab-drone':{name:'Labordrohne',slot:'research',effect:'research'},'data-prism':{name:'Datenprisma',slot:'research',effect:'data'},...Object.fromEntries(Object.entries(extendedItemCatalog).map(([id,v])=>[id,{name:v.name,slot:v.slot,effect:v.role}]))} as Record<ItemTypeId,{name:string;slot:ItemSlot;effect:ItemEffect}>;
 export const rarityRank=(r:Rarity)=>(['common','uncommon','rare','epic','legendary','mythic'] as Rarity[]).indexOf(r);
 export const itemEffect=(i:Item)=>BALANCE.itemBaseEffect*BALANCE.rarity[i.rarity].factor*(1+.18*i.level)*(1+.12*(i.forge??0));
-export const equippedItems=(s:GameState)=>Object.values(s.equipped).map(id=>s.inventory.find(i=>i.id===id)).filter((i):i is Item=>!!i);
+export const equipmentSlotUnlocked=(s:GameState,slot:ItemSlot)=>equipmentSlots.indexOf(slot)<equipmentSlotCount(s);
+/** Category, ownership and acquired socket must agree for every effect consumer. */
+export const equippedItems=(s:GameState)=>equipmentSlots.flatMap(slot=>equipmentSlotUnlocked(s,slot)?s.inventory.filter(i=>i.id===s.equipped[slot]&&itemTypes[i.type]?.slot===slot):[]);
 export const legacyHardwareClasses=(s:GameState)=>hardwareIds.filter(id=>s.hardwareCounts[id]>=BALANCE.scalingSynergy.legacyThreshold).length;
 export const totalReachedMilestones=(s:GameState)=>hardwareIds.reduce((n,id)=>n+reachedMilestones(id,s.hardwareCounts[id]).length,0);
 export const rareComponentTypesOwned=(s:GameState)=>['graphene','nanotubes','superconductors','neuralCrystals','quantumCores'].filter(id=>s.discoveredComponents.includes(id as ComponentId)).length;
@@ -1068,7 +1070,7 @@ export const equippedBonus=(s:GameState,e:ItemEffect)=>s.retention.activeRun?.id
 export function specialItemEffectQuote(s:GameState,item:Item){
  const effect=item.type==='impulse-relay'?'relay':item.type==='insight-archive'?'int-yield':null;if(!effect)return null;
  const baseline={...item,rarity:'common' as const,level:0,forge:0},amplifier=1+deepPrestigeBonus(s,'manufacturing'),effectiveValue=itemEffectFor(s,item,effect)*amplifier,baselineValue=itemEffectFor(s,baseline,effect)*amplifier,scale=baselineValue>0?effectiveValue/baselineValue:0;
- const active=s.retention.activeRun?.id!=='no-items'&&s.inventory.some(i=>i.id===item.id)&&s.equipped[itemTypes[item.type].slot]===item.id;
+ const active=s.retention.activeRun?.id!=='no-items'&&equippedItems(s).some(i=>i.id===item.id);
  return{type:item.type,effect:effect as 'relay'|'int-yield',active,scale,effectiveValue,baselineValue,triggerInterval:effect==='relay'?10:null,bonusSeconds:effect==='relay'?2*scale:0,intWeightContribution:effect==='int-yield'?.25*scale:0,appliedBonusSeconds:active&&effect==='relay'?2*scale:0,appliedIntWeightContribution:active&&effect==='int-yield'?.25*scale:0,futureIncomeOnly:effect==='int-yield'};
 }
 export const itemSynergyExponent=(s:GameState)=>1+(hasNode(s,'manufacturing4',1)?.05:0)+(hasNode(s,'manufacturing6',1)?.05:0)+(hasNode(s,'manufacturing7',1)?.07:0)+(hasNode(s,'manufacturing8',1)?.10:0);
@@ -1078,7 +1080,7 @@ export type CombinationRequirement={slot:ItemSlot|null;type:ItemTypeId|null;effe
 export function itemCombinationQuote(s:GameState,id:ItemCombinationId){
  const definition=BALANCE.itemCombinations[id],neededItems:CombinationRequirement[]='items' in definition?definition.items.map(required=>{
   const item=s.inventory.find(i=>i.id===s.equipped[required.slot]&&i.type===required.type&&itemTypes[i.type].slot===required.slot);
-  const matched=!!item&&equipmentSlots.indexOf(required.slot)<equipmentSlotCount(s);
+  const matched=!!item&&equipmentSlotUnlocked(s,required.slot);
   return{...required,effect:null,instanceId:item?.id??null,matched};
  }):definition.effects.map(effect=>{const item=equippedItems(s).find(i=>itemEffectProfile(i).includes(effect));return{slot:item?itemTypes[item.type].slot:null,type:item?.type??null,effect,instanceId:item?.id??null,matched:!!item};});
  const disabled=!definition.legacy&&s.retention.activeRun?.id==='no-items',active=!disabled&&neededItems.every(i=>i.matched),multiplicative=definition.kind==='compute-factor'||definition.kind==='analysis-components-factor';
@@ -1340,7 +1342,7 @@ export function researchPerformanceQuote(s:GameState,now=s.savedAt,id?:ResearchI
  const sources:Record<string,ScientificNumber>={};
  if(s.retention.activeRun?.id!=='no-items'){
   const amplifier=1+deepPrestigeBonus(s,'manufacturing');
-  const validItems=equipmentSlots.flatMap((slot,index)=>index<equipmentSlotCount(s)?s.inventory.filter(item=>item.id===s.equipped[slot]&&itemTypes[item.type].slot===slot):[]);
+  const validItems=equippedItems(s);
   for(const item of validItems){const effect=itemEffectFor(s,item,'research');if(effect>0)sources[`item:${item.id}:${item.type}`]=ScientificNumber.from(effect).multiplyNumber(amplifier);}
   const itemSum=Object.values(sources).reduce((sum,v)=>sum.add(v),ScientificNumber.zero());if(!itemSum.isZero()){const applied=itemSum.add(ScientificNumber.from(1)).pow(itemSynergyExponent(s)).subtract(ScientificNumber.from(1));for(const key of Object.keys(sources))sources[key]=sources[key].divide(itemSum).multiply(applied);}
   const equipped=Object.fromEntries(equipmentSlots.map(slot=>[slot,validItems.find(item=>itemTypes[item.type].slot===slot)?.id??undefined])) as GameState['equipped'];

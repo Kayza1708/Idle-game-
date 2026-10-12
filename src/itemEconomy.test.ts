@@ -15,9 +15,9 @@ describe('durable equipment sockets and component sources',()=>{
   const base=newGame(0),item={id:'socket-item',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false};
   const locked=equip({...base,inventory:[item]},item.id);expect(locked.equipped).toEqual({});
   const one=equip({...base,prestigeCount:1,inventory:[item]},item.id);expect(one.equipped.processor).toBe(item.id);
-  const second={id:'socket-item-2',type:'field-scanner' as const,rarity:'common' as const,level:0,locked:false};
-  const blocked=equip({...one,inventory:[item,second]},second.id);expect(blocked.equipped.research).toBeUndefined();
-  const opened=equip({...one,nodes:['manufacturing1'],inventory:[item,second]},second.id);expect(opened.equipped.research).toBe(second.id);
+  const second={id:'socket-item-2',type:'memory-crystal' as const,rarity:'common' as const,level:0,locked:false};
+  const blocked=equip({...one,inventory:[item,second]},second.id);expect(blocked.equipped.core).toBeUndefined();
+  const opened=equip({...one,nodes:['manufacturing1'],inventory:[item,second]},second.id);expect(opened.equipped.core).toBe(second.id);
  });
  it('grants titanium on hardware milestones and lasers on gaming GPU milestones',()=>{
   let s={...newGame(0),credits:1e12,discovered:['calculator','sbc','pc','gpu'] as import('./economy').HardwareId[]};
@@ -41,7 +41,7 @@ it('exposes every equipped item effect in the production breakdown',async()=>{
   {id:'c',type:'neural-asic' as const,rarity:'common' as const,level:0,locked:false},
   {id:'d',type:'data-prism' as const,rarity:'common' as const,level:0,locked:false}
  ];
- const s={...base,prestigeCount:1,nodes:['manufacturing1'],inventory:items,equipped:{processor:'c',utility:'d'}};
+ const s={...base,prestigeCount:1,unlockedEquipmentSlots:3,nodes:['manufacturing1'],inventory:items,equipped:{processor:'c',research:'d'}};
  const breakdown=productionBreakdown(s);expect(breakdown.itemBonuses.credits).toBeGreaterThan(0);expect(breakdown.itemBonuses.data).toBeGreaterThan(0);
 });
 

@@ -1,0 +1,335 @@
+{
+  "scope": "Prepared formula quotes at identical hardware/model/account/rarity and acquired sockets. Items are technical fixtures, not paid natural acquisitions or proven late-game timings. fixedAccountIncome3 amortizes every tenth paid tap at a fixed rate, excluding Overclock, evolving hardware, purchases and feedback. No simulation, research completion, grants to live saves or claims.",
+  "sourceHashes": {
+    "src/economy.ts": "a675fbce7cfdbf21ad7c3e58c416c12cf21748dc",
+    "src/inventory.ts": "f9b95218debd8e328391d9ceb208901e07ac097a",
+    "src/deviceEffects.ts": "f4bcd9014e750150b0e6ec047082ab62a72a42b2",
+    "scripts/build-effect-quotes.ts": "aa2b314772c47dfae180a21ccff3b1f19e3a9fd3"
+  },
+  "baseline": {
+    "fixedAccountIncome0": {
+      "m": 3.1356097013118007,
+      "e": 6
+    },
+    "fixedAccountIncome3": {
+      "m": 7.08648422496467,
+      "e": 6
+    },
+    "credits": {
+      "m": 3.1356097013118007,
+      "e": 6
+    },
+    "compute": {
+      "m": 3.5621534535324377,
+      "e": 4
+    },
+    "data": {
+      "m": 4.4644683129359795,
+      "e": 1
+    },
+    "tap": {
+      "m": 1.3169581745509562,
+      "e": 6
+    },
+    "qualityData": {
+      "m": 1.08856,
+      "e": 6
+    },
+    "efficiencyData": {
+      "m": 1.08856,
+      "e": 6
+    },
+    "trainingFactor": 1,
+    "laborFactor": 1,
+    "combinations": [],
+    "specials": []
+  },
+  "builds": [
+    {
+      "name": "active",
+      "types": [
+        "impulse-relay",
+        "memory-crystal",
+        "field-scanner"
+      ],
+      "quote": {
+        "fixedAccountIncome0": {
+          "m": 3.631725868253354,
+          "e": 6
+        },
+        "fixedAccountIncome3": {
+          "m": 1.1411861038507483,
+          "e": 7
+        },
+        "credits": {
+          "m": 3.631725868253354,
+          "e": 6
+        },
+        "compute": {
+          "m": 3.5621534535324377,
+          "e": 4
+        },
+        "data": {
+          "m": 4.733507504837979,
+          "e": 1
+        },
+        "tap": {
+          "m": 1.5253269646664087,
+          "e": 6
+        },
+        "qualityData": {
+          "m": 1.08856,
+          "e": 6
+        },
+        "efficiencyData": {
+          "m": 1.08856,
+          "e": 6
+        },
+        "trainingFactor": 1,
+        "laborFactor": 1,
+        "combinations": [
+          {
+            "id": "material-mapping",
+            "kind": "analysis-components-factor",
+            "legacy": false,
+            "neededItems": [
+              {
+                "slot": "research",
+                "type": "field-scanner",
+                "effect": null,
+                "instanceId": "item-3",
+                "matched": true
+              },
+              {
+                "slot": "core",
+                "type": "memory-crystal",
+                "effect": null,
+                "instanceId": "item-2",
+                "matched": true
+              }
+            ],
+            "missingEquipment": [],
+            "active": true,
+            "disabled": false,
+            "configuredValue": 1.25,
+            "contribution": 1.25
+          }
+        ],
+        "specials": [
+          {
+            "type": "impulse-relay",
+            "effect": "relay",
+            "active": true,
+            "scale": 1.4704460966542754,
+            "effectiveValue": 0.15822000000000006,
+            "baselineValue": 0.10760000000000002,
+            "triggerInterval": 10,
+            "bonusSeconds": 2.940892193308551,
+            "intWeightContribution": 0,
+            "appliedBonusSeconds": 2.940892193308551,
+            "appliedIntWeightContribution": 0,
+            "futureIncomeOnly": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "production",
+      "types": [
+        "quantum-chip",
+        "tensor-core",
+        "data-prism"
+      ],
+      "quote": {
+        "fixedAccountIncome0": {
+          "m": 5.85910686772326,
+          "e": 6
+        },
+        "fixedAccountIncome3": {
+          "m": 1.3603129006141927,
+          "e": 7
+        },
+        "credits": {
+          "m": 5.85910686772326,
+          "e": 6
+        },
+        "compute": {
+          "m": 5.627233550841892,
+          "e": 4
+        },
+        "data": {
+          "m": 6.131494149107457,
+          "e": 1
+        },
+        "tap": {
+          "m": 2.581340712806222,
+          "e": 6
+        },
+        "qualityData": {
+          "m": 9.87049,
+          "e": 5
+        },
+        "efficiencyData": {
+          "m": 9.87049,
+          "e": 5
+        },
+        "trainingFactor": 0.906747379273387,
+        "laborFactor": 1,
+        "combinations": [
+          {
+            "id": "compute-credit-link",
+            "kind": "credits-bonus",
+            "legacy": true,
+            "neededItems": [
+              {
+                "slot": "processor",
+                "type": "quantum-chip",
+                "effect": "compute",
+                "instanceId": "item-1",
+                "matched": true
+              },
+              {
+                "slot": "research",
+                "type": "data-prism",
+                "effect": "credits",
+                "instanceId": "item-3",
+                "matched": true
+              }
+            ],
+            "missingEquipment": [],
+            "active": true,
+            "disabled": false,
+            "configuredValue": 0.08,
+            "contribution": 0.08
+          },
+          {
+            "id": "parallel-architecture",
+            "kind": "compute-factor",
+            "legacy": false,
+            "neededItems": [
+              {
+                "slot": "processor",
+                "type": "quantum-chip",
+                "effect": null,
+                "instanceId": "item-1",
+                "matched": true
+              },
+              {
+                "slot": "core",
+                "type": "tensor-core",
+                "effect": null,
+                "instanceId": "item-2",
+                "matched": true
+              }
+            ],
+            "missingEquipment": [],
+            "active": true,
+            "disabled": false,
+            "configuredValue": 1.2,
+            "contribution": 1.2
+          }
+        ],
+        "specials": []
+      }
+    },
+    {
+      "name": "learning",
+      "types": [
+        "photonic-array",
+        "logic-seed",
+        "lab-drone"
+      ],
+      "quote": {
+        "fixedAccountIncome0": {
+          "m": 3.1356097013118007,
+          "e": 6
+        },
+        "fixedAccountIncome3": {
+          "m": 7.279969838600875,
+          "e": 6
+        },
+        "credits": {
+          "m": 3.1356097013118007,
+          "e": 6
+        },
+        "compute": {
+          "m": 3.5621534535324377,
+          "e": 4
+        },
+        "data": {
+          "m": 4.733507504837979,
+          "e": 1
+        },
+        "tap": {
+          "m": 1.3814533790963581,
+          "e": 6
+        },
+        "qualityData": {
+          "m": 5.99282,
+          "e": 5
+        },
+        "efficiencyData": {
+          "m": 5.99282,
+          "e": 5
+        },
+        "trainingFactor": 0.5505274052542335,
+        "laborFactor": 1.3228534925032172,
+        "combinations": [
+          {
+            "id": "training-research-link",
+            "kind": "research-bonus",
+            "legacy": true,
+            "neededItems": [
+              {
+                "slot": "processor",
+                "type": "photonic-array",
+                "effect": "training",
+                "instanceId": "item-1",
+                "matched": true
+              },
+              {
+                "slot": "core",
+                "type": "logic-seed",
+                "effect": "research",
+                "instanceId": "item-2",
+                "matched": true
+              }
+            ],
+            "missingEquipment": [],
+            "active": true,
+            "disabled": false,
+            "configuredValue": 0.12,
+            "contribution": 0.12
+          },
+          {
+            "id": "learning-pipeline",
+            "kind": "training-bonus",
+            "legacy": false,
+            "neededItems": [
+              {
+                "slot": "processor",
+                "type": "photonic-array",
+                "effect": null,
+                "instanceId": "item-1",
+                "matched": true
+              },
+              {
+                "slot": "core",
+                "type": "logic-seed",
+                "effect": null,
+                "instanceId": "item-2",
+                "matched": true
+              }
+            ],
+            "missingEquipment": [],
+            "active": true,
+            "disabled": false,
+            "configuredValue": 0.5,
+            "contribution": 0.5
+          }
+        ],
+        "specials": []
+      }
+    }
+  ]
+}

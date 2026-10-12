@@ -10,7 +10,7 @@ import {restore,serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 import {createBalanceReport} from './balanceReport';
 import {specialItemComparisonText} from './specialItemText';
-const fixture=(type:'impulse-relay'|'insight-archive')=>{let s=prestige(addCredits(newGame(0),BALANCE.prestigeBaseRevenue*9));s=buyHardwareClass(s,'calculator');s=createItem(s,type,'common');return equip(s,s.inventory.at(-1)!.id);};
+const fixture=(type:'impulse-relay'|'insight-archive')=>{let s=prestige(addCredits(newGame(0),BALANCE.prestigeBaseRevenue*9));s={...s,unlockedEquipmentSlots:3};s=buyHardwareClass(s,'calculator');s=createItem(s,type,'common');return equip(s,s.inventory.at(-1)!.id);};
 const item=(s:GameState)=>s.inventory[0];
 describe('canonical Relay/Archive special effects',()=>{
  it.each(['impulse-relay','insight-archive'] as const)('uses Common basis and one canonical quality/level/forge ratio for %s',type=>{
