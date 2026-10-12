@@ -552,8 +552,8 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             </h3>
             <p>
               {de
-                ? "Drei Instanzen werden verbraucht; Qualität steigt um eine Stufe, Level und Schmiedestufe des neuen Items sind 0. Keine weiteren Ressourcenkosten."
-                : "Three instances are consumed; rarity increases one tier, new item level and forge level are 0. No additional resource cost."}
+                ? "Die zuerst ausgewählte Instanz bleibt als Basis erhalten: Level und Schmiedestufe bleiben. Zwei Duplikate werden verbraucht; Qualität steigt um eine Stufe."
+                : "The first selected instance is retained: level and forge are kept. Two duplicates are consumed; rarity increases one tier."}
             </p>
             {s.inventory
               .filter((i) => i.type === item.type && i.rarity === item.rarity)
@@ -577,6 +577,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                     : ""}
                 </label>
               ))}
+            <p>{de ? "Basisinstanz" : "Base instance"}: {fusion[0] ?? "—"}</p>
             <p role="status">
               {fusionPreview(s, fusion).reason === "protected"
                 ? de
@@ -596,16 +597,16 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               <>
                 <p>{de ? "Effekte des Ergebnisses" : "Result effects"}</p>
                 {effect({
-                  ...item,
+                  ...(fusionPreview(s, fusion).result ?? item),
                   rarity: fusionPreview(s, fusion).result!.rarity,
-                  level: 0,
-                  forge: 0,
+                  level: fusionPreview(s, fusion).result!.level,
+                  forge: fusionPreview(s, fusion).result!.forge ?? 0,
                 })}
-                {!itemImprovementHasEffect(s, item, {
-                  ...item,
+                {!itemImprovementHasEffect(s, s.inventory.find(i => i.id === fusion[0]) ?? item, {
+                  ...(fusionPreview(s, fusion).result ?? item),
                   rarity: fusionPreview(s, fusion).result!.rarity,
-                  level: 0,
-                  forge: 0,
+                  level: fusionPreview(s, fusion).result!.level,
+                  forge: fusionPreview(s, fusion).result!.forge ?? 0,
                 }) && (
                   <p>
                     {de
@@ -618,12 +619,12 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             <button
               disabled={
                 !fusionPreview(s, fusion).allowed ||
-                !itemImprovementHasEffect(s, item, {
-                  ...item,
+                !itemImprovementHasEffect(s, s.inventory.find(i => i.id === fusion[0]) ?? item, {
+                  ...(fusionPreview(s, fusion).result ?? item),
                   rarity:
                     fusionPreview(s, fusion).result?.rarity ?? item.rarity,
-                  level: 0,
-                  forge: 0,
+                  level: fusionPreview(s, fusion).result?.level ?? item.level,
+                  forge: fusionPreview(s, fusion).result?.forge ?? item.forge ?? 0,
                 })
               }
               onClick={() => {
@@ -631,7 +632,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                 if (
                   q.allowed &&
                   confirm(
-                    `${de ? "Instanzen unwiderruflich verbrauchen" : "Permanently consume instances"}: ${fusion.join(", ")} → ${rarityText(q.result!.rarity, language)}`,
+                    `${de ? "Instanzen unwiderruflich verbrauchen" : "Permanently consume instances"}: ${fusion.slice(1).join(", ")} → ${rarityText(q.result!.rarity, language)}`,
                   )
                 ) {
                   act("item-fuse", fusion);

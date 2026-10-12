@@ -107,7 +107,7 @@ describe("existing mechanics exposed through their domain contracts", () => {
       ).toBe(poor);
     },
   );
-  it("fusion consumes exactly three explicit IDs and creates one next-quality instance", () => {
+  it("fusion retains the selected base and consumes two explicit duplicates", () => {
     const s = items(),
       ids = s.inventory.slice(0, 3).map((i) => i.id),
       q = fusionPreview(s, ids),
@@ -116,11 +116,12 @@ describe("existing mechanics exposed through their domain contracts", () => {
     expect(next.inventory).toHaveLength(2);
     expect(
       next.inventory.find((i) => i.id !== s.inventory[3].id),
-    ).toMatchObject({ ...q.result, level: 0 });
+    ).toMatchObject(q.result!);
     expect(exactEconomyValue(next, "data").toJSON()).toEqual(
       exactEconomyValue(s, "data").toJSON(),
     );
-    expect(next.inventory.some((i) => ids.includes(i.id))).toBe(false);
+    expect(next.inventory.some((i) => ids.slice(1).includes(i.id))).toBe(false);
+    expect(next.inventory.some((i) => i.id === ids[0])).toBe(true);
     expect(fuseItems(next, ids)).toBe(next);
   });
   it("fusion refuses equipped, locked, duplicate and unknown inputs without consumption", () => {

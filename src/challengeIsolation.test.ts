@@ -88,7 +88,7 @@ describe('isolated challenge runs with short real simulations',()=>{
   expect(returned.researchLevels).toEqual(expected.researchLevels);expect(returned.modules).toEqual(expected.modules);
  });
  it('consumes nonproductive elapsed time once without granting another starter budget',()=>{
-  const idle=newGame(0),wall=60000;
+  const fresh=newGame(0),idle={...fresh,prestigeCount:1,lifetime:{...fresh.lifetime,hardwareClasses:['sbc'] as GameState['lifetime']['hardwareClasses']}},wall=60000;
   const run=advanceTo(startRunChallenge(idle,'no-items'),wall,false,rng).state;
   expect(run.challengeSession?.report.seconds).toBe(60);
   expect(run.challengeSession?.report.lostSeconds).toBe(0);expect(run.challengeSession?.anchor).toBe(wall);

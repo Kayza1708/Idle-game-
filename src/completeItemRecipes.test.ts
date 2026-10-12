@@ -1,3 +1,4 @@
+import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,it,expect} from 'vitest';
 import originalRecipes from './testSupport/originalItemRecipes.json';
 import originalEffects from './testSupport/originalItemEffects.json';
@@ -67,7 +68,7 @@ describe('9C complete item catalogue',()=>{
  });
  it('keeps new ownership and migration isolated between main and challenge',()=>{
   const main=prestige(addCredits(learnBlueprint(prepared('photonic-array'),'photonic-array'),BALANCE.prestigeBaseRevenue*9));
-  let challenge=startRunChallenge(main,'no-items');expect(challenge.challengeSession).toBeDefined();challenge={...challenge,completedResearch:['blueprints'],blueprintFragments:10};challenge=learnBlueprint(challenge,'lab-drone');expect(challenge.learnedRecipes).toEqual(['lab-drone']);expect(abortRunChallenge(reload(challenge)).learnedRecipes).toEqual(['photonic-array']);
+  let challenge=startRunChallenge(withChallengeAccess(main),'no-items');expect(challenge.challengeSession).toBeDefined();challenge={...challenge,completedResearch:['blueprints'],blueprintFragments:10};challenge=learnBlueprint(challenge,'lab-drone');expect(challenge.learnedRecipes).toEqual(['lab-drone']);expect(abortRunChallenge(reload(challenge)).learnedRecipes).toEqual(['photonic-array']);
   const old=createItem(challenge,'memory-crystal','rare');old.challengeSession!.main=createItem(old.challengeSession!.main,'logic-seed','epic');delete old.learnedRecipes;delete old.challengeSession!.main.learnedRecipes;const migrated=restore(JSON.stringify({version:41,state:old}),old.savedAt);expect(migrated.error).toBeUndefined();expect(migrated.state.learnedRecipes).toEqual(['memory-crystal']);expect(migrated.state.challengeSession!.main.learnedRecipes).toEqual(['logic-seed']);
  });
  it('still rejects unknown ownership, recipe goals, planner IDs and queued recipe IDs',()=>{const s=prepared('lab-drone');for(const bad of [{...s,learnedRecipes:['missing']},{...s,pinnedGoal:{kind:'recipe',id:'missing'}},{...s,craftingPlanner:{...s.craftingPlanner,recipeId:'missing'}}])expect(()=>importGame(JSON.stringify({version:42,state:bad}))).toThrow();const job=craft(learnBlueprint(s,'lab-drone'),'lab-drone');job.crafting.active!.recipeId='missing' as never;expect(()=>importGame(JSON.stringify({version:42,state:job}))).toThrow();expect(craftingRecipe('item','missing')).toBeNull();});

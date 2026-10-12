@@ -15,7 +15,7 @@ import {AnalysisContracts} from './AnalysisContracts';
 import {economySnapshot} from './economySnapshot';
 import {savedJobs,balanceContexts} from './balanceSnapshot';
 import baseline from './testSupport/dataAnalysisBaseline.json';
-const ready=():GameState=>({...newGame(0),data:1e6,credits:1e6,discovered:['calculator','sbc']});
+const ready=():GameState=>({...newGame(0),data:1e6,credits:1e6,prestigeCount:1,lifetime:{...newGame(0).lifetime,hardwareClasses:['calculator','sbc']},discovered:['calculator','sbc']});
 describe('scientific unbounded Data contract',()=>{
  it.each([0,.25,1,4,10,100])('evaluates B=%s',B=>expect(dataMultiplierScientific(SN.from(B)).toNumber()).toBeCloseTo(1+(B<=4?B:4+Math.sqrt(4*(B-4))),12));
  it('is continuous and monotone and handles bonuses beyond native range',()=>{const points=[0,.25,1,4-1e-12,4,4+1e-12,10,100].map(B=>dataMultiplierScientific(SN.from(B)));points.forEach((v,i)=>{if(i)expect(v.compare(points[i-1])).toBeGreaterThan(0)});expect(points[5].toNumber()-5).toBeLessThan(.000003);const huge=dataMultiplierScientific(SN.fromParts(1,1000));expect(huge.exponent).toBe(500);expect(huge.mantissa).toBeCloseTo(2,12);});
