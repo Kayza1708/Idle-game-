@@ -824,6 +824,40 @@ export const BALANCE = {
   },
   breakthroughs: { distillation: [10, .15], graph: [20, .20], planning: [30, .20] },
   gemShop:{labSlots:[500,1500],offline:[{hours:12,cost:250},{hours:16,cost:500},{hours:24,cost:1000}],crafting:[{seconds:1800,cost:20},{seconds:14400,cost:120}],training:[{seconds:900,cost:15},{seconds:3600,cost:45}],materials:{circuits:{cost:30,amount:50},advanced:{cost:60,copperCoils:10,siliconWafers:10}},labBoost:[80,3600],boostCap:86400},researchLabMax:4,equipmentSlotCosts:[1e9,1e20],
+  achievementThresholds:{
+    'calculators':[10,100,1e3,1e4,1e5,1e6,1e7,1e8,1e9,1e10],
+    'hardware':[25,250,2500,25000,250000,2.5e6,2.5e7,2.5e8,2.5e9,2.5e10],
+    'classes':[2,3,5,7,9,11,12,13,14,15],
+    'milestones':[3,10,25,50,90,150,300,600,1200,2500],
+    'prestiges':[1,5,15,35,75,150,300,600,1200,2500],
+    'int':[1,100,1e3,1e4,1e5,1e6,1e7,1e8,1e9,1e10],
+    'lab-time':[3600,86400,604800,2.592e6,7.776e6,1.5552e7,3.1104e7,6.2208e7,1.24416e8,2.48832e8],
+    'research':[1,20,100,500,2000,7500,30000,100000,500000,2000000],
+    'training':[1,20,100,500,2000,7500,30000,100000,500000,2000000],
+    'crafting':[1,10,50,200,1000,5000,20000,75000,300000,1000000],
+    'items':[1,3,5,8,12,16,20,24,27,30],
+    'taps':[100,1e3,1e4,1e5,1e6,1e7,1e8,1e9,1e10,1e11],
+    'components':[10,100,1e3,1e4,1e5,1e6,1e7,1e8,1e9,1e10],
+    'credits':[1e3,1e6,1e9,1e12,1e16,1e22,1e30,1e45,1e70,1e100],
+    'data':[100,1e4,1e6,1e8,1e10,1e13,1e16,1e20,1e30,1e50],
+    'active':[600,3600,14400,43200,86400,259200,604800,1.2096e6,2.592e6,5.184e6],
+    'overclock':[1,10,50,250,1e3,5e3,2.5e4,1e5,5e5,2e6],
+    'research-start':[1,10,100,1e3,1e4,1e5,1e6,1e7,1e8,1e9],
+    'training-start':[1,10,100,1e3,1e4,1e5,1e6,1e7,1e8,1e9],
+    'drops':[10,100,500,2500,1e4,5e4,2e5,1e6,5e6,2e7],
+    'fusion':[1,5,20,100,500,2500,1e4,5e4,2e5,1e6],
+    'forge':[1,10,50,250,1e3,5e3,2.5e4,1e5,5e5,2e6],
+    'material-types':[1,3,5,8,10,12,14,16,18,20],
+    'blueprints':[1,3,5,8,12,16,20,24,26,28],
+    'crafted-types':[1,3,5,8,12,16,20,24,27,30],
+    'material-families':[1,2,3,4,5],
+    'foundry-network':[1,3,5,7,9,11,13,15],
+    'challenge-stages':[1,10,30,69,138,230,345,460,575,690],
+    'challenge-depth':[1,7,14,21,28,35,42,49,60,69],
+  },
+  missionCounts:{daily:6,weekly:12,monthly:30},missionRequired:{daily:4,weekly:8,monthly:20},
+  missionBaseGoals:{'hardware':[25,300,2500],'milestones':[2,12,50],'train-done':[1,10,40],'research-done':[1,7,30],'components':[25,250,1500],'craft':[1,5,20],'drops':[5,60,250],'fusion':[1,5,20],'forge':[1,8,30],'credits':[1e4,1e7,1e10],'data':[250,5000,50000],'taps':[250,5000,50000],'overclock':[2,20,100],'prestige':[1,3,10],'active':[600,7200,36000]},
+  missionProgression:{bandClasses:[3,6,9,12,15],bandMultipliers:[1,2,4,8,16,32],repeatMultiplier:2,productionSeconds:[7200,50400,216000],objectiveGoals:{blueprints:[1,2,4],foundries:[1,1,2],challenges:[1,3,9]},},
   achievementTierGems:[2,4,8,12],achievementPointsPerTier:[2,4,8,12],achievementResearchPerTen:.01,achievementResearchCap:.20,
   missionRewards:{daily:{task:2,bonus:6},weekly:{task:5,bonus:30},monthly:{task:15,bonus:120}},
   hardwareAutobuyerUnlock:100,hardwareAutobuyerInterval:5,
@@ -893,7 +927,8 @@ export type ExperimentLength='intro'|'short'|'long';
 export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number; rewardFactor?:number; contractVersion?:1|2|3;materialContract?:import('./materialEconomy').MaterialContract };
 export type AnalysisResult={id:string;type:ExperimentId;length:Exclude<ExperimentLength,'intro'>;at:number;mode:'active'|'offline';components:Partial<ComponentInventory>;blueprintFragments:number;researchFragments:number};
 export type ProgressMetric='hardwareBought'|'milestones'|'trainingStarted'|'trainingCompleted'|'researchStarted'|'researchCompleted'|'componentsEarned'|'itemsCrafted'|'dropsClaimed'|'itemsFused'|'forgeUpgrades'|'regularCredits'|'regularData'|'taps'|'overclocks'|'prestiges'|'activeSeconds';
-export type MissionTask={id:string;metric:ProgressMetric;goal:number;baseline:number;reward:number;claimed:boolean;de:string;en:string};
+export type MissionObjective='blueprints'|'foundries'|'challenges';
+export type MissionTask={rewardTier?:number;objective?:MissionObjective;id:string;metric:ProgressMetric;goal:number;baseline:number;reward:number;claimed:boolean;de:string;en:string};
 export type MissionPeriod={key:string;endsAt:number;tasks:MissionTask[];required:number;bonus:number;bonusClaimed:boolean};
 export type LifetimeStats={calculatorsBought:number;hardwareBought:number;hardwareClasses:HardwareId[];milestones:number;prestiges:number;intEarned:number;labSeconds:number;researchStarted:number;researchCompleted:number;trainingStarted:number;trainingCompleted:number;itemsCrafted:number;itemTypes:ItemTypeId[];taps:number;overclocks:number;componentsEarned:number;dropsClaimed:number;itemsFused:number;forgeUpgrades:number;regularCredits:number;regularData:number;activeSeconds:number};
 export type GemLedgerEntry={id:string;at:number;amount:number;source:string};

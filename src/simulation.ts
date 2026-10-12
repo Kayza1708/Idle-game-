@@ -107,7 +107,7 @@ function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.rand
     const toCrafting=next.crafting.active?.endsAt===null?Infinity:next.crafting.active?Math.max(0,(next.crafting.active.endsAt-now)/1000):Infinity;
     const toExperiment=next.experiments.active?Math.max(0,(next.experiments.active.endsAt-now)/1000):Infinity;
     const toResearch=Math.min(...next.researchLabs.map(lab=>lab?Math.max(0,(lab.endsAt-now)/1000):Infinity));
-    const toPeriod=Math.min(...(['daily','weekly','monthly'] as const).map(kind=>Math.max(0,(next.missions[kind].endsAt-now)/1000)));
+    const toPeriod=next.retention.activeRun||next.challengeSession?Infinity:Math.min(...(['daily','weekly','monthly'] as const).map(kind=>Math.max(0,(next.missions[kind].endsAt-now)/1000)));
     const toBoost=Math.min(next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
     // Keep integration boundaries on the persistent timeline. Otherwise an
     // external save/advance split creates a new Euler step and changes rates

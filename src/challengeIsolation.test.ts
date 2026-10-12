@@ -105,13 +105,13 @@ describe('isolated challenge runs with short real simulations',()=>{
   expect(again.retention.runCompletions['no-taps']).toBe(2);expect(again.retention.challengeStars).toBe(2);
  });
  it('blocks resets, the gem shop and main-game claims through real domain transactions',()=>{
-  const funded=rollPeriods(addCredits(startRunChallenge(preparedMain(),'no-taps'),BALANCE.prestigeBaseRevenue*100),0);
+  const funded=rollPeriods(addCredits(startRunChallenge(rollPeriods(preparedMain(),0),'no-taps'),BALANCE.prestigeBaseRevenue*100),0);
   const run={...funded,gems:1000,cycleINTEarned:1e12,exactEconomy:{...funded.exactEconomy,cycleINTEarned:{m:1,e:12}},season:{...funded.season,xp:1000},lifetime:{...funded.lifetime,hardwareBought:25},onboarding:{completed:['first-buy'],claimed:[]}};
   expect(prestige({...run,retention:{...run.retention,activeRun:null}})).not.toBe(run);
   expect(axiomReset({...run,retention:{...run.retention,activeRun:null}}).axiomResetCount).toBeGreaterThan(run.axiomResetCount);
   const reset=prestige(run);expect(reset.prestigeCount).toBe(run.prestigeCount+1);expect(reset.challengeSession!.main).toBe(run.challengeSession!.main);expect(axiomReset(run)).toBe(run);expect(buyGemOffer(run,'materials-circuits')).toBe(run);
   expect(gemOfferQuote(run,'materials-circuits')).toMatchObject({enabled:false,reason:'challenge'});
-  expect(claimMission(run,'daily',run.missions.daily.tasks[0].id)).toBe(run);expect(claimMissionBonus(run,'daily')).toBe(run);
+  expect(claimMission(run,'daily',run.challengeSession!.main.missions.daily.tasks[0].id)).toBe(run);expect(claimMissionBonus(run,'daily')).toBe(run);
   expect(claimSeasonReward(run,1)).toBe(run);expect(claimAchievement(run,'hardware',0)).toBe(run);expect(claimOnboarding(run,'first-buy')).toBe(run);
  });
  it('has identical online/offline main and challenge results on the same short decision boundaries',()=>{
