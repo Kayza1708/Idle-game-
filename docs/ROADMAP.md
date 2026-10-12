@@ -2,6 +2,19 @@
 
 Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEPS.md` werden am Ende jedes Auftrags aktualisiert; unerledigte Kriterien bleiben offen.
 
+## Begrenzte natürliche Einstiegsmessung 12. Oktober 2026 — Erledigt
+
+- [x] Gemergten PR #87 und grüne Node-22-CI bestätigt.
+- [x] Acht frische aktive/Sitzungsprofile bis zwei Stunden mit zwei Seeds und unterschiedlichen Ausgabenprioritäten gemessen.
+- [x] Echte bezahlte Jobstarts, automatische Käufe, Data-Drops/Produktion, Resetverluste und nicht erreichte Ziele getrennt dokumentiert.
+- [x] Messinstrument auf Sitzungsgrenzen, Rückkehr, Seed-Reproduzierbarkeit, Data-Bilanz, Reload und Horizont geprüft; 1.237 Standardtests, Typecheck und Build lokal grün.
+- [x] Fragmentgate mit Basisformel belegt und eine begrenzte Forschung→Crafting-Brücke konkret spezifiziert.
+- [ ] Den vorgeschlagenen einmaligen Fragment-Grant integrieren, versionieren und dieselben Profile erneut prüfen.
+- [ ] Passive Kadenz/Taps isolieren und breitere vorhandene Forschungs-Sinks messen.
+- [ ] Natürliches Midgame, Forge-/Buildpfade, Challenge-Kapitel und Langzeitbalance kalibrieren.
+
+Diese Abnahme betrifft die acht dokumentierten Einstiegsmessungen. Sie belegt weder durchschnittliches Spielerverhalten noch Monatsbalance. Keine Spielparameter geändert. Siehe `natural-progression-findings.md`.
+
 ## Regression-Verträge 12. Oktober 2026 — Erledigt
 
 - [x] Alle 30 bekannten Fehler des früheren breiten Teillaufs einzeln klassifiziert und korrigiert.
