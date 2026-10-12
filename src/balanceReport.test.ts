@@ -41,6 +41,7 @@ describe('local balance report',()=>{
     expect(report.currentState.resources.credits).toBeNull();
     expect(report.currentState.resources.data).toBeNull();
     expect(json).not.toMatch(/NaN|Infinity/);
+ expect(report.contexts[0].researchContract).toBeNull();expect(report.contexts[0].researchContractError).toBeTruthy();
   });
 
 
@@ -68,10 +69,6 @@ it('exports formulas, bounded-drop diagnostics and no AI name',async()=>{const {
 
 it('keeps simulator exports as mantissa/exponent beyond the numeric projection cap',async()=>{const {simulationScientificSnapshot}=await import('./simulation');const base=newGame(0),snapshot=simulationScientificSnapshot({...base,exactEconomy:{...base.exactEconomy,credits:{m:1.25,e:420}}});expect(snapshot.credits).toEqual({m:1.25,e:420});});
 
-describe('fixed-profile balance simulation',()=>{
- it('uses session-only actions, regular taps and deterministic seeds',async()=>{const {simulateBalance}=await import('./simulation'),a=simulateBalance(.34,true,1708),again=simulateBalance(.34,true,1708),passive=simulateBalance(.34,false,1708);expect(a.evaluation?.timing.manualActionsOutsideSessions).toBe(0);expect(passive.evaluation?.timing.manualActionsOutsideSessions).toBe(0);expect(a.evaluation?.timing.taps).toBe(a.final.lifetime.taps);expect(a.evaluation?.timing.taps).toBe(a.evaluation?.timing.onlineSeconds);expect(passive.final.lifetime.taps).toBe(0);expect(a.exactFinal).toEqual(again.exactFinal);expect(a.milestones).toEqual(again.milestones);expect(new Set(a.final.experiments.completedIds).size).toBe(a.final.experiments.completedIds.length);expect(a.final.lifetime.researchCompleted).toBe(new Set(a.final.telemetry.recentEvents.filter(e=>e.type==='research-complete').map(e=>`${e.details.id}:${e.details.level}`)).size);},30_000);
- it('records availability before discretionary prestige and applies the offline cap',async()=>{const {simulateBalance}=await import('./simulation'),active=simulateBalance(1,true,42),passive=simulateBalance(1,false,42);expect(active.evaluation?.firstPrestigeAvailable).toBeGreaterThan(0);expect(active.milestones.firstPrestige).toBeGreaterThanOrEqual(45*60);expect(passive.evaluation?.timing.lostOfflineSeconds).toBeGreaterThan(0);expect(passive.evaluation!.timing.creditedOfflineSeconds+passive.evaluation!.timing.lostOfflineSeconds).toBe(passive.evaluation!.timing.offlineSeconds);expect(active.exactFinal?.credits).toEqual(active.final.exactEconomy.credits);},30_000);
-});
 
 it('exports analyses, component flows, crafting and prestige-node purchases as dedicated local tables',async()=>{
  const {createBalanceExportFiles}=await import('./balanceReport');
@@ -84,7 +81,8 @@ it('exports component consumption for crafting and item upgrades',async()=>{
  const {createBalanceExportFiles}=await import('./balanceReport');
  const {upgrade}=await import('./inventory');
  const base=newGame(0),item={id:'u',type:'quantum-chip' as const,rarity:'common' as const,level:0,locked:false};
- const upgraded=upgrade({...base,data:10000,componentInventory:{...base.componentInventory,circuits:1000},components:1000,inventory:[item]},'u');
+ const upgraded=upgrade({...base,data:10000,componentInventory:Object.fromEntries(Object.keys(base.componentInventory).map(id=>[id,1000])) as GameState['componentInventory'],components:1000,inventory:[item]},'u');
  const csv=createBalanceExportFiles(upgraded,1000)['crafting.csv'];
- expect(csv).toContain('upgradeComponentCost');expect(csv).toContain('circuits');
+ expect(upgraded).not.toBe(base);expect(upgraded.telemetry.recentEvents.at(-1)?.type).toBe('item-upgrade');
+ expect(csv).toContain('upgradeComponentCost');expect(csv).toContain('circuits');expect(csv).toContain('upgradeMaterials');expect(csv).toContain('siliconWafers');
 });

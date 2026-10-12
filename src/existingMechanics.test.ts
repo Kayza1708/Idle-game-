@@ -1,3 +1,4 @@
+import {upgradeFoundry,forgeJobQuote,settleFoundries} from './foundries';
 import {learnBlueprint} from './blueprints';
 import {buyNode} from "./prestige";
 import { itemImprovementHasEffect } from "./itemMechanics";
@@ -81,7 +82,7 @@ describe("existing mechanics exposed through their domain contracts", () => {
   it.each(["upgrade", "forge"] as const)(
     "%s uses quoted costs and changes the real effect",
     (action) => {
-      const s = items(),
+      const s = action === "forge" ? upgradeFoundry(buyNode(items(),"manufacturing1"),0,0) : items(),
         id = s.inventory[0].id,
         q = itemImprovementPreview(s, id, action)!;
       const next = action === "upgrade" ? upgrade(s, id) : forgeItem(s, id);
@@ -93,8 +94,10 @@ describe("existing mechanics exposed through their domain contracts", () => {
           .subtract(ScientificNumber.from(q.dataCost))
           .toJSON(),
       );
-      expect(next.inventory[0]).toEqual(q.result);
-      expect(itemEffect(next.inventory[0])).toBeGreaterThan(
+      const finished=action === "forge" ? settleFoundries({...next,savedAt:next.foundries[0].active!.endsAt}) : next;
+      if(action === "forge")expect(next.inventory[0]).toEqual(s.inventory[0]);
+      expect(finished.inventory[0]).toMatchObject(q.result);
+      expect(itemEffect(finished.inventory[0])).toBeGreaterThan(
         itemEffect(s.inventory[0]),
       );
       const poor = {

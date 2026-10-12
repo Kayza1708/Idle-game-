@@ -11,3 +11,9 @@ it('keeps the control event loop responsive during actual simulation and preserv
     expect(threaded).toEqual(simulateBalance(...args));
   }finally{clearInterval(timer);}
 },15_000);
+
+ it('terminates a worker after its explicit wall-clock budget',async()=>{
+   await expect(runSimulationWorker([0,true,1708],undefined,1)).rejects.toThrow('exceeded 1 ms budget');
+ },5000);
+
+it.each([0,-1,Infinity,NaN])('rejects invalid simulation budget %s without launching a worker',async budget=>{await expect(runSimulationWorker([0,true,1708],undefined,budget)).rejects.toThrow('positive finite budget');});

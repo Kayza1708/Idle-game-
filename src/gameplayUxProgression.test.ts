@@ -1,3 +1,8 @@
+import {createElement,isValidElement,type ReactNode} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {Workshop,num} from './Panels';
+import {ResearchCatalog} from './ResearchCatalog';
+import {researchPreview,type ResearchId} from './economy';
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
 import {addCredits,buyHardwareClass,computeRate,hardwareClassComputeRate,hardwareIds,hardwarePurchaseComputeGain,maxAffordable,newGame,quality,efficiency,BALANCE} from './economy';
@@ -16,12 +21,11 @@ describe('prestige run reset regression',()=>{
 
 describe('authoritative workshop progression UI',()=>{
  it('shows authoritative current production and selected-purchase gain',()=>{
-  expect(panels).toContain('output=hardwareClassComputeRate(s,id)');
-  expect(panels).toContain('purchaseOutput=hardwarePurchaseComputeGain(s,id,count)');
-  expect(panels).toContain('className="hardware-output"');
-  expect(panels).toContain('className="hardware-next-output"');
-  const s={...newGame(0),hardware:12,hardwareCounts:{...newGame(0).hardwareCounts,calculator:12}};
-  expect(hardwareClassComputeRate(s,'calculator')).toBeGreaterThan(0);
+  const base=addCredits(newGame(0),1e9),s={...base,settings:{...base.settings,buyMode:10 as const},hardware:12,hardwareCounts:{...base.hardwareCounts,calculator:12}};
+  const html=renderToStaticMarkup(createElement(Workshop,{s,act:()=>{}}));
+  const row=html.slice(html.indexOf('id="hardware-calculator"'),html.indexOf('id="hardware-sbc"'));
+  expect(row).toContain(`<span class="hardware-output">${num(hardwareClassComputeRate(s,'calculator'),1)} Compute/s</span>`);
+  expect(row).toContain(`Nächster Kauf: +${num(hardwarePurchaseComputeGain(s,'calculator',10),1)}/s`);
  });
  it('matches the real compute delta for x10 and MAX purchases',()=>{
   const base=addCredits(newGame(0),1e9),tenGain=hardwarePurchaseComputeGain(base,'calculator',10),afterTen=buyHardwareClass(base,'calculator',10);
@@ -46,12 +50,15 @@ describe('mobile prestige and research interaction',()=>{
   expect(css).toMatch(/\.node-buy-action\{[^}]*min-height:48px/);
   expect(css).toMatch(/--overlay-bottom-reserve:calc\(var\(--nav-height\) \+ env\(safe-area-inset-bottom\)\)/);
  });
- it('makes each research row the detail trigger without a details control',()=>{
-  const research=panels.slice(panels.indexOf('export function Research'),panels.indexOf('export function Inventory'));
-  expect(research).toContain('onClick={()=>setSelectedResearch(id)}');
-  expect(research).toContain('<MobileDetailSheet title={copy.name}');
-  expect(research).not.toContain('<details>');
-  expect(research).not.toContain('Details</span>');
+ it('makes each visible research card open its own details without starting a job',()=>{
+  const s=newGame(0),selected:ResearchId[]=[],actions:string[]=[];
+  const tree=ResearchCatalog({s,act:name=>actions.push(name),onSelect:id=>selected.push(id),block:q=>q.reason});
+  const cards:any[]=[];
+  const visit=(node:ReactNode)=>{if(Array.isArray(node)){node.forEach(visit);return;}if(!isValidElement<{children?:ReactNode;className?:string}>(node))return;if(node.props.className?.startsWith('research-card '))cards.push(node);visit(node.props.children);};
+  visit(tree);expect(cards).toHaveLength(3);
+  for(const card of cards)card.props.onClick();
+  expect(selected).toEqual(['dataGeneration','modelArchitecture','blueprints']);expect(actions).toEqual([]);
+  expect(s.researchLabs.every(job=>!job)).toBe(true);
  });
  it.each([375,390,393,402,430])('keeps primary surfaces and CTAs contained at %ipx',width=>{
   expect(width).toBeGreaterThanOrEqual(375);

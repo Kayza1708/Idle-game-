@@ -1,0 +1,221 @@
+{
+  "baseCommit": "5b55782c5430f0ed21d3044e142233b2152faee5",
+  "baseline": {
+    "tests": 1193,
+    "passed": 1163,
+    "failed": 30,
+    "scope": "breiter früherer Teillauf; Simulation-, balanceReport-, firstPrestige8c- und simulationWorker-Dateien ausgeschlossen"
+  },
+  "classification": {
+    "outdatedContractsOrFixtures": 28,
+    "precisionAssertion": 1,
+    "confirmedUiBug": 1
+  },
+  "originalFailures": [
+    {
+      "file": "src/alpha.test.ts",
+      "originalTest": "crafts, equips, upgrades, locks and safely salvages",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Bezahltes Blueprint-Lernen und die erweiterten Materialtabellen waren im Fixture nicht berücksichtigt."
+    },
+    {
+      "file": "src/alpha.test.ts",
+      "originalTest": "keeps every component reachable through analyses and crafts with exact ingredients",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Bezahltes Blueprint-Lernen und die erweiterten Materialtabellen waren im Fixture nicht berücksichtigt."
+    },
+    {
+      "file": "src/alpha.test.ts",
+      "originalTest": "applies all three blueprint effects to real production or analysis",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Bezahltes Blueprint-Lernen und die erweiterten Materialtabellen waren im Fixture nicht berücksichtigt."
+    },
+    {
+      "file": "src/axiom.test.ts",
+      "originalTest": "keeps protected parameters while using a scientific Axiom threshold",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Der Test schützte eine frühere Prestige-Schwelle statt der bereits implementierten Schwelle."
+    },
+    {
+      "file": "src/challengeUi.test.tsx",
+      "originalTest": "renders the real rule, progress, reward and passive main notice in de",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Das Fixture erfüllte weder Account-Zugang noch bezahlten Autostarter; außerdem erwartete es das alte INT-Ziel."
+    },
+    {
+      "file": "src/challengeUi.test.tsx",
+      "originalTest": "renders the real rule, progress, reward and passive main notice in en",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Das Fixture erfüllte weder Account-Zugang noch bezahlten Autostarter; außerdem erwartete es das alte INT-Ziel."
+    },
+    {
+      "file": "src/coreLoop.test.ts",
+      "originalTest": "starts three paid parallel jobs without subtracting capacity or credits per second",
+      "classification": "Präzisionsassertion",
+      "reason": "Summierte ScientificNumber-Debits unterscheiden sich um eine letzte Mantissenstelle; relative Präzision wird geprüft, Einzeldebits bleiben exakt."
+    },
+    {
+      "file": "src/earlyGameMobile.test.ts",
+      "originalTest": "renders every hardware class through one list and no later-hardware section",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Quelltext-Syntax statt gerenderter Hardwareklassen geprüft; jetzt SSR mit allen 15 IDs genau einmal."
+    },
+    {
+      "file": "src/earlyPrestigeUnlocks.test.ts",
+      "originalTest": "buys calculator then SBC once per ten seconds and honors a percentage reserve online and offline",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "1.000 Credits konnten den bereits geltenden SBC-Preis von 6.000 Credits nicht bezahlen; Reserveprüfung bleibt erhalten."
+    },
+    {
+      "file": "src/economy.test.ts",
+      "originalTest": "charges once and completes from elapsed offline time",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Operations wurde ohne permanenten Projektzugang gestartet; bezahlter Start und Exactly-once-Abschluss werden jetzt tatsächlich ausgeführt."
+    },
+    {
+      "file": "src/economy.test.ts",
+      "originalTest": "stores the configured duration at start and charges all data exactly once",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Operations wurde ohne permanenten Projektzugang gestartet; bezahlter Start und Exactly-once-Abschluss werden jetzt tatsächlich ausgeführt."
+    },
+    {
+      "file": "src/economy.test.ts",
+      "originalTest": "starts repeatable and one-time research without credits or research points",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Operations wurde ohne permanenten Projektzugang gestartet; bezahlter Start und Exactly-once-Abschluss werden jetzt tatsächlich ausgeführt."
+    },
+    {
+      "file": "src/existingMechanics.test.ts",
+      "originalTest": "upgrade uses quoted costs and changes the real effect",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Upgrade speichert zusätzlich Materialbelege; Forge ist ein bezahlter zeitgebundener Foundry-Auftrag, keine Sofortaktion."
+    },
+    {
+      "file": "src/existingMechanics.test.ts",
+      "originalTest": "forge uses quoted costs and changes the real effect",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Upgrade speichert zusätzlich Materialbelege; Forge ist ein bezahlter zeitgebundener Foundry-Auftrag, keine Sofortaktion."
+    },
+    {
+      "file": "src/gameplayUxProgression.test.ts",
+      "originalTest": "shows authoritative current production and selected-purchase gain",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "UI wurde über frühere Quelltextfragmente geprüft; SSR-Produktion und konkrete ResearchCatalog-Klicks ersetzen die veralteten Annahmen."
+    },
+    {
+      "file": "src/gameplayUxProgression.test.ts",
+      "originalTest": "makes each research row the detail trigger without a details control",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "UI wurde über frühere Quelltextfragmente geprüft; SSR-Produktion und konkrete ResearchCatalog-Klicks ersetzen die veralteten Annahmen."
+    },
+    {
+      "file": "src/longTermInt.test.ts",
+      "originalTest": "records the exact ledgers and applied versus removed INT multipliers",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Ein diskreter Simulationscheckpoint muss mindestens drei INT erreichen, nicht exakt drei. Der Anspruch und Bonus werden weiterhin gegen die Domainformel geprüft."
+    },
+    {
+      "file": "src/phase1.test.ts",
+      "originalTest": "makes 24 short architecture experiments equal one long material reward",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Die bereits gültigen Kurz-/Lang-Verhältnisse sind für Architektur 1/16 und Artefakt 1/12 statt pauschal 1/24."
+    },
+    {
+      "file": "src/phase1.test.ts",
+      "originalTest": "makes 24 short artifact experiments equal one long material reward",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Die bereits gültigen Kurz-/Lang-Verhältnisse sind für Architektur 1/16 und Artefakt 1/12 statt pauschal 1/24."
+    },
+    {
+      "file": "src/prestigeCurve.test.ts",
+      "originalTest": "changes only the calibrated threshold among protected economy parameters",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Analysepreis 250 statt früher 57.623; exakte alte 60-Minuten-Kalibrierung ist kein aktueller Nachweis. Der begrenzte frische Run prüft realen Anspruch ohne Grants/Resets."
+    },
+    {
+      "file": "src/prestigeCurve.test.ts",
+      "originalTest": "reaches an attractive three-INT first prestige at 60 minutes using the unchanged fresh 8B A profile",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Analysepreis 250 statt früher 57.623; exakte alte 60-Minuten-Kalibrierung ist kein aktueller Nachweis. Der begrenzte frische Run prüft realen Anspruch ohne Grants/Resets."
+    },
+    {
+      "file": "src/purchaseMath.test.ts",
+      "originalTest": "keeps the existing disabled calculator class-upgrade action unchanged",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Klassen-Upgrades sind implementierte bezahlte Aktionen; Preis, Debit, Wiederholung und leere Credits werden statt genereller Deaktivierung geprüft."
+    },
+    {
+      "file": "src/researchAreas.test.tsx",
+      "originalTest": "migrates and advances saved main independently; new challenges inherit no research",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Neue Challenges erben permanente Forschungszugänge, keine laufenden Jobs. Legacy-Bereichsmigration wird gegen separat migrierten Main verglichen."
+    },
+    {
+      "file": "src/retention.test.ts",
+      "originalTest": "tracks collection completion from permanent discovery",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Katalog ist 20/30; Challenge-Fixtures brauchen Accountzugang/Autostarter und tatsächlich produzierte Ziel-Credits. Vorbereitete Hardwarekäufe sind kein natürlicher Progressionsnachweis."
+    },
+    {
+      "file": "src/retention.test.ts",
+      "originalTest": "ignores old unclaimed INT and requires eligible revenue earned by this run",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Katalog ist 20/30; Challenge-Fixtures brauchen Accountzugang/Autostarter und tatsächlich produzierte Ziel-Credits. Vorbereitete Hardwarekäufe sind kein natürlicher Progressionsnachweis."
+    },
+    {
+      "file": "src/retention.test.ts",
+      "originalTest": "rewards a challenge run once across double click and reload",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Katalog ist 20/30; Challenge-Fixtures brauchen Accountzugang/Autostarter und tatsächlich produzierte Ziel-Credits. Vorbereitete Hardwarekäufe sind kein natürlicher Progressionsnachweis."
+    },
+    {
+      "file": "src/retention.test.ts",
+      "originalTest": "improves a repeat best time without granting more stars",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Katalog ist 20/30; Challenge-Fixtures brauchen Accountzugang/Autostarter und tatsächlich produzierte Ziel-Credits. Vorbereitete Hardwarekäufe sind kein natürlicher Progressionsnachweis."
+    },
+    {
+      "file": "src/technicalBugs.test.ts",
+      "originalTest": "preserves protected technical parameters under the authorized Data/analysis contract",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Erweiterte Kataloge und permanente Challenge-Slots widersprechen früheren Gesamtobjekt-/Nullslot-Annahmen. Vorgängerparameter bleiben über explizite Projektion geschützt."
+    },
+    {
+      "file": "src/technicalBugs.test.ts",
+      "originalTest": "migrates historical node/paid/compatible equipped evidence separately without inventing items",
+      "classification": "Veralteter Testvertrag/Fixture",
+      "reason": "Erweiterte Kataloge und permanente Challenge-Slots widersprechen früheren Gesamtobjekt-/Nullslot-Annahmen. Vorgängerparameter bleiben über explizite Projektion geschützt."
+    },
+    {
+      "file": "src/tutorialGuide.test.ts",
+      "originalTest": "explains live lock reasons",
+      "classification": "UI-Fehler",
+      "reason": "Die Tutorial-Hilfe nannte eine Hardwareanalyse als generelle Voraussetzung und verschwieg Blueprint-Lernen und Modulzutaten. UI korrigiert und DE/EN getestet."
+    }
+  ],
+  "additionalConfirmedBugs": [
+    "Research-UI bildet challenge-rule nicht auf Sperrgrund und CTA ab.",
+    "Ungültige Ressourcenprojektionen lassen researchContractSnapshot den Diagnoseexport abbrechen.",
+    "crafting.csv verliert vollständige Materialkosten von Item-Upgrades."
+  ],
+  "balanceChanges": false,
+  "campaigns": "Separater expliziter Lauf; keine Langzeitkalibrierung durchgeführt.",
+  "verification": {
+    "standardCommand": "npm test -- --reporter=json",
+    "standardTests": 1229,
+    "standardPassed": 1229,
+    "standardFailed": 0,
+    "typecheck": "passed",
+    "build": "passed",
+    "campaignDiscovery": "four expected files; passed",
+    "campaignExecution": "not run",
+    "browserQa": "not run",
+    "runtime": "Node 24 local; project/CI targets Node 22",
+    "postReviewExportRecheck": {
+      "passed": 111,
+      "failed": 0,
+      "typecheck": "passed",
+      "build": "passed"
+    }
+  }
+}

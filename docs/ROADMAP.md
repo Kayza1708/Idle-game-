@@ -2,6 +2,18 @@
 
 Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEPS.md` werden am Ende jedes Auftrags aktualisiert; unerledigte Kriterien bleiben offen.
 
+## Regression-Verträge 12. Oktober 2026 — Erledigt
+
+- [x] Alle 30 bekannten Fehler des früheren breiten Teillaufs einzeln klassifiziert und korrigiert.
+- [x] Tutorial- und Forschungs-Sperrtexte an echte Domain-Voraussetzungen gebunden.
+- [x] Fehlerhafte Ressourcen im Diagnoseexport ausgewiesen und vollständige Upgrade-Materialbelege exportiert.
+- [x] Vollständiger Standardlauf: 1.229 Tests, Typecheck und Build lokal grün.
+- [x] CPU-intensive Kampagnen separat aufrufbar und Worker bei Zeitbudgetende terminiert; kurze Preis-/Kaufverträge im Standardlauf erhalten.
+- [ ] Natürliche Profile, alte Kampagnen-Timingfenster und Wochen-/Monatsbalance neu messen und kalibrieren.
+- [ ] Browser-/Geräteabnahme und Node-22-CI dieses PRs bestätigen.
+
+Prüfgrenzen und Einzelbefunde: `regression-cleanup.md` und `regression-cleanup-audit.json`. Dieser Status bestätigt Regression-Verträge; Langzeitbalance ist weiterhin offen.
+
 ## Stabilisierung 29. September 2026 — Erledigt
 
 - [x] Zeitpartitionierung für Training, passive Produktion und Save/Reload regressionsfest gemacht.

@@ -1,3 +1,13 @@
+## Regression-Verträge und Diagnoseexport – 12. Oktober 2026
+
+Die 30 früheren Fehler sind einzeln in `regression-cleanup-audit.json` klassifiziert: 28 veraltete Verträge/Fixtures, eine Mantissenassertion und ein Tutorial-Fehler. Zusätzlich bestätigt und repariert: fehlende Research-Challenge-Sperre in der UI, Abbruch des Diagnoseexports bei ungültigen Ressourcenprojektionen und verlorene Upgrade-Materialbelege im Crafting-CSV. Kosten, Balance und Reset-/Saveverträge wurden nicht verändert.
+
+Lokale Abnahme: **1.229/1.229 Standardtests**, Typecheck und Build grün. Kampagnenerkennung zeigt die vier erwarteten Dateien. Node 24 lokal; Node 22 ist weiterhin die konfigurierte CI-Version. Build mit bestehender Chunk-Größenwarnung. Details und Grenzen: `regression-cleanup.md`.
+
+`npm test` umfasst jetzt den vollständigen Standardumfang einschließlich der zuvor ausgelassenen Export-, ersten Prestige- und Worker-Verträge. Lange Messprofile sind über `npm run test:campaigns` separat aufrufbar, mit Worker-Budgets und manuellem CI-Job. Die Kampagnen sind **nicht ausgeführt und nicht kalibriert**; alte Timing-Annahmen bleiben offen und können scheitern.
+
+Nächster abhängiger Schritt: begrenzte natürliche aktive/passive Profile für Einstieg, ersten Prestige, erste Familienfreischaltungen und Crafting messen; danach Timing-Ziele und Kampagnenassertions neu begründen. Erst anschließend Wochen-/Monatsprogression, Materialengpässe und Challenge-Kapitel kalibrieren. Eigene Grafiken, Bonuskisten-Ablauf und Browser-/Geräteabnahme bleiben offen.
+
 ## Übergabe KI-Ausrüstung – 29. September 2026
 
 Die Modellkarte öffnet nun einen eigenen Dialog mit KI-Name, Modelllevel, dauerhaftem Platzstatus, kategoriekonformer Itemauswahl und echter Produktionsvorschau. Platz 1 folgt dem ersten Prestige; Platz 2/3 kosten 1e9/1e20 Credits oder werden durch Fertigung I/V kostenlos gewährt. Käufe rechnen vollständig im ScientificNumber-Pfad. Ausrüsten, Ersetzen und Entfernen laufen über bestehende Domain-/Event-Save-Pfade, löschen keine Iteminstanz und erlauben keine Doppelbelegung.

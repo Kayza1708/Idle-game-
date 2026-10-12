@@ -80,10 +80,10 @@ describe("full compute user economy", () => {
     expect(rates(next).slice(0, 3)).toEqual(before);
     const paid = training.cost.add(research.cost).add(analysis.costExact);
     expect(
-      exactEconomyValue(next, "data").compare(
+      exactEconomyValue(next, "data").divide(
         exactEconomyValue(s, "data").subtract(paid),
-      ),
-    ).toBe(0);
+      ).toNumber(),
+    ).toBeCloseTo(1, 12);
     expect(next.activeTraining?.workRequired).toBe(training.duration);
     expect(next.researchLabs[0]?.durationSeconds).toBe(research.duration);
     expect(next.experiments.active?.durationSeconds).toBe(analysis.duration);

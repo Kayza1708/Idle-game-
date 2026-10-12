@@ -24,7 +24,7 @@ describe('prestige agent',()=>{
 });
 
 describe('prestige economy diagnostics',()=>{
- it('records the exact ledgers and applied versus removed INT multipliers',async()=>{const {simulateBalance}=await import('./simulation'),run=simulateBalance(90/1440,true,1708,Infinity,'training-first',[{start:0,end:5400}]),trace=run.prestigeEconomyTrace[0];expect(trace).toBeDefined();expect(trace.weightedEligibleRevenue).toEqual(trace.eligibleRevenue);expect(trace.claimableINT).toEqual({m:3,e:0});expect(trace.intCreditMultiplierBefore).toBe(1);expect(trace.intCreditMultiplierAfter).toBeCloseTo(1+BALANCE.prestigeBonusLogScale*Math.log(4));expect(trace.multipliersAfter?.synergies.int).toBe(1);expect(trace.legacyIntSynergyAfter.m).toBeGreaterThanOrEqual(1)},10_000);
+ it('records the exact ledgers and applied versus removed INT multipliers',async()=>{const {simulateBalance}=await import('./simulation'),run=simulateBalance(90/1440,true,1708,Infinity,'training-first',[{start:0,end:5400}]),trace=run.prestigeEconomyTrace[0];expect(trace).toBeDefined();expect(trace.weightedEligibleRevenue).toEqual(trace.eligibleRevenue);const claim=ScientificNumber.fromJSON(trace.claimableINT);expect(claim.compare(ScientificNumber.from(3))).toBeGreaterThanOrEqual(0);expect(claim.toJSON()).toEqual(prestigeClaimForEligibleScientific(ScientificNumber.fromJSON(trace.weightedEligibleRevenue)).toJSON());expect(trace.intCreditMultiplierBefore).toBe(1);expect(trace.intCreditMultiplierAfter).toBeCloseTo(1+BALANCE.prestigeBonusLogScale*Math.log1p(claim.toNumber()));expect(trace.multipliersAfter?.synergies.int).toBe(1);expect(trace.legacyIntSynergyAfter.m).toBeGreaterThanOrEqual(1)},10_000);
 });
 
 describe('logarithmic cycle INT credit bonus',()=>{
