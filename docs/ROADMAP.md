@@ -1,3 +1,27 @@
+## Achievements und Quests V1 integriert – 12. Oktober 2026
+
+Implementiert: sieben neue permanente Erfolgsfamilien für 20 Materialien, 28 bezahlte Baupläne, 30 selbst gefertigte Itemtypen, fünf Materialfamilien, 15 Schmiede-Ausbaustufen und Challenge-Erstabschlüsse/-Tiefe. Höhere spätere Schwellen; doppelte Item-Endstufe entfernt. Neue Quests verwenden sechs Hardwarefortschrittsbänder, feste Produktionsbudgets und optionale neue Systemziele. Kein neuer Start-/Abbruch-Farm, keine verpflichtende Fusion oder Prestige. Save v50 behält alte Claims und laufende Quests; Hauptspiel und Challenges bleiben isoliert. Vertragsdokument: `achievements-quests-v1.md`.
+
+**Lokale Abnahme:** 1.274 Standardtests und Typecheck grün; 17 gezielte neue Verträge. Keine langen Kampagnen oder Browser-/Geräteprüfung.
+
+**Noch offen:** natürliche Abschlussquoten und Wochen-/Monatskalibrierung, Gem-/Season-XP-Auswirkungen, Browser-/Geräteabnahme. Nächste Progressionsmessung soll passive Kadenz, feste Builds sowie Quest-/Achievementzeitpunkte gemeinsam erfassen. Das nachfolgende ursprüngliche Auftragspaket ist historisch; dessen Struktur-/Savepunkte sind umgesetzt, seine natürliche Langzeitabnahme bleibt offen.
+
+## V1-Auftrag: Achievements und Quests integrieren – 12. Oktober 2026
+
+**Offen; ausdrücklich vom Nutzer ergänzt.** Die folgenden Punkte sind ein Umsetzungspaket, keine bereits ausgelieferte Balanceänderung.
+
+Bestätigte Befunde (`src/achievements.ts`, `src/missions.ts`): Das Itemtypen-Achievement nutzt zehn Schwellen `1,2,3,4,5,6,7,8,9,9` bei inzwischen 30 Itemtypen. Missionsvorlagen haben feste Tages-/Wochen-/Monatsmengen und keine accountabhängige Zielskalierung; zusätzliche Wiederholungsstufen multiplizieren Mengen pauschal mit fünf. Starts und Abschlüsse sind getrennte belohnte Ziele. Neue Bauplan-, Materialfamilien-, Schmiedeausbau- und Challenge-Stufenprogression sind nicht ausdrücklich als Ziele integriert. Damit ist nicht bewiesen, dass sämtliche Aufgaben zu leicht sind: Einige Endstufen sind im Gegenteil extrem hoch und noch nicht natürlich kalibriert.
+
+### Umfang und Reihenfolge
+
+1. **Ziel- und Belohnungsaudit:** Erreichbarkeit, Redundanz, Abbruch-/Start-Farming, mehrfach belohnte gleiche Fortschritte, Gem-/Season-XP-/Materialpaket-Ausgaben prüfen. Periodenbeginn und Challenge-Isolation berücksichtigen.
+2. **Langfristige Achievements:** Itemtypen bis zum vollständigen 30er-Katalog erweitern, doppelte Schwelle beseitigen. Bezahltes Bauplanlernen, tatsächlich hergestellte Typen, Materialfamilien, Ausbau der drei Schmieden, erstmals abgeschlossene Challenge-Stufen und Familienmeilensteine integrieren. Erstabschlüsse statt Wiederholungsfarm zählen; keine nur durch Lagerbestand belegten Lifetime-Erfolge. Wiederholung von Starts zugunsten nachweislicher Abschlüsse zurücknehmen. Frühe Einführungsziele erhalten; spätere Kapitel deutlich anspruchsvoller machen.
+3. **Quests:** Neue Vorlagen erst nach tatsächlichem Zugang zum jeweiligen System ziehen. Ziele bei Periodenbeginn anhand des erreichten Progressionsbands bestimmen und danach einfrieren. Passive Produktionsziele neben optionalen aktiven Aufgaben anbieten. Wochen-/Monatsziele umfassen mehrere sinnvolle Systemhandlungen; keine Pflicht zum unerwünschten Prestige, zur Itemvernichtung oder zum seltenen Zufallsfund. Teure Fusion/Forge nicht bloß wegen höherer Schwierigkeit häufiger verlangen.
+4. **Save-/Resetvertrag:** Bereits beanspruchte Achievement-IDs und Belohnungen erhalten. Neue längere Familien dürfen alte Claims weder erneut vergüten noch entziehen. Laufende Quests samt Ziel, Baseline, Fortschritt und Claims bis zum Periodenwechsel erhalten. Neue Fortschrittszähler nur aus verlässlichen bestehenden Daten migrieren; sonst ab Einführung zählen. Hauptspielaufgaben nicht durch isolierte Challenge-Ressourcen/-Aktionen erfüllen; erstmalige Challenge-Erfolge ausdrücklich im Hauptaccount verbuchen. Prestige/Axiom dürfen Lifetime-Erfolge und Claims nicht löschen.
+5. **Balance und Abnahme:** Zahlen ausschließlich in `src/economy.ts`; Dokumentation in `docs/economy.md`. Kurze natürliche frühe Profile und repräsentative belegte Mid-/Late-Zustände nutzen; Wochen-/Monatstimings bleiben bis zu Messungen Annahmen. Tests für Unlocks, eindeutige steigende Schwellen, maximal erreichbare Sammlungsziele, Start-/Abbruch-Exploits, Replay, Reload, Migration, Offline-Abschluss, Periodenwechsel, Automation und Challenge-Isolation. UI/Zieltexte in allen unterstützten Sprachen prüfen; Typecheck, Standardtests und Build vor PR.
+
+**Abhängigkeit:** Als eigener V1-Block vor Season-/Belohnungsabnahme und externer Beta einplanen. Struktur-/Savekorrekturen zuerst; endgültige Schwellen gemeinsam mit passiver Progression und festen Builds kalibrieren. Keine pauschale Verdopplung aller Ziele und keine Erhöhung der Belohnungen proportional zur Schwierigkeit. Zusätzliche manuelle Claim-Arbeit vermeiden; automatische Abschlüsse müssen regulären Systemfortschritt gleichwertig zählen.
+
 # Verbindliche Entwicklungsroadmap
 
 Statuswerte: **In Arbeit**, **Geplant**, **Erledigt**. Der Status und `NEXT_STEPS.md` werden am Ende jedes Auftrags aktualisiert; unerledigte Kriterien bleiben offen.
