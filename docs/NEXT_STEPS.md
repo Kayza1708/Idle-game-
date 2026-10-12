@@ -1,3 +1,13 @@
+## Natürliche frühe Progression – 12. Oktober 2026
+
+PR #87 ist gemergt; Node-22-CI grün. Acht korrigierte natürliche Zwei-Stunden-Profile mit zwei Seeds, kontinuierlichem Spiel/kurzen Sitzungen und Modell-/Materialpriorität wurden in 36,25 Sekunden gemessen. Keine Grants, vorbereiteten Unlocks, Shop-/Ad-Käufe oder Monatskampagnen. Artefakt und konkrete Entscheidungsvorlage: `natural-progression-baseline.json` und `natural-progression-findings.md`.
+
+Aktiv: erster INT 41:38/44:34, tatsächlicher Prestige 57:30 mit 6 INT bzw. 56:40 mit 3 INT. Relais 22:30/21:30. Bei kurzen Sitzungen (10 Minuten am Anfang plus 5 bei Minute 60) nach zwei Stunden kein Prestige; Relais bei 65:00. Keiner der acht Runs fertigt den Quantenchip. Aktive Runs haben dessen direkte Materialien und Data, aber nur 0–1 von 4 Lernfragmenten. Hardwareanalysen erzeugen ohne Boni ein Fragment pro vier Stunden. Das ist eine bestätigte Basisrate, keine Gesamt-ETA mit Zufallsfunden.
+
+Nächster Kandidat: einmalige Brücke von regulär bezahltem Abschluss „Offene Baupläne“ zu vier vorhandenen Bauplanfragmenten, mit permanentem Grant-Nachweis und strikter Challenge-Isolation. **Noch nicht implementiert oder kalibriert.** Danach Sitzungsfrequenz/Taps getrennt und ein breiteres echtes Forschungsportfolio messen. Data-Überschüsse aus dem bewusst eingeschränkten Forschungscontroller begründen keinen pauschalen Preis-Nerf. Details zu Kosten, Reset, Migration, Automation und Tests stehen in der Entscheidungsvorlage.
+
+Lokale Abnahme: 1.237 Standardtests, Typecheck und Build grün; vollständige Sitzungstreue, Data-Bilanz und Reload geprüft. Keine Balance-/Save-/Domainänderung in diesem Auftrag. Natürliche Forge-/Midgame-/Challenge- und Wochen-/Monatsbalance bleibt offen.
+
 ## Regression-Verträge und Diagnoseexport – 12. Oktober 2026
 
 Die 30 früheren Fehler sind einzeln in `regression-cleanup-audit.json` klassifiziert: 28 veraltete Verträge/Fixtures, eine Mantissenassertion und ein Tutorial-Fehler. Zusätzlich bestätigt und repariert: fehlende Research-Challenge-Sperre in der UI, Abbruch des Diagnoseexports bei ungültigen Ressourcenprojektionen und verlorene Upgrade-Materialbelege im Crafting-CSV. Kosten, Balance und Reset-/Saveverträge wurden nicht verändert.
