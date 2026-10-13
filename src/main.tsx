@@ -6,6 +6,7 @@ import {CrashRecorder} from './crashDiagnostics';
 import {installMobileIntegration} from './mobileIntegration';
 import {browserStorage} from './storage';
 import './style.css';
+import './mobile-ui.css';
 
 const uninstallMobile=installMobileIntegration();
 window.addEventListener('pagehide',uninstallMobile,{once:true});
