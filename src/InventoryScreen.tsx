@@ -1,4 +1,4 @@
-import {BonusBoxes} from './BonusBoxes';
+import {BonusBoxes} from './BonusBoxPanel';
 import {MaterialBuildAutomation} from './MaterialBuildAutomation';
 import {FoundryDetails,ItemForgeDetails,DeviceDetails,RecoveryDetails} from './ProgressionDetails';
 import {BlueprintMasteryDetails,ComponentSources} from './ItemProgressDetails';
