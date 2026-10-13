@@ -1,5 +1,5 @@
 import {VectorIcon} from './VectorIcon';
-import {materialIcons,deviceIcons,prestigeIcon} from './artIconCatalog';
+import {prestigeIcon} from './artIconCatalog';
 import type { CSSProperties } from 'react';
 import { type ComponentId, type HardwareId, type ItemTypeId, type PrestigeUpgradeId } from './economy';
 
@@ -14,6 +14,9 @@ export const componentCells:Partial<Record<ComponentId,[number,number]>>={circui
 export const itemV2Cells:Partial<Record<ItemTypeId,[number,number]>>={'quantum-chip':[0,0],'neural-asic':[1,0],'field-scanner':[2,0],'data-prism':[0,1]};
 export const itemV1Cells:Partial<Record<ItemTypeId,[number,number]>>={'quantum-chip':[0,0],'neural-asic':[1,0],'photonic-array':[2,0],'memory-crystal':[3,0],'logic-seed':[0,1],'tensor-core':[1,1],'field-scanner':[2,1],'lab-drone':[3,1],'data-prism':[0,2]};
 export const prestigeCells:Partial<Record<PrestigeUpgradeId,[number,number]>>={dataArchive1:[0,0],computeNet1:[1,0],analysis1:[2,0],labs1:[3,0],manufacturing1:[0,1],dataArchive2:[1,1],computeNet2:[2,1],analysis2:[3,1],labs2:[0,2],manufacturing2:[1,2],dataArchive3:[2,2],computeNet3:[3,2],analysis3:[0,3],labs3:[1,3],manufacturing3:[2,3]};
+// Reviewed row-major order of the complete 6 × 5 item rework. Stable IDs, independent of economy ordering.
+export const itemReworkCells:Record<ItemTypeId,[number,number]>={'impulse-relay':[0,0],'insight-archive':[1,0],'quantum-chip':[2,0],'neural-asic':[3,0],'photonic-array':[4,0],'memory-crystal':[5,0],'logic-seed':[0,1],'tensor-core':[1,1],'field-scanner':[2,1],'lab-drone':[3,1],'data-prism':[4,1],'inference-router':[5,1],'burst-processor':[0,2],'legacy-controller':[1,2],'sparse-decoder':[2,2],'photonic-matrix':[3,2],'quantum-coupler':[4,2],'distillation-module':[5,2],'curriculum-module':[0,3],'long-term-memory':[1,3],'cryocontroller':[2,3],'manufacturing-controller':[3,3],'diagnostic-adapter':[4,3],'experiment-controller':[5,3],'precision-scanner':[0,4],'recycling-probe':[1,4],'blueprint-archive':[2,4],'protocol-controller':[3,4],'photonic-analyzer':[4,4],'quantum-diagnostic-module':[5,4]};
+export const materialExtensionCells:Partial<Record<ComponentId,[number,number]>>={neuralCrystals:[0,0],ceramicCapacitors:[1,0],ferriteCores:[2,0],goldContacts:[3,0],ceramicSubstrates:[0,1],opticalFibers:[1,1],thermalInterface:[2,1],diamondSubstrates:[3,1],spintronicDevices:[0,2],photonicCircuits:[1,2],cryogenicResonators:[2,2]};
 export type ResourceArtId='credits'|'gems'|'compute'|'int'|'research'|'blueprints'|'components'|'data';
 const resourceCells:Record<ResourceArtId,[number,number]>={credits:[0,0],gems:[1,0],compute:[2,0],int:[3,0],research:[0,1],blueprints:[1,1],components:[2,1],data:[3,1]};
 export type MetaArtId='daily'|'weekly'|'monthly'|'season'|'profile'|'achievements';
@@ -23,10 +26,10 @@ const activityCells:Record<ActivityArtId,[number,number]>={'drop-closed':[0,0],'
 
 const cellStyle=(cell:[number,number],grid:Grid):SpriteStyle=>({'--sprite-x':grid.columns===1?'0%':`${cell[0]*100/(grid.columns-1)}%`,'--sprite-y':grid.rows===1?'0%':`${cell[1]*100/(grid.rows-1)}%`});
 export function HardwareArt({id}:{id:HardwareId}){return <span className="atlas-sprite hardware-art" style={cellStyle(hardwareCells[id],{columns:4,rows:4})} aria-hidden="true"/>}
-export function ItemArt({type}:{type:ItemTypeId}){const icon=deviceIcons[type];if(icon)return <span className="device-vector-art item-art" data-art-id={type} aria-hidden="true"><VectorIcon name={icon}/></span>;const v2=itemV2Cells[type];return <span className={`atlas-sprite item-art ${v2?'item-art-v2':'item-art-v1'}`} style={cellStyle(v2??itemV1Cells[type]!,v2?{columns:3,rows:3}:{columns:4,rows:3})} aria-hidden="true"/>}
+export function ItemArt({type}:{type:ItemTypeId}){return <span className="atlas-sprite item-art item-art-rework" data-art-id={type} style={cellStyle(itemReworkCells[type],{columns:6,rows:5})} aria-hidden="true"/>}
 export function PrestigeArt({id}:{id:PrestigeUpgradeId}){const cell=prestigeCells[id];return cell?<span className="atlas-sprite prestige-art" style={cellStyle(cell,{columns:4,rows:4})} aria-hidden="true"/>:<span className="prestige-vector-art prestige-art" data-art-id={id} aria-hidden="true"><VectorIcon name={prestigeIcon(id)}/></span>}
 export function ResourceArt({id}:{id:ResourceArtId}){return <span className="atlas-sprite resource-art" style={cellStyle(resourceCells[id],{columns:4,rows:2})} aria-hidden="true"/>}
 export function GemAmount({value,className='' }:{value:string|number;className?:string}){return <span className={`gem-amount ${className}`}><ResourceArt id="gems"/><span>{value}</span></span>}
-export function ComponentArt({id}:{id:ComponentId}){const icon=materialIcons[id];return icon?<span className="material-vector-art component-art" data-art-id={id} aria-hidden="true"><VectorIcon name={icon}/></span>:<span className="atlas-sprite component-art" style={cellStyle(componentCells[id]!,{columns:5,rows:2})} aria-hidden="true"/>}
+export function ComponentArt({id}:{id:ComponentId}){const cell=materialExtensionCells[id];return <span className={`atlas-sprite component-art${cell?' component-art-extension':''}`} data-art-id={id} style={cellStyle(cell??componentCells[id]!,cell?{columns:4,rows:3}:{columns:5,rows:2})} aria-hidden="true"/>}
 export function MetaArt({id}:{id:MetaArtId}){return <span className="atlas-sprite meta-art" style={cellStyle(metaCells[id],{columns:3,rows:2})} aria-hidden="true"/>}
 export function ActivityArt({id}:{id:ActivityArtId}){return <span className="atlas-sprite activity-art" style={cellStyle(activityCells[id],{columns:3,rows:2})} aria-hidden="true"/>}
