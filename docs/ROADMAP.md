@@ -1,3 +1,17 @@
+## Neue Item- und Materialatlanten integriert – 13. Oktober 2026
+
+Nach #97 auf main aufgebaut. Alle 30 Itemtypen auf den farblich/silhouettenmäßig vielfältigen Reworkatlas umgestellt; elf Materialien auf den bestätigten neuen Materialatlas. Neun bestehende Materialmotive und Hauptressourcen bleiben. PNGs inklusive Schmieden-/erster Itemversion im Gitbestand; Schmieden noch ohne UI-Bildfläche. Details: `artwork-integration.md`.
+
+1.346 Tests, Typecheck, Build und Diffcheck grün; quadratische Atlaszellen, Alpha und bytegleiche Buildkopien geprüft. Keine Domain-/Saveänderung. Mobile Sichtprüfung und insbesondere Routerkante bleiben offen, keine Gerätefreigabe behauptet. Nächster Grafikschritt: Inventory, Crafting, Drops und Detailansicht bei 360/390/430 px abnehmen.
+
+## Vollständiger Item-Art-Rework
+
+Alle 30 Itemmotive mit vielfältigen Silhouetten, Materialien und Paletten neu generiert. Materialatlas bleibt erhalten. Details und ID-Reihenfolge: `item-artwork-rework.md`. Noch keine Rasterzuordnung oder Mobileabnahme; vor Integration Zellränder und Routerkabel prüfen.
+
+## Pixelillustrationen erstellt – 13. Oktober 2026
+
+Drei neue transparente Atlanten mit 21 Items, elf Materialien und drei Schmieden erstellt, ohne vorhandene PNGs zu überschreiben. Anzahl/Reihenfolge visuell, PNG-/Alphadaten maschinell geprüft. Spezifikation und Grenzen: `generated-artwork.md`. Nächster Schritt: Rasterzuordnung und Zellgrenzen im Spiel prüfen; noch keine UI-/Mobilefreigabe. Vorhandene SVG-Icons bleiben aktiv. Keine Domainänderung, deshalb Standardtests dieses reinen Assetblocks nicht erneut ausgeführt.
+
 ## Assetprüfung und Icons – 13. Oktober 2026
 
 21 Items und elf Materialien nutzen eigene SVG-Motive statt gemeinsamer Platzhalter oder des unpassenden Memristorkristalls. Navigation, Kisten, Equipmentslots und spätere Prestigezweige verwenden semantische SVGs. Passende PNG-Zuordnungen bleiben erhalten. Konkreter Grafikauftrag: `artwork-commission.md`; reproduzierbare Übersicht: `icon-preview.svg` / `scripts/artwork-icon-preview.ts`.

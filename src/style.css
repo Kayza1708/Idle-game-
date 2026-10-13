@@ -702,3 +702,7 @@ html[data-native-platform] body{padding:0}
 .device-vector-art .vector-icon,.material-vector-art .vector-icon,.prestige-vector-art .vector-icon { width:76%; height:76%; }
 .prestige-vector-art { color:var(--branch,#bc9be6); }
 .slot-orb .vector-icon { width:32px; height:32px; }
+
+/* Reworked square-cell atlases. No new layout width or hit targets. */
+.item-art-rework { aspect-ratio:1; background-image:url('/assets/game/items-complete-rework-atlas-v1.png'); background-size:600% 500%; }
+.component-art-extension { background-image:url('/assets/game/materials-extension-atlas-v1.png'); background-size:400% 300%; }

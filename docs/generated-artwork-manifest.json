@@ -1,0 +1,50 @@
+[
+  {
+    "file": "items-extension-atlas-v1.png",
+    "size": [
+      1916,
+      821
+    ],
+    "grid": [
+      7,
+      3
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "materials-extension-atlas-v1.png",
+    "size": [
+      1448,
+      1086
+    ],
+    "grid": [
+      4,
+      3
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ]
+  },
+  {
+    "file": "foundries-atlas-v1.png",
+    "size": [
+      2172,
+      724
+    ],
+    "grid": [
+      3,
+      1
+    ],
+    "mode": "RGBA",
+    "alphaExtrema": [
+      0,
+      255
+    ]
+  }
+]
