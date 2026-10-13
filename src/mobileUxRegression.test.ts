@@ -25,7 +25,7 @@ describe('mobile gameplay shell and information architecture',()=>{
   const workshop=panels.slice(panels.indexOf('export function Workshop'),panels.indexOf('export function Research'));
   expect(workshop).not.toContain('next-goal-onboarding');
   expect(workshop).not.toContain('className="card quest"');
-  expect(tutorial).toContain('className="tutorial-helper"');
+  expect(tutorial).toContain('className="tutorial-helper mira-stage"');
  });
  it('offers only the next locked laboratory inline with its existing price',()=>{
   expect(panels).toContain('data-lab-unlock="next"');

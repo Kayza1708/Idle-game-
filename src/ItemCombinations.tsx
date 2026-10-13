@@ -11,8 +11,8 @@ const names:Record<ItemCombinationId,[string,string]>={
 export function ItemCombinations({s}:{s:GameState}){
  const de=s.settings.language==='de',cap=(1-BALANCE.trainingCostFloor)*100,slot=(id:string|null)=>id?(de?({processor:'Prozessor',core:'Kern',research:'Forschung'}[id]):({processor:'Processor',core:'Core',research:'Research'}[id])):null;
  return <section className="item-combinations" aria-label={de?'Kombinationen':'Combinations'}><h3>{de?'Kombinationen':'Combinations'}</h3>
-  {itemCombinationQuotes(s).map(q=><article key={q.id} data-combination={q.id} data-active={q.active}>
-   <div className="combination-title"><b>{names[q.id][de?0:1]}</b><span>{q.active?(de?'Aktiv':'Active'):(de?'Unvollständig':'Incomplete')}</span></div>
+  {itemCombinationQuotes(s).map(q=><details className="combination-disclosure" key={q.id} data-combination={q.id} data-active={q.active}>
+   <summary className="combination-title"><b>{names[q.id][de?0:1]}</b><span>{q.active?(de?'Aktiv':'Active'):(de?'Unvollständig':'Incomplete')}</span></summary>
    {q.disabled&&<p>{de?'No-Items: Kombination deaktiviert':'No-Items: combination disabled'}</p>}
    <ul className="combination-required">{q.neededItems.map((required,index)=><li key={index}>
     {required.type&&<ItemArt type={required.type}/>}
@@ -29,6 +29,6 @@ export function ItemCombinations({s}:{s:GameState}){
     {(['quality','efficiency'] as const).map(track=>{const c=trainingCombinationComparison(s,track);return <p className="combination-training-price" data-track={track} key={track}>{track==='quality'?(de?'Qualität':'Quality'):(de?'Effizienz':'Efficiency')}: {formatScientific(c.before.cost,3)} → {formatScientific(c.after.cost,3)} Data · B {c.before.bonusTotal.toFixed(2)} → {c.after.bonusTotal.toFixed(2)} · {de?'Faktor':'Factor'} {c.after.factor.toFixed(4)} · {de?`Rabattdeckel ${cap} %`:`Discount cap ${cap}%`}{c.after.capped?(de?' erreicht':' reached'):''}</p>})}
     <p>{de?'Nur zukünftige Trainingsstarts; laufende Kosten und Dauer bleiben fest.':'Future training starts only; running costs and duration stay fixed.'}</p></>}
    {q.kind==='analysis-components-factor'&&<p>{de?'Bei Analysestart festgelegt; Ausrüstungswechsel verändert diesen Auftrag nicht.':'Fixed at analysis start; equipment changes do not change this job.'}</p>}
-  </article>)}
+  </details>)}
  </section>;
 }

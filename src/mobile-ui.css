@@ -120,3 +120,67 @@ body:has(.mobile-sheet-backdrop) .resource-bar{pointer-events:none}
 .mobile-detail-sheet__header{display:grid;grid-template-columns:auto minmax(0,1fr) 44px;align-items:center;gap:8px}
 .mobile-detail-sheet__header:has(>h2:first-child){grid-template-columns:minmax(0,1fr) 44px}
 .mobile-detail-sheet__header>h2{min-width:0;overflow-wrap:anywhere;margin:0}
+/* Mira is a character in the scene. Only her angular speech bubble has a surface. */
+.tutorial-dock{overflow:visible;border:0;background:transparent;position:relative;z-index:7}
+.tutorial-helper.mira-stage{position:relative!important;display:block;height:auto;min-height:224px;padding:8px 8px 0;box-sizing:border-box;background:transparent;overflow:visible}
+.mira-stage .mira-character{position:absolute;left:0;bottom:0;width:144px;height:218px;max-height:none;object-fit:contain;object-position:center bottom;margin:0;z-index:0;pointer-events:none}
+.mira-stage .mira-speech{position:relative;margin:0 0 0 96px;padding:12px;min-width:0;color:#182521;background:#efe4c8;border:2px solid #bda57b;box-shadow:3px 3px 0 #060d1480;z-index:1;overflow:visible}
+.mira-stage .mira-speech::after{content:'';position:absolute;width:18px;height:20px;left:-18px;bottom:20px;background:#efe4c8;clip-path:polygon(100% 0,100% 100%,0 100%);pointer-events:none}
+.tutorial-helper.mira-stage>.mira-speech{padding:10px 12px}
+.tutorial-helper.mira-stage>.mira-speech>strong{display:block;padding-right:28px;font-size:.78rem;color:#243b31;line-height:1.3}
+.tutorial-helper.mira-stage .tutorial-copy{display:block;max-height:none;overflow:visible;margin:6px 0}
+.tutorial-helper.mira-stage .tutorial-copy p{font-size:.75rem;color:#23372d;line-height:1.4;margin:0}
+.tutorial-helper.mira-stage .mira-close{position:absolute;top:0;right:0;min-width:44px;min-height:44px;padding:3px;border:0;background:transparent;color:#44594c;font-size:20px}
+.tutorial-helper.mira-stage .mira-cue{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;padding:6px 10px;min-height:44px;background:#2e5845;color:#f3f6df;border:1px solid #486b50;font-size:.75rem}
+.mira-requirement{font-size:.65rem;padding:0;margin:4px 0}.mira-requirement summary{display:flex;align-items:center;min-height:44px;color:#4d5945}.tutorial-helper.mira-stage .mira-requirement small{display:block;color:#3d4836;font-size:.65rem;line-height:1.4}
+.story-dialogue.mira-stage{display:block;padding:0;border:0;background:transparent;box-shadow:none;overflow:visible;min-height:238px;max-height:calc(100dvh - var(--top-height) - env(safe-area-inset-top) - var(--nav-height) - env(safe-area-inset-bottom) - 24px);pointer-events:none}
+.story-dialogue.mira-stage.has-mira{display:block}
+.story-dialogue.mira-stage .mira-speech{pointer-events:auto;max-height:calc(100dvh - var(--top-height) - env(safe-area-inset-top) - var(--nav-height) - env(safe-area-inset-bottom) - 32px);overflow-y:auto;padding:12px;border:2px solid #bda57b;background:#efe4c8;margin-left:96px}
+.story-dialogue.mira-stage .mira-character{width:160px;height:238px;max-height:238px}
+.story-dialogue.mira-stage .story-copy>strong{display:block;padding:0;margin:0;background:transparent;border:0;color:#3c5947;font-size:.68rem}
+.story-dialogue.mira-stage .story-copy h2{color:#294934;font-size:.85rem}
+.story-dialogue.mira-stage .story-copy p{font-size:.78rem;color:#182b22;margin:6px 0;line-height:1.45}
+.story-dialogue.mira-stage .story-actions{gap:6px;justify-content:space-between;flex-wrap:wrap}
+.story-dialogue.mira-stage .story-actions button{min-height:44px;padding:6px 8px;font-size:.7rem;border:1px solid #77856b;background:transparent;color:#304831}
+.story-dialogue.mira-stage .story-actions .story-next{background:#2e5845;border-color:#486b50;color:#f3f6df}
+.story-dialogue.mira-stage:not(.has-mira) .mira-speech{margin-left:0}
+.tutorial-focus::after{display:grid!important;content:'▼';position:absolute;top:0;right:3px;z-index:8;width:22px;height:22px;min-width:0;min-height:0;color:#f6d389;background:#26372f;border:0;font-size:18px;pointer-events:none;animation:none}
+.node-effect-summary>p{font-size:.8rem;line-height:1.45;margin:0 0 8px;overflow-wrap:normal;word-break:normal}
+.effect-preview{display:grid;gap:0;margin:6px 0;padding:0;border-block:1px solid var(--ui-line)}
+.effect-preview>div{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px;padding:8px 0;border-bottom:1px solid #34444e80;min-height:36px}
+.effect-preview>div:last-child{border-bottom:0}.effect-preview dt{display:flex;align-items:center;gap:5px;min-width:0;font-size:.7rem;color:var(--ui-muted)}
+.effect-preview dt :is(.resource-art,.vector-icon){width:16px;min-width:16px;height:16px;float:none;flex:none}
+.effect-preview dd{display:flex;align-items:baseline;justify-content:flex-end;flex-wrap:wrap;gap:5px;margin:0;font-variant-numeric:tabular-nums;font-size:.73rem}
+.effect-preview dd i{font-style:normal;color:var(--ui-muted)}.effect-preview dd>span{color:var(--ui-muted)}.effect-preview dd b{color:var(--ui-text)}.effect-preview dd small{font-size:.62rem;color:var(--ui-positive)}.effect-preview .negative dd small{color:var(--ui-negative)}
+.node-unlocks{padding:0;margin:4px 0;list-style:none;display:grid;gap:6px}.node-unlocks li{font-size:.75rem;line-height:1.3}
+.mobile-detail-sheet .node-requirements{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;font-size:.68rem}
+.equipment-picker .item-effect-brief{font-size:.7rem;margin:3px 0}.equipment-picker .effect-preview{border:0;margin:4px 0}.equipment-picker .effect-preview>div{padding:3px 0;min-height:0}
+.research-area-group>small{display:none}.mobile-equipment .equipment-picker>details{margin:8px 0}
+@media(max-height:700px){.tutorial-helper.mira-stage{height:auto;min-height:180px}.mira-stage .mira-character{height:176px;width:116px}.tutorial-helper.mira-stage .mira-speech{margin-left:78px}.story-dialogue.mira-stage{min-height:194px}.story-dialogue.mira-stage .mira-character{height:194px;width:130px}}
+@media(max-width:380px){.effect-preview>div{grid-template-columns:minmax(0,1fr) auto}.effect-preview dt{font-size:.65rem}.effect-preview dd{font-size:.67rem;gap:3px}.tutorial-helper.mira-stage .mira-speech{margin-left:100px}.story-dialogue.mira-stage .mira-speech{margin-left:108px}}
+.mira-more{font-size:.65rem;margin:4px 0}.mira-more>summary{min-height:44px;display:flex;align-items:center;color:#4d5945}.mira-more p{margin:4px 0}
+.training-detail .training-choices button small{display:block;color:var(--ui-muted);line-height:1.4;margin-top:5px}
+.training-detail>header>p{font-size:.75rem}.training-detail .training-queue p{font-size:.7rem}
+.node-buy-action{font-size:.74rem!important;text-transform:none!important;white-space:normal}
+.profile-modal .inbox-list article p{font-size:.75rem;line-height:1.4}
+.profile-modal .stats-grid>article{min-height:56px}.profile-modal .stats-grid small{font-size:.65rem}
+.story-dialogue.mira-stage .story-copy h2.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;clip-path:inset(50%);overflow:hidden;white-space:nowrap;border:0!important}
+.item-combinations>.combination-disclosure{padding:0;border:0;border-bottom:1px solid var(--ui-line);margin:0;background:transparent;box-shadow:none}
+.item-combinations>.combination-disclosure>summary{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;padding:6px 0;list-style:none;font-size:.75rem;cursor:pointer}
+.item-combinations>.combination-disclosure>summary span{font-size:.62rem;color:var(--ui-muted)}
+.item-combinations>.combination-disclosure[data-active=true]>summary span{color:var(--ui-positive)}
+.item-combinations>.combination-disclosure :is(p,li){font-size:.7rem;line-height:1.4}.item-combinations>.combination-disclosure ul{padding-left:16px}
+.challenge-family .challenge-stage>p{font-size:.7rem;line-height:1.4}
+.node-cost-line{display:flex;align-items:center;gap:6px;color:var(--ui-gold);margin:0 0 10px;font-size:.8rem}.node-cost-line .resource-art{width:18px;min-width:18px;float:none}.node-cost-line span{margin-left:auto;color:var(--ui-positive)}
+.resource-cell>b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.prestige-summary b{font-variant-numeric:tabular-nums}.prestige-actions>button{min-width:0;white-space:normal;font-size:.75rem}
+.foundry-art{display:inline-block;background-image:url('/assets/game/foundries-atlas-v1.png');width:36px;min-width:36px;height:36px;aspect-ratio:1;float:none}
+.foundry-manager>.foundry-row{margin:0;border:0;border-bottom:1px solid var(--ui-line);padding:0;background:transparent}
+.foundry-manager>.foundry-row>summary{display:grid;grid-template-columns:36px minmax(0,1fr) 20px;align-items:center;gap:8px;min-height:56px;list-style:none;font-size:.78rem;cursor:pointer;padding:7px 0}
+.foundry-manager>.foundry-row>summary span:last-child{color:var(--ui-action);text-align:right}
+.foundry-manager>.foundry-row[open]{padding-bottom:8px}.foundry-manager>.foundry-row p{font-size:.7rem;line-height:1.4}
+.story-dialogue.mira-stage.has-mira .mira-speech::after{display:none}
+.story-dialogue.mira-stage.has-mira::after{content:'';position:absolute;left:80px;bottom:168px;width:18px;height:20px;background:#efe4c8;clip-path:polygon(100% 0,100% 100%,0 100%);z-index:2;pointer-events:none}
+@media(max-width:380px){.story-dialogue.mira-stage.has-mira::after{left:90px}}
+@media(max-height:700px){.story-dialogue.mira-stage.has-mira::after{bottom:136px}}
+.foundry-art{background-size:300% 100%}

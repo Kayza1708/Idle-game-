@@ -10,7 +10,7 @@ const results=[];let browser;
 try{
  await new Promise(r=>setTimeout(r,1500));browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH,headless:true,args:['--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--no-zygote']});
  for(const width of [360,390,430])for(const language of ['de','en']){
-  const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400&&/\/(assets|src)\//.test(r.url()))errors.push(`${r.status()} ${r.url()}`)});
   await page.goto('http://127.0.0.1:5176');await page.waitForTimeout(250);
   await page.evaluate(async language=>{
    const e=await import('/src/economy.ts'),d=await import('/src/durableStorage.ts'),story=await import('/src/story.ts'),items=await import('/src/inventory.ts');await d.removeDurableGame();localStorage.clear();
@@ -50,7 +50,7 @@ try{
   // Active coach, independently of story pages, must stay within the shell.
   await page.evaluate(async()=>{const d=await import('/src/durableStorage.ts');const s=(await d.loadDurableGame(Date.now())).state;await d.persistDurableGame({...s,story:{...s.story,tutorial:'active',target:'training',open:null,queue:[],enabled:false}},Date.now())});await page.reload();await page.locator('.tutorial-helper').waitFor();await capture('tutorial-coach');
   await page.locator('.tutorial-helper .story-next').click();await capture('tutorial-training');await closeSheet();
-  await page.setViewportSize({width,height:640});await capture('tutorial-short');
+  await page.setViewportSize({width,height:640});await capture('tutorial-short');await page.evaluate(()=>document.documentElement.style.fontSize='20px');await capture('tutorial-large-text');
   if(errors.length)throw Error(errors.join('\n'));await context.close();
  }
  writeFileSync(`${output}/results.json`,JSON.stringify(results,null,2));console.log(`${results.length} rendered views passed viewport checks`);

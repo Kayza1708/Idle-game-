@@ -47,7 +47,7 @@ describe('mobile prestige and research interaction',()=>{
  it('uses a compact node sheet with an reachable purchase action',()=>{
   expect(panels).toContain('className="primary node-buy-action"');
   expect(panels).toContain("act('node',selected)");
-  expect(panels).toContain('className="prestige-node-values"');
+  expect(panels).toContain('className="node-effect-summary"');
   expect(css).toMatch(/\.node-buy-action\{[^}]*min-height:48px/);
   expect(css).toMatch(/--overlay-bottom-reserve:calc\(var\(--nav-height\) \+ env\(safe-area-inset-bottom\)\)/);
  });

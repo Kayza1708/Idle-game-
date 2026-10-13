@@ -1,3 +1,9 @@
+## 2026-10-13 · Datenvertrag für normale Prestiges
+
+Ab diesem Stand bleibt **das ungenutzte Datenguthaben bei normalem Prestige erhalten**, einschließlich `exactEconomy.data` oberhalb des nativen Zahlenbereichs. Die Preview führt Daten unter `kept` und nicht unter `reset`. Start-Credits, Hardware, Modelllevel und Jobabbruch bleiben unverändert. Bereits bezahltes Training und Analysen werden weiterhin ohne Erstattung beendet; Forschung, Crafting und Forge behalten ihre gespeicherten Verträge. Axiom-Reset löscht Daten weiterhin ausdrücklich; neue Challenges starten ohne Hauptspiel-Daten.
+
+Keine Produktion, Preise, Zeitkurven oder Effekthöhen wurden angepasst. Die Beschleunigung nach einem Prestige durch behaltene Daten ist eine beabsichtigte Vertragsänderung; ihre Langzeitbalance wurde hier nicht neu kalibriert. Keine nachträgliche Gutschrift historisch gelöschter Daten und keine Save-Schemaänderung. Die natürliche Fortschrittsmessung verbucht nur den tatsächlichen Vorher-minus-Nachher-Verlust in der Resetbilanz, keine pauschale Löschung mehr.
+
 ## Einmalige Forschung→Crafting-Brücke – 12. Oktober 2026
 
 `BALANCE.firstBlueprintResearchFragments = 4`: Der erste tatsächlich bezahlte Hauptspielabschluss von `blueprints` vergibt vier vorhandene Bauplanfragmente. Dauerhafter Save-v49-Nachweis (`unearned` → `pending` → `consumed`), kein zweiter Grant bei Prestige/Axiom/Reload/Challenge. Bereits abgeschlossene Altprojekte bekommen keine nachträgliche Gutschrift; bezahlte noch laufende Altprojekte bleiben berechtigt. Sicherer Ganzzahlbestand: bei fehlender Kapazität bleibt die ganze Auszahlung pending bis nach einem Verbrauch.

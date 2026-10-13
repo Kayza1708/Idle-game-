@@ -14,7 +14,7 @@ export function ChallengeStagePicker({s,id,act}:{s:GameState;id:ChallengeFamily;
   <label>{de?'Stufe':'Stage'}<select value={stage} onChange={e=>{const value=Number(e.currentTarget.value);setStage(value);setLinks(current=>current.slice(0,challengeCatalogQuote(id,value)!.rules.networkLimit));}}>{Array.from({length:69},(_,i)=><option key={i+1} value={i+1}>{i+1}{i+1>complete+1?' 🔒':''}</option>)}</select></label>
   <p>{de?'Kapitel / höchste belohnte Stufe':'Chapter / highest rewarded stage'}: {q.chapter} / {complete}</p>
   <ul>{challengeTargetDefinitions(q).map(target=><li key={target.id}>{challengeGoalText(target.id,de)}: {formatScientific(target.target,4)}</li>)}</ul>
-  <ul>{challengeRuleText(q,de).map(rule=><li key={rule}>{rule}</li>)}</ul>
+  <details className="system-disclosure"><summary>{de?'Regeln':'Rules'}</summary><ul>{challengeRuleText(q,de).map(rule=><li key={rule}>{rule}</li>)}</ul></details>
   <p>{challengeRewardText(id,de)}: +{(q.rewardBonus*100).toFixed(1)} %</p>
   <details><summary>{de?'Gemeinsame Automation':'Shared automation'} · {total}/690</summary><ul>{Object.values(BALANCE.challengeCatalog.milestones).map((feature,index)=><li key={feature}>{feature}: {BALANCE.challengeCorrections.automationTotals[index]} {de?'erstmalige Stufenabschlüsse insgesamt':'total first stage completions'} {s.challengeUnlocks.includes(feature)?'✓':''}</li>)}</ul></details>
   <p>{de?'Start: 50 Credits; keine Hardware, Daten, Materialien oder Jobs. Forschung und geschützte Loadoutkopien bleiben nutzbar. Das Hauptspiel läuft separat weiter.':'Start: 50 Credits; no hardware, data, materials or jobs. Research and protected loadout copies remain usable. Your main game continues separately.'}</p>

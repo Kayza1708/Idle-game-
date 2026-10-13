@@ -1,3 +1,12 @@
+## 2026-10-13 · Mira, progressive layers and retained Data
+
+- Normal prestige now preserves unspent Data (native projection and exact scientific ledger); paid cancelled jobs are not refunded. Axiom resets keep their deeper reset contract; challenge isolation is unchanged.
+- Axioms stay hidden in Prestige/profile until the first attainable reward and remain visible after reaching the layer.
+- Mira is a large freestanding character with an angular speech bubble, concise instructions, target navigation and a visible target arrow. No enclosing dialogue box.
+- Concrete production/training/lab previews replace narrow prose columns; research unlocks and calculations open on demand. Equipment combinations, challenge rules and foundries are compact disclosures. Existing three foundry graphics are now bound to their UI.
+- Exact large balances and INT claims use bounded scientific display. Empty job metadata and redundant research unlock text no longer occupy the main screens.
+- Tests: 1,375 passed; typecheck/build passed. Early/late visual matrix and remaining native acceptance are documented in `mira-streamlined-ui.md`.
+
 ## 2026-10-13 · Screenshot-driven mobile layout audit
 
 - Fixed the clipped story dialogue (two simultaneous horizontal translations), merchant-list specificity conflicts and missing shop icon backgrounds.
