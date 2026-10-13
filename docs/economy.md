@@ -593,3 +593,9 @@ Schwellen und Missionsbasismengen zentral in BALANCE. Itementdeckung bis 30; bez
 ## Wochen-/Monatskapitel und Achievementkurve – 12. Oktober 2026
 
 Neue Perioden: eine Produktionsaufgabe pro Metric; Mindestband 0/2/2, Bandvorgriff 0/+1/+2 (max5), Frontierstride 0/4/2. Längere wiederholte Arbeitsziele reservieren zusätzliche Lifetime-Abschnitte, Größen ×2. Normale Anzahl/Bonusschwellen und Gem-/Material-/XPbudgets unverändert. Achievement-Produktionsfaktor ersetzt durch `1+0.25*ln(1+P/100)`; Forschungsbonus bleibt separat auf20% begrenzt. Auch Altaccounts verwenden neuen Faktor, ihre Claims/Gems/Punkte und laufenden Quests bleiben. Save v51 für konkrete Hardwaretargets. Kleine natürliche Gegenmessung belegt weniger frühe Ausschüttung; echte Wochen-/Monats-ETA weiter offen. Vollständige Verträge: `quest-chapters-and-achievements.md`.
+
+## Buildintegration — 12. Oktober 2026
+
+Der Photonenfeld-Bauplan kostet nun **4 statt 6 Fragmente**. Der unveränderte einmalige Vier-Fragment-Receipt aus bezahlter Blueprints-Forschung ermöglicht damit Chip **oder** Trainingitem, nicht beide. Zutaten, 1.200 Data, Compute-Bus, 900s Fertigung sowie spätere Rezepte bleiben unverändert; keine alten Zahlungen zurückrechnen. Natürliche Gegenmessung und offene Langzeitgrenzen: `build-equipment-integration.md`.
+
+Ausrüstungseffekte verwenden einheitlich Eigentum, richtige Kategorie und erworbenen Kategorieplatz. Gesperrte historische Referenzen bleiben erhalten, liefern bis zum regulären Erwerb jedoch keine Effekte. Neue Forschung friert ihre Faktoren beim Start ein; alte Jobs/Income/INT werden nicht neu bewertet. Die Vorschau zeigt tatsächliche Training-Datazahlungen und Laborfaktoren, keine fiktive Trainingsbeschleunigung.

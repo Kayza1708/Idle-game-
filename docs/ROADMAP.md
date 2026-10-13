@@ -1,3 +1,11 @@
+## Buildeinstieg und Ausrüstung integriert – 12. Oktober 2026
+
+Kategorie-/Eigentums-/Sockelprüfung für sämtliche Itemeffekte vereinheitlicht; leere andere Plätze umgehen keine Sperren. Historische Items/Referenzen bleiben, gesperrte Effekte erst nach regulärem Erwerb aktiv. Photonenfeld-Bauplan 6 → 4 Fragmente: gleiche bezahlte Einstiegsauswahl wie Chip, kein Extra-Grant. Vorschau zeigt Training-Data Q/E und neuen Laborfaktor; laufende Forschungszeiten bleiben. Details: `build-equipment-integration.md`.
+
+Sechs Vor-/sechs Nachprofile mit gleicher Forschungsfreiheit, zwei Eingabekadenzen und echten Kosten. Learning vorher leer, jetzt Photonenfeld bei 68:30/72:30 gefertigt; alle finalen Profile 31 Training/7 Forschung. Zwei frühe Plätze regulär erreicht, vollständige Kern-/Researchsets und dritter Platz nicht bewiesen. Vorbereitete statische Vollsetquotes sind getrennt; Produktionsset gewinnt dort auch den vereinfachten Tap-Einkommensvergleich. Späterer reiner Tapbuild und Learningnutzen an Datawalls bleiben offen.
+
+Lokale Abnahme: 1.313 Standardtests, zehn neue Integrationsverträge, App-/strikte CLI-Typechecks, Build/Diffcheck grün. Finale sechs Profile 55,94s; Quellhashes, Gem-/Season-XP-/Data-/Tapabgleich und Reload geprüft. Keine Browser-/Geräteabnahme. Nächster Implementierungsblock: den bisher nur vorbereiteten Bonuskistenablauf vervollständigen; Midgame-/Langzeitbalance bleibt separater V1-Abnahmepunkt.
+
 ## Früher Prestige und gleiche Folgepause geprüft – 12. Oktober 2026
 
 Acht zusätzliche natürliche Profile, gleiche Besuche/30min Eingaben, erster Reset ab 1/3 INT und je 5min online + 2h55 offline danach. Früher Reset bei 3h erhält 1 INT und öffnet nur den Einkaufsagenten; späterer bei 6h erhält 6 INT. Bei 9h05: 3 versus 7 erhaltene/abholbare INT. Kein zweiter passiver Reset. Bezahlte Queue-first schafft in gleicher Pause drei statt eines Trainingsabschlusses, verzichtet dafür auf Fertigung/Labor. Keine globale Preis-/Freischaltungsänderung, Prestige weiterhin ab 1 erlaubt. Befunde: `first-prestige-return-findings.md`.

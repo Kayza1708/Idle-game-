@@ -83,7 +83,7 @@ describe('review corrections with persisted paid contracts',()=>{
   const run=startRunChallenge(s,'fragmented-network',69,[],['campus']),active=renderToStaticMarkup(createElement(ChallengeRunPanel,{s:run,act:()=>{}}));expect(active).toContain('v2');expect(active).toContain(BALANCE.hardware.campus.name);
  });
  it('keeps Hands Off useful at the offline cap and integrates its memory bonus across reload',()=>{
-  let s=account();s=createItem(s,'long-term-memory','common');s=equip(s,s.inventory[0].id);s={...s,savedAt:1000,offlineCapacitySeconds:BALANCE.maxOfflineSeconds,challengeStages:{'no-taps':69},hardware:1,hardwareCounts:{...s.hardwareCounts,calculator:1},discovered:['calculator']};
+  let s={...account(),unlockedEquipmentSlots:2};s=createItem(s,'long-term-memory','common');s=equip(s,s.inventory[0].id);s={...s,savedAt:1000,offlineCapacitySeconds:BALANCE.maxOfflineSeconds,challengeStages:{'no-taps':69},hardware:1,hardwareCounts:{...s.hardwareCounts,calculator:1},discovered:['calculator']};
   const plain={...s,challengeStages:{}};expect(creditRateScientific(s.hardware,s.level,s,s.savedAt).compare(creditRateScientific(plain.hardware,plain.level,plain,plain.savedAt))).toBeGreaterThan(0);
   const full=advance(s,12,false,()=>.5).state,split=advance(reload(advance(s,6,false,()=>.5).state),6,false,()=>.5).state;expect(full.exactEconomy.credits).toEqual(split.exactEconomy.credits);
  });

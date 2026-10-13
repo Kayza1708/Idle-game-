@@ -1,7 +1,7 @@
 import type {TelemetryEvent} from '../src/telemetry';
 /** Bounded observations of the real domain; no grants, debug stocks or free unlocks. */
 import {performance} from 'node:perf_hooks';
-import {BALANCE,researchQuote,newGame,registerTap,startTraining,startResearchProject,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,newINTScientific,creditRateScientific,computeRateScientific,dataRateScientific,tapCreditsScientific,specialItemEffectQuote,toggleHardwareAutobuyer,queueTraining,offlineTimeLimit,type GameState,type TrainingTrack,type ItemTypeId,type ResearchId} from '../src/economy';
+import {BALANCE,researchQuote,newGame,registerTap,startTraining,startResearchProject,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,newINTScientific,creditRateScientific,computeRateScientific,dataRateScientific,tapCreditsScientific,specialItemEffectQuote,toggleHardwareAutobuyer,queueTraining,offlineTimeLimit,itemTypes,type GameState,type TrainingTrack,type ItemTypeId,type ResearchId} from '../src/economy';
 import {ScientificNumber} from '../src/scientificNumber';
 import {queueExperiment,analysisQuote} from '../src/experiments';
 import {craft,craftModule,craftAffordability,claimLootDrop,equip} from '../src/inventory';
@@ -11,7 +11,7 @@ import {prestige,buyNode,prestigePreview} from '../src/prestige';
 import {achievements,claimAchievement} from '../src/achievements';
 import {rollPeriods,claimMission,claimMissionBonus,missionProgress} from '../src/missions';
 import {serialize,restore} from '../src/storage';
-export type ProfileConfig={play:'continuous'|'short-sessions';priority:'model-first'|'materials-first';seed:number;seconds:number;budgetMs?:number;tapsPerSecond?:0|1|3;build?:'relay'|'chip'|'researcher';claimRewards?:boolean;sessions?:readonly (readonly [number,number])[];absenceMode?:'single-return';maxPrestiges?:1|2;firstPrestigeINT?:1|3;nodePolicy?:'factory-first'|'queue-first'};
+export type ProfileConfig={play:'continuous'|'short-sessions';priority:'model-first'|'materials-first';seed:number;seconds:number;budgetMs?:number;tapsPerSecond?:0|1|3;build?:'relay'|'chip'|'researcher';claimRewards?:boolean;sessions?:readonly (readonly [number,number])[];absenceMode?:'single-return';maxPrestiges?:1|2;firstPrestigeINT?:1|3;nodePolicy?:'factory-first'|'queue-first';loadout?:readonly ItemTypeId[];equalResearch?:boolean};
 export const onlineAt=(play:ProfileConfig['play'],second:number)=>play==='continuous'||second<600||(second>=3600&&second<3900);
 export const profileOnlineAt=(config:ProfileConfig,second:number)=>config.sessions?config.sessions.some(([start,end])=>second>=start&&second<end):onlineAt(config.play,second);
 export function runNaturalProfile(config:ProfileConfig){
@@ -21,6 +21,7 @@ export function runNaturalProfile(config:ProfileConfig){
  if(config.firstPrestigeINT!==undefined&&![1,3].includes(config.firstPrestigeINT))throw Error('Invalid first prestige target');
  if(config.maxPrestiges!==undefined&&![1,2].includes(config.maxPrestiges))throw Error('Invalid prestige limit');
  if(config.nodePolicy&&!['factory-first','queue-first'].includes(config.nodePolicy))throw Error('Invalid node policy');
+ if(config.loadout&&(config.loadout.length<1||config.loadout.length>3||config.loadout.some(id=>!Object.hasOwn(BALANCE.itemRecipes,id))||new Set(config.loadout.map(id=>itemTypes[id].slot)).size!==config.loadout.length))throw Error('Invalid loadout');
  if(config.tapsPerSecond!==undefined&&![0,1,3].includes(config.tapsPerSecond))throw Error('Invalid tap cadence');
  if(config.sessions&&config.sessions.some(([a,b],i)=>!Number.isSafeInteger(a)||!Number.isSafeInteger(b)||a<0||b<=a||b>horizon||(i>0&&a<config.sessions![i-1][1])))throw Error('Invalid session windows');
  const wallStart=performance.now(),budget=config.budgetMs??60_000;
@@ -80,7 +81,7 @@ export function runNaturalProfile(config:ProfileConfig){
  function blocked(family:string,reasons:string[]){for(const reason of reasons){blocks[family]??={};blocks[family][reason]=(blocks[family][reason]??0)+1;}}
  function factory(){
   if(s.crafting.active||s.crafting.queue.length)return;
-  const target:ItemTypeId|undefined=!s.craftedItemCounts['impulse-relay']?'impulse-relay':!s.craftedItemCounts['quantum-chip']?'quantum-chip':s.materials.knownBlueprints.find(id=>!s.craftedItemCounts[id]);
+  const target:ItemTypeId|undefined=config.loadout?config.loadout.find(id=>!s.craftedItemCounts[id]):!s.craftedItemCounts['impulse-relay']?'impulse-relay':!s.craftedItemCounts['quantum-chip']?'quantum-chip':s.materials.knownBlueprints.find(id=>!s.craftedItemCounts[id]);
   if(!target)return;
   const blueprint=blueprintQuote(s,target);if(blueprint.canLearn)act('blueprint',target,state=>learnBlueprint(state,target));
   const quote=craftAffordability(s,target);blocked(`craft:${target}`,quote.reasons);
@@ -92,7 +93,7 @@ export function runNaturalProfile(config:ProfileConfig){
   if(config.nodePolicy&&s.nodes.includes('trainingPlan')){for(let slot=s.trainingQueue.length;slot<2;slot++){if(!act('training-queue',track,state=>queueTraining(state,track)))break;track=track==='quality'?'efficiency':'quality';}}
   const research:ResearchId|undefined=s.researchLevels.dataGeneration<2?'dataGeneration':s.researchLevels.modelArchitecture<1?'modelArchitecture':!s.completedResearch.includes('blueprints')?'blueprints':undefined;
   if(research)act('research',research,state=>startResearchProject(state,research));
-  else if(config.build==='researcher'){
+  else if(config.equalResearch||config.build==='researcher'){
    const portfolio:ResearchId[]=['operations','dataGeneration','modelArchitecture','computeOptimization','userScaling','materialAnalysis','blueprintAnalysis','tapAmplification'];
    const desired=portfolio.find(id=>!(id in BALANCE.repeatableResearch)||s.researchLevels[id as keyof typeof s.researchLevels]<3);
    // Skip locked/running/full/too expensive quotes; never fabricate access or pay a free job.
@@ -105,11 +106,12 @@ export function runNaturalProfile(config:ProfileConfig){
   // Claim once at >=3 INT, between analyses. Running research/crafting continue;
   // any cancelled training is explicitly reported through the real reset preview.
   if(s.prestigeCount<(config.maxPrestiges??1)&&newINTScientific(s).compare(ScientificNumber.from(s.prestigeCount===0?(config.firstPrestigeINT??3):3))>=0&&!s.experiments.active&&(s.prestigeCount===0||s.savedAt-(s.telemetry.runStartedAt??s.savedAt)>=900000)){const before=s,preview=prestigePreview(s);s=prestige(s);if(s!==before){first.prestige??=s.savedAt/1000;resetData=resetData.add(exactEconomyValue(before,'data'));resets.push({at:s.savedAt/1000,gain:preview.claimableINT,reset:preview.reset,jobs:preview.jobs});}}
-  const nodeOrder=config.nodePolicy==='queue-first'?['shoppingAgent','trainingPlan','dataArchive1','analysis1','manufacturing1','labs1'] as const:config.nodePolicy==='factory-first'?['shoppingAgent','dataArchive1','analysis1','manufacturing1','labs1','trainingPlan'] as const:['shoppingAgent','dataArchive1','analysis1','manufacturing1','labs1'] as const;
+  const nodeOrder=config.equalResearch?['shoppingAgent','dataArchive1','analysis1','manufacturing1','labs1','computeNet1','trainingPlan'] as const:config.nodePolicy==='queue-first'?['shoppingAgent','trainingPlan','dataArchive1','analysis1','manufacturing1','labs1'] as const:config.nodePolicy==='factory-first'?['shoppingAgent','dataArchive1','analysis1','manufacturing1','labs1','trainingPlan'] as const:['shoppingAgent','dataArchive1','analysis1','manufacturing1','labs1'] as const;
   if(s.prestigeCount){for(const node of nodeOrder){if(!s.nodes.includes(node)){act('node',node,state=>buyNode(state,node));break;}}
    for(const id of ['calculator','sbc'] as const)if(!s.hardwareAutoBuyers[id])act('automation',id,state=>toggleHardwareAutobuyer(state,id));
+   if(config.loadout){for(const type of config.loadout){const item=s.inventory.find(i=>i.type===type&&!Object.values(s.equipped).includes(i.id));if(item&&act('equip',item.type,state=>equip(state,item.id)))equippedTimeline.push({at:s.savedAt/1000,type:item.type});}}else {
    const desired=config.build?(config.build==='relay'?'impulse-relay':s.inventory.some(i=>i.type==='quantum-chip')?'quantum-chip':'impulse-relay'):undefined;
-   const item=s.inventory.find(item=>!Object.values(s.equipped).includes(item.id)&&(!desired||item.type===desired));if(item&&act('equip',item.type,state=>equip(state,item.id)))equippedTimeline.push({at:s.savedAt/1000,type:item.type});}
+   const item=s.inventory.find(item=>!Object.values(s.equipped).includes(item.id)&&(!desired||item.type===desired));if(item&&act('equip',item.type,state=>equip(state,item.id)))equippedTimeline.push({at:s.savedAt/1000,type:item.type});}}
   if(config.claimRewards){for(const a of achievements)for(let tier=0;tier<a.thresholds.length;tier++)if(a.progress(s)>=a.thresholds[tier]&&!s.achievementClaims.includes(`${a.id}:${tier}`))act('achievement',`${a.id}:${tier}`,state=>claimAchievement(state,a.id,tier));for(const period of ['daily','weekly','monthly'] as const){for(const task of s.missions[period].tasks)if(!task.claimed&&missionProgress(s,task)>=task.goal)act('mission',`${period}:${task.id}`,state=>claimMission(state,period,task.id));act('mission-bonus',period,state=>claimMissionBonus(state,period));}}
   if(config.priority==='model-first'){model();factory();analysis();}else{factory();analysis();if(s.experiments.active||s.experiments.completedIds.length)model();}
   const pick=hardwareIds.map(id=>hardwarePurchasePreview(s,id)).filter(q=>q.allowed&&!q.creditGain.isZero()).sort((a,b)=>b.creditGain.divide(b.cost).compare(a.creditGain.divide(a.cost))||hardwareIds.indexOf(a.id)-hardwareIds.indexOf(b.id))[0];
