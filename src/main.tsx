@@ -7,6 +7,7 @@ import {installMobileIntegration} from './mobileIntegration';
 import {browserStorage} from './storage';
 import './style.css';
 import './mobile-ui.css';
+import './pixel-game.css';
 
 const uninstallMobile=installMobileIntegration();
 window.addEventListener('pagehide',uninstallMobile,{once:true});

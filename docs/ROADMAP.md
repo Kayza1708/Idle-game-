@@ -1,3 +1,12 @@
+## 2026-10-13 · Pixel UI, Kapseln und Tutorialfinger
+
+- Einheitliche Pixel-Console-Oberfläche, lokal mitgelieferte Pixelschrift/OFL, eigene gefüllte Pixelicons und kantige Dialoge auf allen gemeinsam genutzten Screens.
+- Eigener SVG-Kapselautomat im Shop: Gem-Zug, reale 1%-Itemchance, zugängliche Komponenten und Mengen, sichtbare Chancen, stabile Quittung. Save v53, Challenge-Isolation und beide Resetverträge integriert.
+- Kosmetische Kurbel-/Kugel-/Auswurfanimation und Erfolgsfeedback; Tutorialfinger an tatsächlichen Buttons/Navigation. Einstellungen und reduzierte Bewegung werden respektiert.
+- Video nur über echte Provider-Erfolgsrückmeldung; Produktionsanbieter bleibt ausdrücklich nicht verfügbar, bis native Integration vorliegt. Kein Mock-Video-Grant.
+- Prüfung: 1.387 Tests / 102 Dateien grün; Typecheck, Build und Diffcheck grün; 558 frühe/späte Ansichten plus sieben Interaktionsprofile im echten Renderer. Native Abnahme bleibt offen.
+- Offen für Release: echter Rewarded-Ad-Anbieter mit Ad Units/SDK-Konfiguration, native iPhone-Abnahme und Kalibrierung von Gem-Preis/Mengen/Video-Limit. Siehe `pixel-capsule-ui.md` für Prüfumfang und Grenzen.
+
 ## 2026-10-13 · Mira, progressive layers and retained Data
 
 - Normal prestige now preserves unspent Data (native projection and exact scientific ledger); paid cancelled jobs are not refunded. Axiom resets keep their deeper reset contract; challenge isolation is unchanged.
