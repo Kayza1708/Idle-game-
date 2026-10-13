@@ -1,3 +1,9 @@
+## Kantige Designsprache und Tutorialzeile – 13. Oktober 2026
+
+Mobile-Stylesheet vollständig ersetzt: flache, rechteckige Flächen, Radius null in App und Dialogen, konsistente Preis-/Aktions-/Trennlinienlogik. Tutorial als echte zweite Shellzeile mit gemessenem Dialogabstand; Zielnavigation hebt erst nach Viewwechsel hervor. Shop-/Menü-/Settings-/Screen-/Dialogskin vereinheitlicht. Funktionslose Notification-Schalter entfernt, Integrationshinweis erhalten. Keine Domain-/Save-/Balancingänderung. Vertrag: `square-mobile-design.md`.
+
+Abschließender Typecheck/Source-Path-Check, Build und Diffcheck grün; 32 gezielte UI-Verträge grün. Vollsuite 1.358/1.361 Fälle bestanden; drei Zeitlimits, nach isoliertem Retry zwei bestehende Domain-Timeouter offen (longTermInt 10s, runStart 5s). Keine Vollsuite-/CI-Freigabe behauptet. Screenshotpfade fehlen, keine iPhone-/Browser-Sichtabnahme. Nächster Schritt: Geräte-/Guide-/Overlaymatrix und die zwei Testbudgets/Ursachen prüfen; kein Release oder automatischer Merge.
+
 ## Konkretes Mobile-Feedback korrigiert – 13. Oktober 2026
 
 Hardware wieder Preis-only, Laborhintergrund statt aktueller Hardware, Tutorial als Portal mit neuer Begrenzung. Komponenten als Bild/Menge ohne Reservierungszeile/Rahmen; Null-Zutaten ausgeblendet. Menü als Liste, Settings mit festen Feld-/Slidergrößen. Shopkategorien und vollständige Bestätigung im gemeinsamen Detailblatt, Info auch bei blockiertem Kauf erreichbar. Keine Domain-/Save-/Balancingänderung. Vertrag: `mobile-feedback-fixes.md`.

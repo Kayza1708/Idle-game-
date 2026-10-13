@@ -1,0 +1,8 @@
+import {describe,it,expect} from 'vitest';
+import {readFileSync} from 'node:fs';
+const css=readFileSync(new URL('./mobile-ui.css',import.meta.url),'utf8'),app=readFileSync(new URL('./App.tsx',import.meta.url),'utf8'),guide=readFileSync(new URL('./TutorialFocus.tsx',import.meta.url),'utf8');
+describe('square mobile design and in-flow tutorial contracts',()=>{
+ it('has no positive corner radius in the active mobile stylesheet',()=>{const values=[...css.matchAll(/border-radius:([^;}]+)/g)].map(x=>x[1]);expect(values.length).toBeGreaterThan(0);for(const value of values)expect(value).toMatch(/^0(?:px)?(?:!important)?$/);expect(css).toContain(':is(#root,.mobile-sheet-backdrop');});
+ it('places the tutorial between header and content with its own shell row',()=>{const header=app.indexOf('<ResourceBar'),dock=app.indexOf('className="tutorial-dock"'),content=app.indexOf('<div className={`content');expect(dock).toBeGreaterThan(header);expect(dock).toBeLessThan(content);expect(css).toContain('.game-shell.has-tutorial>.content{grid-row:3}');expect(css).toContain('.game-shell.has-tutorial>.bottom-nav{grid-row:4}');expect(guide).not.toContain('createPortal');expect(css).toContain('.tutorial-helper{position:static!important');});
+ it('reveals tutorial targets before highlighting and scrolling after navigation',()=>{const start=app.indexOf('const showTutorial='),end=app.indexOf(' const act=',start),source=app.slice(start,end);expect(source).toContain("setAttribute('open','')");expect(source).toContain("tutorialGuide(ref.current)?.targetId===targetId");expect(source).toContain("target?.classList.add('tutorial-focus')");expect(guide).toContain("document.getElementById(guide.targetId)?.classList.remove('tutorial-focus')");});
+});
