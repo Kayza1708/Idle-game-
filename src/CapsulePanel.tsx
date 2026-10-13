@@ -1,28 +1,26 @@
 import {itemText,componentText} from './gameplayI18n';
-import {useEffect,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState} from 'react';
 import {BALANCE,type GameState,type ComponentId} from './economy';
 import {capsuleQuote,capsuleMaterialTier} from './capsuleMachine';
 import {ComponentArt,ItemArt,GemAmount} from './GameArt';
 import {MobileDetailSheet} from './MobileDetailSheet';
 
-/** Original code-native art. The pixels stay crisp at every device density. */
-export function CapsuleMachineArt(){return <svg className="capsule-machine-art" viewBox="0 0 160 192" shapeRendering="crispEdges" aria-hidden="true">
- <path fill="#080f22" d="M36 8h88v8h8v8h8v64h-8v16H28V88h-8V24h8v-8h8z"/>
- <path fill="#b9ede2" d="M36 16h88v8h8v64h-8v8H36v-8h-8V24h8z"/>
- <path fill="#254457" d="M40 28h80v8h8v44h-8v8H40v-8h-8V36h8z"/>
- <path fill="#6da0a7" d="M40 24h80v4H40zm-8 12h4v32h-4z"/>
- <g className="machine-balls">{[[44,62,'#f6b74d'],[66,66,'#f48569'],[90,62,'#8fd4bb'],[108,70,'#be9aeb'],[52,44,'#85bfea'],[80,42,'#f6b74d'],[104,42,'#f48569'],[36,76,'#8fd4bb'],[78,78,'#85bfea']].map(([x,y,c],i)=><g key={i} transform={`translate(${x} ${y})`}><path fill={c as string} d="M4 0h12v4h4v12h-4v4H4v-4H0V4h4z"/><path fill="#eaf5e8" d="M4 4h8v4H4z"/><path fill="#172639" d="M0 10h20v3H0z"/></g>)}</g>
- <path fill="#080f22" d="M24 96h112v84h8v12H16v-12h8z"/>
- <path fill="#b85048" d="M32 104h96v72H32z"/><path fill="#ed8a65" d="M32 104h96v8H32zm0 8h8v56h-8z"/><path fill="#763643" d="M120 112h8v64H32v-8h88z"/>
- <path fill="#f7ddb0" d="M48 112h64v20H48z"/><path fill="#1b3043" d="M56 116h8v12h-8zm12 0h4v12h-4zm8 0h8v12h-8zm12 0h8v12h-8zm12 0h4v12h-4z"/>
- <g className="machine-crank"><path fill="#080f22" d="M56 136h48v24H56z"/><path fill="#ebc77d" d="M60 140h40v16H60z"/><path fill="#72505a" d="M64 148h32v4H64z"/><path fill="#fff0c1" d="M76 136h8v24h-8z"/></g>
- <path fill="#080f22" d="M56 164h48v16H56z"/><path fill="#35505c" d="M64 168h32v4H64z"/>
- <path fill="#e2ae6f" d="M24 180h112v4H24z"/>
- <g className="machine-capsule"><path fill="#80d4b4" d="M72 162h16v4h4v16h-4v4H72v-4h-4v-16h4z"/><path fill="#f5dca5" d="M68 174h24v8h-4v4H72v-4h-4z"/><path fill="#172639" d="M68 172h24v4H68z"/></g>
+/** Detailed original bitmap cabinet, with independent mechanical sprite layers. */
+export function CapsuleMachineArt(){
+ const clip=useId(),colors=['#efb758','#74cbb9','#ac9ad7','#e17a67','#75b8dd'],balls=[[245,623],[338,655],[433,628],[535,656],[633,633],[731,651],[810,602],[196,547],[299,534],[400,551],[502,530],[612,540],[720,523],[775,436],[664,435],[554,429],[442,444],[328,429],[254,350],[362,334],[490,338],[607,324],[699,341]];
+ return <svg className="capsule-machine-art" viewBox="0 0 1024 1536" shapeRendering="crispEdges" aria-hidden="true">
+  <defs><clipPath id={clip}><path d="M256 204H768L868 318L895 537L836 688H184L132 537L160 318Z"/></clipPath></defs>
+  <image href="/assets/game/capsule-machine-v2.webp" width="1024" height="1536"/>
+  <g className="machine-balls" clipPath={`url(#${clip})`}>{balls.map(([x,y],i)=><g key={i} transform={`translate(${x} ${y})`}><g className="machine-ball" style={{animationDelay:`${-(i%7)*.05}s`}}><path fill="#17394c" d="M-22-42h44v6h12v12h8v48h-8v12H22v6h-44v-6h-12V24h-8v-48h8v-12h12z"/><path fill={colors[i%colors.length]} d="M-20-38h40v6h10v12h8v40h-8v12H20v6h-40v-6h-10V20h-8v-40h8v-12h10z"/><path fill="#f3f0ca" opacity=".75" d="M-18-30H6v6h-18v12h-12v-12h6z"/><path fill="#153c52" opacity=".55" d="M-38-2h76v6h-76zM20 4h12v18H20zM-20 26h40v6h-40z"/><path fill="#fff5dd" opacity=".45" d="M-16 5h28v5h-28z"/></g></g>)}</g>
+  <path fill="#cbfff0" opacity=".14" d="M217 280h22v218h-22zM247 246h12v142h-12zM820 290h12v210h-12z"/>
+  <g className="machine-crank"><path fill="#183347" d="M485 981h148v44H485z"/><path fill="#ddb05e" d="M489 977h144v36H489z"/><path fill="#ffe2a2" d="M493 977h136v8H493z"/><path fill="#8e6234" d="M497 1005h132v8H497z"/><path fill="#183347" d="M612 959h44v82h-44z"/><path fill="#e9c579" d="M620 965h28v68h-28z"/><path fill="#fff0c0" d="M620 965h8v62h-8z"/></g>
+  <g className="machine-door"><path fill="#132d3e" d="M412 1162h204v136H412z"/><path fill="#63858b" d="M412 1162h204v10H412z"/></g>
+  <g className="machine-capsule"><g className="capsule-lid"><path fill="#193748" d="M468 1192h88v8h16v16h8v28H444v-28h8v-16h16z"/><path fill="#89d5bd" d="M468 1200h88v8h12v16h4v12H452v-12h4v-16h12z"/><path fill="#def4ce" d="M472 1208h40v8h-40z"/></g><g className="capsule-bottom"><path fill="#193748" d="M444 1240h136v28h-8v16h-16v8h-88v-8h-16v-16h-8z"/><path fill="#edc583" d="M452 1248h120v16h-8v12h-12v8h-80v-8h-12v-12h-8z"/><path fill="#fae4ba" d="M464 1252h92v8h-92z"/></g></g>
+  <g className="machine-reveal-sparks" fill="#ffe2a1"><path d="M386 1280h8v16h-8zM378 1288h24v8h-24zM626 1280h8v16h-8zM618 1288h24v8h-24zM506 1174h12v20h-12z"/></g>
  </svg>}
 export function CapsulePanel({s,act,videoAvailable=false,videoBusy=false}:{s:GameState;act:(name:string,...args:any[])=>void;videoAvailable?:boolean;videoBusy?:boolean}){
  const de=s.settings.language==='de',q=capsuleQuote(s),[details,setDetails]=useState(false),[spinning,setSpinning]=useState(false),lastSeen=useRef(s.capsuleMachine.draws),receipt=s.capsuleMachine.last;
- useEffect(()=>{if(lastSeen.current===s.capsuleMachine.draws)return;lastSeen.current=s.capsuleMachine.draws;if(!s.settings.effects||matchMedia('(prefers-reduced-motion: reduce)').matches)return;setSpinning(true);const timer=setTimeout(()=>setSpinning(false),1200);return()=>{clearTimeout(timer);setSpinning(false)}},[s.capsuleMachine.draws,s.settings.effects]);
+ useEffect(()=>{if(lastSeen.current===s.capsuleMachine.draws)return;lastSeen.current=s.capsuleMachine.draws;if(!s.settings.effects||matchMedia('(prefers-reduced-motion: reduce)').matches)return;setSpinning(true);const timer=setTimeout(()=>setSpinning(false),1800);return()=>{clearTimeout(timer);setSpinning(false)}},[s.capsuleMachine.draws,s.settings.effects]);
  const locked=q.reason==='prestige',busy=spinning||videoBusy;
  return <section className={`capsule-panel ${spinning?'is-spinning':''}`} data-capsule-draws={s.capsuleMachine.draws}>
   <header><b>{de?'KI-KAPSELN':'AI CAPSULES'}</b><button aria-label={de?'Chancen anzeigen':'Show odds'} onClick={()=>setDetails(true)}>?</button></header>

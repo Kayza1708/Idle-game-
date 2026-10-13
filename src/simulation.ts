@@ -1,3 +1,4 @@
+import {worldDropInterval,worldDropRewardFactor} from './economy';
 import {earnBlueprintResearchReward,settleBlueprintResearchReward} from './blueprintResearchReward';
 import {offlineTimeLimit} from './economy';
 import {automationFeatureUnlocked,researchRepeatUnlocked} from './economy';
@@ -139,7 +140,7 @@ function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.rand
   }
   if(left>1e-9)return{state,report:emptyReport()};
   next=updateOnboarding(rollPeriods(next,next.savedAt));
-  if(active){next.lifetime.activeSeconds+=total;const dropMult=tapDropMultiplier(next);const interval=Math.max(8,BALANCE.worldDropSeconds/dropMult);const progress=(next.worldDropProgress??0)+total;const spawn=Math.floor(progress/interval);next.worldDropProgress=progress-spawn*interval;next.lootDrops=(next.lootDrops??[]).filter(d=>d.expiresAt>next.savedAt);for(let i=0;i<spawn&&next.lootDrops.length<3;i++){const seed=next.nextId++;next.lootDrops.push({id:`drop-${seed}`,spawnedAt:next.savedAt,expiresAt:next.savedAt+8000,x:8+(seed*37)%84,y:12+(seed*53)%68,variant:seed%17===0?'core':seed%5===0?'cache':'coin'});}}
+  if(active){next.lifetime.activeSeconds+=total;const dropMult=tapDropMultiplier(next);const interval=worldDropInterval(next);const progress=(next.worldDropProgress??0)+total;const spawn=Math.floor((progress+1e-9)/interval);next.worldDropProgress=Math.max(0,progress-spawn*interval);next.lootDrops=(next.lootDrops??[]).filter(d=>d.expiresAt>next.savedAt);for(let i=0;i<spawn&&next.lootDrops.length<BALANCE.worldDropMaxVisible;i++){const seed=next.nextId++;next.lootDrops.push({id:`drop-${seed}`,spawnedAt:next.savedAt,rewardFactor:worldDropRewardFactor(next),expiresAt:next.savedAt+BALANCE.worldDropVisibleSeconds*1000,x:8+(seed*37)%84,y:12+(seed*53)%68,variant:seed%17===0?'core':seed%5===0?'cache':'coin'});}}
   const offline=!active&&total>10;
   next=addMetrics(next,next.savedAt,{activeSeconds:active?total:0,offlineSeconds:offline?total:0,passive:offline?0:generatedCredits,offline:offline?generatedCredits:0,offlineCredits:offline?generatedCredits:0,offlineData:offline?generatedData:0,offlineResearch:offline?generatedResearch:0});
   const pinnedReachedAfter=next.pinnedGoal?resolvePinnedGoal(next,next.pinnedGoal)?.reached??false:false;if(!pinnedReachedBefore&&pinnedReachedAfter)next=addEvent(next,'goal-completed',next.savedAt,{goal:JSON.stringify(next.pinnedGoal)});

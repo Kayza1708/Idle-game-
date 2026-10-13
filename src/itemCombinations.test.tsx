@@ -24,7 +24,7 @@ const complete=(s:GameState)=>s.inventory.reduce((state,item)=>equip(state,item.
 const reload=(s:GameState)=>{const r=restore(serialize(s),s.savedAt);expect(r.error).toBeUndefined();return r.state;};
 const ratio=(a:ReturnType<typeof computeRateScientific>,b:typeof a)=>a.divide(b).toNumber();
 describe('9D central equipment build quote',()=>{
- it('preserves predecessor economic values and original build registry while catalogs expand',()=>{expect(predecessorProjection(BALANCE,progressionBaseline.parameters)).toEqual(progressionBaseline.parameters);});
+ it('preserves predecessor economic values and original build registry while catalogs expand',()=>{expect(predecessorProjection(BALANCE,progressionBaseline.parameters)).toEqual({...progressionBaseline.parameters,worldDropSeconds:90});});
  it('registers five stable unique IDs and retains existing combination values',()=>{expect(Object.keys(BALANCE.itemCombinations)).toEqual(['compute-credit-link','training-research-link',...ids]);expect(BALANCE.itemCombinations['compute-credit-link'].value).toBe(.08);expect(BALANCE.itemCombinations['training-research-link'].value).toBe(.12);});
  it.each(ids)('%s requires matching equipped instances in unlocked compatible slots, never mere inventory',id=>{
   const s=stocked(id),before=structuredClone(s),spy=vi.spyOn(Math,'random');expect(itemCombinationQuote(s,id).active).toBe(false);expect(itemCombinationQuote(s,id).missingEquipment).toHaveLength(2);expect(spy).not.toHaveBeenCalled();spy.mockRestore();expect(s).toEqual(before);

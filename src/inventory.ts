@@ -117,18 +117,18 @@ export function forgeItem(s:GameState,id:string,ticket?:ImprovementTicket){const
  * and rare cores are short jackpot moments. Drop research/items/prestige affect both frequency and quality. */
 export function claimLootDrop(s:GameState,id:string,rng=Math.random){
  if(s.retention.activeRun?.id==='no-taps')return s;const drop=s.lootDrops.find(d=>d.id===id);if(!drop||drop.expiresAt<s.savedAt)return {...s,lootDrops:s.lootDrops.filter(d=>d.id!==id)};
- const variant=drop.variant??'coin',quality=tapDropMultiplier(s),qualityBoost=variant==='core'?2.35:variant==='cache'?1.45:1;
+ const rewardFactor=drop.rewardFactor??1;const variant=drop.variant??'coin',quality=tapDropMultiplier(s),qualityBoost=variant==='core'?2.35:variant==='cache'?1.45:1;
  const entries=(materialTable(s,'world').map(row=>[row.id,row.weight] as [ComponentId,number]) as [keyof typeof s.componentInventory,number][]).map(([k,w])=>[k,w*Math.pow(Math.max(1,quality)*qualityBoost,BALANCE.materialQualityPowers[k])] as [keyof typeof s.componentInventory,number]);
  const draw=()=>{const total=entries.reduce((n,[,w])=>n+w,0);let roll=rng()*total,pick=entries[entries.length-1][0];for(const [candidate,w] of entries){roll-=w;if(roll<=0){pick=candidate;break}}return pick};
  const draws=variant==='core'?7:variant==='cache'?3:1,perDraw=variant==='core'?2:1,grant:Partial<typeof s.componentInventory>={};
- for(let i=0;i<draws;i++){const pick=draw();grant[pick]=(grant[pick]??0)+perDraw;}
+ for(let i=0;i<draws;i++){const pick=draw();const quantity=perDraw*rewardFactor,whole=Math.floor(quantity),fraction=quantity-whole;grant[pick]=(grant[pick]??0)+whole+(fraction>0&&rng()<fraction?1:0);}
  let next=grantComponents({...s,lootDrops:s.lootDrops.filter(d=>d.id!==id),lifetime:{...s.lifetime,dropsClaimed:s.lifetime.dropsClaimed+1}},grant);
  const creditSeconds=variant==='core'?60:variant==='cache'?15:5,dataSeconds=variant==='core'?45:variant==='cache'?12:0;
- next=addCreditsScientific(next,creditRateScientific(next.hardware,next.level,next,next.savedAt,false).multiplyNumber(creditSeconds),true,false);
- if(dataSeconds>0)next=addDataScientific(next,dataRateScientific(next).multiplyNumber(dataSeconds));
+ next=addCreditsScientific(next,creditRateScientific(next.hardware,next.level,next,next.savedAt,false).multiplyNumber(creditSeconds*rewardFactor),true,false);
+ if(dataSeconds>0)next=addDataScientific(next,dataRateScientific(next).multiplyNumber(dataSeconds*rewardFactor));
  let itemDropped=false;
  if(variant==='core'&&s.retention.activeRun?.id!=='closed-supply-chain'){
-   const itemChance=Math.min(.15,.03+.006*Math.max(0,quality-1));
+   const itemChance=Math.min(1,rewardFactor*Math.min(.15,.03+.006*Math.max(0,quality-1)));
    if(rng()<itemChance){next=randomItem(next,rng);itemDropped=true;}
  }
  if(rng()<BALANCE.blueprintDropChance)next=discoverBlueprint(next);return addEvent(next,'component-found',s.savedAt,{source:'world-drop',variant,draws,components:Object.entries(grant).map(([k,v])=>`${k}:${v}`).join(','),creditSeconds,dataSeconds,itemDropped,quality});
