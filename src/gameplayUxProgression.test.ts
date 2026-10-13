@@ -20,12 +20,13 @@ describe('prestige run reset regression',()=>{
 });
 
 describe('authoritative workshop progression UI',()=>{
- it('shows authoritative current production and selected-purchase gain',()=>{
+ it('shows authoritative production without next-purchase clutter',()=>{
   const base=addCredits(newGame(0),1e9),s={...base,settings:{...base.settings,buyMode:10 as const},hardware:12,hardwareCounts:{...base.hardwareCounts,calculator:12}};
   const html=renderToStaticMarkup(createElement(Workshop,{s,act:()=>{}}));
   const row=html.slice(html.indexOf('id="hardware-calculator"'),html.indexOf('id="hardware-sbc"'));
   expect(row).toContain(`<span class="hardware-output">${num(hardwareClassComputeRate(s,'calculator'),1)} Compute/s</span>`);
-  expect(row).toContain(`Nächster Kauf: +${num(hardwarePurchaseComputeGain(s,'calculator',10),1)}/s`);
+  expect(row).not.toContain('Nächster Kauf');
+  expect(html).not.toContain('hardware-savings-goals');
  });
  it('matches the real compute delta for x10 and MAX purchases',()=>{
   const base=addCredits(newGame(0),1e9),tenGain=hardwarePurchaseComputeGain(base,'calculator',10),afterTen=buyHardwareClass(base,'calculator',10);

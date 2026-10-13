@@ -1,3 +1,9 @@
+## Durchgehender Mobile-UI-Umbau – 13. Oktober 2026
+
+Action-Screen mit Pixelhardware statt CSS-Würfel; Sparzielkarten/Nächster-Kauf-Text entfernt. Navigation, Menü als Bottom Sheet, Details, Equipment, Profil, Research-/Inventarbereiche, Missionen/Season, Shop, Return und Story mit gemeinsamer kompakter Gestaltung. Alle 15 Hardwarekaufaktionen bleiben; Forschung/Inventar/Forge/Automation in aufklappbaren Bereichen. Keine Wirtschaft-/Saveänderung. Umfang und Matrix: `mobile-ui-overhaul.md`.
+
+1.350 Tests, Source-Path-Check, Typecheck, Build und Diffcheck grün. Browserdownload kein gültiges ZIP, Screenshotpfade fehlen: keine echte Mobile-/iOS-Sichtabnahme, keine gemessene Geometrie/Scrollreduktion behauptet. Nächster notwendiger Schritt ist die dokumentierte 360/390/430px- und niedrige-Viewport-Matrix; kein Release und keine 8/10-Qualitätsbehauptung.
+
 ## Mac-Build und Menüs korrigiert – 13. Oktober 2026
 
 Auf main e1f7cb7: UI-Module BonusBoxes.tsx → BonusBoxPanel.tsx und ResearchAutomation.tsx → ResearchAutomationPanel.tsx umbenannt; Domainmodule bleiben. Imports und Renderverträge angepasst. Neue check:source-paths-Prüfung läuft vor jedem Typecheck/Build, lehnt case-insensitive Modulkonflikte und falsch geschriebene lokale Imports ab. Drei künstliche Negativ-/Positivfälle geprüft.

@@ -264,11 +264,11 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
                     : "Modules"
                   : id === "workbench"
                     ? de
-                      ? "Baupläne / Herstellung"
-                      : "Blueprints / crafting"
+                      ? "Werkstatt"
+                      : "Crafting"
                     : de
-                      ? "Items / Ausrüstung"
-                      : "Items / equipment"}
+                      ? "Items"
+                      : "Items"}
             </button>
           ),
         )}
@@ -334,7 +334,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               </button>
             </div>
           ))}
-          <FoundryDetails s={s} act={(name,...args)=>{if(name==='open-material')setComponent(args[0]);else act(name,...args)}}/><MaterialBuildAutomation s={s} kind="crafting" act={act}/><p>{de?'Neue Baupläne: zehn bezahlte Forschungsabschlüsse je Bereich oder 1-%-Chance aus echten Materialdrops. Danach regulär lernen.':'New blueprints: ten paid research completions per area or a 1% chance from actual material drops. Then learn normally.'}</p><section className="recipe-list">
+          <details className="system-disclosure"><summary>{de?'Schmieden & Automation':'Foundries & automation'}</summary><FoundryDetails s={s} act={(name,...args)=>{if(name==='open-material')setComponent(args[0]);else act(name,...args)}}/><MaterialBuildAutomation s={s} kind="crafting" act={act}/></details><p>{de?'Neue Baupläne: zehn bezahlte Forschungsabschlüsse je Bereich oder 1-%-Chance aus echten Materialdrops. Danach regulär lernen.':'New blueprints: ten paid research completions per area or a 1% chance from actual material drops. Then learn normally.'}</p><section className="recipe-list">
             {view === "modules"
               ? (Object.keys(BALANCE.modules) as ModuleId[]).map((id) =>
                   recipeCard("module", id),
@@ -545,7 +545,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               </section>
             );
           })}
-          <DeviceDetails s={s} item={item}/><ItemForgeDetails s={s} item={item} act={(name,...args)=>{if(name==='open-material'){setItemId(null);setComponent(args[0]);}else act(name,...args)}}/><RecoveryDetails s={s} item={item} act={act}/>{item.rarity!=='mythic'&&<button onClick={()=>act('pin-goal',{kind:'item-upgrade',id:item.id,target:rarities.indexOf(item.rarity)+1})}>{de?'Nächste Aufwertung anheften':'Pin next upgrade'}</button>}
+          <details className="system-disclosure"><summary>{de?'Build & Synergien':'Build & synergies'}</summary><DeviceDetails s={s} item={item}/></details><details className="system-disclosure"><summary>{de?'Forge & Recycling':'Forge & recycling'}</summary><ItemForgeDetails s={s} item={item} act={(name,...args)=>{if(name==='open-material'){setItemId(null);setComponent(args[0]);}else act(name,...args)}}/><RecoveryDetails s={s} item={item} act={act}/></details>{item.rarity!=='mythic'&&<button onClick={()=>act('pin-goal',{kind:'item-upgrade',id:item.id,target:rarities.indexOf(item.rarity)+1})}>{de?'Nächste Aufwertung anheften':'Pin next upgrade'}</button>}
           <section className="improvement-card">
             <h3>
               {de

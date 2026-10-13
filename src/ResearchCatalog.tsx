@@ -44,8 +44,8 @@ export function ResearchCatalog({
         .map((area) => {
           const ids = researchAreas[area].ids as readonly ResearchId[];
           return (
-            <section data-research-area={area} key={area}>
-              <h2>{researchAreaText(area, language).name}</h2>
+            <details className="research-area-group" data-research-area={area} key={area} open={ids.some(id=>['dataGeneration','modelArchitecture','blueprints'].includes(id)||s.researchLabs.some(lab=>lab?.id===id))}>
+              <summary>{researchAreaText(area, language).name}</summary>
               {(s.researchAccessIds.some(id=>ids.includes(id))||ids.some(id=>researchAccess(s,id).node&&researchAccess(s,id).allowed)) && (
                 <small>
                   {de ? "Dauerhaft freigeschaltet" : "Permanently unlocked"}
@@ -98,10 +98,10 @@ export function ResearchCatalog({
                     );
                   })}
               </div>
-            </section>
+            </details>
           );
         })}
-      {researchAreaOrder.map(area=>{const node=nextResearchStage(s,area);return node&&<section className="research-area-preview" data-research-area-preview={area} key={area}><h3>{researchAreaText(area,language).name}</h3><p>{de?'Nächste Gebietsstufe':'Next area stage'}: {prestigeText(node,language).name}</p><button onClick={()=>act('open-prestige-node',node)}>{de?'Prestige-Node ansehen':'View prestige node'}</button></section>})}
+      <details className="system-disclosure"><summary>{de?'Gebiete freischalten':'Unlock areas'}</summary>{researchAreaOrder.map(area=>{const node=nextResearchStage(s,area);return node&&<section className="research-area-preview" data-research-area-preview={area} key={area}><h3>{researchAreaText(area,language).name}</h3><p>{de?'Nächste Gebietsstufe':'Next area stage'}: {prestigeText(node,language).name}</p><button onClick={()=>act('open-prestige-node',node)}>{de?'Prestige-Node ansehen':'View prestige node'}</button></section>})}</details>
       {s.completedResearch.length > 0 && (
         <details className="research-completed">
           <summary>

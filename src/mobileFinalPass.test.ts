@@ -43,10 +43,10 @@ describe('final mobile interaction contracts',()=>{
   expect(app).toContain("name==='full-reset'");
   expect(app).toContain('await removeDurableGame();removeGame(storage.current);location.reload()');
  });
- it('shows selected-purchase output and a compact buy action',()=>{
+ it('shows current output and compact buy action without next-purchase clutter',()=>{
   expect(panels).toContain('hardwarePurchasePreview(s,id,mode)');
-  expect(panels).toContain('preview.computeGain.toNumber(MAX_ECONOMY_VALUE)');
-  expect(panels).toContain("'Nächster Kauf'");
+  expect(panels).toContain('className="hardware-output"');
+  expect(panels).not.toContain("'Nächster Kauf'");
   expect(panels).toContain('className="hardware-output"');
   expect(panels).toContain("'KAUFEN'");
   expect(panels).not.toContain('className="hardware-buy" disabled={!affordable} onClick={()=>act(\'buy-class\',id)} aria-label={`${hardwareText(id,language).name} kaufen`}>+</button>');
