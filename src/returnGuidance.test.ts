@@ -5,7 +5,7 @@ import {createItem} from './inventory';
 import {returnText} from './returnText';
 import {claimMissionBonus,rollPeriods} from './missions';
 import {openBonusBox} from './bonusBoxes';
-import {BonusBoxes} from './BonusBoxes';
+import {BonusBoxes} from './BonusBoxPanel';
 import {componentText} from './gameplayI18n';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';

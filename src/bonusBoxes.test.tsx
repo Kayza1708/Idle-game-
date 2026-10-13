@@ -7,7 +7,7 @@ import {newGame,addCredits,buyHardwareClass,BALANCE,hardwareIds,type GameState} 
 import {claimMissionBonus} from './missions';
 import {rollPeriods} from './missions';
 import {earnDailyBonusBox,openBonusBox,bonusBoxRoll,validBonusBoxes} from './bonusBoxes';
-import {BonusBoxes,bonusBoxText} from './BonusBoxes';
+import {BonusBoxes,bonusBoxText} from './BonusBoxPanel';
 import {serialize,restore,SAVE_VERSION,loadGame,SAVE_KEY} from './storage';
 import {prestige,axiomReset} from './prestige';
 import {startRunChallenge,abortRunChallenge} from './retention';
