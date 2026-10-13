@@ -19,6 +19,7 @@ export function TrainingCostDetails({
     de = s.settings.language === "de",
     baseline = trainingDataCostForLevelScientific(q.targetLevel),
     actualDiscount = 1 - q.cost.divide(baseline).toNumber();
+  if(q.intro||s.activeTraining?.intro&&s.activeTraining.track===track)return <span className="training-cost-details">{de?'Einführungsauftrag: kostenlos, feste Dauer 20 s. Weitere Stufen nutzen die regulären Datenkosten und Trainingszeiten.':'Introductory lesson: free, fixed 20 s. Later levels use normal Data costs and training durations.'}</span>;
   return (
     <span className="training-cost-details">
       {de?'Grunddauer → Startdauer':'Base → start duration'}: {duration.baseDuration.toFixed(1)} → {duration.duration.toFixed(1)} s (alignment ×{duration.alignment}; modelTransfer ×{duration.modelTransfer}, {de?'Start':'start'} {duration.runStart}) · {track}: {de ? "Basis" : "Base"} {formatScientific(q.baseCost, 3)} Data →{" "}

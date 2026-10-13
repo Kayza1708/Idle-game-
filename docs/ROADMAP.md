@@ -1,3 +1,12 @@
+## 2026-10-14 · Detailgrafiken, Einstieg und Drop-Rhythmus
+
+- Detailliertes Pixel-Labor und Automatenkörper integriert; separate LED-/Monitor-/Lüfterebenen, mechanische 1,8-s-Kapselsequenz, reduzierte Bewegung.
+- Silkscreen für Titel, IBM Plex Mono für Zahlen/kleine Texte, lokale Fonts/Lizenzen; kompakter Mira-Coach, Finger bis zum echten Bestätigungsbutton, sichtbare Shop-Sperrgründe.
+- Erste Quality-/Data-Generation-Einführung: kostenlos, 20 Sekunden, permanente Startnachweise in Save v54; keine Challenge-/Reset-/Reload-Wiederholung oder rückwirkende Erstattung.
+- Sichtbare Drops: Basis 90 s, mindestens 30 s, einer gleichzeitig, 12 s sichtbar; passende Pixelkiste ohne ×1. Eingefrorene Mengen kompensieren den geringeren erwarteten Durchsatz; alte Drops bleiben unverändert.
+- Prüfung: 1.394 Tests / 103 Dateien, Typecheck/Build/Diffcheck; 558 frühe/späte Renderer-Ansichten, sieben Kapsel-/Providerprofile und sechs Null-Daten-Einstiegsprofile. Vertrag/Asset-Prompts: `pixel-polish.md`.
+- Weiter offen: native iPhone-Abnahme, echter Werbeanbieter, natürliche Langzeitkalibrierung der neuen Einstiegs-/Drop-Parameter und des Automaten. Kein Release-/Merge-Nachweis.
+
 ## 2026-10-13 · Pixel UI, Kapseln und Tutorialfinger
 
 - Einheitliche Pixel-Console-Oberfläche, lokal mitgelieferte Pixelschrift/OFL, eigene gefüllte Pixelicons und kantige Dialoge auf allen gemeinsam genutzten Screens.

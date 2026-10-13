@@ -44,7 +44,7 @@ describe('Credit-only hardware and pure savings goals',()=>{
  });
  it('invalid savings quantities never become affordable zero-cost quotes',()=>{const q=hardwareSavingsQuote(newGame(0),'calculator',NaN);expect(q.allowed).toBe(false);expect(q.resources.valid).toBe(false);});
  it('tutorial requires the actual SBC purchase, not ten predecessors',()=>{
-  const s={...newGame(0),story:{...newGame(0).story,target:'research' as const}};expect(tutorialGuide(s)?.requirement).toContain('Kaufe den Einplatinencomputer');const bought=buyHardwareClass(addCreditsScientific(s,ScientificNumber.from(BALANCE.hardware.sbc.baseCost),false,false),'sbc');expect(bought.hardwareCounts.calculator).toBe(0);expect(tutorialGuide(bought)?.requirement).not.toContain('Taschenrechner');
+  const s={...newGame(0),intro:{qualityUsed:true,researchUsed:true},story:{...newGame(0).story,target:'research' as const}};expect(tutorialGuide(s)?.requirement).toContain('Kaufe den Einplatinencomputer');const bought=buyHardwareClass(addCreditsScientific(s,ScientificNumber.from(BALANCE.hardware.sbc.baseCost),false,false),'sbc');expect(bought.hardwareCounts.calculator).toBe(0);expect(tutorialGuide(bought)?.requirement).not.toContain('Taschenrechner');
  });
  it('all prices remain strictly increasing',()=>expect(hardwareIds.every((id,i)=>i===0||BALANCE.hardware[id].baseCost>BALANCE.hardware[hardwareIds[i-1]].baseCost)).toBe(true));
 });

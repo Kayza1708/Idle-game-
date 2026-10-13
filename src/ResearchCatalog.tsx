@@ -85,7 +85,7 @@ export function ResearchCatalog({
                           </h3>
                           <small>{isRepeatableResearch(id)?(de?'Wiederholbare Grundlagenforschung':'Repeatable fundamentals'):(de?'Einmaliges Schlüsselprojekt':'One-time key project')}</small><p>{copy.effect}</p>{isRepeatableResearch(id)&&<span className="research-marks" aria-label={de?'Fortschrittsmarken ohne zusätzliche Belohnung':'Progress marks without extra rewards'}>{[5,10,25,50,100].map(mark=><i className={s.researchLevels[id]>=mark?'reached':''} key={mark}>{mark}</i>)}</span>}
                           <small>
-                            <CostBadge name="Data" icon={<ResourceArt id="data"/>} balance={exactEconomyValue(s,'data')} required={q.cost} de={de}/> ·{" "}
+                            {q.intro?<span className="intro-label">{de?'GRATIS':'FREE'}</span>:<CostBadge name="Data" icon={<ResourceArt id="data"/>} balance={exactEconomyValue(s,'data')} required={q.cost} de={de}/>} ·{" "}
                             {(q.duration / 60).toFixed(1)} min
                           </small>
                           {reason && <small>{reason}</small>}
