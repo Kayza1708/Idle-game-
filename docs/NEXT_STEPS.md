@@ -1,3 +1,9 @@
+## Kompakte Kosten und radiales Prestige-Design – 13. Oktober 2026
+
+CostBadge/RecipeIngredient vereinheitlichen Icon + Besitz/Benötigt mit grünem/rotem und zusätzlichem textlichem Status in Hardware, Training, Forschung, Analyse, Crafting und Forge. Rezepte, Mastery, Laborquellen, Diagnose und Notifications öffnen auf Bedarf. Material-/Tutorialnavigation öffnet ihr Disclosure. Prestige: 46 Nodes radial mit echter Abhängigkeitsgeometrie, Pan/Zoom, Einpassen und Zentrieren; Settings/Slots/Karten weiter verdichtet. Keine Domain-/Save-/Balanceänderung. Vertrag: `compact-mobile-design.md`.
+
+1.356 Standardtests grün; nach Kamera-/Revealnacharbeit 28 und 20 gezielte Verträge grün, abschließende Typechecks/Build/Diffcheck grün. Layoutmodell: 115 Mindestabstand bei 88px Nodes, keine Überschneidung/Canvasüberschreitung. Keine echte Pixel-/Touch-/iOS-Abnahme; bereitgestellte Bilder fehlen und Browserinstallation blockiert. Nächster notwendiger Schritt bleibt die vollständige Geräte-/Schriftgrößenmatrix, nicht Release oder Qualitätsfreigabe.
+
 ## Durchgehender Mobile-UI-Umbau – 13. Oktober 2026
 
 Action-Screen mit Pixelhardware statt CSS-Würfel; Sparzielkarten/Nächster-Kauf-Text entfernt. Navigation, Menü als Bottom Sheet, Details, Equipment, Profil, Research-/Inventarbereiche, Missionen/Season, Shop, Return und Story mit gemeinsamer kompakter Gestaltung. Alle 15 Hardwarekaufaktionen bleiben; Forschung/Inventar/Forge/Automation in aufklappbaren Bereichen. Keine Wirtschaft-/Saveänderung. Umfang und Matrix: `mobile-ui-overhaul.md`.

@@ -1,3 +1,6 @@
+import {CostBadge} from './CostBadge';
+import {exactEconomyValue} from './economy';
+import {ResourceArt} from './GameArt';
 import {MaterialBuildAutomation} from './MaterialBuildAutomation';
 import {MaterialFocus} from './ProgressionDetails';
 import { type GameState, type ExperimentId, formatScientific } from "./economy";
@@ -18,7 +21,7 @@ export function AnalysisContracts({
   const de = s.settings.language === "de",
     language = s.settings.language;
   return (
-    <section className="analysis-grid"><MaterialFocus s={s} act={act}/><MaterialBuildAutomation s={s} kind="analysis" act={act}/>
+    <section className="analysis-grid"><details className="system-disclosure"><summary>{de?'Farmziel & Automation':'Farm target & automation'}</summary><MaterialFocus s={s} act={act}/><MaterialBuildAutomation s={s} kind="analysis" act={act}/></details>
       <h2>{de ? "Unabhängiger Analyseslot" : "Independent analysis slot"}</h2>
       {(["hardware", "architecture", "artifact"] as ExperimentId[]).map(
         (id) => (
@@ -57,7 +60,7 @@ export function AnalysisContracts({
                           : "Long contract"}
                     </b>
                     <p>
-                      {formatScientific(q.costExact, 1)} Data {q.dataFactor<1&&<small>{de?'Datenpipeline':'Data pipeline'}: {q.baseCost.data} ×{q.dataFactor}, {de?'aufgerundet':'rounded up'}</small>} ·{" "}
+                      <CostBadge name="Data" icon={<ResourceArt id="data"/>} balance={exactEconomyValue(s,'data')} required={q.costExact} de={de}/> {q.dataFactor<1&&<small>{de?'Datenpipeline':'Data pipeline'}: {q.baseCost.data} ×{q.dataFactor}, {de?'aufgerundet':'rounded up'}</small>} ·{" "}
                       {(q.duration / 60).toFixed(1)} min
                     </p>
                     <p>{de?'Grunddauer':'Base duration'}: {q.baseDuration/60} min · {de?'Grundbelohnungsfaktor':'Base reward factor'}: {q.rewardFactor.toFixed(6)}</p>

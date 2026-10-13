@@ -1,3 +1,6 @@
+import {CostBadge} from './CostBadge';
+import {exactEconomyValue} from './economy';
+import {ResourceArt} from './GameArt';
 import {BonusBoxes} from './BonusBoxPanel';
 import {MaterialBuildAutomation} from './MaterialBuildAutomation';
 import {FoundryDetails,ItemForgeDetails,DeviceDetails,RecoveryDetails} from './ProgressionDetails';
@@ -64,11 +67,11 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
   };
   const moduleLink = (id: ModuleId) => {
     setView("modules");
-    requestAnimationFrame(() =>
-      document
-        .getElementById(`recipe-${id}`)
-        ?.scrollIntoView({ block: "center" }),
-    );
+    requestAnimationFrame(() => {
+      const target=document.getElementById(`recipe-${id}`);
+      target?.closest<HTMLDetailsElement>('details')?.setAttribute('open','');
+      target?.scrollIntoView({block:'nearest'});
+    });
   };
   const effect = (entry: Item) => (
     <ul>
@@ -91,7 +94,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
           ? moduleText(id as ModuleId, language)
           : itemText(id as ItemTypeId, language);
     return (
-      <article id={`recipe-${id}`} className="recipe-card" key={id}>
+      <details className="recipe-disclosure" key={id}><summary>{kind==='item'?<ItemArt type={id as ItemTypeId}/>:<ActivityArt id="workbench"/>}<span>{name}</span><b className={q.affordable?'sufficient':'insufficient'}>{q.affordable?'✓':'›'}</b></summary><article id={`recipe-${id}`} className="recipe-card">
         {kind === "item" ? (
           <ItemArt type={id as ItemTypeId} />
         ) : (
@@ -121,7 +124,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             </p>
           </>
         )}
-        {kind==='item'&&<><BlueprintMasteryDetails s={s} id={id as ItemTypeId} act={act}/><button onClick={()=>act('pin-goal',{kind:'item-craft',id,target:s.craftedItemCounts[id as ItemTypeId]+1})}>{de?'Herstellung anheften':'Pin crafting'}</button></>}
+        {kind==='item'&&<><details className="system-disclosure"><summary>{de?"Bauplan & Mastery":"Blueprint & mastery"}</summary><BlueprintMasteryDetails s={s} id={id as ItemTypeId} act={act}/></details><button onClick={()=>act('pin-goal',{kind:'item-craft',id,target:s.craftedItemCounts[id as ItemTypeId]+1})}>{de?'Herstellung anheften':'Pin crafting'}</button></>}
         {recipe && (
           <>
             <p>
@@ -131,17 +134,11 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               · {recipe.durationPerUnit * recipe.quantity} s
               {kind==="item" && " · Level 0 · Forge 0"}
             </p>
-            {kind==="item" && <section className="recipe-result-effects">
+            {kind==="item" && <details className="recipe-result-effects system-disclosure"><summary>{de?"Effekte":"Effects"}</summary>
               <p>{de?"Common-Effekte nach Ausrüsten":"Common effects when equipped"}</p>
               {effect({id:`preview-${id}`,type:id as ItemTypeId,rarity:recipe.result.rarity!,level:0,forge:0,locked:false})}
-            </section>}
-            <p className="manufacturing-cost">
-              {de?'Herstellungskosten':'Manufacturing costs'}: {formatScientific(
-                ScientificNumber.from(recipe.ingredients.data),
-                1,
-              )}{" "}
-              Data
-            </p>
+            </details>}
+            <div className="manufacturing-cost"><CostBadge name="Data" icon={<ResourceArt id="data"/>} balance={exactEconomyValue(s,'data')} required={recipe.ingredients.data} de={de}/></div>
             <ul className="recipe-ingredients">
               {Object.entries(recipe.ingredients.components).map(([key, n]) => (
                 <RecipeIngredient key={key} name={componentText(key as ComponentId,language).name}
@@ -230,7 +227,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
         >
           {de ? "Herstellen" : "Craft"} ×{quantity}
         </button>
-      </article>
+      </article></details>
     );
   };
   return (

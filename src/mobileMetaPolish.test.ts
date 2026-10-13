@@ -57,7 +57,7 @@ describe('mobile interaction polish',()=>{
   expect(meta).toContain('languages.map');
  });
  it('shows honest disabled notification capabilities',()=>{
-  expect(meta).toContain('className="notification-settings"');
+  expect(meta).toContain('className="notification-settings system-disclosure"');
   expect(meta).toContain('Native Benachrichtigungen sind in dieser Beta noch nicht integriert.');
   expect(meta).toContain('type="checkbox" disabled aria-disabled="true"');
  });
