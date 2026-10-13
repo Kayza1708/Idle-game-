@@ -1,0 +1,30 @@
+/** Small, repo-owned SVG icons. Artwork/illustrations remain separate PNG assets. */
+export const iconPaths={
+ tap:'M7 4v21l6-6 5 9 4-2-5-9h9Z',credits:'M23 8c-8-7-18 1-13 8 3 4 13 0 13 6 0 5-11 7-16 2M16 3v26',
+ data:'M6 4h20v24H6ZM10 10h12M10 16h12M10 22h8',compute:'M9 9h14v14H9ZM4 11h5M4 21h5M23 11h5M23 21h5M11 4v5M21 4v5M11 23v5M21 23v5',
+ hardware:'M5 6h22v15H5ZM10 27h12M16 21v6M9 10h14',research:'M12 4h8M14 4v9L6 25q-1 3 3 3h14q4 0 3-3l-8-12V4M10 20h12',
+ training:'M4 25l8-8 6 4 10-15M20 6h8v8',analysis:'M22 22l7 7M25 14a11 11 0 1 1-22 0 11 11 0 0 1 22 0M8 14h12M14 8v12',
+ components:'M5 9h22v18H5ZM9 5v4M16 5v4M23 5v4M9 27v3M16 27v3M23 27v3M10 14h12v8H10Z',craft:'M5 25l14-14M18 5l9 9-5 5-9-9ZM3 28h11',
+ item:'M16 3l12 7v14l-12 7L4 24V10ZM4 10l12 7 12-7M16 17v14',prestige:'M25 11A11 11 0 1 0 27 20M25 4v7h-7M12 12l8 8M20 12l-8 8',
+ time:'M28 16a12 12 0 1 1-24 0 12 12 0 0 1 24 0M16 7v10l6 4',season:'M16 3l4 8 9 1-7 7 2 9-8-4-8 4 2-9-7-7 9-1Z',
+ challenge:'M6 4v25M6 5h20l-5 6 5 6H6',profile:'M22 10a6 6 0 1 1-12 0 6 6 0 0 1 12 0M5 29v-4q0-8 11-8t11 8v4',gem:'M4 11l6-7h12l6 7-12 18ZM4 11h24M10 4l6 25 6-25',
+ box:'M4 10l12-6 12 6v17H4ZM4 10h24M16 4v23M12 16h8',lock:'M8 14V9a8 8 0 0 1 16 0v5M5 14h22v16H5ZM16 20v5',plus:'M16 5v22M5 16h22',
+ capacitor:'M12 5v22M20 5v22M4 16h8M20 16h8',ferrite:'M16 4a12 12 0 1 1 0 24 12 12 0 0 1 0-24M16 10a6 6 0 1 0 0 12 6 6 0 0 0 0-12M4 16h6M22 16h6',
+ contacts:'M6 7h20v14H6ZM8 21v7M13 21v7M19 21v7M24 21v7M11 12h10',substrate:'M4 9l12-5 12 5-12 5ZM4 16l12 5 12-5M4 23l12 5 12-5',
+ fiber:'M4 26Q12 4 28 6M4 22Q12 0 28 2M4 30Q12 8 28 10M22 1v10',thermal:'M5 24h22v5H5ZM9 20c-6-5 6-6 0-11M16 20c-6-5 6-6 0-11M23 20c-6-5 6-6 0-11',
+ diamond:'M16 3l13 12-13 14L3 15ZM3 15h26M16 3l-5 12 5 14 5-14Z',spin:'M4 10h24v12H4ZM8 16h7M12 12l4 4-4 4M24 16h-7M20 12l-4 4 4 4',
+ photonics:'M4 16h24M8 11v10M14 8v16M20 11v10M23 4l5 4-5 4M23 20l5 4-5 4',cryo:'M16 3v26M5 9l22 14M5 23L27 9M12 6l4 4 4-4M12 26l4-4 4 4M4 13l6-1-1-6M23 26l-1-6 6-1',
+ memristor:'M5 5h22v22H5ZM5 12h22M5 20h22M12 5v22M20 5v22M8 8l2 2M15 15l2 2M23 23l2 2',
+ relay:'M4 8h8v16H4ZM20 8h8v16h-8ZM12 16h4l3-7M16 24v-8M16 4v3',archive:'M5 5h22v6H5ZM7 11v17h18V11M12 16h8M12 21h8',
+ router:'M4 5h8v7H4ZM20 5h8v7h-8ZM12 23h8v7h-8ZM8 12v6h16v-6M16 18v5',burst:'M18 3L7 18h8l-1 11 11-16h-8Z',legacy:'M4 6h14v20H4ZM8 10h6M8 16h6M8 22h6M22 10h6v16h-6ZM18 20h4',
+ sparse:'M5 5h6v6H5ZM21 5h6v6h-6ZM13 21h6v6h-6ZM11 8h10M8 11l8 10M24 11l-8 10',quantum:'M26 16a10 5 0 1 1-20 0 10 5 0 0 1 20 0M16 6a5 10 0 1 1 0 20 5 10 0 0 1 0-20M14 14h4v4h-4Z',
+ distill:'M5 5h22l-9 12v11h-4V17ZM9 11h14',curriculum:'M4 6h10l2 3 2-3h10v20H18l-2 3-2-3H4ZM16 9v20M8 12h4M20 12h4M8 18h4M20 18h4',
+ memory:'M6 8h20v16H6ZM10 12h12v8H10ZM4 4v24M28 4v24M10 24v5M16 24v5M22 24v5',manufacturing:'M4 28V14l8 5V9l8 10V4h8v24ZM8 23h3M16 23h3M24 23h2',
+ diagnostic:'M4 5h24v22H4ZM7 18h5l3-9 4 15 3-6h3',recycling:'M13 4h10l5 9M23 6l5 7-8 1M28 18l-5 9H12M24 24l-12 3 4-8M7 27l-5-9 5-9M4 18l3-9 5 8',
+ photonicAnalyzer:'M4 10h15M7 5v10M13 3v14M25 21a6 6 0 1 1-12 0 6 6 0 0 1 12 0M24 25l5 5',
+ quantumDiagnostic:'M24 12a9 5 0 1 1-18 0 9 5 0 0 1 18 0M15 3a5 9 0 1 1 0 18 5 9 0 0 1 0-18M4 27h8l3-5 3 8 3-3h7',
+ blueprintArchive:'M5 4h22v24H5ZM9 8h14v16H9ZM12 12h8v8h-8ZM5 10h4M23 18h4',
+ protocol:'M4 5h8v8H4ZM20 5h8v8h-8ZM12 23h8v7h-8ZM12 9h8M8 13v6h16v-6M16 19v4M23 8l2 2',drone:'M10 12h12v12H10ZM4 4h6v6H4ZM22 4h6v6h-6ZM4 24h6v6H4ZM22 24h6v6h-6ZM7 10l3 4M25 10l-3 4M7 24l3-4M25 24l-3-4',
+} as const;
+export type VectorIconName=keyof typeof iconPaths;
+export function VectorIcon({name}:{name:VectorIconName}){return <svg className="vector-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d={iconPaths[name]}/></svg>}

@@ -1,0 +1,19 @@
+import {describe,it,expect} from 'vitest';
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {BALANCE,componentIds,hardwareIds,itemTypes,type ItemTypeId,type PrestigeUpgradeId} from './economy';
+import {ComponentArt,ItemArt,HardwareArt,PrestigeArt,componentCells,itemV1Cells,itemV2Cells,prestigeCells} from './GameArt';
+import {materialIcons,deviceIcons,prestigeIcon} from './artIconCatalog';
+import {VectorIcon,iconPaths} from './VectorIcon';
+import {PixelIcon} from './PixelIcon';
+const render=(component:any,props:any)=>renderToStaticMarkup(createElement(component,props));
+describe('real atlas coverage and SVG fallback motifs',()=>{
+ it('keeps all 15 existing hardware sprite mappings',()=>{for(const id of hardwareIds){const html=render(HardwareArt,{id});expect(html).toContain('atlas-sprite');expect(html).not.toContain('<svg')}});
+ it('covers all 20 actual material IDs with a mapped raster or specific vector motif',()=>{expect(componentIds).toHaveLength(20);for(const id of componentIds){expect(materialIcons[id]||componentCells[id]).toBeTruthy();const html=render(ComponentArt,{id});expect(html).not.toContain('neutral-material-art');expect(html).not.toContain('⬡');expect(html).toContain('aria-hidden="true"')}});
+ it('replaces the inaccurate crystal with a memristor-array icon while retaining the nine matching old motifs',()=>{expect(materialIcons.neuralCrystals).toBe('memristor');expect(Object.keys(materialIcons)).toHaveLength(11);expect(render(ComponentArt,{id:'neuralCrystals'})).toContain('<svg');expect(render(ComponentArt,{id:'quantumCores'})).toContain('atlas-sprite')});
+ it('covers all 30 items and keeps all nine matching old item artworks',()=>{const ids=Object.keys(itemTypes) as ItemTypeId[];expect(ids).toHaveLength(30);expect(Object.keys(deviceIcons)).toHaveLength(21);for(const type of ids){expect(deviceIcons[type]||itemV2Cells[type]||itemV1Cells[type]).toBeTruthy();const html=render(ItemArt,{type});expect(html).not.toContain('neutral-device-art');expect(html).not.toContain('◇')}expect(render(ItemArt,{type:'lab-drone'})).toContain('item-art-v1');expect(render(ItemArt,{type:'quantum-chip'})).toContain('item-art-v2')});
+ it('gives every new/special device a different silhouette instead of one generic diamond',()=>{const motifs=Object.values(deviceIcons);expect(new Set(motifs).size).toBe(motifs.length);for(const motif of motifs)expect(iconPaths[motif]).toBeTruthy()});
+ it('uses existing early prestige motifs and semantic branch/special icons for every later node',()=>{for(const id of Object.keys(BALANCE.prestigeUpgrades) as PrestigeUpgradeId[]){expect(iconPaths[prestigeIcon(id)]).toBeTruthy();const html=render(PrestigeArt,{id});expect(html.includes('<svg')).toBe(!prestigeCells[id]);}expect(prestigeIcon('trainingPlan')).toBe('training');expect(prestigeIcon('shoppingAgent')).toBe('hardware')});
+ it('keeps decorative icons hidden and explicitly named UI icons accessible without font glyphs',()=>{const named=render(PixelIcon,{name:'box',label:'Bonuskiste'}),decorative=render(PixelIcon,{name:'box'});expect(named).toContain('role="img"');expect(named).toContain('aria-label="Bonuskiste"');expect(decorative).toContain('aria-hidden="true"');expect(named).toContain('<svg');expect(named).not.toContain('▣')});
+ it('provides static currentColor SVGs without animations, external images or interactive targets',()=>{for(const name of Object.keys(iconPaths)){const html=render(VectorIcon,{name});expect(html).toContain('viewBox="0 0 32 32"');expect(html).toContain('currentColor');expect(html).toContain('focusable="false"');expect(html).not.toMatch(/<animate|<image|href=/)}});
+});

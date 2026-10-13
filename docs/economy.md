@@ -599,3 +599,9 @@ Neue Perioden: eine Produktionsaufgabe pro Metric; Mindestband 0/2/2, Bandvorgri
 Der Photonenfeld-Bauplan kostet nun **4 statt 6 Fragmente**. Der unveränderte einmalige Vier-Fragment-Receipt aus bezahlter Blueprints-Forschung ermöglicht damit Chip **oder** Trainingitem, nicht beide. Zutaten, 1.200 Data, Compute-Bus, 900s Fertigung sowie spätere Rezepte bleiben unverändert; keine alten Zahlungen zurückrechnen. Natürliche Gegenmessung und offene Langzeitgrenzen: `build-equipment-integration.md`.
 
 Ausrüstungseffekte verwenden einheitlich Eigentum, richtige Kategorie und erworbenen Kategorieplatz. Gesperrte historische Referenzen bleiben erhalten, liefern bis zum regulären Erwerb jedoch keine Effekte. Neue Forschung friert ihre Faktoren beim Start ein; alte Jobs/Income/INT werden nicht neu bewertet. Die Vorschau zeigt tatsächliche Training-Datazahlungen und Laborfaktoren, keine fiktive Trainingsbeschleunigung.
+
+## Tagesbonuskisten — 12. Oktober 2026
+
+Der Tagesbonus ersetzt sein sofortiges Materialpaket durch eine gespeicherte Kiste. Pakete/Gems/Season-XP behalten ihre Mengen; beim Öffnen ist eine bereits beim Verdienen zugängliche Familie wählbar. Die bestehende 1%-Bauplanchance wird beim Verdienen eingefroren (Discovery, kein Gratislernen; bekannter Treffer → Fragment). Kein neuer Preis oder Hardwaregate.
+
+Neue Grenzen in BALANCE: 32 Pendingkisten, höchstens 1.000 Einheiten pro eingefrorenem Komponentenbetrag als Savevertragsgrenze. Ein neues Overflowreceipt wird mit der höchsten gespeicherten Familie automatisch geöffnet; unsicherer Ganzzahlgrant lässt Receipt bzw. den kompletten Overflowbonusclaim unverändert. Save52/Reset-/Challenge-/Migrationsvertrag: `bonus-box-flow.md`. Natürliche Langzeitwirkung ist unkalibriert.
