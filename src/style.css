@@ -692,3 +692,6 @@ html[data-native-platform] body{padding:0}
 .bonus-box-card { border:1px solid var(--border,#344153); border-radius:12px; padding:12px; margin-block:12px; min-width:0; }
 .bonus-box-card h3,.bonus-box-card p { margin-block:6px; overflow-wrap:anywhere; }
 .bonus-box-card button { display:block; width:100%; min-height:44px; margin-block:6px; white-space:normal; overflow-wrap:anywhere; }
+
+.return-current p { overflow-wrap:anywhere; }
+.return-guidance button { display:block; width:100%; min-height:44px; margin-block:6px; white-space:normal; overflow-wrap:anywhere; }

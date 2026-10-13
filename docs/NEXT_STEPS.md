@@ -1,3 +1,11 @@
+## Rückkehr- und Freischaltungsführung verbessert – 13. Oktober 2026
+
+Rückkehrbericht trennt Bruttoerzeugung von aktuellem Ledgerbestand, zeigt echte Autobuyereinheiten und respektiert die Zahlenformatierung. Höchstens zwei aktuelle Wege zu Pendingkisten, erworbenem leerem Ausrüstungsslot, Trainingsplan, bezahlbarer Forschung oder realem Forschungszugang. Keine automatische Auswahl/Käufe/Starts, keine neue Hauptscreen-Karte. Rewards führen direkt zu Missionen/Season; überlagernde Menüs werden geschlossen. Kistenbeleg zeigt lokalisierte Namen statt Objektcoercion. Vertrag: `return-unlock-guidance.md`.
+
+Lokale Abnahme: 1.338 Standardtests, zehn neue Domain-/Renderverträge, Typecheck, Build und Diffcheck grün. Keine Balance-/Save-/Rewardänderung. Mobile Browserabnahme konkret blockiert: keine lokale Browserdatei, offizieller Download kein gültiges ZIP, Cloud-Browser erreicht lokalen Server nicht. Deshalb keine 360/390/430px-, Fokus- oder Gerätefreigabe behauptet.
+
+Separater Aufbau auf dem offenen Bonuskisten-PR #95; Vorgängerbranches unverändert. Nächste Abnahme: die dokumentierte mobile Flowmatrix in einer Umgebung mit Browserzugang prüfen. Midgame-/Langzeitbalance sowie native Geräte-, Monetarisierungs-/Analytics- und Storeintegration bleiben V1-Arbeit.
+
 ## Bonuskisten als echter Ablauf integriert – 12. Oktober 2026
 
 Tagesbonus verdient eine Kiste statt seines sofortigen Materialpakets; Gems/200 XP unverändert. Familie und 1%-Blueprintwurf werden beim Verdienen eingefroren, beim Öffnen einmalig gebucht. Inventarkarte mit Empfangsbeleg und Tagesbonus-Verweis in sieben Sprachen; kein Login-/Timer-/SDKgenerator. Höchstens 32 Pendingkisten, neuer Overflow automatisch geöffnet; unsicherer Ganzzahlgrant rollt den kompletten Overflowbonus zurück. Save v52, leere Legacy-Migration ohne Nachzahlungen, Prestige/Axiom erhalten Kisten, Challenges getrennt/blockiert. Audit/Savepfad aktualisiert. Vertrag: `bonus-box-flow.md`.
