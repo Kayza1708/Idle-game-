@@ -1,3 +1,9 @@
+## Konkretes Mobile-Feedback korrigiert – 13. Oktober 2026
+
+Hardware wieder Preis-only, Laborhintergrund statt aktueller Hardware, Tutorial als Portal mit neuer Begrenzung. Komponenten als Bild/Menge ohne Reservierungszeile/Rahmen; Null-Zutaten ausgeblendet. Menü als Liste, Settings mit festen Feld-/Slidergrößen. Shopkategorien und vollständige Bestätigung im gemeinsamen Detailblatt, Info auch bei blockiertem Kauf erreichbar. Keine Domain-/Save-/Balancingänderung. Vertrag: `mobile-feedback-fixes.md`.
+
+1.361 Tests, Source-Path-Check, Typecheck, Build und Diffcheck grün. Browser-/iOS-Sichtabnahme weiterhin offen, keine tatsächliche Tutorial-/Touchgeometrie gemessen. Nächster notwendiger Schritt: dokumentierte niedrige-Viewport-, Tutorial-/Trainingsblatt-, große-Preis- und Settings-/Shopmatrix; kein Release und kein automatischer Merge.
+
 ## Kompakte Kosten und radiales Prestige-Design – 13. Oktober 2026
 
 CostBadge/RecipeIngredient vereinheitlichen Icon + Besitz/Benötigt mit grünem/rotem und zusätzlichem textlichem Status in Hardware, Training, Forschung, Analyse, Crafting und Forge. Rezepte, Mastery, Laborquellen, Diagnose und Notifications öffnen auf Bedarf. Material-/Tutorialnavigation öffnet ihr Disclosure. Prestige: 46 Nodes radial mit echter Abhängigkeitsgeometrie, Pan/Zoom, Einpassen und Zentrieren; Settings/Slots/Karten weiter verdichtet. Keine Domain-/Save-/Balanceänderung. Vertrag: `compact-mobile-design.md`.

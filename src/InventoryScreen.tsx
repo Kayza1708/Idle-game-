@@ -140,13 +140,13 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             </details>}
             <div className="manufacturing-cost"><CostBadge name="Data" icon={<ResourceArt id="data"/>} balance={exactEconomyValue(s,'data')} required={recipe.ingredients.data} de={de}/></div>
             <ul className="recipe-ingredients">
-              {Object.entries(recipe.ingredients.components).map(([key, n]) => (
+              {Object.entries(recipe.ingredients.components).filter(([,n])=>Number(n)>0).map(([key, n]) => (
                 <RecipeIngredient key={key} name={componentText(key as ComponentId,language).name}
                   icon={<ComponentArt id={key as ComponentId}/>} balance={s.componentInventory[key as ComponentId]}
                   required={n??0} missing={q.missingComponents[key as ComponentId]??0} de={de}
                   onClick={()=>setComponent(key as ComponentId)}/>
               ))}
-              {Object.entries(recipe.ingredients.modules).map(([key, n]) => (
+              {Object.entries(recipe.ingredients.modules).filter(([,n])=>Number(n)>0).map(([key, n]) => (
                 <RecipeIngredient key={key} name={moduleText(key as ModuleId,language)}
                   icon={<ActivityArt id="workbench"/>} balance={s.modules[key as ModuleId]}
                   required={n??0} missing={q.missingModules[key as ModuleId]??0} de={de}
@@ -281,21 +281,13 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               <button
                 className="component-tile"
                 key={id}
+                aria-label={`${componentText(id,language).name} ×${s.componentInventory[id]}`}
                 onClick={() => setComponent(id)}
               >
                 <ComponentArt id={id} />
                 <strong>×{s.componentInventory[id]}</strong>
-                <span>{componentText(id, language).name}</span>
-                <small>
-                  {de ? "Reserviert" : "Reserved"}:{" "}
-                  {jobs.reduce(
-                    (n, j) =>
-                      n +
-                      ((j!.ingredients.components[id] ?? 0) / j!.quantity) *
-                        (j!.quantity - j!.completed),
-                    0,
-                  )}
-                </small>
+                <span className="component-name">{componentText(id, language).name}</span>
+
               </button>
             ))}
           </section>
