@@ -39,9 +39,9 @@ describe('prestige tree presentation contract',()=>{
     expect(buyNode(funded,id)).toBe(funded);
   });
 
-  it('places the independent entry unlocks directly below the core',()=>{
+  it('places independent entry unlocks on distinct first-ring positions',()=>{
     const entry=['shoppingAgent','trainingPlan','componentScanner'] as const;
     expect(entry.map(id=>BALANCE.prestigeUpgrades[id].requires)).toEqual([[],[],[]]);
-    expect(new Set(entry.map(id=>prestigeLayout[id].y))).toEqual(new Set([160]));
+    expect(new Set(entry.map(id=>JSON.stringify(prestigeLayout[id]))).size).toBe(3);
   });
 });

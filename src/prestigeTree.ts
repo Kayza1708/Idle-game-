@@ -4,18 +4,24 @@ import {prestigeGate} from './retention';
 export type PrestigeNodeState='locked'|'ready'|'affordable'|'owned';
 export type PrestigePoint={x:number;y:number};
 
-export const PRESTIGE_CANVAS={width:1120,height:1160,nodeWidth:112,nodeHeight:92,core:{x:560,y:48}} as const;
-
-const branchX=[80,310,560,810,1040] as const;
-const specialX:Partial<Record<PrestigeUpgradeId,number>>={shoppingAgent:430,trainingPlan:560,componentScanner:690,milestoneMemory:920,modelSynthesis:920,researchArchive:920};
-
-/** One deterministic register is shared by rendering and connector geometry. */
-export const prestigeLayout=Object.fromEntries((Object.keys(BALANCE.prestigeUpgrades) as PrestigeUpgradeId[]).map(id=>{
-  const node=BALANCE.prestigeUpgrades[id];
-  const special=specialX[id];
-  const yieldNode=node.branch===5;
-  return [id,{x:special??branchX[node.branch as 0|1|2|3|4],y:yieldNode?160+(node.depth-1)*116:special?160:300+(node.depth-1)*116}];
+const ids=Object.keys(BALANCE.prestigeUpgrades) as PrestigeUpgradeId[];
+const maximumDepth=Math.max(...ids.map(id=>BALANCE.prestigeUpgrades[id].depth));
+const extent=320+maximumDepth*115+100;
+export const PRESTIGE_CANVAS={width:extent*2,height:extent*2,nodeWidth:88,nodeHeight:88,core:{x:extent,y:extent}};
+/** Six radial sectors. Shared positions drive nodes and actual prerequisite links. */
+export const prestigeLayout=Object.fromEntries(ids.map(id=>{
+ const node=BALANCE.prestigeUpgrades[id];
+ if(node.branch>=6){const specials=ids.filter(other=>BALANCE.prestigeUpgrades[other].branch>=6),angle=(-60+specials.indexOf(id)*360/specials.length)*Math.PI/180;return [id,{x:extent+Math.cos(angle)*160,y:extent+Math.sin(angle)*160}];}
+ const peers=ids.filter(other=>BALANCE.prestigeUpgrades[other].branch===node.branch&&BALANCE.prestigeUpgrades[other].depth===node.depth),index=peers.indexOf(id);
+ const offset=peers.length>1?(index/(peers.length-1)-.5)*44:0;
+ const angle=(-90+node.branch*60+offset)*Math.PI/180,radius=280+(node.depth-1)*115;
+ return [id,{x:extent+Math.cos(angle)*radius,y:extent+Math.sin(angle)*radius}];
 })) as Record<PrestigeUpgradeId,PrestigePoint>;
+export const prestigeMapScale=(value:number)=>Math.max(.1,Math.min(1.5,value));
+export function prestigeConnector(from:PrestigePoint,to:PrestigePoint){
+ const distance=Math.hypot(to.x-from.x,to.y-from.y),inset=Math.min(PRESTIGE_CANVAS.nodeWidth/2,distance/3),ux=(to.x-from.x)/(distance||1),uy=(to.y-from.y)/(distance||1);
+ return `M ${from.x+ux*inset} ${from.y+uy*inset} L ${to.x-ux*inset} ${to.y-uy*inset}`;
+}
 
 export function validatePrestigeCatalog(){
   const ids=new Set(Object.keys(BALANCE.prestigeUpgrades) as PrestigeUpgradeId[]),unknown:string[]=[];
