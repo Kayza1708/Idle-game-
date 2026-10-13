@@ -48,11 +48,6 @@ export function ResearchCatalog({
           return (
             <details className="research-area-group" data-research-area={area} key={area} open={ids.some(id=>['dataGeneration','modelArchitecture','blueprints'].includes(id)||s.researchLabs.some(lab=>lab?.id===id))}>
               <summary>{researchAreaText(area, language).name}</summary>
-              {(s.researchAccessIds.some(id=>ids.includes(id))||ids.some(id=>researchAccess(s,id).node&&researchAccess(s,id).allowed)) && (
-                <small>
-                  {de ? "Dauerhaft freigeschaltet" : "Permanently unlocked"}
-                </small>
-              )}
               <div className="research-projects">
                 {ids
                   .filter((id) => researchAccess(s,id).allowed && !researchPreview(s, id)!.done)

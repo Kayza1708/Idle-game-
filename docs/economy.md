@@ -1,3 +1,15 @@
+## 2026-10-13 · KI-Kapselautomat (vorläufige Balance)
+
+Alle Parameter stehen in `BALANCE.capsuleMachine`: 10 Gems pro Zug, exakt 1% Item / 99% Komponenten, keine Pity. Komponenten werden aus der zugänglichen World-Tabelle gewählt: bedingte Chance ≥10% → 3–12, ≥1% bis <10% → 2–5, darunter → 1–2; die Menge ist jeweils gleichverteilt. Erwartungswert einer Komponentensorte mit bedingter Chance p und Mengenintervall [a,b] pro Zug: `0.99 × p × (a+b)/2`. Bestehende Seltenheitschancen gelten innerhalb des 1%-Itempools; alle zugänglichen Itemtypen haben gleiche Chance. Sonderitems bleiben ausgeschlossen, erweiterte Items erfordern ihre bisherigen Bauplan-/Zugangsgates.
+
+Freischaltung nach erstem Prestige, kein Zug in Challenges. Gems und Beute werden atomar gebucht; Wiederholen einer gespeicherten Draw-ID zahlt nichts doppelt. Bestand und Quittung bleiben über beide Resets, Challenges starten leer und stellen den Hauptstand wieder her. `BALANCE.adLimits.capsule=6` zählt nur erfolgreich abgeschlossene, eindeutige Video-Transaktionen. Ohne echten Anbieter ist Video deaktiviert. Preis, Mengen und Limit sind neue, **noch nicht langfristig kalibrierte** Designannahmen; übrige Produktions-/Kosten-/Zeitformeln bleiben unverändert. Vertrag und Abnahmelücken: `pixel-capsule-ui.md`.
+
+## 2026-10-13 · Datenvertrag für normale Prestiges
+
+Ab diesem Stand bleibt **das ungenutzte Datenguthaben bei normalem Prestige erhalten**, einschließlich `exactEconomy.data` oberhalb des nativen Zahlenbereichs. Die Preview führt Daten unter `kept` und nicht unter `reset`. Start-Credits, Hardware, Modelllevel und Jobabbruch bleiben unverändert. Bereits bezahltes Training und Analysen werden weiterhin ohne Erstattung beendet; Forschung, Crafting und Forge behalten ihre gespeicherten Verträge. Axiom-Reset löscht Daten weiterhin ausdrücklich; neue Challenges starten ohne Hauptspiel-Daten.
+
+Keine Produktion, Preise, Zeitkurven oder Effekthöhen wurden angepasst. Die Beschleunigung nach einem Prestige durch behaltene Daten ist eine beabsichtigte Vertragsänderung; ihre Langzeitbalance wurde hier nicht neu kalibriert. Keine nachträgliche Gutschrift historisch gelöschter Daten und keine Save-Schemaänderung. Die natürliche Fortschrittsmessung verbucht nur den tatsächlichen Vorher-minus-Nachher-Verlust in der Resetbilanz, keine pauschale Löschung mehr.
+
 ## Einmalige Forschung→Crafting-Brücke – 12. Oktober 2026
 
 `BALANCE.firstBlueprintResearchFragments = 4`: Der erste tatsächlich bezahlte Hauptspielabschluss von `blueprints` vergibt vier vorhandene Bauplanfragmente. Dauerhafter Save-v49-Nachweis (`unearned` → `pending` → `consumed`), kein zweiter Grant bei Prestige/Axiom/Reload/Challenge. Bereits abgeschlossene Altprojekte bekommen keine nachträgliche Gutschrift; bezahlte noch laufende Altprojekte bleiben berechtigt. Sicherer Ganzzahlbestand: bei fehlender Kapazität bleibt die ganze Auszahlung pending bis nach einem Verbrauch.

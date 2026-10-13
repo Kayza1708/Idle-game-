@@ -16,7 +16,7 @@ describe('mobile gameplay shell and information architecture',()=>{
   expect(css).toMatch(/\.workshop-scroll\{[^}]*min-height:0[^}]*overflow-y:auto/);
  });
  it('uses a compact decorative lab background instead of a hardware object',()=>{
-  expect(panels).toContain('early-lab-pixel-art.png');
+  expect(panels).toContain('pixel-lab-console.svg');
   expect(panels).not.toContain('className="core-machine"');
   expect(css).toMatch(/\.core-hero \.tap-surface\{[^}]*height:214px/);
   expect(css).toContain('repeating-radial-gradient');
@@ -25,7 +25,7 @@ describe('mobile gameplay shell and information architecture',()=>{
   const workshop=panels.slice(panels.indexOf('export function Workshop'),panels.indexOf('export function Research'));
   expect(workshop).not.toContain('next-goal-onboarding');
   expect(workshop).not.toContain('className="card quest"');
-  expect(tutorial).toContain('className="tutorial-helper"');
+  expect(tutorial).toContain('className="tutorial-helper mira-stage"');
  });
  it('offers only the next locked laboratory inline with its existing price',()=>{
   expect(panels).toContain('data-lab-unlock="next"');

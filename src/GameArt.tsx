@@ -33,3 +33,5 @@ export function GemAmount({value,className='' }:{value:string|number;className?:
 export function ComponentArt({id}:{id:ComponentId}){const cell=materialExtensionCells[id];return <span className={`atlas-sprite component-art${cell?' component-art-extension':''}`} data-art-id={id} style={cellStyle(cell??componentCells[id]!,cell?{columns:4,rows:3}:{columns:5,rows:2})} aria-hidden="true"/>}
 export function MetaArt({id}:{id:MetaArtId}){return <span className="atlas-sprite meta-art" style={cellStyle(metaCells[id],{columns:3,rows:2})} aria-hidden="true"/>}
 export function ActivityArt({id}:{id:ActivityArtId}){return <span className="atlas-sprite activity-art" style={cellStyle(activityCells[id],{columns:3,rows:2})} aria-hidden="true"/>}
+
+export function FoundryArt({index}:{index:0|1|2}){return <span className="atlas-sprite foundry-art" data-art-id={`foundry-${index+1}`} style={cellStyle([index,0],{columns:3,rows:1})} aria-hidden="true"/>}
