@@ -1,0 +1,22 @@
+import {describe,it,expect} from 'vitest';
+import {newGame,addData,addCredits,buyHardwareClass,type GameState} from './economy';
+import {returnGuidance} from './returnGuidance';
+import {createItem} from './inventory';
+import {returnText} from './returnText';
+import {claimMissionBonus,rollPeriods} from './missions';
+import {openBonusBox} from './bonusBoxes';
+import {BonusBoxes} from './BonusBoxes';
+import {componentText} from './gameplayI18n';
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+const base=()=>buyHardwareClass(addCredits(newGame(0),1e6),'calculator');
+describe('return navigation without rewards or hidden unlocks',()=>{
+ it('does not mutate stocks, start jobs or recommend unaffordable research/training',()=>{const s=newGame(0),before=JSON.stringify(s);expect(returnGuidance(s)).toEqual([]);expect(JSON.stringify(s)).toBe(before)});
+ it('offers actual affordable idle training and accessible research without pretending either started',()=>{const s=addData(base(),10000),actions=returnGuidance(s);expect(actions).toContainEqual({kind:'training'});expect(actions.some(a=>a.kind==='research')).toBe(true);expect(s.activeTraining).toBeNull();expect(s.researchLabs.every(x=>x===null)).toBe(true)});
+ it('offers an acquired empty queue rather than duplicating training and hides it when full',()=>{const s={...base(),prestigeCount:1,nodes:['trainingPlan'],trainingQueue:[]};expect(returnGuidance(s)[0]).toEqual({kind:'queue'});expect(returnGuidance({...s,trainingQueue:[{track:'quality',targetLevel:1},{track:'efficiency',targetLevel:1}]} as GameState).some(x=>x.kind==='queue'||x.kind==='training')).toBe(false)});
+ it('does not offer locked, incompatible or already occupied equipment categories',()=>{let s=createItem({...base(),prestigeCount:1},'lab-drone','common');expect(returnGuidance(s).some(a=>a.kind==='equipment')).toBe(false);s={...s,unlockedEquipmentSlots:3};expect(returnGuidance(s)[0]).toEqual({kind:'equipment'});s={...s,equipped:{research:s.inventory[0].id}};expect(returnGuidance(s).some(a=>a.kind==='equipment')).toBe(false)});
+ it('limits links, prioritizes pending boxes and suppresses main suggestions during challenges',()=>{const s=base(),boxes={...s,bonusBoxes:{...s.bonusBoxes,pending:[{id:1,at:0,choices:[{family:'base' as const,amount:12}],blueprint:null}],earned:1}};expect(returnGuidance(boxes)[0]).toEqual({kind:'boxes'});expect(returnGuidance(addData({...boxes,nodes:['trainingPlan'],prestigeCount:1},10000))).toHaveLength(2);expect(returnGuidance({...boxes,retention:{...boxes.retention,activeRun:{id:'no-items'} as never}})).toEqual([])});
+ it('routes to a real next research node only after prestige when no immediate project can start',()=>{const s={...newGame(0),prestigeCount:1};expect(returnGuidance(s)).toContainEqual({kind:'unlock',node:'dataArchive1'});expect(returnGuidance(newGame(0)).some(a=>a.kind==='unlock')).toBe(false)});
+ it('has readable new guidance text in all seven languages',()=>{expect(Object.keys(returnText)).toHaveLength(7);for(const copy of Object.values(returnText))for(const text of Object.values(copy))expect(text.length).toBeGreaterThan(2)});
+ it('renders actual component names in bonus receipts instead of object coercion',()=>{const start=rollPeriods(base(),0),s={...start,lifetime:{...start.lifetime,taps:10},missions:{...start.missions,daily:{...start.missions.daily,required:1,tasks:[{id:'receipt',metric:'taps' as const,baseline:0,goal:1,reward:1,de:'Test',en:'Test',claimed:false}]}}};const earned=claimMissionBonus(s,'daily'),opened=openBonusBox(earned,earned.bonusBoxes.pending[0].id,'base');for(const language of Object.keys(returnText) as (keyof typeof returnText)[]){const localized={...opened,settings:{...opened.settings,language}},html=renderToStaticMarkup(createElement(BonusBoxes,{s:localized,act:()=>{}}));expect(html).toContain(componentText('circuits',language).name);expect(html).not.toContain('[object Object]')}});
+});

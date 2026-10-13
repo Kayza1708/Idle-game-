@@ -1,3 +1,27 @@
+## Assetprüfung und Icons – 13. Oktober 2026
+
+21 Items und elf Materialien nutzen eigene SVG-Motive statt gemeinsamer Platzhalter oder des unpassenden Memristorkristalls. Navigation, Kisten, Equipmentslots und spätere Prestigezweige verwenden semantische SVGs. Passende PNG-Zuordnungen bleiben erhalten. Konkreter Grafikauftrag: `artwork-commission.md`; reproduzierbare Übersicht: `icon-preview.svg` / `scripts/artwork-icon-preview.ts`.
+
+1.346 Tests einschließlich acht neuer Iconverträge, Typecheck und Build bestanden. Mobile Browser-/Geräteabnahme weiterhin offen; keine neue Wirtschaftskalibrierung. Vite meldet weiterhin den großen Hauptbundle. Nächster Assetblock: 32 beauftragte Einzelillustrationen abnehmen und exakt nach ID zuordnen; Schmieden/Hintergründe erst nach definierter UI-Bildfläche. V1-Geräteprüfung und Langzeitbalance bleiben offen.
+
+Mergekorrektur: #95 wurde in den Vorgängerbranch, #96 in den Kistenbranch gemergt; main enthält sie noch nicht. Dieser Arbeitsbranch integriert ihren gemeinsamen Stand f5ca8d6 mit main 2872b03 und den Icons. Kein automatischer main-Merge, kein Release, Vorgängerbranches unverändert.
+
+## Rückkehr- und Freischaltungsführung verbessert – 13. Oktober 2026
+
+Rückkehrbericht trennt Bruttoerzeugung von aktuellem Ledgerbestand, zeigt echte Autobuyereinheiten und respektiert die Zahlenformatierung. Höchstens zwei aktuelle Wege zu Pendingkisten, erworbenem leerem Ausrüstungsslot, Trainingsplan, bezahlbarer Forschung oder realem Forschungszugang. Keine automatische Auswahl/Käufe/Starts, keine neue Hauptscreen-Karte. Rewards führen direkt zu Missionen/Season; überlagernde Menüs werden geschlossen. Kistenbeleg zeigt lokalisierte Namen statt Objektcoercion. Vertrag: `return-unlock-guidance.md`.
+
+Lokale Abnahme: 1.338 Standardtests, zehn neue Domain-/Renderverträge, Typecheck, Build und Diffcheck grün. Keine Balance-/Save-/Rewardänderung. Mobile Browserabnahme konkret blockiert: keine lokale Browserdatei, offizieller Download kein gültiges ZIP, Cloud-Browser erreicht lokalen Server nicht. Deshalb keine 360/390/430px-, Fokus- oder Gerätefreigabe behauptet.
+
+Separater Aufbau auf dem offenen Bonuskisten-PR #95; Vorgängerbranches unverändert. Nächste Abnahme: die dokumentierte mobile Flowmatrix in einer Umgebung mit Browserzugang prüfen. Midgame-/Langzeitbalance sowie native Geräte-, Monetarisierungs-/Analytics- und Storeintegration bleiben V1-Arbeit.
+
+## Bonuskisten als echter Ablauf integriert – 12. Oktober 2026
+
+Tagesbonus verdient eine Kiste statt seines sofortigen Materialpakets; Gems/200 XP unverändert. Familie und 1%-Blueprintwurf werden beim Verdienen eingefroren, beim Öffnen einmalig gebucht. Inventarkarte mit Empfangsbeleg und Tagesbonus-Verweis in sieben Sprachen; kein Login-/Timer-/SDKgenerator. Höchstens 32 Pendingkisten, neuer Overflow automatisch geöffnet; unsicherer Ganzzahlgrant rollt den kompletten Overflowbonus zurück. Save v52, leere Legacy-Migration ohne Nachzahlungen, Prestige/Axiom erhalten Kisten, Challenges getrennt/blockiert. Audit/Savepfad aktualisiert. Vertrag: `bonus-box-flow.md`.
+
+Lokale Abnahme: 1.328 Standardtests, 15 neue Kistenverträge, Typecheck, Build und Diffcheck grün. Ein kurzer natürlicher 600s-Verlauf verdient eine echte Tageskiste ohne vorbereitete Ressourcen/Quests. Alle Sprachen per Renderingvertrag geprüft; keine Browser-/Geräteabnahme oder Monatsökonomie-/Retentionkalibrierung.
+
+Dieser Block liegt separat auf Draft-PR #94 auf; Vorgängerbranch bleibt unverändert. Nächster V1-Block: Rückkehr-/Freischaltungsführung und Mobileabnahme der vollständigen Abläufe. Späterer dritter Equipmentplatz/Buildbalance, Langzeitquests, native Monetarisierung/Analytics, Geräte-/Storeabnahme bleiben offen.
+
 ## Buildeinstieg und Ausrüstung integriert – 12. Oktober 2026
 
 Kategorie-/Eigentums-/Sockelprüfung für sämtliche Itemeffekte vereinheitlicht; leere andere Plätze umgehen keine Sperren. Historische Items/Referenzen bleiben, gesperrte Effekte erst nach regulärem Erwerb aktiv. Photonenfeld-Bauplan 6 → 4 Fragmente: gleiche bezahlte Einstiegsauswahl wie Chip, kein Extra-Grant. Vorschau zeigt Training-Data Q/E und neuen Laborfaktor; laufende Forschungszeiten bleiben. Details: `build-equipment-integration.md`.
