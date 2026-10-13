@@ -15,8 +15,9 @@ describe('mobile gameplay shell and information architecture',()=>{
   expect(css).toContain('grid-template-rows:calc(var(--top-height) + env(safe-area-inset-top)) minmax(0,1fr) calc(var(--nav-height) + env(safe-area-inset-bottom))');
   expect(css).toMatch(/\.workshop-scroll\{[^}]*min-height:0[^}]*overflow-y:auto/);
  });
- it('keeps the core compact and independent of the old lab image',()=>{
-  expect(panels).not.toContain('early-lab-pixel-art.png');
+ it('uses a compact decorative lab background instead of a hardware object',()=>{
+  expect(panels).toContain('early-lab-pixel-art.png');
+  expect(panels).not.toContain('className="core-machine"');
   expect(css).toMatch(/\.core-hero \.tap-surface\{[^}]*height:214px/);
   expect(css).toContain('repeating-radial-gradient');
  });

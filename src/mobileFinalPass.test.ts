@@ -48,7 +48,7 @@ describe('final mobile interaction contracts',()=>{
   expect(panels).toContain('className="hardware-output"');
   expect(panels).not.toContain("'Nächster Kauf'");
   expect(panels).toContain('className="hardware-output"');
-  expect(panels).toContain("'KAUFEN'");
+  expect(panels).toContain('className="hardware-price"');
   expect(panels).not.toContain('className="hardware-buy" disabled={!affordable} onClick={()=>act(\'buy-class\',id)} aria-label={`${hardwareText(id,language).name} kaufen`}>+</button>');
  });
  it('uses localized header suffixes without ellipsis',()=>{
