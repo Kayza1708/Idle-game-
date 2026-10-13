@@ -280,6 +280,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
             {componentIds.map((id) => (
               <button
                 className="component-tile"
+                data-empty={s.componentInventory[id]===0}
                 key={id}
                 aria-label={`${componentText(id,language).name} ×${s.componentInventory[id]}`}
                 onClick={() => setComponent(id)}
@@ -307,11 +308,11 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               onChange={(e) => setQuantity(Number(e.target.value))}
             />
           </label>
-          <p>
+          <details className="system-disclosure"><summary>{de?'Auftragsregeln':'Order rules'}</summary><p>
             {de
               ? "Zutaten werden beim Start vollständig reserviert. Abbruch und Erstattung nur für wartende Aufträge."
               : "Ingredients are fully reserved on start. Cancellation and refund apply only to waiting orders."}
-          </p>
+          </p></details>
           {s.crafting.queue.map((job) => (
             <div className="queue-option" key={job.id}>
               <span>
@@ -323,7 +324,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               </button>
             </div>
           ))}
-          <details className="system-disclosure"><summary>{de?'Schmieden & Automation':'Foundries & automation'}</summary><FoundryDetails s={s} act={(name,...args)=>{if(name==='open-material')setComponent(args[0]);else act(name,...args)}}/><MaterialBuildAutomation s={s} kind="crafting" act={act}/></details><p>{de?'Neue Baupläne: zehn bezahlte Forschungsabschlüsse je Bereich oder 1-%-Chance aus echten Materialdrops. Danach regulär lernen.':'New blueprints: ten paid research completions per area or a 1% chance from actual material drops. Then learn normally.'}</p><section className="recipe-list">
+          <details className="system-disclosure"><summary>{de?'Schmieden & Automation':'Foundries & automation'}</summary><FoundryDetails s={s} act={(name,...args)=>{if(name==='open-material')setComponent(args[0]);else act(name,...args)}}/><MaterialBuildAutomation s={s} kind="crafting" act={act}/></details><details className="system-disclosure"><summary>{de?'Baupläne finden':'Find blueprints'}</summary><p>{de?'Neue Baupläne: zehn bezahlte Forschungsabschlüsse je Bereich oder 1-%-Chance aus echten Materialdrops. Danach regulär lernen.':'New blueprints: ten paid research completions per area or a 1% chance from actual material drops. Then learn normally.'}</p></details><section className="recipe-list">
             {view === "modules"
               ? (Object.keys(BALANCE.modules) as ModuleId[]).map((id) =>
                   recipeCard("module", id),

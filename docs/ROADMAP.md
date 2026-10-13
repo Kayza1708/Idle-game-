@@ -1,3 +1,11 @@
+## 2026-10-13 · Screenshot-driven mobile layout audit
+
+- Fixed the clipped story dialogue (two simultaneous horizontal translations), merchant-list specificity conflicts and missing shop icon backgrounds.
+- Unified rectangular dialogs, compact research labs, analysis/crafting disclosures, inventory density, challenge-family disclosures, profile navigation and prestige canvas sizing/labels/entry zoom.
+- Shared detail dialogs retain keyboard focus, restore the trigger and use unique heading IDs. Gameplay, costs, reward formulas and save schema remain unchanged; challenge INT text now formats its ScientificNumber.
+- Validation: 1,364 tests passed; typecheck/source-path checks/build passed. Real Chromium views at 360/390/430 px in DE/EN plus short-height tutorial checks. See `docs/mobile-layout-audit.md` for coverage and limits.
+- Native iPhone safe areas, VoiceOver, keyboard/large text and all late-game populated variants still need device acceptance. This is not an App Store release certification.
+
 ## Kantige Designsprache und Tutorialzeile – 13. Oktober 2026
 
 Mobile-Stylesheet vollständig ersetzt: flache, rechteckige Flächen, Radius null in App und Dialogen, konsistente Preis-/Aktions-/Trennlinienlogik. Tutorial als echte zweite Shellzeile mit gemessenem Dialogabstand; Zielnavigation hebt erst nach Viewwechsel hervor. Shop-/Menü-/Settings-/Screen-/Dialogskin vereinheitlicht. Funktionslose Notification-Schalter entfernt, Integrationshinweis erhalten. Keine Domain-/Save-/Balancingänderung. Vertrag: `square-mobile-design.md`.
