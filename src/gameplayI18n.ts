@@ -419,6 +419,7 @@ const branches=[
 const roman=['','I','II','III','IV','V','VI','VII','VIII'];
 
 const prestigeEffects:Record<PrestigeUpgradeId,L>={
+ batchFabrication:l('Unlock item batch crafting ×3/×10/×100.','Schaltet Item-Mehrfachherstellung ×3/×10/×100 frei.','Desbloquea fabricación múltiple de objetos.','Débloque la fabrication multiple d’objets.','Desbloqueia fabricação múltipla de itens.','Sblocca la produzione multipla di oggetti.','Odblokowuje seryjne tworzenie przedmiotów.'),
  modelArchive:l('Keep model levels and paid training through normal prestige; Axioms still reset them.','Behält Modellstufen und bezahltes Training bei normalem Prestige; Axiome setzen sie zurück.','','','','',''),
  shoppingAgent:l('Per-class calculator and single-board computer autobuyers with a shared reserve.','Klassenweise Autobuyer für Taschenrechner und Einplatinencomputer mit gemeinsamer Reserve.','','','','',''),
  trainingPlan:l('Queue two model training jobs; Credits are charged only when each job starts.','Zwei Modelltrainings vormerken; Credits werden erst beim jeweiligen Start abgezogen.','','','','',''),
@@ -473,6 +474,7 @@ const prestigeEffects:Record<PrestigeUpgradeId,L>={
 };
 
 export const prestigeText=(id:PrestigeUpgradeId,language:Language)=>{
+ if(id==='batchFabrication'||id==='modelArchive')return{name:pick(id==='batchFabrication'?l('Batch Fabrication','Serienfertigung','Fabricación en serie','Fabrication en série','Fabricação em série','Produzione in serie','Produkcja seryjna'):l('Model Archive','Modellarchiv','Archivo de modelo','Archives du modèle','Arquivo do modelo','Archivio modello','Archiwum modelu'),language),effect:pick(prestigeEffects[id],language)};
  const researchCopy:Partial<Record<PrestigeUpgradeId,[string,string]>>={labs2:['Two waiting projects; regular automatic queue starts. Operations expands capacity to four.','Zwei wartende Aufträge; regulärer automatischer Queue-Start. Labororganisation erweitert auf vier.'],labs3:['One repeatable project with an explicit target level; manual queue takes priority.','Ein wiederholbares Projekt mit explizitem Ziellevel; manuelle Queue hat Vorrang.'],labs4:['Permanent laboratory performance contribution. Research director also requires Research Scheduling.','Dauerhafter Laborleistungsbeitrag. Der Forschungsdirektor benötigt zusätzlich Forschungsplanung.'],labs5:['Queue configuration is retained through normal prestige.','Queue-Konfiguration bleibt bei normalem Prestige erhalten.'],labs6:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.'],labs7:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.'],labs8:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.']};
 
  if(id==='shoppingAgent'||id==='trainingPlan'||id==='componentScanner')return{name:pick(id==='shoppingAgent'?l('Shopping Agent','Einkaufsagent','','','','',''):id==='trainingPlan'?l('Training Plan','Trainingsplan','','','','',''):l('Component Scanner','Komponentenscanner','','','','',''),language),effect:pick(prestigeEffects[id],language)};

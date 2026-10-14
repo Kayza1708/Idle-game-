@@ -1,3 +1,4 @@
+import {foundryInfrastructure} from './foundries';
 import {BALANCE,GameState,itemCombinationBonus} from './economy';
 import {addEvent} from './telemetry';
 export type Achievement={id:string;de:string;en:string;descriptionDe:string;descriptionEn:string;thresholds:readonly number[];progress:(s:GameState)=>number};
@@ -27,7 +28,7 @@ export const achievements:Achievement[]=[
  family('blueprints','Bauplanbibliothek','Blueprint library','Lerne unterschiedliche Itemrezepte.','Learn distinct item recipes.',BALANCE.achievementThresholds['blueprints'],s=>new Set(s.learnedRecipes).size),
  family('crafted-types','Ingenieursportfolio','Engineering portfolio','Stelle unterschiedliche Itemtypen selbst her.','Craft distinct item types yourself.',BALANCE.achievementThresholds['crafted-types'],s=>new Set(s.craftedItemTypes).size),
  family('material-families','Neue Fertigungsverfahren','New manufacturing processes','Schalte Materialfamilien frei.','Unlock material families.',BALANCE.achievementThresholds['material-families'],s=>new Set(s.materials.families).size),
- family('foundry-network','Industrielle Fertigung','Industrial manufacturing','Baue die drei Schmieden aus; alle Ausbaustufen zählen.','Expand the three foundries; all facility levels count.',BALANCE.achievementThresholds['foundry-network'],s=>s.foundries.reduce((n,f)=>n+f.level,0)),
+ family('foundry-network','Industrielle Fertigung','Industrial manufacturing','Baue die Veredelung aus und erhöhe die höchste Forge-Stufe eines Items.','Upgrade refining and increase your highest item Forge level.',BALANCE.achievementThresholds['foundry-network'],s=>foundryInfrastructure(s)+Math.max(0,...s.inventory.map(i=>i.forge??0))),
  family('challenge-stages','Grenzen der Intelligenz','Limits of intelligence','Schließe unterschiedliche Challenge-Stufen erstmals ab.','Complete distinct challenge stages for the first time.',BALANCE.achievementThresholds['challenge-stages'],s=>Object.values(s.challengeStages).reduce((n,v)=>n+v,0)),
  family('challenge-depth','Spezialist','Specialist','Erreiche höhere Stufen in einer Challengefamilie.','Reach higher stages in one challenge family.',BALANCE.achievementThresholds['challenge-depth'],s=>Math.max(0,...Object.values(s.challengeStages))),
 ];
