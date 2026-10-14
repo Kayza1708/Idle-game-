@@ -32,10 +32,10 @@ describe('structured Workshop action hero',()=>{
   expect(tapSurface).not.toContain('className="tap-content"');
   expect(tapSurface).not.toContain('className="core-status"');
  });
- it('shows authoritative model effects before opening its sheet',()=>{
-  expect(workshop).toContain('className="model-metrics"');
-  expect(workshop).toContain('quality(s.qualityLevel)');
-  expect(workshop).toContain('BALANCE.computePerUser/efficiency(s.efficiencyLevel)');
+ it('keeps model levels compact and exposes effects in the training sheet',()=>{
+  expect(workshop).not.toContain('className="model-metrics"');expect(workshop).toContain('className="training-entry"');
+  expect(workshop).toContain('s.qualityLevel');
+  expect(workshop).toContain('model-effect-summary');expect(workshop).toContain('s.efficiencyLevel');
  });
  it.each([[375,667],[375,812],[390,844],[393,852],[402,874],[430,932]])('keeps the %ix%i portrait contract bounded',(width:number,height:number)=>{
   expect(width).toBeGreaterThanOrEqual(375);

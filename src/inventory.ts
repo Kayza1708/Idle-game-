@@ -124,14 +124,14 @@ export function claimLootDrop(s:GameState,id:string,rng=Math.random){
  for(let i=0;i<draws;i++){const pick=draw();const quantity=perDraw*rewardFactor,whole=Math.floor(quantity),fraction=quantity-whole;grant[pick]=(grant[pick]??0)+whole+(fraction>0&&rng()<fraction?1:0);}
  let next=grantComponents({...s,lootDrops:s.lootDrops.filter(d=>d.id!==id),lifetime:{...s.lifetime,dropsClaimed:s.lifetime.dropsClaimed+1}},grant);
  const creditSeconds=variant==='core'?60:variant==='cache'?15:5,dataSeconds=variant==='core'?45:variant==='cache'?12:0;
- next=addCreditsScientific(next,creditRateScientific(next.hardware,next.level,next,next.savedAt,false).multiplyNumber(creditSeconds*rewardFactor),true,false);
+ const creditGain=creditRateScientific(next.hardware,next.level,next,next.savedAt,false).multiplyNumber(creditSeconds*rewardFactor),dataGain=dataRateScientific(next).multiplyNumber(dataSeconds*rewardFactor);next=addCreditsScientific(next,creditGain,true,false);
  if(dataSeconds>0)next=addDataScientific(next,dataRateScientific(next).multiplyNumber(dataSeconds*rewardFactor));
  let itemDropped=false;
  if(variant==='core'&&s.retention.activeRun?.id!=='closed-supply-chain'){
    const itemChance=Math.min(1,rewardFactor*Math.min(.15,.03+.006*Math.max(0,quality-1)));
    if(rng()<itemChance){next=randomItem(next,rng);itemDropped=true;}
  }
- if(rng()<BALANCE.blueprintDropChance)next=discoverBlueprint(next);return addEvent(next,'component-found',s.savedAt,{source:'world-drop',variant,draws,components:Object.entries(grant).map(([k,v])=>`${k}:${v}`).join(','),creditSeconds,dataSeconds,itemDropped,quality});
+ if(rng()<BALANCE.blueprintDropChance)next=discoverBlueprint(next);return addEvent(next,'component-found',s.savedAt,{source:'world-drop',variant,draws,components:Object.entries(grant).map(([k,v])=>`${k}:${v}`).join(','),creditSeconds,dataSeconds,itemDropped,quality,creditGainExact:JSON.stringify(creditGain.toJSON()),dataGainExact:JSON.stringify(dataGain.toJSON())});
 }
 
 export function craftingMissingText(quote:ReturnType<typeof craftingAffordability>,language:string){const de=language==='de';return quote.reasons.map(reason=>reason==='invalid-quantity'?(de?'Ungültige Menge':'Invalid quantity'):reason==='blueprint-unlearned'?(de?'Bauplan noch nicht gelernt':'Blueprint not learned'):reason==='recipe-locked'?(de?'Bauplan gesperrt':'Recipe locked'):reason==='queue-full'?(de?'Warteschlange voll':'Queue full'):reason==='data'?`${quote.data.missingExact.toScientificString()} Data`:reason==='blueprints'?`${quote.missingBlueprints} ${de?'Bauplanfragmente':'blueprint fragments'}`:reason.startsWith('component:')?`${componentText(reason.slice(10) as keyof typeof quote.missingComponents,de?'de':'en').name} ×${quote.missingComponents[reason.slice(10) as keyof typeof quote.missingComponents]}`:`${moduleText(reason.slice(7) as ModuleId,de?'de':'en')} ×${quote.missingModules[reason.slice(7) as keyof typeof quote.missingModules]}`).join(' · ');}

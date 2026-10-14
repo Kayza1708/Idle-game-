@@ -863,7 +863,7 @@ export const BALANCE = {
   achievementTierGems:[2,4,8,12],achievementPointsPerTier:[2,4,8,12],achievementResearchPerTen:.01,achievementResearchCap:.20,
   missionRewards:{daily:{task:2,bonus:6},weekly:{task:5,bonus:30},monthly:{task:15,bonus:120}},
   hardwareAutobuyerUnlock:100,hardwareAutobuyerInterval:5,
-  capsuleMachine:{gemCost:10,itemChance:.01,componentRanges:{common:[3,12],uncommon:[2,5],rare:[1,2]},rareChanceBoundary:.01,uncommonChanceBoundary:.10},
+  capsuleMachine:{gemCost:10,itemChance:.01,componentChance:.35,creditChance:.45,dataChance:.14,gemChance:.0475,jackpotChance:.0025,jackpotMultiplier:20,gemRange:[2,8],creditSeconds:[15,60],dataSeconds:[15,60],creditFloor:100,dataFloor:5,componentRanges:{common:[3,12],uncommon:[2,5],rare:[1,2]},rareChanceBoundary:.01,uncommonChanceBoundary:.10},
   adLimits: { creditBoost: 8, components: 12, creditDrop: 12, capsule:6 },
   researchProjects:{
     operations:{name:'Labororganisation',balanceCategory:'automation',effect:'Erweitert die durch labs2 freigeschaltete Queue von zwei auf vier wartende Aufträge.'},
