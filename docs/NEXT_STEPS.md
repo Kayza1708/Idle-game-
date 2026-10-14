@@ -1,3 +1,12 @@
+## 2026-10-14 · Beute, Automat und randloses Labor
+
+- [x] Dichte fünffarbige Kugelstapel, besondere Item-/Jackpot-Enthüllung und geprüfte einmalige Auszahlung; sechs echte Click-/Save-/Reload-Profile.
+- [x] Neue Gewinntabelle: Low Credits/Komponenten, Mid Data/Gems, High 1%-Item oder 0,25%-Jackpot (20×Zugpreis). Atomarer Gem-Ledger und Save v55; keine rückwirkenden Belohnungen.
+- [x] Randloses statisches Labor, Modellüberlagerung entfernt, detaillierte Dropkisten/Öffnung und freier Loottext; Challenges eigener Menüpunkt ohne Profilnavigation.
+- [x] Einheitliche Steuerungsglyphen, weniger Listenrahmen, gemeinsame Sheet-/Progress-/Erfolgsanimationen; Effekteinstellung/reduzierte Bewegung berücksichtigt.
+- [x] 1.404 Tests/104 Dateien, Typecheck/Build/Diffcheck; 222 frühe + 336 späte Rendereransichten, 360/390/430 px DE/EN. Vertrag, neues Asset und Prompt: [reward-presentation.md](reward-presentation.md).
+- [ ] Native iPhone-Abnahme, echter Produktions-Werbeanbieter und langfristige Kalibrierung der erweiterten Gewinntabelle. Kein Merge/Release.
+
 ## 2026-10-14 · Detailgrafiken, Einstieg und Drop-Rhythmus
 
 - Detailliertes Pixel-Labor und Automatenkörper integriert; separate LED-/Monitor-/Lüfterebenen, mechanische 1,8-s-Kapselsequenz, reduzierte Bewegung.

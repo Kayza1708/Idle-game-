@@ -1,3 +1,9 @@
+## 2026-10-14 · Erweiterte Kapselgewinne (vorläufig)
+
+Die vorherige 1%-Item/99%-Komponenten-Tabelle wird ersetzt: 1 % Items, 35 % Komponenten, 45 % Credits, 14 % Data, 4,75 % kleine Gems und 0,25 % Gem-Jackpot. Preis bleibt 10 Gems. Kleine Gems 2–8; Jackpot 20×Preis = 200. Credits/Data: gleichverteilte 15–60 Sekunden ihrer aktuellen Rate, mindestens 100 Credits/5 Data. Credits zählen nicht als prestigegeeigneter Produktionsverdienst. Alle Werte liegen in `BALANCE.capsuleMachine`; sonstige Produktions-, Hardware- und Resetformeln unverändert.
+
+Komponenten verwenden dieselbe zugängliche World-Tabelle und Mengenklassen. Ihr sortenspezifischer Erwartungswert ist jetzt `0.35 × p × (a+b)/2`. Direkter Gem-Rückfluss 0,7375 je Zug, mittlere Gem-Senke 9,2625; übriger Beutewert und Video-Fortschritt sind nicht kalibriert. Atomare Belastung vor Gewinn, sichere Ganzzahlen, eingefrorene wissenschaftliche Quittung, Save v55 ohne rückwirkenden Grant. Vollständiger Reset-/Provider-/Prüfvertrag: [reward-presentation.md](reward-presentation.md). **Neue Tabelle ist ungemessene Balanceannahme.**
+
 ## 2026-10-14 · Einführungsaufträge und ruhigere sichtbare Drops
 
 `BALANCE.introTrainingSeconds=20`, `introResearchSeconds=20`: Erstes Qualitätstraining und Datenerzeugung 1 kosten im jeweiligen aktiven Tutorialschritt einmalig null Daten. Nur erster Run, keine Challenges; Start konsumiert permanenten Save-v54-Nachweis. Bereits bezahlte Altaufträge bleiben unverändert, keine Erstattung. Alle weiteren Preise/Zeitkurven bleiben regulär. Das erste Einführungslabor benötigt keinen SBC; andere UI-Zugänge werden nicht freigeschaltet.
