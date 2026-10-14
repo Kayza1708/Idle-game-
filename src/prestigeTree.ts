@@ -17,7 +17,7 @@ export const prestigeLayout=Object.fromEntries(ids.map(id=>{
  const angle=(-90+node.branch*60+offset)*Math.PI/180,radius=280+(node.depth-1)*115;
  return [id,{x:extent+Math.cos(angle)*radius,y:extent+Math.sin(angle)*radius}];
 })) as Record<PrestigeUpgradeId,PrestigePoint>;
-export const prestigeMapScale=(value:number)=>Math.max(.1,Math.min(1.5,value));
+export const prestigeMapScale=(value:number)=>Math.max(.65,Math.min(1.5,value));
 export function prestigeConnector(from:PrestigePoint,to:PrestigePoint){
  const distance=Math.hypot(to.x-from.x,to.y-from.y),inset=Math.min(PRESTIGE_CANVAS.nodeWidth/2,distance/3),ux=(to.x-from.x)/(distance||1),uy=(to.y-from.y)/(distance||1);
  return `M ${from.x+ux*inset} ${from.y+uy*inset} L ${to.x-ux*inset} ${to.y-uy*inset}`;

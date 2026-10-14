@@ -1,3 +1,4 @@
+import {MobileArt} from './MobileArt';
 import {ScientificNumber} from './scientificNumber';
 import {CapsuleCelebration} from './CapsuleCelebration';
 import {itemText,componentText} from './gameplayI18n';
@@ -8,21 +9,16 @@ import {ComponentArt,ItemArt,GemAmount,ResourceArt} from './GameArt';
 import {MobileDetailSheet} from './MobileDetailSheet';
 
 /** Detailed original bitmap cabinet, with independent mechanical sprite layers. */
-export function CapsuleMachineArt(){
- return <svg className="capsule-machine-art" viewBox="0 0 1024 1536" shapeRendering="crispEdges" aria-hidden="true">
-  <image href="/assets/game/capsule-machine-filled-v3.webp" width="1024" height="1536"/>
-  <g className="machine-crank"><path fill="#183347" d="M485 981h148v44H485z"/><path fill="#ddb05e" d="M489 977h144v36H489z"/><path fill="#ffe2a2" d="M493 977h136v8H493z"/><path fill="#8e6234" d="M497 1005h132v8H497z"/><path fill="#183347" d="M612 959h44v82h-44z"/><path fill="#e9c579" d="M620 965h28v68h-28z"/><path fill="#fff0c0" d="M620 965h8v62h-8z"/></g>
-  <g className="machine-door"><path fill="#132d3e" d="M412 1162h204v136H412z"/><path fill="#63858b" d="M412 1162h204v10H412z"/></g>
-  <g className="machine-capsule"><g className="capsule-lid"><path fill="#193748" d="M468 1192h88v8h16v16h8v28H444v-28h8v-16h16z"/><path fill="#89d5bd" d="M468 1200h88v8h12v16h4v12H452v-12h4v-16h12z"/><path fill="#def4ce" d="M472 1208h40v8h-40z"/></g><g className="capsule-bottom"><path fill="#193748" d="M444 1240h136v28h-8v16h-16v8h-88v-8h-16v-16h-8z"/><path fill="#edc583" d="M452 1248h120v16h-8v12h-12v8h-80v-8h-12v-12h-8z"/><path fill="#fae4ba" d="M464 1252h92v8h-92z"/></g></g>
-  <g className="machine-reveal-sparks" fill="#ffe2a1"><path d="M386 1280h8v16h-8zM378 1288h24v8h-24zM626 1280h8v16h-8zM618 1288h24v8h-24zM506 1174h12v20h-12z"/></g>
- </svg>}
+export function CapsuleMachineArt({revealed=false}:{revealed?:boolean}){
+ return <div className={`capsule-machine-art sprite-machine${revealed?' has-receipt':''}`} aria-hidden="true"><img src="/assets/game/capsule-machine-filled-v3.webp" alt=""/><span className="machine-crank"/><span className="machine-capsule"><MobileArt sprite="capsule-closed" className="capsule-closed-sprite"/><MobileArt sprite="capsule-open" className="capsule-open-sprite"/></span></div>;
+}
 export function CapsulePanel({s,act,videoAvailable=false,videoBusy=false}:{s:GameState;act:(name:string,...args:any[])=>void;videoAvailable?:boolean;videoBusy?:boolean}){
  const de=s.settings.language==='de',q=capsuleQuote(s),[details,setDetails]=useState(false),[spinning,setSpinning]=useState(false),[celebrate,setCelebrate]=useState(false),lastSeen=useRef(s.capsuleMachine.draws),receipt=s.capsuleMachine.last;
  useEffect(()=>{if(lastSeen.current===s.capsuleMachine.draws)return;lastSeen.current=s.capsuleMachine.draws;if(!s.settings.effects||matchMedia('(prefers-reduced-motion: reduce)').matches){setCelebrate(!!s.capsuleMachine.last&&capsuleTier(s.capsuleMachine.last)==='high');return;}setSpinning(true);const timer=setTimeout(()=>{setSpinning(false);setCelebrate(!!s.capsuleMachine.last&&capsuleTier(s.capsuleMachine.last)==='high')},1800);return()=>{clearTimeout(timer);setSpinning(false)}},[s.capsuleMachine.draws,s.settings.effects]);
  const locked=q.reason==='prestige',busy=spinning||videoBusy;
  return <section className={`capsule-panel ${spinning?'is-spinning':''}`} data-capsule-draws={s.capsuleMachine.draws}>
-  <header><b>{de?'KI-KAPSELN':'AI CAPSULES'}</b><button aria-label={de?'Chancen anzeigen':'Show odds'} onClick={()=>setDetails(true)}>?</button></header>
-  <div className="capsule-stage"><span className="machine-sign">{de?'KI-GLÜCKSAUTOMAT':'AI LUCK MACHINE'}</span><CapsuleMachineArt/><span className="machine-odds">1% ITEM · 0,25% JACKPOT</span></div>
+  <header><b>1% ITEM · 0,25% JACKPOT</b><button aria-label={de?'Chancen anzeigen':'Show odds'} onClick={()=>setDetails(true)}>?</button></header>
+  <div className="capsule-stage"><span className="machine-sign">{de?'KI-GLÜCKSAUTOMAT':'AI LUCK MACHINE'}</span><CapsuleMachineArt revealed={!!receipt}/></div>
   <div className={`capsule-result ${spinning?'is-hidden':''}`} role="status" aria-live="polite">{receipt?<>{receipt.kind==='item'&&receipt.item?<><ItemArt type={receipt.item.type}/><b>{de?'Item erhalten!':'Item received!'}</b><small>{itemText(receipt.item.type,s.settings.language)} · {receipt.rarity}</small></>:receipt.resource?<span><ResourceArt id={receipt.resource.id}/><b>+{formatScientific(ScientificNumber.fromJSON(receipt.resource.amount),2,s.settings.numberFormat)} {receipt.resource.id==='gems'?'Gems':receipt.resource.id==='data'?(de?'Daten':'Data'):'Credits'}</b></span>:Object.entries(receipt.components).map(([id,n])=><span key={id} aria-label={`${n} ${componentText(id as ComponentId,s.settings.language).name}`} title={componentText(id as ComponentId,s.settings.language).name}><ComponentArt id={id as ComponentId}/><b>×{n}</b></span>)}</>:<small>{de?'Jede Kapsel enthält Beute.':'Every capsule contains loot.'}</small>}</div>
   {locked?<p className="capsule-locked">{de?'Nach deinem ersten Prestige':'After your first prestige'}</p>:q.reason?<p>{de?'Während einer Challenge deaktiviert':'Disabled during a challenge'}</p>:<div className="capsule-actions"><button data-capsule-gems disabled={!q.allowed||busy} onClick={()=>act('capsule-gem',q.next)}><span>{de?'Ziehen':'Draw'}</span><GemAmount value={q.cost}/></button><button data-capsule-video disabled={!videoAvailable||!q.videoAllowed||busy} onClick={()=>act('capsule-video')}><span aria-hidden="true">▶</span><span>{videoBusy?(de?'Video läuft…':'Playing…'):'Video'}</span><small>{q.videoRemaining}/{BALANCE.adLimits.capsule}</small></button></div>}
   {!locked&&!videoAvailable&&<small className="capsule-video-note">{de?'Video derzeit nicht verfügbar':'Video currently unavailable'}</small>}
