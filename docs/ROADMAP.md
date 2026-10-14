@@ -1,3 +1,12 @@
+## 2026-10-14 · Abschluss-, Ausrüstungs- und Prestigeanimationen
+
+- [x] Forschung/Crafting/Forge: kurze freie Abschlusszeile, Gruppierung gleichzeitiger Aufträge, gezielter Impuls sichtbarer Ziele; doppelte Forge-/Craft-Itemtoasts entfernt.
+- [x] Bestätigter Itemwechsel: kosmetischer Flug zum sichtbaren Slot; keine blockierten Transfers oder Domainverzögerung.
+- [x] Neue Prestige-Knoten und Verbindungen: kurzer wandernder Lichtimpuls, keine dauerhaften Blinker.
+- [x] Reduzierte Bewegung/Effekte aus, Abbruch und Bereinigung; kein Replay bei Reload, Kontextwechsel oder Offline-Rückkehr.
+- [x] 1.410 Tests/105 Dateien, 99 gezielte Nachlaufprüfungen, Typecheck/Build/Diffcheck und sechs mobile Interaktionsprofile; Vertrag: [progression-motion.md](progression-motion.md).
+- [ ] Native iPhone-Abnahme; weiterhin Kapsel-Langzeitkalibrierung und echter Werbeanbieter. Kein Merge/Release dieses Auftrags.
+
 ## 2026-10-14 · Beute, Automat und randloses Labor
 
 - [x] Dichte fünffarbige Kugelstapel, besondere Item-/Jackpot-Enthüllung und geprüfte einmalige Auszahlung; sechs echte Click-/Save-/Reload-Profile.
