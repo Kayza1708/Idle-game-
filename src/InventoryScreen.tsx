@@ -241,7 +241,7 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
           {equipmentSlotCount(s)}
         </button>
       </header>
-      <BonusBoxes s={s} act={act}/>
+      {!embedded&&<BonusBoxes s={s} act={act}/>}
       <div className="mobile-segments inventory-segments" role="tablist">
         {(["components", "modules", "workbench", "items"] as const).map(
           (id) => (
@@ -418,7 +418,7 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
           onClose={() => setItemId(null)}
         >
           <p>
-            {item.id} · {rarityText(item.rarity, language)} · Lv {item.level} ·{" "}
+            {rarityText(item.rarity, language)} · Lv {item.level}/69 ·{" "}
             {de ? "Schmiedestufe" : "Forge level"} {item.forge ?? 0}
           </p>
           <p>
@@ -516,14 +516,7 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
                 )}
                 <button
                   disabled={!q.allowed || !effective}
-                  onClick={() => {
-                    if (
-                      confirm(
-                        `${de ? "Kosten bestätigen" : "Confirm costs"}: ${Object.entries(q.componentCosts).map(([id,n])=>`${n} ${componentText(id as ComponentId,language).name}`).join(', ')}, ${q.dataCost} Data · ${item.id}`,
-                      )
-                    )
-                      act(action, item.id,{rarity:item.rarity,level:item.level,forge:item.forge??0});
-                  }}
+                  onClick={() => act(action, item.id,{rarity:item.rarity,level:item.level,forge:item.forge??0})}
                 >
                   {action === "upgrade"
                     ? de

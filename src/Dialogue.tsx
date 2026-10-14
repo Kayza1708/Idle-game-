@@ -1,3 +1,5 @@
+import {TutorialFinger} from './TutorialFinger';
+import {tutorialGuide} from './tutorialGuide';
 import {useEffect,useRef} from 'react';
 import type { GameState } from './economy';
 import { dialogues,dialogueUiCopy,storyChapters } from './story';
@@ -21,11 +23,12 @@ export function DialogueOverlay({state,onContinue,onSkip}:{state:GameState;onCon
  const id=state.story.open,dialogue=id?dialogues[id]:undefined,next=useRef<HTMLButtonElement>(null),skipRef=useRef(onSkip),copy=dialogueUiCopy(state);skipRef.current=onSkip;
  useEffect(()=>{if(!id)return;const previous=document.activeElement as HTMLElement|null,escape=(event:KeyboardEvent)=>{if(event.key==='Escape')skipRef.current()};next.current?.focus();window.addEventListener('keydown',escape);return()=>{window.removeEventListener('keydown',escape);previous?.focus()}},[id]);
  if(!id||!dialogue)return null;
- const brief=dialogueSummary(state);
+ const brief=dialogueSummary(state),guide=state.story.tutorial==='active'?tutorialGuide(state):null;
+ const fingerTarget=id==='first-item'?(typeof document!=='undefined'&&document.getElementById('forge-model-entry')?'forge-model-entry':'tutorial-model-entry'):guide?.targetId;
  const mira=dialogue.speaker==='Mira';
  const finalChapterPage=storyChapters.some(chapter=>chapter.pages[1]===id);
- return <aside className={`story-dialogue mira-stage${mira?' has-mira':''}`} role="dialog" aria-labelledby="story-heading" aria-describedby="story-text">
+ return <>{guide&&<TutorialFinger targetId={fingerTarget!} routeTargetId={guide.targetId==='tutorial-quality-training'?'tutorial-model-entry':`tab-${guide.tab}`} animate={state.settings.effects}/>}<aside className={`story-dialogue mira-stage${mira?' has-mira':''}`} role="dialog" aria-labelledby="story-heading" aria-describedby="story-text">
   {mira&&<img className="mira-sprite mira-character" src="/assets/game/mira-voss.png" alt="Dr. Mira Voss"/>}
   <div className="story-copy mira-speech"><strong>{dialogue.speaker==='Mira'?'Dr. Mira Voss':(state.aiName??'AURA')}</strong><h2 id="story-heading" className={dialogue.title?undefined:'visually-hidden'}>{dialogue.title?.(state)??copy.heading}</h2><p id="story-text">{brief??dialogue.text(state)}</p>{brief&&<details className="mira-more"><summary>{state.settings.language==='de'?'Details':'Details'}</summary><p>{dialogue.text(state)}</p></details>}<div className="story-actions"><button onClick={onSkip}>{dialogue.title?copy.close:copy.skip}</button><button ref={next} className="story-next" onClick={onContinue}>{finalChapterPage?copy.close:copy.continue}</button></div></div>
- </aside>;
+ </aside></>;
 }

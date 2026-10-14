@@ -150,3 +150,80 @@ body{font-family:var(--reading-font)}:is(.hardware-info,.research-card,.shop-off
 .return-compact .return-report__footer button{min-width:0;min-height:48px;font-size:11px;padding:8px;flex:1}
 .return-compact .return-continue{background:#2c685a;color:#edffd9;flex:2!important}
 @media(max-height:740px){.capsule-machine-art{width:146px;height:219px}.capsule-result{min-height:28px}.capsule-result>small{font-size:10px}.capsule-stage{margin-block:4px}.capsule-panel>header>b{font-size:12px}}
+/* Edge-to-edge mobile surfaces; horizontal rubber banding belongs to no game page. */
+html,body,#root{overscroll-behavior-x:none;overflow-x:hidden}
+.game-shell>.content{width:100%;max-width:none;margin:0;padding:0;background:#101d30;overscroll-behavior-x:none;touch-action:pan-y}
+.game-shell>.screen-content{overflow-x:hidden;overscroll-behavior-x:none}
+.panel.mobile-screen{padding:0 0 12px;background:#101d30;border:0}
+.mobile-screen-title{margin:0;padding:9px 12px;border-inline:0}
+.mobile-screen :is(.mobile-segments,.research-tabs,.forge-modes,.forge-inventory-tabs){margin:0;width:100%;border-inline:0}
+.workshop-scroll{padding:5px 12px 12px}.workshop-action,.core-hero{margin-inline:0;width:100%}
+.mobile-detail-sheet,.model-console{width:100%;max-width:none;border-inline:0!important}
+.mobile-sheet-backdrop,.equipment-backdrop{padding-inline:0}
+/* Physical forge recesses are painted in the two assets, with borderless sprite hit areas. */
+.forge-stage{height:auto;aspect-ratio:3/2;margin:0;width:100%;border:0;overflow:hidden}
+.forge-stage>img{width:100%;height:100%;object-fit:fill}
+.forge-stage[data-mode=craft] .forge-result-slot{left:50.5%;top:50%;width:19%;height:17%}
+.forge-result-slot,.fusion-input{border:0!important;box-shadow:none!important;background:transparent!important;padding:0;min-width:44px;min-height:44px;display:grid;place-items:center}
+.forge-result-slot .item-art,.fusion-input .item-art{width:clamp(30px,12vw,54px);height:clamp(30px,12vw,54px);max-width:90%;max-height:90%;filter:drop-shadow(0 2px 3px #000)}
+.forge-stage[data-mode=fusion] .fusion-result{left:50%;top:38%;width:17%;height:21%}
+.forge-stage[data-mode=fusion] .fusion-input{top:79%;width:12%;height:14%}
+.forge-stage[data-mode=fusion] .fusion-input:nth-last-child(3){left:26%!important}
+.forge-stage[data-mode=fusion] .fusion-input:nth-last-child(1){left:75%!important}
+.fusion-links{display:none}.forge-result-slot small,.fusion-input small{position:absolute;bottom:0;font-size:9px;color:#ffeab8;text-shadow:1px 1px #000}
+.forge-result-slot>b,.fusion-input>b{color:#97e2d3;font-size:24px;text-shadow:0 0 6px #1cd6c9}
+.forge-result-slot.can-craft .item-art{filter:drop-shadow(0 0 5px #65e2b1)}
+.forge-result-slot.not-craftable .item-art,.forge-recipe-grid .not-craftable .item-art{filter:grayscale(.9);opacity:.45}
+.forge-recipe-grid .can-craft{border-color:#73dcc0;background:#163e3c;box-shadow:inset 0 -2px #72dec0}
+.forge-recipe-grid button{position:relative;min-height:100px}.forge-recipe-grid button>span{position:absolute;right:6px;top:5px;color:#a0e7c0}
+.forge-order,.forge-empty-order,.forge-screen>.system-disclosure,.forge-screen>.bonus-box-card,.forge-modules{padding:8px 12px!important}
+.forge-empty-order>button{width:100%;min-height:48px}.forge-screen .inventory-grid,.forge-screen .inventory-controls{padding-inline:12px}
+.foundry-station{display:grid;grid-template-columns:80px minmax(0,1fr);gap:8px}.foundry-station>div{display:grid;gap:5px}.foundry-station small{font-size:11px}.foundry-station .foundry-art{width:80px}
+/* Model: family identity is shape + label + color, including empty/locked sockets. */
+.model-network{height:290px;min-height:290px;background:radial-gradient(ellipse at center,#244a5c80,transparent 70%)}
+.model-console-body{padding:0 12px 12px}.network-slot{width:70px;height:72px;min-width:70px;min-height:72px;background:transparent!important;box-shadow:none!important;border:0!important;gap:0;padding:12px}
+.network-slot .socket-frame{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.model-network .socket-frame :is(path,circle){fill:#122b3d;stroke-width:5;stroke:#65afcd}
+.network-slot[data-slot-family=processor] .socket-frame circle{stroke:#eab969}
+.network-slot[data-slot-family=core] .socket-frame path{stroke:#72d8c5}
+.network-slot[data-slot-family=research] .socket-frame path{stroke:#bc99e0}
+.network-slot.locked .socket-frame :is(path,circle){stroke:#405969;fill:#142331}.network-slot.selected .socket-frame :is(path,circle){stroke:#eaffb6;filter:drop-shadow(0 0 4px #a6ecc4)}
+.network-slot>.item-art,.network-slot>.vector-icon{z-index:1;position:relative;width:32px;height:32px}
+.network-slot>small{position:absolute;top:100%;font-size:9px;white-space:nowrap;color:#cce5e8}.network-slot>i{z-index:1;position:absolute;bottom:10px;font-size:8px}
+.neural-core{width:110px}.neural-core>div{height:118px;clip-path:none;background:url('/assets/game/model-core-v2.webp') center/contain no-repeat;box-shadow:none}
+/* Research console: all bays stay visible, no sideways carousel. */
+.research-panel>.research-view,.analysis-view,.breakthrough-view{padding:10px 12px}
+.research-panel .lab-overview{background:#132b3c;border-block:1px solid #3a6778;padding:8px;margin-bottom:10px}
+.research-panel .lab-overview>h2{display:none}.research-panel .lab-slots{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px;overflow:visible!important;width:100%}
+.research-panel .lab-slot{min-width:0;min-height:82px;margin:0!important;padding:8px!important;flex:none;border:0!important;border-top:3px solid #67c3bd!important;background:#1c3547!important}
+.research-panel .lab-slot h3{display:flex;align-items:center;gap:5px;font-size:11px}.lab-slot .pixel-icon{width:20px;height:20px}.lab-slot p{font-size:10px;color:#97c3c9}.lab-slot .bar{height:5px}
+.research-panel .lab-overview .lab-unlock{padding:8px;margin-top:6px;font-size:10px;min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:8px;border-top:1px solid #466779}
+.research-panel .research-area-group{border:0;margin-bottom:12px}.research-area-group>summary{display:flex;align-items:center;gap:7px;min-height:44px;font-size:12px;background:#1b3245;padding:7px}
+.research-area-group>summary .pixel-icon{width:22px;height:22px}.research-catalog .research-projects{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px}
+.research-catalog .research-card{display:grid;grid-template-columns:24px minmax(0,1fr) 14px!important;padding:8px!important;min-height:112px;align-items:start;border:1px solid #3b6476!important;background:#142b3b;box-shadow:none;text-align:left;gap:5px}
+.research-card>.pixel-icon{width:24px;height:24px;color:#87d9cd}.research-card>span{min-width:0}.research-card h3{font-size:11px!important;white-space:normal;margin:0 0 5px!important}.research-card small{font-size:9px}.research-brief,.research-marks,.research-block-note{display:none!important}.research-card .cost-badge{padding:3px 0;border:0;background:transparent;font-size:9px}.research-card .cost-icon>*{width:12px;height:12px}
+.research-card.locked{opacity:.65}.research-card.available{border-bottom:2px solid #6acbae!important}.research-card.running{border-bottom:2px solid #f6be6e!important}
+.period-progress{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:7px;padding:10px 12px!important;margin:8px 12px}.period-progress>div:first-of-type{min-width:0}.period-progress>.bar{grid-column:1}.period-progress>.mission-box-link{grid-column:1/-1;min-width:0;font-size:12px;min-height:44px;white-space:normal}.mobile-mission-list{padding:0 12px}
+.bonus-box-card{margin:8px 0!important;border:0!important;border-block:1px solid #345e73!important;background:#152e41}.bonus-box-card h3{font-size:12px;display:flex;align-items:center;gap:5px}.bonus-box-card .pixel-icon{width:26px;height:26px}.bonus-box-card p,.bonus-box-card small{font-size:11px}.bonus-box-card>div{display:flex;flex-wrap:wrap;gap:5px}.bonus-box-card button{min-height:44px;font-size:11px}
+/* Continuous patrol; the clickable target moves with its drone. */
+.core-hero .core-drop{animation:drone-patrol 8s ease-in-out infinite alternate;will-change:left;top:clamp(34px,var(--drop-y,40%),calc(100% - 34px))}
+.core-drop:nth-child(2n){animation-duration:10s;animation-delay:-4s}.core-drop:nth-child(3n){animation-duration:12s;animation-delay:-7s}
+@keyframes drone-patrol{from{left:34px}to{left:calc(100% - 34px)}}
+.effects-off .core-hero .core-drop{animation:none!important;will-change:auto}@media(prefers-reduced-motion:reduce){.core-hero .core-drop{animation:none!important;will-change:auto}}
+@media(max-height:700px){.model-network{height:260px;min-height:260px}}
+.equipment-backdrop:has(.model-console){padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);align-items:stretch}
+.equipment-backdrop .model-console{height:100%!important;max-height:100%!important;border:0!important}.model-console-body{flex:1;overscroll-behavior-x:none}
+.forge-blueprint-learning{display:grid;gap:5px;margin-top:10px}.forge-blueprint-learning>button{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:8px;min-height:52px;text-align:left;font-size:11px}.forge-blueprint-learning .pixel-icon{width:24px;height:24px}.forge-blueprint-learning small{display:block;font-size:10px;color:#9fbfc7;margin-top:4px}
+.network-slot[data-motion-slot=core]>small{top:auto;bottom:4px;z-index:2}.network-slot.unlocked>.vector-icon{color:#c5f4d9;opacity:.85}.network-slot.locked>.vector-icon{color:#778f9d}
+.research-catalog .research-card{display:block!important;position:relative;min-height:108px;padding:8px!important}
+.research-catalog .research-card>.pixel-icon{position:absolute;left:8px;top:8px;width:18px;height:18px}
+.research-catalog .research-card>i{position:absolute;right:8px;top:8px;font-size:12px}
+.research-catalog .research-card>span:not(.pixel-icon){display:block;padding-top:24px;min-width:0}
+.research-catalog .research-card h3{font-family:var(--reading-font)!important;font-size:11px!important;letter-spacing:0;text-transform:none;line-height:1.35;overflow-wrap:anywhere}
+.research-catalog .research-card>span>small:not(.research-block-note){display:flex!important;align-items:center;gap:3px;flex-wrap:wrap;color:#b7d9d5;font-family:var(--reading-font);font-size:10px;margin-top:7px}
+.workshop-screen{padding:0;margin:0;width:100%}.workshop-action{padding:0;margin-inline:0;border-inline:0}.core-lab-background{width:100%;max-width:none}
+.workshop-screen .workshop-action{margin:0;width:100%}.core-hero .tap-surface{width:100%;max-width:none;margin:0;padding:0}
+
+.bonus-box-card .bonus-box-reveal{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:center;gap:6px;margin-top:10px}.bonus-box-illustration{width:72px;height:64px;grid-row:span 3}.bonus-box-materials{display:flex;flex-wrap:wrap;gap:8px}.bonus-box-materials>span{display:flex;align-items:center;gap:5px;font-size:10px}.bonus-box-materials .component-art{width:24px;height:24px}.bonus-box-materials b{display:block;color:#acedd1}.bonus-box-lid{transform:translateY(-14px) rotate(-8deg);transform-origin:10px 32px}.bonus-box-rays{opacity:1}.is-opening .bonus-box-lid{animation:bonus-lid-open 1.4s ease-out}.is-opening .bonus-box-materials{animation:bonus-loot-reveal 1.4s ease-out}@keyframes bonus-lid-open{0%{transform:none}35%,100%{transform:translateY(-14px) rotate(-8deg)}}@keyframes bonus-loot-reveal{0%,25%{opacity:0;transform:translateY(8px)}60%,100%{opacity:1;transform:none}}.effects-off .bonus-box-card *{animation:none!important}@media(prefers-reduced-motion:reduce){.bonus-box-card *{animation:none!important}}
+
+.research-catalog .research-card>.pixel-icon{padding:2px;display:grid;place-items:center}

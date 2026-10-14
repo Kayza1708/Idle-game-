@@ -1,3 +1,17 @@
+## 2026-10-14 · Mobiler Folgeauftrag nach PR #110 — Save v57
+
+- [x] Wiederhergestellte lokale Arbeit auf Basis von main `cff21a5`; eigener Branch `codex/mobile-forge-research-v2`.
+- [x] Hin-/Rückflug mit bewegter Touchfläche und Auszahlung am tatsächlichen Einsammelort; reduzierte Bewegung/Effekte aus berücksichtigt.
+- [x] Eine Veredelungsstation mit fünf Ausbaustufen. Historische bezahlte Parallelaufträge und Queues laufen aus; höchste alte Stationstufe und belegter Infrastrukturfortschritt erhalten.
+- [x] Zwei Ambossgrafiken mit eingezeichneten Sockeln; leere Auswahl beim Einstieg, herstellbare Items leuchtend, fehlende Materialien ausgegraut. Unbekannte/ungelernte Baupläne zeigen keine Itemgrafik.
+- [x] Neuer KI-Kern und sechs Familiensockel: Prozessor Kreis, Kern Dreieck, Forschung Quadrat. Serienfertigung als eigener 100-INT-Knoten nach Fertigung II, Transaktionssperre vor Erwerb.
+- [x] Kompakte Forschung mit sichtbaren Laboren, randlosen Screens und vertikalem Touchscroll; Mira-Finger auch bei geöffneter Dialogrede. Item-Level-up direkt aus der angezeigten Kostenkarte ohne Systemdialog.
+- [x] Missionskisten in der Schmiede erreichbar, sichtbare Öffnung und tatsächliche Materialicons/-mengen; Reload wiederholt weder Öffnung noch Auszahlung.
+- [x] 1.469 Tests/107 Dateien, Typecheck, Build und Diffcheck; zwölf neue Mobileprofile und sechs Modell-/Fusionsprofile mit realen Transaktionen und verifiziertem Save-Reload.
+- [ ] Native iPhone/WKWebView-Abnahme sowie natürliche Langzeitbalance des neuen Serienfertigungsknotens bleiben offen.
+
+Verträge und Prüfungen: [mobile-forge-research-v2.md](mobile-forge-research-v2.md). Kein Merge und keine Veröffentlichung.
+
 ## 2026-10-14 · Direkte main-Integration und kompakte Mobile-Rückkehr
 
 - Modell-/Schmiedepaket aus PR 109 direkt auf main übernommen: Der frühere Merge ging nach Abschluss von PR 108 nur in dessen Vorgängerbranch. Der neue PR richtet sich direkt an main.
