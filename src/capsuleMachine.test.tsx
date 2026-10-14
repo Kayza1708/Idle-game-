@@ -3,7 +3,7 @@ import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {newGame,addCredits,BALANCE,type GameState} from './economy';
 import {capsuleQuote,drawGemCapsule,rewardCapsuleVideo,validCapsuleMachine,capsuleItemPool} from './capsuleMachine';
-import {CapsulePanel} from './CapsulePanel';
+import {CapsulePanel,CapsuleMachineArt} from './CapsulePanel';
 import {serialize,restore,SAVE_VERSION} from './storage';
 import {prestige,axiomReset} from './prestige';
 import {startRunChallenge,abortRunChallenge} from './retention';
@@ -25,3 +25,5 @@ describe('capsule machine transactions',()=>{
  it('migrates v52 main and challenge snapshots without generating loot; rejects corrupt current saves',()=>{const s=ready(),old:any=structuredClone(s);delete old.capsuleMachine;const result=restore(JSON.stringify({version:52,state:old}),0);expect(result.error).toBeUndefined();expect(result.migrated).toBe(true);expect(result.state.capsuleMachine.draws).toBe(0);expect(result.state.gems).toBe(100);const run:any=structuredClone(startRunChallenge(s,'no-items'));delete run.capsuleMachine;delete run.challengeSession.main.capsuleMachine;expect(restore(JSON.stringify({version:52,state:run}),0).state.challengeSession?.main.capsuleMachine.draws).toBe(0);expect(restore(JSON.stringify({version:SAVE_VERSION,state:old}),0).error).toBeTruthy();expect(validCapsuleMachine({draws:1,items:0,last:null})).toBe(false);expect(()=>serialize({...s,ads:{...s.ads,counts:{capsule:7}}})).toThrow(TypeError)});
  it('renders real odds and an unavailable video button with a 44px target, without a fake ad claim',()=>{const markup=renderToStaticMarkup(<CapsulePanel s={ready()} act={()=>{}}/>);expect(markup).toContain('1% ITEM');expect(markup).toContain('0,25% JACKPOT');expect(markup).toMatch(/data-capsule-video="true" disabled/);expect(markup).toContain('Video derzeit nicht verfügbar')});
 });
+
+it('uses one filled cabinet image while retaining only the mechanical crank and ejected capsule layers',()=>{const html=renderToStaticMarkup(<CapsuleMachineArt/>);expect(html).toContain('/assets/game/capsule-machine-filled-v3.webp');expect(html).not.toContain('machine-balls');expect(html).not.toContain('radialGradient');expect(html).toContain('machine-crank');expect(html).toContain('machine-capsule');expect(html).toContain('machine-reveal-sparks')});

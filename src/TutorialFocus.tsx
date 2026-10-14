@@ -13,5 +13,5 @@ export function TutorialFocus({state,onShow,onSkip}:{state:GameState;onShow:(tab
   <img className="mira-character" src="/assets/game/mira-voss.png" alt="" aria-hidden="true"/>
   <div className="mira-speech"><button className="mira-close" onClick={onSkip} aria-label={guide.skip}>×</button><strong>{guide.title}</strong><div className="tutorial-copy"><p>{guide.explanation}</p>{guide.requirement&&<small className="mira-requirement">{guide.requirement}</small>}</div><button className="story-next mira-cue" onClick={()=>onShow(guide.tab,guide.subtab,guide.targetId)}>{guide.show} <span aria-hidden="true">›</span></button></div>
  </aside>;
- return <><TutorialFinger targetId={guide.targetId} routeTargetId={`tab-${guide.tab}`} animate={state.settings.effects}/>{content}</>;
+ return <><TutorialFinger targetId={guide.targetId} routeTargetId={guide.targetId==='tutorial-quality-training'?'tutorial-model-entry':`tab-${guide.tab}`} animate={state.settings.effects}/>{content}</>;
 }

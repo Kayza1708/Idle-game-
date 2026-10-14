@@ -18,7 +18,7 @@ import {createBalanceExportFiles} from './balanceReport';
 import {ItemCombinations} from './ItemCombinations';
 const ids=['parallel-architecture','learning-pipeline','material-mapping'] as const;
 const pairs:Record<typeof ids[number],[ItemTypeId,ItemTypeId]>={'parallel-architecture':['quantum-chip','tensor-core'],'learning-pipeline':['photonic-array','logic-seed'],'material-mapping':['field-scanner','memory-crystal']};
-const prepared=():GameState=>({...addCredits(addData(newGame(0,'9d-tests'),1e6),1e21),prestigeCount:1,purchasedEquipmentSlots:2,discovered:['calculator','sbc'],hardwareCounts:{...newGame(0).hardwareCounts,calculator:1},hardware:1});
+const prepared=():GameState=>({...addCredits(addData(newGame(0,'9d-tests'),1e6),1e9),prestigeCount:1,purchasedEquipmentSlots:2,discovered:['calculator','sbc'],hardwareCounts:{...newGame(0).hardwareCounts,calculator:1},hardware:1});
 const stocked=(id:typeof ids[number])=>pairs[id].reduce((s,type)=>createItem(s,type,'common'),prepared());
 const complete=(s:GameState)=>s.inventory.reduce((state,item)=>equip(state,item.id),s);
 const reload=(s:GameState)=>{const r=restore(serialize(s),s.savedAt);expect(r.error).toBeUndefined();return r.state;};
@@ -57,7 +57,7 @@ describe('9D applied production and training',()=>{
  });
  it.each(['quality','efficiency'] as const)('adds exactly 0.50 to B and charges the rounded %s quote, with unchanged running costs/duration',track=>{
   const s=complete(stocked('learning-pipeline')),comparison=trainingCombinationComparison(s,track),quote=trainingCostQuote(s,track);expect(quote.bonusTotal-comparison.before.bonusTotal).toBeCloseTo(.5,12);expect(quote.sources['combination:learning-pipeline']).toBe(.5);expect(quote.factor).toBeCloseTo(1/(1+quote.bonusTotal),12);
-  const started=startTraining(s,track);expect(ratio(exactEconomyValue(s,'data').subtract(exactEconomyValue(started,'data')),quote.cost)).toBeCloseTo(1,9);expect(started.activeTraining!.dataCostExact).toEqual(quote.cost.toJSON());expect(started.activeTraining!.costBasis!.bonusTotal).toBe(quote.bonusTotal);
+  const started=startTraining(s,track);expect(ratio(exactEconomyValue(s,'credits').subtract(exactEconomyValue(started,'credits')),quote.cost)).toBeCloseTo(1,9);expect(started.activeTraining!.creditCostExact).toEqual(quote.cost.toJSON());expect(started.activeTraining!.costBasis!.bonusTotal).toBe(quote.bonusTotal);
   const swapped=unequip(started,'processor');expect(swapped.activeTraining).toEqual(started.activeTraining);expect(reload(swapped).activeTraining).toEqual(started.activeTraining);
   expect(startTraining(unequip(s,'processor'),track).activeTraining!.workRequired).toBe(started.activeTraining!.workRequired);
   const capped={...s,trainingBoostUntil:1000},c=trainingCombinationComparison(capped,track);expect(c.before.factor).toBe(.5);expect(c.after.factor).toBe(.5);expect(c.after.capped).toBe(true);expect(c.after.cost.toJSON()).toEqual(c.before.cost.toJSON());

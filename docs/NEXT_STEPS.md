@@ -1,3 +1,21 @@
+## 2026-10-14 · Direkte main-Integration und kompakte Mobile-Rückkehr
+
+- Modell-/Schmiedepaket aus PR 109 direkt auf main übernommen: Der frühere Merge ging nach Abschluss von PR 108 nur in dessen Vorgängerbranch. Der neue PR richtet sich direkt an main.
+- Kompakter Offline-Dialog mit Ertrag/Materialien/Abschlüssen; vollständige Abrechnung und Navigation unter Details, feste erreichbare Aktionen. Haupttab Labor, Tap-/Hold-Erklärung bei Mira.
+- Neuer transparenter Automaten-Bitmap mit detailliertem gestapeltem Kapselinhalt; Kurbel/Ausgabe/Erfolgsfeier erhalten, unabhängige Kugellayer entfernt. Kein zusätzliches UI-Balancing oder Savewechsel.
+- Nachgewiesen: zwölf Mobile-Rückkehr-/Kapselprofile (360/390/430 px × 640/844 px × DE/EN), sechs Modell-/Schmiede-Interaktionsprofile, vier Laborlevel und Mira-Trainingsweg. Kleine Rückkehr ohne Scrollbedarf, Ziehen oberhalb der Navigation, keine Seitenüberbreite/fehlenden Assets/JS-Fehler.
+- 1.463 Tests/106 Dateien, Source-Path-Check/Typecheck, Build und Diffcheck grün. Native Geräteabnahme und natürliche Balance bleiben offen; kein Merge/Release. Details: [mobile-return-capsule-polish.md](mobile-return-capsule-polish.md).
+
+## 2026-10-14 · Mobile Modell und Schmiede v56
+
+- [x] Modellnetz mit sechs Familiensockeln, passende Ausrüstung/Buildvorschauen und geschützte Challengekopien; stufenweise Manufacturing-Freischaltungen.
+- [x] Training künftig Credits, echter später Archivknoten für normalen Prestige, Axiom-/Challengegrenzen; vorher bezahlte Datajobs erhalten.
+- [x] Sofortige neue Common-Items, Level1–69, höchstes Fusionlevel/Forge, Original-Schmiedegrafik, konkrete Recyclingrückgabe mit mobilem Dialog; alte bezahlte Timer erhalten.
+- [x] Bestätigte Craft-/Fusion-/Recyclingeffekte, reduzierte Bewegung; dezente Laborakzente bei Modelllevel10/25/50.
+- [ ] Natürliche Credit-/Item-/Fusion-/Archivkurven kalibrieren; native iPhone-/WKWebView-/VoiceOver-Abnahme und Releaseagenda weiterhin offen. Kein Merge/Release.
+- [x] 1.461 Tests/106 Dateien; Typecheck/Build, sechs echte Mobile-Interaktionsprofile DE/EN mit vorbereiteten Beständen und vier Laborlevelansichten; keine natürliche Balance-Abnahme.
+- Verträge, Asset und vollständiger Bildprompt: [model-forge-v1.md](model-forge-v1.md).
+
 ## 2026-10-14 · Paketdrohnen und tatsächliche iPhone-Korrekturen
 
 - [x] Fünf aktuelle iPhone-Screenshots geprüft; Labor 2 war in einer horizontalen Slotzeile verborgen. Zwei-/Vier-Lab-Raster mit vollständiger Breite, tatsächliche Zugänge unverändert.

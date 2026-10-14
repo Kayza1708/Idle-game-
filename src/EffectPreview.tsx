@@ -9,8 +9,8 @@ export function effectPreviewRows(before:GameState,after:GameState){
   {id:'credits',icon:'credits' as ResourceArtId,name:'Credits/s',before:creditRateScientific(before.hardware,before.level,before,before.savedAt),after:creditRateScientific(after.hardware,after.level,after,before.savedAt)},
   {id:'data',icon:'data' as ResourceArtId,name:before.settings.language==='de'?'Daten/s':'Data/s',before:dataRateScientific(before),after:dataRateScientific(after)},
   {id:'users',name:before.settings.language==='de'?'Nutzer':'Users',before:usersRateScientific(before),after:usersRateScientific(after)},
-  {id:'quality',icon:'data' as ResourceArtId,name:before.settings.language==='de'?'Qualität · Kosten':'Quality · cost',lower:true,before:trainingCostQuote(before,'quality').cost,after:trainingCostQuote(after,'quality').cost},
-  {id:'efficiency',icon:'data' as ResourceArtId,name:before.settings.language==='de'?'Effizienz · Kosten':'Efficiency · cost',lower:true,before:trainingCostQuote(before,'efficiency').cost,after:trainingCostQuote(after,'efficiency').cost},
+  {id:'quality',icon:'credits' as ResourceArtId,name:before.settings.language==='de'?'Qualität · Kosten':'Quality · cost',lower:true,before:trainingCostQuote(before,'quality').cost,after:trainingCostQuote(after,'quality').cost},
+  {id:'efficiency',icon:'credits' as ResourceArtId,name:before.settings.language==='de'?'Effizienz · Kosten':'Efficiency · cost',lower:true,before:trainingCostQuote(before,'efficiency').cost,after:trainingCostQuote(after,'efficiency').cost},
   {id:'research',icon:'research' as ResourceArtId,name:before.settings.language==='de'?'Laborleistung':'Lab performance',before:ScientificNumber.from(researchPerformanceQuote(before).laborFactor),after:ScientificNumber.from(researchPerformanceQuote(after).laborFactor)},
  ];return rows.filter(r=>r.before.compare(r.after)!==0);
 }
