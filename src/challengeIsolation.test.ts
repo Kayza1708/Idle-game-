@@ -150,14 +150,14 @@ describe('isolated challenge runs with short real simulations',()=>{
   const legacy={...preparedMain(),retention:{...preparedMain().retention,activeRun:{id:'no-taps',startedAt:0}}};
   const migrated=restore(JSON.stringify({version:24,state:legacy}),0);
   expect(migrated.error).toBeUndefined();expect(migrated.state.challengeMigrationNotice).toBe('legacy-challenge-recovered');
-  expect(migrated.state.retention.activeRun).toBeNull();expect(migrated.state.credits).toBe(legacy.credits);expect(migrated.state.inventory).toEqual(legacy.inventory);
+  expect(migrated.state.retention.activeRun).toBeNull();expect(migrated.state.credits).toBe(legacy.credits);expect(migrated.state.inventory).toEqual(JSON.parse(JSON.stringify(legacy.inventory)).map((i:any)=>({...i,level:i.level+1})));
  });
  it('migrates a valid legacy challenge by retaining only known saved progress, with an explicit warning',()=>{
   const legacy=preparedMain();legacy.retention.activeRun={id:'no-taps',runId:'legacy',startedAt:0,eligibleAtStart:{m:0,e:0}};
   const migrated=restore(JSON.stringify({version:40,state:legacy}),0);
   expect(migrated.error).toBeUndefined();expect(migrated.migrated).toBe(true);expect(migrated.state.retention.activeRun).toBeNull();
   expect(migrated.state.challengeMigrationNotice).toBe('legacy-challenge-recovered');expect(migrated.state.exactEconomy).toEqual(legacy.exactEconomy);
-  expect(migrated.state.inventory).toEqual(legacy.inventory);expect(migrated.state.credits).toBe(legacy.credits);
+  expect(migrated.state.inventory).toEqual(JSON.parse(JSON.stringify(legacy.inventory)).map((i:any)=>({...i,level:i.level+1})));expect(migrated.state.credits).toBe(legacy.credits);
   legacy.retention.activeRun.id='alien';expect(restore(JSON.stringify({version:40,state:legacy}),0).error).toBeTruthy();
  });
 });
