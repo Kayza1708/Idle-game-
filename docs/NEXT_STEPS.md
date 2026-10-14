@@ -1,3 +1,21 @@
+## 2026-10-14 · Paketdrohnen und tatsächliche iPhone-Korrekturen
+
+- [x] Fünf aktuelle iPhone-Screenshots geprüft; Labor 2 war in einer horizontalen Slotzeile verborgen. Zwei-/Vier-Lab-Raster mit vollständiger Breite, tatsächliche Zugänge unverändert.
+- [x] Training wieder klarer Button; randloses Labor ohne feste Tap-Zahl, Tippen-Floater erhalten; farbigere Navigation und kontrastreichere Werte.
+- [x] Physisch versetzte kosmetische Kugelpackung an der Glaswanne, eigene detaillierte Paketdrohne statt Kiste; flüssige Bewegung bei stabiler Touchfläche.
+- [x] Konkrete Materialnamen/Mengen und Währungen ohne Lootkasten; echte Drop-Belege statt gleichzeitiger passiver Materialien, auch bei folgenden Telemetrieereignissen.
+- [x] 1.413 Tests/105 Dateien, Typecheck/Build/Diffcheck, 222 frühe Ansichten und sechs zusätzliche mobile Interaktionsprofile. Asset/Prompt/Vertrag: [delivery-ui-corrections.md](delivery-ui-corrections.md).
+- [ ] Native iPhone-Abnahme; Produktions-Werbeanbieter und Kapsel-Langzeitkalibrierung weiterhin offen. Keine Gameplay-/Save-/Balanceänderung, kein Merge/Release.
+
+## 2026-10-14 · Abschluss-, Ausrüstungs- und Prestigeanimationen
+
+- [x] Forschung/Crafting/Forge: kurze freie Abschlusszeile, Gruppierung gleichzeitiger Aufträge, gezielter Impuls sichtbarer Ziele; doppelte Forge-/Craft-Itemtoasts entfernt.
+- [x] Bestätigter Itemwechsel: kosmetischer Flug zum sichtbaren Slot; keine blockierten Transfers oder Domainverzögerung.
+- [x] Neue Prestige-Knoten und Verbindungen: kurzer wandernder Lichtimpuls, keine dauerhaften Blinker.
+- [x] Reduzierte Bewegung/Effekte aus, Abbruch und Bereinigung; kein Replay bei Reload, Kontextwechsel oder Offline-Rückkehr.
+- [x] 1.410 Tests/105 Dateien, 99 gezielte Nachlaufprüfungen, Typecheck/Build/Diffcheck und sechs mobile Interaktionsprofile; Vertrag: [progression-motion.md](progression-motion.md).
+- [ ] Native iPhone-Abnahme; weiterhin Kapsel-Langzeitkalibrierung und echter Werbeanbieter. Kein Merge/Release dieses Auftrags.
+
 ## 2026-10-14 · Beute, Automat und randloses Labor
 
 - [x] Dichte fünffarbige Kugelstapel, besondere Item-/Jackpot-Enthüllung und geprüfte einmalige Auszahlung; sechs echte Click-/Save-/Reload-Profile.

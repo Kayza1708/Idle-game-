@@ -1,3 +1,4 @@
+import {machineBallPile} from './machineBallPile';
 import {ScientificNumber} from './scientificNumber';
 import {CapsuleCelebration} from './CapsuleCelebration';
 import {itemText,componentText} from './gameplayI18n';
@@ -9,11 +10,11 @@ import {MobileDetailSheet} from './MobileDetailSheet';
 
 /** Detailed original bitmap cabinet, with independent mechanical sprite layers. */
 export function CapsuleMachineArt(){
- const clip=useId(),colors=['#efb758','#74cbb9','#ac9ad7','#e17a67','#75b8dd'],balls=[[196, 633], [264, 633], [332, 633], [400, 633], [455, 633], [523, 633], [591, 633], [646, 633], [714, 633], [160, 579], [228, 579], [296, 579], [364, 579], [419, 579], [487, 579], [555, 579], [610, 579], [678, 579], [746, 579], [167, 514], [235, 514], [303, 514], [371, 514], [426, 514], [494, 514], [562, 514], [617, 514], [685, 514], [753, 514], [203, 449], [271, 449], [339, 449], [407, 449], [462, 449], [530, 449], [598, 449], [653, 449], [721, 449], [242, 395], [310, 395], [378, 395], [446, 395], [501, 395], [569, 395], [637, 395], [692, 395], [304, 330], [372, 330], [440, 330], [508, 330], [563, 330], [631, 330]];
+ const clip=useId(),colors=['#efb758','#74cbb9','#ac9ad7','#e17a67','#75b8dd'];
  return <svg className="capsule-machine-art" viewBox="0 0 1024 1536" shapeRendering="crispEdges" aria-hidden="true">
-  <defs>{colors.map((color,i)=><radialGradient key={i} id={`${clip}-ball-${i}`} cx="30%" cy="25%" r="75%"><stop offset="0" stopColor="#f4eecb"/><stop offset=".28" stopColor={color}/><stop offset=".7" stopColor={color}/><stop offset="1" stopColor="#234355"/></radialGradient>)}<clipPath id={clip}><path d="M256 204H768L868 318L895 537L836 688H184L132 537L160 318Z"/></clipPath></defs>
+  <defs>{colors.map((color,i)=><radialGradient key={i} id={`${clip}-ball-${i}`} cx="30%" cy="25%" r="75%"><stop offset="0" stopColor="#f4eecb"/><stop offset=".28" stopColor={color}/><stop offset=".7" stopColor={color}/><stop offset="1" stopColor="#234355"/></radialGradient>)}<clipPath id={clip}><path d="M256 204H768L868 318L895 537L850 698Q512 784 174 698L132 537L160 318Z"/></clipPath></defs>
   <image href="/assets/game/capsule-machine-v2.webp" width="1024" height="1536"/>
-  <g className="machine-balls" clipPath={`url(#${clip})`}>{balls.map(([x,y],i)=><g key={i} transform={`translate(${x} ${y}) rotate(${(i*23)%28-14})`}><g className="machine-ball" style={{animationDelay:`${-(i%7)*.05}s`}}><circle r="42" fill="#17394c"/><circle r="39" fill={`url(#${clip}-ball-${(i*7+Math.floor(i/4))%colors.length})`}/><ellipse cx="-12" cy="-17" rx="9" ry="5" fill="#fff8dc" opacity=".7"/></g></g>)}</g>
+  <g className="machine-balls" clipPath={`url(#${clip})`}>{machineBallPile.map(({x,y,r,color},i)=><g key={i} transform={`translate(${x.toFixed(2)} ${y.toFixed(2)}) rotate(${(i*23)%28-14})`}><g className="machine-ball" style={{animationDelay:`${-(i%7)*.05}s`}}><circle r={r+1} fill="#17394c"/><circle r={r} fill={`url(#${clip}-ball-${color})`}/><ellipse cx={-r*.3} cy={-r*.42} rx={r*.22} ry={r*.13} fill="#fff8dc" opacity=".7"/></g></g>)}</g>
   <path fill="#cbfff0" opacity=".14" d="M217 280h22v218h-22zM247 246h12v142h-12zM820 290h12v210h-12z"/>
   <g className="machine-crank"><path fill="#183347" d="M485 981h148v44H485z"/><path fill="#ddb05e" d="M489 977h144v36H489z"/><path fill="#ffe2a2" d="M493 977h136v8H493z"/><path fill="#8e6234" d="M497 1005h132v8H497z"/><path fill="#183347" d="M612 959h44v82h-44z"/><path fill="#e9c579" d="M620 965h28v68h-28z"/><path fill="#fff0c0" d="M620 965h8v62h-8z"/></g>
   <g className="machine-door"><path fill="#132d3e" d="M412 1162h204v136H412z"/><path fill="#63858b" d="M412 1162h204v10H412z"/></g>
