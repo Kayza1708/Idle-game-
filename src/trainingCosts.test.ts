@@ -3,8 +3,8 @@ import { describe, it, expect } from "vitest";
 import {
   newGame,
   buyHardwareClass,
-  addData,
-  addDataScientific,
+  addData,addCredits,
+  addCreditsScientific,
   trainingCostQuote,
   trainingPreview,
   startTraining,
@@ -14,7 +14,7 @@ import {
   grantComponents,
   itemEffectFor,
   deepPrestigeBonus,
-  trainingDataCostForLevelScientific,
+  trainingBaseCreditCostScientific,
   usersRateScientific,
   creditRateScientific,
   type GameState,
@@ -41,7 +41,7 @@ import {
 const ready = () =>
   grantComponents(
     {
-      ...buyHardwareClass(addData(newGame(0), 1e6), "calculator"),
+      ...buyHardwareClass(addCredits(addData(newGame(0),1e6),1e9), "calculator"),
       prestigeCount: 1,
       unlockedEquipmentSlots: 3,
     },
@@ -55,15 +55,15 @@ const withItem = (
   const s = createItem({...grantComponents(ready(),{siliconWafers:1000,photonicLenses:1000,superconductors:100,neuralCrystals:100}),foundries:[{level:1,active:null,queue:[]}]}, type, rarity);
   return equip(s, s.inventory[0].id);
 };
-describe("training Data cost bonuses", () => {
-  it("retains unrounded base, rounds only the final price, and has no credit cost", () => {
+describe("training Credit cost bonuses", () => {
+  it("retains unrounded base, rounds only the final price, and has no Data cost", () => {
     for (let level = 1; level < 15; level++) {
       const s = { ...ready(), qualityLevel: level - 1, level: level - 1 },
         q = trainingCostQuote(s, "quality");
-      expect(q.cost.compare(trainingDataCostForLevelScientific(level))).toBe(0);
+      expect(q.cost.toNumber()).toBeCloseTo(Math.ceil(q.baseCost.toNumber()),6);
       expect(q.factor).toBe(1);
-      expect(q.baseCost.toNumber()).toBeCloseTo(15 * 1.75 ** (level - 1), 8);
-      expect(startTraining(s, "quality").credits).toBe(s.credits);
+      expect(q.baseCost.toNumber()/(300 * 2.4 ** (level - 1))).toBeCloseTo(1,12);
+      expect(startTraining(s, "quality").data).toBe(s.data);
     }
   });
   it("converts graph +20% to 1/1.2 and adds actual milestone and item sources exactly once", () => {
@@ -75,7 +75,7 @@ describe("training Data cost bonuses", () => {
       bonusTotal: 0.2,
       factor: 1 / 1.2,
     });
-    expect(trainingCostQuote(graph, "quality").cost.toNumber()).toBe(13);
+    expect(trainingCostQuote(graph, "quality").cost.toNumber()).toBe(250);
     let s = withItem();
     s = {
       ...s,
@@ -87,11 +87,11 @@ describe("training Data cost bonuses", () => {
     expect(Object.values(q.sources)).toHaveLength(5);
     expect(q.bonusTotal).toBeCloseTo(0.2 + 0.05 + 0.1 + 0.09 + item, 14);
     expect(q.factor).toBeCloseTo(1 / (1 + q.bonusTotal), 14);
-    expect(q.cost.toNumber()).toBe(Math.ceil(15 * q.factor));
+    expect(q.cost.toNumber()).toBe(Math.ceil(300 * q.factor));
   });
   it("caps the discount at 50%, including ceiling of odd costs and temporary expiry", () => {
     const s = { ...ready(), trainingBoostUntil: 1000 };
-    expect(trainingCostQuote(s, "quality").cost.toNumber()).toBe(8);
+    expect(trainingCostQuote(s, "quality").cost.toNumber()).toBe(150);
     expect(trainingCostQuote(s, "quality").factor).toBe(0.5);
     const both = {
       ...s,
@@ -102,7 +102,7 @@ describe("training Data cost bonuses", () => {
       },
     };
     expect(trainingCostQuote(both, "quality").bonusTotal).toBe(2);
-    expect(trainingCostQuote(both, "quality", 2000).cost.toNumber()).toBe(15);
+    expect(trainingCostQuote(both, "quality", 2000).cost.toNumber()).toBe(300);
     expect(
       trainingCostQuote(
         {
@@ -166,9 +166,7 @@ describe("training Data cost bonuses", () => {
             after: p.result,
           }),
         );
-      expect(html).toContain(
-        language === "de" ? "keine sofortige Ersparnis" : "no immediate saving",
-      );
+      expect(html).toContain("Credits");
       expect(
         renderToStaticMarkup(
           createElement(TrainingCostDetails, { s: state, track: "quality" }),
@@ -185,8 +183,8 @@ describe("training Data cost bonuses", () => {
       p = trainingPreview(s, "quality");
     expect(JSON.stringify(s)).toBe(before);
     const started = startTraining(s, "quality");
-    expect(exactEconomyValue(s, "data").subtract(p.cost).toJSON()).toEqual(
-      started.exactEconomy.data,
+    expect(exactEconomyValue(s, "credits").subtract(p.cost).toJSON()).toEqual(
+      started.exactEconomy.credits,
     );
     expect(started.activeTraining?.costBasis).toMatchObject({
       factor: p.factor,
@@ -197,11 +195,11 @@ describe("training Data cost bonuses", () => {
     const files = createBalanceExportFiles(started, 0),
       summary = JSON.parse(files["summary.json"]),
       economy = JSON.parse(files["economy.json"]);
-    expect(summary.jobs.training.cost.data).toEqual(p.cost.toJSON());
+    expect(summary.jobs.training.cost.credits).toEqual(p.cost.toJSON());
     expect(summary.jobs.training.costBasis).toEqual(
       started.activeTraining!.costBasis,
     );
-    expect(economy.formulas.trainingDataCost.cost).toBe(
+    expect(economy.formulas.trainingCreditCost.cost).toBe(
       "ceil(unrounded base * factor)",
     );
     expect(files["events.jsonl"]).toContain("trainingBonusSources");
@@ -218,7 +216,7 @@ describe("training Data cost bonuses", () => {
       started = startQueuedTrainingIfAffordable(s);
     expect(queued).toEqual([{ track: "quality", targetLevel: 1 }]);
     expect(started.trainingQueue).toEqual([]);
-    expect(started.activeTraining?.dataCostExact).toEqual(quote.cost.toJSON());
+    expect(started.activeTraining?.creditCostExact).toEqual(quote.cost.toJSON());
     expect(started.activeTraining?.costBasis?.sources).toEqual(quote.sources);
   });
   it("starts the next queued job once on the regular simulation step after completion", () => {
@@ -228,15 +226,15 @@ describe("training Data cost bonuses", () => {
     s = createItem(s, "logic-seed", "rare");
     s = equip(s, s.inventory.at(-1)!.id);
     const expected = trainingCostQuote(s, "efficiency"),
-      before = exactEconomyValue(s, "data"),
+      before = exactEconomyValue(s, "credits"),
       done = advance(s, 91).state;
     expect(done.qualityLevel).toBe(1);
     expect(done.activeTraining?.track).toBe("efficiency");
-    expect(done.activeTraining?.dataCostExact).toEqual(expected.cost.toJSON());
+    expect(done.activeTraining?.creditCostExact).toEqual(expected.cost.toJSON());
     expect(done.activeTraining?.startedAt).toBe(90000);
     expect(done.trainingQueue).toEqual([]);
     expect(
-      before.subtract(expected.cost).compare(exactEconomyValue(done, "data")),
+      before.subtract(expected.cost).compare(exactEconomyValue(done, "credits")),
     ).toBeLessThan(0);
     expect(
       done.telemetry.recentEvents.filter((e) => e.type === "training-start"),
@@ -268,8 +266,8 @@ describe("training Data cost bonuses", () => {
     ).toEqual(creditRateScientific(s.hardware, s.level, s).toJSON());
     expect(advance(loaded, 88).state.qualityLevel).toBe(1);
   });
-  it("handles levels above native overflow and rejects insufficient Data without any mutation", () => {
-    const s = addDataScientific(
+  it("handles levels above native overflow and rejects insufficient Credits without any mutation", () => {
+    const s = addCreditsScientific(
         {
           ...newGame(0),
           qualityLevel: 1500,
@@ -281,13 +279,13 @@ describe("training Data cost bonuses", () => {
       p = trainingPreview(s, "quality");
     expect(p.cost.exponent).toBeGreaterThan(308);
     const started = startTraining(s, "quality");
-    expect(started.activeTraining?.dataCostExact).toEqual(p.cost.toJSON());
+    expect(started.activeTraining?.creditCostExact).toEqual(p.cost.toJSON());
     expect(importGame(serialize(started)).activeTraining).toEqual(
       started.activeTraining,
     );
     expect(
       JSON.parse(createBalanceExportFiles(started)["summary.json"]).jobs
-        .training.cost.data.e,
+        .training.cost.credits.e,
     ).toBeGreaterThan(308);
     const poor = addData(newGame(0), 12);
     expect(startTraining(poor, "quality")).toBe(poor);
@@ -310,10 +308,8 @@ describe("training Data cost bonuses", () => {
     ).toThrow(/Trainingskosten/);
     const legacy = {
       ...s,
-      activeTraining: { ...s.activeTraining!, costBasis: undefined },
+      activeTraining: { ...s.activeTraining!, costBasis: undefined, paymentResource: 'data' as const, creditCost:0, creditCostExact:undefined,dataCost:15,dataCostExact:{m:1.5,e:1} },
     };
-    expect(importGame(serialize(legacy)).activeTraining?.dataCostExact).toEqual(
-      s.activeTraining?.dataCostExact,
-    );
+    expect(importGame(serialize(legacy)).activeTraining?.dataCost).toBe(15);
   });
 });

@@ -22,7 +22,7 @@ function grant(s:GameState,id:number,payment:CapsuleReceipt['payment'],rng:()=>n
  let next=s,item:CapsuleReceipt['item']=null,components:CapsuleReceipt['components']={},rarity:Rarity='common',kind:CapsuleReceipt['kind']='components',resource:CapsuleReceipt['resource']=null;const roll=random();
  if(roll<q.itemChance){
   if(!q.items.length)return s;let value=random(),picked=rarities.at(-1)!;for(const r of rarities){value-=BALANCE.rarity[r].chance;if(value<0){picked=r;break}}
-  rarity=picked;const type=q.items[Math.floor(random()*q.items.length)];next=createItem(s,type,rarity);if(next===s)return s;item={id:next.inventory.at(-1)!.id,type};kind='item';
+  rarity='common';const type=q.items[Math.floor(random()*q.items.length)];next=createItem(s,type,rarity);if(next===s)return s;item={id:next.inventory.at(-1)!.id,type};kind='item';
  }else if(roll<q.itemChance+BALANCE.capsuleMachine.componentChance){
   let value=random(),picked=q.materials.at(-1);for(const row of q.materials){value-=row.chance;if(value<0){picked=row;break}}if(!picked)return s;
   rarity=capsuleMaterialTier(picked.chance);const [minimum,maximum]=BALANCE.capsuleMachine.componentRanges[rarity as 'common'|'uncommon'|'rare'],amount=minimum+Math.floor(random()*(maximum-minimum+1));

@@ -12,7 +12,7 @@ import {blueprintQuote} from './blueprints';
 import {specialItemEffectText,specialItemComparisonText} from './specialItemText';
 import {TrainingItemCostComparison} from "./TrainingCostDetails";
 import { itemImprovementHasEffect } from "./itemMechanics";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   BALANCE,
   type GameState,
@@ -48,16 +48,17 @@ import { MobileDetailSheet } from "./MobileDetailSheet";
 import { JobDetails } from "./JobDetails";
 import { ScientificNumber } from "./scientificNumber";
 type Action = (name: string, ...args: any[]) => void;
-export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
+export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; act: Action;mode?:"components"|"items";embedded?:boolean }) {
   const language = s.settings.language,
     de = language === "de",
     [view, setView] = useState<
       "components" | "modules" | "workbench" | "items"
-    >("components"),
+    >(mode??"components"),
     [component, setComponent] = useState<ComponentId | null>(null),
     [itemId, setItemId] = useState<string | null>(null),
     [fusion, setFusion] = useState<string[]>([]),
     [quantity, setQuantity] = useState(1);
+  useEffect(()=>{if(mode)setView(mode)},[mode]);
   const item = s.inventory.find((i) => i.id === itemId),
     jobs = [s.crafting.active, ...s.crafting.queue].filter((j) => !!j),
     equipped = (id: string) => Object.values(s.equipped).includes(id);
@@ -231,7 +232,7 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
     );
   };
   return (
-    <div className="panel mobile-screen inventory-screen">
+    <div className={`panel mobile-screen inventory-screen ${embedded?"embedded-inventory":""}`}>
       <header className="mobile-screen-title">
         <h1>{de ? "Inventar" : "Inventory"}</h1>
         <button onClick={() => act("open-equipment")}>
@@ -535,107 +536,8 @@ export function InventoryScreen({ s, act }: { s: GameState; act: Action }) {
               </section>
             );
           })}
-          <details className="system-disclosure"><summary>{de?'Build & Synergien':'Build & synergies'}</summary><DeviceDetails s={s} item={item}/></details><details className="system-disclosure"><summary>{de?'Forge & Recycling':'Forge & recycling'}</summary><ItemForgeDetails s={s} item={item} act={(name,...args)=>{if(name==='open-material'){setItemId(null);setComponent(args[0]);}else act(name,...args)}}/><RecoveryDetails s={s} item={item} act={act}/></details>{item.rarity!=='mythic'&&<button onClick={()=>act('pin-goal',{kind:'item-upgrade',id:item.id,target:rarities.indexOf(item.rarity)+1})}>{de?'Nächste Aufwertung anheften':'Pin next upgrade'}</button>}
-          <section className="improvement-card">
-            <h3>
-              {de
-                ? "Fusion: drei gleiche Items"
-                : "Fusion: three matching items"}
-            </h3>
-            <p>
-              {de
-                ? "Die zuerst ausgewählte Instanz bleibt als Basis erhalten: Level und Schmiedestufe bleiben. Zwei Duplikate werden verbraucht; Qualität steigt um eine Stufe."
-                : "The first selected instance is retained: level and forge are kept. Two duplicates are consumed; rarity increases one tier."}
-            </p>
-            {s.inventory
-              .filter((i) => i.type === item.type && i.rarity === item.rarity)
-              .map((i) => (
-                <label className="fusion-choice" key={i.id}>
-                  <input
-                    type="checkbox"
-                    disabled={i.locked || equipped(i.id)}
-                    checked={fusion.includes(i.id)}
-                    onChange={(e) =>
-                      setFusion(
-                        e.target.checked
-                          ? [...fusion, i.id]
-                          : fusion.filter((id) => id !== i.id),
-                      )
-                    }
-                  />
-                  {i.id} · Lv {i.level} · +{i.forge ?? 0}
-                  {i.locked || equipped(i.id)
-                    ? ` · ${de ? "Geschützt" : "Protected"}`
-                    : ""}
-                </label>
-              ))}
-            <p>{de ? "Basisinstanz" : "Base instance"}: {fusion[0] ?? "—"}</p>
-            <p role="status">
-              {fusionPreview(s, fusion).reason === "protected"
-                ? de
-                  ? "Gesperrte oder ausgerüstete Instanzen sind geschützt"
-                  : "Locked or equipped instances are protected"
-                : fusionPreview(s, fusion).reason === "maximum"
-                  ? de
-                    ? "Mythische Items können nicht fusioniert werden"
-                    : "Mythic items cannot be fused"
-                  : fusionPreview(s, fusion).allowed
-                    ? `${de ? "Ergebnis" : "Result"}: ${rarityText(fusionPreview(s, fusion).result!.rarity, language)}`
-                    : de
-                      ? "Genau drei unterschiedliche, ungeschützte Instanzen gleicher Art und Qualität auswählen"
-                      : "Select exactly three distinct unprotected instances of the same type and rarity"}
-            </p>
-            {fusionPreview(s, fusion).allowed && (
-              <>
-                <p>{de ? "Effekte des Ergebnisses" : "Result effects"}</p>
-                {effect({
-                  ...(fusionPreview(s, fusion).result ?? item),
-                  rarity: fusionPreview(s, fusion).result!.rarity,
-                  level: fusionPreview(s, fusion).result!.level,
-                  forge: fusionPreview(s, fusion).result!.forge ?? 0,
-                })}
-                {!itemImprovementHasEffect(s, s.inventory.find(i => i.id === fusion[0]) ?? item, {
-                  ...(fusionPreview(s, fusion).result ?? item),
-                  rarity: fusionPreview(s, fusion).result!.rarity,
-                  level: fusionPreview(s, fusion).result!.level,
-                  forge: fusionPreview(s, fusion).result!.forge ?? 0,
-                }) && (
-                  <p>
-                    {de
-                      ? "Qualitätswechsel ohne angewendete Bonusänderung: derzeit nicht bedienbar."
-                      : "Rarity change without an applied bonus change: currently unavailable."}
-                  </p>
-                )}
-              </>
-            )}
-            <button
-              disabled={
-                !fusionPreview(s, fusion).allowed ||
-                !itemImprovementHasEffect(s, s.inventory.find(i => i.id === fusion[0]) ?? item, {
-                  ...(fusionPreview(s, fusion).result ?? item),
-                  rarity:
-                    fusionPreview(s, fusion).result?.rarity ?? item.rarity,
-                  level: fusionPreview(s, fusion).result?.level ?? item.level,
-                  forge: fusionPreview(s, fusion).result?.forge ?? item.forge ?? 0,
-                })
-              }
-              onClick={() => {
-                const q = fusionPreview(s, fusion);
-                if (
-                  q.allowed &&
-                  confirm(
-                    `${de ? "Instanzen unwiderruflich verbrauchen" : "Permanently consume instances"}: ${fusion.slice(1).join(", ")} → ${rarityText(q.result!.rarity, language)}`,
-                  )
-                ) {
-                  act("item-fuse", fusion);
-                  setFusion([]);
-                  setItemId(null);
-                }
-              }}
-            >
-              {de ? "Fusion bestätigen" : "Confirm fusion"}
-            </button>
-          </section>
+          <details className="system-disclosure"><summary>{de?'Build & Synergien':'Build & synergies'}</summary><DeviceDetails s={s} item={item}/></details><details className="system-disclosure"><summary>{de?'Forge & Recycling':'Forge & recycling'}</summary><ItemForgeDetails s={s} item={item} act={(name,...args)=>{if(name==='open-material'){setItemId(null);setComponent(args[0]);}else act(name,...args)}}/><RecoveryDetails s={s} item={item} act={act}/></details>{item.level<69&&<button onClick={()=>act('pin-goal',{kind:'item-upgrade',id:item.id,target:item.level+1})}>{de?'Nächste Aufwertung anheften':'Pin next upgrade'}</button>}
+          <button onClick={()=>{setItemId(null);window.dispatchEvent(new CustomEvent('forge-navigate',{detail:'fusion'}))}}>{de?'Am Amboss fusionieren':'Fuse at the anvil'} ›</button>
 
         </MobileDetailSheet>
       )}

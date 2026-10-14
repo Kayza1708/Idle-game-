@@ -1,7 +1,9 @@
+// Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
+import {legacyPaidCraft as craft,legacyCraftAffordability as craftAffordability} from './testSupport/legacyPaidCraft';
 import {describe,expect,it} from 'vitest';
 import {BALANCE,creditRateScientific,exactEconomyValue,newGame,registerTap,tapCreditsScientific} from './economy';
 import {completeExperiment,queueExperiment} from './experiments';
-import {craft,craftAffordability,equip,createItem} from './inventory';
+import {equip,createItem} from './inventory';
 import {advance} from './simulation';
 import {restore,serialize} from './storage';
 import {prestige} from './prestige';

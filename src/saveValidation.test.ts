@@ -1,7 +1,8 @@
+import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {learnBlueprint} from './blueprints';
 import {describe,expect,it} from 'vitest';
 import {BALANCE,newGame,addData,grantComponents,creditRate,type GameState} from './economy';
-import {craft,craftModule,createItem,equip} from './inventory';
+import {craftModule,createItem,equip} from './inventory';
 import {advance} from './simulation';
 import {SAVE_VERSION,SAVE_KEY,BACKUP_KEYS,TEMP_KEY,importGame,restore,serialize,validate,persistGame,loadGame,type StorageLike} from './storage';
 import {persistDurableGame} from './durableStorage';

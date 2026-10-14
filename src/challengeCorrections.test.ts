@@ -18,13 +18,13 @@ import {settleResearchCompletions,advance} from './simulation';
 const account=():GameState=>({...newGame(0),prestigeCount:1,lifetime:{...newGame(0).lifetime,hardwareClasses:[...hardwareIds]},completedResearch:['blueprints','distributedInference'],researchAccessIds:[...repeatableResearchIds],nodes:['shoppingAgent'],hardwareAutoBuyers:{calculator:true},challengeStages:Object.fromEntries(Object.keys(BALANCE.challengeCatalog.families).map(id=>[id,68]))});
 const reload=(s:GameState)=>{const result=restore(serialize(s),s.savedAt);expect(result.error).toBeUndefined();return result.state;};
 describe('review corrections with persisted paid contracts',()=>{
- it('keeps the chosen fusion base, level, Forge, tap counters and exact combined recovery budget',()=>{
+ it('keeps the highest-level fusion base, level, Forge, tap counters and exact combined recovery budget',()=>{
   let s=newGame(0);for(let n=0;n<3;n++)s=createItem(s,'impulse-relay','common');
   s={...s,inventory:s.inventory.map((i,n)=>({...i,level:n+2,forge:n+4,relayTaps:n+10,materialBasis:{circuits:20+n},recoveryUsed:{circuits:1}}))};
   const ids=[s.inventory[1].id,s.inventory[0].id,s.inventory[2].id],before=structuredClone(s),preview=fusionPreview(s,ids),out=fuseItems(s,ids);
-  expect(s).toEqual(before);expect(preview.result).toMatchObject({id:ids[0],level:3,forge:5});expect(out.nextId).toBe(s.nextId);
-  expect(out.inventory).toHaveLength(1);expect(out.inventory[0]).toMatchObject({id:ids[0],rarity:'uncommon',level:3,forge:5,relayTaps:11,materialBasis:{circuits:63},recoveryUsed:{circuits:3}});
-  expect(reload(out).inventory).toEqual(out.inventory);const q=salvageQuote(out,ids[0]);expect(q.returned.circuits!+q.remainders.circuits+3).toBeCloseTo(63*.6);
+  expect(s).toEqual(before);expect(preview.result).toMatchObject({id:ids[2],level:4,forge:6});expect(out.nextId).toBe(s.nextId);
+  expect(out.inventory).toHaveLength(1);expect(out.inventory[0]).toMatchObject({id:ids[2],rarity:'uncommon',level:4,forge:6,relayTaps:12,materialBasis:{circuits:63},recoveryUsed:{circuits:3}});
+  expect(reload(out).inventory).toEqual(out.inventory);const q=salvageQuote(out,ids[2]);expect(q.returned.circuits!+q.remainders.circuits+3).toBeCloseTo(63*.6);
  });
  it('accumulates ten isolated rare finds with a ten-percent bonus through reload',()=>{
   let s=newGame(0),total=0;const factors={base:1,semiconductor:1,photonic:1,frontier:1,quantum:1.1};

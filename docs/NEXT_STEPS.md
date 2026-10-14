@@ -1,3 +1,13 @@
+## 2026-10-14 · Mobile Modell und Schmiede v56
+
+- [x] Modellnetz mit sechs Familiensockeln, passende Ausrüstung/Buildvorschauen und geschützte Challengekopien; stufenweise Manufacturing-Freischaltungen.
+- [x] Training künftig Credits, echter später Archivknoten für normalen Prestige, Axiom-/Challengegrenzen; vorher bezahlte Datajobs erhalten.
+- [x] Sofortige neue Common-Items, Level1–69, höchstes Fusionlevel/Forge, Original-Schmiedegrafik, konkrete Recyclingrückgabe mit mobilem Dialog; alte bezahlte Timer erhalten.
+- [x] Bestätigte Craft-/Fusion-/Recyclingeffekte, reduzierte Bewegung; dezente Laborakzente bei Modelllevel10/25/50.
+- [ ] Natürliche Credit-/Item-/Fusion-/Archivkurven kalibrieren; native iPhone-/WKWebView-/VoiceOver-Abnahme und Releaseagenda weiterhin offen. Kein Merge/Release.
+- [x] 1.461 Tests/106 Dateien; Typecheck/Build, sechs echte Mobile-Interaktionsprofile DE/EN mit vorbereiteten Beständen und vier Laborlevelansichten; keine natürliche Balance-Abnahme.
+- Verträge, Asset und vollständiger Bildprompt: [model-forge-v1.md](model-forge-v1.md).
+
 ## 2026-10-14 · Paketdrohnen und tatsächliche iPhone-Korrekturen
 
 - [x] Fünf aktuelle iPhone-Screenshots geprüft; Labor 2 war in einer horizontalen Slotzeile verborgen. Zwei-/Vier-Lab-Raster mit vollständiger Breite, tatsächliche Zugänge unverändert.

@@ -1,7 +1,7 @@
 import {challengeAutomationUnlocks,challengeStartQuote,challengeCompletionQuote,challengeCatalogQuote,type ChallengeFamily,emptyChallengeMetrics} from './challengeStages';
 import {archiveChallengeTelemetry,addEvent} from './telemetry';
 import {advanceTo,emptyReport} from './simulation';
-import {BALANCE,equipmentSlots,equipmentSlotCount,exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
+import {BALANCE,equipmentSlots,slotFamily,equipmentSlotCount,exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import type {Language} from './i18n';
 export type Challenge={id:string;name:string;description:string;stars:number;check:(s:GameState)=>boolean};
@@ -250,7 +250,7 @@ export function claimChallenge(s:GameState,id:string){const c=challenges.find(x=
 /** Only permanent bonuses/knowledge and immutable equipment copies cross this boundary. */
 export function startRunChallenge(s:GameState,id:string,stage=1,itemIds?:string[],networkLinks?:HardwareId[]):GameState{
  const q=challengeStartQuote(s,id,stage,itemIds??(id==='no-items'?[]:Object.values(s.equipped).filter((x):x is string=>!!x)),networkLinks);if(!q.allowed)return s;
- const fresh=newGame(s.savedAt,s.telemetry.campaignId),runId=`${s.telemetry.campaignId}:${id}:${crypto.randomUUID()}`,inventory=q.loadout.map((item,index)=>({...item,id:`loadout-${index}`,materialBasis:undefined,recoveryUsed:undefined})),equipped=Object.fromEntries(inventory.map(i=>[itemTypes[i.type].slot,i.id]));
+ const fresh=newGame(s.savedAt,s.telemetry.campaignId),runId=`${s.telemetry.campaignId}:${id}:${crypto.randomUUID()}`,inventory=q.loadout.map((item,index)=>({...item,id:`loadout-${index}`,materialBasis:undefined,recoveryUsed:undefined})),equipped=Object.fromEntries(inventory.map((item,index)=>{const prior=inventory.slice(0,index).filter(i=>itemTypes[i.type].slot===itemTypes[item.type].slot).length;return[equipmentSlots.filter(slot=>slotFamily(slot)===itemTypes[item.type].slot)[prior],item.id]}));
  return addEvent({...fresh,aiName:s.aiName,profile:{...fresh.profile,playerName:s.profile.playerName},settings:{...s.settings},clockOffsetMs:s.clockOffsetMs,gems:0,nodes:[...s.nodes],axiomUpgrades:[...s.axiomUpgrades],axiomUpgradeLevels:{...s.axiomUpgradeLevels},availableAxioms:0,totalAxiomsEarned:s.totalAxiomsEarned,axioms:0,exactAxioms:{available:{m:0,e:0},total:s.exactAxioms?.total??{m:s.totalAxiomsEarned,e:0}},totalINTEarned:s.totalINTEarned,prestigeCount:s.prestigeCount,unlockedEquipmentSlots:equipmentSlotCount(s),blueprintResearchReward:s.blueprintResearchReward,completedResearch:[...s.completedResearch],researchLevels:{...s.researchLevels},researchAccessIds:[...s.researchAccessIds],purchasedResearchLabs:s.purchasedResearchLabs,inventory,equipped,challengeStages:{...s.challengeStages},challengeUnlocks:[...s.challengeUnlocks],learnedRecipes:[],blueprintMastery:{...fresh.blueprintMastery},craftedItemTypes:[],craftedItemCounts:{...fresh.craftedItemCounts},materials:{...fresh.materials},hardwareAutoBuyers:{...s.hardwareAutoBuyers},automation:{...fresh.automation,enabled:s.automation.enabled},
   exactEconomy:{...fresh.exactEconomy,totalINTEarned:s.exactEconomy.totalINTEarned},
   story:{...fresh.story,tutorial:'skipped',target:null,open:null,queue:[],enabled:false},
