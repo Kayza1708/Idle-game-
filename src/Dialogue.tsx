@@ -9,7 +9,7 @@ export function dialogueSummary(s:GameState){
   'tutorial-production':['Hardware liefert Compute. Nutzer erzeugen Credits und Daten.','Hardware supplies compute. Users generate credits and data.'],
   'tutorial-research':['Forsche für stärkere Produktion. Wähle Datenerzeugung.','Research strengthens production. Choose Data Generation.'],
   'tutorial-analysis':['Starte eine Hardwareanalyse für Komponenten.','Start a hardware analysis for components.'],
-  'tutorial-crafting':['Öffne die Werkstatt und fertige dein erstes Item.','Open crafting and build your first item.'],
+  'tutorial-crafting':['Öffne die Schmiede und fertige dein erstes Item.','Open crafting and build your first item.'],
   'tutorial-prestige':['Prestige bringt INT. Daten und Forschung bleiben.','Prestige earns INT. Data and research stay.'],
   'first-training':['Training fertig. Dein Modell verdient jetzt mehr.','Training complete. Your model earns more now.'],
   'first-item':['Item gefunden. Öffne die Ausrüstung und lege es an.','Item found. Open equipment and equip it.'],

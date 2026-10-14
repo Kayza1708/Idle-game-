@@ -1,11 +1,14 @@
+import {craft as instantCraft} from './inventory';
+// Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
+import {legacyPaidCraft as craft,legacyCraftAffordability as craftAffordability} from './testSupport/legacyPaidCraft';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,it,expect} from 'vitest';
 import originalRecipes from './testSupport/originalItemRecipes.json';
 import originalEffects from './testSupport/originalItemEffects.json';
 import {BALANCE,newGame,addData,addCredits,spendResources,grantComponents,itemTypes,itemEffectProfile,itemEffectFor,hardwareIds,type Item,type GameState,type ComponentId} from './economy';
 import {blueprintQuote,learnBlueprint,recipeIds} from './blueprints';
-import {craftingRecipe} from './craftingRecipes';
-import {craft,craftModule,createItem,settleCrafting,runCraftingPlanner,craftAffordability} from './inventory';
+import {legacyCraftingRecipe as craftingRecipe} from './testSupport/legacyPaidCraft';
+import {craftModule,createItem,settleCrafting,runCraftingPlanner,} from './inventory';
 import {restore,serialize,importGame} from './storage';
 import {balanceContexts} from './balanceSnapshot';
 import {createBalanceExportFiles} from './balanceReport';
@@ -27,7 +30,7 @@ function prepared(id:typeof ids[number],quantity=1){const e=expected[id];return 
 describe('9C complete item catalogue',()=>{
  it('retains every original item effect at all rarities and both baseline/progressed levels',()=>{
   const base=newGame(0),advanced={...base,discovered:hardwareIds,hardwareCounts:Object.fromEntries(hardwareIds.map(id=>[id,500])) as GameState['hardwareCounts']};
-  for(const row of originalEffects){const item={id:'baseline',type:row.type,rarity:row.rarity,level:0,forge:0,locked:false} as Item,profile=itemEffectProfile(item);expect(profile).toEqual(row.profile);expect(profile.map(e=>itemEffectFor(base,item,e))).toEqual(row.base);expect(profile.map(e=>itemEffectFor(advanced,{...item,level:3,forge:2},e))).toEqual(row.advanced);}
+  for(const row of originalEffects){const item={id:'baseline',type:row.type,rarity:row.rarity,level:0,forge:0,locked:false} as Item,profile=itemEffectProfile(item);expect(profile).toEqual(row.profile);expect(profile.map(e=>itemEffectFor(base,item,e))).toEqual(row.base);expect(profile.map(e=>itemEffectFor(advanced,{...item,level:4,forge:2},e))).toEqual(row.advanced);}
  });
  it('retains all six pre-9C recipe values from freshly fetched origin/main',()=>{expect(Object.fromEntries(recipeIds.slice(0,6).map(id=>[id,BALANCE.itemRecipes[id]]))).toEqual(originalRecipes);});
  it('covers all eleven types exactly once and appends the five recipes in order',()=>{expect(recipeIds).toHaveLength(30);expect(new Set(recipeIds).size).toBe(30);expect([...recipeIds].sort()).toEqual(Object.keys(itemTypes).sort());expect(recipeIds.slice(6,11)).toEqual(ids);for(const id of recipeIds)expect(craftingRecipe('item',id)?.result).toEqual({kind:'item',id,rarity:'common'});});
@@ -46,7 +49,7 @@ describe('9C complete item catalogue',()=>{
   for(const [k,n] of Object.entries(e.modules))expect(paid.modules[k as keyof typeof paid.modules]).toBe(n);
   const queued=craft(paid,id);expect(queued.data).toBeCloseTo(0,8);expect(queued.blueprintFragments).toBe(0);expect(craft(queued,id)).toBe(queued);
   const partial=settleCrafting({...reload(queued),savedAt:e.seconds*1000});expect(partial.inventory).toHaveLength(1);expect(partial.crafting.active!.completed).toBe(1);
-  const done=settleCrafting({...reload(partial),savedAt:e.seconds*3000});expect(done.inventory).toHaveLength(3);expect(done.inventory.every(i=>i.type===id&&i.rarity==='common'&&i.level===0&&(i.forge??0)===0)).toBe(true);expect(done.data).toBe(queued.data);expect(done.crafting).toEqual({active:null,queue:[]});expect(settleCrafting(reload(done)).inventory).toEqual(done.inventory);
+  const done=settleCrafting({...reload(partial),savedAt:e.seconds*3000});expect(done.inventory).toHaveLength(3);expect(done.inventory.every(i=>i.type===id&&i.rarity==='common'&&i.level===1&&(i.forge??0)===0)).toBe(true);expect(done.data).toBe(queued.data);expect(done.crafting).toEqual({active:null,queue:[]});expect(settleCrafting(reload(done)).inventory).toEqual(done.inventory);
   expect(itemEffectProfile(done.inventory[0])).toEqual([e.effect]);expect(done.learnedRecipes).toEqual([id]);
  });
  it.each(ids)('%s rejects each ingredient/module/Data shortage atomically and a competing start cannot reuse stock',id=>{
@@ -58,13 +61,13 @@ describe('9C complete item catalogue',()=>{
  it.each(ids)('%s integrates planner, pinning, queue and bounded exports through the shared catalogue',id=>{
   const base=prepared(id),s={...base,axiomUpgrades:['craftingPlanner' as const],craftingPlanner:{enabled:true,recipeId:id,target:5 as const,elapsed:0},pinnedGoal:{kind:'recipe' as const,id}};
   expect(runCraftingPlanner(s)).toBe(s);expect(resolvePinnedGoal(s,s.pinnedGoal)?.reached).toBe(false);expect(pinnableGoals(s)).toContainEqual(s.pinnedGoal);
-  const learned=learnBlueprint(s,id);expect(resolvePinnedGoal(learned,s.pinnedGoal)?.reached).toBe(true);expect(runCraftingPlanner(learned)).toEqual(craft(learned,id));
+  const learned=learnBlueprint(s,id);expect(resolvePinnedGoal(learned,s.pinnedGoal)?.reached).toBe(true);expect(runCraftingPlanner(learned)).toEqual(instantCraft(learned,id));
   const blocker=craftModule(grantComponents(addData(learned,350),BALANCE.modules.computeBus.ingredients),'computeBus'),queued=craft(blocker,id);expect(queued.crafting.queue[0].recipeId).toBe(id);expect(reload(queued).crafting).toEqual(queued.crafting);
   const row=balanceContexts(queued)[0].blueprints.find(r=>r.ownership.recipeId===id)!;expect(row.ownership.learned).toBe(true);expect(row.manufacturing!.ingredients.blueprints).toBe(0);expect(createBalanceExportFiles(queued,0)['crafting.csv']).toContain(id);
  });
  it.each(ids)('%s migrates historical item evidence without altering instances, but current finds never learn',id=>{
-  const found=createItem(prepared(id),id,'legendary');found.inventory[0]={...found.inventory[0],level:3,forge:2,locked:true};expect(reload(found).learnedRecipes).toEqual([]);expect(craft(found,id)).toBe(found);
-  const old=structuredClone(found);delete old.learnedRecipes;const result=restore(JSON.stringify({version:41,state:old}),0);expect(result.error).toBeUndefined();expect(result.state.learnedRecipes).toEqual([id]);expect(result.state.inventory).toEqual(found.inventory);expect(result.state.blueprintFragments).toBe(found.blueprintFragments);
+  const found=createItem(prepared(id),id,'legendary');found.inventory[0]={...found.inventory[0],level:4,forge:2,locked:true};expect(reload(found).learnedRecipes).toEqual([]);expect(craft(found,id)).toBe(found);
+  const old=structuredClone(found);delete old.learnedRecipes;const result=restore(JSON.stringify({version:41,state:old}),0);expect(result.error).toBeUndefined();expect(result.state.learnedRecipes).toEqual([id]);expect(result.state.inventory).toEqual(JSON.parse(JSON.stringify(found.inventory)).map((i:any)=>({...i,level:i.level+1})));expect(result.state.blueprintFragments).toBe(found.blueprintFragments);
  });
  it('keeps new ownership and migration isolated between main and challenge',()=>{
   const main=prestige(addCredits(learnBlueprint(prepared('photonic-array'),'photonic-array'),BALANCE.prestigeBaseRevenue*9));

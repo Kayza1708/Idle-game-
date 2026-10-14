@@ -1,7 +1,8 @@
+import {equipmentEligibility} from './inventory';
 import {
   trainingDurationQuote,
   trainingCostQuote,
-  trainingDataCostForLevelScientific,
+  trainingBaseCreditCostScientific,
   itemTypes,
   type GameState,
   type Item,
@@ -17,13 +18,13 @@ export function TrainingCostDetails({
 }) {
   const duration=trainingDurationQuote(s,track),q = trainingCostQuote(s, track),
     de = s.settings.language === "de",
-    baseline = trainingDataCostForLevelScientific(q.targetLevel),
+    baseline = trainingBaseCreditCostScientific(q.targetLevel),
     actualDiscount = 1 - q.cost.divide(baseline).toNumber();
-  if(q.intro||s.activeTraining?.intro&&s.activeTraining.track===track)return <span className="training-cost-details">{de?'Einführungsauftrag: kostenlos, feste Dauer 20 s. Weitere Stufen nutzen die regulären Datenkosten und Trainingszeiten.':'Introductory lesson: free, fixed 20 s. Later levels use normal Data costs and training durations.'}</span>;
+  if(q.intro||s.activeTraining?.intro&&s.activeTraining.track===track)return <span className="training-cost-details">{de?'Einführungsauftrag: kostenlos, feste Dauer 20 s. Weitere Stufen nutzen die regulären Creditkosten und Trainingszeiten.':'Introductory lesson: free, fixed 20 s. Later levels use normal Credit costs and training durations.'}</span>;
   return (
     <span className="training-cost-details">
-      {de?'Grunddauer → Startdauer':'Base → start duration'}: {duration.baseDuration.toFixed(1)} → {duration.duration.toFixed(1)} s (alignment ×{duration.alignment}; modelTransfer ×{duration.modelTransfer}, {de?'Start':'start'} {duration.runStart}) · {track}: {de ? "Basis" : "Base"} {formatScientific(q.baseCost, 3)} Data →{" "}
-      {formatScientific(q.cost, 3)} Data · {de ? "Kostenfaktor" : "Cost factor"}{" "}
+      {de?'Grunddauer → Startdauer':'Base → start duration'}: {duration.baseDuration.toFixed(1)} → {duration.duration.toFixed(1)} s (alignment ×{duration.alignment}; modelTransfer ×{duration.modelTransfer}, {de?'Start':'start'} {duration.runStart}) · {track}: {de ? "Basis" : "Base"} {formatScientific(q.baseCost, 3)} Credits →{" "}
+      {formatScientific(q.cost, 3)} Credits · {de ? "Kostenfaktor" : "Cost factor"}{" "}
       {q.factor.toFixed(4)} ·{" "}
       {de ? "Faktorrabatt vor Aufrundung" : "Factor discount before rounding"}{" "}
       {(q.discount * 100).toFixed(2)} % ·{" "}
@@ -45,7 +46,7 @@ export function TrainingItemCostComparison({
   after: Item;
 }) {
   const de = s.settings.language === "de",
-    slot = itemTypes[before.type].slot,
+    slot = Object.entries(s.equipped).find(([,id])=>id===before.id)?.[0]??equipmentEligibility(s,before.id).slot??itemTypes[before.type].slot,
     base = { ...s, equipped: { ...s.equipped, [slot]: before.id } },
     next = {
       ...base,
@@ -67,7 +68,7 @@ export function TrainingItemCostComparison({
         return (
           <p key={track}>
             {track}: {formatScientific(a.cost, 3)} →{" "}
-            {formatScientific(b.cost, 3)} Data{" "}
+            {formatScientific(b.cost, 3)} Credits{" "}
             {same &&
               (de
                 ? "· Aktuell gleiche gerundete Kosten; keine sofortige Ersparnis."

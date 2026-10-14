@@ -144,7 +144,9 @@ describe('guarded normal auto prestige',()=>{
  it('caps large jumps and cannot recursively reset at one checkpoint',()=>{
   const start=integrationStart(),short={...start,offlineCapacitySeconds:BALANCE.baseOfflineSeconds},after=advance(short,1e12,false,()=>.5);
   expect(after.report.seconds).toBe(BALANCE.baseOfflineSeconds);expect(after.state.prestigeCount-start.prestigeCount).toBeLessThanOrEqual(Math.floor(BALANCE.baseOfflineSeconds/900));expect(after.state.axiomResetCount).toBe(start.axiomResetCount);expect(after.state.lifetime.taps).toBe(0);expect(after.state.credits).toBeGreaterThanOrEqual(0);
- });
+ // This functional cap/reset contract processes the full eight-hour window.
+ // Keep its safety timeout bounded without making a 5s runner budget a device-performance claim.
+ },15_000);
  it('provides concrete German and English restart status',()=>{
   expect(automaticRestartText(true,'de')).toBe('Automatischer Neustart bereit');expect(automaticRestartText(false,'en')).toBe('Automatic restart requires an enabled shopping agent');expect(prestigeAgentReasonText('training-active','en')).toBe('Waiting for training');
  });

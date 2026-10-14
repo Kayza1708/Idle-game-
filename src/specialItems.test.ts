@@ -44,7 +44,7 @@ describe('canonical Relay/Archive special effects',()=>{
   const threshold=axiomThresholdScientific(),ready={...reset,cycleINTEarned:threshold.toNumber(),exactEconomy:{...reset.exactEconomy,cycleINTEarned:threshold.toJSON()}};const axiom=axiomReset(ready);expect(item(axiom).relayTaps).toBe(9);expect(specialItemEffectQuote(axiom,item(axiom))!.active).toBe(true);
  });
  it('preserves fusion base level and counter, protecting equipped instances',()=>{
-  let s=fixture('impulse-relay');for(let n=0;n<2;n++)s=createItem(s,'impulse-relay','common');const ids=s.inventory.map(i=>i.id);expect(fuseItems(s,ids)).toBe(s);s=unequip(s,'processor');const out=fuseItems(s,ids);expect(out.inventory).toHaveLength(1);expect(item(out).rarity).toBe('uncommon');expect(item(out).level).toBe(0);expect(item(out).relayTaps).toBe(0);expect(specialItemEffectQuote(out,item(out))!.scale).toBeGreaterThan(1);
+  let s=fixture('impulse-relay');for(let n=0;n<2;n++)s=createItem(s,'impulse-relay','common');const ids=s.inventory.map(i=>i.id);expect(fuseItems(s,ids)).toBe(s);s=unequip(s,'processor');const out=fuseItems(s,ids);expect(out.inventory).toHaveLength(1);expect(item(out).rarity).toBe('uncommon');expect(item(out).level).toBe(1);expect(item(out).relayTaps).toBe(0);expect(specialItemEffectQuote(out,item(out))!.scale).toBeGreaterThan(1);
  });
  it('does not claim a hidden increase for an unchanged rounded quote',()=>{const s=fixture('impulse-relay'),i=item(s);expect(specialItemComparisonText(s,i,i)).not.toContain('kleiner Zuwachs');});
 });

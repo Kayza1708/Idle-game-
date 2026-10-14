@@ -41,7 +41,7 @@ export function runNaturalProfile(config:ProfileConfig){
   for(const event of [...state.telemetry.recentEvents,...state.telemetry.permanentEvents]){
    if(seenEvents.has(event))continue;seenEvents.add(event);
    if(!['hardware-purchase','training-start','research-start','experiment-start','crafting_queued'].includes(event.type))continue;
-   const d=event.details,credits=event.type==='hardware-purchase'?ScientificNumber.fromString(String(d.exactCost??d.cost)):ScientificNumber.zero();
+   const d=event.details,credits=event.type==='hardware-purchase'?ScientificNumber.fromString(String(d.exactCost??d.cost)):event.type==='training-start'?ScientificNumber.fromString(String(d.exactCreditCost??d.creditCost??0)):ScientificNumber.zero();
    const data=event.type==='hardware-purchase'?ScientificNumber.zero():d.exactDataCost?ScientificNumber.fromString(String(d.exactDataCost)):ScientificNumber.from(Number(d.dataCost??0));
    const sum=bookedCosts[event.type]??{credits:ScientificNumber.zero(),data:ScientificNumber.zero(),events:0};bookedCosts[event.type]={credits:sum.credits.add(credits),data:sum.data.add(data),events:sum.events+1};
   }

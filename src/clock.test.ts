@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { BALANCE, GameState, addCredits, addData, buyHardwareClass, exactEconomyValue, hardwareCostScientific, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining, trainingDataCost, type TrainingTrack } from './economy';
+import { BALANCE, GameState, addCredits, addData, buyHardwareClass, exactEconomyValue, hardwareCostScientific, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining, trainingCost, type TrainingTrack } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige, buyNode } from './prestige';
 import { advance, advanceTo, debugAdvance, settleResearchCompletions, simulationNow, type ResearchCompletionStep } from './simulation';
@@ -21,7 +21,7 @@ function productiveTraining(reset:GameState,track:TrainingTrack){
   expect(bought.hardwareCounts.calculator).toBe(1);
   expect(exactEconomyValue(bought,'credits').compare(budget.subtract(price))).toBe(0);
   // Prepare only the training ingredient; production requires the paid hardware.
-  const training=startTraining(addData(bought,trainingDataCost(bought,track)),track);
+  const training=startTraining(addCredits(bought,trainingCost(bought,track)),track);
   expect(training.activeTraining?.track).toBe(track);
   return training;
 }

@@ -277,7 +277,7 @@ const breakthroughs:Record<BreakthroughId,{name:L;effect:L}>={
  },
  graph:{
   name:l('Optimized Training Graph','Optimierter Trainingsgraph','Grafo de entrenamiento optimizado','Graphe d’entraînement optimisé','Grafo de treinamento otimizado','Grafo di training ottimizzato','Zoptymalizowany graf treningu'),
-  effect:l('Training Data-cost contribution +20%; fixed duration unchanged','Trainingskostenbeitrag +20 %; feste Dauer unverändert','Efecto heredado: la duración fija no se acelera','Effet historique : la durée fixe n’est pas accélérée','Efeito legado: a duração fixa não é acelerada','Effetto legacy: la durata fissa non viene accelerata','Efekt historyczny: stały czas treningu nie jest przyspieszany')
+  effect:l('Training Credit-cost contribution +20%; fixed duration unchanged','Trainingskostenbeitrag +20 %; feste Dauer unverändert','Efecto heredado: la duración fija no se acelera','Effet historique : la durée fixe n’est pas accélérée','Efeito legado: a duração fixa não é acelerada','Effetto legacy: la durata fissa non viene accelerata','Efekt historyczny: stały czas treningu nie jest przyspieszany')
  },
  planning:{
   name:l('Autonomous Lab Planning','Autonome Laborplanung','Planificación autónoma de laboratorio','Planification autonome du laboratoire','Planejamento autônomo de laboratório','Pianificazione autonoma laboratorio','Autonomiczne planowanie laboratorium'),
@@ -380,7 +380,7 @@ const effects:Partial<Record<ItemEffect,L>>={
  credits:l('Credits','Credits','Créditos','Crédits','Créditos','Crediti','Kredyty'),
  data:l('Data','Daten','Datos','Données','Dados','Dati','Dane'),
  research:l('Research','Forschung','Investigación','Recherche','Pesquisa','Ricerca','Badania'),
- training:l('Training needs less Data','Training benötigt weniger Data','Bono de entrenamiento heredado (duración fija)','Bonus d’entraînement historique (durée fixe)','Bônus legado de treino (duração fixa)','Bonus training legacy (durata fissa)','Historyczny bonus treningu (stały czas)'),
+ training:l('Training needs fewer Credits','Training benötigt weniger Credits','Bono de entrenamiento heredado (duración fija)','Bonus d’entraînement historique (durée fixe)','Bônus legado de treino (duração fixa)','Bonus training legacy (durata fissa)','Historyczny bonus treningu (stały czas)'),
  experiment:l('Analysis','Analyse','Análisis','Analyse','Análise','Analisi','Analiza'),
  components:l('Components','Komponenten','Componentes','Composants','Componentes','Componenti','Komponenty'),
  tap:l('Tap','Tap','Toque','Impulsion','Toque','Tap','Kliknięcie'),
@@ -419,8 +419,9 @@ const branches=[
 const roman=['','I','II','III','IV','V','VI','VII','VIII'];
 
 const prestigeEffects:Record<PrestigeUpgradeId,L>={
+ modelArchive:l('Keep model levels and paid training through normal prestige; Axioms still reset them.','Behält Modellstufen und bezahltes Training bei normalem Prestige; Axiome setzen sie zurück.','','','','',''),
  shoppingAgent:l('Per-class calculator and single-board computer autobuyers with a shared reserve.','Klassenweise Autobuyer für Taschenrechner und Einplatinencomputer mit gemeinsamer Reserve.','','','','',''),
- trainingPlan:l('Queue two model training jobs; data is charged only when each job starts.','Zwei Modelltrainings vormerken; Daten werden erst beim jeweiligen Start abgezogen.','','','','',''),
+ trainingPlan:l('Queue two model training jobs; Credits are charged only when each job starts.','Zwei Modelltrainings vormerken; Credits werden erst beim jeweiligen Start abgezogen.','','','','',''),
  componentScanner:l('Double one accessible passive component weight without adding finds.','Verdoppelt ein zugängliches passives Komponentengewicht, ohne zusätzliche Funde zu erzeugen.','','','','',''),
  milestoneMemory:l('+2% weighted INT revenue per distinct hardware milestone edge this run, up to +100%.','+2 % gewichteter INT-Einnahmewert je unterschiedlicher Hardware-Meilensteinkante dieses Runs, maximal +100 %.','','','','',''),
  modelSynthesis:l('+3% weighted INT revenue per completed training this run, up to +150%.','+3 % gewichteter INT-Einnahmewert je abgeschlossenem Training dieses Runs, maximal +150 %.','','','','',''),

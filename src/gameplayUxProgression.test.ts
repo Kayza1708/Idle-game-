@@ -36,8 +36,8 @@ describe('authoritative workshop progression UI',()=>{
   expect(maxGain).toBeCloseTo(computeRate(afterMax.hardware,afterMax)-computeRate(afterTen.hardware,afterTen));
  });
  it('shows real model current-to-next values from economy functions',()=>{
-  expect(panels).toContain('quality(s.qualityLevel+1)');
-  expect(panels).toContain('BALANCE.computePerUser/efficiency(s.efficiencyLevel+1)');
+  expect(panels).toContain("trainingPreview(s,track)");
+  expect(panels).toContain('q.effect');
   expect(quality(1)).toBeGreaterThan(quality(0));
   expect(BALANCE.computePerUser/efficiency(1)).toBeLessThan(BALANCE.computePerUser/efficiency(0));
  });

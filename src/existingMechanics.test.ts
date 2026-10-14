@@ -76,8 +76,8 @@ describe("existing mechanics exposed through their domain contracts", () => {
     expect(finished.modules.computeBus).toBe(1);
     const chip = craft(learnBlueprint(finished, "quantum-chip"), "quantum-chip");
     expect(chip.modules.computeBus).toBe(0);
-    expect(chip.crafting.active?.ingredients.modules.computeBus).toBe(1);
-    expect(chip.crafting.active?.quantity).toBe(1);
+    expect(chip.crafting.active).toBeNull();
+    expect(chip.inventory).toHaveLength(1);
   });
   it.each(["upgrade", "forge"] as const)(
     "%s uses quoted costs and changes the real effect",
@@ -159,7 +159,7 @@ describe("existing mechanics exposed through their domain contracts", () => {
     expect(itemImprovementHasEffect(items(), q.item, q.result)).toBe(true);
   });
   it("maximum quality and forge level quote no fictitious result", () => {
-    const s = createItem(ready(), "quantum-chip", "mythic");
+    const created = createItem(ready(), "quantum-chip", "mythic"), s={...created,inventory:created.inventory.map(item=>({...item,level:69}))};
     const item = s.inventory.at(-1)!;
     expect(itemImprovementPreview(s, item.id, "upgrade")).toMatchObject({
       allowed: false,
