@@ -1,3 +1,10 @@
+## 2026-10-15 · Kräftige Seltenheitsrahmen und größere Items
+
+- [x] Ganze Einfassung in kräftiger Seltenheitsfarbe, dunkle Innenfläche, einmaliger Rahmen-Glanz beim Reveal; Seltenheitsnamen bleiben lesbar.
+- [x] Inventar-, Detail- und Ergebnisportraits etwa 10–15 % größer, weiterhin drei Inventarspalten und kompakte Detail-Aktion.
+- [x] Sechs echte Seltenheitsrahmen im Browser geprüft; Aktionsprüfung für 18 Mobileprofile wiederholt, 1.490 Tests/109 Dateien, Typecheck und Build grün. [Aktualisierter Clip und Farbpalette](item-presentation.md).
+- [ ] Weitere Motion-Ideen für Forschung, Hardware-Meilensteine, Prestige-Pfade und Reward-Transfers vorgeschlagen; native Abnahme bleibt offen. Kein Merge/Release.
+
 ## 2026-10-15 · Gemeinsame Item-Präsentation und Animationsabläufe
 
 - [x] Echte Craft-/Fusionsabläufe mit Material- bzw. drei Instanzgrafiken, Energiephase, Item-Reveal, Seltenheit und tatsächlichen Werten. Skip/Weiter und sofortiges Ergebnis bei reduzierter Bewegung/Effekte aus.

@@ -6,6 +6,27 @@ Continuation of PR113. Previous chest work is retained; this replaces the brief 
 
 The recording and captures use prepared fixtures and actual UI actions. They are not image-generated mockups or evidence of natural progression/native-device performance. Existing project bitmap assets are reused; no new generated art or SDK.
 
+## Vibrant rarity refinement
+
+The entire rim now uses the rarity color, with a dark interior so the bitmap remains legible. Names still state rarity: color is an additional cue. All six share the same frame geometry and the processor/core/research family mark.
+
+| Rarity | Rim color |
+| --- | --- |
+| Common | Silver `#b7cad8` |
+| Uncommon | Green `#35ef88` |
+| Rare | Blue `#36adff` |
+| Epic | Violet `#a965ff` |
+| Legendary | Gold `#ffba32` |
+| Mythic | Pink-red `#ff4c87` |
+
+[Six-rarity actual inventory capture](screenshots/item-six-rarities.webp). A one-shot rim highlight accompanies the confirmed item reveal; no permanent flashing. Skip and reduced motion stop that highlight.
+
+Portraits enlarged about 10–15%: inventory 66→74px (60→68px on narrow screens), detail 96→108px, result 156→176px (130→146px on short screens). Detail padding tightened to retain action space. The existing physical model/forge sockets keep their fitted sizes.
+
+The refreshed recording/captures use the new style. `scripts/rarity-presentation-audit.mjs` verifies six distinct computed border colors, a truly green uncommon rim, ≥2px borders, readable portrait size and no overflow in a prepared six-instance inventory. The 18-profile action audit was repeated with the larger portraits; 1,490 tests, typecheck, build and diff check remain green.
+
+Further animation opportunities (proposals, not additional implementations): short lab-completion reveals, hardware milestone pulses, energy tracing along newly unlocked prestige paths, and claimed resources traveling to the header. Reserve longer sequences for rare milestones; ordinary actions should remain brief and responsive.
+
 ## Shared presentation
 
 `ItemPortrait` uses the real item atlas, one consistent metal well, rarity color/rail, processor/core/research family glyph and instance level. Hero, compact and tile sizes share that identity in inventory, recipes, fusion selection/results, details, equipment, capsule items and received-item notices. Names/rarities use existing localization. Instance IDs are removed from player-facing inventory labels. Detail sheets use a compact horizontal hero so the upgrade action remains near the top.
