@@ -55,8 +55,10 @@ export function ResearchCatalog({
                     const q = researchPreview(s, id)!,
                       copy = name(id),
                       running = !!q.running,
+                      queueIndex=s.researchQueue.indexOf(id),
+                      queued=queueIndex>=0,
                       reason = block(q),
-                      state = running
+                      state = queued ? "queued" : running
                         ? "running"
                         : reason
                           ? "locked"
@@ -90,7 +92,7 @@ export function ResearchCatalog({
                           </small>
                           {reason && <small className="research-block-note">{reason}</small>}
                         </span>
-                        <i>{running ? "◷" : reason ? "🔒" : "›"}</i>
+                        <i>{queued ? queueIndex+1 : running ? "◷" : reason ? "🔒" : "›"}</i>
                       </button>
                     );
                   })}

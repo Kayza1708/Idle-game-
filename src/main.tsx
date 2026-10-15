@@ -11,6 +11,7 @@ import './pixel-game.css';
 import './cohesive-game.css';
 import './immersive-game.css';
 import './item-presentation.css';
+import './shop-market.css';
 
 const uninstallMobile=installMobileIntegration();
 window.addEventListener('pagehide',uninstallMobile,{once:true});
@@ -18,3 +19,5 @@ export const crashRecorder=new CrashRecorder(browserStorage(),null);
 window.addEventListener('error',event=>crashRecorder.failure('unhandled-exception',event.error??event.message));
 window.addEventListener('unhandledrejection',event=>crashRecorder.failure('unhandled-exception',event.reason));
 createRoot(document.getElementById('root')!).render(<React.StrictMode><CrashBoundary recorder={crashRecorder}><App recorder={crashRecorder}/></CrashBoundary></React.StrictMode>);
+
+import './menu-settings.css';
