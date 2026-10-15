@@ -1,3 +1,11 @@
+## 2026-10-15 · Immersive Rückmeldungen nach PR112
+
+- [x] Bonuskiste mit getrenntem Pixel-Art-Deckel/Unterteil, Öffnungschoreografie, Licht, zeitbasierten Partikeln und Materialkarten aus bestätigtem Beleg.
+- [x] Herstellung/Fusion mit Abschlussimpuls, drei Fusionsitems; tatsächliche Aufwertung mit Level-Puls. Effekte aus und reduzierte Bewegung berücksichtigt.
+- [x] Größere, lesbare Forschungszeilen mit Kosten/Sperrgrund; Item-Aufwertung ohne rohe Dezimalbrüche, doppelte Ergebniswerte oder „Fehlt 0“. Details nach der Hauptaktion eingeklappt.
+- [x] 1.473 Tests/108 Dateien, Typecheck und Build. Browserprüfungen und vollständiger Grafikprompt: [immersive-mobile-feedback.md](immersive-mobile-feedback.md).
+- [ ] Native iPhone/WKWebView/VoiceOver und subjektive Designabnahme offen. Kein Merge/Release.
+
 ## 2026-10-14 · Einheitliche Mobile-Art nach PR111
 
 - [x] Gemeinsamer transparenter Pixel-Art-Atlas für Kapseln, Bonuskisten, Modell-Sockel und Prestige-Hub; echte Grafikzustände statt einfacher Form-Platzhalter.

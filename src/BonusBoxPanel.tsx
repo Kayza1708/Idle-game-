@@ -1,3 +1,4 @@
+import {RewardReveal} from './RewardReveal';
 import {MobileArt} from './MobileArt';
 import {useEffect,useRef,useState} from 'react';
 import {ComponentArt} from './GameArt';
@@ -14,15 +15,18 @@ export const bonusBoxText={
  pl:{title:'Skrzynie bonusowe',source:'Bonus dzienny zawiera skrzynię materiałów w ekwipunku.',choose:'Wybierz rodzinę odblokowaną w chwili zdobycia skrzyni.',chance:'Szansa na odkrycie schematu',open:'Otwórz',received:'Otrzymano',auto:'Otwarta automatycznie',fragment:'1 fragment schematu',inventory:'Skrzynie w ekwipunku',families:['Podstawowe','Półprzewodniki','Fotonika','Frontier','Kwantowe']},
 };
 export function BonusBoxes({s,act}:{s:GameState;act:(name:string,...args:any[])=>void}){
- const previous=useRef({opened:s.bonusBoxes.opened,campaign:s.telemetry.campaignId,run:s.retention.activeRun?.runId}),[opening,setOpening]=useState(false);
- useEffect(()=>{const old=previous.current;previous.current={opened:s.bonusBoxes.opened,campaign:s.telemetry.campaignId,run:s.retention.activeRun?.runId};if(old.campaign!==s.telemetry.campaignId||old.run!==s.retention.activeRun?.runId||s.bonusBoxes.opened<=old.opened){setOpening(false);return}setOpening(true);const timer=window.setTimeout(()=>setOpening(false),3500);return()=>window.clearTimeout(timer)},[s.bonusBoxes.opened,s.telemetry.campaignId,s.retention.activeRun?.runId]);
+ const previous=useRef({opened:s.bonusBoxes.opened,campaign:s.telemetry.campaignId,run:s.retention.activeRun?.runId}),[receiptScene,setReceiptScene]=useState<GameState['bonusBoxes']['lastOpened']>(null);
+ const opening=receiptScene!==null;
+ useEffect(()=>{const old=previous.current;previous.current={opened:s.bonusBoxes.opened,campaign:s.telemetry.campaignId,run:s.retention.activeRun?.runId};if(old.campaign!==s.telemetry.campaignId||old.run!==s.retention.activeRun?.runId||s.challengeSession||s.retention.activeRun||s.bonusBoxes.opened<old.opened){setReceiptScene(null);return}if(s.bonusBoxes.opened>old.opened&&s.bonusBoxes.lastOpened)setReceiptScene(structuredClone(s.bonusBoxes.lastOpened))},[s.bonusBoxes.opened,s.telemetry.campaignId,s.retention.activeRun?.runId,!!s.challengeSession]);
  if(s.retention.activeRun||s.challengeSession||!s.bonusBoxes.earned)return null;
- const text=bonusBoxText[s.settings.language],box=s.bonusBoxes.pending[0],receipt=s.bonusBoxes.lastOpened;
+ const text=bonusBoxText[s.settings.language],box=s.bonusBoxes.pending[0],receipt=receiptScene??s.bonusBoxes.lastOpened;
  const contents=receipt&&<div className="box-materials">{Object.entries(receipt.components).map(([id,n])=><span key={id}><ComponentArt id={id as keyof GameState['componentInventory']}/><span>{componentText(id as keyof GameState['componentInventory'],s.settings.language).name}<b>×{n}</b></span></span>)}{receipt.blueprint&&<p>{receipt.blueprint==='fragment'?text.fragment:itemText(receipt.blueprint,s.settings.language)}</p>}</div>;
  return <section className={`bonus-box-card art-box-card${opening&&s.settings.effects?' is-opening':''}`} data-box-opening={opening} aria-label={text.title}>
  <header><MobileArt sprite={opening?'chest-open':'chest-closed'} className="box-thumbnail"/><div><h3>{text.title} <b>{s.bonusBoxes.pending.length}</b></h3><small>{box?text.choose:text.inventory}</small></div></header>
  {box&&<div className="box-choices">{box.choices.map(choice=><button key={`${box.id}:${choice.family}`} onClick={()=>act('bonus-box-open',box.id,choice.family)}><span>{text.families[Object.keys(BALANCE.materialFamilies).indexOf(choice.family)]}</span><b>{text.open} ›</b></button>)}</div>}
- {opening&&receipt&&<div className="box-live-receipt" role="status"><MobileArt sprite="chest-open"/><div><b>{receipt.automatic?text.auto:text.received}</b>{contents}</div></div>}
+ {opening&&receipt&&<RewardReveal key={s.bonusBoxes.opened} title={text.received} closeLabel={deLabel(s)} effects={s.settings.effects} onClose={()=>setReceiptScene(null)}>{contents}</RewardReveal>}
  {!opening&&receipt&&<details className="box-history"><summary>{text.received} · {Object.values(receipt.components).reduce((sum,n)=>sum+Number(n),0)} <PixelIcon name="components"/></summary>{contents}</details>}
  </section>;
 }
+
+function deLabel(s:GameState){return s.settings.language==='de'?'Weiter':'Continue'}
