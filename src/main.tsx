@@ -11,6 +11,7 @@ import './pixel-game.css';
 import './cohesive-game.css';
 import './immersive-game.css';
 import './item-presentation.css';
+import './shop-market.css';
 
 const uninstallMobile=installMobileIntegration();
 window.addEventListener('pagehide',uninstallMobile,{once:true});

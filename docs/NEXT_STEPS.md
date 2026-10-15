@@ -1,3 +1,14 @@
+## 2026-10-15 · Neuer Shop — Save v58
+
+- [x] Vier kaufbare Kistenstufen mit garantierten Komponenten, sichtbaren Item-/Seltenheitschancen und bestätigtem Öffnungsbeleg; neue Pixel-Art-Grafiken.
+- [x] Kostenlose Common-Kiste alle 24 Stunden, drei zusätzliche providerbestätigte Werbeöffnungen im eigenen 24-Stunden-Fenster; Fehler/Abbruch/Reload ohne erfundene Auszahlung.
+- [x] Direkte Materialpakete (u. a. 40 Graphen für 80 Gems), eingefrorene Tagesauswahl, ein echter 40-%-Rabatt und ein tägliches Rare-Item für 500 Gems.
+- [x] Gem-/Starter-/Builder-Produktdaten und Native-Receipt-Schnittstelle vorbereitet; echte Käufe bleiben bis zur Integration deaktiviert. Alte dauerhafte Upgrades/Boosts unter Extras erhalten.
+- [x] Atomare Tickets, Tagesstock, Cooldowns und Shopbelege über Saves; v58-Migration ohne Gratisnachzahlungen. 1.521 Tests/110 Dateien, Typecheck, Build, acht UI-Profile und separate Providerprüfung grün.
+- [ ] Native Werbe-/Store-Anbindung, Server-Verifikation und echte iPhone-Abnahme offen; kein Merge/Release.
+
+[Shop-Dokumentation, Preise, Grafikprompt und echter Clip](shop-rework.md).
+
 ## 2026-10-15 · Kräftige Seltenheitsrahmen und größere Items
 
 - [x] Ganze Einfassung in kräftiger Seltenheitsfarbe, dunkle Innenfläche, einmaliger Rahmen-Glanz beim Reveal; Seltenheitsnamen bleiben lesbar.
