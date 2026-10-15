@@ -1,3 +1,11 @@
+## 2026-10-15 · Shop V1, Save v58
+
+Neue Parameter ausschließlich in `BALANCE.shop` / `BALANCE.adLimits.shopChest`. Common/Rare/Epic/Legendary kosten 60/180/450/1200 Gems, enthalten garantiert 30–54/75–120/140–240/300–500 Komponenten und haben 8/22/40/100 % Itemchance. Bedingte Seltenheiten und Materialgewichte sind vor dem Kauf sichtbar. Keine direkt verkauften Mythic- oder speziellen Relay/Archive-Items.
+
+Eine freie Common-Kiste alle 24 Stunden ab erfolgreicher Abholung; drei zusätzliche erfolgreiche Videos pro eigenem 24-Stunden-Fenster. Tagesangebote wechseln UTC, werden beim ersten Besuch eingefroren und führen einmaligen Stock. Tägliches garantiertes Rare-Item: 500 Gems. Ein Materialpaket täglich −40 % vom realen Normalpreis. Regulärer Graphen-Kauf: exakt 40 für 80 Gems. Weitere feste Pakete und vorbereitete Echtgeld-Produktinhalte stehen im zentralen Balance-Objekt.
+
+Dies sind initiale V1-Parameter, keine gemessene Live-Economy/Retention-Prognose. Gegenstücke bleiben die bestehenden Material- und Fusions-/Upgrade-Sinks. Bestehende Produktion, Dropfrequenz, Crafting-/Fusionskosten und reale Bezahlfunktionen werden nicht geändert. Details/Tests: [shop-rework.md](shop-rework.md).
+
 ## 2026-10-14 · Erweiterte Kapselgewinne (vorläufig)
 
 Die vorherige 1%-Item/99%-Komponenten-Tabelle wird ersetzt: 1 % Items, 35 % Komponenten, 45 % Credits, 14 % Data, 4,75 % kleine Gems und 0,25 % Gem-Jackpot. Preis bleibt 10 Gems. Kleine Gems 2–8; Jackpot 20×Preis = 200. Credits/Data: gleichverteilte 15–60 Sekunden ihrer aktuellen Rate, mindestens 100 Credits/5 Data. Credits zählen nicht als prestigegeeigneter Produktionsverdienst. Alle Werte liegen in `BALANCE.capsuleMachine`; sonstige Produktions-, Hardware- und Resetformeln unverändert.
