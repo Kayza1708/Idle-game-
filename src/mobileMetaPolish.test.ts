@@ -1,3 +1,8 @@
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {SettingsPanel} from './SettingsPanel';
+import {newGame} from './economy';
+import menu from './MetaMenu.tsx?raw';
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -22,8 +27,9 @@ describe('shared mobile shell and diagnostics',()=>{
   const shell=app.slice(app.indexOf('return <main className='));
   expect(shell).not.toContain('crash-notice');
   expect(shell).not.toContain('Crash-Bericht exportieren');
-  expect(meta).toContain("act('crash-export')");
-  expect(meta).toContain('diagnostic-settings');
+  const html=renderToStaticMarkup(createElement(SettingsPanel,{s:newGame(0),act:()=>{},onReset:()=>{}}));
+  expect(html).toContain('diagnostic-settings');
+  expect(html).toContain('Crashbericht exportieren');
  });
 });
 
@@ -49,16 +55,18 @@ describe('mobile interaction polish',()=>{
   expect(css).toContain('.setting-range output{width:5ch;text-align:right}');
  });
  it('opens profile and settings as separate modes and keeps all languages selectable',()=>{
-  expect(app).toContain("setProfileSection('profile')");
-  expect(app).toContain("setProfileSection('settings')");
+  expect(menu).toContain("['profile','profile'");
+  expect(menu).toContain("['settings','settings'");
+  expect(app).toContain('setProfileSection(page)');
   expect(app).toContain('<ProfileModal key={profileSection}');
   expect(meta).toContain("const settingsMode=initialTab==='settings'");
-  expect(meta).toContain('value={s.settings.language} onChange={e=>act(\'language\',e.currentTarget.value)}');
-  expect(meta).toContain('languages.map');
+  const html=renderToStaticMarkup(createElement(SettingsPanel,{s:newGame(0),act:()=>{},onReset:()=>{}}));
+  for(const language of ['de','en','es','fr','pt','it','pl'])expect(html).toContain(`value="${language}"`);
  });
  it('shows honest disabled notification capabilities',()=>{
-  expect(meta).toContain('className="notification-settings system-disclosure"');
-  expect(meta).toContain('Native Benachrichtigungen sind in dieser Beta noch nicht integriert.');
+  const html=renderToStaticMarkup(createElement(SettingsPanel,{s:newGame(0),act:()=>{},onReset:()=>{}}));
+  expect(html).toContain('class="notification-settings system-disclosure"');
+  expect(html).toContain('In dieser Beta noch nicht verfügbar.');
   expect(meta).not.toContain("['Allgemein','Forschung abgeschlossen'");
  });
 });

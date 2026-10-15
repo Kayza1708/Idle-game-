@@ -1,5 +1,6 @@
 /** Small, repo-owned SVG icons. Artwork/illustrations remain separate PNG assets. */
 export const iconPaths={
+ settings:'M12 4h8l1 5 5 1 3 6-4 4 1 5-7 4-4-4-5 1-4-7 4-4-1-5ZM21 16a5 5 0 1 1-10 0 5 5 0 0 1 10 0',trophy:'M9 4h14v11q0 7-7 7t-7-7ZM9 7H4v5q0 6 7 6M23 7h5v5q0 6-7 6M16 22v6M9 29h14',
  tap:'M7 4v21l6-6 5 9 4-2-5-9h9Z',credits:'M23 8c-8-7-18 1-13 8 3 4 13 0 13 6 0 5-11 7-16 2M16 3v26',
  data:'M6 4h20v24H6ZM10 10h12M10 16h12M10 22h8',compute:'M9 9h14v14H9ZM4 11h5M4 21h5M23 11h5M23 21h5M11 4v5M21 4v5M11 23v5M21 23v5',
  hardware:'M5 6h22v15H5ZM10 27h12M16 21v6M9 10h14',research:'M12 4h8M14 4v9L6 25q-1 3 3 3h14q4 0 3-3l-8-12V4M10 20h12',

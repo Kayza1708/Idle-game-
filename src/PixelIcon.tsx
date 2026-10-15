@@ -1,4 +1,4 @@
 import {iconPaths} from './VectorIcon';
-export type PixelIconName='tap'|'credits'|'data'|'compute'|'hardware'|'research'|'training'|'analysis'|'components'|'craft'|'item'|'prestige'|'time'|'season'|'challenge'|'profile'|'gem'|'box'|'lock'|'plus';
+export type PixelIconName='settings'|'trophy'|'tap'|'credits'|'data'|'compute'|'hardware'|'research'|'training'|'analysis'|'components'|'craft'|'item'|'prestige'|'time'|'season'|'challenge'|'profile'|'gem'|'box'|'lock'|'plus';
 /** Shared 32-unit illustrated control glyphs with layered metal/ink treatment. */
 export function PixelIcon({name,label}:{name:PixelIconName;label?:string}){return <span className={`pixel-icon pixel-icon-${name}`} role={label?'img':undefined} aria-label={label} aria-hidden={label?undefined:true}><svg className="vector-icon" viewBox="0 0 40 40" aria-hidden="true" fill="none" strokeLinecap="square" strokeLinejoin="miter"><g transform="translate(4 5)"><path d={iconPaths[name]} stroke="#071b2b" strokeWidth="4.5"/><path d={iconPaths[name]} stroke="currentColor" strokeWidth="2.7"/><path d={iconPaths[name]} stroke="#dce8cc" strokeWidth=".65" opacity=".7"/></g></svg></span>}
