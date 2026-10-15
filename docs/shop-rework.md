@@ -1,3 +1,9 @@
+## Kantige Integration
+
+Shopkarten, Buttons, Rabattschilder, Kaufbestätigungen, Itemrahmen und Crafting-/Fusions-Ergebnisse verwenden gerade Ecken wie die bestehende Spieloberfläche. Kräftige Seltenheitsfarben, Abmessungen und Animationen bleiben erhalten; kreisförmige Energieeffekte und Prozessor-Symbole behalten ihre Form.
+
+Geprüft: acht Shopprofile (DE/EN, 360–430 px, reduzierte/abgeschaltete Effekte) und zwei Item-Aktionsprofile (360/390 px); berechnete Ecken zusätzlich an echten DOM-Elementen geprüft. Screenshots und Shopvideo aktualisiert.
+
 # Shop rework · 2026-10-15 · Save v58
 
 Built on the item/chest work in PR113. This feature adds a four-category shop, new pure transactions and durable claims. It does not activate a native SDK or real payment flow.

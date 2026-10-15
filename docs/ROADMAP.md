@@ -1,3 +1,8 @@
+## Kantige Shop- und Item-Oberfläche
+
+- [x] Neue Karten, Buttons, Itemrahmen und Belohnungsflächen verwenden die geraden Ecken des Spiels; Seltenheitsfarben, Größen und Animationen bleiben erhalten.
+- [x] Browserprüfung kontrolliert die tatsächlich berechneten Ecken einschließlich der Belohnungs-Portale.
+
 ## 2026-10-15 · Neuer Shop — Save v58
 
 - [x] Vier kaufbare Kistenstufen mit garantierten Komponenten, sichtbaren Item-/Seltenheitschancen und bestätigtem Öffnungsbeleg; neue Pixel-Art-Grafiken.
