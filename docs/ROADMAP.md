@@ -1,3 +1,11 @@
+## 2026-10-15 · Gemeinsame Item-Präsentation und Animationsabläufe
+
+- [x] Echte Craft-/Fusionsabläufe mit Material- bzw. drei Instanzgrafiken, Energiephase, Item-Reveal, Seltenheit und tatsächlichen Werten. Skip/Weiter und sofortiges Ergebnis bei reduzierter Bewegung/Effekte aus.
+- [x] Aufwertung, Veredelungsabschluss, Recycling, An-/Ablegen und Schutzänderungen als kurze bestätigte Rückmeldung; keine falschen Abschlüsse beim Auftragsstart.
+- [x] Gemeinsamer Itemrahmen mit Seltenheit/Typ/Level in Inventar, Auswahl, Details, Equipment, Kapsel und Fundmeldung. Kompakter Detail-Hero und drei Inventarspalten.
+- [x] 1.490 Tests/109 Dateien, Typecheck, Build und Browserprüfung mit tatsächlichen Aktionen; [Dokumentation und echter Bildschirmclip](item-presentation.md).
+- [ ] Native iPhone/WKWebView/VoiceOver und finale Designabnahme offen. Kein Merge/Release.
+
 ## 2026-10-15 · Immersive Rückmeldungen nach PR112
 
 - [x] Bonuskiste mit getrenntem Pixel-Art-Deckel/Unterteil, Öffnungschoreografie, Licht, zeitbasierten Partikeln und Materialkarten aus bestätigtem Beleg.

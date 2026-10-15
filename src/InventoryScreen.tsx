@@ -1,4 +1,5 @@
-import {ItemLevelBadge} from './ItemLevelBadge';
+import {ItemHero,ItemPortrait} from './ItemPresentation';
+import {itemStatLines} from './itemActionEvents';
 import {CostBadge} from './CostBadge';
 import {exactEconomyValue} from './economy';
 import {ResourceArt} from './GameArt';
@@ -363,11 +364,10 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
                   setFusion([]);
                 }}
               >
-                <ItemArt type={entry.type} />
+                <ItemPortrait item={entry}/>
                 <span>{itemText(entry.type, language)}</span>
                 <small>
-                  {entry.id} · {rarityText(entry.rarity, language)} · Lv{" "}
-                  {entry.level}
+                  {rarityText(entry.rarity, language)} · Lv {entry.level}{entry.locked?' · 🔒':''}
                 </small>
                 {equipped(entry.id) && <i>{de ? "Ausgerüstet" : "Equipped"}</i>}
               </button>
@@ -418,9 +418,7 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
           art={<ItemArt type={item.type} />}
           onClose={() => setItemId(null)}
         >
-          <p>
-            {rarityText(item.rarity, language)} · <ItemLevelBadge id={item.id} level={item.level} effects={s.settings.effects}/>
-          </p>
+          <ItemHero item={item} language={language} stats={itemStatLines(s,item)}/>
           <p>
             {equipped(item.id)
               ? de
@@ -432,12 +430,7 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
             {s.retention.activeRun?.id === "no-items" &&
               ` · ${de ? "Challenge deaktiviert Itemeffekte" : "Challenge disables item effects"}`}
           </p>
-          <p>
-            {de
-              ? "Aktiv, wenn ausgerüstet."
-              : "Active while equipped."}
-          </p>
-          {effect(item)}
+
           <button
             disabled={!equipmentEligibility(s, item.id).allowed}
             onClick={() => act("equip", item.id)}
