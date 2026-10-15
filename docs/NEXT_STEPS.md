@@ -1,3 +1,14 @@
+## 2026-10-14 · Einheitliche Mobile-Art nach PR111
+
+- [x] Gemeinsamer transparenter Pixel-Art-Atlas für Kapseln, Bonuskisten, Modell-Sockel und Prestige-Hub; echte Grafikzustände statt einfacher Form-Platzhalter.
+- [x] Kompaktes Prestige-Fenster, strukturierte Spritenodes, sechs Branch-Sprünge und sichtbarer Startknoten. Zoom-Hitflächen ≥57px, Karte vor der Navigation.
+- [x] Maus-/Touch-Knotenklick und Ziehen getrennt; tatsächlicher Archivvertrag auch im Verlust-/Erhalttext. KI-Kern zentriert, sechs geometrische Sockel im selben Materialstil.
+- [x] Kisten-Ergebnis kurz sichtbar, danach History-Disclosure; Rezeptauswahl bleibt über Tabs/Reload, Besitz- und Challenge-Prüfung erhalten.
+- [x] 1.473 Tests/108 Dateien, Typecheck, Build und Diffcheck; zwölf DE/EN-Mobileprofile mit tatsächlichen Aktionen, zusätzlich Touch-Drag und Archiv-Details. Vorbereitete Fixtures, keine natürliche Balancebehauptung.
+- [ ] Native iPhone/WKWebView/VoiceOver und subjektive finale Designabnahme offen; vorhandene Bundlewarnung.
+
+Assetpfad, vollständiger Built-in-Imagegen-Prompt, Verträge, reale Screenshots und Prüfbefehl: [cohesive-mobile-art.md](cohesive-mobile-art.md). Kein Merge/Release, Save/Economy unverändert.
+
 ## 2026-10-14 · Mobiler Folgeauftrag nach PR #110 — Save v57
 
 - [x] Wiederhergestellte lokale Arbeit auf Basis von main `cff21a5`; eigener Branch `codex/mobile-forge-research-v2`.
