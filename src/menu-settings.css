@@ -14,3 +14,5 @@
 .mobile-settings input[type=range]::-moz-range-track{height:6px;background:#466475;border:1px solid #668899}
 .mobile-settings input[type=range]::-moz-range-thumb{width:18px;height:24px;border:1px solid #b6f5df;background:#7fd9b7;border-radius:0}
 .balance-export progress{appearance:none;border:0;background:#254253}.balance-export progress::-webkit-progress-bar{background:#254253}.balance-export progress::-webkit-progress-value{background:#6cddb9}.balance-export progress::-moz-progress-bar{background:#6cddb9}
+.meta-menu-grid .shop-pixel-icon{width:52px;height:52px;min-width:52px;filter:drop-shadow(0 3px 2px #06132199)}.meta-menu-grid>button{min-height:138px;gap:9px;padding:12px}.settings-modal>header>.shop-pixel-icon{width:42px;height:42px;min-width:42px}
+@media(max-height:700px){.meta-menu-grid>button{min-height:112px;padding:9px;gap:5px}.meta-menu-grid .shop-pixel-icon{width:40px;height:40px;min-width:40px}.meta-menu-grid small{font-size:10px}}

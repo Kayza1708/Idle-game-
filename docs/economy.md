@@ -1,3 +1,9 @@
+## Schmiede ohne Ausbau-Level (v59)
+
+Die separate Stations-Aufbaureihe ist aus dem Spielablauf entfernt. Mit dem bestehenden Zugang (erster Prestige + Fertigung I) startet die erste Item-Veredelung direkt; bezahlt werden ausschließlich die bekannten Itemkosten. `BALANCE.forgeItemLimit = 20` erhält den bisherigen maximalen Item-Forge-Deckel, ohne Stations-Level als Hürde. Bereits bezahlte Stations-Geschwindigkeitsboni und eingefrorene laufende Aufträge bleiben erhalten. Kein Währungs-Refund, keine Gratisbelohnung. Die alten Level-Felder und Migrationsfunktionen bleiben für gespeicherte Aufträge kompatibel; die App bietet keinen Stations-Ausbau mehr an.
+
+Neue Missionen wählen kein Stations-Ausbauziel mehr. v58→v59 übernimmt den verbleibenden Fortschritt unerfüllter Ausbauziele als Item-Veredelungsziel; abholbare und beanspruchte Aufgaben bleiben unverändert. Gleiche Regeln gelten für den gespeicherten Hauptspielstand einer Challenge.
+
 ## 2026-10-15 · Shop V1, Save v58
 
 Neue Parameter ausschließlich in `BALANCE.shop` / `BALANCE.adLimits.shopChest`. Common/Rare/Epic/Legendary kosten 60/180/450/1200 Gems, enthalten garantiert 30–54/75–120/140–240/300–500 Komponenten und haben 8/22/40/100 % Itemchance. Bedingte Seltenheiten und Materialgewichte sind vor dem Kauf sichtbar. Keine direkt verkauften Mythic- oder speziellen Relay/Archive-Items.

@@ -1,3 +1,11 @@
+## Shop-Kategorien, Pixel-Icons und Schmiede ohne Stations-Level
+
+- [x] Gumball-Maschine mit bestehender Auszahlung und Animation als eigener oberer Reiter wieder eingebunden.
+- [x] Boosts und dauerhafte Upgrades in eigenen oberen Reitern als Shopkarten, mit echten Preisen, Zuständen, Kaufbestätigung und belegtem Kauf-Feedback.
+- [x] 100/550/1200-Gem-Pakete verwenden einen/zwei/drei Kristalle; Menü und Einstellungen verwenden zusammenpassende Pixel-Art-Icons.
+- [x] Stations-Ausbau-Level entfernt; Item-Veredelung über vorhandenen Zugang direkt möglich, alte bezahlte Boni und Aufträge erhalten, offene Ausbau-Missionen mit Restfortschritt übernommen (Save v59).
+- [x] Simulator-Exportweg und lokaler Kopierbefehl dokumentiert; echtes iPhone/Xcode weiterhin geräteabhängig zu prüfen.
+
 ## Shop, Forschungsaktion und Einstellungen – Review-Korrektur
 
 - [x] Den bisher nur in den bereits gemergten Arbeitsbranch übernommenen Shop für einen direkten PR gegen main integriert; v58-Migration, Preise und kantige Animationen übernommen.
