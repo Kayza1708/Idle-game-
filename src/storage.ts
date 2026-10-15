@@ -1,5 +1,5 @@
 import {migrateShopSave,validShop} from './shop';
-import {migrateSingleFoundry} from './foundries';
+import {migrateSingleFoundry,retireFoundryTasks} from './foundries';
 import {migrateModelForge} from './modelForgeMigration';
 import {migrateIntro,validIntro} from './introMigration';
 import {migrateCapsuleMachine,validCapsuleMachine} from './capsuleMachine';
@@ -14,7 +14,7 @@ import {migrateBlueprints} from './blueprints';
 import {migrateResearchAreas} from './researchAreas';
 import {assertDomainState,assertLegacyChallengeRun} from './saveValidation';
 import { BALANCE, hardwareIds, GameState, newGame, trainingCost, trainingWork, normalizeExactEconomy, exactEconomyKeys } from './economy';import {ScientificNumber} from './scientificNumber';import { advanceTo } from './simulation';import { anonymousCampaignId, migratedTelemetry } from './telemetry';import { migratedStory } from './story';
-export const SAVE_KEY='ai-singularity.save';export const TEMP_KEY='ai-singularity.save.pending';export const BACKUP_KEY='ai-singularity.save.backup-v15';export const BACKUP_KEYS=[BACKUP_KEY,`${BACKUP_KEY}.2`,`${BACKUP_KEY}.3`] as const;export const RECOVERY_KEY='ai-singularity.save.recovery';export const SAVE_VERSION=58;type Envelope={version:number;state:GameState};
+export const SAVE_KEY='ai-singularity.save';export const TEMP_KEY='ai-singularity.save.pending';export const BACKUP_KEY='ai-singularity.save.backup-v15';export const BACKUP_KEYS=[BACKUP_KEY,`${BACKUP_KEY}.2`,`${BACKUP_KEY}.3`] as const;export const RECOVERY_KEY='ai-singularity.save.recovery';export const SAVE_VERSION=59;type Envelope={version:number;state:GameState};
 
 const exactEconomyFromLegacy=(old:any,base:GameState)=>({credits:ScientificNumber.from(old.credits??base.credits).toJSON(),data:ScientificNumber.from(old.data??base.data).toJSON(),researchPoints:ScientificNumber.from(old.researchPoints??base.researchPoints).toJSON(),lifetimeDataGenerated:ScientificNumber.from(old.lifetime?.regularData??base.lifetime.regularData).toJSON(),runCreditsEarned:ScientificNumber.from(old.runCreditsEarned??base.runCreditsEarned).toJSON(),lifetimeCreditsEarned:ScientificNumber.from(old.lifetimeCreditsEarned??base.lifetimeCreditsEarned).toJSON(),lifetimeEligibleCredits:ScientificNumber.from(old.lifetimeEligibleCredits??base.lifetimeEligibleCredits).toJSON(),cycleEligibleCredits:ScientificNumber.from(old.cycleEligibleCredits??old.lifetimeEligibleCredits??base.cycleEligibleCredits).toJSON(),prestigeEntitlementClaimed:ScientificNumber.from(old.prestigeEntitlementClaimed??base.prestigeEntitlementClaimed).toJSON(),totalINTEarned:ScientificNumber.from(old.totalINTEarned??base.totalINTEarned).toJSON(),cycleINTEarned:ScientificNumber.from(old.cycleINTEarned??old.totalINTEarned??base.cycleINTEarned).toJSON(),unspentINT:ScientificNumber.from(old.unspentINT??base.unspentINT).toJSON(),spentINT:ScientificNumber.from(old.spentINT??base.spentINT).toJSON()});
 const validScientific=(v:unknown)=>ScientificNumber.isValidJSON(v);
@@ -39,6 +39,7 @@ function restoreVersioned(raw:string|null,now=Date.now()):{state:GameState;error
  if(Number.isInteger(data.version)&&data.version>=1&&data.version<=56){old=migrateSingleFoundry(old);data.state=old;}
  if(Number.isInteger(data.version)&&data.version>=1&&data.version<=55){old=migrateModelForge(old);data.state=old;}
  if((Number.isInteger(data.version)&&data.version>=42&&data.version<=SAVE_VERSION)&&(!Array.isArray(old?.learnedRecipes)||(old?.challengeSession&&!Array.isArray(old.challengeSession.main?.learnedRecipes))))throw new TypeError('Dauerhafter Bauplanbesitz fehlt im aktuellen Spielstand.');
+ if(data.version===58){assertValidState(old);return{state:old,migrated:true};}
  if(data.version===57){assertValidState(old);return{state:old,migrated:true};}
  if(data.version===56){assertValidState(old);return{state:old,migrated:true};}
  if(data.version===55){assertValidState(old);return{state:old,migrated:true};}
@@ -63,7 +64,7 @@ if(old&&data.version!==SAVE_VERSION){const base=newGame(old.savedAt);old.setting
 export function restore(raw:string|null,now=Date.now()):{state:GameState;error?:string;migrated?:boolean}{
  const result=restoreVersioned(raw,now);
  if(result.error)return result;
- try{const envelope=raw?JSON.parse(raw):null,original=envelope?.state??result.state,base=envelope&&Number.isInteger(envelope.version)&&envelope.version<=45?migrateLegacyMaterialDiscovery(result.state):result.state,state=migrateBlueprints(migrateResearchAreas(base,original),original);assertValidState(state);return {...result,...(state!==result.state?{migrated:true}:{}),state:normalizeChallengeEconomy(state)};}
+ try{const envelope=raw?JSON.parse(raw):null,original=envelope?.state??result.state,base=envelope&&Number.isInteger(envelope.version)&&envelope.version<=45?migrateLegacyMaterialDiscovery(result.state):result.state,state=migrateBlueprints(migrateResearchAreas(base,original),original);assertValidState(state);return {...result,...(state!==result.state?{migrated:true}:{}),state:retireFoundryTasks(normalizeChallengeEconomy(state))};}
  catch(error){return {state:newGame(now,anonymousCampaignId()),error:`Der lokale Spielstand ist beschädigt. Er wurde nicht überschrieben.${error instanceof Error?' '+error.message:''}`};}
 }
 export type StorageLike=Pick<Storage,'getItem'|'setItem'|'removeItem'>;export type LoadResult={state:GameState;error?:string;writable:boolean;migrated?:boolean;recoveryRaw?:string};

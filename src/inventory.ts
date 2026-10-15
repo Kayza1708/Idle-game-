@@ -112,7 +112,7 @@ export function fuseItems(s:GameState,ids:string[]){
  return addEvent(backed,'item-craft',s.savedAt,{action:'fusion',type:first.type,rarity,resultInstanceId:first.id,consumed:consumed.join(',')});
 }
 /** Forge upgrades improve the scaling of one item without replacing rarity progression. */
-export function forgeItem(s:GameState,id:string,ticket?:ImprovementTicket){const item=s.inventory.find(i=>i.id===id);if(!item||!sameImprovement(item,ticket))return s;const index=s.foundries.findIndex(f=>!f.active);return index<0?s:queueForge(s,index,id);}
+export function forgeItem(s:GameState,id:string,ticket?:ImprovementTicket){const item=s.inventory.find(i=>i.id===id);if(!item||!sameImprovement(item,ticket))return s;return queueForge(s,0,id);}
 
 
 /** Active world loot: common signals give a small production burst, caches improve component quality,
