@@ -1,3 +1,26 @@
+## 2026-10-15 · Kräftige Seltenheitsrahmen und größere Items
+
+- [x] Ganze Einfassung in kräftiger Seltenheitsfarbe, dunkle Innenfläche, einmaliger Rahmen-Glanz beim Reveal; Seltenheitsnamen bleiben lesbar.
+- [x] Inventar-, Detail- und Ergebnisportraits etwa 10–15 % größer, weiterhin drei Inventarspalten und kompakte Detail-Aktion.
+- [x] Sechs echte Seltenheitsrahmen im Browser geprüft; Aktionsprüfung für 18 Mobileprofile wiederholt, 1.490 Tests/109 Dateien, Typecheck und Build grün. [Aktualisierter Clip und Farbpalette](item-presentation.md).
+- [ ] Weitere Motion-Ideen für Forschung, Hardware-Meilensteine, Prestige-Pfade und Reward-Transfers vorgeschlagen; native Abnahme bleibt offen. Kein Merge/Release.
+
+## 2026-10-15 · Gemeinsame Item-Präsentation und Animationsabläufe
+
+- [x] Echte Craft-/Fusionsabläufe mit Material- bzw. drei Instanzgrafiken, Energiephase, Item-Reveal, Seltenheit und tatsächlichen Werten. Skip/Weiter und sofortiges Ergebnis bei reduzierter Bewegung/Effekte aus.
+- [x] Aufwertung, Veredelungsabschluss, Recycling, An-/Ablegen und Schutzänderungen als kurze bestätigte Rückmeldung; keine falschen Abschlüsse beim Auftragsstart.
+- [x] Gemeinsamer Itemrahmen mit Seltenheit/Typ/Level in Inventar, Auswahl, Details, Equipment, Kapsel und Fundmeldung. Kompakter Detail-Hero und drei Inventarspalten.
+- [x] 1.490 Tests/109 Dateien, Typecheck, Build und Browserprüfung mit tatsächlichen Aktionen; [Dokumentation und echter Bildschirmclip](item-presentation.md).
+- [ ] Native iPhone/WKWebView/VoiceOver und finale Designabnahme offen. Kein Merge/Release.
+
+## 2026-10-15 · Immersive Rückmeldungen nach PR112
+
+- [x] Bonuskiste mit getrenntem Pixel-Art-Deckel/Unterteil, Öffnungschoreografie, Licht, zeitbasierten Partikeln und Materialkarten aus bestätigtem Beleg.
+- [x] Herstellung/Fusion mit Abschlussimpuls, drei Fusionsitems; tatsächliche Aufwertung mit Level-Puls. Effekte aus und reduzierte Bewegung berücksichtigt.
+- [x] Größere, lesbare Forschungszeilen mit Kosten/Sperrgrund; Item-Aufwertung ohne rohe Dezimalbrüche, doppelte Ergebniswerte oder „Fehlt 0“. Details nach der Hauptaktion eingeklappt.
+- [x] 1.473 Tests/108 Dateien, Typecheck und Build. Browserprüfungen und vollständiger Grafikprompt: [immersive-mobile-feedback.md](immersive-mobile-feedback.md).
+- [ ] Native iPhone/WKWebView/VoiceOver und subjektive Designabnahme offen. Kein Merge/Release.
+
 ## 2026-10-14 · Einheitliche Mobile-Art nach PR111
 
 - [x] Gemeinsamer transparenter Pixel-Art-Atlas für Kapseln, Bonuskisten, Modell-Sockel und Prestige-Hub; echte Grafikzustände statt einfacher Form-Platzhalter.

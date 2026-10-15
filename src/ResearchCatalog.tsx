@@ -1,6 +1,4 @@
 import {PixelIcon,type PixelIconName} from './PixelIcon';
-import {CostBadge} from './CostBadge';
-import {exactEconomyValue} from './economy';
 import {BlueprintResearchRewardNotice} from './ResearchQuoteDetails';
 import {
   researchAreas,
@@ -87,7 +85,7 @@ export function ResearchCatalog({
                           </h3>
                           <p className="research-brief">{copy.effect}</p>{isRepeatableResearch(id)&&<span className="research-marks" aria-label={de?'Fortschrittsmarken ohne zusätzliche Belohnung':'Progress marks without extra rewards'}>{[5,10,25,50,100].map(mark=><i className={s.researchLevels[id]>=mark?'reached':''} key={mark}>{mark}</i>)}</span>}
                           <small>
-                            {q.intro?<span className="intro-label">{de?'GRATIS':'FREE'}</span>:<CostBadge name="Data" icon={<ResourceArt id="data"/>} balance={exactEconomyValue(s,'data')} required={q.cost} de={de}/>} ·{" "}
+                            {q.intro?<span className="intro-label">{de?'GRATIS':'FREE'}</span>:<span className="research-price"><ResourceArt id="data"/>{formatScientific(q.cost,1)} Data</span>} ·{" "}
                             {(q.duration / 60).toFixed(1)} min
                           </small>
                           {reason && <small className="research-block-note">{reason}</small>}

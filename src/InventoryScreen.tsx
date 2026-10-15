@@ -1,3 +1,5 @@
+import {ItemHero,ItemPortrait} from './ItemPresentation';
+import {itemStatLines} from './itemActionEvents';
 import {CostBadge} from './CostBadge';
 import {exactEconomyValue} from './economy';
 import {ResourceArt} from './GameArt';
@@ -362,11 +364,10 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
                   setFusion([]);
                 }}
               >
-                <ItemArt type={entry.type} />
+                <ItemPortrait item={entry}/>
                 <span>{itemText(entry.type, language)}</span>
                 <small>
-                  {entry.id} · {rarityText(entry.rarity, language)} · Lv{" "}
-                  {entry.level}
+                  {rarityText(entry.rarity, language)} · Lv {entry.level}{entry.locked?' · 🔒':''}
                 </small>
                 {equipped(entry.id) && <i>{de ? "Ausgerüstet" : "Equipped"}</i>}
               </button>
@@ -417,27 +418,19 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
           art={<ItemArt type={item.type} />}
           onClose={() => setItemId(null)}
         >
-          <p>
-            {rarityText(item.rarity, language)} · Lv {item.level}/69 ·{" "}
-            {de ? "Schmiedestufe" : "Forge level"} {item.forge ?? 0}
-          </p>
+          <ItemHero item={item} language={language} stats={itemStatLines(s,item)}/>
           <p>
             {equipped(item.id)
               ? de
                 ? "Ausgerüstet"
                 : "Equipped"
               : de
-                ? "Nicht ausgerüstet: Effekte nicht aktiv"
-                : "Unequipped: effects inactive"}
+                ? "Nicht ausgerüstet"
+                : "Unequipped"}
             {s.retention.activeRun?.id === "no-items" &&
               ` · ${de ? "Challenge deaktiviert Itemeffekte" : "Challenge disables item effects"}`}
           </p>
-          <p>
-            {de
-              ? "Bonusbeiträge vor Kombination und Synergie; nur ausgerüstet wirksam."
-              : "Bonus contributions before combination and synergy; effective only while equipped."}
-          </p>
-          {effect(item)}
+
           <button
             disabled={!equipmentEligibility(s, item.id).allowed}
             onClick={() => act("equip", item.id)}
@@ -445,11 +438,7 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
             {de ? "Ausrüsten" : "Equip"}
           </button>
           {equipmentEligibility(s, item.id).reason === "no-socket" && (
-            <p>
-              {de
-                ? "Kein freier Ausrüstungsplatz; bestehenden Platz ersetzen oder weiteren Platz im Equipment-Dialog freischalten."
-                : "No free equipment socket; replace an occupied socket or unlock another socket in the equipment dialog."}
-            </p>
+            <button onClick={()=>act('open-equipment')}>{de?'Plätze im Modell verwalten':'Manage model sockets'} ›</button>
           )}
           {s.prestigeCount < 1 && (
             <p>{de ? "Benötigt erstes Prestige" : "Requires first prestige"}</p>
@@ -477,20 +466,11 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
                       ? "Schmieden"
                       : "Forge"}
                 </h3>
-                <p>{formatScientific(q.dataCostExact,1)} Data · {de?'Fehlt':'Missing'} {formatScientific(q.data.missingExact,1)}</p>
+                <p className="upgrade-price">{formatScientific(q.dataCostExact,1)} Data <span>Lv {item.level} → {q.result.level}</span></p>
                 <ul className="recipe-ingredients">{Object.entries(q.componentCosts).map(([id,n])=><RecipeIngredient key={id} name={componentText(id as ComponentId,language).name} icon={<ComponentArt id={id as ComponentId}/>} balance={s.componentInventory[id as ComponentId]} required={n!} missing={q.missingMaterials[id]??0} de={de} onClick={()=>{setItemId(null);setComponent(id as ComponentId)}}/>)}</ul>
-                {Object.keys(q.componentCosts).filter(id=>id!=='circuits').map(id=><ComponentSources key={id} s={s} id={id as ComponentId} act={act}/>)}
-                <dl>{q.effectChanges.map(change=><div key={change.effect}><dt>{effectText(change.effect,language)} {de?'Beitrag bei Ausrüstung':'Contribution when equipped'}</dt><dd>{change.before.toFixed(6)} → {change.after.toFixed(6)}</dd></div>)}</dl>
-                <p>
-                  {de ? "Ergebnis" : "Result"}:{" "}
-                  {rarityText(q.result.rarity, language)} · Lv {q.result.level}{" "}
-                  · {de ? "Schmiedestufe" : "Forge level"} {q.result.forge ?? 0}
-                </p>
-                {effect(q.result)}
+
+                <dl>{q.effectChanges.filter(change=>!['relay','int-yield'].includes(change.effect)).map(change=><div key={change.effect}><dt>{effectText(change.effect,language)}</dt><dd>+{(change.before*100).toFixed(2)} % <strong>→ +{(change.after*100).toFixed(2)} %</strong></dd></div>)}</dl>
                 {specialItemComparisonText(s,item,q.result)&&<p className="special-item-comparison">{specialItemComparisonText(s,item,q.result)}</p>}
-                {itemEffectProfile(item).includes("data") && <DataItemComparison s={s} before={item} after={q.result}/>}
-                {itemEffectProfile(item).includes("research") && <ResearchItemComparison s={s} before={item} after={q.result}/>}
-                {itemEffectProfile(item).includes("training") && <TrainingItemCostComparison s={s} before={item} after={q.result}/>}
                 {!effective && (
                   <p>
                     {de
@@ -526,6 +506,12 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
                       ? "Schmieden"
                       : "Forge"}
                 </button>
+                <details className="system-disclosure"><summary>{de?'Materialquellen':'Material sources'}</summary>{Object.keys(q.componentCosts).filter(id=>id!=='circuits').map(id=><ComponentSources key={id} s={s} id={id as ComponentId} act={act}/>)}</details>
+                <details className="system-disclosure"><summary>{de?"Wirkung im Build":"Effect on build"}</summary>
+                {itemEffectProfile(item).includes("data") && <DataItemComparison s={s} before={item} after={q.result}/>}
+                {itemEffectProfile(item).includes("research") && <ResearchItemComparison s={s} before={item} after={q.result}/>}
+                {itemEffectProfile(item).includes("training") && <TrainingItemCostComparison s={s} before={item} after={q.result}/>}
+                </details>
               </section>
             );
           })}
