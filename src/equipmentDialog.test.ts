@@ -1,10 +1,11 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {addCredits,equipmentSlotCount,exactEconomyValue,newGame,type GameState} from './economy';
+import {addCredits,equipmentSlotCount,exactEconomyValue,type GameState} from './economy';
 import {equipmentEligibility,buyEquipmentSlot,createItem,equip,unequip} from './inventory';
 import {equipmentEffectCopy,equipmentPreview} from './EquipmentDialog';
 import {prestige} from './prestige';
 import {ScientificNumber} from './scientificNumber';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 describe('persistent AI equipment slots',()=>{
  it('opens exactly one free slot after the first prestige',()=>{const base=newGame(0),ready=addCredits(base,1e12),after=prestige(ready);expect(equipmentSlotCount(base)).toBe(0);expect(equipmentSlotCount(after)).toBe(1);expect(after.purchasedEquipmentSlots).toBe(0)});

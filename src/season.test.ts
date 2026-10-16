@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {newGame} from './economy';
+
 import {addSeasonXP,claimSeasonReward,rollSeason,seasonClaimable,seasonLevel,seasonProgress,seasonRewardTiers,SEASON_DAYS,SEASON_LEVELS,SEASON_XP_PER_LEVEL} from './season';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 describe('30 day season',()=>{
   it('reports level progress and a claimable reward consistently',()=>{

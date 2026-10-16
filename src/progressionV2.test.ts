@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,hardwareIds,newGame,toggleHardwareAutobuyer} from './economy';
+import {BALANCE,hardwareIds,toggleHardwareAutobuyer} from './economy';
 import {achievements,currentAchievementTier} from './achievements';
 import {rollPeriods} from './missions';
 import {advanceTo} from './simulation';

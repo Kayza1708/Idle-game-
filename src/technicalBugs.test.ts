@@ -1,14 +1,16 @@
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import {predecessorProjection} from './testSupport/protectedProgression';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import dataBaseline from './testSupport/dataAnalysisBaseline.json';
 import {describe,it,expect} from 'vitest';
 import {createHash} from 'node:crypto';
-import {BALANCE,newGame,addCredits,addDataScientific,buyHardwareClass,computeRateScientific,computeFactors,equipmentSlotCount,axiomThresholdScientific,passiveCircuitRate,creditRateScientific,dataRateScientific,dataSynergyScientific,averageDataSynergy,exactEconomyValue,hardwarePurchasePreview,productionBreakdown,registerTap,axiomEconomyValue,creditMultiplierFromAxiomsScientific,type GameState,type PrestigeUpgradeId} from './economy';
+import {BALANCE,addCredits,addDataScientific,buyHardwareClass,computeRateScientific,computeFactors,equipmentSlotCount,axiomThresholdScientific,passiveCircuitRate,creditRateScientific,dataRateScientific,dataSynergyScientific,averageDataSynergy,exactEconomyValue,hardwarePurchasePreview,productionBreakdown,registerTap,axiomEconomyValue,creditMultiplierFromAxiomsScientific,type GameState,type PrestigeUpgradeId} from './economy';
 import {prestige,buyNode,axiomReset,buyAxiomUpgrade,prestigePreview,axiomPreview,axiomRewardScientific} from './prestige';
 import {createItem,equip,buyEquipmentSlot} from './inventory';
 import {advance,advanceTo} from './simulation';
 import {queueExperiment,completeExperiment} from './experiments';
-import {serialize,restore,importGame,SAVE_VERSION} from './storage';
+import {serialize,SAVE_VERSION} from './storage';
 import {createLifecycleGate} from './mobileIntegration';
 import {startRunChallenge,abortRunChallenge} from './retention';
 import {claimAchievement} from './achievements';

@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,computeRate,dataResearchMultiplier,dataRate,newGame,queueResearchProject,researchLabCount} from './economy';
+import {BALANCE,computeRate,dataResearchMultiplier,dataRate,queueResearchProject,researchLabCount} from './economy';
 import {buyNode,prestige} from './prestige';
 
 describe('five-branch prestige tree',()=>{

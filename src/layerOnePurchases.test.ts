@@ -1,6 +1,7 @@
+import {newGame} from './legacyContractFixture';
 import baseline from './testSupport/dataAnalysisBaseline.json';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,buyHardwareClass,exactEconomyValue,hardwareBulkCostScientific,hardwareCostScientific,hardwareIds,isolatedBulkCostScientific,layerOneProfile,maxAffordable,newGame} from './economy';
+import {BALANCE,buyHardwareClass,exactEconomyValue,hardwareBulkCostScientific,hardwareCostScientific,hardwareIds,isolatedBulkCostScientific,layerOneProfile,maxAffordable} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {simulateLayerOne} from './layerOneSimulation';
 

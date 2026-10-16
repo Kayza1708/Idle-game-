@@ -1,15 +1,16 @@
+import {newGame,restore} from './legacyContractFixture';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft,legacyCraftAffordability as craftAffordability} from './testSupport/legacyPaidCraft';
 import {recipeIds} from './blueprints';
 import {buyNode} from './prestige';
 import * as telemetry from './telemetry';
 import {describe,it,expect,vi} from 'vitest';
-import {addCredits,addData,BALANCE,buyHardwareClass,exactEconomyValue,newGame,trainingPreview,startTraining,researchPreview,startResearchProject,hardwarePurchasePreview,creditRateScientific,computeRateScientific,dataRateScientific,trainingBaseCreditCostScientific,repeatableResearchDataCostScientific,usersRateScientific,trainingCostQuote,productionBreakdown,type GameState,scientificAffordability} from './economy';
+import {addCredits,addData,BALANCE,buyHardwareClass,exactEconomyValue,trainingPreview,startTraining,researchPreview,startResearchProject,hardwarePurchasePreview,creditRateScientific,computeRateScientific,dataRateScientific,trainingBaseCreditCostScientific,repeatableResearchDataCostScientific,usersRateScientific,trainingCostQuote,productionBreakdown,type GameState,scientificAffordability} from './economy';
 import {analysisAffordability,queueExperiment} from './experiments';
 import {craftModule,settleCrafting,createItem,equip} from './inventory';
 import {economySnapshot} from './economySnapshot';
 import {ScientificNumber} from './scientificNumber';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {ProductionDetails} from './ProductionDetails';
 import {JobDetails} from './JobDetails';
 import {renderToStaticMarkup} from 'react-dom/server';

@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 import { describe, expect, it } from 'vitest';
-import { addCredits, newGame } from './economy';
+import { addCredits} from './economy';
 import { advance } from './simulation';
-import { BACKUP_KEY, SAVE_KEY, TEMP_KEY, loadGame, persistGame, RECOVERY_KEY, restore, serialize, StorageLike } from './storage';
+import { BACKUP_KEY, SAVE_KEY, TEMP_KEY, loadGame, persistGame, RECOVERY_KEY, serialize, StorageLike } from './storage';
 
 class MemoryStorage implements StorageLike {
   value: string | null = null;

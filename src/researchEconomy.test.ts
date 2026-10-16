@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import {buyNode} from './prestige';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,exactEconomyValue,newGame,repeatableResearchDataCost,repeatableResearchDuration,researchDuration,researchDurationAtStart,researchProjectDataCost,researchProjectDataCostScientific,startResearchProject} from './economy';
+import {BALANCE,exactEconomyValue,repeatableResearchDataCost,repeatableResearchDuration,researchDuration,researchDurationAtStart,researchProjectDataCost,researchProjectDataCostScientific,startResearchProject} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {advance} from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 const funded=(data:ScientificNumber|number)=>{const value=typeof data==='number'?ScientificNumber.from(data):data,base=buyNode({...newGame(0),unspentINT:10,exactEconomy:{...newGame(0).exactEconomy,unspentINT:{m:1,e:1}}},'labs1');return{...base,data:value.toNumber(),exactEconomy:{...base.exactEconomy,data:value.toJSON()}}};
 describe('category research contracts',()=>{

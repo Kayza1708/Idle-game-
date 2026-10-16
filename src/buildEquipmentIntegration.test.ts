@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,equippedItems,equippedBonus,equipmentSlotCount,researchPerformanceQuote,startResearchProject,addData,exactEconomyValue,type GameState} from './economy';
+import {BALANCE,equippedItems,equippedBonus,equipmentSlotCount,researchPerformanceQuote,startResearchProject,addData,exactEconomyValue,type GameState} from './economy';
 import {createItem,equip,equipmentEligibility,unequip} from './inventory';
 import {equipmentPreview,equipmentEffectCopy} from './EquipmentDialog';
 import {deviceEffectQuote} from './deviceEffects';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {predecessorProjection} from './testSupport/protectedProgression';
 import {runNaturalProfile} from '../scripts/natural-progression-profile';
 import {blueprintQuote,learnBlueprint} from './blueprints';

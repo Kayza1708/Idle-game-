@@ -1,8 +1,9 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,addCreditsScientific,exactEconomyValue,intYieldFactor,newINTScientific,prestigeClaimScientific,creditMultiplierFromINT,type GameState} from './economy';
+import {BALANCE,addCreditsScientific,exactEconomyValue,intYieldFactor,newINTScientific,prestigeClaimScientific,creditMultiplierFromINT,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {prestige,buyNode} from './prestige';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 const amount=(n:number)=>ScientificNumber.from(BALANCE.prestigeBaseRevenue).multiplyNumber(n);
 describe('first three-INT prestige calibration contract',()=>{
  it('weights each new eligible booking once using that booking state, never retroactively',()=>{

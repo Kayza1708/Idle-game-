@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {newGame,addData,addCredits,buyHardwareClass,type GameState} from './economy';
+import {addData,addCredits,buyHardwareClass,type GameState} from './economy';
 import {returnGuidance} from './returnGuidance';
 import {createItem} from './inventory';
 import {returnText} from './returnText';

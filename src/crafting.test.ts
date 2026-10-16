@@ -1,8 +1,9 @@
+import {newGame} from './legacyContractFixture';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {recipeIds} from './blueprints';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,type GameState} from './economy';
+import {BALANCE,type GameState} from './economy';
 import {cancelCrafting,craftModule} from './inventory';
 import {advance} from './simulation';
 const rich=()=>({...newGame(0),learnedRecipes:recipeIds,completedResearch:['blueprints' as const],data:1e6,exactEconomy:{...newGame(0).exactEconomy,data:{m:1,e:6}},blueprintFragments:100,modules:{computeBus:10,dataLattice:10},components:10000,componentInventory:{circuits:1000,copperCoils:1000,siliconWafers:1000,titaniumBolts:1000,photonicLenses:1000,graphene:1000,nanotubes:1000,superconductors:1000,neuralCrystals:1000,quantumCores:1000,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0}} as GameState);

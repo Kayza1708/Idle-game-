@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {newGame} from './economy';
+
 import {claimOnboarding,updateOnboarding} from './onboarding';
 import {addEvent} from './telemetry';
 

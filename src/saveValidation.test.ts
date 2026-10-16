@@ -1,10 +1,12 @@
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {learnBlueprint} from './blueprints';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,newGame,addData,grantComponents,creditRate,type GameState} from './economy';
+import {BALANCE,addData,grantComponents,creditRate,type GameState} from './economy';
 import {craftModule,createItem,equip} from './inventory';
 import {advance} from './simulation';
-import {SAVE_VERSION,SAVE_KEY,BACKUP_KEYS,TEMP_KEY,importGame,restore,serialize,validate,persistGame,loadGame,type StorageLike} from './storage';
+import {SAVE_VERSION,SAVE_KEY,BACKUP_KEYS,TEMP_KEY,serialize,validate,persistGame,loadGame,type StorageLike} from './storage';
 import {persistDurableGame} from './durableStorage';
 
 function ready(){let s=grantComponents({...addData(newGame(0),20000),prestigeCount:1,completedResearch:['blueprints' as const],modules:{computeBus:10,dataLattice:10},blueprintFragments:100},{circuits:1000,copperCoils:1000,siliconWafers:1000,titaniumBolts:1000,photonicLenses:1000,graphene:1000,nanotubes:1000});s=createItem(s,'quantum-chip','rare');return learnBlueprint(equip(s,s.inventory[0].id),'quantum-chip');}

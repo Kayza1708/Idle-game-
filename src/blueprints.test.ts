@@ -1,13 +1,15 @@
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import {craft as instantCraft} from './inventory';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft,legacyCraftAffordability as craftAffordability} from './testSupport/legacyPaidCraft';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,it,expect,vi} from 'vitest';
-import {BALANCE,newGame,addData,grantComponents,addCredits,axiomThresholdScientific,type GameState} from './economy';
+import {BALANCE,addData,grantComponents,addCredits,axiomThresholdScientific,type GameState} from './economy';
 import {blueprintQuote,learnBlueprint,recipeIds} from './blueprints';
 import {craftModule,settleCrafting,runCraftingPlanner,createItem,cancelCrafting} from './inventory';
 import {legacyCraftingRecipe as craftingRecipe} from './testSupport/legacyPaidCraft';
-import {restore,serialize,importGame,SAVE_VERSION,SAVE_KEY,persistGame,type StorageLike} from './storage';
+import {serialize,SAVE_VERSION,SAVE_KEY,persistGame,type StorageLike} from './storage';
 import {prestige,axiomReset} from './prestige';
 import {startRunChallenge,abortRunChallenge} from './retention';
 import {createBalanceExportFiles} from './balanceReport';

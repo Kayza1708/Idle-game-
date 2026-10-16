@@ -1,9 +1,11 @@
+import {loadGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import { describe, expect, it } from 'vitest';
-import { BALANCE, GameState, addCredits, addData, buyHardwareClass, exactEconomyValue, hardwareCostScientific, newGame, researchDuration, queueResearchProject, startResearchProject, startTraining, trainingCost, type TrainingTrack } from './economy';
+import { BALANCE, GameState, addCredits, addData, buyHardwareClass, exactEconomyValue, hardwareCostScientific, researchDuration, queueResearchProject, startResearchProject, startTraining, trainingCost, type TrainingTrack } from './economy';
 import { queueExperiment } from './experiments';
 import { prestige, buyNode } from './prestige';
 import { advance, advanceTo, debugAdvance, settleResearchCompletions, simulationNow, type ResearchCompletionStep } from './simulation';
-import { persistGame, loadGame, restore, serialize, StorageLike } from './storage';
+import { persistGame, serialize, StorageLike } from './storage';
 
 class MemoryStorage implements StorageLike {
   value:string|null=null;

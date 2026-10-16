@@ -1,3 +1,4 @@
+import {newGame} from './legacyContractFixture';
 import {createElement,isValidElement,type ReactNode} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {Workshop,num} from './Panels';
@@ -5,7 +6,7 @@ import {ResearchCatalog} from './ResearchCatalog';
 import {researchPreview,type ResearchId} from './economy';
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
-import {addCredits,buyHardwareClass,computeRate,hardwareClassComputeRate,hardwareIds,hardwarePurchaseComputeGain,maxAffordable,newGame,quality,efficiency,BALANCE} from './economy';
+import {addCredits,buyHardwareClass,computeRate,hardwareClassComputeRate,hardwareIds,hardwarePurchaseComputeGain,maxAffordable,quality,efficiency,BALANCE} from './economy';
 import {prestige} from './prestige';
 import panels from './Panels.tsx?raw';
 const css=readFileSync(new URL('./style.css',import.meta.url),'utf8');

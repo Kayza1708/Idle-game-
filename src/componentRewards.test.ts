@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,componentTotal,newGame} from './economy';
+import {BALANCE,componentTotal} from './economy';
 import {advance} from './simulation';
 import {buyGemOffer} from './gemShop';
 import {claimOnboarding} from './onboarding';

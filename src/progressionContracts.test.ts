@@ -1,3 +1,4 @@
+import {newGame,restore} from './legacyContractFixture';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {createElement} from 'react';
 import {MaterialBuildAutomation} from './MaterialBuildAutomation';
@@ -5,11 +6,11 @@ import {advance} from './simulation';
 import {learnBlueprint} from './blueprints';
 import {actionSound,actionHaptic} from './audio';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,componentIds,itemTypes,addCreditsScientific,hardwareBulkCostScientific,buyHardwareClass,buyClassUpgrade,classUpgradePreview,computeRateScientific,equippedBonus,grantComponents,type GameState,type HardwareId,type ItemTypeId} from './economy';
+import {BALANCE,componentIds,itemTypes,addCreditsScientific,hardwareBulkCostScientific,buyHardwareClass,buyClassUpgrade,classUpgradePreview,computeRateScientific,equippedBonus,grantComponents,type GameState,type HardwareId,type ItemTypeId} from './economy';
 import {materialTable,materialPackageQuote,grantMaterialPackage,grantMaterialBox,blueprintResearchCompletion} from './materialEconomy';
 import {createItem,claimLootDrop} from './inventory';
 import {salvageWithRecovery} from './recovery';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 import {progressionSnapshot} from './progressionExport';
 import {challengeStageCatalog} from './challengeStages';
 import {startRunChallenge,abortRunChallenge} from './retention';

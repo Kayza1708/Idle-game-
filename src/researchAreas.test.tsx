@@ -1,9 +1,11 @@
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,it,expect} from 'vitest';
-import {newGame,addData,addCredits,exactEconomyValue,researchPreview,startResearchProject,type GameState} from './economy';
+import {addData,addCredits,exactEconomyValue,researchPreview,startResearchProject,type GameState} from './economy';
 import {researchNodeAccess,researchAreas,researchAccess,visibleResearchIds,assertResearchAreaCatalog} from './researchAreas';
 import {buyNode,prestige,axiomReset} from './prestige';
-import {serialize,importGame,restore} from './storage';
+import {serialize} from './storage';
 import {startRunChallenge,abortRunChallenge} from './retention';
 import {advance} from './simulation';
 import {renderToStaticMarkup} from 'react-dom/server';

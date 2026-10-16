@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect,vi} from 'vitest';
-import {newGame,type GameState} from './economy';
+import {type GameState} from './economy';
 import {validForgeSelection,readForgeSelection,rememberForgeSelection} from './forgePreferences';
 import {prestigeMapScale,PRESTIGE_CANVAS} from './prestigeTree';
 const learned=():GameState=>({...newGame(0,'preferences'),completedResearch:['blueprints'],learnedRecipes:['quantum-chip']});

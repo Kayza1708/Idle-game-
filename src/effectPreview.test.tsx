@@ -1,7 +1,8 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {newGame,buyHardwareClass,addCredits,addData,addDataScientific,addCreditsScientific,type GameState} from './economy';
+import {buyHardwareClass,addCredits,addData,addDataScientific,addCreditsScientific,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {EffectPreview,effectPreviewRows} from './EffectPreview';
 import {ResourceBar,compactHeaderValue,Prestige} from './Panels';

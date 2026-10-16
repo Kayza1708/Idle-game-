@@ -1,14 +1,15 @@
+import {newGame,restore} from './legacyContractFixture';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,grantComponents,addData,addCredits,componentIds,exactEconomyValue,type GameState} from './economy';
+import {BALANCE,grantComponents,addData,addCredits,componentIds,exactEconomyValue,type GameState} from './economy';
 import {settleCrafting,createItem,upgrade,fuseItems,toggleLock,equip} from './inventory';
 import {upgradeFoundry,foundryUpgradeQuote,forgeJobQuote,queueForge,settleFoundries,removeQueuedForge,foundryBusy} from './foundries';
 import {salvageQuote,salvageWithRecovery} from './recovery';
 import {buyBlueprintMastery} from './itemProgress';
 import {learnBlueprint} from './blueprints';
 import {advance} from './simulation';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 import {prestige,axiomReset} from './prestige';
 // Prepared technical resources/build access. No natural progression assertion.
 const rich=():GameState=>({...grantComponents(addData(newGame(0),1e12),Object.fromEntries(componentIds.map(id=>[id,1000000]))),prestigeCount:1,nodes:['manufacturing1'],axiomResetCount:1,completedResearch:['blueprints','materialRecycling'],modules:{computeBus:100,dataLattice:100},blueprintFragments:1000,impulseRelayBlueprint:true,materials:{...newGame(0).materials,families:['base','semiconductor','photonic','frontier','quantum']}});

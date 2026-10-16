@@ -1,10 +1,11 @@
+import {newGame} from './legacyContractFixture';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {buyNode} from './prestige';
 import {describe,expect,it} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {readFileSync} from 'node:fs';
-import {newGame} from './economy';
+
 import {startRunChallenge} from './retention';
 import {challengeCompletionQuote} from './challengeStages';
 import {formatScientific} from './economy';

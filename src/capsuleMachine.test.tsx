@@ -1,10 +1,11 @@
+import {newGame,restore} from './legacyContractFixture';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {newGame,addCredits,BALANCE,type GameState} from './economy';
+import {addCredits,BALANCE,type GameState} from './economy';
 import {capsuleQuote,drawGemCapsule,rewardCapsuleVideo,validCapsuleMachine,capsuleItemPool} from './capsuleMachine';
 import {CapsulePanel,CapsuleMachineArt} from './CapsulePanel';
-import {serialize,restore,SAVE_VERSION} from './storage';
+import {serialize,SAVE_VERSION} from './storage';
 import {prestige,axiomReset} from './prestige';
 import {startRunChallenge,abortRunChallenge} from './retention';
 import {unavailableRewardedAdProvider,rewardAd} from './ads';

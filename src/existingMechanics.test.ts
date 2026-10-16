@@ -1,3 +1,5 @@
+import {importGame} from './legacyContractFixture';
+import {newGame} from './legacyContractFixture';
 import {upgradeFoundry,forgeJobQuote,settleFoundries} from './foundries';
 import {learnBlueprint} from './blueprints';
 import {buyNode} from "./prestige";
@@ -6,7 +8,6 @@ import { describe, it, expect, vi } from "vitest";
 import { ScientificNumber } from "./scientificNumber";
 import {
   BALANCE,
-  newGame,
   addData,
   exactEconomyValue,
   queueResearchProject,
@@ -33,7 +34,7 @@ import {
   queueExperiment,
   analysisBlockReason,
 } from "./experiments";
-import { serialize, importGame } from "./storage";
+import { serialize} from './storage';
 const ready = (): GameState => {
   let s = addData(newGame(0), 1e9);
   s = buyNode({...s,unspentINT:100,exactEconomy:{...s.exactEconomy,unspentINT:{m:1,e:2}}},"labs1");

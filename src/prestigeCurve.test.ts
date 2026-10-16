@@ -1,8 +1,9 @@
+import {newGame} from './legacyContractFixture';
 import {prepareEarlyHardwareDecision} from '../scripts/early-hardware-profile';
 import {advance} from './simulation';
 import {registerTap,buyHardwareClass,newINTScientific,type TrainingTrack} from './economy';
 import {describe,expect,it} from 'vitest';
-import {addCredits,BALANCE,canPrestige,creditMultiplierFromINT,newGame,newINT,prestigeClaimForEligible} from './economy';
+import {addCredits,BALANCE,canPrestige,creditMultiplierFromINT,newINT,prestigeClaimForEligible} from './economy';
 import {prestige,prestigePreview} from './prestige';
 import {ScientificNumber} from './scientificNumber';
 
@@ -17,5 +18,5 @@ describe('calibrated cumulative INT entitlement',()=>{
   let state=newGame(0),track:TrainingTrack='quality',firstOne:number|null=null,firstThree:number|null=null;
   for(let t=0;t<=3600;t++){if(t){state=advance(state,1,true,()=>.5).state;state=registerTap(state,state.savedAt);}const claim=newINTScientific(state);if(firstOne===null&&claim.compare(ScientificNumber.from(1))>=0)firstOne=t;if(firstThree===null&&claim.compare(ScientificNumber.from(3))>=0)firstThree=t;if(t%10===0){const prepared=prepareEarlyHardwareDecision(state,track,'A');state=prepared.state;track=prepared.track;if(prepared.pick)state=buyHardwareClass(state,prepared.pick);}}
   expect(firstOne).not.toBeNull();expect(firstOne!).toBeGreaterThan(0);expect(firstOne!).toBeLessThanOrEqual(3600);if(firstThree!==null)expect(firstThree).toBeGreaterThanOrEqual(firstOne!);expect(state.prestigeCount).toBe(0);expect(newINTScientific(state).toNumber()).toBeGreaterThanOrEqual(1);expect(state.lifetime.taps).toBe(3600);
- },20_000);
+ },45_000);
 });

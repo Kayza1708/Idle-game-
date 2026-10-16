@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,newGame,type PrestigeUpgradeId} from './economy';
+import {BALANCE,type PrestigeUpgradeId} from './economy';
 import {buyNode} from './prestige';
 import {prestigeLayout,prestigeNodeState,validatePrestigeCatalog} from './prestigeTree';
 

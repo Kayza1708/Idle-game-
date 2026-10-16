@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {newGame,trainingPreview,startTraining,researchQuote,startResearchProject,BALANCE,addCredits,addData,type GameState} from './economy';
-import {advance} from './simulation';import {serialize,restore,SAVE_VERSION} from './storage';
+import {trainingPreview,startTraining,researchQuote,startResearchProject,BALANCE,addCredits,addData,type GameState} from './economy';
+import {advance} from './simulation';import {serialize,SAVE_VERSION} from './storage';
 import {prestige,axiomReset} from './prestige';import {startRunChallenge,abortRunChallenge} from './retention';import {withChallengeAccess} from './testSupport/challengeAccount';
 import {tutorialGuide} from './tutorialGuide';import {Research,Workshop} from './Panels';
 const lesson=(target:'training'|'research'):GameState=>{const s=newGame(0,'intro-tests');return {...s,aiName:'Nova',story:{...s.story,target,open:null,queue:[]}}};

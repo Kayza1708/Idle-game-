@@ -1,3 +1,13 @@
+## 2026-10-16 · Prestige/Axiome V2
+
+- [x] 60 frei nach INT-Preis kaufbare Knoten, 24 Axiom-Upgrades, neuer INT-Anspruch und Credits-/Daten-/Trainingsskalierung integriert.
+- [x] Drei Grundslots, dauerhaft erworbene Zusatzslots, geheimes Labor ab 200.000 INT mit zehn entwickelbaren Einzelmodellen und Erkenntnis.
+- [x] Garantierte Starterrezepte, gezielte Synthese, zeitbasierte Fusion, dynamische Restarbeit, endliche Resetabsicht und Save-v60-Migration implementiert.
+- [x] Typecheck, 1.582 Tests/115 Dateien und Produktionsbuild bestanden; 46 V2-Fälle einschließlich echter Acht-Stunden-Simulation mit 1/3/96 Speicherabschnitten.
+- [ ] Visuelle Browser- und iPhone/WKWebView-Abnahme sowie vollständige Langzeit-/Challenge-Kampagnen offen. Kein Merge und keine Veröffentlichung.
+
+[Konzept und Integrationsgrenzen](prestige-v2-implementation.md).
+
 ## Shop-Kategorien, Pixel-Icons und Schmiede ohne Stations-Level
 
 - [x] Gumball-Maschine mit bestehender Auszahlung und Animation als eigener oberer Reiter wieder eingebunden.

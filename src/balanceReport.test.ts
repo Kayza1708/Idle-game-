@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import { describe, expect, it } from 'vitest';
 import { createBalanceExportFiles, createBalanceReport, serializeBalanceReport, createBalanceZip, createBalanceZipAsync } from './balanceReport';
 import { addEvent } from './telemetry';
-import { BALANCE, newGame, type GameState } from './economy';
+import { BALANCE, type GameState } from './economy';
 import { prestige } from './prestige';
-import { restore } from './storage';
+
 
 describe('local balance report',()=>{
   it('exports early prestige settings and queued training',()=>{const base=newGame(0),state={...base,nodes:['shoppingAgent','trainingPlan','componentScanner'],hardwareAutoBuyers:{calculator:true},scannerTarget:'circuits' as const,automation:{...base.automation,reservePercent:.25},trainingQueue:[{track:'quality' as const,targetLevel:1}]},report=createBalanceReport(state,0);expect(report.currentState.model.trainingQueue).toEqual(state.trainingQueue);expect(report.currentState.int.earlyUnlockSettings).toEqual({hardwareAutoBuyers:{calculator:true},reservePercent:.25,scannerTarget:'circuits'});});

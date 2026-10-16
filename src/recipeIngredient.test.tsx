@@ -1,9 +1,10 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {RecipeIngredient} from './RecipeIngredient';
 import {ComponentArt,ActivityArt} from './GameArt';
-import {newGame} from './economy';
+
 import {craftingAffordability} from './inventory';
 import {componentText,moduleText} from './gameplayI18n';
 

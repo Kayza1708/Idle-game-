@@ -1,5 +1,6 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,hardwareIds,repeatableResearchIds,newGame,addData,addCredits,addCreditsScientific,startTraining,startResearchProject,buyHardwareClass,activateOverclock,registerTap,equippedBonus,itemCombinationQuotes,exactEconomyValue,type GameState} from './economy';
+import {BALANCE,hardwareIds,repeatableResearchIds,addData,addCredits,addCreditsScientific,startTraining,startResearchProject,buyHardwareClass,activateOverclock,registerTap,equippedBonus,itemCombinationQuotes,exactEconomyValue,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {startRunChallenge,completeRunChallenge,abortRunChallenge} from './retention';
 import {challengeStageCatalog,challengeCatalogQuote,challengeRules,challengeCompletionQuote,challengeFamilyBonus,type ChallengeFamily,emptyChallengeMetrics,addChallengeMetrics} from './challengeStages';
@@ -8,7 +9,7 @@ import {salvageWithRecovery} from './recovery';
 import {deviceBonus} from './deviceEffects';
 import {advance} from './simulation';
 import {prestige,axiomReset} from './prestige';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 const ready=():GameState=>({...addCredits(addData(newGame(0),1e8),1e20),prestigeCount:1,unlockedEquipmentSlots:3,completedResearch:['blueprints','distributedInference'],nodes:['shoppingAgent','labs1','manufacturing1'],hardwareAutoBuyers:{calculator:true},lifetime:{...newGame(0).lifetime,hardwareClasses:[...hardwareIds]},researchAccessIds:[...repeatableResearchIds],challengeStages:Object.fromEntries(Object.keys(BALANCE.challengeCatalog.families).map(id=>[id,68]))});
 const reload=(s:GameState)=>{const r=restore(serialize(s),s.savedAt);expect(r.error).toBeUndefined();return r.state;};
 describe('ten versioned challenge families and 690 scientific fixed stages',()=>{

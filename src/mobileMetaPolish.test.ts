@@ -1,7 +1,8 @@
+import {newGame} from './legacyContractFixture';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {SettingsPanel} from './SettingsPanel';
-import {newGame} from './economy';
+
 import menu from './MetaMenu.tsx?raw';
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';

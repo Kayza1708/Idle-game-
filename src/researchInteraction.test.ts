@@ -1,8 +1,9 @@
+import {newGame,restore} from './legacyContractFixture';
 import {advanceTo} from './simulation';
 import {describe,it,expect} from 'vitest';
-import {newGame,addData,startResearchProject,exactEconomyValue} from './economy';
+import {addData,startResearchProject,exactEconomyValue} from './economy';
 import {researchActionQuote,requestResearchProject} from './researchInteraction';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 const ready=()=>{const s=addData(newGame(0,'manual-queue'),1e12);return {...s,nodes:['labs1','labs2','computeNet1'] as typeof s.nodes,discovered:['calculator','sbc'] as typeof s.discovered,researchLevels:{...s.researchLevels,dataGeneration:1},intro:{...s.intro,researchUsed:true}}};
 const full=()=>{const n=startResearchProject(startResearchProject(ready(),'dataGeneration'),'modelArchitecture');return n};
 describe('one manual research action',()=>{

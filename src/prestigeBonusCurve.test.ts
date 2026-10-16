@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,addCredits,creditMultiplierFromINT,newGame} from './economy';
+import {BALANCE,addCredits,creditMultiplierFromINT} from './economy';
 import {prestige,prestigePreview} from './prestige';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 
 const withCycleINT=(value:number)=>{const state=newGame(0),exact=ScientificNumber.from(value).toJSON();return{...state,cycleINTEarned:value,totalINTEarned:value,exactEconomy:{...state.exactEconomy,cycleINTEarned:exact,totalINTEarned:exact}}};

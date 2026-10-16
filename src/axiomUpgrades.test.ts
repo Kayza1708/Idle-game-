@@ -1,8 +1,9 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {addCreditsScientific,axiomThresholdScientific,creditMultiplierFromAxioms,exactEconomyValue,intYieldFactor,newGame,type GameState} from './economy';
+import {addCreditsScientific,axiomThresholdScientific,creditMultiplierFromAxioms,exactEconomyValue,intYieldFactor,type GameState} from './economy';
 import {axiomReset,buyAxiomUpgrade,prestigeAgentStatus,runPrestigeAgent} from './prestige';
 import {advance} from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 
 const funded=(axioms=20)=>({...newGame(0),axioms,availableAxioms:axioms,totalAxiomsEarned:axioms});
