@@ -21,3 +21,5 @@ window.addEventListener('unhandledrejection',event=>crashRecorder.failure('unhan
 createRoot(document.getElementById('root')!).render(<React.StrictMode><CrashBoundary recorder={crashRecorder}><App recorder={crashRecorder}/></CrashBoundary></React.StrictMode>);
 
 import './menu-settings.css';
+
+import './commerce.css';

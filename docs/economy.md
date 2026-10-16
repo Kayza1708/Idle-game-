@@ -1,3 +1,11 @@
+## 2026-10-16 · Kommerzialisierung V1
+
+- `BALANCE.commerce` zentralisiert Einkommen-Pass ×2, 10 Gems/Video, 300 s Drohnen-Credits, 600 s Laborvideo, 2 Gems/min Laborabschluss sowie Ticket-/Cooldownzeiten und garantierte Paketinhalte.
+- `BALANCE.adLimits`: 5 Gem-Videos, 12 Drohnen, 6 Laborvideos pro UTC-Tag. Drohne mit 10 Minuten Cooldown. Werbefrei behält alle Quoten.
+- Starter: 300 Gems, 120 Circuits, 80 Coils und drei garantierte Rare-Items für unterschiedliche Grundformen. Builder: 1.200 Gems + 300 Circuits + 200 Coils. Lab: 600 Gems + 200 Circuits. Gem-Pakete: 100/550/1.200/2.600. Keine lokal erfundenen Echtgeldpreise.
+- Drohnen sind kein prestige-berechtigtes Einkommen. Permanente Produktionsverdopplung gilt auf Credits, Taps und Offline-Produktion und wird nicht mehrfach angewendet.
+- Preise und Quoten sind erste Balancewerte, noch keine durch Langzeit-/Umsatzdaten kalibrierten Release-Werte. [Vollständiger Vertrag](commercialization-v1.md).
+
 # Aktuell: Prestige/Axiome V2 (Save 60)
 
 Die untenstehenden älteren Abschnitte dokumentieren frühere Vertragsstände. Für neue Spiele und migrierte Saves gelten `BALANCE.progression` und der [vollständige V2-Katalog](prestige-axiom-concept-v2.md), einschließlich aller 60 INT- und 24 Axiompreise.

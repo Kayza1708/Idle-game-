@@ -1,3 +1,14 @@
+## 2026-10-16 · Kommerzialisierung V1
+
+- [x] Store-Katalog mit Werbefrei-/Einkommen-Pass, garantierten Starter-Items, Builder-/Laborvorrat und vier Gem-Paketen; echte Store-Preise und Verifikation als anschließbare Schnittstellen.
+- [x] Freiwillige Gem-/Drohnen-/Laborbelohnungen mit Quoten, Cooldown, gespeicherten Einmalbelegen und kantigen Shop-/Laboraktionen; Werbefrei nutzt dieselben Limits.
+- [x] Gem-Laborabschluss, tatsächliche Zeitgutschrift für Forschung/Crafting und korrektes Integrationstraining; Save v61 ergänzt bestehende Kauf-/Fortschrittsdaten ohne erneute V2-Migration.
+- [x] Belegprüfung, idempotente Gutschrift, permanenter Restore/Widerruf und dauerhafter Save vor Store-Abschluss vorbereitet.
+- [x] Typecheck, Produktionsbuild und 1.618 Tests/116 Dateien bestanden; darunter 36 neue Monetarisierungsfälle. Visuelle/native Geräteabnahme bleibt offen.
+- [ ] Native Store-/Ad-SDKs, authentifizierter Verifikations-/Auslieferungsserver und Sandbox-/iPhone-Abnahme vor echten Käufen und Videos erforderlich. Kein Merge oder Release ausgeführt.
+
+[Inhalte, Preise, Funktionsumfang und offene Release-Integration](commercialization-v1.md).
+
 ## 2026-10-16 · Prestige/Axiome V2
 
 - [x] 60 frei nach INT-Preis kaufbare Knoten, 24 Axiom-Upgrades, neuer INT-Anspruch und Credits-/Daten-/Trainingsskalierung integriert.

@@ -417,6 +417,7 @@ export function progressionCreditFactors(
     (hasProgressionNode(s, "I05") ? formula().intCreditNodeExponent : 0) +
     (hasProgressionNode(s, "I10") ? formula().intCreditNodeExponent : 0);
   return {
+    permanentIncome: s.commerce?.owned.includes('ai_singularity.pass.income') ? BALANCE.commerce.incomeMultiplier : 1,
     baseRevenuePerUser: BALANCE.baseRevenuePerUser,
     quality: q ** (hasProgressionNode(s, "T01") ? effects().T01 : 1),
     INT: exactEconomyValue(s, "cycleINTEarned").add(S(1)).pow(a),
@@ -907,7 +908,7 @@ export function progressionTap(s: GameState, now: number) {
       now,
       false,
     ).multiplyNumber(q.seconds),
-    gain = (base.compare(S(1)) < 0 ? S(1) : base).multiplyNumber(crit),
+    gain = (base.compare(S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1)) < 0 ? S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1) : base).multiplyNumber(crit),
     charge = Math.min(formula().overdriveCharge, s.overclock.taps + 1),
     trigger =
       charge >= formula().overdriveCharge && now >= s.overclock.cooldownUntil,
@@ -1006,7 +1007,7 @@ export function nextTapCredit(
       now,
       false,
     ).multiplyNumber(q.seconds);
-  return (base.compare(S(1)) < 0 ? S(1) : base).multiplyNumber(
+  return (base.compare(S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1)) < 0 ? S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1) : base).multiplyNumber(
     seed / 4294967296 < q.chance ? q.crit : 1,
   );
 }
