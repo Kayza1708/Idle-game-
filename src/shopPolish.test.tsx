@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {newGame,addData,grantComponents,componentIds,BALANCE,type GameState} from './economy';
+import {addData,grantComponents,componentIds,BALANCE,type GameState} from './economy';
 import {createItem,forgeItem} from './inventory';
 import {forgeJobQuote,retireFoundryTasks,settleFoundries} from './foundries';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 import {ShopUpgrades} from './ShopUpgrades';
 import {gemBundleCount,GemBundleArt} from './ShopIcon';
 import {MetaMenu} from './MetaMenu';

@@ -1,6 +1,7 @@
+import {newGame} from './legacyContractFixture';
 import {moduleText} from './gameplayI18n';
 import {learnBlueprint} from './blueprints';
-import {describe,expect,it} from 'vitest';import {newGame,registerTap} from './economy';import {addEvent} from './telemetry';import {advanceTutorial,chooseAiName,resumeTutorial,skipTutorial,syncStory} from './story';import {tutorialGuide,tutorialTargetIds} from './tutorialGuide';
+import {describe,expect,it} from 'vitest';import {registerTap} from './economy';import {addEvent} from './telemetry';import {advanceTutorial,chooseAiName,resumeTutorial,skipTutorial,syncStory} from './story';import {tutorialGuide,tutorialTargetIds} from './tutorialGuide';
 const at=(target:any)=>({...chooseAiName(newGame(0),'Nova'),story:{...chooseAiName(newGame(0),'Nova').story,open:null,target}});
 describe('Mira guided campaign',()=>{
  it('maps all nine post-name actions to stable visible targets',()=>{const targets=['tap','hardware','production','credits','training','research','analysis','crafting','prestige'] as const,ids=['tutorial-tap','tutorial-buy-calculator','tutorial-production','tutorial-credits','tutorial-quality-training','tutorial-data-generation','tutorial-hardware-analysis','tutorial-recipe-quantum-chip','tutorial-prestige-action'];targets.forEach((target,index)=>expect(tutorialGuide({...at(target),discovered:target==='analysis'?['sbc']:[]})?.targetId).toBe(ids[index]));expect(tutorialTargetIds).toEqual(ids)});

@@ -4,17 +4,17 @@ const scaled=<T extends string>(source:Partial<Record<T,number>>,quantity:number
 export const validCraftingQuantity=(quantity:unknown):quantity is number=>typeof quantity==='number'&&Number.isSafeInteger(quantity)&&quantity>0;
 export type CraftingRecipe={quantity:number;ingredients:CraftingReservation;durationPerUnit:number;result:CraftingJob['result']};
 /** Full order costs, shared by preview, reservation and save validation. No prices are changed. */
-export function craftingRecipe(kind:CraftingJob['kind'],id:string,quantity=1,legacyFragments=false,masteryLevel=0,legacyTimed=false):CraftingRecipe|null {
+export function craftingRecipe(kind:CraftingJob['kind'],id:string,quantity=1,legacyFragments=false,masteryLevel=0,legacyTimed=false,progression=false):CraftingRecipe|null {
  if(!validCraftingQuantity(quantity)||!Number.isInteger(masteryLevel)||masteryLevel<0||masteryLevel>4||(kind==='module'&&masteryLevel!==0))return null;
  let ingredients:CraftingReservation,durationPerUnit:number,result:CraftingJob['result'];
  if(kind==='module'&&Object.hasOwn(BALANCE.modules,id)){
-  const moduleId=id as keyof typeof BALANCE.modules,recipe=BALANCE.modules[moduleId];
+  const moduleId=id as keyof typeof BALANCE.modules,recipe=progression?{...BALANCE.modules[moduleId],ingredients:BALANCE.progression.formula.moduleIngredients[moduleId==='computeBus'?0:1]}:BALANCE.modules[moduleId];
   ingredients={components:scaled(recipe.ingredients,quantity),modules:{},data:recipe.data*quantity,blueprints:0};
-  durationPerUnit=BALANCE.craftingSeconds.module;result={kind,id:moduleId};
+  durationPerUnit=progression?BALANCE.progression.formula.moduleWork[moduleId==='computeBus'?0:1]:BALANCE.craftingSeconds.module;result={kind,id:moduleId};
  }else if(kind==='item'&&Object.hasOwn(BALANCE.itemRecipes,id)){
-  const itemId=id as keyof typeof BALANCE.itemRecipes,recipe=BALANCE.itemRecipes[itemId];
+  const itemId=id as keyof typeof BALANCE.itemRecipes,starter=(BALANCE.progression.starters as Record<string,{ingredients:Partial<ComponentInventory>;data:number;work:number}>)[id],recipe=progression&&starter?{...BALANCE.itemRecipes[itemId],ingredients:starter.ingredients,data:starter.data,modules:{}}:BALANCE.itemRecipes[itemId];
   ingredients={components:scaled(Object.fromEntries(Object.entries(recipe.ingredients).map(([id,n])=>[id,n>0?Math.max(1,Math.ceil(n*BALANCE.blueprintMasteryFactors[masteryLevel])):0])),quantity),modules:scaled(recipe.modules,quantity),data:recipe.data*quantity,blueprints:legacyFragments?recipe.blueprints*quantity:0};
-  durationPerUnit=legacyTimed?('duration' in recipe?recipe.duration:BALANCE.craftingSeconds[recipe.rarity]):0;result={kind,id:itemId,rarity:legacyTimed?recipe.rarity:'common'};
+  durationPerUnit=progression?(starter?.work??('duration' in recipe?recipe.duration:BALANCE.craftingSeconds[recipe.rarity])):legacyTimed?('duration' in recipe?recipe.duration:BALANCE.craftingSeconds[recipe.rarity]):0;result={kind,id:itemId,rarity:legacyTimed?recipe.rarity:'common'};
  }else return null;
  // Recipe quantities are discrete native integers; reject multiplication overflow rather than clamp.
  if(![...Object.values(ingredients.components),...Object.values(ingredients.modules),ingredients.data,ingredients.blueprints,durationPerUnit*1000*quantity].every(n=>typeof n==='number'&&Number.isSafeInteger(n)&&n>=0))return null;

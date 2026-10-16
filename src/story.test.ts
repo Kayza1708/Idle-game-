@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import {ScientificNumber} from './scientificNumber';
 import { describe, expect, it } from 'vitest';
-import { type GameState, addCredits, newGame, registerTap, usersRate } from './economy';
+import { type GameState, addCredits, registerTap, usersRate } from './economy';
 import { prestige,axiomReset } from './prestige';
 import { chooseAiName,continueDialogue, dialogues, migratedStory, prepareStoryOnLoad, reopenChapter, skipTutorial, syncStory, toggleStory } from './story';
-import { restore, serialize } from './storage';
+import { serialize } from './storage';
 
 const reachTapPrompt=(state=newGame(0))=>{let next=chooseAiName(state,'Nova');for(let i=0;i<4;i++)next=continueDialogue(next);return next;};
 

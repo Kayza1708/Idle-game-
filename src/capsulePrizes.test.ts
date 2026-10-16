@@ -1,4 +1,5 @@
-import {describe,it,expect} from 'vitest';import {newGame,creditRateScientific,dataRateScientific,BALANCE,addCredits,addDataScientific,exactEconomyValue} from './economy';import {drawGemCapsule,capsuleTier} from './capsuleMachine';import {ScientificNumber} from './scientificNumber';import {serialize,restore,SAVE_VERSION} from './storage';
+import {newGame,restore} from './legacyContractFixture';
+import {describe,it,expect} from 'vitest';import {creditRateScientific,dataRateScientific,BALANCE,addCredits,addDataScientific,exactEconomyValue} from './economy';import {drawGemCapsule,capsuleTier} from './capsuleMachine';import {ScientificNumber} from './scientificNumber';import {serialize,SAVE_VERSION} from './storage';
 const ready=()=>({...newGame(0,'prize-tests'),prestigeCount:1,gems:100});const rng=(...values:number[])=>{let i=0;return()=>values[i++]??0};
 describe('capsule prize table and transactions',()=>{
  it('sums to one, keeps the 1% item branch and has a 20x jackpot without positive Gem expectation',()=>{const b=BALANCE.capsuleMachine;expect(b.itemChance+b.componentChance+b.creditChance+b.dataChance+b.gemChance+b.jackpotChance).toBeCloseTo(1,14);expect(b.itemChance).toBe(.01);expect(b.jackpotMultiplier).toBe(20);expect(b.gemChance*(b.gemRange[0]+b.gemRange[1])/2+b.jackpotChance*b.gemCost*b.jackpotMultiplier).toBeCloseTo(.7375);});

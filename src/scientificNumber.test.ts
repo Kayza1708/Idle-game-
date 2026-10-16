@@ -62,10 +62,10 @@ describe('canonical scientific floating point', () => {
     expect(a.toNumber()).toBe(1e300); // Explicit legacy/UI cap, never a purchase comparison.
   });
 
-  it('documents finite mantissa precision instead of promising exact decimals', () => {
+  it('retains sparse transaction residuals while powers remain approximate', () => {
     const huge=ScientificNumber.fromString('1e1000');
-    expect(huge.add(ScientificNumber.from(1))).toBe(huge);
-    expect(huge.subtract(ScientificNumber.from(1))).toBe(huge);
+    expect(huge.add(ScientificNumber.from(1)).subtract(huge).compare(ScientificNumber.from(1))).toBe(0);
+    expect(huge.subtract(ScientificNumber.from(1)).compare(huge)).toBe(-1);expect(ScientificNumber.fromJSON(JSON.parse(JSON.stringify(huge.subtract(ScientificNumber.from(1))))).add(ScientificNumber.from(1)).compare(huge)).toBe(0);
   });
 
   it.each([NaN,Infinity,-Infinity,-1])('rejects invalid/nonpositive-domain native input %s', value => {

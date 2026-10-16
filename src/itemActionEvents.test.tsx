@@ -1,6 +1,7 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {newGame,addData,grantComponents,componentIds,type GameState} from './economy';
+import {addData,grantComponents,componentIds,type GameState} from './economy';
 import {craft,upgrade,fuseItems,equip,unequip,toggleLock,salvage} from './inventory';
 import {queueForge,settleFoundries} from './foundries';
 import {salvageQuote} from './recovery';

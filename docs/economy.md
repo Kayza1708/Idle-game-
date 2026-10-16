@@ -1,3 +1,19 @@
+# Aktuell: Prestige/Axiome V2 (Save 60)
+
+Die untenstehenden älteren Abschnitte dokumentieren frühere Vertragsstände. Für neue Spiele und migrierte Saves gelten `BALANCE.progression` und der [vollständige V2-Katalog](prestige-axiom-concept-v2.md), einschließlich aller 60 INT- und 24 Axiompreise.
+
+- Credits verdienen INT abschnittsweise: E += F × ((R_neu/C0)^p − (R_alt/C0)^p). R bleibt über normale Prestiges erhalten; ein Kauf ändert nur künftige Buchungen. p = 0,50 + 0,04×A01 + 0,02×I10, höchstens 0,72. Auszahlung einmalig als floor(E) abzüglich bereits beanspruchter INT.
+- Credits erhalten den Faktor (1+Zyklus-INT)^(0,10+0,04×I05+0,04×I10). Axiome verstärken Credits mit (1+A)^(2+0,15×min(6,A02)) × 1,25^max(0,A02−6). A02 kostet nach sechs Stufen 1458×3^(L−6) für den nächsten Kauf; kein unbegrenzter INT-Exponent.
+- Erste Axiome ab 30 unterschiedlichen Knoten und 1e6 Zyklus-INT; spätere Schwelle 1e6×(1+A), Auszahlung floor(sqrt(INT/Schwelle)). Normale Prestiges setzen diese Zyklusuhr nicht zurück.
+- Erkenntnis ab Laborzugang: 0,002×sqrt(max(aktueller INT;0,02×historischem Höchstwert)) pro Sekunde, danach I08 und D01. Der Seed von 1.000 wird genau einmal gebucht. Modelle kosten ceil(1000×2,2^Anzahl), Upgrades ceil(40×1,22^Level×0,9^D02).
+- Quality/Efficiency kosten 300×2,4^(Ziel−1) Credits; Integration 500×2,5^(Ziel−1) Credits plus 100×1,5^G Daten. Q/E-Wirkungen flachen nach Level 50 logarithmisch ab. Integration verstärkt numerische Itemwerte um 1,005^G, mit T10 1,007^G.
+- Analysemenge steigt mit Materialforschung; Kosten bezahlter Aufträge bleiben eingefroren. Synthese schafft jede der 20 Komponenten gezielt über Daten und Arbeit. Seltenheitsgarantien und Recycling können keine zusätzlichen gebundenen Materialkosten erfinden.
+- Vor einem Axiom werden ungestartete Reservierungen freigegeben und erst danach Daten/Credits gelöscht. Laufende Forschung/Fertigung/Analysen behalten bezahlte Inputs; dynamische Geschwindigkeit verwendet immer nur die aktuell aktive KI.
+
+Siehe [Implementierung und verbleibende Abnahme](prestige-v2-implementation.md). Frühere Balancing-Simulationen unter V59 sind kein Nachweis für das Tempo der V2-Economy.
+
+---
+
 ## Schmiede ohne Ausbau-Level (v59)
 
 Die separate Stations-Aufbaureihe ist aus dem Spielablauf entfernt. Mit dem bestehenden Zugang (erster Prestige + Fertigung I) startet die erste Item-Veredelung direkt; bezahlt werden ausschließlich die bekannten Itemkosten. `BALANCE.forgeItemLimit = 20` erhält den bisherigen maximalen Item-Forge-Deckel, ohne Stations-Level als Hürde. Bereits bezahlte Stations-Geschwindigkeitsboni und eingefrorene laufende Aufträge bleiben erhalten. Kein Währungs-Refund, keine Gratisbelohnung. Die alten Level-Felder und Migrationsfunktionen bleiben für gespeicherte Aufträge kompatibel; die App bietet keinen Stations-Ausbau mehr an.

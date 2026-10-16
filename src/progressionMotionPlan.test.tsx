@@ -1,10 +1,11 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {newGame,addData,addCredits,grantComponents,componentIds,startResearchProject,type GameState} from './economy';
+import {addData,addCredits,grantComponents,componentIds,startResearchProject,type GameState} from './economy';
 import {createItem,equip,unequip,craftModule} from './inventory';
 import {queueForge,settleFoundries} from './foundries';
 import {advance} from './simulation';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 import {progressionMotionPlan} from './progressionMotionPlan';
 import {ProgressionFeedback} from './ProgressionFeedback';
 const rich=()=>{let s=grantComponents(addData(addCredits(newGame(0,'motion'),1e12),1e9),Object.fromEntries(componentIds.map(id=>[id,10000])));return {...s,prestigeCount:1,unlockedEquipmentSlots:3,completedResearch:['blueprints'],foundries:[0,1,2].map(()=>({level:1,active:null,queue:[]}))} as GameState};

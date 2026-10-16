@@ -1,11 +1,12 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {buyHardwareClass,newGame,researchLabCount,startResearchProject} from './economy';
+import {buyHardwareClass,researchLabCount,startResearchProject} from './economy';
 import {claimAchievement,achievementResearchBonus} from './achievements';
 import {buyGemOffer,nativeGemProducts} from './gemShop';
 import {claimMission,rollPeriods} from './missions';
 import {prestige} from './prestige';
 import {advance} from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 describe('persistent achievements, missions and gem shop',()=>{
  it('counts x10 and max hardware by the actual purchased amount',()=>{let s={...newGame(0),credits:1e9};s=buyHardwareClass(s,'calculator',10);expect(s.lifetime.calculatorsBought).toBe(10);const before=s.hardwareCounts.calculator;s=buyHardwareClass(s,'calculator','max');expect(s.lifetime.calculatorsBought).toBe(s.hardwareCounts.calculator);expect(s.hardwareCounts.calculator).toBeGreaterThan(before)});

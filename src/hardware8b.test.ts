@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,addCreditsScientific,exactEconomyValue,hardwarePurchasePreview,buyHardwareClass,hardwareBulkCostScientific,hardwareIds,creditRateScientific} from './economy';
+import {BALANCE,addCreditsScientific,exactEconomyValue,hardwarePurchasePreview,buyHardwareClass,hardwareBulkCostScientific,hardwareIds,creditRateScientific} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {hardwareSavingsQuote,hardwareSavingsGoals} from './hardwareGoals';
 describe('Server/Farm Credit savings contract',()=>{

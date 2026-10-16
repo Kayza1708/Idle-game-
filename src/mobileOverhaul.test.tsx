@@ -1,8 +1,9 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {Workshop,Research} from './Panels';
-import {newGame,hardwareIds} from './economy';
+import {hardwareIds} from './economy';
 import {readFileSync} from 'node:fs';
 const render=(Component:any,s:any)=>renderToStaticMarkup(createElement(Component,{s,act:()=>{}}));
 describe('compact mobile overview with reachable detail',()=>{

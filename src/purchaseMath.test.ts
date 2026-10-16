@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe, expect, it} from 'vitest';
-import {addCredits, addCreditsScientific, addData, buyClassUpgrade, classUpgradePreview, buyHardwareClass, canAffordResources, canAffordScientificCreditCost, exactEconomyValue, hardwareBulkCostScientific, hardwareCostScientific, hardwareIds, maxAffordable, newGame, spendResources, spendScientificCredits, spendScientificResources, type GameState} from './economy';
+import {addCredits, addCreditsScientific, addData, buyClassUpgrade, classUpgradePreview, buyHardwareClass, canAffordResources, canAffordScientificCreditCost, exactEconomyValue, hardwareBulkCostScientific, hardwareCostScientific, hardwareIds, maxAffordable, spendResources, spendScientificCredits, spendScientificResources, type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
-import {loadGame, persistGame, restore, SAVE_KEY, SAVE_VERSION, serialize, type StorageLike} from './storage';
+import {loadGame, persistGame, SAVE_KEY, SAVE_VERSION, serialize, type StorageLike} from './storage';
 
 const funded=(balance:ScientificNumber,owned=0):GameState=>{
   const fresh=newGame(0),state={...fresh,credits:balance.toNumber(),exactEconomy:{...fresh.exactEconomy,credits:balance.toJSON()}};

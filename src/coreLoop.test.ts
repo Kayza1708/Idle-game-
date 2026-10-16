@@ -1,8 +1,9 @@
+import {importGame} from './legacyContractFixture';
+import {newGame} from './legacyContractFixture';
 import { describe, it, expect } from "vitest";
 import {
   BALANCE,
   equippedBonus,
-  newGame,
   addCredits,
   addData,
   buyHardwareClass,
@@ -31,7 +32,7 @@ import { queueExperiment, analysisAffordability } from "./experiments";
 import { createItem, equip } from "./inventory";
 import { economySnapshot } from "./economySnapshot";
 import { advance } from "./simulation";
-import { serialize, importGame } from "./storage";
+import { serialize} from './storage';
 import { ScientificNumber } from "./scientificNumber";
 import { createBalanceExportFiles } from "./balanceReport";
 import { renderToStaticMarkup } from "react-dom/server";

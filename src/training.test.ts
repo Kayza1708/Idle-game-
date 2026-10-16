@@ -1,8 +1,9 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {type GameState,BALANCE,baseDataRateScientific,creditRate,dataMultiplierScientific,dataRateScientific,efficiency,exactEconomyValue,newGame,productionBreakdown,quality,registerTap,softcap,startTraining,trainingCost,trainingBaseCreditCostScientific,trainingDurationSeconds,trainingWork,usersRateScientific} from './economy';
+import {type GameState,BALANCE,baseDataRateScientific,creditRate,dataMultiplierScientific,dataRateScientific,efficiency,exactEconomyValue,productionBreakdown,quality,registerTap,softcap,startTraining,trainingCost,trainingBaseCreditCostScientific,trainingDurationSeconds,trainingWork,usersRateScientific} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {advance} from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 const withCredits=(amount:ScientificNumber|number)=>{const value=typeof amount==='number'?ScientificNumber.from(amount):amount,base=newGame(0);return{...base,credits:value.toNumber(),data:0,exactEconomy:{...base.exactEconomy,credits:value.toJSON()}}};
 describe('data production',()=>{

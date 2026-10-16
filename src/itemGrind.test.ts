@@ -1,3 +1,4 @@
+import {newGame,restore} from './legacyContractFixture';
 import {craftAffordability as liveCraftAffordability} from './inventory';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft,legacyCraftAffordability as craftAffordability} from './testSupport/legacyPaidCraft';
@@ -8,12 +9,12 @@ import baseline from './testSupport/progressionBaseline.json';
 import {predecessorProjection} from './testSupport/protectedProgression';
 import {upgradeFoundry,settleFoundries} from './foundries';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,addData,addDataScientific,addCredits,addCreditsScientific,grantComponents,spendComponents,exactEconomyValue,itemTypes,itemEffectFor,rareComponentTypesOwned,axiomThresholdScientific,type ItemTypeId,type GameState,type Rarity} from './economy';
+import {BALANCE,addData,addDataScientific,addCredits,addCreditsScientific,grantComponents,spendComponents,exactEconomyValue,itemTypes,itemEffectFor,rareComponentTypesOwned,axiomThresholdScientific,type ItemTypeId,type GameState,type Rarity} from './economy';
 import {cancelCrafting,settleCrafting,createItem,upgrade,itemImprovementPreview,fuseItems,forgeItem} from './inventory';
 import {blueprintMasteryQuote,buyBlueprintMastery,fragmentConversionQuote,convertResearchFragments,componentSourceQuote} from './itemProgress';
 import {learnBlueprint,recipeIds} from './blueprints';
 import {legacyCraftingRecipe as craftingRecipe} from './testSupport/legacyPaidCraft';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 import {prestige,axiomReset,buyBreakthrough} from './prestige';
 import {startRunChallenge,abortRunChallenge} from './retention';

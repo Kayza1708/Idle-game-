@@ -1,12 +1,13 @@
+import {newGame,restore} from './legacyContractFixture';
 import {settleFoundries} from './foundries';
 import {startRunChallenge,abortRunChallenge} from './retention';
 import {describe,it,expect,vi} from 'vitest';
-import {BALANCE,newGame,addCredits,addData,buyHardwareClass,itemEffectFor,specialItemEffectQuote,registerTap,tapCreditsScientific,creditRateScientific,exactEconomyValue,addCreditsScientific,intYieldFactor,axiomThresholdScientific,type GameState,type Item} from './economy';
+import {BALANCE,addCredits,addData,buyHardwareClass,itemEffectFor,specialItemEffectQuote,registerTap,tapCreditsScientific,creditRateScientific,exactEconomyValue,addCreditsScientific,intYieldFactor,axiomThresholdScientific,type GameState,type Item} from './economy';
 import {createItem,equip,unequip,upgrade,forgeItem,itemImprovementPreview,fuseItems} from './inventory';
 import {grantComponents as components} from './economy';
 import {prestige,axiomReset} from './prestige';
 import {advance} from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 import {createBalanceReport} from './balanceReport';
 import {specialItemComparisonText} from './specialItemText';

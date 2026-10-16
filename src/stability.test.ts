@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {buyHardwareClass,newGame,startTraining,trainingRate,trainingWork,type GameState} from './economy';
+import {buyHardwareClass,startTraining,trainingRate,trainingWork,type GameState} from './economy';
 import {advance} from './simulation';
 import {BACKUP_KEY,loadGame,persistGame,SAVE_KEY,type StorageLike} from './storage';
 import {createBalanceExportFiles,createBalanceZip} from './balanceReport';

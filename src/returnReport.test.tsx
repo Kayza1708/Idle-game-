@@ -1,7 +1,8 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect,vi} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {newGame,componentIds} from './economy';
+import {componentIds} from './economy';
 import {emptyReport} from './simulation';
 import {ReturnReport} from './ReturnReport';
 vi.mock('react-dom',()=>({createPortal:(node:unknown)=>node}));

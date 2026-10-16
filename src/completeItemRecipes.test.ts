@@ -1,3 +1,5 @@
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import {craft as instantCraft} from './inventory';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft,legacyCraftAffordability as craftAffordability} from './testSupport/legacyPaidCraft';
@@ -5,11 +7,11 @@ import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,it,expect} from 'vitest';
 import originalRecipes from './testSupport/originalItemRecipes.json';
 import originalEffects from './testSupport/originalItemEffects.json';
-import {BALANCE,newGame,addData,addCredits,spendResources,grantComponents,itemTypes,itemEffectProfile,itemEffectFor,hardwareIds,type Item,type GameState,type ComponentId} from './economy';
+import {BALANCE,addData,addCredits,spendResources,grantComponents,itemTypes,itemEffectProfile,itemEffectFor,hardwareIds,type Item,type GameState,type ComponentId} from './economy';
 import {blueprintQuote,learnBlueprint,recipeIds} from './blueprints';
 import {legacyCraftingRecipe as craftingRecipe} from './testSupport/legacyPaidCraft';
 import {craftModule,createItem,settleCrafting,runCraftingPlanner,} from './inventory';
-import {restore,serialize,importGame} from './storage';
+import {serialize} from './storage';
 import {balanceContexts} from './balanceSnapshot';
 import {createBalanceExportFiles} from './balanceReport';
 import {pinnableGoals,resolvePinnedGoal} from './nextGoal';

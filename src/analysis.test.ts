@@ -1,8 +1,9 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,exactEconomyValue,GameState,newGame,startResearchProject,buyHardwareClass,formatScientific} from './economy';
+import {BALANCE,exactEconomyValue,GameState,startResearchProject,buyHardwareClass,formatScientific} from './economy';
 import {analysisAffordability,analysisBlockReason,cancelExperiment,experimentDuration,experimentSpeed,completeExperiment,queueExperiment} from './experiments';
 import {advance} from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 
 const playable=(now=0):GameState=>({...newGame(now),discovered:['calculator','sbc'],credits:100_000,data:100_000,researchPoints:1_000});

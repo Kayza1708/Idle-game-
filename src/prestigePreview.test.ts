@@ -1,8 +1,9 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {addCredits,buyHardwareClass,computeRate,creditMultiplierFromINT,equipmentSlotCount,hardwareCost,hardwareIds,newGame,type GameState} from './economy';
+import {addCredits,buyHardwareClass,computeRate,creditMultiplierFromINT,equipmentSlotCount,hardwareCost,hardwareIds,type GameState} from './economy';
 import {craft,createItem} from './inventory';
 import {prestige,prestigePreview} from './prestige';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {advance} from './simulation';
 
 const ready=()=>addCredits(newGame(1_000,'prestige-preview'),1e12);

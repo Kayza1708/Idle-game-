@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {newGame} from './economy';
+
 import {claimMissionBonus} from './missions';
 import {runNaturalProfile,summarizeNaturalProfile,profileOnlineAt} from '../scripts/natural-progression-profile';
 const base={play:'continuous',priority:'model-first',seed:1708,seconds:120} as const;

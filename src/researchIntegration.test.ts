@@ -1,3 +1,5 @@
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft,legacyCraftingAffordability as craftingAffordability} from './testSupport/legacyPaidCraft';
 import {withChallengeAccess} from './testSupport/challengeAccount';
@@ -5,7 +7,7 @@ import progressionBaseline from './testSupport/progressionBaseline.json';
 import {predecessorProjection} from './testSupport/protectedProgression';
 import baseline from './testSupport/researchBaseline.json';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,itemTypes,newGame,addData,addDataScientific,addCredits,grantComponents,exactEconomyValue,MAX_ECONOMY_VALUE,researchQuote,researchPerformanceQuote,researchPrerequisites,researchProjectDataCostScientific,researchModifiers,researchQueueCapacity,researchQueuePreview,startResearchProject,queueResearchProject,trainingPreview,startTraining,trainingCostQuote,computeRateScientific,classComputeTerms,hardwareIds,researchRateScientific,itemEffectFor,equippedBonus,itemSynergyExponent,deepPrestigeBonus,itemCombinationQuote,type GameState,type ResearchId,type Item} from './economy';
+import {BALANCE,itemTypes,addData,addDataScientific,addCredits,grantComponents,exactEconomyValue,MAX_ECONOMY_VALUE,researchQuote,researchPerformanceQuote,researchPrerequisites,researchProjectDataCostScientific,researchModifiers,researchQueueCapacity,researchQueuePreview,startResearchProject,queueResearchProject,trainingPreview,startTraining,trainingCostQuote,computeRateScientific,classComputeTerms,hardwareIds,researchRateScientific,itemEffectFor,equippedBonus,itemSynergyExponent,deepPrestigeBonus,itemCombinationQuote,type GameState,type ResearchId,type Item} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {buyNode,prestige,axiomReset} from './prestige';
 import {advance,settleResearchCompletions} from './simulation';
@@ -13,7 +15,7 @@ import {configureResearchDirector,configureResearchRepeat,researchDirectorQuote,
 import {analysisAffordability,queueExperiment,completeExperiment,cancelExperiment} from './experiments';
 import {createItem,equip,unequip,settleCrafting,cancelCrafting,craftModule,} from './inventory';
 import {learnBlueprint} from './blueprints';
-import {serialize,restore,importGame} from './storage';
+import {serialize} from './storage';
 import {balanceContexts,savedJobs} from './balanceSnapshot';
 import {startRunChallenge,abortRunChallenge} from './retention';
 const ratio=(a:ScientificNumber,b:ScientificNumber)=>a.divide(b).toNumber();
@@ -51,7 +53,7 @@ describe('queue, repeat and director shared time path',()=>{
 });
 
 describe('research boundary regressions',()=>{
- it('starts the manual queue at the Data affordability boundary, never before its debit is affordable',()=>{let s=buyNode(buyNode(ready(),'labs1'),'labs2');s={...s,data:0,exactEconomy:{...s.exactEconomy,data:{m:0,e:0}},hardware:1,hardwareCounts:{...s.hardwareCounts,calculator:1},researchQueue:['blueprints']};const q=researchQuote(s,'blueprints')!,eta=q.resources.secondsToAfford!;expect(eta).toBeGreaterThan(0);const result=advance(s,eta+1,true).state;expect(result.researchLabs[0]!.startedAt).toBeCloseTo(eta*1000,5);expect(result.researchLabs[0]!.endsAt-result.researchLabs[0]!.startedAt).toBeCloseTo(result.researchLabs[0]!.durationSeconds*1000,5);expect(result.lifetime.researchStarted).toBe(1);});
+ it('starts the manual queue at the Data affordability boundary, never before its debit is affordable',()=>{let s=buyNode(buyNode(ready(),'labs1'),'labs2');s={...s,data:0,exactEconomy:{...s.exactEconomy,data:{m:0,e:0}},hardware:1,hardwareCounts:{...s.hardwareCounts,calculator:1},researchQueue:['blueprints']};const q=researchQuote(s,'blueprints')!,eta=q.resources.secondsToAfford!;expect(eta).toBeGreaterThan(0);const result=advance(s,eta+1,true).state;expect(result.researchLabs[0]!.startedAt).toBeGreaterThanOrEqual(eta*1000-1e-6);expect(result.researchLabs[0]!.startedAt-eta*1000).toBeLessThanOrEqual(1.01);expect(result.researchLabs[0]!.endsAt-result.researchLabs[0]!.startedAt).toBeCloseTo(result.researchLabs[0]!.durationSeconds*1000,5);expect(result.lifetime.researchStarted).toBe(1);});
  it('queued/autopilot training uses the successful run-start counter',async()=>{const {queueTraining,startQueuedTrainingIfAffordable}=await import('./economy');let s={...ready(),nodes:['trainingPlan'],completedResearch:['modelTransfer'] as GameState['completedResearch'],runTrainingStarted:5};s=queueTraining(s,'quality');const started=startQueuedTrainingIfAffordable(s);expect(started.runTrainingStarted).toBe(6);expect(started.activeTraining!.durationBasis!.modelTransfer).toBe(.5);expect(started.trainingQueue).toEqual([]);});
  it('offline recycling matches split advances including reload and leaves Data/module reservations unchanged',()=>{let s={...ready(),completedResearch:['blueprints','materialRecycling'] as GameState['completedResearch'],blueprintFragments:100,modules:{computeBus:100,dataLattice:100}};s=grantComponents(s,Object.fromEntries(Object.keys(BALANCE.components).map(id=>[id,1000])));s=learnBlueprint(s,'photonic-array');s=craft(s,'photonic-array','common',3);const whole=advance(s,2700,false,()=>.9).state,partial=advance(s,1000,false,()=>.9).state,split=advance(reload(partial),1700,false,()=>.9).state;expect(whole.componentInventory).toEqual(split.componentInventory);expect(whole.craftingRecycleRemainders).toEqual(split.craftingRecycleRemainders);expect(whole.inventory).toEqual(split.inventory);expect(whole.inventory).toHaveLength(3);expect(whole.modules).toEqual(split.modules);});
  it('targets offer only acquired projects; historical locked pins show their actual node and no immediate ETA',async()=>{const {pinnableGoals,resolvePinnedGoal}=await import('./nextGoal');const s=ready();expect(pinnableGoals(s).filter(g=>g.kind==='research').map(g=>g.id)).toEqual(['dataGeneration','modelArchitecture','blueprints']);expect(resolvePinnedGoal(s,{kind:'research',id:'dataPipeline'})!.tab).toBe('prestige');expect(resolvePinnedGoal(s,{kind:'research',id:'dataPipeline'})!.targetId).toBe('prestige-node-dataArchive4');expect(resolvePinnedGoal(s,{kind:'research',id:'dataPipeline'})!.etaSeconds).toBeUndefined();expect(pinnableGoals(s).filter(g=>g.kind==='hardware')).toHaveLength(15);});

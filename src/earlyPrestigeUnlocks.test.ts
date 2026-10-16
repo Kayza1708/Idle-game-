@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {addCredits,addData,BALANCE,componentIds,newGame,passiveComponentWeights,queueTraining,removeQueuedTraining,selectScannerTarget,type GameState} from './economy';
+import {addCredits,addData,BALANCE,componentIds,passiveComponentWeights,queueTraining,removeQueuedTraining,selectScannerTarget,type GameState} from './economy';
 import {buyNode,prestige,prestigePreview} from './prestige';
 import {advance} from './simulation';
 import {ScientificNumber} from './scientificNumber';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 const withINT=(amount=3):GameState=>{const s=newGame(0);return{...s,prestigeCount:1,unspentINT:amount,totalINTEarned:amount,exactEconomy:{...s.exactEconomy,unspentINT:ScientificNumber.from(amount).toJSON(),totalINTEarned:ScientificNumber.from(amount).toJSON()}}};
 

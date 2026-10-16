@@ -1,3 +1,5 @@
+import {choosePhaseModel} from './progression';
+import {newProgression,hasProgressionNode,axiomLevel,modelFactor,itemAmplifier,legacyItemFactor,progressionComputeFactors,progressionUserFactors,progressionCreditFactors,progressionDataRate,progressionTrainingRate,recordINTIncome,progressionINTClaim,progressionINTRate,progressionTap,activeSlotIds,progressionResearchSpeed,tapQuote,nextTapCredit,effectiveQuality,effectiveEfficiency,integrationLevel,integrationLimit,integrationBase} from './progression';
 import {challengeNetworkLinkAllowed,activeChallengeRules,challengeFamilyBonus,addChallengeMetrics} from './challengeStages';
 import {classUpgradePackageQuote,hardwarePurchaseMaterialQuote,hardwareMaterialQuote,grantPaidHardwareMilestone,unlockPaidHardwareMaterials} from './materialEconomy';
 import {deviceBonus} from './deviceEffects';
@@ -617,6 +619,1561 @@ export const extendedItemCatalog = {
   }
 } as const;
 export const BALANCE = {
+ progression:{
+  "formula": {
+    "trainingSoftStart": 50,
+    "trainingSoftScale": 25,
+    "computeLogScale": 0.03,
+    "intBaseExponent": 0.5,
+    "intAxiomExponent": 0.04,
+    "intNodeExponent": 0.02,
+    "intCreditExponent": 0.1,
+    "intCreditNodeExponent": 0.04,
+    "qualityBase": 1.12,
+    "efficiencyBase": 1.1,
+    "axiomCreditExponent": 2,
+    "axiomCreditLevelExponent": 0.15,
+    "axiomCreditBoundedLevels": 6,
+    "axiomCreditTail": 1.25,
+    "axiomTailPrice": 1458,
+    "axiomTailGrowth": 3,
+    "modelLimitStep": 5,
+    "modelSlotsLevel": 15,
+    "modelItemBase": 1.05,
+    "modelItemLevel": 0.002,
+    "modelCouplingCap": 1.5,
+    "modelCouplingScale": 0.2,
+    "modelAxiomCore": 1.08,
+    "modelDevelopmentCore": 1.02,
+    "dataPower": 0.55,
+    "dataScale": 0.1,
+    "knowledgeAxiomPower": 0.15,
+    "fusionWork": 60,
+    "fusionWorkGrowth": 3,
+    "autoAxiomMinSeconds": 300,
+    "comboMax": 50,
+    "overdriveCharge": 100,
+    "overdriveFactor": 3,
+    "critCap": 0.5,
+    "automaticShoppingSeconds": 5,
+    "moduleWork": [
+      60,
+      120
+    ],
+    "moduleIngredients": [
+      {
+        "circuits": 8,
+        "copperCoils": 4
+      },
+      {
+        "circuits": 12,
+        "copperCoils": 6
+      }
+    ],
+    "directorTargets": 3,
+    "directorExpandedTargets": 6
+  },
+  "firstAxiomNodes": 30,
+  "nodes": {
+    "H01": {
+      "name": "Einkaufsagent I",
+      "cost": 1,
+      "depth": 1,
+      "branch": 0,
+      "requires": [],
+      "effect": "Autobuyer für Taschenrechner und Einplatinencomputer."
+    },
+    "H02": {
+      "name": "Einkaufsagent II",
+      "cost": 300,
+      "depth": 2,
+      "branch": 0,
+      "requires": [],
+      "effect": "Autobuyer für Heim-PC, Gaming-GPU und GPU-Rig."
+    },
+    "H03": {
+      "name": "Einkaufsagent III",
+      "cost": 15000,
+      "depth": 3,
+      "branch": 0,
+      "requires": [],
+      "effect": "Autobuyer für Server, Serverfarm und Rechenzentrumscampus."
+    },
+    "H04": {
+      "name": "Einkaufsagent IV",
+      "cost": 150000,
+      "depth": 4,
+      "branch": 0,
+      "requires": [],
+      "effect": "Autobuyer für Hyperscale-Cloud, Flüssigkeitskühlung und Untersee-Rechenzentrum."
+    },
+    "H05": {
+      "name": "Einkaufsagent V",
+      "cost": 3000000,
+      "depth": 5,
+      "branch": 0,
+      "requires": [],
+      "effect": "Autobuyer für Orbitalzentrum, Mondkomplex, Dyson-Schwarm und Matrioshka-Gehirn."
+    },
+    "H06": {
+      "name": "Parallelrechner",
+      "cost": 5000,
+      "depth": 6,
+      "branch": 0,
+      "requires": [],
+      "effect": "Globaler Compute-Faktor ×1,50."
+    },
+    "H07": {
+      "name": "Hardware-Verbund",
+      "cost": 80000,
+      "depth": 7,
+      "branch": 0,
+      "requires": [],
+      "effect": "Compute-Faktor min(2; 1+0,01×Summe(sqrt(Stückzahl je Klasse))). Einmal anwenden."
+    },
+    "H08": {
+      "name": "Klassenvielfalt",
+      "cost": 250000,
+      "depth": 8,
+      "branch": 0,
+      "requires": [],
+      "effect": "Credits-Faktor 1+0,05×K, maximal ×1,75. K = aktuell besessene unterschiedliche Hardwareklassen."
+    },
+    "H09": {
+      "name": "Industrielle KI",
+      "cost": 30000000,
+      "depth": 9,
+      "branch": 0,
+      "requires": [],
+      "effect": "Compute ×3; zusätzlich ×(1+0,02×J), maximal ×1,30. J = aktuell mit mindestens 500 Geräten besetzte Klassen."
+    },
+    "H10": {
+      "name": "Planetare Parallelität",
+      "cost": 200000000000,
+      "depth": 10,
+      "branch": 0,
+      "requires": [],
+      "effect": "Compute zusätzlich ×8. Erhöht Credits über die Nutzerkette, kein zweites direktes Revenue-×8."
+    },
+    "T01": {
+      "name": "Qualitätsarchitektur",
+      "cost": 2,
+      "depth": 1,
+      "branch": 1,
+      "requires": [],
+      "effect": "Nur der Quality-Revenue-Faktor hoch 1,10."
+    },
+    "T02": {
+      "name": "Effizienzarchitektur",
+      "cost": 8,
+      "depth": 2,
+      "branch": 1,
+      "requires": [],
+      "effect": "Nur der Efficiency-Kapazitätsfaktor hoch 1,10."
+    },
+    "T03": {
+      "name": "Trainingsplan",
+      "cost": 40,
+      "depth": 3,
+      "branch": 1,
+      "requires": [],
+      "effect": "Zwei manuell wartende Trainings zusätzlich zum aktiven Auftrag."
+    },
+    "T04": {
+      "name": "Integration",
+      "cost": 250,
+      "depth": 4,
+      "branch": 1,
+      "requires": [],
+      "effect": "Dritte Trainingsrichtung. Numerische Item-Boni werden mit 1,005^Integrationslevel verstärkt; Grundlimit 200."
+    },
+    "T05": {
+      "name": "Trainingsbeschleuniger",
+      "cost": 2000,
+      "depth": 5,
+      "branch": 1,
+      "requires": [],
+      "effect": "Trainingsgeschwindigkeit ×1,50 für alle verfügbaren Richtungen."
+    },
+    "T06": {
+      "name": "Trainingsautopilot",
+      "cost": 12000,
+      "depth": 6,
+      "branch": 1,
+      "requires": [],
+      "effect": "Automatisch nach Zielleveln/Prioritäten trainieren; ein aktiver Auftrag. Gemeinsame Budgets und Resetabsicht respektieren."
+    },
+    "T07": {
+      "name": "Lernkurve",
+      "cost": 100000,
+      "depth": 7,
+      "branch": 1,
+      "requires": [],
+      "effect": "Credits ×(1+0,005×min(100;Q+E+G)). Erhaltene Level zählen für den Faktor, nicht als neue Abschlussereignisse."
+    },
+    "T08": {
+      "name": "Modellarchiv",
+      "cost": 400000,
+      "depth": 8,
+      "branch": 1,
+      "requires": [],
+      "effect": "Bewahrt Q/E/G und bezahltes aktives Training bei normalem Prestige; Axiom setzt Training zurück."
+    },
+    "T09": {
+      "name": "Hochleistungsinferenz",
+      "cost": 35000000,
+      "depth": 9,
+      "branch": 1,
+      "requires": [],
+      "effect": "Revenue ×3; Trainingsgeschwindigkeit zusätzlich ×1,50."
+    },
+    "T10": {
+      "name": "Perfekte Integration",
+      "cost": 160000000000,
+      "depth": 10,
+      "branch": 1,
+      "requires": [],
+      "effect": "Integrationsbasis 1,007 statt 1,005. Schaltet Integration intern frei; T04 ist dann als enthalten markiert und nicht erneut kaufbar."
+    },
+    "F01": {
+      "name": "Parallellabor I",
+      "cost": 3,
+      "depth": 1,
+      "branch": 2,
+      "requires": [],
+      "effect": "Ein zusätzliches reguläres Forschungslabor."
+    },
+    "F02": {
+      "name": "Forschungspuffer",
+      "cost": 100,
+      "depth": 2,
+      "branch": 2,
+      "requires": [],
+      "effect": "Manuelle Forschungswarteschlange von zwei auf sechs Plätze erweitern. Normaler Startbutton reiht bei vollen Laboren ein."
+    },
+    "F03": {
+      "name": "Forschungswiederholung",
+      "cost": 2000,
+      "depth": 3,
+      "branch": 2,
+      "requires": [],
+      "effect": "Ein gewähltes wiederholbares Projekt endlos wiederholen, soweit Budget und Resetregeln es erlauben."
+    },
+    "F04": {
+      "name": "Parallellabor II",
+      "cost": 8000,
+      "depth": 4,
+      "branch": 2,
+      "requires": [],
+      "effect": "Ein weiteres reguläres Forschungslabor, unabhängig von F01."
+    },
+    "F05": {
+      "name": "Forschungsdirektor",
+      "cost": 30000,
+      "depth": 5,
+      "branch": 2,
+      "requires": [],
+      "effect": "Bis zu drei unterschiedliche Forschungsziele mit endlichen Zielleveln/Prioritäten abarbeiten. Keine endlose Wiederholung; dafür F03."
+    },
+    "F06": {
+      "name": "Forschungsbeschleuniger",
+      "cost": 60000,
+      "depth": 6,
+      "branch": 2,
+      "requires": [],
+      "effect": "Forschungsgeschwindigkeit ×2 außerhalb des gedämpften Forschungsbonus-Pools."
+    },
+    "F07": {
+      "name": "Datenkompression",
+      "cost": 180000,
+      "depth": 7,
+      "branch": 2,
+      "requires": [],
+      "effect": "Datenkosten neuer Forschung ×0,85. Keine rückwirkende Erstattung."
+    },
+    "F08": {
+      "name": "Parallellabor III",
+      "cost": 600000,
+      "depth": 8,
+      "branch": 2,
+      "requires": [],
+      "effect": "Ein weiteres reguläres Forschungslabor. Basis 1 plus F01/F04/F08 plus gekaufte Zusatzlabore."
+    },
+    "F09": {
+      "name": "Autonome Wissenschaft",
+      "cost": 35000000,
+      "depth": 9,
+      "branch": 2,
+      "requires": [],
+      "effect": "Forschungsgeschwindigkeit zusätzlich ×3; Datenproduktion ×4."
+    },
+    "F10": {
+      "name": "Wissenschaftliche Singularität",
+      "cost": 80000000000,
+      "depth": 10,
+      "branch": 2,
+      "requires": [],
+      "effect": "Forschungsgeschwindigkeit zusätzlich ×5; Datenproduktion zusätzlich ×8."
+    },
+    "W01": {
+      "name": "Zusatzprozessor",
+      "cost": 1000,
+      "depth": 1,
+      "branch": 3,
+      "requires": [],
+      "effect": "Öffnet ausschließlich processorAux. Dauerhafte Infrastruktur, auch nach Axiom. Basis-Prozessor/Core/Forschung sind bereits frei."
+    },
+    "W02": {
+      "name": "Zusatz-Core",
+      "cost": 10000,
+      "depth": 2,
+      "branch": 3,
+      "requires": [],
+      "effect": "Öffnet ausschließlich coreAux. Kein Vorgänger nötig; dauerhaft über Axiom."
+    },
+    "W03": {
+      "name": "Gezielte Materialanalyse",
+      "cost": 100,
+      "depth": 3,
+      "branch": 3,
+      "requires": [],
+      "effect": "Neue Analysen garantieren mindestens eine seltene Komponente. Fehlt im Ergebnis eine, genau einmal Graphen hinzufügen; auch bei rein häufiger Tabelle gültig."
+    },
+    "W04": {
+      "name": "Präzisionsfertigung",
+      "cost": 500,
+      "depth": 4,
+      "branch": 3,
+      "requires": [],
+      "effect": "Material- und Datenkosten neuer Item-Level-Upgrades ×0,85, je Input aufrunden. Kein Rabatt auf Fusion oder Rezepterwerb."
+    },
+    "W05": {
+      "name": "Item-Verstärker",
+      "cost": 3000,
+      "depth": 5,
+      "branch": 3,
+      "requires": [],
+      "effect": "Numerische Boni ausgerüsteter Items ×1,10 auf den Bonusanteil."
+    },
+    "W06": {
+      "name": "Zusatz-Forschungssockel",
+      "cost": 100000,
+      "depth": 6,
+      "branch": 3,
+      "requires": [],
+      "effect": "Öffnet ausschließlich researchAux. Kein Vorgänger nötig; dauerhaft über Axiom."
+    },
+    "W07": {
+      "name": "Serienfertigung",
+      "cost": 180000,
+      "depth": 7,
+      "branch": 3,
+      "requires": [],
+      "effect": "Items/Module seriell ×3/×10/×100 planen; jede Einheit besitzt eigenen bezahlten Vertrag. Eine Fertigung, keine zusätzliche Schmiede."
+    },
+    "W08": {
+      "name": "Fertigungstakt",
+      "cost": 500000,
+      "depth": 8,
+      "branch": 3,
+      "requires": [],
+      "effect": "Arbeitsgeschwindigkeit von Crafting und Item-Schmiede ×2. Laufende Restarbeit profitiert, Kosten/Grundarbeit bleiben erhalten."
+    },
+    "W09": {
+      "name": "Resonante Ausrüstung",
+      "cost": 20000000,
+      "depth": 9,
+      "branch": 3,
+      "requires": [],
+      "effect": "Numerische ausgerüstete Item-Boni zusätzlich ×2; keine Extra-Slots oder Triggerwürfe."
+    },
+    "W10": {
+      "name": "Perfekte Ausrüstung",
+      "cost": 100000000000,
+      "depth": 10,
+      "branch": 3,
+      "requires": [],
+      "effect": "Numerische ausgerüstete Item-Boni zusätzlich ×3; mit W05/W09 insgesamt ×6,60 vor Integration/KI."
+    },
+    "S01": {
+      "name": "Impulsverstärker",
+      "cost": 3,
+      "depth": 1,
+      "branch": 4,
+      "requires": [],
+      "effect": "Roher allgemeiner Tapfaktor X ×1,50 vor 1+ln(X)."
+    },
+    "S02": {
+      "name": "Kritische Impulse I",
+      "cost": 30,
+      "depth": 2,
+      "branch": 4,
+      "requires": [],
+      "effect": "Crit-Chance +5 Prozentpunkte, Basis 5 % → 10 %."
+    },
+    "S03": {
+      "name": "Kritische Leistung I",
+      "cost": 100,
+      "depth": 3,
+      "branch": 4,
+      "requires": [],
+      "effect": "Crit-Multiplikator +0,50, Basis ×2 → ×2,50."
+    },
+    "S04": {
+      "name": "Overdrive-Verstärker I",
+      "cost": 2000,
+      "depth": 4,
+      "branch": 4,
+      "requires": [],
+      "effect": "Overdrive-Faktor ×2: Basis ×3 → ×6."
+    },
+    "S05": {
+      "name": "Kritische Impulse II",
+      "cost": 6000,
+      "depth": 5,
+      "branch": 4,
+      "requires": [],
+      "effect": "Weitere +5 Prozentpunkte Crit-Chance. Mit S02 15 % vor KI-Sekundärfähigkeit."
+    },
+    "S06": {
+      "name": "Kritische Leistung II",
+      "cost": 20000,
+      "depth": 6,
+      "branch": 4,
+      "requires": [],
+      "effect": "Crit-Multiplikator zusätzlich +1. Mit S03 Basis ×2 → ×3,50."
+    },
+    "S07": {
+      "name": "Overdrive-Speicher",
+      "cost": 100000,
+      "depth": 7,
+      "branch": 4,
+      "requires": [],
+      "effect": "Overdrive-Dauer ×1,50: 15 → 22,5 Sekunden. Fester Mindestabstand zwischen Auslösungen bleibt 60 Sekunden."
+    },
+    "S08": {
+      "name": "Impulsnetz",
+      "cost": 400000,
+      "depth": 8,
+      "branch": 4,
+      "requires": [],
+      "effect": "Roher allgemeiner Tapfaktor X zusätzlich ×2; mit S01 ×3."
+    },
+    "S09": {
+      "name": "Overdrive-Verstärker II",
+      "cost": 25000000,
+      "depth": 9,
+      "branch": 4,
+      "requires": [],
+      "effect": "Overdrive-Faktor zusätzlich ×1,50. Mit S04 ×9; ohne S04 ×4,50."
+    },
+    "S10": {
+      "name": "Singularitätsimpuls",
+      "cost": 80000000000,
+      "depth": 10,
+      "branch": 4,
+      "requires": [],
+      "effect": "Rohe Impulsenergie zusätzlich ×8 NACH 1+ln(X), vor gemeinsamer weicher Tapbegrenzung. Vorschau zeigt effektiven statt versprochenem pauschalem ×8-Ertrag."
+    },
+    "I01": {
+      "name": "Kommerzialisierung",
+      "cost": 4,
+      "depth": 1,
+      "branch": 5,
+      "requires": [],
+      "effect": "Eigener Revenue-Faktor ×1,25."
+    },
+    "I02": {
+      "name": "Meilenstein-Erkenntnis",
+      "cost": 40,
+      "depth": 2,
+      "branch": 5,
+      "requires": [],
+      "effect": "INT-Ertragsgewicht +0,02 je erstmals in diesem Run bezahlter Hardware-Meilensteinkante; Beitrag maximal +1."
+    },
+    "I03": {
+      "name": "Modell-Erkenntnis",
+      "cost": 200,
+      "depth": 3,
+      "branch": 5,
+      "requires": [],
+      "effect": "INT-Ertragsgewicht +0,01×min(150;Q+E+G). Erhaltene Level wirken weiter; keine neue Auszahlung durch Restore."
+    },
+    "I04": {
+      "name": "Forschungs-Erkenntnis",
+      "cost": 1500,
+      "depth": 4,
+      "branch": 5,
+      "requires": [],
+      "effect": "INT-Ertragsgewicht +0,02×min(100;summe Forschungslevel+erledigte Einzelprojekte). Dauerhafte Forschung bleibt im Faktor erhalten."
+    },
+    "I05": {
+      "name": "INT-Rückkopplung",
+      "cost": 5000,
+      "depth": 5,
+      "branch": 5,
+      "requires": [],
+      "effect": "Exponent a des INT-Creditsfaktors von 0,10 um +0,04 erhöhen."
+    },
+    "I06": {
+      "name": "Prestige-Agent",
+      "cost": 25000,
+      "depth": 6,
+      "branch": 5,
+      "requires": [],
+      "effect": "Auto-Prestige nach Mindest-INT, Mindestlaufzeit und Warten nur auf bereits laufende ausgewählte Jobs. Minimaler bezahlter Taschenrechner-Wiederanlauf enthalten."
+    },
+    "I07": {
+      "name": "Relatives Prestige-Ziel",
+      "cost": 180000,
+      "depth": 7,
+      "branch": 5,
+      "requires": [],
+      "effect": "Zusätzlich Ziel ×2/×5/×10 gegenüber letztem positivem Prestigegewinn; optionale feste Zeitobergrenze. Grundagent enthalten; I06 dann nicht erneut kaufbar."
+    },
+    "I08": {
+      "name": "Erkenntnisverdichter",
+      "cost": 800000,
+      "depth": 8,
+      "branch": 5,
+      "requires": [],
+      "effect": "Erkenntnisproduktion ×2. Vor Labor kaufbar, dort als spätere Wirkung angezeigt."
+    },
+    "I09": {
+      "name": "Tiefe Erkenntnis",
+      "cost": 60000000,
+      "depth": 9,
+      "branch": 5,
+      "requires": [],
+      "effect": "INT-Ertragsgewicht zusätzlich ×3 ausschließlich für künftige qualifizierte Credits."
+    },
+    "I10": {
+      "name": "Rekursive Erkenntnis",
+      "cost": 300000000000,
+      "depth": 10,
+      "branch": 5,
+      "requires": [],
+      "effect": "INT-Exponent p +0,02; INT-Credits-Exponent a zusätzlich +0,04. Gesamtgrenzen p=0,72 und a=0,18."
+    }
+  },
+  "axioms": {
+    "A01": {
+      "id": "A01",
+      "name": "Axiom-Resonanz",
+      "costs": [
+        1,
+        3,
+        9,
+        27,
+        81
+      ],
+      "effect": "p je Stufe +0,04: 0,50 bis 0,70; mit I10 höchstens 0,72.",
+      "tail": null
+    },
+    "A02": {
+      "id": "A02",
+      "name": "Ökonomisches Fundament",
+      "costs": [
+        2,
+        6,
+        18,
+        54,
+        162,
+        486
+      ],
+      "effect": "Stufen 1–6 erhöhen Exponent von (1+A) je um 0,15: 2 bis 2,90. Ab Stufe 7 zusätzliche Multiplikatoren ×1,25 je Stufe, keine weitere Exponentenerhöhung.",
+      "tail": {
+        "first_level": 7,
+        "first_cost": 1458,
+        "cost_growth": 3,
+        "factor": 1.25
+      }
+    },
+    "A03": {
+      "id": "A03",
+      "name": "Permanente Parallelität",
+      "costs": [
+        4,
+        12,
+        36,
+        108,
+        324
+      ],
+      "effect": "Compute ×(1+A)^(0,05×L), maximal L=5.",
+      "tail": null
+    },
+    "A04": {
+      "id": "A04",
+      "name": "Kritische Resonanz",
+      "costs": [
+        3,
+        9,
+        27,
+        81
+      ],
+      "effect": "Crit-Multiplikator ×1,15 je Stufe, maximal vier Stufen. Gemeinsame weiche Tapbegrenzung bleibt wirksam.",
+      "tail": null
+    },
+    "A05": {
+      "id": "A05",
+      "name": "Integrationskapazität",
+      "costs": [
+        5,
+        15,
+        45,
+        135
+      ],
+      "effect": "Integrationslimit +25 je Stufe bis 300; zusätzlicher numerischer Itemfaktor ×1,02 je Stufe auch unterhalb des Limits.",
+      "tail": null
+    },
+    "A06": {
+      "id": "A06",
+      "name": "KI-Kernverstärkung",
+      "costs": [
+        8,
+        24,
+        72,
+        216,
+        648
+      ],
+      "effect": "Gemeinsamen Revenue-Bonusanteil der aktiven entwickelten KI ×1,08 je Stufe. Wirkt bei allen zehn Modellen einschließlich K10, niemals auf Slots.",
+      "tail": null
+    },
+    "B01": {
+      "id": "B01",
+      "name": "Verankerte Einkaufsagenten",
+      "costs": [
+        1
+      ],
+      "effect": "Bereits erworbene H01–H05 bleiben über Axiom aktiv und gekauft. Keine neue Gruppe wird kostenlos entdeckt.",
+      "tail": null
+    },
+    "B02": {
+      "id": "B02",
+      "name": "Verankerte Steuerung",
+      "costs": [
+        2
+      ],
+      "effect": "Bereits erworbene T03/T06/F02/F03/F05/I06/I07 inklusive Minimalstarter bleiben über Axiom erhalten.",
+      "tail": null
+    },
+    "B03": {
+      "id": "B03",
+      "name": "Ausrüstungsresonanz",
+      "costs": [
+        3,
+        9,
+        27
+      ],
+      "effect": "Numerische ausgerüstete Item-Boni zusätzlich ×1,10 je Stufe. Slotgedächtnis entfällt, weil reguläre Slotkapazität immer dauerhaft ist.",
+      "tail": null
+    },
+    "B04": {
+      "id": "B04",
+      "name": "Wiederaufbauplan",
+      "costs": [
+        5
+      ],
+      "effect": "Bereits bekannte INT-Knoten nach gespeicherter Reihenfolge oder günstigstem Preis wieder kaufen; Budget/INT-Sparziel beachten. Grundagent und bezahlter Minimalstarter enthalten.",
+      "tail": null
+    },
+    "B05": {
+      "id": "B05",
+      "name": "Beschleunigter Wiederaufbau",
+      "costs": [
+        4,
+        12,
+        36
+      ],
+      "effect": "Trainingsgeschwindigkeit unterhalb des beim letzten Axiom gespeicherten Rekords ×2/×4/×8. Keine kostenlosen Level oder neuen Abschlussereignisse.",
+      "tail": null
+    },
+    "B06": {
+      "id": "B06",
+      "name": "Axiom-Agent",
+      "costs": [
+        25
+      ],
+      "effect": "Auto-Axiom nach Mindestgewinn, mindestens fünf Minuten Axiom-Zyklusdauer und ausgewählten Job-/Laborregeln. Erstes Axiom manuell; Starter und grundlegende Abholung enthalten. Technische Portionsgrenze ist niemals eine Ertragsgrenze.",
+      "tail": null
+    },
+    "C01": {
+      "id": "C01",
+      "name": "Komponentenarchiv",
+      "costs": [
+        2,
+        6,
+        18
+      ],
+      "effect": "Passive Komponentenmenge +25 % je Stufe bis +75 %. Restmengen speichern, keine zusätzlichen Zufallswürfe.",
+      "tail": null
+    },
+    "C02": {
+      "id": "C02",
+      "name": "Analyseplaner",
+      "costs": [
+        3
+      ],
+      "effect": "Gewählte Analyse automatisch wiederholen. Absolutes Datensparziel und vorgemerkten Reset respektieren.",
+      "tail": null
+    },
+    "C03": {
+      "id": "C03",
+      "name": "Fertigungsplaner",
+      "costs": [
+        5
+      ],
+      "effect": "Gewähltes Rezept bis Zielbestand 1/5/10 herstellen. Aktive und reservierte Outputs mitzählen; jede Einheit genau einmal bezahlen.",
+      "tail": null
+    },
+    "C04": {
+      "id": "C04",
+      "name": "Fusionsplaner",
+      "costs": [
+        12
+      ],
+      "effect": "Explizit erlaubte Duplikate bis Zielseltenheit fusionieren. Nie gesperrte/ausgerüstete Items verwenden; kein automatisches Zerlegen.",
+      "tail": null
+    },
+    "C05": {
+      "id": "C05",
+      "name": "Materialkreislauf",
+      "costs": [
+        8,
+        24,
+        72
+      ],
+      "effect": "Rückgewinnung tatsächlich gebundener Inputs +5 Prozentpunkte je Stufe, von 60 % auf maximal 75 %. Keine Modell-Salvage-Wechselboni.",
+      "tail": null
+    },
+    "C06": {
+      "id": "C06",
+      "name": "Hochleistungsfertigung",
+      "costs": [
+        10,
+        30,
+        90
+      ],
+      "effect": "Crafting-/Schmiedegeschwindigkeit ×(1/0,85)^L, maximal drei Stufen. Dynamische Restarbeit, keine Änderung bezahlter Inputs.",
+      "tail": null
+    },
+    "D01": {
+      "id": "D01",
+      "name": "Erkenntnisresonanz",
+      "costs": [
+        2,
+        6,
+        18,
+        54,
+        162
+      ],
+      "effect": "Erkenntnisproduktion zusätzlich ×(1+A)^(0,15×L), maximal fünf Stufen.",
+      "tail": null
+    },
+    "D02": {
+      "id": "D02",
+      "name": "Effiziente KI-Entwicklung",
+      "costs": [
+        3,
+        9,
+        27,
+        81
+      ],
+      "effect": "Kosten eines KI-Level-Upgrades ×0,90 je Stufe. Keine Freischaltpreisrabatte und keine rückwirkenden Refunds.",
+      "tail": null
+    },
+    "D03": {
+      "id": "D03",
+      "name": "Erweiterte KI-Entwicklung",
+      "costs": [
+        5,
+        15,
+        45,
+        135
+      ],
+      "effect": "Modell-Maximallevel +5 je Stufe von 30 bis 50. Zusätzlich gemeinsamer aktiver KI-Revenue-Bonusanteil ×1,02 je Stufe; dadurch nicht nur ein ferner Grenzkauf.",
+      "tail": null
+    },
+    "D04": {
+      "id": "D04",
+      "name": "KI-Einsatzplan",
+      "costs": [
+        10
+      ],
+      "effect": "Ein aktives Modell nach Ereignissen automatisch wählen: normaler Neustart, Beginn geplanter Forschungs-/Materialphase. Nie zwei Modelle aktiv. Freie manuelle Auswahl und Loadouts sind Basisbedienung.",
+      "tail": null
+    },
+    "D05": {
+      "id": "D05",
+      "name": "Modell-Item-Kopplung",
+      "costs": [
+        25
+      ],
+      "effect": "Gemeinsamen KI-Revenue-Bonusanteil mit min(1,50;1+0,20×(b^G−1)) verstärken. Ausschließlich Integrationslevel verwenden; keine rekursive Abhängigkeit vom KI-Itembonus.",
+      "tail": null
+    },
+    "D06": {
+      "id": "D06",
+      "name": "Vertiefte KI-Fähigkeiten",
+      "costs": [
+        30
+      ],
+      "effect": "Feste zweite laufende Fähigkeit des einen aktiven Modells freischalten. Keine Startkosten-/Grundarbeitsrabatte und keine zweite aktive KI.",
+      "tail": null
+    }
+  },
+  "models": {
+    "K01": {
+      "id": "K01",
+      "name": "Kommerzmodell",
+      "kind": "revenue",
+      "base": 3,
+      "secondary": "Overdrive-Faktor ×1,10 während dieses Modell aktiv ist."
+    },
+    "K02": {
+      "id": "K02",
+      "name": "Inferenzmodell",
+      "kind": "users",
+      "base": 2,
+      "secondary": "Datenproduktion ×1,25."
+    },
+    "K03": {
+      "id": "K03",
+      "name": "Datenmodell",
+      "kind": "data",
+      "base": 4,
+      "secondary": "Forschungsgeschwindigkeit ×1,15."
+    },
+    "K04": {
+      "id": "K04",
+      "name": "Interaktionsmodell",
+      "kind": "tap",
+      "base": 3,
+      "secondary": "Crit-Chance +3 Prozentpunkte, Grenze 50 %."
+    },
+    "K05": {
+      "id": "K05",
+      "name": "Integrationsmodell",
+      "kind": "items",
+      "base": 1.2,
+      "secondary": "Analysegeschwindigkeit ×1,15."
+    },
+    "K06": {
+      "id": "K06",
+      "name": "Parallelmodell",
+      "kind": "compute",
+      "base": 1.6,
+      "secondary": "Forschungsgeschwindigkeit zusätzlich ×1,15."
+    },
+    "K07": {
+      "id": "K07",
+      "name": "Wissenschaftsmodell",
+      "kind": "research",
+      "base": 2.5,
+      "secondary": "Datenproduktion ×1,25."
+    },
+    "K08": {
+      "id": "K08",
+      "name": "Lernmodell",
+      "kind": "training",
+      "base": 2.5,
+      "secondary": "Integrationstraining zusätzlich ×1,25."
+    },
+    "K09": {
+      "id": "K09",
+      "name": "Materialmodell",
+      "kind": "analysis",
+      "base": 2,
+      "secondary": "Passive Komponentenmenge ×1,20."
+    },
+    "K10": {
+      "id": "K10",
+      "name": "Modulares Modell",
+      "kind": "slots",
+      "base": 1,
+      "secondary": "Analysemengen ×1,15."
+    }
+  },
+  "research": {
+    "dataGeneration": {
+      "id": "dataGeneration",
+      "name": "Datenerzeugung",
+      "base": 363,
+      "seconds": 180,
+      "requires": [],
+      "effect": "Daten ×1,12^L."
+    },
+    "materialAnalysis": {
+      "id": "materialAnalysis",
+      "name": "Materialanalyse",
+      "base": 100,
+      "seconds": 300,
+      "requires": [
+        [
+          "dataGeneration",
+          1
+        ]
+      ],
+      "effect": "Analysemengen ×(1+0,08L). Bestehende Auftragskosten bleiben unverändert."
+    },
+    "blueprintAnalysis": {
+      "id": "blueprintAnalysis",
+      "name": "Bauplananalyse",
+      "base": 180,
+      "seconds": 600,
+      "requires": [
+        [
+          "materialAnalysis",
+          1
+        ]
+      ],
+      "effect": "Bauplanfragmente aus Analysen ×(1+0,10L), mit Restmengenbuchung."
+    },
+    "modelArchitecture": {
+      "id": "modelArchitecture",
+      "name": "Modellarchitektur",
+      "base": 250,
+      "seconds": 900,
+      "requires": [
+        [
+          "dataGeneration",
+          1
+        ]
+      ],
+      "effect": "Revenue ×1,10^L."
+    },
+    "computeOptimization": {
+      "id": "computeOptimization",
+      "name": "Compute-Optimierung",
+      "base": 300,
+      "seconds": 900,
+      "requires": [
+        [
+          "modelArchitecture",
+          1
+        ]
+      ],
+      "effect": "Compute ×1,10^L."
+    },
+    "userScaling": {
+      "id": "userScaling",
+      "name": "Nutzer-Skalierung",
+      "base": 350,
+      "seconds": 1200,
+      "requires": [
+        [
+          "computeOptimization",
+          1
+        ]
+      ],
+      "effect": "Nutzerkapazität ×1,08^L."
+    },
+    "hardwareIntegration": {
+      "id": "hardwareIntegration",
+      "name": "Hardware-Integration",
+      "base": 450,
+      "seconds": 1500,
+      "requires": [
+        [
+          "userScaling",
+          3
+        ]
+      ],
+      "effect": "Compute ×(1+0,01K)^L, K aktuell besessene Klassen bis 15."
+    },
+    "labAutomation": {
+      "id": "labAutomation",
+      "name": "Laborautomation",
+      "base": 600,
+      "seconds": 1800,
+      "requires": [
+        [
+          "blueprintAnalysis",
+          1
+        ]
+      ],
+      "effect": "Analysegeschwindigkeit ×(1+0,05L)."
+    },
+    "commercialization": {
+      "id": "commercialization",
+      "name": "Kommerzialisierung",
+      "base": 400,
+      "seconds": 1200,
+      "requires": [
+        [
+          "modelArchitecture",
+          1
+        ]
+      ],
+      "effect": "Revenue ×1,10^L."
+    },
+    "networkEffects": {
+      "id": "networkEffects",
+      "name": "Netzwerkeffekte",
+      "base": 500,
+      "seconds": 1500,
+      "requires": [
+        [
+          "commercialization",
+          3
+        ]
+      ],
+      "effect": "Revenue ×(1+0,01L×log10(1+Nutzer)). Kein zusätzlicher Nutzerfaktor."
+    },
+    "parallelArchitecture": {
+      "id": "parallelArchitecture",
+      "name": "Parallele Architektur",
+      "base": 550,
+      "seconds": 1800,
+      "requires": [
+        [
+          "computeOptimization",
+          3
+        ]
+      ],
+      "effect": "Compute ×(1+0,015K)^L, K aktuelle Klassen bis 15."
+    },
+    "hardwareCoDesign": {
+      "id": "hardwareCoDesign",
+      "name": "Hardware-Co-Design",
+      "base": 650,
+      "seconds": 2400,
+      "requires": [
+        [
+          "parallelArchitecture",
+          3
+        ]
+      ],
+      "effect": "Compute ×(1+0,002×min(100;Q+E))^L."
+    },
+    "syntheticData": {
+      "id": "syntheticData",
+      "name": "Synthetische Daten",
+      "base": 500,
+      "seconds": 600,
+      "requires": [
+        [
+          "dataGeneration",
+          3
+        ]
+      ],
+      "effect": "Daten ×(1+0,002×min(100;Q+E))^L."
+    },
+    "dataFlywheel": {
+      "id": "dataFlywheel",
+      "name": "Datenkreislauf",
+      "base": 800,
+      "seconds": 900,
+      "requires": [
+        [
+          "syntheticData",
+          3
+        ]
+      ],
+      "effect": "Daten ×1,08^L statt unbegrenzter allgemeiner Synergie-Exponent."
+    },
+    "recursiveLearning": {
+      "id": "recursiveLearning",
+      "name": "Rekursives Lernen",
+      "base": 1000,
+      "seconds": 2400,
+      "requires": [
+        [
+          "modelArchitecture",
+          5
+        ]
+      ],
+      "effect": "Trainingsgeschwindigkeit ×(1+0,03L)."
+    },
+    "autonomousScience": {
+      "id": "autonomousScience",
+      "name": "Autonome Wissenschaft",
+      "base": 1200,
+      "seconds": 3600,
+      "requires": [
+        [
+          "labAutomation",
+          3
+        ]
+      ],
+      "effect": "Forschungsgeschwindigkeit ×(1+0,03L)."
+    },
+    "tapAmplification": {
+      "id": "tapAmplification",
+      "name": "Impulsverstärkung",
+      "base": 600,
+      "seconds": 1200,
+      "requires": [
+        [
+          "computeOptimization",
+          3
+        ]
+      ],
+      "effect": "Roher Tapfaktor X ×1,08^L, vor logarithmischer Abflachung."
+    },
+    "dropProtocols": {
+      "id": "dropProtocols",
+      "name": "Signalprotokolle",
+      "base": 250,
+      "seconds": 600,
+      "requires": [
+        [
+          "materialAnalysis",
+          3
+        ]
+      ],
+      "effect": "Aktives Dropintervall = max(30;90/(1+0,05L)) Sekunden. Keine kostenlosen Taps offline."
+    }
+  },
+  "projects": {
+    "operations": {
+      "id": "operations",
+      "name": "Labororganisation",
+      "cost": 500,
+      "seconds": 300,
+      "requires": [
+        [
+          "dataGeneration",
+          1
+        ]
+      ],
+      "effect": "Manuelle Forschungsqueue +2. Basis 2, mit F02 6, mit Projekt bis 8."
+    },
+    "blueprints": {
+      "id": "blueprints",
+      "name": "Offene Baupläne",
+      "cost": 300,
+      "seconds": 300,
+      "requires": [
+        [
+          "dataGeneration",
+          1
+        ]
+      ],
+      "effect": "Fortgeschrittene Rezepte und Grundmodule lernen; sechs Starterrezepte benötigen dieses Projekt nicht."
+    },
+    "alignment": {
+      "id": "alignment",
+      "name": "Reproduzierbare Modelle",
+      "cost": 1000,
+      "seconds": 900,
+      "requires": [
+        [
+          "modelArchitecture",
+          1
+        ]
+      ],
+      "effect": "Trainingsgeschwindigkeit ×(1/0,90). Kein neuer KI-Snapshot."
+    },
+    "dataPipeline": {
+      "id": "dataPipeline",
+      "name": "Datenpipeline",
+      "cost": 100000,
+      "seconds": 3600,
+      "requires": [
+        [
+          "dataFlywheel",
+          3
+        ]
+      ],
+      "effect": "Datenkosten neuer Analysen und gezielter Synthesen ×0,80."
+    },
+    "distributedInference": {
+      "id": "distributedInference",
+      "name": "Verteilte Inferenz",
+      "cost": 250000,
+      "seconds": 7200,
+      "requires": [
+        [
+          "parallelArchitecture",
+          3
+        ]
+      ],
+      "effect": "Ab 25 Geräten im Vorgänger werden bis zu zehn Nachfolger je Klasse mit 10 % zusätzlicher Rohleistung pro Gerät verbunden. Link nur einmal in Hardware-Rohcompute."
+    },
+    "modelTransfer": {
+      "id": "modelTransfer",
+      "name": "Modelltransfer",
+      "cost": 150000,
+      "seconds": 3600,
+      "requires": [
+        [
+          "recursiveLearning",
+          3
+        ]
+      ],
+      "effect": "Erste sechs tatsächlich begonnenen Trainings je normalem Run: Geschwindigkeit ×2. Startzähler wird gespeichert; Restore zählt nicht neu."
+    },
+    "materialRecycling": {
+      "id": "materialRecycling",
+      "name": "Materialrecycling",
+      "cost": 50000,
+      "seconds": 1800,
+      "requires": [
+        [
+          "materialAnalysis",
+          3
+        ],
+        [
+          "blueprintAnalysis",
+          3
+        ]
+      ],
+      "effect": "5 % der effektiv gezahlten Materialinputs bei Craftabschluss zurück; Rückgabe von gebundenem Salvage-Buch abziehen."
+    },
+    "researchScheduling": {
+      "id": "researchScheduling",
+      "name": "Forschungsplanung",
+      "cost": 75000,
+      "seconds": 3600,
+      "requires": [
+        [
+          "labAutomation",
+          3
+        ],
+        [
+          "autonomousScience",
+          3
+        ]
+      ],
+      "effect": "Forschungsgeschwindigkeit ×1,10; vorhandener F05-Direktor kann sechs statt drei Ziele verwalten."
+    }
+  },
+  "starters": {
+    "impulse-relay": {
+      "id": "impulse-relay",
+      "family": "processor",
+      "ingredients": {
+        "circuits": 12,
+        "copperCoils": 2
+      },
+      "data": 0,
+      "work": 120,
+      "effect": "Bestehender Impulsrelais-Proc; Zusatzenergie läuft innerhalb derselben weichen Tapbegrenzung, nicht als unbeschränkte zweite Auszahlung."
+    },
+    "memory-crystal": {
+      "id": "memory-crystal",
+      "family": "core",
+      "ingredients": {
+        "circuits": 10,
+        "copperCoils": 4
+      },
+      "data": 50,
+      "work": 180,
+      "effect": "Bestehendes Credits-Itemprofil, nicht zu Daten umbenennen."
+    },
+    "lab-drone": {
+      "id": "lab-drone",
+      "family": "research",
+      "ingredients": {
+        "circuits": 10,
+        "copperCoils": 6
+      },
+      "data": 80,
+      "work": 180,
+      "effect": "Bestehendes Forschungs-Itemprofil."
+    },
+    "quantum-chip": {
+      "id": "quantum-chip",
+      "family": "processor",
+      "ingredients": {
+        "circuits": 20,
+        "copperCoils": 8
+      },
+      "data": 150,
+      "work": 300,
+      "effect": "Bestehendes Compute-Itemprofil."
+    },
+    "tensor-core": {
+      "id": "tensor-core",
+      "family": "core",
+      "ingredients": {
+        "circuits": 24,
+        "copperCoils": 10
+      },
+      "data": 200,
+      "work": 300,
+      "effect": "Bestehendes Compute-Itemprofil."
+    },
+    "field-scanner": {
+      "id": "field-scanner",
+      "family": "research",
+      "ingredients": {
+        "circuits": 18,
+        "copperCoils": 10
+      },
+      "data": 180,
+      "work": 300,
+      "effect": "Bestehendes Analysegeschwindigkeits-Itemprofil."
+    }
+  },
+  "materials": {
+    "base": [
+      "circuits",
+      "copperCoils",
+      "ceramicCapacitors",
+      "ferriteCores"
+    ],
+    "semiconductor": [
+      "siliconWafers",
+      "titaniumBolts",
+      "goldContacts",
+      "ceramicSubstrates",
+      "thermalInterface"
+    ],
+    "photonic": [
+      "photonicLenses",
+      "graphene",
+      "opticalFibers",
+      "photonicCircuits"
+    ],
+    "frontier": [
+      "nanotubes",
+      "superconductors",
+      "diamondSubstrates"
+    ],
+    "quantum": [
+      "neuralCrystals",
+      "spintronicDevices",
+      "quantumCores",
+      "cryogenicResonators"
+    ]
+  },
+  "analyses": {
+    "hardware-short": {
+      "id": "hardware-short",
+      "cost": 250,
+      "work": 600,
+      "units": 12,
+      "fragments": "1/24"
+    },
+    "hardware-long": {
+      "id": "hardware-long",
+      "cost": 6000,
+      "work": 14400,
+      "units": 360,
+      "fragments": "1"
+    },
+    "architecture-short": {
+      "id": "architecture-short",
+      "cost": 800,
+      "work": 1800,
+      "units": 18,
+      "fragments": "1/8"
+    },
+    "architecture-long": {
+      "id": "architecture-long",
+      "cost": 12800,
+      "work": 28800,
+      "units": 360,
+      "fragments": "2"
+    },
+    "artifact-short": {
+      "id": "artifact-short",
+      "cost": 4000,
+      "work": 7200,
+      "units": 30,
+      "fragments": "1/2"
+    },
+    "artifact-long": {
+      "id": "artifact-long",
+      "cost": 48000,
+      "work": 86400,
+      "units": 450,
+      "fragments": "6"
+    }
+  },
+  "labThreshold": 200000,
+  "axiomThreshold": 1000000,
+  "labSeed": 1000,
+  "knowledgeRate": 0.002,
+  "knowledgeFloor": 0.02,
+  "modelPriceBase": 1000,
+  "modelPriceGrowth": 2.2,
+  "modelUpgradeBase": 40,
+  "modelUpgradeGrowth": 1.22,
+  "modelDiscount": 0.9,
+  "modelBaseLimit": 30,
+  "modelLevelLimit": 50,
+  "modelCore": 1.5,
+  "modelCoreLevel": 0.01,
+  "modelPrimaryLevel": 0.08,
+  "integrationBase": 1.005,
+  "integrationPerfect": 1.007,
+  "integrationLimit": 200,
+  "tapBase": 0.02,
+  "tapSoft": 4,
+  "tapCrit": 0.05,
+  "tapCritBase": 2,
+  "tapCombo": 0.01,
+  "tapGap": 200,
+  "comboIdle": 2000,
+  "overdriveInterval": 60000,
+  "overdriveSeconds": 15,
+  "overdriveMaxSeconds": 30,
+  "trainingQEBase": 300,
+  "trainingQEGrowth": 2.4,
+  "trainingGBase": 500,
+  "trainingGGrowth": 2.5,
+  "trainingGData": 100,
+  "trainingGDataGrowth": 1.5,
+  "trainingSeconds": 90,
+  "trainingGrowth": 1.18,
+  "integrationSeconds": 120,
+  "integrationGrowth": 1.15,
+  "trainingCap": 28800,
+  "researchGrowth": 1.85,
+  "researchTimeGrowth": 1.22,
+  "researchCap": 43200,
+  "synthesisCosts": [
+    50,
+    250,
+    2000,
+    20000,
+    200000
+  ],
+  "synthesisWork": [
+    60,
+    180,
+    600,
+    1800,
+    7200
+  ],
+  "itemBases": [
+    1.1,
+    2,
+    3
+  ],
+  "hardwareGroups": [
+    [
+      "calculator",
+      "sbc"
+    ],
+    [
+      "pc",
+      "gpu",
+      "rig"
+    ],
+    [
+      "server",
+      "farm",
+      "campus"
+    ],
+    [
+      "cloud",
+      "liquid",
+      "subsea"
+    ],
+    [
+      "orbital",
+      "lunar",
+      "dyson",
+      "matrioshka"
+    ]
+  ],
+  "legacyMap": {
+    "shoppingAgent": "H01",
+    "trainingPlan": "T03",
+    "labs1": "F01",
+    "labs2": "F02",
+    "labs3": "F03",
+    "labs5": "T06",
+    "manufacturing2": "W04",
+    "manufacturing6": "W01",
+    "manufacturing7": "W02",
+    "manufacturing8": "W06",
+    "analysis3": "W03",
+    "batchFabrication": "W07",
+    "modelArchive": "T08",
+    "milestoneMemory": "I02",
+    "modelSynthesis": "I03",
+    "researchArchive": "I04"
+  },
+  "effects": {
+    "H06": 1.5,
+    "H07per": 0.01,
+    "H07cap": 2,
+    "H08": 0.05,
+    "H09": 3,
+    "H09per": 0.02,
+    "H09cap": 0.3,
+    "H09count": 500,
+    "H10": 8,
+    "T01": 1.1,
+    "T02": 1.1,
+    "T05": 1.5,
+    "T07per": 0.005,
+    "T07cap": 100,
+    "T09": 3,
+    "T09training": 1.5,
+    "F06": 2,
+    "F09": 3,
+    "F09data": 4,
+    "F10": 5,
+    "F10data": 8,
+    "F07": 0.85,
+    "W05": 1.1,
+    "W09": 2,
+    "W10": 3,
+    "W08": 2,
+    "S01": 1.5,
+    "S02": 0.05,
+    "S03": 0.5,
+    "S04": 2,
+    "S05": 0.05,
+    "S06": 1,
+    "S07": 1.5,
+    "S08": 2,
+    "S09": 1.5,
+    "S10": 8,
+    "I01": 1.25,
+    "I02per": 0.02,
+    "I02cap": 1,
+    "I03per": 0.01,
+    "I03cap": 150,
+    "I04per": 0.02,
+    "I04cap": 100,
+    "I08": 2,
+    "I09": 3,
+    "A03": 0.05,
+    "A04": 1.15,
+    "A05item": 1.02,
+    "B03": 1.1,
+    "B05": 2,
+    "C06": 0.85,
+    "D06data": 1.25,
+    "D06speed": 1.15,
+    "D06crit": 0.03,
+    "D06overdrive": 1.1,
+    "D06passive": 1.2,
+    "D06quantity": 1.15,
+    "archiveINT": 0.25,
+    "archiveINTcap": 2
+  },
+  "researchEffects": {
+    "computeOptimization": 1.1,
+    "hardwareIntegration": 0.01,
+    "parallelArchitecture": 0.015,
+    "hardwareCoDesign": 0.002,
+    "hardwareCoDesignCap": 100,
+    "userScaling": 1.08,
+    "modelArchitecture": 1.1,
+    "commercialization": 1.1,
+    "networkEffects": 0.01,
+    "dataGeneration": 1.12,
+    "syntheticData": 0.002,
+    "syntheticDataCap": 100,
+    "dataFlywheel": 1.08,
+    "recursiveLearning": 0.03,
+    "autonomousScience": 0.03,
+    "tapAmplification": 1.08,
+    "alignment": 0.9,
+    "modelTransfer": 2,
+    "researchScheduling": 1.1,
+    "materialAnalysis": 0.08,
+    "dataPipeline": 0.8
+  }
+},
   extendedItems:extendedItemCatalog,
   materialFamilies:{base:{name:'Basis',en:'Basic',hardware:null,ids:['circuits','copperCoils','ceramicCapacitors','ferriteCores']},semiconductor:{name:'Halbleiter',en:'Semiconductors',hardware:'pc',ids:['siliconWafers','titaniumBolts','goldContacts','ceramicSubstrates','thermalInterface']},photonic:{name:'Photonik',en:'Photonics',hardware:'server',ids:['photonicLenses','graphene','nanotubes','opticalFibers','photonicCircuits']},frontier:{name:'Frontier',en:'Frontier',hardware:'campus',ids:['superconductors','neuralCrystals','diamondSubstrates','spintronicDevices']},quantum:{name:'Quanten',en:'Quantum',hardware:'matrioshka',ids:['quantumCores','cryogenicResonators']}},
   hardwareMaterialPairs:{calculator:['circuits','copperCoils'],sbc:['circuits','copperCoils'],pc:['siliconWafers','thermalInterface'],gpu:['siliconWafers','thermalInterface'],rig:['goldContacts','opticalFibers'],server:['goldContacts','opticalFibers'],farm:['photonicLenses','opticalFibers'],campus:['graphene','photonicCircuits'],cloud:['superconductors','diamondSubstrates'],liquid:['neuralCrystals','spintronicDevices'],subsea:['superconductors','diamondSubstrates'],orbital:['photonicCircuits','spintronicDevices'],lunar:['photonicCircuits','spintronicDevices'],dyson:['quantumCores','cryogenicResonators'],matrioshka:['quantumCores','cryogenicResonators']},
@@ -915,7 +2472,7 @@ export type ComponentInventory=Record<ComponentId,number>;
 export type ModuleId=keyof typeof BALANCE.modules;
 export type ModuleInventory=Record<ModuleId,number>;
 export type ItemFamily = 'processor' | 'core' | 'research';
-export type ItemSlot = ItemFamily | 'processorAux' | 'coreAux' | 'researchAux';
+export type ItemSlot = ItemFamily | 'processorAux' | 'coreAux' | 'researchAux' | 'universal1' | 'universal2';
 export type ItemEffect = ExpandedItemRole | 'relay'|'int-yield'|'compute' | 'credits' | 'data' | 'research' | 'training' | 'experiment' | 'components' | 'tap' | 'drop';
 export type ExpandedItemId=keyof typeof extendedItemCatalog;
 export type ExpandedItemRole=typeof extendedItemCatalog[ExpandedItemId]['role'];
@@ -928,11 +2485,11 @@ export type OperatingProfileId=keyof typeof BALANCE.operatingProfiles;
 export type ResearchProjectId=keyof typeof BALANCE.researchProjects;
 export type RepeatableResearchId=keyof typeof BALANCE.repeatableResearch;
 export type ResearchId=ResearchProjectId|RepeatableResearchId;
-export type TrainingTrack='quality'|'efficiency';
+export type TrainingTrack='quality'|'efficiency'|'integration';
 export type TrainingCostBasis={resource?:'credits'|'data';targetLevel:number;baseDataCostExact:ScientificJSON;factor:number;bonusTotal:number;sources:Record<string,number>};
-export type ActiveTraining={creditCostExact?:ScientificJSON;paymentResource?:'credits'|'data';intro?:true;durationBasis?:{baseDuration:number;alignment:number;modelTransfer:number;runStart:number};costBasis?:TrainingCostBasis;track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;dataCostExact?:ScientificJSON;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
+export type ActiveTraining={modelTransferEligible?:boolean;creditCostExact?:ScientificJSON;paymentResource?:'credits'|'data';intro?:true;durationBasis?:{baseDuration:number;alignment:number;modelTransfer:number;runStart:number};costBasis?:TrainingCostBasis;track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;dataCostExact?:ScientificJSON;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
 export type QueuedTraining={track:TrainingTrack;targetLevel:number};
-export type ResearchStartBasis={planningFactor?:number;baseDuration:number;sources:Record<string,ScientificJSON>;bonusTotal:ScientificJSON;laborFactor:number;temporaryFactors:{labBoost:number;overclock:number;deviceSwitch?:number};minimumApplied:boolean};
+export type ResearchStartBasis={progressionVersion?:2;planningFactor?:number;baseDuration:number;sources:Record<string,ScientificJSON>;bonusTotal:ScientificJSON;laborFactor:number;temporaryFactors:{labBoost:number;overclock:number;deviceSwitch?:number};minimumApplied:boolean};
 export type ResearchTarget={id:ResearchId;targetLevel:number};
 export type ResearchDirector={enabled:boolean;entries:ResearchTarget[];reservePercent:0|.25|.5|.75;budget:ScientificJSON|null;spent:ScientificJSON;mode:'strict'|'affordable';elapsed:number};
 export type ActiveResearch={intro?:true;jobId?:string;quoteBasis?:ResearchStartBasis;id:ResearchId;level:number;startedAt:number;endsAt:number;durationSeconds:number;dataCost:number;dataCostExact?:ScientificJSON};
@@ -940,7 +2497,7 @@ export type OverclockChannel='credits'|'training'|'research';
 export type Item = { legacyLevelFactor?:number; id: string; type: ItemTypeId; rarity: Rarity; level: number; locked: boolean; forge?:number;relayTaps?:number;challengeCopy?:true;materialBasis?:Partial<ComponentInventory>;recoveryUsed?:Partial<ComponentInventory> };
 export type LootDrop={rewardFactor?:number;id:string;spawnedAt:number;expiresAt:number;x?:number;y?:number;variant?:'coin'|'cache'|'core'};
 export type ExperimentLength='intro'|'short'|'long';
-export type Experiment = { id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number; rewardFactor?:number; contractVersion?:1|2|3;materialContract?:import('./materialEconomy').MaterialContract };
+export type Experiment = { progressionRare?:boolean;progressionWorkRequired?:number;progressionUnits?:number;progressionBlueprints?:number; id: string; type: ExperimentId; length:ExperimentLength; startedAt: number; endsAt: number; durationSeconds?:number;creditCost?:number;dataCost?:number;combinationFactor?:number; rewardFactor?:number; contractVersion?:1|2|3;materialContract?:import('./materialEconomy').MaterialContract };
 export type AnalysisResult={id:string;type:ExperimentId;length:Exclude<ExperimentLength,'intro'>;at:number;mode:'active'|'offline';components:Partial<ComponentInventory>;blueprintFragments:number;researchFragments:number};
 export type ProgressMetric='hardwareBought'|'milestones'|'trainingStarted'|'trainingCompleted'|'researchStarted'|'researchCompleted'|'componentsEarned'|'itemsCrafted'|'dropsClaimed'|'itemsFused'|'forgeUpgrades'|'regularCredits'|'regularData'|'taps'|'overclocks'|'prestiges'|'activeSeconds';
 export type MissionObjective='blueprints'|'foundries'|'challenges'|'hardware-class';
@@ -956,21 +2513,23 @@ export type PlayerProfile={playerName:string;artifacts:string[];completedSeasons
 export type ChallengeRunState={id:string;runId:string;startedAt:number;eligibleAtStart:ScientificJSON;stage?:number;catalogVersion?:0|1|2;networkLinks?:HardwareId[];metrics?:import('./challengeStages').ChallengeMetrics;loadout?:Item[]};
 export type RetentionState={hardwareMasteryXp:Record<HardwareId,number>;challengeStars:number;claimedChallenges:string[];activeRun:ChallengeRunState|null;runCompletions:Record<string,number>;runBestSeconds:Record<string,number>};
 export type CraftingReservation={components:Partial<ComponentInventory>;modules:Partial<ModuleInventory>;data:number;blueprints:number};
-export type CraftingJob={legacyTimed?:true;masteryLevel?:number;fragmentContract?:'legacy-reserved';id:string;kind:'module'|'item';recipeId:ModuleId|ItemTypeId;quantity:number;completed:number;durationPerUnit:number;startedAt:number|null;endsAt:number|null;ingredients:CraftingReservation;result:{kind:'module'|'item';id:ModuleId|ItemTypeId;rarity?:Rarity}};
+export type CraftingJob={progressionVersion?:2;legacyTimed?:true;masteryLevel?:number;fragmentContract?:'legacy-reserved';id:string;kind:'module'|'item';recipeId:ModuleId|ItemTypeId;quantity:number;completed:number;durationPerUnit:number;startedAt:number|null;endsAt:number|null;ingredients:CraftingReservation;result:{kind:'module'|'item';id:ModuleId|ItemTypeId;rarity?:Rarity}};
 export type CraftingState={active:CraftingJob|null;queue:CraftingJob[]};
-export type AxiomUpgradeId='axiomResonance'|'axiomAutomation'|'axiomArchive'|'anchoredShoppingAgent'|'analysisPlanner'|'craftingPlanner'|'prestigeAgent';
+export type AxiomUpgradeId=import('./progression').AxiomNodeV2|'axiomResonance'|'axiomAutomation'|'axiomArchive'|'anchoredShoppingAgent'|'analysisPlanner'|'craftingPlanner'|'prestigeAgent';
 export const axiomUpgradeIds:AxiomUpgradeId[]=['axiomResonance','axiomAutomation','axiomArchive'];
-export type AxiomUpgradeLevels=Record<'axiomResonance'|'axiomAutomation'|'axiomArchive',number>;
+export type AxiomUpgradeLevels=Record<'axiomResonance'|'axiomAutomation'|'axiomArchive',number>&Partial<Record<import('./progression').AxiomNodeV2,number>>;
 export const axiomUpgradeCost=(id:AxiomUpgradeId)=>id==='axiomResonance'?BALANCE.axiom.resonanceCost:id==='axiomAutomation'||id==='prestigeAgent'?BALANCE.axiom.automationCost:id==='axiomArchive'?BALANCE.axiom.archiveCost:1;
 export type ChallengeSession={main:GameState;anchor:number;report:import('./simulation').AdvanceReport};
 export type GameState = {
+ integrationLevel:number;
+ progression:import('./progression').ProgressionState;
   shop:import('./shop').ShopState;
   intro:{qualityUsed:boolean;researchUsed:boolean};
   capsuleMachine:import('./capsuleMachine').CapsuleState;bonusBoxes:import('./bonusBoxes').BonusBoxState;materials:import('./materialEconomy').MaterialProgress;foundries:import('./foundries').FoundryState[];legacyFoundryLevels:number;deviceProgress:import('./deviceEffects').DeviceProgress;challengeStages:Record<string,number>;challengeUnlocks:string[];
   challengeSession?:ChallengeSession;challengeReturn?:{runId:string;success:boolean;report:import('./simulation').AdvanceReport};challengeMigrationNotice?:'legacy-challenge-recovered';
   blueprintResearchReward:'unearned'|'pending'|'consumed';researchAccessIds:ResearchId[];researchRepeat:{enabled:boolean;id:RepeatableResearchId|null;targetLevel:number};researchDirector:ResearchDirector;runTrainingStarted:number;craftingRecycleRemainders:ComponentInventory;
   blueprintMastery:Record<ItemTypeId,number>;craftedItemCounts:Record<ItemTypeId,number>;craftedItemTypes:ItemTypeId[];discoveredComponents:ComponentId[];fragmentConversionRevision:number;
-  learnedRecipes?:(keyof typeof BALANCE.itemRecipes)[];researchAreas?:ResearchAreaId[];aiName:string|null;credits:number;data:number;researchPoints:number;axioms:number;availableAxioms:number;totalAxiomsEarned:number;axiomResetCount:number;axiomUpgrades:AxiomUpgradeId[];axiomUpgradeLevels:AxiomUpgradeLevels;exactAxioms:{available:ScientificJSON;total:ScientificJSON};analysisPlanner:{enabled:boolean;type:ExperimentId;length:Exclude<ExperimentLength,'intro'>;elapsed:number};craftingPlanner:{enabled:boolean;recipeId:ItemTypeId;target:1|5|10;elapsed:number};prestigeAgent:{enabled:boolean;minimumReward:ScientificJSON;minimumRunMinutes:15|30|60|120;waitForTraining?:boolean;waitForAnalysis?:boolean;waitForJobs?:boolean;elapsed:number;lastReason?:string};runStartedAt:number;runMilestoneEdges:string[];runTrainingCompleted:number;runResearchCompleted:number;insightArchiveBlueprint:boolean;operatingProfile:OperatingProfileId;completedResearch:ResearchProjectId[];researchLevels:Record<RepeatableResearchId,number>;researchLabs:(ActiveResearch|null)[];researchQueue:ResearchId[];purchasedResearchLabs:number; hardware:number; hardwareCounts:Record<HardwareId,number>; classUpgrades:HardwareId[]; discovered:HardwareId[]; level:number; qualityLevel:number; efficiencyLevel:number; training:number; activeTraining:ActiveTraining|null; trainingQueue:QueuedTraining[]; offlineCapacitySeconds:number; savedAt:number; clockOffsetMs:number;
+  learnedRecipes?:(keyof typeof BALANCE.itemRecipes)[];researchAreas?:ResearchAreaId[];aiName:string|null;credits:number;data:number;researchPoints:number;axioms:number;availableAxioms:number;totalAxiomsEarned:number;axiomResetCount:number;axiomUpgrades:AxiomUpgradeId[];axiomUpgradeLevels:AxiomUpgradeLevels;exactAxioms:{available:ScientificJSON;total:ScientificJSON};analysisPlanner:{enabled:boolean;type:ExperimentId;length:Exclude<ExperimentLength,'intro'>;elapsed:number};craftingPlanner:{enabled:boolean;recipeId:ItemTypeId;target:1|5|10;elapsed:number};prestigeAgent:{enabled:boolean;minimumReward:ScientificJSON;minimumRunMinutes:15|30|60|120;waitForTraining?:boolean;waitForAnalysis?:boolean;waitForResearch?:boolean;waitForCrafting?:boolean;waitForJobs?:boolean;elapsed:number;lastReason?:string};runStartedAt:number;runMilestoneEdges:string[];runTrainingCompleted:number;runResearchCompleted:number;insightArchiveBlueprint:boolean;operatingProfile:OperatingProfileId;completedResearch:ResearchProjectId[];researchLevels:Record<RepeatableResearchId,number>;researchLabs:(ActiveResearch|null)[];researchQueue:ResearchId[];purchasedResearchLabs:number; hardware:number; hardwareCounts:Record<HardwareId,number>; classUpgrades:HardwareId[]; discovered:HardwareId[]; level:number; qualityLevel:number; efficiencyLevel:number; training:number; activeTraining:ActiveTraining|null; trainingQueue:QueuedTraining[]; offlineCapacitySeconds:number; savedAt:number; clockOffsetMs:number;
   runCreditsEarned:number; lifetimeCreditsEarned:number; lifetimeEligibleCredits:number;cycleEligibleCredits:number; prestigeEntitlementClaimed:number; totalINTEarned:number;cycleINTEarned:number; unspentINT:number; spentINT:number; prestigeCount:number; exactEconomy:ExactEconomy;
   nodes:string[]; modules:ModuleInventory; scannerRewards:string[];runRecyclingRewards:string[];gems:number; welcomeGiftClaimed:boolean; components:number; componentInventory:ComponentInventory; componentRemainder:number; archivePassiveFindCount:number; passiveCircuitProgress:number; worldDropProgress:number; lootDrops:LootDrop[]; researchRemainder:number; blueprintRemainder:number; researchFragments:number; blueprintFragments:number; impulseRelayBlueprint:boolean;
   breakthroughs:BreakthroughId[]; inventory:Item[]; equipped:Partial<Record<ItemSlot,string>>; purchasedEquipmentSlots:number;unlockedEquipmentSlots:number; pity:{rare:number;epic:number;legendary:number};
@@ -1044,15 +2603,15 @@ const lifetime=():LifetimeStats=>({calculatorsBought:0,hardwareBought:0,hardware
 export const runStartContract=()=>({credits:BALANCE.runStartCredits,hardware:0,hardwareCounts:Object.fromEntries(hardwareIds.map(id=>[id,0])) as Record<HardwareId,number>,creditLedger:ScientificNumber.from(BALANCE.runStartCredits).toJSON()});
 export const initializeRun=(s:GameState):GameState=>{const start=runStartContract();return {...s,credits:start.credits,hardware:start.hardware,hardwareCounts:start.hardwareCounts,automation:{...s.automation,elapsed:0,shoppingElapsed:0},exactEconomy:{...s.exactEconomy,credits:start.creditLedger}};};
 /** Effective route to the first paid calculator, including permanent legacy unlocks. */
-export const automaticRestartAvailable=(s:GameState)=>shoppingAgentUnlocked(s)&&s.hardwareAutoBuyers.calculator===true;
-export const newGame=(now=Date.now(),campaignId='unassigned'):GameState=>initializeRun({shop:{revision:0,clockAt:0,rotation:null,freeNextAt:0,adWindow:{startedAt:0,used:0},pendingAd:null,last:null},intro:{qualityUsed:false,researchUsed:false},capsuleMachine:{draws:0,items:0,last:null},bonusBoxes:{earned:0,opened:0,pending:[],lastDailyKey:null,lastOpened:null},materials:{families:[],legacyMaterials:[],milestones:[],classUpgrades:[],hardwareRemainders:emptyComponentInventory(),salvageRemainders:emptyComponentInventory(),analysisRemainders:emptyComponentInventory(),knownBlueprints:[],researchProgress:{data:0,architecture:0,model:0,materials:0,automation:0},focus:null},foundries:[],legacyFoundryLevels:0,deviceProgress:{qualityCompletions:0,efficiencyCompletions:0,lastTrack:null,lastResearchArea:null},challengeStages:{},challengeUnlocks:[],blueprintMastery:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemCounts:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemTypes:[],discoveredComponents:[],fragmentConversionRevision:0,blueprintResearchReward:'unearned',researchAccessIds:[],researchRepeat:{enabled:false,id:null,targetLevel:1},researchDirector:{enabled:false,entries:[],reservePercent:0,budget:null,spent:{m:0,e:0},mode:'strict',elapsed:0},runTrainingStarted:0,craftingRecycleRemainders:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},learnedRecipes:[],researchAreas:[],aiName:null,credits:0,data:0,researchPoints:0,axioms:0,availableAxioms:0,totalAxiomsEarned:0,axiomResetCount:0,axiomUpgrades:[],axiomUpgradeLevels:{axiomResonance:0,axiomAutomation:0,axiomArchive:0},exactAxioms:{available:{m:0,e:0},total:{m:0,e:0}},analysisPlanner:{enabled:false,type:'hardware',length:'short',elapsed:0},craftingPlanner:{enabled:false,recipeId:'quantum-chip',target:1,elapsed:0},prestigeAgent:{enabled:false,minimumReward:{m:3,e:0},minimumRunMinutes:60,waitForTraining:true,waitForAnalysis:true,elapsed:0,lastReason:'disabled'},runStartedAt:now,runMilestoneEdges:[],runTrainingCompleted:0,runResearchCompleted:0,insightArchiveBlueprint:false,operatingProfile:'balanced',completedResearch:[],researchLevels:{dataGeneration:0,materialAnalysis:0,blueprintAnalysis:0,modelArchitecture:0,computeOptimization:0,userScaling:0,hardwareIntegration:0,labAutomation:0,commercialization:0,networkEffects:0,parallelArchitecture:0,hardwareCoDesign:0,syntheticData:0,dataFlywheel:0,recursiveLearning:0,autonomousScience:0,tapAmplification:0,dropProtocols:0},researchLabs:[null,null,null,null],researchQueue:[],purchasedResearchLabs:0,hardware:0,hardwareCounts:{calculator:0,sbc:0,pc:0,gpu:0,rig:0,server:0,farm:0,campus:0,cloud:0,liquid:0,subsea:0,orbital:0,lunar:0,dyson:0,matrioshka:0},classUpgrades:[],discovered:[],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,trainingQueue:[],offlineCapacitySeconds:BALANCE.baseOfflineSeconds,savedAt:now,clockOffsetMs:0,runCreditsEarned:0,lifetimeCreditsEarned:0,lifetimeEligibleCredits:0,cycleEligibleCredits:0,prestigeEntitlementClaimed:0,totalINTEarned:0,cycleINTEarned:0,unspentINT:0,spentINT:0,prestigeCount:0,exactEconomy:{credits:{m:0,e:0},data:{m:0,e:0},researchPoints:{m:0,e:0},lifetimeDataGenerated:{m:0,e:0},runCreditsEarned:{m:0,e:0},lifetimeCreditsEarned:{m:0,e:0},lifetimeEligibleCredits:{m:0,e:0},cycleEligibleCredits:{m:0,e:0},prestigeEntitlementClaimed:{m:0,e:0},totalINTEarned:{m:0,e:0},cycleINTEarned:{m:0,e:0},unspentINT:{m:0,e:0},spentINT:{m:0,e:0}},nodes:[],modules:{computeBus:0,dataLattice:0},scannerRewards:[],runRecyclingRewards:[],gems:50,welcomeGiftClaimed:true,components:0,componentInventory:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},componentRemainder:0,archivePassiveFindCount:0,passiveCircuitProgress:0,worldDropProgress:0,lootDrops:[],researchRemainder:0,blueprintRemainder:0,researchFragments:0,blueprintFragments:0,impulseRelayBlueprint:false,breakthroughs:[],inventory:[],equipped:{},purchasedEquipmentSlots:0,unlockedEquipmentSlots:0,pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false,lastResult:null},crafting:{active:null,queue:[]},automation:{enabled:false,reserve:0,reservePercent:0,shoppingElapsed:0,elapsed:0,target:null},hardwareAutoBuyers:{},scannerTarget:null,retention:{hardwareMasteryXp:Object.fromEntries(hardwareIds.map(id=>[id,0])) as Record<HardwareId,number>,challengeStars:0,claimedChallenges:[],activeRun:null,runCompletions:{},runBestSeconds:{}},season:{id:'season-01',startedAt:now,endsAt:now+30*86400000,xp:0,claimed:[]},previousSeason:null,pinnedGoal:null,profile:{playerName:'Operator',artifacts:[],completedSeasons:[],readMessages:[],inbox:[{id:'progression-v2',title:'Progression V2',body:'Langzeit-Achievements, 6/12/30 Missionen, Hardware-Mastery und der erweiterte INT-Baum sind live.',at:now},{id:'season-01',title:'Season 01 · Boot Sequence',body:'Die erste 30-Tage Neural Season ist gestartet. Erledige Missionen, sammle Season XP und sichere dir das Boot Sequence Core Artifact.',at:now}]},missions:{daily:emptyPeriod(dayKey(now),now),weekly:emptyPeriod(weekKey(now),now),monthly:emptyPeriod('',now),mailbox:[]},lifetime:lifetime(),runMilestoneClasses:[],achievementClaims:[],achievementPoints:0,gemLedger:[],processedGemPurchases:[],trainingBoostUntil:0,labBoostUntil:0,creditBoostUntil:0,overclock:{taps:0,charged:false,activeUntil:0,cooldownUntil:0,channel:'credits'},feedback:{windowStartedAt:now,work:0},onboarding:{completed:[],claimed:[]},legacySpecialization:null,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true,buyMode:1,musicEnabled:false,musicVolume:.25,sfxMuted:false,sfxVolume:.5,hapticsEnabled:false,language:'de',numberFormat:'auto'},testSave:false,nextId:1,telemetry:newTelemetry(now,campaignId),story:newStory()});
+export const automaticRestartAvailable=(s:GameState)=>hasProgressionNode(s,'I06')||hasProgressionNode(s,'I07')||axiomLevel(s,'B04')>0||axiomLevel(s,'B06')>0||shoppingAgentUnlocked(s)&&s.hardwareAutoBuyers.calculator===true;
+export const newGame=(now=Date.now(),campaignId='unassigned'):GameState=>initializeRun({integrationLevel:0,progression:newProgression(now,campaignId),shop:{revision:0,clockAt:0,rotation:null,freeNextAt:0,adWindow:{startedAt:0,used:0},pendingAd:null,last:null},intro:{qualityUsed:false,researchUsed:false},capsuleMachine:{draws:0,items:0,last:null},bonusBoxes:{earned:0,opened:0,pending:[],lastDailyKey:null,lastOpened:null},materials:{families:[],legacyMaterials:[],milestones:[],classUpgrades:[],hardwareRemainders:emptyComponentInventory(),salvageRemainders:emptyComponentInventory(),analysisRemainders:emptyComponentInventory(),knownBlueprints:[],researchProgress:{data:0,architecture:0,model:0,materials:0,automation:0},focus:null},foundries:[],legacyFoundryLevels:0,deviceProgress:{qualityCompletions:0,efficiencyCompletions:0,lastTrack:null,lastResearchArea:null},challengeStages:{},challengeUnlocks:[],blueprintMastery:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemCounts:Object.fromEntries(Object.keys(BALANCE.itemRecipes).map(id=>[id,0])) as Record<ItemTypeId,number>,craftedItemTypes:[],discoveredComponents:[],fragmentConversionRevision:0,blueprintResearchReward:'unearned',researchAccessIds:[],researchRepeat:{enabled:false,id:null,targetLevel:1},researchDirector:{enabled:false,entries:[],reservePercent:0,budget:null,spent:{m:0,e:0},mode:'strict',elapsed:0},runTrainingStarted:0,craftingRecycleRemainders:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},learnedRecipes:[],researchAreas:[],aiName:null,credits:0,data:0,researchPoints:0,axioms:0,availableAxioms:0,totalAxiomsEarned:0,axiomResetCount:0,axiomUpgrades:[],axiomUpgradeLevels:{axiomResonance:0,axiomAutomation:0,axiomArchive:0},exactAxioms:{available:{m:0,e:0},total:{m:0,e:0}},analysisPlanner:{enabled:false,type:'hardware',length:'short',elapsed:0},craftingPlanner:{enabled:false,recipeId:'quantum-chip',target:1,elapsed:0},prestigeAgent:{enabled:false,minimumReward:{m:3,e:0},minimumRunMinutes:60,waitForTraining:true,waitForAnalysis:true,elapsed:0,lastReason:'disabled'},runStartedAt:now,runMilestoneEdges:[],runTrainingCompleted:0,runResearchCompleted:0,insightArchiveBlueprint:false,operatingProfile:'balanced',completedResearch:[],researchLevels:{dataGeneration:0,materialAnalysis:0,blueprintAnalysis:0,modelArchitecture:0,computeOptimization:0,userScaling:0,hardwareIntegration:0,labAutomation:0,commercialization:0,networkEffects:0,parallelArchitecture:0,hardwareCoDesign:0,syntheticData:0,dataFlywheel:0,recursiveLearning:0,autonomousScience:0,tapAmplification:0,dropProtocols:0},researchLabs:[null,null,null,null],researchQueue:[],purchasedResearchLabs:0,hardware:0,hardwareCounts:{calculator:0,sbc:0,pc:0,gpu:0,rig:0,server:0,farm:0,campus:0,cloud:0,liquid:0,subsea:0,orbital:0,lunar:0,dyson:0,matrioshka:0},classUpgrades:[],discovered:[],level:0,qualityLevel:0,efficiencyLevel:0,training:0,activeTraining:null,trainingQueue:[],offlineCapacitySeconds:BALANCE.baseOfflineSeconds,savedAt:now,clockOffsetMs:0,runCreditsEarned:0,lifetimeCreditsEarned:0,lifetimeEligibleCredits:0,cycleEligibleCredits:0,prestigeEntitlementClaimed:0,totalINTEarned:0,cycleINTEarned:0,unspentINT:0,spentINT:0,prestigeCount:0,exactEconomy:{credits:{m:0,e:0},data:{m:0,e:0},researchPoints:{m:0,e:0},lifetimeDataGenerated:{m:0,e:0},runCreditsEarned:{m:0,e:0},lifetimeCreditsEarned:{m:0,e:0},lifetimeEligibleCredits:{m:0,e:0},cycleEligibleCredits:{m:0,e:0},prestigeEntitlementClaimed:{m:0,e:0},totalINTEarned:{m:0,e:0},cycleINTEarned:{m:0,e:0},unspentINT:{m:0,e:0},spentINT:{m:0,e:0}},nodes:[],modules:{computeBus:0,dataLattice:0},scannerRewards:[],runRecyclingRewards:[],gems:50,welcomeGiftClaimed:true,components:0,componentInventory:{circuits:0,copperCoils:0,siliconWafers:0,titaniumBolts:0,photonicLenses:0,graphene:0,nanotubes:0,superconductors:0,neuralCrystals:0,quantumCores:0,ceramicCapacitors:0,ferriteCores:0,goldContacts:0,ceramicSubstrates:0,opticalFibers:0,thermalInterface:0,diamondSubstrates:0,spintronicDevices:0,photonicCircuits:0,cryogenicResonators:0},componentRemainder:0,archivePassiveFindCount:0,passiveCircuitProgress:0,worldDropProgress:0,lootDrops:[],researchRemainder:0,blueprintRemainder:0,researchFragments:0,blueprintFragments:0,impulseRelayBlueprint:false,breakthroughs:[],inventory:[],equipped:{},purchasedEquipmentSlots:0,unlockedEquipmentSlots:0,pity:{rare:0,epic:0,legendary:0},experiments:{active:null,queue:[],repeat:null,completedIds:[],firstReward:false,lastResult:null},crafting:{active:null,queue:[]},automation:{enabled:false,reserve:0,reservePercent:0,shoppingElapsed:0,elapsed:0,target:null},hardwareAutoBuyers:{},scannerTarget:null,retention:{hardwareMasteryXp:Object.fromEntries(hardwareIds.map(id=>[id,0])) as Record<HardwareId,number>,challengeStars:0,claimedChallenges:[],activeRun:null,runCompletions:{},runBestSeconds:{}},season:{id:'season-01',startedAt:now,endsAt:now+30*86400000,xp:0,claimed:[]},previousSeason:null,pinnedGoal:null,profile:{playerName:'Operator',artifacts:[],completedSeasons:[],readMessages:[],inbox:[{id:'progression-v2',title:'Progression V2',body:'Langzeit-Achievements, 6/12/30 Missionen, Hardware-Mastery und der erweiterte INT-Baum sind live.',at:now},{id:'season-01',title:'Season 01 · Boot Sequence',body:'Die erste 30-Tage Neural Season ist gestartet. Erledige Missionen, sammle Season XP und sichere dir das Boot Sequence Core Artifact.',at:now}]},missions:{daily:emptyPeriod(dayKey(now),now),weekly:emptyPeriod(weekKey(now),now),monthly:emptyPeriod('',now),mailbox:[]},lifetime:lifetime(),runMilestoneClasses:[],achievementClaims:[],achievementPoints:0,gemLedger:[],processedGemPurchases:[],trainingBoostUntil:0,labBoostUntil:0,creditBoostUntil:0,overclock:{taps:0,charged:false,activeUntil:0,cooldownUntil:0,channel:'credits'},feedback:{windowStartedAt:now,work:0},onboarding:{completed:[],claimed:[]},legacySpecialization:null,ads:{day:dayKey(now),counts:{},transactions:[]},settings:{effects:true,buyMode:1,musicEnabled:false,musicVolume:.25,sfxMuted:false,sfxVolume:.5,hapticsEnabled:false,language:'de',numberFormat:'auto'},testSave:false,nextId:1,telemetry:newTelemetry(now,campaignId),story:newStory()});
 
-export const upgradeLevel=(s:GameState,id:PrestigeUpgradeId)=>s.nodes.includes(id)||s.nodes.includes(`${id}:1`)?1:0;
-export const hasNode=(s:GameState,b:string,t:number)=>upgradeLevel(s,b as PrestigeUpgradeId)>=t;
-export const researchQueueUnlocked=(s:GameState)=>hasNode(s,'labs2',1)||s.challengeUnlocks.includes('research-queue');
-export const researchRepeatUnlocked=(s:GameState)=>hasNode(s,'labs3',1)||s.challengeUnlocks.includes('research-repeat');
-export const trainingQueueUnlocked=(s:GameState)=>hasNode(s,'trainingPlan',1)||s.challengeUnlocks.includes('training-queue');
-export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
+export const upgradeLevel=(s:GameState,id:PrestigeUpgradeId)=>s.nodes.includes(id)||s.nodes.includes(`${id}:1`)||s.progression?.version===2&&!!(BALANCE.progression.legacyMap as Record<string,string>)[id]&&hasProgressionNode(s,(BALANCE.progression.legacyMap as Record<string,string>)[id])?1:0;
+export const hasNode=(s:GameState,b:string,t:number)=>upgradeLevel(s,b as PrestigeUpgradeId)>=t||t===1&&hasProgressionNode(s,(BALANCE.progression.legacyMap as Record<string,string>)[b]??b);
+export const researchQueueUnlocked=(s:GameState)=>s.progression?.version===2||hasNode(s,'labs2',1)||s.challengeUnlocks.includes('research-queue');
+export const researchRepeatUnlocked=(s:GameState)=>hasProgressionNode(s,'F03')||hasNode(s,'labs3',1)||s.challengeUnlocks.includes('research-repeat');
+export const trainingQueueUnlocked=(s:GameState)=>hasProgressionNode(s,'T03')||hasNode(s,'trainingPlan',1)||s.challengeUnlocks.includes('training-queue');
+export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>axiomLevel(s,id==='analysisPlanner'?'C02':'C03')>0||s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
 export const deepPrestigeBonus=(s:GameState,branch:'data'|'compute'|'analysis'|'labs'|'manufacturing')=>{const tiers=branch==='data'?['dataArchive4','dataArchive5','dataArchive6','dataArchive7','dataArchive8']:branch==='compute'?['computeNet4','computeNet5','computeNet6','computeNet7','computeNet8']:branch==='analysis'?['analysis4','analysis5','analysis6','analysis7','analysis8']:branch==='labs'?['labs4','labs6','labs7','labs8']:['manufacturing4','manufacturing6','manufacturing7','manufacturing8'];const values=branch==='data'?[.5,1,1.5,2.5,4]:branch==='compute'?[.25,.5,1,1.5,2.5]:branch==='analysis'?[.25,.5,1,1.5,2.5]:branch==='labs'?[.25,.5,1,2]:[.2,.4,.75,1.25];return tiers.reduce((sum,id,i)=>sum+(hasNode(s,id,1)?values[i]:0),0);};
 export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemFamily;effect:ItemEffect}>={
  'impulse-relay':{name:'Impulsrelais',slot:'processor',effect:'relay'},'insight-archive':{name:'Erkenntnisarchiv',slot:'research',effect:'int-yield'},
@@ -1061,9 +2620,9 @@ export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemFamily;effect:Ite
  'field-scanner':{name:'Feldscanner',slot:'research',effect:'experiment'},'lab-drone':{name:'Labordrohne',slot:'research',effect:'research'},'data-prism':{name:'Datenprisma',slot:'research',effect:'data'},...Object.fromEntries(Object.entries(extendedItemCatalog).map(([id,v])=>[id,{name:v.name,slot:v.slot,effect:v.role}]))} as Record<ItemTypeId,{name:string;slot:ItemFamily;effect:ItemEffect}>;
 export const rarityRank=(r:Rarity)=>(['common','uncommon','rare','epic','legendary','mythic'] as Rarity[]).indexOf(r);
 export const itemEffect=(i:Item)=>BALANCE.itemBaseEffect*BALANCE.rarity[i.rarity].factor*(1+BALANCE.itemLevelEffectPerStep*Math.max(0,i.level-1))*(i.legacyLevelFactor??1)*(1+.12*(i.forge??0));
-export const equipmentSlotUnlocked=(s:GameState,slot:ItemSlot)=>equipmentSlots.indexOf(slot)<equipmentSlotCount(s);
+export const equipmentSlotUnlocked=(s:GameState,slot:ItemSlot)=>s.progression?.version===2?activeSlotIds(s).includes(slot):equipmentSlots.indexOf(slot)<equipmentSlotCount(s);
 /** Category, ownership and acquired socket must agree for every effect consumer. */
-export const equippedItems=(s:GameState)=>equipmentSlots.flatMap(slot=>equipmentSlotUnlocked(s,slot)?s.inventory.filter(i=>i.id===s.equipped[slot]&&itemTypes[i.type]?.slot===slotFamily(slot)):[]);
+export const equippedItems=(s:GameState)=>equipmentSlots.flatMap(slot=>equipmentSlotUnlocked(s,slot)?s.inventory.filter(i=>i.id===s.equipped[slot]&&(slot.startsWith('universal')||itemTypes[i.type]?.slot===slotFamily(slot))):[]);
 export const legacyHardwareClasses=(s:GameState)=>hardwareIds.filter(id=>s.hardwareCounts[id]>=BALANCE.scalingSynergy.legacyThreshold).length;
 export const totalReachedMilestones=(s:GameState)=>hardwareIds.reduce((n,id)=>n+reachedMilestones(id,s.hardwareCounts[id]).length,0);
 export const rareComponentTypesOwned=(s:GameState)=>['graphene','nanotubes','superconductors','neuralCrystals','quantumCores'].filter(id=>s.discoveredComponents.includes(id as ComponentId)).length;
@@ -1080,7 +2639,7 @@ export const itemEffectProfile=(i:Item):ItemEffect[]=>{
  const tertiary:Partial<Record<ItemTypeId,ItemEffect>>={'impulse-relay':'relay','insight-archive':'int-yield','quantum-chip':'research','neural-asic':'tap','photonic-array':'credits','memory-crystal':'research','logic-seed':'tap','tensor-core':'credits','field-scanner':'research','lab-drone':'drop','data-prism':'research'};
  return [primary,...(rank>=2?[secondary[i.type]!] :[]),...(rank>=4?[tertiary[i.type]!] :[])];
 };
-export const itemEffectFor=(s:GameState,i:Item,e:ItemEffect)=>{const effects=itemEffectProfile(i);if(!effects.includes(e))return 0;const position=effects.indexOf(e),baseWeight=position===0?1:position===1?.65:.40,prestigeWeight=position===1?(hasNode(s,'analysis6',1)?1.25:1):position===2?(hasNode(s,'analysis7',1)?1.35:1):1;return itemEffect(i)*itemScalingMultiplier(s,i)*baseWeight*prestigeWeight;};
+export const itemEffectFor=(s:GameState,i:Item,e:ItemEffect)=>{const effects=itemEffectProfile(i);if(!effects.includes(e))return 0;const position=effects.indexOf(e),baseWeight=position===0?1:position===1?.65:.40,prestigeWeight=position===1?(hasNode(s,'analysis6',1)?1.25:1):position===2?(hasNode(s,'analysis7',1)?1.35:1):1;return itemEffect(i)*(s.progression?.version===2?itemAmplifier(s):itemScalingMultiplier(s,i))*baseWeight*prestigeWeight*legacyItemFactor(s,e);};
 export const equippedBonus=(s:GameState,e:ItemEffect)=>s.retention.activeRun?.id==='no-items'?0:equippedItems(s).reduce((n,i)=>n+itemEffectFor(s,i,e),0)*(1+deepPrestigeBonus(s,'manufacturing'));
 /** Ratio against the same-context canonical Common/level-1/forge-0 instance.
  * Shared amplifiers apply equally to both values, never again to the special reward. */
@@ -1192,11 +2751,11 @@ export const intSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.s
 export const achievementSynergyScientific=(s:GameState)=>ScientificNumber.from(1+BALANCE.achievementProduction.logStrength*Math.log1p(s.achievementPoints/BALANCE.achievementProduction.pointScale));
 export const artifactSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.artifactBase).pow(s.profile.artifacts.length).pow(1+Math.min(.5,s.profile.artifacts.length*.03));
 export const breakthroughSynergyScientific=(s:GameState)=>ScientificNumber.from(BALANCE.scalingSynergy.breakthroughBase).pow(s.breakthroughs.length).pow(1+Math.min(.35,s.breakthroughs.length*.04));
-export function classComputeTerms(s:GameState,id:HardwareId,count=s.hardwareCounts[id]){const index=hardwareIds.indexOf(id);return{ownedCompute:count*BALANCE.hardware[id].compute,linkedCompute:researchModifiers(s).distributedInference&&index>0&&challengeNetworkLinkAllowed(s,index)&&s.hardwareCounts[hardwareIds[index-1]]>=25?Math.min(count,10)*BALANCE.hardware[id].compute*BALANCE.computeNetworkBonus*(1+challengeFamilyBonus(s,'fragmented-network'))*(1+deviceBonus(s,'neighbor')+(index>=hardwareIds.indexOf('campus')?deviceBonus(s,'lateNeighbor'):0)):0,milestone:1+(milestoneFactor(id,count)-1)*(1+((id==='calculator'||id==='sbc')?challengeFamilyBonus(s,'five-hardware'):0)),classUpgrade:(s.classUpgrades.includes(id)?2:1)*((id==='calculator'||id==='sbc')&&count>=10?1+deviceBonus(s,'legacy')*(1+challengeFamilyBonus(s,'five-hardware')):1),mastery:1+hardwareMasteryBonus(s,id)*(1+challengeFamilyBonus(s,'no-items'))};}
+export function classComputeTerms(s:GameState,id:HardwareId,count=s.hardwareCounts[id]){if(s.progression?.version===2){const index=hardwareIds.indexOf(id);return{ownedCompute:count*BALANCE.hardware[id].compute,linkedCompute:s.completedResearch.includes('distributedInference')&&index>0&&challengeNetworkLinkAllowed(s,index)&&s.hardwareCounts[hardwareIds[index-1]]>=25?Math.min(count,10)*BALANCE.hardware[id].compute*.1*(1+challengeFamilyBonus(s,'fragmented-network'))*(1+deviceBonus(s,'neighbor')+(index>=hardwareIds.indexOf('campus')?deviceBonus(s,'lateNeighbor'):0)):0,milestone:1+(milestoneFactor(id,count)-1)*(1+(['calculator','sbc','pc'].includes(id)?challengeFamilyBonus(s,'five-hardware'):0)),classUpgrade:(s.classUpgrades.includes(id)?2:1)*(['calculator','sbc'].includes(id)&&count>=10?1+deviceBonus(s,'legacy'):1),mastery:1};}const index=hardwareIds.indexOf(id);return{ownedCompute:count*BALANCE.hardware[id].compute,linkedCompute:researchModifiers(s).distributedInference&&index>0&&challengeNetworkLinkAllowed(s,index)&&s.hardwareCounts[hardwareIds[index-1]]>=25?Math.min(count,10)*BALANCE.hardware[id].compute*BALANCE.computeNetworkBonus*(1+challengeFamilyBonus(s,'fragmented-network'))*(1+deviceBonus(s,'neighbor')+(index>=hardwareIds.indexOf('campus')?deviceBonus(s,'lateNeighbor'):0)):0,milestone:1+(milestoneFactor(id,count)-1)*(1+((id==='calculator'||id==='sbc')?challengeFamilyBonus(s,'five-hardware'):0)),classUpgrade:(s.classUpgrades.includes(id)?2:1)*((id==='calculator'||id==='sbc')&&count>=10?1+deviceBonus(s,'legacy')*(1+challengeFamilyBonus(s,'five-hardware')):1),mastery:1+hardwareMasteryBonus(s,id)*(1+challengeFamilyBonus(s,'no-items'))};}
 export const classCompute=(s:GameState,id:HardwareId,count=s.hardwareCounts[id])=>{const terms=classComputeTerms(s,id,count);return(terms.ownedCompute+terms.linkedCompute)*terms.milestone*terms.classUpgrade*terms.mastery;};
 export const prestigeComputePerClass=(s:GameState)=>hasNode(s,'computeNet3',1)?.30:hasNode(s,'computeNet2',1)?.15:hasNode(s,'computeNet1',1)?.08:0;
 export const classComputeScientific=(s:GameState,id:HardwareId,count=s.hardwareCounts[id])=>ScientificNumber.from(Math.max(0,classCompute(s,id,count)));
-export function computeFactors(s:GameState){const tier=Math.max(0,Math.max(0,...s.discovered.map(id=>hardwareIds.indexOf(id)))-7);return {deviceCompute:1+deviceBonus(s,'sparse')+deviceBonus(s,'photonicCompute')+deviceBonus(s,'pairs'),itemCombination:itemCombinationQuote(s,'parallel-architecture').contribution,itemAndMilestoneAdditive:1+equippedBonus(s,'compute')+milestoneBonus(s,'compute')+milestoneBonus(s,'synergy'),prestigePerClass:1+prestigeComputePerClass(s)*s.discovered.length,deepPrestige:1+deepPrestigeBonus(s,'compute'),computeOptimization:ScientificNumber.from(1.16).pow(Math.max(0,s.researchLevels.computeOptimization)),hardwareIntegration:ScientificNumber.from(1.12).pow(Math.max(0,s.researchLevels.hardwareIntegration)*tier),parallelArchitecture:ScientificNumber.from(1+BALANCE.repeatableResearch.parallelArchitecture.effectPerLevel).pow(s.researchLevels.parallelArchitecture*s.discovered.length),hardwareCoDesign:ScientificNumber.from(1+BALANCE.repeatableResearch.hardwareCoDesign.effectPerLevel).pow(s.researchLevels.hardwareCoDesign*Math.max(0,s.level)*s.discovered.length),milestoneSynergy:milestoneSynergy(s).compute,legacyInfrastructure:legacyInfrastructureMultiplier(s),hardwareOwnership:hardwareOwnershipSynergyScientific(s),infrastructure:infrastructureSynergyScientific(s),model:modelSynergyScientific(s).pow(.20)};}
+export function computeFactors(s:GameState){if(s.progression?.version===2)return progressionComputeFactors(s);const tier=Math.max(0,Math.max(0,...s.discovered.map(id=>hardwareIds.indexOf(id)))-7);return {deviceCompute:1+deviceBonus(s,'sparse')+deviceBonus(s,'photonicCompute')+deviceBonus(s,'pairs'),itemCombination:itemCombinationQuote(s,'parallel-architecture').contribution,itemAndMilestoneAdditive:1+equippedBonus(s,'compute')+milestoneBonus(s,'compute')+milestoneBonus(s,'synergy'),prestigePerClass:1+prestigeComputePerClass(s)*s.discovered.length,deepPrestige:1+deepPrestigeBonus(s,'compute'),computeOptimization:ScientificNumber.from(1.16).pow(Math.max(0,s.researchLevels.computeOptimization)),hardwareIntegration:ScientificNumber.from(1.12).pow(Math.max(0,s.researchLevels.hardwareIntegration)*tier),parallelArchitecture:ScientificNumber.from(1+BALANCE.repeatableResearch.parallelArchitecture.effectPerLevel).pow(s.researchLevels.parallelArchitecture*s.discovered.length),hardwareCoDesign:ScientificNumber.from(1+BALANCE.repeatableResearch.hardwareCoDesign.effectPerLevel).pow(s.researchLevels.hardwareCoDesign*Math.max(0,s.level)*s.discovered.length),milestoneSynergy:milestoneSynergy(s).compute,legacyInfrastructure:legacyInfrastructureMultiplier(s),hardwareOwnership:hardwareOwnershipSynergyScientific(s),infrastructure:infrastructureSynergyScientific(s),model:modelSynergyScientific(s).pow(.20)};}
 export const computeRateScientific=(_hardware:number,s?:GameState)=>{if(!s)return ScientificNumber.from(Math.max(0,_hardware));let base=ScientificNumber.zero();for(const id of hardwareIds)base=base.add(classComputeScientific(s,id));return scientificProduct(base,...Object.values(computeFactors(s)));};
 export const computeRate=(_hardware:number,s?:GameState)=>computeRateScientific(_hardware,s).toNumber(MAX_ECONOMY_VALUE);
 /** Legacy helpers retained for v1 tests/imports and mapped to calculators. */
@@ -1205,7 +2764,7 @@ export const bulkCost=(owned:number,count:number,s?:GameState)=>hardwareBulkCost
 export const softcap=(x:number,k:number)=>x<=k?x:k+Math.sqrt(k*(x-k));
 export const quality=(level:number)=>1+softcap(BALANCE.modelQualityPerLevel*Math.max(0,level),BALANCE.qualitySoftcap);
 export const efficiency=(level:number)=>1+softcap(BALANCE.modelEfficiencyPerLevel*Math.max(0,level),BALANCE.efficiencySoftcap);
-export const usersFactors=(s:GameState)=>({efficiencyPerCompute:(1+(efficiency(s.efficiencyLevel)-1)*(1+challengeFamilyBonus(s,'efficiency-lock')))/BALANCE.computePerUser,milestoneUsers:1+milestoneBonus(s,'users'),userScaling:ScientificNumber.from(1.14).pow(Math.max(0,s.researchLevels.userScaling)),infrastructure:infrastructureSynergyScientific(s).pow(.25),milestoneSynergy:milestoneSynergy(s).users});
+export const usersFactors=(s:GameState)=>(s.progression?.version===2?progressionUserFactors(s):({efficiencyPerCompute:(1+(efficiency(s.efficiencyLevel)-1)*(1+challengeFamilyBonus(s,'efficiency-lock')))/BALANCE.computePerUser,milestoneUsers:1+milestoneBonus(s,'users'),userScaling:ScientificNumber.from(1.14).pow(Math.max(0,s.researchLevels.userScaling)),infrastructure:infrastructureSynergyScientific(s).pow(.25),milestoneSynergy:milestoneSynergy(s).users}));
 export const usersRateScientific=(s:GameState)=>scientificProduct(computeRateScientific(s.hardware,s),...Object.values(usersFactors(s)));
 export const usersRate=(s:GameState)=>usersRateScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const repeatableResearchIds=Object.keys(BALANCE.repeatableResearch) as RepeatableResearchId[];
@@ -1238,7 +2797,7 @@ export const dataMultiplierScientific=(rawBonus:ScientificNumber)=>ScientificNum
 export const dataMultiplier=(s:GameState)=>dataMultiplierScientific(dataRawBonusScientific(s)).toNumber();
 export const baseDataRateScientific=(users:ScientificNumber)=>users.pow(.5).multiplyNumber(BALANCE.baseDataPerSecond);
 export function dataProductionQuote(s:GameState){const sources=dataBonusTerms(s),rawBonus=Object.values(sources).reduce((sum,v)=>sum.add(v),ScientificNumber.zero()),baseRate=baseDataRateScientific(usersRateScientific(s)),multiplier=dataMultiplierScientific(rawBonus),challengeFactor=activeChallengeRules(s)?.dataFactor??1;return{baseRate,sources,rawBonus,multiplier,challengeFactor,rate:scientificProduct(baseRate,multiplier,challengeFactor)};}
-export const dataRateScientific=(s:GameState)=>dataProductionQuote(s).rate;
+export const dataRateScientific=(s:GameState)=>s.progression?.version===2?progressionDataRate(s):dataProductionQuote(s).rate;
 export function dataProductionComparison(before:GameState,after:GameState){const a=dataProductionQuote(before),b=dataProductionQuote(after);return{before:a,after:b,direction:b.rate.compare(a.rate),relativeGain:a.rate.isZero()?null:b.rate.compare(a.rate)>=0?b.rate.divide(a.rate).subtract(ScientificNumber.from(1)):ScientificNumber.from(1).subtract(b.rate.divide(a.rate)),sameRoundedDisplay:formatScientific(a.rate,2)===formatScientific(b.rate,2)};}
 export const dataRate=(s:GameState)=>dataRateScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const passiveCircuitRate=(s:GameState)=>s.discovered.length/BALANCE.passiveCircuitSecondsPerClass;
@@ -1251,7 +2810,7 @@ export const dataAffordability=(s:GameState,cost:number)=>{const quote=scientifi
 /** Historical Research Points are inert; laboratory performance is quoted at start. */
 export const researchRateScientific=(_s:GameState,_now=_s.savedAt)=>ScientificNumber.zero();
 export const researchRate=(s:GameState,now=s.savedAt)=>researchRateScientific(s,now).toNumber(MAX_ECONOMY_VALUE);
-export const creditMultiplierFromINT=(s:GameState)=>1+BALANCE.prestigeBonusLogScale*Math.LN10*exactEconomyValue(s,'cycleINTEarned').add(ScientificNumber.from(1)).log10();
+export const creditMultiplierFromINT=(s:GameState)=>s.progression?.version===2?exactEconomyValue(s,'cycleINTEarned').add(ScientificNumber.from(1)).pow(.1+(hasProgressionNode(s,'I05')?.04:0)+(hasProgressionNode(s,'I10')?.04:0)).toNumber(MAX_ECONOMY_VALUE):1+BALANCE.prestigeBonusLogScale*Math.LN10*exactEconomyValue(s,'cycleINTEarned').add(ScientificNumber.from(1)).log10();
 /** Preserve small integer Axiom arithmetic without rounding fractional balances
  * up to a price. The decimal coefficient/exponent is decoded without projecting
  * an economic value to Number; large values retain scientific mantissa precision. */
@@ -1270,17 +2829,17 @@ export function axiomEconomyValue(s:GameState,key:'available'|'total'){
  if(value.compare(ScientificNumber.from(MAX_ECONOMY_VALUE))>0)return value;
  return Math.abs(value.toNumber(MAX_ECONOMY_VALUE)-fallback)>Math.max(1,fallback)*1e-12?ScientificNumber.from(fallback):value;
 }
-export const creditMultiplierFromAxiomsScientific=(s:GameState)=>axiomEconomyValue(s,'total').multiplyNumber(BALANCE.axiom.creditPerTotal).add(ScientificNumber.from(1));
+export const creditMultiplierFromAxiomsScientific=(s:GameState)=>s.progression?.version===2?axiomEconomyValue(s,'total').add(ScientificNumber.from(1)).pow(2+.15*Math.min(6,axiomLevel(s,'A02'))).multiply(ScientificNumber.from(1.25).pow(Math.max(0,axiomLevel(s,'A02')-6))):axiomEconomyValue(s,'total').multiplyNumber(BALANCE.axiom.creditPerTotal).add(ScientificNumber.from(1));
 /** Bounded compatibility/display projection; production uses the scientific value. */
 export const creditMultiplierFromAxioms=(s:GameState)=>creditMultiplierFromAxiomsScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const permanentFactor=creditMultiplierFromINT;
-export function creditFactors(s:GameState,now=s.savedAt,temporary=true){const architecture=ScientificNumber.from(1+BALANCE.repeatableResearch.modelArchitecture.effectPerLevel).pow(Math.max(0,s.researchLevels.modelArchitecture));const itemCredits=ScientificNumber.from(1+equippedBonus(s,'credits')+itemCombinationBonus(s,'credits')).pow(itemSynergyExponent(s)*milestoneSynergy(s).itemExponent);const commercialization=ScientificNumber.from(1+BALANCE.repeatableResearch.commercialization.effectPerLevel).pow(s.researchLevels.commercialization),userLog=Math.max(0,usersRateScientific(s).log10()),network=ScientificNumber.fromParts(1,Math.max(0,BALANCE.repeatableResearch.networkEffects.effectPerLevel*s.researchLevels.networkEffects*userLog**.8));return {baseRevenuePerUser:BALANCE.baseRevenuePerUser,quality:1+(quality(s.qualityLevel)-1)*(1+challengeFamilyBonus(s,'quality-lock')),INT:creditMultiplierFromINT(s),axioms:creditMultiplierFromAxiomsScientific(s),modelArchitecture:architecture,commercialization:commercialization,networkEffects:network,milestoneRevenue:milestoneSynergy(s).revenue,items:itemCredits,hardwareOwnership:hardwareOwnershipCreditMultiplier(s),infrastructure:infrastructureSynergyScientific(s),lifetimeData:dataSynergyScientific(s),model:modelSynergyScientific(s),achievements:achievementSynergyScientific(s),artifacts:artifactSynergyScientific(s),breakthroughs:breakthroughSynergyScientific(s),devicePassive:1+deviceBonus(s,'memory')*(1+challengeFamilyBonus(s,'no-taps')),temporary:temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='credits'?1+deviceBonus(s,'burst'):0):1};}
+export function creditFactors(s:GameState,now=s.savedAt,temporary=true){if(s.progression?.version===2)return progressionCreditFactors(s,now,temporary);const architecture=ScientificNumber.from(1+BALANCE.repeatableResearch.modelArchitecture.effectPerLevel).pow(Math.max(0,s.researchLevels.modelArchitecture));const itemCredits=ScientificNumber.from(1+equippedBonus(s,'credits')+itemCombinationBonus(s,'credits')).pow(itemSynergyExponent(s)*milestoneSynergy(s).itemExponent);const commercialization=ScientificNumber.from(1+BALANCE.repeatableResearch.commercialization.effectPerLevel).pow(s.researchLevels.commercialization),userLog=Math.max(0,usersRateScientific(s).log10()),network=ScientificNumber.fromParts(1,Math.max(0,BALANCE.repeatableResearch.networkEffects.effectPerLevel*s.researchLevels.networkEffects*userLog**.8));return {baseRevenuePerUser:BALANCE.baseRevenuePerUser,quality:1+(quality(s.qualityLevel)-1)*(1+challengeFamilyBonus(s,'quality-lock')),INT:creditMultiplierFromINT(s),axioms:creditMultiplierFromAxiomsScientific(s),modelArchitecture:architecture,commercialization:commercialization,networkEffects:network,milestoneRevenue:milestoneSynergy(s).revenue,items:itemCredits,hardwareOwnership:hardwareOwnershipCreditMultiplier(s),infrastructure:infrastructureSynergyScientific(s),lifetimeData:dataSynergyScientific(s),model:modelSynergyScientific(s),achievements:achievementSynergyScientific(s),artifacts:artifactSynergyScientific(s),breakthroughs:breakthroughSynergyScientific(s),devicePassive:1+deviceBonus(s,'memory')*(1+challengeFamilyBonus(s,'no-taps')),temporary:temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='credits'?1+deviceBonus(s,'burst'):0):1};}
 export const creditRateScientific=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>{if(!s)return ScientificNumber.from(Math.max(0,hardware*BALANCE.baseRevenuePerUser*quality(level)));return scientificProduct(usersRateScientific(s),...Object.values(creditFactors(s,now,temporary)));};
 export const creditRate=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>creditRateScientific(hardware,level,s,now,temporary).toNumber(MAX_ECONOMY_VALUE);
-export const equipmentSlots=['processor','core','research','processorAux','coreAux','researchAux'] as const;
+export const equipmentSlots=['processor','core','research','processorAux','coreAux','researchAux','universal1','universal2'] as const;
 export const slotFamily=(slot:ItemSlot):ItemFamily=>slot.endsWith('Aux')?slot.slice(0,-3) as ItemFamily:slot as ItemFamily;
-export const equipmentSlotCount=(s:GameState)=>s.prestigeCount<1?0:Math.min(6,Math.max(1,s.unlockedEquipmentSlots??0,1+(s.purchasedEquipmentSlots??0),hasNode(s,'manufacturing8',1)?6:hasNode(s,'manufacturing7',1)?5:hasNode(s,'manufacturing6',1)?4:hasNode(s,'manufacturing5',1)?3:hasNode(s,'manufacturing1',1)?2:1));
-export function productionBreakdown(s:GameState,now=s.savedAt){const hardware=hardwareIds.map(id=>({id,count:s.hardwareCounts[id],milestone:milestoneFactor(id,s.hardwareCounts[id]),compute:classCompute(s,id)})),rawCompute=hardware.reduce((n,row)=>n+row.compute,0),computeGlobal=rawCompute?computeRate(s.hardware,s)/rawCompute:1,modelQuality=quality(s.qualityLevel),modelEfficiency=efficiency(s.efficiencyLevel),prestige=permanentFactor(s),achievement=achievementSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),creditFamily=breakthroughSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),legacyInfrastructure=legacyInfrastructureMultiplier(s),ownershipCredits=hardwareOwnershipCreditMultiplier(s),itemBonuses={credits:equippedBonus(s,'credits'),compute:equippedBonus(s,'compute'),data:equippedBonus(s,'data'),research:equippedBonus(s,'research'),training:equippedBonus(s,'training'),experiment:equippedBonus(s,'experiment')},items=creditFactors(s,now).items.toNumber(MAX_ECONOMY_VALUE),temporary=creditFactors(s,now).temporary;return{itemCombinations:itemCombinationQuotes(s),factors:{compute:computeFactors(s),users:usersFactors(s),credits:creditFactors(s,now),dataAdditive:dataBonusTerms(s)},hardware,rawCompute,computeGlobal,legacyInfrastructure,ownershipCredits,modelQuality,modelEfficiency,prestige,achievement,creditFamily,itemBonuses,items,temporary,synergies:{infrastructure:infrastructureSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),hardwareOwnership:hardwareOwnershipSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),data:dataSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),model:modelSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),int:1,artifacts:artifactSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE)},passive:creditRate(s.hardware,s.level,s,now),tap:tapCredits(s,now)};}
+export const equipmentSlotCount=(s:GameState)=>s.progression?.version===2?activeSlotIds(s).length:s.prestigeCount<1?0:Math.min(6,Math.max(1,s.unlockedEquipmentSlots??0,1+(s.purchasedEquipmentSlots??0),hasNode(s,'manufacturing8',1)?6:hasNode(s,'manufacturing7',1)?5:hasNode(s,'manufacturing6',1)?4:hasNode(s,'manufacturing5',1)?3:hasNode(s,'manufacturing1',1)?2:1));
+export function productionBreakdown(s:GameState,now=s.savedAt){const hardware=hardwareIds.map(id=>({id,count:s.hardwareCounts[id],milestone:milestoneFactor(id,s.hardwareCounts[id]),compute:classCompute(s,id)})),rawCompute=hardware.reduce((n,row)=>n+row.compute,0),computeGlobal=rawCompute?computeRate(s.hardware,s)/rawCompute:1,modelQuality=effectiveQuality(s),modelEfficiency=effectiveEfficiency(s),prestige=permanentFactor(s),achievement=achievementSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),creditFamily=breakthroughSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),legacyInfrastructure=legacyInfrastructureMultiplier(s),ownershipCredits=hardwareOwnershipCreditMultiplier(s),itemBonuses={credits:equippedBonus(s,'credits'),compute:equippedBonus(s,'compute'),data:equippedBonus(s,'data'),research:equippedBonus(s,'research'),training:equippedBonus(s,'training'),experiment:equippedBonus(s,'experiment')},items=creditFactors(s,now).items.toNumber(MAX_ECONOMY_VALUE),temporary=creditFactors(s,now).temporary;return{itemCombinations:itemCombinationQuotes(s),factors:{compute:computeFactors(s),users:usersFactors(s),credits:creditFactors(s,now),dataAdditive:dataBonusTerms(s)},hardware,rawCompute,computeGlobal,legacyInfrastructure,ownershipCredits,modelQuality,modelEfficiency,prestige,achievement,creditFamily,itemBonuses,items,temporary,synergies:{infrastructure:infrastructureSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),hardwareOwnership:hardwareOwnershipSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),data:dataSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),model:modelSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE),int:1,artifacts:artifactSynergyScientific(s).toNumber(MAX_ECONOMY_VALUE)},passive:creditRate(s.hardware,s.level,s,now),tap:tapCredits(s,now)};}
 /** Current class contribution after the same global multipliers used by computeRate. */
 export const hardwareClassComputeRate=(s:GameState,id:HardwareId)=>scientificProduct(classComputeScientific(s,id),...Object.values(computeFactors(s))).toNumber(MAX_ECONOMY_VALUE);
 /** Total compute-rate delta for a prospective bulk purchase, including milestone/synergy changes. */
@@ -1288,7 +2847,7 @@ export const hardwareClassComputeRate=(s:GameState,id:HardwareId)=>scientificPro
 export function hardwareOwnershipAfter(s:GameState,id:HardwareId,count:number){const hardwareCounts={...s.hardwareCounts,[id]:s.hardwareCounts[id]+count};return{hardwareCounts,hardware:Object.values(hardwareCounts).reduce((sum,owned)=>sum+owned,0),discovered:s.discovered.includes(id)?s.discovered:[...s.discovered,id],retention:{...s.retention,hardwareMasteryXp:{...s.retention.hardwareMasteryXp,[id]:(s.retention.hardwareMasteryXp[id]??0)+count}}};}
 export const hardwarePurchaseComputeGain=(s:GameState,id:HardwareId,count:number)=>{if(!Number.isSafeInteger(count)||count<1)return 0;const after={...s,...hardwareOwnershipAfter(s,id,count)};return computeRateScientific(after.hardware,after).subtract(computeRateScientific(s.hardware,s)).toNumber(MAX_ECONOMY_VALUE);};
 /** Training advances strictly by elapsed seconds; legacy compute, tap, item and timed boosts do not shorten it. */
-export const trainingRate=(_hardware:number,_s?:GameState,_now=0,_temporary=true)=>1;
+export const trainingRate=(_hardware:number,_s?:GameState,_now=0,_temporary=true)=>_s?.progression?.version===2?progressionTrainingRate(_s):1;
 export const trainingDurationSeconds=(level:number)=>Math.min(BALANCE.trainingDurationCapSeconds,BALANCE.trainingDurationBaseSeconds*BALANCE.trainingDurationGrowth**Math.max(0,level-1));
 export const trainingGoalSeconds=trainingDurationSeconds;
 export const trainingGoal=(level:number)=>trainingDurationSeconds(level+1);
@@ -1308,14 +2867,14 @@ export function trainingCostBonusSources(s:GameState,now=s.savedAt){
  return sources;
 }
 /** At exponent 16 and above, unit rounding is below binary64 representation precision. */
-export const scientificCeil=(value:ScientificNumber)=>value.isZero()||value.exponent>=16?value:ScientificNumber.from(Math.ceil(value.toNumber()));
+export const scientificCeil=(value:ScientificNumber)=>{if(value.isZero()||value.exponent>=16)return value;const n=value.toNumber(),nearest=Math.round(n);return ScientificNumber.from(Math.abs(n-nearest)<=Number.EPSILON*Math.max(1,n)*16?nearest:Math.ceil(n));};
 export const trainingBaseDataCostScientific=(targetLevel:number)=>ScientificNumber.from(BALANCE.trainingDataBase).multiply(ScientificNumber.from(BALANCE.trainingDataGrowth).pow(targetLevel-1));
 export function introOffer(s:GameState,kind:'quality'|'research'){
  if(s.retention.activeRun||s.challengeSession||s.prestigeCount>0||s.axiomResetCount>0||s.story.tutorial!=='active')return false;
  return kind==='quality'?!s.intro.qualityUsed&&s.story.target==='training'&&s.qualityLevel===0:!s.intro.researchUsed&&s.story.target==='research'&&s.researchLevels.dataGeneration===0;
 }
 export function trainingCostQuote(s:GameState,track:TrainingTrack,now=s.savedAt){
- const targetLevel=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,sources:Record<string,number>={...trainingCostBonusSources(s,now),...(s.deviceProgress.lastTrack&&s.deviceProgress.lastTrack!==track?{'device:curriculum':deviceBonus(s,'curriculum')}:{})},bonusTotal=Object.values(sources).reduce((sum,value)=>sum+value,0),factor=Math.max(BALANCE.trainingCostFloor,1/(1+bonusTotal)),baseCost=trainingBaseCreditCostScientific(targetLevel),intro=track==='quality'&&introOffer(s,'quality'),cost=intro?ScientificNumber.zero():scientificCeil(baseCost.multiplyNumber(factor));
+ const targetLevel=(track==='quality'?s.qualityLevel:track==='integration'?integrationLevel(s):s.efficiencyLevel)+1,sources:Record<string,number>={...(s.progression?.version===2?{}:trainingCostBonusSources(s,now)),...(s.deviceProgress.lastTrack&&s.deviceProgress.lastTrack!==track?{'device:curriculum':deviceBonus(s,'curriculum')}:{})},bonusTotal=Object.values(sources).reduce((sum,value)=>sum+value,0),factor=Math.max(BALANCE.trainingCostFloor,1/(1+bonusTotal)),baseCost=track==='integration'?ScientificNumber.from(BALANCE.progression.trainingGBase).multiply(ScientificNumber.from(BALANCE.progression.trainingGGrowth).pow(targetLevel-1)):trainingBaseCreditCostScientific(targetLevel),intro=track==='quality'&&introOffer(s,'quality'),cost=intro?ScientificNumber.zero():scientificCeil(baseCost.multiplyNumber(factor));
  return{intro,targetLevel,sources,bonusTotal,factor,baseCost,cost,discount:1-factor,capped:factor===BALANCE.trainingCostFloor};
 }
 /** Same rounded prices with only the additional build contribution removed; individual effects stay. */
@@ -1323,25 +2882,25 @@ export function trainingCombinationComparison(s:GameState,track:TrainingTrack){
  const after=trainingCostQuote(s,track),combination=itemCombinationQuote(s,'learning-pipeline'),beforeBonus=Object.entries(after.sources).filter(([key])=>key!==`combination:${combination.id}`).reduce((n,[,value])=>n+value,0),beforeFactor=Math.max(BALANCE.trainingCostFloor,1/(1+beforeBonus));
  return{track,combination,before:{bonusTotal:beforeBonus,factor:beforeFactor,cost:scientificCeil(after.baseCost.multiplyNumber(beforeFactor)),capped:beforeFactor===BALANCE.trainingCostFloor},after};
 }
-export const trainingDataCostScientific=(_s:GameState,_track:TrainingTrack)=>ScientificNumber.zero();
+export const trainingDataCostScientific=(s:GameState,track:TrainingTrack)=>track==='integration'?scientificCeil(ScientificNumber.from(BALANCE.progression.trainingGData).multiply(ScientificNumber.from(BALANCE.progression.trainingGDataGrowth).pow(integrationLevel(s)))):ScientificNumber.zero();
 export const trainingDataCost=(s:GameState,track:TrainingTrack)=>trainingDataCostScientific(s,track).toNumber(MAX_ECONOMY_VALUE);
-export function trainingDurationQuote(s:GameState,track?:TrainingTrack){const baseDuration=trainingDurationSeconds((track==='quality'?s.qualityLevel:track==='efficiency'?s.efficiencyLevel:s.level)+1),modifiers=researchModifiers(s),alignment=modifiers.alignment,modelTransfer=modifiers.modelTransfer;return{baseDuration,alignment,modelTransfer,runStart:s.runTrainingStarted+1,duration:track==='quality'&&introOffer(s,'quality')?BALANCE.introTrainingSeconds:baseDuration*alignment*modelTransfer};}
+export function trainingDurationQuote(s:GameState,track?:TrainingTrack){if(s.progression?.version===2){const c=BALANCE.progression,n=(track==='quality'?s.qualityLevel:track==='efficiency'?s.efficiencyLevel:integrationLevel(s));const baseDuration=Math.min(c.trainingCap,(track==='integration'?c.integrationSeconds:c.trainingSeconds)*(track==='integration'?c.integrationGrowth:c.trainingGrowth)**n);return{baseDuration,alignment:1,modelTransfer:1,runStart:s.runTrainingStarted+1,duration:track==='quality'&&introOffer(s,'quality')?BALANCE.introTrainingSeconds:baseDuration};}const baseDuration=trainingDurationSeconds((track==='quality'?s.qualityLevel:track==='efficiency'?s.efficiencyLevel:s.level)+1),modifiers=researchModifiers(s),alignment=modifiers.alignment,modelTransfer=modifiers.modelTransfer;return{baseDuration,alignment,modelTransfer,runStart:s.runTrainingStarted+1,duration:track==='quality'&&introOffer(s,'quality')?BALANCE.introTrainingSeconds:baseDuration*alignment*modelTransfer};}
 export const trainingWork=(s:GameState,track?:TrainingTrack)=>trainingDurationQuote(s,track).duration;
 export function trainingPreview(s:GameState,track:TrainingTrack){
- const valid=track==='quality'||track==='efficiency',level=(track==='quality'?s.qualityLevel:s.efficiencyLevel)+1,quote=trainingCostQuote(s,track),cost=valid?quote.cost:ScientificNumber.zero(),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'credits'),cost,creditRateScientific(s.hardware,s.level,s)):unavailableAffordability(cost),reason=track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked?'challenge-rule':!ledgerValid?'invalid-resources':!valid?'invalid-track':s.activeTraining?'training-active':!resources.affordable?'credits':null;
- return{...quote,durationBasis:trainingDurationQuote(s,track),track,level,cost,duration:trainingWork(s,track),resources,reason,allowed:reason===null,effect:track==='quality'?quality(level)/quality(level-1):efficiency(level)/efficiency(level-1)};
+ const valid=track==='quality'||track==='efficiency'||track==='integration',level=(track==='quality'?s.qualityLevel:track==='integration'?integrationLevel(s):s.efficiencyLevel)+1,quote=trainingCostQuote(s,track),cost=valid?quote.cost:ScientificNumber.zero(),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'credits'),cost,creditRateScientific(s.hardware,s.level,s)):unavailableAffordability(cost),reason=track==='integration'&&(!hasProgressionNode(s,'T04')||integrationLevel(s)>=integrationLimit(s)||s.retention.activeRun?.id==='no-items')?'challenge-rule':track==='integration'&&exactEconomyValue(s,'data').compare(trainingDataCostScientific(s,track))<0?'data':track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked?'challenge-rule':!ledgerValid?'invalid-resources':!valid?'invalid-track':s.activeTraining?'training-active':!resources.affordable?'credits':null;
+ return{...quote,durationBasis:trainingDurationQuote(s,track),track,level,cost,duration:trainingWork(s,track),resources,reason,allowed:reason===null,effect:track==='integration'?integrationBase(s):track==='quality'?effectiveQuality(s,level)/effectiveQuality(s,level-1):effectiveEfficiency(s,level)/effectiveEfficiency(s,level-1)};
 }
-export function startTraining(s:GameState,track:TrainingTrack){if(track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked)return s;const preview=trainingPreview(s,track);if(!preview.allowed)return s;const creditCostExact=preview.cost,creditCost=creditCostExact.toNumber(MAX_ECONOMY_VALUE),dataCostExact=ScientificNumber.zero(),dataCost=0,duration=preview.duration;const paid=spendScientificResources(s,creditCostExact);return addEvent({...paid,intro:{...s.intro,qualityUsed:s.intro.qualityUsed||preview.intro},deviceProgress:{...s.deviceProgress,lastTrack:track},runTrainingStarted:s.runTrainingStarted+1,training:0,activeTraining:{...(preview.intro?{intro:true as const}:{}),track,durationBasis:preview.durationBasis,paymentResource:'credits',creditCostExact:creditCostExact.toJSON(),costBasis:{resource:'credits',targetLevel:preview.targetLevel,baseDataCostExact:preview.baseCost.toJSON(),factor:preview.factor,bonusTotal:preview.bonusTotal,sources:preview.sources},creditCost,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{intro:preview.intro,track,baseDataCostExact:preview.baseCost.toScientificString(16),trainingCostFactor:preview.factor,trainingBonusTotal:preview.bonusTotal,trainingBonusSources:JSON.stringify(preview.sources),creditCost,dataCost,level:track==='quality'?s.qualityLevel:s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactCreditCost:creditCostExact.toScientificString(16),exactDataCost:dataCostExact.toScientificString(16)});}
-export function queueTraining(s:GameState,track:TrainingTrack){if(!trainingQueueUnlocked(s)||s.trainingQueue.length>=2)return s;const base=track==='quality'?s.qualityLevel:s.efficiencyLevel,active=s.activeTraining?.track===track?1:0,planned=s.trainingQueue.filter(job=>job.track===track).length,targetLevel=base+active+planned+1;return{...s,trainingQueue:[...s.trainingQueue,{track,targetLevel}]};}
+export function startTraining(s:GameState,track:TrainingTrack){if(track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked)return s;const preview=trainingPreview(s,track);if(!preview.allowed)return s;const creditCostExact=preview.cost,creditCost=creditCostExact.toNumber(MAX_ECONOMY_VALUE),dataCostExact=trainingDataCostScientific(s,track),dataCost=dataCostExact.toNumber(),duration=preview.duration;const paid=spendScientificResources(s,creditCostExact,dataCostExact);return addEvent({...paid,intro:{...s.intro,qualityUsed:s.intro.qualityUsed||preview.intro},deviceProgress:{...s.deviceProgress,lastTrack:track},runTrainingStarted:s.runTrainingStarted+1,training:0,activeTraining:{...(s.progression?.version===2?{modelTransferEligible:s.completedResearch.includes('modelTransfer')&&s.runTrainingStarted<BALANCE.researchTransferStarts}:{}),...(preview.intro?{intro:true as const}:{}),track,durationBasis:preview.durationBasis,paymentResource:'credits',creditCostExact:creditCostExact.toJSON(),costBasis:{resource:'credits',targetLevel:preview.targetLevel,baseDataCostExact:preview.baseCost.toJSON(),factor:preview.factor,bonusTotal:preview.bonusTotal,sources:preview.sources},creditCost,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{intro:preview.intro,track,baseDataCostExact:preview.baseCost.toScientificString(16),trainingCostFactor:preview.factor,trainingBonusTotal:preview.bonusTotal,trainingBonusSources:JSON.stringify(preview.sources),creditCost,dataCost,level:track==='quality'?s.qualityLevel:s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactCreditCost:creditCostExact.toScientificString(16),exactDataCost:dataCostExact.toScientificString(16)});}
+export function queueTraining(s:GameState,track:TrainingTrack){if(!trainingQueueUnlocked(s)||s.trainingQueue.length>=2)return s;const base=track==='quality'?s.qualityLevel:track==='integration'?integrationLevel(s):s.efficiencyLevel,active=s.activeTraining?.track===track?1:0,planned=s.trainingQueue.filter(job=>job.track===track).length,targetLevel=base+active+planned+1;return{...s,trainingQueue:[...s.trainingQueue,{track,targetLevel}]};}
 export function removeQueuedTraining(s:GameState,index:number){if(index<0||index>=s.trainingQueue.length)return s;const removed=s.trainingQueue[index],queue=s.trainingQueue.filter((job,i)=>i<index||job.track!==removed.track);return{...s,trainingQueue:queue};}
-export function startQueuedTrainingIfAffordable(s:GameState){if(s.activeTraining||!s.trainingQueue.length)return s;const job=s.trainingQueue[0],level=job.track==='quality'?s.qualityLevel:s.efficiencyLevel;if(job.targetLevel!==level+1)return s;const started=startTraining(s,job.track);return started===s?s:{...started,trainingQueue:s.trainingQueue.slice(1)};}
+export function startQueuedTrainingIfAffordable(s:GameState){if(s.activeTraining||!s.trainingQueue.length)return s;const job=s.trainingQueue[0],level=job.track==='quality'?s.qualityLevel:job.track==='integration'?integrationLevel(s):s.efficiencyLevel;if(job.targetLevel!==level+1)return s;const started=startTraining(s,job.track);return started===s?s:{...started,trainingQueue:s.trainingQueue.slice(1)};}
 export function passiveComponentWeights(s:GameState){const accessible=(['circuits','copperCoils','siliconWafers','titaniumBolts','photonicLenses','graphene','nanotubes','superconductors','neuralCrystals','quantumCores'] as ComponentId[]).slice(0,Math.max(1,Math.min(componentIds.length,s.discovered.length))),target=hasNode(s,'componentScanner',1)&&s.scannerTarget&&accessible.includes(s.scannerTarget)?s.scannerTarget:null,total=accessible.reduce((sum,id)=>sum+BALANCE.componentSources.hardware[id]*(id===target?2:1),0);return accessible.map(id=>({id,weight:BALANCE.componentSources.hardware[id]*(id===target?2:1),chance:BALANCE.componentSources.hardware[id]*(id===target?2:1)/total,source:BALANCE.components[id].source}));}
 export function rollPassiveComponent(s:GameState,rng=Math.random){const table=passiveComponentWeights(s);let roll=rng(),picked=table.at(-1)!.id;for(const row of table){roll-=row.chance;if(roll<=0){picked=row.id;break;}}return picked;}
 export function selectScannerTarget(s:GameState,target:ComponentId|null){return !hasNode(s,'componentScanner',1)||target!==null&&!passiveComponentWeights({...s,scannerTarget:null}).some(row=>row.id===target)?s:{...s,scannerTarget:target};}
 export const axiomThresholdScientific=()=>ScientificNumber.fromJSON(BALANCE.axiom.threshold);
 export const prestigeClaimForEligibleScientific=(eligible:ScientificNumber)=>{const root=eligible.divideNumber(BALANCE.prestigeBaseRevenue).sqrt();if(root.exponent<15)return ScientificNumber.from(Math.floor(root.toNumber()+1e-12));return root;};
 export const prestigeClaimForEligible=(eligible:ScientificNumber)=>prestigeClaimForEligibleScientific(eligible).toNumber(MAX_ECONOMY_VALUE);
-export const prestigeClaimScientific=(s:GameState)=>prestigeClaimForEligibleScientific(exactEconomyValue(s,'cycleEligibleCredits'));
+export const prestigeClaimScientific=(s:GameState)=>s.progression?.version===2?progressionINTClaim(s):prestigeClaimForEligibleScientific(exactEconomyValue(s,'cycleEligibleCredits'));
 export const prestigeClaim=(s:GameState)=>prestigeClaimScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const newINTScientific=(s:GameState)=>prestigeClaimScientific(s).subtract(exactEconomyValue(s,'prestigeEntitlementClaimed'));
 export const newINT=(s:GameState)=>newINTScientific(s).toNumber(MAX_ECONOMY_VALUE);
@@ -1350,18 +2909,19 @@ export const canPrestige=(s:GameState)=>!newINTScientific(s).isZero();
 export const nextPrestigeThresholdScientific=(s:GameState)=>exactEconomyValue(s,'prestigeEntitlementClaimed').add(ScientificNumber.from(1)).pow(2).multiplyNumber(BALANCE.prestigeBaseRevenue);
 export const nextPrestigeThreshold=(s:GameState)=>nextPrestigeThresholdScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const prestigeRequirementDepth=(id:PrestigeUpgradeId,seen=new Set<PrestigeUpgradeId>()):number=>{if(seen.has(id))return 1;const requirements=BALANCE.prestigeUpgrades[id].requires as readonly PrestigeUpgradeId[];if(!requirements.length)return 1;const next=new Set(seen).add(id);return 1+Math.max(...requirements.map(required=>prestigeRequirementDepth(required,next)))};
-export const prestigeUpgradeCost=(id:PrestigeUpgradeId,_level=0)=>{if(id==='shoppingAgent')return 1;if(id==='trainingPlan'||id==='componentScanner')return 3;if(id==='milestoneMemory')return 100;if(id==='modelSynthesis')return 1000;if(id==='researchArchive')return 10000;return 10**Math.max(0,prestigeRequirementDepth(id)-1)};
+export const prestigeUpgradeCost=(id:PrestigeUpgradeId,_level=0)=>{if(Object.hasOwn(BALANCE.progression.nodes,id))return BALANCE.progression.nodes[id as keyof typeof BALANCE.progression.nodes].cost;if(id==='shoppingAgent')return 1;if(id==='trainingPlan'||id==='componentScanner')return 3;if(id==='milestoneMemory')return 100;if(id==='modelSynthesis')return 1000;if(id==='researchArchive')return 10000;return 10**Math.max(0,prestigeRequirementDepth(id)-1)};
 export const prestigeUpgradeCostScientific=(id:PrestigeUpgradeId,level=0)=>ScientificNumber.from(prestigeUpgradeCost(id,level));
-export const intYieldFactor=(s:GameState)=>{const runFactor=1+(hasNode(s,'milestoneMemory',1)?Math.min(1,s.runMilestoneEdges.length*.02):0)+(hasNode(s,'modelSynthesis',1)?Math.min(1.5,s.runTrainingCompleted*.03):0)+(hasNode(s,'researchArchive',1)?Math.min(2,s.runResearchCompleted*.05):0)+(equippedItems(s).find(item=>item.type==='insight-archive')?specialItemEffectQuote(s,equippedItems(s).find(item=>item.type==='insight-archive')!)!.appliedIntWeightContribution:0),resonance=1+.1*(s.axiomUpgradeLevels?.axiomResonance??0);return runFactor*resonance*resonance;};
+export const intYieldFactor=(s:GameState)=>{if(s.progression?.version===2)return progressionINTRate(s);const runFactor=1+(hasNode(s,'milestoneMemory',1)?Math.min(1,s.runMilestoneEdges.length*.02):0)+(hasNode(s,'modelSynthesis',1)?Math.min(1.5,s.runTrainingCompleted*.03):0)+(hasNode(s,'researchArchive',1)?Math.min(2,s.runResearchCompleted*.05):0)+(equippedItems(s).find(item=>item.type==='insight-archive')?specialItemEffectQuote(s,equippedItems(s).find(item=>item.type==='insight-archive')!)!.appliedIntWeightContribution:0),resonance=1+.1*(s.axiomUpgradeLevels?.axiomResonance??0);return runFactor*resonance*resonance;};
 export function selectOperatingProfile(s:GameState,id:OperatingProfileId){return BALANCE.operatingProfiles[id]?{...s,operatingProfile:id}:s;}
 export const newResearchKeys=['dataPipeline','distributedInference','modelTransfer','materialRecycling','researchScheduling'] as const;
 export const researchDuration=(id:ResearchProjectId)=>newResearchKeys.includes(id as typeof newResearchKeys[number])?BALANCE.researchKeyDurationSeconds:researchDurationForLevel(researchCategory(id),1);
 export const researchProjectDataCostScientific=(id:ResearchProjectId)=>researchDataCostForLevelScientific(researchCategory(id),newResearchKeys.includes(id as typeof newResearchKeys[number])?BALANCE.researchKeyPricePower+1:1);
+
 export const researchProjectDataCost=(id:ResearchProjectId)=>researchProjectDataCostScientific(id).toNumber(MAX_ECONOMY_VALUE);
-export const researchLabCount=(s:GameState)=>Math.min(activeChallengeRules(s)?.labs??BALANCE.researchLabMax,1+(hasNode(s,'labs1',1)?1:0)+s.purchasedResearchLabs);
-export function researchModifiers(s:GameState){return{alignment:s.completedResearch.includes('alignment')?BALANCE.researchAlignmentFactor:1,modelTransfer:s.completedResearch.includes('modelTransfer')&&s.runTrainingStarted<BALANCE.researchTransferStarts?BALANCE.researchTransferFactor:1,analysisCost:s.completedResearch.includes('dataPipeline')?BALANCE.researchAnalysisCostFactor:1,distributedInference:s.completedResearch.includes('distributedInference')||hasNode(s,'computeNetwork',1),materialRecycling:s.completedResearch.includes('materialRecycling')?Math.min(BALANCE.recoveryFraction,BALANCE.researchRecyclingFraction*(1+challengeFamilyBonus(s,'closed-supply-chain'))):0,queueCapacity:s.completedResearch.includes('operations')?4:2,director:hasNode(s,'labs4',1)&&s.completedResearch.includes('researchScheduling')};}
+export const researchLabCount=(s:GameState)=>s.progression?.version===2?Math.min(s.retention.activeRun?.id==='serial-science'?1:Infinity,1+['F01','F04','F08'].filter(id=>hasProgressionNode(s,id)).length+s.purchasedResearchLabs):Math.min(activeChallengeRules(s)?.labs??BALANCE.researchLabMax,1+(hasNode(s,'labs1',1)?1:0)+s.purchasedResearchLabs);
+export function researchModifiers(s:GameState){if(s.progression?.version===2)return{alignment:s.completedResearch.includes('alignment')?1/.9:1,modelTransfer:1,analysisCost:s.completedResearch.includes('dataPipeline')?.8:1,distributedInference:s.completedResearch.includes('distributedInference'),materialRecycling:s.completedResearch.includes('materialRecycling')?.05:0,queueCapacity:(hasProgressionNode(s,'F02')?6:2)+(s.completedResearch.includes('operations')?2:0),director:hasProgressionNode(s,'F05')};return{alignment:s.completedResearch.includes('alignment')?BALANCE.researchAlignmentFactor:1,modelTransfer:s.completedResearch.includes('modelTransfer')&&s.runTrainingStarted<BALANCE.researchTransferStarts?BALANCE.researchTransferFactor:1,analysisCost:s.completedResearch.includes('dataPipeline')?BALANCE.researchAnalysisCostFactor:1,distributedInference:s.completedResearch.includes('distributedInference')||hasNode(s,'computeNetwork',1),materialRecycling:s.completedResearch.includes('materialRecycling')?Math.min(BALANCE.recoveryFraction,BALANCE.researchRecyclingFraction*(1+challengeFamilyBonus(s,'closed-supply-chain'))):0,queueCapacity:s.completedResearch.includes('operations')?4:2,director:hasNode(s,'labs4',1)&&s.completedResearch.includes('researchScheduling')};}
 /** Applied permanent contributions only; economic magnitudes stay scientific. */
-export function researchPerformanceQuote(s:GameState,now=s.savedAt,id?:ResearchId){
+export function researchPerformanceQuote(s:GameState,now=s.savedAt,id?:ResearchId){if(s.progression?.version===2){const speed=progressionResearchSpeed(s);return{sources:{progression:ScientificNumber.from(Math.max(0,speed-1))},bonusTotal:ScientificNumber.from(Math.max(0,speed-1)),laborFactor:speed,temporaryFactors:{labBoost:s.labBoostUntil>now?2:1,overclock:1,deviceSwitch:id&&s.deviceProgress.lastResearchArea&&researchAreaFor(id)!==s.deviceProgress.lastResearchArea?1+deviceBonus(s,'areaSwitch'):1}};}
  const sources:Record<string,ScientificNumber>={};
  if(s.retention.activeRun?.id!=='no-items'){
   const amplifier=1+deepPrestigeBonus(s,'manufacturing');
@@ -1384,11 +2944,11 @@ export function researchPrerequisites(id:ResearchId):{id:ResearchId;level:number
  if(keys[id])return keys[id]!;if(!isRepeatableResearch(id))return[];const required=BALANCE.repeatableResearch[id].requires;return required?[{id:required,level:1}]:[];
 }
 export const researchLevel=(s:GameState,id:ResearchId)=>isRepeatableResearch(id)?s.researchLevels[id]:s.completedResearch.includes(id)?1:0;
-export const researchMissingRequirements=(s:GameState,id:ResearchId)=>researchPrerequisites(id).filter(r=>researchLevel(s,r.id)<r.level);
+export const researchMissingRequirements=(s:GameState,id:ResearchId)=>(s.progression?.version===2?((BALANCE.progression.research as Record<string,{requires:readonly (readonly [string,number])[]}>)[id]??(BALANCE.progression.projects as Record<string,{requires:readonly (readonly [string,number])[]}>)[id]).requires.map(([id,level])=>({id:id as ResearchId,level})):researchPrerequisites(id)).filter(r=>researchLevel(s,r.id)<r.level);
 export const researchRequirement=(s:GameState,id:ResearchId)=>researchMissingRequirements(s,id)[0]?.id??null;
 export function researchQuote(s:GameState,id:ResearchId){
  const repeat=isRepeatableResearch(id),known=repeat||Object.hasOwn(BALANCE.researchProjects,id);if(!known)return null;
- const level=repeat?s.researchLevels[id]+1:1,slot=s.researchLabs.findIndex((x,i)=>i<researchLabCount(s)&&x===null),requirements=researchMissingRequirements(s,id),requirement=requirements[0]?.id??null,running=s.researchLabs.find(x=>x?.id===id),done=!repeat&&s.completedResearch.includes(id),intro=id==='dataGeneration'&&introOffer(s,'research'),cost=intro?ScientificNumber.zero():repeat?repeatableResearchDataCostScientific(id,level):researchProjectDataCostScientific(id),access=researchAccess(s,id),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),performance=researchPerformanceQuote(s,s.savedAt,id),baseDuration=repeat?repeatableResearchDuration(id,level):researchDuration(id),rawDuration=baseDuration/performance.laborFactor/performance.temporaryFactors.labBoost/performance.temporaryFactors.overclock/performance.temporaryFactors.deviceSwitch,duration=intro?BALANCE.introResearchSeconds:Math.max(BALANCE.researchMinimumSeconds,rawDuration),reason=!ledgerValid?'invalid-resources':activeChallengeRules(s)?.alternateResearch&&s.deviceProgress.lastResearchArea===researchAreaFor(id)?'challenge-rule':!access.allowed?'area':requirement?'requirement':done?'completed':running?'running':slot<0?'lab':!resources.affordable?'data':null;
+ const level=repeat?s.researchLevels[id]+1:1,slot=(()=>{const empty=s.researchLabs.findIndex((x,i)=>i<researchLabCount(s)&&x===null);return empty<0&&s.progression?.version===2&&s.researchLabs.length<researchLabCount(s)?s.researchLabs.length:empty;})(),requirements=researchMissingRequirements(s,id),requirement=requirements[0]?.id??null,running=s.researchLabs.find(x=>x?.id===id),done=!repeat&&s.completedResearch.includes(id),intro=id==='dataGeneration'&&introOffer(s,'research'),cost=intro?ScientificNumber.zero():s.progression?.version===2?scientificCeil((repeat?ScientificNumber.from(BALANCE.progression.research[id].base).multiply(ScientificNumber.from(BALANCE.progression.researchGrowth).pow(level-1)):ScientificNumber.from(BALANCE.progression.projects[id].cost)).multiplyNumber(hasProgressionNode(s,'F07')?.85:1)):repeat?repeatableResearchDataCostScientific(id,level):researchProjectDataCostScientific(id),access=researchAccess(s,id),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),performance=researchPerformanceQuote(s,s.savedAt,id),baseDuration=s.progression?.version===2?(repeat?Math.min(BALANCE.progression.researchCap,BALANCE.progression.research[id].seconds*BALANCE.progression.researchTimeGrowth**(level-1)):BALANCE.progression.projects[id].seconds):repeat?repeatableResearchDuration(id,level):researchDuration(id),rawDuration=baseDuration/performance.laborFactor/performance.temporaryFactors.labBoost/performance.temporaryFactors.overclock/performance.temporaryFactors.deviceSwitch,duration=intro?BALANCE.introResearchSeconds:Math.max(s.progression?.version===2?.001:BALANCE.researchMinimumSeconds,rawDuration),reason=!ledgerValid?'invalid-resources':activeChallengeRules(s)?.alternateResearch&&s.deviceProgress.lastResearchArea===researchAreaFor(id)?'challenge-rule':!access.allowed?'area':requirement?'requirement':done?'completed':running?'running':slot<0?'lab':!resources.affordable?'data':null;
  return{id,intro,access,level,slot,requirements,requirement,running,done,cost,resources,baseDuration,...performance,minimumApplied:rawDuration<=BALANCE.researchMinimumSeconds,duration,reason,allowed:reason===null};
 }
 export const researchPreview=researchQuote;
@@ -1397,7 +2957,7 @@ export const researchQueueCapacity=(s:GameState)=>researchModifiers(s).queueCapa
 export function researchQueuePreview(s:GameState,id:ResearchId){const quote=researchQuote(s,id),reason=!quote?'unknown':!researchQueueUnlocked(s)?'locked':!quote.access.allowed?'area':quote.done?'completed':quote.requirement?'requirement':quote.running?'running':s.researchQueue.includes(id)?'queued':s.researchQueue.length>=researchQueueCapacity(s)?'full':null;return{allowed:reason===null,reason,level:quote?.level??1};}
 export function queueResearchProject(s:GameState,id:ResearchId){return researchQueuePreview(s,id).allowed?{...s,researchQueue:[...s.researchQueue,id]}:s;}
 export function removeQueuedResearch(s:GameState,target:number|string){const index=typeof target==='string'?s.researchQueue.findIndex(id=>id===target):target;return !Number.isSafeInteger(index)||index<0||index>=s.researchQueue.length?s:{...s,researchQueue:s.researchQueue.filter((_,i)=>i!==index)};}
-export function startResearchProject(s:GameState,id:ResearchId){const preview=researchQuote(s,id);if(!preview?.allowed)return s;const {slot,level,duration}=preview,dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),jobId=`research-${s.nextId}`,quoteBasis:ResearchStartBasis={baseDuration:preview.baseDuration,sources:Object.fromEntries(Object.entries(preview.sources).map(([id,v])=>[id,v.toJSON()])),bonusTotal:preview.bonusTotal.toJSON(),laborFactor:preview.laborFactor,temporaryFactors:preview.temporaryFactors,minimumApplied:preview.minimumApplied};const labs=[...s.researchLabs];labs[slot]={...(preview.intro?{intro:true as const}:{}),id,jobId,quoteBasis,level,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,durationSeconds:duration,dataCost,dataCostExact:dataCostExact.toJSON()};const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,intro:{...s.intro,researchUsed:s.intro.researchUsed||preview.intro},deviceProgress:{...s.deviceProgress,lastResearchArea:researchAreaFor(id)??null},nextId:s.nextId+1,researchLabs:labs,lifetime:{...s.lifetime,researchStarted:s.lifetime.researchStarted+1}},'research-start',s.savedAt,{intro:preview.intro,id,jobId,level,labId:slot,dataCost,durationSeconds:duration,baseDuration:preview.baseDuration,quoteBasis:JSON.stringify(quoteBasis),startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
+export function startResearchProject(s:GameState,id:ResearchId){const original=s;s=choosePhaseModel(s,'research');const preview=researchQuote(s,id);if(!preview?.allowed)return original;const {slot,level,duration}=preview,dataCostExact=preview.cost,dataCost=dataCostExact.toNumber(MAX_ECONOMY_VALUE),jobId=`research-${s.nextId}`,quoteBasis:ResearchStartBasis={...(s.progression?.version===2?{progressionVersion:2 as const}:{}),baseDuration:preview.baseDuration,sources:Object.fromEntries(Object.entries(preview.sources).map(([id,v])=>[id,v.toJSON()])),bonusTotal:preview.bonusTotal.toJSON(),laborFactor:preview.laborFactor,temporaryFactors:preview.temporaryFactors,minimumApplied:preview.minimumApplied};const labs=[...s.researchLabs];labs[slot]={...(preview.intro?{intro:true as const}:{}),id,jobId,quoteBasis,level,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,durationSeconds:duration,dataCost,dataCostExact:dataCostExact.toJSON()};const paid=spendScientificResources(s,ScientificNumber.zero(),dataCostExact);return addEvent({...paid,intro:{...s.intro,researchUsed:s.intro.researchUsed||preview.intro},deviceProgress:{...s.deviceProgress,lastResearchArea:researchAreaFor(id)??null},nextId:s.nextId+1,researchLabs:labs,lifetime:{...s.lifetime,researchStarted:s.lifetime.researchStarted+1}},'research-start',s.savedAt,{intro:preview.intro,id,jobId,level,labId:slot,dataCost,durationSeconds:duration,baseDuration:preview.baseDuration,quoteBasis:JSON.stringify(quoteBasis),startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactDataCost:dataCostExact.toScientificString(16)});}
 export const buyResearchProject=startResearchProject;
 export function buyResearchLab(s:GameState){return s;}
 export function hardwarePurchasePreview(s:GameState,id:HardwareId,count:number|'max'=1){
@@ -1419,23 +2979,23 @@ export function buyHardwareClass(s:GameState,id:HardwareId,count:number|'max'=1)
 
  return next;
 }
-export const shoppingAgentUnlocked=(s:GameState)=>hasNode(s,'shoppingAgent',1)||s.axiomUpgrades.includes('anchoredShoppingAgent');
-export const hardwareAutobuyerUnlocked=(s:GameState,id:HardwareId)=>s.hardwareCounts[id]>=BALANCE.hardwareAutobuyerUnlock||(shoppingAgentUnlocked(s)&&(id==='calculator'||id==='sbc'));
+export const shoppingAgentUnlocked=(s:GameState)=>hasProgressionNode(s,'H01')||hasNode(s,'shoppingAgent',1)||s.axiomUpgrades.includes('anchoredShoppingAgent');
+export const hardwareAutobuyerUnlocked=(s:GameState,id:HardwareId)=>s.progression?.version===2?(s.progression.legacyAutobuyers.includes(id)||BALANCE.progression.hardwareGroups.some((g,i)=>(g as readonly string[]).includes(id)&&hasProgressionNode(s,`H0${i+1}`))):s.hardwareCounts[id]>=BALANCE.hardwareAutobuyerUnlock||(shoppingAgentUnlocked(s)&&(id==='calculator'||id==='sbc'));
 export function toggleHardwareAutobuyer(s:GameState,id:HardwareId){return hardwareAutobuyerUnlocked(s,id)?{...s,hardwareAutoBuyers:{...s.hardwareAutoBuyers,[id]:!s.hardwareAutoBuyers[id]}}:s;}
 export function buyHardware(s:GameState,count=1){return buyHardwareClass(s,'calculator',count)}
 export const classUpgradeCost=(id:HardwareId,s:GameState)=>hardwareCost(id,BALANCE.classUpgradeCount,s)*BALANCE.classUpgradeCostFactor;
 export function classUpgradePreview(s:GameState,id:HardwareId){const valid=hardwareIds.includes(id),cost=valid?hardwareCostScientific(id,BALANCE.classUpgradeCount,s).multiplyNumber(BALANCE.classUpgradeCostFactor):ScientificNumber.zero(),materials=valid?classUpgradePackageQuote(s,id):null,reason=!valid?'unknown':s.classUpgrades.includes(id)||s.materials.classUpgrades.includes(id)?'owned':s.hardwareCounts[id]<BALANCE.classUpgradeMinimum?'milestone':hardwareIds.indexOf(id)>=(activeChallengeRules(s)?.classLimit??15)?'challenge-rule':!canAffordScientificCreditCost(s,cost)?'credits':null;return{id,cost,materials,reason,allowed:reason===null};}
 export function buyClassUpgrade(s:GameState,id:HardwareId){const q=classUpgradePreview(s,id);if(!q.allowed||!q.materials?.allowed)return s;const paid=spendScientificCredits(s,q.cost);if(paid===s)return s;return addEvent(grantComponents({...paid,classUpgrades:[...s.classUpgrades,id],materials:{...s.materials,classUpgrades:[...s.materials.classUpgrades,id],hardwareRemainders:q.materials.remainders}},q.materials.components),'component-found',s.savedAt,{source:'paid-class-upgrade',hardware:id,components:JSON.stringify(q.materials.components),exactCreditCost:q.cost.toScientificString(16)},true);}
-export function addCreditsScientific(s:GameState,delta:ScientificNumber,eligible=true,production=eligible){if(!ScientificNumber.isValid(delta)||!validEconomyValues(s,eligible?['credits','runCreditsEarned','lifetimeCreditsEarned','lifetimeEligibleCredits','cycleEligibleCredits']:['credits'])||(production&&!validResourceNumber(s.lifetime.regularCredits)))return s;let next=exactSet(s,'credits',exactEconomyValue(s,'credits').add(delta));if(eligible){next=exactSet(next,'runCreditsEarned',exactEconomyValue(s,'runCreditsEarned').add(delta));next=exactSet(next,'lifetimeCreditsEarned',exactEconomyValue(s,'lifetimeCreditsEarned').add(delta));next=exactSet(next,'lifetimeEligibleCredits',exactEconomyValue(s,'lifetimeEligibleCredits').add(delta));next=exactSet(next,'cycleEligibleCredits',exactEconomyValue(s,'cycleEligibleCredits').add(delta.multiplyNumber(intYieldFactor(s))));}return {...next,lifetime:production?{...s.lifetime,regularCredits:safeEconomyAdd(s.lifetime.regularCredits,delta.toNumber(MAX_ECONOMY_VALUE))}:s.lifetime};}
+export function addCreditsScientific(s:GameState,delta:ScientificNumber,eligible=true,production=eligible){if(!ScientificNumber.isValid(delta)||!validEconomyValues(s,eligible?['credits','runCreditsEarned','lifetimeCreditsEarned','lifetimeEligibleCredits','cycleEligibleCredits']:['credits'])||(production&&!validResourceNumber(s.lifetime.regularCredits)))return s;let next=exactSet(s,'credits',exactEconomyValue(s,'credits').add(delta));if(eligible){next=exactSet(next,'runCreditsEarned',exactEconomyValue(s,'runCreditsEarned').add(delta));next=exactSet(next,'lifetimeCreditsEarned',exactEconomyValue(s,'lifetimeCreditsEarned').add(delta));next=exactSet(next,'lifetimeEligibleCredits',exactEconomyValue(s,'lifetimeEligibleCredits').add(delta));next=exactSet(next,'cycleEligibleCredits',exactEconomyValue(s,'cycleEligibleCredits').add(s.progression?.version===2?delta:delta.multiplyNumber(intYieldFactor(s))));}if(eligible&&s.progression?.version===2)next=recordINTIncome(s,next,delta);return {...next,lifetime:production?{...s.lifetime,regularCredits:safeEconomyAdd(s.lifetime.regularCredits,delta.toNumber(MAX_ECONOMY_VALUE))}:s.lifetime};}
 export function addCredits(s:GameState,value:number,eligible=true,production=eligible){return validResourceNumber(value)?addCreditsScientific(s,ScientificNumber.from(value),eligible,production):s;}
 export const impulseNetworkBonus=(s:GameState,now=s.savedAt)=>hasNode(s,'impulseNetwork',1)?creditRate(s.hardware,s.level,s,now,false)*Math.min(BALANCE.impulseNetworkCap,Math.floor(s.hardwareCounts.calculator/10)*BALANCE.impulseNetworkPerTen):0;
 export const tapPrestigeMultiplier=(s:GameState)=>1+(hasNode(s,'computeNet2',1)?.35:hasNode(s,'computeNet1',1)?.15:0)+(hasNode(s,'computeNet4',1)?.50:0)+(hasNode(s,'computeNet7',1)?.75:0);
 export const worldDropInterval=(s:GameState)=>Math.max(BALANCE.worldDropMinimumSeconds,BALANCE.worldDropSeconds/tapDropMultiplier(s));
 export const worldDropRewardFactor=(s:GameState)=>worldDropInterval(s)/Math.max(BALANCE.worldDropPreviousMinimumSeconds,BALANCE.worldDropPreviousSeconds/tapDropMultiplier(s));
 export const tapDropMultiplier=(s:GameState)=>Math.max(.25,(1+s.researchLevels.dropProtocols*BALANCE.repeatableResearch.dropProtocols.effectPerLevel)*(1+equippedBonus(s,'drop'))*(1+(hasNode(s,'analysis4',1)?.25:0)+(hasNode(s,'analysis7',1)?.50:0)));
-export const tapCreditsScientific=(s:GameState,now=s.savedAt)=>{if(s.retention.activeRun?.id==='no-taps')return ScientificNumber.zero();const activeScaling=ScientificNumber.from(1+BALANCE.tapQualityCoefficient*softcap(s.qualityLevel,25)+milestoneBonus(s,'tap')+equippedBonus(s,'tap'));const research=ScientificNumber.from(1+BALANCE.repeatableResearch.tapAmplification.effectPerLevel).pow(s.researchLevels.tapAmplification);const combo=1+Math.min(BALANCE.tapComboCap,s.overclock.taps)*BALANCE.tapComboPerTap;const crit=(s.lifetime.taps+1)%Math.max(2,Math.round(1/BALANCE.tapCritBase))===0?BALANCE.tapCritMultiplier:1;return creditRateScientific(s.hardware,s.level,s,now,false).multiplyNumber(BALANCE.tapRateFraction).add(ScientificNumber.from(BALANCE.baseTapCredits)).multiply(activeScaling).multiply(research).multiplyNumber(tapPrestigeMultiplier(s)*combo*crit).add(ScientificNumber.from(impulseNetworkBonus(s,now)));};
+export const tapCreditsScientific=(s:GameState,now=s.savedAt)=>{if(s.progression?.version===2)return nextTapCredit(s,now);if(s.retention.activeRun?.id==='no-taps')return ScientificNumber.zero();const activeScaling=ScientificNumber.from(1+BALANCE.tapQualityCoefficient*softcap(s.qualityLevel,25)+milestoneBonus(s,'tap')+equippedBonus(s,'tap'));const research=ScientificNumber.from(1+BALANCE.repeatableResearch.tapAmplification.effectPerLevel).pow(s.researchLevels.tapAmplification);const combo=1+Math.min(BALANCE.tapComboCap,s.overclock.taps)*BALANCE.tapComboPerTap;const crit=(s.lifetime.taps+1)%Math.max(2,Math.round(1/BALANCE.tapCritBase))===0?BALANCE.tapCritMultiplier:1;return creditRateScientific(s.hardware,s.level,s,now,false).multiplyNumber(BALANCE.tapRateFraction).add(ScientificNumber.from(BALANCE.baseTapCredits)).multiply(activeScaling).multiply(research).multiplyNumber(tapPrestigeMultiplier(s)*combo*crit).add(ScientificNumber.from(impulseNetworkBonus(s,now)));};
 export const tapCredits=(s:GameState,now=s.savedAt)=>tapCreditsScientific(s,now).toNumber(MAX_ECONOMY_VALUE);
-export function registerTap(s:GameState,now:number){if(s.retention.activeRun?.id==='no-taps')return s;const base=tapCreditsScientific(s,now),candidate=equippedItems(s).find(i=>i.type==='impulse-relay'),quote=candidate?specialItemEffectQuote(s,candidate):null,relay=quote?.active?candidate:undefined,paid=!base.isZero(),relayCount=(relay?.relayTaps??0)+(paid?1:0),relayBonus=relay&&paid&&relayCount%(quote!.triggerInterval as number)===0?creditRateScientific(s.hardware,s.level,s,now,false).multiplyNumber(quote!.appliedBonusSeconds):ScientificNumber.zero(),total=base.add(relayBonus),reward=total.toNumber(MAX_ECONOMY_VALUE),inventory=relay&&paid?s.inventory.map(i=>i.id===relay.id?{...i,relayTaps:relayCount}:i):s.inventory,nextTaps=s.overclock.taps+1,triggered=nextTaps>=BALANCE.overclockTaps,duration=BALANCE.overclockSeconds*(1+milestoneBonus(s,'overclock'))*(1+deviceBonus(s,'overclockDuration')),overclock=triggered?{...s.overclock,taps:0,charged:false,activeUntil:now+duration*1000,cooldownUntil:now+duration*1000}:{...s.overclock,taps:nextTaps,charged:false};const feedback=now-s.feedback.windowStartedAt>=60000?{windowStartedAt:now,work:0}:s.feedback;return addMetrics(addCreditsScientific({...s,inventory,lifetime:{...s.lifetime,taps:s.lifetime.taps+1,overclocks:s.lifetime.overclocks+(triggered?1:0)},feedback,overclock},total,true,false),now,{taps:1,tap:reward});}
+export function registerTap(s:GameState,now:number){if(s.progression?.version===2)return progressionTap(s,now);if(s.retention.activeRun?.id==='no-taps')return s;const base=tapCreditsScientific(s,now),candidate=equippedItems(s).find(i=>i.type==='impulse-relay'),quote=candidate?specialItemEffectQuote(s,candidate):null,relay=quote?.active?candidate:undefined,paid=!base.isZero(),relayCount=(relay?.relayTaps??0)+(paid?1:0),relayBonus=relay&&paid&&relayCount%(quote!.triggerInterval as number)===0?creditRateScientific(s.hardware,s.level,s,now,false).multiplyNumber(quote!.appliedBonusSeconds):ScientificNumber.zero(),total=base.add(relayBonus),reward=total.toNumber(MAX_ECONOMY_VALUE),inventory=relay&&paid?s.inventory.map(i=>i.id===relay.id?{...i,relayTaps:relayCount}:i):s.inventory,nextTaps=s.overclock.taps+1,triggered=nextTaps>=BALANCE.overclockTaps,duration=BALANCE.overclockSeconds*(1+milestoneBonus(s,'overclock'))*(1+deviceBonus(s,'overclockDuration')),overclock=triggered?{...s.overclock,taps:0,charged:false,activeUntil:now+duration*1000,cooldownUntil:now+duration*1000}:{...s.overclock,taps:nextTaps,charged:false};const feedback=now-s.feedback.windowStartedAt>=60000?{windowStartedAt:now,work:0}:s.feedback;return addMetrics(addCreditsScientific({...s,inventory,lifetime:{...s.lifetime,taps:s.lifetime.taps+1,overclocks:s.lifetime.overclocks+(triggered?1:0)},feedback,overclock},total,true,false),now,{taps:1,tap:reward});}
 export function selectOverclockChannel(s:GameState,channel:OverclockChannel){return hasNode(s,'overclockSwitch',1)&&s.overclock.activeUntil<=s.savedAt?{...s,overclock:{...s.overclock,channel}}:s}
 export function activateOverclock(s:GameState,now:number){if(s.retention.activeRun?.id==='no-taps')return s;const duration=BALANCE.overclockSeconds*(1+milestoneBonus(s,'overclock'))*(1+deviceBonus(s,'overclockDuration'));return !s.overclock.charged||now<s.overclock.cooldownUntil?s:{...s,lifetime:{...s.lifetime,overclocks:s.lifetime.overclocks+1},overclock:{...s.overclock,taps:0,charged:false,activeUntil:now+duration*1000,cooldownUntil:now+BALANCE.overclockCooldownSeconds*1000}};}
 

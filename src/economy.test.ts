@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 import { describe, expect, it } from 'vitest';
-import { BALANCE, GameState, buyHardware, creditRate, dataRate, hardwareBulkCost, hardwareCost, newGame, researchRate, researchDuration, researchProjectDataCost, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, trainingGoal, startResearchProject, researchLabCount } from './economy';
+import { BALANCE, GameState, buyHardware, creditRate, dataRate, hardwareBulkCost, hardwareCost, researchRate, researchDuration, researchProjectDataCost, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, trainingGoal, startResearchProject, researchLabCount } from './economy';
 import { advance, advanceTo } from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 describe('economy', () => {
   it('uses the calculator balance and exact geometric bulk sum', () => {

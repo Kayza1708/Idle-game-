@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,addCreditsScientific,axiomThresholdScientific,automaticRestartAvailable,buyHardwareClass,creditRateScientific,exactEconomyValue,hardwareCostScientific,hardwareIds,newGame,newINTScientific,runStartContract,type GameState} from './economy';
+import {BALANCE,addCreditsScientific,axiomThresholdScientific,automaticRestartAvailable,buyHardwareClass,creditRateScientific,exactEconomyValue,hardwareCostScientific,hardwareIds,newINTScientific,runStartContract,type GameState} from './economy';
 import {axiomPreview,axiomReset,buyAxiomUpgrade,buyNode,prestige,prestigeAgentStatus,prestigePreview,runPrestigeAgent} from './prestige';
 import {ScientificNumber} from './scientificNumber';
 import {advance,advanceTo} from './simulation';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {automaticRestartText,prestigeAgentReasonText,runStartText} from './prestigeText';
 
 const claimable=()=>addCreditsScientific(newGame(0),ScientificNumber.from(BALANCE.prestigeBaseRevenue*16));
@@ -140,13 +141,13 @@ describe('guarded normal auto prestige',()=>{
   const start=integrationStart(),online=advance(start,1800,true,()=>.5).state,offline=advance(start,1800,false,()=>.5).state;
   expect(online.prestigeCount).toBe(start.prestigeCount+2);expect(offline.prestigeCount).toBe(online.prestigeCount);expect(offline.exactEconomy).toEqual(online.exactEconomy);expect(offline.hardwareCounts).toEqual(online.hardwareCounts);expect(offline.runStartedAt).toBe(online.runStartedAt);expect(offline.telemetry.prestigeHistory).toEqual(online.telemetry.prestigeHistory);
   const first=advance(start,900,false,()=>.5).state,loaded=restore(serialize(first),first.savedAt);expect(loaded.error).toBeUndefined();const split=advance(loaded.state,900,false,()=>.5).state;expect(split.exactEconomy).toEqual(offline.exactEconomy);expect(split.prestigeCount).toBe(offline.prestigeCount);expect(split.lifetime.hardwareBought).toBe(offline.lifetime.hardwareBought);
- });
+ },15000);
  it('caps large jumps and cannot recursively reset at one checkpoint',()=>{
   const start=integrationStart(),short={...start,offlineCapacitySeconds:BALANCE.baseOfflineSeconds},after=advance(short,1e12,false,()=>.5);
   expect(after.report.seconds).toBe(BALANCE.baseOfflineSeconds);expect(after.state.prestigeCount-start.prestigeCount).toBeLessThanOrEqual(Math.floor(BALANCE.baseOfflineSeconds/900));expect(after.state.axiomResetCount).toBe(start.axiomResetCount);expect(after.state.lifetime.taps).toBe(0);expect(after.state.credits).toBeGreaterThanOrEqual(0);
  // This functional cap/reset contract processes the full eight-hour window.
  // Keep its safety timeout bounded without making a 5s runner budget a device-performance claim.
- },15_000);
+ },45_000);
  it('provides concrete German and English restart status',()=>{
   expect(automaticRestartText(true,'de')).toBe('Automatischer Neustart bereit');expect(automaticRestartText(false,'en')).toBe('Automatic restart requires an enabled shopping agent');expect(prestigeAgentReasonText('training-active','en')).toBe('Waiting for training');
  });

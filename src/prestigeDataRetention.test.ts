@@ -1,9 +1,10 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,addCredits,addData,addDataScientific,axiomThresholdScientific,buyHardwareClass,exactEconomyValue,newGame,startTraining} from './economy';
+import {BALANCE,addCredits,addData,addDataScientific,axiomThresholdScientific,buyHardwareClass,exactEconomyValue,startTraining} from './economy';
 import {axiomLayerVisible,axiomReset,prestige,prestigePreview} from './prestige';
 import {queueExperiment} from './experiments';
 import {ScientificNumber} from './scientificNumber';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {abortRunChallenge,startRunChallenge} from './retention';
 const ready=()=>addData(addCredits(newGame(1000),1e12),10_000);
 describe('normal prestige retains paid Data balance',()=>{

@@ -1,8 +1,9 @@
+import {newGame,restore} from './legacyContractFixture';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {learnBlueprint} from './blueprints';
 import {materialTable} from './materialEconomy';
-import {describe,expect,it} from 'vitest';import{BALANCE,newGame,bulkCost,computeRate,creditRate,GameState}from'./economy';import{advance}from'./simulation';import{buyNode,prestige}from'./prestige';import {equip,salvage,toggleLock,upgrade,randomItem} from './inventory';import{queueExperiment,completeExperiment,experimentSpeed}from'./experiments';import{claimMission,rollPeriods}from'./missions';import{buyGemOffer}from'./gemShop';import{rewardAd}from'./ads';import{restore,serialize}from'./storage';
+import {describe,expect,it} from 'vitest';import {BALANCE,bulkCost,computeRate,creditRate,GameState} from './economy';import{advance}from'./simulation';import{buyNode,prestige}from'./prestige';import {equip,salvage,toggleLock,upgrade,randomItem} from './inventory';import{queueExperiment,completeExperiment,experimentSpeed}from'./experiments';import{claimMission,rollPeriods}from'./missions';import{buyGemOffer}from'./gemShop';import{rewardAd}from'./ads';import {serialize} from './storage';
 describe('alpha systems',()=>{
  it('keeps long and split simulation equivalent',()=>{const s={...newGame(0),hardware:10};const a=advance(s,1000).state,b=advance(advance(s,400).state,600).state;expect(b.level).toBe(a.level);expect(Math.abs(b.credits-a.credits)/Math.max(1,a.credits)).toBeLessThan(0.0001)});
  it('prestiges once and purchases prerequisite nodes',()=>{let s:GameState={...newGame(0),runCreditsEarned:1e15,lifetimeCreditsEarned:1e15,lifetimeEligibleCredits:1e15,cycleEligibleCredits:1e15};s=prestige(s);expect(s.prestigeCount).toBe(1);const total=s.totalINTEarned;expect(prestige(s)).toBe(s);s={...s,unspentINT:3,exactEconomy:{...s.exactEconomy,unspentINT:{m:3,e:0}}};const bought=buyNode(s,'dataArchive1');expect(bought.nodes).toContain('dataArchive1');expect(bought.totalINTEarned).toBe(total);expect(buyNode(bought,'dataArchive1')).toBe(bought)});

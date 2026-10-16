@@ -418,7 +418,7 @@ const branches=[
 
 const roman=['','I','II','III','IV','V','VI','VII','VIII'];
 
-const prestigeEffects:Record<PrestigeUpgradeId,L>={
+const prestigeEffects:Partial<Record<PrestigeUpgradeId,L>>={
  batchFabrication:l('Unlock item batch crafting ×3/×10/×100.','Schaltet Item-Mehrfachherstellung ×3/×10/×100 frei.','Desbloquea fabricación múltiple de objetos.','Débloque la fabrication multiple d’objets.','Desbloqueia fabricação múltipla de itens.','Sblocca la produzione multipla di oggetti.','Odblokowuje seryjne tworzenie przedmiotów.'),
  modelArchive:l('Keep model levels and paid training through normal prestige; Axioms still reset them.','Behält Modellstufen und bezahltes Training bei normalem Prestige; Axiome setzen sie zurück.','','','','',''),
  shoppingAgent:l('Per-class calculator and single-board computer autobuyers with a shared reserve.','Klassenweise Autobuyer für Taschenrechner und Einplatinencomputer mit gemeinsamer Reserve.','','','','',''),
@@ -473,15 +473,15 @@ const prestigeEffects:Record<PrestigeUpgradeId,L>={
  manufacturing8:l('Item Synergy ^1.10; Forge/Fusion become true endgame scalers.','Item-Synergie ^1,10; Forge/Fusion werden echte Endgame-Skalierer.','Sinergia de objetos ^1,10; Forja/Fusión se convierten en escaladores de endgame.','Synergie d’objets ^1,10 ; Forge/Fusion deviennent de vrais moteurs de fin de jeu.','Sinergia de itens ^1,10; Forja/Fusão viram escaladores de endgame.','Sinergia oggetti ^1,10; Forgia/Fusione diventano veri scaler endgame.','Synergia przedmiotów ^1,10; Kuźnia/Fuzja stają się prawdziwymi skalami endgame.')
 };
 
-export const prestigeText=(id:PrestigeUpgradeId,language:Language)=>{
- if(id==='batchFabrication'||id==='modelArchive')return{name:pick(id==='batchFabrication'?l('Batch Fabrication','Serienfertigung','Fabricación en serie','Fabrication en série','Fabricação em série','Produzione in serie','Produkcja seryjna'):l('Model Archive','Modellarchiv','Archivo de modelo','Archives du modèle','Arquivo do modelo','Archivio modello','Archiwum modelu'),language),effect:pick(prestigeEffects[id],language)};
+export const prestigeText=(id:PrestigeUpgradeId,language:Language)=>{if(Object.hasOwn(BALANCE.progression.nodes,id)){const n=BALANCE.progression.nodes[id as keyof typeof BALANCE.progression.nodes];return{name:n.name,effect:n.effect};}
+ if(id==='batchFabrication'||id==='modelArchive')return{name:pick(id==='batchFabrication'?l('Batch Fabrication','Serienfertigung','Fabricación en serie','Fabrication en série','Fabricação em série','Produzione in serie','Produkcja seryjna'):l('Model Archive','Modellarchiv','Archivo de modelo','Archives du modèle','Arquivo do modelo','Archivio modello','Archiwum modelu'),language),effect:pick(prestigeEffects[id]??l(BALANCE.prestigeUpgrades[id].effect,BALANCE.prestigeUpgrades[id].effect,'','','','',''),language)};
  const researchCopy:Partial<Record<PrestigeUpgradeId,[string,string]>>={labs2:['Two waiting projects; regular automatic queue starts. Operations expands capacity to four.','Zwei wartende Aufträge; regulärer automatischer Queue-Start. Labororganisation erweitert auf vier.'],labs3:['One repeatable project with an explicit target level; manual queue takes priority.','Ein wiederholbares Projekt mit explizitem Ziellevel; manuelle Queue hat Vorrang.'],labs4:['Permanent laboratory performance contribution. Research director also requires Research Scheduling.','Dauerhafter Laborleistungsbeitrag. Der Forschungsdirektor benötigt zusätzlich Forschungsplanung.'],labs5:['Queue configuration is retained through normal prestige.','Queue-Konfiguration bleibt bei normalem Prestige erhalten.'],labs6:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.'],labs7:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.'],labs8:['Additional permanent laboratory performance contribution.','Zusätzlicher dauerhafter Laborleistungsbeitrag.']};
 
- if(id==='shoppingAgent'||id==='trainingPlan'||id==='componentScanner')return{name:pick(id==='shoppingAgent'?l('Shopping Agent','Einkaufsagent','','','','',''):id==='trainingPlan'?l('Training Plan','Trainingsplan','','','','',''):l('Component Scanner','Komponentenscanner','','','','',''),language),effect:pick(prestigeEffects[id],language)};
+ if(id==='shoppingAgent'||id==='trainingPlan'||id==='componentScanner')return{name:pick(id==='shoppingAgent'?l('Shopping Agent','Einkaufsagent','','','','',''):id==='trainingPlan'?l('Training Plan','Trainingsplan','','','','',''):l('Component Scanner','Komponentenscanner','','','','',''),language),effect:pick(prestigeEffects[id]??l(BALANCE.prestigeUpgrades[id].effect,BALANCE.prestigeUpgrades[id].effect,'','','','',''),language)};
  const depth=Number(id.match(/([1-8])$/)?.[1]??1);
  const branch=id.startsWith('dataArchive')?0:id.startsWith('computeNet')?1:id.startsWith('analysis')?2:id.startsWith('labs')?3:4;
  return {
   name:`${pick(branches[branch],language)} ${roman[depth]}`,
-  effect:[researchCopy[id]&&['de','en'].includes(language)?researchCopy[id]![language==='de'?1:0]:pick(prestigeEffects[id],language),researchUnlockText(id,language)].filter(Boolean).join(' '),
+  effect:[researchCopy[id]&&['de','en'].includes(language)?researchCopy[id]![language==='de'?1:0]:pick(prestigeEffects[id]??l(BALANCE.prestigeUpgrades[id].effect,BALANCE.prestigeUpgrades[id].effect,'','','','',''),language),researchUnlockText(id,language)].filter(Boolean).join(' '),
  };
 };

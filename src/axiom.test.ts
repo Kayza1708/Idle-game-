@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,axiomThresholdScientific,addCredits,computeRate,creditMultiplierFromAxioms,creditMultiplierFromINT,creditRate,hardwareIds,newGame,passiveComponentWeights,queueResearchProject,queueTraining} from './economy';
+import {BALANCE,axiomThresholdScientific,addCredits,computeRate,creditMultiplierFromAxioms,creditMultiplierFromINT,creditRate,hardwareIds,passiveComponentWeights,queueResearchProject,queueTraining} from './economy';
 import {axiomPreview,axiomReset,axiomReward,buyNode,prestige} from './prestige';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 
 const withCycle=(amount:ScientificNumber)=>{const s=newGame(0),number=amount.toNumber();return{...s,cycleINTEarned:number,totalINTEarned:number,unspentINT:number,exactEconomy:{...s.exactEconomy,cycleINTEarned:amount.toJSON(),totalINTEarned:amount.toJSON(),unspentINT:amount.toJSON()}}};

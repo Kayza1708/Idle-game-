@@ -5,8 +5,8 @@ export type RecipeId=keyof typeof BALANCE.itemRecipes;
 export const recipeIds=Object.keys(BALANCE.itemRecipes) as RecipeId[];
 export function blueprintQuote(s:GameState,id:string){
  const recipe=Object.hasOwn(BALANCE.itemRecipes,id)?BALANCE.itemRecipes[id as RecipeId]:null;
- const extended=Object.hasOwn(BALANCE.extendedItems,id);const prerequisite=!!recipe&&(extended?(newBlueprintAccess(s,id)&&(s.materials.knownBlueprints.includes(id as RecipeId)||s.learnedRecipes?.includes(id as RecipeId))):(id==='impulse-relay'?s.impulseRelayBlueprint:id==='insight-archive'?s.insightArchiveBlueprint:'research' in recipe?s.completedResearch.includes(recipe.research):true));
- const price=recipe?.blueprints??0,learned=!!recipe&&(price===0||(s.learnedRecipes??[]).includes(id as RecipeId));
+ const extended=Object.hasOwn(BALANCE.extendedItems,id);const starter=Object.hasOwn(BALANCE.progression.starters,id);const prerequisite=s.progression?.version===2?(!!recipe&&(starter?true:s.completedResearch.includes('blueprints'))):!!recipe&&(extended?(newBlueprintAccess(s,id)&&(s.materials.knownBlueprints.includes(id as RecipeId)||s.learnedRecipes?.includes(id as RecipeId))):(id==='impulse-relay'?s.impulseRelayBlueprint:id==='insight-archive'?s.insightArchiveBlueprint:'research' in recipe?s.completedResearch.includes(recipe.research):true));
+ const price=s.progression?.version===2&&starter?0:recipe?.blueprints??0,learned=!!recipe&&((s.progression?.version!==2&&price===0)||(s.learnedRecipes??[]).includes(id as RecipeId));
  const validStock=Number.isSafeInteger(s.blueprintFragments)&&s.blueprintFragments>=0;
  const missing=learned?0:validStock?Math.max(0,price-s.blueprintFragments):price;
  return{recipeId:id,valid:!!recipe,prerequisite,price,balance:s.blueprintFragments,missing,learned,accessible:prerequisite&&learned,canLearn:!!recipe&&price>0&&prerequisite&&!learned&&validStock&&missing===0};

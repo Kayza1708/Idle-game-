@@ -1,3 +1,4 @@
+import {newGame,restore} from './legacyContractFixture';
 import {Research} from './Panels';
 import {researchPreview} from './economy';
 import {createElement} from 'react';
@@ -5,11 +6,11 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {ChallengeStagePicker} from './ChallengeStagePicker';
 import {ChallengeRunPanel} from './ChallengeRunPanel';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,hardwareIds,repeatableResearchIds,addCredits,addData,grantComponents,startResearchProject,trainingDurationSeconds,creditRateScientific,offlineTimeLimit,classComputeTerms,type GameState} from './economy';
+import {BALANCE,hardwareIds,repeatableResearchIds,addCredits,addData,grantComponents,startResearchProject,trainingDurationSeconds,creditRateScientific,offlineTimeLimit,classComputeTerms,type GameState} from './economy';
 import {createItem,equip,fuseItems,fusionPreview} from './inventory';
 import {amplifyAnalysisMaterials,queueExperiment,completeExperiment} from './experiments';
 import {salvageQuote} from './recovery';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 import {startRunChallenge,abortRunChallenge} from './retention';
 import {challengeCatalogQuote,challengeTargetDefinitions,challengeAutomationUnlocks,challengeStartQuote,challengeEntryQuote,challengeCompletionQuote} from './challengeStages';
 import {ScientificNumber} from './scientificNumber';

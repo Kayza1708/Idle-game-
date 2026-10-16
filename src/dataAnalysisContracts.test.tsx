@@ -1,3 +1,5 @@
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import progressionBaseline from './testSupport/progressionBaseline.json';
 import {predecessorProjection} from './testSupport/protectedProgression';
 import {startRunChallenge} from './retention';
@@ -5,10 +7,10 @@ import {createItem,equip} from './inventory';
 import {describe,it,expect} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {BALANCE,newGame,type GameState,dataProductionQuote,dataProductionComparison,dataMultiplierScientific,dataRawBonusScientific,dataRateScientific,exactEconomyValue,startTraining,startResearchProject,buyHardwareClass,itemTypes} from './economy';
+import {BALANCE,type GameState,dataProductionQuote,dataProductionComparison,dataMultiplierScientific,dataRawBonusScientific,dataRateScientific,exactEconomyValue,startTraining,startResearchProject,buyHardwareClass,itemTypes} from './economy';
 import {ScientificNumber as SN} from './scientificNumber';
 import {analysisQuote,analysisRewardFactor,queueExperiment,completeExperiment,splitMaterialReward} from './experiments';
-import {restore,serialize,importGame} from './storage';
+import {serialize} from './storage';
 import {advance} from './simulation';
 import {configureResearchDirector,runResearchAutomation,researchDirectorQuote} from './researchAutomation';
 import {AnalysisContracts} from './AnalysisContracts';

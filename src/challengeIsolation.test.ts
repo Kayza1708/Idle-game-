@@ -1,6 +1,9 @@
+import {loadGame} from './legacyContractFixture';
+import {importGame} from './legacyContractFixture';
+import {newGame,restore} from './legacyContractFixture';
 import {ScientificNumber} from './scientificNumber';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,addCredits,addCreditsScientific,addData,buyHardwareClass,exactEconomyValue,grantComponents,newGame,registerTap,startResearchProject,startTraining,type GameState} from './economy';
+import {BALANCE,addCredits,addCreditsScientific,addData,buyHardwareClass,exactEconomyValue,grantComponents,registerTap,startResearchProject,startTraining,type GameState} from './economy';
 import {abortRunChallenge,completeRunChallenge,runChallengeReady,startRunChallenge} from './retention';
 import {advance,advanceTo} from './simulation';
 import {createItem,equip,craftModule} from './inventory';
@@ -11,7 +14,7 @@ import {claimMission,claimMissionBonus,rollPeriods} from './missions';
 import {claimSeasonReward} from './season';
 import {claimAchievement} from './achievements';
 import {claimOnboarding} from './onboarding';
-import {BACKUP_KEYS,SAVE_KEY,SAVE_VERSION,importGame,loadGame,persistGame,restore,serialize,type StorageLike} from './storage';
+import {BACKUP_KEYS,SAVE_KEY,SAVE_VERSION,persistGame,serialize,type StorageLike} from './storage';
 import {createLifecycleGate} from './mobileIntegration';
 
 const rng=()=>.5;

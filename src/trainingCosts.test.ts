@@ -1,7 +1,8 @@
+import {importGame} from './legacyContractFixture';
+import {newGame} from './legacyContractFixture';
 import {settleFoundries} from './foundries';
 import { describe, it, expect } from "vitest";
 import {
-  newGame,
   buyHardwareClass,
   addData,addCredits,
   addCreditsScientific,
@@ -29,7 +30,7 @@ import {
 } from "./inventory";
 import { itemImprovementHasEffect } from "./itemMechanics";
 import { advance } from "./simulation";
-import { SAVE_VERSION, serialize, importGame } from "./storage";
+import { SAVE_VERSION, serialize} from './storage';
 import { createBalanceExportFiles } from "./balanceReport";
 import { ScientificNumber } from "./scientificNumber";
 import { renderToStaticMarkup } from "react-dom/server";

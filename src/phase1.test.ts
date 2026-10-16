@@ -1,5 +1,6 @@
+import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {activateOverclock,addCredits,BALANCE,GameState,buyClassUpgrade,buyHardwareClass,classCompute,exactEconomyValue,hardwareBulkCost,hardwareBulkCostScientific,hardwareCost,maxAffordable,milestoneFactor,newGame,newInsight,newINT,canPrestige,canAffordResources,spendResources,hardwareIds,reachedMilestones,prestigeUpgradeCost,creditMultiplierFromINT,registerTap,tapCredits} from './economy';
+import {activateOverclock,addCredits,BALANCE,GameState,buyClassUpgrade,buyHardwareClass,classCompute,exactEconomyValue,hardwareBulkCost,hardwareBulkCostScientific,hardwareCost,maxAffordable,milestoneFactor,newInsight,newINT,canPrestige,canAffordResources,spendResources,hardwareIds,reachedMilestones,prestigeUpgradeCost,creditMultiplierFromINT,registerTap,tapCredits} from './economy';
 import {analysisRewardFactor,completeExperiment,queueExperiment,splitMaterialReward} from './experiments';
 import {prestige} from './prestige';
 import {advance} from './simulation';
@@ -44,7 +45,7 @@ it('uses scientific arithmetic for extreme hardware costs without unsafe counts'
 
 describe('scientific-number arithmetic',()=>{
  it('adds, subtracts and serializes values beyond IEEE exponent range without Infinity',async()=>{const {ScientificNumber}=await import('./scientificNumber');const a=ScientificNumber.fromParts(9.5,420),b=ScientificNumber.fromParts(2.5,420),sum=a.add(b),back=ScientificNumber.fromJSON(JSON.parse(JSON.stringify(sum)));expect(sum.toScientificString(3)).toBe('1.20e+421');expect(sum.subtract(b).toScientificString(3)).toBe('9.50e+420');expect(back.compare(sum)).toBe(0);expect(JSON.stringify(sum)).not.toMatch(/Infinity|NaN/)});
- it('keeps tiny additions deterministic at the available significant precision',async()=>{const {ScientificNumber}=await import('./scientificNumber');const huge=ScientificNumber.fromParts(1,400),tiny=ScientificNumber.fromParts(1,1);expect(huge.add(tiny).compare(huge)).toBe(0)});
+ it('retains tiny additions alongside a large balance',async()=>{const {ScientificNumber}=await import('./scientificNumber');const huge=ScientificNumber.fromParts(1,400),tiny=ScientificNumber.fromParts(1,1);expect(huge.add(tiny).subtract(huge).compare(tiny)).toBe(0)});
 
  it('spends credit and data costs atomically through the shared precision path',()=>{const s={...newGame(0),credits:1000,data:100};expect(canAffordResources(s,{credits:900,data:101})).toBe(false);expect(spendResources(s,{credits:900,data:101})).toBe(s);const paid=spendResources(s,{credits:900,data:40});expect(paid.credits).toBeCloseTo(100);expect(paid.data).toBeCloseTo(60);});
 });

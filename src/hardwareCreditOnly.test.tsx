@@ -1,6 +1,7 @@
+import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {BALANCE,newGame,addCreditsScientific,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,creditRateScientific,hardwareBulkCostScientific,passiveCircuitRate,type GameState} from './economy';
+import {BALANCE,addCreditsScientific,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,creditRateScientific,hardwareBulkCostScientific,passiveCircuitRate,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {hardwareSavingsGoals,hardwareSavingsQuote} from './hardwareGoals';
 import {HardwareSavingsGoals} from './HardwareSavingsGoals';

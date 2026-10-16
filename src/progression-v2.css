@@ -1,0 +1,352 @@
+.progression-v2 {
+  --v2-accent: #5bd7ff;
+}
+.v2-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.v2-tabs button[aria-pressed="true"] {
+  border-color: #62d7ff;
+  background: #153b55;
+}
+.v2-summary,
+.v2-lab header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: linear-gradient(135deg, #152b41, #191c36);
+  border: 1px solid #345776;
+}
+.v2-summary > div,
+.v2-lab header > div {
+  flex: 1;
+  min-width: 0;
+}
+.v2-summary h2,
+.v2-lab h2 {
+  margin: 0 0 4px;
+}
+.v2-summary small,
+.v2-lab small {
+  display: block;
+  color: #a8c4da;
+}
+.v2-summary .resource-art {
+  width: 42px;
+  height: 42px;
+}
+.v2-branch h3 {
+  font-size: 14px;
+  margin: 20px 0 8px;
+  color: #bddff2;
+}
+.v2-node-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 7px;
+}
+.v2-node {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 7px;
+  padding: 10px 5px;
+  background: #111e30;
+  border: 1px solid #2b425b;
+  border-radius: 2px !important;
+  min-height: 120px;
+}
+.v2-node b {
+  font-size: 11px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.v2-node small {
+  font-size: 10px;
+  color: #adbdcf;
+}
+.v2-node.available {
+  border-color: #4696c9;
+}
+.v2-node.owned {
+  border-color: #45bb80;
+  background: #102c26;
+}
+.v2-symbol {
+  display: grid;
+  place-items: center;
+  min-width: 38px;
+  min-height: 38px;
+  border: 2px solid #64d9ff;
+  transform: none;
+  font-size: 12px;
+  font-weight: 800;
+  color: #94e9ff;
+  background: #103950;
+  box-shadow: inset 0 0 12px #36a2c426;
+}
+.branch-T,
+.branch-D {
+  border-color: #c39cff;
+  color: #dac3ff;
+  background: #302243;
+}
+.branch-W,
+.branch-C {
+  border-color: #e7bb60;
+  color: #ffe0a0;
+  background: #3f321b;
+}
+.branch-S {
+  border-color: #ff8e75;
+  color: #ffb99b;
+  background: #442619;
+}
+.branch-I,
+.branch-B {
+  border-color: #74e5a9;
+  color: #adf8d1;
+  background: #174331;
+}
+.v2-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 240;
+  background: #020911d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+.v2-dialog {
+  position: relative;
+  width: min(100%, 440px);
+  max-height: 85dvh;
+  overflow: auto;
+  border: 2px solid #5889a8;
+  background: #111d2e;
+  padding: 24px;
+  box-shadow: 0 20px 80px #0008;
+  border-radius: 2px;
+}
+.v2-dialog h2 {
+  padding-right: 28px;
+  font-size: 20px;
+}
+.v2-dialog p {
+  font-size: 14px;
+  line-height: 1.55;
+}
+.v2-dialog button {
+  min-height: 44px;
+  margin: 6px 5px 0 0;
+}
+.v2-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 44px;
+}
+.v2-lab {
+  margin: 12px 0;
+  border: 1px solid #445679;
+  background: #121c2c;
+  padding: 12px;
+}
+.v2-model-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.v2-model {
+  min-width: 0;
+  border: 1px solid #38415f;
+  padding: 12px;
+  background: #121d30;
+}
+.v2-model.active {
+  border: 2px solid #57ddab;
+  background: #102f2b;
+}
+.v2-model h3 {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.v2-model b {
+  font-size: 12px;
+}
+.v2-model small {
+  font-size: 11px;
+  margin: 6px 0;
+}
+.v2-model button {
+  display: block;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 7px;
+  font-size: 12px;
+}
+.v2-develop {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  min-height: 56px;
+  border-color: #bca0f3 !important;
+  background: #39285b !important;
+}
+.v2-mira {
+  border-left: 3px solid #c4b0fd;
+  padding: 10px 12px;
+  margin: 12px 0;
+  background: #241f3b;
+}
+.v2-mira p,
+.v2-note {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #bfcde1;
+}
+.v2-settings {
+  margin-top: 18px;
+  padding: 10px;
+  border: 1px solid #344960;
+}
+.v2-settings summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.v2-settings label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 8px 0;
+  font-size: 12px;
+}
+.v2-settings input,
+.v2-settings select {
+  min-height: 44px;
+  max-width: 140px;
+}
+.v2-settings input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+}
+.v2-lab button,
+.progression-v2 button {
+  min-height: 44px;
+  border-radius: 2px;
+}
+.v2-model.active {
+  animation: v2-light 0.3s ease-out;
+}
+@keyframes v2-light {
+  from {
+    filter: brightness(1.8);
+    transform: scale(0.97);
+  }
+  to {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-model.active {
+    animation: none;
+  }
+}
+.v2-fusion-working .fusion-slot {
+  animation: v2-fusion-pulse 1.4s ease-in-out infinite alternate;
+}
+.v2-fusion-working {
+  box-shadow: inset 0 0 35px #9667e92e;
+}
+@keyframes v2-fusion-pulse {
+  from {
+    filter: brightness(0.9);
+  }
+  to {
+    filter: brightness(1.35);
+    transform: translateY(-3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-fusion-working .fusion-slot {
+    animation: none;
+  }
+}
+
+.v2-ki-reveal {
+  text-align: center;
+  animation: v2-reveal 1.5s ease-out;
+}
+.v2-ki-reveal > .v2-symbol {
+  width: 80px;
+  height: 80px;
+  margin: 10px auto;
+  border-color: #b995ff;
+  box-shadow: 0 0 36px #ab78ff66;
+}
+@keyframes v2-reveal {
+  0% {
+    opacity: 0.25;
+    transform: scale(0.88);
+    filter: brightness(2);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.025);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-ki-reveal {
+    animation: none;
+  }
+}
+
+.v2-branch > summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 4px;
+  margin-top: 8px;
+  border-bottom: 1px solid #34516c;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #c8e9ff;
+}
+.v2-branch > summary::after {
+  content: "+";
+  font-size: 20px;
+}
+.v2-branch[open] > summary::after {
+  content: "−";
+}
+.v2-branch .v2-node-grid {
+  padding-top: 8px;
+}
+.v2-symbol .prestige-art {
+  width: 38px;
+  height: 38px;
+}
+.v2-node b {
+  font-size: 12px;
+}
+.v2-node small {
+  font-size: 11px;
+}
+
+.v2-settings label{min-height:44px}

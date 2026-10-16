@@ -1,7 +1,8 @@
+import {newGame,restore} from './legacyContractFixture';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,hardwareBulkCostScientific,hardwarePurchasePreview,addCreditsScientific,addData,grantComponents,componentIds,buyHardwareClass,addCredits,computeRateScientific,creditRateScientific,classComputeTerms,startTraining,trainingCostQuote,trainingDurationQuote,startResearchProject,researchQuote,registerTap,itemTypes,itemEffectProfile,type GameState,type ExpandedItemId,type Item} from './economy';
+import {BALANCE,hardwareBulkCostScientific,hardwarePurchasePreview,addCreditsScientific,addData,grantComponents,componentIds,buyHardwareClass,addCredits,computeRateScientific,creditRateScientific,classComputeTerms,startTraining,trainingCostQuote,trainingDurationQuote,startResearchProject,researchQuote,registerTap,itemTypes,itemEffectProfile,type GameState,type ExpandedItemId,type Item} from './economy';
 import {createItem,equip,unequip,settleCrafting,claimLootDrop} from './inventory';
 import {deviceBonus,deviceEffectQuote,trackCompleted} from './deviceEffects';
 import {materialAnalysisContract,hardwareMaterialQuote,blueprintResearchCompletion,discoverBlueprint} from './materialEconomy';
@@ -9,7 +10,7 @@ import {salvageQuote} from './recovery';
 import {learnBlueprint,recipeIds,blueprintQuote} from './blueprints';
 import {settleResearchCompletions,advance} from './simulation';
 import {startManualResearchQueue} from './researchAutomation';
-import {serialize,restore} from './storage';
+import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 import {exactEconomyValue} from './economy';
 // Explicit prepared technical inventory/access/resources. Actual payment and completion paths below.

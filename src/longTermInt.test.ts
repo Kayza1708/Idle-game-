@@ -1,11 +1,12 @@
+import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,addCreditsScientific,creditMultiplierFromINT,creditRateScientific,productionBreakdown,exactEconomyValue,intYieldFactor,newGame,newINTScientific,prestigeClaimForEligibleScientific,prestigeUpgradeCost,prestigeUpgradeCostScientific,axiomThresholdScientific,type GameState} from './economy';
+import {BALANCE,addCreditsScientific,creditMultiplierFromINT,creditRateScientific,productionBreakdown,exactEconomyValue,intYieldFactor,newINTScientific,prestigeClaimForEligibleScientific,prestigeUpgradeCost,prestigeUpgradeCostScientific,axiomThresholdScientific,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {buyNode,prestige,runPrestigeAgent} from './prestige';
 import {createItem,equip} from './inventory';
 import {advance} from './simulation';
 import {axiomReset} from './prestige';
-import {restore,serialize} from './storage';
+import {serialize} from './storage';
 
 describe('long-term weighted INT economy',()=>{
  it('uses the square-root entitlement monotonically at scientific scale',()=>{const b=BALANCE.prestigeBaseRevenue;expect(prestigeClaimForEligibleScientific(ScientificNumber.from(b*9)).toNumber()).toBe(3);expect(prestigeClaimForEligibleScientific(ScientificNumber.from(b*16)).toNumber()).toBe(4);expect(prestigeClaimForEligibleScientific(ScientificNumber.fromParts(1,300)).compare(prestigeClaimForEligibleScientific(ScientificNumber.fromParts(1,200)))).toBeGreaterThan(0)});
@@ -25,7 +26,7 @@ describe('prestige agent',()=>{
 
 describe('prestige economy diagnostics',()=>{
  // Functional 90-minute seeded trace verification, not a wall-clock performance assertion.
- it('records the exact ledgers and applied versus removed INT multipliers',async()=>{const {simulateBalance}=await import('./simulation'),run=simulateBalance(90/1440,true,1708,Infinity,'training-first',[{start:0,end:5400}]),trace=run.prestigeEconomyTrace[0];expect(trace).toBeDefined();expect(trace.weightedEligibleRevenue).toEqual(trace.eligibleRevenue);const claim=ScientificNumber.fromJSON(trace.claimableINT);expect(claim.compare(ScientificNumber.from(3))).toBeGreaterThanOrEqual(0);expect(claim.toJSON()).toEqual(prestigeClaimForEligibleScientific(ScientificNumber.fromJSON(trace.weightedEligibleRevenue)).toJSON());expect(trace.intCreditMultiplierBefore).toBe(1);expect(trace.intCreditMultiplierAfter).toBeCloseTo(1+BALANCE.prestigeBonusLogScale*Math.log1p(claim.toNumber()));expect(trace.multipliersAfter?.synergies.int).toBe(1);expect(trace.legacyIntSynergyAfter.m).toBeGreaterThanOrEqual(1)},30_000);
+ it('records the exact ledgers and applied versus removed INT multipliers',async()=>{const {simulateBalance}=await import('./simulation'),run=simulateBalance(90/1440,true,1708,Infinity,'training-first',[{start:0,end:5400}],false,undefined,undefined,'comparison',newGame(Date.UTC(2026,0,1))),trace=run.prestigeEconomyTrace[0];expect(trace).toBeDefined();expect(trace.weightedEligibleRevenue).toEqual(trace.eligibleRevenue);const claim=ScientificNumber.fromJSON(trace.claimableINT);expect(claim.compare(ScientificNumber.from(3))).toBeGreaterThanOrEqual(0);expect(claim.toJSON()).toEqual(prestigeClaimForEligibleScientific(ScientificNumber.fromJSON(trace.weightedEligibleRevenue)).toJSON());expect(trace.intCreditMultiplierBefore).toBe(1);expect(trace.intCreditMultiplierAfter).toBeCloseTo(1+BALANCE.prestigeBonusLogScale*Math.log1p(claim.toNumber()));expect(trace.multipliersAfter?.synergies.int).toBe(1);expect(trace.legacyIntSynergyAfter.m).toBeGreaterThanOrEqual(1)},90_000);
 });
 
 describe('logarithmic cycle INT credit bonus',()=>{
