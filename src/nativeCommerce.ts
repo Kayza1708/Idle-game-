@@ -1,4 +1,4 @@
-/** Native commerce boundary. Browser builds deliberately expose no purchasable products. */
+/** @deprecated Use shopNative.ts and commerce.ts for all new integrations. Native commerce boundary. Browser builds deliberately expose no purchasable products. */
 export type StoreProductMetadata={productId:string;localizedPrice:string;title:string;description:string};
 export interface NativeStoreAdapter{
  listProducts(productIds:readonly string[]):Promise<StoreProductMetadata[]>;

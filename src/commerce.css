@@ -1,0 +1,93 @@
+.commerce-store > p,
+.commerce-label {
+  color: #afc1d1;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.commerce-label {
+  display: block;
+  color: #77ecc2;
+  letter-spacing: 0.07em;
+}
+.commerce-starter-items {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.commerce-starter-items .item-portrait {
+  width: 64px;
+  height: 64px;
+}
+.commerce-rewards {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+.commerce-reward {
+  grid-template-columns: 72px 1fr;
+  border: 1px solid #39647b;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #162b3f, #0d1728);
+  padding: 16px;
+  align-items: center;
+}
+.commerce-reward h3 {
+  font-size: 1rem;
+  margin: 0 0 8px;
+}
+.commerce-reward p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+.commerce-reward small {
+  display: block;
+  color: #b5c8d8;
+}
+.commerce-reward button,
+.commerce-lab-actions button,
+.commerce-store button {
+  min-height: 44px;
+  margin-top: 10px;
+  border-radius: 3px;
+}
+.commerce-lab-actions {
+  display: grid;
+  gap: 5px;
+  margin-top: 12px;
+}
+.commerce-lab-actions button {
+  font-size: 0.8rem;
+  padding: 8px;
+  white-space: normal;
+}
+.commerce-lab-actions small {
+  font-size: 0.7rem;
+  color: #b5c8d8;
+}
+.commerce-notice {
+  z-index: 150;
+}
+.commerce-drone-art {
+  animation: commerce-drone 3s ease-in-out infinite;
+}
+@keyframes commerce-drone {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .commerce-drone-art {
+    animation: none;
+  }
+}
+.effects-off .commerce-drone-art {
+  animation: none;
+}
+
+.commerce-drone-art {
+  width: 72px;
+  height: 64px;
+  filter: drop-shadow(0 0 8px #28a9da55);
+}

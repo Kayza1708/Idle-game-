@@ -1,3 +1,7 @@
+import {createElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+import {newGame,BALANCE} from './economy';
+import {Research} from './Panels';
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
 import app from './App.tsx?raw';
@@ -27,11 +31,15 @@ describe('mobile gameplay shell and information architecture',()=>{
   expect(workshop).not.toContain('className="card quest"');
   expect(tutorial).toContain('className="tutorial-helper mira-stage"');
  });
- it('offers only the next locked laboratory inline with its existing price',()=>{
-  expect(panels).toContain('data-lab-unlock="next"');
-  expect(panels).toContain("offer=next===3?'lab-slot-1':next===4?'lab-slot-2':null");
-  expect(panels).toContain('BALANCE.gemShop.labSlots[next-3]');
-  expect(panels).not.toContain('className="locked-labs"');
+ it('offers only the next paid laboratory at its actual price, then removes the purchase',()=>{
+  const base=newGame(0);
+  for(const purchased of [0,1,2]){
+   const state={...base,gems:5000,purchasedResearchLabs:purchased,progression:{...base.progression,licenses:['F01']}};
+   const html=renderToStaticMarkup(createElement(Research,{s:state,act:()=>{}}));
+   const cards=html.match(/<article[^>]*data-lab-unlock="next".*?<\/article>/g)??[];
+   expect(cards).toHaveLength(purchased<2?1:0);
+   if(purchased<2){expect(cards[0]).toContain(`<span>${BALANCE.gemShop.labSlots[purchased]}</span>`);expect(cards[0]).toContain('FREISCHALTEN');}
+  }
  });
  it('uses compact shop offers without developer or native-store prose',()=>{
   expect(shop).not.toContain('Garantierte Inhalte, keine Lootboxen');

@@ -2,7 +2,7 @@
 
 ## Store / IAP
 
-`src/nativeCommerce.ts` defines the boundary for StoreKit/App Store metadata, verified purchases, and restore operations. Browser builds intentionally return no products and show no price or successful purchase state. A native implementation must supply signed/verified entitlement handling before Premium Pass, Gem Packs, Starter Packs, Season Packs, or special offers can be sold.
+`src/shopNative.ts`, `src/commerce.ts` and `src/CommerceOffers.tsx` now provide the active purchase contracts, verified fulfillment, durable-save-before-finish ordering and permanent restore flow. `nativeCommerce.ts` is a deprecated compatibility boundary. Native SDKs and the authenticated verification/ownership backend remain disconnected. See [Commercialization V1](commercialization-v1.md) for products, exact contents, limits and remaining release integration.
 
 ## Rewarded ads
 
