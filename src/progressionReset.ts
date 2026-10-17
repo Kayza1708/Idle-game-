@@ -1,3 +1,4 @@
+import {closeBalanceRun} from './balanceHistory';
 import {
   challengeCatalogQuote,
   addChallengeMetrics,
@@ -245,8 +246,7 @@ export function axiomResetV2(state: GameState) {
   ] as const)
     exact[key] = { m: 0, e: 0 };
   const base = newGame(s.savedAt);
-  return addEvent(
-    minimalRestart(
+  const reset = minimalRestart(
       initializeRun({
         ...s,
         nodes: s.nodes.filter((id) => keep.includes(id)),
@@ -293,7 +293,9 @@ export function axiomResetV2(state: GameState) {
           tutorial: s.progression.tutorial === "lab" ? "lab" : "axiom",
         },
       }),
-    ),
+    );
+  const measured = closeBalanceRun(state, reset, "axiom", newINTScientific(state).toJSON(), gain.toJSON());
+  return addEvent({...measured,telemetry:{...measured.telemetry,runStartedAt:s.savedAt}},
     "axiom-reset",
     s.savedAt,
     { gain: gain.toScientificString(), cycleINT: s.cycleINTEarned },
