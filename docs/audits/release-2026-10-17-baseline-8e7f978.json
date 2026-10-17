@@ -1,0 +1,73 @@
+{
+  "craftingSkip": {
+    "gemsSpent": 20,
+    "beforeSeconds": 3600,
+    "immediateSeconds": 1800,
+    "afterPrepareSeconds": 3600,
+    "workDone": 0
+  },
+  "bulkCraftWork": {
+    "elapsed": 3600.0100000000007,
+    "items": 2,
+    "requiredPerItem": 3600,
+    "activeRemaining": null
+  },
+  "paidLab": {
+    "regularLabs": 2,
+    "quote": {
+      "cost": 500,
+      "enabled": false,
+      "reason": "prestige-lab",
+      "owned": false
+    },
+    "boughtLabs": 0
+  },
+  "sixLabSave": {
+    "labs": 6,
+    "saved": false,
+    "error": "TypeError: Ungültige oder unvollständige Spielstandfelder."
+  },
+  "integrationSkip": {
+    "gemsSpent": 1,
+    "levelBefore": 0,
+    "levelAfter": 0,
+    "modelLevel": 1,
+    "completed": true
+  },
+  "researchStart": {
+    "started": true,
+    "quotedSeconds": 178.38898692121813,
+    "preparedSeconds": 178.38898692121813
+  },
+  "researchVisibility": {
+    "visibleAreas": [
+      [
+        "dataGeneration",
+        true
+      ],
+      [
+        "syntheticData",
+        true
+      ],
+      [
+        "commercialization",
+        true
+      ],
+      [
+        "autonomousScience",
+        true
+      ]
+    ]
+  },
+  "integrationQueue": {
+    "beforeValid": true,
+    "queue": [
+      {
+        "track": "integration",
+        "targetLevel": 1
+      }
+    ],
+    "saved": false,
+    "error": "TypeError: Ungültige oder unvollständige Spielstandfelder."
+  }
+}

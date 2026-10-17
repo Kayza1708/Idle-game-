@@ -1,3 +1,13 @@
+## 2026-10-17 · Release-Audit
+
+- [x] Ausgangsstand `8e7f978` und neuen Hauptbranch `ff75c464` nach dem während des Audits gemergten Monetarisierungs-PR #118 geprüft; unveränderte Spielregeln, technische Reproduktionen auf beiden Ständen.
+- [x] Fünf Shop-/Crafting-/Labor-/Trainingsfehler im Ausgangsstand bestätigt; deren jetzt gemergte Korrektur mit denselben Probes nachgewiesen. Integrations-Queue bleibt zwischen API, UI und Speicherprüfer uneinheitlich.
+- [x] Build/Typecheck, Assetreferenzen, Teststruktur, native Integrationsgrenzen und npm-Abhängigkeiten geprüft; Ergebnisse inklusive lokaler Test-Timeouts im Auditbericht dokumentiert.
+- [ ] Stabile V2-Spiel-/Speichermatrix und reproduzierbar grüner Node-22-Releasecheck, anschließend V2-Langzeitkalibrierung und echte iPhone-/TestFlight-Abnahme.
+- [ ] Vor echtem Verkauf: native Kauf-/Ad-Anbieter, serverseitige Eigentums-/Auslieferungsprüfung, Restore-/Unterbrechungsmatrix und vollständiges App-Store-Paket abnehmen.
+
+[Priorisierte Befunde und Release-Plan](release-audit-2026-10-17.md). [Technische Reproduktionen](../scripts/release-audit-probe.ts).
+
 ## 2026-10-16 · Kommerzialisierung V1
 
 - [x] Store-Katalog mit Werbefrei-/Einkommen-Pass, garantierten Starter-Items, Builder-/Laborvorrat und vier Gem-Paketen; echte Store-Preise und Verifikation als anschließbare Schnittstellen.
