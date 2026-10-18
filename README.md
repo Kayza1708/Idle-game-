@@ -1,4 +1,4 @@
-# AI Singularity – Audio Pack v1
+# Idle Intelligence – Audio Pack v1
 
 Original, procedurally composed audio for the cozy retro-pixel idle game. No samples or third-party music are used.
 
@@ -62,3 +62,7 @@ Die acht eigens erstellten Sounds liegen jeweils als OGG, MP3-Fallback und unkom
 ## Lokaler Spielstand und KI-Name
 
 Neue Kampagnen benennen die KI vor dem Prolog (Vorschlag `AURA`); der Name wird ausschließlich im lokalen, versionierten Save gespeichert und bleibt über Reload und Prestige bestehen. Save v14 erweitert Lifetime-Achievements, UTC-Aufträge und den Browser-Gem-Shop, migriert den ersetzten INT-Baum mit vollständiger Rückerstattung und überschreibt beschädigte, inkompatible oder nicht sicher migrierbare Originaldaten nicht. Die Warnung bietet stattdessen einen Download des Originalinhalts und einen geprüften manuellen Import zur Wiederherstellung.
+
+## App-Branding
+
+Icon, sichtbarer Name und Mac-Anleitung: [Idle Intelligence](docs/idle-intelligence-branding.md). Nach dem Pull: `npm ci` und `npm run ios:prepare` im vorhandenen iOS-Projekt.
