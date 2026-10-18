@@ -31,3 +31,7 @@ Native bridge calls are covered by mocks; actual iPhone share-sheet/file saving 
 In der laufenden App: Einstellungen → Spielstand & Berichte → Balancebericht exportieren → ZIP speichern / teilen. Den nativen Teilen-Dialog offen lassen. In einem Mac-Terminal im Repository `bash scripts/copy-simulator-balance.sh` ausführen. Das Script liest ausschließlich den App-Cache des gebooteten Simulators und kopiert Balance-ZIPs in den Downloads-Ordner. Beim Schließen des Teilen-Dialogs räumt die App den temporären Cache auf. Mit mehreren gebooteten Geräten zuvor das richtige Gerät auswählen; der Standard nutzt `booted`.
 
 Alternativ Cacheordner im Finder öffnen: `open "$(xcrun simctl get_app_container booted com.kayza1708.aisingularity data)/Library/Caches/exports"`. ZIP von dort kopieren, solange der Teilen-Dialog offen ist. Auf einem echten iPhone im Teilen-Dialog „In Dateien sichern“ oder AirDrop verwenden. Der Simulator-Befehl wurde hier auf Shellsyntax geprüft; ein Mac/Xcode steht in dieser Umgebung nicht zur Ausführung bereit.
+
+## App-Icon und Anzeigename
+
+Das bestätigte Idle-Intelligence-Logo und native Icon-Exporte sind enthalten. Nach einem Pull `npm ci` und `npm run ios:prepare` ausführen; dieser Ablauf übernimmt nach Build/Sync das Icon und den sichtbaren Namen ins vorhandene iOS-Projekt und öffnet Xcode. Ein reines `cap sync` übernimmt App-Icons nicht. Bundle-ID und vorhandene Speicherkennungen bleiben erhalten. [Details und Abnahme](idle-intelligence-branding.md).

@@ -603,7 +603,7 @@ export function formatLongTermReport(suite:LongTermBalanceSuite){
 
   lines.push('');
   lines.push('==========================================');
-  lines.push(' AI SINGULARITY LONG-TERM BALANCE REPORT');
+  lines.push(' IDLE INTELLIGENCE LONG-TERM BALANCE REPORT');
   lines.push('==========================================');
   lines.push(`Seed: ${suite.seed}`);
   lines.push('');

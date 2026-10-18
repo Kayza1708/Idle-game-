@@ -1,0 +1,38 @@
+[
+  {
+    "width": 320,
+    "title": "Idle Intelligence",
+    "logo": {
+      "loaded": true,
+      "width": 64,
+      "height": 64,
+      "inside": true
+    },
+    "manifest": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "title": "Idle Intelligence",
+    "logo": {
+      "loaded": true,
+      "width": 64,
+      "height": 64,
+      "inside": true
+    },
+    "manifest": true,
+    "errors": []
+  },
+  {
+    "width": 430,
+    "title": "Idle Intelligence",
+    "logo": {
+      "loaded": true,
+      "width": 64,
+      "height": 64,
+      "inside": true
+    },
+    "manifest": true,
+    "errors": []
+  }
+]

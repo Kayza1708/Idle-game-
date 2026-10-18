@@ -1,3 +1,14 @@
+## 2026-10-18 · Idle Intelligence: Name und App-Icon
+
+- [x] Freigegebenes Chip-Logo mit Schriftzug integriert: Spielmenü, Web-Favicon, Apple-Touch-Icon und Webmanifest; sichtbare Namen aktualisiert.
+- [x] Deckendes 1024-px-App-Store-/iOS-Icon und Android-Launcher-Exporte vorbereitet; App-/Paket- und Speicherkennungen beibehalten.
+- [x] Sichere Übernahme in bestehende Capacitor-Projekte per `branding:apply`; Mac-Ablauf `ios:prepare` erstellt. Wiederholbarkeit und installierte iOS-/Android-Vorlagen geprüft.
+- [x] Browserabnahme bei 320/390/430 px: Logo, Namen, Manifest und Bilddateien geprüft, keine Seitenüberbreite oder Laufzeitfehler; Typecheck und Produktionsbuild bestanden.
+- [x] Vollständige Testsuite mit 1.652 Tests in 119 Dateien bestanden.
+- [ ] Echte Xcode-/Android-Studio-Builds und App-Store-Connect-/Play-Listing bleiben manuell auf den jeweiligen Systemen zu prüfen.
+
+[Icon, Vorschau und Mac-Anleitung](idle-intelligence-branding.md).
+
 ## 2026-10-18 · Gemeinsame Oberflächen, Beta 7
 
 - [x] Originalmotive für Hardware, Shop und Menü präzise ausgeschnitten; gemeinsamer Bitmap-Viewport mit den vorhandenen Items, unveränderte Assets.

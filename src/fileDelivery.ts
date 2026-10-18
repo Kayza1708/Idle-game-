@@ -10,7 +10,7 @@ export async function deliverFile(file:ExportFile):Promise<'download'|'share'>{
   if(!Capacitor.isPluginAvailable('Filesystem')||!Capacitor.isPluginAvailable('Share'))throw new Error('NATIVE_EXPORT_UNAVAILABLE');
   const path=`exports/${file.name}`;
   const {uri}=await Filesystem.writeFile({path,directory:Directory.Cache,data:bytesToBase64(file.bytes),recursive:true});
-  try{await Share.share({title:file.name,files:[uri],dialogTitle:'AI Singularity'});}finally{await Filesystem.deleteFile({path,directory:Directory.Cache}).catch(()=>{});}
+  try{await Share.share({title:file.name,files:[uri],dialogTitle:'Idle Intelligence'});}finally{await Filesystem.deleteFile({path,directory:Directory.Cache}).catch(()=>{});}
   return 'share';
  }
  const url=URL.createObjectURL(new Blob([file.bytes as BlobPart],{type:file.mime})),link=document.createElement('a');

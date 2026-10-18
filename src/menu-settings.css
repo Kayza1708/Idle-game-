@@ -24,3 +24,5 @@
 .mobile-settings .setting-toggle input[type=checkbox]:checked::after{translate:none;transform:translateX(22px);background:#c0ffe1;border-color:#d7ffed}
 .mobile-settings .setting-toggle input:focus-visible{outline:2px solid #b5f5d9;outline-offset:1px}
 @media(prefers-reduced-motion:reduce){.mobile-settings .setting-toggle input::after{transition:none}}
+
+.meta-menu .menu-brand{display:flex;align-items:center;gap:12px;min-width:0}.menu-brand-icon{display:block;width:64px;height:64px;flex:0 0 64px;object-fit:contain}.meta-menu>header .menu-brand small{letter-spacing:.08em}

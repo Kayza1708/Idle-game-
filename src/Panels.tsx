@@ -101,7 +101,7 @@ export function Research({s,act,videoAvailable=false,videoBusy=false}:{s:GameSta
  </div>
 }
 export function Inventory({s,act}:{s:GameState;act:Action}){return <ForgeScreen key={`${s.telemetry.campaignId}:${s.retention.activeRun?.runId??'main'}`} s={s} act={act}/>}
-export function Shop({s,act,videoAvailable=false,videoBusy=false,nativeShop,purchaseVerifier}:StoreServices&{s:GameState;act:Action;videoAvailable?:boolean;videoBusy?:boolean}){return <div className="panel mobile-screen shop-screen"><header className="mobile-screen-title"><div><small>AI SINGULARITY</small><h1>{s.settings.language==='de'?'Shop':'Shop'}</h1></div><b><GemAmount value={s.gems}/></b></header><GemShop s={s} act={act} videoAvailable={videoAvailable} videoBusy={videoBusy} nativeShop={nativeShop} purchaseVerifier={purchaseVerifier}/></div>}
+export function Shop({s,act,videoAvailable=false,videoBusy=false,nativeShop,purchaseVerifier}:StoreServices&{s:GameState;act:Action;videoAvailable?:boolean;videoBusy?:boolean}){return <div className="panel mobile-screen shop-screen"><header className="mobile-screen-title"><div><small>IDLE INTELLIGENCE</small><h1>{s.settings.language==='de'?'Shop':'Shop'}</h1></div><b><GemAmount value={s.gems}/></b></header><GemShop s={s} act={act} videoAvailable={videoAvailable} videoBusy={videoBusy} nativeShop={nativeShop} purchaseVerifier={purchaseVerifier}/></div>}
 
 export function Prestige(props:{s:GameState;act:Action}){return props.s.progression?.version===2?<ProgressionPanel {...props}/>:<LegacyPrestige {...props}/>;}
 function LegacyPrestige({s,act}:{s:GameState;act:Action}){
