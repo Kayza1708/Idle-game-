@@ -1,0 +1,655 @@
+{
+  "source": "2026-10-18T19:50:12.410Z; anonymized partial reconstruction, not a full save",
+  "resources": {
+    "credits": 3812613.9965874664,
+    "data": 69623.79411961017,
+    "researchPoints": 0,
+    "gems": 93
+  },
+  "balances": {
+    "credits": {
+      "m": 3.8126139965874666,
+      "e": 6,
+      "terms": [
+        [
+          -13,
+          800000
+        ],
+        [
+          -12,
+          6692718
+        ],
+        [
+          -11,
+          6782545
+        ],
+        [
+          -10,
+          1946534
+        ],
+        [
+          -9,
+          5671550
+        ],
+        [
+          -8,
+          6519172
+        ],
+        [
+          -7,
+          4266957
+        ],
+        [
+          -6,
+          5708813
+        ],
+        [
+          -5,
+          4058352
+        ],
+        [
+          -4,
+          9478085
+        ],
+        [
+          -3,
+          7116731
+        ],
+        [
+          -2,
+          6660300
+        ],
+        [
+          -1,
+          9965874
+        ],
+        [
+          0,
+          -6187387
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "data": {
+      "m": 6.962379411961018,
+      "e": 4,
+      "terms": [
+        [
+          -8,
+          8774000
+        ],
+        [
+          -7,
+          8908041
+        ],
+        [
+          -6,
+          4057014
+        ],
+        [
+          -5,
+          2084541
+        ],
+        [
+          -4,
+          2684547
+        ],
+        [
+          -3,
+          9836183
+        ],
+        [
+          -2,
+          1017986
+        ],
+        [
+          -1,
+          7941196
+        ],
+        [
+          0,
+          69623
+        ]
+      ]
+    },
+    "researchPoints": {
+      "m": 0,
+      "e": 0
+    },
+    "lifetimeDataGenerated": {
+      "m": 7.706679411961018,
+      "e": 4,
+      "terms": [
+        [
+          -8,
+          8774000
+        ],
+        [
+          -7,
+          8908041
+        ],
+        [
+          -6,
+          4057014
+        ],
+        [
+          -5,
+          2084541
+        ],
+        [
+          -4,
+          2684547
+        ],
+        [
+          -3,
+          9836183
+        ],
+        [
+          -2,
+          1017986
+        ],
+        [
+          -1,
+          7941196
+        ],
+        [
+          0,
+          77066
+        ]
+      ]
+    },
+    "runCreditsEarned": {
+      "m": 4.596184143494947,
+      "e": 7,
+      "terms": [
+        [
+          -13,
+          800000
+        ],
+        [
+          -12,
+          6692718
+        ],
+        [
+          -11,
+          6782545
+        ],
+        [
+          -10,
+          1946534
+        ],
+        [
+          -9,
+          5671550
+        ],
+        [
+          -8,
+          6519172
+        ],
+        [
+          -7,
+          4266957
+        ],
+        [
+          -6,
+          5708813
+        ],
+        [
+          -5,
+          7058352
+        ],
+        [
+          -4,
+          1514376
+        ],
+        [
+          -3,
+          9899799
+        ],
+        [
+          -2,
+          6318950
+        ],
+        [
+          -1,
+          4349494
+        ],
+        [
+          0,
+          5961841
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    "lifetimeCreditsEarned": {
+      "m": 4.596184143494947,
+      "e": 7,
+      "terms": [
+        [
+          -13,
+          800000
+        ],
+        [
+          -12,
+          6692718
+        ],
+        [
+          -11,
+          6782545
+        ],
+        [
+          -10,
+          1946534
+        ],
+        [
+          -9,
+          5671550
+        ],
+        [
+          -8,
+          6519172
+        ],
+        [
+          -7,
+          4266957
+        ],
+        [
+          -6,
+          5708813
+        ],
+        [
+          -5,
+          7058352
+        ],
+        [
+          -4,
+          1514376
+        ],
+        [
+          -3,
+          9899799
+        ],
+        [
+          -2,
+          6318950
+        ],
+        [
+          -1,
+          4349494
+        ],
+        [
+          0,
+          5961841
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    "lifetimeEligibleCredits": {
+      "m": 4.596184143494947,
+      "e": 7,
+      "terms": [
+        [
+          -13,
+          800000
+        ],
+        [
+          -12,
+          6692718
+        ],
+        [
+          -11,
+          6782545
+        ],
+        [
+          -10,
+          1946534
+        ],
+        [
+          -9,
+          5671550
+        ],
+        [
+          -8,
+          6519172
+        ],
+        [
+          -7,
+          4266957
+        ],
+        [
+          -6,
+          5708813
+        ],
+        [
+          -5,
+          7058352
+        ],
+        [
+          -4,
+          1514376
+        ],
+        [
+          -3,
+          9899799
+        ],
+        [
+          -2,
+          6318950
+        ],
+        [
+          -1,
+          4349494
+        ],
+        [
+          0,
+          5961841
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    "cycleEligibleCredits": {
+      "m": 4.596184143494947,
+      "e": 7,
+      "terms": [
+        [
+          -13,
+          800000
+        ],
+        [
+          -12,
+          6692718
+        ],
+        [
+          -11,
+          6782545
+        ],
+        [
+          -10,
+          1946534
+        ],
+        [
+          -9,
+          5671550
+        ],
+        [
+          -8,
+          6519172
+        ],
+        [
+          -7,
+          4266957
+        ],
+        [
+          -6,
+          5708813
+        ],
+        [
+          -5,
+          7058352
+        ],
+        [
+          -4,
+          1514376
+        ],
+        [
+          -3,
+          9899799
+        ],
+        [
+          -2,
+          6318950
+        ],
+        [
+          -1,
+          4349494
+        ],
+        [
+          0,
+          5961841
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    "prestigeEntitlementClaimed": {
+      "m": 0,
+      "e": 0
+    },
+    "totalINTEarned": {
+      "m": 0,
+      "e": 0
+    },
+    "cycleINTEarned": {
+      "m": 0,
+      "e": 0
+    },
+    "unspentINT": {
+      "m": 0,
+      "e": 0
+    },
+    "spentINT": {
+      "m": 0,
+      "e": 0
+    }
+  },
+  "hardware": {
+    "total": 82,
+    "counts": {
+      "calculator": 50,
+      "sbc": 25,
+      "pc": 1,
+      "gpu": 6,
+      "rig": 0,
+      "server": 0,
+      "farm": 0,
+      "campus": 0,
+      "cloud": 0,
+      "liquid": 0,
+      "subsea": 0,
+      "orbital": 0,
+      "lunar": 0,
+      "dyson": 0,
+      "matrioshka": 0
+    },
+    "classUpgrades": [],
+    "discovered": [
+      "calculator",
+      "sbc",
+      "pc",
+      "gpu"
+    ]
+  },
+  "model": {
+    "level": 10,
+    "qualityLevel": 6,
+    "efficiencyLevel": 4,
+    "training": 0,
+    "activeTraining": null,
+    "trainingQueue": []
+  },
+  "researchLevels": {
+    "dataGeneration": 4,
+    "materialAnalysis": 1,
+    "blueprintAnalysis": 0,
+    "modelArchitecture": 3,
+    "computeOptimization": 0,
+    "userScaling": 0,
+    "hardwareIntegration": 0,
+    "labAutomation": 0,
+    "commercialization": 1,
+    "networkEffects": 0,
+    "parallelArchitecture": 0,
+    "hardwareCoDesign": 0,
+    "syntheticData": 0,
+    "dataFlywheel": 0,
+    "recursiveLearning": 0,
+    "autonomousScience": 0,
+    "tapAmplification": 0,
+    "dropProtocols": 0
+  },
+  "completedResearch": [
+    "blueprints",
+    "alignment"
+  ],
+  "items": {
+    "inventory": [
+      {
+        "id": "item-8",
+        "type": "impulse-relay",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false,
+        "forge": 0,
+        "relayTaps": 323
+      },
+      {
+        "id": "item-19",
+        "type": "memory-crystal",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false,
+        "forge": 0,
+        "relayTaps": 0
+      },
+      {
+        "id": "item-25",
+        "type": "memory-crystal",
+        "rarity": "common",
+        "level": 1,
+        "locked": false,
+        "forge": 0,
+        "relayTaps": 0
+      },
+      {
+        "id": "item-28",
+        "type": "lab-drone",
+        "rarity": "uncommon",
+        "level": 1,
+        "locked": false,
+        "forge": 0,
+        "relayTaps": 0
+      },
+      {
+        "id": "item-182",
+        "type": "quantum-chip",
+        "rarity": "common",
+        "level": 1,
+        "locked": false,
+        "forge": 0,
+        "relayTaps": 0
+      },
+      {
+        "id": "item-187",
+        "type": "field-scanner",
+        "rarity": "common",
+        "level": 1,
+        "locked": false,
+        "forge": 0,
+        "relayTaps": 0
+      }
+    ],
+    "equipped": {
+      "processor": "item-8",
+      "core": "item-19",
+      "research": "item-28"
+    }
+  },
+  "entitlement": {
+    "m": 2.450978578526844,
+    "e": -1,
+    "terms": [
+      [
+        -7,
+        2500000
+      ],
+      [
+        -6,
+        2157101
+      ],
+      [
+        -5,
+        185461
+      ],
+      [
+        -4,
+        8206924
+      ],
+      [
+        -3,
+        4386561
+      ],
+      [
+        -2,
+        5785268
+      ],
+      [
+        -1,
+        2450978
+      ]
+    ]
+  },
+  "expectedCreditRate": {
+    "m": 4.056859577994558,
+    "e": 4,
+    "terms": [
+      [
+        -10,
+        6736000
+      ],
+      [
+        -9,
+        8927003
+      ],
+      [
+        -8,
+        5299562
+      ],
+      [
+        -7,
+        5552467
+      ],
+      [
+        -6,
+        7200301
+      ],
+      [
+        -5,
+        8987438
+      ],
+      [
+        -4,
+        2930922
+      ],
+      [
+        -3,
+        2273522
+      ],
+      [
+        -2,
+        4558751
+      ],
+      [
+        -1,
+        5957799
+      ],
+      [
+        0,
+        40568
+      ]
+    ]
+  }
+}

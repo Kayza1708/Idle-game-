@@ -1,0 +1,38 @@
+[
+  {
+    "width": 320,
+    "reportStateGPUPrice": "2,7 Mio.",
+    "persisted": {
+      "gpu": 7,
+      "paidResearchData": 1140,
+      "baseDuration": 150,
+      "durationSeconds": 123.05606429088823
+    },
+    "reload": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "reportStateGPUPrice": "2,7 Mio.",
+    "persisted": {
+      "gpu": 7,
+      "paidResearchData": 1140,
+      "baseDuration": 150,
+      "durationSeconds": 123.05606429088823
+    },
+    "reload": true,
+    "errors": []
+  },
+  {
+    "width": 430,
+    "reportStateGPUPrice": "2,7 Mio.",
+    "persisted": {
+      "gpu": 7,
+      "paidResearchData": 1140,
+      "baseDuration": 150,
+      "durationSeconds": 123.05606429088823
+    },
+    "reload": true,
+    "errors": []
+  }
+]

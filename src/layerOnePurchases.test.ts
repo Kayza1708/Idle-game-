@@ -2,6 +2,7 @@ import {newGame} from './legacyContractFixture';
 import baseline from './testSupport/dataAnalysisBaseline.json';
 import {describe,expect,it} from 'vitest';
 import {BALANCE,buyHardwareClass,exactEconomyValue,hardwareBulkCostScientific,hardwareCostScientific,hardwareIds,isolatedBulkCostScientific,layerOneProfile,maxAffordable} from './economy';
+import {predecessorProjection} from './testSupport/protectedProgression';
 import {ScientificNumber} from './scientificNumber';
 import {simulateLayerOne} from './layerOneSimulation';
 
@@ -14,6 +15,6 @@ describe('layer one credit purchases',()=>{
 });
 
 describe('current protected hardware catalog',()=>{
- it('keeps the accepted layer-one hardware prices and production unchanged',()=>{expect(hardwareIds.map(id=>[BALANCE.hardware[id].baseCost,BALANCE.hardware[id].compute])).toEqual(hardwareIds.map(id=>[baseline.parameters.hardware[id].baseCost,baseline.parameters.hardware[id].compute]));});
- it('retains all classes and configured growth factors',()=>{expect(hardwareIds).toHaveLength(15);expect(hardwareIds.map(id=>BALANCE.hardware[id].growth)).toEqual([1.17,1.18,1.19,1.20,1.21,1.22,1.23,1.24,1.25,1.26,1.27,1.28,1.29,1.30,1.31]);});
+ it('accepts the authorized early prices while preserving production and late classes',()=>{expect(hardwareIds.map(id=>[predecessorProjection(BALANCE.hardware[id].baseCost,baseline.parameters.hardware[id].baseCost,`hardware.${id}.baseCost`),BALANCE.hardware[id].compute])).toEqual(hardwareIds.map(id=>[baseline.parameters.hardware[id].baseCost,baseline.parameters.hardware[id].compute]));});
+ it('retains all classes and configured growth factors',()=>{expect(hardwareIds).toHaveLength(15);expect(hardwareIds.map(id=>BALANCE.hardware[id].growth)).toEqual([1.17,1.16,1.17,1.18,1.19,1.20,1.23,1.24,1.25,1.26,1.27,1.28,1.29,1.30,1.31]);});
 });
