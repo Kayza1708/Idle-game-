@@ -3,7 +3,7 @@ import type {PrestigeNodeV2,AxiomNodeV2} from './progression';
 import {challengeCatalogQuote,addChallengeMetrics,type ChallengeFamily} from './challengeStages';
 import {preservedResearchAccess} from './researchAreas';
 import {unlockResearchAreaForNode} from './researchAreas';
-import { BALANCE, newGame, initializeRun,runStartContract,automaticRestartAvailable, BreakthroughId, canPrestige, GameState, newINT,newINTScientific, prestigeClaimScientific, equipmentSlotCount, addAxiomAmounts, subtractAxiomAmounts, axiomEconomyValue, creditMultiplierFromAxiomsScientific, PrestigeUpgradeId, prestigeUpgradeCost,prestigeUpgradeCostScientific, upgradeLevel, exactEconomyValue, hasNode,axiomThresholdScientific, MAX_ECONOMY_VALUE,creditMultiplierFromAxioms,creditMultiplierFromINT,type AxiomUpgradeId,axiomUpgradeCost } from './economy';
+import { BALANCE, newGame, initializeRun,runStartContract,automaticRestartAvailable, BreakthroughId, canPrestige, GameState, newINTScientific, prestigeClaimScientific, equipmentSlotCount, addAxiomAmounts, subtractAxiomAmounts, axiomEconomyValue, PrestigeUpgradeId, prestigeUpgradeCost,prestigeUpgradeCostScientific, upgradeLevel, exactEconomyValue, axiomThresholdScientific, MAX_ECONOMY_VALUE,creditMultiplierFromAxioms,creditMultiplierFromINT,type AxiomUpgradeId,axiomUpgradeCost } from './economy';
 import {ScientificNumber} from './scientificNumber';
 import { addEvent, recordPrestige } from './telemetry';
 import {prestigeGate} from './retention';

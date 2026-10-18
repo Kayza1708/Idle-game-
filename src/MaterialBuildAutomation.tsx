@@ -1,5 +1,5 @@
 import {ScientificNumber} from './scientificNumber';
-import {automationFeatureUnlocked,formatScientific,BALANCE,type GameState,type ItemTypeId,type ExperimentId} from './economy';
+import {automationFeatureUnlocked,formatScientific,BALANCE,type GameState,type ExperimentId} from './economy';
 import {analysisAffordability,analysisBlockReason} from './experiments';
 import {craftingAffordability,plannedItemCount,craftingMissingText} from './inventory';
 import {blueprintQuote,recipeIds} from './blueprints';

@@ -41,9 +41,9 @@ Echte Videos und Zahlungen benötigen weiterhin den nativen Anbieter, verifizier
 
 Regressionstests prüfen Sofort-Transaktionen, Schutzregeln, Save-Migration, Kaufberechtigungen, getrennte Abholbelege, Fristende, volle Kistenbestände und Video-Wiederholschutz. `scripts/instant-season-audit.mjs` bedient die echte App mit einem klar synthetischen, finanzierten Testspielstand: Ausrüsten, Crafting-/Fusionsanimationen, Season-Vorschauen, Kiste abholen/öffnen, 320/390/430 px und reduzierte Bewegung. Das ist keine natürliche Balance-Messung und kein iPhone-Test.
 
-![Ausrüstung](screenshots/instant-equipment.png)
-![Kostenlose Season](screenshots/instant-season-free.png)
-![Premium Season](screenshots/instant-season-premium.png)
-![Fusion](screenshots/instant-fusion.png)
+Ausrüstung (historischer Nachweis: Git-Historie vor Bereinigung)
+Kostenlose Season (historischer Nachweis: Git-Historie vor Bereinigung)
+Premium Season (historischer Nachweis: Git-Historie vor Bereinigung)
+Fusion (historischer Nachweis: Git-Historie vor Bereinigung)
 
 Lokale Abnahme mit Node 22.23.3: Typecheck, 1.648 Tests in 118 Dateien und Produktionsbuild bestanden. Vite meldet weiterhin einen großen Hauptchunk; Geräteperformance ist noch separat zu messen.

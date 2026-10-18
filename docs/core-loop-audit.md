@@ -18,7 +18,7 @@ Die Allocation-Helfer und aktive Profilaktion entfallen. Gespeicherte Profil-IDs
 
 `early`: neuer Stand, erster Taschenrechner regulär für 15 Credits gekauft. `hardware`: vorbereitete 1e6 Credits/Data, 25 Taschenrechner und ein SBC regulär bezahlt. `bonuses`: identischer Hardwarezustand, Quality 5, Efficiency 3, Modelllevel 8, Compute Optimization 2, User Scaling 2, Commercialization 3, Compute-Netz-Knoten 1 und zwei historische Axiome. Kein natürlicher Progressions- oder Langzeitlauf. Jeder Zustand wird mit allen drei gespeicherten Profilen gemessen, ohne Zeitfortschritt oder weitere Aktionen.
 
-Originalmessung am unveränderten Ausgangsstand vor dem Fix; Nachmessung mit demselben Skript. Reproduktion: `npx vite-node --script scripts/core-loop-comparison.ts` (Node 22). Vollständige wissenschaftliche Daten einschließlich Data-Raten: [core-loop-comparison.json](core-loop-comparison.json). Für den Ausgangsstand dasselbe Skript gegen dessen `src/economy` ausführen.
+Originalmessung am unveränderten Ausgangsstand vor dem Fix; Nachmessung mit demselben Skript. Reproduktion: `npx vite-node --script scripts/core-loop-comparison.ts` (Node 22). Vollständige wissenschaftliche Daten einschließlich Data-Raten: core-loop-comparison.json (historischer Nachweis: Git-Historie vor Bereinigung). Für den Ausgangsstand dasselbe Skript gegen dessen `src/economy` ausführen.
 
 | Zustand | Profil | Compute/s vorher = nachher | Users vorher | Users nachher | Credits/s vorher | Credits/s nachher |
 |---|---|---|---|---|---|---|

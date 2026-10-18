@@ -21,7 +21,7 @@ function grant(s:GameState,id:number,payment:CapsuleReceipt['payment'],rng:()=>n
  const random=()=>{const value=rng();if(!Number.isFinite(value)||value<0||value>=1)throw new RangeError('Invalid capsule roll');return value};
  let next=s,item:CapsuleReceipt['item']=null,components:CapsuleReceipt['components']={},rarity:Rarity='common',kind:CapsuleReceipt['kind']='components',resource:CapsuleReceipt['resource']=null;const roll=random();
  if(roll<q.itemChance){
-  if(!q.items.length)return s;let value=random(),picked=rarities.at(-1)!;for(const r of rarities){value-=BALANCE.rarity[r].chance;if(value<0){picked=r;break}}
+  if(!q.items.length)return s;random(); // Preserve the established seeded draw sequence; capsule items are always Common.
   rarity='common';const type=q.items[Math.floor(random()*q.items.length)];next=createItem(s,type,rarity);if(next===s)return s;item={id:next.inventory.at(-1)!.id,type};kind='item';
  }else if(roll<q.itemChance+BALANCE.capsuleMachine.componentChance){
   let value=random(),picked=q.materials.at(-1);for(const row of q.materials){value-=row.chance;if(value<0){picked=row;break}}if(!picked)return s;

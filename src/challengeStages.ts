@@ -1,5 +1,5 @@
 import {activeSlotIds} from './progression';
-import {BALANCE,formatScientific,exactEconomyValue,prestigeClaimForEligibleScientific,computeRateScientific,usersRateScientific,creditRateScientific,scientificCeil,hardwareIds,hasNode,classComputeTerms,itemTypes,equipmentSlotCount,equipmentSlots,slotFamily,type GameState,type Item} from './economy';
+import {BALANCE,formatScientific,exactEconomyValue,prestigeClaimForEligibleScientific,computeRateScientific,usersRateScientific,creditRateScientific,scientificCeil,hardwareIds,hasNode,classComputeTerms,itemTypes,equipmentSlotCount,slotFamily,type GameState,type Item} from './economy';
 import {researchAreaFor,researchAccess} from './researchAreas';
 import {ScientificNumber,type ScientificJSON} from './scientificNumber';
 export type ChallengeFamily=keyof typeof BALANCE.challengeCatalog.families;

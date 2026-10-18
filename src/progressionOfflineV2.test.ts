@@ -1,11 +1,9 @@
 import { describe, it, expect } from "vitest";
 import {
   newGame,
-  BALANCE,
   buyHardwareClass,
   exactEconomyValue,
   addData,
-  startResearchProject,
 } from "./economy";
 import { advance } from "./simulation";
 import { serialize, restore } from "./storage";

@@ -44,7 +44,7 @@ npm run balance:early -- casual node_modules/.cache/early-casual.json
 
 ## Bestehender Reportzustand
 
-Aus dem anonymisierten Teilzustand mit 82 Geräten, Q6/E4, denselben sechs Items, etwa 3,81 Mio. Credits und 0,245 INT lässt sich die ursprüngliche Produktion von 40.568,60 Credits/s reproduzieren. [Rekonstruktionsdaten](early-balance-report-start.json). Dies ist kein vollständiger Save und kein Ersatz für den Originalexport.
+Aus dem anonymisierten Teilzustand mit 82 Geräten, Q6/E4, denselben sechs Items, etwa 3,81 Mio. Credits und 0,245 INT lässt sich die ursprüngliche Produktion von 40.568,60 Credits/s reproduzieren. Rekonstruktionsdaten (historischer Nachweis: Git-Historie vor Bereinigung). Dies ist kein vollständiger Save und kein Ersatz für den Originalexport.
 
 Die nächste GPU ist jetzt mit dem vorhandenen Guthaben kaufbar: ungefähr 2,7 Mio. Credits für Gerät sieben. Modellarchitektur Stufe vier kostet in diesem Zustand 1.140 Daten und dauert rund 123 Sekunden statt einer langen Laborblockade. In der fortgeführten Vergleichsstrategie liegt die erste ganze INT nach etwa 18,7 min statt 47,8 min; zusätzliche Käufe werden dabei tatsächlich bezahlt. Diese Zeiten beginnen am rekonstruierten Reportzustand, nicht bei einem neuen Spiel.
 

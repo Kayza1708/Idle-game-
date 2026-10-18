@@ -8,7 +8,7 @@ Geprüft: acht Shopprofile (DE/EN, 360–430 px, reduzierte/abgeschaltete Effekt
 
 Built on the item/chest work in PR113. This feature adds a four-category shop, new pure transactions and durable claims. It does not activate a native SDK or real payment flow.
 
-[Actual browser tour (MP4)](previews/shop-tour.mp4) · [Today](screenshots/shop-today.webp) · [Chest catalogue](screenshots/shop-chests.webp) · [Materials](screenshots/shop-materials.webp) · [Gem/bundle previews](screenshots/shop-bundles.webp) · [Confirmed Legendary receipt](screenshots/shop-legendary-reward.webp).
+Actual browser tour (MP4) (historischer Nachweis: Git-Historie vor Bereinigung) · Today (historischer Nachweis: Git-Historie vor Bereinigung) · Chest catalogue (historischer Nachweis: Git-Historie vor Bereinigung) · Materials (historischer Nachweis: Git-Historie vor Bereinigung) · Gem/bundle previews (historischer Nachweis: Git-Historie vor Bereinigung) · Confirmed Legendary receipt (historischer Nachweis: Git-Historie vor Bereinigung).
 
 The clip/captures use a prepared funded fixture and real application actions. The separate ad verification harness uses a mock provider; the recorded production UI correctly shows ads unavailable. No real ad or native purchase is represented as completed.
 

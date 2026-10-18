@@ -28,7 +28,7 @@ Das bisher garantierte Komponentenbudget wird mit unveränderten Ziehungen auf K
 
 Explizit vorbereitete identische Ressourcen-/Prestigezustände, Common Level 0/Forge 0. Slots werden im Nachweisskript regulär gekauft, Items durch bestehende Domainfunktion angelegt und regulär ausgerüstet. Produktion, Training und Analyse verwenden echte Domainfunktionen. **Keine natürliche Progressionsmessung und kein Nachweis der natürlichen Beschaffung oder Balance.**
 
-Die Referenz ohne neue Kombination stammt aus den tatsächlichen Economy-/Analysefunktionen von main 7b265cb auf demselben vorbereiteten Zustand, nicht aus einer rückwärts berechneten Rate. Referenz: `src/testSupport/itemBuildsBaseline.json`. Vergleich: [item-builds-proof.json](item-builds-proof.json), Reproduktion `npx vite-node --script scripts/item-builds-proof.ts work/item-builds-proof.json`.
+Die Referenz ohne neue Kombination stammt aus den tatsächlichen Economy-/Analysefunktionen von main 7b265cb auf demselben vorbereiteten Zustand, nicht aus einer rückwärts berechneten Rate. Referenz: `src/testSupport/itemBuildsBaseline.json`. Vergleich: item-builds-proof.json (historischer Nachweis: Git-Historie vor Bereinigung), Reproduktion `npx vite-node --script scripts/item-builds-proof.ts work/item-builds-proof.json`.
 
 | Vergleich, vorhandene Einzelwirkungen beibehalten | Ohne neuen Beitrag | Mit neuem Beitrag |
 | --- | ---: | ---: |
@@ -61,7 +61,7 @@ git diff --check
 
 Der SHA-256 der JSON-serialisierten ursprünglichen BALANCE-Werte (neues Register ausgeschlossen) ist unverändert: `6c692caa268841af8a610dca7def0281d3715c5cf444bf3e2a812837e123e00f`. Rezepte, Preise, Hardwarekurven, Research-, Prestige- und Axiomparameter unverändert.
 
-Browser: `scripts/browser-item-builds.py` (47,37 s), 390×844, DE/EN, sechs Kombination-/Sprachfälle, echte Ausrüstungsklicks, zunächst unvollständig und danach aktiv, tatsächlicher Trainingsstart für 9 Data in beiden Sprachen sowie separate Deckelzustände 8→8. Alle fünf Karten pro Ansicht geometrisch geprüft: Text innerhalb der Karten, kein horizontaler Seitenoverflow, keine Pageerrors. [Protokoll und 16 Screenshots](screenshots/item-builds/results.json). Die Screenshots warten nach dem Scrollen auf eine stabile Darstellung; eine zunächst direkt nach dem Scrollen abgeschnittene Anfangsbeschriftung ist in den finalen Aufnahmen vollständig. Keine unbelegte DOM-Overflow-Ursache behauptet.
+Browser: `scripts/browser-item-builds.py` (47,37 s), 390×844, DE/EN, sechs Kombination-/Sprachfälle, echte Ausrüstungsklicks, zunächst unvollständig und danach aktiv, tatsächlicher Trainingsstart für 9 Data in beiden Sprachen sowie separate Deckelzustände 8→8. Alle fünf Karten pro Ansicht geometrisch geprüft: Text innerhalb der Karten, kein horizontaler Seitenoverflow, keine Pageerrors. Protokoll und 16 Screenshots (historischer Nachweis: Git-Historie vor Bereinigung). Die Screenshots warten nach dem Scrollen auf eine stabile Darstellung; eine zunächst direkt nach dem Scrollen abgeschnittene Anfangsbeschriftung ist in den finalen Aufnahmen vollständig. Keine unbelegte DOM-Overflow-Ursache behauptet.
 
 Typecheck/Build/Diffcheck bestehen. Die bestehende Vite-Warnung zum großen Bundle bleibt. Keine Gesamtsuite, FAST/DEEP oder Tages-/Monatskampagne. Commits mit `[skip ci]` vermeiden die pauschale CI-Gesamtsuite.
 

@@ -22,6 +22,6 @@ Die iOS-Projektdateien liegen nicht im Repository. Installation/Sync und Privacy
 
 Browserprüfungen auf 360×640, 390×844 und 430×844: neuer Shop vorhanden, normaler Button → Queue, gespeicherte Queue nach Reload, alle neun Einstellungszeilen ohne internes Abschneiden, Eingabefokus bleibt beim Speichern erhalten, ZIP heruntergeladen. Alle drei Dateien mit ZIP-CRC und parsebarem summary.json geprüft (19 Dateien je Archiv). Neue Domain- und Bridge-Tests decken Sofortstart, Vormerken ohne Abbuchung, Doppeltippen, Reload/Autostart, gesperrten Zugang, Binärtreue, native Übergabe, fehlende Plugins, Abbruch/Retry und Browser-URL-Lebensdauer ab.
 
-Screenshots: [Menü](screenshots/review-menu.webp), [Einstellungen](screenshots/review-settings.webp), [Queue](screenshots/review-research.webp), [Export](screenshots/review-export.webp).
+Screenshots: Menü (historischer Nachweis: Git-Historie vor Bereinigung), Einstellungen (historischer Nachweis: Git-Historie vor Bereinigung), Queue (historischer Nachweis: Git-Historie vor Bereinigung), Export (historischer Nachweis: Git-Historie vor Bereinigung).
 
 Abschlussprüfung: Typecheck, alle 1.530 Tests in 112 Dateien, Produktionsbuild und git diff --check erfolgreich. Bestehende Warnung zur Bundlegröße bleibt. Keine reale Werbung, Zahlung, Veröffentlichung oder automatischer Merge.

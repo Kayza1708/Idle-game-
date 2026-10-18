@@ -2,7 +2,7 @@
 
 ## Ergebnis des hochgeladenen Berichts
 
-Quelle: Export vom 18.10.2026, 19:50 UTC. [Abgeleitete Messwerte](taps-names-run-analysis.json); der persönliche ZIP-Export wird nicht ins Repository übernommen.
+Quelle: Export vom 18.10.2026, 19:50 UTC. Abgeleitete Messwerte (historischer Nachweis: Git-Historie vor Bereinigung); der persönliche ZIP-Export wird nicht ins Repository übernommen.
 
 | Messwert | Beobachtung |
 | --- | --- |

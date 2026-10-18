@@ -2,7 +2,7 @@ import {importGame} from './legacyContractFixture';
 import {newGame,restore} from './legacyContractFixture';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,it,expect} from 'vitest';
-import {addData,addCredits,exactEconomyValue,researchPreview,startResearchProject,type GameState} from './economy';
+import {addData,addCredits,researchPreview,startResearchProject,type GameState} from './economy';
 import {researchNodeAccess,researchAreas,researchAccess,visibleResearchIds,assertResearchAreaCatalog} from './researchAreas';
 import {buyNode,prestige,axiomReset} from './prestige';
 import {serialize} from './storage';
@@ -15,7 +15,7 @@ const ready=()=>({...addData(newGame(0),1e8),unspentINT:1e6,totalINTEarned:1e6,c
 const legacy=(s:GameState,missingArea=false)=>{const raw=structuredClone(s) as any;const strip=(x:any)=>{for(const k of ['researchAccessIds','researchRepeat','researchDirector','runTrainingStarted','craftingRecycleRemainders'])delete x[k];if(missingArea)delete x.researchAreas;if(x.challengeSession)strip(x.challengeSession.main)};strip(raw);return JSON.stringify({version:43,state:raw})};
 describe('project-specific permanent research access',()=>{
  it('contains all 26 IDs once, with precisely three starting projects',()=>{assertResearchAreaCatalog();expect(Object.values(researchAreas).flatMap(a=>a.ids)).toHaveLength(26);expect(visibleResearchIds(ready())).toEqual(['dataGeneration','modelArchitecture','blueprints']);});
- it('a regular node purchase opens only its specified stage, once',()=>{let s=ready();for(const [node,ids] of Object.entries(Object.entries(researchNodeAccess).reduce((rows,[id,node])=>({...rows,[node!]:[...(rows[node!]??[]),id]}),{} as Record<string,string[]>))){const before=new Set(visibleResearchIds(s)),after=buyNode(s,node as never);if(after===s){ // buy prerequisite stages first
+ it('a regular node purchase opens only its specified stage, once',()=>{let s=ready();for(const [node,ids] of Object.entries(Object.entries(researchNodeAccess).reduce((rows,[id,node])=>({...rows,[node!]:[...(rows[node!]??[]),id]}),{} as Record<string,string[]>))){const after=buyNode(s,node as never);if(after===s){ // buy prerequisite stages first
  const family=node.replace(/\d+$/,'');for(let stage=1;stage<Number(node.at(-1));stage++)s=buyNode(s,`${family}${stage}` as never);
  }
  const prev=s,opened=buyNode(s,node as never);expect(opened.nodes).toContain(node);expect(visibleResearchIds(opened).filter(id=>!visibleResearchIds(prev).includes(id))).toEqual(ids);expect(buyNode(opened,node as never)).toBe(opened);s=opened;}});

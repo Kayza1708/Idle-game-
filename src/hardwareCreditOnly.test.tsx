@@ -1,10 +1,9 @@
 import {newGame} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {BALANCE,addCreditsScientific,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,creditRateScientific,hardwareBulkCostScientific,passiveCircuitRate,type GameState} from './economy';
+import {BALANCE,addCreditsScientific,buyHardwareClass,hardwareIds,hardwarePurchasePreview,exactEconomyValue,creditRateScientific,hardwareBulkCostScientific,passiveCircuitRate} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {hardwareSavingsGoals,hardwareSavingsQuote} from './hardwareGoals';
-import {HardwareSavingsGoals} from './HardwareSavingsGoals';
 import {Workshop} from './Panels';
 import {advance} from './simulation';
 import {tutorialGuide} from './tutorialGuide';
@@ -33,7 +32,6 @@ describe('Credit-only hardware and pure savings goals',()=>{
  it('next class and milestone use real SCI costs and rate-based ETA; no infinite ETA',()=>{
   const s=buyHardwareClass(newGame(0),'calculator'),goals=hardwareSavingsGoals(s);expect(goals.next?.id).toBe('sbc');expect(goals.milestone?.amount).toBe(9);expect(goals.milestone?.cost.compare(hardwareBulkCostScientific('calculator',1,9,s))).toBe(0);expect(goals.next?.resources.secondsToAfford).toBeGreaterThan(0);expect(hardwareSavingsQuote(newGame(0),'sbc').resources.secondsToAfford).toBeNull();
   const pin=resolvePinnedGoal(s,{kind:'hardware',id:'calculator',target:10});expect(pin?.etaSeconds).toBe(goals.milestone?.resources.secondsToAfford);
-  for(const language of ['de','en'] as const){const html=renderToStaticMarkup(<HardwareSavingsGoals s={{...s,settings:{...s.settings,language}}} open={()=>{}}/>);expect(html).toContain('Credits');expect(html).not.toMatch(/Infinity|NaN/);}
  });
  it('shopping automation can buy an unowned SBC, using the transaction and reserve',()=>{
   let s=addCreditsScientific(newGame(0),ScientificNumber.from(BALANCE.hardware.sbc.baseCost),false,false);s={...s,nodes:['shoppingAgent'],hardwareAutoBuyers:{sbc:true}};

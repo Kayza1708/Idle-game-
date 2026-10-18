@@ -9,7 +9,7 @@ import baseline from './testSupport/progressionBaseline.json';
 import {predecessorProjection} from './testSupport/protectedProgression';
 import {upgradeFoundry,settleFoundries} from './foundries';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,addData,addDataScientific,addCredits,addCreditsScientific,grantComponents,spendComponents,exactEconomyValue,itemTypes,itemEffectFor,rareComponentTypesOwned,axiomThresholdScientific,type ItemTypeId,type GameState,type Rarity} from './economy';
+import {BALANCE,addData,addDataScientific,addCredits,addCreditsScientific,grantComponents,spendComponents,exactEconomyValue,itemTypes,itemEffectFor,rareComponentTypesOwned,axiomThresholdScientific,type ItemTypeId,type GameState} from './economy';
 import {cancelCrafting,settleCrafting,createItem,upgrade,itemImprovementPreview,fuseItems,forgeItem} from './inventory';
 import {blueprintMasteryQuote,buyBlueprintMastery,fragmentConversionQuote,convertResearchFragments,componentSourceQuote} from './itemProgress';
 import {learnBlueprint,recipeIds} from './blueprints';

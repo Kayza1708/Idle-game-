@@ -2,16 +2,15 @@ import {newGame,restore} from './legacyContractFixture';
 // Frozen pre-v56 order contracts; live instant crafting is covered by modelForgeV1.test.ts.
 import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,hardwareBulkCostScientific,hardwarePurchasePreview,addCreditsScientific,addData,grantComponents,componentIds,buyHardwareClass,addCredits,computeRateScientific,creditRateScientific,classComputeTerms,startTraining,trainingCostQuote,trainingDurationQuote,startResearchProject,researchQuote,registerTap,itemTypes,itemEffectProfile,type GameState,type ExpandedItemId,type Item} from './economy';
-import {createItem,equip,unequip,settleCrafting,claimLootDrop} from './inventory';
+import {BALANCE,hardwareBulkCostScientific,hardwarePurchasePreview,addCreditsScientific,addData,grantComponents,componentIds,buyHardwareClass,addCredits,computeRateScientific,creditRateScientific,classComputeTerms,startTraining,trainingCostQuote,trainingDurationQuote,startResearchProject,researchQuote,registerTap,itemTypes,itemEffectProfile,type GameState,type ExpandedItemId} from './economy';
+import {createItem,equip,unequip,settleCrafting} from './inventory';
 import {deviceBonus,deviceEffectQuote,trackCompleted} from './deviceEffects';
-import {materialAnalysisContract,hardwareMaterialQuote,blueprintResearchCompletion,discoverBlueprint} from './materialEconomy';
+import {materialAnalysisContract,hardwareMaterialQuote,blueprintResearchCompletion} from './materialEconomy';
 import {salvageQuote} from './recovery';
 import {learnBlueprint,recipeIds,blueprintQuote} from './blueprints';
 import {settleResearchCompletions,advance} from './simulation';
 import {startManualResearchQueue} from './researchAutomation';
 import {serialize} from './storage';
-import {ScientificNumber} from './scientificNumber';
 import {exactEconomyValue} from './economy';
 // Explicit prepared technical inventory/access/resources. Actual payment and completion paths below.
 const prepared=():GameState=>({...grantComponents(addData(addCredits(newGame(0),1e20),1e9),Object.fromEntries(componentIds.map(id=>[id,100000]))),prestigeCount:1,unlockedEquipmentSlots:3,nodes:['manufacturing1','labs1','labs2','analysis1'],completedResearch:['blueprints','distributedInference','materialRecycling'],modules:{computeBus:100,dataLattice:100},blueprintFragments:1000,hardware:100,hardwareCounts:{...newGame(0).hardwareCounts,calculator:50,sbc:50},discovered:['calculator','sbc'],materials:{...newGame(0).materials,families:['base','semiconductor','photonic','frontier','quantum'],knownBlueprints:Object.keys(BALANCE.extendedItems) as ExpandedItemId[]}});

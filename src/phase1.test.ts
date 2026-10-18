@@ -26,7 +26,7 @@ it('finds the same accessible passive component online and offline',()=>{
 });
 
 it('keeps huge economy math finite for costs, bulk buys and credit accumulation',async()=>{
- const {MAX_ECONOMY_VALUE,safeEconomyAdd,safeEconomyMul,canAffordResources,spendResources}=await import('./economy');
+ const {MAX_ECONOMY_VALUE,safeEconomyAdd,safeEconomyMul}=await import('./economy');
  expect(safeEconomyAdd(1e300,1e300)).toBe(MAX_ECONOMY_VALUE);
  expect(safeEconomyMul(1e250,1e100)).toBe(MAX_ECONOMY_VALUE);
  expect(Number.isFinite(hardwareCost('matrioshka',500,newGame(0)))).toBe(true);

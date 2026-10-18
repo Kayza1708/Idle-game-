@@ -24,6 +24,6 @@ Use case: stylized-concept. Asset type: production pixel-art sprite atlas for a 
 
 ## Ansichten
 
-[Automat](screenshots/shop-polish-capsule.webp) · [Boosts](screenshots/shop-polish-boosts.webp) · [Upgrades](screenshots/shop-polish-upgrades.webp) · [Gem-Pakete](screenshots/shop-polish-gems.webp) · [Menü](screenshots/shop-polish-menu.webp) · [Einstellungen](screenshots/shop-polish-settings.webp)
+Automat (historischer Nachweis: Git-Historie vor Bereinigung) · Boosts (historischer Nachweis: Git-Historie vor Bereinigung) · Upgrades (historischer Nachweis: Git-Historie vor Bereinigung) · Gem-Pakete (historischer Nachweis: Git-Historie vor Bereinigung) · Menü (historischer Nachweis: Git-Historie vor Bereinigung) · Einstellungen (historischer Nachweis: Git-Historie vor Bereinigung)
 
 Abschluss: alle 1.536 Tests in 113 Dateien, Typecheck, Produktionsbuild, vier Browserprofile und git diff --check erfolgreich. Bestehende Bundlegrößen-Warnung unverändert; kein Merge, Release oder neuer Werbe-/Zahlungs-SDK.

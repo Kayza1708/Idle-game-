@@ -1,7 +1,7 @@
 import type {GameState,Item,ComponentInventory} from './economy';
 export type FoundryJob={id:string;itemId:string;target:number;before:Pick<Item,'rarity'|'level'|'forge'>;startedAt:number;endsAt:number;duration:number;components:Partial<ComponentInventory>;dataCost:number};
 export type FoundryState={level:number;active:FoundryJob|null;queue:string[]};
-import {BALANCE,spendComponents,spendScientificResources,grantComponents,type ComponentId} from './economy';
+import {BALANCE,spendComponents,spendScientificResources,type ComponentId} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {itemImprovementPreview} from './inventory';
 import {deviceBonus} from './deviceEffects';

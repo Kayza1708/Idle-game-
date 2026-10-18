@@ -2,7 +2,7 @@
 
 Continuation of PR113. Previous chest work is retained; this replaces the brief forge burst with actual item-centered action sequences and a shared item presentation.
 
-[Actual browser recording, 16 seconds](previews/item-actions-mobile.mp4) · [Craft result](screenshots/item-craft-result.webp) · [Fusion inputs](screenshots/item-fusion-inputs.webp) · [Fusion result](screenshots/item-fusion-result.webp) · [Detail sheet](screenshots/item-detail.webp).
+Actual browser recording, 16 seconds (historischer Nachweis: Git-Historie vor Bereinigung) · Craft result (historischer Nachweis: Git-Historie vor Bereinigung) · Fusion inputs (historischer Nachweis: Git-Historie vor Bereinigung) · Fusion result (historischer Nachweis: Git-Historie vor Bereinigung) · Detail sheet (historischer Nachweis: Git-Historie vor Bereinigung).
 
 The recording and captures use prepared fixtures and actual UI actions. They are not image-generated mockups or evidence of natural progression/native-device performance. Existing project bitmap assets are reused; no new generated art or SDK.
 
@@ -19,7 +19,7 @@ The entire rim now uses the rarity color, with a dark interior so the bitmap rem
 | Legendary | Gold `#ffba32` |
 | Mythic | Pink-red `#ff4c87` |
 
-[Six-rarity actual inventory capture](screenshots/item-six-rarities.webp). A one-shot rim highlight accompanies the confirmed item reveal; no permanent flashing. Skip and reduced motion stop that highlight.
+Six-rarity actual inventory capture (historischer Nachweis: Git-Historie vor Bereinigung). A one-shot rim highlight accompanies the confirmed item reveal; no permanent flashing. Skip and reduced motion stop that highlight.
 
 Portraits enlarged about 10–15%: inventory 66→74px (60→68px on narrow screens), detail 96→108px, result 156→176px (130→146px on short screens). Detail padding tightened to retain action space. The existing physical model/forge sockets keep their fitted sizes.
 

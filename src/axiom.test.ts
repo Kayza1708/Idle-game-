@@ -6,7 +6,6 @@ import {serialize} from './storage';
 import {ScientificNumber} from './scientificNumber';
 
 const withCycle=(amount:ScientificNumber)=>{const s=newGame(0),number=amount.toNumber();return{...s,cycleINTEarned:number,totalINTEarned:number,unspentINT:number,exactEconomy:{...s.exactEconomy,cycleINTEarned:amount.toJSON(),totalINTEarned:amount.toJSON(),unspentINT:amount.toJSON()}}};
-const withCycleINT=(amount:number)=>withCycle(ScientificNumber.from(amount));
 
 describe('axiom layer',()=>{
  it('uses the configured square-root entitlement boundaries',()=>{const t=axiomThresholdScientific();expect(axiomReward(withCycle(t.multiplyNumber(.999)))).toBe(0);expect(axiomReward(withCycle(t))).toBe(1);expect(axiomReward(withCycle(t.multiplyNumber(3.999)))).toBe(1);expect(axiomReward(withCycle(t.multiplyNumber(4)))).toBe(2)});

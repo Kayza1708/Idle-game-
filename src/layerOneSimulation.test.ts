@@ -1,7 +1,5 @@
-import {newGame} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {BALANCE,buyHardwareClass,exactEconomyValue,hardwareBulkCostScientific,hardwareCostScientific,hardwareIds,isolatedBulkCostScientific,layerOneProfile,maxAffordable} from './economy';
-import {ScientificNumber} from './scientificNumber';
+import {hardwareIds,layerOneProfile} from './economy';
 import {simulateLayerOne} from './layerOneSimulation';
 
 describe('isolated layer-one acceptance',()=>{

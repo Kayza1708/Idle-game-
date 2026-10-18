@@ -2,7 +2,7 @@
 
 ## Store / IAP
 
-`src/shopNative.ts`, `src/commerce.ts` and `src/CommerceOffers.tsx` now provide the active purchase contracts, verified fulfillment, durable-save-before-finish ordering and permanent restore flow. `nativeCommerce.ts` is a deprecated compatibility boundary. Native SDKs and the authenticated verification/ownership backend remain disconnected. See [Commercialization V1](commercialization-v1.md) for products, exact contents, limits and remaining release integration.
+`src/shopNative.ts`, `src/commerce.ts` and `src/CommerceOffers.tsx` now provide the active purchase contracts, verified fulfillment, durable-save-before-finish ordering and permanent restore flow. The unused `nativeCommerce.ts` predecessor has been removed. Native SDKs and the authenticated verification/ownership backend remain disconnected. See [Commercialization V1](commercialization-v1.md) for products, exact contents, limits and remaining release integration.
 
 ## Rewarded ads
 

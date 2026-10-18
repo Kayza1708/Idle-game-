@@ -1,6 +1,6 @@
 import {ItemPortrait,ItemIdentity} from './ItemPresentation';
 import {useEffect,useRef} from 'react';import {createPortal} from 'react-dom';
-import type {GameState} from './economy';import type {CapsuleReceipt} from './capsuleMachine';import {ItemArt,ResourceArt} from './GameArt';import {itemText} from './gameplayI18n';import {ScientificNumber} from './scientificNumber';
+import type {GameState} from './economy';import type {CapsuleReceipt} from './capsuleMachine';import {ResourceArt} from './GameArt';import {ScientificNumber} from './scientificNumber';
 export function CapsuleCelebration({receipt,s,onClose}:{receipt:CapsuleReceipt;s:GameState;onClose:()=>void}){
  const onCloseRef=useRef(onClose);onCloseRef.current=onClose;
  const close=useRef<HTMLButtonElement>(null),de=s.settings.language==='de';useEffect(()=>{const previous=document.activeElement as HTMLElement;close.current?.focus();const key=(e:KeyboardEvent)=>{if(e.key==='Escape')onCloseRef.current();if(e.key==='Tab'){e.preventDefault();close.current?.focus()}};document.addEventListener('keydown',key);return()=>{document.removeEventListener('keydown',key);previous?.focus()}},[]);

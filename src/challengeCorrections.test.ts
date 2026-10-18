@@ -6,7 +6,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {ChallengeStagePicker} from './ChallengeStagePicker';
 import {ChallengeRunPanel} from './ChallengeRunPanel';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,hardwareIds,repeatableResearchIds,addCredits,addData,grantComponents,startResearchProject,trainingDurationSeconds,creditRateScientific,offlineTimeLimit,classComputeTerms,type GameState} from './economy';
+import {BALANCE,hardwareIds,repeatableResearchIds,addData,startResearchProject,trainingDurationSeconds,creditRateScientific,offlineTimeLimit,classComputeTerms,type GameState} from './economy';
 import {createItem,equip,fuseItems,fusionPreview} from './inventory';
 import {amplifyAnalysisMaterials,queueExperiment,completeExperiment} from './experiments';
 import {salvageQuote} from './recovery';

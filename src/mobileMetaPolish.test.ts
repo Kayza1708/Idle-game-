@@ -13,7 +13,7 @@ import contracts from './AnalysisContracts.tsx?raw';
 import meta from './MetaHub.tsx?raw';
 import shop from './GemShopPanel.tsx?raw';
 import art from './GameArt.tsx?raw';
-import commerce from './nativeCommerce.ts?raw';
+import {unavailableShopNativeAdapter} from './shopNative';
 // Avoid overlapping Vite asset-URL and SSR import.meta rewrites; read real CSS.
 const css=readFileSync(resolve('src/style.css'),'utf8');
 
@@ -87,10 +87,10 @@ describe('canonical gems, season and native boundaries',()=>{
   expect(meta).toContain('className="reward-card premium locked"');
   expect(meta).not.toContain('premiumChest');
  });
- it('has no hardcoded price or simulated native purchase',()=>{
-  expect(commerce).toContain('localizedPrice:string');
-  expect(commerce).toContain("purchase:async()=> 'failed'");
-  expect(commerce).not.toMatch(/[€$£]\s*\d/);
+ it('has no simulated successful native purchase',async()=>{
+  expect(unavailableShopNativeAdapter.available).toBe(false);
+  expect(await unavailableShopNativeAdapter.products()).toEqual([]);
+  expect(await unavailableShopNativeAdapter.purchase('starter' as never)).toEqual({status:'unavailable'});
   expect(app).not.toContain("case'ad':return rewardAd");
  });
 });

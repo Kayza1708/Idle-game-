@@ -42,7 +42,7 @@ Gezielte Suite: researchAreas, researchEconomy, sharedPreviews, prestigeTree, sa
 
 Typecheck, Production-Build und `git diff --check` bestanden; bestehender Vite-Hinweis auf Chunk über 500 kB, kein Buildfehler. Prüfungen werden auf dem finalen Commit wiederholt.
 
-Browser: Chromium, 390×844 px, DE/EN. Reale App-Dispatcher-Aktionen: drei Anfangskarten, exakt eine Vorschau, vier Nodekäufe samt exaktem Node-Detailtitel, neue Reihenfolge, Reload und Hardwareanalyse. Keine Pageerrors, keine horizontale Überbreite, überprüfte Forschungs-/Previewbuttons mindestens 44 px. Reproduktion: `python scripts/browser-research-areas.py http://127.0.0.1:5177 docs/screenshots/research-areas` bei laufendem Vite. Ressourcen/INT vorbereitet, anschließend ausschließlich reguläre UI-Käufe. [Screenshots und Ergebnisprotokoll](screenshots/research-areas/results.json). Die anfängliche Fixture-Startup-Race wurde im Prüfskript durch Warten auf Appinitialisierung beseitigt; sie ist kein Economy-Fix.
+Browser: Chromium, 390×844 px, DE/EN. Reale App-Dispatcher-Aktionen: drei Anfangskarten, exakt eine Vorschau, vier Nodekäufe samt exaktem Node-Detailtitel, neue Reihenfolge, Reload und Hardwareanalyse. Keine Pageerrors, keine horizontale Überbreite, überprüfte Forschungs-/Previewbuttons mindestens 44 px. Reproduktion: `python scripts/browser-research-areas.py http://127.0.0.1:5177 docs/screenshots/research-areas` bei laufendem Vite. Ressourcen/INT vorbereitet, anschließend ausschließlich reguläre UI-Käufe. Screenshots und Ergebnisprotokoll (historischer Nachweis: Git-Historie vor Bereinigung). Die anfängliche Fixture-Startup-Race wurde im Prüfskript durch Warten auf Appinitialisierung beseitigt; sie ist kein Economy-Fix.
 
 ## Grenzen und offen
 

@@ -1,6 +1,6 @@
 import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
-import {addCredits,addData,BALANCE,componentIds,passiveComponentWeights,queueTraining,removeQueuedTraining,selectScannerTarget,type GameState} from './economy';
+import {addCredits,BALANCE,componentIds,passiveComponentWeights,queueTraining,removeQueuedTraining,selectScannerTarget,type GameState} from './economy';
 import {buyNode,prestige,prestigePreview} from './prestige';
 import {advance} from './simulation';
 import {ScientificNumber} from './scientificNumber';

@@ -5,7 +5,7 @@ import {researchModifiers} from './economy';
 import {runFusionPlanner} from './progressionAutomation';
 import {fabricationSpeed} from './progressionWork';
 import {prepareProgressionWork,advanceProgressionWork,pauseMain} from './progressionWork';
-import {hasProgressionNode,knowledgeRate,discoverProgression,axiomLevel,secondary,integrationLevel} from './progression';
+import {hasProgressionNode,discoverProgression,axiomLevel,secondary} from './progression';
 import {progressionAgent} from './progressionReset';
 import {worldDropInterval,worldDropRewardFactor} from './economy';
 import {earnBlueprintResearchReward,settleBlueprintResearchReward} from './blueprintResearchReward';
@@ -18,13 +18,13 @@ import {trackCompleted,deviceBonus} from './deviceEffects';
 import {settleFoundries} from './foundries';
 import {receivedItems,bundleItems,mergeItemBundles} from './itemReceipts';
 import {startManualResearchQueue,runResearchAutomation,researchQueueStatus} from './researchAutomation';
-import { BALANCE, addCredits,addData,addCreditsScientific,addDataScientific,addResearchScientific, averageDataSynergy, GameState, trainingRate,trainingDataCost, creditRate,creditRateScientific, dataRate,dataRateScientific, researchRate,researchRateScientific, researchLabCount, hardwareCost, classCompute, buyHardwareClass, maxAffordable, hasNode, isRepeatableResearch, milestoneBonus,tapDropMultiplier, startResearchProject,startQueuedTrainingIfAffordable,rollPassiveComponent,computeRate,computeRateScientific,usersRate,newINT,newINTScientific,newGame,tapCredits,startTraining,queueTraining,selectScannerTarget,passiveCircuitRate,grantComponents,safeEconomyAdd,MAX_ECONOMY_VALUE,hardwareIds,registerTap,permanentFactor,creditMultiplierFromINT,creditMultiplierFromAxioms,hardwareCostScientific,canAffordScientificCreditCost,hardwareAutobuyerUnlocked,shoppingAgentUnlocked,exactEconomyValue,repeatableResearchIds,repeatableResearchDataCost,researchProjectDataCost,trainingCostScientific,PrestigeUpgradeId,ItemTypeId,ComponentId,ExperimentId,Rarity,prestigeUpgradeCost,upgradeLevel,dataSynergyScientific,intSynergyScientific,productionBreakdown } from './economy';
+import { BALANCE, addCreditsScientific,addDataScientific,averageDataSynergy, GameState, trainingRate,trainingDataCost, creditRate,creditRateScientific, dataRate,dataRateScientific, researchRate,researchRateScientific, researchLabCount, hardwareCost, classCompute, buyHardwareClass, hasNode, isRepeatableResearch, milestoneBonus,startResearchProject,startQueuedTrainingIfAffordable,rollPassiveComponent,computeRate,computeRateScientific,usersRate,newINT,newINTScientific,newGame,startTraining,queueTraining,selectScannerTarget,passiveCircuitRate,grantComponents,safeEconomyAdd,MAX_ECONOMY_VALUE,hardwareIds,registerTap,creditMultiplierFromINT,creditMultiplierFromAxioms,hardwareCostScientific,canAffordScientificCreditCost,hardwareAutobuyerUnlocked,shoppingAgentUnlocked,exactEconomyValue,repeatableResearchIds,repeatableResearchDataCost,researchProjectDataCost,trainingCostScientific,PrestigeUpgradeId,ItemTypeId,ComponentId,ExperimentId,prestigeUpgradeCost,upgradeLevel,dataSynergyScientific,intSynergyScientific,productionBreakdown } from './economy';
 import { experimentSpeed,completeExperiment, queueExperiment,runAnalysisPlanner } from './experiments';
 import { rollPeriods,claimMission,claimMissionBonus,missionRewardClaimable,MissionKind } from './missions';
 import { achievements,claimAchievement } from './achievements';
 import { claimSeasonReward,seasonClaimable,seasonLevel } from './season';
 import { challenges,claimChallenge,prestigeGate,totalMastery } from './retention';
-import { craft,craftModule,craftAffordability,equip,forgeItem,fuseItems,claimLootDrop,settleCrafting,runCraftingPlanner } from './inventory';
+import { craft,craftModule,craftAffordability,equip,claimLootDrop,settleCrafting,runCraftingPlanner } from './inventory';
 import { buyNode } from './prestige';
 import { updateOnboarding } from './onboarding';
 import { addEvent, addMetrics,addSnapshot } from './telemetry';
@@ -156,7 +156,7 @@ function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.rand
   }
   if(left>1e-9)return{state,report:emptyReport()};
   next=updateOnboarding(rollPeriods(next,next.savedAt));
-  if(active){next.lifetime.activeSeconds+=total;const dropMult=tapDropMultiplier(next);const interval=worldDropInterval(next);const progress=(next.worldDropProgress??0)+total;const spawn=Math.floor((progress+1e-9)/interval);next.worldDropProgress=Math.max(0,progress-spawn*interval);next.lootDrops=(next.lootDrops??[]).filter(d=>d.expiresAt>next.savedAt);for(let i=0;i<spawn&&next.lootDrops.length<BALANCE.worldDropMaxVisible;i++){const seed=next.nextId++;next.lootDrops.push({id:`drop-${seed}`,spawnedAt:next.savedAt,rewardFactor:worldDropRewardFactor(next),expiresAt:next.savedAt+BALANCE.worldDropVisibleSeconds*1000,x:8+(seed*37)%84,y:12+(seed*53)%68,variant:seed%17===0?'core':seed%5===0?'cache':'coin'});}}
+  if(active){next.lifetime.activeSeconds+=total;const interval=worldDropInterval(next);const progress=(next.worldDropProgress??0)+total;const spawn=Math.floor((progress+1e-9)/interval);next.worldDropProgress=Math.max(0,progress-spawn*interval);next.lootDrops=(next.lootDrops??[]).filter(d=>d.expiresAt>next.savedAt);for(let i=0;i<spawn&&next.lootDrops.length<BALANCE.worldDropMaxVisible;i++){const seed=next.nextId++;next.lootDrops.push({id:`drop-${seed}`,spawnedAt:next.savedAt,rewardFactor:worldDropRewardFactor(next),expiresAt:next.savedAt+BALANCE.worldDropVisibleSeconds*1000,x:8+(seed*37)%84,y:12+(seed*53)%68,variant:seed%17===0?'core':seed%5===0?'cache':'coin'});}}
   const offline=!active&&total>10;
   next=addMetrics(next,next.savedAt,{activeSeconds:active?total:0,offlineSeconds:offline?total:0,passive:offline?0:generatedCredits,offline:offline?generatedCredits:0,offlineCredits:offline?generatedCredits:0,offlineData:offline?generatedData:0,offlineResearch:offline?generatedResearch:0});
   const pinnedReachedAfter=next.pinnedGoal?resolvePinnedGoal(next,next.pinnedGoal)?.reached??false:false;if(!pinnedReachedBefore&&pinnedReachedAfter)next=addEvent(next,'goal-completed',next.savedAt,{goal:JSON.stringify(next.pinnedGoal)});
@@ -445,10 +445,6 @@ export function simulateBalance(days:number,active:boolean,seed=1708,prestigeLim
 // Kept behind a tiny indirection so production simulation remains tree-shakeable.
 import {prestige as simulationPrestige,axiomReset as simulationAxiomReset,axiomReward as simulationAxiomReward,runPrestigeAgent as simulationRunPrestigeAgent,buyAxiomUpgrade as simulationBuyAxiomUpgrade} from './prestige';
 
-function requirePrestigeForSimulation(){
-  return{prestige:simulationPrestige};
-}
-
 export type LongTermBalanceSuite={
   seed:number;
   runs:BalanceSimulationResult[];
@@ -529,7 +525,7 @@ const inRange=(value:number,min:number,max:number)=>value>=min&&value<=max;
 /** V10 target corridors. These are design targets, not technical assertions. */
 export function diagnoseLongTermSuite(suite:LongTermBalanceSuite):SuiteBalanceDiagnosis{
   const findings:SuiteBalanceFinding[]=[];
-  const d1a=runAt(suite,1,true),d1p=runAt(suite,1,false),d7a=runAt(suite,7,true),d7p=runAt(suite,7,false),d30a=runAt(suite,30,true),d30p=runAt(suite,30,false),d60a=runAt(suite,60,true),d90a=runAt(suite,90,true),d365a=runAt(suite,365,true);
+  const d1a=runAt(suite,1,true),d1p=runAt(suite,1,false),d7a=runAt(suite,7,true),d30a=runAt(suite,30,true),d30p=runAt(suite,30,false),d60a=runAt(suite,60,true),d90a=runAt(suite,90,true),d365a=runAt(suite,365,true);
   const addRange=(value:number|null|undefined,min:number,max:number,code:string,system:string,label:string,unit='')=>{
     if(value==null){findings.push(finding('CRITICAL',code,system,`${label}: never; target ${min}-${max}${unit}.`));return;}
     findings.push(finding(inRange(value,min,max)?'PASS':'WARNING',code,system,`${label}: ${value.toFixed(2)}${unit}; target ${min}-${max}${unit}.`));

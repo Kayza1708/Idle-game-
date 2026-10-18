@@ -1,6 +1,6 @@
 import {isRepeatableResearch,type ResearchId} from './economy';
 import {researchText,projectText} from './gameplayI18n';
-import { researchAreas, researchAreaOrder, researchNodeAccess } from "./researchAreas";
+import { researchAreas, researchNodeAccess } from "./researchAreas";
 const copy = {
   initial: [
     "Anfangsbereich",

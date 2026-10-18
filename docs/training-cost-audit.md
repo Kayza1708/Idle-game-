@@ -33,7 +33,7 @@ Saveformat bleibt v41, additive optionale Kostenbasis. Ältere gültige Aufträg
 
 ## Reproduzierbare Vorher/Nachher-Messung
 
-Messung mit echten `trainingPreview`/`startTraining`, Quality-Ziellevel 1, gleiche vorbereitete Zustände. 1e6 Data und Komponenten sind kurze Testvorbereitung, keine Progressionsmessung. Common-Photonenfeld regulär ausgerüstet; Verbesserung regulär bezahlt (Upgrade und Forge). Kombiniert: gleiches Item, Rig 25, Lunar 10 und Graph. Vorher gegen die originale Economy-Datei des Basiscommits, importiert mit lediglich angepassten relativen Modulpfaden; unveränderte Transaktionen. Nachher: `npx vite-node --script scripts/training-cost-comparison.ts` (Node 22). Vollständige gespeicherte Kostenbasis: [training-cost-comparison.json](training-cost-comparison.json).
+Messung mit echten `trainingPreview`/`startTraining`, Quality-Ziellevel 1, gleiche vorbereitete Zustände. 1e6 Data und Komponenten sind kurze Testvorbereitung, keine Progressionsmessung. Common-Photonenfeld regulär ausgerüstet; Verbesserung regulär bezahlt (Upgrade und Forge). Kombiniert: gleiches Item, Rig 25, Lunar 10 und Graph. Vorher gegen die originale Economy-Datei des Basiscommits, importiert mit lediglich angepassten relativen Modulpfaden; unveränderte Transaktionen. Nachher: `npx vite-node --script scripts/training-cost-comparison.ts` (Node 22). Vollständige gespeicherte Kostenbasis: training-cost-comparison.json (historischer Nachweis: Git-Historie vor Bereinigung).
 
 | Zustand | Data vorher | Data nachher | B | Faktor | Dauer vorher/nachher (s) | Credits vorher/nachher |
 |---|---|---|---|---|---|---|

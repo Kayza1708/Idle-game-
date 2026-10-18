@@ -4,7 +4,7 @@ import {legacyPaidCraft} from './testSupport/legacyPaidCraft';
 import {queueForge,upgradeFoundry} from './foundries';
 import {describe,it,expect} from 'vitest';
 import {BALANCE,addCredits,addData,grantComponents,componentIds,exactEconomyValue,startTraining,trainingCostQuote,specialItemEffectQuote,equipmentSlots,equipmentSlotCount,itemEffect,itemScalingMultiplier,registerTap,creditRateScientific,tapCreditsScientific,hardwareIds,type ItemTypeId,type GameState} from './economy';
-import {craft,craftModule,createItem,equip,upgrade,fuseItems,fusionPreview,settleCrafting,itemImprovementPreview} from './inventory';
+import {craft,craftModule,createItem,equip,upgrade,fuseItems,fusionPreview,itemImprovementPreview} from './inventory';
 import {salvageQuote,salvageWithRecovery} from './recovery';
 import {prestige,axiomReset,prestigePreview} from './prestige';
 import {advance} from './simulation';

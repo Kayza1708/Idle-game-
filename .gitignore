@@ -2,3 +2,6 @@ node_modules/
 dist/
 *.tsbuildinfo
 .DS_Store
+*.bak
+*.backup
+package-lock.backup.json

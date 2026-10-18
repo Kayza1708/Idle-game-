@@ -1,5 +1,5 @@
 import {queueExperiment} from '../src/experiments';
-import {BALANCE,startTraining,startResearchProject,hardwareIds,hardwarePurchasePreview,type GameState,type TrainingTrack,type HardwareId} from '../src/economy';
+import {startTraining,startResearchProject,hardwareIds,hardwarePurchasePreview,type GameState,type TrainingTrack,type HardwareId} from '../src/economy';
 /** Shared genuine 8A/8B decision profile; no grants, claims or reset. */
 export function prepareEarlyHardwareDecision(s:GameState,track:TrainingTrack,strategy:'A'|'B',options?:{dataPriority:'model-first'|'analysis-first';includeAnalysis:true}){
    const analysis=()=>{if(options&&!s.experiments.active&&!s.experiments.completedIds.length)s=queueExperiment(s,'hardware',s.savedAt,'short');};

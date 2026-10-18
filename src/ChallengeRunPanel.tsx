@@ -1,7 +1,7 @@
 import {challengeCompletionQuote,challengeGoalText,challengeRuleText} from './challengeStages';
 import {formatScientific,BALANCE} from './economy';
 import type {GameState} from './economy';
-import {challengeText,runChallenges,runChallengeProgress,runChallengeReady} from './retention';
+import {runChallenges,runChallengeReady} from './retention';
 
 export const challengeUi=(language:GameState['settings']['language'])=>language==='de'?{
  legacyNotice:'Alter Challenge-Run beendet: Der vorhandene Fortschritt wurde erhalten. Ein historischer Hauptspielstand wurde damals nicht gespeichert und kann nicht wiederhergestellt werden.',

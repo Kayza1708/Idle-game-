@@ -6,7 +6,7 @@ import {economySnapshot} from './economySnapshot';
 import {specialItemEffects,balanceContexts,balanceEvents,savedJobs,telemetryCoverage,measuredEconomy} from './balanceSnapshot';
 import {TELEMETRY_LIMITS} from './telemetry';
 import type { GameState } from './economy';
-import { BALANCE, creditRate,computeRate,dataRate,itemTypes,newINT,researchRate,exactEconomyJSON,researchQuote } from './economy';
+import { BALANCE, itemTypes,exactEconomyJSON,researchQuote } from './economy';
 import { SAVE_VERSION } from './storage';
 
 function balanceHistoryReport(s:GameState){try{return rawBalanceHistoryReport(s);}catch(error){return {version:1,current:null,runs:[],comparisons:[],coverage:{error:error instanceof Error?error.message:'Invalid economy state',detailedHistoryAvailable:false}};}}

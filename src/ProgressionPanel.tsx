@@ -15,11 +15,7 @@ import {
   nextModelCost,
   nextModelUpgradeCost,
   modelCore,
-  modelFactor,
   knowledgeRate,
-  integrationLevel,
-  integrationBase,
-  activeSlotIds,
   type PrestigeNodeV2,
   type AxiomNodeV2,
   type ModelId,
@@ -30,7 +26,7 @@ import {
   axiomThresholdV2,
 } from "./progressionReset";
 import { ScientificNumber } from "./scientificNumber";
-import { ResourceArt, PrestigeArt } from "./GameArt";
+import { ResourceArt } from "./GameArt";
 import "./progression-v2.css";
 type Props = { s: GameState; act: (name: string, ...args: any[]) => void };
 const labels = {

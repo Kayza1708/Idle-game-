@@ -4,7 +4,6 @@ import {predecessorProjection} from './testSupport/protectedProgression';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import dataBaseline from './testSupport/dataAnalysisBaseline.json';
 import {describe,it,expect} from 'vitest';
-import {createHash} from 'node:crypto';
 import {BALANCE,addCredits,addDataScientific,buyHardwareClass,computeRateScientific,computeFactors,equipmentSlotCount,axiomThresholdScientific,passiveCircuitRate,creditRateScientific,dataRateScientific,dataSynergyScientific,averageDataSynergy,exactEconomyValue,hardwarePurchasePreview,productionBreakdown,registerTap,axiomEconomyValue,creditMultiplierFromAxiomsScientific,type GameState,type PrestigeUpgradeId} from './economy';
 import {prestige,buyNode,axiomReset,buyAxiomUpgrade,prestigePreview,axiomPreview,axiomRewardScientific} from './prestige';
 import {createItem,equip,buyEquipmentSlot} from './inventory';
