@@ -1,3 +1,14 @@
+## 2026-10-18 · Tap-Belege, Namensprüfung und Run-Auswertung, Beta 8
+
+- [x] Null-Anzeige nach bezahltem Tap reproduziert und durch exakten Transaktionsbeleg ersetzt; Krits/Relay bleiben im Popup stabil, abgewiesene Eingaben animieren keine Auszahlung.
+- [x] Zentrale Namensprüfung für KI und Spieler integriert, einschließlich Unicode-/Leet-Normalisierung, häufigen Schimpfwörtern und neutraler Fehlermeldung; ungültige Entwürfe ersetzen keinen Spielernamen.
+- [x] Run-Export ausgewertet: 570 Taps mit 840.269 Credits, ein laufender Run ohne Prestige; Grenzen und offene Pacing-Fragen dokumentiert, keine Preisänderung.
+- [x] Bericht um vollständigen Build und Tap-Diagnostik ergänzt. Typecheck/Build und vollständiger Lauf mit 1.702 Tests in 121 Dateien bestanden; anschließend 109 gezielte Tests einschließlich drei weiterer Namensfälle bestanden.
+- [x] Browserabnahme bei 320/390/430 px: echte Tap-Belege, Cooldown, Spielername und KI-Benennung geprüft, keine Seitenüberbreite oder Laufzeitfehler.
+- [ ] Künftige Leaderboards/Clans benötigen serverseitige Prüfung und Moderation; natürliche Runs über mehrere Prestiges und echte WKWebView-Abnahme bleiben offen.
+
+[Fehlerursache, Run-Zahlen, Grenzen und Abnahme](taps-names-review.md).
+
 ## 2026-10-18 · Idle Intelligence: Name und App-Icon
 
 - [x] Freigegebenes Chip-Logo mit Schriftzug integriert: Spielmenü, Web-Favicon, Apple-Touch-Icon und Webmanifest; sichtbare Namen aktualisiert.
