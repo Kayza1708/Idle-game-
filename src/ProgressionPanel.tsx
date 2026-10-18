@@ -1,4 +1,4 @@
-import {ProgressionNodeArt} from './ProgressionArt';
+import {ProgressionNetwork,type NetworkNode} from './ProgressionNetwork';
 import { synthesisQuote } from "./progressionWork";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -111,7 +111,7 @@ export function ProgressionPanel({ s, act }: Props) {
   }, [selected, confirm]);
   return (
     <div className="panel progression-v2">
-      <div className="v2-tabs">
+      {meta&&<div className="v2-tabs">
         <button
           aria-pressed={layer === "int"}
           onClick={() => {
@@ -132,11 +132,12 @@ export function ProgressionPanel({ s, act }: Props) {
             {de ? "Axiome" : "Axioms"}
           </button>
         )}
-      </div>
+      </div>}
       <section className="v2-summary">
         <ResourceArt id="int" />
         <div>
           <h2>{layer === "int" ? "Prestige" : de ? "Axiome" : "Axioms"}</h2>
+          <span className="v2-balance-label">{de?'Verfügbar':'Available'}</span>
           <b>
             {fmt(
               layer === "int"
@@ -158,94 +159,14 @@ export function ProgressionPanel({ s, act }: Props) {
           }
           onClick={() => setConfirm(layer === "int" ? "prestige" : "axiom")}
         >
-          +{fmt(layer === "int" ? gain : ag)}
-          <br />
-          {layer === "int" ? "INT" : de ? "Axiome" : "Axioms"}
+          <span>{layer==='int'?'Prestige':de?'Axiom-Neustart':'Axiom reset'}</span>
+          <strong>+{fmt(layer === "int" ? gain : ag)} {layer==='int'?'INT':de?'Axiome':'Axioms'}</strong>
         </button>
       </section>
-      {!meta && (
-        <p className="v2-note">
-          {de
-            ? "Axiome: ab 1e6 Zyklus-INT und 30 verschiedenen Knoten. Alle Knoten frei nach INT-Preis wählbar."
-            : "Axioms: 1e6 cycle INT and 30 distinct nodes. Node purchases require only INT."}
-        </p>
-      )}
-      {layer === "int"
-        ? Object.entries(labels).map(([branch, label]) => (
-            <details className="v2-branch" data-branch={branch} key={branch} open={branch === "H"}>
-              <summary>{label}</summary>
-              <div className="v2-node-grid">
-                {Object.entries(BALANCE.progression.nodes)
-                  .filter(([id]) => id.startsWith(branch))
-                  .map(([id, n]) => {
-                    const own = hasProgressionNode(s, id),
-                      can =
-                        exactEconomyValue(s, "unspentINT").compare(
-                          ScientificNumber.from(n.cost),
-                        ) >= 0;
-                    return (
-                      <button
-                        id={`prestige-node-${id}`}
-                        className={`v2-node ${own ? "owned" : can ? "available" : ""}`}
-                        aria-label={`${n.name}, ${n.cost} INT${own ? ", erfüllt" : ""}`}
-                        onClick={() => setSelected(id as PrestigeNodeV2)}
-                        key={id}
-                      >
-                        <span className={`v2-symbol branch-${branch}`}>
-                          <ProgressionNodeArt id={id as PrestigeNodeV2}/>
-                          {own&&<i className="v2-owned-mark" aria-hidden="true">✓</i>}
-                        </span>
-                        <b lang={de?"de":"en"}>{n.name}</b>
-                        <small>
-                          {own
-                            ? de
-                              ? "Erfüllt"
-                              : "Owned"
-                            : fmt(ScientificNumber.from(n.cost)) + " INT"}
-                        </small>
-                      </button>
-                    );
-                  })}
-              </div>
-            </details>
-          ))
-        : ["A", "B", "C", "D"].map((branch, i) => (
-            <details className="v2-branch" data-branch={branch} key={branch} open={branch === "A"}>
-              <summary>
-                {
-                  [
-                    "Skalierung",
-                    "Wiederaufbau",
-                    "Materialien",
-                    "KI-Entwicklung",
-                  ][i]
-                }
-              </summary>
-              <div className="v2-node-grid">
-                {Object.entries(BALANCE.progression.axioms)
-                  .filter(([id]) => id.startsWith(branch))
-                  .map(([id, n]) => {
-                    const c = axiomNodeCost(s, id as AxiomNodeV2),
-                      l = axiomLevel(s, id);
-                    return (
-                      <button
-                        key={id}
-                        className={`v2-node ${c === null ? "owned" : ""}`}
-                        onClick={() => setSelected(id as AxiomNodeV2)}
-                      >
-                        <span className={`v2-symbol branch-${branch}`}>
-                          <ProgressionNodeArt id={id as AxiomNodeV2}/>
-                        </span>
-                        <b lang={de?"de":"en"}>{n.name}</b>
-                        <small>
-                          Lv {l} · {c ? fmt(c) : "MAX"}
-                        </small>
-                      </button>
-                    );
-                  })}
-              </div>
-            </details>
-          ))}
+      <ProgressionNetwork key={layer} kind={layer} de={de} effects={s.settings.effects} onSelect={setSelected}
+        labels={layer==='int'?(de?labels:{H:'Hardware & compute',T:'Models & training',F:'Research & data',W:'Items & crafting',S:'Taps & overdrive',I:'INT & recovery'}):{A:de?'Skalierung':'Scaling',B:de?'Wiederaufbau':'Recovery',C:de?'Materialien':'Materials',D:de?'KI-Entwicklung':'AI development'}}
+        nodes={layer==='int'?Object.entries(BALANCE.progression.nodes).map(([id,n])=>({id:id as PrestigeNodeV2,name:n.name,order:n.cost,cost:fmt(ScientificNumber.from(n.cost))+' INT',owned:hasProgressionNode(s,id),affordable:exactEconomyValue(s,'unspentINT').compare(ScientificNumber.from(n.cost))>=0})):Object.entries(BALANCE.progression.axioms).map(([id,n],index)=>{const c=axiomNodeCost(s,id as AxiomNodeV2);return{id:id as AxiomNodeV2,name:n.name,order:index,cost:c?fmt(c)+' '+(de?'Axiome':'Axioms'):'MAX',owned:c===null,affordable:!!c&&axiomEconomyValue(s,'available').compare(c)>=0,level:axiomLevel(s,id)}}) satisfies NetworkNode[]}/>
+      {!meta&&<details className="system-disclosure v2-system-info"><summary>{de?'Spätere Systeme':'Later systems'}</summary><p className="v2-note">{de?'Axiome: ab 1e6 Zyklus-INT und 30 verschiedenen Knoten.':'Axioms: 1e6 cycle INT and 30 distinct nodes.'}</p></details>}
       <AutomationSettings s={s} act={act} />
       {selected && node && (
         <div className="v2-backdrop" onClick={() => setSelected(null)}>
@@ -379,6 +300,7 @@ export function SecretLab({ s, act }: Props) {
         <ResourceArt id="int" />
         <div>
           <h2>{de ? "Geheimes Labor" : "Secret lab"}</h2>
+          <span className="v2-balance-label">{de?'Verfügbar':'Available'}</span>
           <b>
             {fmt(ScientificNumber.fromJSON(p.knowledge))}{" "}
             {de ? "Erkenntnis" : "Insight"}

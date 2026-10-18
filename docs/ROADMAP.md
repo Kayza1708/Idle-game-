@@ -1,8 +1,10 @@
 # Idle Intelligence – aktueller Stand
 
-Stand: Bereinigung nach main `d3040a9` (PR #125). Frühere doppelte Arbeitsprotokolle und erledigte Branch-Abhängigkeiten stehen in der Git-Historie; diese Datei beschreibt die verbleibende Arbeit.
+Stand: Prestigenetz und Schmiedebewegung nach main `625a42f` (PR #126). Frühere doppelte Arbeitsprotokolle und erledigte Branch-Abhängigkeiten stehen in der Git-Historie; diese Datei beschreibt die verbleibende Arbeit.
 
 ## Implementiert
+
+- [x] Verbundenes INT-/Axiomnetz mit Verschieben, Zoom und Tastatur; Craft-/Fusionsbewegung direkt in der ursprünglichen Schmiede. Browserprüfung und Grenzen: [Prestigenetz und Schmiedebewegung](network-forge-motion.md).
 
 - [x] V2-Prestige, Axiome, Modelle und zugehörige Save-/Offline-Verträge; siehe [V2-Stabilisierung](v2-stability-balance-report.md).
 - [x] Sofortiges Crafting und Fusion sowie drei vorbereitete Seasons; siehe [Items und Seasons](instant-items-seasons.md).
