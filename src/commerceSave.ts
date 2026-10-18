@@ -15,6 +15,7 @@ export function validCommerce(value: unknown): value is CommerceState {
     v.every((x) => typeof x === "string" && x.length > 0) &&
     new Set(v).size === v.length;
   return (
+    (c.gemVideos===undefined||Number.isSafeInteger(c.gemVideos)&&c.gemVideos>=0)&&
     strings(c.owned) &&
     c.owned.every((id) =>
       BALANCE.commerce.products.some((p) => p.id === id && p.once),

@@ -1,4 +1,3 @@
-import {startFusion} from './progressionAutomation';
 import {automaticCanSpendData} from './progressionWork';
 import {activeSlotIds,hasProgressionNode} from './progression';
 import {automationFeatureUnlocked} from './economy';
@@ -25,7 +24,7 @@ export function craftingAffordability(s:GameState,kind:CraftingJob['kind'],id:st
  const missingBlueprints=Number.isSafeInteger(s.blueprintFragments)&&s.blueprintFragments>=0?Math.max(0,(costs?.blueprints??0)-s.blueprintFragments):Infinity;
  const reserved=kind==='item'?[s.crafting.active,...s.crafting.queue].filter(j=>j?.kind==='item'&&j.recipeId===id).reduce((n,j)=>n+j!.quantity-j!.completed,0):0;const valid=Number.isSafeInteger(s.lifetime.itemsCrafted+quantity)&&!!recipe&&(kind!=='item'||quantity<=BALANCE.maxInstantCraft)&&(kind!=='item'||Number.isSafeInteger((s.craftedItemCounts[id as ItemTypeId]??0)+reserved+quantity))&&data.valid&&Number.isSafeInteger(s.nextId)&&s.nextId>0&&Number.isSafeInteger(s.nextId+quantity+1)&&Number.isFinite(s.savedAt)&&s.savedAt>=0&&s.savedAt+recipe.durationPerUnit*1000*quantity<=Number.MAX_SAFE_INTEGER;
  const batchAllowed=kind!=='item'||quantity===1||hasNode(s,'batchFabrication',1);
- const affordable=!s.progression?.fusion&&batchAllowed&&valid&&unlocked&&(s.progression?.version===2?s.crafting.queue.length+quantity<=100:kind==='item'||s.crafting.queue.length<3)&&missingBlueprints===0&&!Object.keys(missingComponents).length&&!Object.keys(missingModules).length&&canAffordScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(costs!.data));
+ const affordable=(kind==='item'||!s.progression?.fusion)&&batchAllowed&&valid&&unlocked&&(kind==='item'||(s.progression?.version===2?s.crafting.queue.length+quantity<=100:s.crafting.queue.length<3))&&missingBlueprints===0&&!Object.keys(missingComponents).length&&!Object.keys(missingModules).length&&canAffordScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(costs!.data));
  const reasons=[...(!batchAllowed?['batch-locked']:[]),...(!valid?['invalid-quantity']:[]),...(!unlocked?[kind==='item'&&blueprintQuote(s,id).prerequisite?'blueprint-unlearned':'recipe-locked']:[]),...(kind==='module'&&s.crafting.queue.length>=3?['queue-full']:[]),...(data.missing>0?['data']:[]),...(missingBlueprints>0?['blueprints']:[]),...Object.keys(missingComponents).map(id=>`component:${id}`),...Object.keys(missingModules).map(id=>`module:${id}`)];return{recycling:{fraction:kind==='item'?researchModifiers(s).materialRecycling:0,componentsPerExemplar:Object.fromEntries(Object.entries(costs?.components??{}).map(([key,n])=>[key,Number(n)/quantity])),remainders:s.craftingRecycleRemainders,atCompletion:true},recipe,valid,affordable,unlocked,data,missingComponents,missingModules,missingBlueprints,reasons};
 }
 export function moduleAffordability(s:GameState,id:ModuleId,quantity=1){return craftingAffordability(s,'module',id,quantity);}
@@ -60,7 +59,16 @@ function startCraftingJob(s:GameState,job:CraftingJob,startedAt=s.savedAt){const
 function enqueuePaid(s:GameState,job:CraftingJob){const queued=addEvent(s,'crafting_queued',s.savedAt,jobDetails(job));return queued.crafting.active?{...queued,crafting:{...queued.crafting,queue:[...queued.crafting.queue,job]}}:startCraftingJob(queued,job);}
 function reserveCrafting(s:GameState,kind:CraftingJob['kind'],id:string,quantity:number,rarity?:Rarity){
  const quote=craftingAffordability(s,kind,id,quantity),recipe=quote.recipe;
- if(!quote.affordable||!recipe||(kind==='item'&&rarity!==recipe.result.rarity))return s;if(s.progression?.version===2){let next=s;for(let i=0;i<quantity;i++){const unit=craftingRecipe(kind,id,1,false,kind==='item'?s.blueprintMastery[id as ItemTypeId]??0:0,false,true)!;const resource=spendScientificResources(next,ScientificNumber.zero(),ScientificNumber.from(unit.ingredients.data));const componentInventory={...next.componentInventory},modules={...next.modules};for(const [key,n]of Object.entries(unit.ingredients.components))componentInventory[key as keyof typeof componentInventory]-=n??0;for(const[key,n]of Object.entries(unit.ingredients.modules))modules[key as ModuleId]-=n??0;const job:CraftingJob={id:`craft-${next.nextId}`,progressionVersion:2,kind,recipeId:unit.result.id,quantity:1,completed:0,durationPerUnit:unit.durationPerUnit,startedAt:null,endsAt:null,ingredients:unit.ingredients,result:unit.result,masteryLevel:kind==='item'?s.blueprintMastery[id as ItemTypeId]??0:0};next=enqueuePaid({...resource,nextId:next.nextId+1,componentInventory,components:componentTotal(componentInventory),modules},job);}return next;}
+ if(!quote.affordable||!recipe||(kind==='item'&&rarity!==recipe.result.rarity))return s;if(s.progression?.version===2&&kind==='item'){
+ const {ingredients,result}=recipe,resources=spendScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(ingredients.data));
+ const componentInventory={...s.componentInventory},modules={...s.modules};
+ for(const [key,n]of Object.entries(ingredients.components))componentInventory[key as ComponentId]-=n??0;
+ for(const [key,n]of Object.entries(ingredients.modules))modules[key as ModuleId]-=n??0;
+ const job:CraftingJob={id:`craft-${s.nextId}`,progressionVersion:2,kind,recipeId:result.id,quantity,completed:0,durationPerUnit:0,startedAt:s.savedAt,endsAt:s.savedAt,ingredients,result,masteryLevel:s.blueprintMastery[id as ItemTypeId]??0};
+ const paid={...resources,nextId:s.nextId+1,componentInventory,components:componentTotal(componentInventory),modules};
+ const done=settleCrafting(addEvent(addEvent({...paid,crafting:{active:job,queue:[]}},'crafting_queued',s.savedAt,{...jobDetails(job),instant:true}),'crafting_started',s.savedAt,jobDetails(job)));
+ return {...done,crafting:paid.crafting};
+ }if(s.progression?.version===2&&kind==='module'){let next=s;for(let i=0;i<quantity;i++){const unit=craftingRecipe(kind,id,1,false,0,false,true)!;const resource=spendScientificResources(next,ScientificNumber.zero(),ScientificNumber.from(unit.ingredients.data));const componentInventory={...next.componentInventory},modules={...next.modules};for(const [key,n]of Object.entries(unit.ingredients.components))componentInventory[key as keyof typeof componentInventory]-=n??0;for(const[key,n]of Object.entries(unit.ingredients.modules))modules[key as ModuleId]-=n??0;const job:CraftingJob={id:`craft-${next.nextId}`,progressionVersion:2,kind,recipeId:unit.result.id,quantity:1,completed:0,durationPerUnit:unit.durationPerUnit,startedAt:null,endsAt:null,ingredients:unit.ingredients,result:unit.result,masteryLevel:0};next=enqueuePaid({...resource,nextId:next.nextId+1,componentInventory,components:componentTotal(componentInventory),modules},job);}return next;}
  const {ingredients,durationPerUnit,result}=recipe;
  const resources=spendScientificResources(s,ScientificNumber.zero(),ScientificNumber.from(ingredients.data));
  if(resources===s)return s;
@@ -102,7 +110,7 @@ export function upgrade(s:GameState,id:string,ticket?:ImprovementTicket){const q
 
 
 /** Fuse three identical items into one item of the next rarity. This is the long-tail item sink. */
-export function fuseItems(s:GameState,ids:string[]){return s.progression?.version===2?startFusion(s,ids):fuseItemsNow(s,ids);}
+export function fuseItems(s:GameState,ids:string[]){return fuseItemsNow(s,ids);}
 export function fuseItemsNow(s:GameState,ids:string[]){
  if(!fusionPreview(s,ids).allowed)return s;
  const unique=[...new Set(ids)],items=unique.map(id=>s.inventory.find(i=>i.id===id)).filter((i):i is Item=>!!i);
@@ -110,7 +118,7 @@ export function fuseItemsNow(s:GameState,ids:string[]){
  const first=fusionPreview(s,ids).result!;const basis=items.find(i=>i.id===first.id)!;if(items.some(i=>i.type!==basis.type||i.rarity!==basis.rarity)||basis.rarity==='mythic')return s;
  const order:Rarity[]=['common','uncommon','rare','epic','legendary','mythic'],rarity=order[order.indexOf(basis.rarity)+1];
  const consumed=items.filter(item=>item.id!==first.id).map(item=>item.id),rarityResult=rarity;
- const result={...first,level:s.progression?.version===2?Math.min(...items.map(i=>i.level)):first.level,rarity:rarityResult,materialBasis:combineMaterialBasis(...items.map(old=>old.materialBasis??(s.progression?.version===2?{}:{circuits:BALANCE.legacyItemRecovery[old.rarity]}))),recoveryUsed:combineMaterialBasis(...items.map(old=>old.recoveryUsed??{}))};
+ const result={...first,level:first.level,rarity:rarityResult,materialBasis:combineMaterialBasis(...items.map(old=>old.materialBasis??(s.progression?.version===2?{}:{circuits:BALANCE.legacyItemRecovery[old.rarity]}))),recoveryUsed:combineMaterialBasis(...items.map(old=>old.recoveryUsed??{}))};
  let backed={...s,inventory:s.inventory.filter(i=>!consumed.includes(i.id)).map(i=>i.id===first.id?result:i),pinnedGoal:s.pinnedGoal?.kind==='item-upgrade'&&consumed.includes(s.pinnedGoal.id)?null:s.pinnedGoal,lifetime:{...s.lifetime,itemsFused:s.lifetime.itemsFused+1}};
  if(s.retention.activeRun&&unique.every(id=>s.retention.activeRun!.metrics!.craftedIds.includes(id))){const m=s.retention.activeRun.metrics!;backed=addChallengeMetrics(backed,{craftedIds:m.craftedIds.filter(id=>!consumed.includes(id)),craftRarity:Math.max(m.craftRarity,rarities.indexOf(rarity))});}
  return addEvent(backed,'item-craft',s.savedAt,{action:'fusion',type:first.type,rarity,resultInstanceId:first.id,consumed:consumed.join(',')});
@@ -143,3 +151,14 @@ export function claimLootDrop(s:GameState,id:string,rng=Math.random){
 export function craftingMissingText(quote:ReturnType<typeof craftingAffordability>,language:string){const de=language==='de';return quote.reasons.map(reason=>reason==='batch-locked'?(de?'Serienfertigung im Prestige-Baum benötigt':'Batch Fabrication prestige node required'):reason==='invalid-quantity'?(de?'Ungültige Menge':'Invalid quantity'):reason==='blueprint-unlearned'?(de?'Bauplan noch nicht gelernt':'Blueprint not learned'):reason==='recipe-locked'?(de?'Bauplan gesperrt':'Recipe locked'):reason==='queue-full'?(de?'Warteschlange voll':'Queue full'):reason==='data'?`${quote.data.missingExact.toScientificString()} Data`:reason==='blueprints'?`${quote.missingBlueprints} ${de?'Bauplanfragmente':'blueprint fragments'}`:reason.startsWith('component:')?`${componentText(reason.slice(10) as keyof typeof quote.missingComponents,de?'de':'en').name} ×${quote.missingComponents[reason.slice(10) as keyof typeof quote.missingComponents]}`:`${moduleText(reason.slice(7) as ModuleId,de?'de':'en')} ×${quote.missingModules[reason.slice(7) as keyof typeof quote.missingModules]}`).join(' · ');}
 
 function legacyEquipmentEligibility(s:GameState,id:string,requested?:ItemSlot){const item=s.inventory.find(i=>i.id===id),family=item&&Object.hasOwn(itemTypes,item.type)?itemTypes[item.type].slot:null,compatible=equipmentSlots.filter(slot=>slotFamily(slot)===family&&equipmentSlots.indexOf(slot)<equipmentSlotCount(s)),slot=requested??compatible.find(slot=>s.inventory.find(i=>i.id===s.equipped[slot])?.type===item?.type)??compatible.find(slot=>!s.equipped[slot])??compatible[0]??null,reason=!family?'unknown':s.prestigeCount<1?'prestige':Object.values(s.equipped).includes(id)?'equipped':s.inventory.some(i=>i.type===item!.type&&i.id!==s.equipped[slot!]&&Object.values(s.equipped).includes(i.id))?'duplicate-type':!slot||slotFamily(slot)!==family||equipmentSlots.indexOf(slot)>=equipmentSlotCount(s)?'no-socket':null;return{item,slot,reason,allowed:reason===null};}
+
+/** Settle paid pre-instant item orders once; preserve module contracts and their reservations. */
+export function settleLegacyItemOrdersInstant(s:GameState){
+ const jobs=[s.crafting.active,...s.crafting.queue].filter((j):j is CraftingJob=>!!j),items=jobs.filter(j=>j.kind==='item');
+ if(!items.length)return s;
+ let n=s;
+ for(const job of items)n=settleCrafting({...n,crafting:{active:{...job,durationPerUnit:0,startedAt:s.savedAt,endsAt:s.savedAt},queue:[]}});
+ const modules=jobs.filter(j=>j.kind==='module'),first=modules.shift();
+ n={...n,crafting:{active:null,queue:modules}};
+ return first?(first.startedAt!==null&&first.endsAt!==null?{...n,crafting:{...n.crafting,active:first}}:startCraftingJob(n,first,s.savedAt)):n;
+}

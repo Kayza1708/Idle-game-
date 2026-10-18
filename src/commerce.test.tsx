@@ -635,7 +635,7 @@ describe("save and UI release boundaries", () => {
     expect(html).not.toContain("€");
     expect(html).not.toContain("undefined");
     expect(html.match(/disabled=""/g)?.length).toBe(
-      BALANCE.commerce.products.length + 1,
+      BALANCE.commerce.products.filter(p=>p.kind!=="season"||p.id.endsWith(s.season.id.split("-")[1])).length + 1,
     );
     const ad = renderToStaticMarkup(<RewardOffers s={s} act={() => {}} />);
     expect(ad).toContain("Videos derzeit nicht verfügbar");

@@ -169,7 +169,7 @@ describe("V2 real jobs and reset lifecycles", () => {
     ] as ItemTypeId[]) {
       const before = s.inventory.length;
       s = craft(s, id);
-      expect(s.crafting.active?.recipeId).toBe(id);
+      expect(s.crafting.active).toBeNull();
       s = roundtrip(s);
       s = advance(s, 301).state;
       expect(s.inventory.length).toBe(before + 1);
@@ -178,22 +178,11 @@ describe("V2 real jobs and reset lifecycles", () => {
     }
     expect(Object.keys(s.equipped)).toHaveLength(3);
   });
-  it("releases exactly the actual cost of one queued serial unit once", () => {
-    let s = v2Account();
-    s = buyNode(s, "W07");
-    s = grantComponents(s, { circuits: 1000, copperCoils: 1000 });
-    s = {
-      ...s,
-      learnedRecipes: [...(s.learnedRecipes ?? []), "impulse-relay"],
-    };
-    s = craft(s, "impulse-relay", "common", 3);
-    expect(s.crafting.queue).toHaveLength(2);
-    const id = s.crafting.queue[0].id,
-      circuits = s.componentInventory.circuits;
-    s = cancelCrafting(s, id);
-    expect(s.componentInventory.circuits).toBe(circuits + 12);
-    expect(cancelCrafting(s, id)).toBe(s);
-    expect(roundtrip(s).crafting.queue).toHaveLength(1);
+  it("creates a whole instant batch and does not refund completed units",()=>{
+    let s=buyNode(v2Account(),'W07');s={...s,learnedRecipes:[...(s.learnedRecipes??[]),'impulse-relay']};s=grantComponents(s,{circuits:1000,copperCoils:1000});
+    const before=s.componentInventory.circuits;s=craft(s,'impulse-relay','common',3);
+    expect(s.crafting.active).toBeNull();expect(s.crafting.queue).toEqual([]);expect(s.inventory.filter(i=>i.type==='impulse-relay')).toHaveLength(3);expect(s.componentInventory.circuits).toBe(before-36);
+    expect(cancelCrafting(s,'craft-1')).toBe(s);roundtrip(s);
   });
   it("starts and completes paid research with no old prestige access nodes", () => {
     let s = buyHardwareClass(newGame(0), "calculator");
@@ -308,7 +297,7 @@ describe("V2 real jobs and reset lifecycles", () => {
     expect(s.researchLabs.find(Boolean)!.dataCostExact).toEqual(paid);
     roundtrip(s);
   });
-  it("fuses over elapsed work and carries exactly the material basis", () => {
+  it("fuses immediately and carries exactly the material basis", () => {
     let s = v2Account();
     for (let i = 0; i < 3; i++) s = createItem(s, "quantum-chip", "common");
     s = {
@@ -320,8 +309,8 @@ describe("V2 real jobs and reset lifecycles", () => {
     };
     const ids = s.inventory.map((i) => i.id);
     s = fuseItems(s, ids);
-    expect(s.inventory).toHaveLength(0);
-    expect(s.progression.fusion).not.toBeNull();
+    expect(s.inventory).toHaveLength(1);
+    expect(s.progression.fusion).toBeNull();
     s = advance(s, 60).state;
     expect(s.inventory).toHaveLength(1);
     expect(s.inventory[0].rarity).toBe("uncommon");
@@ -422,11 +411,12 @@ describe("V2 boundary and automation regressions", () => {
     );
     s = craft(s, "impulse-relay");
     s = craft(s, "memory-crystal");
-    expect(s.crafting.queue.length).toBe(1);
+    expect(s.crafting.queue.length).toBe(0);
     s = axiomReset(s);
     expect(exactEconomyValue(s, "data").isZero()).toBe(true);
     expect(s.crafting.queue).toHaveLength(0);
-    expect(s.crafting.active).not.toBeNull();
+    expect(s.crafting.active).toBeNull();
+    expect(s.inventory.some(i=>i.type==="impulse-relay")).toBe(true);
     roundtrip(s);
   });
   it("returns no imaginary salvage material for a free loot item", () => {

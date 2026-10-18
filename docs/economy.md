@@ -679,3 +679,13 @@ Save56 migriert alte Lv0-Basis aufLv1 ohne Effektverlust, erhält Outlierpower �
 Eine Veredelungsstation (Maximum 5) statt drei neu ausbaubarer Stationen; bestehende Preise, Geschwindigkeiten und Item-Forgegrenzen der ersten Station bleiben unverändert. Save57 übernimmt die höchste historische Stufe; zusätzliche frühere Ausbaustufen bleiben als validierter `legacyFoundryLevels`-Fortschritt (0–10) erhalten. Bezahlte Nebenaufträge und bestehende Queues laufen unter ihren bisherigen Verträgen aus. Keine neuen Starts/Upgrades für Station 2/3. Infrastrukturmissionen verwenden die verbliebenen realen Ausbaustufen; industrielle Achievements zusätzlich die höchste Item-Forge-Stufe, damit bisherige Schwellen weiterhin erreichbar sind. Alte Missionen/Claims erhalten, ohne Nachzahlung.
 
 Neuer zentraler Prestige-Knoten `batchFabrication`: 100 INT, Tiefe3, nach `manufacturing2`, benötigt Prestige; schaltet ×3/×10/×100 Itemherstellung frei. Der Domainpfad verweigert mehrere Items vor Erwerb atomar. Einzelfertigung und alte bezahlte Craftverträge bleiben erhalten; Module behalten ihren bisherigen Domainvertrag. Keine sonstige Neukalibrierung. Preis/Progressionswirkung sind noch nicht natürlich gemessen. Details: [mobile-forge-research-v2.md](mobile-forge-research-v2.md).
+
+## 2026-10-18 · Sofort-Items / Seasons 1–3
+
+Item-Crafting und Fusion sind sofortige atomare Transaktionen. Rezeptkosten bleiben erhalten, Item-Warteschlangen entfallen; bezahlte alte Aufträge werden beim Upgrade auf v63 ohne zweite Zahlung fertiggestellt. Module und Veredelung behalten ihre Prozesse.
+
+`BALANCE.seasonV2` enthält die ersten drei Themen, 50 Belohnungsstufen pro Season, Free/Premium-Itemraritäten und Belohnungswerte. Pro Season: Free 1.200 Gems, 20 Kisten, 3 Items; Premium zusätzlich 4.500 Gems, 20 höherwertige Kisten und 13 Items. Das Finale garantiert Epic (Free) bzw. Legendary (Premium). Kisten verwenden bestehende Shop-Lootregeln.
+
+Die ersten drei Stufen der sechs frühen Kernforschungen dauern 30/60/90 Sekunden vor Boni; Daten-Basiskosten werden auf 30/60/120 begrenzt, anschließend gilt das vorhandene Preiswachstum. Einführung 20 Sekunden; bezahlte Jobs unverändert. Gem-Videoabrufe: 10 Gems, jeder zehnte erfolgreiche Abruf 30; bestehend fünf Abrufe pro Tag, kein Zählerfortschritt bei Abbruch/Replay. Alle neuen Werte stehen in `BALANCE.seasonV2`.
+
+[Details, Berechtigungen und Migration](instant-items-seasons.md).

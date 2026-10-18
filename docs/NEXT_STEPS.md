@@ -1,3 +1,14 @@
+## 2026-10-18 · Sofort-Items und Seasons 1–3
+
+- [x] Item-Crafting und Fusion atomar ohne Warteschlange; bestehende Ergebnisanimationen und Migration bezahlter Altaufträge in Save v63.
+- [x] Drei 50-stufige Season-Themen mit Items, Kisten und deutlich umfangreicherem Premium-Track; getrennte Belege, Restore/Entzug und sieben Tage Nachfrist.
+- [x] Dauerhafter Kistenbestand, neue gruppierte Ausrüstungsauswahl, schnellere frühe Forschung und kompaktes Gem-Videoangebot mit jeder zehnten Bonusbelohnung.
+- [x] Browserabnahme bei 320/390/430 px: keine Seitenüberbreite, echtes Ausrüsten, Sofort-Crafting/Fusion mit Animation und Season-Kiste abholen/öffnen; reduzierte Bewegung geprüft.
+- [x] Node 22.23.3: Typecheck, 1.648 Tests in 118 Dateien und Produktionsbuild bestanden.
+- [ ] Native Werbe-/Store-Anbieter und echte Season-Produkte anschließen/verifizieren; iPhone-/WKWebView-Abnahme und natürliche Balance-Messung bleiben offen.
+
+[Umfang, Belohnungen, Migration und Screenshots](instant-items-seasons.md).
+
 ## 2026-10-17 · V2-Stabilisierung und mehrstufiger Balancebericht
 
 - [x] Integrationstraining in Queue-API, Bedienung und Saveprüfung vereinheitlicht; Unlocks, Challenge-Regeln und vorgemerkte Endstufen berücksichtigt.

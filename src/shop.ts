@@ -8,7 +8,7 @@ import type {AdResult} from './ads';
 export type ChestTier=keyof typeof BALANCE.shop.chests;
 export const chestTiers=Object.keys(BALANCE.shop.chests) as ChestTier[];
 export type ShopRotation={day:number;materials:ComponentId[];discount:ComponentId;item:ItemTypeId;claimed:string[]};
-export type ShopReceipt={id:number;at:number;offerId:string;kind:'chest'|'material'|'item';payment:'free'|'video'|'gems';cost:number;tier:ChestTier|null;components:Partial<Record<ComponentId,number>>;item:Item|null};
+export type ShopReceipt={id:number;at:number;offerId:string;kind:'chest'|'material'|'item';payment:'free'|'video'|'gems'|'season';cost:number;tier:ChestTier|null;components:Partial<Record<ComponentId,number>>;item:Item|null};
 export type ShopState={revision:number;clockAt:number;rotation:ShopRotation|null;freeNextAt:number;adWindow:{startedAt:number;used:number};pendingAd:{id:string;at:number;expiresAt:number;context:string}|null;last:ShopReceipt|null};
 export type ShopOffer={id:string;kind:'chest'|'material'|'item';cost:number;payment:'free'|'gems';tier?:ChestTier;component?:ComponentId;amount?:number;item?:ItemTypeId;rarity?:Rarity;stock?:boolean;discount?:number;originalCost?:number};
 export type ShopTicket={id:string;revision:number;day:number};
@@ -84,7 +84,7 @@ export function validShop(value:unknown):value is ShopState{
  if(!s||!int(s.revision)||!time(s.clockAt)||!time(s.freeNextAt)||!s.adWindow||!time(s.adWindow.startedAt)||!int(s.adWindow.used)||s.adWindow.used>BALANCE.adLimits.shopChest)return false;
  if(s.rotation!==null){const r=s.rotation;if(!r||!int(r.day)||!Array.isArray(r.materials)||r.materials.length!==BALANCE.shop.rotatingOfferCount||new Set(r.materials).size!==r.materials.length||r.materials.some(id=>!componentIds.includes(id))||!componentIds.includes(r.discount)||!capsuleItemType(r.item)||!Array.isArray(r.claimed)||r.claimed.length>BALANCE.shop.rotatingOfferCount+2||new Set(r.claimed).size!==r.claimed.length||r.claimed.some(id=>typeof id!=='string'||!([...r.materials.map(c=>`daily:${r.day}:${c}`),`discount:${r.day}:${r.discount}`,`item:${r.day}`].includes(id))))return false;}
  if(s.pendingAd!==null){const p=s.pendingAd;if(!p||!validTx(p.id)||!time(p.at)||!time(p.expiresAt)||p.expiresAt-p.at!==BALANCE.shop.adTicketMs||typeof p.context!=='string'||p.context.length>1000)return false;}
- if(s.last!==null){const r=s.last;if(!r||!int(r.id)||!r.id||r.id>s.revision||!time(r.at)||!validTx(r.offerId)||!['chest','material','item'].includes(r.kind)||!['free','video','gems'].includes(r.payment)||!int(r.cost)||(r.payment!=='gems'&&r.cost!==0)||!(r.tier===null||chestTiers.includes(r.tier))||!r.components||Array.isArray(r.components)||typeof r.components!=='object'||Object.entries(r.components).some(([id,n])=>!componentIds.includes(id as ComponentId)||!int(n)||Number(n)<=0))return false;
+ if(s.last!==null){const r=s.last;if(!r||!int(r.id)||!r.id||r.id>s.revision||!time(r.at)||!validTx(r.offerId)||!['chest','material','item'].includes(r.kind)||!['free','video','gems','season'].includes(r.payment)||!int(r.cost)||(r.payment!=='gems'&&r.cost!==0)||!(r.tier===null||chestTiers.includes(r.tier))||!r.components||Array.isArray(r.components)||typeof r.components!=='object'||Object.entries(r.components).some(([id,n])=>!componentIds.includes(id as ComponentId)||!int(n)||Number(n)<=0))return false;
   if(r.kind==='chest'&&!r.tier||r.kind!=='chest'&&r.tier!==null)return false;
   if(r.item!==null&&(!r.item||!validTx(r.item.id)||!capsuleItemType(r.item.type)||!Object.hasOwn(BALANCE.rarity,r.item.rarity)||r.item.level!==1||r.item.locked!==false))return false;
   if(r.kind==='item'&&!r.item||r.kind==='material'&&r.item!==null)return false;
@@ -92,3 +92,9 @@ export function validShop(value:unknown):value is ShopState{
  return true;
 }
 function capsuleItemType(id:unknown):id is ItemTypeId{return typeof id==='string'&&Object.hasOwn(BALANCE.itemRecipes,id)&&!['impulse-relay','insight-archive'].includes(id);}
+
+/** Earned chest: the same loot table and receipt animation, without spending or changing daily offers. */
+export function grantRewardChest(s:GameState,tier:ChestTier,source:string){
+ if(blocked(s)||!chestTiers.includes(tier)||!Number.isSafeInteger(s.shop.revision+1))return s;
+ try{return grant(s,{id:source,kind:'chest',tier,cost:0,payment:'free'},'season',seeded(s));}catch{return s;}
+}
