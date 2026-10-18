@@ -15,7 +15,6 @@ import {
   grantComponents,
   itemEffectFor,
   deepPrestigeBonus,
-  trainingBaseCreditCostScientific,
   usersRateScientific,
   creditRateScientific,
   type GameState,

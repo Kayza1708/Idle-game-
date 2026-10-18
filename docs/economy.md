@@ -636,7 +636,7 @@ Drei permanente Schmieden, fünf Ausbaustufen mit beauftragten Kosten, Geschwind
 
 Zehn Challengefamilien ×69 feste wissenschaftliche Stufen, sechs Kapitel, keine Vermögensskalierung. Kurven: Credits 1e6·10^(0,30·(Stufe−1)), Data 1e3·10^(0,20·…), Compute/Users 1e2·10^(0,25·…), Mindest-INT ceil(10^(0,15·…)); Familienfaktoren 1. Eigener Familienbonus im Run deaktiviert; Rewardanteil 0,08·ln(1+höchste absolvierte Stufe) verstärkt nur einen bestehenden spezifischen Bonusanteil. Frische 50 Credits ohne Ressourcen/Jobs, zulässige permanente Boni/Forschung und unveränderliche Loadoutkopien, Hauptspiel separat passiv. Normalprestige nur bei ausgewiesenem Mindest-INT, Axiom gesperrt.
 
-Zentrale Tabellen, tatsächliche Quellen/Verbraucher, kurze vorbereitete Nachweise und offene Grafik-/Kisten-/Balancegrenzen: [Audit](material-builds-audit.md), [Katalog](material-builds-catalog.json), [Domainnachweis](material-builds-proof.json). Keine Behauptung natürlicher Erreichbarkeit aller 69 Stufen.
+Zentrale Tabellen, tatsächliche Quellen/Verbraucher, kurze vorbereitete Nachweise und offene Grafik-/Kisten-/Balancegrenzen: [Audit](material-builds-audit.md), Katalog (historischer Nachweis: Git-Historie vor Bereinigung), Domainnachweis (historischer Nachweis: Git-Historie vor Bereinigung). Keine Behauptung natürlicher Erreichbarkeit aller 69 Stufen.
 
 ## PR #85 correction: catalogue v2 / save v48
 

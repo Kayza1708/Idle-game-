@@ -1,5 +1,5 @@
 import {automaticCanSpendData} from './progressionWork';
-import {activeSlotIds,hasProgressionNode} from './progression';
+import {activeSlotIds} from './progression';
 import {automationFeatureUnlocked} from './economy';
 import {addChallengeMetrics} from './challengeStages';
 import {materialTable,discoverBlueprint} from './materialEconomy';
@@ -8,7 +8,7 @@ import {deviceBonus} from './deviceEffects';
 import {foundryBusy,queueForge,combineMaterialBasis} from './foundries';
 import {blueprintQuote} from './blueprints';
 import {componentText,moduleText} from './gameplayI18n';
-import { researchModifiers, componentIds, specialItemEffectQuote, MAX_ECONOMY_VALUE, componentTotal, canAffordScientificResources, validEconomyValues, refundDataScientific, type CraftingJob, type ComponentId, BALANCE, GameState, grantComponents, Item, itemTypes,itemEffectProfile,itemEffectFor,deepPrestigeBonus,equipmentSlotCount,equipmentSlots,slotFamily,type ItemSlot,exactEconomyValue,spendScientificResources, ItemTypeId, ModuleId, Rarity, spendComponents, spendResources, hasNode, tapDropMultiplier, addCreditsScientific, addDataScientific, creditRateScientific, dataRateScientific } from './economy';
+import { researchModifiers, componentIds, specialItemEffectQuote, componentTotal, canAffordScientificResources, validEconomyValues, refundDataScientific, type CraftingJob, type ComponentId, BALANCE, GameState, grantComponents, Item, itemTypes,itemEffectProfile,itemEffectFor,deepPrestigeBonus,equipmentSlotCount,equipmentSlots,slotFamily,type ItemSlot,exactEconomyValue,spendScientificResources, ItemTypeId, ModuleId, Rarity, spendComponents, hasNode, tapDropMultiplier, addCreditsScientific, addDataScientific, creditRateScientific, dataRateScientific } from './economy';
 import { addEvent } from './telemetry';
 import {ScientificNumber} from './scientificNumber';
 import {dataAffordability as economyDataAffordability} from './economy';

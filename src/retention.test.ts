@@ -2,7 +2,7 @@ import {newGame,restore} from './legacyContractFixture';
 import {advance} from './simulation';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {describe,expect,it} from 'vitest';
-import {addCredits,BALANCE,buyHardwareClass,dataRate,hardwareCost,hardwareMasteryLevel,tapCredits} from './economy';
+import {addCredits,BALANCE,buyHardwareClass,dataRate,hardwareCost,hardwareMasteryLevel} from './economy';
 import {abortRunChallenge,challengeClaimable,challenges,claimChallenge,collectionSummary,completeRunChallenge,prestigeGate,runChallengeProgress,runChallengeReady,startRunChallenge,totalMastery} from './retention';
 import {serialize} from './storage';
 

@@ -1,6 +1,6 @@
 import {newGame,restore} from './legacyContractFixture';
 import { describe, expect, it } from 'vitest';
-import { BALANCE, GameState, buyHardware, creditRate, dataRate, hardwareBulkCost, hardwareCost, researchRate, researchDuration, researchProjectDataCost, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, trainingGoal, startResearchProject, researchLabCount } from './economy';
+import { BALANCE, GameState, buyHardware, creditRate, dataRate, hardwareBulkCost, hardwareCost, researchRate, researchDuration, researchProjectDataCost, repeatableResearchDataCost, repeatableResearchDuration, selectOperatingProfile, startTraining, startResearchProject, researchLabCount } from './economy';
 import { advance, advanceTo } from './simulation';
 import {serialize} from './storage';
 

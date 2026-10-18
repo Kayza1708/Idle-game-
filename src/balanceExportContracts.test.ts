@@ -3,7 +3,7 @@ import {describe,it,expect} from 'vitest';
 import {BALANCE,addCredits,addCreditsScientific,addData,buyHardwareClass,startResearchProject,startTraining,exactEconomyValue,type GameState} from './economy';
 import {createBalanceExportFiles,createBalanceReport,createBalanceZipAsync,MAX_EXPORT_BYTES} from './balanceReport';
 import {craftModule,settleCrafting} from './inventory';
-import {queueExperiment,completeExperiment} from './experiments';
+import {queueExperiment} from './experiments';
 import {startRunChallenge,abortRunChallenge,completeRunChallenge} from './retention';
 import {advanceTo} from './simulation';
 import {serialize} from './storage';

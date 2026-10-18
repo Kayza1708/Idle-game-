@@ -3,7 +3,7 @@ import {newGame,restore} from './legacyContractFixture';
 import {legacyPaidCraft as craft} from './testSupport/legacyPaidCraft';
 import {describe,it,expect} from 'vitest';
 import {BALANCE,grantComponents,addData,addCredits,componentIds,exactEconomyValue,type GameState} from './economy';
-import {settleCrafting,createItem,upgrade,fuseItems,toggleLock,equip} from './inventory';
+import {settleCrafting,createItem,upgrade,fuseItems,toggleLock} from './inventory';
 import {upgradeFoundry,foundryUpgradeQuote,forgeJobQuote,queueForge,settleFoundries,removeQueuedForge,foundryBusy} from './foundries';
 import {salvageQuote,salvageWithRecovery} from './recovery';
 import {buyBlueprintMastery} from './itemProgress';

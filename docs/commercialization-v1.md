@@ -36,7 +36,7 @@ Forschungs-Skips verändern die tatsächliche Restarbeit und schließen Aufträg
 
 `App` akzeptiert `rewardedAdProvider`, `nativeShop` und `purchaseVerifier`. `src/main.tsx` übergibt absichtlich keine aktiven Anbieter. Die UI bleibt ohne Store-Metadaten und ohne vollständige Kauf-/Verifikations-/Abschlussbrücke deaktiviert. Geldpreise kommen ausschließlich aus `products()` des echten Stores.
 
-`src/shopNative.ts` ist die aktuelle Schnittstelle; `nativeCommerce.ts` ist ein ungenutzter, als veraltet markierter Vorgänger.
+`src/shopNative.ts` ist die aktuelle Schnittstelle; Der ungenutzte Vorgänger `nativeCommerce.ts` wurde bei der Bereinigung entfernt.
 
 1. Store-Produkte mit den IDs aus `BALANCE.commerce.products` anlegen. Pässe und Starterpaket sind einmalig, die anderen Pakete Verbrauchsprodukte.
 2. Native Store-Brücke anbinden: `products`, `purchase`, `restore`, `finish`. Unterbrochene, noch nicht abgeschlossene Kauftransaktionen beim nächsten Start erneut zur Verifikation und normalen Auslieferung anbieten. `restore` ist für dauerhafte Pässe vorgesehen und bezahlt keine Verbrauchsinhalte erneut.

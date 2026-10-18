@@ -1,7 +1,7 @@
 import {choosePhaseModel} from './progression';
-import {newProgression,hasProgressionNode,axiomLevel,modelFactor,itemAmplifier,legacyItemFactor,progressionComputeFactors,progressionUserFactors,progressionCreditFactors,progressionDataRate,progressionTrainingRate,recordINTIncome,progressionINTClaim,progressionINTRate,progressionTap,activeSlotIds,progressionResearchSpeed,tapQuote,nextTapCredit,effectiveQuality,effectiveEfficiency,integrationLevel,integrationLimit,integrationBase} from './progression';
+import {newProgression,hasProgressionNode,axiomLevel,itemAmplifier,legacyItemFactor,progressionComputeFactors,progressionUserFactors,progressionCreditFactors,progressionDataRate,progressionTrainingRate,recordINTIncome,progressionINTClaim,progressionINTRate,progressionTap,activeSlotIds,progressionResearchSpeed,nextTapCredit,effectiveQuality,effectiveEfficiency,integrationLevel,integrationLimit,integrationBase} from './progression';
 import {challengeNetworkLinkAllowed,activeChallengeRules,challengeFamilyBonus,addChallengeMetrics} from './challengeStages';
-import {classUpgradePackageQuote,hardwarePurchaseMaterialQuote,hardwareMaterialQuote,grantPaidHardwareMilestone,unlockPaidHardwareMaterials} from './materialEconomy';
+import {classUpgradePackageQuote,hardwarePurchaseMaterialQuote,grantPaidHardwareMilestone,unlockPaidHardwareMaterials} from './materialEconomy';
 import {deviceBonus} from './deviceEffects';
 import {researchAccess,researchAreaFor,type ResearchAreaId} from './researchAreas';
 import {ScientificNumber,type ScientificJSON} from './scientificNumber';

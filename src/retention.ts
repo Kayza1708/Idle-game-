@@ -1,9 +1,9 @@
 import {buyHardwareClass} from './economy';
-import {activeSlotIds,hasProgressionNode} from './progression';
+import {activeSlotIds} from './progression';
 import {challengeAutomationUnlocks,challengeStartQuote,challengeCompletionQuote,challengeCatalogQuote,type ChallengeFamily,emptyChallengeMetrics} from './challengeStages';
 import {archiveChallengeTelemetry,addEvent} from './telemetry';
 import {advanceTo,emptyReport} from './simulation';
-import {BALANCE,equipmentSlots,slotFamily,equipmentSlotCount,exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
+import {BALANCE,slotFamily,equipmentSlotCount,exactEconomyValue,GameState,HardwareId,hardwareIds,hardwareMasteryLevel,newGame,prestigeClaimForEligible,itemTypes} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import type {Language} from './i18n';
 export type Challenge={id:string;name:string;description:string;stars:number;check:(s:GameState)=>boolean};

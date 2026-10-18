@@ -6,7 +6,6 @@ import {
   newINTScientific,
   exactEconomyValue,
   equipmentSlotCount,
-  computeRateScientific,
   creditRateScientific,
   type GameState,
 } from "./economy";
@@ -129,8 +128,6 @@ import {
 } from "./progressionReset";
 import {
   selectModel,
-  knowledgeRate,
-  modelFactor,
   integrationLevel,
 } from "./progression";
 import { startRunChallenge, abortRunChallenge } from "./retention";
@@ -330,7 +327,6 @@ describe("V2 real jobs and reset lifecycles", () => {
     expect(lab).toContain("1.000");
   });
 });
-import { startFusion } from "./progressionAutomation";
 import { salvageQuote } from "./recovery";
 import { migrateProgressionV2 } from "./progressionSave";
 import { newGame as legacyGame } from "./legacyContractFixture";
@@ -503,8 +499,7 @@ describe("V2 boundary and automation regressions", () => {
   });
 });
 
-import { queueTraining, addDataScientific } from "./economy";
-import { knownProgressionNodes } from "./progression";
+import { queueTraining } from "./economy";
 describe("V2 job and save boundaries", () => {
   it("runs a manual queued training without enabling autopilot", () => {
     let s = buyNode(v2Account(), "T03");

@@ -1,8 +1,7 @@
 import {newGame,restore} from './legacyContractFixture';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,addCreditsScientific,hardwareBulkCostScientific,buyHardwareClass,grantComponents,componentIds,exactEconomyValue,type GameState,type HardwareId} from './economy';
+import {BALANCE,addCreditsScientific,hardwareBulkCostScientific,buyHardwareClass,componentIds,type GameState,type HardwareId} from './economy';
 import {materialAccess,materialTable,hardwareMaterialQuote,hardwarePurchaseMaterialQuote,grantPaidHardwareMilestone,setAnalysisFocus,materialPackageQuote} from './materialEconomy';
-import {ScientificNumber} from './scientificNumber';
 import {prestige,axiomReset} from './prestige';
 import {serialize} from './storage';
 import {queueExperiment,completeExperiment} from './experiments';

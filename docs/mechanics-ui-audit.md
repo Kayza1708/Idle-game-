@@ -72,12 +72,12 @@ versioniert. Beispiele (weitere Dateien tragen denselben Breiten-/Sprachsuffix):
 
 | Breite / Sprache | Module | Axiome |
 | --- | --- | --- |
-| 360 DE | [Bild](screenshots/mechanics-ui/modules-de-360.png) | [Bild](screenshots/mechanics-ui/axiom-de-360.png) |
-| 360 EN | [Bild](screenshots/mechanics-ui/modules-en-360.png) | [Bild](screenshots/mechanics-ui/axiom-en-360.png) |
-| 390 DE | [Bild](screenshots/mechanics-ui/modules-de-390.png) | [Bild](screenshots/mechanics-ui/axiom-de-390.png) |
-| 390 EN | [Bild](screenshots/mechanics-ui/modules-en-390.png) | [Bild](screenshots/mechanics-ui/axiom-en-390.png) |
-| 430 DE | [Bild](screenshots/mechanics-ui/modules-de-430.png) | [Bild](screenshots/mechanics-ui/axiom-de-430.png) |
-| 430 EN | [Bild](screenshots/mechanics-ui/modules-en-430.png) | [Bild](screenshots/mechanics-ui/axiom-en-430.png) |
+| 360 DE | Bild (historischer Nachweis: Git-Historie vor Bereinigung) | Bild (historischer Nachweis: Git-Historie vor Bereinigung) |
+| 360 EN | Bild (historischer Nachweis: Git-Historie vor Bereinigung) | Bild (historischer Nachweis: Git-Historie vor Bereinigung) |
+| 390 DE | Bild (historischer Nachweis: Git-Historie vor Bereinigung) | Bild (historischer Nachweis: Git-Historie vor Bereinigung) |
+| 390 EN | Bild (historischer Nachweis: Git-Historie vor Bereinigung) | Bild (historischer Nachweis: Git-Historie vor Bereinigung) |
+| 430 DE | Bild (historischer Nachweis: Git-Historie vor Bereinigung) | Bild (historischer Nachweis: Git-Historie vor Bereinigung) |
+| 430 EN | Bild (historischer Nachweis: Git-Historie vor Bereinigung) | Bild (historischer Nachweis: Git-Historie vor Bereinigung) |
 
 ## Vorhandene Testabweichungen und tatsächlicher Prüfumfang
 

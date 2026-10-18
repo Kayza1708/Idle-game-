@@ -9,9 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#050817" />
     <title>Idle Intelligence</title>
+    <link rel="stylesheet" href="/src/loading-screen.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div id="root"><main class="loading-screen" aria-label="Idle Intelligence wird geladen">
+      <div class="loading-screen__ambient" aria-hidden="true"></div>
+      <div class="loading-screen__identity"><span class="loading-screen__eyebrow">NEURAL SYSTEMS / ONLINE</span><h1><img class="loading-screen__icon" src="/icons/icon-512.png" width="220" height="220" alt="Idle Intelligence"/></h1><p>Dein nächster Durchbruch wartet.</p></div>
+      <div class="loading-screen__footer"><div class="loading-screen__status" role="status">Spiel wird geladen …</div><div class="loading-screen__track" aria-hidden="true"><span></span></div><div class="loading-screen__tip"><span>MIRA’S TIPP</span><p>Hardware arbeitet auch, wenn du nicht tippst.</p></div><small>IDLE INTELLIGENCE · NEURAL LINK</small><noscript>Bitte aktiviere JavaScript, um zu spielen.</noscript></div>
+    </main></div>
+    <script type="module" src="/src/bootstrap.ts"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 import {automaticCanSpendData} from './progressionWork';
 import {plannedResearchStart} from './deviceEffects';
-import {BALANCE,researchQueueUnlocked,researchRepeatUnlocked,hasNode,isRepeatableResearch,researchLevel,researchQuote,researchModifiers,researchLabCount,startResearchProject,exactEconomyValue,type GameState,type ResearchTarget,type ResearchDirector,type RepeatableResearchId} from './economy';
+import {BALANCE,researchQueueUnlocked,researchRepeatUnlocked,isRepeatableResearch,researchLevel,researchQuote,researchModifiers,researchLabCount,startResearchProject,exactEconomyValue,type GameState,type ResearchTarget,type ResearchDirector,type RepeatableResearchId} from './economy';
 import {ScientificNumber} from './scientificNumber';
 const validTarget=(entry:ResearchTarget)=>!!entry&&!!researchQuoteCatalog(entry.id)&&Number.isSafeInteger(entry.targetLevel)&&entry.targetLevel>0&&(isRepeatableResearch(entry.id)||entry.targetLevel===1);
 const researchQuoteCatalog=(id:string)=>Object.hasOwn(BALANCE.repeatableResearch,id)||Object.hasOwn(BALANCE.researchProjects,id);

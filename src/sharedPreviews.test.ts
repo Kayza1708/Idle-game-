@@ -5,7 +5,7 @@ import {recipeIds} from './blueprints';
 import {buyNode} from './prestige';
 import * as telemetry from './telemetry';
 import {describe,it,expect,vi} from 'vitest';
-import {addCredits,addData,BALANCE,buyHardwareClass,exactEconomyValue,trainingPreview,startTraining,researchPreview,startResearchProject,hardwarePurchasePreview,creditRateScientific,computeRateScientific,dataRateScientific,trainingBaseCreditCostScientific,repeatableResearchDataCostScientific,usersRateScientific,trainingCostQuote,productionBreakdown,type GameState,scientificAffordability} from './economy';
+import {addCredits,addData,BALANCE,buyHardwareClass,exactEconomyValue,trainingPreview,startTraining,researchPreview,startResearchProject,hardwarePurchasePreview,creditRateScientific,computeRateScientific,dataRateScientific,repeatableResearchDataCostScientific,usersRateScientific,trainingCostQuote,productionBreakdown,type GameState,scientificAffordability} from './economy';
 import {analysisAffordability,queueExperiment} from './experiments';
 import {craftModule,settleCrafting,createItem,equip} from './inventory';
 import {economySnapshot} from './economySnapshot';

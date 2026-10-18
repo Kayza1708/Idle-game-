@@ -3,7 +3,7 @@ import {createElement,isValidElement,type ReactNode} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {Workshop,num} from './Panels';
 import {ResearchCatalog} from './ResearchCatalog';
-import {researchPreview,type ResearchId} from './economy';
+import {type ResearchId} from './economy';
 import {describe,expect,it} from 'vitest';
 import {readFileSync} from 'node:fs';
 import {addCredits,buyHardwareClass,computeRate,hardwareClassComputeRate,hardwareIds,hardwarePurchaseComputeGain,maxAffordable,quality,efficiency,BALANCE} from './economy';

@@ -45,7 +45,7 @@ Der Export trennt kontextbezogene Besitz-/Lernquotes von fragmentfreien Herstell
 
 174 gezielte Tests in zehn Dateien: Bauplanlernen, atomare Herstellung, Crafting, Savevalidierung, gemeinsame Vorschauen, bestehende Bedienmechaniken, Export, Challenge-Isolation, Storage und IndexedDB. Typecheck, Production-Build und `git diff --check` bestanden. Keine Gesamtsuite, FAST/DEEP oder Langzeitkampagne; jeder gezielte Lauf deutlich unter fünf Minuten.
 
-Browserprüfung 390 × 844 px DE/EN mit tatsächlichen Pointeraktionen: einmaliges bestätigtes Lernen und zwei regulär bezahlte Herstellungsaufträge, gespeicherte Abzüge/Reservierungen geprüft, keine JavaScriptfehler und keine horizontale Überbreite. Vorbereitete Testressourcen ausdrücklich im [Protokoll](screenshots/blueprints/results.json) und [Browserskript](../scripts/browser-blueprints.py) gekennzeichnet. Sechs Screenshots unter `docs/screenshots/blueprints/`. Offen: In englischen Screenshots sind einzelne Zutatenbeschriftungen links teilweise beschnitten; Lernstatus, Bestätigung und Herstellungsbuttons sind bedienbar. Die Prüfung bestätigt diese Aktionen, keine vollständige visuelle Fehlerfreiheit. Diese Darstellungsabweichung wird nicht ohne Nachweis als bestehender Fehler bezeichnet.
+Browserprüfung 390 × 844 px DE/EN mit tatsächlichen Pointeraktionen: einmaliges bestätigtes Lernen und zwei regulär bezahlte Herstellungsaufträge, gespeicherte Abzüge/Reservierungen geprüft, keine JavaScriptfehler und keine horizontale Überbreite. Vorbereitete Testressourcen ausdrücklich im Protokoll (historischer Nachweis: Git-Historie vor Bereinigung) und [Browserskript](../scripts/browser-blueprints.py) gekennzeichnet. Sechs Screenshots unter `docs/screenshots/blueprints/`. Offen: In englischen Screenshots sind einzelne Zutatenbeschriftungen links teilweise beschnitten; Lernstatus, Bestätigung und Herstellungsbuttons sind bedienbar. Die Prüfung bestätigt diese Aktionen, keine vollständige visuelle Fehlerfreiheit. Diese Darstellungsabweichung wird nicht ohne Nachweis als bestehender Fehler bezeichnet.
 
 Offen bleiben die bekannte Vite-Chunkgrößenwarnung, die Schicht-3-Referenzabweichungen 361/313 und 57.700/59.132 sowie optionale Langzeit-/Axiombalance. Keine neue Kalibrierung, keine bestätigte natürliche Progression oder vollständige Gesamtabnahme.
 
@@ -55,7 +55,7 @@ PR #78 war am 7. Oktober weiterhin offen, Head adc4bd5. Nachbesserung auf dem vo
 
 ### Reproduktion und Befund
 
-Das ursprüngliche `scripts/browser-blueprints.py` reproduziert im DE/EN-Durchlauf bei 390 px die links beschnittenen englischen Glyphen auf adc4bd5. [Vorher](screenshots/blueprints-mobile/en-390-before.png) und [gemessene ursprüngliche Button-/Textrechtecke](screenshots/blueprints-mobile/before-layout.json).
+Das ursprüngliche `scripts/browser-blueprints.py` reproduziert im DE/EN-Durchlauf bei 390 px die links beschnittenen englischen Glyphen auf adc4bd5. Vorher (historischer Nachweis: Git-Historie vor Bereinigung) und gemessene ursprüngliche Button-/Textrechtecke (historischer Nachweis: Git-Historie vor Bereinigung).
 
 Die konkrete alte UI-Konstruktion war eine eingerückte native Liste mit unstrukturierten direkten Textknoten im Standardbutton: Name, ×-Zeichen, Menge und gegebenenfalls Fehlmenge teilten eine Inline-Zeile. Sie übernahmen globale Button-Großschreibung/Typografie, hatten keine eigenen begrenzten Textbereiche und keine Icon-/Mengenspuren. Die Screenshotprüfung zeigt den Beschnitt; die DOM-Textrechtecke lagen trotzdem innerhalb der Buttons. Ein negativer Außenabstand oder eine horizontale DOM-Überbreite als Ursache ist damit **nicht** belegt. Der genaue ursprüngliche Chromium-Paintauslöser wurde nicht bis zur Browserengine isoliert; die belegte problematische Markup-/Darstellungskonstruktion wird vollständig ersetzt, statt eine unbewiesene Overflow-Erklärung zu behaupten.
 
@@ -69,7 +69,7 @@ Die konkrete alte UI-Konstruktion war eine eingerückte native Liste mit unstruk
 - Bestehende `ComponentArt`-Zuordnungen. Module verwenden die bereits vorhandene Werkbankillustration `ActivityArt('workbench')`; der Katalog besitzt keine dedizierten Modul-Atlaszellen. Keine erfundenen Koordinaten.
 - Lernstatus und einmaliger Lernpreis bleiben separate Bereiche. Der bestehende Data-Preis ist ausdrücklich als Herstellungskosten beschriftet. Lern-/Herstellungsbuttons mindestens 44 px.
 
-[Nachher, englische Zutaten 390 px](screenshots/blueprints-mobile/after/en-390-ingredients.png). Auch »Superconductors« wird bei dieser Breite vollständig auf zwei Zeilen umgebrochen.
+Nachher, englische Zutaten 390 px (historischer Nachweis: Git-Historie vor Bereinigung). Auch »Superconductors« wird bei dieser Breite vollständig auf zwei Zeilen umgebrochen.
 
 ### Tatsächliche Prüfungen
 
@@ -77,7 +77,7 @@ Das **vorhandene** Browserskript ist auf 360/390/430 px × DE/EN erweitert. Alle
 
 Zusätzlich 390 Präsentationsprüfungen mit sehr langen ungetrennten Namen und langen wissenschaftlichen Texten bis e+1000. Diese **DOM-only-Anzeigetexte** werden anschließend wiederhergestellt und niemals in Spielstand oder Domainledger geschrieben. Sie sind keine gültigen riesigen diskreten Komponentenbestände oder Gratisressourcen.
 
-Je Kombination echte bestätigte Lernaktion (4 → 0 Fragmente), zwei bezahlte Quantenchipaufträge und ein bezahlter Compute-Bus-Auftrag. Die gespeicherten tatsächlichen Zutatenabzüge und Reservierungen werden geprüft. Ressourcen/Freischaltungen sind vorbereitete technische Fixtures; kein Simulationslauf oder Progressionsnachweis. Keine JavaScriptfehler. [Vollständiges Protokoll mit allen Karten](screenshots/blueprints-mobile/after/results.json).
+Je Kombination echte bestätigte Lernaktion (4 → 0 Fragmente), zwei bezahlte Quantenchipaufträge und ein bezahlter Compute-Bus-Auftrag. Die gespeicherten tatsächlichen Zutatenabzüge und Reservierungen werden geprüft. Ressourcen/Freischaltungen sind vorbereitete technische Fixtures; kein Simulationslauf oder Progressionsnachweis. Keine JavaScriptfehler. Vollständiges Protokoll mit allen Karten (historischer Nachweis: Git-Historie vor Bereinigung).
 
 Normale Browser-/Aktionsprüfung bei Höhe 844 px. Die lange einspaltige 360-px-Zutatenübersicht wird nur für den Übersichtsscreenshot bei Höhe 1600 px aufgenommen und anschließend auf 844 px zurückgestellt; die Karten-/Aktionsassertions verwenden die reguläre mobile Höhe. Weitere normale Viewport-Screenshots liegen im gleichen Ordner. Screenshotkontrolle DE/EN an allen drei Breiten: kein erneut sichtbarer Beschnitt in den neuen Zutatenkarten.
 

@@ -27,7 +27,7 @@ Alle 39 statisch erkennbaren, wörtlichen `/assets/...`-Referenzen in produktive
 
 ## Reproduzierte Vorher-/Nachher-Befunde
 
-Prioritäten: **P1** vor Release beheben, **P2** relevante Integrations-/Qualitätslücke. Reproduktionen verwenden gezielt vorbereitete technische Zustände; es handelt sich nicht um gemessene natürliche Spielverläufe. Daten: [Ausgangsstand 8e7f978](audits/release-2026-10-17-baseline-8e7f978.json) und [aktueller Stand ff75c46 / PR #118](audits/release-2026-10-17-current-ff75c46.json). Wiederholen: `npx vite-node --script scripts/release-audit-probe.ts`.
+Prioritäten: **P1** vor Release beheben, **P2** relevante Integrations-/Qualitätslücke. Reproduktionen verwenden gezielt vorbereitete technische Zustände; es handelt sich nicht um gemessene natürliche Spielverläufe. Daten: Ausgangsstand 8e7f978 (historischer Nachweis: Git-Historie vor Bereinigung) und aktueller Stand ff75c46 / PR #118 (historischer Nachweis: Git-Historie vor Bereinigung). Wiederholen: `npx vite-node --script scripts/release-audit-probe.ts`.
 
 | ID | Einstufung | Befund im Ausgangsstand 8e7f978 | Auswirkung damals | Aktueller main / gemergter #118 |
 | --- | --- | --- | --- | --- |
@@ -120,7 +120,7 @@ Für die erste V1 nicht zwingend: Leaderboards, Freunde/Einladungen, zusätzlich
 
 Eine seriöse Fertig-Prozentzahl oder ein belastbarer Release-Termin ist ohne diese offenen Abnahmen nicht ableitbar. Der Fortschritt liegt in der vorhandenen Spielstruktur; der Engpass ist jetzt die belegte Zuverlässigkeit und Integration dieser Struktur.
 
-Maschinenlesbares Prüfprotokoll: [release-verification-2026-10-17.json](audits/release-verification-2026-10-17.json).
+Maschinenlesbares Prüfprotokoll: release-verification-2026-10-17.json (historischer Nachweis: Git-Historie vor Bereinigung).
 
 ## Quellen
 

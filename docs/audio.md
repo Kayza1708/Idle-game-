@@ -2,7 +2,7 @@
 
 ## Verwendete Dateien
 
-Die Audioverwaltung prüft OGG und verwendet MP3 als vorhandenen Fallback. WAV bleibt als Distributionsreserve vorhanden. Sämtliche referenzierten Basen wurden unter `public/assets/audio/` geprüft:
+Die Audioverwaltung prüft OGG und verwendet MP3 als vorhandenen Fallback. Unbenutzte WAV-Reserven wurden aus dem ausgelieferten Paket entfernt; die frühere Fassung bleibt in der Git-Historie. Sämtliche referenzierten Basen wurden unter `public/assets/audio/` geprüft:
 
 | Datei | Verwendung |
 | --- | --- |

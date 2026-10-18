@@ -1,4 +1,4 @@
-import {BALANCE,itemTypes,type GameState,type Item} from './economy';
+import {BALANCE,type GameState} from './economy';
 import {deviceEffectQuote} from './deviceEffects';
 import {salvageQuote} from './recovery';
 import {foundryUpgradeQuote,forgeJobQuote} from './foundries';

@@ -74,4 +74,4 @@ Die bestehende echte V2-Matrix (`prestigeConceptV2.test.ts`, `progressionOffline
 
 **Abschlussprüfung mit Node 22.23.3:** `npm run build` einschließlich Typecheck bestanden; `npm test`: **1.633 Tests / 117 Dateien bestanden**, Laufzeit 228,24 s. Darunter 15 neue V2-Stabilisierungs-/Messfälle. Der synthetische Kapazitätscheck mit 105 Resets, 40 Zwischenstandsversuchen pro Run und 510 zusätzlichen Ereignissen behält 100 Runs und fünf archivierte Runs; sein ZIP nach Reload umfasst **6.331.674 Bytes**, unter der bestehenden 8-MiB-Grenze. Dies ist ein technischer Export-/Speichertest, keine Aussage zur natürlichen Spielgeschwindigkeit. Vorhandene Vite-Warnung zur Hauptchunkgröße bleibt bestehen.
 
-[Maschinenlesbare Prüfergebnisse](audits/v2-stability-verification-2026-10-17.json). Echte iPhone-/WKWebView-/TestFlight-Abnahme und langfristige Balancekalibrierung sind weiterhin auszuführen.
+Maschinenlesbare Prüfergebnisse (historischer Nachweis: Git-Historie vor Bereinigung). Echte iPhone-/WKWebView-/TestFlight-Abnahme und langfristige Balancekalibrierung sind weiterhin auszuführen.

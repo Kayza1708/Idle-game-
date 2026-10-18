@@ -14,14 +14,12 @@ import {
   newGame,
   MAX_ECONOMY_VALUE,
   type GameState,
-  type PrestigeUpgradeId,
   type AxiomUpgradeId,
 } from "./economy";
 import { ScientificNumber } from "./scientificNumber";
 import {
   axiomLevel,
   knownPurchaseCount,
-  knownProgressionNodes,
   hasProgressionNode,
   discoverProgression,
   minimalRestart,

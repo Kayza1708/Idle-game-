@@ -1,4 +1,4 @@
-import {BALANCE,isRepeatableResearch,researchQueueCapacity,researchDataCostForLevelScientific,researchCategory,repeatableResearchDataCostScientific,researchProjectDataCostScientific,type GameState} from './economy';
+import {BALANCE,isRepeatableResearch,researchQueueCapacity,repeatableResearchDataCostScientific,researchProjectDataCostScientific,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 const fail=(path:string):never=>{throw new TypeError(`Forschungsvertrag: ungültig ${path}`)};
 const object=(v:unknown):v is Record<string,unknown>=>!!v&&typeof v==='object'&&!Array.isArray(v);

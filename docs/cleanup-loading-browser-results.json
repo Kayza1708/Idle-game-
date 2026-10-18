@@ -1,0 +1,35 @@
+{
+  "profiles": [
+    {
+      "width": 320,
+      "height": 568,
+      "reduced": false,
+      "boot": true,
+      "ready": true,
+      "names": true,
+      "playerReload": true,
+      "rotatingTip": false
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "reduced": false,
+      "boot": true,
+      "ready": true,
+      "names": true,
+      "playerReload": true,
+      "rotatingTip": true
+    },
+    {
+      "width": 430,
+      "height": 932,
+      "reduced": true,
+      "boot": true,
+      "ready": true,
+      "names": true,
+      "playerReload": true,
+      "rotatingTip": false
+    }
+  ],
+  "retry": true
+}

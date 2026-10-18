@@ -1,5 +1,4 @@
 import {newGame,restore} from './legacyContractFixture';
-import {ScientificNumber} from './scientificNumber';
 import { describe, expect, it } from 'vitest';
 import { type GameState, addCredits, registerTap, usersRate } from './economy';
 import { prestige,axiomReset } from './prestige';

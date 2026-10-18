@@ -1,6 +1,6 @@
 import {axiomLevel} from './progression';
 import {challengeFamilyBonus} from './challengeStages';
-import {BALANCE,grantComponents,type GameState,type Item,type ComponentInventory,type ComponentId} from './economy';
+import {BALANCE,grantComponents,type GameState,type ComponentInventory,type ComponentId} from './economy';
 import {foundryBusy} from './foundries';
 import {deviceBonus} from './deviceEffects';
 import {addEvent} from './telemetry';

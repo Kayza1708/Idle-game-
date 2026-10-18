@@ -2,7 +2,7 @@ import {newGame,restore} from './legacyContractFixture';
 import {settleFoundries} from './foundries';
 import {startRunChallenge,abortRunChallenge} from './retention';
 import {describe,it,expect,vi} from 'vitest';
-import {BALANCE,addCredits,addData,buyHardwareClass,itemEffectFor,specialItemEffectQuote,registerTap,tapCreditsScientific,creditRateScientific,exactEconomyValue,addCreditsScientific,intYieldFactor,axiomThresholdScientific,type GameState,type Item} from './economy';
+import {BALANCE,addCredits,addData,buyHardwareClass,itemEffectFor,specialItemEffectQuote,registerTap,tapCreditsScientific,creditRateScientific,exactEconomyValue,addCreditsScientific,intYieldFactor,axiomThresholdScientific,type GameState} from './economy';
 import {createItem,equip,unequip,upgrade,forgeItem,itemImprovementPreview,fuseItems} from './inventory';
 import {grantComponents as components} from './economy';
 import {prestige,axiomReset} from './prestige';

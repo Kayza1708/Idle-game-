@@ -4,7 +4,7 @@ import {balanceContexts} from './balanceSnapshot';
 import {describe,it,expect} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {addCredits,buyHardwareClass,BALANCE,hardwareIds,type GameState} from './economy';
+import {addCredits,buyHardwareClass,BALANCE,type GameState} from './economy';
 import {claimMissionBonus} from './missions';
 import {rollPeriods} from './missions';
 import {earnDailyBonusBox,openBonusBox,bonusBoxRoll,validBonusBoxes} from './bonusBoxes';

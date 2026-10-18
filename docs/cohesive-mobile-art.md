@@ -36,10 +36,10 @@ Browser screenshots below show actual renderers, not generated mockups. Natural 
 
 ## Actual mobile views
 
-![Model](screenshots/cohesive/model.png)
+Model (historischer Nachweis: Git-Historie vor Bereinigung)
 
-![Prestige](screenshots/cohesive/prestige.png)
+Prestige (historischer Nachweis: Git-Historie vor Bereinigung)
 
-![Capsule](screenshots/cohesive/capsule.png)
+Capsule (historischer Nachweis: Git-Historie vor Bereinigung)
 
-![Bonus box](screenshots/cohesive/box.png)
+Bonus box (historischer Nachweis: Git-Historie vor Bereinigung)

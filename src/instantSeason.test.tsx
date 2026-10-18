@@ -3,7 +3,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {BALANCE,newGame,grantComponents,addCreditsScientific,addDataScientific,exactEconomyValue,componentIds,type GameState,startResearchProject,researchQuote} from './economy';
 import {craft,createItem,fuseItems,craftModule,craftingAffordability} from './inventory';
 import {seasonLoot,openSeasonChest} from './seasonLoot';
-import {addSeasonXP,claimSeasonReward,getSeasonTiers,rollSeason,premiumSeasonOwned,seasonClaimable} from './season';
+import {addSeasonXP,claimSeasonReward,getSeasonTiers,rollSeason,premiumSeasonOwned} from './season';
 import {fulfillVerifiedPurchase,beginCommerceReward,completeCommerceReward,rewardQuote,type VerifiedPurchase} from './commerce';
 import {serialize,restore,SAVE_VERSION} from './storage';
 import {buyNode,prestige} from './prestige';

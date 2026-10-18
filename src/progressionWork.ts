@@ -16,11 +16,8 @@ import {
   discoverProgression,
   hasProgressionNode,
   axiomLevel,
-  modelFactor,
   secondary,
   progressionResearchSpeed,
-  selectModel,
-  type ModelId,
 } from "./progression";
 import { experimentSpeed } from "./experiments";
 import { ScientificNumber } from "./scientificNumber";

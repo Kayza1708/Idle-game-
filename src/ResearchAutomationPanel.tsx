@@ -1,4 +1,4 @@
-import {researchQueueUnlocked,researchRepeatUnlocked} from './economy';
+import {researchRepeatUnlocked} from './economy';
 import {hasNode,isRepeatableResearch,formatScientific,researchLevel,type GameState,type ResearchId} from './economy';
 import {visibleResearchIds} from './researchAreas';
 import {researchDirectorQuote,researchRepeatQuote,researchQueueStatus} from './researchAutomation';

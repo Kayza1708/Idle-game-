@@ -1,5 +1,5 @@
 /** Explicit pre-v56 paid-order fixtures. Never used by the live game. */
-import {BALANCE,type GameState,type ItemTypeId,type Rarity,type CraftingJob,componentTotal,spendScientificResources} from '../economy';
+import {type GameState,type ItemTypeId,type Rarity,type CraftingJob,componentTotal,spendScientificResources} from '../economy';
 import {ScientificNumber} from '../scientificNumber';
 import {addEvent} from '../telemetry';
 import {craftingAffordability} from '../inventory';

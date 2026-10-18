@@ -2,7 +2,7 @@ import {newGame,restore} from './legacyContractFixture';
 import {describe,expect,it} from 'vitest';
 import {BALANCE,addCreditsScientific,creditMultiplierFromINT,creditRateScientific,productionBreakdown,exactEconomyValue,intYieldFactor,newINTScientific,prestigeClaimForEligibleScientific,prestigeUpgradeCost,prestigeUpgradeCostScientific,axiomThresholdScientific,type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
-import {buyNode,prestige,runPrestigeAgent} from './prestige';
+import {prestige,runPrestigeAgent} from './prestige';
 import {createItem,equip} from './inventory';
 import {advance} from './simulation';
 import {axiomReset} from './prestige';

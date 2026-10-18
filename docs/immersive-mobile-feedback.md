@@ -26,7 +26,7 @@ PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs CHROMIUM_PATH=/absolute
 
 ## Actual browser captures
 
-Prepared fixtures, not mockups: [chest receipt](screenshots/immersive-chest.webp), [item upgrade](screenshots/immersive-item.webp), [research](screenshots/immersive-research.webp). The chest capture shows the completed scene; motion itself is implemented in the components/styles.
+Prepared fixtures, not mockups: chest receipt (historischer Nachweis: Git-Historie vor Bereinigung), item upgrade (historischer Nachweis: Git-Historie vor Bereinigung), research (historischer Nachweis: Git-Historie vor Bereinigung). The chest capture shows the completed scene; motion itself is implemented in the components/styles.
 
 ## Generated asset provenance
 

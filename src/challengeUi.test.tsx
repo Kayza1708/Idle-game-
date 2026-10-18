@@ -1,3 +1,4 @@
+import {shouldSaveAfterAction} from './savePolicy';
 import {newGame} from './legacyContractFixture';
 import {withChallengeAccess} from './testSupport/challengeAccount';
 import {buyNode} from './prestige';
@@ -27,7 +28,7 @@ describe('challenge UI contract',()=>{
  it('keeps abort confirmation and saves/return reporting in the application action path',()=>{
   const app=readFileSync('src/App.tsx','utf8');
   expect(app).toContain("name==='challenge-run-abort'&&ref.current.retention.activeRun&&!confirm(challengeUi(ref.current.settings.language).confirm)");
-  expect(app).toContain("setReport({...next.challengeReturn.report,context:'challenge'})");expect(app).toContain("'challenge-run-start','challenge-run-abort','challenge-run-complete'");
+  expect(app).toContain("setReport({...next.challengeReturn.report,context:'challenge'})");expect(app).toContain('shouldSaveAfterAction(action)');for(const action of ['challenge-run-start','challenge-run-abort','challenge-run-complete'])expect(shouldSaveAfterAction(action)).toBe(true);
   expect(app).toContain('changed:syncStory(before,changed)');
   expect(app).toContain('writable.current=durable?.recovered?false:durable?true:loaded.current.writable');
   expect(app).toContain('loaded.current={...loaded.current,recoveryRaw:durable.recoveryRaw,writable:false}');

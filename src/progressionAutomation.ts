@@ -1,23 +1,15 @@
 import {
   BALANCE,
   exactEconomyValue,
-  researchQuote,
-  researchLevel,
-  spendScientificResources,
   type GameState,
-  type ItemTypeId,
 } from "./economy";
 import {
   axiomLevel,
   knownProgressionNodes,
   hasProgressionNode,
-  selectModel,
-  choosePhaseModel,
-  type PrestigeNodeV2,
-  type ModelId,
 } from "./progression";
 import { buyProgressionNode } from "./progressionReset";
-import { fusionPreview, fuseItemsNow } from "./inventory";
+import { fuseItemsNow } from "./inventory";
 import { fabricationSpeed } from "./progressionWork";
 import { ScientificNumber } from "./scientificNumber";
 export function rebuildKnown(s: GameState) {

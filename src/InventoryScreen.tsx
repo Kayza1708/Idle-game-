@@ -22,7 +22,6 @@ import {
   type ItemTypeId,
   type ComponentId,
   type Item,
-  itemTypes,
   componentIds,
   itemEffectProfile,
   itemEffectFor,
@@ -35,8 +34,6 @@ import {
   craftingAffordability,
   craftingMissingText,
   itemImprovementPreview,
-  fusionPreview,
-  rarities,
 } from "./inventory";
 import { ActivityArt, ComponentArt, ItemArt } from "./GameArt";
 import {
@@ -48,7 +45,6 @@ import {
 } from "./gameplayI18n";
 import { MobileDetailSheet } from "./MobileDetailSheet";
 import { JobDetails } from "./JobDetails";
-import { ScientificNumber } from "./scientificNumber";
 type Action = (name: string, ...args: any[]) => void;
 export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; act: Action;mode?:"components"|"items";embedded?:boolean }) {
   const language = s.settings.language,
@@ -58,7 +54,6 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
     >(mode??"components"),
     [component, setComponent] = useState<ComponentId | null>(null),
     [itemId, setItemId] = useState<string | null>(null),
-    [fusion, setFusion] = useState<string[]>([]),
     [quantity, setQuantity] = useState(1);
   useEffect(()=>{if(mode)setView(mode)},[mode]);
   const item = s.inventory.find((i) => i.id === itemId),
@@ -362,7 +357,6 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
                 id={`item-detail-${entry.id}`}
                 onClick={() => {
                   setItemId(entry.id);
-                  setFusion([]);
                 }}
               >
                 <ItemPortrait item={entry} equipped={equipped(entry.id)}/>

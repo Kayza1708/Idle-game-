@@ -1,5 +1,4 @@
-import {hasProgressionNode} from './progression';
-import {BALANCE,componentIds,grantComponents,hardwareOwnershipAfter,hasNode,type ComponentId,type ComponentInventory,type GameState,type HardwareId,type ItemTypeId,type ExperimentId} from './economy';
+import {BALANCE,grantComponents,hardwareOwnershipAfter,hasNode,type ComponentId,type ComponentInventory,type GameState,type HardwareId,type ItemTypeId,type ExperimentId} from './economy';
 import {deviceBonus} from './deviceEffects';
 import {researchAreaFor,type ResearchAreaId} from './researchAreas';
 import {addEvent} from './telemetry';

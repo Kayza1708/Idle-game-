@@ -43,7 +43,7 @@ Calculator 15; Farm 80.000.000 und sämtliche späteren Preise unverändert. Pre
 
 Der Server-Zielkonflikt bleibt **offen**: final kauft A zuerst die unverändert 80 Mio. teure Farm, deren 650.000 Compute und vorhandene Faktoren den Server kurz danach bezahlen. Der Server muss preislich unter der Farm bleiben. Selbst die erlaubte Anhebung nahe diese Grenze erfüllt das 90-Minuten-Ziel nicht. Wir behaupten keine mathematische Unmöglichkeit für sämtliche denkbaren Preisvektoren; nach genau drei Runden wird nicht weiter gesucht. Kein versteckter Unlock/Multiplikator löst den Konflikt.
 
-Ausgangsmessung 6,36 s; Runden 5,18 / 5,45 / 5,80 s; **22,78 s kumulierte tatsächliche Rechenlaufzeit**, jede Durchführung mit 60-s-Prozesslimit und internem kumuliertem 300-s-Budget. Maximal 90 simulierte Minuten je Strategie/Durchführung. Rohdaten: [before](hardware-early/before.json), [round 1](hardware-early/round-1.json), [round 2](hardware-early/round-2.json), [after](hardware-early/after.json).
+Ausgangsmessung 6,36 s; Runden 5,18 / 5,45 / 5,80 s; **22,78 s kumulierte tatsächliche Rechenlaufzeit**, jede Durchführung mit 60-s-Prozesslimit und internem kumuliertem 300-s-Budget. Maximal 90 simulierte Minuten je Strategie/Durchführung. Rohdaten: before (historischer Nachweis: Git-Historie vor Bereinigung), round 1 (historischer Nachweis: Git-Historie vor Bereinigung), round 2 (historischer Nachweis: Git-Historie vor Bereinigung), after (historischer Nachweis: Git-Historie vor Bereinigung).
 
 Reproduktion mit Node 22 und installiertem Repository: `npx vite-node --script scripts/hardware-early-calibration.ts output.json`. Ohne Override misst das die aktuellen Preise. Historische Preise mit explizitem JSON-Argument (nur die fünf zugelassenen baseCost-IDs) aus der Tabelle; Overrides gelten nur im Messprozess. Budget liegt in ignoriertem `node_modules/.cache/hardware-calibration-budget.json`; für eine **separate** Untersuchung einen neuen Budgetlauf anlegen, niemals den laufenden Dreirundenprozess zurücksetzen. Keine Langzeitkampagne.
 
@@ -51,7 +51,7 @@ ScientificNumber ist binäres Floating Point mit etwa 15–16 Dezimalstellen, ke
 
 ## Technische Abnahme und Grenzen
 
-Gezielte Tests und Typecheck/Build/Diffprüfung werden unten mit tatsächlichem Ergebnis ergänzt. Browser Chromium 360/390/430 × 844 DE/EN: alle 15 Klassen, Preis/Detail-Erreichbarkeit auch letzter Klasse, real bezahlter Erstkauf, Sparziele, ≥44-px-Zielbuttons, keine Seitenüberbreite/JS-Fehler; 13,20 s. [Screenshots/Protokoll](screenshots/hardware-early/results.json), `scripts/browser-hardware-goals.py`.
+Gezielte Tests und Typecheck/Build/Diffprüfung werden unten mit tatsächlichem Ergebnis ergänzt. Browser Chromium 360/390/430 × 844 DE/EN: alle 15 Klassen, Preis/Detail-Erreichbarkeit auch letzter Klasse, real bezahlter Erstkauf, Sparziele, ≥44-px-Zielbuttons, keine Seitenüberbreite/JS-Fehler; 13,20 s. Screenshots/Protokoll (historischer Nachweis: Git-Historie vor Bereinigung), `scripts/browser-hardware-goals.py`.
 
 Ein vorhandener Tutorial-Quelltexttest suchte drei inzwischen ausgelagerte Ziele ausschließlich in Panels. Am Ausgangscommit f17bde5 fehlen dieselben drei Literale bereits. Der Test prüft jetzt zusätzlich die tatsächlich eingebundenen ResearchCatalog/AnalysisContracts/InventoryScreen-Dateien; alle bisherigen Assertions bleiben erhalten. Die Tutorial-SBC-Assertion folgt dem ausdrücklich neuen Credit-only-Vertrag.
 

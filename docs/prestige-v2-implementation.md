@@ -33,7 +33,7 @@ Die Zahlen des Konzepts sind eine implementierte Ausgangsbalance. Vollständige 
 - Echte Acht-Stunden-Simulation mit mehr als 32 Axiom-Resets: 1/3/96 gespeicherte Abschnitte stimmen bei Resetanzahl, Hardware, Zyklusuhr und RNG überein; wirtschaftliche Werte innerhalb relativer Toleranz 1e-10.
 - Aktive V59-Forschungsarbeit über Migration, pausierte Schmiedearbeit, acht K10-Loadoutitems und historische Lizenzen sind ausdrücklich geprüft.
 
-Maschinenlesbarer Beleg: [prestige-v2-verification.json](prestige-v2-verification.json). Lang laufende historische Funktionstests besitzen eigene Zeitlimits; ihre Assertions bleiben erhalten. Die Zahlen-Caches sind begrenzt und ändern keine gespeicherten Werte.
+Maschinenlesbarer Beleg: prestige-v2-verification.json (historischer Nachweis: Git-Historie vor Bereinigung). Lang laufende historische Funktionstests besitzen eigene Zeitlimits; ihre Assertions bleiben erhalten. Die Zahlen-Caches sind begrenzt und ändern keine gespeicherten Werte.
 
 ## Dateien zur weiteren Arbeit
 

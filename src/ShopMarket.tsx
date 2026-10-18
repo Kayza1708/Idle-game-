@@ -5,7 +5,7 @@ import {materialTable} from './materialEconomy';
 import {useEffect,useRef,useState,type CSSProperties} from 'react';
 import {BALANCE,type GameState,type ComponentId,type Item} from './economy';
 import {shopOffers,shopQuote,shopRotation,shopVideoQuote,shopContext,type ShopOffer,type ShopTicket,type ShopReceipt,type ChestTier} from './shop';
-import {ComponentArt,GemAmount,ResourceArt} from './GameArt';
+import {ComponentArt,GemAmount} from './GameArt';
 import {ItemPortrait,ItemIdentity} from './ItemPresentation';
 import {itemStatLines} from './itemActionEvents';
 import {componentText,itemText,rarityText} from './gameplayI18n';

@@ -1,6 +1,6 @@
 import {newGame,restore} from './legacyContractFixture';
 import {describe, expect, it} from 'vitest';
-import {addCredits, addCreditsScientific, addData, buyClassUpgrade, classUpgradePreview, buyHardwareClass, canAffordResources, canAffordScientificCreditCost, exactEconomyValue, hardwareBulkCostScientific, hardwareCostScientific, hardwareIds, maxAffordable, spendResources, spendScientificCredits, spendScientificResources, type GameState} from './economy';
+import {addCredits, addData, buyClassUpgrade, classUpgradePreview, buyHardwareClass, canAffordResources, canAffordScientificCreditCost, exactEconomyValue, hardwareBulkCostScientific, hardwareCostScientific, hardwareIds, maxAffordable, spendResources, spendScientificCredits, spendScientificResources, type GameState} from './economy';
 import {ScientificNumber} from './scientificNumber';
 import {loadGame, persistGame, SAVE_KEY, SAVE_VERSION, serialize, type StorageLike} from './storage';
 

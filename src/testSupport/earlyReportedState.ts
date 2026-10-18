@@ -1,4 +1,4 @@
-import snapshot from '../../docs/early-balance-report-start.json';
+import snapshot from './earlyReportedSnapshot.json';
 import {newGame,type GameState} from '../economy';
 import {ScientificNumber,type ScientificJSON} from '../scientificNumber';
 

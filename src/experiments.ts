@@ -4,7 +4,7 @@ import {automaticCanSpendData} from './progressionWork';
 import {automationFeatureUnlocked} from './economy';
 import {materialTable,materialAnalysisContract,drawMaterials,materialFamily} from './materialEconomy';
 import {experimentText} from './gameplayI18n';
-import { BALANCE, researchModifiers, itemCombinationQuote, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, validEconomyValues, dataRate, dataAffordability, formatScientific, exactEconomyValue, spendScientificResources } from './economy';
+import { BALANCE, researchModifiers, itemCombinationQuote, ComponentId, equippedBonus, deepPrestigeBonus, ExperimentId, ExperimentLength, GameState, grantComponents, hasNode, validEconomyValues, dataAffordability, formatScientific, spendScientificResources } from './economy';
 import {ScientificNumber} from './scientificNumber';
 import { randomItem } from './inventory';
 import { addEvent } from './telemetry';

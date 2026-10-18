@@ -3,7 +3,7 @@ import {exactEconomyValue} from './economy';
 import {ResourceArt} from './GameArt';
 import {MaterialBuildAutomation} from './MaterialBuildAutomation';
 import {MaterialFocus} from './ProgressionDetails';
-import { type GameState, type ExperimentId, formatScientific } from "./economy";
+import { type GameState, type ExperimentId } from "./economy";
 import {
   analysisAffordability,
   analysisBlockReason,

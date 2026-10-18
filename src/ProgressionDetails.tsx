@@ -3,16 +3,14 @@ import {MobileDetailSheet} from './MobileDetailSheet';
 import {CostBadge} from './CostBadge';
 import {exactEconomyValue} from './economy';
 import {ResourceArt} from './GameArt';
-import {PixelIcon} from './PixelIcon';
 import {BALANCE,formatScientific,classUpgradePreview,hardwarePurchasePreview,type HardwareId,type GameState,type ComponentId,type Item} from './economy';
 import {componentText,itemText} from './gameplayI18n';
-import {ComponentArt,ItemArt,FoundryArt} from './GameArt';
+import {ComponentArt,ItemArt} from './GameArt';
 import {RecipeIngredient} from './RecipeIngredient';
-import {foundryUpgradeQuote,forgeJobQuote,foundryBusy} from './foundries';
+import {forgeJobQuote} from './foundries';
 import {deviceEffectQuote} from './deviceEffects';
 import {materialAccess,type MaterialFamily} from './materialEconomy';
 import {salvageQuote} from './recovery';
-import {ScientificNumber} from './scientificNumber';
 type Action=(name:string,...args:any[])=>void;
 function Ingredients({s,cost,act}:{s:GameState;cost:Partial<GameState['componentInventory']>;act:Action}){const de=s.settings.language==='de';return <ul className="recipe-ingredients">{Object.entries(cost).filter(([,n])=>Number(n)>0).map(([id,n])=><RecipeIngredient key={id} name={componentText(id as ComponentId,s.settings.language).name} icon={<ComponentArt id={id as ComponentId}/>} balance={s.componentInventory[id as ComponentId]} required={Number(n)} missing={Math.max(0,Number(n)-s.componentInventory[id as ComponentId])} de={de} onClick={()=>act('open-material',id)}/>)}</ul>;}
 export function FoundryDetails({s,act}:{s:GameState;act:Action}){const de=s.settings.language==='de';if(!s.foundries.some(f=>f.active||f.queue.length))return null;return <section className="foundry-manager" id="foundries"><h3>{de?'Veredelungsaufträge':'Refining jobs'}</h3>{s.foundries.map((station,index)=><div key={index} className="foundry-orders">{station.active&&<p>{itemText(s.inventory.find(i=>i.id===station.active!.itemId)!.type,s.settings.language)} → Forge {station.active.target} · {Math.max(0,(station.active.endsAt-s.savedAt)/1000).toFixed(0)} s</p>}{station.queue.map(id=><p key={id}>{itemText(s.inventory.find(i=>i.id===id)!.type,s.settings.language)} <button onClick={()=>act('forge-remove',index,id)}>{de?'Entfernen':'Remove'}</button></p>)}</div>)}</section>;}
