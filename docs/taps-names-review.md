@@ -31,7 +31,7 @@ Neue Exporte enthalten `buildVersion` in Zusammenfassung und Manifest sowie den 
 
 Bei 0,245 INT nach über vier erfassten Stunden ist das erste Prestige noch nicht erreicht. Die erste ganze INT benötigt ohne weitere INT-Modifikatoren rund 765,1 Mio. berechtigte Credits. Bei unveränderter Endproduktion fehlen rechnerisch noch knapp 4 h 55 min; zusätzliche Hardware, Training und Forschung machen diese reine Momentaufnahme ausdrücklich zu keiner Spielzeitprognose. Ein weiterer natürlicher Run bis mindestens zum ersten und zweiten Prestige ist nötig, bevor die Reset-Skalierung bewertet werden kann.
 
-Einige aufgeführte spätere Forschungsprojekte kosten hunderte Millionen Daten bei aktuell 26,83 Daten/s. Das ist ein Prüfpunkt für spätere Freischaltungen und Produktionssprünge, kein Beleg, alle aktuellen Forschungspreise pauschal zu senken. Dieser Auftrag ändert keine Preise.
+Nachprüfung in Beta 9: Die aufgeführten Millionenpreise späterer Projekte stammten aus einer Legacy-Exportfunktion und waren nicht die tatsächlichen V2-Angebote. Diese Werte sind deshalb kein Beleg für eine entsprechende aktuelle Forschungswall. Der Export ist korrigiert; die anschließend ausdrücklich beauftragte frühe Progression wurde separat kalibriert. [Korrektur und neue Messung](early-balance-rework.md).
 
 375 detaillierte Snapshots wurden durch das Limit verworfen. Es gibt keine erfassten Savefehler oder nichtendlichen Zahlen, aber zwei Watchdog-Ereignisse. `lastSuccessfulSave = null` und fehlende Savegrößen sind eine Diagnose-Lücke, kein Nachweis eines fehlgeschlagenen Speicherns. Der Bericht enthält keinen vollständigen Spielstand; die Browserprüfung verwendet einen separat aufgebauten Zustand mit denselben wesentlichen Produktionsstufen.
 

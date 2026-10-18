@@ -693,3 +693,10 @@ Die ersten drei Stufen der sechs frühen Kernforschungen dauern 30/60/90 Sekunde
 ## 2026-10-18 · Temporäres Gem-Angebot
 
 `BALANCE.commerce.gemVideoCooldownMs = 600000`: Nach einem erfolgreichen Gem-Abruf gilt eine gespeicherte Zehn-Minuten-Frist (`commerce.gemNextAt`). Die Karte verschwindet während dieser Frist und bei ausgeschöpfter Tagesquote. Abbruch/Fehler bleiben ohne neue Frist. Bestehende fünf Abrufe pro Tag, 10 Gems regulär und 30 beim zehnten erfolgreichen Abruf bleiben erhalten. Werbefrei nutzt dieselben Grenzen. Das optionale Feld ist im bestehenden Save v63 validiert und rückwärtskompatibel.
+
+
+## 2026-10-18 · Frühe Progression, Beta 9
+
+Basispreis/Wachstum: SBC 2.000/1,16; PC 30.000/1,17; GPU 1 Mio./1,18; Rig 15 Mio./1,19; Server 2 Mrd./1,20. Geräteproduktion, Meilensteine, Grundumsatz, Trainings- und INT-/Axiom-Formeln unverändert. Acht frühe Forschungsreihen haben fünf Einstiegsstufen mit 30/60/90/150/240 s und Kostenbasiskappen 30/60/120/180/250 Daten, weiterhin multipliziert mit Levelwachstum; Kommerzialisierung und Hardware-Integration sind jetzt enthalten. Projektzeiten Operations/Blueprints/Alignment: 180/150/450 s. Bereits bezahlte Arbeitsverträge bleiben gespeichert. Keine Saveversion- oder Entitlement-Konvertierung.
+
+Im aktiven Vergleich: erste ganze INT etwa 39–42 min, erster gewählter Reset mit drei INT etwa 49–54 min; weniger häufige Rückkehrprofile brauchen länger. Der Export zeigt nun echte V2-Forschungsangebote statt Legacy-Preisen. [Methodik, vollständige Vorher/Nachher-Werte und Grenzen](early-balance-rework.md).

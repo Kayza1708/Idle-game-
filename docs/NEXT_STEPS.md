@@ -1,3 +1,15 @@
+## 2026-10-18 · Frühe Progression, Beta 9
+
+- [x] Fünf frühe Hardwareklassen günstiger und mit flacherem Kaufwachstum; Produktion, Meilensteine und spätere Klassenpreise erhalten.
+- [x] Acht frühe Forschungsreihen über fünf Einstiegsstufen geglättet; Labororganisation, Baupläne und Alignment beschleunigt. Keine neue Prestigezeit-/Hardwarebedingung.
+- [x] Gleiche Vorher/Nachher-Strategien mit echten Transaktionen gemessen: erste INT etwa 39–42 min, erster gewählter Drei-INT-Reset etwa 49–54 min, zweiter Run etwa 33–39 min; Rückkehrprofil gesondert ausgewiesen.
+- [x] Anonymisierter Reportzustand mit passender Ausgangsproduktion fortgeführt; tatsächlichen GPU-Kauf und Forschungsstart mit Save/Reload bei 320/390/430 px geprüft.
+- [x] Exportfehler korrigiert: Projektkosten stammen jetzt aus der tatsächlichen V2-Quote, einschließlich fehlender Voraussetzungen. Historische Parameter-Guards erlauben nur die zehn ausdrücklich freigegebenen Preis-/Wachstumsabweichungen.
+- [x] Node-22-Typecheck und Produktionsbuild sowie 1.710 Tests in 122 Dateien bestanden; fünf zusätzliche Balance-/Save-Abnahmeprüfungen und Browser-Reload geprüft.
+- [ ] Weitere natürliche Mehrfach-Prestige-Runs und echte iPhone-/WKWebView-Abnahme zum Feintuning bleiben offen.
+
+[Werte, Methodik, Messprotokolle und Grenzen](early-balance-rework.md).
+
 ## 2026-10-18 · Tap-Belege, Namensprüfung und Run-Auswertung, Beta 8
 
 - [x] Null-Anzeige nach bezahltem Tap reproduziert und durch exakten Transaktionsbeleg ersetzt; Krits/Relay bleiben im Popup stabil, abgewiesene Eingaben animieren keine Auszahlung.

@@ -1,0 +1,10 @@
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {dirname} from 'node:path';
+import {BALANCE} from '../src/economy';
+import {simulateEarlyBalance,type EarlyPlayStyle} from '../src/earlyBalanceSimulation';
+const style=(process.argv[2]??'casual') as EarlyPlayStyle,path=process.argv[3]??`node_modules/.cache/early-balance-${style}.json`;
+if(!['engaged','casual','returning'].includes(style))throw Error('Choose engaged, casual or returning');
+const result=simulateEarlyBalance({style});
+mkdirSync(dirname(path),{recursive:true});
+writeFileSync(path,JSON.stringify({parameters:{hardware:Object.fromEntries(Object.entries(BALANCE.hardware).map(([id,p])=>[id,{baseCost:p.baseCost,growth:p.growth,compute:p.compute}])),prestigeBaseRevenue:BALANCE.prestigeBaseRevenue,earlyResearch:BALANCE.seasonV2.earlyResearch},...result},null,2)+'\n');
+console.log(JSON.stringify({style,firstINT:result.firstINT,firstThreeINT:result.firstThreeINT,firstItem:result.firstItem,firstHardware:result.firstHardware,resets:result.resets,maxGap:result.maxFirstRunActionGap,invalid:result.invalid}));
