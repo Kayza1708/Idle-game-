@@ -32,7 +32,8 @@ export function NativeOffers({
   nativeShop = unavailableShopNativeAdapter,
   purchaseVerifier = unavailablePurchaseVerifier,
   permanentOnly = false,
-}: StoreServices & { s: GameState; act: Action; permanentOnly?: boolean }) {
+  productIds,
+}: StoreServices & { s: GameState; act: Action; permanentOnly?: boolean;productIds?:ProductId[] }) {
   const de = s.settings.language === "de",
     [products, setProducts] = useState<StoreProduct[]>([]),
     [busy, setBusy] = useState(false),
@@ -80,7 +81,7 @@ export function NativeOffers({
         (p) =>
           id ||
           p.productId === "ai_singularity.pass.adfree" ||
-          p.productId === "ai_singularity.pass.income",
+          p.productId === "ai_singularity.pass.income" || p.productId.startsWith("ai_singularity.season."),
       );
       if (campaign !== context.current) return;
       if (verified.length) {
@@ -128,7 +129,7 @@ export function NativeOffers({
       setBusy(false);
     }
   };
-  const title = (kind: string, gems: number) =>
+  const title = (kind: string, gems: number) => kind==="season"?"Premium Season Pass":
     kind === "adfree"
       ? de
         ? "Werbefrei-Pass"
@@ -163,16 +164,16 @@ export function NativeOffers({
       <div className="market-bundles">
         {BALANCE.commerce.products
           .filter(
-            (p) => !permanentOnly || p.kind === "adfree" || p.kind === "income",
+            (p) => (!productIds||productIds.includes(p.id))&&(!permanentOnly || p.kind === "adfree" || p.kind === "income")&& (p.kind!=="season"||p.id.endsWith(s.season.id.split("-")[1])),
           )
           .map((p) => {
             const store = products.find((x) => x.id === p.id),
               owned = commerceState(s).owned.includes(p.id);
             return (
               <article key={p.id} data-native-product={p.id}>
-                {p.kind === "adfree" || p.kind === "income" ? (
+                {p.kind === "adfree" || p.kind === "income" || p.kind==="season" ? (
                   <ShopIcon
-                    name={p.kind === "adfree" ? "offline" : "researchBoost"}
+                    name={p.kind==="season"?"season":p.kind === "adfree" ? "offline" : "researchBoost"}
                   />
                 ) : (
                   <GemBundleArt gems={p.gems} />
@@ -194,6 +195,7 @@ export function NativeOffers({
                       : "Claim video rewards without watching. Normal limits still apply."}
                   </p>
                 )}
+                {p.kind==="season"&&<p>{de?`Gilt nur für Season ${p.id.split(".").at(-1)}. Kein automatisches Abo. Erreichte Premium-Belohnungen nachträglich abholen.`:`Only for season ${p.id.split(".").at(-1)}. No automatic subscription. Claim reached premium rewards retroactively.`}</p>}
                 {p.kind === "income" && (
                   <p>
                     {de
@@ -264,8 +266,8 @@ export function NativeOffers({
       </div>
       <button disabled={!ready || busy} onClick={() => void purchase()}>
         {de
-          ? "Dauerhafte Käufe wiederherstellen"
-          : "Restore permanent purchases"}
+          ? "Käufe wiederherstellen"
+          : "Restore purchases"}
       </button>
       {status && <p role="status">{status}</p>}
     </section>

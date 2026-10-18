@@ -46,40 +46,9 @@ export function rebuildKnown(s: GameState) {
 }
 
 export function startFusion(s: GameState, ids: string[]) {
-  const q = fusionPreview(s, ids);
-  if (
-    !q.allowed ||
-    s.progression.fusion ||
-    s.crafting.active ||
-    s.foundries.some((f) => f.active)
-  )
-    return s;
-  const inputs = ids.map((id) => s.inventory.find((i) => i.id === id)!);
-  return {
-    ...s,
-    inventory: s.inventory.filter((i) => !ids.includes(i.id)),
-    progression: {
-      ...s.progression,
-      fusion: {
-        id: `fusion-${s.nextId}`,
-        inputs,
-        done: 0,
-        required:
-          BALANCE.progression.formula.fusionWork *
-          BALANCE.progression.formula.fusionWorkGrowth **
-            [
-              "common",
-              "uncommon",
-              "rare",
-              "epic",
-              "legendary",
-              "mythic",
-            ].indexOf(inputs[0].rarity),
-      },
-    },
-    nextId: s.nextId + 1,
-  };
+  return fuseItemsNow(s,ids);
 }
+
 export function advanceFusion(s: GameState, seconds: number) {
   const f = s.progression.fusion;
   if (!f) return s;

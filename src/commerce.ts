@@ -22,6 +22,7 @@ export type RewardTicket = {
   amount: ScientificJSON;
 };
 export type CommerceState = {
+  gemVideos?:number;
   owned: ProductId[];
   transactions: string[];
   pending: RewardTicket | null;
@@ -141,7 +142,7 @@ export function rewardQuote(s: GameState, kind: RewardKind, index = 0) {
     lab = researchSkipQuote(s, index);
   const amount =
     kind === "gems"
-      ? ScientificNumber.from(BALANCE.commerce.rewardGems)
+      ? ScientificNumber.from(BALANCE.commerce.rewardGems*((((c.gemVideos??0)+1)%BALANCE.seasonV2.droneEvery===0)?BALANCE.seasonV2.droneBonusMultiplier:1))
       : kind === "creditDrop"
         ? creditRateScientific(
             s.hardware,
@@ -164,6 +165,7 @@ export function rewardQuote(s: GameState, kind: RewardKind, index = 0) {
     allowed:
       !commerceBlocked(s) &&
       count < BALANCE.adLimits[kind] &&
+      (kind!=="gems"||Number.isSafeInteger((c.gemVideos??0)+1))&&
       cooldown === 0 &&
       !amount.isZero() &&
       (kind !== "research" || lab.allowed),
@@ -259,6 +261,7 @@ export function completeCommerceReward(
       commerce: {
         ...c,
         pending: null,
+        gemVideos:(c.gemVideos??0)+(t.kind==="gems"?1:0),
         day: q.day,
         counts: {
           ...(q.day === c.day ? c.counts : {}),
@@ -294,7 +297,7 @@ export function fulfillVerifiedPurchase(
   const product = BALANCE.commerce.products.find((x) => x.id === p.productId);
   if (!product) return s;
   const c = commerceState(s),
-    permanent = product.kind === "adfree" || product.kind === "income";
+    permanent = product.kind === "adfree" || product.kind === "income" || product.kind === "season";
   if (p.status === "revoked")
     return permanent
       ? {
@@ -388,7 +391,7 @@ export function purchaseFulfilled(s: GameState, p: VerifiedPurchase) {
   return p.status === "revoked"
     ? !c.owned.includes(p.productId)
     : p.productId === "ai_singularity.pass.adfree" ||
-        p.productId === "ai_singularity.pass.income"
+        p.productId === "ai_singularity.pass.income" || p.productId.startsWith("ai_singularity.season.")
       ? c.owned.includes(p.productId)
       : c.transactions.includes(p.transactionId);
 }

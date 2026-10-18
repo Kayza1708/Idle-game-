@@ -1,0 +1,23 @@
+[
+  {
+    "width": 320,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "overflow": false
+  },
+  {
+    "width": 430,
+    "overflow": false
+  },
+  {
+    "craft": "instant receipt with animation",
+    "fusion": "instant receipt with animation",
+    "equipment": "grouped slots and real equip",
+    "seasons": 3,
+    "chest": "claimed and opened",
+    "reducedMotion": true,
+    "errors": []
+  }
+]

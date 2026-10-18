@@ -23,3 +23,5 @@ createRoot(document.getElementById('root')!).render(<React.StrictMode><CrashBoun
 import './menu-settings.css';
 
 import './commerce.css';
+
+import "./instant-mobile.css";

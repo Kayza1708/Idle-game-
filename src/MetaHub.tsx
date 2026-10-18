@@ -1,3 +1,5 @@
+import {SeasonPass} from './SeasonPass';
+import type {StoreServices} from './CommerceOffers';
 import {ShopIcon} from './ShopIcon';
 import {SettingsPanel} from './SettingsPanel';
 import {axiomLayerVisible} from './prestige';
@@ -18,7 +20,7 @@ type Action=(name:string,...args:any[])=>void;
 const kinds=['daily','weekly','monthly'] as const;
 const questIcons:Record<string,PixelIconName>={hardwareBought:'hardware',milestones:'hardware',trainingStarted:'training',trainingCompleted:'training',researchStarted:'research',researchCompleted:'research',componentsEarned:'components',itemsCrafted:'craft',regularCredits:'credits',regularData:'data',taps:'tap',overclocks:'compute',prestiges:'prestige',activeSeconds:'time'};
 const questIcon=(metric:string):PixelIconName=>questIcons[metric]??'challenge';
-export function MissionHub({s,act,variant='combined'}:{s:GameState;act:Action;variant?:'combined'|'season'}) {
+export function MissionHub({s,act,variant='combined',nativeShop,purchaseVerifier}:StoreServices&{s:GameState;act:Action;variant?:'combined'|'season'}) {
   const [open,setOpen]=useState(variant==='season');
   const [premiumOpen,setPremiumOpen]=useState(false);
   const [rewardDetail,setRewardDetail]=useState<SeasonReward|null>(null);
@@ -46,7 +48,7 @@ export function MissionHub({s,act,variant='combined'}:{s:GameState;act:Action;va
       <span><PixelIcon name="challenge"/> {t(s.settings.language,'claimableCount',{count:readyCount})} {readyCount>0&&<b className="notice">!</b>} <span aria-hidden="true">{open?'▴':'▾'}</span></span>
     </button>}
     {open&&<div className="mission-drawer" id="mission-drawer">
-      <section className="season-pass" aria-labelledby="season-pass-title">
+      {s.progression?.version===2?<SeasonPass s={s} act={act} nativeShop={nativeShop} purchaseVerifier={purchaseVerifier}/>:<section className="season-pass" aria-labelledby="season-pass-title">
         <div className="season-heading"><MetaArt id="season"/><div><small>SEASON 01</small><h3 id="season-pass-title">Boot Sequence</h3></div><b>{t(s.settings.language,'level')} {level} / {SEASON_LEVELS}</b><span className="season-countdown"><small>{s.settings.language==='de'?'SEASON ENDET IN':'SEASON ENDS IN'}</small><b>{seasonRemaining}</b></span></div>
         <div className="season-xp-copy"><span>{formatLocalized(xpInLevel,s.settings.language,s.settings.numberFormat)} / {formatLocalized(SEASON_XP_PER_LEVEL,s.settings.language,s.settings.numberFormat)} XP</span><span>{level>=SEASON_LEVELS?'MAX':t(s.settings.language,'xpUntilLevel',{level:level+1}).replace('XP',`${formatLocalized(SEASON_XP_PER_LEVEL-xpInLevel,s.settings.language,s.settings.numberFormat)} XP`)}</span></div>
         <div className="bar season-progress" role="progressbar" aria-valuemin={0} aria-valuemax={SEASON_XP_PER_LEVEL} aria-valuenow={xpInLevel}><i style={{width:`${seasonProgress(s)*100}%`}}/></div>
@@ -61,8 +63,8 @@ export function MissionHub({s,act,variant='combined'}:{s:GameState;act:Action;va
             <button className="reward-card premium locked" onClick={()=>setRewardDetail(premium)} aria-label={t(s.settings.language,'premiumRewardLocked',{level:tier.level})}>{rewardArt(premium)}<span>{rewardLabel(premium)}</span><small>PREMIUM · {t(s.settings.language,'passInactive')}</small></button>
           </article>})}
         </div>
-      </section>
-      {s.previousSeason&&s.savedAt<=s.previousSeason.claimUntil&&<section className="previous-season"><h3>{t(s.settings.language,'previousSeason')}</h3><p>{t(s.settings.language,'claimUntil',{time:remaining(s.previousSeason.claimUntil)})}</p><div className="season-reward-track">{seasonRewards.filter(reward=>reward.level<=Math.min(SEASON_LEVELS,Math.floor(s.previousSeason!.xp/SEASON_XP_PER_LEVEL))&&!s.previousSeason!.claimed.includes(reward.level)).map(reward=><button key={reward.level} onClick={()=>act('season-claim',reward.level,s.previousSeason!.id)}>{t(s.settings.language,'level')} {reward.level} · {rewardLabel(reward)} · {t(s.settings.language,'claim')}</button>)}</div></section>}
+      </section>}
+      {s.progression?.version!==2&&s.previousSeason&&s.savedAt<=s.previousSeason.claimUntil&&<section className="previous-season"><h3>{t(s.settings.language,'previousSeason')}</h3><p>{t(s.settings.language,'claimUntil',{time:remaining(s.previousSeason.claimUntil)})}</p><div className="season-reward-track">{seasonRewards.filter(reward=>reward.level<=Math.min(SEASON_LEVELS,Math.floor(s.previousSeason!.xp/SEASON_XP_PER_LEVEL))&&!s.previousSeason!.claimed.includes(reward.level)).map(reward=><button key={reward.level} onClick={()=>act('season-claim',reward.level,s.previousSeason!.id)}>{t(s.settings.language,'level')} {reward.level} · {rewardLabel(reward)} · {t(s.settings.language,'claim')}</button>)}</div></section>}
       {variant==='combined'&&<section className="quest-board" aria-labelledby="quest-board-title">
         <div className="quest-heading"><div><small>{t(s.settings.language,'missionConsole')}</small><h3 id="quest-board-title">{t(s.settings.language,'quests')}</h3></div>{claimable(kind)&&<span className="claim-hint">{t(s.settings.language,'rewardReady')}</span>}</div>
         <div className="mission-tabs" role="tablist" aria-label={t(s.settings.language,'questPeriod')}>{kinds.map(tab=><button role="tab" aria-selected={kind===tab} className={kind===tab?'active':''} key={tab} onClick={()=>setKind(tab)}><MetaArt id={tab}/>{t(s.settings.language,tab)} {claimable(tab)&&<b className="notice">!</b>}</button>)}</div>
