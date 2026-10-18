@@ -1,3 +1,5 @@
+import './research-catalog.css';
+import {VectorIcon} from './VectorIcon';
 import {PixelIcon,type PixelIconName} from './PixelIcon';
 import {BlueprintResearchRewardNotice} from './ResearchQuoteDetails';
 import {
@@ -28,6 +30,7 @@ export function ResearchCatalog({
     quote: NonNullable<ReturnType<typeof researchPreview>>,
   ) => string | null;
 }) {
+  const duration=(seconds:number)=>{const n=Math.max(0,Math.ceil(seconds));return n<60?`${n} s`:n<3600?`${Math.floor(n/60)} min${n%60?` ${n%60} s`:''}`:`${Math.floor(n/3600)} h${Math.floor(n%3600/60)?` ${Math.floor(n%3600/60)} min`:''}`};
   const areaIcon:Record<string,PixelIconName>={data:'data',architecture:'hardware',model:'training',materials:'craft',automation:'research'};
   const de = s.settings.language === "de",
     language = s.settings.language,
@@ -74,11 +77,12 @@ export function ResearchCatalog({
                             : `research-${id}`
                         }
                         className={`research-card ${state}`}
+                        aria-description={reason??undefined}
                         key={id}
                         onClick={() => onSelect(id)}
                       >
                         <PixelIcon name={areaIcon[area]}/>
-                        <span>
+                        <span className="research-card-content">
                           <h3>
                             {copy.name}
                             {isRepeatableResearch(id)
@@ -86,13 +90,12 @@ export function ResearchCatalog({
                               : ""}
                           </h3>
                           <p className="research-brief">{copy.effect}</p>{isRepeatableResearch(id)&&<span className="research-marks" aria-label={de?'Fortschrittsmarken ohne zusätzliche Belohnung':'Progress marks without extra rewards'}>{[5,10,25,50,100].map(mark=><i className={s.researchLevels[id]>=mark?'reached':''} key={mark}>{mark}</i>)}</span>}
-                          <small>
-                            {q.intro?<span className="intro-label">{de?'GRATIS':'FREE'}</span>:<span className="research-price"><ResourceArt id="data"/>{formatScientific(q.cost,1)} Data</span>} ·{" "}
-                            {(q.duration / 60).toFixed(1)} min
+                          <small className="research-card-meta">
+                            {q.intro?<span className="intro-label">{de?'GRATIS':'FREE'}</span>:<span className="research-price"><ResourceArt id="data"/>{formatScientific(q.cost,1)} Data</span>}<span className="research-duration"><VectorIcon name="time"/>{duration(q.duration)}</span>
                           </small>
                           {reason && <small className="research-block-note">{reason}</small>}
                         </span>
-                        <i>{queued ? queueIndex+1 : running ? "◷" : reason ? "🔒" : "›"}</i>
+                        <i className="research-card-state" aria-label={queued?(de?"Vorgemerkt":"Queued"):running?(de?"Läuft":"Running"):reason??(de?"Verfügbar":"Available")}>{queued ? queueIndex+1 : <VectorIcon name={running?"time":reason?"lock":"plus"}/>}</i>
                       </button>
                     );
                   })}

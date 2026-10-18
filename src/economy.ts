@@ -2438,7 +2438,7 @@ export const BALANCE = {
   missionRewards:{daily:{task:2,bonus:6},weekly:{task:5,bonus:30},monthly:{task:15,bonus:120}},
   hardwareAutobuyerUnlock:100,hardwareAutobuyerInterval:5,
   capsuleMachine:{gemCost:10,itemChance:.01,componentChance:.35,creditChance:.45,dataChance:.14,gemChance:.0475,jackpotChance:.0025,jackpotMultiplier:20,gemRange:[2,8],creditSeconds:[15,60],dataSeconds:[15,60],creditFloor:100,dataFloor:5,componentRanges:{common:[3,12],uncommon:[2,5],rare:[1,2]},rareChanceBoundary:.01,uncommonChanceBoundary:.10},
-  commerce:{incomeMultiplier:2,rewardGems:10,droneSeconds:300,droneCooldownMs:600000,researchAdSeconds:600,researchGemsPerMinute:2,ticketMs:600000,
+  commerce:{incomeMultiplier:2,rewardGems:10,gemVideoCooldownMs:600000,droneSeconds:300,droneCooldownMs:600000,researchAdSeconds:600,researchGemsPerMinute:2,ticketMs:600000,
     starterItems:[{type:'quantum-chip',rarity:'rare'},{type:'memory-crystal',rarity:'rare'},{type:'field-scanner',rarity:'rare'}],
     products:[
       {id:'ai_singularity.season.01',kind:'season',once:true,gems:0,components:{}},

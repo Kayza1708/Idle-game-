@@ -689,3 +689,7 @@ Item-Crafting und Fusion sind sofortige atomare Transaktionen. Rezeptkosten blei
 Die ersten drei Stufen der sechs frühen Kernforschungen dauern 30/60/90 Sekunden vor Boni; Daten-Basiskosten werden auf 30/60/120 begrenzt, anschließend gilt das vorhandene Preiswachstum. Einführung 20 Sekunden; bezahlte Jobs unverändert. Gem-Videoabrufe: 10 Gems, jeder zehnte erfolgreiche Abruf 30; bestehend fünf Abrufe pro Tag, kein Zählerfortschritt bei Abbruch/Replay. Alle neuen Werte stehen in `BALANCE.seasonV2`.
 
 [Details, Berechtigungen und Migration](instant-items-seasons.md).
+
+## 2026-10-18 · Temporäres Gem-Angebot
+
+`BALANCE.commerce.gemVideoCooldownMs = 600000`: Nach einem erfolgreichen Gem-Abruf gilt eine gespeicherte Zehn-Minuten-Frist (`commerce.gemNextAt`). Die Karte verschwindet während dieser Frist und bei ausgeschöpfter Tagesquote. Abbruch/Fehler bleiben ohne neue Frist. Bestehende fünf Abrufe pro Tag, 10 Gems regulär und 30 beim zehnten erfolgreichen Abruf bleiben erhalten. Werbefrei nutzt dieselben Grenzen. Das optionale Feld ist im bestehenden Save v63 validiert und rückwärtskompatibel.
