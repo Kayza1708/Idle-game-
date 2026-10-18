@@ -1,0 +1,35 @@
+[
+  {
+    "width": 320,
+    "aiNaming": "blocked then valid name accepted",
+    "fixture": "zero hardware",
+    "paidAnimation": "+1",
+    "cooldownHasNoNewAnimation": true,
+    "positivePreview": true,
+    "blockedNameRetainsPrevious": true,
+    "validNameNormalized": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "aiNaming": "covered at 320",
+    "fixture": "report-shaped production, critical tap and relay",
+    "paidAnimation": "+107.134,48",
+    "cooldownHasNoNewAnimation": true,
+    "positivePreview": true,
+    "blockedNameRetainsPrevious": true,
+    "validNameNormalized": true,
+    "errors": []
+  },
+  {
+    "width": 430,
+    "aiNaming": "covered at 320",
+    "fixture": "zero hardware",
+    "paidAnimation": "+1",
+    "cooldownHasNoNewAnimation": true,
+    "positivePreview": true,
+    "blockedNameRetainsPrevious": true,
+    "validNameNormalized": true,
+    "errors": []
+  }
+]

@@ -26,3 +26,5 @@
 @media(prefers-reduced-motion:reduce){.mobile-settings .setting-toggle input::after{transition:none}}
 
 .meta-menu .menu-brand{display:flex;align-items:center;gap:12px;min-width:0}.menu-brand-icon{display:block;width:64px;height:64px;flex:0 0 64px;object-fit:contain}.meta-menu>header .menu-brand small{letter-spacing:.08em}
+
+.mobile-settings .player-name-field .field-error{grid-column:1/-1;margin:0 0 6px;color:#ffc1b6;font:500 12px/1.4 system-ui}.mobile-settings .player-name-field input[aria-invalid=true]{border-color:#f4a99b}
