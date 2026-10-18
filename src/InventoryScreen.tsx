@@ -357,6 +357,7 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
             {s.inventory.map((entry) => (
               <button
                 className={`item-tile rarity-${entry.rarity}`}
+                aria-label={`${itemText(entry.type,language)} · ${rarityText(entry.rarity,language)} · Lv ${entry.level}${equipped(entry.id)?de?" · Ausgerüstet":" · Equipped":""}${entry.locked?de?" · Gesperrt":" · Locked":""}`}
                 key={entry.id}
                 id={`item-detail-${entry.id}`}
                 onClick={() => {
@@ -364,12 +365,11 @@ export function InventoryScreen({ s, act,mode,embedded=false }: { s: GameState; 
                   setFusion([]);
                 }}
               >
-                <ItemPortrait item={entry}/>
+                <ItemPortrait item={entry} equipped={equipped(entry.id)}/>
                 <span>{itemText(entry.type, language)}</span>
                 <small>
                   {rarityText(entry.rarity, language)} · Lv {entry.level}{entry.locked?' · 🔒':''}
                 </small>
-                {equipped(entry.id) && <i>{de ? "Ausgerüstet" : "Equipped"}</i>}
               </button>
             ))}
           </section>

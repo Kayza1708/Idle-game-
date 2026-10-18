@@ -1,0 +1,185 @@
+[
+  {
+    "equipmentWidth": 320,
+    "geometry": [
+      {
+        "slot": "processor",
+        "width": 75.046875,
+        "height": 75.046875,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "core",
+        "width": 75.046875,
+        "height": 75.046875,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "research",
+        "width": 75.046875,
+        "height": 75.046875,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "processorAux",
+        "width": 75.046875,
+        "height": 75.046875,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "coreAux",
+        "width": 75.046875,
+        "height": 75.046875,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "researchAux",
+        "width": 75.046875,
+        "height": 75.046875,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      }
+    ]
+  },
+  {
+    "equipmentWidth": 390,
+    "geometry": [
+      {
+        "slot": "processor",
+        "width": 93.953125,
+        "height": 93.953125,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "core",
+        "width": 93.953125,
+        "height": 93.953125,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "research",
+        "width": 93.953125,
+        "height": 93.953125,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "processorAux",
+        "width": 93.953125,
+        "height": 93.953125,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "coreAux",
+        "width": 93.953125,
+        "height": 93.953125,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "researchAux",
+        "width": 93.953125,
+        "height": 93.953125,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      }
+    ]
+  },
+  {
+    "equipmentWidth": 430,
+    "geometry": [
+      {
+        "slot": "processor",
+        "width": 104.75,
+        "height": 104.75,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "core",
+        "width": 104.75,
+        "height": 104.75,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "research",
+        "width": 104.75,
+        "height": 104.75,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "processorAux",
+        "width": 104.75,
+        "height": 104.75,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "coreAux",
+        "width": 104.75,
+        "height": 104.75,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      },
+      {
+        "slot": "researchAux",
+        "width": 104.75,
+        "height": 104.75,
+        "inside": true,
+        "centred": true,
+        "nestedFrames": 0
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "overflow": false
+  },
+  {
+    "width": 430,
+    "overflow": false
+  },
+  {
+    "video": "claim hides, reload stays hidden, ten-minute deadline restores offer"
+  },
+  {
+    "craft": "instant receipt with animation",
+    "fusion": "instant receipt with animation",
+    "equipment": "original core and socket scene; three families equipped without nested frames",
+    "seasons": 3,
+    "chest": "claimed and opened",
+    "reducedMotion": true,
+    "errors": []
+  }
+]

@@ -1,3 +1,15 @@
+## 2026-10-18 · Bestehende Grafik integrieren, Beta 6
+
+- [x] Alle 30 Original-Itemgrafiken präzise ausgeschnitten, optisch zentriert und in gemeinsame Seltenheitsrahmen eingesetzt; Nachbarfragmente und überlagernde Ausgerüstet-Banner entfernt.
+- [x] Ursprüngliche KI-Kern-/Sockelszene sauber ausgearbeitet; Items direkt in Bitmap-Sockeln und gemalten Schmiedevertiefungen. Konkurrierende Equipment-Styles entfernt, vorhandene Navigation erhalten.
+- [x] Gemeinsame Leseschrift für Bedienung und lange Modellnamen; bestehende Pixel-Art und Pixelüberschriften erhalten.
+- [x] Gem-Karte nach erfolgreicher Nutzung für zehn Minuten verborgen, Frist über Reload gespeichert; Tagesquote und Bonuszähler bleiben wirksam.
+- [x] Browserabnahme bei 320/390/430 px mit echtem Ausrüsten aller drei Familien, Geometriemessung, Herstellung/Fusion, Season-Kiste und gespeichertem Gem-Cooldown; keine Seitenüberbreite oder Laufzeitfehler.
+- [x] Node 22.23.3: vollständiger Testlauf mit 1.651 Tests in 118 Dateien, Typecheck und Produktionsbuild bestanden.
+- [ ] Echte iPhone-/WKWebView-Abnahme für Lesbarkeit, Touch und Performance sowie Anbindung der nativen Werbe-/Kaufanbieter bleiben offen.
+
+[Änderungen, Ursachen und Bildvorschauen](cohesive-item-polish.md).
+
 ## 2026-10-18 · Sofort-Items und Seasons 1–3
 
 - [x] Item-Crafting und Fusion atomar ohne Warteschlange; bestehende Ergebnisanimationen und Migration bezahlter Altaufträge in Save v63.

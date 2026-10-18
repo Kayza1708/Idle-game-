@@ -2,7 +2,7 @@ import {describe,it,expect} from 'vitest';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {BALANCE,componentIds,hardwareIds,itemTypes,type ItemTypeId,type PrestigeUpgradeId} from './economy';
-import {ComponentArt,ItemArt,HardwareArt,PrestigeArt,componentCells,itemV1Cells,itemV2Cells,prestigeCells,itemReworkCells,materialExtensionCells} from './GameArt';
+import {ComponentArt,ItemArt,HardwareArt,PrestigeArt,componentCells,itemV1Cells,itemV2Cells,prestigeCells,itemReworkCells,materialExtensionCells,itemArtBounds} from './GameArt';
 import {materialIcons,deviceIcons,prestigeIcon} from './artIconCatalog';
 import {VectorIcon,iconPaths} from './VectorIcon';
 import {PixelIcon} from './PixelIcon';
@@ -17,3 +17,5 @@ describe('real atlas coverage and SVG fallback motifs',()=>{
  it('keeps decorative icons hidden and explicitly named UI icons accessible without font glyphs',()=>{const named=render(PixelIcon,{name:'box',label:'Bonuskiste'}),decorative=render(PixelIcon,{name:'box'});expect(named).toContain('role="img"');expect(named).toContain('aria-label="Bonuskiste"');expect(decorative).toContain('aria-hidden="true"');expect(named).toContain('<svg');expect(named).not.toContain('▣')});
  it('provides static currentColor SVGs without animations, external images or interactive targets',()=>{for(const name of Object.keys(iconPaths)){const html=render(VectorIcon,{name});expect(html).toContain('viewBox="0 0 32 32"');expect(html).toContain('currentColor');expect(html).toContain('focusable="false"');expect(html).not.toMatch(/<animate|<image|href=/)}});
 });
+
+it('uses reviewed original atlas viewports for every item without stretching or neighbour cells',()=>{for(const type of Object.keys(itemTypes) as ItemTypeId[]){const [x,y,w,h]=itemArtBounds[type];expect(x).toBeGreaterThanOrEqual(0);expect(y).toBeGreaterThanOrEqual(0);expect(w).toBeGreaterThan(0);expect(h).toBeGreaterThan(0);expect(x+w).toBeLessThanOrEqual(1374);expect(y+h).toBeLessThanOrEqual(1145);const html=render(ItemArt,{type});expect(html).toContain(`viewBox="${x} ${y} ${w} ${h}"`);expect(html).toContain('preserveAspectRatio="xMidYMid meet"');expect(html).toContain('items-complete-rework-atlas-v1.png');}});

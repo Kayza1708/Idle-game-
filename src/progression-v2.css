@@ -173,7 +173,9 @@
   background: #102f2b;
 }
 .v2-model h3 {
-  font-size: 14px;
+  font-family:var(--reading-font);
+  overflow-wrap:anywhere;
+  font-size: 13px;
   line-height: 1.3;
 }
 .v2-model b {

@@ -25,3 +25,5 @@ import './menu-settings.css';
 import './commerce.css';
 
 import "./instant-mobile.css";
+
+import './equipment.css';

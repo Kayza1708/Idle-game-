@@ -23,6 +23,7 @@ export type RewardTicket = {
 };
 export type CommerceState = {
   gemVideos?:number;
+  gemNextAt?:number;
   owned: ProductId[];
   transactions: string[];
   pending: RewardTicket | null;
@@ -155,7 +156,7 @@ export function rewardQuote(s: GameState, kind: RewardKind, index = 0) {
             Math.min(lab.seconds, BALANCE.commerce.researchAdSeconds),
           );
   const cooldown =
-    kind === "creditDrop" ? Math.max(0, c.droneNextAt - s.savedAt) : 0;
+    kind === "creditDrop" ? Math.max(0, c.droneNextAt - s.savedAt) : kind === "gems" ? Math.max(0,(c.gemNextAt??0)-s.savedAt) : 0;
   return {
     amount,
     day,
@@ -262,6 +263,7 @@ export function completeCommerceReward(
         ...c,
         pending: null,
         gemVideos:(c.gemVideos??0)+(t.kind==="gems"?1:0),
+        gemNextAt:t.kind==="gems"?s.savedAt+BALANCE.commerce.gemVideoCooldownMs:c.gemNextAt,
         day: q.day,
         counts: {
           ...(q.day === c.day ? c.counts : {}),

@@ -360,8 +360,11 @@ describe("optional rewarded offers", () => {
       newGame(0),
       active("ai_singularity.pass.adfree"),
     );
-    for (let i = 0; i < BALANCE.adLimits.gems; i++)
-      s = reward(s, "gems", `tx${i}`);
+    for (let i = 0; i < BALANCE.adLimits.gems; i++) {
+      s = reward({...s,savedAt:i*BALANCE.commerce.gemVideoCooldownMs}, "gems", `tx${i}`);
+      expect(s.commerce!.counts.gems).toBe(i+1);
+    }
+    expect(s.gems).toBe(newGame(0).gems+50);
     expect(rewardQuote(s, "gems").allowed).toBe(false);
     const tomorrow = { ...s, savedAt: BALANCE.shop.cycleMs };
     expect(rewardQuote(tomorrow, "gems").remaining).toBe(5);
