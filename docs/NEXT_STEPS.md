@@ -1,3 +1,14 @@
+## 2026-10-17 · V2-Stabilisierung und mehrstufiger Balancebericht
+
+- [x] Integrationstraining in Queue-API, Bedienung und Saveprüfung vereinheitlicht; Unlocks, Challenge-Regeln und vorgemerkte Endstufen berücksichtigt.
+- [x] Challenge-Prestige-Kontext, Axiom-Telemetrie-Runstart und V2-Produktions-/Jobdiagnosen korrigiert.
+- [x] Save v62, bis zu 100 dauerhafte Run-Zusammenfassungen, wissenschaftliche Produktion/Belohnungen, fünfminütige Zwischenstände und vier zusätzliche Analyse-Dateien implementiert.
+- [x] Ältere Runs als Summen archiviert; teilweise erfasste Runs und verworfene Messpunkte kenntlich gemacht; v60/v61 ohne erneute Fortschrittsmigration überführt.
+- [x] Node 22.23.3: Typecheck, Produktionsbuild und 1.633 Tests in 117 Dateien bestanden; voller synthetischer Historienexport mit 100 gespeicherten/fünf archivierten Runs und 500 aktuellen Ereignissen nach Reload geprüft (6.331.674 Bytes).
+- [ ] Echte iPhone-/WKWebView-Abnahme und Langzeitkalibrierung anhand mehrerer natürlicher Runs bleiben offen.
+
+[Funktionsumfang, Messdefinitionen, Migration und Exportanleitung](v2-stability-balance-report.md).
+
 ## 2026-10-17 · Release-Audit
 
 - [x] Ausgangsstand `8e7f978` und neuen Hauptbranch `ff75c464` nach dem während des Audits gemergten Monetarisierungs-PR #118 geprüft; unveränderte Spielregeln, technische Reproduktionen auf beiden Ständen.

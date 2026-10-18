@@ -56,7 +56,7 @@ describe('local balance report',()=>{
 });
 
 describe('analysis archive',()=>{
- it('contains every documented local analysis file and no direct personal fields',async()=>{const {createBalanceExportFiles,createBalanceZip}=await import('./balanceReport');const files=createBalanceExportFiles(newGame(0),1000);expect(Object.keys(files).sort()).toEqual(['analyses.csv','components.csv','crafting.csv','diagnostics.json','economy.json','events.csv','events.jsonl','manifest.json','milestones.csv','prestige-nodes.csv','prestige.csv','purchases.csv','research.csv','sessions.csv','snapshots.csv','summary.json','timeline.csv','timeline.json','training.csv']);expect(createBalanceZip(newGame(0),1000).slice(0,2)).toEqual(new Uint8Array([80,75]));expect(JSON.stringify(files)).not.toMatch(/email|ipAddress|realName/i);});
+ it('contains every documented local analysis file and no direct personal fields',async()=>{const {createBalanceExportFiles,createBalanceZip}=await import('./balanceReport');const files=createBalanceExportFiles(newGame(0),1000);expect(Object.keys(files).sort()).toEqual(['analyses.csv','balance-history.json','components.csv','crafting.csv','diagnostics.json','economy.json','events.csv','events.jsonl','manifest.json','milestones.csv','prestige-comparisons.csv','prestige-nodes.csv','prestige.csv','purchases.csv','research.csv','run-checkpoints.csv','runs.csv','sessions.csv','snapshots.csv','summary.json','timeline.csv','timeline.json','training.csv']);expect(createBalanceZip(newGame(0),1000).slice(0,2)).toEqual(new Uint8Array([80,75]));expect(JSON.stringify(files)).not.toMatch(/email|ipAddress|realName/i);});
 });
 
 it('writes ZIP central directory offsets and CRC-compatible stored entries',()=>{const zip=createBalanceZip(newGame(0),1000),view=new DataView(zip.buffer,zip.byteOffset,zip.byteLength),end=zip.length-22;expect(view.getUint32(0,true)).toBe(0x04034b50);expect(view.getUint32(end,true)).toBe(0x06054b50);const centralOffset=view.getUint32(end+16,true);expect(view.getUint32(centralOffset,true)).toBe(0x02014b50);const expected=Object.keys(createBalanceExportFiles(newGame(0),1000)).length;expect(view.getUint16(end+8,true)).toBe(expected);expect(view.getUint16(end+10,true)).toBe(expected);});
@@ -74,7 +74,7 @@ it('keeps simulator exports as mantissa/exponent beyond the numeric projection c
 it('exports analyses, component flows, crafting and prestige-node purchases as dedicated local tables',async()=>{
  const {createBalanceExportFiles}=await import('./balanceReport');
  const files=createBalanceExportFiles(newGame(0),1000);
- for(const name of ['analyses.csv','components.csv','crafting.csv','prestige-nodes.csv'])expect(files[name]).toBeDefined();
+ for(const name of ['analyses.csv','balance-history.json','components.csv','crafting.csv','prestige-nodes.csv'])expect(files[name]).toBeDefined();
  expect(files['analyses.csv']).toContain('foundTotal');expect(files['components.csv']).toContain('source');expect(files['crafting.csv']).toContain('itemEffect');expect(files['prestige-nodes.csv']).toContain('effect');
 });
 

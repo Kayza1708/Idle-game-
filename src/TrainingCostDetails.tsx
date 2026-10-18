@@ -2,7 +2,6 @@ import {equipmentEligibility} from './inventory';
 import {
   trainingDurationQuote,
   trainingCostQuote,
-  trainingBaseCreditCostScientific,
   itemTypes,
   type GameState,
   type Item,
@@ -18,7 +17,7 @@ export function TrainingCostDetails({
 }) {
   const duration=trainingDurationQuote(s,track),q = trainingCostQuote(s, track),
     de = s.settings.language === "de",
-    baseline = trainingBaseCreditCostScientific(q.targetLevel),
+    baseline = q.baseCost,
     actualDiscount = 1 - q.cost.divide(baseline).toNumber();
   if(q.intro||s.activeTraining?.intro&&s.activeTraining.track===track)return <span className="training-cost-details">{de?'Einführungsauftrag: kostenlos, feste Dauer 20 s. Weitere Stufen nutzen die regulären Creditkosten und Trainingszeiten.':'Introductory lesson: free, fixed 20 s. Later levels use normal Credit costs and training durations.'}</span>;
   return (
