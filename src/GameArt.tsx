@@ -1,6 +1,7 @@
 import {VectorIcon} from './VectorIcon';
 import {prestigeIcon} from './artIconCatalog';
-import {useId,type CSSProperties} from 'react';
+import type {CSSProperties} from 'react';
+import {RasterMotif} from './RasterMotif';
 import { type ComponentId, type HardwareId, type ItemTypeId, type PrestigeUpgradeId } from './economy';
 
 type SpriteStyle = CSSProperties & {'--sprite-x': string; '--sprite-y': string};
@@ -25,7 +26,26 @@ export type ActivityArtId='drop-closed'|'drop-open'|'hardware'|'architecture'|'a
 const activityCells:Record<ActivityArtId,[number,number]>={'drop-closed':[0,0],'drop-open':[1,0],hardware:[2,0],architecture:[0,1],artifact:[1,1],workbench:[2,1]};
 
 const cellStyle=(cell:[number,number],grid:Grid):SpriteStyle=>({'--sprite-x':grid.columns===1?'0%':`${cell[0]*100/(grid.columns-1)}%`,'--sprite-y':grid.rows===1?'0%':`${cell[1]*100/(grid.rows-1)}%`});
-export function HardwareArt({id}:{id:HardwareId}){return <span className="atlas-sprite hardware-art" style={cellStyle(hardwareCells[id],{columns:4,rows:4})} aria-hidden="true"/>}
+/** Reviewed visible hardware motifs, independent of the approximate original grid. */
+export const hardwareArtGeometry={
+ calculator:{bounds:[48,65,224,235],clip:'M48,239 48,228 50,224 54,217 65,199 73,186 87,164 145,73 149,69 152,67 157,65 166,65 174,67 223,82 254,92 258,94 261,96 266,101 269,105 270,107 271,110 271,129 270,132 258,157 189,286 180,295 177,297 172,299 162,299 155,297 135,290 130,288 88,271 69,263 61,259 55,253 53,250 52,248Z'},
+ sbc:{bounds:[325,74,281,212],clip:'M325,170 325,164 334,155 370,123 375,119 396,104 405,98 442,74 445,74 450,76 566,133 573,137 593,149 596,151 605,160 605,191 603,199 601,202 594,209 554,242 514,274 506,280 501,283 499,284 490,285 484,282 479,279 470,273 331,177 328,174Z'},
+ pc:{bounds:[644,52,305,252],clip:'M918,133 948,262 948,266 943,271 937,274 850,303 840,303 760,291 662,271 655,269 651,265 646,258 644,255 644,244 646,120 647,93 653,87 669,82 714,69 735,63 774,52 782,52 798,56 824,63 830,65 833,67 916,131Z'},
+ gpu:{bounds:[963,76,271,228],clip:'M979,285 977,274 963,165 963,162 967,158 984,144 987,142 1001,137 1149,85 1164,80 1175,77 1179,76 1188,76 1193,77 1215,83 1220,85 1224,87 1229,92 1231,95 1232,98 1233,159 1233,177 1229,185 1224,190 1219,193 1129,243 1125,245 1007,303 1005,303 985,292 981,288Z'},
+ rig:{bounds:[47,320,241,283],clip:'M286,353 287,530 287,545 286,575 281,580 273,587 268,588 187,602 176,602 170,601 67,578 61,576 59,575 54,570 47,562 47,383 49,380 54,375 60,372 99,355 182,320 189,320 205,324 240,334 257,339 270,343 279,346Z'},
+ server:{bounds:[367,323,210,277],clip:'M576,359 576,573 574,577 572,580 569,583 567,584 492,598 486,599 473,599 465,598 385,585 379,584 375,583 373,582 370,579 367,573 367,391 368,368 369,366 372,363 374,362 389,356 466,328 480,323 488,323 492,324 549,345 570,353Z'},
+ farm:{bounds:[644,339,285,262],clip:'M644,570 644,394 651,369 655,365 659,363 705,341 711,339 714,339 919,404 924,406 927,409 928,411 928,555 924,559 920,560 856,574 851,575 715,600 708,600 649,575Z'},
+ campus:{bounds:[949,370,293,232],clip:'M949,542 952,460 954,455 958,451 964,447 1020,420 1060,403 1135,372 1142,370 1164,370 1177,371 1185,373 1187,374 1218,390 1229,398 1233,402 1236,406 1238,418 1241,475 1241,484 1239,486 1235,489 1205,509 1194,516 1115,566 1063,598 1057,601 1049,601 1046,600 1038,597 1004,583 989,576 969,566 956,559 951,554 949,551Z'},
+ cloud:{bounds:[16,632,358,269],clip:'M50,709 199,632 200,632 274,679 331,718 338,725 353,741 372,793 373,797 373,798 372,803 370,807 343,841 339,845 335,847 281,873 267,879 262,881 252,883 133,900 129,900 121,899 118,898 114,896 88,881 80,873 59,849 16,791 16,783 32,733 38,724 47,712Z'},
+ liquid:{bounds:[376,614,220,287],clip:'M376,859 397,647 399,644 401,642 405,639 410,637 421,634 488,616 498,614 509,614 515,615 522,617 564,630 570,632 575,637 577,640 595,847 595,871 593,874 591,876 588,878 577,883 574,884 567,886 520,899 515,900 493,900 487,899 406,885 381,878 377,874 376,872Z'},
+ subsea:{bounds:[633,641,309,257],clip:'M820,897 742,897 684,886 681,885 668,879 648,864 646,862 637,840 636,837 634,803 633,783 633,746 646,684 647,681 656,660 660,656 664,654 679,649 683,648 788,641 825,641 855,643 862,644 882,647 893,651 903,658 906,661 911,669 919,688 921,694 937,749 941,798 941,802 935,846 933,858 931,869 927,873 919,880 916,882 913,883 881,891Z'},
+ orbital:{bounds:[961,606,277,320],clip:'M961,834 975,679 979,675 984,672 991,668 1104,606 1211,647 1224,653 1228,655 1232,659 1236,756 1237,808 1237,811 1231,883 1230,889 1228,894 1226,898 1222,904 1219,908 1215,912 1209,917 1204,920 1195,924 1188,925 1175,925 1168,923 1165,922 1106,901 999,858 991,854 966,841 961,836Z'},
+ lunar:{bounds:[18,946,325,272],clip:'M18,1105 21,1050 111,950 115,946 291,1006 297,1009 334,1034 337,1037 341,1065 342,1106 342,1160 341,1180 340,1182 329,1200 325,1204 319,1207 309,1211 294,1213 279,1214 219,1216 181,1217 166,1217 125,1215 88,1213 55,1211 51,1210 45,1208 41,1206 35,1201 32,1198 27,1192 21,1180 20,1176 18,1163Z'},
+ dyson:{bounds:[339,915,319,293],clip:'M574,1184 509,1201 435,1207 430,1207 414,1196 411,1193 368,1145 364,1140 361,1136 360,1134 345,1075 339,1037 339,1035 345,1008 346,1004 348,998 350,994 371,959 373,956 376,952 379,949 434,924 477,915 482,915 542,923 545,925 592,959 607,972 623,987 627,991 655,1059 657,1073 657,1080 655,1084 636,1117 630,1126 627,1130 600,1161 594,1167 577,1182Z'},
+ matrioshka:{bounds:[672,919,278,287],clip:'M672,1034 674,1019 677,1004 679,997 680,994 682,989 687,977 697,961 699,958 711,945 715,941 729,931 745,923 752,921 757,920 764,919 785,919 793,920 803,923 807,925 816,930 824,936 832,944 839,952 843,958 942,1136 943,1138 945,1143 949,1161 949,1176 947,1184 946,1187 940,1199 938,1201 935,1203 930,1205 919,1205 856,1197 805,1190 745,1180 735,1178 729,1176 725,1173 719,1167 702,1143 696,1134 693,1129 685,1113 683,1108 680,1100 679,1097 677,1090 674,1074 672,1060Z'}
+} as const;
+export function HardwareArt({id}:{id:HardwareId}){const art=hardwareArtGeometry[id];return <RasterMotif className="atlas-sprite hardware-art" artId={id} bounds={art.bounds} clip={art.clip} source="/assets/game/hardware-classes-atlas.png" atlasWidth={1262} atlasHeight={1246}/>}
+
 /** Reviewed visible bounds, not nominal grid cells: some original motifs cross cell edges.
  * The original atlas is reused unchanged. SVG viewports remove transparent offsets and neighbour fragments. */
 export const itemArtBounds:Record<ItemTypeId,[number,number,number,number]>={
@@ -67,7 +87,8 @@ const itemArtClips:Record<ItemTypeId,string>={
  'photonic-analyzer':'M994,947 1137,914 1147,914 1158,918 1163,920 1171,928 1176,980 1176,994 1163,1007 1101,1039 967,1097 960,1097 955,1095 923,1079 916,1072 910,1065 909,1062 909,1058 910,1047 927,1005 928,1003 930,1000 934,996 991,949Z',
  'quantum-diagnostic-module':'M1339,930 1339,1074 1334,1089 1333,1091 1331,1094 1328,1097 1325,1099 1282,1109 1272,1109 1228,1096 1220,1088 1204,1062 1203,967 1203,942 1204,930 1215,911 1223,903 1309,896 1316,896 1323,903 1338,928Z'
 };
-export function ItemArt({type}:{type:ItemTypeId}){const clip=useId();return <svg className="atlas-sprite item-art item-art-rework" data-art-id={type} viewBox={itemArtBounds[type].join(' ')} preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false"><defs><clipPath id={clip}><path d={itemArtClips[type]}/></clipPath></defs><image href="/assets/game/items-complete-rework-atlas-v1.png" width="1374" height="1145" clipPath={`url(#${clip})`}/></svg>}
+export function ItemArt({type}:{type:ItemTypeId}){return <RasterMotif className="atlas-sprite item-art item-art-rework" artId={type} bounds={itemArtBounds[type]} clip={itemArtClips[type]} source="/assets/game/items-complete-rework-atlas-v1.png" atlasWidth={1374} atlasHeight={1145}/>}
+
 
 export function PrestigeArt({id}:{id:PrestigeUpgradeId}){const cell=prestigeCells[id];return cell?<span className="atlas-sprite prestige-art" style={cellStyle(cell,{columns:4,rows:4})} aria-hidden="true"/>:<span className="prestige-vector-art prestige-art" data-art-id={id} aria-hidden="true"><VectorIcon name={prestigeIcon(id)}/></span>}
 export function ResourceArt({id}:{id:ResourceArtId}){return <span className="atlas-sprite resource-art" style={cellStyle(resourceCells[id],{columns:4,rows:2})} aria-hidden="true"/>}

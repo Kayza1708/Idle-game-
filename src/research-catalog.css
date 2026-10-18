@@ -1,0 +1,30 @@
+/* Sole owner of the existing research rows: icon, title, cost/time and state. */
+.research-catalog {font-family:var(--reading-font,system-ui);min-width:0}
+.research-catalog .research-projects {display:grid;grid-template-columns:minmax(0,1fr);gap:8px;margin-top:8px}
+.research-catalog .research-card {
+ display:grid;grid-template-columns:32px minmax(0,1fr) 20px;align-items:center;
+ gap:10px;min-width:0;width:100%;min-height:96px;padding:12px;
+ text-align:left;background:linear-gradient(145deg,#193649,#122a3a);border:1px solid #3d6275;
+ box-shadow:inset 0 1px #d7ffff12;font-family:var(--reading-font,system-ui);color:#d7eaf0;
+}
+.research-catalog .research-card-content {display:block;min-width:0}
+.research-catalog .research-card>.pixel-icon {width:32px;height:32px;padding:2px;background:transparent;border:0;color:#83ddcd;box-shadow:none}
+.research-catalog .research-card h3 {margin:0 0 8px;font:700 14px/1.4 var(--reading-font,system-ui);letter-spacing:0;white-space:normal;overflow-wrap:anywhere;text-transform:none}
+.research-catalog .research-card-state {justify-self:end;display:grid;place-items:center;width:20px;height:24px;font:700 12px system-ui;color:#8be0c3;font-style:normal}
+.research-card-state .vector-icon {width:17px;height:17px}
+.research-catalog .research-card-meta {display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font:600 12px/1.35 var(--reading-font,system-ui);color:#b5d0da}
+.research-catalog .research-price,.research-catalog .research-duration {display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.research-price .resource-art {width:17px;height:17px;min-width:17px;float:none}
+.research-duration .vector-icon {width:13px;height:13px;color:#8eb7c6}
+.research-catalog .research-brief,.research-catalog .research-marks,.research-catalog .research-block-note {display:none}
+.research-catalog .research-card.available {border-color:#538d85}
+.research-catalog .research-card.running {border-color:#b28a4f;background:linear-gradient(145deg,#343a37,#162c3b)}
+.research-catalog .research-card.running .research-card-state {color:#f2ce86}
+.research-catalog .research-card.queued {border-color:#9b81c6}
+.research-catalog .research-card.queued .research-card-state {background:#3d3553;color:#e2d0ff}
+.research-catalog .research-card.locked {opacity:1;border-color:#355366;color:#aec1cd;background:#132a39}
+.research-catalog .research-card.locked>.pixel-icon,.research-catalog .research-card.locked .research-card-state {color:#91a7b5}
+.research-catalog .research-card:focus-visible {outline:2px solid #a4edd4;outline-offset:2px}
+.research-catalog .research-area-group>summary {gap:8px;padding:10px 8px;font:700 14px/1.3 var(--reading-font,system-ui);color:#d8ebe8;background:#173443;border-bottom:1px solid #3d6275}
+.research-catalog .research-area-group>summary .pixel-icon {width:24px;height:24px;min-width:24px;border:0;background:none;padding:0;color:#87d8cb}
+@media(max-width:350px){.research-catalog .research-card{padding:10px 8px;gap:8px;grid-template-columns:28px minmax(0,1fr) 18px}.research-catalog .research-card h3{font-size:13px}.research-catalog .research-card>.pixel-icon{width:28px;height:28px}}

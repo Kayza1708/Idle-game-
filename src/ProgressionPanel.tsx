@@ -1,3 +1,4 @@
+import {ProgressionNodeArt} from './ProgressionArt';
 import { synthesisQuote } from "./progressionWork";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -175,7 +176,7 @@ export function ProgressionPanel({ s, act }: Props) {
       )}
       {layer === "int"
         ? Object.entries(labels).map(([branch, label]) => (
-            <details className="v2-branch" key={branch} open={branch === "H"}>
+            <details className="v2-branch" data-branch={branch} key={branch} open={branch === "H"}>
               <summary>{label}</summary>
               <div className="v2-node-grid">
                 {Object.entries(BALANCE.progression.nodes)
@@ -195,26 +196,10 @@ export function ProgressionPanel({ s, act }: Props) {
                         key={id}
                       >
                         <span className={`v2-symbol branch-${branch}`}>
-                          {own ? (
-                            "✓"
-                          ) : (
-                            <PrestigeArt
-                              id={
-                                (
-                                  {
-                                    H: "computeNet1",
-                                    T: "labs1",
-                                    F: "dataArchive1",
-                                    W: "manufacturing1",
-                                    S: "analysis1",
-                                    I: "dataArchive2",
-                                  } as const
-                                )[branch as keyof typeof labels]
-                              }
-                            />
-                          )}
+                          <ProgressionNodeArt id={id as PrestigeNodeV2}/>
+                          {own&&<i className="v2-owned-mark" aria-hidden="true">✓</i>}
                         </span>
-                        <b>{n.name}</b>
+                        <b lang={de?"de":"en"}>{n.name}</b>
                         <small>
                           {own
                             ? de
@@ -229,7 +214,7 @@ export function ProgressionPanel({ s, act }: Props) {
             </details>
           ))
         : ["A", "B", "C", "D"].map((branch, i) => (
-            <details className="v2-branch" key={branch} open={branch === "A"}>
+            <details className="v2-branch" data-branch={branch} key={branch} open={branch === "A"}>
               <summary>
                 {
                   [
@@ -253,9 +238,9 @@ export function ProgressionPanel({ s, act }: Props) {
                         onClick={() => setSelected(id as AxiomNodeV2)}
                       >
                         <span className={`v2-symbol branch-${branch}`}>
-                          {id}
+                          <ProgressionNodeArt id={id as AxiomNodeV2}/>
                         </span>
-                        <b>{n.name}</b>
+                        <b lang={de?"de":"en"}>{n.name}</b>
                         <small>
                           Lv {l} · {c ? fmt(c) : "MAX"}
                         </small>

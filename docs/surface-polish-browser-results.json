@@ -1,0 +1,107 @@
+[
+  {
+    "width": 320,
+    "height": 640,
+    "language": "de",
+    "researchQueue": true,
+    "researchCards": 26,
+    "nodePurchase": true,
+    "menuIcons": 6,
+    "shopCategories": true,
+    "settingsSwitches": [
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "matrix(1, 0, 0, 1, 22, 0)"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      }
+    ],
+    "keyboard": true,
+    "reducedMotion": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "language": "de",
+    "researchQueue": true,
+    "researchCards": 26,
+    "nodePurchase": true,
+    "menuIcons": 6,
+    "shopCategories": true,
+    "settingsSwitches": [
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "matrix(1, 0, 0, 1, 22, 0)"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      }
+    ],
+    "keyboard": true,
+    "reducedMotion": true,
+    "errors": []
+  },
+  {
+    "width": 430,
+    "height": 932,
+    "language": "en",
+    "researchQueue": true,
+    "researchCards": 26,
+    "nodePurchase": true,
+    "menuIcons": 6,
+    "shopCategories": true,
+    "settingsSwitches": [
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "matrix(1, 0, 0, 1, 22, 0)"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      },
+      {
+        "width": 56,
+        "height": 44,
+        "thumbTransform": "none"
+      }
+    ],
+    "keyboard": true,
+    "reducedMotion": true,
+    "errors": []
+  }
+]

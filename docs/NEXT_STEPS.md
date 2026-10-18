@@ -1,3 +1,13 @@
+## 2026-10-18 · Gemeinsame Oberflächen, Beta 7
+
+- [x] Originalmotive für Hardware, Shop und Menü präzise ausgeschnitten; gemeinsamer Bitmap-Viewport mit den vorhandenen Items, unveränderte Assets.
+- [x] Forschungsliste, Prestige-Karten, Menü und Einstellungen vereinheitlicht; vorhandene Anordnung erhalten und konkurrierende Forschungs-Styles entfernt.
+- [x] Starterpaket und tägliche Kiste bei schmalen Displays korrigiert; Switches mit 56 × 44 px Trefferfläche, Tastaturbedienung und reduzierter Bewegung geprüft.
+- [x] Typecheck, Produktionsbuild und 1.651 Tests in 118 Dateien bestanden; Browserabnahme bei 320/390/430 px, einschließlich Queue, Knotenkauf und Regressionen für Items/Gem-Cooldown.
+- [ ] Echte iPhone-/WKWebView-Abnahme und native Werbe-/Store-Anbindung bleiben offen.
+
+[Änderungen, Messprotokoll und Bildvorschauen](surface-polish.md).
+
 ## 2026-10-18 · Bestehende Grafik integrieren, Beta 6
 
 - [x] Alle 30 Original-Itemgrafiken präzise ausgeschnitten, optisch zentriert und in gemeinsame Seltenheitsrahmen eingesetzt; Nachbarfragmente und überlagernde Ausgerüstet-Banner entfernt.
