@@ -1,0 +1,1 @@
+{"name":"IdleIntelligence.Editor","references":["IdleIntelligence.Core","IdleIntelligence.Runtime","Unity.ugui","Unity.InputSystem"],"includePlatforms":["Editor"]}

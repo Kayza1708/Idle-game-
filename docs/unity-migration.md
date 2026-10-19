@@ -2,6 +2,10 @@
 
 Stand: 19.10.2026. Referenz: tatsächlicher TypeScript-Arbeitsbaum auf `codex/unity-rewrite`, HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
+## Fortschritt: erster spielbarer Abschnitt
+
+Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen ist die Einrichtung in `ab67478` separat gesichert und der [erste spielbare Abschnitt](unity-playable-slice.md) implementiert: unabhängiger C#-Kern, erzeugte Balance, frühe Produktion/Käufe, Taps/Overdrive, Training, fünf Forschungen, getrennte atomare Unity-Saves und Offlinefortschritt. Die Szene heißt `Assets/Scenes/IdleIntelligence.unity`. Gemeinsame Referenzfälle sowie EditMode-/PlayMode-Prüfungen und die offenen Grenzen stehen im verlinkten Bericht. Der Gesamtrewrite bleibt offen; keine der folgenden vollständigen Systemzeilen wird durch einen Teilport pauschal abgehakt.
+
 ## Lokale Einrichtung und Nachweis
 
 - Repository: `/Users/yannicrogowitz/Idle-game-`; Unity: `IdleIntelligence/`; kein verschachteltes `.git`.
@@ -22,7 +26,7 @@ Stand: 19.10.2026. Referenz: tatsächlicher TypeScript-Arbeitsbaum auf `codex/un
 
 Nach vollständigem Schließen des Editors am 19.10.2026: separater Import-/Compile-Aufruf mit dem installierten Editor `6000.3.26f1`, `-batchmode -nographics -quit`, Exitcode **0**. Lokales Log: `/tmp/idle-intelligence-baseline.log`. Dies prüft weiterhin das unveränderte Template, keine Spielparität. Die Einrichtung wird vor dem ersten C#-Spielabschnitt separat committed.
 
-Alle folgenden Kriterien bleiben offen. Bei Implementierung pro Zeile TypeScript-Fixtures, C#-Parität und relevante UI-Abnahme dokumentieren. Alte und V2-Pfade bewusst unterscheiden: vorhandene Legacy-Verträge nicht als neue aktive Features duplizieren und nicht ungeprüft entfernen.
+Alle folgenden Kriterien bleiben als vollständige Systemabnahme offen; den nachgewiesenen Teilumfang beschreibt der Bericht oben. Bei Implementierung pro Zeile TypeScript-Fixtures, C#-Parität und relevante UI-Abnahme dokumentieren. Alte und V2-Pfade bewusst unterscheiden: vorhandene Legacy-Verträge nicht als neue aktive Features duplizieren und nicht ungeprüft entfernen.
 
 | Offen | Bestand / Mechanik | Aktuelle Quellen | Nachweis für den Unity-Port |
 |---|---|---|---|

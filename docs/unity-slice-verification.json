@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-19",
+  "unity": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "setupCommit": "ab67478",
+  "scope": "First early V2 playable slice, not full rewrite parity",
+  "sourceHash": "891e65323b04154d72eeb3cb02dc0db0234ee224c87576f4408fc360acb6a23f",
+  "baselineBatchExitCode": 0,
+  "sceneGenerationExitCode": 0,
+  "referenceTransactionsAndRates": 24,
+  "exactNumberCases": 8,
+  "unityTests": {
+    "editmode": {
+      "result": "Passed",
+      "total": "13",
+      "passed": "13",
+      "failed": "0",
+      "duration": "2.3417577",
+      "start-time": "2026-10-19 09:07:12Z",
+      "end-time": "2026-10-19 09:07:15Z"
+    },
+    "playmode": {
+      "result": "Passed",
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "duration": "2.6404879",
+      "start-time": "2026-10-19 09:08:10Z",
+      "end-time": "2026-10-19 09:08:13Z"
+    }
+  },
+  "typescript": {
+    "typecheck": "passed",
+    "regularTestFiles": 124,
+    "regularTests": 1845,
+    "targetedExportRetest": "2 passed after final fixture relocation",
+    "build": "passed; existing >500kB chunk warning"
+  },
+  "visualReview": {
+    "profiles": [
+      "320x568",
+      "390x844",
+      "430x932"
+    ],
+    "preview": "docs/screenshots/unity-playable-slice.png",
+    "method": "PlayMode RenderTexture of actual scene canvas; inspected images, not a device test"
+  },
+  "notPerformed": [
+    "Player build",
+    "Physical device tests",
+    "Full web-save migration",
+    "Full-system or natural long-term Unity parity"
+  ],
+  "sdkAdded": false,
+  "published": false,
+  "merged": false
+}

@@ -4,11 +4,11 @@
 
 Einrichtung auf `codex/unity-rewrite`: Unity `6000.3.26f1`, Projekt `IdleIntelligence/`. [Arbeitsregeln](../IdleIntelligence/AGENTS.md), [Migrationsliste und Prüfstand](unity-migration.md), [vollständiger Dateikatalog](unity-source-inventory.md).
 
-1. Einrichtung separat sichern: Der nach Schließen des Editors ausgeführte Batch-Import mit exakt `6000.3.26f1` ist erfolgreich (Exitcode 0; `/tmp/idle-intelligence-baseline.log`). Weitere Compile-/Testläufe nach Implementierung separat prüfen.
-2. Reine C#-Domain mit ScientificNumber, reproduzierbarem Balanceexport aus `src/economy.ts` und TypeScript-Vergleichsfixtures implementieren. Keine Balancewerte ändern.
-3. Versionierte, atomare Unity-Saves und expliziten validierten Web-Save-Import entwickeln; Offline-/Resume-/Uhr-/Challengeverträge zuerst absichern.
-4. Hardware/Taps/Training/Forschung als ersten spielbaren Slice umsetzen; dann Items/Forge/Modelle, Prestige/Axiome, Challenges, Meta/Seasons und vorbereitete Shopschnittstellen gemäß Migrationsliste ergänzen.
-5. Mobile UI, Grafiken, Animation, Audio, Sprachen und Geräteprüfung abschließen. Native Werbung/Käufe, Veröffentlichung, Merge und Entfernen der TypeScript-Version erfordern einen neuen Auftrag.
+1. Den ersten Abschnitt in `Assets/Scenes/IdleIntelligence.unity` mit Unity 6000.3.26f1 öffnen und anhand der [Play-Anleitung](unity-playable-slice.md) testen. Einrichtung ist separat in `ab67478` gesichert; aktueller Umfang samt Prüfnachweisen ist dokumentiert. Der gesamte Rewrite ist weiter offen.
+2. Materialbelohnungen bezahlter Hardwarekäufe und -meilensteine, restliche Forschung/Jobs/Queues und zusätzliche Fortschrittsfelder mit gemeinsamen TypeScript-Fixtures ergänzen. Keine Balancewerte ändern; `npm run unity:check` vor jedem Port prüfen.
+3. Versionierten, expliziten Web-Save-Import und Recovery-/Exportoberfläche entwickeln, bevor vorhandene Web-Saves übernommen werden. Das jetzige Format speichert ausschließlich den Slice; unbekannte/beschädigte Originale bleiben gesperrt. Weitere Uhr-/Resume-/Crash-/Gerätefälle und später Challengeisolation prüfen.
+4. Items/Forge/Modelle, INT/Prestige/Axiome, Automation, Challenges, Meta/Seasons und vorbereitete Shopschnittstellen gemäß vollständiger Migrationsliste ergänzen. Bestehende TypeScript-Systeme erhalten.
+5. Vollständige mobile UI, Story/Namensprüfung, sieben Sprachen, originale Fonts, Animation, Audio, Barrierefreiheit und Geräteprüfung abschließen. Native Werbung/Käufe, Veröffentlichung, Merge und Entfernen der TypeScript-Version erfordern einen neuen Auftrag.
 
 Die bisherigen TypeScript-/iOS-Releasepunkte unten bleiben erhalten; während der Unity-Einrichtung keinen ungeprüften Pull/Sync über lokale Bestände ausführen.
 

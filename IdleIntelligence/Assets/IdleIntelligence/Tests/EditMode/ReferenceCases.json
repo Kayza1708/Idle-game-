@@ -1,0 +1,5809 @@
+{
+  "sourceHash": "891e65323b04154d72eeb3cb02dc0db0234ee224c87576f4408fc360acb6a23f",
+  "numberCases": [
+    {
+      "name": "subtract-small",
+      "op": "subtract",
+      "a": {
+        "m": 1,
+        "e": 350,
+        "terms": null
+      },
+      "b": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "expected": {
+        "m": 1,
+        "e": 350,
+        "terms": [
+          {
+            "index": 0,
+            "value": -1
+          },
+          {
+            "index": 50,
+            "value": 1
+          }
+        ]
+      },
+      "comparison": 1
+    },
+    {
+      "name": "add-small",
+      "op": "add",
+      "a": {
+        "m": 1,
+        "e": 350,
+        "terms": null
+      },
+      "b": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "expected": {
+        "m": 1,
+        "e": 350,
+        "terms": [
+          {
+            "index": 0,
+            "value": 1
+          },
+          {
+            "index": 50,
+            "value": 1
+          }
+        ]
+      },
+      "comparison": 1
+    },
+    {
+      "name": "multiply",
+      "op": "multiply",
+      "a": {
+        "m": 1.23456789,
+        "e": 250,
+        "terms": null
+      },
+      "b": {
+        "m": 2.5,
+        "e": 100,
+        "terms": null
+      },
+      "expected": {
+        "m": 3.086419725,
+        "e": 350,
+        "terms": null
+      },
+      "comparison": 1
+    },
+    {
+      "name": "subtract-decimal",
+      "op": "subtract",
+      "a": {
+        "m": 1.00123,
+        "e": 2,
+        "terms": null
+      },
+      "b": {
+        "m": 1.23,
+        "e": -1,
+        "terms": null
+      },
+      "expected": {
+        "m": 1,
+        "e": 2,
+        "terms": null
+      },
+      "comparison": 1
+    },
+    {
+      "name": "equal",
+      "op": "compare",
+      "a": {
+        "m": 1.5,
+        "e": 1,
+        "terms": null
+      },
+      "b": {
+        "m": 1.5,
+        "e": 1,
+        "terms": null
+      },
+      "expected": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "comparison": 0
+    },
+    {
+      "name": "ceil-large-half",
+      "op": "ceil",
+      "a": {
+        "m": 9.000000000000005,
+        "e": 14,
+        "terms": null
+      },
+      "b": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "expected": {
+        "m": 9.000000000000009,
+        "e": 14,
+        "terms": [
+          {
+            "index": 0,
+            "value": 1
+          },
+          {
+            "index": 2,
+            "value": 9
+          }
+        ]
+      },
+      "comparison": 1
+    },
+    {
+      "name": "ceil-quadrillion-half",
+      "op": "ceil",
+      "a": {
+        "m": 1.0000000000000004,
+        "e": 15,
+        "terms": [
+          {
+            "index": -1,
+            "value": 5000000
+          },
+          {
+            "index": 2,
+            "value": 10
+          }
+        ]
+      },
+      "b": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "expected": {
+        "m": 1,
+        "e": 15,
+        "terms": null
+      },
+      "comparison": 1
+    },
+    {
+      "name": "ceil-quadrillion-odd-half",
+      "op": "ceil",
+      "a": {
+        "m": 1.0000000000000016,
+        "e": 15,
+        "terms": [
+          {
+            "index": -1,
+            "value": 5000000
+          },
+          {
+            "index": 0,
+            "value": 1
+          },
+          {
+            "index": 2,
+            "value": 10
+          }
+        ]
+      },
+      "b": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "expected": {
+        "m": 1.000000000000002,
+        "e": 15,
+        "terms": null
+      },
+      "comparison": 1
+    }
+  ],
+  "cases": [
+    {
+      "name": "fresh-rates",
+      "action": "rates",
+      "id": "",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "first-calculator",
+      "action": "buy",
+      "id": "calculator",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 3.5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 1.5,
+        "e": 1,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.35,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 1.5,
+        "e": 1,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "first-tap",
+      "action": "tap",
+      "id": "",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 3.5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 3.6,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.35,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "tap-gap-rejected",
+      "action": "tap",
+      "id": "",
+      "amount": 1,
+      "at": 1000100,
+      "before": {
+        "credits": {
+          "m": 3.6,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 3.6,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.35,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "idle-production",
+      "action": "advance",
+      "id": "",
+      "amount": 1,
+      "at": 1012345,
+      "before": {
+        "credits": {
+          "m": 3.6,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 5.266575,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 1.2345,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1012345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 1.666575,
+        "e": 1,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 1.2345,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.35,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "paid-efficiency",
+      "action": "train",
+      "id": "efficiency",
+      "amount": 1,
+      "at": 1012345,
+      "before": {
+        "credits": {
+          "m": 1.05266575,
+          "e": 3,
+          "terms": null
+        },
+        "data": {
+          "m": 1.2345,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1012345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 7.5266575,
+          "e": 2,
+          "terms": null
+        },
+        "data": {
+          "m": 1.2345,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1012345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "research",
+        "hasTraining": true,
+        "hasResearchJob": false,
+        "training": {
+          "id": "efficiency",
+          "required": 90,
+          "done": 0,
+          "intro": false
+        },
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 3,
+        "e": 2,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.35,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 3,
+        "e": 2,
+        "terms": null
+      },
+      "seconds": 90
+    },
+    {
+      "name": "intro-quality",
+      "action": "train",
+      "id": "quality",
+      "amount": 1,
+      "at": 1012345,
+      "before": {
+        "credits": {
+          "m": 1,
+          "e": 2,
+          "terms": null
+        },
+        "data": {
+          "m": 1.2345,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1012345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 1,
+          "e": 2,
+          "terms": null
+        },
+        "data": {
+          "m": 1.2345,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1012345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": false,
+        "tutorial": "research",
+        "hasTraining": true,
+        "hasResearchJob": false,
+        "training": {
+          "id": "quality",
+          "required": 20,
+          "done": 0,
+          "intro": true
+        },
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.35,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 20
+    },
+    {
+      "name": "training-completion",
+      "action": "advance",
+      "id": "",
+      "amount": 1,
+      "at": 1042345,
+      "before": {
+        "credits": {
+          "m": 1,
+          "e": 2,
+          "terms": null
+        },
+        "data": {
+          "m": 1.2345,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1012345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": false,
+        "tutorial": "research",
+        "hasTraining": true,
+        "hasResearchJob": false,
+        "training": {
+          "id": "quality",
+          "required": 20,
+          "done": 0,
+          "intro": true
+        },
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 1.421489982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 2220000
+            },
+            {
+              "index": -2,
+              "value": 3541807
+            },
+            {
+              "index": -1,
+              "value": 1489982
+            },
+            {
+              "index": 0,
+              "value": 142
+            }
+          ]
+        },
+        "data": {
+          "m": 4.2345,
+          "e": 0,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9900000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 2344999
+            },
+            {
+              "index": 0,
+              "value": 4
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1042345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": false,
+        "tutorial": "research",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 4.214899823541807,
+        "e": 1,
+        "terms": [
+          {
+            "index": -3,
+            "value": 2220000
+          },
+          {
+            "index": -2,
+            "value": 3541807
+          },
+          {
+            "index": -1,
+            "value": 1489982
+          },
+          {
+            "index": 0,
+            "value": 42
+          }
+        ]
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 3,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": 9900000
+          },
+          {
+            "index": -2,
+            "value": 9999999
+          },
+          {
+            "index": -1,
+            "value": -1
+          },
+          {
+            "index": 0,
+            "value": 3
+          }
+        ]
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.512,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "intro-research",
+      "action": "research",
+      "id": "dataGeneration",
+      "amount": 1,
+      "at": 1042345,
+      "before": {
+        "credits": {
+          "m": 1.421489982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 2220000
+            },
+            {
+              "index": -2,
+              "value": 3541807
+            },
+            {
+              "index": -1,
+              "value": 1489982
+            },
+            {
+              "index": 0,
+              "value": 142
+            }
+          ]
+        },
+        "data": {
+          "m": 4.2345,
+          "e": 0,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9900000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 2344999
+            },
+            {
+              "index": 0,
+              "value": 4
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1042345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": false,
+        "tutorial": "research",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 1.421489982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 2220000
+            },
+            {
+              "index": -2,
+              "value": 3541807
+            },
+            {
+              "index": -1,
+              "value": 1489982
+            },
+            {
+              "index": 0,
+              "value": 142
+            }
+          ]
+        },
+        "data": {
+          "m": 4.2345,
+          "e": 0,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9900000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 2344999
+            },
+            {
+              "index": 0,
+              "value": 4
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1042345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": true,
+        "tutorial": "done",
+        "hasTraining": false,
+        "hasResearchJob": true,
+        "training": null,
+        "researchJob": {
+          "id": "dataGeneration",
+          "required": 20,
+          "done": 0,
+          "intro": true
+        }
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.512,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 20
+    },
+    {
+      "name": "research-completion",
+      "action": "advance",
+      "id": "",
+      "amount": 1,
+      "at": 1072345,
+      "before": {
+        "credits": {
+          "m": 1.421489982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 2220000
+            },
+            {
+              "index": -2,
+              "value": 3541807
+            },
+            {
+              "index": -1,
+              "value": 1489982
+            },
+            {
+              "index": 0,
+              "value": 142
+            }
+          ]
+        },
+        "data": {
+          "m": 4.2345,
+          "e": 0,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9900000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 2344999
+            },
+            {
+              "index": 0,
+              "value": 4
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1042345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": true,
+        "tutorial": "done",
+        "hasTraining": false,
+        "hasResearchJob": true,
+        "training": null,
+        "researchJob": {
+          "id": "dataGeneration",
+          "required": 20,
+          "done": 0,
+          "intro": true
+        }
+      },
+      "expected": {
+        "credits": {
+          "m": 1.875089982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9196000
+            },
+            {
+              "index": -2,
+              "value": 3541806
+            },
+            {
+              "index": -1,
+              "value": 5089982
+            },
+            {
+              "index": 0,
+              "value": 187
+            }
+          ]
+        },
+        "data": {
+          "m": 7.3545,
+          "e": 0,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9676000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 3544999
+            },
+            {
+              "index": 0,
+              "value": 7
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1072345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": true,
+        "tutorial": "done",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 4.536,
+        "e": 1,
+        "terms": [
+          {
+            "index": -3,
+            "value": 6976000
+          },
+          {
+            "index": -2,
+            "value": -1
+          },
+          {
+            "index": -1,
+            "value": 3600000
+          },
+          {
+            "index": 0,
+            "value": 45
+          }
+        ]
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 3.1199999999999997,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": -224000
+          },
+          {
+            "index": -1,
+            "value": 1200000
+          },
+          {
+            "index": 0,
+            "value": 3
+          }
+        ]
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.512,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1.12,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "paid-data-research",
+      "action": "research",
+      "id": "dataGeneration",
+      "amount": 1,
+      "at": 1072345,
+      "before": {
+        "credits": {
+          "m": 1.875089982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9196000
+            },
+            {
+              "index": -2,
+              "value": 3541806
+            },
+            {
+              "index": -1,
+              "value": 5089982
+            },
+            {
+              "index": 0,
+              "value": 187
+            }
+          ]
+        },
+        "data": {
+          "m": 1.00073545,
+          "e": 4,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9676000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 3544999
+            },
+            {
+              "index": 0,
+              "value": 10007
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1072345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": true,
+        "tutorial": "done",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 1.875089982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9196000
+            },
+            {
+              "index": -2,
+              "value": 3541806
+            },
+            {
+              "index": -1,
+              "value": 5089982
+            },
+            {
+              "index": 0,
+              "value": 187
+            }
+          ]
+        },
+        "data": {
+          "m": 9.8963545,
+          "e": 3,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9676000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 3544999
+            },
+            {
+              "index": 0,
+              "value": 9896
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1072345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": true,
+        "tutorial": "done",
+        "hasTraining": false,
+        "hasResearchJob": true,
+        "training": null,
+        "researchJob": {
+          "id": "dataGeneration",
+          "required": 60,
+          "done": 0,
+          "intro": false
+        }
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 1.11,
+        "e": 2,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.512,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1.12,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 1.11,
+        "e": 2,
+        "terms": null
+      },
+      "seconds": 59.46299564040604
+    },
+    {
+      "name": "too-poor",
+      "action": "buy",
+      "id": "calculator",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 1.2589254117941675,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 1.2589254117941675,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "quote": {
+        "m": 1.5,
+        "e": 1,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "bulk-ten",
+      "action": "buy",
+      "id": "calculator",
+      "amount": 10,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 1.005,
+          "e": 4,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.714103377419578,
+          "e": 3,
+          "terms": [
+            {
+              "index": -2,
+              "value": -8042246
+            },
+            {
+              "index": -1,
+              "value": -8966225
+            },
+            {
+              "index": 0,
+              "value": 9715
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 3.3589662258042248,
+        "e": 2,
+        "terms": [
+          {
+            "index": -2,
+            "value": 8042246
+          },
+          {
+            "index": -1,
+            "value": 8966225
+          },
+          {
+            "index": 0,
+            "value": 335
+          }
+        ]
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1.12,
+        "e": 1,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1000000
+          },
+          {
+            "index": -1,
+            "value": 2000000
+          },
+          {
+            "index": 0,
+            "value": 11
+          }
+        ]
+      },
+      "users": {
+        "m": 1.12,
+        "e": 1,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1000000
+          },
+          {
+            "index": -1,
+            "value": 2000000
+          },
+          {
+            "index": 0,
+            "value": 11
+          }
+        ]
+      },
+      "income": {
+        "m": 1.512,
+        "e": 1,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1350000
+          },
+          {
+            "index": -1,
+            "value": 1200000
+          },
+          {
+            "index": 0,
+            "value": 15
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 3.776329771657285,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 3.3589662258042248,
+        "e": 2,
+        "terms": [
+          {
+            "index": -2,
+            "value": 8042246
+          },
+          {
+            "index": -1,
+            "value": 8966225
+          },
+          {
+            "index": 0,
+            "value": 335
+          }
+        ]
+      },
+      "seconds": 0
+    },
+    {
+      "name": "hardware-milestone-rates",
+      "action": "rates",
+      "id": "",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 9.99417759838781,
+          "e": 11,
+          "terms": [
+            {
+              "index": -2,
+              "value": -5960000
+            },
+            {
+              "index": -1,
+              "value": -2190353
+            },
+            {
+              "index": 0,
+              "value": -2240161
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.99417759838781,
+          "e": 11,
+          "terms": [
+            {
+              "index": -2,
+              "value": -5960000
+            },
+            {
+              "index": -1,
+              "value": -2190353
+            },
+            {
+              "index": 0,
+              "value": -2240161
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1.65085312,
+        "e": 3,
+        "terms": [
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8531200
+          },
+          {
+            "index": 0,
+            "value": 1650
+          }
+        ]
+      },
+      "users": {
+        "m": 1.7168872448,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1600000
+          },
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8872448
+          },
+          {
+            "index": 0,
+            "value": 1716
+          }
+        ]
+      },
+      "income": {
+        "m": 2.31779778048,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 6160000
+          },
+          {
+            "index": -2,
+            "value": 8000005
+          },
+          {
+            "index": -1,
+            "value": 7977804
+          },
+          {
+            "index": 0,
+            "value": 2317
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 6.644621602470811,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1342500
+          },
+          {
+            "index": -2,
+            "value": 247081
+          },
+          {
+            "index": -1,
+            "value": 6446216
+          },
+          {
+            "index": 0,
+            "value": 6
+          }
+        ]
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "hundredth-tap",
+      "action": "tap",
+      "id": "",
+      "amount": 1,
+      "at": 1019800,
+      "before": {
+        "credits": {
+          "m": 9.99417766412673,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 5023360
+            },
+            {
+              "index": -4,
+              "value": 7862822
+            },
+            {
+              "index": -3,
+              "value": 6853703
+            },
+            {
+              "index": -2,
+              "value": 5809158
+            },
+            {
+              "index": -1,
+              "value": 6729537
+            },
+            {
+              "index": 0,
+              "value": -2233588
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1019600,
+        "combo": 50,
+        "critRng": 4147003796,
+        "charge": 99,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 99,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 6.899063218593575,
+        "e": 1,
+        "terms": [
+          {
+            "index": -5,
+            "value": -204480
+          },
+          {
+            "index": -4,
+            "value": -6268569
+          },
+          {
+            "index": -3,
+            "value": 1516825
+          },
+          {
+            "index": -2,
+            "value": -1406425
+          },
+          {
+            "index": -1,
+            "value": -93678
+          },
+          {
+            "index": 0,
+            "value": 69
+          }
+        ]
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1.65085312,
+        "e": 3,
+        "terms": [
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8531200
+          },
+          {
+            "index": 0,
+            "value": 1650
+          }
+        ]
+      },
+      "users": {
+        "m": 1.7168872448,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1600000
+          },
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8872448
+          },
+          {
+            "index": 0,
+            "value": 1716
+          }
+        ]
+      },
+      "income": {
+        "m": 6.95339334144,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 8480000
+          },
+          {
+            "index": -2,
+            "value": 4000016
+          },
+          {
+            "index": -1,
+            "value": 3933414
+          },
+          {
+            "index": 0,
+            "value": 6953
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 6.644621602470811,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1342500
+          },
+          {
+            "index": -2,
+            "value": 247081
+          },
+          {
+            "index": -1,
+            "value": 6446216
+          },
+          {
+            "index": 0,
+            "value": 6
+          }
+        ]
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "charged-overdrive",
+      "action": "rates",
+      "id": "",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1.65085312,
+        "e": 3,
+        "terms": [
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8531200
+          },
+          {
+            "index": 0,
+            "value": 1650
+          }
+        ]
+      },
+      "users": {
+        "m": 1.7168872448,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1600000
+          },
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8872448
+          },
+          {
+            "index": 0,
+            "value": 1716
+          }
+        ]
+      },
+      "income": {
+        "m": 6.95339334144,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 8480000
+          },
+          {
+            "index": -2,
+            "value": 4000016
+          },
+          {
+            "index": -1,
+            "value": 3933414
+          },
+          {
+            "index": 0,
+            "value": 6953
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 6.644621602470811,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1342500
+          },
+          {
+            "index": -2,
+            "value": 247081
+          },
+          {
+            "index": -1,
+            "value": 6446216
+          },
+          {
+            "index": 0,
+            "value": 6
+          }
+        ]
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "cooldown-prevents-overdrive",
+      "action": "tap",
+      "id": "",
+      "amount": 1,
+      "at": 1020000,
+      "before": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 99,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.994177665506543,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4614400
+            },
+            {
+              "index": -4,
+              "value": 5325684
+            },
+            {
+              "index": -3,
+              "value": 9887352
+            },
+            {
+              "index": -2,
+              "value": 2996308
+            },
+            {
+              "index": -1,
+              "value": 6542181
+            },
+            {
+              "index": 0,
+              "value": -2233450
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1020000,
+        "combo": 50,
+        "critRng": 3100287974,
+        "charge": 100,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 101,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 6.899063218593575,
+        "e": 1,
+        "terms": [
+          {
+            "index": -5,
+            "value": -204480
+          },
+          {
+            "index": -4,
+            "value": 3731431
+          },
+          {
+            "index": -3,
+            "value": 1516824
+          },
+          {
+            "index": -2,
+            "value": -1406425
+          },
+          {
+            "index": -1,
+            "value": -93678
+          },
+          {
+            "index": 0,
+            "value": 69
+          }
+        ]
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1.65085312,
+        "e": 3,
+        "terms": [
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8531200
+          },
+          {
+            "index": 0,
+            "value": 1650
+          }
+        ]
+      },
+      "users": {
+        "m": 1.7168872448,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1600000
+          },
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8872448
+          },
+          {
+            "index": 0,
+            "value": 1716
+          }
+        ]
+      },
+      "income": {
+        "m": 6.95339334144,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 8480000
+          },
+          {
+            "index": -2,
+            "value": 4000016
+          },
+          {
+            "index": -1,
+            "value": 3933414
+          },
+          {
+            "index": 0,
+            "value": 6953
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 6.644621602470811,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1342500
+          },
+          {
+            "index": -2,
+            "value": 247081
+          },
+          {
+            "index": -1,
+            "value": 6446216
+          },
+          {
+            "index": 0,
+            "value": 6
+          }
+        ]
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "combo-idle",
+      "action": "tap",
+      "id": "",
+      "amount": 1,
+      "at": 1021801,
+      "before": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.994177665277775,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 2716096
+            },
+            {
+              "index": -4,
+              "value": 3844236
+            },
+            {
+              "index": -3,
+              "value": 8943380
+            },
+            {
+              "index": -2,
+              "value": 9988408
+            },
+            {
+              "index": -1,
+              "value": 7774437
+            },
+            {
+              "index": 0,
+              "value": -2233473
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1021801,
+        "combo": 1,
+        "critRng": 3100287974,
+        "charge": 1,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 101,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 4.611385785585675,
+        "e": 1,
+        "terms": [
+          {
+            "index": -5,
+            "value": -2102784
+          },
+          {
+            "index": -4,
+            "value": 2249983
+          },
+          {
+            "index": -3,
+            "value": 572852
+          },
+          {
+            "index": -2,
+            "value": 5585675
+          },
+          {
+            "index": -1,
+            "value": 1138578
+          },
+          {
+            "index": 0,
+            "value": 46
+          }
+        ]
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1.65085312,
+        "e": 3,
+        "terms": [
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8531200
+          },
+          {
+            "index": 0,
+            "value": 1650
+          }
+        ]
+      },
+      "users": {
+        "m": 1.7168872448,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1600000
+          },
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8872448
+          },
+          {
+            "index": 0,
+            "value": 1716
+          }
+        ]
+      },
+      "income": {
+        "m": 6.95339334144,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 8480000
+          },
+          {
+            "index": -2,
+            "value": 4000016
+          },
+          {
+            "index": -1,
+            "value": 3933414
+          },
+          {
+            "index": 0,
+            "value": 6953
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 6.644621602470811,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1342500
+          },
+          {
+            "index": -2,
+            "value": 247081
+          },
+          {
+            "index": -1,
+            "value": 6446216
+          },
+          {
+            "index": 0,
+            "value": 6
+          }
+        ]
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "overdrive-expiry",
+      "action": "advance",
+      "id": "",
+      "amount": 1,
+      "at": 1050000,
+      "before": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.99418043690278,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 5106528
+            },
+            {
+              "index": -2,
+              "value": 5203405
+            },
+            {
+              "index": -1,
+              "value": 2781313
+            },
+            {
+              "index": 0,
+              "value": -1956310
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 3.3223108012354055,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 7125000
+            },
+            {
+              "index": -2,
+              "value": 2354056
+            },
+            {
+              "index": -1,
+              "value": 2310801
+            },
+            {
+              "index": 0,
+              "value": 332
+            }
+          ]
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1050000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 2.77208614545408,
+        "e": 5,
+        "terms": [
+          {
+            "index": -3,
+            "value": -3264000
+          },
+          {
+            "index": -2,
+            "value": 800672
+          },
+          {
+            "index": -1,
+            "value": -3854546
+          },
+          {
+            "index": 0,
+            "value": 277209
+          }
+        ]
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 3.3223108012354055,
+        "e": 2,
+        "terms": [
+          {
+            "index": -3,
+            "value": 7125000
+          },
+          {
+            "index": -2,
+            "value": 2354056
+          },
+          {
+            "index": -1,
+            "value": 2310801
+          },
+          {
+            "index": 0,
+            "value": 332
+          }
+        ]
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1.65085312,
+        "e": 3,
+        "terms": [
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8531200
+          },
+          {
+            "index": 0,
+            "value": 1650
+          }
+        ]
+      },
+      "users": {
+        "m": 1.7168872448,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1600000
+          },
+          {
+            "index": -2,
+            "value": 4
+          },
+          {
+            "index": -1,
+            "value": 8872448
+          },
+          {
+            "index": 0,
+            "value": 1716
+          }
+        ]
+      },
+      "income": {
+        "m": 2.31779778048,
+        "e": 3,
+        "terms": [
+          {
+            "index": -3,
+            "value": 6160000
+          },
+          {
+            "index": -2,
+            "value": 8000005
+          },
+          {
+            "index": -1,
+            "value": 7977804
+          },
+          {
+            "index": 0,
+            "value": 2317
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 6.644621602470811,
+        "e": 0,
+        "terms": [
+          {
+            "index": -3,
+            "value": 1342500
+          },
+          {
+            "index": -2,
+            "value": 247081
+          },
+          {
+            "index": -1,
+            "value": 6446216
+          },
+          {
+            "index": 0,
+            "value": 6
+          }
+        ]
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "eight-hour-cap",
+      "action": "advance",
+      "id": "",
+      "amount": 1,
+      "at": 173800000,
+      "before": {
+        "credits": {
+          "m": 3.5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 3.8915,
+          "e": 4,
+          "terms": null
+        },
+        "data": {
+          "m": 2.88,
+          "e": 3,
+          "terms": null
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 173800000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 3.888,
+        "e": 4,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 2.88,
+        "e": 3,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.35,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "same-time-no-reward",
+      "action": "advance",
+      "id": "",
+      "amount": 1,
+      "at": 1072345,
+      "before": {
+        "credits": {
+          "m": 1.875089982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9196000
+            },
+            {
+              "index": -2,
+              "value": 3541806
+            },
+            {
+              "index": -1,
+              "value": 5089982
+            },
+            {
+              "index": 0,
+              "value": 187
+            }
+          ]
+        },
+        "data": {
+          "m": 7.3545,
+          "e": 0,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9676000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 3544999
+            },
+            {
+              "index": 0,
+              "value": 7
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1072345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": true,
+        "tutorial": "done",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 1.875089982354181,
+          "e": 2,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9196000
+            },
+            {
+              "index": -2,
+              "value": 3541806
+            },
+            {
+              "index": -1,
+              "value": 5089982
+            },
+            {
+              "index": 0,
+              "value": 187
+            }
+          ]
+        },
+        "data": {
+          "m": 7.3545,
+          "e": 0,
+          "terms": [
+            {
+              "index": -3,
+              "value": 9676000
+            },
+            {
+              "index": -2,
+              "value": 9999999
+            },
+            {
+              "index": -1,
+              "value": 3544999
+            },
+            {
+              "index": 0,
+              "value": 7
+            }
+          ]
+        },
+        "hardware": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 1,
+        "efficiency": 0,
+        "savedAt": 1072345,
+        "lastTap": 1000000,
+        "combo": 1,
+        "critRng": 2663448498,
+        "charge": 1,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 1,
+        "overdrives": 0,
+        "qualityUsed": true,
+        "researchUsed": true,
+        "tutorial": "done",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 1,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 1.512,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 1.12,
+        "e": -1,
+        "terms": null
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "trained-research-rates",
+      "action": "rates",
+      "id": "",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          3,
+          2,
+          3,
+          2,
+          4
+        ],
+        "quality": 4,
+        "efficiency": 3,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          3,
+          2,
+          3,
+          2,
+          4
+        ],
+        "quality": 4,
+        "efficiency": 3,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 2.1972855027200007,
+        "e": 3,
+        "terms": [
+          {
+            "index": -5,
+            "value": 1600000
+          },
+          {
+            "index": -3,
+            "value": 3581248
+          },
+          {
+            "index": -2,
+            "value": 2000071
+          },
+          {
+            "index": -1,
+            "value": 2855027
+          },
+          {
+            "index": 0,
+            "value": 2197
+          }
+        ]
+      },
+      "users": {
+        "m": 3.547687812870181,
+        "e": 3,
+        "terms": [
+          {
+            "index": -8,
+            "value": 5840000
+          },
+          {
+            "index": -7,
+            "value": 2077635
+          },
+          {
+            "index": -6,
+            "value": 6325555
+          },
+          {
+            "index": -5,
+            "value": 2807884
+          },
+          {
+            "index": -4,
+            "value": 2466502
+          },
+          {
+            "index": -3,
+            "value": 6224398
+          },
+          {
+            "index": -2,
+            "value": 7018111
+          },
+          {
+            "index": -1,
+            "value": 6878128
+          },
+          {
+            "index": 0,
+            "value": 3547
+          }
+        ]
+      },
+      "income": {
+        "m": 4.005240702229528,
+        "e": 4,
+        "terms": [
+          {
+            "index": -15,
+            "value": 2960000
+          },
+          {
+            "index": -14,
+            "value": 6523575
+          },
+          {
+            "index": -13,
+            "value": 123345
+          },
+          {
+            "index": -12,
+            "value": 1997384
+          },
+          {
+            "index": -11,
+            "value": 7163491
+          },
+          {
+            "index": -10,
+            "value": 3770456
+          },
+          {
+            "index": -9,
+            "value": 9349108
+          },
+          {
+            "index": -8,
+            "value": 5089355
+          },
+          {
+            "index": -7,
+            "value": 788795
+          },
+          {
+            "index": -6,
+            "value": 7748232
+          },
+          {
+            "index": -5,
+            "value": 5973776
+          },
+          {
+            "index": -4,
+            "value": 1252108
+          },
+          {
+            "index": -3,
+            "value": 822556
+          },
+          {
+            "index": -2,
+            "value": 9528286
+          },
+          {
+            "index": -1,
+            "value": 4070222
+          },
+          {
+            "index": 0,
+            "value": 40052
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 1.3915099428475373,
+        "e": 1,
+        "terms": [
+          {
+            "index": -5,
+            "value": 8078600
+          },
+          {
+            "index": -4,
+            "value": 6878193
+          },
+          {
+            "index": -3,
+            "value": 1484080
+          },
+          {
+            "index": -2,
+            "value": 2847537
+          },
+          {
+            "index": -1,
+            "value": 9150994
+          },
+          {
+            "index": 0,
+            "value": 13
+          }
+        ]
+      },
+      "quote": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "seconds": 0
+    },
+    {
+      "name": "paid-quality-cost",
+      "action": "train",
+      "id": "quality",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 9.994177664816636,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2233519
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          3,
+          2,
+          3,
+          2,
+          4
+        ],
+        "quality": 4,
+        "efficiency": 3,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "training",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 9.994177565276635,
+          "e": 11,
+          "terms": [
+            {
+              "index": -5,
+              "value": 4818880
+            },
+            {
+              "index": -4,
+              "value": 1594253
+            },
+            {
+              "index": -3,
+              "value": 8370528
+            },
+            {
+              "index": -2,
+              "value": 4402733
+            },
+            {
+              "index": -1,
+              "value": 6635859
+            },
+            {
+              "index": 0,
+              "value": -2243473
+            },
+            {
+              "index": 1,
+              "value": 99942
+            }
+          ]
+        },
+        "data": {
+          "m": 0,
+          "e": 0,
+          "terms": null
+        },
+        "hardware": [
+          100,
+          25,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          3,
+          2,
+          3,
+          2,
+          4
+        ],
+        "quality": 4,
+        "efficiency": 3,
+        "savedAt": 1000000,
+        "lastTap": 1019800,
+        "combo": 50,
+        "critRng": 2673688547,
+        "charge": 0,
+        "activeUntil": 1034800,
+        "cooldownUntil": 1079800,
+        "taps": 100,
+        "overdrives": 1,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "research",
+        "hasTraining": true,
+        "hasResearchJob": false,
+        "training": {
+          "id": "quality",
+          "required": 174.48999839999996,
+          "done": 0,
+          "intro": false
+        },
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 9.954,
+        "e": 3,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 2.1972855027200007,
+        "e": 3,
+        "terms": [
+          {
+            "index": -5,
+            "value": 1600000
+          },
+          {
+            "index": -3,
+            "value": 3581248
+          },
+          {
+            "index": -2,
+            "value": 2000071
+          },
+          {
+            "index": -1,
+            "value": 2855027
+          },
+          {
+            "index": 0,
+            "value": 2197
+          }
+        ]
+      },
+      "users": {
+        "m": 3.547687812870181,
+        "e": 3,
+        "terms": [
+          {
+            "index": -8,
+            "value": 5840000
+          },
+          {
+            "index": -7,
+            "value": 2077635
+          },
+          {
+            "index": -6,
+            "value": 6325555
+          },
+          {
+            "index": -5,
+            "value": 2807884
+          },
+          {
+            "index": -4,
+            "value": 2466502
+          },
+          {
+            "index": -3,
+            "value": 6224398
+          },
+          {
+            "index": -2,
+            "value": 7018111
+          },
+          {
+            "index": -1,
+            "value": 6878128
+          },
+          {
+            "index": 0,
+            "value": 3547
+          }
+        ]
+      },
+      "income": {
+        "m": 4.005240702229528,
+        "e": 4,
+        "terms": [
+          {
+            "index": -15,
+            "value": 2960000
+          },
+          {
+            "index": -14,
+            "value": 6523575
+          },
+          {
+            "index": -13,
+            "value": 123345
+          },
+          {
+            "index": -12,
+            "value": 1997384
+          },
+          {
+            "index": -11,
+            "value": 7163491
+          },
+          {
+            "index": -10,
+            "value": 3770456
+          },
+          {
+            "index": -9,
+            "value": 9349108
+          },
+          {
+            "index": -8,
+            "value": 5089355
+          },
+          {
+            "index": -7,
+            "value": 788795
+          },
+          {
+            "index": -6,
+            "value": 7748232
+          },
+          {
+            "index": -5,
+            "value": 5973776
+          },
+          {
+            "index": -4,
+            "value": 1252108
+          },
+          {
+            "index": -3,
+            "value": 822556
+          },
+          {
+            "index": -2,
+            "value": 9528286
+          },
+          {
+            "index": -1,
+            "value": 4070222
+          },
+          {
+            "index": 0,
+            "value": 40052
+          }
+        ]
+      },
+      "dataRate": {
+        "m": 1.3915099428475373,
+        "e": 1,
+        "terms": [
+          {
+            "index": -5,
+            "value": 8078600
+          },
+          {
+            "index": -4,
+            "value": 6878193
+          },
+          {
+            "index": -3,
+            "value": 1484080
+          },
+          {
+            "index": -2,
+            "value": 2847537
+          },
+          {
+            "index": -1,
+            "value": 9150994
+          },
+          {
+            "index": 0,
+            "value": 13
+          }
+        ]
+      },
+      "quote": {
+        "m": 9.954,
+        "e": 3,
+        "terms": null
+      },
+      "seconds": 174.48999839999996
+    },
+    {
+      "name": "research-prerequisite",
+      "action": "research",
+      "id": "computeOptimization",
+      "amount": 1,
+      "at": 1000000,
+      "before": {
+        "credits": {
+          "m": 5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 1,
+          "e": 3,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "expected": {
+        "credits": {
+          "m": 5,
+          "e": 1,
+          "terms": null
+        },
+        "data": {
+          "m": 1,
+          "e": 3,
+          "terms": null
+        },
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "research": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "quality": 0,
+        "efficiency": 0,
+        "savedAt": 1000000,
+        "lastTap": -1,
+        "combo": 0,
+        "critRng": 991,
+        "charge": 0,
+        "activeUntil": 0,
+        "cooldownUntil": 0,
+        "taps": 0,
+        "overdrives": 0,
+        "qualityUsed": false,
+        "researchUsed": false,
+        "tutorial": "tap",
+        "hasTraining": false,
+        "hasResearchJob": false,
+        "training": null,
+        "researchJob": null
+      },
+      "creditGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "creditSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataGain": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataSpent": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "compute": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "users": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "income": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataRate": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "quote": {
+        "m": 3,
+        "e": 1,
+        "terms": null
+      },
+      "seconds": 30
+    }
+  ]
+}
