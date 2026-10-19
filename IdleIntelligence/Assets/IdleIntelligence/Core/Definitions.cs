@@ -24,8 +24,8 @@ namespace IdleIntelligence.Core
     }
     [Serializable] public sealed class Job
     {
-        public string id; public double required,done; public bool intro,modelTransferEligible;
-        public Job Copy() => (Job)MemberwiseClone();
+        public string id;public NumberData paidData;public bool paidDataRecorded; public double required,done; public bool intro,modelTransferEligible;
+        public Job Copy(){var j=(Job)MemberwiseClone();if(paidDataRecorded)j.paidData=ScientificNumber.FromData(paidData).ToData();else j.paidData=null;return j;}
     }
     public sealed class GameState
     {
@@ -35,20 +35,24 @@ namespace IdleIntelligence.Core
         public int Quality,Efficiency,Combo,Charge; public long Taps,Overdrives; public uint CritRng=(uint)Balance.InitialCritRng;
         public double SavedAt,LastTap=-1,ActiveUntil,CooldownUntil;
         public bool QualityUsed,ResearchUsed; public string Tutorial="tap";
-        public IndustryState Industry=new IndustryState();public MetaState Meta=new MetaState();public WorkshopState Workshop=new WorkshopState();public PrestigeState Prestige=new PrestigeState();
+        public ChallengeState Challenges=new ChallengeState();public IndustryState Industry=new IndustryState();public MetaState Meta=new MetaState();public WorkshopState Workshop=new WorkshopState();public PrestigeState Prestige=new PrestigeState();
         public Job Training,ResearchJob;
-        public GameState Copy() { var s=(GameState)MemberwiseClone();s.Hardware=(long[])Hardware.Clone();s.Research=(int[])Research.Clone();s.Training=Training?.Copy();s.ResearchJob=ResearchJob?.Copy();s.Workshop=Workshop.Copy();s.Prestige=Prestige.Copy();s.Meta=Meta.Copy();s.Industry=Industry.Copy();return s; }
+        public GameState Copy() { var s=(GameState)MemberwiseClone();s.Hardware=(long[])Hardware.Clone();s.Research=(int[])Research.Clone();s.Training=Training?.Copy();s.ResearchJob=ResearchJob?.Copy();s.Workshop=Workshop.Copy();s.Prestige=Prestige.Copy();s.Meta=Meta.Copy();s.Industry=Industry.Copy();s.Challenges=Challenges.Copy();return s; }
     }
     // Explicit, separate Unity save/fixture schema. Web saves are never silently consumed.
-    [Serializable] public sealed class StateData
+    [Serializable] public class MainStateData
     {
         public NumberData credits,data; public long[] hardware; public int[] research;
         public int quality,efficiency,combo,charge; public long taps,overdrives; public uint critRng;
         public double savedAt,lastTap,activeUntil,cooldownUntil;
         public bool qualityUsed,researchUsed; public string tutorial;
         public IndustryState industry;public MetaState meta;public PrestigeState prestige; public WorkshopState workshop; public bool hasTraining,hasResearchJob; public Job training,researchJob;
-        public static StateData From(GameState s) => new StateData {industry=s.Industry.Copy(),meta=s.Meta.Copy(),prestige=s.Prestige.Copy(),workshop=s.Workshop.Copy(),credits=s.Credits.ToData(),data=s.Data.ToData(),hardware=(long[])s.Hardware.Clone(),research=(int[])s.Research.Clone(),quality=s.Quality,efficiency=s.Efficiency,combo=s.Combo,charge=s.Charge,taps=s.Taps,overdrives=s.Overdrives,critRng=s.CritRng,savedAt=s.SavedAt,lastTap=s.LastTap,activeUntil=s.ActiveUntil,cooldownUntil=s.CooldownUntil,qualityUsed=s.QualityUsed,researchUsed=s.ResearchUsed,tutorial=s.Tutorial,hasTraining=s.Training!=null,hasResearchJob=s.ResearchJob!=null,training=s.Training?.Copy(),researchJob=s.ResearchJob?.Copy()};
-        public GameState ToState(bool legacy=false,bool beforePrestige=false,bool beforeMeta=false,bool beforeIndustry=false)
+        public ChallengeProgress challengeProgress;
+        static void Fill(MainStateData d,GameState s){d.industry=s.Industry.Copy();d.meta=s.Meta.Copy();d.prestige=s.Prestige.Copy();d.workshop=s.Workshop.Copy();d.credits=s.Credits.ToData();d.data=s.Data.ToData();d.hardware=(long[])s.Hardware.Clone();d.research=(int[])s.Research.Clone();d.quality=s.Quality;d.efficiency=s.Efficiency;d.combo=s.Combo;d.charge=s.Charge;d.taps=s.Taps;d.overdrives=s.Overdrives;d.critRng=s.CritRng;d.savedAt=s.SavedAt;d.lastTap=s.LastTap;d.activeUntil=s.ActiveUntil;d.cooldownUntil=s.CooldownUntil;d.qualityUsed=s.QualityUsed;d.researchUsed=s.ResearchUsed;d.tutorial=s.Tutorial;d.hasTraining=s.Training!=null;d.hasResearchJob=s.ResearchJob!=null;d.training=s.Training?.Copy();d.researchJob=s.ResearchJob?.Copy();d.challengeProgress=s.Challenges.Progress.Copy();}
+        public static StateData From(GameState s){var d=new StateData{hasChallenge=s.Challenges.Run!=null,challengeRun=s.Challenges.Run?.Copy(),challengeMain=s.Challenges.Main==null?null:FromMain(s.Challenges.Main)};Fill(d,s);return d;}
+        public static MainStateData FromMain(GameState s){var d=new MainStateData();Fill(d,s);return d;}
+
+        public GameState ToState(bool legacy=false,bool beforePrestige=false,bool beforeMeta=false,bool beforeIndustry=false,bool beforeChallenges=false,bool deferSession=false)
         {
             if(legacy){if(research==null||research.Length!=5)throw new FormatException("Invalid v1 research");Array.Resize(ref research,Balance.Research.Length);workshop=new WorkshopState{runStartedAt=savedAt};}
             if(!legacy&&(beforePrestige||beforeMeta||beforeIndustry)&&research!=null&&research.Length==10)Array.Resize(ref research,Balance.Research.Length);
@@ -56,8 +60,21 @@ namespace IdleIntelligence.Core
             if(legacy||beforePrestige){prestige=new PrestigeState{historicalIncomeUnavailable=true,known=(string[])workshop.nodes.Clone()};if(workshop.hasAnalysis)workshop.analysis.rareGuarantee=workshop.nodes.Contains("W03");}
             if(legacy||beforePrestige||beforeMeta){meta=MetaState.New(savedAt);meta.cycleStartedAt=workshop.runStartedAt;meta.cycleRecords=new[]{quality,efficiency,workshop.integration};if(prestige.lab)meta.tutorial="lab";if(workshop.hasAnalysis)workshop.analysis.quantityIntegral=workshop.analysis.done;int model=Array.FindIndex(MetaBalance.Models,m=>m.Id==workshop.activeModel);if(model>=0)meta.models[model]=workshop.activeModelLevel;}
             if(industry!=null){if(!industry.hasSynthesis)industry.synthesis=null;if(industry.foundries!=null)foreach(var f in industry.foundries)if(f!=null&&!f.hasActive)f.active=null;}
-            var s=new GameState {Industry=industry,Meta=meta,Prestige=prestige,Workshop=workshop,Credits=ScientificNumber.FromData(credits),Data=ScientificNumber.FromData(data),Hardware=hardware,Research=research,Quality=quality,Efficiency=efficiency,Combo=combo,Charge=charge,Taps=taps,Overdrives=overdrives,CritRng=critRng,SavedAt=savedAt,LastTap=lastTap,ActiveUntil=activeUntil,CooldownUntil=cooldownUntil,QualityUsed=qualityUsed,ResearchUsed=researchUsed,Tutorial=tutorial,Training=hasTraining?training:null,ResearchJob=hasResearchJob?researchJob:null};
+            if(legacy||beforePrestige||beforeMeta||beforeIndustry||beforeChallenges)challengeProgress=new ChallengeProgress();
+            var s=new GameState {Challenges=new ChallengeState{Progress=challengeProgress},Industry=industry,Meta=meta,Prestige=prestige,Workshop=workshop,Credits=ScientificNumber.FromData(credits),Data=ScientificNumber.FromData(data),Hardware=hardware,Research=research,Quality=quality,Efficiency=efficiency,Combo=combo,Charge=charge,Taps=taps,Overdrives=overdrives,CritRng=critRng,SavedAt=savedAt,LastTap=lastTap,ActiveUntil=activeUntil,CooldownUntil=cooldownUntil,QualityUsed=qualityUsed,ResearchUsed=researchUsed,Tutorial=tutorial,Training=hasTraining?training:null,ResearchJob=hasResearchJob?researchJob:null};
+            if(deferSession)return s;Game.Validate(s);return s.Copy();
+        }
+    }
+    // A bounded main snapshot has no active-session fields: no recursive JSON graph.
+    [Serializable] public sealed class StateData:MainStateData
+    {
+        public bool hasChallenge;public ChallengeRun challengeRun;public MainStateData challengeMain;
+        public new GameState ToState(bool legacy=false,bool beforePrestige=false,bool beforeMeta=false,bool beforeIndustry=false,bool beforeChallenges=false)
+        {
+            var s=base.ToState(legacy,beforePrestige,beforeMeta,beforeIndustry,beforeChallenges,true);
+            if(!(legacy||beforePrestige||beforeMeta||beforeIndustry||beforeChallenges)&&hasChallenge){s.Challenges.Run=challengeRun?.Copy();s.Challenges.Main=challengeMain?.ToState();}
             Game.Validate(s);return s.Copy();
         }
     }
+
 }

@@ -102,3 +102,7 @@ Vollständiges Onboarding mit Namensprüfung, sieben Sprachen, originale Schrift
 ## Erweiterung: Forschung und Industrie
 
 Der aktuelle funktionale Abschnitt wird in [unity-industry.md](unity-industry.md) samt Speichervertrag und Prüfergebnissen beschrieben. Dieselbe Szene öffnen. Forschung enthält die vollständigen 26 aktiven V2-Forschungen. Unter **Items → Material** zu Synthese, Durchbrüchen, Fragmentumwandlung und Foundry scrollen. Im Inventar öffnet das Antippen eines Items das gemeinsame Detailfenster mit **Schmieden**. Ressourcen werden beim tatsächlichen Start gespeichert; wartende Foundry-Items sind noch nicht bezahlt. Analysen können ohne Erstattung abgebrochen werden. Synthese verwendet denselben Arbeitsplatz. Für reguläre Tests Ressourcen im Spiel verdienen; finanzierte Prüfzustände werden ausschließlich von Tests in temporären Saves angelegt.
+
+## Challenge-Läufe mit Play testen
+
+In `Assets/Scenes/IdleIntelligence.unity` Play starten, **Forschung → Challenges** öffnen. Nach erstem Prestige und geforderter Hardwareentdeckung Familie/Stufe, Loadout und gegebenenfalls Verbindungen auswählen. Start speichert sofort; Ziele und Abbruch/Abschluss sind anschließend hier erreichbar. Hauptspiel und bezahlte Jobs pausieren auch offline. Wiederholte Erstabschlussbelohnungen sind gesperrt. Vollständige Regeln, Save-v6-Migration und offene Langzeit-Challenges: [Challenge-Bericht](unity-challenges.md). Testbilder verwenden ausdrücklich finanzierte temporäre Zustände.

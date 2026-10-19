@@ -4,7 +4,7 @@ namespace IdleIntelligence.Core
 {
     public static class PrestigeRules
     {
-        public static bool Has(GameState s,string id)=>s.Workshop.nodes.Contains(id)||(id=="T04"&&s.Workshop.nodes.Contains("T10"))||(id=="I06"&&(s.Workshop.nodes.Contains("I07")||MetaRules.Level(s,"B04")>0||MetaRules.Level(s,"B06")>0));
+        public static bool Has(GameState s,string id)=>(id=="F02"&&s.Challenges.Progress.unlocks.Contains("research-queue"))||(id=="T03"&&s.Challenges.Progress.unlocks.Contains("training-queue"))||(id=="F03"&&s.Challenges.Progress.unlocks.Contains("research-repeat"))||(id=="I06"&&s.Challenges.Progress.unlocks.Contains("prestige-agent"))||s.Workshop.nodes.Contains(id)||(id=="T04"&&s.Workshop.nodes.Contains("T10"))||(id=="I06"&&(s.Workshop.nodes.Contains("I07")||MetaRules.Level(s,"B04")>0||MetaRules.Level(s,"B06")>0));
         public static double E(string key)=>PrestigeBalance.Effect(key);
         public static double V(string key)=>PrestigeBalance.Value(key);
         public static double F(GameState s,string id)=>Has(s,id)?E(id):1;
@@ -29,7 +29,7 @@ namespace IdleIntelligence.Core
         public static ScientificNumber CreditFactor(GameState s)=>s.Prestige.Cycle.Add(ScientificNumber.One).Pow(V("intCreditExponent")+(Has(s,"I05")?V("intCreditNodeExponent"):0)+(Has(s,"I10")?V("intCreditNodeExponent"):0));
         public static GameState Buy(GameState state,string id)
         {
-            var node=PrestigeBalance.Nodes.FirstOrDefault(n=>n.Id==id);if(node==null||Has(state,id)||state.Prestige.Free.CompareTo(ScientificNumber.From(node.Cost))<0)return state;
+            var node=PrestigeBalance.Nodes.FirstOrDefault(n=>n.Id==id);if(ChallengeRules.Active(state)||node==null||Has(state,id)||state.Prestige.Free.CompareTo(ScientificNumber.From(node.Cost))<0)return state;
             var s=state.Copy();s.Prestige.Free=s.Prestige.Free.Subtract(ScientificNumber.From(node.Cost));s.Prestige.Spent=s.Prestige.Spent.Add(ScientificNumber.From(node.Cost));s.Workshop.nodes=s.Workshop.nodes.Concat(new[]{id}).ToArray();s.Prestige.known=s.Prestige.known.Union(new[]{id}).ToArray();
             if(id=="W01"||id=="W02"||id=="W06")s.Workshop.permanentSlots=ItemBalance.Slots.Where((slot,i)=>i>=3&&i<6&&Workshop.ActiveSlots(s)[i]).ToArray();s.Prestige.revision++;s.Workshop.revision++;return s;
         }
@@ -42,7 +42,7 @@ namespace IdleIntelligence.Core
         {if(!s.Prestige.lab)return ScientificNumber.Zero;var floor=ScientificNumber.FromData(s.Prestige.best).Times(V("knowledgeFloor"));return (s.Prestige.Cycle.CompareTo(floor)>0?s.Prestige.Cycle:floor).Pow(.5).Times(V("knowledgeRate")*F(s,"I08")).Multiply(ScientificNumber.FromData(s.Meta.total).Add(ScientificNumber.One).Pow(V("knowledgeAxiomPower")*MetaRules.Level(s,"D01")));}
         public static GameState Reset(GameState state,long expectedRevision=-1)
         {
-            if(expectedRevision>=0&&state.Prestige.revision!=expectedRevision)return state;var gain=Claim(state);if(gain.CompareTo(ScientificNumber.One)<0)return state;
+            if(expectedRevision>=0&&state.Prestige.revision!=expectedRevision)return state;var gain=Claim(state);if(gain.CompareTo(ScientificNumber.One)<0||ChallengeRules.Active(state)&&gain.CompareTo(ChallengeRules.Current(state).MinimumINT)<0)return state;
             var s=state.Copy();var p=s.Prestige;p.Cycle=p.Cycle.Add(gain);p.Total=p.Total.Add(gain);p.Free=p.Free.Add(gain);p.lastGain=gain.ToData();p.resets++;p.revision++;Discover(s);s=Workshop.Discover(s);p=s.Prestige;foreach(var f in s.Industry.foundries)f.queue=Array.Empty<string>();
             s.Hardware=new long[s.Hardware.Length];s.Credits=ScientificNumber.From(Balance.StartCredits);
             if(!Has(s,"T08")){s.Quality=s.Efficiency=s.Workshop.integration=0;s.Training=null;}
@@ -51,7 +51,7 @@ namespace IdleIntelligence.Core
             foreach(var job in p.moduleQueue){var d=ItemBalance.Modules.First(m=>m.Id==job.id);s.Data=s.Data.Add(ScientificNumber.From(d.Data));for(int c=0;c<d.Costs.Length;c++)s.Workshop.components[c]+=(long)d.Costs[c];}p.moduleQueue=Array.Empty<Job>();
             s.Industry.trainingStarted=0;s.Workshop.runStartedAt=s.SavedAt;s.Workshop.qualityCompletions=s.Workshop.efficiencyCompletions=0;s.Workshop.lastTrack="";p.milestones=Array.Empty<string>();p.autoSeconds=p.otherAutoSeconds=0;p.resetIntent=false;p.intentResearch=Array.Empty<string>();p.intentTraining=p.intentAnalysis=p.intentCrafting=false;
             s.Combo=s.Charge=0;s.LastTap=-1;s.ActiveUntil=s.CooldownUntil=0;s.Workshop.revision++;
-            s=MetaAutomation.Rebuild(MetaRules.Phase(s,0));if(Has(s,"I06"))s=Game.Buy(s,"calculator");return s;
+            if(ChallengeRules.Active(s)){var m=s.Challenges.Run.metrics;m.minimumINT=m.prestiges==0||ScientificNumber.FromData(m.minimumINT).CompareTo(gain)>0?gain.ToData():m.minimumINT;m.prestiges++;}s=MetaAutomation.Rebuild(MetaRules.Phase(s,0));if(Has(s,"I06"))s=Game.Buy(s,"calculator");return s;
         }
         public static void Validate(GameState s)
         {

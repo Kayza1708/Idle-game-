@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-19",
+  "unityVersion": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "baseCommit": "e253c376",
+  "remoteMain": "58bccf7a (PR132 merged externally; tree identical to base)",
+  "scope": "Functional section 2: 690 current V2 run challenge stages; twelve static long-term challenges remain open pending metrics/seasons. Full rewrite incomplete.",
+  "typescriptGameplayChanged": false,
+  "saveVersion": 6,
+  "migrates": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "compile": {
+    "exitCode": 0,
+    "log": "/tmp/unity-challenge-compile-final.log"
+  },
+  "tests": {
+    "editMode": {
+      "id": "2",
+      "testcasecount": "38",
+      "result": "Passed",
+      "total": "38",
+      "passed": "38",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 17:54:11Z",
+      "end-time": "2026-10-19 17:55:56Z",
+      "duration": "104.9220693"
+    },
+    "playMode": {
+      "id": "2",
+      "testcasecount": "20",
+      "result": "Passed",
+      "total": "20",
+      "passed": "20",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 17:56:21Z",
+      "end-time": "2026-10-19 17:56:45Z",
+      "duration": "24.1352416"
+    },
+    "typecheck": "passed",
+    "vitest": {
+      "files": 131,
+      "passed": 1862,
+      "failed": 0,
+      "log": "/tmp/unity-challenge-vitest.log"
+    },
+    "exports": "npm run unity:check passed",
+    "build": "passed; existing bundle-size warning"
+  },
+  "references": {
+    "transactions": 417,
+    "exactCatalogStages": 690
+  },
+  "mobile": {
+    "fundedTemporaryTestStates": true,
+    "realDevice": false,
+    "sizes": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ]
+    ],
+    "visuallyInspected": true
+  },
+  "open": [
+    "Twelve static long-term challenges: metrics, achievements, mastery and seasons dependencies.",
+    "No V2 consumer exists in source for data-crunch data reward or inflation ownership reward.",
+    "Legacy challenge catalogs 0/1 and explicit web import: section 8.",
+    "Natural complete challenge run and actual mobile device validation not yet performed.",
+    "Remaining functional sections 3–8; no full rewrite completion."
+  ],
+  "correctedDuringVerification": [
+    "Null optional selections required explicit fixture presence flags.",
+    "One-ULP production rounding uses established numeric tolerance, not exact JSON comparison.",
+    "Updated old save-version assertion after v6 migration.",
+    "Mobile rendering caught duplicated research navigation; creation moved out of refresh and guarded by PlayMode assertion."
+  ]
+}

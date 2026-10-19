@@ -1,11 +1,11 @@
 # Funktionale Unity-Abnahme
 
-Arbeitsauftrag: vollständiger funktionaler Port, danach optische Überarbeitung. Ausgang `1e0abf30`, Branch `codex/unity-rewrite`, PR #131 inzwischen gemergt; Folge-Draft für diesen Auftrag. Bestehender geprüfter Kern und TypeScript bleiben erhalten. Ein vorhandenes Menü oder exportierter Katalog zählt nicht als Abnahme.
+Arbeitsauftrag: vollständiger funktionaler Port, danach optische Überarbeitung. Ausgang `1e0abf30`, Branch `codex/unity-rewrite`, PR #131 inzwischen gemergt; PR #132 inzwischen extern gemergt; nächster Folge-Draft für diesen Auftrag. Bestehender geprüfter Kern und TypeScript bleiben erhalten. Ein vorhandenes Menü oder exportierter Katalog zählt nicht als Abnahme.
 
 | Abschnitt | Codeabgleich / fehlender Umfang | Abnahme |
 |---|---|---|
 | 1 Forschung/Industrie | Bisher 10 Forschungs-IDs, V2 tatsächlich 18 Wiederholforschungen + 8 Projekte. Fehlende Verbraucher, Foundry-Infrastruktur/-jobs/-queues, Synthese, Durchbrüche und Fragmentkonvertierung. Sechs Analysen vorhanden; Abbruch, Datenpipeline und Syntheseslot ergänzen. | V2-Kern samt UI geprüft: 221 gemeinsame Fälle, 33 EditMode/16 PlayMode; [Bericht](unity-industry.md). Dropverbraucher folgt in 5, Import/Altdaten in 8. |
-| 2 Challenges | Regeln, Kapitel, Belohnungen, separater Hauptstand, Pause/Offline/Abbruch/Resume und Migration fehlen. | Offen |
+| 2 Challenges | 690 aktuelle V2-Laufstufen, Regeln, Belohnungen, Hauptspielpause, Abbruch/Reload und Save-v6 implementiert. | Laufabschnitt geprüft: [Bericht](unity-challenges.md). Zwölf langfristige Challenges benötigen Metriken/Seasons aus 3/4; breite Abnahme offen. |
 | 3 Missionen/Profil | Perioden, Kapitelquests, Achievements, Claims, Profil, Mailbox und Metriken fehlen. | Offen |
 | 4 Seasons | Drei Originalkataloge, Free-/Premiumansprüche, XP/Wechsel, Items, Truhen und Kulanz fehlen. | Offen |
 | 5 Shop/Belohnungen | Voller Shop, Gumball, Bonusboxen, aktive Drops, Angebote, Boosts, Upgrades und Entitlements fehlen. | Offen |

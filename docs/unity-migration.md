@@ -10,6 +10,10 @@ Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen 
 
 26 aktive V2-Forschungen (18 wiederholbar, acht Projekte einschließlich Labororganisation), aktuelle Ratenverbraucher, geteilte Analyse/Synthese, alle 20 Synthesen, Foundry-Level/Veredelung/Warteplätze, Durchbrüche und Fragmentumwandlung sind samt erreichbarer UI portiert. Unity-Save v5 migriert 1–4 mit Originalkopien. [Prüfbericht](unity-industry.md): 221 zusätzliche gemeinsame Fälle, 33 EditMode-/16 PlayMode-Tests und 1.860 Vitest-Tests. Breite Systemzeilen bleiben wegen Challenge-/Shopverbrauchern, Legacy-/Webimport und Geräteabnahme offen. Die [funktionale Abnahmeliste](unity-functional-acceptance.md) ordnet alle acht Abschnitte zu; [optischer Rückstand](unity-visual-backlog.md) wird zentral geführt.
 
+## Funktionaler Folgeauftrag: Challenge-Läufe
+
+Alle 690 aktuellen V2-Laufstufen sind mit Einschränkungen, echter Hauptspielpause online/offline, Abbruch, wiederholbaren sicheren Abschlüssen, Familienverbrauchern und gemeinsamen Freischaltungen portiert. [Prüfbericht und Quellabweichungen](unity-challenges.md), [Prüfdaten](unity-challenges-verification.json). Save v6 migriert v1–5 mit Originalkopien. Zwölf statische Langzeit-Challenges, historische Webkataloge und echte Geräte bleiben offen; die breite Challengezeile bleibt entsprechend ungecheckt.
+
 ## Fortschritt: Items und Schmiede
 
 Der nächste [spielbare Abschnitt](unity-playable-slice.md#items-und-schmiede-mit-play-testen) enthält 20 Komponenten, bezahlte Hardwarepakete/passive Funde, sechs Analysen, zwei Modulrezepte, Bauplanlernen/-meisterschaft, den vollständigen 30-Typen-/sechs-Seltenheiten-Katalog, Inventar, Ausrüsten/Ablegen/Sperren/Levelverbesserung und sofortige Herstellung/Fusion. Originalkosten und Erhaltungsregeln werden gegen 509 zusätzliche TypeScript-Fälle geprüft. Gemeinsame Porträts/Formen/Farben/Details und kosmetische Schmiedeanimationen sind an sofort gespeicherte Transaktionen gebunden. Unity-Save v1 wird mit Originalkopie nach v2 ergänzt. [Prüfnachweis](unity-items-verification.json) und [tatsächlicher Mitschnitt](recordings/unity-forge.mp4).
