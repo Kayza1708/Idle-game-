@@ -708,3 +708,8 @@ Der erste Unity-Abschnitt übernimmt bestehende Werte ohne Balanceänderung. `np
 ## Unity-Itemabschnitt · 19.10.2026
 
 Keine Balanceänderung. `ItemBalance.g.cs` und 509 zusätzliche gemeinsame Fälle werden aus `economy.ts` und den bestehenden Domainfunktionen exportiert: alle 30 Itemtypen/sechs Seltenheiten, Rezept-/Meisterschafts-/Levelkosten, Komponenten/Module/Analysen, Materialpakete, Slots, Kombinationen, bedingte Effekte und Fusionserhaltung. Die originalen Seltenheitsfarben kommen aus `ItemPresentation.tsx`. Verteilte bestehende Regeln werden übernommen, nicht still bereinigt. Testvorräte für vollständige Katalogprüfung und Animationsaufnahme existieren ausschließlich in Tests. Fehlende Verbraucher/Erwerbswege bleiben in der Migrationsliste offen und führen zu keiner neuen Ersatzbalance.
+
+
+## Unity-INT-Abschnitt · 19.10.2026
+
+Keine Balanceänderung. Der reproduzierbare `PrestigeBalance.g.cs`-Export übernimmt alle 60 Knoten, Originalpreise/-formeln, tatsächliche Effekte, Reset-/Erhaltungsregeln und Netzgeometrie. Auch die im aktuellen TypeScript noch vorhandenen zusätzlichen gemeinsamen Itembonus-Poolbeiträge W01 +0,40 / W02 +0,75 / W06 +1,25 werden unverändert übernommen und sichtbar dokumentiert. Gemeinsame 370 technische Fälle und ein getrennter natürlicher frischer Lauf prüfen den Port; keine erhöhten Testbestände im regulären Spiel. Axiome und neue KI-Modelle bleiben offen. [Details und Prüfgrenzen](unity-int-prestige.md).

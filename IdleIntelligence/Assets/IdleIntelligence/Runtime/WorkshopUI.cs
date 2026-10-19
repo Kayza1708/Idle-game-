@@ -21,9 +21,9 @@ namespace IdleIntelligence.Runtime
     public sealed class WorkshopUI:MonoBehaviour
     {
         public ItemPortrait PortraitPrefab;public ActionCard RowPrefab;public ForgeAnimator Forge;public Sprite[] ItemSprites,ComponentSprites;public Transform Rows,Equipment;public Text RecipeTitle,Cost,Stock;public Button Primary,Info,Motion;public GameObject ForgePanel,DetailRoot;public ItemPortrait DetailPortrait;public Text DetailText;public Transform DetailActions;
-        GameRuntime game;int recipe;string mode="blueprints";readonly List<string> selection=new List<string>();long lastRevision=-1;double lastData;int lastInventory;
+        GameRuntime game;int recipe,quantity=1;Button batch;string mode="blueprints";readonly List<string> selection=new List<string>();long lastRevision=-1;double lastData;int lastInventory;
         public string Mode=>mode;public string[] Selection=>selection.ToArray();public GameRuntime Runtime=>game;
-        public void Initialize(GameRuntime runtime){game=runtime;DetailRoot.transform.SetParent(GetComponentInParent<Canvas>().transform,false);WorkshopUIFactory.Fill((RectTransform)DetailRoot.transform);DetailRoot.AddComponent<SafeArea>();DetailRoot.SetActive(false);ItemPortrait.Sprites=ItemSprites;Primary.onClick.AddListener(Commit);Info.onClick.AddListener(()=>OpenRecipe(recipe));Motion.onClick.AddListener(()=>{game.Act(v=>{var next=v.Copy();next.Workshop.reducedMotion=!next.Workshop.reducedMotion;return next;});Forge.SetReduced(game.State.Workshop.reducedMotion);UpdateView(true);});transform.Find("WorkshopTabs/Blueprints").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("blueprints"));transform.Find("WorkshopTabs/Inventory").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("inventory"));transform.Find("WorkshopTabs/Materials").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("components"));transform.Find("WorkshopOptions/FusionMode").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("fusion"));DetailRoot.transform.Find("DetailPanel/CloseItemDetail").GetComponent<Button>().onClick.AddListener(CloseDetail);UpdateView(true);}
+        public void Initialize(GameRuntime runtime){game=runtime;DetailRoot.transform.SetParent(GetComponentInParent<Canvas>().transform,false);WorkshopUIFactory.Fill((RectTransform)DetailRoot.transform);DetailRoot.AddComponent<SafeArea>();DetailRoot.SetActive(false);ItemPortrait.Sprites=ItemSprites;Primary.onClick.AddListener(Commit);Info.onClick.AddListener(()=>OpenRecipe(recipe));Motion.onClick.AddListener(()=>{game.Act(v=>{var next=v.Copy();next.Workshop.reducedMotion=!next.Workshop.reducedMotion;return next;});Forge.SetReduced(game.State.Workshop.reducedMotion);UpdateView(true);});transform.Find("WorkshopTabs/Blueprints").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("blueprints"));transform.Find("WorkshopTabs/Inventory").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("inventory"));transform.Find("WorkshopTabs/Materials").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("components"));transform.Find("WorkshopOptions/FusionMode").GetComponent<Button>().onClick.AddListener(()=>ChangeMode("fusion"));DetailRoot.transform.Find("DetailPanel/CloseItemDetail").GetComponent<Button>().onClick.AddListener(CloseDetail);batch=WorkshopUIFactory.Button("BatchQuantity",transform.Find("WorkshopOptions"),"×1",()=>{int[] choices={1,3,10,100};quantity=choices[(Array.IndexOf(choices,quantity)+1)%choices.Length];UpdateView(true);});UpdateView(true);}
         void OnDestroy(){if(DetailRoot!=null)Destroy(DetailRoot);}
         void OnDisable(){Forge?.Cancel();if(DetailRoot!=null)DetailRoot.SetActive(false);}
         void Update(){if(game!=null)UpdateView(false);}
@@ -43,7 +43,7 @@ namespace IdleIntelligence.Runtime
             {
                 string type=ItemBalance.Items[recipe].Id;if(!s.Workshop.learned[recipe]){game.Act(v=>Workshop.Learn(v,type));UpdateView(true);return;}
                 var q=Workshop.Quote(s,type);if(!q.Allowed)return;var components=q.Components.Select((amount,index)=>new{amount,index}).Where(c=>c.amount>0).Select(c=>c.index).ToArray();
-                if(game.Act(v=>Workshop.Craft(v,type,ticket))){var result=game.State.Workshop.inventory.Last().Copy();UpdateView(true);Forge.Play(Array.Empty<ItemInstance>(),components,result,s.Workshop.reducedMotion);}
+                if(game.Act(v=>v.Workshop.revision==ticket?Workshop.CraftBatch(v,type,quantity):v)){var result=game.State.Workshop.inventory.Last().Copy();UpdateView(true);Forge.Play(Array.Empty<ItemInstance>(),components,result,s.Workshop.reducedMotion);}
             }
         }
         void UpdateView(bool force)
@@ -51,7 +51,7 @@ namespace IdleIntelligence.Runtime
             var s=game.State;var w=s.Workshop;bool stockChanged=w.revision!=lastRevision||w.inventory.Length!=lastInventory;double amount=s.Data.ToDouble();bool dataChanged=Math.Abs(amount-lastData)>=1;
             if(!force&&!stockChanged&&!dataChanged)return;lastRevision=w.revision;lastData=amount;lastInventory=w.inventory.Length;
             selection.RemoveAll(id=>Item(id)==null);Motion.GetComponentInChildren<Text>().text=w.reducedMotion?"Bewegung aus":"Bewegung an";ForgePanel.SetActive(mode=="blueprints"||mode=="fusion");Equipment.gameObject.SetActive(mode=="inventory");
-            Stock.text="Komponenten "+w.components.Sum()+"   ·   Bauplanfragmente "+w.fragments;
+            if(batch!=null){batch.GetComponentInChildren<Text>().text="×"+quantity;batch.interactable=PrestigeRules.Has(s,"W07");}Stock.text="Komponenten "+w.components.Sum()+"   ·   Bauplanfragmente "+w.fragments;
             if(!Forge.IsAnimating)
             {
                 for(int i=0;i<3;i++)Forge.Inputs[i].Bind(mode=="fusion"&&selection.Count>i?Item(selection[i]):null,null,mode=="fusion"?"+":"Material");
@@ -62,7 +62,7 @@ namespace IdleIntelligence.Runtime
             }
             else
             {
-                var d=ItemBalance.Items[recipe];var q=Workshop.Quote(s,d.Id);RecipeTitle.text=d.Name;Cost.text=Costs(q)+(q.Reason!=null?"\n"+q.Reason:"");Primary.GetComponentInChildren<Text>().text=w.learned[recipe]?"Sofort herstellen":"Bauplan lernen · "+d.BlueprintPrice+" Fragmente";Primary.interactable=game.Writable&&(w.learned[recipe]?q.Allowed:Workshop.LearnBlock(s,recipe)==null);Info.interactable=true;
+                var d=ItemBalance.Items[recipe];var q=Workshop.Quote(s,d.Id);RecipeTitle.text=d.Name;Cost.text=(quantity>1?"×"+quantity+" · Kosten je Item: ":"")+Costs(q)+(q.Reason!=null?"\n"+q.Reason:"");Primary.GetComponentInChildren<Text>().text=w.learned[recipe]?"Sofort herstellen":"Bauplan lernen · "+d.BlueprintPrice+" Fragmente";Primary.interactable=game.Writable&&(w.learned[recipe]?q.Allowed:Workshop.LearnBlock(s,recipe)==null);Info.interactable=true;
             }
             if(force||stockChanged)BuildRows();
         }
@@ -74,7 +74,7 @@ namespace IdleIntelligence.Runtime
             {
                 WorkshopUIFactory.Label("Sources",Rows,"Quellen: bezahlte Hardware-Meilensteine und Analysen.",13,40);
                 var focus=WorkshopUIFactory.Button("AnalysisFocus",Rows,"Analysefokus: "+(w.focus<0?"Alle Familien":new[]{"Basis","Halbleiter","Photonik","Frontier","Quanten"}[w.focus]),()=>{game.Act(v=>{var next=v.Copy();int f=next.Workshop.focus;do{f++;if(f>4){f=-1;break;}}while(!MaterialAnalysis.Access(next,f));next.Workshop.focus=f;next.Workshop.revision++;return next;});UpdateView(true);});focus.interactable=game.Writable;
-                for(int i=0;i<ItemBalance.Modules.Length;i++){int index=i;var d=ItemBalance.Modules[i];var b=WorkshopUIFactory.Button("module-"+d.Id,Rows,d.Name+" ×"+w.modules[i]+(w.hasModuleJob?" · Modulauftrag läuft":" · "+d.Data+" Daten / "+d.Work+" Arbeitssek."),()=>{game.Act(v=>Workshop.StartModule(v,index));UpdateView(true);});b.interactable=game.Writable&&!w.hasModuleJob&&Game.Level(s,"blueprints")>0&&s.Data.CompareTo(ScientificNumber.From(d.Data))>=0&&!d.Costs.Where((cost,c)=>w.components[c]<cost).Any();}
+                for(int i=0;i<ItemBalance.Modules.Length;i++){int index=i;var d=ItemBalance.Modules[i];var b=WorkshopUIFactory.Button("module-"+d.Id,Rows,d.Name+" ×"+w.modules[i]+(w.hasModuleJob?" · Modulauftrag läuft":" · "+d.Data+" Daten / "+d.Work+" Arbeitssek."),()=>{game.Act(v=>Workshop.ModuleBatch(v,index,quantity));UpdateView(true);});b.interactable=game.Writable&&s.Prestige.moduleQueue.Length+quantity<=100&&Game.Level(s,"blueprints")>0&&s.Data.CompareTo(ScientificNumber.From(d.Data*quantity))>=0&&!d.Costs.Where((cost,c)=>w.components[c]<cost*quantity).Any();}
                 for(int i=0;i<ItemBalance.Analyses.Length;i++){int index=i;var d=ItemBalance.Analyses[i];var b=WorkshopUIFactory.Button("analysis-"+d.Id,Rows,d.Id+" · "+d.Cost+" Daten"+(MaterialAnalysis.Block(s,i)!=null?" · "+MaterialAnalysis.Block(s,i):""),()=>{game.Act(v=>MaterialAnalysis.Start(v,index));UpdateView(true);});b.interactable=game.Writable&&MaterialAnalysis.Block(s,i)==null;}
                 for(int i=0;i<w.components.Length;i++)WorkshopUIFactory.Label("component-"+i,Rows,ItemBalance.ComponentNames[i]+"  ×"+w.components[i],14,34);
                 return;
@@ -98,7 +98,7 @@ namespace IdleIntelligence.Runtime
                 portrait.Button.onClick.AddListener(()=>{if(mode=="fusion")ToggleSelection(i.id);else OpenItem(i.id);});var label=WorkshopUIFactory.Label("Name",tile.transform,Workshop.Definition(i).Name,11);var rt=label.rectTransform;rt.anchorMin=new Vector2(0,0);rt.anchorMax=new Vector2(1,0);rt.pivot=new Vector2(.5f,0);rt.sizeDelta=new Vector2(0,32);label.alignment=TextAnchor.UpperCenter;
             }
         }
-        void OpenSlot(int n){OpenDetail(null,ItemBalance.Slots[n]+"\n"+(n<3?"Grundslot":n<6?"Freischaltung über "+new[]{"W01","W02","W06"}[n-3]+" oder einen permanenten Slot. Prestige ist noch nicht migriert.":"Modulares Modell K10"+(n==7?" ab Level 15":"")+". Modellentwicklung ist noch nicht migriert."));}
+        void OpenSlot(int n){OpenDetail(null,ItemBalance.Slots[n]+"\n"+(n<3?"Grundslot":n<6?"Freischaltung über "+new[]{"W01","W02","W06"}[n-3]+" oder einen permanenten Slot. Im INT-Netz kaufen; bleibt bei normalem Prestige erhalten.":"Modulares Modell K10"+(n==7?" ab Level 15":"")+". Modellentwicklung ist noch nicht migriert."));}
         public void OpenItem(string id)
         {
             var item=Item(id);if(item==null)return;var d=Workshop.Definition(item);var effects=d.Profiles[item.rarity].Distinct().Select(effect=>effect+": +"+(Workshop.Effect(game.State,item,effect)*100).ToString("F1")+" %");OpenDetail(item,d.Name+" · "+ItemBalance.Rarities[item.rarity]+"\nLevel "+item.level+" · Schmiede "+item.forge+"\n"+string.Join("\n",effects)+(d.Role!=""?"\nBedingter Gerätebonus: "+d.Role+" (Cap "+d.Cap+")":""));

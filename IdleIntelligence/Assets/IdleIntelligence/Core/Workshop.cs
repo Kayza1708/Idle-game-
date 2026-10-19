@@ -33,16 +33,16 @@ namespace IdleIntelligence.Core
         }
         public static double Amplifier(GameState s)
         {
-            var w=s.Workshop;double f=Math.Pow(ItemBalance.IntegrationBase,w.integration)*(w.activeModel=="K10"?ItemBalance.ModelItemBase+ItemBalance.ModelItemLevel*w.activeModelLevel:1);
+            var w=s.Workshop;double f=Math.Pow(PrestigeRules.Has(s,"T10")?PrestigeRules.V("integrationPerfect"):ItemBalance.IntegrationBase,w.integration)*(w.activeModel=="K10"?ItemBalance.ModelItemBase+ItemBalance.ModelItemLevel*w.activeModelLevel:1);
             for(int n=0;n<3;n++)if(w.nodes.Contains(new[]{"W05","W09","W10"}[n]))f*=ItemBalance.AmplifierNodes[n];return f;
         }
         public static double ModelCore(GameState s)=>string.IsNullOrEmpty(s.Workshop.activeModel)?1:ItemBalance.ModelCore*(1+ItemBalance.ModelCoreLevel*s.Workshop.activeModelLevel);
         public static double Effect(GameState s,ItemInstance i,string effect)
         {
             var d=Definition(i);int position=Array.IndexOf(d.Profiles[i.rarity],effect);if(position<0)return 0;
-            return ItemBalance.BaseEffect*ItemBalance.RarityFactors[i.rarity]*(1+ItemBalance.LevelStep*Math.Max(0,i.level-1))*i.legacyLevelFactor*(1+ItemBalance.ForgeStep*i.forge)*Amplifier(s)*d.Weights[position];
+            return ItemBalance.BaseEffect*ItemBalance.RarityFactors[i.rarity]*(1+ItemBalance.LevelStep*Math.Max(0,i.level-1))*i.legacyLevelFactor*(1+ItemBalance.ForgeStep*i.forge)*Amplifier(s)*d.Weights[position]*(position==1&&PrestigeBalance.SecondaryNodes.Any(id=>PrestigeRules.Has(s,id))?PrestigeRules.V("legacySecondaryMultiplier"):position==2&&PrestigeBalance.TertiaryNodes.Any(id=>PrestigeRules.Has(s,id))?PrestigeRules.V("legacyTertiaryMultiplier"):1);
         }
-        public static double Bonus(GameState s,string effect)=>Equipped(s).Sum(i=>Effect(s,i,effect));
+        public static double Bonus(GameState s,string effect)=>Equipped(s).Sum(i=>Effect(s,i,effect))*(1+s.Workshop.nodes.Where(id=>PrestigeBalance.LegacyItemBonuses.ContainsKey(id)).Sum(id=>PrestigeBalance.LegacyItemBonuses[id]));
         public static double Device(GameState s,string role,double at=-1)
         {
             double sum=0;var w=s.Workshop;double now=at<0?s.SavedAt:at;
@@ -129,8 +129,8 @@ namespace IdleIntelligence.Core
             var d=Definition(item);int target=item.level+1;double complexity=Math.Max(1,Math.Min(ItemBalance.LevelComplexityCap,Math.Sqrt(ItemBalance.Items[Index(item.type)].Data/ItemBalance.LevelComplexityBase)));
             // Upgrade complexity uses the original recipe, including starter overrides only for crafting.
             complexity=Math.Max(1,Math.Min(ItemBalance.LevelComplexityCap,Math.Sqrt(ItemBalance.OriginalRecipeData[Index(item.type)]/ItemBalance.LevelComplexityBase)));
-            long amount=(long)Math.Ceiling(ItemBalance.LevelMaterialBase*Math.Pow(ItemBalance.LevelMaterialGrowth,target-2));var costs=new double[s.Workshop.components.Length];costs[0]=amount;costs[d.BaseMaterial]=(long)Math.Ceiling(amount/ItemBalance.LevelBaseDivisor);if(target>=ItemBalance.LevelRareStart)costs[d.RareMaterial]=1+Math.Floor((target-ItemBalance.LevelRareStart)/ItemBalance.LevelRareStep);
-            double data=Math.Ceiling(ItemBalance.LevelDataBase*complexity*Math.Pow(ItemBalance.LevelDataGrowth,target-2));string reason=item.challengeCopy?"Geschützt":item.level>=ItemBalance.MaxLevel?"Maximallevel":s.Data.CompareTo(ScientificNumber.From(data))<0?"Zu wenig Daten":Enumerable.Range(0,costs.Length).Any(c=>s.Workshop.components[c]<costs[c])?"Komponenten fehlen":null;
+            double discount=PrestigeRules.Has(s,"W04")?PrestigeRules.V("upgradeDiscount"):1;long amount=(long)Math.Ceiling(ItemBalance.LevelMaterialBase*Math.Pow(ItemBalance.LevelMaterialGrowth,target-2)*discount);var costs=new double[s.Workshop.components.Length];costs[0]=amount;costs[d.BaseMaterial]=(long)Math.Ceiling(amount/ItemBalance.LevelBaseDivisor);if(target>=ItemBalance.LevelRareStart)costs[d.RareMaterial]=1+Math.Floor((target-ItemBalance.LevelRareStart)/ItemBalance.LevelRareStep);
+            double data=Math.Ceiling(ItemBalance.LevelDataBase*complexity*Math.Pow(ItemBalance.LevelDataGrowth,target-2)*discount);string reason=item.challengeCopy?"Geschützt":item.level>=ItemBalance.MaxLevel?"Maximallevel":s.Data.CompareTo(ScientificNumber.From(data))<0?"Zu wenig Daten":Enumerable.Range(0,costs.Length).Any(c=>s.Workshop.components[c]<costs[c])?"Komponenten fehlen":null;
             return new CraftQuote{Allowed=reason==null,Reason=reason,Components=costs,Data=data,Revision=s.Workshop.revision};
         }
         public static GameState Upgrade(GameState state,string id,long revision=-1)
@@ -157,7 +157,11 @@ namespace IdleIntelligence.Core
             int area=ResearchArea(id);double value=w.researchProgress[area]+1+Device(s,"blueprintProgress");
             if(value>=ItemBalance.BlueprintResearchThreshold){value-=(int)ItemBalance.BlueprintResearchThreshold;int known=Array.FindIndex(ItemBalance.Items,d=>!string.IsNullOrEmpty(d.Role)&&d.Area==new[]{"data","architecture","model","materials","automation"}[area]&&!w.knownBlueprints[Index(d.Id)]&&!w.learned[Index(d.Id)]&&Game.Level(s,"blueprints")>0&&d.Access!="prestige"&&MaterialAnalysis.Access(s,d.Access=="server"?2:d.Access=="campus"?3:4));if(known>=0)w.knownBlueprints[known]=true;else w.fragments++;}w.researchProgress[area]=value;w.revision++;
         }
+        public static GameState CraftBatch(GameState state,string type,int quantity)
+        {if(quantity<1||quantity>ItemBalance.MaxCraft||quantity>1&&!PrestigeRules.Has(state,"W07"))return state;var q=Quote(state,type);if(!q.Allowed||state.Data.CompareTo(ScientificNumber.From(q.Data*quantity))<0||q.Components.Where((n,c)=>n*quantity>state.Workshop.components[c]).Any()||q.Modules.Where((n,c)=>n*quantity>state.Workshop.modules[c]).Any())return state;var s=state;for(int i=0;i<quantity;i++){if(i>0){s=s.Copy();s.Workshop.nextId--;}var next=Craft(s,type);if(ReferenceEquals(next,s))return state;s=next;}return s;}
+        public static GameState ModuleBatch(GameState state,int n,int quantity)
+        {if(n<0||n>=ItemBalance.Modules.Length||quantity<1||quantity>100||state.Prestige.moduleQueue.Length+quantity>100)return state;var s=state;for(int i=0;i<quantity;i++){var saved=s.Prestige.moduleQueue;var unit=s.Copy();unit.Prestige.moduleQueue=Array.Empty<Job>();var next=StartModule(unit,n);if(ReferenceEquals(next,unit))return state;next.Prestige.moduleQueue=saved.Concat(next.Prestige.moduleQueue).ToArray();s=next;}return s;}
         public static GameState StartModule(GameState state,int n)
-        {if(n<0||n>=ItemBalance.Modules.Length||Game.Level(state,"blueprints")==0||state.Workshop.hasModuleJob)return state;var d=ItemBalance.Modules[n];if(state.Data.CompareTo(ScientificNumber.From(d.Data))<0||Enumerable.Range(0,d.Costs.Length).Any(c=>state.Workshop.components[c]<d.Costs[c]))return state;var s=state.Copy();s.Data=s.Data.Subtract(ScientificNumber.From(d.Data));for(int c=0;c<d.Costs.Length;c++)s.Workshop.components[c]-=(long)d.Costs[c];s.Workshop.nextId++;s.Workshop.hasModuleJob=true;s.Workshop.moduleJob=new Job{id=d.Id,required=d.Work};return Changed(s);}
+        {if(n<0||n>=ItemBalance.Modules.Length||Game.Level(state,"blueprints")==0||state.Prestige.moduleQueue.Length>=100)return state;var d=ItemBalance.Modules[n];if(state.Data.CompareTo(ScientificNumber.From(d.Data))<0||Enumerable.Range(0,d.Costs.Length).Any(c=>state.Workshop.components[c]<d.Costs[c]))return state;var s=state.Copy();s.Data=s.Data.Subtract(ScientificNumber.From(d.Data));for(int c=0;c<d.Costs.Length;c++)s.Workshop.components[c]-=(long)d.Costs[c];s.Workshop.nextId++;var job=new Job{id=d.Id,required=d.Work};if(!s.Workshop.hasModuleJob){s.Workshop.hasModuleJob=true;s.Workshop.moduleJob=job;}else s.Prestige.moduleQueue=s.Prestige.moduleQueue.Concat(new[]{job}).ToArray();return Changed(s);}
     }
 }

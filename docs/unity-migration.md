@@ -1,6 +1,6 @@
 # Unity-Rewrite: Bestand und Migrationsabnahme
 
-Stand: 19.10.2026. Referenz: tatsächlicher TypeScript-Arbeitsbaum auf `codex/unity-rewrite`, HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
+Stand: 19.10.2026. Ursprüngliche Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
 ## Fortschritt: erster spielbarer Abschnitt
 
@@ -10,7 +10,16 @@ Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen 
 
 Der nächste [spielbare Abschnitt](unity-playable-slice.md#items-und-schmiede-mit-play-testen) enthält 20 Komponenten, bezahlte Hardwarepakete/passive Funde, sechs Analysen, zwei Modulrezepte, Bauplanlernen/-meisterschaft, den vollständigen 30-Typen-/sechs-Seltenheiten-Katalog, Inventar, Ausrüsten/Ablegen/Sperren/Levelverbesserung und sofortige Herstellung/Fusion. Originalkosten und Erhaltungsregeln werden gegen 509 zusätzliche TypeScript-Fälle geprüft. Gemeinsame Porträts/Formen/Farben/Details und kosmetische Schmiedeanimationen sind an sofort gespeicherte Transaktionen gebunden. Unity-Save v1 wird mit Originalkopie nach v2 ergänzt. [Prüfnachweis](unity-items-verification.json) und [tatsächlicher Mitschnitt](recordings/unity-forge.mp4).
 
-Die vollständigen Systemzeilen unten bleiben offen: Prestige-/Modellerwerb, Erkenntnisarchiv-Freischaltung im aktuellen V2, restliche Effektverbraucher, Zerlegen, Foundries, Stapelherstellung, Fragmentumwandlung, Legacy-Queues und Web-Import sind damit nicht als vollständig migriert abgenommen. TypeScript, iOS und lokale Backups bleiben erhalten.
+Die vollständigen Systemzeilen unten bleiben offen: Axiom-/Modellerwerb, Erkenntnisarchiv-Freischaltung im aktuellen V2, restliche Effektverbraucher, Zerlegen, vollständige Foundries, Fragmentumwandlung, Legacy-Queues und Web-Import sind damit nicht als vollständig migriert abgenommen. TypeScript, iOS und lokale Backups bleiben erhalten.
+
+## Fortschritt: normales INT-Prestige
+
+[INT-Umfang, Resetmatrix und Prüfbericht](unity-int-prestige.md): alle 60 aktuellen Knoten, exakter Einkommens-/Anspruchsledger, Guthaben/Vergabe, normale Resets und ihre Erhaltung, Integrationstraining, bis zu vier Labs, benötigte Queues/Automationen, zusätzliche permanente Slots und Mengenverträge. Verbundenes Netz mit sechs Bereichen, Pan/Pinch und kosmetischer Resetanimation nach dauerhaftem Transaktionssave. 380 neue gemeinsame technische Referenzfälle und ein frischer natürlicher Lauf bis zum ersten Prestige; siehe [Prüfdaten](unity-int-verification.json). Unity-Saves v1/v2 migrieren verlustfrei nach v3 mit bytegleicher Originalkopie; historischer INT-Einkommensanspruch wurde früher nicht gespeichert und wird nicht erfunden.
+
+- [x] Normales INT-V2-Prestige und alle 60 Knoten für die bereits portierten Systeme; keine Vorgängerpflicht und keine Balanceänderung.
+- [x] Zusätzliche Itemslots, Integration, Trainings-/Forschungsplanung und Hardware-Autokäufer als benötigte INT-Abhängigkeiten.
+- [ ] Axiome und neue KI-Modelle als nächster Abschnitt; I08-Erkenntnis ist gespeichert, neue Modellverbraucher fehlen.
+- [ ] Restliche Foundry-/Forschung-/Planer-/Meta-/Challengeverbraucher und Geräte-/Playerabnahme. Die breiten Systemzeilen bleiben entsprechend offen.
 
 ## Lokale Einrichtung und Nachweis
 
@@ -49,7 +58,7 @@ Alle folgenden Kriterien bleiben als vollständige Systemabnahme offen; den nach
 | [ ] | Inventar, Seltenheiten, Level, Slots, Ausrüsten, Sperren, Zerlegen, Spezialeffekte/Builds | `inventory.ts`, `itemMechanics.ts`, `deviceEffects.ts`, `ItemPresentation.tsx` | Vollständiger `ItemTypeId`-Katalog; Quellen, Caps, effektive Boni, Slotlimits und Effektvorschau vergleichen |
 | [ ] | Modellschmiede/Foundry, Infrastruktur, Verbesserung, Fusion und Planer | `foundries.ts`, `progressionAutomation.ts`, `ForgeScreen.tsx`, `ItemCombinations.tsx` | Aktuellen Sofortpfad und alte Queue-/Recoverydaten erhalten; keine erneute Zahlung alter Jobs |
 | [ ] | Modelle entwickeln, upgraden, wählen, Wissensfortschritt, Phasenwechsel | `progression.ts`, `progressionWork.ts`, `modelForgeMigration.ts` | Kosten, Transfer-/Integrationswirkung, aktive Auswahl und Automatik paritätisch testen |
-| [ ] | Prestige V2, INT-Anspruch, Baum, Unlocks, Reset und Runstart | `progressionReset.ts`, `progression.ts`, `prestige.ts`, `prestigeTree.ts` | Reset-Retention-Matrix und Vorschau mit tatsächlichem Ergebnis vergleichen; Legacy-Knoten berücksichtigen |
+| [x] | Normales Prestige V2, INT-Anspruch, alle 60 Knoten, Unlocks, Reset und Runstart | `progressionReset.ts`, `progression.ts`, `prestige.ts`, `prestigeTree.ts` | [INT-Prüfbericht](unity-int-prestige.md): Reset-Retention-Matrix, 380 gemeinsame Fälle, drei Folgeresets, natürlicher Erstlauf; Axiome/Modelle separat offen |
 | [ ] | Axiom-Reset/-Upgrades, permanente Archive und Prestige-Agent | `progressionReset.ts`, `economy.ts`; `axiom.test.ts`, `axiomUpgrades.test.ts`, `runStart.test.ts` | Entitlement, Schwellen, Kosten, Aufbewahrung, Mindestlaufzeit und Wartegründe vergleichen |
 | [ ] | Hardware-Autokäufer, Reserve, Forschung, Training, Analyse-, Craft-/Fusion-/Prestigeplaner | `economy.ts`, `researchAutomation.ts`, `progressionAutomation.ts`, `progressionWork.ts` | Gleiche Aktionsreihenfolge und Zahlungsregeln bei Online-/Offlinefortschritt |
 | [ ] | Challenges, Stufen/Kapitel, Einschränkungen, Sterne, Bestzeiten, Hauptspielisolation | `challengeStages.ts`, `retention.ts`, `simulation.ts`, `ChallengeRunPanel.tsx` | Start/Abbruch/Abschluss/Reload; separaten Hauptzustand, passive Fortschritte und Einmalbelohnungen vergleichen |

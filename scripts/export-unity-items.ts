@@ -68,6 +68,7 @@ let sockets={...three,nodes:['W01','W02','W06'],progression:{...three.progressio
 for(const hardware of hardwareIds)for(const threshold of Object.keys(BALANCE.hardwareMaterialAmounts)){add('paid-package-'+hardware+'-'+threshold,addCreditsScientific(rich,S.fromString('1e350')),'hardware-buy',hardware,[threshold]);}
 for(const id of modules)add('complete-module-'+id,rich,'module-complete',id);
 for(const id of Object.keys(BALANCE.progression.analyses)){let prepared={...rich,researchLevels:{...rich.researchLevels,blueprintAnalysis:3}};add('complete-'+id,prepared,'analysis-complete',id);}
+add('complete-hardware-W03',{...rich,nodes:['W03']},'analysis-complete','hardware-short');
 const json=JSON.stringify({sourceHash,itemIds:items,cases},null,2)+'\n';
 for(const[path,content]of [[root+'Core/ItemBalance.g.cs',cs],[root+'Tests/EditMode/ItemReferenceCases.json',json]]){if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==content)throw Error('Stale Unity items export '+path)}else writeFileSync(path,content)}
 console.log('Unity items:',items.length,'types,',cases.length,'reference cases',sourceHash);
