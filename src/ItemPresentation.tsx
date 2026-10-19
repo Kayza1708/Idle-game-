@@ -8,7 +8,7 @@ export const rarityColors={common:'#b7cad8',uncommon:'#35ef88',rare:'#36adff',ep
 /** The same actual sprite, rarity treatment and family mark in every item surface. */
 export function ItemPortrait({item,size='tile',count=1,level=true,surface='card',equipped=false}:{item:Item;size?:'mini'|'tile'|'hero';count?:number;level?:boolean;surface?:'card'|'inset';equipped?:boolean}){
  const family=itemTypes[item.type].slot;
- return <span className={`item-portrait portrait-${size} portrait-${item.rarity} portrait-${surface}`} data-item-rarity={item.rarity} data-item-family={family} style={{'--item-color':rarityColors[item.rarity]} as CSSProperties} aria-hidden="true"><span className="item-rarity-sweep"/><ItemArt type={item.type}/><span className={`item-family-mark family-${family}`}/>{level&&<span className="item-portrait-level">Lv {item.level}</span>}{count>1?<span className="item-portrait-count">×{count}</span>:equipped&&<span className="item-equipped-mark">✓</span>}</span>;
+ return <span className={`item-portrait portrait-${size} portrait-${item.rarity} portrait-${surface}`} data-item-rarity={item.rarity} data-item-family={family} style={{'--item-color':rarityColors[item.rarity]} as CSSProperties} aria-hidden="true"><ItemArt type={item.type}/><span className={`item-family-mark family-${family}`}/>{level&&<span className="item-portrait-level">Lv {item.level}</span>}{count>1?<span className="item-portrait-count">×{count}</span>:equipped&&<span className="item-equipped-mark">✓</span>}</span>;
 }
 /** A physical socket owns its frame. Equipped art is inserted directly, without another card. */
 export function ItemSocket({item,family,locked=false}:{item?:Item;family:'processor'|'core'|'research';locked?:boolean}){
