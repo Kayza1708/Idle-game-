@@ -29,7 +29,7 @@ namespace IdleIntelligence.Runtime
             double elapsed=Math.Max(0,(Now-State.SavedAt)/1000);var before=State.Credits;
             if(Writable)State=Game.Advance(State,Now);
             if(elapsed>10&&loaded.State!=null&&Writable)message="Willkommen zurück: +"+State.Credits.Subtract(before)+" Credits (Offline-Limit berücksichtigt)";
-            TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt)));
+            TapButton.transform.parent.gameObject.AddComponent<SignalView>().Initialize(this);TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt)));
             HardwareTab.onClick.AddListener(()=>Show("hardware"));TrainingTab.onClick.AddListener(()=>Show("training"));ResearchTab.onClick.AddListener(()=>Show("research"));SaveButton.onClick.AddListener(()=>{Tick();Save();Refresh();});
             ItemsTab.onClick.AddListener(()=>Show("items"));PrestigeTab.onClick.AddListener(()=>Show("prestige"));started=true;Show(tab);Save();Refresh();
         }

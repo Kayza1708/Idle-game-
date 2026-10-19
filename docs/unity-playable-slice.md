@@ -124,3 +124,7 @@ V1–8-Saves erhalten vor der Migration eine Originalkopie. Ihre Missionen und e
 ## Seasons mit Play testen
 
 In derselben Szene unter **Forschung → Seasons** Free/Premium, Levelbereiche und Sammlung öffnen. XP stammen aus echten Missionsclaims. Erreichte Free-Belohnungen abholen; verdiente Truhen darunter öffnen. Erhaltene Items sind im normalen Inventar ausrüstbar. **Sammlung** zeigt Artefakte und ihren tatsächlichen Produktionsfaktor. Premium bleibt ohne bestätigtes Entitlement gesperrt; keine vorgetäuschte Kaufbestätigung. Die vorherige Season ist nur während der Originalkulanz verfügbar. [Regeln und Prüfung](unity-seasons.md).
+
+## Aktive Signal-Drops mit Play testen
+
+Im Labor aktiv spielen: ohne Boni erscheint nach 90 aktiven Sekunden ein Signal mit zwölf Sekunden Restzeit. Es verwendet die vorhandene Komponentengrafik und ist direkt anklickbar. Forschung Signalprotokolle und ausgerüstete Drop-Effekte beeinflussen Häufigkeit und Qualität. Material-/Credit-/Daten-/Item-/Bauplanbelohnungen sowie Missionszähler werden durch die echte gespeicherte Transaktion vergeben. Offlinezeit erzeugt keine neuen Signale; abgelaufene und doppelt angeklickte Belege zahlen nichts. In No-Taps-Challenges bleibt das Einsammeln gesperrt. [Regeln und Nachweis](unity-signals.md).

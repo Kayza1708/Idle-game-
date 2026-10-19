@@ -7,7 +7,7 @@ namespace IdleIntelligence.Core
   const long Max=9007199254740991L;
   public static double Roll(string campaign,string key)
   {uint hash=2166136261;string text=campaign+":"+key;unchecked{for(int i=0;i<text.Length;i++){hash=(hash^text[i])*16777619;if(char.IsHighSurrogate(text[i])&&i+1<text.Length&&char.IsLowSurrogate(text[i+1]))i++;}hash^=hash>>16;hash*=0x7feb352d;hash^=hash>>15;}return hash/4294967296d;}
-  static string Blueprint(GameState s)
+  public static string Blueprint(GameState s)
   {if(Game.Level(s,"blueprints")==0)return "fragment";for(int i=0;i<MissionBalance.ExtendedIds.Length;i++){string id=MissionBalance.ExtendedIds[i],access=MissionBalance.ExtendedAccess[i];int n=Workshop.Index(id);if(!s.Workshop.learned[n]&&!s.Workshop.knownBlueprints[n]&&(access=="prestige"?s.Prestige.resets>0:s.Industry.families[access=="server"?2:access=="campus"?3:4]))return id;}return "fragment";}
   public static GameState EarnDaily(GameState state)
   {

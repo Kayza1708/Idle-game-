@@ -12,7 +12,7 @@ namespace IdleIntelligence.Core
             if(s.ModelLevel<0||s.ModelLevel>9007199254740991L||s.Hardware.Any(n=>n<0||n>9007199254740991L)||s.Research.Any(n=>n<0)||s.Quality<0||s.Efficiency<0||s.Taps<0||s.Overdrives<0||s.Combo<0||s.Combo>Balance.ComboMax||s.Charge<0||s.Charge>Balance.OverdriveCharge)throw new FormatException("Invalid counts");
             if(!ScientificNumber.Finite(s.SavedAt)||s.SavedAt<0||s.SavedAt>9007199254740991d||!ScientificNumber.Finite(s.LastTap)||s.LastTap < -1||!ScientificNumber.Finite(s.ActiveUntil)||s.ActiveUntil<0||!ScientificNumber.Finite(s.CooldownUntil)||s.CooldownUntil<0)throw new FormatException("Invalid clock");
             if(!new[]{"tap","hardware","production","credits","training","research","done"}.Contains(s.Tutorial))throw new FormatException("Invalid tutorial");
-            SeasonRules.Validate(s);MissionRules.Validate(s);RetentionRules.Validate(s);Lifetime.Validate(s);Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
+            Signals.Validate(s);SeasonRules.Validate(s);MissionRules.Validate(s);RetentionRules.Validate(s);Lifetime.Validate(s);Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
             ValidateJob(s.Training,new[]{"quality","efficiency","integration"});ValidateJob(s.ResearchJob,Balance.Research.Select(r=>r.Id).ToArray());
         }
         static void ValidateJob(Job j,string[] ids) { if(j!=null&&(!ids.Contains(j.id)||!ScientificNumber.Finite(j.required)||j.required<=0||!ScientificNumber.Finite(j.done)||j.done<0||j.done>j.required+1e-6))throw new FormatException("Invalid job"); }
@@ -169,7 +169,7 @@ namespace IdleIntelligence.Core
                 s=Industry.Settle(s);MaterialAnalysis.Advance(s,0);PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);
                 if(researchAutoActive)s.Prestige.researchAutoSeconds+=slice;if(s.Prestige.researchAutoSeconds+1e-7>=PrestigeRules.V("researchAutomationInterval")){s.Prestige.researchAutoSeconds%=PrestigeRules.V("researchAutomationInterval");s=PrestigeAutomation.ResearchAuto(s);}
             }
-            s=MissionRules.Roll(s,s.SavedAt);if(active)s.Lifetime.activeSeconds+=Math.Min(elapsed,limit);
+            s=MissionRules.Roll(s,s.SavedAt);if(active){s.Lifetime.activeSeconds+=Math.Min(elapsed,limit);Signals.Spawn(s,Math.Min(elapsed,limit));}
             // Consume even discarded offline time. Loading or resuming twice cannot replay it.
             s.SavedAt=now;ChallengeRules.PauseMain(s,now);return Guide(RetentionRules.UpdateOnboarding(MissionRules.InitializeAfterMigration(s,now)));
         }

@@ -2,6 +2,10 @@
 
 Stand: 19.10.2026. Ursprüngliche Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
+## Fortsetzung 20.10.2026: aktive Signal-Drops
+
+[Teilabschnitt 5a](unity-signals.md) ergänzt Originalspawns, drei Varianten, echte Forschung-/Itemqualität, Material-/Credit-/Daten-/Item-/Bauplanbelohnungen und den tatsächlichen Missions-/Achievementproduzenten. Saves v1–10 bleiben mit Originalkopien erhalten. Der restliche Shop/Gumball, Angebote, Boosts und Adapter bleiben offen. [Prüfdaten](unity-signals-verification.json).
+
 ## Fortsetzung 20.10.2026: V2-Seasons
 
 [Season-Abschnitt](unity-seasons.md): drei aktuelle Themen, 300 Free-/Premiumbelohnungen, exakte Claims, Materialien/Items, verdiente Truhen, Vitrine und tatsächlicher Artefakt-Einnahmenbonus. Save v10 erhält V1–9 mit Originalkopien und unveränderten Missions-/Seasonansprüchen. Premium benötigt das zugehörige Entitlement; keine SDKs oder erfundenen Käufe. [Prüfdaten](unity-seasons-verification.json). Legacy-Websaves und reale Geräte bleiben gesondert offen.

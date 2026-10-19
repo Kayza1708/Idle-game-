@@ -20,6 +20,7 @@
 - [x] 37 Achievementfamilien samt Claims/AP-Verbraucher, acht Laborziele und Profil/Postfach/Namensfilter mit Save-v8-Erhaltung portiert; zwölf statische Bedingungen vorhanden, zwei benötigen noch Seasons. [Teilabnahme 3b](unity-retention.md); Missionen bleiben offen.
 - [x] UTC-Missionen mit originalen 6/12/30 Aufgaben, Claims/Bonus/Ablauf, eingefrorenen Tagesbonusboxen und konservativer Save-v9-Migration implementiert; [Teilumfang und Prüfgrenzen](unity-missions.md). Vollständige Seasons, aktive Drop-Erzeugung und Story/Kapitel bleiben offen.
 - [x] Drei V2-Seasons mit 300 Originalbelohnungen, verdienten Truhen, Vitrine und echtem Artefakt-Einnahmenbonus portiert; Save-v10-Erhaltung und vorbereitete Premium-/XP-Referenzen getrennt von echten Käufen. [Umfang und Abnahme](unity-seasons.md).
+- [x] Aktive Signal-Drops mit Originaltiming, drei Varianten, echten Qualitäts-/Belohnungsregeln und Lifetime-/Missionsproduzenten portiert; konservative Save-v11-Erhaltung. [Teilabschnitt 5a](unity-signals.md).
 - [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Shop/aktive Drops/Gumball/Boosts, vorbereitete Adapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
