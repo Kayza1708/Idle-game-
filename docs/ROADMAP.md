@@ -13,7 +13,8 @@
 - [x] 24 gemeinsame TypeScript-Transaktions-/Ratenfälle und acht exakte Zahlenfälle, 13 EditMode- und drei PlayMode-Tests geprüft; TypeScript-Suite mit 1.845 Tests, Typecheck und Build erfolgreich.
 - [x] Itemabschnitt: Komponenten, bezahlte Materialpakete/Analysen, Baupläne/Meisterschaft, Inventar/Ausrüstung, Sofortherstellung/Fusion und gemeinsame Schmiededarstellung mit rein kosmetischen Animationen implementiert. 509 zusätzliche TS-Fälle, 18 EditMode- und sechs PlayMode-Tests; Save-v1-Migration mit Originalkopie. [Anleitung und Grenzen](unity-playable-slice.md).
 - [x] Normales INT-Prestige mit allen 60 Knoten, verbundenem Netz/Pan/Pinch, Integration, zusätzlichen Labs/Slots und benötigter Automation implementiert; 380 gemeinsame Fälle, natürlicher Erstlauf (39:38 simuliert), Save-v1/v2-Erhaltung nach v3. 25 EditMode-/9 PlayMode-Tests und 1.857 Vitest-Tests erfolgreich. [Prüfbericht](unity-int-prestige.md).
-- [ ] Übrige Systeme laut Migrationsliste portieren; als nächstes Axiome und neue KI-Modelle, danach vollständige Forschung, fehlende Itemverbraucher/Erwerbswege, sichere Web-Save-Migration und UI-/Sprach-/Lifecycle-Parität.
+- [x] Axiome/Modelle: 24 Knoten, zehn Modelle, geheimes Labor/Mira, echte Effekte, Planer, sichere Resets und Save-v1/v2/v3-Migration nach v4. 323 gemeinsame technische Fälle; [Umfang und Prüfgrenzen](unity-axioms-models.md).
+- [ ] Übrige Systeme laut Migrationsliste portieren; insbesondere volle Foundries/Synthese und Forschung, fehlende Itemverbraucher/Erwerbswege, sichere Web-Save-Migration und UI-/Sprach-/Lifecycle-Parität.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
 Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.

@@ -1,5 +1,7 @@
 # Unity: INT-Prestige und verbundenes Knotennetz
 
+Aktuelle Fortsetzung: [Axiome und neue KI-Modelle](unity-axioms-models.md) implementiert diese damaligen nächsten Schritte. Die folgenden Ergebnisse dokumentieren den INT-Abschnitt historisch.
+
 Stand: 19.10.2026. Erweiterung des bestehenden Spielabschnitts auf `codex/unity-rewrite`; Axiome und neue KI-Modelle bleiben der nächste Abschnitt. Der gesamte Rewrite ist nicht abgeschlossen.
 
 ## Spielregeln und Transaktionen

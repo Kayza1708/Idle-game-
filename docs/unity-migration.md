@@ -18,8 +18,16 @@ Die vollständigen Systemzeilen unten bleiben offen: Axiom-/Modellerwerb, Erkenn
 
 - [x] Normales INT-V2-Prestige und alle 60 Knoten für die bereits portierten Systeme; keine Vorgängerpflicht und keine Balanceänderung.
 - [x] Zusätzliche Itemslots, Integration, Trainings-/Forschungsplanung und Hardware-Autokäufer als benötigte INT-Abhängigkeiten.
-- [ ] Axiome und neue KI-Modelle als nächster Abschnitt; I08-Erkenntnis ist gespeichert, neue Modellverbraucher fehlen.
+- [x] Axiome und neue KI-Modelle im unten beschriebenen Folgeabschnitt; I08-Erkenntnis besitzt jetzt echte Modellverbraucher.
 - [ ] Restliche Foundry-/Forschung-/Planer-/Meta-/Challengeverbraucher und Geräte-/Playerabnahme. Die breiten Systemzeilen bleiben entsprechend offen.
+
+## Fortschritt: Axiome und neue KI-Modelle
+
+[Axiom-/Modellbericht](unity-axioms-models.md): alle 24 aktuellen Axiomknoten und zehn Modelle mit echten Verbrauchern in den portierten Systemen, gemeinsames Axiomnetz, Erhaltungsvorschau, geheimes Labor/Mira, verbleibender Zufallspool, Kosten/Upgrades, Modellwechsel und Slotverlust ohne Itemverlust. Benötigte Wiederkauf-/Analyse-/Fertigungs-/Fusions-/Axiomsnittler und Zerlegen ergänzt. 323 zusätzliche gemeinsame technische Fälle; [Prüfdaten](unity-meta-verification.json). Save-Versionen 1–3 migrieren mit Originalkopie nach v4. Frühere INT-/Itemberichte bleiben historische Nachweise.
+
+- [x] Vollständiger aktueller V2-Axiomkatalog und alle neuen KI-Modelle für die vorhandenen Unity-Systeme.
+- [x] Verlustfreie Erhaltung vorhandener Unity-Felder und sicher gespeicherte, kosmetische Erwerbs-/Resetbelege.
+- [ ] Weitere Foundry-/Synthese-/Forschungsverbraucher, Web-/Legacyimport und Geräteabnahme. Erkenntnisarchiv-Neuerwerb bleibt ungeklärt; keine Ersatzfreischaltung.
 
 ## Lokale Einrichtung und Nachweis
 
@@ -57,9 +65,9 @@ Alle folgenden Kriterien bleiben als vollständige Systemabnahme offen; den nach
 | [ ] | Module, sämtliche Itemrezepte, sofortige Herstellung, Mengenwahl und alte bezahlte Jobs | `craftingRecipes.ts`, `inventory.ts`, `progressionWork.ts` | Atomare Kosten/Auszahlung, ungültige Mengen, Legacy-Reservierungen, Save-/Reload-Sicherheit |
 | [ ] | Inventar, Seltenheiten, Level, Slots, Ausrüsten, Sperren, Zerlegen, Spezialeffekte/Builds | `inventory.ts`, `itemMechanics.ts`, `deviceEffects.ts`, `ItemPresentation.tsx` | Vollständiger `ItemTypeId`-Katalog; Quellen, Caps, effektive Boni, Slotlimits und Effektvorschau vergleichen |
 | [ ] | Modellschmiede/Foundry, Infrastruktur, Verbesserung, Fusion und Planer | `foundries.ts`, `progressionAutomation.ts`, `ForgeScreen.tsx`, `ItemCombinations.tsx` | Aktuellen Sofortpfad und alte Queue-/Recoverydaten erhalten; keine erneute Zahlung alter Jobs |
-| [ ] | Modelle entwickeln, upgraden, wählen, Wissensfortschritt, Phasenwechsel | `progression.ts`, `progressionWork.ts`, `modelForgeMigration.ts` | Kosten, Transfer-/Integrationswirkung, aktive Auswahl und Automatik paritätisch testen |
+| [x] | Neue V2-KI-Modelle entwickeln, upgraden, wählen, Wissensfortschritt, Phasenwechsel | `progression.ts`, `progressionWork.ts`, `modelForgeMigration.ts` | [Axiom-/Modellbericht](unity-axioms-models.md): Pool/RNG, Kosten, alle zehn Modelle, Integration, aktive Auswahl/Slots und Phasen; Legacy-/Webimport separat offen |
 | [x] | Normales Prestige V2, INT-Anspruch, alle 60 Knoten, Unlocks, Reset und Runstart | `progressionReset.ts`, `progression.ts`, `prestige.ts`, `prestigeTree.ts` | [INT-Prüfbericht](unity-int-prestige.md): Reset-Retention-Matrix, 380 gemeinsame Fälle, drei Folgeresets, natürlicher Erstlauf; Axiome/Modelle separat offen |
-| [ ] | Axiom-Reset/-Upgrades, permanente Archive und Prestige-Agent | `progressionReset.ts`, `economy.ts`; `axiom.test.ts`, `axiomUpgrades.test.ts`, `runStart.test.ts` | Entitlement, Schwellen, Kosten, Aufbewahrung, Mindestlaufzeit und Wartegründe vergleichen |
+| [x] | Aktuelle 24 V2-Axiomknoten, Axiom-Reset/-Upgrades, Archive und Axiom-/Prestige-Agent | `progressionReset.ts`, `economy.ts`; `axiom.test.ts`, `axiomUpgrades.test.ts`, `runStart.test.ts` | [Axiom-/Modellbericht](unity-axioms-models.md): tatsächliche Schwellen, Kosten, Erhaltung, mehrere Zyklen, Mindestlaufzeit, Wartegründe und sichere Belege |
 | [ ] | Hardware-Autokäufer, Reserve, Forschung, Training, Analyse-, Craft-/Fusion-/Prestigeplaner | `economy.ts`, `researchAutomation.ts`, `progressionAutomation.ts`, `progressionWork.ts` | Gleiche Aktionsreihenfolge und Zahlungsregeln bei Online-/Offlinefortschritt |
 | [ ] | Challenges, Stufen/Kapitel, Einschränkungen, Sterne, Bestzeiten, Hauptspielisolation | `challengeStages.ts`, `retention.ts`, `simulation.ts`, `ChallengeRunPanel.tsx` | Start/Abbruch/Abschluss/Reload; separaten Hauptzustand, passive Fortschritte und Einmalbelohnungen vergleichen |
 | [ ] | Daily/Weekly/Monthly-Aufgaben, Kapitelquests, Erfolge, Mailbox und Profil | `missions.ts`, `achievements.ts`, `retention.ts`, `profileName.ts` | Periodenwechsel, Baselines, Claim-IDs, Kapitelaufstieg und permanente Belohnungen identisch |

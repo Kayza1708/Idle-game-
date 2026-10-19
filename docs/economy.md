@@ -713,3 +713,8 @@ Keine Balanceänderung. `ItemBalance.g.cs` und 509 zusätzliche gemeinsame Fäll
 ## Unity-INT-Abschnitt · 19.10.2026
 
 Keine Balanceänderung. Der reproduzierbare `PrestigeBalance.g.cs`-Export übernimmt alle 60 Knoten, Originalpreise/-formeln, tatsächliche Effekte, Reset-/Erhaltungsregeln und Netzgeometrie. Auch die im aktuellen TypeScript noch vorhandenen zusätzlichen gemeinsamen Itembonus-Poolbeiträge W01 +0,40 / W02 +0,75 / W06 +1,25 werden unverändert übernommen und sichtbar dokumentiert. Gemeinsame 370 technische Fälle und ein getrennter natürlicher frischer Lauf prüfen den Port; keine erhöhten Testbestände im regulären Spiel. Axiome und neue KI-Modelle bleiben offen. [Details und Prüfgrenzen](unity-int-prestige.md).
+
+
+## Unity-Axiome und Modelle · 19.10.2026
+
+Keine Balanceänderung und keine neuen Formeln. `MetaBalance.g.cs` übernimmt den aktuellen 24-Knoten-/10-Modell-Katalog samt Originalpreisstaffeln, A02-Tail und bestehenden Recoveryregeln reproduzierbar. Axiom-, Modell-, Slot-, Trainings-, Budget- und Planereffekte werden an die bestehenden Unity-Transaktionen angeschlossen. 323 zusätzliche gemeinsame technische Fälle, darunter mehrere Axiomzyklen, tatsächliche Erkenntnisproduktion und Restmengen, prüfen die Übernahme. Das Erkenntnisarchiv erhält keinen erfundenen Lern-/Gratisweg. [Umfang und fehlende Verbraucher](unity-axioms-models.md).
