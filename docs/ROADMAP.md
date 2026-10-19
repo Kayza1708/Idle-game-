@@ -21,6 +21,8 @@ Stand: Bereinigung nach main `d3040a9` (PR #125). Frühere doppelte Arbeitsproto
 
 ## Implementiert
 
+- [x] Verbundenes INT-/Axiomnetz mit Verschieben, Zoom und Tastatur; Craft-/Fusionsbewegung direkt in der ursprünglichen Schmiede. Browserprüfung und Grenzen: [Prestigenetz und Schmiedebewegung](network-forge-motion.md).
+
 - [x] V2-Prestige, Axiome, Modelle und zugehörige Save-/Offline-Verträge; siehe [V2-Stabilisierung](v2-stability-balance-report.md).
 - [x] Sofortiges Crafting und Fusion sowie drei vorbereitete Seasons; siehe [Items und Seasons](instant-items-seasons.md).
 - [x] Gemeinsame Itemdarstellung, überarbeitete Oberflächen und freigegebenes Idle-Intelligence-Branding.
