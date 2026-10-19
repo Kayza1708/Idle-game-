@@ -50,7 +50,7 @@ namespace IdleIntelligence.Core
             // Modules were paid at enqueue time. Release only waiting contracts, as in TS.
             foreach(var job in p.moduleQueue){var d=ItemBalance.Modules.First(m=>m.Id==job.id);s.Data=s.Data.Add(ScientificNumber.From(d.Data));for(int c=0;c<d.Costs.Length;c++)s.Workshop.components[c]+=(long)d.Costs[c];}p.moduleQueue=Array.Empty<Job>();
             s.Industry.trainingStarted=0;s.Workshop.runStartedAt=s.SavedAt;s.Workshop.qualityCompletions=s.Workshop.efficiencyCompletions=0;s.Workshop.lastTrack="";p.milestones=Array.Empty<string>();p.autoSeconds=p.otherAutoSeconds=0;p.resetIntent=false;p.intentResearch=Array.Empty<string>();p.intentTraining=p.intentAnalysis=p.intentCrafting=false;
-            s.Combo=s.Charge=0;s.LastTap=-1;s.ActiveUntil=s.CooldownUntil=0;s.Workshop.revision++;
+            s.Lifetime.prestiges++;s.Lifetime.intEarned+=gain.ToDouble();s.Lifetime.runMilestoneClasses=Array.Empty<string>();s.Combo=s.Charge=0;s.LastTap=-1;s.ActiveUntil=s.CooldownUntil=0;s.Workshop.revision++;
             if(ChallengeRules.Active(s)){var m=s.Challenges.Run.metrics;m.minimumINT=m.prestiges==0||ScientificNumber.FromData(m.minimumINT).CompareTo(gain)>0?gain.ToData():m.minimumINT;m.prestiges++;}s=MetaAutomation.Rebuild(MetaRules.Phase(s,0));if(Has(s,"I06"))s=Game.Buy(s,"calculator");return s;
         }
         public static void Validate(GameState s)

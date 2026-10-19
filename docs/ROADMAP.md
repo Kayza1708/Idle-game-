@@ -16,6 +16,7 @@
 - [x] Axiome/Modelle: 24 Knoten, zehn Modelle, geheimes Labor/Mira, echte Effekte, Planer, sichere Resets und Save-v1/v2/v3-Migration nach v4. 323 gemeinsame technische Fälle; [Umfang und Prüfgrenzen](unity-axioms-models.md).
 - [x] Aktuellen V2-Forschungs-/Industriekern portiert: alle 26 Forschungen, Raten, Foundry, Synthese, Durchbrüche, Fragmenttransaktionen und Save-v5-Migration mit Originalen; [221 Referenzfälle und tatsächliche Prüfergebnisse](unity-industry.md).
 - [x] 690 V2-Challenge-Laufstufen mit eigenem Laufzustand, Hauptspielpause, sicheren Rückkehrtransaktionen, echter Regelwirkung und Save-v6-Migration; [Bericht](unity-challenges.md). Zwölf statische Langzeit-Challenges folgen mit ihren Abhängigkeiten.
+- [x] Persistente Ereigniszähler/Mastery für vorhandene Produzenten und aktiver/offliner Zeitkontext als Abhängigkeit von Missionen/Achievements, mit konservativer Save-v7-Migration; [Umfang](unity-lifetime.md). Abschnitt 3 selbst bleibt offen.
 - [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Challenges, Missionen/Profil, Seasons, Shop/Belohnungen, vorbereitete Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 

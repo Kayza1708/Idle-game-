@@ -106,3 +106,7 @@ Der aktuelle funktionale Abschnitt wird in [unity-industry.md](unity-industry.md
 ## Challenge-Läufe mit Play testen
 
 In `Assets/Scenes/IdleIntelligence.unity` Play starten, **Forschung → Challenges** öffnen. Nach erstem Prestige und geforderter Hardwareentdeckung Familie/Stufe, Loadout und gegebenenfalls Verbindungen auswählen. Start speichert sofort; Ziele und Abbruch/Abschluss sind anschließend hier erreichbar. Hauptspiel und bezahlte Jobs pausieren auch offline. Wiederholte Erstabschlussbelohnungen sind gesperrt. Vollständige Regeln, Save-v6-Migration und offene Langzeit-Challenges: [Challenge-Bericht](unity-challenges.md). Testbilder verwenden ausdrücklich finanzierte temporäre Zustände.
+
+## Dauerhafte Statistik und Mastery
+
+Dieselbe Szene öffnen, Play und **Forschung → Dauerhafter Fortschritt** wählen. Käufe, Arbeit, Materialien und aktive Zeit stammen aus echten Aktionen; die Mastery-Liste ist scrollbar. Bei alten Ständen weist die Ansicht auf nicht verfügbare historische Zähler hin. Alte Bestände bleiben bestehen; es gibt keine erfundenen rückwirkenden Ereignisse. Missionen/Achievement-Claims folgen als nächster Teil von Abschnitt 3. [Details](unity-lifetime.md).

@@ -1,0 +1,136 @@
+{
+  "date": "2026-10-19",
+  "unityVersion": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "baseCommit": "37a8e6a0",
+  "scope": "Dependency subsection 3a: lifetime producers, mastery, activity context, statistics UI and save v7. Missions/achievements/profile and complete migration remain open.",
+  "typescriptGameplayChanged": false,
+  "saveVersion": 7,
+  "migrates": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "references": {
+    "producerTransactions": 98,
+    "fundedTechnicalStates": true
+  },
+  "compile": {
+    "log": "/tmp/unity-lifetime-compile-final.log",
+    "exitCode": 0
+  },
+  "tests": {
+    "editMode": {
+      "id": "2",
+      "testcasecount": "42",
+      "result": "Passed",
+      "total": "42",
+      "passed": "42",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 18:11:45Z",
+      "end-time": "2026-10-19 18:13:36Z",
+      "duration": "110.9198415"
+    },
+    "playMode": {
+      "id": "2",
+      "testcasecount": "22",
+      "result": "Passed",
+      "total": "22",
+      "passed": "22",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 18:15:14Z",
+      "end-time": "2026-10-19 18:15:41Z",
+      "duration": "26.5207808"
+    },
+    "finalMobileUI": {
+      "id": "2",
+      "testcasecount": "2",
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 18:16:29Z",
+      "end-time": "2026-10-19 18:16:32Z",
+      "duration": "2.5831454"
+    },
+    "vitest": {
+      "passed": 1864,
+      "files": 132,
+      "failed": 0,
+      "log": "/tmp/unity-lifetime-vitest.log"
+    },
+    "typecheck": "passed",
+    "exports": "npm run unity:check passed",
+    "build": "passed; existing bundle size warning"
+  },
+  "editorFailure": {
+    "firstPlayExitCode": 138,
+    "testResultProduced": false,
+    "component": "native Burst.Compiler.IL.Server compiler thread",
+    "log": "/tmp/unity-lifetime-play.log",
+    "crashArtifactsPreserved": "/tmp/unity-lifetime-native-crash",
+    "successfulPlayModeCommandFlag": "--burst-force-sync-compilation",
+    "packagesAndProjectSettingsChanged": false
+  },
+  "mobile": {
+    "sizes": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ]
+    ],
+    "fundedTemporaryStates": true,
+    "visuallyInspected": true,
+    "realDevice": false,
+    "images": [
+      "screenshots/unity-lifetime-funded-320.png",
+      "screenshots/unity-lifetime-funded-390.png",
+      "screenshots/unity-lifetime-funded-430.png"
+    ]
+  },
+  "migration": [
+    "No historic counters or retroactive rewards inferred from inventory/hardware balances.",
+    "Old persistent hardware discoveries preserve existing challenge-entry evidence without granting lifetime metrics.",
+    "Active v6 sessions migrate main and local histories conservatively; missing v7 main history blocks writes."
+  ],
+  "correctedDuringVerification": [
+    "JSON null objects require an explicit initialized contract marker.",
+    "Shared reference setup now acquires entry hardware through a real paid purchase.",
+    "Reference tests assert actual completion of all 20 synthesis jobs, analysis and forge rather than matching no-ops.",
+    "Historical v6 challenge fixtures lack a lifetime start anchor; only that absent metadata anchor is normalized, while all recorded main fields remain compared.",
+    "Mobile statistics text anchored at top to remove obstructive empty space."
+  ],
+  "open": [
+    "Mission periods/claims and chapter/onboarding rewards.",
+    "Achievement catalogue/claims, AP consumer and gem ledger.",
+    "Profile, mailbox and source name policy.",
+    "Twelve static long-term challenges and season dependencies.",
+    "Remaining sections 4–8, web import, actual devices and release validation."
+  ]
+}

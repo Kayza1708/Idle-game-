@@ -18,7 +18,7 @@ namespace IdleIntelligence.Runtime
         public GameState State {get;private set;}
         public bool Writable {get;private set;}
         public string SavePath=>store?.PathName;
-        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused;
+        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;
         GameObject queueControls;string queueSignature="";
         float nextRefresh,nextSave;readonly List<ActionCard> cards=new List<ActionCard>();
         static double Now=>DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -35,12 +35,12 @@ namespace IdleIntelligence.Runtime
         }
         void Update()
         {
-            if(!started||paused)return;
+            if(!started||paused||!focused)return;
             // UTC elapsed time drives the domain; refresh frequency only controls presentation.
             if(Time.unscaledTime>=nextRefresh){Tick();Refresh();nextRefresh=Time.unscaledTime+.1f;}
             if(Time.unscaledTime>=nextSave){Save();nextSave=Time.unscaledTime+5;}
         }
-        void Tick(){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;State=Game.Advance(State,Now);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms){Save();if(!Writable)State=before;}}}
+        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;State=Game.Advance(State,Now,active&&!paused&&focused);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms){Save();if(!Writable)State=before;}}}
         public bool Act(Func<GameState,GameState> action)
         {
             if(!Writable)return false;Tick();if(!Writable){Refresh();return false;}var before=State;State=action(State);
@@ -54,23 +54,25 @@ namespace IdleIntelligence.Runtime
         void OnApplicationPause(bool value)
         {
             if(!started)return;
-            if(value){WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();ModelsView?.Cancel();Tick();Save();paused=true;}else{paused=false;Tick();Save();Refresh();}
+            if(value){WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();ModelsView?.Cancel();Tick();Save();paused=true;}else{paused=false;Tick(false);Save();Refresh();}
         }
-        void OnApplicationFocus(bool focused){if(!started)return;if(focused){Tick();Save();Refresh();}else{WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();ModelsView?.Cancel();Tick();Save();}}
+        void OnApplicationFocus(bool focused){if(!started)return;if(focused){Tick(false);this.focused=true;Save();Refresh();}else{WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();ModelsView?.Cancel();Tick();this.focused=false;Save();}}
         void OnApplicationQuit(){Tick();Save();}
         void OnDestroy(){if(started){Tick();Save();}}
         void Show(string selected)
         {
+            if(lifetimeView!=null){lifetimeView.gameObject.SetActive(false);Destroy(lifetimeView.gameObject);lifetimeView=null;}var oldProgress=Content.Find("ProgressAccess");if(oldProgress!=null){oldProgress.gameObject.SetActive(false);Destroy(oldProgress.gameObject);}
             if(ChallengeView!=null){Destroy(ChallengeView.gameObject);ChallengeView=null;}
             if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);queueControls=null;}queueSignature="";
             if(ModelsView!=null){ModelsView.Cancel();Destroy(ModelsView.gameObject);ModelsView=null;}if(PrestigeView!=null){PrestigeView.Cancel();Destroy(PrestigeView.gameObject);PrestigeView=null;}if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             var oldChallenge=Content.Find("ChallengesAccess");if(oldChallenge!=null){oldChallenge.gameObject.SetActive(false);Destroy(oldChallenge.gameObject);}var oldLab=Content.Find("SecretLab");if(oldLab!=null){oldLab.gameObject.SetActive(false);Destroy(oldLab.gameObject);}tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
-            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges";
+            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress";
             foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
             Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(tab=="progress"){lifetimeView=WorkshopUIFactory.Vertical("Lifetime",Content).AddComponent<LifetimeView>();lifetimeView.Initialize(this);Refresh();return;}
             if(tab=="challenges"){ChallengeView=WorkshopUIFactory.Vertical("Challenges",Content).AddComponent<ChallengeUI>();ChallengeView.Initialize(this);Refresh();return;}
             if(tab=="models"){ModelsView=Instantiate(ModelPrefab,Content);ModelsView.Initialize(this);Refresh();return;}
-            if(tab=="research"){WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
+            if(tab=="research"){WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;

@@ -14,6 +14,10 @@ Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen 
 
 Alle 690 aktuellen V2-Laufstufen sind mit Einschränkungen, echter Hauptspielpause online/offline, Abbruch, wiederholbaren sicheren Abschlüssen, Familienverbrauchern und gemeinsamen Freischaltungen portiert. [Prüfbericht und Quellabweichungen](unity-challenges.md), [Prüfdaten](unity-challenges-verification.json). Save v6 migriert v1–5 mit Originalkopien. Zwölf statische Langzeit-Challenges, historische Webkataloge und echte Geräte bleiben offen; die breite Challengezeile bleibt entsprechend ungecheckt.
 
+## Funktionaler Folgeauftrag: dauerhafte Metriken
+
+[Statistik-Abhängigkeit für Abschnitt 3](unity-lifetime.md): echte Produzenten, Mastery-XP, explizite aktive Zeit, Challenge-Historienisolation und Save-v7-Erhaltung. Alte Historien werden nicht aus Beständen erfunden. Missionen/Achievements/Profil bleiben bis zu ihren Transaktionen und Oberflächen offen.
+
 ## Fortschritt: Items und Schmiede
 
 Der nächste [spielbare Abschnitt](unity-playable-slice.md#items-und-schmiede-mit-play-testen) enthält 20 Komponenten, bezahlte Hardwarepakete/passive Funde, sechs Analysen, zwei Modulrezepte, Bauplanlernen/-meisterschaft, den vollständigen 30-Typen-/sechs-Seltenheiten-Katalog, Inventar, Ausrüsten/Ablegen/Sperren/Levelverbesserung und sofortige Herstellung/Fusion. Originalkosten und Erhaltungsregeln werden gegen 509 zusätzliche TypeScript-Fälle geprüft. Gemeinsame Porträts/Formen/Farben/Details und kosmetische Schmiedeanimationen sind an sofort gespeicherte Transaktionen gebunden. Unity-Save v1 wird mit Originalkopie nach v2 ergänzt. [Prüfnachweis](unity-items-verification.json) und [tatsächlicher Mitschnitt](recordings/unity-forge.mp4).

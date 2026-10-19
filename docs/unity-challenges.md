@@ -1,6 +1,6 @@
 # Unity: Challenge-Läufe
 
-Stand 19.10.2026, funktionaler Abschnitt 2 auf `codex/unity-rewrite`, PR #132 inzwischen extern gemergt; nächster Folge-Draft. Kein Merge. TypeScript-Spiel und Balance unverändert.
+Stand 19.10.2026, funktionaler Abschnitt 2 auf `codex/unity-rewrite`, PR #132 inzwischen extern gemergt; Folge-Draft [#133](https://github.com/Kayza1708/Idle-game-/pull/133). Kein Merge. TypeScript-Spiel und Balance unverändert.
 
 ## Implementiert
 

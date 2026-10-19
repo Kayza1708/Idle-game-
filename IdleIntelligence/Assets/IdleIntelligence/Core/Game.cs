@@ -5,14 +5,14 @@ namespace IdleIntelligence.Core
     // Early V2 only: no Unity APIs, clocks, filesystem, hidden RNG or frame counters.
     public static class Game
     {
-        public static GameState New(double now) { var s=new GameState {Meta=MetaState.New(now),Workshop=new WorkshopState{runStartedAt=now},SavedAt=now,Credits=ScientificNumber.From(Balance.StartCredits)};Validate(s);return s; }
+        public static GameState New(double now) { var s=new GameState {Lifetime=new LifetimeState{initialized=true,since=now},Meta=MetaState.New(now),Workshop=new WorkshopState{runStartedAt=now},SavedAt=now,Credits=ScientificNumber.From(Balance.StartCredits)};Validate(s);return s; }
         public static void Validate(GameState s)
         {
             if(s==null||s.Credits==null||s.Data==null||s.Hardware==null||s.Hardware.Length!=Balance.Hardware.Length||s.Research==null||s.Research.Length!=Balance.Research.Length)throw new FormatException("Invalid state shape");
             if(s.Hardware.Any(n=>n<0||n>9007199254740991L)||s.Research.Any(n=>n<0)||s.Quality<0||s.Efficiency<0||s.Taps<0||s.Overdrives<0||s.Combo<0||s.Combo>Balance.ComboMax||s.Charge<0||s.Charge>Balance.OverdriveCharge)throw new FormatException("Invalid counts");
             if(!ScientificNumber.Finite(s.SavedAt)||s.SavedAt<0||s.SavedAt>9007199254740991d||!ScientificNumber.Finite(s.LastTap)||s.LastTap < -1||!ScientificNumber.Finite(s.ActiveUntil)||s.ActiveUntil<0||!ScientificNumber.Finite(s.CooldownUntil)||s.CooldownUntil<0)throw new FormatException("Invalid clock");
             if(!new[]{"tap","hardware","production","credits","training","research","done"}.Contains(s.Tutorial))throw new FormatException("Invalid tutorial");
-            Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
+            Lifetime.Validate(s);Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
             ValidateJob(s.Training,new[]{"quality","efficiency","integration"});ValidateJob(s.ResearchJob,Balance.Research.Select(r=>r.Id).ToArray());
         }
         static void ValidateJob(Job j,string[] ids) { if(j!=null&&(!ids.Contains(j.id)||!ScientificNumber.Finite(j.required)||j.required<=0||!ScientificNumber.Finite(j.done)||j.done<0||j.done>j.required+1e-6))throw new FormatException("Invalid job"); }
@@ -52,7 +52,7 @@ namespace IdleIntelligence.Core
             int i=Array.FindIndex(Balance.Hardware,h=>h.Id==id);
             if(i<0||i>=(ChallengeRules.Current(state)?.ClassLimit??Balance.Hardware.Length)||quantity<=0||quantity>9007199254740991L-state.Hardware[i])return state;
             var cost=HardwareCost(state,i,quantity);if(state.Credits.CompareTo(cost)<0)return state;
-            var s=state.Copy();s.Credits=s.Credits.Subtract(cost);s.Hardware[i]+=quantity;if(ChallengeRules.Active(s))s.Challenges.Run.metrics.hardwarePurchases++;foreach(var edge in Balance.Hardware[i].Milestones.Where(m=>state.Hardware[i]<m.Threshold&&s.Hardware[i]>=m.Threshold))s.Prestige.milestones=s.Prestige.milestones.Union(new[]{id+":"+edge.Threshold}).ToArray();if(ChallengeRules.Active(s))s.Challenges.Run.metrics.milestones+=Balance.Hardware[i].Milestones.Count(m=>state.Hardware[i]<m.Threshold&&s.Hardware[i]>=m.Threshold);Workshop.PaidHardware(s,i,state.Hardware[i]);return Guide(s);
+            var s=state.Copy();s.Credits=s.Credits.Subtract(cost);s.Hardware[i]+=quantity;Lifetime.Hardware(s,i,quantity,state.Hardware[i]);if(ChallengeRules.Active(s))s.Challenges.Run.metrics.hardwarePurchases++;foreach(var edge in Balance.Hardware[i].Milestones.Where(m=>state.Hardware[i]<m.Threshold&&s.Hardware[i]>=m.Threshold))s.Prestige.milestones=s.Prestige.milestones.Union(new[]{id+":"+edge.Threshold}).ToArray();if(ChallengeRules.Active(s))s.Challenges.Run.metrics.milestones+=Balance.Hardware[i].Milestones.Count(m=>state.Hardware[i]<m.Threshold&&s.Hardware[i]>=m.Threshold);Workshop.PaidHardware(s,i,state.Hardware[i]);return Guide(s);
         }
         public static GameState Tap(GameState state,double now)
         {
@@ -65,9 +65,9 @@ namespace IdleIntelligence.Core
             if(relay!=null)s.Workshop.inventory.First(i=>i.id==relay.id).relayTaps++;
             double seconds=Balance.TapSoft*q/(Balance.TapSoft+q*(1+chance*(crit-1)));
             var basis=Income(s,false).Times(seconds);if(basis.CompareTo(ScientificNumber.One)<0)basis=ScientificNumber.One;
-            PrestigeRules.Earn(s,basis.Times(rng/4294967296d<chance?crit:1));s.CritRng=rng;s.LastTap=now;s.Combo=(int)Math.Min(Balance.ComboMax,combo+1);s.Taps++;
+            PrestigeRules.Earn(s,basis.Times(rng/4294967296d<chance?crit:1));s.CritRng=rng;s.LastTap=now;s.Combo=(int)Math.Min(Balance.ComboMax,combo+1);s.Taps++;s.Lifetime.taps++;
             int charge=(int)Math.Min(Balance.OverdriveCharge,s.Charge+1);
-            if(charge>=Balance.OverdriveCharge&&now>=s.CooldownUntil){s.Charge=0;s.ActiveUntil=now+Math.Min(Balance.OverdriveMaxSeconds,Balance.OverdriveSeconds*PrestigeRules.F(s,"S07")*(1+Bonus(s,"overclock"))*(1+Workshop.Device(s,"overclockDuration")))*1000;s.CooldownUntil=now+Balance.OverdriveInterval;s.Overdrives++;}else s.Charge=charge;
+            if(charge>=Balance.OverdriveCharge&&now>=s.CooldownUntil){s.Charge=0;s.ActiveUntil=now+Math.Min(Balance.OverdriveMaxSeconds,Balance.OverdriveSeconds*PrestigeRules.F(s,"S07")*(1+Bonus(s,"overclock"))*(1+Workshop.Device(s,"overclockDuration")))*1000;s.CooldownUntil=now+Balance.OverdriveInterval;s.Overdrives++;s.Lifetime.overclocks++;}else s.Charge=charge;
             return Guide(s);
         }
         public static ScientificNumber Ceil(ScientificNumber n)
@@ -87,7 +87,7 @@ namespace IdleIntelligence.Core
         {
             if(!TrainingAvailable(state,track))return state;if(state.Training!=null)return PrestigeAutomation.QueueTraining(state,track);
             var cost=TrainingCost(state,track);if(state.Credits.CompareTo(cost)<0||state.Data.CompareTo(TrainingData(state,track))<0)return state;
-            var s=state.Copy();s.Data=s.Data.Subtract(TrainingData(s,track));bool intro=track=="quality"&&IntroQuality(s);s.Credits=s.Credits.Subtract(cost);s.Training=new Job{id=track,required=TrainingWork(s,track),intro=intro,modelTransferEligible=Level(s,"modelTransfer")>0&&s.Industry.trainingStarted<IndustryBalance.TransferStarts};s.Industry.trainingStarted++;s.QualityUsed|=intro;s.Workshop.lastTrack=track;return Guide(s);
+            var s=state.Copy();s.Data=s.Data.Subtract(TrainingData(s,track));bool intro=track=="quality"&&IntroQuality(s);s.Credits=s.Credits.Subtract(cost);s.Training=new Job{id=track,required=TrainingWork(s,track),intro=intro,modelTransferEligible=Level(s,"modelTransfer")>0&&s.Industry.trainingStarted<IndustryBalance.TransferStarts};s.Industry.trainingStarted++;s.Lifetime.trainingStarted++;s.QualityUsed|=intro;s.Workshop.lastTrack=track;return Guide(s);
         }
         public static ScientificNumber ResearchCost(GameState s,int i)
         {
@@ -113,7 +113,7 @@ namespace IdleIntelligence.Core
         public static GameState Research(GameState state,string id)
         {
             var selected=MetaRules.Phase(state,1);int i=ResearchIndex(id);if(ResearchBlock(selected,i)=="Labor belegt")return PrestigeAutomation.QueueResearch(state,id);if(ResearchBlock(selected,i)!=null)return state;
-            var s=selected.Copy();bool intro=id=="dataGeneration"&&IntroResearch(s);var paidData=ResearchCost(s,i);s.Data=s.Data.Subtract(ResearchCost(s,i));s.Workshop.nextId++;s.Workshop.revision++;var job=new Job{id=id,required=ResearchWork(s,i),intro=intro,paidDataRecorded=true,paidData=paidData.ToData()};if(s.ResearchJob==null)s.ResearchJob=job;else s.Prestige.labs=s.Prestige.labs.Concat(new[]{job}).ToArray();s.ResearchUsed|=intro;s.Workshop.lastArea=new[]{"data","architecture","model","materials","automation"}[Workshop.ResearchArea(id)];return Guide(s);
+            var s=selected.Copy();bool intro=id=="dataGeneration"&&IntroResearch(s);var paidData=ResearchCost(s,i);s.Data=s.Data.Subtract(ResearchCost(s,i));s.Workshop.nextId++;s.Workshop.revision++;var job=new Job{id=id,required=ResearchWork(s,i),intro=intro,paidDataRecorded=true,paidData=paidData.ToData()};if(s.ResearchJob==null)s.ResearchJob=job;else s.Prestige.labs=s.Prestige.labs.Concat(new[]{job}).ToArray();s.Lifetime.researchStarted++;s.ResearchUsed|=intro;s.Workshop.lastArea=new[]{"data","architecture","model","materials","automation"}[Workshop.ResearchArea(id)];return Guide(s);
         }
         public static GameState Guide(GameState s)
         {
@@ -127,7 +127,7 @@ namespace IdleIntelligence.Core
             return s;
         }
         public static double OfflineLimit(GameState s)=>Math.Min(Balance.MaxOfflineSeconds,Balance.OfflineSeconds*(1+Bonus(s,"offline")+ChallengeRules.Bonus(s,"no-taps")));
-        public static GameState Advance(GameState state,double now)
+        public static GameState Advance(GameState state,double now,bool active=false)
         {
             if(!ScientificNumber.Finite(now)||now<=state.SavedAt)return state;
             var s=Workshop.Discover(state.Copy());double elapsed=(now-s.SavedAt)/1000,limit=OfflineLimit(s),left=Math.Min(elapsed,limit);
@@ -152,19 +152,19 @@ namespace IdleIntelligence.Core
                 if(s.ActiveUntil>s.SavedAt)slice=Math.Min(slice,(s.ActiveUntil-s.SavedAt)/1000);
                 if(slice<1e-8)slice=Math.Min(left,1e-6);
                 MaterialAnalysis.Advance(s,slice,false);Industry.Work(s,slice);
-                var produced=Income(s).Times((1+Workshop.Device(s,"memory",s.SavedAt+slice*500)*(1+ChallengeRules.Bonus(s,"no-taps")))/(1+Workshop.Device(s,"memory")*(1+ChallengeRules.Bonus(s,"no-taps")))).Times(slice);var producedData=DataRate(s).Times(slice);ChallengeRules.Produced(s,produced,producedData);PrestigeRules.Earn(s,produced);s.Prestige.knowledge=ScientificNumber.FromData(s.Prestige.knowledge).Add(PrestigeRules.KnowledgeRate(s).Times(slice)).ToData();s.Data=s.Data.Add(producedData);
+                var produced=Income(s).Times((1+Workshop.Device(s,"memory",s.SavedAt+slice*500)*(1+ChallengeRules.Bonus(s,"no-taps")))/(1+Workshop.Device(s,"memory")*(1+ChallengeRules.Bonus(s,"no-taps")))).Times(slice);var producedData=DataRate(s).Times(slice);Lifetime.Produced(s,produced,producedData);s.Lifetime.labSeconds+=PrestigeAutomation.ResearchJobs(s).Count()*slice;if(active)s.Lifetime.activeSeconds+=slice;ChallengeRules.Produced(s,produced,producedData);PrestigeRules.Earn(s,produced);s.Prestige.knowledge=ScientificNumber.FromData(s.Prestige.knowledge).Add(PrestigeRules.KnowledgeRate(s).Times(slice)).ToData();s.Data=s.Data.Add(producedData);
                 if(s.Training!=null)s.Training.done+=trainSpeed*slice;
                 if(s.ResearchJob!=null)s.ResearchJob.done+=researchSpeed*slice;foreach(var job in s.Prestige.labs)job.done+=(job.intro?1:WorkSpeed(s,true))*slice;
                 Workshop.Passive(s,slice);if(s.Workshop.hasModuleJob)s.Workshop.moduleJob.done+=slice*MetaAutomation.Fabrication(s);
                 s.SavedAt+=slice*1000;left-=slice;
-                if(s.Training!=null&&s.Training.done+1e-7>=s.Training.required){if(s.Training.id=="quality"){s.Quality++;s.Workshop.qualityCompletions++;}else if(s.Training.id=="efficiency"){s.Efficiency++;s.Workshop.efficiencyCompletions++;}else s.Workshop.integration++;if(ChallengeRules.Active(s)){var metrics=s.Challenges.Run.metrics;metrics.training++;if(s.Training.id=="quality")metrics.quality++;if(s.Training.id=="efficiency")metrics.efficiency++;}s.Training=null;}
+                if(s.Training!=null&&s.Training.done+1e-7>=s.Training.required){s.Lifetime.trainingCompleted++;if(s.Training.id=="quality"){s.Quality++;s.Workshop.qualityCompletions++;}else if(s.Training.id=="efficiency"){s.Efficiency++;s.Workshop.efficiencyCompletions++;}else s.Workshop.integration++;if(ChallengeRules.Active(s)){var metrics=s.Challenges.Run.metrics;metrics.training++;if(s.Training.id=="quality")metrics.quality++;if(s.Training.id=="efficiency")metrics.efficiency++;}s.Training=null;}
                 s.Prestige.autoSeconds+=slice;s.Prestige.otherAutoSeconds+=slice;s.Meta.analysisSeconds+=slice;s.Meta.craftSeconds+=slice;
                 bool shoppingDue=shoppingActive&&s.Prestige.autoSeconds+1e-7>=PrestigeRules.V("automaticShoppingSeconds"),otherDue=otherAutoActive&&s.Prestige.otherAutoSeconds+1e-7>=PrestigeRules.V("hardwareAutoInterval");
                 if(!s.Prestige.resetIntent&&(shoppingDue||otherDue)){if(shoppingDue)s.Prestige.autoSeconds%=PrestigeRules.V("automaticShoppingSeconds");if(otherDue)s.Prestige.otherAutoSeconds%=PrestigeRules.V("hardwareAutoInterval");s=PrestigeAutomation.Hardware(s,shoppingDue,otherDue);}
                 if(agentActive){s.Prestige.agentSeconds+=slice;if(s.Prestige.agentSeconds+1e-7>=PrestigeRules.V("agentInterval")){s.Prestige.agentSeconds%=PrestigeRules.V("agentInterval");s=PrestigeAutomation.Agent(s);}}
                 if(planners&&!s.Prestige.resetIntent){if(s.Meta.analysisSeconds+1e-7>=PrestigeRules.V("agentInterval")){s.Meta.analysisSeconds%=PrestigeRules.V("agentInterval");s=MetaAutomation.Analysis(s);}if(s.Meta.craftSeconds+1e-7>=PrestigeRules.V("agentInterval")){s.Meta.craftSeconds%=PrestigeRules.V("agentInterval");s=MetaAutomation.Craft(s);}}
-                if(s.ResearchJob!=null&&s.ResearchJob.done+1e-7>=s.ResearchJob.required){s.Research[ResearchIndex(s.ResearchJob.id)]++;ChallengeRules.ResearchCompleted(s,s.ResearchJob);if(!s.ResearchJob.intro)Workshop.ResearchComplete(s,s.ResearchJob.id);s.ResearchJob=null;}
-                foreach(var job in s.Prestige.labs.Where(j=>j.done+1e-7>=j.required).ToArray()){s.Research[ResearchIndex(job.id)]++;ChallengeRules.ResearchCompleted(s,job);if(!job.intro)Workshop.ResearchComplete(s,job.id);}s.Prestige.labs=s.Prestige.labs.Where(j=>j.done+1e-7<j.required).ToArray();
+                if(s.ResearchJob!=null&&s.ResearchJob.done+1e-7>=s.ResearchJob.required){s.Research[ResearchIndex(s.ResearchJob.id)]++;s.Lifetime.researchCompleted++;ChallengeRules.ResearchCompleted(s,s.ResearchJob);if(!s.ResearchJob.intro)Workshop.ResearchComplete(s,s.ResearchJob.id);s.ResearchJob=null;}
+                foreach(var job in s.Prestige.labs.Where(j=>j.done+1e-7>=j.required).ToArray()){s.Research[ResearchIndex(job.id)]++;s.Lifetime.researchCompleted++;ChallengeRules.ResearchCompleted(s,job);if(!job.intro)Workshop.ResearchComplete(s,job.id);}s.Prestige.labs=s.Prestige.labs.Where(j=>j.done+1e-7<j.required).ToArray();
                 if(s.Workshop.hasModuleJob&&s.Workshop.moduleJob.done+1e-7>=s.Workshop.moduleJob.required){s.Workshop.modules[Array.FindIndex(ItemBalance.Modules,m=>m.Id==s.Workshop.moduleJob.id)]++;s.Workshop.hasModuleJob=false;s.Workshop.moduleJob=null;s.Workshop.revision++;}
                 s=Industry.Settle(s);MaterialAnalysis.Advance(s,0);PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);
                 if(researchAutoActive)s.Prestige.researchAutoSeconds+=slice;if(s.Prestige.researchAutoSeconds+1e-7>=PrestigeRules.V("researchAutomationInterval")){s.Prestige.researchAutoSeconds%=PrestigeRules.V("researchAutomationInterval");s=PrestigeAutomation.ResearchAuto(s);}

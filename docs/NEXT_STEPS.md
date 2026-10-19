@@ -1,6 +1,6 @@
 ## Unity: laufende funktionale Migration
 
-Abschnitt 1 und V2-Challenge-Läufe aus Abschnitt 2 sind umgesetzt und geprüft; [Abnahmeliste](unity-functional-acceptance.md). Nächster Abschnitt: persistente Metriken, Missionen/Kapitelquests, Achievements, Profil und Mailbox. Zwölf statische Langzeit-Challenges benötigen außerdem Mastery-/Seasonabhängigkeiten. Danach Seasons, Shop/Belohnungen, unverfügbare Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Keine pauschale Gesamtabnahme; optischer Feinschliff und Geräte-/Releaseprüfung folgen später.
+Abschnitt 1 und V2-Challenge-Läufe aus Abschnitt 2 sind umgesetzt und geprüft; [Abnahmeliste](unity-functional-acceptance.md). Persistente Produzenten/Mastery sind als [Abhängigkeit](unity-lifetime.md) ergänzt. Als Nächstes: Missionen/Kapitelquests, Achievements/AP/Gem-Ledger, Profil und Mailbox. Zwölf statische Langzeit-Challenges benötigen außerdem Mastery-/Seasonabhängigkeiten. Danach Seasons, Shop/Belohnungen, unverfügbare Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Keine pauschale Gesamtabnahme; optischer Feinschliff und Geräte-/Releaseprüfung folgen später.
 
 # Nächste Schritte
 
