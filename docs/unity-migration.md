@@ -6,6 +6,12 @@ Stand: 19.10.2026. Referenz: tatsächlicher TypeScript-Arbeitsbaum auf `codex/un
 
 Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen ist die Einrichtung in `ab67478` separat gesichert und der [erste spielbare Abschnitt](unity-playable-slice.md) implementiert: unabhängiger C#-Kern, erzeugte Balance, frühe Produktion/Käufe, Taps/Overdrive, Training, fünf Forschungen, getrennte atomare Unity-Saves und Offlinefortschritt. Die Szene heißt `Assets/Scenes/IdleIntelligence.unity`. Gemeinsame Referenzfälle sowie EditMode-/PlayMode-Prüfungen und die offenen Grenzen stehen im verlinkten Bericht. Der Gesamtrewrite bleibt offen; keine der folgenden vollständigen Systemzeilen wird durch einen Teilport pauschal abgehakt.
 
+## Fortschritt: Items und Schmiede
+
+Der nächste [spielbare Abschnitt](unity-playable-slice.md#items-und-schmiede-mit-play-testen) enthält 20 Komponenten, bezahlte Hardwarepakete/passive Funde, sechs Analysen, zwei Modulrezepte, Bauplanlernen/-meisterschaft, den vollständigen 30-Typen-/sechs-Seltenheiten-Katalog, Inventar, Ausrüsten/Ablegen/Sperren/Levelverbesserung und sofortige Herstellung/Fusion. Originalkosten und Erhaltungsregeln werden gegen 509 zusätzliche TypeScript-Fälle geprüft. Gemeinsame Porträts/Formen/Farben/Details und kosmetische Schmiedeanimationen sind an sofort gespeicherte Transaktionen gebunden. Unity-Save v1 wird mit Originalkopie nach v2 ergänzt. [Prüfnachweis](unity-items-verification.json) und [tatsächlicher Mitschnitt](recordings/unity-forge.mp4).
+
+Die vollständigen Systemzeilen unten bleiben offen: Prestige-/Modellerwerb, Erkenntnisarchiv-Freischaltung im aktuellen V2, restliche Effektverbraucher, Zerlegen, Foundries, Stapelherstellung, Fragmentumwandlung, Legacy-Queues und Web-Import sind damit nicht als vollständig migriert abgenommen. TypeScript, iOS und lokale Backups bleiben erhalten.
+
 ## Lokale Einrichtung und Nachweis
 
 - Repository: `/Users/yannicrogowitz/Idle-game-`; Unity: `IdleIntelligence/`; kein verschachteltes `.git`.

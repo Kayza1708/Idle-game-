@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-19",
+  "unity": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "scope": "Items and instant forge extension; entire rewrite remains incomplete",
+  "balanceChanged": false,
+  "sourceHash": "2c22ef9df4b9bd54989a72712d07534dab783b875cfe5287da9bc0de632b9359",
+  "itemTypes": 30,
+  "rarities": 6,
+  "itemReferenceCases": 509,
+  "existingReferenceCases": 24,
+  "exactNumberCases": 8,
+  "separateCompileExitCode": 0,
+  "unityTests": {
+    "editMode": {
+      "result": "Passed",
+      "total": "18",
+      "passed": "18",
+      "failed": "0",
+      "duration": "10.8793145",
+      "start-time": "2026-10-19 09:46:07Z",
+      "end-time": "2026-10-19 09:46:18Z"
+    },
+    "playMode": {
+      "result": "Passed",
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "duration": "12.4003309",
+      "start-time": "2026-10-19 09:45:20Z",
+      "end-time": "2026-10-19 09:45:33Z"
+    }
+  },
+  "typescript": {
+    "typecheck": "passed",
+    "testFiles": 125,
+    "tests": 1847,
+    "build": "passed",
+    "warnings": [
+      "Existing Vite main bundle over 500 kB",
+      "Sandbox prevents optional Vite worker-test HMR websocket; test passes"
+    ]
+  },
+  "saveMigration": {
+    "from": 1,
+    "to": 2,
+    "sameFileName": "unity-slice-v1.json",
+    "originalCopy": ".v1-original-<sha256>",
+    "backup": "previous main state",
+    "verified": [
+      "legacy credits/hardware retained",
+      "original byte-for-byte preserved",
+      "atomic version 2 replace retains version 1 backup",
+      "active analysis/module save/reload, same timestamp no duplicate reward",
+      "corrupt analysis draw order rejected"
+    ]
+  },
+  "visualReview": {
+    "profiles": [
+      "320x568",
+      "390x844",
+      "430x932"
+    ],
+    "method": "Rendered actual PlayMode scene canvas, visually inspected; not physical-device QA",
+    "screenshots": [
+      "docs/screenshots/unity-forge.png",
+      "docs/screenshots/unity-items.png",
+      "docs/screenshots/unity-item-detail-320.png"
+    ],
+    "recording": "docs/recordings/unity-forge.mp4",
+    "recordingFrames": 92,
+    "encodingFps": 20,
+    "recordingFixture": "Test-only prepared inventory/materials/data; no runtime debug grant"
+  },
+  "notPerformed": [
+    "Player build",
+    "Physical iPhone/Android tests",
+    "Natural long-term progression",
+    "Web-save import",
+    "Full prestige/model/axiom and effect-consumer migration",
+    "OS reduced-motion preference integration"
+  ],
+  "sdkAdded": false,
+  "merged": false,
+  "published": false
+}

@@ -703,3 +703,8 @@ Im aktiven Vergleich: erste ganze INT etwa 39–42 min, erster gewählter Reset 
 ## Unity-Referenzexport · 19.10.2026
 
 Der erste Unity-Abschnitt übernimmt bestehende Werte ohne Balanceänderung. `npm run unity:export` erzeugt `IdleIntelligence/Assets/IdleIntelligence/Core/Balance.g.cs` und gemeinsame Referenzfälle aus dem laufenden TypeScript-Code; `npm run unity:check` erkennt veraltete Exporte. Der Port enthält Startkapital, Hardwarepreise und Meilensteine, frühe Produktionsfaktoren, Taps/Overdrive, Qualität/Effizienz und fünf frühe Wiederholforschungen einschließlich der bisherigen Tutorialangebote. Keine separat handgepflegten C#- oder Inspectorwerte. Die Grenzen und tatsächliche Paritätsprüfung stehen in [unity-playable-slice.md](unity-playable-slice.md); fehlende Systeme sind keine neue Balanceentscheidung. Die nachfolgenden TypeScript-Balanceaufzeichnungen bleiben gültig.
+
+
+## Unity-Itemabschnitt · 19.10.2026
+
+Keine Balanceänderung. `ItemBalance.g.cs` und 509 zusätzliche gemeinsame Fälle werden aus `economy.ts` und den bestehenden Domainfunktionen exportiert: alle 30 Itemtypen/sechs Seltenheiten, Rezept-/Meisterschafts-/Levelkosten, Komponenten/Module/Analysen, Materialpakete, Slots, Kombinationen, bedingte Effekte und Fusionserhaltung. Die originalen Seltenheitsfarben kommen aus `ItemPresentation.tsx`. Verteilte bestehende Regeln werden übernommen, nicht still bereinigt. Testvorräte für vollständige Katalogprüfung und Animationsaufnahme existieren ausschließlich in Tests. Fehlende Verbraucher/Erwerbswege bleiben in der Migrationsliste offen und führen zu keiner neuen Ersatzbalance.

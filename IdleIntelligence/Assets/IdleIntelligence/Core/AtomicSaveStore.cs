@@ -13,20 +13,21 @@ namespace IdleIntelligence.Core
     }
     public sealed class AtomicSaveStore
     {
-        public const int Version=1;
+        public const int Version=2;
         public const string Format="idle-intelligence-unity-slice";
         readonly string path;readonly IEnvelopeCodec codec;
         bool writable;
         public string PathName=>path;
         public AtomicSaveStore(string path,IEnvelopeCodec codec) {this.path=path;this.codec=codec;}
         static string Hash(string payload) {using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(payload))).Replace("-","").ToLowerInvariant();}
-        GameState Read(string filename)
+        GameState Read(string filename)=>Read(filename,out _);
+        GameState Read(string filename,out int version)
         {
-            var info=new FileInfo(filename);if(info.Length>4*1024*1024)throw new FormatException("Save too large");
+            version=0;var info=new FileInfo(filename);if(info.Length>4*1024*1024)throw new FormatException("Save too large");
             var envelope=codec.DecodeEnvelope(File.ReadAllText(filename));
-            if(envelope==null||envelope.format!=Format||envelope.version!=Version)throw new NotSupportedException("Unbekannte Spielstandversion; Original bleibt erhalten.");
+            if(envelope==null||envelope.format!=Format||envelope.version!=Version&&envelope.version!=1)throw new NotSupportedException("Unbekannte Spielstandversion; Original bleibt erhalten.");
             if(envelope.payload==null||envelope.sha256!=Hash(envelope.payload))throw new FormatException("Spielstand-Prüfsumme ungültig.");
-            return codec.Decode(envelope.payload).ToState();
+            version=envelope.version;return codec.Decode(envelope.payload).ToState(version==1);
         }
         public SaveLoad Load(double now)
         {
@@ -39,7 +40,7 @@ namespace IdleIntelligence.Core
                     if(File.Exists(path+".pending")||File.Exists(path+".backup"))return new SaveLoad{Message="Hauptstand fehlt. Vorhandene Recoverydateien sichern; Speichern gesperrt."};
                     writable=true;return new SaveLoad{State=Game.New(now),Writable=true};
                 }
-                try {var s=Read(path);if(File.Exists(path+".pending"))return new SaveLoad{State=s,Message="Unterbrochener Schreibvorgang vorhanden; Original und Pendingdatei bleiben erhalten. Speichern gesperrt."};writable=true;return new SaveLoad{State=s,Writable=true};}
+                try {var s=Read(path,out int loadedVersion);if(File.Exists(path+".pending"))return new SaveLoad{State=s,Message="Unterbrochener Schreibvorgang vorhanden; Original und Pendingdatei bleiben erhalten. Speichern gesperrt."};if(loadedVersion==1){string original=File.ReadAllText(path),copy=path+".v1-original-"+Hash(original);if(!File.Exists(copy))File.Copy(path,copy,false);else if(File.ReadAllText(copy)!=original)throw new IOException("Migrationskopie stimmt nicht überein.");}writable=true;return new SaveLoad{State=s,Writable=true};}
                 catch(NotSupportedException){throw;}
                 catch(Exception error) when(error is IOException||error is FormatException||error is ArgumentException||error is NullReferenceException||error is OverflowException)
                 {

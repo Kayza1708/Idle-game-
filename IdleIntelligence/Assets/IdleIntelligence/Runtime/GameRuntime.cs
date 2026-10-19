@@ -11,7 +11,8 @@ namespace IdleIntelligence.Runtime
         // Test injection never changes the normal persistent path or grants currency.
         public static string SavePathOverride;
         public Text Credits,Compute,Users,Data,Status,Overdrive,Hint;
-        public Button TapButton,HardwareTab,TrainingTab,ResearchTab,SaveButton;
+        public Button TapButton,HardwareTab,TrainingTab,ResearchTab,SaveButton,ItemsTab;
+        public WorkshopUI WorkshopPrefab;public WorkshopUI WorkshopView {get;private set;}
         public Transform Content;public ActionCard CardPrefab;public Sprite[] HardwareSprites;
         public GameState State {get;private set;}
         public bool Writable {get;private set;}
@@ -28,7 +29,7 @@ namespace IdleIntelligence.Runtime
             if(elapsed>10&&loaded.State!=null&&Writable)message="Willkommen zurück: +"+State.Credits.Subtract(before)+" Credits (Offline-Limit berücksichtigt)";
             TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt)));
             HardwareTab.onClick.AddListener(()=>Show("hardware"));TrainingTab.onClick.AddListener(()=>Show("training"));ResearchTab.onClick.AddListener(()=>Show("research"));SaveButton.onClick.AddListener(()=>{Tick();Save();Refresh();});
-            started=true;Show(tab);Save();Refresh();
+            ItemsTab.onClick.AddListener(()=>Show("items"));started=true;Show(tab);Save();Refresh();
         }
         void Update()
         {
@@ -38,10 +39,10 @@ namespace IdleIntelligence.Runtime
             if(Time.unscaledTime>=nextSave){Save();nextSave=Time.unscaledTime+5;}
         }
         void Tick(){if(Writable)State=Game.Advance(State,Now);}
-        public void Act(Func<GameState,GameState> action)
+        public bool Act(Func<GameState,GameState> action)
         {
-            if(!Writable)return;Tick();var before=State;State=action(State);
-            if(!ReferenceEquals(before,State)) {message="Aktion gespeichert";Save();}Refresh();
+            if(!Writable)return false;Tick();var before=State;State=action(State);
+            if(!ReferenceEquals(before,State)) {message="Aktion gespeichert";Save();}Refresh();return !ReferenceEquals(before,State)&&Writable;
         }
         void Save()
         {
@@ -51,14 +52,19 @@ namespace IdleIntelligence.Runtime
         void OnApplicationPause(bool value)
         {
             if(!started)return;
-            if(value){Tick();Save();paused=true;}else{paused=false;Tick();Save();Refresh();}
+            if(value){WorkshopView?.Forge.Cancel();Tick();Save();paused=true;}else{paused=false;Tick();Save();Refresh();}
         }
-        void OnApplicationFocus(bool focused){if(!started)return;if(focused){Tick();Save();Refresh();}else{Tick();Save();}}
+        void OnApplicationFocus(bool focused){if(!started)return;if(focused){Tick();Save();Refresh();}else{WorkshopView?.Forge.Cancel();Tick();Save();}}
         void OnApplicationQuit(){Tick();Save();}
         void OnDestroy(){if(started){Tick();Save();}}
         void Show(string selected)
         {
+            if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
+            bool workshop=tab=="items";
+            foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
+            Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?2:Balance.Research.Length;
             for(int i=0;i<count;i++)
             {

@@ -102,7 +102,7 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void FutureVersionsDoNotFallBackOrOverwrite()
         {
-            var store=new AtomicSaveStore(path,codec);var s=store.Load(1000).State;store.Save(s);store.Save(s);string future=File.ReadAllText(path).Replace("\"version\":1","\"version\":999");File.WriteAllText(path,future);
+            var store=new AtomicSaveStore(path,codec);var s=store.Load(1000).State;store.Save(s);store.Save(s);string future=File.ReadAllText(path).Replace("\"version\":"+AtomicSaveStore.Version,"\"version\":999");File.WriteAllText(path,future);
             var load=store.Load(1000);Assert.That(load.State,Is.Null);Assert.That(load.Writable,Is.False);Assert.Throws<InvalidOperationException>(()=>store.Save(s));Assert.That(File.ReadAllText(path),Is.EqualTo(future));
         }
         [Test]public void MissingMainWithPendingDataNeverStartsOverAutomatically()
