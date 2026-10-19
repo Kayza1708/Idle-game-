@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-19",
+  "unityVersion": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "baseCommit": "83cc77ef8057beb7226d01357c2ba562a4431a3a",
+  "remoteBaseline": "main dfcce0ef merges prior PR #130; identical gameplay source at task start",
+  "scope": "24 current V2 axiom nodes, ten new AI models and consumers in ported systems; rewrite incomplete",
+  "balanceSourceSHA256": "1c9dcfea3fe7ae74e25bfbefda2a8e543294be775b9fecb0005decfd71b9cb39",
+  "typescriptGameplayChanged": false,
+  "compile": {
+    "exitCode": 0,
+    "compilerErrors": 0,
+    "log": "/tmp/idle-meta-compile.log"
+  },
+  "tests": {
+    "editMode": {
+      "result": "Passed",
+      "total": "29",
+      "passed": "29",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-19 12:48:13Z",
+      "end-time": "2026-10-19 12:49:17Z",
+      "duration": "63.9550767",
+      "exitCode": 0
+    },
+    "playMode": {
+      "result": "Passed",
+      "total": "13",
+      "passed": "13",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-19 12:51:04Z",
+      "end-time": "2026-10-19 12:51:23Z",
+      "duration": "18.9514057",
+      "exitCode": 0
+    },
+    "targetedMetaParity": {
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-19 12:50:04Z",
+      "end-time": "2026-10-19 12:50:07Z",
+      "duration": "3.1943655",
+      "exitCode": 0
+    }
+  },
+  "references": {
+    "axiomNodes": 24,
+    "models": 10,
+    "newMetaCases": 323,
+    "existingPrestigeCases": 380,
+    "existingItemCases": 510,
+    "existingTransactionsAndRates": 24,
+    "existingExactNumberCases": 8
+  },
+  "typescript": {
+    "typecheck": "passed",
+    "vitest": {
+      "files": 129,
+      "passed": 1859,
+      "failed": 0,
+      "durationSeconds": 257.77
+    },
+    "build": "passed",
+    "warnings": [
+      "Existing main bundle exceeds 500 kB"
+    ],
+    "exportCheck": "passed",
+    "finalTargetedExportTests": {
+      "passed": 2,
+      "failed": 0,
+      "durationSeconds": 3.43,
+      "reason": "Follow-up after strengthening reserve and phase cases; TypeScript gameplay unchanged"
+    }
+  },
+  "save": {
+    "currentVersion": 4,
+    "supportedOldVersions": [
+      1,
+      2,
+      3
+    ],
+    "originalCopies": "Byte-identical .vN-original-<SHA256> before first write, plus prior main file as .backup",
+    "v3Fixture": "INT, inventory, equipped item and simultaneously running training, research, analysis and module work retained",
+    "missingOrInvalidV4": "rejected, originals not automatically overwritten",
+    "historicalNewFields": "Old formats lack model RNG and axiom training records. Use source initialization from saved timestamp, current levels for new cycle records and known run start as initial axiom clock; no invented historical maxima",
+    "webImport": false
+  },
+  "mobile": {
+    "profiles": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ]
+    ],
+    "actualCanvasImages": "Rendered in PlayMode and visually inspected: axiom network, retention preview, secret lab/Mira, actual axiom and model receipt effects",
+    "testStates": "Explicitly funded temporary fixtures; no test resources in normal scene",
+    "physicalDevice": false,
+    "nativeReducedMotion": false,
+    "playerBuild": false
+  },
+  "lifecycle": [
+    "Single stored model RNG and remaining pool across reload",
+    "One active model, inactive-slot bindings removed while inventory preserved",
+    "Axiom reset saved before cosmetic receipt",
+    "Reduced motion, tab switch and reload without duplicate reset/acquisition",
+    "Online/offline split and repeated timestamp checked",
+    "No repeated lab seed after discovery"
+  ],
+  "naturalRuns": {
+    "newNaturalAxiomOrTenModelRun": false,
+    "existingNaturalFirstPrestigeReplay": "Retained and passed in full EditMode suite; 2378 simulated seconds, 14532 actions, 41 checkpoints"
+  },
+  "remaining": [
+    "Foundry consumers including C06 and synthesis consumers",
+    "Remaining research, expanded director mode requiring researchScheduling",
+    "Unclear regular acquisition of insight-archive item; no replacement/free unlock",
+    "Challenges/licences, meta, season, shop and further drop systems",
+    "Explicit web/legacy save import and recovery UI",
+    "Seven languages, fonts, native reduced motion, audio/haptics",
+    "Physical mobile lifecycle/touch/accessibility tests and player build"
+  ],
+  "constraints": {
+    "newNativeAdsOrPurchaseSDKs": false,
+    "publication": false,
+    "mergePerformedByTask": false,
+    "unrelatedBackupsAndIOSPreserved": true
+  }
+}

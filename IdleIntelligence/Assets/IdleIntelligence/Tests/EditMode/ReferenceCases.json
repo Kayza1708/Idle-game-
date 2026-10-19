@@ -219,6 +219,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -518,6 +521,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -870,6 +876,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -1169,6 +1178,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -1521,6 +1533,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -1820,6 +1835,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -2172,6 +2190,9 @@
       "amount": 1,
       "at": 1000100,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -2471,6 +2492,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -2823,6 +2847,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -3122,6 +3149,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -3474,6 +3504,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -3773,6 +3806,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -4130,6 +4166,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -4429,6 +4468,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -4786,6 +4828,9 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -5090,6 +5135,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -5510,6 +5558,9 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -5843,6 +5894,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -6234,6 +6288,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -6572,6 +6629,9 @@
         }
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -6988,6 +7048,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -7321,6 +7384,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -7712,6 +7778,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -8011,6 +8080,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -8363,6 +8435,9 @@
       "amount": 10,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -8662,6 +8737,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -9092,6 +9170,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -9408,6 +9489,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -9841,6 +9925,9 @@
       "amount": 1,
       "at": 1019800,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -10169,6 +10256,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -10639,6 +10729,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -10967,6 +11060,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -11412,6 +11508,9 @@
       "amount": 1,
       "at": 1020000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -11740,6 +11839,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -12210,6 +12312,9 @@
       "amount": 1,
       "at": 1021801,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -12538,6 +12643,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -13008,6 +13116,9 @@
       "amount": 1,
       "at": 1050000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -13336,6 +13447,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -13832,6 +13946,9 @@
       "amount": 1,
       "at": 173800000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -14131,6 +14248,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -14483,6 +14603,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -14816,6 +14939,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -15202,6 +15328,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -15530,6 +15659,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -16059,6 +16191,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -16387,6 +16522,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -16921,6 +17059,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
@@ -17220,6 +17361,9 @@
         "researchJob": null
       },
       "expected": {
+        "meta": {
+          "schema": 1
+        },
         "prestige": {
           "schema": 1
         },
