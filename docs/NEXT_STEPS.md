@@ -1,22 +1,16 @@
-# Nächste Unity-Abschnitte · 20.10.2026
-
-UTC-Missionen und eingefrorene Tagesbonusboxen sind als [Teilabschnitt 3c](unity-missions.md) ergänzt. Als Nächstes vollständige drei Seasons mit originalen Free-/Premiumansprüchen und Truhen; anschließend Shop/Gumball/aktive Drops mit den noch fehlenden Missionsproduzenten und Effektverbrauchern. Vollständige Kapitel/Mira bleiben mit Tutorial/Sprachen in Abschnitt 7 verbunden. Adapter und sämtliche Import-/Recovery-/Berichtsverträge bleiben offen. Die [Abnahmeliste](unity-functional-acceptance.md) ist maßgeblich; keine Gesamtfertigmeldung.
+# Nächste Schritte · 20.10.2026
 
 ## Unity: laufende funktionale Migration
 
-Abschnitt 1 und V2-Challenge-Läufe aus Abschnitt 2 sind umgesetzt und geprüft; [Abnahmeliste](unity-functional-acceptance.md). Persistente Produzenten/Mastery sind als [Abhängigkeit](unity-lifetime.md) ergänzt. Achievements/AP/Gem-Ledger, Laborziele und Profil/Mailbox/Namensfilter sind als [3b](unity-retention.md) umgesetzt. Als Nächstes: Missionen/UTC-Perioden, Kapitelziele und deren Season-/Bonusbox-Abhängigkeiten. Zwölf statische Langzeit-Challenges benötigen außerdem Mastery-/Seasonabhängigkeiten. Danach Seasons, Shop/Belohnungen, unverfügbare Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Keine pauschale Gesamtabnahme; optischer Feinschliff und Geräte-/Releaseprüfung folgen später.
+Branch `codex/unity-rewrite`, Unity `6000.3.26f1`, Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`. [Play-Anleitung](unity-playable-slice.md), [Arbeitsregeln](../IdleIntelligence/AGENTS.md), [Abnahmeliste](unity-functional-acceptance.md).
 
-# Nächste Schritte
+Forschung/Industrie, isolierte V2-Challenges, Statistiken/Mastery, Achievements/Profil, UTC-Missionen/Tagesbonusboxen und die drei V2-Seasons sind im dokumentierten Umfang implementiert und geprüft. [Missionsbericht](unity-missions.md), [Season-Bericht](unity-seasons.md). Der gesamte Rewrite ist weiter offen.
 
-## Unity-Rewrite · lokaler Arbeitszweig
-
-Einrichtung auf `codex/unity-rewrite`: Unity `6000.3.26f1`, Projekt `IdleIntelligence/`. [Arbeitsregeln](../IdleIntelligence/AGENTS.md), [Migrationsliste und Prüfstand](unity-migration.md), [vollständiger Dateikatalog](unity-source-inventory.md).
-
-1. Den erweiterten Item-/Schmiede-/INT-/Axiom-/Modellabschnitt in `Assets/Scenes/IdleIntelligence.unity` mit Unity 6000.3.26f1 öffnen und anhand der [Play-Anleitung](unity-playable-slice.md) testen. Einrichtung ist separat in `ab67478` gesichert; aktueller Umfang samt Prüfnachweisen ist dokumentiert. Der gesamte Rewrite ist weiter offen.
-2. Mit Challenges einschließlich tatsächlicher Regeln/Belohnungen, getrennter Hauptspiel-Pause, Abbruch/Reload und Offlinefortschritt gemäß [achtteiliger Abnahmeliste](unity-functional-acceptance.md) fortfahren. Forschung/Industrie sind im beschriebenen V2-Umfang geprüft; [Bericht](unity-industry.md).
-3. Versionierten, expliziten Web-Save-Import und Recovery-/Exportoberfläche entwickeln, bevor vorhandene Web-Saves übernommen werden. Das jetzige Format speichert ausschließlich den Slice; unbekannte/beschädigte Originale bleiben gesperrt. Weitere Uhr-/Resume-/Crash-/Gerätefälle und später Challengeisolation prüfen.
-4. Fehlende Item-Erwerbs-/Effektverbraucher (insbesondere ungeklärter Erkenntnisarchiv-Erwerb und verbleibende Drop-/Forschungs-/Foundryverbraucher), weitere Planer, Challenges, Missionen/Profil, Seasons und vorbereitete Shopschnittstellen gemäß vollständiger Migrationsliste ergänzen. Bestehende TypeScript-Systeme erhalten.
-5. Vollständige mobile UI, Story/Namensprüfung, sieben Sprachen, originale Fonts, Animation, Audio, Barrierefreiheit und Geräteprüfung abschließen. Native Werbung/Käufe, Veröffentlichung, Merge und Entfernen der TypeScript-Version erfordern einen neuen Auftrag.
+1. Abschnitt 5: vollständiger Shop/Gumball, aktive Drops samt Missionsproduzenten, Angebote, Boosts und permanente Upgrades mit tatsächlichen Effektverbrauchern.
+2. Abschnitt 6: vorbereitete unverfügbare Werbe-/Kaufadapter samt Limits, Entitlements, Pending-/Transaktionsschutz und Fehlerpfaden. Keine SDKs oder vorgetäuschten Käufe.
+3. Abschnitt 7: vollständige Kapitel/Mira/Tutorial, sieben Sprachen, alle Einstellungen, vorhandenes Audio und unterstützte Haptik. Namenspolicy und erster Profil-/KI-Name sind bereits portiert.
+4. Abschnitt 8: expliziter validierter Webimport mit Originalkopie und Erhaltung unbekannter Daten, Export/Recovery, Rückkehr-/Diagnose-/Balanceberichte und restliche Speicherverträge.
+5. Danach gemeinsamer optischer Feinschliff und tatsächliche Geräte-/Player-/Releaseprüfung. TypeScript und Backups erhalten; nichts mergen oder veröffentlichen.
 
 Die bisherigen TypeScript-/iOS-Releasepunkte unten bleiben erhalten; während der Unity-Einrichtung keinen ungeprüften Pull/Sync über lokale Bestände ausführen.
 

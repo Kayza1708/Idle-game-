@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-20",
+  "unity": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "scope": "Active V2 seasons, not total migration acceptance or purchase SDK integration",
+  "saveVersion": 10,
+  "themes": 3,
+  "catalogRewards": 300,
+  "sourceTransactions": 1017,
+  "sequentialScenarios": 21,
+  "fixture": "IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/SeasonReferenceCases.json",
+  "editMode": {
+    "passed": 55,
+    "total": 55,
+    "exit": 0,
+    "xml": "/tmp/unity-seasons-edit.xml"
+  },
+  "finalSeasonEditMode": {
+    "passed": 3,
+    "total": 3,
+    "exit": 0,
+    "xml": "/tmp/unity-seasons-edit-final.xml",
+    "includes": "all 1017 source transactions, actual artifact income, earned artifact retention"
+  },
+  "playMode": {
+    "passed": 31,
+    "total": 31,
+    "exit": 0,
+    "xml": "/tmp/unity-seasons-play.xml",
+    "burst": "--burst-force-sync-compilation"
+  },
+  "finalSeasonUI": {
+    "passed": 2,
+    "total": 2,
+    "exit": 0,
+    "xml": "/tmp/unity-seasons-play-final.xml"
+  },
+  "vitest": {
+    "passed": 1870,
+    "files": 135,
+    "exit": 0,
+    "log": "/tmp/unity-seasons-vitest.log"
+  },
+  "finalSourceContractVitest": {
+    "passed": 2,
+    "exit": 0,
+    "log": "/tmp/unity-seasons-target-final.log"
+  },
+  "buildAndTypecheck": {
+    "exit": 0,
+    "log": "/tmp/unity-seasons-build.log",
+    "warning": "existing main bundle size above 500 kB"
+  },
+  "mobile": {
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "editorRenders": true,
+    "visuallyInspected": true,
+    "realDeviceAcceptance": false,
+    "preparedXPAndEntitlements": true,
+    "screenshots": [
+      "screenshots/unity-seasons-prepared-320.png",
+      "screenshots/unity-seasons-prepared-390.png",
+      "screenshots/unity-seasons-prepared-430.png",
+      "screenshots/unity-seasons-prepared-chest-390.png",
+      "screenshots/unity-seasons-prepared-overview-390.png"
+    ]
+  },
+  "open": [
+    "full Shop/Gumball/drops/boosts/permanent upgrades (5)",
+    "full commerce/ad contracts and unavailable providers (6), no native SDKs",
+    "complete story/chapters/Mira and all seven languages/settings (7)",
+    "explicit web import and unsupported original data, recovery/export/diagnostics (8)",
+    "actual devices and player/release acceptance"
+  ],
+  "compile": {
+    "exit": 0,
+    "compilerErrors": 0,
+    "log": "/tmp/unity-seasons-compile-final.log"
+  },
+  "finalSourceExport": {
+    "exit": 0,
+    "log": "/tmp/unity-seasons-export-final.log"
+  },
+  "finalTypecheck": {
+    "exit": 0,
+    "log": "/tmp/unity-seasons-typecheck-final.log"
+  }
+}

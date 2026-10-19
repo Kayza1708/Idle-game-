@@ -2,6 +2,10 @@
 
 Stand: 19.10.2026. Ursprüngliche Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
+## Fortsetzung 20.10.2026: V2-Seasons
+
+[Season-Abschnitt](unity-seasons.md): drei aktuelle Themen, 300 Free-/Premiumbelohnungen, exakte Claims, Materialien/Items, verdiente Truhen, Vitrine und tatsächlicher Artefakt-Einnahmenbonus. Save v10 erhält V1–9 mit Originalkopien und unveränderten Missions-/Seasonansprüchen. Premium benötigt das zugehörige Entitlement; keine SDKs oder erfundenen Käufe. [Prüfdaten](unity-seasons-verification.json). Legacy-Websaves und reale Geräte bleiben gesondert offen.
+
 ## Fortsetzung 20.10.2026: Missionen und Kalenderbelohnungen
 
 [Teilabschnitt 3c](unity-missions.md) ergänzt alle 18 aktuellen Vorlagen, 6/12/30 Aufgaben, originale Baselines, Gems/Materialien/XP, UTC-Ablaufabrechnung, eingefrorene Tagesbonusboxen und Seasonuhr. Native Saves v1–8 erhalten Originalkopien und beginnen neue Missionsbaselines erst nach ihrer Hauptspiel-Synchronisierung. Die vollständigen Seasons, aktive Drops und Story-/Kapitelabläufe bleiben eigene offene Abhängigkeiten. Aktuelle Prüfdaten: [Nachweis](unity-missions-verification.json). Keine breite Systemzeile wird dadurch pauschal abgeschlossen.
@@ -91,7 +95,7 @@ Alle folgenden Kriterien bleiben als vollständige Systemabnahme offen; den nach
 | [ ] | Hardware-Autokäufer, Reserve, Forschung, Training, Analyse-, Craft-/Fusion-/Prestigeplaner | `economy.ts`, `researchAutomation.ts`, `progressionAutomation.ts`, `progressionWork.ts` | Gleiche Aktionsreihenfolge und Zahlungsregeln bei Online-/Offlinefortschritt |
 | [ ] | Challenges, Stufen/Kapitel, Einschränkungen, Sterne, Bestzeiten, Hauptspielisolation | `challengeStages.ts`, `retention.ts`, `simulation.ts`, `ChallengeRunPanel.tsx` | Start/Abbruch/Abschluss/Reload; separaten Hauptzustand, passive Fortschritte und Einmalbelohnungen vergleichen |
 | [ ] | Daily/Weekly/Monthly-Aufgaben, Kapitelquests, Erfolge, Mailbox und Profil | `missions.ts`, `achievements.ts`, `retention.ts`, `profileName.ts` | Periodenwechsel, Baselines, Claim-IDs, Kapitelaufstieg und permanente Belohnungen identisch |
-| [ ] | Seasons, drei Themen, Free/Premium-Spuren, XP, Vitrine, Truhen und Kulanzfrist | `season.ts`, `seasonLoot.ts`, `SeasonPass.tsx`, `SeasonChestTray.tsx` | Claims über Wechsel/Reload, Entitlements, volle Loot-Queue und Challenges vergleichen |
+| [x] | Aktuelle V2-Seasons: drei Themen, Free/Premium-Spuren, XP, Vitrine, Truhen und Kulanzfrist | `season.ts`, `seasonLoot.ts`, `SeasonPass.tsx`, `SeasonChestTray.tsx` | [Season-Bericht](unity-seasons.md): Claims über Wechsel/Reload, Entitlements, volles Lager und Challenges geprüft; Legacy-/Webimport separat offen |
 | [ ] | Shop, Gem-Angebote, permanente Slots/Upgrades, Boosts, Drops und Truhen | `shop.ts`, `gemShop.ts`, `ShopMarket.tsx`, `ShopUpgrades.tsx` | Limits, Preise, Verfügbarkeit, Kaufabzug, Ergebnis und kein Claim bei Fehler vergleichen |
 | [ ] | Bonusboxen, Dropauswahl, Kapselmaschine, Pity/Jackpot und Ergebnisbelege | `bonusBoxes.ts`, `capsuleMachine.ts`, `RewardReveal.tsx`, `ItemReceipt.tsx` | Deterministische Seeds/Transaktions-IDs, Pools, Auswahl und genau einmalige Belohnung |
 | [ ] | Story, Mira, Tutorial, Finger/Fokus, AI-/Spielername und Namensmoderation | `story.ts`, `onboarding.ts`, `tutorialGuide.ts`, `aiName.ts`, `namePolicy.ts`, `moderation/` | Tutorialzustände, übersprungene Dialoge, Unicode-Normalisierung, reservierte Namen und Alt-Save-Nachprüfung |

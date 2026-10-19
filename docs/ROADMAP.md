@@ -19,7 +19,8 @@
 - [x] Persistente Ereigniszähler/Mastery für vorhandene Produzenten und aktiver/offliner Zeitkontext als Abhängigkeit von Missionen/Achievements, mit konservativer Save-v7-Migration; [Umfang](unity-lifetime.md). Abschnitt 3 selbst bleibt offen.
 - [x] 37 Achievementfamilien samt Claims/AP-Verbraucher, acht Laborziele und Profil/Postfach/Namensfilter mit Save-v8-Erhaltung portiert; zwölf statische Bedingungen vorhanden, zwei benötigen noch Seasons. [Teilabnahme 3b](unity-retention.md); Missionen bleiben offen.
 - [x] UTC-Missionen mit originalen 6/12/30 Aufgaben, Claims/Bonus/Ablauf, eingefrorenen Tagesbonusboxen und konservativer Save-v9-Migration implementiert; [Teilumfang und Prüfgrenzen](unity-missions.md). Vollständige Seasons, aktive Drop-Erzeugung und Story/Kapitel bleiben offen.
-- [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Challenges, Missionen/Profil, Seasons, Shop/Belohnungen, vorbereitete Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
+- [x] Drei V2-Seasons mit 300 Originalbelohnungen, verdienten Truhen, Vitrine und echtem Artefakt-Einnahmenbonus portiert; Save-v10-Erhaltung und vorbereitete Premium-/XP-Referenzen getrennt von echten Käufen. [Umfang und Abnahme](unity-seasons.md).
+- [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Shop/aktive Drops/Gumball/Boosts, vorbereitete Adapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
 Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.

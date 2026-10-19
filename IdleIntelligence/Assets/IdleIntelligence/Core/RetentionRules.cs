@@ -43,7 +43,7 @@ namespace IdleIntelligence.Core
   // Same createItem boundary for onboarding and later season/shop sources.
   public static GameState CreateItem(GameState state,string type,int rarity)
   {
-   if(Workshop.Index(type)<0||rarity<0||rarity>=ItemBalance.RarityFactors.Length||state.Workshop.nextId<1||state.Workshop.nextId>=9007199254740991L)return state;var s=state.Copy();var i=new ItemInstance{id="item-"+s.Workshop.nextId++,type=type,rarity=rarity,missingMaterialBasis=true};s.Workshop.inventory=s.Workshop.inventory.Concat(new[]{i}).ToArray();Lifetime.Item(s,type);s.Workshop.revision++;return s;
+   if(Workshop.Index(type)<0||rarity<0||rarity>=ItemBalance.RarityFactors.Length||state.Workshop.nextId<1||state.Workshop.nextId>=9007199254740991L||state.Workshop.inventory.Any(i=>i.id=="item-"+state.Workshop.nextId))return state;var s=state.Copy();var i=new ItemInstance{id="item-"+s.Workshop.nextId++,type=type,rarity=rarity,missingMaterialBasis=true};s.Workshop.inventory=s.Workshop.inventory.Concat(new[]{i}).ToArray();Lifetime.Item(s,type);s.Workshop.revision++;return s;
   }
   public static GameState Onboarding(GameState state,string id)
   {
