@@ -1,0 +1,110 @@
+# Unity-Rewrite: Bestand und Migrationsabnahme
+
+Stand: 19.10.2026. Referenz: tatsächlicher TypeScript-Arbeitsbaum auf `codex/unity-rewrite`, HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
+
+## Lokale Einrichtung und Nachweis
+
+- Repository: `/Users/yannicrogowitz/Idle-game-`; Unity: `IdleIntelligence/`; kein verschachteltes `.git`.
+- Anfangszustand: keine Änderungen an versionierten Dateien; unversioniert waren `.patch-backups/`, `IdleIntelligence/`, `ios/`, `full_simulation_source_dump.txt`, `longTermSimulation_current.txt`, `simulation_actions.txt`, `simulation_api_dump.txt`, `simulation_current.txt`. Diese Bestände bleiben erhalten und werden nicht pauschal hinzugefügt.
+- Installiert: `/Applications/Unity/Hub/Editor/6000.3.26f1/Unity.app`; zusätzlich vorhandener Editor `6000.6.6f1` wird nicht verwendet. Projektversion ist `6000.3.26f1 (de8167e7440c)`.
+- Vorhandenes 2D-URP-Template mit `Assets/Scenes/SampleScene.unity`, URP-Renderer, Input Actions, Szenenvorlage und Settings erhalten. Noch keine eigenen C#-Spielsysteme vorhanden. Paketmanifest und Lockdatei bleiben unverändert, einschließlich vorhandener Template-Pakete.
+- `EditorSettings.asset`: `m_SerializationMode: 2` (Text). `VersionControlSettings.asset`: `Visible Meta Files`. Keine Umstellung erforderlich.
+- Eigene `.gitignore` schließt Unity-Caches, lokale Einstellungen, IDE-Erzeugnisse, Testausgaben und Builds aus. Assets mit Ordner-/Datei-Metas, Packages und ProjectSettings werden im Hauptrepository erfasst.
+- Editor war bereits für genau diesen Pfad geöffnet (Hauptprozess PID 34845; Import-Worker desselben Editors). `Temp/UnityLockfile` vorhanden. Kein zusätzlicher Editor-/Batchprozess gestartet und keine Lockdatei entfernt.
+- Bestehendes `~/Library/Logs/Unity/Editor.log` nennt die passende Version, den Projektpfad und den erfolgreichen Template-/Paket-Compile: `Tundra build success (15.68 seconds)`, 949 ausgewertete Schritte; `AssetDatabase: script compilation time: 17.061238s`; anschließender Assembly-Reload und `InitialRefreshV2` in 52.935 Sekunden. Assemblies sind in `Library/ScriptAssemblies` vorhanden. Keine `error CS...`-/`Scripts have compiler errors`-Treffer bei dieser Prüfung. Weitere Paketimporte sind im Log sichtbar; dies belegt keinen neuen vollständigen Batchlauf und keine fehlerfreie Spielimplementierung.
+- Ein reproduzierbarer separater Batch-Import, Unity-Spieltests, Player-Build, Play-Mode-Abnahme und Geräteabnahme stehen aus. Vollständige Editorlogs wegen möglicher Zugangsdaten nicht einchecken.
+- Abschließende Git-Prüfung: 19 Dateien unter Assets einschließlich aller Datei-/Ordner-Metas, zwei Package-Dateien und 25 ProjectSettings-Dateien im Index; keine fehlenden oder verwaisten Metas, keine erzeugten Cache-/Builddateien aufgenommen. Unity-YAML behält seine erzeugten Leerwerte; `.gitattributes` erlaubt deren nachgestellte Leerzeichen. `git diff --cached --check` und `git diff --check` erfolgreich. Änderungen sind gestaged, noch nicht committed.
+- TypeScript-Referenz geprüft: `npm run typecheck` erfolgreich; `npm test` mit 123 Dateien / 1.843 Tests erfolgreich; `npm run build` erfolgreich (bekannte Warnung zum großen Hauptbundle). Im ersten Testlauf war Vites lokaler WebSocket-Port durch die Sandbox blockiert; der betroffene `simulationWorker.test.ts` wurde außerhalb der Sandbox erneut erfolgreich geprüft (sechs Tests, ohne Portfehler). Separate Langzeitkampagnen wurden nicht zusätzlich gestartet. Keine Änderungen unter `src/`.
+
+## Vollständige fachliche Migrationsliste
+
+### Nachprüfung der Einrichtung
+
+Nach vollständigem Schließen des Editors am 19.10.2026: separater Import-/Compile-Aufruf mit dem installierten Editor `6000.3.26f1`, `-batchmode -nographics -quit`, Exitcode **0**. Lokales Log: `/tmp/idle-intelligence-baseline.log`. Dies prüft weiterhin das unveränderte Template, keine Spielparität. Die Einrichtung wird vor dem ersten C#-Spielabschnitt separat committed.
+
+Alle folgenden Kriterien bleiben offen. Bei Implementierung pro Zeile TypeScript-Fixtures, C#-Parität und relevante UI-Abnahme dokumentieren. Alte und V2-Pfade bewusst unterscheiden: vorhandene Legacy-Verträge nicht als neue aktive Features duplizieren und nicht ungeprüft entfernen.
+
+| Offen | Bestand / Mechanik | Aktuelle Quellen | Nachweis für den Unity-Port |
+|---|---|---|---|
+| [ ] | Gesamter GameState, stabile IDs, Kataloge, Startzustand, Freischaltungen | `src/economy.ts`, `src/progression.ts`, `src/progressionValidation.ts` | Identischer neuer Zustand, stabile ID-Zuordnung, keine Inspector-Defaults als zweite Balancequelle |
+| [ ] | Große Zahlen, exakte Ressourcen, Anzeigeformate, Kaufmathematik, Softcaps | `scientificNumber.ts`, `economy.ts`; `scientificNumber.test.ts`, `purchaseMath.test.ts` | Mantisse/Exponent-JSON, Überlaufgrenzen, Addition/Multiplikation/Potenzen, Vergleiche, Bulk/Max und Rundungen identisch |
+| [ ] | Credits, Compute, Nutzer, Daten, Forschung, INT, Axiome, Gems und Komponenten | `economy.ts`, `progression.ts`, `materialEconomy.ts`, `economySnapshot.ts` | Produktionsfaktoren, Kaufberechtigung, berechtigte Einkommensquellen und Statistik getrennt erhalten |
+| [ ] | Alle Hardwareklassen, Nachbarschaft, Meilensteine, Klassenupgrades | `economy.ts`, `hardwareGoals.ts`, `materialEconomy.ts`; `hardware8b.test.ts`, `hardwareCreditOnly.test.tsx` | Käufe 1/10/Max, bestehende Credit-/Materialverträge und bezahlte Meilensteine vergleichen |
+| [ ] | Tap, Combos, Krits, Impulsrelais, Overclock/Overdrive, Eingabefeedback | `tapInteraction.ts`, `progression.ts`, `economy.ts` | Jeder echte Tap genau einmal; gesperrte Aktionen ohne Auszahlung; Touch/Cancel/Mehrfingereingabe prüfen |
+| [ ] | Training Qualität/Effizienz/Integration, Arbeitsvorrat, Warteschlangen | `progressionWork.ts`, `economy.ts`, `TrainingCostDetails.tsx` | Kostenbasis beim Start erhalten; Arbeitsraten, Limits, Warteschlange, Transfer und Online-/Offlinearbeit vergleichen |
+| [ ] | Forschungsprojekte, wiederholbare Forschung, Bereiche, Labs, Queue und Automation | `researchAreas.ts`, `researchInteraction.ts`, `researchAutomation.ts`, `researchValidation.ts`, `economy.ts` | Kosten-/Dauerangebote, Quellenaufschlüsselung, Freischaltungen und Abschlussreihenfolge; kein kostenloser Doppelstart |
+| [ ] | Hardwareanalyse, Architekturstudie, Artefaktsuche; Fokus, kurz/lang, Intro und Queue | `experiments.ts`, `AnalysisContracts.tsx`, `DataComparison.tsx` | Zahlung/Reservierung, Abbruch, Auszahlungen, RNG und Rezepte/Forschung als Ergebnis vergleichen |
+| [ ] | Komponentenfamilien, Fragmente, Entdeckung, Baupläne, Lernen, Meisterschaft und Konvertierung | `materialEconomy.ts`, `blueprints.ts`, `blueprintResearchReward.ts`, `itemProgress.ts` | Entdeckungen/Freischaltungen und Mengen gegen echte Aktionen prüfen; keine unverdienten Ressourcen |
+| [ ] | Module, sämtliche Itemrezepte, sofortige Herstellung, Mengenwahl und alte bezahlte Jobs | `craftingRecipes.ts`, `inventory.ts`, `progressionWork.ts` | Atomare Kosten/Auszahlung, ungültige Mengen, Legacy-Reservierungen, Save-/Reload-Sicherheit |
+| [ ] | Inventar, Seltenheiten, Level, Slots, Ausrüsten, Sperren, Zerlegen, Spezialeffekte/Builds | `inventory.ts`, `itemMechanics.ts`, `deviceEffects.ts`, `ItemPresentation.tsx` | Vollständiger `ItemTypeId`-Katalog; Quellen, Caps, effektive Boni, Slotlimits und Effektvorschau vergleichen |
+| [ ] | Modellschmiede/Foundry, Infrastruktur, Verbesserung, Fusion und Planer | `foundries.ts`, `progressionAutomation.ts`, `ForgeScreen.tsx`, `ItemCombinations.tsx` | Aktuellen Sofortpfad und alte Queue-/Recoverydaten erhalten; keine erneute Zahlung alter Jobs |
+| [ ] | Modelle entwickeln, upgraden, wählen, Wissensfortschritt, Phasenwechsel | `progression.ts`, `progressionWork.ts`, `modelForgeMigration.ts` | Kosten, Transfer-/Integrationswirkung, aktive Auswahl und Automatik paritätisch testen |
+| [ ] | Prestige V2, INT-Anspruch, Baum, Unlocks, Reset und Runstart | `progressionReset.ts`, `progression.ts`, `prestige.ts`, `prestigeTree.ts` | Reset-Retention-Matrix und Vorschau mit tatsächlichem Ergebnis vergleichen; Legacy-Knoten berücksichtigen |
+| [ ] | Axiom-Reset/-Upgrades, permanente Archive und Prestige-Agent | `progressionReset.ts`, `economy.ts`; `axiom.test.ts`, `axiomUpgrades.test.ts`, `runStart.test.ts` | Entitlement, Schwellen, Kosten, Aufbewahrung, Mindestlaufzeit und Wartegründe vergleichen |
+| [ ] | Hardware-Autokäufer, Reserve, Forschung, Training, Analyse-, Craft-/Fusion-/Prestigeplaner | `economy.ts`, `researchAutomation.ts`, `progressionAutomation.ts`, `progressionWork.ts` | Gleiche Aktionsreihenfolge und Zahlungsregeln bei Online-/Offlinefortschritt |
+| [ ] | Challenges, Stufen/Kapitel, Einschränkungen, Sterne, Bestzeiten, Hauptspielisolation | `challengeStages.ts`, `retention.ts`, `simulation.ts`, `ChallengeRunPanel.tsx` | Start/Abbruch/Abschluss/Reload; separaten Hauptzustand, passive Fortschritte und Einmalbelohnungen vergleichen |
+| [ ] | Daily/Weekly/Monthly-Aufgaben, Kapitelquests, Erfolge, Mailbox und Profil | `missions.ts`, `achievements.ts`, `retention.ts`, `profileName.ts` | Periodenwechsel, Baselines, Claim-IDs, Kapitelaufstieg und permanente Belohnungen identisch |
+| [ ] | Seasons, drei Themen, Free/Premium-Spuren, XP, Vitrine, Truhen und Kulanzfrist | `season.ts`, `seasonLoot.ts`, `SeasonPass.tsx`, `SeasonChestTray.tsx` | Claims über Wechsel/Reload, Entitlements, volle Loot-Queue und Challenges vergleichen |
+| [ ] | Shop, Gem-Angebote, permanente Slots/Upgrades, Boosts, Drops und Truhen | `shop.ts`, `gemShop.ts`, `ShopMarket.tsx`, `ShopUpgrades.tsx` | Limits, Preise, Verfügbarkeit, Kaufabzug, Ergebnis und kein Claim bei Fehler vergleichen |
+| [ ] | Bonusboxen, Dropauswahl, Kapselmaschine, Pity/Jackpot und Ergebnisbelege | `bonusBoxes.ts`, `capsuleMachine.ts`, `RewardReveal.tsx`, `ItemReceipt.tsx` | Deterministische Seeds/Transaktions-IDs, Pools, Auswahl und genau einmalige Belohnung |
+| [ ] | Story, Mira, Tutorial, Finger/Fokus, AI-/Spielername und Namensmoderation | `story.ts`, `onboarding.ts`, `tutorialGuide.ts`, `aiName.ts`, `namePolicy.ts`, `moderation/` | Tutorialzustände, übersprungene Dialoge, Unicode-Normalisierung, reservierte Namen und Alt-Save-Nachprüfung |
+| [ ] | Sprachen und Zahlen-/Effekt-/Audio-/Haptikeinstellungen | `i18n.ts`, `gameplayI18n.ts`, `workshopI18n.ts`, übrige `*Text.ts`, `SettingsPanel.tsx` | EN/DE/ES/FR/PT/IT/PL, Plurale, lange Texte, persistente Einstellungen und lesbare große Zahlen |
+| [ ] | Gesamte Navigation, Overlays, Detailblätter, Vergleich/Vorschau, Unlock-/Rückkehrführung | `App.tsx`, `Panels.tsx`, `MetaHub.tsx`, `MetaMenu.tsx`, `MobileDetailSheet.tsx`, `nextGoal.ts`, `returnGuidance.ts` | Alle bestehenden Aktionen erreichbar; mindestens 44 Einheiten Touchziele, Safe Areas, Kontrast, keine leeren Menüs |
+| [ ] | Loading, Startfehler, Crash-Recovery und Dateizustellung | `bootstrap.ts`, `LoadingScreen.tsx`, `CrashBoundary.tsx`, `crashDiagnostics.ts`, `fileDelivery.ts`, `mobileIntegration.ts` | Start ohne Save/mit Fehler, Wiederholen, Import/Export/Teilen und diagnostischer Export |
+| [ ] | Lokale Telemetrie, Run-/Balancehistorie und Diagnose-/Balanceexporte | `telemetry.ts`, `balanceHistory.ts`, `balanceReport.ts`, `balanceExport*`, `*Export.ts`, `BalanceExportDialog.tsx` | Ereigniskontext, exakte Zahlen, Historienlimits und exportierte Fakten erhalten; kein neues Analytics-SDK |
+
+Quellen ohne `src/` in der Tabelle liegen ebenfalls unter `src/`. Der ergänzende [vollständige Dateikatalog](unity-source-inventory.md) erfasst auch UI-/Hilfsmodule, Tests, Simulatoren und konkrete Runtime-Assets, die nicht einzeln in jede Tabellenzeile passen.
+
+## Balance und Zeitvertrag
+
+- [ ] Alle `BALANCE`-Abschnitte, `extendedItemCatalog`, Hardware-, Forschungs-, Material-, Rezept-, Item-, Prestige-, Axiom-, Shop-, Ad- und Seasonkataloge aus `src/economy.ts` verlustfrei übernehmen. Quellhash und Datenformat dokumentieren, IDs nie aus übersetzten Anzeigenamen ableiten.
+- [ ] Zusätzlich bestehende verstreute Konstanten erfassen (beispielsweise Season-Dauer/Level in `season.ts`, einzelne Ad-Beträge in `ads.ts` und Regeln/Formeln in Domainmodulen). Dies ist eine Bestandsabweichung vom Ziel einer einzigen Balancequelle, keine Erlaubnis zur Bereinigung in diesem Auftrag. Vor dem Datenexport ausdrücklich entscheiden und mit Paritätstests absichern.
+- [ ] `simulation.ts` (`advanceTo`, `simulationNow`), `progressionWork.ts` und `progressionOfflineV2.test.ts` portieren: reale verstrichene Zeit, Offlinekapazität, abgeschnittene Zeit, `savedAt`, Uhrversatz, rückwärts/vorwärts springende Uhr, diskrete Jobgrenzen und gleiche Reihenfolge der automatischen Aktionen.
+- [ ] RNG als Parameter/gespeicherten Seed führen; JavaScript-32-Bit-Operationen bei Material-RNG exakt nachbilden. Kein neuer UnityEngine.Random-Verlauf für historische Auszahlungen.
+- [ ] Suspend/Resume, mehrfacher Resume, Save direkt vor/nach Abschluss, lange Abwesenheit und passives Hauptspiel während einer Challenge prüfen. Keine Doppelgutschrift und keine aktiven Taps im Hintergrund.
+- [ ] Rückkehrbericht aus tatsächlich gutgeschriebenen Ressourcen/Jobs/Items erzeugen (`ReturnReport.tsx`, `returnOverview.test.ts`, `returnReport.test.tsx`), verlorene Zeit getrennt anzeigen.
+- [ ] TypeScript-Simulatoren und Tests als Referenz erhalten (`scripts/`, `*Simulation.ts`, `testSupport/`). Reguläre Tests und separate Langzeitkampagnen unterscheiden; vorbereitete Fixtures sind keine natürliche Balanceabnahme.
+
+## Speicherstände und Migration
+
+- [ ] Web-Envelope aktuell `SAVE_VERSION = 63`, Hauptschlüssel `ai-singularity.save`; Pending, drei Backups (`backup-v15` samt `.2`/`.3`) und Recoverydaten berücksichtigen. Version des Envelopes und `progression.version = 2` sind unterschiedliche Verträge.
+- [ ] `storage.ts`, `durableStorage.ts`, `saveValidation.ts`, `progressionValidation.ts`, `savePolicy.ts`, `recovery.ts` und alle `*Migration.ts`/`*Save.ts` anhand echter Exportfixtures portieren. Save enthält auch laufende/alte Jobs, Reserve-/Queuezustände, RNG, Claims, Transaktionen, Challenges und exakte Zahlen.
+- [ ] Separates Unity-Saveformat und Speicherort definieren. JSON-Import zunächst explizit, validiert und mit unveränderter Originalkopie; unterstützte alte Versionen auflisten. Unbekannte Zukunftsversionen, NaN/Infinity, ungültige IDs, defekte/zu große Dateien und Fehler bei Migration ablehnen.
+- [ ] Atomarer Write (Temp schreiben, zurücklesen/validieren, Backup, Commit), Quota-/Dateifehler und Crash zwischen jedem Schritt testen. Ein unlesbarer oder inkompatibler Originalstand darf nicht automatisch durch NewGame ersetzt werden. Recovery muss sichtbar und exportierbar bleiben.
+- [ ] Sofortiges dauerhaftes Speichern nach relevanten Aktionen, beim Hintergrundwechsel und nach verifizierten Käufen nachbilden; Save-/Load-Fehler sperren riskante Aktionen. Web-/Capacitor-Bestände unverändert lassen.
+
+## Grafik, Animation und Audio
+
+- [ ] Runtime-Zuordnungen aus `GameArt.tsx`, `artIconCatalog.ts`, `RasterMotif.tsx`, `MobileArt.tsx`, `ProgressionArt.tsx`, `PixelIcon.tsx`, `VectorIcon.tsx`, `ShopIcon.tsx` erfassen; tatsächliche Nutzung vor historischen Art-Dokumenten priorisieren. Atlas-Ausschnitte, Pivot, Filter, Alpha und Safe-Area-Skalierung prüfen. Reservierte Atlaszellen nicht versehentlich aktivieren.
+- [ ] Alle verwendeten Dateien aus `public/assets/game/`, `public/icons/` und Branding (Favicon/Touchicon/Manifest) zuordnen. SVG-/CSS-Geometrie, Labormotive, Hardware, Items, Materialien, Modelle, Forge, Drops, Kapseln, Mira, Prestige, Meta und Shop in Unity nachbauen bzw. vorhandene Rasterassets importieren. Keine Löschung der Originale.
+- [ ] Schriften IBM Plex Mono/Silkscreen samt Lizenzdateien erhalten; WOFF2 nicht als bereits funktionierenden Unity-Font behandeln. Geeignete Fontquellen und Glyphenabdeckung separat prüfen. Audio-MP3/OGG aus `public/assets/audio/` mit bestehender Lautstärke-/Mute-/Resume-Logik (`audio.ts`) übernehmen.
+- [ ] `gameMotion.ts`, `progressionMotionPlan.ts`, `LabMotion.tsx`, `ProgressionFeedback.tsx`, `RewardFeedback.tsx`, `RewardReveal.tsx`, `CapsuleCelebration.tsx`, `TutorialFinger.tsx`, `tapInteraction.ts` und alle CSS-Keyframes/Transitions inventarisieren und sinngemäß portieren.
+- [ ] Tap-/Produktionsfeedback, Laborschleifen, Forschungs-/Craft-/Forge-Abschluss, Itemflug, Prestigeverbindungen, Kapsel-/Truhenöffnung, Drops, Tutorial und Loading prüfen. Bestätigte Aktionen genau einmal darstellen; keine nachträgliche Effektserie bei Load/Offline/Prestige/Axiom/Challengewechsel.
+- [ ] Animation nie zur Auszahlung verwenden. Bei Effekte aus/reduzierter Bewegung statische Meldung; Unterbrechung räumt Effekte auf und fängt keine Touch-Eingaben ab. Geräte-Audio/Haptik getrennt abnehmen.
+
+## Vorbereitete Monetarisierung und Plattformgrenzen
+
+- [ ] `ads.ts`: verfügbarer Mock nur für Tests, Produktionsanbieter derzeit unverfügbar. Erfolgs-/Abbruch-/Fehlerpfade, Limits, Transaktionsdeduplizierung, Forschungsskip, Creditboost/-drop, Komponenten, Gems, Shoptruhe und Kapsel erhalten.
+- [ ] `commerce.ts`, `commerceSave.ts`, `shopNative.ts`, `shop.ts`, `gemShop.ts`: Produkt-IDs und Inhalt aus der Referenz übernehmen, nicht aus UI-Preisen ableiten. `ShopNativeAdapter` und `PurchaseVerifier` sind derzeit unverfügbar; keine lokale erfundene erfolgreiche Kaufprüfung.
+- [ ] Dauerhafte Entitlements, Season-Premium, Gem-Ledger, Pending-/verarbeitete Transaktionen und Claim-IDs erhalten. Kauf erst nach verifizierter Lieferung und erfolgreichem dauerhaftem Save abschließen (`persistAndFinishPurchases`).
+- [ ] Restore, Widerruf, Wiederzustellung, Eigentumsabgleich, echte Storepreise und serverseitige Belegprüfung bleiben spätere Integrationsabnahmen. Kein Werbe-/IAP-SDK oder Echtgeldfluss in diesem Einrichtungsauftrag.
+- [ ] Capacitor-Grenzen aus `mobileIntegration.ts`, `fileDelivery.ts`, `audio.ts`, `deviceEffects.ts`, `capacitor.config.*` und `ios/` erfassen: Lifecycle, Dateisystem/Share, Haptik, Keyboard/Safe Areas. Native Adapter separat beauftragen; vorhandenes iOS-Projekt nicht ersetzen. Benachrichtigungen, soziale Funktionen und Cloud-Saves nicht als fertig migrierte Funktionen ausgeben.
+
+## Reihenfolge und Abnahme
+
+1. Offenen Editor nach Sichern ungespeicherter Änderungen manuell schließen. Dann untenstehenden Batch-Import ausführen und Exitcode sowie Log prüfen. Keine Lockdatei löschen. Alternativ im bereits geöffneten Editor Refresh und Console prüfen; das ersetzt keinen protokollierten Batchlauf.
+2. Reine C#-Domain/Tests, ScientificNumber und versionierten Balanceexport mit TypeScript-Referenzfixtures aufbauen. Noch keine neue Balance.
+3. NewGame, Simulation, sichere Saves und Offline-/Lifecycle-Verträge implementieren; danach erster spielbarer Slice aus Hardware, Tap, Training und Forschung.
+4. Materialien/Items/Forge/Modelle, Prestige/Axiome/Automation und Challenges portieren; danach Meta, Seasons, Shop und vorbereitete Schnittstellen.
+5. Vollständige mobile UI/Grafik/Audio/Animation, sieben Sprachen, Import/Export und Diagnostik abnehmen. PlayMode-/Gerätetests und natürliche Runs folgen; TypeScript erst nach gesondertem Auftrag ersetzen.
+
+Batch-Import **erst nach Schließen des Projekts**, vom Repositoryordner aus:
+
+```sh
+/Applications/Unity/Hub/Editor/6000.3.26f1/Unity.app/Contents/MacOS/Unity \
+  -batchmode -nographics -quit \
+  -projectPath "$PWD/IdleIntelligence" \
+  -logFile /tmp/idle-intelligence-unity-import.log
+```
+
+Der Befehl importiert/kompiliert, führt aber keine Spieltests und keinen Player-Build aus. Nach Einführen der Tests separat `-runTests -testPlatform EditMode -testResults /tmp/idle-intelligence-editmode.xml` mit eigenem Log ausführen (ohne `-quit`, Test Runner beendet den Lauf); anschließend nötige PlayMode-Tests. Nur ein Exitcode 0 zusammen mit geprüftem Log bestätigt den Batch-Import; Testergebnisse separat auswerten.

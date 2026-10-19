@@ -1,5 +1,18 @@
 # Idle Intelligence – aktueller Stand
 
+## Unity-Rewrite lokal · 19.10.2026
+
+- [x] Tatsächlichen Repositorypfad und Branch `codex/unity-rewrite` geprüft; TypeScript, lokale Backups, Exporte und iOS-Bestand erhalten.
+- [x] Vorhandenes Unity-6000.3.26f1-Unterprojekt mit Git-Ignore für generierte Daten und Arbeitsregeln eingerichtet; vollständige Asset-/Meta-Paare geprüft.
+- [x] Aktuellen Spielcode als [Migrationsliste](unity-migration.md) und [Dateikatalog](unity-source-inventory.md) erfasst; keine Spielsysteme entfernt und keine Balance geändert.
+- [x] Bereits geöffneten passenden Editor und erfolgreichen Template-/Paket-Compile samt erstem Import im bestehenden Editorlog nachgewiesen.
+- [x] TypeScript-Referenz unverändert geprüft: Typecheck, 1.843 reguläre Tests und Produktionsbuild erfolgreich; bekannte Bundlegrößenwarnung bleibt offen.
+- [x] Separaten Batch-Import mit Unity 6000.3.26f1 nach manuellem Schließen des Projekts ausgeführt, Exitcode 0; siehe Migrationsdokument. Keine zweite Instanz gestartet.
+- [ ] C#-Domain, sichere Saves und Offlinefortschritt mit Paritätstests implementieren; anschließend sämtliche Systeme laut Migrationsliste portieren.
+- [ ] Unity-PlayMode, Player-Build und echte mobile Geräteabnahme durchführen. Der Template-Compile belegt keine Spielparität.
+
+Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.
+
 Stand: Bereinigung nach main `d3040a9` (PR #125). Frühere doppelte Arbeitsprotokolle und erledigte Branch-Abhängigkeiten stehen in der Git-Historie; diese Datei beschreibt die verbleibende Arbeit.
 
 ## Implementiert

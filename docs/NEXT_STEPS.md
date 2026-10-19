@@ -1,5 +1,17 @@
 # Nächste Schritte
 
+## Unity-Rewrite · lokaler Arbeitszweig
+
+Einrichtung auf `codex/unity-rewrite`: Unity `6000.3.26f1`, Projekt `IdleIntelligence/`. [Arbeitsregeln](../IdleIntelligence/AGENTS.md), [Migrationsliste und Prüfstand](unity-migration.md), [vollständiger Dateikatalog](unity-source-inventory.md).
+
+1. Einrichtung separat sichern: Der nach Schließen des Editors ausgeführte Batch-Import mit exakt `6000.3.26f1` ist erfolgreich (Exitcode 0; `/tmp/idle-intelligence-baseline.log`). Weitere Compile-/Testläufe nach Implementierung separat prüfen.
+2. Reine C#-Domain mit ScientificNumber, reproduzierbarem Balanceexport aus `src/economy.ts` und TypeScript-Vergleichsfixtures implementieren. Keine Balancewerte ändern.
+3. Versionierte, atomare Unity-Saves und expliziten validierten Web-Save-Import entwickeln; Offline-/Resume-/Uhr-/Challengeverträge zuerst absichern.
+4. Hardware/Taps/Training/Forschung als ersten spielbaren Slice umsetzen; dann Items/Forge/Modelle, Prestige/Axiome, Challenges, Meta/Seasons und vorbereitete Shopschnittstellen gemäß Migrationsliste ergänzen.
+5. Mobile UI, Grafiken, Animation, Audio, Sprachen und Geräteprüfung abschließen. Native Werbung/Käufe, Veröffentlichung, Merge und Entfernen der TypeScript-Version erfordern einen neuen Auftrag.
+
+Die bisherigen TypeScript-/iOS-Releasepunkte unten bleiben erhalten; während der Unity-Einrichtung keinen ungeprüften Pull/Sync über lokale Bestände ausführen.
+
 Aktueller Arbeitsstand: Bereinigung, Startbildschirm und Namensfilter nach dem gemergten frühen Balancing aus PR #125. Historische Iterationsprotokolle liegen in der Git-Historie. [Aktuelle Roadmap](ROADMAP.md), [Bereinigungsnachweis](cleanup-loading-names.md).
 
 1. Nach Merge auf dem Mac `git pull`, anschließend `npm ci` und `npm run ios:prepare`. Der Befehl baut vor dem Capacitor-Sync; ein fehlgeschlagener Build darf nicht durch einen separaten Sync alter `dist`-Dateien umgangen werden.
