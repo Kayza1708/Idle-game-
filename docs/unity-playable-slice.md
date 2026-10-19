@@ -114,3 +114,9 @@ Dieselbe Szene öffnen, Play und **Forschung → Dauerhafter Fortschritt** wähl
 ## Erfolge, Laborziele und Profil mit Play testen
 
 In derselben Szene **Forschung → Profil · Achievements / Laborziele / Post** öffnen. Erreichte Stufen direkt auf den Aktionskarten abholen; AP beeinflussen die echten Einnahmen. Laborziele vergeben die ursprünglichen Credits/Items/Komponenten einmalig. Unter Profil Namen validiert speichern, den KI-Namen erstmals wählen, Nachrichten lesen und Quellen/Lizenzen öffnen. Langzeit-Challenges besitzen echte Stern-Claims; Seasonbedingungen benötigen noch Abschnitt 4. [Genaue Regeln und Save-v8-Grenzen](unity-retention.md). Missionen und vollständige Mira-Führung bleiben offen.
+
+## UTC-Missionen mit Play testen
+
+Öffne `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` mit Unity **6000.3.26f1** und drücke Play. Unter **Forschung → Missionen** stehen tägliche, wöchentliche und monatliche Ziele. Neue Perioden behalten ihre anfänglichen Ziele/Baselines auch bei weiterem Fortschritt. Erreiche ein Ziel mit echten Käufen, Training oder Taps und drücke seinen Abholknopf. Bei 4/8/20 abgeschlossenen Zielen ist der Periodenbonus verfügbar. Der Tagesbonus legt eine Bonusbox an; weiter unten die Materialfamilie wählen. Ein erneuter Klick zahlt nichts doppelt, auch nach Stop/Play.
+
+V1–8-Saves erhalten vor der Migration eine Originalkopie. Ihre Missionen und erste Season beginnen nach der initialen Offline-Synchronisierung, ohne historische Belohnungen. In Challenges sind Hauptspiel-Claims gesperrt. Ablaufabrechnung, Offlinegrenzen und alte aktive Sessions werden zusätzlich automatisiert geprüft. Volle Season-Claims und aktive Signal-Drops folgen separat; siehe [Missionsbericht](unity-missions.md). Für vorbereitete Screenshotzustände wird ausschließlich ein temporärer Test-Save verwendet.

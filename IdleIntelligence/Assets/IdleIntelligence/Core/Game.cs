@@ -5,14 +5,14 @@ namespace IdleIntelligence.Core
     // Early V2 only: no Unity APIs, clocks, filesystem, hidden RNG or frame counters.
     public static class Game
     {
-        public static GameState New(double now) { var s=new GameState {Retention=RetentionState.New(now),Lifetime=new LifetimeState{initialized=true,since=now},Meta=MetaState.New(now),Workshop=new WorkshopState{runStartedAt=now},SavedAt=now,Credits=ScientificNumber.From(Balance.StartCredits)};Validate(s);return s; }
+        public static GameState New(double now) { var s=new GameState {Missions=MissionState.New(now),Retention=RetentionState.New(now),Lifetime=new LifetimeState{initialized=true,since=now},Meta=MetaState.New(now),Workshop=new WorkshopState{runStartedAt=now},SavedAt=now,Credits=ScientificNumber.From(Balance.StartCredits)};Validate(s);return s; }
         public static void Validate(GameState s)
         {
             if(s==null||s.Credits==null||s.Data==null||s.Hardware==null||s.Hardware.Length!=Balance.Hardware.Length||s.Research==null||s.Research.Length!=Balance.Research.Length)throw new FormatException("Invalid state shape");
             if(s.ModelLevel<0||s.ModelLevel>9007199254740991L||s.Hardware.Any(n=>n<0||n>9007199254740991L)||s.Research.Any(n=>n<0)||s.Quality<0||s.Efficiency<0||s.Taps<0||s.Overdrives<0||s.Combo<0||s.Combo>Balance.ComboMax||s.Charge<0||s.Charge>Balance.OverdriveCharge)throw new FormatException("Invalid counts");
             if(!ScientificNumber.Finite(s.SavedAt)||s.SavedAt<0||s.SavedAt>9007199254740991d||!ScientificNumber.Finite(s.LastTap)||s.LastTap < -1||!ScientificNumber.Finite(s.ActiveUntil)||s.ActiveUntil<0||!ScientificNumber.Finite(s.CooldownUntil)||s.CooldownUntil<0)throw new FormatException("Invalid clock");
             if(!new[]{"tap","hardware","production","credits","training","research","done"}.Contains(s.Tutorial))throw new FormatException("Invalid tutorial");
-            RetentionRules.Validate(s);Lifetime.Validate(s);Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
+            MissionRules.Validate(s);RetentionRules.Validate(s);Lifetime.Validate(s);Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
             ValidateJob(s.Training,new[]{"quality","efficiency","integration"});ValidateJob(s.ResearchJob,Balance.Research.Select(r=>r.Id).ToArray());
         }
         static void ValidateJob(Job j,string[] ids) { if(j!=null&&(!ids.Contains(j.id)||!ScientificNumber.Finite(j.required)||j.required<=0||!ScientificNumber.Finite(j.done)||j.done<0||j.done>j.required+1e-6))throw new FormatException("Invalid job"); }
@@ -130,7 +130,7 @@ namespace IdleIntelligence.Core
         public static GameState Advance(GameState state,double now,bool active=false)
         {
             if(!ScientificNumber.Finite(now)||now<=state.SavedAt)return state;
-            var s=Workshop.Discover(state.Copy());double elapsed=(now-s.SavedAt)/1000,limit=OfflineLimit(s),left=Math.Min(elapsed,limit);
+            var s=Workshop.Discover(MissionRules.Roll(state,state.SavedAt).Copy());double elapsed=(now-s.SavedAt)/1000,limit=OfflineLimit(s),left=Math.Min(elapsed,limit);
             while(left>1e-9)
             {
                 PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);s=PrestigeAutomation.StartJobs(s);s=MetaAutomation.Fusion(s);
@@ -152,11 +152,11 @@ namespace IdleIntelligence.Core
                 if(s.ActiveUntil>s.SavedAt)slice=Math.Min(slice,(s.ActiveUntil-s.SavedAt)/1000);
                 if(slice<1e-8)slice=Math.Min(left,1e-6);
                 MaterialAnalysis.Advance(s,slice,false);Industry.Work(s,slice);
-                var produced=Income(s).Times((1+Workshop.Device(s,"memory",s.SavedAt+slice*500)*(1+ChallengeRules.Bonus(s,"no-taps")))/(1+Workshop.Device(s,"memory")*(1+ChallengeRules.Bonus(s,"no-taps")))).Times(slice);var producedData=DataRate(s).Times(slice);Lifetime.Produced(s,produced,producedData);s.Lifetime.labSeconds+=PrestigeAutomation.ResearchJobs(s).Count()*slice;if(active)s.Lifetime.activeSeconds+=slice;ChallengeRules.Produced(s,produced,producedData);PrestigeRules.Earn(s,produced);s.Prestige.knowledge=ScientificNumber.FromData(s.Prestige.knowledge).Add(PrestigeRules.KnowledgeRate(s).Times(slice)).ToData();s.Data=s.Data.Add(producedData);
+                var produced=Income(s).Times((1+Workshop.Device(s,"memory",s.SavedAt+slice*500)*(1+ChallengeRules.Bonus(s,"no-taps")))/(1+Workshop.Device(s,"memory")*(1+ChallengeRules.Bonus(s,"no-taps")))).Times(slice);var producedData=DataRate(s).Times(slice);Lifetime.Produced(s,produced,producedData);s.Lifetime.labSeconds+=PrestigeAutomation.ResearchJobs(s).Count()*slice;ChallengeRules.Produced(s,produced,producedData);PrestigeRules.Earn(s,produced);s.Prestige.knowledge=ScientificNumber.FromData(s.Prestige.knowledge).Add(PrestigeRules.KnowledgeRate(s).Times(slice)).ToData();s.Data=s.Data.Add(producedData);
                 if(s.Training!=null)s.Training.done+=trainSpeed*slice;
                 if(s.ResearchJob!=null)s.ResearchJob.done+=researchSpeed*slice;foreach(var job in s.Prestige.labs)job.done+=(job.intro?1:WorkSpeed(s,true))*slice;
                 Workshop.Passive(s,slice);if(s.Workshop.hasModuleJob)s.Workshop.moduleJob.done+=slice*MetaAutomation.Fabrication(s);
-                s.SavedAt+=slice*1000;left-=slice;
+                s.SavedAt+=slice*1000;s=MissionRules.Roll(s,s.SavedAt);left-=slice;
                 if(s.Training!=null&&s.Training.done+1e-7>=s.Training.required){s.ModelLevel++;s.Lifetime.trainingCompleted++;if(s.Training.id=="quality"){s.Quality++;s.Workshop.qualityCompletions++;}else if(s.Training.id=="efficiency"){s.Efficiency++;s.Workshop.efficiencyCompletions++;}else s.Workshop.integration++;if(ChallengeRules.Active(s)){var metrics=s.Challenges.Run.metrics;metrics.training++;if(s.Training.id=="quality")metrics.quality++;if(s.Training.id=="efficiency")metrics.efficiency++;}s.Training=null;}
                 s.Prestige.autoSeconds+=slice;s.Prestige.otherAutoSeconds+=slice;s.Meta.analysisSeconds+=slice;s.Meta.craftSeconds+=slice;
                 bool shoppingDue=shoppingActive&&s.Prestige.autoSeconds+1e-7>=PrestigeRules.V("automaticShoppingSeconds"),otherDue=otherAutoActive&&s.Prestige.otherAutoSeconds+1e-7>=PrestigeRules.V("hardwareAutoInterval");
@@ -169,8 +169,9 @@ namespace IdleIntelligence.Core
                 s=Industry.Settle(s);MaterialAnalysis.Advance(s,0);PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);
                 if(researchAutoActive)s.Prestige.researchAutoSeconds+=slice;if(s.Prestige.researchAutoSeconds+1e-7>=PrestigeRules.V("researchAutomationInterval")){s.Prestige.researchAutoSeconds%=PrestigeRules.V("researchAutomationInterval");s=PrestigeAutomation.ResearchAuto(s);}
             }
+            s=MissionRules.Roll(s,s.SavedAt);if(active)s.Lifetime.activeSeconds+=Math.Min(elapsed,limit);
             // Consume even discarded offline time. Loading or resuming twice cannot replay it.
-            s.SavedAt=now;ChallengeRules.PauseMain(s,now);return Guide(RetentionRules.UpdateOnboarding(s));
+            s.SavedAt=now;ChallengeRules.PauseMain(s,now);return Guide(RetentionRules.UpdateOnboarding(MissionRules.InitializeAfterMigration(s,now)));
         }
     }
 }

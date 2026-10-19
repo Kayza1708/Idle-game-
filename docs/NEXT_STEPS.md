@@ -1,3 +1,7 @@
+# Nächste Unity-Abschnitte · 20.10.2026
+
+UTC-Missionen und eingefrorene Tagesbonusboxen sind als [Teilabschnitt 3c](unity-missions.md) ergänzt. Als Nächstes vollständige drei Seasons mit originalen Free-/Premiumansprüchen und Truhen; anschließend Shop/Gumball/aktive Drops mit den noch fehlenden Missionsproduzenten und Effektverbrauchern. Vollständige Kapitel/Mira bleiben mit Tutorial/Sprachen in Abschnitt 7 verbunden. Adapter und sämtliche Import-/Recovery-/Berichtsverträge bleiben offen. Die [Abnahmeliste](unity-functional-acceptance.md) ist maßgeblich; keine Gesamtfertigmeldung.
+
 ## Unity: laufende funktionale Migration
 
 Abschnitt 1 und V2-Challenge-Läufe aus Abschnitt 2 sind umgesetzt und geprüft; [Abnahmeliste](unity-functional-acceptance.md). Persistente Produzenten/Mastery sind als [Abhängigkeit](unity-lifetime.md) ergänzt. Achievements/AP/Gem-Ledger, Laborziele und Profil/Mailbox/Namensfilter sind als [3b](unity-retention.md) umgesetzt. Als Nächstes: Missionen/UTC-Perioden, Kapitelziele und deren Season-/Bonusbox-Abhängigkeiten. Zwölf statische Langzeit-Challenges benötigen außerdem Mastery-/Seasonabhängigkeiten. Danach Seasons, Shop/Belohnungen, unverfügbare Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Keine pauschale Gesamtabnahme; optischer Feinschliff und Geräte-/Releaseprüfung folgen später.

@@ -1,6 +1,6 @@
 # Idle Intelligence – aktueller Stand
 
-## Unity-Rewrite lokal · 19.10.2026
+## Unity-Rewrite lokal · 20.10.2026
 
 - [x] Tatsächlichen Repositorypfad und Branch `codex/unity-rewrite` geprüft; TypeScript, lokale Backups, Exporte und iOS-Bestand erhalten.
 - [x] Vorhandenes Unity-6000.3.26f1-Unterprojekt mit Git-Ignore für generierte Daten und Arbeitsregeln eingerichtet; vollständige Asset-/Meta-Paare geprüft.
@@ -18,6 +18,7 @@
 - [x] 690 V2-Challenge-Laufstufen mit eigenem Laufzustand, Hauptspielpause, sicheren Rückkehrtransaktionen, echter Regelwirkung und Save-v6-Migration; [Bericht](unity-challenges.md). Zwölf statische Langzeit-Challenges folgen mit ihren Abhängigkeiten.
 - [x] Persistente Ereigniszähler/Mastery für vorhandene Produzenten und aktiver/offliner Zeitkontext als Abhängigkeit von Missionen/Achievements, mit konservativer Save-v7-Migration; [Umfang](unity-lifetime.md). Abschnitt 3 selbst bleibt offen.
 - [x] 37 Achievementfamilien samt Claims/AP-Verbraucher, acht Laborziele und Profil/Postfach/Namensfilter mit Save-v8-Erhaltung portiert; zwölf statische Bedingungen vorhanden, zwei benötigen noch Seasons. [Teilabnahme 3b](unity-retention.md); Missionen bleiben offen.
+- [x] UTC-Missionen mit originalen 6/12/30 Aufgaben, Claims/Bonus/Ablauf, eingefrorenen Tagesbonusboxen und konservativer Save-v9-Migration implementiert; [Teilumfang und Prüfgrenzen](unity-missions.md). Vollständige Seasons, aktive Drop-Erzeugung und Story/Kapitel bleiben offen.
 - [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Challenges, Missionen/Profil, Seasons, Shop/Belohnungen, vorbereitete Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 

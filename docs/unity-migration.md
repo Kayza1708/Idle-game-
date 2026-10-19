@@ -2,6 +2,10 @@
 
 Stand: 19.10.2026. Ursprüngliche Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
+## Fortsetzung 20.10.2026: Missionen und Kalenderbelohnungen
+
+[Teilabschnitt 3c](unity-missions.md) ergänzt alle 18 aktuellen Vorlagen, 6/12/30 Aufgaben, originale Baselines, Gems/Materialien/XP, UTC-Ablaufabrechnung, eingefrorene Tagesbonusboxen und Seasonuhr. Native Saves v1–8 erhalten Originalkopien und beginnen neue Missionsbaselines erst nach ihrer Hauptspiel-Synchronisierung. Die vollständigen Seasons, aktive Drops und Story-/Kapitelabläufe bleiben eigene offene Abhängigkeiten. Aktuelle Prüfdaten: [Nachweis](unity-missions-verification.json). Keine breite Systemzeile wird dadurch pauschal abgeschlossen.
+
 ## Fortschritt: erster spielbarer Abschnitt
 
 Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen ist die Einrichtung in `ab67478` separat gesichert und der [erste spielbare Abschnitt](unity-playable-slice.md) implementiert: unabhängiger C#-Kern, erzeugte Balance, frühe Produktion/Käufe, Taps/Overdrive, Training, fünf Forschungen, getrennte atomare Unity-Saves und Offlinefortschritt. Die Szene heißt `Assets/Scenes/IdleIntelligence.unity`. Gemeinsame Referenzfälle sowie EditMode-/PlayMode-Prüfungen und die offenen Grenzen stehen im verlinkten Bericht. Der Gesamtrewrite bleibt offen; keine der folgenden vollständigen Systemzeilen wird durch einen Teilport pauschal abgehakt.

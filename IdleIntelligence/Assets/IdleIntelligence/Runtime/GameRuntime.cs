@@ -18,7 +18,7 @@ namespace IdleIntelligence.Runtime
         public GameState State {get;private set;}
         public bool Writable {get;private set;}
         public string SavePath=>store?.PathName;
-        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;
+        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;
         GameObject queueControls;string queueSignature="";
         float nextRefresh,nextSave;readonly List<ActionCard> cards=new List<ActionCard>();
         static double Now=>DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -40,7 +40,7 @@ namespace IdleIntelligence.Runtime
             if(Time.unscaledTime>=nextRefresh){Tick();Refresh();nextRefresh=Time.unscaledTime+.1f;}
             if(Time.unscaledTime>=nextSave){Save();nextSave=Time.unscaledTime+5;}
         }
-        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;State=Game.Advance(State,Now,active&&!paused&&focused);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms){Save();if(!Writable)State=before;}}}
+        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;int ledger=State.Retention.ledger.Length;State=Game.Advance(State,Now,active&&!paused&&focused);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms||State.Retention.ledger.Length!=ledger){Save();if(!Writable)State=before;}}}
         public bool Act(Func<GameState,GameState> action)
         {
             if(!Writable)return false;Tick();if(!Writable){Refresh();return false;}var before=State;State=action(State);
@@ -61,20 +61,22 @@ namespace IdleIntelligence.Runtime
         void OnDestroy(){if(started){Tick();Save();}}
         void Show(string selected)
         {
+            if(missionView!=null){missionView.gameObject.SetActive(false);Destroy(missionView.gameObject);missionView=null;}var oldMissions=Content.Find("MissionsAccess");if(oldMissions!=null){oldMissions.gameObject.SetActive(false);Destroy(oldMissions.gameObject);}
             if(retentionView!=null){retentionView.gameObject.SetActive(false);Destroy(retentionView.gameObject);retentionView=null;}var oldProfile=Content.Find("ProfileAccess");if(oldProfile!=null){oldProfile.gameObject.SetActive(false);Destroy(oldProfile.gameObject);}
             if(lifetimeView!=null){lifetimeView.gameObject.SetActive(false);Destroy(lifetimeView.gameObject);lifetimeView=null;}var oldProgress=Content.Find("ProgressAccess");if(oldProgress!=null){oldProgress.gameObject.SetActive(false);Destroy(oldProgress.gameObject);}
             if(ChallengeView!=null){Destroy(ChallengeView.gameObject);ChallengeView=null;}
             if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);queueControls=null;}queueSignature="";
             if(ModelsView!=null){ModelsView.Cancel();Destroy(ModelsView.gameObject);ModelsView=null;}if(PrestigeView!=null){PrestigeView.Cancel();Destroy(PrestigeView.gameObject);PrestigeView=null;}if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             var oldChallenge=Content.Find("ChallengesAccess");if(oldChallenge!=null){oldChallenge.gameObject.SetActive(false);Destroy(oldChallenge.gameObject);}var oldLab=Content.Find("SecretLab");if(oldLab!=null){oldLab.gameObject.SetActive(false);Destroy(oldLab.gameObject);}tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
-            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile";
+            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="missions";
             foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
             Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(tab=="missions"){missionView=WorkshopUIFactory.Vertical("Missions",Content).AddComponent<MissionView>();missionView.Initialize(this);Refresh();return;}
             if(tab=="profile"){retentionView=WorkshopUIFactory.Vertical("Profile",Content).AddComponent<RetentionView>();retentionView.Initialize(this);Refresh();return;}
             if(tab=="progress"){lifetimeView=WorkshopUIFactory.Vertical("Lifetime",Content).AddComponent<LifetimeView>();lifetimeView.Initialize(this);Refresh();return;}
             if(tab=="challenges"){ChallengeView=WorkshopUIFactory.Vertical("Challenges",Content).AddComponent<ChallengeUI>();ChallengeView.Initialize(this);Refresh();return;}
             if(tab=="models"){ModelsView=Instantiate(ModelPrefab,Content);ModelsView.Initialize(this);Refresh();return;}
-            if(tab=="research"){WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>Show("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
+            if(tab=="research"){WorkshopUIFactory.Button("MissionsAccess",Content,"Missionen · Tages-/Wochen-/Monatsziele",()=>Show("missions"));WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>Show("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
