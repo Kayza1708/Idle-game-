@@ -16,7 +16,7 @@ namespace IdleIntelligence.Core
     public sealed class CombinationDefinition {public readonly string Id;public readonly double Value;public readonly string[] Needs;public readonly bool Items,Multiplicative;public CombinationDefinition(string id,double value,string[] needs,bool items,bool multiplicative){Id=id;Value=value;Needs=needs;Items=items;Multiplicative=multiplicative;}}
     [Serializable] public sealed class ItemInstance
     {
-        public string id,type;public int rarity,level=1,forge;public bool locked,challengeCopy;public long relayTaps;public double legacyLevelFactor=1;
+        public string id,type;public int rarity,level=1,forge;public bool locked,challengeCopy,missingMaterialBasis;public long relayTaps;public double legacyLevelFactor=1;
         public double[] materialBasis=new double[ItemBalance.ComponentIds.Length],recoveryUsed=new double[ItemBalance.ComponentIds.Length];
         public ItemInstance Copy(){var v=(ItemInstance)MemberwiseClone();v.materialBasis=(double[])materialBasis.Clone();v.recoveryUsed=(double[])recoveryUsed.Clone();return v;}
     }

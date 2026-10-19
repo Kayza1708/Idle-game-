@@ -14,9 +14,10 @@ namespace IdleIntelligence.Core
             int target=Game.TrainingLevel(state,track)+(state.Training?.id==track?1:0)+p.trainingQueue.Count(j=>j.track==track)+1;if(track=="integration"&&target>MetaRules.IntegrationLimit(state))return state;
             var s=state.Copy();s.Prestige.trainingQueue=p.trainingQueue.Concat(new[]{new TrainingTarget{track=track,level=target}}).ToArray();return s;
         }
+        public static int ResearchCapacity(GameState s)=>(int)((PrestigeRules.Has(s,"F02")?IndustryBalance.QueueF02:IndustryBalance.QueueBase)+(Game.Level(s,"operations")>0?IndustryBalance.QueueOperations:0));
         public static bool CanQueueResearch(GameState state,string id)
         {
-            int index=Game.ResearchIndex(id);var p=state.Prestige;return index>=0&&!p.researchQueue.Contains(id)&&p.researchQueue.Length<(PrestigeRules.Has(state,"F02")?6:2)&&!ResearchJobs(state).Any(j=>j.id==id)&&!(Balance.Research[index].Project&&state.Research[index]>0)&&!Balance.Research[index].Requires.Any(r=>Game.Level(state,r.Id)<r.Level);
+            int index=Game.ResearchIndex(id);var p=state.Prestige;return index>=0&&!p.researchQueue.Contains(id)&&p.researchQueue.Length<ResearchCapacity(state)&&!ResearchJobs(state).Any(j=>j.id==id)&&!(Balance.Research[index].Project&&state.Research[index]>0)&&!Balance.Research[index].Requires.Any(r=>Game.Level(state,r.Id)<r.Level);
         }
         public static GameState QueueResearch(GameState state,string id)
         {if(!CanQueueResearch(state,id))return state;var s=state.Copy();s.Prestige.researchQueue=s.Prestige.researchQueue.Concat(new[]{id}).ToArray();return s;}
@@ -79,9 +80,9 @@ namespace IdleIntelligence.Core
             {
                 var reward=PrestigeRules.Claim(state);var last=ScientificNumber.FromData(p.lastGain);var relative=p.relative>0&&!last.IsZero?last.Times(p.relative):ScientificNumber.From(p.agentMinimum);bool timeout=p.maximumRunSeconds>0&&state.SavedAt-state.Workshop.runStartedAt>=p.maximumRunSeconds*1000;
                 if(!meta&&(!PrestigeRules.Has(state,"I06")||!p.agent||state.SavedAt-state.Workshop.runStartedAt<p.agentMinutes*60000||reward.CompareTo(ScientificNumber.From(p.agentMinimum))<0||!timeout&&reward.CompareTo(relative)<0))return state;
-                state=state.Copy();p=state.Prestige;p.resetIntent=true;state.Meta.intentAxiom=meta;p.intentTraining=p.agentWaitTraining&&state.Training!=null;p.intentResearch=p.agentWaitResearch?ResearchJobs(state).Select(j=>j.id).ToArray():Array.Empty<string>();p.intentAnalysis=p.agentWaitAnalysis&&state.Workshop.hasAnalysis;p.intentCrafting=p.agentWaitCrafting&&state.Workshop.hasModuleJob;
+                state=state.Copy();p=state.Prestige;p.resetIntent=true;state.Meta.intentAxiom=meta;p.intentTraining=p.agentWaitTraining&&state.Training!=null;p.intentResearch=p.agentWaitResearch?ResearchJobs(state).Select(j=>j.id).ToArray():Array.Empty<string>();p.intentAnalysis=p.agentWaitAnalysis&&(state.Workshop.hasAnalysis||state.Industry.synthesis!=null);p.intentCrafting=p.agentWaitCrafting&&state.Workshop.hasModuleJob;
             }
-            bool waiting=p.intentTraining&&state.Training!=null||p.intentAnalysis&&state.Workshop.hasAnalysis||p.intentCrafting&&state.Workshop.hasModuleJob||ResearchJobs(state).Any(j=>p.intentResearch.Contains(j.id));return waiting?state:state.Meta.intentAxiom?MetaRules.AxiomReset(state):PrestigeRules.Reset(state);
+            bool waiting=p.intentTraining&&state.Training!=null||p.intentAnalysis&&(state.Workshop.hasAnalysis||state.Industry.synthesis!=null)||p.intentCrafting&&state.Workshop.hasModuleJob||ResearchJobs(state).Any(j=>p.intentResearch.Contains(j.id));return waiting?state:state.Meta.intentAxiom?MetaRules.AxiomReset(state):PrestigeRules.Reset(state);
         }
     }
 }

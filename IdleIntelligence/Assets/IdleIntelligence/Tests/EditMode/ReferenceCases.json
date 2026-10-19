@@ -219,6 +219,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -490,6 +517,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -521,6 +564,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -792,6 +862,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -876,6 +962,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -1156,6 +1269,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -1178,6 +1307,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -1449,6 +1605,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -1533,6 +1705,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -1813,6 +2012,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -1835,6 +2050,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -2106,6 +2348,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -2190,6 +2448,33 @@
       "amount": 1,
       "at": 1000100,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -2461,6 +2746,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -2492,6 +2793,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -2763,6 +3091,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -2847,6 +3191,33 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -3127,6 +3498,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -3149,6 +3536,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -3429,6 +3843,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -3504,6 +3934,33 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -3784,6 +4241,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -3806,6 +4279,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -4086,6 +4586,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -4108,7 +4624,8 @@
           "id": "efficiency",
           "required": 90,
           "done": 0,
-          "intro": false
+          "intro": false,
+          "modelTransferEligible": false
         },
         "researchJob": null
       },
@@ -4166,6 +4683,33 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -4446,6 +4990,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -4468,6 +5028,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -4748,6 +5335,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -4770,7 +5373,8 @@
           "id": "quality",
           "required": 20,
           "done": 0,
-          "intro": true
+          "intro": true,
+          "modelTransferEligible": false
         },
         "researchJob": null
       },
@@ -4828,6 +5432,33 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -5108,6 +5739,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -5130,11 +5777,39 @@
           "id": "quality",
           "required": 20,
           "done": 0,
-          "intro": true
+          "intro": true,
+          "modelTransferEligible": false
         },
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -5440,6 +6115,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -5558,6 +6249,33 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -5872,6 +6590,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 1,
@@ -5894,6 +6628,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -6199,6 +6960,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -6288,6 +7065,33 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -6602,6 +7406,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 1,
@@ -6629,6 +7449,33 @@
         }
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -6943,6 +7790,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 1,
@@ -7048,6 +7911,33 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -7362,6 +8252,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 1,
@@ -7384,6 +8290,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -7698,6 +8631,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 1,
@@ -7778,6 +8727,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -8049,6 +9025,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -8080,6 +9072,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -8351,6 +9370,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -8435,6 +9470,33 @@
       "amount": 10,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -8715,6 +9777,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -8737,6 +9815,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -9030,6 +10135,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -9170,6 +10291,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -9458,6 +10606,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -9489,6 +10653,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -9777,6 +10968,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -9925,6 +11132,33 @@
       "amount": 1,
       "at": 1019800,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -10234,6 +11468,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -10256,6 +11506,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -10556,6 +11833,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -10729,6 +12022,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -11029,6 +12349,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -11060,6 +12396,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -11360,6 +12723,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -11508,6 +12887,33 @@
       "amount": 1,
       "at": 1020000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -11817,6 +13223,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -11839,6 +13261,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -12148,6 +13597,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -12312,6 +13777,33 @@
       "amount": 1,
       "at": 1021801,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -12621,6 +14113,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -12643,6 +14151,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -12952,6 +14487,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -13116,6 +14667,33 @@
       "amount": 1,
       "at": 1050000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -13425,6 +15003,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -13447,6 +15041,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -13773,6 +15394,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -13946,6 +15583,33 @@
       "amount": 1,
       "at": 173800000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -14226,6 +15890,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -14248,6 +15928,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -14528,6 +16235,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 0,
@@ -14603,6 +16326,33 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -14909,6 +16659,22 @@
         ],
         "research": [
           1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -14939,6 +16705,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -15245,6 +17038,22 @@
         ],
         "research": [
           1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -15328,6 +17137,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -15633,6 +17469,22 @@
           3,
           2,
           4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -15659,6 +17511,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -15964,6 +17843,22 @@
           3,
           2,
           4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -16191,6 +18086,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -16500,6 +18422,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 4,
@@ -16522,6 +18460,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            true,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -16831,6 +18796,22 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0
         ],
         "quality": 4,
@@ -16853,7 +18834,8 @@
           "id": "quality",
           "required": 174.48999839999996,
           "done": 0,
-          "intro": false
+          "intro": false,
+          "modelTransferEligible": false
         },
         "researchJob": null
       },
@@ -17059,6 +19041,33 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -17330,6 +19339,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
@@ -17361,6 +19386,33 @@
         "researchJob": null
       },
       "expected": {
+        "industry": {
+          "schema": 1,
+          "discovered": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "families": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
         "meta": {
           "schema": 1
         },
@@ -17632,6 +19684,22 @@
           0
         ],
         "research": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
           0,
           0,
           0,
