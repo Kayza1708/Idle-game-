@@ -8,3 +8,5 @@ Keine zusätzliche Designrunde während des funktionalen Ports. Vorhandene Anord
 - Effektfarben, Übergänge und Audio-/Haptikabstimmung gemeinsam überprüfen.
 - Sichere Bereiche, große Sprachtexte, Screenreader und reale Touch-/Notch-/Suspend-Geräteabnahme.
 - Umfangreiche Animationsüberarbeitung und finale Geräte-/Releaseprüfung erst nach funktionaler Abnahme.
+- Erfolge/Profil: große Leerflächen des vorhandenen Aktionskarten-Prefabs nach vollständigem Funktionsport verdichten; Schrift wurde für die aktuelle Bedienung bereits vergrößert.
+- Glyphen-Fallback für zulässige Unicode-Spielernamen auf echten Geräten prüfen; der reine Namensvertrag ist gegen JavaScript geprüft, Gerätefonts bleiben Abschnitt 7/Geräteabnahme.

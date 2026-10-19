@@ -32,24 +32,25 @@ namespace IdleIntelligence.Core
         public ScientificNumber Credits=ScientificNumber.Zero, Data=ScientificNumber.Zero;
         public long[] Hardware=new long[Balance.Hardware.Length];
         public int[] Research=new int[Balance.Research.Length];
-        public int Quality,Efficiency,Combo,Charge; public long Taps,Overdrives; public uint CritRng=(uint)Balance.InitialCritRng;
+        public int Quality,Efficiency,Combo,Charge; public long Taps,Overdrives,ModelLevel; public uint CritRng=(uint)Balance.InitialCritRng;
         public double SavedAt,LastTap=-1,ActiveUntil,CooldownUntil;
         public bool QualityUsed,ResearchUsed; public string Tutorial="tap";
+        public RetentionState Retention=RetentionState.Migrated();
         public LifetimeState Lifetime=new LifetimeState{initialized=true};
         public ChallengeState Challenges=new ChallengeState();public IndustryState Industry=new IndustryState();public MetaState Meta=new MetaState();public WorkshopState Workshop=new WorkshopState();public PrestigeState Prestige=new PrestigeState();
         public Job Training,ResearchJob;
-        public GameState Copy() { var s=(GameState)MemberwiseClone();s.Hardware=(long[])Hardware.Clone();s.Research=(int[])Research.Clone();s.Training=Training?.Copy();s.ResearchJob=ResearchJob?.Copy();s.Workshop=Workshop.Copy();s.Prestige=Prestige.Copy();s.Meta=Meta.Copy();s.Industry=Industry.Copy();s.Challenges=Challenges.Copy();s.Lifetime=Lifetime.Copy();return s; }
+        public GameState Copy() { var s=(GameState)MemberwiseClone();s.Hardware=(long[])Hardware.Clone();s.Research=(int[])Research.Clone();s.Training=Training?.Copy();s.ResearchJob=ResearchJob?.Copy();s.Workshop=Workshop.Copy();s.Prestige=Prestige.Copy();s.Meta=Meta.Copy();s.Industry=Industry.Copy();s.Challenges=Challenges.Copy();s.Lifetime=Lifetime.Copy();s.Retention=Retention.Copy();return s; }
     }
     // Explicit, separate Unity save/fixture schema. Web saves are never silently consumed.
     [Serializable] public class MainStateData
     {
         public NumberData credits,data; public long[] hardware; public int[] research;
-        public int quality,efficiency,combo,charge; public long taps,overdrives; public uint critRng;
+        public int quality,efficiency,combo,charge; public long taps,overdrives,modelLevel;public bool modelLevelRecorded; public uint critRng;
         public double savedAt,lastTap,activeUntil,cooldownUntil;
         public bool qualityUsed,researchUsed; public string tutorial;
         public IndustryState industry;public MetaState meta;public PrestigeState prestige; public WorkshopState workshop; public bool hasTraining,hasResearchJob; public Job training,researchJob;
-        public ChallengeProgress challengeProgress;public LifetimeState lifetime;
-        static void Fill(MainStateData d,GameState s){d.lifetime=s.Lifetime.Copy();d.industry=s.Industry.Copy();d.meta=s.Meta.Copy();d.prestige=s.Prestige.Copy();d.workshop=s.Workshop.Copy();d.credits=s.Credits.ToData();d.data=s.Data.ToData();d.hardware=(long[])s.Hardware.Clone();d.research=(int[])s.Research.Clone();d.quality=s.Quality;d.efficiency=s.Efficiency;d.combo=s.Combo;d.charge=s.Charge;d.taps=s.Taps;d.overdrives=s.Overdrives;d.critRng=s.CritRng;d.savedAt=s.SavedAt;d.lastTap=s.LastTap;d.activeUntil=s.ActiveUntil;d.cooldownUntil=s.CooldownUntil;d.qualityUsed=s.QualityUsed;d.researchUsed=s.ResearchUsed;d.tutorial=s.Tutorial;d.hasTraining=s.Training!=null;d.hasResearchJob=s.ResearchJob!=null;d.training=s.Training?.Copy();d.researchJob=s.ResearchJob?.Copy();d.challengeProgress=s.Challenges.Progress.Copy();}
+        public ChallengeProgress challengeProgress;public LifetimeState lifetime;public RetentionState retention;
+        static void Fill(MainStateData d,GameState s){d.modelLevelRecorded=true;d.modelLevel=s.ModelLevel;d.retention=s.Retention.Copy();d.lifetime=s.Lifetime.Copy();d.industry=s.Industry.Copy();d.meta=s.Meta.Copy();d.prestige=s.Prestige.Copy();d.workshop=s.Workshop.Copy();d.credits=s.Credits.ToData();d.data=s.Data.ToData();d.hardware=(long[])s.Hardware.Clone();d.research=(int[])s.Research.Clone();d.quality=s.Quality;d.efficiency=s.Efficiency;d.combo=s.Combo;d.charge=s.Charge;d.taps=s.Taps;d.overdrives=s.Overdrives;d.critRng=s.CritRng;d.savedAt=s.SavedAt;d.lastTap=s.LastTap;d.activeUntil=s.ActiveUntil;d.cooldownUntil=s.CooldownUntil;d.qualityUsed=s.QualityUsed;d.researchUsed=s.ResearchUsed;d.tutorial=s.Tutorial;d.hasTraining=s.Training!=null;d.hasResearchJob=s.ResearchJob!=null;d.training=s.Training?.Copy();d.researchJob=s.ResearchJob?.Copy();d.challengeProgress=s.Challenges.Progress.Copy();}
         public static StateData From(GameState s){var d=new StateData{hasChallenge=s.Challenges.Run!=null,challengeRun=s.Challenges.Run?.Copy(),challengeMain=s.Challenges.Main==null?null:FromMain(s.Challenges.Main)};Fill(d,s);return d;}
         public static MainStateData FromMain(GameState s){var d=new MainStateData();Fill(d,s);return d;}
 
@@ -62,7 +63,7 @@ namespace IdleIntelligence.Core
             if(legacy||beforePrestige||beforeMeta){meta=MetaState.New(savedAt);meta.cycleStartedAt=workshop.runStartedAt;meta.cycleRecords=new[]{quality,efficiency,workshop.integration};if(prestige.lab)meta.tutorial="lab";if(workshop.hasAnalysis)workshop.analysis.quantityIntegral=workshop.analysis.done;int model=Array.FindIndex(MetaBalance.Models,m=>m.Id==workshop.activeModel);if(model>=0)meta.models[model]=workshop.activeModelLevel;}
             if(industry!=null){if(!industry.hasSynthesis)industry.synthesis=null;if(industry.foundries!=null)foreach(var f in industry.foundries)if(f!=null&&!f.hasActive)f.active=null;}
             if(legacy||beforePrestige||beforeMeta||beforeIndustry||beforeChallenges)challengeProgress=new ChallengeProgress();
-            var s=new GameState {Lifetime=lifetime==null||!lifetime.initialized?new LifetimeState{initialized=true,historicalUnavailable=true,since=savedAt}:lifetime,Challenges=new ChallengeState{Progress=challengeProgress},Industry=industry,Meta=meta,Prestige=prestige,Workshop=workshop,Credits=ScientificNumber.FromData(credits),Data=ScientificNumber.FromData(data),Hardware=hardware,Research=research,Quality=quality,Efficiency=efficiency,Combo=combo,Charge=charge,Taps=taps,Overdrives=overdrives,CritRng=critRng,SavedAt=savedAt,LastTap=lastTap,ActiveUntil=activeUntil,CooldownUntil=cooldownUntil,QualityUsed=qualityUsed,ResearchUsed=researchUsed,Tutorial=tutorial,Training=hasTraining?training:null,ResearchJob=hasResearchJob?researchJob:null};
+            var s=new GameState {ModelLevel=modelLevelRecorded?modelLevel:(long)quality+efficiency+(workshop?.integration??0),Retention=retention==null||!retention.initialized?RetentionState.Migrated():retention,Lifetime=lifetime==null||!lifetime.initialized?new LifetimeState{initialized=true,historicalUnavailable=true,since=savedAt}:lifetime,Challenges=new ChallengeState{Progress=challengeProgress},Industry=industry,Meta=meta,Prestige=prestige,Workshop=workshop,Credits=ScientificNumber.FromData(credits),Data=ScientificNumber.FromData(data),Hardware=hardware,Research=research,Quality=quality,Efficiency=efficiency,Combo=combo,Charge=charge,Taps=taps,Overdrives=overdrives,CritRng=critRng,SavedAt=savedAt,LastTap=lastTap,ActiveUntil=activeUntil,CooldownUntil=cooldownUntil,QualityUsed=qualityUsed,ResearchUsed=researchUsed,Tutorial=tutorial,Training=hasTraining?training:null,ResearchJob=hasResearchJob?researchJob:null};
             if(deferSession)return s;Game.Validate(s);return s.Copy();
         }
     }

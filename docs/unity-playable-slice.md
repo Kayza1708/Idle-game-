@@ -110,3 +110,7 @@ In `Assets/Scenes/IdleIntelligence.unity` Play starten, **Forschung → Challeng
 ## Dauerhafte Statistik und Mastery
 
 Dieselbe Szene öffnen, Play und **Forschung → Dauerhafter Fortschritt** wählen. Käufe, Arbeit, Materialien und aktive Zeit stammen aus echten Aktionen; die Mastery-Liste ist scrollbar. Bei alten Ständen weist die Ansicht auf nicht verfügbare historische Zähler hin. Alte Bestände bleiben bestehen; es gibt keine erfundenen rückwirkenden Ereignisse. Missionen/Achievement-Claims folgen als nächster Teil von Abschnitt 3. [Details](unity-lifetime.md).
+
+## Erfolge, Laborziele und Profil mit Play testen
+
+In derselben Szene **Forschung → Profil · Achievements / Laborziele / Post** öffnen. Erreichte Stufen direkt auf den Aktionskarten abholen; AP beeinflussen die echten Einnahmen. Laborziele vergeben die ursprünglichen Credits/Items/Komponenten einmalig. Unter Profil Namen validiert speichern, den KI-Namen erstmals wählen, Nachrichten lesen und Quellen/Lizenzen öffnen. Langzeit-Challenges besitzen echte Stern-Claims; Seasonbedingungen benötigen noch Abschnitt 4. [Genaue Regeln und Save-v8-Grenzen](unity-retention.md). Missionen und vollständige Mira-Führung bleiben offen.

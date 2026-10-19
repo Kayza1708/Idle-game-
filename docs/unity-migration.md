@@ -18,6 +18,10 @@ Alle 690 aktuellen V2-Laufstufen sind mit Einschränkungen, echter Hauptspielpau
 
 [Statistik-Abhängigkeit für Abschnitt 3](unity-lifetime.md): echte Produzenten, Mastery-XP, explizite aktive Zeit, Challenge-Historienisolation und Save-v7-Erhaltung. Alte Historien werden nicht aus Beständen erfunden. Missionen/Achievements/Profil bleiben bis zu ihren Transaktionen und Oberflächen offen.
 
+## Funktionaler Folgeauftrag: Erfolge und Profil
+
+[Erfolge, Laborziele und Profil](unity-retention.md): alle 37 Achievementfamilien mit Claims und AP-Einnahmen, zwölf statische Bedingungen, acht Einführungsbelohnungen, Namenspolicy/erste KI-Wahl und lesbares Postfach. Save v8 erhält v1–7 und speichert das Modelllevel unabhängig. 935 gemeinsame Transaktionen, 330 Namens- und 18.094 Unicodefälle. Missionen/Perioden sowie Season-Produzenten bleiben offen; die breite Systemzeile wird nicht pauschal abgeschlossen.
+
 ## Fortschritt: Items und Schmiede
 
 Der nächste [spielbare Abschnitt](unity-playable-slice.md#items-und-schmiede-mit-play-testen) enthält 20 Komponenten, bezahlte Hardwarepakete/passive Funde, sechs Analysen, zwei Modulrezepte, Bauplanlernen/-meisterschaft, den vollständigen 30-Typen-/sechs-Seltenheiten-Katalog, Inventar, Ausrüsten/Ablegen/Sperren/Levelverbesserung und sofortige Herstellung/Fusion. Originalkosten und Erhaltungsregeln werden gegen 509 zusätzliche TypeScript-Fälle geprüft. Gemeinsame Porträts/Formen/Farben/Details und kosmetische Schmiedeanimationen sind an sofort gespeicherte Transaktionen gebunden. Unity-Save v1 wird mit Originalkopie nach v2 ergänzt. [Prüfnachweis](unity-items-verification.json) und [tatsächlicher Mitschnitt](recordings/unity-forge.mp4).
