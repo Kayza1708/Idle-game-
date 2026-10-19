@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using IdleIntelligence.Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,13 +12,14 @@ namespace IdleIntelligence.Runtime
         // Test injection never changes the normal persistent path or grants currency.
         public static string SavePathOverride;
         public Text Credits,Compute,Users,Data,Status,Overdrive,Hint;
-        public Button TapButton,HardwareTab,TrainingTab,ResearchTab,SaveButton,ItemsTab;
-        public WorkshopUI WorkshopPrefab;public WorkshopUI WorkshopView {get;private set;}
+        public Button TapButton,HardwareTab,TrainingTab,ResearchTab,SaveButton,ItemsTab,PrestigeTab;
+        public PrestigeNetworkView PrestigePrefab;public PrestigeNetworkView PrestigeView {get;private set;}public WorkshopUI WorkshopPrefab;public WorkshopUI WorkshopView {get;private set;}
         public Transform Content;public ActionCard CardPrefab;public Sprite[] HardwareSprites;
         public GameState State {get;private set;}
         public bool Writable {get;private set;}
         public string SavePath=>store?.PathName;
         AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused;
+        GameObject queueControls;string queueSignature="";
         float nextRefresh,nextSave;readonly List<ActionCard> cards=new List<ActionCard>();
         static double Now=>DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         void Start()
@@ -29,7 +31,7 @@ namespace IdleIntelligence.Runtime
             if(elapsed>10&&loaded.State!=null&&Writable)message="Willkommen zurück: +"+State.Credits.Subtract(before)+" Credits (Offline-Limit berücksichtigt)";
             TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt)));
             HardwareTab.onClick.AddListener(()=>Show("hardware"));TrainingTab.onClick.AddListener(()=>Show("training"));ResearchTab.onClick.AddListener(()=>Show("research"));SaveButton.onClick.AddListener(()=>{Tick();Save();Refresh();});
-            ItemsTab.onClick.AddListener(()=>Show("items"));started=true;Show(tab);Save();Refresh();
+            ItemsTab.onClick.AddListener(()=>Show("items"));PrestigeTab.onClick.AddListener(()=>Show("prestige"));started=true;Show(tab);Save();Refresh();
         }
         void Update()
         {
@@ -38,7 +40,7 @@ namespace IdleIntelligence.Runtime
             if(Time.unscaledTime>=nextRefresh){Tick();Refresh();nextRefresh=Time.unscaledTime+.1f;}
             if(Time.unscaledTime>=nextSave){Save();nextSave=Time.unscaledTime+5;}
         }
-        void Tick(){if(Writable)State=Game.Advance(State,Now);}
+        void Tick(){if(Writable){long resets=State.Prestige.resets;State=Game.Advance(State,Now);if(State.Prestige.resets!=resets)Save();}}
         public bool Act(Func<GameState,GameState> action)
         {
             if(!Writable)return false;Tick();var before=State;State=action(State);
@@ -52,37 +54,45 @@ namespace IdleIntelligence.Runtime
         void OnApplicationPause(bool value)
         {
             if(!started)return;
-            if(value){WorkshopView?.Forge.Cancel();Tick();Save();paused=true;}else{paused=false;Tick();Save();Refresh();}
+            if(value){WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();Tick();Save();paused=true;}else{paused=false;Tick();Save();Refresh();}
         }
-        void OnApplicationFocus(bool focused){if(!started)return;if(focused){Tick();Save();Refresh();}else{WorkshopView?.Forge.Cancel();Tick();Save();}}
+        void OnApplicationFocus(bool focused){if(!started)return;if(focused){Tick();Save();Refresh();}else{WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();Tick();Save();}}
         void OnApplicationQuit(){Tick();Save();}
         void OnDestroy(){if(started){Tick();Save();}}
         void Show(string selected)
         {
-            if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
+            if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);queueControls=null;}queueSignature="";
+            if(PrestigeView!=null){PrestigeView.Cancel();Destroy(PrestigeView.gameObject);PrestigeView=null;}if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
-            bool workshop=tab=="items";
+            bool workshop=tab=="items"||tab=="prestige";
             foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
             Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
-            int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?2:Balance.Research.Length;
+            int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
             for(int i=0;i<count;i++)
             {
-                int index=i;var card=Instantiate(CardPrefab,Content);card.gameObject.name=tab+"-"+(tab=="hardware"?Balance.Hardware[i].Id:tab=="training"?(i==0?"quality":"efficiency"):Balance.Research[i].Id);cards.Add(card);
+                int index=i;var card=Instantiate(CardPrefab,Content);card.gameObject.name=tab+"-"+(tab=="hardware"?Balance.Hardware[i].Id:tab=="training"?PrestigeAutomation.Tracks[i]:Balance.Research[i].Id);cards.Add(card);
                 if(tab=="hardware") {card.Icon.sprite=HardwareSprites[i];card.Button.onClick.AddListener(()=>Act(s=>Game.Buy(s,Balance.Hardware[index].Id)));}
-                else {card.Icon.gameObject.SetActive(false);if(tab=="training")card.Button.onClick.AddListener(()=>Act(s=>Game.Train(s,index==0?"quality":"efficiency")));else card.Button.onClick.AddListener(()=>Act(s=>Game.Research(s,Balance.Research[index].Id)));}
+                else {card.Icon.gameObject.SetActive(false);if(tab=="training")card.Button.onClick.AddListener(()=>Act(s=>Game.Train(s,PrestigeAutomation.Tracks[index])));else card.Button.onClick.AddListener(()=>Act(s=>Game.Research(s,Balance.Research[index].Id)));}
             }
             Refresh();
+        }
+        void RefreshQueues()
+        {
+            if(tab!="training"&&tab!="research")return;string signature=tab+string.Join(",",State.Prestige.trainingQueue.Select(j=>j.track+":"+j.level))+string.Join(",",State.Prestige.researchQueue);if(signature==queueSignature)return;queueSignature=signature;if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);}queueControls=WorkshopUIFactory.Vertical("UnpaidQueues",Content);
+            if(tab=="training")for(int i=0;i<State.Prestige.trainingQueue.Length;i++){int index=i;var job=State.Prestige.trainingQueue[i];WorkshopUIFactory.Button("CancelTrainingQueue"+i,queueControls.transform,"Wartend: "+job.track+" → "+job.level+" · entfernen",()=>Act(s=>{var n=s.Copy();string track=n.Prestige.trainingQueue[index].track;n.Prestige.trainingQueue=n.Prestige.trainingQueue.Where((j,k)=>k<index||j.track!=track).ToArray();return n;}));}
+            if(tab=="research")for(int i=0;i<State.Prestige.researchQueue.Length;i++){int index=i;string id=State.Prestige.researchQueue[i];WorkshopUIFactory.Button("CancelResearchQueue"+i,queueControls.transform,"Wartend: "+id+" · entfernen",()=>Act(s=>{var n=s.Copy();n.Prestige.researchQueue=n.Prestige.researchQueue.Where((j,k)=>k!=index).ToArray();return n;}));}
         }
         static string Seconds(double seconds)=>Math.Max(0,seconds).ToString("F0")+" s";
         void Refresh()
         {
-            if(State==null)return;
+            if(State==null)return;RefreshQueues();
             Credits.text="CREDITS\n"+State.Credits+"  (+"+Game.Income(State)+"/s)";
             Compute.text="COMPUTE\n"+Game.Compute(State);Users.text="NUTZER\n"+Game.Users(State);Data.text="DATEN\n"+State.Data+" (+"+Game.DataRate(State)+"/s)";
-            Overdrive.text=State.ActiveUntil>State.SavedAt?"OVERDRIVE ×"+Balance.OverdriveFactor+" · "+Seconds((State.ActiveUntil-State.SavedAt)/1000):"OVERDRIVE  "+State.Charge+" / "+Balance.OverdriveCharge+(State.CooldownUntil>State.SavedAt?" · Pause "+Seconds((State.CooldownUntil-State.SavedAt)/1000):"");
+            Overdrive.text=State.ActiveUntil>State.SavedAt?"OVERDRIVE ×"+Game.OverdriveFactor(State)+" · "+Seconds((State.ActiveUntil-State.SavedAt)/1000):"OVERDRIVE  "+State.Charge+" / "+Balance.OverdriveCharge+(State.CooldownUntil>State.SavedAt?" · Pause "+Seconds((State.CooldownUntil-State.SavedAt)/1000):"");
             Status.text=(Writable?"● ":"! ")+message;Status.color=Writable?new Color(.65f,.9f,.8f):new Color(1,.65f,.55f);
-            Hint.text=State.Tutorial=="tap"?"Tippe auf das Labor und kaufe deinen ersten Rechner.":State.Tutorial=="training"?"Training: erstes Qualitätstraining kostenlos.":State.Tutorial=="research"?"Forschung: erste Datenerzeugung kostenlos.":"Hardware liefert Compute → Nutzer → Credits und Daten.";
+            Hint.text=State.Prestige.resets>0?"INT verstärkt die Produktion. Knoten und Automation im INT-Netz.":State.Tutorial=="tap"?"Tippe auf das Labor und kaufe deinen ersten Rechner.":State.Tutorial=="training"?"Training: erstes Qualitätstraining kostenlos.":State.Tutorial=="research"?"Forschung: erste Datenerzeugung kostenlos.":"Hardware liefert Compute → Nutzer → Credits und Daten.";
             TapButton.interactable=Writable;SaveButton.interactable=Writable;
             HardwareTab.GetComponentInChildren<Text>().color=tab=="hardware"?Color.white:new Color(.65f,.75f,.8f);TrainingTab.GetComponentInChildren<Text>().color=tab=="training"?Color.white:new Color(.65f,.75f,.8f);ResearchTab.GetComponentInChildren<Text>().color=tab=="research"?Color.white:new Color(.65f,.75f,.8f);
             for(int i=0;i<cards.Count;i++)
@@ -94,12 +104,12 @@ namespace IdleIntelligence.Runtime
                 }
                 else if(tab=="training")
                 {
-                    string id=i==0?"quality":"efficiency";var cost=Game.TrainingCost(State,id);card.Title.text=(i==0?"Qualität":"Effizienz")+"  Lv. "+(i==0?State.Quality:State.Efficiency);
-                    card.Detail.text=State.Training!=null?"Läuft: "+State.Training.id+" · "+Seconds((State.Training.required-State.Training.done)/Game.WorkSpeed(State)):"Start: "+cost+" C · "+Seconds(Game.TrainingWork(State,id)/Game.WorkSpeed(State));card.Button.interactable=Writable&&State.Training==null&&State.Credits.CompareTo(cost)>=0;
+                    string id=PrestigeAutomation.Tracks[i];var cost=Game.TrainingCost(State,id);card.Title.text=(i==0?"Qualität":i==1?"Effizienz":"Integration")+"  Lv. "+Game.TrainingLevel(State,id);
+                    card.Detail.text=State.Training!=null?"Läuft: "+State.Training.id+" · "+Seconds((State.Training.required-State.Training.done)/Game.WorkSpeed(State)):"Start: "+cost+" C · "+Seconds(Game.TrainingWork(State,id)/Game.WorkSpeed(State));card.Button.interactable=Writable&&Game.TrainingAvailable(State,id)&&(State.Training==null?State.Credits.CompareTo(cost)>=0&&State.Data.CompareTo(Game.TrainingData(State,id))>=0:PrestigeRules.Has(State,"T03")&&State.Prestige.trainingQueue.Length<2);if(id=="integration")card.Detail.text+=" · "+Game.TrainingData(State,id)+" Daten";if(State.Training!=null&&PrestigeRules.Has(State,"T03"))card.Detail.text+=" · Einreihen ("+State.Prestige.trainingQueue.Length+"/2)";
                 }
                 else
                 {
-                    var r=Balance.Research[i];var block=Game.ResearchBlock(State,i);card.Title.text=r.Name+"  Lv. "+State.Research[i];card.Detail.text=State.ResearchJob?.id==r.Id?"Läuft · "+Seconds((State.ResearchJob.required-State.ResearchJob.done)/(State.ResearchJob.intro?1:Game.WorkSpeed(State,true))):(block??"Start")+" · "+Game.ResearchCost(State,i)+" Daten";card.Button.interactable=Writable&&block==null;
+                    var r=Balance.Research[i];var block=Game.ResearchBlock(State,i);card.Title.text=r.Name+"  Lv. "+State.Research[i];card.Detail.text=State.ResearchJob?.id==r.Id?"Läuft · "+Seconds((State.ResearchJob.required-State.ResearchJob.done)/(State.ResearchJob.intro?1:Game.WorkSpeed(State,true))):(block??"Start")+" · "+Game.ResearchCost(State,i)+" Daten";card.Button.interactable=Writable&&(block==null||block=="Labor belegt"&&!State.Prestige.researchQueue.Contains(r.Id)&&State.Prestige.researchQueue.Length<(PrestigeRules.Has(State,"F02")?6:2));var job=PrestigeAutomation.ResearchJobs(State).FirstOrDefault(j=>j.id==r.Id);if(job!=null)card.Detail.text="Läuft · "+Seconds((job.required-job.done)/Game.WorkSpeed(State,true));if(block=="Labor belegt"){card.Detail.text+=" · Einreihen";card.Button.interactable=Writable&&PrestigeAutomation.CanQueueResearch(State,r.Id);}
                 }
             }
         }

@@ -110,6 +110,10 @@ namespace IdleIntelligence.Core
             if (b.IsZero) throw new DivideByZeroException();
             return IsZero ? Zero : Parts(Mantissa / b.Mantissa, Exponent - b.Exponent);
         }
+        public ScientificNumber Floor()
+        {
+            var integers=new SortedDictionary<long,BigInteger>(terms.Where(p=>p.Key>=0).ToDictionary(p=>p.Key,p=>p.Value));var fractions=new SortedDictionary<long,BigInteger>(terms.Where(p=>p.Key<0).ToDictionary(p=>p.Key,p=>p.Value));if(Sign(fractions)<0){integers.TryGetValue(0,out var n);integers[0]=n-1;}return new ScientificNumber(integers);
+        }
         public double Log10() => IsZero ? double.NegativeInfinity : Math.Log10(Mantissa) + Exponent;
         public ScientificNumber Pow(double p)
         {

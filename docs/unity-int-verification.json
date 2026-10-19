@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-19",
+  "scope": "Normal INT prestige and 60 nodes on ported Unity systems; not a completed rewrite",
+  "branch": "codex/unity-rewrite",
+  "baseImplementation": "4aa4bbb06ab4de5dd6d9805d96cf16ca480cc85a",
+  "unity": "6000.3.26f1",
+  "scene": "IdleIntelligence/Assets/Scenes/IdleIntelligence.unity",
+  "compile": {
+    "exitCode": 0,
+    "compilerErrors": 0,
+    "log": "/tmp/idle-prestige-compile.log"
+  },
+  "typescript": {
+    "typecheck": "passed",
+    "vitest": {
+      "files": 128,
+      "passed": 1857,
+      "failed": 0,
+      "durationSeconds": 253.17
+    },
+    "build": "passed",
+    "warnings": [
+      "Existing main bundle exceeds 500 kB"
+    ],
+    "unityExportCheck": "passed",
+    "finalTargetedFollowup": {
+      "file": "scripts/unity-prestige.test.ts",
+      "passed": 2,
+      "failed": 0,
+      "durationSeconds": 15.07,
+      "reason": "Added automation timing/reserve fixtures after the full suite; TypeScript gameplay source unchanged"
+    }
+  },
+  "unityTests": {
+    "editMode": {
+      "result": "Passed",
+      "total": "25",
+      "passed": "25",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-19 12:21:53Z",
+      "end-time": "2026-10-19 12:22:43Z",
+      "duration": "50.1025809",
+      "exitCode": 0
+    },
+    "playMode": {
+      "result": "Passed",
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-19 12:23:04Z",
+      "end-time": "2026-10-19 12:23:20Z",
+      "duration": "16.0985684",
+      "exitCode": 0
+    },
+    "finalParityFollowup": {
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "start-time": "2026-10-19 12:23:53Z",
+      "end-time": "2026-10-19 12:23:55Z",
+      "duration": "2.2346025",
+      "reason": "Strengthened the existing staggered hardware clock fixture after the full suite; same C# code"
+    }
+  },
+  "references": {
+    "transactionsAndRates": 24,
+    "exactNumbers": 8,
+    "items": 510,
+    "fundedPrestigeCases": 380,
+    "nodeCount": 60,
+    "prestigeSourceSHA256": "031e8b3f4a24ea2e84d253ccfe4a3003d81785f51924980e5961650de36d963e"
+  },
+  "naturalFirstPrestige": {
+    "source": "NaturalPrestigeRun.json",
+    "startCredits": 50,
+    "additionalTestGrants": false,
+    "seconds": 2378,
+    "actions": 14532,
+    "checkpoints": 41,
+    "strategy": "Three taps/second, at most one affordable hardware purchase/second, lower Q/E training, existing research up to level 10; actual source tutorial and regular starter gifts",
+    "classification": "Accelerated deterministic elapsed-time replay in TS and C#, not a wall-clock device playthrough"
+  },
+  "saveMigration": {
+    "currentVersion": 3,
+    "supportedOldVersions": [
+      1,
+      2
+    ],
+    "originalCopies": "Byte-identical .v1-original-<SHA256> / .v2-original-<SHA256> before writing",
+    "oldResourcesItemsEquipmentAndWork": "preserved",
+    "historicalIncome": "Unavailable in old Unity formats, explicitly flagged; new eligible income starts tracking after migration",
+    "corruptOrUnknown": "read-only; never automatically overwrite"
+  },
+  "mobile": {
+    "profiles": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ]
+    ],
+    "actualCanvasRenders": "passed; visually inspected network, details and prestige pulse",
+    "pinch": "Two-touch InputSystem path and focal-point math implemented; math tested in PlayMode",
+    "physicalDevice": false,
+    "playerBuild": false
+  },
+  "priorFailedAttempts": [
+    {
+      "kind": "EditMode",
+      "reason": "Corrected source fixture setup/craft signature, tutorial replay and analysis test duration; final full run passes"
+    },
+    {
+      "kind": "PlayMode",
+      "reason": "One stale test button required frame refresh; final full run passes"
+    },
+    {
+      "kind": "PlayMode no graphics",
+      "reason": "RenderTexture unavailable with -nographics (6/9); repeated full suite with active graphics (9/9)"
+    },
+    {
+      "kind": "Expanded automation references",
+      "reason": "Corrected independent hardware timers, additive training credit reserve, research scheduler boundaries and immediate/ten-second/end-of-work prestige checkpoints to match TS; final full EditMode run passes"
+    }
+  ],
+  "preserved": [
+    "TypeScript gameplay source and balance",
+    "Existing Unity resources and saves",
+    "Local backups, iOS and unrelated exports"
+  ],
+  "remaining": [
+    "Axioms and new AI models next",
+    "I08 knowledge model consumers",
+    "Remaining research catalogues and Foundry consumers",
+    "Analysis/craft/fusion planners, challenges and meta systems",
+    "Explicit web-save import and recovery UI",
+    "Seven languages, fonts, native reduced motion, audio/haptics",
+    "Physical mobile lifecycle/touch/accessibility tests and player build"
+  ],
+  "constraints": {
+    "newNativeAdsPurchaseSDKs": false,
+    "publication": false,
+    "mergePerformedByThisTask": false
+  }
+}

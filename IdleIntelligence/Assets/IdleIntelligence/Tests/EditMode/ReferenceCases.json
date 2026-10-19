@@ -219,6 +219,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -515,6 +518,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -864,6 +870,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -1160,6 +1169,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -1509,6 +1521,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -1805,6 +1820,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -2154,6 +2172,9 @@
       "amount": 1,
       "at": 1000100,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -2450,6 +2471,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -2799,6 +2823,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -3095,6 +3122,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -3444,6 +3474,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -3740,6 +3773,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -4094,6 +4130,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -4390,6 +4429,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -4744,6 +4786,9 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -5045,6 +5090,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -5462,6 +5510,9 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -5792,6 +5843,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -6180,6 +6234,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -6515,6 +6572,9 @@
         }
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -6928,6 +6988,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -7258,6 +7321,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -7646,6 +7712,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -7942,6 +8011,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -8291,6 +8363,9 @@
       "amount": 10,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -8587,6 +8662,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -9014,6 +9092,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -9327,6 +9408,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -9757,6 +9841,9 @@
       "amount": 1,
       "at": 1019800,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -10082,6 +10169,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -10549,6 +10639,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -10874,6 +10967,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -11316,6 +11412,9 @@
       "amount": 1,
       "at": 1020000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -11641,6 +11740,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -12108,6 +12210,9 @@
       "amount": 1,
       "at": 1021801,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -12433,6 +12538,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -12900,6 +13008,9 @@
       "amount": 1,
       "at": 1050000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -13225,6 +13336,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -13718,6 +13832,9 @@
       "amount": 1,
       "at": 173800000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -14014,6 +14131,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -14363,6 +14483,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -14693,6 +14816,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -15076,6 +15202,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -15401,6 +15530,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -15927,6 +16059,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -16252,6 +16387,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -16783,6 +16921,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
@@ -17079,6 +17220,9 @@
         "researchJob": null
       },
       "expected": {
+        "prestige": {
+          "schema": 1
+        },
         "workshop": {
           "schema": 1,
           "revision": 0,
