@@ -7,6 +7,7 @@ public const double ComputePerUser = 1d;
 public const double RevenuePerUser = 1.35d;
 public const double OfflineSeconds = 28800d;
 public const double MaxOfflineSeconds = 86400d;
+public const double TrainingCostFloor = 0.5d;
 public const double TrainingCreditBase = 300d;
 public const double TrainingCreditGrowth = 2.4d;
 public const double IntroTrainingSeconds = 20d;
@@ -59,11 +60,16 @@ new HardwareDefinition("dyson","Fusionsbetriebener Dyson-Schwarm",1e+95d,1.3d,1e
 new HardwareDefinition("matrioshka","Matrioshka-Gehirn",1e+125d,1.31d,1e+55d, new Milestone[]{new Milestone(10,0.12d,"research",0.1d),new Milestone(25,0.16d,"research",0.2d),new Milestone(50,0.22d,"research",0.3d),new Milestone(100,0.3d,"research",0.4d),new Milestone(250,0.42d,"research",0.5d),new Milestone(500,0.6d,"research",0.6d)})
 };
 public static readonly ResearchDefinition[] Research = {
-new ResearchDefinition("dataGeneration","Datenerzeugung",363d,180d,1.12d,new Requirement[]{}),
-new ResearchDefinition("modelArchitecture","Modellarchitektur",250d,900d,1.1d,new Requirement[]{new Requirement("dataGeneration",1)}),
-new ResearchDefinition("computeOptimization","Compute-Optimierung",300d,900d,1.1d,new Requirement[]{new Requirement("modelArchitecture",1)}),
-new ResearchDefinition("userScaling","Nutzer-Skalierung",350d,1200d,1.08d,new Requirement[]{new Requirement("computeOptimization",1)}),
-new ResearchDefinition("commercialization","Kommerzialisierung",400d,1200d,1.1d,new Requirement[]{new Requirement("modelArchitecture",1)})
+new ResearchDefinition("dataGeneration","Datenerzeugung",363d,180d,1.12d,false,true,new Requirement[]{}),
+new ResearchDefinition("modelArchitecture","Modellarchitektur",250d,900d,1.1d,false,true,new Requirement[]{new Requirement("dataGeneration",1)}),
+new ResearchDefinition("computeOptimization","Compute-Optimierung",300d,900d,1.1d,false,true,new Requirement[]{new Requirement("modelArchitecture",1)}),
+new ResearchDefinition("userScaling","Nutzer-Skalierung",350d,1200d,1.08d,false,true,new Requirement[]{new Requirement("computeOptimization",1)}),
+new ResearchDefinition("commercialization","Kommerzialisierung",400d,1200d,1.1d,false,true,new Requirement[]{new Requirement("modelArchitecture",1)}),
+new ResearchDefinition("materialAnalysis","Materialanalyse",100d,300d,0.08d,false,true,new Requirement[]{new Requirement("dataGeneration",1)}),
+new ResearchDefinition("blueprintAnalysis","Bauplananalyse",180d,600d,1d,false,true,new Requirement[]{new Requirement("materialAnalysis",1)}),
+new ResearchDefinition("blueprints","Offene Baupläne",300d,150d,1d,true,false,new Requirement[]{new Requirement("dataGeneration",1)}),
+new ResearchDefinition("materialRecycling","Materialrecycling",50000d,1800d,1d,true,false,new Requirement[]{new Requirement("materialAnalysis",3),new Requirement("blueprintAnalysis",3)}),
+new ResearchDefinition("labAutomation","Laborautomation",600d,1800d,1d,false,false,new Requirement[]{new Requirement("blueprintAnalysis",1)})
 };
 public static readonly double[] EarlySeconds = {30d,60d,90d,150d,240d};
 public static readonly double[] EarlyDataCap = {30d,60d,120d,180d,250d};

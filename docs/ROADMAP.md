@@ -11,8 +11,9 @@
 - [x] Ersten spielbaren C#-Abschnitt umgesetzt: große Zahlen, erzeugte zentrale Balance, Hardware/Compute/Nutzer/Credits, Taps/Overdrive, Qualität/Effizienz, fünf frühe Forschungen, getrennte atomare Saves mit Backup und Offlinefortschritt. [Umfang und Grenzen](unity-playable-slice.md).
 - [x] Hochformatszene mit vorhandener Labor-/Hardwaregrafik, Ressourcenleiste und wiederverwendbarem Aktionsprefab an echte Spielaktionen gebunden; 320/390/430 px gerendert und geprüft.
 - [x] 24 gemeinsame TypeScript-Transaktions-/Ratenfälle und acht exakte Zahlenfälle, 13 EditMode- und drei PlayMode-Tests geprüft; TypeScript-Suite mit 1.845 Tests, Typecheck und Build erfolgreich.
-- [ ] Übrige Systeme laut Migrationsliste portieren; insbesondere Materialbelohnungen, vollständige Forschung, INT/Prestige, sichere Web-Save-Migration und UI-/Sprach-/Lifecycle-Parität.
-- [ ] Unity-PlayMode, Player-Build und echte mobile Geräteabnahme durchführen. Der Template-Compile belegt keine Spielparität.
+- [x] Itemabschnitt: Komponenten, bezahlte Materialpakete/Analysen, Baupläne/Meisterschaft, Inventar/Ausrüstung, Sofortherstellung/Fusion und gemeinsame Schmiededarstellung mit rein kosmetischen Animationen implementiert. 509 zusätzliche TS-Fälle, 18 EditMode- und sechs PlayMode-Tests; Save-v1-Migration mit Originalkopie. [Anleitung und Grenzen](unity-playable-slice.md).
+- [ ] Übrige Systeme laut Migrationsliste portieren; insbesondere vollständige Forschung, Modell-/Prestige-/Axiomfortschritt, fehlende Itemverbraucher/Erwerbswege, sichere Web-Save-Migration und UI-/Sprach-/Lifecycle-Parität.
+- [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
 Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.
 
