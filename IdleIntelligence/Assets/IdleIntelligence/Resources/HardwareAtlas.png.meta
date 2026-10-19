@@ -1,0 +1,728 @@
+fileFormatVersion: 2
+guid: 7f93435860270448f8b35b718037562a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5192809946355133643
+    second: HardwareAtlas_0
+  - first:
+      213: -3290019339265839145
+    second: HardwareAtlas_1
+  - first:
+      213: -8506538201340116719
+    second: HardwareAtlas_2
+  - first:
+      213: -8675229783636917823
+    second: HardwareAtlas_3
+  - first:
+      213: -8717257015439525652
+    second: HardwareAtlas_4
+  - first:
+      213: -5117181187076738471
+    second: HardwareAtlas_5
+  - first:
+      213: -6115162218568552761
+    second: HardwareAtlas_6
+  - first:
+      213: 5761782407934566079
+    second: HardwareAtlas_7
+  - first:
+      213: -4630125838802777853
+    second: HardwareAtlas_8
+  - first:
+      213: -1994067872311030509
+    second: HardwareAtlas_9
+  - first:
+      213: -3042106155621805245
+    second: HardwareAtlas_10
+  - first:
+      213: -1332706504726652972
+    second: HardwareAtlas_11
+  - first:
+      213: 1947274970391636571
+    second: HardwareAtlas_12
+  - first:
+      213: -5313450079084026936
+    second: HardwareAtlas_13
+  - first:
+      213: -496145348955535954
+    second: HardwareAtlas_14
+  - first:
+      213: -5390102909311926142
+    second: HardwareAtlas_15
+  - first:
+      213: -1011346094206918844
+    second: HardwareAtlas_16
+  - first:
+      213: -2586959082108007618
+    second: HardwareAtlas_17
+  - first:
+      213: -1082577975827953261
+    second: HardwareAtlas_18
+  - first:
+      213: 624446566749333974
+    second: HardwareAtlas_19
+  - first:
+      213: -6524815448984274188
+    second: HardwareAtlas_20
+  - first:
+      213: 1591735542884954260
+    second: HardwareAtlas_21
+  - first:
+      213: 7346153038848698925
+    second: HardwareAtlas_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HardwareAtlas_0
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 929
+        width: 341
+        height: 277
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bccec9e2221901840800000000000000
+      internalID: 5192809946355133643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_1
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 1196
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dfe4ea97d08752d0800000000000000
+      internalID: -3290019339265839145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_2
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 915
+        width: 286
+        height: 311
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11105d05394b2f980800000000000000
+      internalID: -8506538201340116719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 990
+        width: 5
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c1ce61a9746b9780800000000000000
+      internalID: -8675229783636917823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_4
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 935
+        width: 254
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce8f1f23ee4160780800000000000000
+      internalID: -8717257015439525652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_5
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 950
+        width: 323
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 952baf482de1cf8b0800000000000000
+      internalID: -5117181187076738471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 630
+        width: 296
+        height: 303
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cee45a9c54922ba0800000000000000
+      internalID: -6115162218568552761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_7
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 640
+        width: 286
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbed802a296f5ff40800000000000000
+      internalID: 5761782407934566079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_8
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 889
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3098dc0c41d7ebfb0800000000000000
+      internalID: -4630125838802777853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_9
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 629
+        width: 612
+        height: 289
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31dc1ecc5d5a354e0800000000000000
+      internalID: -1994067872311030509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 966
+        height: 636
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3431229b19448c5d0800000000000000
+      internalID: -3042106155621805245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_11
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 234
+        width: 293
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d75ae3be76418de0800000000000000
+      internalID: -1332706504726652972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_12
+      rect:
+        serializedVersion: 2
+        x: 1046
+        y: 201
+        width: 41
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5ae33ab44c160b10800000000000000
+      internalID: 1947274970391636571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_13
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 153
+        width: 43
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c3ec601e45d246b0800000000000000
+      internalID: -5313450079084026936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_14
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 132
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea50b8e0f665d19f0800000000000000
+      internalID: -496145348955535954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_15
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 151
+        width: 43
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 280c9a346f18235b0800000000000000
+      internalID: -5390102909311926142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_16
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 0
+        width: 148
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44f51dde51af6f1f0800000000000000
+      internalID: -1011346094206918844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_17
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 179
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3b4b7ecb66491cd0800000000000000
+      internalID: -2586959082108007618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_18
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 195
+        width: 25
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3990d151119e9f0f0800000000000000
+      internalID: -1082577975827953261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_19
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 134
+        width: 14
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d96e4018da7aa800800000000000000
+      internalID: 624446566749333974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_20
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 134
+        width: 70
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fabf4a4be23375a0800000000000000
+      internalID: -6524815448984274188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_21
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 54
+        width: 48
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 490750afa0bf61610800000000000000
+      internalID: 1591735542884954260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HardwareAtlas_22
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 64
+        width: 42
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2aab3a6447c2f560800000000000000
+      internalID: 7346153038848698925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HardwareAtlas_0: 5192809946355133643
+      HardwareAtlas_1: -3290019339265839145
+      HardwareAtlas_10: -3042106155621805245
+      HardwareAtlas_11: -1332706504726652972
+      HardwareAtlas_12: 1947274970391636571
+      HardwareAtlas_13: -5313450079084026936
+      HardwareAtlas_14: -496145348955535954
+      HardwareAtlas_15: -5390102909311926142
+      HardwareAtlas_16: -1011346094206918844
+      HardwareAtlas_17: -2586959082108007618
+      HardwareAtlas_18: -1082577975827953261
+      HardwareAtlas_19: 624446566749333974
+      HardwareAtlas_2: -8506538201340116719
+      HardwareAtlas_20: -6524815448984274188
+      HardwareAtlas_21: 1591735542884954260
+      HardwareAtlas_22: 7346153038848698925
+      HardwareAtlas_3: -8675229783636917823
+      HardwareAtlas_4: -8717257015439525652
+      HardwareAtlas_5: -5117181187076738471
+      HardwareAtlas_6: -6115162218568552761
+      HardwareAtlas_7: 5761782407934566079
+      HardwareAtlas_8: -4630125838802777853
+      HardwareAtlas_9: -1994067872311030509
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

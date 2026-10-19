@@ -1,6 +1,22 @@
 # Idle Intelligence – aktueller Stand
 
-Stand: Prestigenetz und Schmiedebewegung nach main `625a42f` (PR #126). Frühere doppelte Arbeitsprotokolle und erledigte Branch-Abhängigkeiten stehen in der Git-Historie; diese Datei beschreibt die verbleibende Arbeit.
+## Unity-Rewrite lokal · 19.10.2026
+
+- [x] Tatsächlichen Repositorypfad und Branch `codex/unity-rewrite` geprüft; TypeScript, lokale Backups, Exporte und iOS-Bestand erhalten.
+- [x] Vorhandenes Unity-6000.3.26f1-Unterprojekt mit Git-Ignore für generierte Daten und Arbeitsregeln eingerichtet; vollständige Asset-/Meta-Paare geprüft.
+- [x] Aktuellen Spielcode als [Migrationsliste](unity-migration.md) und [Dateikatalog](unity-source-inventory.md) erfasst; keine Spielsysteme entfernt und keine Balance geändert.
+- [x] Bereits geöffneten passenden Editor und erfolgreichen Template-/Paket-Compile samt erstem Import im bestehenden Editorlog nachgewiesen.
+- [x] TypeScript-Referenz unverändert geprüft: Typecheck, 1.843 reguläre Tests und Produktionsbuild erfolgreich; bekannte Bundlegrößenwarnung bleibt offen.
+- [x] Separaten Batch-Import mit Unity 6000.3.26f1 nach manuellem Schließen des Projekts ausgeführt, Exitcode 0; siehe Migrationsdokument. Keine zweite Instanz gestartet.
+- [x] Ersten spielbaren C#-Abschnitt umgesetzt: große Zahlen, erzeugte zentrale Balance, Hardware/Compute/Nutzer/Credits, Taps/Overdrive, Qualität/Effizienz, fünf frühe Forschungen, getrennte atomare Saves mit Backup und Offlinefortschritt. [Umfang und Grenzen](unity-playable-slice.md).
+- [x] Hochformatszene mit vorhandener Labor-/Hardwaregrafik, Ressourcenleiste und wiederverwendbarem Aktionsprefab an echte Spielaktionen gebunden; 320/390/430 px gerendert und geprüft.
+- [x] 24 gemeinsame TypeScript-Transaktions-/Ratenfälle und acht exakte Zahlenfälle, 13 EditMode- und drei PlayMode-Tests geprüft; TypeScript-Suite mit 1.845 Tests, Typecheck und Build erfolgreich.
+- [ ] Übrige Systeme laut Migrationsliste portieren; insbesondere Materialbelohnungen, vollständige Forschung, INT/Prestige, sichere Web-Save-Migration und UI-/Sprach-/Lifecycle-Parität.
+- [ ] Unity-PlayMode, Player-Build und echte mobile Geräteabnahme durchführen. Der Template-Compile belegt keine Spielparität.
+
+Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.
+
+Stand: Bereinigung nach main `d3040a9` (PR #125). Frühere doppelte Arbeitsprotokolle und erledigte Branch-Abhängigkeiten stehen in der Git-Historie; diese Datei beschreibt die verbleibende Arbeit.
 
 ## Implementiert
 

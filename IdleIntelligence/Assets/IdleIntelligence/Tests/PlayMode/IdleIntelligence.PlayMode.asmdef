@@ -1,0 +1,1 @@
+{"name":"IdleIntelligence.PlayMode","references":["IdleIntelligence.Core","IdleIntelligence.Runtime","Unity.ugui"],"optionalUnityReferences":["TestAssemblies"]}
