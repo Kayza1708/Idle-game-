@@ -4,7 +4,7 @@
   "branch": "codex/unity-rewrite",
   "scope": "Items and instant forge extension; entire rewrite remains incomplete",
   "balanceChanged": false,
-  "sourceHash": "2c22ef9df4b9bd54989a72712d07534dab783b875cfe5287da9bc0de632b9359",
+  "sourceHash": "61cb2ce93b4c0f13e1f8905cd6de04bd5ee2d76c44fbda1d20aba9ee3c62276b",
   "itemTypes": 30,
   "rarities": 6,
   "itemReferenceCases": 509,
@@ -17,9 +17,9 @@
       "total": "18",
       "passed": "18",
       "failed": "0",
-      "duration": "10.8793145",
-      "start-time": "2026-10-19 09:46:07Z",
-      "end-time": "2026-10-19 09:46:18Z"
+      "duration": "11.2436705",
+      "start-time": "2026-10-19 09:48:29Z",
+      "end-time": "2026-10-19 09:48:41Z"
     },
     "playMode": {
       "result": "Passed",
@@ -39,7 +39,30 @@
     "warnings": [
       "Existing Vite main bundle over 500 kB",
       "Sandbox prevents optional Vite worker-test HMR websocket; test passes"
-    ]
+    ],
+    "baselineBeforeRemoteIntegration": {
+      "testFiles": 125,
+      "tests": 1847,
+      "result": "Passed"
+    },
+    "afterRemoteIntegration": {
+      "testFiles": 127,
+      "tests": 1855,
+      "passed": 1854,
+      "failed": 1,
+      "failure": "Existing passiveReturnProfile elapsed-budget timeout; Vitest worker onTaskUpdate RPC timeout",
+      "targetedRerun": {
+        "file": "src/passiveReturnProfile.test.ts",
+        "result": "Passed",
+        "tests": 8,
+        "profileDurationMs": 31570,
+        "totalDurationSeconds": 34.17
+      },
+      "testBudgetChanged": false,
+      "build": "Passed",
+      "typecheck": "Passed",
+      "unityCheck": "Passed"
+    }
   },
   "saveMigration": {
     "from": 1,
@@ -82,5 +105,13 @@
   ],
   "sdkAdded": false,
   "merged": false,
-  "published": false
+  "published": false,
+  "remoteIntegration": {
+    "preservedRemoteHead": "dc941521",
+    "mergeCommit": "48137999",
+    "previousPr": 128,
+    "previousPrMergedAt": "2026-10-19T09:10:51Z",
+    "effectOnUnityExport": "source hash only; numeric values and colors unchanged",
+    "followupDraftAuthorized": true
+  }
 }

@@ -53,7 +53,7 @@ Für einen bewussten neuen Testlauf zuerst Play beenden und **den gesamten Save-
 
 ## Tatsächlich geprüft
 
-Für den Itemabschnitt: siehe [unity-items-verification.json](unity-items-verification.json). Unity 6000.3.26f1 importiert/kompiliert; 18 EditMode-Tests (509 Itemfälle zusätzlich zu 24 bestehenden Transaktions- und acht Zahlenfällen) sowie sechs PlayMode-Tests. Geprüft sind alte Save-v1-Erhaltung, aktive Aufträge über Save/Reload, gesperrte beschädigte Analysedaten, veraltete Crafttickets, echte sofortige UI-Transaktionen, schnelle Wiederholung, Abbruch/Tabwechsel ohne Doppelbelohnung, reduzierte Bewegung, gespeicherte Ausrüstung und mobile Renderbilder bei 320/390/430 px. Typecheck, die vollständige Vitest-Suite (125 Dateien / 1.847 Tests) und Produktionsbuild sind erfolgreich; die bestehende Bundlegrößenwarnung bleibt. Die historische Abnahme des ersten Abschnitts folgt unten; Geräte-/Player-Abnahme bleibt offen.
+Für den Itemabschnitt: siehe [unity-items-verification.json](unity-items-verification.json). Unity 6000.3.26f1 importiert/kompiliert; 18 EditMode-Tests (509 Itemfälle zusätzlich zu 24 bestehenden Transaktions- und acht Zahlenfällen) sowie sechs PlayMode-Tests. Geprüft sind alte Save-v1-Erhaltung, aktive Aufträge über Save/Reload, gesperrte beschädigte Analysedaten, veraltete Crafttickets, echte sofortige UI-Transaktionen, schnelle Wiederholung, Abbruch/Tabwechsel ohne Doppelbelohnung, reduzierte Bewegung, gespeicherte Ausrüstung und mobile Renderbilder bei 320/390/430 px. Typecheck und Produktionsbuild sind erfolgreich; die bestehende Bundlegrößenwarnung bleibt. Vor der Remote-Übernahme bestand die vollständige Vitest-Suite (125 Dateien / 1.847 Tests). Der anschließende Gesamtlauf umfasste 127 Dateien / 1.855 Tests: 1.854 bestanden, ein bestehender Langzeitprofil-Test überschritt sein Zeitlimit; zusätzlich meldete Vitest einen Worker-RPC-Timeout. Der separate Nachlauf der gesamten betroffenen Profildatei besteht mit acht Tests; der Langzeittest benötigt dabei 31,6 s. Kein Zeitlimit oder Spielcode wurde dafür verändert. Die historische Abnahme des ersten Abschnitts folgt unten; Geräte-/Player-Abnahme bleibt offen.
 
 
 Die maschinenlesbare Zusammenfassung steht in [unity-slice-verification.json](unity-slice-verification.json). Rohlogs bleiben lokal unter `/tmp/idle-intelligence-*.log`; sie werden wegen möglicher Lizenz-/Zugangsdaten nicht eingecheckt.
@@ -63,6 +63,10 @@ Die maschinenlesbare Zusammenfassung steht in [unity-slice-verification.json](un
 - EditMode: 13 Tests, einschließlich der oben genannten gemeinsamen Fälle sowie Reinheit, exakte Zahlungen, Zeitsegmentierung/Reload, Offline-Cap, atomarem Replace, Backup, zukünftiger Version, beschädigtem Save, fehlendem Hauptstand, unterbrochenem Pending und externer Beschädigung.
 - PlayMode: 3 Tests für verdrahtete UI-Aktionen mit echten Ressourcen, Jobabschlüsse, SafeArea, Speichern/Reload sowie schreibgeschützte Recovery. Gerenderte Profile 320×568, 390×844 und 430×932 visuell geprüft; daraus [Hochformatvorschau](screenshots/unity-playable-slice.png).
 - `npm run typecheck`, `npm test` (124 Dateien / 1.845 Tests), `npm run build` erfolgreich. Nach Erweiterung der Referenzfälle den betroffenen Exporttest separat erneut geprüft. Bekannte Warnung zum großen TypeScript-Hauptbundle bleibt bestehen.
+
+## Remote-Stand dieser Fortsetzung
+
+Der vorherige PR #128 wurde bereits am 19.10.2026 um 09:10:51 UTC von GitHub nach `main` gemergt. Der lokale Itemabschnitt wurde zunächst in `ee436d40` gesichert; zusätzliche Remote-Commits einschließlich PR #127 wurden anschließend ohne Force-Push erhalten. Deren Änderungen betreffen TypeScript-Darstellung, nicht Economyregeln oder Seltenheitsfarben. Der erneute Export änderte nur den Quellhash; die Referenzwerte bleiben gleich. Der neue Itemabschnitt wird in einem separaten Folge-Draft geprüft und von diesem Auftrag nicht gemergt.
 
 ## Verbleibende Lücken
 
