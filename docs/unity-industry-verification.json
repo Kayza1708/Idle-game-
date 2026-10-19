@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-19",
+  "unityVersion": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "baseCommit": "1e0abf30402edab5026573f05102d81a42823445",
+  "remoteMain": "b81e1043 (PR131 merged externally during work; tree identical to base)",
+  "scope": "Functional section 1: 26 V2 research IDs, existing-system consumers, analyses, synthesis, foundry, breakthroughs and fragment conversion. Full rewrite incomplete.",
+  "typescriptGameplayChanged": false,
+  "economySHA256": "71cd4e220544b655332f7a30448d3ec0ac42694a6561933c52256afcdc0b66f7",
+  "saveVersion": 5,
+  "migrates": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "compile": {
+    "exitCode": 0,
+    "compilerErrors": 0,
+    "log": "/tmp/unity-industry-compile-complete.log"
+  },
+  "tests": {
+    "editMode": {
+      "result": "Passed",
+      "total": "33",
+      "passed": "33",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-19 15:28:19Z",
+      "end-time": "2026-10-19 15:29:44Z",
+      "duration": "84.9728417"
+    },
+    "playMode": {
+      "result": "Passed",
+      "total": "16",
+      "passed": "16",
+      "failed": "0",
+      "skipped": "0",
+      "start-time": "2026-10-19 17:06:12Z",
+      "end-time": "2026-10-19 17:06:34Z",
+      "duration": "21.6215325"
+    },
+    "vitest": {
+      "files": 130,
+      "passed": 1860,
+      "failed": 0,
+      "log": "/tmp/unity-industry-vitest-final.log"
+    },
+    "typecheck": "passed (also invoked by build)",
+    "build": "passed; existing bundle-size warning",
+    "exports": "npm run unity:check passed"
+  },
+  "commonReferences": {
+    "industry": 221,
+    "items": 510,
+    "INT": 380,
+    "meta": 323,
+    "transactions": 24,
+    "numbers": 8
+  },
+  "naturalFirstPrestige": {
+    "simulatedSeconds": 2378,
+    "actions": 14532,
+    "unchanged": true,
+    "noFundedStock": true
+  },
+  "mobileRenderings": {
+    "sizes": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ]
+    ],
+    "images": [
+      "screenshots/unity-industry-320.png",
+      "screenshots/unity-industry-390.png",
+      "screenshots/unity-industry-430.png",
+      "screenshots/unity-foundry-320.png"
+    ],
+    "fundedTestStates": true,
+    "visuallyInspected": true,
+    "scrollReachabilityAssertion": true,
+    "realDevice": false
+  },
+  "correctedDuringVerification": [
+    "Optional JSON jobs needed explicit presence flags.",
+    "Passive materials use persistent discoveries, not currently owned classes.",
+    "Catalog completeness test caught operations: 26 active V2 research IDs.",
+    "Paid jobs survive resets; unpaid foundry queues clear; claim discovers unclaimed starter knowledge before reset.",
+    "Missing material ledgers distinguished from explicit zero ledgers for new items and source forge/upgrade fallback.",
+    "Initial PlayMode test selected an empty equipment portrait; changed to the actual named inventory tile and asserted last action scroll reachability."
+  ],
+  "open": [
+    "Active dropProtocols producer: section 5.",
+    "Challenge/future shop, mission and other system consumers: subsequent sections.",
+    "Web/legacy import, strict complete storage contracts, UI recovery/exports: section 8.",
+    "Old saves cannot restore never-recorded histories or missing-versus-empty material-ledger distinctions; arrays retained unchanged.",
+    "Insight archive acquisition remains source-ambiguous.",
+    "Full rewrite, real device and release validation remain open."
+  ]
+}

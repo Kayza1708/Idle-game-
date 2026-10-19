@@ -13,7 +13,7 @@ namespace IdleIntelligence.Core
     }
     public sealed class AtomicSaveStore
     {
-        public const int Version=4;
+        public const int Version=5;
         public const string Format="idle-intelligence-unity-slice";
         readonly string path;readonly IEnvelopeCodec codec;
         bool writable;
@@ -25,9 +25,9 @@ namespace IdleIntelligence.Core
         {
             version=0;var info=new FileInfo(filename);if(info.Length>4*1024*1024)throw new FormatException("Save too large");
             var envelope=codec.DecodeEnvelope(File.ReadAllText(filename));
-            if(envelope==null||envelope.format!=Format||envelope.version!=Version&&envelope.version!=1&&envelope.version!=2&&envelope.version!=3)throw new NotSupportedException("Unbekannte Spielstandversion; Original bleibt erhalten.");
+            if(envelope==null||envelope.format!=Format||envelope.version!=Version&&envelope.version!=1&&envelope.version!=2&&envelope.version!=3&&envelope.version!=4)throw new NotSupportedException("Unbekannte Spielstandversion; Original bleibt erhalten.");
             if(envelope.payload==null||envelope.sha256!=Hash(envelope.payload))throw new FormatException("Spielstand-Prüfsumme ungültig.");
-            version=envelope.version;return codec.Decode(envelope.payload).ToState(version==1,version==2,version==3);
+            version=envelope.version;return codec.Decode(envelope.payload).ToState(version==1,version==2,version==3,version==4);
         }
         public SaveLoad Load(double now)
         {

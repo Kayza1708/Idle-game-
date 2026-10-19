@@ -69,7 +69,23 @@ new ResearchDefinition("materialAnalysis","Materialanalyse",100d,300d,0.08d,fals
 new ResearchDefinition("blueprintAnalysis","Bauplananalyse",180d,600d,1d,false,true,new Requirement[]{new Requirement("materialAnalysis",1)}),
 new ResearchDefinition("blueprints","Offene Baupläne",300d,150d,1d,true,false,new Requirement[]{new Requirement("dataGeneration",1)}),
 new ResearchDefinition("materialRecycling","Materialrecycling",50000d,1800d,1d,true,false,new Requirement[]{new Requirement("materialAnalysis",3),new Requirement("blueprintAnalysis",3)}),
-new ResearchDefinition("labAutomation","Laborautomation",600d,1800d,1d,false,false,new Requirement[]{new Requirement("blueprintAnalysis",1)})
+new ResearchDefinition("labAutomation","Laborautomation",600d,1800d,1d,false,false,new Requirement[]{new Requirement("blueprintAnalysis",1)}),
+new ResearchDefinition("hardwareIntegration","Hardware-Integration",450d,1500d,0.01d,false,true,new Requirement[]{new Requirement("userScaling",3)}),
+new ResearchDefinition("networkEffects","Netzwerkeffekte",500d,1500d,0.01d,false,false,new Requirement[]{new Requirement("commercialization",3)}),
+new ResearchDefinition("parallelArchitecture","Parallele Architektur",550d,1800d,0.015d,false,false,new Requirement[]{new Requirement("computeOptimization",3)}),
+new ResearchDefinition("hardwareCoDesign","Hardware-Co-Design",650d,2400d,0.002d,false,false,new Requirement[]{new Requirement("parallelArchitecture",3)}),
+new ResearchDefinition("syntheticData","Synthetische Daten",500d,600d,0.002d,false,false,new Requirement[]{new Requirement("dataGeneration",3)}),
+new ResearchDefinition("dataFlywheel","Datenkreislauf",800d,900d,1.08d,false,false,new Requirement[]{new Requirement("syntheticData",3)}),
+new ResearchDefinition("recursiveLearning","Rekursives Lernen",1000d,2400d,0.03d,false,false,new Requirement[]{new Requirement("modelArchitecture",5)}),
+new ResearchDefinition("autonomousScience","Autonome Wissenschaft",1200d,3600d,0.03d,false,false,new Requirement[]{new Requirement("labAutomation",3)}),
+new ResearchDefinition("tapAmplification","Impulsverstärkung",600d,1200d,1.08d,false,false,new Requirement[]{new Requirement("computeOptimization",3)}),
+new ResearchDefinition("dropProtocols","Signalprotokolle",250d,600d,1d,false,false,new Requirement[]{new Requirement("materialAnalysis",3)}),
+new ResearchDefinition("alignment","Reproduzierbare Modelle",1000d,450d,0.9d,true,false,new Requirement[]{new Requirement("modelArchitecture",1)}),
+new ResearchDefinition("dataPipeline","Datenpipeline",100000d,3600d,0.8d,true,false,new Requirement[]{new Requirement("dataFlywheel",3)}),
+new ResearchDefinition("distributedInference","Verteilte Inferenz",250000d,7200d,1d,true,false,new Requirement[]{new Requirement("parallelArchitecture",3)}),
+new ResearchDefinition("modelTransfer","Modelltransfer",150000d,3600d,2d,true,false,new Requirement[]{new Requirement("recursiveLearning",3)}),
+new ResearchDefinition("researchScheduling","Forschungsplanung",75000d,3600d,1.1d,true,false,new Requirement[]{new Requirement("labAutomation",3),new Requirement("autonomousScience",3)}),
+new ResearchDefinition("operations","Labororganisation",500d,180d,1d,true,false,new Requirement[]{new Requirement("dataGeneration",1)})
 };
 public static readonly double[] EarlySeconds = {30d,60d,90d,150d,240d};
 public static readonly double[] EarlyDataCap = {30d,60d,120d,180d,250d};
