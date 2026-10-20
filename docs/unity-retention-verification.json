@@ -1,0 +1,158 @@
+{
+  "date": "2026-10-19",
+  "unityVersion": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "baseCommit": "9c29c75b",
+  "scope": "Functional subsection 3b: achievements, permanent claims/AP/wallet, eight onboarding goals, static challenge predicates, profile/mailbox/name policy. Missions/periods and remaining migration still open.",
+  "typescriptGameplayChanged": false,
+  "saveVersion": 8,
+  "migrates": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "compile": {
+    "exitCode": 0,
+    "log": "/tmp/unity-retention-compile-final.log"
+  },
+  "references": {
+    "rewardTransactions": 935,
+    "nameValidations": 330,
+    "normalizationCases": 18094,
+    "unicodeDecompositions": 17086,
+    "unicodeCompositions": 12133,
+    "fundedTechnicalStates": true
+  },
+  "tests": {
+    "editMode": {
+      "id": "2",
+      "testcasecount": "48",
+      "result": "Passed",
+      "total": "48",
+      "passed": "48",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 18:40:57Z",
+      "end-time": "2026-10-19 18:42:57Z",
+      "duration": "120.8582826"
+    },
+    "finalFinancialAndUnicode": {
+      "id": "2",
+      "testcasecount": "3",
+      "result": "Passed",
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 18:50:06Z",
+      "end-time": "2026-10-19 18:50:16Z",
+      "duration": "10.0654193"
+    },
+    "playMode": {
+      "id": "2",
+      "testcasecount": "26",
+      "result": "Passed",
+      "total": "26",
+      "passed": "26",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 18:45:56Z",
+      "end-time": "2026-10-19 18:46:26Z",
+      "duration": "29.8427763"
+    },
+    "finalMobileUI": {
+      "id": "2",
+      "testcasecount": "4",
+      "result": "Passed",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "inconclusive": "0",
+      "skipped": "0",
+      "asserts": "0",
+      "engine-version": "3.5.0.0",
+      "clr-version": "4.0.30319.42000",
+      "start-time": "2026-10-19 18:53:28Z",
+      "end-time": "2026-10-19 18:53:32Z",
+      "duration": "3.3010673"
+    },
+    "vitest": {
+      "passed": 1866,
+      "files": 133,
+      "failed": 0,
+      "log": "/tmp/unity-retention-vitest.log"
+    },
+    "typecheck": "passed as part of build",
+    "exports": "npm run unity:check passed; final retention exporter checks repeated via targeted Vitest",
+    "build": "passed; existing bundle size warning"
+  },
+  "playModeFlags": [
+    "--burst-force-sync-compilation (prior subsection encountered native Burst compiler crash; no package/settings changes)"
+  ],
+  "mobile": {
+    "sizes": [
+      [
+        320,
+        568
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        430,
+        932
+      ]
+    ],
+    "fundedTemporaryStates": true,
+    "actualPaidHardwareActions": true,
+    "visuallyInspected": true,
+    "realDevice": false,
+    "images": [
+      "screenshots/unity-retention-funded-320.png",
+      "screenshots/unity-retention-funded-390.png",
+      "screenshots/unity-retention-funded-430.png"
+    ]
+  },
+  "verifiedContracts": [
+    "37 achievement families, every original tier, duplicate claims, real AP income consumer and exact credit transactions.",
+    "12 static challenge predicates/claims; season histories are prepared technical states until section 4 supplies the producer.",
+    "Eight real onboarding rewards; source credits do not count as eligible INT income.",
+    "First-only AI naming, validated player name, read-only informational mailbox, durable read receipts and shipped licences.",
+    "Wallet/claims preserved through normal/axiom reset, offline/reload and isolated challenge return.",
+    "Save v7 migration preserves originals and existing assets; absent historical wallet starts zero rather than fabricating claims.",
+    "Failed permanent reward save rolls back the wallet and leaves damaged original unchanged."
+  ],
+  "correctedDuringVerification": [
+    "Supplementary-plane lowercasing and NFKC were incompatible in Mono; generated JS Unicode tables and pure C# normalization added and tested.",
+    "Independent model level is now persisted instead of assuming it equals a prepared state's track sum.",
+    "Funded combination fixture now equips a real base core slot; unsupported universal ownership was removed.",
+    "Claim fixtures assert actual eligible claims, and the first-axiom test explicitly meets the original known-node gate.",
+    "Card text enlarged for small portrait rendering; unready cards say reward instead of inviting an unavailable claim."
+  ],
+  "open": [
+    "Mission periods/chapters, manual/expiry rewards and season/bonus-box dependencies (3c).",
+    "Two static season challenge producers and artifact effects (4).",
+    "Remaining shop/drops/commerce adapters/tutorial/settings/spoken language/audio/haptics systems (5–7).",
+    "Full Mira/prologue and first-name onboarding flow remains section 7.",
+    "Explicit validated web import, recovery UI, strict complete field contracts and diagnostics/exports (8).",
+    "Insight archive acquisition remains source-ambiguous; prepared all-item histories do not prove natural 30-item achievements.",
+    "Actual devices, player/release validation and full functional rewrite not complete."
+  ]
+}

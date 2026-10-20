@@ -219,6 +219,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -564,6 +567,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -962,6 +968,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -1307,6 +1316,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -1705,6 +1717,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -2050,6 +2065,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -2448,6 +2466,9 @@
       "amount": 1,
       "at": 1000100,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -2793,6 +2814,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -3191,6 +3215,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -3536,6 +3563,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -3934,6 +3964,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -4279,6 +4312,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -4683,6 +4719,9 @@
       "amount": 1,
       "at": 1012345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -5028,6 +5067,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -5432,6 +5474,9 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -5783,6 +5828,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -6249,6 +6297,9 @@
       "amount": 1,
       "at": 1042345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -6628,6 +6679,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -7005,6 +7059,12 @@
         "hasResearchJob": true,
         "training": null,
         "researchJob": {
+          "paidDataRecorded": true,
+          "paidData": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "id": "dataGeneration",
           "required": 20,
           "done": 0,
@@ -7065,6 +7125,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -7442,6 +7505,12 @@
         "hasResearchJob": true,
         "training": null,
         "researchJob": {
+          "paidDataRecorded": true,
+          "paidData": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "id": "dataGeneration",
           "required": 20,
           "done": 0,
@@ -7449,6 +7518,9 @@
         }
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -7911,6 +7983,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -8290,6 +8365,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -8667,6 +8745,12 @@
         "hasResearchJob": true,
         "training": null,
         "researchJob": {
+          "paidDataRecorded": true,
+          "paidData": {
+            "m": 1.11,
+            "e": 2,
+            "terms": null
+          },
           "id": "dataGeneration",
           "required": 60,
           "done": 0,
@@ -8727,6 +8811,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -9072,6 +9159,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -9470,6 +9560,9 @@
       "amount": 10,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -9815,6 +9908,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -10291,6 +10387,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -10653,6 +10752,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -11132,6 +11234,9 @@
       "amount": 1,
       "at": 1019800,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -11506,6 +11611,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -12022,6 +12130,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -12396,6 +12507,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -12887,6 +13001,9 @@
       "amount": 1,
       "at": 1020000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -13261,6 +13378,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -13777,6 +13897,9 @@
       "amount": 1,
       "at": 1021801,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -14151,6 +14274,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -14667,6 +14793,9 @@
       "amount": 1,
       "at": 1050000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -15041,6 +15170,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -15583,6 +15715,9 @@
       "amount": 1,
       "at": 173800000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -15928,6 +16063,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -16326,6 +16464,9 @@
       "amount": 1,
       "at": 1072345,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -16705,6 +16846,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -17137,6 +17281,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -17511,6 +17658,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -18086,6 +18236,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -18460,6 +18613,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -19041,6 +19197,9 @@
       "amount": 1,
       "at": 1000000,
       "before": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [
@@ -19386,6 +19545,9 @@
         "researchJob": null
       },
       "expected": {
+        "challengeProgress": {
+          "schema": 1
+        },
         "industry": {
           "schema": 1,
           "discovered": [

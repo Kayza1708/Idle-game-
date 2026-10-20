@@ -29,7 +29,7 @@ namespace IdleIntelligence.Core
         }
         public static IEnumerable<ItemInstance> Equipped(GameState s)
         {
-            var active=ActiveSlots(s);for(int n=0;n<8;n++)if(active[n]){var i=s.Workshop.inventory.FirstOrDefault(x=>x.id==s.Workshop.equipped[n]);if(i!=null&&(n>=6||Definition(i).Family==ItemBalance.Slots[n].Replace("Aux","")))yield return i;}
+            if(ChallengeRules.Is(s,"no-items"))yield break;var active=ActiveSlots(s);for(int n=0;n<8;n++)if(active[n]){var i=s.Workshop.inventory.FirstOrDefault(x=>x.id==s.Workshop.equipped[n]);if(i!=null&&(n>=6||Definition(i).Family==ItemBalance.Slots[n].Replace("Aux","")))yield return i;}
         }
         public static double Amplifier(GameState s)
         {
@@ -69,7 +69,7 @@ namespace IdleIntelligence.Core
             var s=state.Copy();w=s.Workshop;var need=new double[w.components.Length];
             for(int n=0;n<ItemBalance.Items.Length;n++)if(ItemBalance.Items[n].Starter>=0&&ItemBalance.Items[n].Starter<3)
             {w.learned[n]=true;if(w.crafted[n]==0&&!w.inventory.Any(i=>i.type==ItemBalance.Items[n].Id))for(int c=0;c<need.Length;c++)need[c]+=ItemBalance.Items[n].Components[0][c];}
-            for(int c=0;c<need.Length;c++)w.components[c]=Math.Max(w.components[c],(long)need[c]);w.starterGift=true;return Changed(s);
+            for(int c=0;c<need.Length;c++){long gift=Math.Max(0,(long)need[c]-w.components[c]);w.components[c]+=gift;Lifetime.Components(s,c,gift);}w.starterGift=true;return Changed(s);
         }
         public static bool Prerequisite(GameState s,int n)=>ItemBalance.Items[n].Starter>=0||Game.Level(s,"blueprints")>0;
         public static string LearnBlock(GameState s,int n)
@@ -94,8 +94,8 @@ namespace IdleIntelligence.Core
             for(int c=0;c<w.components.Length;c++)w.components[c]-=(long)q.Components[c];for(int c=0;c<w.modules.Length;c++)w.modules[c]-=(long)q.Modules[c];
             w.nextId++;var item=new ItemInstance{id="item-"+w.nextId++,type=type,materialBasis=(double[])q.Components.Clone()};
             double fraction=Game.Level(s,"materialRecycling")>0?Math.Min(ItemBalance.RecoveryFraction,ItemBalance.ResearchRecycling*(1+Device(s,"recovery"))):0;
-            for(int c=0;c<w.components.Length;c++) {item.recoveryUsed[c]=q.Components[c]*fraction;double v=w.recyclingRemainders[c]+item.recoveryUsed[c];double near=Math.Floor(v+.5);if(Math.Abs(v-near)<=2.220446049250313e-16*Math.Max(1,v)*16)v=near;long returned=(long)Math.Floor(v);w.components[c]+=returned;w.recyclingRemainders[c]=v-returned;}
-            w.inventory=w.inventory.Concat(new[]{item}).ToArray();w.crafted[n]++;
+            for(int c=0;c<w.components.Length;c++) {item.recoveryUsed[c]=q.Components[c]*fraction;double v=w.recyclingRemainders[c]+item.recoveryUsed[c];double near=Math.Floor(v+.5);if(Math.Abs(v-near)<=2.220446049250313e-16*Math.Max(1,v)*16)v=near;long returned=(long)Math.Floor(v);w.components[c]+=returned;Lifetime.Components(s,c,returned);w.recyclingRemainders[c]=v-returned;}
+            w.inventory=w.inventory.Concat(new[]{item}).ToArray();Lifetime.Item(s,item.type);s.Lifetime.itemsCrafted++;ChallengeRules.ItemCrafted(s,item);w.crafted[n]++;
             if(ItemBalance.Items.Select((d,i)=>new{d,i}).Where(x=>x.d.Starter>=0&&x.d.Starter<3).All(x=>w.crafted[x.i]>0))for(int k=0;k<w.learned.Length;k++)if(ItemBalance.Items[k].Starter>=0)w.learned[k]=true;
             return Changed(s);
         }
@@ -121,7 +121,7 @@ namespace IdleIntelligence.Core
             var result=best.Copy();result.missingMaterialBasis=false;result.rarity++;for(int c=0;c<result.materialBasis.Length;c++){result.materialBasis[c]=items.Sum(i=>i.materialBasis[c]);result.recoveryUsed[c]=items.Sum(i=>i.recoveryUsed[c]);}return result;
         }
         public static GameState Fuse(GameState state,string[] ids)
-        {var result=FusionResult(state,ids);if(result==null)return state;var s=state.Copy();s.Workshop.inventory=s.Workshop.inventory.Where(i=>!ids.Contains(i.id)||i.id==result.id).Select(i=>i.id==result.id?result:i).ToArray();return Changed(s);}
+        {var result=FusionResult(state,ids);if(result==null)return state;var s=state.Copy();s.Lifetime.itemsFused++;s.Workshop.inventory=s.Workshop.inventory.Where(i=>!ids.Contains(i.id)||i.id==result.id).Select(i=>i.id==result.id?result:i).ToArray();if(ChallengeRules.Active(s)&&ids.All(id=>s.Challenges.Run.metrics.craftedIds.Contains(id))){var m=s.Challenges.Run.metrics;m.craftedIds=m.craftedIds.Where(id=>!ids.Contains(id)||id==result.id).ToArray();m.craftRarity=Math.Max(m.craftRarity,result.rarity);}return Changed(s);}
         public static GameState Mastery(GameState state,string id,int expected)
         {int n=Index(id);if(n<0||state.Workshop.mastery[n]!=expected||expected>=4||!Prerequisite(state,n)||!state.Workshop.learned[n]||state.Workshop.crafted[n]==0||state.Workshop.fragments<ItemBalance.MasteryCosts[expected])return state;var s=state.Copy();s.Workshop.fragments-=(long)ItemBalance.MasteryCosts[expected];s.Workshop.mastery[n]++;return Changed(s);}
         public static CraftQuote UpgradeQuote(GameState s,ItemInstance item)
@@ -134,21 +134,21 @@ namespace IdleIntelligence.Core
             return new CraftQuote{Allowed=reason==null,Reason=reason,Components=costs,Data=data,Revision=s.Workshop.revision};
         }
         public static GameState Upgrade(GameState state,string id,long revision=-1)
-        {var old=state.Workshop.inventory.FirstOrDefault(i=>i.id==id);if(old==null||revision>=0&&revision!=state.Workshop.revision)return state;var q=UpgradeQuote(state,old);if(!q.Allowed)return state;var s=state.Copy();s.Data=s.Data.Subtract(ScientificNumber.From(q.Data));for(int c=0;c<q.Components.Length;c++)s.Workshop.components[c]-=(long)q.Components[c];var item=s.Workshop.inventory.First(i=>i.id==id);if(item.missingMaterialBasis){item.materialBasis[0]=IndustryBalance.LegacyItemRecovery[item.rarity];item.missingMaterialBasis=false;}item.level++;for(int c=0;c<q.Components.Length;c++)item.materialBasis[c]+=q.Components[c];return Changed(s);}
+        {var old=state.Workshop.inventory.FirstOrDefault(i=>i.id==id);if(old==null||revision>=0&&revision!=state.Workshop.revision)return state;var q=UpgradeQuote(state,old);if(!q.Allowed)return state;var s=state.Copy();s.Data=s.Data.Subtract(ScientificNumber.From(q.Data));for(int c=0;c<q.Components.Length;c++)s.Workshop.components[c]-=(long)q.Components[c];var item=s.Workshop.inventory.First(i=>i.id==id);if(item.missingMaterialBasis){item.materialBasis[0]=IndustryBalance.LegacyItemRecovery[item.rarity];item.missingMaterialBasis=false;}item.level++;if(ChallengeRules.Active(s)&&s.Challenges.Run.metrics.craftedIds.Contains(id))s.Challenges.Run.metrics.craftRarity=Math.Max(s.Challenges.Run.metrics.craftRarity,item.rarity);for(int c=0;c<q.Components.Length;c++)item.materialBasis[c]+=q.Components[c];return Changed(s);}
         public static void PaidHardware(GameState s,int index,long before)
         {
             var w=s.Workshop;s.Industry.discovered[index]=true;for(int n=0;n<5;n++)if(n==0||IndustryBalance.FamilyHardware[n]==Balance.Hardware[index].Id)s.Industry.families[n]=true;for(int k=0;k<ItemBalance.PackageThresholds.Length;k++)
             {
                 int threshold=ItemBalance.PackageThresholds[k];string key=Balance.Hardware[index].Id+":"+threshold;if(before>=threshold||s.Hardware[index]<threshold||w.milestones.Contains(key))continue;
                 for(int pair=0;pair<ItemBalance.HardwarePairs[index].Length;pair++)
-                {int c=ItemBalance.HardwarePairs[index][pair];int f=ItemBalance.HardwareFamilies[c];double raw=ItemBalance.PackageAmounts[k][pair]*(f>=3?ItemBalance.FrontierFactor:1)*(1+Device(s,"hardwarePackage"))*(1+(f==2?Device(s,"photonicYield"):f==4?Device(s,"quantumYield"):0))+w.hardwareRemainders[c];long amount=(long)Math.Floor(raw+2.220446049250313e-16*Math.Max(1,raw)*16);w.components[c]+=amount;w.hardwareRemainders[c]=Math.Max(0,raw-amount);}
-                w.components[3]+=(long)ItemBalance.TitaniumMilestone;if(index==3)w.components[4]+=(long)ItemBalance.GpuLaser;w.milestones=w.milestones.Concat(new[]{key}).ToArray();
+                {int c=ItemBalance.HardwarePairs[index][pair];int f=ItemBalance.HardwareFamilies[c];double raw=ItemBalance.PackageAmounts[k][pair]*(f>=3?ItemBalance.FrontierFactor:1)*(1+Device(s,"hardwarePackage"))*(1+(f==2?Device(s,"photonicYield"):f==4?Device(s,"quantumYield"):0))+w.hardwareRemainders[c];long amount=(long)Math.Floor(raw+2.220446049250313e-16*Math.Max(1,raw)*16);w.components[c]+=amount;Lifetime.Components(s,c,amount);w.hardwareRemainders[c]=Math.Max(0,raw-amount);}
+                w.components[3]+=(long)ItemBalance.TitaniumMilestone;Lifetime.Components(s,3,(long)ItemBalance.TitaniumMilestone);if(index==3){w.components[4]+=(long)ItemBalance.GpuLaser;Lifetime.Components(s,4,(long)ItemBalance.GpuLaser);}w.milestones=w.milestones.Concat(new[]{key}).ToArray();
             }
         }
         public static void Passive(GameState s,double seconds)
         {
             var w=s.Workshop;int count=s.Industry.discovered.Count(n=>n);w.passiveProgress+=count/ItemBalance.PassiveSeconds*seconds;long drops=(long)Math.Floor(w.passiveProgress);w.passiveProgress-=drops;
-            if(drops>0)w.revision++;double total=ItemBalance.PassiveWeights.Take(Math.Min(count,10)).Sum();for(long n=0;n<drops;n++){w.materialRng=unchecked(w.materialRng*1664525u+1013904223u);double roll=w.materialRng/4294967296d;int picked=Math.Min(count,10)-1;for(int k=0;k<Math.Min(count,10);k++){roll-=ItemBalance.PassiveWeights[k]/total;if(roll<=0){picked=k;break;}}if(picked>=0){double raw=s.Meta.passiveRemainders[picked]+(1+PrestigeRules.E("archiveINT")*MetaRules.Level(s,"C01"))*(MetaRules.Secondary(s,"K09")?PrestigeRules.E("D06passive"):1);long amount=(long)Math.Floor(raw+1e-12);w.components[picked]+=amount;s.Meta.passiveRemainders[picked]=Math.Max(0,raw-amount);}}
+            if(drops>0)w.revision++;double total=ItemBalance.PassiveWeights.Take(Math.Min(count,10)).Sum();for(long n=0;n<drops;n++){w.materialRng=unchecked(w.materialRng*1664525u+1013904223u);double roll=w.materialRng/4294967296d;int picked=Math.Min(count,10)-1;for(int k=0;k<Math.Min(count,10);k++){roll-=ItemBalance.PassiveWeights[k]/total;if(roll<=0){picked=k;break;}}if(picked>=0){double raw=s.Meta.passiveRemainders[picked]+(1+PrestigeRules.E("archiveINT")*MetaRules.Level(s,"C01"))*(MetaRules.Secondary(s,"K09")?PrestigeRules.E("D06passive"):1);long amount=(long)Math.Floor(raw+1e-12);w.components[picked]+=amount;Lifetime.Components(s,picked,amount);s.Meta.passiveRemainders[picked]=Math.Max(0,raw-amount);}}
         }
         public static int ResearchArea(string id)=>IndustryBalance.ResearchAreas[Game.ResearchIndex(id)];
         public static void ResearchComplete(GameState s,string id)

@@ -2,6 +2,22 @@
 
 Stand: 19.10.2026. Ursprüngliche Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
+## Fortsetzung 20.10.2026: Markt
+
+[Teilabschnitt 5b](unity-market.md): alle Marktangebote mit Originalpreisen/Rotation, gemeinsame Truhenvergabe, Tagesbestand, Tickets, Cooldown, Ergebnisbelege und tatsächlich unverfügbarer vorbereiteter Videopfad. Save v12 erhält V1–11 samt Originalkopien. Gumball, Gem-Upgrades und vollständige Commerce-/Ad-Verträge bleiben offen. [Prüfdaten](unity-market-verification.json).
+
+## Fortsetzung 20.10.2026: aktive Signal-Drops
+
+[Teilabschnitt 5a](unity-signals.md) ergänzt Originalspawns, drei Varianten, echte Forschung-/Itemqualität, Material-/Credit-/Daten-/Item-/Bauplanbelohnungen und den tatsächlichen Missions-/Achievementproduzenten. Saves v1–10 bleiben mit Originalkopien erhalten. Der restliche Shop/Gumball, Angebote, Boosts und Adapter bleiben offen. [Prüfdaten](unity-signals-verification.json).
+
+## Fortsetzung 20.10.2026: V2-Seasons
+
+[Season-Abschnitt](unity-seasons.md): drei aktuelle Themen, 300 Free-/Premiumbelohnungen, exakte Claims, Materialien/Items, verdiente Truhen, Vitrine und tatsächlicher Artefakt-Einnahmenbonus. Save v10 erhält V1–9 mit Originalkopien und unveränderten Missions-/Seasonansprüchen. Premium benötigt das zugehörige Entitlement; keine SDKs oder erfundenen Käufe. [Prüfdaten](unity-seasons-verification.json). Legacy-Websaves und reale Geräte bleiben gesondert offen.
+
+## Fortsetzung 20.10.2026: Missionen und Kalenderbelohnungen
+
+[Teilabschnitt 3c](unity-missions.md) ergänzt alle 18 aktuellen Vorlagen, 6/12/30 Aufgaben, originale Baselines, Gems/Materialien/XP, UTC-Ablaufabrechnung, eingefrorene Tagesbonusboxen und Seasonuhr. Native Saves v1–8 erhalten Originalkopien und beginnen neue Missionsbaselines erst nach ihrer Hauptspiel-Synchronisierung. Die vollständigen Seasons, aktive Drops und Story-/Kapitelabläufe bleiben eigene offene Abhängigkeiten. Aktuelle Prüfdaten: [Nachweis](unity-missions-verification.json). Keine breite Systemzeile wird dadurch pauschal abgeschlossen.
+
 ## Fortschritt: erster spielbarer Abschnitt
 
 Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen ist die Einrichtung in `ab67478` separat gesichert und der [erste spielbare Abschnitt](unity-playable-slice.md) implementiert: unabhängiger C#-Kern, erzeugte Balance, frühe Produktion/Käufe, Taps/Overdrive, Training, fünf Forschungen, getrennte atomare Unity-Saves und Offlinefortschritt. Die Szene heißt `Assets/Scenes/IdleIntelligence.unity`. Gemeinsame Referenzfälle sowie EditMode-/PlayMode-Prüfungen und die offenen Grenzen stehen im verlinkten Bericht. Der Gesamtrewrite bleibt offen; keine der folgenden vollständigen Systemzeilen wird durch einen Teilport pauschal abgehakt.
@@ -9,6 +25,18 @@ Die Einrichtungsaufnahme unten beschreibt den ursprünglichen Stand. Inzwischen 
 ## Funktionaler Folgeauftrag: Forschung und Industrie
 
 26 aktive V2-Forschungen (18 wiederholbar, acht Projekte einschließlich Labororganisation), aktuelle Ratenverbraucher, geteilte Analyse/Synthese, alle 20 Synthesen, Foundry-Level/Veredelung/Warteplätze, Durchbrüche und Fragmentumwandlung sind samt erreichbarer UI portiert. Unity-Save v5 migriert 1–4 mit Originalkopien. [Prüfbericht](unity-industry.md): 221 zusätzliche gemeinsame Fälle, 33 EditMode-/16 PlayMode-Tests und 1.860 Vitest-Tests. Breite Systemzeilen bleiben wegen Challenge-/Shopverbrauchern, Legacy-/Webimport und Geräteabnahme offen. Die [funktionale Abnahmeliste](unity-functional-acceptance.md) ordnet alle acht Abschnitte zu; [optischer Rückstand](unity-visual-backlog.md) wird zentral geführt.
+
+## Funktionaler Folgeauftrag: Challenge-Läufe
+
+Alle 690 aktuellen V2-Laufstufen sind mit Einschränkungen, echter Hauptspielpause online/offline, Abbruch, wiederholbaren sicheren Abschlüssen, Familienverbrauchern und gemeinsamen Freischaltungen portiert. [Prüfbericht und Quellabweichungen](unity-challenges.md), [Prüfdaten](unity-challenges-verification.json). Save v6 migriert v1–5 mit Originalkopien. Zwölf statische Langzeit-Challenges, historische Webkataloge und echte Geräte bleiben offen; die breite Challengezeile bleibt entsprechend ungecheckt.
+
+## Funktionaler Folgeauftrag: dauerhafte Metriken
+
+[Statistik-Abhängigkeit für Abschnitt 3](unity-lifetime.md): echte Produzenten, Mastery-XP, explizite aktive Zeit, Challenge-Historienisolation und Save-v7-Erhaltung. Alte Historien werden nicht aus Beständen erfunden. Missionen/Achievements/Profil bleiben bis zu ihren Transaktionen und Oberflächen offen.
+
+## Funktionaler Folgeauftrag: Erfolge und Profil
+
+[Erfolge, Laborziele und Profil](unity-retention.md): alle 37 Achievementfamilien mit Claims und AP-Einnahmen, zwölf statische Bedingungen, acht Einführungsbelohnungen, Namenspolicy/erste KI-Wahl und lesbares Postfach. Save v8 erhält v1–7 und speichert das Modelllevel unabhängig. 935 gemeinsame Transaktionen, 330 Namens- und 18.094 Unicodefälle. Missionen/Perioden sowie Season-Produzenten bleiben offen; die breite Systemzeile wird nicht pauschal abgeschlossen.
 
 ## Fortschritt: Items und Schmiede
 
@@ -75,7 +103,7 @@ Alle folgenden Kriterien bleiben als vollständige Systemabnahme offen; den nach
 | [ ] | Hardware-Autokäufer, Reserve, Forschung, Training, Analyse-, Craft-/Fusion-/Prestigeplaner | `economy.ts`, `researchAutomation.ts`, `progressionAutomation.ts`, `progressionWork.ts` | Gleiche Aktionsreihenfolge und Zahlungsregeln bei Online-/Offlinefortschritt |
 | [ ] | Challenges, Stufen/Kapitel, Einschränkungen, Sterne, Bestzeiten, Hauptspielisolation | `challengeStages.ts`, `retention.ts`, `simulation.ts`, `ChallengeRunPanel.tsx` | Start/Abbruch/Abschluss/Reload; separaten Hauptzustand, passive Fortschritte und Einmalbelohnungen vergleichen |
 | [ ] | Daily/Weekly/Monthly-Aufgaben, Kapitelquests, Erfolge, Mailbox und Profil | `missions.ts`, `achievements.ts`, `retention.ts`, `profileName.ts` | Periodenwechsel, Baselines, Claim-IDs, Kapitelaufstieg und permanente Belohnungen identisch |
-| [ ] | Seasons, drei Themen, Free/Premium-Spuren, XP, Vitrine, Truhen und Kulanzfrist | `season.ts`, `seasonLoot.ts`, `SeasonPass.tsx`, `SeasonChestTray.tsx` | Claims über Wechsel/Reload, Entitlements, volle Loot-Queue und Challenges vergleichen |
+| [x] | Aktuelle V2-Seasons: drei Themen, Free/Premium-Spuren, XP, Vitrine, Truhen und Kulanzfrist | `season.ts`, `seasonLoot.ts`, `SeasonPass.tsx`, `SeasonChestTray.tsx` | [Season-Bericht](unity-seasons.md): Claims über Wechsel/Reload, Entitlements, volles Lager und Challenges geprüft; Legacy-/Webimport separat offen |
 | [ ] | Shop, Gem-Angebote, permanente Slots/Upgrades, Boosts, Drops und Truhen | `shop.ts`, `gemShop.ts`, `ShopMarket.tsx`, `ShopUpgrades.tsx` | Limits, Preise, Verfügbarkeit, Kaufabzug, Ergebnis und kein Claim bei Fehler vergleichen |
 | [ ] | Bonusboxen, Dropauswahl, Kapselmaschine, Pity/Jackpot und Ergebnisbelege | `bonusBoxes.ts`, `capsuleMachine.ts`, `RewardReveal.tsx`, `ItemReceipt.tsx` | Deterministische Seeds/Transaktions-IDs, Pools, Auswahl und genau einmalige Belohnung |
 | [ ] | Story, Mira, Tutorial, Finger/Fokus, AI-/Spielername und Namensmoderation | `story.ts`, `onboarding.ts`, `tutorialGuide.ts`, `aiName.ts`, `namePolicy.ts`, `moderation/` | Tutorialzustände, übersprungene Dialoge, Unicode-Normalisierung, reservierte Namen und Alt-Save-Nachprüfung |

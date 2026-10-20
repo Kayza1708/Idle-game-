@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-20",
+  "unity": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "scope": "UTC missions and frozen daily bonus boxes; not total migration acceptance",
+  "saveVersion": 9,
+  "sourceTemplates": 18,
+  "sourceReferenceTransactions": 208,
+  "sourceCases": "IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/MissionReferenceCases.json",
+  "editMode": {
+    "passed": 52,
+    "total": 52,
+    "exit": 0,
+    "xml": "/tmp/unity-missions-edit.xml"
+  },
+  "finalMissionEditMode": {
+    "passed": 4,
+    "total": 4,
+    "exit": 0,
+    "xml": "/tmp/unity-missions-edit-final.xml"
+  },
+  "playMode": {
+    "passed": 28,
+    "total": 28,
+    "exit": 0,
+    "xml": "/tmp/unity-missions-play.xml",
+    "burst": "--burst-force-sync-compilation"
+  },
+  "finalMissionUI": {
+    "passed": 3,
+    "total": 3,
+    "exit": 0,
+    "xml": "/tmp/unity-missions-play-final.xml"
+  },
+  "vitest": {
+    "passed": 1868,
+    "files": 134,
+    "exit": 0,
+    "log": "/tmp/unity-missions-vitest.log"
+  },
+  "typecheck": {
+    "exit": 0,
+    "log": "/tmp/unity-missions-typecheck.log"
+  },
+  "build": {
+    "exit": 0,
+    "log": "/tmp/unity-missions-build.log",
+    "warning": "existing main bundle above 500 kB"
+  },
+  "sourceExportCheck": {
+    "exit": 0,
+    "log": "/tmp/unity-missions-export.log"
+  },
+  "mobile": {
+    "editorWidths": [
+      320,
+      390,
+      430
+    ],
+    "visualInspection": true,
+    "deviceAcceptance": false,
+    "fundedFixtures": true,
+    "screenshots": [
+      "screenshots/unity-missions-funded-320.png",
+      "screenshots/unity-missions-funded-390.png",
+      "screenshots/unity-missions-funded-430.png",
+      "screenshots/unity-missions-funded-box-390.png"
+    ]
+  },
+  "open": [
+    "three season reward catalogs, claims and chests (4)",
+    "active world drops and remaining shop reward consumers (5)",
+    "complete chapter/story/Mira flow (7)",
+    "explicit web import, recovery UI and remaining strict save contracts (8)",
+    "actual mobile devices and player/release acceptance"
+  ],
+  "compile": {
+    "exit": 0,
+    "log": "/tmp/unity-missions-compile-final.log",
+    "compilerErrors": 0
+  }
+}

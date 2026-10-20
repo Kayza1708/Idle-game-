@@ -1,6 +1,6 @@
 # Idle Intelligence – aktueller Stand
 
-## Unity-Rewrite lokal · 19.10.2026
+## Unity-Rewrite lokal · 20.10.2026
 
 - [x] Tatsächlichen Repositorypfad und Branch `codex/unity-rewrite` geprüft; TypeScript, lokale Backups, Exporte und iOS-Bestand erhalten.
 - [x] Vorhandenes Unity-6000.3.26f1-Unterprojekt mit Git-Ignore für generierte Daten und Arbeitsregeln eingerichtet; vollständige Asset-/Meta-Paare geprüft.
@@ -15,7 +15,14 @@
 - [x] Normales INT-Prestige mit allen 60 Knoten, verbundenem Netz/Pan/Pinch, Integration, zusätzlichen Labs/Slots und benötigter Automation implementiert; 380 gemeinsame Fälle, natürlicher Erstlauf (39:38 simuliert), Save-v1/v2-Erhaltung nach v3. 25 EditMode-/9 PlayMode-Tests und 1.857 Vitest-Tests erfolgreich. [Prüfbericht](unity-int-prestige.md).
 - [x] Axiome/Modelle: 24 Knoten, zehn Modelle, geheimes Labor/Mira, echte Effekte, Planer, sichere Resets und Save-v1/v2/v3-Migration nach v4. 323 gemeinsame technische Fälle; [Umfang und Prüfgrenzen](unity-axioms-models.md).
 - [x] Aktuellen V2-Forschungs-/Industriekern portiert: alle 26 Forschungen, Raten, Foundry, Synthese, Durchbrüche, Fragmenttransaktionen und Save-v5-Migration mit Originalen; [221 Referenzfälle und tatsächliche Prüfergebnisse](unity-industry.md).
-- [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Challenges, Missionen/Profil, Seasons, Shop/Belohnungen, vorbereitete Adapter, Tutorial/Sprachen und vollständige Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
+- [x] 690 V2-Challenge-Laufstufen mit eigenem Laufzustand, Hauptspielpause, sicheren Rückkehrtransaktionen, echter Regelwirkung und Save-v6-Migration; [Bericht](unity-challenges.md). Zwölf statische Langzeit-Challenges folgen mit ihren Abhängigkeiten.
+- [x] Persistente Ereigniszähler/Mastery für vorhandene Produzenten und aktiver/offliner Zeitkontext als Abhängigkeit von Missionen/Achievements, mit konservativer Save-v7-Migration; [Umfang](unity-lifetime.md). Abschnitt 3 selbst bleibt offen.
+- [x] 37 Achievementfamilien samt Claims/AP-Verbraucher, acht Laborziele und Profil/Postfach/Namensfilter mit Save-v8-Erhaltung portiert; zwölf statische Bedingungen vorhanden, zwei benötigen noch Seasons. [Teilabnahme 3b](unity-retention.md); Missionen bleiben offen.
+- [x] UTC-Missionen mit originalen 6/12/30 Aufgaben, Claims/Bonus/Ablauf, eingefrorenen Tagesbonusboxen und konservativer Save-v9-Migration implementiert; [Teilumfang und Prüfgrenzen](unity-missions.md). Vollständige Seasons, aktive Drop-Erzeugung und Story/Kapitel bleiben offen.
+- [x] Drei V2-Seasons mit 300 Originalbelohnungen, verdienten Truhen, Vitrine und echtem Artefakt-Einnahmenbonus portiert; Save-v10-Erhaltung und vorbereitete Premium-/XP-Referenzen getrennt von echten Käufen. [Umfang und Abnahme](unity-seasons.md).
+- [x] Aktive Signal-Drops mit Originaltiming, drei Varianten, echten Qualitäts-/Belohnungsregeln und Lifetime-/Missionsproduzenten portiert; konservative Save-v11-Erhaltung. [Teilabschnitt 5a](unity-signals.md).
+- [x] Markt mit allen 20 Materialpaketen, vier Gem-Truhen, freier Truhe, Tagesrotation/-rabatt/-item und sicherer gemeinsamer Truhenvergabe portiert; unverfügbarer Videoprovider ohne SDK und Save-v12-Erhaltung. [Teilabschnitt 5b](unity-market.md).
+- [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Shop/aktive Drops/Gumball/Boosts, vorbereitete Adapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
 Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.

@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-20",
+  "unity": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "scope": "Active signals, subsection 5a; full shop and rewrite remain open",
+  "saveVersion": 11,
+  "sourceTransactions": 213,
+  "sourceSaveGuardCases": 8,
+  "fixture": "IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/SignalReferenceCases.json",
+  "editMode": {
+    "passed": 58,
+    "total": 58,
+    "exit": 0,
+    "xml": "/tmp/unity-signals-edit.xml"
+  },
+  "finalSignalAndSaveEditMode": {
+    "passed": 3,
+    "total": 3,
+    "exit": 0,
+    "xml": "/tmp/unity-signals-edit-final.xml",
+    "includes": "213 source transactions, Closed Supply item guard and actual source factor validation"
+  },
+  "playMode": {
+    "passed": 33,
+    "total": 33,
+    "exit": 0,
+    "xml": "/tmp/unity-signals-play.xml",
+    "burst": "--burst-force-sync-compilation"
+  },
+  "vitest": {
+    "passed": 1872,
+    "files": 136,
+    "exit": 0,
+    "log": "/tmp/unity-signals-vitest.log"
+  },
+  "finalSourceContractVitest": {
+    "passed": 2,
+    "exit": 0,
+    "log": "/tmp/unity-signals-target-final.log"
+  },
+  "buildAndTypecheck": {
+    "exit": 0,
+    "log": "/tmp/unity-signals-build.log",
+    "warning": "existing main bundle above 500 kB"
+  },
+  "sourceExportCheck": {
+    "exit": 0,
+    "log": "/tmp/unity-signals-export.log",
+    "finalSignalSpecificExport": true
+  },
+  "mobile": {
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "visuallyInspected": true,
+    "editorRenders": true,
+    "realDeviceAcceptance": false,
+    "preparedActiveProgressOnly": true,
+    "screenshots": [
+      "screenshots/unity-signals-prepared-320.png",
+      "screenshots/unity-signals-prepared-390.png",
+      "screenshots/unity-signals-prepared-430.png"
+    ]
+  },
+  "open": [
+    "full market, Gumball, offers, boosts and permanent upgrades (5)",
+    "full commerce/ad error contracts and unavailable providers (6)",
+    "complete chapters/Mira/languages/settings/audio/haptics (7)",
+    "explicit validated web import, recovery/export and diagnostics (8)",
+    "actual devices and player/release acceptance"
+  ],
+  "compile": {
+    "exit": 0,
+    "compilerErrors": 0,
+    "log": "/tmp/unity-signals-compile-final.log"
+  },
+  "finalTypecheck": {
+    "exit": 0,
+    "log": "/tmp/unity-signals-typecheck-final.log"
+  }
+}

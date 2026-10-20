@@ -27,10 +27,10 @@ namespace IdleIntelligence.Core
             var definition=ItemBalance.Analyses[job.definition];long count=Split(job.units+w.componentRemainder,out w.componentRemainder);var found=new long[w.components.Length];double total=job.weights.Sum();
             for(long i=0;i<count;i++){double roll=Draw(w);int picked=job.order.Last();foreach(int c in job.order){roll-=job.weights[c]/total;if(roll<=0){picked=c;break;}}found[picked]++;}
             if(job.rareGuarantee&&!Enumerable.Range(0,found.Length).Any(c=>found[c]>0&&ItemBalance.RareComponents[c]))found[5]++;
-            for(int c=0;c<found.Length;c++){int family=Family(c);double v=found[c]*job.combination*(family==2?job.photonicIntegral/job.required:family==4?job.quantumIntegral/job.required:job.quantityIntegral/job.required)+w.analysisRemainders[c];long amount=Split(v,out w.analysisRemainders[c]);w.components[c]+=amount;}
+            for(int c=0;c<found.Length;c++){int family=Family(c);double v=found[c]*job.combination*(family==2?job.photonicIntegral/job.required:family==4?job.quantumIntegral/job.required:job.quantityIntegral/job.required)+w.analysisRemainders[c];long amount=Split(v,out w.analysisRemainders[c]);w.components[c]+=amount;Lifetime.Components(s,c,amount);}
             w.fragments+=Split(job.blueprints+w.blueprintRemainder,out w.blueprintRemainder);double research=definition.Id.StartsWith("architecture")?definition.Fragments:0;w.researchFragments+=Split(research+w.researchRemainder,out w.researchRemainder);
-            if(definition.ItemChance>0&&Draw(w)<definition.ItemChance){var candidates=ItemBalance.Items.Where(i=>i.Id!="impulse-relay"&&i.Id!="insight-archive").ToArray();var item=new ItemInstance{missingMaterialBasis=true,id="item-"+w.nextId++,type=candidates[(int)Math.Floor(Draw(w)*candidates.Length)].Id};w.inventory=w.inventory.Concat(new[]{item}).ToArray();}
-            w.hasAnalysis=false;w.analysis=null;w.revision++;
+            if(!ChallengeRules.Is(s,"closed-supply-chain")&&definition.ItemChance>0&&Draw(w)<definition.ItemChance){var candidates=ItemBalance.Items.Where(i=>i.Id!="impulse-relay"&&i.Id!="insight-archive").ToArray();var item=new ItemInstance{missingMaterialBasis=true,id="item-"+w.nextId++,type=candidates[(int)Math.Floor(Draw(w)*candidates.Length)].Id};w.inventory=w.inventory.Concat(new[]{item}).ToArray();Lifetime.Item(s,item.type);}
+            s.Industry.firstAnalysisReward=true;s.Lifetime.analysesCompleted++;w.hasAnalysis=false;w.analysis=null;w.revision++;
         }
     }
 }

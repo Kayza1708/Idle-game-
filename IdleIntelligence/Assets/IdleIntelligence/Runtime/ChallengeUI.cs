@@ -1,0 +1,42 @@
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using IdleIntelligence.Core;
+using UnityEngine;
+using UnityEngine.UI;
+namespace IdleIntelligence.Runtime
+{
+ // Uses the existing action-card and item-portrait prefabs; transactions stay in the pure core.
+ public sealed class ChallengeUI:MonoBehaviour
+ {
+  GameRuntime game;int family,stage=1;readonly List<string> selected=new List<string>(),links=new List<string>();Transform controls;Text status;string signature="";
+  public void Initialize(GameRuntime runtime){game=runtime;ItemPortrait.Sprites=game.WorkshopPrefab.ItemSprites;status=WorkshopUIFactory.Label("ChallengeStatus",transform,"",17,88);controls=WorkshopUIFactory.Vertical("ChallengeControls",transform).transform;Defaults();Build();}
+  void Defaults(){selected.Clear();if(ChallengeBalance.Families[family]!="no-items")selected.AddRange(game.State.Workshop.equipped.Where(v=>!string.IsNullOrEmpty(v)));links.Clear();links.AddRange(Balance.Hardware.Skip(1).Take(ChallengeRules.Definition(ChallengeBalance.Families[family],stage).NetworkLimit).Select(h=>h.Id));}
+  void Update(){if(game==null)return;var s=game.State;if(ChallengeRules.Active(s)){var r=s.Challenges.Run;status.text=ChallengeBalance.Names[ChallengeRules.Index(r.id)]+" · Stufe "+r.stage+"\nHauptspiel vollständig pausiert · "+Math.Floor((s.SavedAt-r.startedAt)/1000)+" s";string next=r.runId+":"+ChallengeRules.Ready(s);if(signature!=next){signature=next;Build();}foreach(var goal in ChallengeRules.Current(s).Goals){var text=controls.Find("Goal-"+goal.Id)?.GetComponent<Text>();if(text!=null)text.text=goal.Id+"  "+ChallengeRules.GoalValue(s,goal.Id)+" / "+goal.Target;}}else status.text="CHALLENGES\n"+s.Challenges.Progress.stars+" Sterne · "+s.Challenges.Progress.stages.Sum()+" erstmals abgeschlossene Stufen";}
+  Text Paragraph(string name,string value,int size=14)
+  {var t=WorkshopUIFactory.Label(name,controls,value,size,54);float width=((RectTransform)transform).rect.width;var settings=t.GetGenerationSettings(new Vector2(Math.Max(220,width>50?width-20:300),0));t.GetComponent<LayoutElement>().preferredHeight=Math.Max(54,t.cachedTextGenerator.GetPreferredHeight(value,settings)/t.pixelsPerUnit+16);return t;}
+  Button Action(string name,string label,System.Action action,bool enabled=true){var b=WorkshopUIFactory.Button(name,controls,label,action);b.interactable=game.Writable&&enabled;return b;}
+  void Build()
+  {
+   WorkshopUIFactory.Clear(controls);var s=game.State;
+   if(ChallengeRules.Active(s))
+   {
+    var run=s.Challenges.Run;var d=ChallengeRules.Current(s);Paragraph("ChallengeRules",d.Rules);Paragraph("IsolationRule","Hier gesammelte Ressourcen, Käufe und Items bleiben im Challenge-Lauf. Beim Abbruch oder Abschluss wird dein gespeichertes Hauptspiel wiederhergestellt. Nur der reguläre Erstabschluss vergibt Sterne und den dauerhaften Familienbonus.");foreach(var goal in d.Goals)Paragraph("Goal-"+goal.Id,goal.Id+"  "+ChallengeRules.GoalValue(s,goal.Id)+" / "+goal.Target);
+    Action("CompleteChallenge","Erfolgreich abschließen und Hauptspiel laden",()=>{if(game.Act(v=>ChallengeRules.Return(v,true,run.runId))){signature="";Build();}},ChallengeRules.Ready(s));Action("AbortChallenge","Challenge abbrechen und Hauptspiel laden",()=>{if(game.Act(v=>ChallengeRules.Return(v,false,run.runId))){signature="";Defaults();Build();}});Action("PlayChallenge","Im Challenge-Lauf weiterspielen",()=>game.HardwareTab.onClick.Invoke());return;
+   }
+   Action("ChallengeFamily",ChallengeBalance.Names[family]+" · Familie wechseln",()=>{family=(family+1)%ChallengeBalance.Families.Length;stage=Math.Min(69,s.Challenges.Progress.stages[family]+1);Defaults();Build();});
+   var chooser=WorkshopUIFactory.Horizontal("ChallengeStagePicker",controls);WorkshopUIFactory.Button("PreviousChallengeStage",chooser.transform,"− Stufe",()=>{stage=Math.Max(1,stage-1);Defaults();Build();});WorkshopUIFactory.Label("SelectedChallengeStage",chooser.transform,stage+" / 69",17,54);WorkshopUIFactory.Button("NextChallengeStage",chooser.transform,"Stufe +",()=>{stage=Math.Min(69,stage+1);Defaults();Build();});Action("NextUnfinishedChallenge","Erste neue Stufe auswählen",()=>{stage=Math.Min(69,s.Challenges.Progress.stages[family]+1);Defaults();Build();});
+   string id=ChallengeBalance.Families[family];var quote=ChallengeRules.Definition(id,stage);Paragraph("ChallengeRules",quote.Rules);if(id=="inflation"&&quote.PriceFactor!=ChallengeBalance.ActualInflationFactor)Paragraph("InflationSourceDifference","Bestandsabweichung: Der Katalog nennt ×"+quote.PriceFactor+", die aktuelle Preisfunktion berechnet ×"+ChallengeBalance.ActualInflationFactor+". Die Hardwarepreise folgen der tatsächlichen Preisfunktion.");foreach(var g in quote.Goals)Paragraph("Target-"+g.Id,"Ziel: "+g.Id+" · "+g.Target);
+   bool already=s.Challenges.Progress.stages[family]>=stage;Paragraph("ChallengeRewards",already?"Wiederholung: keine weiteren Sterne und kein zusätzlicher Familienbonus. Eine schnellere Bestzeit zählt.":"Erstabschluss: "+quote.Stars+" Sterne · Familienbonus bis "+(100*ChallengeBalance.RewardCoefficient*Math.Log(1+stage)).ToString("F2")+" %. Freischaltungen richten sich nach der Summe aller erstmals abgeschlossenen Stufen.");
+   Paragraph("ChallengeRetention","Hauptspiel, laufende Aufträge und Zeitboni werden pausiert und separat gespeichert. Der Challenge-Lauf startet mit 50 Credits, ohne Hauptspielguthaben oder Materialien. Dauerhafte Forschung, aktive Knoten, Axiomwirkungen und ein gewählter Ausrüstungssatz wirken gemäß Originalregeln. Axiome, Modellwechsel und permanente Knotenkäufe sind während des Laufs gesperrt.");
+   if(id!="no-items")
+   {
+    Paragraph("ChallengeLoadout","Ausrüstung wählen: "+selected.Count+" / "+Workshop.ActiveSlots(s).Count(v=>v)+" Slots. Die Originalitems bleiben im Hauptspiel; im Lauf sind nur gesperrte Kopien vorhanden.");
+    foreach(var item in s.Workshop.inventory){var i=item;var row=Instantiate(game.CardPrefab,controls);row.name="ChallengeLoadout-"+i.id;row.Title.text=(selected.Contains(i.id)?"✓ ":"")+Workshop.Definition(i).Name;row.Detail.text=ItemBalance.Rarities[i.rarity]+" · Lv "+i.level+" · +"+i.forge;row.Icon.color=Color.clear;var icon=Instantiate(game.WorkshopPrefab.PortraitPrefab,row.Icon.transform);var rect=(RectTransform)icon.transform;rect.anchorMin=rect.anchorMax=new Vector2(.5f,.5f);rect.sizeDelta=new Vector2(58,58);rect.anchoredPosition=Vector2.zero;icon.Bind(i);icon.Caption.text="";icon.Button.interactable=false;icon.Button.targetGraphic.raycastTarget=false;row.Button.onClick.AddListener(()=>{if(selected.Contains(i.id))selected.Remove(i.id);else selected.Add(i.id);Build();});}
+   }
+   else Paragraph("NoItemLoadout","Bare Metal: keine Itemkopien und keine Itemboni.");
+   if(id=="fragmented-network")foreach(var h in Balance.Hardware.Skip(1)){string hardware=h.Id;Action("ChallengeLink-"+hardware,(links.Contains(hardware)?"✓ ":"")+h.Name+" · Verbindung vom Vorgänger",()=>{if(links.Contains(hardware))links.Remove(hardware);else links.Add(hardware);Build();});}
+   string block=ChallengeRules.EntryBlock(s,id,stage,selected.ToArray(),links.ToArray());Paragraph("ChallengeEntry",block??"Startbereit. Das Hauptspiel wird vor dem Wechsel im atomaren Spielstand erhalten.");Action("StartChallenge","Stufe "+stage+" starten",()=>{string runId="unity:"+id+":"+Guid.NewGuid().ToString("N");if(game.Act(v=>ChallengeRules.Start(v,id,stage,runId,selected.ToArray(),links.ToArray())))game.HardwareTab.onClick.Invoke();},block==null);
+  }
+ }
+}

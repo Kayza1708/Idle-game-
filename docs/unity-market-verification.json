@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-20",
+  "unity": "6000.3.26f1",
+  "scope": "Market subsection 5b, not full shop/rewrite or SDK acceptance",
+  "branch": "codex/unity-rewrite",
+  "saveVersion": 12,
+  "sourceTransactions": 481,
+  "sequentialScenarios": 21,
+  "campaignSeedCases": 5,
+  "fixture": "IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/MarketReferenceCases.json",
+  "editMode": {
+    "passed": 61,
+    "total": 61,
+    "exit": 0,
+    "xml": "/tmp/unity-market-edit.xml"
+  },
+  "finalMarketEditMode": {
+    "passed": 3,
+    "total": 3,
+    "exit": 0,
+    "xml": "/tmp/unity-market-edit-final.xml"
+  },
+  "playMode": {
+    "passed": 36,
+    "total": 36,
+    "exit": 0,
+    "xml": "/tmp/unity-market-play.xml",
+    "burst": "--burst-force-sync-compilation"
+  },
+  "finalMarketUI": {
+    "passed": 3,
+    "total": 3,
+    "exit": 0,
+    "xml": "/tmp/unity-market-play-final.xml"
+  },
+  "vitest": {
+    "passed": 1874,
+    "files": 137,
+    "exit": 0,
+    "log": "/tmp/unity-market-vitest.log"
+  },
+  "buildAndTypecheck": {
+    "exit": 0,
+    "log": "/tmp/unity-market-build.log",
+    "warning": "existing main bundle above 500 kB"
+  },
+  "sourceExportCheck": {
+    "exit": 0,
+    "log": "/tmp/unity-market-export.log"
+  },
+  "mobile": {
+    "widths": [
+      320,
+      390,
+      430
+    ],
+    "editorRenders": true,
+    "visuallyInspected": true,
+    "realDeviceAcceptance": false,
+    "fundedGemStocks": true,
+    "screenshots": [
+      "screenshots/unity-market-funded-320.png",
+      "screenshots/unity-market-funded-390.png",
+      "screenshots/unity-market-funded-430.png",
+      "screenshots/unity-market-funded-item-390.png",
+      "screenshots/unity-market-funded-odds-390.png"
+    ]
+  },
+  "providers": {
+    "runtimeVideo": "UnavailableRewardedVideoProvider",
+    "grantsFakeSuccess": false,
+    "SDKsAdded": false
+  },
+  "open": [
+    "Gumball and Gem offers / permanent upgrades / boosts (5c)",
+    "remaining commerce and ad error contracts / entitlements (6)",
+    "complete chapters, Mira, languages, settings, audio / haptics (7)",
+    "validated explicit web import, unsupported originals, recovery / export / diagnostics (8)",
+    "actual device and player/release acceptance"
+  ],
+  "compile": {
+    "exit": 0,
+    "compilerErrors": 0,
+    "log": "/tmp/unity-market-compile-final.log"
+  }
+}

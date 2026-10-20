@@ -102,3 +102,33 @@ Vollständiges Onboarding mit Namensprüfung, sieben Sprachen, originale Schrift
 ## Erweiterung: Forschung und Industrie
 
 Der aktuelle funktionale Abschnitt wird in [unity-industry.md](unity-industry.md) samt Speichervertrag und Prüfergebnissen beschrieben. Dieselbe Szene öffnen. Forschung enthält die vollständigen 26 aktiven V2-Forschungen. Unter **Items → Material** zu Synthese, Durchbrüchen, Fragmentumwandlung und Foundry scrollen. Im Inventar öffnet das Antippen eines Items das gemeinsame Detailfenster mit **Schmieden**. Ressourcen werden beim tatsächlichen Start gespeichert; wartende Foundry-Items sind noch nicht bezahlt. Analysen können ohne Erstattung abgebrochen werden. Synthese verwendet denselben Arbeitsplatz. Für reguläre Tests Ressourcen im Spiel verdienen; finanzierte Prüfzustände werden ausschließlich von Tests in temporären Saves angelegt.
+
+## Challenge-Läufe mit Play testen
+
+In `Assets/Scenes/IdleIntelligence.unity` Play starten, **Forschung → Challenges** öffnen. Nach erstem Prestige und geforderter Hardwareentdeckung Familie/Stufe, Loadout und gegebenenfalls Verbindungen auswählen. Start speichert sofort; Ziele und Abbruch/Abschluss sind anschließend hier erreichbar. Hauptspiel und bezahlte Jobs pausieren auch offline. Wiederholte Erstabschlussbelohnungen sind gesperrt. Vollständige Regeln, Save-v6-Migration und offene Langzeit-Challenges: [Challenge-Bericht](unity-challenges.md). Testbilder verwenden ausdrücklich finanzierte temporäre Zustände.
+
+## Dauerhafte Statistik und Mastery
+
+Dieselbe Szene öffnen, Play und **Forschung → Dauerhafter Fortschritt** wählen. Käufe, Arbeit, Materialien und aktive Zeit stammen aus echten Aktionen; die Mastery-Liste ist scrollbar. Bei alten Ständen weist die Ansicht auf nicht verfügbare historische Zähler hin. Alte Bestände bleiben bestehen; es gibt keine erfundenen rückwirkenden Ereignisse. Missionen/Achievement-Claims folgen als nächster Teil von Abschnitt 3. [Details](unity-lifetime.md).
+
+## Erfolge, Laborziele und Profil mit Play testen
+
+In derselben Szene **Forschung → Profil · Achievements / Laborziele / Post** öffnen. Erreichte Stufen direkt auf den Aktionskarten abholen; AP beeinflussen die echten Einnahmen. Laborziele vergeben die ursprünglichen Credits/Items/Komponenten einmalig. Unter Profil Namen validiert speichern, den KI-Namen erstmals wählen, Nachrichten lesen und Quellen/Lizenzen öffnen. Langzeit-Challenges besitzen echte Stern-Claims; Seasonbedingungen benötigen noch Abschnitt 4. [Genaue Regeln und Save-v8-Grenzen](unity-retention.md). Missionen und vollständige Mira-Führung bleiben offen.
+
+## UTC-Missionen mit Play testen
+
+Öffne `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` mit Unity **6000.3.26f1** und drücke Play. Unter **Forschung → Missionen** stehen tägliche, wöchentliche und monatliche Ziele. Neue Perioden behalten ihre anfänglichen Ziele/Baselines auch bei weiterem Fortschritt. Erreiche ein Ziel mit echten Käufen, Training oder Taps und drücke seinen Abholknopf. Bei 4/8/20 abgeschlossenen Zielen ist der Periodenbonus verfügbar. Der Tagesbonus legt eine Bonusbox an; weiter unten die Materialfamilie wählen. Ein erneuter Klick zahlt nichts doppelt, auch nach Stop/Play.
+
+V1–8-Saves erhalten vor der Migration eine Originalkopie. Ihre Missionen und erste Season beginnen nach der initialen Offline-Synchronisierung, ohne historische Belohnungen. In Challenges sind Hauptspiel-Claims gesperrt. Ablaufabrechnung, Offlinegrenzen und alte aktive Sessions werden zusätzlich automatisiert geprüft. Volle Season-Claims und aktive Signal-Drops folgen separat; siehe [Missionsbericht](unity-missions.md). Für vorbereitete Screenshotzustände wird ausschließlich ein temporärer Test-Save verwendet.
+
+## Seasons mit Play testen
+
+In derselben Szene unter **Forschung → Seasons** Free/Premium, Levelbereiche und Sammlung öffnen. XP stammen aus echten Missionsclaims. Erreichte Free-Belohnungen abholen; verdiente Truhen darunter öffnen. Erhaltene Items sind im normalen Inventar ausrüstbar. **Sammlung** zeigt Artefakte und ihren tatsächlichen Produktionsfaktor. Premium bleibt ohne bestätigtes Entitlement gesperrt; keine vorgetäuschte Kaufbestätigung. Die vorherige Season ist nur während der Originalkulanz verfügbar. [Regeln und Prüfung](unity-seasons.md).
+
+## Aktive Signal-Drops mit Play testen
+
+Im Labor aktiv spielen: ohne Boni erscheint nach 90 aktiven Sekunden ein Signal mit zwölf Sekunden Restzeit. Es verwendet die vorhandene Komponentengrafik und ist direkt anklickbar. Forschung Signalprotokolle und ausgerüstete Drop-Effekte beeinflussen Häufigkeit und Qualität. Material-/Credit-/Daten-/Item-/Bauplanbelohnungen sowie Missionszähler werden durch die echte gespeicherte Transaktion vergeben. Offlinezeit erzeugt keine neuen Signale; abgelaufene und doppelt angeklickte Belege zahlen nichts. In No-Taps-Challenges bleibt das Einsammeln gesperrt. [Regeln und Nachweis](unity-signals.md).
+
+## Markt mit Play testen
+
+**Forschung → Markt** öffnen. Die freie Truhe kann sofort abgeholt werden; danach zeigt ihr gespeicherter Cooldown die Restzeit. Bezahlte Angebote benötigen echte vorhandene Gems. Materialien, Tagesangebote und Tagesitem kaufen; der gespeicherte Ergebnisbeleg steht darunter. Unter **Chancen** sind Tabellen und aktueller Itempool lesbar. Videowerbung ist ausdrücklich nicht verfügbar: der Klick vergibt keine Truhe und verbraucht kein Limit. [Vollständige Regeln und Prüfung](unity-market.md). Gumball/Gem-Upgrades folgen separat.
