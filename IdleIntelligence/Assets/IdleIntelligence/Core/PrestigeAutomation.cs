@@ -37,7 +37,12 @@ namespace IdleIntelligence.Core
                 {var before=s;var next=Game.Train(s,track);if(!ReferenceEquals(next,before)){s=next;if(s.Prestige.trainingQueue.Length>0)s.Prestige.trainingQueue=s.Prestige.trainingQueue.Skip(1).ToArray();}}
             }
             if(!s.Workshop.hasModuleJob&&s.Prestige.moduleQueue.Length>0){s=s.Copy();s.Workshop.moduleJob=s.Prestige.moduleQueue[0].Copy();s.Workshop.hasModuleJob=true;s.Prestige.moduleQueue=s.Prestige.moduleQueue.Skip(1).ToArray();}
-            for(int slot=ResearchJobs(s).Count();slot<LabCount(s);slot++)
+            return StartResearchQueue(s);
+        }
+        public static GameState StartResearchQueue(GameState state)
+        {
+            if(state.Prestige.resetIntent)return state;var s=state;
+            for(int attempt=0;attempt<GemBalance.MaximumLabs&&AdRewards.FreeLab(s)>=0;attempt++)
             {
                 string candidate=null;
                 foreach(string id in s.Prestige.researchQueue){int n=Game.ResearchIndex(id);if(Balance.Research[n].Project&&s.Research[n]>0||ResearchJobs(s).Any(j=>j.id==id))continue;string block=Game.ResearchBlock(s,n);if(block=="Zu wenig Daten")return s;if(block==null){candidate=id;break;}}

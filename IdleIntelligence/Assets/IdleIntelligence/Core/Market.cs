@@ -23,7 +23,7 @@ namespace IdleIntelligence.Core
   public static bool Blocked(GameState s)=>ChallengeRules.Active(s);
   public static double Clock(GameState s)=>Math.Max(s.SavedAt,s.Rewards.shopClockAt);
   public static bool MaterialAccess(GameState s,int c)=>c>=0&&c<ItemBalance.ComponentIds.Length&&(!MarketBalance.NewMaterials[c]||MaterialAnalysis.Access(s,(int)MarketBalance.AccessFamilies[c]));
-  static string Json(string value)
+  public static string Json(string value)
   {var b=new StringBuilder("\"");for(int i=0;i<value.Length;i++){char c=value[i];switch(c){case '"':b.Append("\\\"");break;case '\\':b.Append("\\\\");break;case '\b':b.Append("\\b");break;case '\f':b.Append("\\f");break;case '\n':b.Append("\\n");break;case '\r':b.Append("\\r");break;case '\t':b.Append("\\t");break;default:if(c<32||char.IsSurrogate(c)&&!(char.IsHighSurrogate(c)&&i+1<value.Length&&char.IsLowSurrogate(value[i+1]))&&!(char.IsLowSurrogate(c)&&i>0&&char.IsHighSurrogate(value[i-1])))b.Append("\\u"+((int)c).ToString("x4",CultureInfo.InvariantCulture));else b.Append(c);break;}}return b.Append('"').ToString();}
   public static string Context(GameState s)=>"["+Json(s.Missions.campaign)+","+s.Prestige.resets.ToString(CultureInfo.InvariantCulture)+","+s.Meta.resets.ToString(CultureInfo.InvariantCulture)+","+(s.Challenges.Run==null?"null":Json(s.Challenges.Run.runId))+","+(s.Challenges.Main==null?"false":"true")+"]";
   static double Hash(GameState s,string key)=>BonusBoxes.Roll(s.Missions.campaign,"shop:"+key);
@@ -76,5 +76,7 @@ namespace IdleIntelligence.Core
    if(m.hasRotation){var r=m.rotation;if(r==null||r.day<0||r.day>Max||r.materials==null||r.materials.Length!=MarketBalance.RotatingCount||r.materials.Any(c=>c<0||c>=ItemBalance.ComponentIds.Length)||r.materials.Distinct().Count()!=r.materials.Length||r.discount<0||r.discount>=ItemBalance.ComponentIds.Length||!SeasonBalance.PoolTypes.Contains(r.item)||new[]{"impulse-relay","insight-archive"}.Contains(r.item)||r.claimed==null||r.claimed.Length>MarketBalance.RotatingCount+2||r.claimed.Distinct().Count()!=r.claimed.Length||r.claimed.Any(id=>!r.materials.Select(c=>"daily:"+Number(r.day)+":"+ItemBalance.ComponentIds[c]).Concat(new[]{"discount:"+Number(r.day)+":"+ItemBalance.ComponentIds[r.discount],"item:"+Number(r.day)}).Contains(id)))throw new FormatException("Invalid market rotation");}
    if(m.hasPending){var p=m.pending;if(p==null||!Transaction(p.id)||!ScientificNumber.Finite(p.at)||p.at<0||p.at>8.64e15||!ScientificNumber.Finite(p.expiresAt)||p.expiresAt>8.64e15||p.expiresAt-p.at!=MarketBalance.AdTicketMilliseconds||p.context==null||p.context.Length>1000)throw new FormatException("Invalid pending market video");}if(!s.Rewards.hasReceipt&&s.Rewards.shopRevision>0&&m.freeNextAt>0)throw new FormatException("Missing market receipt");
   }
+  public static GameState ClaimAdFree(GameState s,string tx)=>PurchaseRules.AdFree(s)?CompleteVideo(s,tx,"success"):CancelVideo(s,tx);
+
  }
 }
