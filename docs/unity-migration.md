@@ -2,6 +2,10 @@
 
 Stand: 19.10.2026. Ursprüngliche Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
+## Fortsetzung 20.10.2026: vorbereitete Kaufverträge
+
+[Teilabschnitt 6a](unity-purchases.md): zwölf Originalprodukte, Einmal-/Wiederholungsschutz, Restore/Widerruf, echte Einnahmen-/Tap-Verbraucher und Save v14 mit Originalen. Store und Verifier sind ausdrücklich unverfügbar; kein SDK, keine lokalen Gratisrechte. Restliche Werbe-/Forschungsskipverträge bleiben 6b. [Prüfbericht](unity-purchases-verification.md).
+
 ## Fortsetzung 20.10.2026: Gem-Angebote und Gumball
 
 [Teilabschnitt 5c](unity-gems.md) ergänzt alle 17 Gem-Angebote, tatsächliche Zusatzlabore/Offlinekapazitäten/Laborbonus, Modul-/Trainingsverkürzungen und Kapselmaschine mit gespeicherten Belegen. Save v13 erhält v1–12 mit Originalkopien. Verbleibende Commerce-/Werbeverträge, Story/Sprachen/Einstellungen und Speicher-/Import-/Berichte bleiben offen. [Prüfbericht](unity-gems-verification.md).

@@ -7,7 +7,7 @@ Branch `codex/unity-rewrite`, Unity `6000.3.26f1`, Szene `IdleIntelligence/Asset
 Forschung/Industrie, isolierte V2-Challenges, Statistiken/Mastery, Achievements/Profil, UTC-Missionen/Tagesbonusboxen und die drei V2-Seasons sind im dokumentierten Umfang implementiert und geprüft. [Missionsbericht](unity-missions.md), [Season-Bericht](unity-seasons.md). Der gesamte Rewrite ist weiter offen.
 
 1. Abschnitt 5c ist ergänzt: [Gumball und Gem-Angebote](unity-gems.md) mit tatsächlichen Boost-/Upgradeverbrauchern. Legacy-/Webimport bleibt Abschnitt 8. [Markt/Truhen/Rotation](unity-market.md) sind als 5b bereits portiert. [Aktive Drops](unity-signals.md) samt Missionsproduzenten sind als 5a bereits implementiert und geprüft.
-2. Abschnitt 6: vorbereitete unverfügbare Werbe-/Kaufadapter samt Limits, Entitlements, Pending-/Transaktionsschutz und Fehlerpfaden. Keine SDKs oder vorgetäuschten Käufe.
+2. Abschnitt 6b: übrige Werbe-/Forschungsskipverträge, Limits, gespeicherte Aufträge, Creditboost und echte Werbefrei-Verbraucher. [Vorbereitete Kaufverträge 6a](unity-purchases.md) mit Restore/Widerruf, dauerhaften Rechten und Save-v14-Erhaltung sind ergänzt. Keine SDKs oder vorgetäuschten Käufe.
 3. Abschnitt 7: vollständige Kapitel/Mira/Tutorial, sieben Sprachen, alle Einstellungen, vorhandenes Audio und unterstützte Haptik. Namenspolicy und erster Profil-/KI-Name sind bereits portiert.
 4. Abschnitt 8: expliziter validierter Webimport mit Originalkopie und Erhaltung unbekannter Daten, Export/Recovery, Rückkehr-/Diagnose-/Balanceberichte und restliche Speicherverträge.
 5. Danach gemeinsamer optischer Feinschliff und tatsächliche Geräte-/Player-/Releaseprüfung. TypeScript und Backups erhalten; nichts mergen oder veröffentlichen.

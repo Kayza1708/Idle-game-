@@ -16,3 +16,5 @@ Keine zusätzliche Designrunde während des funktionalen Ports. Vorhandene Anord
 - Markt: nach vollständigem Funktionsport Truhen-/Ergebnisgrafiken, lange Materiallisten und Zeitdarstellung gemeinsam verfeinern. Chancen, Preise, Bestände und Tagesitem sind jetzt lesbar/bedienbar.
 
 - Gems/Gumball: lange Preis-/Restzeitanzeigen und Ergebnisbereich später zusammen mit Markt/Truhen verdichten. Aktuell scrollbar, gemeinsame Porträts und mindestens 44 Einheiten hohe Bedienelemente.
+
+- Storekatalog: vorhandene Aktionskarten nach vollständiger Funktionsmigration verdichten; Inhalte, Sperren und fehlende echte Storepreise bleiben dabei klar getrennt.

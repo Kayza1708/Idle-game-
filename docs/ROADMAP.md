@@ -23,6 +23,7 @@
 - [x] Aktive Signal-Drops mit Originaltiming, drei Varianten, echten Qualitäts-/Belohnungsregeln und Lifetime-/Missionsproduzenten portiert; konservative Save-v11-Erhaltung. [Teilabschnitt 5a](unity-signals.md).
 - [x] Markt mit allen 20 Materialpaketen, vier Gem-Truhen, freier Truhe, Tagesrotation/-rabatt/-item und sicherer gemeinsamer Truhenvergabe portiert; unverfügbarer Videoprovider ohne SDK und Save-v12-Erhaltung. [Teilabschnitt 5b](unity-market.md).
 - [x] Gumball und alle 17 Gem-Angebote mit echten Zusatzlaboren/Offlinekapazitäten/Laborbonus, proportionalen Modul-/Trainingsverkürzungen und Save-v13-Erhaltung portiert; [Teilabschnitt 5c](unity-gems.md).
+- [x] Vorbereitete Kaufverträge mit zwölf Originalprodukten, Restore/Widerruf, echten Einnahmen-/Tap-Verbrauchern und dauerhaftem Save vor Storeabschluss portiert; Produktionsadapter unverfügbar, keine echten Käufe. [Teilabschnitt 6a](unity-purchases.md).
 - [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): übrige Commerce-/Werbeadapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
