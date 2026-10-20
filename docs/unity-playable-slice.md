@@ -142,3 +142,7 @@ Unter **Zeit** einen Laborbonus kaufen und laufende Forschung beobachten. Ein ak
 Nach dem ersten Prestige **Gumball** öffnen und für 10 Gems ziehen. Der gespeicherte Ergebnisbeleg steht über dem Ziehungsbutton; Chancen und weitere Inhalte bleiben scrollbar. Erhaltene Items/Komponenten sind sofort im normalen Inventar/Bestand. Play stoppen und erneut starten: Ergebnis, Gems und dauerhafte Upgrades bleiben erhalten. Wiederholte alte Klickereignisse vergeben nichts erneut. Ein bewusst neuer Klick nach Aktualisierung zieht erneut. **Video** meldet den unverfügbaren Anbieter ohne Belohnung oder Limitverbrauch.
 
 Automatisierte Gem-/Prestige-/F01-Vorräte in den Screenshots sind ausdrücklich vorbereitete Teststände, keine Gratisvorräte im regulären Spiel und kein natürlicher Langzeitlauf. [Regeln](unity-gems.md), [tatsächliche Prüfungen](unity-gems-verification.md).
+
+## Vorbereitete Kaufverträge mit Play prüfen
+
+**Forschung → Pakete & Vorteile** öffnen. Originalprodukte und Inhalte lesen; es werden keine erfundenen Storepreise angezeigt. Kaufknöpfe sind ohne Store und Verifier gesperrt. **Käufe wiederherstellen** meldet die fehlende Anbindung und verändert weder Gems noch Eigentum. Es gibt keine Gratisfreischaltung im normalen Spiel. Einnahmenpass, Restore-/Widerruf-/Wiederholungsfälle und tatsächliche Paketlieferungen werden mit ausdrücklich injizierten Verifierausgaben in Tests geprüft; das ersetzt keinen echten Storetest. [Umfang/Grenzen](unity-purchases.md), [Prüfbericht](unity-purchases-verification.md).
