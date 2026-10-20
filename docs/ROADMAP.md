@@ -61,3 +61,7 @@ Die aktuelle Abnahme dieser Bereinigung wird in [cleanup-loading-names.md](clean
 
 - [ ] Serverseitige, versionsgleiche Namensprüfung, Moderation, Meldung und Einspruch ergänzen. Die lokale Wortliste ist keine vollständige Bedeutungs- oder Personenprüfung.
 - [ ] Authentifizierung, manipulationssichere Ranglisten und Clanrechte separat entwickeln und prüfen.
+
+Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Abschnitte 7/8 und die breite Schlussabnahme bleiben offen.
+
+- [x] Native Save-JSON-Struktur vor dem Serializer gegen unbekannte/doppelte Felder, falsche Typen und Zahlen prüfen; tatsächliche Originalerhaltung bei externer Dateiersetzung getestet. [Prüfgrenzen](unity-save-validation.md). Das schließt Abschnitt 8 nicht ab.

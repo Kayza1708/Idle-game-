@@ -1,6 +1,6 @@
 # Funktionale Unity-Abnahme
 
-Arbeitsauftrag: vollständiger funktionaler Port, danach optische Überarbeitung. Ausgang `1e0abf30`, Branch `codex/unity-rewrite`, PR #131 inzwischen gemergt; PR #132 inzwischen extern gemergt; PR #133 inzwischen ebenfalls extern gemergt; PR [#134](https://github.com/Kayza1708/Idle-game-/pull/134) für Gems ebenfalls extern gemergt. PR #135 für Kaufverträge ebenfalls extern gemergt. Neue geprüfte Abschnitte werden ausschließlich als Folge-Drafts vorgeschlagen. Bestehender geprüfter Kern und TypeScript bleiben erhalten. Ein vorhandenes Menü oder exportierter Katalog zählt nicht als Abnahme.
+Arbeitsauftrag: vollständiger funktionaler Port, danach optische Überarbeitung. Ausgang `1e0abf30`, Branch `codex/unity-rewrite`, PR #131 inzwischen gemergt; PR #132 inzwischen extern gemergt; PR #133 inzwischen ebenfalls extern gemergt; PR [#134](https://github.com/Kayza1708/Idle-game-/pull/134) für Gems ebenfalls extern gemergt. PR #135 für Kaufverträge und #136 für Werbe-/Skipverträge ebenfalls extern gemergt. Folge-Draft [#137](https://github.com/Kayza1708/Idle-game-/pull/137) enthält den dokumentierten Zwischenstand von Abschnitt 7. Neue geprüfte Abschnitte werden ausschließlich als Folge-Drafts vorgeschlagen. Bestehender geprüfter Kern und TypeScript bleiben erhalten. Ein vorhandenes Menü oder exportierter Katalog zählt nicht als Abnahme.
 
 | Abschnitt | Codeabgleich / fehlender Umfang | Abnahme |
 |---|---|---|
@@ -11,7 +11,7 @@ Arbeitsauftrag: vollständiger funktionaler Port, danach optische Überarbeitung
 | 5 Shop/Belohnungen | Tagesbonusboxen und aktive Drops mit echten Verbrauchern/Produzenten vorhanden. Marktangebote/Truhen/Rotation mit tatsächlichen Transaktionen sind als [5b](unity-market.md) ergänzt. [Gumball und alle 17 Gem-Angebote](unity-gems.md) mit tatsächlichen Boost-/Upgradeverbrauchern sind als 5c ergänzt. Vollständige Entitlementverträge bleiben 6, Legacy-/Webimport 8. | Offen |
 | 6 Adapter | [6a Kaufverträge](unity-purchases.md): zwölf Originalprodukte, verifizierte Grantverträge, Restore/Widerruf und dauerhaftes Speichern vor Storeabschluss. Produktionsadapter bleiben unverfügbar. [6b Werbe-/Skipverträge](unity-ads.md) ergänzt Quoten/Cooldowns, gesicherte Aufträge, direkte Werbefrei-Ansprüche, Forschungsskip und echte Creditboostverbraucher. | Funktionaler Adapterumfang geprüft; echte native Integration separat |
 | 7 Bedienung/Inhalte | [Einstellungen/Audio-Zwischenstand](unity-settings.md): dauerhafte Einstellungen, originale Zahlenformate, tatsächliche Kaufmengen und Audioassets geprüft. Sieben Textkataloge angeschlossen; vollständige Sprachabdeckung, Mira-/Tutorial-Runtime und Ereignisabhängigkeiten noch offen. | Offen; keine Gesamtabnahme |
-| 8 Speicher/Berichte | Expliziter Webimport, Export, bedienbare Recovery, Rückkehr-/Diagnose-/Balanceberichte und restliche Speicherverträge fehlen. | Offen |
+| 8 Speicher/Berichte | [Strikte native JSON-Prüfung](unity-save-validation.md) als verlustvermeidende Abhängigkeit ergänzt. Expliziter Webimport, Export, bedienbare Recovery, Rückkehr-/Diagnose-/Balanceberichte und restliche Speicherverträge fehlen. | Offen |
 
 Pro Abschnitt: reine Transaktionen und vollständige Verbraucher, erreichbare UI, gemeinsame TS-/C#-Fälle, Import/Compile, EditMode/PlayMode, gespeicherte Migrationsoriginale, Dokumentation und eigener Commit. Querschnittliche Abnahmepunkte bleiben offen, solange spätere Verbraucher fehlen. Unbekannte Importfelder werden nicht still verworfen.
 
@@ -22,3 +22,5 @@ Pro Abschnitt: reine Transaktionen und vollständige Verbraucher, erreichbare UI
 - `queueExperiment` erzeugt während einer Synthese beim Fehlertext einen Nullzugriff auf `experiments.active.type`. Der reine `analysisQuote` sperrt den gemeinsamen Platz korrekt. Unity sperrt die Schaltfläche und lehnt den Start ab; der gemeinsame Fall prüft das Quote statt den abstürzenden Fehlertext. TypeScript bleibt unverändert.
 - Foundry: Erstes `queueForge` kann die Level-1-Station erzeugen, obwohl die Ressourcen für den Auftrag fehlen. Das ist aktuelles Quellverhalten und wird als Referenzfall erhalten.
 - Bezahlte Hardwareklassen-Upgrades: Domainfunktion ist vorhanden; der Balancekommentar erklärt sie als Migration-only ohne neues ×2-Angebot. UI-Erreichbarkeit vor einer neuen Kaufoberfläche weiter abgleichen; alte Upgrades beim Webimport erhalten.
+
+[Konkrete verbleibende Funktionen und Abnahmegrenzen](unity-functional-remaining.md). Keine vollständige Abschnitt-7-/8-Abnahme aus diesem Zwischenstand ableiten.

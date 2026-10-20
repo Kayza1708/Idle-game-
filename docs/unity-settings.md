@@ -1,6 +1,6 @@
 # Unity · Einstellungen, Sprache und Audio · Abschnitt 7 in Arbeit
 
-Stand 20.10.2026. Abschnitt 6b ist als `e7eb8e97` gepusht; Folge-Draft #136 ist offen. Dieser Bericht markiert **Abschnitt 7 nicht als abgeschlossen**. Abschnitt 8 und die breite Schlussabnahme bleiben offen.
+Stand 20.10.2026. Abschnitt 6b ist als `e7eb8e97` gepusht; PR #136 wurde extern gemergt; Folge-Draft [#137](https://github.com/Kayza1708/Idle-game-/pull/137) enthält `751c8d70`. Dieser Bericht markiert **Abschnitt 7 nicht als abgeschlossen**. Abschnitt 8 und die breite Schlussabnahme bleiben offen.
 
 ## Tatsächlich angeschlossen
 
@@ -33,3 +33,5 @@ Unity-Save-Version 16 ergänzt Einstellungen in Hauptspiel und isoliertem Challe
 Noch keine physische Audio-/Haptikabnahme, kein Playerexport und keine Geräteabnahme aus diesen Editorprüfungen ableiten.
 
 - Typecheck bestanden; vollständiges Vitest **1.882/141 Dateien** (`/tmp/unity-settings-vitest.log`), Web-Build bestanden (`/tmp/unity-settings-build.log`). Das ist keine Unity-Playerexportprüfung.
+
+Nachfolgende Save-Abhängigkeit: [JSON-Strukturprüfung](unity-save-validation.md); [konkreter Restumfang](unity-functional-remaining.md).

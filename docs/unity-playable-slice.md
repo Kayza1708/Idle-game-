@@ -158,3 +158,5 @@ Bei 320 × 568 scrollen; alle Schaltflächen bleiben erreichbar. [Regeln/Grenzen
 ## Einstellungen · Abschnitt 7 in Arbeit
 
 In der bestehenden Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` Play starten und **Forschung → Einstellungen** öffnen. Sprache, Zahlenformat und Hardware-Kaufmenge wählen. Unter Hardware wird die echte ×1/×10/Max-Menge samt Kosten verwendet. Musik ist zunächst aus; aktivieren und eine Lautstärke wählen. „Sound testen“ verwendet einen vorhandenen Unity-Audioclip. Haptik ist auf dieser Plattform ausdrücklich als unverfügbar markiert. Nach Stop/Play bleiben die Einstellungen erhalten. Vorhandene Saves werden mit Originalkopie auf Version 16 migriert. [Prüfumfang und offene Story-/Sprachabdeckung](unity-settings.md).
+
+Nicht unterstützte oder strukturell ungültige native Savefelder werden vor dem JSON-Laden erkannt; das Original bleibt gesperrt erhalten. Die geplante bedienbare Recovery und der Webimport sind noch nicht implementiert. [Speicherschutz](unity-save-validation.md), [konkrete funktionale Restliste](unity-functional-remaining.md).

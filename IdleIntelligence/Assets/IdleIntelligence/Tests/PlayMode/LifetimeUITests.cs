@@ -32,7 +32,8 @@ namespace IdleIntelligence.PlayTests
    game.SendMessage("OnApplicationPause",true);double before=game.State.Lifetime.activeSeconds;double saved=game.State.SavedAt;
    yield return new WaitForSecondsRealtime(.25f);game.SendMessage("OnApplicationPause",false);
    Assert.That(game.State.SavedAt,Is.GreaterThan(saved));Assert.That(game.State.Lifetime.activeSeconds,Is.EqualTo(before),"Resume consumes background interval as offline before foreground updates");
-   var stored=new AtomicSaveStore(game.SavePath,new UnitySaveCodec()).Load(game.State.SavedAt);Assert.That(stored.Writable,Is.True,stored.Message);Assert.That(stored.State.Lifetime.activeSeconds,Is.EqualTo(before));
+   var stored=new AtomicSaveStore(game.SavePath,new UnitySaveCodec()).Load(game.State.SavedAt);Assert.That(stored.Writable,Is.True,stored.Message);// JSON decimal roundtrip may differ by one binary ULP; the in-memory pause assertion above stays exact.
+   Assert.That(stored.State.Lifetime.activeSeconds,Is.EqualTo(before).Within(1e-12));
   }
  }
 }

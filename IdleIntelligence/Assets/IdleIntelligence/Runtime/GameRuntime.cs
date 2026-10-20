@@ -42,7 +42,7 @@ namespace IdleIntelligence.Runtime
             if(Time.unscaledTime>=nextRefresh){Tick();Refresh();nextRefresh=Time.unscaledTime+.1f;}
             if(Time.unscaledTime>=nextSave){Save();nextSave=Time.unscaledTime+5;}
         }
-        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;int ledger=State.Retention.ledger.Length;State=Game.Advance(State,Now,active&&!paused&&focused);if(active&&!paused&&focused)Audio?.Feedback("foreground-tick",before,State);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms||State.Retention.ledger.Length!=ledger){Save();if(!Writable)State=before;}}}
+        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;int ledger=State.Retention.ledger.Length;State=Game.Advance(State,Now,active&&!paused&&focused);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms||State.Retention.ledger.Length!=ledger){Save();if(!Writable)State=before;}if(Writable&&active&&!paused&&focused)Audio?.Feedback("foreground-tick",before,State);}}
         public bool Act(Func<GameState,GameState> action,string actionName="action")
         {
             if(!Writable)return false;Audio?.Unlock();Tick();if(!Writable){Refresh();return false;}var before=State;State=action(State);
