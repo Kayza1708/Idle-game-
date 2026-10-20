@@ -146,3 +146,11 @@ Automatisierte Gem-/Prestige-/F01-Vorräte in den Screenshots sind ausdrücklich
 ## Vorbereitete Kaufverträge mit Play prüfen
 
 **Forschung → Pakete & Vorteile** öffnen. Originalprodukte und Inhalte lesen; es werden keine erfundenen Storepreise angezeigt. Kaufknöpfe sind ohne Store und Verifier gesperrt. **Käufe wiederherstellen** meldet die fehlende Anbindung und verändert weder Gems noch Eigentum. Es gibt keine Gratisfreischaltung im normalen Spiel. Einnahmenpass, Restore-/Widerruf-/Wiederholungsfälle und tatsächliche Paketlieferungen werden mit ausdrücklich injizierten Verifierausgaben in Tests geprüft; das ersetzt keinen echten Storetest. [Umfang/Grenzen](unity-purchases.md), [Prüfbericht](unity-purchases-verification.md).
+
+## Werbeverträge / Forschungsskip mit Play prüfen
+
+**Forschung → Belohnungen / Forschung sofort abschließen** öffnen. Ohne verifiziertes Werbefrei-Recht meldet der Anbieter „unverfügbar“: keine Gems, Credits, Verkürzung oder verbrauchte Quote. Für laufende Forschung **Sofort abschließen** wählen, Auftrag/Restzeit/Gemkosten lesen und separat bestätigen. Ein alter Auftrag oder geänderter Preis wird abgelehnt. Das echte Forschungslevel steigt bei Abschluss, der nächste wartende Auftrag wird regulär bezahlt gestartet.
+
+Ein tatsächlich vorhandenes Werbefrei-Recht verwendet **Ohne Video abholen** auch in Markt und Gumball. Tageslimits, Cooldowns und Auftragsprüfungen bleiben wirksam; es wird keine Anzeige abgespielt. Im normalen Testspiel gibt es keine Gratisaktivierung des Rechts. Vorbereitete Rechte/Gems/Forschungslevel in Tests sind technische Teststände. Creditboost-/Komponenten-Altangebote sind als solche gekennzeichnet; ihre Quellverträge werden geprüft, obwohl der aktuelle Webshop keine Aktion dafür hat.
+
+Bei 320 × 568 scrollen; alle Schaltflächen bleiben erreichbar. [Regeln/Grenzen](unity-ads.md), [Prüfbericht](unity-ads-verification.md).

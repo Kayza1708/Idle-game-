@@ -2,6 +2,10 @@
 
 Stand: 19.10.2026. Ursprüngliche Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
+## Fortsetzung 20.10.2026: Werbe-/Forschungsskipverträge
+
+[Abschnitt 6b](unity-ads.md) ergänzt übrige Belohnungs-/Limit-/Cooldownverträge, persistente Auftragsidentitäten, bestätigten Gem-Forschungsskip, direkte geprüfte Werbefrei-Ansprüche und Creditboostproduktion. Save v15 erhält v1–14 mit Originalen. Produktionsanbieter bleiben unverfügbar. Story/Sprachen/Einstellungen und Import/Recovery/Berichte bleiben 7/8.
+
 ## Fortsetzung 20.10.2026: vorbereitete Kaufverträge
 
 [Teilabschnitt 6a](unity-purchases.md): zwölf Originalprodukte, Einmal-/Wiederholungsschutz, Restore/Widerruf, echte Einnahmen-/Tap-Verbraucher und Save v14 mit Originalen. Store und Verifier sind ausdrücklich unverfügbar; kein SDK, keine lokalen Gratisrechte. Restliche Werbe-/Forschungsskipverträge bleiben 6b. [Prüfbericht](unity-purchases-verification.md).

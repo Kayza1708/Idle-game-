@@ -18,3 +18,5 @@ Keine zusätzliche Designrunde während des funktionalen Ports. Vorhandene Anord
 - Gems/Gumball: lange Preis-/Restzeitanzeigen und Ergebnisbereich später zusammen mit Markt/Truhen verdichten. Aktuell scrollbar, gemeinsame Porträts und mindestens 44 Einheiten hohe Bedienelemente.
 
 - Storekatalog: vorhandene Aktionskarten nach vollständiger Funktionsmigration verdichten; Inhalte, Sperren und fehlende echte Storepreise bleiben dabei klar getrennt.
+
+- Belohnungs-/Forschungsskipseite nach vollständiger Funktionsmigration verdichten; Auftragsidentität, Kosten und Bestätigung dabei weiter lesbar halten. Aktuelle Hochformate sind scrollbar und bedienbar.
