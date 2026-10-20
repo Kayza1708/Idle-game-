@@ -179,3 +179,7 @@ Batch-Import **erst nach Schließen des Projekts**, vom Repositoryordner aus:
 ```
 
 Der Befehl importiert/kompiliert, führt aber keine Spieltests und keinen Player-Build aus. Nach Einführen der Tests separat `-runTests -testPlatform EditMode -testResults /tmp/idle-intelligence-editmode.xml` mit eigenem Log ausführen (ohne `-quit`, Test Runner beendet den Lauf); anschließend nötige PlayMode-Tests. Nur ein Exitcode 0 zusammen mit geprüftem Log bestätigt den Batch-Import; Testergebnisse separat auswerten.
+
+### Abschnitt 7 · überprüfter Zwischenstand
+
+[Einstellungen/Audio](unity-settings.md) mit Save-v16, tatsächlichen Kaufmengen und Original-Zahlenformaten ergänzt. Vollständige Story-/Tutorial-Runtime und durchgängige Sprachabdeckung bleiben offen; Kataloge und Menüs sind keine Gesamtabnahme. Speicher-/Diagnoseverträge bleiben Abschnitt 8.

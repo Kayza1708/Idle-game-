@@ -154,3 +154,7 @@ Automatisierte Gem-/Prestige-/F01-Vorräte in den Screenshots sind ausdrücklich
 Ein tatsächlich vorhandenes Werbefrei-Recht verwendet **Ohne Video abholen** auch in Markt und Gumball. Tageslimits, Cooldowns und Auftragsprüfungen bleiben wirksam; es wird keine Anzeige abgespielt. Im normalen Testspiel gibt es keine Gratisaktivierung des Rechts. Vorbereitete Rechte/Gems/Forschungslevel in Tests sind technische Teststände. Creditboost-/Komponenten-Altangebote sind als solche gekennzeichnet; ihre Quellverträge werden geprüft, obwohl der aktuelle Webshop keine Aktion dafür hat.
 
 Bei 320 × 568 scrollen; alle Schaltflächen bleiben erreichbar. [Regeln/Grenzen](unity-ads.md), [Prüfbericht](unity-ads-verification.md).
+
+## Einstellungen · Abschnitt 7 in Arbeit
+
+In der bestehenden Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` Play starten und **Forschung → Einstellungen** öffnen. Sprache, Zahlenformat und Hardware-Kaufmenge wählen. Unter Hardware wird die echte ×1/×10/Max-Menge samt Kosten verwendet. Musik ist zunächst aus; aktivieren und eine Lautstärke wählen. „Sound testen“ verwendet einen vorhandenen Unity-Audioclip. Haptik ist auf dieser Plattform ausdrücklich als unverfügbar markiert. Nach Stop/Play bleiben die Einstellungen erhalten. Vorhandene Saves werden mit Originalkopie auf Version 16 migriert. [Prüfumfang und offene Story-/Sprachabdeckung](unity-settings.md).

@@ -1,0 +1,39 @@
+using System;using System.Linq;
+namespace IdleIntelligence.Core
+{
+ [Serializable]public sealed class StoryState
+ {
+  public int schema=1;public bool initialized=true,enabled=true;public string tutorial="active",target="name",open;public string[] queue=Array.Empty<string>(),seen=Array.Empty<string>(),chapters=Array.Empty<string>();
+  public StoryState Copy(){var n=(StoryState)MemberwiseClone();n.queue=(string[])queue.Clone();n.seen=(string[])seen.Clone();n.chapters=chapters==null?null:(string[])chapters.Clone();return n;}
+  public static StoryState Restore(StoryState s){var n=s.Copy();if(string.IsNullOrEmpty(n.open))n.open=null;if(string.IsNullOrEmpty(n.target))n.target=null;return n;}
+  public static StoryState Migrated()=>new StoryState{tutorial="skipped",target=null};
+ }
+ [Serializable]public sealed class StoryFacts
+ {
+  public double taps,hardwareBought,users,credits,componentsEarned,itemsCrafted,inventory,claim,quality,prestiges,hardware,modelLevel,researchStarted,completedResearch,breakthroughs,milestones,axioms;
+  public bool training,trainingEvent,research,analysis,analysisEvent,crafting,equipped,server,automation,hardwareAuto,lab;
+ }
+ public static class NarrativeRules
+ {
+  public static readonly string[] Targets={"tap","hardware","production","credits","training","research","analysis","crafting","prestige"};
+  static bool Known(string id)=>NarrativeCatalog.Dialogues.Any(d=>d.Id==id);
+  static bool Tutorial(string id)=>id!=null&&(id.StartsWith("tutorial-")||id.StartsWith("prologue-"));
+  static StoryState Append(StoryState s,string id){if(s.seen.Contains(id)||s.open==id||s.queue.Contains(id))return s;var n=s.Copy();if(n.open!=null)n.queue=n.queue.Concat(new[]{id}).ToArray();else{n.open=id;n.seen=n.seen.Concat(new[]{id}).ToArray();}return n;}
+  public static bool Fulfilled(StoryFacts f,string target){switch(target){case "tap":return f.taps>0;case "hardware":return f.hardwareBought>0;case "production":return f.hardwareBought>0&&f.users>0;case "credits":return f.credits>=25;case "training":return f.training||f.trainingEvent;case "research":return f.research||f.researchStarted>0;case "analysis":return f.analysis||f.analysisEvent||f.componentsEarned>0;case "crafting":return f.crafting||f.itemsCrafted>0||f.inventory>0;case "prestige":return f.claim>=1;default:return false;}}
+  public static StoryState Advance(StoryState state,StoryFacts f){if(state.tutorial!="active"||state.target==null||state.target=="name"||state.target=="prologue")return state;var n=state;int guard=0;while(n.target!=null&&guard++<Targets.Length&&Fulfilled(f,n.target)){var s=n.Copy();int index=Array.IndexOf(Targets,s.target)+1;s.target=index<Targets.Length?Targets[index]:null;s.tutorial=s.target==null?"completed":"active";n=Append(s,s.target==null?"tutorial-complete":"tutorial-"+s.target);}return n;}
+  static bool Reached(StoryFacts f,string id){switch(id){case "aura-signal":return f.quality>=1;case "aura-customers":return f.users>=1000;case "aura-company":return f.prestiges>=1;case "aura-equipment":return f.equipped;case "aura-infrastructure":return f.server;default:return false;}}
+  static StoryState Unlock(StoryState s,string id,bool autoOpen){if(s.chapters.Contains(id))return s;int i=Array.IndexOf(NarrativeCatalog.Chapters,id);if(i<0)return s;var n=s.Copy();n.chapters=n.chapters.Concat(new[]{id}).ToArray();n.seen=n.seen.Union(NarrativeCatalog.Pages[i]).ToArray();if(autoOpen&&n.enabled){n.seen=n.seen.Where(x=>x!=NarrativeCatalog.Pages[i][0]).ToArray();return Append(n,NarrativeCatalog.Pages[i][0]);}return n;}
+  public static StoryState Prepare(StoryState s,StoryFacts f){if(s.chapters!=null)return s;var n=s.Copy();n.chapters=Array.Empty<string>();foreach(string id in NarrativeCatalog.Chapters)if(Reached(f,id))n=Unlock(n,id,false);return n;}
+  public static StoryState Sync(StoryState s,StoryFacts b,StoryFacts a){var n=Advance(s,a);if(b.taps==0&&a.taps>0)n=Append(n,"first-lab");if(a.hardware>b.hardware)n=Append(n,"first-hardware");if(!b.training&&a.training)n=Append(n,"first-ai");if(a.modelLevel>b.modelLevel)n=Append(n,"first-training");if(b.researchStarted==0&&a.researchStarted>0)n=Append(n,"first-research");if(!b.analysis&&a.analysis)n=Append(n,"first-analysis");if(a.inventory>b.inventory)n=Append(n,"first-item");if(!b.automation&&a.automation||!b.hardwareAuto&&a.hardwareAuto)n=Append(n,"first-automation");if(a.completedResearch>b.completedResearch||a.breakthroughs>b.breakthroughs)n=Append(n,"first-research");if(a.milestones>b.milestones)n=Append(n,"first-milestone");if(b.claim<1&&a.claim>=1)n=Append(n,"prestige-ready");if(a.prestiges>b.prestiges)n=Append(n,"first-prestige");if(!b.lab&&a.lab)n=Append(n,"secret-lab");if(a.axioms>b.axioms)n=Append(n,"first-axiom");foreach(string id in NarrativeCatalog.Chapters)if(!Reached(b,id)&&Reached(a,id))n=Unlock(n,id,true);return n;}
+  static StoryState Next(StoryState s,string id=null){var n=s.Copy();n.open=id??n.queue.FirstOrDefault();n.queue=id!=null?n.queue.Where(q=>q!=id).ToArray():n.queue.Skip(n.open==null?0:1).ToArray();if(n.open!=null&&!n.seen.Contains(n.open))n.seen=n.seen.Concat(new[]{n.open}).ToArray();return n;}
+  public static StoryState ChooseName(StoryState s,bool hasName,string name){if(hasName||!NameRules.Validate(name,NameBalance.AIMaximum).Ok)return s;var n=s.Copy();n.target="prologue";n.open="prologue-welcome";n.seen=n.seen.Union(new[]{n.open}).ToArray();return n;}
+  public static StoryState Continue(StoryState s,StoryFacts f){if(s.open==null)return s;string id=s.open;var n=s.Copy();n.open=null;if(n.tutorial=="active"){string[] prologue={"prologue-welcome","prologue-aura","prologue-funding","prologue-mission"};int i=Array.IndexOf(prologue,id);if(i>=0)return Next(n,i+1<prologue.Length?prologue[i+1]:"tutorial-tap");if(id=="tutorial-tap"){n.target="tap";return Advance(n,f);}if(id.StartsWith("tutorial-"))return Advance(n,f);}foreach(var pages in NarrativeCatalog.Pages)if(pages[0]==id)return Next(n,pages[1]);return Next(n);}
+  public static StoryState SkipTutorial(StoryState s){var n=s.Copy();n.tutorial="skipped";n.open=null;n.queue=n.queue.Where(id=>!Tutorial(id)).ToArray();return Next(n);}
+  public static StoryState Resume(StoryState s){if(s.tutorial=="active")return s;var n=s.Copy();n.tutorial="active";n.target=n.target??"tap";n.open="tutorial-"+n.target;n.seen=n.seen.Union(new[]{n.open}).ToArray();return n;}
+  public static StoryState SkipCurrent(StoryState s){if(s.tutorial=="active"&&Tutorial(s.open))return SkipTutorial(s);var n=s.Copy();n.open=null;return Next(n);}
+  public static StoryState Reopen(StoryState s,string id){if(!Known(id)||!s.seen.Contains(id)||s.open!=null)return s;var n=s.Copy();n.open=id;return n;}
+  public static StoryState ReopenChapter(StoryState s,string id){int i=Array.IndexOf(NarrativeCatalog.Chapters,id);if(i<0||!s.chapters.Contains(id)||s.open!=null)return s;var n=s.Copy();n.open=NarrativeCatalog.Pages[i][0];return n;}
+  public static StoryState Toggle(StoryState s){var n=s.Copy();n.enabled=!n.enabled;if(!n.enabled){if(n.open!=null&&!Tutorial(n.open))n.open=null;n.queue=n.queue.Where(Tutorial).ToArray();}return n;}
+  public static void Validate(StoryState s){if(s==null||s.schema!=1||!s.initialized||!new[]{"active","skipped","completed"}.Contains(s.tutorial)||s.target!=null&&!Targets.Concat(new[]{"name","prologue"}).Contains(s.target)||s.open!=null&&!Known(s.open)||s.queue==null||s.seen==null||s.chapters==null||s.queue.Any(id=>!Known(id))||s.seen.Any(id=>!Known(id))||s.chapters.Any(id=>!NarrativeCatalog.Chapters.Contains(id))||s.queue.Distinct().Count()!=s.queue.Length||s.seen.Distinct().Count()!=s.seen.Length||s.chapters.Distinct().Count()!=s.chapters.Length)throw new FormatException("Invalid story state");}
+ }
+}

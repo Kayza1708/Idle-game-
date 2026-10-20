@@ -20,3 +20,5 @@ Keine zusätzliche Designrunde während des funktionalen Ports. Vorhandene Anord
 - Storekatalog: vorhandene Aktionskarten nach vollständiger Funktionsmigration verdichten; Inhalte, Sperren und fehlende echte Storepreise bleiben dabei klar getrennt.
 
 - Belohnungs-/Forschungsskipseite nach vollständiger Funktionsmigration verdichten; Auftragsidentität, Kosten und Bestätigung dabei weiter lesbar halten. Aktuelle Hochformate sind scrollbar und bedienbar.
+
+- Einstellungsansicht: bestehende vertikale Anordnung erhalten; Sprachliste benötigt auf 320 px Scrollen. Erst nach funktionaler Abnahme optional kompakter darstellen. Noch deutsche Navigations-/Detailtexte sind funktionale Lokalisierungslücken, kein kosmetischer Abschluss.

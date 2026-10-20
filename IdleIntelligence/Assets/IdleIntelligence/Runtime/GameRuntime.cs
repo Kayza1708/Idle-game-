@@ -18,7 +18,7 @@ namespace IdleIntelligence.Runtime
         public GameState State {get;private set;}
         public bool Writable {get;private set;}
         public string SavePath=>store?.PathName;
-        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;SeasonView seasonView;MarketView marketView;GemFeatureView gemView;NativeStoreView storeView;AdRewardView adView;
+        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;SeasonView seasonView;MarketView marketView;GemFeatureView gemView;NativeStoreView storeView;AdRewardView adView;SettingsView settingsView;public AppAudio Audio {get;private set;}
         GameObject queueControls;string queueSignature="";
         int rewardRequestFrame=-1;
         public bool AcquireRewardRequest(){if(rewardRequestFrame==Time.frameCount)return false;rewardRequestFrame=Time.frameCount;return true;}
@@ -31,7 +31,7 @@ namespace IdleIntelligence.Runtime
             double elapsed=Math.Max(0,(Now-State.SavedAt)/1000);var before=State.Credits;
             if(Writable)State=Game.Advance(State,Now);
             if(elapsed>10&&loaded.State!=null&&Writable)message="Willkommen zurück: +"+State.Credits.Subtract(before)+" Credits (Offline-Limit berücksichtigt)";
-            TapButton.transform.parent.gameObject.AddComponent<SignalView>().Initialize(this);TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt)));
+            Audio=gameObject.AddComponent<AppAudio>();Audio.Initialize(this);TapButton.transform.parent.gameObject.AddComponent<SignalView>().Initialize(this);TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt)));
             HardwareTab.onClick.AddListener(()=>Show("hardware"));TrainingTab.onClick.AddListener(()=>Show("training"));ResearchTab.onClick.AddListener(()=>Show("research"));SaveButton.onClick.AddListener(()=>{Tick();Save();Refresh();});
             ItemsTab.onClick.AddListener(()=>Show("items"));PrestigeTab.onClick.AddListener(()=>Show("prestige"));started=true;Show(tab);Save();Refresh();
         }
@@ -42,11 +42,11 @@ namespace IdleIntelligence.Runtime
             if(Time.unscaledTime>=nextRefresh){Tick();Refresh();nextRefresh=Time.unscaledTime+.1f;}
             if(Time.unscaledTime>=nextSave){Save();nextSave=Time.unscaledTime+5;}
         }
-        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;int ledger=State.Retention.ledger.Length;State=Game.Advance(State,Now,active&&!paused&&focused);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms||State.Retention.ledger.Length!=ledger){Save();if(!Writable)State=before;}}}
-        public bool Act(Func<GameState,GameState> action)
+        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;int ledger=State.Retention.ledger.Length;State=Game.Advance(State,Now,active&&!paused&&focused);if(active&&!paused&&focused)Audio?.Feedback("foreground-tick",before,State);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms||State.Retention.ledger.Length!=ledger){Save();if(!Writable)State=before;}}}
+        public bool Act(Func<GameState,GameState> action,string actionName="action")
         {
-            if(!Writable)return false;Tick();if(!Writable){Refresh();return false;}var before=State;State=action(State);
-            if(!ReferenceEquals(before,State)) {message="Aktion gespeichert";Save();if(!Writable)State=before;}Refresh();return !ReferenceEquals(before,State)&&Writable;
+            if(!Writable)return false;Audio?.Unlock();Tick();if(!Writable){Refresh();return false;}var before=State;State=action(State);
+            if(!ReferenceEquals(before,State)) {message="Aktion gespeichert";Save();if(!Writable)State=before;}if(Writable)Audio?.Feedback(actionName,before,State);Refresh();return !ReferenceEquals(before,State)&&Writable;
         }
         void Save()
         {
@@ -63,6 +63,7 @@ namespace IdleIntelligence.Runtime
         void OnDestroy(){if(started){Tick();Save();}}
         void Show(string selected)
         {
+            if(settingsView!=null){settingsView.gameObject.SetActive(false);Destroy(settingsView.gameObject);settingsView=null;}var oldSettings=Content.Find("SettingsAccess");if(oldSettings!=null){oldSettings.gameObject.SetActive(false);Destroy(oldSettings.gameObject);}
             if(adView!=null){adView.gameObject.SetActive(false);Destroy(adView.gameObject);adView=null;}var oldAds=Content.Find("AdAccess");if(oldAds!=null){oldAds.gameObject.SetActive(false);Destroy(oldAds.gameObject);}
             if(storeView!=null){storeView.gameObject.SetActive(false);Destroy(storeView.gameObject);storeView=null;}var oldStore=Content.Find("StoreAccess");if(oldStore!=null){oldStore.gameObject.SetActive(false);Destroy(oldStore.gameObject);}
             if(gemView!=null){gemView.gameObject.SetActive(false);Destroy(gemView.gameObject);gemView=null;}var oldGems=Content.Find("GemAccess");if(oldGems!=null){oldGems.gameObject.SetActive(false);Destroy(oldGems.gameObject);}
@@ -75,9 +76,10 @@ namespace IdleIntelligence.Runtime
             if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);queueControls=null;}queueSignature="";
             if(ModelsView!=null){ModelsView.Cancel();Destroy(ModelsView.gameObject);ModelsView=null;}if(PrestigeView!=null){PrestigeView.Cancel();Destroy(PrestigeView.gameObject);PrestigeView=null;}if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             var oldChallenge=Content.Find("ChallengesAccess");if(oldChallenge!=null){oldChallenge.gameObject.SetActive(false);Destroy(oldChallenge.gameObject);}var oldLab=Content.Find("SecretLab");if(oldLab!=null){oldLab.gameObject.SetActive(false);Destroy(oldLab.gameObject);}tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
-            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="missions"||tab=="seasons"||tab=="market"||tab=="gems"||tab=="store"||tab=="ads";
+            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="missions"||tab=="seasons"||tab=="market"||tab=="gems"||tab=="store"||tab=="ads"||tab=="settings";
             foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
             Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(tab=="settings"){settingsView=WorkshopUIFactory.Vertical("Settings",Content).AddComponent<SettingsView>();settingsView.Initialize(this);Refresh();return;}
             if(tab=="ads"){adView=WorkshopUIFactory.Vertical("AdRewards",Content).AddComponent<AdRewardView>();adView.Initialize(this);Refresh();return;}
             if(tab=="store"){storeView=WorkshopUIFactory.Vertical("NativeStore",Content).AddComponent<NativeStoreView>();storeView.Initialize(this);Refresh();return;}
             if(tab=="gems"){gemView=WorkshopUIFactory.Vertical("GemFeatures",Content).AddComponent<GemFeatureView>();gemView.Initialize(this);Refresh();return;}
@@ -88,15 +90,15 @@ namespace IdleIntelligence.Runtime
             if(tab=="progress"){lifetimeView=WorkshopUIFactory.Vertical("Lifetime",Content).AddComponent<LifetimeView>();lifetimeView.Initialize(this);Refresh();return;}
             if(tab=="challenges"){ChallengeView=WorkshopUIFactory.Vertical("Challenges",Content).AddComponent<ChallengeUI>();ChallengeView.Initialize(this);Refresh();return;}
             if(tab=="models"){ModelsView=Instantiate(ModelPrefab,Content);ModelsView.Initialize(this);Refresh();return;}
-            if(tab=="research"){WorkshopUIFactory.Button("AdAccess",Content,"Belohnungen / Forschung sofort abschließen",()=>Show("ads"));WorkshopUIFactory.Button("StoreAccess",Content,"Pakete & Vorteile · Store nicht verfügbar",()=>Show("store"));WorkshopUIFactory.Button("GemAccess",Content,"Gems · Upgrades / Zeit / Gumball",()=>Show("gems"));WorkshopUIFactory.Button("MarketAccess",Content,"Markt · Angebote / Materialien / Truhen",()=>Show("market"));WorkshopUIFactory.Button("SeasonAccess",Content,"Seasons · Belohnungen und Truhen",()=>Show("seasons"));WorkshopUIFactory.Button("MissionsAccess",Content,"Missionen · Tages-/Wochen-/Monatsziele",()=>Show("missions"));WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>Show("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
+            if(tab=="research"){WorkshopUIFactory.Button("SettingsAccess",Content,SettingsRules.Text(State.Settings.language,"ui:settings"),()=>Show("settings"));WorkshopUIFactory.Button("AdAccess",Content,"Belohnungen / Forschung sofort abschließen",()=>Show("ads"));WorkshopUIFactory.Button("StoreAccess",Content,"Pakete & Vorteile · Store nicht verfügbar",()=>Show("store"));WorkshopUIFactory.Button("GemAccess",Content,"Gems · Upgrades / Zeit / Gumball",()=>Show("gems"));WorkshopUIFactory.Button("MarketAccess",Content,"Markt · Angebote / Materialien / Truhen",()=>Show("market"));WorkshopUIFactory.Button("SeasonAccess",Content,"Seasons · Belohnungen und Truhen",()=>Show("seasons"));WorkshopUIFactory.Button("MissionsAccess",Content,"Missionen · Tages-/Wochen-/Monatsziele",()=>Show("missions"));WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>Show("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
             for(int i=0;i<count;i++)
             {
                 int index=i;var card=Instantiate(CardPrefab,Content);card.gameObject.name=tab+"-"+(tab=="hardware"?Balance.Hardware[i].Id:tab=="training"?PrestigeAutomation.Tracks[i]:Balance.Research[i].Id);cards.Add(card);
-                if(tab=="hardware") {card.Icon.sprite=HardwareSprites[i];card.Button.onClick.AddListener(()=>Act(s=>Game.Buy(s,Balance.Hardware[index].Id)));}
-                else {card.Icon.gameObject.SetActive(false);if(tab=="training")card.Button.onClick.AddListener(()=>Act(s=>Game.Train(s,PrestigeAutomation.Tracks[index])));else card.Button.onClick.AddListener(()=>Act(s=>Game.Research(s,Balance.Research[index].Id)));}
+                if(tab=="hardware") {card.Icon.sprite=HardwareSprites[i];card.Button.onClick.AddListener(()=>Act(s=>Game.Buy(s,Balance.Hardware[index].Id,SettingsRules.BuyQuantity(s,index)),"buy-class"));}
+                else {card.Icon.gameObject.SetActive(false);if(tab=="training")card.Button.onClick.AddListener(()=>Act(s=>Game.Train(s,PrestigeAutomation.Tracks[index]),"train"));else card.Button.onClick.AddListener(()=>Act(s=>Game.Research(s,Balance.Research[index].Id),"research-project"));}
             }
             Refresh();
         }
@@ -110,8 +112,8 @@ namespace IdleIntelligence.Runtime
         void Refresh()
         {
             if(State==null)return;RefreshQueues();if(tab=="research"){var access=Content.Find("ChallengesAccess")?.GetComponent<Button>();if(access!=null)access.GetComponentInChildren<Text>().text=ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen";var lab=Content.Find("SecretLab")?.GetComponent<Button>();if(lab!=null){lab.interactable=Writable&&State.Prestige.lab;lab.GetComponentInChildren<Text>().text=State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · "+State.Prestige.Total+" / "+PrestigeRules.V("labThreshold")+" Gesamt-INT";}}
-            Credits.text="CREDITS\n"+State.Credits+"  (+"+Game.Income(State)+"/s)";
-            Compute.text="COMPUTE\n"+Game.Compute(State);Users.text="NUTZER\n"+Game.Users(State);Data.text="DATEN\n"+State.Data+" (+"+Game.DataRate(State)+"/s)";
+            string language=State.Settings.language,format=State.Settings.numberFormat;Credits.text=SettingsRules.Text(language,"workshop:credits")+"\n"+NumberFormatting.Format(State.Credits,format)+"  (+"+NumberFormatting.Format(Game.Income(State),format)+"/s)";
+            Compute.text=SettingsRules.Text(language,"workshop:compute")+"\n"+NumberFormatting.Format(Game.Compute(State),format);Users.text=SettingsRules.Text(language,"workshop:users")+"\n"+NumberFormatting.Format(Game.Users(State),format);Data.text=SettingsRules.Text(language,"workshop:data")+"\n"+NumberFormatting.Format(State.Data,format)+" (+"+NumberFormatting.Format(Game.DataRate(State),format)+"/s)";
             Overdrive.text=State.ActiveUntil>State.SavedAt?"OVERDRIVE ×"+Game.OverdriveFactor(State)+" · "+Seconds((State.ActiveUntil-State.SavedAt)/1000):"OVERDRIVE  "+State.Charge+" / "+Balance.OverdriveCharge+(State.CooldownUntil>State.SavedAt?" · Pause "+Seconds((State.CooldownUntil-State.SavedAt)/1000):"");
             if(!Writable)foreach(var control in Content.GetComponentsInChildren<Button>())control.interactable=false;Status.text=(ChallengeRules.Active(State)?"CHALLENGE · Hauptspiel pausiert · ":"")+(Writable?"● ":"! ")+message;Status.color=Writable?new Color(.65f,.9f,.8f):new Color(1,.65f,.55f);
             Hint.text=State.Meta.tutorial=="lab"?"Mira: Geheimes Labor freigeschaltet! Öffne Forschung → KI-Modelle.":State.Prestige.resets>0?"INT verstärkt die Produktion. Knoten und Automation im INT-Netz.":State.Tutorial=="tap"?"Tippe auf das Labor und kaufe deinen ersten Rechner.":State.Tutorial=="training"?"Training: erstes Qualitätstraining kostenlos.":State.Tutorial=="research"?"Forschung: erste Datenerzeugung kostenlos.":"Hardware liefert Compute → Nutzer → Credits und Daten.";
@@ -122,7 +124,7 @@ namespace IdleIntelligence.Runtime
                 var card=cards[i];
                 if(tab=="hardware")
                 {
-                    var h=Balance.Hardware[i];var cost=Game.HardwareCost(State,i);card.Title.text=h.Name+"  ×"+State.Hardware[i];card.Detail.text="Kaufen: "+cost+" C  ·  +"+ScientificNumber.From(h.Compute)+" Compute";card.Button.interactable=Writable&&i<(ChallengeRules.Current(State)?.ClassLimit??State.Hardware.Length)&&State.Credits.CompareTo(cost)>=0;if(i>=(ChallengeRules.Current(State)?.ClassLimit??State.Hardware.Length))card.Detail.text="In dieser Challenge gesperrt";
+                    var h=Balance.Hardware[i];long quantity=SettingsRules.BuyQuantity(State,i);var cost=Game.HardwareCost(State,i,Math.Max(1,quantity));card.Title.text=SettingsRules.Text(language,"hardware:"+h.Id)+"  ×"+State.Hardware[i];card.Detail.text=SettingsRules.Text(language,"game:buy")+" ×"+quantity+": "+NumberFormatting.Format(cost,format)+" C  ·  +"+NumberFormatting.Format(ScientificNumber.From(h.Compute).Times(quantity),format)+" Compute";card.Button.interactable=Writable&&quantity>0&&i<(ChallengeRules.Current(State)?.ClassLimit??State.Hardware.Length)&&State.Credits.CompareTo(cost)>=0;if(i>=(ChallengeRules.Current(State)?.ClassLimit??State.Hardware.Length))card.Detail.text="In dieser Challenge gesperrt";
                 }
                 else if(tab=="training")
                 {
@@ -131,7 +133,7 @@ namespace IdleIntelligence.Runtime
                 }
                 else
                 {
-                    var r=Balance.Research[i];var block=Game.ResearchBlock(State,i);card.Title.text=r.Name+"  Lv. "+State.Research[i];card.Detail.text=State.ResearchJob?.id==r.Id?"Läuft · "+Seconds((State.ResearchJob.required-State.ResearchJob.done)/Game.ResearchSpeed(State,State.ResearchJob)):(block??"Start")+" · "+Game.ResearchCost(State,i)+" Daten";card.Button.interactable=Writable&&(block==null||block=="Labor belegt"&&!State.Prestige.researchQueue.Contains(r.Id)&&State.Prestige.researchQueue.Length<PrestigeAutomation.ResearchCapacity(State));var job=PrestigeAutomation.ResearchJobs(State).FirstOrDefault(j=>j.id==r.Id);if(job!=null)card.Detail.text="Läuft · "+Seconds((job.required-job.done)/Game.ResearchSpeed(State,job));if(block=="Labor belegt"){card.Detail.text+=" · Einreihen ("+State.Prestige.researchQueue.Length+"/"+PrestigeAutomation.ResearchCapacity(State)+")";card.Button.interactable=Writable&&PrestigeAutomation.CanQueueResearch(State,r.Id);}
+                    var r=Balance.Research[i];var block=Game.ResearchBlock(State,i);card.Title.text=SettingsRules.Text(language,"research:"+r.Id)+"  Lv. "+State.Research[i];card.Detail.text=State.ResearchJob?.id==r.Id?"Läuft · "+Seconds((State.ResearchJob.required-State.ResearchJob.done)/Game.ResearchSpeed(State,State.ResearchJob)):(block??"Start")+" · "+Game.ResearchCost(State,i)+" Daten";card.Button.interactable=Writable&&(block==null||block=="Labor belegt"&&!State.Prestige.researchQueue.Contains(r.Id)&&State.Prestige.researchQueue.Length<PrestigeAutomation.ResearchCapacity(State));var job=PrestigeAutomation.ResearchJobs(State).FirstOrDefault(j=>j.id==r.Id);if(job!=null)card.Detail.text="Läuft · "+Seconds((job.required-job.done)/Game.ResearchSpeed(State,job));if(block=="Labor belegt"){card.Detail.text+=" · Einreihen ("+State.Prestige.researchQueue.Length+"/"+PrestigeAutomation.ResearchCapacity(State)+")";card.Button.interactable=Writable&&PrestigeAutomation.CanQueueResearch(State,r.Id);}
                 }
             }
         }
