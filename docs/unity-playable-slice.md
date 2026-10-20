@@ -128,3 +128,7 @@ In derselben Szene unter **Forschung → Seasons** Free/Premium, Levelbereiche u
 ## Aktive Signal-Drops mit Play testen
 
 Im Labor aktiv spielen: ohne Boni erscheint nach 90 aktiven Sekunden ein Signal mit zwölf Sekunden Restzeit. Es verwendet die vorhandene Komponentengrafik und ist direkt anklickbar. Forschung Signalprotokolle und ausgerüstete Drop-Effekte beeinflussen Häufigkeit und Qualität. Material-/Credit-/Daten-/Item-/Bauplanbelohnungen sowie Missionszähler werden durch die echte gespeicherte Transaktion vergeben. Offlinezeit erzeugt keine neuen Signale; abgelaufene und doppelt angeklickte Belege zahlen nichts. In No-Taps-Challenges bleibt das Einsammeln gesperrt. [Regeln und Nachweis](unity-signals.md).
+
+## Markt mit Play testen
+
+**Forschung → Markt** öffnen. Die freie Truhe kann sofort abgeholt werden; danach zeigt ihr gespeicherter Cooldown die Restzeit. Bezahlte Angebote benötigen echte vorhandene Gems. Materialien, Tagesangebote und Tagesitem kaufen; der gespeicherte Ergebnisbeleg steht darunter. Unter **Chancen** sind Tabellen und aktueller Itempool lesbar. Videowerbung ist ausdrücklich nicht verfügbar: der Klick vergibt keine Truhe und verbraucht kein Limit. [Vollständige Regeln und Prüfung](unity-market.md). Gumball/Gem-Upgrades folgen separat.

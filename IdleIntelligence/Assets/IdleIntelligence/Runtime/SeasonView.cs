@@ -32,7 +32,7 @@ namespace IdleIntelligence.Runtime
    Text("SeasonChestsTitle","VERDIENTE TRUHEN · "+s.Rewards.chests.Length+" / "+SeasonBalance.MaxChests,54);
    foreach(var chest in s.Rewards.chests){long chestId=chest.id;var card=Card("SeasonChest-"+chestId,chest.tier+"-Truhe #"+chestId,()=>game.Act(v=>SeasonRules.OpenChest(v,chestId)));card.Detail.text=chest.seasonId+"\nÖffnen · Originaler Material-/Itempool";refresh.Add(()=>card.Button.interactable=game.Writable&&!ChallengeRules.Active(game.State)&&game.State.Rewards.chests.Any(c=>c.id==chestId));}
    if(s.Rewards.chests.Length==0)Text("SeasonNoChests","Keine ungeöffneten Truhen.",54);
-   if(s.Rewards.hasReceipt){var r=s.Rewards.receipt;Text("SeasonReceipt","Zuletzt geöffnet: "+r.tier+" · "+r.components.Sum()+" Komponenten"+(r.hasItem?" · "+ItemBalance.Items[Workshop.Index(r.item.type)].Name+" ("+ItemBalance.Rarities[r.item.rarity]+")":""),90);}
+   if(s.Rewards.hasReceipt&&s.Rewards.receipt.payment=="season"){var r=s.Rewards.receipt;Text("SeasonReceipt","Zuletzt geöffnet: "+r.tier+" · "+r.components.Sum()+" Komponenten"+(r.hasItem?" · "+ItemBalance.Items[Workshop.Index(r.item.type)].Name+" ("+ItemBalance.Rarities[r.item.rarity]+")":""),90);}
   }
  }
 }

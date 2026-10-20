@@ -6,7 +6,7 @@ Branch `codex/unity-rewrite`, Unity `6000.3.26f1`, Szene `IdleIntelligence/Asset
 
 Forschung/Industrie, isolierte V2-Challenges, Statistiken/Mastery, Achievements/Profil, UTC-Missionen/Tagesbonusboxen und die drei V2-Seasons sind im dokumentierten Umfang implementiert und geprüft. [Missionsbericht](unity-missions.md), [Season-Bericht](unity-seasons.md). Der gesamte Rewrite ist weiter offen.
 
-1. Abschnitt 5 fortsetzen: vollständiger Shop/Gumball, Angebote, Boosts und permanente Upgrades. [Aktive Drops](unity-signals.md) samt Missionsproduzenten sind als 5a bereits implementiert und geprüft.
+1. Abschnitt 5 fortsetzen: Gumball und Gem-Angebote mit Boosts und permanenten Upgrades. [Markt/Truhen/Rotation](unity-market.md) sind als 5b bereits portiert. [Aktive Drops](unity-signals.md) samt Missionsproduzenten sind als 5a bereits implementiert und geprüft.
 2. Abschnitt 6: vorbereitete unverfügbare Werbe-/Kaufadapter samt Limits, Entitlements, Pending-/Transaktionsschutz und Fehlerpfaden. Keine SDKs oder vorgetäuschten Käufe.
 3. Abschnitt 7: vollständige Kapitel/Mira/Tutorial, sieben Sprachen, alle Einstellungen, vorhandenes Audio und unterstützte Haptik. Namenspolicy und erster Profil-/KI-Name sind bereits portiert.
 4. Abschnitt 8: expliziter validierter Webimport mit Originalkopie und Erhaltung unbekannter Daten, Export/Recovery, Rückkehr-/Diagnose-/Balanceberichte und restliche Speicherverträge.

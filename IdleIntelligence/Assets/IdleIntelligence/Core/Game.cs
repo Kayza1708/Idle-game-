@@ -5,14 +5,14 @@ namespace IdleIntelligence.Core
     // Early V2 only: no Unity APIs, clocks, filesystem, hidden RNG or frame counters.
     public static class Game
     {
-        public static GameState New(double now) { var s=new GameState {Missions=MissionState.New(now),Retention=RetentionState.New(now),Lifetime=new LifetimeState{initialized=true,since=now},Meta=MetaState.New(now),Workshop=new WorkshopState{runStartedAt=now},SavedAt=now,Credits=ScientificNumber.From(Balance.StartCredits)};Validate(s);return s; }
+        public static GameState New(double now,string campaign="unassigned") { var s=new GameState {Missions=MissionState.New(now),Retention=RetentionState.New(now),Lifetime=new LifetimeState{initialized=true,since=now},Meta=MetaState.New(now,campaign),Workshop=new WorkshopState{runStartedAt=now},SavedAt=now,Credits=ScientificNumber.From(Balance.StartCredits)};s.Missions.campaign=campaign;Validate(s);return s; }
         public static void Validate(GameState s)
         {
             if(s==null||s.Credits==null||s.Data==null||s.Hardware==null||s.Hardware.Length!=Balance.Hardware.Length||s.Research==null||s.Research.Length!=Balance.Research.Length)throw new FormatException("Invalid state shape");
             if(s.ModelLevel<0||s.ModelLevel>9007199254740991L||s.Hardware.Any(n=>n<0||n>9007199254740991L)||s.Research.Any(n=>n<0)||s.Quality<0||s.Efficiency<0||s.Taps<0||s.Overdrives<0||s.Combo<0||s.Combo>Balance.ComboMax||s.Charge<0||s.Charge>Balance.OverdriveCharge)throw new FormatException("Invalid counts");
             if(!ScientificNumber.Finite(s.SavedAt)||s.SavedAt<0||s.SavedAt>9007199254740991d||!ScientificNumber.Finite(s.LastTap)||s.LastTap < -1||!ScientificNumber.Finite(s.ActiveUntil)||s.ActiveUntil<0||!ScientificNumber.Finite(s.CooldownUntil)||s.CooldownUntil<0)throw new FormatException("Invalid clock");
             if(!new[]{"tap","hardware","production","credits","training","research","done"}.Contains(s.Tutorial))throw new FormatException("Invalid tutorial");
-            Signals.Validate(s);SeasonRules.Validate(s);MissionRules.Validate(s);RetentionRules.Validate(s);Lifetime.Validate(s);Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
+            Signals.Validate(s);SeasonRules.Validate(s);Market.Validate(s);MissionRules.Validate(s);RetentionRules.Validate(s);Lifetime.Validate(s);Workshop.Validate(s);Industry.Validate(s);PrestigeRules.Validate(s);MetaRules.Validate(s);ChallengeRules.Validate(s);
             ValidateJob(s.Training,new[]{"quality","efficiency","integration"});ValidateJob(s.ResearchJob,Balance.Research.Select(r=>r.Id).ToArray());
         }
         static void ValidateJob(Job j,string[] ids) { if(j!=null&&(!ids.Contains(j.id)||!ScientificNumber.Finite(j.required)||j.required<=0||!ScientificNumber.Finite(j.done)||j.done<0||j.done>j.required+1e-6))throw new FormatException("Invalid job"); }

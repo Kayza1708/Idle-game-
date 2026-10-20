@@ -12,3 +12,5 @@ Keine zusätzliche Designrunde während des funktionalen Ports. Vorhandene Anord
 - Glyphen-Fallback für zulässige Unicode-Spielernamen auf echten Geräten prüfen; der reine Namensvertrag ist gegen JavaScript geprüft, Gerätefonts bleiben Abschnitt 7/Geräteabnahme.
 
 - Seasons: Truhen-/Artefaktdarstellung und umfangreiche Belohnungslisten nach vollständiger Migration mit dem Shop optisch vereinheitlichen; Claims und Sammlung sind bereits bedienbar.
+
+- Markt: nach vollständigem Funktionsport Truhen-/Ergebnisgrafiken, lange Materiallisten und Zeitdarstellung gemeinsam verfeinern. Chancen, Preise, Bestände und Tagesitem sind jetzt lesbar/bedienbar.
