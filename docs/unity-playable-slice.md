@@ -131,4 +131,14 @@ Im Labor aktiv spielen: ohne Boni erscheint nach 90 aktiven Sekunden ein Signal 
 
 ## Markt mit Play testen
 
-**Forschung → Markt** öffnen. Die freie Truhe kann sofort abgeholt werden; danach zeigt ihr gespeicherter Cooldown die Restzeit. Bezahlte Angebote benötigen echte vorhandene Gems. Materialien, Tagesangebote und Tagesitem kaufen; der gespeicherte Ergebnisbeleg steht darunter. Unter **Chancen** sind Tabellen und aktueller Itempool lesbar. Videowerbung ist ausdrücklich nicht verfügbar: der Klick vergibt keine Truhe und verbraucht kein Limit. [Vollständige Regeln und Prüfung](unity-market.md). Gumball/Gem-Upgrades folgen separat.
+**Forschung → Markt** öffnen. Die freie Truhe kann sofort abgeholt werden; danach zeigt ihr gespeicherter Cooldown die Restzeit. Bezahlte Angebote benötigen echte vorhandene Gems. Materialien, Tagesangebote und Tagesitem kaufen; der gespeicherte Ergebnisbeleg steht darunter. Unter **Chancen** sind Tabellen und aktueller Itempool lesbar. Videowerbung ist ausdrücklich nicht verfügbar: der Klick vergibt keine Truhe und verbraucht kein Limit. [Vollständige Regeln und Prüfung](unity-market.md). Gumball/Gem-Upgrades siehe nächster Abschnitt.
+
+## Gem-Angebote und Gumball mit Play testen
+
+In **Assets → Scenes → IdleIntelligence.unity** mit **6000.3.26f1** Play starten, **Forschung → Gems** öffnen. Unter **Upgrades** zuerst 12-, dann 16-, dann 24-Stunden-Offlinekapazität kaufen; Zusatzlabor I/II benötigen den ursprünglichen INT-Knoten F01 und bauen aufeinander auf. Nur vorhandene Gems werden verwendet. Die Kopfzeile zeigt die wirkliche Kapazität.
+
+Unter **Zeit** einen Laborbonus kaufen und laufende Forschung beobachten. Ein aktives Training beziehungsweise ein Modulauftrag aus **Items → Material** lässt sich proportional zur verbleibenden Zeit verkürzen; Kosten und verkürzte Sekunden stehen direkt am Angebot. Sofortige Itemrezepte erzeugen keine zeitlichen Herstellungsaufträge. Unter **Material** stehen die freigeschalteten Familienpakete und die beiden Originalpakete.
+
+Nach dem ersten Prestige **Gumball** öffnen und für 10 Gems ziehen. Der gespeicherte Ergebnisbeleg steht über dem Ziehungsbutton; Chancen und weitere Inhalte bleiben scrollbar. Erhaltene Items/Komponenten sind sofort im normalen Inventar/Bestand. Play stoppen und erneut starten: Ergebnis, Gems und dauerhafte Upgrades bleiben erhalten. Wiederholte alte Klickereignisse vergeben nichts erneut. Ein bewusst neuer Klick nach Aktualisierung zieht erneut. **Video** meldet den unverfügbaren Anbieter ohne Belohnung oder Limitverbrauch.
+
+Automatisierte Gem-/Prestige-/F01-Vorräte in den Screenshots sind ausdrücklich vorbereitete Teststände, keine Gratisvorräte im regulären Spiel und kein natürlicher Langzeitlauf. [Regeln](unity-gems.md), [tatsächliche Prüfungen](unity-gems-verification.md).

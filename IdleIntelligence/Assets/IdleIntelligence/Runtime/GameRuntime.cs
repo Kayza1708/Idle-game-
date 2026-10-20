@@ -18,7 +18,7 @@ namespace IdleIntelligence.Runtime
         public GameState State {get;private set;}
         public bool Writable {get;private set;}
         public string SavePath=>store?.PathName;
-        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;SeasonView seasonView;MarketView marketView;
+        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;SeasonView seasonView;MarketView marketView;GemFeatureView gemView;
         GameObject queueControls;string queueSignature="";
         float nextRefresh,nextSave;readonly List<ActionCard> cards=new List<ActionCard>();
         static double Now=>DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
@@ -61,6 +61,7 @@ namespace IdleIntelligence.Runtime
         void OnDestroy(){if(started){Tick();Save();}}
         void Show(string selected)
         {
+            if(gemView!=null){gemView.gameObject.SetActive(false);Destroy(gemView.gameObject);gemView=null;}var oldGems=Content.Find("GemAccess");if(oldGems!=null){oldGems.gameObject.SetActive(false);Destroy(oldGems.gameObject);}
             if(marketView!=null){marketView.gameObject.SetActive(false);Destroy(marketView.gameObject);marketView=null;}var oldMarket=Content.Find("MarketAccess");if(oldMarket!=null){oldMarket.gameObject.SetActive(false);Destroy(oldMarket.gameObject);}
             if(seasonView!=null){seasonView.gameObject.SetActive(false);Destroy(seasonView.gameObject);seasonView=null;}var oldSeason=Content.Find("SeasonAccess");if(oldSeason!=null){oldSeason.gameObject.SetActive(false);Destroy(oldSeason.gameObject);}
             if(missionView!=null){missionView.gameObject.SetActive(false);Destroy(missionView.gameObject);missionView=null;}var oldMissions=Content.Find("MissionsAccess");if(oldMissions!=null){oldMissions.gameObject.SetActive(false);Destroy(oldMissions.gameObject);}
@@ -70,9 +71,10 @@ namespace IdleIntelligence.Runtime
             if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);queueControls=null;}queueSignature="";
             if(ModelsView!=null){ModelsView.Cancel();Destroy(ModelsView.gameObject);ModelsView=null;}if(PrestigeView!=null){PrestigeView.Cancel();Destroy(PrestigeView.gameObject);PrestigeView=null;}if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             var oldChallenge=Content.Find("ChallengesAccess");if(oldChallenge!=null){oldChallenge.gameObject.SetActive(false);Destroy(oldChallenge.gameObject);}var oldLab=Content.Find("SecretLab");if(oldLab!=null){oldLab.gameObject.SetActive(false);Destroy(oldLab.gameObject);}tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
-            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="missions"||tab=="seasons"||tab=="market";
+            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="missions"||tab=="seasons"||tab=="market"||tab=="gems";
             foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
             Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(tab=="gems"){gemView=WorkshopUIFactory.Vertical("GemFeatures",Content).AddComponent<GemFeatureView>();gemView.Initialize(this);Refresh();return;}
             if(tab=="market"){Act(Market.Visit);marketView=WorkshopUIFactory.Vertical("Market",Content).AddComponent<MarketView>();marketView.Initialize(this);Refresh();return;}
             if(tab=="seasons"){seasonView=WorkshopUIFactory.Vertical("Seasons",Content).AddComponent<SeasonView>();seasonView.Initialize(this);Refresh();return;}
             if(tab=="missions"){missionView=WorkshopUIFactory.Vertical("Missions",Content).AddComponent<MissionView>();missionView.Initialize(this);Refresh();return;}
@@ -80,7 +82,7 @@ namespace IdleIntelligence.Runtime
             if(tab=="progress"){lifetimeView=WorkshopUIFactory.Vertical("Lifetime",Content).AddComponent<LifetimeView>();lifetimeView.Initialize(this);Refresh();return;}
             if(tab=="challenges"){ChallengeView=WorkshopUIFactory.Vertical("Challenges",Content).AddComponent<ChallengeUI>();ChallengeView.Initialize(this);Refresh();return;}
             if(tab=="models"){ModelsView=Instantiate(ModelPrefab,Content);ModelsView.Initialize(this);Refresh();return;}
-            if(tab=="research"){WorkshopUIFactory.Button("MarketAccess",Content,"Markt · Angebote / Materialien / Truhen",()=>Show("market"));WorkshopUIFactory.Button("SeasonAccess",Content,"Seasons · Belohnungen und Truhen",()=>Show("seasons"));WorkshopUIFactory.Button("MissionsAccess",Content,"Missionen · Tages-/Wochen-/Monatsziele",()=>Show("missions"));WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>Show("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
+            if(tab=="research"){WorkshopUIFactory.Button("GemAccess",Content,"Gems · Upgrades / Zeit / Gumball",()=>Show("gems"));WorkshopUIFactory.Button("MarketAccess",Content,"Markt · Angebote / Materialien / Truhen",()=>Show("market"));WorkshopUIFactory.Button("SeasonAccess",Content,"Seasons · Belohnungen und Truhen",()=>Show("seasons"));WorkshopUIFactory.Button("MissionsAccess",Content,"Missionen · Tages-/Wochen-/Monatsziele",()=>Show("missions"));WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>Show("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
@@ -123,7 +125,7 @@ namespace IdleIntelligence.Runtime
                 }
                 else
                 {
-                    var r=Balance.Research[i];var block=Game.ResearchBlock(State,i);card.Title.text=r.Name+"  Lv. "+State.Research[i];card.Detail.text=State.ResearchJob?.id==r.Id?"Läuft · "+Seconds((State.ResearchJob.required-State.ResearchJob.done)/(State.ResearchJob.intro?1:Game.WorkSpeed(State,true))):(block??"Start")+" · "+Game.ResearchCost(State,i)+" Daten";card.Button.interactable=Writable&&(block==null||block=="Labor belegt"&&!State.Prestige.researchQueue.Contains(r.Id)&&State.Prestige.researchQueue.Length<PrestigeAutomation.ResearchCapacity(State));var job=PrestigeAutomation.ResearchJobs(State).FirstOrDefault(j=>j.id==r.Id);if(job!=null)card.Detail.text="Läuft · "+Seconds((job.required-job.done)/Game.WorkSpeed(State,true));if(block=="Labor belegt"){card.Detail.text+=" · Einreihen ("+State.Prestige.researchQueue.Length+"/"+PrestigeAutomation.ResearchCapacity(State)+")";card.Button.interactable=Writable&&PrestigeAutomation.CanQueueResearch(State,r.Id);}
+                    var r=Balance.Research[i];var block=Game.ResearchBlock(State,i);card.Title.text=r.Name+"  Lv. "+State.Research[i];card.Detail.text=State.ResearchJob?.id==r.Id?"Läuft · "+Seconds((State.ResearchJob.required-State.ResearchJob.done)/Game.ResearchSpeed(State,State.ResearchJob)):(block??"Start")+" · "+Game.ResearchCost(State,i)+" Daten";card.Button.interactable=Writable&&(block==null||block=="Labor belegt"&&!State.Prestige.researchQueue.Contains(r.Id)&&State.Prestige.researchQueue.Length<PrestigeAutomation.ResearchCapacity(State));var job=PrestigeAutomation.ResearchJobs(State).FirstOrDefault(j=>j.id==r.Id);if(job!=null)card.Detail.text="Läuft · "+Seconds((job.required-job.done)/Game.ResearchSpeed(State,job));if(block=="Labor belegt"){card.Detail.text+=" · Einreihen ("+State.Prestige.researchQueue.Length+"/"+PrestigeAutomation.ResearchCapacity(State)+")";card.Button.interactable=Writable&&PrestigeAutomation.CanQueueResearch(State,r.Id);}
                 }
             }
         }
