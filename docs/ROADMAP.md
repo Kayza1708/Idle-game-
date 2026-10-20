@@ -22,7 +22,8 @@
 - [x] Drei V2-Seasons mit 300 Originalbelohnungen, verdienten Truhen, Vitrine und echtem Artefakt-Einnahmenbonus portiert; Save-v10-Erhaltung und vorbereitete Premium-/XP-Referenzen getrennt von echten Käufen. [Umfang und Abnahme](unity-seasons.md).
 - [x] Aktive Signal-Drops mit Originaltiming, drei Varianten, echten Qualitäts-/Belohnungsregeln und Lifetime-/Missionsproduzenten portiert; konservative Save-v11-Erhaltung. [Teilabschnitt 5a](unity-signals.md).
 - [x] Markt mit allen 20 Materialpaketen, vier Gem-Truhen, freier Truhe, Tagesrotation/-rabatt/-item und sicherer gemeinsamer Truhenvergabe portiert; unverfügbarer Videoprovider ohne SDK und Save-v12-Erhaltung. [Teilabschnitt 5b](unity-market.md).
-- [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): Shop/aktive Drops/Gumball/Boosts, vorbereitete Adapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
+- [x] Gumball und alle 17 Gem-Angebote mit echten Zusatzlaboren/Offlinekapazitäten/Laborbonus, proportionalen Modul-/Trainingsverkürzungen und Save-v13-Erhaltung portiert; [Teilabschnitt 5c](unity-gems.md).
+- [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): übrige Commerce-/Werbeadapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
 Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.

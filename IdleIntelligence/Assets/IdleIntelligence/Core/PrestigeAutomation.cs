@@ -6,7 +6,7 @@ namespace IdleIntelligence.Core
     public static class PrestigeAutomation
     {
         public static readonly string[] Tracks={"quality","efficiency","integration"};
-        public static int LabCount(GameState s)=>Math.Min(ChallengeRules.Current(s)?.Labs??4,1+(PrestigeRules.Has(s,"F01")?1:0)+(PrestigeRules.Has(s,"F04")?1:0)+(PrestigeRules.Has(s,"F08")?1:0));
+        public static int LabCount(GameState s)=>Math.Min(ChallengeRules.Is(s,"serial-science")?1:int.MaxValue,s.Upgrades.purchasedLabs+1+(PrestigeRules.Has(s,"F01")?1:0)+(PrestigeRules.Has(s,"F04")?1:0)+(PrestigeRules.Has(s,"F08")?1:0));
         public static IEnumerable<Job> ResearchJobs(GameState s)=>new[]{s.ResearchJob}.Concat(s.Prestige.labs).Where(j=>j!=null);
         public static GameState QueueTraining(GameState state,string track)
         {

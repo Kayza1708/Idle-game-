@@ -14,3 +14,5 @@ Keine zusätzliche Designrunde während des funktionalen Ports. Vorhandene Anord
 - Seasons: Truhen-/Artefaktdarstellung und umfangreiche Belohnungslisten nach vollständiger Migration mit dem Shop optisch vereinheitlichen; Claims und Sammlung sind bereits bedienbar.
 
 - Markt: nach vollständigem Funktionsport Truhen-/Ergebnisgrafiken, lange Materiallisten und Zeitdarstellung gemeinsam verfeinern. Chancen, Preise, Bestände und Tagesitem sind jetzt lesbar/bedienbar.
+
+- Gems/Gumball: lange Preis-/Restzeitanzeigen und Ergebnisbereich später zusammen mit Markt/Truhen verdichten. Aktuell scrollbar, gemeinsame Porträts und mindestens 44 Einheiten hohe Bedienelemente.
