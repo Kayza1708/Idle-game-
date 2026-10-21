@@ -33,18 +33,17 @@ Aktueller Arbeitsstand: Bereinigung, Startbildschirm und Namensfilter nach dem g
 
 - `node scripts/network-forge-audit.mjs`: echte App-Aktionen auf drei mobilen Browserbreiten mit finanzierten Testzuständen, Screenshots und kurzem Craft-/Fusionsclip.
 
-Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Abschnitte 7/8 und die breite Schlussabnahme bleiben offen.
+Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Aktueller Verbraucherabgleich und konkrete Grenzen stehen im folgenden Fortsetzungsstand.
 
-### Fortsetzung 21.10.2026
+### Aktuelle Fortsetzung · 21.10.2026
 
-Mira, Story-Saves und die neue Export-/Recovery-/Import-/Rückkehr-Runtime sind verbunden; [aktueller Bericht](unity-story-storage.md). Die historischen Aussagen „nur Storykatalog“ und „keine Recoveryoberfläche“ beschreiben frühere Zwischenstände. Jetzt die konkrete Restliste weiter abarbeiten: vollständige Text-/Detailanbindung, restliche Diagnosefelder/Ziele und tatsächliche UI-Verbraucher gegen Source prüfen, zusätzliche Queueaktionen und Referenzen abschließen, danach vollständige Regression und erneuter lokaler Playerbuild. Bestehende TypeScript-Version, Saveoriginale und lokale Backups erhalten. Keine Geräte-/Native-/SDK-Fertigmeldung aus dem Mac-Player ableiten.
+Der funktionale V2-Abgleich aller 26 Zeilen ist in [unity-functional-audit.md](unity-functional-audit.md) dokumentiert. Story/Mira, tatsächliche Ereignisse und Fokusführung, Ziele/Details, Speichertransfer/Recovery/Rückkehr und native Run-/Sitzungsberichte sind verbunden. Save v21 erhält v1–20 mit Originalen; große Agentparameter und konkrete Reset-Jobbindungen sind geprüft. Vollständige Regression: 128/128 EditMode, 55/55 PlayMode, 1.886/143 Vitest; Typecheck, Sourcecheck und Web-Build erfolgreich. Lokaler aktueller Player und konkrete Folgegrenzen stehen im [Prüfbericht](unity-story-storage.md).
 
-21.10.2026: Nach dem externen Merge von #138 auf `codex/unity-rewrite` weiterarbeiten und einen Folge-Draft pflegen. Zielnavigation, Rückkehraktionen und native Historien sind verbunden; nächste Prüfung umfasst echte Itemvergleichs-/Kostendetails, alle breiten Migrationszeilen und abschließenden aktuellen macOS-Playerbuild. Siehe `unity-functional-remaining.md`; kein Merge/Release.
+Nach dem externen Merge von #139 nächste Änderungen als Folge-Draft pflegen; kein Merge/Release. Unabhängig erhalten: bestehende TypeScript-Version, iOS, Backups und Saveoriginale.
 
-Weitere geprüfte Bedienwege: automatische Mira-Details, Forschungs-/Trainingsangebote, konkrete Zielinstanz/-knoten, globale Resetpause und bestätigter Neustart mit Originalkopie. PR #139 ist der Folge-Draft. Noch umfassende Quellen-/Faktordetails, Crash-/Sitzungsdiagnostik, finale Auditmatrix und erneuter Unity-Playerbuild prüfen; keine nativen Anbieter aktivieren.
+Verbleibende getrennte Arbeit:
 
-Aktueller Schlussabgleich: `unity-functional-audit.md` ordnet alle 26 Zeilen Verbrauchern, Bedienung und Nachweisen zu. Vor dem Abschluss noch letzte v19-Challenge-/Rückkehrmigration, vollständige Regressionen und aktuellen macOS-Playerbuild prüfen. Source-Inhaltsfallbacks, archivierte historische Sonderverträge, native Integrationen/Geräte und spätere Optik ausdrücklich getrennt lassen. #139 wurde extern gemergt; nächste geprüfte Änderungen erhalten einen Folge-Draft ohne Merge.
-
-Die funktionale Nachprüfung und aktuellen Regressionen stehen in `unity-story-storage.md`; die 26-Zeilen-Matrix in `unity-functional-audit.md`. Jetzt den abschließenden unveränderten Code als lokalen StandaloneOSX-Player bauen und den frischen isolierten Playerlauf nachweisen; danach Push/Folge-Draft. Bekannte Sourceprobleme, historische Sonderverträge, echte native Integration, physische Geräte und Optik bleiben ausdrücklich eigene Grenzen.
-
-Vor dem Playerbau ist der bei der Parameterprüfung ergänzte v21-Stand noch vollständig zu prüfen: exakter wissenschaftlicher Agent-Mindestwert, Jobidentitäten bei Resetwarten, Budget leeren, Planerintervall und Zahlenfelder ohne Änderung. 15 gezielte EditMode-Tests bestehen bereits; `45920ee1` hält den vollständig geprüften v20-Checkpoint. Keine weiteren Systeme/Balanceänderungen einführen; anschließend aktuellen Player, Push und Folge-Draft abschließen.
+- Quellentscheidungen zu Erkenntnisarchiv-Erwerb, beschädigtem frühem Resume, Analyse-/Foundry-Sonderfällen und originalen DE/EN-Sprachfallbacks. Keine erfundenen Regeln/Gratisfreischaltungen.
+- Bisher ausdrücklich abgelehnte aktive historische Webreservierungen/Testuhren/Alt-Reset-/Fusionverträge separat migrieren, falls benötigt; vollständige Originale behalten. Browser-Dateikonverterdownload manuell prüfen, Automatisierung war gesperrt.
+- Echte Native-/Store-/Werbe-/Share-/Haptikadapter und Belegserver separat beauftragen; Anbieter bleiben unverfügbar. Physische iPhone-/Androidtests und plattformweite Fehler-/Crashmatrix sind offen.
+- Spätere Gestaltung/Animations- und Geräte-/Releaseprüfung aus `unity-visual-backlog.md`; keine neue Designrunde in diesem Auftrag.

@@ -26,8 +26,8 @@
 - [x] Vorbereitete Kaufverträge mit zwölf Originalprodukten, Restore/Widerruf, echten Einnahmen-/Tap-Verbrauchern und dauerhaftem Save vor Storeabschluss portiert; Produktionsadapter unverfügbar, keine echten Käufe. [Teilabschnitt 6a](unity-purchases.md).
 - [x] Werbe-/Forschungsskipverträge mit Limits/Cooldowns, gespeicherten Aufträgen, echten Werbefrei-/Creditboostverbrauchern und Save-v15-Erhaltung portiert; [Abschnitt 6b](unity-ads.md). Produktionsanbieter unverfügbar.
 - [x] Einstellungen, Kaufmengen und Original-Zahlenformate mit Save-v16-Migration sowie vorhandene Unity-Audioclips geprüft; [Teilumfang und offene Story-/Sprachabdeckung](unity-settings.md). Abschnitt 7 bleibt offen.
-- [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): übrige Commerce-/Werbeadapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
-- [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
+- [x] Aktuelle V2-Verbraucher, Kapitel/Mira/Tutorial, persistente Sprachpfade und Speicher-/Diagnoseoberflächen laut [26-Zeilen-Abgleich](unity-functional-audit.md) verbunden; Quellfallbacks, historische Sonderimporte und Nativeanbieter bleiben separat offen.
+- [ ] Echte mobile Geräteabnahme durchführen; lokaler macOS-Player, Editor-PlayMode und gerenderte mobile Profile sind getrennt geprüft.
 
 Die folgende TypeScript-Roadmap bleibt als Referenz und offener Releasebestand erhalten.
 
@@ -62,7 +62,7 @@ Die aktuelle Abnahme dieser Bereinigung wird in [cleanup-loading-names.md](clean
 - [ ] Serverseitige, versionsgleiche Namensprüfung, Moderation, Meldung und Einspruch ergänzen. Die lokale Wortliste ist keine vollständige Bedeutungs- oder Personenprüfung.
 - [ ] Authentifizierung, manipulationssichere Ranglisten und Clanrechte separat entwickeln und prüfen.
 
-Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Abschnitte 7/8 und die breite Schlussabnahme bleiben offen.
+Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Der aktuelle Stand ersetzt die damaligen offenen Verbraucherzeilen; konkrete Grenzen siehe `unity-functional-audit.md`.
 
 - [x] Native Save-JSON-Struktur vor dem Serializer gegen unbekannte/doppelte Felder, falsche Typen und Zahlen prüfen; tatsächliche Originalerhaltung bei externer Dateiersetzung getestet. [Prüfgrenzen](unity-save-validation.md). Das schließt Abschnitt 8 nicht ab.
 
@@ -71,7 +71,7 @@ Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining
 - [x] Mira-/Kapitel-/Tutorial-Runtime mit Namenswahl, echten Ereignissen, Skip/Resume, gespeicherten Dialogen und tatsächlicher Zielnavigation; 84 zusätzliche verbundene Source-Schritte.
 - [x] Explizite Export-/Recoveryansicht, Offline-Webkonverter mit Originalerhalt, gemessene Rückkehrbelege und erste echte mehrfache Runhistorien; Nachweise und Grenzen in [unity-story-storage.md](unity-story-storage.md).
 - [x] Echter lokaler macOS-Universal-Player gebaut und auf Apple M4 mit isoliertem Save bedient/reloaded. Kein Ersatz für Mobilgeräte-/Storeabnahme.
-- [ ] Breite Schlussabnahme und restliche Verbraucher/Detailaktionen weiter anhand [unity-functional-remaining.md](unity-functional-remaining.md); keine Gesamtrewrite-Fertigmeldung.
+- [x] Breite funktionale Verbraucher-/Detailprüfung aller 26 Zeilen anhand [unity-functional-remaining.md](unity-functional-remaining.md); konkrete Quell-/Altimport-/Gerätegrenzen bleiben ausgewiesen.
 
 - 21.10.2026 Fortsetzung des funktionalen Unity-Auftrags: Source-Zielnavigation und Rückkehraktionen verbunden, Save-v19-Historien mit vollständigen Start-/Endpunkten und historischen Verfügbarkeitsmarkern, echte lokale Dateidiagnostik. Vollständiges PlayMode 49/49, Vitest 1.885/143. Details/Schlussabnahme und erneuter Playerbuild laufen weiter; keine pauschale Fertigmeldung.
 
@@ -82,3 +82,5 @@ Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining
 - 21.10.2026: Schlussabgleich mit Save v20, originalen Klassenupgrade-Verbrauchern, Challenge-/Rückkehrmigration, tatsächlichem Produktions-/Sitzungsexport und bytegetreuem explizitem Web-Dateieingang. EditMode 125/125, danach 17/17 betroffene Equip-/Save-/Item-/Retentionprüfungen; vollständiges PlayMode 53/53; Vitest 1.886/143 und Web-Build erfolgreich. Source/Altimport/Plattform/Optik bleiben getrennt; aktueller Unity-Player folgt.
 
 - 21.10.2026: zusätzlicher abschließender Parameterabgleich ergänzt wissenschaftlich exakte Agent-Mindestziele (Save v21), leere/pausierende Direktorbudgets, unveränderte Präzisionsfelder und konkrete Reset-Jobbindungen einschließlich Schmiede. 13 zusätzliche Original-Konfigurations-/Agentfälle, erste gezielte EditMode-Prüfungen 15/15. Abschließender aktueller Player-/Regressionstest folgt.
+
+- 21.10.2026: Aktueller Code `86559ea8` vollständig geprüft: 128/128 EditMode, 55/55 PlayMode, 1.886/143 Vitest, Typecheck/Sourcecheck/Web-Build. Neuer StandaloneOSX-Universal-Player erfolgreich, echter isolierter M4-Playerlauf bei 390×844 samt Reload bestanden. Funktionaler V2-Abgleich abgeschlossen innerhalb der ausgewiesenen Source-/Altimportgrenzen; Native/Geräte/Optik bleiben eigene Folgeabnahmen. Siehe `unity-functional-verification.json`.

@@ -185,3 +185,11 @@ Mit Unity **6000.3.26f1** das Unterprojekt `IdleIntelligence/` öffnen, dann **`
 8. **Einstellungen → Spielstand zurücksetzen** bietet Bestätigung und Abbruch. Nur für einen bewusst neuen Lauf verwenden: der vollständige vorige Stand wird vor Austausch zusätzlich unter `CampaignOriginals/` bewahrt. Dies setzt auch Namen/Einstellungen/Fortschritt zurück und ist kein Prestige.
 
 Vorbereitete finanzierte Referenz-/PlayMode-Zustände sind technische Transaktionsprüfungen. Der natürliche Erstprestige-Nachweis ist separat ein beschleunigt simulierter Lauf ohne Grants; er behauptet keinen minutenlangen realen Eingabemitschnitt. Physische Mobilgeräte und echte Plattformanbieter bleiben getrennte Abnahme.
+
+## Aktueller Einstieg und Abschlussnachweis · 21.10.2026
+
+Die obigen älteren Zahlen/Teilberichte sind historische Nachweise. Aktueller Code `86559ea8`: 128/128 EditMode, 55/55 PlayMode und echter StandaloneOSX-Universal-Player mit isoliertem 390×844-M4-Test einschließlich Reload. Details/Grenzen in `unity-story-storage.md` und `unity-functional-verification.json`.
+
+Zum manuellen Test **`IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`** in **6000.3.26f1** öffnen und Play bei **390×844** starten. Bei neuer Kampagne zuerst in Mira einen gültigen Namen wählen und den Prolog mit **Weiter** durchlaufen. Die Führung zeigt die nächsten tatsächlichen Ziele: Tapfläche, Taschenrechner, erstes Qualitätstraining, erste Datenerzeugung. **Forschung → Mira/Story** öffnet Kapitel, Replay, Skip/Resume und Zielnavigation. **Forschung → Einstellungen** bietet Sprache/Audio/Bewegung und den ausdrücklich bestätigten Neustart mit Originalkopie; keine Save-Dateien löschen. **Forschung → Spielstände/Berichte** führt zu Importprüfung, Export, Recovery, Rückkehrarchiv und gemessenen Run-/Sitzungsberichten. Ein vorhandener Save setzt seinen gespeicherten Stand fort.
+
+Aktuelles lokales Appbundle: `/tmp/IdleIntelligence-functional-final-20261021.app`. Der automatische Nachweis lief mit explizitem temporärem Save; normales Öffnen verwendet den regulären nativen Spielstand. Echte Mobilgeräte und Produktionsanbieter bleiben separat offen.

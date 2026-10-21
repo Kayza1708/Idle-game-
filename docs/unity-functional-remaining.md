@@ -26,7 +26,7 @@ Stand 21.10.2026. [Aktueller Story-/Speicherbericht](unity-story-storage.md) ers
 
 - [x] Alle 26 breiten fachlichen Zeilen erneut mit Verbraucher, erreichbarer Aktion und Referenz-/Runtimebeleg abgeglichen: `unity-functional-audit.md`. Historische Zwischenstände eingeordnet; Source-/Sonderimport-/Gerätegrenzen separat.
 - [x] Gefundene Funktionen/Verknüpfungen ergänzt und in geprüften Commits fortgesetzt: Ziele/Rückkehr, Momentaufnahmen/Diagnostik, automatische Mira-Anzeige, Details, Resetpause, Klassenupgrade-Verbraucher, Challenge-Integration, direkte Equip-Belege und exakte Automationsparameter/Jobbindungen.
-- [ ] Vollständige finale TS-/Unity-Regression und erneuter **Unity-Playerbuild des abschließenden Codes**. Ein macOS-Universal-Player und tatsächlicher Apple-M4-Smoke-Test sind bereits bestanden; sie gelten nur für ihren berichteten Codeumfang.
+- [x] Vollständige aktuelle Regression: 128/128 EditMode, 55/55 PlayMode, 1.886/143 Vitest, Typecheck/Sourcecheck/Web-Build. **Aktueller Unity-Playerbuild von `86559ea8`**: StandaloneOSX Universal arm64+x86_64, 0 Buildfehler, tatsächlicher isolierter Apple-M4-Playerlauf mit Reload bestanden. Keine physische Mobilgeräteabnahme.
 
 ## Getrennte Quellprobleme
 
