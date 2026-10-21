@@ -43,16 +43,13 @@ namespace IdleIntelligence.Core
             return LegacyEffects.Factor(s,"item:"+effect).ToDouble()*ItemBalance.BaseEffect*ItemBalance.RarityFactors[i.rarity]*(1+ItemBalance.LevelStep*Math.Max(0,i.level-1))*i.legacyLevelFactor*(1+ItemBalance.ForgeStep*i.forge)*Amplifier(s)*d.Weights[position]*(position==1&&PrestigeBalance.SecondaryNodes.Any(id=>PrestigeRules.Has(s,id))?PrestigeRules.V("legacySecondaryMultiplier"):position==2&&PrestigeBalance.TertiaryNodes.Any(id=>PrestigeRules.Has(s,id))?PrestigeRules.V("legacyTertiaryMultiplier"):1);
         }
         public static double Bonus(GameState s,string effect)=>Equipped(s).Sum(i=>Effect(s,i,effect))*(1+s.Workshop.nodes.Where(id=>PrestigeBalance.LegacyItemBonuses.ContainsKey(id)).Sum(id=>PrestigeBalance.LegacyItemBonuses[id]));
-        public static double Device(GameState s,string role,double at=-1)
+        public static double Device(GameState s,string role,double at=-1)=>Equipped(s).Sum(i=>DeviceInstance(s,i,role,at));
+        public static double DeviceInstance(GameState s,ItemInstance i,string role,double at=-1)
         {
-            double sum=0;var w=s.Workshop;double now=at<0?s.SavedAt:at;
-            foreach(var i in Equipped(s))
-            {
-                var d=Definition(i);if(d.Role!=role)continue;int owned=s.Hardware.Count(n=>n>0);
-                bool condition=role=="sparse"?owned>0&&owned<=3:role=="photonicCompute"||role=="burst"?s.ActiveUntil>now:role=="legacy"?s.Hardware[0]>=10||s.Hardware[1]>=10:true;
-                double progress=role=="pairs"?Math.Min(ItemBalance.PairCap,Math.Min(w.qualityCompletions,w.efficiencyCompletions))/ItemBalance.PairCap:role=="memory"?Math.Min(1,Math.Max(0,now-w.runStartedAt)/1000/ItemBalance.MemorySeconds):1;
-                if(condition)sum+=Math.Min(d.Cap,Effect(s,i,role))*progress;
-            }return sum;
+            var d=Definition(i);if(d.Role!=role)return 0;var w=s.Workshop;double now=at<0?s.SavedAt:at;int owned=s.Hardware.Count(n=>n>0);
+            bool condition=role=="sparse"?owned>0&&owned<=3:role=="photonicCompute"||role=="burst"?s.ActiveUntil>now:role=="legacy"?s.Hardware[0]>=10||s.Hardware[1]>=10:true;
+            double progress=role=="pairs"?Math.Min(ItemBalance.PairCap,Math.Min(w.qualityCompletions,w.efficiencyCompletions))/ItemBalance.PairCap:role=="memory"?Math.Min(1,Math.Max(0,now-w.runStartedAt)/1000/ItemBalance.MemorySeconds):1;
+            return condition?Math.Min(d.Cap,Effect(s,i,role))*progress:0;
         }
         public static double Combination(GameState s,string id)
         {

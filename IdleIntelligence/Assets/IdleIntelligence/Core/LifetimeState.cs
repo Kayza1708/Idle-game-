@@ -39,7 +39,7 @@ namespace IdleIntelligence.Core
         public static double Mastery(GameState s,int index)=>Math.Floor(Math.Sqrt(Math.Max(0,s.Lifetime.hardwareMasteryXp[index])/LifetimeBalance.MasteryDivisor));
         static double AddCapped(double old,ScientificNumber gain)=>Math.Min(LifetimeBalance.Maximum,old+gain.ToDouble(LifetimeBalance.Maximum));
         public static void Produced(GameState s,ScientificNumber credits,ScientificNumber data)
-        {s.Lifetime.regularCredits=AddCapped(s.Lifetime.regularCredits,credits);s.Lifetime.regularData=AddCapped(s.Lifetime.regularData,data);}
+        {s.LifetimeDataExact=s.LifetimeDataExact.Add(data);s.Lifetime.regularCredits=AddCapped(s.Lifetime.regularCredits,credits);s.Lifetime.regularData=AddCapped(s.Lifetime.regularData,data);}
         public static void Validate(GameState s)
         {
             var l=s.Lifetime;if(l==null||!l.initialized||l.schema!=1||!ScientificNumber.Finite(l.since)||l.since<0||l.since>s.SavedAt)throw new FormatException("Invalid lifetime state");
