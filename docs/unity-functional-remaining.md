@@ -14,17 +14,17 @@ Stand 21.10.2026. [Aktueller Story-/Speicherbericht](unity-story-storage.md) ers
 ## Abschnitt 8 · Übernahme und Bedienung, restliche Vollständigkeit
 
 - [x] Bewusster Offline-Webkonverter mit Original-`restore`/`serialize`, nativer Struktur-/Domain-/exakter Kontenprüfung, Vorschau und ausdrücklicher Übernahme. Vollständiges Original und normalisierter Sourcezustand bleiben im Unity-Save/Export erhalten. Source unterstützt 1–63; die ausgeführten Referenzfälle und konkreten Ablehnungswege stehen im Bericht, nicht als Test aller 63 Versionen ausgeben.
-- [x] Erreichbarer Unity-Export, Zwischenablage/Ordner, Dateiprüfung und ausdrückliche Recovery mit Originalkopien. Beschädigte, fremde und extern veränderte Dateien bleiben geschützt. Native Versionen 1–17 migrieren mit Originalen auf v18.
+- [x] Erreichbarer Unity-Export, Zwischenablage/Ordner, Dateiprüfung und ausdrückliche Recovery mit Originalkopien. Beschädigte, fremde und extern veränderte Dateien bleiben geschützt. Native Versionen 1–18 migrieren mit Originalen auf v19.
 - [x] Vor Anzeige gespeicherter tatsächlicher Rückkehrbeleg aus Brutto-Produktion, Zeitgrenzen, Jobabschlüssen, Hardware, Komponenten/Fragmenten und verbleibenden neuen Items; Anzeigen/Reload vergeben nichts erneut.
 - [x] Echte native Produktions-/Ausgaben-/Ereignis-/Zeitmessung über mehrere Runs/Prestiges mit Begrenzung/Archivierung; Web-Balancehistorien übernommen und komplette historische Rohdaten weiter exportierbar. Source-/C#-Fälle sowie 103 finanzierte Begrenzungsresets vorhanden.
 - [x] Bei erneutem Codeabgleich fehlende alte Produktions-/Itemfaktoren, Lizenzen, Autokäufer, Trainingsboost und Scannerverbraucher ergänzt. Erste Bauplan-Forschungsbelohnung erhält Hauptspiel-/Zahlungs-/Kapazitäts-/Einmalschutz.
-- [ ] Vollständige Start-/End-Snapshots und übrige lokale Diagnose-/Balanceexportfelder gegen Source abgleichen; keine unbekannten historischen Details als nullte Messung ausgeben.
+- [x] Vollständige Start-/End-Snapshots und lokale Diagnosemessung ergänzt; Verfügbarkeitsmarker unterscheiden historische Unbekannte. Source-Rohdaten bleiben erhalten, nativer Watchdog wird ausdrücklich als nicht implementiert ausgewiesen.
 - [ ] Laufende/alte Speicherverträge einzeln nachprüfen. Nicht unterstützte aktive Altreservierungen, Testuhren und Reset-/Fusionverträge ausdrücklich ablehnen; Originale erhalten. Weitere reguläre Queue-/Recovery-/Rückkehraktionen gegen Source ergänzen.
 - [ ] Online-/Offline-/Uhrsprung-/Reload-/Challenge-/Originalschutz nach allen Ergänzungen abschließend regressieren.
 
 ## Breite Schlussabnahme
 
-- [ ] Sämtliche Zeilen in `unity-migration.md` mit konkretem Verbraucher, erreichbarer Aktion und Referenz-/Runtimebeleg erneut abgleichen. Historische Verweise aktualisieren. Insbesondere Zielanheften/nächste Ziele, Rückkehrführung, Quellen-/Effektaufschlüsselungen, Vergleiche und Detailaktionen prüfen.
+- [ ] Sämtliche Zeilen in `unity-migration.md` mit konkretem Verbraucher, erreichbarer Aktion und Referenz-/Runtimebeleg erneut abgleichen. Historische Verweise aktualisieren. Zielanheften/nächste Ziele und Rückkehrführung sind mit 851 Sourcequotes sowie tatsächlichen Play-Aktionen ergänzt. Quellen-/Effektaufschlüsselungen und restliche Detailaktionen weiter prüfen.
 - [ ] Bei der Nachprüfung gefundene fehlende Funktionen ergänzen, jeweils tatsächlich testen/committen und selbstständig fortfahren.
 - [ ] Vollständige finale TS-/Unity-Regression und erneuter **Unity-Playerbuild des abschließenden Codes**. Ein macOS-Universal-Player und tatsächlicher Apple-M4-Smoke-Test sind bereits bestanden; sie gelten nur für ihren berichteten Codeumfang.
 

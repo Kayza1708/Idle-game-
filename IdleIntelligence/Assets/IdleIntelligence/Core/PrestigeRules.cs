@@ -22,7 +22,7 @@ namespace IdleIntelligence.Core
             var p=s.Prestige;var r=p.Eligible;double exponent=Exponent(s);ScientificNumber increment;
             if(r.IsZero)increment=delta.Divide(ScientificNumber.From(V("prestigeBaseRevenue"))).Pow(exponent);
             else {var ratio=delta.Divide(r);var relative=ratio.Log10() < -6?ratio.Times(exponent):ratio.Log10()>6?ratio.Add(ScientificNumber.One).Pow(exponent).Subtract(ScientificNumber.One):ScientificNumber.From(Expm1(exponent*Log1p(ratio.ToDouble())));increment=r.Divide(ScientificNumber.From(V("prestigeBaseRevenue"))).Pow(exponent).Multiply(relative);}
-            p.Entitlement=p.Entitlement.Add(increment.Times(Weight(s)));p.Eligible=r.Add(delta);s.Credits=s.Credits.Add(delta);
+            p.Entitlement=p.Entitlement.Add(increment.Times(Weight(s)));p.Eligible=r.Add(delta);s.LifetimeCreditsExact=s.LifetimeCreditsExact.Add(delta);s.LifetimeEligibleExact=s.LifetimeEligibleExact.Add(delta);s.RunCredits=s.RunCredits.Add(delta);s.Credits=s.Credits.Add(delta);
         }
         public static ScientificNumber Claim(GameState s)
         {var n=s.Prestige.Entitlement;var whole=n.Exponent<15?ScientificNumber.From(Math.Floor(n.ToDouble()+1e-11)):n.Floor();return whole.Subtract(s.Prestige.Cycle);}
@@ -44,7 +44,7 @@ namespace IdleIntelligence.Core
         {
             if(expectedRevision>=0&&state.Prestige.revision!=expectedRevision)return state;var gain=Claim(state);if(gain.CompareTo(ScientificNumber.One)<0||ChallengeRules.Active(state)&&gain.CompareTo(ChallengeRules.Current(state).MinimumINT)<0)return state;
             var s=state.Copy();var p=s.Prestige;p.Cycle=p.Cycle.Add(gain);p.Total=p.Total.Add(gain);p.Free=p.Free.Add(gain);p.lastGain=gain.ToData();p.resets++;p.revision++;Discover(s);s=Workshop.Discover(s);p=s.Prestige;foreach(var f in s.Industry.foundries)f.queue=Array.Empty<string>();
-            s.Hardware=new long[s.Hardware.Length];s.Credits=ScientificNumber.From(Balance.StartCredits);
+            s.RunCredits=ScientificNumber.Zero;s.RunCreditsRecorded=true;s.Hardware=new long[s.Hardware.Length];s.Credits=ScientificNumber.From(Balance.StartCredits);
             if(!Has(s,"T08")){s.ModelLevel=0;s.Quality=s.Efficiency=s.Workshop.integration=0;s.Training=null;}
             p.trainingQueue=Array.Empty<TrainingTarget>();p.researchQueue=Array.Empty<string>();
             // Modules were paid at enqueue time. Release only waiting contracts, as in TS.

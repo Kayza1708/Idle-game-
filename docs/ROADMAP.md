@@ -72,3 +72,5 @@ Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining
 - [x] Explizite Export-/Recoveryansicht, Offline-Webkonverter mit Originalerhalt, gemessene Rückkehrbelege und erste echte mehrfache Runhistorien; Nachweise und Grenzen in [unity-story-storage.md](unity-story-storage.md).
 - [x] Echter lokaler macOS-Universal-Player gebaut und auf Apple M4 mit isoliertem Save bedient/reloaded. Kein Ersatz für Mobilgeräte-/Storeabnahme.
 - [ ] Breite Schlussabnahme und restliche Verbraucher/Detailaktionen weiter anhand [unity-functional-remaining.md](unity-functional-remaining.md); keine Gesamtrewrite-Fertigmeldung.
+
+- 21.10.2026 Fortsetzung des funktionalen Unity-Auftrags: Source-Zielnavigation und Rückkehraktionen verbunden, Save-v19-Historien mit vollständigen Start-/Endpunkten und historischen Verfügbarkeitsmarkern, echte lokale Dateidiagnostik. Vollständiges PlayMode 49/49, Vitest 1.885/143. Details/Schlussabnahme und erneuter Playerbuild laufen weiter; keine pauschale Fertigmeldung.
