@@ -69,7 +69,7 @@ namespace IdleIntelligence.Core
                 if(p.director&&PrestigeRules.Has(s,"F05"))s.Prestige.directorSpent=ScientificNumber.FromData(p.directorSpent).Add(price).ToData();
             }return s;
         }
-        public static bool HardwareUnlocked(GameState s,int index)=>PrestigeRules.Has(s,PrestigeBalance.HardwareGroup[index]);
+        public static bool HardwareUnlocked(GameState s,int index)=>s.Legacy.autobuyers.Contains(Balance.Hardware[index].Id)||PrestigeRules.Has(s,PrestigeBalance.HardwareGroup[index]);
         public static GameState ToggleHardware(GameState state,int index)
         {if(index<0||index>=state.Hardware.Length||!HardwareUnlocked(state,index))return state;var s=state.Copy();s.Prestige.hardwareAuto[index]=!s.Prestige.hardwareAuto[index];return s;}
         public static GameState Hardware(GameState state,bool shoppingDue=true,bool otherDue=true)

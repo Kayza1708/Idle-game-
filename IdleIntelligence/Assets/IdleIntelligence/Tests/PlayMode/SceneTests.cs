@@ -28,7 +28,7 @@ namespace IdleIntelligence.PlayTests
         }
         [UnityTest] public IEnumerator PortraitSceneUsesRealTransactionsAndReusablePrefab()
         {
-            var game=UnityEngine.Object.FindFirstObjectByType<GameRuntime>();Assert.That(game.Writable,Is.True);Assert.That(game.State.Credits.ToDouble(),Is.EqualTo(Balance.StartCredits).Within(1));
+            var game=UnityEngine.Object.FindFirstObjectByType<GameRuntime>();game.Show("story");yield return null;GameObject.Find("StoryNameInput").GetComponent<InputField>().text="AURA";Click("StoryChooseName");for(int i=0;i<5;i++){yield return null;Click("StoryContinue");}Click("HardwareTab");yield return null;Assert.That(game.Writable,Is.True);Assert.That(game.State.Credits.ToDouble(),Is.EqualTo(Balance.StartCredits).Within(1));
             Assert.That(game.SaveButton.GetComponent<RectTransform>().rect.height,Is.GreaterThanOrEqualTo(44));Assert.That(game.HardwareTab.GetComponent<RectTransform>().rect.height,Is.GreaterThanOrEqualTo(44));Assert.That(game.CardPrefab,Is.Not.Null);Assert.That(game.HardwareSprites.Length,Is.EqualTo(Balance.Hardware.Length));Assert.That(game.TapButton.GetComponent<RectTransform>().rect.height,Is.GreaterThanOrEqualTo(44));
             Click("hardware-calculator");Assert.That(game.State.Hardware[0],Is.EqualTo(1));Assert.That(Game.Compute(game.State).IsZero,Is.False);
             Click("TapLab");Assert.That(game.State.Taps,Is.EqualTo(1));Click("TrainingTab");yield return null;Click("training-quality");Assert.That(game.State.Training,Is.Not.Null);Assert.That(game.State.QualityUsed,Is.True);

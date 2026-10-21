@@ -3,10 +3,11 @@ namespace IdleIntelligence.Core
 {
  [Serializable]public sealed class StoryState
  {
-  public int schema=1;public bool initialized=true,enabled=true;public string tutorial="active",target="name",open;public string[] queue=Array.Empty<string>(),seen=Array.Empty<string>(),chapters=Array.Empty<string>();
+  public int schema=1;public bool legacyIntro;public bool initialized=true,enabled=true;public string tutorial="active",target="name",open;public string[] queue=Array.Empty<string>(),seen=Array.Empty<string>(),chapters=Array.Empty<string>();
   public StoryState Copy(){var n=(StoryState)MemberwiseClone();n.queue=(string[])queue.Clone();n.seen=(string[])seen.Clone();n.chapters=chapters==null?null:(string[])chapters.Clone();return n;}
   public static StoryState Restore(StoryState s){var n=s.Copy();if(string.IsNullOrEmpty(n.open))n.open=null;if(string.IsNullOrEmpty(n.target))n.target=null;return n;}
   public static StoryState Migrated()=>new StoryState{tutorial="skipped",target=null};
+  public static StoryState Legacy(string target)=>new StoryState{legacyIntro=true,tutorial=target=="done"?"skipped":"active",target=target=="done"?null:target};
  }
  [Serializable]public sealed class StoryFacts
  {

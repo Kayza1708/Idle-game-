@@ -1,0 +1,2 @@
+import {newGame} from '../src/economy';import {serialize} from '../src/storage';import {convertWebSave} from './unity-web-transfer';import {writeFileSync,readFileSync} from 'node:fs';
+const path='IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/WebImportReferenceCase.json',json=JSON.stringify(convertWebSave(serialize(newGame(1000000,'web-import-test')),1000000));if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==json)throw Error('Web import fixture stale');}else writeFileSync(path,json);console.log('Unity web import source reference checked');
