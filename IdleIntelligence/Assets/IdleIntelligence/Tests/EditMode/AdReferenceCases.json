@@ -680,8 +680,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -1053,13 +1062,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -2015,13 +2024,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -2966,13 +2975,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -3917,13 +3926,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -4879,13 +4888,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -5830,13 +5839,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -6781,13 +6790,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -7743,13 +7752,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -8694,13 +8703,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -9645,13 +9654,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -10607,13 +10616,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -11571,13 +11580,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -12535,13 +12544,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -13499,13 +13508,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -14474,13 +14483,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -15445,13 +15454,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -16416,13 +16425,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -17398,13 +17407,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -18376,13 +18385,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -19354,13 +19363,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -20343,13 +20352,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -21328,13 +21337,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -22313,13 +22322,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -23309,13 +23318,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -24301,13 +24310,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -25293,13 +25302,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -26285,13 +26294,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -27277,13 +27286,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -28269,13 +28278,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -29261,13 +29270,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -30253,13 +30262,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -31245,13 +31254,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -32237,13 +32246,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -33229,13 +33238,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -34221,13 +34230,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -35213,13 +35222,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -36205,13 +36214,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -37197,13 +37206,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -38200,13 +38209,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -39199,13 +39208,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -40700,8 +40709,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -41073,13 +41091,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -42100,13 +42118,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -43051,13 +43069,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -44002,13 +44020,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -45029,13 +45047,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -45980,13 +45998,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -46931,13 +46949,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -47958,13 +47976,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -48909,13 +48927,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -49860,13 +49878,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -50887,13 +50905,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -51844,13 +51862,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -52861,13 +52879,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -53878,13 +53896,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -54971,13 +54989,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -55989,13 +56007,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -57007,13 +57025,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -58101,13 +58119,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -59120,13 +59138,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -60139,13 +60157,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -61234,13 +61252,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -62254,13 +62272,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -63274,13 +63292,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -64370,13 +64388,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -65391,13 +65409,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -66412,13 +66430,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -67509,13 +67527,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -68531,13 +68549,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -69553,13 +69571,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -70651,13 +70669,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -71674,13 +71692,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -72697,13 +72715,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -73796,13 +73814,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -74820,13 +74838,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -75848,13 +75866,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -76952,13 +76970,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -77981,13 +77999,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -79010,13 +79028,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -80115,13 +80133,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -81145,13 +81163,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -82710,8 +82728,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -83083,13 +83110,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -84045,13 +84072,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -84996,13 +85023,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -85947,13 +85974,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -86909,13 +86936,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -87860,13 +87887,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -88811,13 +88838,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -89773,13 +89800,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -90724,13 +90751,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -91675,13 +91702,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -92637,13 +92664,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -93594,13 +93621,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 991.1387587721694,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -94551,13 +94578,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 991.1387587721694,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -95508,13 +95535,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 991.1387587721694,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -96465,13 +96492,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 991.1387587721694,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -96481,13 +96508,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -97449,13 +97476,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 991.1387587721694,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -97465,13 +97492,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -98423,13 +98450,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 1982.2775175443387,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -98439,13 +98466,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -99397,13 +99424,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 1982.2775175443387,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -99413,13 +99440,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -100371,13 +100398,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 1982.2775175443387,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -100387,13 +100414,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -101356,13 +101383,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 1982.2775175443387,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -101372,13 +101399,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -102331,13 +102358,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 2973.416276316508,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -102347,13 +102374,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -103306,13 +103333,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 2973.416276316508,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -103322,13 +103349,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -104281,13 +104308,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 2973.416276316508,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -104297,13 +104324,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -105267,13 +105294,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 2973.416276316508,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -105283,13 +105310,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -106243,13 +106270,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 3964.5550350886774,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -106259,13 +106286,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -107219,13 +107246,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 3964.5550350886774,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -107235,13 +107262,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -108195,13 +108222,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 3964.5550350886774,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -108211,13 +108238,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -109182,13 +109209,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 3964.5550350886774,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -109198,13 +109225,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -110159,13 +110186,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 4955.693793860847,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -110175,13 +110202,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -111136,13 +111163,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 4955.693793860847,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -111152,13 +111179,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -112113,13 +112140,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 4955.693793860847,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -112129,13 +112156,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -113101,13 +113128,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 4955.693793860847,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -113117,13 +113144,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -114079,13 +114106,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -114095,13 +114122,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -115057,13 +115084,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -115073,13 +115100,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -116035,13 +116062,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -116051,13 +116078,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -117013,13 +117040,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -117029,13 +117056,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -117991,13 +118018,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -118007,13 +118034,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -118969,13 +118996,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -118985,13 +119012,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -119947,13 +119974,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -119963,13 +119990,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -120925,13 +120952,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -120941,13 +120968,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -121903,13 +121930,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -121919,13 +121946,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -122881,13 +122908,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -122897,13 +122924,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -123859,13 +123886,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -123875,13 +123902,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -124837,13 +124864,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -124853,13 +124880,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -125815,13 +125842,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -125831,13 +125858,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -126793,13 +126820,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -126809,13 +126836,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -127782,13 +127809,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 5946.832552633016,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -127798,13 +127825,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -128761,13 +128788,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 6937.971311405186,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -128777,13 +128804,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "dataGeneration",
               "required": 9604.37522074616,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -130278,8 +130305,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -134971,8 +135007,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -139664,8 +139709,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -143433,8 +143487,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -147204,8 +147267,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -151923,8 +151995,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -152296,13 +152377,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -153247,13 +153328,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -153263,13 +153344,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -154214,13 +154295,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -154230,13 +154311,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -154245,13 +154326,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             }
           ],
           "queue": [],
@@ -155196,13 +155277,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -155212,13 +155293,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -155227,13 +155308,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -155242,13 +155323,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             }
           ],
           "queue": [],
@@ -156193,13 +156274,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -156209,13 +156290,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -156224,13 +156305,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -156239,13 +156320,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -156254,13 +156335,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             }
           ],
           "queue": [],
@@ -157205,13 +157286,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -157221,13 +157302,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -157236,13 +157317,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -157251,13 +157332,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -157266,13 +157347,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -157281,13 +157362,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -158232,13 +158313,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -158248,13 +158329,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -158263,13 +158344,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -158278,13 +158359,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -158293,13 +158374,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -158308,13 +158389,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [
@@ -159261,13 +159342,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -159277,13 +159358,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -159292,13 +159373,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -159307,13 +159388,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -159322,13 +159403,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -159337,13 +159418,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [
@@ -160290,13 +160371,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -160306,13 +160387,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -160321,13 +160402,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -160336,13 +160417,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -160351,13 +160432,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -160366,13 +160447,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [
@@ -161330,13 +161411,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -161346,13 +161427,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -161361,13 +161442,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -161376,13 +161457,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -161391,13 +161472,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -161406,13 +161487,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -162374,13 +162455,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -162390,13 +162471,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -162405,13 +162486,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -162420,13 +162501,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -162435,13 +162516,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -163409,13 +163490,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -163425,13 +163506,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -163440,13 +163521,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -163455,13 +163536,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -164435,13 +164516,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -164451,13 +164532,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -164466,13 +164547,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -165452,13 +165533,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -165468,13 +165549,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -166464,13 +166545,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -168981,8 +169062,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -169354,13 +169444,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -170316,13 +170406,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -171280,13 +171370,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 1.6518979312869488,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -172364,13 +172454,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 992.7906567034563,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -175067,8 +175157,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -175440,13 +175539,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -176402,13 +176501,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -177366,13 +177465,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 3.3037958625738977,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -178450,13 +178549,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "materialAnalysis",
             "required": 16007.292034576933,
             "done": 1985.5813134069126,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -181153,8 +181252,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -211483,8 +211591,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -241853,8 +241970,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -274091,8 +274217,17 @@
           "intentTraining": false,
           "intentResearch": [],
           "intentAnalysis": false,
+          "intentAnalysisKey": "",
+          "intentModuleKey": "",
+          "intentForgeKeys": [],
           "intentCrafting": false,
           "agent": false,
+          "agentMinimumExactRecorded": true,
+          "agentMinimumExact": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
           "agentMinimum": 3,
           "agentMinutes": 60,
           "agentWaitTraining": true,
@@ -274464,13 +274599,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [],
           "queue": [],
@@ -275415,13 +275550,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -275431,13 +275566,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             }
           ],
           "queue": [],
@@ -276382,13 +276517,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -276398,13 +276533,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -276413,13 +276548,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             }
           ],
           "queue": [],
@@ -277364,13 +277499,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -277380,13 +277515,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -277395,13 +277530,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -277410,13 +277545,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             }
           ],
           "queue": [],
@@ -278361,13 +278496,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -278377,13 +278512,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -278392,13 +278527,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -278407,13 +278542,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -278422,13 +278557,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             }
           ],
           "queue": [],
@@ -279373,13 +279508,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -279389,13 +279524,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -279404,13 +279539,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -279419,13 +279554,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -279434,13 +279569,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -279449,13 +279584,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -280400,13 +280535,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -280416,13 +280551,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -280431,13 +280566,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -280446,13 +280581,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -280461,13 +280596,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -280476,13 +280611,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [
@@ -281429,13 +281564,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-1",
             "id": "dataGeneration",
             "required": 9604.37522074616,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-1"
+            "slot": 0
           },
           "labs": [
             {
@@ -281445,13 +281580,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -281460,13 +281595,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -281475,13 +281610,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -281490,13 +281625,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -281505,13 +281640,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [
@@ -282469,13 +282604,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -282485,13 +282620,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -282500,13 +282635,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -282515,13 +282650,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -282530,13 +282665,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-5",
               "id": "computeOptimization",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 4,
-              "key": "research-5"
+              "slot": 4
             },
             {
               "paidDataRecorded": true,
@@ -282545,13 +282680,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -283513,13 +283648,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -283529,13 +283664,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -283544,13 +283679,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -283559,13 +283694,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             },
             {
               "paidDataRecorded": true,
@@ -283574,13 +283709,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-6",
               "id": "userScaling",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 5,
-              "key": "research-6"
+              "slot": 5
             }
           ],
           "queue": [],
@@ -284548,13 +284683,13 @@
               "e": 7,
               "terms": null
             },
+            "key": "research-7",
             "id": "commercialization",
             "required": 43200,
             "done": 0,
             "intro": false,
             "identityRecorded": true,
-            "slot": 0,
-            "key": "research-7"
+            "slot": 0
           },
           "labs": [
             {
@@ -284564,13 +284699,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-2",
               "id": "materialAnalysis",
               "required": 16007.292034576933,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 1,
-              "key": "research-2"
+              "slot": 1
             },
             {
               "paidDataRecorded": true,
@@ -284579,13 +284714,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-3",
               "id": "blueprintAnalysis",
               "required": 32014.584069153865,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 2,
-              "key": "research-3"
+              "slot": 2
             },
             {
               "paidDataRecorded": true,
@@ -284594,13 +284729,13 @@
                 "e": 7,
                 "terms": null
               },
+              "key": "research-4",
               "id": "modelArchitecture",
               "required": 43200,
               "done": 0,
               "intro": false,
               "identityRecorded": true,
-              "slot": 3,
-              "key": "research-4"
+              "slot": 3
             }
           ],
           "queue": [],

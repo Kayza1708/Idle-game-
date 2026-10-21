@@ -103,3 +103,15 @@ Der explizite Offline-Konverter bietet nun eine Dateiauswahl. UTF-8 wird strikt 
 Der aktuelle lokale Unity-Playerbuild folgt als eigener Nachweis; der frühere Build deckt diesen Code nicht ab. Echte native Anbieter und physische Mobilgeräte bleiben separat.
 
 Der unveränderte gesamte Stand nach der Equip-Bindung bestand erneut vollständig **125/125 EditMode**, `/tmp/unity-terminal-edit.xml`, Exit 0. Die 53/53 PlayMode-Ergebnisse gelten ebenfalls für diesen Stand.
+
+## Abschließende Automationsparameter · Save v21
+
+Die weitere Parameter-/Aktionsnachprüfung fand noch tatsächliche Lücken: Der bisherige skalare INT-Agent-Mindestgewinn begrenzte sehr große Eingaben. Der autoritative Wert ist jetzt wissenschaftlich gespeichert und wird vom Resetvergleich und Import geprüft; der alte Zahlenwert bleibt ausschließlich als lesbarer Legacyvertrag erhalten. Save v21 erhält v1–20. Unverändert verlassene Zahlenfelder schreiben ihre gerundete Anzeige nicht zurück. Forschungsbudgets lassen sich wieder leeren; dies **pausiert** den Direktor wie im Source und bedeutet kein unbegrenztes Budget. Analyse-/Fertigungsplaner setzen ihre Intervalluhr beim Umschalten zurück. Ungültige Axiommindestwerte werden abgelehnt, statt still auf eins gesetzt.
+
+Reset-Warteregeln erfassen jetzt die konkreten bestehenden Forschungs-, Analyse-/Synthese-, Modul- und Schmiedeaufträge. Ein späterer Auftrag desselben Projekts oder Typs verlängert die alte Absicht nicht. Vorhandene v20-Absichten behalten ihre alten tatsächlich gespeicherten Warteverträge; es werden bei der Migration keine vorher nicht erfassten Schmiedewartezeiten erfunden. Neue Absichten nutzen die vollständige Sourcebindung. Gemeinsame Originalfälle verwenden ausdrücklich vorbereitete große Entitlements und tatsächlich gestartete Forschungs-/Schmiedeaufträge; sie sind keine natürlichen Balanceprofile.
+
+Erste gezielte Import-/INT-/Meta-/Kontrollprüfungen **15/15**, `/tmp/unity-v21-controls-edit.xml`: acht Source-Agentfälle (einschließlich `1e500`, `1e-500` und Austausch nach Erfassung) und fünf Sourcebudgetfälle. Verbundene UI-/Saveprüfungen und vollständige Schlussläufe folgen für diesen erweiterten Stand. Der v20-Checkpoint `45920ee1` bleibt separat geprüft erhalten.
+
+Aktueller vollständiger v21-Lauf: **128/128 EditMode**, `/tmp/unity-v21-full-edit.xml`, Exit 0; **1.886/143 Vitest**, `/tmp/unity-v21-full-vitest.log`; Typecheck, `unity:check` und Web-Build erfolgreich. Verbundene zusätzliche Parameteraktionen zuvor **7/7 PlayMode**, `/tmp/unity-v21-parameters-play.xml`. Vollständiges aktuelles PlayMode und Player folgen separat.
+
+Vollständiges aktuelles v21-PlayMode **55/55**, `/tmp/unity-v21-full-play.xml`, Exit 0, keine übersprungenen Tests. Die unveränderte Codebasis wird anschließend als lokaler Unity-Player gebaut.

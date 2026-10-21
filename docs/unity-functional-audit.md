@@ -1,6 +1,6 @@
 # Funktionaler Unity-Abgleich · 21.10.2026
 
-Dieser erneute Codeabgleich ordnet alle 26 breiten fachlichen Zeilen aus `unity-migration.md` tatsächlichen Verbrauchern und Bedienwegen zu. Ein Katalog zählt nicht als Implementierungsnachweis. Aktueller Stand: Save v20; `src/` unverändert. Vollständige Schlussläufe und Playerbuild werden im aktuellen Prüfbericht mit tatsächlichen Resultaten ergänzt. Frühere Berichte bleiben historische Nachweise.
+Dieser erneute Codeabgleich ordnet alle 26 breiten fachlichen Zeilen aus `unity-migration.md` tatsächlichen Verbrauchern und Bedienwegen zu. Ein Katalog zählt nicht als Implementierungsnachweis. Aktueller Stand: Save v21; `src/` unverändert. Vollständige Schlussläufe und Playerbuild werden im aktuellen Prüfbericht mit tatsächlichen Resultaten ergänzt. Frühere Berichte bleiben historische Nachweise.
 
 | Zeile | Tatsächlicher Verbraucher | Bedienweg in `IdleIntelligence.unity` | Referenz-/Runtime-Nachweis und Grenze |
 |---|---|---|---|
@@ -17,7 +17,7 @@ Dieser erneute Codeabgleich ordnet alle 26 breiten fachlichen Zeilen aus `unity-
 | Inventar/Ausrüstung/Effekte | `Workshop.Equipped/Effect/Device`, `ItemDetailRules`, `MetaAutomation.Salvage` | Inventarraster, Slot-/Instanzdetails, Anlegen/Ablegen/Sperren/Verbessern/Zerlegen | vollständiger 30×6-Katalog mit echten Effekten, zwölf zusätzliche Source-Spezialquote-/Vergleichsfälle; unerreichbarer Archiv-Neuerwerb ist Sourceproblem |
 | Foundry/Fusion/Planer | `Industry`, `Workshop.Fuse`, `MetaAutomation` | Materialien → Schmiedelevel; Itemdetails → Schmieden; Fusionsansicht; C02–C04 | bezahlte Soforttransaktionen, echte Ergebnisse, alte Wartende/Refunds; kosmetische Animationen vergeben nichts |
 | KI-Modelle | `MetaRules.Develop/Upgrade/Select`, alle zehn Modellverbraucher | Forschung → Geheimes Labor | Restpool/RNG, Kosten, aktive Auswahl und Zusatzslotverlust ohne Itemverlust durch Metareferenzen/Playtests |
-| INT/60 Knoten/Reset | `PrestigeRules`, `PrestigeAutomation.Agent`, `ResetControls` | verbundenes INT-Netz, Details, Pause | ursprüngliche 380 Fälle, natürlicher Lauf, Folgeresets; passende vorgemerkte Absicht beim Umschalten jetzt gelöscht |
+| INT/60 Knoten/Reset | `PrestigeRules`, `PrestigeAutomation.Agent`, `ResetControls` | verbundenes INT-Netz, Details, Pause | ursprüngliche 380 Fälle, natürlicher Lauf, Folgeresets; passende vorgemerkte Absicht beim Umschalten jetzt gelöscht; wissenschaftliches Mindestziel und konkrete Jobidentitäten ergänzt |
 | Axiome/24 Knoten | `MetaRules`, `MetaAutomation`, Resetmatrix | INT → Axiomnetz, Erhaltungsvorschau | Metaeffekte/mehrere Zyklen, gespeicherte Transaktion vor Animation; keine Vorgängerkaufsperre |
 | Automation/Reserven/Budgets | `PrestigeAutomation`, `MetaAutomation` | zuständige INT-/Axiomknotendetails; globale Resetpause | gemeinsame Online-/Offline-Referenzen, konkrete Pause/Reloadprüfung; Original-Reihenfolge und Sparziele |
 | Challenges | `ChallengeRules`, isolierter `MainSnapshot` | Forschung → Challenges; Abbruch/Abschluss | alle 690 aktuellen Stufen, 419 Sourceaktionen, reale Start-/Abbruch-/Reloadtests; Hauptspielmessung getrennt |

@@ -1,6 +1,6 @@
 # Unity: spielbarer Abschnitt mit Items, Schmiede, INT, Axiomen und KI-Modellen
 
-Stand: 19.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478` gesichert. Der gesamte Rewrite bleibt offen; maßgeblich bleibt [die vollständige Migrationsliste](unity-migration.md).
+Stand: 21.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478` gesichert. Der aktuelle funktionale V2-Abgleich steht in `unity-functional-audit.md`; bekannte Quellprobleme, historische Sonderimporte, native Integrationen, physische Geräte und Optik bleiben getrennt offen. Maßgeblich bleibt [die vollständige Migrationsliste](unity-migration.md).
 
 ## Öffnen und mit Play testen
 
@@ -10,10 +10,10 @@ Stand: 19.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478
 4. Mit **50 Credits** starten. In **Hardware** einen Taschenrechner für **15 Credits** kaufen. Compute, Nutzer sowie Credit-/Datenproduktion steigen. Die Hardwareliste ist scrollbar; ein Klick kauft ein Gerät und zieht den angezeigten Preis ab.
 5. **Tippen · Credit-Impuls** anklicken. Akzeptierte Taps haben mindestens **200 ms** Abstand. Nach **100 akzeptierten Taps** startet Overdrive automatisch: standardmäßig **×3 passive Credits für 15 Sekunden**. Die Sperrzeit läuft **60 Sekunden ab Auslösung**; Ladung kann sich währenddessen erneut sammeln. Hardware-Meilensteine können die Dauer nach den bisherigen Regeln verändern.
 6. Nach erstem Tap und Hardwarekauf führt der frühe Tutorialzustand zum Tab **Training**. **Qualität** erstmals kostenlos starten (20 Arbeitssekunden, durch Compute etwas schneller). Weitere Qualitätstrainings und Effizienz kosten Credits. Ein Trainingsplatz; Dauer und Kosten werden angezeigt. Währenddessen kann Forschung parallel laufen.
-7. Unter **Forschung** die erste **Datenerzeugung** kostenlos starten (20 Sekunden). Danach kosten Wiederholungen Daten; die frühen Kosten-/Zeitstaffeln und Voraussetzungen stammen unverändert aus TypeScript. Enthalten sind Datenerzeugung, Modellarchitektur, Compute-Optimierung, Nutzer-Skalierung und Kommerzialisierung. Ein Forschungsplatz vor den INT-Laborfreischaltungen. Insgesamt sind inzwischen zehn frühe Projekte enthalten; weitere Kataloge bleiben offen.
+7. Unter **Forschung** die erste **Datenerzeugung** kostenlos starten (20 Sekunden). Danach kosten Wiederholungen Daten; die frühen Kosten-/Zeitstaffeln und Voraussetzungen stammen unverändert aus TypeScript. Enthalten sind Datenerzeugung, Modellarchitektur, Compute-Optimierung, Nutzer-Skalierung und Kommerzialisierung. Ein Forschungsplatz vor den INT-Laborfreischaltungen. Der aktuelle Forschungs-/Analyse-/Industrieumfang und seine Bedienwege stehen in der Auditmatrix; diese frühe Anleitung ist der Einstieg.
 8. **Sichern** drücken oder die automatische Speicherung abwarten. Play beenden und erneut starten: Hardware, Ressourcen, Jobs, Tap-RNG und Overdrivezustand bleiben erhalten. Für den Offline-Test nach einem Kauf Play beenden, einige Zeit warten und erneut starten. Die Rückkehrmeldung zeigt den tatsächlichen Creditzuwachs. Ein sofortiger weiterer Neustart zahlt denselben Zeitraum nicht erneut aus. Lange Abwesenheit wird auf die bestehende Offlinekapazität begrenzt.
 
-Die Szene beginnt nach der Namens-/Prologphase mit dem frühen Tap-Tutorial; die vollständigen Dialoge sind noch nicht portiert. Der PlayMode-Test schließt Jobs durch kontrollierten Zeitfortschritt ab; dies ist kein Nachweis natürlicher Langzeitbalance.
+Die automatische Mira-Ansicht beginnt mit der Namenswahl und dem Originalprolog. Danach führt das gespeicherte Tutorial zu tatsächlichen Aktionen. Alle 38 Originaldialoge und fünf Kapitel sind über Forschung → Mira/Story erreichbar; dort auch Skip, Resume und Replay. Der PlayMode-Test schließt Jobs durch kontrollierten Zeitfortschritt ab; dies ist kein Nachweis natürlicher Langzeitbalance.
 
 ## Items und Schmiede mit Play testen
 
