@@ -20,7 +20,7 @@ namespace IdleIntelligence.Runtime
    }
    if(id=="T06")
    {
-    Toggle(parent,game,"TrainingAutopilot","Trainingsautopilot",p.trainingAuto,n=>n.Prestige.trainingAuto=!n.Prestige.trainingAuto,refresh);for(int i=0;i<3;i++){int t=i;Number(parent,game,"TrainingTarget"+i,PrestigeAutomation.Tracks[i]+" Ziellevel (0 = unbegrenzt)",p.trainingTargets[i].ToString(),(n,v)=>n.Prestige.trainingTargets[t]=Nonnegative(v),refresh);}
+    Toggle(parent,game,"TrainingAutopilot","Trainingsautopilot",p.trainingAuto,n=>n.Prestige.trainingAuto=!n.Prestige.trainingAuto,refresh);for(int i=0;i<3;i++){int t=i;Number(parent,game,"TrainingTarget"+i,PrestigeAutomation.Tracks[i]+" Ziellevel (0 = unbegrenzt)",p.trainingTargets[i].ToString(),(n,v)=>n.Prestige.trainingTargets[t]=Nonnegative(v)<=100000?Nonnegative(v):throw new ArgumentOutOfRangeException(),refresh);}
    }
    if(id=="F03")
    {
@@ -36,7 +36,7 @@ namespace IdleIntelligence.Runtime
    }
    if(id=="I06"||id=="I07")
    {
-    Toggle(parent,game,"PrestigeAgent","Prestige-Agent",p.agent,n=>n.Prestige.agent=!n.Prestige.agent,refresh);Number(parent,game,"MinimumINT","Mindestgewinn INT",p.agentMinimum.ToString(CultureInfo.InvariantCulture),(n,v)=>n.Prestige.agentMinimum=Math.Max(1,ScientificNumber.Parse(v).ToDouble()),refresh);WorkshopUIFactory.Button("AgentMinutes",parent,"Mindestlaufzeit: "+p.agentMinutes+" min",()=>Edit(game,n=>{double[] a={15,30,60,120};n.Prestige.agentMinutes=a[(Array.IndexOf(a,n.Prestige.agentMinutes)+1)%a.Length];},refresh));
+    Toggle(parent,game,"PrestigeAgent","Prestige-Agent",p.agent,ResetControls.TogglePrestige,refresh);Number(parent,game,"MinimumINT","Mindestgewinn INT",p.agentMinimum.ToString(CultureInfo.InvariantCulture),(n,v)=>n.Prestige.agentMinimum=Math.Max(1,ScientificNumber.Parse(v).ToDouble()),refresh);WorkshopUIFactory.Button("AgentMinutes",parent,"Mindestlaufzeit: "+p.agentMinutes+" min",()=>Edit(game,n=>{double[] a={15,30,60,120};n.Prestige.agentMinutes=a[(Array.IndexOf(a,n.Prestige.agentMinutes)+1)%a.Length];},refresh));
     Toggle(parent,game,"WaitTraining","Laufendes Training abwarten",p.agentWaitTraining,n=>n.Prestige.agentWaitTraining=!n.Prestige.agentWaitTraining,refresh);Toggle(parent,game,"WaitResearch","Laufende Forschung abwarten",p.agentWaitResearch,n=>n.Prestige.agentWaitResearch=!n.Prestige.agentWaitResearch,refresh);Toggle(parent,game,"WaitAnalysis","Laufende Analyse abwarten",p.agentWaitAnalysis,n=>n.Prestige.agentWaitAnalysis=!n.Prestige.agentWaitAnalysis,refresh);Toggle(parent,game,"WaitCrafting","Laufendes Modul abwarten",p.agentWaitCrafting,n=>n.Prestige.agentWaitCrafting=!n.Prestige.agentWaitCrafting,refresh);
     if(PrestigeRules.Has(s,"I07")){WorkshopUIFactory.Button("RelativeINT",parent,"Relatives Ziel: "+(p.relative>0?"×"+p.relative:"Aus"),()=>Edit(game,n=>{double[] a={0,2,5,10};n.Prestige.relative=a[(Array.IndexOf(a,n.Prestige.relative)+1)%a.Length];},refresh));Number(parent,game,"MaximumRun","Optionale Zeitobergrenze in Sekunden (0 = aus)",p.maximumRunSeconds.ToString(CultureInfo.InvariantCulture),(n,v)=>n.Prestige.maximumRunSeconds=Nonnegative(v),refresh);}
    }

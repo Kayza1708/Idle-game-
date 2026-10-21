@@ -74,3 +74,5 @@ Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining
 - [ ] Breite Schlussabnahme und restliche Verbraucher/Detailaktionen weiter anhand [unity-functional-remaining.md](unity-functional-remaining.md); keine Gesamtrewrite-Fertigmeldung.
 
 - 21.10.2026 Fortsetzung des funktionalen Unity-Auftrags: Source-Zielnavigation und Rückkehraktionen verbunden, Save-v19-Historien mit vollständigen Start-/Endpunkten und historischen Verfügbarkeitsmarkern, echte lokale Dateidiagnostik. Vollständiges PlayMode 49/49, Vitest 1.885/143. Details/Schlussabnahme und erneuter Playerbuild laufen weiter; keine pauschale Fertigmeldung.
+
+- 21.10.2026: Tatsächliche automatische Mira-/Namensdarstellung und reine Forschungs-/Trainingsdetails verbunden (PlayMode 50/50). Passende Resetabsicht beim Agentenschalter korrigiert; Pause und ausdrücklich bestätigter Kampagnenneustart mit vollständigem vorherigem Originalexport geprüft (6/6 verbundene Folgefälle). Breiter Abschluss-/Playernachweis läuft weiter.

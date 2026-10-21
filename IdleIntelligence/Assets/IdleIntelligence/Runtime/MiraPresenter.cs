@@ -1,0 +1,10 @@
+using System;using IdleIntelligence.Core;using UnityEngine;using UnityEngine.UI;
+namespace IdleIntelligence.Runtime {
+ // Reuses the existing item detail prefab as the source dialogue overlay. All state changes go through saved runtime actions.
+ public sealed class MiraPresenter:MonoBehaviour {
+  GameRuntime game;GameObject sheet;public void Initialize(GameRuntime runtime){game=runtime;}
+  void LateUpdate(){if(game==null||game.State==null)return;bool needed=game.Writable&&game.CurrentTab!="story"&&(game.State.Story.open!=null||string.IsNullOrEmpty(game.State.Retention.aiName));if(!needed){Close();return;}if(sheet==null){sheet=Instantiate(game.WorkshopPrefab.DetailRoot,game.Content.GetComponentInParent<Canvas>().transform);sheet.name="AutomaticMira";WorkshopUIFactory.Fill((RectTransform)sheet.transform);sheet.AddComponent<SafeArea>();var canvas=sheet.GetComponent<Canvas>();if(canvas==null)canvas=sheet.AddComponent<Canvas>();canvas.overrideSorting=true;canvas.sortingOrder=110;if(sheet.GetComponent<GraphicRaycaster>()==null)sheet.AddComponent<GraphicRaycaster>();sheet.SetActive(true);var scroll=sheet.GetComponentInChildren<ScrollRect>(true);foreach(Transform child in scroll.content)child.gameObject.SetActive(false);var body=WorkshopUIFactory.Vertical("MiraAutomaticContent",scroll.content);body.AddComponent<StoryView>().Initialize(game);var button=sheet.transform.Find("DetailPanel/CloseItemDetail").GetComponent<Button>();button.onClick.RemoveAllListeners();button.onClick.AddListener(()=>game.Act(s=>NarrativeBridge.Action(s,"skip")));button.interactable=!string.IsNullOrEmpty(game.State.Retention.aiName);button.GetComponentInChildren<Text>().text="Skip";}sheet.transform.Find("DetailPanel/CloseItemDetail").GetComponent<Button>().interactable=!string.IsNullOrEmpty(game.State.Retention.aiName);foreach(var text in sheet.GetComponentsInChildren<Text>(true))if(text.GetComponent<UiLocalizedText>()==null)text.gameObject.AddComponent<UiLocalizedText>().Initialize(game);}
+  void Close(){if(sheet!=null){sheet.SetActive(false);Destroy(sheet);sheet=null;}}
+  void OnDestroy(){Close();}
+ }
+}
