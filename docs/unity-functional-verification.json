@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-21",
+  "codeCommit": "86559ea8",
+  "unity": "6000.3.26f1",
+  "saveVersion": 21,
+  "typescriptUntouched": true,
+  "checks": {
+    "typecheck": "passed",
+    "sourceParity": "passed",
+    "vitest": {
+      "files": 143,
+      "passed": 1886,
+      "failed": 0,
+      "log": "/tmp/unity-v21-full-vitest.log"
+    },
+    "webBuild": "passed, existing chunk-size warning",
+    "editMode": {
+      "passed": 128,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0,
+      "xml": "/tmp/unity-v21-full-edit.xml"
+    },
+    "playMode": {
+      "passed": 55,
+      "failed": 0,
+      "skipped": 0,
+      "exit": 0,
+      "xml": "/tmp/unity-v21-full-play.xml"
+    }
+  },
+  "player": {
+    "result": "Succeeded",
+    "exit": 0,
+    "target": "StandaloneOSX",
+    "architectures": [
+      "arm64",
+      "x86_64"
+    ],
+    "errors": 0,
+    "bytes": 370577559,
+    "path": "/tmp/IdleIntelligence-functional-final-20261021.app",
+    "log": "/tmp/unity-final-player-build.log",
+    "smoke": {
+      "passed": true,
+      "error": "",
+      "unity": "6000.3.26f1",
+      "platform": "OSXPlayer",
+      "os": "Mac OS X 26.6.2",
+      "graphics": "Apple M4",
+      "savePath": "/var/folders/hj/txdyk1cj2sd36krkc8jqbg480000gn/T/idle-player-final-v21-20261021/isolated-save.json",
+      "width": 390,
+      "height": 844
+    },
+    "smokeExit": 0,
+    "screenshot": "/var/folders/hj/txdyk1cj2sd36krkc8jqbg480000gn/T/idle-player-final-v21-20261021/player-portrait.png",
+    "shutdownWarnings": "Unity thread finalization / ComputeBuffer disposal / memory label diagnostic; successful exit, no claim of clean native leak audit"
+  },
+  "boundaries": [
+    "Source acquisition/resume/analysis/foundry issues",
+    "Original language fallbacks",
+    "Explicitly rejected active historical web contracts preserved as originals",
+    "Browser file converter download manual",
+    "No production ad/purchase SDK or fabricated success",
+    "No physical iPhone/Android acceptance",
+    "No claim of complete visual parity"
+  ]
+}

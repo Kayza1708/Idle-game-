@@ -1,0 +1,8 @@
+using System;using System.Collections.Generic;using IdleIntelligence.Core;using UnityEngine;using UnityEngine.UI;
+namespace IdleIntelligence.Runtime {
+ public sealed class ProductionView:MonoBehaviour {
+  GameRuntime game;Text text;float next;public void Initialize(GameRuntime runtime){game=runtime;text=WorkshopUIFactory.Label("ProductionFacts",transform,"",14,54);text.GetComponent<LayoutElement>().preferredHeight=-1;text.alignment=TextAnchor.UpperLeft;Refresh();}
+  void Update(){if(Time.unscaledTime>=next){next=Time.unscaledTime+.5f;Refresh();}}
+  void Refresh(){string N(ScientificNumber n)=>NumberFormatting.Format(n,game.State.Settings.numberFormat);var s=game.State;var lines=new List<string>{"Production / sources","Measured current formula steps. Temporary effects are included.","Compute: "+N(Game.Compute(s))+" · Users: "+N(Game.Users(s)),"Credits/s: "+N(Game.Income(s))+" · Data/s: "+N(Game.DataRate(s))};foreach(string kind in new[]{"compute","users","credits","data"}){var steps=new List<ProductionStep>();var result=kind=="compute"?Game.ComputeTrace(s,steps):kind=="users"?Game.UsersTrace(s,steps):kind=="credits"?Game.IncomeTrace(s,steps):Game.DataRateTrace(s,steps);lines.Add("\n"+SettingsRules.Text(s.Settings.language,"workshop:"+kind)+" = "+N(result));foreach(var step in steps)lines.Add(step.Id+": ×"+N(step.Factor)+" → "+N(step.After));}for(int i=0;i<s.Hardware.Length;i++)if(s.Hardware[i]>0)lines.Add(SettingsRules.Text(s.Settings.language,"hardware:"+Balance.Hardware[i].Id)+" ×"+s.Hardware[i]+(Array.IndexOf(s.Legacy.classUpgrades,Balance.Hardware[i].Id)>=0?" · "+"Legacy class upgrade"+" ×"+CompatibilityCatalog.ClassUpgradeMultiplier:""));text.text=string.Join("\n",lines);}
+ }
+}

@@ -1,6 +1,6 @@
 # Unity: spielbarer Abschnitt mit Items, Schmiede, INT, Axiomen und KI-Modellen
 
-Stand: 19.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478` gesichert. Der gesamte Rewrite bleibt offen; maßgeblich bleibt [die vollständige Migrationsliste](unity-migration.md).
+Stand: 21.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478` gesichert. Der aktuelle funktionale V2-Abgleich steht in `unity-functional-audit.md`; bekannte Quellprobleme, historische Sonderimporte, native Integrationen, physische Geräte und Optik bleiben getrennt offen. Maßgeblich bleibt [die vollständige Migrationsliste](unity-migration.md).
 
 ## Öffnen und mit Play testen
 
@@ -10,10 +10,10 @@ Stand: 19.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478
 4. Mit **50 Credits** starten. In **Hardware** einen Taschenrechner für **15 Credits** kaufen. Compute, Nutzer sowie Credit-/Datenproduktion steigen. Die Hardwareliste ist scrollbar; ein Klick kauft ein Gerät und zieht den angezeigten Preis ab.
 5. **Tippen · Credit-Impuls** anklicken. Akzeptierte Taps haben mindestens **200 ms** Abstand. Nach **100 akzeptierten Taps** startet Overdrive automatisch: standardmäßig **×3 passive Credits für 15 Sekunden**. Die Sperrzeit läuft **60 Sekunden ab Auslösung**; Ladung kann sich währenddessen erneut sammeln. Hardware-Meilensteine können die Dauer nach den bisherigen Regeln verändern.
 6. Nach erstem Tap und Hardwarekauf führt der frühe Tutorialzustand zum Tab **Training**. **Qualität** erstmals kostenlos starten (20 Arbeitssekunden, durch Compute etwas schneller). Weitere Qualitätstrainings und Effizienz kosten Credits. Ein Trainingsplatz; Dauer und Kosten werden angezeigt. Währenddessen kann Forschung parallel laufen.
-7. Unter **Forschung** die erste **Datenerzeugung** kostenlos starten (20 Sekunden). Danach kosten Wiederholungen Daten; die frühen Kosten-/Zeitstaffeln und Voraussetzungen stammen unverändert aus TypeScript. Enthalten sind Datenerzeugung, Modellarchitektur, Compute-Optimierung, Nutzer-Skalierung und Kommerzialisierung. Ein Forschungsplatz vor den INT-Laborfreischaltungen. Insgesamt sind inzwischen zehn frühe Projekte enthalten; weitere Kataloge bleiben offen.
+7. Unter **Forschung** die erste **Datenerzeugung** kostenlos starten (20 Sekunden). Danach kosten Wiederholungen Daten; die frühen Kosten-/Zeitstaffeln und Voraussetzungen stammen unverändert aus TypeScript. Enthalten sind Datenerzeugung, Modellarchitektur, Compute-Optimierung, Nutzer-Skalierung und Kommerzialisierung. Ein Forschungsplatz vor den INT-Laborfreischaltungen. Der aktuelle Forschungs-/Analyse-/Industrieumfang und seine Bedienwege stehen in der Auditmatrix; diese frühe Anleitung ist der Einstieg.
 8. **Sichern** drücken oder die automatische Speicherung abwarten. Play beenden und erneut starten: Hardware, Ressourcen, Jobs, Tap-RNG und Overdrivezustand bleiben erhalten. Für den Offline-Test nach einem Kauf Play beenden, einige Zeit warten und erneut starten. Die Rückkehrmeldung zeigt den tatsächlichen Creditzuwachs. Ein sofortiger weiterer Neustart zahlt denselben Zeitraum nicht erneut aus. Lange Abwesenheit wird auf die bestehende Offlinekapazität begrenzt.
 
-Die Szene beginnt nach der Namens-/Prologphase mit dem frühen Tap-Tutorial; die vollständigen Dialoge sind noch nicht portiert. Der PlayMode-Test schließt Jobs durch kontrollierten Zeitfortschritt ab; dies ist kein Nachweis natürlicher Langzeitbalance.
+Die automatische Mira-Ansicht beginnt mit der Namenswahl und dem Originalprolog. Danach führt das gespeicherte Tutorial zu tatsächlichen Aktionen. Alle 38 Originaldialoge und fünf Kapitel sind über Forschung → Mira/Story erreichbar; dort auch Skip, Resume und Replay. Der PlayMode-Test schließt Jobs durch kontrollierten Zeitfortschritt ab; dies ist kein Nachweis natürlicher Langzeitbalance.
 
 ## Items und Schmiede mit Play testen
 
@@ -170,3 +170,26 @@ Weiterhin **`IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`**, Editor **
 Webstand im bisherigen Spiel ausdrücklich exportieren. In Unity den **lokalen Web-Konverter** öffnen, das Web-JSON einfügen, prüfen/konvertieren und Transferdatei herunterladen. Deren absoluten Dateipfad in der Unity-Speicheransicht eingeben und **Web-Transferdatei prüfen** wählen. Vorschau und etwaige Ablehnung lesen. Erst **Ausgewählten Stand … wiederherstellen** übernimmt ihn. Die Webversion und das Original bleiben erhalten. Nicht unterstützte laufende Altverträge im Webspiel beenden/abbrechen; keine Ersatzfreischaltung verwenden.
 
 Nach echter Abwesenheit zeigt die Speicheransicht den gespeicherten Rückkehrbeleg. Bruttoerzeugung und jetziger Bestand sind getrennt; **als gelesen markieren** vergibt nichts. Diagnose- und Balanceexport stehen darunter. Importierte originale Webdaten bleiben zusätzlich separat exportierbar. [Verträge, tatsächliche Prüfungen und Grenzen](unity-story-storage.md).
+
+## Aktuelle verbundene Bedienwege (21.10.2026)
+
+Mit Unity **6000.3.26f1** das Unterprojekt `IdleIntelligence/` öffnen, dann **`Assets/Scenes/IdleIntelligence.unity`** und Play starten. Einen bestehenden Save weiterverwenden; für einen getrennten frischen Test einen eigenen temporären Speicherpfad/Testprofil verwenden. Keine Bestandsdatei löschen.
+
+1. Bei neuer Kampagne erscheint die vorhandene Detailoberfläche automatisch für den KI-Namen und offene Mira-Dialoge. Namen bestätigen, Dialogseiten lesen/weiter oder überspringen. Danach „Ziel zeigen“ nutzen und die echte Aktion ausführen. Kapitel/Replay/Führung beenden/Fortsetzen stehen unter **Forschung → Mira**; Zustand und Name bleiben nach Reload gespeichert.
+2. **Training** beziehungsweise **Forschung**: Detailtaste unter der betreffenden Karte öffnet aktuelle Preise, Anforderungen, Arbeitsmenge/Rate und bezahlte laufende Aufträge. Das Lesen startet keinen Job. **Forschung → Produktion/Quellen** zeigt die tatsächlich ausgeführten Produktionsfaktoren.
+3. **Forschung → Ziele**: Zielart wählen, konkretes Ziel anheften, „Ziel anzeigen“. Hardware/Forschung springen an die Karte, INT an den passenden Knoten, Itemverbesserung an die konkrete Instanz. Reload erhält die Auswahl; „Ziel lösen“ kauft/vergibt nichts.
+4. **INT-Netz**: Schalter und gemeinsame Pause speichern die Automationswahl. Beim Ausschalten wird die passende vorgemerkte Resetabsicht gelöscht. Verbindungen sind keine Kaufvoraussetzung.
+5. **Forschung → Spielstände/Recovery/Berichte**: Unity-Export erzeugen; JSON kopieren oder Exportordner öffnen. Recoverydatei erst prüfen, Vorschau lesen, dann ausdrücklich bestätigen. Rückkehrberichte entstehen ab 60 Sekunden; Bruttoertrag/angerechnete und verfallene Zeit bleiben von verfügbaren Beständen getrennt. Archivbelege/Lesestatus und Folgeaktionen vergeben keine zweite Belohnung.
+6. Webimport bleibt bewusst zweistufig: lokalen Offline-Konverter manuell im Systembrowser öffnen, Original-Webexport eingeben und Transferdatei erzeugen. In Unity den Transferpfad prüfen; erst nach Vorschau/Originalkopie ausdrücklich übernehmen. Der automatisierte Browserzugriff auf `file://` war gesperrt, daher bleibt der tatsächliche Browser-Dateidownload ein manueller Prüfschritt.
+7. Lokale Balancehistorie sowie Diagnose-/aktuelle/vorige Sitzungsberichte lassen sich dort exportieren. Bei alten Ständen bedeuten Verfügbarkeitsmarker „nicht erfasst“, nicht gemessene Nullwerte. Ein unsauberes Sitzungsende hat ohne weitere Belege unbekannte Ursache.
+8. **Einstellungen → Spielstand zurücksetzen** bietet Bestätigung und Abbruch. Nur für einen bewusst neuen Lauf verwenden: der vollständige vorige Stand wird vor Austausch zusätzlich unter `CampaignOriginals/` bewahrt. Dies setzt auch Namen/Einstellungen/Fortschritt zurück und ist kein Prestige.
+
+Vorbereitete finanzierte Referenz-/PlayMode-Zustände sind technische Transaktionsprüfungen. Der natürliche Erstprestige-Nachweis ist separat ein beschleunigt simulierter Lauf ohne Grants; er behauptet keinen minutenlangen realen Eingabemitschnitt. Physische Mobilgeräte und echte Plattformanbieter bleiben getrennte Abnahme.
+
+## Aktueller Einstieg und Abschlussnachweis · 21.10.2026
+
+Die obigen älteren Zahlen/Teilberichte sind historische Nachweise. Aktueller Code `86559ea8`: 128/128 EditMode, 55/55 PlayMode und echter StandaloneOSX-Universal-Player mit isoliertem 390×844-M4-Test einschließlich Reload. Details/Grenzen in `unity-story-storage.md` und `unity-functional-verification.json`.
+
+Zum manuellen Test **`IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`** in **6000.3.26f1** öffnen und Play bei **390×844** starten. Bei neuer Kampagne zuerst in Mira einen gültigen Namen wählen und den Prolog mit **Weiter** durchlaufen. Die Führung zeigt die nächsten tatsächlichen Ziele: Tapfläche, Taschenrechner, erstes Qualitätstraining, erste Datenerzeugung. **Forschung → Mira/Story** öffnet Kapitel, Replay, Skip/Resume und Zielnavigation. **Forschung → Einstellungen** bietet Sprache/Audio/Bewegung und den ausdrücklich bestätigten Neustart mit Originalkopie; keine Save-Dateien löschen. **Forschung → Spielstände/Berichte** führt zu Importprüfung, Export, Recovery, Rückkehrarchiv und gemessenen Run-/Sitzungsberichten. Ein vorhandener Save setzt seinen gespeicherten Stand fort.
+
+Aktuelles lokales Appbundle: `/tmp/IdleIntelligence-functional-final-20261021.app`. Der automatische Nachweis lief mit explizitem temporärem Save; normales Öffnen verwendet den regulären nativen Spielstand. Echte Mobilgeräte und Produktionsanbieter bleiben separat offen.

@@ -205,3 +205,54 @@ Bonussekunden regulärer passiver Credits|bonus seconds of regular passive Credi
 INT-Gewichtungsbeitrag|INT weighting contribution|Contribución a la ponderación INT|Contribution à la pondération INT|Contribuição à ponderação INT|Contributo alla ponderazione INT|Wkład w wagę INT
 nur zukünftige Einnahmen|future income only|solo ingresos futuros|revenus futurs uniquement|apenas receitas futuras|solo ricavi futuri|tylko przyszłe przychody
 Bonussekunden|bonus seconds|segundos extra|secondes bonus|segundos extras|secondi bonus|dodatkowe sekundy
+Grundwert|Base|Base|Base|Base|Base|Podstawa
+Preisersparnis|Price saving|Ahorro de precio|Économie sur le prix|Economia no preço|Risparmio sul prezzo|Oszczędność ceny
+Startdauer|Start duration|Duración inicial|Durée de départ|Duração inicial|Durata iniziale|Czas początkowy
+Aktuelle Arbeitsrate|Current work rate|Ritmo de trabajo actual|Vitesse de travail actuelle|Ritmo de trabalho atual|Velocità di lavoro attuale|Aktualne tempo pracy
+Beim Start bezahlt|Paid at start|Pagado al iniciar|Payé au démarrage|Pago no início|Pagato all’avvio|Opłacone na początku
+Einführungsauftrag: kostenlos, feste Dauer 20 s.|Introductory lesson: free, fixed 20 s.|Lección introductoria: gratis, duración fija de 20 s.|Leçon d’introduction : gratuite, durée fixe de 20 s.|Aula introdutória: grátis, duração fixa de 20 s.|Lezione introduttiva: gratuita, durata fissa di 20 s.|Lekcja wprowadzająca: bezpłatna, stały czas 20 s.
+Verstrichene Zeit bestimmt den Fortschritt; aktuelle Boni können die Restdauer ändern.|Elapsed time drives progress; current bonuses can change the remaining duration.|El tiempo transcurrido determina el progreso; las bonificaciones pueden cambiar el tiempo restante.|Le temps écoulé détermine la progression ; les bonus peuvent modifier la durée restante.|O tempo decorrido determina o progresso; bônus podem mudar o tempo restante.|Il tempo trascorso determina i progressi; i bonus possono cambiare il tempo rimanente.|Upływ czasu określa postęp; premie mogą zmienić pozostały czas.
+Automatische Resets pausieren|Pause automatic resets|Pausar reinicios automáticos|Mettre en pause les réinitialisations automatiques|Pausar reinícios automáticos|Sospendi ripristini automatici|Wstrzymaj automatyczne resety
+Spielstand zurücksetzen|Reset saved game|Reiniciar partida guardada|Réinitialiser la sauvegarde|Redefinir jogo salvo|Ripristina salvataggio|Zresetuj zapis gry
+Der gesamte Fortschritt wird zurückgesetzt. Vor dem Austausch bleibt eine vollständige Originalkopie lokal erhalten.|All progress will reset. A complete original copy is preserved locally before replacement.|Se reiniciará todo el progreso. Se conservará una copia original completa antes de sustituirlo.|Toute la progression sera réinitialisée. Une copie originale complète est conservée localement avant le remplacement.|Todo o progresso será redefinido. Uma cópia original completa será preservada antes da substituição.|Tutti i progressi saranno azzerati. Una copia originale completa viene conservata prima della sostituzione.|Cały postęp zostanie zresetowany. Przed zastąpieniem zostanie zachowana pełna lokalna kopia oryginału.
+Neue Kampagne bestätigen|Confirm new campaign|Confirmar nueva campaña|Confirmer la nouvelle campagne|Confirmar nova campanha|Conferma nuova campagna|Potwierdź nową kampanię
+Zurück|Back|Volver|Retour|Voltar|Indietro|Wstecz
+Arbeit|Work|Trabajo|Travail|Trabalho|Lavoro|Praca
+Produktion / Quellen|Production / sources|Producción / fuentes|Production / sources|Produção / fontes|Produzione / fonti|Produkcja / źródła
+Tatsächliche aktuelle Rechenschritte. Temporäre Effekte sind enthalten.|Measured current formula steps. Temporary effects are included.|Pasos reales de la fórmula actual. Incluye efectos temporales.|Étapes réelles de la formule actuelle. Effets temporaires inclus.|Etapas reais da fórmula atual. Inclui efeitos temporários.|Passaggi reali della formula attuale. Effetti temporanei inclusi.|Rzeczywiste etapy aktualnego wzoru. Uwzględnia efekty tymczasowe.
+Aktuelle Sitzungsdiagnose exportieren|Export current session diagnostics|Exportar diagnóstico de sesión actual|Exporter le diagnostic de la session actuelle|Exportar diagnóstico da sessão atual|Esporta diagnosi della sessione attuale|Eksportuj diagnostykę bieżącej sesji
+Vorige Sitzungsdiagnose exportieren|Export previous session diagnostics|Exportar diagnóstico de sesión anterior|Exporter le diagnostic de la session précédente|Exportar diagnóstico da sessão anterior|Esporta diagnosi della sessione precedente|Eksportuj diagnostykę poprzedniej sesji
+Altfaktor Compute|Legacy compute|Factor heredado de cómputo|Facteur de calcul hérité|Fator de computação legado|Fattore di calcolo precedente|Historyczny mnożnik obliczeń
+Geräte-Compute|Device compute|Cómputo de dispositivos|Calcul des appareils|Computação de dispositivos|Calcolo dei dispositivi|Obliczenia urządzeń
+Kombination paralleler Architektur|Parallel architecture combination|Combinación de arquitectura paralela|Combinaison d’architecture parallèle|Combinação de arquitetura paralela|Combinazione di architettura parallela|Kombinacja architektury równoległej
+Compute aus Items / Meilensteinen|Item / milestone compute|Cómputo de objetos / hitos|Calcul des objets / jalons|Computação de itens / marcos|Calcolo di oggetti / traguardi|Obliczenia przedmiotów / kamieni milowych
+Compute-Optimierung|Compute optimization|Optimización de cómputo|Optimisation du calcul|Otimização de computação|Ottimizzazione del calcolo|Optymalizacja obliczeń
+Hardwareintegration|Hardware integration|Integración de hardware|Intégration matérielle|Integração de hardware|Integrazione hardware|Integracja sprzętu
+Forschung paralleler Architektur|Parallel architecture research|Investigación de arquitectura paralela|Recherche d’architecture parallèle|Pesquisa de arquitetura paralela|Ricerca di architettura parallela|Badania architektury równoległej
+Hardware-Co-Design|Hardware co-design|Codiseño de hardware|Conception conjointe matérielle|Codesign de hardware|Co-progettazione hardware|Wspólne projektowanie sprzętu
+Modell-Compute|Model compute|Cómputo del modelo|Calcul du modèle|Computação do modelo|Calcolo del modello|Obliczenia modelu
+Axiom-Compute|Axiom compute|Cómputo de axiomas|Calcul des axiomes|Computação de axiomas|Calcolo degli assiomi|Obliczenia aksjomatów
+Nutzer aus Meilensteinen|Milestone users|Usuarios de hitos|Utilisateurs des jalons|Usuários de marcos|Utenti dei traguardi|Użytkownicy z kamieni milowych
+Nutzerskalierung|User scaling|Escalado de usuarios|Croissance des utilisateurs|Escala de usuários|Scalabilità utenti|Skalowanie użytkowników
+Modell-Nutzer|Model users|Usuarios del modelo|Utilisateurs du modèle|Usuários do modelo|Utenti del modello|Użytkownicy modelu
+Einnahmen pro Nutzer|Revenue per user|Ingresos por usuario|Revenu par utilisateur|Receita por usuário|Ricavi per utente|Przychód na użytkownika
+Items / Kombination|Items / combination|Objetos / combinación|Objets / combinaison|Itens / combinação|Oggetti / combinazione|Przedmioty / kombinacja
+Modellkern|Model core|Núcleo del modelo|Noyau du modèle|Núcleo do modelo|Nucleo del modello|Rdzeń modelu
+Speicher / Challenge|Memory / challenge|Memoria / desafío|Mémoire / défi|Memória / desafio|Memoria / sfida|Pamięć / wyzwanie
+INT-Einnahmenfaktor|INT credit factor|Factor de créditos INT|Facteur de crédits INT|Fator de créditos INT|Fattore di crediti INT|Mnożnik kredytów INT
+Axiom-Credits|Axiom credits|Créditos de axiomas|Crédits des axiomes|Créditos de axiomas|Crediti degli assiomi|Kredyty aksjomatów
+Modell-Einnahmen|Model revenue|Ingresos del modelo|Revenus du modèle|Receita do modelo|Ricavi del modello|Przychód modelu
+Netzwerkeffekte|Network effects|Efectos de red|Effets de réseau|Efeitos de rede|Effetti di rete|Efekty sieciowe
+Season-Artefakte|Season artifacts|Artefactos de temporada|Artefacts de saison|Artefatos de temporada|Artefatti stagionali|Artefakty sezonowe
+Altfaktor Credits|Legacy credits|Créditos heredados|Crédits hérités|Créditos legados|Crediti precedenti|Historyczne kredyty
+Bezahlter Einnahmenvorteil|Paid income|Ventaja de ingresos comprada|Avantage de revenus acheté|Vantagem de receita comprada|Vantaggio di ricavi acquistato|Zakupiona premia przychodu
+Daten-Skalierung / Items / Meilensteine|Data scale / items / milestones|Escala de datos / objetos / hitos|Échelle des données / objets / jalons|Escala de dados / itens / marcos|Scala dati / oggetti / traguardi|Skala danych / przedmioty / kamienie milowe
+Challenge-Daten|Challenge data|Datos del desafío|Données du défi|Dados do desafio|Dati della sfida|Dane wyzwania
+Modell-Daten|Model data|Datos del modelo|Données du modèle|Dados do modelo|Dati del modello|Dane modelu
+Altfaktor Daten|Legacy data|Datos heredados|Données héritées|Dados legados|Dati precedenti|Historyczne dane
+Gemeinsamer aktueller Durchbruchsfaktor|Current shared breakthrough factor|Factor común actual de avances|Facteur commun actuel des percées|Fator comum atual de avanços|Fattore comune attuale delle scoperte|Aktualny wspólny mnożnik przełomów
+Erhaltenes Klassenupgrade|Legacy class upgrade|Mejora de clase conservada|Amélioration de classe conservée|Melhoria de classe preservada|Potenziamento di classe conservato|Zachowane ulepszenie klasy
+Originaldatei unverändert exportieren|Export original file unchanged|Exportar archivo original sin cambios|Exporter le fichier original sans modification|Exportar arquivo original sem alterações|Esporta file originale invariato|Eksportuj oryginalny plik bez zmian
+Originalspielstand unlesbar · Recovery öffnen|Original save unreadable · open Recovery|Partida original ilegible · abrir Recovery|Sauvegarde originale illisible · ouvrir Recovery|Save original ilegível · abrir Recovery|Salvataggio originale illeggibile · apri Recovery|Oryginalny zapis nieczytelny · otwórz Recovery
+Herstellung / Schmiede abwarten|Wait for crafting / forge|Esperar fabricación / forja|Attendre fabrication / forge|Aguardar fabricação / forja|Attendi produzione / forgia|Czekaj na wytwarzanie / kuźnię
+Gesamtbudget Daten (leer = pausiert; bisher ausgegeben:|Total Data budget (empty = paused; spent so far:|Presupuesto total de datos (vacío = pausado; gastado:|Budget total de données (vide = en pause ; dépensé :|Orçamento total de dados (vazio = pausado; gasto:|Budget totale dati (vuoto = in pausa; speso:|Łączny budżet danych (puste = wstrzymane; wydano:

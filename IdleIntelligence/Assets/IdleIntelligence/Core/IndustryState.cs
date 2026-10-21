@@ -4,7 +4,7 @@ namespace IdleIntelligence.Core
 {
  [Serializable] public sealed class ForgeJob
  {
-  public string itemId;public int rarity,level,forge,target;public double done,required,data;public double[] components;
+  public string key,itemId;public int rarity,level,forge,target;public double done,required,data;public double[] components;
   public ForgeJob Copy(){var j=(ForgeJob)MemberwiseClone();j.components=(double[])components.Clone();return j;}
  }
  [Serializable] public sealed class FoundryState
@@ -33,7 +33,7 @@ namespace IdleIntelligence.Core
   public static string SynthesisBlock(GameState s,int component)
   {if(component<0||component>=ItemBalance.ComponentIds.Length)return "Unbekannt";int f=MaterialAnalysis.Family(component);return !MaterialAnalysis.Access(s,f)?"Materialfamilie gesperrt":s.Workshop.hasAnalysis||s.Industry.synthesis!=null?"Analyseplatz belegt":s.Data.CompareTo(ScientificNumber.From(AnalysisCost(s,IndustryBalance.SynthesisCosts[f])))<0?"Zu wenig Daten":null;}
   public static GameState Synthesize(GameState state,int component)
-  {var selected=MetaRules.Phase(state,2);if(SynthesisBlock(selected,component)!=null)return state;var s=selected.Copy();int f=MaterialAnalysis.Family(component);s.Data=s.Data.Subtract(ScientificNumber.From(AnalysisCost(s,IndustryBalance.SynthesisCosts[f])));s.Industry.hasSynthesis=true;s.Industry.synthesis=new Job{id=ItemBalance.ComponentIds[component],required=IndustryBalance.SynthesisWork[f]};s.Workshop.nextId++;s.Workshop.revision++;LocalJournal.Record(s,"synthesis-start",permanent:false);return s;}
+  {var selected=MetaRules.Phase(state,2);if(SynthesisBlock(selected,component)!=null)return state;var s=selected.Copy();int f=MaterialAnalysis.Family(component);s.Data=s.Data.Subtract(ScientificNumber.From(AnalysisCost(s,IndustryBalance.SynthesisCosts[f])));s.Industry.hasSynthesis=true;s.Industry.synthesis=new Job{key="synthesis-"+s.Workshop.nextId,id=ItemBalance.ComponentIds[component],required=IndustryBalance.SynthesisWork[f]};s.Workshop.nextId++;s.Workshop.revision++;LocalJournal.Record(s,"synthesis-start",permanent:false);return s;}
   public static CraftQuote ForgeQuote(GameState s,string id,int station=0)
   {
    var i=s.Workshop.inventory.FirstOrDefault(v=>v.id==id);var costs=new double[ItemBalance.ComponentIds.Length];var q=new CraftQuote{Components=costs,Revision=s.Workshop.revision};
@@ -47,7 +47,7 @@ namespace IdleIntelligence.Core
   public static double ForgeWork(GameState s,ItemInstance item,int station=0)
   {int level=s.Industry.foundries.Length>station?s.Industry.foundries[station].level:1;return Math.Max(IndustryBalance.ForgeMinimumSeconds,IndustryBalance.ForgeBaseSeconds*Math.Pow(IndustryBalance.ForgeDurationGrowth,item.forge)/(IndustryBalance.ForgeSpeeds[level-1]*(1+Math.Log(1+Workshop.Device(s,"recovery")))));}
   static GameState StartForge(GameState state,string id,int station)
-  {var q=ForgeQuote(state,id,station);if(!q.Allowed||state.Industry.foundries[station].active!=null)return state;var s=state.Copy();var item=s.Workshop.inventory.First(i=>i.id==id);s.Data=s.Data.Subtract(ScientificNumber.From(q.Data));for(int c=0;c<q.Components.Length;c++)s.Workshop.components[c]-=(long)q.Components[c];s.Industry.foundries[station].hasActive=true;s.Industry.foundries[station].active=new ForgeJob{itemId=id,rarity=item.rarity,level=item.level,forge=item.forge,target=item.forge+1,required=ForgeWork(s,item,station),components=q.Components,data=q.Data};s.Workshop.nextId++;s.Workshop.revision++;LocalJournal.Record(s,"forge-start",permanent:false);return s;}
+  {var q=ForgeQuote(state,id,station);if(!q.Allowed||state.Industry.foundries[station].active!=null)return state;var s=state.Copy();var item=s.Workshop.inventory.First(i=>i.id==id);s.Data=s.Data.Subtract(ScientificNumber.From(q.Data));for(int c=0;c<q.Components.Length;c++)s.Workshop.components[c]-=(long)q.Components[c];s.Industry.foundries[station].hasActive=true;s.Industry.foundries[station].active=new ForgeJob{key="forge-"+s.Workshop.nextId,itemId=id,rarity=item.rarity,level=item.level,forge=item.forge,target=item.forge+1,required=ForgeWork(s,item,station),components=q.Components,data=q.Data};s.Workshop.nextId++;s.Workshop.revision++;LocalJournal.Record(s,"forge-start",permanent:false);return s;}
   public static GameState QueueForge(GameState state,string id)
   {var i=state.Workshop.inventory.FirstOrDefault(v=>v.id==id);if(i==null||i.locked||i.challengeCopy||Busy(state,id)||i.forge>=IndustryBalance.ForgeItemLimit)return state;var s=state;if(s.Industry.foundries.Length==0){s=s.Copy();s.Industry.foundries=new[]{new FoundryState{level=1}};return StartForge(s,id,0);}var f=s.Industry.foundries[0];if(f.queue.Length>=2)return state;if(f.active==null)return StartForge(s,id,0);s=s.Copy();s.Industry.foundries[0].queue=f.queue.Concat(new[]{id}).ToArray();s.Workshop.revision++;return s;}
   public static GameState RemoveQueued(GameState state,string id)

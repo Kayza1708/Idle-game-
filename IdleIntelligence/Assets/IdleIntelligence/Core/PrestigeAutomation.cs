@@ -79,15 +79,18 @@ namespace IdleIntelligence.Core
             {var reserve=ProtectedCredits(s);var ordinary=n<2?s.Credits.Times(n==0&&s.Hardware.All(c=>c==0)?0:s.Prestige.reservePercent):ScientificNumber.Zero;if(ordinary.CompareTo(reserve)>0)reserve=ordinary;var cost=Game.HardwareCost(s,n);if(s.Credits.CompareTo(cost.Add(reserve))>=0)s=Game.Buy(s,Balance.Hardware[n].Id);}
             return s;
         }
+        public static string JobIdentity(Job j)=>string.IsNullOrEmpty(j?.key)?j?.id??"":j.key;
+        public static string AnalysisIdentity(GameState s)=>s.Workshop.hasAnalysis?(s.Workshop.analysis.key??"legacy-analysis"):s.Industry.synthesis!=null?JobIdentity(s.Industry.synthesis):"";
+        public static string ForgeIdentity(ForgeJob job)=>string.IsNullOrEmpty(job.key)?"legacy-forge:"+job.itemId+":"+job.target:job.key;
         public static GameState Agent(GameState state)
         {
             state=MetaAutomation.Rebuild(state);var p=state.Prestige;bool meta=state.Meta.axiomAuto&&MetaRules.Level(state,"B06")>0&&state.SavedAt-state.Meta.cycleStartedAt>=PrestigeRules.V("autoAxiomMinSeconds")*1000&&MetaRules.Reward(state).CompareTo(ScientificNumber.FromData(state.Meta.axiomMinimum))>=0;if(!p.resetIntent)
             {
-                var reward=PrestigeRules.Claim(state);var last=ScientificNumber.FromData(p.lastGain);var relative=p.relative>0&&!last.IsZero?last.Times(p.relative):ScientificNumber.From(p.agentMinimum);bool timeout=p.maximumRunSeconds>0&&state.SavedAt-state.Workshop.runStartedAt>=p.maximumRunSeconds*1000;
-                if(!meta&&(!PrestigeRules.Has(state,"I06")||!p.agent||state.SavedAt-state.Workshop.runStartedAt<p.agentMinutes*60000||reward.CompareTo(ScientificNumber.From(p.agentMinimum))<0||!timeout&&reward.CompareTo(relative)<0))return state;
-                state=state.Copy();p=state.Prestige;p.resetIntent=true;state.Meta.intentAxiom=meta;p.intentTraining=p.agentWaitTraining&&state.Training!=null;p.intentResearch=p.agentWaitResearch?ResearchJobs(state).Select(j=>j.id).ToArray():Array.Empty<string>();p.intentAnalysis=p.agentWaitAnalysis&&(state.Workshop.hasAnalysis||state.Industry.synthesis!=null);p.intentCrafting=p.agentWaitCrafting&&state.Workshop.hasModuleJob;
+                var reward=PrestigeRules.Claim(state);var last=ScientificNumber.FromData(p.lastGain);var relative=p.relative>0&&!last.IsZero?last.Times(p.relative):p.Minimum;bool timeout=p.maximumRunSeconds>0&&state.SavedAt-state.Workshop.runStartedAt>=p.maximumRunSeconds*1000;
+                if(!meta&&(!PrestigeRules.Has(state,"I06")||!p.agent||state.SavedAt-state.Workshop.runStartedAt<p.agentMinutes*60000||reward.CompareTo(p.Minimum)<0||!timeout&&reward.CompareTo(relative)<0))return state;
+                state=state.Copy();p=state.Prestige;p.resetIntent=true;state.Meta.intentAxiom=meta;p.intentTraining=p.agentWaitTraining&&state.Training!=null;p.intentResearch=p.agentWaitResearch?ResearchJobs(state).Select(JobIdentity).ToArray():Array.Empty<string>();p.intentAnalysis=p.agentWaitAnalysis&&(state.Workshop.hasAnalysis||state.Industry.synthesis!=null);p.intentCrafting=p.agentWaitCrafting&&state.Workshop.hasModuleJob;p.intentAnalysisKey=p.intentAnalysis?AnalysisIdentity(state):"";p.intentModuleKey=p.intentCrafting?JobIdentity(state.Workshop.moduleJob):"";p.intentForgeKeys=p.agentWaitCrafting?state.Industry.foundries.Where(f=>f.active!=null).Select(f=>ForgeIdentity(f.active)).ToArray():Array.Empty<string>();
             }
-            bool waiting=p.intentTraining&&state.Training!=null||p.intentAnalysis&&(state.Workshop.hasAnalysis||state.Industry.synthesis!=null)||p.intentCrafting&&state.Workshop.hasModuleJob||ResearchJobs(state).Any(j=>p.intentResearch.Contains(j.id));return waiting?state:state.Meta.intentAxiom?MetaRules.AxiomReset(state):PrestigeRules.Reset(state);
+            bool waiting=p.intentTraining&&state.Training!=null||p.intentAnalysis&&!string.IsNullOrEmpty(p.intentAnalysisKey)&&AnalysisIdentity(state)==p.intentAnalysisKey||p.intentCrafting&&state.Workshop.hasModuleJob&&JobIdentity(state.Workshop.moduleJob)==p.intentModuleKey||state.Industry.foundries.Any(f=>f.active!=null&&p.intentForgeKeys.Contains(ForgeIdentity(f.active)))||ResearchJobs(state).Any(j=>p.intentResearch.Contains(JobIdentity(j)));return waiting?state:state.Meta.intentAxiom?MetaRules.AxiomReset(state):PrestigeRules.Reset(state);
         }
     }
 }
