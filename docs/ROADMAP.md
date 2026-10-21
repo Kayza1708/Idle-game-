@@ -65,3 +65,10 @@ Die aktuelle Abnahme dieser Bereinigung wird in [cleanup-loading-names.md](clean
 Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Abschnitte 7/8 und die breite Schlussabnahme bleiben offen.
 
 - [x] Native Save-JSON-Struktur vor dem Serializer gegen unbekannte/doppelte Felder, falsche Typen und Zahlen prüfen; tatsächliche Originalerhaltung bei externer Dateiersetzung getestet. [Prüfgrenzen](unity-save-validation.md). Das schließt Abschnitt 8 nicht ab.
+
+### 21.10.2026 · verbundene Mira- und Speicher-Runtime
+
+- [x] Mira-/Kapitel-/Tutorial-Runtime mit Namenswahl, echten Ereignissen, Skip/Resume, gespeicherten Dialogen und tatsächlicher Zielnavigation; 84 zusätzliche verbundene Source-Schritte.
+- [x] Explizite Export-/Recoveryansicht, Offline-Webkonverter mit Originalerhalt, gemessene Rückkehrbelege und erste echte mehrfache Runhistorien; Nachweise und Grenzen in [unity-story-storage.md](unity-story-storage.md).
+- [x] Echter lokaler macOS-Universal-Player gebaut und auf Apple M4 mit isoliertem Save bedient/reloaded. Kein Ersatz für Mobilgeräte-/Storeabnahme.
+- [ ] Breite Schlussabnahme und restliche Verbraucher/Detailaktionen weiter anhand [unity-functional-remaining.md](unity-functional-remaining.md); keine Gesamtrewrite-Fertigmeldung.

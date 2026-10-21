@@ -11,7 +11,7 @@ namespace IdleIntelligence.Core
   }
   sealed class Parser
   {
-   readonly string source;int at,nodes;public Parser(string json){source=json??throw new FormatException("Missing JSON");if(source.Length>4*1024*1024)throw new FormatException("JSON too large");}
+   readonly string source;int at,nodes;public Parser(string json){source=json??throw new FormatException("Missing JSON");if(source.Length>32*1024*1024)throw new FormatException("JSON too large");}
    FormatException Error(string reason)=>new FormatException(reason+" at JSON offset "+at);
    void Space(){while(at<source.Length&&(source[at]==' '||source[at]=='\t'||source[at]=='\n'||source[at]=='\r'))at++;}
    bool Take(char c){Space();if(at<source.Length&&source[at]==c){at++;return true;}return false;}
@@ -21,8 +21,8 @@ namespace IdleIntelligence.Core
    public Value Document(){var value=Read();Space();if(at!=source.Length)throw Error("Trailing JSON content");return value;}
   }
   public static Value Parse(string json)=>new Parser(json).Document();
-  public static void Validate(string json,Type type,bool complete=false)=>Check(Parse(json),type,"$",complete);
-  static void Check(Value value,Type type,string path,bool complete)
+  public static void Validate(string json,Type type,bool complete=false,string[] optional=null)=>Check(Parse(json),type,"$",complete,optional);
+  static void Check(Value value,Type type,string path,bool complete,string[] optional)
   {
    if(value.Kind=="null"){if(type.IsValueType)throw new FormatException("Null value at "+path);return;}
    if(type==typeof(string)){if(value.Kind!="string")throw new FormatException("Expected text at "+path);return;}
@@ -35,12 +35,12 @@ namespace IdleIntelligence.Core
     decimal max=type==typeof(int)?int.MaxValue:type==typeof(uint)?uint.MaxValue:type==typeof(long)?long.MaxValue:type==typeof(ulong)?ulong.MaxValue:type==typeof(short)?short.MaxValue:type==typeof(byte)?byte.MaxValue:0;
     if(integer<min||integer>max)throw new FormatException("Integer overflow at "+path);return;
    }
-   if(type.IsArray){if(value.Kind!="array")throw new FormatException("Expected array at "+path);var element=type.GetElementType();for(int i=0;i<value.Items.Count;i++)Check(value.Items[i],element,path+"["+i+"]",complete);return;}
+   if(type.IsArray){if(value.Kind!="array")throw new FormatException("Expected array at "+path);var element=type.GetElementType();for(int i=0;i<value.Items.Count;i++)Check(value.Items[i],element,path+"["+i+"]",complete,optional);return;}
    if(value.Kind!="object")throw new FormatException("Expected object at "+path);
    var fields=type.GetFields(BindingFlags.Instance|BindingFlags.Public).Where(f=>!f.IsNotSerialized).ToDictionary(f=>f.Name,StringComparer.Ordinal);
-   foreach(var entry in value.Fields){if(!fields.TryGetValue(entry.Key,out var field))throw new NotSupportedException("Nicht unterstütztes Savefeld "+path+"."+entry.Key+"; Original bleibt erhalten.");Check(entry.Value,field.FieldType,path+"."+entry.Key,complete);}
+   foreach(var entry in value.Fields){if(!fields.TryGetValue(entry.Key,out var field))throw new NotSupportedException("Nicht unterstütztes Savefeld "+path+"."+entry.Key+"; Original bleibt erhalten.");Check(entry.Value,field.FieldType,path+"."+entry.Key,complete,optional);}
    // Unity encodes some inactive null classes as empty objects. Domain flags validate those.
-   if(complete&&value.Fields.Count>0)foreach(string key in fields.Keys)if(!value.Fields.ContainsKey(key))throw new FormatException("Missing save field "+path+"."+key);
+   if(complete&&value.Fields.Count>0)foreach(string key in fields.Keys)if(!value.Fields.ContainsKey(key)&&!(optional??Array.Empty<string>()).Contains(key)&&!(optional??Array.Empty<string>()).Contains(fields[key].DeclaringType.FullName+"."+key))throw new FormatException("Missing save field "+path+"."+key);
   }
  }
 }

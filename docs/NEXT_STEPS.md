@@ -34,3 +34,7 @@ Aktueller Arbeitsstand: Bereinigung, Startbildschirm und Namensfilter nach dem g
 - `node scripts/network-forge-audit.mjs`: echte App-Aktionen auf drei mobilen Browserbreiten mit finanzierten Testzuständen, Screenshots und kurzem Craft-/Fusionsclip.
 
 Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Abschnitte 7/8 und die breite Schlussabnahme bleiben offen.
+
+### Fortsetzung 21.10.2026
+
+Mira, Story-Saves und die neue Export-/Recovery-/Import-/Rückkehr-Runtime sind verbunden; [aktueller Bericht](unity-story-storage.md). Die historischen Aussagen „nur Storykatalog“ und „keine Recoveryoberfläche“ beschreiben frühere Zwischenstände. Jetzt die konkrete Restliste weiter abarbeiten: vollständige Text-/Detailanbindung, restliche Diagnosefelder/Ziele und tatsächliche UI-Verbraucher gegen Source prüfen, zusätzliche Queueaktionen und Referenzen abschließen, danach vollständige Regression und erneuter lokaler Playerbuild. Bestehende TypeScript-Version, Saveoriginale und lokale Backups erhalten. Keine Geräte-/Native-/SDK-Fertigmeldung aus dem Mac-Player ableiten.

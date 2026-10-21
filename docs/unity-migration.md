@@ -183,3 +183,9 @@ Der Befehl importiert/kompiliert, führt aber keine Spieltests und keinen Player
 ### Abschnitt 7 · überprüfter Zwischenstand
 
 [Einstellungen/Audio](unity-settings.md) mit Save-v16, tatsächlichen Kaufmengen und Original-Zahlenformaten ergänzt. Vollständige Story-/Tutorial-Runtime und durchgängige Sprachabdeckung bleiben offen; Kataloge und Menüs sind keine Gesamtabnahme. Speicher-/Diagnoseverträge bleiben Abschnitt 8.
+
+## Aktueller Abgleich 21.10.2026 · Story und Speicher
+
+Die historischen Teilberichte oben bleiben Nachweise ihres jeweiligen Zeitpunkts. Inzwischen sind Mira/38 Dialoge/fünf Kapitel mit echten Spielaktionen, Ereignissen, Intro-Migration und tatsächlichen Fokuszielen verbunden. Export, validierter expliziter Webtransfer mit vollständigen Originalen, bedienbare Recovery, Rückkehrbelege und gemessene mehrfache Runhistorien besitzen erreichbare Oberflächen. Beim neuen Codeabgleich ergänzte Legacyfaktoren, Trainingsboost und Scanner sowie der Schutz der Bauplan-Forschungsbelohnung haben tatsächliche Verbraucher. [Verträge und ausgeführte Prüfungen](unity-story-storage.md), [konkreter weiterlaufender Restumfang](unity-functional-remaining.md).
+
+Ein echter lokaler StandaloneOSX-Universal-Player wurde gebaut und auf Apple M4 mit isoliertem Save gespielt/reloaded. Das ist keine Mobilgeräteabnahme. Die breiten Zeilen bleiben bis zum konkreten Verbraucher-/Detail-/UI-Schlussabgleich offen; keine pauschale Gesamtabnahme aus einem vorhandenen Menü.

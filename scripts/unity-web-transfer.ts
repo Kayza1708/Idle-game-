@@ -1,0 +1,30 @@
+/** Offline compatibility adapter. All web validation and migration execute the original source. */
+import {unityBalanceHistory} from './unity-history-wire';
+import {restore,serialize} from '../src/storage';
+import {unitySettingsState} from './unity-settings-wire';
+import {type GameState} from '../src/economy';
+import {num} from './unity-prestige-wire';
+import {ScientificNumber as S} from '../src/scientificNumber';
+export const WEB_TRANSFER_FORMAT='idle-intelligence-web-transfer';
+export function convertWebSave(original:string,now:number){
+ if(!original.trim()||new TextEncoder().encode(original).length>4*1024*1024)throw Error('Web save is empty or exceeds 4 MiB.');
+ const parsed=JSON.parse(original);if(!Number.isInteger(parsed.version)||parsed.version<1||parsed.version>63)throw Error('Unsupported web version; original unchanged.');
+ const result=restore(original,now);if(result.error)throw Error(result.error);
+ const s=result.state;
+ function convert(s:GameState):any{
+  // These source contracts do not have a lossless native executor yet. Never truncate a batch.
+  if(s.progression.fusion||s.progression.resetIntent)throw Error("Unresolved legacy fusion or pending reset: finish or cancel it in the original game before importing.");
+  if(s.clockOffsetMs!==0)throw Error("Nonzero debug clock offset: no compatible native clock contract; original unchanged.");
+  if([s.crafting.active,...s.crafting.queue].some(j=>j&&(j.kind!=="module"||j.legacyTimed||j.fragmentContract)))throw Error("Unsupported legacy reservation: finish or cancel the job in the original game before importing.");
+  if(s.crafting.active&&(s.crafting.active.quantity??1)!==1||s.crafting.queue.some(j=>(j.quantity??1)!==1))throw Error('Active legacy crafting batch: finish or cancel it in the web game before importing.');
+  const d=unitySettingsState(s);d.legacy={licenses:s.progression.licenses,autobuyers:s.progression.legacyAutobuyers,cycle:Object.entries(s.progression.legacyCycle).map(([key,value])=>({key,value:num(S.fromJSON(value))})),permanent:Object.entries(s.progression.legacyPermanent).map(([key,value])=>({key,value:num(S.fromJSON(value))})),trainingBoostUntil:s.trainingBoostUntil,scannerTarget:s.scannerTarget===null?-1:["circuits","copperCoils","siliconWafers","titaniumBolts","photonicLenses","graphene","nanotubes","superconductors","neuralCrystals","quantumCores"].indexOf(s.scannerTarget),prepared:s.testSave};
+  const event=(e:GameState['telemetry']['recentEvents'][number])=>({at:e.at,run:e.run,axiom:s.axiomResetCount,type:e.type,job:e.jobId??'',context:e.context??'main',campaign:s.telemetry.campaignId,credits:num(e.resources.exactEconomy?S.fromJSON(e.resources.exactEconomy.credits):S.from(e.resources.credits)),data:num(e.resources.exactEconomy?S.fromJSON(e.resources.exactEconomy.data):S.from(e.resources.data)),compute:num(S.fromJSON(e.resources.scientificRates?.compute??{m:0,e:0})),users:num(S.fromJSON(e.resources.scientificRates?.users??{m:0,e:0})),income:num(S.fromJSON(e.resources.scientificRates?.credits??{m:0,e:0})),insight:num(S.zero()),gems:e.resources.gems});
+  if(s.activeTraining){d.training.startedAt=s.activeTraining.startedAt??0;d.training.startRecorded=s.activeTraining.startedAt!==null;}for(const j of [d.researchJob,...d.prestige.labs].filter(Boolean)){const source=s.researchLabs.find(x=>x?.jobId===j.key);j.startedAt=source?.startedAt??0;j.startRecorded=!!source;}if(d.workshop.hasAnalysis){d.workshop.analysis.startedAt=s.experiments.active?.startedAt??0;d.workshop.analysis.startRecorded=!!s.experiments.active;}
+  d.workshop.blueprintPending=s.blueprintResearchReward==="pending";d.storyRecorded=true;d.story={schema:1,initialized:true,legacyIntro:false,enabled:s.story.enabled!==false,...s.story,queue:s.story.queue??[],seen:s.story.seen??[],chapters:s.story.chapters??[]};
+  d.journal={schema:1,initialized:true,tapsRecorded:true,measuredTaps:s.telemetry.archivedMetrics.taps+s.telemetry.metrics.reduce((sum,m)=>sum+m.taps,0),historicalAvailable:s.telemetry.historicalDataAvailable,since:s.telemetry.campaignStartedAt??0,challengeEvents:(s.telemetry.challengeArchive?.events??[]).map(event),droppedChallengeEvents:s.telemetry.challengeArchive?.dropped??0,history:unityBalanceHistory(s),returns:[],dropped:s.telemetry.diagnostics.droppedEvents,recent:s.telemetry.recentEvents.map(event),permanent:s.telemetry.permanentEvents.map(event)};
+  d.returnReceipt={schema:1,initialized:true,hasReport:false,read:false,id:0,context:'main',from:0,through:0,elapsed:0,credited:0,discarded:0,credits:num(S.zero()),data:num(S.zero()),insight:num(S.zero()),availableCredits:num(S.zero()),availableData:num(S.zero()),training:0,research:0,analyses:0,crafted:0,prestiges:0,axioms:0,hardware:Array(15).fill(0)};
+  if(s.challengeSession)d.challengeMain=convert(s.challengeSession.main);
+  return d;
+ }
+ return {format:WEB_TRANSFER_FORMAT,version:1,sourceVersion:parsed.version,original,normalized:serialize(s),payload:JSON.stringify(convert(s)),notes:['The complete original and migrated web state are retained. Legacy-only fields are archived, not silently deleted.','Historical events retain their original data in normalized JSON; native event projections cannot reconstruct missing scientific rate snapshots.']};
+}

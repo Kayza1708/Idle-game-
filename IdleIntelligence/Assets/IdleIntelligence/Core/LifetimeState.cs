@@ -23,7 +23,7 @@ namespace IdleIntelligence.Core
     public static class Lifetime
     {
         public static void Components(GameState s,int component,long amount)
-        {
+        {if(s.AdvanceLog!=null)s.AdvanceLog.Components[component]+=amount;
             if(amount<=0)return;
             s.Lifetime.componentsEarned+=amount;
             s.Lifetime.discoveredComponents=s.Lifetime.discoveredComponents.Union(new[]{ItemBalance.ComponentIds[component]}).ToArray();

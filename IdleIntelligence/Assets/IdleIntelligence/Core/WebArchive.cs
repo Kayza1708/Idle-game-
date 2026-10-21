@@ -1,0 +1,4 @@
+using System;using System.Security.Cryptography;using System.Text;
+namespace IdleIntelligence.Core {
+ [Serializable]public sealed class WebArchive {public bool present;public int sourceVersion;public string original="",normalized="";public string[] notes=Array.Empty<string>();public WebArchive Copy()=>new WebArchive{present=present,sourceVersion=sourceVersion,original=original,normalized=normalized,notes=(string[])notes.Clone()};public static void Validate(WebArchive a){if(a==null||a.notes==null||a.present&&(a.sourceVersion<1||a.sourceVersion>63||string.IsNullOrEmpty(a.original)||string.IsNullOrEmpty(a.normalized)))throw new FormatException("Invalid preserved web originals");}public string Hash(){using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(original))).Replace("-","").ToLowerInvariant();}}
+}

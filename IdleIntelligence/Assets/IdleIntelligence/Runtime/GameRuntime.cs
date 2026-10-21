@@ -17,8 +17,8 @@ namespace IdleIntelligence.Runtime
         public ChallengeUI ChallengeView {get;private set;}public Transform Content;public ActionCard CardPrefab;public Sprite[] HardwareSprites;
         public GameState State {get;private set;}
         public bool Writable {get;private set;}
-        public string SavePath=>store?.PathName;
-        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;SeasonView seasonView;MarketView marketView;GemFeatureView gemView;NativeStoreView storeView;AdRewardView adView;SettingsView settingsView;public AppAudio Audio {get;private set;}
+        public string SavePath=>store?.PathName;public AtomicSaveStore Storage=>store;public bool HasReadableState{get;private set;}
+        AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;SeasonView seasonView;MarketView marketView;GemFeatureView gemView;NativeStoreView storeView;AdRewardView adView;SettingsView settingsView;StoryView storyView;StorageView storageView;public AppAudio Audio {get;private set;}
         GameObject queueControls;string queueSignature="";
         int rewardRequestFrame=-1;
         public bool AcquireRewardRequest(){if(rewardRequestFrame==Time.frameCount)return false;rewardRequestFrame=Time.frameCount;return true;}
@@ -27,13 +27,13 @@ namespace IdleIntelligence.Runtime
         void Start()
         {
             store=new AtomicSaveStore(SavePathOverride??Path.Combine(Application.persistentDataPath,"unity-slice-v1.json"),new UnitySaveCodec());
-            var loaded=store.Load(Now);Writable=loaded.Writable;State=loaded.State??Game.New(Now);message=loaded.Message??"Lokal gespeichert";
+            var loaded=store.Load(Now);Writable=loaded.Writable;HasReadableState=loaded.State!=null;State=loaded.State??Game.New(Now);message=loaded.Message??"Lokal gespeichert";
             double elapsed=Math.Max(0,(Now-State.SavedAt)/1000);var before=State.Credits;
-            if(Writable)State=Game.Advance(State,Now);
+            if(Writable)AdvanceOffline(Now);
             if(elapsed>10&&loaded.State!=null&&Writable)message="Willkommen zurück: +"+State.Credits.Subtract(before)+" Credits (Offline-Limit berücksichtigt)";
-            Audio=gameObject.AddComponent<AppAudio>();Audio.Initialize(this);TapButton.transform.parent.gameObject.AddComponent<SignalView>().Initialize(this);TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt)));
-            HardwareTab.onClick.AddListener(()=>Show("hardware"));TrainingTab.onClick.AddListener(()=>Show("training"));ResearchTab.onClick.AddListener(()=>Show("research"));SaveButton.onClick.AddListener(()=>{Tick();Save();Refresh();});
-            ItemsTab.onClick.AddListener(()=>Show("items"));PrestigeTab.onClick.AddListener(()=>Show("prestige"));started=true;Show(tab);Save();Refresh();
+            Audio=gameObject.AddComponent<AppAudio>();Audio.Initialize(this);TapButton.transform.parent.gameObject.AddComponent<SignalView>().Initialize(this);TapButton.onClick.AddListener(()=>Act(s=>Game.Tap(s,s.SavedAt),"tap"));
+            HardwareTab.onClick.AddListener(()=>UserShow("hardware"));TrainingTab.onClick.AddListener(()=>UserShow("training"));ResearchTab.onClick.AddListener(()=>UserShow("research"));SaveButton.onClick.AddListener(()=>{Tick();Save();Refresh();});
+            ItemsTab.onClick.AddListener(()=>UserShow("items"));PrestigeTab.onClick.AddListener(()=>UserShow("prestige"));var hintButton=Hint.gameObject.AddComponent<Button>();Hint.raycastTarget=true;hintButton.onClick.AddListener(()=>UserShow("story"));started=true;Show(tab);Save();Refresh();
         }
         void Update()
         {
@@ -42,10 +42,13 @@ namespace IdleIntelligence.Runtime
             if(Time.unscaledTime>=nextRefresh){Tick();Refresh();nextRefresh=Time.unscaledTime+.1f;}
             if(Time.unscaledTime>=nextSave){Save();nextSave=Time.unscaledTime+5;}
         }
-        void Tick(bool active=true){if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;int ledger=State.Retention.ledger.Length;State=Game.Advance(State,Now,active&&!paused&&focused);if(State.Prestige.resets!=resets||State.Meta.resets!=axioms||State.Retention.ledger.Length!=ledger){Save();if(!Writable)State=before;}if(Writable&&active&&!paused&&focused)Audio?.Feedback("foreground-tick",before,State);}}
+        void LateUpdate(){if(State==null)return;foreach(var text in Content.GetComponentInParent<Canvas>().GetComponentsInChildren<Text>(true))if(text.GetComponent<UiLocalizedText>()==null)text.gameObject.AddComponent<UiLocalizedText>().Initialize(this);}
+        void Tick(bool active=true){if(!active){if(Writable)AdvanceOffline(Now);return;}if(Writable){var before=State;long resets=State.Prestige.resets,axioms=State.Meta.resets;int ledger=State.Retention.ledger.Length;State=NarrativeBridge.Sync(State,Game.Advance(State,Now,active&&!paused&&focused));if(State.Prestige.resets!=resets||State.Meta.resets!=axioms||State.Retention.ledger.Length!=ledger){Save();if(!Writable)State=before;}if(Writable&&active&&!paused&&focused)Audio?.Feedback("foreground-tick",before,State);}}
+        void AdvanceOffline(double now){var before=State;var measured=Game.AdvanceMeasured(before,now);var capture=measured.Report;var next=NarrativeBridge.Sync(before,measured.State);if(ReferenceEquals(next,before))return;ReturnReceipt.Attach(before,next,capture);try{store.Save(next);State=next;HasReadableState=true;}catch(Exception e){Writable=false;State=before;message="Speichern gesperrt: "+e.Message;Debug.LogWarning(message);}}
+        public void RecoverSave(string source,string hash){WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();ModelsView?.Cancel();State=store.Recover(source,hash);Writable=HasReadableState=true;AdvanceOffline(Now);Show("storage");Refresh();}
         public bool Act(Func<GameState,GameState> action,string actionName="action")
         {
-            if(!Writable)return false;Audio?.Unlock();Tick();if(!Writable){Refresh();return false;}var before=State;State=action(State);
+            if(!Writable)return false;Audio?.Unlock();Tick();if(!Writable){Refresh();return false;}var before=State;State=NarrativeBridge.Sync(before,action(State));
             if(!ReferenceEquals(before,State)) {message="Aktion gespeichert";Save();if(!Writable)State=before;}if(Writable)Audio?.Feedback(actionName,before,State);Refresh();return !ReferenceEquals(before,State)&&Writable;
         }
         void Save()
@@ -61,8 +64,11 @@ namespace IdleIntelligence.Runtime
         void OnApplicationFocus(bool focused){if(!started)return;if(focused){Tick(false);this.focused=true;Save();Refresh();}else{WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();ModelsView?.Cancel();Tick();this.focused=false;Save();}}
         void OnApplicationQuit(){Tick();Save();}
         void OnDestroy(){if(started){Tick();Save();}}
-        void Show(string selected)
+        public void UserShow(string selected){Audio?.Unlock();Audio?.Play("ui-click");Show(selected);}
+        public void Show(string selected)
         {
+            if(storageView!=null){storageView.gameObject.SetActive(false);Destroy(storageView.gameObject);storageView=null;}var oldStorage=Content.Find("StorageAccess");if(oldStorage!=null){oldStorage.gameObject.SetActive(false);Destroy(oldStorage.gameObject);}
+            if(storyView!=null){storyView.gameObject.SetActive(false);Destroy(storyView.gameObject);storyView=null;}var oldStory=Content.Find("StoryAccess");if(oldStory!=null){oldStory.gameObject.SetActive(false);Destroy(oldStory.gameObject);}
             if(settingsView!=null){settingsView.gameObject.SetActive(false);Destroy(settingsView.gameObject);settingsView=null;}var oldSettings=Content.Find("SettingsAccess");if(oldSettings!=null){oldSettings.gameObject.SetActive(false);Destroy(oldSettings.gameObject);}
             if(adView!=null){adView.gameObject.SetActive(false);Destroy(adView.gameObject);adView=null;}var oldAds=Content.Find("AdAccess");if(oldAds!=null){oldAds.gameObject.SetActive(false);Destroy(oldAds.gameObject);}
             if(storeView!=null){storeView.gameObject.SetActive(false);Destroy(storeView.gameObject);storeView=null;}var oldStore=Content.Find("StoreAccess");if(oldStore!=null){oldStore.gameObject.SetActive(false);Destroy(oldStore.gameObject);}
@@ -76,9 +82,11 @@ namespace IdleIntelligence.Runtime
             if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);queueControls=null;}queueSignature="";
             if(ModelsView!=null){ModelsView.Cancel();Destroy(ModelsView.gameObject);ModelsView=null;}if(PrestigeView!=null){PrestigeView.Cancel();Destroy(PrestigeView.gameObject);PrestigeView=null;}if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             var oldChallenge=Content.Find("ChallengesAccess");if(oldChallenge!=null){oldChallenge.gameObject.SetActive(false);Destroy(oldChallenge.gameObject);}var oldLab=Content.Find("SecretLab");if(oldLab!=null){oldLab.gameObject.SetActive(false);Destroy(oldLab.gameObject);}tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
-            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="missions"||tab=="seasons"||tab=="market"||tab=="gems"||tab=="store"||tab=="ads"||tab=="settings";
+            bool workshop=tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="missions"||tab=="seasons"||tab=="market"||tab=="gems"||tab=="store"||tab=="ads"||tab=="settings"||tab=="story"||tab=="storage";
             foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
             Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(tab=="storage"){storageView=WorkshopUIFactory.Vertical("Storage",Content).AddComponent<StorageView>();storageView.Initialize(this);Refresh();return;}
+            if(tab=="story"){storyView=WorkshopUIFactory.Vertical("MiraStory",Content).AddComponent<StoryView>();storyView.Initialize(this);Refresh();return;}
             if(tab=="settings"){settingsView=WorkshopUIFactory.Vertical("Settings",Content).AddComponent<SettingsView>();settingsView.Initialize(this);Refresh();return;}
             if(tab=="ads"){adView=WorkshopUIFactory.Vertical("AdRewards",Content).AddComponent<AdRewardView>();adView.Initialize(this);Refresh();return;}
             if(tab=="store"){storeView=WorkshopUIFactory.Vertical("NativeStore",Content).AddComponent<NativeStoreView>();storeView.Initialize(this);Refresh();return;}
@@ -90,7 +98,7 @@ namespace IdleIntelligence.Runtime
             if(tab=="progress"){lifetimeView=WorkshopUIFactory.Vertical("Lifetime",Content).AddComponent<LifetimeView>();lifetimeView.Initialize(this);Refresh();return;}
             if(tab=="challenges"){ChallengeView=WorkshopUIFactory.Vertical("Challenges",Content).AddComponent<ChallengeUI>();ChallengeView.Initialize(this);Refresh();return;}
             if(tab=="models"){ModelsView=Instantiate(ModelPrefab,Content);ModelsView.Initialize(this);Refresh();return;}
-            if(tab=="research"){WorkshopUIFactory.Button("SettingsAccess",Content,SettingsRules.Text(State.Settings.language,"ui:settings"),()=>Show("settings"));WorkshopUIFactory.Button("AdAccess",Content,"Belohnungen / Forschung sofort abschließen",()=>Show("ads"));WorkshopUIFactory.Button("StoreAccess",Content,"Pakete & Vorteile · Store nicht verfügbar",()=>Show("store"));WorkshopUIFactory.Button("GemAccess",Content,"Gems · Upgrades / Zeit / Gumball",()=>Show("gems"));WorkshopUIFactory.Button("MarketAccess",Content,"Markt · Angebote / Materialien / Truhen",()=>Show("market"));WorkshopUIFactory.Button("SeasonAccess",Content,"Seasons · Belohnungen und Truhen",()=>Show("seasons"));WorkshopUIFactory.Button("MissionsAccess",Content,"Missionen · Tages-/Wochen-/Monatsziele",()=>Show("missions"));WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>Show("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>Show("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>Show("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>Show("models"));lab.interactable=Writable&&State.Prestige.lab;}
+            if(tab=="research"){WorkshopUIFactory.Button("StorageAccess",Content,"Saves / Recovery / Reports",()=>UserShow("storage"));WorkshopUIFactory.Button("StoryAccess",Content,"Mira · "+(State.Story.open??State.Story.target??"Dialoge / Kapitel"),()=>UserShow("story"));WorkshopUIFactory.Button("SettingsAccess",Content,SettingsRules.Text(State.Settings.language,"ui:settings"),()=>UserShow("settings"));WorkshopUIFactory.Button("AdAccess",Content,"Belohnungen / Forschung sofort abschließen",()=>UserShow("ads"));WorkshopUIFactory.Button("StoreAccess",Content,"Pakete & Vorteile · Store nicht verfügbar",()=>UserShow("store"));WorkshopUIFactory.Button("GemAccess",Content,"Gems · Upgrades / Zeit / Gumball",()=>UserShow("gems"));WorkshopUIFactory.Button("MarketAccess",Content,"Markt · Angebote / Materialien / Truhen",()=>UserShow("market"));WorkshopUIFactory.Button("SeasonAccess",Content,"Seasons · Belohnungen und Truhen",()=>UserShow("seasons"));WorkshopUIFactory.Button("MissionsAccess",Content,"Missionen · Tages-/Wochen-/Monatsziele",()=>UserShow("missions"));WorkshopUIFactory.Button("ProfileAccess",Content,"Profil · Achievements / Laborziele / Post",()=>UserShow("profile"));WorkshopUIFactory.Button("ProgressAccess",Content,"Dauerhafter Fortschritt · Statistik / Mastery",()=>UserShow("progress"));WorkshopUIFactory.Button("ChallengesAccess",Content,ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen",()=>UserShow("challenges"));var lab=WorkshopUIFactory.Button("SecretLab",Content,State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · ab "+PrestigeRules.V("labThreshold")+" Gesamt-INT",()=>UserShow("models"));lab.interactable=Writable&&State.Prestige.lab;}
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
@@ -102,6 +110,8 @@ namespace IdleIntelligence.Runtime
             }
             Refresh();
         }
+        public void NavigateTo(string selected,string element,string mode=""){Show(selected);if(WorkshopView!=null&&mode.Length>0)WorkshopView.ChangeMode(mode);StartCoroutine(FocusTarget(element));}
+        System.Collections.IEnumerator FocusTarget(string name){yield return null;Canvas.ForceUpdateCanvases();var target=GameObject.Find(name);if(target==null)yield break;var selectable=target.GetComponentInChildren<Selectable>();if(selectable!=null&&UnityEngine.EventSystems.EventSystem.current!=null)UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(selectable.gameObject);if(target.transform.IsChildOf(Content)){var scroll=Content.GetComponentInParent<ScrollRect>();var rect=(RectTransform)Content;var bounds=RectTransformUtility.CalculateRelativeRectTransformBounds(rect,(RectTransform)target.transform);float range=rect.rect.height-scroll.viewport.rect.height;if(range>0)scroll.verticalNormalizedPosition=1-Mathf.Clamp01(-bounds.max.y/range);}}
         void RefreshQueues()
         {
             if(tab!="training"&&tab!="research")return;string signature=tab+string.Join(",",State.Prestige.trainingQueue.Select(j=>j.track+":"+j.level))+string.Join(",",State.Prestige.researchQueue);if(signature==queueSignature)return;queueSignature=signature;if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);}queueControls=WorkshopUIFactory.Vertical("UnpaidQueues",Content);
@@ -115,8 +125,8 @@ namespace IdleIntelligence.Runtime
             string language=State.Settings.language,format=State.Settings.numberFormat;Credits.text=SettingsRules.Text(language,"workshop:credits")+"\n"+NumberFormatting.Format(State.Credits,format)+"  (+"+NumberFormatting.Format(Game.Income(State),format)+"/s)";
             Compute.text=SettingsRules.Text(language,"workshop:compute")+"\n"+NumberFormatting.Format(Game.Compute(State),format);Users.text=SettingsRules.Text(language,"workshop:users")+"\n"+NumberFormatting.Format(Game.Users(State),format);Data.text=SettingsRules.Text(language,"workshop:data")+"\n"+NumberFormatting.Format(State.Data,format)+" (+"+NumberFormatting.Format(Game.DataRate(State),format)+"/s)";
             Overdrive.text=State.ActiveUntil>State.SavedAt?"OVERDRIVE ×"+Game.OverdriveFactor(State)+" · "+Seconds((State.ActiveUntil-State.SavedAt)/1000):"OVERDRIVE  "+State.Charge+" / "+Balance.OverdriveCharge+(State.CooldownUntil>State.SavedAt?" · Pause "+Seconds((State.CooldownUntil-State.SavedAt)/1000):"");
-            if(!Writable)foreach(var control in Content.GetComponentsInChildren<Button>())control.interactable=false;Status.text=(ChallengeRules.Active(State)?"CHALLENGE · Hauptspiel pausiert · ":"")+(Writable?"● ":"! ")+message;Status.color=Writable?new Color(.65f,.9f,.8f):new Color(1,.65f,.55f);
-            Hint.text=State.Meta.tutorial=="lab"?"Mira: Geheimes Labor freigeschaltet! Öffne Forschung → KI-Modelle.":State.Prestige.resets>0?"INT verstärkt die Produktion. Knoten und Automation im INT-Netz.":State.Tutorial=="tap"?"Tippe auf das Labor und kaufe deinen ersten Rechner.":State.Tutorial=="training"?"Training: erstes Qualitätstraining kostenlos.":State.Tutorial=="research"?"Forschung: erste Datenerzeugung kostenlos.":"Hardware liefert Compute → Nutzer → Credits und Daten.";
+            if(!Writable&&tab!="storage"){foreach(var control in Content.GetComponentsInChildren<Button>())control.interactable=false;var recovery=Content.Find("StorageAccess")?.GetComponent<Button>();if(recovery!=null)recovery.interactable=true;}Status.text=(State.Legacy.prepared?"PREPARED TEST SAVE · ":"")+(ChallengeRules.Active(State)?"CHALLENGE · Hauptspiel pausiert · ":"")+(Writable?"● ":"! ")+message;Status.color=Writable?new Color(.65f,.9f,.8f):new Color(1,.65f,.55f);
+            Hint.text=State.Story.open!=null?"Mira · "+(State.Settings.language=="de"?"Dialog öffnen":"Open dialogue"):State.Story.target=="name"?"Mira · "+(State.Settings.language=="de"?"KI benennen · hier öffnen":"Name your AI · open here"):State.Meta.tutorial=="lab"?"Mira: Geheimes Labor freigeschaltet! Öffne Forschung → KI-Modelle.":State.Prestige.resets>0?"INT verstärkt die Produktion. Knoten und Automation im INT-Netz.":State.Tutorial=="tap"?"Tippe auf das Labor und kaufe deinen ersten Rechner.":State.Tutorial=="training"?"Training: erstes Qualitätstraining kostenlos.":State.Tutorial=="research"?"Forschung: erste Datenerzeugung kostenlos.":"Hardware liefert Compute → Nutzer → Credits und Daten.";
             TapButton.interactable=Writable&&!ChallengeRules.Is(State,"no-taps");SaveButton.interactable=Writable;
             HardwareTab.GetComponentInChildren<Text>().color=tab=="hardware"?Color.white:new Color(.65f,.75f,.8f);TrainingTab.GetComponentInChildren<Text>().color=tab=="training"?Color.white:new Color(.65f,.75f,.8f);ResearchTab.GetComponentInChildren<Text>().color=tab=="research"?Color.white:new Color(.65f,.75f,.8f);
             for(int i=0;i<cards.Count;i++)
