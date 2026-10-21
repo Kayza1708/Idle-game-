@@ -8,7 +8,7 @@ Forschung/Industrie, isolierte V2-Challenges, Statistiken/Mastery, Achievements/
 
 1. Abschnitt 5c ist ergänzt: [Gumball und Gem-Angebote](unity-gems.md) mit tatsächlichen Boost-/Upgradeverbrauchern. Legacy-/Webimport bleibt Abschnitt 8. [Markt/Truhen/Rotation](unity-market.md) sind als 5b bereits portiert. [Aktive Drops](unity-signals.md) samt Missionsproduzenten sind als 5a bereits implementiert und geprüft.
 2. Abschnitt 6b ist ergänzt: [Werbe-/Forschungsskipverträge](unity-ads.md), Limits, gespeicherte Aufträge, Creditboost und echte Werbefrei-Verbraucher. [Vorbereitete Kaufverträge 6a](unity-purchases.md) mit Restore/Widerruf, dauerhaften Rechten und Save-v14-Erhaltung sind ergänzt. Keine SDKs oder vorgetäuschten Käufe.
-3. Abschnitt 7: vollständige Kapitel/Mira/Tutorial, sieben Sprachen, alle Einstellungen, vorhandenes Audio und unterstützte Haptik. Namenspolicy und erster Profil-/KI-Name sind bereits portiert.
+3. Abschnitt 7 in Arbeit: [dauerhafte Einstellungen, Zahlenformate, Kaufmengen und Audioassets](unity-settings.md) geprüft. Vollständige Kapitel/Mira/Tutorial-Runtime, Ereignisbelege und durchgängige Verwendung der sieben Originaltextkataloge bleiben offen. Haptikpräferenz vorhanden, native Patternanbindung unverfügbar.
 4. Abschnitt 8: expliziter validierter Webimport mit Originalkopie und Erhaltung unbekannter Daten, Export/Recovery, Rückkehr-/Diagnose-/Balanceberichte und restliche Speicherverträge.
 5. Danach gemeinsamer optischer Feinschliff und tatsächliche Geräte-/Player-/Releaseprüfung. TypeScript und Backups erhalten; nichts mergen oder veröffentlichen.
 
@@ -32,3 +32,5 @@ Aktueller Arbeitsstand: Bereinigung, Startbildschirm und Namensfilter nach dem g
 - `src/moderation/blockedTerms.json` und `reservedNames.json`: gepflegte Listen, Quellen/Lizenz in `NOTICE.md` und in den App-Einstellungen. Keine automatische, ungeprüfte Aktualisierung aus dem Internet.
 
 - `node scripts/network-forge-audit.mjs`: echte App-Aktionen auf drei mobilen Browserbreiten mit finanzierten Testzuständen, Screenshots und kurzem Craft-/Fusionsclip.
+
+Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Abschnitte 7/8 und die breite Schlussabnahme bleiben offen.

@@ -25,6 +25,7 @@
 - [x] Gumball und alle 17 Gem-Angebote mit echten Zusatzlaboren/Offlinekapazitäten/Laborbonus, proportionalen Modul-/Trainingsverkürzungen und Save-v13-Erhaltung portiert; [Teilabschnitt 5c](unity-gems.md).
 - [x] Vorbereitete Kaufverträge mit zwölf Originalprodukten, Restore/Widerruf, echten Einnahmen-/Tap-Verbrauchern und dauerhaftem Save vor Storeabschluss portiert; Produktionsadapter unverfügbar, keine echten Käufe. [Teilabschnitt 6a](unity-purchases.md).
 - [x] Werbe-/Forschungsskipverträge mit Limits/Cooldowns, gespeicherten Aufträgen, echten Werbefrei-/Creditboostverbrauchern und Save-v15-Erhaltung portiert; [Abschnitt 6b](unity-ads.md). Produktionsanbieter unverfügbar.
+- [x] Einstellungen, Kaufmengen und Original-Zahlenformate mit Save-v16-Migration sowie vorhandene Unity-Audioclips geprüft; [Teilumfang und offene Story-/Sprachabdeckung](unity-settings.md). Abschnitt 7 bleibt offen.
 - [ ] Funktionale Folgeabschnitte laut [Abnahmeliste](unity-functional-acceptance.md): übrige Commerce-/Werbeadapter, vollständige Kapitel/Mira/Sprachen/Einstellungen und Speicher-/Diagnoseverträge. Fehlende spätere Verbraucher bleiben ausdrücklich offen.
 - [ ] Player-Build und echte mobile Geräteabnahme durchführen; bisher sind Editor-PlayMode und gerenderte mobile Profile geprüft.
 
@@ -60,3 +61,7 @@ Die aktuelle Abnahme dieser Bereinigung wird in [cleanup-loading-names.md](clean
 
 - [ ] Serverseitige, versionsgleiche Namensprüfung, Moderation, Meldung und Einspruch ergänzen. Die lokale Wortliste ist keine vollständige Bedeutungs- oder Personenprüfung.
 - [ ] Authentifizierung, manipulationssichere Ranglisten und Clanrechte separat entwickeln und prüfen.
+
+Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining.md), [Schutz vor ignorierten Savefeldern](unity-save-validation.md). Abschnitte 7/8 und die breite Schlussabnahme bleiben offen.
+
+- [x] Native Save-JSON-Struktur vor dem Serializer gegen unbekannte/doppelte Felder, falsche Typen und Zahlen prüfen; tatsächliche Originalerhaltung bei externer Dateiersetzung getestet. [Prüfgrenzen](unity-save-validation.md). Das schließt Abschnitt 8 nicht ab.
