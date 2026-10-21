@@ -84,3 +84,11 @@ Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining
 - 21.10.2026: zusätzlicher abschließender Parameterabgleich ergänzt wissenschaftlich exakte Agent-Mindestziele (Save v21), leere/pausierende Direktorbudgets, unveränderte Präzisionsfelder und konkrete Reset-Jobbindungen einschließlich Schmiede. 13 zusätzliche Original-Konfigurations-/Agentfälle, erste gezielte EditMode-Prüfungen 15/15. Abschließender aktueller Player-/Regressionstest folgt.
 
 - 21.10.2026: Aktueller Code `86559ea8` vollständig geprüft: 128/128 EditMode, 55/55 PlayMode, 1.886/143 Vitest, Typecheck/Sourcecheck/Web-Build. Neuer StandaloneOSX-Universal-Player erfolgreich, echter isolierter M4-Playerlauf bei 390×844 samt Reload bestanden. Funktionaler V2-Abgleich abgeschlossen innerhalb der ausgewiesenen Source-/Altimportgrenzen; Native/Geräte/Optik bleiben eigene Folgeabnahmen. Siehe `unity-functional-verification.json`.
+
+### Optische Überarbeitung · erster Abschnitt
+
+- [x] uGUI-Grundlage mit Originalgrafiken/-fonts, kompakter Ressourcenleiste, permanenter unterer Navigation, Labor/Modell/Training/Hardware sowie gemeinsamer Item-/Kostendarstellung umgesetzt.
+- [x] Vorherbilder und tatsächliche DE-/EN-Unity-Renderbilder bei 320/390/430 px geprüft und korrigiert; echte Ausrüstung mit Reload, Tap/Overdrive und reduzierte Bewegung geprüft. Nachweis: `unity-design-01.md`.
+- [ ] Übrige Bildschirme einzeln gestalten; native Geräte-/Schrift-/Notch-/Touchabnahme bleibt offen. Keine Balanceänderung, kein Merge/Release.
+
+Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschließender Detail-Nachtest 1/1 (zwölf Sourcefälle), Vitest 1.886/143; Typecheck/Sourcecheck/Web-Build erfolgreich. 23 echte Unity-Bilder und zeitprotokollierter Clip versioniert. Keine native Gerätefreigabe.

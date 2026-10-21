@@ -256,3 +256,11 @@ Originaldatei unverändert exportieren|Export original file unchanged|Exportar a
 Originalspielstand unlesbar · Recovery öffnen|Original save unreadable · open Recovery|Partida original ilegible · abrir Recovery|Sauvegarde originale illisible · ouvrir Recovery|Save original ilegível · abrir Recovery|Salvataggio originale illeggibile · apri Recovery|Oryginalny zapis nieczytelny · otwórz Recovery
 Herstellung / Schmiede abwarten|Wait for crafting / forge|Esperar fabricación / forja|Attendre fabrication / forge|Aguardar fabricação / forja|Attendi produzione / forgia|Czekaj na wytwarzanie / kuźnię
 Gesamtbudget Daten (leer = pausiert; bisher ausgegeben:|Total Data budget (empty = paused; spent so far:|Presupuesto total de datos (vacío = pausado; gastado:|Budget total de données (vide = en pause ; dépensé :|Orçamento total de dados (vazio = pausado; gasto:|Budget totale dati (vuoto = in pausa; speso:|Łączny budżet danych (puste = wstrzymane; wydano:
+Leer|Empty|Vacío|Vide|Vazio|Vuoto|Puste
+Bewegung an|Motion on|Movimiento activado|Mouvement activé|Movimento ligado|Movimento attivo|Ruch włączony
+Bewegung aus|Motion off|Movimiento desactivado|Mouvement désactivé|Movimento desligado|Movimento disattivato|Ruch wyłączony
+Basismodell|Base model|Modelo base|Modèle de base|Modelo base|Modello base|Model bazowy
+Prozessorsockel|Processor socket|Ranura de procesador|Emplacement processeur|Espaço de processador|Slot processore|Gniazdo procesora
+Kernsockel|Core socket|Ranura de núcleo|Emplacement noyau|Espaço de núcleo|Slot nucleo|Gniazdo rdzenia
+Forschungssockel|Research socket|Ranura de investigación|Emplacement recherche|Espaço de pesquisa|Slot ricerca|Gniazdo badań
+Universalsockel|Universal socket|Ranura universal|Emplacement universel|Espaço universal|Slot universale|Gniazdo uniwersalne

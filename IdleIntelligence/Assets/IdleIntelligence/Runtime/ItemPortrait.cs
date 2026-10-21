@@ -6,6 +6,8 @@ namespace IdleIntelligence.Runtime
     public sealed class ItemPortrait:MonoBehaviour
     {
         public Image Art;public ShapeFrame Frame;public Text Caption;public Button Button;
+        void OnRectTransformDimensionsChange(){if(Art!=null&&Frame!=null&&Caption!=null)Bind(Item,Frame.Shape,Item==null?Caption.text:"");}
+        public static string SlotName(string slot,string language){string name=slot.StartsWith("processor")?"Prozessorsockel":slot.StartsWith("core")?"Kernsockel":slot.StartsWith("research")?"Forschungssockel":"Universalsockel";return UiLocalizedText.Translate(name,language)+(slot.EndsWith("Aux")||slot=="universal2"?" II":slot=="universal1"?" I":"");}
         public static Sprite[] Sprites;public ItemInstance Item {get;private set;}
         public static Color RarityColor(int rarity){ColorUtility.TryParseHtmlString(ItemBalance.RarityColors[Mathf.Clamp(rarity,0,5)],out var c);return c;}
         public void Bind(ItemInstance item,string family=null,string empty="")
@@ -13,7 +15,7 @@ namespace IdleIntelligence.Runtime
             Item=item?.Copy();string shape=family??(item!=null?Workshop.Definition(item).Family:"research");Frame.Shape=shape;Frame.color=item!=null?RarityColor(item.rarity):new Color(.3f,.45f,.52f);Frame.SetVerticesDirty();
             Art.gameObject.SetActive(item!=null);Caption.text=item==null?empty:"Lv. "+item.level+(item.locked?" · ◆":"");
             if(item!=null){Art.sprite=Sprites[Workshop.Index(item.type)];Art.preserveAspect=true;Art.useSpriteMesh=true;}
-            var r=Art.rectTransform;r.anchorMin=r.anchorMax=new Vector2(.5f,shape=="core"?.40f:.52f);r.pivot=new Vector2(.5f,.5f);float size=((RectTransform)transform).rect.width*(shape=="core"?.49f:.66f);r.sizeDelta=new Vector2(size,size);r.anchoredPosition=Vector2.zero;
+            var r=Art.rectTransform;Frame.rectTransform.anchorMin=new Vector2(0,.17f);Frame.rectTransform.anchorMax=Vector2.one;Frame.rectTransform.offsetMin=Frame.rectTransform.offsetMax=Vector2.zero;r.anchorMin=r.anchorMax=new Vector2(.5f,.585f);r.pivot=new Vector2(.5f,.5f);float size=Mathf.Min(((RectTransform)transform).rect.width,((RectTransform)transform).rect.height*.83f)*(shape=="core"?.52f:.76f);r.sizeDelta=new Vector2(size,size);r.anchoredPosition=Vector2.zero;if(item!=null){var bounds=Art.sprite.bounds;var draw=new Vector2(size,size);float aspect=Art.sprite.rect.width/Art.sprite.rect.height;if(aspect>1)draw.y/=aspect;else draw.x*=aspect;r.anchoredPosition=-new Vector2(bounds.center.x/bounds.size.x*draw.x,bounds.center.y/bounds.size.y*draw.y);}
         }
     }
 }
