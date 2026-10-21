@@ -104,7 +104,7 @@ namespace IdleIntelligence.Core
             if(slot<0||!candidates.Contains(slot)||w.inventory.Any(i=>i.type==item.type&&i.id!=w.equipped[slot]&&w.equipped.Contains(i.id)))return null;return ItemBalance.Slots[slot];
         }
         public static GameState Equip(GameState state,string id,string slot=null)
-        {slot=EquipmentSlot(state,id,slot);if(slot==null)return state;var s=state.Copy();s.Workshop.equipped[Array.IndexOf(ItemBalance.Slots,slot)]=id;LocalJournal.Record(s,"item-equip",permanent:false);return Changed(s);}
+        {slot=EquipmentSlot(state,id,slot);if(slot==null)return state;var s=state.Copy();s.Workshop.equipped[Array.IndexOf(ItemBalance.Slots,slot)]=id;s.Retention.onboardingCompleted=s.Retention.onboardingCompleted.Union(new[]{"equip-item"}).ToArray();LocalJournal.Record(s,"item-equip",permanent:false);return Changed(s);}
         public static GameState Unequip(GameState state,string slot)
         {int n=Array.IndexOf(ItemBalance.Slots,slot);if(n<0||string.IsNullOrEmpty(state.Workshop.equipped[n]))return state;var s=state.Copy();s.Workshop.equipped[n]="";LocalJournal.Record(s,"item-equip",permanent:false);return Changed(s);}
         public static GameState Lock(GameState state,string id)

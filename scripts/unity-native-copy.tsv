@@ -216,3 +216,41 @@ Automatische Resets pausieren|Pause automatic resets|Pausar reinicios automátic
 Spielstand zurücksetzen|Reset saved game|Reiniciar partida guardada|Réinitialiser la sauvegarde|Redefinir jogo salvo|Ripristina salvataggio|Zresetuj zapis gry
 Der gesamte Fortschritt wird zurückgesetzt. Vor dem Austausch bleibt eine vollständige Originalkopie lokal erhalten.|All progress will reset. A complete original copy is preserved locally before replacement.|Se reiniciará todo el progreso. Se conservará una copia original completa antes de sustituirlo.|Toute la progression sera réinitialisée. Une copie originale complète est conservée localement avant le remplacement.|Todo o progresso será redefinido. Uma cópia original completa será preservada antes da substituição.|Tutti i progressi saranno azzerati. Una copia originale completa viene conservata prima della sostituzione.|Cały postęp zostanie zresetowany. Przed zastąpieniem zostanie zachowana pełna lokalna kopia oryginału.
 Neue Kampagne bestätigen|Confirm new campaign|Confirmar nueva campaña|Confirmer la nouvelle campagne|Confirmar nova campanha|Conferma nuova campagna|Potwierdź nową kampanię
+Zurück|Back|Volver|Retour|Voltar|Indietro|Wstecz
+Arbeit|Work|Trabajo|Travail|Trabalho|Lavoro|Praca
+Produktion / Quellen|Production / sources|Producción / fuentes|Production / sources|Produção / fontes|Produzione / fonti|Produkcja / źródła
+Tatsächliche aktuelle Rechenschritte. Temporäre Effekte sind enthalten.|Measured current formula steps. Temporary effects are included.|Pasos reales de la fórmula actual. Incluye efectos temporales.|Étapes réelles de la formule actuelle. Effets temporaires inclus.|Etapas reais da fórmula atual. Inclui efeitos temporários.|Passaggi reali della formula attuale. Effetti temporanei inclusi.|Rzeczywiste etapy aktualnego wzoru. Uwzględnia efekty tymczasowe.
+Aktuelle Sitzungsdiagnose exportieren|Export current session diagnostics|Exportar diagnóstico de sesión actual|Exporter le diagnostic de la session actuelle|Exportar diagnóstico da sessão atual|Esporta diagnosi della sessione attuale|Eksportuj diagnostykę bieżącej sesji
+Vorige Sitzungsdiagnose exportieren|Export previous session diagnostics|Exportar diagnóstico de sesión anterior|Exporter le diagnostic de la session précédente|Exportar diagnóstico da sessão anterior|Esporta diagnosi della sessione precedente|Eksportuj diagnostykę poprzedniej sesji
+Altfaktor Compute|Legacy compute|Factor heredado de cómputo|Facteur de calcul hérité|Fator de computação legado|Fattore di calcolo precedente|Historyczny mnożnik obliczeń
+Geräte-Compute|Device compute|Cómputo de dispositivos|Calcul des appareils|Computação de dispositivos|Calcolo dei dispositivi|Obliczenia urządzeń
+Kombination paralleler Architektur|Parallel architecture combination|Combinación de arquitectura paralela|Combinaison d’architecture parallèle|Combinação de arquitetura paralela|Combinazione di architettura parallela|Kombinacja architektury równoległej
+Compute aus Items / Meilensteinen|Item / milestone compute|Cómputo de objetos / hitos|Calcul des objets / jalons|Computação de itens / marcos|Calcolo di oggetti / traguardi|Obliczenia przedmiotów / kamieni milowych
+Compute-Optimierung|Compute optimization|Optimización de cómputo|Optimisation du calcul|Otimização de computação|Ottimizzazione del calcolo|Optymalizacja obliczeń
+Hardwareintegration|Hardware integration|Integración de hardware|Intégration matérielle|Integração de hardware|Integrazione hardware|Integracja sprzętu
+Forschung paralleler Architektur|Parallel architecture research|Investigación de arquitectura paralela|Recherche d’architecture parallèle|Pesquisa de arquitetura paralela|Ricerca di architettura parallela|Badania architektury równoległej
+Hardware-Co-Design|Hardware co-design|Codiseño de hardware|Conception conjointe matérielle|Codesign de hardware|Co-progettazione hardware|Wspólne projektowanie sprzętu
+Modell-Compute|Model compute|Cómputo del modelo|Calcul du modèle|Computação do modelo|Calcolo del modello|Obliczenia modelu
+Axiom-Compute|Axiom compute|Cómputo de axiomas|Calcul des axiomes|Computação de axiomas|Calcolo degli assiomi|Obliczenia aksjomatów
+Nutzer aus Meilensteinen|Milestone users|Usuarios de hitos|Utilisateurs des jalons|Usuários de marcos|Utenti dei traguardi|Użytkownicy z kamieni milowych
+Nutzerskalierung|User scaling|Escalado de usuarios|Croissance des utilisateurs|Escala de usuários|Scalabilità utenti|Skalowanie użytkowników
+Modell-Nutzer|Model users|Usuarios del modelo|Utilisateurs du modèle|Usuários do modelo|Utenti del modello|Użytkownicy modelu
+Einnahmen pro Nutzer|Revenue per user|Ingresos por usuario|Revenu par utilisateur|Receita por usuário|Ricavi per utente|Przychód na użytkownika
+Items / Kombination|Items / combination|Objetos / combinación|Objets / combinaison|Itens / combinação|Oggetti / combinazione|Przedmioty / kombinacja
+Modellkern|Model core|Núcleo del modelo|Noyau du modèle|Núcleo do modelo|Nucleo del modello|Rdzeń modelu
+Speicher / Challenge|Memory / challenge|Memoria / desafío|Mémoire / défi|Memória / desafio|Memoria / sfida|Pamięć / wyzwanie
+INT-Einnahmenfaktor|INT credit factor|Factor de créditos INT|Facteur de crédits INT|Fator de créditos INT|Fattore di crediti INT|Mnożnik kredytów INT
+Axiom-Credits|Axiom credits|Créditos de axiomas|Crédits des axiomes|Créditos de axiomas|Crediti degli assiomi|Kredyty aksjomatów
+Modell-Einnahmen|Model revenue|Ingresos del modelo|Revenus du modèle|Receita do modelo|Ricavi del modello|Przychód modelu
+Netzwerkeffekte|Network effects|Efectos de red|Effets de réseau|Efeitos de rede|Effetti di rete|Efekty sieciowe
+Season-Artefakte|Season artifacts|Artefactos de temporada|Artefacts de saison|Artefatos de temporada|Artefatti stagionali|Artefakty sezonowe
+Altfaktor Credits|Legacy credits|Créditos heredados|Crédits hérités|Créditos legados|Crediti precedenti|Historyczne kredyty
+Bezahlter Einnahmenvorteil|Paid income|Ventaja de ingresos comprada|Avantage de revenus acheté|Vantagem de receita comprada|Vantaggio di ricavi acquistato|Zakupiona premia przychodu
+Daten-Skalierung / Items / Meilensteine|Data scale / items / milestones|Escala de datos / objetos / hitos|Échelle des données / objets / jalons|Escala de dados / itens / marcos|Scala dati / oggetti / traguardi|Skala danych / przedmioty / kamienie milowe
+Challenge-Daten|Challenge data|Datos del desafío|Données du défi|Dados do desafio|Dati della sfida|Dane wyzwania
+Modell-Daten|Model data|Datos del modelo|Données du modèle|Dados do modelo|Dati del modello|Dane modelu
+Altfaktor Daten|Legacy data|Datos heredados|Données héritées|Dados legados|Dati precedenti|Historyczne dane
+Gemeinsamer aktueller Durchbruchsfaktor|Current shared breakthrough factor|Factor común actual de avances|Facteur commun actuel des percées|Fator comum atual de avanços|Fattore comune attuale delle scoperte|Aktualny wspólny mnożnik przełomów
+Erhaltenes Klassenupgrade|Legacy class upgrade|Mejora de clase conservada|Amélioration de classe conservée|Melhoria de classe preservada|Potenziamento di classe conservato|Zachowane ulepszenie klasy
+Originaldatei unverändert exportieren|Export original file unchanged|Exportar archivo original sin cambios|Exporter le fichier original sans modification|Exportar arquivo original sem alterações|Esporta file originale invariato|Eksportuj oryginalny plik bez zmian
+Originalspielstand unlesbar · Recovery öffnen|Original save unreadable · open Recovery|Partida original ilegible · abrir Recovery|Sauvegarde originale illisible · ouvrir Recovery|Save original ilegível · abrir Recovery|Salvataggio originale illeggibile · apri Recovery|Oryginalny zapis nieczytelny · otwórz Recovery
