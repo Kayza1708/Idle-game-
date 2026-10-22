@@ -68,8 +68,12 @@ function databaseError(error){
 async function createGuest(db,now){
   const id=crypto.randomUUID();
   const token=newToken();
+  const guestName='Agent-'+id.slice(0,8);
+  // Must use exactly the same canonical key as public name checks and authenticated renames.
+  // The SQL fallback trigger uses only simple ASCII normalization for pre-migration compatibility.
+  const nameKey=normalizeModerationText(guestName);
   await db.batch([
-    db.prepare('INSERT INTO players(id,display_name,created_at) VALUES(?,?,?)').bind(id,'Agent-'+id.slice(0,8),now),
+    db.prepare('INSERT INTO players(id,display_name,name_key,created_at) VALUES(?,?,?,?)').bind(id,guestName,nameKey,now),
     db.prepare('INSERT INTO sessions(token_hash,player_id,created_at,expires_at) VALUES(?,?,?,?)')
       .bind(await digest(token),id,now,now+30*86400)
   ]);
