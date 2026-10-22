@@ -69,3 +69,11 @@ Offen bleiben insbesondere die physische Wirkung von Schrift/Touch/Notches, Syst
 - Ticket-Ziehung verwendet bestehende Ergebnisanzeige; hochwertige Gumball-/Kistenbewegung und vollständigen echten Videonachweis noch prüfen.
 - Company-Badges/Profilrahmen: Grund-SVG für Bronze/Silber/Gold ergänzt, aber **noch kein integrierter Unity-Spriteatlas** oder fertiges Profil mit 3 Showcase-Slots und Privacy-Schaltern. Benötigt modulare Grundform, Emblem pro Achievementfamilie, Bronze/Silber/Gold-Rarity, Locked/Unlocked/Preview/Equipped und Rahmen (Founder/Neon/Quantum/Singularity).
 - Profilzahlen (Compute/INT/Prestiges/Spielzeit) nur bei ausdrücklicher Freigabe und verifizierter Herkunft online anzeigen; keine Social Chat-UI aufbauen.
+
+
+## Profile-Badges / Bilder ergänzt (22.10.2026)
+
+- [x] Je 3 Metallstufen der sieben Company-/Achievementfamilien als einzelne Web-SVG; acht Rahmen, Company-Wappen und Unity-kompatible Pixelvarianten im gesonderten Feature-Branch.
+- [x] Lokale Unity-Abzeichen-Galerie und Schaukasten mit tatsächlich abgeholten Achievements, Web-Profil-Vorschau und markierte Season-Gutscheine.
+- [ ] Kein echter Online-Company-Profil-Screen, kein kauf-/auswählbarer Profile Frame, keine profilübergreifende verifizierte Datensynchronisierung; nicht als fertig markieren.
+- [ ] Effektqualität, Bildgrenzen, Text/Notch-Kontrast und Animationen in tatsächlichen Unity-Screenshots und Geräten visuell beurteilen.

@@ -89,3 +89,10 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 3. Unity 6000.3.26f1 Import/Compile, EditMode/PlayMode und tatsächliche Ticket-Ziehung mit v21/v22 Save-Migration durchführen.
 4. Shop/Gumball/Season bei 320/390/430px in DE/EN und weitere Sprachen samt Ticketgrafik/Audio/Reduced Motion abnehmen.
 5. Company-Profilrahmen/Badge-Kataloge weiter visualisieren, ohne Chat einzuführen oder lokale Voucher in serverseitiges Handelsinventar umzuwandeln.
+
+
+## Gumball Art + Abzeichen (Feature-Branch, nicht mergen ohne Abnahme)
+
+1. [Art-/Funktionsabgleich](profile-gumball-art-audit.md) prüfen; die Gutschein-Belohnungslogik ist bereits in main enthalten und wird nicht neu verdoppelt.
+2. Web: npm run typecheck, npm test, npm run build. Unity: tatsächlichen Editor in 6000.3.26f1 kompilieren, EditMode ProfileBadgeArtTests und existierende GumballVoucherTests, anschließend Profil/Season/Shop bei 320/390/430 px und DE/EN prüfen.
+3. Fehlende echte Profileinbindung mit gesicherter Auth, online einstellbaren 3 Badge-Slots, Frame-Käufen nur gegen serverbestätigte Gems und Privacy-Schaltern implementieren. Kein Chat.
