@@ -128,3 +128,10 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 
 - [x] Separate Workers/D1-Basis mit serverseitigen RP- und Research-Regeln sowie Unity-HTTP-Adapter vorbereitet. Details: [Cloudflare Companies](cloudflare-companies.md).
 - [ ] Worker/D1 tatsächlich deployen und integrieren; Auth, Inventar, echte Company-Oberfläche, Chat, Trading, Projektsystem, Seasons und Live-/Gerätetests sind noch offen.
+
+
+## Companies ohne Chat – 22.10.2026
+
+- [x] Separate Backend-Migration für CEO-Übergabe, Rollen, Einladungen ohne Nachrichtentext, standardmäßig private Profile, Company-Badges, Rahmenkatalog und Escrow-Angebote implementiert.
+- [ ] Persönliche Challenge-/Prestige-Badges erst mit überprüfbaren Nachweisen freigeben; lokale Spielstände zählen nicht als Serverbeleg.
+- [ ] Unity-Menüs, sicheres Echtgeld/Gems-Inventar, echter Handel, Moderation, DSGVO-Selbstauskunft/Löschung, Device-/Stresstests und Remote-Migration offen. Kein Chat vorgesehen.

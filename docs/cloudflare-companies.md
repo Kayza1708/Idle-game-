@@ -4,7 +4,7 @@
 Independent Companies for up to 50 members. A player's personal Credits, INT, hardware, Prestige and local save must never determine Company RP. Company research unlocks meaningful personal benefits; later releases add earned Gems, Components, Blueprints, Chests and Gumball Tickets, trading and leaderboards.
 
 ## Server ownership
-Cloudflare Worker = API. D1 = member registry, RP, research and tokens. Later Durable Objects = real-time chat and Company event distribution. Unity = view/controller. Personal inventory remains local **until** a separately designed server-authoritative rewards/inventory bridge is implemented.
+Cloudflare Worker = API. D1 = member registry, RP, research and tokens. No chat or private messaging is planned. Company events can use polling or optional Durable Objects later. Unity = view/controller. Personal inventory remains local **until** a separately designed server-authoritative rewards/inventory bridge is implemented.
 
 ## Phase 1 (this branch)
 - [x] Worker routes for guest identity, Company creation, search, join, membership, lazy RP claims, research and lifetime Company rankings.
@@ -18,7 +18,11 @@ Cloudflare Worker = API. D1 = member registry, RP, research and tokens. Later Du
 Server-enforced permissions (CEO/manager/member), invitations, kicks, CEO transfer, moderated names, projects with personal contribution caps, assignments, 24-hour daily rewards and Company HQ. All members earn the same base Company production; Company-level upgrades benefit every member.
 
 ## Phase 3 – secure rewards and social
-D1-backed inventory provenance, replay-safe redemption ledger, Company Token shop and Gem/Chest/Gumball-ticket grants, item/blueprint/component marketplace with escrow, donation limits and trade audit. Add moderated Durable Objects chat and a reporting/blocking system. No trade route may trust local Unity inventory amounts.
+D1-backed inventory provenance, replay-safe redemption ledger, Company Token shop and Gem/Chest/Gumball-ticket grants, item/blueprint/component marketplace with escrow, donation limits and trade audit. No chat or direct messages. Fixed-format trade offers, member invitations and reports on abusive names or fraudulent trades replace messaging. No trade route may trust local Unity inventory.
+
+## Phase 3b – Private profiles and administration
+
+See [chat-free Company community specification](company-social-no-chat.md). D1 role management, leadership transfer, private profiles, server-minted bronze/silver/gold Company badges, frame catalog, trade escrow and ID-only invitations are on a development branch; Unity menus and real item transfers are not finished.
 
 ## Phase 4 – seasons
 Seasonal Company leagues, normalized contributions, 20v20 research races, milestone chests and 30-day reset for rankings only. Company HQ and permanent research persist. Season rewards are server-owned and idempotent.

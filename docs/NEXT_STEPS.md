@@ -73,3 +73,10 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 2. Node-/SQLite-Tests und lokale Worker-/D1-Integration prüfen; Unity 6000.3.26f1 kompilieren. Dieser Branch wurde noch nicht deployed oder im Editor geprüft.
 3. Sichere Accountbindung und serverseitige Belohnungs-/Inventarführung implementieren, danach Company-UI, Projekte, Handels-Escrow, Chat und Seasons hinzufügen.
 4. Main unverändert lassen, nicht mergen oder veröffentlichen ohne gesonderte Freigabe.
+
+
+## Company-Community ohne Chat
+
+- [Technisches Konzept](company-social-no-chat.md) für private Spielerprofile, Bronze/Silber/Gold-Abzeichen, Profilrahmen, Leadership-Management, Einladungen und Item-Handel lesen.
+- Vor dem Produktivstart D1-Migrationen 0001–0003 auf Staging prüfen, Unity 6000.3.26f1 kompilieren und Client/Server-Berechtigungen auf zwei Geräten testen.
+- Persönliche Gem-Wallet und Item-Provenienz zuerst serverseitig absichern, bevor Gems-Rahmen kaufbar oder lokale Items transferierbar werden. Es wird kein Chat implementiert.

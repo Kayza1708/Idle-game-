@@ -1,4 +1,5 @@
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
+import {socialRoute} from './social.mjs';
 
 // Public read routes deliberately expose no private inventory, gems or session identifiers.
 // This is a guest-account MVP. Apple/Google account linking is required before commercial release.
@@ -49,6 +50,10 @@ async function requiredMember(db,playerId){
 function databaseError(error){
   const message=String(error?.message||'');
   if(/company_full/i.test(message))return new ApiError(409,'company_full');
+  if(/seller_not_company_member|insufficient_trade_inventory/i.test(message))return new ApiError(409,'insufficient_trade_inventory');
+  if(/invalid_trade_membership/i.test(message))return new ApiError(409,'invalid_trade_membership');
+  if(/trade_already_closed/i.test(message))return new ApiError(409,'offer_unavailable');
+  if(/leader_must_be_member|transfer_leadership_first/i.test(message))return new ApiError(409,'leadership_action_rejected');
   if(/not_enough_rp/i.test(message))return new ApiError(409,'insufficient_company_rp');
   if(/UNIQUE constraint failed|constraint failed|FOREIGN KEY constraint failed/i.test(message))return new ApiError(409,'conflict');
   return error;
@@ -80,7 +85,30 @@ const claimSql =
   'tokens=tokens+MIN(MAX(CAST((? - last_claim_at)/3600 AS INTEGER),0),24)*10,'+
   'last_claim_at=CASE WHEN (? - last_claim_at)>=3600 THEN ? ELSE last_claim_at END '+
   'WHERE player_id=? RETURNING company_id,contributed_rp,tokens,last_claim_at';
+// Scheduled retention cleanup. Expiring open trades releases escrow in D1 triggers.
 export default {
+  async scheduled(_event,env,ctx) {
+    if(!env.DB)throw new Error('database_not_configured');
+    const nowSeconds=time();
+    const cleanup=async()=>{
+      // Only close an OPEN offer once; the D1 trigger returns locked assets exactly once.
+      await env.DB.prepare(
+        "UPDATE company_trade_offers SET status='expired',closed_at=? WHERE status='open' AND expires_at<=?"
+      ).bind(nowSeconds,nowSeconds).run();
+      // Non-financial, closed offers can be removed after 30 days; product purchases use a separate ledger.
+      await env.DB.prepare(
+        "DELETE FROM company_trade_offers WHERE status!='open' AND closed_at<?"
+      ).bind(nowSeconds-30*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_invitations WHERE status!='pending' AND decided_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_invitations WHERE status='pending' AND expires_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare("DELETE FROM sessions WHERE expires_at<?").bind(nowSeconds-7*86400).run();
+    };
+    ctx.waitUntil(cleanup());
+  },
   async fetch(request,env) {
     try{
       if(!env.DB)throw new ApiError(503,'database_not_configured');
@@ -95,6 +123,10 @@ export default {
         return createGuest(db,now);
       }
       const player=await authenticated(request,db,now);
+      const social=await socialRoute({
+        request,db,player,now,path,method,reply,ApiError,payload,membership,requiredMember
+      });
+      if(social)return social;
       if(method==='POST'&&path==='/v1/session/rotate'){
         const token=newToken(),hash=await digest(token);
         await db.prepare('UPDATE sessions SET token_hash=?,created_at=?,expires_at=? WHERE token_hash=?')
@@ -125,7 +157,7 @@ export default {
         catch(error){if(error instanceof RangeError)throw new ApiError(400,'invalid_company_data',error.message);throw error;}
         const id=crypto.randomUUID();
         await db.batch([
-          db.prepare('INSERT INTO companies(id,founder_id,name,tag,created_at) VALUES(?,?,?,?,?)').bind(id,player.id,company.name,company.tag,now),
+          db.prepare('INSERT INTO companies(id,founder_id,leader_id,name,tag,created_at) VALUES(?,?,?,?,?,?)').bind(id,player.id,player.id,company.name,company.tag,now),
           db.prepare('INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES(?,?,?,?,?)')
             .bind(player.id,id,'ceo',now,now)
         ]);

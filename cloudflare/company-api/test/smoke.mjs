@@ -40,8 +40,47 @@ assert.equal(second.status,201);
 const bob=second.body.accessToken;
 assert.equal((await http('POST','/v1/companies/'+companyId+'/join',bob,{})).status,201);
 assert.equal((await http('POST','/v1/companies/'+companyId+'/join',bob,{})).status,409);
-assert.equal((await http('POST','/v1/company/leave',bob,{})).status,200);
+const profileId=first.body.player.id,bobId=second.body.player.id;
+const privateProfile=await http('GET','/v1/profile',alice);
+assert.equal(privateProfile.status,200,JSON.stringify(privateProfile.body));
+assert.equal(privateProfile.body.privacy.int,false);
+assert.ok(privateProfile.body.ownedFrames.includes('founder'));
+const privatePublic=await http('GET','/v1/players/'+profileId+'/profile',bob);
+assert.equal(privatePublic.status,200);
+assert.deepEqual(privatePublic.body.stats,{});
+assert.deepEqual(privatePublic.body.badges,[]);
+assert.equal((await http('PUT','/v1/profile/showcase',alice,{badges:[{family:'company-founder',tier:1}]})).status,200);
+assert.equal((await http('PATCH','/v1/profile/privacy',alice,{badges:true,int:true})).status,200);
+assert.equal((await http('POST','/v1/profile/frame',alice,{frameId:'founder'})).status,200);
+assert.equal((await http('POST','/v1/profile/frame',bob,{frameId:'gold-lab'})).status,409);
+const published=await http('GET','/v1/players/'+profileId+'/profile',bob);
+assert.equal(published.body.badges.length,1);
+assert.deepEqual(published.body.stats,{}); // Visibility cannot invent unverified personal stats.
+assert.equal((await http('POST','/v1/trades/offers',alice,{
+  give:{kind:'component',assetId:'graphene',quantity:5},
+  want:{kind:'component',assetId:'quantumCores',quantity:1}
+})).status,409); // Client inventory cannot be used to mint trade stock.
+assert.equal((await http('GET','/v1/trades/offers',bob)).status,200);
+assert.equal((await http('POST','/v1/company/members/'+bobId+'/role',alice,{role:'executive'})).status,200);
+assert.equal((await http('POST','/v1/company/members/'+profileId+'/kick',bob,{})).status,403);
 assert.equal((await http('POST','/v1/company/leave',alice,{})).status,409);
+assert.equal((await http('POST','/v1/company/leadership/transfer',alice,{playerId:bobId})).status,200);
+assert.equal((await http('POST','/v1/company/leave',bob,{})).status,409);
+const third=await http('POST','/v1/session/guest');
+assert.equal(third.status,201);
+const charlie=third.body.accessToken;
+const invitation=await http('POST','/v1/company/invitations',bob,{playerId:third.body.player.id});
+assert.equal(invitation.status,201,JSON.stringify(invitation.body));
+const charlieInvites=await http('GET','/v1/me/invitations',charlie);
+assert.equal(charlieInvites.status,200);
+assert.equal(charlieInvites.body.invitations.length,1);
+assert.equal((await http('POST','/v1/me/invitations/'+invitation.body.invitationId+'/accept',charlie,{})).status,200);
+assert.equal((await http('POST','/v1/me/invitations/'+invitation.body.invitationId+'/accept',charlie,{})).status,409);
+assert.equal((await http('POST','/v1/company/leave',charlie,{})).status,200);
+assert.equal((await http('POST','/v1/company/leave',alice,{})).status,200);
+assert.equal((await http('POST','/v1/company/leave',alice,{})).status,409);
+assert.equal((await http('GET','/v1/players/'+profileId+'/profile',bob)).status,200);
+assert.equal((await http('POST','/v1/no-chat',bob,{})).status,404);
 const rank=await http('GET','/v1/leaderboards/companies',alice);
 assert.equal(rank.status,200);
 assert.equal(rank.body.companies[0].name,'Neural Labs');
