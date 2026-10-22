@@ -122,3 +122,9 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Eigene Pixel-Spritefolge und gemeinsame Präsentationsprefabs; Herstellung, Ausrüsten, Kauf und Tap/Overdrive abgestimmt, sofort gespeicherte Transaktionen und reduzierte Bewegung erhalten.
 - [x] Echter Gem-Bestand, Hamburger mit vorhandenen Menürouten, Nutzerdetail weiterhin erreichbar, Modell-/Slotkomposition nach der konkreten TypeScript-Vorlage und Alpha-basierte Itemzentrierung.
 - [x] DE/EN bei 320/390/430 px, höchstes Fusionslevel, acht Materialarten, Abbruch/Wiederholung/Reload und echte Spielaudio-Aufnahmen nachgewiesen. Funktionale Resultate und visuelle Beurteilung getrennt: [unity-design-05.md](unity-design-05.md).
+
+
+## Cloudflare Company Multiplayer – 22.10.2026
+
+- [x] Separate Workers/D1-Basis mit serverseitigen RP- und Research-Regeln sowie Unity-HTTP-Adapter vorbereitet. Details: [Cloudflare Companies](cloudflare-companies.md).
+- [ ] Worker/D1 tatsächlich deployen und integrieren; Auth, Inventar, echte Company-Oberfläche, Chat, Trading, Projektsystem, Seasons und Live-/Gerätetests sind noch offen.

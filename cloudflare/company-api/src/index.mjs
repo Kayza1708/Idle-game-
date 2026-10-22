@@ -1,0 +1,166 @@
+import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
+
+// Public read routes deliberately expose no private inventory, gems or session identifiers.
+// This is a guest-account MVP. Apple/Google account linking is required before commercial release.
+class ApiError extends Error {
+  constructor(status,code,message=code){super(message);this.status=status;this.code=code;}
+}
+function reply(value,status=200) {
+  return new Response(JSON.stringify(value),{status,headers:{
+    'content-type':'application/json; charset=utf-8',
+    'cache-control':'no-store','x-content-type-options':'nosniff'
+  }});
+}
+function time(){return Math.floor(Date.now()/1000);}
+function newToken() {
+  const bytes=crypto.getRandomValues(new Uint8Array(32));
+  return btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+async function digest(token){
+  const hash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token));
+  return Array.from(new Uint8Array(hash),byte=>byte.toString(16).padStart(2,'0')).join('');
+}
+async function payload(request){
+  const raw=await request.text();
+  if(raw.length>2048)throw new ApiError(413,'payload_too_large');
+  try{const data=JSON.parse(raw);if(!data||typeof data!=='object'||Array.isArray(data))throw 0;return data;}
+  catch{throw new ApiError(400,'invalid_json');}
+}
+async function authenticated(request,db,now){
+  const authorization=request.headers.get('authorization')||'';
+  const match=/^Bearer ([A-Za-z0-9_-]{43})$/.exec(authorization);
+  if(!match)throw new ApiError(401,'auth_required');
+  const hash=await digest(match[1]);
+  const user=await db.prepare(
+    'SELECT p.id,p.display_name,p.created_at,s.token_hash FROM sessions s '+
+    'JOIN players p ON p.id=s.player_id WHERE s.token_hash=? AND s.expires_at>?'
+  ).bind(hash,now).first();
+  if(!user)throw new ApiError(401,'invalid_session');
+  return user;
+}
+async function membership(db,playerId){
+  return db.prepare('SELECT m.*,c.name AS company_name,c.tag AS company_tag FROM company_members m JOIN companies c ON c.id=m.company_id WHERE m.player_id=?').bind(playerId).first();
+}
+async function requiredMember(db,playerId){
+  const m=await membership(db,playerId);
+  if(!m)throw new ApiError(409,'not_in_company');
+  return m;
+}
+function databaseError(error){
+  const message=String(error?.message||'');
+  if(/company_full/i.test(message))return new ApiError(409,'company_full');
+  if(/not_enough_rp/i.test(message))return new ApiError(409,'insufficient_company_rp');
+  if(/UNIQUE constraint failed|constraint failed|FOREIGN KEY constraint failed/i.test(message))return new ApiError(409,'conflict');
+  return error;
+}
+async function createGuest(db,now){
+  const id=crypto.randomUUID();
+  const token=newToken();
+  await db.batch([
+    db.prepare('INSERT INTO players(id,display_name,created_at) VALUES(?,?,?)').bind(id,'Agent-'+id.slice(0,8),now),
+    db.prepare('INSERT INTO sessions(token_hash,player_id,created_at,expires_at) VALUES(?,?,?,?)')
+      .bind(await digest(token),id,now,now+30*86400)
+  ]);
+  return reply({player:{id,displayName:'Agent-'+id.slice(0,8)},accessToken:token,expiresAt:now+30*86400},201);
+}
+async function myCompany(db,playerId){
+  const m=await requiredMember(db,playerId);
+  const [company,members,research]=await Promise.all([
+    db.prepare('SELECT id,name,tag,visibility,member_count,rp_balance,rp_lifetime,created_at FROM companies WHERE id=?').bind(m.company_id).first(),
+    db.prepare('SELECT p.id,p.display_name,m.role,m.joined_at,m.contributed_rp FROM company_members m JOIN players p ON p.id=m.player_id WHERE m.company_id=? ORDER BY m.contributed_rp DESC').bind(m.company_id).all(),
+    db.prepare('SELECT node_id,level FROM company_research WHERE company_id=? ORDER BY node_id').bind(m.company_id).all()
+  ]);
+  const levels=Object.fromEntries(research.results.map(item=>[item.node_id,item.level]));
+  return reply({company,membership:{role:m.role,tokens:m.tokens,contributedRP:m.contributed_rp,lastClaimAt:m.last_claim_at},members:members.results,research:research.results.map(item=>({...item,nextCost:item.level<10?researchCost(item.level+1):null})),bonuses:researchBonuses(levels)});
+}
+const claimSql =
+  'UPDATE company_members SET '+
+  'contributed_rp=contributed_rp+MIN(MAX(CAST((? - last_claim_at)/3600 AS INTEGER),0),24)*100*'+
+  '(100+2*COALESCE((SELECT level FROM company_research WHERE company_id=company_members.company_id AND node_id=\'infrastructure\'),0))/100,'+
+  'tokens=tokens+MIN(MAX(CAST((? - last_claim_at)/3600 AS INTEGER),0),24)*10,'+
+  'last_claim_at=CASE WHEN (? - last_claim_at)>=3600 THEN ? ELSE last_claim_at END '+
+  'WHERE player_id=? RETURNING company_id,contributed_rp,tokens,last_claim_at';
+export default {
+  async fetch(request,env) {
+    try{
+      if(!env.DB)throw new ApiError(503,'database_not_configured');
+      const url=new URL(request.url),path=url.pathname,method=request.method,now=time(),db=env.DB;
+      if(method==='GET'&&path==='/v1/health')return reply({ok:true,service:'idle-intelligence-companies',version:1});
+      if(method==='POST'&&path==='/v1/session/guest')return createGuest(db,now);
+      const player=await authenticated(request,db,now);
+      if(method==='POST'&&path==='/v1/session/rotate'){
+        const token=newToken(),hash=await digest(token);
+        await db.prepare('UPDATE sessions SET token_hash=?,created_at=?,expires_at=? WHERE token_hash=?')
+          .bind(hash,now,now+30*86400,player.token_hash).run();
+        return reply({accessToken:token,expiresAt:now+30*86400});
+      }
+      if(method==='GET'&&path==='/v1/me'){
+        const m=await membership(db,player.id);
+        return reply({player:{id:player.id,displayName:player.display_name,createdAt:player.created_at},membership:m?{companyId:m.company_id,companyName:m.company_name,tag:m.company_tag,role:m.role,tokens:m.tokens}:null});
+      }
+      if(method==='GET'&&path==='/v1/companies'){
+        const q=(url.searchParams.get('q')||'').slice(0,50);
+        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime FROM companies WHERE visibility=\'public\' AND (instr(lower(name),lower(?))>0 OR instr(lower(tag),lower(?))>0) ORDER BY rp_lifetime DESC LIMIT 30').bind(q,q).all();
+        return reply({companies:results.results,maxMembers:MAX_MEMBERS});
+      }
+      if(method==='GET'&&path==='/v1/leaderboards/companies'){
+        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime FROM companies ORDER BY rp_lifetime DESC,id LIMIT 100').all();
+        return reply({companies:results.results,ranking:'lifetime_rp',seasonal:false});
+      }
+      if(method==='GET'&&path==='/v1/company')return myCompany(db,player.id);
+      if(method==='POST'&&path==='/v1/companies'){
+        if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
+        let company;
+        try{company=validateCompanyInput(await payload(request));}
+        catch(error){if(error instanceof RangeError)throw new ApiError(400,'invalid_company_data',error.message);throw error;}
+        const id=crypto.randomUUID();
+        await db.batch([
+          db.prepare('INSERT INTO companies(id,founder_id,name,tag,created_at) VALUES(?,?,?,?,?)').bind(id,player.id,company.name,company.tag,now),
+          db.prepare('INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES(?,?,?,?,?)')
+            .bind(player.id,id,'ceo',now,now)
+        ]);
+        return reply({companyId:id,...company,role:'ceo'},201);
+      }
+      const join=/^\/v1\/companies\/([^/]+)\/join$/.exec(path);
+      if(method==='POST'&&join){
+        if(!validCompanyId(join[1]))throw new ApiError(400,'invalid_company_id');
+        if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
+        const result=await db.prepare(
+          'INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) '+
+          'SELECT ?,id,\'member\',?,? FROM companies WHERE id=? AND visibility=\'public\''
+        ).bind(player.id,now,now,join[1]).run();
+        if(!result.meta?.changes)throw new ApiError(404,'company_not_found');
+        return reply({companyId:join[1],role:'member'},201);
+      }
+      if(method==='POST'&&path==='/v1/company/leave'){
+        const m=await requiredMember(db,player.id);
+        if(m.role==='ceo')throw new ApiError(409,'ceo_must_transfer_company_first');
+        await db.prepare('DELETE FROM company_members WHERE player_id=?').bind(player.id).run();
+        return reply({leftCompany:true});
+      }
+      if(method==='POST'&&path==='/v1/company/claim'){
+        await requiredMember(db,player.id);
+        const m=await db.prepare(claimSql).bind(now,now,now,now,player.id).first();
+        // The D1 trigger atomically adds the RP delta to the Company account.
+        return reply({companyId:m.company_id,contributedRP:m.contributed_rp,tokens:m.tokens,lastClaimAt:m.last_claim_at});
+      }
+      if(method==='POST'&&path==='/v1/company/research'){
+        const m=await requiredMember(db,player.id);
+        if(!['ceo','manager'].includes(m.role))throw new ApiError(403,'role_not_allowed');
+        const data=await payload(request),nodeId=data.nodeId;
+        if(!RESEARCH_NODES.includes(nodeId))throw new ApiError(400,'unknown_research');
+        const changed=await db.prepare(
+          'UPDATE company_research SET level=level+1 WHERE company_id=? AND node_id=? AND level<10 RETURNING level'
+        ).bind(m.company_id,nodeId).first();
+        if(!changed)throw new ApiError(409,'max_research_level');
+        return reply({nodeId,level:changed.level,nextCost:changed.level<10?researchCost(changed.level+1):null});
+      }
+      throw new ApiError(404,'not_found');
+    }catch(original){
+      const error=databaseError(original);
+      if(error instanceof ApiError)return reply({error:{code:error.code,message:error.message}},error.status);
+      console.error('company-api failed',error);
+      return reply({error:{code:'internal_error',message:'Internal server error'}},500);
+    }
+  }
+};

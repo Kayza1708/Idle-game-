@@ -65,3 +65,11 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 
 - Neuer Stand der Inszenierung: [unity-design-05.md](unity-design-05.md), mit zuerst geprüftem Fusionsablauf, aktuellem Gesamtvideo inklusive Modell/Menü und getrennten Funktions-/Sichtprüfungen. Weitere Bildschirmarbeit auf dieser Grundlage einzeln abnehmen; keine pauschale Archero-/Releasequalitätsfreigabe.
 - Echte Geräteprüfung für Notches, Touch, Systemschrift/Fontfallback, Audio-/Haptik und Burst-/Releasebetrieb bleibt gesondert offen. Bestehende Quellprobleme und der vollständige funktionale Audit bleiben davon getrennt.
+
+
+## Cloudflare Company Backend – neuer Entwicklungsbranch
+
+1. [Cloudflare Companies](cloudflare-companies.md) und [Einrichtung](../cloudflare/company-api/README.md) ansehen. D1 in EU-Jurisdiktion erstellen und Wrangler-Konfiguration mit echter Datenbank-ID versehen.
+2. Node-/SQLite-Tests und lokale Worker-/D1-Integration prüfen; Unity 6000.3.26f1 kompilieren. Dieser Branch wurde noch nicht deployed oder im Editor geprüft.
+3. Sichere Accountbindung und serverseitige Belohnungs-/Inventarführung implementieren, danach Company-UI, Projekte, Handels-Escrow, Chat und Seasons hinzufügen.
+4. Main unverändert lassen, nicht mergen oder veröffentlichen ohne gesonderte Freigabe.
