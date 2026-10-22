@@ -112,3 +112,5 @@ Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md
 7. Datenschutz/Auskunft/Löschung, Missbrauchsmeldung, Privatsphäre für Ranglisten, EU-D1-Aufbewahrung und Stress-/Mobiltests vor Veröffentlichung vervollständigen. Kein Chat.
 
 - Aktionsrunde 06 / Draft #152: Main-Integration `aebd1174` erhält die vorhandenen Unity-Company-/Profil-/Gutscheinwege. Neuer Company-Menü-/Gutschein-/Reload-Fall und zwei übernommene Compile-Anschlüsse korrigiert; finale integrierte Prüfergebnisse stehen im Abschnitt-06-Bericht. Optische Company-Abnahme bleibt separat.
+
+- Referenzdateien reproduzierbar mit `TZ=Europe/Berlin npm run unity:export` erzeugen; lokale und Linux-PR-Prüfung verwenden diese Referenzzeitzone. Andere Zeitzonen nicht als Balanceänderung in Referenzdateien übernehmen.

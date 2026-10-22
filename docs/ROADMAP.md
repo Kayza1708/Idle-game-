@@ -168,3 +168,5 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - [ ] Kein Chat, keine Direktnachrichten und kein Nachrichtenfeld für Trading/Anträge.
 
 - Aktionsrunde 06 mit `main aebd1174` zusammengeführt: Company-/Profil-/Gutscheinwege erhalten, zwei übernommene Compileanschlüsse korrigiert, Gutschein-Referenzprojektion ergänzt und Referenzen aus den Quellen erneuert. Integrierte 135 EditMode-Fälle sowie 75 PlayMode-Fälle über breiten Lauf und expliziten Profil-Nachlauf geprüft; genaue Scopes und visuelle Grenzen im Abschnitt-06-Bericht. Kein PR-Merge und keine Veröffentlichung.
+
+- PR-Testbedingungen für Runde 06 reproduzierbar ausgewiesen: Linux-Job mit Referenzzeitzone Europe/Berlin und lokal geprüftem 30-s-Vitest-Limit, ohne Produktionsänderung.
