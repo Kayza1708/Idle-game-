@@ -62,3 +62,6 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 
 - Der abgeschlossene Leisten-/Animationsabschnitt ist in [unity-design-04.md](unity-design-04.md) mit vollständigem Fünf-Aktionen-Video, fünf Einzelclips und echtem Unity-Audiomix dokumentiert. Diese ruhigen gemeinsamen Leisten bilden die Grundlage weiterer Bildschirmarbeit; starke Rahmen bleiben bei Items/Fenstern/Hauptaktionen.
 - Physische Touch-/Notch-/Fontfallback-, Audio-/Haptik- und Burst-/Releaseprüfung weiterhin separat ausführen. Die Editoraufnahme mit echten Transaktionen ersetzt diese Geräteabnahme nicht.
+
+- Neuer Stand der Inszenierung: [unity-design-05.md](unity-design-05.md), mit zuerst geprüftem Fusionsablauf, aktuellem Gesamtvideo inklusive Modell/Menü und getrennten Funktions-/Sichtprüfungen. Weitere Bildschirmarbeit auf dieser Grundlage einzeln abnehmen; keine pauschale Archero-/Releasequalitätsfreigabe.
+- Echte Geräteprüfung für Notches, Touch, Systemschrift/Fontfallback, Audio-/Haptik und Burst-/Releasebetrieb bleibt gesondert offen. Bestehende Quellprobleme und der vollständige funktionale Audit bleiben davon getrennt.

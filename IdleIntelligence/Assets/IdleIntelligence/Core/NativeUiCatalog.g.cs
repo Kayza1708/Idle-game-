@@ -287,5 +287,16 @@ new LocalizedCopy("native:283",new[]{"Quantum yield","Quantenfunde","Hallazgos c
 new LocalizedCopy("native:284",new[]{"Equip","Ausrüsten","Equipar","Équiper","Equipar","Equipaggia","Wyposaż"}),
 new LocalizedCopy("native:285",new[]{"Train","Trainieren","Entrenar","Entraîner","Treinar","Addestra","Trenuj"}),
 new LocalizedCopy("native:286",new[]{"In inventory","Im Inventar","En el inventario","Dans l’inventaire","No inventário","Nell’inventario","W ekwipunku"}),
-new LocalizedCopy("native:287",new[]{"Combining material …","Material wird verbunden …","Combinando materiales …","Assemblage des matériaux …","Combinando materiais …","Combinazione materiali …","Łączenie materiałów …"})
+new LocalizedCopy("native:287",new[]{"Combining material …","Material wird verbunden …","Combinando materiales …","Assemblage des matériaux …","Combinando materiais …","Combinazione materiali …","Łączenie materiałów …"}),
+new LocalizedCopy("native:288",new[]{"Menu","Menü","Menú","Menu","Menu","Menu","Menu"}),
+new LocalizedCopy("native:289",new[]{"Production / users","Produktion / Nutzer","Producción / usuarios","Production / utilisateurs","Produção / usuários","Produzione / utenti","Produkcja / użytkownicy"}),
+new LocalizedCopy("native:290",new[]{"Saves / recovery","Spielstände / Recovery","Partidas / recuperación","Sauvegardes / récupération","Jogos salvos / recuperação","Salvataggi / recupero","Zapisy / odzyskiwanie"}),
+new LocalizedCopy("native:291",new[]{"Market","Markt","Mercado","Marché","Mercado","Mercato","Rynek"}),
+new LocalizedCopy("native:292",new[]{"Bundles & benefits","Pakete & Vorteile","Paquetes y ventajas","Packs et avantages","Pacotes e benefícios","Pacchetti e vantaggi","Pakiety i korzyści"}),
+new LocalizedCopy("native:293",new[]{"Progress","Fortschritt","Progreso","Progression","Progresso","Progressi","Postępy"}),
+new LocalizedCopy("native:294",new[]{"Goals","Ziele","Objetivos","Objectifs","Objetivos","Obiettivi","Cele"}),
+new LocalizedCopy("native:295",new[]{"AI models","KI-Modelle","Modelos de IA","Modèles d’IA","Modelos de IA","Modelli IA","Modele SI"}),
+new LocalizedCopy("native:296",new[]{"Rewards","Belohnungen","Recompensas","Récompenses","Recompensas","Ricompense","Nagrody"}),
+new LocalizedCopy("native:297",new[]{"Fusion · three identical items","Fusion · drei gleiche Items","Fusión · tres objetos idénticos","Fusion · trois objets identiques","Fusão · três itens idênticos","Fusione · tre oggetti identici","Fuzja · trzy identyczne przedmioty"}),
+new LocalizedCopy("native:298",new[]{"Fuse instantly","Sofort fusionieren","Fusionar al instante","Fusionner instantanément","Fundir agora","Fondi subito","Połącz natychmiast"})
 };}}

@@ -1,0 +1,90 @@
+[
+  {
+    "file": "docs/media/unity-design-05/all-five-actions.mp4",
+    "startFrame": 0,
+    "endFrame": 586,
+    "sourceFrames": 587,
+    "encodedFrames": 587,
+    "measuredSeconds": 28.514572,
+    "containerSeconds": 28.5,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "98caa15bd96547f17e9744f5cbb186c8310beb76bafadffcde2d1fa2de905675"
+  },
+  {
+    "file": "docs/media/unity-design-05/01-tap-overdrive.mp4",
+    "startFrame": 0,
+    "endFrame": 84,
+    "sourceFrames": 85,
+    "encodedFrames": 85,
+    "measuredSeconds": 6.05201,
+    "containerSeconds": 6.01,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "3df98d7d93ef5b1fcd5afaa113b790d3ef2be843addd422b7c3e829cace3aaba"
+  },
+  {
+    "file": "docs/media/unity-design-05/02-hardware.mp4",
+    "startFrame": 85,
+    "endFrame": 149,
+    "sourceFrames": 65,
+    "encodedFrames": 65,
+    "measuredSeconds": 4.47702,
+    "containerSeconds": 4.43,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "59991a6b26ae0b86820fed60d23d3eca96d6e1c4c1cded66ef66bffbb870db54"
+  },
+  {
+    "file": "docs/media/unity-design-05/03-craft.mp4",
+    "startFrame": 150,
+    "endFrame": 239,
+    "sourceFrames": 90,
+    "encodedFrames": 90,
+    "measuredSeconds": 5.024105,
+    "containerSeconds": 4.98,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "d14441eefb1e805fe7b4c9dbcd4f22cc308c0646c2274f3e5cabaa30bc94743a"
+  },
+  {
+    "file": "docs/media/unity-design-05/04-fusion.mp4",
+    "startFrame": 240,
+    "endFrame": 351,
+    "sourceFrames": 112,
+    "encodedFrames": 112,
+    "measuredSeconds": 4.048284,
+    "containerSeconds": 4.01,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "ed0a27db0c51bf5ee910a705329799cce99264da4d361bab9e572d85a8addd90"
+  },
+  {
+    "file": "docs/media/unity-design-05/05-equip.mp4",
+    "startFrame": 352,
+    "endFrame": 471,
+    "sourceFrames": 120,
+    "encodedFrames": 120,
+    "measuredSeconds": 4.003703,
+    "containerSeconds": 4.0,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "2a8e0fec2ac3cd4a15957faecc9f06c4434c14847036ad5a6469b729c693c400"
+  },
+  {
+    "file": "docs/media/unity-design-05/06-model.mp4",
+    "startFrame": 472,
+    "endFrame": 536,
+    "sourceFrames": 65,
+    "encodedFrames": 65,
+    "measuredSeconds": 2.004247,
+    "containerSeconds": 2.0,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "bedc0c1f3a99bfe8e5c4b7768453ed428b1e49d5247efcb499bc2315ea480abb"
+  },
+  {
+    "file": "docs/media/unity-design-05/07-menu.mp4",
+    "startFrame": 537,
+    "endFrame": 586,
+    "sourceFrames": 50,
+    "encodedFrames": 50,
+    "measuredSeconds": 2.231079,
+    "containerSeconds": 2.21,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "8b0fd0203c56b8c89b5576410bae7186890d0232d3f7a26643522525e9810d00"
+  }
+]

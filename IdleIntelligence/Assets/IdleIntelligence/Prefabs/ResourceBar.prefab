@@ -950,7 +950,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9f33cc7ebfa4a4041a2174820c4e15b1, type: 2}
+  m_Sprite: {fileID: 21300000, guid: 05b398a63a44946bcb61841f3feb29d3, type: 2}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1504,7 +1504,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Nutzer
+  m_Text: Gems
 --- !u!1 &8763000883348182285
 GameObject:
   m_ObjectHideFlags: 0
