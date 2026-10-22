@@ -41,6 +41,15 @@
       "passed": "7",
       "failed": "0",
       "seconds": "10.7236481"
+    },
+    {
+      "report": "idle-ios-start-final.xml",
+      "result": "Passed",
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "seconds": "38.1449425",
+      "scope": "Final initial naming + chapter flow, Company/Profile/Audio and permanent claim storage"
     }
   ],
   "typecheck": "passed",
