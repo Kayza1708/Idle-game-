@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 128" role="img" aria-labelledby="title desc">
+<title id="title">Gumball Gutschein</title><desc id="desc">Violettes futuristisches Ticket mit leuchtender Gumball-Kapsel und goldener Einlösekante</desc>
+<defs>
+ <linearGradient id="ticket" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#6742ac"/><stop offset=".55" stop-color="#251f66"/><stop offset="1" stop-color="#101e47"/></linearGradient>
+ <linearGradient id="gold" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fff2ac"/><stop offset=".5" stop-color="#ffb43d"/><stop offset="1" stop-color="#e77032"/></linearGradient>
+ <radialGradient id="glass" cx=".35" cy=".25" r=".8"><stop stop-color="#c5f8ff"/><stop offset=".2" stop-color="#4b9ef2"/><stop offset=".8" stop-color="#132d83"/><stop offset="1" stop-color="#302c79"/></radialGradient>
+ <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>
+<g transform="translate(4 4) rotate(-8 76 60)">
+ <path d="M11 29 H111 V15 H137 L151 31 V91 L137 107 H111 V93 H11 Q4 93 4 86 V36 Q4 29 11 29Z" fill="#4a2bcb" filter="url(#shadow)"/>
+ <path d="M10 27 H112 L126 12 H139 L154 31 V92 L139 109 H126 L112 95 H10 Q2 95 2 87 V35 Q2 27 10 27Z" fill="url(#gold)"/>
+ <path d="M11 34 H116 L129 20 H136 L145 34 V89 L136 100 H129 L116 88 H11Z" fill="url(#ticket)" stroke="#c77dff" stroke-width="2.5"/>
+ <path d="M114 29 V91" stroke="#ffc16d" stroke-width="2" stroke-dasharray="5 4"/>
+ <path d="M123 34 H139 M123 43 H139 M123 52 H139 M123 61 H139 M123 70 H139 M123 79 H139" stroke="#a647ff" stroke-width="4"/>
+ <circle cx="71" cy="59" r="30" fill="#30206f" stroke="#f9b2ff" stroke-width="3"/>
+ <circle cx="71" cy="59" r="26" fill="url(#glass)" stroke="#97eaff" stroke-width="2"/>
+ <circle cx="60" cy="69" r="10" fill="#fd7fb5" stroke="#ffb2d4" stroke-width="1.7"/>
+ <circle cx="76" cy="70" r="11" fill="#ae66ed" stroke="#daa9ff" stroke-width="1.7"/>
+ <circle cx="87" cy="57" r="9" fill="#46d3ee" stroke="#b4fffa" stroke-width="1.7"/>
+ <circle cx="68" cy="49" r="9" fill="#ffae49" stroke="#ffe390" stroke-width="1.7"/>
+ <circle cx="54" cy="51" r="8" fill="#5f96ff" stroke="#b3e6ff" stroke-width="1.7"/>
+ <path d="M53 43 Q66 26 88 44" fill="none" stroke="#ebffff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+ <path d="M16 44 H34 M16 51 H29 M16 58 H34 M16 65 H26" stroke="#dea4ff" stroke-width="3" stroke-linecap="round"/>
+ <path d="M23 76 L26 82 L33 83 L28 88 L29 94 L23 90 L17 94 L18 88 L13 83 L20 82 Z" fill="url(#gold)" stroke="#ffe5a1" stroke-width=".9"/>
+ <path d="M16 38 H105 M16 84 H105" stroke="#a781ff" stroke-width="1.6" opacity=".55"/>
+</g></svg>
