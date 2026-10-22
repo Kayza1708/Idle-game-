@@ -50,8 +50,8 @@ describe('Gumball vouchers: earning, spending, storage',()=>{
   expect(vouchersAvailable(premium)).toBe(2);
   expect(claimSeasonReward(premium,40,'season-01','premium')).toBe(premium);
  });
- it('makes low probability odds explicit and deterministic per draw/receipt',()=>{
-  expect(BALANCE.gumballVouchers.chestChances).toEqual({common:.005,rare:.01,epic:.015,legendary:.02});
+ it('makes tiered odds explicit and deterministic per draw/receipt',()=>{
+  expect(BALANCE.gumballVouchers.chestChances).toEqual({common:.05,rare:.10,epic:.20,legendary:.30});
   expect(BALANCE.gumballVouchers.dailyBoxChance).toBe(.0025);
   const seed=bonusBoxRoll('ticket-tests','gumball-voucher:chest:2:free-common');
   expect(seed).toBe(bonusBoxRoll('ticket-tests','gumball-voucher:chest:2:free-common'));
