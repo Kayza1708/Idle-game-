@@ -92,3 +92,11 @@ Unity-Zwischenstand: [konkrete funktionale Restliste](unity-functional-remaining
 - [ ] Übrige Bildschirme einzeln gestalten; native Geräte-/Schrift-/Notch-/Touchabnahme bleibt offen. Keine Balanceänderung, kein Merge/Release.
 
 Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschließender Detail-Nachtest 1/1 (zwölf Sourcefälle), Vitest 1.886/143; Typecheck/Sourcecheck/Web-Build erfolgreich. 23 echte Unity-Bilder und zeitprotokollierter Clip versioniert. Keine native Gerätefreigabe.
+
+### Designabschnitt 1 · zweite Überarbeitung nach PR #141
+
+- [x] Offizielles Unity-Agent-Plugin 0.1.8-beta installiert/aktiviert; uGUI-/2D-Skills samt relevanter Referenzen gelesen, vorhandene Editor-Testanbindung erhalten. Keine parallele Sitzung neu gestartet.
+- [x] Eckige gemeinsame Flächen, zurückhaltendes manuelles Speichern, kompakte Inventar-/Schlossdarstellung und tatsächlich gemeinsame Itemrahmen umgesetzt.
+- [x] Kontextbezogene Itemvergleiche ohne unveränderte Werte, sichtbare Nachteile und aufklappbare seltenere Aktionen; Pointer-Tapfeedback und ausschließlich kosmetischer Overdrive-Kernzustand implementiert.
+- [x] Vollständige Regressionen vor abschließender Textkorrektur: 59/59 PlayMode, 128/128 EditMode, 1.886/143 Vitest; Typecheck/Web-Build erfolgreich. Anschließend UI-Nachprüfung 4/4 und erneut vollständiges PlayMode 59/59 auf abschließendem Stand. Medienmanifest: [Prüfbericht](unity-design-02.md).
+- [ ] Neue gemeinsame Grundlage auf weitere Bildschirme übertragen; echte Geräte-, Glyphen-, Notch-/Touch- und native Integrationsabnahme bleiben getrennt offen.

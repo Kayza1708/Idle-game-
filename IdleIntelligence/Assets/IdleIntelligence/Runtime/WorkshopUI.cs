@@ -27,6 +27,7 @@ namespace IdleIntelligence.Runtime
         void OnDestroy(){if(DetailRoot!=null)Destroy(DetailRoot);}
         void OnDisable(){Forge?.Cancel();if(DetailRoot!=null)DetailRoot.SetActive(false);}
         void Update(){if(game!=null)UpdateView(false);}
+        void LateUpdate(){if(DetailRoot!=null&&DetailRoot.activeSelf)DetailText.GetComponent<LayoutElement>().preferredHeight=Mathf.Ceil(DetailText.preferredHeight)+16;}
         public void ChangeMode(string next){Forge.Cancel();mode=next;selection.Clear();CloseDetail();UpdateView(true);}
         public void SelectRecipe(int n){Forge.Cancel();recipe=n;mode="blueprints";selection.Clear();UpdateView(true);}
         public void ToggleSelection(string id){Forge.Cancel();if(selection.Contains(id))selection.Remove(id);else if(selection.Count<3)selection.Add(id);mode="fusion";UpdateView(true);}
@@ -50,7 +51,7 @@ namespace IdleIntelligence.Runtime
         {
             var s=game.State;var w=s.Workshop;bool stockChanged=w.revision!=lastRevision||w.inventory.Length!=lastInventory;double amount=s.Data.ToDouble();bool dataChanged=Math.Abs(amount-lastData)>=1,industryTick=mode=="components"&&Math.Floor(s.SavedAt/1000)!=lastIndustrySecond;
             if(!force&&!stockChanged&&!dataChanged&&!industryTick)return;lastIndustrySecond=Math.Floor(s.SavedAt/1000);lastRevision=w.revision;lastData=amount;lastInventory=w.inventory.Length;
-            selection.RemoveAll(id=>Item(id)==null);Motion.GetComponentInChildren<Text>().text=w.reducedMotion?"Bewegung aus":"Bewegung an";ForgePanel.SetActive(mode=="blueprints"||mode=="fusion");Equipment.gameObject.SetActive(mode=="inventory");
+            selection.RemoveAll(id=>Item(id)==null);Motion.GetComponentInChildren<Text>().text=w.reducedMotion?"Bewegung aus":"Bewegung an";ForgePanel.SetActive(mode=="blueprints"||mode=="fusion");Equipment.gameObject.SetActive(mode=="inventory");transform.Find("WorkshopOptions").gameObject.SetActive(mode!="inventory");Stock.gameObject.SetActive(mode!="inventory");
             if(batch!=null){batch.GetComponentInChildren<Text>().text="×"+quantity;batch.interactable=PrestigeRules.Has(s,"W07");}Stock.text="Komponenten "+w.components.Sum()+"   ·   Bauplanfragmente "+w.fragments;
             if(!Forge.IsAnimating)
             {
@@ -89,26 +90,39 @@ namespace IdleIntelligence.Runtime
             if(mode=="inventory")
             {
                 var active=Workshop.ActiveSlots(s);
-                for(int i=0;i<8;i++){int slot=i;var portrait=Instantiate(PortraitPrefab,Equipment);portrait.name="equipment-"+ItemBalance.Slots[i];var item=Item(w.equipped[i]);portrait.Bind(item,ItemBalance.Slots[i].Replace("Aux",""),active[i]?"Leer":"Gesperrt");portrait.Button.onClick.AddListener(()=>{if(item!=null)OpenItem(item.id);else OpenSlot(slot);});}
+                var oldGrid=Equipment.GetComponent<GridLayoutGroup>();if(oldGrid!=null)DestroyImmediate(oldGrid);var oldSizer=Equipment.GetComponent<ItemGrid>();if(oldSizer!=null)DestroyImmediate(oldSizer);
+                var stack=Equipment.GetComponent<VerticalLayoutGroup>()??Equipment.gameObject.AddComponent<VerticalLayoutGroup>();stack.childControlWidth=stack.childControlHeight=true;stack.childForceExpandHeight=false;stack.spacing=4;
+                var open=WorkshopUIFactory.Node("EquipmentGrid",Equipment,typeof(GridLayoutGroup),typeof(ContentSizeFitter),typeof(ItemGrid));var grid=open.GetComponent<GridLayoutGroup>();grid.constraint=GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=3;grid.spacing=new Vector2(6,4);open.GetComponent<ItemGrid>().Height=112;open.GetComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;
+                var locked=WorkshopUIFactory.Horizontal("LockedSlots",Equipment,54);locked.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
+                for(int i=0;i<8;i++){int slot=i;var portrait=Instantiate(PortraitPrefab,active[i]?open.transform:locked.transform);portrait.name="equipment-"+ItemBalance.Slots[i];var item=Item(w.equipped[i]);portrait.Bind(item,ItemBalance.Slots[i].Replace("Aux",""),active[i]?"+":"");
+                    if(!active[i]){var size=portrait.gameObject.GetComponent<LayoutElement>()??portrait.gameObject.AddComponent<LayoutElement>();size.minWidth=size.preferredWidth=54;size.flexibleWidth=0;portrait.Frame.rectTransform.anchorMin=Vector2.zero;var icon=WorkshopUIFactory.Node("LockIcon",portrait.transform,typeof(CompactGlyph));icon.GetComponent<CompactGlyph>().Kind=CompactGlyph.Symbol.Lock;var rect=(RectTransform)icon.transform;rect.anchorMin=rect.anchorMax=new Vector2(.5f,.55f);rect.sizeDelta=new Vector2(17,20);icon.GetComponent<CompactGlyph>().raycastTarget=false;}
+                    portrait.Button.onClick.AddListener(()=>{if(item!=null)OpenItem(item.id);else OpenSlot(slot);});}
+                locked.SetActive(active.Any(value=>!value));
             }
             var container=WorkshopUIFactory.Node("InventoryGrid",Rows,typeof(GridLayoutGroup),typeof(ContentSizeFitter),typeof(ItemGrid));container.GetComponent<ContentSizeFitter>().verticalFit=ContentSizeFitter.FitMode.PreferredSize;var layout=container.GetComponent<GridLayoutGroup>();layout.constraint=GridLayoutGroup.Constraint.FixedColumnCount;layout.constraintCount=3;layout.spacing=new Vector2(6,8);layout.cellSize=new Vector2(112,130);
             if(w.inventory.Length==0)WorkshopUIFactory.Label("InventoryHint",Rows,"Noch keine Items. Wähle einen gelernten Starterbauplan.",14,50);
             foreach(var item in w.inventory)
             {
                 var i=item;var tile=WorkshopUIFactory.Node("item-"+i.id,container.transform);var portrait=Instantiate(PortraitPrefab,tile.transform);var r=(RectTransform)portrait.transform;r.anchorMin=r.anchorMax=new Vector2(.5f,1);r.pivot=new Vector2(.5f,1);r.anchoredPosition=Vector2.zero;r.sizeDelta=new Vector2(94,112);portrait.Bind(i);if(selection.Contains(i.id))portrait.Caption.text+=" ✓";
-                portrait.Button.onClick.AddListener(()=>{if(mode=="fusion")ToggleSelection(i.id);else OpenItem(i.id);});var label=WorkshopUIFactory.Label("Name",tile.transform,SettingsRules.Text(s.Settings.language,"item:"+i.type),12);var rt=label.rectTransform;rt.anchorMin=new Vector2(0,0);rt.anchorMax=new Vector2(1,0);rt.pivot=new Vector2(.5f,0);rt.sizeDelta=new Vector2(0,32);label.alignment=TextAnchor.UpperCenter;
+                portrait.Button.onClick.AddListener(()=>{if(mode=="fusion")ToggleSelection(i.id);else OpenItem(i.id);});string name=SettingsRules.Text(s.Settings.language,"item:"+i.type);if(name.Length>18)name=name.Replace("-","-\n");var label=WorkshopUIFactory.Label("Name",tile.transform,name,12);var rt=label.rectTransform;rt.anchorMin=new Vector2(0,0);rt.anchorMax=new Vector2(1,0);rt.pivot=new Vector2(.5f,0);rt.sizeDelta=new Vector2(0,32);label.alignment=TextAnchor.UpperCenter;
             }
         }
-        void OpenSlot(int n){OpenDetail(null,ItemPortrait.SlotName(ItemBalance.Slots[n],game.State.Settings.language)+"\n"+(n<3?"Grundslot":n<6?"Freischaltung über "+new[]{"W01","W02","W06"}[n-3]+" oder einen permanenten Slot. Im INT-Netz kaufen; bleibt bei normalem Prestige erhalten.":"Modulares Modell K10"+(n==7?" ab Level 15":"")+". Modellentwicklung im Geheimen Labor unter Forschung."));}
-        public void OpenItem(string id)
+        void OpenSlot(int n){OpenDetail(null,ItemPortrait.SlotName(ItemBalance.Slots[n],game.State.Settings.language)+"\n"+(n<3?"Grundslot":n<6?"Freischaltung im INT-Netz: "+new[]{"Zusatzprozessor","Zusatz-Core","Zusatz-Forschungssockel"}[n-3]+". Dauerhaft, auch nach Axiom.":"Modulares Modell"+(n==7?" "+UiLocalizedText.Translate("ab Level",game.State.Settings.language)+" "+ItemBalance.ModelSlotLevel:"")+". Modellentwicklung im Geheimen Labor unter Forschung."));DetailPortrait.Bind(null,ItemBalance.Slots[n].Replace("Aux",""));}
+        public void OpenItem(string id,string requestedSlot=null)
         {
-            var item=Item(id);if(item==null)return;var d=Workshop.Definition(item);OpenDetail(item,ItemDetailsUI.Text(game.State,item));
-            foreach(var slot in ItemBalance.Slots.Where(slot=>Workshop.EquipmentSlot(game.State,id,slot)!=null)){string target=slot;WorkshopUIFactory.Button("equip-"+slot,DetailActions,"Anlegen: "+ItemPortrait.SlotName(slot,game.State.Settings.language),()=>{game.Act(s=>Workshop.Equip(s,id,target),"equip");CloseDetail();UpdateView(true);});}
+            var item=Item(id);if(item==null)return;var d=Workshop.Definition(item);OpenDetail(item,ItemDetailsUI.Text(game.State,item,requestedSlot));
+            string chosen=Workshop.EquipmentSlot(game.State,id,requestedSlot);if(chosen!=null){var equip=WorkshopUIFactory.Button("equip-"+chosen,DetailActions,"Anlegen: "+ItemPortrait.SlotName(chosen,game.State.Settings.language),()=>{game.Act(s=>Workshop.Equip(s,id,chosen),"equip");CloseDetail();UpdateView(true);});GameTheme.CompactAction(equip,true);}
+
             if(game.State.Workshop.equipped.Contains(id)){string slot=ItemBalance.Slots[Array.IndexOf(game.State.Workshop.equipped,id)];WorkshopUIFactory.Button("Unequip",DetailActions,"Ablegen",()=>{game.Act(s=>Workshop.Unequip(s,slot),"unequip");CloseDetail();UpdateView(true);});}
-            WorkshopUIFactory.Button("Lock",DetailActions,item.locked?"Entsperren":"Sperren",()=>{game.Act(s=>Workshop.Lock(s,id));OpenItem(id);UpdateView(true);});var q=Workshop.UpgradeQuote(game.State,item);var costRow=WorkshopUIFactory.Node("UpgradeCosts",DetailActions,typeof(CostStrip));costRow.GetComponent<CostStrip>().Bind(game,q);var upgrade=WorkshopUIFactory.Button("Upgrade",DetailActions,"Level erhöhen",()=>{game.Act(s=>Workshop.Upgrade(s,id,q.Revision),"upgrade");OpenItem(id);UpdateView(true);});upgrade.interactable=game.Writable&&q.Allowed;
-            IndustryUI.Item(DetailActions,game,id,()=>{OpenItem(id);UpdateView(true);});
-            var salvage=WorkshopUIFactory.Button("SalvageItem",DetailActions,"Zerlegen · nur gebundene Materialien zurückgewinnen",()=>{float roll=UnityEngine.Random.value;game.Act(v=>MetaAutomation.Salvage(v,id,Math.Min(.999999999,roll)),"salvage");CloseDetail();UpdateView(true);});salvage.interactable=game.Writable&&!Industry.Busy(game.State,id)&&!item.locked&&!item.challengeCopy&&!game.State.Workshop.equipped.Contains(id);
-            WorkshopUIFactory.Button("SelectForFusion",DetailActions,"Für Fusion auswählen",()=>{CloseDetail();ToggleSelection(id);});
+            var more=WorkshopUIFactory.Vertical("MoreItemActions",DetailActions);more.SetActive(false);var fold=WorkshopUIFactory.Button("MoreItemActionsToggle",DetailActions,"Weitere Aktionen",()=>{more.SetActive(!more.activeSelf);});fold.transform.SetSiblingIndex(DetailActions.childCount-2);
+            WorkshopUIFactory.Button("Lock",more.transform,item.locked?"Entsperren":"Sperren",()=>{game.Act(s=>Workshop.Lock(s,id));OpenItem(id);UpdateView(true);});var q=Workshop.UpgradeQuote(game.State,item);var costRow=WorkshopUIFactory.Node("UpgradeCosts",DetailActions,typeof(CostStrip));costRow.GetComponent<CostStrip>().Bind(game,q);var upgrade=WorkshopUIFactory.Button("Upgrade",DetailActions,"Level erhöhen",()=>{game.Act(s=>Workshop.Upgrade(s,id,q.Revision),"upgrade");OpenItem(id);UpdateView(true);});upgrade.interactable=game.Writable&&q.Allowed;
+            fold.GetComponent<Image>().color=Color.clear;GameTheme.CompactAction(upgrade,game.State.Workshop.equipped.Contains(id));if(!game.State.Workshop.equipped.Contains(id))upgrade.GetComponent<Image>().color=Color.clear;fold.transform.SetAsLastSibling();more.transform.SetAsLastSibling();
+            foreach(var slot in ItemBalance.Slots.Where(slot=>slot!=chosen&&Workshop.EquipmentSlot(game.State,id,slot)!=null)){string target=slot;WorkshopUIFactory.Button("choose-slot-"+slot,more.transform,ItemPortrait.SlotName(slot,game.State.Settings.language),()=>OpenItem(id,target));}
+            foreach(var button in DetailActions.GetComponentsInChildren<Button>(true)){var height=button.GetComponent<LayoutElement>();if(height!=null)height.minHeight=height.preferredHeight=54;}
+            DetailPortrait.Caption.text="";
+            IndustryUI.Item(more.transform,game,id,()=>{OpenItem(id);UpdateView(true);});
+            var salvage=WorkshopUIFactory.Button("SalvageItem",more.transform,"Zerlegen · nur gebundene Materialien zurückgewinnen",()=>{float roll=UnityEngine.Random.value;game.Act(v=>MetaAutomation.Salvage(v,id,Math.Min(.999999999,roll)),"salvage");CloseDetail();UpdateView(true);});salvage.interactable=game.Writable&&!Industry.Busy(game.State,id)&&!item.locked&&!item.challengeCopy&&!game.State.Workshop.equipped.Contains(id);
+            WorkshopUIFactory.Button("SelectForFusion",more.transform,"Für Fusion auswählen",()=>{CloseDetail();ToggleSelection(id);});foreach(var button in more.GetComponentsInChildren<Button>(true)){var height=button.GetComponent<LayoutElement>();if(height!=null)height.minHeight=height.preferredHeight=54;}
         }
         void OpenRecipe(int index)
         {

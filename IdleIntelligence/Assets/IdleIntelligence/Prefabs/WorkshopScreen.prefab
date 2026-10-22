@@ -622,6 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326b5d20a450f4d388e8047ad9830267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: IdleIntelligence.Runtime::IdleIntelligence.Runtime.ItemGrid
+  Height: 148
 --- !u!1 &1612160697997090828
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,7 +2397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.16078432, g: 0.23137255, b: 0.3137255, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2834,9 +2835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 148
+  m_MinHeight: 124
   m_PreferredWidth: -1
-  m_PreferredHeight: 148
+  m_PreferredHeight: 124
   m_FlexibleWidth: -1
   m_FlexibleHeight: 0
   m_LayoutPriority: 1
@@ -3482,11 +3483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4382914306348619327, guid: f721589b1b16e4b169bd7ddd942f641d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4382914306348619327, guid: f721589b1b16e4b169bd7ddd942f641d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 140
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 4382914306348619327, guid: f721589b1b16e4b169bd7ddd942f641d, type: 3}
       propertyPath: m_LocalPosition.x

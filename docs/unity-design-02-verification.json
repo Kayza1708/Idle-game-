@@ -1,0 +1,395 @@
+{
+  "date": "2026-10-22",
+  "branch": "codex/unity-rewrite",
+  "baseCommit": "4a789bcb",
+  "mergedPredecessorPR": 141,
+  "editor": "6000.3.26f1",
+  "actualPlatform": "macOS arm64 Unity Editor PlayMode; no physical device claim",
+  "officialPlugin": {
+    "id": "unity@unity-agent-plugin",
+    "version": "0.1.8-beta",
+    "installed": true,
+    "enabled": true,
+    "source": "https://github.com/Unity-Technologies/unity-agent-plugin",
+    "otherSessionsRestarted": false,
+    "newSessionForAutomaticDiscovery": true
+  },
+  "unityCli": {
+    "version": "1.0.0-beta.13",
+    "availableUpdate": "1.0.0-beta.14",
+    "pipelinePackageInstalled": false,
+    "liveConnectionResult": "STATUS_NO_INSTANCES",
+    "editorBatchConnectionVerified": true
+  },
+  "runs": [
+    {
+      "name": "baseline",
+      "scope": "Before UI changes",
+      "path": "/tmp/idle-design2-baseline.xml",
+      "sha256": "62b610c7defd577a536aabcc7880d504852e48437a6e64118fb0272d3df8b761",
+      "result": "Passed",
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "durationSeconds": 13.1267315,
+      "exitCode": 0
+    },
+    {
+      "name": "EditMode",
+      "scope": "Full core/reference/save suite; before final presentation copy/wrapping",
+      "path": "/tmp/idle-design2-final-edit.xml",
+      "sha256": "ae98c3b810de4acc6f2c698af0fd0386d2d7c2c23227b5e5d9659cf1f09c9ccd",
+      "result": "Passed",
+      "total": 128,
+      "passed": 128,
+      "failed": 0,
+      "durationSeconds": 287.1056703,
+      "exitCode": 0
+    },
+    {
+      "name": "focusedPlayMode",
+      "scope": "Final visual/media generation",
+      "path": "/tmp/idle-design2-focused-play.xml",
+      "sha256": "fb5d015c68f75e0f93228505d152d95bc25d5359e47964953cd6a140c4df2479",
+      "result": "Passed",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "durationSeconds": 18.9206304,
+      "exitCode": 0
+    },
+    {
+      "name": "PlayMode",
+      "scope": "Full suite on final source",
+      "path": "/tmp/idle-design2-regression.xml",
+      "sha256": "0c869323a65b4ac430d0b559ca29e2a506ce7498b1dfbf586ec7febbea0cb68b",
+      "result": "Passed",
+      "total": 59,
+      "passed": 59,
+      "failed": 0,
+      "durationSeconds": 97.1118479,
+      "exitCode": 0
+    }
+  ],
+  "typeScript": {
+    "typecheck": 0,
+    "vitest": {
+      "exitCode": 0,
+      "tests": 1886,
+      "files": 143
+    },
+    "build": 0,
+    "unityCheck": 0,
+    "sourceAndEconomyChanged": false
+  },
+  "saveSchemaChanged": false,
+  "assetMetaPairsMissing": [],
+  "touchAssertions": {
+    "resolutions": [
+      320,
+      390,
+      430
+    ],
+    "targetActualPixels": 44,
+    "assertionTolerancePixels": 0.5
+  },
+  "mediaGenerationRun": "focusedPlayMode",
+  "video": {
+    "sourceFrames": 100,
+    "measuredElapsedSeconds": 8.177,
+    "encodedFrames": 100,
+    "containerSeconds": 8.2,
+    "width": 390,
+    "height": 844,
+    "codec": "h264/yuv420p VFR",
+    "decodeExitCode": 0,
+    "preparedState": true,
+    "initialCharge": 96,
+    "ordinaryTaps": 3,
+    "activationTaps": 1,
+    "awardsFromAnimation": false
+  },
+  "limits": [
+    "Original source fallbacks and Insight Archive acquisition remain source issues",
+    "No native SDK, physical touch/notch/font fallback acceptance or release",
+    "Design limited to first section"
+  ],
+  "media": [
+    {
+      "path": "docs/media/unity-design-02/before-detail-en-390.png",
+      "bytes": 67359,
+      "sha256": "5c4cfc2a50df713d4b1c209bbb748505a3b9d97ed3ff02ad39204ee3dd57f634",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/before-items-de-320.png",
+      "bytes": 58083,
+      "sha256": "d4b0751a605fd781ad20c9084e61eb9252b7efdfd378a939dd5a210eef44ef38",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/before-labor-de-390.png",
+      "bytes": 232524,
+      "sha256": "bf534ecd763af42344bd683ae5debfaa6cf195fb7a5ac9a5aee4c92b21e895cb",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/detail-de-390.png",
+      "bytes": 60914,
+      "sha256": "e21c4f3f4422bf3c1cb91f5f5b06deee3058bcc3c6af238124a819926dd9fdec",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/detail-en-390.png",
+      "bytes": 53755,
+      "sha256": "f8859d754682ff75e42aa227016f0b51b653a427311a2c97a4a979f0f6e5164b",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/drawback-en.png",
+      "bytes": 67550,
+      "sha256": "8155909015d5032c0cdd50ed68c85663daab99423728a43357c9695beacf54b3",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/empty-de-320.png",
+      "bytes": 51365,
+      "sha256": "e68d2454ae33e80f89bbc5ecb453e6d69b3dd36235803fa4d55276c5159e7c93",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/empty-de-390.png",
+      "bytes": 71262,
+      "sha256": "06377a6699a8920cf2e8cbdeafc91738493bd25e1f435f35aa77b0672c5ad9d8",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/empty-de-430.png",
+      "bytes": 89555,
+      "sha256": "4b5e2a5d0425dece6c9acc29ce283ad4919824dc3357364a212566ff5ef167cc",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/empty-en-320.png",
+      "bytes": 51443,
+      "sha256": "9f1a83a7cb909c11e99fa96b894a51ce7e19d672839e786301a85e3f3b34cf58",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/empty-en-390.png",
+      "bytes": 71106,
+      "sha256": "e16b2e99cc7ea9c493d237d8f8c19aaae32629b101fa61ae1f197d624099f7c6",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/empty-en-430.png",
+      "bytes": 89671,
+      "sha256": "24957f0c55eee37fe7d511d2c6d8d5abdaa7a316e19e78fd83d8562bcabcc356",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/equipped-de-320.png",
+      "bytes": 60313,
+      "sha256": "b4eb3b85ee9ba2c859d2dc090e2423999671bfac78cdecd6b3904d79310d2eec",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/equipped-de-390.png",
+      "bytes": 83790,
+      "sha256": "734229beab848cd80398550bc9b7a460fe399dd5aaa65aedc115d991295d122f",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/equipped-de-430.png",
+      "bytes": 103756,
+      "sha256": "a5972614e5de07bdcf09475471103d2efd77a4a9dd860e0b3d2145ded2e23107",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/equipped-en-320.png",
+      "bytes": 60584,
+      "sha256": "9d559271e749b3ee7feb1e41341b58d47ed918fedb372a7fc11f3d6885fda26d",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/equipped-en-390.png",
+      "bytes": 83743,
+      "sha256": "03415ec216cca1091b1f9479e65a274a593dc3fb433c9c71781eb4b9b3717c6e",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/equipped-en-430.png",
+      "bytes": 103588,
+      "sha256": "66684691b3dc5acecb99cafa5c18350196667ce8196a9327b0b69b20393b112f",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/equipped-reloaded.png",
+      "bytes": 103082,
+      "sha256": "4852db0fa6ffd8f9d4b81cd07a43fda71f28386b4d1654035d58c705d36a63b1",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/frame-times.txt",
+      "bytes": 988,
+      "sha256": "412ab9e1df1f9c0606483e42e5afcb8e2dcb42c4ed028269688919fe7dd71061"
+    },
+    {
+      "path": "docs/media/unity-design-02/labor-de-320.png",
+      "bytes": 116398,
+      "sha256": "5aff48b4ede241f6e1aa422cb1702922c181ea3b1d28685f9064e7fb32175455",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/labor-de-390.png",
+      "bytes": 232043,
+      "sha256": "d130de7e647d12dd8320d23a1cc96f145130dc6ae92579ca619e607400478f92",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/labor-de-430.png",
+      "bytes": 275562,
+      "sha256": "5583f0efe7fe76b492b1a898344df0eb5fa885ddc4752ec5a7a08e1221c4d298",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/labor-en-320.png",
+      "bytes": 115607,
+      "sha256": "8506b3441705295d9f14ca2d7932d77308f755de3506c53dc8e4894b655b9377",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/labor-en-390.png",
+      "bytes": 230212,
+      "sha256": "f57bc2a396ca2911385e49b747721d44f9167efa4a3588fece09bde098cb91f5",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/labor-en-430.png",
+      "bytes": 270674,
+      "sha256": "5288c221f43bde311c3c0a582c400b0f294de645c665c5c02c40833c0b02be7b",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/locked-de-320.png",
+      "bytes": 18512,
+      "sha256": "b2904d76592857429cfaac2b9a003dd683f9d5b939e46331851b20f16245d010",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/locked-de-390.png",
+      "bytes": 31629,
+      "sha256": "9e2e30d5d50cc3d292d47ae65eb4c293c8bbf93b054f50e73151635485da0022",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/locked-de-430.png",
+      "bytes": 37184,
+      "sha256": "a6c93efba9bed5e37d7e5a5bc05be77caa13b9b0c7d02e4729c3537c0524596a",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/locked-en-320.png",
+      "bytes": 18891,
+      "sha256": "d9cd3120f5f3da3438f29297578eb97696055cc0db54c055f9fc60c0268254b3",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/locked-en-390.png",
+      "bytes": 31241,
+      "sha256": "3fcbaefe3f46001e4d2d34cabea5eb73bbbbeba078a22e1457411edcc5716521",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/locked-en-430.png",
+      "bytes": 36807,
+      "sha256": "b0894c0596d4a58142002298a0d61439486396ea3bdcfaf7ba4d279c8d447bf5",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/long-de-320.png",
+      "bytes": 39252,
+      "sha256": "f9f354544e154f83a97115401ac42710fc69e590d90b70a2165ab119b5075f1b",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/long-de-390.png",
+      "bytes": 69830,
+      "sha256": "9cf6b98fa382ddb1d24f6fd2a5aa8fd6232472044448cb8b717c5d7de447195b",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/long-de-430.png",
+      "bytes": 80527,
+      "sha256": "0c6c6839c82c51a8b8fb3d04a359a6310d2f1fa27ee51d67f37b430f2eb5ac73",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/long-en-320.png",
+      "bytes": 45537,
+      "sha256": "d02ccd8b422e1b7b8e66d4f123d433fd48bd20b41675e0ad70cd62248eb6123f",
+      "width": 320,
+      "height": 568
+    },
+    {
+      "path": "docs/media/unity-design-02/long-en-390.png",
+      "bytes": 75732,
+      "sha256": "80db539bea509ee1dd0c68cea162f57d545ed42e8431d0717f480b083ab4719d",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/long-en-430.png",
+      "bytes": 69468,
+      "sha256": "772d64f7fc4e67d0e83033e07e40d529ad07dbcf4be0b6fb778579979d48b0d4",
+      "width": 430,
+      "height": 932
+    },
+    {
+      "path": "docs/media/unity-design-02/reduced-motion.png",
+      "bytes": 230040,
+      "sha256": "982d02f51eda4060fde12837a67b37f378216f803f237cfd12c244b22d721816",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "path": "docs/media/unity-design-02/tap-overdrive.mp4",
+      "bytes": 149245,
+      "sha256": "3c5f49dc28e8f688c82a17d67032f374c3773e9fc6c0bff9db79635e5d2a98b1"
+    }
+  ]
+}
