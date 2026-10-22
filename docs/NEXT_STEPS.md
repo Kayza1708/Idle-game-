@@ -2,6 +2,8 @@
 
 ## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
 
+Installierter und gestarteter Unity-Spielcode: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
+
 Aktueller lokaler iOS-Weg und Prüfstand: [Unity auf iPhone-16-Pro-Simulator](unity-ios-local.md). Separate Unity-App und neuer Buildordner; Capacitor-`ios/`, ursprüngliche App und Saves bleiben erhalten. Company-Onlinezugang und echte native Integrationen sind weiterhin gesondert offen. Die folgende ältere Aufgabenhistorie ist keine Aussage, dass alle damaligen Zwischenlücken heute noch bestehen; maßgeblich sind funktionaler Audit und aktueller Plattformbericht.
 
 
@@ -19,7 +21,9 @@ Forschung/Industrie, isolierte V2-Challenges, Statistiken/Mastery, Achievements/
 
 Die bisherigen TypeScript-/iOS-Releasepunkte unten bleiben erhalten; während der Unity-Einrichtung keinen ungeprüften Pull/Sync über lokale Bestände ausführen.
 
-Aktueller Arbeitsstand: Bereinigung, Startbildschirm und Namensfilter nach dem gemergten frühen Balancing aus PR #125. Historische Iterationsprotokolle liegen in der Git-Historie. [Aktuelle Roadmap](ROADMAP.md), [Bereinigungsnachweis](cleanup-loading-names.md).
+## Historischer TypeScript-/Capacitor-Weg · nicht für den aktuellen Unity-Start
+
+Historischer Arbeitsstand: Bereinigung, Startbildschirm und Namensfilter nach dem gemergten frühen Balancing aus PR #125. Historische Iterationsprotokolle liegen in der Git-Historie. [Aktuelle Roadmap](ROADMAP.md), [Bereinigungsnachweis](cleanup-loading-names.md).
 
 1. Nach Merge auf dem Mac `git pull`, anschließend `npm ci` und `npm run ios:prepare`. Der Befehl baut vor dem Capacitor-Sync; ein fehlgeschlagener Build darf nicht durch einen separaten Sync alter `dist`-Dateien umgangen werden.
 2. Auf einem echten iPhone starten: Prestigenetz (Ziehen, Pinch, Kauf), Craft-/Fusionsbewegung einschließlich schneller Wiederholung, reduzierte Bewegung, Hintergrundwechsel und Share-Sheet prüfen. Vor eigenen Resettests einen Spielstand exportieren. Die Repository-Bereinigung löscht keine Geräte-Spielstände.

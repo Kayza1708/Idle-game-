@@ -24,7 +24,19 @@ Die historischen 26 breiten funktionalen Migrationszeilen haben dokumentierte C#
 
 ## Tatsächliches Ergebnis
 
-Export, Xcode-Build, Installation, Startcommit und Beobachtungen werden nach dem jeweiligen Schritt eingetragen. Dieser Abschnitt ist bis dahin kein Erfolgsnachweis.
+Erfolgreich nativ exportiert, mit Xcode gebaut, installiert und gestartet: **a5a59bdd0182de426bd64f0aadfaea913a662931**. Unity 6000.3.26f1, iOS Simulator ARM64, iPhone 16 Pro / iOS 27.0. Das installierte App-`Info.plist` enthält `IdleUnityCommit` mit genau diesem Commit sowie `CFBundleSupportedPlatforms = iPhoneSimulator`. Kein Web-Build. Der spätere Dokumentationscommit ist kein anderer installierter Spielcode.
+
+Finales Projekt: `IdleIntelligence/Builds/iOS-Simulator-a5a59bdd-20261023/Unity-iPhone.xcodeproj`. Fertige App: `DerivedData/Build/Products/Debug-iphonesimulator/IdleIntelligenceUnity.app` darunter. Beide Exporte bleiben lokal erhalten; der erste `eb251e84`-Export wurde nicht überschrieben. Unity-Exporte und Xcode-Builds endeten mit Exitcode 0 / Succeeded, letztere mit vorhandenen Unity-/SDK-Warnungen.
+
+Der Simulator wurde zwischenzeitlich heruntergefahren; der erste Updateversuch meldete entsprechend Shutdown und installierte nichts. Nach erneutem Boot desselben Geräts erfolgreich installiert und gestartet. Das OS hat dabei den Datencontainerpfad gewechselt, die Inhalte aber übernommen. 27 konkrete Vergleiche bestätigen Namen, Gems/AP, Inventar, Ausrüstung, Baupläne, Nodes/Slots, Prestige-/Axiomguthaben und vorhandene Modelle. Save v22 hat eine gültige Prüfsumme, `legacy.prepared` ist false. Änderungen an Produktions-/Automationsuhren, Prestige-Eignung und Training entsprechen dem regulären Offlinefortschritt. Kein Import oder Zurücksetzen des gerade erspielten Fortschritts. Eine zusätzliche lokale Kopie vor dem Update liegt unter `/tmp/idle-unity-simulator-played-before-update/`; keine echten Spielstände im Repository.
+
+Die alte Capacitor-App wurde nicht gestartet oder ersetzt. 15 vorher erfasste Originaldateien ihres Datenbereichs haben unveränderte Hashes. Das unversionierte `ios/` sowie die übrigen sieben ursprünglichen unversionierten Gruppen wurden nicht gestaged oder verändert.
+
+Xcode-Projekt wurde geöffnet. Die UI-Abfrage blockierte bei der ersten Initialisierung lange und später zeitweise mit Timeout. Eine Auswahl von iPhone 16 Pro wurde per UI versucht; die endgültige Dropdown-Auswahl war nicht zuverlässig auslesbar. Build, Installation und Start sind dagegen nachweislich auf die genaue 16-Pro-Simulator-ID festgelegt. Für einen späteren GUI-Run gegebenenfalls oben **Unity-iPhone → iPhone 16 Pro (iOS 27.0)** wählen. Simulator benötigt keine Apple-Anmeldung, Teamwahl oder Gerätefreigabe. Vorhandenes Device-Signing wurde nicht verändert.
+
+**Jetzt spielen:** Im Device Hub den vorhandenen iPhone 16 Pro öffnen. Die App **Idle Intelligence Unity** ist bereits gestartet; bei Miras Trainingsabschluss mit „Weiter“ fortfahren. Für einen erneuten Start die gleichnamige Unity-App wählen; die alte App „Idle Intelligence“ ist weiterhin die separate Capacitor-Version. Der Nutzer hat ausdrücklich zunächst den Simulator gewählt. Physische Geräte-, Performance-, Haptik- und Releaseabnahme sind nicht erfolgt.
+
+Nachweis ohne private Spielstandinhalte: `unity-ios-installed-verification.json`. Die lokale tatsächliche Nachheraufnahme liegt im finalen Buildordner als `actual-simulator.png`; sie zeigt bereits den gerade erspielten Nutzerfortschritt und wird daher nicht als finanzierter Teststand oder öffentliches Testfixture eingecheckt.
 
 ## Regression und visuelle Einordnung
 

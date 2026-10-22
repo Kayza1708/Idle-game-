@@ -1,0 +1,57 @@
+{
+  "sourceCommit": "a5a59bdd0182de426bd64f0aadfaea913a662931",
+  "bundle": "com.kayza1708.idleintelligence.unity",
+  "platforms": [
+    "iPhoneSimulator"
+  ],
+  "orientation": [
+    "UIInterfaceOrientationPortrait"
+  ],
+  "simulator": "iPhone 16 Pro, iOS 27.0, ARM64",
+  "deviceId": "2F5C4B2F-A725-45B9-881D-16DA5BD50057",
+  "saveVersion": 22,
+  "saveChecksumValid": true,
+  "prepared": false,
+  "xcodeBuild": "Succeeded; Debug iOS Simulator; CODE_SIGNING_ALLOWED=NO",
+  "physicalDeviceTested": false,
+  "rawSectionEquality": {
+    "hardware": true,
+    "workshop": false,
+    "retention": false,
+    "prestige": false,
+    "meta": false
+  },
+  "preservedPermanentAndInventoryFields": {
+    "retention.aiName": true,
+    "retention.playerName": true,
+    "retention.gems": true,
+    "retention.points": true,
+    "retention.achievementClaims": true,
+    "retention.onboardingClaimed": true,
+    "retention.artifacts": true,
+    "retention.completedSeasons": true,
+    "workshop.inventory": true,
+    "workshop.equipped": true,
+    "workshop.learned": true,
+    "workshop.knownBlueprints": true,
+    "workshop.mastery": true,
+    "workshop.nodes": true,
+    "workshop.permanentSlots": true,
+    "prestige.resets": true,
+    "prestige.totalINT": true,
+    "prestige.unspent": true,
+    "prestige.spent": true,
+    "prestige.known": true,
+    "meta.resets": true,
+    "meta.axioms": true,
+    "meta.models": true,
+    "meta.available": true,
+    "meta.total": true,
+    "hardware": true,
+    "saveChecksum": true
+  },
+  "saveContainerRelocatedByOS": true,
+  "normalAdvance": "Training completed, onboarding completion recorded, passive progress and prestige eligibility/automation clocks advanced through existing offline rules.",
+  "capacitorOriginalFilesChecked": 15,
+  "capacitorChangedOriginalFiles": []
+}
