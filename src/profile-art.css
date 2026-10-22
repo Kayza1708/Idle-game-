@@ -40,3 +40,9 @@
 @media(prefers-reduced-motion:reduce){
  .profile-avatar-art::after{animation:none!important;transform:none!important;filter:none!important}
 }
+
+/* Accessible red action hints, never used as a substitute for text/claim buttons. */
+.claim-red-alert{display:inline-flex;align-items:center;justify-content:center;
+ min-width:19px;height:19px;margin-inline-start:5px;padding:0 3px;
+ background:#d92a37;color:#fff;border-radius:5px;font-size:14px;font-weight:900;
+ font-style:normal;line-height:1;box-shadow:0 0 0 2px #101e32}
