@@ -1,0 +1,15 @@
+/* Shared voucher reward sprite; native Unity renderer uses the same reference art. */
+.gumball-voucher-art{width:auto;height:auto;object-fit:contain;image-rendering:pixelated;flex-shrink:0;filter:drop-shadow(0 2px 8px #8e4dff55)}
+.capsule-voucher-wallet{display:flex;align-items:center;justify-content:center;gap:5px;padding:3px 8px;color:#e9d9ff;font-weight:600;font-size:13px}
+.capsule-actions [data-capsule-voucher]{display:flex;align-items:center;justify-content:center;gap:3px;background:linear-gradient(160deg,#523c88,#27285e);border:1px solid #9e86ed;color:#fff;min-height:44px;min-width:92px}
+.capsule-actions [data-capsule-voucher]:disabled{opacity:.5}
+.capsule-actions [data-capsule-voucher] small{color:#ffe3a8}
+.season-voucher-reward,.gumball-voucher-odds,.gumball-voucher-found{display:flex;align-items:center;gap:5px}
+.season-voucher-reward{font-size:11px;color:#f2d7ff}
+.gumball-voucher-found{margin:8px auto;padding:6px;border:1px solid #b277fc;color:#f7dcff;border-radius:6px}
+.gumball-voucher-odds{margin:8px 0;font-size:14px}
+
+/* A rare Gumball voucher is visibly additive to the normal Season reward, not a replacement. */
+.season-voucher-combo{position:relative;display:inline-flex;align-items:center;justify-content:center;isolation:isolate}
+.season-voucher-combo-ticket{position:absolute;right:-8px;bottom:-6px;border-radius:6px;background:#1d1c3a;border:1px solid #efc574;padding:1px;box-shadow:0 1px 5px #0007}
+.season-voucher-combo-ticket img{display:block}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 72" role="img" aria-label="Pixel Gumball Gutschein" shape-rendering="crispEdges">
+<title>Retro Gumball Gutschein</title>
+<g transform="translate(0 0)">
+<!-- Hard pixel silhouette, 2- and 4-pixel steps; no blur, rounded corners or gradients. -->
+<path d="M10 10H72V6H82V10H88V16H92V56H88V62H82V66H72V62H10V58H6V54H4V18H6V14H10Z" fill="#f7bd60"/>
+<path d="M10 14H68V10H82V14H86V18H88V54H86V58H82V62H68V58H10V54H8V18H10Z" fill="#703da7"/>
+<path d="M14 18H68V14H78V18H82V22H84V50H82V54H78V58H68V54H14V50H12V22H14Z" fill="#242353"/>
+<path d="M72 16H76V56H72Z" fill="#ffc978"/>
+<path d="M78 22H82V26H78ZM78 32H82V36H78ZM78 42H82V46H78Z" fill="#c38cff"/>
+<path d="M36 20H56V24H64V28H68V44H64V48H60V52H32V48H28V44H24V28H28V24H36Z" fill="#cb8fff"/>
+<path d="M36 24H56V28H60V32H64V44H60V48H32V44H28V32H32V28H36Z" fill="#8de4f6"/>
+<path d="M36 28H56V32H60V44H56V48H36V44H32V32H36Z" fill="#2256aa"/>
+<path d="M34 30H46V34H34ZM30 34H38V38H30Z" fill="#edffff"/>
+<!-- Five discrete pixel gumballs. -->
+<path d="M36 38H44V42H48V46H44V50H36V46H32V42H36Z" fill="#f9a2cf"/>
+<path d="M48 38H56V42H60V46H56V50H48V46H44V42H48Z" fill="#bc85ff"/>
+<path d="M44 30H52V34H56V38H52V42H44V38H40V34H44Z" fill="#ffbd67"/>
+<path d="M56 34H64V38H60V42H56Z" fill="#65e3df"/>
+<path d="M28 40H36V44H32V48H28Z" fill="#ffd68b"/>
+<path d="M16 25H24V29H16ZM16 33H22V37H16ZM16 41H24V45H16Z" fill="#ad85d8"/>
+<path d="M18 52H22V48H26V52H30V56H26V60H22V56H18Z" fill="#ffd977"/>
+<path d="M10 14H68V16H10ZM10 56H68V58H10Z" fill="#ab81ec"/>
+</g></svg>

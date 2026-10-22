@@ -1,7 +1,7 @@
 01-tap-overdrive 0 84
 02-hardware 85 149
 03-craft 150 239
-04-fusion 240 350
-05-equip 351 451
-06-model 452 511
-07-menu 512 561
+04-fusion 240 353
+05-equip 354 471
+06-model 472 536
+07-menu 537 586

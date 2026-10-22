@@ -15,7 +15,7 @@ namespace IdleIntelligence.Core
  [Serializable]public sealed class BonusBox
  {public long id;public double at;public string blueprint="";public BonusChoice[] choices=Array.Empty<BonusChoice>();public BonusBox Copy(){var b=(BonusBox)MemberwiseClone();b.choices=choices.Select(c=>c.Copy()).ToArray();return b;}}
  [Serializable]public sealed class BonusReceipt
- {public long id;public double at;public int family;public string blueprint="";public bool automatic;public long[] components=new long[ItemBalance.ComponentIds.Length];public BonusReceipt Copy(){var r=(BonusReceipt)MemberwiseClone();r.components=(long[])components.Clone();return r;}}
+ {public long id;public double at;public int family;public string blueprint="";public bool automatic,voucherGranted;public long[] components=new long[ItemBalance.ComponentIds.Length];public BonusReceipt Copy(){var r=(BonusReceipt)MemberwiseClone();r.components=(long[])components.Clone();return r;}}
  [Serializable]public sealed class BonusState
  {public long earned,opened;public string lastDailyKey="";public BonusBox[] pending=Array.Empty<BonusBox>();public bool hasLast;public BonusReceipt last;public BonusState Copy(){var b=(BonusState)MemberwiseClone();b.pending=pending.Select(p=>p.Copy()).ToArray();b.last=hasLast?last?.Copy():null;return b;}}
  [Serializable]public sealed class LegacyMissionMail

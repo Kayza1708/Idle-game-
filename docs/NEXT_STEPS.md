@@ -70,4 +70,45 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 
 Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md](unity-design-06.md). Zunächst diesen Stand gemeinsam visuell beurteilen. Native iPhone-/Android-Notches, Touch-/Systemschrift, Audio-/Haptikunterbrechungen und Leistungsaufnahme bleiben Geräteabnahme. Übrige Bildschirmdichte und die im Quellkatalog identisch deutsch geführten INT-Namen getrennt bearbeiten; keine Ersatzregeln oder Balanceänderungen ableiten.
 
-- Remote-Abgleich dieses Abschnitts: Die inzwischen auf `main` integrierten Company-/Gumball-Funktionserweiterungen sind kein Teil der reinen Animationsrunde 06. Deren Unity-Port/Paritätsabnahme ist gesondert gegen den neuen Quellstand abzugleichen; die historischen Funktionsberichte beziehen sich auf ihren geprüften Quellstand.
+
+
+## Cloudflare Company Backend – neuer Entwicklungsbranch
+
+1. [Cloudflare Companies](cloudflare-companies.md) und [Einrichtung](../cloudflare/company-api/README.md) ansehen. D1 in EU-Jurisdiktion erstellen und Wrangler-Konfiguration mit echter Datenbank-ID versehen.
+2. Node-/SQLite-Tests und lokale Worker-/D1-Integration prüfen; Unity 6000.3.26f1 kompilieren. Dieser Branch wurde noch nicht deployed oder im Editor geprüft.
+3. Sichere Accountbindung und serverseitige Belohnungs-/Inventarführung implementieren, danach Company-UI, Projekte, Handels-Escrow und Seasons hinzufügen; Chat bleibt ausgeschlossen.
+4. Code nur nach erfolgreichem CI-Lauf in main mergen; kein Cloudflare-Remote-Deployment oder Store-Release ohne gesonderte Freigabe.
+
+
+## Company-Community ohne Chat
+
+- [Technisches Konzept](company-social-no-chat.md) für private Spielerprofile, Bronze/Silber/Gold-Abzeichen, Profilrahmen, Leadership-Management, Einladungen und Item-Handel lesen.
+- Vor dem Produktivstart D1-Migrationen 0001–0003 auf Staging prüfen, Unity 6000.3.26f1 kompilieren und Client/Server-Berechtigungen auf zwei Geräten testen.
+- Persönliche Gem-Wallet und Item-Provenienz zuerst serverseitig absichern, bevor Gems-Rahmen kaufbar oder lokale Items transferierbar werden. Es wird kein Chat implementiert.
+
+
+## Gutschein-Integration (Draft-PR #149)
+
+1. [Gumball Voucher Design-/Mechanikbericht](gumball-vouchers.md) und tatsächliche TypeScript-/Unity-Tests prüfen.
+2. `npm run typecheck`, `npm test`, `npm run unity:check`, `npm run build` prüfen. Generierte Unity-Referenzen werden auf dem isolierten Feature-Branch synchronisiert. Keine Golden-Fixture-Abweichungen verdecken.
+3. Unity 6000.3.26f1 Import/Compile, EditMode/PlayMode und tatsächliche Ticket-Ziehung mit v21/v22 Save-Migration durchführen.
+4. Shop/Gumball/Season bei 320/390/430px in DE/EN und weitere Sprachen samt Ticketgrafik/Audio/Reduced Motion abnehmen.
+5. Company-Profilrahmen/Badge-Kataloge weiter visualisieren, ohne Chat einzuführen oder lokale Voucher in serverseitiges Handelsinventar umzuwandeln.
+
+
+## Gumball Art + Abzeichen (Feature-Branch, nicht mergen ohne Abnahme)
+
+1. [Art-/Funktionsabgleich](profile-gumball-art-audit.md) prüfen; die Gutschein-Belohnungslogik ist bereits in main enthalten und wird nicht neu verdoppelt.
+2. Web: npm run typecheck, npm test, npm run build. Unity: tatsächlichen Editor in 6000.3.26f1 kompilieren, EditMode ProfileBadgeArtTests und existierende GumballVoucherTests, anschließend Profil/Season/Shop bei 320/390/430 px und DE/EN prüfen.
+3. Fehlende echte Profileinbindung mit gesicherter Auth, online einstellbaren 3 Badge-Slots, Frame-Käufen nur gegen serverbestätigte Gems und Privacy-Schaltern implementieren. Kein Chat.
+
+## Company-/Gutschein-Main-Integration · 22.10.2026
+1. GitHub Game checks und Cloudflare Companies API am finalen PR-Head prüfen, Referenzexports nur aus src/economy.ts generieren; rote CI nie ignorieren.
+2. Die neuen Spielquellen in main können **ohne Cloudflare-Remote-Migration** bleiben; remote Wrangler D1 migrations apply erst nach D1-Backup und geprüftem Nutzer-/Namensdaten-Upgrade ausführen.
+3. Sicheres Gast/Apple/Google-Konto und späteres Recovery ohne E-Mail-Pflicht implementieren. Serverseitig prüfbare Freischaltung ab 1.000 Gesamt-INT und 500-Gem-Founder-Wallet implementieren; bis dahin bleiben Online-Beitritte absichtlich gesperrt.
+4. Normale Kisten-/Season-Gutscheinquittungen, Gems und Trading-Items nur anhand serververifizierter Belege online handelbar machen. UI muss lokale vs. geprüfte Tickets sichtbar trennen und Offline-/Crashfälle behandeln.
+5. Namenscheck kann öffentlich und gedrosselt erfolgen; erst authentifizierter PUT reserviert einen Namen. Frühere bereits existierende Pseudonyme vor produktiver Aktivierung anhand einheitlicher Unicode-/Leetspeak-Schlüssel migrieren.
+6. In Unity prüfen: 1.000-INT-Mira-Text, Claim-! auf Missionen/Achievements, Company-Rankings ohne Login, opt-in Profil-/Badge-Ausstellung, handhabbarer Trade-Flow und reduzierte Bewegung.
+7. Datenschutz/Auskunft/Löschung, Missbrauchsmeldung, Privatsphäre für Ranglisten, EU-D1-Aufbewahrung und Stress-/Mobiltests vor Veröffentlichung vervollständigen. Kein Chat.
+
+- Aktionsrunde 06 / Draft #152: Main-Integration `aebd1174` erhält die vorhandenen Unity-Company-/Profil-/Gutscheinwege. Neuer Company-Menü-/Gutschein-/Reload-Fall und zwei übernommene Compile-Anschlüsse korrigiert; finale integrierte Prüfergebnisse stehen im Abschnitt-06-Bericht. Optische Company-Abnahme bleibt separat.

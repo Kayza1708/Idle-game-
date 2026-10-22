@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Challenge Master silver">
+ <defs><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4ffff"/><stop offset=".36" stop-color="#e8faff"/><stop offset=".72" stop-color="#8caac7"/><stop offset="1" stop-color="#3c5d8b"/></linearGradient></defs>
+ <!-- Uniform 3-tier medallion silhouette, distinct achievement-family emblem. -->
+ <path d="M41 83 34 119 64 105 94 119 87 83" fill="#8caac7" stroke="#3c5d8b" stroke-width="5" stroke-linejoin="round"/>
+ <path d="M34 116 64 101 94 116" stroke="#f4ffff" stroke-opacity=".65" stroke-width="2" fill="none"/>
+ <path d="M64 7 86 14 106 33 113 56 108 83 88 104 64 111 40 104 20 83 15 56 22 33 42 14Z" fill="url(#metal)" stroke="#3c5d8b" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M64 18 82 24 97 39 102 58 97 77 81 93 64 100 47 93 31 77 26 58 31 39 46 24Z" fill="#23364e" stroke="#e8faff" stroke-width="3"/>
+ <path d="M37 35 47 26 M80 26 91 36" stroke="#f4ffff" stroke-opacity=".8" stroke-width="3"/>
+ <g color="#ff7d9b" transform="translate(10 10) scale(.84)"><path d="M49 35h30v16c0 17-6 29-15 34-9-5-15-17-15-34V35Z" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/><path d="M49 44H39v11q2 12 15 14M79 44h10v11q-2 12-15 14" stroke="currentColor" stroke-width="5" fill="none"/><path d="m64 46 5 9 10 1-8 7 2 10-9-5-9 5 2-10-8-7 10-1Z" fill="currentColor"/></g>
+ <path d="M30 85Q64 113 98 85" fill="none" stroke="#f4ffff" stroke-opacity=".48" stroke-width="2"/>
+ </svg>

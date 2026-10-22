@@ -126,3 +126,45 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 ### Unity · Aktionsinszenierung Abschnitt 06
 
 Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung, Laborakzente, zielgerichtetes Ausrüsten, ruhige Navigation und reine Hardware-Gesamtpreise sind in [unity-design-06.md](unity-design-06.md) abgegrenzt. Visuelle Prüfung und funktionale Regression bleiben getrennt. Keine pauschale Gestaltungs-/Gerätefreigabe und keine Änderung von Balance, Saveformat oder nativen Kauf-/Werbeanbietern.
+
+
+## Cloudflare Company Multiplayer – 22.10.2026
+
+- [x] Separate Workers/D1-Basis mit serverseitigen RP- und Research-Regeln sowie Unity-HTTP-Adapter vorbereitet. Details: [Cloudflare Companies](cloudflare-companies.md).
+- [ ] Worker/D1 tatsächlich deployen und integrieren; Auth, Inventar, vollständige Company-Oberfläche, verifizierter Handel, Projektsystem, Seasons und Live-/Gerätetests sind noch offen.
+
+
+## Companies ohne Chat – 22.10.2026
+
+- [x] Separate Backend-Migration für CEO-Übergabe, Rollen, Einladungen ohne Nachrichtentext, standardmäßig private Profile, Company-Badges, Rahmenkatalog und Escrow-Angebote implementiert.
+- [ ] Persönliche Challenge-/Prestige-Badges erst mit überprüfbaren Nachweisen freigeben; lokale Spielstände zählen nicht als Serverbeleg.
+- [ ] Unity-Menüs, sicheres Echtgeld/Gems-Inventar, echter Handel, Moderation, DSGVO-Selbstauskunft/Löschung, Device-/Stresstests und Remote-Migration offen. Kein Chat vorgesehen.
+
+
+## Gumball-Gutscheine (Entwicklungs-PR #149, 22.10.2026)
+
+- [x] Nicht handelbare Gutscheine als echte zusätzliche Gumball-Ziehung in TypeScript und Unity implementiert, Odds/Season-Milestones aus gemeinsamer Balancequelle.
+- [x] Transparentes Ticket-Artwork (SVG/Web) und natives Pixel-Sprite, Wallet/Einlösung und separate Kisten-Reveal-Belohnung angelegt.
+- [x] Save-v22-Wrapper mit alten v21/älteren Saves, konservativem Nullbestand und testbaren Grenzen vorbereitet; neue TypeScript- und Unity-Tests hinzugefügt.
+- [ ] Unity-Editor-Kompilation, endgültige Paritätsabnahme nach Regeneration, DE/EN plus fünf weitere Sprachen, Screenshots/Video und Geräte-/Offline-/Schnelltap-Prüfung nachweisen. Draft nicht mergen.
+- [ ] Persönliche Profil-/Company-Badge-Sprites und Rahmen native vollständig integrieren; drei erste Badge-Grundmotive sind Konzeptassets, keine fertige Profil-UI.
+
+
+## Profilgrafiken / Gumball-Art (22.10.2026, getrennter Feature-Branch)
+
+- [x] Bestands-Gumball-Gutscheine, Kistenquoten und Free-/Premium-Season-Claims geprüft; keine zweite Wallet oder doppelten Ticket-Bonus hinzugefügt.
+- [x] 7 Abzeichenfamilien × Bronze/Silber/Gold, 8 Profilrahmen und Company-Wappen als eigene SVG-Grafiken ergänzt; native Unity-Pixelart-Generatoren erstellt, lokale Achievement-Vorschau angebunden.
+- [x] Web-Season-Pass zeigt bestehende Gutscheine zusätzlich am Reward und in Track-Zusammenfassungen; kein Balanceeingriff.
+- [ ] Unity-Kompilierung, native Profil- und Kisten-Screenshots, 7 Sprachen, Geräteabnahme und verifizierter Online-Schaukasten noch offen. [Status](profile-gumball-art-audit.md).
+
+## Company / Gumball / Profile · Folgestand 22.10.2026
+- [x] Gutscheinwahrscheinlichkeiten: Common 5 %, Rare 10 %, Epic 20 %, Legendary 30 %; generierter Unity-Export und Referenztests synchronisiert. Bonusbox/Season-Milestones unverändert.
+- [x] Retro-Pixel-Gutschein, Badge-SVGs, animierte seltene Profilrahmen mit Bewegungsreduktion, native lokale Schaukasten-Vorschau und rote Claim-Hinweise vorbereitet.
+- [x] Cloudflare: eindeutige, moderierte pseudonyme Spielernamen/Companynamen, öffentliche Company-Ranglisten und Opt-in-Spielerrang, Anträge/Einladungen, verifizierte Ticket-Wallet und D1-Escrow/Trader-Abzeichen; keine Nachrichten gespeichert.
+- [x] Server prüft Gründungsgebühr von 500 **verifizierten** Gems und Company-Freigabe; Unity zeigt 1.000-INT-Meilenstein und Mira-Erläuterung.
+- [ ] **Echte Nutzbarkeit:** 1.000-INT-Nachweis muss sicher vom persönlichen Game ins Backend gelangen; servervalidiertes Gem-Guthaben, Client-Login/Account-Recovery und sichere Gutschein-Quittungen aus normalen Kisten fehlen. Lokale Save-Dateien gelten niemals als Online-Nachweis.
+- [ ] Company-Komplettmenüs inkl. Bewerbungs-/Rollen-/Handel-UI und Benutzerprofil-Privatsphäre-/Rahmenauswahl ausbauen. Aktuell Hub/Transport/lesende Ansichten und sichere API-Basis, keine vollständige soziale Live-Erfahrung.
+- [ ] Unity-Editor-Kompilierung, C#-PlayMode/Device-/Offline-Tests, Performance bei 320/390/430 px und Datenschutzlöschung/Export vor App-Release abschließen.
+- [ ] Kein Chat, keine Direktnachrichten und kein Nachrichtenfeld für Trading/Anträge.
+
+- Aktionsrunde 06 mit `main aebd1174` zusammengeführt: Company-/Profil-/Gutscheinwege erhalten, zwei übernommene Compileanschlüsse korrigiert, Gutschein-Referenzprojektion ergänzt und Referenzen aus den Quellen erneuert. Integrierte 135 EditMode-Fälle sowie 75 PlayMode-Fälle über breiten Lauf und expliziten Profil-Nachlauf geprüft; genaue Scopes und visuelle Grenzen im Abschnitt-06-Bericht. Kein PR-Merge und keine Veröffentlichung.

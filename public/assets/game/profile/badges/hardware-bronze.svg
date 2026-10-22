@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Hardware Pioneer bronze">
+ <defs><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe4b2"/><stop offset=".36" stop-color="#f5c188"/><stop offset=".72" stop-color="#b47044"/><stop offset="1" stop-color="#6b3c2e"/></linearGradient></defs>
+ <!-- Uniform 3-tier medallion silhouette, distinct achievement-family emblem. -->
+ <path d="M41 83 34 119 64 105 94 119 87 83" fill="#b47044" stroke="#6b3c2e" stroke-width="5" stroke-linejoin="round"/>
+ <path d="M34 116 64 101 94 116" stroke="#ffe4b2" stroke-opacity=".65" stroke-width="2" fill="none"/>
+ <path d="M64 7 86 14 106 33 113 56 108 83 88 104 64 111 40 104 20 83 15 56 22 33 42 14Z" fill="url(#metal)" stroke="#6b3c2e" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M64 18 82 24 97 39 102 58 97 77 81 93 64 100 47 93 31 77 26 58 31 39 46 24Z" fill="#4a2a37" stroke="#f5c188" stroke-width="3"/>
+ <path d="M37 35 47 26 M80 26 91 36" stroke="#ffe4b2" stroke-opacity=".8" stroke-width="3"/>
+ <g color="#76bfff" transform="translate(10 10) scale(.84)"><rect x="43" y="42" width="42" height="42" rx="6" fill="none" stroke="currentColor" stroke-width="6"/><rect x="55" y="54" width="18" height="18" fill="currentColor"/><path d="M52 32v10M64 32v10M76 32v10M52 84v10M64 84v10M76 84v10M33 52h10M33 64h10M33 76h10M85 52h10M85 64h10M85 76h10" stroke="currentColor" stroke-width="5" stroke-linecap="square"/></g>
+ <path d="M30 85Q64 113 98 85" fill="none" stroke="#ffe4b2" stroke-opacity=".48" stroke-width="2"/>
+ </svg>

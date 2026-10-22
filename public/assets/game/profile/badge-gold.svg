@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128"><title>gold Achievement Badge</title>
+ <defs><linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a6"/><stop offset=".6" stop-color="#e5ab3d"/><stop offset="1" stop-color="#926027"/></linearGradient></defs>
+ <path d="M44 77 L35 122 L63 107 L91 122 L83 77" fill="#e5ab3d" stroke="#926027" stroke-width="4"/>
+ <path d="M57 87 L63 107 L76 111" fill="none" stroke="#fff0a6" stroke-width="3"/>
+ <path d="M64 7 L86 15 L108 40 L113 65 L101 90 L80 107 L48 107 L26 90 L15 65 L20 40 L42 15 Z" fill="url(#rim)" stroke="#fff0a6" stroke-width="4"/>
+ <path d="M64 17 L85 24 L99 44 L103 63 L92 83 L76 95 L52 95 L36 83 L25 63 L29 44 L43 24 Z" fill="#41334e" stroke="#e5ab3d" stroke-width="3"/>
+ <path d="M64 30 L73 49 L93 52 L78 66 L82 86 L64 76 L46 86 L50 66 L35 52 L55 49 Z" fill="#ffed9f" stroke="#fff0a6" stroke-width="3"/>
+ <path d="M39 33 L52 24 M76 24 L89 33" stroke="#fff0a6" stroke-width="3" opacity=".8"/>
+ </svg>

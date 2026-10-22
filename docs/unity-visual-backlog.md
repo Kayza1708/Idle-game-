@@ -64,7 +64,7 @@ Offen bleiben insbesondere die physische Wirkung von Schrift/Touch/Notches, Syst
 
 ## Gemeinsame Aktionssequenzen · Abschnitt 06
 
-[Umfang und eigene visuelle Beurteilung](unity-design-06.md): gebogene beschleunigte Fusion, gestaffelte Silhouette/echter Slotrahmen/Resultat, eigener Pressen-/Dampfsprite, Truhen- und Kapselmechanik aus Originalgrafiken, gemeinsame gespeicherte Belege und Zieltransfers. Wiederverwendung und begrenzte Partikel, Kürzen/Navigation/Reload/reduzierte Bewegung. Keine Belohnung aus Animationen. Hardware zeigt Gesamtpreis und tatsächliche Menge statt Bestand/Preis. Menü-Rundgang schließt die 15 vorhandenen Hauptrouten mit Scrollen/Rückkehr ein.
+[Umfang und eigene visuelle Beurteilung](unity-design-06.md): gebogene beschleunigte Fusion, gestaffelte Silhouette/echter Slotrahmen/Resultat, eigener Pressen-/Dampfsprite, Truhen- und Kapselmechanik aus Originalgrafiken, gemeinsame gespeicherte Belege und Zieltransfers. Wiederverwendung und begrenzte Partikel, Kürzen/Navigation/Reload/reduzierte Bewegung. Keine Belohnung aus Animationen. Hardware zeigt Gesamtpreis und tatsächliche Menge statt Bestand/Preis. Menü-Rundgang schließt die 15 ursprünglichen Hauptrouten und nach Main-Integration den bedingten Company-Zugang mit Scrollen/Rückkehr ein; INT-Teststand ausdrücklich vorbereitet.
 
 Offen für folgende Abnahmen:
 
@@ -73,3 +73,21 @@ Offen für folgende Abnahmen:
 - Die übrigen Inhalte/Listen behalten ihre vorhandenen Layouts; der gemeinsame Menüstil ersetzt keine vollständige Layoutabnahme aller Unterseiten.
 - Gemeinsamer Quellkatalog: mehrere INT-Knotennamen/-Beschreibungen in allen sieben Sprachen deutsch. Als Inhaltsübersetzung gesondert bearbeiten, keine neuen Begriffe/Balanceregeln erfinden.
 - Gesamtqualität anhand der tatsächlichen Clips gemeinsam beurteilen; bestandene Tests und ein vorhandenes Effektgerüst sind keine visuelle Gleichwertigkeit mit Archero.
+
+
+## Gumball Gutschein & Profil-Badges (22.10.2026)
+
+- Neues Ticket-Artwork: Web-SVG und native UI-Pixelsprite vorhanden; Format- und Art-Differenzen bei 320/390/430 px prüfen, goldene Randkante, Kapsel und Ticketzähler über alle Menüs vereinheitlichen.
+- Ticket-Ziehung verwendet bestehende Ergebnisanzeige; hochwertige Gumball-/Kistenbewegung und vollständigen echten Videonachweis noch prüfen.
+- Company-Badges/Profilrahmen: Grund-SVG für Bronze/Silber/Gold ergänzt, aber **noch kein integrierter Unity-Spriteatlas** oder fertiges Profil mit 3 Showcase-Slots und Privacy-Schaltern. Benötigt modulare Grundform, Emblem pro Achievementfamilie, Bronze/Silber/Gold-Rarity, Locked/Unlocked/Preview/Equipped und Rahmen (Founder/Neon/Quantum/Singularity).
+- Profilzahlen (Compute/INT/Prestiges/Spielzeit) nur bei ausdrücklicher Freigabe und verifizierter Herkunft online anzeigen; keine Social Chat-UI aufbauen.
+
+
+## Profile-Badges / Bilder ergänzt (22.10.2026)
+
+- [x] Je 3 Metallstufen der sieben Company-/Achievementfamilien als einzelne Web-SVG; acht Rahmen, Company-Wappen und Unity-kompatible Pixelvarianten im gesonderten Feature-Branch.
+- [x] Lokale Unity-Abzeichen-Galerie und Schaukasten mit tatsächlich abgeholten Achievements, Web-Profil-Vorschau und markierte Season-Gutscheine.
+- [ ] Kein echter Online-Company-Profil-Screen, kein kauf-/auswählbarer Profile Frame, keine profilübergreifende verifizierte Datensynchronisierung; nicht als fertig markieren.
+- [ ] Effektqualität, Bildgrenzen, Text/Notch-Kontrast und Animationen in tatsächlichen Unity-Screenshots und Geräten visuell beurteilen.
+
+- Übernommene Company-Ansicht (`main aebd1174`): englische Gate-Erklärung, aber mehrere übrige Beschriftungen noch deutsch; langer Statusabsatz ist in der vorhandenen festen Höhe gekürzt. Aktionen/Scrollen/Rückkehr werden geprüft und aufgenommen. Vollständige Quelllokalisierung und eigener Inhalts-/Dichtedurchlauf bleiben offen; keine Online-/Serverfreigabe daraus ableiten.

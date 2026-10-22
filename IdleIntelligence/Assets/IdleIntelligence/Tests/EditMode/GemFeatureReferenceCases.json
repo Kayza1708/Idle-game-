@@ -842,6 +842,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -15010,6 +15012,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -30806,6 +30810,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -33210,6 +33216,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -35614,6 +35622,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -38034,6 +38044,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -40430,6 +40442,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -42834,6 +42848,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -45254,6 +45270,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -47673,6 +47691,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -50108,6 +50128,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -52543,6 +52565,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -54929,6 +54953,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -57315,6 +57341,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -61686,6 +61714,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -63325,6 +63355,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -64964,6 +64996,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -66603,6 +66637,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -68238,6 +68274,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -81045,6 +81083,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -84797,6 +84837,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -87793,6 +87835,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -89611,6 +89655,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -91429,6 +91475,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -93133,6 +93181,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -94837,6 +94887,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -96549,6 +96601,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -98261,6 +98315,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -99999,6 +100055,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -101737,6 +101795,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -103461,6 +103521,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -105185,6 +105247,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -106909,6 +106973,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -108633,6 +108699,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -110257,6 +110325,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -111881,6 +111951,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -113505,6 +113577,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -115129,6 +115203,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -117258,6 +117334,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -119387,6 +119465,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -121516,6 +121596,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -123645,6 +123727,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -125774,6 +125858,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -162347,6 +162433,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -172278,6 +172366,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -175517,6 +175607,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null
@@ -177097,6 +177189,8 @@
           "nextChest": 1,
           "chests": [],
           "shopRevision": 0,
+          "vouchersEarned": 0,
+          "vouchersSpent": 0,
           "shopClockAt": 0,
           "hasReceipt": false,
           "receipt": null

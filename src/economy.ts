@@ -2437,6 +2437,7 @@ export const BALANCE = {
   achievementTierGems:[2,4,8,12],achievementPointsPerTier:[2,4,8,12],achievementResearchPerTen:.01,achievementResearchCap:.20,
   missionRewards:{daily:{task:2,bonus:6},weekly:{task:5,bonus:30},monthly:{task:15,bonus:120}},
   hardwareAutobuyerUnlock:100,hardwareAutobuyerInterval:5,
+  gumballVouchers:{chestChances:{common:0.05,rare:0.10,epic:0.20,legendary:0.30},dailyBoxChance:0.0025,seasonFreeLevel:30,seasonPremiumLevel:40,maxOwned:999},
   capsuleMachine:{gemCost:10,itemChance:.01,componentChance:.35,creditChance:.45,dataChance:.14,gemChance:.0475,jackpotChance:.0025,jackpotMultiplier:20,gemRange:[2,8],creditSeconds:[15,60],dataSeconds:[15,60],creditFloor:100,dataFloor:5,componentRanges:{common:[3,12],uncommon:[2,5],rare:[1,2]},rareChanceBoundary:.01,uncommonChanceBoundary:.10},
   commerce:{incomeMultiplier:2,rewardGems:10,gemVideoCooldownMs:600000,droneSeconds:300,droneCooldownMs:600000,researchAdSeconds:600,researchGemsPerMinute:2,ticketMs:600000,
     starterItems:[{type:'quantum-chip',rarity:'rare'},{type:'memory-crystal',rarity:'rare'},{type:'field-scanner',rarity:'rare'}],
@@ -2547,7 +2548,7 @@ export type GameState = {
   commerce?:import('./commerce').CommerceState;
   shop:import('./shop').ShopState;
   intro:{qualityUsed:boolean;researchUsed:boolean};
-  capsuleMachine:import('./capsuleMachine').CapsuleState;bonusBoxes:import('./bonusBoxes').BonusBoxState;materials:import('./materialEconomy').MaterialProgress;foundries:import('./foundries').FoundryState[];legacyFoundryLevels:number;deviceProgress:import('./deviceEffects').DeviceProgress;challengeStages:Record<string,number>;challengeUnlocks:string[];
+  capsuleMachine:import('./capsuleMachine').CapsuleState;vouchers?:import('./gumballVouchers').GumballVoucherWallet;bonusBoxes:import('./bonusBoxes').BonusBoxState;materials:import('./materialEconomy').MaterialProgress;foundries:import('./foundries').FoundryState[];legacyFoundryLevels:number;deviceProgress:import('./deviceEffects').DeviceProgress;challengeStages:Record<string,number>;challengeUnlocks:string[];
   challengeSession?:ChallengeSession;challengeReturn?:{runId:string;success:boolean;report:import('./simulation').AdvanceReport};challengeMigrationNotice?:'legacy-challenge-recovered';
   blueprintResearchReward:'unearned'|'pending'|'consumed';researchAccessIds:ResearchId[];researchRepeat:{enabled:boolean;id:RepeatableResearchId|null;targetLevel:number};researchDirector:ResearchDirector;runTrainingStarted:number;craftingRecycleRemainders:ComponentInventory;
   blueprintMastery:Record<ItemTypeId,number>;craftedItemCounts:Record<ItemTypeId,number>;craftedItemTypes:ItemTypeId[];discoveredComponents:ComponentId[];fragmentConversionRevision:number;
