@@ -8,7 +8,7 @@ namespace IdleIntelligence.Runtime
 {
  public sealed class RetentionView:MonoBehaviour
  {
-  GameRuntime game;Transform content;Text header;string page="achievements";readonly List<Action> refresh=new List<Action>();
+  GameRuntime game;Transform content;Text header;string page="profile";readonly List<Action> refresh=new List<Action>();
   public void Initialize(GameRuntime runtime)
   {
    game=runtime;header=WorkshopUIFactory.Label("ProfileWallet",transform,"",17,72);
