@@ -71,8 +71,8 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 
 1. [Cloudflare Companies](cloudflare-companies.md) und [Einrichtung](../cloudflare/company-api/README.md) ansehen. D1 in EU-Jurisdiktion erstellen und Wrangler-Konfiguration mit echter Datenbank-ID versehen.
 2. Node-/SQLite-Tests und lokale Worker-/D1-Integration prüfen; Unity 6000.3.26f1 kompilieren. Dieser Branch wurde noch nicht deployed oder im Editor geprüft.
-3. Sichere Accountbindung und serverseitige Belohnungs-/Inventarführung implementieren, danach Company-UI, Projekte, Handels-Escrow, Chat und Seasons hinzufügen.
-4. Main unverändert lassen, nicht mergen oder veröffentlichen ohne gesonderte Freigabe.
+3. Sichere Accountbindung und serverseitige Belohnungs-/Inventarführung implementieren, danach Company-UI, Projekte, Handels-Escrow und Seasons hinzufügen; Chat bleibt ausgeschlossen.
+4. Code nur nach erfolgreichem CI-Lauf in main mergen; kein Cloudflare-Remote-Deployment oder Store-Release ohne gesonderte Freigabe.
 
 
 ## Company-Community ohne Chat
@@ -96,3 +96,12 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 1. [Art-/Funktionsabgleich](profile-gumball-art-audit.md) prüfen; die Gutschein-Belohnungslogik ist bereits in main enthalten und wird nicht neu verdoppelt.
 2. Web: npm run typecheck, npm test, npm run build. Unity: tatsächlichen Editor in 6000.3.26f1 kompilieren, EditMode ProfileBadgeArtTests und existierende GumballVoucherTests, anschließend Profil/Season/Shop bei 320/390/430 px und DE/EN prüfen.
 3. Fehlende echte Profileinbindung mit gesicherter Auth, online einstellbaren 3 Badge-Slots, Frame-Käufen nur gegen serverbestätigte Gems und Privacy-Schaltern implementieren. Kein Chat.
+
+## Company-/Gutschein-Main-Integration · 22.10.2026
+1. GitHub Game checks und Cloudflare Companies API am finalen PR-Head prüfen, Referenzexports nur aus src/economy.ts generieren; rote CI nie ignorieren.
+2. Die neuen Spielquellen in main können **ohne Cloudflare-Remote-Migration** bleiben; remote Wrangler D1 migrations apply erst nach D1-Backup und geprüftem Nutzer-/Namensdaten-Upgrade ausführen.
+3. Sicheres Gast/Apple/Google-Konto und späteres Recovery ohne E-Mail-Pflicht implementieren. Serverseitig prüfbare Freischaltung ab 1.000 Gesamt-INT und 500-Gem-Founder-Wallet implementieren; bis dahin bleiben Online-Beitritte absichtlich gesperrt.
+4. Normale Kisten-/Season-Gutscheinquittungen, Gems und Trading-Items nur anhand serververifizierter Belege online handelbar machen. UI muss lokale vs. geprüfte Tickets sichtbar trennen und Offline-/Crashfälle behandeln.
+5. Namenscheck kann öffentlich und gedrosselt erfolgen; erst authentifizierter PUT reserviert einen Namen. Frühere bereits existierende Pseudonyme vor produktiver Aktivierung anhand einheitlicher Unicode-/Leetspeak-Schlüssel migrieren.
+6. In Unity prüfen: 1.000-INT-Mira-Text, Claim-! auf Missionen/Achievements, Company-Rankings ohne Login, opt-in Profil-/Badge-Ausstellung, handhabbarer Trade-Flow und reduzierte Bewegung.
+7. Datenschutz/Auskunft/Löschung, Missbrauchsmeldung, Privatsphäre für Ranglisten, EU-D1-Aufbewahrung und Stress-/Mobiltests vor Veröffentlichung vervollständigen. Kein Chat.
