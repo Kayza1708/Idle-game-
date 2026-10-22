@@ -37,11 +37,11 @@ namespace IdleIntelligence.Runtime
         }
         public IEnumerator PlayerLeaderboard(Action<long, string> completed)
         {
-            return Send("GET", "/v1/leaderboards/players", null, completed);
+            return Send("GET", "/v1/leaderboards/players", null, completed, false);
         }
         public IEnumerator CompanySeasonLeaderboard(Action<long, string> completed)
         {
-            return Send("GET", "/v1/leaderboards/companies?scope=monthly", null, completed);
+            return Send("GET", "/v1/leaderboards/companies?scope=monthly", null, completed, false);
         }
         public IEnumerator SetJoinPolicy(string joinPolicy, Action<long, string> completed)
         {
@@ -181,11 +181,11 @@ namespace IdleIntelligence.Runtime
         }
         public IEnumerator FindCompanies(string query, Action<long, string> completed)
         {
-            return Send("GET", "/v1/companies?q=" + Uri.EscapeDataString(query ?? ""), null, completed);
+            return Send("GET", "/v1/companies?q=" + Uri.EscapeDataString(query ?? ""), null, completed, false);
         }
         public IEnumerator CompanyLeaderboard(Action<long, string> completed)
         {
-            return Send("GET", "/v1/leaderboards/companies", null, completed);
+            return Send("GET", "/v1/leaderboards/companies", null, completed, false);
         }
         public IEnumerator CreateCompany(string name, string tag, Action<long, string> completed)
         {

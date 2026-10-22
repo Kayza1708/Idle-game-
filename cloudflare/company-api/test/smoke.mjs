@@ -28,6 +28,12 @@ async function ready() {
   throw Error('Wrangler development Worker not ready');
 }
 await ready();
+// Public leaderboards do not create accounts, sessions or personal data.
+assert.equal((await http('GET','/v1/leaderboards/companies')).status,200);
+assert.equal((await http('GET','/v1/leaderboards/companies?scope=monthly')).status,200);
+assert.equal((await http('GET','/v1/leaderboards/players')).status,200);
+assert.equal((await http('GET','/v1/companies?q=Neural')).status,200);
+assert.equal((await http('POST','/v1/companies',null,{name:'Intruder',tag:'BAD'})).status,401);
 const first=await http('POST','/v1/session/guest');
 assert.equal(first.status,201);
 assert.equal(first.body.accessToken.length,43);

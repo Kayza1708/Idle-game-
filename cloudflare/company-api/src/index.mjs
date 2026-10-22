@@ -141,6 +141,45 @@ export default {
         if (!limit.success) throw new ApiError(429,'signup_rate_limited');
         return createGuest(db,now);
       }
+      // Public read-only Company browsing and opt-in ranking; never requires an email or guest account.
+      if(method==='GET'&&path==='/v1/companies'){
+        const q=(url.searchParams.get('q')||'').slice(0,50);
+        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime,join_policy FROM companies WHERE visibility=\'public\' AND (instr(lower(name),lower(?))>0 OR instr(lower(tag),lower(?))>0) ORDER BY rp_lifetime DESC LIMIT 30').bind(q,q).all();
+        return reply({companies:results.results,maxMembers:MAX_MEMBERS});
+      }
+      if(method==='GET'&&path==='/v1/leaderboards/players'){
+        // Rank is server-calculated from capped Company contributions, not local Credits/INT.
+        // People who did not opt in are never included in the public list.
+        const results=await db.prepare(
+          'WITH positions AS (SELECT player_id,company_id,contributed_rp,'+
+          'ROW_NUMBER() OVER(ORDER BY contributed_rp DESC,player_id) AS ranking '+
+          'FROM company_members) SELECT p.id,p.display_name AS name,c.tag AS company_tag,'+
+          'r.ranking AS rank,r.contributed_rp AS rp '+
+          'FROM positions r JOIN player_profiles pr ON pr.player_id=r.player_id AND pr.show_rank=1 '+
+          'JOIN players p ON p.id=r.player_id JOIN companies c ON c.id=r.company_id '+
+          'ORDER BY r.ranking LIMIT 100'
+        ).all();
+        return reply({players:results.results,ranking:'verified_company_rp',optIn:true});
+      }
+      if(method==='GET'&&path==='/v1/leaderboards/companies'){
+        const scope=url.searchParams.get('scope')==='monthly'?'monthly':'lifetime';
+        const season=new Date(now*1000).toISOString().slice(0,7);
+        if(scope==='monthly'){
+          const results=await db.prepare(
+            'SELECT c.id,c.name,c.tag,c.member_count,m.rp AS score,'+
+            'ROW_NUMBER() OVER(ORDER BY m.rp DESC,c.id) AS rank '+
+            'FROM company_monthly_scores m JOIN companies c ON c.id=m.company_id '+
+            'WHERE m.season_id=? ORDER BY score DESC,c.id LIMIT 100'
+          ).bind(season).all();
+          return reply({companies:results.results,ranking:'monthly_verified_rp',season,seasonal:true});
+        }
+        const results=await db.prepare(
+          'SELECT id,name,tag,member_count,rp_lifetime,'+
+          'ROW_NUMBER() OVER(ORDER BY rp_lifetime DESC,id) AS rank '+
+          'FROM companies ORDER BY rp_lifetime DESC,id LIMIT 100'
+        ).all();
+        return reply({companies:results.results,ranking:'lifetime_rp',seasonal:false});
+      }
       const player=await authenticated(request,db,now);
       const voucher=await vouchersRoute({request,db,player,path,method,now,reply,ApiError,payload,requiredMember});
       if(voucher)return voucher;
@@ -187,44 +226,6 @@ export default {
           serverVerified:player.company_access_verified===1,
           verifiedGemBalance:wallet?.balance??0,
           warning:'The local INT tree is not a server-verified entitlement. A trusted progression bridge is required before launch.'});
-      }
-      if(method==='GET'&&path==='/v1/companies'){
-        const q=(url.searchParams.get('q')||'').slice(0,50);
-        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime,join_policy FROM companies WHERE visibility=\'public\' AND (instr(lower(name),lower(?))>0 OR instr(lower(tag),lower(?))>0) ORDER BY rp_lifetime DESC LIMIT 30').bind(q,q).all();
-        return reply({companies:results.results,maxMembers:MAX_MEMBERS});
-      }
-      if(method==='GET'&&path==='/v1/leaderboards/players'){
-        // Rank is server-calculated from capped Company contributions, not local Credits/INT.
-        // People who did not opt in are never included in the public list.
-        const results=await db.prepare(
-          'WITH positions AS (SELECT player_id,company_id,contributed_rp,'+
-          'ROW_NUMBER() OVER(ORDER BY contributed_rp DESC,player_id) AS ranking '+
-          'FROM company_members) SELECT p.id,p.display_name AS name,c.tag AS company_tag,'+
-          'r.ranking AS rank,r.contributed_rp AS rp '+
-          'FROM positions r JOIN player_profiles pr ON pr.player_id=r.player_id AND pr.show_rank=1 '+
-          'JOIN players p ON p.id=r.player_id JOIN companies c ON c.id=r.company_id '+
-          'ORDER BY r.ranking LIMIT 100'
-        ).all();
-        return reply({players:results.results,ranking:'verified_company_rp',optIn:true});
-      }
-      if(method==='GET'&&path==='/v1/leaderboards/companies'){
-        const scope=url.searchParams.get('scope')==='monthly'?'monthly':'lifetime';
-        const season=new Date(now*1000).toISOString().slice(0,7);
-        if(scope==='monthly'){
-          const results=await db.prepare(
-            'SELECT c.id,c.name,c.tag,c.member_count,m.rp AS score,'+
-            'ROW_NUMBER() OVER(ORDER BY m.rp DESC,c.id) AS rank '+
-            'FROM company_monthly_scores m JOIN companies c ON c.id=m.company_id '+
-            'WHERE m.season_id=? ORDER BY score DESC,c.id LIMIT 100'
-          ).bind(season).all();
-          return reply({companies:results.results,ranking:'monthly_verified_rp',season,seasonal:true});
-        }
-        const results=await db.prepare(
-          'SELECT id,name,tag,member_count,rp_lifetime,'+
-          'ROW_NUMBER() OVER(ORDER BY rp_lifetime DESC,id) AS rank '+
-          'FROM companies ORDER BY rp_lifetime DESC,id LIMIT 100'
-        ).all();
-        return reply({companies:results.results,ranking:'lifetime_rp',seasonal:false});
       }
       if(method==='GET'&&path==='/v1/company')return myCompany(db,player.id);
       if(method==='POST'&&path==='/v1/companies'){

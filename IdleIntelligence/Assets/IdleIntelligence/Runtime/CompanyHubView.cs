@@ -69,18 +69,18 @@ namespace IdleIntelligence.Runtime
                     "kein Fortschritt wird hochgeladen.",14,104);
             else LoadCompanies(false);
         }
-        bool Ready()
+        bool Ready(bool sessionRequired)
         {
             if(game==null||!CompanyAccess.LocallyEligible(game.State)){ShowGate();return false;}
-            if(api==null||!api.HasSession||!api.IsConfigured){
-                status.text="Onlinekonto noch nicht sicher verbunden. Offline-Fortschritt bleibt lokal.";
+            if(api==null||!api.IsConfigured||(sessionRequired&&!api.HasSession)){
+                status.text=api==null||!api.IsConfigured?"Cloudflare-API wurde noch nicht eingerichtet.":"Onlinekonto noch nicht sicher verbunden. Offline-Fortschritt bleibt lokal.";
                 return false;
             }
             return true;
         }
-        void Run(Func<Action<long,string>,IEnumerator> request,Action<string> draw)
+        void Run(Func<Action<long,string>,IEnumerator> request,Action<string> draw,bool sessionRequired=true)
         {
-            if(!Ready())return;
+            if(!Ready(sessionRequired))return;
             int id=++pendingSequence;
             status.text="Lade Daten…";
             StartCoroutine(request((code,json)=>{
@@ -111,7 +111,7 @@ namespace IdleIntelligence.Runtime
                     Paragraph("#"+rank+" · "+row.name+" ["+row.tag+"]\n"+
                         (monthly?row.score:row.rp_lifetime)+" RP · "+row.member_count+"/50 Mitglieder",76);
                 }
-            });
+            },false);
         }
         void LoadPlayers()
         {
@@ -123,7 +123,7 @@ namespace IdleIntelligence.Runtime
                 foreach(var p in data.players){
                     Paragraph("#"+p.rank+" · "+p.name+" ["+p.company_tag+"] · "+p.rp+" RP",58);
                 }
-            });
+            },false);
         }
         void Search()
         {
@@ -144,7 +144,7 @@ namespace IdleIntelligence.Runtime
                           response=>{WorkshopUIFactory.Clear(content);Paragraph(apply?
                           "Bewerbung übermittelt. Entscheidung abwarten.":"Beitritt serverseitig bestätigt.");}));
                 }
-            });
+            },false);
         }
         void LoadVouchers()
         {
