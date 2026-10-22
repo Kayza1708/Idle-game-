@@ -153,12 +153,55 @@ namespace IdleIntelligence.Runtime
     WorkshopUIFactory.Button("ProfileBackToIdentity",content,"Zurück zum Profil",()=>Show("profile"));
   }
 
+  [Serializable] sealed class NameCheckReply { public bool available; public string name,reason; }
   void NameInput(bool ai)
   {
    string key=ai?"AIName":"PlayerName";Paragraph(key+"Label",ai?"KI-Name · einmalig wählen":"Spielernamen ändern");
    var root=WorkshopUIFactory.Node(key+"Input",content,typeof(Image),typeof(InputField));WorkshopUIFactory.Size(root,54);root.GetComponent<Image>().color=new Color(.1f,.2f,.25f);
    var text=WorkshopUIFactory.Label("Value",root.transform,"",16);DestroyImmediate(text.GetComponent<LayoutElement>());WorkshopUIFactory.Fill(text.rectTransform);text.rectTransform.offsetMin=new Vector2(10,0);text.rectTransform.offsetMax=new Vector2(-10,0);var input=root.GetComponent<InputField>();input.textComponent=text;input.text=ai?"":game.State.Retention.playerName;input.interactable=game.Writable;
-   var error=Paragraph(key+"Error"," ");var button=WorkshopUIFactory.Button(key+"Save",content,"Namen speichern",()=>{var result=NameRules.Validate(input.text,ai?NameBalance.AIMaximum:NameBalance.PlayerMaximum);if(!result.Ok){error.text=result.Error=="length"?"Bitte wähle einen Namen mit 2 bis "+(ai?NameBalance.AIMaximum:NameBalance.PlayerMaximum)+" Zeichen.":result.Error=="characters"?"Bitte verwende nur Buchstaben, Zahlen, Leerzeichen, - oder _.":"Bitte wähle einen anderen Namen.";return;}if(game.Act(v=>RetentionRules.SetName(v,input.text,ai)))Build();});button.interactable=game.Writable;
+   var error=Paragraph(key+"Error"," ");
+   Button button=null;
+   button=WorkshopUIFactory.Button(key+"Save",content,"Namen speichern",()=>{
+      string desired=input.text;var result=NameRules.Validate(desired,ai?NameBalance.AIMaximum:NameBalance.PlayerMaximum);
+      if(!result.Ok){
+         error.text=result.Error=="length"?"Bitte wähle einen Namen mit 2 bis "+(ai?NameBalance.AIMaximum:NameBalance.PlayerMaximum)+" Zeichen.":
+           result.Error=="characters"?"Bitte verwende nur Buchstaben, Zahlen, Leerzeichen, - oder _.":"Bitte wähle einen anderen Namen.";
+         return;
+      }
+      Action saveLocal=()=>{if(game!=null&&game.Act(v=>RetentionRules.SetName(v,desired,ai)))Build();};
+      if(ai||desired==game.State.Retention.playerName){saveLocal();return;}
+      var api=FindObjectOfType<CompanyApiClient>();
+      if(api==null||!api.IsConfigured){
+        // Offline is playable; the server will reserve a unique name only when account linking is available.
+        saveLocal();return;
+      }
+      button.interactable=false;error.text="Prüfe Namen weltweit…";
+      StartCoroutine(api.CheckUniqueName(desired,(code,json)=>{
+        if(this==null||button==null)return;
+        button.interactable=game.Writable;
+        if(code!=200){
+          error.text="Online-Namensprüfung derzeit nicht erreichbar. Bitte später erneut versuchen.";
+          return;
+        }
+        NameCheckReply checkedName=null;
+        try{checkedName=JsonUtility.FromJson<NameCheckReply>(json);}catch(Exception){}
+        if(checkedName==null||!checkedName.available){
+          error.text="Dieser Spielername ist schon vergeben oder nicht zulässig.";return;
+        }
+        if(!api.HasSession){
+          // Anonymous availability is only a preview; never claim this is a server reservation.
+          saveLocal();return;
+        }
+        button.interactable=false;
+        StartCoroutine(api.ReserveUniqueName(desired,(reserveCode,reserveJson)=>{
+          if(this==null||button==null)return;
+          button.interactable=game.Writable;
+          if(reserveCode>=200&&reserveCode<300){saveLocal();return;}
+          error.text=reserveCode==409?"Name wurde inzwischen vergeben. Bitte anderen wählen.":
+            "Online-Reservierung fehlgeschlagen. Name noch nicht gespeichert.";
+        }));
+      }));
+   });button.interactable=game.Writable;
   }
  }
 }
