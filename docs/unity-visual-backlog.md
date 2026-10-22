@@ -61,3 +61,11 @@ Weitere Forschung/Netze/Schmiede-/Shop-/Season-/Profil-/Einstellungsansichten be
 [Prüfbericht und visuelle Beurteilung](unity-design-05.md): Fusion mit großen konkreten Eingaben und Ergebnis, eigener Pixel-Spritefolge, präzisem Soundmoment und Transfer zum Inventarregister. Dasselbe Bausteinsystem für Herstellung und lokale Aktionsimpulse. Originalmodell und verbundene Sockel nach `EquipmentDialog.tsx` wieder zusammengeführt; sichtbare Itemmitte aus Alpha-Metriken. Ressourcen bleiben ruhig und zeigen echte Gems, Nutzer sind im Hamburger-Menü unter Produktion/Nutzer erreichbar. Keine neue allgemeine Gestaltung für übrige Bildschirme.
 
 Offen bleiben insbesondere die physische Wirkung von Schrift/Touch/Notches, Systemaudio und native Haptik sowie die einzelnen übrigen Bildschirmabnahmen. Die konkrete Verbesserung gegenüber Abschnitt 04 und die funktionalen Testresultate sind bewusst getrennt dokumentiert.
+
+
+## Gumball Gutschein & Profil-Badges (22.10.2026)
+
+- Neues Ticket-Artwork: Web-SVG und native UI-Pixelsprite vorhanden; Format- und Art-Differenzen bei 320/390/430 px prüfen, goldene Randkante, Kapsel und Ticketzähler über alle Menüs vereinheitlichen.
+- Ticket-Ziehung verwendet bestehende Ergebnisanzeige; hochwertige Gumball-/Kistenbewegung und vollständigen echten Videonachweis noch prüfen.
+- Company-Badges/Profilrahmen: Grund-SVG für Bronze/Silber/Gold ergänzt, aber **noch kein integrierter Unity-Spriteatlas** oder fertiges Profil mit 3 Showcase-Slots und Privacy-Schaltern. Benötigt modulare Grundform, Emblem pro Achievementfamilie, Bronze/Silber/Gold-Rarity, Locked/Unlocked/Preview/Equipped und Rahmen (Founder/Neon/Quantum/Singularity).
+- Profilzahlen (Compute/INT/Prestiges/Spielzeit) nur bei ausdrücklicher Freigabe und verifizierter Herkunft online anzeigen; keine Social Chat-UI aufbauen.
