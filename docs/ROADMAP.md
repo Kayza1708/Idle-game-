@@ -100,3 +100,11 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Kontextbezogene Itemvergleiche ohne unveränderte Werte, sichtbare Nachteile und aufklappbare seltenere Aktionen; Pointer-Tapfeedback und ausschließlich kosmetischer Overdrive-Kernzustand implementiert.
 - [x] Vollständige Regressionen vor abschließender Textkorrektur: 59/59 PlayMode, 128/128 EditMode, 1.886/143 Vitest; Typecheck/Web-Build erfolgreich. Anschließend UI-Nachprüfung 4/4 und erneut vollständiges PlayMode 59/59 auf abschließendem Stand. Medienmanifest: [Prüfbericht](unity-design-02.md).
 - [ ] Neue gemeinsame Grundlage auf weitere Bildschirme übertragen; echte Geräte-, Glyphen-, Notch-/Touch- und native Integrationsabnahme bleiben getrennt offen.
+
+### Labor/Itemdetails nach verbindlichem Zielbild · 22.10.2026
+
+- [x] Neue einzelne generierte Stahl-/Gold-/Mint-Rasterassets mit nachvollziehbarer Herkunft; tatsächlich verwendetes gemeinsames Button-Prefab und bestehende Labor-/Fenster-/Portraitprefabs weiterentwickelt.
+- [x] Dominanter Originalkern, Cyan-Overdrive, Goldtraining/-käufe, größere Hardwaremotive; große zentrierte Items, einzelne ausgearbeitete Sockel und dynamische klare Detailhierarchie.
+- [x] Nicht blockierende Druck-/Tap-/Aktivierungs-/Reveal-/Ausrüstungseffekte, reduzierte Bewegung und gespeicherte Transaktion vor Feedback; schnelle Craft-/Fusionsregression durch reine Layoutanpassung statt Neubinden während Culling behoben.
+- [x] Vollständiger Nachlauf 60/60 PlayMode und 128/128 EditMode; Typecheck, 1.886 Vitest-Tests/143 Dateien, Web-Build und Referenzcheck. Letzter visueller Nachlauf/Medienmanifest: [unity-design-03.md](unity-design-03.md).
+- [ ] Weitere Bildschirme auf dieser Grundlage bearbeiten; echte Geräte-/Notch-/Unicode-/Haptik- und Releaseabnahme bleibt gesondert offen.

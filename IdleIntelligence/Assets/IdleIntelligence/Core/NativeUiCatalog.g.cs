@@ -282,5 +282,8 @@ new LocalizedCopy("native:278",new[]{"Permanent, including after Axiom.","Dauerh
 new LocalizedCopy("native:279",new[]{"Modular model","Modulares Modell","Modelo modular","Modèle modulaire","Modelo modular","Modello modulare","Model modułowy"}),
 new LocalizedCopy("native:280",new[]{"Base socket","Grundslot","Ranura básica","Emplacement de base","Slot básico","Slot base","Gniazdo podstawowe"}),
 new LocalizedCopy("native:281",new[]{"from level","ab Level","desde el nivel","à partir du niveau","a partir do nível","dal livello","od poziomu"}),
-new LocalizedCopy("native:282",new[]{"Develop models in the Secret Lab under Research.","Modellentwicklung im Geheimen Labor unter Forschung.","Desarrolla modelos en el Laboratorio secreto de Investigación.","Développez les modèles au Laboratoire secret dans Recherche.","Desenvolva modelos no Laboratório secreto em Pesquisa.","Sviluppa modelli nel Laboratorio segreto in Ricerca.","Rozwijaj modele w Tajnym laboratorium w Badaniach."})
+new LocalizedCopy("native:282",new[]{"Develop models in the Secret Lab under Research.","Modellentwicklung im Geheimen Labor unter Forschung.","Desarrolla modelos en el Laboratorio secreto de Investigación.","Développez les modèles au Laboratoire secret dans Recherche.","Desenvolva modelos no Laboratório secreto em Pesquisa.","Sviluppa modelli nel Laboratorio segreto in Ricerca.","Rozwijaj modele w Tajnym laboratorium w Badaniach."}),
+new LocalizedCopy("native:283",new[]{"Quantum yield","Quantenfunde","Hallazgos cuánticos","Découvertes quantiques","Descobertas quânticas","Scoperte quantistiche","Znaleziska kwantowe"}),
+new LocalizedCopy("native:284",new[]{"Equip","Ausrüsten","Equipar","Équiper","Equipar","Equipaggia","Wyposaż"}),
+new LocalizedCopy("native:285",new[]{"Train","Trainieren","Entrenar","Entraîner","Treinar","Addestra","Trenuj"})
 };}}
