@@ -29,7 +29,7 @@ namespace IdleIntelligence.Runtime
         }
         public IEnumerator CheckUniqueName(string name, Action<long, string> completed)
         {
-            return Send("GET", "/v1/names/check?name=" + Uri.EscapeDataString(name ?? ""), null, completed);
+            return Send("GET", "/v1/names/check?name=" + Uri.EscapeDataString(name ?? ""), null, completed, false);
         }
         public IEnumerator ReserveUniqueName(string name, Action<long, string> completed)
         {

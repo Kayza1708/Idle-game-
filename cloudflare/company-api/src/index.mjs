@@ -180,6 +180,20 @@ export default {
         ).all();
         return reply({companies:results.results,ranking:'lifetime_rp',seasonal:false});
       }
+      // Name preview does not require an account; the eventual authenticated rename is the atomic reservation.
+      // Never collect email or persist the requester's IP.
+      if(method==='GET'&&path==='/v1/names/check'){
+        if(!env.NAME_CHECK_LIMIT)throw new ApiError(503,'name_check_protection_unavailable');
+        const ip=request.headers.get('CF-Connecting-IP')||'missing-edge-ip';
+        const limit=await env.NAME_CHECK_LIMIT.limit({key:ip});
+        if(!limit.success)throw new ApiError(429,'name_check_rate_limited');
+        const candidate=(url.searchParams.get('name')||'').slice(0,100),check=validatePlayerName(candidate);
+        if(!check.ok)return reply({available:false,reason:check.error});
+        const key=normalizeModerationText(check.name);
+        const exists=await db.prepare('SELECT 1 FROM players WHERE name_key=?').bind(key).first();
+        return reply({available:!exists,name:check.name,reason:exists?'taken':null,
+          note:'Preview only; name is reserved only after authenticated PUT /v1/me/name'});
+      }
       const player=await authenticated(request,db,now);
       const voucher=await vouchersRoute({request,db,player,path,method,now,reply,ApiError,payload,requiredMember});
       if(voucher)return voucher;
@@ -192,16 +206,6 @@ export default {
         await db.prepare('UPDATE sessions SET token_hash=?,created_at=?,expires_at=? WHERE token_hash=?')
           .bind(hash,now,now+30*86400,player.token_hash).run();
         return reply({accessToken:token,expiresAt:now+30*86400});
-      }
-      // Name reservations are global and atomic: never rely on the local offline name form.
-      if(method==='GET'&&path==='/v1/names/check'){
-        const candidate=(url.searchParams.get('name')||'').slice(0,100);
-        const check=validatePlayerName(candidate);
-        if(!check.ok)return reply({available:false,reason:check.error});
-        const key=normalizeModerationText(check.name);
-        const existing=await db.prepare('SELECT id FROM players WHERE name_key=? AND id!=?')
-          .bind(key,player.id).first();
-        return reply({available:!existing,name:check.name,reason:existing?'taken':null});
       }
       if(method==='PUT'&&path==='/v1/me/name'){
         const data=await payload(request),check=validatePlayerName(data.name);

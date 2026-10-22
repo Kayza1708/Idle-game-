@@ -26,6 +26,14 @@
         "limit": 3,
         "period": 60
       }
+    },
+    {
+      "name": "NAME_CHECK_LIMIT",
+      "namespace_id": "5003",
+      "simple": {
+        "limit": 20,
+        "period": 60
+      }
     }
   ],
   "triggers": {

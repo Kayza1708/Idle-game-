@@ -29,6 +29,8 @@ async function ready() {
 }
 await ready();
 // Public leaderboards do not create accounts, sessions or personal data.
+assert.equal((await http('GET','/v1/names/check?name=NewAgent')).body.available,true);
+assert.equal((await http('GET','/v1/names/check?name=h1tl3r')).body.available,false);
 assert.equal((await http('GET','/v1/leaderboards/companies')).status,200);
 assert.equal((await http('GET','/v1/leaderboards/companies?scope=monthly')).status,200);
 assert.equal((await http('GET','/v1/leaderboards/players')).status,200);
@@ -43,7 +45,7 @@ assert.equal((await http('GET','/v1/company/access',alice)).body.serverVerified,
 assert.equal((await http('POST','/v1/companies',alice,{name:'Neural Labs',tag:'NLS'})).status,403);
 provisionLocalTestAccount(first.body.player.id,500);
 assert.equal((await http('GET','/v1/company/access',alice)).body.verifiedGemBalance,500);
-assert.equal((await http('GET','/v1/names/check?name=Agent-'+first.body.player.id.slice(0,8),alice)).body.available,true);
+assert.equal((await http('GET','/v1/names/check?name=Agent-'+first.body.player.id.slice(0,8),alice)).body.available,false);
 assert.equal((await http('GET','/v1/names/check?name=h1tl3r',alice)).body.available,false);
 const create=await http('POST','/v1/companies',alice,{name:'Neural Labs',tag:'NLS'});
 assert.equal(create.status,201,JSON.stringify(create.body));
