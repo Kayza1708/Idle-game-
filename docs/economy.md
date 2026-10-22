@@ -718,3 +718,8 @@ Keine Balanceänderung. Der reproduzierbare `PrestigeBalance.g.cs`-Export übern
 ## Unity-Axiome und Modelle · 19.10.2026
 
 Keine Balanceänderung und keine neuen Formeln. `MetaBalance.g.cs` übernimmt den aktuellen 24-Knoten-/10-Modell-Katalog samt Originalpreisstaffeln, A02-Tail und bestehenden Recoveryregeln reproduzierbar. Axiom-, Modell-, Slot-, Trainings-, Budget- und Planereffekte werden an die bestehenden Unity-Transaktionen angeschlossen. 323 zusätzliche gemeinsame technische Fälle, darunter mehrere Axiomzyklen, tatsächliche Erkenntnisproduktion und Restmengen, prüfen die Übernahme. Das Erkenntnisarchiv erhält keinen erfundenen Lern-/Gratisweg. [Umfang und fehlende Verbraucher](unity-axioms-models.md).
+
+
+### Gumball-Tickets – 22.10.2026
+
+Zusätzliche, nicht transferierbare Belohnungswährung für **eine normale Ziehung pro Gutschein**. Kein Gem-Abzug, kein Ad-Verbrauch, keine zusätzliche Chance auf besondere Gegenstände beim Ziehen. Unabhängige Bonuschance in Common/Rare/Epic/Legendary-Truhen: 0,5%/1%/1,5%/2%, tägliche Bonusbox 0,25%. 1 garantierter Gutschein Free Season Level 30, 1 zusätzlicher Premium Season Level 40; beide auf die bestehenden Rewards aufgesetzt. Wallet-Grenze: 999 verfügbare Tickets. Quelle: `BALANCE.gumballVouchers` in `src/economy.ts`. Alle Werte vor Produktion anhand echter Tests und Loot-Inflationssimulation überprüfen. Token sind lokal und dürfen nicht zu Cloudflare-Trades/Gems gemintet werden.

@@ -1,5 +1,5 @@
 // Generated from original commerce / ad contracts.
-namespace IdleIntelligence.Core {public static class AdBalance {public const string SourceHash="176fb9c4961d2ff65e1008a054fcbfc68505bc89855189d495d4fe517400d800";
+namespace IdleIntelligence.Core {public static class AdBalance {public const string SourceHash="6e8cc449774f585bb8000e1b6aa8237678c41f4fbd479164c1a2923df69b30dd";
 public const double CreditMultiplier=2d;
 public const double RewardGems=10d;
 public const double GemCooldown=600000d;

@@ -4,8 +4,9 @@ import {seasonLoot} from './seasonLoot';
 import type {ChestTier} from './shop';
 import {BALANCE,GameState,ComponentId,SeasonState,type ItemTypeId,type Rarity,grantComponents} from './economy';
 import {addEvent} from './telemetry';
+import {earnGumballVoucher,vouchersAvailable} from './gumballVouchers';
 export const SEASON_DAYS=30,SEASON_LEVELS=50,SEASON_XP_PER_LEVEL=1000,SEASON_GRACE_DAYS=7;
-export type SeasonReward={level:number;gems?:number;component?:ComponentId;amount?:number;artifact?:string;chest?:ChestTier;item?:{type:ItemTypeId;rarity:Rarity}};
+export type SeasonReward={level:number;gems?:number;component?:ComponentId;amount?:number;artifact?:string;chest?:ChestTier;vouchers?:number;item?:{type:ItemTypeId;rarity:Rarity}};
 export type SeasonRewardTier={level:number;free:SeasonReward;premium:SeasonReward;milestone:boolean};
 const rewardFor=(level:number,track:'free'|'premium'):SeasonReward=>{const config=BALANCE.seasonRewards[track],milestone=level%5===0;if(milestone){const index=level/5-1;return{level,gems:config.milestoneGems[index],component:config.milestoneComponents[index] as ComponentId,amount:config.milestoneAmounts[index],...(level===SEASON_LEVELS?{artifact:'boot-sequence-core'}:{})}}const band=Math.min(4,Math.floor((level-1)/10));return{level,gems:config.regularGems[band]+level%3*2,component:config.regularComponents[band] as ComponentId,amount:config.regularAmounts[band]+level%3}};
 export const seasonRewardTiers:SeasonRewardTier[]=Array.from({length:SEASON_LEVELS},(_,i)=>{const level=i+1;return{level,free:rewardFor(level,'free'),premium:rewardFor(level,'premium'),milestone:level%5===0}});
@@ -35,6 +36,7 @@ export function getSeasonTiers(id:string):SeasonRewardTier[]{
   else {r.component=([['circuits','copperCoils','siliconWafers','titaniumBolts','photonicLenses'],['copperCoils','siliconWafers','photonicLenses','graphene','superconductors']][track][band]) as ComponentId;r.amount=c.materialBase[track]+band*c.materialBase[0];}
   const special=(premium?c.premiumItems:c.freeItems) as Record<number,string>;
   if(special[level])r.item={type:theme.items[(level/10-1)%theme.items.length] as ItemTypeId,rarity:special[level] as Rarity};
+  if(level===(premium?BALANCE.gumballVouchers.seasonPremiumLevel:BALANCE.gumballVouchers.seasonFreeLevel))r.vouchers=1;
   if(level===SEASON_LEVELS)r.artifact=theme.artifact;
   return r;
  };
@@ -51,14 +53,15 @@ export function claimSeasonReward(s:GameState,level:number,seasonId=s.season.id,
  const previous=seasonId===s.previousSeason?.id&&s.savedAt<=s.previousSeason.claimUntil,target=previous?s.previousSeason:seasonId===s.season.id?s.season:null;
  if(!target||!Number.isInteger(level)||level>levelFor(target)||track==='premium'&&!premiumSeasonOwned(s,seasonId))return s;
  const claimed=track==='free'?target.claimed:target.premiumClaimed??[],r=rewardsForSeason(s,seasonId).find(r=>r.level===level)?.[track],loot=seasonLoot(s);
- if(!r||claimed.includes(level)||r.chest&&loot.pending.length>=BALANCE.seasonV2.maxChests||!Number.isSafeInteger(s.gems+(r.gems??0))||r.chest&&!Number.isSafeInteger(loot.nextId+1))return s;
+ if(!r||claimed.includes(level)||r.chest&&loot.pending.length>=BALANCE.seasonV2.maxChests||!Number.isSafeInteger(s.gems+(r.gems??0))||r.chest&&!Number.isSafeInteger(loot.nextId+1)||(r.vouchers??0)>0&&vouchersAvailable(s)+(r.vouchers??0)>BALANCE.gumballVouchers.maxOwned)return s;
  let n=s;
  if(r.component&&r.amount){if(!Number.isSafeInteger(s.componentInventory[r.component]+r.amount)||!Number.isSafeInteger(s.components+r.amount))return s;n=grantComponents(n,{[r.component]:r.amount});}
  if(r.item){const created=createItem(n,r.item.type,r.item.rarity);if(created===n)return s;n=created;}
  if(r.chest)n={...n,seasonLoot:{nextId:loot.nextId+1,pending:[...loot.pending,{id:loot.nextId,tier:r.chest,seasonId}]}};
+ if(r.vouchers)n=earnGumballVoucher(n,r.vouchers);
  if(r.gems)n={...n,gems:n.gems+r.gems,gemLedger:[...n.gemLedger,{id:`season:${seasonId}:${track}:${level}`,at:s.savedAt,amount:r.gems,source:`season-${track}`}]};
  if(r.artifact){const id=`${seasonId}-${track==='premium'?'premium-core':'core'}`;n={...n,profile:{...n.profile,artifacts:[...new Set([...n.profile.artifacts,id])],completedSeasons:[...new Set([...n.profile.completedSeasons,seasonId])]}};}
  const changed={...target,[track==='free'?'claimed':'premiumClaimed']:[...claimed,level]};
  n=previous?{...n,previousSeason:changed as GameState['previousSeason']}:{...n,season:changed};
- return addEvent(n,'season-reward',s.savedAt,{seasonId,level,track,gems:r.gems??0,chest:r.chest??'',item:r.item?.type??'',rarity:r.item?.rarity??'',component:r.component??'',amount:r.amount??0});
+ return addEvent(n,'season-reward',s.savedAt,{seasonId,level,track,gems:r.gems??0,chest:r.chest??'',item:r.item?.type??'',rarity:r.item?.rarity??'',component:r.component??'',amount:r.amount??0,vouchers:r.vouchers??0});
 }

@@ -4,11 +4,12 @@ import {materialAccessible,materialTable} from './materialEconomy';
 import {capsuleItemPool} from './capsuleMachine';
 import {bonusBoxRoll} from './bonusBoxes';
 import {addEvent} from './telemetry';
+import {earnGumballVoucher,voucherChestChance} from './gumballVouchers';
 import type {AdResult} from './ads';
 export type ChestTier=keyof typeof BALANCE.shop.chests;
 export const chestTiers=Object.keys(BALANCE.shop.chests) as ChestTier[];
 export type ShopRotation={day:number;materials:ComponentId[];discount:ComponentId;item:ItemTypeId;claimed:string[]};
-export type ShopReceipt={id:number;at:number;offerId:string;kind:'chest'|'material'|'item';payment:'free'|'video'|'gems'|'season';cost:number;tier:ChestTier|null;components:Partial<Record<ComponentId,number>>;item:Item|null};
+export type ShopReceipt={id:number;at:number;offerId:string;kind:'chest'|'material'|'item';payment:'free'|'video'|'gems'|'season';cost:number;tier:ChestTier|null;components:Partial<Record<ComponentId,number>>;item:Item|null;voucherGranted?:boolean};
 export type ShopState={revision:number;clockAt:number;rotation:ShopRotation|null;freeNextAt:number;adWindow:{startedAt:number;used:number};pendingAd:{id:string;at:number;expiresAt:number;context:string}|null;last:ShopReceipt|null};
 export type ShopOffer={id:string;kind:'chest'|'material'|'item';cost:number;payment:'free'|'gems';tier?:ChestTier;component?:ComponentId;amount?:number;item?:ItemTypeId;rarity?:Rarity;stock?:boolean;discount?:number;originalCost?:number};
 export type ShopTicket={id:string;revision:number;day:number};
@@ -57,9 +58,12 @@ function grant(s:GameState,offer:ShopOffer,payment:ShopReceipt['payment'],rng:()
  const total=Object.values(components).reduce((n,v)=>n+v!,0);if(!Number.isSafeInteger(s.components+total)||!Number.isSafeInteger(s.lifetime.componentsEarned+total)||Object.entries(components).some(([id,n])=>!Number.isSafeInteger(s.componentInventory[id as ComponentId]+n!)))return s;
  let next=s;if(itemType){next=createItem(next,itemType,rarity);if(next===s)return s}if(total)next=grantComponents(next,components);
  const item=itemType?{...next.inventory.at(-1)!}:null,now=clock(s),id=s.shop.revision+1,cost=payment==='gems'?offer.cost:0;
- const receipt:ShopReceipt={id,at:now,offerId:offer.id,kind:offer.kind,payment,cost,tier:offer.tier??null,components,item};
+ const voucherRoll=offer.kind==='chest'?bonusBoxRoll(s.telemetry.campaignId,`gumball-voucher:chest:${id}:${offer.id}`):1;
+ const voucherGranted=offer.kind==='chest'&&voucherRoll<voucherChestChance(offer.tier!)&&earnGumballVoucher(next)!==next;
+ if(voucherGranted)next=earnGumballVoucher(next);
+ const receipt:ShopReceipt={id,at:now,offerId:offer.id,kind:offer.kind,payment,cost,tier:offer.tier??null,components,item,...(voucherGranted?{voucherGranted:true}:{})};
  const shop:ShopState={...s.shop,revision:id,clockAt:now,rotation:s.shop.rotation?{...s.shop.rotation,claimed:offer.stock?[...s.shop.rotation.claimed,offer.id]:s.shop.rotation.claimed}:null,freeNextAt:payment==='free'?now+BALANCE.shop.cycleMs:s.shop.freeNextAt,last:receipt};
- return addEvent({...next,gems:next.gems-cost,shop,gemLedger:cost?[...next.gemLedger,{id:`shop:${s.telemetry.campaignId}:${id}`,at:now,amount:-cost,source:offer.id}]:next.gemLedger},'gem-purchase',now,{offer:offer.id,cost,payment,receipt:id,item:item?.type??'',rarity:item?.rarity??'',components:JSON.stringify(components)});
+ return addEvent({...next,gems:next.gems-cost,shop,gemLedger:cost?[...next.gemLedger,{id:`shop:${s.telemetry.campaignId}:${id}`,at:now,amount:-cost,source:offer.id}]:next.gemLedger},'gem-purchase',now,{offer:offer.id,cost,payment,receipt:id,item:item?.type??'',rarity:item?.rarity??'',components:JSON.stringify(components),voucherGranted});
 }
 const seeded=(s:GameState)=>{let i=0;return()=>hash(s,`receipt:${s.shop.revision+1}:${i++}`)};
 /** Expected revision/day prevent double taps and stale rotating offers. Debit + grant are atomic. */
@@ -87,6 +91,7 @@ export function validShop(value:unknown):value is ShopState{
  if(s.last!==null){const r=s.last;if(!r||!int(r.id)||!r.id||r.id>s.revision||!time(r.at)||!validTx(r.offerId)||!['chest','material','item'].includes(r.kind)||!['free','video','gems','season'].includes(r.payment)||!int(r.cost)||(r.payment!=='gems'&&r.cost!==0)||!(r.tier===null||chestTiers.includes(r.tier))||!r.components||Array.isArray(r.components)||typeof r.components!=='object'||Object.entries(r.components).some(([id,n])=>!componentIds.includes(id as ComponentId)||!int(n)||Number(n)<=0))return false;
   if(r.kind==='chest'&&!r.tier||r.kind!=='chest'&&r.tier!==null)return false;
   if(r.item!==null&&(!r.item||!validTx(r.item.id)||!capsuleItemType(r.item.type)||!Object.hasOwn(BALANCE.rarity,r.item.rarity)||r.item.level!==1||r.item.locked!==false))return false;
+  if(r.voucherGranted!==undefined&&typeof r.voucherGranted!=='boolean')return false;
   if(r.kind==='item'&&!r.item||r.kind==='material'&&r.item!==null)return false;
  }else if(s.revision>0&&s.freeNextAt>0)return false;
  return true;

@@ -80,3 +80,12 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 - [Technisches Konzept](company-social-no-chat.md) für private Spielerprofile, Bronze/Silber/Gold-Abzeichen, Profilrahmen, Leadership-Management, Einladungen und Item-Handel lesen.
 - Vor dem Produktivstart D1-Migrationen 0001–0003 auf Staging prüfen, Unity 6000.3.26f1 kompilieren und Client/Server-Berechtigungen auf zwei Geräten testen.
 - Persönliche Gem-Wallet und Item-Provenienz zuerst serverseitig absichern, bevor Gems-Rahmen kaufbar oder lokale Items transferierbar werden. Es wird kein Chat implementiert.
+
+
+## Gutschein-Integration (Draft-PR #149)
+
+1. [Gumball Voucher Design-/Mechanikbericht](gumball-vouchers.md) und tatsächliche TypeScript-/Unity-Tests prüfen.
+2. `npm run typecheck`, `npm test`, `npm run unity:check`, `npm run build` prüfen. Generierte Unity-Referenzen werden auf dem isolierten Feature-Branch synchronisiert. Keine Golden-Fixture-Abweichungen verdecken.
+3. Unity 6000.3.26f1 Import/Compile, EditMode/PlayMode und tatsächliche Ticket-Ziehung mit v21/v22 Save-Migration durchführen.
+4. Shop/Gumball/Season bei 320/390/430px in DE/EN und weitere Sprachen samt Ticketgrafik/Audio/Reduced Motion abnehmen.
+5. Company-Profilrahmen/Badge-Kataloge weiter visualisieren, ohne Chat einzuführen oder lokale Voucher in serverseitiges Handelsinventar umzuwandeln.

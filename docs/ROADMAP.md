@@ -135,3 +135,12 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Separate Backend-Migration für CEO-Übergabe, Rollen, Einladungen ohne Nachrichtentext, standardmäßig private Profile, Company-Badges, Rahmenkatalog und Escrow-Angebote implementiert.
 - [ ] Persönliche Challenge-/Prestige-Badges erst mit überprüfbaren Nachweisen freigeben; lokale Spielstände zählen nicht als Serverbeleg.
 - [ ] Unity-Menüs, sicheres Echtgeld/Gems-Inventar, echter Handel, Moderation, DSGVO-Selbstauskunft/Löschung, Device-/Stresstests und Remote-Migration offen. Kein Chat vorgesehen.
+
+
+## Gumball-Gutscheine (Entwicklungs-PR #149, 22.10.2026)
+
+- [x] Nicht handelbare Gutscheine als echte zusätzliche Gumball-Ziehung in TypeScript und Unity implementiert, Odds/Season-Milestones aus gemeinsamer Balancequelle.
+- [x] Transparentes Ticket-Artwork (SVG/Web) und natives Pixel-Sprite, Wallet/Einlösung und separate Kisten-Reveal-Belohnung angelegt.
+- [x] Save-v22-Wrapper mit alten v21/älteren Saves, konservativem Nullbestand und testbaren Grenzen vorbereitet; neue TypeScript- und Unity-Tests hinzugefügt.
+- [ ] Unity-Editor-Kompilation, endgültige Paritätsabnahme nach Regeneration, DE/EN plus fünf weitere Sprachen, Screenshots/Video und Geräte-/Offline-/Schnelltap-Prüfung nachweisen. Draft nicht mergen.
+- [ ] Persönliche Profil-/Company-Badge-Sprites und Rahmen native vollständig integrieren; drei erste Badge-Grundmotive sind Konzeptassets, keine fertige Profil-UI.

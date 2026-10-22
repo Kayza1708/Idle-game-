@@ -1,0 +1,10 @@
+/* Shared voucher reward sprite; native Unity renderer uses the same reference art. */
+.gumball-voucher-art{width:auto;height:auto;object-fit:contain;image-rendering:auto;flex-shrink:0;filter:drop-shadow(0 2px 8px #8e4dff55)}
+.capsule-voucher-wallet{display:flex;align-items:center;justify-content:center;gap:5px;padding:3px 8px;color:#e9d9ff;font-weight:600;font-size:13px}
+.capsule-actions [data-capsule-voucher]{display:flex;align-items:center;justify-content:center;gap:3px;background:linear-gradient(160deg,#523c88,#27285e);border:1px solid #9e86ed;color:#fff;min-height:44px;min-width:92px}
+.capsule-actions [data-capsule-voucher]:disabled{opacity:.5}
+.capsule-actions [data-capsule-voucher] small{color:#ffe3a8}
+.season-voucher-reward,.gumball-voucher-odds,.gumball-voucher-found{display:flex;align-items:center;gap:5px}
+.season-voucher-reward{font-size:11px;color:#f2d7ff}
+.gumball-voucher-found{margin:8px auto;padding:6px;border:1px solid #b277fc;color:#f7dcff;border-radius:6px}
+.gumball-voucher-odds{margin:8px 0;font-size:14px}

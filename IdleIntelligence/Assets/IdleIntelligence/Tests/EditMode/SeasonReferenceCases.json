@@ -416,7 +416,8 @@
             "item": {
               "type": "field-scanner",
               "rarity": "rare"
-            }
+            },
+            "vouchers": 1
           },
           "premium": {
             "level": 30,
@@ -561,7 +562,8 @@
           "premium": {
             "level": 40,
             "gems": 480,
-            "chest": "legendary"
+            "chest": "legendary",
+            "vouchers": 1
           },
           "milestone": true
         },
@@ -1127,7 +1129,8 @@
             "item": {
               "type": "lab-drone",
               "rarity": "rare"
-            }
+            },
+            "vouchers": 1
           },
           "premium": {
             "level": 30,
@@ -1272,7 +1275,8 @@
           "premium": {
             "level": 40,
             "gems": 480,
-            "chest": "legendary"
+            "chest": "legendary",
+            "vouchers": 1
           },
           "milestone": true
         },
@@ -1838,7 +1842,8 @@
             "item": {
               "type": "data-prism",
               "rarity": "rare"
-            }
+            },
+            "vouchers": 1
           },
           "premium": {
             "level": 30,
@@ -1983,7 +1988,8 @@
           "premium": {
             "level": 40,
             "gems": 480,
-            "chest": "legendary"
+            "chest": "legendary",
+            "vouchers": 1
           },
           "milestone": true
         },
