@@ -86,7 +86,14 @@ export default {
       if(!env.DB)throw new ApiError(503,'database_not_configured');
       const url=new URL(request.url),path=url.pathname,method=request.method,now=time(),db=env.DB;
       if(method==='GET'&&path==='/v1/health')return reply({ok:true,service:'idle-intelligence-companies',version:1});
-      if(method==='POST'&&path==='/v1/session/guest')return createGuest(db,now);
+      if(method==='POST'&&path==='/v1/session/guest'){
+        if (!env.GUEST_SIGNUP_LIMIT) throw new ApiError(503,'signup_protection_unavailable');
+        // Use Cloudflare's edge IP header transiently; do not store it in D1 or application logs.
+        const clientKey = request.headers.get('CF-Connecting-IP') || 'missing-edge-ip';
+        const limit = await env.GUEST_SIGNUP_LIMIT.limit({key:clientKey});
+        if (!limit.success) throw new ApiError(429,'signup_rate_limited');
+        return createGuest(db,now);
+      }
       const player=await authenticated(request,db,now);
       if(method==='POST'&&path==='/v1/session/rotate'){
         const token=newToken(),hash=await digest(token);
@@ -109,6 +116,9 @@ export default {
       }
       if(method==='GET'&&path==='/v1/company')return myCompany(db,player.id);
       if(method==='POST'&&path==='/v1/companies'){
+        if (!env.COMPANY_CREATE_LIMIT) throw new ApiError(503,'company_protection_unavailable');
+        const limit = await env.COMPANY_CREATE_LIMIT.limit({key:player.id});
+        if (!limit.success) throw new ApiError(429,'company_creation_rate_limited');
         if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
         let company;
         try{company=validateCompanyInput(await payload(request));}
