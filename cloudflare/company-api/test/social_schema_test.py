@@ -9,6 +9,7 @@ V3=(ROOT/"0003_company_invitations.sql").read_text()
 V4=(ROOT/"0004_trade_badges.sql").read_text()
 V5=(ROOT/"0005_names_applications_rankings.sql").read_text()
 V6=(ROOT/"0006_verified_vouchers.sql").read_text()
+V7=(ROOT/"0007_verified_company_founder.sql").read_text()
 
 class SocialSchemaTests(unittest.TestCase):
     def setUp(self):
@@ -25,6 +26,7 @@ class SocialSchemaTests(unittest.TestCase):
         self.db.executescript(V4)
         self.db.executescript(V5)
         self.db.executescript(V6)
+        self.db.executescript(V7)
 
     def scalar(self,sql,args=()):
         return self.db.execute(sql,args).fetchone()[0]
@@ -74,6 +76,23 @@ class SocialSchemaTests(unittest.TestCase):
         cols=[row[1] for row in self.db.execute("PRAGMA table_info(company_invitations)")]
         self.assertNotIn("message",cols)
 
+
+    def test_paid_company_creation_requires_verified_entitlement_and_gems(self):
+        self.db.execute("INSERT INTO players(id,display_name,created_at) VALUES('charlie','Charlie',100)")
+        def found():
+            self.db.execute(
+                "INSERT INTO companies(id,founder_id,name,tag,created_at) VALUES('company2','charlie','Second Lab','SLB',200)"
+            )
+        with self.assertRaises(sqlite3.IntegrityError):
+            found()
+        self.db.execute("UPDATE players SET company_access_verified=1 WHERE id='charlie'")
+        with self.assertRaises(sqlite3.IntegrityError):
+            found()
+        self.db.execute("UPDATE verified_gem_wallet SET balance=500 WHERE player_id='charlie'")
+        found()
+        self.assertEqual(self.scalar("SELECT balance FROM verified_gem_wallet WHERE player_id='charlie'"),0)
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO companies(id,founder_id,name,tag,created_at) VALUES('company3','charlie','Third Lab','TLB',200)")
 
     def test_unique_names_and_monthly_score(self):
         self.db.execute("UPDATE players SET display_name='Astra',name_key='astra' WHERE id='alice'")

@@ -1,4 +1,14 @@
 import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+function provisionLocalTestAccount(playerId,founderGems=0){
+  assert.match(playerId,/^[0-9a-f-]{36}$/i);
+  // Local CI fixture only. There is intentionally no server HTTP endpoint to mint paid Gems.
+  const sql="UPDATE players SET company_access_verified=1 WHERE id='"+playerId+"'; "+
+    "UPDATE verified_gem_wallet SET balance="+founderGems+" WHERE player_id='"+playerId+"';";
+  execFileSync('npx',['wrangler','d1','execute','idle-intelligence-companies','--local','--command',sql],
+    {encoding:'utf8',timeout:45000});
+}
+
 
 const base='http://127.0.0.1:8787';
 async function http(method,path,token,body) {
@@ -23,9 +33,16 @@ assert.equal(first.status,201);
 assert.equal(first.body.accessToken.length,43);
 const alice=first.body.accessToken;
 assert.equal((await http('GET','/v1/me',alice)).status,200);
+assert.equal((await http('GET','/v1/company/access',alice)).body.serverVerified,false);
+assert.equal((await http('POST','/v1/companies',alice,{name:'Neural Labs',tag:'NLS'})).status,403);
+provisionLocalTestAccount(first.body.player.id,500);
+assert.equal((await http('GET','/v1/company/access',alice)).body.verifiedGemBalance,500);
+assert.equal((await http('GET','/v1/names/check?name=Agent-'+first.body.player.id.slice(0,8),alice)).body.available,true);
+assert.equal((await http('GET','/v1/names/check?name=h1tl3r',alice)).body.available,false);
 const create=await http('POST','/v1/companies',alice,{name:'Neural Labs',tag:'NLS'});
 assert.equal(create.status,201,JSON.stringify(create.body));
 const companyId=create.body.companyId;
+assert.equal((await http('GET','/v1/company/access',alice)).body.verifiedGemBalance,0);
 assert.equal((await http('POST','/v1/companies',alice,{name:'Another Company',tag:'ACT'})).status,409);
 const detail=await http('GET','/v1/company',alice);
 assert.equal(detail.status,200);
@@ -38,6 +55,8 @@ assert.equal(claim.body.contributedRP,0);
 const second=await http('POST','/v1/session/guest');
 assert.equal(second.status,201);
 const bob=second.body.accessToken;
+provisionLocalTestAccount(second.body.player.id,0);
+assert.equal((await http('GET','/v1/leaderboards/companies?scope=monthly',bob)).status,200);
 assert.equal((await http('POST','/v1/companies/'+companyId+'/join',bob,{})).status,201);
 assert.equal((await http('POST','/v1/companies/'+companyId+'/join',bob,{})).status,409);
 const profileId=first.body.player.id,bobId=second.body.player.id;
@@ -55,12 +74,23 @@ assert.equal((await http('POST','/v1/profile/frame',alice,{frameId:'founder'})).
 assert.equal((await http('POST','/v1/profile/frame',bob,{frameId:'gold-lab'})).status,409);
 const published=await http('GET','/v1/players/'+profileId+'/profile',bob);
 assert.equal(published.body.badges.length,1);
+const playerRanks=await http('GET','/v1/leaderboards/players',bob);
+assert.equal(playerRanks.status,200);
+assert.ok(playerRanks.body.players.some(p=>p.id===profileId));
+const nameless=await http('GET','/v1/names/check?name=Neural%20Labs',bob);
+assert.equal(nameless.status,200);
 assert.deepEqual(published.body.stats,{}); // Visibility cannot invent unverified personal stats.
 assert.equal((await http('POST','/v1/trades/offers',alice,{
   give:{kind:'component',assetId:'graphene',quantity:5},
   want:{kind:'component',assetId:'quantumCores',quantity:1}
 })).status,409); // Client inventory cannot be used to mint trade stock.
 assert.equal((await http('GET','/v1/trades/offers',bob)).status,200);
+const voucherAccount=await http('GET','/v1/vouchers/me',bob);
+assert.equal(voucherAccount.status,200);
+assert.equal(voucherAccount.body.verifiedBalance,0);
+assert.equal(voucherAccount.body.localVouchersTransferable,false);
+assert.equal((await http('GET','/v1/vouchers/offers',bob)).status,200);
+assert.equal((await http('POST','/v1/vouchers/gifts',bob,{requestId:'00000000-0000-4000-8000-000000000001',recipientId:profileId,quantity:1})).status,409);
 assert.equal((await http('POST','/v1/company/members/'+bobId+'/role',alice,{role:'executive'})).status,200);
 assert.equal((await http('POST','/v1/company/members/'+profileId+'/kick',bob,{})).status,403);
 assert.equal((await http('POST','/v1/company/leave',alice,{})).status,409);
@@ -69,6 +99,7 @@ assert.equal((await http('POST','/v1/company/leave',bob,{})).status,409);
 const third=await http('POST','/v1/session/guest');
 assert.equal(third.status,201);
 const charlie=third.body.accessToken;
+provisionLocalTestAccount(third.body.player.id,0);
 const invitation=await http('POST','/v1/company/invitations',bob,{playerId:third.body.player.id});
 assert.equal(invitation.status,201,JSON.stringify(invitation.body));
 const charlieInvites=await http('GET','/v1/me/invitations',charlie);
