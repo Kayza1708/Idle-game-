@@ -79,7 +79,9 @@ assert.equal(playerRanks.status,200);
 assert.ok(playerRanks.body.players.some(p=>p.id===profileId));
 const nameless=await http('GET','/v1/names/check?name=Neural%20Labs',bob);
 assert.equal(nameless.status,200);
-assert.deepEqual(published.body.stats,{}); // Visibility cannot invent unverified personal stats.
+assert.equal(typeof published.body.stats.rank,'string');
+assert.ok(Number(published.body.stats.rank)>=1);
+assert.equal(published.body.stats.int,undefined); // Visibility cannot invent unverified personal INT.
 assert.equal((await http('POST','/v1/trades/offers',alice,{
   give:{kind:'component',assetId:'graphene',quantity:5},
   want:{kind:'component',assetId:'quantumCores',quantity:1}
