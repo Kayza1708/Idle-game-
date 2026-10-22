@@ -63,11 +63,10 @@ namespace IdleIntelligence.Runtime
             WorkshopUIFactory.Label("CompanySafeAuth",content,
                 "Online-Profil und Handelsbestand müssen sicher mit deiner Spieler-ID verknüpft sein. "+
                 "Es werden keine E-Mails benötigt. Ungeprüfte lokale Gems und Tickets sind online nicht verwendbar.",14,120);
-            if(api==null||!api.HasSession||!api.IsConfigured)
+            if(api==null||!api.IsConfigured)
                 WorkshopUIFactory.Label("CompanyAccountPending",content,
-                    "Cloudflare-Konto noch nicht verknüpft. Sichere Gast-/Apple-/Google-Kontoverknüpfung ist noch offen; "+
-                    "kein Fortschritt wird hochgeladen.",14,104);
-            else LoadCompanies(false);
+                    "Cloudflare-API noch nicht verbunden. Company-Ranglisten und Handel folgen nach Servereinrichtung.",14,104);
+            else LoadCompanies(false); // Public rankings do not require guest registration.
         }
         bool Ready(bool sessionRequired)
         {
