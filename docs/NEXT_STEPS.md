@@ -65,3 +65,9 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 
 - Neuer Stand der Inszenierung: [unity-design-05.md](unity-design-05.md), mit zuerst geprüftem Fusionsablauf, aktuellem Gesamtvideo inklusive Modell/Menü und getrennten Funktions-/Sichtprüfungen. Weitere Bildschirmarbeit auf dieser Grundlage einzeln abnehmen; keine pauschale Archero-/Releasequalitätsfreigabe.
 - Echte Geräteprüfung für Notches, Touch, Systemschrift/Fontfallback, Audio-/Haptik und Burst-/Releasebetrieb bleibt gesondert offen. Bestehende Quellprobleme und der vollständige funktionale Audit bleiben davon getrennt.
+
+### Nach Aktionsinszenierung 06
+
+Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md](unity-design-06.md). Zunächst diesen Stand gemeinsam visuell beurteilen. Native iPhone-/Android-Notches, Touch-/Systemschrift, Audio-/Haptikunterbrechungen und Leistungsaufnahme bleiben Geräteabnahme. Übrige Bildschirmdichte und die im Quellkatalog identisch deutsch geführten INT-Namen getrennt bearbeiten; keine Ersatzregeln oder Balanceänderungen ableiten.
+
+- Remote-Abgleich dieses Abschnitts: Die inzwischen auf `main` integrierten Company-/Gumball-Funktionserweiterungen sind kein Teil der reinen Animationsrunde 06. Deren Unity-Port/Paritätsabnahme ist gesondert gegen den neuen Quellstand abzugleichen; die historischen Funktionsberichte beziehen sich auf ihren geprüften Quellstand.

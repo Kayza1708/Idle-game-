@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab56f91b95ed34197b80ace3f76e5c74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: IdleIntelligence.Runtime::IdleIntelligence.Runtime.PresentationArt
+  ChestBody:
+  - {fileID: 21300000, guid: 43946ad175d6b41f0a50595cc974e397, type: 2}
+  - {fileID: 21300000, guid: 8250a6264f71d4dcebf2b62ddd6dafef, type: 2}
+  - {fileID: 21300000, guid: 6b6ec799afb3944228c542c9fdfe3c42, type: 2}
+  - {fileID: 21300000, guid: 2cc03927657734d5bbd6a6cceb82fa8e, type: 2}
+  ChestLid:
+  - {fileID: 21300000, guid: 75a958fa115844365b87d94273fe3fcd, type: 2}
+  - {fileID: 21300000, guid: d1292a27c901f4457ba039e4cd2b1f7b, type: 2}
+  - {fileID: 21300000, guid: 78b76467e7a0c45638951c7a14084aad, type: 2}
+  - {fileID: 21300000, guid: dedec03e6351c4e8485c92b166eaaaa6, type: 2}
+  Pressure:
+  - {fileID: 21300000, guid: a9b30e307b67141958d913d9350349bd, type: 2}
+  - {fileID: 21300000, guid: 30ac21e0825334dc59b7c84033a59d5a, type: 2}
+  - {fileID: 21300000, guid: e03a5ae0909e241fb991566d457e04b6, type: 2}
+  - {fileID: 21300000, guid: 3e4d75ca27a97492c88fec303f411c53, type: 2}
+  - {fileID: 21300000, guid: 47e8f0518e0c74c31b3223b74c48a80e, type: 2}
+  - {fileID: 21300000, guid: 73b9c9c5679b3469f9bc271435044dd5, type: 2}
+  Machine: {fileID: 21300000, guid: 3c9f4b638f238444393a33c2261c3352, type: 2}
+  Crank: {fileID: 21300000, guid: ce9a4a3cb2e924c0bbd703592bb33886, type: 2}
+  Door: {fileID: 21300000, guid: e086ffd9bccdb4d018b24f4d7373e210, type: 2}
+  Capsule: {fileID: 21300000, guid: 838a361dd7fd748f4b19bdb11803a725, type: 2}
+  OpenCapsule: {fileID: 21300000, guid: bacfb7a73f2a547c19408174f85a1df6, type: 2}
+  Drone: {fileID: 21300000, guid: 255c55c1abe2f4301a5041b0e84141c3, type: 2}
+  Piston: {fileID: 21300000, guid: 6384b324def114ca9945dc14095f2f30, type: 2}
+  Steam: {fileID: 21300000, guid: ed799d2cb40ed44f59d6b11a82f5bd0a, type: 2}
+  Blueprint: {fileID: 21300000, guid: 26ecfb192f9684a96b20db44eb3ee105, type: 2}

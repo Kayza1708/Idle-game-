@@ -1,0 +1,172 @@
+[
+  {
+    "file": "docs/media/unity-design-06/all-five-actions.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 562,
+    "encodedFrames": 562,
+    "measuredSeconds": 29.462789,
+    "containerSeconds": 29.4,
+    "sha256": "517e7d75cccca3365b87a618d841260ce0c25f741f0275da57ba3274f121f22a",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/01-tap-overdrive.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 85,
+    "encodedFrames": 85,
+    "measuredSeconds": 6.171579,
+    "containerSeconds": 6.16,
+    "sha256": "d02ceffa2092ee41b371bb1aa39a89f1e249a21c8d768760eab17c9014664aef",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/02-hardware.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 65,
+    "encodedFrames": 65,
+    "measuredSeconds": 4.482718,
+    "containerSeconds": 4.5,
+    "sha256": "b054457cb4eb9a3f4d50feca09148a9d476595917f498dac0590c077bb7d9ec0",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/03-craft.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 90,
+    "encodedFrames": 90,
+    "measuredSeconds": 5.42514,
+    "containerSeconds": 5.42,
+    "sha256": "ca2a226d8e17adae42f56f538d3d15b7171864e9455c5d181dd8228d46ea442a",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/04-fusion.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 111,
+    "encodedFrames": 111,
+    "measuredSeconds": 4.014471,
+    "containerSeconds": 4.0,
+    "sha256": "ab3fa5d23f71fa05e9c234003425d694c1038725b60c7f43a734523fd62a24fd",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/05-equip.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 101,
+    "encodedFrames": 101,
+    "measuredSeconds": 4.022103,
+    "containerSeconds": 4.0,
+    "sha256": "c463efda7fabfbdc6e23c2452fb71477567b4409556045939df81a2113d4e42a",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/06-model.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 60,
+    "encodedFrames": 60,
+    "measuredSeconds": 1.975941,
+    "containerSeconds": 1.96,
+    "sha256": "c78bdbb7404b5cdccf4d5c7415da63cf9a4a99bfdc8254bc43c3cdbe566f7ff8",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/07-menu.mp4",
+    "source": "idle-design6-motion",
+    "sourceFrames": 50,
+    "encodedFrames": 50,
+    "measuredSeconds": 2.693241,
+    "containerSeconds": 2.64,
+    "sha256": "51192d1bed1379c905e4cdd5b4739636079ae114c726c79588df36a196a9c8ef",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/all-reward-actions.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 1036,
+    "encodedFrames": 1036,
+    "measuredSeconds": 40.441712,
+    "containerSeconds": 40.47,
+    "sha256": "433a4e930f5a8fe4b79e7bdf7ed429a6b29789ef60bc5329f598ae9726e11727",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/08-living-labor.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 185,
+    "encodedFrames": 185,
+    "measuredSeconds": 11.972409,
+    "containerSeconds": 11.98,
+    "sha256": "58d4b64d858d4369bafe3ea30d5c4e825b88fc41312df9da01a163b049d8a3b3",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/09-free-chest.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 146,
+    "encodedFrames": 146,
+    "measuredSeconds": 4.818794,
+    "containerSeconds": 4.82,
+    "sha256": "ec57e64d003438791c9b5344116c9c154671e8df567576b2bd1b1a25a5fe8cbc",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/10-paid-chest.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 146,
+    "encodedFrames": 146,
+    "measuredSeconds": 4.830598,
+    "containerSeconds": 4.82,
+    "sha256": "6cffd8a0aa971b8fd16f52bb8f1f64cf4d87977777d08010b7646f76c725f775",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/11-shop-material.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 87,
+    "encodedFrames": 87,
+    "measuredSeconds": 3.513924,
+    "containerSeconds": 3.5,
+    "sha256": "77d64ed8ca8e4e6a11e115dd81611f7a998e025d4052138aac080fed99e60b02",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/12-gumball.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 170,
+    "encodedFrames": 170,
+    "measuredSeconds": 5.017158,
+    "containerSeconds": 5.01,
+    "sha256": "f87ce2e3f371eefe4c957e4b2d36a0212fe226f69473d9b53eb86f784006bbc0",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/13-season-chest.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 145,
+    "encodedFrames": 145,
+    "measuredSeconds": 4.809449,
+    "containerSeconds": 4.83,
+    "sha256": "e987509bf8391aae3f345b9d7cefd589719b68300b600bacbbcd56c917029124",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/14-earned-bonus-box.mp4",
+    "source": "idle-design6-rewards",
+    "sourceFrames": 157,
+    "encodedFrames": 157,
+    "measuredSeconds": 4.803742,
+    "containerSeconds": 4.79,
+    "sha256": "9e06665360f1762a1dabe99e72c282adfe60069cd723656d1d827a07f1f08c45",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  },
+  {
+    "file": "docs/media/unity-design-06/menu-walk.mp4",
+    "source": "idle-design6-menus",
+    "sourceFrames": 1751,
+    "encodedFrames": 1751,
+    "measuredSeconds": 75.292328,
+    "containerSeconds": 75.31,
+    "sha256": "84feba3d3b4bf8970472f0182f30fae746b539822439b1968309854390d09e93",
+    "audio": "Actual Unity AudioListener mix, 48 kHz stereo, AAC; no substituted clips"
+  }
+]

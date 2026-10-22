@@ -61,3 +61,15 @@ Weitere Forschung/Netze/Schmiede-/Shop-/Season-/Profil-/Einstellungsansichten be
 [Prüfbericht und visuelle Beurteilung](unity-design-05.md): Fusion mit großen konkreten Eingaben und Ergebnis, eigener Pixel-Spritefolge, präzisem Soundmoment und Transfer zum Inventarregister. Dasselbe Bausteinsystem für Herstellung und lokale Aktionsimpulse. Originalmodell und verbundene Sockel nach `EquipmentDialog.tsx` wieder zusammengeführt; sichtbare Itemmitte aus Alpha-Metriken. Ressourcen bleiben ruhig und zeigen echte Gems, Nutzer sind im Hamburger-Menü unter Produktion/Nutzer erreichbar. Keine neue allgemeine Gestaltung für übrige Bildschirme.
 
 Offen bleiben insbesondere die physische Wirkung von Schrift/Touch/Notches, Systemaudio und native Haptik sowie die einzelnen übrigen Bildschirmabnahmen. Die konkrete Verbesserung gegenüber Abschnitt 04 und die funktionalen Testresultate sind bewusst getrennt dokumentiert.
+
+## Gemeinsame Aktionssequenzen · Abschnitt 06
+
+[Umfang und eigene visuelle Beurteilung](unity-design-06.md): gebogene beschleunigte Fusion, gestaffelte Silhouette/echter Slotrahmen/Resultat, eigener Pressen-/Dampfsprite, Truhen- und Kapselmechanik aus Originalgrafiken, gemeinsame gespeicherte Belege und Zieltransfers. Wiederverwendung und begrenzte Partikel, Kürzen/Navigation/Reload/reduzierte Bewegung. Keine Belohnung aus Animationen. Hardware zeigt Gesamtpreis und tatsächliche Menge statt Bestand/Preis. Menü-Rundgang schließt die 15 vorhandenen Hauptrouten mit Scrollen/Rückkehr ein.
+
+Offen für folgende Abnahmen:
+
+- Physische iPhone-16-Pro-/Android-Beurteilung von Touch, Safe Areas, Framerate, Wärme/Energie, Schrift und Audio-/Haptikunterbrechungen. 402×874 mit simuliertem Ausschnitt ist kein Gerätetest.
+- OS-seitige reduzierte Bewegung/Haptik ohne vorhandene native Plattformbrücke nicht als getestet ausgeben; die gespeicherten manuellen Einstellungen sind geprüft.
+- Die übrigen Inhalte/Listen behalten ihre vorhandenen Layouts; der gemeinsame Menüstil ersetzt keine vollständige Layoutabnahme aller Unterseiten.
+- Gemeinsamer Quellkatalog: mehrere INT-Knotennamen/-Beschreibungen in allen sieben Sprachen deutsch. Als Inhaltsübersetzung gesondert bearbeiten, keine neuen Begriffe/Balanceregeln erfinden.
+- Gesamtqualität anhand der tatsächlichen Clips gemeinsam beurteilen; bestandene Tests und ein vorhandenes Effektgerüst sind keine visuelle Gleichwertigkeit mit Archero.

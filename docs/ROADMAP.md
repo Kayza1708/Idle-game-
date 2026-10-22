@@ -122,3 +122,7 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Eigene Pixel-Spritefolge und gemeinsame Präsentationsprefabs; Herstellung, Ausrüsten, Kauf und Tap/Overdrive abgestimmt, sofort gespeicherte Transaktionen und reduzierte Bewegung erhalten.
 - [x] Echter Gem-Bestand, Hamburger mit vorhandenen Menürouten, Nutzerdetail weiterhin erreichbar, Modell-/Slotkomposition nach der konkreten TypeScript-Vorlage und Alpha-basierte Itemzentrierung.
 - [x] DE/EN bei 320/390/430 px, höchstes Fusionslevel, acht Materialarten, Abbruch/Wiederholung/Reload und echte Spielaudio-Aufnahmen nachgewiesen. Funktionale Resultate und visuelle Beurteilung getrennt: [unity-design-05.md](unity-design-05.md).
+
+### Unity · Aktionsinszenierung Abschnitt 06
+
+Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung, Laborakzente, zielgerichtetes Ausrüsten, ruhige Navigation und reine Hardware-Gesamtpreise sind in [unity-design-06.md](unity-design-06.md) abgegrenzt. Visuelle Prüfung und funktionale Regression bleiben getrennt. Keine pauschale Gestaltungs-/Gerätefreigabe und keine Änderung von Balance, Saveformat oder nativen Kauf-/Werbeanbietern.

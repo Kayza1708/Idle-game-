@@ -298,5 +298,11 @@ new LocalizedCopy("native:294",new[]{"Goals","Ziele","Objetivos","Objectifs","Ob
 new LocalizedCopy("native:295",new[]{"AI models","KI-Modelle","Modelos de IA","Modèles d’IA","Modelos de IA","Modelli IA","Modele SI"}),
 new LocalizedCopy("native:296",new[]{"Rewards","Belohnungen","Recompensas","Récompenses","Recompensas","Ricompense","Nagrody"}),
 new LocalizedCopy("native:297",new[]{"Fusion · three identical items","Fusion · drei gleiche Items","Fusión · tres objetos idénticos","Fusion · trois objets identiques","Fusão · três itens idênticos","Fusione · tre oggetti identici","Fuzja · trzy identyczne przedmioty"}),
-new LocalizedCopy("native:298",new[]{"Fuse instantly","Sofort fusionieren","Fusionar al instante","Fusionner instantanément","Fundir agora","Fondi subito","Połącz natychmiast"})
+new LocalizedCopy("native:298",new[]{"Fuse instantly","Sofort fusionieren","Fusionar al instante","Fusionner instantanément","Fundir agora","Fondi subito","Połącz natychmiast"}),
+new LocalizedCopy("native:299",new[]{"Shorten","Kürzen","Acortar","Abréger","Encurtar","Abbrevia","Skróć"}),
+new LocalizedCopy("native:300",new[]{"Chest opened","Truhe geöffnet","Cofre abierto","Coffre ouvert","Baú aberto","Forziere aperto","Skrzynia otwarta"}),
+new LocalizedCopy("native:301",new[]{"Purchase complete","Kauf abgeschlossen","Compra completada","Achat effectué","Compra concluída","Acquisto completato","Zakup ukończony"}),
+new LocalizedCopy("native:302",new[]{"No-items challenge","Challenge ohne Items","Desafío sin objetos","Défi sans objets","Desafio sem itens","Sfida senza oggetti","Wyzwanie bez przedmiotów"}),
+new LocalizedCopy("native:303",new[]{"Chests contain components and sometimes an item.","Truhen enthalten Komponenten und manchmal ein Item.","Los cofres contienen componentes y a veces un objeto.","Les coffres contiennent des composants et parfois un objet.","Baús contêm componentes e às vezes um item.","I forzieri contengono componenti e talvolta un oggetto.","Skrzynie zawierają komponenty i czasem przedmiot."}),
+new LocalizedCopy("native:304",new[]{"Upgrades, materials and capsules for your lab.","Upgrades, Materialien und Kapseln für dein Labor.","Mejoras, materiales y cápsulas para tu laboratorio.","Améliorations, matériaux et capsules pour votre laboratoire.","Melhorias, materiais e cápsulas para seu laboratório.","Potenziamenti, materiali e capsule per il laboratorio.","Ulepszenia, materiały i kapsuły dla twojego laboratorium."})
 };}}

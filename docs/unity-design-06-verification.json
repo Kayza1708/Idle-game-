@@ -1,0 +1,89 @@
+{
+  "unity": "6000.3.26f1",
+  "platform": "macOS Editor, uGUI PlayMode camera capture",
+  "processFlag": "--burst-disable-compilation (known native Burst limit, no package/settings changes)",
+  "baseCommit": "f85868fdfd1df3b3e52bfcb56b87032aa22b01f5",
+  "unityRuns": [
+    {
+      "scope": "Full EditMode",
+      "file": "idle-design6-edit.xml",
+      "sha256": "423dab17d8914f4c1db93650b7a7665a6be9693ac3ebf18729ddac54b94b17d2",
+      "total": 128,
+      "passed": 128,
+      "failed": 0,
+      "durationSeconds": 188.2575123
+    },
+    {
+      "scope": "ActionSequenceTests + RewardPresentationTests after timing corrections",
+      "file": "idle-design6-timing-final.xml",
+      "sha256": "4059efe66d2b5f6fd682627f9ca3721a311155b185bee6b011ba4244aa63b2a1",
+      "total": 14,
+      "passed": 14,
+      "failed": 0,
+      "durationSeconds": 229.586345
+    },
+    {
+      "scope": "Final full PlayMode including all visual corrections and language-choice labels",
+      "file": "idle-design6-play-final-accepted.xml",
+      "sha256": "65c69b38fb365f992614829cf428f34df30cfd59f9fc17580d8b1860d2a1dd0c",
+      "total": 74,
+      "passed": 74,
+      "failed": 0,
+      "durationSeconds": 361.3325717
+    }
+  ],
+  "webChecks": {
+    "typecheck": "passed",
+    "vitestTests": 1886,
+    "vitestFiles": 143,
+    "build": "passed; existing >500 kB chunk warning",
+    "unityReferences": "passed; native copy 305 x seven languages"
+  },
+  "logs": [
+    {
+      "file": "idle-design6-typecheck.log",
+      "sha256": "8d6ffb31fc18389243fe0c7448027ab527ace7efeb71ae0953ff34280d5eb0a1"
+    },
+    {
+      "file": "idle-design6-vitest.log",
+      "sha256": "cf63fb9343f977c6b6ed74f448ecdc7cc43c1ffda634150eac8e3239e7c4c094"
+    },
+    {
+      "file": "idle-design6-web-build.log",
+      "sha256": "412ed2c22e39ebb3d3324e4e628cf4456ba45e2541cb8198054abfee97d0f451"
+    },
+    {
+      "file": "idle-design6-parity-final.log",
+      "sha256": "a0c57d5dbe855d769a4fd240af4fe95a36bd1d9b7dfd4ad7e6f5f14d9edb528b"
+    },
+    {
+      "file": "idle-design6-build-final.log",
+      "sha256": "e0e229ac04240310f0c0e3c1a11f96f683686d20ba626ae106377f741a43e149"
+    },
+    {
+      "file": "idle-design6-play-final-accepted.log",
+      "sha256": "d08b1e7043bb37658271e1c95a68155079efaa5cdc49b39f58d4ad5d88d5d582"
+    }
+  ],
+  "assets": {
+    "missingMetadata": [],
+    "typescriptOriginalsPackagesSettingsUnchanged": true
+  },
+  "media": {
+    "manifest": "docs/media/unity-design-06/video-metadata.json",
+    "sha256": "36cd2eb1a3c1455b2d4b547b5ca5168fa5ed7071720ed9c627a090c9ffe7915f",
+    "newNativeClips": 17,
+    "beforeClips": 1,
+    "screenshots": 218,
+    "frameTotal": 3349,
+    "audio": "actual Unity AudioListener 48kHz stereo; AAC mux; no replacement sounds",
+    "preparedTestSaves": true
+  },
+  "limits": [
+    "No physical iPhone or Android test",
+    "No OS reduced-motion/native haptics integration claim",
+    "No new provider/SDK; store and production ads unavailable",
+    "Other screen layouts not generally approved",
+    "New TypeScript main Company/Gumball integrations were not ported by this visual task"
+  ]
+}

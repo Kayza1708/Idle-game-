@@ -17,7 +17,7 @@ with TemporaryDirectory() as directory:
         frame = source / f'{index:04d}.png'
         assert frame.is_file()
         duration = times[index + 1] - time if index + 1 < len(times) else times[-1] - times[-2]
-        lines.extend(["file '" + str(frame).replace("'", "'\\''") + "'", 'option framerate 60', f'duration {duration:.9f}'])
+        lines.extend(["file '" + str(frame).replace("'", "'\\''") + "'", 'option framerate 1000', f'duration {duration:.9f}'])
     manifest.write_text('\n'.join(lines) + '\n')
     subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-f', 'concat', '-safe', '0', '-i', str(manifest), '-fps_mode', 'vfr', '-c:v', 'libx264', '-crf', '20', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(output)], check=True)
 print(f'{len(times)} real Unity frames; {times[-1] - times[0]:.3f} elapsed seconds')
