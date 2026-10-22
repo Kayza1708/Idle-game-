@@ -134,6 +134,70 @@ export async function socialRoute(ctx) {
    if(!row)throw new ApiError(409,'leadership_changed_retry');
    return reply({newLeaderId:row.leader_id,yourNewRole:'executive'});
  }
+ // Invite flows use IDs only; no invitation text, chat or direct messages.
+ if(method==='GET'&&path==='/v1/me/invitations'){
+   const list=await db.prepare(
+     "SELECT i.id,i.company_id,c.name AS company_name,c.tag AS company_tag,i.created_at,i.expires_at "+
+     "FROM company_invitations i JOIN companies c ON c.id=i.company_id "+
+     "WHERE i.invited_player_id=? AND i.status='pending' AND i.expires_at>? "+
+     "ORDER BY i.created_at DESC LIMIT 30"
+   ).bind(player.id,now).all();
+   return reply({invitations:list.results});
+ }
+ if(method==='POST'&&path==='/v1/company/invitations'){
+   const self=await member();
+   if(!['ceo','executive','manager'].includes(self.role))throw new ApiError(403,'role_not_allowed');
+   const data=await payload(request),targetId=data.playerId;
+   if(typeof targetId!=='string'||!/^[0-9a-f-]{36}$/i.test(targetId)||targetId===player.id)
+     throw new ApiError(400,'invalid_invitation_target');
+   if(await membership(db,targetId))throw new ApiError(409,'target_already_in_company');
+   const count=await db.prepare(
+     "SELECT COUNT(*) AS n FROM company_invitations WHERE company_id=? AND status='pending' AND expires_at>?"
+   ).bind(self.company_id,now).first();
+   if(count.n>=20)throw new ApiError(429,'invitation_limit');
+   const id=crypto.randomUUID(),expiresAt=now+604800;
+   // Close stale invites to allow a new invitation after expiration.
+   await db.prepare(
+     "UPDATE company_invitations SET status='revoked',decided_at=? WHERE company_id=? AND invited_player_id=? AND status='pending' AND expires_at<=?"
+   ).bind(now,self.company_id,targetId,now).run();
+   const exists=await db.prepare('SELECT 1 FROM players WHERE id=?').bind(targetId).first();
+   if(!exists)throw new ApiError(404,'player_not_found');
+   await db.prepare(
+     'INSERT INTO company_invitations(id,company_id,invited_player_id,invited_by_player_id,created_at,expires_at) VALUES(?,?,?,?,?,?)'
+   ).bind(id,self.company_id,targetId,player.id,now,expiresAt).run();
+   return reply({invitationId:id,playerId:targetId,expiresAt},201);
+ }
+ const acceptInvite=/^\/v1\/me\/invitations\/([0-9a-f-]{36})\/accept$/i.exec(path);
+ if(method==='POST'&&acceptInvite){
+   if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
+   const accepted=await db.prepare(
+     "UPDATE company_invitations SET status='accepted',decided_at=? "+
+     "WHERE id=? AND invited_player_id=? AND status='pending' AND expires_at>? "+
+     "RETURNING company_id"
+   ).bind(now,acceptInvite[1],player.id,now).first();
+   if(!accepted)throw new ApiError(409,'invitation_unavailable');
+   return reply({companyId:accepted.company_id,role:'member'});
+ }
+ const declineInvite=/^\/v1\/me\/invitations\/([0-9a-f-]{36})\/decline$/i.exec(path);
+ if(method==='POST'&&declineInvite){
+   const declined=await db.prepare(
+     "UPDATE company_invitations SET status='declined',decided_at=? WHERE id=? AND invited_player_id=? AND status='pending' RETURNING id"
+   ).bind(now,declineInvite[1],player.id).first();
+   if(!declined)throw new ApiError(409,'invitation_unavailable');
+   return reply({declinedInvitationId:declined.id});
+ }
+ const revokeInvite=/^\/v1\/company\/invitations\/([0-9a-f-]{36})\/revoke$/i.exec(path);
+ if(method==='POST'&&revokeInvite){
+   const self=await member();
+   if(!['ceo','executive','manager'].includes(self.role))throw new ApiError(403,'role_not_allowed');
+   const revoked=await db.prepare(
+     "UPDATE company_invitations SET status='revoked',decided_at=? WHERE id=? AND company_id=? AND status='pending' "+
+     "AND EXISTS(SELECT 1 FROM company_members m WHERE m.player_id=? AND m.company_id=? AND m.role IN ('ceo','executive','manager')) "+
+     "RETURNING id"
+   ).bind(now,revokeInvite[1],self.company_id,player.id,self.company_id).first();
+   if(!revoked)throw new ApiError(409,'invitation_unavailable');
+   return reply({revokedInvitationId:revoked.id});
+ }
  // Do not introduce any messaging route. Trading uses strict fixed fields, never free-form text.
  if(method==='GET'&&path==='/v1/trades/inventory'){
    const assets=await db.prepare('SELECT kind,asset_id,quantity FROM trade_inventory WHERE player_id=? AND quantity>0 ORDER BY kind,asset_id LIMIT 200')
