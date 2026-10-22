@@ -6,18 +6,18 @@ Run ActionSequenceTests first. Audio is the actual captured Unity listener WAV.
 from pathlib import Path
 import subprocess,shutil,json,hashlib,sys,wave
 import imageio_ffmpeg
-root=Path(__file__).resolve().parents[1];out=Path(sys.argv[2]).resolve() if len(sys.argv)>2 else root/'docs/media/unity-design-04';out.mkdir(parents=True,exist_ok=True)
-source=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path('/tmp/idle-design4-motion');times=[float(x)for x in (source/'times.txt').read_text().splitlines()];ff=imageio_ffmpeg.get_ffmpeg_exe()
-for p in Path('/tmp/idle-design4-review').glob('*.png'):shutil.copy2(p,out/p.name)
+root=Path(__file__).resolve().parents[1];out=Path(sys.argv[2]).resolve() if len(sys.argv)>2 else root/'docs/media/unity-design-05';out.mkdir(parents=True,exist_ok=True)
+source=Path(sys.argv[1]).resolve() if len(sys.argv)>1 else Path('/tmp/idle-design5-motion');times=[float(x)for x in (source/'times.txt').read_text().splitlines()];ff=imageio_ffmpeg.get_ffmpeg_exe()
+for p in Path('/tmp/idle-design5-review').glob('*.png'):shutil.copy2(p,out/p.name)
 # Preserve actual additional visual checks, captured by the existing full regression.
 for pattern in ['empty-*.png','equipped-*.png','long-*.png','drawback-en.png']:
  for p in Path('/tmp/idle-design2-review').glob(pattern):shutil.copy2(p,out/p.name)
-shutil.copy2(root/'docs/media/unity-design-03/labor-de-390.png',out/'before-labor-de-390.png')
+shutil.copy2(root/'docs/media/unity-design-04/labor-de-390.png',out/'before-labor-de-390.png')
 for name in ['times.txt','segments.txt','audio-probe.txt']:shutil.copy2(source/name,out/name)
 segments=[('all-five-actions',0,len(times)-1)]+[(a,int(b),int(c))for a,b,c in(x.split()for x in(source/'segments.txt').read_text().splitlines())]
 metadata=[]
 for name,start,end in segments:
- d=Path('/tmp/idle-design4-encode')/name;d.mkdir(parents=True,exist_ok=True)
+ d=Path('/tmp/idle-design5-encode')/name;d.mkdir(parents=True,exist_ok=True)
  for n,idx in enumerate(range(start,end+1)):
   p=d/f'{n:04}.png'
   if p.exists():p.unlink()

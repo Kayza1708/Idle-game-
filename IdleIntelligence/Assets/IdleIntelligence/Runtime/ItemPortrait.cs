@@ -8,7 +8,7 @@ namespace IdleIntelligence.Runtime
         public bool ShowLevel=true;public Image Art;public ShapeFrame Frame;public Text Caption;public Button Button;
         void OnRectTransformDimensionsChange(){if(Art!=null&&Frame!=null&&Caption!=null)LayoutPortrait();}
         public static string SlotName(string slot,string language){string name=slot.StartsWith("processor")?"Prozessorsockel":slot.StartsWith("core")?"Kernsockel":slot.StartsWith("research")?"Forschungssockel":"Universalsockel";return UiLocalizedText.Translate(name,language)+(slot.EndsWith("Aux")||slot=="universal2"?" II":slot=="universal1"?" I":"");}
-        public static Sprite[] Sprites;public ItemInstance Item {get;private set;}
+        public static Sprite[] Sprites;static ItemArtMetrics metrics;public ItemInstance Item {get;private set;}
         public static Color RarityColor(int rarity){ColorUtility.TryParseHtmlString(ItemBalance.RarityColors[Mathf.Clamp(rarity,0,5)],out var c);return c;}
         public void Bind(ItemInstance item,string family=null,string empty="")
         {
@@ -19,7 +19,9 @@ namespace IdleIntelligence.Runtime
         }
         // Layout can run during RectMask2D culling: never activate/deactivate or rebind graphics here.
         void LayoutPortrait(){string shape=Frame.Shape;
-            Frame.rectTransform.anchorMin=new Vector2(0,ShowLevel ? .17f : 0);Frame.rectTransform.anchorMax=Vector2.one;Frame.rectTransform.offsetMin=Frame.rectTransform.offsetMax=Vector2.zero;if(Item==null)return;var item=Item;var r=Art.rectTransform;r.anchorMin=r.anchorMax=new Vector2(.5f,ShowLevel ? .585f : .5f);r.pivot=new Vector2(.5f,.5f);float size=Mathf.Min(((RectTransform)transform).rect.width,((RectTransform)transform).rect.height*(ShowLevel ? .83f : 1))*(shape=="core"?.52f:.76f);r.sizeDelta=new Vector2(size,size);r.anchoredPosition=Vector2.zero;if(item!=null){var bounds=Art.sprite.bounds;var draw=new Vector2(size,size);float aspect=Art.sprite.rect.width/Art.sprite.rect.height;if(aspect>1)draw.y/=aspect;else draw.x*=aspect;r.anchoredPosition=-new Vector2(bounds.center.x/bounds.size.x*draw.x,bounds.center.y/bounds.size.y*draw.y);}
+            Frame.rectTransform.anchorMin=new Vector2(0,ShowLevel ? .17f : 0);Frame.rectTransform.anchorMax=Vector2.one;Frame.rectTransform.offsetMin=Frame.rectTransform.offsetMax=Vector2.zero;if(Item==null)return;var item=Item;var r=Art.rectTransform;r.anchorMin=r.anchorMax=new Vector2(.5f,ShowLevel ? .585f : .5f);r.pivot=new Vector2(.5f,.5f);float socket=Mathf.Min(((RectTransform)transform).rect.width,((RectTransform)transform).rect.height*(ShowLevel ? .83f : 1));float footprint=socket*(shape=="core"?.50f:.72f);if(metrics==null)metrics=Resources.Load<ItemArtMetrics>("PixelUI/ItemArtMetrics");var visible=metrics!=null?metrics.For(Art.sprite):new Rect(0,0,1,1);var pixels=Art.sprite.rect.size;float factor=footprint/Mathf.Max(visible.width*pixels.x,visible.height*pixels.y);r.sizeDelta=pixels*factor;r.anchoredPosition=-Vector2.Scale(visible.center-new Vector2(.5f,.5f),r.sizeDelta);
+
+
         }
     }
 }

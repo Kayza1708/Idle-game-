@@ -55,3 +55,9 @@ Weitere Forschung/Netze/Schmiede-/Shop-/Season-/Profil-/Einstellungsansichten be
 ## Ruhige Leisten und vollständiger Aktionsnachweis
 
 [Abschnitt 04](unity-design-04.md): Ressourcen und untere Navigation liegen jetzt auf gemeinsamen ruhigen Flächen mit feinen Trennern/aktivem Cyanindikator. Keine dekorativen Einzelkästen; Originalicons bleiben in einheitlichen Flächen. Tap/Overdrive, Kauf, Herstellung, Fusion und Ausrüsten sind mit vollständigen Bewegungsphasen und tatsächlichem Audiomix dokumentiert. Unbenutzte Materialsockel bleiben auch nach der Herstellung verborgen. Keine zusätzliche Designrunde für übrige Inhalte; physische Abnahme und weitere Bildschirmabschnitte bleiben offen.
+
+## Inszenierung, Modell und bestehende Menüwege · Abschnitt 05
+
+[Prüfbericht und visuelle Beurteilung](unity-design-05.md): Fusion mit großen konkreten Eingaben und Ergebnis, eigener Pixel-Spritefolge, präzisem Soundmoment und Transfer zum Inventarregister. Dasselbe Bausteinsystem für Herstellung und lokale Aktionsimpulse. Originalmodell und verbundene Sockel nach `EquipmentDialog.tsx` wieder zusammengeführt; sichtbare Itemmitte aus Alpha-Metriken. Ressourcen bleiben ruhig und zeigen echte Gems, Nutzer sind im Hamburger-Menü unter Produktion/Nutzer erreichbar. Keine neue allgemeine Gestaltung für übrige Bildschirme.
+
+Offen bleiben insbesondere die physische Wirkung von Schrift/Touch/Notches, Systemaudio und native Haptik sowie die einzelnen übrigen Bildschirmabnahmen. Die konkrete Verbesserung gegenüber Abschnitt 04 und die funktionalen Testresultate sind bewusst getrennt dokumentiert.

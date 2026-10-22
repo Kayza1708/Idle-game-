@@ -1,0 +1,1 @@
+sampleRate=48000 channels=2 samples=2740224 peak=0.1560596
