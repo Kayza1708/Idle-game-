@@ -99,7 +99,7 @@ namespace IdleIntelligence.Runtime
             var texture=new Texture2D(w,h,TextureFormat.RGBA32,false);
             texture.filterMode=FilterMode.Point;
             texture.wrapMode=TextureWrapMode.Clamp;
-            texture.SetPixels32(pixels);texture.Apply(false,true);
+            texture.SetPixels32(pixels);texture.Apply(false,false);
             var sprite=Sprite.Create(texture,new Rect(0,0,w,h),new Vector2(.5f,.5f),80f);
             sprite.name="ProfileBadge-"+key;
             Cache.Add(key,sprite);
@@ -138,7 +138,7 @@ namespace IdleIntelligence.Runtime
             Box(13,77,19,83,edge);Box(77,77,83,83,edge);
             var texture=new Texture2D(w,w,TextureFormat.RGBA32,false);
             texture.filterMode=FilterMode.Point;texture.wrapMode=TextureWrapMode.Clamp;
-            texture.SetPixels32(pixels);texture.Apply(false,true);
+            texture.SetPixels32(pixels);texture.Apply(false,false);
             sprite=Sprite.Create(texture,new Rect(0,0,w,w),new Vector2(.5f,.5f),96f);
             sprite.name="ProfileFrame-"+id;Cache.Add(id,sprite);
             return sprite;
