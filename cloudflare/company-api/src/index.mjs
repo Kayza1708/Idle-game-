@@ -35,7 +35,7 @@ async function authenticated(request,db,now){
   if(!match)throw new ApiError(401,'auth_required');
   const hash=await digest(match[1]);
   const user=await db.prepare(
-    'SELECT p.id,p.display_name,p.created_at,s.token_hash FROM sessions s '+
+    'SELECT p.id,p.display_name,p.created_at,p.company_access_verified,s.token_hash FROM sessions s '+
     'JOIN players p ON p.id=s.player_id WHERE s.token_hash=? AND s.expires_at>?'
   ).bind(hash,now).first();
   if(!user)throw new ApiError(401,'invalid_session');
@@ -52,6 +52,8 @@ async function requiredMember(db,playerId){
 function databaseError(error){
   const message=String(error?.message||'');
   if(/company_full/i.test(message))return new ApiError(409,'company_full');
+  if(/company_access_not_verified/i.test(message))return new ApiError(403,'company_access_not_verified');
+  if(/insufficient_verified_gems/i.test(message))return new ApiError(409,'insufficient_verified_gems');
   if(/insufficient_verified_vouchers|invalid_voucher_|voucher_capacity|voucher_trade_already_closed/i.test(message))
     return new ApiError(409,'verified_voucher_trade_rejected');
   if(/idx_players_unique_name|players.name_key|idx_company_unique_name_key|companies.name_key/i.test(message))return new ApiError(409,'name_taken');
@@ -177,7 +179,14 @@ export default {
       }
       if(method==='GET'&&path==='/v1/me'){
         const m=await membership(db,player.id);
-        return reply({player:{id:player.id,displayName:player.display_name,createdAt:player.created_at},membership:m?{companyId:m.company_id,companyName:m.company_name,tag:m.company_tag,role:m.role,tokens:m.tokens}:null});
+        return reply({player:{id:player.id,displayName:player.display_name,createdAt:player.created_at},membership:m?{companyId:m.company_id,companyName:m.company_name,tag:m.company_tag,role:m.role,tokens:m.tokens}:null,companyAccessVerified:player.company_access_verified===1});
+      }
+      if(method==='GET'&&path==='/v1/company/access'){
+        const wallet=await db.prepare('SELECT balance FROM verified_gem_wallet WHERE player_id=?').bind(player.id).first();
+        return reply({requirements:{totalINT:1000,founderGemCost:500},
+          serverVerified:player.company_access_verified===1,
+          verifiedGemBalance:wallet?.balance??0,
+          warning:'The local INT tree is not a server-verified entitlement. A trusted progression bridge is required before launch.'});
       }
       if(method==='GET'&&path==='/v1/companies'){
         const q=(url.searchParams.get('q')||'').slice(0,50);
@@ -219,6 +228,7 @@ export default {
       }
       if(method==='GET'&&path==='/v1/company')return myCompany(db,player.id);
       if(method==='POST'&&path==='/v1/companies'){
+        if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
         if (!env.COMPANY_CREATE_LIMIT) throw new ApiError(503,'company_protection_unavailable');
         const limit = await env.COMPANY_CREATE_LIMIT.limit({key:player.id});
         if (!limit.success) throw new ApiError(429,'company_creation_rate_limited');
@@ -245,6 +255,7 @@ export default {
       }
       const join=/^\/v1\/companies\/([^/]+)\/join$/.exec(path);
       if(method==='POST'&&join){
+        if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
         if(!validCompanyId(join[1]))throw new ApiError(400,'invalid_company_id');
         if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
         const result=await db.prepare(

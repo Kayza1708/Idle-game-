@@ -154,6 +154,7 @@ export async function socialRoute(ctx) {
  }
  const apply=/^\/v1\/companies\/([0-9a-f-]{36})\/apply$/i.exec(path);
  if(method==='POST'&&apply){
+   if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
    if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
    const target=await db.prepare(
      "SELECT id,member_count FROM companies WHERE id=? AND visibility='public' AND join_policy='apply'"
@@ -252,6 +253,7 @@ export async function socialRoute(ctx) {
  }
  const acceptInvite=/^\/v1\/me\/invitations\/([0-9a-f-]{36})\/accept$/i.exec(path);
  if(method==='POST'&&acceptInvite){
+   if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
    if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
    const accepted=await db.prepare(
      "UPDATE company_invitations SET status='accepted',decided_at=? "+
