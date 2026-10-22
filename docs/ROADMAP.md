@@ -108,3 +108,10 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Nicht blockierende Druck-/Tap-/Aktivierungs-/Reveal-/Ausrüstungseffekte, reduzierte Bewegung und gespeicherte Transaktion vor Feedback; schnelle Craft-/Fusionsregression durch reine Layoutanpassung statt Neubinden während Culling behoben.
 - [x] Vollständiger Nachlauf 60/60 PlayMode und 128/128 EditMode; Typecheck, 1.886 Vitest-Tests/143 Dateien, Web-Build und Referenzcheck. Letzter visueller Nachlauf/Medienmanifest: [unity-design-03.md](unity-design-03.md).
 - [ ] Weitere Bildschirme auf dieser Grundlage bearbeiten; echte Geräte-/Notch-/Unicode-/Haptik- und Releaseabnahme bleibt gesondert offen.
+
+### Unity · ruhige Leisten und Aktionsnachweis (22.10.2026)
+
+- [x] Gemeinsame Ressourcen-/Navigationsflächen nach TypeScript-Gliederung, ohne dekorative Einzelrahmen; bestehende Safe Areas und Originalgrafiken erhalten.
+- [x] Fünf tatsächliche Aktionen: Tap/Overdrive, Hardwarekauf, Komponentenherstellung, Fusion, Itemflug zum echten Ausrüstungssockel; Transaktionen vor Effekten gespeichert.
+- [x] Durchgehender echter Unity-Mitschnitt und fünf vollständige Einzelclips mit aufgenommenem tatsächlichem Unity-Spielaudio; vorbereitete Zustände gekennzeichnet.
+- [x] DE/EN bei 320/390/430 px, lange Namen, Slots/Materialmangel, Abbruch, schnelle Wiederholung, reduzierte Bewegung und Reload geprüft. Nachweise und Abgrenzung: [unity-design-04.md](unity-design-04.md).

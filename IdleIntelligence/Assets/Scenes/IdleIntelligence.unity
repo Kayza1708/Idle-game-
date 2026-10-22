@@ -1904,18 +1904,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 187524338}
     m_Modifications:
-    - target: {fileID: 471537461537627536, guid: 25dbe1d64e5ba424b8368f99f7883f42, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 471537461537627536, guid: 25dbe1d64e5ba424b8368f99f7883f42, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 471537461537627536, guid: 25dbe1d64e5ba424b8368f99f7883f42, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1359974795714495130, guid: 25dbe1d64e5ba424b8368f99f7883f42, type: 3}
       propertyPath: m_Name
       value: Laboratory

@@ -1,48 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using IdleIntelligence.Core;
-using UnityEngine;
-using UnityEngine.UI;
-namespace IdleIntelligence.Runtime
-{
-    // A presentation-only receipt player. No reference to GameRuntime, save store or grants.
-    public sealed class ForgeAnimator:MonoBehaviour
-    {
-        public RectTransform Layer;public ItemPortrait PortraitPrefab,Result;public ItemPortrait[] Inputs;public Text Message;public Image Flash;public Sprite[] Components;
-        readonly List<GameObject> transient=new List<GameObject>();Coroutine running;int generation;ItemInstance receipt;
-        public bool IsAnimating=>running!=null;
-        public void Cancel()
-        {
-            generation++;if(running!=null)StopCoroutine(running);running=null;foreach(var g in transient)if(g!=null){g.SetActive(false);Destroy(g);}transient.Clear();Flash.color=Color.clear;
-            foreach(var p in Inputs)p.gameObject.SetActive(true);if(receipt!=null){Result.Bind(receipt);Result.transform.localScale=Vector3.one;Result.gameObject.SetActive(true);Message.text="Im Inventar · "+ItemBalance.Rarities[receipt.rarity];}
-        }
-        void OnDisable()=>Cancel();
-        public void Play(ItemInstance[] items,int[] componentIds,ItemInstance result,bool reduced)
-        {
-            Cancel();receipt=result.Copy();Result.Bind(receipt);Result.gameObject.SetActive(reduced);Message.text=reduced?"Fertig · im Inventar":"Schmieden …";if(reduced)return;
-            int token=generation;running=StartCoroutine(Animate(items,componentIds,result,token));
-        }
-        IEnumerator Animate(ItemInstance[] items,int[] components,ItemInstance result,int token)
-        {
-            var ghosts=new List<RectTransform>();var starts=new List<Vector2>();var particles=new List<RectTransform>();
-            for(int n=0;n<3;n++)
-            {
-                Inputs[n].gameObject.SetActive(false);var ghost=Instantiate(PortraitPrefab,Layer);ghost.gameObject.name="ForgeFlight";ghost.Button.interactable=false;ghost.Button.targetGraphic.raycastTarget=false;((RectTransform)ghost.transform).sizeDelta=new Vector2(62,62);
-                if(items.Length>n)ghost.Bind(items[n]);else {ghost.Bind(null);ghost.Art.gameObject.SetActive(true);ghost.Art.sprite=Components[components[n%components.Length]];ghost.Art.rectTransform.sizeDelta=new Vector2(42,42);ghost.Caption.text="";}
-                var rt=(RectTransform)ghost.transform;rt.anchorMin=rt.anchorMax=new Vector2(.5f,.5f);rt.sizeDelta=new Vector2(62,62);Vector2 origin=Layer.InverseTransformPoint(Inputs[n].transform.position);rt.anchoredPosition=origin;starts.Add(origin);ghosts.Add(rt);transient.Add(ghost.gameObject);
-            }
-            Vector2 destination=Layer.InverseTransformPoint(Result.transform.position);
-            for(int i=0;i<18;i++) {var g=new GameObject("ForgeSpark",typeof(RectTransform),typeof(Image));g.transform.SetParent(Layer,false);g.GetComponent<Image>().raycastTarget=false;g.GetComponent<Image>().color=Color.clear;var r=(RectTransform)g.transform;r.anchorMin=r.anchorMax=new Vector2(.5f,.5f);r.sizeDelta=new Vector2(i%3==0?6:3,i%3==0?6:3);particles.Add(r);transient.Add(g);}
-            float time=0;while(time<1.75f&&token==generation)
-            {
-                time+=Time.unscaledDeltaTime;float fly=Mathf.Clamp01(time/.7f),smooth=fly*fly*(3-2*fly);for(int i=0;i<ghosts.Count;i++){var g=ghosts[i];g.anchoredPosition=Vector2.Lerp(starts[i],destination,smooth)+new Vector2(Mathf.Sin(fly*Mathf.PI)*(i-1)*14,Mathf.Sin(fly*Mathf.PI)*40);g.localScale=Vector3.one*Mathf.Lerp(1,.25f,smooth);g.localEulerAngles=new Vector3(0,0,Mathf.Sin(fly*Mathf.PI)*(i-1)*25);g.gameObject.SetActive(time<.72f);}
-                float burst=Mathf.Clamp01((time-.6f)/.65f);Flash.color=new Color(1,.75f,.3f,Mathf.Max(0,1-Mathf.Abs(time-.72f)*6)*.6f);
-                for(int i=0;i<particles.Count;i++){float a=(i*137.5f)*Mathf.Deg2Rad;var p=particles[i];p.anchoredPosition=destination+new Vector2(Mathf.Cos(a),Mathf.Sin(a))*burst*(35+i%4*13)+Vector2.down*burst*burst*45;p.localEulerAngles=new Vector3(0,0,time*160+i*30);p.GetComponent<Image>().color=new Color(1,.55f+i%3*.15f,.15f,burst>0?1-burst:0);}
-                if(time>.8f){Result.gameObject.SetActive(true);float reveal=Mathf.Clamp01((time-.8f)/.4f);Result.transform.localScale=Vector3.one*(1+Mathf.Sin(reveal*Mathf.PI)*.15f);Message.text=""+Workshop.Definition(result).Name+" · "+ItemBalance.Rarities[result.rarity];}
-                yield return null;
-            }
-            running=null;Cancel();
-        }
-        public void SetReduced(bool reduced){if(reduced)Cancel();}
-    }
+using System.Collections;using System.Collections.Generic;using System.Linq;
+using IdleIntelligence.Core;using UnityEngine;using UnityEngine.UI;
+namespace IdleIntelligence.Runtime {
+ // Presentation of a persisted receipt, with a single replaceable, bounded sequence.
+ public sealed class ForgeAnimator:MonoBehaviour {
+  public RectTransform Layer;public ItemPortrait PortraitPrefab,Result;public ItemPortrait[] Inputs;public Text Message;public Image Flash;public Sprite[] Components;
+  readonly List<GameObject> transient=new List<GameObject>();Coroutine running;ItemInstance receipt;string language="de";int materialCount=-1;
+  public bool IsAnimating=>running!=null;public int FlightCount{get;private set;}
+  public void Cancel(){if(running!=null)StopCoroutine(running);running=null;foreach(var g in transient)if(g!=null){g.SetActive(false);Destroy(g);}transient.Clear();FlightCount=0;Flash.color=Color.clear;for(int n=0;n<Inputs.Length;n++)Inputs[n].gameObject.SetActive(materialCount<0||n<materialCount);if(receipt!=null){Result.Bind(receipt);Result.transform.localScale=Vector3.one;Result.gameObject.SetActive(true);Message.text=UiLocalizedText.Translate("Im Inventar",language)+" · "+SettingsRules.Text(language,"rarity:"+ItemBalance.Rarities[receipt.rarity]);}}
+  public void FusionInputs(){materialCount=-1;foreach(var input in Inputs)input.gameObject.SetActive(true);}
+  public void ShowMaterials(double[] costs,int quantity){var ids=costs.Select((n,i)=>new{n,i}).Where(v=>v.n>0).ToArray();materialCount=ids.Length;for(int n=0;n<Inputs.Length;n++){var p=Inputs[n];p.gameObject.SetActive(n<ids.Length);if(n>=ids.Length)continue;p.Bind(null);p.Art.gameObject.SetActive(true);p.Art.sprite=Components[ids[n].i];p.Art.preserveAspect=true;p.Art.rectTransform.sizeDelta=new Vector2(42,42);p.Caption.text="×"+(ids[n].n*quantity);}}
+  void OnDisable()=>Cancel();
+  public void Play(ItemInstance[] items,int[] componentIds,ItemInstance result,bool reduced,double[] amounts=null,string locale="de"){Cancel();language=locale;receipt=result.Copy();Result.Bind(receipt);Result.gameObject.SetActive(reduced);if(reduced){Cancel();return;}Message.text=UiLocalizedText.Translate("Material wird verbunden …",language);running=StartCoroutine(Animate(items,componentIds,result,amounts));}
+  IEnumerator Animate(ItemInstance[] items,int[] components,ItemInstance result,double[] amounts){Canvas.ForceUpdateCanvases();var ghosts=new List<RectTransform>();var starts=new List<Vector2>();bool fusion=items.Length>0;int count=fusion?items.Length:components.Length;FlightCount=count;for(int n=0;n<count;n++){var ghost=Instantiate(PortraitPrefab,Layer);ghost.name=fusion?"FusionFlight-"+items[n].id:"ComponentFlight-"+components[n];ghost.Button.interactable=false;foreach(var image in ghost.GetComponentsInChildren<Graphic>())image.raycastTarget=false;var rt=(RectTransform)ghost.transform;rt.anchorMin=rt.anchorMax=new Vector2(.5f,.5f);rt.sizeDelta=new Vector2(62,72);Vector2 origin=count<=3?(Vector2)Layer.InverseTransformPoint(Inputs[n].transform.position):new Vector2((n-(count-1)*.5f)*54,Layer.rect.height*.28f);rt.anchoredPosition=origin;starts.Add(origin);if(fusion)ghost.Bind(items[n]);else{ghost.Bind(null);ghost.Art.gameObject.SetActive(true);ghost.Art.sprite=Components[components[n]];ghost.Art.preserveAspect=true;ghost.Art.rectTransform.sizeDelta=new Vector2(44,44);ghost.Caption.text="×"+(amounts==null?1:amounts[components[n]]);ghost.Frame.color=GameTheme.Accent;}ghosts.Add(rt);transient.Add(ghost.gameObject);}foreach(var p in Inputs)p.gameObject.SetActive(false);
+   Vector2 destination=Layer.InverseTransformPoint(Result.transform.position);Flash.rectTransform.anchorMin=Flash.rectTransform.anchorMax=new Vector2(.5f,.5f);Flash.rectTransform.sizeDelta=new Vector2(116,104);Flash.rectTransform.anchoredPosition=destination;var ringNode=WorkshopUIFactory.Node("ForgeEnergy",Layer,typeof(EnergyRing));var ring=ringNode.GetComponent<EnergyRing>();ring.raycastTarget=false;ring.rectTransform.anchorMin=ring.rectTransform.anchorMax=new Vector2(.5f,.5f);ring.rectTransform.anchoredPosition=destination;ring.rectTransform.sizeDelta=new Vector2(122,122);transient.Add(ringNode);var sparks=new List<Image>();Color rarity=ItemPortrait.RarityColor(result.rarity);for(int i=0;i<12;i++){var g=WorkshopUIFactory.Node("ForgeSpark",Layer,typeof(Image));var image=g.GetComponent<Image>();image.raycastTarget=false;image.color=Color.clear;image.rectTransform.anchorMin=image.rectTransform.anchorMax=new Vector2(.5f,.5f);image.rectTransform.sizeDelta=Vector2.one*(i%3==0?5:3);sparks.Add(image);transient.Add(g);}
+   float time=0;while(time<2.15f){time+=Time.unscaledDeltaTime;float fly=Mathf.Clamp01((time-.22f)/.72f),smooth=fly*fly*(3-2*fly);for(int i=0;i<ghosts.Count;i++){var g=ghosts[i];g.anchoredPosition=Vector2.Lerp(starts[i],destination,smooth)+new Vector2(Mathf.Sin(fly*Mathf.PI)*(i-(count-1)*.5f)*12,Mathf.Sin(fly*Mathf.PI)*32);g.localScale=Vector3.one*Mathf.Lerp(1,.2f,smooth);g.localEulerAngles=new Vector3(0,0,Mathf.Sin(fly*Mathf.PI)*(i-1)*15);g.gameObject.SetActive(time<.96f);}ring.Phase=time*.6f;ring.Pulse=Mathf.Clamp01(1-Mathf.Abs(time-.95f)*4);ring.Opacity=Mathf.Clamp01((1.75f-time)*2);ring.SetVerticesDirty();Flash.color=new Color(rarity.r,rarity.g,rarity.b,Mathf.Max(0,1-Mathf.Abs(time-1)*7)*.22f);float burst=Mathf.Clamp01((time-1)/.65f);for(int i=0;i<sparks.Count;i++){float a=i*137.5f*Mathf.Deg2Rad;sparks[i].rectTransform.anchoredPosition=destination+new Vector2(Mathf.Cos(a),Mathf.Sin(a))*burst*(38+i%3*12);var color=rarity;color.a=time>1?1-burst:0;sparks[i].color=color;}if(time>1.05f){Result.gameObject.SetActive(true);float reveal=Mathf.Clamp01((time-1.05f)/.45f);Result.transform.localScale=Vector3.one*Mathf.Lerp(.65f,1,Mathf.SmoothStep(0,1,reveal));Message.text=SettingsRules.Text(language,"item:"+result.type)+" · "+SettingsRules.Text(language,"rarity:"+ItemBalance.Rarities[result.rarity]);}yield return null;}running=null;Cancel();
+  }
+  public void SetReduced(bool reduced){if(reduced)Cancel();}
+ }
 }

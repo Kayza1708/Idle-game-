@@ -28,7 +28,7 @@ namespace IdleIntelligence.Runtime
         void OnDisable(){Forge?.Cancel();if(DetailRoot!=null)DetailRoot.SetActive(false);}
         void Update(){if(game!=null)UpdateView(false);}
         void LateUpdate(){if(DetailRoot!=null&&DetailRoot.activeSelf){DetailText.GetComponent<LayoutElement>().preferredHeight=Mathf.Ceil(DetailText.preferredHeight)+16;var all=DetailActions.Find("MoreItemActions/AllItemEffects");if(all!=null&&all.gameObject.activeInHierarchy){var text=all.GetComponent<Text>();text.GetComponent<LayoutElement>().preferredHeight=Mathf.Ceil(text.preferredHeight)+16;}}}
-        public void ChangeMode(string next){Forge.Cancel();mode=next;selection.Clear();CloseDetail();UpdateView(true);}
+        public void ChangeMode(string next){GetComponent<EquipFlight>()?.Cancel();Forge.Cancel();mode=next;selection.Clear();CloseDetail();UpdateView(true);}
         public void SelectRecipe(int n){Forge.Cancel();recipe=n;mode="blueprints";selection.Clear();UpdateView(true);}
         public void ToggleSelection(string id){Forge.Cancel();if(selection.Contains(id))selection.Remove(id);else if(selection.Count<3)selection.Add(id);mode="fusion";UpdateView(true);}
         ItemInstance Item(string id)=>game.State.Workshop.inventory.FirstOrDefault(i=>i.id==id);
@@ -38,13 +38,13 @@ namespace IdleIntelligence.Runtime
             var s=game.State;long ticket=s.Workshop.revision;
             if(mode=="fusion")
             {
-                var ids=selection.ToArray();var result=Workshop.FusionResult(s,ids);if(result==null)return;var inputs=ids.Select(id=>Item(id).Copy()).ToArray();if(game.Act(v=>v.Workshop.revision==ticket?Workshop.Fuse(v,ids):v,"item-fuse")){selection.Clear();UpdateView(true);Forge.Play(inputs,Array.Empty<int>(),result,s.Workshop.reducedMotion);}
+                var ids=selection.ToArray();var result=Workshop.FusionResult(s,ids);if(result==null)return;var inputs=ids.Select(id=>Item(id).Copy()).ToArray();if(game.Act(v=>v.Workshop.revision==ticket?Workshop.Fuse(v,ids):v,"item-fuse")){selection.Clear();UpdateView(true);Forge.Play(inputs,Array.Empty<int>(),result,s.Workshop.reducedMotion||!s.Settings.effects,null,s.Settings.language);}
             }
             else
             {
                 string type=ItemBalance.Items[recipe].Id;if(!s.Workshop.learned[recipe]){game.Act(v=>Workshop.Learn(v,type),"blueprint-learn");UpdateView(true);return;}
                 var q=Workshop.Quote(s,type);if(!q.Allowed)return;var components=q.Components.Select((amount,index)=>new{amount,index}).Where(c=>c.amount>0).Select(c=>c.index).ToArray();
-                if(game.Act(v=>v.Workshop.revision==ticket?Workshop.CraftBatch(v,type,quantity):v)){var result=game.State.Workshop.inventory.Last().Copy();UpdateView(true);Forge.Play(Array.Empty<ItemInstance>(),components,result,s.Workshop.reducedMotion);}
+                if(game.Act(v=>v.Workshop.revision==ticket?Workshop.CraftBatch(v,type,quantity):v,"item-craft")){var result=game.State.Workshop.inventory.Last().Copy();UpdateView(true);Forge.Play(Array.Empty<ItemInstance>(),components,result,s.Workshop.reducedMotion||!s.Settings.effects,q.Components.Select(n=>n*quantity).ToArray(),s.Settings.language);}
             }
         }
         void UpdateView(bool force)
@@ -55,6 +55,7 @@ namespace IdleIntelligence.Runtime
             if(batch!=null){batch.GetComponentInChildren<Text>().text="×"+quantity;batch.interactable=PrestigeRules.Has(s,"W07");}Stock.text="Komponenten "+w.components.Sum()+"   ·   Bauplanfragmente "+w.fragments;
             if(!Forge.IsAnimating)
             {
+                if(mode=="fusion")Forge.FusionInputs();
                 for(int i=0;i<3;i++)Forge.Inputs[i].Bind(mode=="fusion"&&selection.Count>i?Item(selection[i]):null,null,mode=="fusion"?"+":"Material");
             }
             if(mode=="fusion")
@@ -63,7 +64,7 @@ namespace IdleIntelligence.Runtime
             }
             else
             {
-                var d=ItemBalance.Items[recipe];var q=Workshop.Quote(s,d.Id);if(CostView!=null){Cost.gameObject.SetActive(false);CostView.gameObject.SetActive(true);CostView.Bind(game,q);}RecipeTitle.text=d.Name;Cost.text=(quantity>1?"×"+quantity+" · Kosten je Item: ":"")+Costs(q)+(q.Reason!=null?"\n"+q.Reason:"");Primary.GetComponentInChildren<Text>().text=w.learned[recipe]?"Sofort herstellen":"Bauplan lernen · "+d.BlueprintPrice+" Fragmente";Primary.interactable=game.Writable&&(w.learned[recipe]?q.Allowed:Workshop.LearnBlock(s,recipe)==null);Info.interactable=true;
+                var d=ItemBalance.Items[recipe];var q=Workshop.Quote(s,d.Id);if(!Forge.IsAnimating)Forge.ShowMaterials(q.Components,quantity);if(CostView!=null){Cost.gameObject.SetActive(false);CostView.gameObject.SetActive(true);CostView.Bind(game,q);}RecipeTitle.text=d.Name;Cost.text=(quantity>1?"×"+quantity+" · Kosten je Item: ":"")+Costs(q)+(q.Reason!=null?"\n"+q.Reason:"");Primary.GetComponentInChildren<Text>().text=w.learned[recipe]?"Sofort herstellen":"Bauplan lernen · "+d.BlueprintPrice+" Fragmente";Primary.interactable=game.Writable&&(w.learned[recipe]?q.Allowed:Workshop.LearnBlock(s,recipe)==null);Info.interactable=true;
             }
             if(force||stockChanged||mode=="components"&&(dataChanged||industryTick))BuildRows();
         }
@@ -111,7 +112,7 @@ namespace IdleIntelligence.Runtime
         public void OpenItem(string id,string requestedSlot=null)
         {
             var item=Item(id);if(item==null)return;game.Audio?.Unlock();game.Audio?.Play("ui-click");var d=Workshop.Definition(item);string full=ItemDetailsUI.Text(game.State,item,requestedSlot);OpenDetail(item,full);var compare=full.IndexOf("\n\n<b>",StringComparison.Ordinal);DetailText.text=ItemDetailsUI.Primary(game.State,item)+(compare>=0?full.Substring(compare):"");
-            string chosen=Workshop.EquipmentSlot(game.State,id,requestedSlot);if(chosen!=null){var equip=WorkshopUIFactory.Button("equip-"+chosen,DetailActions,UiLocalizedText.Translate("Ausrüsten",game.State.Settings.language),()=>{bool committed=game.Act(s=>Workshop.Equip(s,id,chosen),"equip");CloseDetail();UpdateView(true);if(committed){var target=Equipment.GetComponentsInChildren<ItemPortrait>().FirstOrDefault(p=>p.name=="equipment-"+chosen);if(target!=null)PanelMotion.Play(target.gameObject,game.State.Workshop.reducedMotion||!game.State.Settings.effects,true);}});GameTheme.CompactAction(equip,true);}
+            string chosen=Workshop.EquipmentSlot(game.State,id,requestedSlot);if(chosen!=null){var equip=WorkshopUIFactory.Button("equip-"+chosen,DetailActions,UiLocalizedText.Translate("Ausrüsten",game.State.Settings.language),()=>{Vector3 origin=DetailPortrait.Frame.transform.position;string effect=ItemDetailsUI.Primary(game.State,item);bool committed=game.Act(s=>Workshop.Equip(s,id,chosen),"equip");CloseDetail();UpdateView(true);if(committed){var target=Equipment.GetComponentsInChildren<ItemPortrait>().FirstOrDefault(p=>p.name=="equipment-"+chosen);var flight=GetComponent<EquipFlight>()??gameObject.AddComponent<EquipFlight>();flight.Play(PortraitPrefab,item,origin,target,effect,game.State.Workshop.reducedMotion||!game.State.Settings.effects);}});GameTheme.CompactAction(equip,true);}
 
             if(game.State.Workshop.equipped.Contains(id)){string slot=ItemBalance.Slots[Array.IndexOf(game.State.Workshop.equipped,id)];WorkshopUIFactory.Button("Unequip",DetailActions,"Ablegen",()=>{game.Act(s=>Workshop.Unequip(s,slot),"unequip");CloseDetail();UpdateView(true);});}
             var more=WorkshopUIFactory.Vertical("MoreItemActions",DetailActions);var all=WorkshopUIFactory.Label("AllItemEffects",more.transform,string.Join("\n",full.Split('\n').Skip(2)),13);all.GetComponent<LayoutElement>().preferredHeight=all.preferredHeight+22;more.SetActive(false);var fold=WorkshopUIFactory.Button("MoreItemActionsToggle",DetailActions,"Weitere Aktionen",()=>{more.SetActive(!more.activeSelf);});fold.transform.SetSiblingIndex(DetailActions.childCount-2);
