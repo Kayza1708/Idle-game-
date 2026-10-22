@@ -1,6 +1,7 @@
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
 import {socialRoute} from './social.mjs';
 import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from '../../../src/namePolicy.ts';
+import {vouchersRoute} from './vouchers.mjs';
 
 // Public read routes deliberately expose no private inventory, gems or session identifiers.
 // This is a guest-account MVP. Apple/Google account linking is required before commercial release.
@@ -51,6 +52,8 @@ async function requiredMember(db,playerId){
 function databaseError(error){
   const message=String(error?.message||'');
   if(/company_full/i.test(message))return new ApiError(409,'company_full');
+  if(/insufficient_verified_vouchers|invalid_voucher_|voucher_capacity|voucher_trade_already_closed/i.test(message))
+    return new ApiError(409,'verified_voucher_trade_rejected');
   if(/idx_players_unique_name|players.name_key|idx_company_unique_name_key|companies.name_key/i.test(message))return new ApiError(409,'name_taken');
   if(/seller_not_company_member|insufficient_trade_inventory/i.test(message))return new ApiError(409,'insufficient_trade_inventory');
   if(/invalid_trade_membership/i.test(message))return new ApiError(409,'invalid_trade_membership');
@@ -102,6 +105,18 @@ export default {
         "DELETE FROM company_trade_offers WHERE status!='open' AND closed_at<?"
       ).bind(nowSeconds-30*86400).run();
       await env.DB.prepare(
+        "UPDATE company_voucher_offers SET status='expired',closed_at=? WHERE status='open' AND expires_at<=?"
+      ).bind(nowSeconds,nowSeconds).run();
+      await env.DB.prepare(
+        "DELETE FROM company_voucher_offers WHERE status!='open' AND closed_at<?"
+      ).bind(nowSeconds-30*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_applications WHERE state!='pending' AND decided_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_applications WHERE state='pending' AND expires_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare(
         "DELETE FROM company_invitations WHERE status!='pending' AND decided_at<?"
       ).bind(nowSeconds-7*86400).run();
       await env.DB.prepare(
@@ -125,6 +140,8 @@ export default {
         return createGuest(db,now);
       }
       const player=await authenticated(request,db,now);
+      const voucher=await vouchersRoute({request,db,player,path,method,now,reply,ApiError,payload,requiredMember});
+      if(voucher)return voucher;
       const social=await socialRoute({
         request,db,player,now,path,method,reply,ApiError,payload,membership,requiredMember
       });
