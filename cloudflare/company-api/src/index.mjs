@@ -85,7 +85,30 @@ const claimSql =
   'tokens=tokens+MIN(MAX(CAST((? - last_claim_at)/3600 AS INTEGER),0),24)*10,'+
   'last_claim_at=CASE WHEN (? - last_claim_at)>=3600 THEN ? ELSE last_claim_at END '+
   'WHERE player_id=? RETURNING company_id,contributed_rp,tokens,last_claim_at';
+// Scheduled retention cleanup. Expiring open trades releases escrow in D1 triggers.
 export default {
+  async scheduled(_event,env,ctx) {
+    if(!env.DB)throw new Error('database_not_configured');
+    const nowSeconds=time();
+    const cleanup=async()=>{
+      // Only close an OPEN offer once; the D1 trigger returns locked assets exactly once.
+      await env.DB.prepare(
+        "UPDATE company_trade_offers SET status='expired',closed_at=? WHERE status='open' AND expires_at<=?"
+      ).bind(nowSeconds,nowSeconds).run();
+      // Non-financial, closed offers can be removed after 30 days; product purchases use a separate ledger.
+      await env.DB.prepare(
+        "DELETE FROM company_trade_offers WHERE status!='open' AND closed_at<?"
+      ).bind(nowSeconds-30*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_invitations WHERE status!='pending' AND decided_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_invitations WHERE status='pending' AND expires_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare("DELETE FROM sessions WHERE expires_at<?").bind(nowSeconds-7*86400).run();
+    };
+    ctx.waitUntil(cleanup());
+  },
   async fetch(request,env) {
     try{
       if(!env.DB)throw new ApiError(503,'database_not_configured');

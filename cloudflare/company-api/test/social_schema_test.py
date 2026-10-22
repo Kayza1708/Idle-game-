@@ -90,6 +90,19 @@ class SocialSchemaTests(unittest.TestCase):
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE company_trade_offers SET status='accepted',buyer_id='bob' WHERE id='trade1'")
 
+    def test_trade_expiration_unlocks_escrow_once(self):
+        self.db.execute("INSERT INTO trade_inventory VALUES('alice','component','graphene',4)")
+        self.db.execute("""
+          INSERT INTO company_trade_offers
+          (id,company_id,seller_id,give_kind,give_id,give_qty,want_kind,want_id,want_qty,created_at,expires_at)
+          VALUES('trade4','company','alice','component','graphene',3,'component','quantumCores',2,100,1000)
+        """)
+        self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='alice' AND asset_id='graphene'"),1)
+        self.db.execute("UPDATE company_trade_offers SET status='expired',closed_at=2000 WHERE status='open' AND expires_at<=2000")
+        self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='alice' AND asset_id='graphene'"),4)
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("UPDATE company_trade_offers SET status='expired' WHERE id='trade4'")
+
     def test_cancel_and_exit_return_escrow(self):
         self.db.execute("INSERT INTO trade_inventory VALUES('bob','blueprint','testBlueprint',3)")
         self.db.execute("""
