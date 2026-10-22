@@ -19,6 +19,56 @@ namespace IdleIntelligence.Runtime
             accessToken = bearerToken ?? "";
         }
 
+        public IEnumerator MyPublicProfile(string playerId, Action<long, string> completed)
+        {
+            return Send("GET", "/v1/players/" + Uri.EscapeDataString(playerId ?? "") + "/profile", null, completed);
+        }
+        public IEnumerator MyPrivateProfile(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/profile", null, completed);
+        }
+        public IEnumerator UpdateProfilePrivacy(string json, Action<long, string> completed)
+        {
+            return Send("PATCH", "/v1/profile/privacy", json, completed);
+        }
+        public IEnumerator EquipFrame(string frameId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/profile/frame", JsonUtility.ToJson(new FrameSelection { frameId = frameId }), completed);
+        }
+        public IEnumerator SetMemberRole(string playerId, string role, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/company/members/" + Uri.EscapeDataString(playerId ?? "") + "/role",
+                JsonUtility.ToJson(new RoleUpdate { role = role }), completed);
+        }
+        public IEnumerator RemoveMember(string playerId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/company/members/" + Uri.EscapeDataString(playerId ?? "") + "/kick", "{}", completed);
+        }
+        public IEnumerator TransferLeadership(string playerId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/company/leadership/transfer", JsonUtility.ToJson(new PlayerSelection { playerId = playerId }), completed);
+        }
+        public IEnumerator CompanyTradeOffers(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/trades/offers", null, completed);
+        }
+        public IEnumerator MyTradeInventory(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/trades/inventory", null, completed);
+        }
+        public IEnumerator CreateTradeOffer(string json, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/trades/offers", json, completed);
+        }
+        public IEnumerator AcceptTrade(string offerId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/trades/" + Uri.EscapeDataString(offerId ?? "") + "/accept", "{}", completed);
+        }
+        public IEnumerator CancelTrade(string offerId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/trades/" + Uri.EscapeDataString(offerId ?? "") + "/cancel", "{}", completed);
+        }
+
         public IEnumerator CreateGuest(Action<long, string> completed)
         {
             return Send("POST", "/v1/session/guest", "{}", completed, false);
@@ -107,6 +157,9 @@ namespace IdleIntelligence.Runtime
 #endif
         }
 
+        [Serializable] private sealed class FrameSelection { public string frameId; }
+        [Serializable] private sealed class RoleUpdate { public string role; }
+        [Serializable] private sealed class PlayerSelection { public string playerId; }
         [Serializable] private sealed class CompanyCreate { public string name; public string tag; }
         [Serializable] private sealed class ResearchUpgrade { public string nodeId; }
     }

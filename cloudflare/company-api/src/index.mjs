@@ -1,4 +1,5 @@
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
+import {socialRoute} from './social.mjs';
 
 // Public read routes deliberately expose no private inventory, gems or session identifiers.
 // This is a guest-account MVP. Apple/Google account linking is required before commercial release.
@@ -49,6 +50,10 @@ async function requiredMember(db,playerId){
 function databaseError(error){
   const message=String(error?.message||'');
   if(/company_full/i.test(message))return new ApiError(409,'company_full');
+  if(/seller_not_company_member|insufficient_trade_inventory/i.test(message))return new ApiError(409,'insufficient_trade_inventory');
+  if(/invalid_trade_membership/i.test(message))return new ApiError(409,'invalid_trade_membership');
+  if(/trade_already_closed/i.test(message))return new ApiError(409,'offer_unavailable');
+  if(/leader_must_be_member|transfer_leadership_first/i.test(message))return new ApiError(409,'leadership_action_rejected');
   if(/not_enough_rp/i.test(message))return new ApiError(409,'insufficient_company_rp');
   if(/UNIQUE constraint failed|constraint failed|FOREIGN KEY constraint failed/i.test(message))return new ApiError(409,'conflict');
   return error;
@@ -95,6 +100,10 @@ export default {
         return createGuest(db,now);
       }
       const player=await authenticated(request,db,now);
+      const social=await socialRoute({
+        request,db,player,now,path,method,reply,ApiError,payload,membership,requiredMember
+      });
+      if(social)return social;
       if(method==='POST'&&path==='/v1/session/rotate'){
         const token=newToken(),hash=await digest(token);
         await db.prepare('UPDATE sessions SET token_hash=?,created_at=?,expires_at=? WHERE token_hash=?')
@@ -125,7 +134,7 @@ export default {
         catch(error){if(error instanceof RangeError)throw new ApiError(400,'invalid_company_data',error.message);throw error;}
         const id=crypto.randomUUID();
         await db.batch([
-          db.prepare('INSERT INTO companies(id,founder_id,name,tag,created_at) VALUES(?,?,?,?,?)').bind(id,player.id,company.name,company.tag,now),
+          db.prepare('INSERT INTO companies(id,founder_id,leader_id,name,tag,created_at) VALUES(?,?,?,?,?,?)').bind(id,player.id,player.id,company.name,company.tag,now),
           db.prepare('INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES(?,?,?,?,?)')
             .bind(player.id,id,'ceo',now,now)
         ]);
