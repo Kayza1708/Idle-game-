@@ -62,3 +62,7 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 
 - Der abgeschlossene Leisten-/Animationsabschnitt ist in [unity-design-04.md](unity-design-04.md) mit vollständigem Fünf-Aktionen-Video, fünf Einzelclips und echtem Unity-Audiomix dokumentiert. Diese ruhigen gemeinsamen Leisten bilden die Grundlage weiterer Bildschirmarbeit; starke Rahmen bleiben bei Items/Fenstern/Hauptaktionen.
 - Physische Touch-/Notch-/Fontfallback-, Audio-/Haptik- und Burst-/Releaseprüfung weiterhin separat ausführen. Die Editoraufnahme mit echten Transaktionen ersetzt diese Geräteabnahme nicht.
+
+## Unity-Arbeitsregeln für Gestaltung · 22.10.2026
+
+Die [Unity-AGENTS.md](../IdleIntelligence/AGENTS.md) enthält jetzt verbindliche Kriterien für konsistente Pixel-Art-Oberflächen, inszenierte Aktionsanimationen, den Abgleich mit der TypeScript-Oberfläche und echte visuelle Unity-Nachweise. Technische Schutzregeln bleiben erhalten. Diese reine Dokumentationsänderung stellt keine visuelle Abnahme des Spiels dar; konkrete offene Arbeiten bleiben im [visuellen Backlog](unity-visual-backlog.md). Kein Spielcode, keine Assets, Balance oder Saves geändert. Dokumente auf Erhaltung der bestehenden Regeln und konsistente Verweise geprüft; Runtime-/Buildtests für diese Dokumentationsänderung nicht ausgeführt.
