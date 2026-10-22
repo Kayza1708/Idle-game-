@@ -1,5 +1,6 @@
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
 import {socialRoute} from './social.mjs';
+import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from '../../../src/namePolicy.ts';
 
 // Public read routes deliberately expose no private inventory, gems or session identifiers.
 // This is a guest-account MVP. Apple/Google account linking is required before commercial release.
@@ -50,6 +51,7 @@ async function requiredMember(db,playerId){
 function databaseError(error){
   const message=String(error?.message||'');
   if(/company_full/i.test(message))return new ApiError(409,'company_full');
+  if(/idx_players_unique_name|players.name_key|idx_company_unique_name_key|companies.name_key/i.test(message))return new ApiError(409,'name_taken');
   if(/seller_not_company_member|insufficient_trade_inventory/i.test(message))return new ApiError(409,'insufficient_trade_inventory');
   if(/invalid_trade_membership/i.test(message))return new ApiError(409,'invalid_trade_membership');
   if(/trade_already_closed/i.test(message))return new ApiError(409,'offer_unavailable');
@@ -133,17 +135,69 @@ export default {
           .bind(hash,now,now+30*86400,player.token_hash).run();
         return reply({accessToken:token,expiresAt:now+30*86400});
       }
+      // Name reservations are global and atomic: never rely on the local offline name form.
+      if(method==='GET'&&path==='/v1/names/check'){
+        const candidate=(url.searchParams.get('name')||'').slice(0,100);
+        const check=validatePlayerName(candidate);
+        if(!check.ok)return reply({available:false,reason:check.error});
+        const key=normalizeModerationText(check.name);
+        const existing=await db.prepare('SELECT id FROM players WHERE name_key=? AND id!=?')
+          .bind(key,player.id).first();
+        return reply({available:!existing,name:check.name,reason:existing?'taken':null});
+      }
+      if(method==='PUT'&&path==='/v1/me/name'){
+        const data=await payload(request),check=validatePlayerName(data.name);
+        if(!check.ok)throw new ApiError(400,'invalid_player_name',check.error);
+        const key=normalizeModerationText(check.name);
+        if(!key)throw new ApiError(400,'invalid_player_name');
+        const result=await db.prepare(
+          'UPDATE players SET display_name=?,name_key=?,last_name_change_at=? '+
+          'WHERE id=? AND (last_name_change_at=0 OR last_name_change_at<=?) '+
+          'RETURNING display_name'
+        ).bind(check.name,key,now,player.id,now-86400).first();
+        if(!result)throw new ApiError(429,'name_cooldown');
+        return reply({name:result.display_name,checked:true});
+      }
       if(method==='GET'&&path==='/v1/me'){
         const m=await membership(db,player.id);
         return reply({player:{id:player.id,displayName:player.display_name,createdAt:player.created_at},membership:m?{companyId:m.company_id,companyName:m.company_name,tag:m.company_tag,role:m.role,tokens:m.tokens}:null});
       }
       if(method==='GET'&&path==='/v1/companies'){
         const q=(url.searchParams.get('q')||'').slice(0,50);
-        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime FROM companies WHERE visibility=\'public\' AND (instr(lower(name),lower(?))>0 OR instr(lower(tag),lower(?))>0) ORDER BY rp_lifetime DESC LIMIT 30').bind(q,q).all();
+        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime,join_policy FROM companies WHERE visibility=\'public\' AND (instr(lower(name),lower(?))>0 OR instr(lower(tag),lower(?))>0) ORDER BY rp_lifetime DESC LIMIT 30').bind(q,q).all();
         return reply({companies:results.results,maxMembers:MAX_MEMBERS});
       }
+      if(method==='GET'&&path==='/v1/leaderboards/players'){
+        // Rank is server-calculated from capped Company contributions, not local Credits/INT.
+        // People who did not opt in are never included in the public list.
+        const results=await db.prepare(
+          'WITH positions AS (SELECT player_id,company_id,contributed_rp,'+
+          'ROW_NUMBER() OVER(ORDER BY contributed_rp DESC,player_id) AS ranking '+
+          'FROM company_members) SELECT p.id,p.display_name AS name,c.tag AS company_tag,'+
+          'r.ranking AS rank,r.contributed_rp AS rp '+
+          'FROM positions r JOIN player_profiles pr ON pr.player_id=r.player_id AND pr.show_rank=1 '+
+          'JOIN players p ON p.id=r.player_id JOIN companies c ON c.id=r.company_id '+
+          'ORDER BY r.ranking LIMIT 100'
+        ).all();
+        return reply({players:results.results,ranking:'verified_company_rp',optIn:true});
+      }
       if(method==='GET'&&path==='/v1/leaderboards/companies'){
-        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime FROM companies ORDER BY rp_lifetime DESC,id LIMIT 100').all();
+        const scope=url.searchParams.get('scope')==='monthly'?'monthly':'lifetime';
+        const season=new Date(now*1000).toISOString().slice(0,7);
+        if(scope==='monthly'){
+          const results=await db.prepare(
+            'SELECT c.id,c.name,c.tag,c.member_count,m.rp AS score,'+
+            'ROW_NUMBER() OVER(ORDER BY m.rp DESC,c.id) AS rank '+
+            'FROM company_monthly_scores m JOIN companies c ON c.id=m.company_id '+
+            'WHERE m.season_id=? ORDER BY score DESC,c.id LIMIT 100'
+          ).bind(season).all();
+          return reply({companies:results.results,ranking:'monthly_verified_rp',season,seasonal:true});
+        }
+        const results=await db.prepare(
+          'SELECT id,name,tag,member_count,rp_lifetime,'+
+          'ROW_NUMBER() OVER(ORDER BY rp_lifetime DESC,id) AS rank '+
+          'FROM companies ORDER BY rp_lifetime DESC,id LIMIT 100'
+        ).all();
         return reply({companies:results.results,ranking:'lifetime_rp',seasonal:false});
       }
       if(method==='GET'&&path==='/v1/company')return myCompany(db,player.id);
@@ -152,16 +206,25 @@ export default {
         const limit = await env.COMPANY_CREATE_LIMIT.limit({key:player.id});
         if (!limit.success) throw new ApiError(429,'company_creation_rate_limited');
         if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
-        let company;
-        try{company=validateCompanyInput(await payload(request));}
+        let company,policy;
+        try{
+          const input=await payload(request);
+          company=validateCompanyInput(input);
+          const nameCheck=validateName(company.name,32);
+          if(!nameCheck.ok||containsBlockedName(company.tag))
+            throw new RangeError('Company name or tag blocked by the shared name policy');
+          policy=input.joinPolicy??'open';
+          if(!['open','invite','apply'].includes(policy))throw new RangeError('Invalid admission policy');
+        }
         catch(error){if(error instanceof RangeError)throw new ApiError(400,'invalid_company_data',error.message);throw error;}
         const id=crypto.randomUUID();
         await db.batch([
-          db.prepare('INSERT INTO companies(id,founder_id,leader_id,name,tag,created_at) VALUES(?,?,?,?,?,?)').bind(id,player.id,player.id,company.name,company.tag,now),
+          db.prepare('INSERT INTO companies(id,founder_id,leader_id,name,tag,name_key,join_policy,created_at) VALUES(?,?,?,?,?,?,?,?)')
+            .bind(id,player.id,player.id,company.name,company.tag,normalizeModerationText(company.name),policy,now),
           db.prepare('INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES(?,?,?,?,?)')
             .bind(player.id,id,'ceo',now,now)
         ]);
-        return reply({companyId:id,...company,role:'ceo'},201);
+        return reply({companyId:id,...company,joinPolicy:policy,role:'ceo'},201);
       }
       const join=/^\/v1\/companies\/([^/]+)\/join$/.exec(path);
       if(method==='POST'&&join){
@@ -169,7 +232,7 @@ export default {
         if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
         const result=await db.prepare(
           'INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) '+
-          'SELECT ?,id,\'member\',?,? FROM companies WHERE id=? AND visibility=\'public\''
+          'SELECT ?,id,\'member\',?,? FROM companies WHERE id=? AND visibility=\'public\' AND join_policy=\'open\''
         ).bind(player.id,now,now,join[1]).run();
         if(!result.meta?.changes)throw new ApiError(404,'company_not_found');
         return reply({companyId:join[1],role:'member'},201);

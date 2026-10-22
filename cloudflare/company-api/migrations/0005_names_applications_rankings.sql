@@ -54,3 +54,10 @@ WHEN NEW.contributed_rp>OLD.contributed_rp BEGIN
    VALUES(NEW.company_id,strftime('%Y-%m','now'),NEW.contributed_rp-OLD.contributed_rp)
    ON CONFLICT(company_id,season_id) DO UPDATE SET rp=rp+excluded.rp;
 END;
+
+CREATE TRIGGER player_guest_key AFTER INSERT ON players WHEN NEW.name_key IS NULL BEGIN
+ UPDATE players SET name_key=lower(replace(NEW.display_name,' ','')) WHERE id=NEW.id;
+END;
+CREATE TRIGGER company_default_key AFTER INSERT ON companies WHEN NEW.name_key IS NULL BEGIN
+ UPDATE companies SET name_key=lower(replace(NEW.name,' ','')) WHERE id=NEW.id;
+END;

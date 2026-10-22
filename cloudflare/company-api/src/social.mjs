@@ -27,7 +27,15 @@ export async function socialRoute(ctx) {
    const statsByKey=Object.fromEntries(stats.results.map(s=>[s.stat_key,s.stat_value]));
    const visibleStats={};
    const flags=[['playtime','show_playtime','playtime'],['maxCompute','show_max_compute','max_compute'],['prestiges','show_prestiges','prestiges'],['int','show_int','int'],['rank','show_rank','rank']];
-   for(const [key,field,dbKey] of flags)if(base[field]===1&&statsByKey[dbKey]!=null)visibleStats[key]=statsByKey[dbKey];
+   for(const [key,field,dbKey] of flags)if(base[field]===1&&statsByKey[dbKey]!=null&&key!=='rank')visibleStats[key]=statsByKey[dbKey];
+   if(base.show_rank===1){
+     // Rank derived from server-owned contributions. Do not trust a client-uploaded rank.
+     const ranking=await db.prepare(
+       'WITH ranked AS (SELECT player_id,ROW_NUMBER() OVER(ORDER BY contributed_rp DESC,player_id) AS rank '+
+       'FROM company_members) SELECT rank FROM ranked WHERE player_id=?'
+     ).bind(id).first();
+     if(ranking)visibleStats.rank=String(ranking.rank);
+   }
    return reply({player:{id:base.id,displayName:base.display_name,frameId:base.frame_id,company:base.company_id?{id:base.company_id,name:base.company_name,tag:base.company_tag}:null},badges:badges.results.map(b=>({...b,metal:TIERS[b.tier]})),stats:visibleStats});
  }
  if(method==='GET'&&path==='/v1/profile'){
