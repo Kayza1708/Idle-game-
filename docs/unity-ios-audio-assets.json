@@ -1,0 +1,57 @@
+[
+  {
+    "path": "IdleIntelligence/Assets/IdleIntelligence/Resources/Audio/forge-impact.wav",
+    "sha256": "55818528d06218a2b2bd546bfd3e6a5369855c5e983cb828e49178d11608c233",
+    "rate": 44100,
+    "channels": 1,
+    "seconds": 0.52,
+    "peak": 0.699981689453125,
+    "rms": 0.09025820160541723,
+    "origin": "Original procedural synthesis; no samples",
+    "generator": "tools/audio/generate-unity-feedback.py"
+  },
+  {
+    "path": "IdleIntelligence/Assets/IdleIntelligence/Resources/Audio/fusion-impact.wav",
+    "sha256": "4944b4709937ac0b0d30d4c630083ab786e60b564bb091b71c0c81620fb2758c",
+    "rate": 44100,
+    "channels": 1,
+    "seconds": 0.74,
+    "peak": 0.69317626953125,
+    "rms": 0.11749055538104874,
+    "origin": "Original procedural synthesis; no samples",
+    "generator": "tools/audio/generate-unity-feedback.py"
+  },
+  {
+    "path": "IdleIntelligence/Assets/IdleIntelligence/Resources/Audio/gumball-open.wav",
+    "sha256": "280c55d9fffa3045995681d22e01c3c6273c4188aed825bf1fe732afdcb5508d",
+    "rate": 44100,
+    "channels": 1,
+    "seconds": 0.49,
+    "peak": 0.4024658203125,
+    "rms": 0.07623304208564097,
+    "origin": "Original procedural synthesis; no samples",
+    "generator": "tools/audio/generate-unity-feedback.py"
+  },
+  {
+    "path": "IdleIntelligence/Assets/IdleIntelligence/Resources/Audio/gumball-turn.wav",
+    "sha256": "779c5c6996a21f102fa49d92f8ccf6c6cabbd9419bc09043c6913400541dcb77",
+    "rate": 44100,
+    "channels": 1,
+    "seconds": 0.47,
+    "peak": 0.19134521484375,
+    "rms": 0.035598807639820554,
+    "origin": "Original procedural synthesis; no samples",
+    "generator": "tools/audio/generate-unity-feedback.py"
+  },
+  {
+    "path": "IdleIntelligence/Assets/IdleIntelligence/Resources/Audio/purchase-confirm.wav",
+    "sha256": "f96fac0337a47498ca966c44413573ac6f5655292cf635732275f379fb4b2a0d",
+    "rate": 44100,
+    "channels": 1,
+    "seconds": 0.27,
+    "peak": 0.23626708984375,
+    "rms": 0.06584560176585375,
+    "origin": "Original procedural synthesis; no samples",
+    "generator": "tools/audio/generate-unity-feedback.py"
+  }
+]

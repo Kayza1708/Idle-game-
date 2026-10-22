@@ -1,5 +1,10 @@
 # Nächste Schritte · 20.10.2026
 
+## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
+
+Aktueller lokaler iOS-Weg und Prüfstand: [Unity auf iPhone-16-Pro-Simulator](unity-ios-local.md). Separate Unity-App und neuer Buildordner; Capacitor-`ios/`, ursprüngliche App und Saves bleiben erhalten. Company-Onlinezugang und echte native Integrationen sind weiterhin gesondert offen. Die folgende ältere Aufgabenhistorie ist keine Aussage, dass alle damaligen Zwischenlücken heute noch bestehen; maßgeblich sind funktionaler Audit und aktueller Plattformbericht.
+
+
 ## Unity: laufende funktionale Migration
 
 Branch `codex/unity-rewrite`, Unity `6000.3.26f1`, Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`. [Play-Anleitung](unity-playable-slice.md), [Arbeitsregeln](../IdleIntelligence/AGENTS.md), [Abnahmeliste](unity-functional-acceptance.md).

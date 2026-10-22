@@ -1,0 +1,30 @@
+[
+  {
+    "file": "docs/media/unity-ios-local/03-craft.mp4",
+    "sha256": "83c02d4922cbc038db8ca0ece67750a9febbc141ae4d07538b107ef3e8b57445",
+    "frames": 90,
+    "seconds": 5.285030400000004,
+    "audio": "Actual Unity AudioListener, stereo 48 kHz; prepared isolated test saves; native timestamps, no replacement audio or effects"
+  },
+  {
+    "file": "docs/media/unity-ios-local/04-fusion.mp4",
+    "sha256": "db7f1331aafc238baa404a7010b1b35d355147c32175d4fdfb0980fd2cad5db8",
+    "frames": 108,
+    "seconds": 3.9752500999999967,
+    "audio": "Actual Unity AudioListener, stereo 48 kHz; prepared isolated test saves; native timestamps, no replacement audio or effects"
+  },
+  {
+    "file": "docs/media/unity-ios-local/02-hardware.mp4",
+    "sha256": "8abbb5961cd2b2f416e3f82ba20182559caf4b7d635a64b94cc66d313b5e5c22",
+    "frames": 65,
+    "seconds": 4.118820199999995,
+    "audio": "Actual Unity AudioListener, stereo 48 kHz; prepared isolated test saves; native timestamps, no replacement audio or effects"
+  },
+  {
+    "file": "docs/media/unity-ios-local/12-gumball.mp4",
+    "sha256": "df861b25299398ceacd30babc15c36a197bb307386fed18758019d21be9b610d",
+    "frames": 343,
+    "seconds": 5.003614000000027,
+    "audio": "Actual Unity AudioListener, stereo 48 kHz; prepared isolated test saves; native timestamps, no replacement audio or effects"
+  }
+]

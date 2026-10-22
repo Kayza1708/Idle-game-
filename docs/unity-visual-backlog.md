@@ -91,3 +91,11 @@ Offen für folgende Abnahmen:
 - [ ] Effektqualität, Bildgrenzen, Text/Notch-Kontrast und Animationen in tatsächlichen Unity-Screenshots und Geräten visuell beurteilen.
 
 - Übernommene Company-Ansicht (`main aebd1174`): englische Gate-Erklärung, aber mehrere übrige Beschriftungen noch deutsch; langer Statusabsatz ist in der vorhandenen festen Höhe gekürzt. Aktionen/Scrollen/Rückkehr werden geprüft und aufgenommen. Vollständige Quelllokalisierung und eigener Inhalts-/Dichtedurchlauf bleiben offen; keine Online-/Serverfreigabe daraus ableiten.
+
+## Company/Profil und lokaler iOS-Weg · 23.10.2026
+
+- Company: kompakte gemeinsame Navigation und Haupttext; vollständige Regeln aufklappbar. Dynamische Texthöhe statt Abschneiden bzw. großer fester Leerflächen. DE/EN-Grundtexte korrigiert. Keine serverseitige Freigabe daraus ableiten.
+- Profil: fünf Zugänge in zwei kompakten Zeilen statt fünf großen vertikalen Buttons. Badge-Claim erhält erst nach erfolgreichem Save einen begrenzten Impuls am tatsächlich neu gebauten Badgeicon; kein zweiter Grant.
+- Noch offen: vollständige Company-Onlinezustände (Mitgliedschaft, Handel, verifizierte Auszeichnungen) mit echtem konfiguriertem Server visuell abnehmen; Profile-Frame-Auswahl/-Erwerb ist weiterhin keine vorhandene funktionale Aktion. Keine zusätzlichen Previewrahmen als kaufbar darstellen.
+- Profil enthält abseits der hier korrigierten Kopf-/Identitäts-/Schaukastentexte noch historische Inhaltsfallbacks. Die Layoutprüfung ist keine vollständige Siebensprachen-Inhaltsabnahme. Weitere Badgekarten-/Mailbox-Dichte und Touchflächen in einem zusammenhängenden Profilabschnitt prüfen.
+- Fünf neue eigene Audiocues und echte Unity-Audioclips: `unity-ios-audio-assets.json`, `media/unity-ios-local/`. Klangabnahme auf physischen iPhone-Lautsprechern/Kopfhörern bleibt getrennt vom Editor-/Simulatornachweis.
