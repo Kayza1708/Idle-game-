@@ -7,6 +7,8 @@ V1=(ROOT/"0001_companies.sql").read_text()
 V2=(ROOT/"0002_profiles_roles_trades.sql").read_text()
 V3=(ROOT/"0003_company_invitations.sql").read_text()
 V4=(ROOT/"0004_trade_badges.sql").read_text()
+V5=(ROOT/"0005_names_applications_rankings.sql").read_text()
+V6=(ROOT/"0006_verified_vouchers.sql").read_text()
 
 class SocialSchemaTests(unittest.TestCase):
     def setUp(self):
@@ -21,6 +23,8 @@ class SocialSchemaTests(unittest.TestCase):
         self.db.executescript(V2)
         self.db.executescript(V3)
         self.db.executescript(V4)
+        self.db.executescript(V5)
+        self.db.executescript(V6)
 
     def scalar(self,sql,args=()):
         return self.db.execute(sql,args).fetchone()[0]
@@ -57,7 +61,7 @@ class SocialSchemaTests(unittest.TestCase):
         self.assertEqual(self.scalar("SELECT count(*) FROM profile_badge_showcase"),1)
 
     def test_invitation_acceptance_has_no_message_body(self):
-        self.db.execute("INSERT INTO players VALUES('charlie','Charlie',100)")
+        self.db.execute("INSERT INTO players(id,display_name,created_at) VALUES('charlie','Charlie',100)")
         self.db.execute("""
           INSERT INTO company_invitations(id,company_id,invited_player_id,invited_by_player_id,created_at,expires_at)
           VALUES('inv1','company','charlie','alice',100,700)
@@ -69,6 +73,73 @@ class SocialSchemaTests(unittest.TestCase):
             self.db.execute("UPDATE company_invitations SET status='accepted',decided_at=201 WHERE id='inv1'")
         cols=[row[1] for row in self.db.execute("PRAGMA table_info(company_invitations)")]
         self.assertNotIn("message",cols)
+
+
+    def test_unique_names_and_monthly_score(self):
+        self.db.execute("UPDATE players SET display_name='Astra',name_key='astra' WHERE id='alice'")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("UPDATE players SET display_name='AsTrA',name_key='astra' WHERE id='bob'")
+        self.db.execute("UPDATE company_members SET contributed_rp=1000,last_claim_at=3600 WHERE player_id='bob'")
+        self.assertEqual(self.scalar("SELECT rp FROM company_monthly_scores WHERE company_id='company'"),1000)
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),1)
+
+    def test_verified_voucher_gift_cannot_be_duped(self):
+        self.db.execute("UPDATE company_members SET contributed_rp=1000,last_claim_at=3600 WHERE player_id='bob'")
+        self.db.execute("""INSERT INTO company_voucher_gifts
+          (id,company_id,sender_id,recipient_id,quantity,created_at)
+          VALUES('gift1','company','bob','alice',1,200000)""")
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),0)
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='alice'"),1)
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("""INSERT INTO company_voucher_gifts
+              (id,company_id,sender_id,recipient_id,quantity,created_at)
+              VALUES('gift1','company','bob','alice',1,200000)""")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("""INSERT INTO company_voucher_gifts
+              (id,company_id,sender_id,recipient_id,quantity,created_at)
+              VALUES('gift2','company','bob','alice',1,200000)""")
+
+    def test_verified_voucher_trade_escrow_and_replay(self):
+        self.db.execute("UPDATE company_members SET contributed_rp=10000,last_claim_at=3600 WHERE player_id='bob'")
+        self.db.execute("INSERT INTO trade_inventory VALUES('alice','component','graphene',10)")
+        self.db.execute("""INSERT INTO company_voucher_offers
+          (id,company_id,seller_id,quantity,want_kind,want_id,want_qty,created_at,expires_at)
+          VALUES('voucher1','company','bob',1,'component','graphene',3,200000,400000)""")
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),1)
+        self.db.execute("UPDATE company_voucher_offers SET status='accepted',buyer_id='alice',closed_at=200100 WHERE id='voucher1'")
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='alice'"),1)
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),1)
+        self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='alice' AND asset_id='graphene'"),7)
+        self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='bob' AND asset_id='graphene'"),3)
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("UPDATE company_voucher_offers SET status='accepted' WHERE id='voucher1'")
+
+    def test_voucher_expiry_refund_and_one_time_redemption(self):
+        self.db.execute("UPDATE company_members SET contributed_rp=1000,last_claim_at=3600 WHERE player_id='bob'")
+        self.db.execute("""INSERT INTO company_voucher_offers
+          (id,company_id,seller_id,quantity,want_kind,want_id,want_qty,created_at,expires_at)
+          VALUES('voucher2','company','bob',1,'component','graphene',3,200000,250000)""")
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),0)
+        self.db.execute("UPDATE company_voucher_offers SET status='expired',closed_at=250001 WHERE id='voucher2'")
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),1)
+        self.db.execute("INSERT INTO player_voucher_redemptions VALUES('receipt1','bob',250002)")
+        self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),0)
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO player_voucher_redemptions VALUES('receipt1','bob',250002)")
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("INSERT INTO player_voucher_redemptions VALUES('receipt2','bob',250003)")
+
+    def test_application_join_uses_no_messages(self):
+        self.db.execute("UPDATE companies SET join_policy='apply' WHERE id='company'")
+        self.db.execute("INSERT INTO players(id,display_name,created_at) VALUES('charlie','Charlie',100)")
+        self.db.execute("""INSERT INTO company_applications
+          (id,company_id,player_id,created_at,expires_at)
+          VALUES('app1','company','charlie',200,700)""")
+        self.db.execute("UPDATE company_applications SET state='accepted',decided_at=300 WHERE id='app1'")
+        self.assertEqual(self.scalar("SELECT role FROM company_members WHERE player_id='charlie'"),'member')
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("UPDATE company_applications SET state='accepted' WHERE id='app1'")
+        self.assertNotIn('message',[x[1] for x in self.db.execute("PRAGMA table_info(company_applications)")])
 
     def test_escrow_accept_and_replay_protection(self):
         self.db.execute("INSERT INTO trade_inventory VALUES('alice','component','graphene',6)")
