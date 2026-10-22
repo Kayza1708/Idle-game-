@@ -13,6 +13,10 @@ namespace IdleIntelligence.Runtime
         [SerializeField] private string apiBaseUrl = "";
         private string accessToken = "";
 
+        public bool HasSession => !string.IsNullOrEmpty(accessToken);
+        public bool IsConfigured => Uri.TryCreate(apiBaseUrl,UriKind.Absolute,out var url) &&
+            (url.Scheme==Uri.UriSchemeHttps || AllowLocalEditorHttp(url));
+
         public void Configure(string baseUrl, string bearerToken)
         {
             apiBaseUrl = (baseUrl ?? "").Trim().TrimEnd('/');

@@ -12,7 +12,7 @@ namespace IdleIntelligence.Runtime
    game=runtime;Pulse.transform.SetParent(GetComponentInParent<Canvas>().transform,false);WorkshopUIFactory.Fill((RectTransform)Pulse.transform);Pulse.gameObject.AddComponent<SafeArea>();BuildNodes();Home();ResetButton.onClick.AddListener(PerformReset);transform.Find("NetworkTools/ZoomOut").GetComponent<Button>().onClick.AddListener(()=>ZoomAt(zoom/1.15f,Vector2.zero));transform.Find("NetworkTools/ZoomIn").GetComponent<Button>().onClick.AddListener(()=>ZoomAt(zoom*1.15f,Vector2.zero));transform.Find("NetworkTools/Home").GetComponent<Button>().onClick.AddListener(Home);transform.Find("NetworkTools/ReducedPrestigeMotion").GetComponent<Button>().onClick.AddListener(()=>{game.Act(s=>{var n=s.Copy();n.Workshop.reducedMotion=!n.Workshop.reducedMotion;n.Settings.effects=!n.Workshop.reducedMotion;return n;});Pulse.Cancel();});
    var pause=WorkshopUIFactory.Button("PauseAutomaticResets",transform,"Pause automatic resets",()=>game.Act(ResetControls.Pause));pause.interactable=game.Writable&&!ChallengeRules.Active(game.State);var layer=WorkshopUIFactory.Button("NetworkLayer",transform,"Axiome",()=>SetLayer(!IsAxiom));layer.transform.SetAsFirstSibling();
    companyMilestone=WorkshopUIFactory.Button("CompanyAccessMilestone",transform,
-     "Companies · 1.000 INT",()=>game.UserShow("story"));
+     "Companies · 1.000 INT",()=>game.UserShow("company"));
    companyMilestone.transform.SetAsFirstSibling();
    for(int i=0;i<6;i++){int branch=i;transform.Find("Branches/Branch"+i).GetComponent<Button>().onClick.AddListener(()=>CenterBranch(branch));}Refresh();
   }
