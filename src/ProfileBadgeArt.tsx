@@ -10,7 +10,7 @@ export function ProfileBadgeArt({family,tier=1,size=54}:{family:ProfileBadgeFami
 export function ProfileAvatarArt({size=76,frameId='basic'}:{size?:number;frameId?:string}){
  const available=['basic','founder','bronze-lab','silver-lab','gold-lab','neon','quantum','singularity'];
  const id=available.includes(frameId)?frameId:'basic';
- return <span className="profile-avatar-art" style={{width:size,height:size}} aria-hidden="true">
+ return <span className="profile-avatar-art" data-frame={id} style={{width:size,height:size}} aria-hidden="true">
     <span className="profile-avatar-core"><span className="profile-avatar-eye"/><span className="profile-avatar-eye"/></span>
     <img src={'/assets/game/profile/frames/'+id+'.svg'} width={size} height={size} alt="" draggable={false}/>
   </span>;

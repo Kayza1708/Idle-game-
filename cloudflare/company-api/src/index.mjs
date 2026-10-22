@@ -1,5 +1,7 @@
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
 import {socialRoute} from './social.mjs';
+import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from '../../../src/namePolicy.ts';
+import {vouchersRoute} from './vouchers.mjs';
 
 // Public read routes deliberately expose no private inventory, gems or session identifiers.
 // This is a guest-account MVP. Apple/Google account linking is required before commercial release.
@@ -33,7 +35,7 @@ async function authenticated(request,db,now){
   if(!match)throw new ApiError(401,'auth_required');
   const hash=await digest(match[1]);
   const user=await db.prepare(
-    'SELECT p.id,p.display_name,p.created_at,s.token_hash FROM sessions s '+
+    'SELECT p.id,p.display_name,p.created_at,p.company_access_verified,s.token_hash FROM sessions s '+
     'JOIN players p ON p.id=s.player_id WHERE s.token_hash=? AND s.expires_at>?'
   ).bind(hash,now).first();
   if(!user)throw new ApiError(401,'invalid_session');
@@ -50,6 +52,11 @@ async function requiredMember(db,playerId){
 function databaseError(error){
   const message=String(error?.message||'');
   if(/company_full/i.test(message))return new ApiError(409,'company_full');
+  if(/company_access_not_verified/i.test(message))return new ApiError(403,'company_access_not_verified');
+  if(/insufficient_verified_gems/i.test(message))return new ApiError(409,'insufficient_verified_gems');
+  if(/insufficient_verified_vouchers|invalid_voucher_|voucher_capacity|voucher_trade_already_closed/i.test(message))
+    return new ApiError(409,'verified_voucher_trade_rejected');
+  if(/idx_players_unique_name|players.name_key|idx_company_unique_name_key|companies.name_key/i.test(message))return new ApiError(409,'name_taken');
   if(/seller_not_company_member|insufficient_trade_inventory/i.test(message))return new ApiError(409,'insufficient_trade_inventory');
   if(/invalid_trade_membership/i.test(message))return new ApiError(409,'invalid_trade_membership');
   if(/trade_already_closed/i.test(message))return new ApiError(409,'offer_unavailable');
@@ -61,8 +68,12 @@ function databaseError(error){
 async function createGuest(db,now){
   const id=crypto.randomUUID();
   const token=newToken();
+  const guestName='Agent-'+id.slice(0,8);
+  // Must use exactly the same canonical key as public name checks and authenticated renames.
+  // The SQL fallback trigger uses only simple ASCII normalization for pre-migration compatibility.
+  const nameKey=normalizeModerationText(guestName);
   await db.batch([
-    db.prepare('INSERT INTO players(id,display_name,created_at) VALUES(?,?,?)').bind(id,'Agent-'+id.slice(0,8),now),
+    db.prepare('INSERT INTO players(id,display_name,name_key,created_at) VALUES(?,?,?,?)').bind(id,guestName,nameKey,now),
     db.prepare('INSERT INTO sessions(token_hash,player_id,created_at,expires_at) VALUES(?,?,?,?)')
       .bind(await digest(token),id,now,now+30*86400)
   ]);
@@ -100,6 +111,18 @@ export default {
         "DELETE FROM company_trade_offers WHERE status!='open' AND closed_at<?"
       ).bind(nowSeconds-30*86400).run();
       await env.DB.prepare(
+        "UPDATE company_voucher_offers SET status='expired',closed_at=? WHERE status='open' AND expires_at<=?"
+      ).bind(nowSeconds,nowSeconds).run();
+      await env.DB.prepare(
+        "DELETE FROM company_voucher_offers WHERE status!='open' AND closed_at<?"
+      ).bind(nowSeconds-30*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_applications WHERE state!='pending' AND decided_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare(
+        "DELETE FROM company_applications WHERE state='pending' AND expires_at<?"
+      ).bind(nowSeconds-7*86400).run();
+      await env.DB.prepare(
         "DELETE FROM company_invitations WHERE status!='pending' AND decided_at<?"
       ).bind(nowSeconds-7*86400).run();
       await env.DB.prepare(
@@ -122,7 +145,62 @@ export default {
         if (!limit.success) throw new ApiError(429,'signup_rate_limited');
         return createGuest(db,now);
       }
+      // Public read-only Company browsing and opt-in ranking; never requires an email or guest account.
+      if(method==='GET'&&path==='/v1/companies'){
+        const q=(url.searchParams.get('q')||'').slice(0,50);
+        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime,join_policy FROM companies WHERE visibility=\'public\' AND (instr(lower(name),lower(?))>0 OR instr(lower(tag),lower(?))>0) ORDER BY rp_lifetime DESC LIMIT 30').bind(q,q).all();
+        return reply({companies:results.results,maxMembers:MAX_MEMBERS});
+      }
+      if(method==='GET'&&path==='/v1/leaderboards/players'){
+        // Rank is server-calculated from capped Company contributions, not local Credits/INT.
+        // People who did not opt in are never included in the public list.
+        const results=await db.prepare(
+          'WITH positions AS (SELECT player_id,company_id,contributed_rp,'+
+          'ROW_NUMBER() OVER(ORDER BY contributed_rp DESC,player_id) AS ranking '+
+          'FROM company_members) SELECT p.id,p.display_name AS name,c.tag AS company_tag,'+
+          'r.ranking AS rank,r.contributed_rp AS rp '+
+          'FROM positions r JOIN player_profiles pr ON pr.player_id=r.player_id AND pr.show_rank=1 '+
+          'JOIN players p ON p.id=r.player_id JOIN companies c ON c.id=r.company_id '+
+          'ORDER BY r.ranking LIMIT 100'
+        ).all();
+        return reply({players:results.results,ranking:'verified_company_rp',optIn:true});
+      }
+      if(method==='GET'&&path==='/v1/leaderboards/companies'){
+        const scope=url.searchParams.get('scope')==='monthly'?'monthly':'lifetime';
+        const season=new Date(now*1000).toISOString().slice(0,7);
+        if(scope==='monthly'){
+          const results=await db.prepare(
+            'SELECT c.id,c.name,c.tag,c.member_count,m.rp AS score,'+
+            'ROW_NUMBER() OVER(ORDER BY m.rp DESC,c.id) AS rank '+
+            'FROM company_monthly_scores m JOIN companies c ON c.id=m.company_id '+
+            'WHERE m.season_id=? ORDER BY score DESC,c.id LIMIT 100'
+          ).bind(season).all();
+          return reply({companies:results.results,ranking:'monthly_verified_rp',season,seasonal:true});
+        }
+        const results=await db.prepare(
+          'SELECT id,name,tag,member_count,rp_lifetime,'+
+          'ROW_NUMBER() OVER(ORDER BY rp_lifetime DESC,id) AS rank '+
+          'FROM companies ORDER BY rp_lifetime DESC,id LIMIT 100'
+        ).all();
+        return reply({companies:results.results,ranking:'lifetime_rp',seasonal:false});
+      }
+      // Name preview does not require an account; the eventual authenticated rename is the atomic reservation.
+      // Never collect email or persist the requester's IP.
+      if(method==='GET'&&path==='/v1/names/check'){
+        if(!env.NAME_CHECK_LIMIT)throw new ApiError(503,'name_check_protection_unavailable');
+        const ip=request.headers.get('CF-Connecting-IP')||'missing-edge-ip';
+        const limit=await env.NAME_CHECK_LIMIT.limit({key:ip});
+        if(!limit.success)throw new ApiError(429,'name_check_rate_limited');
+        const candidate=(url.searchParams.get('name')||'').slice(0,100),check=validatePlayerName(candidate);
+        if(!check.ok)return reply({available:false,reason:check.error});
+        const key=normalizeModerationText(check.name);
+        const exists=await db.prepare('SELECT 1 FROM players WHERE name_key=?').bind(key).first();
+        return reply({available:!exists,name:check.name,reason:exists?'taken':null,
+          note:'Preview only; name is reserved only after authenticated PUT /v1/me/name'});
+      }
       const player=await authenticated(request,db,now);
+      const voucher=await vouchersRoute({request,db,player,path,method,now,reply,ApiError,payload,requiredMember});
+      if(voucher)return voucher;
       const social=await socialRoute({
         request,db,player,now,path,method,reply,ApiError,payload,membership,requiredMember
       });
@@ -133,43 +211,65 @@ export default {
           .bind(hash,now,now+30*86400,player.token_hash).run();
         return reply({accessToken:token,expiresAt:now+30*86400});
       }
+      if(method==='PUT'&&path==='/v1/me/name'){
+        const data=await payload(request),check=validatePlayerName(data.name);
+        if(!check.ok)throw new ApiError(400,'invalid_player_name',check.error);
+        const key=normalizeModerationText(check.name);
+        if(!key)throw new ApiError(400,'invalid_player_name');
+        const result=await db.prepare(
+          'UPDATE players SET display_name=?,name_key=?,last_name_change_at=? '+
+          'WHERE id=? AND (last_name_change_at=0 OR last_name_change_at<=?) '+
+          'RETURNING display_name'
+        ).bind(check.name,key,now,player.id,now-86400).first();
+        if(!result)throw new ApiError(429,'name_cooldown');
+        return reply({name:result.display_name,checked:true});
+      }
       if(method==='GET'&&path==='/v1/me'){
         const m=await membership(db,player.id);
-        return reply({player:{id:player.id,displayName:player.display_name,createdAt:player.created_at},membership:m?{companyId:m.company_id,companyName:m.company_name,tag:m.company_tag,role:m.role,tokens:m.tokens}:null});
+        return reply({player:{id:player.id,displayName:player.display_name,createdAt:player.created_at},membership:m?{companyId:m.company_id,companyName:m.company_name,tag:m.company_tag,role:m.role,tokens:m.tokens}:null,companyAccessVerified:player.company_access_verified===1});
       }
-      if(method==='GET'&&path==='/v1/companies'){
-        const q=(url.searchParams.get('q')||'').slice(0,50);
-        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime FROM companies WHERE visibility=\'public\' AND (instr(lower(name),lower(?))>0 OR instr(lower(tag),lower(?))>0) ORDER BY rp_lifetime DESC LIMIT 30').bind(q,q).all();
-        return reply({companies:results.results,maxMembers:MAX_MEMBERS});
-      }
-      if(method==='GET'&&path==='/v1/leaderboards/companies'){
-        const results=await db.prepare('SELECT id,name,tag,member_count,rp_lifetime FROM companies ORDER BY rp_lifetime DESC,id LIMIT 100').all();
-        return reply({companies:results.results,ranking:'lifetime_rp',seasonal:false});
+      if(method==='GET'&&path==='/v1/company/access'){
+        const wallet=await db.prepare('SELECT balance FROM verified_gem_wallet WHERE player_id=?').bind(player.id).first();
+        return reply({requirements:{totalINT:1000,founderGemCost:500},
+          serverVerified:player.company_access_verified===1,
+          verifiedGemBalance:wallet?.balance??0,
+          warning:'The local INT tree is not a server-verified entitlement. A trusted progression bridge is required before launch.'});
       }
       if(method==='GET'&&path==='/v1/company')return myCompany(db,player.id);
       if(method==='POST'&&path==='/v1/companies'){
+        if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
         if (!env.COMPANY_CREATE_LIMIT) throw new ApiError(503,'company_protection_unavailable');
         const limit = await env.COMPANY_CREATE_LIMIT.limit({key:player.id});
         if (!limit.success) throw new ApiError(429,'company_creation_rate_limited');
         if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
-        let company;
-        try{company=validateCompanyInput(await payload(request));}
+        let company,policy;
+        try{
+          const input=await payload(request);
+          company=validateCompanyInput(input);
+          const nameCheck=validateName(company.name,32);
+          if(!nameCheck.ok||containsBlockedName(company.tag))
+            throw new RangeError('Company name or tag blocked by the shared name policy');
+          policy=input.joinPolicy??'open';
+          if(!['open','invite','apply'].includes(policy))throw new RangeError('Invalid admission policy');
+        }
         catch(error){if(error instanceof RangeError)throw new ApiError(400,'invalid_company_data',error.message);throw error;}
         const id=crypto.randomUUID();
         await db.batch([
-          db.prepare('INSERT INTO companies(id,founder_id,leader_id,name,tag,created_at) VALUES(?,?,?,?,?,?)').bind(id,player.id,player.id,company.name,company.tag,now),
+          db.prepare('INSERT INTO companies(id,founder_id,leader_id,name,tag,name_key,join_policy,created_at) VALUES(?,?,?,?,?,?,?,?)')
+            .bind(id,player.id,player.id,company.name,company.tag,normalizeModerationText(company.name),policy,now),
           db.prepare('INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES(?,?,?,?,?)')
             .bind(player.id,id,'ceo',now,now)
         ]);
-        return reply({companyId:id,...company,role:'ceo'},201);
+        return reply({companyId:id,...company,joinPolicy:policy,role:'ceo'},201);
       }
       const join=/^\/v1\/companies\/([^/]+)\/join$/.exec(path);
       if(method==='POST'&&join){
+        if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
         if(!validCompanyId(join[1]))throw new ApiError(400,'invalid_company_id');
         if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
         const result=await db.prepare(
           'INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) '+
-          'SELECT ?,id,\'member\',?,? FROM companies WHERE id=? AND visibility=\'public\''
+          'SELECT ?,id,\'member\',?,? FROM companies WHERE id=? AND visibility=\'public\' AND join_policy=\'open\''
         ).bind(player.id,now,now,join[1]).run();
         if(!result.meta?.changes)throw new ApiError(404,'company_not_found');
         return reply({companyId:join[1],role:'member'},201);

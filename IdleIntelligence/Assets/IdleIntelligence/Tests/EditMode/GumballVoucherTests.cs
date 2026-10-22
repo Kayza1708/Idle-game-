@@ -38,8 +38,8 @@ namespace IdleIntelligence.Tests
       Assert.That(VoucherRules.SeasonAward(30,0),Is.EqualTo(1));
       Assert.That(VoucherRules.SeasonAward(40,1),Is.EqualTo(1));
       Assert.That(VoucherRules.SeasonAward(15,0),Is.Zero);
-      Assert.That(VoucherRules.ChestChance("common"),Is.EqualTo(.005).Within(1e-12));
-      Assert.That(VoucherRules.ChestChance("legendary"),Is.EqualTo(.02).Within(1e-12));
+      Assert.That(VoucherRules.ChestChance("common"),Is.EqualTo(.05).Within(1e-12));
+      Assert.That(VoucherRules.ChestChance("legendary"),Is.EqualTo(.30).Within(1e-12));
       Assert.That(VoucherRules.CanEarn(state),Is.True);
       state.Rewards.vouchersEarned=VoucherBalance.MaxOwned;
       Assert.That(VoucherRules.CanEarn(state),Is.False);

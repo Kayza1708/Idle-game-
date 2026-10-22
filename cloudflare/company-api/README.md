@@ -96,3 +96,8 @@ These are read-only **potential modifiers**. Unity does not consume them yet. Ap
 - D1 migration/rollback rehearsal, latency and quotas monitoring, load tests, GDPR/DSGVO review and required third-party agreements.
 
 This foundation intentionally avoids messaging, trusting client-side inventory or exposing paid currency to unaudited trading.
+
+
+## Server-owned tradable Gumball tickets (D1 0006)
+
+A **separate verified voucher wallet** can be gifted and sold inside a Company after 48 hours of mutual membership. It receives at most one voucher at each server-calculated lifetime Company RP milestone (1k, 10k, 50k), never by uploading local chest/Season saves. `GET /v1/vouchers/me`, `POST /v1/vouchers/gifts`, `GET/POST /v1/vouchers/offers`, `POST /v1/vouchers/offers/:id/accept|cancel`, `POST /v1/vouchers/redeem` and `GET /v1/vouchers/redemptions` are supported. The server issues unique redemption receipts but the Unity-native redemption-to-local-draw adapter is not yet shipped. All transfers and trade escrows are D1-trigger atomic. No chat text or Gems are traded. **Local chest vouchers remain non-transferable** until a server-verifiable chest-claim grant path exists.

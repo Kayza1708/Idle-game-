@@ -13,10 +13,87 @@ namespace IdleIntelligence.Runtime
         [SerializeField] private string apiBaseUrl = "";
         private string accessToken = "";
 
+        public bool HasSession => !string.IsNullOrEmpty(accessToken);
+        public bool IsConfigured => Uri.TryCreate(apiBaseUrl,UriKind.Absolute,out var url) &&
+            (url.Scheme==Uri.UriSchemeHttps || AllowLocalEditorHttp(url));
+
         public void Configure(string baseUrl, string bearerToken)
         {
             apiBaseUrl = (baseUrl ?? "").Trim().TrimEnd('/');
             accessToken = bearerToken ?? "";
+        }
+
+        public IEnumerator CompanyAccessQuote(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/company/access", null, completed);
+        }
+        public IEnumerator CheckUniqueName(string name, Action<long, string> completed)
+        {
+            return Send("GET", "/v1/names/check?name=" + Uri.EscapeDataString(name ?? ""), null, completed, false);
+        }
+        public IEnumerator ReserveUniqueName(string name, Action<long, string> completed)
+        {
+            return Send("PUT", "/v1/me/name", JsonUtility.ToJson(new NameSelection { name = name }), completed);
+        }
+        public IEnumerator PlayerLeaderboard(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/leaderboards/players", null, completed, false);
+        }
+        public IEnumerator CompanySeasonLeaderboard(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/leaderboards/companies?scope=monthly", null, completed, false);
+        }
+        public IEnumerator SetJoinPolicy(string joinPolicy, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/company/settings",
+                JsonUtility.ToJson(new JoinPolicySelection { joinPolicy = joinPolicy }), completed);
+        }
+        public IEnumerator ApplyToCompany(string companyId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/companies/" + Uri.EscapeDataString(companyId ?? "") + "/apply", "{}", completed);
+        }
+        public IEnumerator CompanyApplications(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/company/applications", null, completed);
+        }
+        public IEnumerator MyCompanyApplications(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/me/applications", null, completed);
+        }
+        public IEnumerator DecideApplication(string applicationId, bool accept, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/company/applications/" + Uri.EscapeDataString(applicationId ?? "") +
+                (accept ? "/accept" : "/reject"), "{}", completed);
+        }
+        public IEnumerator MyVerifiedVouchers(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/vouchers/me", null, completed);
+        }
+        public IEnumerator VoucherTradeOffers(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/vouchers/offers", null, completed);
+        }
+        public IEnumerator CreateVoucherTrade(string json, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/vouchers/offers", json, completed);
+        }
+        public IEnumerator AcceptVoucherTrade(string tradeId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/vouchers/offers/" + Uri.EscapeDataString(tradeId ?? "") + "/accept", "{}", completed);
+        }
+        public IEnumerator CancelVoucherTrade(string tradeId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/vouchers/offers/" + Uri.EscapeDataString(tradeId ?? "") + "/cancel", "{}", completed);
+        }
+        public IEnumerator GiftVoucher(string recipientId, int quantity, string requestId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/vouchers/gifts",
+                JsonUtility.ToJson(new VoucherGift { recipientId = recipientId, quantity = quantity, requestId = requestId }), completed);
+        }
+        public IEnumerator RedeemVerifiedVoucher(string requestId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/vouchers/redeem",
+                JsonUtility.ToJson(new VoucherReceipt { requestId = requestId }), completed);
         }
 
         public IEnumerator MyPublicProfile(string playerId, Action<long, string> completed)
@@ -104,11 +181,11 @@ namespace IdleIntelligence.Runtime
         }
         public IEnumerator FindCompanies(string query, Action<long, string> completed)
         {
-            return Send("GET", "/v1/companies?q=" + Uri.EscapeDataString(query ?? ""), null, completed);
+            return Send("GET", "/v1/companies?q=" + Uri.EscapeDataString(query ?? ""), null, completed, false);
         }
         public IEnumerator CompanyLeaderboard(Action<long, string> completed)
         {
-            return Send("GET", "/v1/leaderboards/companies", null, completed);
+            return Send("GET", "/v1/leaderboards/companies", null, completed, false);
         }
         public IEnumerator CreateCompany(string name, string tag, Action<long, string> completed)
         {
@@ -178,6 +255,10 @@ namespace IdleIntelligence.Runtime
 #endif
         }
 
+        [Serializable] private sealed class NameSelection { public string name; }
+        [Serializable] private sealed class JoinPolicySelection { public string joinPolicy; }
+        [Serializable] private sealed class VoucherGift { public string recipientId, requestId; public int quantity; }
+        [Serializable] private sealed class VoucherReceipt { public string requestId; }
         [Serializable] private sealed class FrameSelection { public string frameId; }
         [Serializable] private sealed class RoleUpdate { public string role; }
         [Serializable] private sealed class PlayerSelection { public string playerId; }

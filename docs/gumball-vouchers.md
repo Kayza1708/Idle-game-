@@ -6,8 +6,8 @@ Ein violettes Sci-Fi-Ticket mit goldener Einlösekante und bunten Gumball-Kapsel
 
 ## Funktion
 - Genau **1 Gutschein = 1 normale zusätzliche Ziehung**, ohne Gems und ohne Verbrauch des Ad-Kontingents.
-- Nicht handelbar, nicht online übertragbar; aktuell lokale Spielerökonomie. Aus lokalen Saves dürfen niemals serverseitige Company-Items oder Gems gemintet werden.
-- Kisten haben unabhängige Chancen pro Öffnung: Common 0,5%, Rare 1%, Epic 1,5%, Legendary 2%. Tägliche Bonuskiste 0,25%. Die bereits vorhandenen Material-/Itemchancen bleiben unverändert. Shop zeigt Chancen auch vor Gems-Kistenkäufen an.
+- Die lokale Wallet kann nicht ungeprüft online gehandelt werden. Serverseitig belegte Company-Gutscheine können separat auf einem transaktionssicheren Konto handelbar gemacht werden; kein Upload frei editierbarer lokaler Bestände als Server-Guthaben.
+- Kisten haben unabhängige Chancen pro Öffnung: Common 5%, Rare 10%, Epic 20%, Legendary 30%. Tägliche Bonuskiste 0,25%. Die bereits vorhandenen Material-/Itemchancen bleiben unverändert. Shop zeigt Chancen auch vor Gems-Kistenkäufen an.
 - 30-Tage-Seasons V2: 1 garantierter zusätzlicher Gutschein auf Free-Level 30 und 1 auf Premium-Level 40. Die Tickets ergänzen andere Rewards; sie ersetzen keine vorhandenen.
 - Die Quoten sind *erste Balance-Hypothesen*, keine nachgewiesenen optimalen Conversion-/Retention-Werte. Im frühen Nutzer-Test messen: Gutscheinquellen, Ziehungen, Session Length, D1/7/30 und Gumball-Umsatz pro DAU.
 
@@ -42,3 +42,7 @@ Bestehende Unity-Achievements und Profile besitzen technische Daten und Aktionsk
 5. Instrumentiertes Balancing statt angenommener Erfolgsquote: Tutorial-Completion, D1/D7/D30, Time-to-Prestige, Reward-Claim-Rate, Video Completion, Retention-Kohorten, Item-Inflation.
 
 Quelle aller Voucherswahrscheinlichkeiten und Gutschein-Mengen: src/economy.ts, automatisiert nach Unity VoucherBalance.g.cs exportiert.
+
+## Neue Chancen und Handel – 22.10.2026
+
+Auf ausdrücklichen Wunsch: Truhenchancen Common/Rare/Epic/Legendary 5/10/20/30 Prozent. Die tägliche Bonusbox bleibt bei 0,25 Prozent, der Season-Pass bei Free 30 und Premium 40. Mit höheren Gutscheinfunden steigt die zusätzliche Ziehungszahl deutlich; bevor dies mit Echtgeldeinkäufen verbunden wird, ist die Gem-Inflation zu messen. Persönlich erspielte Gutscheine sind weiterhin lokale Spielwerte; für online handelbare Gutscheine ist ein **unabhängiger serverseitiger Herkunfts- und Besitznachweis erforderlich**. Das gilt besonders für eine mögliche Wiederveräußerung von IAP-basierten Zufallsfunden.

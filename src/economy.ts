@@ -2437,7 +2437,7 @@ export const BALANCE = {
   achievementTierGems:[2,4,8,12],achievementPointsPerTier:[2,4,8,12],achievementResearchPerTen:.01,achievementResearchCap:.20,
   missionRewards:{daily:{task:2,bonus:6},weekly:{task:5,bonus:30},monthly:{task:15,bonus:120}},
   hardwareAutobuyerUnlock:100,hardwareAutobuyerInterval:5,
-  gumballVouchers:{chestChances:{common:0.005,rare:0.01,epic:0.015,legendary:0.02},dailyBoxChance:0.0025,seasonFreeLevel:30,seasonPremiumLevel:40,maxOwned:999},
+  gumballVouchers:{chestChances:{common:0.05,rare:0.10,epic:0.20,legendary:0.30},dailyBoxChance:0.0025,seasonFreeLevel:30,seasonPremiumLevel:40,maxOwned:999},
   capsuleMachine:{gemCost:10,itemChance:.01,componentChance:.35,creditChance:.45,dataChance:.14,gemChance:.0475,jackpotChance:.0025,jackpotMultiplier:20,gemRange:[2,8],creditSeconds:[15,60],dataSeconds:[15,60],creditFloor:100,dataFloor:5,componentRanges:{common:[3,12],uncommon:[2,5],rare:[1,2]},rareChanceBoundary:.01,uncommonChanceBoundary:.10},
   commerce:{incomeMultiplier:2,rewardGems:10,gemVideoCooldownMs:600000,droneSeconds:300,droneCooldownMs:600000,researchAdSeconds:600,researchGemsPerMinute:2,ticketMs:600000,
     starterItems:[{type:'quantum-chip',rarity:'rare'},{type:'memory-crystal',rarity:'rare'},{type:'field-scanner',rarity:'rare'}],

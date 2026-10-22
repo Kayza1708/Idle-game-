@@ -11,3 +11,38 @@
 .profile-showcase-heading{font-size:11px;letter-spacing:.05em;color:#b7d8e3;margin-bottom:8px}
 .profile-showcase-privacy{font-size:11px;line-height:1.4;color:#9dbbc8;margin:8px 0 0}
 @media(max-width:370px){.profile-local-badge{flex-basis:66px}.profile-identity-showcase{gap:8px}}
+
+/* Original pixel-glint treatment inspired by rare unlocks, not copied game artwork. */
+.profile-avatar-art[data-frame="neon"],
+.profile-avatar-art[data-frame="quantum"],
+.profile-avatar-art[data-frame="singularity"],
+.profile-avatar-art[data-frame="gold-lab"]{isolation:isolate}
+.profile-avatar-art[data-frame="neon"]::after,
+.profile-avatar-art[data-frame="quantum"]::after,
+.profile-avatar-art[data-frame="singularity"]::after,
+.profile-avatar-art[data-frame="gold-lab"]::after{
+ content:"";position:absolute;inset:9%;z-index:2;pointer-events:none;
+ border:3px solid transparent;border-top-color:#fff2bc;border-right-color:#7aebf9;
+ clip-path:polygon(0 0,100% 0,100% 100%,0 100%);opacity:.7;
+ animation:profile-pixel-border-glint 1.8s steps(6,end) infinite;
+}
+.profile-avatar-art[data-frame="neon"]::after{border-top-color:#ff8fed;border-right-color:#7bf9f2}
+.profile-avatar-art[data-frame="quantum"]::after{border-top-color:#c4a9ff;border-right-color:#73ecff}
+.profile-avatar-art[data-frame="singularity"]::after{border-top-color:#ffe8a1;border-right-color:#73ffcf}
+@keyframes profile-pixel-border-glint{
+ 0%,100%{transform:translate(0,0);filter:none;opacity:.4}
+ 33%{transform:translate(2px,-2px);filter:drop-shadow(0 0 2px currentColor);opacity:1}
+ 66%{transform:translate(-2px,2px);filter:none;opacity:.65}
+}
+.profile-frame-preview-gallery{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.profile-frame-preview-gallery>div{flex:1 1 86px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:11px}
+.profile-frame-preview-gallery small{color:#a4bacb}
+@media(prefers-reduced-motion:reduce){
+ .profile-avatar-art::after{animation:none!important;transform:none!important;filter:none!important}
+}
+
+/* Accessible red action hints, never used as a substitute for text/claim buttons. */
+.claim-red-alert{display:inline-flex;align-items:center;justify-content:center;
+ min-width:19px;height:19px;margin-inline-start:5px;padding:0 3px;
+ background:#d92a37;color:#fff;border-radius:5px;font-size:14px;font-weight:900;
+ font-style:normal;line-height:1;box-shadow:0 0 0 2px #101e32}

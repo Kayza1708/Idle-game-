@@ -27,7 +27,15 @@ export async function socialRoute(ctx) {
    const statsByKey=Object.fromEntries(stats.results.map(s=>[s.stat_key,s.stat_value]));
    const visibleStats={};
    const flags=[['playtime','show_playtime','playtime'],['maxCompute','show_max_compute','max_compute'],['prestiges','show_prestiges','prestiges'],['int','show_int','int'],['rank','show_rank','rank']];
-   for(const [key,field,dbKey] of flags)if(base[field]===1&&statsByKey[dbKey]!=null)visibleStats[key]=statsByKey[dbKey];
+   for(const [key,field,dbKey] of flags)if(base[field]===1&&statsByKey[dbKey]!=null&&key!=='rank')visibleStats[key]=statsByKey[dbKey];
+   if(base.show_rank===1){
+     // Rank derived from server-owned contributions. Do not trust a client-uploaded rank.
+     const ranking=await db.prepare(
+       'WITH ranked AS (SELECT player_id,ROW_NUMBER() OVER(ORDER BY contributed_rp DESC,player_id) AS rank '+
+       'FROM company_members) SELECT rank FROM ranked WHERE player_id=?'
+     ).bind(id).first();
+     if(ranking)visibleStats.rank=String(ranking.rank);
+   }
    return reply({player:{id:base.id,displayName:base.display_name,frameId:base.frame_id,company:base.company_id?{id:base.company_id,name:base.company_name,tag:base.company_tag}:null},badges:badges.results.map(b=>({...b,metal:TIERS[b.tier]})),stats:visibleStats});
  }
  if(method==='GET'&&path==='/v1/profile'){
@@ -134,6 +142,82 @@ export async function socialRoute(ctx) {
    if(!row)throw new ApiError(409,'leadership_changed_retry');
    return reply({newLeaderId:row.leader_id,yourNewRole:'executive'});
  }
+ // Structured applications and admission policy: IDs only, no messages/DMs.
+ if(method==='GET'&&path==='/v1/me/applications'){
+   const pending=await db.prepare(
+     "SELECT a.id,a.company_id,c.name AS company_name,a.expires_at "+
+     "FROM company_applications a JOIN companies c ON c.id=a.company_id "+
+     "WHERE a.player_id=? AND a.state='pending' AND a.expires_at>? "+
+     "ORDER BY a.created_at DESC LIMIT 20"
+   ).bind(player.id,now).all();
+   return reply({applications:pending.results});
+ }
+ const apply=/^\/v1\/companies\/([0-9a-f-]{36})\/apply$/i.exec(path);
+ if(method==='POST'&&apply){
+   if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
+   if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
+   const target=await db.prepare(
+     "SELECT id,member_count FROM companies WHERE id=? AND visibility='public' AND join_policy='apply'"
+   ).bind(apply[1]).first();
+   if(!target)throw new ApiError(404,'company_not_accepting_applications');
+   if(target.member_count>=50)throw new ApiError(409,'company_full');
+   const existing=await db.prepare(
+     "SELECT id FROM company_applications WHERE player_id=? AND company_id=? AND state='pending' AND expires_at>?"
+   ).bind(player.id,target.id,now).first();
+   if(existing)return reply({applicationId:existing.id,alreadyPending:true});
+   await db.prepare(
+     "UPDATE company_applications SET state='withdrawn',decided_at=? WHERE player_id=? AND company_id=? AND state='pending' AND expires_at<=?"
+   ).bind(now,player.id,target.id,now).run();
+   const id=crypto.randomUUID();
+   await db.prepare(
+     "INSERT INTO company_applications(id,company_id,player_id,created_at,expires_at) VALUES(?,?,?,?,?)"
+   ).bind(id,target.id,player.id,now,now+604800).run();
+   return reply({applicationId:id,pending:true},201);
+ }
+ if(method==='GET'&&path==='/v1/company/applications'){
+   const m=await member();
+   if(!['ceo','executive','manager'].includes(m.role))throw new ApiError(403,'role_not_allowed');
+   const results=await db.prepare(
+     "SELECT a.id,a.player_id,p.display_name,a.created_at,a.expires_at "+
+     "FROM company_applications a JOIN players p ON p.id=a.player_id "+
+     "WHERE a.company_id=? AND a.state='pending' AND a.expires_at>? "+
+     "ORDER BY a.created_at LIMIT 50"
+   ).bind(m.company_id,now).all();
+   return reply({applications:results.results});
+ }
+ if(method==='POST'&&path==='/v1/company/settings'){
+   const m=await member();
+   if(m.role!=='ceo')throw new ApiError(403,'ceo_only');
+   const data=await payload(request),policy=data.joinPolicy;
+   if(!['open','invite','apply'].includes(policy))throw new ApiError(400,'invalid_join_policy');
+   const updated=await db.prepare(
+     'UPDATE companies SET join_policy=? WHERE id=? AND leader_id=? RETURNING join_policy'
+   ).bind(policy,m.company_id,player.id).first();
+   if(!updated)throw new ApiError(409,'leadership_changed_retry');
+   return reply({joinPolicy:updated.join_policy});
+ }
+ const decide=/^\/v1\/company\/applications\/([0-9a-f-]{36})\/(accept|reject)$/i.exec(path);
+ if(method==='POST'&&decide){
+   const m=await member();
+   if(!['ceo','executive','manager'].includes(m.role))throw new ApiError(403,'role_not_allowed');
+   const action=decide[2]==='accept'?'accepted':'rejected';
+   const updated=await db.prepare(
+     'UPDATE company_applications SET state=?,decided_at=? '+
+     "WHERE id=? AND company_id=? AND state='pending' AND expires_at>=? AND "+
+     "EXISTS(SELECT 1 FROM company_members WHERE player_id=? AND company_id=? AND role IN ('ceo','executive','manager')) "+
+     'RETURNING id,player_id,state'
+   ).bind(action,now,decide[1],m.company_id,now,player.id,m.company_id).first();
+   if(!updated)throw new ApiError(409,'application_unavailable');
+   return reply({application:updated});
+ }
+ const withdraw=/^\/v1\/me\/applications\/([0-9a-f-]{36})\/withdraw$/i.exec(path);
+ if(method==='POST'&&withdraw){
+   const updated=await db.prepare(
+     "UPDATE company_applications SET state='withdrawn',decided_at=? WHERE id=? AND player_id=? AND state='pending' RETURNING id"
+   ).bind(now,withdraw[1],player.id).first();
+   if(!updated)throw new ApiError(409,'application_unavailable');
+   return reply({withdrawnApplicationId:updated.id});
+ }
  // Invite flows use IDs only; no invitation text, chat or direct messages.
  if(method==='GET'&&path==='/v1/me/invitations'){
    const list=await db.prepare(
@@ -169,6 +253,7 @@ export async function socialRoute(ctx) {
  }
  const acceptInvite=/^\/v1\/me\/invitations\/([0-9a-f-]{36})\/accept$/i.exec(path);
  if(method==='POST'&&acceptInvite){
+   if(player.company_access_verified!==1)throw new ApiError(403,'company_access_not_verified');
    if(await membership(db,player.id))throw new ApiError(409,'already_in_company');
    const accepted=await db.prepare(
      "UPDATE company_invitations SET status='accepted',decided_at=? "+
