@@ -10,6 +10,7 @@ V4=(ROOT/"0004_trade_badges.sql").read_text()
 V5=(ROOT/"0005_names_applications_rankings.sql").read_text()
 V6=(ROOT/"0006_verified_vouchers.sql").read_text()
 V7=(ROOT/"0007_verified_company_founder.sql").read_text()
+V8=(ROOT/"0008_voucher_trade_achievements.sql").read_text()
 
 class SocialSchemaTests(unittest.TestCase):
     def setUp(self):
@@ -27,6 +28,7 @@ class SocialSchemaTests(unittest.TestCase):
         self.db.executescript(V5)
         self.db.executescript(V6)
         self.db.executescript(V7)
+        self.db.executescript(V8)
 
     def scalar(self,sql,args=()):
         return self.db.execute(sql,args).fetchone()[0]
@@ -130,6 +132,8 @@ class SocialSchemaTests(unittest.TestCase):
         self.assertEqual(self.scalar("SELECT balance FROM player_voucher_balances WHERE player_id='bob'"),1)
         self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='alice' AND asset_id='graphene'"),7)
         self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='bob' AND asset_id='graphene'"),3)
+        self.assertEqual(self.scalar("SELECT COUNT(*) FROM player_badges WHERE family='company-trader' AND tier=1"),2)
+        self.assertEqual(self.scalar("SELECT completed_trades FROM player_trade_counters WHERE player_id='bob'"),1)
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE company_voucher_offers SET status='accepted' WHERE id='voucher1'")
 
