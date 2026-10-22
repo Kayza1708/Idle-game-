@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: 84e996d4d5e7c4d49a41586f8c97b659
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7196801653157331936
+    second: DeliveryDrone_0
+  - first:
+      213: -8250120973823543206
+    second: DeliveryDrone_1
+  - first:
+      213: -4748289350262587984
+    second: DeliveryDrone_2
+  - first:
+      213: -2514541272874351988
+    second: DeliveryDrone_3
+  - first:
+      213: -7617121887254900428
+    second: DeliveryDrone_4
+  - first:
+      213: 2241963855596031967
+    second: DeliveryDrone_5
+  - first:
+      213: -4800512906777791014
+    second: DeliveryDrone_6
+  - first:
+      213: -5110866277491094963
+    second: DeliveryDrone_7
+  - first:
+      213: 8010229678791883642
+    second: DeliveryDrone_8
+  - first:
+      213: 33665877971606184
+    second: DeliveryDrone_9
+  - first:
+      213: 1045351981435944229
+    second: DeliveryDrone_10
+  - first:
+      213: 3859233157537762062
+    second: DeliveryDrone_11
+  - first:
+      213: -2647709188270145041
+    second: DeliveryDrone_12
+  - first:
+      213: -6950323516578950178
+    second: DeliveryDrone_13
+  - first:
+      213: -8993873790882385541
+    second: DeliveryDrone_14
+  - first:
+      213: -2084298607774312666
+    second: DeliveryDrone_15
+  - first:
+      213: -4109045402623487151
+    second: DeliveryDrone_16
+  - first:
+      213: 8618609324434752229
+    second: DeliveryDrone_17
+  - first:
+      213: -281850197990833648
+    second: DeliveryDrone_18
+  - first:
+      213: 1839139013559113648
+    second: DeliveryDrone_19
+  - first:
+      213: 699300150490873116
+    second: DeliveryDrone_20
+  - first:
+      213: 9054371852389109423
+    second: DeliveryDrone_21
+  - first:
+      213: -8955526867228671683
+    second: DeliveryDrone_22
+  - first:
+      213: -4934744123261679377
+    second: DeliveryDrone_23
+  - first:
+      213: -6055556289260704828
+    second: DeliveryDrone_24
+  - first:
+      213: 7373134949562110030
+    second: DeliveryDrone_25
+  - first:
+      213: -4975821928807710549
+    second: DeliveryDrone_26
+  - first:
+      213: 3457723414802149462
+    second: DeliveryDrone_27
+  - first:
+      213: 6996262264593109277
+    second: DeliveryDrone_28
+  - first:
+      213: -8465004918579217540
+    second: DeliveryDrone_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DeliveryDrone_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1255
+        height: 868
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02cfc98d603df1c90800000000000000
+      internalID: -7196801653157331936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_1
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 829
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a587f317faea18d80800000000000000
+      internalID: -8250120973823543206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_2
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 829
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bdf3d25effaa1eb0800000000000000
+      internalID: -4748289350262587984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_3
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 565
+        width: 274
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c820441f80e8a1dd0800000000000000
+      internalID: -2514541272874351988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_4
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 821
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4319153300c8a4690800000000000000
+      internalID: -7617121887254900428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_5
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 797
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdf011c8f3e0d1f10800000000000000
+      internalID: 2241963855596031967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_6
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 797
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad5f4db02f6216db0800000000000000
+      internalID: -4800512906777791014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_7
+      rect:
+        serializedVersion: 2
+        x: 1588
+        y: 555
+        width: 155
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4ace9bf23e8219b0800000000000000
+      internalID: -5110866277491094963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_8
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 765
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7b7eade37d0a2f60800000000000000
+      internalID: 8010229678791883642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_9
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 747
+        width: 35
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aa9c8900fa977000800000000000000
+      internalID: 33665877971606184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_10
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 753
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d7dbea616d18e00800000000000000
+      internalID: 1045351981435944229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_11
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 741
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0b82741c10ce8530800000000000000
+      internalID: 3859233157537762062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_12
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 739
+        width: 11
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe1ce9c7582714bd0800000000000000
+      internalID: -2647709188270145041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_13
+      rect:
+        serializedVersion: 2
+        x: 1274
+        y: 715
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed39448069d7b8f90800000000000000
+      internalID: -6950323516578950178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_14
+      rect:
+        serializedVersion: 2
+        x: 1258
+        y: 612
+        width: 49
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7172c350775f2380800000000000000
+      internalID: -8993873790882385541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_15
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 678
+        width: 23
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62755c595751313e0800000000000000
+      internalID: -2084298607774312666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_16
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 647
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 153dcaa1afcb9f6c0800000000000000
+      internalID: -4109045402623487151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_17
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 660
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e28dc864837b9770800000000000000
+      internalID: 8618609324434752229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_18
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 652
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01202ecfcbaa61cf0800000000000000
+      internalID: -281850197990833648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_19
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 626
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b7d0cb403fe58910800000000000000
+      internalID: 1839139013559113648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_20
+      rect:
+        serializedVersion: 2
+        x: 1707
+        y: 635
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1db26528c964b900800000000000000
+      internalID: 699300150490873116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_21
+      rect:
+        serializedVersion: 2
+        x: 1482
+        y: 615
+        width: 29
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faec2f54a3797ad70800000000000000
+      internalID: 9054371852389109423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_22
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 612
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d314e5e33c397b380800000000000000
+      internalID: -8955526867228671683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_23
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 565
+        width: 35
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe88a838d54448bb0800000000000000
+      internalID: -4934744123261679377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_24
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 580
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cbab3d73a756fba0800000000000000
+      internalID: -6055556289260704828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_25
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 17
+        width: 9
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e40daad0c23a25660800000000000000
+      internalID: 7373134949562110030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_26
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 29
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba041db915452fab0800000000000000
+      internalID: -4975821928807710549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_27
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 31
+        width: 580
+        height: 493
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65035de302d4cff20800000000000000
+      internalID: 3457723414802149462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_28
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 17
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d11da8c3677b71160800000000000000
+      internalID: 6996262264593109277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeliveryDrone_29
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 15
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7bb62640e2468a80800000000000000
+      internalID: -8465004918579217540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      DeliveryDrone_0: -7196801653157331936
+      DeliveryDrone_1: -8250120973823543206
+      DeliveryDrone_10: 1045351981435944229
+      DeliveryDrone_11: 3859233157537762062
+      DeliveryDrone_12: -2647709188270145041
+      DeliveryDrone_13: -6950323516578950178
+      DeliveryDrone_14: -8993873790882385541
+      DeliveryDrone_15: -2084298607774312666
+      DeliveryDrone_16: -4109045402623487151
+      DeliveryDrone_17: 8618609324434752229
+      DeliveryDrone_18: -281850197990833648
+      DeliveryDrone_19: 1839139013559113648
+      DeliveryDrone_2: -4748289350262587984
+      DeliveryDrone_20: 699300150490873116
+      DeliveryDrone_21: 9054371852389109423
+      DeliveryDrone_22: -8955526867228671683
+      DeliveryDrone_23: -4934744123261679377
+      DeliveryDrone_24: -6055556289260704828
+      DeliveryDrone_25: 7373134949562110030
+      DeliveryDrone_26: -4975821928807710549
+      DeliveryDrone_27: 3457723414802149462
+      DeliveryDrone_28: 6996262264593109277
+      DeliveryDrone_29: -8465004918579217540
+      DeliveryDrone_3: -2514541272874351988
+      DeliveryDrone_4: -7617121887254900428
+      DeliveryDrone_5: 2241963855596031967
+      DeliveryDrone_6: -4800512906777791014
+      DeliveryDrone_7: -5110866277491094963
+      DeliveryDrone_8: 8010229678791883642
+      DeliveryDrone_9: 33665877971606184
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

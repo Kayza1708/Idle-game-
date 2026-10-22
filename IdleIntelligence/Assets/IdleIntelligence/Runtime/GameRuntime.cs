@@ -52,7 +52,7 @@ namespace IdleIntelligence.Runtime
         public bool Act(Func<GameState,GameState> action,string actionName="action")
         {
             if(!Writable)return false;Audio?.Unlock();Tick();if(!Writable){Refresh();return false;}var before=State;double actionMark=Crash.Ledger.Begin("actions",actionName,Now,State.Meta.resets+":"+State.Prestige.resets);var actionWatch=System.Diagnostics.Stopwatch.StartNew();State=NarrativeBridge.Sync(before,action(State));
-            if(!ReferenceEquals(before,State)) {Diagnostics.Research("action:"+actionName,State.Lifetime.researchCompleted-before.Lifetime.researchCompleted);message="Aktion gespeichert";Save();if(!Writable)State=before;}Crash.Ledger.End("actions",actionName,actionMark,Now,actionWatch.Elapsed.TotalMilliseconds,Writable?"ok":"save-blocked");if(Writable)Audio?.Feedback(actionName,before,State);Refresh();return !ReferenceEquals(before,State)&&Writable;
+            if(!ReferenceEquals(before,State)) {Diagnostics.Research("action:"+actionName,State.Lifetime.researchCompleted-before.Lifetime.researchCompleted);message="Aktion gespeichert";Save();if(!Writable)State=before;}Crash.Ledger.End("actions",actionName,actionMark,Now,actionWatch.Elapsed.TotalMilliseconds,Writable?"ok":"save-blocked");if(Writable)Audio?.Feedback(actionName,before,State);Refresh();if(Writable&&!ReferenceEquals(before,State))GetComponent<RewardPresentation>()?.Receipt(before,State,actionName);GetComponent<RewardPresentation>()?.ClearOrigin();return !ReferenceEquals(before,State)&&Writable;
         }
         void Save()
         {
@@ -71,6 +71,7 @@ namespace IdleIntelligence.Runtime
         public void ShowDetails(string kind,int index){detailKind=kind;detailIndex=index;Show("details");}
         public void Show(string selected)
         {
+            GetComponent<RewardPresentation>()?.Cancel();var menuReturn=Content.Find("MenuReturn");if(menuReturn!=null){menuReturn.gameObject.SetActive(false);Destroy(menuReturn.gameObject);}
             if(productionView!=null){productionView.gameObject.SetActive(false);Destroy(productionView.gameObject);productionView=null;}if(economyDetail!=null){economyDetail.gameObject.SetActive(false);Destroy(economyDetail.gameObject);economyDetail=null;}foreach(Transform child in Content)if(child.name.StartsWith("Details-",StringComparison.Ordinal)){child.gameObject.SetActive(false);Destroy(child.gameObject);}
             var oldProduction=Content.Find("ProductionAccess");if(oldProduction!=null){oldProduction.gameObject.SetActive(false);Destroy(oldProduction.gameObject);}
             if(goalView!=null){goalView.gameObject.SetActive(false);Destroy(goalView.gameObject);goalView=null;}var oldGoals=Content.Find("GoalsAccess");if(oldGoals!=null){oldGoals.gameObject.SetActive(false);Destroy(oldGoals.gameObject);}

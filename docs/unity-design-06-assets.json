@@ -1,0 +1,61 @@
+{
+  "originalConversions": [
+    {
+      "original": "public/assets/game/shop-chests-v1.webp",
+      "unity": "IdleIntelligence/Assets/IdleIntelligence/Resources/ShopChests.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "decodedPixelsIdentical": true,
+      "sourceSha256": "a653ffbb78ac8f33d30bc345958a7776aa71cc2428174590deff8279f1b06ad7",
+      "unitySha256": "2bd6ff39b3b0d8552adf0dff48d8c89b14b2a951315c8c4e0c7b560ffdeeff3c",
+      "rights": "Existing project original; no new rights asserted"
+    },
+    {
+      "original": "public/assets/game/capsule-machine-filled-v3.webp",
+      "unity": "IdleIntelligence/Assets/IdleIntelligence/Resources/CapsuleMachine.png",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "decodedPixelsIdentical": true,
+      "sourceSha256": "d16ad1bea86e545040cdc15c02cbad36fc5ea365069645af43eb750c29c6cda1",
+      "unitySha256": "f2edfadc0fb02bd4446fdac84cc385f27cb87aaefecebc9a46d3de35fe494b68",
+      "rights": "Existing project original; no new rights asserted"
+    },
+    {
+      "original": "public/assets/game/mobile-ui-sprites-v1.webp",
+      "unity": "IdleIntelligence/Assets/IdleIntelligence/Resources/MobileSprites.png",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "decodedPixelsIdentical": true,
+      "sourceSha256": "4741ca9ec9a83756b1ca8fd56dcc7619f92fbd33d8719608444ed3ea80ca9142",
+      "unitySha256": "8d402eb7b91b303f371574aee114f72e4548cb9233d3be6209a518ac454439f3",
+      "rights": "Existing project original; no new rights asserted"
+    },
+    {
+      "original": "public/assets/game/delivery-drone-v1.webp",
+      "unity": "IdleIntelligence/Assets/IdleIntelligence/Resources/DeliveryDrone.png",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "decodedPixelsIdentical": true,
+      "sourceSha256": "275f9476815116bac99d6ed9e5c1114bb88775a157f28aa9e10eb10858865bf4",
+      "unitySha256": "27ca84bd45e590c5a26c51ec6278d4e99ae0ca5e26327c0751345a6e418fa397",
+      "rights": "Existing project original; no new rights asserted"
+    }
+  ],
+  "derivatives": "Standalone Sprite assets created by BuildRewardPresentation; original pixels, isolated crank alpha silhouette. Drone crop excludes separate parcel and retains all rotors.",
+  "ownedAssets": [
+    "64x48 forge piston",
+    "24x24 steam tile",
+    "six 48x48 faceted pressure-wave frames",
+    "ItemSilhouette UI shader"
+  ],
+  "generation": "Editor APIs and authored raster code; no foreign artwork or copied Archero assets",
+  "fonts": "Existing IBM Plex Mono and Silkscreen with bundled license files, unchanged"
+}

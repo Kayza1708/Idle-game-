@@ -66,6 +66,11 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 - Neuer Stand der Inszenierung: [unity-design-05.md](unity-design-05.md), mit zuerst geprüftem Fusionsablauf, aktuellem Gesamtvideo inklusive Modell/Menü und getrennten Funktions-/Sichtprüfungen. Weitere Bildschirmarbeit auf dieser Grundlage einzeln abnehmen; keine pauschale Archero-/Releasequalitätsfreigabe.
 - Echte Geräteprüfung für Notches, Touch, Systemschrift/Fontfallback, Audio-/Haptik und Burst-/Releasebetrieb bleibt gesondert offen. Bestehende Quellprobleme und der vollständige funktionale Audit bleiben davon getrennt.
 
+### Nach Aktionsinszenierung 06
+
+Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md](unity-design-06.md). Zunächst diesen Stand gemeinsam visuell beurteilen. Native iPhone-/Android-Notches, Touch-/Systemschrift, Audio-/Haptikunterbrechungen und Leistungsaufnahme bleiben Geräteabnahme. Übrige Bildschirmdichte und die im Quellkatalog identisch deutsch geführten INT-Namen getrennt bearbeiten; keine Ersatzregeln oder Balanceänderungen ableiten.
+
+
 
 ## Cloudflare Company Backend – neuer Entwicklungsbranch
 
@@ -105,3 +110,7 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 5. Namenscheck kann öffentlich und gedrosselt erfolgen; erst authentifizierter PUT reserviert einen Namen. Frühere bereits existierende Pseudonyme vor produktiver Aktivierung anhand einheitlicher Unicode-/Leetspeak-Schlüssel migrieren.
 6. In Unity prüfen: 1.000-INT-Mira-Text, Claim-! auf Missionen/Achievements, Company-Rankings ohne Login, opt-in Profil-/Badge-Ausstellung, handhabbarer Trade-Flow und reduzierte Bewegung.
 7. Datenschutz/Auskunft/Löschung, Missbrauchsmeldung, Privatsphäre für Ranglisten, EU-D1-Aufbewahrung und Stress-/Mobiltests vor Veröffentlichung vervollständigen. Kein Chat.
+
+- Aktionsrunde 06 / Draft #152: Main-Integration `aebd1174` erhält die vorhandenen Unity-Company-/Profil-/Gutscheinwege. Neuer Company-Menü-/Gutschein-/Reload-Fall und zwei übernommene Compile-Anschlüsse korrigiert; finale integrierte Prüfergebnisse stehen im Abschnitt-06-Bericht. Optische Company-Abnahme bleibt separat.
+
+- Referenzdateien reproduzierbar mit `TZ=Europe/Berlin npm run unity:export` erzeugen; lokale und Linux-PR-Prüfung verwenden diese Referenzzeitzone. Andere Zeitzonen nicht als Balanceänderung in Referenzdateien übernehmen.

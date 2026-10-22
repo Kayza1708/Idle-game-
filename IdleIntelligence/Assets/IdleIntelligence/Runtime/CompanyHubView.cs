@@ -126,7 +126,7 @@ namespace IdleIntelligence.Runtime
         }
         void Search()
         {
-            Run(cb=>api.FindCompanies(""),json=>{
+            Run(cb=>api.FindCompanies("",cb),json=>{
                 // The existing search endpoint returns {companies:[...]}.
                 var data=Parse<CompanyRows>(json);
                 WorkshopUIFactory.Clear(content);

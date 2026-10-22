@@ -1,0 +1,187 @@
+{
+  "unity": "6000.3.26f1",
+  "platform": "macOS Editor, native uGUI PlayMode camera frames",
+  "referenceTimezone": "Europe/Berlin",
+  "integrationBaseCommit": "aebd117458430511d6aae332aa182d80c6ad96f5",
+  "animationCommit": "cd4afe960628b4ea6bb2731fb8320cf39af2bb7c",
+  "unityCSharpSourceSha256": "ffb0f7bb0a2217acbf17e50217bdb33ce8dfc8bd97c6ec4d8a84bbe23a804cb7",
+  "processFlag": "--burst-disable-compilation; existing native Burst limit, no package or settings changes",
+  "unityRuns": [
+    {
+      "file": "idle-design6-edit-integrated-final.xml",
+      "scope": "Final full EditMode with synchronized TypeScript vouchers and Europe/Berlin references",
+      "result": "Passed",
+      "total": 135,
+      "passed": 135,
+      "failed": 0,
+      "seconds": 343.7072233,
+      "sha256": "45bdfe28c8ae449051f08fe9c581972324af69b1c18c5c52075ae6a3d3888cc0"
+    },
+    {
+      "file": "idle-design6-play-integrated.xml",
+      "scope": "Full integrated PlayMode; two obsolete direct-achievement navigation tests failed",
+      "result": "Failed(Child)",
+      "total": 75,
+      "passed": 73,
+      "failed": 2,
+      "seconds": 361.9087961,
+      "sha256": "1923cf94109427bc07274c58bbc69041bf967baa312fceffe524a16089599b6c"
+    },
+    {
+      "file": "idle-design6-profile-integrated.xml",
+      "scope": "All four profile UI cases rerun through actual Profile -> Achievements navigation; no runtime changes after broad suite",
+      "result": "Passed",
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "seconds": 7.228367,
+      "sha256": "74321c29ee2289f01a9ef0cbc56a1e1e3fccefb5ba6cbc56628f13c3205953d7"
+    }
+  ],
+  "effectivePlayMode": {
+    "uniqueCases": 75,
+    "passed": 75,
+    "failed": 0,
+    "scope": "73 passed broad cases + all four profile cases rerun, replacing the two obsolete test navigation failures; not a single 75/75 final run",
+    "cases": {
+      "IdleIntelligence.PlayTests.ActionSequenceTests.ChromeAndActionsAtMobileSizes": "Passed",
+      "IdleIntelligence.PlayTests.ActionSequenceTests.EightMaterialReceiptIsBoundedAndSavedBeforeCancellation": "Passed",
+      "IdleIntelligence.PlayTests.ActionSequenceTests.FusionRevealIsReadableInBothLanguagesAndRetainsBestLevel": "Passed",
+      "IdleIntelligence.PlayTests.ActionSequenceTests.MenuGemsAndConnectedModelAreReachable": "Passed",
+      "IdleIntelligence.PlayTests.ActionSequenceTests.OffscreenEquipmentTargetBecomesVisibleAndMenuRestoresInventoryMode": "Passed",
+      "IdleIntelligence.PlayTests.ActionSequenceTests.RapidRepeatCancelReducedAndReloadStayExactlyOnce": "Passed",
+      "IdleIntelligence.PlayTests.ActionSequenceTests.RecordFiveActualActionsInOrder": "Passed",
+      "IdleIntelligence.PlayTests.ActionSequenceTests.RecordFusionFirst": "Passed",
+      "IdleIntelligence.PlayTests.AdUITests.RapidDirectClaimsAcrossMarketAndCapsuleOnlyConsumeOneRequest": "Passed",
+      "IdleIntelligence.PlayTests.AdUITests.UnavailableProviderNeverRewardsAndGemConfirmationCompletesActualJobOnce": "Passed",
+      "IdleIntelligence.PlayTests.AdUITests.VerifiedAdFreeRightUsesDirectClaimsWithLimitsAndNoProviderSuccess": "Passed",
+      "IdleIntelligence.PlayTests.ChallengeTests.FailedSaveKeepsOriginalAndRollsBackUncommittedChallengeSwitch": "Passed",
+      "IdleIntelligence.PlayTests.ChallengeTests.PreparedCompletionPersistsOnceEvenIfOldButtonFiresAgain": "Passed",
+      "IdleIntelligence.PlayTests.ChallengeTests.SerialRulesLinksSelectionAndMobilePresentationUseRealControls": "Passed",
+      "IdleIntelligence.PlayTests.ChallengeTests.StartAndAbortPreserveMainJobsAndSaveBeforeNavigation": "Passed",
+      "IdleIntelligence.PlayTests.DesignReviewTests.CaptureBaselineAndProveEditorAccess": "Passed",
+      "IdleIntelligence.PlayTests.DesignReviewTests.InterruptAndReducedMotionPreserveCommittedEquipment": "Passed",
+      "IdleIntelligence.PlayTests.DesignReviewTests.RecordRealTapAndOverdrive": "Passed",
+      "IdleIntelligence.PlayTests.DesignReviewTests.ReviewMobileSection": "Passed",
+      "IdleIntelligence.PlayTests.DesignReviewTests.UnifiedSlotsLongNamesAndUsefulComparison": "Passed",
+      "IdleIntelligence.PlayTests.GemUITests.FailedCapsuleSaveRestoresWalletAndReceipt": "Passed",
+      "IdleIntelligence.PlayTests.GemUITests.PermanentOffersAndCapsulesAreReachableExactlyOnceAndSaved": "Passed",
+      "IdleIntelligence.PlayTests.GemUITests.UnavailableCapsuleVideoDoesNotSpendQuotaOrGrant": "Passed",
+      "IdleIntelligence.PlayTests.GuidanceUITests.ActualPauseButtonCancelsPendingAutomationBeforeReload": "Passed",
+      "IdleIntelligence.PlayTests.GuidanceUITests.DamagedMainHasReachableExplicitRecoveryAndKeepsOriginal": "Passed",
+      "IdleIntelligence.PlayTests.GuidanceUITests.ExactAgentBudgetClearAndUneditedFieldsUseRealSavedControls": "Passed",
+      "IdleIntelligence.PlayTests.GuidanceUITests.ExplicitCampaignResetCanCancelAndPreservesCompletePreviousCampaign": "Passed",
+      "IdleIntelligence.PlayTests.GuidanceUITests.ProductionAndPreviousSessionExportsUseActualRuntimeAndKeepUncleanOriginal": "Passed",
+      "IdleIntelligence.PlayTests.GuidanceUITests.RealPinNavigateReloadClearAndDiagnosticExport": "Passed",
+      "IdleIntelligence.PlayTests.GuidanceUITests.RealPlannerToggleRestartsOriginalInterval": "Passed",
+      "IdleIntelligence.PlayTests.IndustryTests.AllResearchIsReachableAndOperationsStartIsSaved": "Passed",
+      "IdleIntelligence.PlayTests.IndustryTests.FoundryControlsUseSharedItemDetailsAndMobileLayout": "Passed",
+      "IdleIntelligence.PlayTests.IndustryTests.SynthesisAndConversionsAreReachableSavedAndNotReplayed": "Passed",
+      "IdleIntelligence.PlayTests.LifetimeUITests.ActualHardwareEventsShowInMobileStatisticsAndSurviveReload": "Passed",
+      "IdleIntelligence.PlayTests.LifetimeUITests.SuspendedTimeIsConsumedOnceWithoutActiveTimeCredit": "Passed",
+      "IdleIntelligence.PlayTests.MarketUITests.FailedMarketSaveRestoresDebitStockAndItemReceipt": "Passed",
+      "IdleIntelligence.PlayTests.MarketUITests.FreePaidMaterialsAndDailyItemUseAtomicTicketsAndActualPortraits": "Passed",
+      "IdleIntelligence.PlayTests.MarketUITests.UnavailableProviderClearsSavedTicketWithoutGrantOrLimitConsumption": "Passed",
+      "IdleIntelligence.PlayTests.MetaTests.AxiomNetworkPreviewSaveAndCancellationDoNotReplayReset": "Passed",
+      "IdleIntelligence.PlayTests.MetaTests.FundedMobileNetworkLabAndActualReceiptsRender": "Passed",
+      "IdleIntelligence.PlayTests.MetaTests.MiraFirstModelAndReducedRevealAreSavedBeforeTabSwitch": "Passed",
+      "IdleIntelligence.PlayTests.MetaTests.ModelSwitchRemovesOnlyEquipmentBindingsAndPreservesItems": "Passed",
+      "IdleIntelligence.PlayTests.MissionUITests.AutomaticExpiryPaymentAlsoRollsBackWhenAtomicSaveFails": "Passed",
+      "IdleIntelligence.PlayTests.MissionUITests.ClaimBonusAndFrozenChoicePersistOnceDespiteOldCallbacksAndReload": "Passed",
+      "IdleIntelligence.PlayTests.MissionUITests.FailedMissionSaveRollsBackClaimAndDisablesFurtherTransactions": "Passed",
+      "IdleIntelligence.PlayTests.PrestigeTests.ConnectedNetworkPanPinchAndIndependentPurchasesUseRealLedger": "Passed",
+      "IdleIntelligence.PlayTests.PrestigeTests.PrestigeIsDurableBeforeItsCosmeticAnimationAndReloadCannotReplay": "Passed",
+      "IdleIntelligence.PlayTests.PrestigeTests.ReducedPrestigeAndMobileNetworkDetailsRender": "Passed",
+      "IdleIntelligence.PlayTests.PurchaseUITests.FailedVerifiedGrantSaveRollsBackAllConsumablesAndPermanentRights": "Passed",
+      "IdleIntelligence.PlayTests.PurchaseUITests.ProductCatalogAndRestoreAreReachableWithoutInventedPricesReceiptsOrRights": "Passed",
+      "IdleIntelligence.PlayTests.RetentionUITests.ActualAchievementClaimsPersistBeforeRefreshAndOldCallbacksCannotPayTwice": "Passed",
+      "IdleIntelligence.PlayTests.RetentionUITests.FailedPermanentRewardSaveRestoresWalletAndKeepsDamagedOriginal": "Passed",
+      "IdleIntelligence.PlayTests.RetentionUITests.OnboardingAndStaticChallengeUsePaidProgressAndOneTimeReceipts": "Passed",
+      "IdleIntelligence.PlayTests.RetentionUITests.ProfilePolicyFirstAIChoiceAndMailboxAreReachableAndReloadable": "Passed",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.HardwareQuotesAndAllMenusAtMobileSizes": "Passed",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.IntegratedVoucherAndCompanyPathsKeepActualSavedReceipts": "Passed",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.ReceiptCancelReducedRepeatUnavailableAndReloadDoNotGrant": "Passed",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.ReceiptScreensAtDEENMobileAndSimulatedPhoneSafeArea": "Passed",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.RecordActualMenuWalkWithScrollAndReturn": "Passed",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.RecordChestCapsuleShopAndLivingLabor": "Passed",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.SharedForgePoolAndBackgroundCancelKeepReceipts": "Passed",
+      "IdleIntelligence.PlayTests.SceneTests.CorruptSaveDisablesActionsAndPreservesFileAcrossSceneReload": "Passed",
+      "IdleIntelligence.PlayTests.SceneTests.PortraitSceneUsesRealTransactionsAndReusablePrefab": "Passed",
+      "IdleIntelligence.PlayTests.SceneTests.ReopeningScenePersistsOfflineTimeWithoutPayingItTwice": "Passed",
+      "IdleIntelligence.PlayTests.SeasonUITests.OriginalFreeRewardsPortraitsAndEarnedChestsAreReachableAndSavedOnce": "Passed",
+      "IdleIntelligence.PlayTests.SeasonUITests.PreparedPremiumEntitlementIsScopedToItsSeasonAndClaimFailureRollsBack": "Passed",
+      "IdleIntelligence.PlayTests.SettingsUITests.SettingsAffectRealStateBuyModeAndAudioAssetsPersist": "Passed",
+      "IdleIntelligence.PlayTests.SignalUITests.SignalSaveFailureKeepsRewardAndVisibleReceiptUnconsumed": "Passed",
+      "IdleIntelligence.PlayTests.SignalUITests.VisibleLabSignalUsesRealClaimAndSavesExactlyOnce": "Passed",
+      "IdleIntelligence.PlayTests.StorageUITests.ActualExportWebPreviewConfirmationRecoveryAndSevenLanguages": "Passed",
+      "IdleIntelligence.PlayTests.StoryUITests.ActualMiraNamePrologueSkipResumeAndSavedEventSurviveReload": "Passed",
+      "IdleIntelligence.PlayTests.StoryUITests.MiraActuallyOpensAndCostDetailsAreReachableWithoutPurchasing": "Passed",
+      "IdleIntelligence.PlayTests.WorkshopTests.ForgeTransactionsFinishBeforeAnimationAndCancelWithoutAwards": "Passed",
+      "IdleIntelligence.PlayTests.WorkshopTests.RecordActualCraftAndFusionAtMobileSizes": "Passed",
+      "IdleIntelligence.PlayTests.WorkshopTests.ReducedMotionPersistsAndShowsStaticActualResult": "Passed"
+    }
+  },
+  "webChecks": {
+    "typecheck": "passed",
+    "testCommand": "TZ=Europe/Berlin npm test -- --testTimeout 30000",
+    "vitestTests": 1896,
+    "vitestFiles": 145,
+    "build": "passed; existing >500 kB chunk warning",
+    "references": "passed; 305 native UI texts x seven languages; actual voucher ledger projection",
+    "earlierFailures": "Two imported C# compile errors corrected; imported voucher projection/fixture timezone corrected; one Vitest 5s timeout replaced by documented 30s full rerun"
+  },
+  "logs": [
+    {
+      "file": "idle-design6-integrated-typecheck.log",
+      "sha256": "ad207a15a19a3003856689fdfd16e4a6db3ce7dd14572f89ef71cd9a94dd565e"
+    },
+    {
+      "file": "idle-design6-integrated-vitest-final.log",
+      "sha256": "337445b29cf2fcd35cf1699084820d8da9ca7920de25aad3bf9ff0484eb02375"
+    },
+    {
+      "file": "idle-design6-integrated-web-build.log",
+      "sha256": "6cccffce597dd91d522c5208448eb09bdc037f1f6b1b0d02b1c605daa54ccd96"
+    },
+    {
+      "file": "idle-design6-integrated-parity.log",
+      "sha256": "d1de21a43aeefab63ca2ebe1e475a52fd9774eb6926b9a7ebcf4db9331ef0bb1"
+    },
+    {
+      "file": "idle-design6-integrated-export.log",
+      "sha256": "ceb368f70e3d1bf57cc1cd3f8686a08ff00ba716ae77a331c0b660c466d0be22"
+    },
+    {
+      "file": "idle-design6-edit-integrated-final.log",
+      "sha256": "a15254e7b6927d4a111fbc39c0125d4b5b6482ee04d96967aac84b37c09685fa"
+    },
+    {
+      "file": "idle-design6-play-integrated.log",
+      "sha256": "c855733cc374dab9b724d74ab045ed6c6d060e157c6aa677299179528754d1b4"
+    },
+    {
+      "file": "idle-design6-profile-integrated.log",
+      "sha256": "d8542352db18d891e5a6ccc84e9716e6441617aa7d014039c0ff27b63a1d2767"
+    }
+  ],
+  "assets": {
+    "missingMetadata": [],
+    "noOwnChangesToTypeScriptOriginalsPackagesSettingsRelativeToIntegratedMain": true
+  },
+  "media": {
+    "manifest": "docs/media/unity-design-06/video-metadata.json",
+    "sha256": "c6aade31248bd69b44dfbac932fae9fa12f9f5a09540ab0cbdf844dec8a14269",
+    "newClips": 17,
+    "unchangedBeforeClips": 1,
+    "screenshots": 226,
+    "nativeFrameTotal": 3707,
+    "preparedStates": true,
+    "audio": "actual Unity AudioListener 48 kHz stereo, AAC mux; no replacement audio"
+  },
+  "limits": [
+    "No physical iPhone/Android, native haptics or OS reduced-motion acceptance",
+    "No production provider/SDK or release approval",
+    "Company English UI contains inherited German copy and clipped long status; central visual backlog",
+    "Other screen layouts and Source INT translations remain separate acceptance"
+  ]
+}

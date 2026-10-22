@@ -62,6 +62,18 @@ Weitere Forschung/Netze/Schmiede-/Shop-/Season-/Profil-/Einstellungsansichten be
 
 Offen bleiben insbesondere die physische Wirkung von Schrift/Touch/Notches, Systemaudio und native Haptik sowie die einzelnen übrigen Bildschirmabnahmen. Die konkrete Verbesserung gegenüber Abschnitt 04 und die funktionalen Testresultate sind bewusst getrennt dokumentiert.
 
+## Gemeinsame Aktionssequenzen · Abschnitt 06
+
+[Umfang und eigene visuelle Beurteilung](unity-design-06.md): gebogene beschleunigte Fusion, gestaffelte Silhouette/echter Slotrahmen/Resultat, eigener Pressen-/Dampfsprite, Truhen- und Kapselmechanik aus Originalgrafiken, gemeinsame gespeicherte Belege und Zieltransfers. Wiederverwendung und begrenzte Partikel, Kürzen/Navigation/Reload/reduzierte Bewegung. Keine Belohnung aus Animationen. Hardware zeigt Gesamtpreis und tatsächliche Menge statt Bestand/Preis. Menü-Rundgang schließt die 15 ursprünglichen Hauptrouten und nach Main-Integration den bedingten Company-Zugang mit Scrollen/Rückkehr ein; INT-Teststand ausdrücklich vorbereitet.
+
+Offen für folgende Abnahmen:
+
+- Physische iPhone-16-Pro-/Android-Beurteilung von Touch, Safe Areas, Framerate, Wärme/Energie, Schrift und Audio-/Haptikunterbrechungen. 402×874 mit simuliertem Ausschnitt ist kein Gerätetest.
+- OS-seitige reduzierte Bewegung/Haptik ohne vorhandene native Plattformbrücke nicht als getestet ausgeben; die gespeicherten manuellen Einstellungen sind geprüft.
+- Die übrigen Inhalte/Listen behalten ihre vorhandenen Layouts; der gemeinsame Menüstil ersetzt keine vollständige Layoutabnahme aller Unterseiten.
+- Gemeinsamer Quellkatalog: mehrere INT-Knotennamen/-Beschreibungen in allen sieben Sprachen deutsch. Als Inhaltsübersetzung gesondert bearbeiten, keine neuen Begriffe/Balanceregeln erfinden.
+- Gesamtqualität anhand der tatsächlichen Clips gemeinsam beurteilen; bestandene Tests und ein vorhandenes Effektgerüst sind keine visuelle Gleichwertigkeit mit Archero.
+
 
 ## Gumball Gutschein & Profil-Badges (22.10.2026)
 
@@ -77,3 +89,5 @@ Offen bleiben insbesondere die physische Wirkung von Schrift/Touch/Notches, Syst
 - [x] Lokale Unity-Abzeichen-Galerie und Schaukasten mit tatsächlich abgeholten Achievements, Web-Profil-Vorschau und markierte Season-Gutscheine.
 - [ ] Kein echter Online-Company-Profil-Screen, kein kauf-/auswählbarer Profile Frame, keine profilübergreifende verifizierte Datensynchronisierung; nicht als fertig markieren.
 - [ ] Effektqualität, Bildgrenzen, Text/Notch-Kontrast und Animationen in tatsächlichen Unity-Screenshots und Geräten visuell beurteilen.
+
+- Übernommene Company-Ansicht (`main aebd1174`): englische Gate-Erklärung, aber mehrere übrige Beschriftungen noch deutsch; langer Statusabsatz ist in der vorhandenen festen Höhe gekürzt. Aktionen/Scrollen/Rückkehr werden geprüft und aufgenommen. Vollständige Quelllokalisierung und eigener Inhalts-/Dichtedurchlauf bleiben offen; keine Online-/Serverfreigabe daraus ableiten.

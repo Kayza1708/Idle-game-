@@ -1,0 +1,7 @@
+08-living-labor 0 192
+09-free-chest 193 290
+10-paid-chest 291 389
+11-shop-material 390 482
+12-gumball 483 655
+13-season-chest 656 807
+14-earned-bonus-box 808 965

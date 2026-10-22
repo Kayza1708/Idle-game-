@@ -123,6 +123,10 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Echter Gem-Bestand, Hamburger mit vorhandenen Menürouten, Nutzerdetail weiterhin erreichbar, Modell-/Slotkomposition nach der konkreten TypeScript-Vorlage und Alpha-basierte Itemzentrierung.
 - [x] DE/EN bei 320/390/430 px, höchstes Fusionslevel, acht Materialarten, Abbruch/Wiederholung/Reload und echte Spielaudio-Aufnahmen nachgewiesen. Funktionale Resultate und visuelle Beurteilung getrennt: [unity-design-05.md](unity-design-05.md).
 
+### Unity · Aktionsinszenierung Abschnitt 06
+
+Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung, Laborakzente, zielgerichtetes Ausrüsten, ruhige Navigation und reine Hardware-Gesamtpreise sind in [unity-design-06.md](unity-design-06.md) abgegrenzt. Visuelle Prüfung und funktionale Regression bleiben getrennt. Keine pauschale Gestaltungs-/Gerätefreigabe und keine Änderung von Balance, Saveformat oder nativen Kauf-/Werbeanbietern.
+
 
 ## Cloudflare Company Multiplayer – 22.10.2026
 
@@ -162,3 +166,7 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [ ] Company-Komplettmenüs inkl. Bewerbungs-/Rollen-/Handel-UI und Benutzerprofil-Privatsphäre-/Rahmenauswahl ausbauen. Aktuell Hub/Transport/lesende Ansichten und sichere API-Basis, keine vollständige soziale Live-Erfahrung.
 - [ ] Unity-Editor-Kompilierung, C#-PlayMode/Device-/Offline-Tests, Performance bei 320/390/430 px und Datenschutzlöschung/Export vor App-Release abschließen.
 - [ ] Kein Chat, keine Direktnachrichten und kein Nachrichtenfeld für Trading/Anträge.
+
+- Aktionsrunde 06 mit `main aebd1174` zusammengeführt: Company-/Profil-/Gutscheinwege erhalten, zwei übernommene Compileanschlüsse korrigiert, Gutschein-Referenzprojektion ergänzt und Referenzen aus den Quellen erneuert. Integrierte 135 EditMode-Fälle sowie 75 PlayMode-Fälle über breiten Lauf und expliziten Profil-Nachlauf geprüft; genaue Scopes und visuelle Grenzen im Abschnitt-06-Bericht. Kein PR-Merge und keine Veröffentlichung.
+
+- PR-Testbedingungen für Runde 06 reproduzierbar ausgewiesen: Linux-Job mit Referenzzeitzone Europe/Berlin und lokal geprüftem 30-s-Vitest-Limit, ohne Produktionsänderung.
