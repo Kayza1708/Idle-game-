@@ -19,7 +19,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Install Cloudflare Wrangler
+        run: npm install --no-audit --no-fund
       - name: Pure Company rules
         run: npm test
       - name: D1 SQLite schema and transaction checks
         run: python3 -m unittest discover -s test -p '*_test.py'
+      - name: Wrangler local D1 integration smoke
+        run: |
+          npm run db:local
+          npm run dev -- --port 8787 > /tmp/companies-wrangler.log 2>&1 &
+          node test/smoke.mjs || (cat /tmp/companies-wrangler.log && exit 1)
