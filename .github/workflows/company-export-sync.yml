@@ -1,0 +1,35 @@
+name: Synchronize Unity reference exports (feature only)
+on:
+  push:
+    branches:
+      - feature/profile-badge-art-polish
+    paths:
+      - '.github/workflows/company-export-sync.yml'
+jobs:
+  synchronize:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout the feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/profile-badge-art-polish
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Regenerate canonical Unity exports
+        run: npm run unity:export
+      - name: Commit only generated tracked references
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -u
+          if ! git diff --cached --quiet; then
+            git diff --cached --stat
+            git commit -m "chore(unity): regenerate reference exports after voucher balance change"
+            git push origin HEAD:feature/profile-badge-art-polish
+          fi
