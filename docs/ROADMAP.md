@@ -115,3 +115,7 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Fünf tatsächliche Aktionen: Tap/Overdrive, Hardwarekauf, Komponentenherstellung, Fusion, Itemflug zum echten Ausrüstungssockel; Transaktionen vor Effekten gespeichert.
 - [x] Durchgehender echter Unity-Mitschnitt und fünf vollständige Einzelclips mit aufgenommenem tatsächlichem Unity-Spielaudio; vorbereitete Zustände gekennzeichnet.
 - [x] DE/EN bei 320/390/430 px, lange Namen, Slots/Materialmangel, Abbruch, schnelle Wiederholung, reduzierte Bewegung und Reload geprüft. Nachweise und Abgrenzung: [unity-design-04.md](unity-design-04.md).
+
+## Unity-Arbeitsregeln für Gestaltung · 22.10.2026
+
+Die [Unity-AGENTS.md](../IdleIntelligence/AGENTS.md) enthält jetzt verbindliche Kriterien für konsistente Pixel-Art-Oberflächen, inszenierte Aktionsanimationen, den Abgleich mit der TypeScript-Oberfläche und echte visuelle Unity-Nachweise. Technische Schutzregeln bleiben erhalten. Diese reine Dokumentationsänderung stellt keine visuelle Abnahme des Spiels dar; konkrete offene Arbeiten bleiben im [visuellen Backlog](unity-visual-backlog.md). Kein Spielcode, keine Assets, Balance oder Saves geändert. Dokumente auf Erhaltung der bestehenden Regeln und konsistente Verweise geprüft; Runtime-/Buildtests für diese Dokumentationsänderung nicht ausgeführt.
