@@ -87,7 +87,7 @@ namespace IdleIntelligence.Editor
             string prefab=Root+"Prefabs/ActionCard.prefab";PrefabUtility.SaveAsPrefabAsset(card,prefab);UnityEngine.Object.DestroyImmediate(card);runtime.CardPrefab=AssetDatabase.LoadAssetAtPath<ActionCard>(prefab);runtime.HardwareSprites=sprites;runtime.WorkshopPrefab=CreateWorkshop.Build(runtime.CardPrefab);runtime.ModelPrefab=CreateMetaLab.Build();runtime.PrestigePrefab=CreatePrestige.Build(sprites,runtime.WorkshopPrefab);
             PlayerSettings.defaultScreenWidth=390;PlayerSettings.defaultScreenHeight=844;PlayerSettings.defaultInterfaceOrientation=UIOrientation.Portrait;PlayerSettings.allowedAutorotateToLandscapeLeft=false;PlayerSettings.allowedAutorotateToLandscapeRight=false;PlayerSettings.allowedAutorotateToPortraitUpsideDown=false;
             const string scenePath="Assets/Scenes/IdleIntelligence.unity";EditorSceneManager.SaveScene(scene,scenePath);EditorBuildSettings.scenes=new[]{new EditorBuildSettingsScene(scenePath,true)};AssetDatabase.SaveAssets();
-            Debug.Log("PLAYABLE_SLICE_SCENE_CREATED: "+scenePath);
+            ApplyMobileDesign.Build();Debug.Log("PLAYABLE_SLICE_SCENE_CREATED: "+scenePath);
         }
     }
 }

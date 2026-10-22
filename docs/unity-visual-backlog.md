@@ -1,8 +1,20 @@
 # Optische Überarbeitung nach funktionaler Migration
 
-Keine zusätzliche Designrunde während des funktionalen Ports. Vorhandene Anordnung, Grafiken und Prefabs weiterverwenden. Bedienungs-/Lesbarkeitsfehler sofort beheben.
+Der erste ausdrücklich beauftragte Designabschnitt ist in `unity-design-01.md` abgegrenzt. Originale Grafiken und uGUI bleiben erhalten; keine Balance-/Saveänderung.
 
-- Einheitliche Typografie/Originalfonts und Textabstände auf kleinen Geräten.
+## Abschnitt 1 · gemeinsame Grundlage
+
+- [x] Kompakte Ressourcenleiste und dauerhafte untere Fünfernavigation.
+- [x] Gemeinsame Labor-/Modell-/Trainings-/Hardwareansicht mit echter Tapfläche, Produktion und Overdrivefeedback.
+- [x] Einheitliche Itembilder/Slotformen/Seltenheitsrahmen und scrollbar vollständige Details; Kosten mit Originalicons, Bestand/Bedarf und Grün/Rot.
+- [x] Originalfonts samt Lizenzen in Unity nutzbar; gemeinsame Farben, Buttons/Abstände und wiederverwendbare Labor-/Ressourcen-/Navigationsprefabs.
+- [ ] Physische Glyphen-/Unicode-/Notch-/Touchabnahme, Screenreader und dynamische Schriftgrößen.
+
+## Weitere Gestaltungsabschnitte
+
+Forschung, INT/Axiome, Analysen/Schmiede, Modelle, Shop, Seasons, Profil und Einstellungen erhalten anschließend eigene Gestaltungsdurchläufe auf dieser Grundlage. Ihre vorhandene Funktionalität bleibt bestehen. Keine pauschale Designfertigmeldung.
+
+- Typografie/Abstände in den übrigen Bildschirmen mit den geprüften Originalfonts vereinheitlichen.
 - Knotenbeschriftungen bei kleinem Zoom besser lesbar machen; Detailfenster bleiben die ausführliche Ansicht.
 - Lange Modell-/Forschungs-/Planerlisten nach vollständigem Funktionsport verdichten.
 - Effektfarben, Übergänge und Audio-/Haptikabstimmung gemeinsam überprüfen.

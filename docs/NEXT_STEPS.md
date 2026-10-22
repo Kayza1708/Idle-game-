@@ -47,3 +47,7 @@ Verbleibende getrennte Arbeit:
 - Bisher ausdrücklich abgelehnte aktive historische Webreservierungen/Testuhren/Alt-Reset-/Fusionverträge separat migrieren, falls benötigt; vollständige Originale behalten. Browser-Dateikonverterdownload manuell prüfen, Automatisierung war gesperrt.
 - Echte Native-/Store-/Werbe-/Share-/Haptikadapter und Belegserver separat beauftragen; Anbieter bleiben unverfügbar. Physische iPhone-/Androidtests und plattformweite Fehler-/Crashmatrix sind offen.
 - Spätere Gestaltung/Animations- und Geräte-/Releaseprüfung aus `unity-visual-backlog.md`; keine neue Designrunde in diesem Auftrag.
+
+### Nächster optischer Abschnitt
+
+Die neue gemeinsame Grundlage ist in `unity-design-01.md` beschrieben. Erst den reviewbaren ersten Abschnitt gemeinsam bewerten; danach Forschung/INT/Axiome und die weiteren Listen/Details mit denselben Styles überarbeiten. Kein weiterer eigenständiger Designmodus und keine neuen Grafikentwürfe. Reale iPhone-/Android-, Glyphen-/Touch-/Notch-/Schriftgrößenprüfung bleibt gesondert offen. Native Anbieter unverfügbar lassen; bestehende Quellprobleme und historischen Savegrenzen unverändert erhalten.
