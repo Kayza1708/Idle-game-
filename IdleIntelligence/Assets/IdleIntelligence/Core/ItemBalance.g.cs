@@ -1,6 +1,6 @@
 // Generated from the current TypeScript economy/domain. Do not edit.
 namespace IdleIntelligence.Core { public static class ItemBalance {
-public const string SourceHash="61cb2ce93b4c0f13e1f8905cd6de04bd5ee2d76c44fbda1d20aba9ee3c62276b";
+public const string SourceHash="ca7a08811f8d1c17dfc73fe348fd088aa1a546d92b92013a7631c2f93b403f7a";
 public const double BaseEffect=0.08d;
 public const double LevelStep=0.18d;
 public const double ForgeStep=0.1200000000000001d;
