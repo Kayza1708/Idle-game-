@@ -23,6 +23,10 @@ D1-backed inventory provenance, replay-safe redemption ledger, Company Token sho
 ## Phase 4 – seasons
 Seasonal Company leagues, normalized contributions, 20v20 research races, milestone chests and 30-day reset for rankings only. Company HQ and permanent research persist. Season rewards are server-owned and idempotent.
 
+## Commercial release: identity, security, GDPR and monetization
+
+Full [Company commercial security specification](company-commercial-security.md): guest-first optional Apple/Google identity linking without email storage, server-owned trade and reward ledgers, rewarded-ad SSV, purchase verification, abuse controls, deletion/export and provider agreements. This is a **proposed design**, not a completed security audit; P0 requirements are not yet done.
+
 ## Non-negotiable quality criteria
 - No client-submitted currency totals or timestamps.
 - No free-unlimited trade or gem/ticket faucet from anonymous guest accounts.
