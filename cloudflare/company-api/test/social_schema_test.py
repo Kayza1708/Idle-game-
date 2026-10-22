@@ -6,6 +6,7 @@ ROOT=pathlib.Path(__file__).resolve().parents[1] / "migrations"
 V1=(ROOT/"0001_companies.sql").read_text()
 V2=(ROOT/"0002_profiles_roles_trades.sql").read_text()
 V3=(ROOT/"0003_company_invitations.sql").read_text()
+V4=(ROOT/"0004_trade_badges.sql").read_text()
 
 class SocialSchemaTests(unittest.TestCase):
     def setUp(self):
@@ -19,6 +20,7 @@ class SocialSchemaTests(unittest.TestCase):
         self.db.execute("INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES('bob','company','member',100,100)")
         self.db.executescript(V2)
         self.db.executescript(V3)
+        self.db.executescript(V4)
 
     def scalar(self,sql,args=()):
         return self.db.execute(sql,args).fetchone()[0]
@@ -87,6 +89,7 @@ class SocialSchemaTests(unittest.TestCase):
         self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='bob' AND asset_id='graphene'"),4)
         self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='alice' AND asset_id='quantumCores'"),2)
         self.assertEqual(self.scalar("SELECT quantity FROM trade_inventory WHERE player_id='bob' AND asset_id='quantumCores'"),1)
+        self.assertEqual(self.scalar("SELECT COUNT(*) FROM player_badges WHERE family='company-trader' AND tier=1"),2)
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE company_trade_offers SET status='accepted',buyer_id='bob' WHERE id='trade1'")
 
