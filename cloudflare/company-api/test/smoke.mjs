@@ -69,7 +69,7 @@ assert.equal(privatePublic.status,200);
 assert.deepEqual(privatePublic.body.stats,{});
 assert.deepEqual(privatePublic.body.badges,[]);
 assert.equal((await http('PUT','/v1/profile/showcase',alice,{badges:[{family:'company-founder',tier:1}]})).status,200);
-assert.equal((await http('PATCH','/v1/profile/privacy',alice,{badges:true,int:true})).status,200);
+assert.equal((await http('PATCH','/v1/profile/privacy',alice,{badges:true,int:true,rank:true})).status,200);
 assert.equal((await http('POST','/v1/profile/frame',alice,{frameId:'founder'})).status,200);
 assert.equal((await http('POST','/v1/profile/frame',bob,{frameId:'gold-lab'})).status,409);
 const published=await http('GET','/v1/players/'+profileId+'/profile',bob);
