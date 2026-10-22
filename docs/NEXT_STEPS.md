@@ -59,3 +59,6 @@ Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Klei
 ### Aktueller visueller Abschnitt nach Zielbild
 
 [Labor und Itemdetails](unity-design-03.md) ersetzt die provisorische Darstellung des ersten Abschnitts mit einzeln erzeugten Pixel-UI-Skins, gemeinsamem Button-Prefab und echten gespeicherten Aktionen. Vorher/Nachher und der tatsächliche Animationsmitschnitt liegen im zugehörigen Medienordner; Assetherkunft und bewusste Abweichungen sind im Bericht ausgewiesen. Diesen Draft zuerst visuell reviewen. Danach übrige Bildschirme mit den gemeinsamen Komponenten bearbeiten; keine pauschale Geräte-/Releasefreigabe. Sourceprobleme/Native-Integrationen bleiben getrennt; keine Balance-/Saveänderung.
+
+- Der abgeschlossene Leisten-/Animationsabschnitt ist in [unity-design-04.md](unity-design-04.md) mit vollständigem Fünf-Aktionen-Video, fünf Einzelclips und echtem Unity-Audiomix dokumentiert. Diese ruhigen gemeinsamen Leisten bilden die Grundlage weiterer Bildschirmarbeit; starke Rahmen bleiben bei Items/Fenstern/Hauptaktionen.
+- Physische Touch-/Notch-/Fontfallback-, Audio-/Haptik- und Burst-/Releaseprüfung weiterhin separat ausführen. Die Editoraufnahme mit echten Transaktionen ersetzt diese Geräteabnahme nicht.

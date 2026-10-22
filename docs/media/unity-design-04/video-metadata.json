@@ -1,0 +1,68 @@
+[
+  {
+    "file": "docs/media/unity-design-04/all-five-actions.mp4",
+    "startFrame": 0,
+    "endFrame": 414,
+    "sourceFrames": 415,
+    "encodedFrames": 415,
+    "measuredSeconds": 37.52829,
+    "containerSeconds": 37.52,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "97960ea739a19591ce8328ff064a6f15d0583eccee3d0c9b0cabd01b6c83852c"
+  },
+  {
+    "file": "docs/media/unity-design-04/01-tap-overdrive.mp4",
+    "startFrame": 0,
+    "endFrame": 84,
+    "sourceFrames": 85,
+    "encodedFrames": 85,
+    "measuredSeconds": 8.724007,
+    "containerSeconds": 8.64,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "8ee180bb1cce45e69c3ae0f7251cb361e2634c91154f6335e364033aaa431e18"
+  },
+  {
+    "file": "docs/media/unity-design-04/02-hardware.mp4",
+    "startFrame": 85,
+    "endFrame": 149,
+    "sourceFrames": 65,
+    "encodedFrames": 65,
+    "measuredSeconds": 7.037801,
+    "containerSeconds": 6.96,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "8cd72f6e8565dea349d044a86535757e670848402d96280e5da39ff98ff30fb8"
+  },
+  {
+    "file": "docs/media/unity-design-04/03-craft.mp4",
+    "startFrame": 150,
+    "endFrame": 239,
+    "sourceFrames": 90,
+    "encodedFrames": 90,
+    "measuredSeconds": 7.735891,
+    "containerSeconds": 7.68,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "6a0160d805b019ca0e240ca9977c7ff9653aa548cd8f260f328c5960fd844652"
+  },
+  {
+    "file": "docs/media/unity-design-04/04-fusion.mp4",
+    "startFrame": 240,
+    "endFrame": 329,
+    "sourceFrames": 90,
+    "encodedFrames": 90,
+    "measuredSeconds": 7.179271,
+    "containerSeconds": 7.16,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "d24f53a979c20e974998d877bedba19ae2849ecfbd9c373e3654e11494d7bf49"
+  },
+  {
+    "file": "docs/media/unity-design-04/05-equip.mp4",
+    "startFrame": 330,
+    "endFrame": 414,
+    "sourceFrames": 85,
+    "encodedFrames": 85,
+    "measuredSeconds": 6.218004,
+    "containerSeconds": 6.2,
+    "audio": "Actual Unity AudioListener mix, AAC; no substitute clips",
+    "sha256": "cc004482f020cbd8d4fcdc40560b76583343d1e47aaa2b71f63e8c1e3cb9699e"
+  }
+]

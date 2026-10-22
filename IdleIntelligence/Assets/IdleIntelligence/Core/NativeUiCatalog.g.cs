@@ -285,5 +285,7 @@ new LocalizedCopy("native:281",new[]{"from level","ab Level","desde el nivel","�
 new LocalizedCopy("native:282",new[]{"Develop models in the Secret Lab under Research.","Modellentwicklung im Geheimen Labor unter Forschung.","Desarrolla modelos en el Laboratorio secreto de Investigación.","Développez les modèles au Laboratoire secret dans Recherche.","Desenvolva modelos no Laboratório secreto em Pesquisa.","Sviluppa modelli nel Laboratorio segreto in Ricerca.","Rozwijaj modele w Tajnym laboratorium w Badaniach."}),
 new LocalizedCopy("native:283",new[]{"Quantum yield","Quantenfunde","Hallazgos cuánticos","Découvertes quantiques","Descobertas quânticas","Scoperte quantistiche","Znaleziska kwantowe"}),
 new LocalizedCopy("native:284",new[]{"Equip","Ausrüsten","Equipar","Équiper","Equipar","Equipaggia","Wyposaż"}),
-new LocalizedCopy("native:285",new[]{"Train","Trainieren","Entrenar","Entraîner","Treinar","Addestra","Trenuj"})
+new LocalizedCopy("native:285",new[]{"Train","Trainieren","Entrenar","Entraîner","Treinar","Addestra","Trenuj"}),
+new LocalizedCopy("native:286",new[]{"In inventory","Im Inventar","En el inventario","Dans l’inventaire","No inventário","Nell’inventario","W ekwipunku"}),
+new LocalizedCopy("native:287",new[]{"Combining material …","Material wird verbunden …","Combinando materiales …","Assemblage des matériaux …","Combinando materiais …","Combinazione materiali …","Łączenie materiałów …"})
 };}}

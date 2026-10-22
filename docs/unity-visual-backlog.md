@@ -51,3 +51,7 @@ Offen für spätere Geräte-/Designabnahmen:
 Aktueller Stand: [unity-design-03.md](unity-design-03.md). Stahlhaut, Gold-/Mintaktionen und gemeinsame Pixelkanten sind echte einzelne Assets; Namen/Zahlen/Kosten/Aktionen bleiben dynamisch. Labor, Hardware und Itemdetails verwenden die neue Grundlage. Original-Seltenheitsfarben und alle Slotformen bleiben erhalten; Animationen sind begrenzt und transaktionsfrei.
 
 Weitere Forschung/Netze/Schmiede-/Shop-/Season-/Profil-/Einstellungsansichten benötigen weiterhin ihre eigenen Layout-/Dichteprüfungen. Gemeinsam verwendete Styles allein sind keine vollständige Gestaltungsabnahme dieser Bildschirme. Physische Touch-/Notch-/Fontfallbackprüfung, Systemschriftgrößen und native Audio-/Haptikabnahme bleiben offen. Das aktuelle Originalschriftpaar wird beibehalten; eine andere Zielbildschrift ist nicht ohne Lizenz übernommen. Keine dauerhaften Itemstrahlen/Glows; begrenzte Revealpartikel statt dessen.
+
+## Ruhige Leisten und vollständiger Aktionsnachweis
+
+[Abschnitt 04](unity-design-04.md): Ressourcen und untere Navigation liegen jetzt auf gemeinsamen ruhigen Flächen mit feinen Trennern/aktivem Cyanindikator. Keine dekorativen Einzelkästen; Originalicons bleiben in einheitlichen Flächen. Tap/Overdrive, Kauf, Herstellung, Fusion und Ausrüsten sind mit vollständigen Bewegungsphasen und tatsächlichem Audiomix dokumentiert. Unbenutzte Materialsockel bleiben auch nach der Herstellung verborgen. Keine zusätzliche Designrunde für übrige Inhalte; physische Abnahme und weitere Bildschirmabschnitte bleiben offen.
