@@ -92,7 +92,7 @@ These are read-only **potential modifiers**. Unity does not consume them yet. Ap
 - Store bearer credentials securely with platform Keychain/Keystore integration, **not** PlayerPrefs; CompanyApiClient intentionally stores credentials in memory only.
 - Abuse protection: rate limiting on guest creation, Company name moderation, reports, bans, privacy/deletion/export workflows, terms of service, retention and backups.
 - Validate ownership/provenance of all Gems, IAP, inventory items, blueprints and coupon redemptions on the server. Use idempotency keys and append-only ledgers for trade and reward transactions.
-- Membership admin actions, invites/applications, project contributions, assignments, HQ, reward shop, requests, trading escrow, chat moderation/abuse reporting, Seasons and PvP.
+- Applications, projects, assignments, HQ, server-reward shop, requests, trading eligibility, abuse reporting, Seasons and PvP. Chat and DMs are deliberately excluded.
 - D1 migration/rollback rehearsal, latency and quotas monitoring, load tests, GDPR/DSGVO review and required third-party agreements.
 
-This V1 intentionally avoids deploying a fake chat, pretending that client-side inventory is secure, or exposing paid currency to an unaudited trading system.
+This foundation intentionally avoids messaging, trusting client-side inventory or exposing paid currency to unaudited trading.
