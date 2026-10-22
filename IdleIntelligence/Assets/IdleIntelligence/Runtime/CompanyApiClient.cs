@@ -48,6 +48,27 @@ namespace IdleIntelligence.Runtime
         {
             return Send("POST", "/v1/company/leadership/transfer", JsonUtility.ToJson(new PlayerSelection { playerId = playerId }), completed);
         }
+        public IEnumerator MyCompanyInvitations(Action<long, string> completed)
+        {
+            return Send("GET", "/v1/me/invitations", null, completed);
+        }
+        public IEnumerator InvitePlayer(string playerId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/company/invitations",
+                JsonUtility.ToJson(new PlayerSelection { playerId = playerId }), completed);
+        }
+        public IEnumerator AcceptInvitation(string invitationId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/me/invitations/" + Uri.EscapeDataString(invitationId ?? "") + "/accept", "{}", completed);
+        }
+        public IEnumerator DeclineInvitation(string invitationId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/me/invitations/" + Uri.EscapeDataString(invitationId ?? "") + "/decline", "{}", completed);
+        }
+        public IEnumerator RevokeInvitation(string invitationId, Action<long, string> completed)
+        {
+            return Send("POST", "/v1/company/invitations/" + Uri.EscapeDataString(invitationId ?? "") + "/revoke", "{}", completed);
+        }
         public IEnumerator CompanyTradeOffers(Action<long, string> completed)
         {
             return Send("GET", "/v1/trades/offers", null, completed);

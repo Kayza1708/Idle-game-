@@ -5,6 +5,7 @@ import unittest
 ROOT=pathlib.Path(__file__).resolve().parents[1] / "migrations"
 V1=(ROOT/"0001_companies.sql").read_text()
 V2=(ROOT/"0002_profiles_roles_trades.sql").read_text()
+V3=(ROOT/"0003_company_invitations.sql").read_text()
 
 class SocialSchemaTests(unittest.TestCase):
     def setUp(self):
@@ -17,6 +18,7 @@ class SocialSchemaTests(unittest.TestCase):
         self.db.execute("INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES('alice','company','ceo',100,100)")
         self.db.execute("INSERT INTO company_members(player_id,company_id,role,joined_at,last_claim_at) VALUES('bob','company','member',100,100)")
         self.db.executescript(V2)
+        self.db.executescript(V3)
 
     def scalar(self,sql,args=()):
         return self.db.execute(sql,args).fetchone()[0]
@@ -51,6 +53,20 @@ class SocialSchemaTests(unittest.TestCase):
             self.db.execute("INSERT INTO profile_badge_showcase(player_id,slot,family,tier) VALUES('bob',1,'prestige',3)")
         self.db.execute("INSERT INTO profile_badge_showcase(player_id,slot,family,tier) VALUES('bob',1,'company-contributor',2)")
         self.assertEqual(self.scalar("SELECT count(*) FROM profile_badge_showcase"),1)
+
+    def test_invitation_acceptance_has_no_message_body(self):
+        self.db.execute("INSERT INTO players VALUES('charlie','Charlie',100)")
+        self.db.execute("""
+          INSERT INTO company_invitations(id,company_id,invited_player_id,invited_by_player_id,created_at,expires_at)
+          VALUES('inv1','company','charlie','alice',100,700)
+        """)
+        self.assertEqual(self.scalar("SELECT count(*) FROM company_invitations WHERE status='pending'"),1)
+        self.db.execute("UPDATE company_invitations SET status='accepted',decided_at=200 WHERE id='inv1'")
+        self.assertEqual(self.scalar("SELECT role FROM company_members WHERE player_id='charlie'"),'member')
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.db.execute("UPDATE company_invitations SET status='accepted',decided_at=201 WHERE id='inv1'")
+        cols=[row[1] for row in self.db.execute("PRAGMA table_info(company_invitations)")]
+        self.assertNotIn("message",cols)
 
     def test_escrow_accept_and_replay_protection(self):
         self.db.execute("INSERT INTO trade_inventory VALUES('alice','component','graphene',6)")

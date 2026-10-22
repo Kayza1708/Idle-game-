@@ -66,6 +66,17 @@ assert.equal((await http('POST','/v1/company/members/'+profileId+'/kick',bob,{})
 assert.equal((await http('POST','/v1/company/leave',alice,{})).status,409);
 assert.equal((await http('POST','/v1/company/leadership/transfer',alice,{playerId:bobId})).status,200);
 assert.equal((await http('POST','/v1/company/leave',bob,{})).status,409);
+const third=await http('POST','/v1/session/guest');
+assert.equal(third.status,201);
+const charlie=third.body.accessToken;
+const invitation=await http('POST','/v1/company/invitations',bob,{playerId:third.body.player.id});
+assert.equal(invitation.status,201,JSON.stringify(invitation.body));
+const charlieInvites=await http('GET','/v1/me/invitations',charlie);
+assert.equal(charlieInvites.status,200);
+assert.equal(charlieInvites.body.invitations.length,1);
+assert.equal((await http('POST','/v1/me/invitations/'+invitation.body.invitationId+'/accept',charlie,{})).status,200);
+assert.equal((await http('POST','/v1/me/invitations/'+invitation.body.invitationId+'/accept',charlie,{})).status,409);
+assert.equal((await http('POST','/v1/company/leave',charlie,{})).status,200);
 assert.equal((await http('POST','/v1/company/leave',alice,{})).status,200);
 assert.equal((await http('POST','/v1/company/leave',alice,{})).status,409);
 assert.equal((await http('GET','/v1/players/'+profileId+'/profile',bob)).status,200);
