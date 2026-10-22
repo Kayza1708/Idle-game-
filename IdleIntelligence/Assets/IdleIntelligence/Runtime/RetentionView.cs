@@ -42,6 +42,7 @@ namespace IdleIntelligence.Runtime
    Paragraph("ProfileSummary","Spieler: "+s.Retention.playerName+"\nKI: "+(string.IsNullOrEmpty(s.Retention.aiName)?"Noch unbenannt":s.Retention.aiName)+"\nArtefakte: "+s.Retention.artifacts.Length+" · abgeschlossene Seasons: "+s.Retention.completedSeasons.Length);
    WorkshopUIFactory.Button("ShowNameLicenses",content,"Namensfilter · Quellen und Lizenzen",()=>Show("licenses"));
    LocalBadgeShowcase(s);
+   FramePreviews();
    NameInput(false);if(string.IsNullOrEmpty(s.Retention.aiName))NameInput(true);
    Paragraph("MailboxTitle","POSTFACH",17);if(s.Retention.inbox.Length==0)Paragraph("EmptyMailbox","Keine Nachrichten vorhanden.");
    foreach(var message in s.Retention.inbox)
@@ -109,6 +110,28 @@ namespace IdleIntelligence.Runtime
     }
     WorkshopUIFactory.Button("ProfileOpenAllBadges",content,"Alle Abzeichen ansehen",()=>Show("badges"));
     Paragraph("ProfileBadgePrivacy","Diese Ansicht verwendet deinen lokalen Spielstand. Öffentliche Company-Badges und frei wählbare Online-Schaukastenplätze benötigen eine überprüfte Konto-Verknüpfung.");
+  }
+  void FramePreviews()
+  {
+    var title=Paragraph("ProfileRareFrames","SELTENE PROFILRAHMEN · Vorschau",16);
+    title.GetComponent<LayoutElement>().preferredHeight=42;
+    var row=WorkshopUIFactory.Horizontal("ProfileFramePreviewGallery",content,124);
+    string[] ids={"neon","quantum","singularity"};
+    string[] labels={"Neon · 60 Gems","Quantum · 150 Gems","Singularity · Event"};
+    for(int i=0;i<ids.Length;i++)
+    {
+      var root=WorkshopUIFactory.Vertical("Preview-"+ids[i],row.transform);
+      var node=WorkshopUIFactory.Node("FramePreviewIcon",root.transform,typeof(Image));
+      WorkshopUIFactory.Size(node,83);
+      var image=node.GetComponent<Image>();
+      image.sprite=ProfileFrameSprite.Get(ids[i]);
+      image.preserveAspect=true;image.raycastTarget=false;
+      node.AddComponent<AnimatedProfileFrame>().Initialize(image,ids[i],()=>game!=null&&game.State.Settings.effects);
+      var caption=WorkshopUIFactory.Label("FramePreviewCaption",root.transform,labels[i],11,32);
+      caption.alignment=TextAnchor.MiddleCenter;caption.resizeTextForBestFit=true;
+      caption.resizeTextMinSize=9;caption.resizeTextMaxSize=11;
+    }
+    Paragraph("FrameOwnershipNotice","Nur Vorschau. Kauf/Ausrüsten wird nach serverseitiger Gem-Prüfung freigeschaltet.");
   }
   void BadgeLibrary(GameState s)
   {
