@@ -26,8 +26,8 @@ export async function socialRoute(ctx) {
    ]);
    const statsByKey=Object.fromEntries(stats.results.map(s=>[s.stat_key,s.stat_value]));
    const visibleStats={};
-   const flags=[['playtime','show_playtime'],['maxCompute','show_max_compute'],['prestiges','show_prestiges'],['int','show_int'],['rank','show_rank']];
-   for(const [key,field] of flags)if(base[field]===1&&statsByKey[key]!=null)visibleStats[key]=statsByKey[key];
+   const flags=[['playtime','show_playtime','playtime'],['maxCompute','show_max_compute','max_compute'],['prestiges','show_prestiges','prestiges'],['int','show_int','int'],['rank','show_rank','rank']];
+   for(const [key,field,dbKey] of flags)if(base[field]===1&&statsByKey[dbKey]!=null)visibleStats[key]=statsByKey[dbKey];
    return reply({player:{id:base.id,displayName:base.display_name,frameId:base.frame_id,company:base.company_id?{id:base.company_id,name:base.company_name,tag:base.company_tag}:null},badges:badges.results.map(b=>({...b,metal:TIERS[b.tier]})),stats:visibleStats});
  }
  if(method==='GET'&&path==='/v1/profile'){
@@ -53,7 +53,7 @@ export async function socialRoute(ctx) {
    ).bind(flag('badges'),flag('playtime'),flag('maxCompute'),flag('prestiges'),flag('int'),flag('rank'),player.id).run();
    // Minimize persisted data: revoke shared statistics when visibility is switched off.
    for(const key of PRIVACY_KEYS.filter(k=>k!=='badges'&&privacy[k]===false))
-     await db.prepare('DELETE FROM public_player_stats WHERE player_id=? AND stat_key=?').bind(player.id,key).run();
+     await db.prepare('DELETE FROM public_player_stats WHERE player_id=? AND stat_key=?').bind(player.id,key==='maxCompute'?'max_compute':key).run();
    return reply({saved:true});
  }
  if(method==='PUT'&&path==='/v1/profile/showcase'){
