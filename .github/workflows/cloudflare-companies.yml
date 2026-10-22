@@ -1,0 +1,25 @@
+name: Cloudflare Companies API
+on:
+  pull_request:
+    paths:
+      - 'cloudflare/company-api/**'
+      - '.github/workflows/cloudflare-companies.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'cloudflare/company-api/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cloudflare/company-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Pure Company rules
+        run: npm test
+      - name: D1 SQLite schema and transaction checks
+        run: python3 -m unittest discover -s test -p '*_test.py'
