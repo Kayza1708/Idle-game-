@@ -2,11 +2,11 @@
 -- No email, client-provided rank, IP, contact or chat data.
 ALTER TABLE players ADD COLUMN name_key TEXT;
 ALTER TABLE players ADD COLUMN last_name_change_at INTEGER NOT NULL DEFAULT 0;
-UPDATE players SET name_key=lower(replace(display_name,' ',''));
+UPDATE players SET name_key=lower(replace(replace(replace(display_name,' ',''),'-',''),'_',''));
 CREATE UNIQUE INDEX idx_players_unique_name ON players(name_key) WHERE name_key IS NOT NULL;
 
 ALTER TABLE companies ADD COLUMN name_key TEXT;
-UPDATE companies SET name_key=lower(replace(name,' ',''));
+UPDATE companies SET name_key=lower(replace(replace(replace(name,' ',''),'-',''),'_',''));
 CREATE UNIQUE INDEX idx_company_unique_name_key ON companies(name_key) WHERE name_key IS NOT NULL;
 ALTER TABLE companies ADD COLUMN join_policy TEXT NOT NULL DEFAULT 'open'
   CHECK(join_policy IN ('open','invite','apply'));
@@ -56,8 +56,8 @@ WHEN NEW.contributed_rp>OLD.contributed_rp BEGIN
 END;
 
 CREATE TRIGGER player_guest_key AFTER INSERT ON players WHEN NEW.name_key IS NULL BEGIN
- UPDATE players SET name_key=lower(replace(NEW.display_name,' ','')) WHERE id=NEW.id;
+ UPDATE players SET name_key=lower(replace(replace(replace(NEW.display_name,' ',''),'-',''),'_','')) WHERE id=NEW.id;
 END;
 CREATE TRIGGER company_default_key AFTER INSERT ON companies WHEN NEW.name_key IS NULL BEGIN
- UPDATE companies SET name_key=lower(replace(NEW.name,' ','')) WHERE id=NEW.id;
+ UPDATE companies SET name_key=lower(replace(replace(replace(NEW.name,' ',''),'-',''),'_','')) WHERE id=NEW.id;
 END;
