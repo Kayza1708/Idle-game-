@@ -92,6 +92,11 @@ class SocialSchemaTests(unittest.TestCase):
         self.assertEqual(self.scalar("SELECT COUNT(*) FROM player_badges WHERE family='company-trader' AND tier=1"),2)
         with self.assertRaises(sqlite3.IntegrityError):
             self.db.execute("UPDATE company_trade_offers SET status='accepted',buyer_id='bob' WHERE id='trade1'")
+        self.assertEqual(self.scalar("SELECT completed_trades FROM player_trade_counters WHERE player_id='alice'"),1)
+        self.assertEqual(self.scalar("SELECT completed_trades FROM player_trade_counters WHERE player_id='bob'"),1)
+        self.db.execute("DELETE FROM company_trade_offers WHERE id='trade1'")
+        self.assertEqual(self.scalar("SELECT completed_trades FROM player_trade_counters WHERE player_id='alice'"),1)
+        self.assertEqual(self.scalar("SELECT count(*) FROM player_badges WHERE player_id='alice' AND family='company-trader'"),1)
 
     def test_trade_expiration_unlocks_escrow_once(self):
         self.db.execute("INSERT INTO trade_inventory VALUES('alice','component','graphene',4)")
