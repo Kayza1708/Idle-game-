@@ -1,0 +1,40 @@
+name: Sync generated Unity voucher references (feature only)
+on:
+  push:
+    branches:
+      - feature/gumball-ticket-rewards
+    paths:
+      - 'src/economy.ts'
+      - 'src/season.ts'
+      - 'src/shop.ts'
+      - 'src/bonusBoxes.ts'
+      - 'src/capsuleMachine.ts'
+      - 'scripts/export-unity-gumball-vouchers.ts'
+      - '.github/workflows/gumball-unity-export.yml'
+permissions:
+  contents: write
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/gumball-ticket-rewards
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install project dependencies
+        run: npm ci
+      - name: Re-export reproducible Unity source and reference cases
+        run: npm run unity:export
+      - name: Commit only existing tracked generated references to feature branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -u IdleIntelligence/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(unity): regenerate reference exports for voucher economy [skip ci]"
+            git push origin HEAD:feature/gumball-ticket-rewards
+          fi
