@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="singularity player frame">
+ <defs><linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7ff7de"/><stop offset=".48" stop-color="#ffcf77"/><stop offset="1" stop-color="#683da3"/></linearGradient></defs>
+ <path d="M50 7H206L249 50V206L206 249H50L7 206V50Z" fill="none" stroke="#683da3" stroke-width="13" stroke-linejoin="bevel"/>
+ <path d="M51 13H205L243 51V205L205 243H51L13 205V51Z" fill="none" stroke="url(#rim)" stroke-width="8" stroke-linejoin="bevel"/>
+ <path d="M55 24H201L232 55V201L201 232H55L24 201V55Z" fill="none" stroke="#ffcf77" stroke-width="3" stroke-opacity=".65" stroke-linejoin="bevel"/>
+ <path d="M38 69V55L55 38H72M218 69V55L201 38H184M38 187V201L55 218H72M218 187V201L201 218H184" fill="none" stroke="#7ff7de" stroke-width="6"/>
+ <path d="M109 13H147M109 243H147M13 109V147M243 109V147" fill="none" stroke="#683da3" stroke-width="3"/>
+ <path d="M128 5 141 17 128 29 115 17Z M128 227 141 239 128 251 115 239Z" fill="#ffcf77" stroke="#7ff7de" stroke-width="2"/>
+ <path d="M5 128 17 115 29 128 17 141Z M227 128 239 115 251 128 239 141Z" fill="#ffcf77" stroke="#7ff7de" stroke-width="2"/>
+ </svg>

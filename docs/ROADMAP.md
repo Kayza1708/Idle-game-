@@ -144,3 +144,11 @@ Prüfstand Design 1: vollständiges PlayMode 58/58, EditMode 128/128 plus abschl
 - [x] Save-v22-Wrapper mit alten v21/älteren Saves, konservativem Nullbestand und testbaren Grenzen vorbereitet; neue TypeScript- und Unity-Tests hinzugefügt.
 - [ ] Unity-Editor-Kompilation, endgültige Paritätsabnahme nach Regeneration, DE/EN plus fünf weitere Sprachen, Screenshots/Video und Geräte-/Offline-/Schnelltap-Prüfung nachweisen. Draft nicht mergen.
 - [ ] Persönliche Profil-/Company-Badge-Sprites und Rahmen native vollständig integrieren; drei erste Badge-Grundmotive sind Konzeptassets, keine fertige Profil-UI.
+
+
+## Profilgrafiken / Gumball-Art (22.10.2026, getrennter Feature-Branch)
+
+- [x] Bestands-Gumball-Gutscheine, Kistenquoten und Free-/Premium-Season-Claims geprüft; keine zweite Wallet oder doppelten Ticket-Bonus hinzugefügt.
+- [x] 7 Abzeichenfamilien × Bronze/Silber/Gold, 8 Profilrahmen und Company-Wappen als eigene SVG-Grafiken ergänzt; native Unity-Pixelart-Generatoren erstellt, lokale Achievement-Vorschau angebunden.
+- [x] Web-Season-Pass zeigt bestehende Gutscheine zusätzlich am Reward und in Track-Zusammenfassungen; kein Balanceeingriff.
+- [ ] Unity-Kompilierung, native Profil- und Kisten-Screenshots, 7 Sprachen, Geräteabnahme und verifizierter Online-Schaukasten noch offen. [Status](profile-gumball-art-audit.md).

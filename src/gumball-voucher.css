@@ -8,3 +8,8 @@
 .season-voucher-reward{font-size:11px;color:#f2d7ff}
 .gumball-voucher-found{margin:8px auto;padding:6px;border:1px solid #b277fc;color:#f7dcff;border-radius:6px}
 .gumball-voucher-odds{margin:8px 0;font-size:14px}
+
+/* A rare Gumball voucher is visibly additive to the normal Season reward, not a replacement. */
+.season-voucher-combo{position:relative;display:inline-flex;align-items:center;justify-content:center;isolation:isolate}
+.season-voucher-combo-ticket{position:absolute;right:-8px;bottom:-6px;border-radius:6px;background:#1d1c3a;border:1px solid #efc574;padding:1px;box-shadow:0 1px 5px #0007}
+.season-voucher-combo-ticket img{display:block}

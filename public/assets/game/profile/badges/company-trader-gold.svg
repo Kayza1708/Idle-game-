@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Exchange Expert gold">
+ <defs><linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffbdc"/><stop offset=".36" stop-color="#fff0aa"/><stop offset=".72" stop-color="#e0a33b"/><stop offset="1" stop-color="#84501e"/></linearGradient></defs>
+ <!-- Uniform 3-tier medallion silhouette, distinct achievement-family emblem. -->
+ <path d="M41 83 34 119 64 105 94 119 87 83" fill="#e0a33b" stroke="#84501e" stroke-width="5" stroke-linejoin="round"/>
+ <path d="M34 116 64 101 94 116" stroke="#fffbdc" stroke-opacity=".65" stroke-width="2" fill="none"/>
+ <path d="M64 7 86 14 106 33 113 56 108 83 88 104 64 111 40 104 20 83 15 56 22 33 42 14Z" fill="url(#metal)" stroke="#84501e" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M64 18 82 24 97 39 102 58 97 77 81 93 64 100 47 93 31 77 26 58 31 39 46 24Z" fill="#4c3546" stroke="#fff0aa" stroke-width="3"/>
+ <path d="M37 35 47 26 M80 26 91 36" stroke="#fffbdc" stroke-opacity=".8" stroke-width="3"/>
+ <g color="#fdbb76" transform="translate(10 10) scale(.84)"><path d="M39 54h45l-9-10M84 54l-9 10M88 73H43l9-10M43 73l9 10" stroke="currentColor" stroke-width="7" fill="none" stroke-linejoin="round" stroke-linecap="square"/><circle cx="44" cy="42" r="6" fill="currentColor"/><circle cx="84" cy="85" r="6" fill="currentColor"/></g>
+ <path d="M30 85Q64 113 98 85" fill="none" stroke="#fffbdc" stroke-opacity=".48" stroke-width="2"/>
+ </svg>
