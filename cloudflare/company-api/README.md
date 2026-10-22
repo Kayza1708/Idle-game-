@@ -35,6 +35,27 @@ This is a **non-deployed, non-production-ready** foundation for the Unity Compan
 
 D1 migrations are versioned in migrations/. Running db:remote affects the remote database, and deployment is not performed by this branch.
 
+## Existing Cloudflare D1 database for this project (created 22 Oct 2026)
+
+The EU-jurisdiction D1 database has already been created. Its public `database_id` is configured in `wrangler.jsonc`. **Do not run `wrangler d1 create` again**. The guest endpoint and Company-creation endpoint now have approximate Cloudflare rate-limit bindings; these do not replace anti-bot, server-side business quotas and account recovery requirements.
+
+If `git switch` is blocked by local Unity documentation edits, **do not discard them**. Use a separate working tree:
+
+```bash
+cd ~/Idle-game-
+git fetch origin
+git worktree add --detach ../Idle-game-cloudflare origin/feature/cloudflare-companies-foundation
+cd ../Idle-game-cloudflare/cloudflare/company-api
+npm install
+npm test
+npm run db:local
+npm run dev
+```
+
+This does not touch existing modifications in the primary checkout. In another terminal check `curl http://127.0.0.1:8787/v1/health`. Only the local database is migrated; the remote D1 service is **not live** until a separately approved deployment.
+
+Security and monetization architecture: [Company commercial security specification](../../docs/company-commercial-security.md).
+
 ## API routes
 - POST /v1/session/guest (no Authorization header) – returns player and accessToken
 - POST /v1/session/rotate – returns a replacement accessToken; store the new one before discarding the old one
