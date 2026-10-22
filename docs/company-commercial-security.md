@@ -7,7 +7,7 @@ Scope: commercial iOS/Android Unity mobile game, Cloudflare Workers + D1 in EU j
 - Zero mandatory signup gates on first launch. Single-player may start **offline and anonymously**.
 - When the player first opens Companies, provision a pseudonymous guest identity with a server-generated random player UUID and random secret (securely stored in Keychain/Keystore). No email, phone number, real name, or contact permissions required.
 - Offer optional "Secure your progress" after the first meaningful Company action, using Sign in with Apple on iOS and Google identity on Android; optional cross-platform account recovery through a one-time recovery code/passkey. Identity providers' ID tokens must be validated server-side and not logged or stored. Store only a pairwise pseudonymous opaque identity (prefer keyed hash/HMAC of provider and stable subject); do not request/store email/profile fields.
-- Do not claim the service is anonymous under GDPR: player IDs, nicknames, message contents, device and connection data remain potentially personal data.
+- Do not claim the service is anonymous under GDPR: player IDs, nicknames, Company names, trades, device and connection data remain potentially personal data.
 - Guests may participate in social activities subject to abuse limits; **high-value, transferable item trades** can require account linking, minimum tenure and provable server inventory. No real-money purchase or forced login gate is needed for normal play.
 - Company membership bonuses apply to personal gameplay during membership; **Company RP and league scores do not depend on personal Credits, INT, hardware or Prestige**. Monetization must not purchase Company War ranking points or unbounded RP.
 - Prefer adding Company rewards to the existing 30-day Season Pass instead of launching a competing mandatory second paid pass.
@@ -22,7 +22,7 @@ All pricing and reward values are **test hypotheses**, not launched products.
 | Research Report | Passive Company Node production | Voluntary video for capped *personal* bonus tokens/loot, not unlimited Company RP | Does not accelerate Company leagues |
 | Gumball voucher | Earn shards/tickets through Company projects | Optional rewarded ad for limited non-transferable ticket shard; optional store offer | Server-issued, daily cap and one-time redemption |
 | Company shop | CT earned by active contribution | Optional cosmetics and carefully capped convenience through StoreKit/Google Play Billing | No purchasing Rank/War contribution |
-| Company cosmetics | Earned emblems/frames | Paid emblem pack / HQ skin / themed messaging cosmetics | No gameplay advantage |
+| Company cosmetics | Earned emblems/frames | Paid emblem pack / HQ skin / themed profile cosmetics | No gameplay advantage |
 | Company Season track | Free milestone rewards | Extra cosmetics and noncompetitive personal rewards bundled into the **existing** premium season | No exclusion from co-op |
 
 No forced interstitials in the Company marketplace or while trading. Avoid advertising in interactions requiring careful user consent. Reward options must be clear before the video starts; allow declining without penalty. Any paid gumball, loot box or randomized chest must display item odds **before** purchase. Paid digital vouchers and cosmetics must follow Apple/Google in-app billing rules. Publish platform-appropriate details of subscriptions and cancellation/refunds if ever added.
@@ -75,7 +75,7 @@ No statement that the game "cannot be hacked" is technically defensible. Objecti
 `sessions(token_hash, player_id, expiry, revoked_at)`,
 `company_members`, `company_research`, `company_projects`, `research_contributions`,
 `wallet_ledger`, `inventory_ledger`, `reward_receipts`,
-`trade_escrow`, `consent_preferences`, `no_messages`, `reports`,
+`trade_escrow`, `consent_preferences`, `reports`,
 `account_deletion_requests`.
 
 - **Do not store** email address, phone, real name, address, contact list, DOB, raw Apple/Google ID tokens or passwords.
@@ -89,7 +89,7 @@ No statement that the game "cannot be hacked" is technically defensible. Objecti
 - Accurate App Store privacy nutrition labels and Google Play Data safety forms must reflect SDK and Cloudflare data processing as deployed, not just what D1 persists.
 - There will be no chat, no DMs, no messaging SDK and no free-text trade comments. User communication uses fixed-format offers and ID-only invitations.
 - If AdMob is used in EEA/UK/CH, use a **Google-certified TCF CMP** such as supported Google UMP where applicable; consent choices must be reversible and recorded.
-- Apple review requires report/block/filter/contact mechanics for user-generated Company chat; accounts including guest identities must be deletable.
+- User-generated Company and player names require reporting and abuse handling. Accounts, including guest identities, must be deletable.
 - D1 EU jurisdiction applies to D1 storage/processing, not necessarily every request, Worker, SDK or external vendor location.
 
 ## 5. Rollout gates (do not skip)
@@ -97,7 +97,7 @@ No statement that the game "cannot be hacked" is technically defensible. Objecti
 ### P0 – before public beta with Companies
 - Rate-limited guest enrollment and Company creation, robust session renewal/revocation and account linking/recovery.
 - HTTPS transport, no secrets in Unity, secure device storage, database hardening, parameterized queries, backups, alerting.
-- Report/block name/chat abuse before enabling chat, deletion and data-export endpoints, privacy notices + store disclosures.
+- Report/block abusive player or Company names and fraudulent trades before enabling public Company features; add deletion and data-export endpoints, privacy notices and store disclosures.
 - Unity EditMode/PlayMode + real iOS/Android tests, D1 migration/restore, concurrent join and research claims.
 
 ### P0 – before enabling paid / tradable rewards
