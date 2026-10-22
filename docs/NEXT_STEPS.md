@@ -51,3 +51,11 @@ Verbleibende getrennte Arbeit:
 ### Nächster optischer Abschnitt
 
 Die neue gemeinsame Grundlage ist in `unity-design-01.md` beschrieben. Erst den reviewbaren ersten Abschnitt gemeinsam bewerten; danach Forschung/INT/Axiome und die weiteren Listen/Details mit denselben Styles überarbeiten. Kein weiterer eigenständiger Designmodus und keine neuen Grafikentwürfe. Reale iPhone-/Android-, Glyphen-/Touch-/Notch-/Schriftgrößenprüfung bleibt gesondert offen. Native Anbieter unverfügbar lassen; bestehende Quellprobleme und historischen Savegrenzen unverändert erhalten.
+
+### Designabschnitt 1 · verfeinerte Grundlage 22.10.2026
+
+Aktueller Bericht/Play-Anleitung: [unity-design-02.md](unity-design-02.md). Kleine Ecken, gemeinsame Sockel-/Itemlogik, kompakte Schlossreihe, kontextbezogene Vergleiche und Tap-/Overdrive-Kernfeedback ersetzen die provisorischen Wege des ersten Abschnitts. Erst diesen Folge-Draft bewerten; weitere Bildschirme bleiben eigene Abschnitte. Offizielles Unity-Plugin installiert; für automatische Skill-Erkennung eine neue Codex-Sitzung öffnen, laufende parallele Sitzungen unverändert lassen. Live-Pipeline/MCP ist nicht eingerichtet; die geprüfte Editor-Batch-Anbindung bleibt verfügbar. Aktuelle Restpunkte zentral unter [unity-visual-backlog.md](unity-visual-backlog.md).
+
+### Aktueller visueller Abschnitt nach Zielbild
+
+[Labor und Itemdetails](unity-design-03.md) ersetzt die provisorische Darstellung des ersten Abschnitts mit einzeln erzeugten Pixel-UI-Skins, gemeinsamem Button-Prefab und echten gespeicherten Aktionen. Vorher/Nachher und der tatsächliche Animationsmitschnitt liegen im zugehörigen Medienordner; Assetherkunft und bewusste Abweichungen sind im Bericht ausgewiesen. Diesen Draft zuerst visuell reviewen. Danach übrige Bildschirme mit den gemeinsamen Komponenten bearbeiten; keine pauschale Geräte-/Releasefreigabe. Sourceprobleme/Native-Integrationen bleiben getrennt; keine Balance-/Saveänderung.
