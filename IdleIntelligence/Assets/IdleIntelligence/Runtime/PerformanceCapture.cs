@@ -15,6 +15,7 @@ namespace IdleIntelligence.Runtime
     {
         public static readonly ProfilerMarker Tick=new ProfilerMarker("Idle.Tick"), Refresh=new ProfilerMarker("Idle.UIRefresh"), Save=new ProfilerMarker("Idle.AtomicSave"), Localize=new ProfilerMarker("Idle.LocalizeScan"), Diagnostic=new ProfilerMarker("Idle.DiagnosticWrite");
         public static long UiNodes;
+        public sealed class SavePhases:IAtomicSaveProfiling { readonly Dictionary<string,ProfilerMarker> markers=new Dictionary<string,ProfilerMarker>();public IDisposable Phase(string name){if(!markers.TryGetValue(name,out var marker))markers[name]=marker=new ProfilerMarker("Idle.Save."+name);return marker.Auto();} }
     }
     // Opt-in development measurement, isolated save. No production telemetry or SDK.
     public sealed class PerformanceCapture:MonoBehaviour
@@ -35,11 +36,11 @@ namespace IdleIntelligence.Runtime
         IEnumerator Start()
         {
             folder=Path.Combine(Application.temporaryCachePath,"idle-profile-"+Environment.GetEnvironmentVariable("IDLE_PROFILE"));Directory.CreateDirectory(folder);
-            while((game=FindFirstObjectByType<GameRuntime>())==null||game.State==null)yield return null;
+            while((game=FindFirstObjectByType<GameRuntime>())==null||game.State==null)yield return null;game.Storage.Profiling=new PerformanceMarkers.SavePhases();
             game.Act(s=>{var n=s.Copy();n.Legacy.prepared=true;n.Retention.aiName="AURA";n.Story.enabled=false;n.Story.open=null;n.Story.queue=Array.Empty<string>();n.Story.seen=NarrativeCatalog.Dialogues.Select(d=>d.Id).ToArray();n.Story.tutorial="skipped";n.Credits=ScientificNumber.From(1e8);n.Data=ScientificNumber.From(1e6);n.Hardware[0]=10;return n;});
             var handles=new List<ProfilerRecorderHandle>();ProfilerRecorderHandle.GetAvailable(handles);
             var available=handles.Select(ProfilerRecorderHandle.GetDescription).ToArray();File.WriteAllLines(Path.Combine(folder,"available-counters.txt"),available.Select(d=>d.Category.Name+" | "+d.Name));
-            string[] names={"Main Thread","GC Allocated In Frame","GC Used Memory","Idle.Tick","Idle.UIRefresh","Idle.AtomicSave","Idle.LocalizeScan","Idle.DiagnosticWrite","UI.Layout","Canvas.BuildBatch"};
+            string[] names={"Main Thread","GC Allocated In Frame","GC Used Memory","Idle.Tick","Idle.UIRefresh","Idle.AtomicSave","Idle.LocalizeScan","Idle.DiagnosticWrite","Layout","Canvas.BuildBatch"};
             foreach(var name in names){var match=available.FirstOrDefault(d=>d.Name==name);if(match.Name==name)counters.Add(name,ProfilerRecorder.StartNew(match.Category,name,1));}
             Profiler.logFile=Path.Combine(folder,"unity-profiler.raw");Profiler.enableBinaryLog=true;Profiler.enabled=true;
             foreach(var tab in new[]{"hardware","training","research"})
@@ -47,6 +48,10 @@ namespace IdleIntelligence.Runtime
                 game.Show(tab);phase=tab+"-warmup";yield return new WaitForSecondsRealtime(2);
                 phase=tab;recording=true;yield return new WaitForSecondsRealtime(10);recording=false;
             }
+            // Additional after-only input stress; kept separate from the matched three-view baseline.
+            game.Act(s=>NarrativeBridge.Action(s,"skip"));game.Show("hardware");phase="input-warmup";yield return new WaitForSecondsRealtime(2);
+            phase="taps";recording=true;for(int i=0;i<30;i++){game.TapButton.onClick.Invoke();yield return new WaitForSecondsRealtime(.34f);}recording=false;
+            phase="purchases";recording=true;for(int i=0;i<20;i++){GameObject.Find("hardware-calculator").GetComponent<ActionCard>().Button.onClick.Invoke();yield return new WaitForSecondsRealtime(.5f);}recording=false;
             Profiler.enabled=false;Profiler.enableBinaryLog=false;
             var text=new StringBuilder("phase,frameMs,cpuNs,gpuMs,gcBytes,heapBytes,uiNodes,tickNs,refreshNs,saveNs,scanNs,diagnosticNs,layoutNs,batchNs\n");
             foreach(var s in samples)text.AppendFormat(System.Globalization.CultureInfo.InvariantCulture,"{0},{1:F4},{2:F0},{3:F4},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}\n",s.phase,s.elapsed,s.cpu,s.gpu,s.gc,s.heap,s.ui,s.tick,s.refresh,s.save,s.scan,s.diagnostic,s.layout,s.batch);
@@ -56,7 +61,7 @@ namespace IdleIntelligence.Runtime
         void LateUpdate()
         {
             if(!recording)return;FrameTimingManager.CaptureFrameTimings();double gpu=FrameTimingManager.GetLatestTimings(1,timing)>0?timing[0].gpuFrameTime:0;
-            samples.Add(new Sample{phase=phase,elapsed=Time.unscaledDeltaTime*1000,cpu=Read("Main Thread"),gpu=gpu,gc=Read("GC Allocated In Frame"),heap=Read("GC Used Memory"),ui=PerformanceMarkers.UiNodes,tick=Read("Idle.Tick"),refresh=Read("Idle.UIRefresh"),save=Read("Idle.AtomicSave"),scan=Read("Idle.LocalizeScan"),diagnostic=Read("Idle.DiagnosticWrite"),layout=Read("UI.Layout"),batch=Read("Canvas.BuildBatch")});
+            samples.Add(new Sample{phase=phase,elapsed=Time.unscaledDeltaTime*1000,cpu=Read("Main Thread"),gpu=gpu,gc=Read("GC Allocated In Frame"),heap=Read("GC Used Memory"),ui=PerformanceMarkers.UiNodes,tick=Read("Idle.Tick"),refresh=Read("Idle.UIRefresh"),save=Read("Idle.AtomicSave"),scan=Read("Idle.LocalizeScan"),diagnostic=Read("Idle.DiagnosticWrite"),layout=Read("Layout"),batch=Read("Canvas.BuildBatch")});
         }
 #endif
     }

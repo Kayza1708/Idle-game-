@@ -61,6 +61,7 @@ namespace IdleIntelligence.Core
         public static ScientificNumber Parts(double m, long exponent)
         {
             if (double.IsNaN(m) || double.IsInfinity(m) || m < 0) throw new ArgumentOutOfRangeException(nameof(m));
+            if(m==0)return Zero;if(m==1&&exponent==0)return One;
             return Parse(m.ToString("R", Invariant), exponent);
         }
         public static ScientificNumber Parse(string value) => Parse(value, 0);

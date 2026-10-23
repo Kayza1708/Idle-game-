@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 namespace IdleIntelligence.Core
 {
+    public interface IAtomicSaveProfiling { IDisposable Phase(string name); }
     public interface ISaveCodec { string Encode(StateData data); StateData Decode(string json); }
     [Serializable] public sealed class SaveEnvelope { public string format;public int version;public string payload,sha256; }
     public interface IEnvelopeCodec : ISaveCodec { string EncodeEnvelope(SaveEnvelope data);SaveEnvelope DecodeEnvelope(string json); }
@@ -18,7 +19,7 @@ namespace IdleIntelligence.Core
         public const int Version=22;
         public const string Format="idle-intelligence-unity-slice";
         readonly string path;readonly IEnvelopeCodec codec;
-        bool writable;string diskHash;
+        bool writable;string diskHash;public IAtomicSaveProfiling Profiling;
         public string PathName=>path;
         public AtomicSaveStore(string path,IEnvelopeCodec codec) {this.path=path;this.codec=codec;}
         static string Hash(string payload) {using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(payload))).Replace("-","").ToLowerInvariant();}
@@ -71,21 +72,20 @@ namespace IdleIntelligence.Core
         public void Save(GameState state)
         {
             if(!writable)throw new InvalidOperationException("Speichern gesperrt; Originaldateien zuerst sichern.");
-            Game.Validate(state);
+            using(Profiling?.Phase("Validate")){Game.Validate(state);}
             string parent=System.IO.Path.GetDirectoryName(path);if(!string.IsNullOrEmpty(parent))Directory.CreateDirectory(parent);
-            // Recheck the disk before every write, including external replacement after load.
-            // An unchanged SHA-256 proves these are the exact bytes validated at load/commit.
-            if(File.Exists(path)){if(new FileInfo(path).Length>32*1024*1024)throw new FormatException("Save too large");if(diskHash==null||diskHash!=FileHash(path))throw new IOException("Spielstand extern verändert; Original bleibt erhalten.");}else if(diskHash!=null)throw new IOException("Spielstand extern entfernt; Recovery erforderlich.");
-            string payload=codec.Encode(StateData.From(state));
-            string json=codec.EncodeEnvelope(new SaveEnvelope{format=Format,version=Version,payload=payload,sha256=Hash(payload)});
-            byte[] bytes=Encoding.UTF8.GetBytes(json);
-            using(var stream=new FileStream(path+".pending",FileMode.CreateNew,FileAccess.Write,FileShare.None)){stream.Write(bytes,0,bytes.Length);stream.Flush(true);}
-            Read(path+".pending");
-            // Detect concurrent replacement again immediately before committing.
-            if(File.Exists(path)&&diskHash!=FileHash(path))throw new IOException("Spielstand während des Speicherns verändert; Pending und Original bleiben erhalten.");
-            // Same-volume replace atomically updates main and retains its previous contents.
-            if(File.Exists(path))File.Replace(path+".pending",path,path+".backup");
-            else File.Move(path+".pending",path);diskHash=BytesHash(bytes);
+            using(Profiling?.Phase("OriginalHash")){
+                // These exact bytes were fully validated at load/commit. Unknown external changes still block.
+                if(File.Exists(path)){if(new FileInfo(path).Length>32*1024*1024)throw new FormatException("Save too large");if(diskHash==null||diskHash!=FileHash(path))throw new IOException("Spielstand extern verändert; Original bleibt erhalten.");}else if(diskHash!=null)throw new IOException("Spielstand extern entfernt; Recovery erforderlich.");
+            }
+            byte[] bytes;
+            using(Profiling?.Phase("Encode")){string payload=codec.Encode(StateData.From(state));string json=codec.EncodeEnvelope(new SaveEnvelope{format=Format,version=Version,payload=payload,sha256=Hash(payload)});bytes=Encoding.UTF8.GetBytes(json);}
+            using(Profiling?.Phase("Flush")){using(var stream=new FileStream(path+".pending",FileMode.CreateNew,FileAccess.Write,FileShare.None)){stream.Write(bytes,0,bytes.Length);stream.Flush(true);}}
+            using(Profiling?.Phase("PendingValidate")){Read(path+".pending");}
+            using(Profiling?.Phase("Commit")){
+                if(File.Exists(path)&&diskHash!=FileHash(path))throw new IOException("Spielstand während des Speicherns verändert; Pending und Original bleiben erhalten.");
+                if(File.Exists(path))File.Replace(path+".pending",path,path+".backup");else File.Move(path+".pending",path);diskHash=BytesHash(bytes);
+            }
         }
     }
 }

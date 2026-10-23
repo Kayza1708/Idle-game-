@@ -128,3 +128,6 @@ Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md
 - Aktionsrunde 06 / Draft #152: Main-Integration `aebd1174` erhält die vorhandenen Unity-Company-/Profil-/Gutscheinwege. Neuer Company-Menü-/Gutschein-/Reload-Fall und zwei übernommene Compile-Anschlüsse korrigiert; finale integrierte Prüfergebnisse stehen im Abschnitt-06-Bericht. Optische Company-Abnahme bleibt separat.
 
 - Referenzdateien reproduzierbar mit `TZ=Europe/Berlin npm run unity:export` erzeugen; lokale und Linux-PR-Prüfung verwenden diese Referenzzeitzone. Andere Zeitzonen nicht als Balanceänderung in Referenzdateien übernehmen.
+
+### Laufende Hauptansichts-Reparatur (23.10.2026)
+Kompakter Ressourcen-/Menükopf, Shell-eigener Mira-Dock, echter Tutorialfinger, verdichtete Hardware und gemeinsame Lernkarten sind im Folge-Draft #154 in Arbeit. Nächste verbindliche Abnahmen: vollständiger finaler PlayMode-Lauf, nativer Echtzeitweg mit Finger/Drop/Reload, Nachher-Profil inklusive Save-Untermarkern. Simulator ist kein physischer 60-fps-Nachweis. Prüfstand: `unity-iphone-repair.md`.

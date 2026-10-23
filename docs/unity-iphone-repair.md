@@ -50,3 +50,38 @@ Bisher nach Korrektur: vollständiger EditMode-Lauf **135/135**, Typecheck erfol
 ## Noch nicht abgenommen
 
 Physisches iPhone 16 Pro mit stabilen 60 fps, thermischer Dauerlauf, reales Touch-/Audio-/Haptikverhalten und native Produktionsintegrationen sind eigenständige Abnahmen. Simulator-GPU-Zeiten ersetzen keine Messung auf einem Gerät. Keine neuen Werbe-/Kauf-SDKs, keine Veröffentlichung.
+
+## Nativer Zwischenvergleich auf cae3ac22
+
+Gleicher ARM64-Simulator, gleiche Auflösung, identischer vorbereiteter Zustand, gleiche Development-/Debug-Konfiguration und Aufnahme. Editor und Xcode-Compiler waren für beide Messungen geschlossen. Die vorgesehene Zielbildrate ist Teil der Korrektur (`-1` → `60`). Die Vorbereitung setzt den KI-Namen über die echte Runtime; dadurch bleibt in beiden Läufen der Willkommensdialog geöffnet. Gemessen sind also die drei Ansichten **mit ihrer jeweiligen echten Mira-Darstellung**; dies ist keine Messung eines vollständig geschlossenen Tutorials.
+
+| Nachher, Simulator Development/Debug | Labor/Hardware | Training | Forschung |
+|---|---:|---:|---:|
+| Framezeit Mittel | 17,010 ms | 17,273 ms | 18,419 ms |
+| Framezeit p95 | 19,962 ms | 18,333 ms | 31,709 ms |
+| GC-Allokationen / Frame Mittel | 168.338 B | 163.636 B | 170.129 B |
+| Simulation Mittel | 1,565 ms | 1,788 ms | 1,492 ms |
+| Anzeige Mittel | 1,052 ms | 0,619 ms | 2,674 ms |
+| Größter Save | 103,705 ms | 104,691 ms | 104,641 ms |
+| Neue UI-Knoten stationär | 0 | 0 | 0 |
+
+Rohdaten: `Builds/performance-review/after-cae/`. **Noch kein stabiler 60-fps-Nachweis**: Save-Spitzen und Forschungsframes überschreiten das Budget weiterhin. Weitere Untersuchung läuft; diese Grenzen werden nicht durch bestandene Funktionstests verdeckt.
+
+Der native Echtzeit-Frischstart hat zusätzlich einen abgeschnittenen Tutorial-Zielbutton nach fokussiertem Hardwarekauf gefunden. `failed-guide-cae3ac22.mp4`/das zugehörige Bild bleiben als Fehlerbelege erhalten; sie sind kein erfolgreicher Abnahmemitschnitt. Ein kompletter Raycast-Test für Mira → Hardware → Training → Forschung wurde dafür ergänzt. Die vorherige vollständige Suite bestand mit 81/81, deckte diese durchgängige echte Trefferfolge aber noch nicht ab.
+
+Weitere Korrekturen nach dem nativen Zwischenlauf: Die Führung setzt ihren Scrollzustand nur beim tatsächlichen Wechsel zurück in den begleitenden Modus zurück. Labor-Sichtbarkeit hat einen eindeutigen Besitzer; unveränderte Navigation darf einen zwischenzeitlichen Sichtbarkeitswechsel nicht verdecken. Der Portrait-Test verwendet die aktive Editor-Zielgruppe auch nach iOS-Export und prüft die realen Displayabmessungen. Die vollständige neue Raycastfolge bis zum Forschungsstart besteht. Wiederholte Null-/Eins-Konvertierungen und JSON-Pfad-/Literalallokationen sind reduziert; der validierte Save-Envelope wird ohne zweiten Parserdurchlauf gelesen. Pending wird weiterhin vollständig deserialisiert und validiert. Optionale Save-Untermarker trennen Validierung, Hash, Kodierung, Flush, Pending-Prüfung und Commit. Ein neuer EditMode-Fall prüft die gemeinsame Anzeigeprojektion exakt gegen alle bisherigen Produktionsraten der Prestige-Fixtures; vollständiger Lauf 136/136 bestanden.
+
+Die zusätzliche vollständige Web-Regression nach den sachlichen Dialogkorrekturen besteht: **146 Dateien / 1.902 Tests**, Typecheck und Produktionsbuild erfolgreich. Die Sparmaßnahmen am Save-Pfad behalten ausdrücklich die vollständige Pending-Deserialisierung/-Validierung bei; es gibt keinen ungeprüften schnellen Speicherweg.
+
+## Anschlussauftrag: kompakter Header und Tutorial-Layout
+
+Die eingefügte Aufgabenbeschreibung vom 23.10. wurde vollständig gelesen. Die darin genannten vier Screenshots sind in der zugänglichen Anlage nicht enthalten (nur Text); vorhandene native und neu gerenderte Unity-Bilder bilden die überprüfbare Ausgangsbasis. TypeScript-Referenzen tatsächlich gelesen: `ResourceBar`/`TapSurface`/`HardwareStore` in `Panels.tsx`, `TutorialFocus.tsx`, `TutorialFinger.tsx`, `Dialogue.tsx` sowie zugehörige Layoutregeln in `style.css`, `mobile-ui.css`, `pixel-game.css`.
+
+- Die separate Titel-/Speicherzeile ist aus dem normalen Layout entfernt; vier gleich gewichtete Ressourcenspalten und ein 44er Hamburger teilen eine 52er Kopfzone. Manuelles Speichern bleibt im Menü und in Einstellungen. Erfolgreiche Autosaves erzeugen keine permanente Fußzeile; Fehler, Challenges und markierte Teststände bleiben sichtbar.
+- Mira besitzt einen einzigen, vom Shell-Layout bemessenen Dock unterhalb der Ressourcen, außerhalb des Scrollinhalts. Portrait und Blase bleiben zusammen; kein Umbetten zwischen unterschiedlich gesteuerten Parents, keine negativen Layoutabstände. Kurze Textseiten, Namensfeld, Validierung, Confirm/Skip/Continue und gespeicherte Storyzustände bleiben verbunden.
+- Der eigene Pixel-Finger übernimmt die Silhouette der TypeScript-Komponente. Er folgt dem wirklichen Ziel bzw. dessen Navigation/Führung und berücksichtigt Scroll-Clip, Layoutänderungen, Skip und reduzierte Bewegung. Er empfängt keine Raycasts und schreibt keinen Spielzustand; kein `ForceUpdateCanvases` pro Frame.
+- Labor: randlose vorhandene Originalzeichnung, bestehender Aspekt-/Crop-Mechanismus, entfernte permanente Tapbeschriftung und deren Band; kompakte Modell-/Trainingszeile mit beschrifteten Ressourcenraten. Keine zusätzliche Grafikfläche.
+- Hardware: 72er Zeilen, 44er Originalmotive, einheitlich 98 breite Kaufbereiche mit mindestens 44er Kaufaktion; sichtbare ×1/×10/MAX-Wahl nach bestehenden Domainregeln. Gesamtpreis statt Bestand/Preis-Fraktion.
+- Lernkarten: gemeinsames Prefab, unterschiedliche Originalmotive für drei Trainingsarten, untergeordnetes 44er Informationsziel im Kopf; laufende Arbeit zeigt Fortschritt/Restzeit ohne deaktivierte große Startfläche oder irreführende Folgekosten. Verwaltung bleibt im Menü.
+
+Zwischenprüfungen: fünf gezielte PlayMode-Fälle bestanden, einschließlich echter Raycasts bis Forschungsstart, Skip/Resume/Reload, 30 Ansichtswechseln ohne doppelte Mira-/Fingerkomponenten sowie gleichbleibender Hardware-Kaufgeometrie und drei vollständig sichtbaren Hardwarezeilen bei echtem 390×846-Display. DE/EN-Game-View-Bilder für 320/390/430 und ×1/×10/MAX erzeugt und repräsentative Bilder selbst angesehen. Danach den sichtbar zu hohen Infobutton im gemeinsamen Headerlayout korrigiert. Finaler Gesamtlauf, neue native Aufnahme mit Finger und erneute Profilaufnahme sind noch offen. Keine visuelle oder Performance-Fertigmeldung.

@@ -219,7 +219,7 @@
       },
       "navigation": "tutorial-quality-training",
       "aiName": "AURA",
-      "text": "Dein erstes Qualitätstraining ist kostenlos und dauert 20 Sekunden. Danach kosten weitere Stufen Daten.",
+      "text": "Dein erstes Qualitätstraining ist kostenlos und dauert 20 Sekunden. Danach kosten weitere Stufen Credits.",
       "trainingEvidence": false,
       "analysisEvidence": false
     },
@@ -285,7 +285,7 @@
       },
       "navigation": "tutorial-quality-training",
       "aiName": "AURA",
-      "text": "Dein erstes Qualitätstraining ist kostenlos und dauert 20 Sekunden. Danach kosten weitere Stufen Daten.",
+      "text": "Dein erstes Qualitätstraining ist kostenlos und dauert 20 Sekunden. Danach kosten weitere Stufen Credits.",
       "trainingEvidence": false,
       "analysisEvidence": false
     },

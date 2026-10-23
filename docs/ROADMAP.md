@@ -182,3 +182,5 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - Aktionsrunde 06 mit `main aebd1174` zusammengeführt: Company-/Profil-/Gutscheinwege erhalten, zwei übernommene Compileanschlüsse korrigiert, Gutschein-Referenzprojektion ergänzt und Referenzen aus den Quellen erneuert. Integrierte 135 EditMode-Fälle sowie 75 PlayMode-Fälle über breiten Lauf und expliziten Profil-Nachlauf geprüft; genaue Scopes und visuelle Grenzen im Abschnitt-06-Bericht. Kein PR-Merge und keine Veröffentlichung.
 
 - PR-Testbedingungen für Runde 06 reproduzierbar ausgewiesen: Linux-Job mit Referenzzeitzone Europe/Berlin und lokal geprüftem 30-s-Vitest-Limit, ohne Produktionsänderung.
+
+- 23.10.2026, laufend: Hauptansichts-/Tutorialreparatur in Draft #154 um kompakten Ressourcenheader, randloses Labor, direkte Hardware-Kaufmengen und einen layoutgeführten Mira-Dock samt Pixel-Finger erweitert. Fünf gezielte PlayMode-Prüfungen bestehen; finale native Aufnahme und Gesamtregression noch nicht abgenommen. Details: `unity-iphone-repair.md`.

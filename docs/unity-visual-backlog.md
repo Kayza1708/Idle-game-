@@ -99,3 +99,9 @@ Offen für folgende Abnahmen:
 - Noch offen: vollständige Company-Onlinezustände (Mitgliedschaft, Handel, verifizierte Auszeichnungen) mit echtem konfiguriertem Server visuell abnehmen; Profile-Frame-Auswahl/-Erwerb ist weiterhin keine vorhandene funktionale Aktion. Keine zusätzlichen Previewrahmen als kaufbar darstellen.
 - Profil enthält abseits der hier korrigierten Kopf-/Identitäts-/Schaukastentexte noch historische Inhaltsfallbacks. Die Layoutprüfung ist keine vollständige Siebensprachen-Inhaltsabnahme. Weitere Badgekarten-/Mailbox-Dichte und Touchflächen in einem zusammenhängenden Profilabschnitt prüfen.
 - Fünf neue eigene Audiocues und echte Unity-Audioclips: `unity-ios-audio-assets.json`, `media/unity-ios-local/`. Klangabnahme auf physischen iPhone-Lautsprechern/Kopfhörern bleibt getrennt vom Editor-/Simulatornachweis.
+
+## Hauptansichts-Reparatur und Tutorialdock · laufend 23.10.2026
+
+- Kompakte gemeinsame Kopfzeile ohne H-/Save-Glyph, randloses Labor, 72er Hardware, direkte Kaufmengenwahl und ein Shell-eigener Mira-Dock implementiert. Originalportrait/-grafiken erhalten. Selbst betrachtete echte Bilder zeigten zuvor Overlay-Verdeckung und unnötige Höhen; verantwortliche Parents/Prefabs gezielt korrigiert.
+- Finger aus eigenem TS-Pixelmotiv an tatsächliches Ziel gebunden, statisch bei reduzierter Bewegung. Finaler nativer Echtzeitmitschnitt und vollständige abschließende Bildprüfung bleiben offen.
+- Späterer Feinschliff: lange Forschungstitel und aktive Lernkarten auf allen Breiten weiter beurteilen; keine neue Rahmen-/Effektbibliothek. Im Rahmen dieser Reparatur nur bedienungsrelevante Korrekturen.
