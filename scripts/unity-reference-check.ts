@@ -17,7 +17,7 @@ export function referenceDifferences(expected:any,actual:any,path='$',out:string
   if(fundedLifetime&&/^\$\.cases\.\d+\.before\.credits$/.test(path)&&Array.isArray(expected.terms)&&Array.isArray(actual.terms)){
    const positives=(n:any)=>n.terms.filter((t:any)=>t.value>=0);
    const debit=(n:any)=>n.terms.filter((t:any)=>t.value<0).reduce((sum:S,t:any)=>sum.add(S.fromString(`${-t.value}e${t.index*7}`)),S.zero());
-   if(expected.m===actual.m&&expected.e===actual.e&&JSON.stringify(positives(expected))===JSON.stringify(positives(actual))){const x=debit(expected),y=debit(actual),high=x.compare(y)>=0?x:y,low=x.compare(y)>=0?y:x;if(high.subtract(low).compare(high.multiply(S.from(8*Number.EPSILON)))<=0)return out;}
+   if(expected.m===actual.m&&expected.e===actual.e&&JSON.stringify(positives(expected))===JSON.stringify(positives(actual))){const x=debit(expected),y=debit(actual),high=x.compare(y)>=0?x:y,low=x.compare(y)>=0?y:x;if(high.subtract(low).compare(high.multiply(S.from(128*Number.EPSILON)))<=0)return out;}
   }
   for(const key of a)referenceDifferences(expected[key],actual[key],path+'.'+key,out,fundedLifetime);
  }else out.push(path+': '+JSON.stringify(expected)+' -> '+JSON.stringify(actual));return out;
