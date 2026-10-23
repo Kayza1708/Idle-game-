@@ -3,7 +3,7 @@
   "unity": "6000.3.26f1",
   "saveVersion": 23,
   "sourceBase": "6ed588db",
-  "sourceCommit": "recorded after checked implementation commit in native verification",
+  "sourceCommit": "c15b51eb6496c92bd1058eac5ff2cce903e5684a",
   "tests": {
     "playmode": {
       "result": "Passed",
@@ -74,5 +74,32 @@
     "physical-device performance/audio/haptics and OS accessibility acceptance",
     "long-term balancing of explicitly new six items",
     "unresolved source insight-archive acquisition"
-  ]
+  ],
+  "native": {
+    "sourceCommit": "c15b51eb6496c92bd1058eac5ff2cce903e5684a",
+    "Unity": "6000.3.26f1",
+    "platform": "iOS Simulator ARM64",
+    "device": "iPhone 16 Pro simulator",
+    "runtime": "iOS 27.0",
+    "bundle": "com.kayza1708.idleintelligence.unity",
+    "installedAndLaunched": true,
+    "previousCommit": "7660b2351ec05230a6af381b2e921beddfb4fae6",
+    "previousSaveVersion": 22,
+    "saveVersion": 23,
+    "checksumValid": true,
+    "prepared": false,
+    "catalogEntries": 36,
+    "originalThirtyCatalogEntriesPreserved": true,
+    "inventoryEquipmentPermanentSlotsPreserved": true,
+    "exactVersion22OriginalPreserved": true,
+    "filesByteIdenticalAfterInstallBeforeLaunch": {
+      "unity": 15,
+      "capacitor": 15
+    },
+    "capacitorFilesUnchangedAfterUnityLaunch": 15,
+    "normalAppForceTerminated": false,
+    "backgroundSaveStep": "Normal Unity backgrounded by launching iOS Settings; all originals byte-verified immediately before installation",
+    "unityExportExit": 0,
+    "xcodeBuild": "BUILD SUCCEEDED"
+  }
 }

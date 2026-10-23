@@ -198,3 +198,5 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - [x] Fünf atomare bestätigte Transfers pro Person/UTC-Tag über alle vorhandenen Handelsarten, beide Teilnehmer; Quota-UI, feste Meldungen, Blockierung und bestätigte Kontolöschung.14 Node-/31 SQLite- und echter lokaler D1/HTTP-Smoke bestanden. Kein produktiver Rollout.
 - [x] Vollständige Schlussregression:1937Vitest,142EditMode,94PlayMode; echte DE/EN-Bilder bei320/390/430. [Prüfbericht und konkrete Grenzen](unity-visual-items-store.md).
 - [ ] Kommerzielle Native-Identität, genehmigter Backendrollout, Moderation/externes Löschen/Store-Datenschutz-IARC und physische Geräteprüfung. Nicht mit den lokalen technischen Nachweisen gleichsetzen.
+
+- [x] Nativer Simulatorplayer des geprüften Implementierungscommits `c15b51eb` separat exportiert, mit Xcode gebaut, tatsächlich installiert/gestartet. Gültiger normaler Save22→23 mit exaktem Original und15/15Capacitor-Originalen nachgewiesen; kein vorbereiteter normaler Spielerstand. Physisches iPhone bleibt separat.
