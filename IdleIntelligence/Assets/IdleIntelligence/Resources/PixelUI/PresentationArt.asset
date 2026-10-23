@@ -22,6 +22,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d1292a27c901f4457ba039e4cd2b1f7b, type: 2}
   - {fileID: 21300000, guid: 78b76467e7a0c45638951c7a14084aad, type: 2}
   - {fileID: 21300000, guid: dedec03e6351c4e8485c92b166eaaaa6, type: 2}
+  ChestInner:
+  - {fileID: 21300000, guid: ea915b0437c3c458295afb797293fbbc, type: 2}
+  - {fileID: 21300000, guid: 58a9d22d15b044f5abc4de2267488300, type: 2}
+  - {fileID: 21300000, guid: 8b3f9f349fd3b4b22b268ccfc57e3fc9, type: 2}
+  - {fileID: 21300000, guid: 1582cd37285224a11938fa3af5df05c4, type: 2}
   Pressure:
   - {fileID: 21300000, guid: a9b30e307b67141958d913d9350349bd, type: 2}
   - {fileID: 21300000, guid: 30ac21e0825334dc59b7c84033a59d5a, type: 2}
