@@ -1,8 +1,17 @@
 # Nächste Schritte · 20.10.2026
 
+## Truhenscharnier und Komponentenübersicht · 23.10.2026
+
+Mechanisch befestigter Deckel mit sichtbarer Innenseite und offener Truhe vor der Beuteenthüllung; alle 20 Komponenten als gemeinsames kompaktes Inventarraster. Originalicons anhand der TS-Atlaszuordnungen korrigiert. [Umsetzung, echte Vorher-/Nachher-Clips mit Unity-Audio und Prüfung](unity-chest-components.md). 139/139 EditMode, abschließend 89/89 PlayMode und 1.902 Vitest bestanden; keine pauschale Geräte-/Performancefreigabe.
+
+## Gezielte iPhone-Testreparatur · 23.10.2026
+
+Native Unity-Profiler-Baseline im **iPhone-16-Pro-Simulator** aufgenommen. CPU-/GC-/Save-Engpässe korrigiert; Original-Mira mit bedienbarer Führung, echte Drohnen-Hitfläche und gemeinsame Trainings-/Forschungskarten implementiert. Keine physische 60-fps-Abnahme behauptet. Prüfstand, Messmethode, gespeicherte Transaktionen und noch laufende Endabnahme: [gezielter Reparaturbericht](unity-iphone-repair.md). Folge-Draft #154, nicht mergen/veröffentlichen.
+
+
 ## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
 
-Installierter und gestarteter Unity-Spielcode: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
+Historischer installierter Unity-Spielcode vor der Hauptansichtsreparatur: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
 
 Aktueller lokaler iOS-Weg und Prüfstand: [Unity auf iPhone-16-Pro-Simulator](unity-ios-local.md). Separate Unity-App und neuer Buildordner; Capacitor-`ios/`, ursprüngliche App und Saves bleiben erhalten. Company-Onlinezugang und echte native Integrationen sind weiterhin gesondert offen. Die folgende ältere Aufgabenhistorie ist keine Aussage, dass alle damaligen Zwischenlücken heute noch bestehen; maßgeblich sind funktionaler Audit und aktueller Plattformbericht.
 
@@ -123,3 +132,14 @@ Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md
 - Aktionsrunde 06 / Draft #152: Main-Integration `aebd1174` erhält die vorhandenen Unity-Company-/Profil-/Gutscheinwege. Neuer Company-Menü-/Gutschein-/Reload-Fall und zwei übernommene Compile-Anschlüsse korrigiert; finale integrierte Prüfergebnisse stehen im Abschnitt-06-Bericht. Optische Company-Abnahme bleibt separat.
 
 - Referenzdateien reproduzierbar mit `TZ=Europe/Berlin npm run unity:export` erzeugen; lokale und Linux-PR-Prüfung verwenden diese Referenzzeitzone. Andere Zeitzonen nicht als Balanceänderung in Referenzdateien übernehmen.
+
+### Laufende Hauptansichts-Reparatur (23.10.2026)
+Kompakter Ressourcen-/Menükopf, Shell-eigener Mira-Dock, echter Tutorialfinger, verdichtete Hardware und gemeinsame Lernkarten sind im Folge-Draft #154 in Arbeit. Nächste verbindliche Abnahmen: vollständiger finaler PlayMode-Lauf, nativer Echtzeitweg mit Finger/Drop/Reload, Nachher-Profil inklusive Save-Untermarkern. Simulator ist kein physischer 60-fps-Nachweis. Prüfstand: `unity-iphone-repair.md`.
+
+### Nach dem Meta-Visual-/Item-/Handelsabschnitt · 23.10.2026
+
+Die geprüften gemeinsamen Bausteine stehen in `unity-visual-items-store.md` und dessen JSON-Nachweis;142EditMode/94PlayMode und1937Webtests sind grün. Die sechs neuen Items sind zusätzliche autorisierte Inhalte, alte Preise/Claims bleiben erhalten. Save23 erweitert30→36 ohne Originalverlust. Der lokale echte Worker bestätigt5/Tag samt Konkurrenzschutz und Kontolöschung; **kein automatischer Produktionsrollout**.
+
+Nächste getrennte Abnahmen: verifizierte Native-Identität/Fortschrittsbindung und Online-Entitlements, freigegebener D1-Rollout, externer authentifizierter Löschweg und Moderationsbetrieb, juristische Store-/Datenschutz-/IARC-Angaben, Langzeitbalance der neuen Items, historische Sprachfallbacks sowie physische Touch-/Lautsprecher-/Haptik-/Wärme-/60-fps-Prüfung. Der Erkenntnisarchiv-Erwerb bleibt ein dokumentiertes Quellproblem. Keine pauschale Aussage „kommerziell fertig“ oder „gesamter Rewrite abgenommen“.
+
+Aktuell normal installiert/gestartet: `c15b51eb` auf dem iPhone16Pro-**Simulator** (iOS27, ARM64), nativer Unity-Player, Save23 ohne vorbereitete Ressourcen. Xcode-Export unter `Builds/iOS-MetaVisual-c15b51eb/Xcode`. Dokumentations-Folgecommit verändert diesen ausführbaren Code nicht.

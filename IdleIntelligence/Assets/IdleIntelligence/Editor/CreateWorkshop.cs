@@ -15,6 +15,14 @@ namespace IdleIntelligence.Editor
         const string Root="Assets/IdleIntelligence/";
         static Sprite SaveSprite(Sprite sprite,string path){var old=AssetDatabase.LoadAssetAtPath<Sprite>(path);if(old==null)AssetDatabase.CreateAsset(sprite,path);else{EditorUtility.CopySerialized(sprite,old);UnityEngine.Object.DestroyImmediate(sprite);sprite=old;}return sprite;}
         static Texture2D Texture(string name){string path=Root+"Resources/"+name+".png";var t=(TextureImporter)AssetImporter.GetAtPath(path);t.textureType=TextureImporterType.Sprite;t.spriteImportMode=SpriteImportMode.Single;t.textureCompression=TextureImporterCompression.Uncompressed;t.alphaIsTransparency=true;t.SaveAndReimport();return AssetDatabase.LoadAssetAtPath<Texture2D>(path);}
+        public static Sprite[] BuildComponentSprites()
+        {
+            string source=File.ReadAllText(Path.Combine(Directory.GetParent(Application.dataPath).Parent.FullName,"src/GameArt.tsx"));
+            Dictionary<string,Vector2Int> Cells(string name){var table=Regex.Match(source,@"(?:export )?const "+name+@"[^=]*=\{([^}]+)\}");if(!table.Success)throw new InvalidOperationException("Missing TS art table "+name);return Regex.Matches(table.Groups[1].Value,@"(\w+):\[\s*(\d+)\s*,\s*(\d+)\s*\]").Cast<Match>().ToDictionary(m=>m.Groups[1].Value,m=>new Vector2Int(int.Parse(m.Groups[2].Value),int.Parse(m.Groups[3].Value)));}
+            var basic=Cells("componentCells");var extra=Cells("materialExtensionCells");var baseAtlas=Texture("ComponentAtlas");var extension=Texture("ComponentExtension");var result=new Sprite[ItemBalance.ComponentIds.Length];
+            for(int i=0;i<result.Length;i++){string id=ItemBalance.ComponentIds[i];bool extended=extra.TryGetValue(id,out var cell);if(!extended&&!basic.TryGetValue(id,out cell))throw new InvalidOperationException("Missing original component art "+id);var atlas=extended?extension:baseAtlas;int columns=extended?4:5,rows=extended?3:2;float width=atlas.width/(float)columns,height=atlas.height/(float)rows;var sprite=Sprite.Create(atlas,new Rect(cell.x*width,atlas.height-(cell.y+1)*height,width,height),Vector2.one*.5f,100,0,SpriteMeshType.FullRect);sprite.name=id;result[i]=SaveSprite(sprite,Root+"Art/component-"+id+".asset");}
+            return result;
+        }
         static GameObject Node(string name,Transform parent,params Type[] types)=>WorkshopUIFactory.Node(name,parent,types);
         static void At(RectTransform r,float x,float y,float w,float h){r.anchorMin=r.anchorMax=new Vector2(x,y);r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=Vector2.zero;r.sizeDelta=new Vector2(w,h);}
         static ItemPortrait Portrait(Transform parent,ItemPortrait prefab,string name,float x,float y,float size){var p=(ItemPortrait)PrefabUtility.InstantiatePrefab(prefab,parent);p.name=name;At((RectTransform)p.transform,x,y,size,size);return p;}
@@ -23,12 +31,12 @@ namespace IdleIntelligence.Editor
             var atlas=Texture("ItemAtlas");var source=File.ReadAllText(Path.GetFullPath("../src/GameArt.tsx"));var sprites=new Sprite[ItemBalance.Items.Length];
             for(int n=0;n<sprites.Length;n++)
             {
-                string id=ItemBalance.Items[n].Id;var match=Regex.Match(source,"['\"]?"+id+"['\"]?:\\[(\\d+),(\\d+),(\\d+),(\\d+)\\]");if(!match.Success)throw new Exception("Missing item art "+id);
+                string id=ItemBalance.Items[n].Id;if(MetaItemArtBuilder.IsMeta(id)){sprites[n]=MetaItemArtBuilder.SpriteFor(id);if(sprites[n]==null)throw new System.InvalidOperationException("Run MetaItemArtBuilder.Build before rebuilding workshop");continue;}var match=Regex.Match(source,"['\"]?"+id+"['\"]?:\\[(\\d+),(\\d+),(\\d+),(\\d+)\\]");if(!match.Success)throw new Exception("Missing item art "+id);
                 int x=int.Parse(match.Groups[1].Value),y=int.Parse(match.Groups[2].Value),w=int.Parse(match.Groups[3].Value),h=int.Parse(match.Groups[4].Value);var sprite=Sprite.Create(atlas,new Rect(x,atlas.height-y-h,w,h),new Vector2(.5f,.5f),100);sprite.name=id;
                 var clip=Regex.Match(source,"['\"]"+id+"['\"]:'(M[^']+)'" );if(clip.Success){var nums=Regex.Matches(clip.Groups[1].Value,@"-?\d+(?:\.\d+)?").Cast<Match>().Select(m=>float.Parse(m.Value,System.Globalization.CultureInfo.InvariantCulture)).ToArray();var points=Enumerable.Range(0,nums.Length/2).Select(i=>new Vector2((nums[i*2]-x-w*.5f)/100,(h*.5f-nums[i*2+1]+y)/100)).ToArray();var triangles=Triangulate(points);if(triangles.Length>0)sprite.OverrideGeometry(points,triangles);}
                 sprites[n]=SaveSprite(sprite,Root+"Art/item-"+id+".asset");
             }
-            var components=new Sprite[ItemBalance.ComponentIds.Length];var baseAtlas=Texture("ComponentAtlas");var extraAtlas=Texture("ComponentExtension");for(int i=0;i<components.Length;i++){var a=i<10?baseAtlas:extraAtlas;int cell=i%10;float w=a.width/5f,h=a.height/2f;var sprite=Sprite.Create(a,new Rect(cell%5*w,a.height-(cell/5+1)*h,w,h),new Vector2(.5f,.5f),100);sprite.name=ItemBalance.ComponentIds[i];components[i]=SaveSprite(sprite,Root+"Art/component-"+sprite.name+".asset");}
+            var components=BuildComponentSprites();
             Texture("Forge");var forgeArt=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Resources/Forge.png");
             var portrait=Node("ItemPortrait",null,typeof(Image),typeof(Button),typeof(ItemPortrait));At((RectTransform)portrait.transform,.5f,.5f,94,94);portrait.GetComponent<Image>().color=new Color(.025f,.06f,.09f,.95f);var view=portrait.GetComponent<ItemPortrait>();view.Button=portrait.GetComponent<Button>();
             var frame=Node("RarityFrame",portrait.transform,typeof(CanvasRenderer),typeof(ShapeFrame));WorkshopUIFactory.Fill((RectTransform)frame.transform);view.Frame=frame.GetComponent<ShapeFrame>();view.Frame.raycastTarget=false;

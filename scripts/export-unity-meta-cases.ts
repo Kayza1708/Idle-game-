@@ -1,5 +1,5 @@
 import {readFileSync,writeFileSync} from 'node:fs';
-import {BALANCE,newGame,addCreditsScientific,addDataScientific,grantComponents,componentIds,startTraining,startResearchProject,registerTap,type GameState} from '../src/economy';
+import {BALANCE,newGame,addCreditsScientific,addDataScientific,grantComponents,componentIds,lateMetaItemCatalog,startTraining,startResearchProject,registerTap,type GameState} from '../src/economy';
 import {discoverProgression,developModel,upgradeModel,selectModel,knowledgeRate,itemAmplifier,modelCore,nextModelCost,nextModelUpgradeCost} from '../src/progression';
 import {buyProgressionAxiom,buyProgressionNode,axiomResetV2,axiomRewardV2,normalResetV2} from '../src/progressionReset';
 import {queueExperiment,runAnalysisPlanner,experimentSpeed} from '../src/experiments';
@@ -34,4 +34,14 @@ for(let level=1;level<=5;level++){let knowledge=funded();knowledge={...knowledge
 for(const [level,extension] of [[30,0],[30,1],[49,4],[50,4]]){let limit=funded();limit={...limit,axiomUpgradeLevels:{...limit.axiomUpgradeLevels,D03:extension},progression:{...limit.progression,models:{K01:level},active:'K01'}};add('D03-limit-'+level+'-'+extension,limit,'model-upgrade','K01');}
 let records=funded();records={...records,axiomUpgradeLevels:{...records.axiomUpgradeLevels,B05:3},progression:{...records.progression,trainingRecords:{quality:20,efficiency:20,integration:20}}};add('B05-below-archived-record',records,'train','quality');
 let protectedLab=funded();protectedLab={...protectedLab,nodes:['F05'],axiomUpgradeLevels:{...protectedLab.axiomUpgradeLevels,C02:1},researchLevels:{...protectedLab.researchLevels,dataGeneration:9},researchDirector:{...protectedLab.researchDirector,enabled:true,entries:[{id:'dataGeneration',targetLevel:10}]},analysisPlanner:{...protectedLab.analysisPlanner,enabled:true}};protectedLab=startResearchProject(protectedLab,'modelArchitecture');protectedLab={...protectedLab,data:270,exactEconomy:{...protectedLab.exactEconomy,data:S.from(270).toJSON()}};add('C02-respects-director-reserve-with-full-lab',protectedLab,'analysis-plan');
+// Prepared domain states for each new effect, real slot assignment, context caps and resets.
+for(const id of Object.keys(lateMetaItemCatalog) as (keyof typeof lateMetaItemCatalog)[]){
+ let s=funded();s={...s,axiomResetCount:5,nodes:['H01','H02','H03','T01','T02','T03','F01','F02','F03','W01','W02','W03','S01','S02','S03','I01','I02','I03'],progression:{...s.progression,bestINT:S.from(1e6).toJSON(),models:{K01:4,K02:3,K03:2,K04:1,K05:0},active:'K01'}};
+ s=createItem(s,id,'legendary');const item=s.inventory.at(-1)!;s=equip(s,item.id);if(!Object.values(s.equipped).includes(item.id))throw Error('Unreachable equipped fixture '+id);
+ add('meta-item-'+id+'-active',s,'none');add('meta-item-'+id+'-offline',s,'advance','','0',s.savedAt+60000);
+ add('meta-item-'+id+'-no-model',{...s,progression:{...s.progression,active:null}},'none');
+ add('meta-item-'+id+'-locked',{...s,axiomResetCount:0,progression:{...s.progression,lab:false}},'none');
+ let cycle=add('meta-item-'+id+'-reset',s,'reset');add('meta-item-'+id+'-second-reset',cycle,'reset');
+ let axiom=s;for(let i=0;i<2;i++){axiom={...axiom,progression:{...axiom.progression,lab:true,known:Object.keys(BALANCE.progression.nodes),entitlement:S.from(1e20).toJSON()}};add('meta-item-'+id+'-axiom-reward-'+i,axiom,'none');axiom=add('meta-item-'+id+'-axiom-cycle-'+i,axiom,'axiom-reset');add('meta-item-'+id+'-axiom-no-replay-'+i,axiom,'axiom-reset');}
+}
 const path='IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/MetaReferenceCases.json',json=JSON.stringify({scope:'Funded technical fixtures; not a natural progression run',cases},null,2)+'\n';if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==json)throw Error('Stale meta references')}else writeFileSync(path,json);console.log('Unity meta reference cases:',cases.length);

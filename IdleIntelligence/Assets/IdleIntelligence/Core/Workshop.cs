@@ -47,8 +47,8 @@ namespace IdleIntelligence.Core
         public static double DeviceInstance(GameState s,ItemInstance i,string role,double at=-1)
         {
             var d=Definition(i);if(d.Role!=role)return 0;var w=s.Workshop;double now=at<0?s.SavedAt:at;int owned=s.Hardware.Count(n=>n>0);
-            bool condition=role=="sparse"?owned>0&&owned<=3:role=="photonicCompute"||role=="burst"?s.ActiveUntil>now:role=="legacy"?s.Hardware[0]>=10||s.Hardware[1]>=10:true;
-            double progress=role=="pairs"?Math.Min(ItemBalance.PairCap,Math.Min(w.qualityCompletions,w.efficiencyCompletions))/ItemBalance.PairCap:role=="memory"?Math.Min(1,Math.Max(0,now-w.runStartedAt)/1000/ItemBalance.MemorySeconds):1;
+            bool condition=role=="sparse"?owned>0&&owned<=3:role=="photonicCompute"||role=="burst"?s.ActiveUntil>now:role=="legacy"?s.Hardware[0]>=10||s.Hardware[1]>=10:LateAccess(s,d)&&(role!="modelEcho"||!string.IsNullOrEmpty(s.Workshop.activeModel));
+            double progress=role=="pairs"?Math.Min(ItemBalance.PairCap,Math.Min(w.qualityCompletions,w.efficiencyCompletions))/ItemBalance.PairCap:role=="memory"?Math.Min(1,Math.Max(0,now-w.runStartedAt)/1000/ItemBalance.MemorySeconds):role=="cycleResearch"?Math.Min(1,s.Meta.resets/ItemBalance.MetaCycleCount):role=="knowledgeCompute"?Math.Min(1,Math.Max(0,ScientificNumber.FromData(s.Prestige.knowledge).Log10())/ItemBalance.MetaKnowledgeLog):role=="modelTraining"?Math.Min(1,s.Meta.models.Count(l=>l>=0)/ItemBalance.MetaModelCount):1;
             return condition?Math.Min(d.Cap,Effect(s,i,role))*progress:0;
         }
         public static double Combination(GameState s,string id)
@@ -68,18 +68,19 @@ namespace IdleIntelligence.Core
             {w.learned[n]=true;if(w.crafted[n]==0&&!w.inventory.Any(i=>i.type==ItemBalance.Items[n].Id))for(int c=0;c<need.Length;c++)need[c]+=ItemBalance.Items[n].Components[0][c];}
             for(int c=0;c<need.Length;c++){long gift=Math.Max(0,(long)need[c]-w.components[c]);w.components[c]+=gift;Lifetime.Components(s,c,gift);}w.starterGift=true;return Changed(s);
         }
-        public static bool Prerequisite(GameState s,int n)=>ItemBalance.Items[n].Starter>=0||Game.Level(s,"blueprints")>0;
+        public static bool LateAccess(GameState s,ItemDefinition d)=>d.Access!="lab"&&d.Access!="axiom"&&d.Access!="model-set"||s.Prestige.lab&&(d.Access=="axiom"?s.Meta.resets>0:d.Access=="model-set"?s.Meta.models.Count(l=>l>=0)>=3:true);
+        public static bool Prerequisite(GameState s,int n)=>(ItemBalance.Items[n].Starter>=0||Game.Level(s,"blueprints")>0)&&LateAccess(s,ItemBalance.Items[n]);
         public static string LearnBlock(GameState s,int n)
         {
             if(n<0||n>=ItemBalance.Items.Length)return "Unbekannter Bauplan";
-            var d=ItemBalance.Items[n];return s.Workshop.learned[n]?"Bereits gelernt":!Prerequisite(s,n)?"Forschung: Baupläne":d.BlueprintPrice==0?(d.Starter>=0?"Starter-Aufgaben abschließen":"Vorhandener Bauplan benötigt · Erwerbsweg noch offen"):s.Workshop.fragments<d.BlueprintPrice?"Zu wenig Bauplanfragmente":null;
+            var d=ItemBalance.Items[n];return s.Workshop.learned[n]?"Bereits gelernt":!Prerequisite(s,n)?(d.Access=="axiom"?"Erster Axiomzyklus und Forschung: Baupläne":d.Access=="model-set"?"Drei KI-Modelle im Geheimlabor und Forschung: Baupläne":d.Access=="lab"?"Geheimlabor und Forschung: Baupläne":"Forschung: Baupläne"):d.BlueprintPrice==0?(d.Starter>=0?"Starter-Aufgaben abschließen":"Vorhandener Bauplan benötigt · Erwerbsweg noch offen"):s.Workshop.fragments<d.BlueprintPrice?"Zu wenig Bauplanfragmente":null;
         }
         public static GameState Learn(GameState state,string id)
         {int n=Index(id);if(LearnBlock(state,n)!=null)return state;var s=state.Copy();s.Workshop.fragments-=ItemBalance.Items[n].BlueprintPrice;s.Workshop.learned[n]=true;LocalJournal.Record(s,"blueprint-learn",permanent:true);return Changed(s);}
         public static CraftQuote Quote(GameState s,string type)
         {
             int n=Index(type);if(n<0)return new CraftQuote{Reason="Unbekannt"};var d=ItemBalance.Items[n];var w=s.Workshop;var q=new CraftQuote{Components=(double[])d.Components[w.mastery[n]].Clone(),Modules=(double[])d.ModuleCosts.Clone(),Data=d.Data,Revision=w.revision};
-            q.Reason=!Prerequisite(s,n)?"Forschung: Baupläne":!w.learned[n]?"Bauplan lernen":!Stock(w.nextId+2)?"ID-Grenze":s.Data.CompareTo(ScientificNumber.From(q.Data))<0?"Zu wenig Daten":null;
+            q.Reason=!Prerequisite(s,n)?(d.Access=="axiom"?"Erster Axiomzyklus und Forschung: Baupläne":d.Access=="model-set"?"Drei KI-Modelle im Geheimlabor und Forschung: Baupläne":d.Access=="lab"?"Geheimlabor und Forschung: Baupläne":"Forschung: Baupläne"):!w.learned[n]?"Bauplan lernen":!Stock(w.nextId+2)?"ID-Grenze":s.Data.CompareTo(ScientificNumber.From(q.Data))<0?"Zu wenig Daten":null;
             for(int c=0;c<q.Components.Length;c++)if(q.Reason==null&&w.components[c]<q.Components[c])q.Reason="Fehlt: "+ItemBalance.ComponentNames[c];
             for(int c=0;c<q.Modules.Length;c++)if(q.Reason==null&&w.modules[c]<q.Modules[c])q.Reason="Fehlt: "+ItemBalance.Modules[c].Name;
             q.Allowed=q.Reason==null;return q;

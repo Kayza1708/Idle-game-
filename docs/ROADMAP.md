@@ -1,5 +1,14 @@
 # Idle Intelligence – aktueller Stand
 
+## Truhenscharnier und Komponentenübersicht · 23.10.2026
+
+Mechanisch befestigter Deckel mit sichtbarer Innenseite und offener Truhe vor der Beuteenthüllung; alle 20 Komponenten als gemeinsames kompaktes Inventarraster. Originalicons anhand der TS-Atlaszuordnungen korrigiert. [Umsetzung, echte Vorher-/Nachher-Clips mit Unity-Audio und Prüfung](unity-chest-components.md). 139/139 EditMode, abschließend 89/89 PlayMode und 1.902 Vitest bestanden; keine pauschale Geräte-/Performancefreigabe.
+
+## Gezielte iPhone-Testreparatur · 23.10.2026
+
+Native Unity-Profiler-Baseline im **iPhone-16-Pro-Simulator** aufgenommen. CPU-/GC-/Save-Engpässe korrigiert; Original-Mira mit bedienbarer Führung, echte Drohnen-Hitfläche und gemeinsame Trainings-/Forschungskarten implementiert. Keine physische 60-fps-Abnahme behauptet. Prüfstand, Messmethode, gespeicherte Transaktionen und noch laufende Endabnahme: [gezielter Reparaturbericht](unity-iphone-repair.md). Folge-Draft #154, nicht mergen/veröffentlichen.
+
+
 ## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
 
 Installierter und gestarteter Unity-Spielcode: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
@@ -177,3 +186,17 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - Aktionsrunde 06 mit `main aebd1174` zusammengeführt: Company-/Profil-/Gutscheinwege erhalten, zwei übernommene Compileanschlüsse korrigiert, Gutschein-Referenzprojektion ergänzt und Referenzen aus den Quellen erneuert. Integrierte 135 EditMode-Fälle sowie 75 PlayMode-Fälle über breiten Lauf und expliziten Profil-Nachlauf geprüft; genaue Scopes und visuelle Grenzen im Abschnitt-06-Bericht. Kein PR-Merge und keine Veröffentlichung.
 
 - PR-Testbedingungen für Runde 06 reproduzierbar ausgewiesen: Linux-Job mit Referenzzeitzone Europe/Berlin und lokal geprüftem 30-s-Vitest-Limit, ohne Produktionsänderung.
+
+- 23.10.2026, laufend: Hauptansichts-/Tutorialreparatur in Draft #154 um kompakten Ressourcenheader, randloses Labor, direkte Hardware-Kaufmengen und einen layoutgeführten Mira-Dock samt Pixel-Finger erweitert. Fünf gezielte PlayMode-Prüfungen bestehen; finale native Aufnahme und Gesamtregression noch nicht abgenommen. Details: `unity-iphone-repair.md`.
+
+### Meta-Visuals, neue Items und sichere Online-Verträge · 23.10.2026
+
+- [x] Eigene semantische Grafiken für alle60INT-/24Axiomknoten; keine Itembilder als Ersatz. Preisabhängige Käufe bleiben ohne Vorgängersperre. Kompakteres verbundenes Netz mit gleich breiten Touchwerkzeugen.
+- [x] Sechs gleich große Hauptsockel, gemeinsame zentrierte Artfläche auch im Inventar, tatsächliche aktive Boni und vorhandene Slotformen/Seltenheiten.
+- [x] Sechs neue Dark-Lab-/Axiom-Items mit zentralen beauftragten Rezepten/Caps und tatsächlichen Erkenntnis-/Modell-/Axiom-/Forschungs-/Compute-/Trainingsverbrauchern, eigener Art und sieben Namen/Effekttexten. Save23 erhält alte Indizes und Originale.
+- [x] Mira mit eigenen Ausdrucksframes, ruhigem Blinzeln/Idle und statischem Reduced Motion; keine simulierte Sprachausgabe. Truhen behalten Scharnier und tatsächliche Ergebnisse; alle vier Typen mit aufgenommenem Unity-Audio geprüft.
+- [x] Fünf atomare bestätigte Transfers pro Person/UTC-Tag über alle vorhandenen Handelsarten, beide Teilnehmer; Quota-UI, feste Meldungen, Blockierung und bestätigte Kontolöschung.14 Node-/31 SQLite- und echter lokaler D1/HTTP-Smoke bestanden. Kein produktiver Rollout.
+- [x] Vollständige Schlussregression:1937Vitest,142EditMode,94PlayMode; echte DE/EN-Bilder bei320/390/430. [Prüfbericht und konkrete Grenzen](unity-visual-items-store.md).
+- [ ] Kommerzielle Native-Identität, genehmigter Backendrollout, Moderation/externes Löschen/Store-Datenschutz-IARC und physische Geräteprüfung. Nicht mit den lokalen technischen Nachweisen gleichsetzen.
+
+- [x] Nativer Simulatorplayer des geprüften Implementierungscommits `c15b51eb` separat exportiert, mit Xcode gebaut, tatsächlich installiert/gestartet. Gültiger normaler Save22→23 mit exaktem Original und15/15Capacitor-Originalen nachgewiesen; kein vorbereiteter normaler Spielerstand. Physisches iPhone bleibt separat.

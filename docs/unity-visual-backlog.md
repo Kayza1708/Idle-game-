@@ -99,3 +99,27 @@ Offen für folgende Abnahmen:
 - Noch offen: vollständige Company-Onlinezustände (Mitgliedschaft, Handel, verifizierte Auszeichnungen) mit echtem konfiguriertem Server visuell abnehmen; Profile-Frame-Auswahl/-Erwerb ist weiterhin keine vorhandene funktionale Aktion. Keine zusätzlichen Previewrahmen als kaufbar darstellen.
 - Profil enthält abseits der hier korrigierten Kopf-/Identitäts-/Schaukastentexte noch historische Inhaltsfallbacks. Die Layoutprüfung ist keine vollständige Siebensprachen-Inhaltsabnahme. Weitere Badgekarten-/Mailbox-Dichte und Touchflächen in einem zusammenhängenden Profilabschnitt prüfen.
 - Fünf neue eigene Audiocues und echte Unity-Audioclips: `unity-ios-audio-assets.json`, `media/unity-ios-local/`. Klangabnahme auf physischen iPhone-Lautsprechern/Kopfhörern bleibt getrennt vom Editor-/Simulatornachweis.
+
+## Hauptansichts-Reparatur und Tutorialdock · Prüfstand 23.10.2026
+
+- Kompakte gemeinsame Kopfzeile ohne H-/Save-Glyph, randloses Labor, 72er Hardware, direkte Kaufmengenwahl und ein Shell-eigener Mira-Dock implementiert. Originalportrait/-grafiken erhalten. Selbst betrachtete echte Bilder zeigten zuvor Overlay-Verdeckung und unnötige Höhen; verantwortliche Parents/Prefabs gezielt korrigiert.
+- Finger aus eigenem TS-Pixelmotiv an tatsächliches Ziel gebunden, statisch bei reduzierter Bewegung. Alle 36 DE-/EN-Bilder mit 320/390/430 px und ×1/×10/MAX wurden tatsächlich angesehen. Native Nachprüfung deckte zusätzlich fehlende uGUI-Registrierung und einen verspäteten Ziel-Fallback auf; diese werden im Runtime-Code und mit expliziten Regressionen korrigiert.
+- Späterer Feinschliff: lange Forschungstitel und aktive Lernkarten auf allen Breiten weiter beurteilen; keine neue Rahmen-/Effektbibliothek. Im Rahmen dieser Reparatur nur bedienungsrelevante Korrekturen.
+- Gemessene Ursachen weiter eingegrenzt: dynamische Kartenhöhe muss den Inhalt statt der intrinsischen Höhe des Rahmensprites verwenden. Längere Namen/Effekte werden in echten Game-View-Größen geprüft. Fingerposition nach Canvaslayout ohne eigenes ForceUpdateCanvases pro Frame. Gemessene Layoutzeiten und native Belege stehen im Prüfbericht.
+- Separater funktionaler Altbefund beim TS-Abgleich: `TapSurface` besitzt einen Halte-Repeater (3/s), die aktuelle Unity-Tapfläche konsumiert einzelne Klicks. In dieser UI-Reparatur keine neue Eingabemechanik eingeführt; Mira verspricht das nicht verfügbare Halten nicht mehr. Vollständige Migrationsparität deshalb nicht pauschal behaupten.
+
+- Offen und getrennt von erledigten Layoutreparaturen: physische iPhone-/Android-Lesbarkeit, Softwaretastatur mit tatsächlichem Insetswechsel, reale Fingerbedienung und Energie-/Wärmeprüfung. Device-Hub-Tasten und Buttonclicks ersetzen diese nicht.
+- Performance hat Vorrang vor weiterer allgemeiner Designrunde: stationär im optimierten Simulator etwa 16,67 ms, aber bis etwa 50 ms bei Käufen. Weitere Pending-Decode-/Validierungs- und Kauf-Layoutarbeit messen, Transaktionssicherheit nicht abschwächen.
+- Keine Behauptung, die aktuelle Oberfläche sei bereits der abschließende Pixel-Art-/Animationsfeinschliff. Bestehende Originalassets und gemeinsame Komponenten bilden die Grundlage.
+
+## Truhen und Komponenten · 23.10.2026
+
+- Gezielte Deckelverschiebung ersetzt: feste perspektivische Scharnierachse, eigene Innenflächen, eingefasste offene Mulde und erst danach tatsächliche gespeicherte Funde. Die Truhe bleibt offen sichtbar. [Echte Clips und Layoutprüfung](unity-chest-components.md).
+- Alle 20 Komponenten gemeinsam klein im Inventar und Materialtab, Bestand und antippbare Details/Synthese. Fehlerhafte Erweiterungsatlas-Ausschnitte korrigiert; kein weiterer Grafikstil hinzugefügt.
+- Eigene visuelle Sichtprüfung umfasst 320/390/430 px und DE/EN; reale Geräte-/Touch-/Lautsprecherabnahme bleibt separat. Historische Sprachfallbacks im Markt und allgemeine Shopdichte bleiben offen. Keine neue allgemeine Effekt-/Designrunde begonnen.
+
+## Meta-Visual-/Itemrunde · 23.10.2026
+
+Eigene Progressionsmotive ersetzen jetzt sämtliche falschen Item-/Hardwarezuordnungen in60INT-/24Axiomknoten. Netzwerkhöhe/Toolbar und identische88er-Sockel sind tatsächlich im Spiel geprüft. Sechs neue Itemgrafiken und sechs Mira-Ausdrücke verwenden gemeinsame Darstellung, ohne zusätzliche überlagerte Rahmen. Vier echte Truhenaufnahmen einschließlich Legendary-Ergebnis und tatsächlichem Audio liegen im Abschnittsbericht.
+
+Weiter getrennt offen: sehr dichte Knotentexte bei kleinster Zoomstufe benötigen gezieltes Zoomen/Details; historische Sprachfallbacks in Knoten-/Shop-/Companytexten; tatsächliche Company-Projekt-/Online-Meilensteininszenierung erst mit verifiziertem Anbieter und bestätigten Serverereignissen; weitere Shop-/Menüverdichtung und physische Lautsprecher-/Touchabnahme. Keine nicht ausgelösten Onlineeffekte als Videoerfolg behaupten.

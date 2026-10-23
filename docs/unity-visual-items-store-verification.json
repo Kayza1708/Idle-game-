@@ -1,0 +1,105 @@
+{
+  "scope": "Prepared isolated Unity states and local-only D1/Worker; no production database operations; no physical-device claim",
+  "unity": "6000.3.26f1",
+  "saveVersion": 23,
+  "sourceBase": "6ed588db",
+  "sourceCommit": "c15b51eb6496c92bd1058eac5ff2cce903e5684a",
+  "tests": {
+    "playmode": {
+      "result": "Passed",
+      "total": "94",
+      "passed": "94",
+      "failed": "0",
+      "duration": "404.388401"
+    },
+    "editmode": {
+      "result": "Passed",
+      "total": "142",
+      "passed": "142",
+      "failed": "0",
+      "duration": "129.3240735"
+    }
+  },
+  "vitest": {
+    "files": 147,
+    "passed": 1937,
+    "failed": 0
+  },
+  "backend": {
+    "nodePassed": 14,
+    "sqlitePassed": 31,
+    "python": "3.12.14",
+    "node": "22.23.3",
+    "wrangler": "4.152.0",
+    "migrationsAppliedLocally": 10,
+    "httpSmoke": "passed, including concurrent last allowance and confirmed deletion"
+  },
+  "referenceCases": {
+    "meta": 395,
+    "item": 588
+  },
+  "assetsSha256": {
+    "IdleIntelligence/Assets/IdleIntelligence/Art/meta-items-v1.png": "75c4a17a48278076b8123fcb3ec0315af3a512d6392b6cec2954d06012477a63",
+    "IdleIntelligence/Assets/IdleIntelligence/Art/mira-expressions-v1.png": "879a62c56510a247db3bde89b8b90bb1f3fc44839e337e7993b13ce89fc96a3e"
+  },
+  "media": {
+    "mira": {
+      "file": "media/unity-meta-visual/mira-runtime.mp4",
+      "durationSeconds": 6.013333333333334,
+      "audio": "actual Unity mix; no voiceover",
+      "frameTiming": "measured frame deltas, absolute timestamp origin normalized to zero only"
+    },
+    "chests": {
+      "file": "media/unity-meta-visual/four-chest-tiers.mp4",
+      "durationSeconds": 14.09,
+      "audio": "actual Unity mix",
+      "tiers": [
+        "common",
+        "rare",
+        "epic",
+        "legendary"
+      ]
+    },
+    "screenshots": 33,
+    "prepared": true,
+    "postEffects": false,
+    "retimed": false
+  },
+  "remaining": [
+    "commercial verified identity/progress binding",
+    "approved productive D1 rollout",
+    "external authenticated deletion resource",
+    "moderation/privacy/store/IARC review",
+    "historical localization fallbacks",
+    "physical-device performance/audio/haptics and OS accessibility acceptance",
+    "long-term balancing of explicitly new six items",
+    "unresolved source insight-archive acquisition"
+  ],
+  "native": {
+    "sourceCommit": "c15b51eb6496c92bd1058eac5ff2cce903e5684a",
+    "Unity": "6000.3.26f1",
+    "platform": "iOS Simulator ARM64",
+    "device": "iPhone 16 Pro simulator",
+    "runtime": "iOS 27.0",
+    "bundle": "com.kayza1708.idleintelligence.unity",
+    "installedAndLaunched": true,
+    "previousCommit": "7660b2351ec05230a6af381b2e921beddfb4fae6",
+    "previousSaveVersion": 22,
+    "saveVersion": 23,
+    "checksumValid": true,
+    "prepared": false,
+    "catalogEntries": 36,
+    "originalThirtyCatalogEntriesPreserved": true,
+    "inventoryEquipmentPermanentSlotsPreserved": true,
+    "exactVersion22OriginalPreserved": true,
+    "filesByteIdenticalAfterInstallBeforeLaunch": {
+      "unity": 15,
+      "capacitor": 15
+    },
+    "capacitorFilesUnchangedAfterUnityLaunch": 15,
+    "normalAppForceTerminated": false,
+    "backgroundSaveStep": "Normal Unity backgrounded by launching iOS Settings; all originals byte-verified immediately before installation",
+    "unityExportExit": 0,
+    "xcodeBuild": "BUILD SUCCEEDED"
+  }
+}

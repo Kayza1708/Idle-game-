@@ -13,12 +13,15 @@ namespace IdleIntelligence.PlayTests
 {
  public sealed class SeasonUITests
  {
+  void OpenMenuRoute(string route){game.GetComponent<IdleIntelligence.Runtime.GameMenu>().Open();Click("Menu-"+route);}
+
+
   string dir;GameRuntime game;
   [UnitySetUp]public IEnumerator Setup(){dir=Path.Combine(Path.GetTempPath(),"unity-season-ui-"+Guid.NewGuid());Directory.CreateDirectory(dir);GameRuntime.SavePathOverride=Path.Combine(dir,"save.json");yield return SceneManager.LoadSceneAsync("IdleIntelligence");yield return null;game=UnityEngine.Object.FindFirstObjectByType<GameRuntime>();}
   [UnityTearDown]public IEnumerator Cleanup(){if(game!=null)UnityEngine.Object.Destroy(game.gameObject);yield return null;GameRuntime.SavePathOverride=null;Directory.Delete(dir,true);}
   static Button B(string name){var b=GameObject.Find(name)?.GetComponent<Button>();Assert.That(b,Is.Not.Null,name);return b;}
   static void Click(string name){var b=B(name);Assert.That(b.interactable,Is.True,name);b.onClick.Invoke();}
-  IEnumerator Open(){Click("ResearchTab");yield return null;Click("SeasonAccess");yield return null;}
+  IEnumerator Open(){Click("ResearchTab");yield return null;OpenMenuRoute("seasons");yield return null;}
   void Prepare(bool premium=false){Debug.Log("PREPARED_SEASON_UI: XP / optional entitlement fixture only; no SDK purchase or natural acquisition claim");game.Act(s=>{var n=s.Copy();n.Missions.season.xp=50000;if(premium)n.Rewards.owned=new[]{SeasonRules.Product(n.Missions.season.id)};return n;});}
   void ScrollTo(string name){Canvas.ForceUpdateCanvases();var scroll=game.Content.GetComponentInParent<ScrollRect>();var target=GameObject.Find(name).GetComponent<RectTransform>();var content=(RectTransform)game.Content;float y=-content.InverseTransformPoint(target.TransformPoint(target.rect.center)).y;scroll.verticalNormalizedPosition=Mathf.Clamp01(1-(y-scroll.viewport.rect.height*.3f)/Math.Max(1,content.rect.height-scroll.viewport.rect.height));Canvas.ForceUpdateCanvases();}
   [UnityTest]public IEnumerator OriginalFreeRewardsPortraitsAndEarnedChestsAreReachableAndSavedOnce()
