@@ -206,3 +206,15 @@ Die obigen älteren Zahlen/Teilberichte sind historische Nachweise. Aktueller Co
 Zum manuellen Test **`IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`** in **6000.3.26f1** öffnen und Play bei **390×844** starten. Bei neuer Kampagne zuerst in Mira einen gültigen Namen wählen und den Prolog mit **Weiter** durchlaufen. Die Führung zeigt die nächsten tatsächlichen Ziele: Tapfläche, Taschenrechner, erstes Qualitätstraining, erste Datenerzeugung. **Forschung → Mira/Story** öffnet Kapitel, Replay, Skip/Resume und Zielnavigation. **Forschung → Einstellungen** bietet Sprache/Audio/Bewegung und den ausdrücklich bestätigten Neustart mit Originalkopie; keine Save-Dateien löschen. **Forschung → Spielstände/Berichte** führt zu Importprüfung, Export, Recovery, Rückkehrarchiv und gemessenen Run-/Sitzungsberichten. Ein vorhandener Save setzt seinen gespeicherten Stand fort.
 
 Aktuelles lokales Appbundle: `/tmp/IdleIntelligence-functional-final-20261021.app`. Der automatische Nachweis lief mit explizitem temporärem Save; normales Öffnen verwendet den regulären nativen Spielstand. Echte Mobilgeräte und Produktionsanbieter bleiben separat offen.
+
+## Simulator-Nachprüfung vom 23.10.2026
+
+Die gezielte Hauptansichtsreparatur verwendet weiter dieselbe Startszene und echte Systeme. Der kompakte Ressourcenheader enthält Credits/Daten/Compute/Gems und das Hamburger-Menü. Dort bleiben Einstellungen, manuelles Speichern, Mira fortsetzen, Verwaltung und Berichte erreichbar. Unter Labor/Overdrive/Modell folgt die Hardwarewahl ×1/×10/MAX mit tatsächlichem Gesamtpreis; beim frischen Start passen ohne Dialog mindestens drei vollständige Zeilen in 390×846.
+
+Zum Nachspielen: isolierten frischen Save verwenden, Namen bestätigen, Miras Seiten mit Weiter lesen, am Fingerziel tippen, ersten Taschenrechner kaufen, Qualitätstraining starten und Datenerzeugung erforschen. Forschungsstart bei belegtem Labor reiht gemäß bestehender Regeln ein; Training zeigt die freigeschaltete T03-Queue weiter. Die natürlich erscheinende Drohne direkt am bewegten Motiv antippen. Werbung bleibt unverfügbar. Im Menü Führung überspringen/fortsetzen und Sprache wechseln; danach speichern und neu starten. Niemals dafür einen vorhandenen persönlichen Save löschen.
+
+[Reparaturbericht mit echten Bildern, Profilwerten und Grenzen](unity-iphone-repair.md). Simulatornachweise ersetzen keine Tastatur-/Touch-/60-fps-Abnahme auf einem physischen iPhone.
+
+## Truhen und Komponentenübersicht · 23.10.2026
+
+**Items → Inventar** zeigt jetzt alle 20 Komponenten als vier kompakte Reihen oberhalb des Modells. Nullbestände bleiben sichtbar. Antippen öffnet Namen, Originalgrafik, Bestand und die vorhandene Synthese mit tatsächlichen Kosten. **Material** verwendet dasselbe Raster. Im **Markt** öffnet sich eine erworbene Truhe am festen Scharnier, bleibt offen und lässt erst danach ihre tatsächlich gespeicherten Funde heraussteigen. Kürzen/Schließen vergeben nichts. [Prüfbericht und echte Vorher-/Nachher-Clips](unity-chest-components.md). Vorbereitete Aufnahmebestände sind ausdrücklich getrennt von persönlichen Saves.

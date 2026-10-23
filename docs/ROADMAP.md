@@ -1,5 +1,9 @@
 # Idle Intelligence – aktueller Stand
 
+## Truhenscharnier und Komponentenübersicht · 23.10.2026
+
+Mechanisch befestigter Deckel mit sichtbarer Innenseite und offener Truhe vor der Beuteenthüllung; alle 20 Komponenten als gemeinsames kompaktes Inventarraster. Originalicons anhand der TS-Atlaszuordnungen korrigiert. [Umsetzung, echte Vorher-/Nachher-Clips mit Unity-Audio und Prüfung](unity-chest-components.md). 139/139 EditMode, abschließend 89/89 PlayMode und 1.902 Vitest bestanden; keine pauschale Geräte-/Performancefreigabe.
+
 ## Gezielte iPhone-Testreparatur · 23.10.2026
 
 Native Unity-Profiler-Baseline im **iPhone-16-Pro-Simulator** aufgenommen. CPU-/GC-/Save-Engpässe korrigiert; Original-Mira mit bedienbarer Führung, echte Drohnen-Hitfläche und gemeinsame Trainings-/Forschungskarten implementiert. Keine physische 60-fps-Abnahme behauptet. Prüfstand, Messmethode, gespeicherte Transaktionen und noch laufende Endabnahme: [gezielter Reparaturbericht](unity-iphone-repair.md). Folge-Draft #154, nicht mergen/veröffentlichen.

@@ -1,5 +1,9 @@
 # Nächste Schritte · 20.10.2026
 
+## Truhenscharnier und Komponentenübersicht · 23.10.2026
+
+Mechanisch befestigter Deckel mit sichtbarer Innenseite und offener Truhe vor der Beuteenthüllung; alle 20 Komponenten als gemeinsames kompaktes Inventarraster. Originalicons anhand der TS-Atlaszuordnungen korrigiert. [Umsetzung, echte Vorher-/Nachher-Clips mit Unity-Audio und Prüfung](unity-chest-components.md). 139/139 EditMode, abschließend 89/89 PlayMode und 1.902 Vitest bestanden; keine pauschale Geräte-/Performancefreigabe.
+
 ## Gezielte iPhone-Testreparatur · 23.10.2026
 
 Native Unity-Profiler-Baseline im **iPhone-16-Pro-Simulator** aufgenommen. CPU-/GC-/Save-Engpässe korrigiert; Original-Mira mit bedienbarer Führung, echte Drohnen-Hitfläche und gemeinsame Trainings-/Forschungskarten implementiert. Keine physische 60-fps-Abnahme behauptet. Prüfstand, Messmethode, gespeicherte Transaktionen und noch laufende Endabnahme: [gezielter Reparaturbericht](unity-iphone-repair.md). Folge-Draft #154, nicht mergen/veröffentlichen.
@@ -7,7 +11,7 @@ Native Unity-Profiler-Baseline im **iPhone-16-Pro-Simulator** aufgenommen. CPU-/
 
 ## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
 
-Installierter und gestarteter Unity-Spielcode: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
+Historischer installierter Unity-Spielcode vor der Hauptansichtsreparatur: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
 
 Aktueller lokaler iOS-Weg und Prüfstand: [Unity auf iPhone-16-Pro-Simulator](unity-ios-local.md). Separate Unity-App und neuer Buildordner; Capacitor-`ios/`, ursprüngliche App und Saves bleiben erhalten. Company-Onlinezugang und echte native Integrationen sind weiterhin gesondert offen. Die folgende ältere Aufgabenhistorie ist keine Aussage, dass alle damaligen Zwischenlücken heute noch bestehen; maßgeblich sind funktionaler Audit und aktueller Plattformbericht.
 
