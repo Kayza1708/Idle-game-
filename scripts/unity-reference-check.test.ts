@@ -1,0 +1,4 @@
+import {it,expect} from 'vitest';import {referenceDifferences} from './unity-reference-check';
+const number=(v:number)=>({m:v,e:0,terms:null});
+it('allows only binary64-scale drift in computed INT entitlement',()=>{const expected={prestige:{entitlement:number(1)}};expect(referenceDifferences(expected,{prestige:{entitlement:number(1+Number.EPSILON)}})).toEqual([]);expect(referenceDifferences(expected,{prestige:{entitlement:number(1+1e-10)}})).not.toEqual([]);});
+it('keeps balances, payments, awarded INT, IDs and action sequences exact',()=>{for(const key of ['credits','data','cycleINT','unspent','spent'])expect(referenceDifferences({prestige:{[key]:number(1)}},{prestige:{[key]:number(1+Number.EPSILON)}})).not.toEqual([]);expect(referenceDifferences({actions:[{kind:'buy',at:1}]},{actions:[{kind:'buy',at:2}]})).not.toEqual([]);expect(referenceDifferences({prestige:{entitlement:number(1)}},{prestige:{entitlement:{m:1,e:0}}})).not.toEqual([]);});
