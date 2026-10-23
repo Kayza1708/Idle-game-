@@ -135,3 +135,9 @@ Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md
 
 ### Laufende Hauptansichts-Reparatur (23.10.2026)
 Kompakter Ressourcen-/Menükopf, Shell-eigener Mira-Dock, echter Tutorialfinger, verdichtete Hardware und gemeinsame Lernkarten sind im Folge-Draft #154 in Arbeit. Nächste verbindliche Abnahmen: vollständiger finaler PlayMode-Lauf, nativer Echtzeitweg mit Finger/Drop/Reload, Nachher-Profil inklusive Save-Untermarkern. Simulator ist kein physischer 60-fps-Nachweis. Prüfstand: `unity-iphone-repair.md`.
+
+### Nach dem Meta-Visual-/Item-/Handelsabschnitt · 23.10.2026
+
+Die geprüften gemeinsamen Bausteine stehen in `unity-visual-items-store.md` und dessen JSON-Nachweis;142EditMode/94PlayMode und1937Webtests sind grün. Die sechs neuen Items sind zusätzliche autorisierte Inhalte, alte Preise/Claims bleiben erhalten. Save23 erweitert30→36 ohne Originalverlust. Der lokale echte Worker bestätigt5/Tag samt Konkurrenzschutz und Kontolöschung; **kein automatischer Produktionsrollout**.
+
+Nächste getrennte Abnahmen: verifizierte Native-Identität/Fortschrittsbindung und Online-Entitlements, freigegebener D1-Rollout, externer authentifizierter Löschweg und Moderationsbetrieb, juristische Store-/Datenschutz-/IARC-Angaben, Langzeitbalance der neuen Items, historische Sprachfallbacks sowie physische Touch-/Lautsprecher-/Haptik-/Wärme-/60-fps-Prüfung. Der Erkenntnisarchiv-Erwerb bleibt ein dokumentiertes Quellproblem. Keine pauschale Aussage „kommerziell fertig“ oder „gesamter Rewrite abgenommen“.

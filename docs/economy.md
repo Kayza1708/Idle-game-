@@ -723,3 +723,24 @@ Keine Balanceänderung und keine neuen Formeln. `MetaBalance.g.cs` übernimmt de
 ### Gumball-Tickets – 22.10.2026
 
 Zusätzliche, lokale Belohnungswährung (nicht ungeprüft serverseitig transferierbar) für **eine normale Ziehung pro Gutschein**. Kein Gem-Abzug, kein Ad-Verbrauch, keine zusätzliche Chance auf besondere Gegenstände beim Ziehen. Unabhängige Bonuschance in Common/Rare/Epic/Legendary-Truhen: 5%/10%/20%/30%, tägliche Bonusbox 0,25%. 1 garantierter Gutschein Free Season Level 30, 1 zusätzlicher Premium Season Level 40; beide auf die bestehenden Rewards aufgesetzt. Wallet-Grenze: 999 verfügbare Tickets. Quelle: `BALANCE.gumballVouchers` in `src/economy.ts`. Alle Werte vor Produktion anhand echter Tests und Loot-Inflationssimulation überprüfen. Token sind lokal und dürfen nicht zu Cloudflare-Trades/Gems gemintet werden.
+
+## Beauftragtes Online-Handelslimit · 23.10.2026
+
+`BALANCE.companyTradeDailyLimit = 5`: fünf abgeschlossene Spielertransaktionen je Spieler und UTC-Kalendertag, für beide Teilnehmer gemeinsam über Warenhandel, Gutscheinhandel und Geschenke. Offene/abgelehnte/stornierte/abgelaufene Angebote verbrauchen nichts. Migration 0009 setzt das Limit atomar mit Escrow/Transfer durch; das ist eine ausdrücklich beauftragte neue Regel, keine Änderung bestehender Itempreise. Keine Produktionsmigration ausgeführt.
+
+## Beauftragte Dark-Lab-/Axiom-Items · 23.10.2026
+
+Sechs zusätzliche IDs **hinter** den bestehenden 30; deren Werte bleiben erhalten. `lateMetaItemCatalog` ist die einzige Balancequelle, einschließlich Rezepten und Primär-Caps:
+
+| ID | Zugang | Rezept: Fragmente / Daten | Neuer Verbraucher / Cap je Item |
+|---|---|---|---|
+| darklab-resonator | Geheimlabor | 32 / 2 Mio. | Erkenntnisrate +35% maximal |
+| model-echo-core | Geheimlabor; aktives Modell für Effekt | 48 / 4 Mio. | Bonusanteil Modellkern +25% maximal |
+| axiom-lattice | Geheimlabor und abgeschlossener Axiomreset | 80 / 12 Mio. | Axiomgewinn vor Abrunden +20% maximal |
+| cycle-observatory | Geheimlabor und abgeschlossener Axiomreset | 96 / 18 Mio. | Forschung +30% maximal × min(1,Axiomzyklen/5) |
+| entropy-sink | Geheimlabor | 64 / 8 Mio. | Compute +40% maximal × min(1,max(0,log10(unverbrauchte Erkenntnis))/6) |
+| mnemonic-anchor | Geheimlabor und drei erworbene Modelle | 72 / 10 Mio. | Training +35% maximal × min(1,Modellzahl/5) |
+
+Komponenten, Module, Sekundär-/Tertiärkanäle und Upgradeeffekte sind ebenfalls zentral definiert. Herstellung bleibt sofort, Common Lv.1; höhere Seltenheiten entstehen über Fusion und die vorhandenen freigeschalteten Zufallspools. Die Rezept-Rarität bezeichnet wie bisher den Kosten-/Arbeitsrang, keinen garantierten Herstellungsrang. Kein neuer Erwerbsweg für das weiterhin problematische Erkenntnisarchiv.
+
+Sammlungs-Achievements erhalten **zusätzliche** Endstufen bei36 Itemtypen bzw.34 kostenpflichtigen Bauplänen. Die bisherigen30-/28-Schwellen und alle alten Claims bleiben unverändert. Die bestehende Reward-Indexbegrenzung verwendet dafür die schon vorhandene höchste Stufenbelohnung; keine alten Belohnungen werden erneut gewährt.

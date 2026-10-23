@@ -31,7 +31,7 @@ namespace IdleIntelligence.Editor
             var atlas=Texture("ItemAtlas");var source=File.ReadAllText(Path.GetFullPath("../src/GameArt.tsx"));var sprites=new Sprite[ItemBalance.Items.Length];
             for(int n=0;n<sprites.Length;n++)
             {
-                string id=ItemBalance.Items[n].Id;var match=Regex.Match(source,"['\"]?"+id+"['\"]?:\\[(\\d+),(\\d+),(\\d+),(\\d+)\\]");if(!match.Success)throw new Exception("Missing item art "+id);
+                string id=ItemBalance.Items[n].Id;if(MetaItemArtBuilder.IsMeta(id)){sprites[n]=MetaItemArtBuilder.SpriteFor(id);if(sprites[n]==null)throw new System.InvalidOperationException("Run MetaItemArtBuilder.Build before rebuilding workshop");continue;}var match=Regex.Match(source,"['\"]?"+id+"['\"]?:\\[(\\d+),(\\d+),(\\d+),(\\d+)\\]");if(!match.Success)throw new Exception("Missing item art "+id);
                 int x=int.Parse(match.Groups[1].Value),y=int.Parse(match.Groups[2].Value),w=int.Parse(match.Groups[3].Value),h=int.Parse(match.Groups[4].Value);var sprite=Sprite.Create(atlas,new Rect(x,atlas.height-y-h,w,h),new Vector2(.5f,.5f),100);sprite.name=id;
                 var clip=Regex.Match(source,"['\"]"+id+"['\"]:'(M[^']+)'" );if(clip.Success){var nums=Regex.Matches(clip.Groups[1].Value,@"-?\d+(?:\.\d+)?").Cast<Match>().Select(m=>float.Parse(m.Value,System.Globalization.CultureInfo.InvariantCulture)).ToArray();var points=Enumerable.Range(0,nums.Length/2).Select(i=>new Vector2((nums[i*2]-x-w*.5f)/100,(h*.5f-nums[i*2+1]+y)/100)).ToArray();var triangles=Triangulate(points);if(triangles.Length>0)sprite.OverrideGeometry(points,triangles);}
                 sprites[n]=SaveSprite(sprite,Root+"Art/item-"+id+".asset");

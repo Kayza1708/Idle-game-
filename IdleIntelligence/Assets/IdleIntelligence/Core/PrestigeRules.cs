@@ -39,7 +39,7 @@ namespace IdleIntelligence.Core
             if(p.lab&&!p.labSeed){p.knowledge=ScientificNumber.FromData(p.knowledge).Add(ScientificNumber.From(V("labSeed"))).ToData();p.labSeed=true;}
         }
         public static ScientificNumber KnowledgeRate(GameState s)
-        {if(!s.Prestige.lab)return ScientificNumber.Zero;var floor=ScientificNumber.FromData(s.Prestige.best).Times(V("knowledgeFloor"));return (s.Prestige.Cycle.CompareTo(floor)>0?s.Prestige.Cycle:floor).Pow(.5).Times(V("knowledgeRate")*F(s,"I08")).Multiply(ScientificNumber.FromData(s.Meta.total).Add(ScientificNumber.One).Pow(V("knowledgeAxiomPower")*MetaRules.Level(s,"D01")));}
+        {if(!s.Prestige.lab)return ScientificNumber.Zero;var floor=ScientificNumber.FromData(s.Prestige.best).Times(V("knowledgeFloor"));return (s.Prestige.Cycle.CompareTo(floor)>0?s.Prestige.Cycle:floor).Pow(.5).Times(V("knowledgeRate")*F(s,"I08")*(1+Workshop.Device(s,"insight"))).Multiply(ScientificNumber.FromData(s.Meta.total).Add(ScientificNumber.One).Pow(V("knowledgeAxiomPower")*MetaRules.Level(s,"D01")));}
         public static GameState Reset(GameState state,long expectedRevision=-1)
         {
             if(expectedRevision>=0&&state.Prestige.revision!=expectedRevision)return state;var gain=Claim(state);if(gain.CompareTo(ScientificNumber.One)<0||ChallengeRules.Active(state)&&gain.CompareTo(ChallengeRules.Current(state).MinimumINT)<0)return state;

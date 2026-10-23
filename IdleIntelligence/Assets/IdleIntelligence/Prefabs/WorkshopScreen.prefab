@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d50e1f093f6fe41838eae995876f4e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: IdleIntelligence.Runtime::IdleIntelligence.Runtime.WorkshopUI
+  ComponentPanel: {fileID: 0}
   DetailName: {fileID: 5384094484367367913}
   DetailMeta: {fileID: 119295298264340045}
   CostView: {fileID: 2179204697517801456}
@@ -436,6 +437,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: af46940fc18eb40e788314fc39b4f700, type: 2}
   - {fileID: 21300000, guid: 322f285ad28374e0889b63d5377aed6a, type: 2}
   - {fileID: 21300000, guid: d61b807aaf1ee451b993f68d4f678d2d, type: 2}
+  - {fileID: 21300000, guid: 748d16027a4894653a7c6a660956bb5c, type: 2}
+  - {fileID: 21300000, guid: e3caf9e524a05416a9dd0ed1c9af9d60, type: 2}
+  - {fileID: 21300000, guid: 98df6f730cc484f5a9a30a2a7c236e7c, type: 2}
+  - {fileID: 21300000, guid: 4091bb008269b4b0ebd857f54131f471, type: 2}
+  - {fileID: 21300000, guid: 784671fc8db5748e2ba0845ee761eec8, type: 2}
+  - {fileID: 21300000, guid: 69376b6a7e463414f93ec8dee6bc7f4c, type: 2}
   ComponentSprites:
   - {fileID: 21300000, guid: 470cfbe3bbf894649a2038ed2673ad75, type: 2}
   - {fileID: 21300000, guid: 1c4048719a71a45308a6e57b826909ab, type: 2}

@@ -8,3 +8,7 @@ package-lock.backup.json
 
 # Local native exports, profiler captures and private save backups
 /Builds/
+
+# Isolated local Worker tooling and Python test bytecode
+/cloudflare/company-api/.wrangler/
+/cloudflare/company-api/test/__pycache__/

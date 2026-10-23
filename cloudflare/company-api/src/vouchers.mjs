@@ -1,3 +1,4 @@
+import {tradeLimit} from './trade-limits.mjs';
 // Cloudflare D1 owns these balances. A local Unity save is NEVER an issuer.
 export function voucherPayload(value,max=10){
  if(!Number.isSafeInteger(value)||value<1||value>max)throw new RangeError('invalid_voucher_quantity');
@@ -24,7 +25,7 @@ export async function vouchersRoute(ctx){
     db.prepare('SELECT tier FROM player_voucher_milestones WHERE player_id=? ORDER BY tier').bind(player.id).all()
   ]);
   return reply({verifiedBalance:wallet?.balance??0,claimSources:milestones.results.map(m=>m.tier),
-    localVouchersTransferable:false,note:'This balance excludes unverified local chest and Season vouchers'});
+    tradeLimit:await tradeLimit(db,player.id,now),localVouchersTransferable:false,note:'This balance excludes unverified local chest and Season vouchers'});
  }
  if(method==='POST'&&path==='/v1/vouchers/gifts'){
   const m=await requiredMember(db,player.id),data=await payload(request);
@@ -32,9 +33,9 @@ export async function vouchersRoute(ctx){
   try{quantity=voucherPayload(data.quantity,5);id=voucherRequestId(data.requestId);}
   catch(e){throw new ApiError(400,e.message);}
   if(!uuid.test(data.recipientId)||data.recipientId===player.id)throw new ApiError(400,'invalid_recipient');
-  const prior=await db.prepare('SELECT id FROM company_voucher_gifts WHERE id=? AND sender_id=?')
+  const prior=await db.prepare('SELECT id,recipient_id,quantity FROM company_voucher_gifts WHERE id=? AND sender_id=?')
     .bind(id,player.id).first();
-  if(prior)return reply({transferId:id,alreadyProcessed:true});
+  if(prior){if(prior.recipient_id!==data.recipientId||prior.quantity!==quantity)throw new ApiError(409,'voucher_receipt_collision');return reply({transferId:id,alreadyProcessed:true});}
   await db.prepare(
     'INSERT INTO company_voucher_gifts(id,company_id,sender_id,recipient_id,quantity,created_at) VALUES(?,?,?,?,?,?)'
   ).bind(id,m.company_id,player.id,data.recipientId,quantity,now).run();
@@ -47,7 +48,7 @@ export async function vouchersRoute(ctx){
     "FROM company_voucher_offers WHERE company_id=? AND status='open' AND expires_at>? "+
     "ORDER BY created_at DESC LIMIT 40"
   ).bind(m.company_id,now).all();
-  return reply({offers:results.results});
+  return reply({offers:results.results,tradeLimit:await tradeLimit(db,player.id,now)});
  }
  if(method==='POST'&&path==='/v1/vouchers/offers'){
   const m=await requiredMember(db,player.id),data=await payload(request);

@@ -358,6 +358,13 @@ const rarities:Record<Rarity,L>={
 export const rarityText=(id:Rarity,language:Language)=>pick(rarities[id],language);
 
 const itemNames:Partial<Record<ItemTypeId,L>>={
+ 'darklab-resonator':l("Dark-lab resonator","Geheimlabor-Resonator","Resonador del laboratorio secreto","Résonateur du laboratoire secret","Ressonador do laboratório secreto","Risonatore del laboratorio segreto","Rezonator tajnego laboratorium"),
+ 'model-echo-core':l("Model echo core","Modell-Echokern","Núcleo de eco del modelo","Cœur écho du modèle","Núcleo de eco do modelo","Nucleo eco del modello","Rdzeń echa modelu"),
+ 'axiom-lattice':l("Axiom lattice","Axiomgitter","Red de axiomas","Réseau d’axiomes","Malha de axiomas","Reticolo di assiomi","Sieć aksjomatów"),
+ 'cycle-observatory':l("Cycle observatory","Zyklus-Observatorium","Observatorio de ciclos","Observatoire des cycles","Observatório de ciclos","Osservatorio dei cicli","Obserwatorium cykli"),
+ 'entropy-sink':l("Entropy sink","Entropiesenke","Sumidero de entropía","Puits d’entropie","Dissipador de entropia","Pozzo di entropia","Pochłaniacz entropii"),
+ 'mnemonic-anchor':l("Mnemonic anchor","Mnemonischer Anker","Ancla mnemónica","Ancre mnémonique","Âncora mnemónica","Ancora mnemonica","Kotwica mnemoniczna"),
+
  'insight-archive':l('Insight Archive','Erkenntnisarchiv','','','','',''),
  'impulse-relay':l('Impulse Relay','Impulsrelais','Relé de impulso','Relais d’impulsion','Relé de impulso','Relè d’impulso','Przekaźnik impulsowy'),
  'quantum-chip':l('Quantum Chip','Quantenchip','Chip cuántico','Puce quantique','Chip quântico','Chip quantistico','Chip kwantowy'),
@@ -374,6 +381,13 @@ const itemNames:Partial<Record<ItemTypeId,L>>={
 export const itemText=(id:ItemTypeId,language:Language)=>itemNames[id]?pick(itemNames[id]!,language):language==='de'?BALANCE.extendedItems[id as keyof typeof BALANCE.extendedItems].name:BALANCE.extendedItems[id as keyof typeof BALANCE.extendedItems].en;
 
 const effects:Partial<Record<ItemEffect,L>>={
+ 'insight':l("Knowledge production","Erkenntnisproduktion","Producción de conocimiento","Production de connaissances","Produção de conhecimento","Produzione di conoscenza","Produkcja wiedzy"),
+ 'modelEcho':l("Active model revenue bonus","Revenue-Bonus des aktiven Modells","Bono de ingresos del modelo activo","Bonus de revenus du modèle actif","Bónus de receita do modelo ativo","Bonus ricavi del modello attivo","Premia przychodów aktywnego modelu"),
+ 'axiomResonance':l("Axiom yield","Axiomgewinn","Ganancia de axiomas","Gain d’axiomes","Ganho de axiomas","Guadagno di assiomi","Zysk aksjomatów"),
+ 'cycleResearch':l("Research per axiom cycle","Forschung je Axiomzyklus","Investigación por ciclo de axiomas","Recherche par cycle d’axiomes","Pesquisa por ciclo de axiomas","Ricerca per ciclo di assiomi","Badania na cykl aksjomatów"),
+ 'knowledgeCompute':l("Compute from unspent knowledge","Compute aus unverbrauchter Erkenntnis","Cómputo del conocimiento sin gastar","Calcul issu des connaissances non dépensées","Compute do conhecimento não gasto","Compute dalla conoscenza non spesa","Obliczenia z niewydanej wiedzy"),
+ 'modelTraining':l("Training per acquired model","Training je erworbenem Modell","Entrenamiento por modelo adquirido","Entraînement par modèle acquis","Treino por modelo adquirido","Addestramento per modello acquisito","Trening na zdobyty model"),
+
  'int-yield':l('INT weighting for future eligible income','INT-Gewichtung für zukünftige berechtigte Einnahmen','','','','',''),
  relay:l('Manual tap relay','Relais für manuelle Taps','Cada 10.º toque pagado: +2 segundos de créditos','Chaque 10e impulsion payée : +2 secondes de crédits','Cada 10.º toque pago: +2 segundos de créditos','Ogni 10° tap pagato: +2 secondi di crediti','Co 10. płatne kliknięcie: +2 sekundy kredytów'),
  compute:l('Compute','Compute','Cómputo','Calcul','Computação','Compute','Obliczenia'),

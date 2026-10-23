@@ -1,3 +1,4 @@
+import {tradeLimit} from './trade-limits.mjs';
 import {BADGE_FAMILIES,TIERS,PROFILE_FRAMES,PRIVACY_KEYS,validatePrivacy,validateShowcase,maySetRole,mayKick,validateTradePart} from './social-catalog.mjs';
 
 // Every route is authenticated by the parent Worker. This module does not implement chat/DMs.
@@ -284,10 +285,11 @@ export async function socialRoute(ctx) {
    return reply({revokedInvitationId:revoked.id});
  }
  // Do not introduce any messaging route. Trading uses strict fixed fields, never free-form text.
+ if(method==='GET'&&path==='/v1/trades/limits')return reply({tradeLimit:await tradeLimit(db,player.id,now)});
  if(method==='GET'&&path==='/v1/trades/inventory'){
    const assets=await db.prepare('SELECT kind,asset_id,quantity FROM trade_inventory WHERE player_id=? AND quantity>0 ORDER BY kind,asset_id LIMIT 200')
      .bind(player.id).all();
-   return reply({assets:assets.results,source:'server_issued_only'});
+   return reply({assets:assets.results,source:'server_issued_only',tradeLimit:await tradeLimit(db,player.id,now)});
  }
  if(method==='GET'&&path==='/v1/trades/offers'){
    const self=await member();
@@ -297,7 +299,7 @@ export async function socialRoute(ctx) {
      "JOIN players p ON p.id=o.seller_id WHERE o.company_id=? AND o.status='open' AND o.expires_at>? "+
      "ORDER BY o.created_at DESC LIMIT 50"
    ).bind(self.company_id,now).all();
-   return reply({offers:results.results});
+   return reply({offers:results.results,tradeLimit:await tradeLimit(db,player.id,now)});
  }
  if(method==='POST'&&path==='/v1/trades/offers'){
    const self=await member();

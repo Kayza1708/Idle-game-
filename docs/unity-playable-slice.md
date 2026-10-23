@@ -218,3 +218,15 @@ Zum Nachspielen: isolierten frischen Save verwenden, Namen bestätigen, Miras Se
 ## Truhen und Komponentenübersicht · 23.10.2026
 
 **Items → Inventar** zeigt jetzt alle 20 Komponenten als vier kompakte Reihen oberhalb des Modells. Nullbestände bleiben sichtbar. Antippen öffnet Namen, Originalgrafik, Bestand und die vorhandene Synthese mit tatsächlichen Kosten. **Material** verwendet dasselbe Raster. Im **Markt** öffnet sich eine erworbene Truhe am festen Scharnier, bleibt offen und lässt erst danach ihre tatsächlich gespeicherten Funde heraussteigen. Kürzen/Schließen vergeben nichts. [Prüfbericht und echte Vorher-/Nachher-Clips](unity-chest-components.md). Vorbereitete Aufnahmebestände sind ausdrücklich getrennt von persönlichen Saves.
+
+## Neue Meta-Items, Mira und Progressionsgrafiken · 23.10.2026
+
+Weiter dieselbe Szene `Assets/IdleIntelligence/Scenes/IdleIntelligence.unity` öffnen und Play drücken. Normale Saves werden automatisch unter Originalschutz auf23 erweitert. Keine vorbereiteten Ressourcen in normale Saves importieren.
+
+- **Items → Inventar:** alle20 Komponenten gemeinsam; sechs gleich große Hauptsockel um das Modell, kompakte Schlösser, antippbare Details. Nach unten scrollen für Inventar/Extras und „Aktive Ausrüstungsboni“. Ein Item antippen: tatsächliche Wirkung/Vergleich/Kosten, Ausrüsten oder Ablegen; bestehende Fusion und Upgrades bleiben erreichbar.
+- **Items → Baupläne:** die sechs neuen Typen benötigen das echte Geheimlabor, bei Axiomgitter/Observatorium zusätzlich einen abgeschlossenen Axiomreset, beim Anker drei erworbene Modelle. Kaufen/Herstellen bleibt kostenpflichtig und sofort. Jede neue ID hat eine eigene Grafik; höhere Seltenheiten entstehen wie bisher über Drops/Fusion.
+- **INT:** neue eigene Progressionssymbole, kompaktere Werkzeuge, Ziehen/Pinch. Verbindungen erzeugen keine Kaufvoraussetzungen. Axiome wechseln über den vorhandenen Freischaltweg. Ein real gespeicherter Knotenkauf erhält kurzes örtliches Feedback.
+- **Menü → Mira/Dialoge** bzw. echte Storyereignisse: animiertes Portrait, Titel/Textanfänge statt technischer Archiv-IDs. Bei reduzierter Bewegung/Effekte aus statisch. Originale Tutorials und deren Fortschritte werden nicht zurückgesetzt.
+- **Company:** Warenhandel, Gutscheine, Datenschutz/Konto und feste Melde-/Sperraktionen. Ohne konfigurierte verifizierte Anbindung erscheint ein erklärter Fehler; kein lokaler Spielstand wird zum Onlinebestand. Kontolöschung zeigt vor der zweiten Bestätigung den genauen Onlineverlust und lokalen Erhalt. Das serverseitige5/Tag-Limit ist lokal geprüft, nicht automatisch produktiv ausgerollt.
+
+Für die reproduzierbaren vorbereiteten Aufnahmen nur die isolierten PlayMode-Fälle `MetaVisualSectionTests` verwenden. Sie setzen einen eigenen temporären Savepfad und kennzeichnen Ressourcen/Slot-/Axiomzustände ausdrücklich. Clips sind tatsächliches Unity-Rendering mit tatsächlichem Spielaudio, ohne nachträgliche Effekte oder Retiming.

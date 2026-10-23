@@ -1,3 +1,4 @@
+using IdleIntelligence.Core;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -20,15 +21,16 @@ namespace IdleIntelligence.Runtime
         [Serializable] sealed class PlayerRows
         {public PlayerRow[] players;public string ranking;}
         [Serializable] sealed class VoucherWallet
-        {public long verifiedBalance;public bool localVouchersTransferable;}
+        {public TradeLimit tradeLimit;public long verifiedBalance;public bool localVouchersTransferable;}
         [Serializable] sealed class InviteRow
         {public string id,company_id,company_name,company_tag;public long expires_at;}
         [Serializable] sealed class InviteRows
         {public InviteRow[] invitations;}
         [Serializable] sealed class TradeRow
-        {public string id,seller_id,want_kind,want_id;public long quantity,want_qty;public long expires_at;}
+        {public string id,seller_id,seller_name,give_kind,give_id,want_kind,want_id;public long quantity,give_qty,want_qty;public long expires_at;}
+        [Serializable] sealed class TradeLimit { public int used,limit; public long resetAt; }
         [Serializable] sealed class TradeRows
-        {public TradeRow[] offers;}
+        {public TradeLimit tradeLimit;public TradeRow[] offers;}
 
         GameRuntime game;
         CompanyApiClient api;
@@ -52,6 +54,8 @@ namespace IdleIntelligence.Runtime
             WorkshopUIFactory.Button("CompanyVouchers",nav,de?"Tickets":"Vouchers",LoadVouchers);
             WorkshopUIFactory.Button("CompanyInvites",nav,de?"Einladungen":"Invites",LoadInvitations);
             content=WorkshopUIFactory.Vertical("CompanyResults",transform).transform;
+            WorkshopUIFactory.Button("CompanyGoods",transform,de?"Warenhandel":"Goods trading",LoadGoods);
+            WorkshopUIFactory.Button("CompanyPrivacy",transform,de?"Datenschutz / Konto":"Privacy / account",ShowPrivacy);
             ShowGate();
             foreach(var text in GetComponentsInChildren<Text>())
                 if(text.name=="CompanySafeAuth"||text.name=="CompanyAccountPending")text.gameObject.AddComponent<ContentTextHeight>();
@@ -78,9 +82,9 @@ namespace IdleIntelligence.Runtime
                     game.State.Settings.language=="de"?"Online-Anbindung noch nicht eingerichtet. Company-Ranglisten und Handel benötigen den verifizierten Serverzugang.":"Online connection is not configured. Company rankings and trading require verified server access.",14,104);
             else LoadCompanies(false); // Public rankings do not require guest registration.
         }
-        bool Ready(bool sessionRequired)
+        bool Ready(bool sessionRequired,bool accountAction=false)
         {
-            if(game==null||!CompanyAccess.LocallyEligible(game.State)){ShowGate();return false;}
+            if(game==null||!accountAction&&!CompanyAccess.LocallyEligible(game.State)){ShowGate();return false;}
             if(api==null||!api.IsConfigured||(sessionRequired&&!api.HasSession)){
                 bool de=game.State.Settings.language=="de";
                 status.text=api==null||!api.IsConfigured?(de?"Online-Anbindung noch nicht eingerichtet.":"Online connection is not configured."):(de?"Onlinekonto noch nicht sicher verbunden. Offline-Fortschritt bleibt lokal.":"Online account is not verified. Offline progress remains local.");
@@ -88,14 +92,15 @@ namespace IdleIntelligence.Runtime
             }
             return true;
         }
-        void Run(Func<Action<long,string>,IEnumerator> request,Action<string> draw,bool sessionRequired=true)
+        void Run(Func<Action<long,string>,IEnumerator> request,Action<string> draw,bool sessionRequired=true,bool accountAction=false)
         {
-            if(!Ready(sessionRequired))return;
+            if(!Ready(sessionRequired,accountAction))return;
             int id=++pendingSequence;
             status.text="Lade Daten…";
             StartCoroutine(request((code,json)=>{
                 if(this==null||id!=pendingSequence)return;
                 if(code<200||code>=300){
+                    if(json.Contains("daily_trade_limit")){status.text=game.State.Settings.language=="de"?"Tageslimit erreicht: fünf abgeschlossene Handel pro Person. Reset 00:00 UTC.":"Daily limit reached: five completed trades per player. Resets 00:00 UTC.";return;}
                     status.text=code==403?"Zugang noch nicht serverseitig bestätigt.":code==401?
                         "Gastsitzung nicht verbunden oder abgelaufen.":"Online-Anfrage fehlgeschlagen · "+code;
                     return;
@@ -128,12 +133,13 @@ namespace IdleIntelligence.Runtime
         }
         void LoadPlayers()
         {
-            Run(api.PlayerLeaderboard,json=>{
+            Run(cb=>api.PlayerLeaderboard(cb),json=>{
                 var data=Parse<PlayerRows>(json);
                 WorkshopUIFactory.Clear(content);
                 Paragraph("SPIELER-RANGLISTE · Nur freiwillig öffentlich gemachte, servergeprüfte Company-RP.");
                 if(data?.players==null||data.players.Length==0){Paragraph("Noch keine öffentlichen Rangplätze.");return;}
                 foreach(var p in data.players){
+                    var playerId=p.id;WorkshopUIFactory.Button("ReportPlayer-"+playerId,content,"Melden / Blockieren",()=>Moderate("player",playerId));
                     Paragraph("#"+p.rank+" · "+p.name+" ["+p.company_tag+"] · "+p.rp+" RP",58);
                 }
             },false);
@@ -147,7 +153,7 @@ namespace IdleIntelligence.Runtime
                 Paragraph("COMPANIES FINDEN · Offene Beitritte gratis, geschlossene nur mit Einladung.");
                 if(data?.companies==null||data.companies.Length==0){Paragraph("Keine Company gefunden.");return;}
                 foreach(var row in data.companies){
-                    var companyId=row.id;
+                    var companyId=row.id;WorkshopUIFactory.Button("ReportCompany-"+companyId,content,"Company melden",()=>Moderate("company",companyId));
                     Paragraph(row.name+" ["+row.tag+"] · "+row.member_count+"/50 · "+
                         (row.join_policy=="apply"?"Bewerbung":row.join_policy=="invite"?"Einladung":"Offen"),65);
                     if(row.member_count>=50||row.join_policy=="invite")continue;
@@ -159,35 +165,47 @@ namespace IdleIntelligence.Runtime
                 }
             },false);
         }
+        [Serializable] sealed class OnlinePrivacy {public PrivacyValues privacy;}
+        [Serializable] sealed class PrivacyValues {public bool badges,playtime,maxCompute,prestiges,rank;public bool @int;}
+        [Serializable] sealed class BlockRow {public string blocked_id,display_name;}
+        [Serializable] sealed class BlockRows {public BlockRow[] blocked;}
+        void Moderate(string type,string id){WorkshopUIFactory.Clear(content);Paragraph("Meldung: feste Gründe, kein Chat. / Fixed report reasons, no chat.");foreach(var reason in new[]{"name","fraud","harassment","other"}){string code=reason;string label=reason=="name"?"Ungeeigneter Name":reason=="fraud"?"Betrug":reason=="harassment"?"Belästigung":"Sonstiger Missbrauch";WorkshopUIFactory.Button("SubmitReport-"+code,content,label,()=>Run(cb=>api.Report(type,id,code,cb),json=>{WorkshopUIFactory.Clear(content);Paragraph("Meldung übermittelt / Report received.");}));}if(type=="player")WorkshopUIFactory.Button("BlockPlayer",content,"Spieler blockieren",()=>Run(cb=>api.BlockPlayer(id,true,cb),json=>{WorkshopUIFactory.Clear(content);Paragraph("Blockiert: Einladungen und Handel sind gesperrt. / Blocked: invitations and trading disabled.");}));}
+        void ShowPrivacy(){WorkshopUIFactory.Clear(content);bool de=game.State.Settings.language=="de";Paragraph(de?"Online-Statistiken bleiben ohne ausdrückliche Freigabe privat. Keine lokalen Bestände hochladen.":"Online statistics stay private unless explicitly shared. Local inventories are never uploaded.",90);WorkshopUIFactory.Button("MakeProfilePrivate",content,de?"Alle Statistiken privat setzen":"Make all statistics private",()=>Run(cb=>api.UpdateProfilePrivacy("{\"badges\":false,\"playtime\":false,\"maxCompute\":false,\"prestiges\":false,\"int\":false,\"rank\":false}",cb),json=>{status.text=de?"Privat gespeichert.":"Privacy saved.";},true,true));WorkshopUIFactory.Button("ManageBlockedPlayers",content,de?"Blockierte Spieler":"Blocked players",()=>Run(cb=>api.BlockedPlayers(cb),json=>{var rows=Parse<BlockRows>(json);WorkshopUIFactory.Clear(content);foreach(var row in rows.blocked??Array.Empty<BlockRow>()){string id=row.blocked_id;WorkshopUIFactory.Button("Unblock-"+id,content,(row.display_name??id)+" · "+(de?"Freigeben":"Unblock"),()=>Run(cb=>api.BlockPlayer(id,false,cb),value=>ShowPrivacy(),true,true));}if(rows.blocked==null||rows.blocked.Length==0)Paragraph(de?"Keine blockierten Spieler.":"No blocked players.");},true,true));WorkshopUIFactory.Button("DeleteOnlineAccount",content,de?"Onlinekonto löschen…":"Delete online account…",()=>{WorkshopUIFactory.Clear(content);Paragraph(de?"Löscht dein Onlinekonto, Sitzungen und serverseitige Bestände endgültig. Eine bestehende Company geht an ein Mitglied über; eine allein geführte Company entfällt. Der lokale Spielstand bleibt erhalten.":"Permanently deletes the online account, sessions and server inventory. A Company passes to another member; a sole-member Company is removed. Your local save remains.",200);WorkshopUIFactory.Button("CancelAccountDeletion",content,de?"Abbrechen":"Cancel",ShowPrivacy);WorkshopUIFactory.Button("ConfirmAccountDeletion",content,de?"Onlinekonto endgültig löschen":"Permanently delete online account",()=>Run(cb=>api.DeleteOnlineAccount(cb),json=>{api.ClearSession();WorkshopUIFactory.Clear(content);Paragraph(de?"Onlinekonto gelöscht. Lokaler Spielstand erhalten.":"Online account deleted. Local save preserved.");},true,true));});}
         void LoadVouchers()
         {
-            Run(api.MyVerifiedVouchers,json=>{
+            Run(cb=>api.MyVerifiedVouchers(cb),json=>{
                 var data=Parse<VoucherWallet>(json);
                 WorkshopUIFactory.Clear(content);
                 Paragraph("GEPRÜFTE GUMBALL-GUTSCHEINE · "+data.verifiedBalance,78);
+                TradeAllowance(data.tradeLimit);
                 Paragraph("Die lokalen Gutschein-Funde aus Kisten/Seasons sind nicht automatisch auf andere Accounts übertragbar.",85);
                 WorkshopUIFactory.Button("CompanyVoucherOffers",content,"Angebote ansehen",LoadVoucherOffers);
             });
         }
+        void LoadGoods(){Run(cb=>api.CompanyTradeOffers(cb),json=>{var data=Parse<TradeRows>(json);WorkshopUIFactory.Clear(content);bool de=game.State.Settings.language=="de";TradeAllowance(data.tradeLimit);WorkshopUIFactory.Button("VerifiedInventory",content,de?"Verifizierte Bestände":"Verified inventory",()=>Run(cb=>api.MyTradeInventory(cb),raw=>{var inventory=Parse<GoodsInventory>(raw);WorkshopUIFactory.Clear(content);TradeAllowance(inventory.tradeLimit);foreach(var item in inventory.assets??Array.Empty<GoodsAsset>())Paragraph(item.quantity+" × "+SettingsRules.Text(game.State.Settings.language,(item.kind=="component"?"component:":"item:")+item.asset_id));if(inventory.assets==null||inventory.assets.Length==0)Paragraph(de?"Keine serverseitig verifizierten Waren. Lokale Funde sind nicht übertragbar.":"No server-verified goods. Local finds cannot be transferred.",80);}));foreach(var row in data.offers??Array.Empty<TradeRow>()){string id=row.id;Paragraph(row.seller_name+": "+row.give_qty+" × "+row.give_id+" → "+row.want_qty+" × "+row.want_id,70);var accept=WorkshopUIFactory.Button("GoodsAccept-"+id,content,de?"Annehmen":"Accept",()=>Run(cb=>api.AcceptTrade(id,cb),value=>LoadGoods()));accept.interactable=data.tradeLimit!=null&&data.tradeLimit.used<data.tradeLimit.limit;}if(data.offers==null||data.offers.Length==0)Paragraph(de?"Keine offenen Warenangebote.":"No open goods offers.");});}
+        [Serializable] sealed class GoodsAsset{public string kind,asset_id;public long quantity;}
+        [Serializable] sealed class GoodsInventory{public TradeLimit tradeLimit;public GoodsAsset[] assets;}
+        void TradeAllowance(TradeLimit data) { if(data==null){Paragraph("Handelslimit wird vom Server geprüft.");return;} bool de=game.State.Settings.language=="de";Paragraph(data.used+"/"+data.limit+(de?" Handel heute · Reset ":" trades today · reset ")+DateTimeOffset.FromUnixTimeSeconds(data.resetAt).UtcDateTime.ToString("HH:mm")+" UTC",48); }
         void LoadVoucherOffers()
         {
-            Run(api.VoucherTradeOffers,json=>{
+            Run(cb=>api.VoucherTradeOffers(cb),json=>{
                 var data=Parse<TradeRows>(json);
                 WorkshopUIFactory.Clear(content);
                 Paragraph("GUTSCHEIN-HANDEL · Nur in deiner Company · kein Chat");
+                TradeAllowance(data.tradeLimit);
                 if(data?.offers==null||data.offers.Length==0){Paragraph("Keine offenen Angebote.");return;}
                 foreach(var row in data.offers){
                     string tradeId=row.id;
                     Paragraph(row.quantity+" × Gumball-Gutschein gegen "+row.want_qty+" × "+row.want_id+" ("+row.want_kind+")",86);
-                    WorkshopUIFactory.Button("CompanyVoucherBuy-"+tradeId,content,"Angebot annehmen",()=>
+                    var accept=WorkshopUIFactory.Button("CompanyVoucherBuy-"+tradeId,content,"Angebot annehmen",()=>
                         Run(cb=>api.AcceptVoucherTrade(tradeId,cb),
-                            response=>{WorkshopUIFactory.Clear(content);Paragraph("Handel bestätigt. Server prüft Besitz und Escrow.");}));
+                            response=>{WorkshopUIFactory.Clear(content);Paragraph("Handel bestätigt. Server prüft Besitz und Escrow.");}));accept.interactable=data.tradeLimit!=null&&data.tradeLimit.used<data.tradeLimit.limit;
                 }
             });
         }
         void LoadInvitations()
         {
-            Run(api.MyCompanyInvitations,json=>{
+            Run(cb=>api.MyCompanyInvitations(cb),json=>{
                 var data=Parse<InviteRows>(json);
                 WorkshopUIFactory.Clear(content);
                 Paragraph("EINLADUNGEN · keine Direktnachrichten");

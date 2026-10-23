@@ -117,3 +117,9 @@ Offen für folgende Abnahmen:
 - Gezielte Deckelverschiebung ersetzt: feste perspektivische Scharnierachse, eigene Innenflächen, eingefasste offene Mulde und erst danach tatsächliche gespeicherte Funde. Die Truhe bleibt offen sichtbar. [Echte Clips und Layoutprüfung](unity-chest-components.md).
 - Alle 20 Komponenten gemeinsam klein im Inventar und Materialtab, Bestand und antippbare Details/Synthese. Fehlerhafte Erweiterungsatlas-Ausschnitte korrigiert; kein weiterer Grafikstil hinzugefügt.
 - Eigene visuelle Sichtprüfung umfasst 320/390/430 px und DE/EN; reale Geräte-/Touch-/Lautsprecherabnahme bleibt separat. Historische Sprachfallbacks im Markt und allgemeine Shopdichte bleiben offen. Keine neue allgemeine Effekt-/Designrunde begonnen.
+
+## Meta-Visual-/Itemrunde · 23.10.2026
+
+Eigene Progressionsmotive ersetzen jetzt sämtliche falschen Item-/Hardwarezuordnungen in60INT-/24Axiomknoten. Netzwerkhöhe/Toolbar und identische88er-Sockel sind tatsächlich im Spiel geprüft. Sechs neue Itemgrafiken und sechs Mira-Ausdrücke verwenden gemeinsame Darstellung, ohne zusätzliche überlagerte Rahmen. Vier echte Truhenaufnahmen einschließlich Legendary-Ergebnis und tatsächlichem Audio liegen im Abschnittsbericht.
+
+Weiter getrennt offen: sehr dichte Knotentexte bei kleinster Zoomstufe benötigen gezieltes Zoomen/Details; historische Sprachfallbacks in Knoten-/Shop-/Companytexten; tatsächliche Company-Projekt-/Online-Meilensteininszenierung erst mit verifiziertem Anbieter und bestätigten Serverereignissen; weitere Shop-/Menüverdichtung und physische Lautsprecher-/Touchabnahme. Keine nicht ausgelösten Onlineeffekte als Videoerfolg behaupten.

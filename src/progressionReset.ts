@@ -1,3 +1,4 @@
+import {deviceBonus} from './deviceEffects';
 import {closeBalanceRun} from './balanceHistory';
 import {
   challengeCatalogQuote,
@@ -115,7 +116,7 @@ export function axiomRewardV2(s: GameState) {
   )
     return ScientificNumber.zero();
   const i = exactEconomyValue(s, "cycleINTEarned").add(newINTScientific(s));
-  return i.divide(axiomThresholdV2(s)).sqrt().floor();
+  return i.divide(axiomThresholdV2(s)).sqrt().multiplyNumber(1+deviceBonus(s,"axiomResonance")).floor();
 }
 function releaseUnstarted(state: GameState) {
   let s = state;

@@ -188,3 +188,13 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - PR-Testbedingungen für Runde 06 reproduzierbar ausgewiesen: Linux-Job mit Referenzzeitzone Europe/Berlin und lokal geprüftem 30-s-Vitest-Limit, ohne Produktionsänderung.
 
 - 23.10.2026, laufend: Hauptansichts-/Tutorialreparatur in Draft #154 um kompakten Ressourcenheader, randloses Labor, direkte Hardware-Kaufmengen und einen layoutgeführten Mira-Dock samt Pixel-Finger erweitert. Fünf gezielte PlayMode-Prüfungen bestehen; finale native Aufnahme und Gesamtregression noch nicht abgenommen. Details: `unity-iphone-repair.md`.
+
+### Meta-Visuals, neue Items und sichere Online-Verträge · 23.10.2026
+
+- [x] Eigene semantische Grafiken für alle60INT-/24Axiomknoten; keine Itembilder als Ersatz. Preisabhängige Käufe bleiben ohne Vorgängersperre. Kompakteres verbundenes Netz mit gleich breiten Touchwerkzeugen.
+- [x] Sechs gleich große Hauptsockel, gemeinsame zentrierte Artfläche auch im Inventar, tatsächliche aktive Boni und vorhandene Slotformen/Seltenheiten.
+- [x] Sechs neue Dark-Lab-/Axiom-Items mit zentralen beauftragten Rezepten/Caps und tatsächlichen Erkenntnis-/Modell-/Axiom-/Forschungs-/Compute-/Trainingsverbrauchern, eigener Art und sieben Namen/Effekttexten. Save23 erhält alte Indizes und Originale.
+- [x] Mira mit eigenen Ausdrucksframes, ruhigem Blinzeln/Idle und statischem Reduced Motion; keine simulierte Sprachausgabe. Truhen behalten Scharnier und tatsächliche Ergebnisse; alle vier Typen mit aufgenommenem Unity-Audio geprüft.
+- [x] Fünf atomare bestätigte Transfers pro Person/UTC-Tag über alle vorhandenen Handelsarten, beide Teilnehmer; Quota-UI, feste Meldungen, Blockierung und bestätigte Kontolöschung.14 Node-/31 SQLite- und echter lokaler D1/HTTP-Smoke bestanden. Kein produktiver Rollout.
+- [x] Vollständige Schlussregression:1937Vitest,142EditMode,94PlayMode; echte DE/EN-Bilder bei320/390/430. [Prüfbericht und konkrete Grenzen](unity-visual-items-store.md).
+- [ ] Kommerzielle Native-Identität, genehmigter Backendrollout, Moderation/externes Löschen/Store-Datenschutz-IARC und physische Geräteprüfung. Nicht mit den lokalen technischen Nachweisen gleichsetzen.
