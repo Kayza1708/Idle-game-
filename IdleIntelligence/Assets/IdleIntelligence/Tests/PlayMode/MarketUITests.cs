@@ -13,12 +13,15 @@ namespace IdleIntelligence.PlayTests
 {
  public sealed class MarketUITests
  {
+  void OpenMenuRoute(string route){game.GetComponent<IdleIntelligence.Runtime.GameMenu>().Open();Click("Menu-"+route);}
+
+
   string dir;GameRuntime game;
   [UnitySetUp]public IEnumerator Setup(){dir=Path.Combine(Path.GetTempPath(),"unity-market-ui-"+Guid.NewGuid());Directory.CreateDirectory(dir);GameRuntime.SavePathOverride=Path.Combine(dir,"save.json");yield return SceneManager.LoadSceneAsync("IdleIntelligence");yield return null;game=UnityEngine.Object.FindFirstObjectByType<GameRuntime>();}
   [UnityTearDown]public IEnumerator Cleanup(){if(game!=null)UnityEngine.Object.Destroy(game.gameObject);yield return null;GameRuntime.SavePathOverride=null;Directory.Delete(dir,true);}
   static Button B(string name){var b=GameObject.Find(name)?.GetComponent<Button>();Assert.That(b,Is.Not.Null,name);return b;}
   static void Click(string name){var b=B(name);Assert.That(b.interactable,Is.True,name);b.onClick.Invoke();}
-  IEnumerator Open(){Click("ResearchTab");yield return null;Click("MarketAccess");yield return null;}
+  IEnumerator Open(){Click("ResearchTab");yield return null;OpenMenuRoute("market");yield return null;}
   void ScrollTo(string name){Canvas.ForceUpdateCanvases();var scroll=game.Content.GetComponentInParent<ScrollRect>();var target=GameObject.Find(name).GetComponent<RectTransform>();var content=(RectTransform)game.Content;float y=-content.InverseTransformPoint(target.TransformPoint(target.rect.center)).y;scroll.verticalNormalizedPosition=Mathf.Clamp01(1-(y-scroll.viewport.rect.height*.3f)/Math.Max(1,content.rect.height-scroll.viewport.rect.height));Canvas.ForceUpdateCanvases();}
   void Prepare(){Debug.Log("FUNDED_MARKET_UI: prepared Gem stock only; actual debit/grant transactions, no purchase provider");game.Act(s=>{var n=s.Copy();n.Retention.gems=100000;return n;});}
   [UnityTest]public IEnumerator FreePaidMaterialsAndDailyItemUseAtomicTicketsAndActualPortraits()

@@ -22,6 +22,7 @@ namespace IdleIntelligence.Core
   }
   public static Value Parse(string json)=>new Parser(json).Document();
   public static void Validate(string json,Type type,bool complete=false,string[] optional=null)=>Check(Parse(json),type,"$",complete,optional);
+  static readonly System.Collections.Concurrent.ConcurrentDictionary<Type,Dictionary<string,FieldInfo>> Schemas=new System.Collections.Concurrent.ConcurrentDictionary<Type,Dictionary<string,FieldInfo>>();
   static void Check(Value value,Type type,string path,bool complete,string[] optional)
   {
    if(value.Kind=="null"){if(type.IsValueType)throw new FormatException("Null value at "+path);return;}
@@ -37,7 +38,7 @@ namespace IdleIntelligence.Core
    }
    if(type.IsArray){if(value.Kind!="array")throw new FormatException("Expected array at "+path);var element=type.GetElementType();for(int i=0;i<value.Items.Count;i++)Check(value.Items[i],element,path+"["+i+"]",complete,optional);return;}
    if(value.Kind!="object")throw new FormatException("Expected object at "+path);
-   var fields=type.GetFields(BindingFlags.Instance|BindingFlags.Public).Where(f=>!f.IsNotSerialized).ToDictionary(f=>f.Name,StringComparer.Ordinal);
+   var fields=Schemas.GetOrAdd(type,t=>t.GetFields(BindingFlags.Instance|BindingFlags.Public).Where(f=>!f.IsNotSerialized).ToDictionary(f=>f.Name,StringComparer.Ordinal));
    foreach(var entry in value.Fields){if(!fields.TryGetValue(entry.Key,out var field))throw new NotSupportedException("Nicht unterstütztes Savefeld "+path+"."+entry.Key+"; Original bleibt erhalten.");Check(entry.Value,field.FieldType,path+"."+entry.Key,complete,optional);}
    // Unity encodes some inactive null classes as empty objects. Domain flags validate those.
    if(complete&&value.Fields.Count>0)foreach(string key in fields.Keys)if(!value.Fields.ContainsKey(key)&&!(optional??Array.Empty<string>()).Contains(key)&&!(optional??Array.Empty<string>()).Contains(fields[key].DeclaringType.FullName+"."+key))throw new FormatException("Missing save field "+path+"."+key);

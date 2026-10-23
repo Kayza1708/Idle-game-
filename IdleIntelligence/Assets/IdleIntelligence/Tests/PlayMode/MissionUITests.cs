@@ -13,12 +13,15 @@ namespace IdleIntelligence.PlayTests
 {
  public sealed class MissionUITests
  {
+  void OpenMenuRoute(string route){game.GetComponent<IdleIntelligence.Runtime.GameMenu>().Open();Click("Menu-"+route);}
+
+
   string dir;GameRuntime game;
   [UnitySetUp]public IEnumerator Setup(){dir=Path.Combine(Path.GetTempPath(),"unity-mission-ui-"+Guid.NewGuid());Directory.CreateDirectory(dir);GameRuntime.SavePathOverride=Path.Combine(dir,"save.json");yield return SceneManager.LoadSceneAsync("IdleIntelligence");yield return null;game=UnityEngine.Object.FindFirstObjectByType<GameRuntime>();}
   [UnityTearDown]public IEnumerator Cleanup(){if(game!=null)UnityEngine.Object.Destroy(game.gameObject);yield return null;GameRuntime.SavePathOverride=null;Directory.Delete(dir,true);}
   static Button B(string name){var b=GameObject.Find(name)?.GetComponent<Button>();Assert.That(b,Is.Not.Null,name);return b;}
   static void Click(string name){var b=B(name);Assert.That(b.interactable,Is.True,name);b.onClick.Invoke();}
-  IEnumerator Open(){Click("ResearchTab");yield return null;Click("MissionsAccess");yield return null;}
+  IEnumerator Open(){Click("ResearchTab");yield return null;OpenMenuRoute("missions");yield return null;}
   void ScrollTo(string name){Canvas.ForceUpdateCanvases();var scroll=game.Content.GetComponentInParent<ScrollRect>();var target=GameObject.Find(name).GetComponent<RectTransform>();var content=(RectTransform)game.Content;float y=-content.InverseTransformPoint(target.TransformPoint(target.rect.center)).y;scroll.verticalNormalizedPosition=Mathf.Clamp01(1-(y-scroll.viewport.rect.height*.3f)/Math.Max(1,content.rect.height-scroll.viewport.rect.height));Canvas.ForceUpdateCanvases();}
   void Prepare(){Debug.Log("FUNDED_MISSION_UI_STATE: lifetime counters prepared for isolated UI transaction tests; no natural-run claim");game.Act(s=>{var n=s.Copy();n.Industry.families[0]=true;foreach(var p in new[]{n.Missions.daily,n.Missions.weekly,n.Missions.monthly})foreach(var t in p.tasks)if(string.IsNullOrEmpty(t.objective)){var field=typeof(LifetimeState).GetField(t.metric);field.SetValue(n.Lifetime,Math.Max((double)field.GetValue(n.Lifetime),t.baseline+t.goal));}return n;});}
   [UnityTest]public IEnumerator ClaimBonusAndFrozenChoicePersistOnceDespiteOldCallbacksAndReload()

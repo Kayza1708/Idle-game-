@@ -15,9 +15,13 @@ namespace IdleIntelligence.Core
         public readonly double Mantissa;
         public readonly long Exponent;
         public bool IsZero => terms.Count == 0;
-        public static ScientificNumber Zero => From(0);
-        public static ScientificNumber One => From(1);
         static readonly CultureInfo Invariant = CultureInfo.InvariantCulture;
+        static readonly ScientificNumber defaultCap = Parts(1e300,0);
+        static readonly ScientificNumber zero = new ScientificNumber(new SortedDictionary<long, BigInteger>());
+        static readonly ScientificNumber one = new ScientificNumber(new SortedDictionary<long, BigInteger> { [0] = BigInteger.One });
+        public static ScientificNumber Zero => zero;
+        public static ScientificNumber One => one;
+
         static void Put(IDictionary<long, BigInteger> t, long k, BigInteger v) { if (v.IsZero) t.Remove(k); else t[k] = v; }
         static SortedDictionary<long, BigInteger> Normalize(IDictionary<long, BigInteger> input)
         {
@@ -53,7 +57,7 @@ namespace IdleIntelligence.Core
             if (Mantissa >= 10) { Mantissa /= 10; Exponent++; }
             if (Math.Abs((double)Exponent) > 9007199254740991d || !(Mantissa > 0)) throw new ArgumentOutOfRangeException(nameof(input));
         }
-        public static ScientificNumber From(double n) => Parts(n, 0);
+        public static ScientificNumber From(double n) => n == 0 ? Zero : n == 1 ? One : Parts(n, 0);
         public static ScientificNumber Parts(double m, long exponent)
         {
             if (double.IsNaN(m) || double.IsInfinity(m) || m < 0) throw new ArgumentOutOfRangeException(nameof(m));
@@ -81,18 +85,25 @@ namespace IdleIntelligence.Core
         public int CompareTo(ScientificNumber other)
         {
             if (other == null) return 1;
+            if (ReferenceEquals(this, other)) return 0;
+            if (IsZero) return other.IsZero ? 0 : -1;
+            if (other.IsZero) return 1;
             var diff = new SortedDictionary<long, BigInteger>(terms);
             foreach (var p in other.terms) { diff.TryGetValue(p.Key, out var a); diff[p.Key] = a - p.Value; }
             return Sign(Normalize(diff));
         }
         public ScientificNumber Add(ScientificNumber b)
         {
+            if (b.IsZero) return this;
+            if (IsZero) return b;
             var t = new SortedDictionary<long, BigInteger>(terms);
             foreach (var p in b.terms) { t.TryGetValue(p.Key, out var a); t[p.Key] = a + p.Value; }
             return new ScientificNumber(t);
         }
         public ScientificNumber Subtract(ScientificNumber b)
         {
+            if (b.IsZero) return this;
+            if (IsZero || ReferenceEquals(this,b)) return Zero;
             var t = new SortedDictionary<long, BigInteger>(terms);
             foreach (var p in b.terms) { t.TryGetValue(p.Key, out var a); t[p.Key] = a - p.Value; }
             t = Normalize(t);
@@ -100,6 +111,9 @@ namespace IdleIntelligence.Core
         }
         public ScientificNumber Multiply(ScientificNumber b)
         {
+            if (IsZero || b.IsZero) return Zero;
+            if (ReferenceEquals(b,One)) return this;
+            if (ReferenceEquals(this,One)) return b;
             var t = new SortedDictionary<long, BigInteger>();
             foreach (var a in terms) foreach (var v in b.terms) { long k = checked(a.Key + v.Key); t.TryGetValue(k, out var n); t[k] = n + a.Value * v.Value; }
             return new ScientificNumber(t);
@@ -127,7 +141,7 @@ namespace IdleIntelligence.Core
         public double ToDouble(double cap = 1e300)
         {
             if (IsZero) return 0;
-            if (CompareTo(From(cap)) >= 0) return cap;
+            if (CompareTo(cap==1e300?defaultCap:From(cap)) >= 0) return cap;
             return Exponent < -324 ? 0 : double.Parse(Mantissa.ToString("R", Invariant) + "e" + Exponent.ToString(Invariant), Invariant);
         }
         public override string ToString() => IsZero ? "0" : Exponent < 6 && Exponent >= -2 ? ToDouble().ToString("N1", Invariant) : Mantissa.ToString("F2", Invariant) + "e" + Exponent;

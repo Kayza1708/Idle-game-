@@ -74,7 +74,8 @@ namespace IdleIntelligence.Core
             Game.Validate(state);
             string parent=System.IO.Path.GetDirectoryName(path);if(!string.IsNullOrEmpty(parent))Directory.CreateDirectory(parent);
             // Recheck the disk before every write, including external replacement after load.
-            if(File.Exists(path)){Read(path);if(diskHash==null||diskHash!=FileHash(path))throw new IOException("Spielstand extern verändert; Original bleibt erhalten.");}else if(diskHash!=null)throw new IOException("Spielstand extern entfernt; Recovery erforderlich.");
+            // An unchanged SHA-256 proves these are the exact bytes validated at load/commit.
+            if(File.Exists(path)){if(new FileInfo(path).Length>32*1024*1024)throw new FormatException("Save too large");if(diskHash==null||diskHash!=FileHash(path))throw new IOException("Spielstand extern verändert; Original bleibt erhalten.");}else if(diskHash!=null)throw new IOException("Spielstand extern entfernt; Recovery erforderlich.");
             string payload=codec.Encode(StateData.From(state));
             string json=codec.EncodeEnvelope(new SaveEnvelope{format=Format,version=Version,payload=payload,sha256=Hash(payload)});
             byte[] bytes=Encoding.UTF8.GetBytes(json);

@@ -1,5 +1,5 @@
 // Generated from current source dialogue functions; original language fallbacks retained.
-namespace IdleIntelligence.Core {public static class NarrativeCatalog {public const string SourceHash="f4fdc25a726a3e6e640ccd60ca73c91b87ab763643cdb818bc00d0e21a67e0db";
+namespace IdleIntelligence.Core {public static class NarrativeCatalog {public const string SourceHash="9d028380599ad393859edba78345cfd11b5c57f352a53eb3faa0fbe5c7e60020";
 public static readonly string[] Languages={"en","de","es","fr","pt","it","pl"};
 public static readonly string[] Chapters={"aura-signal","aura-customers","aura-company","aura-equipment","aura-infrastructure"};
 public static readonly string[][] Pages={new string[]{"aura-signal-1","aura-signal-2"},new string[]{"aura-customers-1","aura-customers-2"},new string[]{"aura-company-1","aura-company-2"},new string[]{"aura-equipment-1","aura-equipment-2"},new string[]{"aura-infrastructure-1","aura-infrastructure-2"}};

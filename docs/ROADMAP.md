@@ -1,5 +1,10 @@
 # Idle Intelligence – aktueller Stand
 
+## Gezielte iPhone-Testreparatur · 23.10.2026
+
+Native Unity-Profiler-Baseline im **iPhone-16-Pro-Simulator** aufgenommen. CPU-/GC-/Save-Engpässe korrigiert; Original-Mira mit bedienbarer Führung, echte Drohnen-Hitfläche und gemeinsame Trainings-/Forschungskarten implementiert. Keine physische 60-fps-Abnahme behauptet. Prüfstand, Messmethode, gespeicherte Transaktionen und noch laufende Endabnahme: [gezielter Reparaturbericht](unity-iphone-repair.md). Folge-Draft #154, nicht mergen/veröffentlichen.
+
+
 ## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
 
 Installierter und gestarteter Unity-Spielcode: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
