@@ -1,5 +1,12 @@
 # Idle Intelligence – aktueller Stand
 
+## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
+
+Installierter und gestarteter Unity-Spielcode: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
+
+Aktueller lokaler iOS-Weg und Prüfstand: [Unity auf iPhone-16-Pro-Simulator](unity-ios-local.md). Separate Unity-App und neuer Buildordner; Capacitor-`ios/`, ursprüngliche App und Saves bleiben erhalten. Company-Onlinezugang und echte native Integrationen sind weiterhin gesondert offen. Die folgende ältere Aufgabenhistorie ist keine Aussage, dass alle damaligen Zwischenlücken heute noch bestehen; maßgeblich sind funktionaler Audit und aktueller Plattformbericht.
+
+
 ## Unity-Rewrite lokal · 20.10.2026
 
 - [x] Tatsächlichen Repositorypfad und Branch `codex/unity-rewrite` geprüft; TypeScript, lokale Backups, Exporte und iOS-Bestand erhalten.

@@ -39,40 +39,51 @@ namespace IdleIntelligence.Runtime
         {
             game=runtime;
             api=FindObjectOfType<CompanyApiClient>();
-            WorkshopUIFactory.Label("CompanyHeading",transform,"COMPANIES · Forschungsnetzwerk",18,58);
-            status=WorkshopUIFactory.Label("CompanyState",transform,"",14,88);
+            bool de=game.State.Settings.language=="de";
+            WorkshopUIFactory.Label("CompanyHeading",transform,"COMPANIES",20,44);
+            status=WorkshopUIFactory.Label("CompanyState",transform,"",15,44);
+            status.gameObject.AddComponent<ContentTextHeight>();
             var tabs=WorkshopUIFactory.Horizontal("CompanyTabs",transform).transform;
-            WorkshopUIFactory.Button("CompanyLeaderboard",tabs,"Rang",()=>LoadCompanies(false));
+            WorkshopUIFactory.Button("CompanyLeaderboard",tabs,de?"Rang":"Rank",()=>LoadCompanies(false));
             WorkshopUIFactory.Button("CompanyMonth",tabs,"Season",()=>LoadCompanies(true));
-            WorkshopUIFactory.Button("PlayerRankings",tabs,"Spieler",LoadPlayers);
+            WorkshopUIFactory.Button("PlayerRankings",tabs,de?"Spieler":"Players",LoadPlayers);
             var nav=WorkshopUIFactory.Horizontal("CompanySecondary",transform).transform;
-            WorkshopUIFactory.Button("CompanySearch",nav,"Suchen",Search);
-            WorkshopUIFactory.Button("CompanyVouchers",nav,"Tickets",LoadVouchers);
-            WorkshopUIFactory.Button("CompanyInvites",nav,"Einladungen",LoadInvitations);
+            WorkshopUIFactory.Button("CompanySearch",nav,de?"Suchen":"Find",Search);
+            WorkshopUIFactory.Button("CompanyVouchers",nav,de?"Tickets":"Vouchers",LoadVouchers);
+            WorkshopUIFactory.Button("CompanyInvites",nav,de?"Einladungen":"Invites",LoadInvitations);
             content=WorkshopUIFactory.Vertical("CompanyResults",transform).transform;
             ShowGate();
+            foreach(var text in GetComponentsInChildren<Text>())
+                if(text.name=="CompanySafeAuth"||text.name=="CompanyAccountPending")text.gameObject.AddComponent<ContentTextHeight>();
         }
         void ShowGate()
         {
             WorkshopUIFactory.Clear(content);
             bool unlocked=CompanyAccess.LocallyEligible(game.State);
-            status.text=CompanyAccess.Explanation(game.State.Settings.language=="de",unlocked);
+            bool de=game.State.Settings.language=="de";
+            status.text=de?(unlocked?"1.000 Gesamt-INT erreicht · Online-Prüfung erforderlich.\nBeitritt kostenlos · Gründung: 500 geprüfte Gems.":"Ab 1.000 Gesamt-INT · gemeinsames Forschungsnetz.\nBeitritt kostenlos · verifiziertes Onlinekonto erforderlich."):(unlocked?"1,000 lifetime INT reached · online verification required.\nFree to join · founding: 500 verified Gems.":"Unlocks at 1,000 lifetime INT · shared research network.\nFree to join · verified online account required.");
+            var explanation=WorkshopUIFactory.Label("CompanyAccessExplanation",content,CompanyAccess.Explanation(de,unlocked),15,44);
+            explanation.gameObject.AddComponent<ContentTextHeight>();
+            explanation.gameObject.SetActive(false);
+            var details=WorkshopUIFactory.Button("CompanyAccessDetails",content,de?"Zugang und Regeln":"Access and rules",()=>explanation.gameObject.SetActive(!explanation.gameObject.activeSelf));
+            details.transform.SetAsFirstSibling();
             if(!unlocked) {WorkshopUIFactory.Button("CompanyPrestige",content,
-                "Zum INT-Netz",()=>game.UserShow("prestige"));return;}
-            WorkshopUIFactory.Button("CompanyMira",content,"Miras Erklärung",()=>game.UserShow("story"));
+                game.State.Settings.language=="de"?"Zum INT-Netz":"INT network",()=>game.UserShow("prestige"));return;}
+            WorkshopUIFactory.Button("CompanyMira",content,game.State.Settings.language=="de"?"Miras Erklärung":"Mira explains",()=>game.UserShow("story"));
             WorkshopUIFactory.Label("CompanySafeAuth",content,
-                "Online-Profil und Handelsbestand müssen sicher mit deiner Spieler-ID verknüpft sein. "+
+                game.State.Settings.language!="de"?"Online profiles and trading balances require a verified player identity. No email is required. Unverified local Gems and vouchers cannot be used online.":"Online-Profil und Handelsbestand müssen sicher mit deiner Spieler-ID verknüpft sein. "+
                 "Es werden keine E-Mails benötigt. Ungeprüfte lokale Gems und Tickets sind online nicht verwendbar.",14,120);
             if(api==null||!api.IsConfigured)
                 WorkshopUIFactory.Label("CompanyAccountPending",content,
-                    "Cloudflare-API noch nicht verbunden. Company-Ranglisten und Handel folgen nach Servereinrichtung.",14,104);
+                    game.State.Settings.language=="de"?"Online-Anbindung noch nicht eingerichtet. Company-Ranglisten und Handel benötigen den verifizierten Serverzugang.":"Online connection is not configured. Company rankings and trading require verified server access.",14,104);
             else LoadCompanies(false); // Public rankings do not require guest registration.
         }
         bool Ready(bool sessionRequired)
         {
             if(game==null||!CompanyAccess.LocallyEligible(game.State)){ShowGate();return false;}
             if(api==null||!api.IsConfigured||(sessionRequired&&!api.HasSession)){
-                status.text=api==null||!api.IsConfigured?"Cloudflare-API wurde noch nicht eingerichtet.":"Onlinekonto noch nicht sicher verbunden. Offline-Fortschritt bleibt lokal.";
+                bool de=game.State.Settings.language=="de";
+                status.text=api==null||!api.IsConfigured?(de?"Online-Anbindung noch nicht eingerichtet.":"Online connection is not configured."):(de?"Onlinekonto noch nicht sicher verbunden. Offline-Fortschritt bleibt lokal.":"Online account is not verified. Offline progress remains local.");
                 return false;
             }
             return true;
@@ -94,8 +105,11 @@ namespace IdleIntelligence.Runtime
             }));
         }
         static T Parse<T>(string json) where T:class=>JsonUtility.FromJson<T>(json);
-        void Paragraph(string text,int height=64)=>
-            WorkshopUIFactory.Label("CompanyRow",content,text,14,height);
+        void Paragraph(string text,int height=64)
+        {
+            var row=WorkshopUIFactory.Label("CompanyRow",content,text,15,44);
+            row.gameObject.AddComponent<ContentTextHeight>();
+        }
         void LoadCompanies(bool monthly)
         {
             Run(cb=>monthly?api.CompanySeasonLeaderboard(cb):api.CompanyLeaderboard(cb),

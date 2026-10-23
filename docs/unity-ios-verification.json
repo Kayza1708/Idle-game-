@@ -1,0 +1,59 @@
+{
+  "unity": "6000.3.26f1",
+  "baseCommit": "06c021db",
+  "runs": [
+    {
+      "report": "idle-ios-edit.xml",
+      "result": "Passed",
+      "total": "135",
+      "passed": "135",
+      "failed": "0",
+      "seconds": "357.913456"
+    },
+    {
+      "report": "idle-ios-play.xml",
+      "result": "Passed",
+      "total": "77",
+      "passed": "77",
+      "failed": "0",
+      "seconds": "324.1709972"
+    },
+    {
+      "report": "idle-ios-ui-final.xml",
+      "result": "Failed(Child)",
+      "total": "7",
+      "passed": "6",
+      "failed": "1",
+      "seconds": "10.9109183"
+    },
+    {
+      "report": "idle-ios-ui-final2.xml",
+      "result": "Passed",
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "seconds": "10.7408171"
+    },
+    {
+      "report": "idle-ios-ui-final3.xml",
+      "result": "Passed",
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "seconds": "10.7236481"
+    },
+    {
+      "report": "idle-ios-start-final.xml",
+      "result": "Passed",
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "seconds": "38.1449425",
+      "scope": "Final initial naming + chapter flow, Company/Profile/Audio and permanent claim storage"
+    }
+  ],
+  "typecheck": "passed",
+  "vitest": "1896/1896, 145 files, TZ=Europe/Berlin",
+  "webBuild": "passed (regression only; not used for installation)",
+  "scope": "135 full EditMode; 77 full PlayMode before final small Company/Badge visual changes; final 7/7 targeted PlayMode with corrected unobstructed visual fixtures; prior 6/7 found and fixed inactive badge-card targeting"
+}

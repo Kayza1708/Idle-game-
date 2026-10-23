@@ -30,3 +30,7 @@ Die vorhandenen Dateien decken alle Aktionen funktional ab, besitzen aber keine 
 ## Native Haptik
 
 Wenn eine Host-Anbindung `globalThis.NativeHaptics.vibrate(pattern)` bereitstellt, wird sie verwendet. Andernfalls nutzt die gemeinsame Funktion defensiv `navigator.vibrate`. Fehlende oder abgelehnte Unterstützung bleibt ohne Auswirkung auf das Spiel. Haptik ist standardmäßig aus und wird nur für direkte Nutzeraktionen ausgelöst.
+
+## Unity: eigene Schmiede-/Kauf-/Gumball-Cues (23.10.2026)
+
+Die Unity-Runtime verwendet zusätzlich fünf eigene synthetisierte WAVs in `IdleIntelligence/Assets/IdleIntelligence/Resources/Audio`: Schmiedeschlag `forge-impact`, harmonischer Fusionsimpuls `fusion-impact`, kurzer bestätigender Kaufklang `purchase-confirm`, mechanisches Drehen `gumball-turn` und Kapselöffnung `gumball-open`. Reproduzierbare Erzeugung: `python3 tools/audio/generate-unity-feedback.py`. Keine fremden Samples; bestehende Originalmusik und TS-Audiorouten bleiben erhalten. Die Klänge reagieren auf die bestehenden persistierten Erfolgspfade, Lautstärke und Stummschaltung. Animation/Audio vergeben keine Belohnungen. Details und tatsächliche Plattformprüfung in [Unity-iOS](unity-ios-local.md).

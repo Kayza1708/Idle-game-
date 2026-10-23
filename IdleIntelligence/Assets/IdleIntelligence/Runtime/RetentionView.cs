@@ -8,16 +8,24 @@ namespace IdleIntelligence.Runtime
 {
  public sealed class RetentionView:MonoBehaviour
  {
+  bool De=>game.State.Settings.language=="de";
   GameRuntime game;Transform content;Text header;string page="profile";readonly List<Action> refresh=new List<Action>();
   public void Initialize(GameRuntime runtime)
   {
    game=runtime;header=WorkshopUIFactory.Label("ProfileWallet",transform,"",17,72);
    var nav=WorkshopUIFactory.Vertical("RetentionNavigation",transform).transform;
-   WorkshopUIFactory.Button("ShowAchievements",nav,"Achievements",()=>Show("achievements"));WorkshopUIFactory.Button("ShowBadges",nav,"Abzeichen",()=>Show("badges"));WorkshopUIFactory.Button("ShowOnboarding",nav,"Laborziele · Einführungsbelohnungen",()=>Show("onboarding"));WorkshopUIFactory.Button("ShowStaticChallenges",nav,"Langzeit-Challenges",()=>Show("challenges"));WorkshopUIFactory.Button("ShowProfile",nav,"Profil und Postfach",()=>Show("profile"));
+   var first=WorkshopUIFactory.Horizontal("RetentionPrimary",nav,48).transform;
+   var second=WorkshopUIFactory.Horizontal("RetentionSecondary",nav,48).transform;
+   bool de=game.State.Settings.language=="de";
+   WorkshopUIFactory.Button("ShowProfile",first,de?"Profil":"Profile",()=>Show("profile"));
+   WorkshopUIFactory.Button("ShowBadges",first,de?"Abzeichen":"Badges",()=>Show("badges"));
+   WorkshopUIFactory.Button("ShowAchievements",first,de?"Erfolge":"Achievements",()=>Show("achievements"));
+   WorkshopUIFactory.Button("ShowOnboarding",second,de?"Laborziele":"Lab goals",()=>Show("onboarding"));
+   WorkshopUIFactory.Button("ShowStaticChallenges",second,de?"Langzeitziele":"Long-term goals",()=>Show("challenges"));
    content=WorkshopUIFactory.Vertical("RetentionContent",transform).transform;Build();
   }
   void Show(string next){page=next;Build();}
-  void Update(){if(game==null)return;header.text=game.State.Retention.playerName+"\n"+game.State.Retention.gems+" Gems · "+game.State.Retention.points+" AP · "+game.State.Challenges.Progress.stars+" Sterne"+(ChallengeRules.Active(game.State)?"\nChallenge-Labor · Hauptspiel pausiert":"");foreach(var update in refresh)update();}
+  void Update(){if(game==null)return;header.text=game.State.Retention.playerName+"\n"+game.State.Retention.gems+" Gems · "+game.State.Retention.points+" AP · "+game.State.Challenges.Progress.stars+(De?" Sterne":" stars")+(ChallengeRules.Active(game.State)?(De?"\nChallenge-Labor · Hauptspiel pausiert":"\nChallenge lab · main game paused"):"");foreach(var update in refresh)update();}
   Text Paragraph(string name,string text,int size=14)
   {var label=WorkshopUIFactory.Label(name,content,text,size,72);label.alignment=TextAnchor.UpperLeft;label.GetComponent<LayoutElement>().preferredHeight=Math.Max(54,label.cachedTextGenerator.GetPreferredHeight(text,label.GetGenerationSettings(new Vector2(Math.Max(220,((RectTransform)transform).rect.width-20),0)))/label.pixelsPerUnit+16);return label;}
   ActionCard Card(string name,string title,Action action)
@@ -31,7 +39,7 @@ namespace IdleIntelligence.Runtime
    {
     Paragraph("AchievementExplanation","Jede erreichte Stufe kann einmal abgeholt werden. AP erhöhen die Einnahmen nach der bestehenden Formel; ein Claim wird sofort gespeichert.");
     foreach(var a in RetentionBalance.Achievements)
-    {int tier=RetentionRules.CurrentTier(s,a);var card=Card("Achievement-"+a.Id,a.Name+" · Stufe "+(tier+1),()=>{if(game.Act(v=>RetentionRules.Achievement(v,a.Id,tier)))Build();});var claimNotice=ClaimNotice.Attach(card.Button.transform);card.Icon.gameObject.SetActive(true);card.Icon.sprite=ProfileBadgeSprite.Get(BadgeFamily(a.Id),BadgeTier(s,a.Id));card.Icon.color=BadgeClaimCount(s,a.Id)>0?Color.white:new Color(1f,1f,1f,.35f);card.Icon.preserveAspect=true;refresh.Add(()=>{var current=game.State;bool claimed=current.Retention.achievementClaims.Contains(a.Id+":"+tier);int reward=Math.Min(tier,RetentionBalance.TierGems.Length-1);card.Detail.text=a.Description+"\n"+ScientificNumber.From(RetentionRules.AchievementValue(current,a.Id))+" / "+ScientificNumber.From(a.Thresholds[tier])+"\n"+(claimed?"Abgeholt":(RetentionRules.AchievementReady(current,a.Id,tier)?"Abholen: ":"Belohnung: ")+RetentionBalance.TierGems[reward]+" Gems + "+RetentionBalance.TierPoints[reward]+" AP");card.Button.interactable=game.Writable&&RetentionRules.AchievementReady(current,a.Id,tier);claimNotice.SetActive(card.Button.interactable);});}return;
+    {int tier=RetentionRules.CurrentTier(s,a);var card=Card("Achievement-"+a.Id,a.Name+" · Stufe "+(tier+1),()=>{if(game.Act(v=>RetentionRules.Achievement(v,a.Id,tier))){Build();var earned=content.GetComponentsInChildren<ActionCard>().FirstOrDefault(c=>c.name=="Achievement-"+a.Id);if(earned!=null)PanelMotion.Play(earned.Icon.gameObject,game.State.Workshop.reducedMotion||!game.State.Settings.effects,true);}});var claimNotice=ClaimNotice.Attach(card.Button.transform);card.Icon.gameObject.SetActive(true);card.Icon.sprite=ProfileBadgeSprite.Get(BadgeFamily(a.Id),BadgeTier(s,a.Id));card.Icon.color=BadgeClaimCount(s,a.Id)>0?Color.white:new Color(1f,1f,1f,.35f);card.Icon.preserveAspect=true;refresh.Add(()=>{var current=game.State;bool claimed=current.Retention.achievementClaims.Contains(a.Id+":"+tier);int reward=Math.Min(tier,RetentionBalance.TierGems.Length-1);card.Detail.text=a.Description+"\n"+ScientificNumber.From(RetentionRules.AchievementValue(current,a.Id))+" / "+ScientificNumber.From(a.Thresholds[tier])+"\n"+(claimed?"Abgeholt":(RetentionRules.AchievementReady(current,a.Id,tier)?"Abholen: ":"Belohnung: ")+RetentionBalance.TierGems[reward]+" Gems + "+RetentionBalance.TierPoints[reward]+" AP");card.Button.interactable=game.Writable&&RetentionRules.AchievementReady(current,a.Id,tier);claimNotice.SetActive(card.Button.interactable);});}return;
    }
    if(page=="badges"){BadgeLibrary(s);return;}
    if(page=="onboarding")
@@ -39,7 +47,7 @@ namespace IdleIntelligence.Runtime
    if(page=="challenges")
    {foreach(var c in RetentionBalance.Challenges){var card=Card("StaticChallenge-"+c.Id,c.Name,()=>{if(game.Act(v=>RetentionRules.StaticChallenge(v,c.Id)))Build();});var claimNotice=ClaimNotice.Attach(card.Button.transform);refresh.Add(()=>{bool claimed=game.State.Retention.challengeClaims.Contains(c.Id);card.Detail.text=c.Description+"\n"+c.Stars+" Sterne · "+(claimed?"Abgeholt":RetentionRules.StaticReady(game.State,c.Id)?"Abholen":"Ziel noch offen");card.Button.interactable=game.Writable&&RetentionRules.StaticReady(game.State,c.Id);claimNotice.SetActive(card.Button.interactable);});}return;}
    ProfileIdentity(s);
-   Paragraph("ProfileSummary","Spieler: "+s.Retention.playerName+"\nKI: "+(string.IsNullOrEmpty(s.Retention.aiName)?"Noch unbenannt":s.Retention.aiName)+"\nArtefakte: "+s.Retention.artifacts.Length+" · abgeschlossene Seasons: "+s.Retention.completedSeasons.Length);
+   Paragraph("ProfileSummary",(De?"Spieler: ":"Player: ")+s.Retention.playerName+"\n"+(De?"KI: ":"AI: ")+(string.IsNullOrEmpty(s.Retention.aiName)?(De?"Noch unbenannt":"Not named yet"):s.Retention.aiName)+"\n"+(De?"Artefakte: ":"Artifacts: ")+s.Retention.artifacts.Length+(De?" · abgeschlossene Seasons: ":" · completed seasons: ")+s.Retention.completedSeasons.Length);
    WorkshopUIFactory.Button("ShowNameLicenses",content,"Namensfilter · Quellen und Lizenzen",()=>Show("licenses"));
    LocalBadgeShowcase(s);
    FramePreviews();
@@ -80,7 +88,7 @@ namespace IdleIntelligence.Runtime
     frame.sprite=ProfileFrameSprite.Get("basic");
     frame.preserveAspect=true;frame.raycastTarget=false;
     var label=WorkshopUIFactory.Label("ProfileIdentityText",row.transform,
-      s.Retention.playerName+"\nSpielerprofil · lokal\n"+s.Retention.achievementClaims.Length+" erhaltene Achievement-Stufen",16,108);
+      s.Retention.playerName+(De?"\nSpielerprofil · lokal\n":"\nPlayer profile · local\n")+s.Retention.achievementClaims.Length+(De?" erhaltene Achievement-Stufen":" claimed achievement tiers"),16,108);
     label.alignment=TextAnchor.MiddleLeft;
   }
   void LocalBadgeShowcase(GameState s)
@@ -90,11 +98,11 @@ namespace IdleIntelligence.Runtime
       .Where(x=>x.definition!=null&&x.claims>0)
       .OrderByDescending(x=>x.claims).ThenBy(x=>x.id,StringComparer.Ordinal)
       .Take(3).ToArray();
-    var heading=Paragraph("ProfileBadgeShowcaseTitle","ABZEICHEN · persönlicher Schaukasten",16);
+    var heading=Paragraph("ProfileBadgeShowcaseTitle",De?"ABZEICHEN · persönlicher Schaukasten":"BADGES · personal showcase",16);
     heading.GetComponent<LayoutElement>().preferredHeight=42;
     if(available.Length==0)
     {
-      Paragraph("ProfileNoBadges","Noch keine Abzeichen freigeschaltet. Erledige Achievements oder Challenges.");return;
+      Paragraph("ProfileNoBadges",De?"Noch keine Abzeichen freigeschaltet. Erledige Achievements oder Challenges.":"No badges unlocked yet. Complete achievements or challenges.");return;
     }
     var row=WorkshopUIFactory.Horizontal("ProfileBadgeShowcase",content,120);
     foreach(var entry in available)
