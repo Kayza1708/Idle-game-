@@ -125,3 +125,58 @@ Der vollständige PlayMode-Lauf auf f163180e besteht mit **84/84**. Bei der ansc
 Der vollständige Stand bb3711dd bestand mit 85/85 PlayMode-Tests; Debug und ReleaseForProfiling wurden nativ erfolgreich gebaut. Im tatsächlichen Einstiegsvideo fiel anschließend auf, dass die Tutorialnavigation eine bereits sichtbare erste Trainingskarte unnötig nach oben schob und die Überschrift anschnitt. Der Fokus prüft jetzt die tatsächlichen Viewportgrenzen und berücksichtigt die gemeinsame Überschrift. Der gezielte Hauptansichtslauf besteht mit 6/6. Eine einwortige letzte Dialogseite wird mit der vorigen Seite verbunden; Hardwaretexte beeinflussen die festen Kaufspalten nicht mehr.
 
 Die typisierte JSON-Prüfung verarbeitet gültige Saves jetzt ohne vollständigen zusätzlichen Wertbaum. Lexikalische Prüfung, Grenzen, Duplikate, unbekannte/fehlende Felder und Typprüfung bleiben erhalten; lexikalische Fehler behalten ihren Vorrang. Differenzielle Fälle vergleichen den bisherigen Baumvertrag mit dem Streamingvertrag. Vollständige EditMode-Regression: **138/138 bestanden**, `/tmp/idle-stream-final-edit.xml`. Eine versuchte GC-API-Messung lieferte unter Unity für beide Wege null und wurde als unbrauchbar verworfen; daraus wird kein Allokationsnachweis abgeleitet. Native Neumessung und abschließender Gesamtlauf folgen auf diesem Stand. Pending-Vollprüfung, Domainvalidierung und dauerhafter atomarer Commit bleiben synchron erhalten.
+
+## Gleiche Konfiguration: Baseline b5bb7a2b → bb3711dd
+
+Beide Xcode **Debug**, IL2CPP Debug, gleicher Simulator, Auflösung und Instrumentierung; keine Aufnahme/Editor-/Compilerlast während der Messung. Die drei stationären Phasen sind identisch vorbereitet. Das Story-Harness deaktiviert den Tutorialmodus, die Runtime öffnet dennoch den tatsächlichen Mira-Willkommensdialog; dieser Zustand ist in beiden Messungen enthalten.
+
+| Debug nachher | Labor/Hardware | Training | Forschung |
+|---|---:|---:|---:|
+| Frame Mittel | 17,604 ms | 17,096 ms | 17,855 ms |
+| Frame p95 | 17,867 ms | 18,268 ms | 26,822 ms |
+| Größter Frame | 149,996 ms | 99,371 ms | 115,085 ms |
+| GC/Frame Mittel | 138.192 B | 121.579 B | 128.941 B |
+| Größter Save | 92,617 ms | 97,076 ms | 90,283 ms |
+| Layout Mittel | 0,004 ms | 0,058 ms | 0,410 ms |
+
+Rohdaten: `IdleIntelligence/Builds/performance-review/bb-debug/`. Keine Factory-UI-Neuerzeugung in den stationären Phasen; dieser Zähler erfasst nicht sämtliche Effekt-/Prefabobjekte. Debug-Aktionsphasen bleiben deutlich langsamer: größte Frames Tap 148,423 ms, Kauf 248,444 ms; größte Saves 94,813/177,122 ms.
+
+Separat **ReleaseForProfiling bb3711dd**: stationäre Mittel 16,669/16,667/16,667 ms, p95 18,193/18,157/18,230 ms; größter Frame 20,766/23,813/25,974 ms. Taps größter Frame 33,307 ms, Käufe 49,999 ms. Dies ist kein behaupteter stabiler 60-fps-Nachweis; der nächste optimierte Stand muss insbesondere Transaktionsspitzen erneut prüfen. Die CPU-Hauptthreadzeit enthält Wartezeit, GPU-Werte stammen aus dem Simulator. Rohdaten `bb-release/`.
+
+## Endstand be8b04ca · tatsächliche Messung und Regression
+
+Spielcode **be8b04caf2cf1815f03d683b037fc802ee4ac18d**: Unity-Export `Succeeded`, 0 Fehler, Apple-Plistprüfung OK; Xcode **ReleaseForProfiling ARM64 iphonesimulator BUILD SUCCEEDED**. Ausgaben separat unter `Builds/iOS-Final-20261023/`; `ios/` und ältere Exporte bleiben erhalten. Editor vor jedem Start frisch geprüft; keine zweite Instanz. Die fünf allein durch Export/Tests erzeugten Projekteinstellungen wurden mit lokaler Kopie auf ihren vorher sauberen Repositoryinhalt zurückgesetzt.
+
+**138/138 EditMode, 85/85 vollständige finale PlayMode-Tests**, `/tmp/idle-stream-final-edit.xml`, `/tmp/idle-final-complete-play.xml`. Web: Typecheck, 146 Vitest-Dateien / 1.902 Tests und Produktionsbuild bestanden (`/tmp/idle-final2-*.log`); seitdem keine Webcodeänderung. Referenzparität, unbekannte/fehlerhafte Saves, T03-Queue, tatsächliche Raycasts, Skip/Resume/Reload, Drone-Claim/Expiry/Wiederholung und unverfügbarer Werbeanbieter sind enthalten. Keine Anzeige und kein Kauf wird als erfolgreich simuliert.
+
+Native Endmessung, **gleiche ReleaseForProfiling-Konfiguration wie bb-release**, Editor, Compiler und Aufnahme geschlossen:
+
+| Endstand Simulator | Labor/Hardware | Training | Forschung | Taps | Käufe |
+|---|---:|---:|---:|---:|---:|
+| Frame Mittel (ms) | 16,667 | 16,667 | 16,667 | 16,717 | 17,371 |
+| Frame p95 (ms) | 17,278 | 17,292 | 17,287 | 17,323 | 17,273 |
+| Größter Frame (ms) | 24,711 | 26,717 | 25,157 | 33,023 | 50,018 |
+| GC/Frame Mittel (B) | 131.636 | 119.633 | 119.469 | 275.403 | 300.706 |
+| Größter Save (ms) | 22,558 | 20,622 | 17,965 | 20,215 | 39,958 |
+
+Die Streamingänderung senkt die Allokationen in den Eingabephasen leicht; **sie belegt keinen durchgehenden Latenzgewinn**. Der größte Kauf-Save ist in dieser Aufnahme sogar höher. Keine Behauptung, sämtliches Ruckeln oder stabile 60 fps seien abgenommen. Weitere Optimierung muss Pending-Decode/Domainvalidierung und Kauf-Layout getrennt untersuchen, ohne die dauerhafte Transaktion abzuschwächen. Vollständige Messwerte einschließlich Hauptthread-, GPU-, Heap-, Layout-, Canvas- und Save-Markern: [maschineller Nachweis](unity-iphone-repair-verification.json), lokale Rohaufnahme `IdleIntelligence/Builds/performance-review/final-be8b04ca/`.
+
+## Visuelle Prüfung und Grenzen
+
+Alle 36 tatsächlichen Game-View-Bilder bei **320×694, 390×846, 430×932**, DE/EN und Hardware ×1/×10/MAX wurden selbst angesehen. Einheitlicher Header, ursprüngliches randloses Labor, kompakte Hardware und drei vollständige Zeilen ohne Dialog bei 390, unterschiedliche Trainingsicons, einzelne Trainings-/Forschungsüberschrift und Scrollerende oberhalb der Navigation sind sichtbar. Lange Beschreibungen sind bewusst gekürzt und vollständig über Details erreichbar. Ein letzter Dialogrest „bauen?“ und unnötiges Scrollen der ersten Karte wurden vor dem Endbuild korrigiert. Die Detailtexte sind auf 320 kleiner; physische Lesbarkeit bleibt Geräteprüfung. Der Finger liegt kurz am Ziel und kann einzelne Buttonbuchstaben überdecken; keine Eingabesperre.
+
+Originale ohne Nachbearbeitung: [Mira vorher](media/unity-iphone-repair/before-mira.png), [Training vorher](media/unity-iphone-repair/before-training.png), [alte native Modalüberlagerung](media/unity-iphone-repair/before-baseline-modal.png), [Labor nachher](media/unity-iphone-repair/hardware-de-1-390.png), [Training nachher](media/unity-iphone-repair/training-de-390.png), [Forschung nachher](media/unity-iphone-repair/research-de-390.png). Die alte native Modalgrafik verdeckt die darunter angeforderte Ansicht; sie ist kein frei sichtbares Vorherbild der Forschung. Sämtliche neuen Einzelbilder liegen im selben Medienordner; intern verwendete Kontaktbögen sind ausschließlich Prüfhilfen, keine Implementierungsbilder. Die vier erwähnten Nutzerbilder fehlen als zugängliche Dateien.
+
+Keine neuen externen Assets oder Lizenzen. Original-Mira, Labor, Hardware, Ressourcen und vorhandene Fonts weiterverwendet. Der Tutorialfinger übernimmt die eigene TS-Pixelsilhouette als uGUI-Geometrie, keine neue Figur. Keine allgemeine Effektbibliothek oder Balanceänderung.
+
+## Bestehender Simulator-Spielstand
+
+Vor dem Update beide aktuellen Originalstände vollständig mit SHA-256 gesichert unter `IdleIntelligence/Builds/performance-review/originals-immediately-before-update/`. Vor und **nach Installation vor Appstart**: Unity 9/9 und Capacitor 15/15 Dateien unverändert. Die ältere Sicherung war durch vorheriges legitimes Spielen überholt und wurde ausdrücklich nicht zurückkopiert.
+
+Normale Unity-App erfolgreich gestartet und erneut geladen: vorhandener Name, Gems, Hardware, Forschung, Trainingslevel, Inventar, Ausrüstung, Fragmente, Upgrades, Kapseln, Commerce-/Werberechte, Einstellungen, Webarchiv und Rootfeldmenge erhalten; Saveversion 22. Abweichungen in Workshoprevision/Materialzufall/Komponenten und INT-Anspruch/-Automationssekunden entsprechen bestehendem Offline-/Zeitfortschritt; keine Rücksetzung. Spielcode laut **installierter Info.plist** be8b04ca, Unity 6000.3.26f1, iOS Simulator ARM64. Das ist weiterhin kein physisches iPhone.
+
+### Native Abweichung im Finger-Nachweis
+
+Der natürliche Mitschnitt `fresh-tutorial-final-be8b04ca.mp4` besteht funktional (91,225 s natürliche Drohne, 94,224 s Reload), **zeigt jedoch entgegen dem Editor keinen Tutorialfinger**. Damit ist er kein abschließender Fingernachweis. Ursache: `TutorialPointer` verdeckte die uGUI-Lebenszyklusmethoden ohne `base.OnEnable/OnDisable`; im Editor konnte die zusätzliche Validierung die fehlende Runtime-Registrierung verdecken. Die Korrektur überschreibt beide Methoden korrekt, erhält Registrierung/Cleanup und setzt den Zeiger an den unteren Zielrand statt über den Buttontext. Der UI-Test prüft ausdrücklich die tatsächliche `GraphicRegistry`. Diese zusätzliche Playerkorrektur erhält vor dem Abschluss einen neuen nativen Build, Aufnahme und vollständigen PlayMode-Lauf. Der erste Mitschnitt bleibt als Befund erhalten.
+
+Endstand-Profilfenster be8b04ca: tatsächlich 2.000 vom Editor geladene Frames, 58 Saves; PendingValidate 490,963 ms gesamt (8,465 ms/Aufruf), Encode 209,822 ms, Commit 105,398 ms, Validate 85,678 ms, OriginalHash 42,206 ms, Flush 29,537 ms. Layout insgesamt 1.394,248 ms; CanvasUpdate.Layout ist verschachtelt und wird nicht zusätzlich addiert. Diese Rohdaten erklären verbleibende synchrone Arbeit, keine vollständige Geräteabnahme.

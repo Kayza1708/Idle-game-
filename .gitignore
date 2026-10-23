@@ -5,3 +5,6 @@ dist/
 *.bak
 *.backup
 package-lock.backup.json
+
+# Local native exports, profiler captures and private save backups
+/Builds/
