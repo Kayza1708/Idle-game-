@@ -118,7 +118,7 @@ namespace IdleIntelligence.Runtime
 
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
-            if(tab=="training"||tab=="research")learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,tab=="training"?"Training":"Forschung",18,34);
+            if(tab=="training"||tab=="research")learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,tab=="training"?"Training":"Forschung",18,tab=="research"?48:34);
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
             for(int i=0;i<count;i++)
             {
@@ -142,7 +142,7 @@ namespace IdleIntelligence.Runtime
         static string Seconds(double seconds)=>Math.Max(0,seconds).ToString("F0")+" s";
         void Refresh()
         {using(PerformanceMarkers.Refresh.Auto()){
-            if(State==null)return;RefreshQueues();if(learningOverview!=null){bool de=State.Settings.language=="de";learningOverview.text=tab=="research"?(de?"Forschung · Labore ":"Research · Labs ")+PrestigeAutomation.ResearchJobs(State).Count()+" / "+PrestigeAutomation.LabCount(State)+" · "+State.Prestige.researchQueue.Length+(de?" wartend":" queued"):(de?"Training":"Training");}if(tab=="research"){var access=Content.Find("ChallengesAccess")?.GetComponent<Button>();if(access!=null)access.GetComponentInChildren<Text>().text=ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen";var lab=Content.Find("SecretLab")?.GetComponent<Button>();if(lab!=null){lab.interactable=Writable&&State.Prestige.lab;lab.GetComponentInChildren<Text>().text=State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · "+State.Prestige.Total+" / "+PrestigeRules.V("labThreshold")+" Gesamt-INT";}}
+            if(State==null)return;RefreshQueues();if(learningOverview!=null){bool de=State.Settings.language=="de";learningOverview.text=tab=="research"?(de?"Forschung\n<size=12>Labore ":"Research\n<size=12>Labs ")+PrestigeAutomation.ResearchJobs(State).Count()+" / "+PrestigeAutomation.LabCount(State)+" · "+State.Prestige.researchQueue.Length+(de?" wartend</size>":" queued</size>"):(de?"Training":"Training");}if(tab=="research"){var access=Content.Find("ChallengesAccess")?.GetComponent<Button>();if(access!=null)access.GetComponentInChildren<Text>().text=ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen";var lab=Content.Find("SecretLab")?.GetComponent<Button>();if(lab!=null){lab.interactable=Writable&&State.Prestige.lab;lab.GetComponentInChildren<Text>().text=State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · "+State.Prestige.Total+" / "+PrestigeRules.V("labThreshold")+" Gesamt-INT";}}
             var rates=Game.ViewRates(State);DisplayIncome=rates.Income;DisplayDataRate=rates.Data;
             string language=State.Settings.language,format=State.Settings.numberFormat;
             if(GetComponent<MobileShell>()!=null){Credits.text=HasReadableState?NumberFormatting.Format(State.Credits,format):"—";Data.text=HasReadableState?NumberFormatting.Format(State.Data,format):"—";Compute.text=HasReadableState?NumberFormatting.Format(rates.Compute,format):"—";Users.text=HasReadableState?NumberFormatting.Format(ScientificNumber.From(State.Retention.gems),format):"—";}

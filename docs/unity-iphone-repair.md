@@ -85,3 +85,33 @@ Die eingefügte Aufgabenbeschreibung vom 23.10. wurde vollständig gelesen. Die 
 - Lernkarten: gemeinsames Prefab, unterschiedliche Originalmotive für drei Trainingsarten, untergeordnetes 44er Informationsziel im Kopf; laufende Arbeit zeigt Fortschritt/Restzeit ohne deaktivierte große Startfläche oder irreführende Folgekosten. Verwaltung bleibt im Menü.
 
 Zwischenprüfungen: fünf gezielte PlayMode-Fälle bestanden, einschließlich echter Raycasts bis Forschungsstart, Skip/Resume/Reload, 30 Ansichtswechseln ohne doppelte Mira-/Fingerkomponenten sowie gleichbleibender Hardware-Kaufgeometrie und drei vollständig sichtbaren Hardwarezeilen bei echtem 390×846-Display. DE/EN-Game-View-Bilder für 320/390/430 und ×1/×10/MAX erzeugt und repräsentative Bilder selbst angesehen. Danach den sichtbar zu hohen Infobutton im gemeinsamen Headerlayout korrigiert. Finaler Gesamtlauf, neue native Aufnahme mit Finger und erneute Profilaufnahme sind noch offen. Keine visuelle oder Performance-Fertigmeldung.
+
+## Optimierter nativer Zwischenstand 945f98e9 (getrennte Konfiguration)
+
+Xcode `ReleaseForProfiling`, IL2CPP `Release`/Clang `-O3`, weiterhin Unity Development Player. **Nicht dieselbe Konfiguration wie die vorherige Debug-Tabelle**; daraus keine alleinige Code-Speedup-Zahl ableiten. Gleicher Simulator, 1206×2622, gleiche vorbereitete drei Ansichten, Editor/Compiler während der Messung geschlossen, keine Videoaufnahme.
+
+| Simulator, optimiert | Labor/Hardware | Training | Forschung |
+|---|---:|---:|---:|
+| Frame Mittel | 16,667 ms | 16,666 ms | 16,667 ms |
+| Frame p95 | 17,283 ms | 17,294 ms | 17,301 ms |
+| Größter Frame | 29,101 ms | 25,275 ms | 27,616 ms |
+| GC / Frame Mittel | 131.403 B | 116.714 B | 119.185 B |
+| UI-Refresh Mittel | 0,223 ms | 0,108 ms | 0,337 ms |
+| Größter Save | 19,931 ms | 20,041 ms | 24,697 ms |
+| Neue UI-Knoten stationär | 0 | 0 | 0 |
+
+Zusätzliche **vorbereitete** Inputphasen, keine natürliche Progressionsabnahme: 30 echte Tap-Transaktionen und 20 Hardwarekäufe über bestehende Buttonaktionen. Mittel 16,919/17,627 ms; größte Frames 49,386/50,034 ms; größte Saves 21,760/28,007 ms. Es bleiben sichtbare Transaktionsspitzen. Rohdaten: `Builds/performance-review/after945-release/`.
+
+Die echte `.raw`-Auswertung lädt das vom Editor bereitgestellte Fenster von **2.000 Frames**, nicht die gesamte längere Datei. Darin 58 Save-Marker: Pending-Vollprüfung insgesamt 584,331 ms (10,075 ms/Aufruf), Encode 209,472 ms (3,612 ms/Aufruf), Validate 109,085 ms (1,881 ms/Aufruf), Commit 101,796 ms (1,755 ms/Aufruf), OriginalHash 42,719 ms (0,737 ms/Aufruf), Flush 38,664 ms (0,667 ms/Aufruf). Dateiflush ist somit nicht die dominierende gemessene Ursache. Layout und CanvasUpdate.Layout sind verschachtelte Marker und dürfen nicht addiert werden. Das Fenster umfasst überwiegend die zusätzlichen Eingabephasen; kein unzulässiger Layout-Vergleich mit den ersten drei Baselinephasen.
+
+Daraufhin wird beim Lesen ungeescapter JSON-Strings auf unnötige StringBuilder verzichtet; dieselbe UTF-16-/Kontrollzeichenprüfung bleibt erhalten. Escapes laufen weiter über den vollständigen Parser. Vollständige EditMode-Regression nach dieser Änderung: **137/137 bestanden**, einschließlich unbekannter Felder, fehlerhafter Originale, numerischer Koerzierung und neuer Gegenproben für rohe/escapte Surrogate. Pending-Deserialisierung, Domainvalidierung, Prüfsummen, Konkurrenzprüfung, fsync, atomarer Replace und Backup bleiben erhalten. Der Performancegewinn dieser letzten Änderung muss im nächsten nativen Stand gemessen werden.
+
+## Tatsächlicher natürlicher Einstieg im Simulator
+
+`fresh-tutorial-945f98e9.mp4`: echter ungeschnittener Simulator-Mitschnitt, Standardstart mit 50 Credits, keine Zuschüsse, keine beschleunigte Uhr, separater Entwicklungs-Save. Die Automatisierung trifft die echten EventSystem-Raycasts und sendet Pointer-Down/Up/Click; der Namenswert wird programmgesteuert ins echte InputField gesetzt. Eine reale iOS-Tastatureingabe wurde damit **nicht** abgenommen. Ereignisprotokoll im gleichnamigen Ordner: Name, Tap, Hardware, Training, Forschung; natürliche Drohne bei 91,278 s genau einmal eingesammelt; Reload bei 94,237 s mit erhaltenem Namen, Intro-Verbrauch und einem Drop. Der ursprüngliche Protokolltext nennt `Application.buildGUID` fälschlich „commit“; das ist eine Unity-Build-ID. Der tatsächliche Git-Commit ist **945f98e9e35e58f6b5e5cd00ab8a10367eded4e4**, anhand Exportmanifest und installierter App-Metadaten. Die Beschriftung im Entwicklungsharness ist inzwischen korrigiert.
+
+AVFoundation konnte die Aufnahme dekodieren; Kontrollframes vor/nach Hardware, Training, Forschung und Reload wurden angesehen. **Keine Audiospur vorhanden**. Der Mitschnitt belegt die grundlegende Führung, enthält aber noch den danach korrigierten festen Kartenhöhen-/Textseitenstand und ersetzt deshalb nicht den ausstehenden endgültigen Mitschnitt.
+
+Weitere konkrete Layoutkorrektur: Ein Bild mit intrinsischer Spritehöhe darf nicht die bevorzugte Kartenhöhe bestimmen. `LearningCard` liefert die tatsächliche Inhaltshöhe über den bestehenden uGUI-Layoutvertrag; Namen und Wirkungstexte können umbrechen. Der Pixel-Finger wird nach der Canvas-Layoutphase positioniert, versteckt sich bei Menüs/Itemfenstern und verweist bei Hardware direkt auf den Kaufbutton. Forschungsüberschrift und Laborbelegung sind getrennte Textzeilen. Die Tests prüfen jetzt tatsächliche Game-View-Displaygrößen statt ausschließlich RenderTexture-Wechsel; neun gezielte Fälle bestanden vor dem letzten zusätzlichen Mira-Padding. Der vollständige Schlusslauf folgt noch.
+
+Beim konkreten TS-Tapflächenabgleich wurde zusätzlich ein historisch fehlender Consumer sichtbar: Der TS-Halte-Repeater (3/s) ist in der Unity-Tapfläche nicht angebunden. Dieser Auftrag untersagt neue Funktionen; die bestehenden Einzel-Taps bleiben unverändert. Mira zeigt deshalb für diesen Schritt nur die tatsächlich unterstützte Tap-Anweisung. Quelltexte/Katalog/Balance werden dafür nicht umgeschrieben. Der fehlende Consumer bleibt ausdrücklich im Backlog und ist kein abgenommenes Migrationskriterium.

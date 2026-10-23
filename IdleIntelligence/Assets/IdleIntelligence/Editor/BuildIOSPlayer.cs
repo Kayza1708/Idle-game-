@@ -41,6 +41,8 @@ namespace IdleIntelligence.Editor
                 Debug.Log("IOS_SIMULATOR_BUILD " + report.summary.result + " commit=" + commit + " errors=" + report.summary.totalErrors);
                 if (report.summary.result != BuildResult.Succeeded)
                     throw new InvalidOperationException("Unity iOS export failed: " + report.summary.result);
+                var plistPath=Path.Combine(output,"Info.plist");var plist=new System.Xml.XmlDocument();plist.XmlResolver=null;plist.Load(plistPath);var dictionary=plist.DocumentElement.SelectSingleNode("dict");
+                foreach(var pair in new[]{new[]{"IdleUnityCommit",commit},new[]{"IdleUnityPlatform","iOS Simulator ARM64"},new[]{"IdleUnityVersion",Application.unityVersion}}){var key=plist.CreateElement("key");key.InnerText=pair[0];var value=plist.CreateElement("string");value.InnerText=pair[1];dictionary.AppendChild(key);dictionary.AppendChild(value);}plist.Save(plistPath);
                 File.WriteAllText(Path.Combine(output, "unity-build-provenance.txt"),
                     "commit=" + commit + "\nUnity=" + Application.unityVersion +
                     "\nplatform=iOS Simulator ARM64\nbundle=com.kayza1708.idleintelligence.unity\n" +
