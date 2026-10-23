@@ -9,7 +9,7 @@ namespace IdleIntelligence.Runtime
     public static class WorkshopUIFactory
     {
         public static Font Font=>GameTheme.Body;
-        public static GameObject Node(string name,Transform parent,params Type[] types){var g=new GameObject(name,typeof(RectTransform));g.transform.SetParent(parent,false);foreach(var t in types)g.AddComponent(t);return g;}
+        public static GameObject Node(string name,Transform parent,params Type[] types){PerformanceMarkers.UiNodes++;var g=new GameObject(name,typeof(RectTransform));g.transform.SetParent(parent,false);foreach(var t in types)g.AddComponent(t);return g;}
         public static void Fill(RectTransform r){r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.offsetMin=r.offsetMax=Vector2.zero;}
         public static void Size(GameObject g,float h){var l=g.AddComponent<LayoutElement>();l.minHeight=h;l.preferredHeight=h;l.flexibleHeight=0;}
         public static Text Label(string name,Transform parent,string value,int size=14,float height=32){var g=Node(name,parent,typeof(Text));var t=g.GetComponent<Text>();t.font=Font;t.text=value;t.color=new Color(.9f,.95f,1);t.fontSize=size;t.alignment=TextAnchor.MiddleLeft;t.raycastTarget=false;Size(g,height);return t;}
