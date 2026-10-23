@@ -20,4 +20,8 @@ for(seconds=0;seconds<14400;seconds++){
 }
 if(!state.prestigeCount)throw Error('No natural first prestige within four hours');
 const result={scope:'Fresh natural deterministic policy: default 50 credits, no grants, three accepted taps/second, one affordable best compute/base-price hardware purchase/second, lower Q/E training and existing research up to level 10. Accelerated elapsed-time simulation, not a wall-clock playthrough.',seconds:seconds+1,initial,actions,checks};
-const json=JSON.stringify(result)+'\n',path='IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/NaturalPrestigeRun.json';if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==json)throw Error('Stale natural prestige replay')}else writeFileSync(path,json);console.log('Natural first prestige:',seconds+1,'seconds;',actions.length,'real paid/tap/time actions;',checks.length,'checkpoints');
+const json=JSON.stringify(result)+'\n',path='IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/NaturalPrestigeRun.json';if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==json){
+const old=JSON.parse(readFileSync(path,'utf8')),changes:string[]=[];
+const inspect=(a:any,b:any,p:string)=>{if(changes.length>=12||JSON.stringify(a)===JSON.stringify(b))return;if(a&&b&&typeof a==='object'&&typeof b==='object'){for(const key of new Set([...Object.keys(a),...Object.keys(b)]))inspect(a[key],b[key],p+'.'+key)}else changes.push(`${p}: ${JSON.stringify(a)} -> ${JSON.stringify(b)}`)};
+inspect(old,result,'replay');console.error(changes.join('\n'));throw Error('Stale natural prestige replay')}
+}else writeFileSync(path,json);console.log('Natural first prestige:',seconds+1,'seconds;',actions.length,'real paid/tap/time actions;',checks.length,'checkpoints');
