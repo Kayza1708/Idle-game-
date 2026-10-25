@@ -1,0 +1,61 @@
+{
+  "editor": "6000.3.26f1",
+  "sourceBaseline": "c722e94111dd07fb7432a60fc8e68b387f43f730",
+  "platform": "Unity Editor Game View; no new native build",
+  "saves": "schema23 unchanged; isolated prepared fixtures only",
+  "tests": {
+    "edit-final": {
+      "passed": "142",
+      "failed": "0",
+      "duration": "136.2051027",
+      "sha256": "c17a6cd235c2c012b9f0079d5442541c5a44f745131056228600e5b878d87948"
+    },
+    "play-full-before-final-bar-grid": {
+      "passed": "99",
+      "failed": "0",
+      "duration": "444.1406004",
+      "sha256": "7dfd56faca3438d4b3088940e59173c664e9a8fcc4da112a24d9065296369d65"
+    },
+    "ui-final": {
+      "passed": "2",
+      "failed": "0",
+      "duration": "8.070058",
+      "sha256": "a811c389278404cc2cd19bfa8544f2deb71b11963b759a00871c7b5830494046"
+    }
+  },
+  "media": {
+    "axiom-de-320.png": "772f12d18b0aabefc62aa9d4fe03bfe7222b707335a3c1ed423f767aada4a8f6",
+    "axiom-de-390.png": "a6940d9fd8a6a0b0cda95a27f52ae15b2cf6818514f50adca3c4f2e64668f74d",
+    "axiom-de-430.png": "79fc2e47894728d2930035d678ae83d4f69c1bf036362dc0fe232c099d6c8ff1",
+    "axiom-en-320.png": "8afb9423327b1a994548f9b8c003389853544fda7315e43cebf36eb7dc5fa124",
+    "axiom-en-390.png": "8dbb87dd3f31f333fb80a8ceb6fa17928b470f94e0e9c2a11c81b771203bdb06",
+    "axiom-en-430.png": "2211a3debc0e816ddad9721b3926f43f0e482c9e0208ec934a42870d20c4a280",
+    "before-int-de-390.png": "e97deebb647cef1a906f241345069ec98b46bf14a392474bbac17262a2ad78f9",
+    "detail-axiom-de-320.png": "bd2553376277469ada3edc5afb3e40f09432226a3834480bc1bfd431e0e542cb",
+    "detail-axiom-de-390.png": "6443d8384575dd7753ed4eb6437bb63df8bab097c771097fd739ae6a4c17ecd7",
+    "detail-axiom-de-430.png": "6a020b54e6b7a01c7d2b1c38e78243fa6c814452a69411792f200e2ce898741f",
+    "detail-axiom-en-320.png": "c288c7dd3f25f0c3e3514bc06f60289c6b8a6e2adf2f5aff848b8cc62e68b0c8",
+    "detail-axiom-en-390.png": "a3ddfae6f8aee78e79a71f1245a8ed0556ea44bd8589cb52b3c0eec6c71d6997",
+    "detail-axiom-en-430.png": "b52dcf966c6bef6b81244ca919a6a2c5072d69fa58f706a245ceb151831b6408",
+    "detail-int-de-320.png": "9200774deea53153f4363b57c4345db097cad1f9e59e956e6239d48cb8b3a267",
+    "detail-int-de-390.png": "6a6c9dd0e97291373ec0d5f5d4d7ac5ffbd049e744c63eb8ee75f4de8164de1b",
+    "detail-int-de-430.png": "e7a6bee263e668725cf3bda3bce832c52540cb5c8df71c480592706d9786a0c5",
+    "detail-int-en-320.png": "29e302d75b1977bd3ffc5153ae858f057fafff836819d66722d5d4f8f5dbee77",
+    "detail-int-en-390.png": "73796721de517dee5f1e564898e1408f889199b16ab777cee28c911a59e81143",
+    "detail-int-en-430.png": "1e86b1c451cc055eb845ada936f892151ff62aac4339a6cd580e1fa21286645e",
+    "int-de-320.png": "a67bac7f8a14aad1795f9b8aaa97b98f61927a4c5c57c3099c3cf0ca97080f7c",
+    "int-de-390.png": "82e27d1062374e456851e6eeab9aa34f88def46615e749ce1afd73e2f1a807d4",
+    "int-de-430.png": "8f4d6dd34373ca6c945f9ec4fddc5748d4e62fae0230ff7660be12112a568464",
+    "int-en-320.png": "0f67b9608d1c868b4cb37a0772ca250dcd5d8939362222ba58896f2bc32cb76c",
+    "int-en-390.png": "b0c7c9b2017123e8adb1c579fa3e6cd6045b34bbdaf7cf7b51fcb8782e82bd5f",
+    "int-en-430.png": "d3ee1ed459fd2d903cd09112e28e91c0b8bb927049833e943bf138d0c634cf59"
+  },
+  "typescript": {
+    "typecheck": "passed",
+    "vitest": 1937,
+    "files": 147,
+    "build": "passed",
+    "initialTimeouts": 7,
+    "unchangedTimeouts": true
+  }
+}

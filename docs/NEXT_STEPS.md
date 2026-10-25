@@ -1,5 +1,10 @@
 # Nächste Schritte · 25.10.2026
 
+## Prestige-/Axiombaum im gemeinsamen Spielstil · 25.10.2026
+
+Gemeinsame Stahlrahmen, Originalfonts, Goldaktionen, ruhige Werkzeugleisten und eigene Progressionsicons; kompakte inhaltsabhängige Details und korrekte Viewportanpassung. Regeln, Saves und freie Knotenkäufe erhalten.142EditMode/99PlayMode bestanden; finale Präsentationskorrekturen zusätzlich mit2UI-Tests und142EditMode geprüft.24Unity-Bilder DE/EN bei320/390/430px, bekannte Übersetzungsfallbacks getrennt offen. [Prüfbericht und Vorher/Nachher](unity-prestige-skin.md). Kein neuer Simulatorbuild, keine physische Geräteabnahme.
+
+
 ## Truhe, Gumball und mobile Mira-Box · 25.10.2026
 
 Die bisherige positive Scharnierbeurteilung ist überholt: Die tatsächliche Perspektivschwäche wurde durch registrierte gezeichnete Öffnungsposen behoben. Der Gumball-Automat gibt eine sichtbare Kapsel aus und öffnet echte separate Hälften; die gemeinsame Tutorialbox enthält kurze Texte und ihre Aktionen. Finale Regression142EditMode/97PlayMode/1937Vitest und tatsächliche Clips/Bilder: [aktueller Prüfbericht](unity-reward-motion-v2.md). Physische Touch-/Lautsprecher-/Tastatur-/Performanceabnahme bleibt getrennt. Aktuell tatsächlich installiert/gestartet:7a3eeb26 auf iPhone16Pro-Simulator/iOS27; normaler Save23 und23Unity-/15Capacitor-Originale erhalten. Native Mira-Box zusätzlich isoliert geprüft; physische Geräteabnahme bleibt offen.

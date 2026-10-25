@@ -1,5 +1,10 @@
 # Idle Intelligence – aktueller Stand
 
+## Prestige-/Axiombaum im gemeinsamen Spielstil · 25.10.2026
+
+Gemeinsame Stahlrahmen, Originalfonts, Goldaktionen, ruhige Werkzeugleisten und eigene Progressionsicons; kompakte inhaltsabhängige Details und korrekte Viewportanpassung. Regeln, Saves und freie Knotenkäufe erhalten.142EditMode/99PlayMode bestanden; finale Präsentationskorrekturen zusätzlich mit2UI-Tests und142EditMode geprüft.24Unity-Bilder DE/EN bei320/390/430px, bekannte Übersetzungsfallbacks getrennt offen. [Prüfbericht und Vorher/Nachher](unity-prestige-skin.md). Kein neuer Simulatorbuild, keine physische Geräteabnahme.
+
+
 ## Truhenscharnier und Komponentenübersicht · 23.10.2026
 
 Mechanisch befestigter Deckel mit sichtbarer Innenseite und offener Truhe vor der Beuteenthüllung; alle 20 Komponenten als gemeinsames kompaktes Inventarraster. Originalicons anhand der TS-Atlaszuordnungen korrigiert. [Umsetzung, echte Vorher-/Nachher-Clips mit Unity-Audio und Prüfung](unity-chest-components.md). 139/139 EditMode, abschließend 89/89 PlayMode und 1.902 Vitest bestanden; keine pauschale Geräte-/Performancefreigabe.

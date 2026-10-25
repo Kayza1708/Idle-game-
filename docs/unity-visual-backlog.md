@@ -12,7 +12,7 @@ Der erste ausdrücklich beauftragte Designabschnitt ist in `unity-design-01.md` 
 
 ## Weitere Gestaltungsabschnitte
 
-Forschung, INT/Axiome, Analysen/Schmiede, Modelle, Shop, Seasons, Profil und Einstellungen erhalten anschließend eigene Gestaltungsdurchläufe auf dieser Grundlage. Ihre vorhandene Funktionalität bleibt bestehen. Keine pauschale Designfertigmeldung.
+Forschung, Analysen/Schmiede, Modelle, Shop, Seasons, Profil und Einstellungen erhalten anschließend eigene Gestaltungsdurchläufe auf dieser Grundlage. Ihre vorhandene Funktionalität bleibt bestehen. Keine pauschale Designfertigmeldung.
 
 - Typografie/Abstände in den übrigen Bildschirmen mit den geprüften Originalfonts vereinheitlichen.
 - Knotenbeschriftungen bei kleinem Zoom besser lesbar machen; Detailfenster bleiben die ausführliche Ansicht.
@@ -131,3 +131,11 @@ Die positive Scharnierbeurteilung vom23.10 ist durch erneute Nutzerabnahme über
 Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich aktualisierten Simulator/physischem Gerät; Lautsprecher-/Touchprüfung, Tastatur-Inset bei Namenswahl, weitere Marktverdichtung und historische Sprachfallbacks außerhalb dieses Abschnitts. Die gezeichneten Deckelposen und zeitkontinuierlichen Kapsel-/Beutebewegungen sind getrennte Techniken; kein Anspruch auf physikalische3D-Truhensimulation. Keine pauschale Qualitätsfreigabe aus Testergebnissen.
 
 - Native Mira-Namenswahl/Dialog auf iPhone16Pro-Simulator mit sicherer Insel-/Navigationsfläche tatsächlich angesehen; normaler Spielerstand danach wieder geöffnet. Physischer Finger/Softwaretastatur/Lautsprecher bleibt offen. Vereinzelte bereits vorhandene Randfragmente in Material-Atlasmotiven (z.B. Keramikkondensator) getrennt bei der nächsten gezielten Assetbereinigung beurteilen; keine Zuordnungs-/Balanceänderung in dieser Animationskorrektur.
+
+## INT-/Axiomnetz · 25.10.2026
+
+- [x] Gemeinsame Stahl-/Schrift-/Goldgestaltung und eigene Progressionsicons, ruhige Bereichs-/Werkzeugleisten.
+- [x] Inhaltsabhängige Knotendetails, Einzeilennamen mit vollständigem Detailtitel, Geld-/Kaufzustände und dynamische Netzhöhe.
+- [x] Tatsächliche DE/EN-Ansichten bei320/390/430px selbst geprüft; [Nachweise](unity-prestige-skin.md).
+- [ ] Historische gemischtsprachige Netzbeschriftungen und Katalogbeschreibungen vollständig lokalisieren.
+- [ ] Reale Zwei-Finger-/Safe-Area-/Lesbarkeitsabnahme auf physischem iPhone; kein neuer Simulatorbuild für diesen Abschnitt.
