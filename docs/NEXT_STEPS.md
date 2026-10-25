@@ -2,7 +2,7 @@
 
 ## Truhe, Gumball und mobile Mira-Box · 25.10.2026
 
-Die bisherige positive Scharnierbeurteilung ist überholt: Die tatsächliche Perspektivschwäche wurde durch registrierte gezeichnete Öffnungsposen behoben. Der Gumball-Automat gibt eine sichtbare Kapsel aus und öffnet echte separate Hälften; die gemeinsame Tutorialbox enthält kurze Texte und ihre Aktionen. Finale Regression142EditMode/97PlayMode/1937Vitest und tatsächliche Clips/Bilder: [aktueller Prüfbericht](unity-reward-motion-v2.md). Physische Touch-/Lautsprecher-/Tastatur-/Performanceabnahme bleibt getrennt. Der separate native Simulatorupdate wird nach Sicherung des normalen Saves protokolliert.
+Die bisherige positive Scharnierbeurteilung ist überholt: Die tatsächliche Perspektivschwäche wurde durch registrierte gezeichnete Öffnungsposen behoben. Der Gumball-Automat gibt eine sichtbare Kapsel aus und öffnet echte separate Hälften; die gemeinsame Tutorialbox enthält kurze Texte und ihre Aktionen. Finale Regression142EditMode/97PlayMode/1937Vitest und tatsächliche Clips/Bilder: [aktueller Prüfbericht](unity-reward-motion-v2.md). Physische Touch-/Lautsprecher-/Tastatur-/Performanceabnahme bleibt getrennt. Aktuell tatsächlich installiert/gestartet:7a3eeb26 auf iPhone16Pro-Simulator/iOS27; normaler Save23 und23Unity-/15Capacitor-Originale erhalten. Native Mira-Box zusätzlich isoliert geprüft; physische Geräteabnahme bleibt offen.
 
 
 ## Truhenscharnier und Komponentenübersicht · 23.10.2026

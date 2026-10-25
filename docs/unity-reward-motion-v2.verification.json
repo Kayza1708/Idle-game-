@@ -23,7 +23,7 @@
   },
   "typecheckExitCode": 0,
   "webBuildExitCode": 0,
-  "actualScreenshotCount": 31,
+  "actualScreenshotCount": 33,
   "preparedReviewOnly": true,
   "normalSaveSchemaUnchanged": 23,
   "nativeDeviceAcceptance": false,
@@ -56,10 +56,39 @@
     "mira-dialog-de-320.png": "15830d12c787b727d7983b2524c0ded927b3808bed953fcf550350a2e4a02d8a",
     "gumball.mp4": "9da4d1b0d75e29e6931ff872b7c2ff104db6399ccb1b29c10240fd083d630521",
     "mira-dialog-en-390.png": "b3b4f776e12c113abd8a3d2ab25f1b3614a140366c5475fe9be25d72391d3dac",
+    "native-mira-dialog.png": "3b4e655511909f095526b6f88314081f851f51aa82507ada87d5356c48ee34fd",
     "chest.mp4": "c6060812ba9cee16a3d117c13a8b32e7c52735e6f4f7bf26d047568f6d96c9bd",
     "mira-dialog-en-430.png": "8504679f56e8c274572f6f74930a3567d27924f39d65f283e9ca157af60dbe08",
+    "native-mira-naming.png": "a42275f05e9eb9fa5fd14be992d373e19dce41f98feb98bfb210aac9deaee12b",
     "mira-dialog-de-430.png": "431f07c4e71df7d45fa8de58262293aef863cbf43b6ba1b042f73325382b1022",
     "mira-dialog-en-320.png": "928beb7d94c63d79928a89271e92d7ea04b4c3cfd61ed9a9a60cec8f9bdf6be2",
     "mira-dialog-de-390.png": "443fe51af43dd59de0bc248f40a2a4395e750a5f2bb76e16bcb46df9ac821373"
+  },
+  "sourceCommit": "7a3eeb26eb0ecd42a19d7441fc739610552a3803",
+  "nativeSimulator": {
+    "installedCommit": "7a3eeb26",
+    "device": "iPhone 16 Pro simulator",
+    "runtime": "iOS 27.0",
+    "architecture": "ARM64",
+    "unityExportSucceeded": true,
+    "xcodeBuildSucceeded": true,
+    "installedAndLaunched": true,
+    "saveVersion": 23,
+    "prepared": false,
+    "normalSaveChecksumValid": true,
+    "identityInventoryEquipmentPreserved": true,
+    "originalFilesByteIdenticalBeforeAndAfterInstall": {
+      "unity": 23,
+      "capacitor": 15
+    },
+    "capacitorFilesUnchangedAfterLaunch": 15,
+    "fiveUnitySettingsRestored": true,
+    "isolatedNativeMiraNamingAndDialogueViewed": true,
+    "fullNaturalCampaignReaccepted": false,
+    "normalPlayerResumed": true
+  },
+  "sourceCommitCI": {
+    "check": "passed",
+    "backend": "passed"
   }
 }

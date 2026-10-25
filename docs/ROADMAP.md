@@ -207,3 +207,5 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - [x] Separater Automatenkorpus, passende Kurbel, echte Ausgabe, Abfedern und sauber getrennte Original-Kapselhälften. Transparenzfehler nach Truhe behoben. Transaktionen bleiben vor dem Effekt gespeichert.
 - [x] Gemeinsame kompakte Mira-Sprechblase mit internen Weiter-/Skip-Aktionen, Namenswahl und tatsächlicher sieben-sprachiger Frage; Navigation/Spiel bleiben bedienbar.
 - [x] Final142EditMode/97PlayMode/1937Vitest, Compile/Typecheck/Build und echte DE/EN320/390/430-Bilder sowie zwei vollständige Clips mit Unity-Audio. [Prüfbericht](unity-reward-motion-v2.md). Keine physische Gerätefreigabe.
+
+- [x] Implementierungscommit7a3eeb26 als nativer ARM64-Unity-Player auf iPhone16Pro-Simulator/iOS27 installiert/gestartet.23Unity-/15Capacitor-Originale geschützt; gültiger normaler Save23, `prepared=false`. Zusätzlicher isolierter nativer Mira-Start mit50Startcredits angesehen; normaler Spielstand wieder geöffnet. Kein physischer Gerätetest.
