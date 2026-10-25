@@ -200,3 +200,10 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - [ ] Kommerzielle Native-Identität, genehmigter Backendrollout, Moderation/externes Löschen/Store-Datenschutz-IARC und physische Geräteprüfung. Nicht mit den lokalen technischen Nachweisen gleichsetzen.
 
 - [x] Nativer Simulatorplayer des geprüften Implementierungscommits `c15b51eb` separat exportiert, mit Xcode gebaut, tatsächlich installiert/gestartet. Gültiger normaler Save22→23 mit exaktem Original und15/15Capacitor-Originalen nachgewiesen; kein vorbereiteter normaler Spielerstand. Physisches iPhone bleibt separat.
+
+### Gezielte Truhen-/Gumball- und Mira-Korrektur · 25.10.2026
+
+- [x] Verzerrenden Deckel-/Muldenrenderer ersetzt,24 registrierte Öffnungsposen; alle vier Typen, ohne Nachbarstreifen und ohne gestreckten Common-Erstframe.
+- [x] Separater Automatenkorpus, passende Kurbel, echte Ausgabe, Abfedern und sauber getrennte Original-Kapselhälften. Transparenzfehler nach Truhe behoben. Transaktionen bleiben vor dem Effekt gespeichert.
+- [x] Gemeinsame kompakte Mira-Sprechblase mit internen Weiter-/Skip-Aktionen, Namenswahl und tatsächlicher sieben-sprachiger Frage; Navigation/Spiel bleiben bedienbar.
+- [x] Final142EditMode/97PlayMode/1937Vitest, Compile/Typecheck/Build und echte DE/EN320/390/430-Bilder sowie zwei vollständige Clips mit Unity-Audio. [Prüfbericht](unity-reward-motion-v2.md). Keine physische Gerätefreigabe.

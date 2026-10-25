@@ -1,4 +1,9 @@
-# Nächste Schritte · 20.10.2026
+# Nächste Schritte · 25.10.2026
+
+## Truhe, Gumball und mobile Mira-Box · 25.10.2026
+
+Die bisherige positive Scharnierbeurteilung ist überholt: Die tatsächliche Perspektivschwäche wurde durch registrierte gezeichnete Öffnungsposen behoben. Der Gumball-Automat gibt eine sichtbare Kapsel aus und öffnet echte separate Hälften; die gemeinsame Tutorialbox enthält kurze Texte und ihre Aktionen. Finale Regression142EditMode/97PlayMode/1937Vitest und tatsächliche Clips/Bilder: [aktueller Prüfbericht](unity-reward-motion-v2.md). Physische Touch-/Lautsprecher-/Tastatur-/Performanceabnahme bleibt getrennt. Der separate native Simulatorupdate wird nach Sicherung des normalen Saves protokolliert.
+
 
 ## Truhenscharnier und Komponentenübersicht · 23.10.2026
 

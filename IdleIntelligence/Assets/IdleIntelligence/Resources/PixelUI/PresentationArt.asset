@@ -12,6 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab56f91b95ed34197b80ace3f76e5c74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: IdleIntelligence.Runtime::IdleIntelligence.Runtime.PresentationArt
+  ChestOpening:
+  - {fileID: 21300000, guid: 7a8bc69fb68ca46abb0fc1816b8e6903, type: 2}
+  - {fileID: 21300000, guid: 5dbec3bd483234170b8048fbf0bd1bd4, type: 2}
+  - {fileID: 21300000, guid: 28c158a5fcf044cfea862e9624aa8d42, type: 2}
+  - {fileID: 21300000, guid: e2a39299cb60b4a959c18dbc5243f393, type: 2}
+  - {fileID: 21300000, guid: b35487ac3494e48ed8204658fbc2113f, type: 2}
+  - {fileID: 21300000, guid: 21ba738153441486c8e93a9fcf3bfcee, type: 2}
+  - {fileID: 21300000, guid: c1567e19f9fa54aa1bf119dac7ff811c, type: 2}
+  - {fileID: 21300000, guid: 590ae12541e9f4128b66028e26f18ae6, type: 2}
+  - {fileID: 21300000, guid: 198a51f2478484087a517f0c1561f3ac, type: 2}
+  - {fileID: 21300000, guid: 5ce6314f2f35e4c61948fd88c4e0dfc4, type: 2}
+  - {fileID: 21300000, guid: 536333204bf80474cbbd4459021a5b8a, type: 2}
+  - {fileID: 21300000, guid: 041c855589dbc42bda1dd68c9b725bd8, type: 2}
+  - {fileID: 21300000, guid: cfadd57a922c14b818481bdc9f880310, type: 2}
+  - {fileID: 21300000, guid: fd7ad2365f5e14ef0bfe58f24a5b1995, type: 2}
+  - {fileID: 21300000, guid: 6cc6478bd7d744874910993e538c2c53, type: 2}
+  - {fileID: 21300000, guid: 5ab1ad8db8d134edd8c502498ca6ed0e, type: 2}
+  - {fileID: 21300000, guid: 7245aefee4ae549feae4d66e4cb43ceb, type: 2}
+  - {fileID: 21300000, guid: 8068e5f6868f14e00922a87f4fb9152f, type: 2}
+  - {fileID: 21300000, guid: f838d67e51b29435dbc4ae07001dddd2, type: 2}
+  - {fileID: 21300000, guid: f4945f806bbf54900aba6082c40bb543, type: 2}
+  - {fileID: 21300000, guid: 5e775aff8401d41539ddc18d97e14687, type: 2}
+  - {fileID: 21300000, guid: 6aaf614c4bf9e46aa90b8895b5387f5b, type: 2}
+  - {fileID: 21300000, guid: 6d983b1e930864158b4ba058b01d0f6a, type: 2}
+  - {fileID: 21300000, guid: acbd9d311d3c44fcaab77bf763b26d14, type: 2}
+  MachineEmpty: {fileID: 21300000, guid: 0681ce87829f74287a9e70debc5946dc, type: 2}
+  CapsuleTop: {fileID: 21300000, guid: d587cd7dd0c5c46a39ca5e86c1078303, type: 2}
+  CapsuleBottom: {fileID: 21300000, guid: 5119789d03aca43158e5d95455db3078, type: 2}
   ChestBody:
   - {fileID: 21300000, guid: 43946ad175d6b41f0a50595cc974e397, type: 2}
   - {fileID: 21300000, guid: 8250a6264f71d4dcebf2b62ddd6dafef, type: 2}

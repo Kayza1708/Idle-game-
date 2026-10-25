@@ -1,32 +1,34 @@
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace IdleIntelligence.Runtime
 {
+ // Authored poses share one registered base pivot. No rectangular lid cut or
+ // synthetic cavity: the rear hinge and interior are part of the same drawing.
  public sealed class HingedChestRig : MonoBehaviour
  {
   public RectTransform Assembly;
   public Image Body,Lid;
-  public HingedLidMesh Hinge;
-  public ChestWellGraphic Well;
-  public float Opening=>Hinge.Opening;
-  public Vector3 Mouth=>Assembly.TransformPoint(new Vector3(0,10,0));
-  public void Prepare(PresentationArt art,int tier)
+  public float Opening {get;private set;}
+  public int Frame {get;private set;}
+  PresentationArt art;int tier;
+  public Vector3 Mouth=>Assembly.TransformPoint(new Vector3(0,14,0));
+  public void Prepare(PresentationArt source,int value)
   {
-   Assembly.gameObject.SetActive(true);Body.sprite=art.ChestBody[tier];Hinge.Exterior=art.ChestLid[tier];Hinge.Interior=art.ChestInner[tier];Hinge.SetOpening(0);
-   Body.rectTransform.anchorMin=Body.rectTransform.anchorMax=Vector2.one*.5f;Body.rectTransform.pivot=Vector2.one*.5f;
-   Body.rectTransform.sizeDelta=new Vector2(256,256*290f/627);Body.rectTransform.anchoredPosition=new Vector2(0,256*(145f/627-.5f));
-   Lid.rectTransform.anchorMin=Lid.rectTransform.anchorMax=Vector2.one*.5f;Lid.rectTransform.pivot=new Vector2(.626f,.423f);
-   Lid.rectTransform.sizeDelta=new Vector2(256,256*337f/627);Lid.rectTransform.anchoredPosition=new Vector2(256*(.626f-.5f),256*((290+337*.423f)/627-.5f));
-   Lid.rectTransform.localScale=Vector3.one;Lid.rectTransform.localRotation=Quaternion.identity;Body.preserveAspect=Lid.preserveAspect=false;
-   Well.Accent=ItemPortrait.RarityColor(tier==0?0:tier+1);Well.SetVerticesDirty();Pose(0,0,0);SetOpacity(1);
+   art=source;tier=Mathf.Clamp(value,0,3);Assembly.gameObject.SetActive(true);
+   Lid.gameObject.SetActive(false);
+   var r=Body.rectTransform;r.anchorMin=r.anchorMax=Vector2.one*.5f;
+   r.sizeDelta=Vector2.one*256;r.anchoredPosition=new Vector2(0,-100);
+   Body.preserveAspect=false;Pose(0,0,0);SetOpacity(1);
   }
   public void Pose(float opening,float preparation,float settle)
   {
-   Assembly.anchoredPosition=new Vector2(preparation*2,Mathf.Lerp(-48,-160,settle));Assembly.localScale=Vector3.one*Mathf.Lerp(1,.55f,settle);
-   if(Hinge.Opening!=Mathf.Clamp01(opening))Hinge.SetOpening(opening);
-   Well.gameObject.SetActive(opening>.025f);
+   Opening=Mathf.Clamp01(opening);Frame=Mathf.Min(5,Mathf.FloorToInt(Opening*6));
+   var sprite=art.ChestOpening[tier*6+Frame];if(Body.sprite!=sprite){Body.sprite=sprite;Body.rectTransform.pivot=sprite.pivot/sprite.rect.size;}if(Body.rectTransform.sizeDelta!=sprite.rect.size)Body.rectTransform.sizeDelta=sprite.rect.size;
+   // Translation keeps the base registered; no independent lid translation,
+   // squash, rotation or synthetic extra rim can separate it from the body.
+   Assembly.anchoredPosition=new Vector2(0,Mathf.Lerp(-22,-156,settle)+preparation*2);
+   Assembly.localScale=Vector3.one*Mathf.Lerp(1,.46f,settle);
   }
-  public void SetOpacity(float opacity){Body.color=Lid.color=new Color(1,1,1,opacity);Well.canvasRenderer.SetAlpha(opacity);}
+  public void SetOpacity(float value){Body.color=new Color(1,1,1,value);}
  }
 }
