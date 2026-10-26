@@ -1,6 +1,6 @@
 // Generated from the current TypeScript economy/domain. Do not edit.
 namespace IdleIntelligence.Core { public static class ItemBalance {
-public const string SourceHash="890652c02e752b1390d0b501d21980ffa6cda7da0957dbb478e064e78c630f21";
+public const string SourceHash="d07fad8d4c4a1af539bd27b1bdd0fdff87bf0132a863185a4e6736b9fe0fa034";
 public const double MetaKnowledgeLog=6d;
 public const double MetaCycleCount=5d;
 public const double MetaModelCount=5d;
@@ -88,7 +88,7 @@ new ItemDefinition("mnemonic-anchor","Mnemonischer Anker","core",-1,72,"modelTra
 };
 public static readonly double[] OriginalRecipeData=new double[]{0d,0d,1800d,2400d,1200d,1800d,1500d,3000d,3000d,3600d,2800d,2400d,1000d,1000d,1000d,6000d,12000d,6000d,1000d,1000d,12000d,2400d,1000d,2400d,2400d,2400d,6000d,2400d,6000d,12000d,2000000d,4000000d,12000000d,18000000d,8000000d,10000000d};
 public static readonly ModuleDefinition[] Modules={new ModuleDefinition("computeBus","Compute-Bus",new double[]{8d,4d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d},250d,60d),new ModuleDefinition("dataLattice","Daten-Gitter",new double[]{12d,6d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d,0d},500d,120d)};
-public static readonly AnalysisDefinition[] Analyses={new AnalysisDefinition("hardware-short",250d,600d,12d,0.041666666666666664d,0d),new AnalysisDefinition("hardware-long",6000d,14400d,360d,1d,0d),new AnalysisDefinition("architecture-short",800d,1800d,18d,0.125d,0d),new AnalysisDefinition("architecture-long",12800d,28800d,360d,2d,0d),new AnalysisDefinition("artifact-short",4000d,7200d,30d,0.5d,0.004d),new AnalysisDefinition("artifact-long",48000d,86400d,450d,6d,0.06d)};
+public static readonly AnalysisDefinition[] Analyses={new AnalysisDefinition("hardware-short",250d,600d,24d,0.041666666666666664d,0d),new AnalysisDefinition("hardware-long",6000d,14400d,720d,1d,0d),new AnalysisDefinition("architecture-short",800d,1800d,36d,0.125d,0d),new AnalysisDefinition("architecture-long",12800d,28800d,720d,2d,0d),new AnalysisDefinition("artifact-short",4000d,7200d,60d,0.5d,0.004d),new AnalysisDefinition("artifact-long",48000d,86400d,900d,6d,0.06d)};
 public static readonly int[] HardwareFamilies=new int[]{0,0,1,1,2,2,2,3,3,4,0,0,1,1,2,1,3,3,2,4};
 public static readonly int[][] HardwarePairs=new int[][]{new int[]{0,1},new int[]{0,1},new int[]{2,15},new int[]{2,15},new int[]{12,14},new int[]{12,14},new int[]{4,14},new int[]{5,18},new int[]{7,16},new int[]{8,17},new int[]{7,16},new int[]{18,17},new int[]{18,17},new int[]{9,19},new int[]{9,19}};
 public static readonly int[] PackageThresholds=new int[]{10,25,50,100,250,500};

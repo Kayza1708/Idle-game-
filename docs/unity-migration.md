@@ -202,3 +202,7 @@ Alle 26 breiten Zeilen sind erneut in `unity-functional-audit.md` mit tatsächli
 ## Beauftragte Erweiterung nach der funktionalen Basismigration · 23.10.2026
 
 [Visual-/Item-/Store-Abschnitt](unity-visual-items-store.md): sechs zusätzliche Dark-Lab-/Axiomtypen erweitern den ursprünglichen30er-Katalog auf36; dies ist neue beauftragte Spielinhaltserweiterung mit zentraler Balance, kein still geänderter Migrationsmaßstab. Save23 erweitert die alten Arrays unter Erhalt der Originale. Eigene60-/24-Knotensymbole, Mira-Ausdrücke und gemeinsame88er-Ausrüstungssockel ersetzen konkret falsche Darstellungen. Vorbereitete Online-Schutzfunktionen und fünf Transfers pro UTC-Tag werden lokal mit echtem Worker/D1 geprüft; produktiver Rollout und verifizierte Native-Identität bleiben gesonderte offene Integrationen. Das Erkenntnisarchiv erhält weiterhin keinen erfundenen Erwerbsweg.
+
+## Beauftragte Materialanalyse-Erweiterung · 26.10.2026
+
+Neue V2-Basisausbeute ×2, F02-Analysequeue und F03-Wiederholung sind zusätzliche beauftragte Regeln; die ursprünglichen Preise/Arbeitszeiten/Fragmente bleiben erhalten. Unity-Save24 erhält23 und ältere unterstützte Originale; der explizite Webtransfer unterstützt jetzt Web64 einschließlich kurzer/langer Queueeinträge und tatsächlicher Fundbelege. Die spätere Komponenten-/Mengenzielsuche ist noch nicht implementiert. [Bedienung, Referenzfälle, Prüfstand und Grenzen](unity-analysis-planning.md). Keine Gesamtabnahme nativer Integrationen oder physischer Geräte daraus ableiten.

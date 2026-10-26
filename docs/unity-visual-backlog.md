@@ -173,3 +173,9 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 
 - [x] Im nativen Labor aufgedeckter Mira-Überlauf nach Reload reproduziert und an der nachträglichen Textmessung behoben; Seite vollständig lesbar, Storyzustand unverändert. Finale Gesamtprüfung im aktuellen Bericht.
 - [ ] Bestehende deutsche Funktionskopie `prestige-ready` in `src/story.ts` vollständig lokalisieren; unveränderten Quellfallback von UI-Layoutfehlern unterscheiden.
+
+### Analyseplanung · 26.10.2026
+
+- Neue Analyseübersicht nutzt Original-Komponentengrafiken und gemeinsame Buttons, keine zusätzliche Effekt-/Grafikrunde. Alle20 Bestandstypen bleiben gemeinsam sichtbar.
+- Später: Wiederholungsstatus um besonders knappe explizite Wartegründe (geschützte Datenreserve/Finanzierung) ergänzen; Regeln und Reserveprüfung bestehen bereits. Endliche Komponenten-/Mengenziele sind ein eigener noch offener Funktionsabschnitt.
+- Die gesamte Analyseplanung plus sechs Queueeinträge braucht auf kleinen Displays weiterhin Scrollen; keine Behauptung, dass Bestand, alle Verträge und alle Wartenden gleichzeitig auf einen Bildschirm passen.

@@ -1,0 +1,42 @@
+{
+  "unity": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "unitySaveVersion": 24,
+  "webSaveVersion": 64,
+  "preparedTests": true,
+  "normalSaveModifiedByTests": false,
+  "editMode": {
+    "total": "147",
+    "passed": "147",
+    "failed": "0",
+    "duration": "124.347012",
+    "start-time": "2026-10-26 22:35:23Z",
+    "end-time": "2026-10-26 22:37:27Z"
+  },
+  "targetedPlayMode": {
+    "total": "2",
+    "passed": "2",
+    "failed": "0",
+    "duration": "6.5212464",
+    "start-time": "2026-10-26 22:49:28Z",
+    "end-time": "2026-10-26 22:49:34Z"
+  },
+  "vitest": {
+    "passed": 1944,
+    "files": 148,
+    "durationSeconds": 329.66
+  },
+  "typecheck": "passed",
+  "webBuild": "passed; existing chunk-size advisory",
+  "fullPlayMode": {
+    "total": "113",
+    "passed": "113",
+    "failed": "0",
+    "duration": "529.9014364",
+    "start-time": "2026-10-26 22:38:24Z",
+    "end-time": "2026-10-26 22:47:14Z"
+  },
+  "physicalIPhone": "not tested",
+  "targetSearch": "later; not implemented",
+  "nativeSimulator": "Export/install pending; physical device not tested"
+}

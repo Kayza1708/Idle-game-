@@ -168,3 +168,9 @@ Die geprüften gemeinsamen Bausteine stehen in `unity-visual-items-store.md` und
 Nächste getrennte Abnahmen: verifizierte Native-Identität/Fortschrittsbindung und Online-Entitlements, freigegebener D1-Rollout, externer authentifizierter Löschweg und Moderationsbetrieb, juristische Store-/Datenschutz-/IARC-Angaben, Langzeitbalance der neuen Items, historische Sprachfallbacks sowie physische Touch-/Lautsprecher-/Haptik-/Wärme-/60-fps-Prüfung. Der Erkenntnisarchiv-Erwerb bleibt ein dokumentiertes Quellproblem. Keine pauschale Aussage „kommerziell fertig“ oder „gesamter Rewrite abgenommen“.
 
 Aktuell normal installiert/gestartet: `c15b51eb` auf dem iPhone16Pro-**Simulator** (iOS27, ARM64), nativer Unity-Player, Save23 ohne vorbereitete Ressourcen. Xcode-Export unter `Builds/iOS-MetaVisual-c15b51eb/Xcode`. Dokumentations-Folgecommit verändert diesen ausführbaren Code nicht.
+
+## Materialanalyse: aktueller Stand · 26.10.2026
+
+Neue Analysen liefern doppelte Basismengen. Schmiede → Komponenten enthält die gemeinsame Bestands-/Analyseübersicht. F02(100INT) erlaubt sechs wartende Analysen; F03(2.000INT) oder C02 erlaubt bezahlte Wiederholung innerhalb der bestehenden Offlinekapazität. Sourcepreise bleiben maßgeblich, keine zusätzlichen Vorgängersperren. Unity-Save24/Web64 erhalten bisherige Originale und bezahlte Verträge. [Prüfbericht und konkrete Bedienung](unity-analysis-planning.md).
+
+Als Nächstes: echte Zielplanung „Komponente X bis Bestand Y“, geeignete Analyse/Fokus wählen, endliches Stopkriterium, Reserven und Online/Offline/Reload-Parität. Noch nicht als vorhandene Funktion ausgeben. Ebenfalls spätere UX: expliziter Wartegrund für geschützte Datenreserve. Physische Geräte-/Native-Integrationsabnahme separat fortführen.

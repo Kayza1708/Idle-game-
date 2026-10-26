@@ -46,7 +46,7 @@ namespace IdleIntelligence.Core
             var s=state.Copy();var p=s.Prestige;p.Cycle=p.Cycle.Add(gain);p.Total=p.Total.Add(gain);p.Free=p.Free.Add(gain);p.lastGain=gain.ToData();p.resets++;p.revision++;Discover(s);s=Workshop.Discover(s);p=s.Prestige;foreach(var f in s.Industry.foundries)f.queue=Array.Empty<string>();
             s.Legacy.classUpgrades=Array.Empty<string>();s.Legacy.classUpgradesRecorded=true;s.RunCredits=ScientificNumber.Zero;s.RunCreditsRecorded=true;s.Hardware=new long[s.Hardware.Length];s.Credits=ScientificNumber.From(Balance.StartCredits);
             if(!Has(s,"T08")){s.ModelLevel=0;s.Quality=s.Efficiency=s.Workshop.integration=0;s.Training=null;}
-            p.trainingQueue=Array.Empty<TrainingTarget>();p.researchQueue=Array.Empty<string>();
+            s.Industry.analysisQueue=Array.Empty<int>();p.trainingQueue=Array.Empty<TrainingTarget>();p.researchQueue=Array.Empty<string>();
             // Modules were paid at enqueue time. Release only waiting contracts, as in TS.
             foreach(var job in p.moduleQueue){var d=ItemBalance.Modules.First(m=>m.Id==job.id);s.Data=s.Data.Add(ScientificNumber.From(d.Data));for(int c=0;c<d.Costs.Length;c++)s.Workshop.components[c]+=(long)d.Costs[c];}p.moduleQueue=Array.Empty<Job>();
             s.Industry.trainingStarted=0;s.Workshop.runStartedAt=s.SavedAt;s.Workshop.qualityCompletions=s.Workshop.efficiencyCompletions=0;s.Workshop.lastTrack="";p.milestones=Array.Empty<string>();p.autoSeconds=p.otherAutoSeconds=0;ResetControls.ClearIntent(s);p.intentResearch=Array.Empty<string>();p.intentTraining=p.intentAnalysis=p.intentCrafting=false;

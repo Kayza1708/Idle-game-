@@ -151,13 +151,13 @@ namespace IdleIntelligence.Core
             var s=Workshop.Discover(MissionRules.Roll(state,state.SavedAt).Copy());s.AdvanceLog=capture;Workshop.SettleBlueprintReward(s);double elapsed=(now-s.SavedAt)/1000,limit=OfflineLimit(s),left=Math.Min(elapsed,limit);s.AdvanceLog=capture;if(capture!=null){capture.From=state.SavedAt;capture.Through=now;capture.Elapsed=elapsed;capture.Credited=left;capture.Discarded=Math.Max(0,elapsed-left);}
             while(left>1e-9)
             {
-                PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);s=PrestigeAutomation.StartJobs(s);s=MetaAutomation.Fusion(s);
+                PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);s=PrestigeAutomation.StartJobs(s);s=MaterialAnalysis.StartQueued(s);s=MetaAutomation.Fusion(s);
                 double trainSpeed=WorkSpeed(s),researchSpeed=ResearchSpeed(s,s.ResearchJob);
                 double slice=Math.Min(Industry.NextBoundary(s),Math.Min(left,(Balance.SimulationStepMilliseconds-s.SavedAt%Balance.SimulationStepMilliseconds)/1000));
                 if(s.Workshop.hasAnalysis)slice=Math.Min(slice,Math.Max(0,(s.Workshop.analysis.required-s.Workshop.analysis.done)/MaterialAnalysis.Speed(s)));
                 if(s.Workshop.hasModuleJob)slice=Math.Min(slice,Math.Max(0,(s.Workshop.moduleJob.required-s.Workshop.moduleJob.done)/MetaAutomation.Fabrication(s)));
                 bool shoppingActive=s.Prestige.hardwareAuto.Take(2).Any(v=>v),otherAutoActive=s.Prestige.hardwareAuto.Skip(2).Any(v=>v),researchAutoActive=(s.Prestige.researchRepeat&&PrestigeRules.Has(s,"F03"))||(s.Prestige.director&&PrestigeRules.Has(s,"F05")),agentActive=s.Prestige.agent&&PrestigeRules.Has(s,"I06")||s.Meta.axiomAuto&&MetaRules.Level(s,"B06")>0;
-                bool planners=s.Meta.analysisAuto&&MetaRules.Level(s,"C02")>0||s.Meta.craftAuto&&MetaRules.Level(s,"C03")>0;
+                bool planners=s.Meta.analysisAuto&&(MetaRules.Level(s,"C02")>0||PrestigeRules.Has(s,"F03"))||s.Meta.craftAuto&&MetaRules.Level(s,"C03")>0;
                 if(planners)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("agentInterval")-Math.Max(s.Meta.analysisSeconds,s.Meta.craftSeconds)));
                 if(shoppingActive)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("automaticShoppingSeconds")-s.Prestige.autoSeconds));
                 if(otherAutoActive)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("hardwareAutoInterval")-s.Prestige.otherAutoSeconds));

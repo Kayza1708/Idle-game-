@@ -229,3 +229,12 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - [x] Final142EditMode/97PlayMode/1937Vitest, Compile/Typecheck/Build und echte DE/EN320/390/430-Bilder sowie zwei vollständige Clips mit Unity-Audio. [Prüfbericht](unity-reward-motion-v2.md). Keine physische Gerätefreigabe.
 
 - [x] Implementierungscommit7a3eeb26 als nativer ARM64-Unity-Player auf iPhone16Pro-Simulator/iOS27 installiert/gestartet.23Unity-/15Capacitor-Originale geschützt; gültiger normaler Save23, `prepared=false`. Zusätzlicher isolierter nativer Mira-Start mit50Startcredits angesehen; normaler Spielstand wieder geöffnet. Kein physischer Gerätetest.
+
+### Materialanalyse und Prestige-Planung · 26.10.2026
+
+- [x] Beauftragte V2-Komponentenausbeute neuer Analysen ×2 zentral im Economy-Code; alte bezahlte Verträge, Zeiten, Kosten, Fragmente, Itemchancen und Rezepte erhalten.
+- [x] F02 mit sechs unbezahlten, gespeicherten FIFO-Analyseaufträgen; F03 mit regulär bezahlter Wiederholung, Datenreserve und bestehender Offlinekapazität. C02 als alternativer Zugang erhalten.
+- [x] Echte Komponenten-/Analyseübersicht mit Originalgrafiken, Prozent/Restzeit, erreichbaren Aktionen und gespeichertem tatsächlichem Fundbeleg; DE/EN320/390/430 angesehen.
+- [x] Unity23→24 und expliziter Web63→64-Vertrag unter Originalschutz; Importprüfungen für neue Queue/Fundfelder und Offline-/Reload-Referenzen. Prüfbericht: `unity-analysis-planning.md`.
+- [ ] Endliche Komponenten-/Mengenziele und automatische Auswahl geeigneter Analysen/Fokus: späterer beauftragter Ausbau, noch keine fertige Funktion.
+- [ ] Physische iPhone-Abnahme bleibt von Editor-/Simulatornachweisen getrennt.

@@ -1054,7 +1054,7 @@ export const BALANCE = {
       "depth": 2,
       "branch": 2,
       "requires": [],
-      "effect": "Manuelle Forschungswarteschlange von zwei auf sechs Plätze erweitern. Normaler Startbutton reiht bei vollen Laboren ein."
+      "effect": "Forschungswarteschlange auf sechs Plätze erweitern; zusätzlich sechs Analysen vorplanen. Wartende Analysen werden erst beim Start bezahlt."
     },
     "F03": {
       "name": "Forschungswiederholung",
@@ -1062,7 +1062,7 @@ export const BALANCE = {
       "depth": 3,
       "branch": 2,
       "requires": [],
-      "effect": "Ein gewähltes wiederholbares Projekt endlos wiederholen, soweit Budget und Resetregeln es erlauben."
+      "effect": "Forschung und eine gewählte Analyse automatisch wiederholen, solange Datenbudget und Resetregeln es erlauben. Auch offline innerhalb der Offlinekapazität."
     },
     "F04": {
       "name": "Parallellabor II",
@@ -2144,47 +2144,48 @@ export const BALANCE = {
       "cryogenicResonators"
     ]
   },
+  analysisQueueCapacity: 6,
   "analyses": {
     "hardware-short": {
       "id": "hardware-short",
       "cost": 250,
       "work": 600,
-      "units": 12,
+      "units": 24,
       "fragments": "1/24"
     },
     "hardware-long": {
       "id": "hardware-long",
       "cost": 6000,
       "work": 14400,
-      "units": 360,
+      "units": 720,
       "fragments": "1"
     },
     "architecture-short": {
       "id": "architecture-short",
       "cost": 800,
       "work": 1800,
-      "units": 18,
+      "units": 36,
       "fragments": "1/8"
     },
     "architecture-long": {
       "id": "architecture-long",
       "cost": 12800,
       "work": 28800,
-      "units": 360,
+      "units": 720,
       "fragments": "2"
     },
     "artifact-short": {
       "id": "artifact-short",
       "cost": 4000,
       "work": 7200,
-      "units": 30,
+      "units": 60,
       "fragments": "1/2"
     },
     "artifact-long": {
       "id": "artifact-long",
       "cost": 48000,
       "work": 86400,
-      "units": 450,
+      "units": 900,
       "fragments": "6"
     }
   },
@@ -2768,7 +2769,7 @@ export type GameState = {
   runCreditsEarned:number; lifetimeCreditsEarned:number; lifetimeEligibleCredits:number;cycleEligibleCredits:number; prestigeEntitlementClaimed:number; totalINTEarned:number;cycleINTEarned:number; unspentINT:number; spentINT:number; prestigeCount:number; exactEconomy:ExactEconomy;
   nodes:string[]; modules:ModuleInventory; scannerRewards:string[];runRecyclingRewards:string[];gems:number; welcomeGiftClaimed:boolean; components:number; componentInventory:ComponentInventory; componentRemainder:number; archivePassiveFindCount:number; passiveCircuitProgress:number; worldDropProgress:number; lootDrops:LootDrop[]; researchRemainder:number; blueprintRemainder:number; researchFragments:number; blueprintFragments:number; impulseRelayBlueprint:boolean;
   breakthroughs:BreakthroughId[]; inventory:Item[]; equipped:Partial<Record<ItemSlot,string>>; purchasedEquipmentSlots:number;unlockedEquipmentSlots:number; pity:{rare:number;epic:number;legendary:number};
-  experiments:{active:Experiment|null;queue:ExperimentId[];repeat:ExperimentId|null;completedIds:string[];firstReward:boolean;lastResult:AnalysisResult|null};
+  experiments:{active:Experiment|null;queue:(ExperimentId|`${ExperimentId}-short`|`${ExperimentId}-long`)[];repeat:ExperimentId|null;completedIds:string[];firstReward:boolean;lastResult:AnalysisResult|null};
   crafting:CraftingState;
   seasonLoot?:import('./seasonLoot').SeasonLoot;
   automation:{enabled:boolean;reserve:number;reservePercent?:number;shoppingElapsed?:number;elapsed:number;target:HardwareId|null};hardwareAutoBuyers:Partial<Record<HardwareId,boolean>>;scannerTarget:ComponentId|null;retention:RetentionState;season:SeasonState;previousSeason:PreviousSeason|null;pinnedGoal:PinnedGoalState|null;profile:PlayerProfile;missions:{daily:MissionPeriod;weekly:MissionPeriod;monthly:MissionPeriod;mailbox:{id:string;gems:number}[]};lifetime:LifetimeStats;runMilestoneClasses:HardwareId[];achievementClaims:string[];achievementPoints:number;gemLedger:GemLedgerEntry[];processedGemPurchases:string[];trainingBoostUntil:number;labBoostUntil:number;creditBoostUntil:number; overclock:{taps:number;charged:boolean;activeUntil:number;cooldownUntil:number;channel?:OverclockChannel};feedback:{windowStartedAt:number;work:number};
@@ -2847,7 +2848,7 @@ export const hasNode=(s:GameState,b:string,t:number)=>upgradeLevel(s,b as Presti
 export const researchQueueUnlocked=(s:GameState)=>s.progression?.version===2||hasNode(s,'labs2',1)||s.challengeUnlocks.includes('research-queue');
 export const researchRepeatUnlocked=(s:GameState)=>hasProgressionNode(s,'F03')||hasNode(s,'labs3',1)||s.challengeUnlocks.includes('research-repeat');
 export const trainingQueueUnlocked=(s:GameState)=>hasProgressionNode(s,'T03')||hasNode(s,'trainingPlan',1)||s.challengeUnlocks.includes('training-queue');
-export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>axiomLevel(s,id==='analysisPlanner'?'C02':'C03')>0||s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
+export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>(id==='analysisPlanner'&&hasProgressionNode(s,'F03'))||axiomLevel(s,id==='analysisPlanner'?'C02':'C03')>0||s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
 export const deepPrestigeBonus=(s:GameState,branch:'data'|'compute'|'analysis'|'labs'|'manufacturing')=>{const tiers=branch==='data'?['dataArchive4','dataArchive5','dataArchive6','dataArchive7','dataArchive8']:branch==='compute'?['computeNet4','computeNet5','computeNet6','computeNet7','computeNet8']:branch==='analysis'?['analysis4','analysis5','analysis6','analysis7','analysis8']:branch==='labs'?['labs4','labs6','labs7','labs8']:['manufacturing4','manufacturing6','manufacturing7','manufacturing8'];const values=branch==='data'?[.5,1,1.5,2.5,4]:branch==='compute'?[.25,.5,1,1.5,2.5]:branch==='analysis'?[.25,.5,1,1.5,2.5]:branch==='labs'?[.25,.5,1,2]:[.2,.4,.75,1.25];return tiers.reduce((sum,id,i)=>sum+(hasNode(s,id,1)?values[i]:0),0);};
 export function lateMetaItemUnlocked(s:GameState,id:string){if(!Object.hasOwn(lateMetaItemCatalog,id))return true;const d=lateMetaItemCatalog[id as LateMetaItemId];return s.progression?.lab===true&&(d.access==='axiom'?s.axiomResetCount>0:d.access==='model-set'?Object.values(s.progression.models).filter(v=>v>=0).length>=3:true);}
 export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemFamily;effect:ItemEffect}>={

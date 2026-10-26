@@ -1,6 +1,6 @@
 // Generated from current TypeScript active signal contracts.
 namespace IdleIntelligence.Core {public static class SignalBalance {
-public const string SourceHash="23021c9e59a67c0ad1117a8c6e2350e18fa2e8655560925c5962a713779fd841";
+public const string SourceHash="3a035552a6b348ffe179a82fa4ce0bea33cd9aa1dfc6bbc1614444dfb9700180";
 public const double FactorMinimum=1d;
 public const double FactorMaximum=4d;
 public const double Seconds=90d;

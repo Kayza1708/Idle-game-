@@ -13,8 +13,7 @@ namespace IdleIntelligence.Runtime
   public static void Materials(Transform parent,GameRuntime game,Action refresh)
   {
    var s=game.State;var i=s.Industry;var w=s.Workshop;
-   if(w.hasAnalysis)Action(parent,game,"CancelAnalysis","Analyse abbrechen · keine Erstattung",true,MaterialAnalysis.Cancel,refresh);
-   if(i.synthesis!=null)WorkshopUIFactory.Label("SynthesisWork",parent,"Synthese: "+i.synthesis.id+" · "+Math.Floor(100*i.synthesis.done/i.synthesis.required)+" %",14,44);
+
    // Per-component synthesis is reachable from the shared compact overview details.
    WorkshopUIFactory.Label("BreakthroughBalance",parent,"Forschungsfragmente: "+w.researchFragments+" · Durchbrüche",16,44);
    for(int n=0;n<IndustryBalance.BreakthroughIds.Length;n++){string id=IndustryBalance.BreakthroughIds[n];bool owned=i.breakthroughs.Contains(id);Action(parent,game,"Breakthrough"+id,SettingsRules.Text(s.Settings.language,"breakthrough:"+id)+" · "+SettingsRules.Text(s.Settings.language,"breakthrough-effect:"+id)+" · "+"Current shared breakthrough factor: ×"+Industry.BreakthroughFactor(s)+" · "+(owned?"Erforscht":IndustryBalance.BreakthroughCosts[n]+" Forschungsfragmente"),!owned&&w.researchFragments>=IndustryBalance.BreakthroughCosts[n],v=>Industry.BuyBreakthrough(v,id),refresh);}

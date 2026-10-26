@@ -1,6 +1,6 @@
 /** Offline compatibility adapter. All web validation and migration execute the original source. */
 import {unityBalanceHistory} from './unity-history-wire';
-import {restore,serialize} from '../src/storage';
+import {restore,serialize,SAVE_VERSION} from '../src/storage';
 import {unitySettingsState} from './unity-settings-wire';
 import {type GameState} from '../src/economy';
 import {num} from './unity-prestige-wire';
@@ -8,7 +8,7 @@ import {ScientificNumber as S} from '../src/scientificNumber';
 export const WEB_TRANSFER_FORMAT='idle-intelligence-web-transfer';
 export function convertWebSave(original:string,now:number){
  if(!original.trim()||new TextEncoder().encode(original).length>4*1024*1024)throw Error('Web save is empty or exceeds 4 MiB.');
- const validationInput=original.charCodeAt(0)===0xfeff?original.slice(1):original;const parsed=JSON.parse(validationInput);if(!Number.isInteger(parsed.version)||parsed.version<1||parsed.version>63)throw Error('Unsupported web version; original unchanged.');
+ const validationInput=original.charCodeAt(0)===0xfeff?original.slice(1):original;const parsed=JSON.parse(validationInput);if(!Number.isInteger(parsed.version)||parsed.version<1||parsed.version>SAVE_VERSION)throw Error('Unsupported web version; original unchanged.');
  const result=restore(validationInput,now);if(result.error)throw Error(result.error);
  const s=result.state;
  function convert(s:GameState):any{
