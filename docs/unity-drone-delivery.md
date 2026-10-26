@@ -28,3 +28,11 @@ Unity-Editorbilder und Simulator sind keine Abnahme von physischem iPhone-Touch,
 ## Selbst spielen
 
 Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` öffnen → Play → Labor. Im normalen aktiven Spiel erscheint eine Drohne nach dem bestehenden, durch Dropqualität veränderten Intervall (Basis90s, Untergrenze30s), sichtbar für12s. Das Paket unter der Drohne antippen. Während des Ergebnisfensters laufen Produktion und Spielzeit weiter; × schließt sofort, Tabwechsel bricht nur die Präsentation ab. Einstellungen → reduzierte Bewegung/Effekte aus zeigt statt Flug und Paketfall sofort den tatsächlichen Fund. Kein finanziertes Testsave in den normalen Spielstand importieren. Core-/Cache-Funde sind weiterhin die ursprünglichen periodischen Varianten; keine erhöhte Dropchance für diese Umsetzung.
+
+## Tatsächlich gestarteter lokaler Player
+
+**5f8e647bac9e9589e932840a87a8e26caf1c2e00**, Unity6000.3.26f1/IL2CPP/ARM64, **iPhone16Pro-Simulator mit iOS27.0**. Separater Export und Xcode-`ReleaseForProfiling`-Build unter `Builds/iOS-Drone-5f8e647b/`, beide erfolgreich. Kein Signingwechsel, keine Veröffentlichung und kein Start der alten Web-App. Fünf frisch gesicherte Projekteinstellungen bytegenau restauriert; Exportnebenprodukte und eigene temporäre Testszenen getrennt im privaten Buildordner erhalten.
+
+**20Unity-/15Capacitor-Originaldateien** vor Installation und nach Installation vor erstem Start bytegleich. Danach gültiger normaler Save23 mit `prepared=false`, erhaltene Identität/Inventar/Ausrüstung und regulärem Zeitfortschritt. Alle15Capacitor-Dateien auch nach Unity-Start unverändert. Private Originale und normales Spielstandbild bleiben unversioniert im ignorierten Buildordner. Das tatsächliche native1206×2622-Bild wurde angesehen: normale Laboransicht mit Safe Area sowie natürlich erschienene Drohne mit Paket und getrenntem Countdown. Dies ist ein Simulator-Rendersichtnachweis, keine automatisierte native Touch- oder physische Geräteabnahme.
+
+Beide Code-CI-Prüfungen für5f8e647b erfolgreich: [test](https://github.com/Kayza1708/Idle-game-/actions/runs/40287843631/job/121455618038), [check](https://github.com/Kayza1708/Idle-game-/actions/runs/40287843346/job/121455617171). Ein nachfolgender Dokumentationscommit ändert den tatsächlich installierten Spielcode nicht.

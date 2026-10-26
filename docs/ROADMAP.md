@@ -2,7 +2,7 @@
 
 ## Drohnenpaket und tatsächliche Funde · 26.10.2026
 
-Sichtbares Originalpaket mit Aufhängungen, größerem beweglichem Touchziel und getrenntem Countdown. Gespeicherter Fund vor Paketfall/Abflug/Siegelauflösung; tatsächliche Materialien, Ressourcen, Items und Baupläne in adaptivem gemeinsamem Ergebnisfenster. Erstes Item vor Schmiedebesuch, voller Fund, schnelle Wiederholung, Savefehler, Abbruch, reduzierte Bewegung und Reload geprüft.108PlayMode/142EditMode/1937Vitest sowie Typecheck/Build bestanden; DE/EN bei320/390/430px und echter6,45s-Unity-Clip mit Originalspielton. [Prüfbericht, Vorher/Nachher und Clip](unity-drone-delivery.md). Balance und Save23 unverändert; Simulatoraktualisierung wird separat nachgewiesen.
+Sichtbares Originalpaket mit Aufhängungen, größerem beweglichem Touchziel und getrenntem Countdown. Gespeicherter Fund vor Paketfall/Abflug/Siegelauflösung; tatsächliche Materialien, Ressourcen, Items und Baupläne in adaptivem gemeinsamem Ergebnisfenster. Erstes Item vor Schmiedebesuch, voller Fund, schnelle Wiederholung, Savefehler, Abbruch, reduzierte Bewegung und Reload geprüft.108PlayMode/142EditMode/1937Vitest sowie Typecheck/Build bestanden; DE/EN bei320/390/430px und echter6,45s-Unity-Clip mit Originalspielton. [Prüfbericht, Vorher/Nachher und Clip](unity-drone-delivery.md). Balance und Save23 unverändert; Unity/IL2CPP/ARM64 mit5f8e647b im iPhone16Pro-Simulator/iOS27 gebaut, installiert und gestartet;20Unity-/15Capacitor-Originale und normaler Save23 erhalten. Natürlich erschienene Drohne mit Paket im tatsächlichen nativen Bild angesehen; beide Code-CI-Prüfungen grün. Physische Geräteabnahme separat.
 
 
 ## Neue Hauptnavigation, Schmiede und Forschung · 26.10.2026

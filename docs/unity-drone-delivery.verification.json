@@ -187,5 +187,35 @@
   "saveSchema": 23,
   "domainBalanceChanged": false,
   "isolatedPreparedTestStates": true,
-  "physicalDeviceAcceptance": false
+  "physicalDeviceAcceptance": false,
+  "native": {
+    "installedCommit": "5f8e647bac9e9589e932840a87a8e26caf1c2e00",
+    "unity": "6000.3.26f1",
+    "platform": "iOS Simulator ARM64",
+    "device": "iPhone 16 Pro simulator",
+    "os": "iOS 27.0",
+    "export": "Succeeded",
+    "xcodeBuild": "BUILD SUCCEEDED; exit 0",
+    "buildFolder": "Builds/iOS-Drone-5f8e647b",
+    "saveVersion": 23,
+    "normalSaveValid": true,
+    "prepared": false,
+    "unityOriginalsBeforeAndAfterInstallBeforeLaunch": 20,
+    "capacitorOriginalsBeforeAndAfterUnityLaunch": 15,
+    "originalIdentityInventoryEquipmentPreserved": true,
+    "projectInputsRestored": 5,
+    "screenshotPrivate": "Builds/iOS-Drone-5f8e647b/native-player-current.png",
+    "nativeScreenshotSha256": "ef21c36ee2da0092b671c0d6a0a91b40c57605127d7e3431a46d2ef555166184",
+    "nativeScreenshotInspected": "Actual normal player, hanging drone parcel/countdown visible, portrait Safe Area",
+    "physicalDevice": false
+  },
+  "codeCI": {
+    "commit": "5f8e647bac9e9589e932840a87a8e26caf1c2e00",
+    "test": "SUCCESS",
+    "check": "SUCCESS",
+    "links": [
+      "https://github.com/Kayza1708/Idle-game-/actions/runs/40287843631/job/121455618038",
+      "https://github.com/Kayza1708/Idle-game-/actions/runs/40287843346/job/121455617171"
+    ]
+  }
 }

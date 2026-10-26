@@ -1,5 +1,10 @@
 # Lokaler Unity-iOS-Weg
 
+## Aktuell: Drohnenlieferung · 26.10.2026
+
+Installierter und gestarteter Unity-Spielcode **5f8e647bac9e9589e932840a87a8e26caf1c2e00**, iPhone16Pro-Simulator/iOS27.0, Unity6000.3.26f1/IL2CPP/ARM64. Export und Xcode-Build erfolgreich, separater Ordner `Builds/iOS-Drone-5f8e647b/`; fünf Originaleinstellungen restauriert.20Unity-/15Capacitor-Originale bei Installation erhalten, normaler Save23 gültig und `prepared=false`; Capacitor danach weiter bytegleich. Tatsächliches natives Bild einschließlich natürlich erschienener Drohne mit Paket angesehen. [Prüfbericht, Clip und Grenzen](unity-drone-delivery.md). Kein physischer iPhone- oder60fps-Nachweis, keine Veröffentlichung.
+
+
 Aktueller tatsächlich installierter/gestarteter Unity-Spielcode seit26.10.2026: **48dd4756**, iPhone16Pro-Simulator/iOS27/ARM64. Separater Export `Builds/iOS-Navigation-48dd4756/`, erfolgreicher Unity-/Xcode-Build,19Unity-/15Capacitor-Originale bytegenau erhalten; normaler Save23 gültig und unfinanziert. Beide Code-CI-Prüfungen grün. [Aktueller UI-/Native-Prüfbericht](unity-navigation-forge.md). Ältere Commitangaben unten sind historische Prüfstände.
 
 ## Ziel und Schutz bestehender Daten
