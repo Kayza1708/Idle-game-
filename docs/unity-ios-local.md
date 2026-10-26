@@ -1,5 +1,7 @@
 # Lokaler Unity-iOS-Weg
 
+Aktueller tatsächlich installierter/gestarteter Unity-Spielcode seit26.10.2026: **48dd4756**, iPhone16Pro-Simulator/iOS27/ARM64. Separater Export `Builds/iOS-Navigation-48dd4756/`, erfolgreicher Unity-/Xcode-Build,19Unity-/15Capacitor-Originale bytegenau erhalten; normaler Save23 gültig und unfinanziert. Beide Code-CI-Prüfungen grün. [Aktueller UI-/Native-Prüfbericht](unity-navigation-forge.md). Ältere Commitangaben unten sind historische Prüfstände.
+
 ## Ziel und Schutz bestehender Daten
 
 Device Hub zeigt **iPhone 16 Pro · iOS 27.0 · Simulator**. `devicectl` bestätigt `Reality: simulated`, UDID `2F5C4B2F-A725-45B9-881D-16DA5BD50057`. Ein physisches iPhone wurde nicht erkannt. Daher ist dies Simulatorprüfung, keine Geräteabnahme.

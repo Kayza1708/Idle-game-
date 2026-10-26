@@ -149,3 +149,5 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 - [ ] Ältere gemischtsprachige Material-/Analyse-/Detailtexte vollständig lokalisieren.
 - [ ] Shop-Unterseiten optisch separat verdichten; diese Änderung bündelt ihre vorhandenen Zugänge.
 - [ ] Physische Geräte-/Touch-/Lautsprecher-/Safe-Area-/Performanceabnahme.
+
+- [x] Lange Ressourcenwerte und Modellproduktion anhand des tatsächlichen fortgeschrittenen Simulatorstands korrigiert; vollständige Glyphen und Begrenzungen bei DE/EN320/390/430 getestet.

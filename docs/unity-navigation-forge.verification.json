@@ -316,5 +316,30 @@
   },
   "saves": "schema23 unchanged; normal player not financed; isolated prepared saves for item/lab cases",
   "platform": "Actual Unity Editor Game View; physical device acceptance remains separate",
-  "nativeReadabilityFollowup": "Complete rendered glyph counts and bounds for advanced values in DE/EN at 320/390/430; original number strings and balances unchanged"
+  "nativeReadabilityFollowup": "Complete rendered glyph counts and bounds for advanced values in DE/EN at 320/390/430; original number strings and balances unchanged",
+  "native": {
+    "installedCommit": "48dd4756a9d63781425a48978d7b805229eb19d9",
+    "unity": "6000.3.26f1",
+    "platform": "iOS Simulator ARM64",
+    "saveVersion": 23,
+    "prepared": false,
+    "originalPreserved": true,
+    "normalSaveValid": true,
+    "capacitorOriginalsStillUnchangedAfterUnityStart": 15,
+    "preservedBeforeInstall": {
+      "unity": 19,
+      "capacitor": 15
+    },
+    "unityExport": "passed",
+    "xcodeBuild": "passed",
+    "target": "iPhone16Pro Simulator / iOS27 / ARM64",
+    "fiveExportInputsRestored": true,
+    "nativeScreenshotInspected": true,
+    "physicalDeviceAcceptance": false
+  },
+  "codeCI": {
+    "commit": "48dd4756a9d63781425a48978d7b805229eb19d9",
+    "check": "passed 7m36s",
+    "test": "passed 46s"
+  }
 }
