@@ -23,18 +23,18 @@ namespace IdleIntelligence.PlayTests
         }
         [UnityTest]public IEnumerator ForgeTransactionsFinishBeforeAnimationAndCancelWithoutAwards()
         {
-            Fund();Click("ItemsTab");yield return null;var ui=game.WorkshopView;string type=ItemBalance.Items.First(i=>i.Starter==0).Id;var before=game.State.Workshop.components[0];Click("CommitForge");Assert.That(game.State.Workshop.inventory.Length,Is.EqualTo(1));Assert.That(game.State.Workshop.components[0],Is.LessThan(before));Assert.That(ui.Forge.IsAnimating,Is.True);ui.Forge.Cancel();Assert.That(game.State.Workshop.inventory.Length,Is.EqualTo(1));
+            Fund();Click("ItemsTab");yield return null;var ui=game.WorkshopView;ui.ChangeMode("craft");string type=ItemBalance.Items.First(i=>i.Starter==0).Id;var before=game.State.Workshop.components[0];Click("CommitForge");Assert.That(game.State.Workshop.inventory.Length,Is.EqualTo(1));Assert.That(game.State.Workshop.components[0],Is.LessThan(before));Assert.That(ui.Forge.IsAnimating,Is.True);ui.Forge.Cancel();Assert.That(game.State.Workshop.inventory.Length,Is.EqualTo(1));
             Click("CommitForge");Click("CommitForge");Assert.That(game.State.Workshop.inventory.Length,Is.EqualTo(3));ui.ChangeMode("fusion");foreach(var item in game.State.Workshop.inventory.ToArray())ui.ToggleSelection(item.id);Click("CommitForge");Assert.That(game.State.Workshop.inventory.Length,Is.EqualTo(1));Assert.That(game.State.Workshop.inventory[0].rarity,Is.EqualTo(1));Click("HardwareTab");yield return null;yield return new WaitForSecondsRealtime(2);Assert.That(game.State.Workshop.inventory.Length,Is.EqualTo(1));
             Click("ItemsTab");yield return null;ui=game.WorkshopView;ui.ChangeMode("inventory");ui.OpenItem(game.State.Workshop.inventory[0].id);Assert.That(ui.DetailRoot.activeInHierarchy,Is.True);Click("equip-processor");Assert.That(game.State.Workshop.equipped[0],Is.EqualTo(game.State.Workshop.inventory[0].id));Assert.That(Workshop.Equipped(game.State).Count(),Is.EqualTo(1));
         }
         [UnityTest]public IEnumerator ReducedMotionPersistsAndShowsStaticActualResult()
         {
-            Fund();Click("ItemsTab");yield return null;var ui=game.WorkshopView;Click("ReducedMotion");Assert.That(game.State.Workshop.reducedMotion,Is.True);Click("CommitForge");Assert.That(ui.Forge.IsAnimating,Is.False);Assert.That(ui.Forge.Result.Item.id,Is.EqualTo(game.State.Workshop.inventory.Last().id));
+            Fund();Click("ItemsTab");yield return null;var ui=game.WorkshopView;ui.ChangeMode("craft");Click("ReducedMotion");Assert.That(game.State.Workshop.reducedMotion,Is.True);Click("CommitForge");Assert.That(ui.Forge.IsAnimating,Is.False);Assert.That(ui.Forge.Result.Item.id,Is.EqualTo(game.State.Workshop.inventory.Last().id));
             var read=new AtomicSaveStore(game.SavePath,new UnitySaveCodec()).Load(game.State.SavedAt);Assert.That(read.State.Workshop.reducedMotion,Is.True);Assert.That(read.State.Workshop.inventory.Length,Is.EqualTo(1));
         }
         [UnityTest]public IEnumerator RecordActualCraftAndFusionAtMobileSizes()
         {
-            Fund();Click("ItemsTab");yield return null;var ui=game.WorkshopView;Directory.CreateDirectory("/tmp/unity-forge-frames");int frame=0;
+            Fund();Click("ItemsTab");yield return null;var ui=game.WorkshopView;ui.ChangeMode("craft");Directory.CreateDirectory("/tmp/unity-forge-frames");int frame=0;
             for(int i=0;i<4;i++){Capture(390,844,"/tmp/unity-forge-frames/"+(frame++).ToString("D4")+".png");yield return new WaitForSecondsRealtime(.05f);}
             Click("CommitForge");for(int i=0;i<40;i++){Capture(390,844,"/tmp/unity-forge-frames/"+(frame++).ToString("D4")+".png");yield return new WaitForSecondsRealtime(.05f);}
             Click("CommitForge");Click("CommitForge");ui.ChangeMode("fusion");foreach(var item in game.State.Workshop.inventory.ToArray())ui.ToggleSelection(item.id);yield return null;

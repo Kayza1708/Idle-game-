@@ -139,3 +139,13 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 - [x] Tatsächliche DE/EN-Ansichten bei320/390/430px selbst geprüft; [Nachweise](unity-prestige-skin.md).
 - [ ] Historische gemischtsprachige Netzbeschriftungen und Katalogbeschreibungen vollständig lokalisieren.
 - [ ] Reale Zwei-Finger-/Safe-Area-/Lesbarkeitsabnahme auf physischem iPhone; kein neuer Simulatorbuild für diesen Abschnitt.
+
+## Navigation, Schmiede und Forschung · 26.10.2026
+
+- [x] Vier/fünf Hauptreiter mit echtem Fortschrittszugang, Modell → Training und Shop ganz rechts.
+- [x] Inventar, Komponenten, Baupläne, Herstellen, Fusion als eigene Schmiedereiter; saubere kosmetische Ergebniswechsel.
+- [x] Kompakte Forschungsbereiche, Details auf Antippen, reale belegte/freie Labore und Restzeit; erhaltene bezahlte Aufträge nach Kapazitätsverlust sichtbar.
+- [x] DE/EN320/390/430px und echte Schmiedeaufnahme geprüft; [Nachweis](unity-navigation-forge.md).
+- [ ] Ältere gemischtsprachige Material-/Analyse-/Detailtexte vollständig lokalisieren.
+- [ ] Shop-Unterseiten optisch separat verdichten; diese Änderung bündelt ihre vorhandenen Zugänge.
+- [ ] Physische Geräte-/Touch-/Lautsprecher-/Safe-Area-/Performanceabnahme.

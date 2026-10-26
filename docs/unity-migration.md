@@ -1,5 +1,7 @@
 # Unity-Rewrite: Bestand und Migrationsabnahme
 
+Aktuelle UI-Wege seit26.10.2026: [Navigation, Schmiede und kompakte Forschung](unity-navigation-forge.md). Vier Startreiter, später Prestige als fünfter; Training über Modell, Items unter Schmiede. Historische Reiterbezeichnungen unten bleiben als Prüfgeschichte erkennbar.
+
 Aktueller Abgleich: 21.10.2026, [Verbraucher-/UI-/Nachweismatrix](unity-functional-audit.md). Historische Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
 ## Fortsetzung 20.10.2026: Werbe-/Forschungsskipverträge

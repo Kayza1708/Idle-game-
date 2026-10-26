@@ -1,5 +1,17 @@
 # Unity: spielbarer Abschnitt mit Items, Schmiede, INT, Axiomen und KI-Modellen
 
+## Aktuelle Navigation · 26.10.2026
+
+1. Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` öffnen und Play starten. Anfangs unten Labor, Forschung, Schmiede, Shop; Prestige erscheint mit tatsächlichem INT-Zugang als fünfter Reiter vor Shop.
+2. Modell im Labor antippen → Training. Modellkern in der Ausrüstungsansicht führt ebenfalls dorthin.
+3. Forschung → Laborbelegung oben → Fachbereich wählen. Karte für Details antippen, goldene Startaktion direkt zum Forschen; volle Labore reihen nach bestehenden Regeln ein.
+4. Schmiede → Inventar/Ausrüstung, Komponenten, Baupläne, Herstellen oder Fusion. Im Bauplandetail lernen; gelernter Bauplan führt zur Herstellung. Für Fusion drei zulässige gleiche Items auswählen. Transaktionen sind vor Animation gespeichert.
+5. Shop ganz rechts → vorhandene Angebote/Truhen, Gems/Gumball und weitere Shopfunktionen. Einstellungen und Saves bleiben im Hamburger-Menü.
+6. Axiome und geheimes Labor werden innerhalb ihrer Bereiche erst nach tatsächlicher Freischaltung sichtbar. Keine Testressourcen im normalen Spielstand vergeben.
+
+Aktueller Nachweis und Grenzen: [Navigation/Schmiede/Forschung](unity-navigation-forge.md). Ältere Benennungen „Items“, „INT“ und separater Trainingsreiter in der folgenden Historie beziehen sich auf frühere Oberflächenstände.
+
+
 Stand: 23.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478` gesichert. Der aktuelle funktionale V2-Abgleich steht in `unity-functional-audit.md`; bekannte Quellprobleme, historische Sonderimporte, native Integrationen, physische Geräte und Optik bleiben getrennt offen. Maßgeblich bleibt [die vollständige Migrationsliste](unity-migration.md).
 
 ## Aktuelle Hauptansichten · 23.10.2026

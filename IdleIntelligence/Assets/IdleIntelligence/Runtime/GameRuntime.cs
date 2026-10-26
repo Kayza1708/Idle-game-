@@ -21,7 +21,7 @@ namespace IdleIntelligence.Runtime
         public bool Writable {get;private set;}
         public string SavePath=>store?.PathName;public AtomicSaveStore Storage=>store;public bool HasReadableState{get;private set;}
         AtomicSaveStore store;string tab="hardware",message="Bereit";bool started,paused,focused=true;LifetimeView lifetimeView;RetentionView retentionView;MissionView missionView;CompanyHubView companyHubView;SeasonView seasonView;MarketView marketView;GemFeatureView gemView;NativeStoreView storeView;AdRewardView adView;SettingsView settingsView;StoryView storyView;GoalView goalView;StorageView storageView;public AppAudio Audio {get;private set;}public LocalDiagnostics Diagnostics{get;private set;}public CrashRecording Crash{get;private set;}
-        Text learningOverview;GameObject queueControls;string queueSignature="";
+        int researchArea;public void SetResearchArea(int area){researchArea=area;labsOverview?.ShowArea(area);}ResearchLabOverview labsOverview;ShopHub shopHub;Text learningOverview;GameObject queueControls;string queueSignature="";
         int rewardRequestFrame=-1;
         public bool AcquireRewardRequest(){if(rewardRequestFrame==Time.frameCount)return false;rewardRequestFrame=Time.frameCount;return true;}
         long localizedGeneration=-1;
@@ -38,7 +38,7 @@ namespace IdleIntelligence.Runtime
             if(elapsed>10&&loaded.State!=null&&Writable)message="Willkommen zurück: +"+State.Credits.Subtract(before)+" Credits (Offline-Limit berücksichtigt)";
             Audio=gameObject.AddComponent<AppAudio>();Audio.Initialize(this);TapButton.transform.parent.gameObject.AddComponent<SignalView>().Initialize(this);TapButton.onClick.AddListener(TapFromUI);
             HardwareTab.onClick.AddListener(()=>UserShow("hardware"));TrainingTab.onClick.AddListener(()=>UserShow("training"));ResearchTab.onClick.AddListener(()=>UserShow("research"));SaveButton.onClick.AddListener(()=>{Tick();Save();Refresh();});
-            ItemsTab.onClick.AddListener(()=>UserShow("items"));PrestigeTab.onClick.AddListener(()=>UserShow("prestige"));var hintButton=Hint.gameObject.AddComponent<Button>();Hint.raycastTarget=true;hintButton.onClick.AddListener(()=>{if(!HasReadableState||!Writable){UserShow("storage");return;}if(State.Story.open!=null||State.Story.target=="name"||State.Story.target=="prologue")UserShow("story");else NavigateGoal(GuidanceRules.Next(State));});var hintLayout=Hint.GetComponent<LayoutElement>();if(hintLayout!=null){hintLayout.minHeight=44;hintLayout.preferredHeight=Math.Max(44,hintLayout.preferredHeight);}GetComponent<MobileShell>()?.Initialize(this);started=true;Show(tab);Save();Refresh();gameObject.AddComponent<MiraPresenter>().Initialize(this);
+            ItemsTab.onClick.AddListener(()=>{UserShow("items");WorkshopView.ChangeMode("inventory");});PrestigeTab.onClick.AddListener(()=>UserShow("prestige"));var hintButton=Hint.gameObject.AddComponent<Button>();Hint.raycastTarget=true;hintButton.onClick.AddListener(()=>{if(!HasReadableState||!Writable){UserShow("storage");return;}if(State.Story.open!=null||State.Story.target=="name"||State.Story.target=="prologue")UserShow("story");else NavigateGoal(GuidanceRules.Next(State));});var hintLayout=Hint.GetComponent<LayoutElement>();if(hintLayout!=null){hintLayout.minHeight=44;hintLayout.preferredHeight=Math.Max(44,hintLayout.preferredHeight);}GetComponent<MobileShell>()?.Initialize(this);started=true;Show(tab);Save();Refresh();gameObject.AddComponent<MiraPresenter>().Initialize(this);
         }
         void Update()
         {
@@ -75,7 +75,7 @@ namespace IdleIntelligence.Runtime
         public void ShowDetails(string kind,int index){detailKind=kind;detailIndex=index;Show("details");}
         public void Show(string selected)
         {
-            learningOverview=null;foreach(Transform heading in Content)if(heading.name=="LearningOverview"){heading.gameObject.SetActive(false);Destroy(heading.gameObject);}
+            if(labsOverview!=null){labsOverview.gameObject.SetActive(false);Destroy(labsOverview.gameObject);labsOverview=null;}if(shopHub!=null){shopHub.gameObject.SetActive(false);Destroy(shopHub.gameObject);shopHub=null;}learningOverview=null;foreach(Transform heading in Content)if(heading.name=="LearningOverview"){heading.gameObject.SetActive(false);Destroy(heading.gameObject);}
             GetComponent<RewardPresentation>()?.Cancel();var menuReturn=Content.Find("MenuReturn");if(menuReturn!=null){menuReturn.gameObject.SetActive(false);Destroy(menuReturn.gameObject);}
             if(productionView!=null){productionView.gameObject.SetActive(false);Destroy(productionView.gameObject);productionView=null;}if(economyDetail!=null){economyDetail.gameObject.SetActive(false);Destroy(economyDetail.gameObject);economyDetail=null;}foreach(Transform child in Content)if(child.name.StartsWith("Details-",StringComparison.Ordinal)){child.gameObject.SetActive(false);Destroy(child.gameObject);}
             var oldProduction=Content.Find("ProductionAccess");if(oldProduction!=null){oldProduction.gameObject.SetActive(false);Destroy(oldProduction.gameObject);}
@@ -95,9 +95,10 @@ namespace IdleIntelligence.Runtime
             if(queueControls!=null){queueControls.SetActive(false);Destroy(queueControls);queueControls=null;}queueSignature="";
             if(ModelsView!=null){ModelsView.Cancel();Destroy(ModelsView.gameObject);ModelsView=null;}if(PrestigeView!=null){PrestigeView.Cancel();Destroy(PrestigeView.gameObject);PrestigeView=null;}if(WorkshopView!=null){Destroy(WorkshopView.gameObject);WorkshopView=null;}
             var oldChallenge=Content.Find("ChallengesAccess");if(oldChallenge!=null){oldChallenge.gameObject.SetActive(false);Destroy(oldChallenge.gameObject);}var oldLab=Content.Find("SecretLab");if(oldLab!=null){oldLab.gameObject.SetActive(false);Destroy(oldLab.gameObject);}tab=selected;foreach(var card in cards){card.gameObject.SetActive(false);Destroy(card.gameObject);}cards.Clear();
-            bool workshop=tab=="production"||tab=="details"||tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="company"||tab=="missions"||tab=="seasons"||tab=="market"||tab=="gems"||tab=="store"||tab=="ads"||tab=="settings"||tab=="story"||tab=="storage"||tab=="goals";
+            bool workshop=tab=="shop"||tab=="production"||tab=="details"||tab=="items"||tab=="prestige"||tab=="models"||tab=="challenges"||tab=="progress"||tab=="profile"||tab=="company"||tab=="missions"||tab=="seasons"||tab=="market"||tab=="gems"||tab=="store"||tab=="ads"||tab=="settings"||tab=="story"||tab=="storage"||tab=="goals";
             if(GetComponent<MobileShell>()==null)foreach(var name in new[]{"Laboratory","Overdrive","Guidance"}){var child=Content.GetComponentInParent<SafeArea>().transform.Find(name);if(child!=null)child.gameObject.SetActive(!workshop);}
             Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;
+            if(tab=="shop"){shopHub=WorkshopUIFactory.Vertical("ShopHub",Content).AddComponent<ShopHub>();shopHub.Initialize(this);Refresh();return;}
             if(tab=="production"){productionView=WorkshopUIFactory.Vertical("Production",Content).AddComponent<ProductionView>();productionView.Initialize(this);Refresh();return;}
             if(tab=="details"){economyDetail=WorkshopUIFactory.Vertical("EconomyDetail",Content).AddComponent<EconomyDetailView>();economyDetail.Initialize(this,detailKind,detailIndex);Refresh();return;}
             if(tab=="goals"){goalView=WorkshopUIFactory.Vertical("Goals",Content).AddComponent<GoalView>();goalView.Initialize(this);Refresh();return;}
@@ -118,7 +119,8 @@ namespace IdleIntelligence.Runtime
 
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
-            if(tab=="training"||tab=="research")learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,tab=="training"?"Training":"Forschung",18,tab=="research"?48:34);
+            if(tab=="research"){labsOverview=WorkshopUIFactory.Vertical("ResearchLabs",Content).AddComponent<ResearchLabOverview>();labsOverview.Initialize(this);}
+            if(tab=="training")learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,tab=="training"?"Training":"Forschung",18,tab=="research"?48:34);
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
             for(int i=0;i<count;i++)
             {
@@ -127,11 +129,11 @@ namespace IdleIntelligence.Runtime
                 else {if(tab=="training")card.Button.onClick.AddListener(()=>Act(s=>Game.Train(s,PrestigeAutomation.Tracks[index]),"train"));else card.Button.onClick.AddListener(()=>Act(s=>Game.Research(s,Balance.Research[index].Id),"research-project"));card.GetComponent<LearningCard>().Initialize(this,tab,i);}
 
             }
-            if(tab=="research"){var lab=WorkshopUIFactory.Button("SecretLab",Content,"Geheimes Labor · KI-Modelle",()=>UserShow("models"));lab.interactable=Writable&&State.Prestige.lab;}
+            if(tab=="research"){labsOverview.Bind(cards.ToArray(),researchArea);var lab=WorkshopUIFactory.Button("SecretLab",Content,"Geheimes Labor · KI-Modelle",()=>UserShow("models"));lab.gameObject.SetActive(State.Prestige.lab);lab.interactable=Writable&&State.Prestige.lab;}
             Refresh();
         }
         public void NavigateGoal(GoalQuote quote){if(quote==null)return;NavigateTo(quote.Tab,quote.Element??"",quote.Mode??"");if(quote.Kind=="prestige"&&PrestigeView!=null)PrestigeView.OpenNode(NavigationCatalog.LegacyNodes.TryGetValue(quote.Id,out var mapped)?mapped:quote.Id);if(quote.Kind=="item-upgrade"&&WorkshopView!=null)WorkshopView.OpenItem(quote.Id);}
-        public void NavigateTo(string selected,string element,string mode=""){Show(selected);if(WorkshopView!=null&&mode.Length>0)WorkshopView.ChangeMode(mode);StartCoroutine(FocusTarget(element));}
+        public void NavigateTo(string selected,string element,string mode=""){Show(selected);if(selected=="research"&&element.StartsWith("research-",StringComparison.Ordinal))SetResearchArea(Workshop.ResearchArea(element.Substring(9)));if(WorkshopView!=null&&mode.Length>0)WorkshopView.ChangeMode(mode);StartCoroutine(FocusTarget(element));}
         System.Collections.IEnumerator FocusTarget(string name){yield return null;Canvas.ForceUpdateCanvases();var target=GameObject.Find(name);if(target==null)yield break;var selectable=target.GetComponentInChildren<Selectable>();if(selectable!=null&&UnityEngine.EventSystems.EventSystem.current!=null)UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(selectable.gameObject);if(target.transform.IsChildOf(Content)){var scroll=Content.GetComponentInParent<ScrollRect>();var targetRect=learningOverview!=null&&cards.Count>0&&target==cards[0].gameObject?learningOverview.rectTransform:(RectTransform)target.transform;float low=scroll.viewport.InverseTransformPoint(targetRect.TransformPoint(new Vector3(0,targetRect.rect.yMin,0))).y,high=scroll.viewport.InverseTransformPoint(targetRect.TransformPoint(new Vector3(0,targetRect.rect.yMax,0))).y;if(low>=scroll.viewport.rect.yMin&&high<=scroll.viewport.rect.yMax)yield break;var rect=(RectTransform)Content;var bounds=RectTransformUtility.CalculateRelativeRectTransformBounds(rect,targetRect);float range=rect.rect.height-scroll.viewport.rect.height;if(range>0)scroll.verticalNormalizedPosition=1-Mathf.Clamp01(-bounds.max.y/range);}}
         void RefreshQueues()
         {
@@ -142,7 +144,7 @@ namespace IdleIntelligence.Runtime
         static string Seconds(double seconds)=>Math.Max(0,seconds).ToString("F0")+" s";
         void Refresh()
         {using(PerformanceMarkers.Refresh.Auto()){
-            if(State==null)return;RefreshQueues();if(learningOverview!=null){bool de=State.Settings.language=="de";learningOverview.text=tab=="research"?(de?"Forschung\n<size=12>Labore ":"Research\n<size=12>Labs ")+PrestigeAutomation.ResearchJobs(State).Count()+" / "+PrestigeAutomation.LabCount(State)+" · "+State.Prestige.researchQueue.Length+(de?" wartend</size>":" queued</size>"):(de?"Training":"Training");}if(tab=="research"){var access=Content.Find("ChallengesAccess")?.GetComponent<Button>();if(access!=null)access.GetComponentInChildren<Text>().text=ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen";var lab=Content.Find("SecretLab")?.GetComponent<Button>();if(lab!=null){lab.interactable=Writable&&State.Prestige.lab;lab.GetComponentInChildren<Text>().text=State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · "+State.Prestige.Total+" / "+PrestigeRules.V("labThreshold")+" Gesamt-INT";}}
+            if(State==null)return;GetComponent<MobileShell>()?.RefreshNavigation();RefreshQueues();if(learningOverview!=null){bool de=State.Settings.language=="de";learningOverview.text=tab=="research"?(de?"Forschung\n<size=12>Labore ":"Research\n<size=12>Labs ")+PrestigeAutomation.ResearchJobs(State).Count()+" / "+PrestigeAutomation.LabCount(State)+" · "+State.Prestige.researchQueue.Length+(de?" wartend</size>":" queued</size>"):(de?"Training":"Training");}if(tab=="research"){var access=Content.Find("ChallengesAccess")?.GetComponent<Button>();if(access!=null)access.GetComponentInChildren<Text>().text=ChallengeRules.Active(State)?"Aktive Challenge · zurückkehren":"Challenges · 10 Familien / 69 Stufen";var lab=Content.Find("SecretLab")?.GetComponent<Button>();if(lab!=null){lab.gameObject.SetActive(State.Prestige.lab);lab.interactable=Writable&&State.Prestige.lab;lab.GetComponentInChildren<Text>().text=State.Prestige.lab?"Geheimes Labor · KI-Modelle":"Geheimes Labor · "+State.Prestige.Total+" / "+PrestigeRules.V("labThreshold")+" Gesamt-INT";}}
             var rates=Game.ViewRates(State);DisplayIncome=rates.Income;DisplayDataRate=rates.Data;
             string language=State.Settings.language,format=State.Settings.numberFormat;
             if(GetComponent<MobileShell>()!=null){Credits.text=HasReadableState?NumberFormatting.Format(State.Credits,format):"—";Data.text=HasReadableState?NumberFormatting.Format(State.Data,format):"—";Compute.text=HasReadableState?NumberFormatting.Format(rates.Compute,format):"—";Users.text=HasReadableState?NumberFormatting.Format(ScientificNumber.From(State.Retention.gems),format):"—";}
@@ -161,7 +163,7 @@ namespace IdleIntelligence.Runtime
                 {
                     card.GetComponent<HardwarePresentation>().RefreshView();
                 }
-                else card.GetComponent<LearningCard>().RefreshView();
+                else if(card.gameObject.activeInHierarchy)card.GetComponent<LearningCard>().RefreshView();
             }
         }}
     }
