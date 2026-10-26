@@ -1,5 +1,9 @@
 # Unity: spielbarer Abschnitt mit Items, Schmiede, INT, Axiomen und KI-Modellen
 
+## Automatisches Speichern und Ausrüstung
+
+Speichern ist automatisch: alle5s, nach Transaktionen und beim Appwechsel. „Jetzt speichern“ im Hamburger-Menü bleibt optional. Die Teststand-Fußzeile erscheint nicht mehr, Speicherfehler bleiben sichtbar. Das Modell führt zum Training; die kleine goldene Taste ebenfalls. In der Schmiede stehen sechs gleich große Sockel um den Kern; universelle Zusätze erscheinen einzeln erst beim vorhandenen Modellzugang. [Aktuelle Ansichten und Prüfung](unity-clean-ui.md).
+
 ## Drohnenlieferung
 
 Im Labor trägt die bewegte Drohne ein Paket mit Countdown daneben. Innerhalb der bestehenden12s antippen: Fund wird sofort gespeichert, danach fallen Paket und tatsächlicher Inhalt sichtbar ins Ergebnisfenster. × oder Tabwechsel schließt ohne weitere Vergabe; reduzierte Bewegung zeigt einen statischen Fund mit Schließen-Aktion. Basisintervall90s, bestehende Qualitätsuntergrenze30s; keine geänderten Dropregeln. [Bilder, Clip und Prüfbericht](unity-drone-delivery.md).

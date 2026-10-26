@@ -159,3 +159,14 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 - [x] DE/EN320/390/430, echter Clip mit Unity-Audio, Abbruch/Reload/reduzierte Bewegung geprüft; [Nachweise](unity-drone-delivery.md).
 - [ ] Zusätzliche gezeichnete Offenpose des Pakets optional für spätere Detailanimation; aktuelle Sequenz löst das Siegel auf und enthüllt den Inhalt.
 - [ ] Physischer iPhone-Touch/Lautsprecher und60fps getrennt abnehmen.
+
+## Ruhige Hauptansichten und Ausrüstung · 26.10.2026
+
+- [x] Testsave-Fußzeile aus der Spieloberfläche entfernt; Diagnoseflag, Challenge-/Speicherwarnungen und Autosave erhalten.
+- [x] Trainingsbutton kompakt/goldgelb, tatsächliche Modellzeile ohne Überlauf; Forschungsthema und20er-Kostenicon getrennt.
+- [x] Sechs Sockel in zwei symmetrischen Dreierreihen, gleiche sichtbare Meshmaße aller Formen; kompakte Produktions-/Detailzeile. Universalsockel erst nach jeweiligem echten Zugang.
+- [x] Leere/belegte Ansichten DE/EN320/390/430 und automatisches Speichern/Modellwechsel geprüft. [Nachweise](unity-clean-ui.md).
+- [ ] Unterreiter in Schmiede/Forschung/Shop einheitlich verdichten; aktuelle zweizeilige Navigation benötigt relativ viel Höhe.
+- [ ] Labor-/Trainingsrestzeiten über gemeinsame kompakte Zustandsanzeigen angleichen.
+- [ ] Ältere Shop-/Analyse-/Detailkosten an die kleinen geprüften Kostenicons angleichen.
+- [ ] Physische Geräte-, Textgrößen-/Touch- und60fps-Abnahme separat.
