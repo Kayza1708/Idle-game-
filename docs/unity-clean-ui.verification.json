@@ -1,21 +1,21 @@
 {
   "unity": "6000.3.26f1",
-  "parentCommit": "bda06ad61193fe80e3fa10eaee1780f5ee398186",
+  "parentCommit": "0ceb38d5f444fcd22214fbd11c3ad25948fa8021",
   "playMode": {
     "id": "2",
-    "testcasecount": "110",
+    "testcasecount": "111",
     "result": "Passed",
-    "total": "110",
-    "passed": "110",
+    "total": "111",
+    "passed": "111",
     "failed": "0",
     "inconclusive": "0",
     "skipped": "0",
     "asserts": "0",
     "engine-version": "3.5.0.0",
     "clr-version": "4.0.30319.42000",
-    "start-time": "2026-10-26 08:14:39Z",
-    "end-time": "2026-10-26 08:23:11Z",
-    "duration": "512.1385159"
+    "start-time": "2026-10-26 08:49:52Z",
+    "end-time": "2026-10-26 08:58:29Z",
+    "duration": "517.2216169"
   },
   "editMode": {
     "id": "2",
@@ -29,9 +29,9 @@
     "asserts": "0",
     "engine-version": "3.5.0.0",
     "clr-version": "4.0.30319.42000",
-    "start-time": "2026-10-26 08:25:00Z",
-    "end-time": "2026-10-26 08:27:09Z",
-    "duration": "129.2139717"
+    "start-time": "2026-10-26 08:59:35Z",
+    "end-time": "2026-10-26 09:01:41Z",
+    "duration": "125.815536"
   },
   "typescript": {
     "typecheck": "Passed",
@@ -45,7 +45,8 @@
     "IdleIntelligence/Assets/IdleIntelligence/Runtime/LearningCard.cs": "58611198564624023cad84b8e78c64b4d11f2ef14ca86766402b5b84fa070b73",
     "IdleIntelligence/Assets/IdleIntelligence/Runtime/ModelLoadout.cs": "46794185e9361506444970273af4f6c6e3ae9d02f1e4404780806a422205c318",
     "IdleIntelligence/Assets/IdleIntelligence/Runtime/ShapeFrame.cs": "2151a094e0ba23314e8bc70e5e3f08cab602511bc2b6646ec8343e0bf289c03d",
-    "IdleIntelligence/Assets/IdleIntelligence/Runtime/WorkshopUI.cs": "a4e6ffb421bba3af6886d8d33e370967da347baa6340dea8474759e29b0a53f8"
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/WorkshopUI.cs": "a4e6ffb421bba3af6886d8d33e370967da347baa6340dea8474759e29b0a53f8",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/MiraCoach.cs": "fa08f38f3a232b54a41eaaa9558ceb4e42bdfcc7224de563033a37191b3684a6"
   },
   "captures": "media/unity-clean-ui/capture.json",
   "preparedCaptureStates": true,
@@ -53,5 +54,13 @@
   "autoSaveSecondsUnchanged": 5,
   "transactionSaveUnchanged": true,
   "balanceChanged": false,
-  "physicalDeviceAcceptance": false
+  "physicalDeviceAcceptance": false,
+  "baseUICommit": "0ceb38d5f444fcd22214fbd11c3ad25948fa8021",
+  "miraReload": {
+    "beforeRequiredHeight": 76.78125,
+    "beforeAvailableHeight": 58,
+    "beforeReproduced": true,
+    "after": "Entire page fits after actual scene reload, DE/EN at320/390/430; Story.open unchanged",
+    "upstreamGermanCopy": "src/story.ts prestige-ready"
+  }
 }

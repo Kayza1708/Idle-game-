@@ -170,3 +170,6 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 - [ ] Labor-/Trainingsrestzeiten über gemeinsame kompakte Zustandsanzeigen angleichen.
 - [ ] Ältere Shop-/Analyse-/Detailkosten an die kleinen geprüften Kostenicons angleichen.
 - [ ] Physische Geräte-, Textgrößen-/Touch- und60fps-Abnahme separat.
+
+- [x] Im nativen Labor aufgedeckter Mira-Überlauf nach Reload reproduziert und an der nachträglichen Textmessung behoben; Seite vollständig lesbar, Storyzustand unverändert. Finale Gesamtprüfung im aktuellen Bericht.
+- [ ] Bestehende deutsche Funktionskopie `prestige-ready` in `src/story.ts` vollständig lokalisieren; unveränderten Quellfallback von UI-Layoutfehlern unterscheiden.
