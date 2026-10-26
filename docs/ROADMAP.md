@@ -1,5 +1,10 @@
 # Idle Intelligence – aktueller Stand
 
+## Drohnenpaket und tatsächliche Funde · 26.10.2026
+
+Sichtbares Originalpaket mit Aufhängungen, größerem beweglichem Touchziel und getrenntem Countdown. Gespeicherter Fund vor Paketfall/Abflug/Siegelauflösung; tatsächliche Materialien, Ressourcen, Items und Baupläne in adaptivem gemeinsamem Ergebnisfenster. Erstes Item vor Schmiedebesuch, voller Fund, schnelle Wiederholung, Savefehler, Abbruch, reduzierte Bewegung und Reload geprüft.108PlayMode/142EditMode/1937Vitest sowie Typecheck/Build bestanden; DE/EN bei320/390/430px und echter6,45s-Unity-Clip mit Originalspielton. [Prüfbericht, Vorher/Nachher und Clip](unity-drone-delivery.md). Balance und Save23 unverändert; Simulatoraktualisierung wird separat nachgewiesen.
+
+
 ## Neue Hauptnavigation, Schmiede und Forschung · 26.10.2026
 
 Vier Startreiter Labor/Forschung/Schmiede/Shop, später fünf mit Prestige; Training über das Modell. Eigene Schmiedereiter, lernbare Bauplandetails, kompakte Forschungsbereiche und reale Laborbelegung einschließlich erhaltener Aufträge. Bestehende Transaktionen, Animationen und Save23 erhalten; bounded Sound-Recycling ergänzt.105PlayMode/142EditMode/1937Vitest bestanden, DE/EN bei320/390/430px und echter Herstellung-/Fusionsclip mit Unity-Audio. [Prüfbericht und Medien](unity-navigation-forge.md). Tatsächlich gestarteter Simulatorcode48dd4756, iPhone16Pro/iOS27/ARM64;19Unity-/15Capacitor-Originale und normaler Save23 erhalten. Beide Code-CI-Prüfungen grün. Physische Abnahme separat.

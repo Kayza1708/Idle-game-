@@ -151,3 +151,11 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 - [ ] Physische Geräte-/Touch-/Lautsprecher-/Safe-Area-/Performanceabnahme.
 
 - [x] Lange Ressourcenwerte und Modellproduktion anhand des tatsächlichen fortgeschrittenen Simulatorstands korrigiert; vollständige Glyphen und Begrenzungen bei DE/EN320/390/430 getestet.
+
+## Drohnenlieferung · 26.10.2026
+
+- [x] Originalpaket sichtbar an der Drohne, Countdown getrennt und kontrastiert; bewegtes96×106-Touchziel ohne dekorative Raycastblocker.
+- [x] Gespeicherte tatsächliche Fundanzeige einschließlich erster Itembelohnung vor Schmiedebesuch, Paketfall/Abflug und örtlicher Siegelauflösung; voller Core-Fund bei320px lesbar.
+- [x] DE/EN320/390/430, echter Clip mit Unity-Audio, Abbruch/Reload/reduzierte Bewegung geprüft; [Nachweise](unity-drone-delivery.md).
+- [ ] Zusätzliche gezeichnete Offenpose des Pakets optional für spätere Detailanimation; aktuelle Sequenz löst das Siegel auf und enthüllt den Inhalt.
+- [ ] Physischer iPhone-Touch/Lautsprecher und60fps getrennt abnehmen.

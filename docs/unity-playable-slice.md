@@ -1,5 +1,9 @@
 # Unity: spielbarer Abschnitt mit Items, Schmiede, INT, Axiomen und KI-Modellen
 
+## Drohnenlieferung
+
+Im Labor trägt die bewegte Drohne ein Paket mit Countdown daneben. Innerhalb der bestehenden12s antippen: Fund wird sofort gespeichert, danach fallen Paket und tatsächlicher Inhalt sichtbar ins Ergebnisfenster. × oder Tabwechsel schließt ohne weitere Vergabe; reduzierte Bewegung zeigt einen statischen Fund mit Schließen-Aktion. Basisintervall90s, bestehende Qualitätsuntergrenze30s; keine geänderten Dropregeln. [Bilder, Clip und Prüfbericht](unity-drone-delivery.md).
+
 ## Aktuelle Navigation · 26.10.2026
 
 1. Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` öffnen und Play starten. Anfangs unten Labor, Forschung, Schmiede, Shop; Prestige erscheint mit tatsächlichem INT-Zugang als fünfter Reiter vor Shop.
