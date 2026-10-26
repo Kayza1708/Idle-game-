@@ -62,5 +62,35 @@
     "beforeReproduced": true,
     "after": "Entire page fits after actual scene reload, DE/EN at320/390/430; Story.open unchanged",
     "upstreamGermanCopy": "src/story.ts prestige-ready"
+  },
+  "native": {
+    "installedCommit": "7e9a080765ee2ed7f98654734b0a58195fefb716",
+    "unity": "6000.3.26f1",
+    "platform": "iOS Simulator ARM64",
+    "device": "iPhone 16 Pro simulator",
+    "os": "iOS 27.0",
+    "export": "Succeeded",
+    "xcodeBuild": "BUILD SUCCEEDED; exit 0",
+    "buildFolder": "Builds/iOS-Clean-7e9a0807",
+    "saveVersion": 23,
+    "normalSaveValid": true,
+    "prepared": false,
+    "unityOriginalsBeforeAndAfterInstallBeforeLaunch": 22,
+    "capacitorOriginalsBeforeAndAfterUnityLaunch": 15,
+    "originalIdentityInventoryEquipmentPreserved": true,
+    "projectInputsRestored": 5,
+    "privateScreenshot": "Builds/iOS-Clean-7e9a0807/native-labor-current.png",
+    "nativeScreenshotSha256": "b631c27dd479f2bd8c90c962e33a0c49d7bf86159fa67021e54582b8b351b95e",
+    "nativeScreenshotInspected": "Normal live save; full prestige-ready Mira page, gold compact training button, Safe Area, no test footer",
+    "physicalDevice": false
+  },
+  "codeCI": {
+    "commit": "7e9a080765ee2ed7f98654734b0a58195fefb716",
+    "test": "SUCCESS",
+    "check": "SUCCESS",
+    "links": [
+      "https://github.com/Kayza1708/Idle-game-/actions/runs/40296679511/job/121484320089",
+      "https://github.com/Kayza1708/Idle-game-/actions/runs/40296679512/job/121484321621"
+    ]
   }
 }

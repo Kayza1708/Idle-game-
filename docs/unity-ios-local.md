@@ -1,6 +1,11 @@
 # Lokaler Unity-iOS-Weg
 
-## Aktuell: Drohnenlieferung · 26.10.2026
+## Aktuell: aufgeräumte Hauptansichten und Mira · 26.10.2026
+
+Installierter und gestarteter Spielcode **7e9a080765ee2ed7f98654734b0a58195fefb716**, iPhone16Pro-Simulator/iOS27.0, Unity6000.3.26f1/IL2CPP/ARM64. Separater Export/Xcode-Build `Builds/iOS-Clean-7e9a0807/` erfolgreich, fünf Projekteinstellungen restauriert.22Unity-/15Capacitor-Originale erhalten; normaler Save23 gültig/`prepared=false`, Identität/Inventar/Ausrüstung erhalten. Native Laboraufnahme mit vollständigem Mira-Hinweis, kompakter goldener Trainingstaste und Safe Area selbst angesehen.111PlayMode/142EditMode/1937Vitest sowie beide Code-CI-Prüfungen grün. [Bilder, Abnahme und verbleibende optische Punkte](unity-clean-ui.md). Kein physischer Geräte- oder60fps-Nachweis, nicht veröffentlicht.
+
+
+## Vorheriger Stand: Drohnenlieferung · 26.10.2026
 
 Installierter und gestarteter Unity-Spielcode **5f8e647bac9e9589e932840a87a8e26caf1c2e00**, iPhone16Pro-Simulator/iOS27.0, Unity6000.3.26f1/IL2CPP/ARM64. Export und Xcode-Build erfolgreich, separater Ordner `Builds/iOS-Drone-5f8e647b/`; fünf Originaleinstellungen restauriert.20Unity-/15Capacitor-Originale bei Installation erhalten, normaler Save23 gültig und `prepared=false`; Capacitor danach weiter bytegleich. Tatsächliches natives Bild einschließlich natürlich erschienener Drohne mit Paket angesehen. [Prüfbericht, Clip und Grenzen](unity-drone-delivery.md). Kein physischer iPhone- oder60fps-Nachweis, keine Veröffentlichung.
 
