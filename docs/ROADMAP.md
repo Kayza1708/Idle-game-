@@ -2,7 +2,7 @@
 
 ## Neue Hauptnavigation, Schmiede und Forschung · 26.10.2026
 
-Vier Startreiter Labor/Forschung/Schmiede/Shop, später fünf mit Prestige; Training über das Modell. Eigene Schmiedereiter, lernbare Bauplandetails, kompakte Forschungsbereiche und reale Laborbelegung einschließlich erhaltener Aufträge. Bestehende Transaktionen, Animationen und Save23 erhalten; bounded Sound-Recycling ergänzt.104PlayMode/142EditMode/1937Vitest bestanden, DE/EN bei320/390/430px und echter Herstellung-/Fusionsclip mit Unity-Audio. [Prüfbericht und Medien](unity-navigation-forge.md). Native/physische Abnahme separat.
+Vier Startreiter Labor/Forschung/Schmiede/Shop, später fünf mit Prestige; Training über das Modell. Eigene Schmiedereiter, lernbare Bauplandetails, kompakte Forschungsbereiche und reale Laborbelegung einschließlich erhaltener Aufträge. Bestehende Transaktionen, Animationen und Save23 erhalten; bounded Sound-Recycling ergänzt.105PlayMode/142EditMode/1937Vitest bestanden, DE/EN bei320/390/430px und echter Herstellung-/Fusionsclip mit Unity-Audio. [Prüfbericht und Medien](unity-navigation-forge.md). Native/physische Abnahme separat.
 
 
 ## Prestige-/Axiombaum im gemeinsamen Spielstil · 25.10.2026
