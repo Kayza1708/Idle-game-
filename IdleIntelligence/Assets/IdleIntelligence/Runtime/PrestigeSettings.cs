@@ -23,6 +23,7 @@ namespace IdleIntelligence.Runtime
    {
     Toggle(parent,game,"TrainingAutopilot","Trainingsautopilot",p.trainingAuto,n=>n.Prestige.trainingAuto=!n.Prestige.trainingAuto,refresh);for(int i=0;i<3;i++){int t=i;Number(parent,game,"TrainingTarget"+i,PrestigeAutomation.Tracks[i]+" Ziellevel (0 = unbegrenzt)",p.trainingTargets[i].ToString(),(n,v)=>n.Prestige.trainingTargets[t]=Nonnegative(v)<=100000?Nonnegative(v):throw new ArgumentOutOfRangeException(),refresh);}
    }
+   if(id=="F02"||id=="F03")WorkshopUIFactory.Button("OpenAnalysisPlanning",parent,s.Settings.language=="de"?"Analysen in der Schmiede planen":"Plan analyses in the forge",()=>{var network=UnityEngine.Object.FindFirstObjectByType<PrestigeNetworkView>();network?.CloseDetail();game.Show("items");game.WorkshopView.ChangeMode("components");});
    if(id=="F03")
    {
     Toggle(parent,game,"ResearchRepeat","Forschung wiederholen",p.researchRepeat,n=>n.Prestige.researchRepeat=!n.Prestige.researchRepeat&&!string.IsNullOrEmpty(n.Prestige.repeatId),refresh);WorkshopUIFactory.Button("RepeatProject",parent,"Projekt: "+(string.IsNullOrEmpty(p.repeatId)?"wählen":p.repeatId),()=>Edit(game,n=>{var ids=Balance.Research.Where(r=>!r.Project).Select(r=>r.Id).ToArray();n.Prestige.repeatId=ids[(Array.IndexOf(ids,n.Prestige.repeatId)+1)%ids.Length];},refresh));

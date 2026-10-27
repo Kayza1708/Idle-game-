@@ -2,7 +2,7 @@ import {newGame,restore} from './legacyContractFixture';
 import { describe, expect, it } from 'vitest';
 import { type GameState, addCredits, registerTap, usersRate } from './economy';
 import { prestige,axiomReset } from './prestige';
-import { chooseAiName,continueDialogue, dialogues, migratedStory, prepareStoryOnLoad, reopenChapter, skipTutorial, syncStory, toggleStory } from './story';
+import { chooseAiName,continueDialogue, resumeTutorial, dialogues, migratedStory, prepareStoryOnLoad, reopenChapter, skipTutorial, syncStory, toggleStory } from './story';
 import { serialize } from './storage';
 
 const reachTapPrompt=(state=newGame(0))=>{let next=chooseAiName(state,'Nova');for(let i=0;i<4;i++)next=continueDialogue(next);return next;};
@@ -106,3 +106,12 @@ describe('Mira story and tutorial',()=>{
 it('shows the first axiom explanation exactly once',()=>{const fresh=newGame(0),before={...fresh,hardware:1,hardwareCounts:{...fresh.hardwareCounts,calculator:1},discovered:['calculator'] as GameState['discovered'],story:migratedStory(),cycleINTEarned:1e300,totalINTEarned:1e300,unspentINT:1e300,exactEconomy:{...newGame(0).exactEconomy,cycleINTEarned:{m:1,e:1000000000000000},totalINTEarned:{m:1,e:1000000000000000},unspentINT:{m:1,e:1000000000000000}}},first=syncStory(before,axiomReset(before));expect(first.story.seen).toContain('first-axiom');const again=syncStory(first,{...first,axiomResetCount:2});expect(again.story.queue.filter(id=>id==='first-axiom')).toHaveLength(0)});
 
 it('does not force a v36 existing save into naming',()=>{const old:any=newGame(0);old.aiName=null;old.story={...old.story,target:'prologue',open:'prologue-welcome'};const restored=restore(JSON.stringify({version:36,state:old}),10);expect(restored.migrated).toBe(true);expect(restored.state.aiName).toBe('AURA');expect(restored.state.story.target).not.toBe('name')});
+
+ describe('early tutorial resume',()=>{
+ it('resumes naming and prologue using existing dialogues without repeated grants',()=>{
+ const fresh=newGame(1000000), naming=resumeTutorial(skipTutorial(fresh));expect(naming.story.target).toBe('name');expect(naming.story.open).toBeNull();expect(naming.story.seen).not.toContain('tutorial-name');
+ const named=chooseAiName(naming,'Nova'), resumed=resumeTutorial(skipTutorial(named));expect(resumed.story.open).toBe('prologue-welcome');expect(dialogues[resumed.story.open!]).toBeDefined();expect(resumed.credits).toBe(named.credits);expect(resumed.intro.qualityUsed).toBe(named.intro.qualityUsed);expect(restore(serialize(resumed),1000001).state.story.open).toBe('prologue-welcome');
+ });
+});
+
+it('replaces obsolete action prompts when real progress already fulfills them',()=>{let state=reachTapPrompt();state=continueDialogue(state);state=syncStory(state,registerTap(state,state.savedAt));expect(state.story.target).toBe('hardware');const next={...state,lifetime:{...state.lifetime,hardwareBought:1},hardware:1,hardwareCounts:{...state.hardwareCounts,calculator:1},credits:35};const progressed=syncStory(state,next);expect(progressed.story.target).toBe('training');expect(progressed.story.open).toBe('tutorial-training');expect(progressed.story.queue).not.toContain('tutorial-hardware');});

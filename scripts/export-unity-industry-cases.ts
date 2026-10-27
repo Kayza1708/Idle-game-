@@ -3,7 +3,7 @@ import {BALANCE,newGame,addCreditsScientific,addDataScientific,grantComponents,c
 import {createItem,toggleLock,fuseItemsNow,upgrade,equip} from '../src/inventory';
 import {queueForge,upgradeFoundry,forgeJobQuote,removeQueuedForge} from '../src/foundries';
 import {startSynthesis,synthesisQuote} from '../src/progressionWork';
-import {analysisQuote,queueExperiment} from '../src/experiments';
+import {analysisQuote,queueExperiment,enqueueAnalysis,removeAnalysis} from '../src/experiments';
 import {buyBreakthrough,prestige,axiomReset} from '../src/prestige';
 import {fragmentConversionQuote,convertResearchFragments} from '../src/itemProgress';
 import {advanceTo} from '../src/simulation';
@@ -12,11 +12,22 @@ import {UNITY_RESEARCH_IDS} from './unity-research-ids';
 import {ScientificNumber as S} from '../src/scientificNumber';
 const fresh=()=>{let s=newGame(1_000_000,'unity-industry');s={...s,aiName:'AURA',story:{...s.story,target:null},intro:{qualityUsed:true,researchUsed:true},hardwareCounts:{...s.hardwareCounts,calculator:25,sbc:10,pc:2},qualityLevel:8,efficiencyLevel:6};s=addCreditsScientific(s,S.from(1e40));s=addDataScientific(s,S.from(1e40));s=grantComponents(s,Object.fromEntries(componentIds.map(id=>[id,1000000])));return s;};
 const cases:any[]=[];
-function add(name:string,s:GameState,action='rates',id='',amount=1,at=s.savedAt){let n=s;if(action==='research')n=startResearchProject(s,id as any);if(action==='queue-research')n=queueResearchProject(s,id as any);if(action==='reset')n=prestige(s);if(action==='axiom-reset')n=axiomReset(s);if(action==='train')n=startTraining(s,id as any);if(action==='forge')n=queueForge(s,0,id);if(action==='foundry')n=upgradeFoundry(s,0,amount);if(action==='remove')n=removeQueuedForge(s,0,id);if(action==='synthesis')n=startSynthesis(s,id as any);if(action==='analysis'){if(s.progression.synthesis){if(analysisQuote(s,'hardware','short').allowed)throw Error('Synthesis must occupy analysis slot');action='analysis-quote';}else n=queueExperiment(s,'hardware',s.savedAt,'short');}if(action==='breakthrough')n=buyBreakthrough(s,id as any);if(action==='convert'){const t=fragmentConversionQuote(s,amount);n=convertResearchFragments(s,t);if(id==='repeat')n=convertResearchFragments(n,t);}if(action==='lock')n=toggleLock(s,id);if(action==='upgrade')n=upgrade(s,id);if(action==='advance')n=advanceTo(s,at).state;
+function add(name:string,s:GameState,action='rates',id='',amount=1,at=s.savedAt){let n=s;if(action==='queue-analysis')n=enqueueAnalysis(s,id.split('-')[0] as any,id.split('-')[1] as any);if(action==='remove-analysis')n=removeAnalysis(s,amount);if(action==='research')n=startResearchProject(s,id as any);if(action==='queue-research')n=queueResearchProject(s,id as any);if(action==='reset')n=prestige(s);if(action==='axiom-reset')n=axiomReset(s);if(action==='train')n=startTraining(s,id as any);if(action==='forge')n=queueForge(s,0,id);if(action==='foundry')n=upgradeFoundry(s,0,amount);if(action==='remove')n=removeQueuedForge(s,0,id);if(action==='synthesis')n=startSynthesis(s,id as any);if(action==='analysis'){if(s.progression.synthesis){if(analysisQuote(s,'hardware','short').allowed)throw Error('Synthesis must occupy analysis slot');action='analysis-quote';}else n=queueExperiment(s,'hardware',s.savedAt,'short');}if(action==='breakthrough')n=buyBreakthrough(s,id as any);if(action==='convert'){const t=fragmentConversionQuote(s,amount);n=convertResearchFragments(s,t);if(id==='repeat')n=convertResearchFragments(n,t);}if(action==='lock')n=toggleLock(s,id);if(action==='upgrade')n=upgrade(s,id);if(action==='advance')n=advanceTo(s,at).state;
  let researchPrice=S.zero(),researchWork=0;if(UNITY_RESEARCH_IDS.includes(id as any)){const q=researchQuote(s,id as any);researchPrice=q.cost;researchWork=q.duration;}
  let forgeCost=0,forgeWork=0,forgeComponents:number[]=[];if(s.inventory.some(i=>i.id===id)){const q=forgeJobQuote(s,0,id);forgeCost=q.dataCost;forgeWork=q.duration;forgeComponents=componentIds.map(id=>(q.components as any)[id]??0);}
  cases.push({name,action,id,amount,at,before:unityState(s),expected:unityState(n),rates:metrics(n),researchPrice:num(researchPrice),researchWork,forgeCost,forgeWork,forgeComponents});return n;
 }
+// Shared new planning cases: locked, unpaid FIFO, starvation, offline and repeat.
+let plan=fresh();add('analysis-queue-locked',plan,'queue-analysis','hardware-short');plan.nodes=['F02','F03'];
+for(let i=0;i<6;i++)plan=add('analysis-queue-slot-'+i,plan,'queue-analysis','hardware-short');
+add('analysis-queue-full',plan,'queue-analysis','hardware-short');add('analysis-remove-middle',plan,'remove-analysis','',2);
+add('analysis-offline-six',plan,'advance','',1,plan.savedAt+3_600_000);
+const emptyData={...plan,data:0,exactEconomy:{...plan.exactEconomy,data:S.zero().toJSON()},hardwareCounts:Object.fromEntries(hardwareIds.map(id=>[id,0])) as GameState['hardwareCounts']};
+add('analysis-queue-no-data',emptyData,'advance','',1,emptyData.savedAt+60_000);
+let repeat=fresh();repeat.nodes=['F03'];repeat.analysisPlanner={enabled:true,type:'hardware',length:'short',elapsed:0};
+add('analysis-prestige-repeat',repeat,'advance','',1,repeat.savedAt+3_600_000);
+repeat.completedResearch=['dataPipeline'];add('analysis-repeat-discount',repeat,'advance','',1,repeat.savedAt+3_600_000);
+repeat.progression.reserves.data=S.from(1e40).toJSON();add('analysis-repeat-reserve',repeat,'advance','',1,repeat.savedAt+60_000);
 for(const id of UNITY_RESEARCH_IDS){let s=fresh();for(const key of Object.keys(s.researchLevels))s.researchLevels[key as keyof typeof s.researchLevels]=4;s.completedResearch=['blueprints','alignment','dataPipeline','distributedInference','modelTransfer','materialRecycling','researchScheduling'].filter(key=>key!==id) as any;s=add('research-'+id,s,'research',id);if(s.researchLabs.some(Boolean))add('research-work-'+id,s,'advance','',1,s.savedAt+1000);}
 for(const id of ['hardwareIntegration','networkEffects','parallelArchitecture','hardwareCoDesign','syntheticData','dataFlywheel','recursiveLearning','autonomousScience','tapAmplification','dropProtocols'])for(const level of [1,5,100]){let s=fresh();s.researchLevels={...s.researchLevels,[id]:level};add('effect-'+id+'-'+level,s);}
 for(const project of ['alignment','distributedInference','researchScheduling'])add('effect-'+project,{...fresh(),completedResearch:[project as any]});

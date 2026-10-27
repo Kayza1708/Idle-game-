@@ -234,7 +234,7 @@ export function modelCore(s: GameState) {
       1) *
       formula().modelAxiomCore ** axiomLevel(s, "A06") *
       formula().modelDevelopmentCore ** axiomLevel(s, "D03") *
-      coupling
+      coupling * (1 + deviceBonus(s,"modelEcho"))
   );
 }
 export function legacyItemFactor(s: GameState, e: string) {
@@ -309,7 +309,7 @@ export function progressionComputeFactors(s: GameState) {
       1 +
       deviceBonus(s, "sparse") +
       deviceBonus(s, "photonicCompute") +
-      deviceBonus(s, "pairs"),
+      deviceBonus(s, "pairs") + deviceBonus(s,"knowledgeCompute"),
     itemCombination: itemCombinationQuote(s, "parallel-architecture")
       .contribution,
     itemAndMilestoneAdditive:
@@ -523,6 +523,7 @@ export function progressionTrainingRate(s: GameState) {
       ? effects().B05 ** axiomLevel(s, "B05")
       : 1;
   return (
+    (1 + deviceBonus(s,"modelTraining")) *
     computeLog(s) *
     (1 + equippedBonus(s, "training") + milestoneBonus(s, "training")) *
     (1 + itemCombinationQuote(s, "learning-pipeline").contribution) *
@@ -543,6 +544,7 @@ export function progressionTrainingRate(s: GameState) {
 }
 export function progressionResearchSpeed(s: GameState) {
   return (
+    (1 + deviceBonus(s,"cycleResearch")) *
     computeLog(s) *
     (1 + equippedBonus(s, "research") + milestoneBonus(s, "research")) *
     (1 + itemCombinationBonus(s, "research")) *
@@ -721,7 +723,7 @@ export function knowledgeRate(s: GameState) {
   return (i.compare(floor) > 0 ? i : floor)
     .sqrt()
     .multiplyNumber(
-      BALANCE.progression.knowledgeRate *
+      BALANCE.progression.knowledgeRate * (1 + deviceBonus(s,"insight")) *
         (hasProgressionNode(s, "I08") ? effects().I08 : 1),
     )
     .multiply(

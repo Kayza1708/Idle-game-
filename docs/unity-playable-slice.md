@@ -1,14 +1,47 @@
 # Unity: spielbarer Abschnitt mit Items, Schmiede, INT, Axiomen und KI-Modellen
 
-Stand: 21.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478` gesichert. Der aktuelle funktionale V2-Abgleich steht in `unity-functional-audit.md`; bekannte Quellprobleme, historische Sonderimporte, native Integrationen, physische Geräte und Optik bleiben getrennt offen. Maßgeblich bleibt [die vollständige Migrationsliste](unity-migration.md).
+## Automatisches Speichern und Ausrüstung
+
+Speichern ist automatisch: alle5s, nach Transaktionen und beim Appwechsel. „Jetzt speichern“ im Hamburger-Menü bleibt optional. Die Teststand-Fußzeile erscheint nicht mehr, Speicherfehler bleiben sichtbar. Das Modell führt zum Training; die kleine goldene Taste ebenfalls. In der Schmiede stehen sechs gleich große Sockel um den Kern; universelle Zusätze erscheinen einzeln erst beim vorhandenen Modellzugang. [Aktuelle Ansichten und Prüfung](unity-clean-ui.md).
+
+## Drohnenlieferung
+
+Im Labor trägt die bewegte Drohne ein Paket mit Countdown daneben. Innerhalb der bestehenden12s antippen: Fund wird sofort gespeichert, danach fallen Paket und tatsächlicher Inhalt sichtbar ins Ergebnisfenster. × oder Tabwechsel schließt ohne weitere Vergabe; reduzierte Bewegung zeigt einen statischen Fund mit Schließen-Aktion. Basisintervall90s, bestehende Qualitätsuntergrenze30s; keine geänderten Dropregeln. [Bilder, Clip und Prüfbericht](unity-drone-delivery.md).
+
+## Aktuelle Navigation · 26.10.2026
+
+1. Szene `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity` öffnen und Play starten. Anfangs unten Labor, Forschung, Schmiede, Shop; Prestige erscheint mit tatsächlichem INT-Zugang als fünfter Reiter vor Shop.
+2. Modell im Labor antippen → Training. Modellkern in der Ausrüstungsansicht führt ebenfalls dorthin.
+3. Forschung → Laborbelegung oben → Fachbereich wählen. Karte für Details antippen, goldene Startaktion direkt zum Forschen; volle Labore reihen nach bestehenden Regeln ein.
+4. Schmiede → Inventar/Ausrüstung, Komponenten, Baupläne, Herstellen oder Fusion. Im Bauplandetail lernen; gelernter Bauplan führt zur Herstellung. Für Fusion drei zulässige gleiche Items auswählen. Transaktionen sind vor Animation gespeichert.
+5. Shop ganz rechts → vorhandene Angebote/Truhen, Gems/Gumball und weitere Shopfunktionen. Einstellungen und Saves bleiben im Hamburger-Menü.
+6. Axiome und geheimes Labor werden innerhalb ihrer Bereiche erst nach tatsächlicher Freischaltung sichtbar. Keine Testressourcen im normalen Spielstand vergeben.
+
+Aktueller Nachweis und Grenzen: [Navigation/Schmiede/Forschung](unity-navigation-forge.md). Ältere Benennungen „Items“, „INT“ und separater Trainingsreiter in der folgenden Historie beziehen sich auf frühere Oberflächenstände.
+
+
+Stand: 23.10.2026. Branch `codex/unity-rewrite`. Einrichtung separat in `ab67478` gesichert. Der aktuelle funktionale V2-Abgleich steht in `unity-functional-audit.md`; bekannte Quellprobleme, historische Sonderimporte, native Integrationen, physische Geräte und Optik bleiben getrennt offen. Maßgeblich bleibt [die vollständige Migrationsliste](unity-migration.md).
+
+## Aktuelle Hauptansichten · 23.10.2026
+
+Die normale Szene ist weiterhin `IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`, Editor exakt **6000.3.26f1**. **390×846** entspricht annähernd dem iPhone-16-Pro-Seitenverhältnis; Safe Areas müssen zusätzlich im Simulator bzw. am Gerät geprüft werden. Die Ressourcenzeile enthält Credits, Daten, Compute und den echten Gem-Bestand; rechts öffnet das Hamburger-Symbol das Menü. Der alte Save-/H-Knopf ist entfernt. **Menü → Einstellungen → Jetzt speichern** bleibt erreichbar. Erfolgreiche Autosaves brauchen keine dauernde Fußzeile; Speicherfehler dürfen nicht ignoriert werden.
+
+- **Labor:** Originalzeichnung direkt antippen; Original-Hardware darunter kaufen. Die sichtbare **×1 / ×10 / MAX**-Wahl gilt für alle Zeilen nach den bisherigen Regeln. MAX zeigt die tatsächlich bezahlbare Stückzahl und ihren Gesamtpreis. Liste scrollen; Navigation bleibt fest darunter.
+- **Mira:** Originalportrait und Sprechblase liegen gemeinsam unter dem Header. Namen im sichtbaren Feld wählen, **Bestätigen**, dann kurze **Weiter**-Seiten. Der Pixel-Finger zeigt ein tatsächliches Ziel; **Ziel zeigen** führt zur passenden Ansicht/Karte. Navigation erfüllt keinen Aktionsschritt. **Menü → Mira** enthält Skip/Resume und Kapitel. Ein Name, Intro-Verbrauch und Fortschritte bleiben nach Reload gespeichert. Die aktuelle Unity-Fläche verarbeitet Einzel-Taps; der noch fehlende TS-Halte-Repeater ist separat dokumentiert.
+- **Training:** Qualität/Effizienz/Integration mit Wirkung, Level, Kosten und Dauer. Direkt **Trainieren**; das kleine **i** öffnet die bestehenden Details. Laufende Arbeit zeigt Fortschritt und Restzeit. Das Einführungstraining nur bei seinem tatsächlichen unbenutzten Tutorialzustand kostenlos erwarten.
+- **Forschung:** Forschungskatalog, tatsächliche Voraussetzungen/Kosten, Start bzw. automatische Einreihung bei belegtem Labor; Belegung und Warteschlange stehen unter einer einzelnen Überschrift. Details über **i**. Geheimlabor bleibt an seine Freischaltung gebunden.
+- **Menü:** Produktion/Nutzer, Einstellungen, Mira, Saves/Recovery/Berichte sowie vorhandene weitere Funktionen sind hier erreichbar. Ältere weiter unten erwähnte Verwaltungszugänge im Forschungstab sind historische Layoutanweisungen und durch diese Menürouten ersetzt.
+- **Drohne:** die wirkliche bewegte Originaldrohne im Labor antippen, auch während der begleitenden Führung. Ihre gespeicherte Transaktion vergibt genau einmal; unverfügbare Werbung bleibt unverfügbar. Keine Save-Dateien zum Erzwingen eines Drops löschen.
+
+Prüfstände, tatsächliche native Commits, Aufnahmen und verbleibende Performancegrenzen: [iPhone-Reparaturbericht](unity-iphone-repair.md). Automatisierte finanzierte Zustände und natürlicher 50-Credits-Einstieg sind dort ausdrücklich getrennt. Ein Simulatorlauf ist kein physischer Gerätenachweis.
 
 ## Öffnen und mit Play testen
 
 1. In Unity Hub **Add project from disk** wählen und `~/Idle-game-/IdleIntelligence/` hinzufügen, falls es noch nicht gelistet ist. Genau **6000.3.26f1** verwenden. Das bestehende Hauptrepository bleibt unverändert der Git-Root.
 2. **Assets → Scenes → IdleIntelligence.unity** öffnen. `SampleScene.unity` ist weiterhin vorhanden, enthält aber nicht den spielbaren Abschnitt. Die neue Szene ist die aktivierte Buildszene.
-3. Im Game-Fenster ein Hochformat wählen: **390 × 844**; zusätzlich **320 × 568** und **430 × 932** prüfen. Play drücken. Die Szene enthält bereits Canvas, SafeArea, Kamera, EventSystem und verdrahteten Game-Controller; kein manuelles Hinzufügen von Komponenten nötig.
-4. Mit **50 Credits** starten. In **Hardware** einen Taschenrechner für **15 Credits** kaufen. Compute, Nutzer sowie Credit-/Datenproduktion steigen. Die Hardwareliste ist scrollbar; ein Klick kauft ein Gerät und zieht den angezeigten Preis ab.
-5. **Tippen · Credit-Impuls** anklicken. Akzeptierte Taps haben mindestens **200 ms** Abstand. Nach **100 akzeptierten Taps** startet Overdrive automatisch: standardmäßig **×3 passive Credits für 15 Sekunden**. Die Sperrzeit läuft **60 Sekunden ab Auslösung**; Ladung kann sich währenddessen erneut sammeln. Hardware-Meilensteine können die Dauer nach den bisherigen Regeln verändern.
+3. Im Game-Fenster ein Hochformat wählen: **390 × 846**; zusätzlich **320 × 694** und **430 × 932** prüfen. Play drücken. Die Szene enthält bereits Canvas, SafeArea, Kamera, EventSystem und verdrahteten Game-Controller; kein manuelles Hinzufügen von Komponenten nötig.
+4. Ein neuer isolierter Spielstand beginnt mit **50 Credits**; zuerst den KI-Namen bei Mira bestätigen oder bewusst überspringen. Ein vorhandener Save wird unverändert fortgesetzt. Danach In **Hardware** einen Taschenrechner für **15 Credits** kaufen. Compute, Nutzer sowie Credit-/Datenproduktion steigen. Die Hardwareliste ist scrollbar; ein Klick kauft ein Gerät und zieht den angezeigten Preis ab.
+5. Die große **Laborzeichnung / den KI-Kern** antippen. Ein permanenter Tap-Bedienhinweis wird nicht mehr eingeblendet. Akzeptierte Taps haben mindestens **200 ms** Abstand. Nach **100 akzeptierten Taps** startet Overdrive automatisch: standardmäßig **×3 passive Credits für 15 Sekunden**. Die Sperrzeit läuft **60 Sekunden ab Auslösung**; Ladung kann sich währenddessen erneut sammeln. Hardware-Meilensteine können die Dauer nach den bisherigen Regeln verändern.
 6. Nach erstem Tap und Hardwarekauf führt der frühe Tutorialzustand zum Tab **Training**. **Qualität** erstmals kostenlos starten (20 Arbeitssekunden, durch Compute etwas schneller). Weitere Qualitätstrainings und Effizienz kosten Credits. Ein Trainingsplatz; Dauer und Kosten werden angezeigt. Währenddessen kann Forschung parallel laufen.
 7. Unter **Forschung** die erste **Datenerzeugung** kostenlos starten (20 Sekunden). Danach kosten Wiederholungen Daten; die frühen Kosten-/Zeitstaffeln und Voraussetzungen stammen unverändert aus TypeScript. Enthalten sind Datenerzeugung, Modellarchitektur, Compute-Optimierung, Nutzer-Skalierung und Kommerzialisierung. Ein Forschungsplatz vor den INT-Laborfreischaltungen. Der aktuelle Forschungs-/Analyse-/Industrieumfang und seine Bedienwege stehen in der Auditmatrix; diese frühe Anleitung ist der Einstieg.
 8. **Sichern** drücken oder die automatische Speicherung abwarten. Play beenden und erneut starten: Hardware, Ressourcen, Jobs, Tap-RNG und Overdrivezustand bleiben erhalten. Für den Offline-Test nach einem Kauf Play beenden, einige Zeit warten und erneut starten. Die Rückkehrmeldung zeigt den tatsächlichen Creditzuwachs. Ein sofortiger weiterer Neustart zahlt denselben Zeitraum nicht erneut aus. Lange Abwesenheit wird auf die bestehende Offlinekapazität begrenzt.
@@ -186,10 +219,42 @@ Mit Unity **6000.3.26f1** das Unterprojekt `IdleIntelligence/` öffnen, dann **`
 
 Vorbereitete finanzierte Referenz-/PlayMode-Zustände sind technische Transaktionsprüfungen. Der natürliche Erstprestige-Nachweis ist separat ein beschleunigt simulierter Lauf ohne Grants; er behauptet keinen minutenlangen realen Eingabemitschnitt. Physische Mobilgeräte und echte Plattformanbieter bleiben getrennte Abnahme.
 
-## Aktueller Einstieg und Abschlussnachweis · 21.10.2026
+## Historischer Einstieg und Abschlussnachweis · 21.10.2026
 
 Die obigen älteren Zahlen/Teilberichte sind historische Nachweise. Aktueller Code `86559ea8`: 128/128 EditMode, 55/55 PlayMode und echter StandaloneOSX-Universal-Player mit isoliertem 390×844-M4-Test einschließlich Reload. Details/Grenzen in `unity-story-storage.md` und `unity-functional-verification.json`.
 
 Zum manuellen Test **`IdleIntelligence/Assets/Scenes/IdleIntelligence.unity`** in **6000.3.26f1** öffnen und Play bei **390×844** starten. Bei neuer Kampagne zuerst in Mira einen gültigen Namen wählen und den Prolog mit **Weiter** durchlaufen. Die Führung zeigt die nächsten tatsächlichen Ziele: Tapfläche, Taschenrechner, erstes Qualitätstraining, erste Datenerzeugung. **Forschung → Mira/Story** öffnet Kapitel, Replay, Skip/Resume und Zielnavigation. **Forschung → Einstellungen** bietet Sprache/Audio/Bewegung und den ausdrücklich bestätigten Neustart mit Originalkopie; keine Save-Dateien löschen. **Forschung → Spielstände/Berichte** führt zu Importprüfung, Export, Recovery, Rückkehrarchiv und gemessenen Run-/Sitzungsberichten. Ein vorhandener Save setzt seinen gespeicherten Stand fort.
 
 Aktuelles lokales Appbundle: `/tmp/IdleIntelligence-functional-final-20261021.app`. Der automatische Nachweis lief mit explizitem temporärem Save; normales Öffnen verwendet den regulären nativen Spielstand. Echte Mobilgeräte und Produktionsanbieter bleiben separat offen.
+
+## Simulator-Nachprüfung vom 23.10.2026
+
+Die gezielte Hauptansichtsreparatur verwendet weiter dieselbe Startszene und echte Systeme. Der kompakte Ressourcenheader enthält Credits/Daten/Compute/Gems und das Hamburger-Menü. Dort bleiben Einstellungen, manuelles Speichern, Mira fortsetzen, Verwaltung und Berichte erreichbar. Unter Labor/Overdrive/Modell folgt die Hardwarewahl ×1/×10/MAX mit tatsächlichem Gesamtpreis; beim frischen Start passen ohne Dialog mindestens drei vollständige Zeilen in 390×846.
+
+Zum Nachspielen: isolierten frischen Save verwenden, Namen bestätigen, Miras Seiten mit Weiter lesen, am Fingerziel tippen, ersten Taschenrechner kaufen, Qualitätstraining starten und Datenerzeugung erforschen. Forschungsstart bei belegtem Labor reiht gemäß bestehender Regeln ein; Training zeigt die freigeschaltete T03-Queue weiter. Die natürlich erscheinende Drohne direkt am bewegten Motiv antippen. Werbung bleibt unverfügbar. Im Menü Führung überspringen/fortsetzen und Sprache wechseln; danach speichern und neu starten. Niemals dafür einen vorhandenen persönlichen Save löschen.
+
+[Reparaturbericht mit echten Bildern, Profilwerten und Grenzen](unity-iphone-repair.md). Simulatornachweise ersetzen keine Tastatur-/Touch-/60-fps-Abnahme auf einem physischen iPhone.
+
+## Truhen und Komponentenübersicht · 23.10.2026
+
+**Items → Inventar** zeigt jetzt alle 20 Komponenten als vier kompakte Reihen oberhalb des Modells. Nullbestände bleiben sichtbar. Antippen öffnet Namen, Originalgrafik, Bestand und die vorhandene Synthese mit tatsächlichen Kosten. **Material** verwendet dasselbe Raster. Im **Markt** öffnet sich eine erworbene Truhe am festen Scharnier, bleibt offen und lässt erst danach ihre tatsächlich gespeicherten Funde heraussteigen. Kürzen/Schließen vergeben nichts. [Prüfbericht und echte Vorher-/Nachher-Clips](unity-chest-components.md). Vorbereitete Aufnahmebestände sind ausdrücklich getrennt von persönlichen Saves.
+
+## Neue Meta-Items, Mira und Progressionsgrafiken · 23.10.2026
+
+Weiter dieselbe Szene `Assets/Scenes/IdleIntelligence.unity` öffnen und Play drücken. Normale Saves werden automatisch unter Originalschutz auf23 erweitert. Keine vorbereiteten Ressourcen in normale Saves importieren.
+
+- **Items → Inventar:** alle20 Komponenten gemeinsam; sechs gleich große Hauptsockel um das Modell, kompakte Schlösser, antippbare Details. Nach unten scrollen für Inventar/Extras und „Aktive Ausrüstungsboni“. Ein Item antippen: tatsächliche Wirkung/Vergleich/Kosten, Ausrüsten oder Ablegen; bestehende Fusion und Upgrades bleiben erreichbar.
+- **Items → Baupläne:** die sechs neuen Typen benötigen das echte Geheimlabor, bei Axiomgitter/Observatorium zusätzlich einen abgeschlossenen Axiomreset, beim Anker drei erworbene Modelle. Kaufen/Herstellen bleibt kostenpflichtig und sofort. Jede neue ID hat eine eigene Grafik; höhere Seltenheiten entstehen wie bisher über Drops/Fusion.
+- **INT:** neue eigene Progressionssymbole, kompaktere Werkzeuge, Ziehen/Pinch. Verbindungen erzeugen keine Kaufvoraussetzungen. Axiome wechseln über den vorhandenen Freischaltweg. Ein real gespeicherter Knotenkauf erhält kurzes örtliches Feedback.
+- **Menü → Mira/Dialoge** bzw. echte Storyereignisse: animiertes Portrait, Titel/Textanfänge statt technischer Archiv-IDs. Bei reduzierter Bewegung/Effekte aus statisch. Originale Tutorials und deren Fortschritte werden nicht zurückgesetzt.
+- **Company:** Warenhandel, Gutscheine, Datenschutz/Konto und feste Melde-/Sperraktionen. Ohne konfigurierte verifizierte Anbindung erscheint ein erklärter Fehler; kein lokaler Spielstand wird zum Onlinebestand. Kontolöschung zeigt vor der zweiten Bestätigung den genauen Onlineverlust und lokalen Erhalt. Das serverseitige5/Tag-Limit ist lokal geprüft, nicht automatisch produktiv ausgerollt.
+
+Für die reproduzierbaren vorbereiteten Aufnahmen nur die isolierten PlayMode-Fälle `MetaVisualSectionTests` verwenden. Sie setzen einen eigenen temporären Savepfad und kennzeichnen Ressourcen/Slot-/Axiomzustände ausdrücklich. Clips sind tatsächliches Unity-Rendering mit tatsächlichem Spielaudio, ohne nachträgliche Effekte oder Retiming.
+
+Der normale iPhone16Pro-Simulator startet bereits den nativen Player `c15b51eb` mit dem erhaltenen normalen Save23. Kein Web-/Capacitorstart. Der lokale Xcode-Export liegt separat unter `Builds/iOS-MetaVisual-c15b51eb/Xcode/Unity-iPhone.xcodeproj`; physisches Gerät/Signing sind eine getrennte Abnahme.
+
+## Materialanalyse und Nachtbetrieb · 26.10.2026
+
+In derselben Szene Play starten: **Schmiede → Komponenten**. Alle20 Komponenten im gemeinsamen Raster, danach drei Analysefamilien mit kurzer/langer Ausbeute, tatsächlicher Zeit und Preis. Neue Hardware-Kurzanalyse liefert24 Basiskomponenten statt12; laufende alte Verträge behalten ihre Menge. Forschungspuffer (F02,100INT) erlaubt sechs unbezahlte Analyseaufträge; bei belegtem Platz **Einreihen**, beim Eintrag × zum Entfernen. Forschungswiederholung (F03,2.000INT) erlaubt **Wiederholen ON** und die Rezeptwahl darunter. Keine Vorgängerkaufsperren. C02 bleibt alternativer Zugang zur gleichen Wiederholung. Im Knoten gibt es einen direkten Sprung zur Planung.
+
+Nach einem Start oder einer Änderung wird automatisch gespeichert. App verlassen und später zurückkehren: bezahlbare Aufträge laufen innerhalb der angezeigten Offlinekapazität weiter; Basis8h, bestehende Verbesserungen bis24h. Queue vor Wiederholung. Für eine Pause Wiederholung ausschalten und gegebenenfalls wartende Aufträge entfernen. Letzte echte Komponentenfunde werden mit Icon/Menge gespeichert und nach Reload angezeigt. Zielsuche nach bestimmter Komponente/Menge folgt später. [Ausführlicher Prüfbericht](unity-analysis-planning.md).

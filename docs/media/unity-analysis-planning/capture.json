@@ -1,0 +1,95 @@
+{
+  "capture": "Actual Unity scene-camera rendering, no image edits",
+  "test": "IdleIntelligence.PlayTests.AnalysisOverviewTests.ActualMobileViewsAndNoTickRecreation",
+  "prepared": true,
+  "saveIsolation": "Temporary separate SavePathOverride; normal simulator save untouched",
+  "languages": [
+    "de",
+    "en"
+  ],
+  "widths": [
+    320,
+    390,
+    430
+  ],
+  "files": [
+    {
+      "file": "actual-receipt.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "b36abe02115d3a334a512995e6fd0b8ccac927efb5963cbf74ab8b46f4b6781e"
+    },
+    {
+      "file": "overview-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "fda9c01fe030c3947e96f0258d34e6cb80f23f775b24c841f6f67fe5e7e20d4f"
+    },
+    {
+      "file": "overview-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "f113f40d0fad9cc368a8751d9d6e87b53e765e8629924c28842be33add29968a"
+    },
+    {
+      "file": "overview-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "03f9f28d7f1af0f861443392950ad66c75efbc7cb686b71172b67f3d93e5c757"
+    },
+    {
+      "file": "overview-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "8fbea011867d968f269e10276c601dac9468f0e191c109627b54a9c39e2f0023"
+    },
+    {
+      "file": "overview-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "dddf117fdcc5b6b1843888f8e605901539a9230d1467043f0690b46b7b9f9f92"
+    },
+    {
+      "file": "overview-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "b58b8bfcb284d7007d272bb6d6f57b145a7137de53baea76c8c9427fe3611368"
+    },
+    {
+      "file": "planning-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "8b801a6038b5a716aea606f082b8d8522df010f570bdcd6d04f7247fb2e692f2"
+    },
+    {
+      "file": "planning-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "525997fe427945fa565f3406c78fa3de1f22b7c249788931665a8f753ba11d25"
+    },
+    {
+      "file": "planning-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "0eae979da427018730573f89b3490f65110c2769f9f91fa9a20724c421a7dcbe"
+    },
+    {
+      "file": "planning-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "187d2a0d115a6b86558218259fabbf90d0ff6331b8ff230bab7f092ed20a6a25"
+    },
+    {
+      "file": "planning-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "2dcf736ce617fb20a06fae13f14e37fa8693bcadfcc7bff9182bda8e3720263e"
+    },
+    {
+      "file": "planning-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "739478b02c1d322c16383b618da2f21d0a051361a8cfb917e281b82b4565c279"
+    }
+  ]
+}

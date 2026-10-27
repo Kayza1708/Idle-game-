@@ -1,8 +1,42 @@
-# Nächste Schritte · 20.10.2026
+# Nächste Schritte · 26.10.2026
+
+## Aufgeräumte Hauptansichten und Ausrüstung · 26.10.2026
+
+Testfußzeile ausgeblendet, internes QA-Merkmal und Speicherwarnungen erhalten. Automatisches5s-/Transaktionsspeichern tatsächlich geprüft; manuelles Speichern bleibt optional. Kleine goldene Trainingstaste ohne Zeilenüberlauf, sechs geometrisch gleich große Sockel symmetrisch um den Originalkern, Zusatzsockel erst nach echtem Zugang, kompakter Detailzugang und kleine eindeutige Forschungskostenicons.111PlayMode/142EditMode/1937Vitest, Typecheck/Build bestanden; DE/EN320/390/430 mit leeren/belegten Sockeln selbst angesehen. [Prüfbericht, Bilder und weitere optische Prioritäten](unity-clean-ui.md). Im nativen Labor aufgedeckten Mira-Überlauf nach Reload zusätzlich reproduziert und korrigiert; aktuelle Textseite passt ohne Storyfortschritt. Keine Balance-/Saveänderung. Finaler Player7e9a0807 im iPhone16Pro-Simulator/iOS27 erfolgreich gebaut, installiert und gestartet;22Unity-/15Capacitor-Originale und normaler Save23 erhalten. Tatsächliche native Laboransicht mit vollständigem Mira-Hinweis angesehen; beide Code-CI-Prüfungen grün.
+
+
+## Drohnenpaket und tatsächliche Funde · 26.10.2026
+
+Sichtbares Originalpaket mit Aufhängungen, größerem beweglichem Touchziel und getrenntem Countdown. Gespeicherter Fund vor Paketfall/Abflug/Siegelauflösung; tatsächliche Materialien, Ressourcen, Items und Baupläne in adaptivem gemeinsamem Ergebnisfenster. Erstes Item vor Schmiedebesuch, voller Fund, schnelle Wiederholung, Savefehler, Abbruch, reduzierte Bewegung und Reload geprüft.108PlayMode/142EditMode/1937Vitest sowie Typecheck/Build bestanden; DE/EN bei320/390/430px und echter6,45s-Unity-Clip mit Originalspielton. [Prüfbericht, Vorher/Nachher und Clip](unity-drone-delivery.md). Balance und Save23 unverändert; Unity/IL2CPP/ARM64 mit5f8e647b im iPhone16Pro-Simulator/iOS27 gebaut, installiert und gestartet;20Unity-/15Capacitor-Originale und normaler Save23 erhalten. Natürlich erschienene Drohne mit Paket im tatsächlichen nativen Bild angesehen; beide Code-CI-Prüfungen grün. Physische Geräteabnahme separat.
+
+
+## Neue Hauptnavigation, Schmiede und Forschung · 26.10.2026
+
+Vier Startreiter Labor/Forschung/Schmiede/Shop, später fünf mit Prestige; Training über das Modell. Eigene Schmiedereiter, lernbare Bauplandetails, kompakte Forschungsbereiche und reale Laborbelegung einschließlich erhaltener Aufträge. Bestehende Transaktionen, Animationen und Save23 erhalten; bounded Sound-Recycling ergänzt.105PlayMode/142EditMode/1937Vitest bestanden, DE/EN bei320/390/430px und echter Herstellung-/Fusionsclip mit Unity-Audio. [Prüfbericht und Medien](unity-navigation-forge.md). Tatsächlich gestarteter Simulatorcode48dd4756, iPhone16Pro/iOS27/ARM64;19Unity-/15Capacitor-Originale und normaler Save23 erhalten. Beide Code-CI-Prüfungen grün. Physische Abnahme separat.
+
+
+## Prestige-/Axiombaum im gemeinsamen Spielstil · 25.10.2026
+
+Gemeinsame Stahlrahmen, Originalfonts, Goldaktionen, ruhige Werkzeugleisten und eigene Progressionsicons; kompakte inhaltsabhängige Details und korrekte Viewportanpassung. Regeln, Saves und freie Knotenkäufe erhalten.142EditMode/99PlayMode bestanden; finale Präsentationskorrekturen zusätzlich mit2UI-Tests und142EditMode geprüft.24Unity-Bilder DE/EN bei320/390/430px, bekannte Übersetzungsfallbacks getrennt offen. [Prüfbericht und Vorher/Nachher](unity-prestige-skin.md). Kein neuer Simulatorbuild, keine physische Geräteabnahme.
+
+
+## Truhe, Gumball und mobile Mira-Box · 25.10.2026
+
+Die bisherige positive Scharnierbeurteilung ist überholt: Die tatsächliche Perspektivschwäche wurde durch registrierte gezeichnete Öffnungsposen behoben. Der Gumball-Automat gibt eine sichtbare Kapsel aus und öffnet echte separate Hälften; die gemeinsame Tutorialbox enthält kurze Texte und ihre Aktionen. Finale Regression142EditMode/97PlayMode/1937Vitest und tatsächliche Clips/Bilder: [aktueller Prüfbericht](unity-reward-motion-v2.md). Physische Touch-/Lautsprecher-/Tastatur-/Performanceabnahme bleibt getrennt. Aktuell tatsächlich installiert/gestartet:7a3eeb26 auf iPhone16Pro-Simulator/iOS27; normaler Save23 und23Unity-/15Capacitor-Originale erhalten. Native Mira-Box zusätzlich isoliert geprüft; physische Geräteabnahme bleibt offen.
+
+
+## Truhenscharnier und Komponentenübersicht · 23.10.2026
+
+Mechanisch befestigter Deckel mit sichtbarer Innenseite und offener Truhe vor der Beuteenthüllung; alle 20 Komponenten als gemeinsames kompaktes Inventarraster. Originalicons anhand der TS-Atlaszuordnungen korrigiert. [Umsetzung, echte Vorher-/Nachher-Clips mit Unity-Audio und Prüfung](unity-chest-components.md). 139/139 EditMode, abschließend 89/89 PlayMode und 1.902 Vitest bestanden; keine pauschale Geräte-/Performancefreigabe.
+
+## Gezielte iPhone-Testreparatur · 23.10.2026
+
+Native Unity-Profiler-Baseline im **iPhone-16-Pro-Simulator** aufgenommen. CPU-/GC-/Save-Engpässe korrigiert; Original-Mira mit bedienbarer Führung, echte Drohnen-Hitfläche und gemeinsame Trainings-/Forschungskarten implementiert. Keine physische 60-fps-Abnahme behauptet. Prüfstand, Messmethode, gespeicherte Transaktionen und noch laufende Endabnahme: [gezielter Reparaturbericht](unity-iphone-repair.md). Folge-Draft #154, nicht mergen/veröffentlichen.
+
 
 ## Unity-Simulator und Company-/Audio-Anpassung · 23.10.2026
 
-Installierter und gestarteter Unity-Spielcode: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
+Historischer installierter Unity-Spielcode vor der Hauptansichtsreparatur: **a5a59bdd** auf dem iPhone-16-Pro-Simulator (iOS 27.0, ARM64). Native Xcode-Builds erfolgreich; 27 Save-Erhaltungsprüfungen und unveränderte 15 Capacitor-Originale bestätigt. Keine physische Geräteabnahme.
 
 Aktueller lokaler iOS-Weg und Prüfstand: [Unity auf iPhone-16-Pro-Simulator](unity-ios-local.md). Separate Unity-App und neuer Buildordner; Capacitor-`ios/`, ursprüngliche App und Saves bleiben erhalten. Company-Onlinezugang und echte native Integrationen sind weiterhin gesondert offen. Die folgende ältere Aufgabenhistorie ist keine Aussage, dass alle damaligen Zwischenlücken heute noch bestehen; maßgeblich sind funktionaler Audit und aktueller Plattformbericht.
 
@@ -123,3 +157,22 @@ Die konkreten Medien, Assetherkunft und Prüfungen stehen in [unity-design-06.md
 - Aktionsrunde 06 / Draft #152: Main-Integration `aebd1174` erhält die vorhandenen Unity-Company-/Profil-/Gutscheinwege. Neuer Company-Menü-/Gutschein-/Reload-Fall und zwei übernommene Compile-Anschlüsse korrigiert; finale integrierte Prüfergebnisse stehen im Abschnitt-06-Bericht. Optische Company-Abnahme bleibt separat.
 
 - Referenzdateien reproduzierbar mit `TZ=Europe/Berlin npm run unity:export` erzeugen; lokale und Linux-PR-Prüfung verwenden diese Referenzzeitzone. Andere Zeitzonen nicht als Balanceänderung in Referenzdateien übernehmen.
+
+### Laufende Hauptansichts-Reparatur (23.10.2026)
+Kompakter Ressourcen-/Menükopf, Shell-eigener Mira-Dock, echter Tutorialfinger, verdichtete Hardware und gemeinsame Lernkarten sind im Folge-Draft #154 in Arbeit. Nächste verbindliche Abnahmen: vollständiger finaler PlayMode-Lauf, nativer Echtzeitweg mit Finger/Drop/Reload, Nachher-Profil inklusive Save-Untermarkern. Simulator ist kein physischer 60-fps-Nachweis. Prüfstand: `unity-iphone-repair.md`.
+
+### Nach dem Meta-Visual-/Item-/Handelsabschnitt · 23.10.2026
+
+Die geprüften gemeinsamen Bausteine stehen in `unity-visual-items-store.md` und dessen JSON-Nachweis;142EditMode/94PlayMode und1937Webtests sind grün. Die sechs neuen Items sind zusätzliche autorisierte Inhalte, alte Preise/Claims bleiben erhalten. Save23 erweitert30→36 ohne Originalverlust. Der lokale echte Worker bestätigt5/Tag samt Konkurrenzschutz und Kontolöschung; **kein automatischer Produktionsrollout**.
+
+Nächste getrennte Abnahmen: verifizierte Native-Identität/Fortschrittsbindung und Online-Entitlements, freigegebener D1-Rollout, externer authentifizierter Löschweg und Moderationsbetrieb, juristische Store-/Datenschutz-/IARC-Angaben, Langzeitbalance der neuen Items, historische Sprachfallbacks sowie physische Touch-/Lautsprecher-/Haptik-/Wärme-/60-fps-Prüfung. Der Erkenntnisarchiv-Erwerb bleibt ein dokumentiertes Quellproblem. Keine pauschale Aussage „kommerziell fertig“ oder „gesamter Rewrite abgenommen“.
+
+Aktuell normal installiert/gestartet: `c15b51eb` auf dem iPhone16Pro-**Simulator** (iOS27, ARM64), nativer Unity-Player, Save23 ohne vorbereitete Ressourcen. Xcode-Export unter `Builds/iOS-MetaVisual-c15b51eb/Xcode`. Dokumentations-Folgecommit verändert diesen ausführbaren Code nicht.
+
+## Materialanalyse: aktueller Stand · 26.10.2026
+
+Neue Analysen liefern doppelte Basismengen. Schmiede → Komponenten enthält die gemeinsame Bestands-/Analyseübersicht. F02(100INT) erlaubt sechs wartende Analysen; F03(2.000INT) oder C02 erlaubt bezahlte Wiederholung innerhalb der bestehenden Offlinekapazität. Sourcepreise bleiben maßgeblich, keine zusätzlichen Vorgängersperren. Unity-Save24/Web64 erhalten bisherige Originale und bezahlte Verträge. [Prüfbericht und konkrete Bedienung](unity-analysis-planning.md).
+
+Als Nächstes: echte Zielplanung „Komponente X bis Bestand Y“, geeignete Analyse/Fokus wählen, endliches Stopkriterium, Reserven und Online/Offline/Reload-Parität. Noch nicht als vorhandene Funktion ausgeben. Ebenfalls spätere UX: expliziter Wartegrund für geschützte Datenreserve. Physische Geräte-/Native-Integrationsabnahme separat fortführen.
+
+Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer ARM64-Unity-Simulatorplayer9ee80e60 installiert/gestartet, normaler Save24 ohne Testfinanzierung und23Unity-/15Capacitor-Originale geschützt. Physisches iPhone weiterhin separat. Details in `unity-analysis-planning.md`.

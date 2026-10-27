@@ -1,5 +1,7 @@
 # Unity-Rewrite: Bestand und Migrationsabnahme
 
+Aktuelle UI-Wege seit26.10.2026: [Navigation, Schmiede und kompakte Forschung](unity-navigation-forge.md). Vier Startreiter, später Prestige als fünfter; Training über Modell, Items unter Schmiede. Historische Reiterbezeichnungen unten bleiben als Prüfgeschichte erkennbar.
+
 Aktueller Abgleich: 21.10.2026, [Verbraucher-/UI-/Nachweismatrix](unity-functional-audit.md). Historische Bestandsaufnahme: TypeScript-HEAD `625a42f90e459acce9d5c39dddd52f27172eb1b6`. Der INT-Abschnitt basiert auf `4aa4bbb0` und dem unveränderten aktuellen TypeScript-Code auf `codex/unity-rewrite`; Quellhash und Prüfdaten stehen im INT-Bericht. Die folgende Liste ist ein Arbeitsauftrag für den Port, keine Behauptung bereits implementierter Unity-Systeme. Historische Design-Dokumente können vom aktuellen Code abweichen; Code und laufende Schutztests entscheiden.
 
 ## Fortsetzung 20.10.2026: Werbe-/Forschungsskipverträge
@@ -196,3 +198,11 @@ Ein echter lokaler StandaloneOSX-Universal-Player wurde gebaut und auf Apple M4 
 ## Aktueller Abschlussabgleich 21.10.2026
 
 Alle 26 breiten Zeilen sind erneut in `unity-functional-audit.md` mit tatsächlichem Verbraucher, Bedienweg und Nachweis abgeglichen. Die Haken in der fachlichen Tabelle beziehen sich auf den dort beschriebenen aktuellen V2-Funktionsumfang, nicht auf vollständige historische Import-/Geräte-/Grafikparität. Neu gefunden und ergänzt: Ziele/Rückkehrführung, volle native Run-Snapshots, echte Sitzungsdiagnostik, Detailangebote/Vergleiche, passende Resetabsichts-Löschung, Integration-in-Keine-Items-Sperre und der tatsächliche alte Klassenupgrade-Verbraucher. Sourceprobleme und nicht abbildbare aktive alte Webverträge bleiben einzeln benannt. Save v21 erhält v1–20 mit Originalen. Aktuelle Schlussresultate stehen im [Prüfbericht](unity-story-storage.md).
+
+## Beauftragte Erweiterung nach der funktionalen Basismigration · 23.10.2026
+
+[Visual-/Item-/Store-Abschnitt](unity-visual-items-store.md): sechs zusätzliche Dark-Lab-/Axiomtypen erweitern den ursprünglichen30er-Katalog auf36; dies ist neue beauftragte Spielinhaltserweiterung mit zentraler Balance, kein still geänderter Migrationsmaßstab. Save23 erweitert die alten Arrays unter Erhalt der Originale. Eigene60-/24-Knotensymbole, Mira-Ausdrücke und gemeinsame88er-Ausrüstungssockel ersetzen konkret falsche Darstellungen. Vorbereitete Online-Schutzfunktionen und fünf Transfers pro UTC-Tag werden lokal mit echtem Worker/D1 geprüft; produktiver Rollout und verifizierte Native-Identität bleiben gesonderte offene Integrationen. Das Erkenntnisarchiv erhält weiterhin keinen erfundenen Erwerbsweg.
+
+## Beauftragte Materialanalyse-Erweiterung · 26.10.2026
+
+Neue V2-Basisausbeute ×2, F02-Analysequeue und F03-Wiederholung sind zusätzliche beauftragte Regeln; die ursprünglichen Preise/Arbeitszeiten/Fragmente bleiben erhalten. Unity-Save24 erhält23 und ältere unterstützte Originale; der explizite Webtransfer unterstützt jetzt Web64 einschließlich kurzer/langer Queueeinträge und tatsächlicher Fundbelege. Die spätere Komponenten-/Mengenzielsuche ist noch nicht implementiert. [Bedienung, Referenzfälle, Prüfstand und Grenzen](unity-analysis-planning.md). Keine Gesamtabnahme nativer Integrationen oder physischer Geräte daraus ableiten.

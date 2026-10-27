@@ -65,6 +65,13 @@ namespace IdleIntelligence.Runtime
             return Send("POST", "/v1/company/applications/" + Uri.EscapeDataString(applicationId ?? "") +
                 (accept ? "/accept" : "/reject"), "{}", completed);
         }
+        public void ClearSession(){accessToken="";}
+        public IEnumerator DeleteOnlineAccount(Action<long,string> completed)=>Send("DELETE","/v1/me","{\"confirmation\":\"delete-online-account\"}",(code,json)=>{if(code>=200&&code<300)ClearSession();completed?.Invoke(code,json);});
+        public IEnumerator Report(string targetType,string targetId,string reason,Action<long,string> completed)=>Send("POST","/v1/reports",JsonUtility.ToJson(new ReportBody{targetType=targetType,targetId=targetId,reason=reason}),completed);
+        public IEnumerator BlockPlayer(string playerId,bool block,Action<long,string> completed)=>Send(block?"POST":"DELETE","/v1/blocks",JsonUtility.ToJson(new BlockBody{playerId=playerId}),completed);
+        public IEnumerator BlockedPlayers(Action<long,string> completed)=>Send("GET","/v1/blocks",null,completed);
+        [Serializable] sealed class ReportBody {public string targetType,targetId,reason;}
+        [Serializable] sealed class BlockBody {public string playerId;}
         public IEnumerator MyVerifiedVouchers(Action<long, string> completed)
         {
             return Send("GET", "/v1/vouchers/me", null, completed);
@@ -233,6 +240,7 @@ namespace IdleIntelligence.Runtime
             {
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.timeout = 20;
+                request.redirectLimit = 0; // Never forward the bearer token to a redirected host.
                 if (json != null)
                 {
                     request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));

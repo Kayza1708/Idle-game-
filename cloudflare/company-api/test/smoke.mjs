@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
+function localSql(sql){const cli=process.env.IDLE_COMPANY_WRANGLER;const args=['d1','execute','idle-intelligence-companies','--local',...(process.env.IDLE_COMPANY_TEST_PERSIST?['--persist-to',process.env.IDLE_COMPANY_TEST_PERSIST]:[]),'--command',sql];execFileSync(cli?process.execPath:'npx',cli?[cli,...args]:['wrangler',...args],{encoding:'utf8',timeout:45000});}
 function provisionLocalTestAccount(playerId,founderGems=0){
   assert.match(playerId,/^[0-9a-f-]{36}$/i);
   // Local CI fixture only. There is intentionally no server HTTP endpoint to mint paid Gems.
   const sql="UPDATE players SET company_access_verified=1 WHERE id='"+playerId+"'; "+
     "UPDATE verified_gem_wallet SET balance="+founderGems+" WHERE player_id='"+playerId+"';";
-  execFileSync('npx',['wrangler','d1','execute','idle-intelligence-companies','--local','--command',sql],
-    {encoding:'utf8',timeout:45000});
+  localSql(sql);
 }
 
 
-const base='http://127.0.0.1:8787';
+const base=process.env.IDLE_COMPANY_TEST_BASE||'http://127.0.0.1:8787';
 async function http(method,path,token,body) {
   const response=await fetch(base+path,{
     method,
@@ -101,6 +101,23 @@ assert.equal(voucherAccount.body.verifiedBalance,0);
 assert.equal(voucherAccount.body.localVouchersTransferable,false);
 assert.equal((await http('GET','/v1/vouchers/offers',bob)).status,200);
 assert.equal((await http('POST','/v1/vouchers/gifts',bob,{requestId:'00000000-0000-4000-8000-000000000001',recipientId:profileId,quantity:1})).status,409);
+// Isolated server-issued stock; never sourced from a Unity/Web save or a public mint endpoint.
+localSql("UPDATE player_voucher_balances SET balance=10 WHERE player_id='"+bobId+"'; UPDATE company_members SET joined_at=joined_at-172801 WHERE company_id='"+companyId+"'");
+assert.equal((await http('POST','/v1/reports',bob,{targetType:'company',targetId:companyId,reason:'name',message:'chat'})).status,400);
+assert.equal((await http('POST','/v1/reports',bob,{targetType:'company',targetId:companyId,reason:'name'})).status,201);
+assert.equal((await http('POST','/v1/blocks',bob,{playerId:profileId})).status,200);
+assert.equal((await http('GET','/v1/blocks',bob)).body.blocked.length,1);
+const gift=(n,quantity=1)=>({requestId:'00000000-0000-4000-8000-'+String(n).padStart(12,'0'),recipientId:profileId,quantity});
+assert.equal((await http('POST','/v1/vouchers/gifts',bob,gift(10))).status,403);
+assert.equal((await http('DELETE','/v1/blocks',bob,{playerId:profileId})).status,200);
+for(let n=10;n<14;n++)assert.equal((await http('POST','/v1/vouchers/gifts',bob,gift(n))).status,201);
+const competing=await Promise.all([14,15].map(n=>http('POST','/v1/vouchers/gifts',bob,gift(n))));
+assert.deepEqual(competing.map(r=>r.status).sort(),[201,429]);
+for(const token of [alice,bob]){const quota=(await http('GET','/v1/trades/limits',token)).body.tradeLimit;assert.equal(quota.used,5);assert.equal(quota.limit,5);assert.equal(quota.resetAt%86400,0);}
+assert.equal((await http('POST','/v1/vouchers/gifts',bob,gift(10))).status,200);
+assert.equal((await http('POST','/v1/vouchers/gifts',bob,gift(10,2))).status,409);
+assert.equal((await http('GET','/v1/vouchers/me',bob)).body.verifiedBalance,5);
+assert.equal((await http('GET','/v1/vouchers/me',alice)).body.verifiedBalance,5);
 assert.equal((await http('POST','/v1/company/members/'+bobId+'/role',alice,{role:'executive'})).status,200);
 assert.equal((await http('POST','/v1/company/members/'+profileId+'/kick',bob,{})).status,403);
 assert.equal((await http('POST','/v1/company/leave',alice,{})).status,409);
@@ -129,4 +146,8 @@ const rotated=await http('POST','/v1/session/rotate',alice,{});
 assert.equal(rotated.status,200);
 assert.equal((await http('GET','/v1/me',alice)).status,401);
 assert.equal((await http('GET','/v1/me',rotated.body.accessToken)).status,200);
+assert.equal((await http('DELETE','/v1/me',charlie,{})).status,400);
+assert.equal((await http('DELETE','/v1/me',charlie,{confirmation:'delete-online-account'})).body.localSaveAffected,false);
+assert.equal((await http('GET','/v1/me',charlie)).status,401);
+assert.equal((await http('GET','/v1/company',bob)).body.company.name,'Neural Labs');
 console.log('Cloudflare Company API smoke tests passed');

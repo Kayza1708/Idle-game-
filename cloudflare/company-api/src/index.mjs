@@ -1,3 +1,4 @@
+import {privacyRoute} from './privacy.mjs';
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
 import {socialRoute} from './social.mjs';
 import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from '../../../src/namePolicy.ts';
@@ -51,6 +52,9 @@ async function requiredMember(db,playerId){
 }
 function databaseError(error){
   const message=String(error?.message||'');
+  if(/daily_trade_limit/i.test(message))return new ApiError(429,'daily_trade_limit','Five completed transfers per player and UTC day.');
+  if(/invalid_trade_time/i.test(message))return new ApiError(400,'invalid_trade_time');
+  if(/player_blocked/i.test(message))return new ApiError(403,'player_blocked');
   if(/company_full/i.test(message))return new ApiError(409,'company_full');
   if(/company_access_not_verified/i.test(message))return new ApiError(403,'company_access_not_verified');
   if(/insufficient_verified_gems/i.test(message))return new ApiError(409,'insufficient_verified_gems');
@@ -199,6 +203,7 @@ export default {
           note:'Preview only; name is reserved only after authenticated PUT /v1/me/name'});
       }
       const player=await authenticated(request,db,now);
+      const privacyResponse=await privacyRoute({request,db,player,path,method,now,reply,ApiError,payload});if(privacyResponse)return privacyResponse;
       const voucher=await vouchersRoute({request,db,player,path,method,now,reply,ApiError,payload,requiredMember});
       if(voucher)return voucher;
       const social=await socialRoute({

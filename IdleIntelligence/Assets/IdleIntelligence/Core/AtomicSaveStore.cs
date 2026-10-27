@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 namespace IdleIntelligence.Core
 {
+    public interface IAtomicSaveProfiling { IDisposable Phase(string name); }
     public interface ISaveCodec { string Encode(StateData data); StateData Decode(string json); }
     [Serializable] public sealed class SaveEnvelope { public string format;public int version;public string payload,sha256; }
     public interface IEnvelopeCodec : ISaveCodec { string EncodeEnvelope(SaveEnvelope data);SaveEnvelope DecodeEnvelope(string json); }
@@ -15,10 +16,10 @@ namespace IdleIntelligence.Core
     }
     public sealed class AtomicSaveStore
     {
-        public const int Version=22;
+        public const int Version=24;
         public const string Format="idle-intelligence-unity-slice";
         readonly string path;readonly IEnvelopeCodec codec;
-        bool writable;string diskHash;
+        bool writable;string diskHash;public IAtomicSaveProfiling Profiling;
         public string PathName=>path;
         public AtomicSaveStore(string path,IEnvelopeCodec codec) {this.path=path;this.codec=codec;}
         static string Hash(string payload) {using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(payload))).Replace("-","").ToLowerInvariant();}
@@ -32,7 +33,7 @@ namespace IdleIntelligence.Core
         {
             version=0;
             var envelope=codec.DecodeEnvelope(json);
-            if(envelope==null||envelope.format!=Format||envelope.version!=Version&&envelope.version!=1&&envelope.version!=2&&envelope.version!=3&&envelope.version!=4&&envelope.version!=5&&envelope.version!=6&&envelope.version!=7&&envelope.version!=8&&envelope.version!=9&&envelope.version!=10&&envelope.version!=11&&envelope.version!=12&&envelope.version!=13&&envelope.version!=14&&envelope.version!=15&&envelope.version!=16&&envelope.version!=17&&envelope.version!=18&&envelope.version!=19&&envelope.version!=20&&envelope.version!=21)throw new NotSupportedException("Unbekannte Spielstandversion; Original bleibt erhalten.");
+            if(envelope==null||envelope.format!=Format||envelope.version!=Version&&envelope.version!=23&&envelope.version!=1&&envelope.version!=2&&envelope.version!=3&&envelope.version!=4&&envelope.version!=5&&envelope.version!=6&&envelope.version!=7&&envelope.version!=8&&envelope.version!=9&&envelope.version!=10&&envelope.version!=11&&envelope.version!=12&&envelope.version!=13&&envelope.version!=14&&envelope.version!=15&&envelope.version!=16&&envelope.version!=17&&envelope.version!=18&&envelope.version!=19&&envelope.version!=20&&envelope.version!=21&&envelope.version!=22)throw new NotSupportedException("Unbekannte Spielstandversion; Original bleibt erhalten.");
             if(envelope.payload==null||envelope.sha256!=Hash(envelope.payload))throw new FormatException("Spielstand-Prüfsumme ungültig.");
             version=envelope.version;var decoded=codec is IVersionedSaveCodec versioned?versioned.Decode(envelope.payload,version):codec.Decode(envelope.payload);if(version>=7&&(decoded.lifetime==null||decoded.lifetime.schema!=1||!decoded.lifetime.initialized||decoded.hasChallenge&&(decoded.challengeMain?.lifetime==null||!decoded.challengeMain.lifetime.initialized)))throw new FormatException("Missing lifetime state");if(version>=8&&(!decoded.modelLevelRecorded||decoded.retention==null||!decoded.retention.initialized||decoded.hasChallenge&&(decoded.challengeMain?.retention==null||!decoded.challengeMain.retention.initialized||!decoded.challengeMain.modelLevelRecorded)))throw new FormatException("Missing retention state");if(version>=9&&(decoded.missions==null||!decoded.missions.initialized||decoded.hasChallenge&&(decoded.challengeMain?.missions==null||!decoded.challengeMain.missions.initialized)))throw new FormatException("Missing missions state");if(version>=10&&(decoded.rewards==null||!decoded.rewards.initialized||decoded.hasChallenge&&(decoded.challengeMain?.rewards==null||!decoded.challengeMain.rewards.initialized)))throw new FormatException("Missing season reward state");if(version>=11&&(decoded.signals==null||!decoded.signals.initialized||decoded.hasChallenge&&(decoded.challengeMain?.signals==null||!decoded.challengeMain.signals.initialized)))throw new FormatException("Missing signal state");if(version>=12&&(decoded.market==null||!decoded.market.initialized||decoded.rewards.hasReceipt&&decoded.rewards.receipt?.metadataRecorded!=true||decoded.hasChallenge&&(decoded.challengeMain?.market==null||!decoded.challengeMain.market.initialized||decoded.challengeMain.rewards.hasReceipt&&decoded.challengeMain.rewards.receipt?.metadataRecorded!=true)))throw new FormatException("Missing market state");if(version>=13&&(decoded.upgrades==null||!decoded.upgrades.initialized||decoded.capsules==null||!decoded.capsules.initialized||decoded.hasChallenge&&(decoded.challengeMain?.upgrades==null||!decoded.challengeMain.upgrades.initialized||decoded.challengeMain.capsules==null||!decoded.challengeMain.capsules.initialized)))throw new FormatException("Missing Gem features state");if(version>=14&&(decoded.commerce==null||!decoded.commerce.initialized||decoded.hasChallenge&&(decoded.challengeMain?.commerce==null||!decoded.challengeMain.commerce.initialized)))throw new FormatException("Missing commerce state");if(version>=15&&(!ResearchIdentities(decoded)||decoded.hasChallenge&&!ResearchIdentities(decoded.challengeMain)))throw new FormatException("Missing research identities");if(version>=15&&(decoded.ads==null||!decoded.ads.initialized||decoded.hasChallenge&&(decoded.challengeMain?.ads==null||!decoded.challengeMain.ads.initialized)))throw new FormatException("Missing ad state");if(version>=16&&(decoded.settings==null||!decoded.settings.initialized||decoded.hasChallenge&&(decoded.challengeMain?.settings==null||!decoded.challengeMain.settings.initialized)))throw new FormatException("Missing settings");if(version>=17&&(decoded.returnReceipt==null||!decoded.returnReceipt.initialized||!decoded.storyRecorded||decoded.story==null||!decoded.story.initialized||decoded.journal==null||!decoded.journal.initialized||decoded.hasChallenge&&(decoded.challengeMain?.returnReceipt==null||!decoded.challengeMain.returnReceipt.initialized||decoded.challengeMain.storyRecorded!=true||decoded.challengeMain.story==null||!decoded.challengeMain.story.initialized||decoded.challengeMain.journal==null||!decoded.challengeMain.journal.initialized)))throw new FormatException("Missing story or event journal");return decoded.ToState(version==1,version==2,version==3,version==4,version==5);
         }
@@ -71,20 +72,20 @@ namespace IdleIntelligence.Core
         public void Save(GameState state)
         {
             if(!writable)throw new InvalidOperationException("Speichern gesperrt; Originaldateien zuerst sichern.");
-            Game.Validate(state);
+            using(Profiling?.Phase("Validate")){Game.Validate(state);}
             string parent=System.IO.Path.GetDirectoryName(path);if(!string.IsNullOrEmpty(parent))Directory.CreateDirectory(parent);
-            // Recheck the disk before every write, including external replacement after load.
-            if(File.Exists(path)){Read(path);if(diskHash==null||diskHash!=FileHash(path))throw new IOException("Spielstand extern verändert; Original bleibt erhalten.");}else if(diskHash!=null)throw new IOException("Spielstand extern entfernt; Recovery erforderlich.");
-            string payload=codec.Encode(StateData.From(state));
-            string json=codec.EncodeEnvelope(new SaveEnvelope{format=Format,version=Version,payload=payload,sha256=Hash(payload)});
-            byte[] bytes=Encoding.UTF8.GetBytes(json);
-            using(var stream=new FileStream(path+".pending",FileMode.CreateNew,FileAccess.Write,FileShare.None)){stream.Write(bytes,0,bytes.Length);stream.Flush(true);}
-            Read(path+".pending");
-            // Detect concurrent replacement again immediately before committing.
-            if(File.Exists(path)&&diskHash!=FileHash(path))throw new IOException("Spielstand während des Speicherns verändert; Pending und Original bleiben erhalten.");
-            // Same-volume replace atomically updates main and retains its previous contents.
-            if(File.Exists(path))File.Replace(path+".pending",path,path+".backup");
-            else File.Move(path+".pending",path);diskHash=BytesHash(bytes);
+            using(Profiling?.Phase("OriginalHash")){
+                // These exact bytes were fully validated at load/commit. Unknown external changes still block.
+                if(File.Exists(path)){if(new FileInfo(path).Length>32*1024*1024)throw new FormatException("Save too large");if(diskHash==null||diskHash!=FileHash(path))throw new IOException("Spielstand extern verändert; Original bleibt erhalten.");}else if(diskHash!=null)throw new IOException("Spielstand extern entfernt; Recovery erforderlich.");
+            }
+            byte[] bytes;
+            using(Profiling?.Phase("Encode")){string payload=codec.Encode(StateData.From(state));string json=codec.EncodeEnvelope(new SaveEnvelope{format=Format,version=Version,payload=payload,sha256=Hash(payload)});bytes=Encoding.UTF8.GetBytes(json);}
+            using(Profiling?.Phase("Flush")){using(var stream=new FileStream(path+".pending",FileMode.CreateNew,FileAccess.Write,FileShare.None)){stream.Write(bytes,0,bytes.Length);stream.Flush(true);}}
+            using(Profiling?.Phase("PendingValidate")){Read(path+".pending");}
+            using(Profiling?.Phase("Commit")){
+                if(File.Exists(path)&&diskHash!=FileHash(path))throw new IOException("Spielstand während des Speicherns verändert; Pending und Original bleiben erhalten.");
+                if(File.Exists(path))File.Replace(path+".pending",path,path+".backup");else File.Move(path+".pending",path);diskHash=BytesHash(bytes);
+            }
         }
     }
 }

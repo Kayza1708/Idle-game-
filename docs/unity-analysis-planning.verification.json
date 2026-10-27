@@ -1,0 +1,83 @@
+{
+  "unity": "6000.3.26f1",
+  "branch": "codex/unity-rewrite",
+  "unitySaveVersion": 24,
+  "webSaveVersion": 64,
+  "preparedTests": true,
+  "normalSaveModifiedByTests": false,
+  "editMode": {
+    "total": "147",
+    "passed": "147",
+    "failed": "0",
+    "duration": "124.347012",
+    "start-time": "2026-10-26 22:35:23Z",
+    "end-time": "2026-10-26 22:37:27Z"
+  },
+  "targetedPlayMode": {
+    "total": "2",
+    "passed": "2",
+    "failed": "0",
+    "duration": "6.5212464",
+    "start-time": "2026-10-26 22:49:28Z",
+    "end-time": "2026-10-26 22:49:34Z"
+  },
+  "vitest": {
+    "passed": 1944,
+    "files": 148,
+    "durationSeconds": 329.66
+  },
+  "typecheck": "passed",
+  "webBuild": "passed; existing chunk-size advisory",
+  "fullPlayMode": {
+    "total": "113",
+    "passed": "113",
+    "failed": "0",
+    "duration": "525.4232516",
+    "start-time": "2026-10-27 06:16:45Z",
+    "end-time": "2026-10-27 06:25:30Z",
+    "context": "Final isolated full run, open/unlocked Mac, no parallel Xcode compilation; all five prior failed motion assertions passed unchanged."
+  },
+  "physicalIPhone": "not tested",
+  "targetSearch": "later; not implemented",
+  "nativeSimulator": {
+    "installedCommit": "9ee80e60769891d513aafc69d0b114abdfeed5cc",
+    "unity": "6000.3.26f1",
+    "platform": "iOS Simulator ARM64",
+    "saveVersion": 24,
+    "prepared": false,
+    "originalPreserved": true,
+    "normalSaveValid": true,
+    "unityOriginalFiles": 23,
+    "capacitorOriginalFiles": 15,
+    "capacitorUnchangedAfterUnityLaunch": true,
+    "device": "iPhone 16 Pro Simulator",
+    "os": "iOS 27.0",
+    "xcodeBuild": "BUILD SUCCEEDED, exit0",
+    "unityExport": "succeeded, exit0",
+    "portraitOnly": true,
+    "actualNativeScreenshotInspected": true,
+    "originalAndScreenshotLocation": "ignored local Builds/iOS-Analysis-9ee80e60; private normal save not committed"
+  },
+  "interruptedConcurrentPlayMode": {
+    "total": "113",
+    "passed": "108",
+    "failed": "5",
+    "duration": "681.2948348",
+    "start-time": "2026-10-26 23:25:12Z",
+    "end-time": "2026-10-27 03:04:02Z",
+    "failures": [
+      "IdleIntelligence.PlayTests.ChestInventoryRefinementTests.RecordChestAndInventory",
+      "IdleIntelligence.PlayTests.MetaVisualSectionTests.RecordAllFourActualPaidChestTiersWithoutAnimationGrants",
+      "IdleIntelligence.PlayTests.NavigationFlowTests.RecordSavedCraftAndFusionThroughTabs",
+      "IdleIntelligence.PlayTests.RewardMotionV2Tests.ActualRewardsFitBothLanguagesWidthsAndRapidCancel",
+      "IdleIntelligence.PlayTests.RewardPresentationTests.RecordChestCapsuleShopAndLivingLabor"
+    ],
+    "context": "Long wall-clock interruptions; closed lid observed; concurrent Xcode compilation. Five motion capture/intermediate-pose assertions failed. No production motion changes made; full isolated rerun pending."
+  },
+  "sourceCommit": "9ee80e60769891d513aafc69d0b114abdfeed5cc",
+  "codeCI": {
+    "check": "https://github.com/Kayza1708/Idle-game-/actions/runs/40415667237/job/121897244109",
+    "test": "https://github.com/Kayza1708/Idle-game-/actions/runs/40415667422/job/121897244773",
+    "result": "passed"
+  }
+}

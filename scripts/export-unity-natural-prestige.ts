@@ -1,3 +1,4 @@
+import {verifyReference} from './unity-reference-check';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {newGame,hardwareIds,buyHardwareClass,registerTap,startTraining,startResearchProject,newINTScientific,researchQuote,hardwareCostScientific,exactEconomyValue,computeRateScientific,BALANCE} from '../src/economy';
 import {advanceTo} from '../src/simulation';
@@ -20,4 +21,4 @@ for(seconds=0;seconds<14400;seconds++){
 }
 if(!state.prestigeCount)throw Error('No natural first prestige within four hours');
 const result={scope:'Fresh natural deterministic policy: default 50 credits, no grants, three accepted taps/second, one affordable best compute/base-price hardware purchase/second, lower Q/E training and existing research up to level 10. Accelerated elapsed-time simulation, not a wall-clock playthrough.',seconds:seconds+1,initial,actions,checks};
-const json=JSON.stringify(result)+'\n',path='IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/NaturalPrestigeRun.json';if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==json)throw Error('Stale natural prestige replay')}else writeFileSync(path,json);console.log('Natural first prestige:',seconds+1,'seconds;',actions.length,'real paid/tap/time actions;',checks.length,'checkpoints');
+const json=JSON.stringify(result)+'\n',path='IdleIntelligence/Assets/IdleIntelligence/Tests/EditMode/NaturalPrestigeRun.json';if(process.argv.includes('--check')){verifyReference(path,json,'Stale natural prestige replay');}else writeFileSync(path,json);console.log('Natural first prestige:',seconds+1,'seconds;',actions.length,'real paid/tap/time actions;',checks.length,'checkpoints');

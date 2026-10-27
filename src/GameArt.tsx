@@ -2,7 +2,7 @@ import {VectorIcon} from './VectorIcon';
 import {prestigeIcon} from './artIconCatalog';
 import type {CSSProperties} from 'react';
 import {RasterMotif} from './RasterMotif';
-import { type ComponentId, type HardwareId, type ItemTypeId, type PrestigeUpgradeId } from './economy';
+import { type LateMetaItemId, type ComponentId, type HardwareId, type ItemTypeId, type PrestigeUpgradeId } from './economy';
 
 type SpriteStyle = CSSProperties & {'--sprite-x': string; '--sprite-y': string};
 type Grid = {columns:number;rows:number};
@@ -16,7 +16,8 @@ export const itemV2Cells:Partial<Record<ItemTypeId,[number,number]>>={'quantum-c
 export const itemV1Cells:Partial<Record<ItemTypeId,[number,number]>>={'quantum-chip':[0,0],'neural-asic':[1,0],'photonic-array':[2,0],'memory-crystal':[3,0],'logic-seed':[0,1],'tensor-core':[1,1],'field-scanner':[2,1],'lab-drone':[3,1],'data-prism':[0,2]};
 export const prestigeCells:Partial<Record<PrestigeUpgradeId,[number,number]>>={dataArchive1:[0,0],computeNet1:[1,0],analysis1:[2,0],labs1:[3,0],manufacturing1:[0,1],dataArchive2:[1,1],computeNet2:[2,1],analysis2:[3,1],labs2:[0,2],manufacturing2:[1,2],dataArchive3:[2,2],computeNet3:[3,2],analysis3:[0,3],labs3:[1,3],manufacturing3:[2,3]};
 // Reviewed row-major order of the complete 6 × 5 item rework. Stable IDs, independent of economy ordering.
-export const itemReworkCells:Record<ItemTypeId,[number,number]>={'impulse-relay':[0,0],'insight-archive':[1,0],'quantum-chip':[2,0],'neural-asic':[3,0],'photonic-array':[4,0],'memory-crystal':[5,0],'logic-seed':[0,1],'tensor-core':[1,1],'field-scanner':[2,1],'lab-drone':[3,1],'data-prism':[4,1],'inference-router':[5,1],'burst-processor':[0,2],'legacy-controller':[1,2],'sparse-decoder':[2,2],'photonic-matrix':[3,2],'quantum-coupler':[4,2],'distillation-module':[5,2],'curriculum-module':[0,3],'long-term-memory':[1,3],'cryocontroller':[2,3],'manufacturing-controller':[3,3],'diagnostic-adapter':[4,3],'experiment-controller':[5,3],'precision-scanner':[0,4],'recycling-probe':[1,4],'blueprint-archive':[2,4],'protocol-controller':[3,4],'photonic-analyzer':[4,4],'quantum-diagnostic-module':[5,4]};
+export const metaItemCells:Record<LateMetaItemId,[number,number]>={"darklab-resonator":[0,0],"model-echo-core":[1,0],"axiom-lattice":[2,0],"cycle-observatory":[0,1],"entropy-sink":[1,1],"mnemonic-anchor":[2,1]};
+export const itemReworkCells:Record<Exclude<ItemTypeId,LateMetaItemId>,[number,number]>={'impulse-relay':[0,0],'insight-archive':[1,0],'quantum-chip':[2,0],'neural-asic':[3,0],'photonic-array':[4,0],'memory-crystal':[5,0],'logic-seed':[0,1],'tensor-core':[1,1],'field-scanner':[2,1],'lab-drone':[3,1],'data-prism':[4,1],'inference-router':[5,1],'burst-processor':[0,2],'legacy-controller':[1,2],'sparse-decoder':[2,2],'photonic-matrix':[3,2],'quantum-coupler':[4,2],'distillation-module':[5,2],'curriculum-module':[0,3],'long-term-memory':[1,3],'cryocontroller':[2,3],'manufacturing-controller':[3,3],'diagnostic-adapter':[4,3],'experiment-controller':[5,3],'precision-scanner':[0,4],'recycling-probe':[1,4],'blueprint-archive':[2,4],'protocol-controller':[3,4],'photonic-analyzer':[4,4],'quantum-diagnostic-module':[5,4]};
 export const materialExtensionCells:Partial<Record<ComponentId,[number,number]>>={neuralCrystals:[0,0],ceramicCapacitors:[1,0],ferriteCores:[2,0],goldContacts:[3,0],ceramicSubstrates:[0,1],opticalFibers:[1,1],thermalInterface:[2,1],diamondSubstrates:[3,1],spintronicDevices:[0,2],photonicCircuits:[1,2],cryogenicResonators:[2,2]};
 export type ResourceArtId='credits'|'gems'|'compute'|'int'|'research'|'blueprints'|'components'|'data';
 const resourceCells:Record<ResourceArtId,[number,number]>={credits:[0,0],gems:[1,0],compute:[2,0],int:[3,0],research:[0,1],blueprints:[1,1],components:[2,1],data:[3,1]};
@@ -53,7 +54,8 @@ export const itemArtBounds:Record<ItemTypeId,[number,number,number,number]>={
  'logic-seed':[43,264,154,174],'tensor-core':[255,245,197,194],'field-scanner':[488,234,183,214],'lab-drone':[710,266,209,179],'data-prism':[974,247,141,208],'inference-router':[1170,270,192,168],
  'burst-processor':[30,475,190,169],'legacy-controller':[251,461,203,192],'sparse-decoder':[474,475,199,179],'photonic-matrix':[695,459,224,192],'quantum-coupler':[941,494,213,136],'distillation-module':[1182,443,165,219],
  'curriculum-module':[44,685,185,189],'long-term-memory':[283,659,135,222],'cryocontroller':[466,674,186,200],'manufacturing-controller':[686,674,233,190],'diagnostic-adapter':[924,674,199,202],'experiment-controller':[1122,692,234,193],
- 'precision-scanner':[39,883,165,235],'recycling-probe':[221,898,232,208],'blueprint-archive':[466,896,229,212],'protocol-controller':[704,896,187,214],'photonic-analyzer':[909,914,268,184],'quantum-diagnostic-module':[1203,896,137,214]
+ 'precision-scanner':[39,883,165,235],'recycling-probe':[221,898,232,208],'blueprint-archive':[466,896,229,212],'protocol-controller':[704,896,187,214],'photonic-analyzer':[909,914,268,184],'quantum-diagnostic-module':[1203,896,137,214],
+ 'darklab-resonator':[0,0,512,512],'model-echo-core':[512,0,512,512],'axiom-lattice':[1024,0,512,512],'cycle-observatory':[0,512,512,512],'entropy-sink':[512,512,512,512],'mnemonic-anchor':[1024,512,512,512]
 };
 const itemArtClips:Record<ItemTypeId,string>={
  'impulse-relay':'M47,161 61,74 63,71 69,65 92,50 145,24 149,23 155,23 161,25 164,27 169,32 198,84 206,109 207,113 210,168 210,192 207,196 202,201 159,227 155,228 142,228 135,227 131,226 67,207 59,203 56,201 52,197 47,191Z',
@@ -85,9 +87,10 @@ const itemArtClips:Record<ItemTypeId,string>={
  'blueprint-archive':'M670,942 694,1025 694,1034 693,1041 686,1048 654,1064 563,1107 555,1107 550,1105 537,1097 515,1081 511,1078 505,1073 500,1068 497,1064 487,1045 471,1011 466,964 466,954 467,951 472,944 480,936 485,933 581,896 590,896 601,897 603,898 634,915 665,937Z',
  'protocol-controller':'M778,899 782,896 788,896 882,934 889,941 890,945 890,947 885,1018 883,1024 879,1030 865,1047 862,1050 798,1109 793,1109 791,1108 714,1048 711,1045 709,1042 708,1040 706,1035 704,983 704,969 709,964Z',
  'photonic-analyzer':'M994,947 1137,914 1147,914 1158,918 1163,920 1171,928 1176,980 1176,994 1163,1007 1101,1039 967,1097 960,1097 955,1095 923,1079 916,1072 910,1065 909,1062 909,1058 910,1047 927,1005 928,1003 930,1000 934,996 991,949Z',
- 'quantum-diagnostic-module':'M1339,930 1339,1074 1334,1089 1333,1091 1331,1094 1328,1097 1325,1099 1282,1109 1272,1109 1228,1096 1220,1088 1204,1062 1203,967 1203,942 1204,930 1215,911 1223,903 1309,896 1316,896 1323,903 1338,928Z'
+ 'quantum-diagnostic-module':'M1339,930 1339,1074 1334,1089 1333,1091 1331,1094 1328,1097 1325,1099 1282,1109 1272,1109 1228,1096 1220,1088 1204,1062 1203,967 1203,942 1204,930 1215,911 1223,903 1309,896 1316,896 1323,903 1338,928Z',
+ 'darklab-resonator':'M0,0h512v512h-512z','model-echo-core':'M512,0h512v512h-512z','axiom-lattice':'M1024,0h512v512h-512z','cycle-observatory':'M0,512h512v512h-512z','entropy-sink':'M512,512h512v512h-512z','mnemonic-anchor':'M1024,512h512v512h-512z'
 };
-export function ItemArt({type}:{type:ItemTypeId}){return <RasterMotif className="atlas-sprite item-art item-art-rework" artId={type} bounds={itemArtBounds[type]} clip={itemArtClips[type]} source="/assets/game/items-complete-rework-atlas-v1.png" atlasWidth={1374} atlasHeight={1145}/>}
+export function ItemArt({type}:{type:ItemTypeId}){if(Object.hasOwn(metaItemCells,type))return <RasterMotif className="atlas-sprite item-art item-art-meta" artId={type} bounds={itemArtBounds[type]} clip={itemArtClips[type]} source="/assets/game/meta-items-v1.png" atlasWidth={1536} atlasHeight={1024}/>;return <RasterMotif className="atlas-sprite item-art item-art-rework" artId={type} bounds={itemArtBounds[type]} clip={itemArtClips[type]} source="/assets/game/items-complete-rework-atlas-v1.png" atlasWidth={1374} atlasHeight={1145}/>}
 
 
 export function PrestigeArt({id}:{id:PrestigeUpgradeId}){const cell=prestigeCells[id];return cell?<span className="atlas-sprite prestige-art" style={cellStyle(cell,{columns:4,rows:4})} aria-hidden="true"/>:<span className="prestige-vector-art prestige-art" data-art-id={id} aria-hidden="true"><VectorIcon name={prestigeIcon(id)}/></span>}

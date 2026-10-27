@@ -101,3 +101,13 @@ This foundation intentionally avoids messaging, trusting client-side inventory o
 ## Server-owned tradable Gumball tickets (D1 0006)
 
 A **separate verified voucher wallet** can be gifted and sold inside a Company after 48 hours of mutual membership. It receives at most one voucher at each server-calculated lifetime Company RP milestone (1k, 10k, 50k), never by uploading local chest/Season saves. `GET /v1/vouchers/me`, `POST /v1/vouchers/gifts`, `GET/POST /v1/vouchers/offers`, `POST /v1/vouchers/offers/:id/accept|cancel`, `POST /v1/vouchers/redeem` and `GET /v1/vouchers/redemptions` are supported. The server issues unique redemption receipts but the Unity-native redemption-to-local-draw adapter is not yet shipped. All transfers and trade escrows are D1-trigger atomic. No chat text or Gems are traded. **Local chest vouchers remain non-transferable** until a server-verifiable chest-claim grant path exists.
+
+### Lokale Handels- und Datenschutzprüfung
+
+Node22.13+ (`node:sqlite`) und Python3.11+ sind für die erweiterten lokalen Tests erforderlich; keine neue Testabhängigkeit. `npm test` führt reine Node-Verträge und Request-/Response-Tests mit einer echten isolierten SQLite-Datenbank aus. `python3 -m unittest discover -s test -p '*_test.py'` prüft zusätzlich Trigger, Rollback, Bestandsgrenzen, Migration bestehender Tagesverbräuche und zwei konkurrierende Verbindungen auf den letzten freien Handel.
+
+Migration0009 vereinigt normale Handel, Gutscheinhandel und Geschenke unter **fünf abgeschlossenen Transfers je Spieler/UTC-Tag**. Beide Teilnehmer verbrauchen gemeinsam mit dem Transfer atomar einen Platz. Migration0010 ergänzt feste Missbrauchsmeldungen ohne Chat, Sperrlisten und bestätigte Kontolöschung samt Sessions, Escrow und Company-Nachfolge. Diese Dateien sind vorbereitet und lokal geprüft; **nicht automatisch remote anwenden**.
+
+`GET /v1/trades/limits` und beide Angebots-/Inventarwege liefern `{tradeLimit:{used,limit,resetAt}}`; die Uhr stammt vom Worker. Änderungen am zentralen Limit müssen über `BALANCE.companyTradeDailyLimit` und `scripts/export-company-policy.ts` erfolgen und eine explizite SQL-Migration erhalten. Tests vergleichen den generierten Wert und den aktiven SQL-Vertrag.
+
+Weiterhin offene kommerzielle Grenzen: verifizierte Apple-/Google-Identität und Fortschrittsbindung, produktiver Moderationsbetrieb, externe authentifizierte Lösch-Webressource, Datenschutz-/Storeangaben und D1-Staging-/Deploymentabnahme. Unity meldet fehlende Anbieter ehrlich, statt Gast-/lokale Saves als geprüfte Onlinebestände auszugeben.

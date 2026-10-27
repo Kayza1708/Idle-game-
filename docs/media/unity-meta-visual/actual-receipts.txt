@@ -1,0 +1,4 @@
+common receipt=2 item=none
+rare receipt=3 item=none
+epic receipt=4 item=neural-asic rarity=2
+legendary receipt=5 item=tensor-core rarity=4

@@ -1,0 +1,149 @@
+{
+  "sourceCommit": "7660b2351ec05230a6af381b2e921beddfb4fae6",
+  "unity": "6000.3.26f1",
+  "saveVersion": 22,
+  "preparedEvidence": true,
+  "tests": {
+    "editMode": {
+      "result": "Passed",
+      "total": "139",
+      "passed": "139",
+      "failed": "0",
+      "duration": "127.172088",
+      "localResults": "/tmp/idle-chest-edit.xml"
+    },
+    "playMode": {
+      "result": "Passed",
+      "total": "89",
+      "passed": "89",
+      "failed": "0",
+      "duration": "447.5894673",
+      "localResults": "/tmp/idle-chest-spacing-full-play.xml"
+    },
+    "typecheck": "passed",
+    "vitest": {
+      "tests": 1902,
+      "files": 146,
+      "result": "passed"
+    },
+    "webBuild": "passed, existing bundle-size warning",
+    "sourceCI": {
+      "run": 39971332220,
+      "result": "success",
+      "commit": "fb077a63ca08206a180d505b61ff4dff58a6de7c"
+    },
+    "unitySimulatorExport": "Succeeded, errors=0, separate Builds/iOS-ChestComponents-fb077a63",
+    "xcode": "BUILD SUCCEEDED; ReleaseForProfiling, iPhoneSimulator ARM64, code signing disabled",
+    "targetedSpacing": {
+      "result": "Passed",
+      "passed": 3,
+      "total": 3,
+      "xml": "/tmp/idle-chest-spacing-target.xml"
+    }
+  },
+  "captures": [
+    {
+      "file": "chest-after.mp4",
+      "bytes": 669058,
+      "sha256": "b98e21bd56711a684b86d21f9b7e79bb477d2806ca395b760b8990f6cbfe6152"
+    },
+    {
+      "file": "chest-before.mp4",
+      "bytes": 571225,
+      "sha256": "8ade519955860dc83ccf8c850055707fe6d3026a4bf9e65fc5825c816889d1b9"
+    },
+    {
+      "file": "chest-open.png",
+      "bytes": 86522,
+      "sha256": "ca833bf63cd192e1425c2b96b671bf3521f464b12db388fe7052367e8ed2bc6e"
+    },
+    {
+      "file": "chest-result.png",
+      "bytes": 106457,
+      "sha256": "e269d0cf4ff27ae809e3f1fa2fd401e7c78eca13c72f21b706443e89c4618231"
+    },
+    {
+      "file": "inventory-before-de-390.png",
+      "bytes": 77022,
+      "sha256": "d706852e9b06537066b8f6cbe8d0c53e346c5df954d95fa49e0b4088c6833b6f"
+    },
+    {
+      "file": "inventory-de-320.png",
+      "bytes": 83345,
+      "sha256": "f5f6eff037338c9d100b68f48a57631047eeca4df6cf064a548b7c85aa04f506"
+    },
+    {
+      "file": "inventory-de-390.png",
+      "bytes": 109456,
+      "sha256": "1187cd07d5b691c6cb6c10a13255cf20f9ed78bb2916d45073d9cd27b2046d16"
+    },
+    {
+      "file": "inventory-de-430.png",
+      "bytes": 135608,
+      "sha256": "c3e0c82a6757d993d2918e8ca4a99c03b6a05d0771c84b0b607c70d215fbc3c0"
+    },
+    {
+      "file": "inventory-en-320.png",
+      "bytes": 83575,
+      "sha256": "aa06e935e7b9f9d91b28be46c8a444f9c034d14fb2505a3333e68d488c668114"
+    },
+    {
+      "file": "inventory-en-390.png",
+      "bytes": 110313,
+      "sha256": "c5a92b3eb99951b6efc06f218b1433d4104caf38a6b6f08a076f012298f07cc9"
+    },
+    {
+      "file": "inventory-en-430.png",
+      "bytes": 136413,
+      "sha256": "b1551aba96436567ce5c6b77e373ae53b83487167efa69cbe0289811b2a37a1e"
+    },
+    {
+      "file": "native-inventory-fb077a63.png",
+      "bytes": 1026792,
+      "sha256": "a4169162ddc4d10441095d54333182191d49939cb91181580605e4afc961ec3c"
+    },
+    {
+      "file": "native-result-final-7660b235.png",
+      "bytes": 869849,
+      "sha256": "0035dde600b5735158e7f4c0a1f9a6cf001cc694bc9606dcd26d2824313f6f62"
+    }
+  ],
+  "nativeDeviceTested": false,
+  "editorVideo": {
+    "width": 390,
+    "height": 846,
+    "timing": "actual measured Unity frame timestamps, no retiming/interpolation",
+    "actualAudio": "48kHz stereo Unity mix, peak0.1560596",
+    "beforeSeconds": 4.243333333,
+    "afterSeconds": 4.24
+  },
+  "nativeIntermediate": {
+    "commit": "fb077a63ca08206a180d505b61ff4dff58a6de7c",
+    "platform": "iPhone 16 Pro Simulator, iOS 27, ARM64",
+    "videoSeconds": 20.363333333,
+    "audioTracks": 0,
+    "complete": true,
+    "prepared": true,
+    "issueFound": "item label overlaps materials; corrected in7660b235",
+    "originalFilesPreservedBeforeNormalLaunch": {
+      "unity": 12,
+      "capacitor": 15
+    }
+  },
+  "nativeFinal": {
+    "commit": "7660b2351ec05230a6af381b2e921beddfb4fae6",
+    "export": "Succeeded",
+    "xcode": "BUILD SUCCEEDED, ReleaseForProfiling Simulator ARM64",
+    "videoSeconds": 22.015,
+    "audioTracks": 0,
+    "preparedReviewComplete": true,
+    "normalInstalledAndStarted": true,
+    "normalSaveVersion": 22,
+    "normalPrepared": false,
+    "checksumValid": true,
+    "originalFilesPreservedBeforeNormalLaunch": {
+      "unity": 14,
+      "capacitor": 15
+    }
+  }
+}

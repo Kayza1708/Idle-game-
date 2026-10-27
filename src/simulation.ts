@@ -19,7 +19,7 @@ import {settleFoundries} from './foundries';
 import {receivedItems,bundleItems,mergeItemBundles} from './itemReceipts';
 import {startManualResearchQueue,runResearchAutomation,researchQueueStatus} from './researchAutomation';
 import { BALANCE, addCreditsScientific,addDataScientific,averageDataSynergy, GameState, trainingRate,trainingDataCost, creditRate,creditRateScientific, dataRate,dataRateScientific, researchRate,researchRateScientific, researchLabCount, hardwareCost, classCompute, buyHardwareClass, hasNode, isRepeatableResearch, milestoneBonus,startResearchProject,startQueuedTrainingIfAffordable,rollPassiveComponent,computeRate,computeRateScientific,usersRate,newINT,newINTScientific,newGame,startTraining,queueTraining,selectScannerTarget,passiveCircuitRate,grantComponents,safeEconomyAdd,MAX_ECONOMY_VALUE,hardwareIds,registerTap,creditMultiplierFromINT,creditMultiplierFromAxioms,hardwareCostScientific,canAffordScientificCreditCost,hardwareAutobuyerUnlocked,shoppingAgentUnlocked,exactEconomyValue,repeatableResearchIds,repeatableResearchDataCost,researchProjectDataCost,trainingCostScientific,PrestigeUpgradeId,ItemTypeId,ComponentId,ExperimentId,prestigeUpgradeCost,upgradeLevel,dataSynergyScientific,intSynergyScientific,productionBreakdown } from './economy';
-import { experimentSpeed,completeExperiment, queueExperiment,runAnalysisPlanner } from './experiments';
+import { experimentSpeed,completeExperiment, queueExperiment,runAnalysisPlanner,runAnalysisQueue } from './experiments';
 import { rollPeriods,claimMission,claimMissionBonus,missionRewardClaimable,MissionKind } from './missions';
 import { achievements,claimAchievement } from './achievements';
 import { claimSeasonReward,seasonClaimable,seasonLevel } from './season';
@@ -115,7 +115,7 @@ function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.rand
   const limit=offlineTimeLimit(state),total=Math.max(0,Math.min(seconds,limit));
   const pinnedReachedBefore=state.pinnedGoal?resolvePinnedGoal(state,state.pinnedGoal)?.reached??false:false,questReadyBefore=(['daily','weekly','monthly'] as MissionKind[]).filter(k=>missionRewardClaimable(state,k)).length,seasonReadyBefore=seasonClaimable(state);let left=total,iterations=0,levels=0,experiments=0,craftingCompleted=0,hardware=0,generatedCredits=0,generatedData=0,generatedResearch=0,generatedCreditsExact=ScientificNumber.zero(),generatedDataExact=ScientificNumber.zero(),components:Partial<GameState['componentInventory']>={},analysisResults:NonNullable<GameState['experiments']['lastResult']>[]=[],next=rollPeriods(cloneForSimulation(state),state.savedAt);
   while(left>1e-9&&iterations++<200_000) {
-    if(next.progression?.version===2){next=progressionAgent(discoverProgression(next));next=prepareProgressionWork(runFusionPlanner(next));}
+    if(next.progression?.version===2){next=progressionAgent(discoverProgression(next));next=prepareProgressionWork(runFusionPlanner(runAnalysisQueue(next)));}
     next=settleFoundries(next.progression?.resetIntent?next:startManualResearchQueue(autoStartModelTraining(next)));
     observe?.(next);
     const now=next.savedAt,goal=next.activeTraining?.workRequired??Infinity,rate=next.activeTraining?trainingRate(next.hardware,next,now):0;

@@ -1,5 +1,7 @@
 # Funktionaler Unity-Abgleich · 21.10.2026
 
+Aktuelle UI-Wege seit26.10.2026: [Navigation, Schmiede und kompakte Forschung](unity-navigation-forge.md). Vier Startreiter, später Prestige als fünfter; Training über Modell, Items unter Schmiede. Historische Reiterbezeichnungen unten bleiben als Prüfgeschichte erkennbar.
+
 Dieser erneute Codeabgleich ordnet alle 26 breiten fachlichen Zeilen aus `unity-migration.md` tatsächlichen Verbrauchern und Bedienwegen zu. Ein Katalog zählt nicht als Implementierungsnachweis. Aktueller Stand: Save v21; `src/` unverändert. Vollständige Schlussläufe und Playerbuild werden im aktuellen Prüfbericht mit tatsächlichen Resultaten ergänzt. Frühere Berichte bleiben historische Nachweise.
 
 | Zeile | Tatsächlicher Verbraucher | Bedienweg in `IdleIntelligence.unity` | Referenz-/Runtime-Nachweis und Grenze |

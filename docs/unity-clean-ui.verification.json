@@ -1,0 +1,96 @@
+{
+  "unity": "6000.3.26f1",
+  "parentCommit": "0ceb38d5f444fcd22214fbd11c3ad25948fa8021",
+  "playMode": {
+    "id": "2",
+    "testcasecount": "111",
+    "result": "Passed",
+    "total": "111",
+    "passed": "111",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-26 08:49:52Z",
+    "end-time": "2026-10-26 08:58:29Z",
+    "duration": "517.2216169"
+  },
+  "editMode": {
+    "id": "2",
+    "testcasecount": "142",
+    "result": "Passed",
+    "total": "142",
+    "passed": "142",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-26 08:59:35Z",
+    "end-time": "2026-10-26 09:01:41Z",
+    "duration": "125.815536"
+  },
+  "typescript": {
+    "typecheck": "Passed",
+    "vitest": 1937,
+    "files": 147,
+    "build": "Passed; existing chunk warning"
+  },
+  "sourceSha256": {
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/GameRuntime.cs": "3026d308dea6e793e8ab88b590310a1970b3657593ee066176744803cc7fad97",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/LaboratoryView.cs": "73fdf2505cfca34609517669d99ee0a0b9bcce8b9d634efb0856ac577f833a6b",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/LearningCard.cs": "58611198564624023cad84b8e78c64b4d11f2ef14ca86766402b5b84fa070b73",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/ModelLoadout.cs": "46794185e9361506444970273af4f6c6e3ae9d02f1e4404780806a422205c318",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/ShapeFrame.cs": "2151a094e0ba23314e8bc70e5e3f08cab602511bc2b6646ec8343e0bf289c03d",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/WorkshopUI.cs": "a4e6ffb421bba3af6886d8d33e370967da347baa6340dea8474759e29b0a53f8",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/MiraCoach.cs": "fa08f38f3a232b54a41eaaa9558ceb4e42bdfcc7224de563033a37191b3684a6"
+  },
+  "captures": "media/unity-clean-ui/capture.json",
+  "preparedCaptureStates": true,
+  "saveSchema": 23,
+  "autoSaveSecondsUnchanged": 5,
+  "transactionSaveUnchanged": true,
+  "balanceChanged": false,
+  "physicalDeviceAcceptance": false,
+  "baseUICommit": "0ceb38d5f444fcd22214fbd11c3ad25948fa8021",
+  "miraReload": {
+    "beforeRequiredHeight": 76.78125,
+    "beforeAvailableHeight": 58,
+    "beforeReproduced": true,
+    "after": "Entire page fits after actual scene reload, DE/EN at320/390/430; Story.open unchanged",
+    "upstreamGermanCopy": "src/story.ts prestige-ready"
+  },
+  "native": {
+    "installedCommit": "7e9a080765ee2ed7f98654734b0a58195fefb716",
+    "unity": "6000.3.26f1",
+    "platform": "iOS Simulator ARM64",
+    "device": "iPhone 16 Pro simulator",
+    "os": "iOS 27.0",
+    "export": "Succeeded",
+    "xcodeBuild": "BUILD SUCCEEDED; exit 0",
+    "buildFolder": "Builds/iOS-Clean-7e9a0807",
+    "saveVersion": 23,
+    "normalSaveValid": true,
+    "prepared": false,
+    "unityOriginalsBeforeAndAfterInstallBeforeLaunch": 22,
+    "capacitorOriginalsBeforeAndAfterUnityLaunch": 15,
+    "originalIdentityInventoryEquipmentPreserved": true,
+    "projectInputsRestored": 5,
+    "privateScreenshot": "Builds/iOS-Clean-7e9a0807/native-labor-current.png",
+    "nativeScreenshotSha256": "b631c27dd479f2bd8c90c962e33a0c49d7bf86159fa67021e54582b8b351b95e",
+    "nativeScreenshotInspected": "Normal live save; full prestige-ready Mira page, gold compact training button, Safe Area, no test footer",
+    "physicalDevice": false
+  },
+  "codeCI": {
+    "commit": "7e9a080765ee2ed7f98654734b0a58195fefb716",
+    "test": "SUCCESS",
+    "check": "SUCCESS",
+    "links": [
+      "https://github.com/Kayza1708/Idle-game-/actions/runs/40296679511/job/121484320089",
+      "https://github.com/Kayza1708/Idle-game-/actions/runs/40296679512/job/121484321621"
+    ]
+  }
+}

@@ -723,3 +723,45 @@ Keine Balanceänderung und keine neuen Formeln. `MetaBalance.g.cs` übernimmt de
 ### Gumball-Tickets – 22.10.2026
 
 Zusätzliche, lokale Belohnungswährung (nicht ungeprüft serverseitig transferierbar) für **eine normale Ziehung pro Gutschein**. Kein Gem-Abzug, kein Ad-Verbrauch, keine zusätzliche Chance auf besondere Gegenstände beim Ziehen. Unabhängige Bonuschance in Common/Rare/Epic/Legendary-Truhen: 5%/10%/20%/30%, tägliche Bonusbox 0,25%. 1 garantierter Gutschein Free Season Level 30, 1 zusätzlicher Premium Season Level 40; beide auf die bestehenden Rewards aufgesetzt. Wallet-Grenze: 999 verfügbare Tickets. Quelle: `BALANCE.gumballVouchers` in `src/economy.ts`. Alle Werte vor Produktion anhand echter Tests und Loot-Inflationssimulation überprüfen. Token sind lokal und dürfen nicht zu Cloudflare-Trades/Gems gemintet werden.
+
+## Beauftragtes Online-Handelslimit · 23.10.2026
+
+`BALANCE.companyTradeDailyLimit = 5`: fünf abgeschlossene Spielertransaktionen je Spieler und UTC-Kalendertag, für beide Teilnehmer gemeinsam über Warenhandel, Gutscheinhandel und Geschenke. Offene/abgelehnte/stornierte/abgelaufene Angebote verbrauchen nichts. Migration 0009 setzt das Limit atomar mit Escrow/Transfer durch; das ist eine ausdrücklich beauftragte neue Regel, keine Änderung bestehender Itempreise. Keine Produktionsmigration ausgeführt.
+
+## Beauftragte Dark-Lab-/Axiom-Items · 23.10.2026
+
+Sechs zusätzliche IDs **hinter** den bestehenden 30; deren Werte bleiben erhalten. `lateMetaItemCatalog` ist die einzige Balancequelle, einschließlich Rezepten und Primär-Caps:
+
+| ID | Zugang | Rezept: Fragmente / Daten | Neuer Verbraucher / Cap je Item |
+|---|---|---|---|
+| darklab-resonator | Geheimlabor | 32 / 2 Mio. | Erkenntnisrate +35% maximal |
+| model-echo-core | Geheimlabor; aktives Modell für Effekt | 48 / 4 Mio. | Bonusanteil Modellkern +25% maximal |
+| axiom-lattice | Geheimlabor und abgeschlossener Axiomreset | 80 / 12 Mio. | Axiomgewinn vor Abrunden +20% maximal |
+| cycle-observatory | Geheimlabor und abgeschlossener Axiomreset | 96 / 18 Mio. | Forschung +30% maximal × min(1,Axiomzyklen/5) |
+| entropy-sink | Geheimlabor | 64 / 8 Mio. | Compute +40% maximal × min(1,max(0,log10(unverbrauchte Erkenntnis))/6) |
+| mnemonic-anchor | Geheimlabor und drei erworbene Modelle | 72 / 10 Mio. | Training +35% maximal × min(1,Modellzahl/5) |
+
+Komponenten, Module, Sekundär-/Tertiärkanäle und Upgradeeffekte sind ebenfalls zentral definiert. Herstellung bleibt sofort, Common Lv.1; höhere Seltenheiten entstehen über Fusion und die vorhandenen freigeschalteten Zufallspools. Die Rezept-Rarität bezeichnet wie bisher den Kosten-/Arbeitsrang, keinen garantierten Herstellungsrang. Kein neuer Erwerbsweg für das weiterhin problematische Erkenntnisarchiv.
+
+Sammlungs-Achievements erhalten **zusätzliche** Endstufen bei36 Itemtypen bzw.34 kostenpflichtigen Bauplänen. Die bisherigen30-/28-Schwellen und alle alten Claims bleiben unverändert. Die bestehende Reward-Indexbegrenzung verwendet dafür die schon vorhandene höchste Stufenbelohnung; keine alten Belohnungen werden erneut gewährt.
+
+## Materialanalyse und INT-Planung · 26.10.2026
+
+Expliziter Spielerauftrag: höhere Komponentenausbeute und nutzbare Analyseplanung vor dem Axiomfortschritt. Quelle bleibt ausschließlich `src/economy.ts`, Unity liest reproduzierbar erzeugte Daten.
+
+| Analyse | Komponenten vorher → neu | Daten unverändert | Basisarbeit unverändert |
+|---|---:|---:|---:|
+| Hardware kurz | 12 → 24 | 250 | 10 min |
+| Hardware lang | 360 → 720 | 6.000 | 4 h |
+| Architektur kurz | 18 → 36 | 800 | 30 min |
+| Architektur lang | 360 → 720 | 12.800 | 8 h |
+| Artefakte kurz | 30 → 60 | 4.000 | 2 h |
+| Artefakte lang | 450 → 900 | 48.000 | 24 h |
+
+Nur neue Verträge: bereits bezahlte Analysen behalten ihre gespeicherten Einheiten und Restarbeit. Forschungs-, Fokus-, Familien-, Kombinationseffekte und Bruchteilsreste bleiben anwendbar. Fragmentmengen, Itemchancen, Seltenheitstabellen, Herstellungsrezepte und Preise unverändert. Bei gleicher Analysedauer liefert das System doppelt so viele Basis-Komponenten, keine doppelte Chance auf Items/Fragmente. Der relative Effizienzvorteil langer Analysen bleibt erhalten. Bei vollständig analyselimitierter Herstellung halbiert sich somit die nötige Analysezeit; andere Material-, Daten-, Rezept- und Modulengpässe bleiben bestehen. Es wird keine bestimmte Einzelkomponente garantiert, außer der bestehenden seltenen Zusatzgarantie durch W03.
+
+F02 (weiterhin 100 INT) erweitert zusätzlich zur bestehenden Forschungsqueue die Analyseplanung auf sechs unbezahlte FIFO-Einträge. F03 (weiterhin 2.000 INT) erlaubt zusätzlich die Analyse-Wiederholung. Keine Vorgängerkaufsperren, keine neuen Knoten. Der bisherige Axiomzugang C02 bleibt ein alternativer Zugang zur gleichen Wiederholung und stapelt sich nicht. Wartende Analysen werden erst bei tatsächlich möglichem Start zum dann gültigen Preis bezahlt. Queue vor Wiederholung; fehlt Geld oder Zugang, wartet der erste Auftrag. Keine negative Datenbuchung durch das bisherige ungeprüfte direkte Starten eines Queueeintrags nach Abschluss.
+
+Automatische Wiederholung achtet auf die bestehende gemeinsame Datenreserve und die geschützten Trainings-/Forschungsbudgets. Datenkompression wird auch bei der automatischen Bezahlbarkeitsprüfung korrekt berücksichtigt. Das Offline-Limit bleibt unverändert: Basis acht Stunden, mit vorhandenen Verbesserungen maximal 24 Stunden. Eine 24-Stunden-Analyse wird bei acht Stunden Offlinekapazität nur acht Stunden weiterbearbeitet. Keine Hintergrundsimulation außerhalb der angerechneten Zeit, kein zusätzlicher Offlinebonus und keine Belohnung durch UI/Animation. Sechs kurze Hardwareanalysen ergeben ohne Zusatzboni 144 Komponenten bei sechs echten Abbuchungen von je 250 Daten.
+
+Komponenten-Zielsuche (z. B. gewünschter Bestand Graphen = 50) ist ausdrücklich ein späterer Ausbau; noch kein Zielplaner, keine erfundene garantierte Suche und keine bereits freigeschaltete Funktion.

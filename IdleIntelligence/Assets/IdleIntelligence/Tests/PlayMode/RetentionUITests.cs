@@ -13,13 +13,16 @@ namespace IdleIntelligence.PlayTests
 {
  public sealed class RetentionUITests
  {
+  void OpenMenuRoute(string route){game.GetComponent<IdleIntelligence.Runtime.GameMenu>().Open();Click("Menu-"+route);}
+
+
   string dir;GameRuntime game;
   [UnitySetUp]public IEnumerator Setup(){dir=Path.Combine(Path.GetTempPath(),"unity-retention-ui-"+Guid.NewGuid());Directory.CreateDirectory(dir);GameRuntime.SavePathOverride=Path.Combine(dir,"save.json");yield return SceneManager.LoadSceneAsync("IdleIntelligence");yield return null;game=UnityEngine.Object.FindFirstObjectByType<GameRuntime>();}
   [UnityTearDown]public IEnumerator Cleanup(){if(game!=null)UnityEngine.Object.Destroy(game.gameObject);yield return null;GameRuntime.SavePathOverride=null;Directory.Delete(dir,true);}
   static Button Button(string name){var b=GameObject.Find(name)?.GetComponent<Button>();Assert.That(b,Is.Not.Null,name);return b;}
   static void Click(string name){var b=Button(name);Assert.That(b.interactable,Is.True,name);b.onClick.Invoke();}
   void PaidHardware(int classes=1,int amount=25){Debug.Log("FUNDED_RETENTION_UI_STATE: temporary credit stock; actual paid hardware transactions, not a natural run");game.Act(s=>{var n=s.Copy();n.Credits=ScientificNumber.From(1e200);foreach(var h in Balance.Hardware.Take(classes))n=Game.Buy(n,h.Id,amount);return n;});}
-  IEnumerator Open(){Click("ResearchTab");yield return null;Click("ProfileAccess");yield return null;}
+  IEnumerator Open(){Click("ResearchTab");yield return null;OpenMenuRoute("profile");yield return null;}
   void ScrollTo(string name){Canvas.ForceUpdateCanvases();var scroll=game.Content.GetComponentInParent<ScrollRect>();var target=GameObject.Find(name).GetComponent<RectTransform>();var content=(RectTransform)game.Content;float y=-content.InverseTransformPoint(target.TransformPoint(target.rect.center)).y;scroll.verticalNormalizedPosition=Mathf.Clamp01(1-(y-scroll.viewport.rect.height*.3f)/Math.Max(1,content.rect.height-scroll.viewport.rect.height));Canvas.ForceUpdateCanvases();}
   [UnityTest]public IEnumerator ActualAchievementClaimsPersistBeforeRefreshAndOldCallbacksCannotPayTwice()
   {

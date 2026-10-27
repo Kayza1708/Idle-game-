@@ -1,5 +1,17 @@
 # Lokaler Unity-iOS-Weg
 
+## Aktuell: aufgeräumte Hauptansichten und Mira · 26.10.2026
+
+Installierter und gestarteter Spielcode **7e9a080765ee2ed7f98654734b0a58195fefb716**, iPhone16Pro-Simulator/iOS27.0, Unity6000.3.26f1/IL2CPP/ARM64. Separater Export/Xcode-Build `Builds/iOS-Clean-7e9a0807/` erfolgreich, fünf Projekteinstellungen restauriert.22Unity-/15Capacitor-Originale erhalten; normaler Save23 gültig/`prepared=false`, Identität/Inventar/Ausrüstung erhalten. Native Laboraufnahme mit vollständigem Mira-Hinweis, kompakter goldener Trainingstaste und Safe Area selbst angesehen.111PlayMode/142EditMode/1937Vitest sowie beide Code-CI-Prüfungen grün. [Bilder, Abnahme und verbleibende optische Punkte](unity-clean-ui.md). Kein physischer Geräte- oder60fps-Nachweis, nicht veröffentlicht.
+
+
+## Vorheriger Stand: Drohnenlieferung · 26.10.2026
+
+Installierter und gestarteter Unity-Spielcode **5f8e647bac9e9589e932840a87a8e26caf1c2e00**, iPhone16Pro-Simulator/iOS27.0, Unity6000.3.26f1/IL2CPP/ARM64. Export und Xcode-Build erfolgreich, separater Ordner `Builds/iOS-Drone-5f8e647b/`; fünf Originaleinstellungen restauriert.20Unity-/15Capacitor-Originale bei Installation erhalten, normaler Save23 gültig und `prepared=false`; Capacitor danach weiter bytegleich. Tatsächliches natives Bild einschließlich natürlich erschienener Drohne mit Paket angesehen. [Prüfbericht, Clip und Grenzen](unity-drone-delivery.md). Kein physischer iPhone- oder60fps-Nachweis, keine Veröffentlichung.
+
+
+Aktueller tatsächlich installierter/gestarteter Unity-Spielcode seit26.10.2026: **48dd4756**, iPhone16Pro-Simulator/iOS27/ARM64. Separater Export `Builds/iOS-Navigation-48dd4756/`, erfolgreicher Unity-/Xcode-Build,19Unity-/15Capacitor-Originale bytegenau erhalten; normaler Save23 gültig und unfinanziert. Beide Code-CI-Prüfungen grün. [Aktueller UI-/Native-Prüfbericht](unity-navigation-forge.md). Ältere Commitangaben unten sind historische Prüfstände.
+
 ## Ziel und Schutz bestehender Daten
 
 Device Hub zeigt **iPhone 16 Pro · iOS 27.0 · Simulator**. `devicectl` bestätigt `Reality: simulated`, UDID `2F5C4B2F-A725-45B9-881D-16DA5BD50057`. Ein physisches iPhone wurde nicht erkannt. Daher ist dies Simulatorprüfung, keine Geräteabnahme.
@@ -49,3 +61,8 @@ Vier echte Unity-Aktionsclips mit tatsächlichem AudioListener-Mix (48 kHz Stere
 ## Zusätzlicher Befund aus dem nativen Erststart
 
 Der erste erfolgreiche native Export/Build aus `eb251e84` zeigte eine bereits vorhandene UI-Verknüpfung: Die Company-Erklärung stand bedingungslos vor der Namenswahl. Korrigiert: nur bei tatsächlich lokal freigeschalteter Company und bereits benannter KI anzeigen. Kein Freischalt-, Kosten-, Dialog- oder Savevertrag verändert. Alle neun gezielt betroffenen PlayMode-Fälle bestanden, einschließlich echtem Namens-/Tutorialablauf und Reload. Das Bild `before-native-company-in-intro.png` dokumentiert den gefundenen Fehler; es ist kein Nachherbild. Der Nutzer hat ausdrücklich zunächst den Simulator gewählt.
+
+
+## Materialanalyse-Player · 27.10.2026
+
+Aktuell tatsächlich installiert/gestartet: `9ee80e60769891d513aafc69d0b114abdfeed5cc`, Unity6000.3.26f1, ARM64 **iPhone16Pro-Simulator/iOS27.0**, Bundle `com.kayza1708.idleintelligence.unity`. Xcodeprojekt `Builds/iOS-Analysis-9ee80e60/Xcode/Unity-iPhone.xcodeproj`, erfolgreicher lokaler nativer Build und Start. Kein Web-/Capacitorstart.23Unity-/15Capacitor-Originale vor Installation und nach Installation vor Start bytegleich;15Capacitor-Dateien auch nach Unity-Start unverändert. Gültiger normaler Save24 mit `prepared=false`, Name/Inventar/Ausrüstung erhalten. Quellenprüfungen und tatsächliches natives Startbild in `unity-analysis-planning.md` dokumentiert; private Originale/Aufnahme bleiben im ignorierten Buildordner. Physisches Gerät/60fps/Touch nicht daraus ableiten.

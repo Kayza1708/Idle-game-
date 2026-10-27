@@ -1,0 +1,1437 @@
+{
+  "sourceCommit": "96f628d8cdda05aa48e6262ce4b0343a34a7f33d",
+  "platform": "iPhone 16 Pro Simulator iOS 27 ARM64, M4 Mac; NOT physical device",
+  "resolution": [
+    1206,
+    2622
+  ],
+  "unity": "6000.3.26f1",
+  "tests": {
+    "editMode": {
+      "passed": 138,
+      "total": 138,
+      "results": "/tmp/idle-stream-final-edit.xml"
+    },
+    "playMode": {
+      "passed": 86,
+      "total": 86,
+      "results": "/tmp/idle-pointer-final-full-play.xml"
+    },
+    "vitest": {
+      "passed": 1902,
+      "files": 146
+    },
+    "typecheck": "passed",
+    "webBuild": "passed",
+    "unitySimulatorExport": "Succeeded",
+    "xcodeReleaseForProfiling": "BUILD SUCCEEDED",
+    "githubSourceCI": {
+      "result": "pass",
+      "run": 39960628026
+    }
+  },
+  "profiles": {
+    "before": {
+      "hardware": {
+        "frameMs": {
+          "mean": 51.96,
+          "p95": 82.463,
+          "max": 262.1613
+        },
+        "cpuNs": {
+          "mean": 51948760.767,
+          "p95": 82424792.0,
+          "max": 262175458.0
+        },
+        "gpuMs": {
+          "mean": 0.204,
+          "p95": 0.311,
+          "max": 0.644
+        },
+        "gcBytes": {
+          "mean": 3409280.254,
+          "p95": 5533416.0,
+          "max": 12774884.0
+        },
+        "scanNs": {
+          "mean": 259352.326,
+          "p95": 312084.0,
+          "max": 405125.0
+        },
+        "tickNs": {
+          "mean": 11357914.456,
+          "p95": 26434708.0,
+          "max": 39330250.0
+        },
+        "refreshNs": {
+          "mean": 9913098.472,
+          "p95": 23230208.0,
+          "max": 30521416.0
+        },
+        "saveNs": {
+          "mean": 1884734.026,
+          "p95": 0.0,
+          "max": 181936750.0
+        },
+        "diagnosticNs": {
+          "mean": 941577.741,
+          "p95": 2568501.0,
+          "max": 5297792.0
+        },
+        "layoutNs": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "batchNs": {
+          "mean": 7225.565,
+          "p95": 10583.0,
+          "max": 14083.0
+        },
+        "uiNodesCreated": 0
+      },
+      "training": {
+        "frameMs": {
+          "mean": 34.712,
+          "p95": 53.399,
+          "max": 197.7462
+        },
+        "cpuNs": {
+          "mean": 34697639.848,
+          "p95": 53342916.0,
+          "max": 197742625.0
+        },
+        "gpuMs": {
+          "mean": 0.173,
+          "p95": 0.295,
+          "max": 0.967
+        },
+        "gcBytes": {
+          "mean": 1210596.761,
+          "p95": 4137668.0,
+          "max": 7292006.0
+        },
+        "scanNs": {
+          "mean": 175075.55,
+          "p95": 219167.0,
+          "max": 296417.0
+        },
+        "tickNs": {
+          "mean": 7267193.474,
+          "p95": 26698292.0,
+          "max": 34403750.0
+        },
+        "refreshNs": {
+          "mean": 6168482.121,
+          "p95": 22623500.0,
+          "max": 30250166.0
+        },
+        "saveNs": {
+          "mean": 1283290.367,
+          "p95": 0.0,
+          "max": 186201708.0
+        },
+        "diagnosticNs": {
+          "mean": 627778.266,
+          "p95": 2148625.0,
+          "max": 4985417.0
+        },
+        "layoutNs": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "batchNs": {
+          "mean": 3322.093,
+          "p95": 13500.0,
+          "max": 26791.0
+        },
+        "uiNodesCreated": 0
+      },
+      "research": {
+        "frameMs": {
+          "mean": 49.179,
+          "p95": 83.238,
+          "max": 216.6621
+        },
+        "cpuNs": {
+          "mean": 49163872.108,
+          "p95": 83217125.0,
+          "max": 216596042.0
+        },
+        "gpuMs": {
+          "mean": 0.193,
+          "p95": 0.385,
+          "max": 0.9296
+        },
+        "gcBytes": {
+          "mean": 1739456.079,
+          "p95": 4160832.0,
+          "max": 7328990.0
+        },
+        "scanNs": {
+          "mean": 331247.936,
+          "p95": 424958.0,
+          "max": 455000.0
+        },
+        "tickNs": {
+          "mean": 10485025.66,
+          "p95": 27297333.0,
+          "max": 48586459.0
+        },
+        "refreshNs": {
+          "mean": 9845448.044,
+          "p95": 25785000.0,
+          "max": 33547750.0
+        },
+        "saveNs": {
+          "mean": 1892510.468,
+          "p95": 0.0,
+          "max": 200555125.0
+        },
+        "diagnosticNs": {
+          "mean": 926881.995,
+          "p95": 2470417.0,
+          "max": 5295749.0
+        },
+        "layoutNs": {
+          "mean": 0.0,
+          "p95": 0.0,
+          "max": 0.0
+        },
+        "batchNs": {
+          "mean": 5162.975,
+          "p95": 14833.0,
+          "max": 36542.0
+        },
+        "uiNodesCreated": 0
+      }
+    },
+    "bb-debug": {
+      "hardware": {
+        "frames": 569,
+        "frameMs": {
+          "mean": 17.604,
+          "p95": 17.867,
+          "max": 149.9962
+        },
+        "cpuNs": {
+          "mean": 17587826.504,
+          "p95": 17856542.0,
+          "max": 149927333.0
+        },
+        "gpuMs": {
+          "mean": 0.307,
+          "p95": 0.4418,
+          "max": 1.8452
+        },
+        "gcBytes": {
+          "mean": 138191.756,
+          "p95": 821168.0,
+          "max": 3321539.0
+        },
+        "heapBytes": {
+          "mean": 33525580.035,
+          "p95": 35827712.0,
+          "max": 37875712.0
+        },
+        "uiNodes": {
+          "mean": 135.0,
+          "p95": 135.0,
+          "max": 135.0
+        },
+        "tickNs": {
+          "mean": 1561345.634,
+          "p95": 10160000.0,
+          "max": 38356458.0
+        },
+        "refreshNs": {
+          "mean": 852127.859,
+          "p95": 5287500.0,
+          "max": 8280667.0
+        },
+        "saveNs": {
+          "mean": 319247.951,
+          "p95": 0.0,
+          "max": 92616875.0
+        },
+        "scanNs": {
+          "mean": 374.852,
+          "p95": 792.0,
+          "max": 7167.0
+        },
+        "diagnosticNs": {
+          "mean": 22250.879,
+          "p95": 0.0,
+          "max": 2274667.0
+        },
+        "layoutNs": {
+          "mean": 3874.239,
+          "p95": 8167.0,
+          "max": 72750.0
+        },
+        "batchNs": {
+          "mean": 5504.698,
+          "p95": 9125.0,
+          "max": 77583.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 20
+      },
+      "training": {
+        "frames": 585,
+        "frameMs": {
+          "mean": 17.096,
+          "p95": 18.2678,
+          "max": 99.3713
+        },
+        "cpuNs": {
+          "mean": 17081998.203,
+          "p95": 18264125.0,
+          "max": 99297333.0
+        },
+        "gpuMs": {
+          "mean": 0.303,
+          "p95": 0.448,
+          "max": 0.7039
+        },
+        "gcBytes": {
+          "mean": 121578.961,
+          "p95": 675918.0,
+          "max": 2217486.0
+        },
+        "heapBytes": {
+          "mean": 32575333.962,
+          "p95": 34881536.0,
+          "max": 36147200.0
+        },
+        "uiNodes": {
+          "mean": 137.0,
+          "p95": 137.0,
+          "max": 137.0
+        },
+        "tickNs": {
+          "mean": 1686071.662,
+          "p95": 13263500.0,
+          "max": 18713250.0
+        },
+        "refreshNs": {
+          "mean": 366491.379,
+          "p95": 1458875.0,
+          "max": 14170125.0
+        },
+        "saveNs": {
+          "mean": 325741.168,
+          "p95": 0.0,
+          "max": 97076125.0
+        },
+        "scanNs": {
+          "mean": 372.137,
+          "p95": 834.0,
+          "max": 3333.0
+        },
+        "diagnosticNs": {
+          "mean": 21049.147,
+          "p95": 0.0,
+          "max": 1696250.0
+        },
+        "layoutNs": {
+          "mean": 58441.026,
+          "p95": 9500.0,
+          "max": 3442250.0
+        },
+        "batchNs": {
+          "mean": 7520.822,
+          "p95": 13584.0,
+          "max": 21250.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 16
+      },
+      "research": {
+        "frames": 561,
+        "frameMs": {
+          "mean": 17.855,
+          "p95": 26.8221,
+          "max": 115.0852
+        },
+        "cpuNs": {
+          "mean": 17848745.446,
+          "p95": 26810125.0,
+          "max": 115087125.0
+        },
+        "gpuMs": {
+          "mean": 0.305,
+          "p95": 0.4697,
+          "max": 0.5681
+        },
+        "gcBytes": {
+          "mean": 128940.67,
+          "p95": 690354.0,
+          "max": 2915657.0
+        },
+        "heapBytes": {
+          "mean": 40493369.954,
+          "p95": 41799680.0,
+          "max": 42434560.0
+        },
+        "uiNodes": {
+          "mean": 139.0,
+          "p95": 139.0,
+          "max": 139.0
+        },
+        "tickNs": {
+          "mean": 1296817.889,
+          "p95": 7451291.0,
+          "max": 11188333.0
+        },
+        "refreshNs": {
+          "mean": 2367829.761,
+          "p95": 13914084.0,
+          "max": 19603125.0
+        },
+        "saveNs": {
+          "mean": 318212.492,
+          "p95": 0.0,
+          "max": 90282750.0
+        },
+        "scanNs": {
+          "mean": 304.385,
+          "p95": 667.0,
+          "max": 4166.0
+        },
+        "diagnosticNs": {
+          "mean": 24845.364,
+          "p95": 0.0,
+          "max": 4128708.0
+        },
+        "layoutNs": {
+          "mean": 410102.194,
+          "p95": 3375.0,
+          "max": 25655583.0
+        },
+        "batchNs": {
+          "mean": 6292.276,
+          "p95": 8709.0,
+          "max": 20000.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 93
+      },
+      "taps": {
+        "frames": 603,
+        "frameMs": {
+          "mean": 22.571,
+          "p95": 114.8633,
+          "max": 148.4226
+        },
+        "cpuNs": {
+          "mean": 22563091.992,
+          "p95": 114896667.0,
+          "max": 148399542.0
+        },
+        "gpuMs": {
+          "mean": 0.319,
+          "p95": 0.4852,
+          "max": 1.4394
+        },
+        "gcBytes": {
+          "mean": 341755.408,
+          "p95": 3049234.0,
+          "max": 4158705.0
+        },
+        "heapBytes": {
+          "mean": 35838281.446,
+          "p95": 42422272.0,
+          "max": 44273664.0
+        },
+        "uiNodes": {
+          "mean": 200.0,
+          "p95": 200.0,
+          "max": 200.0
+        },
+        "tickNs": {
+          "mean": 1963299.693,
+          "p95": 9963541.0,
+          "max": 22092709.0
+        },
+        "refreshNs": {
+          "mean": 1313577.036,
+          "p95": 5214833.0,
+          "max": 12981250.0
+        },
+        "saveNs": {
+          "mean": 4942415.013,
+          "p95": 87378000.0,
+          "max": 94812792.0
+        },
+        "scanNs": {
+          "mean": 718.411,
+          "p95": 750.0,
+          "max": 222292.0
+        },
+        "diagnosticNs": {
+          "mean": 27706.952,
+          "p95": 0.0,
+          "max": 2011750.0
+        },
+        "layoutNs": {
+          "mean": 3319.058,
+          "p95": 6416.0,
+          "max": 11167.0
+        },
+        "batchNs": {
+          "mean": 5145.935,
+          "p95": 8375.0,
+          "max": 20459.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 36
+      },
+      "purchases": {
+        "frames": 546,
+        "frameMs": {
+          "mean": 23.97,
+          "p95": 31.8215,
+          "max": 248.4441
+        },
+        "cpuNs": {
+          "mean": 23962105.912,
+          "p95": 31787875.0,
+          "max": 248463541.0
+        },
+        "gpuMs": {
+          "mean": 0.345,
+          "p95": 0.4823,
+          "max": 1.2902
+        },
+        "gcBytes": {
+          "mean": 347676.445,
+          "p95": 850713.0,
+          "max": 7240643.0
+        },
+        "heapBytes": {
+          "mean": 33522586.725,
+          "p95": 36483072.0,
+          "max": 37584896.0
+        },
+        "uiNodes": {
+          "mean": 201.0,
+          "p95": 201.0,
+          "max": 201.0
+        },
+        "tickNs": {
+          "mean": 1724515.324,
+          "p95": 9890000.0,
+          "max": 19352083.0
+        },
+        "refreshNs": {
+          "mean": 1140285.101,
+          "p95": 5277000.0,
+          "max": 10453833.0
+        },
+        "saveNs": {
+          "mean": 5231817.465,
+          "p95": 0.0,
+          "max": 177121959.0
+        },
+        "scanNs": {
+          "mean": 750.485,
+          "p95": 1167.0,
+          "max": 189959.0
+        },
+        "diagnosticNs": {
+          "mean": 36806.397,
+          "p95": 0.0,
+          "max": 2250042.0
+        },
+        "layoutNs": {
+          "mean": 9013496.011,
+          "p95": 9694458.0,
+          "max": 11547375.0
+        },
+        "batchNs": {
+          "mean": 5496.881,
+          "p95": 9083.0,
+          "max": 19083.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 111
+      }
+    },
+    "bb-release": {
+      "hardware": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.669,
+          "p95": 18.1927,
+          "max": 20.7662
+        },
+        "cpuNs": {
+          "mean": 16645323.191,
+          "p95": 18174792.0,
+          "max": 20684542.0
+        },
+        "gpuMs": {
+          "mean": 0.324,
+          "p95": 0.4607,
+          "max": 1.4679
+        },
+        "gcBytes": {
+          "mean": 132962.689,
+          "p95": 820110.0,
+          "max": 3000560.0
+        },
+        "heapBytes": {
+          "mean": 32559512.918,
+          "p95": 34582528.0,
+          "max": 36249600.0
+        },
+        "uiNodes": {
+          "mean": 135.0,
+          "p95": 135.0,
+          "max": 135.0
+        },
+        "tickNs": {
+          "mean": 652071.218,
+          "p95": 4590791.0,
+          "max": 8321875.0
+        },
+        "refreshNs": {
+          "mean": 264450.646,
+          "p95": 1686000.0,
+          "max": 5496750.0
+        },
+        "saveNs": {
+          "mean": 55063.784,
+          "p95": 0.0,
+          "max": 19267875.0
+        },
+        "scanNs": {
+          "mean": 170.889,
+          "p95": 375.0,
+          "max": 2083.0
+        },
+        "diagnosticNs": {
+          "mean": 36595.602,
+          "p95": 0.0,
+          "max": 6399750.0
+        },
+        "layoutNs": {
+          "mean": 4270.236,
+          "p95": 6334.0,
+          "max": 13292.0
+        },
+        "batchNs": {
+          "mean": 10700.889,
+          "p95": 16541.0,
+          "max": 36667.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 1
+      },
+      "training": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.667,
+          "p95": 18.1574,
+          "max": 23.813
+        },
+        "cpuNs": {
+          "mean": 16643031.26,
+          "p95": 18129750.0,
+          "max": 23710959.0
+        },
+        "gpuMs": {
+          "mean": 0.334,
+          "p95": 0.4619,
+          "max": 1.732
+        },
+        "gcBytes": {
+          "mean": 120590.498,
+          "p95": 675922.0,
+          "max": 2193826.0
+        },
+        "heapBytes": {
+          "mean": 32003629.151,
+          "p95": 32980992.0,
+          "max": 33673216.0
+        },
+        "uiNodes": {
+          "mean": 137.0,
+          "p95": 137.0,
+          "max": 137.0
+        },
+        "tickNs": {
+          "mean": 610756.436,
+          "p95": 4324292.0,
+          "max": 7667833.0
+        },
+        "refreshNs": {
+          "mean": 150982.045,
+          "p95": 550917.0,
+          "max": 6931916.0
+        },
+        "saveNs": {
+          "mean": 56004.436,
+          "p95": 0.0,
+          "max": 22159750.0
+        },
+        "scanNs": {
+          "mean": 175.539,
+          "p95": 417.0,
+          "max": 1917.0
+        },
+        "diagnosticNs": {
+          "mean": 25123.616,
+          "p95": 0.0,
+          "max": 2262417.0
+        },
+        "layoutNs": {
+          "mean": 21403.91,
+          "p95": 5917.0,
+          "max": 1396083.0
+        },
+        "batchNs": {
+          "mean": 13729.123,
+          "p95": 19875.0,
+          "max": 31125.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 1
+      },
+      "research": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.667,
+          "p95": 18.23,
+          "max": 25.9737
+        },
+        "cpuNs": {
+          "mean": 16644664.715,
+          "p95": 18210666.0,
+          "max": 25893083.0
+        },
+        "gpuMs": {
+          "mean": 0.303,
+          "p95": 0.4298,
+          "max": 0.609
+        },
+        "gcBytes": {
+          "mean": 119847.235,
+          "p95": 690238.0,
+          "max": 2880811.0
+        },
+        "heapBytes": {
+          "mean": 39003038.882,
+          "p95": 40361984.0,
+          "max": 41336832.0
+        },
+        "uiNodes": {
+          "mean": 139.0,
+          "p95": 139.0,
+          "max": 139.0
+        },
+        "tickNs": {
+          "mean": 581777.399,
+          "p95": 4099166.0,
+          "max": 8189292.0
+        },
+        "refreshNs": {
+          "mean": 512642.827,
+          "p95": 3476709.0,
+          "max": 8575667.0
+        },
+        "saveNs": {
+          "mean": 66158.488,
+          "p95": 0.0,
+          "max": 23201709.0
+        },
+        "scanNs": {
+          "mean": 176.09,
+          "p95": 375.0,
+          "max": 2417.0
+        },
+        "diagnosticNs": {
+          "mean": 23769.686,
+          "p95": 0.0,
+          "max": 2024375.0
+        },
+        "layoutNs": {
+          "mean": 141805.386,
+          "p95": 6250.0,
+          "max": 9394125.0
+        },
+        "batchNs": {
+          "mean": 14551.01,
+          "p95": 23167.0,
+          "max": 41250.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 7
+      },
+      "taps": {
+        "frames": 659,
+        "frameMs": {
+          "mean": 16.947,
+          "p95": 18.4542,
+          "max": 33.3068
+        },
+        "cpuNs": {
+          "mean": 16928587.715,
+          "p95": 18384250.0,
+          "max": 33236917.0
+        },
+        "gpuMs": {
+          "mean": 0.307,
+          "p95": 0.4365,
+          "max": 1.3958
+        },
+        "gcBytes": {
+          "mean": 291914.821,
+          "p95": 2198255.0,
+          "max": 4160188.0
+        },
+        "heapBytes": {
+          "mean": 35092880.898,
+          "p95": 43491328.0,
+          "max": 45887488.0
+        },
+        "uiNodes": {
+          "mean": 200.0,
+          "p95": 200.0,
+          "max": 200.0
+        },
+        "tickNs": {
+          "mean": 713258.66,
+          "p95": 4322250.0,
+          "max": 10329499.0
+        },
+        "refreshNs": {
+          "mean": 316631.014,
+          "p95": 1705541.0,
+          "max": 5967875.0
+        },
+        "saveNs": {
+          "mean": 852380.563,
+          "p95": 11649083.0,
+          "max": 20537500.0
+        },
+        "scanNs": {
+          "mean": 363.513,
+          "p95": 375.0,
+          "max": 135125.0
+        },
+        "diagnosticNs": {
+          "mean": 24003.162,
+          "p95": 0.0,
+          "max": 2172833.0
+        },
+        "layoutNs": {
+          "mean": 3010.058,
+          "p95": 5833.0,
+          "max": 13750.0
+        },
+        "batchNs": {
+          "mean": 8222.985,
+          "p95": 15542.0,
+          "max": 23667.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 28
+      },
+      "purchases": {
+        "frames": 615,
+        "frameMs": {
+          "mean": 17.369,
+          "p95": 18.2629,
+          "max": 49.9986
+        },
+        "cpuNs": {
+          "mean": 17359100.891,
+          "p95": 18264458.0,
+          "max": 49999166.0
+        },
+        "gpuMs": {
+          "mean": 0.335,
+          "p95": 0.4918,
+          "max": 1.0954
+        },
+        "gcBytes": {
+          "mean": 311785.374,
+          "p95": 840468.0,
+          "max": 6754437.0
+        },
+        "heapBytes": {
+          "mean": 32987632.182,
+          "p95": 35065856.0,
+          "max": 37335040.0
+        },
+        "uiNodes": {
+          "mean": 201.0,
+          "p95": 201.0,
+          "max": 201.0
+        },
+        "tickNs": {
+          "mean": 542130.833,
+          "p95": 3131875.0,
+          "max": 8267667.0
+        },
+        "refreshNs": {
+          "mean": 218005.224,
+          "p95": 1179250.0,
+          "max": 4165292.0
+        },
+        "saveNs": {
+          "mean": 746746.067,
+          "p95": 0.0,
+          "max": 29360834.0
+        },
+        "scanNs": {
+          "mean": 321.285,
+          "p95": 250.0,
+          "max": 129708.0
+        },
+        "diagnosticNs": {
+          "mean": 24446.881,
+          "p95": 0.0,
+          "max": 3363583.0
+        },
+        "layoutNs": {
+          "mean": 2135111.637,
+          "p95": 2817292.0,
+          "max": 3181833.0
+        },
+        "batchNs": {
+          "mean": 5030.576,
+          "p95": 8000.0,
+          "max": 13417.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 22
+      }
+    },
+    "final-be8b04ca": {
+      "hardware": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.667,
+          "p95": 17.2782,
+          "max": 24.7108
+        },
+        "cpuNs": {
+          "mean": 16636177.151,
+          "p95": 17249417.0,
+          "max": 24607125.0
+        },
+        "gpuMs": {
+          "mean": 0.389,
+          "p95": 0.5717,
+          "max": 1.6621
+        },
+        "gcBytes": {
+          "mean": 131636.103,
+          "p95": 820448.0,
+          "max": 1903800.0
+        },
+        "heapBytes": {
+          "mean": 32155153.89,
+          "p95": 33976320.0,
+          "max": 34770944.0
+        },
+        "uiNodes": {
+          "mean": 135.0,
+          "p95": 135.0,
+          "max": 135.0
+        },
+        "tickNs": {
+          "mean": 612690.166,
+          "p95": 4234458.0,
+          "max": 8069250.0
+        },
+        "refreshNs": {
+          "mean": 244854.963,
+          "p95": 1644084.0,
+          "max": 4828916.0
+        },
+        "saveNs": {
+          "mean": 55877.982,
+          "p95": 0.0,
+          "max": 22558125.0
+        },
+        "scanNs": {
+          "mean": 178.958,
+          "p95": 458.0,
+          "max": 2209.0
+        },
+        "diagnosticNs": {
+          "mean": 24091.441,
+          "p95": 0.0,
+          "max": 2195167.0
+        },
+        "layoutNs": {
+          "mean": 4983.201,
+          "p95": 7375.0,
+          "max": 20583.0
+        },
+        "batchNs": {
+          "mean": 11308.005,
+          "p95": 18000.0,
+          "max": 34541.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 1
+      },
+      "training": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.667,
+          "p95": 17.2915,
+          "max": 26.7167
+        },
+        "cpuNs": {
+          "mean": 16636799.231,
+          "p95": 17250792.0,
+          "max": 26611416.0
+        },
+        "gpuMs": {
+          "mean": 0.397,
+          "p95": 0.5855,
+          "max": 1.5667
+        },
+        "gcBytes": {
+          "mean": 119633.474,
+          "p95": 675922.0,
+          "max": 2569026.0
+        },
+        "heapBytes": {
+          "mean": 32052174.589,
+          "p95": 33116160.0,
+          "max": 34082816.0
+        },
+        "uiNodes": {
+          "mean": 137.0,
+          "p95": 137.0,
+          "max": 137.0
+        },
+        "tickNs": {
+          "mean": 608584.02,
+          "p95": 4426000.0,
+          "max": 8493750.0
+        },
+        "refreshNs": {
+          "mean": 126789.454,
+          "p95": 530875.0,
+          "max": 6483417.0
+        },
+        "saveNs": {
+          "mean": 60866.541,
+          "p95": 0.0,
+          "max": 20621625.0
+        },
+        "scanNs": {
+          "mean": 189.113,
+          "p95": 459.0,
+          "max": 1000.0
+        },
+        "diagnosticNs": {
+          "mean": 22941.972,
+          "p95": 0.0,
+          "max": 2044417.0
+        },
+        "layoutNs": {
+          "mean": 19881.795,
+          "p95": 5792.0,
+          "max": 1145583.0
+        },
+        "batchNs": {
+          "mean": 16114.121,
+          "p95": 23791.0,
+          "max": 59125.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 1
+      },
+      "research": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.667,
+          "p95": 17.2873,
+          "max": 25.1572
+        },
+        "cpuNs": {
+          "mean": 16640159.805,
+          "p95": 17253000.0,
+          "max": 25048333.0
+        },
+        "gpuMs": {
+          "mean": 0.376,
+          "p95": 0.5406,
+          "max": 0.8533
+        },
+        "gcBytes": {
+          "mean": 119468.747,
+          "p95": 690330.0,
+          "max": 1899681.0
+        },
+        "heapBytes": {
+          "mean": 38790558.03,
+          "p95": 40255488.0,
+          "max": 41066496.0
+        },
+        "uiNodes": {
+          "mean": 139.0,
+          "p95": 139.0,
+          "max": 139.0
+        },
+        "tickNs": {
+          "mean": 573339.509,
+          "p95": 4160584.0,
+          "max": 7766125.0
+        },
+        "refreshNs": {
+          "mean": 502198.493,
+          "p95": 3453584.0,
+          "max": 9829250.0
+        },
+        "saveNs": {
+          "mean": 49531.612,
+          "p95": 0.0,
+          "max": 17964833.0
+        },
+        "scanNs": {
+          "mean": 166.671,
+          "p95": 417.0,
+          "max": 3750.0
+        },
+        "diagnosticNs": {
+          "mean": 21305.742,
+          "p95": 0.0,
+          "max": 1575375.0
+        },
+        "layoutNs": {
+          "mean": 138876.622,
+          "p95": 5875.0,
+          "max": 9559000.0
+        },
+        "batchNs": {
+          "mean": 15845.005,
+          "p95": 25750.0,
+          "max": 45084.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 7
+      },
+      "taps": {
+        "frames": 660,
+        "frameMs": {
+          "mean": 16.717,
+          "p95": 17.3228,
+          "max": 33.023
+        },
+        "cpuNs": {
+          "mean": 16695943.086,
+          "p95": 17311459.0,
+          "max": 32873375.0
+        },
+        "gpuMs": {
+          "mean": 0.356,
+          "p95": 0.5081,
+          "max": 1.504
+        },
+        "gcBytes": {
+          "mean": 275402.647,
+          "p95": 869813.0,
+          "max": 3856625.0
+        },
+        "heapBytes": {
+          "mean": 34586121.309,
+          "p95": 41627648.0,
+          "max": 42663936.0
+        },
+        "uiNodes": {
+          "mean": 200.0,
+          "p95": 200.0,
+          "max": 200.0
+        },
+        "tickNs": {
+          "mean": 671697.974,
+          "p95": 3870833.0,
+          "max": 8286750.0
+        },
+        "refreshNs": {
+          "mean": 323012.559,
+          "p95": 1671292.0,
+          "max": 5640209.0
+        },
+        "saveNs": {
+          "mean": 746984.598,
+          "p95": 0.0,
+          "max": 20215167.0
+        },
+        "scanNs": {
+          "mean": 280.306,
+          "p95": 417.0,
+          "max": 87625.0
+        },
+        "diagnosticNs": {
+          "mean": 20083.395,
+          "p95": 0.0,
+          "max": 1523958.0
+        },
+        "layoutNs": {
+          "mean": 3062.703,
+          "p95": 6334.0,
+          "max": 12542.0
+        },
+        "batchNs": {
+          "mean": 8183.102,
+          "p95": 14875.0,
+          "max": 27500.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 26
+      },
+      "purchases": {
+        "frames": 614,
+        "frameMs": {
+          "mean": 17.371,
+          "p95": 17.2727,
+          "max": 50.0182
+        },
+        "cpuNs": {
+          "mean": 17361317.163,
+          "p95": 17267833.0,
+          "max": 50022333.0
+        },
+        "gpuMs": {
+          "mean": 0.367,
+          "p95": 0.5003,
+          "max": 0.7454
+        },
+        "gcBytes": {
+          "mean": 300706.036,
+          "p95": 842792.0,
+          "max": 7845846.0
+        },
+        "heapBytes": {
+          "mean": 32043541.681,
+          "p95": 33865728.0,
+          "max": 35897344.0
+        },
+        "uiNodes": {
+          "mean": 201.0,
+          "p95": 201.0,
+          "max": 201.0
+        },
+        "tickNs": {
+          "mean": 537671.829,
+          "p95": 2996625.0,
+          "max": 8398042.0
+        },
+        "refreshNs": {
+          "mean": 237445.371,
+          "p95": 1140000.0,
+          "max": 6079750.0
+        },
+        "saveNs": {
+          "mean": 735131.518,
+          "p95": 0.0,
+          "max": 39958041.0
+        },
+        "scanNs": {
+          "mean": 307.679,
+          "p95": 292.0,
+          "max": 123334.0
+        },
+        "diagnosticNs": {
+          "mean": 21533.723,
+          "p95": 0.0,
+          "max": 1733291.0
+        },
+        "layoutNs": {
+          "mean": 2094502.687,
+          "p95": 2692750.0,
+          "max": 3345541.0
+        },
+        "batchNs": {
+          "mean": 5199.028,
+          "p95": 7667.0,
+          "max": 12708.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 22
+      }
+    },
+    "quiet-final-96f628d8": {
+      "hardware": {
+        "frames": 586,
+        "frameMs": {
+          "mean": 17.093,
+          "p95": 16.6966,
+          "max": 91.7599
+        },
+        "gcBytes": {
+          "mean": 130808.766,
+          "p95": 807896.0,
+          "max": 2689757.0
+        },
+        "tickNs": {
+          "mean": 402226.111,
+          "p95": 2500209.0,
+          "max": 13135042.0
+        },
+        "refreshNs": {
+          "mean": 187156.862,
+          "p95": 1170042.0,
+          "max": 3624333.0
+        },
+        "saveNs": {
+          "mean": 47844.638,
+          "p95": 0.0,
+          "max": 14130208.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 11
+      },
+      "training": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.667,
+          "p95": 16.6886,
+          "max": 22.9892
+        },
+        "gcBytes": {
+          "mean": 120819.106,
+          "p95": 666570.0,
+          "max": 2523859.0
+        },
+        "tickNs": {
+          "mean": 358162.02,
+          "p95": 2106875.0,
+          "max": 6235542.0
+        },
+        "refreshNs": {
+          "mean": 85059.213,
+          "p95": 297000.0,
+          "max": 4251542.0
+        },
+        "saveNs": {
+          "mean": 46391.639,
+          "p95": 0.0,
+          "max": 16720166.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 2
+      },
+      "research": {
+        "frames": 601,
+        "frameMs": {
+          "mean": 16.667,
+          "p95": 16.7265,
+          "max": 23.6627
+        },
+        "gcBytes": {
+          "mean": 117917.529,
+          "p95": 680718.0,
+          "max": 1884762.0
+        },
+        "tickNs": {
+          "mean": 502677.547,
+          "p95": 3670791.0,
+          "max": 8461834.0
+        },
+        "refreshNs": {
+          "mean": 431947.865,
+          "p95": 3421541.0,
+          "max": 7476709.0
+        },
+        "saveNs": {
+          "mean": 51522.739,
+          "p95": 0.0,
+          "max": 17381666.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 3
+      },
+      "taps": {
+        "frames": 614,
+        "frameMs": {
+          "mean": 18.024,
+          "p95": 25.0992,
+          "max": 89.0208
+        },
+        "gcBytes": {
+          "mean": 289596.301,
+          "p95": 1913622.0,
+          "max": 4884751.0
+        },
+        "tickNs": {
+          "mean": 666975.507,
+          "p95": 3638750.0,
+          "max": 14139500.0
+        },
+        "refreshNs": {
+          "mean": 307650.992,
+          "p95": 1457417.0,
+          "max": 7842917.0
+        },
+        "saveNs": {
+          "mean": 897940.695,
+          "p95": 13232833.0,
+          "max": 31825125.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 49
+      },
+      "purchases": {
+        "frames": 603,
+        "frameMs": {
+          "mean": 17.799,
+          "p95": 19.7644,
+          "max": 63.8596
+        },
+        "gcBytes": {
+          "mean": 306452.915,
+          "p95": 846096.0,
+          "max": 6322721.0
+        },
+        "tickNs": {
+          "mean": 595275.494,
+          "p95": 3142250.0,
+          "max": 6215541.0
+        },
+        "refreshNs": {
+          "mean": 300701.499,
+          "p95": 1456458.0,
+          "max": 4879708.0
+        },
+        "saveNs": {
+          "mean": 875302.448,
+          "p95": 0.0,
+          "max": 33298334.0
+        },
+        "uiNodesCreated": 0,
+        "framesOver20Ms": 30
+      }
+    }
+  },
+  "configuration": {
+    "before": "Xcode Debug IL2CPP Debug",
+    "bb-debug": "Xcode Debug IL2CPP Debug",
+    "bb-release": "Xcode ReleaseForProfiling IL2CPP Release",
+    "final-be8b04ca": "Xcode ReleaseForProfiling IL2CPP Release",
+    "quiet-final-96f628d8": "Xcode ReleaseForProfiling IL2CPP Release; Device Hub UI closed, simulator remains booted; separate repeat, not original baseline conditions"
+  },
+  "limits": [
+    "simulator GPU/CPU values are not device evidence",
+    "baseline has no Layout recorder; null is unavailable, not zero",
+    "main thread contains waits",
+    "profiles use isolated prepared resources; fresh tutorial capture does not",
+    "input stress phases have no baseline in before",
+    "remaining purchase frame spikes around 50ms",
+    "uiNodesCreated counts factory nodes only",
+    "quiet-final-96f628d8 hardware peak 91.76ms; closing Device Hub does not establish stable device 60fps"
+  ],
+  "profileSourceCommit": "be8b04caf2cf1815f03d683b037fc802ee4ac18d"
+}

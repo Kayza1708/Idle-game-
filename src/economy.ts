@@ -9,6 +9,208 @@ import { addEvent, addMetrics, newTelemetry, type LocalTelemetry } from './telem
 import { newStory, type StoryState } from './story';
 
 /** All tunable alpha balance lives in this file. Domain modules consume these values. */
+export const lateMetaItemCatalog = {
+  "darklab-resonator": {
+    "name": "Geheimlabor-Resonator",
+    "en": "Dark-lab resonator",
+    "slot": "research",
+    "role": "insight",
+    "effect": "insight",
+    "area": "data",
+    "access": "lab",
+    "family": "quantum",
+    "cap": 0.35,
+    "strength": 1,
+    "trigger": "Erkenntnisproduktion im freigeschalteten Geheimlabor",
+    "secondary": "research",
+    "tertiary": "data",
+    "recipe": {
+      "rarity": "rare",
+      "name": "Geheimlabor-Resonator-Bauplan",
+      "ingredients": {
+        "neuralCrystals": 12,
+        "quantumCores": 4,
+        "superconductors": 8,
+        "photonicLenses": 10
+      },
+      "blueprints": 32,
+      "data": 2000000,
+      "modules": {
+        "computeBus": 2,
+        "dataLattice": 2
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Knowledge production in the unlocked secret laboratory"
+  },
+  "model-echo-core": {
+    "name": "Modell-Echokern",
+    "en": "Model echo core",
+    "slot": "core",
+    "role": "modelEcho",
+    "effect": "modelEcho",
+    "area": "model",
+    "access": "lab",
+    "family": "quantum",
+    "cap": 0.25,
+    "strength": 1,
+    "trigger": "Verstärkt nur den Revenue-Bonusanteil des aktiven KI-Modells",
+    "secondary": "training",
+    "tertiary": "compute",
+    "recipe": {
+      "rarity": "rare",
+      "name": "Modell-Echokern-Bauplan",
+      "ingredients": {
+        "neuralCrystals": 16,
+        "graphene": 30,
+        "photonicCircuits": 18,
+        "ceramicSubstrates": 20
+      },
+      "blueprints": 48,
+      "data": 4000000,
+      "modules": {
+        "computeBus": 2,
+        "dataLattice": 2
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Amplifies only the revenue bonus portion of the active AI model"
+  },
+  "axiom-lattice": {
+    "name": "Axiomgitter",
+    "en": "Axiom lattice",
+    "slot": "processor",
+    "role": "axiomResonance",
+    "effect": "axiomResonance",
+    "area": "architecture",
+    "access": "axiom",
+    "family": "quantum",
+    "cap": 0.2,
+    "strength": 1,
+    "trigger": "Axiomgewinn vor Abrundung; ab dem ersten abgeschlossenen Axiomzyklus",
+    "secondary": "research",
+    "tertiary": "credits",
+    "recipe": {
+      "rarity": "epic",
+      "name": "Axiomgitter-Bauplan",
+      "ingredients": {
+        "quantumCores": 12,
+        "diamondSubstrates": 16,
+        "spintronicDevices": 20,
+        "superconductors": 24
+      },
+      "blueprints": 80,
+      "data": 12000000,
+      "modules": {
+        "computeBus": 2,
+        "dataLattice": 2
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Axiom yield before rounding, after the first completed axiom cycle"
+  },
+  "cycle-observatory": {
+    "name": "Zyklus-Observatorium",
+    "en": "Cycle observatory",
+    "slot": "research",
+    "role": "cycleResearch",
+    "effect": "cycleResearch",
+    "area": "automation",
+    "access": "axiom",
+    "family": "quantum",
+    "cap": 0.3,
+    "strength": 1,
+    "trigger": "Forschungstempo wächst mit abgeschlossenen Axiomzyklen bis fünf",
+    "secondary": "drop",
+    "tertiary": "research",
+    "recipe": {
+      "rarity": "legendary",
+      "name": "Zyklus-Observatorium-Bauplan",
+      "ingredients": {
+        "quantumCores": 16,
+        "cryogenicResonators": 24,
+        "photonicLenses": 30,
+        "goldContacts": 60
+      },
+      "blueprints": 96,
+      "data": 18000000,
+      "modules": {
+        "computeBus": 2,
+        "dataLattice": 2
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Research speed scales with completed axiom cycles, up to five"
+  },
+  "entropy-sink": {
+    "name": "Entropiesenke",
+    "en": "Entropy sink",
+    "slot": "processor",
+    "role": "knowledgeCompute",
+    "effect": "knowledgeCompute",
+    "area": "architecture",
+    "access": "lab",
+    "family": "quantum",
+    "cap": 0.4,
+    "strength": 1,
+    "trigger": "Compute wächst mit unverbrauchter Erkenntnis bis 1 Mio.; Ausgaben senken den Bonus",
+    "secondary": "data",
+    "tertiary": "tap",
+    "recipe": {
+      "rarity": "epic",
+      "name": "Entropiesenke-Bauplan",
+      "ingredients": {
+        "superconductors": 30,
+        "thermalInterface": 60,
+        "graphene": 40,
+        "photonicCircuits": 20
+      },
+      "blueprints": 64,
+      "data": 8000000,
+      "modules": {
+        "computeBus": 2,
+        "dataLattice": 2
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Compute scales with unspent knowledge up to one million; spending lowers the bonus"
+  },
+  "mnemonic-anchor": {
+    "name": "Mnemonischer Anker",
+    "en": "Mnemonic anchor",
+    "slot": "core",
+    "role": "modelTraining",
+    "effect": "modelTraining",
+    "area": "model",
+    "access": "model-set",
+    "family": "quantum",
+    "cap": 0.35,
+    "strength": 1,
+    "trigger": "Trainingstempo wächst mit der Zahl erworbener KI-Modelle bis fünf",
+    "secondary": "components",
+    "tertiary": "training",
+    "recipe": {
+      "rarity": "epic",
+      "name": "Mnemonischer Anker-Bauplan",
+      "ingredients": {
+        "neuralCrystals": 24,
+        "nanotubes": 40,
+        "ceramicCapacitors": 60,
+        "diamondSubstrates": 16
+      },
+      "blueprints": 72,
+      "data": 10000000,
+      "modules": {
+        "computeBus": 2,
+        "dataLattice": 2
+      },
+      "duration": 3600
+    },
+    "enTrigger": "Training speed scales with acquired AI model count, up to five"
+  }
+} as const;
+export type LateMetaItemId=keyof typeof lateMetaItemCatalog;
+
 export const extendedItemCatalog = {
   "inference-router": {
     "name": "Inferenz-Router",
@@ -616,9 +818,12 @@ export const extendedItemCatalog = {
       "duration": 3600
     },
     "enTrigger": "Improve quantum material yield from new analyses and paid hardware packages."
-  }
+  },
+  ...lateMetaItemCatalog
 } as const;
 export const BALANCE = {
+  companyTradeDailyLimit: 5,
+  lateItemContext:{knowledgeLogCap:6,cycleCap:5,modelCap:5},
  progression:{
   "formula": {
     "trainingSoftStart": 50,
@@ -849,7 +1054,7 @@ export const BALANCE = {
       "depth": 2,
       "branch": 2,
       "requires": [],
-      "effect": "Manuelle Forschungswarteschlange von zwei auf sechs Plätze erweitern. Normaler Startbutton reiht bei vollen Laboren ein."
+      "effect": "Forschungswarteschlange auf sechs Plätze erweitern; zusätzlich sechs Analysen vorplanen. Wartende Analysen werden erst beim Start bezahlt."
     },
     "F03": {
       "name": "Forschungswiederholung",
@@ -857,7 +1062,7 @@ export const BALANCE = {
       "depth": 3,
       "branch": 2,
       "requires": [],
-      "effect": "Ein gewähltes wiederholbares Projekt endlos wiederholen, soweit Budget und Resetregeln es erlauben."
+      "effect": "Forschung und eine gewählte Analyse automatisch wiederholen, solange Datenbudget und Resetregeln es erlauben. Auch offline innerhalb der Offlinekapazität."
     },
     "F04": {
       "name": "Parallellabor II",
@@ -1939,47 +2144,48 @@ export const BALANCE = {
       "cryogenicResonators"
     ]
   },
+  analysisQueueCapacity: 6,
   "analyses": {
     "hardware-short": {
       "id": "hardware-short",
       "cost": 250,
       "work": 600,
-      "units": 12,
+      "units": 24,
       "fragments": "1/24"
     },
     "hardware-long": {
       "id": "hardware-long",
       "cost": 6000,
       "work": 14400,
-      "units": 360,
+      "units": 720,
       "fragments": "1"
     },
     "architecture-short": {
       "id": "architecture-short",
       "cost": 800,
       "work": 1800,
-      "units": 18,
+      "units": 36,
       "fragments": "1/8"
     },
     "architecture-long": {
       "id": "architecture-long",
       "cost": 12800,
       "work": 28800,
-      "units": 360,
+      "units": 720,
       "fragments": "2"
     },
     "artifact-short": {
       "id": "artifact-short",
       "cost": 4000,
       "work": 7200,
-      "units": 30,
+      "units": 60,
       "fragments": "1/2"
     },
     "artifact-long": {
       "id": "artifact-long",
       "cost": 48000,
       "work": 86400,
-      "units": 450,
+      "units": 900,
       "fragments": "6"
     }
   },
@@ -2356,6 +2562,7 @@ export const BALANCE = {
     'photonic-array':{base:'photonicLenses',rare:'neuralCrystals'},'logic-seed':{base:'photonicLenses',rare:'neuralCrystals'},'lab-drone':{base:'photonicLenses',rare:'neuralCrystals'},'data-prism':{base:'photonicLenses',rare:'neuralCrystals'},
     'field-scanner':{base:'graphene',rare:'quantumCores'},
     ...({"inference-router":{"base":"siliconWafers","rare":"superconductors"},"burst-processor":{"base":"copperCoils","rare":"superconductors"},"legacy-controller":{"base":"copperCoils","rare":"superconductors"},"sparse-decoder":{"base":"siliconWafers","rare":"superconductors"},"photonic-matrix":{"base":"photonicLenses","rare":"neuralCrystals"},"quantum-coupler":{"base":"quantumCores","rare":"cryogenicResonators"},"distillation-module":{"base":"photonicLenses","rare":"neuralCrystals"},"curriculum-module":{"base":"siliconWafers","rare":"superconductors"},"long-term-memory":{"base":"siliconWafers","rare":"superconductors"},"cryocontroller":{"base":"quantumCores","rare":"cryogenicResonators"},"manufacturing-controller":{"base":"siliconWafers","rare":"superconductors"},"diagnostic-adapter":{"base":"siliconWafers","rare":"superconductors"},"experiment-controller":{"base":"siliconWafers","rare":"superconductors"},"precision-scanner":{"base":"photonicLenses","rare":"neuralCrystals"},"recycling-probe":{"base":"photonicLenses","rare":"neuralCrystals"},"blueprint-archive":{"base":"neuralCrystals","rare":"quantumCores"},"protocol-controller":{"base":"siliconWafers","rare":"superconductors"},"photonic-analyzer":{"base":"photonicLenses","rare":"neuralCrystals"},"quantum-diagnostic-module":{"base":"quantumCores","rare":"cryogenicResonators"}} as const),
+    ...{"darklab-resonator": {"base": "neuralCrystals", "rare": "quantumCores"}, "model-echo-core": {"base": "neuralCrystals", "rare": "quantumCores"}, "axiom-lattice": {"base": "quantumCores", "rare": "neuralCrystals"}, "cycle-observatory": {"base": "quantumCores", "rare": "quantumCores"}, "entropy-sink": {"base": "superconductors", "rare": "quantumCores"}, "mnemonic-anchor": {"base": "neuralCrystals", "rare": "quantumCores"}}
   },
   itemUpgradeMaterials:{uncommon:{base:4,rare:0},rare:{base:12,rare:0},epic:{base:30,rare:2},legendary:{base:75,rare:8},mythic:{base:180,rare:25}},
   blueprintMasteryCosts:[10,25,60,150],blueprintMasteryFactors:[1,.95,.90,.85,.80],researchFragmentConversionRate:10,
@@ -2382,6 +2589,12 @@ export const BALANCE = {
     'tensor-core':{rarity:'common' as const,name:'Tensor-Kern-Bauplan',research:'blueprints' as const,ingredients:{circuits:36,copperCoils:0,siliconWafers:20,titaniumBolts:12,photonicLenses:0,graphene:6,nanotubes:4,superconductors:2,neuralCrystals:0,quantumCores:0},blueprints:8,data:3000,modules:{computeBus:1,dataLattice:1},duration:1800},
     'lab-drone':{rarity:'common' as const,name:'Labordrohne-Bauplan',research:'blueprints' as const,ingredients:{circuits:24,copperCoils:12,siliconWafers:0,titaniumBolts:16,photonicLenses:8,graphene:0,nanotubes:4,superconductors:0,neuralCrystals:0,quantumCores:1},blueprints:10,data:3600,modules:{computeBus:1,dataLattice:1},duration:1800},
     ...({"inference-router":{"rarity":"common","name":"Inferenz-Router-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"siliconWafers":14,"goldContacts":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"burst-processor":{"rarity":"common","name":"Burst-Prozessor-Bauplan","ingredients":{"circuits":20,"copperCoils":8,"ceramicCapacitors":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"legacy-controller":{"rarity":"common","name":"Legacy-Controller-Bauplan","ingredients":{"circuits":8,"copperCoils":6,"ferriteCores":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"sparse-decoder":{"rarity":"common","name":"Sparse-Decoder-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"ceramicSubstrates":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"photonic-matrix":{"rarity":"common","name":"Photonik-Matrix-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"photonicLenses":20,"photonicCircuits":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"quantum-coupler":{"rarity":"common","name":"Quantenkoppler-Bauplan","ingredients":{"circuits":80,"copperCoils":18,"quantumCores":26,"cryogenicResonators":13},"blueprints":10,"data":12000,"modules":{"computeBus":1,"dataLattice":1},"duration":3600},"distillation-module":{"rarity":"common","name":"Distillationsmodul-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"graphene":20,"opticalFibers":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"curriculum-module":{"rarity":"common","name":"Curriculum-Modul-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"ceramicSubstrates":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"long-term-memory":{"rarity":"common","name":"Langzeitspeicher-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"goldContacts":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"cryocontroller":{"rarity":"common","name":"Kryocontroller-Bauplan","ingredients":{"circuits":80,"copperCoils":18,"quantumCores":26,"cryogenicResonators":13},"blueprints":10,"data":12000,"modules":{"computeBus":1,"dataLattice":1},"duration":3600},"manufacturing-controller":{"rarity":"common","name":"Fertigungscontroller-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"titaniumBolts":14,"thermalInterface":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"diagnostic-adapter":{"rarity":"common","name":"Diagnoseadapter-Bauplan","ingredients":{"circuits":20,"copperCoils":6,"siliconWafers":8,"goldContacts":4},"blueprints":4,"data":1000,"modules":{},"duration":600},"experiment-controller":{"rarity":"common","name":"Versuchscontroller-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"siliconWafers":14,"opticalFibers":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"precision-scanner":{"rarity":"common","name":"Präzisionsscanner-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"photonicLenses":14,"opticalFibers":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"recycling-probe":{"rarity":"common","name":"Recycling-Sonde-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"graphene":14,"photonicCircuits":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"blueprint-archive":{"rarity":"common","name":"Bauplanarchiv-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"neuralCrystals":20,"spintronicDevices":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"protocol-controller":{"rarity":"common","name":"Protokollcontroller-Bauplan","ingredients":{"circuits":40,"copperCoils":10,"goldContacts":14,"ceramicSubstrates":7},"blueprints":6,"data":2400,"modules":{"computeBus":1,"dataLattice":1},"duration":1200},"photonic-analyzer":{"rarity":"common","name":"Photonik-Analysator-Bauplan","ingredients":{"circuits":60,"copperCoils":14,"photonicLenses":20,"photonicCircuits":10},"blueprints":8,"data":6000,"modules":{"computeBus":1,"dataLattice":1},"duration":2400},"quantum-diagnostic-module":{"rarity":"common","name":"Quanten-Diagnosemodul-Bauplan","ingredients":{"circuits":80,"copperCoils":18,"quantumCores":26,"cryogenicResonators":13},"blueprints":10,"data":12000,"modules":{"computeBus":1,"dataLattice":1},"duration":3600}} as const),
+    'darklab-resonator':lateMetaItemCatalog['darklab-resonator'].recipe,
+    'model-echo-core':lateMetaItemCatalog['model-echo-core'].recipe,
+    'axiom-lattice':lateMetaItemCatalog['axiom-lattice'].recipe,
+    'cycle-observatory':lateMetaItemCatalog['cycle-observatory'].recipe,
+    'entropy-sink':lateMetaItemCatalog['entropy-sink'].recipe,
+    'mnemonic-anchor':lateMetaItemCatalog['mnemonic-anchor'].recipe
   },
   experimentRewards: {
     hardware: { components: 45, blueprints: 1, research: 0, itemChance: 0 },
@@ -2410,7 +2623,7 @@ export const BALANCE = {
     'research':[1,20,100,500,2000,7500,30000,100000,500000,2000000],
     'training':[1,20,100,500,2000,7500,30000,100000,500000,2000000],
     'crafting':[1,10,50,200,1000,5000,20000,75000,300000,1000000],
-    'items':[1,3,5,8,12,16,20,24,27,30],
+    'items':[1,3,5,8,12,16,20,24,27,30,36],
     'taps':[100,1e3,1e4,1e5,1e6,1e7,1e8,1e9,1e10,1e11],
     'components':[10,100,1e3,1e4,1e5,1e6,1e7,1e8,1e9,1e10],
     'credits':[1e3,1e6,1e9,1e12,1e16,1e22,1e30,1e45,1e70,1e100],
@@ -2423,7 +2636,7 @@ export const BALANCE = {
     'fusion':[1,5,20,100,500,2500,1e4,5e4,2e5,1e6],
     'forge':[1,10,50,250,1e3,5e3,2.5e4,1e5,5e5,2e6],
     'material-types':[1,3,5,8,10,12,14,16,18,20],
-    'blueprints':[1,3,5,8,12,16,20,24,26,28],
+    'blueprints':[1,3,5,8,12,16,20,24,26,28,34],
     'crafted-types':[1,3,5,8,12,16,20,24,27,30],
     'material-families':[1,2,3,4,5],
     'foundry-network':[1,3,5,7,9,11,13,15],
@@ -2556,7 +2769,7 @@ export type GameState = {
   runCreditsEarned:number; lifetimeCreditsEarned:number; lifetimeEligibleCredits:number;cycleEligibleCredits:number; prestigeEntitlementClaimed:number; totalINTEarned:number;cycleINTEarned:number; unspentINT:number; spentINT:number; prestigeCount:number; exactEconomy:ExactEconomy;
   nodes:string[]; modules:ModuleInventory; scannerRewards:string[];runRecyclingRewards:string[];gems:number; welcomeGiftClaimed:boolean; components:number; componentInventory:ComponentInventory; componentRemainder:number; archivePassiveFindCount:number; passiveCircuitProgress:number; worldDropProgress:number; lootDrops:LootDrop[]; researchRemainder:number; blueprintRemainder:number; researchFragments:number; blueprintFragments:number; impulseRelayBlueprint:boolean;
   breakthroughs:BreakthroughId[]; inventory:Item[]; equipped:Partial<Record<ItemSlot,string>>; purchasedEquipmentSlots:number;unlockedEquipmentSlots:number; pity:{rare:number;epic:number;legendary:number};
-  experiments:{active:Experiment|null;queue:ExperimentId[];repeat:ExperimentId|null;completedIds:string[];firstReward:boolean;lastResult:AnalysisResult|null};
+  experiments:{active:Experiment|null;queue:(ExperimentId|`${ExperimentId}-short`|`${ExperimentId}-long`)[];repeat:ExperimentId|null;completedIds:string[];firstReward:boolean;lastResult:AnalysisResult|null};
   crafting:CraftingState;
   seasonLoot?:import('./seasonLoot').SeasonLoot;
   automation:{enabled:boolean;reserve:number;reservePercent?:number;shoppingElapsed?:number;elapsed:number;target:HardwareId|null};hardwareAutoBuyers:Partial<Record<HardwareId,boolean>>;scannerTarget:ComponentId|null;retention:RetentionState;season:SeasonState;previousSeason:PreviousSeason|null;pinnedGoal:PinnedGoalState|null;profile:PlayerProfile;missions:{daily:MissionPeriod;weekly:MissionPeriod;monthly:MissionPeriod;mailbox:{id:string;gems:number}[]};lifetime:LifetimeStats;runMilestoneClasses:HardwareId[];achievementClaims:string[];achievementPoints:number;gemLedger:GemLedgerEntry[];processedGemPurchases:string[];trainingBoostUntil:number;labBoostUntil:number;creditBoostUntil:number; overclock:{taps:number;charged:boolean;activeUntil:number;cooldownUntil:number;channel?:OverclockChannel};feedback:{windowStartedAt:number;work:number};
@@ -2635,8 +2848,9 @@ export const hasNode=(s:GameState,b:string,t:number)=>upgradeLevel(s,b as Presti
 export const researchQueueUnlocked=(s:GameState)=>s.progression?.version===2||hasNode(s,'labs2',1)||s.challengeUnlocks.includes('research-queue');
 export const researchRepeatUnlocked=(s:GameState)=>hasProgressionNode(s,'F03')||hasNode(s,'labs3',1)||s.challengeUnlocks.includes('research-repeat');
 export const trainingQueueUnlocked=(s:GameState)=>hasProgressionNode(s,'T03')||hasNode(s,'trainingPlan',1)||s.challengeUnlocks.includes('training-queue');
-export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>axiomLevel(s,id==='analysisPlanner'?'C02':'C03')>0||s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
+export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>(id==='analysisPlanner'&&hasProgressionNode(s,'F03'))||axiomLevel(s,id==='analysisPlanner'?'C02':'C03')>0||s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
 export const deepPrestigeBonus=(s:GameState,branch:'data'|'compute'|'analysis'|'labs'|'manufacturing')=>{const tiers=branch==='data'?['dataArchive4','dataArchive5','dataArchive6','dataArchive7','dataArchive8']:branch==='compute'?['computeNet4','computeNet5','computeNet6','computeNet7','computeNet8']:branch==='analysis'?['analysis4','analysis5','analysis6','analysis7','analysis8']:branch==='labs'?['labs4','labs6','labs7','labs8']:['manufacturing4','manufacturing6','manufacturing7','manufacturing8'];const values=branch==='data'?[.5,1,1.5,2.5,4]:branch==='compute'?[.25,.5,1,1.5,2.5]:branch==='analysis'?[.25,.5,1,1.5,2.5]:branch==='labs'?[.25,.5,1,2]:[.2,.4,.75,1.25];return tiers.reduce((sum,id,i)=>sum+(hasNode(s,id,1)?values[i]:0),0);};
+export function lateMetaItemUnlocked(s:GameState,id:string){if(!Object.hasOwn(lateMetaItemCatalog,id))return true;const d=lateMetaItemCatalog[id as LateMetaItemId];return s.progression?.lab===true&&(d.access==='axiom'?s.axiomResetCount>0:d.access==='model-set'?Object.values(s.progression.models).filter(v=>v>=0).length>=3:true);}
 export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemFamily;effect:ItemEffect}>={
  'impulse-relay':{name:'Impulsrelais',slot:'processor',effect:'relay'},'insight-archive':{name:'Erkenntnisarchiv',slot:'research',effect:'int-yield'},
  'quantum-chip':{name:'Quantenchip',slot:'processor',effect:'compute'},'neural-asic':{name:'Neural-ASIC',slot:'processor',effect:'credits'},'photonic-array':{name:'Photonenfeld',slot:'processor',effect:'training'},
