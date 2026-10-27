@@ -1,0 +1,577 @@
+{
+  "sourceCommit": "9ee80e60769891d513aafc69d0b114abdfeed5cc",
+  "editor": "6000.3.26f1",
+  "environment": "macOS Unity Editor PlayMode, not physical iPhone; isolated prepared temporary save except fresh-name capture",
+  "productionChanged": false,
+  "unityTests": {
+    "id": "2",
+    "testcasecount": "3",
+    "result": "Passed",
+    "total": "3",
+    "passed": "3",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-10-27 19:35:24Z",
+    "end-time": "2026-10-27 19:36:26Z",
+    "duration": "61.6187271"
+  },
+  "cloud": {
+    "cloudClientPresent": false,
+    "cloudConfigured": false,
+    "cloudSession": false
+  },
+  "itemArt": [
+    {
+      "id": "impulse-relay",
+      "sprite": "impulse-relay",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "insight-archive",
+      "sprite": "insight-archive",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "quantum-chip",
+      "sprite": "quantum-chip",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "neural-asic",
+      "sprite": "neural-asic",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "photonic-array",
+      "sprite": "photonic-array",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "memory-crystal",
+      "sprite": "memory-crystal",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "logic-seed",
+      "sprite": "logic-seed",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "tensor-core",
+      "sprite": "tensor-core",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "field-scanner",
+      "sprite": "field-scanner",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "lab-drone",
+      "sprite": "lab-drone",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "data-prism",
+      "sprite": "data-prism",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "inference-router",
+      "sprite": "inference-router",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "burst-processor",
+      "sprite": "burst-processor",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "legacy-controller",
+      "sprite": "legacy-controller",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "sparse-decoder",
+      "sprite": "sparse-decoder",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "photonic-matrix",
+      "sprite": "photonic-matrix",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "quantum-coupler",
+      "sprite": "quantum-coupler",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "distillation-module",
+      "sprite": "distillation-module",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "curriculum-module",
+      "sprite": "curriculum-module",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "long-term-memory",
+      "sprite": "long-term-memory",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "cryocontroller",
+      "sprite": "cryocontroller",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "manufacturing-controller",
+      "sprite": "manufacturing-controller",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "diagnostic-adapter",
+      "sprite": "diagnostic-adapter",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "experiment-controller",
+      "sprite": "experiment-controller",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "precision-scanner",
+      "sprite": "precision-scanner",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "recycling-probe",
+      "sprite": "recycling-probe",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "blueprint-archive",
+      "sprite": "blueprint-archive",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "protocol-controller",
+      "sprite": "protocol-controller",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "photonic-analyzer",
+      "sprite": "photonic-analyzer",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "quantum-diagnostic-module",
+      "sprite": "quantum-diagnostic-module",
+      "texture": "ItemAtlas",
+      "present": true
+    },
+    {
+      "id": "darklab-resonator",
+      "sprite": "item-darklab-resonator",
+      "texture": "meta-items-v1",
+      "present": true
+    },
+    {
+      "id": "model-echo-core",
+      "sprite": "item-model-echo-core",
+      "texture": "meta-items-v1",
+      "present": true
+    },
+    {
+      "id": "axiom-lattice",
+      "sprite": "item-axiom-lattice",
+      "texture": "meta-items-v1",
+      "present": true
+    },
+    {
+      "id": "cycle-observatory",
+      "sprite": "item-cycle-observatory",
+      "texture": "meta-items-v1",
+      "present": true
+    },
+    {
+      "id": "entropy-sink",
+      "sprite": "item-entropy-sink",
+      "texture": "meta-items-v1",
+      "present": true
+    },
+    {
+      "id": "mnemonic-anchor",
+      "sprite": "item-mnemonic-anchor",
+      "texture": "meta-items-v1",
+      "present": true
+    }
+  ],
+  "visitedStates": 219,
+  "languages": {
+    "de": 33,
+    "en": 31,
+    "es": 31,
+    "fr": 31,
+    "pt": 31,
+    "it": 31,
+    "pl": 31
+  },
+  "interactableButtonsUnder43_5InVisitedStates": 0,
+  "localizationExamples": [
+    {
+      "language": "en",
+      "route": "gems",
+      "text": "Ein zusätzlicher Laborplatz\n1500 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "en",
+      "route": "gems",
+      "text": "Dauerhafte Offline-Kapazität\n500 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "en",
+      "route": "gems",
+      "text": "Dauerhafte Offline-Kapazität\n1000 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "en",
+      "route": "ads",
+      "text": "50 Gems · Belohnungen / Forschung\nWerbeanbieter nicht verfügbar"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "Boot Sequence · season-01\nDein erstes Netzwerk\nStufe 0 / 50 · 0 XP\nGems: 50"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "10 Gems\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "30 Gems · common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "10 Gems\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "en",
+      "route": "seasons",
+      "text": "30 Gems · common-Truhe · Impulsrelais (uncommon)\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "gems",
+      "text": "Ein zusätzlicher Laborplatz\n1500 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "fr",
+      "route": "gems",
+      "text": "Dauerhafte Offline-Kapazität\n500 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "fr",
+      "route": "gems",
+      "text": "Dauerhafte Offline-Kapazität\n1000 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "fr",
+      "route": "ads",
+      "text": "50 Gems · Belohnungen / Forschung\nWerbeanbieter nicht verfügbar"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "Boot Sequence · season-01\nDein erstes Netzwerk\nStufe 0 / 50 · 0 XP\nGems: 50"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "10 Gems\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "30 Gems · common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "10 Gems\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "fr",
+      "route": "seasons",
+      "text": "30 Gems · common-Truhe · Impulsrelais (uncommon)\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "gems",
+      "text": "Ein zusätzlicher Laborplatz\n1500 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "pl",
+      "route": "gems",
+      "text": "Dauerhafte Offline-Kapazität\n500 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "pl",
+      "route": "gems",
+      "text": "Dauerhafte Offline-Kapazität\n1000 Gems · Vorherige Stufe erforderlich"
+    },
+    {
+      "language": "pl",
+      "route": "ads",
+      "text": "50 Gems · Belohnungen / Forschung\nWerbeanbieter nicht verfügbar"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "Boot Sequence · season-01\nDein erstes Netzwerk\nStufe 0 / 50 · 0 XP\nGems: 50"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "10 Gems\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "30 Gems · common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "10 Gems\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "common-Truhe\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "12 Leiterplatten\nSeason-Level fehlt"
+    },
+    {
+      "language": "pl",
+      "route": "seasons",
+      "text": "30 Gems · common-Truhe · Impulsrelais (uncommon)\nSeason-Level fehlt"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "fresh-mira-de.png",
+      "sha256": "373d64cd5c1df1767138b1bb909a9abddb09ca01f4999a4c0c701650fba7bcb9"
+    },
+    {
+      "file": "fresh-after-name-de.png",
+      "sha256": "263ea51e2026d47821c38f09b7f3f173a9e2c19909177459e03545d3bf1f49f9"
+    },
+    {
+      "file": "hardware-de.png",
+      "sha256": "815357607b25e9eb8ecf8312bb7968eae71744661d4036f8ffd748acf515ecf6"
+    },
+    {
+      "file": "training-de.png",
+      "sha256": "c29abde7a1c47e2d6ebd630557fcb08a651edf9c3defc2e66f53d8399df86463"
+    },
+    {
+      "file": "research-en.png",
+      "sha256": "8d455c3277faf459d0163d30ffcd07dca665f7639c8e56801c625338a0c096a4"
+    },
+    {
+      "file": "forge-inventory-de.png",
+      "sha256": "ce6cdf429bc1479c644e4b5b9ad27ab601992d0816a3a49617054f63492835e9"
+    },
+    {
+      "file": "prestige-de.png",
+      "sha256": "e5ce7164898ee83001181c9d3740f8f05facb3413f4a116f545df2cbde507545"
+    },
+    {
+      "file": "company-en.png",
+      "sha256": "a813685a5624dacb1f6e9d722a1fac35ce2e04d6d9abf041480059ad2b0af52c"
+    },
+    {
+      "file": "models-en-320.png",
+      "sha256": "801bed1c443f8bd3bbee23989d66282cb361edc7a2b46d2a8e816f6c56164e19"
+    },
+    {
+      "file": "models-de-430.png",
+      "sha256": "51ae4609928ab896c1f9968f9890bbaa285e811e5cc3194b7af171f80114fb22"
+    },
+    {
+      "file": "challenges-fr.png",
+      "sha256": "347ef127011380b87ae7b610630e58bdee2658bb6ca4db915874c7b9f75464fd"
+    },
+    {
+      "file": "challenges-de-320.png",
+      "sha256": "f318d66c651e5ec05270990939598b0f33fa0cf90c70e8c687baa0f5fad99e96"
+    },
+    {
+      "file": "challenges-en-430.png",
+      "sha256": "8f77b50003eb808344f16dc35f18020c5d0adebfbe648ff64722e79d3e22adee"
+    },
+    {
+      "file": "seasons-pl.png",
+      "sha256": "39275f5a947cee5937e9b60e52d511bfbd5a067e40792d77bfb9caac35e5cff5"
+    },
+    {
+      "file": "seasons-en-320.png",
+      "sha256": "026cadd8d759473851809d535c41f9c018399522c366062325c9cf98a53167d7"
+    },
+    {
+      "file": "seasons-en-430.png",
+      "sha256": "f895a4359178f788166a2ec668b38f5f0a7a6ab637f821cc9aad9b3726205af4"
+    },
+    {
+      "file": "missions-en.png",
+      "sha256": "fb8094d33c495c0c94359dc12500fe21755c23e818b4806eca82744db7b8010c"
+    },
+    {
+      "file": "shop-de.png",
+      "sha256": "9db4eec7480f22ac7ff953c7e4cff9b2ef7a5bea0f4ce91927552ca27abb6bde"
+    },
+    {
+      "file": "profile-en.png",
+      "sha256": "dae84ce4467d5f72b6be2c9857d187387b9cfab75ec3d5f44b7fc3edfca66a22"
+    },
+    {
+      "file": "settings-en.png",
+      "sha256": "911503ebcc4d063706141b5ebb286154546cc1cc7977106cffc10c0583babf12"
+    }
+  ],
+  "newRegression": {
+    "typecheck": "passed, including check:assets",
+    "vitest": {
+      "passed": 1944,
+      "files": 148,
+      "durationSeconds": 337.6
+    },
+    "webBuild": "passed; existing chunk size warning",
+    "fullEditMode": "not rerun; unchanged production source has historical 147/147",
+    "fullPlayMode": "not rerun; unchanged production source has historical 113/113",
+    "newNativeBuild": false
+  }
+}

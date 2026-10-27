@@ -1,5 +1,14 @@
 # Nächste Schritte · 26.10.2026
 
+## Bestandsaudit · 27.10.2026
+
+[Unity-Darstellung und Vollständigkeit](unity-presentation-audit-2026-10-27.md): 219 reale Seiten-/Sprachzustände, 36/36 eigene Item-Sprites und frische Mira-Namenswahl geprüft. Kein eigener nativer Ladescreen, keine konfigurierte produktive Company-Verbindung oder persönliche Cloud-Synchronisierung. Sieben Sprachen wählbar, aber konkrete deutsche Resttexte und englische Fallbacks bestehen. Modelle/Challenges/Seasons/Company benötigen eine konsequente kompakte Gestaltung; gemeinsame Styles allein reichen nicht. Keine Spielregeln, Saves oder Produktionsassets verändert.
+
+- [x] Tatsächliche Lücken mit Unity-Bildern und reproduzierbarem Audit-Test erfassen.
+- [ ] Restlokalisierung, kompakte Nebenansichten, native Startdarstellung und neue Analyseführung umsetzen.
+- [ ] Ergebnisfeedback offener Aktionen separat visuell abnehmen; produktive Cloud und physische Geräteprüfung getrennt durchführen.
+
+
 ## Aufgeräumte Hauptansichten und Ausrüstung · 26.10.2026
 
 Testfußzeile ausgeblendet, internes QA-Merkmal und Speicherwarnungen erhalten. Automatisches5s-/Transaktionsspeichern tatsächlich geprüft; manuelles Speichern bleibt optional. Kleine goldene Trainingstaste ohne Zeilenüberlauf, sechs geometrisch gleich große Sockel symmetrisch um den Originalkern, Zusatzsockel erst nach echtem Zugang, kompakter Detailzugang und kleine eindeutige Forschungskostenicons.111PlayMode/142EditMode/1937Vitest, Typecheck/Build bestanden; DE/EN320/390/430 mit leeren/belegten Sockeln selbst angesehen. [Prüfbericht, Bilder und weitere optische Prioritäten](unity-clean-ui.md). Im nativen Labor aufgedeckten Mira-Überlauf nach Reload zusätzlich reproduziert und korrigiert; aktuelle Textseite passt ohne Storyfortschritt. Keine Balance-/Saveänderung. Finaler Player7e9a0807 im iPhone16Pro-Simulator/iOS27 erfolgreich gebaut, installiert und gestartet;22Unity-/15Capacitor-Originale und normaler Save23 erhalten. Tatsächliche native Laboransicht mit vollständigem Mira-Hinweis angesehen; beide Code-CI-Prüfungen grün.
