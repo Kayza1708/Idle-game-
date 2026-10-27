@@ -61,3 +61,8 @@ Vier echte Unity-Aktionsclips mit tatsächlichem AudioListener-Mix (48 kHz Stere
 ## Zusätzlicher Befund aus dem nativen Erststart
 
 Der erste erfolgreiche native Export/Build aus `eb251e84` zeigte eine bereits vorhandene UI-Verknüpfung: Die Company-Erklärung stand bedingungslos vor der Namenswahl. Korrigiert: nur bei tatsächlich lokal freigeschalteter Company und bereits benannter KI anzeigen. Kein Freischalt-, Kosten-, Dialog- oder Savevertrag verändert. Alle neun gezielt betroffenen PlayMode-Fälle bestanden, einschließlich echtem Namens-/Tutorialablauf und Reload. Das Bild `before-native-company-in-intro.png` dokumentiert den gefundenen Fehler; es ist kein Nachherbild. Der Nutzer hat ausdrücklich zunächst den Simulator gewählt.
+
+
+## Materialanalyse-Player · 27.10.2026
+
+Aktuell tatsächlich installiert/gestartet: `9ee80e60769891d513aafc69d0b114abdfeed5cc`, Unity6000.3.26f1, ARM64 **iPhone16Pro-Simulator/iOS27.0**, Bundle `com.kayza1708.idleintelligence.unity`. Xcodeprojekt `Builds/iOS-Analysis-9ee80e60/Xcode/Unity-iPhone.xcodeproj`, erfolgreicher lokaler nativer Build und Start. Kein Web-/Capacitorstart.23Unity-/15Capacitor-Originale vor Installation und nach Installation vor Start bytegleich;15Capacitor-Dateien auch nach Unity-Start unverändert. Gültiger normaler Save24 mit `prepared=false`, Name/Inventar/Ausrüstung erhalten. Quellenprüfungen und tatsächliches natives Startbild in `unity-analysis-planning.md` dokumentiert; private Originale/Aufnahme bleiben im ignorierten Buildordner. Physisches Gerät/60fps/Touch nicht daraus ableiten.

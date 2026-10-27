@@ -238,3 +238,5 @@ Gemeinsame receipt-basierte Fusion/Herstellung, Truhen-/Gumball-/Shopdarstellung
 - [x] Unity23→24 und expliziter Web63→64-Vertrag unter Originalschutz; Importprüfungen für neue Queue/Fundfelder und Offline-/Reload-Referenzen. Prüfbericht: `unity-analysis-planning.md`.
 - [ ] Endliche Komponenten-/Mengenziele und automatische Auswahl geeigneter Analysen/Fokus: späterer beauftragter Ausbau, noch keine fertige Funktion.
 - [ ] Physische iPhone-Abnahme bleibt von Editor-/Simulatornachweisen getrennt.
+
+Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer ARM64-Unity-Simulatorplayer9ee80e60 installiert/gestartet, normaler Save24 ohne Testfinanzierung und23Unity-/15Capacitor-Originale geschützt. Physisches iPhone weiterhin separat. Details in `unity-analysis-planning.md`.

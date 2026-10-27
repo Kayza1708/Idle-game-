@@ -26,7 +26,7 @@ Der TypeScript-Queuepfad startet einen Folgeauftrag jetzt über die gleiche Zuga
 ## Prüfstand
 
 - Typecheck erfolgreich; vollständige148Vitest-Dateien mit1.944/1.944Tests,329,66s; `npm run build` erfolgreich, bestehender Hinweis auf große Web-Chunks.
-- Unity6000.3.26f1 importiert/kompiliert;147/147EditMode,124,35s; vollständiger erster PlayMode-Lauf113/113,529,90s. Abschlusslauf nach Ableitung aller UI-Platzzahlen aus den generierten Katalogen wird separat protokolliert.
+- Unity6000.3.26f1 importiert/kompiliert;147/147EditMode,124,35s; vollständiger erster PlayMode-Lauf113/113,529,90s. Finaler isolierter vollständiger PlayMode-Lauf auf Implementierungscommit9ee80e60:113/113,525,42s,27.10.2026. Alle UI-Platzzahlen stammen dabei aus den generierten Katalogen.
 - 235 tatsächliche TypeScript-Industrie-Referenzfälle, einschließlich neuer Analyseplanung/Wiederholung; keine reine Katalogzählung. Gezielte TS-Save-/Analyse-/Webtransfer-Prüfung35/35.
 - Reale uGUI-Aktionen starten, reihen ein, entfernen, speichern, laden und schließen die Aufträge einmal ab. Der normale Spielerstand wird dabei nicht benutzt. Verglichen werden auch neun Stunden Abwesenheit gegen das unveränderte Acht-Stunden-Limit sowie die Datenreserve.
 - Version23 mit laufender bezahlter12er-Analyse und Inventar bleibt erhalten; nach Migration immer noch12, Originaldatei und Backup bytegleich. Neue Analyse24. Manipulierte Webqueues/Fundbelege werden zurückgewiesen.
@@ -44,3 +44,19 @@ Visuelle Beurteilung: Originalgrafiken, drei klar getrennte Analysefamilien, ein
 - Physisches iPhone, 60-fps-Gerätenachweis und native Hintergrundprozesse sind eigenständige Abnahmen. Editor und Simulator dürfen dafür nicht als Gerätenachweis gelten.
 
 Web-Speichervertrag: Version 64 erweitert die erlaubten Queue-IDs um kurze/lange Rezepte. Version 63 bleibt als vollständiger v2-Spielstand erhalten und wird nicht durch den alten Prestige-Legacypfad geschickt. Expliziter Webimport behält weiterhin Original und normalisierten Datenstand; kein Zugriff auf bestehende Browser-/Capacitor-Saves bei normalem Unity-Start.
+
+
+## Schlussregression · 27.10.2026
+
+Ein zusätzlicher Lauf parallel zur nativen C++-Kompilierung und mit langen Wandzeit-Unterbrechungen meldete108/113: fünf zeitabhängige Aufnahme-/Zwischenposenassertions bei Truhen, Gumball und Forge. Der Deckel wurde bei der Diagnose geschlossen gemeldet. Die Ursache wird dadurch nicht als Produktfehler oder eindeutig als Energiesparfehler bewiesen. Nach bestätigtem geöffneten/entsperrten Mac und ohne parallelen Xcode-Build bestand der vollständige Lauf113/113 in525,42s; sämtliche fünf Assertions blieben unverändert. Produktionsanimationen, Testgrenzen und Belohnungen wurden dafür nicht geändert. Der unterbrochene Lauf bleibt in den Prüfdaten erhalten. Diese Testlaufzeiten sind kein FPS-/Gerätenachweis.
+
+GitHub-Codeprüfungen für9ee80e60 sind grün. Die zusätzlichen Savefelder sind der wesentliche Grund für die großen neu erzeugten Fixture-Diffs; keine unabhängigen C#-Balancewerte eingeführt.
+
+
+## Tatsächlich installierter nativer Player · 27.10.2026
+
+Implementierungscommit `9ee80e60769891d513aafc69d0b114abdfeed5cc` wurde mit Unity6000.3.26f1/iOS Build Support separat nach `Builds/iOS-Analysis-9ee80e60/Xcode` exportiert. Export und Xcode-Build erfolgreich mit Exit0; ARM64/iOS-Simulator, iPhone16Pro/iOS27.0, Hochformat. App `com.kayza1708.idleintelligence.unity` tatsächlich installiert und gestartet, eingebetteter Commit verifiziert. Keine Store-Veröffentlichung und kein physischer iPhone-Build.
+
+23Unity-/15Capacitor-Originaldateien frisch kopiert und vor Installation sowie nach Installation vor dem ersten Start vollständig hashgleich verglichen. Nach tatsächlichem Start: gültiger normaler Save24, atomare Prüfsumme korrekt, `prepared=false`, tatsächliches SavedAt fortgeschritten, Name/Inventar/Ausrüstung erhalten. Alle15Capacitor-Dateien auch nach dem Unity-Start unverändert. Originale, Provenienz und echte native1206×2622-Aufnahme bleiben privat im ignorierten Buildordner.
+
+Native Laboraufnahme selbst angesehen: korrekte Safe Area, vollständige bestehende Prestige-Mira-Seite, Original-Labor, Paketdrohne, goldene Trainingstaste und feste Navigation. Die neue Analyseoberfläche wurde in den isolierten echten Editor-Bildern und PlayMode-Aktionen geprüft; keine Behauptung nativer Touch-/60-fps-Abnahme. Sourcecommit oben ist der ausgeführte Code; der folgende Dokumentationscommit ändert ihn nicht.
