@@ -1,5 +1,9 @@
 # Nächste Schritte · 26.10.2026
 
+## Audit umsetzen · laufend
+
+Eigener Unity-Startablauf mit geschützter Recovery implementiert und mit3/3 PlayMode-Tests geprüft. Übersetzungen, kompakte Nebenansichten, Feedback/Tutorial und Cloud folgen im selben Auftrag; noch keine Gesamtfertigmeldung. [Arbeitsnachweis](unity-audit-followup.md).
+
 ## Bestandsaudit · 27.10.2026
 
 [Unity-Darstellung und Vollständigkeit](unity-presentation-audit-2026-10-27.md): 219 reale Seiten-/Sprachzustände, 36/36 eigene Item-Sprites und frische Mira-Namenswahl geprüft. Kein eigener nativer Ladescreen, keine konfigurierte produktive Company-Verbindung oder persönliche Cloud-Synchronisierung. Sieben Sprachen wählbar, aber konkrete deutsche Resttexte und englische Fallbacks bestehen. Modelle/Challenges/Seasons/Company benötigen eine konsequente kompakte Gestaltung; gemeinsame Styles allein reichen nicht. Keine Spielregeln, Saves oder Produktionsassets verändert.
