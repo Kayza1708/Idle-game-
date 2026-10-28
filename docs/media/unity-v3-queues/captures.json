@@ -1,5 +1,17 @@
 [
   {
+    "file": "live-pipeline-390.png",
+    "size": [
+      390,
+      846
+    ],
+    "bitDepth": 8,
+    "colorType": 2,
+    "hasAlphaChannel": false,
+    "scope": "live editor connection; isolated fresh save",
+    "sha256": "e2ebb20926f9acacaf09641672a3e140223212671708f0767e5a0bdd1774d411"
+  },
+  {
     "file": "research-de-320.png",
     "size": [
       320,
@@ -8,6 +20,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "c40d9e7ceee14b08a7564becd96f578a832c8f0fdff3ac9605a06a3691e5681b"
   },
   {
@@ -19,6 +32,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "145fccf7df448b0c7d61ba762b06928793a58488890190e8ff240ce418b69bb7"
   },
   {
@@ -30,6 +44,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "c31a5ae1b2bb7d3c1b379de4ccd0ac01b571bc050373a0f8dac3513810a35b84"
   },
   {
@@ -41,6 +56,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "5e0ca1b012783847bca97032c866314ec0c496af1afa0619006700727a8ee8e1"
   },
   {
@@ -52,6 +68,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "5fcf0bf0b8f6342603f6bef6d0bc98c8b5eeb34faa7dded4e61e982131ee4008"
   },
   {
@@ -63,6 +80,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "a6ba7cfa72b8be2590a1b5cb97545e96abe6fc27cf699758f3d4c17f3d05bb4f"
   },
   {
@@ -74,6 +92,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "cca7d08afb13052d7ed79c02aca985394dfa9824bd4d35902575e7c65acb622b"
   },
   {
@@ -85,6 +104,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "7e8d9f66caf97d83d56ca8b209d2220ab797a91af885e6a0970e0243e6eb0228"
   },
   {
@@ -96,6 +116,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "91599b0146b7f57a524e891e9da0e82e978bbfb33a81cecb3e1ceb9505e83deb"
   },
   {
@@ -107,6 +128,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "21a1513c9a260939ca2b46d75dd2f64342225f261cf06477a895ebc5c1e2de5a"
   },
   {
@@ -118,6 +140,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "930e86658b8463611bf781086e849d0fe05abac852d6e10ef9698985af3c540a"
   },
   {
@@ -129,6 +152,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "fe0306fa88f7e9ea40b1fedaaa176946589d522955bf0a6b235d8ab9434f9433"
   },
   {
@@ -140,6 +164,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "82ad25ee4bed4b1012ee1fd74092ffcb89b1a72ba04b63f426b05f58e3386110"
   },
   {
@@ -151,6 +176,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "50a3ef4adbfeea6cd587e3eae0b3437f725b75a1c5cef97a54453a869c3a62a9"
   },
   {
@@ -162,6 +188,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "b91c82dd205b568a0db22cbbf4d67398aa1d471d5a2d7e88b63f778b141febeb"
   },
   {
@@ -173,6 +200,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "a16730c051c12b3228dbd3cc315398b02af9ffb3499a7a0cff4409bfa6d1bf96"
   },
   {
@@ -184,6 +212,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "c8015d6800cd2d46480cf2c3f7c9c75c2bef6e9ed6889275f87643368d71b855"
   },
   {
@@ -195,6 +224,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "389dcbdb57779bc0a0380e7b06c387956e47fa462e08111bb9dafb7ff1d3c317"
   },
   {
@@ -206,6 +236,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "f3bcae31aabfcce76eb200bfb41c81eb139e01c07e83c441695f537b8f6cb68a"
   },
   {
@@ -217,6 +248,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "91382c86ff3c86d5d04be7a945eb26ee4636227d27210d21bed0908132dc0957"
   },
   {
@@ -228,6 +260,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "45d97bd4b3c98f4b01e08d67e3010000b0678d0731faf263701f96722c3be4e1"
   },
   {
@@ -239,6 +272,7 @@
     "bitDepth": 8,
     "colorType": 2,
     "hasAlphaChannel": false,
+    "scope": "prepared queue review",
     "sha256": "2831c2b1a9044d74699ae9e44fc971dda486941da80de8b40bf256df6a9c08bf"
   }
 ]

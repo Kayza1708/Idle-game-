@@ -7,3 +7,5 @@ Direkte Unity-Kamerabilder aus `PlannedQueueTests.ActualQueueViewsAtMobileSizesA
 DE/EN-Bilder wurden selbst angesehen. Korrigiert: zu lange Zahlungszeile, Umbruch von Modellarchitektur, Kartenhöhe, Reihenfolge der Trainingsüberschrift und Darstellung bezahlter Labore nach Kapazitätsverlust. Die horizontale Forschungsliste deutet weitere Karten an; sämtliche acht bleiben erreichbar. Tatsächliches Startziel, Originalicon, Position und kostenlose Planbedienung werden gemeinsam dargestellt.
 
 Offen: Budgetpause/Resetabsicht als eigene visuelle Zustände, Axiomentdeckung mit Mira und Erhaltungsvorschau, echte Touch-/Safe-Area-Geräteprüfung und der vollständige V3-Item-/Prestigeauftrag. Diese Bilder schließen ihn nicht ab.
+
+`live-pipeline-390.png` ist ein zusätzlicher unveränderter Live-Capture der neuen Editor-Anbindung: frischer, unfinanzierter isolierter Save, Mira-Namenswahl, tatsächliche Spielszene. Kein V3-Item- oder Axiomentdeckungsnachweis. Framefortschritt und Console: `docs/item-system-v3/art/live-editor-proof.json`. Die übrigen22Bilder bleiben der vorbereitete Queue-Teststand.

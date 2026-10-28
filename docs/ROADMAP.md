@@ -273,3 +273,5 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 - [ ] Vollständige V3-Save-, Grafik-, Animations- und Geräteabnahme bleibt offen. Normale Web64-/Unity24-Saves werden nicht teilweise umgestellt.
 
 - Geprüfter V3-Zwischenstand: Typecheck, Webbuild und Generatorvergleich bestanden; 1.989 Vitest, 188 EditMode und final 129 PlayMode grün. Aktive/passive unveränderte Baseline bis 30 Tage dokumentiert; 90 Tage, vollständige Migration und Nachherbalance offen. Prüfbericht: `docs/item-system-v3/implementation.md`.
+
+- Editor-Anbindung ergänzt und tatsächlich geprüft: offizielle Pipeline0.9.1-exp.1, Live-eval, Sprite-Capabilities, Console, isoliertes fortlaufendes Play und echte390×846-Aufnahme. Sechs neue Sprites sicher importiert; Katalog/Rezepte/Sockeldarstellung weiterhin offen. Details: `docs/item-system-v3/art/README.md`.
