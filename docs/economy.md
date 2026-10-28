@@ -765,3 +765,13 @@ F02 (weiterhin 100 INT) erweitert zusätzlich zur bestehenden Forschungsqueue di
 Automatische Wiederholung achtet auf die bestehende gemeinsame Datenreserve und die geschützten Trainings-/Forschungsbudgets. Datenkompression wird auch bei der automatischen Bezahlbarkeitsprüfung korrekt berücksichtigt. Das Offline-Limit bleibt unverändert: Basis acht Stunden, mit vorhandenen Verbesserungen maximal 24 Stunden. Eine 24-Stunden-Analyse wird bei acht Stunden Offlinekapazität nur acht Stunden weiterbearbeitet. Keine Hintergrundsimulation außerhalb der angerechneten Zeit, kein zusätzlicher Offlinebonus und keine Belohnung durch UI/Animation. Sechs kurze Hardwareanalysen ergeben ohne Zusatzboni 144 Komponenten bei sechs echten Abbuchungen von je 250 Daten.
 
 Komponenten-Zielsuche (z. B. gewünschter Bestand Graphen = 50) ist ausdrücklich ein späterer Ausbau; noch kein Zielplaner, keine erfundene garantierte Suche und keine bereits freigeschaltete Funktion.
+# Item-/Prestige-V3-Zielvertrag (28.10.2026, noch nicht aktiviert)
+
+Die expliziten neuen Designaufträge liegen unter `docs/item-system-v3/specification.txt` und `prestige-axiom-specification.txt`. Neue Zielkonstanten stehen ausschließlich in `BALANCE.itemV3` und `BALANCE.prestigeV3` in `src/economy.ts`; Unity erhält daraus generierte Daten. Vorhandene Knotenpreise und die Regeln regulärer 64/24-Saves wurden in diesem Zwischenstand nicht ersetzt. Keine automatisch aktivierte Teilmigration.
+
+Geprüfter erster Rechenteil: Item-P/Q, getrennte Basiswerte, ausgewählte Produktions-/Trainings-/Forschungs-/Erkenntniseffekte, die tatsächlichen Hardwareklassen, H06–H10/T07 sowie zukünftige INT-Gewichte und W10-Trennung. Gemeinsamer Graph und logarithmischer Distillationsadapter: `docs/item-system-v3/implementation.md`. Weitere Ereignisverbraucher, Rezepte, vollständige Migration und Kampagnenabnahme bleiben offen. Diese Zahlen sind die beauftragte neue Zielbalance und keine nachgewiesene fertige Monatsbalance.
+
+
+### Gemeinsamer V3-Verbraucherstand: Forschung (28.10.2026)
+
+Nur bei explizitem experimentellem V3-Zustand: F07 senkt die Datenkosten **neu** gestarteter Forschung auf 0,70; gespeicherte bezahlte Aufträge bleiben unverändert. F08 zählt zum Intervallbeginn belegte reguläre Slots (Basis und F01/F04/F08); gekaufte Slots profitieren vom Tempo, erhöhen den Faktor aber nicht. F10 multipliziert die Datenrate zusätzlich zu ×5 mit `(1+F/25)^0,5`, F aus dem gemeinsamen Forschungs-Snapshot. Native Integrationsgrenze und D05-Kopplung verwenden dieselbe V3-Integrationsbasis wie TS. Normale Saves bleiben auf ihren bisherigen Regeln.

@@ -33,8 +33,8 @@ namespace IdleIntelligence.Core
         }
         public static double Amplifier(GameState s)
         {
-            var w=s.Workshop;double f=Math.Pow(PrestigeRules.Has(s,"T10")?PrestigeRules.V("integrationPerfect"):ItemBalance.IntegrationBase,w.integration)*(w.activeModel=="K10"?ItemBalance.ModelItemBase+ItemBalance.ModelItemLevel*w.activeModelLevel:1);
-            for(int n=0;n<3;n++)if(w.nodes.Contains(new[]{"W05","W09","W10"}[n]))f*=ItemBalance.AmplifierNodes[n];return f*Math.Pow(PrestigeRules.E("A05item"),MetaRules.Level(s,"A05"))*MetaRules.Pow(s,"B03")*(w.activeModel=="K10"?1:MetaRules.Factor(s,"items"));
+            var w=s.Workshop;double f=Math.Pow(ItemSystemV3.Enabled(s)?ItemV3Balance.Get(PrestigeRules.Has(s,"T10")?"prestige.training.integrationPerfect":"prestige.training.integrationBase"):PrestigeRules.Has(s,"T10")?PrestigeRules.V("integrationPerfect"):ItemBalance.IntegrationBase,w.integration)*(w.activeModel=="K10"?ItemBalance.ModelItemBase+ItemBalance.ModelItemLevel*w.activeModelLevel:1);
+            for(int n=0;n<3;n++)if(w.nodes.Contains(new[]{"W05","W09","W10"}[n]))f*=ItemSystemV3.Enabled(s)?ItemV3Balance.Get(new[]{"prestige.items.W05","prestige.items.W09","prestige.items.W10"}[n]):ItemBalance.AmplifierNodes[n];return f*Math.Pow(PrestigeRules.E("A05item"),MetaRules.Level(s,"A05"))*Math.Pow(ItemSystemV3.Enabled(s)?ItemV3Balance.Get("prestige.axioms.B03"):PrestigeRules.E("B03"),MetaRules.Level(s,"B03"))*(w.activeModel=="K10"?1:MetaRules.Factor(s,"items"));
         }
         public static double ModelCore(GameState s)=>MetaRules.Core(s);
         public static double Effect(GameState s,ItemInstance i,string effect)
@@ -42,8 +42,8 @@ namespace IdleIntelligence.Core
             var d=Definition(i);int position=Array.IndexOf(d.Profiles[i.rarity],effect);if(position<0)return 0;
             return LegacyEffects.Factor(s,"item:"+effect).ToDouble()*ItemBalance.BaseEffect*ItemBalance.RarityFactors[i.rarity]*(1+ItemBalance.LevelStep*Math.Max(0,i.level-1))*i.legacyLevelFactor*(1+ItemBalance.ForgeStep*i.forge)*Amplifier(s)*d.Weights[position]*(position==1&&PrestigeBalance.SecondaryNodes.Any(id=>PrestigeRules.Has(s,id))?PrestigeRules.V("legacySecondaryMultiplier"):position==2&&PrestigeBalance.TertiaryNodes.Any(id=>PrestigeRules.Has(s,id))?PrestigeRules.V("legacyTertiaryMultiplier"):1);
         }
-        public static double Bonus(GameState s,string effect)=>Equipped(s).Sum(i=>Effect(s,i,effect))*(1+s.Workshop.nodes.Where(id=>PrestigeBalance.LegacyItemBonuses.ContainsKey(id)).Sum(id=>PrestigeBalance.LegacyItemBonuses[id]));
-        public static double Device(GameState s,string role,double at=-1)=>Equipped(s).Sum(i=>DeviceInstance(s,i,role,at));
+        public static double Bonus(GameState s,string effect)=>ItemSystemV3.Enabled(s)?0:Equipped(s).Sum(i=>Effect(s,i,effect))*(1+s.Workshop.nodes.Where(id=>PrestigeBalance.LegacyItemBonuses.ContainsKey(id)).Sum(id=>PrestigeBalance.LegacyItemBonuses[id]));
+        public static double Device(GameState s,string role,double at=-1)=>ItemSystemV3.Enabled(s)?0:Equipped(s).Sum(i=>DeviceInstance(s,i,role,at));
         public static double DeviceInstance(GameState s,ItemInstance i,string role,double at=-1)
         {
             var d=Definition(i);if(d.Role!=role)return 0;var w=s.Workshop;double now=at<0?s.SavedAt:at;int owned=s.Hardware.Count(n=>n>0);
@@ -53,7 +53,7 @@ namespace IdleIntelligence.Core
         }
         public static double Combination(GameState s,string id)
         {
-            var d=ItemBalance.Combinations.First(x=>x.Id==id);var equipped=Equipped(s).ToArray();bool active=d.Needs.All(required=>d.Items?equipped.Any(i=>i.type==required):equipped.Any(i=>Definition(i).Profiles[i.rarity].Contains(required)));
+            var d=ItemBalance.Combinations.First(x=>x.Id==id);if(ItemSystemV3.Enabled(s))return d.Multiplicative?1:0;var equipped=Equipped(s).ToArray();bool active=d.Needs.All(required=>d.Items?equipped.Any(i=>i.type==required):equipped.Any(i=>Definition(i).Profiles[i.rarity].Contains(required)));
             return active?d.Value:d.Multiplicative?1:0;
         }
         public static double SpecialScale(GameState s,ItemInstance i)

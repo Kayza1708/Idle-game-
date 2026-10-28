@@ -1,0 +1,809 @@
+{
+  "sourceHash": "239bfe38e916208a78b0a8c70472c434f84d8a133ee0469ce4c83ab95b6890e4",
+  "cases": [
+    {
+      "name": "training-remove-0",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 0,
+      "action": "remove",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "training-remove-1",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 1,
+      "action": "remove",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "training-remove-2",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 2,
+      "action": "remove",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": false
+    },
+    {
+      "name": "training-earlier-0",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 0,
+      "action": "earlier",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": false
+    },
+    {
+      "name": "training-earlier-1",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 1,
+      "action": "earlier",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "efficiency",
+            "level": 1
+          },
+          {
+            "track": "quality",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "training-earlier-2",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 2,
+      "action": "earlier",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": false
+    },
+    {
+      "name": "training-later-0",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 0,
+      "action": "later",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "efficiency",
+            "level": 1
+          },
+          {
+            "track": "quality",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "training-later-1",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 1,
+      "action": "later",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": false
+    },
+    {
+      "name": "training-later-2",
+      "training": true,
+      "signature": "quality:1|efficiency:1",
+      "index": 2,
+      "action": "later",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": false
+    },
+    {
+      "name": "research-remove-0",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 0,
+      "action": "remove",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "research-remove-1",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 1,
+      "action": "remove",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "research-remove-2",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 2,
+      "action": "remove",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "research-earlier-0",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 0,
+      "action": "earlier",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": false
+    },
+    {
+      "name": "research-earlier-1",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 1,
+      "action": "earlier",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "computeOptimization",
+          "dataGeneration",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "research-earlier-2",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 2,
+      "action": "earlier",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "userScaling",
+          "computeOptimization"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "research-later-0",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 0,
+      "action": "later",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "computeOptimization",
+          "dataGeneration",
+          "userScaling"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "research-later-1",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 1,
+      "action": "later",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "userScaling",
+          "computeOptimization"
+        ]
+      },
+      "changed": true
+    },
+    {
+      "name": "research-later-2",
+      "training": false,
+      "signature": "dataGeneration|computeOptimization|userScaling",
+      "index": 2,
+      "action": "later",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "efficiency",
+            "level": 1
+          }
+        ],
+        "research": [
+          "dataGeneration",
+          "computeOptimization",
+          "userScaling"
+        ]
+      },
+      "changed": false
+    },
+    {
+      "name": "dependent-earlier",
+      "training": true,
+      "signature": "quality:1|quality:2",
+      "index": 1,
+      "action": "earlier",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "quality",
+            "level": 2
+          }
+        ],
+        "research": []
+      },
+      "expected": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "quality",
+            "level": 2
+          }
+        ],
+        "research": []
+      },
+      "changed": false
+    },
+    {
+      "name": "dependent-remove",
+      "training": true,
+      "signature": "quality:1|quality:2",
+      "index": 0,
+      "action": "remove",
+      "before": {
+        "training": [
+          {
+            "track": "quality",
+            "level": 1
+          },
+          {
+            "track": "quality",
+            "level": 2
+          }
+        ],
+        "research": []
+      },
+      "expected": {
+        "training": [],
+        "research": []
+      },
+      "changed": true
+    }
+  ]
+}

@@ -262,3 +262,14 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 - [x] Alle 84 INT-/Axiombeschreibungen zentral übersetzt; localegerechte Detailzahlen, kontextbezogene Navigation und kleine echte Item-Claimportraits ergänzt.
 - [x] Unity Compile + 30 EditMode- und 4 PlayMode-Prüfungen bestanden (Bericht: `docs/unity-audit-followup.md`).
 - [ ] Gesamtsprachabnahme und komplette V3-Itemumstellung bleiben eigenständige offene Abnahmen.
+
+
+### 28.10.2026 – gemeinsamer Item-/Prestige-V3-Auftrag in Arbeit
+- [x] Beide vollständigen Auftragstexte und gemeinsamer Berechnungsgraph in `docs/item-system-v3/` gesichert; 60 INT-/24 Axiom-IDs und Preise erhalten.
+- [x] Reale Trainings-/Forschungspläne als gemeinsame grafische Queue: kostenlose Umordnung/Entfernung, veraltete Tickets gesperrt, Save/Reload und bezahlte auslaufende Labore erhalten. Tatsächliche DE/EN-Bilder bei 320/390/430 px liegen in `docs/media/unity-v3-queues/`.
+- [x] Experimentelle Produktions-/Prestigeverbraucher samt generierten TS-/C#-Referenzen und sicherer Schreibsperre für unvollständige V3-Zustände angelegt. Dies ist keine V3-Spielerfreigabe.
+- [x] Sechs neue originale Rastermotive und Prompts dokumentiert; kein Ersatz alter Grafiken. Einbindung und Darstellung noch offen.
+- [ ] Vollständige 42 Fähigkeiten/12 Kombinationen, bezahlte Ereignisverträge/Provenienz, restliche 60/24-Verbraucher, spoilerfreie Mira-Axiomentdeckung, atomare Migration und echte lange Nachherkampagnen abschließen.
+- [ ] Vollständige V3-Save-, Grafik-, Animations- und Geräteabnahme bleibt offen. Normale Web64-/Unity24-Saves werden nicht teilweise umgestellt.
+
+- Geprüfter V3-Zwischenstand: Typecheck, Webbuild und Generatorvergleich bestanden; 1.989 Vitest, 188 EditMode und final 129 PlayMode grün. Aktive/passive unveränderte Baseline bis 30 Tage dokumentiert; 90 Tage, vollständige Migration und Nachherbalance offen. Prüfbericht: `docs/item-system-v3/implementation.md`.

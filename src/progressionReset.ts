@@ -1,3 +1,6 @@
+import {usesItemV3,resetItemProductionV3} from './itemSystemV3';
+import {axiomDiscoveredV3} from './prestigeV3';
+import {itemAxiomFactorV3} from './itemSystemV3';
 import {deviceBonus} from './deviceEffects';
 import {closeBalanceRun} from './balanceHistory';
 import {
@@ -81,7 +84,7 @@ export function axiomNodeCost(s: GameState, id: AxiomNodeV2) {
       : null;
 }
 export function buyProgressionAxiom(s: GameState, id: AxiomNodeV2) {
-  if (s.retention.activeRun) return s;
+  if (s.retention.activeRun || usesItemV3(s) && !axiomDiscoveredV3(s)) return s;
   const cost = axiomNodeCost(s, id),
     available = axiomEconomyValue(s, "available");
   if (!cost || available.compare(cost) < 0) return s;
@@ -109,6 +112,7 @@ export function axiomThresholdV2(s: GameState) {
     .multiplyNumber(BALANCE.progression.axiomThreshold);
 }
 export function axiomRewardV2(s: GameState) {
+  if(usesItemV3(s)&&!axiomDiscoveredV3(s))return ScientificNumber.zero();
   if (s.retention.activeRun) return ScientificNumber.zero();
   if (
     !s.axiomResetCount &&
@@ -116,7 +120,7 @@ export function axiomRewardV2(s: GameState) {
   )
     return ScientificNumber.zero();
   const i = exactEconomyValue(s, "cycleINTEarned").add(newINTScientific(s));
-  return i.divide(axiomThresholdV2(s)).sqrt().multiplyNumber(1+deviceBonus(s,"axiomResonance")).floor();
+  return i.divide(axiomThresholdV2(s)).sqrt().multiplyNumber(1+deviceBonus(s,"axiomResonance")).multiply(itemAxiomFactorV3(s)).floor();
 }
 function releaseUnstarted(state: GameState) {
   let s = state;
@@ -202,7 +206,7 @@ export function normalResetV2(state: GameState) {
       lastTrack: null,
     },
   });
-  next = minimalRestart(rebuildKnown(choosePhaseModel(next, "reset")));
+  next = resetItemProductionV3(minimalRestart(rebuildKnown(choosePhaseModel(next, "reset"))),"prestige");
   next = recordPrestige(state, next, gain.toNumber(MAX_ECONOMY_VALUE));
   if (state.retention.activeRun) {
     const m = state.retention.activeRun.metrics!;
@@ -293,7 +297,7 @@ export function axiomResetV2(state: GameState) {
         },
       }),
     );
-  const measured = closeBalanceRun(state, reset, "axiom", newINTScientific(state).toJSON(), gain.toJSON());
+  const measured = closeBalanceRun(state, resetItemProductionV3(reset,"axiom"), "axiom", newINTScientific(state).toJSON(), gain.toJSON());
   return addEvent({...measured,telemetry:{...measured.telemetry,runStartedAt:s.savedAt}},
     "axiom-reset",
     s.savedAt,
@@ -305,6 +309,7 @@ export function progressionAgent(s: GameState) {
   const p = s.progression;
   const meta =
     p.axiomAuto &&
+    (!usesItemV3(s) || s.axiomResetCount > 0) &&
     axiomLevel(s, "B06") > 0 &&
     s.savedAt - p.axiomCycleStartedAt >=
       BALANCE.progression.formula.autoAxiomMinSeconds * 1000 &&
@@ -318,13 +323,16 @@ export function progressionAgent(s: GameState) {
     timeout =
       p.maximumRunSeconds !== null &&
       s.savedAt - s.runStartedAt >= p.maximumRunSeconds * 1000;
+  const relativeReady = !usesItemV3(s) || p.relative === null || ScientificNumber.fromJSON(p.lastPrestige).compare(S(0)) > 0;
   const ordinary =
+    relativeReady &&
     hasProgressionNode(s, "I06") &&
     s.prestigeAgent.enabled &&
     s.savedAt - s.runStartedAt >= s.prestigeAgent.minimumRunMinutes * 60000 &&
     reward.compare(min) >= 0 &&
     (timeout || reward.compare(relative) >= 0);
   if (!meta && !ordinary && !p.resetIntent) return s;
+  if (usesItemV3(s) && p.resetIntent && (p.resetIntent.kind === 'axiom' && s.axiomResetCount === 0 || p.resetIntent.kind === 'prestige' && !relativeReady)) return s;
   let intent = p.resetIntent;
   if (!intent)
     intent = {

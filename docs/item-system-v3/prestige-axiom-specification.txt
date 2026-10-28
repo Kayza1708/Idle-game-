@@ -1,0 +1,728 @@
+AUFTRAG: PRESTIGE-/AXIOM-REWORK MIT ITEM-V3-INTEGRATION,
+GRAFISCHEN WARTESCHLANGEN UND SPOILERFREIER AXIOMENTDECKUNG
+
+Setze die folgenden Änderungen im aktuellen Idle-Intelligence-Projekt
+vollständig um. Erstelle nicht nur einen Konzeptbericht.
+
+Lies die geltenden AGENTS.md und relevanten Unity-Skills.
+Prüfe aktuellen Branch, Remote-Stand, offene PRs und lokale Änderungen.
+Bestehende Arbeiten, Originalgrafiken und Spielstände erhalten.
+
+Der aktuelle Code ist die technische Ausgangsbasis. Der separat
+beauftragte Item-V3-Umbau ist die neue gemeinsame Zielarchitektur.
+Prüfe, welche Teile davon bereits implementiert sind. Erzeuge keine
+zweite parallele Itemberechnung.
+
+ZIEL
+Prestigekäufe sollen direkt spürbare Vorteile bringen und langfristig
+skalieren. Automationen, Items, Hardware, Training, Forschung,
+Geheimlabor und Axiome müssen zusammenpassen.
+
+Die bestehenden 60 INT-Knoten und 24 Axiomknoten samt IDs erhalten.
+Effekte und verständliche Beschreibungen aktualisieren.
+Produktionszahlen dürfen stark steigen; unbegrenzte Triggerketten,
+Materialvermehrung und rückwirkende Vergütungen sind ausgeschlossen.
+
+
+1. ZENTRALE BALANCE UND BERECHNUNGSVERTRÄGE
+
+- Alle Balancewerte in der geltenden zentralen Quelle pflegen.
+- Unity-Daten und Referenzfälle reproduzierbar daraus erzeugen.
+- Keine unabhängigen C#-/Inspector-Balancewerte hinzufügen.
+- Große Werte über das bestehende ScientificNumber-System berechnen.
+- Vorschau, Tooltip, Simulation und Transaktion verwenden dieselben
+  tatsächlichen Berechnungsfunktionen.
+- Alte Effekte bei Ersetzung entfernen; nicht zusätzlich weiter anwenden.
+- Preise zunächst unverändert lassen. Nach gemeinsamen Simulationen
+  gezielt nachbalancieren und begründen.
+
+Notation:
+H = aktuell besessene Hardwareeinheiten insgesamt.
+K = aktuell besessene unterschiedliche Hardwareklassen.
+J = Klassen mit mindestens 500 aktuell besessenen Geräten.
+M = aktuelle Summe Qualität + Effizienz + Integration.
+F = aktuelle Forschungslevel plus abgeschlossene Einmalforschungen,
+    ohne doppelte Zählung.
+B = erstmals bezahlte Hardware-Meilensteinkanten im aktuellen Run.
+G = Integrationslevel.
+L = Stufe eines Axiomknotens.
+A = insgesamt verdiente Axiome, einschließlich bereits ausgegebener.
+C = unverstärkte Hardwareproduktion relativ zu 1 Compute/s.
+
+C darf keine Item-, Modell-, Prestige-, Axiom- oder temporären Faktoren
+enthalten. Exponenten lesen niemals ihre eigene bereits verstärkte Ausgabe.
+
+
+2. INT-HARDWAREZWEIG
+
+H01–H05:
+Bestehende Autobuyergruppen erhalten.
+Gemeinsame Prioritäten, Mengenwahl, Budget und Reserve berücksichtigen.
+
+H06 – Parallelrechner:
+Globaler Compute-Faktor ×3 statt ×1,5.
+
+H07 – Hardware-Verbund:
+Compute ×(1 + H/100)^0,5.
+Alten harten ×2-Cap vollständig entfernen.
+
+H08 – Klassenvielfalt:
+Credits ×(1 + 0,5 × K).
+Alten ×1,75-Cap entfernen.
+Bei 15 Klassen ergibt das ×8,5.
+
+H09 – Industrielle KI:
+Compute ×5 ×1,15^J.
+Keine zusätzliche alte +30-%-Begrenzung anwenden.
+
+H10 – Planetare Parallelität:
+Compute ×10 ×max(1,C)^0,01.
+Mit der Singularitätslinse aus Item V3:
+Zusatzexponenten auf derselben unverstärkten Referenz addieren.
+Nicht gegenseitig potenzieren und keinen zweiten direkten
+Creditmultiplikator für denselben Effekt anwenden.
+
+
+3. INT-TRAININGSZWEIG
+
+T01 – Qualitätsarchitektur:
+Qualitäts-Revenuefaktor hoch 1,20 statt 1,10.
+
+T02 – Effizienzarchitektur:
+Effizienz-Kapazitätsfaktor hoch 1,20 statt 1,10.
+
+T03 – Trainingsplan:
+Zwei wartende Trainings zusätzlich zum aktiven Auftrag.
+Grafische Queue gemäß Abschnitt 10.
+
+T04 – Integration:
+Freischaltung erhalten.
+Itembasiswerte ×1,01^G statt bisheriger Basis 1,005.
+Grundlimit zunächst 200.
+
+T05 – Trainingsbeschleuniger:
+Trainingstempo ×3 statt ×1,5.
+
+T06 – Trainingsautopilot:
+Bestehende Ziellevel/Prioritäten erhalten.
+Zusätzlich Strategie „Qualität/Effizienz ausbalancieren“:
+Den Track mit niedrigerem Level bevorzugen; Gleichstand stabil behandeln.
+Integration nur nach explizitem Spielerziel automatisch trainieren.
+
+T07 – Lernkurve:
+Credits ×(1 + M/10)^0,75.
+Alten Maximalfaktor ×1,5 entfernen.
+
+T08 – Modellarchiv:
+Q/E/G und bezahltes aktives Training bei normalem Prestige erhalten.
+Keine neuen Abschlussereignisse aus erhaltenen Leveln erzeugen.
+Axiomreset folgt den regulären Rücksetzregeln.
+
+T09 – Hochleistungsinferenz:
+Revenue ×5.
+Trainingstempo zusätzlich ×2.
+
+T10 – Perfekte Integration:
+Integrationsbasis 1,015 statt 1,01.
+Enthält T04; keine doppelte Kaufmöglichkeit oder Wirkung.
+
+Integration wirkt ausschließlich auf allgemeine numerische Itembasiswerte.
+Keine automatische Verstärkung von P, Q, Itemexponenten,
+Triggerhäufigkeiten oder Materialrückgewinnung.
+
+
+4. INT-FORSCHUNGSZWEIG
+
+F01 – Parallellabor I:
+Zusätzlichen regulären Laborplatz erhalten.
+
+F02 – Forschungspuffer:
+Sechs Forschungswarteschlangenplätze und bestehende Analyseplanung.
+Grafisch darstellen; keine separate unübersichtliche Verwaltungsseite.
+
+F03 – Forschungswiederholung:
+Bestehende Wiederholung erhalten.
+Nächsten geplanten Auftrag und Pausengrund sichtbar machen.
+
+F04 – Parallellabor II:
+Zusätzlichen regulären Laborplatz erhalten.
+
+F05 – Forschungsdirektor:
+Drei Forschungsziele mit Zielleveln, Prioritäten und Budget erhalten.
+
+F06 – Forschungsbeschleuniger:
+Forschungstempo ×3 statt ×2.
+
+F07 – Datenkompression:
+Datenkosten neu gestarteter Forschung ×0,70 statt ×0,85.
+Keine rückwirkende Erstattung.
+
+F08 – Laborverbund:
+Bisherigen zusätzlichen Laborplatz erhalten.
+Zusätzlich Forschungstempo aller belegten Labore:
+×(1 + 0,25 × Anzahl belegter regulärer Labore).
+
+„Regulär“ bedeutet Basislabor und über F01/F04/F08 erhaltene Labore.
+Gekaufte Zusatzlabore profitieren vom Faktor, erhöhen aber dessen
+zählende Laboranzahl nicht.
+
+Aktivitätszustand zu Beginn des Simulationsintervalls verwenden.
+An Abschluss-/Startgrenzen neu berechnen.
+Bonusarbeit zählt nicht erneut als reguläre Arbeit.
+
+F09 – Autonome Wissenschaft:
+Forschungstempo ×3.
+Datenproduktion ×5.
+
+F10 – Wissenschaftliche Singularität:
+Forschungstempo ×5.
+Datenproduktion ×5 ×(1 + F/25)^0,5.
+
+
+5. INT-ITEM-/FERTIGUNGSZWEIG
+
+W01/W02/W06:
+Zusätzliche Prozessor-/Kern-/Forschungsslots erhalten.
+Dauerhafte Kapazität und bestehende Slotfamilien respektieren.
+
+W03 – Gezielte Materialanalyse:
+Seltene Mindestkomponente erhalten, aber nur aus bereits
+freigeschalteten zulässigen Materialfamilien.
+Nicht mehr pauschal gesperrtes Graphen einschleusen.
+
+Zusätzlich Menge der ausgewählten Fokusfamilie aus bezahlten Analysen ×2.
+Nur tatsächlich gewählte und verfügbare Fokusfamilie.
+Keine Verdopplung sämtlicher Materialien.
+
+W04 – Präzisionsfertigung:
+Material- und Datenkosten neuer Item-Level-Upgrades ×0,75.
+Je tatsächlich benötigtem Input nach bestehenden Regeln aufrunden.
+Keine Anwendung auf Fusion, Rezepterwerb oder andere nicht genannte Käufe.
+
+W05 – Item-Verstärker:
+Allgemeine Itembasiswerte ×2.
+
+W07 – Serienfertigung:
+Sofortige Herstellung ×3/×10/×100 als atomare Sammeltransaktion.
+Exakte Gesamtpreise und Ergebnisanzahl vor Kauf anzeigen.
+Kein halber Batch und keine teilweise Abbuchung bei Fehlschlag.
+Gemeinsame Ergebnisdarstellung statt 100 blockierender Einzelanimationen.
+
+Manuelle Mengenherstellung ist nicht dasselbe wie automatisches
+Herstellen bis Zielbestand durch einen Planer.
+
+W08 – Werkstattverbund:
+Bisherigen Geschwindigkeitsbonus ersetzen.
+Komponenten aus bezahlten Analysen und Hardware-Meilensteinpaketen ×2.
+Keine Wirkung auf Shop, Handel, Gutscheine, Zerlegung oder Rückgewinnung.
+Bruchteile korrekt speichern.
+
+W09 – Resonante Ausrüstung:
+Allgemeine Itembasiswerte zusätzlich ×3.
+
+W10 – Meisterhafte Ausrüstung:
+Allgemeine Itembasiswerte zusätzlich ×3.
+Für einzigartige Itemfähigkeiten:
+effektive Fähigkeitsstärke = 1,15 × P.
+Für exponentabhängige Teile:
+effektive Exponentstärke = 1,05 × Q.
+
+P/Q nicht global überschreiben:
+- Basiswerte verwenden reguläres P plus Basisverstärker.
+- Fähigkeitskoeffizienten verwenden effektives Fähigkeits-P.
+- Exponenten verwenden effektives Exponenten-Q.
+- Keine doppelte W10-Anwendung.
+- Sicherheitsobergrenzen wie Rückgewinnung/Arbeitsübertrag bleiben gültig.
+
+W05/W09/W10 zusammen: ×18 auf Basiswerte vor Integration
+und weiteren ausdrücklich passenden Verstärkern.
+
+Herstellung und Fusion bleiben sofortig.
+Keinen Timer einführen, um alten Geschwindigkeitsknoten einen Nutzen
+zu verschaffen.
+
+
+6. INT-TAP-/OVERDRIVEZWEIG
+
+S01 – Impulsverstärker:
+Tap-Grundbetrag nach bestehender logarithmischer Dämpfung ×2.
+
+S02 – Kritische Impulse I:
+Crit-Chance +10 Prozentpunkte.
+
+S03 – Kritische Leistung I:
+Crit-Multiplikator +1,5.
+Basis ×2 wird ×3,5.
+
+S04 – Overdrive-Verstärker I:
+Bestehenden Overdrive-Faktor ×2 erhalten.
+
+S05 – Kritische Impulse II:
+Weitere +10 Prozentpunkte Crit-Chance.
+
+S06 – Kritische Leistung II:
+Crit-Multiplikator zusätzlich ×2.
+Mit S03: ×7 vor weiteren expliziten Faktoren.
+
+S07 – Overdrive-Speicher:
+Dauer ×2 statt ×1,5.
+
+S08 – Impulsdurchbruch:
+Skala der tatsächlich vorhandenen gemeinsamen weichen
+Tapbegrenzung ×3.
+
+S09 – Overdrive-Verstärker II:
+Overdrive-Faktor zusätzlich ×2 statt ×1,5.
+Basis ×3 wird mit S04/S09 zu ×12.
+
+S10 – Singularitätsimpuls:
+Tap-Grundbetrag nach logarithmischer Dämpfung zusätzlich ×5.
+Skala der weichen Tapbegrenzung zusätzlich ×2.
+
+Berechnungsreihenfolge:
+- bestehender regulärer Tapgrundbetrag
+- logarithmische Dämpfung
+- S01/S10-Multiplikatoren
+- vorhandene Crit-/Comboeffekte in dokumentierter Reihenfolge
+- gemeinsame weiche Begrenzung mit veränderter Skala
+
+Falls vorhandene Crit-/Comboverträge eine andere Reihenfolge benötigen,
+deren Verhalten explizit abgleichen und eine einzige zentrale Formel
+festlegen. Keine doppelte Anwendung.
+
+Keine neue Tapdrossel erfinden.
+S08 an die bestehende Begrenzung anschließen und effektive Verbesserung
+in Vorschau und Tests nachweisen.
+
+Overdrive:
+- Dauer, Ladung, Burstfenster und Aktivierungsabstand gemeinsam prüfen.
+- Keine überlappenden gestapelten Aktivierungsfaktoren.
+- Kein neuer Start durch Reload oder Itemwechsel.
+- Verlängerte Dauer nicht still durch einen alten Timer abschneiden.
+- Tatsächliche Dauer und nächste Aktivierung verständlich anzeigen.
+
+
+7. INT-ERKENNTNIS-/PRESTIGEZWEIG
+
+I01 – Kommerzialisierung:
+Revenue ×3 statt ×1,25.
+
+I02 – Meilenstein-Erkenntnis:
+INT-Ertragsgewicht ×(1 + B/10)^0,5.
+B zählt echte erstmals bezahlte Meilensteinkanten im Run.
+
+I03 – Modell-Erkenntnis:
+INT-Ertragsgewicht ×(1 + M/25)^0,5.
+
+I04 – Forschungs-Erkenntnis:
+INT-Ertragsgewicht ×(1 + F/20)^0,5.
+
+I05 – INT-Rückkopplung:
+INT-Creditexponent +0,06 statt +0,04.
+
+I06 – Prestige-Agent:
+Bestehende Mindestgewinn-, Mindestlaufzeit- und Jobwarteverträge erhalten.
+Bezahlten minimalen Wiederanlauf erhalten.
+
+I07 – Relatives Prestige-Ziel:
+Relative Ziele und Zeitobergrenze erhalten.
+Vorschau zeigt aktuellen Gewinn, Referenzgewinn und Ziel.
+Kein Ersetzen eines fehlenden positiven Referenzgewinns durch null.
+
+I08 – Erkenntnisverdichter:
+Erkenntnisproduktion ×5 statt ×2.
+Vor Geheimlabor keine irreführende Behauptung sofortiger Produktion.
+
+I09 – Tiefe Erkenntnis:
+INT-Ertragsgewicht ×5 statt ×3.
+
+I10 – Rekursive Erkenntnis:
+INT-Gewinnexponent +0,03 statt +0,02.
+INT-Creditexponent zusätzlich +0,06 statt +0,04.
+
+Mit Basis 0,10 und I05/I10:
+maximaler INT-Creditexponent 0,22.
+
+Mit Basis 0,50, A01 maximal +0,20 und I10 +0,03:
+maximaler INT-Gewinnexponent 0,73.
+
+Alle alten Anzeige-/Validierungsgrenzen von 0,18 beziehungsweise 0,72
+an den neuen Vertrag anpassen.
+
+I02/I03/I04 sind jetzt eigene multiplikative Gewichtsfaktoren.
+Nicht zusätzlich die bisherigen additiven Beiträge anwenden.
+
+INT-Gewichtung beim Verdienen erfassen.
+Neue Knoten und Itemwechsel verändern nicht rückwirkend alte Einnahmen.
+Bereits beanspruchte Prestigeansprüche erhalten.
+
+
+8. AXIOME VOLLSTÄNDIG SPOILERFREI ENTDECKEN
+
+Vor der ersten Entdeckung darf im normalen Spiel nichts von
+Axiomen oder dem späteren Axiomreset stehen.
+
+Erste Entdeckung:
+- mindestens 1.000.000 tatsächlich beanspruchte/verdiente INT
+  im aktuellen Zyklus, nicht bloß Prestigevorschau
+- mindestens 30 unterschiedliche gültige INT-Knoten jemals gekauft
+
+Diese Bedingungen zentral prüfen.
+Nach Entdeckung dauerhaft gespeichert bekannt halten.
+
+Kein zusätzliches Vorgängerknotensystem innerhalb des INT-Baums.
+
+Vor Entdeckung verbergen:
+- Axiomtab, Axiomwährung, Axiomnetz und Resetknopf
+- Axiomknoten und Beschreibungen
+- Axiomitems und ihre noch nicht verfügbaren Rezepte
+- Achievements, Missionen, Shopangebote und Tooltips, die das System verraten
+- Tutorial-/Hilfetexte mit Axiomhinweisen
+- Formulierungen wie „bleibt über Axiom erhalten“
+
+Stattdessen beispielsweise „dauerhaft freigeschaltet“ schreiben.
+Keine leere gesperrte Karte namens „Axiome“.
+
+Spoilerschutz nicht nur über Textsuche lösen:
+Semantische Sichtbarkeitsregeln für betroffene Inhalte verwenden.
+Diagnose-/Entwicklerexporte dürfen intern vollständige Daten enthalten,
+aber keine normalen Spieleransichten damit befüllen.
+
+Freischaltung und Resetberechtigung auch in Domainfunktionen prüfen.
+Versteckte Buttons allein sind kein Schutz.
+
+Axiomgewinn:
+Erstes Mal nach Entdeckung und nur bei positivem tatsächlichem Gewinn.
+Den bestehenden Rewardnenner samt Wachstum gegen die neue
+1-Million-Entdeckung prüfen.
+Wenn der bestehende Nenner einen riesigen Erstgewinn verursacht,
+diesen gezielt gemeinsam mit den Simulationszielen neu balancieren.
+Keine Änderung nur an der UI-Schwelle, während die alte Formel
+unbeachtet bleibt.
+
+Migration:
+Bei bereits durchgeführtem Axiomreset oder rechtmäßig erworbenen
+Axiomknoten System als entdeckt erhalten.
+Keine Bestände oder Rechte wegnehmen.
+Bei bisher nur sichtbarer, aber ungenutzter Axiomansicht nicht automatisch
+einen abgeschlossenen Reset oder ein Tutorial erfinden.
+
+
+9. MIRA-TUTORIAL ZUR AXIOMENTDECKUNG
+
+Prüfe zuerst vorhandene Story-/Tutorialzustände.
+Bestehende passende Inhalte reparieren/ergänzen, keine zweite
+unabhängige Tutorialmaschine bauen.
+
+Ablauf:
+1. Entdeckungsereignis einmal speichern.
+2. Kurze dezente Laborreaktion, Mira-Portrait und Sprechblase.
+3. Erklärung: „Deine KI hat ein grundlegendes Prinzip entdeckt.“
+4. Erst jetzt Axiombezeichnung, Ressource und Zugang sichtbar machen.
+5. Erhaltungsvorschau zeigen:
+   Was bleibt? Was startet neu? Welcher Gewinn entsteht?
+6. Zum ersten sinnvollen Kauf beziehungsweise Resetfenster führen.
+7. Spieler bestätigt den ersten Reset ausdrücklich selbst.
+
+Kein automatischer erster Axiomreset.
+Keine Belohnung für bloßes Abspielen.
+Überspringen, Fortsetzen und erneutes Lesen über Hilfe ermöglichen.
+Neue Sitzung oder Reload darf Entdeckung/Tutorial nicht doppelt auslösen.
+
+Wenn bei Entdeckung ein anderer wichtiger Dialog aktiv ist:
+Ereignis speichern und geordnet später anzeigen.
+Keine überlagerten Mira-Fenster oder verlorene Tutorialzustände.
+
+Animierter Finger folgt echten UI-Zielen.
+Reduzierte Bewegung verwendet statischen Zeiger.
+
+
+10. GRAFISCHE FORSCHUNGS-/TRAININGSWARTESCHLANGEN
+
+Gemeinsame kompakte UI-Bausteine im bestehenden Pixel-Art-Stil verwenden.
+Keine rein technische Textliste und kein zusätzlicher Verwaltungsbildschirm.
+
+FORSCHUNG:
+- Oben reguläre Laborkarten.
+- Jede zeigt Icon, Forschungsname, Ziellevel, Fortschritt und Restzeit.
+- Darunter kompakte horizontale „Als Nächstes“-Leiste.
+- Wartende Karten zeigen Icon, Ziellevel und Position.
+- Antippen öffnet Details.
+- Entfernen und Umordnen klar erreichbar.
+- Umordnen auch ohne präzise Drag-Geste ermöglichen.
+- Bei vollem Labor fügt der normale Forschungsbutton der Queue hinzu.
+- Buttontext zeigt den tatsächlichen Vorgang.
+
+TRAINING:
+- Eine aktive Trainingskarte mit Fortschritt/Restzeit.
+- Darunter zwei kompakte geplante Karten nach Freischaltung.
+- Qualität/Effizienz/Integration über passende Icons unterscheiden.
+- Kein riesiger deaktivierter „Läuft“-Button.
+- Entfernen/Umordnen und Details wie bei Forschung.
+
+ZAHLUNGSSTATUS:
+Zuerst tatsächliche bestehenden Verträge prüfen.
+Eindeutig anzeigen:
+- bereits bezahlt/reserviert
+- oder Zahlung erst beim Start
+
+Keine fiktive Reservierung anzeigen.
+Abbruch-/Refundregeln unverändert korrekt abwickeln.
+Kein Auftrag darf beim Einreihen und nochmals beim Start bezahlt werden.
+
+AUTOMATION:
+Manuell geplante Aufträge haben standardmäßig Vorrang.
+Autopilot-/Direktorziele separat als Ziele darstellen, nicht als bereits
+bezahlte Aufträge.
+Pausengründe wie „Datenreserve“, „Ziel erreicht“, „Reset vorgemerkt“
+kurz verständlich zeigen.
+
+LEERE/GESPERRTE ZUSTÄNDE:
+Keine unnötig große leere Queuefläche.
+Nach Freischaltung kurze Mira-Erklärung.
+Vor Freischaltung höchstens passende INT-Freischaltinformation,
+keine Axiomspoiler.
+
+ANIMATION/PERFORMANCE:
+Nur aktiven Fortschritt aktualisieren.
+Kurzer Übergang bei Start/Abschluss.
+Keine ständige Neuerzeugung aller Karten pro Tick.
+Scrollposition und Auswahl bei Werteänderungen erhalten.
+
+Safe Areas und feste untere Navigation beachten.
+Primär iPhone-16-Pro-Layout, zusätzlich 320/390/430 px und DE/EN prüfen.
+
+
+11. AXIOMKNOTEN ANPASSEN
+
+Bestehende IDs und zunächst Kostenfolgen erhalten.
+
+A01 – Axiom-Resonanz:
++0,04 INT-Gewinnexponent je Stufe behalten.
+Neue Gesamtgrenze mit I10: 0,73.
+Keine pauschale zusätzliche ×100-Schicht einbauen.
+
+A02 – Ökonomisches Fundament:
+Bestehende Exponenten-/Tailstruktur behalten.
+Gemeinsam mit stärkeren INT-/Itemfaktoren simulieren.
+
+A03 – Permanente Parallelität:
+Bestehenden Faktor (1+A)^(0,05L) erhalten.
+Zusätzlich ×2^L Compute.
+
+A04 – Kritische Resonanz:
+Crit-Multiplikator ×1,35^L statt ×1,15^L.
+
+A05 – Integrationskapazität:
++25 Integrationslevel je Stufe erhalten.
+Vorhandener numerischer Itemzusatz wirkt nur auf Basiswerte.
+Keine P-/Q-/Exponentverstärkung.
+
+A06 – KI-Kernverstärkung:
+Gemeinsamer aktiver KI-Revenue-Bonusanteil ×1,20^L statt ×1,08^L.
+
+B01/B02:
+Erhaltung bereits erworbener Automationen erhalten.
+Nicht erworbene Gruppen nicht gratis vergeben.
+
+B03 – Ausrüstungsresonanz:
+Itembasiswerte ×1,5^L statt ×1,1^L.
+Nicht auf Itemexponenten anwenden.
+
+B04 – Wiederaufbauplan:
+Bekannte Knoten nach Reihenfolge/Preis kaufen.
+INT-Sparziel und nächste bezahlbare Aktion sichtbar machen.
+Kein Doppelabbuchen bereits erhaltener Knoten.
+
+B05 – Beschleunigter Wiederaufbau:
+Training unter gespeichertem Rekord ×3^L:
+×3 / ×9 / ×27.
+Keine geschenkten Abschlussereignisse.
+An Rekordgrenzen exakt aufteilen.
+
+B06 – Axiom-Agent:
+Bestehende Mindestgewinn-/Zeit-/Jobregeln erhalten.
+Erst nach manuellem ersten Axiomreset aktivierbar.
+
+C01 – Komponentenarchiv:
+Passive Komponentenmenge:
+Stufe 1 ×2, Stufe 2 ×3, Stufe 3 ×4.
+Nicht als zusätzliches +25-%-System parallel betreiben.
+
+C02/C03/C04:
+Analyse-, Fertigungs- und Fusionsplaner erhalten.
+Soforttransaktionen, Zielbestand, Reservierungen und Itemschutz beachten.
+
+C05 – Materialkreislauf:
+Bestehende Rückgewinnungsstufen mit dem Item-V3-Provenienzsystem
+vereinheitlichen. Kein zusätzlicher unabhängiger Refund.
+
+C06 – Industrielle Ausbeute:
+Bisherige Crafting-/Schmiedegeschwindigkeit ersetzen.
+Reguläre Syntheseausbeute:
+Stufe 1 ×1,5, Stufe 2 ×2, Stufe 3 ×3.
+Vorhandensein/Erreichbarkeit des Synthesesystems prüfen.
+Ohne freigeschaltete Synthese keine irreführende sofortige Wirkung anzeigen.
+
+D01 – Erkenntnisresonanz:
+Bestehenden Faktor (1+A)^(0,15L) erhalten.
+Zusätzlich ×2^L Erkenntnisproduktion.
+
+D02 – Effiziente KI-Entwicklung:
+KI-Level-Upgradepreise ×0,85^L statt ×0,90^L.
+Keine rückwirkenden Refunds, kein Rabatt auf neue Modellziehung.
+
+D03 – Erweiterte KI-Entwicklung:
+Bestehende Modelllevelgrenze erhalten.
+Revenue-Bonusanteil zusätzlich ×1,10^L statt ×1,02^L.
+
+D04 – KI-Einsatzplan:
+Ereignisbezogene Wahl eines aktiven Modells erhalten.
+Keine zwei aktiven Modelle.
+
+D05 – Modell-Item-Kopplung:
+Vorhandene klar begrenzte Kopplung über Integrationslevel erhalten.
+Keine Rekursion über bereits verstärkte Itemfähigkeiten.
+
+D06 – Vertiefte KI-Fähigkeiten:
+Erhalten. Alle zehn sekundären Modellfähigkeiten gegen neue
+Crit-, Overdrive-, Item-, Material- und Erkenntnisregeln prüfen.
+
+
+12. LOGIKLÜCKEN UND EXPLOITS VERBINDLICH SCHLIESSEN
+
+- H08-Altcaps und alte Beschreibung entfernen.
+- Itembasiswerte, P, Q und Kombinationsfaktoren strikt trennen.
+- H10/Linse lesen unverstärkte Produktion.
+- Erhaltene Trainings-/Forschungslevel erzeugen keine neuen
+  Abschlussbelohnungen.
+- Sofortaktionen nicht künstlich verzögern.
+- Manuelle Batches und automatische Zielbestandsplanung unterscheiden.
+- Keine gesperrten Materialien durch Mindestfundgarantie einschleusen.
+- Queuezahlungen und Reservierungen eindeutig speichern.
+- Manuelle Queue nicht durch endlose Automation verhungern lassen.
+- Resetabsicht wartet nur auf beim Vormerken ausgewählte laufende Jobs.
+  Keine neu gestarteten Jobs hinzufügen.
+- Overdrive-/Burst-/Offlineintervalle an Ereignisgrenzen teilen.
+- Materialrückgewinnung aus tatsächlich bezahlten Inputs.
+- Gemeinsamen Rückgewinnungsrahmen aus Item V3 beachten.
+- Keine rückwirkende INT-Gewichtung.
+- Vorschaugewinn nicht als bereits verdiente INT für Entdeckung zählen.
+- Axiomfreischaltung zentral auch außerhalb der UI prüfen.
+- Unbekannte/doppelte Forschungslevel nicht mehrfach zählen.
+- Bereits erhaltene Knoten beim Wiederaufbau nicht erneut bezahlen.
+- Keine Domainfortschritte von Animation, Framerate oder Sichtbarkeit abhängig.
+- No-items-Challenges deaktivieren alle entsprechenden Itemeffekte.
+- Hauptspiel-/Challengezustände isoliert halten.
+- Handels-/Shop-/Refundbestände nicht als reguläre Produktion mitzählen.
+- Alte Timerverträge bei Migration sicher erhalten/abschließen;
+  keine bereits bezahlten Ressourcen verlieren.
+
+Speichermigration:
+Neue Version mit Originalkopie und atomarem Schreiben.
+Bestehende Knotenrechte, Items und Automationskonfigurationen erhalten.
+Keine pauschalen Refunds bei stärkeren Effekten.
+Ersetzte Knoten im Änderungsdialog verständlich erklären.
+
+
+13. GEMEINSAME SIMULATION MIT ITEM V3
+
+Dieser Umbau ist nicht fertig, wenn nur Katalogtexte geändert wurden.
+
+Zunächst Baseline des aktuellen Spiels sichern.
+Dann neue Knoten gemeinsam mit den tatsächlich implementierten
+Item-V3-Verbrauchern simulieren.
+
+Falls Item V3 noch nicht vollständig vorhanden:
+Abhängigkeiten explizit erfassen und die gemeinsamen Berechnungsverträge
+vollenden. Keine Platzhalter als vollständig integriertes System ausgeben.
+
+Profile:
+- ohne bezahlte Inhalte
+- aktiver Tapspieler
+- passiver Rückkehrspieler
+- Hardware-/Creditbuild
+- Trainingsbuild
+- Forschungs-/Materialbuild
+- Geheimlaborbuild
+- Axiombuild
+
+Zeitpunkte:
+15/30/60 Minuten, 6/24 Stunden, 3/7/30/90 Tage.
+
+Erfassen:
+- erster Prestige
+- wichtige INT-Käufe
+- erste zusätzlichen Slots
+- erste vollständige Itemkombinationen
+- Geheimlabor
+- Modellfortschritt
+- Axiomentdeckung
+- erster und weitere Axiomresets
+- Zeit bis Wiederaufbau alter Fortschritte
+- längste Phase ohne sinnvolle bezahlbare Aktion
+- stärkste Produktionsfaktoren und Buildunterschiede
+
+Besonders prüfen:
+- Werden ganze Systeme unbemerkt übersprungen?
+- Ist H08 stark, ohne jeden anderen Creditkauf sinnlos zu machen?
+- Bleibt Axiomreset ein deutlicher Fortschritt?
+- Bringen Training/Forschung neben Hardware noch echte Vorteile?
+- Werden Materialengpässe durch starkes Einkommen unverhältnismäßig?
+- Ist der erste Axiomgewinn nach neuer Entdeckungsschwelle plausibel?
+- Sind langlaufende exponentielle Faktoren numerisch stabil?
+
+Nicht pauschal alle Preise erhöhen, um stärkere Knoten wieder aufzuheben.
+Gezielte Korrekturen zentral dokumentieren.
+Keine behauptete Monatsbalance ohne entsprechende Simulation.
+
+
+14. TESTS UND VISUELLE ABNAHME
+
+Tests an tatsächlichen Verbrauchern:
+- neue Formeln und entfernte Caps
+- Einzelknoten und wichtige Kombinationen
+- Itemverstärkertrennung
+- große ScientificNumber-Werte
+- Kosten/Refunds/Migration
+- Queue einreihen/starten/umordnen/abbrechen
+- Automation und Resetabsicht
+- Online-/Offlinegrenzen
+- Spoilerfreiheit vor Entdeckung
+- Entdeckung genau einmal
+- Mira Skip/Resume/Reload
+- erster manueller Axiomreset
+- bestehende fortgeschrittene Saves
+
+Visuell tatsächlich in Unity prüfen:
+- Labor/INT-Netz mit aktuellen Effekten
+- Training mit aktivem und zwei wartenden Aufträgen
+- Forschung mit mehreren belegten Laboren und voller Queue
+- Materialmangel, Budgetpause und vorgemerkter Reset
+- Axiomzugänge vor Entdeckung vollständig verborgen
+- Mira-Entdeckung, Erhaltungsvorschau und neuer Axiomzugang
+- DE/EN, iPhone-16-Pro-Layout, 320/390/430 px
+- keine verdeckten Buttons, Textüberläufe oder doppelten UI-Elemente
+
+Compile, passende EditMode-/PlayMode-Suiten sowie erforderliche
+Typecheck-/Build-/Referenzprüfungen ausführen.
+Funktionale Ergebnisse und visuelle Beurteilung getrennt berichten.
+
+
+15. LIEFERUNG
+
+- Vollständiger finaler Katalog aller INT-/Axiomknoten mit Preisen/Effekten.
+- Dokumentierte Änderungen gegenüber bisherigem Stand.
+- Gemeinsamer Item-/Prestige-Berechnungsvertrag.
+- Baseline-/Nachher-Simulationen und tatsächliche Grenzen.
+- Save-Migrationsnachweis.
+- Echte Unity-Bilder der beiden grafischen Warteschlangen.
+- Echter Clip der Axiomentdeckung mit Mira und Erhaltungsvorschau.
+- Nachweis, dass vor Entdeckung keine Axiomhinweise sichtbar sind.
+- Geschlossene Logiklücken und ausdrücklich offene Punkte.
+- ROADMAP/NEXT_STEPS/visuellen Backlog aktualisieren.
+- Committen, pushen und passenden Review-PR erstellen/aktualisieren.
+- Nicht selbst mergen oder veröffentlichen.
+
+Vorhandene Spielansichten und echte Aktionen müssen die Änderungen nutzen.
+Separat aufgebaute Testoberflächen oder bloße Katalogeinträge reichen nicht.

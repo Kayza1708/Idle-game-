@@ -196,3 +196,11 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 
 ### Aktueller Auftrag: Item-System V3 (28.10.2026)
 Verbindliche Spezifikation und offener Abnahmegraph: `docs/item-system-v3/specification.txt` und `docs/item-system-v3/implementation.md`. Vorherige Lokalisierungs-/Feedbackänderungen getrennt sichern. Bestehende Saves noch nicht auf teilweise implementierte V3-Regeln umstellen.
+
+
+### Gemeinsamer Prestige-/Item-V3-Vertrag
+Der zusätzliche Auftrag steht unverändert in `docs/item-system-v3/prestige-axiom-specification.txt`. Fortschritt und konkrete offene Verbraucher: `docs/item-system-v3/implementation.md` und `contracts.md`. Grafische unbezahlte Queues mit echter Planbedienung sind umgesetzt; vorhandene F02-/Operationskapazität bleibt acht. Experimentell sind neue Produktions-/INT-Faktoren, F07/F08/F10, Entdeckungs-/Automationssperren und D/E/T-Produktionsbuchung angebunden. Nicht mit einer abgeschlossenen Spielermigration verwechseln.
+
+Weiter: vollständige Auftragsursachen/Start-Snapshots, Komponentenproduzenten K, Itemprovenienz und Fraktionskonten; alle übrigen Knotenverbraucher, expliziter Archiv-Erwerbsvertrag, sechs Rezepte und Spriteimport; danach gemeinsame atomare Migration, Details/Sprachen, spoilerfreie Mira-Führung und erster manueller Axiomreset in echter UI. Arbiträre externe Zeitsplits/numerische Integration und lange Nachher-/Loadoutkampagnen gesondert abnehmen. Baseline läuft auf dem vor Änderungen geladenen Code weiter; nachgewiesen aktiv bis 30 Tage/46 Prestiges, kein abgeschlossener 90-Tage-/Passivbefund.
+
+Geprüfte Grundlage: 1.989 Vitest, 188 EditMode und final129PlayMode; alle Generatoren synchron. Passivbaseline inzwischen 30 Tage/16 Prestiges. Der folgende Arbeitsschritt ist die vollständige Ereignis-/Erwerbs-/Migrationsanbindung; nicht V3 als abgeschlossen markieren.
