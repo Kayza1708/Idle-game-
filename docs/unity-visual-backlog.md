@@ -188,3 +188,7 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 - Neue Analyseübersicht nutzt Original-Komponentengrafiken und gemeinsame Buttons, keine zusätzliche Effekt-/Grafikrunde. Alle20 Bestandstypen bleiben gemeinsam sichtbar.
 - Später: Wiederholungsstatus um besonders knappe explizite Wartegründe (geschützte Datenreserve/Finanzierung) ergänzen; Regeln und Reserveprüfung bestehen bereits. Endliche Komponenten-/Mengenziele sind ein eigener noch offener Funktionsabschnitt.
 - Die gesamte Analyseplanung plus sechs Queueeinträge braucht auf kleinen Displays weiterhin Scrollen; keine Behauptung, dass Bestand, alle Verträge und alle Wartenden gleichzeitig auf einen Bildschirm passen.
+
+## Audit-Fortsetzung · 28.10.2026
+
+Eigene Bootszene, kompakte Nebenansichten, 41 vollständig übersetzte Mira-Dialogkörper, 84 Knotentitel und kurze gespeicherte Abschlussbelege umgesetzt; siehe `unity-audit-followup.md`. Inhaltliche Restübersetzungen, Kontextmarkierung der Navigation und endgültige Geräte-/Kaltstartabnahme bleiben offen. Keine pauschale Kennzeichnung aller Sprachen oder Cloud als fertig.

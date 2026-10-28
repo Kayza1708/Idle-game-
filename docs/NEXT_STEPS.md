@@ -189,3 +189,7 @@ Neue Analysen liefern doppelte Basismengen. Schmiede → Komponenten enthält di
 Als Nächstes: echte Zielplanung „Komponente X bis Bestand Y“, geeignete Analyse/Fokus wählen, endliches Stopkriterium, Reserven und Online/Offline/Reload-Parität. Noch nicht als vorhandene Funktion ausgeben. Ebenfalls spätere UX: expliziter Wartegrund für geschützte Datenreserve. Physische Geräte-/Native-Integrationsabnahme separat fortführen.
 
 Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer ARM64-Unity-Simulatorplayer9ee80e60 installiert/gestartet, normaler Save24 ohne Testfinanzierung und23Unity-/15Capacitor-Originale geschützt. Physisches iPhone weiterhin separat. Details in `unity-analysis-planning.md`.
+
+- Audit-Fortsetzung: gemeinsame kompakte Ansichten, 41 siebensprachige Mira-Dialoge und gespeicherte Analysehilfen umgesetzt; gezielter PlayMode 5/5 inklusive 219 Ansichten. Vollregression/Restinhalte/Cloudkonten/Playerabnahme laufen weiter: siehe `unity-audit-followup.md`.
+
+- 28.10.: EditMode170/170 und gezielter UI-/Feedbacklauf9/9; echter Einführungstrainings-Mitschnitt mit Spielton. iCloud-Backup-Grundlage ohne simulierte Erfolge; Entwicklerkonten fehlen. Weitere Inhalts-/Kontextkorrekturen und finale Vollregression laufen. Details: `unity-audit-followup.md`, `unity-platform-cloud.md`.

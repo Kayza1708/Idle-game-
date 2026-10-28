@@ -1,0 +1,10 @@
+{
+  "scope": "Actual Unity Editor PlayMode render; isolated fresh save; no time or resource injection in recording",
+  "video": "training-completion.mp4",
+  "frames": 788,
+  "elapsedSeconds": 28.96626327,
+  "maxFrameGapSeconds": 0.14615060000000213,
+  "audio": "sampleRate=48000 channels=2 samples=2781184 peak=0.1560596",
+  "videoSha256": "8ed77dd8c32ffb44f5ad3ae70256398ba6a06af2dd7ab28def0e53fbb8227ef7",
+  "physicalDeviceTest": false
+}

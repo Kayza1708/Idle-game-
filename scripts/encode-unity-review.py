@@ -5,8 +5,18 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import subprocess
 import sys
-import imageio_ffmpeg
-source, output = [Path(arg).resolve() for arg in sys.argv[1:3]]
+import argparse
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('source', type=Path)
+parser.add_argument('output', type=Path)
+parser.add_argument('--ffmpeg', type=Path)
+args = parser.parse_args()
+source, output = args.source.resolve(), args.output.resolve()
+if args.ffmpeg:
+    ffmpeg = str(args.ffmpeg.resolve())
+else:
+    import imageio_ffmpeg
+    ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
 times = [float(line) for line in (source / 'times.txt').read_text().splitlines()]
 assert len(times) > 1 and all(b > a for a, b in zip(times, times[1:]))
 output.parent.mkdir(parents=True, exist_ok=True)
@@ -19,5 +29,5 @@ with TemporaryDirectory() as directory:
         duration = times[index + 1] - time if index + 1 < len(times) else times[-1] - times[-2]
         lines.extend(["file '" + str(frame).replace("'", "'\\''") + "'", 'option framerate 1000', f'duration {duration:.9f}'])
     manifest.write_text('\n'.join(lines) + '\n')
-    subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-y', '-f', 'concat', '-safe', '0', '-i', str(manifest), '-fps_mode', 'vfr', '-c:v', 'libx264', '-crf', '20', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(output)], check=True)
+    subprocess.run([ffmpeg, '-y', '-f', 'concat', '-safe', '0', '-i', str(manifest), '-fps_mode', 'vfr', '-c:v', 'libx264', '-crf', '20', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', str(output)], check=True)
 print(f'{len(times)} real Unity frames; {times[-1] - times[0]:.3f} elapsed seconds')

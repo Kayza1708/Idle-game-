@@ -17,6 +17,9 @@ namespace IdleIntelligence.Runtime
         Canvas canvas;
         IEnumerator Start()
         {
+#if UNITY_EDITOR
+            if(GameRuntime.SavePathOverride==null&&System.Array.IndexOf(System.Environment.GetCommandLineArgs(),"-runTests")>=0){Destroy(gameObject);yield break;}
+#endif
             DontDestroyOnLoad(gameObject);
             language = Language(Application.systemLanguage);
             canvas = new GameObject("StartupCanvas", typeof(RectTransform), typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster)).GetComponent<Canvas>();

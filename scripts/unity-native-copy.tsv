@@ -37,8 +37,8 @@ Gelernt · auswählen|Learned · select|Aprendido · elegir|Appris · choisir|Ap
 Kosten je Item|Cost per item|Coste por objeto|Coût par objet|Custo por item|Costo per oggetto|Koszt za przedmiot
 Für Fusion auswählen|Select for fusion|Elegir para fusión|Choisir pour la fusion|Selecionar para fusão|Scegli per fusione|Wybierz do fuzji
 Anlegen|Equip|Equipar|Équiper|Equipar|Equipaggia|Załóż
-Primär|Primary|Principal|Principal|Principal|Primario|Podstawowy
-Zweite Fähigkeit aktiv|Second ability active|Segunda habilidad activa|Deuxième capacité active|Segunda habilidade ativa|Seconda abilità attiva|Druga zdolność aktywna
+Primär|Primary|Principal|Principal|Principal|Primario|Główny
+Zweite Fähigkeit aktiv|Secondary ability active|Habilidad secundaria activa|Capacité secondaire active|Habilidade secundária ativa|Abilità secondaria attiva|Aktywna zdolność dodatkowa
 Level erhöhen|Upgrade level|Mejorar nivel|Améliorer le niveau|Aumentar nível|Aumenta livello|Ulepsz poziom
 Zufällige KI entwickeln|Develop random AI|Desarrollar IA aleatoria|Développer une IA aléatoire|Desenvolver IA aleatória|Sviluppa IA casuale|Opracuj losową SI
 Forschung abwarten|Wait for research|Esperar investigación|Attendre la recherche|Aguardar pesquisa|Attendi ricerca|Czekaj na badania
@@ -55,7 +55,7 @@ KI-Name · einmalig wählen|AI name · choose once|Nombre de IA · elegir una ve
 Spielernamen ändern|Change player name|Cambiar nombre del jugador|Changer le nom du joueur|Alterar nome do jogador|Cambia nome giocatore|Zmień nazwę gracza
 Noch keine Season-Artefakte erhalten.|No season artifacts yet.|Aún no hay artefactos de temporada.|Aucun artefact de saison.|Nenhum artefato de temporada ainda.|Ancora nessun artefatto stagionale.|Brak artefaktów sezonowych.
 Premium-Berechtigung für diese Season vorhanden.|Premium entitlement for this season owned.|Tienes acceso premium para esta temporada.|Droit premium possédé pour cette saison.|Direito premium desta temporada adquirido.|Diritto premium per questa stagione posseduto.|Posiadasz dostęp premium do tego sezonu.
-Keine ungeöffneten Truhen.|No unopened chests.|No hay cofres sin abrir.|Aucun coffre non ouvert.|Nenhum baú fechado.|Nessun forziere da aprire.|Brak nieotwartych skrzyń.
+Keine ungeöffneten Truhen.|No unopened chests.|No hay cofres sin abrir.|Aucun coffre à ouvrir.|Nenhum baú fechado.|Nessun forziere da aprire.|Brak nieotwartych skrzyń.
 Zuletzt geöffnet|Last opened|Último abierto|Dernière ouverture|Último aberto|Ultima apertura|Ostatnio otwarto
 Täglich|Daily|Diario|Quotidien|Diário|Giornaliero|Codziennie
 Wöchentlich|Weekly|Semanal|Hebdomadaire|Semanal|Settimanale|Co tydzień
@@ -125,10 +125,10 @@ Reguläre Daten|Regular data|Datos regulares|Données régulières|Dados regular
 Freie Truhe noch nicht bereit|Free chest not ready yet|Cofre gratis aún no disponible|Coffre gratuit pas encore prêt|Baú grátis ainda não disponível|Forziere gratuito non ancora pronto|Darmowa skrzynia nie jest jeszcze gotowa
 Videoauftrag abgebrochen. Keine Belohnung.|Video request cancelled. No reward.|Solicitud de vídeo cancelada. Sin recompensa.|Demande de vidéo annulée. Aucune récompense.|Solicitação de vídeo cancelada. Sem recompensa.|Richiesta video annullata. Nessuna ricompensa.|Żądanie filmu anulowane. Brak nagrody.
 Video fehlgeschlagen. Keine Belohnung.|Video failed. No reward.|El vídeo falló. Sin recompensa.|Échec de la vidéo. Aucune récompense.|Vídeo falhou. Sem recompensa.|Video non riuscito. Nessuna ricompensa.|Film nie powiódł się. Brak nagrody.
-Gleiche Chance je unbekanntem Modell · keine Duplikate · genau ein Modell aktiv|Equal chance per unknown model · no duplicates · exactly one active model|Igual probabilidad por modelo desconocido · sin duplicados · un modelo activo|Chance égale par modèle inconnu · sans doublons · un seul modèle actif|Chance igual por modelo desconhecido · sem duplicatas · um modelo ativo|Stessa probabilità per modello sconosciuto · nessun duplicato · un solo modello attivo|Równa szansa dla nieznanego modelu · bez duplikatów · jeden aktywny model
+Gleiche Chance je unbekanntem Modell · keine Duplikate · genau ein Modell aktiv|Equal chance per unknown model · no duplicates · exactly one active model|Misma probabilidad por modelo desconocido · sin duplicados · un modelo activo|Même chance pour chaque modèle inconnu · aucun doublon · un seul modèle actif|Mesma chance por modelo desconhecido · sem duplicatas · um modelo ativo|Stessa probabilità per ogni modello sconosciuto · nessun duplicato · un modello attivo|Równa szansa każdego nieznanego modelu · bez duplikatów · jeden aktywny model
 Am Ende ergänzen|Append at end|Añadir al final|Ajouter à la fin|Adicionar ao final|Aggiungi alla fine|Dodaj na końcu
 Keine Auswahl|No selection|Sin selección|Aucune sélection|Nenhuma seleção|Nessuna selezione|Brak wyboru
-UTC-Perioden · Fortschritt bleibt bei Prestige erhalten|UTC periods · progress survives prestige|Períodos UTC · el progreso se conserva con prestigio|Périodes UTC · progression conservée au prestige|Períodos UTC · progresso mantido no prestígio|Periodi UTC · progressi conservati al prestigio|Okresy UTC · postęp zachowany po prestiżu
+UTC-Perioden · Fortschritt bleibt bei Prestige erhalten|UTC periods · progress persists through prestige|Períodos UTC · el progreso persiste tras prestigio|Périodes UTC · progression conservée au prestige|Períodos UTC · progresso mantido no prestígio|Periodi UTC · progressi conservati al prestigio|Okresy UTC · postęp zachowany po prestiżu
 Keine offenen Bonusboxen.|No pending bonus boxes.|No hay cajas de bonificación pendientes.|Aucune boîte bonus en attente.|Nenhuma caixa bônus pendente.|Nessuna scatola bonus in attesa.|Brak oczekujących pudełek bonusowych.
 Nicht gespeichert. Storetransaktion bleibt unbestätigt.|Not saved. Store transaction remains unconfirmed.|No guardado. Transacción de tienda sin confirmar.|Non enregistré. Transaction boutique non confirmée.|Não salvo. Transação da loja não confirmada.|Non salvato. Transazione negozio non confermata.|Nie zapisano. Transakcja sklepu niepotwierdzona.
 Lauf|Run|Partida|Parcours|Execução|Partita|Przebieg
@@ -175,7 +175,7 @@ Store oder Kaufprüfung nicht verfügbar. Keine Gutschrift und kein abgeschlosse
 Jede erreichte Stufe kann einmal abgeholt werden. AP erhöhen die Einnahmen nach der bestehenden Formel; ein Claim wird sofort gespeichert.|Each reached tier can be claimed once. AP increase income using the existing formula; a claim is saved immediately.|Cada nivel alcanzado se recoge una vez. AP aumenta ingresos según la fórmula existente; se guarda inmediatamente.|Chaque palier atteint se réclame une fois. Les AP augmentent les revenus selon la formule existante ; réclamation enregistrée immédiatement.|Cada nível alcançado pode ser resgatado uma vez. AP aumenta renda pela fórmula existente; resgate salvo imediatamente.|Ogni livello raggiunto si riscatta una volta. AP aumenta i ricavi con la formula esistente; riscatto salvato subito.|Każdy osiągnięty próg można odebrać raz. AP zwiększa dochód według obecnego wzoru; odbiór zapisuje się natychmiast.
 XP durch rechtzeitiges Abholen von Missionen. Neue Seasons beginnen ohne alte XP.|XP comes from claiming missions on time. New seasons start without old XP.|La XP viene de recoger misiones a tiempo. Nuevas temporadas sin XP anterior.|L’XP vient des missions réclamées à temps. Les nouvelles saisons commencent sans l’ancienne XP.|XP vem de resgatar missões a tempo. Novas temporadas começam sem XP antigo.|XP dal riscatto tempestivo delle missioni. Le nuove stagioni iniziano senza XP precedente.|XP pochodzi z terminowego odbioru misji. Nowe sezony zaczynają się bez starego XP.
 Premium benötigt eine bestätigte Berechtigung. Die Kaufanbindung ist noch nicht verfügbar. Free-Belohnungen bleiben unabhängig erreichbar.|Premium requires a verified entitlement. Purchase integration is not yet available. Free rewards remain independently accessible.|Premium requiere un derecho verificado. Compras aún no integradas. Recompensas gratis accesibles por separado.|Premium nécessite un droit vérifié. Achats pas encore intégrés. Récompenses gratuites accessibles indépendamment.|Premium requer direito verificado. Compras ainda não integradas. Recompensas grátis continuam acessíveis separadamente.|Premium richiede un diritto verificato. Acquisti non ancora integrati. Ricompense gratuite accessibili separatamente.|Premium wymaga zweryfikowanego prawa. Zakupy nie są jeszcze podłączone. Darmowe nagrody pozostają dostępne niezależnie.
-Haptik: keine vorhandene Unity-Patternanbindung auf dieser Plattform. Einstellung bleibt gespeichert.|Haptics: no Unity pattern integration on this platform. The setting remains saved.|Háptica: sin integración de patrones Unity en esta plataforma. Ajuste guardado.|Haptique : aucune intégration de motifs Unity sur cette plateforme. Réglage conservé.|Háptica: sem integração de padrões Unity nesta plataforma. Configuração salva.|Feedback aptico: nessuna integrazione pattern Unity su questa piattaforma. Impostazione salvata.|Haptyka: brak integracji wzorców Unity na tej platformie. Ustawienie jest zachowane.
+Haptik: keine vorhandene Unity-Patternanbindung auf dieser Plattform. Einstellung bleibt gespeichert.|Haptics: no existing Unity pattern bridge on this platform. Preference is saved.|Háptica: esta plataforma no dispone de integración Unity. La preferencia se guarda.|Haptique : aucune intégration Unity sur cette plateforme. Le réglage est sauvegardé.|Tátil: esta plataforma não tem integração Unity. A preferência é salva.|Feedback aptico: integrazione Unity non disponibile su questa piattaforma. Preferenza salvata.|Haptyka: brak integracji Unity na tej platformie. Ustawienie jest zapisywane.
 Datei prüfen, Vorschau ansehen und ausdrücklich wiederherstellen. Vor dem Austausch werden Quelle, Hauptstand, Backup und Pendingdatei unverändert gesichert.|Validate a file, inspect the preview and explicitly restore it. Source, main, backup and pending files are preserved before replacement.|Valida un archivo, revisa la vista previa y restaura explícitamente. Fuente, partida principal, respaldo y pendiente se conservan antes del reemplazo.|Vérifie un fichier, examine l’aperçu et restaure explicitement. Source, principale, sauvegarde et fichier en attente sont conservés avant remplacement.|Valide arquivo, veja a prévia e restaure explicitamente. Fonte, principal, backup e arquivo pendente são preservados antes da troca.|Verifica un file, esamina l’anteprima e ripristina esplicitamente. Fonte, principale, backup e file pendente sono conservati prima della sostituzione.|Sprawdź plik, obejrzyj podgląd i jawnie przywróć. Źródło, zapis główny, kopia i plik oczekujący są zachowane przed zastąpieniem.
 Quellproblem: Wiederaufnahme vor dem ersten Impuls verweist auf keinen vorhandenen Dialog. Namenswahl und Spiel bleiben erreichbar.|Source issue: resuming before the first impulse references no existing dialogue. Naming and gameplay remain accessible.|Problema original: reanudar antes del primer impulso apunta a un diálogo inexistente. Nombre y juego siguen accesibles.|Problème source : reprendre avant la première impulsion référence un dialogue inexistant. Nom et jeu restent accessibles.|Problema de origem: retomar antes do primeiro impulso aponta para diálogo inexistente. Nome e jogo continuam acessíveis.|Problema sorgente: riprendere prima del primo impulso indica un dialogo inesistente. Nome e gioco restano accessibili.|Problem źródłowy: wznowienie przed pierwszym impulsem wskazuje nieistniejący dialog. Wybór nazwy i gra pozostają dostępne.
 oder einen permanenten Slot. Im INT-Netz kaufen; bleibt bei normalem Prestige erhalten.|or a permanent slot. Buy in the INT network; retained at normal prestige.|o un espacio permanente. Comprar en la red INT; se conserva en prestigio normal.|ou un emplacement permanent. Acheter dans le réseau INT ; conservé au prestige normal.|ou um espaço permanente. Comprar na rede INT; mantido no prestígio normal.|o uno slot permanente. Acquista nella rete INT; conservato al prestigio normale.|lub trwałe miejsce. Kup w sieci INT; zachowane przy zwykłym prestiżu.
@@ -204,7 +204,7 @@ vergütete manuelle Tap|paid manual tap|toque manual remunerado|appui manuel ré
 Bonussekunden regulärer passiver Credits|bonus seconds of regular passive Credits|segundos extra de créditos pasivos normales|secondes bonus de crédits passifs ordinaires|segundos extras de créditos passivos normais|secondi bonus di crediti passivi normali|dodatkowe sekundy zwykłych pasywnych kredytów
 INT-Gewichtungsbeitrag|INT weighting contribution|Contribución a la ponderación INT|Contribution à la pondération INT|Contribuição à ponderação INT|Contributo alla ponderazione INT|Wkład w wagę INT
 nur zukünftige Einnahmen|future income only|solo ingresos futuros|revenus futurs uniquement|apenas receitas futuras|solo ricavi futuri|tylko przyszłe przychody
-Bonussekunden|bonus seconds|segundos extra|secondes bonus|segundos extras|secondi bonus|dodatkowe sekundy
+Bonussekunden|Bonus seconds|Segundos extra|Secondes bonus|Segundos bônus|Secondi bonus|Sekundy premii
 Grundwert|Base|Base|Base|Base|Base|Podstawa
 Preisersparnis|Price saving|Ahorro de precio|Économie sur le prix|Economia no preço|Risparmio sul prezzo|Oszczędność ceny
 Startdauer|Start duration|Duración inicial|Durée de départ|Duração inicial|Durata iniziale|Czas początkowy
@@ -268,13 +268,12 @@ Weitere Aktionen|More actions|Más acciones|Autres actions|Mais ações|Altre az
 Je 10 bezahlte Taps|Every 10 paid taps|Cada 10 toques pagados|Tous les 10 appuis payants|A cada 10 toques pagos|Ogni 10 tocchi pagati|Co 10 płatnych dotknięć
 passives Einkommen|passive income|ingresos pasivos|revenus passifs|renda passiva|entrate passive|dochód pasywny
 INT-Gewichtung|INT weighting|Ponderación INT|Pondération INT|Peso INT|Peso INT|Waga INT
-Bonussekunden|Bonus seconds|Segundos extra|Secondes bonus|Segundos bônus|Secondi bonus|Sekundy premii
 Nächstes Level|Next level|Siguiente nivel|Niveau suivant|Próximo nível|Livello successivo|Następny poziom
 Beim Anlegen|When equipped|Al equipar|À l’équipement|Ao equipar|Quando equipaggiato|Po wyposażeniu
 Jetzt speichern|Save now|Guardar ahora|Sauvegarder|Salvar agora|Salva ora|Zapisz teraz
-Zusatzprozessor|Additional processor|Procesador adicional|Processeur supplémentaire|Processador adicional|Processore aggiuntivo|Dodatkowy procesor
-Zusatz-Core|Additional core|Núcleo adicional|Cœur supplémentaire|Núcleo adicional|Nucleo aggiuntivo|Dodatkowy rdzeń
-Zusatz-Forschungssockel|Additional research socket|Ranura de investigación adicional|Emplacement de recherche supplémentaire|Slot de pesquisa adicional|Slot di ricerca aggiuntivo|Dodatkowe gniazdo badań
+Zusatzprozessor|Extra processor|Procesador adicional|Processeur supplémentaire|Processador extra|Processore aggiuntivo|Dodatkowy procesor
+Zusatz-Core|Extra core|Núcleo adicional|Noyau supplémentaire|Núcleo extra|Nucleo aggiuntivo|Dodatkowy rdzeń
+Zusatz-Forschungssockel|Extra research socket|Ranura de investigación extra|Emplacement de recherche en plus|Encaixe de pesquisa extra|Slot ricerca aggiuntivo|Dodatkowy slot badań
 Freischaltung im INT-Netz|Unlock in the INT network|Desbloquear en la red INT|Débloquer dans le réseau INT|Desbloquear na rede INT|Sblocca nella rete INT|Odblokuj w sieci INT
 Dauerhaft, auch nach Axiom.|Permanent, including after Axiom.|Permanente, incluso tras Axioma.|Permanent, même après Axiome.|Permanente, mesmo após Axioma.|Permanente, anche dopo Assioma.|Trwałe, także po Aksjomacie.
 Modulares Modell|Modular model|Modelo modular|Modèle modulaire|Modelo modular|Modello modulare|Model modułowy
@@ -332,3 +331,379 @@ Labor wird geladen|Loading laboratory|Cargando laboratorio|Chargement du laborat
 Labor konnte nicht geladen werden|Laboratory could not be loaded|No se pudo cargar el laboratorio|Impossible de charger le laboratoire|Não foi possível carregar o laboratório|Impossibile caricare il laboratorio|Nie udało się wczytać laboratorium
 Spielstand geprüft|Save checked|Partida verificada|Sauvegarde vérifiée|Jogo salvo verificado|Salvataggio verificato|Zapis sprawdzony
 Spielstand geschützt · Wiederherstellung öffnen|Save protected · opening recovery|Partida protegida · abriendo recuperación|Sauvegarde protégée · ouverture de la récupération|Jogo salvo protegido · abrindo recuperação|Salvataggio protetto · apertura recupero|Zapis chroniony · otwieranie odzyskiwania
+Stufe|Stage|Etapa|Étape|Etapa|Livello|Etap
+Sterne|Stars|Estrellas|Étoiles|Estrelas|Stelle|Gwiazdki
+Vorherige Stufe erforderlich|Previous tier required|Se requiere el nivel anterior|Palier précédent requis|Nível anterior necessário|Richiesto il livello precedente|Wymagany poprzedni poziom
+Season-Level fehlt|Season level required|Falta nivel de temporada|Niveau de saison requis|Nível da temporada necessário|Livello stagione richiesto|Wymagany poziom sezonu
+Dein erstes Netzwerk|Your first network|Tu primera red|Votre premier réseau|Sua primeira rede|La tua prima rete|Twoja pierwsza sieć
+Ziel noch offen|Goal not reached|Objetivo pendiente|Objectif non atteint|Objetivo pendente|Obiettivo da raggiungere|Cel nieosiągnięty
+Familie wechseln|Change family|Cambiar familia|Changer de famille|Mudar família|Cambia famiglia|Zmień rodzinę
+erstmals abgeschlossene Stufen|stages completed for the first time|etapas completadas por primera vez|étapes terminées pour la première fois|etapas concluídas pela primeira vez|livelli completati per la prima volta|etapy ukończone po raz pierwszy
+GEHEIMES LABOR|SECRET LAB|LABORATORIO SECRETO|LABORATOIRE SECRET|LABORATÓRIO SECRETO|LABORATORIO SEGRETO|TAJNE LABORATORIUM
+Kommerzmodell|Commercial model|Modelo comercial|Modèle commercial|Modelo comercial|Modello commerciale|Model komercyjny
+Inferenzmodell|Inference model|Modelo de inferencia|Modèle d’inférence|Modelo de inferência|Modello di inferenza|Model wnioskowania
+Datenmodell|Data model|Modelo de datos|Modèle de données|Modelo de dados|Modello dati|Model danych
+Interaktionsmodell|Interaction model|Modelo de interacción|Modèle d’interaction|Modelo de interação|Modello interattivo|Model interakcji
+Integrationsmodell|Integration model|Modelo de integración|Modèle d’intégration|Modelo de integração|Modello integrazione|Model integracji
+Parallelmodell|Parallel model|Modelo paralelo|Modèle parallèle|Modelo paralelo|Modello parallelo|Model równoległy
+Wissenschaftsmodell|Science model|Modelo científico|Modèle scientifique|Modelo científico|Modello scientifico|Model naukowy
+Lernmodell|Learning model|Modelo de aprendizaje|Modèle d’apprentissage|Modelo de aprendizado|Modello apprendimento|Model uczenia
+Materialmodell|Material model|Modelo de materiales|Modèle de matériaux|Modelo de materiais|Modello materiali|Model materiałowy
+Universalmodell|Universal model|Modelo universal|Modèle universel|Modelo universal|Modello universale|Model uniwersalny
+Kein Modell aktiv|No active model|Ningún modelo activo|Aucun modèle actif|Nenhum modelo ativo|Nessun modello attivo|Brak aktywnego modelu
+Noch unbekannt|Not discovered|Sin descubrir|Pas encore découvert|Ainda desconhecido|Non ancora scoperto|Jeszcze nieodkryty
+Revenue-Kern|Income core|Núcleo de ingresos|Noyau de revenus|Núcleo de renda|Nucleo ricavi|Rdzeń dochodu
+Universelle Slots|Universal slots|Ranuras universales|Emplacements universels|Espaços universais|Slot universali|Uniwersalne miejsca
+Modellfähigkeiten|Model abilities|Habilidades del modelo|Capacités du modèle|Habilidades do modelo|Abilità del modello|Zdolności modelu
+Funde|Finds|Hallazgos|Trouvailles|Achados|Ritrovamenti|Znaleziska
+je|each|cada uno|chacun|cada|ciascuno|każde
+Itemchance|Item chance|Probabilidad de objeto|Chance d’objet|Chance de item|Probabilità oggetto|Szansa przedmiotu
+Ende UTC|Ends UTC|Fin UTC|Fin UTC|Fim UTC|Fine UTC|Koniec UTC
+VERDIENTE TRUHEN|EARNED CHESTS|COFRES OBTENIDOS|COFFRES GAGNÉS|BAÚS OBTIDOS|FORZIERI OTTENUTI|ZDOBYTE SKRZYNIE
+Freie common-Truhe|Free common chest|Cofre común gratis|Coffre commun gratuit|Baú comum grátis|Forziere comune gratuito|Darmowa zwykła skrzynia
+Ein zusätzlicher Laborplatz|One additional lab slot|Un laboratorio adicional|Un laboratoire supplémentaire|Um laboratório adicional|Un laboratorio aggiuntivo|Dodatkowe laboratorium
+Dauerhafte Offline-Kapazität|Permanent offline capacity|Capacidad sin conexión permanente|Capacité hors ligne permanente|Capacidade offline permanente|Capacità offline permanente|Stała pojemność offline
+Stunden offline|hours offline|horas sin conexión|heures hors ligne|horas offline|ore offline|godzin offline
+Wiederholbar|Repeatable|Repetible|Répétable|Repetível|Ripetibile|Powtarzalne
+Einmalig|One-time|Una vez|Unique|Único|Una volta|Jednorazowe
+Storepreis|Store price|Precio de tienda|Prix boutique|Preço da loja|Prezzo negozio|Cena sklepu
+SELTENE PROFILRAHMEN|RARE PROFILE FRAMES|MARCOS DE PERFIL RAROS|CADRES DE PROFIL RARES|MOLDURAS DE PERFIL RARAS|CORNICI PROFILO RARE|RZADKIE RAMKI PROFILU
+Ziel|Goal|Objetivo|Objectif|Objetivo|Obiettivo|Cel
+passive-credits|Passive income|Ingresos pasivos|Revenus passifs|Renda passiva|Ricavi passivi|Dochód pasywny
+regular-data|Regular data|Datos normales|Données normales|Dados normais|Dati normali|Zwykłe dane
+regular-credits|Regular credits|Créditos normales|Crédits normaux|Créditos normais|Crediti normali|Zwykłe kredyty
+Erstabschluss|First completion|Primera finalización|Première réussite|Primeira conclusão|Primo completamento|Pierwsze ukończenie
+Familienbonus bis|Family bonus up to|Bonificación familiar hasta|Bonus de famille jusqu’à|Bônus de família até|Bonus famiglia fino al|Premia rodziny do
+Freischaltungen richten sich nach der Summe aller erstmals abgeschlossenen Stufen.|Unlocks depend on the total number of stages completed for the first time.|Los desbloqueos dependen del total de etapas completadas por primera vez.|Les déblocages dépendent du total d’étapes terminées pour la première fois.|Os desbloqueios dependem do total de etapas concluídas pela primeira vez.|Gli sblocchi dipendono dal totale dei livelli completati per la prima volta.|Odblokowania zależą od liczby etapów ukończonych po raz pierwszy.
+Kein Tippen, keine Drops oder manuellen Overclocks; nur der bezahlte automatische Start. Jeder Prestige mindestens 1 INT. Eigener Familienbonus aus; Axiome gesperrt.|No taps, drops or manual overclocks; paid automatic starter only.\nEach prestige at least 1 INT.\nOwn family bonus disabled; Axiom locked.|Sin toques, drops ni overclocks manuales; solo inicio automático de pago.\nCada prestigio: al menos 1 INT.\nSin bonificación propia; axiomas bloqueados.|Aucun tap, drop ou overclock manuel ; démarrage automatique payant uniquement.\nAu moins 1 INT par prestige.\nBonus propre désactivé ; axiomes verrouillés.|Sem toques, drops ou overclocks manuais; só início automático pago.\nCada prestígio: pelo menos 1 INT.\nBônus próprio desativado; axiomas bloqueados.|Niente tocchi, drop o overclock manuali; solo avvio automatico a pagamento.\nAlmeno 1 INT per prestigio.\nBonus proprio disattivato; assiomi bloccati.|Bez stuknięć, dropów i ręcznych overclocków; tylko płatny start automatyczny.\nKażdy prestiż: co najmniej 1 INT.\nPremia własnej rodziny wyłączona; aksjomaty zablokowane.
+An|On|Sí|Oui|Ligado|Sì|Wł.
+Aus|Off|No|Non|Desligado|No|Wył.
+Automatisch|Automatic|Automático|Automatique|Automático|Automatico|Automatyczny
+Wissenschaftlich|Scientific|Científico|Scientifique|Científico|Scientifico|Naukowy
+Technisch|Engineering|Ingeniería|Ingénierie|Engenharia|Ingegneristico|Inżynierski
+Materialien · Truhen · Tagesangebote|Materials · chests · daily offers|Materiales · cofres · ofertas diarias|Matériaux · coffres · offres du jour|Materiais · baús · ofertas diárias|Materiali · forzieri · offerte giornaliere|Materiały · skrzynie · oferty dnia
+Gumball · dauerhafte Upgrades|Gumball · permanent upgrades|Gumball · mejoras permanentes|Gumball · améliorations permanentes|Gumball · melhorias permanentes|Gumball · potenziamenti permanenti|Gumball · stałe ulepszenia
+Pakete · Berechtigungen|Bundles · entitlements|Paquetes · derechos|Packs · droits|Pacotes · direitos|Pacchetti · diritti|Pakiety · uprawnienia
+Bonusse · Verfügbarkeit und Limits|Bonuses · availability and limits|Bonificaciones · disponibilidad y límites|Bonus · disponibilité et limites|Bônus · disponibilidade e limites|Bonus · disponibilità e limiti|Premie · dostępność i limity
+Free · Premium · Sammlung|Free · Premium · collection|Gratis · Premium · colección|Gratuit · Premium · collection|Grátis · Premium · coleção|Gratis · Premium · collezione|Bezpłatne · Premium · kolekcja
+Regeln und Erhaltung|Rules and retention|Reglas y conservación|Règles et conservation|Regras e conservação|Regole e conservazione|Zasady i zachowanie postępu
+Zusatzsockel|Additional slots|Ranuras adicionales|Emplacements supplémentaires|Espaços adicionais|Slot aggiuntivi|Dodatkowe miejsca
+Ohne Tippen|Hands Off|Sin toques|Sans toucher|Sem toques|Senza tocchi|Bez stukania
+Ohne Ausrüstung|Bare Metal|Sin equipo|Sans équipement|Sem equipamento|Senza equipaggiamento|Bez wyposażenia
+Kompakter Aufbau|Compact Stack|Conjunto compacto|Installation compacte|Estrutura compacta|Struttura compatta|Zwarty układ
+Datenknappheit|Data Drought|Escasez de datos|Pénurie de données|Escassez de dados|Scarsità di dati|Niedobór danych
+Starke Inflation|Brutal Inflation|Inflación brutal|Inflation brutale|Inflação brutal|Inflazione brutale|Dotkliwa inflacja
+Qualität gesperrt|Quality Lock|Calidad bloqueada|Qualité verrouillée|Qualidade bloqueada|Qualità bloccata|Blokada jakości
+Effizienz gesperrt|Efficiency Lock|Eficiencia bloqueada|Efficacité verrouillée|Eficiência bloqueada|Efficienza bloccata|Blokada wydajności
+Serielle Forschung|Serial Science|Investigación en serie|Recherche en série|Pesquisa em série|Ricerca in serie|Badania szeregowe
+Geschlossene Lieferkette|Closed Supply Chain|Cadena cerrada|Chaîne fermée|Cadeia fechada|Filiera chiusa|Zamknięty łańcuch dostaw
+Fragmentiertes Netzwerk|Fragmented Network|Red fragmentada|Réseau fragmenté|Rede fragmentada|Rete frammentata|Rozproszona sieć
+Passive Credits|Passive income|Ingresos pasivos|Revenus passifs|Renda passiva|Ricavi passivi|Dochód pasywny
+Produzierte Credits|Produced credits|Créditos producidos|Crédits produits|Créditos produzidos|Crediti prodotti|Wyprodukowane kredyty
+Bezahlte Meilensteine|Paid milestones|Hitos pagados|Jalons payés|Marcos pagos|Traguardi pagati|Opłacone kamienie milowe
+Tiefe früher Klassen|Early class depth|Nivel de clases iniciales|Niveau des premières classes|Nível das classes iniciais|Livello classi iniziali|Poziom wczesnych klas
+Erzeugte Daten|Generated data|Datos generados|Données générées|Dados gerados|Dati generati|Wygenerowane dane
+Bezahlte Trainings|Paid training|Entrenamientos pagados|Entraînements payés|Treinos pagos|Allenamenti pagati|Opłacone treningi
+Bezahlte Forschung|Paid research|Investigación pagada|Recherches payées|Pesquisas pagas|Ricerche pagate|Opłacone badania
+Klassenkäufe|Class purchases|Compras de clases|Achats de classes|Compras de classes|Acquisti classi|Zakupy klas
+Forschungsabschlüsse|Research completions|Investigaciones terminadas|Recherches terminées|Pesquisas concluídas|Ricerche completate|Ukończone badania
+Unterschiedliche Forschungsbereiche|Different research areas|Áreas de investigación distintas|Domaines de recherche distincts|Áreas de pesquisa distintas|Aree di ricerca diverse|Różne dziedziny badań
+Lokal hergestellte Items|Locally crafted items|Objetos fabricados localmente|Objets fabriqués localement|Itens fabricados localmente|Oggetti prodotti localmente|Przedmioty wytworzone lokalnie
+Lokaler Seltenheitsrang (0–5)|Local rarity rank (0–5)|Rango de rareza local (0–5)|Rang de rareté local (0–5)|Grau de raridade local (0–5)|Grado rarità locale (0–5)|Lokalny poziom rzadkości (0–5)
+Unterschiedliche lokale Itemtypen|Different local item types|Tipos de objetos locales distintos|Types d’objets locaux distincts|Tipos de itens locais distintos|Tipi di oggetti locali diversi|Różne lokalne typy przedmiotów
+Bezahlte Forschungsdaten|Paid research data|Datos gastados en investigación|Données dépensées en recherche|Dados gastos em pesquisa|Dati spesi in ricerca|Dane wydane na badania
+Aktive Nachbarn|Active neighbors|Vecinos activos|Voisins actifs|Vizinhos ativos|Vicini attivi|Aktywni sąsiedzi
+Mindest-INT je Reset|Minimum INT per reset|INT mínimos por reinicio|INT minimum par réinitialisation|INT mínimo por reinício|INT minimi per ripristino|Minimalne INT na reset
+Alter INT-Vertrag|Legacy INT contract|Contrato INT anterior|Ancien contrat INT|Contrato INT anterior|Contratto INT precedente|Starszy kontrakt INT
+Einnahmen|Income|Ingresos|Revenus|Renda|Ricavi|Dochód
+Nutzer|Users|Usuarios|Utilisateurs|Usuários|Utenti|Użytkownicy
+Truhe|Chest|Cofre|Coffre|Baú|Forziere|Skrzynia
+gewöhnlich|common|común|commun|comum|comune|pospolity
+ungewöhnlich|uncommon|inusual|inhabituel|incomum|non comune|niepospolity
+selten|rare|raro|rare|raro|raro|rzadki
+episch|epic|épico|épique|épico|epico|epicki
+legendär|legendary|legendario|légendaire|lendário|leggendario|legendarny
+mythisch|mythic|mítico|mythique|mítico|mitico|mityczny
+Leiterplatten|Circuit boards|Placas de circuito|Circuits imprimés|Placas de circuito|Circuiti stampati|Płytki drukowane
+Kupferspulen|Copper coils|Bobinas de cobre|Bobines de cuivre|Bobinas de cobre|Bobine di rame|Cewki miedziane
+Siliziumwafer|Silicon wafers|Obleas de silicio|Plaquettes de silicium|Wafers de silício|Wafer di silicio|Płytki krzemowe
+Titanbefestigungen|Titanium fasteners|Fijaciones de titanio|Fixations en titane|Fixadores de titânio|Fissaggi in titanio|Łączniki tytanowe
+Photonische Linsen|Photonic lenses|Lentes fotónicas|Lentilles photoniques|Lentes fotônicas|Lenti fotoniche|Soczewki fotoniczne
+Graphen|Graphene|Grafeno|Graphène|Grafeno|Grafene|Grafen
+Kohlenstoffnanoröhren|Carbon nanotubes|Nanotubos de carbono|Nanotubes de carbone|Nanotubos de carbono|Nanotubi di carbonio|Nanorurki węglowe
+Supraleitende Leiter|Superconducting conductors|Conductores superconductores|Conducteurs supraconducteurs|Condutores supercondutores|Conduttori superconduttori|Przewodniki nadprzewodzące
+Memristor-Arrays|Memristor arrays|Matrices de memristores|Réseaux de memristances|Matrizes de memristores|Matrici di memristori|Macierze memrystorów
+Quantenprozessorkerne|Quantum processor cores|Núcleos de procesador cuántico|Cœurs de processeur quantique|Núcleos de processador quântico|Nuclei di processore quantistico|Rdzenie procesorów kwantowych
+Keramikkondensatoren|Ceramic capacitors|Condensadores cerámicos|Condensateurs céramiques|Capacitores cerâmicos|Condensatori ceramici|Kondensatory ceramiczne
+Ferritkerne|Ferrite cores|Núcleos de ferrita|Noyaux de ferrite|Núcleos de ferrite|Nuclei di ferrite|Rdzenie ferrytowe
+Goldkontakte|Gold contacts|Contactos de oro|Contacts en or|Contatos de ouro|Contatti dorati|Złote styki
+Keramiksubstrate|Ceramic substrates|Sustratos cerámicos|Substrats céramiques|Substratos cerâmicos|Substrati ceramici|Podłoża ceramiczne
+Glasfasern|Optical fibers|Fibras ópticas|Fibres optiques|Fibras ópticas|Fibre ottiche|Światłowody
+Wärmeleitmaterial|Thermal material|Material térmico|Matériau thermique|Material térmico|Materiale termico|Materiał termiczny
+Diamantsubstrate|Diamond substrates|Sustratos de diamante|Substrats en diamant|Substratos de diamante|Substrati di diamante|Podłoża diamentowe
+Spintronik-Bauteile|Spintronic components|Componentes espintrónicos|Composants spintroniques|Componentes spintrônicos|Componenti spintronici|Elementy spintroniczne
+Photonische Schaltkreise|Photonic circuits|Circuitos fotónicos|Circuits photoniques|Circuitos fotônicos|Circuiti fotonici|Obwody fotoniczne
+Kryogene Resonatoren|Cryogenic resonators|Resonadores criogénicos|Résonateurs cryogéniques|Ressonadores criogênicos|Risonatori criogenici|Rezonatory kriogeniczne
+Overdrive-Faktor ×1,10 während dieses Modell aktiv ist.|Overdrive multiplier ×1.10 while this model is active.|Multiplicador de Overdrive ×1,10 mientras está activo.|Multiplicateur d’Overdrive ×1,10 quand ce modèle est actif.|Multiplicador de Overdrive ×1,10 enquanto ativo.|Moltiplicatore Overdrive ×1,10 mentre il modello è attivo.|Mnożnik Overdrive ×1,10 podczas aktywności modelu.
+Datenproduktion ×1,25.|Data production ×1.25.|Producción de datos ×1,25.|Production de données ×1,25.|Produção de dados ×1,25.|Produzione dati ×1,25.|Produkcja danych ×1,25.
+Forschungsgeschwindigkeit ×1,15.|Research speed ×1.15.|Velocidad de investigación ×1,15.|Vitesse de recherche ×1,15.|Velocidade de pesquisa ×1,15.|Velocità ricerca ×1,15.|Szybkość badań ×1,15.
+Crit-Chance +3 Prozentpunkte, Grenze 50 %.|Critical chance +3 percentage points, capped at 50%.|Probabilidad crítica +3 puntos porcentuales, máximo 50 %.|Chance critique +3 points de pourcentage, plafond 50 %.|Chance crítica +3 pontos percentuais, limite de 50 %.|Probabilità critica +3 punti percentuali, limite 50%.|Szansa krytyczna +3 punkty procentowe, limit 50%.
+Analysegeschwindigkeit ×1,15.|Analysis speed ×1.15.|Velocidad de análisis ×1,15.|Vitesse d’analyse ×1,15.|Velocidade de análise ×1,15.|Velocità analisi ×1,15.|Szybkość analiz ×1,15.
+Forschungsgeschwindigkeit zusätzlich ×1,15.|Additional research speed ×1.15.|Velocidad de investigación adicional ×1,15.|Vitesse de recherche supplémentaire ×1,15.|Velocidade de pesquisa adicional ×1,15.|Velocità ricerca aggiuntiva ×1,15.|Dodatkowa szybkość badań ×1,15.
+Integrationstraining zusätzlich ×1,25.|Additional integration training speed ×1.25.|Velocidad de integración adicional ×1,25.|Vitesse d’entraînement d’intégration supplémentaire ×1,25.|Velocidade de treino de integração adicional ×1,25.|Velocità allenamento integrazione aggiuntiva ×1,25.|Dodatkowa szybkość treningu integracji ×1,25.
+Passive Komponentenmenge ×1,20.|Passive component quantity ×1.20.|Cantidad de componentes pasivos ×1,20.|Quantité de composants passifs ×1,20.|Quantidade de componentes passivos ×1,20.|Quantità componenti passivi ×1,20.|Ilość komponentów pasywnych ×1,20.
+Analysemengen ×1,15.|Analysis yield ×1.15.|Rendimiento de análisis ×1,15.|Rendement des analyses ×1,15.|Rendimento de análise ×1,15.|Resa analisi ×1,15.|Wydajność analiz ×1,15.
+Ein Signal im Rauschen|A Signal in the Noise|Una señal entre el ruido|Un signal dans le bruit|Um sinal no ruído|Un segnale nel rumore|Sygnał w szumie
+Die ersten Kunden|The First Customers|Los primeros clientes|Les premiers clients|Os primeiros clientes|I primi clienti|Pierwsi klienci
+Vom Labor zur Firma|From Lab to Company|Del laboratorio a la empresa|Du laboratoire à l’entreprise|Do laboratório à empresa|Dal laboratorio all’azienda|Od laboratorium do firmy
+Mehr als eine Maschine|More Than a Machine|Más que una máquina|Plus qu’une machine|Mais que uma máquina|Più di una macchina|Więcej niż maszyna
+Unsere eigene Infrastruktur|Our Own Infrastructure|Nuestra propia infraestructura|Notre propre infrastructure|Nossa própria infraestrutura|La nostra infrastruttura|Nasza własna infrastruktura
+Impulsrelais|Impulse Relay|Relé de impulsos|Relais d’impulsion|Relé de impulso|Relè a impulsi|Przekaźnik impulsowy
+Erkenntnisarchiv|Insight Archive|Archivo de conocimiento|Archive de connaissances|Arquivo de conhecimento|Archivio intuizioni|Archiwum wiedzy
+Quantenchip|Quantum Chip|Chip cuántico|Puce quantique|Chip quântico|Chip quantistico|Układ kwantowy
+Neural-ASIC|Neural ASIC|ASIC neuronal|ASIC neuronal|ASIC neural|ASIC neurale|Neuronowy ASIC
+Photonenfeld|Photonic Array|Matriz fotónica|Réseau photonique|Matriz fotônica|Matrice fotonica|Macierz fotoniczna
+Speicherkristall|Memory Crystal|Cristal de memoria|Cristal de mémoire|Cristal de memória|Cristallo di memoria|Kryształ pamięci
+Logik-Saat|Logic Seed|Semilla lógica|Graine logique|Semente lógica|Seme logico|Ziarno logiki
+Tensor-Kern|Tensor Core|Núcleo tensorial|Cœur tensoriel|Núcleo tensorial|Nucleo tensoriale|Rdzeń tensorowy
+Feldscanner|Field Scanner|Escáner de campo|Scanner de champ|Scanner de campo|Scanner di campo|Skaner pola
+Labordrohne|Lab Drone|Dron de laboratorio|Drone de laboratoire|Drone de laboratório|Drone da laboratorio|Dron laboratoryjny
+Datenprisma|Data Prism|Prisma de datos|Prisme de données|Prisma de dados|Prisma dati|Pryzmat danych
+Inferenz-Router|Inference router|Enrutador de inferencia|Routeur d’inférence|Roteador de inferência|Router di inferenza|Router wnioskowania
+Burst-Prozessor|Burst processor|Procesador de ráfagas|Processeur en rafale|Processador de rajada|Processore burst|Procesor impulsowy
+Legacy-Controller|Legacy controller|Controlador de legado|Contrôleur d’héritage|Controlador de legado|Controller eredità|Kontroler dziedzictwa
+Sparse-Decoder|Sparse decoder|Decodificador disperso|Décodeur parcimonieux|Decodificador esparso|Decoder sparso|Dekoder rzadki
+Photonik-Matrix|Photonic matrix|Matriz fotónica|Matrice photonique|Matriz fotônica|Matrice fotonica|Matryca fotoniczna
+Quantenkoppler|Quantum coupler|Acoplador cuántico|Coupleur quantique|Acoplador quântico|Accoppiatore quantistico|Sprzęgacz kwantowy
+Distillationsmodul|Distillation module|Módulo de destilación|Module de distillation|Módulo de destilação|Modulo distillazione|Moduł destylacji
+Curriculum-Modul|Curriculum module|Módulo curricular|Module de programme|Módulo curricular|Modulo curricolo|Moduł programu nauki
+Langzeitspeicher|Long-term memory|Memoria a largo plazo|Mémoire à long terme|Memória de longo prazo|Memoria a lungo termine|Pamięć długoterminowa
+Kryocontroller|Cryocontroller|Criocontrolador|Cryocontrôleur|Criocontrolador|Criocontrollore|Kriokontroler
+Fertigungscontroller|Manufacturing controller|Controlador de fabricación|Contrôleur de fabrication|Controlador de fabricação|Controller produzione|Kontroler produkcji
+Diagnoseadapter|Diagnostic adapter|Adaptador de diagnóstico|Adaptateur de diagnostic|Adaptador de diagnóstico|Adattatore diagnostico|Adapter diagnostyczny
+Versuchscontroller|Experiment controller|Controlador de experimentos|Contrôleur d’expériences|Controlador de experimentos|Controller esperimenti|Kontroler eksperymentów
+Präzisionsscanner|Precision scanner|Escáner de precisión|Scanner de précision|Scanner de precisão|Scanner di precisione|Skaner precyzyjny
+Recycling-Sonde|Recycling probe|Sonda de reciclaje|Sonde de recyclage|Sonda de reciclagem|Sonda riciclaggio|Sonda recyklingowa
+Bauplanarchiv|Blueprint archive|Archivo de planos|Archive de plans|Arquivo de projetos|Archivio progetti|Archiwum planów
+Protokollcontroller|Protocol controller|Controlador de protocolos|Contrôleur de protocole|Controlador de protocolos|Controller protocolli|Kontroler protokołów
+Photonik-Analysator|Photonic analyzer|Analizador fotónico|Analyseur photonique|Analisador fotônico|Analizzatore fotonico|Analizator fotoniczny
+Quanten-Diagnosemodul|Quantum diagnostic module|Módulo de diagnóstico cuántico|Module de diagnostic quantique|Módulo de diagnóstico quântico|Modulo diagnostico quantistico|Kwantowy moduł diagnostyczny
+Geheimlabor-Resonator|Dark-lab resonator|Resonador del laboratorio oscuro|Résonateur du laboratoire secret|Ressonador do laboratório secreto|Risonatore del laboratorio segreto|Rezonator tajnego laboratorium
+Modell-Echokern|Model echo core|Núcleo de eco del modelo|Cœur d’écho du modèle|Núcleo de eco do modelo|Nucleo eco del modello|Rdzeń echa modelu
+Axiomgitter|Axiom lattice|Retícula de axiomas|Réseau d’axiomes|Rede de axiomas|Reticolo assiomi|Sieć aksjomatów
+Zyklus-Observatorium|Cycle observatory|Observatorio de ciclos|Observatoire des cycles|Observatório de ciclos|Osservatorio cicli|Obserwatorium cykli
+Entropiesenke|Entropy sink|Sumidero de entropía|Puits d’entropie|Sumidouro de entropia|Dissipatore entropico|Pochłaniacz entropii
+Mnemonischer Anker|Mnemonic anchor|Ancla mnemónica|Ancre mnémotechnique|Âncora mnemônica|Ancora mnemonica|Kotwica mnemoniczna
+Gesicherten Spielstand einfügen|Paste saved game|Pegar partida guardada|Coller la sauvegarde|Colar jogo salvo|Incolla salvataggio|Wklej zapis gry
+Vor dem Reset Spielstand exportieren?|Export save before reset?|¿Exportar partida antes de reiniciar?|Exporter avant la réinitialisation ?|Exportar antes de reiniciar?|Esportare prima del ripristino?|Wyeksportować zapis przed resetem?
+Testspielstand endgültig zurücksetzen?|Permanently reset test save?|¿Reiniciar definitivamente la partida de prueba?|Réinitialiser définitivement la sauvegarde de test ?|Reiniciar definitivamente o jogo de teste?|Azzerare definitivamente il salvataggio di prova?|Trwale zresetować zapis testowy?
+App-/Build-Version|App / build version|Versión de aplicación / compilación|Version application / build|Versão do aplicativo / build|Versione app / build|Wersja aplikacji / kompilacji
+Crashbericht exportieren|Export crash report|Exportar informe de error|Exporter le rapport de plantage|Exportar relatório de falha|Esporta rapporto arresto anomalo|Eksportuj raport awarii
+Balancebericht exportieren|Export balance report|Exportar informe de equilibrio|Exporter le rapport d’équilibrage|Exportar relatório de balanceamento|Esporta rapporto bilanciamento|Eksportuj raport balansu
+Noch {time} abholbar|Claimable for {time}|Disponible durante {time}|Disponible pendant {time}|Disponível por {time}|Disponibile per {time}|Do odebrania przez {time}
+Reset in {time}|Resets in {time}|Reinicio en {time}|Réinitialisation dans {time}|Reinicia em {time}|Ripristino tra {time}|Reset za {time}
+{count} Belohnungen abholbar|{count} rewards ready|{count} recompensas listas|{count} récompenses disponibles|{count} recompensas prontas|{count} ricompense disponibili|Gotowe nagrody: {count}
+Noch kein Season-Artefakt|No Season Artifact yet|Aún no hay artefacto de temporada|Aucun artefact de saison|Ainda sem artefato de temporada|Nessun artefatto stagione|Brak artefaktu sezonowego
+Hardware-Mastery|Hardware Mastery|Maestría de hardware|Maîtrise matérielle|Maestria de hardware|Maestria hardware|Mistrzostwo sprzętu
+Account-Challenges|Account Challenges|Desafíos de cuenta|Défis du compte|Desafios da conta|Sfide account|Wyzwania konta
+Challenge abschließen|Complete challenge|Completar desafío|Terminer le défi|Concluir desafio|Completa sfida|Ukończ wyzwanie
+Lifetime Credits|Lifetime Credits|Créditos acumulados|Crédits cumulés|Créditos acumulados|Crediti totali|Łączne kredyty
+Hardware entdeckt|Hardware discovered|Hardware descubierto|Matériel découvert|Hardware descoberto|Hardware scoperto|Odkryty sprzęt
+Komponenten entdeckt|Components discovered|Componentes descubiertos|Composants découverts|Componentes descobertos|Componenti scoperti|Odkryte komponenty
+500 Einheiten zum Freischalten|Unlock at 500 units|Se desbloquea con 500 unidades|Débloqué à 500 unités|Desbloqueia com 500 unidades|Sblocco a 500 unità|Odblokowanie przy 500 sztukach
+Musiklautstärke|Music volume|Volumen de música|Volume de la musique|Volume da música|Volume musica|Głośność muzyki
+Effektlautstärke|Effects volume|Volumen de efectos|Volume des effets|Volume dos efeitos|Volume effetti|Głośność efektów
+Online-Anbindung noch nicht eingerichtet. Company-Ranglisten und Handel benötigen den verifizierten Serverzugang.|Online connection is not configured. Company rankings and trading require verified server access.|La conexión online no está configurada. Las clasificaciones y el comercio de compañías requieren acceso verificado al servidor.|La connexion en ligne n’est pas configurée. Classements et commerce des compagnies exigent un accès serveur vérifié.|A conexão online não está configurada. Rankings e trocas de companhias exigem acesso verificado ao servidor.|Connessione online non configurata. Classifiche e scambi delle compagnie richiedono accesso verificato al server.|Połączenie online nie jest skonfigurowane. Rankingi i handel kompanii wymagają zweryfikowanego dostępu do serwera.
+Online-Anbindung noch nicht eingerichtet.|Online connection is not configured.|La conexión online no está configurada.|La connexion en ligne n’est pas configurée.|A conexão online não está configurada.|Connessione online non configurata.|Połączenie online nie jest skonfigurowane.
+Onlinekonto noch nicht sicher verbunden. Offline-Fortschritt bleibt lokal.|Online account is not verified. Offline progress remains local.|La cuenta online no está verificada. El progreso sin conexión sigue siendo local.|Compte en ligne non vérifié. La progression hors ligne reste locale.|Conta online não verificada. O progresso offline continua local.|Account online non verificato. I progressi offline restano locali.|Konto online nie jest zweryfikowane. Postęp offline pozostaje lokalny.
+ABZEICHEN · persönlicher Schaukasten|BADGES · personal showcase|INSIGNIAS · colección personal|INSIGNES · vitrine personnelle|EMBLEMAS · coleção pessoal|DISTINTIVI · vetrina personale|ODZNAKI · kolekcja osobista
+Noch keine Abzeichen freigeschaltet. Erledige Achievements oder Challenges.|No badges unlocked yet. Complete achievements or challenges.|Aún no hay insignias. Completa logros o desafíos.|Aucun insigne débloqué. Accomplissez des succès ou des défis.|Nenhum emblema desbloqueado. Complete conquistas ou desafios.|Nessun distintivo sbloccato. Completa obiettivi o sfide.|Brak odblokowanych odznak. Zdobywaj osiągnięcia lub kończ wyzwania.
+Neustart des Labors|Laboratory restart|Reinicio del laboratorio|Redémarrage du laboratoire|Reinício do laboratório|Riavvio laboratorio|Restart laboratorium
+Kauf nur nach INT-Preis.|Purchase depends only on INT cost.|La compra depende solo del coste en INT.|L’achat dépend uniquement du coût en INT.|A compra depende apenas do custo em INT.|L’acquisto dipende solo dal costo in INT.|Zakup zależy wyłącznie od kosztu w INT.
+Analysegeschwindigkeit|Analysis speed|Velocidad de análisis|Vitesse d’analyse|Velocidade de análise|Velocità analisi|Szybkość analiz
+Forschungsgeschwindigkeit|Research speed|Velocidad de investigación|Vitesse de recherche|Velocidade de pesquisa|Velocità ricerca|Szybkość badań
+Trainingsgeschwindigkeit|Training speed|Velocidad de entrenamiento|Vitesse d’entraînement|Velocidade de treino|Velocità allenamento|Szybkość treningu
+Analysefokus: Alle Familien|Analysis focus: all families|Enfoque de análisis: todas las familias|Analyse ciblée : toutes les familles|Foco de análise: todas as famílias|Focus analisi: tutte le famiglie|Cel analiz: wszystkie rodziny
+Besitze 10 Taschenrechner.|Own 10 calculators.|Ten 10 calculadoras.|Possédez 10 calculatrices.|Tenha 10 calculadoras.|Possiedi 10 calcolatrici.|Posiadaj 10 kalkulatorów.
+Kaufe deine erste Hardware.|Buy your first hardware.|Compra tu primer hardware.|Achetez votre premier matériel.|Compre seu primeiro hardware.|Acquista il primo hardware.|Kup pierwszy sprzęt.
+Entdecke den Einplatinencomputer.|Discover the single-board computer.|Descubre el ordenador de placa única.|Découvrez l’ordinateur monocarte.|Descubra o computador de placa única.|Scopri il computer a scheda singola.|Odkryj komputer jednopłytkowy.
+Erreiche Modelllevel 1.|Reach model level 1.|Alcanza el nivel de modelo 1.|Atteignez le niveau de modèle 1.|Alcance o nível de modelo 1.|Raggiungi il livello modello 1.|Osiągnij poziom modelu 1.
+Rüste ein Item aus.|Equip an item.|Equipa un objeto.|Équipez un objet.|Equipe um item.|Equipaggia un oggetto.|Wyposaż przedmiot.
+Schließe Datenerzeugung Stufe 1 ab.|Complete Data Generation level 1.|Completa Generación de datos nivel 1.|Terminez Génération de données niveau 1.|Conclua Geração de dados nível 1.|Completa Generazione dati livello 1.|Ukończ Generowanie danych poziom 1.
+Führe den ersten Prestige durch.|Complete your first prestige.|Completa tu primer prestigio.|Effectuez votre premier prestige.|Conclua seu primeiro prestígio.|Completa il primo prestigio.|Wykonaj pierwszy prestiż.
+Erreiche 25 Taschenrechner: +16 % Klassen-Compute und +6 % Tap-Ertrag.|Reach 25 calculators: +16% class compute and +6% tap income.|Alcanza 25 calculadoras: +16 % cálculo de clase y +6 % ingresos por toque.|Atteignez 25 calculatrices : +16 % calcul de classe et +6 % revenus des taps.|Alcance 25 calculadoras: +16% compute da classe e +6% renda dos toques.|Raggiungi 25 calcolatrici: +16% calcolo della classe e +6% ricavi dai tocchi.|Osiągnij 25 kalkulatorów: +16% mocy klasy i +6% dochodu ze stuknięć.
+Besitze 500 Einheiten in 5 Hardwareklassen.|Own 500 units in 5 hardware classes.|Ten 500 unidades en 5 clases de hardware.|Possédez 500 unités dans 5 classes matérielles.|Tenha 500 unidades em 5 classes de hardware.|Possiedi 500 unità in 5 classi hardware.|Posiadaj 500 sztuk w 5 klasach sprzętu.
+Erreiche insgesamt 25 Hardware-Mastery-Level.|Reach 25 total hardware mastery levels.|Alcanza 25 niveles totales de maestría de hardware.|Atteignez 25 niveaux cumulés de maîtrise matérielle.|Alcance 25 níveis totais de maestria de hardware.|Raggiungi 25 livelli totali di maestria hardware.|Osiągnij łącznie 25 poziomów mistrzostwa sprzętu.
+Erreiche insgesamt 100 Hardware-Mastery-Level.|Reach 100 total hardware mastery levels.|Alcanza 100 niveles totales de maestría de hardware.|Atteignez 100 niveaux cumulés de maîtrise matérielle.|Alcance 100 níveis totais de maestria de hardware.|Raggiungi 100 livelli totali di maestria hardware.|Osiągnij łącznie 100 poziomów mistrzostwa sprzętu.
+Erreiche Mastery 5 mit allen 15 Hardwareklassen.|Reach mastery 5 in all 15 hardware classes.|Alcanza maestría 5 en las 15 clases de hardware.|Atteignez la maîtrise 5 dans les 15 classes matérielles.|Alcance maestria 5 nas 15 classes de hardware.|Raggiungi maestria 5 in tutte le 15 classi hardware.|Osiągnij mistrzostwo 5 we wszystkich 15 klasach sprzętu.
+Führe 25 Prestiges durch.|Complete 25 prestiges.|Completa 25 prestigios.|Effectuez 25 prestiges.|Conclua 25 prestígios.|Completa 25 prestigi.|Wykonaj 25 prestiży.
+Führe 100 Prestiges durch.|Complete 100 prestiges.|Completa 100 prestigios.|Effectuez 100 prestiges.|Conclua 100 prestígios.|Completa 100 prestigi.|Wykonaj 100 prestiży.
+Finde 100.000 Komponenten.|Find 100,000 components.|Encuentra 100.000 componentes.|Trouvez 100 000 composants.|Encontre 100.000 componentes.|Trova 100.000 componenti.|Znajdź 100 000 komponentów.
+Stelle 250 Items her.|Craft 250 items.|Fabrica 250 objetos.|Fabriquez 250 objets.|Fabrique 250 itens.|Crea 250 oggetti.|Wytwórz 250 przedmiotów.
+Schließe 500 Forschungen ab.|Complete 500 research jobs.|Completa 500 investigaciones.|Terminez 500 recherches.|Conclua 500 pesquisas.|Completa 500 ricerche.|Ukończ 500 badań.
+Schließe 3 Seasons vollständig ab.|Fully complete 3 seasons.|Completa totalmente 3 temporadas.|Terminez entièrement 3 saisons.|Conclua totalmente 3 temporadas.|Completa interamente 3 stagioni.|Ukończ w całości 3 sezony.
+Schließe 12 Seasons vollständig ab.|Fully complete 12 seasons.|Completa totalmente 12 temporadas.|Terminez entièrement 12 saisons.|Conclua totalmente 12 temporadas.|Completa interamente 12 stagioni.|Ukończ w całości 12 sezonów.
+Erreiche 500 Achievement Points.|Reach 500 achievement points.|Alcanza 500 puntos de logros.|Atteignez 500 points de succès.|Alcance 500 pontos de conquistas.|Raggiungi 500 punti obiettivi.|Osiągnij 500 punktów osiągnięć.
+CHALLENGES|CHALLENGES|DESAFÍOS|DÉFIS|DESAFIOS|SFIDE|WYZWANIA
+starten|start|iniciar|lancer|iniciar|avvia|rozpocznij
+Analysen planen|Plan analyses|Planificar análisis|Planifier les analyses|Planejar análises|Pianifica analisi|Planuj analizy
+Komponenten automatisch sammeln|Collect components automatically|Recoger componentes automáticamente|Collecter des composants automatiquement|Coletar componentes automaticamente|Raccogli componenti automaticamente|Zbieraj komponenty automatycznie
+Über Nacht forschen|Research overnight|Investigar por la noche|Rechercher pendant la nuit|Pesquisar durante a noite|Ricerca notturna|Badania przez noc
+Planung|Planning|Planificación|Planification|Planejamento|Pianificazione|Planowanie
+Wiederholung|Repeat|Repetición|Répétition|Repetição|Ripetizione|Powtarzanie
+Einkaufsagent I|Purchasing agent I|Agente de compras I|Agent d’achat I|Agente de compras I|Agente acquisti I|Agent zakupów I
+Einkaufsagent II|Purchasing agent II|Agente de compras II|Agent d’achat II|Agente de compras II|Agente acquisti II|Agent zakupów II
+Einkaufsagent III|Purchasing agent III|Agente de compras III|Agent d’achat III|Agente de compras III|Agente acquisti III|Agent zakupów III
+Einkaufsagent IV|Purchasing agent IV|Agente de compras IV|Agent d’achat IV|Agente de compras IV|Agente acquisti IV|Agent zakupów IV
+Einkaufsagent V|Purchasing agent V|Agente de compras V|Agent d’achat V|Agente de compras V|Agente acquisti V|Agent zakupów V
+Parallelrechner|Parallel computing|Cómputo paralelo|Calcul parallèle|Computação paralela|Calcolo parallelo|Obliczenia równoległe
+Hardware-Verbund|Hardware network|Red de hardware|Réseau matériel|Rede de hardware|Rete hardware|Sieć sprzętowa
+Klassenvielfalt|Class diversity|Diversidad de clases|Diversité des classes|Diversidade de classes|Diversità delle classi|Różnorodność klas
+Industrielle KI|Industrial AI|IA industrial|IA industrielle|IA industrial|IA industriale|Przemysłowa SI
+Planetare Parallelität|Planetary parallelism|Paralelismo planetario|Parallélisme planétaire|Paralelismo planetário|Parallelismo planetario|Planetarna równoległość
+Qualitätsarchitektur|Quality architecture|Arquitectura de calidad|Architecture de qualité|Arquitetura de qualidade|Architettura qualitativa|Architektura jakości
+Effizienzarchitektur|Efficiency architecture|Arquitectura de eficiencia|Architecture d’efficacité|Arquitetura de eficiência|Architettura efficiente|Architektura wydajności
+Trainingsplan|Training plan|Plan de entrenamiento|Plan d’entraînement|Plano de treino|Piano di addestramento|Plan treningu
+Trainingsbeschleuniger|Training accelerator|Acelerador de entrenamiento|Accélérateur d’entraînement|Acelerador de treino|Acceleratore di addestramento|Akcelerator treningu
+Trainingsautopilot|Training autopilot|Piloto de entrenamiento|Pilote d’entraînement|Piloto de treino|Pilota di addestramento|Autopilot treningu
+Lernkurve|Learning curve|Curva de aprendizaje|Courbe d’apprentissage|Curva de aprendizado|Curva di apprendimento|Krzywa uczenia
+Modellarchiv|Model archive|Archivo de modelos|Archive des modèles|Arquivo de modelos|Archivio modelli|Archiwum modeli
+Hochleistungsinferenz|High-performance inference|Inferencia de alto rendimiento|Inférence haute performance|Inferência de alto desempenho|Inferenza ad alte prestazioni|Wydajne wnioskowanie
+Perfekte Integration|Perfect integration|Integración perfecta|Intégration parfaite|Integração perfeita|Integrazione perfetta|Doskonała integracja
+Parallellabor I|Parallel lab I|Laboratorio paralelo I|Laboratoire parallèle I|Laboratório paralelo I|Laboratorio parallelo I|Laboratorium równoległe I
+Parallellabor II|Parallel lab II|Laboratorio paralelo II|Laboratoire parallèle II|Laboratório paralelo II|Laboratorio parallelo II|Laboratorium równoległe II
+Parallellabor III|Parallel lab III|Laboratorio paralelo III|Laboratoire parallèle III|Laboratório paralelo III|Laboratorio parallelo III|Laboratorium równoległe III
+Forschungspuffer|Research buffer|Reserva de investigación|Tampon de recherche|Reserva de pesquisa|Riserva di ricerca|Bufor badań
+Forschungswiederholung|Research repetition|Repetición de investigación|Répétition de recherche|Repetição de pesquisa|Ripetizione ricerca|Powtarzanie badań
+Forschungsdirektor|Research director|Director de investigación|Directeur de recherche|Diretor de pesquisa|Direttore della ricerca|Dyrektor badań
+Forschungsbeschleuniger|Research accelerator|Acelerador de investigación|Accélérateur de recherche|Acelerador de pesquisa|Acceleratore della ricerca|Akcelerator badań
+Datenkompression|Data compression|Compresión de datos|Compression des données|Compressão de dados|Compressione dati|Kompresja danych
+Autonome Wissenschaft|Autonomous science|Ciencia autónoma|Science autonome|Ciência autônoma|Scienza autonoma|Autonomiczna nauka
+Wissenschaftliche Singularität|Scientific singularity|Singularidad científica|Singularité scientifique|Singularidade científica|Singolarità scientifica|Osobliwość naukowa
+Gezielte Materialanalyse|Targeted material analysis|Análisis dirigido|Analyse ciblée des matériaux|Análise direcionada|Analisi mirata|Ukierunkowana analiza
+Präzisionsfertigung|Precision crafting|Fabricación de precisión|Fabrication de précision|Fabricação de precisão|Fabbricazione di precisione|Precyzyjne wytwarzanie
+Item-Verstärker|Item amplifier|Amplificador de objetos|Amplificateur d’objets|Amplificador de itens|Amplificatore di oggetti|Wzmacniacz przedmiotów
+Serienfertigung|Serial production|Producción en serie|Production en série|Produção em série|Produzione in serie|Produkcja seryjna
+Fertigungstakt|Production cadence|Cadencia de producción|Cadence de production|Cadência de produção|Ritmo di produzione|Tempo produkcji
+Resonante Ausrüstung|Resonant equipment|Equipo resonante|Équipement résonant|Equipamento ressonante|Equipaggiamento risonante|Rezonujący ekwipunek
+Perfekte Ausrüstung|Perfect equipment|Equipo perfecto|Équipement parfait|Equipamento perfeito|Equipaggiamento perfetto|Doskonały ekwipunek
+Impulsverstärker|Pulse amplifier|Amplificador de impulsos|Amplificateur d’impulsions|Amplificador de pulsos|Amplificatore di impulsi|Wzmacniacz impulsów
+Kritische Impulse I|Critical pulses I|Impulsos críticos I|Impulsions critiques I|Pulsos críticos I|Impulsi critici I|Impulsy krytyczne I
+Kritische Impulse II|Critical pulses II|Impulsos críticos II|Impulsions critiques II|Pulsos críticos II|Impulsi critici II|Impulsy krytyczne II
+Kritische Leistung I|Critical power I|Potencia crítica I|Puissance critique I|Potência crítica I|Potenza critica I|Moc krytyczna I
+Kritische Leistung II|Critical power II|Potencia crítica II|Puissance critique II|Potência crítica II|Potenza critica II|Moc krytyczna II
+Overdrive-Verstärker I|Overdrive amplifier I|Amplificador de Overdrive I|Amplificateur Overdrive I|Amplificador de Overdrive I|Amplificatore Overdrive I|Wzmacniacz Overdrive I
+Overdrive-Verstärker II|Overdrive amplifier II|Amplificador de Overdrive II|Amplificateur Overdrive II|Amplificador de Overdrive II|Amplificatore Overdrive II|Wzmacniacz Overdrive II
+Overdrive-Speicher|Overdrive reserve|Reserva de Overdrive|Réserve Overdrive|Reserva de Overdrive|Riserva Overdrive|Rezerwa Overdrive
+Impulsnetz|Pulse network|Red de impulsos|Réseau d’impulsions|Rede de pulsos|Rete di impulsi|Sieć impulsów
+Singularitätsimpuls|Singularity pulse|Impulso de singularidad|Impulsion de singularité|Pulso de singularidade|Impulso di singolarità|Impuls osobliwości
+Kommerzialisierung|Commercialization|Comercialización|Commercialisation|Comercialização|Commercializzazione|Komercjalizacja
+Meilenstein-Erkenntnis|Milestone insight|Conocimiento de hitos|Savoir des paliers|Conhecimento de marcos|Conoscenza dei traguardi|Wiedza z kamieni milowych
+Modell-Erkenntnis|Model insight|Conocimiento de modelos|Savoir des modèles|Conhecimento de modelos|Conoscenza dei modelli|Wiedza modeli
+Forschungs-Erkenntnis|Research insight|Conocimiento de investigación|Savoir de recherche|Conhecimento de pesquisa|Conoscenza della ricerca|Wiedza z badań
+INT-Rückkopplung|INT feedback|Retroalimentación INT|Rétroaction INT|Realimentação INT|Retroazione INT|Sprzężenie INT
+Prestige-Agent|Prestige agent|Agente de prestigio|Agent de prestige|Agente de prestígio|Agente prestigio|Agent prestiżu
+Relatives Prestige-Ziel|Relative prestige target|Objetivo relativo de prestigio|Objectif relatif de prestige|Meta relativa de prestígio|Obiettivo prestigio relativo|Względny cel prestiżu
+Erkenntnisverdichter|Insight compressor|Compresor de conocimiento|Compresseur de savoir|Compressor de conhecimento|Compressore di conoscenza|Kompresor wiedzy
+Tiefe Erkenntnis|Deep insight|Conocimiento profundo|Savoir profond|Conhecimento profundo|Conoscenza profonda|Głęboka wiedza
+Rekursive Erkenntnis|Recursive insight|Conocimiento recursivo|Savoir récursif|Conhecimento recursivo|Conoscenza ricorsiva|Wiedza rekurencyjna
+Axiom-Resonanz|Axiom resonance|Resonancia de axiomas|Résonance des axiomes|Ressonância de axiomas|Risonanza degli assiomi|Rezonans aksjomatów
+Ökonomisches Fundament|Economic foundation|Base económica|Fondation économique|Fundação econômica|Fondamento economico|Podstawa ekonomiczna
+Permanente Parallelität|Permanent parallelism|Paralelismo permanente|Parallélisme permanent|Paralelismo permanente|Parallelismo permanente|Trwała równoległość
+Kritische Resonanz|Critical resonance|Resonancia crítica|Résonance critique|Ressonância crítica|Risonanza critica|Rezonans krytyczny
+Integrationskapazität|Integration capacity|Capacidad de integración|Capacité d’intégration|Capacidade de integração|Capacità di integrazione|Pojemność integracji
+KI-Kernverstärkung|AI core amplification|Amplificación del núcleo de IA|Amplification du noyau d’IA|Amplificação do núcleo de IA|Amplificazione nucleo IA|Wzmocnienie rdzenia SI
+Verankerte Einkaufsagenten|Persistent purchasing agents|Agentes de compra persistentes|Agents d’achat persistants|Agentes de compra persistentes|Agenti acquisti permanenti|Trwali agenci zakupów
+Verankerte Steuerung|Persistent control|Control persistente|Contrôle persistant|Controle persistente|Controllo permanente|Trwałe sterowanie
+Ausrüstungsresonanz|Equipment resonance|Resonancia de equipo|Résonance d’équipement|Ressonância de equipamento|Risonanza equipaggiamento|Rezonans ekwipunku
+Wiederaufbauplan|Rebuilding plan|Plan de reconstrucción|Plan de reconstruction|Plano de reconstrução|Piano di ricostruzione|Plan odbudowy
+Beschleunigter Wiederaufbau|Accelerated rebuilding|Reconstrucción acelerada|Reconstruction accélérée|Reconstrução acelerada|Ricostruzione accelerata|Przyspieszona odbudowa
+Axiom-Agent|Axiom agent|Agente de axiomas|Agent d’axiomes|Agente de axiomas|Agente assiomi|Agent aksjomatów
+Komponentenarchiv|Component archive|Archivo de componentes|Archive des composants|Arquivo de componentes|Archivio componenti|Archiwum komponentów
+Analyseplaner|Analysis planner|Planificador de análisis|Planificateur d’analyses|Planejador de análises|Pianificatore analisi|Planer analiz
+Fertigungsplaner|Crafting planner|Planificador de fabricación|Planificateur de fabrication|Planejador de fabricação|Pianificatore creazione|Planer wytwarzania
+Fusionsplaner|Fusion planner|Planificador de fusión|Planificateur de fusion|Planejador de fusão|Pianificatore fusione|Planer fuzji
+Materialkreislauf|Material cycle|Ciclo de materiales|Cycle des matériaux|Ciclo de materiais|Ciclo dei materiali|Obieg materiałów
+Hochleistungsfertigung|High-performance crafting|Fabricación de alto rendimiento|Fabrication haute performance|Fabricação de alto desempenho|Creazione ad alte prestazioni|Wydajne wytwarzanie
+Erkenntnisresonanz|Insight resonance|Resonancia de conocimiento|Résonance du savoir|Ressonância de conhecimento|Risonanza della conoscenza|Rezonans wiedzy
+Effiziente KI-Entwicklung|Efficient AI development|Desarrollo eficiente de IA|Développement d’IA efficace|Desenvolvimento eficiente de IA|Sviluppo IA efficiente|Wydajny rozwój SI
+Erweiterte KI-Entwicklung|Expanded AI development|Desarrollo ampliado de IA|Développement d’IA étendu|Desenvolvimento ampliado de IA|Sviluppo IA esteso|Rozszerzony rozwój SI
+KI-Einsatzplan|AI deployment plan|Plan de despliegue de IA|Plan de déploiement d’IA|Plano de uso de IA|Piano di impiego IA|Plan wdrożenia SI
+Modell-Item-Kopplung|Model–item coupling|Acoplamiento modelo–objeto|Couplage modèle–objet|Acoplamento modelo–item|Accoppiamento modello–oggetto|Sprzężenie model–przedmiot
+Vertiefte KI-Fähigkeiten|Advanced AI abilities|Habilidades avanzadas de IA|Capacités d’IA avancées|Habilidades avançadas de IA|Capacità IA avanzate|Zaawansowane zdolności SI
+Itemboni|Item bonuses|Bonificaciones de objetos|Bonus d’objets|Bônus de itens|Bonus degli oggetti|Premie przedmiotów
+Modell deaktivieren|Deactivate model|Desactivar modelo|Désactiver le modèle|Desativar modelo|Disattiva modello|Dezaktywuj model
+Integration|Integration|Integración|Intégration|Integração|Integrazione|Integracja
+Cloud-Backup|Cloud backup|Copia en la nube|Sauvegarde cloud|Backup na nuvem|Backup cloud|Kopia w chmurze
+Apple iCloud auf iOS; Google Play Games auf Android. Lokale Spielstände bleiben unabhängig. Abweichende Stände ausdrücklich wählen, niemals Belohnungen zusammenführen.|Apple iCloud on iOS; Google Play Games on Android. Local saves remain independent. Choose conflicting saves explicitly; rewards are never merged.|Apple iCloud en iOS; Google Play Games en Android. El guardado local es independiente. Elige expresamente entre partidas en conflicto; las recompensas nunca se suman.|Apple iCloud sur iOS ; Google Play Games sur Android. Les sauvegardes locales restent indépendantes. Choisissez les versions en conflit ; les récompenses ne sont jamais fusionnées.|Apple iCloud no iOS; Google Play Games no Android. Os saves locais são independentes. Escolha os saves em conflito; as recompensas nunca são somadas.|Apple iCloud su iOS; Google Play Games su Android. I salvataggi locali restano indipendenti. Scegli tra versioni in conflitto; le ricompense non vengono mai sommate.|Apple iCloud na iOS; Google Play Games na Androidzie. Lokalne zapisy są niezależne. Wybierz wersję przy konflikcie; nagrody nigdy nie są sumowane.
+Cloud prüfen|Check cloud|Consultar nube|Consulter le cloud|Consultar nuvem|Controlla cloud|Sprawdź chmurę
+Stand hochladen|Upload save|Subir partida|Envoyer la sauvegarde|Enviar save|Carica salvataggio|Wyślij zapis
+Gewählten Cloudstand nach Originalkopie laden|Load selected cloud save after preserving originals|Cargar partida de nube tras conservar originales|Charger la version cloud après copie des originaux|Carregar save da nuvem após preservar originais|Carica dal cloud dopo aver conservato gli originali|Wczytaj zapis z chmury po zachowaniu oryginałów
+Cloud wird geprüft · lokaler Stand bleibt erhalten|Checking cloud · local save retained|Consultando nube · guardado local conservado|Vérification cloud · sauvegarde locale conservée|Consultando nuvem · save local preservado|Controllo cloud · salvataggio locale conservato|Sprawdzanie chmury · zapis lokalny zachowany
+Keine Cloud-Sicherung vorhanden|No cloud backup found|No hay copia en la nube|Aucune sauvegarde cloud|Nenhum backup na nuvem|Nessun backup cloud|Brak kopii w chmurze
+Cloudstände gefunden · Vorschau auswählen|Cloud saves found · choose a preview|Partidas encontradas · elegir vista previa|Sauvegardes trouvées · choisir un aperçu|Saves encontrados · escolher prévia|Salvataggi trovati · scegli anteprima|Znaleziono zapisy · wybierz podgląd
+Cloud-Vorschau|Cloud preview|Vista previa de nube|Aperçu cloud|Prévia da nuvem|Anteprima cloud|Podgląd chmury
+Lokaler Stand|Local save|Partida local|Sauvegarde locale|Save local|Salvataggio locale|Zapis lokalny
+Laden ersetzt den lokalen Fortschritt nach unveränderter Originalkopie. Keine Zusammenführung.|Loading replaces local progress after preserving unchanged originals. No merge.|Cargar sustituye el progreso local tras conservar originales intactos. Sin fusión.|Le chargement remplace la progression locale après copie intacte des originaux. Aucune fusion.|Carregar substitui o progresso local após preservar originais intactos. Sem mesclagem.|Il caricamento sostituisce i progressi locali dopo copia intatta degli originali. Nessuna fusione.|Wczytanie zastępuje lokalny postęp po zachowaniu niezmienionych oryginałów. Bez łączenia.
+Cloud-Sicherung bestätigt|Cloud backup confirmed|Copia de nube confirmada|Sauvegarde cloud confirmée|Backup na nuvem confirmado|Backup cloud confermato|Potwierdzono kopię w chmurze
+Platform-Cloud benötigt ein eingerichtetes echtes Mobilgerät. Lokale Spielstände bleiben verfügbar.|Platform cloud requires a provisioned physical mobile device; local saves remain available.|La nube requiere un dispositivo móvil real configurado; los guardados locales siguen disponibles.|Le cloud nécessite un appareil mobile physique configuré ; les sauvegardes locales restent disponibles.|A nuvem exige um dispositivo móvel real configurado; os saves locais continuam disponíveis.|Il cloud richiede un dispositivo mobile fisico configurato; i salvataggi locali restano disponibili.|Chmura wymaga skonfigurowanego urządzenia mobilnego; zapisy lokalne pozostają dostępne.
+Google Play Games ist noch nicht eingerichtet. Anmeldung und Upload werden nicht simuliert.|Google Play Games is not configured; no sign-in or upload is simulated.|Google Play Games aún no está configurado; no se simulan acceso ni subida.|Google Play Games n’est pas configuré ; aucune connexion ni aucun envoi n’est simulé.|Google Play Games não está configurado; login e envio não são simulados.|Google Play Games non è configurato; accesso e caricamento non sono simulati.|Google Play Games nie jest skonfigurowane; logowanie ani wysyłanie nie są symulowane.
+insgesamt|total|total|au total|total|totale|łącznie
+Zentrum|Center|Centrar|Centrer|Centro|Centro|Centrum
+Werkstatt|Workshop|Taller|Atelier|Oficina|Officina|Warsztat
+Impulse|Pulses|Impulsos|Impulsions|Pulsos|Impulsi|Impulsy
+Bewegung|Motion|Movimiento|Mouvement|Movimento|Movimento|Ruch
+Resonanz|Resonance|Resonancia|Résonance|Ressonância|Risonanza|Rezonans
+Archive|Archives|Archivos|Archives|Arquivos|Archivi|Archiwa
+AXIOME|AXIOMS|AXIOMAS|AXIOMES|AXIOMAS|ASSIOMI|AKSJOMATY
+Verschieben · Zwei-Finger-Zoom. Kauf nur nach INT-Kosten.|Drag · Pinch to zoom. Purchase depends only on INT cost.|Arrastra · Pellizca para ampliar. Compra solo según coste de INT.|Glisser · Pincer pour zoomer. Achat selon le coût en INT uniquement.|Arraste · Pince para ampliar. Compra depende apenas do custo em INT.|Trascina · Pizzica per zoomare. Acquisto basato solo sul costo INT.|Przesuwaj · Szczypnij, aby powiększyć. Zakup zależy tylko od kosztu INT.
+Verschieben · Zwei-Finger-Zoom. Kauf nur nach Axiomkosten.|Drag · Pinch to zoom. Purchase depends only on Axiom cost.|Arrastra · Pellizca para ampliar. Compra solo según coste de axiomas.|Glisser · Pincer pour zoomer. Achat selon le coût en axiomes uniquement.|Arraste · Pince para ampliar. Compra depende apenas do custo em axiomas.|Trascina · Pizzica per zoomare. Acquisto basato solo sul costo in assiomi.|Przesuwaj · Szczypnij, aby powiększyć. Zakup zależy tylko od kosztu aksjomatów.
+Challenge abgeschlossen|Challenge completed|Desafío completado|Défi terminé|Desafio concluído|Sfida completata|Wyzwanie ukończone
+Training abgeschlossen|Training completed|Entrenamiento completado|Entraînement terminé|Treino concluído|Addestramento completato|Trening ukończony
+Forschung abgeschlossen|Research completed|Investigación completada|Recherche terminée|Pesquisa concluída|Ricerca completata|Badanie ukończone
+Analyse abgeschlossen|Analysis completed|Análisis completado|Analyse terminée|Análise concluída|Analisi completata|Analiza ukończona
+Knoten aktiviert|Node activated|Nodo activado|Nœud activé|Nó ativado|Nodo attivato|Węzeł aktywowany
+Axiom verstärkt|Axiom upgraded|Axioma mejorado|Axiome amélioré|Axioma melhorado|Assioma migliorato|Aksjomat ulepszony
+Modell verbessert|Model upgraded|Modelo mejorado|Modèle amélioré|Modelo melhorado|Modello migliorato|Model ulepszony
+Modell aktiviert|Model activated|Modelo activado|Modèle activé|Modelo ativado|Modello attivato|Model aktywowany
+Abgeholt|Claimed|Recogido|Récupéré|Resgatado|Riscattato|Odebrano
+Spielstand exportieren|Export save|Exportar partida|Exporter la sauvegarde|Exportar save|Esporta salvataggio|Eksportuj zapis
+Spielstand importieren|Import save|Importar partida|Importer la sauvegarde|Importar save|Importa salvataggio|Importuj zapis
+Haptik|Haptics|Vibración|Retour haptique|Vibração|Feedback aptico|Wibracje
+Sound testen|Test sound|Probar sonido|Tester le son|Testar som|Prova suono|Testuj dźwięk
+Vorherige Season|Previous season|Temporada anterior|Saison précédente|Temporada anterior|Stagione precedente|Poprzedni sezon
+Übersicht|Overview|Resumen|Aperçu|Visão geral|Panoramica|Przegląd
+Erfolge|Achievements|Logros|Succès|Conquistas|Obiettivi|Osiągnięcia
+Nachrichten|Messages|Mensajes|Messages|Mensagens|Messaggi|Wiadomości
+Prestigeanzahl|Prestige count|Número de prestigios|Nombre de prestiges|Número de prestígios|Numero di prestigi|Liczba prestiżów
+Historische INT|Lifetime INT|INT totales|INT cumulés|INT totais|INT totali|Łączne INT
+Axiome|Axioms|Axiomas|Axiomes|Axiomas|Assiomi|Aksjomaty
+Spielerprofil|Player profile|Perfil de jugador|Profil du joueur|Perfil do jogador|Profilo giocatore|Profil gracza
+Vitrine|Showcase|Vitrina|Vitrine|Vitrine|Vetrina|Gablota
+Season-Verlauf|Season history|Historial de temporadas|Historique des saisons|Histórico de temporadas|Cronologia stagioni|Historia sezonów
+Animationen / FX|Animations / FX|Animaciones / efectos|Animations / effets|Animações / efeitos|Animazioni / effetti|Animacje / efekty
+Musik|Music|Música|Musique|Música|Musica|Muzyka
+Effekte stumm|Mute effects|Silenciar efectos|Couper les effets|Silenciar efeitos|Disattiva suoni effetti|Wycisz efekty
+Spielername|Player name|Nombre del jugador|Nom du joueur|Nome do jogador|Nome giocatore|Nazwa gracza
+Season|Season|Temporada|Saison|Temporada|Stagione|Sezon
+30-TAGE NEURAL SEASON|30-DAY NEURAL SEASON|TEMPORADA NEURAL DE 30 DÍAS|SAISON NEURALE DE 30 JOURS|TEMPORADA NEURAL DE 30 DIAS|STAGIONE NEURALE DI 30 GIORNI|30-DNIOWY SEZON NEURONOWY
+Level|Level|Nivel|Niveau|Nível|Livello|Poziom
+Artefakt|Artifact|Artefacto|Artefact|Artefato|Artefatto|Artefakt
+Challenge-Sterne|Challenge stars|Estrellas de desafíos|Étoiles de défis|Estrelas de desafios|Stelle sfide|Gwiazdy wyzwań
+Challenge-Runs|Challenge runs|Intentos de desafío|Tentatives de défi|Tentativas de desafio|Tentativi sfida|Próby wyzwań
+Start|Start|Iniciar|Lancer|Iniciar|Avvia|Rozpocznij
+Abbrechen|Abort|Cancelar|Abandonner|Cancelar|Annulla|Przerwij
+Noch nicht bereit|Not ready|Aún no disponible|Pas encore prêt|Ainda não disponível|Non ancora pronto|Jeszcze niedostępne
+Hardware gekauft|Hardware bought|Hardware comprado|Matériel acheté|Hardware comprado|Hardware acquistato|Kupiony sprzęt
+Aktive Zeit|Active time|Tiempo activo|Temps actif|Tempo ativo|Tempo attivo|Czas aktywności
+Als gelesen markieren|Mark as read|Marcar como leído|Marquer comme lu|Marcar como lido|Segna come letto|Oznacz jako przeczytane
+Item-Typen|Item types|Tipos de objetos|Types d’objets|Tipos de itens|Tipi di oggetti|Typy przedmiotów
+Artefakte|Artifacts|Artefactos|Artefacts|Artefatos|Artefatti|Artefakty
+Basis|Base|Base|Base|Base|Base|Podstawa
+gesamt|total|total|total|total|totale|łącznie
+Data Flywheel|Data flywheel|Ciclo de datos|Boucle de données|Ciclo de dados|Ciclo dei dati|Koło danych
+Datenpipeline|Data pipeline|Canalización de datos|Pipeline de données|Pipeline de dados|Pipeline dati|Potok danych
+Verteilte Inferenz|Distributed inference|Inferencia distribuida|Inférence distribuée|Inferência distribuída|Inferenza distribuita|Rozproszone wnioskowanie
+Modelltransfer|Model transfer|Transferencia de modelos|Transfert de modèles|Transferência de modelos|Trasferimento modelli|Transfer modeli
+Materialrecycling|Material recycling|Reciclaje de materiales|Recyclage de matériaux|Reciclagem de materiais|Riciclo materiali|Recykling materiałów
+Forschungsplanung|Research scheduling|Planificación de investigación|Planification de recherche|Planejamento de pesquisa|Pianificazione ricerca|Planowanie badań
