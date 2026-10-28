@@ -209,3 +209,7 @@ Geprüfte Grundlage: 1.989 Vitest, 188 EditMode und final129PlayMode; alle Gener
 
 ### 29.10.2026 – Archiv-Abhängigkeit im V3-Vertrag
 Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehendes I04-/Legacyrecht, Bauplanforschung und unveränderte bezahlte Herstellung; kein Gratisitem/Ersatzpreis. Elf gemeinsame neue Erwerbs-/Zahlungsfälle; Compile, 9 EditMode, 5 PlayMode und gezielte TS-Fälle grün. Echte Save-Migration und erreichbare V3-Spielerfreigabe ausdrücklich noch offen. Siehe `docs/item-system-v3/contracts.md`.
+
+- Baseline: passives vorhandenes Domainprofil bis90Tage/44Prestiges vollständig, ohne Timeout oder Warnung. Grenzen/alte Diagnosekatalogtexte in `docs/item-system-v3/baseline-notes.md` beachten. Für echte V3-Abnahme vollständige Mira-/Rezept-/Modell-/Axiomstrategien, acht Loadouts und maximalen Leerlauf beobachten; aktuelles Profil dafür nicht ausgeben.
+
+- 29.10.: Logik-Saat mit tatsächlichen bezahlten Ereignissen, IDs/Ursachen, Ausschlüssen und echten Resetfolgen angebunden. 1.999Vitest, 191vollständige EditMode und9gezielte PlayMode grün. Nächste Verträge: Photon/Drohne/Gradient und weitere Ereignisse; V3-Dateimigration/Spielerfreigabe weiterhin offen. `docs/item-system-v3/implementation.md`.

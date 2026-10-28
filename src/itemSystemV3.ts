@@ -13,6 +13,9 @@ export type ItemSystemV3State={
   knowledgeProduced:ScientificJSON;
   componentsProduced:ScientificJSON;
   runMinutes:number;
+  nextTrainingSequence:number;
+  lastCompletedTrainingSequence:number;
+  lastTrainingCompletionCause:'regular'|'bonus'|'intro'|null;
   learningStreak:number;
   lastLearningTrack:'quality'|'efficiency'|null;
   scannerAnalyses:number;
@@ -20,7 +23,7 @@ export type ItemSystemV3State={
   axiomDiscovered:boolean;
   axiomDiscoveryAt:number|null;
 };
-export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
+export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
 export const usesItemV3=(s:GameState)=>s.itemSystemV3?.version===3;
 const c=()=>BALANCE.itemV3;
 const one=()=>S.from(1);
@@ -49,7 +52,7 @@ export const itemV3Has=(s:GameState,id:string)=>itemV3Equipped(s).some(item=>ite
 export function withoutItemV3Equipment(s:GameState):GameState{return{...s,itemSystemV3:undefined,equipped:{}};}
 export function itemV3Snapshot(s:GameState){
  const state=s.itemSystemV3;if(!state||state.version!==3)throw new TypeError('V3 state required');
- nonnegative(state.runMinutes,'Invalid run time');
+ nonnegative(state.runMinutes,'Invalid run time');validateItemTrainingCountersV3(state);
  let H=S.zero();for(const id of hardwareIds)H=H.add(S.from(nonnegative(s.hardwareCounts[id],'Invalid hardware')));
  const M=S.from(s.qualityLevel).add(S.from(s.efficiencyLevel)).add(S.from(integrationLevel(s)));
  // A project present in both old fields is still a single research, not two.
@@ -200,3 +203,27 @@ export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameS
 /** Restores the old researchArchive -> I04 acquisition right. Learning stays an
  * explicit one-time action; this grants neither fragments nor a free item. */
 export function archiveBlueprintRightV3(s:GameState){return usesItemV3(s)&&(s.itemSystemV3!.archiveBlueprintRight||s.insightArchiveBlueprint||s.nodes.includes('I04')||s.progression.known.includes('I04')||(s.learnedRecipes??[]).includes('insight-archive'));}
+
+function validateItemTrainingCountersV3(v:ItemSystemV3State){
+ if(!Number.isSafeInteger(v.nextTrainingSequence)||v.nextTrainingSequence<1||!Number.isSafeInteger(v.lastCompletedTrainingSequence)||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||!Number.isSafeInteger(v.learningStreak)||v.learningStreak<0||v.learningStreak>c().logic.maxStreak||![null,'quality','efficiency'].includes(v.lastLearningTrack)||![null,'regular','bonus','intro'].includes(v.lastTrainingCompletionCause))throw new RangeError('Invalid V3 training counters');
+}
+/** Serial training IDs are assigned only after the existing start/payment
+ * succeeds. Sequence/settlement markers survive resets; personal counters are
+ * never serialized onto a traded item. Legacy unknown jobs grant no new effect. */
+export function identifyItemTrainingV3(s:GameState):GameState{
+ if(!usesItemV3(s)||!s.activeTraining||s.activeTraining.jobId)return s;
+ const v=s.itemSystemV3!;validateItemTrainingCountersV3(v);const id=v.nextTrainingSequence;
+ if(!Number.isSafeInteger(id)||id<1||id>=Number.MAX_SAFE_INTEGER)throw new RangeError('Invalid V3 training sequence');
+ return{...s,itemSystemV3:{...v,nextTrainingSequence:id+1},activeTraining:{...s.activeTraining,jobId:'v3-training-'+id}};
+}
+export function completeItemTrainingV3(s:GameState,cause:'regular'|'bonus'):GameState{
+ if(!usesItemV3(s)||!s.activeTraining)return s;
+ const job=s.activeTraining,v=s.itemSystemV3!;validateItemTrainingCountersV3(v);if(!Number.isFinite(job.workRequired)||job.workRequired<=0||!Number.isFinite(s.training)||s.training<0||!['quality','efficiency','integration'].includes(job.track))return s;const match=/^v3-training-([1-9]\d*)$/.exec(job.jobId??'');if(!match)return s;
+ const id=Number(match[1]);if(!Number.isSafeInteger(id)||id>=v.nextTrainingSequence||id<=v.lastCompletedTrainingSequence||s.training+1e-7<job.workRequired)return s;
+ let learningStreak=v.learningStreak,lastLearningTrack=v.lastLearningTrack;
+ if(cause==='regular'&&!job.intro&&job.track!=='integration'&&itemV3Has(s,'logic-seed')){
+  if(!Number.isSafeInteger(learningStreak)||learningStreak<0||learningStreak>c().logic.maxStreak)throw new RangeError('Invalid V3 learning series');
+  learningStreak=lastLearningTrack===job.track?Math.floor(learningStreak/c().logic.sameTrackDivisor):Math.min(c().logic.maxStreak,learningStreak+1);lastLearningTrack=job.track;
+ }
+ return{...s,itemSystemV3:{...v,lastCompletedTrainingSequence:id,lastTrainingCompletionCause:job.intro?'intro':cause,learningStreak,lastLearningTrack}};
+}

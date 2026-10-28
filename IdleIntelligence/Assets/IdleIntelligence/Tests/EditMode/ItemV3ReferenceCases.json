@@ -1,5 +1,5 @@
 {
-  "sourceHash": "73f9fac1cd007f747229bfd7a3a188720a2b4f64e6cf1d95a8c1f8a342d9c430",
+  "sourceHash": "ee7debb60c7f458b2a515db58045066ee9625f5c116ccfde8949bfe347d4617e",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
@@ -14471,6 +14471,2195 @@
       "fragmentsAfter": 0,
       "typesAfter": [
         "insight-archive"
+      ]
+    }
+  ],
+  "learningFlows": [
+    {
+      "name": "alternation-cap-and-half",
+      "prepared": true,
+      "initial": {
+        "quality": 1,
+        "intro": false,
+        "inventory": [
+          {
+            "id": "item-1",
+            "type": "logic-seed",
+            "rarity": 0,
+            "level": 1,
+            "locked": false,
+            "legacyLevelFactor": 1,
+            "materialBasis": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recoveryUsed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "equipped": [
+          "",
+          "item-1",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "steps": [
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 1000,
+          "quality": 1,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "",
+          "nextSequence": 2,
+          "settledSequence": 0,
+          "jobId": "v3-training-1",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 7.2,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 53.10999999999999,
+          "savedAt": 54109.99999999999,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 54109.99999999999,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 3,
+          "settledSequence": 1,
+          "jobId": "v3-training-2",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 3,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999898,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 40.919090909090905,
+          "savedAt": 95029.0909090909,
+          "quality": 2,
+          "efficiency": 1,
+          "integration": 0,
+          "series": 2,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 3,
+          "settledSequence": 2,
+          "jobId": "",
+          "workSpeed": 2.4,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999898,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 95029.0909090909,
+          "quality": 2,
+          "efficiency": 1,
+          "integration": 0,
+          "series": 2,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 4,
+          "settledSequence": 2,
+          "jobId": "v3-training-3",
+          "workSpeed": 2.4,
+          "creditDebit": {
+            "m": 1.728,
+            "e": 3,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999997252,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 52.224999999999994,
+          "savedAt": 147254.09090909088,
+          "quality": 3,
+          "efficiency": 1,
+          "integration": 0,
+          "series": 3,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 4,
+          "settledSequence": 3,
+          "jobId": "",
+          "workSpeed": 2.6,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999997252,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 147254.09090909088,
+          "quality": 3,
+          "efficiency": 1,
+          "integration": 0,
+          "series": 3,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 5,
+          "settledSequence": 3,
+          "jobId": "v3-training-4",
+          "workSpeed": 2.6,
+          "creditDebit": {
+            "m": 7.2,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999996532,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 40.85615384615384,
+          "savedAt": 188110.24475524473,
+          "quality": 3,
+          "efficiency": 2,
+          "integration": 0,
+          "series": 4,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 5,
+          "settledSequence": 4,
+          "jobId": "",
+          "workSpeed": 2.8,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999996532,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 188110.24475524473,
+          "quality": 3,
+          "efficiency": 2,
+          "integration": 0,
+          "series": 4,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 6,
+          "settledSequence": 4,
+          "jobId": "v3-training-5",
+          "workSpeed": 2.8,
+          "creditDebit": {
+            "m": 4.148,
+            "e": 3,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999992384,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 52.82174285714285,
+          "savedAt": 240931.98761238757,
+          "quality": 4,
+          "efficiency": 2,
+          "integration": 0,
+          "series": 5,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 6,
+          "settledSequence": 5,
+          "jobId": "",
+          "workSpeed": 3,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999992384,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 240931.98761238757,
+          "quality": 4,
+          "efficiency": 2,
+          "integration": 0,
+          "series": 5,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 7,
+          "settledSequence": 5,
+          "jobId": "v3-training-6",
+          "workSpeed": 3,
+          "creditDebit": {
+            "m": 1.728,
+            "e": 3,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999990656,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 41.782,
+          "savedAt": 282713.9876123876,
+          "quality": 4,
+          "efficiency": 3,
+          "integration": 0,
+          "series": 6,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 7,
+          "settledSequence": 6,
+          "jobId": "",
+          "workSpeed": 3.2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999990656,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 282713.9876123876,
+          "quality": 4,
+          "efficiency": 3,
+          "integration": 0,
+          "series": 6,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 8,
+          "settledSequence": 6,
+          "jobId": "v3-training-7",
+          "workSpeed": 3.2,
+          "creditDebit": {
+            "m": 9.954,
+            "e": 3,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999980702,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 54.53812449999998,
+          "savedAt": 337252.11211238755,
+          "quality": 5,
+          "efficiency": 3,
+          "integration": 0,
+          "series": 7,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 8,
+          "settledSequence": 7,
+          "jobId": "",
+          "workSpeed": 3.4000000000000004,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999980702,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 337252.11211238755,
+          "quality": 5,
+          "efficiency": 3,
+          "integration": 0,
+          "series": 7,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 9,
+          "settledSequence": 7,
+          "jobId": "v3-training-8",
+          "workSpeed": 3.4000000000000004,
+          "creditDebit": {
+            "m": 4.148,
+            "e": 3,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999976554,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 43.50202352941175,
+          "savedAt": 380754.1356417993,
+          "quality": 5,
+          "efficiency": 4,
+          "integration": 0,
+          "series": 8,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 9,
+          "settledSequence": 8,
+          "jobId": "",
+          "workSpeed": 3.6,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999976554,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 380754.1356417993,
+          "quality": 5,
+          "efficiency": 4,
+          "integration": 0,
+          "series": 8,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 10,
+          "settledSequence": 8,
+          "jobId": "v3-training-9",
+          "workSpeed": 3.6,
+          "creditDebit": {
+            "m": 2.3888,
+            "e": 4,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999952666,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 57.203943919999986,
+          "savedAt": 437958.0795617993,
+          "quality": 6,
+          "efficiency": 4,
+          "integration": 0,
+          "series": 9,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 10,
+          "settledSequence": 9,
+          "jobId": "",
+          "workSpeed": 3.8,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999952666,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 437958.0795617993,
+          "quality": 6,
+          "efficiency": 4,
+          "integration": 0,
+          "series": 9,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 11,
+          "settledSequence": 9,
+          "jobId": "v3-training-10",
+          "workSpeed": 3.8,
+          "creditDebit": {
+            "m": 9.954,
+            "e": 3,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999942712,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 45.92842063157894,
+          "savedAt": 483886.50019337825,
+          "quality": 6,
+          "efficiency": 5,
+          "integration": 0,
+          "series": 10,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 11,
+          "settledSequence": 10,
+          "jobId": "",
+          "workSpeed": 4,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999942712,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 483886.50019337825,
+          "quality": 6,
+          "efficiency": 5,
+          "integration": 0,
+          "series": 10,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 12,
+          "settledSequence": 10,
+          "jobId": "v3-training-11",
+          "workSpeed": 4,
+          "creditDebit": {
+            "m": 5.7331,
+            "e": 4,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999885381,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 60.74996844303998,
+          "savedAt": 544636.4686364182,
+          "quality": 7,
+          "efficiency": 5,
+          "integration": 0,
+          "series": 10,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 12,
+          "settledSequence": 11,
+          "jobId": "",
+          "workSpeed": 4,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999885381,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 544636.4686364182,
+          "quality": 7,
+          "efficiency": 5,
+          "integration": 0,
+          "series": 10,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 13,
+          "settledSequence": 11,
+          "jobId": "v3-training-12",
+          "workSpeed": 4,
+          "creditDebit": {
+            "m": 2.3888,
+            "e": 4,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999861493,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 51.48454952799999,
+          "savedAt": 596121.0181644182,
+          "quality": 7,
+          "efficiency": 6,
+          "integration": 0,
+          "series": 10,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 13,
+          "settledSequence": 12,
+          "jobId": "",
+          "workSpeed": 4,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999861493,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 596121.0181644182,
+          "quality": 7,
+          "efficiency": 6,
+          "integration": 0,
+          "series": 10,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 14,
+          "settledSequence": 12,
+          "jobId": "v3-training-13",
+          "workSpeed": 4,
+          "creditDebit": {
+            "m": 5.7331,
+            "e": 4,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999804162,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 60.74996844303998,
+          "savedAt": 656870.9866074582,
+          "quality": 7,
+          "efficiency": 7,
+          "integration": 0,
+          "series": 5,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 14,
+          "settledSequence": 13,
+          "jobId": "",
+          "workSpeed": 3,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.99999804162,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "unequip-and-integration",
+      "prepared": true,
+      "initial": {
+        "quality": 1,
+        "intro": false,
+        "inventory": [
+          {
+            "id": "item-1",
+            "type": "logic-seed",
+            "rarity": 0,
+            "level": 1,
+            "locked": false,
+            "legacyLevelFactor": 1,
+            "materialBasis": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recoveryUsed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "equipped": [
+          "",
+          "item-1",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "steps": [
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 1000,
+          "quality": 1,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "",
+          "nextSequence": 2,
+          "settledSequence": 0,
+          "jobId": "v3-training-1",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 7.2,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 53.10999999999999,
+          "savedAt": 54109.99999999999,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "unequip",
+          "savedAt": 54109.99999999999,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 1,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 54109.99999999999,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 3,
+          "settledSequence": 1,
+          "jobId": "v3-training-2",
+          "workSpeed": 1,
+          "creditDebit": {
+            "m": 3,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999898,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 90.01,
+          "savedAt": 144120.00000000003,
+          "quality": 2,
+          "efficiency": 1,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 3,
+          "settledSequence": 2,
+          "jobId": "",
+          "workSpeed": 1,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999898,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "equip",
+          "savedAt": 144120.00000000003,
+          "quality": 2,
+          "efficiency": 1,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 3,
+          "settledSequence": 2,
+          "jobId": "",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999898,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "integration",
+          "savedAt": 144120.00000000003,
+          "quality": 2,
+          "efficiency": 1,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 4,
+          "settledSequence": 2,
+          "jobId": "v3-training-3",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 5,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 1,
+            "e": 2,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999848,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 54.55545454545454,
+          "savedAt": 198675.45454545456,
+          "quality": 2,
+          "efficiency": 1,
+          "integration": 1,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 4,
+          "settledSequence": 3,
+          "jobId": "",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999848,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "start",
+          "track": "efficiency",
+          "savedAt": 198675.45454545456,
+          "quality": 2,
+          "efficiency": 1,
+          "integration": 1,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 5,
+          "settledSequence": 3,
+          "jobId": "v3-training-4",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 7.2,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999776,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 48.282727272727264,
+          "savedAt": 246958.18181818182,
+          "quality": 2,
+          "efficiency": 2,
+          "integration": 1,
+          "series": 2,
+          "lastTrack": "efficiency",
+          "cause": "regular",
+          "nextSequence": 5,
+          "settledSequence": 4,
+          "jobId": "",
+          "workSpeed": 2.4,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999776,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "intro-is-not-paid",
+      "prepared": true,
+      "initial": {
+        "quality": 0,
+        "intro": true,
+        "inventory": [
+          {
+            "id": "item-1",
+            "type": "logic-seed",
+            "rarity": 0,
+            "level": 1,
+            "locked": false,
+            "legacyLevelFactor": 1,
+            "materialBasis": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recoveryUsed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "equipped": [
+          "",
+          "item-1",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "steps": [
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 1000,
+          "quality": 0,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "",
+          "nextSequence": 2,
+          "settledSequence": 0,
+          "jobId": "v3-training-1",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 10.01,
+          "savedAt": 11010,
+          "quality": 1,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "intro",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "gem-completion-is-bonus",
+      "prepared": true,
+      "initial": {
+        "quality": 1,
+        "intro": false,
+        "inventory": [
+          {
+            "id": "item-1",
+            "type": "logic-seed",
+            "rarity": 0,
+            "level": 1,
+            "locked": false,
+            "legacyLevelFactor": 1,
+            "materialBasis": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recoveryUsed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "equipped": [
+          "",
+          "item-1",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "steps": [
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 1000,
+          "quality": 1,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "",
+          "nextSequence": 2,
+          "settledSequence": 0,
+          "jobId": "v3-training-1",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 7.2,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "bonus",
+          "savedAt": 1000,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "bonus",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 999,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "actual-prestige-keeps-sequence",
+      "prepared": true,
+      "initial": {
+        "quality": 1,
+        "intro": false,
+        "inventory": [
+          {
+            "id": "item-1",
+            "type": "logic-seed",
+            "rarity": 0,
+            "level": 1,
+            "locked": false,
+            "legacyLevelFactor": 1,
+            "materialBasis": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recoveryUsed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "equipped": [
+          "",
+          "item-1",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "steps": [
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 1000,
+          "quality": 1,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "",
+          "nextSequence": 2,
+          "settledSequence": 0,
+          "jobId": "v3-training-1",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 7.2,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 53.10999999999999,
+          "savedAt": 54109.99999999999,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "prestige",
+          "savedAt": 54109.99999999999,
+          "quality": 0,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "regular",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 9.9999999923,
+            "e": 11,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 1,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "actual-axiom-keeps-sequence",
+      "prepared": true,
+      "initial": {
+        "quality": 1,
+        "intro": false,
+        "inventory": [
+          {
+            "id": "item-1",
+            "type": "logic-seed",
+            "rarity": 0,
+            "level": 1,
+            "locked": false,
+            "legacyLevelFactor": 1,
+            "materialBasis": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "recoveryUsed": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "equipped": [
+          "",
+          "item-1",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "steps": [
+        {
+          "action": "start",
+          "track": "quality",
+          "savedAt": 1000,
+          "quality": 1,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "",
+          "nextSequence": 2,
+          "settledSequence": 0,
+          "jobId": "v3-training-1",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 7.2,
+            "e": 2,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 53.10999999999999,
+          "savedAt": 54109.99999999999,
+          "quality": 2,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 1,
+          "lastTrack": "quality",
+          "cause": "regular",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2.2,
+          "creditDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "axiom",
+          "savedAt": 54109.99999999999,
+          "quality": 0,
+          "efficiency": 0,
+          "integration": 0,
+          "series": 0,
+          "lastTrack": "",
+          "cause": "regular",
+          "nextSequence": 2,
+          "settledSequence": 1,
+          "jobId": "",
+          "workSpeed": 2,
+          "creditDebit": {
+            "m": 9.9999999923,
+            "e": 11,
+            "terms": null
+          },
+          "dataDebit": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "gems": 1000,
+          "prestiges": 0,
+          "axioms": 1
+        }
       ]
     }
   ]

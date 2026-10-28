@@ -91,5 +91,43 @@
       "result": "Passed",
       "xmlSha256": "c2c92016fa80e612120f3f7df4d2ecbc916fb69ace669a85f063452451d261b3"
     }
+  },
+  "learningFollowup": {
+    "sourceHash": "ee7debb60c7f458b2a515db58045066ee9625f5c116ccfde8949bfe347d4617e",
+    "actualSharedLearningFlows": 6,
+    "prepared": true,
+    "normalSaveActivation": false,
+    "vitest": {
+      "files": 154,
+      "tests": 1999,
+      "passed": 1999,
+      "failed": 0,
+      "seconds": 317.34
+    },
+    "v3Persistence": "blocked until complete migration; no V3 file-reload claim",
+    "targetedEditMode": {
+      "total": "11",
+      "passed": "11",
+      "failed": "0",
+      "duration": "5.1499926",
+      "result": "Passed",
+      "xmlSha256": "d5dd06669ec50b5cb96cc5f90b1858099ca4b5351fd13614cf0459946041c0af"
+    },
+    "fullEditMode": {
+      "total": "191",
+      "passed": "191",
+      "failed": "0",
+      "duration": "127.3209907",
+      "result": "Passed",
+      "xmlSha256": "0431760c3630839eeb11a3542cf238506c907dd49c5a13913b76efe9f123181d"
+    },
+    "playMode": {
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "duration": "47.8243537",
+      "result": "Passed",
+      "xmlSha256": "955af75a2c41d8d9c93386d2f2003d86d70e893945bbbbf5ee2334004f4a4471"
+    }
   }
 }

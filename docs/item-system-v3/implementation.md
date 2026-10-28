@@ -120,3 +120,21 @@ Der V3-Lernweg verwendet nun das bestehende I04-/researchArchive-Recht; keine er
 - Typecheck/Build bestanden, vollständiger Generatorvergleich bestanden; vollständiger erneuter TS-Lauf **153 Dateien / 1.992 Tests bestanden**, 323,03 s (`/tmp/idle-v3-archive-full-vitest.log`).
 
 Das ist ein experimenteller V3-Domainvertrag, keine fertige Save-Migration oder Spielerfreigabe. Insbesondere muss die vollständige native/Web-Migration das rechtmäßige Legacyrecht tatsächlich übernehmen. Bestehende reguläre Saves bleiben64/24, der V3-Schreibschutz bleibt aktiv. Weitere Ereignisverbraucher und die V3-Erwerbs-/Detailoberfläche sind offen.
+
+
+### Baseline-Präzisierung nach vollständigem Passivlauf
+
+Alle neun Passivzeitpunkte bis90Tage sind nun abgeschlossen:44Prestiges, invalid=false, kein Timeout/keine Warnung; geplante, angerechnete und verworfene Zeiten stimmen mit dem bestehenden Schedule überein. [Genaue Grenzen](baseline-notes.md): bestehende Domainstrategie ohne vollständige Mira-/Modell-/Axiom-/Loadoutführung. Alte Legacy-Diagnosekatalogtexte sind keine aktuellen60/24-Kaufregeln. Rohberichte unverändert; keine vollständige V3-/Monatsbalance daraus behaupten. Aktiver90-Tage-Lauf und erweiterte Kampagnen offen.
+
+
+## 29.10.2026 – Lernserie und eindeutige Trainingsereignisse
+
+Logik-Saat ist nun an tatsächliche regulär bezahlte aktive Q/E-Abschlüsse angeschlossen. Eindeutige IDs werden nach Start/Zahlung erzeugt; Abschlussmarker/Ursache verhindern zusätzliche Fortschritte bei Wiederholung. Intro/Bonus/Integration/No-items sind ausgeschlossen, Ablegen erhält die Serie. Wirkliche Resets leeren die Serie, erhalten aber monotone IDs. Persönliche Daten hängen am Spielzustand, nicht an handelbaren Itempayloads.
+
+- **6 gemeinsame vollständige TS-/C#-Trainingsfolgen** zusätzlich zu62Produktions- und11Archivfällen. Tatsächliche Debitwerte, Tempo, Level, IDs und Ursachen werden verglichen.
+- Typecheck/Build und vollständiger Generatorvergleich bestanden; **154Dateien /1.999Vitest**, 317,34s.
+- Unity Compile/gezielt11EditMode grün; danach **191/191 vollständige EditMode**, 127,321s (`/tmp/idle-v3-learning-full-edit.xml`).
+- Tatsächliche Szene, Einführungstrainings-Abschlussfeedback und Queues/Reload **9/9 PlayMode**, 47,824s (`/tmp/idle-v3-learning-play.xml`). Die frühere129er-Voll-PlayMode-Abnahme bleibt ein eigener vorheriger Stand; keine Behauptung eines neuen vollständigen PlayMode-Laufs.
+- Tests fanden einen irrtümlichen Reset der neuen ID-Zähler im TS-Resethelfer; korrigiert und über echte Resettransaktionen gegen C# geprüft. Zwei andere Testaufbauten mussten gültige Challenge-Metriken und den wirklichen Intro-Tutorialkontext verwenden; keine Spielregeln dafür geändert.
+
+Die vollständige V3-Dateimigration bleibt offen und der Schreibschutz aktiv. Photonen-/Drohnen-/Gradientüberträge, weitere Ereignisfähigkeiten, vollständige Item-/Knoten-UI und Langkampagnen bleiben konkrete folgende Arbeiten.

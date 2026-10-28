@@ -19,7 +19,14 @@ namespace IdleIntelligence.Tests
         public int price,fragmentsAfter;public bool prerequisite,canLearn,learnedAfter,doubleLearnSame;
         public NumberData dataBefore,dataAfter,paidData;public long[] componentsBefore,componentsAfter,modulesBefore,modulesAfter;public string[] typesAfter;
     }
-    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;}
+    [Serializable]public sealed class LearningV3Initial{public int quality;public bool intro;public ItemInstance[] inventory;public string[] equipped;}
+    [Serializable]public sealed class LearningV3Step
+    {
+        public string action,track,lastTrack,jobId,cause;public double seconds,savedAt,workSpeed;public int quality,efficiency,integration,series,gems,prestiges,axioms;
+        public long nextSequence,settledSequence;public NumberData credits,data,creditDebit,dataDebit;
+    }
+    [Serializable]public sealed class LearningV3Flow{public string name;public bool prepared;public LearningV3Initial initial;public LearningV3Step[] steps;}
+    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;}
     public sealed class ItemSystemV3Tests
     {
         static ItemV3Cases Cases()=>JsonUtility.FromJson<ItemV3Cases>(File.ReadAllText(Path.Combine(Application.dataPath,"IdleIntelligence/Tests/EditMode/ItemV3ReferenceCases.json")));
@@ -98,6 +105,42 @@ namespace IdleIntelligence.Tests
                 Assert.That(made.Workshop.components,Is.EqualTo(row.componentsAfter),row.name+" materials");Assert.That(made.Workshop.modules,Is.EqualTo(row.modulesAfter),row.name+" modules");
                 Assert.That(made.Workshop.fragments,Is.EqualTo(row.fragmentsAfter),row.name+" fragments");Assert.That(made.Workshop.inventory.Select(i=>i.type).ToArray(),Is.EqualTo(row.typesAfter),row.name+" actual item");
             }
+        }
+        [Test]public void ActualPaidLearningFlowsAndResetReceiptsMatchTypeScript()
+        {
+            var cases=Cases();Assert.That(cases.learningFlows.Length,Is.EqualTo(6));
+            foreach(var flow in cases.learningFlows){
+                var s=Game.New(1000,"prepared-learning-reference",true);s.ItemSystemV3=new ItemV3State();s.Quality=flow.initial.quality;s.Credits=s.Data=ScientificNumber.From(1e12);s.Retention.gems=1000;s.Workshop.nodes=new[]{"T04"};
+                s.Workshop.inventory=flow.initial.inventory.Select(i=>i.Copy()).ToArray();s.Workshop.equipped=(string[])flow.initial.equipped.Clone();if(flow.initial.intro){s.Story.legacyIntro=false;s.Story.tutorial="active";s.Story.target="training";}
+                foreach(var step in flow.steps){var beforeCredits=s.Credits;var beforeData=s.Data;
+                    switch(step.action){
+                        case "start":s=Game.Train(s,step.track);break;
+                        case "finish":s=Game.Advance(s,s.SavedAt+step.seconds*1000);break;
+                        case "bonus":s=GemShop.Buy(s,"training-15m");break;
+                        case "unequip":s=s.Copy();s.Workshop.equipped=new string[ItemBalance.Slots.Length];break;
+                        case "equip":s=Workshop.Equip(s,s.Workshop.inventory[0].id);break;
+                        case "prestige":s=s.Copy();s.Prestige.Entitlement=ScientificNumber.From(100);s=PrestigeRules.Reset(s);break;
+                        case "axiom":s=s.Copy();s.Prestige.Cycle=s.Prestige.Free=s.Prestige.Total=s.Prestige.Entitlement=ScientificNumber.Parse("1e12");s.Prestige.known=PrestigeBalance.Nodes.Take(30).Select(n=>n.Id).ToArray();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;s=MetaRules.AxiomReset(s);break;
+                        default:Assert.Fail("Unknown source learning action "+step.action);break;
+                    }
+                    string at=flow.name+" "+step.action;var v=s.ItemSystemV3;
+                    if(step.action=="start")Assert.That(s.Journal.recent.Last(e=>e.type=="training-start").job,Is.EqualTo(step.jobId),at+" start evidence");if(step.action=="finish"||step.action=="bonus")Assert.That(s.Journal.recent.Last(e=>e.type=="training-complete").job,Is.EqualTo("v3-training-"+step.settledSequence),at+" completion evidence");
+                    Assert.That(v.learningStreak,Is.EqualTo(step.series),at+" series");Assert.That(v.lastLearningTrack??"",Is.EqualTo(step.lastTrack),at+" track");
+                    Assert.That(v.lastTrainingCompletionCause??"",Is.EqualTo(step.cause),at+" cause");Assert.That(v.nextTrainingSequence,Is.EqualTo(step.nextSequence),at+" next ID");Assert.That(v.lastCompletedTrainingSequence,Is.EqualTo(step.settledSequence),at+" settled ID");Assert.That(s.Training?.key??"",Is.EqualTo(step.jobId),at+" live ID");
+                    Assert.That(s.Quality,Is.EqualTo(step.quality),at+" quality");Assert.That(s.Efficiency,Is.EqualTo(step.efficiency),at+" efficiency");Assert.That(s.Workshop.integration,Is.EqualTo(step.integration),at+" integration");
+                    Assert.That(Game.WorkSpeed(s),Is.EqualTo(step.workSpeed).Within(Math.Max(1e-10,step.workSpeed*1e-10)),at+" actual speed");
+                    Near(beforeCredits.Subtract(s.Credits),step.creditDebit,at+" paid Credits");Near(beforeData.Subtract(s.Data),step.dataDebit,at+" paid data");Near(s.Credits,step.credits,at+" Credits");Near(s.Data,step.data,at+" data");
+                    Assert.That(s.Retention.gems,Is.EqualTo(step.gems),at+" Gems");Assert.That(s.Prestige.resets,Is.EqualTo(step.prestiges),at+" prestiges");Assert.That(s.Meta.resets,Is.EqualTo(step.axioms),at+" axioms");Assert.That(s.SavedAt,Is.EqualTo(step.savedAt).Within(1e-6),at+" time");
+                }
+            }
+        }
+        [Test]public void TrainingReceiptRejectsPrematureMalformedDuplicateAndForbiddenTriggers()
+        {
+            var initial=Cases().learningFlows[0].initial;var s=Game.New(1000,"prepared-learning-receipt",true);s.ItemSystemV3=new ItemV3State();s.Quality=1;s.Credits=s.Data=ScientificNumber.From(1e12);s.Workshop.inventory=initial.inventory.Select(i=>i.Copy()).ToArray();s.Workshop.equipped=(string[])initial.equipped.Clone();s=Game.Train(s,"quality");
+            ItemSystemV3.CompleteTraining(s,true);Assert.That(s.ItemSystemV3.lastCompletedTrainingSequence,Is.Zero,"premature");
+            foreach(var key in new[]{null,"old-contract","v3-training-01","v3-training-2","v3-training-9007199254740992"}){var bad=s.Copy();bad.Training.done=bad.Training.required;bad.Training.key=key;ItemSystemV3.CompleteTraining(bad,true);Assert.That(bad.ItemSystemV3.learningStreak,Is.Zero,key);Assert.That(bad.ItemSystemV3.lastCompletedTrainingSequence,Is.Zero,key);}
+            var done=s.Copy();done.Training.done=done.Training.required;ItemSystemV3.CompleteTraining(done,true);ItemSystemV3.CompleteTraining(done,true);Assert.That(done.ItemSystemV3.learningStreak,Is.EqualTo(1));Assert.That(s.ItemSystemV3.learningStreak,Is.Zero,"copied state");
+            var forbidden=s.Copy();forbidden.Training.done=forbidden.Training.required;forbidden.Challenges.Run=new ChallengeRun{id="no-items",stage=1};ItemSystemV3.CompleteTraining(forbidden,true);Assert.That(forbidden.ItemSystemV3.learningStreak,Is.Zero);Assert.That(forbidden.ItemSystemV3.lastCompletedTrainingSequence,Is.EqualTo(1));
         }
         [Test]public void DevelopmentStateCannotSilentlySaveOrAlterExistingNativeState()
         {

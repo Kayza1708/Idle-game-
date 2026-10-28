@@ -101,7 +101,7 @@ namespace IdleIntelligence.Core
         {
             if(!TrainingAvailable(state,track))return state;if(state.Training!=null)return PrestigeAutomation.QueueTraining(state,track);
             var cost=TrainingCost(state,track);if(state.Credits.CompareTo(cost)<0||state.Data.CompareTo(TrainingData(state,track))<0)return state;
-            var s=state.Copy();s.Data=s.Data.Subtract(TrainingData(s,track));bool intro=track=="quality"&&IntroQuality(s);s.Credits=s.Credits.Subtract(cost);s.Training=new Job{startRecorded=true,startedAt=s.SavedAt,id=track,required=TrainingWork(s,track),intro=intro,modelTransferEligible=Level(s,"modelTransfer")>0&&s.Industry.trainingStarted<IndustryBalance.TransferStarts};s.Industry.trainingStarted++;s.Lifetime.trainingStarted++;s.QualityUsed|=intro;s.Workshop.lastTrack=track;LocalJournal.Record(s,"training-start",track,creditCost:cost,dataCost:TrainingData(state,track));return Guide(s);
+            var s=state.Copy();s.Data=s.Data.Subtract(TrainingData(s,track));bool intro=track=="quality"&&IntroQuality(s);s.Credits=s.Credits.Subtract(cost);s.Training=new Job{startRecorded=true,startedAt=s.SavedAt,id=track,required=TrainingWork(s,track),intro=intro,modelTransferEligible=Level(s,"modelTransfer")>0&&s.Industry.trainingStarted<IndustryBalance.TransferStarts};ItemSystemV3.IdentifyTraining(s);s.Industry.trainingStarted++;s.Lifetime.trainingStarted++;s.QualityUsed|=intro;s.Workshop.lastTrack=track;LocalJournal.Record(s,"training-start",ItemSystemV3.Enabled(s)?s.Training.key:track,creditCost:cost,dataCost:TrainingData(state,track));return Guide(s);
         }
         public static ScientificNumber ResearchCost(GameState s,int i)
         {
@@ -182,7 +182,7 @@ namespace IdleIntelligence.Core
                 Workshop.Passive(s,slice);if(s.Workshop.hasModuleJob)s.Workshop.moduleJob.done+=slice*MetaAutomation.Fabrication(s);
                 ItemSystemV3.RecordProduction(s,slice,producedData,producedKnowledge);
                 s.SavedAt+=slice*1000;s=MissionRules.Roll(s,s.SavedAt);left-=slice;
-                if(s.Training!=null&&s.Training.done+1e-7>=s.Training.required)GemShop.FinishTraining(s);
+                if(s.Training!=null&&s.Training.done+1e-7>=s.Training.required)GemShop.FinishTraining(s,true);
                 s.Prestige.autoSeconds+=slice;s.Prestige.otherAutoSeconds+=slice;s.Meta.analysisSeconds+=slice;s.Meta.craftSeconds+=slice;
                 bool shoppingDue=shoppingActive&&s.Prestige.autoSeconds+1e-7>=PrestigeRules.V("automaticShoppingSeconds"),otherDue=otherAutoActive&&s.Prestige.otherAutoSeconds+1e-7>=PrestigeRules.V("hardwareAutoInterval");
                 if(!s.Prestige.resetIntent&&(shoppingDue||otherDue)){if(shoppingDue)s.Prestige.autoSeconds%=PrestigeRules.V("automaticShoppingSeconds");if(otherDue)s.Prestige.otherAutoSeconds%=PrestigeRules.V("hardwareAutoInterval");s=PrestigeAutomation.Hardware(s,shoppingDue,otherDue);}

@@ -10,7 +10,7 @@ namespace IdleIntelligence.Core
         public int version=3;
         public ScientificNumber dataProduced=ScientificNumber.Zero,knowledgeProduced=ScientificNumber.Zero,componentsProduced=ScientificNumber.Zero;
         public double runMinutes;
-        public int learningStreak,scannerAnalyses;public string lastLearningTrack;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
+        public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak,scannerAnalyses;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
         public ItemV3State Copy()=>(ItemV3State)MemberwiseClone();
     }
     public static class ItemSystemV3
@@ -20,7 +20,7 @@ namespace IdleIntelligence.Core
         public static void Validate(GameState s)
         {
             var v=s?.ItemSystemV3;if(v==null)return;
-            if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0)throw new FormatException("Invalid V3 production counters");
+            if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
         }
         public static void RecordProduction(GameState s,double seconds,ScientificNumber data,ScientificNumber knowledge)
         {
@@ -31,6 +31,24 @@ namespace IdleIntelligence.Core
         {
             if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;
             if(axiom){v.knowledgeProduced=ScientificNumber.Zero;v.componentsProduced=ScientificNumber.Zero;}
+        }
+        // Exact IDs, not economy bounds. No normal-save or item payload changes.
+        const long MaxExactSequence=9007199254740991L;
+        public static void IdentifyTraining(GameState s)
+        {
+            if(!Enabled(s)||s.Training==null||!string.IsNullOrEmpty(s.Training.key))return;Validate(s);var v=s.ItemSystemV3;
+            if(v.nextTrainingSequence<1||v.nextTrainingSequence>=MaxExactSequence)throw new FormatException("Invalid V3 training sequence");
+            s.Training.key="v3-training-"+v.nextTrainingSequence.ToString(System.Globalization.CultureInfo.InvariantCulture);v.nextTrainingSequence++;
+        }
+        public static void CompleteTraining(GameState s,bool regular)
+        {
+            if(!Enabled(s)||s.Training==null)return;Validate(s);var job=s.Training;var v=s.ItemSystemV3;const string prefix="v3-training-";
+            if(!ScientificNumber.Finite(job.required)||job.required<=0||!ScientificNumber.Finite(job.done)||job.done<0||!new[]{"quality","efficiency","integration"}.Contains(job.id)||string.IsNullOrEmpty(job.key)||!job.key.StartsWith(prefix,StringComparison.Ordinal)||!long.TryParse(job.key.Substring(prefix.Length),System.Globalization.NumberStyles.None,System.Globalization.CultureInfo.InvariantCulture,out long id)||id<1||id>=v.nextTrainingSequence||id<=v.lastCompletedTrainingSequence||job.done+1e-7<job.required)return;
+            if(job.key!=prefix+id.ToString(System.Globalization.CultureInfo.InvariantCulture))return;
+            v.lastCompletedTrainingSequence=id;v.lastTrainingCompletionCause=job.intro?"intro":regular?"regular":"bonus";
+            if(!regular||job.intro||job.id=="integration"||!Has(s,"logic-seed"))return;
+            if(v.learningStreak<0||v.learningStreak>C("logic.maxStreak"))throw new FormatException("Invalid V3 learning series");
+            v.learningStreak=v.lastLearningTrack==job.id?(int)Math.Floor(v.learningStreak/C("logic.sameTrackDivisor")):Math.Min((int)C("logic.maxStreak"),v.learningStreak+1);v.lastLearningTrack=job.id;
         }
         public static double Strength(ItemInstance item)
         {

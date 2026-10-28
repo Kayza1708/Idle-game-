@@ -19,7 +19,7 @@ Dies ist eine Implementierungsinventur, **keine Freigabe**. Normale Spielstände
 | 11 | `axiom-lattice` | Vorschaufaktor vor Abrundung, nur gültige aktuell gekaufte INT-IDs | bestätigter Reset und Migration |
 | 12 | `entropy-sink` | Compute aus E-Snapshot, große Zahlen | E wird aus regulären Intervallen verbucht und am Axiomreset geleert; Import/Migration und lange Kurvenabnahme offen |
 | 13 | `memory-crystal` | Credits aus D-Snapshot | D wird aus regulären Intervallen verbucht und am Prestige geleert; Import/Migration offen |
-| 14 | `logic-seed` | Training aus gespeichertem Serienwert | bezahlte Q/E-Abschlüsse, Halbierung bei gleichem Track, Runreset |
+| 14 | `logic-seed` | Training aus tatsächlichen regulären bezahlten Q/E-Abschlüssen bei aktiver Ausrüstung; monotone IDs und Ursachen | vollständige V3-Save-Migration, Details und Erreichbarkeit |
 | 15 | `tensor-core` | Compute aus M, optionale Modellupgrades im vollständigen Distilled-Build | gültiger Vieritem-Aufbau und Modellwechsel |
 | 16 | `distillation-module` | tatsächliche Q/E-Ausgabekurve, logarithmischer Adapter | gemeinsame Schwellen-/Raritäts-/Migrationsabnahme |
 | 17 | `curriculum-module` | Q/E-Schwelle vor Distillation verschoben | Kombination/Reload/Details |
@@ -97,3 +97,12 @@ D/E/T entstehen ausschließlich aus regulären angerechneten Simulationsinterval
 Der vorhandene Legacy-Mapper ordnet `researchArchive` bereits I04 („Forschungs-Erkenntnis“) zu. Für V3 gilt das erworbene Recht aus aktuellem I04, gültiger historischer I04-Ownership, vorhandenem Legacy-Blueprintrecht oder bereits gelerntem Rezept. Die bestehende Bauplanforschung bleibt nötig. Das ausdrückliche einmalige Lernen kostet weiterhin 0 Fragmente; es gewährt weder Item noch Ressourcen. Sofortherstellung benutzt unverändert die tatsächlich vorhandenen Material-/Modul-/Datenkosten. Geld allein oder fehlende Forschung reichen nicht; normale noch nicht migrierte Regeln bleiben unverändert.
 
 Elf gemeinsame vorbereitete TS-/C#-Fälle prüfen echte Lern-/Herstellungstransaktionen, Zahlung und doppelte Lernaufrufe. Der TS-Fall enthält einen echten I04-Kauf und anschließenden tatsächlichen Axiomreset mit Item-/Bauplanerhaltung. Das konservative V3-Feld `archiveBlueprintRight` kann ein legitimes Legacyrecht halten; die echte Übernahme dieses Feldes aus älteren nativen/Web-Saves gehört zur noch offenen vollständigen Migration. Kein aktueller Import-/Reloadnachweis für V3 wird daraus behauptet.
+
+
+## Trainingsereignisse und Lernserie
+
+V3-Trainingsstarts erhalten erst nach erfolgreichem bestehendem Start/Zahlung eine eigene monotone Auftrags-ID. Der Abschlussmarker und die letzte Ursache sind getrennt von der runbezogenen Serie. Beide IDs bleiben über tatsächliches Prestige/Axiomreset erhalten; die Serie wird geleert. Kein wachsendes Set aller historischen Jobs nötig. Die53-Bit-Grenze betrifft technische IDs, keine Wallet oder Produktionsrate.
+
+Nur ein wirklich abgeschlossener aktueller Auftrag mit ausgegebener kanonischer ID kann den Marker verändern. Doppelte/premature Aufrufe und unbekannte alte IDs gewähren keinen Effekt. Reguläre bezahlte Q/E-Abschlüsse bei aktivem Logik-Saat-Item erhöhen bei Wechsel bis10 oder halbieren bei gleichem Track abgerundet. Unequip behält die Serie und deren letzten gültigen Track; Abschlüsse ohne Item verändern sie nicht. Integration/Intro/Bonus/No-items geben keinen Serienfortschritt. Gem-Skip-Enden tragen ausdrücklich Bonusursache; normale Einführung Intro. IDs sind auch in den tatsächlichen Start-/Abschlussbelegen verknüpft.
+
+Sechs gemeinsame vollständige TS-/C#-Folgen prüfen wirkliche Starts, Zahlungen, Zeitfortschritt, Tempo, unequip/equip, Integration, Intro, Gem-Skip und tatsächliche Resets. Zusätzliche Guards prüfen verfrühte, doppelte, falsch formatierte oder nicht ausgegebene IDs und No-items. Die Domainzustände können weiterhin nicht als unvollständiger V3-Save geschrieben werden; echte DTO-/Altvertragsmigration und V3-Datei-Reload stehen noch aus. Diese Prüfung ist kein vorweggenommener Persistenznachweis.
