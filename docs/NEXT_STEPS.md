@@ -206,3 +206,6 @@ Weiter: vollständige Auftragsursachen/Start-Snapshots, Komponentenproduzenten K
 Geprüfte Grundlage: 1.989 Vitest, 188 EditMode und final129PlayMode; alle Generatoren synchron. Passivbaseline inzwischen 30 Tage/16 Prestiges. Der folgende Arbeitsschritt ist die vollständige Ereignis-/Erwerbs-/Migrationsanbindung; nicht V3 als abgeschlossen markieren.
 
 - Editor-Anbindung ergänzt und tatsächlich geprüft: offizielle Pipeline0.9.1-exp.1, Live-eval, Sprite-Capabilities, Console, isoliertes fortlaufendes Play und echte390×846-Aufnahme. Sechs neue Sprites sicher importiert; Katalog/Rezepte/Sockeldarstellung weiterhin offen. Details: `docs/item-system-v3/art/README.md`.
+
+### 29.10.2026 – Archiv-Abhängigkeit im V3-Vertrag
+Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehendes I04-/Legacyrecht, Bauplanforschung und unveränderte bezahlte Herstellung; kein Gratisitem/Ersatzpreis. Elf gemeinsame neue Erwerbs-/Zahlungsfälle; Compile, 9 EditMode, 5 PlayMode und gezielte TS-Fälle grün. Echte Save-Migration und erreichbare V3-Spielerfreigabe ausdrücklich noch offen. Siehe `docs/item-system-v3/contracts.md`.

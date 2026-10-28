@@ -275,3 +275,6 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 - Geprüfter V3-Zwischenstand: Typecheck, Webbuild und Generatorvergleich bestanden; 1.989 Vitest, 188 EditMode und final 129 PlayMode grün. Aktive/passive unveränderte Baseline bis 30 Tage dokumentiert; 90 Tage, vollständige Migration und Nachherbalance offen. Prüfbericht: `docs/item-system-v3/implementation.md`.
 
 - Editor-Anbindung ergänzt und tatsächlich geprüft: offizielle Pipeline0.9.1-exp.1, Live-eval, Sprite-Capabilities, Console, isoliertes fortlaufendes Play und echte390×846-Aufnahme. Sechs neue Sprites sicher importiert; Katalog/Rezepte/Sockeldarstellung weiterhin offen. Details: `docs/item-system-v3/art/README.md`.
+
+### 29.10.2026 – Archiv-Abhängigkeit im V3-Vertrag
+Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehendes I04-/Legacyrecht, Bauplanforschung und unveränderte bezahlte Herstellung; kein Gratisitem/Ersatzpreis. Elf gemeinsame neue Erwerbs-/Zahlungsfälle; Compile, 9 EditMode, 5 PlayMode und gezielte TS-Fälle grün. Echte Save-Migration und erreichbare V3-Spielerfreigabe ausdrücklich noch offen. Siehe `docs/item-system-v3/contracts.md`.

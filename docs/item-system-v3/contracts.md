@@ -28,7 +28,7 @@ Dies ist eine Implementierungsinventur, **keine Freigabe**. Normale Spielstände
 | 20 | `manufacturing-controller` | offen | bezahlte Komponenten, Rückgewinnungsreste und Gesamtprovenienz |
 | 21 | `model-echo-core` | ursprünglicher Modellkern × ursprünglicher Revenuefaktor genau einmal potenziert | alle zehn Modelle/Slotwechsel und UI |
 | 22 | `mnemonic-anchor` | Training aus tatsächlichen Modellupgradeleveln | alle Erwerbs-/Reset-/Wechselfälle |
-| 23 | `insight-archive` | zukünftige INT-Gewichtung, keine Neubewertung des Ledgers | Nullkosten-Erwerb über bestehenden I04-/Research-Archive-Vertrag vervollständigen |
+| 23 | `insight-archive` | zukünftige INT-Gewichtung; V3-Lernen/Herstellen über bestehendes I04-/Research-Archive-Recht | vollständige Altimport-/Save-Migration und erreichbare V3-UI-Abnahme |
 | 24 | `field-scanner` | offen | bezahlte Analyseabschlüsse während Ausrüstung zählen; Live-Tempo |
 | 25 | `lab-drone` | offen | Zusatzarbeit nur aus regulärer Laborarbeit; größtes Restlabor, stabile Gleichstände |
 | 26 | `data-prism` | Daten aus F ohne doppelte Projektzählung | Auftrags-/Reset-/Detailsabnahme |
@@ -90,3 +90,10 @@ Die erste Axiomentdeckung prüft ausschließlich tatsächlich verdientes/beanspr
 ### Produktionsbuchung: aktueller geprüfter Vertrag
 
 D/E/T entstehen ausschließlich aus regulären angerechneten Simulationsintervallen. Der erste Auswertungssnapshot steht vor der neuen E-Buchung; die nächste Rate darf den Zuwachs im nächsten Intervall verwenden. Erkenntnis-Startgeschenke sind keine Produktion. Ein erneutes `Advance` auf denselben Zeitpunkt erzeugt keine zweite Buchung. D/T/Lernserie werden am normalen Prestige geleert; E/K erst am Axiomreset. Das K-Feld ist noch **nicht** an sämtliche zulässigen Komponentenproduzenten angeschlossen. Import-/Save-Migration, Bonusarbeits-/Provenienzverträge und vollständige numerische Gleichheit bei beliebigen externen Intervallteilungen bleiben vor Aktivierung offen.
+
+
+## Erkenntnisarchiv: bestätigter Erwerbsvertrag
+
+Der vorhandene Legacy-Mapper ordnet `researchArchive` bereits I04 („Forschungs-Erkenntnis“) zu. Für V3 gilt das erworbene Recht aus aktuellem I04, gültiger historischer I04-Ownership, vorhandenem Legacy-Blueprintrecht oder bereits gelerntem Rezept. Die bestehende Bauplanforschung bleibt nötig. Das ausdrückliche einmalige Lernen kostet weiterhin 0 Fragmente; es gewährt weder Item noch Ressourcen. Sofortherstellung benutzt unverändert die tatsächlich vorhandenen Material-/Modul-/Datenkosten. Geld allein oder fehlende Forschung reichen nicht; normale noch nicht migrierte Regeln bleiben unverändert.
+
+Elf gemeinsame vorbereitete TS-/C#-Fälle prüfen echte Lern-/Herstellungstransaktionen, Zahlung und doppelte Lernaufrufe. Der TS-Fall enthält einen echten I04-Kauf und anschließenden tatsächlichen Axiomreset mit Item-/Bauplanerhaltung. Das konservative V3-Feld `archiveBlueprintRight` kann ein legitimes Legacyrecht halten; die echte Übernahme dieses Feldes aus älteren nativen/Web-Saves gehört zur noch offenen vollständigen Migration. Kein aktueller Import-/Reloadnachweis für V3 wird daraus behauptet.

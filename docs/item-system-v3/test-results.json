@@ -61,5 +61,35 @@
       "result": "Passed",
       "xmlSha256": "121ebd26ecb4e681e58baaab856da3ef29e679326dfbb9886ec6d75fbb233465"
     }
+  },
+  "archiveFollowup": {
+    "sourceHash": "73f9fac1cd007f747229bfd7a3a188720a2b4f64e6cf1d95a8c1f8a342d9c430",
+    "actualSharedArchiveCases": 11,
+    "prepared": true,
+    "normalSaveActivation": false,
+    "vitest": {
+      "files": 153,
+      "tests": 1992,
+      "passed": 1992,
+      "failed": 0,
+      "seconds": 323.03
+    },
+    "actualNativeWebMigration": "pending",
+    "editMode": {
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "duration": "5.4047766",
+      "result": "Passed",
+      "xmlSha256": "c012ed44de3472db5bbf9b064b8ce4b0f24f8fb836e9aa00edbd9440e7ecbc46"
+    },
+    "playMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "23.809244",
+      "result": "Passed",
+      "xmlSha256": "c2c92016fa80e612120f3f7df4d2ecbc916fb69ace669a85f063452451d261b3"
+    }
   }
 }

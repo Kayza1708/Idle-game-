@@ -13,7 +13,13 @@ namespace IdleIntelligence.Tests
         public NumberData regularData,regularKnowledge,compute,income,data,knowledge,cycle;public double minutes,training,researchSpeed;
         public string[] nodes;public int[] axioms,models;public string active;public bool lab;public int resets,purchased;public int[] occupied;
     }
-    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;}
+    [Serializable]public sealed class ArchiveV3Case
+    {
+        public string name;public bool prepared,v3,research,currentRight,knownRight,legacyRight,retainedRight,owned,funded;
+        public int price,fragmentsAfter;public bool prerequisite,canLearn,learnedAfter,doubleLearnSame;
+        public NumberData dataBefore,dataAfter,paidData;public long[] componentsBefore,componentsAfter,modulesBefore,modulesAfter;public string[] typesAfter;
+    }
+    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;}
     public sealed class ItemSystemV3Tests
     {
         static ItemV3Cases Cases()=>JsonUtility.FromJson<ItemV3Cases>(File.ReadAllText(Path.Combine(Application.dataPath,"IdleIntelligence/Tests/EditMode/ItemV3ReferenceCases.json")));
@@ -72,6 +78,26 @@ namespace IdleIntelligence.Tests
             var offline=Game.Advance(s,s.SavedAt+86400000);Assert.That(offline.ItemSystemV3.runMinutes,Is.EqualTo(Game.OfflineLimit(s)/60).Within(1e-8));
             var copy=next.Copy();ItemSystemV3.ResetProduction(copy);Assert.That(copy.ItemSystemV3.dataProduced.IsZero,Is.True);Assert.That(copy.ItemSystemV3.knowledgeProduced.CompareTo(next.ItemSystemV3.knowledgeProduced),Is.Zero);
             ItemSystemV3.ResetProduction(copy,true);Assert.That(copy.ItemSystemV3.knowledgeProduced.IsZero,Is.True);Assert.That(next.ItemSystemV3.runMinutes,Is.EqualTo(.5));
+        }
+        [Test]public void ActualArchiveOwnershipAndCraftPaymentsMatchTypeScript()
+        {
+            var cases=Cases();Assert.That(cases.archiveCases.Length,Is.EqualTo(11));
+            foreach(var row in cases.archiveCases){
+                var s=Game.New(1000,"prepared-archive-reference");if(row.v3)s.ItemSystemV3=new ItemV3State{archiveBlueprintRight=row.legacyRight||row.retainedRight};
+                s.Workshop.nodes=row.currentRight?new[]{"I04"}:Array.Empty<string>();s.Prestige.known=row.knownRight?new[]{"I04"}:Array.Empty<string>();
+                if(row.research)s.Research[Game.ResearchIndex("blueprints")]=1;int index=Workshop.Index("insight-archive");s.Workshop.learned[index]=row.owned;
+                s.Data=ScientificNumber.FromData(row.dataBefore);s.Workshop.components=(long[])row.componentsBefore.Clone();s.Workshop.modules=(long[])row.modulesBefore.Clone();s.Workshop.fragments=0;
+                Assert.That(ItemBalance.Items[index].BlueprintPrice,Is.EqualTo(row.price),row.name+" price");
+                Assert.That(Workshop.Prerequisite(s,index),Is.EqualTo(row.prerequisite),row.name+" prerequisite");
+                Assert.That(Workshop.LearnBlock(s,index)==null,Is.EqualTo(row.canLearn),row.name+" learnable");
+                var learned=Workshop.Learn(s,"insight-archive");Assert.That(learned.Workshop.learned[index],Is.EqualTo(row.learnedAfter),row.name+" ownership");
+                Assert.That(ReferenceEquals(Workshop.Learn(learned,"insight-archive"),learned),Is.EqualTo(row.doubleLearnSame),row.name+" duplicate");
+                Assert.That(learned.Workshop.inventory,Is.Empty,row.name+" learning does not grant an item");
+                var made=row.funded?Workshop.Craft(learned,"insight-archive"):learned;
+                Near(s.Data.Subtract(made.Data),row.paidData,row.name+" actual debit");Near(made.Data,row.dataAfter,row.name+" data");
+                Assert.That(made.Workshop.components,Is.EqualTo(row.componentsAfter),row.name+" materials");Assert.That(made.Workshop.modules,Is.EqualTo(row.modulesAfter),row.name+" modules");
+                Assert.That(made.Workshop.fragments,Is.EqualTo(row.fragmentsAfter),row.name+" fragments");Assert.That(made.Workshop.inventory.Select(i=>i.type).ToArray(),Is.EqualTo(row.typesAfter),row.name+" actual item");
+            }
         }
         [Test]public void DevelopmentStateCannotSilentlySaveOrAlterExistingNativeState()
         {

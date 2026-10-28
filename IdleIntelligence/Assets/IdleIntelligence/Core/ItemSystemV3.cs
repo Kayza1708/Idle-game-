@@ -10,7 +10,7 @@ namespace IdleIntelligence.Core
         public int version=3;
         public ScientificNumber dataProduced=ScientificNumber.Zero,knowledgeProduced=ScientificNumber.Zero,componentsProduced=ScientificNumber.Zero;
         public double runMinutes;
-        public int learningStreak,scannerAnalyses;public string lastLearningTrack;public bool axiomDiscovered;public double axiomDiscoveryAt=-1;
+        public int learningStreak,scannerAnalyses;public string lastLearningTrack;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
         public ItemV3State Copy()=>(ItemV3State)MemberwiseClone();
     }
     public static class ItemSystemV3
@@ -45,6 +45,7 @@ namespace IdleIntelligence.Core
         }
         public static IEnumerable<ItemInstance> Equipped(GameState s)
         {var seen=new HashSet<string>();foreach(var item in Workshop.Equipped(s))if(seen.Add(item.type))yield return item;}
+        public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);
         public static bool Has(GameState s,string id)=>Equipped(s).Any(i=>i.type==id);
         public static double BaseFactor(GameState s,string family)
         {

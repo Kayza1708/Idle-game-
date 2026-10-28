@@ -69,11 +69,11 @@ namespace IdleIntelligence.Core
             for(int c=0;c<need.Length;c++){long gift=Math.Max(0,(long)need[c]-w.components[c]);w.components[c]+=gift;Lifetime.Components(s,c,gift);}w.starterGift=true;return Changed(s);
         }
         public static bool LateAccess(GameState s,ItemDefinition d)=>d.Access!="lab"&&d.Access!="axiom"&&d.Access!="model-set"||s.Prestige.lab&&(d.Access=="axiom"?s.Meta.resets>0:d.Access=="model-set"?s.Meta.models.Count(l=>l>=0)>=3:true);
-        public static bool Prerequisite(GameState s,int n)=>(ItemBalance.Items[n].Starter>=0||Game.Level(s,"blueprints")>0)&&LateAccess(s,ItemBalance.Items[n]);
+        public static bool Prerequisite(GameState s,int n)=>(ItemBalance.Items[n].Starter>=0||Game.Level(s,"blueprints")>0)&&LateAccess(s,ItemBalance.Items[n])&&(!ItemSystemV3.Enabled(s)||ItemBalance.Items[n].Id!="insight-archive"||ItemSystemV3.ArchiveBlueprintRight(s));
         public static string LearnBlock(GameState s,int n)
         {
             if(n<0||n>=ItemBalance.Items.Length)return "Unbekannter Bauplan";
-            var d=ItemBalance.Items[n];return s.Workshop.learned[n]?"Bereits gelernt":!Prerequisite(s,n)?(d.Access=="axiom"?"Erster Axiomzyklus und Forschung: Baupläne":d.Access=="model-set"?"Drei KI-Modelle im Geheimlabor und Forschung: Baupläne":d.Access=="lab"?"Geheimlabor und Forschung: Baupläne":"Forschung: Baupläne"):d.BlueprintPrice==0?(d.Starter>=0?"Starter-Aufgaben abschließen":"Vorhandener Bauplan benötigt · Erwerbsweg noch offen"):s.Workshop.fragments<d.BlueprintPrice?"Zu wenig Bauplanfragmente":null;
+            var d=ItemBalance.Items[n];if(ItemSystemV3.Enabled(s)&&d.Id=="insight-archive"&&!ItemSystemV3.ArchiveBlueprintRight(s)&&Game.Level(s,"blueprints")>0)return "INT: Forschungs-Erkenntnis freischalten";return s.Workshop.learned[n]?"Bereits gelernt":!Prerequisite(s,n)?(d.Access=="axiom"?"Erster Axiomzyklus und Forschung: Baupläne":d.Access=="model-set"?"Drei KI-Modelle im Geheimlabor und Forschung: Baupläne":d.Access=="lab"?"Geheimlabor und Forschung: Baupläne":"Forschung: Baupläne"):d.BlueprintPrice==0&&!(d.Id=="insight-archive"&&ItemSystemV3.ArchiveBlueprintRight(s))?(d.Starter>=0?"Starter-Aufgaben abschließen":"Vorhandener Bauplan benötigt · Erwerbsweg noch offen"):s.Workshop.fragments<d.BlueprintPrice?"Zu wenig Bauplanfragmente":null;
         }
         public static GameState Learn(GameState state,string id)
         {int n=Index(id);if(LearnBlock(state,n)!=null)return state;var s=state.Copy();s.Workshop.fragments-=ItemBalance.Items[n].BlueprintPrice;s.Workshop.learned[n]=true;LocalJournal.Record(s,"blueprint-learn",permanent:true);return Changed(s);}

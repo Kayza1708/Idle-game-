@@ -1,5 +1,5 @@
 {
-  "sourceHash": "ffde2e6d6e158ea5f7d1b840bce3771b11b9813e069adf89ae743856af7596e6",
+  "sourceHash": "73f9fac1cd007f747229bfd7a3a188720a2b4f64e6cf1d95a8c1f8a342d9c430",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
@@ -13574,6 +13574,904 @@
         "e": 4,
         "terms": null
       }
+    }
+  ],
+  "archiveCases": [
+    {
+      "name": "no-earned-right",
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": false,
+      "canLearn": false,
+      "learnedAfter": false,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "money-alone-does-not-unlock",
+      "funded": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": false,
+      "canLearn": false,
+      "learnedAfter": false,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 1,
+        "e": 12,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 1,
+        "e": 12,
+        "terms": null
+      },
+      "componentsBefore": [
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000
+      ],
+      "componentsAfter": [
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000
+      ],
+      "modulesBefore": [
+        100,
+        100
+      ],
+      "modulesAfter": [
+        100,
+        100
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "earned-I04-without-research",
+      "currentRight": true,
+      "research": false,
+      "v3": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": false,
+      "canLearn": false,
+      "learnedAfter": false,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "current-I04",
+      "currentRight": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": true,
+      "learnedAfter": true,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "ever-purchased-I04",
+      "knownRight": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": true,
+      "learnedAfter": true,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "source-legacy-right",
+      "legacyRight": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": true,
+      "learnedAfter": true,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "retained-migration-right",
+      "retainedRight": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": true,
+      "learnedAfter": true,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "already-learned",
+      "owned": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": false,
+      "learnedAfter": true,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "normal-rules-unchanged",
+      "v3": false,
+      "currentRight": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": false,
+      "learnedAfter": false,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "componentsBefore": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "componentsAfter": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "modulesBefore": [
+        0,
+        0
+      ],
+      "modulesAfter": [
+        0,
+        0
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": []
+    },
+    {
+      "name": "actual-paid-archive",
+      "currentRight": true,
+      "funded": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": true,
+      "learnedAfter": true,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 1,
+        "e": 12,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 1,
+        "e": 12,
+        "terms": null
+      },
+      "componentsBefore": [
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000
+      ],
+      "componentsAfter": [
+        99900,
+        100000,
+        99980,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        99995,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000
+      ],
+      "modulesBefore": [
+        100,
+        100
+      ],
+      "modulesAfter": [
+        100,
+        100
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": [
+        "insight-archive"
+      ]
+    },
+    {
+      "name": "owned-recipe-paid-craft",
+      "owned": true,
+      "funded": true,
+      "v3": true,
+      "research": true,
+      "prepared": true,
+      "price": 0,
+      "prerequisite": true,
+      "canLearn": false,
+      "learnedAfter": true,
+      "doubleLearnSame": true,
+      "paidData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataBefore": {
+        "m": 1,
+        "e": 12,
+        "terms": null
+      },
+      "dataAfter": {
+        "m": 1,
+        "e": 12,
+        "terms": null
+      },
+      "componentsBefore": [
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000
+      ],
+      "componentsAfter": [
+        99900,
+        100000,
+        99980,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        99995,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000,
+        100000
+      ],
+      "modulesBefore": [
+        100,
+        100
+      ],
+      "modulesAfter": [
+        100,
+        100
+      ],
+      "fragmentsAfter": 0,
+      "typesAfter": [
+        "insight-archive"
+      ]
     }
   ]
 }

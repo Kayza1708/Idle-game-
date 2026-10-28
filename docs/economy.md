@@ -775,3 +775,8 @@ Geprüfter erster Rechenteil: Item-P/Q, getrennte Basiswerte, ausgewählte Produ
 ### Gemeinsamer V3-Verbraucherstand: Forschung (28.10.2026)
 
 Nur bei explizitem experimentellem V3-Zustand: F07 senkt die Datenkosten **neu** gestarteter Forschung auf 0,70; gespeicherte bezahlte Aufträge bleiben unverändert. F08 zählt zum Intervallbeginn belegte reguläre Slots (Basis und F01/F04/F08); gekaufte Slots profitieren vom Tempo, erhöhen den Faktor aber nicht. F10 multipliziert die Datenrate zusätzlich zu ×5 mit `(1+F/25)^0,5`, F aus dem gemeinsamen Forschungs-Snapshot. Native Integrationsgrenze und D05-Kopplung verwenden dieselbe V3-Integrationsbasis wie TS. Normale Saves bleiben auf ihren bisherigen Regeln.
+
+
+### Erkenntnisarchiv-Erwerb im experimentellen V3-Vertrag (29.10.2026)
+
+Die bestehende Abbildung `researchArchive → I04` begründet das permanente Erwerbsrecht. Aktuell/historisch gekauftes I04 oder erhaltene legitime Rezeptrechte erlauben nach der bestehenden Bauplanforschung ein ausdrückliches Lernen zum bisherigen Nullpreis. Keine Fragmente und kein Item geschenkt; Herstellung weiterhin mit dem bestehenden konkreten Rezept. Kein neuer Fragmentpreis oder Balance-Ersatz. Normale noch nicht migrierte Saves behalten ihre Regeln; tatsächliche Legacy-Übernahme und V3-Migration bleiben offen.
