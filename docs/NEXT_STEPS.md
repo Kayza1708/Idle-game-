@@ -193,3 +193,6 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 - Audit-Fortsetzung: gemeinsame kompakte Ansichten, 41 siebensprachige Mira-Dialoge und gespeicherte Analysehilfen umgesetzt; gezielter PlayMode 5/5 inklusive 219 Ansichten. Vollregression/Restinhalte/Cloudkonten/Playerabnahme laufen weiter: siehe `unity-audit-followup.md`.
 
 - 28.10.: EditMode170/170 und gezielter UI-/Feedbacklauf9/9; echter Einführungstrainings-Mitschnitt mit Spielton. iCloud-Backup-Grundlage ohne simulierte Erfolge; Entwicklerkonten fehlen. Weitere Inhalts-/Kontextkorrekturen und finale Vollregression laufen. Details: `unity-audit-followup.md`, `unity-platform-cloud.md`.
+
+### Aktueller Auftrag: Item-System V3 (28.10.2026)
+Verbindliche Spezifikation und offener Abnahmegraph: `docs/item-system-v3/specification.txt` und `docs/item-system-v3/implementation.md`. Vorherige Lokalisierungs-/Feedbackänderungen getrennt sichern. Bestehende Saves noch nicht auf teilweise implementierte V3-Regeln umstellen.

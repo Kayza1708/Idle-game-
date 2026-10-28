@@ -23,8 +23,8 @@ namespace IdleIntelligence.Runtime
         string MainEffect(GameState s,int index)
         {
             var m=MetaBalance.Models[index];int level=Math.Max(0,s.Meta.models[index]);
-            if(m.Id=="K10")return T("Universelle Slots")+": "+(level>=PrestigeRules.V("modelSlotsLevel")?2:1)+" · "+T("Itemboni")+" ×"+(PrestigeRules.V("modelItemBase")+PrestigeRules.V("modelItemLevel")*level).ToString("F3");
-            return T(Kind(m.Kind))+" ×"+(1+(m.Base-1)*(1+PrestigeRules.V("modelPrimaryLevel")*level)).ToString("F3");
+            if(m.Id=="K10")return T("Universelle Slots")+": "+(level>=PrestigeRules.V("modelSlotsLevel")?2:1)+" · "+T("Itemboni")+" ×"+(PrestigeRules.V("modelItemBase")+PrestigeRules.V("modelItemLevel")*level).ToString("F3",System.Globalization.CultureInfo.GetCultureInfo(game.State.Settings.language));
+            return T(Kind(m.Kind))+" ×"+(1+(m.Base-1)*(1+PrestigeRules.V("modelPrimaryLevel")*level)).ToString("F3",System.Globalization.CultureInfo.GetCultureInfo(game.State.Settings.language));
         }
         void Refresh()
         {
@@ -64,7 +64,7 @@ namespace IdleIntelligence.Runtime
                 if(expanded[index])
                 {
                     var preview=s.Copy();preview.Workshop.activeModel=m.Id;preview.Workshop.activeModelLevel=Math.Max(0,s.Meta.models[i]);
-                    Label("ModelEffect",panel.transform,MainEffect(s,index)+"\n"+T("Revenue-Kern")+" ×"+MetaRules.Core(preview).ToString("F3")+"\n"+T(MetaRules.Level(s,"D06")>0?"Zweite Fähigkeit aktiv":"Modellfähigkeiten")+": "+T(m.Secondary)+(MetaRules.Level(s,"D06")>0?"":"\n"+T("Benötigt")+": "+T(MetaBalance.Axioms.First(a=>a.Id=="D06").Name)),13);
+                    Label("ModelEffect",panel.transform,MainEffect(s,index)+"\n"+T("Revenue-Kern")+" ×"+MetaRules.Core(preview).ToString("F3",System.Globalization.CultureInfo.GetCultureInfo(game.State.Settings.language))+"\n"+T(MetaRules.Level(s,"D06")>0?"Zweite Fähigkeit aktiv":"Modellfähigkeiten")+": "+T(m.Secondary)+(MetaRules.Level(s,"D06")>0?"":"\n"+T("Benötigt")+": "+T(MetaBalance.Axioms.First(a=>a.Id=="D06").Name)),13);
                 }
                 if(owned)
                 {
