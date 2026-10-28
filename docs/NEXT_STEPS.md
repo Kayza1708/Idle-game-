@@ -1,5 +1,18 @@
 # Nächste Schritte · 26.10.2026
 
+## Audit umsetzen · laufend
+
+Eigener Unity-Startablauf mit geschützter Recovery implementiert und mit3/3 PlayMode-Tests geprüft. Übersetzungen, kompakte Nebenansichten, Feedback/Tutorial und Cloud folgen im selben Auftrag; noch keine Gesamtfertigmeldung. [Arbeitsnachweis](unity-audit-followup.md).
+
+## Bestandsaudit · 27.10.2026
+
+[Unity-Darstellung und Vollständigkeit](unity-presentation-audit-2026-10-27.md): 219 reale Seiten-/Sprachzustände, 36/36 eigene Item-Sprites und frische Mira-Namenswahl geprüft. Kein eigener nativer Ladescreen, keine konfigurierte produktive Company-Verbindung oder persönliche Cloud-Synchronisierung. Sieben Sprachen wählbar, aber konkrete deutsche Resttexte und englische Fallbacks bestehen. Modelle/Challenges/Seasons/Company benötigen eine konsequente kompakte Gestaltung; gemeinsame Styles allein reichen nicht. Keine Spielregeln, Saves oder Produktionsassets verändert.
+
+- [x] Tatsächliche Lücken mit Unity-Bildern und reproduzierbarem Audit-Test erfassen.
+- [ ] Restlokalisierung, kompakte Nebenansichten, native Startdarstellung und neue Analyseführung umsetzen.
+- [ ] Ergebnisfeedback offener Aktionen separat visuell abnehmen; produktive Cloud und physische Geräteprüfung getrennt durchführen.
+
+
 ## Aufgeräumte Hauptansichten und Ausrüstung · 26.10.2026
 
 Testfußzeile ausgeblendet, internes QA-Merkmal und Speicherwarnungen erhalten. Automatisches5s-/Transaktionsspeichern tatsächlich geprüft; manuelles Speichern bleibt optional. Kleine goldene Trainingstaste ohne Zeilenüberlauf, sechs geometrisch gleich große Sockel symmetrisch um den Originalkern, Zusatzsockel erst nach echtem Zugang, kompakter Detailzugang und kleine eindeutige Forschungskostenicons.111PlayMode/142EditMode/1937Vitest, Typecheck/Build bestanden; DE/EN320/390/430 mit leeren/belegten Sockeln selbst angesehen. [Prüfbericht, Bilder und weitere optische Prioritäten](unity-clean-ui.md). Im nativen Labor aufgedeckten Mira-Überlauf nach Reload zusätzlich reproduziert und korrigiert; aktuelle Textseite passt ohne Storyfortschritt. Keine Balance-/Saveänderung. Finaler Player7e9a0807 im iPhone16Pro-Simulator/iOS27 erfolgreich gebaut, installiert und gestartet;22Unity-/15Capacitor-Originale und normaler Save23 erhalten. Tatsächliche native Laboransicht mit vollständigem Mira-Hinweis angesehen; beide Code-CI-Prüfungen grün.
@@ -176,3 +189,7 @@ Neue Analysen liefern doppelte Basismengen. Schmiede → Komponenten enthält di
 Als Nächstes: echte Zielplanung „Komponente X bis Bestand Y“, geeignete Analyse/Fokus wählen, endliches Stopkriterium, Reserven und Online/Offline/Reload-Parität. Noch nicht als vorhandene Funktion ausgeben. Ebenfalls spätere UX: expliziter Wartegrund für geschützte Datenreserve. Physische Geräte-/Native-Integrationsabnahme separat fortführen.
 
 Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer ARM64-Unity-Simulatorplayer9ee80e60 installiert/gestartet, normaler Save24 ohne Testfinanzierung und23Unity-/15Capacitor-Originale geschützt. Physisches iPhone weiterhin separat. Details in `unity-analysis-planning.md`.
+
+- Audit-Fortsetzung: gemeinsame kompakte Ansichten, 41 siebensprachige Mira-Dialoge und gespeicherte Analysehilfen umgesetzt; gezielter PlayMode 5/5 inklusive 219 Ansichten. Vollregression/Restinhalte/Cloudkonten/Playerabnahme laufen weiter: siehe `unity-audit-followup.md`.
+
+- 28.10.: EditMode170/170 und gezielter UI-/Feedbacklauf9/9; echter Einführungstrainings-Mitschnitt mit Spielton. iCloud-Backup-Grundlage ohne simulierte Erfolge; Entwicklerkonten fehlen. Weitere Inhalts-/Kontextkorrekturen und finale Vollregression laufen. Details: `unity-audit-followup.md`, `unity-platform-cloud.md`.

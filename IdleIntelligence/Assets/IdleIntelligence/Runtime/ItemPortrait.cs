@@ -5,6 +5,8 @@ namespace IdleIntelligence.Runtime
 {
     public sealed class ItemPortrait:MonoBehaviour
     {
+  void Awake(){PerformanceMarkers.UiNodes++;}
+
         public bool ShowLevel=true;public Image Art;public ShapeFrame Frame;public Text Caption;public Button Button;
         void OnRectTransformDimensionsChange(){if(Art!=null&&Frame!=null&&Caption!=null)LayoutPortrait();}
         public static string SlotName(string slot,string language){string name=slot.StartsWith("processor")?"Prozessorsockel":slot.StartsWith("core")?"Kernsockel":slot.StartsWith("research")?"Forschungssockel":"Universalsockel";return UiLocalizedText.Translate(name,language)+(slot.EndsWith("Aux")||slot=="universal2"?" II":slot=="universal1"?" I":"");}

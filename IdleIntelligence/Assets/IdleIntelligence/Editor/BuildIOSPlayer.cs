@@ -33,7 +33,7 @@ namespace IdleIntelligence.Editor
                 PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
                 {
-                    scenes = new[] { "Assets/Scenes/IdleIntelligence.unity" },
+                    scenes = CreateBootScene.PlayerScenes,
                     locationPathName = output,
                     target = BuildTarget.iOS,
                     options = BuildOptions.Development | BuildOptions.StrictMode

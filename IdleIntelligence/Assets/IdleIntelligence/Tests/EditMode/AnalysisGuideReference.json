@@ -1,0 +1,183 @@
+{
+  "note": "Prepared ownership states test only guidance; no free rewards or purchase eligibility is inferred.",
+  "rows": [
+    {
+      "name": "locked queue",
+      "node": "",
+      "axiom": false,
+      "automatic": false,
+      "guide": "analysis-queue",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": null,
+        "queue": [],
+        "seen": [],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": ""
+    },
+    {
+      "name": "queue unlock",
+      "node": "F02",
+      "axiom": false,
+      "automatic": true,
+      "guide": "",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": "analysis-queue",
+        "queue": [
+          "analysis-budget"
+        ],
+        "seen": [
+          "analysis-queue"
+        ],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": "Du kannst bis zu 6 Analysen vormerken. Wähle Typ und Länge. Datenkosten werden erst beim echten Start bezahlt; fehlende Ressourcen und deine Datenreserve halten den nächsten Auftrag an."
+    },
+    {
+      "name": "repeat unlock",
+      "node": "F03",
+      "axiom": false,
+      "automatic": true,
+      "guide": "",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": "analysis-repeat",
+        "queue": [
+          "analysis-budget"
+        ],
+        "seen": [
+          "analysis-repeat"
+        ],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": "Die Analysewiederholung ist freigeschaltet. Wähle Typ und Länge, aktiviere die Wiederholung und setze bei Bedarf Komponentenziele. Sie stoppt bei erfüllten Zielen oder fehlendem Budget."
+    },
+    {
+      "name": "axiom repeat unlock",
+      "node": "",
+      "axiom": true,
+      "automatic": true,
+      "guide": "",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": "analysis-repeat",
+        "queue": [
+          "analysis-budget"
+        ],
+        "seen": [
+          "analysis-repeat"
+        ],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": "Die Analysewiederholung ist freigeschaltet. Wähle Typ und Länge, aktiviere die Wiederholung und setze bei Bedarf Komponentenziele. Sie stoppt bei erfüllten Zielen oder fehlendem Budget."
+    },
+    {
+      "name": "existing queue manual help",
+      "node": "F02",
+      "axiom": false,
+      "automatic": false,
+      "guide": "analysis-queue",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": "analysis-queue",
+        "queue": [],
+        "seen": [
+          "analysis-queue"
+        ],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": "Du kannst bis zu 6 Analysen vormerken. Wähle Typ und Länge. Datenkosten werden erst beim echten Start bezahlt; fehlende Ressourcen und deine Datenreserve halten den nächsten Auftrag an."
+    },
+    {
+      "name": "existing repeat manual help",
+      "node": "F03",
+      "axiom": false,
+      "automatic": false,
+      "guide": "analysis-repeat",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": "analysis-repeat",
+        "queue": [],
+        "seen": [
+          "analysis-repeat"
+        ],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": "Die Analysewiederholung ist freigeschaltet. Wähle Typ und Länge, aktiviere die Wiederholung und setze bei Bedarf Komponentenziele. Sie stoppt bei erfüllten Zielen oder fehlendem Budget."
+    },
+    {
+      "name": "existing queue offline help",
+      "node": "F02",
+      "axiom": false,
+      "automatic": false,
+      "guide": "analysis-budget",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": "analysis-budget",
+        "queue": [],
+        "seen": [
+          "analysis-budget"
+        ],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": "Offline laufen bezahlte Aufträge und freigeschaltete Analysepläne innerhalb deines Offline-Limits weiter. Reservierte Daten bleiben geschützt. Prüfe Ziele, Reserve und Restlaufzeit; der Rückkehrbericht zeigt die echten Funde."
+    },
+    {
+      "name": "locked repeat despite queue",
+      "node": "F02",
+      "axiom": false,
+      "automatic": false,
+      "guide": "analysis-repeat",
+      "story": {
+        "tutorial": "skipped",
+        "target": null,
+        "open": null,
+        "queue": [],
+        "seen": [],
+        "chapters": [],
+        "enabled": true
+      },
+      "credits": 50,
+      "data": 0,
+      "items": 0,
+      "text": ""
+    }
+  ]
+}
