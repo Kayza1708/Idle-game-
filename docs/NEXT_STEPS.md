@@ -234,3 +234,6 @@ Tatsächliche Einstiege/Rückkehr, persönliche Zähler, technische Trainings-ID
 
 ### 29.10.: Tatsächliches Impulsrelais
 Separater Zehnerbonus mit eigenem Critfaktor, Quoten-/Transaktionsparität, Eingabeausschlüssen und erhaltenem Exemplarstand geprüft:2.033Vitest,205vollständigeEditMode,11gezieltePlayMode. Als Nächstes Burst/Kryo und zeitlich begrenzte Kombinationsverträge, anschließend weitere Arbeits-/Materialereignisse. VollständigeV3-Migration,42er-Erwerb,UI und Nachherkampagnen bleiben Playtestvoraussetzung.
+
+### 29.10.: Burst/Kryo und Zeitgrenzen geprüft
+Tatsächliche Overdrive-Startverträge einschließlich Energiepaar/-trio, manuellem Charged-Aufruf ohne Tapauszahlung, Pause bei aktiver/abgelaufener Burstphase und korrekter Laborfüllung abgeschlossen:2.039Vitest,207vollständigeEditMode,16gezieltePlayMode grün. PR157 inzwischen vom Nutzer gemergt; eigener Folge-Draft für diesen Abschnitt. Nächste unabhängige Verträge: Fertigungsrückgewinnung/Materialprovenienz und übrige Analyse-/Hardwarepaketwirkungen. VollständigeV3-Migration/Details/Katalogerwerb/Arbeitsereignisse vor Xcode weiter offen.

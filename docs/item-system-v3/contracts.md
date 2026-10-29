@@ -13,7 +13,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 3 | `neural-asic` | Credits, M-Snapshot, Distilled-Kombination | gemeinsame Erwerbs-/Loadoutabnahme |
 | 4 | `photonic-array` | Zweier-Lernkombination | bezahlter Trainingsabschluss, Forschungsarbeitsübertrag ohne Rekursion |
 | 5 | `inference-router` | vorhandene gültige Links → globaler Compute | Start-/End-/Challengefälle im vollständigen Lauf |
-| 6 | `burst-processor` | offen | gespeichertes Startfenster, Stärke, Ende und Combovertrag |
+| 6 | `burst-processor` | tatsächlicher Overdrive-Start speichert Stärke/Fenster; Offlinegrenzen, Energiepaar/-trio und pausiertes Challenge-Hauptspiel angebunden | vollständige V3-Dateimigration/Details und natürliche Buildabnahme |
 | 7 | `legacy-controller` | erste drei Klassen vor globalen Faktoren | vollständige Klassen-/Buildsuche |
 | 8 | `sparse-decoder` | stabile Rangfolge vor Sparse/globalen Faktoren | alle Gleichstand-/Slotfälle |
 | 9 | `photonic-matrix` | Compute und Daten bei aktivem Overdrive; kein weiterer direkter Revenuefaktor | zeitgeteilte Offline-/Start-/Wechselfälle |
@@ -26,7 +26,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 16 | `distillation-module` | tatsächliche Q/E-Ausgabekurve, logarithmischer Adapter | gemeinsame Schwellen-/Raritäts-/Migrationsabnahme |
 | 17 | `curriculum-module` | Q/E-Schwelle vor Distillation verschoben | Kombination/Reload/Details |
 | 18 | `long-term-memory` | Credits aus T-Snapshot mit weiter wachsendem Softcap | T zählt tatsächliche angerechnete Intervalle innerhalb der Offlinegrenze; vollständige numerische Split-/Wechselabnahme offen |
-| 19 | `cryocontroller` | offen | Dauer am Overdrivestart speichern; alte Kappung nicht zusätzlich anwenden |
+| 19 | `cryocontroller` | tatsächliche Startdauer×(1+0,5P), außerhalb der alten Basiskappung; späteres Ausrüsten/Ablegen verlängert nicht | vollständige V3-Dateimigration/Details und natürliche Buildabnahme |
 | 20 | `manufacturing-controller` | offen | bezahlte Komponenten, Rückgewinnungsreste und Gesamtprovenienz |
 | 21 | `model-echo-core` | ursprünglicher Modellkern × ursprünglicher Revenuefaktor genau einmal potenziert | alle zehn Modelle/Slotwechsel und UI |
 | 22 | `mnemonic-anchor` | Training aus tatsächlichen Modellupgradeleveln | alle Erwerbs-/Reset-/Wechselfälle |

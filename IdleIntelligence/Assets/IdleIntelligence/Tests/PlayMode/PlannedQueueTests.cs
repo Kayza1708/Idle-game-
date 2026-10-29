@@ -57,6 +57,18 @@ namespace IdleIntelligence.PlayTests
             }finally{game.State.ItemSystemV3=null;game.State.Settings.language="de";startedField.SetValue(game,wasStarted);game.enabled=true;network.CloseDetail();}
             Assert.That(new AtomicSaveStore(game.SavePath,new UnitySaveCodec()).Load(game.State.SavedAt).State.ItemSystemV3,Is.Null);
         }
+        [UnityTest]public IEnumerator ActualV3OverdriveBarUsesSavedDurationAtMobileSizes()
+        {
+            game.Show("hardware");yield return null;var lifecycle=typeof(GameRuntime).GetField("started",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);var stateProperty=typeof(GameRuntime).GetProperty("State");Assert.That(lifecycle,Is.Not.Null);Assert.That(stateProperty,Is.Not.Null);bool started=(bool)lifecycle.GetValue(game);game.enabled=false;lifecycle.SetValue(game,false);var original=game.State;const string output="/tmp/idle-v3-overdrive-review";Directory.CreateDirectory(output);Debug.Log("PREPARED_OVERDRIVE_UI: isolated maximum-strength cryo; domain starts/advances, UI projection only, lifecycle suspended, no V3 file save or natural acquisition claimed.");
+            try{foreach(string locale in new[]{"de","en"}){stateProperty.SetValue(game,original);lifecycle.SetValue(game,started);Assert.That(game.Act(s=>SettingsRules.Change(s,"language",locale)),Is.True);lifecycle.SetValue(game,false);original=game.State;string savedOriginal=File.ReadAllText(game.SavePath);var state=original.Copy();state.ItemSystemV3=new ItemV3State();state.Workshop.nodes=new[]{"W10"};state.Hardware[0]=10;state.Workshop.inventory=new[]{new ItemInstance{id="prepared-cryo",type="cryocontroller",rarity=5,level=69,forge=20}};state=Workshop.Equip(state,"prepared-cryo","core");state.Charge=99;state=Game.Tap(state,state.SavedAt);double start=state.SavedAt,end=state.ActiveUntil;Assert.That(end-start,Is.GreaterThan(Balance.OverdriveMaxSeconds*1000));
+                foreach(string phase in new[]{"start","half","end"}){var display=phase=="start"?state.Copy():Game.Advance(state,phase=="half"?start+(end-start)/2:end+1);stateProperty.SetValue(game,display);game.SendMessage("Refresh");foreach(int width in new[]{320,390,430}){
+#if UNITY_EDITOR
+                    PortraitGameView.Set(width,width==320?694:width==390?846:932);
+#endif
+                    yield return null;yield return null;yield return null;yield return null;Canvas.ForceUpdateCanvases();var laboratory=UnityEngine.Object.FindFirstObjectByType<LaboratoryView>();Assert.That(laboratory,Is.Not.Null);Assert.That(laboratory.ChargeFill.fillAmount,Is.EqualTo(phase=="start"?1:phase=="half"?.5:0).Within(.001),locale+" "+phase+" actual image fill");Assert.That(laboratory.ChargeFill.raycastTarget,Is.False,"Decorative progress must not capture touch");Assert.That(game.Overdrive.text.Contains("OVERDRIVE"),Is.True);Assert.That(File.ReadAllText(game.SavePath),Is.EqualTo(savedOriginal),"Transient V3 projection never overwrites normal save");WorkshopTests.Capture(width,Screen.height,output+"/overdrive-"+locale+"-"+width+"-"+phase+".png");}
+                }
+            }}finally{stateProperty.SetValue(game,original);lifecycle.SetValue(game,started);game.enabled=true;game.Show("hardware");}
+        }
         [UnityTest]public IEnumerator C01DescriptionUsesActualLocalizedV3ValuesAtMobileSizes()
         {
             game.Act(s=>{var n=s.Copy();n.Legacy.prepared=true;n.Meta.resets=1;n.Meta.total=n.Meta.available=ScientificNumber.From(10).ToData();return MetaRules.Buy(n,"C01");});Assert.That(game.Writable,Is.True,game.Status.text);Assert.That(MetaRules.Level(game.State,"C01"),Is.EqualTo(1));game.Show("prestige");yield return null;var network=game.PrestigeView;network.SetLayer(true);yield return null;

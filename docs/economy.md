@@ -810,3 +810,7 @@ Vorhandene zentrale Vorgabe×2 auf bezahlte Analysen und reguläre Hardware-Meil
 
 ### 29.10.2026 – V3-Impulsrelais als separates Tapereignis
 Verbindliche bestehende V3-Spezifikation umgesetzt, keine zusätzlichen Tuningwerte: `BALANCE.itemV3.relay` bleibt Intervall10,2Sekunden×Fähigkeits-P und eigener kritischer Faktor1,5. Auszahlung zusätzlich zum normalen Tap, außerhalb seiner Softcap/normalen Critwirkung; reguläre Referenz ohne temporären Overdrive-/Werbefaktor einschließlich indirekter Overdrive-Itemproduktion. Exemplarstand modulo10; nur akzeptierter manueller Input. W10 genau einmal. Alte normale Spielstände bleiben auf ihren Regeln bis zur vollständigen Migration. Gemeinsame tatsächliche Quoten-/Transaktionsreferenzen in `scripts/export-unity-item-v3.ts`.
+
+
+### 29.10.2026 – V3-Burst-/Kryo-Startvertrag
+Bestehende Spezifikation/zentraler V3-Datenstand: Burst(1+2P) für3s; Energiepaar5s und dieser Faktor×3, Dreierergänzung Daten×5. Kryodauer×(1+0,5P) nach bisheriger Basisdauerberechnung, keine erneute30s-/+100%-Kappung des neuen Faktors. Werte beim tatsächlichen Start einfrieren, an exaktem Fensterende integrieren; alte aktive Zustände ohne Beleg nicht nachträglich verstärken. Kein zusätzlicher Tap oder Reward beim vorhandenen manuellen Charged-Aufruf. Native/TS verwenden dieselben generierten Werte, normale64/24-Regeln bis vollständiger V3-Migration unverändert.

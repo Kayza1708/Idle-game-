@@ -308,6 +308,7 @@ export function pauseMain(s: GameState, at: number) {
     ...s,
     savedAt: at,
     runStartedAt: s.runStartedAt + delta,
+    ...(usesItemV3(s)&&s.itemSystemV3?.overdrive&&s.overclock.activeUntil>s.savedAt?{itemSystemV3:{...s.itemSystemV3,overdrive:{...s.itemSystemV3.overdrive,startedAt:s.itemSystemV3.overdrive.startedAt+delta,burstUntil:s.itemSystemV3.overdrive.burstUntil+delta}}}:{}),
     creditBoostUntil: shift(s.creditBoostUntil),
     trainingBoostUntil: shift(s.trainingBoostUntil),
     labBoostUntil: shift(s.labBoostUntil),

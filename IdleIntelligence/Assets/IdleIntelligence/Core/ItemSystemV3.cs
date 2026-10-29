@@ -5,6 +5,7 @@ namespace IdleIntelligence.Core
 {
     // Development contract; the save boundary rejects it until full V3 migration
     // and all completion-event contracts are accepted. Never silently drop it.
+    [Serializable] public sealed class ItemV3Overdrive {public double startedAt,burstUntil,creditFactor=1,dataFactor=1;public ItemV3Overdrive Copy()=>(ItemV3Overdrive)MemberwiseClone();}
     [Serializable] public sealed class ItemV3Synthesis {public string id,component;public double multiplier;public ItemV3Synthesis Copy()=>(ItemV3Synthesis)MemberwiseClone();}
     public sealed class ItemV3State
     {
@@ -12,8 +13,8 @@ namespace IdleIntelligence.Core
         public ScientificNumber dataProduced=ScientificNumber.Zero,knowledgeProduced=ScientificNumber.Zero,componentsProduced=ScientificNumber.Zero;
         public double runMinutes;
         public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak;public long scannerAnalyses;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
-        public double[] synthesisRemainders=new double[ItemBalance.ComponentIds.Length];public ItemV3Synthesis synthesisContract;
-        public ItemV3State Copy(){var v=(ItemV3State)MemberwiseClone();v.synthesisRemainders=(double[])synthesisRemainders.Clone();v.synthesisContract=synthesisContract?.Copy();return v;}
+        public double[] synthesisRemainders=new double[ItemBalance.ComponentIds.Length];public ItemV3Synthesis synthesisContract;public ItemV3Overdrive overdrive;
+        public ItemV3State Copy(){var v=(ItemV3State)MemberwiseClone();v.synthesisRemainders=(double[])synthesisRemainders.Clone();v.synthesisContract=synthesisContract?.Copy();v.overdrive=overdrive?.Copy();return v;}
     }
     public static class ItemSystemV3
     {
@@ -21,7 +22,7 @@ namespace IdleIntelligence.Core
         public static bool Enabled(GameState s)=>s.ItemSystemV3?.version==3;
         public static void Validate(GameState s)
         {
-            var v=s?.ItemSystemV3;if(v==null)return;
+            var v=s?.ItemSystemV3;if(v==null)return;double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");var od=v.overdrive;if(od!=null&&(!ScientificNumber.Finite(od.startedAt)||!ScientificNumber.Finite(od.burstUntil)||!ScientificNumber.Finite(od.creditFactor)||!ScientificNumber.Finite(od.dataFactor)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>C("combinations.energy.seconds")*1000+.001||od.creditFactor<1||od.creditFactor>(1+C("burst.coefficient")*maxP)*C("combinations.energy.credits")+1e-10||od.dataFactor!=1&&od.dataFactor!=C("combinations.energy.data")))throw new FormatException("Invalid V3 overdrive contract");
             if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
             if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.scannerAnalyses<0||v.scannerAnalyses>MaxExactSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
         }
@@ -38,7 +39,7 @@ namespace IdleIntelligence.Core
         }
         public static void ResetProduction(GameState s,bool axiom=false)
         {
-            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;
+            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;v.overdrive=null;
             if(axiom){v.knowledgeProduced=ScientificNumber.Zero;v.componentsProduced=ScientificNumber.Zero;}
         }
         public static ItemV3State ChallengeState(GameState main)
@@ -91,6 +92,18 @@ namespace IdleIntelligence.Core
             var regular=s.Copy();regular.ActiveUntil=0;
             return Game.Income(regular,false).Times(C("relay.seconds")*AbilityStrength(s,item)*(critical?C("relay.critical"):1));
         }
+        public static void StartOverdrive(GameState s,double now,double baseDuration)
+        {
+            if(!Enabled(s))return;if(!ScientificNumber.Finite(now)||now<s.SavedAt||!ScientificNumber.Finite(baseDuration)||baseDuration<=0)throw new FormatException("Invalid V3 overdrive start");
+            var items=Equipped(s).ToArray();var burst=items.FirstOrDefault(i=>i.type=="burst-processor");var cryo=items.FirstOrDefault(i=>i.type=="cryocontroller");bool pair=burst!=null&&cryo!=null,trio=pair&&items.Any(i=>i.type=="photonic-analyzer");double duration=baseDuration*(1+(cryo!=null?C("cryo.duration")*AbilityStrength(s,cryo):0));
+            s.ActiveUntil=now+duration*1000;s.ItemSystemV3.overdrive=new ItemV3Overdrive{startedAt=now,burstUntil=now+Math.Min(duration,pair?C("combinations.energy.seconds"):C("burst.seconds"))*1000,creditFactor=burst!=null?(1+C("burst.coefficient")*AbilityStrength(s,burst))*(pair?C("combinations.energy.credits"):1):1,dataFactor=trio?C("combinations.energy.data"):1};
+        }
+        public static double BurstFactor(GameState s,bool data=false)
+        {var v=s.ItemSystemV3?.overdrive;if(!Enabled(s)||ChallengeRules.Is(s,"no-items")||v==null||s.SavedAt<v.startedAt||s.SavedAt>=v.burstUntil||s.SavedAt>=s.ActiveUntil)return 1;return data?v.dataFactor:v.creditFactor;}
+        public static double OverdriveFraction(GameState s)
+        {double remaining=Math.Max(0,s.ActiveUntil-s.SavedAt),duration=Enabled(s)&&s.ItemSystemV3.overdrive!=null?s.ActiveUntil-s.ItemSystemV3.overdrive.startedAt:Balance.OverdriveMaxSeconds*1000;return duration<=0?0:Math.Min(1,remaining/duration);}
+        public static double BurstBoundary(GameState s)
+        {var v=s.ItemSystemV3?.overdrive;return Enabled(s)&&v!=null&&v.burstUntil>s.SavedAt?(v.burstUntil-s.SavedAt)/1000:double.PositiveInfinity;}
         public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);
         public static bool Has(GameState s,string id)=>Equipped(s).Any(i=>i.type==id);
         public static ScientificNumber BaseFactorScientific(GameState s,string family)
@@ -163,7 +176,7 @@ namespace IdleIntelligence.Core
             if(!Enabled(s))return ScientificNumber.One;Validate(s);var result=ScientificNumber.One;
             foreach(var item in Equipped(s))if(item.type=="data-prism")result=result.Multiply(ScientificNumber.From(C("prism.base")).Pow(AbilityStrength(s,item)).Multiply(ScientificNumber.One.Add(ResearchLevels(s).Divide(ScientificNumber.From(C("prism.researchScale")))).Pow(ExponentStrength(s,item))));
             foreach(var item in Equipped(s))if(item.type=="photonic-matrix"&&s.ActiveUntil>s.SavedAt)result=result.Times(1+C("photonic.coefficient")*AbilityStrength(s,item));
-            return result;
+            return result.Times(BurstFactor(s,true));
         }
         public static ScientificNumber ModelEcho(GameState s)
         {

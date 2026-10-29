@@ -391,7 +391,7 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "dad1a4aba6854b695c2f3ac43cc2a24edad97a420b0fd054de02b34a1cefa167",
+  "currentSourceHash": "f5b45f81dd894993a8c509b7718ef354c887d7d6efc96d0ded92d28f6e726266",
   "workshopYieldFollowup": {
     "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
     "normalSaveActivation": false,
@@ -528,6 +528,67 @@
       "duration": "76.1148982",
       "result": "Passed",
       "xmlSha256": "08a02970b6fec04990b7cd21246a72e01e6478c6f422bc01305cc29e5dce0b53"
+    }
+  },
+  "overdriveContractsFollowup": {
+    "sourceHash": "f5b45f81dd894993a8c509b7718ef354c887d7d6efc96d0ded92d28f6e726266",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "productionCases": 102,
+    "actualOverdriveFlows": 8,
+    "actualChallengeFlows": 7,
+    "actualRelayFlows": 7,
+    "focusedVitest": 15,
+    "vitest": {
+      "files": 162,
+      "tests": 2039,
+      "passed": 2039,
+      "failed": 0,
+      "seconds": 177.8,
+      "log": "/tmp/idle-v3-overdrive-full-vitest-final.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Actual start snapshots, burst/energy windows, cryo duration, charged control without tap payment, interval splitting, paused main timer, countdown and bounded contracts; normal saves protected",
+    "images": "../media/unity-v3-overdrive/README.md",
+    "rejectedRuns": [
+      "Three test-first cases exposed absent consumers; one expectation used wrong balance property path and was corrected",
+      "First additional PlayMode launch was not executed because automatic approval review hit a temporary usage limit; after expiry a15-test run passed, before final countdown correction",
+      "Exporter omitted fraction helper import, corrected before final complete generation",
+      "First actual countdown UI run found decorative fill image raycastTarget=true; fixed on the responsible Image; rerun passed"
+    ],
+    "targetedEditModeBeforeFinalCountdown": {
+      "total": "25",
+      "passed": "25",
+      "failed": "0",
+      "duration": "6.1633117",
+      "result": "Passed",
+      "xmlSha256": "43f7db86acc7e6dbe882203a8c3c5f54b68ea4ea9dbbac3cdce390e8fea9ece6"
+    },
+    "mobileCountdownUI": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "3.7371309",
+      "result": "Passed",
+      "xmlSha256": "f7f0d1b9e234f8c884fbe90a4a9ea26b05ba63d3323fb8b753019883a0376dad"
+    },
+    "fullEditMode": {
+      "total": "207",
+      "passed": "207",
+      "failed": "0",
+      "duration": "72.6286634",
+      "result": "Passed",
+      "xmlSha256": "360cdbbf8c23e224b1e870cb2ead17203100436b02cd731677fa67db83240def"
+    },
+    "finalTargetedPlayMode": {
+      "total": "16",
+      "passed": "16",
+      "failed": "0",
+      "duration": "81.7320513",
+      "result": "Passed",
+      "xmlSha256": "ccbba151312e41e41dce03f63741c3d5a97edaa97e0ee779d7a9c07e61217978"
     }
   }
 }
