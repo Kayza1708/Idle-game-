@@ -309,3 +309,5 @@ Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehe
 - 29.10.: Präzisionsscanner an normalisierte verfügbare Fokusgewichte und reduzierten Mengenverlust beim bezahlten Start angeschlossen; V3-Vorschau passend.120Startfälle/35Produktionsfolgen,2.049Vitest/210EditMode/5PlayMode grün. W03-Rare-/Fokusfamilienregel, Familienausbeute, Arbeitsereignisse und vollständigeV3-Migration weiterhin offen.
 
 - 29.10.: W03 speichert verfügbare Fokusfamilie×2 und zulässigen seltenen Mindestfund bei Zahlung; alte bezahlte Garantie erhalten, ungültige neue Verträge gesperrt.40gemeinsame Abläufe,2.055Vitest/211volleEditMode/7PlayMode grün; nach Sichtkorrektur2UItests erneut grün,22Originalbilder. V3-Dateimigration und weitere Familien-/Arbeitsverbraucher offen.
+
+- 29.10.: W04 an tatsächlicheV3-Levelkosten×0,75 samt seltenen Inputs/Rundung, Zahlung und Materialbasis angeschlossen.1.260gemeinsame Fälle,2.060Vitest/212volleEditMode/7PlayMode grün. Kostenzeilen nach echten Bildern gegen Zahlenumbrüche korrigiert,7PlayMode erneut grün;23Originalbilder. Alte normaleRegeln erhalten; Zyklusobservatorium-Kostenkollision separat. V3-Gesamtfreigabe offen.

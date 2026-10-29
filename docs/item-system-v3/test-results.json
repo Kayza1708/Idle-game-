@@ -766,5 +766,50 @@
     "graphics": "22 actual Unity captures; 6/6 final DE/EN analysis images 320/390/430 self-inspected, node details representative DE/EN; seven locale fit assertions. Financed read-only V3 projection, original normal save unchanged. No device/full migration claim.",
     "scope": "Only stored W03 family multiplier and already unlocked rare guarantee; legacy paid rights kept; global K10 quantity remains live; Photon/Quantum family items still open",
     "finalWording": "Base draws/Grundmenge disambiguates quantity from base material family; 2 UI and 6 source cases rerun after wording-only change"
+  },
+  "precisionManufacturingW04": {
+    "sourceHash": "d01a4534fac737912aa76fd8aa7b1d6b7530db1ac8a0dc7b4dd70671bc2b617c",
+    "actualUpgradeCases": 1260,
+    "newSourceContracts": 5,
+    "vitest": {
+      "files": 167,
+      "tests": 2060,
+      "passed": 2060,
+      "failed": 0,
+      "seconds": 187.44,
+      "log": "/tmp/idle-v3-W04-full-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "212",
+      "passed": "212",
+      "failed": "0",
+      "duration": "80.9761722",
+      "result": "Passed",
+      "xmlSha256": "4a093d02fcbd1a62e09d048401907c18c1ffff422be3de945dd4855cb4bb4033"
+    },
+    "initialTargetedPlayMode": {
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "duration": "10.9830284",
+      "result": "Passed",
+      "xmlSha256": "aefaed31ca8e96ba4d0563f8442d9be365eea3fdcac65e5d659d4ebd4e2469ca"
+    },
+    "finalCostLayoutPlayMode": {
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "duration": "10.5659924",
+      "result": "Passed",
+      "xmlSha256": "690f8faf95c5fe1c8df5cc4f68cb398da18e68af58aeb3a82b9f90997faee691"
+    },
+    "typecheck": "passed",
+    "build": "passed;1.53s; existing chunk warning",
+    "generatorCheck": "passed full",
+    "scope": "V3 .75 level-up input factors, actual debit and paid material basis, stale action rejection; old normal .85 preserved; no recipe/fusion/forge discount; 36 current types, not full 42-item release",
+    "graphics": "23 actual Unity pictures; node fit all seven languages, DE/EN320/390/430 funded and missing-input item details; six funded pictures and representative missing/node states self-inspected. In-memory V3 projection, normal original byte-identical.",
+    "correction": "Native images exposed a German number split across lines. Shared CostStrip now selects up to three columns using actual text width at minimum size; final tests require a single line per cost. No price/formatting setting changed.",
+    "knownSourceIssue": "cycle-observatory has same base/rare component ID; existing assignment semantics retained and documented, no invented additive cost rule",
+    "testFirst": "Three source failures reproduced old .85/missing description. Subsequent independent all-type test exposed an existing base/rare key collision in expected assertions; preserved source contract rather than changing costs."
   }
 }

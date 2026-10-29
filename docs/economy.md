@@ -825,3 +825,6 @@ Bestehender spezifizierter Faktor1+Fähigkeits-P aus zentralem `BALANCE.itemV3.f
 
 ### 29.10.2026 – beauftragter V3-W03-Startvertrag
 W03 verdoppelt ausschließlich die beim bezahlten Analysestart gewählte/verfügbare Fokusfamilie. Mindestfund nur aus bereits freigeschalteten seltenen Familien: vorhandene Graphenpräferenz, sonst erste zulässige Komponente der bestehenden Reihenfolge, andernfalls keiner. Keine Freischaltung durch die Garantie. Alte bezahlte Verträge ohne neuen Marker behalten ihre zugesagten Regeln. Faktoren und Kandidat werden beim Start fixiert und beim Abschluss validiert; globaler K10-Mengenverbrauch bleibt separat offen. Normale Regeln unverändert. Quelle bleibt `src/economy.ts` (`prestigeV3.items.W03focus`).
+
+### 29.10.2026 – beauftragtes V3-W04
+Neue Item-Levelupgrades mit W04:×0,75 (`BALANCE.prestigeV3.items.W04`) statt alter×0,85; bestehende Material-/Datenkurven und Rundungsreihenfolge erhalten, seltene benötigte Inputs ebenfalls×0,75 und aufrunden. Ohne W04 keine Reduktion. Nur V3; alte Save-Regeln, Fusion, Rezepte, Schmiedestufen und Herstellungskosten unverändert. Ursprüngliche kollidierende Basis-/Seltenmaterial-ID des Zyklusobservatoriums separat dokumentiert, hier nicht durch neue Additionskosten ersetzt.

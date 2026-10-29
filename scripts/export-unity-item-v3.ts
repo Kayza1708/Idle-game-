@@ -20,7 +20,7 @@ import {craft} from '../src/inventory';
 import {advanceTo} from '../src/simulation';
 import {buyGemOffer} from '../src/gemShop';
 import {normalResetV2,axiomResetV2,buyProgressionAxiom,buyProgressionNode} from '../src/progressionReset';
-import {createItem,equip,unequip} from '../src/inventory';
+import {createItem,equip,unequip,itemImprovementPreview,upgrade} from '../src/inventory';
 import {ScientificNumber as S} from '../src/scientificNumber';
 import {UNITY_RESEARCH_IDS} from './unity-research-ids';
 const root='IdleIntelligence/Assets/IdleIntelligence/';
@@ -284,7 +284,13 @@ for(const mode of ['none','common','maximum','no-items','normal'] as const)for(c
  precisionFocusCases.push({mode,tier,type,focus:focus??'',prepared:true,quantity:contract.quantityFactor,units:job.progressionUnits,jobId:job.id,weights:Object.keys(BALANCE.components).map(id=>contract.weights.find(w=>w.id===id)?.weight??0),order:contract.weights.map(w=>Object.keys(BALANCE.components).indexOf(w.id)),dataAfter:number(exactEconomyValue(started,'data')),previewUnits:analysisRewardQuote(state,type,.01).components.whole+analysisRewardQuote(state,type,.01).components.remainder-state.componentRemainder});
 }
 
-for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows,challengeFlows,relayFlows,overdriveFlows,hardwarePackageCases,precisionFocusCases},null,2)+'\n']]){
+const upgradeCases=[];
+for(const mode of ['v3','v3-W04','normal','normal-W04','no-items-W04'] as const)for(const type of Object.keys(itemTypes) as ItemTypeId[])for(const level of [1,2,24,34,54,68,69]){
+ let state:GameState={...newGame(1000,'prepared-W04-reference'),...(mode.startsWith('normal')?{}:{itemSystemV3:newItemSystemV3()}),nodes:mode.endsWith('W04')?['W04']:[]};state=createItem(state,type,'common');state={...state,data:1e15,exactEconomy:{...state.exactEconomy,data:S.from(1e15).toJSON()},componentInventory:Object.fromEntries(Object.keys(state.componentInventory).map(id=>[id,1e9])) as GameState['componentInventory'],inventory:state.inventory.map(item=>({...item,level,materialBasis:{circuits:7}}))};if(mode==='no-items-W04')state={...state,retention:{...state.retention,activeRun:{id:'no-items'} as never}};
+ const item=state.inventory[0],quote=itemImprovementPreview(state,item.id,'upgrade')!,done=upgrade(state,item.id,item);upgradeCases.push({mode,type,level,prepared:true,allowed:quote.allowed,dataCost:quote.dataCost,costs:Object.keys(BALANCE.components).map(id=>quote.componentCosts[id as keyof typeof quote.componentCosts]??0),dataAfter:number(exactEconomyValue(done,'data')),componentsAfter:Object.keys(BALANCE.components).map(id=>done.componentInventory[id as keyof typeof done.componentInventory]),basisAfter:Object.keys(BALANCE.components).map(id=>done.inventory[0].materialBasis?.[id as keyof typeof done.componentInventory]??0),levelAfter:done.inventory[0].level,duplicateRejected:upgrade(done,item.id,item)===done});
+}
+
+for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows,challengeFlows,relayFlows,overdriveFlows,hardwarePackageCases,precisionFocusCases,upgradeCases},null,2)+'\n']]){
  if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==value)throw Error('Stale V3 export: '+path);}else writeFileSync(path,value);
 }
-console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows + ${trainingAutomationCases.length} automation cases + ${componentFlows.length} component flows + ${challengeFlows.length} challenge flows + ${relayFlows.length} relay flows + ${overdriveFlows.length} overdrive flows + ${hardwarePackageCases.length} hardware package cases + ${precisionFocusCases.length} precision focus cases (${sourceHash})`);
+console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows + ${trainingAutomationCases.length} automation cases + ${componentFlows.length} component flows + ${challengeFlows.length} challenge flows + ${relayFlows.length} relay flows + ${overdriveFlows.length} overdrive flows + ${hardwarePackageCases.length} hardware package cases + ${precisionFocusCases.length} precision focus cases + ${upgradeCases.length} paid upgrade cases (${sourceHash})`);

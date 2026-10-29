@@ -17,3 +17,6 @@ Die V3-Vorgabe verlangt jeden fünften bezahlten Analyseabschluss als zusätzlic
 
 ### Präzisierung zum Klassenupgrade-Reset
 Der aktuelle `normalResetV2` und Axiomreset leeren die wirksamen `classUpgrades`, behalten aber `materials.classUpgrades`. `classUpgradePreview` sperrt einen weiteren Kauf auch anhand dieses erhaltenen Materialbelegs. Damit ist die aktive Kaufwirkung nicht einfach ein dauerhaftes Upgrade; bei einem nativen neuen Kaufweg wären diese getrennten Erhaltungsregeln sichtbar zu erklären oder ausdrücklich neu zu entscheiden. Keine still erfundene permanente×2-Wirkung oder wiederholbare Extra-Meilensteinvergabe. Analyse-/W08- und andere unabhängige Verbraucher werden weiterbearbeitet.
+
+## Zyklusobservatorium: gleiche Kosten-ID
+`itemMaterialFamilies[cycle-observatory]` enthält `quantumCores` sowohl als Basis- wie als Seltenmaterial. Das bestehende Source-Kostenobjekt überschreibt bei seltenen Eingaben die Basiszuweisung; Native entspricht dem. W04 übernimmt×0,75/Rundung der tatsächlich geltenden Eingaben, erfindet aber keine zusätzlichen additiven Kosten. Vor vollständiger Katalogfreigabe diese bestehende Kostenkollision ausdrücklich entscheiden; gemeinsame1260Levelkostenreferenzen halten den Befund nachvollziehbar.

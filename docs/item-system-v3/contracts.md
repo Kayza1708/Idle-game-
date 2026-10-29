@@ -82,7 +82,7 @@ Die sechs neuen Namen erhalten ihre endgültigen dauerhaften IDs zusammen mit de
 
 ## Gemeinsame Prestigeabhängigkeiten
 
-Rechenpfade für H06–H10/T07 und zukünftige INT-Gewichte sind vorhanden. F07-Neustartpreis, F08-Aktivitätsfaktor und F10-Forschungsskalierung sind an tatsächliche Verbraucher angeschlossen; W03/W08 sowie Tap-/Overdrive-Startverträge sind inzwischen separat an echte Verbraucher angeschlossen und geprüft (siehe aktuelle Implementierungsberichte). W04/W07, weitere Automationserklärungen, übrige Quell-/Materialverbraucher sowie die vollständigen Modellsekundärfähigkeiten müssen noch einzeln geprüft bzw. ergänzt werden. Einzelne zentral vorhandene neue Werte gelten nicht als fertiger Verbraucher.
+Rechenpfade für H06–H10/T07 und zukünftige INT-Gewichte sind vorhanden. F07-Neustartpreis, F08-Aktivitätsfaktor und F10-Forschungsskalierung sind an tatsächliche Verbraucher angeschlossen; W03/W08 sowie Tap-/Overdrive-Startverträge sind inzwischen separat an echte Verbraucher angeschlossen und geprüft (siehe aktuelle Implementierungsberichte). W04-Levelkosten sind ebenfalls mit tatsächlichen Abbuchungen und Materialbasis geprüft. W07, weitere Automationserklärungen, übrige Quell-/Materialverbraucher sowie die vollständigen Modellsekundärfähigkeiten müssen noch einzeln geprüft bzw. ergänzt werden. Einzelne zentral vorhandene neue Werte gelten nicht als fertiger Verbraucher.
 
 F02 bietet in der tatsächlichen aktuellen Quelle bereits sechs Plätze; die vorhandene Operationsforschung erweitert um zwei auf acht. Die neue Queueoberfläche erhält diese bestehenden Kapazitäten. Sie zeigt echte unbezahlte Pläne und schreibt keine fiktiven Reservierungen.
 

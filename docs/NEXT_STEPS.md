@@ -249,3 +249,6 @@ Gewichte und Mengenverlust wirken beim tatsächlichen bezahlten Start; gespeiche
 
 ### 29.10.: W03-Zielfamilie geprüft
 Bezahlte Faktoren/Mindestfund über Fokuswechsel und Axiomreset erhalten; keine gesperrte Graphengarantie bei neuen V3-Aufträgen.2.055Vitest/211volleEditMode/7PlayMode plus2finaleUIprüfungen,22Bilder; DE/EN320/390/430 selbstgesehen. Weiter mit W04-Levelkosten, gültiger Photon-/Quantenausbeute und deren gespeicherten Verträgen; kein Xcode-Zwischenbuild.
+
+### 29.10.: W04-Levelkosten geprüft
+1.260gemeinsame tatsächliche Quotes/Abbuchungen/Materialbasen, alle vorhandenenTypen und kritischeLevel, alte/neue/no-itemsRegeln;2.060Vitest/212volleEditMode/7PlayMode grün, nach Kostenlesbarkeitskorrektur7PlayMode erneut grün. Weiter mit W07-Serienfertigung: tatsächliche volle Batchkosten und Bezahlsperren in der Oberfläche vereinheitlichen, atomare Fehlfälle und Ergebnisse prüfen. Weitere Familien-/Arbeitsverbraucher und V3-Savemigration vor Xcode weiter offen.

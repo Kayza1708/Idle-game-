@@ -10,6 +10,14 @@ const descriptions={W03:{
  pt:'Novas análises pagas: família de foco escolhida e liberada ×{focus}. Mínimo raro apenas de família liberada. Condições fixadas no início.',
  it:'Nuove analisi pagate: famiglia scelta e sbloccata ×{focus}. Minimo raro solo da famiglie sbloccate. Condizioni fissate alla partenza.',
  pl:'Nowe płatne analizy: wybrana odblokowana rodzina ×{focus}. Minimum rzadkie tylko z odblokowanej rodziny. Warunki ustalone przy starcie.',
+},W04:{
+ en:'New item level upgrades: material and data costs ×{upgrade}. Round each required input up. No discount on fusion, recipes or forging.',
+ de:'Neue Item-Levelupgrades: Material- und Datenkosten ×{upgrade}. Jeden benötigten Input aufrunden. Kein Rabatt auf Fusion, Rezepte oder Schmiedestufen.',
+ es:'Nuevas mejoras de nivel: materiales y datos ×{upgrade}. Cada insumo se redondea hacia arriba. Sin descuento en fusión, recetas ni forja.',
+ fr:'Nouvelles améliorations de niveau : matériaux et données ×{upgrade}. Chaque coût est arrondi au supérieur. Aucun rabais sur fusion, recettes ou forge.',
+ pt:'Novas melhorias de nível: materiais e dados ×{upgrade}. Arredondar cada custo para cima. Sem desconto em fusão, receitas ou forja.',
+ it:'Nuovi aumenti di livello: materiali e dati ×{upgrade}. Ogni costo è arrotondato per eccesso. Nessuno sconto su fusione, ricette o forgiatura.',
+ pl:'Nowe ulepszenia poziomu: materiały i dane ×{upgrade}. Każdy koszt zaokrąglany w górę. Bez zniżki na fuzję, receptury i kucie.',
 },C01:{
  en:'Passive component quantity by level: {values}. Replaces the previous bonus; applies only to regular passive finds.',
  de:'Passive Komponentenmenge je Stufe: {values}. Ersetzt den bisherigen Bonus; gilt nur für reguläre passive Funde.',
@@ -55,7 +63,7 @@ export const prestigeV3DescriptionIds=Object.keys(descriptions);
 export function prestigeV3Description(id:string,language:Language){
  if(!Object.hasOwn(descriptions,id))return null;
  const row=descriptions[id as keyof typeof descriptions],values=id==='C01'||id==='C06'?BALANCE.prestigeV3.axioms[id].map(n=>'×'+new Intl.NumberFormat(language).format(n)).join(' / '):'';
- const fmt=new Intl.NumberFormat(language);return row[language].replace('{focus}',fmt.format(BALANCE.prestigeV3.items.W03focus)).replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
+ const fmt=new Intl.NumberFormat(language);return row[language].replace('{upgrade}',fmt.format(BALANCE.prestigeV3.items.W04)).replace('{focus}',fmt.format(BALANCE.prestigeV3.items.W03focus)).replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
 }
 
 export const synthesisOutputCopy={
