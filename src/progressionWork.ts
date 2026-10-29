@@ -157,6 +157,7 @@ export function advanceProgressionWork(s: GameState, seconds: number) {
         grantComponents(
           { ...next, progression: { ...next.progression, synthesis: null } },
           { [synth.component]: 1 },
+          "synthesis",
         ),
         "synthesis-complete",
         s.savedAt,

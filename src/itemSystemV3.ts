@@ -195,6 +195,15 @@ export function recordItemProductionV3(s:GameState,seconds:number,data:S,knowled
  if(!usesItemV3(s))return s;nonnegative(seconds,'Invalid credited time');
  const v=s.itemSystemV3!;return{...s,itemSystemV3:{...v,dataProduced:S.fromJSON(v.dataProduced).add(data).toJSON(),knowledgeProduced:S.fromJSON(v.knowledgeProduced).add(knowledge).toJSON(),runMinutes:v.runMinutes+seconds/60}};
 }
+const itemComponentSourcesV3=new Set(['analysis','synthesis','passive-hardware','paid-hardware-package','paid-class-upgrade']);
+export type ItemComponentProductionV3='analysis'|'synthesis'|'passive-hardware'|'paid-hardware-package'|'paid-class-upgrade';
+/** Explicit producer receipts only. Default grants (shop, drops, gifts,
+ * salvage, recovery, import and trade) never become self-production. */
+export function recordItemComponentsV3(s:GameState,grant:Partial<GameState['componentInventory']>,source?:ItemComponentProductionV3):GameState{
+ if(!usesItemV3(s)||!source||!itemComponentSourcesV3.has(source))return s;
+ let amount=S.zero();for(const [id,value]of Object.entries(grant)){if(!Object.hasOwn(BALANCE.components,id))continue;const n=value??0;if(!Number.isSafeInteger(n)||n<0)throw new RangeError('Invalid V3 produced components');amount=amount.add(S.from(n));}
+ if(amount.isZero())return s;const v=s.itemSystemV3!;return{...s,itemSystemV3:{...v,componentsProduced:S.fromJSON(v.componentsProduced).add(amount).toJSON()}};
+}
 /** Run data/time/series reset at ordinary prestige; independently produced
  * knowledge/components survive until the actual axiom-cycle boundary. */
 export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameState{

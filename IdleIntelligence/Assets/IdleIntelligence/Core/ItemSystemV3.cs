@@ -27,6 +27,12 @@ namespace IdleIntelligence.Core
             if(!Enabled(s))return;if(!ScientificNumber.Finite(seconds)||seconds<0)throw new ArgumentOutOfRangeException(nameof(seconds));
             var v=s.ItemSystemV3;v.dataProduced=v.dataProduced.Add(data);v.knowledgeProduced=v.knowledgeProduced.Add(knowledge);v.runMinutes+=seconds/60;
         }
+        public static void RecordComponents(GameState s,int component,long amount,string source)
+        {
+            if(!Enabled(s))return;switch(source){case "analysis":case "synthesis":case "passive-hardware":case "paid-hardware-package":case "paid-class-upgrade":break;default:return;}
+            if(component<0||component>=ItemBalance.ComponentIds.Length||amount<0)throw new ArgumentOutOfRangeException(nameof(amount));
+            s.ItemSystemV3.componentsProduced=s.ItemSystemV3.componentsProduced.Add(ScientificNumber.From(amount));
+        }
         public static void ResetProduction(GameState s,bool axiom=false)
         {
             if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;

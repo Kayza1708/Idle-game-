@@ -204,5 +204,44 @@
       "xmlSha256": "c138e58029a1bcd5a412609b1d9e8e07dbe7d068d35ca229740c1c08cdba65d8"
     },
     "rejectedRuns": "wrong UI route, invalid prepared entitlement and batch-unsupported WaitForEndOfFrame corrected; not counted as passing runs"
+  },
+  "componentProductionFollowup": {
+    "sourceHash": "1ee8c1a935a2499797a29396f335f744eb5b8c194a9cfb829f72a366199db11c",
+    "actualSharedComponentFlows": 7,
+    "prepared": true,
+    "normalSaveActivation": false,
+    "vitest": {
+      "files": 155,
+      "tests": 2006,
+      "passed": 2006,
+      "failed": 0,
+      "seconds": 325.12
+    },
+    "additionalActualCraftSpendTest": "5/5 component tests after adding real craft debit assertion",
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed; final seven component flows checked again",
+    "nativeClassUpgradeAcquisition": "unresolved source comment/UI contradiction, separately documented",
+    "editMode": {
+      "total": "195",
+      "passed": "195",
+      "failed": "0",
+      "duration": "135.0768418",
+      "result": "Passed",
+      "xmlSha256": "636ebaa2e9df4e703a3c67fd9ad451ef853969973bac31bad42eed260a8db685"
+    },
+    "playMode": {
+      "total": "18",
+      "passed": "18",
+      "failed": "0",
+      "duration": "78.1082848",
+      "result": "Passed",
+      "xmlSha256": "579050629f7ce5a339303d641186cb6bd10d2d00600a0fd9a7a093b8c7261759"
+    },
+    "correctedFailures": [
+      "actual source/native first-production starter-gift timing mismatch fixed",
+      "old isolated synthesis fixture now marks starter gift previously claimed/spent; fresh behavior separately compared to TS",
+      "transient V3 presentation fixture now suspends lifecycle callbacks; production save guard unchanged"
+    ]
   }
 }
