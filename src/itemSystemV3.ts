@@ -208,7 +208,7 @@ export function recordItemComponentsV3(s:GameState,grant:Partial<GameState['comp
  * knowledge/components survive until the actual axiom-cycle boundary. */
 export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameState{
  if(!usesItemV3(s))return s;const v=s.itemSystemV3!;
- return{...s,itemSystemV3:{...v,dataProduced:S.zero().toJSON(),runMinutes:0,learningStreak:0,lastLearningTrack:null,...(kind==='axiom'?{knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON()}:{} )}};
+ return{...s,itemSystemV3:{...v,dataProduced:S.zero().toJSON(),runMinutes:0,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,...(kind==='axiom'?{knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON()}:{} )}};
 }
 
 /** Restores the old researchArchive -> I04 acquisition right. Learning stays an
@@ -216,7 +216,7 @@ export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameS
 export function archiveBlueprintRightV3(s:GameState){return usesItemV3(s)&&(s.itemSystemV3!.archiveBlueprintRight||s.insightArchiveBlueprint||s.nodes.includes('I04')||s.progression.known.includes('I04')||(s.learnedRecipes??[]).includes('insight-archive'));}
 
 function validateItemTrainingCountersV3(v:ItemSystemV3State){
- if(!Number.isSafeInteger(v.nextTrainingSequence)||v.nextTrainingSequence<1||!Number.isSafeInteger(v.lastCompletedTrainingSequence)||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||!Number.isSafeInteger(v.learningStreak)||v.learningStreak<0||v.learningStreak>c().logic.maxStreak||![null,'quality','efficiency'].includes(v.lastLearningTrack)||![null,'regular','bonus','intro'].includes(v.lastTrainingCompletionCause))throw new RangeError('Invalid V3 training counters');
+ if(!Number.isSafeInteger(v.scannerAnalyses)||v.scannerAnalyses<0||!Number.isSafeInteger(v.nextTrainingSequence)||v.nextTrainingSequence<1||!Number.isSafeInteger(v.lastCompletedTrainingSequence)||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||!Number.isSafeInteger(v.learningStreak)||v.learningStreak<0||v.learningStreak>c().logic.maxStreak||![null,'quality','efficiency'].includes(v.lastLearningTrack)||![null,'regular','bonus','intro'].includes(v.lastTrainingCompletionCause))throw new RangeError('Invalid V3 training counters');
 }
 /** Serial training IDs are assigned only after the existing start/payment
  * succeeds. Sequence/settlement markers survive resets; personal counters are
@@ -237,4 +237,12 @@ export function completeItemTrainingV3(s:GameState,cause:'regular'|'bonus'):Game
   learningStreak=lastLearningTrack===job.track?Math.floor(learningStreak/c().logic.sameTrackDivisor):Math.min(c().logic.maxStreak,learningStreak+1);lastLearningTrack=job.track;
  }
  return{...s,itemSystemV3:{...v,lastCompletedTrainingSequence:id,lastTrainingCompletionCause:job.intro?'intro':cause,learningStreak,lastLearningTrack}};
+}
+
+/** Live scanner factor; regular completion increments are booked atomically
+ * by completeExperiment, never by showing/claiming a reward. */
+export function itemAnalysisFactorV3(s:GameState){
+ if(!usesItemV3(s))return one();validateItemTrainingCountersV3(s.itemSystemV3!);
+ const item=itemV3Equipped(s).find(i=>i.type==='field-scanner');if(!item)return one();
+ const {P}=itemAbilityStrengthV3(s,item);return S.from(c().scanner.base).pow(P).multiply(one().add(itemSoftcapV3(S.from(s.itemSystemV3!.scannerAnalyses),c().scanner.threshold).multiplyNumber(c().scanner.perAnalysis*P)));
 }

@@ -185,3 +185,14 @@ Alle sieben C01-Beschreibungen aus derselben TS-Quelle generiert und an echte TS
 Neue Währungsvergleiche fanden einen fehlerhaften finanzierten Referenzzustand: bereits gewährte INT waren nicht als beansprucht markiert. Fixtures korrigiert, echte Formeln unverändert; nun werden verfügbares Axiomguthaben, lebenslangeINT, noch ausstehende Vergabe und zwei aufeinanderfolgende Axiomresets verglichen.
 
 Prüfungen:155Dateien/2.007Vitest(327,79s), danach26gezielte Finanzierungsfälle; Typecheck, Webbuild, Generatorprüfung grün. UnityCompile/14EditMode(9,412s),13PlayMode(58,464s), finale6UI-/Netztests(22,262s). Keine neue vollständigeUnity-Regression behauptet. Frühere fehlgeschlagene Fixtureläufe zählen nicht als Nachweis. Originale/Saves unverändert; V3-Dateimigration und vollständige Verbraucher bleiben offen, kein Xcode-Player installiert.
+
+
+## 29.10.2026 – Feldscanner am tatsächlichen bezahlten Abschluss
+
+Vorgegebene Formel2^P×[1+0,05×P×S(A,25)] an tatsächliches Analysetempo angeschlossen. A zählt ausschließlich abgeschlossene bezahlte reguläre Aufträge bei aktiver Ausrüstung. Abbruch, wiederholter Abschlussaufruf, bestehender Introauftrag, abgelehntes Zweitstarten und No-items ausgeschlossen. Ablegen erhält die Serie, beide echten Resetarten leeren sie. W10 einmal auf Fähigkeits-P. Neuer persönlicher Zähler bleibt außerhalb handelbarer Items.
+
+Die alte gemeinsame Analyse-/Syntheserate hätte den neuen Scannerfaktor irrtümlich auch auf Synthese angewendet. Basistempo/Analysefaktor getrennt und beide tatsächlichen Verbraucher angepasst; normale Regeln bleiben gleich.17gemeinsame vollständige Produktionsfolgen vergleichen Zahlungen, Komponenten, K, Axiom-/INT-Guthaben, Scannerzähler und Live-Tempo, einschließlich späterem Ausrüsten/Ablegen und Syntheseausschluss. Eigene Grenztests0/24/25/26/1.000.000, maximale Itemstärke, W10 und Kopierisolation.
+
+23gezielteVitest, danach vollständige156Dateien/2.011Tests(335,59s); Typecheck/Webbuild(2,19s)/vollständigeGeneratorprüfung grün. UnityCompile/15gezielteEditMode(8,922s), danach197/197vollständigeEditMode(133,690s). Abschließend8/8gezieltePlayMode(50,549s), echte Szene/Abschlussfeedback/Plan-/Reload-UI. Die Warnung „Saved feedback failed“ stammt aus dem ausdrücklich erwarteten Test eines defekten kosmetischen Verbrauchers nach erfolgreichem Speichern; kein unerklärter Laufzeitfehler. Ein TS-Test brauchte eine explizite GameState-Typannotation; ein nach der Trennung ungenutzter Import entfernt. Veraltete Generatorhashes vollständig neu erzeugt und anschließend geprüft. Keine Produktionsregel dafür verändert.
+
+Noch offen: vollständige Dateimigration und verständliche V3-Itemdetails; die zusätzliche Bibliotheks-Bereichszuordnung ist separat in source-inconsistencies.md dokumentiert. Keine V3-/Playerfreigabe und kein neu installierter Commit. Anschließend C06-Ausbeute/Bruchteilsreste und bezahlte Startverträge weiterbearbeiten.

@@ -11,3 +11,6 @@ Für den Komponenten-Zähler ist der tatsächliche TS-Kauf explizit markiert, al
 ## Archiv und alte Diagnoselisten
 
 V3-Archivlernen/-Herstellung nutzt inzwischen das vorhandene I04-/Legacyrecht; atomare Original-/Webmigration bleibt separat offen. Alte Baseline-Diagnosetexte sind teilweise aus dem früheren Prestigekatalog; sie dürfen nicht als aktueller60/24-Preiskatalog/Kaufsperre verwendet werden. Siehe `baseline-notes.md` und `contracts.md`. Eingefrorene historische Rohberichte nicht nachträglich umschreiben.
+
+## Bibliothekskombination: Analysebereich
+Die V3-Vorgabe verlangt jeden fünften bezahlten Analyseabschluss als zusätzlichen Bauplanfortschritt im tatsächlich zugehörigen Bereich. Der bestehende Forschungsbereichskatalog ordnet ausschließlich Forschungsprojekt-IDs zu; Analyse-IDs hardware/architecture/artifact besitzen dort keine ausdrückliche Zuordnung. Reguläre Analysen vergeben globale Fragmente, keine solchen Bereichspunkte. Eine belastbare Analyse-/Bereichszuordnung vor vollständiger Kombinationsfreigabe ergänzen/klären; nicht kommentarlos einen zufälligen Bereich oder globale Ersatzfragmente vergeben. Basisfähigkeit des Scanners und unabhängige Verbraucher weiterbearbeiten.

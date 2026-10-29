@@ -794,3 +794,6 @@ K wächst ausschließlich aus expliziten tatsächlich vergüteten Produktionsbel
 
 ### Prestige-V3 C01
 Vorhandene zentrale Vorgabe×2/×3/×4 ersetzt im experimentellen V3 den alten passiven Bonus. Intervall3600s unverändert. Rundung ausschließlich an vorhandener1e-12Bruchteilspräzision stabilisiert; keine häufigeren Funde, keine rückwirkende Produktion. Preis/Resetformeln unverändert. Normale Spielstände nicht aktiviert.
+
+### Item-V3 Feldscanner
+Zentrale Vorgabe2^P×[1+0,05×P×S(A,25)] als tatsächlicher Analysefaktor; A zählt bezahlte reguläre Abschlüsse bei Ausrüstung im Run. Alte Itemprofile nicht zusätzlich anwenden; W10 nur einmal auf Fähigkeits-P. Analysefaktor wirkt nicht auf Synthese. Keine neuen Werte, unveränderte Kosten und normaleSave64/24-Regeln.

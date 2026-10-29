@@ -29,7 +29,7 @@ Dies ist eine Implementierungsinventur, **keine Freigabe**. Normale Spielstände
 | 21 | `model-echo-core` | ursprünglicher Modellkern × ursprünglicher Revenuefaktor genau einmal potenziert | alle zehn Modelle/Slotwechsel und UI |
 | 22 | `mnemonic-anchor` | Training aus tatsächlichen Modellupgradeleveln | alle Erwerbs-/Reset-/Wechselfälle |
 | 23 | `insight-archive` | zukünftige INT-Gewichtung; V3-Lernen/Herstellen über bestehendes I04-/Research-Archive-Recht | vollständige Altimport-/Save-Migration und erreichbare V3-UI-Abnahme |
-| 24 | `field-scanner` | offen | bezahlte Analyseabschlüsse während Ausrüstung zählen; Live-Tempo |
+| 24 | `field-scanner` | tatsächliche bezahlte Analyseabschlüsse bei aktiver Ausrüstung; Live-Tempo mit S(A,25), W10 einmal | vollständige Save-Migration/Details; Bibliotheks-Dreierkombination separat |
 | 25 | `lab-drone` | offen | Zusatzarbeit nur aus regulärer Laborarbeit; größtes Restlabor, stabile Gleichstände |
 | 26 | `data-prism` | Daten aus F ohne doppelte Projektzählung | Auftrags-/Reset-/Detailsabnahme |
 | 27 | `diagnostic-adapter` | offen | nur bezahlte einmalige Hardwarepakete, Restverwaltung |
@@ -109,3 +109,6 @@ Sechs gemeinsame vollständige TS-/C#-Folgen prüfen wirkliche Starts, Zahlungen
 
 ### C01 passive Produktion
 V3-Faktoren×2/×3/×4 tatsächlich in passiver Hardwareproduktion; zentrale sieben Sprachtexte im verbundenen Netz, Stunden-/Grenz-/Guthabenparität über elf reale Komponentenfolgen. V3-Dateimigration und natürliche Entdeckungsführung bleiben offen.
+
+### Feldscanner: reguläre Analyseereignisse
+Run-Zähler steigt am tatsächlichen bezahlten Abschluss bei Ausrüstung, bleibt beim Ablegen bestehen und leert sich an beiden echten Resetarten. Abbruch/doppelte Anzeige/alte Introaufträge/No-items ausgeschlossen. Keine Beschleunigung der Synthese durch den nur für Analysen bestimmten Scannerfaktor.17gemeinsame tatsächliche Produktionsfolgen prüfen auch Ausrüsten während Auftrag, Ablegen vor Abschluss, Ablegen/Wiederanlegen, Zahlung und Resets. Vollständige V3-Speicherung und Details weiterhin offen.

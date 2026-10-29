@@ -290,5 +290,46 @@
       "language preview mutated state directly; now exercises actual Settings action",
       "single-word detail header wrapped in French; shared flex header corrected"
     ]
+  },
+  "scannerFollowup": {
+    "sourceHash": "92faac62cb95f48407ac9dbe6f6a709f41f4966894ac2ed086efaa0747fd7cb7",
+    "normalSaveActivation": false,
+    "actualComponentFlows": 17,
+    "focusedVitest": 23,
+    "vitest": {
+      "files": 156,
+      "tests": 2011,
+      "passed": 2011,
+      "seconds": 335.59
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed after regenerating dependent source hashes",
+    "scope": "actual field-scanner paid completion and analysis speed; synthesis explicitly excluded; full library combination and V3 migration remain open",
+    "targetedEditMode": {
+      "total": "15",
+      "passed": "15",
+      "failed": "0",
+      "duration": "8.9221248",
+      "result": "Passed",
+      "xmlSha256": "fead1068433e274ae2780f76f13500a79c00c43b7ea89a549ab7a3fd6d805d96"
+    },
+    "fullEditMode": {
+      "total": "197",
+      "passed": "197",
+      "failed": "0",
+      "duration": "133.6901881",
+      "result": "Passed",
+      "xmlSha256": "c56035d606c73fabe9a9cefe4f3a9f5a210b71f25a68ea0aba26fae7a372e1db"
+    },
+    "playMode": {
+      "total": "8",
+      "passed": "8",
+      "failed": "0",
+      "duration": "50.5486613",
+      "result": "Passed",
+      "xmlSha256": "f4b42891567b8f2df52d53144ddb277d2b3656ef26a79c6ecdc8fee3f5ea2c19",
+      "expectedWarning": "BrokenCosmeticConsumerCannotTurnSuccessfulCommitIntoSaveFailure deliberately raises cosmetic failure after successful durable commit"
+    }
   }
 }

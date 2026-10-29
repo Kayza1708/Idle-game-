@@ -1,6 +1,6 @@
 import {prestigeV3Description,prestigeV3DescriptionIds} from '../src/prestigeV3Copy';
 import {languages} from '../src/i18n';
-import {queueExperiment,cancelExperiment,experimentSpeed} from '../src/experiments';
+import {queueExperiment,cancelExperiment,experimentSpeed,synthesisSpeed} from '../src/experiments';
 import {startSynthesis} from '../src/progressionWork';
 import {protectedData} from '../src/progressionWork';
 /** Generated balance and actual production-consumer fixtures. No second C# tuning table. */
@@ -16,7 +16,7 @@ import {craft} from '../src/inventory';
 import {advanceTo} from '../src/simulation';
 import {buyGemOffer} from '../src/gemShop';
 import {normalResetV2,axiomResetV2,buyProgressionAxiom} from '../src/progressionReset';
-import {createItem,equip} from '../src/inventory';
+import {createItem,equip,unequip} from '../src/inventory';
 import {ScientificNumber as S} from '../src/scientificNumber';
 import {UNITY_RESEARCH_IDS} from './unity-research-ids';
 const root='IdleIntelligence/Assets/IdleIntelligence/';
@@ -113,22 +113,24 @@ const trainingAutomationCases=[
  const protectedResearch=protectedData(state,'research'),after=advanceTo(state,1001,false,()=>.5).state;
  return{...row,manual:row.manual??'',original:!!row.original,done:!!row.done,prepared:true,protectedResearch:number(protectedResearch),track:after.activeTraining?.track??'',jobId:after.activeTraining?.jobId??'',creditDebit:number(exactEconomyValue(state,'credits').subtract(exactEconomyValue(after,'credits'))),dataDebit:number(exactEconomyValue(state,'data').subtract(exactEconomyValue(after,'data'))),remainingPlans:after.trainingQueue.length};
 });
-type ComponentAction={action:'gift'|'shop'|'hardware'|'analysis'|'cancel'|'synthesis'|'finish'|'advance'|'repeat'|'prestige'|'axiom';amount?:number;seconds?:number;pending?:boolean};
+type ComponentAction={action:'scanner-equip'|'scanner-unequip'|'gift'|'shop'|'hardware'|'analysis'|'cancel'|'synthesis'|'finish'|'advance'|'repeat'|'prestige'|'axiom';amount?:number;seconds?:number;pending?:boolean};
 function componentFlow(name:string,actions:ComponentAction[],v3=true,C01=0){
  let state:GameState={...newGame(1000,'prepared-component-reference'),...(v3?{itemSystemV3:newItemSystemV3()}:{}),credits:1e12,data:1e12,gems:1000};state={...state,exactEconomy:{...state.exactEconomy,credits:S.from(1e12).toJSON(),data:S.from(1e12).toJSON()}};
  if(C01){const funding=S.from(1000).toJSON();state={...state,axiomResetCount:1,axioms:1000,availableAxioms:1000,totalAxiomsEarned:1000,exactAxioms:{available:funding,total:funding},itemSystemV3:{...state.itemSystemV3!,axiomDiscovered:true,axiomDiscoveryAt:1000}};for(let i=0;i<C01;i++){const before=state;state=buyProgressionAxiom(state,'C01');if(state===before)throw Error('Prepared C01 purchase failed');}}
  const steps=actions.map(input=>{const action={...input};
-  if(action.action==='gift')state=grantComponents(state,{circuits:500});
+  if(action.action==='scanner-equip'){let item=state.inventory.find(i=>i.type==='field-scanner');if(!item){state=createItem(state,'field-scanner','common');item=state.inventory.at(-1)!;}state=equip(state,item.id);}
+  else if(action.action==='scanner-unequip')state=unequip(state,'research');
+  else if(action.action==='gift')state=grantComponents(state,{circuits:500});
   else if(action.action==='shop')state=buyGemOffer(state,'materials-circuits');
   else if(action.action==='hardware')state=buyHardwareClass(state,'calculator',action.amount!);
   else if(action.action==='analysis')state=queueExperiment(state,'hardware',state.savedAt,'short');
   else if(action.action==='cancel')state=cancelExperiment(state);
   else if(action.action==='synthesis')state=startSynthesis(state,'circuits');
   else if(action.action==='repeat')state=advanceTo(state,state.savedAt,false,()=>.5).state;
-  else if(action.action==='advance'||action.action==='finish'){if(action.action==='finish')action.seconds=state.progression.synthesis?Math.max(0,state.progression.synthesis.required-state.progression.synthesis.work)/experimentSpeed(state)+.01:state.experiments.active?Math.max(0,state.experiments.active.endsAt-state.savedAt)/1000+.01:0;state=advanceTo(state,state.savedAt+action.seconds!*1000,false,()=>.5).state;}
+  else if(action.action==='advance'||action.action==='finish'){if(action.action==='finish')action.seconds=state.progression.synthesis?Math.max(0,state.progression.synthesis.required-state.progression.synthesis.work)/synthesisSpeed(state)+.01:state.experiments.active?Math.max(0,state.experiments.active.endsAt-state.savedAt)/1000+.01:0;state=advanceTo(state,state.savedAt+action.seconds!*1000,false,()=>.5).state;}
   else if(action.action==='prestige')state=normalResetV2({...state,progression:{...state.progression,entitlement:S.from(100).toJSON()}});
   else if(action.action==='axiom')state=axiomResetV2(fundAxiomReference(state,action.pending));
-  return{...action,at:state.savedAt,counter:state.itemSystemV3?number(S.fromJSON(state.itemSystemV3.componentsProduced)):null,components:Object.keys(BALANCE.components).map(id=>state.componentInventory[id as keyof typeof state.componentInventory]),credits:number(exactEconomyValue(state,'credits')),data:number(exactEconomyValue(state,'data')),gems:state.gems,totalINT:number(exactEconomyValue(state,'totalINTEarned')),axiomFunds:number(axiomEconomyValue(state,'available')),analysis:!!state.experiments.active,synthesis:!!state.progression.synthesis,prestiges:state.prestigeCount,axioms:state.axiomResetCount};
+  return{...action,at:state.savedAt,scannerAnalyses:state.itemSystemV3?.scannerAnalyses??0,analysisSpeed:experimentSpeed(state),counter:state.itemSystemV3?number(S.fromJSON(state.itemSystemV3.componentsProduced)):null,components:Object.keys(BALANCE.components).map(id=>state.componentInventory[id as keyof typeof state.componentInventory]),credits:number(exactEconomyValue(state,'credits')),data:number(exactEconomyValue(state,'data')),gems:state.gems,totalINT:number(exactEconomyValue(state,'totalINTEarned')),axiomFunds:number(axiomEconomyValue(state,'available')),analysis:!!state.experiments.active,synthesis:!!state.progression.synthesis,prestiges:state.prestigeCount,axioms:state.axiomResetCount};
  });return{name,v3,C01,prepared:true,steps};
 }
 const componentFlows=[
@@ -142,6 +144,14 @@ const componentFlows=[
  componentFlow('normal-analysis-contract-unchanged',[{action:'analysis'},{action:'finish'},{action:'repeat'}],false),
 ];
 for(const level of [1,2,3])componentFlows.push(componentFlow('C01-passive-level-'+level,[{action:'hardware',amount:1},{action:'advance',seconds:3*BALANCE.passiveCircuitSecondsPerClass-1},{action:'repeat'},{action:'advance',seconds:1}],true,level));
+componentFlows.push(
+ componentFlow('scanner-live-paid-completions',[{action:'scanner-equip'},{action:'analysis'},{action:'finish'},{action:'repeat'},{action:'analysis'},{action:'finish'},{action:'scanner-unequip'},{action:'analysis'},{action:'finish'},{action:'scanner-equip'}]),
+ componentFlow('scanner-only-active-at-actual-completion',[{action:'analysis'},{action:'scanner-equip'},{action:'finish'},{action:'analysis'},{action:'scanner-unequip'},{action:'finish'},{action:'scanner-equip'}]),
+ componentFlow('scanner-cancel-and-refused-start',[{action:'scanner-equip'},{action:'analysis'},{action:'analysis'},{action:'cancel'},{action:'repeat'},{action:'analysis'},{action:'finish'}]),
+ componentFlow('scanner-reset-boundaries',[{action:'scanner-equip'},{action:'analysis'},{action:'finish'},{action:'prestige'},{action:'analysis'},{action:'finish'},{action:'axiom'}]),
+ componentFlow('scanner-does-not-speed-synthesis',[{action:'scanner-equip'},{action:'synthesis'},{action:'finish'},{action:'repeat'}]),
+ componentFlow('scanner-original-mode-preserved',[{action:'scanner-equip'},{action:'analysis'},{action:'finish'},{action:'repeat'}],false),
+);
 for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows},null,2)+'\n']]){
  if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==value)throw Error('Stale V3 export: '+path);}else writeFileSync(path,value);
 }

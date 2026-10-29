@@ -28,7 +28,7 @@ namespace IdleIntelligence.Tests
     [Serializable]public sealed class LearningV3Flow{public string name;public bool prepared;public LearningV3Initial initial;public LearningV3Step[] steps;}
     [Serializable]public sealed class TrainingAutomationV3Case
     {public string name,manual,track,jobId;public bool original,done,prepared;public int quality,efficiency,integration,target,remainingPlans;public NumberData protectedResearch,creditDebit,dataDebit;}
-    [Serializable]public sealed class ComponentV3Step{public string action;public int amount,gems,prestiges,axioms;public double seconds,at;public NumberData counter,credits,data,axiomFunds,totalINT;public long[] components;public bool analysis,synthesis,pending;}
+    [Serializable]public sealed class ComponentV3Step{public string action;public int amount,gems,prestiges,axioms;public long scannerAnalyses;public double analysisSpeed,seconds,at;public NumberData counter,credits,data,axiomFunds,totalINT;public long[] components;public bool analysis,synthesis,pending;}
     [Serializable]public sealed class ComponentV3Flow{public string name;public bool v3,prepared;public int C01;public ComponentV3Step[] steps;}
     [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;public TrainingAutomationV3Case[] trainingAutomationCases;public ComponentV3Flow[] componentFlows;}
     public sealed class ItemSystemV3Tests
@@ -171,9 +171,11 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void ActualComponentProductionAndResetFlowsMatchSource()
         {
-            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(11));foreach(var flow in flows){
+            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(17));foreach(var flow in flows){
                 var s=Game.New(1000,"prepared-component-reference");s.Credits=s.Data=ScientificNumber.From(1e12);s.Retention.gems=1000;if(flow.v3)s.ItemSystemV3=new ItemV3State();if(flow.C01>0){s.Meta.resets=1;s.Meta.total=s.Meta.available=ScientificNumber.From(1000).ToData();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;for(int i=0;i<flow.C01;i++){var before=s;s=MetaRules.Buy(s,"C01");Assert.That(s,Is.Not.SameAs(before),"prepared paid C01 purchase");}}
                 foreach(var step in flow.steps){switch(step.action){
+                    case "scanner-equip":var scanner=s.Workshop.inventory.FirstOrDefault(i=>i.type=="field-scanner");if(scanner==null){s=s.Copy();scanner=new ItemInstance{id="item-"+s.Workshop.nextId++,type="field-scanner",missingMaterialBasis=true};s.Workshop.inventory=s.Workshop.inventory.Concat(new[]{scanner}).ToArray();Lifetime.Item(s,scanner.type);}s=Workshop.Equip(s,scanner.id,"research");break;
+                    case "scanner-unequip":s=Workshop.Unequip(s,"research");break;
                     case "gift":s=s.Copy();s.Workshop.components[0]+=500;Lifetime.Components(s,0,500);break;
                     case "shop":s=GemShop.Buy(s,"materials-circuits");break;
                     case "hardware":s=Game.Buy(s,"calculator",step.amount);break;
@@ -185,9 +187,17 @@ namespace IdleIntelligence.Tests
                     case "axiom":s=MetaRules.AxiomReset(FundAxiomReference(s,step.pending));break;
                     default:Assert.Fail("Unknown component action "+step.action);break;
                 }
-                string context=flow.name+" "+step.action;if(flow.v3)Near(s.ItemSystemV3.componentsProduced,step.counter,context+" produced K");else Assert.That(s.ItemSystemV3,Is.Null,context+" legacy flag");Assert.That(s.Workshop.components,Is.EqualTo(step.components),context+" wallet components");Near(s.Credits,step.credits,context+" credits");Near(s.Data,step.data,context+" data");Near(ScientificNumber.FromData(s.Meta.available),step.axiomFunds,context+" Axiom funds");Near(s.Prestige.Total,step.totalINT,context+" lifetime INT preserved");Assert.That(s.Retention.gems,Is.EqualTo(step.gems),context+" gems");Assert.That(s.Workshop.hasAnalysis,Is.EqualTo(step.analysis),context+" analysis");Assert.That(s.Industry.synthesis!=null,Is.EqualTo(step.synthesis),context+" synthesis");Assert.That(s.Prestige.resets,Is.EqualTo(step.prestiges),context+" prestige count");Assert.That(s.Meta.resets,Is.EqualTo(step.axioms),context+" axiom count");
+                string context=flow.name+" "+step.action;Assert.That(s.ItemSystemV3?.scannerAnalyses??0,Is.EqualTo(step.scannerAnalyses),context+" scanner receipts");Assert.That(MaterialAnalysis.Speed(s),Is.EqualTo(step.analysisSpeed).Within(Math.Max(1e-9,step.analysisSpeed*1e-10)),context+" live analysis speed");if(flow.v3)Near(s.ItemSystemV3.componentsProduced,step.counter,context+" produced K");else Assert.That(s.ItemSystemV3,Is.Null,context+" legacy flag");Assert.That(s.Workshop.components,Is.EqualTo(step.components),context+" wallet components");Near(s.Credits,step.credits,context+" credits");Near(s.Data,step.data,context+" data");Near(ScientificNumber.FromData(s.Meta.available),step.axiomFunds,context+" Axiom funds");Near(s.Prestige.Total,step.totalINT,context+" lifetime INT preserved");Assert.That(s.Retention.gems,Is.EqualTo(step.gems),context+" gems");Assert.That(s.Workshop.hasAnalysis,Is.EqualTo(step.analysis),context+" analysis");Assert.That(s.Industry.synthesis!=null,Is.EqualTo(step.synthesis),context+" synthesis");Assert.That(s.Prestige.resets,Is.EqualTo(step.prestiges),context+" prestige count");Assert.That(s.Meta.resets,Is.EqualTo(step.axioms),context+" axiom count");
                 }
             }
+        }
+        [Test]public void ScannerSoftcapCopiesAndNoItemsUseActualAnalysisRateOnly()
+        {
+            var s=Game.New(1000);s.ItemSystemV3=new ItemV3State();s.Workshop.inventory=new[]{new ItemInstance{id="prepared-scanner",type="field-scanner"}};s=Workshop.Equip(s,"prepared-scanner","research");
+            foreach(long count in new long[]{0,24,25,26,1000000}){s.ItemSystemV3.scannerAnalyses=count;double soft=count<=25?count:25+Math.Sqrt((count-25)*25);Assert.That(MaterialAnalysis.Speed(s),Is.EqualTo(2*(1+.05*soft)).Within(1e-8));Assert.That(MaterialAnalysis.BaseSpeed(s),Is.EqualTo(1));var copy=s.Copy();copy.ItemSystemV3.scannerAnalyses++;Assert.That(s.ItemSystemV3.scannerAnalyses,Is.EqualTo(count));}
+            s.Challenges.Run=new ChallengeRun{id="no-items",stage=1};Assert.That(MaterialAnalysis.Speed(s),Is.EqualTo(1));s.Challenges.Run=null;
+            foreach(bool axiom in new[]{false,true}){var copy=s.Copy();ItemSystemV3.ResetProduction(copy,axiom);Assert.That(copy.ItemSystemV3.scannerAnalyses,Is.Zero);}
+            s.ItemSystemV3.scannerAnalyses=-1;Assert.Throws<FormatException>(()=>ItemSystemV3.Validate(s));
         }
         [Test]public void ComponentReceiptsPreserveScientificRemaindersAndIndependentCopies()
         {

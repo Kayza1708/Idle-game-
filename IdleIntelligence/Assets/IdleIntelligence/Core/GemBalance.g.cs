@@ -1,6 +1,6 @@
 // Generated from original capsule / Gem offer rules.
 namespace IdleIntelligence.Core {public static class GemBalance {
-public const string SourceHash="d3c973215cee58ca37bc9bd04711534c9e9b2be9091bb3e3a212b6386e859c94";
+public const string SourceHash="68008740567daaeddf0e7026fa9c46797891bda3481e504831d18fb6352cba87";
 public const double CapsuleCost=10d;
 public const double ItemChance=0.01d;
 public const double GemChance=0.0475d;

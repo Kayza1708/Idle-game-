@@ -1,5 +1,5 @@
 {
-  "sourceHash": "ed0260502f3da62363cb6926205c36ab49beed54b4eb5b2b01ec9bf769cbb6b3",
+  "sourceHash": "92faac62cb95f48407ac9dbe6f6a709f41f4966894ac2ed086efaa0747fd7cb7",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
@@ -19427,6 +19427,8 @@
         {
           "action": "analysis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -19484,6 +19486,8 @@
           "action": "finish",
           "seconds": 600.01,
           "at": 601010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.4,
             "e": 1,
@@ -19540,6 +19544,8 @@
         {
           "action": "repeat",
           "at": 601010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.4,
             "e": 1,
@@ -19597,6 +19603,8 @@
           "action": "finish",
           "seconds": 0,
           "at": 601010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.4,
             "e": 1,
@@ -19661,6 +19669,8 @@
         {
           "action": "synthesis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -19718,6 +19728,8 @@
           "action": "finish",
           "seconds": 60.01,
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 1,
             "e": 0,
@@ -19774,6 +19786,8 @@
         {
           "action": "repeat",
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 1,
             "e": 0,
@@ -19830,6 +19844,8 @@
         {
           "action": "prestige",
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 1,
             "e": 0,
@@ -19886,6 +19902,8 @@
         {
           "action": "synthesis",
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 1,
             "e": 0,
@@ -19943,6 +19961,8 @@
           "action": "finish",
           "seconds": 60.01,
           "at": 121020,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2,
             "e": 0,
@@ -19999,6 +20019,8 @@
         {
           "action": "axiom",
           "at": 121020,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20064,6 +20086,8 @@
           "action": "hardware",
           "amount": 25,
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2,
             "e": 1,
@@ -20138,6 +20162,8 @@
           "action": "advance",
           "seconds": 7201,
           "at": 7202000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.2,
             "e": 1,
@@ -20236,6 +20262,8 @@
         {
           "action": "repeat",
           "at": 7202000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.2,
             "e": 1,
@@ -20335,6 +20363,8 @@
           "action": "hardware",
           "amount": 1,
           "at": 7202000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.2,
             "e": 1,
@@ -20441,6 +20471,8 @@
         {
           "action": "gift",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20497,6 +20529,8 @@
         {
           "action": "shop",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20553,6 +20587,8 @@
         {
           "action": "analysis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20609,6 +20645,8 @@
         {
           "action": "cancel",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20666,6 +20704,8 @@
           "action": "advance",
           "seconds": 60,
           "at": 61000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20730,6 +20770,8 @@
         {
           "action": "analysis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20786,6 +20828,8 @@
         {
           "action": "analysis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -20843,6 +20887,8 @@
           "action": "finish",
           "seconds": 600.01,
           "at": 601010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.4,
             "e": 1,
@@ -20899,6 +20945,8 @@
         {
           "action": "analysis",
           "at": 601010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 2.4,
             "e": 1,
@@ -20956,6 +21004,8 @@
           "action": "finish",
           "seconds": 600.01,
           "at": 1201020,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 4.8,
             "e": 1,
@@ -21020,6 +21070,8 @@
         {
           "action": "synthesis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -21077,6 +21129,8 @@
           "action": "finish",
           "seconds": 60.01,
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 1,
             "e": 0,
@@ -21134,6 +21188,8 @@
           "action": "axiom",
           "pending": true,
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -21190,6 +21246,8 @@
         {
           "action": "axiom",
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -21254,6 +21312,8 @@
         {
           "action": "synthesis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": null,
           "components": [
             0,
@@ -21307,6 +21367,8 @@
           "action": "finish",
           "seconds": 60.01,
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": null,
           "components": [
             32,
@@ -21359,6 +21421,8 @@
         {
           "action": "repeat",
           "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": null,
           "components": [
             32,
@@ -21419,6 +21483,8 @@
         {
           "action": "analysis",
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": null,
           "components": [
             0,
@@ -21472,6 +21538,8 @@
           "action": "finish",
           "seconds": 600.01,
           "at": 601010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": null,
           "components": [
             32,
@@ -21524,6 +21592,8 @@
         {
           "action": "repeat",
           "at": 601010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": null,
           "components": [
             32,
@@ -21585,6 +21655,8 @@
           "action": "hardware",
           "amount": 1,
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -21642,6 +21714,8 @@
           "action": "advance",
           "seconds": 10799,
           "at": 10800000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 4,
             "e": 0,
@@ -21715,6 +21789,8 @@
         {
           "action": "repeat",
           "at": 10800000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 4,
             "e": 0,
@@ -21789,6 +21865,8 @@
           "action": "advance",
           "seconds": 1,
           "at": 10801000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 6,
             "e": 0,
@@ -21871,6 +21949,8 @@
           "action": "hardware",
           "amount": 1,
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -21928,6 +22008,8 @@
           "action": "advance",
           "seconds": 10799,
           "at": 10800000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 6,
             "e": 0,
@@ -22001,6 +22083,8 @@
         {
           "action": "repeat",
           "at": 10800000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 6,
             "e": 0,
@@ -22075,6 +22159,8 @@
           "action": "advance",
           "seconds": 1,
           "at": 10801000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 9,
             "e": 0,
@@ -22157,6 +22243,8 @@
           "action": "hardware",
           "amount": 1,
           "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 0,
             "e": 0,
@@ -22214,6 +22302,8 @@
           "action": "advance",
           "seconds": 10799,
           "at": 10800000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 8,
             "e": 0,
@@ -22287,6 +22377,8 @@
         {
           "action": "repeat",
           "at": 10800000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 8,
             "e": 0,
@@ -22361,6 +22453,8 @@
           "action": "advance",
           "seconds": 1,
           "at": 10801000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
           "counter": {
             "m": 1.2,
             "e": 1,
@@ -22430,6 +22524,2310 @@
           "synthesis": false,
           "prestiges": 0,
           "axioms": 1
+        }
+      ]
+    },
+    {
+      "name": "scanner-live-paid-completions",
+      "v3": true,
+      "C01": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "scanner-equip",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 300.01,
+          "at": 301010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "at": 301010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 301010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 285.72428571428566,
+          "at": 586734.2857142857,
+          "scannerAnalyses": 2,
+          "analysisSpeed": 2.2,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            45,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            17,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "scanner-unequip",
+          "at": 586734.2857142857,
+          "scannerAnalyses": 2,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            45,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            17,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 586734.2857142857,
+          "scannerAnalyses": 2,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            45,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            17,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999925,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "at": 1186744.2857142857,
+          "scannerAnalyses": 2,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 7.2,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            49,
+            24,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            15,
+            28,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999925,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "scanner-equip",
+          "at": 1186744.2857142857,
+          "scannerAnalyses": 2,
+          "analysisSpeed": 2.2,
+          "counter": {
+            "m": 7.2,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            49,
+            24,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            15,
+            28,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999925,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "scanner-only-active-at-actual-completion",
+      "v3": true,
+      "C01": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "analysis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "scanner-equip",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "at": 601010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 601010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "scanner-unequip",
+          "at": 601010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 285.72428571428566,
+          "at": 886734.2857142857,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "scanner-equip",
+          "at": 886734.2857142857,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "scanner-cancel-and-refused-start",
+      "v3": true,
+      "C01": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "scanner-equip",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "cancel",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 300.01,
+          "at": 301010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "scanner-reset-boundaries",
+      "v3": true,
+      "C01": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "scanner-equip",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 300.01,
+          "at": 301010,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "prestige",
+          "at": 301010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 2,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 1,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 301010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 2,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 1,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 300.01,
+          "at": 601020,
+          "scannerAnalyses": 1,
+          "analysisSpeed": 2.1,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            45,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            17,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 2,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 1,
+          "axioms": 0
+        },
+        {
+          "action": "axiom",
+          "at": 601020,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            45,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            17,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 1,
+            "e": 3,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 1,
+          "axioms": 1
+        }
+      ]
+    },
+    {
+      "name": "scanner-does-not-speed-synthesis",
+      "v3": true,
+      "C01": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "scanner-equip",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "synthesis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": true,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 60.01,
+          "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            33,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "at": 61010,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 2,
+          "counter": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            33,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "scanner-original-mode-preserved",
+      "v3": false,
+      "C01": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "scanner-equip",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1.08,
+          "counter": null,
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1.08,
+          "counter": null,
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 555.5655555555555,
+          "at": 556565.5555555555,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1.08,
+          "counter": null,
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "at": 556565.5555555555,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1.08,
+          "counter": null,
+          "components": [
+            37,
+            18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
         }
       ]
     }

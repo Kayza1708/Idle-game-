@@ -20,7 +20,7 @@ import {
   secondary,
   progressionResearchSpeed,
 } from "./progression";
-import { experimentSpeed } from "./experiments";
+import { experimentSpeed,synthesisSpeed } from "./experiments";
 import { ScientificNumber } from "./scientificNumber";
 export type WorkContract = {
   required: number;
@@ -151,7 +151,7 @@ export function advanceProgressionWork(s: GameState, seconds: number) {
   };
   const synth = p.synthesis;
   if (synth) {
-    const done = synth.work + seconds * experimentSpeed(s);
+    const done = synth.work + seconds * synthesisSpeed(s);
     if (done + 1e-8 >= synth.required) {
       next = addEvent(
         grantComponents(
