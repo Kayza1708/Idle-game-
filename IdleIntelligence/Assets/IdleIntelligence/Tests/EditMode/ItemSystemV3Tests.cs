@@ -29,7 +29,7 @@ namespace IdleIntelligence.Tests
     [Serializable]public sealed class TrainingAutomationV3Case
     {public string name,manual,track,jobId;public bool original,done,prepared;public int quality,efficiency,integration,target,remainingPlans;public NumberData protectedResearch,creditDebit,dataDebit;}
     [Serializable]public sealed class ComponentV3Step{public string action;public int amount,gems,prestiges,axioms;public string synthesisReceipt,synthesisComponent;public double[] synthesisRemainders;public long scannerAnalyses;public double synthesisMultiplier,synthesisSpeed,fabricationSpeed,analysisSpeed,seconds,at;public NumberData intIncome,cycleINT,freeINT,counter,credits,data,axiomFunds,totalINT;public long[] components;public bool analysis,synthesis,pending;}
-    [Serializable]public sealed class ComponentV3Flow{public string name;public bool v3,prepared;public int C01,C06;public ComponentV3Step[] steps;}
+    [Serializable]public sealed class ComponentV3Flow{public string name;public bool v3,prepared;public int C01,C06,W08;public ComponentV3Step[] steps;}
     [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;public TrainingAutomationV3Case[] trainingAutomationCases;public ComponentV3Flow[] componentFlows;}
     public sealed class ItemSystemV3Tests
     {
@@ -128,7 +128,7 @@ namespace IdleIntelligence.Tests
                         case "bonus":s=GemShop.Buy(s,"training-15m");break;
                         case "unequip":s=s.Copy();s.Workshop.equipped=new string[ItemBalance.Slots.Length];break;
                         case "equip":s=Workshop.Equip(s,s.Workshop.inventory[0].id);break;
-                        case "prestige":s=s.Copy();s.Prestige.Entitlement=ScientificNumber.From(100);s=PrestigeRules.Reset(s);break;
+                        case "prestige":s=s.Copy();s.Prestige.Entitlement=s.Prestige.Cycle.Add(ScientificNumber.From(100));s=PrestigeRules.Reset(s);break;
                         case "axiom":s=MetaRules.AxiomReset(FundAxiomReference(s));break;
                         default:Assert.Fail("Unknown source learning action "+step.action);break;
                     }
@@ -171,9 +171,11 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void ActualComponentProductionAndResetFlowsMatchSource()
         {
-            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(23));foreach(var flow in flows){
+            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(29));foreach(var flow in flows){
                 var s=Game.New(1000,"prepared-component-reference");s.Credits=s.Data=ScientificNumber.From(1e12);s.Retention.gems=1000;if(flow.v3)s.ItemSystemV3=new ItemV3State();if(flow.C01>0||flow.C06>0){s.Meta.resets=1;s.Meta.total=s.Meta.available=ScientificNumber.From(1000).ToData();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;for(int i=0;i<flow.C01;i++){var before=s;s=MetaRules.Buy(s,"C01");Assert.That(s,Is.Not.SameAs(before),"prepared paid C01 purchase");}for(int i=0;i<flow.C06;i++){var before=s;s=MetaRules.Buy(s,"C06");Assert.That(s,Is.Not.SameAs(before),"prepared paid C06 purchase");}}
+                if(flow.W08>0){s=FundAxiomReference(s);if(flow.W08==1)s=PrestigeRules.Buy(s,"W08");}
                 foreach(var step in flow.steps){switch(step.action){
+                    case "buy-W08":s=PrestigeRules.Buy(s,"W08");break;
                     case "buy-C06":s=MetaRules.Buy(s,"C06");break;
                     case "scanner-equip":var scanner=s.Workshop.inventory.FirstOrDefault(i=>i.type=="field-scanner");if(scanner==null){s=s.Copy();scanner=new ItemInstance{id="item-"+s.Workshop.nextId++,type="field-scanner",missingMaterialBasis=true};s.Workshop.inventory=s.Workshop.inventory.Concat(new[]{scanner}).ToArray();Lifetime.Item(s,scanner.type);}s=Workshop.Equip(s,scanner.id,"research");break;
                     case "scanner-unequip":s=Workshop.Unequip(s,"research");break;
@@ -184,7 +186,7 @@ namespace IdleIntelligence.Tests
                     case "cancel":s=MaterialAnalysis.Cancel(s);break;
                     case "synthesis":s=Industry.Synthesize(s,0);break;
                     case "advance":case "finish":case "repeat":s=Game.Advance(s,step.at);break;
-                    case "prestige":s=s.Copy();s.Prestige.Entitlement=ScientificNumber.From(100);s=PrestigeRules.Reset(s);break;
+                    case "prestige":s=s.Copy();s.Prestige.Entitlement=s.Prestige.Cycle.Add(ScientificNumber.From(100));s=PrestigeRules.Reset(s);break;
                     case "axiom":s=MetaRules.AxiomReset(FundAxiomReference(s,step.pending));break;
                     default:Assert.Fail("Unknown component action "+step.action);break;
                 }

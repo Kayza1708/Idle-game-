@@ -1,0 +1,68 @@
+[
+  {
+    "file": "W08-de-320.png",
+    "width": 320,
+    "height": 694,
+    "sha256": "828a68728ea0f61ac1cab14ddfa546db522b7cf1f9d52acc1c57a403a258ace5"
+  },
+  {
+    "file": "W08-de-390.png",
+    "width": 390,
+    "height": 846,
+    "sha256": "791f5e183dae8f67e2a849bbd9668a8ea3bc5918b1ae2780b1276abe2443eb96"
+  },
+  {
+    "file": "W08-de-430.png",
+    "width": 430,
+    "height": 932,
+    "sha256": "52715c5d7ba3d455f52a2d19cd72ff33a680edbde5f543542c094c3a6c103093"
+  },
+  {
+    "file": "W08-en-320.png",
+    "width": 320,
+    "height": 694,
+    "sha256": "4b001658d6fe75ac149ee7bf91b3830304441c1b642af02db32bb1446f251098"
+  },
+  {
+    "file": "W08-en-390.png",
+    "width": 390,
+    "height": 846,
+    "sha256": "d34b938e9a89d82198aa1da5981d54928b8a7d3f1388a55cb9b674e05556f202"
+  },
+  {
+    "file": "W08-en-430.png",
+    "width": 430,
+    "height": 932,
+    "sha256": "5ab62e689f4fd3a5e70196eee15efea751ccb0b7ec883b1a0ecb8776adb6cbe4"
+  },
+  {
+    "file": "W08-es-390.png",
+    "width": 390,
+    "height": 846,
+    "sha256": "f76ab90d0dd88b97f0bc8820a7d162a7fa1e0441e5ef8e975989f22a0f1b83d8"
+  },
+  {
+    "file": "W08-fr-390.png",
+    "width": 390,
+    "height": 846,
+    "sha256": "9303bd3729e94568b85e0f49c10e9cc049ba3f6f15e766b3d27aa7a9eb31e394"
+  },
+  {
+    "file": "W08-it-390.png",
+    "width": 390,
+    "height": 846,
+    "sha256": "1e2df873179f8bde13da38a940b11fe207c9efe5f9f2ca6a1e1b114ee4a25bd2"
+  },
+  {
+    "file": "W08-pl-390.png",
+    "width": 390,
+    "height": 846,
+    "sha256": "4d2d934d5f587dbeda5f54d74a8727919e6800ee5294fe54c1800ef93478c821"
+  },
+  {
+    "file": "W08-pt-390.png",
+    "width": 390,
+    "height": 846,
+    "sha256": "6275623af95a0f19c63a4b32c735b5de0ec0cab5676e1c1fada5fd4fc98578c4"
+  }
+]

@@ -15,7 +15,7 @@ import {blueprintQuote,learnBlueprint} from '../src/blueprints';
 import {craft} from '../src/inventory';
 import {advanceTo} from '../src/simulation';
 import {buyGemOffer} from '../src/gemShop';
-import {normalResetV2,axiomResetV2,buyProgressionAxiom} from '../src/progressionReset';
+import {normalResetV2,axiomResetV2,buyProgressionAxiom,buyProgressionNode} from '../src/progressionReset';
 import {createItem,equip,unequip} from '../src/inventory';
 import {ScientificNumber as S} from '../src/scientificNumber';
 import {UNITY_RESEARCH_IDS} from './unity-research-ids';
@@ -85,7 +85,7 @@ function learningFlow(name:string,actions:LearningAction[],intro=false){
   else if(action.action==='bonus')state=buyGemOffer(state,'training-15m');
   else if(action.action==='unequip')state={...state,equipped:{}};
   else if(action.action==='equip')state=equip(state,state.inventory[0].id);
-  else if(action.action==='prestige')state=normalResetV2({...state,progression:{...state.progression,entitlement:S.from(100).toJSON()}});
+  else if(action.action==='prestige')state=normalResetV2({...state,progression:{...state.progression,entitlement:exactEconomyValue(state,'cycleINTEarned').add(S.from(100)).toJSON()}});
   else if(action.action==='axiom')state=axiomResetV2(fundAxiomReference(state));
   return{...action,savedAt:state.savedAt,quality:state.qualityLevel,efficiency:state.efficiencyLevel,integration:state.integrationLevel,series:state.itemSystemV3!.learningStreak,lastTrack:state.itemSystemV3!.lastLearningTrack??'',cause:state.itemSystemV3!.lastTrainingCompletionCause??'',nextSequence:state.itemSystemV3!.nextTrainingSequence,settledSequence:state.itemSystemV3!.lastCompletedTrainingSequence,jobId:state.activeTraining?.jobId??'',workSpeed:trainingRate(state.hardware,state),creditDebit:number(beforeCredits.subtract(exactEconomyValue(state,'credits'))),dataDebit:number(beforeData.subtract(exactEconomyValue(state,'data'))),credits:number(exactEconomyValue(state,'credits')),data:number(exactEconomyValue(state,'data')),gems:state.gems,prestiges:state.prestigeCount,axioms:state.axiomResetCount};
  });return{name,prepared:true,initial,steps};
@@ -114,12 +114,14 @@ const trainingAutomationCases=[
  const protectedResearch=protectedData(state,'research'),after=advanceTo(state,1001,false,()=>.5).state;
  return{...row,manual:row.manual??'',original:!!row.original,done:!!row.done,prepared:true,protectedResearch:number(protectedResearch),track:after.activeTraining?.track??'',jobId:after.activeTraining?.jobId??'',creditDebit:number(exactEconomyValue(state,'credits').subtract(exactEconomyValue(after,'credits'))),dataDebit:number(exactEconomyValue(state,'data').subtract(exactEconomyValue(after,'data'))),remainingPlans:after.trainingQueue.length};
 });
-type ComponentAction={action:'buy-C06'|'scanner-equip'|'scanner-unequip'|'gift'|'shop'|'hardware'|'analysis'|'cancel'|'synthesis'|'finish'|'advance'|'repeat'|'prestige'|'axiom';amount?:number;seconds?:number;pending?:boolean};
-function componentFlow(name:string,actions:ComponentAction[],v3=true,C01=0,C06=0){
+type ComponentAction={action:'buy-W08'|'buy-C06'|'scanner-equip'|'scanner-unequip'|'gift'|'shop'|'hardware'|'analysis'|'cancel'|'synthesis'|'finish'|'advance'|'repeat'|'prestige'|'axiom';amount?:number;seconds?:number;pending?:boolean};
+function componentFlow(name:string,actions:ComponentAction[],v3=true,C01=0,C06=0,W08:0|1|2=0){
  let state:GameState={...newGame(1000,'prepared-component-reference'),...(v3?{itemSystemV3:newItemSystemV3()}:{}),credits:1e12,data:1e12,gems:1000};state={...state,exactEconomy:{...state.exactEconomy,credits:S.from(1e12).toJSON(),data:S.from(1e12).toJSON()}};
  if(C01||C06){const funding=S.from(1000).toJSON();state={...state,axiomResetCount:1,axioms:1000,availableAxioms:1000,totalAxiomsEarned:1000,exactAxioms:{available:funding,total:funding},itemSystemV3:{...state.itemSystemV3!,axiomDiscovered:true,axiomDiscoveryAt:1000}};for(let i=0;i<C01;i++){const before=state;state=buyProgressionAxiom(state,'C01');if(state===before)throw Error('Prepared C01 purchase failed');}for(let i=0;i<C06;i++){const before=state;state=buyProgressionAxiom(state,'C06');if(state===before)throw Error('Prepared C06 purchase failed');}}
+ if(W08){state=fundAxiomReference(state);if(W08===1)state=buyProgressionNode(state,'W08');}
  const steps=actions.map(input=>{const action={...input};
-  if(action.action==='buy-C06')state=buyProgressionAxiom(state,'C06');
+  if(action.action==='buy-W08')state=buyProgressionNode(state,'W08');
+  else if(action.action==='buy-C06')state=buyProgressionAxiom(state,'C06');
   else if(action.action==='scanner-equip'){let item=state.inventory.find(i=>i.type==='field-scanner');if(!item){state=createItem(state,'field-scanner','common');item=state.inventory.at(-1)!;}state=equip(state,item.id);}
   else if(action.action==='scanner-unequip')state=unequip(state,'research');
   else if(action.action==='gift')state=grantComponents(state,{circuits:500});
@@ -130,10 +132,10 @@ function componentFlow(name:string,actions:ComponentAction[],v3=true,C01=0,C06=0
   else if(action.action==='synthesis')state=startSynthesis(state,'circuits');
   else if(action.action==='repeat')state=advanceTo(state,state.savedAt,false,()=>.5).state;
   else if(action.action==='advance'||action.action==='finish'){if(action.action==='finish')action.seconds=state.progression.synthesis?Math.max(0,state.progression.synthesis.required-state.progression.synthesis.work)/synthesisSpeed(state)+.01:state.experiments.active?Math.max(0,state.experiments.active.endsAt-state.savedAt)/1000+.01:0;state=advanceTo(state,state.savedAt+action.seconds!*1000,false,()=>.5).state;}
-  else if(action.action==='prestige')state=normalResetV2({...state,progression:{...state.progression,entitlement:S.from(100).toJSON()}});
+  else if(action.action==='prestige')state=normalResetV2({...state,progression:{...state.progression,entitlement:exactEconomyValue(state,'cycleINTEarned').add(S.from(100)).toJSON()}});
   else if(action.action==='axiom')state=axiomResetV2(fundAxiomReference(state,action.pending));
   return{...action,at:state.savedAt,intIncome:number(progressionCreditFactors(state).INT),cycleINT:number(exactEconomyValue(state,'cycleINTEarned')),freeINT:number(exactEconomyValue(state,'unspentINT')),synthesisRemainders:Object.keys(BALANCE.components).map(id=>state.itemSystemV3?.synthesisRemainders[id as keyof typeof state.componentInventory]??0),synthesisReceipt:state.itemSystemV3?.synthesisContract?.id??'',synthesisComponent:state.itemSystemV3?.synthesisContract?.component??'',synthesisMultiplier:state.itemSystemV3?.synthesisContract?.multiplier??0,synthesisSpeed:synthesisSpeed(state),fabricationSpeed:fabricationSpeed(state),scannerAnalyses:state.itemSystemV3?.scannerAnalyses??0,analysisSpeed:experimentSpeed(state),counter:state.itemSystemV3?number(S.fromJSON(state.itemSystemV3.componentsProduced)):null,components:Object.keys(BALANCE.components).map(id=>state.componentInventory[id as keyof typeof state.componentInventory]),credits:number(exactEconomyValue(state,'credits')),data:number(exactEconomyValue(state,'data')),gems:state.gems,totalINT:number(exactEconomyValue(state,'totalINTEarned')),axiomFunds:number(axiomEconomyValue(state,'available')),analysis:!!state.experiments.active,synthesis:!!state.progression.synthesis,prestiges:state.prestigeCount,axioms:state.axiomResetCount};
- });return{name,v3,C01,C06,prepared:true,steps};
+ });return{name,v3,C01,C06,W08,prepared:true,steps};
 }
 const componentFlows=[
  componentFlow('paid-analysis-once',[{action:'analysis'},{action:'finish'},{action:'repeat'},{action:'finish'}]),
@@ -159,6 +161,14 @@ componentFlows.push(
  componentFlow('C06-paid-snapshot-not-revalued',[{action:'synthesis'},{action:'buy-C06'},{action:'finish'},{action:'synthesis'},{action:'finish'}],true,0,1),
  componentFlow('C06-paid-contract-survives-prestige',[{action:'synthesis'},{action:'prestige'},{action:'finish'},{action:'repeat'}],true,0,1),
  componentFlow('C06-paid-contract-survives-axiom',[{action:'synthesis'},{action:'axiom'},{action:'finish'},{action:'repeat'}],true,0,1),
+);
+componentFlows.push(
+ componentFlow('analysis-refused-while-synthesis-is-paid',[{action:'synthesis'},{action:'analysis'},{action:'finish'}]),
+ componentFlow('normal-analysis-refused-while-synthesis-is-paid',[{action:'synthesis'},{action:'analysis'},{action:'finish'}],false),
+ componentFlow('W08-paid-analysis-and-package',[{action:'analysis'},{action:'finish'},{action:'repeat'},{action:'hardware',amount:25},{action:'hardware',amount:1}],true,0,0,1),
+ componentFlow('W08-old-paid-analysis-keeps-yield',[{action:'analysis'},{action:'buy-W08'},{action:'finish'},{action:'analysis'},{action:'finish'}],true,0,0,2),
+ componentFlow('W08-no-shop-gift-passive-or-synthesis-yield',[{action:'gift'},{action:'shop'},{action:'synthesis'},{action:'finish'},{action:'hardware',amount:1},{action:'advance',seconds:2*BALANCE.passiveCircuitSecondsPerClass+1},{action:'repeat'}],true,0,0,1),
+ componentFlow('W08-paid-contract-survives-prestige',[{action:'analysis'},{action:'prestige'},{action:'finish'},{action:'repeat'}],true,0,0,1),
 );
 for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows},null,2)+'\n']]){
  if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==value)throw Error('Stale V3 export: '+path);}else writeFileSync(path,value);

@@ -30,7 +30,7 @@ export type WorkContract = {
   familyIntegral?: { photonic: number; quantum: number };
 };
 export const fabricationSpeed = (s: GameState) =>
-  (hasProgressionNode(s, "W08") ? BALANCE.progression.effects.W08 : 1) *
+  (!usesItemV3(s)&&hasProgressionNode(s, "W08") ? BALANCE.progression.effects.W08 : 1) *
   (usesItemV3(s)?1:(1 / BALANCE.progression.effects.C06) ** axiomLevel(s, "C06"));
 export const analysisQuantity = (s: GameState) =>
   secondary(s, "K10") ? BALANCE.progression.effects.D06quantity : 1;

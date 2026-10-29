@@ -105,6 +105,18 @@ namespace IdleIntelligence.PlayTests
                 yield return null;yield return null;yield return null;yield return null;Canvas.ForceUpdateCanvases();var detail=GameObject.Find("INTDetails");var description=detail.GetComponentsInChildren<UnityEngine.UI.Text>().First(t=>t.name=="Description");Assert.That(description.text,Does.Contain("+6"),locale+" "+id);Assert.That(description.text,Does.Not.Contain("{"),locale);Assert.That(description.preferredHeight,Is.LessThanOrEqualTo(description.rectTransform.rect.height+1),locale+" "+id);WorkshopTests.Capture(width,Screen.height,output+"/"+id+"-"+locale+"-"+width+".png");
             }}}}finally{game.State.ItemSystemV3=null;lifecycle.SetValue(game,started);game.enabled=true;network.CloseDetail();}
         }
+        [UnityTest]public IEnumerator WorkshopYieldNodeShowsPaidSourcesAtMobileSizes()
+        {
+            game.Act(s=>{var n=s.Copy();n.Legacy.prepared=true;n.Prestige.Cycle=n.Prestige.Total=n.Prestige.Free=n.Prestige.Entitlement=ScientificNumber.From(1e12);return PrestigeRules.Buy(n,"W08");});Assert.That(game.Writable,Is.True,game.Status.text);Assert.That(game.State.Workshop.nodes,Does.Contain("W08"));game.Show("prestige");yield return null;var network=game.PrestigeView;
+            var lifecycle=typeof(GameRuntime).GetField("started",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);bool started=(bool)lifecycle.GetValue(game);game.enabled=false;lifecycle.SetValue(game,false);const string output="/tmp/idle-v3-W08-review";Directory.CreateDirectory(output);
+            Debug.Log("PREPARED_W08_UI: isolated actual normal node purchases; localized V3 text preview only, lifecycle suspended, no V3 save migration.");
+            try{foreach(string locale in SettingsCatalog.Languages){game.State.ItemSystemV3=null;lifecycle.SetValue(game,started);Assert.That(game.Act(s=>SettingsRules.Change(s,"language",locale)),Is.True);lifecycle.SetValue(game,false);game.State.ItemSystemV3=new ItemV3State();foreach(string id in new[]{"W08"}){network.OpenNode(id);yield return null;game.FlushLocalization();foreach(int width in locale=="de"||locale=="en"?new[]{320,390,430}:new[]{390}){
+#if UNITY_EDITOR
+                PortraitGameView.Set(width,width==320?694:width==390?846:932);
+#endif
+                yield return null;yield return null;yield return null;yield return null;Canvas.ForceUpdateCanvases();var detail=GameObject.Find("INTDetails");var description=detail.GetComponentsInChildren<UnityEngine.UI.Text>().First(t=>t.name=="Description");Assert.That(description.text,Does.Contain("×2"),locale+" "+id);Assert.That(description.text,Does.Not.Contain("{"),locale);Assert.That(description.preferredHeight,Is.LessThanOrEqualTo(description.rectTransform.rect.height+1),locale+" "+id);WorkshopTests.Capture(width,Screen.height,output+"/"+id+"-"+locale+"-"+width+".png");
+            }}}}finally{game.State.ItemSystemV3=null;lifecycle.SetValue(game,started);game.enabled=true;network.CloseDetail();}
+        }
         [UnityTest]public IEnumerator ActualQueueViewsAtMobileSizesAndAllSevenLanguages()
         {
             Prepare();string output="/tmp/idle-v3-queue-review-v2";Directory.CreateDirectory(output);

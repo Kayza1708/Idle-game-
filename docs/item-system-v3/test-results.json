@@ -391,5 +391,45 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "a29a8c726eac031fac4de23559121dd1446254ec8a67a9bc65814aa9d1b5a115"
+  "currentSourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
+  "workshopYieldFollowup": {
+    "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
+    "normalSaveActivation": false,
+    "productionCases": 91,
+    "componentFlows": 29,
+    "focusedVitest": 28,
+    "vitest": {
+      "files": 159,
+      "tests": 2024,
+      "passed": 2024,
+      "failed": 0,
+      "seconds": 317.65,
+      "log": "/tmp/idle-v3-W08-full-vitest-awake.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed after clean complete generation",
+    "images": "../media/unity-v3-workshop-yield/README.md",
+    "rejectedRuns": [
+      "first native fixture set entitlement below already-earned cycle INT; fixture corrected, no production formula changed",
+      "generator accidentally overlapped own test editor; export stopped and clean generation plus full compile/regression repeated sequentially",
+      "Mac clamshell sleep12:47\u201313:03 caused two Vitest timeouts/worker errors despite idle assertion;26 targeted recovery checks and complete2024-test awake rerun passed without timeout increases"
+    ],
+    "fullEditMode": {
+      "total": "199",
+      "passed": "199",
+      "failed": "0",
+      "duration": "146.4157869",
+      "result": "Passed",
+      "xmlSha256": "a2950c0c889738e737d944ca1ae9e3ad7cc6a8b90f57aebe7490a4ddfeccb014"
+    },
+    "targetedPlayMode": {
+      "total": "14",
+      "passed": "14",
+      "failed": "0",
+      "duration": "69.9114514",
+      "result": "Passed",
+      "xmlSha256": "0ec3fa51fbe1a68fd0c398f43f1846d36f47ad14a22a8ec774f26c429a4bf8fc"
+    }
+  }
 }

@@ -72,3 +72,7 @@ export function prestigeResearchDataV3(s:GameState){
 export function prestigePassiveComponentsV3(s:GameState){
  const level=axiomLevel(s,'C01');if(!level)return 1;const factor=c().axioms.C01[level-1];if(factor===undefined)throw new RangeError('Invalid C01 level');return factor;
 }
+
+/** Only explicit paid analysis/milestone consumers call this. It is never a
+ * global grantComponents multiplier (shop, recovery, gifts remain excluded). */
+export const prestigeMaterialYieldV3=(s:GameState)=>usesItemV3(s)&&hasProgressionNode(s,'W08')?c().items.W08:1;

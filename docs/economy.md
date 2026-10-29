@@ -803,3 +803,6 @@ Nutzerauftrag ersetzt den dynamischen INT-Einkommensexponenten: `1 + verdiente Z
 
 ### C06 – Industrielle Ausbeute im V3-Vertrag
 Zentrale Vorgaben1,5/2/3 ersetzen den bisherigen C06-Fertigungstempobonus. Nur neue bezahlte Synthesen speichern die tatsächliche Ausbeute beim Start. Kleine Reste werden komponentenweise erhalten; ältere bezahlte Aufträge ohneV3-Beleg liefern weiter ihren ursprünglichen einen Baustein. NormalerPrestige/Axiom behalten bereits bezahlte Synthese samt Resten. Keine geänderten Preise oder zusätzlichen Erstattungen. Industrielle Zweierkombination ist im gemeinsamen Faktor berücksichtigt, benötigt aber weiterhin die noch offenen neuen Katalog-/Rezeptverbraucher.
+
+### W08 – Werkstattverbund im V3-Vertrag
+Vorhandene zentrale Vorgabe×2 auf bezahlte Analysen und reguläre Hardware-Meilensteinpakete ersetzt den alten Fertigungstempofaktor. Analyseausbeute beim bezahlten Start fixiert; Hardwarebeitrag vor Rundung verstärkt, alte Fraktionsguthaben nicht verdoppelt. Shop/Handel/Rückgewinnung/passiveFunde/Synthese und zusätzliche Klassenupgrade-Extraauszahlungen ausgeschlossen. Keine neuen Preise oder Mengenparameter; normaleSpielstände bis zur vollständigen Migration unverändert. Ein bestehender TS-Nullzugriff beim Analyseversuch während laufenderSynthese korrigiert, keine Spielregel geändert.

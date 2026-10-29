@@ -1,5 +1,5 @@
 {
-  "sourceHash": "a29a8c726eac031fac4de23559121dd1446254ec8a67a9bc65814aa9d1b5a115",
+  "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
@@ -22989,6 +22989,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -23400,6 +23401,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -24111,6 +24113,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -24666,6 +24669,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -25176,6 +25180,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -25687,6 +25692,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -26098,6 +26104,7 @@
       "v3": false,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -26396,6 +26403,7 @@
       "v3": false,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -26694,6 +26702,7 @@
       "v3": true,
       "C01": 1,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -27157,6 +27166,7 @@
       "v3": true,
       "C01": 2,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -27620,6 +27630,7 @@
       "v3": true,
       "C01": 3,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -28083,6 +28094,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -29095,6 +29107,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -29806,6 +29819,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -30516,6 +30530,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -31227,6 +31242,7 @@
       "v3": true,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -31637,6 +31653,7 @@
       "v3": false,
       "C01": 0,
       "C06": 0,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -32031,6 +32048,7 @@
       "v3": true,
       "C01": 0,
       "C06": 1,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -32944,6 +32962,7 @@
       "v3": true,
       "C01": 0,
       "C06": 2,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -33857,6 +33876,7 @@
       "v3": true,
       "C01": 0,
       "C06": 3,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -34770,6 +34790,7 @@
       "v3": true,
       "C01": 0,
       "C06": 1,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -35281,6 +35302,7 @@
       "v3": true,
       "C01": 0,
       "C06": 1,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -35691,6 +35713,7 @@
       "v3": true,
       "C01": 0,
       "C06": 1,
+      "W08": 0,
       "prepared": true,
       "steps": [
         {
@@ -36093,6 +36116,2891 @@
           "synthesis": false,
           "prestiges": 0,
           "axioms": 2
+        }
+      ]
+    },
+    {
+      "name": "analysis-refused-while-synthesis-is-paid",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "synthesis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "synthesis-1",
+          "synthesisComponent": "circuits",
+          "synthesisMultiplier": 1,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": true,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "synthesis-1",
+          "synthesisComponent": "circuits",
+          "synthesisMultiplier": 1,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": true,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 60.01,
+          "at": 61010,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "normal-analysis-refused-while-synthesis-is-paid",
+      "v3": false,
+      "C01": 0,
+      "C06": 0,
+      "W08": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "synthesis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": null,
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": true,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": null,
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": true,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 60.01,
+          "at": 61010,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": null,
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W08-paid-analysis-and-package",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 1,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "analysis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            14,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            14,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "hardware",
+          "amount": 25,
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 8.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            60,
+            20,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            14,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.999999956184272,
+            "e": 11,
+            "terms": [
+              {
+                "index": -2,
+                "value": -3663450
+              },
+              {
+                "index": -1,
+                "value": -5728382
+              },
+              {
+                "index": 0,
+                "value": -4381
+              },
+              {
+                "index": 1,
+                "value": 100000
+              }
+            ]
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "hardware",
+          "amount": 1,
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 8.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            60,
+            20,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            14,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.999999948585598,
+            "e": 11,
+            "terms": [
+              {
+                "index": -2,
+                "value": -3686205
+              },
+              {
+                "index": -1,
+                "value": -4402207
+              },
+              {
+                "index": 0,
+                "value": -5141
+              },
+              {
+                "index": 1,
+                "value": 100000
+              }
+            ]
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W08-old-paid-analysis-keeps-yield",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 2,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "analysis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "buy-W08",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "at": 1201020,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 7.2,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            48,
+            16,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            13,
+            28,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W08-no-shop-gift-passive-or-synthesis-yield",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 1,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "gift",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            500,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "shop",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            550,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 970,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "synthesis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "synthesis-1",
+          "synthesisComponent": "circuits",
+          "synthesisMultiplier": 1,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            550,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 970,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": true,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 60.01,
+          "at": 61010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            551,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 970,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "hardware",
+          "amount": 1,
+          "at": 61010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            551,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.99999999985,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 970,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "advance",
+          "seconds": 7201,
+          "at": 7262010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            553,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.731350000097065,
+            "e": 14,
+            "terms": [
+              {
+                "index": -3,
+                "value": 4705000
+              },
+              {
+                "index": -2,
+                "value": 29
+              },
+              {
+                "index": -1,
+                "value": 3794705
+              },
+              {
+                "index": 0,
+                "value": 9706
+              },
+              {
+                "index": 1,
+                "value": 7313500
+              },
+              {
+                "index": 2,
+                "value": 9
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000006701,
+            "e": 12,
+            "terms": [
+              {
+                "index": -3,
+                "value": 1830000
+              },
+              {
+                "index": -2,
+                "value": 2
+              },
+              {
+                "index": -1,
+                "value": 1000000
+              },
+              {
+                "index": 0,
+                "value": 670
+              },
+              {
+                "index": 1,
+                "value": 100000
+              }
+            ]
+          },
+          "gems": 970,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "at": 7262010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 3,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            553,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.731350000097065,
+            "e": 14,
+            "terms": [
+              {
+                "index": -3,
+                "value": 4705000
+              },
+              {
+                "index": -2,
+                "value": 29
+              },
+              {
+                "index": -1,
+                "value": 3794705
+              },
+              {
+                "index": 0,
+                "value": 9706
+              },
+              {
+                "index": 1,
+                "value": 7313500
+              },
+              {
+                "index": 2,
+                "value": 9
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000006701,
+            "e": 12,
+            "terms": [
+              {
+                "index": -3,
+                "value": 1830000
+              },
+              {
+                "index": -2,
+                "value": 2
+              },
+              {
+                "index": -1,
+                "value": 1000000
+              },
+              {
+                "index": 0,
+                "value": 670
+              },
+              {
+                "index": 1,
+                "value": 100000
+              }
+            ]
+          },
+          "gems": 970,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W08-paid-contract-survives-prestige",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 1,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "analysis",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "prestige",
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000011,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1.0000000001,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995001,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1.0000000001,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 1,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000011,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1.0000000001,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995001,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            14,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1.0000000001,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 1,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000011,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1.0000000001,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999995001,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4.8,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            14,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1.0000000001,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 1,
+          "axioms": 0
         }
       ]
     }

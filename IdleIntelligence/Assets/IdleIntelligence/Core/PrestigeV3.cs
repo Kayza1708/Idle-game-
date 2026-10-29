@@ -42,6 +42,7 @@ namespace IdleIntelligence.Core
         public static double ResearchActivity(GameState s)=>ItemSystemV3.Enabled(s)&&PrestigeRules.Has(s,"F08")?1+C("research.F08perLab")*OccupiedRegularLabs(s):1;
         public static ScientificNumber ResearchData(GameState s)=>ItemSystemV3.Enabled(s)&&PrestigeRules.Has(s,"F10")?ScientificNumber.One.Add(ItemSystemV3.ResearchLevels(s).Divide(ScientificNumber.From(C("research.F10scale")))).Pow(C("research.F10exponent")):ScientificNumber.One;
         public static double GainExponent(GameState s)=>PrestigeRules.V("intBaseExponent")+PrestigeRules.V("intAxiomExponent")*MetaRules.Level(s,"A01")+(PrestigeRules.Has(s,"I10")?C("int.I10gain"):0);
+        public static double MaterialYield(GameState s)=>ItemSystemV3.Enabled(s)&&PrestigeRules.Has(s,"W08")?C("items.W08"):1;
         public static double CreditRate(GameState s)=>C("int.creditPerINT")+(PrestigeRules.Has(s,"I05")?C("int.I05"):0)+(PrestigeRules.Has(s,"I10")?C("int.I10credits"):0);
         public static ScientificNumber CreditFactor(GameState s)=>ScientificNumber.One.Add(s.Prestige.Cycle.Times(CreditRate(s)));
         public static bool DiscoveryEligible(GameState s)=>!ChallengeRules.Active(s)&&s.Prestige.Cycle.CompareTo(ScientificNumber.From(C("discovery.cycleINT")))>=0&&s.Prestige.known.Concat(s.Workshop.nodes).Where(id=>PrestigeBalance.Nodes.Any(node=>node.Id==id)).Distinct().Count()>=C("discovery.distinctNodes");
