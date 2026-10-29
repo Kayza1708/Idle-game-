@@ -34,7 +34,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 24 | `field-scanner` | tatsächliche bezahlte Analyseabschlüsse bei aktiver Ausrüstung; Live-Tempo mit S(A,25), W10 einmal | vollständige Save-Migration/Details; Bibliotheks-Dreierkombination separat |
 | 25 | `lab-drone` | offen | Zusatzarbeit nur aus regulärer Laborarbeit; größtes Restlabor, stabile Gleichstände |
 | 26 | `data-prism` | Daten aus F ohne doppelte Projektzählung | Auftrags-/Reset-/Detailsabnahme |
-| 27 | `diagnostic-adapter` | offen | nur bezahlte einmalige Hardwarepakete, Restverwaltung |
+| 27 | `diagnostic-adapter` | variable Komponenten regulärer bezahlter Hardware-Meilensteine×(1+P); Bootstrapping/W08 einmal, feste Extras und alte Reste getrennt | vollständige V3-Details/Migration; Klassenupgrade-Erwerbsfrage bleibt separat |
 | 28 | `experiment-controller` | offen | Bereichswechsel am bezahlten Start, gespeicherter Anfangsfortschritt |
 | 29 | `precision-scanner` | offen | normalisierte Fokusgewichte und reduzierter Mengenabschlag am Start |
 | 30 | `recycling-probe` | offen | irreversible Rare+-Zerlegung, Fraktionskonto statt zusätzlichem Zufallswurf |

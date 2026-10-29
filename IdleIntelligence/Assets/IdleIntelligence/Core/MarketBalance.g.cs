@@ -1,6 +1,6 @@
 // Generated from the current TypeScript market contracts.
 namespace IdleIntelligence.Core {public static class MarketBalance {
-public const string SourceHash="7cdff40dc8fe680aa6b7c9bdaaab9ade788359c21630eb9da0ae9e9c46963237";
+public const string SourceHash="28ac40da701e05edc2a9c3a4774740790da3fd123d2b6595f7bea7632cd443fd";
 public const double CycleMilliseconds=86400000d;
 public const double AdTicketMilliseconds=600000d;
 public const double DiscountPercent=40d;

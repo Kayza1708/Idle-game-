@@ -237,3 +237,6 @@ Separater Zehnerbonus mit eigenem Critfaktor, Quoten-/Transaktionsparität, Eing
 
 ### 29.10.: Burst/Kryo und Zeitgrenzen geprüft
 Tatsächliche Overdrive-Startverträge einschließlich Energiepaar/-trio, manuellem Charged-Aufruf ohne Tapauszahlung, Pause bei aktiver/abgelaufener Burstphase und korrekter Laborfüllung abgeschlossen:2.039Vitest,207vollständigeEditMode,16gezieltePlayMode grün. PR157 inzwischen vom Nutzer gemergt; eigener Folge-Draft für diesen Abschnitt. Nächste unabhängige Verträge: Fertigungsrückgewinnung/Materialprovenienz und übrige Analyse-/Hardwarepaketwirkungen. VollständigeV3-Migration/Details/Katalogerwerb/Arbeitsereignisse vor Xcode weiter offen.
+
+### 29.10.: Diagnoseadapter / bezahlte Pakete
+360gemeinsame tatsächliche Vergaben plus32Produktionsfolgen,2.042Vitest/208vollständigeEditMode grün. PlayMode10/11 und fokussierter erfolgreicher1/1Intro-Nachlauf getrennt dokumentiert; keine pauschale vollePlayMode-Freigabe. Nächste Verbraucher: gültige Bauplanmeisterschaften, fokussierte Analyse-/Familienausbeute, Rückgewinnung und Arbeitsereignisse. Native Klassenupgrade-/Resetfrage weiterhin separat; normaler Save24 unverändert.

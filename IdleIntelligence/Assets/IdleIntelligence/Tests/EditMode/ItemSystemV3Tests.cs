@@ -43,7 +43,8 @@ namespace IdleIntelligence.Tests
     [Serializable]public sealed class RelayV3Flow{public string name,initialCase,scope;public bool prepared,v3,temporary;public uint seed;public RelayV3Step[] steps;}
     [Serializable]public sealed class OverdriveV3Step{public string action,slot;public bool active;public double at,seconds,until,cooldown,fraction;public int activations;public V3CounterWire current;public NumberData credits,data,income,regularIncome,dataRate,compute;public string[] equipped;}
     [Serializable]public sealed class OverdriveV3Flow{public string name,initialCase;public bool prepared;public OverdriveV3Step[] steps;}
-    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;public TrainingAutomationV3Case[] trainingAutomationCases;public ComponentV3Flow[] componentFlows;public ChallengeV3Flow[] challengeFlows;public RelayV3Flow[] relayFlows;public OverdriveV3Flow[] overdriveFlows;}
+    [Serializable]public sealed class HardwarePackageV3Case{public string mode,hardware;public int threshold;public bool prepared;public long[] components;public double[] remainders;public NumberData counter;}
+    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;public TrainingAutomationV3Case[] trainingAutomationCases;public ComponentV3Flow[] componentFlows;public ChallengeV3Flow[] challengeFlows;public RelayV3Flow[] relayFlows;public OverdriveV3Flow[] overdriveFlows;public HardwarePackageV3Case[] hardwarePackageCases;}
     public sealed class ItemSystemV3Tests
     {
         static ItemV3Cases Cases()=>JsonUtility.FromJson<ItemV3Cases>(File.ReadAllText(Path.Combine(Application.dataPath,"IdleIntelligence/Tests/EditMode/ItemV3ReferenceCases.json")));
@@ -184,10 +185,14 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void ActualComponentProductionAndResetFlowsMatchSource()
         {
-            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(29));foreach(var flow in flows){
+            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(32));foreach(var flow in flows){
                 var s=Game.New(1000,"prepared-component-reference");s.Credits=s.Data=ScientificNumber.From(1e12);s.Retention.gems=1000;if(flow.v3)s.ItemSystemV3=new ItemV3State();if(flow.C01>0||flow.C06>0){s.Meta.resets=1;s.Meta.total=s.Meta.available=ScientificNumber.From(1000).ToData();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;for(int i=0;i<flow.C01;i++){var before=s;s=MetaRules.Buy(s,"C01");Assert.That(s,Is.Not.SameAs(before),"prepared paid C01 purchase");}for(int i=0;i<flow.C06;i++){var before=s;s=MetaRules.Buy(s,"C06");Assert.That(s,Is.Not.SameAs(before),"prepared paid C06 purchase");}}
                 if(flow.W08>0){s=FundAxiomReference(s);if(flow.W08==1)s=PrestigeRules.Buy(s,"W08");}
                 foreach(var step in flow.steps){switch(step.action){
+                    case "seed-rests":s=s.Copy();s.Workshop.hardwareRemainders=Enumerable.Repeat(.25,ItemBalance.ComponentIds.Length).ToArray();break;
+                    case "diagnostic-equip":case "boot-maximum":s=PreparedHardwareItems(s,step.action=="boot-maximum");break;
+                    case "diagnostic-unequip":s=Workshop.Unequip(s,"research");break;
+                    case "duplicate-package":s=s.Copy();Workshop.PaidHardware(s,0,24);break;
                     case "buy-W08":s=PrestigeRules.Buy(s,"W08");break;
                     case "buy-C06":s=MetaRules.Buy(s,"C06");break;
                     case "scanner-equip":var scanner=s.Workshop.inventory.FirstOrDefault(i=>i.type=="field-scanner");if(scanner==null){s=s.Copy();scanner=new ItemInstance{id="item-"+s.Workshop.nextId++,type="field-scanner",missingMaterialBasis=true};s.Workshop.inventory=s.Workshop.inventory.Concat(new[]{scanner}).ToArray();Lifetime.Item(s,scanner.type);}s=Workshop.Equip(s,scanner.id,"research");break;
@@ -239,6 +244,14 @@ namespace IdleIntelligence.Tests
         {
             var s=State(Cases().cases.First(c=>c.name=="overdrive-start-snapshot-survives-removal"));s.Charge=99;s=Game.Tap(s,s.SavedAt);Assert.That(s.ActiveUntil-s.SavedAt,Is.GreaterThan(Balance.OverdriveMaxSeconds*1000));var copy=s.Copy();copy.ItemSystemV3.overdrive.creditFactor=1;Assert.That(s.ItemSystemV3.overdrive.creditFactor,Is.GreaterThan(1));copy.ItemSystemV3.overdrive=null;Assert.That(ItemSystemV3.BurstFactor(copy),Is.EqualTo(1));Assert.That(copy.ActiveUntil,Is.EqualTo(s.ActiveUntil));Assert.That(s.ItemSystemV3.overdrive,Is.Not.Null);
             var malformed=s.Copy();malformed.ItemSystemV3.overdrive.creditFactor=double.NaN;Assert.Throws<FormatException>(()=>ItemSystemV3.Validate(malformed));malformed=s.Copy();malformed.ItemSystemV3.overdrive.creditFactor=1e100;Assert.Throws<FormatException>(()=>ItemSystemV3.Validate(malformed));malformed=s.Copy();malformed.ItemSystemV3.overdrive.dataFactor=2;Assert.Throws<FormatException>(()=>ItemSystemV3.Validate(malformed));var normal=s.Copy();normal.Prestige.Entitlement=ScientificNumber.From(100);normal=PrestigeRules.Reset(normal);Assert.That(normal.ItemSystemV3.overdrive,Is.Null);Assert.That(normal.ActiveUntil,Is.Zero);var axiom=MetaRules.AxiomReset(FundAxiomReference(s));Assert.That(axiom.Meta.resets,Is.EqualTo(1));Assert.That(axiom.ItemSystemV3.overdrive,Is.Null);Assert.That(axiom.ActiveUntil,Is.Zero);
+        }
+        static GameState PreparedHardwareItems(GameState state,bool maximum)
+        {
+            var s=state.Copy();if(maximum)s.Workshop.nodes=s.Workshop.nodes.Union(new[]{"W10"}).ToArray();foreach(string type in maximum?new[]{"legacy-controller","diagnostic-adapter","memory-crystal"}:new[]{"diagnostic-adapter"}){var item=s.Workshop.inventory.FirstOrDefault(i=>i.type==type);if(item==null){item=new ItemInstance{id="item-"+s.Workshop.nextId++,type=type,missingMaterialBasis=true};s.Workshop.inventory=s.Workshop.inventory.Concat(new[]{item}).ToArray();Lifetime.Item(s,type);}if(maximum){item.rarity=5;item.level=69;item.forge=20;}s=Workshop.Equip(s,item.id,Workshop.Definition(item).Family);}return s;
+        }
+        [Test]public void EveryHardwareMilestonePackageMatchesActualSourceGrant()
+        {
+            var rows=Cases().hardwarePackageCases;Assert.That(rows.Length,Is.EqualTo(360));foreach(var row in rows){var s=Game.New(1000,"prepared-package-reference");bool maximum=row.mode=="maximum-boot"||row.mode=="no-items";if(row.mode!="normal")s.ItemSystemV3=new ItemV3State();if(maximum)s.Workshop.nodes=new[]{"W08","W10"};s=PreparedHardwareItems(s,maximum);s.Workshop.hardwareRemainders=Enumerable.Repeat(.25,ItemBalance.ComponentIds.Length).ToArray();if(row.mode=="no-items")s.Challenges.Run=new ChallengeRun{id="no-items",stage=1};int hardware=Array.FindIndex(Balance.Hardware,h=>h.Id==row.hardware);s.Hardware[hardware]=row.threshold;Workshop.PaidHardware(s,hardware,row.threshold-1);string c=row.mode+" "+row.hardware+" "+row.threshold;Assert.That(s.Workshop.components,Is.EqualTo(row.components),c+" actual component wallet");Assert.That(s.Workshop.hardwareRemainders,Is.EqualTo(row.remainders).Within(1e-10),c+" fractional remainders");if(s.ItemSystemV3!=null)Near(s.ItemSystemV3.componentsProduced,row.counter,c+" actual K");else Assert.That(row.counter==null||row.counter.m==0,Is.True,c+" normal mode");var paid=(long[])s.Workshop.components.Clone();var counter=s.ItemSystemV3?.componentsProduced;Workshop.PaidHardware(s,hardware,row.threshold-1);Assert.That(s.Workshop.components,Is.EqualTo(paid),c+" duplicate ignored");if(counter!=null)Assert.That(s.ItemSystemV3.componentsProduced,Is.SameAs(counter),c+" no repeated receipt");}
         }
         static GameState SharedChallengeMain(ItemV3Case row)
         {

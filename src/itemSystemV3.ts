@@ -137,6 +137,11 @@ export function itemComputeFactorV3(s:GameState){
  if(combo.pair)result=result.multiplyNumber(c().combinations.compute.factor);
  return result.multiply(itemBaseFactorScientificV3(s,'processor'));
 }
+/** Only variable regular paid milestone components; fixed extras and class
+ * upgrade packages retain their distinct existing contracts. */
+export function itemHardwarePackageFactorV3(s:GameState){
+ if(!usesItemV3(s))return 1;const diagnostic=itemV3Equipped(s).find(i=>i.type==='diagnostic-adapter');return(1+(diagnostic?c().diagnostic.coefficient*itemAbilityStrengthV3(s,diagnostic).P:0))*(itemCombinationV3(s,'bootstrapping').pair?c().combinations.boot.components:1);
+}
 export function itemCreditFactorV3(s:GameState){
  const snapshot=itemV3Snapshot(s),distilled=itemCombinationV3(s,'distilled-intelligence');let result=one();
  for(const item of itemV3Equipped(s)){

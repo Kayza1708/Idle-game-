@@ -391,7 +391,7 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "f5b45f81dd894993a8c509b7718ef354c887d7d6efc96d0ded92d28f6e726266",
+  "currentSourceHash": "a63177caf7b3c4c45781312274821f0fa7f945ffc171c5a01f2f12cb39abd26b",
   "workshopYieldFollowup": {
     "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
     "normalSaveActivation": false,
@@ -590,5 +590,62 @@
       "result": "Passed",
       "xmlSha256": "ccbba151312e41e41dce03f63741c3d5a97edaa97e0ee779d7a9c07e61217978"
     }
+  },
+  "diagnosticPackagesFollowup": {
+    "sourceHash": "a63177caf7b3c4c45781312274821f0fa7f945ffc171c5a01f2f12cb39abd26b",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "hardwarePackageCases": 360,
+    "actualComponentFlows": 32,
+    "focusedVitest": 3,
+    "vitest": {
+      "files": 163,
+      "tests": 2042,
+      "passed": 2042,
+      "failed": 0,
+      "seconds": 192.07,
+      "log": "/tmp/idle-v3-diagnostic-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Variable regular paid hardware milestone materials, diagnostic P/boot/W08 once, old remainders/fixed extras/excluded class-upgrade packages; no V3 disk-save release",
+    "rejectedRuns": [
+      "First editor crashed during script-loading Mono task continuation, exit139, no verdict; unchanged retry passed",
+      "PlayMode10/11: actual29s intro capture lost application/runtime focus, foreground ticks paused; trace proved stateAt froze at15.986/20work. Repeat before foreground activation also failed. User kept Unity foreground, titlebar activated via CUA; unchanged real-time recording then passed with quality1/focus true. No timing or production-rule changes."
+    ],
+    "targetedEditMode": {
+      "total": "26",
+      "passed": "26",
+      "failed": "0",
+      "duration": "6.5577065",
+      "result": "Passed",
+      "xmlSha256": "2cca67c713fe4cb477dd237ad51a0e9eb778b52d3850d06024736103111029a8"
+    },
+    "fullEditMode": {
+      "total": "208",
+      "passed": "208",
+      "failed": "0",
+      "duration": "78.0023799",
+      "result": "Passed",
+      "xmlSha256": "4c906e19f1c892015b89861205583069944c2281050f7f3d1474e93bdc28ccc5"
+    },
+    "initialPlayMode": {
+      "total": "11",
+      "passed": "10",
+      "failed": "1",
+      "duration": "77.1795746",
+      "result": "Failed(Child)",
+      "xmlSha256": "b97456d75db09a121e528042b8fee4187776c056567722628cdeef8c72391931"
+    },
+    "finalFocusedIntro": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "31.6965197",
+      "result": "Passed",
+      "xmlSha256": "0966e5bab8f7254377aff92f52b7b5c12478f13a83c23dd047c183cc424affb2"
+    },
+    "foregroundTrace": "diagnostics/intro-foreground-trace.txt"
   }
 }

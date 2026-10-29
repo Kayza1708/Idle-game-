@@ -1,3 +1,4 @@
+import {hardwareMaterialQuote,grantPaidHardwareMilestone} from '../src/materialEconomy';
 import {startRunChallenge,abortRunChallenge,completeRunChallenge} from '../src/retention';
 import {prestigeV3Description,prestigeV3DescriptionIds,synthesisOutputCopy,prestigeV3Names} from '../src/prestigeV3Copy';
 import {languages} from '../src/i18n';
@@ -116,13 +117,17 @@ const trainingAutomationCases=[
  const protectedResearch=protectedData(state,'research'),after=advanceTo(state,1001,false,()=>.5).state;
  return{...row,manual:row.manual??'',original:!!row.original,done:!!row.done,prepared:true,protectedResearch:number(protectedResearch),track:after.activeTraining?.track??'',jobId:after.activeTraining?.jobId??'',creditDebit:number(exactEconomyValue(state,'credits').subtract(exactEconomyValue(after,'credits'))),dataDebit:number(exactEconomyValue(state,'data').subtract(exactEconomyValue(after,'data'))),remainingPlans:after.trainingQueue.length};
 });
-type ComponentAction={action:'buy-W08'|'buy-C06'|'scanner-equip'|'scanner-unequip'|'gift'|'shop'|'hardware'|'analysis'|'cancel'|'synthesis'|'finish'|'advance'|'repeat'|'prestige'|'axiom';amount?:number;seconds?:number;pending?:boolean};
+type ComponentAction={action:'diagnostic-equip'|'boot-maximum'|'diagnostic-unequip'|'seed-rests'|'duplicate-package'|'buy-W08'|'buy-C06'|'scanner-equip'|'scanner-unequip'|'gift'|'shop'|'hardware'|'analysis'|'cancel'|'synthesis'|'finish'|'advance'|'repeat'|'prestige'|'axiom';amount?:number;seconds?:number;pending?:boolean};
 function componentFlow(name:string,actions:ComponentAction[],v3=true,C01=0,C06=0,W08:0|1|2=0){
  let state:GameState={...newGame(1000,'prepared-component-reference'),...(v3?{itemSystemV3:newItemSystemV3()}:{}),credits:1e12,data:1e12,gems:1000};state={...state,exactEconomy:{...state.exactEconomy,credits:S.from(1e12).toJSON(),data:S.from(1e12).toJSON()}};
  if(C01||C06){const funding=S.from(1000).toJSON();state={...state,axiomResetCount:1,axioms:1000,availableAxioms:1000,totalAxiomsEarned:1000,exactAxioms:{available:funding,total:funding},itemSystemV3:{...state.itemSystemV3!,axiomDiscovered:true,axiomDiscoveryAt:1000}};for(let i=0;i<C01;i++){const before=state;state=buyProgressionAxiom(state,'C01');if(state===before)throw Error('Prepared C01 purchase failed');}for(let i=0;i<C06;i++){const before=state;state=buyProgressionAxiom(state,'C06');if(state===before)throw Error('Prepared C06 purchase failed');}}
  if(W08){state=fundAxiomReference(state);if(W08===1)state=buyProgressionNode(state,'W08');}
  const steps=actions.map(input=>{const action={...input};
-  if(action.action==='buy-W08')state=buyProgressionNode(state,'W08');
+  if(action.action==='seed-rests')state={...state,materials:{...state.materials,hardwareRemainders:Object.fromEntries(Object.keys(BALANCE.components).map(id=>[id,.25])) as GameState['materials']['hardwareRemainders']}};
+  else if(action.action==='diagnostic-equip'||action.action==='boot-maximum'){for(const type of (action.action==='boot-maximum'?['legacy-controller','diagnostic-adapter','memory-crystal']:['diagnostic-adapter']) as ItemTypeId[]){if(!state.inventory.some(i=>i.type===type))state=createItem(state,type,'common');const item=state.inventory.find(i=>i.type===type)!;if(action.action==='boot-maximum')state={...state,nodes:[...new Set([...state.nodes,'W10'])],inventory:state.inventory.map(i=>i.id===item.id?{...i,rarity:'mythic',level:69,forge:20}:i)};state=equip(state,item.id);}}
+  else if(action.action==='diagnostic-unequip')state=unequip(state,'research');
+  else if(action.action==='duplicate-package')state=grantPaidHardwareMilestone(state,'calculator',25);
+  else if(action.action==='buy-W08')state=buyProgressionNode(state,'W08');
   else if(action.action==='buy-C06')state=buyProgressionAxiom(state,'C06');
   else if(action.action==='scanner-equip'){let item=state.inventory.find(i=>i.type==='field-scanner');if(!item){state=createItem(state,'field-scanner','common');item=state.inventory.at(-1)!;}state=equip(state,item.id);}
   else if(action.action==='scanner-unequip')state=unequip(state,'research');
@@ -140,6 +145,9 @@ function componentFlow(name:string,actions:ComponentAction[],v3=true,C01=0,C06=0
  });return{name,v3,C01,C06,W08,prepared:true,steps};
 }
 const componentFlows=[
+ componentFlow('diagnostic-actual-paid-package',[{action:'seed-rests'},{action:'diagnostic-equip'},{action:'hardware',amount:25},{action:'duplicate-package'},{action:'hardware',amount:1},{action:'gift'},{action:'shop'},{action:'diagnostic-unequip'},{action:'hardware',amount:24}]),
+ componentFlow('boot-max-W08-package',[{action:'boot-maximum'},{action:'seed-rests'},{action:'hardware',amount:25},{action:'duplicate-package'},{action:'prestige'},{action:'hardware',amount:25},{action:'axiom'},{action:'hardware',amount:25}],true,0,0,1),
+ componentFlow('normal-diagnostic-control',[{action:'diagnostic-equip'},{action:'hardware',amount:25},{action:'duplicate-package'}],false),
  componentFlow('paid-analysis-once',[{action:'analysis'},{action:'finish'},{action:'repeat'},{action:'finish'}]),
  componentFlow('paid-synthesis-reset-boundaries',[{action:'synthesis'},{action:'finish'},{action:'repeat'},{action:'prestige'},{action:'synthesis'},{action:'finish'},{action:'axiom'}]),
  componentFlow('paid-packages-and-regular-passive',[{action:'hardware',amount:25},{action:'advance',seconds:2*BALANCE.passiveCircuitSecondsPerClass+1},{action:'repeat'},{action:'hardware',amount:1}]),
@@ -240,7 +248,16 @@ const overdriveFlows=[
  overdriveFlow('real-prestige-clears-start-contract',['burst-processor','cryocontroller','photonic-analyzer'],false,[{action:'trigger'},{action:'time',seconds:1},{action:'prestige'},{action:'time',seconds:5}]),
 ];
 
-for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows,challengeFlows,relayFlows,overdriveFlows},null,2)+'\n']]){
+const hardwarePackageCases=[];
+for(const mode of ['diagnostic','maximum-boot','no-items','normal'] as const)for(const hardware of hardwareIds)for(const threshold of Object.keys(BALANCE.hardwareMaterialAmounts).map(Number)){
+ let state:GameState={...newGame(1000,'prepared-package-reference'),...(mode!=='normal'?{itemSystemV3:newItemSystemV3()}:{} )};
+ const maximum=mode==='maximum-boot'||mode==='no-items';state={...state,nodes:maximum?['W08','W10']:[]};for(const type of (maximum?['legacy-controller','diagnostic-adapter','memory-crystal']:['diagnostic-adapter']) as ItemTypeId[]){state=createItem(state,type,maximum?'mythic':'common');if(maximum)state={...state,inventory:state.inventory.map(i=>({...i,level:69,forge:20}))};state=equip(state,state.inventory.at(-1)!.id);}
+ state={...state,materials:{...state.materials,hardwareRemainders:Object.fromEntries(Object.keys(BALANCE.components).map(id=>[id,.25])) as GameState['materials']['hardwareRemainders']}};if(mode==='no-items')state={...state,retention:{...state.retention,activeRun:{id:'no-items'} as never}};
+ const q=hardwareMaterialQuote(state,hardware,threshold),granted=grantPaidHardwareMilestone(state,hardware,threshold);
+ hardwarePackageCases.push({mode,hardware,threshold,prepared:true,components:Object.keys(BALANCE.components).map(id=>granted.componentInventory[id as keyof typeof granted.componentInventory]),remainders:Object.keys(BALANCE.components).map(id=>q.remainders[id as keyof typeof q.remainders]),counter:granted.itemSystemV3?number(S.fromJSON(granted.itemSystemV3.componentsProduced)):null});
+}
+
+for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows,challengeFlows,relayFlows,overdriveFlows,hardwarePackageCases},null,2)+'\n']]){
  if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==value)throw Error('Stale V3 export: '+path);}else writeFileSync(path,value);
 }
-console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows + ${trainingAutomationCases.length} automation cases + ${componentFlows.length} component flows + ${challengeFlows.length} challenge flows + ${relayFlows.length} relay flows + ${overdriveFlows.length} overdrive flows (${sourceHash})`);
+console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows + ${trainingAutomationCases.length} automation cases + ${componentFlows.length} component flows + ${challengeFlows.length} challenge flows + ${relayFlows.length} relay flows + ${overdriveFlows.length} overdrive flows + ${hardwarePackageCases.length} hardware package cases (${sourceHash})`);

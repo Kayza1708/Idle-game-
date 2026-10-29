@@ -814,3 +814,7 @@ Verbindliche bestehende V3-Spezifikation umgesetzt, keine zusätzlichen Tuningwe
 
 ### 29.10.2026 – V3-Burst-/Kryo-Startvertrag
 Bestehende Spezifikation/zentraler V3-Datenstand: Burst(1+2P) für3s; Energiepaar5s und dieser Faktor×3, Dreierergänzung Daten×5. Kryodauer×(1+0,5P) nach bisheriger Basisdauerberechnung, keine erneute30s-/+100%-Kappung des neuen Faktors. Werte beim tatsächlichen Start einfrieren, an exaktem Fensterende integrieren; alte aktive Zustände ohne Beleg nicht nachträglich verstärken. Kein zusätzlicher Tap oder Reward beim vorhandenen manuellen Charged-Aufruf. Native/TS verwenden dieselben generierten Werte, normale64/24-Regeln bis vollständiger V3-Migration unverändert.
+
+
+### 29.10.2026 – V3-Diagnoseadapter / Bootstrapping bei Hardware-Meilensteinen
+Vorhandene spezifizierte Werte aus `BALANCE.itemV3`: variable reguläre Paketkomponenten×(1+P), Bootstrappingpaar zusätzlich×1,5, W08 genau einmal. Keine Änderung des Grundpakets, alter Bruchteile oder fester Sondervergaben. Neue Itemboni gelten nicht für die gesonderten Klassenupgradepakete oder allgemeine Zuschüsse. Gemeinsame tatsächliche Vergaben und Wallet-/K-/Restparität über alle15Klassen und6Meilensteine geprüft; keine neue Tuningkonstante.
