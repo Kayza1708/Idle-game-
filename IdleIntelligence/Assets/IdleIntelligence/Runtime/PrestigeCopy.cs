@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using IdleIntelligence.Core;
@@ -9,6 +10,13 @@ namespace IdleIntelligence.Runtime
         static readonly Dictionary<string,string> Names=Build();
         static Dictionary<string,string> Build(){var names=new Dictionary<string,string>(StringComparer.Ordinal);foreach(var n in PrestigeBalance.Nodes)names.Add(n.Id,n.Name);foreach(var n in MetaBalance.Axioms)names.Add(n.Id,n.Name);foreach(var n in MetaBalance.Models)names.Add(n.Id,n.Name);return names;}
         static readonly Regex Identifiers=new Regex(@"\b[HTFWSIABCDK][0-9]{2}\b");
+        public static string Name(GameState s,string id,string source)
+        {var copy=ItemSystemV3.Enabled(s)?ItemV3Balance.Names.FirstOrDefault(row=>row.Id=="v3-name:"+id):null;return copy==null?source:copy.Values[Math.Max(0,Array.IndexOf(SettingsCatalog.Languages,s.Settings.language))];}
+        public static string Describe(GameState s,string id,string source,string language)
+        {
+            var copy=ItemSystemV3.Enabled(s)?ItemV3Balance.Descriptions.FirstOrDefault(row=>row.Id=="v3:"+id):null;
+            return copy==null?Describe(source,language):copy.Values[Math.Max(0,Array.IndexOf(SettingsCatalog.Languages,language))];
+        }
         public static string Describe(string source,string language)=>Identifiers.Replace(NativeCopy.Text(source,language),m=>Names.TryGetValue(m.Value,out var name)?NativeCopy.Text(name,language):m.Value);
     }
 }

@@ -784,3 +784,29 @@ Die bestehende Abbildung `researchArchive → I04` begründet das permanente Erw
 
 ### Item-/Prestige-V3: wissenschaftlicher Basisbonus (experimentell)
 Unveränderte Formel des additiven Item-Basisbonus: zentraler Basiswert × rohes P × bestehende globale Verstärker × rechtmäßiger Legacy-Zyklusfaktor × permanenter Legacyfaktor. Die letzten beiden bleiben bis zur tatsächlichen Compute-/Credits-Multiplikation ScientificNumber, auch jenseits des Doublebereichs. Keine neuen Werte, kein zusätzlicher Faktor auf einzigartige Fähigkeiten, keine Aktivierung in normalen Saves. Arbeitsraten und vollständige Rechteübertragung bleiben separate offene Verträge. Gemeinsame Produktionsreferenzen steigen62→71.
+
+
+### Prestige-V3: Integrationsautopilot
+T06 erhält unveränderte Preise und Ziellevel: Integration wird automatisch nur für ein ausdrücklich positives noch unerfülltes Spielerziel gewählt. Geschützte Daten folgen derselben Bedingung; manuell eingereihte Integration bleibt unabhängig davon bedienbar. Q/E-Nullziel bleibt unbegrenzt, niedrigere Level und stabile Gleichstände erhalten. Keine neue Konstante oder Kostenänderung; normale64/24-Spielstände behalten die bisherigen Regeln bis zur vollständigen Migration. Acht tatsächliche TS-/C#-Transaktionen vergleichen Auswahl, Zahlung und Reserve.
+
+### Item-V3: Komponentenproduktionszähler K
+K wächst ausschließlich aus expliziten tatsächlich vergüteten Produktionsbelegen, nicht aus allgemeinem `grantComponents`/`Lifetime.Components`. Gültig sind bezahlte Analyse, Synthese, reguläre passive Hardwarefunde und bezahlte Hardwarepakete; bestehender TS-Klassenkauf separat markiert, native Erwerbslücke dokumentiert. Keine neuen Mengen, Preise oder Faktoren. Starterhilfe, Shop, Handel/Import, Erstattung, Zerlegung/Rückgewinnung und Altbestände bleiben ausgeschlossen. Persönlicher wissenschaftlicher Zähler bleibt bei normalem Prestige erhalten und wird am echten Axiomreset geleert. Alte Saves werden damit noch nicht aktiviert oder rückwirkend befüllt.
+
+### Prestige-V3 C01
+Vorhandene zentrale Vorgabe×2/×3/×4 ersetzt im experimentellen V3 den alten passiven Bonus. Intervall3600s unverändert. Rundung ausschließlich an vorhandener1e-12Bruchteilspräzision stabilisiert; keine häufigeren Funde, keine rückwirkende Produktion. Preis/Resetformeln unverändert. Normale Spielstände nicht aktiviert.
+
+### Item-V3 Feldscanner
+Zentrale Vorgabe2^P×[1+0,05×P×S(A,25)] als tatsächlicher Analysefaktor; A zählt bezahlte reguläre Abschlüsse bei Ausrüstung im Run. Alte Itemprofile nicht zusätzlich anwenden; W10 nur einmal auf Fähigkeits-P. Analysefaktor wirkt nicht auf Synthese. Keine neuen Werte, unveränderte Kosten und normaleSave64/24-Regeln.
+
+### 29.10.2026 – ausdrücklich bestätigte lineare INT-Einkommensänderung
+Nutzerauftrag ersetzt den dynamischen INT-Einkommensexponenten: `1 + verdiente Zyklus-INT × Satz`. Grundsatz10%, I05 und I10 jeweils+6Prozentpunkte, damit16% mit einem bzw22% mit beiden.10INT→×2,100INT→×11 ohne Upgrades. Kein Zinseszins; ausgegebeneINT zählen weiterhin, nur der Axiomreset leert den Zyklusledger. I10-INT-Gewinnanteil+0,03 und sämtliche Preise bleiben unverändert. Zentral `BALANCE.prestigeV3.int.creditPerINT/I05/I10credits`, keine unabhängigen C#-Werte. Bisherige Saves bleiben bis zur vollständigen Migration auf ihren alten Regeln. Bestätigungsdetails: `item-system-v3/amendments.md`.
+
+### C06 – Industrielle Ausbeute im V3-Vertrag
+Zentrale Vorgaben1,5/2/3 ersetzen den bisherigen C06-Fertigungstempobonus. Nur neue bezahlte Synthesen speichern die tatsächliche Ausbeute beim Start. Kleine Reste werden komponentenweise erhalten; ältere bezahlte Aufträge ohneV3-Beleg liefern weiter ihren ursprünglichen einen Baustein. NormalerPrestige/Axiom behalten bereits bezahlte Synthese samt Resten. Keine geänderten Preise oder zusätzlichen Erstattungen. Industrielle Zweierkombination ist im gemeinsamen Faktor berücksichtigt, benötigt aber weiterhin die noch offenen neuen Katalog-/Rezeptverbraucher.
+
+### W08 – Werkstattverbund im V3-Vertrag
+Vorhandene zentrale Vorgabe×2 auf bezahlte Analysen und reguläre Hardware-Meilensteinpakete ersetzt den alten Fertigungstempofaktor. Analyseausbeute beim bezahlten Start fixiert; Hardwarebeitrag vor Rundung verstärkt, alte Fraktionsguthaben nicht verdoppelt. Shop/Handel/Rückgewinnung/passiveFunde/Synthese und zusätzliche Klassenupgrade-Extraauszahlungen ausgeschlossen. Keine neuen Preise oder Mengenparameter; normaleSpielstände bis zur vollständigen Migration unverändert. Ein bestehender TS-Nullzugriff beim Analyseversuch während laufenderSynthese korrigiert, keine Spielregel geändert.
+
+
+### 29.10.2026 – V3-Impulsrelais als separates Tapereignis
+Verbindliche bestehende V3-Spezifikation umgesetzt, keine zusätzlichen Tuningwerte: `BALANCE.itemV3.relay` bleibt Intervall10,2Sekunden×Fähigkeits-P und eigener kritischer Faktor1,5. Auszahlung zusätzlich zum normalen Tap, außerhalb seiner Softcap/normalen Critwirkung; reguläre Referenz ohne temporären Overdrive-/Werbefaktor einschließlich indirekter Overdrive-Itemproduktion. Exemplarstand modulo10; nur akzeptierter manueller Input. W10 genau einmal. Alte normale Spielstände bleiben auf ihren Regeln bis zur vollständigen Migration. Gemeinsame tatsächliche Quoten-/Transaktionsreferenzen in `scripts/export-unity-item-v3.ts`.

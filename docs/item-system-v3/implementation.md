@@ -4,6 +4,8 @@ Verbindlicher Auftrag: [unveränderte Spezifikation](specification.txt). Beginn 
 
 Ergänzt durch den verbindlichen [Prestige-/Axiomauftrag](prestige-axiom-specification.txt). Dieser erweitert denselben V3-Vertrag. Die 60/24 bestehenden IDs und Preise bleiben erhalten. K (Komponentenproduktion im Itemauftrag) und K (Hardwareklassen im Prestigeauftrag) erhalten im Code getrennte ausgeschriebene Namen; sie sind keine neue Währung.
 
+Aktuelle ausdrücklich bestätigte Änderungen zur ursprünglichen Spezifikation: [Ergänzungen, einschließlich linearem INT-Einkommen](amendments.md). Diese haben für die betroffenen Regeln Vorrang.
+
 ## Abhängigkeitsgraph vor der Implementierung
 
 ```mermaid
@@ -151,3 +153,102 @@ Neun zusätzliche gemeinsame Produktionsfälle prüfen einzelne Prozessor-/Kerni
 Wissenschaftliche-Basis-Nachprüfung: vollständige191/191EditMode (127,753s) und9/9gezieltePlayMode (47,290s), Typecheck/Webbuild und vollständiger Generatorvergleich bestanden. Ein erster falsch qualifizierter PlayMode-Filter wählte null Tests und gilt ausdrücklich nicht als Abnahme; Namespace korrigiert und echte neun Tests wiederholt. Nachweise: `/tmp/idle-v3-scientific-edit.xml`, `/tmp/idle-v3-scientific-play-corrected.xml`.
 
 Vollständiger TS-Lauf für diesen Stand:154Dateien/2.000Tests bestanden,323,84s (`/tmp/idle-v3-scientific-full-vitest.log`). Die Sandbox meldete einen fehlgeschlagenen Vite-Websocket-Listener; Tests wurden vollständig beendet, Exit0, keine fehlgeschlagenen Tests. Kein Netz-/Cloud-Erfolgsnachweis daraus.
+
+
+## 29.10.2026 – T06: ausdrücklich gewünschte Integration
+
+Experimentelle V3-Automation startet Integration nur bei positivem Ziel und bis zum tatsächlichen Ziellevel. Derselbe Vertrag gilt für den dafür geschützten Datenbetrag. Manuelle Pläne bleiben vor der Automation; Nullziel bedeutet für Q/E weiterhin unbegrenzt, für V3-Integration ausschließlich manuell. Niedrigeres Q/E-Level wird bei freier Wahl bevorzugt, Gleichstand stabil Qualität zuerst. Normale Saves behalten ihr bisheriges Nullzielverhalten.
+
+Acht neue gemeinsame echte Start-/Zahlungs-/Reservierungsfälle: kein Integrationsziel, positives Ziel, erfülltes Ziel, niedrigeres Effizienzlevel, manuelle Integration, manueller Effizienzplan, alle endlichen Ziele erfüllt, bisheriger Normalmodus. 25 gezielte Vitest bestanden. Online/Offline vergleichen gleiche Aufträge, Zahlung und Arbeitsmenge; deren naturgemäß unterschiedliche Online-/Offlineprotokollfelder werden nicht fälschlich als vollständige Objektgleichheit erwartet.
+
+Zielbeschriftungen verwenden echte lokalisierte Tracknamen in sieben Sprachen; V3-Integration erklärt „0 = nur manuell“ statt einer falschen Unbegrenzt-Aussage. Vollständige V3-Dateimigration/Spielerfreigabe und weitere Automations-/Übertragsverträge bleiben offen. Laufende Regressionsergebnisse separat nach Abschluss ergänzen.
+
+T06-Abnahme:154Dateien/2.001Vitest,322,14s;193/193vollständigeEditMode,127,329s;10/10PlayMode vor Aufnahmepräzisierung,54,957s. Danach finale tatsächliche Zieleingabe/Reload und elf mobile Sprachbilder1/1,5,863s, mit echten bezahlten Knoten aus isolierter Finanzierung. Sechs DE/EN-Bilder selbst angesehen und alle Eingaben nach Layoutstabilisierung vollständig sichtbar. Falscher Menüweg, ungültiger vorbereiteter Ledger und im Batch nicht unterstütztes EndOfFrame-Warten wurden korrigiert; frühere Fehlläufe sind keine Freigabe. Typecheck/Webbuild/Generatorvergleich grün; zusätzliche Kopie967×7 separat geprüft. `docs/media/unity-v3-training-targets/README.md`. Nutzerentscheidung: vollständigesV3 vor Xcode-Playtest; Voraussetzungen in playtest-gate.md.
+
+## 29.10.2026 – Tatsächliche Komponentenproduktion K
+
+Nur ausdrückliche Produktionsbelege werden gezählt: bezahlte Analysen, Synthese, passive Hardwarefunde und bezahlte Hardware-Meilensteinpakete. Der bestehende TS-Klassenkauf ist ebenfalls explizit markiert; dessen native Erreichbarkeit hat einen Bestandswiderspruch und bleibt separat offen (`source-inconsistencies.md`). Allgemeine Zuschüsse, Starterhilfe, Shop/Gems, Handel, Import, Gutscheine, Zerlegung und Rückgewinnung zählen nicht. Ausgeben verändert den Zähler nicht. Kein Backfill aus Wallets. Keine K- oder persönlichen Produktionsdaten in Itempayloads.
+
+Sieben neue tatsächliche gemeinsame TS-/C#-Folgen vergleichen zusätzlich echte Komponentenwallets, Credits/Daten/Gems, laufende Aufträge und Resetanzahl: Analyse genau einmal, Synthese plus mehrere echte Resetgrenzen, Hardwarepakete/passive Produktion, ausgeschlossene Zuschüsse/Shop/Abbruch, abgelehnter zweiter Start, bisheriger Normalmodus einschließlich frischer erster Synthese. 52 gezielte Vitest bestanden; erster gezielter Unity-Lauf12/12 nach Behebung des beobachteten Starterhilfe-Zeitpunkts.
+
+Die erweiterte Parität fand einen wirklichen Zeitlaufunterschied: TS ermittelt die bestehende Starterhilfe zwischen inneren Zeitscheiben; Unity bisher nur beim Eintritt in Advance. Unity prüft nun ebenfalls zwischen Scheiben. Keine neue Belohnung oder geänderte Menge; der Beleg bleibt von K ausgeschlossen. Ein Testaufbau las zudem permanente Hardwarebelege fälschlich nur aus dem flüchtigen Journal und kaufte versehentlich49 statt50Einheiten; Erwartungs-/Eingabefehler korrigiert, keine Spielpreise dafür geändert.
+
+Große K-Werte behalten kleine exakte Zuwächse über ScientificNumber; Nativekopien und ausgeschlossene Ursachen werden separat geprüft. V3-Dateimigration/Spielerfreigabe weiterhin gesperrt, neue Synthesekoordinator-Fähigkeit/Katalogeinbindung und weitere Quellverbraucher bleiben offen. Vollregressionsergebnisse nach Abschluss ergänzen.
+
+Komponenten-Abnahme: vollständige155Dateien/2.006Vitest (325,12s),195/195EditMode (135,077s),18/18gezieltePlayMode (78,108s); Typecheck/Webbuild/Generatorvergleich grün. Zusätzlicher echter Craft-Preisabzug bestätigt K bleibt unverändert,5/5Komponententests. Alte Einzel-Syntheseprüfung isoliert zuvor abgeholte/verbrauchte Starterhilfe; sie erwartet weiter genau1. Frische Normal-Synthese plus echte Starterhilfe separat im siebten TS-/C#-Fluss. In-Memory-V3-Aufnahmefixture deaktiviert nun auch Fokus-/Lifecycle-Speicheraufrufe während der reinen Darstellung; produktiver Schreibschutz bleibt strikt und hatte vorher korrekt blockiert. Frühere194/195EditMode und17/18PlayMode sind keine Freigabe; korrigierte vollständige/gezielte Läufe oben. Kein neuer nativer Player installiert.
+
+
+## 29.10.2026 – C01: tatsächliche passive Mengen und lesbare Knotendetails
+
+V3 verwendet für C01 die zentralen Faktoren×2/×3/×4 statt des bisherigen additiven Bonus. Nur reguläre passive Hardwarefunde; keine Shop-/Geschenkmengen. Tatsächliche Stundenintervalle und exakte Fundgrenzen werden geprüft; V3 gleicht ausschließlich die vorhandene Bruchteilspräzision an (1e-12), damit die dritte Stunde nicht durch Rundungsreste einen Fund verliert. Kein geänderter Fundtakt. Die vorige180s-Passivfixture bewies keinen positiven Fund; elf erweiterte tatsächliche Komponentenfolgen ersetzen diese Lücke.
+
+Alle sieben C01-Beschreibungen aus derselben TS-Quelle generiert und an echte TS-/Unity-Knotendetails angeschlossen. DE/EN320/390/430selbst gesehen, elf Originalaufnahmen unter `docs/media/unity-v3-passive-archive`. Headerflex korrigiert, nachdem französischer Titel umbrechend abgeschnitten war. Vorhandenes Spracheinstellungs-/uGUI-System beibehalten; offizielle Localization-Anleitung/API-Referenz geprüft, kein Localization-Paket installiert oder globale Übersetzungsabnahme behauptet.
+
+Neue Währungsvergleiche fanden einen fehlerhaften finanzierten Referenzzustand: bereits gewährte INT waren nicht als beansprucht markiert. Fixtures korrigiert, echte Formeln unverändert; nun werden verfügbares Axiomguthaben, lebenslangeINT, noch ausstehende Vergabe und zwei aufeinanderfolgende Axiomresets verglichen.
+
+Prüfungen:155Dateien/2.007Vitest(327,79s), danach26gezielte Finanzierungsfälle; Typecheck, Webbuild, Generatorprüfung grün. UnityCompile/14EditMode(9,412s),13PlayMode(58,464s), finale6UI-/Netztests(22,262s). Keine neue vollständigeUnity-Regression behauptet. Frühere fehlgeschlagene Fixtureläufe zählen nicht als Nachweis. Originale/Saves unverändert; V3-Dateimigration und vollständige Verbraucher bleiben offen, kein Xcode-Player installiert.
+
+
+## 29.10.2026 – Feldscanner am tatsächlichen bezahlten Abschluss
+
+Vorgegebene Formel2^P×[1+0,05×P×S(A,25)] an tatsächliches Analysetempo angeschlossen. A zählt ausschließlich abgeschlossene bezahlte reguläre Aufträge bei aktiver Ausrüstung. Abbruch, wiederholter Abschlussaufruf, bestehender Introauftrag, abgelehntes Zweitstarten und No-items ausgeschlossen. Ablegen erhält die Serie, beide echten Resetarten leeren sie. W10 einmal auf Fähigkeits-P. Neuer persönlicher Zähler bleibt außerhalb handelbarer Items.
+
+Die alte gemeinsame Analyse-/Syntheserate hätte den neuen Scannerfaktor irrtümlich auch auf Synthese angewendet. Basistempo/Analysefaktor getrennt und beide tatsächlichen Verbraucher angepasst; normale Regeln bleiben gleich.17gemeinsame vollständige Produktionsfolgen vergleichen Zahlungen, Komponenten, K, Axiom-/INT-Guthaben, Scannerzähler und Live-Tempo, einschließlich späterem Ausrüsten/Ablegen und Syntheseausschluss. Eigene Grenztests0/24/25/26/1.000.000, maximale Itemstärke, W10 und Kopierisolation.
+
+23gezielteVitest, danach vollständige156Dateien/2.011Tests(335,59s); Typecheck/Webbuild(2,19s)/vollständigeGeneratorprüfung grün. UnityCompile/15gezielteEditMode(8,922s), danach197/197vollständigeEditMode(133,690s). Abschließend8/8gezieltePlayMode(50,549s), echte Szene/Abschlussfeedback/Plan-/Reload-UI. Die Warnung „Saved feedback failed“ stammt aus dem ausdrücklich erwarteten Test eines defekten kosmetischen Verbrauchers nach erfolgreichem Speichern; kein unerklärter Laufzeitfehler. Ein TS-Test brauchte eine explizite GameState-Typannotation; ein nach der Trennung ungenutzter Import entfernt. Veraltete Generatorhashes vollständig neu erzeugt und anschließend geprüft. Keine Produktionsregel dafür verändert.
+
+Noch offen: vollständige Dateimigration und verständliche V3-Itemdetails; die zusätzliche Bibliotheks-Bereichszuordnung ist separat in source-inconsistencies.md dokumentiert. Keine V3-/Playerfreigabe und kein neu installierter Commit. Anschließend C06-Ausbeute/Bruchteilsreste und bezahlte Startverträge weiterbearbeiten.
+
+
+## 29.10.2026 – C06-Syntheseverträge und bestätigter linearer INT-Bonus
+
+C06 ersetzt den alten Fertigungstempobonus durch reguläre Syntheseausbeute×1,5/×2/×3. Neue bezahlte Starts halten den Ausbeutefaktor und die tatsächliche Job-/Komponentenzuordnung fest; Restmengen je Komponente bleiben erhalten. Spätere Käufe ändern nur neue Aufträge. Tatsächliche normalePrestige-/Axiomresets erhalten bereits bezahlte Synthese samt Vertrag, alte laufende Jobs ohneV3-Beleg liefern weiterhin ihren einen Baustein. Unbekannte Familien bleiben gesperrt. Kopien besitzen unabhängige Vertrags-/Restdaten. Industrielle Zweierkombination im Faktor vorbereitet, sechs neue Katalogitems/Rezepte weiterhin offen.
+
+Neue C06-Bezeichnung und Effekte aus gemeinsamer sieben Sprachquelle; bestehende Komponentenansicht zeigt den wahren nächsten ganzzahligen Ertrag.22echte Bilder unter `docs/media/unity-v3-synthesis`, DE/EN320/390/430selbstgesehen. Kein Designumbau und keine neue Animationsabnahme. Vorschaurest0,5 ausdrücklich vorbereitet, vollständige V3-Dateispeicherung noch gesperrt.
+
+**Zusätzlicher Nutzerauftrag:** INT-Einkommen abV3 linear `1+verdienteZyklusINT×Satz`, ohne Einkommensexponent oder Zinseszins. Auf ausdrückliche Bestätigung Satz10/16/22% je nachI05/I10. Ausgeben erhält den Bonus, normalerPrestige erhält verdienteINT, Axiomreset leert den Zyklus. I10-Gewinnexponent+0,03 bleibt bestehen. Unveränderte ursprüngliche Spezifikationen historisch erhalten; `amendments.md` ist die verbindliche Ergänzung. Alte64/24-Regeln bis zur vollständigen Migration erhalten.
+
+Gemeinsame Produktionsreferenzen71→91 mit0/1/10/100/10^1000INT, allen vier Knotenkombinationen und tatsächlichem Income-Verbraucher. Komponentenfolgen17→23, darunter wiederholte Synthesen, Preis-/Rest-/Faktorsnapshots und beide echten Resets; jeder Schritt vergleicht auch tatsächlichen Einkommensfaktor und verdiente/freieINT. Zusätzliche tatsächliche I05-Käufe und Resettransaktionen in beiden Domains geprüft. Neue I05-/I10-Texte in echter Unity-Netzansicht:22Originalbilder unter `docs/media/unity-v3-linear-int`, DE/EN320/390/430selbstgesehen; siebenSprachen per tatsächlicher Einstellungsaktion. Die finanzierte Mira-Anzeige im Hintergrund ist keine natürliche V3-Einführungsabnahme.
+
+Prüfungen:31gezielteVitest, vollständige158Dateien/2.019Vitest(328,12s), Typecheck, Webbuild(2,04s) und vollständigeGeneratorparität bestanden. UnityCompile/17gezielteEditMode(9,916s), danach199/199vollständigeEditMode(130,290s),12/12gezieltePlayMode(61,894s), abschließend1/1zusätzliche mobileINT-Detailprüfung(7,051s). Kein neuer vollständigerPlayMode-Lauf behauptet.
+
+Fehlläufe transparent:16Generatorprüfungen waren vor vollständiger Neugenerierung rot. Anschließender breiter Lauf hatte3Zeitüberschreitungen/Workerfehler und Sandbox-Websocketfehler; Mac-Energieprotokoll bestätigt Schlafphasen. Vollständiger Nachlauf mit prozessgebundenerWachhalteanforderung und erforderlichem lokalenTestnetz-Zugriff grün, keine Testzeitlimits erhöht. Ein Test verwendete eine nicht vorhandene ScientificNumber.one-Hilfsmethode; auf die tatsächliche API korrigiert. Frühere Fehlläufe zählen nicht als bestanden.
+
+Keine Freigabe der vollständigenV3-Migration, keine normalen Saves überschrieben, kein neuerPlayer installiert. Nächster unabhängiger Verbrauchervertrag: W08/weitere tatsächliche Materialproduzenten, danach weitere Ereignisse/Kataloge/atomare Migration/Mira/Langzeit- und Loadoutabnahme. Nächster Xcode-Playtest unverändert erst nach vollständigemV3.
+
+
+## 29.10.2026 – W08: wirkliche bezahlte Materialquellen
+
+Alter V3-Fertigungs-/Schmiedetempofaktor ersetzt durch×2-Mengen aus bezahlter Analyse und regulären bezahlten Hardware-Meilensteinpaketen. Analyse hält Faktor beim Start fest, Käuferwechsel während Auftrag bewertet keine bezahlten Inputs/Outputs neu. Hardwarebeiträge vor Rundung verstärkt, alte Fraktionsguthaben nicht erneut multipliziert. Ausgeschlossene Quellen bleiben unverändert; extra Klassenupgrade-Vergaben sind keine wiederholten regulären Meilensteine. Neues sieben Sprachlabel erklärt den wirklichen Startfaktor; Name Werkstattverbund statt alter Tempobezeichnung. Aktive Analyse zeigt eigenen gespeicherten Ertrag, Vorschau neuer Analysen aktuellen Faktor.
+
+Tatsächlicher Quellfehler korrigiert: Analyseversuch während Synthese dereferenzierte einen leeren Analyseauftrag. Beide Regelversionen lehnen nun ohne Ausnahme und ohne zweite Zahlung ab.29gemeinsame echte Produktions-/Resetfolgen, zusätzlich alle15Hardwareklassen/sechsMeilensteine mit alten0,25-Resten geprüft. Der erste Native-Fehler war eine finanzierte Fixture, deren Anspruch unter bereits verdientemZyklus-INT lag; jetzt setzt jede Resetfixture Anspruch aufZyklus+100. Keine Produktionsformel dafür geändert.
+
+Sauberer Prüfstand:159Dateien/2.024Vitest(317,65s),28gezielteVitest, Typecheck/Webbuild(1,89s)/vollständigeGeneratorparität grün;199/199vollständigeEditMode(146,416s) und14/14PlayMode(69,911s). ElfOriginalbilder,DE/EN320/390/430selbstgesehen: `docs/media/unity-v3-workshop-yield`. Kein neuer kompletterPlayMode-/Player-/Gerätenachweis.
+
+Ein Export wurde versehentlich parallel zum eigenen Testeditor angestoßen, gestoppt und danach vollständig bei geschlossenemEditor wiederholt; der überlappende Lauf gilt nicht als Abnahme. Mac-Deckelschlaf12:47–13:03 unterbrach einen breiten TS-Lauf:2Timeouts/Workerfehler, danach26gezieltePrüfungen und kompletter2.024erNachlauf ohne erhöhteZeitlimits bestanden. Keine Schlafphase oder rotePrüfung als Erfolg gezählt.
+
+Native Klassenupgrade-Erwerbsfrage mit tatsächlichen Resetfolgen separat dokumentiert. Nächste erforderliche V3-Abhängigkeit: echte Challenge-Ein-/Ausstiege übernehmen das neue Regelsystem bisher nicht. Shadow-Zähler/Main-Erhaltung/monotoneIDs vor Migration schließen; anschließend weitere Material-/Itemereignisse. Weiterhin keine normalen V3-Spielstände freigegeben und kein neuer Xcode-Player installiert.
+
+
+## 29.10.2026 – Tatsächliche V3-Challenge-Grenzen
+
+Die bisherigen Challenge-Fabriken erzeugten einen frischen Zustand ohne V3-Regelkennung. V3 tritt jetzt ausdrücklich in einen eigenen Challenge-Scope ein: D/E/K/T, Scanner-/Lernserien, Syntheseverträge und Restkonten beginnen getrennt. Dauerhafte Axiomgeschichte, Trainingsrekorde und bestehende Erwerbsrechte bleiben verfügbar. Kopierte Impulsrelais beginnen als neue Challengeexemplare ohne den Tapstand des Hauptitems; vorhandene Klassenupgradeboni werden nicht in den Challenge-Start kopiert.
+
+Das Hauptspiel bleibt vollständig pausiert. Rückkehr erhält dessen Produktionszähler, Materialien, Ausrüstung und bezahlte Aufträge unverändert. Nur die höchste ausgegebene technische Trainingsnummer wird übernommen; der Challenge-Abschlussmarker wird ausdrücklich nicht übernommen, damit ein älterer bezahlter Hauptspielauftrag weiterhin genau einmal abschließen kann. Deep-Copy-Prüfungen sind keine Dateispeicher-/Reloadfreigabe; der V3-Schreibschutz bleibt aktiv.
+
+Fünf tatsächliche gemeinsame TS-/C#-Folgen vergleichen sämtliche Transaktionsgrenzen: Abbruch und Fortsetzung bezahlter Hauptspieljobs, getrennte Daten-/Materialproduktion, einmalige echte Challengebelohnung, linearer INT-Bonus nach tatsächlichem Prestige im Challenge-Scope sowie aktiver Zeitlauf über die B05-Rekordgrenze. Finanzen und spätes Vorwissen sind ausdrücklich vorbereitet, keine natürliche Kampagne.
+
+Die gemeinsame Referenz fand einen echten nativen Verbraucherfehler: MetaRules.Pow las für B05 noch den alten Faktor×2 statt des zentralen V3-Faktors×3. Die Abfrage verwendet nun die vorhandene zustandsabhängige Effektquelle, einschließlich A04. Arbeitsmenge und Geschwindigkeit werden separat verglichen. Die anfängliche Diagnose einer unterschiedlichen Arbeitsmenge war falsch: beide Aufträge benötigten90, nur die Rate war2 statt3. Ein zusätzlicher Compilefehler in der Testausführung des neuen Active-Flags wurde korrigiert; frühere fehlgeschlagene Läufe zählen nicht als bestanden.
+
+Abnahme:160Dateien/2.028Vitest(180,95s), Typecheck, Webbuild(1,20s), vollständiger Generatorvergleich grün. UnityCompile/23gezielteEditMode(11,133s),203/203vollständigeEditMode(71,023s),13/13gezieltePlayMode(25,702s): echte Challengebedienung, atomare Ablehnung/Rollback, Reload normaler Saves, Queues und Recovery. Keine neue visuelle Gestaltung oder Videoabnahme. Keine Änderung normaler64/24-Saves, kein neuer Xcode-Player und keine vollständigeV3-Freigabe.
+
+
+## 29.10.2026 – Impulsrelais am tatsächlichen akzeptierten Input
+
+V3 vergütet jeden zehnten akzeptierten manuellen Tap separat mit2×effektivemFähigkeits-P Sekunden regulärer passiver Credits. Der Bonus läuft weder durch die normale Tapsoftcap noch durch den normalen kritischen Schadensmultiplikator. Ausschließlich ein kritischer auslösender Tap erhält den eigenen Relaisfaktor×1,5. W10 wird einmal angewandt; generische Basisverstärker werden nicht zusätzlich auf die Fähigkeit gelegt.
+
+Die Referenzrate deaktiviert temporäre Produktion ausdrücklich auch vor der Computeauswertung, damit etwa Photonik-Matrix während Overdrive nicht indirekt den Referenzbetrag erhöht. Permanente tatsächliche Produktion bleibt Grundlage. Der Triggerstand wird kompakt modulo10 am Exemplar gespeichert; Ablegen, In-Memory-Kopie und beide Resetarten erhalten ihn. Passive Zeit, No-items und abgelehnte schnelle/ungültige Eingaben verändern ihn nicht. Quote und Transaktion verwenden dieselbe Berechnung; Animationen und Audio zahlen weiterhin nichts aus. Alte normale64/24-Tapregeln bleiben unverändert, bis die vollständigeV3-Migration freigegeben wird.
+
+Test-first drei tatsächliche rote Referenzen belegten den alten Softcap-/Temporär-/Inputfehler. Nach Anbindung fünf eigene TS-Verträge und sieben gemeinsame tatsächliche TS-/C#-Eingabefolgen (je16Schritte), inklusive kritischer Seeds, maximalem P/W10/A04, Overdrive, No-items/No-taps, normalem Kontrollmodus, Ablegen/Kopieren und schnellen Wiederholungen. Zuvor22gezielteEditMode grün; abschließende vollständige Regression läuft separat. Kein V3-Dateireloadnachweis und kein neuer Player installiert.
+
+Relais-Endabnahme:161Dateien/2.033Vitest(180,22s), Typecheck, Webbuild(1,43s), vollständiger Generatorvergleich grün.205/205vollständigeEditMode(78,400s),11/11gezieltePlayMode(76,115s): echte Navigation/Labfeedback, begrenzte Effekte, erneute schnelle Aktionen, reduzierte Bewegung und Reload normaler Saves. Kein vollständigerPlayMode-/Gerätenachweis und keine neue visuelle Abnahme behauptet.

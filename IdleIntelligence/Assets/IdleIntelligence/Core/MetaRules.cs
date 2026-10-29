@@ -4,7 +4,7 @@ namespace IdleIntelligence.Core
  public static class MetaRules
  {
   public static int Level(GameState s,string id){int i=Array.FindIndex(MetaBalance.Axioms,n=>n.Id==id);return i<0?0:Math.Max(s.Meta.axioms[i],(id=="C02"&&s.Challenges.Progress.unlocks.Contains("analysis-planner")||id=="C03"&&s.Challenges.Progress.unlocks.Contains("crafting-planner"))?1:0);}
-  public static double Pow(GameState s,string id)=>Math.Pow(PrestigeRules.E(id),Level(s,id));
+  public static double Pow(GameState s,string id)=>Math.Pow(PrestigeRules.EFor(s,id),Level(s,id));
   public static bool Secondary(GameState s,string id)=>s.Workshop.activeModel==id&&Level(s,"D06")>0;
   public static double Factor(GameState s,string kind){var model=MetaBalance.Models.FirstOrDefault(m=>m.Id==s.Workshop.activeModel);return model!=null&&model.Kind==kind?1+(model.Base-1)*(1+PrestigeRules.V("modelPrimaryLevel")*s.Workshop.activeModelLevel):1;}
   public static double Core(GameState s){if(string.IsNullOrEmpty(s.Workshop.activeModel))return 1;double coupling=Level(s,"D05")>0?Math.Min(PrestigeRules.V("modelCouplingCap"),1+PrestigeRules.V("modelCouplingScale")*(Math.Pow(PrestigeV3.IntegrationBase(s),s.Workshop.integration)-1)):1;return 1+(PrestigeRules.V("modelCore")*(1+PrestigeRules.V("modelCoreLevel")*s.Workshop.activeModelLevel)-1)*Math.Pow(ItemSystemV3.Enabled(s)?ItemV3Balance.Get("prestige.axioms.A06"):PrestigeRules.V("modelAxiomCore"),Level(s,"A06"))*Math.Pow(ItemSystemV3.Enabled(s)?ItemV3Balance.Get("prestige.axioms.D03"):PrestigeRules.V("modelDevelopmentCore"),Level(s,"D03"))*coupling*(1+Workshop.Device(s,"modelEcho"));}

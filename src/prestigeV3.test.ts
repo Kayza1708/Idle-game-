@@ -1,13 +1,37 @@
+import {prestigeV3Description} from './prestigeV3Copy';
+import {languages} from './i18n';
+import {advanceTo} from './simulation';
+import {protectedData} from './progressionWork';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,hardwareIds,computeRateScientific,creditRateScientific,addCreditsScientific,exactEconomyValue,researchQuote,dataRateScientific,type GameState} from './economy';
+import {BALANCE,newGame,buyHardwareClass,hardwareIds,computeRateScientific,creditRateScientific,addCreditsScientific,exactEconomyValue,researchQuote,dataRateScientific,type GameState} from './economy';
 import {ScientificNumber as S} from './scientificNumber';
 import {newItemSystemV3,itemBaseFactorV3,itemAbilityStrengthV3,itemStrengthV3} from './itemSystemV3';
-import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditExponentV3,axiomDiscoveryEligibleV3,discoverAxiomsV3} from './prestigeV3';
+import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditRateV3,axiomDiscoveryEligibleV3,discoverAxiomsV3} from './prestigeV3';
 import {itemAmplifier,discoverProgression,progressionResearchSpeed,integrationLimit,modelCore} from './progression';
 import {createItem,equip} from './inventory';
 import {axiomRewardV2,buyProgressionNode,buyProgressionAxiom,progressionAgent,axiomResetV2} from './progressionReset';
 const prepared=(nodes:string[]=[]):GameState=>({...newGame(1000,'prepared-prestige-v3'),itemSystemV3:newItemSystemV3(),nodes});
 describe('Joint prestige/item V3 actual consumers (prepared)',()=>{
+ it('only automates integration with an explicit positive target and leaves manual plans first',()=>{
+  const initial=prepared(['T03','T04','T06']);const funded:GameState={...initial,qualityLevel:5,efficiencyLevel:5,credits:1e12,data:1e12,exactEconomy:{...initial.exactEconomy,credits:S.from(1e12).toJSON(),data:S.from(1e12).toJSON()},progression:{...initial.progression,trainingAuto:true}};
+  const run=(s:GameState,active=false)=>advanceTo(s,s.savedAt+1,active,()=>.5).state;
+  expect(protectedData(funded,'research').isZero()).toBe(true);
+  expect(run(funded).activeTraining?.track).toBe('quality');
+  const target={...funded,progression:{...funded.progression,trainingTargets:{quality:0,efficiency:0,integration:2}}};
+  expect(protectedData(target,'research').compare(S.zero())).toBeGreaterThan(0);expect(run(target).activeTraining?.track).toBe('integration');
+  expect(run({...target,integrationLevel:2}).activeTraining?.track).toBe('quality');
+  const manual:GameState={...funded,trainingQueue:[{track:'integration',targetLevel:1}]};expect(protectedData(manual,'research').compare(S.zero())).toBeGreaterThan(0);expect(run(manual).activeTraining?.track).toBe('integration');
+  expect(run({...funded,qualityLevel:7,efficiencyLevel:3}).activeTraining?.track).toBe('efficiency');
+  const done={...funded,progression:{...funded.progression,trainingTargets:{quality:5,efficiency:5,integration:0}}};expect(run(done).activeTraining).toBeNull();
+  expect(run({...funded,itemSystemV3:undefined}).activeTraining?.track).toBe('integration');
+  const online=run(target,true),offline=run(target);expect(online.activeTraining?.track).toEqual(offline.activeTraining?.track);expect(online.activeTraining?.jobId).toEqual(offline.activeTraining?.jobId);expect(online.activeTraining?.creditCostExact).toEqual(offline.activeTraining?.creditCostExact);expect(online.training).toBe(offline.training);expect(online.itemSystemV3).toEqual(offline.itemSystemV3);
+  expect(advanceTo(offline,offline.savedAt,false,()=>.5).state.itemSystemV3).toEqual(offline.itemSystemV3);
+ });
+ it('applies C01 only once at real passive production boundaries and shares seven-language descriptions',()=>{
+  const base=prepared();const rich={...base,credits:1e9,exactEconomy:{...base.exactEconomy,credits:S.from(1e9).toJSON()}};
+  for(const level of [1,2,3]){const s=buyHardwareClass({...rich,axiomUpgradeLevels:{...rich.axiomUpgradeLevels,C01:level}},'calculator',1);const first=advanceTo(s,s.savedAt+(3*BALANCE.passiveCircuitSecondsPerClass-1)*1000,false,()=>.5).state;expect(S.fromJSON(first.itemSystemV3!.componentsProduced).toNumber()).toBe(2*BALANCE.prestigeV3.axioms.C01[level-1]);const last=advanceTo(first,s.savedAt+3*BALANCE.passiveCircuitSecondsPerClass*1000,false,()=>.5).state;expect(S.fromJSON(last.itemSystemV3!.componentsProduced).toNumber()).toBe(3*BALANCE.prestigeV3.axioms.C01[level-1]);expect(advanceTo(last,last.savedAt,false).state.itemSystemV3).toEqual(last.itemSystemV3);}
+  for(const language of languages){expect(prestigeV3Description('C01',language)).toContain('×2 / ×3 / ×4');expect(prestigeV3Description('C01',language)).not.toContain('{');}expect(prestigeV3Description('unknown','en')).toBeNull();
+ });
  it('keeps all existing IDs and purchase costs',()=>{
   expect(Object.keys(BALANCE.progression.nodes)).toHaveLength(60);expect(Object.keys(BALANCE.progression.axioms)).toHaveLength(24);
   const s=prepared(),price=BALANCE.progression.nodes.H06.cost;const funded={...s,unspentINT:price,exactEconomy:{...s.exactEconomy,unspentINT:S.from(price).toJSON()}};const bought=buyProgressionNode(funded,'H06');expect(bought.nodes).toContain('H06');expect(exactEconomyValue(bought,'unspentINT').isZero()).toBe(true);expect(buyProgressionNode(bought,'H06')).toBe(bought);
@@ -37,7 +61,7 @@ describe('Joint prestige/item V3 actual consumers (prepared)',()=>{
  });
  it('reaches precisely the new gain/credit exponent contracts',()=>{
   const s={...prepared(['I05','I10']),axiomUpgradeLevels:{...newGame(0).axiomUpgradeLevels,A01:5}};
-  expect(prestigeGainExponentV3(s)).toBeCloseTo(.73,14);expect(prestigeCreditExponentV3(s)).toBeCloseTo(.22,14);
+  expect(prestigeGainExponentV3(s)).toBeCloseTo(.73,14);expect(prestigeCreditRateV3(s)).toBeCloseTo(.22,14);
  });
  it('charges the new F07 price only for new research starts',()=>{
   const s=prepared(),base=researchQuote(s,'materialAnalysis')!.cost;

@@ -7,6 +7,8 @@ namespace IdleIntelligence.Core
     public static class PrestigeV3
     {
         static double C(string key)=>ItemV3Balance.Get("prestige."+key);
+        public static double PassiveComponents(GameState s)
+        {int level=MetaRules.Level(s,"C01");return level==0?1:ItemV3Balance.C01PassiveFactors[level-1];}
         public static ScientificNumber HardwareFirst(GameState s)
         {
             var value=ScientificNumber.From(PrestigeRules.Has(s,"H06")?C("hardware.H06"):1);
@@ -40,7 +42,9 @@ namespace IdleIntelligence.Core
         public static double ResearchActivity(GameState s)=>ItemSystemV3.Enabled(s)&&PrestigeRules.Has(s,"F08")?1+C("research.F08perLab")*OccupiedRegularLabs(s):1;
         public static ScientificNumber ResearchData(GameState s)=>ItemSystemV3.Enabled(s)&&PrestigeRules.Has(s,"F10")?ScientificNumber.One.Add(ItemSystemV3.ResearchLevels(s).Divide(ScientificNumber.From(C("research.F10scale")))).Pow(C("research.F10exponent")):ScientificNumber.One;
         public static double GainExponent(GameState s)=>PrestigeRules.V("intBaseExponent")+PrestigeRules.V("intAxiomExponent")*MetaRules.Level(s,"A01")+(PrestigeRules.Has(s,"I10")?C("int.I10gain"):0);
-        public static double CreditExponent(GameState s)=>PrestigeRules.V("intCreditExponent")+(PrestigeRules.Has(s,"I05")?C("int.I05"):0)+(PrestigeRules.Has(s,"I10")?C("int.I10credits"):0);
+        public static double MaterialYield(GameState s)=>ItemSystemV3.Enabled(s)&&PrestigeRules.Has(s,"W08")?C("items.W08"):1;
+        public static double CreditRate(GameState s)=>C("int.creditPerINT")+(PrestigeRules.Has(s,"I05")?C("int.I05"):0)+(PrestigeRules.Has(s,"I10")?C("int.I10credits"):0);
+        public static ScientificNumber CreditFactor(GameState s)=>ScientificNumber.One.Add(s.Prestige.Cycle.Times(CreditRate(s)));
         public static bool DiscoveryEligible(GameState s)=>!ChallengeRules.Active(s)&&s.Prestige.Cycle.CompareTo(ScientificNumber.From(C("discovery.cycleINT")))>=0&&s.Prestige.known.Concat(s.Workshop.nodes).Where(id=>PrestigeBalance.Nodes.Any(node=>node.Id==id)).Distinct().Count()>=C("discovery.distinctNodes");
         public static void Discover(GameState s){if(ItemSystemV3.Enabled(s)&&!s.ItemSystemV3.axiomDiscovered&&DiscoveryEligible(s)){s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=s.SavedAt;}}
         public static ScientificNumber AxiomComputeExtra(GameState s)=>ItemSystemV3.Enabled(s)?ScientificNumber.From(C("axioms.A03")).Pow(MetaRules.Level(s,"A03")):ScientificNumber.One;

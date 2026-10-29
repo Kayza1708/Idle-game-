@@ -63,22 +63,22 @@ namespace IdleIntelligence.Core
             var cost=HardwareCost(state,i,quantity);if(state.Credits.CompareTo(cost)<0)return state;
             var s=state.Copy();s.Credits=s.Credits.Subtract(cost);s.Hardware[i]+=quantity;if(s.AdvanceLog!=null)s.AdvanceLog.Hardware[i]+=quantity;LocalJournal.Record(s,"hardware-purchase",id);Lifetime.Hardware(s,i,quantity,state.Hardware[i]);if(ChallengeRules.Active(s))s.Challenges.Run.metrics.hardwarePurchases++;foreach(var edge in Balance.Hardware[i].Milestones.Where(m=>state.Hardware[i]<m.Threshold&&s.Hardware[i]>=m.Threshold))s.Prestige.milestones=s.Prestige.milestones.Union(new[]{id+":"+edge.Threshold}).ToArray();if(ChallengeRules.Active(s))s.Challenges.Run.metrics.milestones+=Balance.Hardware[i].Milestones.Count(m=>state.Hardware[i]<m.Threshold&&s.Hardware[i]>=m.Threshold);Workshop.PaidHardware(s,i,state.Hardware[i]);RetentionRules.HardwareOnboarding(s);return Guide(s);
         }
-        public static ScientificNumber TapValue(GameState s,double now)
+        public static ScientificNumber TapValue(GameState s,double now,bool includeProc=true)
         {
             if(ChallengeRules.Is(s,"no-taps")||!ScientificNumber.Finite(now)||now<s.SavedAt||s.LastTap>=0&&now-s.LastTap<Balance.TapGap)return ScientificNumber.Zero;
             uint rng=unchecked(s.CritRng*1664525u+1013904223u);int combo=s.LastTap>=0&&now-s.LastTap<=Balance.ComboIdle?s.Combo:0;
-            var relay=Workshop.Equipped(s).FirstOrDefault(i=>i.type=="impulse-relay");double proc=relay!=null&&(relay.relayTaps+1)%10==0?2*Workshop.SpecialScale(s,relay)*Workshop.Amplifier(s):0;
+            var relay=Workshop.Equipped(s).FirstOrDefault(i=>i.type=="impulse-relay");double proc=includeProc&&!ItemSystemV3.Enabled(s)&&relay!=null&&(relay.relayTaps+1)%10==0?2*Workshop.SpecialScale(s,relay)*Workshop.Amplifier(s):0;
             double chance=Math.Min(PrestigeRules.V("critCap"),Balance.TapCrit+(PrestigeRules.Has(s,"S02")?PrestigeRules.EFor(s,"S02"):0)+(PrestigeRules.Has(s,"S05")?PrestigeRules.EFor(s,"S05"):0)+(MetaRules.Secondary(s,"K04")?PrestigeRules.EFor(s,"D06crit"):0)),crit=Balance.TapCritBase+(PrestigeRules.Has(s,"S03")?PrestigeRules.EFor(s,"S03"):0)+(PrestigeRules.Has(s,"S06")?PrestigeRules.EFor(s,"S06"):0);crit*=MetaRules.Pow(s,"A04");
             double x=Math.Max(1,(1+Workshop.Bonus(s,"tap"))*PrestigeRules.F(s,"S01")*PrestigeRules.F(s,"S08")*Math.Pow(Effect("tapAmplification"),Level(s,"tapAmplification")));double q=Balance.TapBase*(1+Math.Log(x))*PrestigeRules.F(s,"S10")*MetaRules.Factor(s,"tap")*(1+Balance.TapCombo*combo)+proc;
             double seconds=Balance.TapSoft*q/(Balance.TapSoft+q*(1+chance*(crit-1)));
             var basis=Income(s,false).Times(seconds);var minimum=ScientificNumber.From(PurchaseRules.Income(s));if(basis.CompareTo(minimum)<0)basis=minimum;
-            return basis.Times(rng/4294967296d<chance?crit:1);
+            bool critical=rng/4294967296d<chance;return basis.Times(critical?crit:1).Add(ItemSystemV3.Enabled(s)&&includeProc?ItemSystemV3.RelayBonus(s,critical):ScientificNumber.Zero);
         }
         public static GameState Tap(GameState state,double now)
         {
             if(ChallengeRules.Is(state,"no-taps")||!ScientificNumber.Finite(now)||now<state.SavedAt||state.LastTap>=0&&now-state.LastTap<Balance.TapGap)return state;
             var s=state.Copy();uint rng=unchecked(s.CritRng*1664525u+1013904223u);int combo=s.LastTap>=0&&now-s.LastTap<=Balance.ComboIdle?s.Combo:0;
-            var relay=Workshop.Equipped(s).FirstOrDefault(i=>i.type=="impulse-relay");if(relay!=null)s.Workshop.inventory.First(i=>i.id==relay.id).relayTaps++;
+            var relay=Workshop.Equipped(s).FirstOrDefault(i=>i.type=="impulse-relay");if(relay!=null){var item=s.Workshop.inventory.First(i=>i.id==relay.id);item.relayTaps=ItemSystemV3.Enabled(s)?(item.relayTaps+1)%(long)ItemV3Balance.Get("relay.interval"):item.relayTaps+1;}
             PrestigeRules.Earn(s,TapValue(state,now));s.CritRng=rng;s.LastTap=now;s.Combo=(int)Math.Min(Balance.ComboMax,combo+1);s.Taps++;LocalBalanceHistory.Tap(s);if(!s.Journal.tapsRecorded){s.Journal.measuredTaps=s.Lifetime.taps;s.Journal.tapsRecorded=true;}s.Journal.measuredTaps++;s.Lifetime.taps++;
             int charge=(int)Math.Min(Balance.OverdriveCharge,s.Charge+1);
             if(charge>=Balance.OverdriveCharge&&now>=s.CooldownUntil){s.Charge=0;s.ActiveUntil=now+Math.Min(Balance.OverdriveMaxSeconds,Balance.OverdriveSeconds*PrestigeRules.F(s,"S07")*(1+Bonus(s,"overclock"))*(1+Workshop.Device(s,"overclockDuration")))*1000;s.CooldownUntil=now+Balance.OverdriveInterval;s.Overdrives++;s.Lifetime.overclocks++;}else s.Charge=charge;
@@ -155,7 +155,7 @@ namespace IdleIntelligence.Core
             var s=Workshop.Discover(MissionRules.Roll(state,state.SavedAt).Copy());s.AdvanceLog=capture;Workshop.SettleBlueprintReward(s);double elapsed=(now-s.SavedAt)/1000,limit=OfflineLimit(s),left=Math.Min(elapsed,limit);s.AdvanceLog=capture;if(capture!=null){capture.From=state.SavedAt;capture.Through=now;capture.Elapsed=elapsed;capture.Credited=left;capture.Discarded=Math.Max(0,elapsed-left);}
             while(left>1e-9)
             {
-                PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);s=PrestigeAutomation.StartJobs(s);s=MaterialAnalysis.StartQueued(s);s=MetaAutomation.Fusion(s);
+                s=Workshop.Discover(s);PrestigeRules.Discover(s);s=PrestigeAutomation.Agent(s);s=PrestigeAutomation.StartJobs(s);s=MaterialAnalysis.StartQueued(s);s=MetaAutomation.Fusion(s);
                 double trainSpeed=WorkSpeed(s),researchSpeed=ResearchSpeed(s,s.ResearchJob);
                 double slice=Math.Min(Industry.NextBoundary(s),Math.Min(left,(Balance.SimulationStepMilliseconds-s.SavedAt%Balance.SimulationStepMilliseconds)/1000));
                 if(s.Workshop.hasAnalysis)slice=Math.Min(slice,Math.Max(0,(s.Workshop.analysis.required-s.Workshop.analysis.done)/MaterialAnalysis.Speed(s)));

@@ -5,13 +5,15 @@ namespace IdleIntelligence.Core
 {
     // Development contract; the save boundary rejects it until full V3 migration
     // and all completion-event contracts are accepted. Never silently drop it.
+    [Serializable] public sealed class ItemV3Synthesis {public string id,component;public double multiplier;public ItemV3Synthesis Copy()=>(ItemV3Synthesis)MemberwiseClone();}
     public sealed class ItemV3State
     {
         public int version=3;
         public ScientificNumber dataProduced=ScientificNumber.Zero,knowledgeProduced=ScientificNumber.Zero,componentsProduced=ScientificNumber.Zero;
         public double runMinutes;
-        public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak,scannerAnalyses;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
-        public ItemV3State Copy()=>(ItemV3State)MemberwiseClone();
+        public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak;public long scannerAnalyses;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
+        public double[] synthesisRemainders=new double[ItemBalance.ComponentIds.Length];public ItemV3Synthesis synthesisContract;
+        public ItemV3State Copy(){var v=(ItemV3State)MemberwiseClone();v.synthesisRemainders=(double[])synthesisRemainders.Clone();v.synthesisContract=synthesisContract?.Copy();return v;}
     }
     public static class ItemSystemV3
     {
@@ -20,17 +22,34 @@ namespace IdleIntelligence.Core
         public static void Validate(GameState s)
         {
             var v=s?.ItemSystemV3;if(v==null)return;
-            if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
+            if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
+            if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.scannerAnalyses<0||v.scannerAnalyses>MaxExactSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
         }
         public static void RecordProduction(GameState s,double seconds,ScientificNumber data,ScientificNumber knowledge)
         {
             if(!Enabled(s))return;if(!ScientificNumber.Finite(seconds)||seconds<0)throw new ArgumentOutOfRangeException(nameof(seconds));
             var v=s.ItemSystemV3;v.dataProduced=v.dataProduced.Add(data);v.knowledgeProduced=v.knowledgeProduced.Add(knowledge);v.runMinutes+=seconds/60;
         }
+        public static void RecordComponents(GameState s,int component,long amount,string source)
+        {
+            if(!Enabled(s))return;switch(source){case "analysis":case "synthesis":case "passive-hardware":case "paid-hardware-package":case "paid-class-upgrade":break;default:return;}
+            if(component<0||component>=ItemBalance.ComponentIds.Length||amount<0)throw new ArgumentOutOfRangeException(nameof(amount));
+            s.ItemSystemV3.componentsProduced=s.ItemSystemV3.componentsProduced.Add(ScientificNumber.From(amount));
+        }
         public static void ResetProduction(GameState s,bool axiom=false)
         {
-            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;
+            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;
             if(axiom){v.knowledgeProduced=ScientificNumber.Zero;v.componentsProduced=ScientificNumber.Zero;}
+        }
+        public static ItemV3State ChallengeState(GameState main)
+        {
+            if(!Enabled(main))return null;Validate(main);var v=main.ItemSystemV3;return new ItemV3State{nextTrainingSequence=v.nextTrainingSequence,archiveBlueprintRight=ArchiveBlueprintRight(main),axiomDiscovered=v.axiomDiscovered,axiomDiscoveryAt=v.axiomDiscoveryAt};
+        }
+        public static void RestoreChallengeSequence(GameState main,GameState shadow)
+        {
+            if(!Enabled(main)||!Enabled(shadow))return;Validate(main);Validate(shadow);main.ItemSystemV3.nextTrainingSequence=Math.Max(main.ItemSystemV3.nextTrainingSequence,shadow.ItemSystemV3.nextTrainingSequence);
+            // Keep the main completion marker and active paid job. A later shadow
+            // completion must not make that older main job unclaimable.
         }
         // Exact IDs, not economy bounds. No normal-save or item payload changes.
         const long MaxExactSequence=9007199254740991L;
@@ -63,6 +82,15 @@ namespace IdleIntelligence.Core
         }
         public static IEnumerable<ItemInstance> Equipped(GameState s)
         {var seen=new HashSet<string>();foreach(var item in Workshop.Equipped(s))if(seen.Add(item.type))yield return item;}
+        public static ScientificNumber RelayBonus(GameState s,bool critical)
+        {
+            if(!Enabled(s))return ScientificNumber.Zero;
+            var item=Equipped(s).FirstOrDefault(i=>i.type=="impulse-relay");if(item==null)return ScientificNumber.Zero;
+            if(item.relayTaps<0||item.relayTaps>9007199254740991L)throw new FormatException("Invalid relay counter");
+            if((item.relayTaps+1)%(long)C("relay.interval")!=0)return ScientificNumber.Zero;
+            var regular=s.Copy();regular.ActiveUntil=0;
+            return Game.Income(regular,false).Times(C("relay.seconds")*AbilityStrength(s,item)*(critical?C("relay.critical"):1));
+        }
         public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);
         public static bool Has(GameState s,string id)=>Equipped(s).Any(i=>i.type==id);
         public static ScientificNumber BaseFactorScientific(GameState s,string family)
@@ -83,6 +111,26 @@ namespace IdleIntelligence.Core
         {double p=context==null?Strength(item):AbilityStrength(context,item),q=context==null?Math.Sqrt(p):ExponentStrength(context,item);return ScientificNumber.From(C("tensor.base")).Pow(p).Multiply(ScientificNumber.One.Add(training.Divide(ScientificNumber.From(C("tensor.trainingScale")))).Pow(q));}
         public static ScientificNumber Lens(ScientificNumber raw,ItemInstance item,bool combination=false)=>
             (raw.CompareTo(ScientificNumber.One)<0?ScientificNumber.One:raw).Pow(C("lens.exponent")*Math.Sqrt(Strength(item))*(combination?C("combinations.industrial.lensExponent"):1));
+        public static double SynthesisYield(GameState s)
+        {
+            if(!Enabled(s))return 1;int level=MetaRules.Level(s,"C06");if(level<0||level>ItemV3Balance.C06SynthesisFactors.Length)throw new FormatException("Invalid C06 level");
+            return (level==0?1:ItemV3Balance.C06SynthesisFactors[level-1])*(Has(s,"fleet-coordinator")&&Has(s,"synthesis-coordinator")?C("combinations.industrial.yield"):1);
+        }
+        public static long SynthesisOutput(GameState s,int component)
+        {double remainder=Enabled(s)?s.ItemSystemV3.synthesisRemainders[component]:0;return (long)Math.Floor(remainder+SynthesisYield(s)+1e-12);}
+        public static void IdentifySynthesis(GameState s)
+        {if(!Enabled(s)||s.Industry.synthesis==null)return;if(s.ItemSystemV3.synthesisContract!=null)throw new FormatException("Existing paid synthesis receipt");var job=s.Industry.synthesis;s.ItemSystemV3.synthesisContract=new ItemV3Synthesis{id=job.key,component=job.id,multiplier=SynthesisYield(s)};}
+        public static long SettleSynthesis(GameState s,Job job)
+        {
+            if(!Enabled(s)||s.ItemSystemV3.synthesisContract==null)return 1;var v=s.ItemSystemV3;var receipt=v.synthesisContract;int component=Array.IndexOf(ItemBalance.ComponentIds,job.id);
+            if(receipt.id!=job.key||receipt.component!=job.id||component<0||!ScientificNumber.Finite(receipt.multiplier)||receipt.multiplier<1)throw new FormatException("Mismatched paid synthesis receipt");
+            double remainder=v.synthesisRemainders[component];if(!ScientificNumber.Finite(remainder)||remainder<0||remainder>=1)throw new FormatException("Invalid synthesis remainder");double total=remainder+receipt.multiplier;long amount=(long)Math.Floor(total+1e-12);v.synthesisRemainders[component]=Math.Max(0,total-amount);v.synthesisContract=null;return amount;
+        }
+        public static ScientificNumber AnalysisFactor(GameState s)
+        {
+            if(!Enabled(s))return ScientificNumber.One;Validate(s);var item=Equipped(s).FirstOrDefault(i=>i.type=="field-scanner");if(item==null)return ScientificNumber.One;
+            double p=AbilityStrength(s,item);return ScientificNumber.From(C("scanner.base")).Pow(p).Multiply(ScientificNumber.One.Add(Softcap(ScientificNumber.From(s.ItemSystemV3.scannerAnalyses),C("scanner.threshold")).Times(C("scanner.perAnalysis")*p)));
+        }
         public static ScientificNumber ComputeFactor(GameState s)
         {
             if(!Enabled(s))return ScientificNumber.One;Validate(s);var result=ScientificNumber.One;var h=HardwareOwned(s);var m=TrainingLevels(s);

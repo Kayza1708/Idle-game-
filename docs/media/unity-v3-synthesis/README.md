@@ -1,0 +1,5 @@
+# C06 und nächste Syntheseausgabe – echte Unity-Ansichten
+
+22 unveränderte Game-View-PNGs aus den beiden C06-PlayMode-Tests in PlannedQueueTests, Unity6000.3.26f1. Isolierte finanzierte Teststände: tatsächlicher normaler C06-Kauf, danach schreibgeschützte V3-In-Memory-Vorschau. Syntheseansicht verwendet ausdrücklich vorbereiteten0,5-Komponentenrest, um den nächsten tatsächlichen ganzzahligen Ertrag+2 bei×1,5 zu zeigen. Die tatsächlichen bezahlten Produktions-/Resetabläufe werden separat gegen TS geprüft. Kein V3-Dateisave, keine natürliche Kampagne oder Geräteabnahme.
+
+DE/EN320/390/430beider Ansichten selbst angesehen: Titel, Effekte, Kosten, Ausbeute und Aktion sichtbar, ohne Überschneidung. Weitere fünf Sprachen390px erfasst; automatischer Text-/Platz-/Touchzieltest. Bestehende großzügige Komponentenfenster und originale Grafiken beibehalten; keine neue Designrunde, Assets oder Lizenzänderungen. Animationen unverändert, diese Bilder sind keine neue Animationsabnahme. Prüfsummen in manifest.json.

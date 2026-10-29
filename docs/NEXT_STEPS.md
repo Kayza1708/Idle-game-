@@ -216,3 +216,21 @@ Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehe
 
 - 29.10.: Wissenschaftliche Legacy-Itembasis bei tatsächlicher Compute-/Creditsproduktion ohne vorzeitige Double-Konvertierung erhalten;71gemeinsame Produktionsfälle bis10^20000,191EditMode und9gezieltePlayMode grün. Keine Saveaktivierung. Aktive Altbaseline90Tage/149Prestiges; passive90Tage/44Prestiges, Grenzen in baseline-notes.md.
 - Derselbe wissenschaftliche Basisstand: vollständige154Dateien/2.000Vitest grün (323,84s), vollständige Generatorparität und Webbuild/Typecheck bestanden. Noch keine vollständige V3-Freigabe.
+
+- 29.10.: T06 schützt Integration ohne positives Ziel vor automatischem Start/Datenreservierung; manuelle Pläne bleiben zuerst. Acht echte gemeinsame Start-/Zahlungsfälle,2.001Vitest,193EditMode,10PlayMode und finale1/1mobileUI grün;11echte Bilder,DE/EN320/390/430selbstgesehen. Keine V3-Savemigration behauptet. Nächster Xcode-Playtest ausdrücklich erst nach vollständigemV3: `docs/item-system-v3/playtest-gate.md`.
+
+- 29.10.: Persönlichen K-Zähler an tatsächliche Analyse/Synthese/passive Hardware/Meilensteinproduktion gebunden; Shop/Gifts/Import/Rückgewinnung ausgeschlossen, keine Wallet-Rückrechnung. Sieben tatsächliche gemeinsame Folgen samt echten Resets und wissenschaftlicher Kopierisolation.2.006Vitest,195EditMode,18gezieltePlayMode grün. Discovery-Zeitpunkt an TS angeglichen; native Klassenupgrade-Erwerbsfrage separat in source-inconsistencies.md. VollständigesV3 vor Xcode unverändert offen.
+
+- 29.10.: C01 passive Mengen×2/×3/×4 an echte Stundenfunde angeschlossen; elf Komponentenfolgen einschließlich mehrerer Axiomguthaben, sieben echte Detailsprachen.2.007Vitest,14gezielteEditMode,13PlayMode und finale6UI-Prüfungen grün. DE/EN320/390/430selbstgesehen. VollständigesV3/Savefreigabe/Xcode weiterhin offen; `docs/item-system-v3/implementation.md`.
+
+- 29.10.: Feldscanner an tatsächliche bezahlte Analyseabschlüsse gebunden, Synthese ausdrücklich vom Scannerbonus getrennt.17gemeinsame Produktionsfolgen,2.011Vitest und197vollständigeEditMode grün; Typecheck/Build/Generatorparität bestanden. V3-Migration/Details/Bibliotheksbereich weiter offen. Danach C06-Ausbeute und Startverträge, weiterhin kein Xcode-Zwischenbuild.
+
+- 29.10.: C06-Ausbeute samt bezahltem Startvertrag/Resten und bestätigtes lineares INT-Einkommen10/16/22% umgesetzt.91Produktionsreferenzen/23tatsächliche Folgen,2.019Vitest/199vollständigeEditMode,12PlayMode+1mobileINT-Prüfung grün.44Originalbilder,DE/EN320/390/430selbstgesehen. V3-Dateimigration/volle Ereignisse/Kataloge weiterhin offen; kein Xcode-Zwischenbuild. Verbindliche Nutzerergänzung in `docs/item-system-v3/amendments.md`.
+
+- 29.10.: W08 an bezahlte Analyse-/reguläre Hardwarepakete gebunden, alter V3-Tempofaktor entfernt, Synthese/Analyse-Nullzugriff korrigiert.29echte Referenzfolgen,2.024Vitest/199EditMode/14PlayMode grün; elfmobileOriginalbilder. Keine V3-Savefreigabe. Nächste Abhängigkeit: tatsächliche Challenge-Einstiege verlieren bislang das neue Regel-Flag; persönliche Zähler/Main/IDs isoliert übernehmen.
+
+### 29.10.: V3-Challenge-Grenzen geprüft
+Tatsächliche Einstiege/Rückkehr, persönliche Zähler, technische Trainings-IDs, B05-Rekordgrenze, Erfolg/Abbruch und Main-Aufträge über fünf TS-/C#-Folgen geprüft.2.028Vitest,203vollständigeEditMode,13gezieltePlayMode grün. Frühere offene Flag-Lücke damit geschlossen; V3-Dateireload bleibt offen. Weiter mit tatsächlichen Itemereignissen (Impulsrelais/Startverträge/Arbeit), sechs Erwerbswegen, vollständiger Migration und UI, erst danach Xcode-Playtest.
+
+### 29.10.: Tatsächliches Impulsrelais
+Separater Zehnerbonus mit eigenem Critfaktor, Quoten-/Transaktionsparität, Eingabeausschlüssen und erhaltenem Exemplarstand geprüft:2.033Vitest,205vollständigeEditMode,11gezieltePlayMode. Als Nächstes Burst/Kryo und zeitlich begrenzte Kombinationsverträge, anschließend weitere Arbeits-/Materialereignisse. VollständigeV3-Migration,42er-Erwerb,UI und Nachherkampagnen bleiben Playtestvoraussetzung.

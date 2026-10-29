@@ -2,11 +2,13 @@
 
 Dies ist eine Implementierungsinventur, **keine Freigabe**. Normale Spielstände sind noch nicht auf V3 umgestellt. „Rechenpfad“ bedeutet an `Game.Compute/Income/DataRate/WorkSpeed/KnowledgeRate` bzw. die entsprechenden TS-Funktionen angebunden und in isolierten Zuständen geprüft. Es bedeutet nicht, dass Erwerb, neue Zähler, Migration oder UI bereits fertig sind.
 
+Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesondere linearer INT-Einkommensbonus10/16/22%.
+
 ## Itemfähigkeiten
 
 | Nr. | Dauerhafte ID / Name | Tatsächlicher bisheriger V3-Pfad | Noch erforderlicher Vertrag |
 |---:|---|---|---|
-| 1 | `impulse-relay` | noch offen | akzeptierte manuelle Taps am Exemplar; separater Zehnerbonus, Crit ×1,5; Referenz ohne temporäre Faktoren |
+| 1 | `impulse-relay` | tatsächliche akzeptierte Taps, separater Zehnerbonus aus regulärer Produktion, eigener Crit×1,5; gespeicherter Exemplarstand modulo10 | vollständige V3-Dateimigration/Details; bestehende Animation bleibt kosmetisch |
 | 2 | `quantum-chip` | Compute, H-Snapshot, Zweier-/Dreierkombination | natürliche Erwerbs-/Loadout-/Migrationsabnahme |
 | 3 | `neural-asic` | Credits, M-Snapshot, Distilled-Kombination | gemeinsame Erwerbs-/Loadoutabnahme |
 | 4 | `photonic-array` | Zweier-Lernkombination | bezahlter Trainingsabschluss, Forschungsarbeitsübertrag ohne Rekursion |
@@ -29,7 +31,7 @@ Dies ist eine Implementierungsinventur, **keine Freigabe**. Normale Spielstände
 | 21 | `model-echo-core` | ursprünglicher Modellkern × ursprünglicher Revenuefaktor genau einmal potenziert | alle zehn Modelle/Slotwechsel und UI |
 | 22 | `mnemonic-anchor` | Training aus tatsächlichen Modellupgradeleveln | alle Erwerbs-/Reset-/Wechselfälle |
 | 23 | `insight-archive` | zukünftige INT-Gewichtung; V3-Lernen/Herstellen über bestehendes I04-/Research-Archive-Recht | vollständige Altimport-/Save-Migration und erreichbare V3-UI-Abnahme |
-| 24 | `field-scanner` | offen | bezahlte Analyseabschlüsse während Ausrüstung zählen; Live-Tempo |
+| 24 | `field-scanner` | tatsächliche bezahlte Analyseabschlüsse bei aktiver Ausrüstung; Live-Tempo mit S(A,25), W10 einmal | vollständige Save-Migration/Details; Bibliotheks-Dreierkombination separat |
 | 25 | `lab-drone` | offen | Zusatzarbeit nur aus regulärer Laborarbeit; größtes Restlabor, stabile Gleichstände |
 | 26 | `data-prism` | Daten aus F ohne doppelte Projektzählung | Auftrags-/Reset-/Detailsabnahme |
 | 27 | `diagnostic-adapter` | offen | nur bezahlte einmalige Hardwarepakete, Restverwaltung |
@@ -106,3 +108,25 @@ V3-Trainingsstarts erhalten erst nach erfolgreichem bestehendem Start/Zahlung ei
 Nur ein wirklich abgeschlossener aktueller Auftrag mit ausgegebener kanonischer ID kann den Marker verändern. Doppelte/premature Aufrufe und unbekannte alte IDs gewähren keinen Effekt. Reguläre bezahlte Q/E-Abschlüsse bei aktivem Logik-Saat-Item erhöhen bei Wechsel bis10 oder halbieren bei gleichem Track abgerundet. Unequip behält die Serie und deren letzten gültigen Track; Abschlüsse ohne Item verändern sie nicht. Integration/Intro/Bonus/No-items geben keinen Serienfortschritt. Gem-Skip-Enden tragen ausdrücklich Bonusursache; normale Einführung Intro. IDs sind auch in den tatsächlichen Start-/Abschlussbelegen verknüpft.
 
 Sechs gemeinsame vollständige TS-/C#-Folgen prüfen wirkliche Starts, Zahlungen, Zeitfortschritt, Tempo, unequip/equip, Integration, Intro, Gem-Skip und tatsächliche Resets. Zusätzliche Guards prüfen verfrühte, doppelte, falsch formatierte oder nicht ausgegebene IDs und No-items. Die Domainzustände können weiterhin nicht als unvollständiger V3-Save geschrieben werden; echte DTO-/Altvertragsmigration und V3-Datei-Reload stehen noch aus. Diese Prüfung ist kein vorweggenommener Persistenznachweis.
+
+### C01 passive Produktion
+V3-Faktoren×2/×3/×4 tatsächlich in passiver Hardwareproduktion; zentrale sieben Sprachtexte im verbundenen Netz, Stunden-/Grenz-/Guthabenparität über elf reale Komponentenfolgen. V3-Dateimigration und natürliche Entdeckungsführung bleiben offen.
+
+### Feldscanner: reguläre Analyseereignisse
+Run-Zähler steigt am tatsächlichen bezahlten Abschluss bei Ausrüstung, bleibt beim Ablegen bestehen und leert sich an beiden echten Resetarten. Abbruch/doppelte Anzeige/alte Introaufträge/No-items ausgeschlossen. Keine Beschleunigung der Synthese durch den nur für Analysen bestimmten Scannerfaktor.17gemeinsame tatsächliche Produktionsfolgen prüfen auch Ausrüsten während Auftrag, Ablegen vor Abschluss, Ablegen/Wiederanlegen, Zahlung und Resets. Vollständige V3-Speicherung und Details weiterhin offen.
+
+### C06 und linearer INT-Bonus
+Neue bezahlte Synthesen speichern ihren Ausbeutefaktor(1,5/2/3) in einem eindeutig zugeordneten Vertrag. Komponentenweise Bruchteilsreste, Kopierisolation und Erhaltung laufender bezahlter Synthesen an beiden echten Resetarten geprüft; spätere C06-Käufe bewerten nichts rückwirkend. Alte bezahlte Synthesen ohneV3-Beleg behalten Ertrag1. Industrielle Zweierkombination im Faktor vorbereitet; neue Katalogitems/Rezepte weiter offen. Neue sieben Sprachbeschreibungen und wahrer nächster ganzzahliger Syntheseertrag in tatsächlichen Details.
+
+Nutzerergänzung29.10.: Einkommensbonus jetztlinear `1+cycleINTEarned×Satz`, Satz10/16/22%. AusgegebeneINT zählen, normalerPrestige erhältZyklus, Axiomreset leert. I10-INT-Gewinnanteil unverändert. Die ursprüngliche Exponentenforderung ist ausdrücklich ersetzt, siehe amendments.md.91Produktionsreferenzen bis10^1000INT plus23tatsächliche Komponenten-/Resetfolgen vergleichen unter anderem Einkommensfaktor und verdiente/freieINT. V3-Speicherung/Aktivierung weiterhin offen.
+
+### W08 – ausschließlich bezahlte Materialproduzenten
+Alter Fertigungs-/Schmiedetempofaktor im V3-Pfad entfernt. Bezahlte Analyse hält×2 beim Start im vorhandenen eindeutigen Ausbeutevertrag fest; alte Aufträge werden nicht nachträglich aufgewertet. Reguläre einmalige bezahlte Hardware-Meilensteinpakete werden vor Rundung verstärkt, vorhandene Bruchteile nicht verdoppelt. Allgemeine Zuschüsse/Shop/Handel/Erstattung/Zerlegung/passive Funde/Synthese bleiben unverändert; gesonderte Klassenupgrade-Extraauszahlungen sind keine erneuten regulären Meilensteine und bleiben ausgeschlossen. Der native Klassenkauf ist weiterhin ein getrenntes offenes Quellproblem.
+
+Neuer Name/Verbraucherbeschreibung in sieben Sprachen, tatsächliche Analyse-Mengenanzeige einschließlich eingefrorenem Aktivauftrag angepasst.29tatsächliche Produktionsfolgen vergleichen auch laufenden Auftrag über Prestige, späteren W08-Kauf und unveränderte ausgeschlossene Quellen. Alle15Hardwareklassen/sechsMeilensteine mit vorhandenen Bruchteilen unabhängig geprüft. Normale64/24-Regeln unverändert.
+
+Nächste konkret gefundene Abhängigkeit: beide tatsächlichen Challenge-Einstiegskonstruktoren erstellen frischen Zustand ohneItemV3-Flag. Vor vollständiger Freigabe neue Regeln in Shadow übernehmen, persönliche Zähler isolieren und Hauptspiel samt pausierten bezahlten Aufträgen verlustfrei wiederherstellen; monotone Trainings-IDs dabei nicht wiederverwenden. Keine Abnahme allein anhand früherer direkter No-items-Fixtures.
+
+
+### Tatsächliche Challenge-Eintritts-/Rückkehrverträge
+V3-Regelkennung über die echten Fabriken erhalten; neuer persönlicher Produktionsscope, dauerhafte Z-Historie/B05-Rekorde und legitime Entdeckungsrechte getrennt. Hauptspieljobs und -zähler bleiben pausiert. Nur monotone nächste Trainingsnummer zurückführen; niemals den Challenge-Abschlussmarker auf einen älteren bezahlten Hauptspieljob anwenden. Neue kopierte Relais haben eigenen Triggerstand0; Hauptitem unverändert. Fünf gemeinsame echte Start-/Arbeits-/Rückkehrfolgen, einschließlich aktiver/offliner Arbeit, Erfolg/Abbruch, doppeltem Claim und bezahlter Hauptspiel-Fortsetzung. Dateimigration und tatsächlicher V3-Reload bleiben separat offen.

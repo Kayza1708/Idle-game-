@@ -1,3 +1,6 @@
+import {synthesisOutputText,prestigeV3Name} from './prestigeV3Copy';
+import {prestigeV3Description} from './prestigeV3Copy';
+import {usesItemV3} from './itemSystemV3';
 import {ProgressionNetwork,type NetworkNode} from './ProgressionNetwork';
 import { synthesisQuote } from "./progressionWork";
 import { useState, useEffect, useRef } from "react";
@@ -166,7 +169,7 @@ export function ProgressionPanel({ s, act }: Props) {
       {layer==='int'&&<section className="v2-system-info v2-company-milestone" data-company-gate={exactEconomyValue(s,"totalINTEarned").compare(ScientificNumber.from(1000))>=0?"unlocked":"locked"}><h3>{de?'◆ COMPANIES · 1.000 INT':'◆ COMPANIES · 1,000 INT'}</h3><p>{exactEconomyValue(s,'totalINTEarned').compare(ScientificNumber.from(1000))>=0?de?'Freigeschaltet. Beitritt kostenlos, Gründung 500 Gems – Online-Beleg und sicherer Account erforderlich. Kein Chat.':'Unlocked. Join for free, found for 500 Gems – requires a verified account and online proof. No chat.':de?'Später verfügbar: Ab 1.000 insgesamt verdienten INT erschließt du Companies. Beitritt gratis, Gründung 500 Gems.':'Locked until 1,000 lifetime INT. Joining is free; founding costs 500 Gems.'}</p></section>}
       <ProgressionNetwork key={layer} kind={layer} de={de} effects={s.settings.effects} onSelect={setSelected}
         labels={layer==='int'?(de?labels:{H:'Hardware & compute',T:'Models & training',F:'Research & data',W:'Items & crafting',S:'Taps & overdrive',I:'INT & recovery'}):{A:de?'Skalierung':'Scaling',B:de?'Wiederaufbau':'Recovery',C:de?'Materialien':'Materials',D:de?'KI-Entwicklung':'AI development'}}
-        nodes={layer==='int'?Object.entries(BALANCE.progression.nodes).map(([id,n])=>({id:id as PrestigeNodeV2,name:n.name,order:n.cost,cost:fmt(ScientificNumber.from(n.cost))+' INT',owned:hasProgressionNode(s,id),affordable:exactEconomyValue(s,'unspentINT').compare(ScientificNumber.from(n.cost))>=0})):Object.entries(BALANCE.progression.axioms).map(([id,n],index)=>{const c=axiomNodeCost(s,id as AxiomNodeV2);return{id:id as AxiomNodeV2,name:n.name,order:index,cost:c?fmt(c)+' '+(de?'Axiome':'Axioms'):'MAX',owned:c===null,affordable:!!c&&axiomEconomyValue(s,'available').compare(c)>=0,level:axiomLevel(s,id)}}) satisfies NetworkNode[]}/>
+        nodes={layer==='int'?Object.entries(BALANCE.progression.nodes).map(([id,n])=>({id:id as PrestigeNodeV2,name:n.name,order:n.cost,cost:fmt(ScientificNumber.from(n.cost))+' INT',owned:hasProgressionNode(s,id),affordable:exactEconomyValue(s,'unspentINT').compare(ScientificNumber.from(n.cost))>=0})):Object.entries(BALANCE.progression.axioms).map(([id,n],index)=>{const c=axiomNodeCost(s,id as AxiomNodeV2);return{id:id as AxiomNodeV2,name:usesItemV3(s)?prestigeV3Name(id,s.settings.language)??n.name:n.name,order:index,cost:c?fmt(c)+' '+(de?'Axiome':'Axioms'):'MAX',owned:c===null,affordable:!!c&&axiomEconomyValue(s,'available').compare(c)>=0,level:axiomLevel(s,id)}}) satisfies NetworkNode[]}/>
       {!meta&&<details className="system-disclosure v2-system-info"><summary>{de?'Spätere Systeme':'Later systems'}</summary><p className="v2-note">{de?'Axiome: ab 1e6 Zyklus-INT und 30 verschiedenen Knoten.':'Axioms: 1e6 cycle INT and 30 distinct nodes.'}</p></details>}
       <AutomationSettings s={s} act={act} />
       {selected && node && (
@@ -185,8 +188,8 @@ export function ProgressionPanel({ s, act }: Props) {
             >
               ×
             </button>
-            <h2 id="v2-node-title">{node.name}</h2>
-            <p>{node.effect}</p>
+            <h2 id="v2-node-title">{usesItemV3(s)?prestigeV3Name(selected,s.settings.language)??node.name:node.name}</h2>
+            <p>{usesItemV3(s)?prestigeV3Description(selected,s.settings.language)??node.effect:node.effect}</p>
             {cost && (
               <p>
                 <ResourceArt id="int" /> {fmt(cost)}{" "}
@@ -703,7 +706,7 @@ export function MaterialSynthesis({ s, act }: Props) {
         </p>
       ) : (
         <button disabled={!q.allowed} onClick={() => act("v2-synthesis", id)}>
-          {de ? "1 herstellen" : "Make 1"} · {formatScientific(q.cost, 0)} Data
+          {usesItemV3(s)?synthesisOutputText(s,id,s.settings.language):(de ? "1 herstellen" : "Make 1")} · {formatScientific(q.cost, 0)} Data
         </button>
       )}
       {!q.access && (

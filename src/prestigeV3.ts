@@ -15,7 +15,7 @@ export function prestigeEffectOverridesV3(){const v=c();return{
  W05:v.items.W05,W09:v.items.W09,W10:v.items.W10,
  S04:v.tap.S04,S07:v.tap.S07,S09:v.tap.S09,
  I01:v.int.I01,I08:v.int.I08,I09:v.int.I09,
- A04:v.axioms.A04,B03:v.axioms.B03,B05:v.axioms.B05,archiveINT:v.axioms.C01[0]-1,
+ A04:v.axioms.A04,B03:v.axioms.B03,B05:v.axioms.B05,
 };}
 export function progressionEffectsV3(s:GameState){return usesItemV3(s)?{...BALANCE.progression.effects,...prestigeEffectOverridesV3()}:BALANCE.progression.effects;}
 export function prestigeHardwareFirstV3(s:GameState){
@@ -39,7 +39,10 @@ export function prestigeINTWeightV3(s:GameState){
  return result;
 }
 export const prestigeGainExponentV3=(s:GameState)=>BALANCE.progression.formula.intBaseExponent+BALANCE.progression.formula.intAxiomExponent*axiomLevel(s,'A01')+(hasProgressionNode(s,'I10')?c().int.I10gain:0);
-export const prestigeCreditExponentV3=(s:GameState)=>BALANCE.progression.formula.intCreditExponent+(hasProgressionNode(s,'I05')?c().int.I05:0)+(hasProgressionNode(s,'I10')?c().int.I10credits:0);
+export const prestigeCreditRateV3=(s:GameState)=>c().int.creditPerINT+(hasProgressionNode(s,'I05')?c().int.I05:0)+(hasProgressionNode(s,'I10')?c().int.I10credits:0);
+/** User-approved linear stacking. Earned cycle INT includes spent INT; only
+ * the actual axiom reset clears that ledger. No exponential compounding. */
+export const prestigeCreditFactorV3=(s:GameState)=>one().add(exactEconomyValue(s,'cycleINTEarned').multiplyNumber(prestigeCreditRateV3(s)));
 export function axiomDiscoveryEligibleV3(s:GameState){
  return !s.retention.activeRun&&exactEconomyValue(s,'cycleINTEarned').compare(S.from(c().discovery.cycleINT))>=0&&new Set([...s.progression.known,...s.nodes].filter(id=>Object.hasOwn(BALANCE.progression.nodes,id))).size>=c().discovery.distinctNodes;
 }
@@ -64,3 +67,12 @@ export function prestigeResearchActivityV3(s:GameState){
 export function prestigeResearchDataV3(s:GameState){
  return usesItemV3(s)&&hasProgressionNode(s,'F10')?one().add(itemV3Snapshot(s).F.divide(S.from(c().research.F10scale))).pow(c().research.F10exponent):one();
 }
+
+/** Actual passive producer, not the old insight-archive item multiplier. */
+export function prestigePassiveComponentsV3(s:GameState){
+ const level=axiomLevel(s,'C01');if(!level)return 1;const factor=c().axioms.C01[level-1];if(factor===undefined)throw new RangeError('Invalid C01 level');return factor;
+}
+
+/** Only explicit paid analysis/milestone consumers call this. It is never a
+ * global grantComponents multiplier (shop, recovery, gifts remain excluded). */
+export const prestigeMaterialYieldV3=(s:GameState)=>usesItemV3(s)&&hasProgressionNode(s,'W08')?c().items.W08:1;

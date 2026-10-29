@@ -1,3 +1,5 @@
+import {usesItemV3} from './itemSystemV3';
+import {analysisYieldLabels} from './prestigeV3Copy';
 import {CostBadge} from './CostBadge';
 import {exactEconomyValue} from './economy';
 import {ResourceArt} from './GameArt';
@@ -68,7 +70,7 @@ export function AnalysisContracts({
                     <dl>{(['components','research','blueprints'] as const).map((key)=><div key={key}><dt>{key==='components'?(de?'Komponenten':'Components'):key==='research'?(de?'Forschungsfragmente':'Research fragments'):(de?'Bauplanfragmente':'Blueprint fragments')}</dt><dd>{q.rewards[key].whole} {de?'ganz beim Abschluss':'whole at completion'} + {q.rewards[key].remainder.toFixed(6)} {de?'Rest (inkl. angesammelter Bruchteile)':'remainder (including accumulated fractions)'}</dd></div>)}</dl>
                     <p>{de?'Reguläre Grundbelohnung vor Mengenboni':'Regular base reward before quantity bonuses'}: {(q.baseRewards.components*q.rewardFactor).toFixed(6)} {de?'Komponenten':'components'}, {(q.baseRewards.research*q.rewardFactor).toFixed(6)} {de?'Forschungsfragmente':'research fragments'}, {(q.baseRewards.blueprints*q.rewardFactor).toFixed(6)} {de?'Bauplanfragmente':'blueprint fragments'}</p>
                     <p>{de?'Zusätzliche Mengenboni':'Additional quantity bonuses'}: ×{q.additional.quantityBonus.toFixed(3)} · {de?'Itemwurf-Chance':'Item roll chance'}: {(q.itemChance*100).toFixed(3)}%</p>
-                    <p>{q.additional.rareGuarantee?(de?'Analyse III: mindestens eine seltene Komponente zusätzlich gesichert; keine Grundbelohnung.':'Analysis III: at least one rare component ensured separately; not a base reward.'):(de?'Keine Seltenheitsgarantie.':'No rare-component guarantee.')} {q.additional.combinationFactor>1&&<span>{de?'Materialkartierung':'Material mapping'}: ×{q.additional.combinationFactor}, {de?'beim Start festgelegt; je Material abgerundet':'fixed at start; rounded down per material'}.</span>}</p>
+                    <p>{q.additional.rareGuarantee?(de?'Analyse III: mindestens eine seltene Komponente zusätzlich gesichert; keine Grundbelohnung.':'Analysis III: at least one rare component ensured separately; not a base reward.'):(de?'Keine Seltenheitsgarantie.':'No rare-component guarantee.')} {q.additional.combinationFactor>1&&<span>{usesItemV3(s)?analysisYieldLabels[s.settings.language]:(de?'Materialkartierung':'Material mapping')}: ×{q.additional.combinationFactor}, {de?'beim Start festgelegt; je Material abgerundet':'fixed at start; rounded down per material'}.</span>}</p>
                     </details>
                     {reason && <p role="status">{reason}</p>}
                     <button

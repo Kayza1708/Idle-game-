@@ -46,8 +46,8 @@ describe('V3 learning series from actual paid completion events',()=>{
  it('keeps receipt IDs through actual prestige and axiom transactions',()=>{
   const complete=finish(prepared(),'quality'),normal=normalResetV2({...complete,progression:{...complete.progression,entitlement:S.from(100).toJSON()}});
   expect(normal.prestigeCount).toBe(1);expect(normal.itemSystemV3!.nextTrainingSequence).toBe(2);expect(normal.itemSystemV3!.lastCompletedTrainingSequence).toBe(1);expect(normal.itemSystemV3!.learningStreak).toBe(0);
-  const cycle=S.fromString('1e12').toJSON(),axiom=axiomResetV2({...complete,cycleINTEarned:1e12,totalINTEarned:1e12,unspentINT:1e12,exactEconomy:{...complete.exactEconomy,cycleINTEarned:cycle,totalINTEarned:cycle,unspentINT:cycle},progression:{...complete.progression,known:Object.keys(BALANCE.progression.nodes).slice(0,30),entitlement:cycle},itemSystemV3:{...complete.itemSystemV3!,axiomDiscovered:true,axiomDiscoveryAt:1000}});
-  expect(axiom.axiomResetCount).toBe(1);expect(axiom.itemSystemV3!.nextTrainingSequence).toBe(2);expect(axiom.itemSystemV3!.lastCompletedTrainingSequence).toBe(1);expect(axiom.itemSystemV3!.learningStreak).toBe(0);expect(axiom.inventory).toEqual(complete.inventory);
+  const cycle=S.fromString('1e12').toJSON(),axiom=axiomResetV2({...complete,cycleINTEarned:1e12,prestigeEntitlementClaimed:1e12,totalINTEarned:1e12,unspentINT:1e12,exactEconomy:{...complete.exactEconomy,cycleINTEarned:cycle,prestigeEntitlementClaimed:cycle,totalINTEarned:cycle,unspentINT:cycle},progression:{...complete.progression,known:Object.keys(BALANCE.progression.nodes).slice(0,30),entitlement:cycle},itemSystemV3:{...complete.itemSystemV3!,axiomDiscovered:true,axiomDiscoveryAt:1000}});
+  expect(axiom.axiomResetCount).toBe(1);expect(S.fromJSON(axiom.exactAxioms.available).toNumber()).toBe(1000);expect(axiom.itemSystemV3!.nextTrainingSequence).toBe(2);expect(axiom.itemSystemV3!.lastCompletedTrainingSequence).toBe(1);expect(axiom.itemSystemV3!.learningStreak).toBe(0);expect(axiom.inventory).toEqual(complete.inventory);
  });
 
 });

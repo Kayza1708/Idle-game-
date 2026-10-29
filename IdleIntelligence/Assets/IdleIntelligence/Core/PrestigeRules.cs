@@ -28,7 +28,7 @@ namespace IdleIntelligence.Core
         }
         public static ScientificNumber Claim(GameState s)
         {var n=s.Prestige.Entitlement;var whole=n.Exponent<15?ScientificNumber.From(Math.Floor(n.ToDouble()+1e-11)):n.Floor();return whole.Subtract(s.Prestige.Cycle);}
-        public static ScientificNumber CreditFactor(GameState s)=>s.Prestige.Cycle.Add(ScientificNumber.One).Pow(ItemSystemV3.Enabled(s)?PrestigeV3.CreditExponent(s):V("intCreditExponent")+(Has(s,"I05")?V("intCreditNodeExponent"):0)+(Has(s,"I10")?V("intCreditNodeExponent"):0));
+        public static ScientificNumber CreditFactor(GameState s)=>ItemSystemV3.Enabled(s)?PrestigeV3.CreditFactor(s):s.Prestige.Cycle.Add(ScientificNumber.One).Pow(V("intCreditExponent")+(Has(s,"I05")?V("intCreditNodeExponent"):0)+(Has(s,"I10")?V("intCreditNodeExponent"):0));
         public static GameState Buy(GameState state,string id)
         {
             var node=PrestigeBalance.Nodes.FirstOrDefault(n=>n.Id==id);if(ChallengeRules.Active(state)||node==null||Has(state,id)||state.Prestige.Free.CompareTo(ScientificNumber.From(node.Cost))<0)return state;

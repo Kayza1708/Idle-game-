@@ -1,3 +1,4 @@
+import {usesItemV3,identifyItemSynthesisV3,settleItemSynthesisV3} from './itemSystemV3';
 import { addEvent } from "./telemetry";
 import { trainingDataCostScientific } from "./economy";
 import { deviceBonus } from "./deviceEffects";
@@ -19,7 +20,7 @@ import {
   secondary,
   progressionResearchSpeed,
 } from "./progression";
-import { experimentSpeed } from "./experiments";
+import { experimentSpeed,synthesisSpeed } from "./experiments";
 import { ScientificNumber } from "./scientificNumber";
 export type WorkContract = {
   required: number;
@@ -29,8 +30,8 @@ export type WorkContract = {
   familyIntegral?: { photonic: number; quantum: number };
 };
 export const fabricationSpeed = (s: GameState) =>
-  (hasProgressionNode(s, "W08") ? BALANCE.progression.effects.W08 : 1) *
-  (1 / BALANCE.progression.effects.C06) ** axiomLevel(s, "C06");
+  (!usesItemV3(s)&&hasProgressionNode(s, "W08") ? BALANCE.progression.effects.W08 : 1) *
+  (usesItemV3(s)?1:(1 / BALANCE.progression.effects.C06) ** axiomLevel(s, "C06"));
 export const analysisQuantity = (s: GameState) =>
   secondary(s, "K10") ? BALANCE.progression.effects.D06quantity : 1;
 export function prepareProgressionWork(s: GameState) {
@@ -150,16 +151,18 @@ export function advanceProgressionWork(s: GameState, seconds: number) {
   };
   const synth = p.synthesis;
   if (synth) {
-    const done = synth.work + seconds * experimentSpeed(s);
+    const done = synth.work + seconds * synthesisSpeed(s);
     if (done + 1e-8 >= synth.required) {
+      const settled=settleItemSynthesisV3(next,synth);next=settled.state;
       next = addEvent(
         grantComponents(
           { ...next, progression: { ...next.progression, synthesis: null } },
-          { [synth.component]: 1 },
+          { [synth.component]: settled.amount },
+          "synthesis",
         ),
         "synthesis-complete",
         s.savedAt,
-        { id: synth.id, component: synth.component, amount: 1 },
+        { id: synth.id, component: synth.component, amount: settled.amount },
       );
     } else
       next = {
@@ -185,6 +188,7 @@ export function protectedData(
         hasProgressionNode(s, "T06") &&
         hasProgressionNode(s, "T04") &&
         s.integrationLevel < Math.min(s.qualityLevel, s.efficiencyLevel) &&
+        (!usesItemV3(s) || s.progression.trainingTargets.integration > 0) &&
         (!s.progression.trainingTargets.integration ||
           s.integrationLevel < s.progression.trainingTargets.integration)));
   if (integrationPending) {
@@ -258,7 +262,7 @@ export function startSynthesis(s: GameState, id: ComponentId) {
   const q = synthesisQuote(s, id);
   if (!q.allowed) return original;
   const data = exactEconomyValue(s, "data").subtract(q.cost);
-  return addEvent(
+  return identifyItemSynthesisV3(addEvent(
     {
       ...s,
       data: data.toNumber(),
@@ -282,7 +286,7 @@ export function startSynthesis(s: GameState, id: ComponentId) {
       dataCost: q.cost.toScientificString(),
       required: q.required,
     },
-  );
+  ));
 }
 /** Paused main session follows wall time without production or ageing paid work. */
 export function pauseMain(s: GameState, at: number) {
