@@ -297,3 +297,5 @@ Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehe
 - 29.10.: W08 an bezahlte Analyse-/reguläre Hardwarepakete gebunden, alter V3-Tempofaktor entfernt, Synthese/Analyse-Nullzugriff korrigiert.29echte Referenzfolgen,2.024Vitest/199EditMode/14PlayMode grün; elfmobileOriginalbilder. Keine V3-Savefreigabe. Nächste Abhängigkeit: tatsächliche Challenge-Einstiege verlieren bislang das neue Regel-Flag; persönliche Zähler/Main/IDs isoliert übernehmen.
 
 - 29.10.: Echte Challenge-Fabriken erhalten V3-Regeln und dauerhafte Z/B05-Historie, isolieren persönliche Zähler und pausierte Hauptspieljobs. Nur technische nächste IDs zurückführen; B05-Verbraucher×3 korrigiert. Fünf gemeinsame Abläufe,2.028Vitest/203EditMode/13PlayMode grün. V3-Dateimigration und vollständige Itemereignisse offen; kein Xcode-Zwischenbuild.
+
+- 29.10.: V3-Impulsrelais vergütet akzeptierte Zehnertaps separat, eigener Crit×1,5/W10einmal, Referenz ohne indirekte temporäre Itemproduktion; Exemplarstand bleibt. Sieben gemeinsame Eingabefolgen,2.033Vitest/205EditMode/11PlayMode grün. V3-Savefreigabe/Details weiter offen; als Nächstes gespeicherte Burst-/Kryostartverträge.

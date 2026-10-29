@@ -391,7 +391,7 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "874860d4c2447d4fdc9d5d21cc16b024f6f305499034632a349284811a4a9ca2",
+  "currentSourceHash": "dad1a4aba6854b695c2f3ac43cc2a24edad97a420b0fd054de02b34a1cefa167",
   "workshopYieldFollowup": {
     "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
     "normalSaveActivation": false,
@@ -479,6 +479,55 @@
       "duration": "25.7019738",
       "result": "Passed",
       "xmlSha256": "821e05dd1d28099b70055d4f2e49a91d9d9b6c364695fd305658a0b98d02b8da"
+    }
+  },
+  "impulseRelayFollowup": {
+    "sourceHash": "dad1a4aba6854b695c2f3ac43cc2a24edad97a420b0fd054de02b34a1cefa167",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "productionCases": 94,
+    "actualRelayFlows": 7,
+    "stepsPerFlow": 16,
+    "focusedVitest": 13,
+    "additionalFinalRelayTests": 5,
+    "vitest": {
+      "files": 161,
+      "tests": 2033,
+      "passed": 2033,
+      "failed": 0,
+      "seconds": 180.22,
+      "log": "/tmp/idle-v3-relay-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Actual manual input, pure quotes and separate relay receipt; critical x1.5, W10 once, temporary production exclusion, rejection and exemplar conservation; no V3 disk-save release",
+    "rejectedRuns": [
+      "Three test-first cases reproduced old saturated bonus, temporary leakage and nonfinite input; fixed production paths, no timeout changes"
+    ],
+    "targetedEditMode": {
+      "total": "22",
+      "passed": "22",
+      "failed": "0",
+      "duration": "5.1981737",
+      "result": "Passed",
+      "xmlSha256": "18a6cea06cdc3e5b92316cbb3d1b0cbcfe7fc0dc8e2501f19906b1ef15564697"
+    },
+    "fullEditMode": {
+      "total": "205",
+      "passed": "205",
+      "failed": "0",
+      "duration": "78.4000369",
+      "result": "Passed",
+      "xmlSha256": "d25c6b90bfda35773082fdf5e8369d789548a003e2d3538fc2879745c69ff68b"
+    },
+    "targetedPlayMode": {
+      "total": "11",
+      "passed": "11",
+      "failed": "0",
+      "duration": "76.1148982",
+      "result": "Passed",
+      "xmlSha256": "08a02970b6fec04990b7cd21246a72e01e6478c6f422bc01305cc29e5dce0b53"
     }
   }
 }

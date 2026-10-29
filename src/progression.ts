@@ -1,5 +1,5 @@
 import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditFactorV3,progressionEffectsV3,discoverAxiomsV3,prestigeResearchActivityV3,prestigeResearchDataV3} from './prestigeV3';
-import {usesItemV3,itemDataFactorV3,itemTrainingStrengthV3,itemWorkFactorV3,itemKnowledgeFactorV3} from './itemSystemV3';
+import {usesItemV3,itemV3Equipped,itemRelayBonusV3,itemDataFactorV3,itemTrainingStrengthV3,itemWorkFactorV3,itemKnowledgeFactorV3} from './itemSystemV3';
 import { deviceBonus } from "./deviceEffects";
 import {
   BALANCE,
@@ -887,16 +887,17 @@ export function tapQuote(s: GameState, now = s.savedAt, proc = 0) {
 export function progressionTap(s: GameState, now: number) {
   if (
     s.retention.activeRun?.id === "no-taps" ||
+    (usesItemV3(s)&&(!Number.isFinite(now)||now<s.savedAt)) ||
     (s.progression.lastTap !== null &&
       now - s.progression.lastTap < BALANCE.progression.tapGap)
   )
     return s;
   let p = { ...s.progression },
     rng = (Math.imul(p.critRng, 1664525) + 1013904223) >>> 0;
-  const relay = equippedItems(s).find((i) => i.type === "impulse-relay"),
+  const relay = (usesItemV3(s)?itemV3Equipped(s):equippedItems(s)).find((i) => i.type === "impulse-relay"),
     relayCount = (relay?.relayTaps ?? 0) + 1,
     proc =
-      relay && relayCount % 10 === 0
+      !usesItemV3(s) && relay && relayCount % 10 === 0
         ? (specialItemEffectQuote(s, relay)?.appliedBonusSeconds ?? 0) *
           itemAmplifier(s)
         : 0;
@@ -909,7 +910,7 @@ export function progressionTap(s: GameState, now: number) {
       now,
       false,
     ).multiplyNumber(q.seconds),
-    gain = (base.compare(S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1)) < 0 ? S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1) : base).multiplyNumber(crit),
+    gain = (base.compare(S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1)) < 0 ? S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1) : base).multiplyNumber(crit).add(usesItemV3(s)?itemRelayBonusV3(s,rng/4294967296<q.chance):S(0)),
     charge = Math.min(formula().overdriveCharge, s.overclock.taps + 1),
     trigger =
       charge >= formula().overdriveCharge && now >= s.overclock.cooldownUntil,
@@ -932,7 +933,7 @@ export function progressionTap(s: GameState, now: number) {
         ...s,
         inventory: relay
           ? s.inventory.map((i) =>
-              i.id === relay.id ? { ...i, relayTaps: relayCount } : i,
+              i.id === relay.id ? { ...i, relayTaps: usesItemV3(s)?relayCount%BALANCE.itemV3.relay.interval:relayCount } : i,
             )
           : s.inventory,
         progression: p,
@@ -988,14 +989,15 @@ export function nextTapCredit(
 ) {
   if (
     s.retention.activeRun?.id === "no-taps" ||
+    (usesItemV3(s)&&(!Number.isFinite(now)||now<s.savedAt)) ||
     (s.progression.lastTap !== null &&
       now - s.progression.lastTap < BALANCE.progression.tapGap)
   )
     return ScientificNumber.zero();
-  const relay = equippedItems(s).find((i) => i.type === "impulse-relay"),
+  const relay = (usesItemV3(s)?itemV3Equipped(s):equippedItems(s)).find((i) => i.type === "impulse-relay"),
     count = (relay?.relayTaps ?? 0) + 1,
     proc =
-      includeProc && relay && count % 10 === 0
+      !usesItemV3(s) && includeProc && relay && count % 10 === 0
         ? (specialItemEffectQuote(s, relay)?.appliedBonusSeconds ?? 0) *
           itemAmplifier(s)
         : 0,
@@ -1010,7 +1012,7 @@ export function nextTapCredit(
     ).multiplyNumber(q.seconds);
   return (base.compare(S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1)) < 0 ? S(s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1) : base).multiplyNumber(
     seed / 4294967296 < q.chance ? q.crit : 1,
-  );
+  ).add(usesItemV3(s)&&includeProc?itemRelayBonusV3(s,seed/4294967296<q.chance):S(0));
 }
 
 export const effectiveQuality = (s: GameState, level = s.qualityLevel) =>

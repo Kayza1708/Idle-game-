@@ -8,7 +8,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 
 | Nr. | Dauerhafte ID / Name | Tatsächlicher bisheriger V3-Pfad | Noch erforderlicher Vertrag |
 |---:|---|---|---|
-| 1 | `impulse-relay` | noch offen | akzeptierte manuelle Taps am Exemplar; separater Zehnerbonus, Crit ×1,5; Referenz ohne temporäre Faktoren |
+| 1 | `impulse-relay` | tatsächliche akzeptierte Taps, separater Zehnerbonus aus regulärer Produktion, eigener Crit×1,5; gespeicherter Exemplarstand modulo10 | vollständige V3-Dateimigration/Details; bestehende Animation bleibt kosmetisch |
 | 2 | `quantum-chip` | Compute, H-Snapshot, Zweier-/Dreierkombination | natürliche Erwerbs-/Loadout-/Migrationsabnahme |
 | 3 | `neural-asic` | Credits, M-Snapshot, Distilled-Kombination | gemeinsame Erwerbs-/Loadoutabnahme |
 | 4 | `photonic-array` | Zweier-Lernkombination | bezahlter Trainingsabschluss, Forschungsarbeitsübertrag ohne Rekursion |

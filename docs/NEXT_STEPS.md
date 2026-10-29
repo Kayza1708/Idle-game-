@@ -231,3 +231,6 @@ Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehe
 
 ### 29.10.: V3-Challenge-Grenzen geprüft
 Tatsächliche Einstiege/Rückkehr, persönliche Zähler, technische Trainings-IDs, B05-Rekordgrenze, Erfolg/Abbruch und Main-Aufträge über fünf TS-/C#-Folgen geprüft.2.028Vitest,203vollständigeEditMode,13gezieltePlayMode grün. Frühere offene Flag-Lücke damit geschlossen; V3-Dateireload bleibt offen. Weiter mit tatsächlichen Itemereignissen (Impulsrelais/Startverträge/Arbeit), sechs Erwerbswegen, vollständiger Migration und UI, erst danach Xcode-Playtest.
+
+### 29.10.: Tatsächliches Impulsrelais
+Separater Zehnerbonus mit eigenem Critfaktor, Quoten-/Transaktionsparität, Eingabeausschlüssen und erhaltenem Exemplarstand geprüft:2.033Vitest,205vollständigeEditMode,11gezieltePlayMode. Als Nächstes Burst/Kryo und zeitlich begrenzte Kombinationsverträge, anschließend weitere Arbeits-/Materialereignisse. VollständigeV3-Migration,42er-Erwerb,UI und Nachherkampagnen bleiben Playtestvoraussetzung.

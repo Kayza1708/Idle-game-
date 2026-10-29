@@ -9,7 +9,8 @@ import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {BALANCE,newGame,hardwareIds,computeRateScientific,creditRateScientific,dataRateScientific,startTraining,exactEconomyValue,grantComponents,addData,buyHardwareClass,axiomEconomyValue,type GameState,type ItemTypeId,type Item,type Rarity,type TrainingTrack} from '../src/economy';
 import {newItemSystemV3} from '../src/itemSystemV3';
-import {trainingRate} from '../src/economy';
+import {trainingRate,registerTap} from '../src/economy';
+import {nextTapCredit} from '../src/progression';
 import {progressionResearchSpeed,knowledgeRate,progressionCreditFactors,activeSlotIds} from '../src/progression';
 import {prestigeEffectOverridesV3,prestigeCreditFactorV3} from '../src/prestigeV3';
 import {blueprintQuote,learnBlueprint} from '../src/blueprints';
@@ -200,7 +201,19 @@ const challengeFlows=[
  challengeFlow('linear-INT-applies-inside-shadow','no-items',[{action:'copy'},{action:'start'},{action:'prestige'},{action:'repeat'},{action:'abort'}]),
 ];
 
-for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows,challengeFlows},null,2)+'\n']]){
+// Actual accepted/rejected input, quote purity and per-exemplar trigger state.
+const relayCommon=add('relay-common-reference',['impulse-relay','photonic-matrix'],1000,'common',1,0,0,'0','0',0,false,{nodes:['W01']});
+const relayMaximum=add('relay-maximum-reference',['impulse-relay','photonic-matrix'],1000,'mythic',69,20,0,'0','0',0,false,{nodes:['W01','W05','W09','W10'],axioms:{A04:2}});
+const critSeed=Array.from({length:10000},(_,i)=>i).find(i=>((Math.imul(i,1664525)+1013904223)>>>0)/4294967296<BALANCE.progression.tapCrit)!;
+function relayFlow(name:string,maximum=false,critical=false,temporary=false,scope='',v3=true){let s=structuredClone(maximum?relayMaximum:relayCommon);if(!v3)s={...s,itemSystemV3:undefined};s={...s,progression:{...s.progression,critRng:critical?critSeed:1},inventory:s.inventory.map(i=>({...i,relayTaps:i.type==='impulse-relay'?9:0})),overclock:{...s.overclock,taps:99,activeUntil:temporary?100000:0},creditBoostUntil:temporary?100000:0,...(scope?{retention:{...s.retention,activeRun:{id:scope} as never}}:{})};
+ const steps=Array.from({length:16},(_,i)=>{const before=s;const action=i===2?'copy':i===3?'unequip':i===5?'equip':'tap';const now=i===1?1000:i===6?999:1000+i*BALANCE.progression.tapGap;
+ if(action==='copy')s=structuredClone(s);else if(action==='unequip')s=unequip(s,'processor');else if(action==='equip')s=equip(s,s.inventory[0].id,'processor');
+ const quote=nextTapCredit(s,now),basic=nextTapCredit(s,now,false),wallet=exactEconomyValue(s,'credits');if(action==='tap')s=registerTap(s,now);
+ return{action,now,accepted:action==='tap'&&s!==before,quote:number(quote),basic:number(basic),gain:number(exactEconomyValue(s,'credits').subtract(wallet)),credits:number(exactEconomyValue(s,'credits')),counts:s.inventory.map(i=>i.relayTaps??0),equipped:['processor','core','research','processorAux','coreAux','researchAux','universal1','universal2'].map(id=>s.equipped[id as keyof typeof s.equipped]??''),rng:s.progression.critRng,combo:s.progression.combo,charge:s.overclock.taps,until:s.overclock.activeUntil,cooldown:s.overclock.cooldownUntil};});
+ return{name,prepared:true,initialCase:maximum?'relay-maximum-reference':'relay-common-reference',v3,seed:critical?critSeed:1,temporary,scope,steps};}
+const relayFlows=[relayFlow('separate-regular-bonus'),relayFlow('critical-is-only-one-point-five',false,true),relayFlow('maximum-P-W10-and-A04',true,true),relayFlow('temporary-state-not-in-reference',true,false,true),relayFlow('no-items-counter-unchanged',false,false,false,'no-items'),relayFlow('no-taps-all-rejected',false,false,false,'no-taps'),relayFlow('normal-rules-control',false,false,false,'',false)];
+
+for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases,componentFlows,challengeFlows,relayFlows},null,2)+'\n']]){
  if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==value)throw Error('Stale V3 export: '+path);}else writeFileSync(path,value);
 }
-console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows + ${trainingAutomationCases.length} automation cases + ${componentFlows.length} component flows + ${challengeFlows.length} challenge flows (${sourceHash})`);
+console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows + ${trainingAutomationCases.length} automation cases + ${componentFlows.length} component flows + ${challengeFlows.length} challenge flows + ${relayFlows.length} relay flows (${sourceHash})`);

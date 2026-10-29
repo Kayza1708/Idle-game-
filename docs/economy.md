@@ -806,3 +806,7 @@ Zentrale Vorgaben1,5/2/3 ersetzen den bisherigen C06-Fertigungstempobonus. Nur n
 
 ### W08 – Werkstattverbund im V3-Vertrag
 Vorhandene zentrale Vorgabe×2 auf bezahlte Analysen und reguläre Hardware-Meilensteinpakete ersetzt den alten Fertigungstempofaktor. Analyseausbeute beim bezahlten Start fixiert; Hardwarebeitrag vor Rundung verstärkt, alte Fraktionsguthaben nicht verdoppelt. Shop/Handel/Rückgewinnung/passiveFunde/Synthese und zusätzliche Klassenupgrade-Extraauszahlungen ausgeschlossen. Keine neuen Preise oder Mengenparameter; normaleSpielstände bis zur vollständigen Migration unverändert. Ein bestehender TS-Nullzugriff beim Analyseversuch während laufenderSynthese korrigiert, keine Spielregel geändert.
+
+
+### 29.10.2026 – V3-Impulsrelais als separates Tapereignis
+Verbindliche bestehende V3-Spezifikation umgesetzt, keine zusätzlichen Tuningwerte: `BALANCE.itemV3.relay` bleibt Intervall10,2Sekunden×Fähigkeits-P und eigener kritischer Faktor1,5. Auszahlung zusätzlich zum normalen Tap, außerhalb seiner Softcap/normalen Critwirkung; reguläre Referenz ohne temporären Overdrive-/Werbefaktor einschließlich indirekter Overdrive-Itemproduktion. Exemplarstand modulo10; nur akzeptierter manueller Input. W10 genau einmal. Alte normale Spielstände bleiben auf ihren Regeln bis zur vollständigen Migration. Gemeinsame tatsächliche Quoten-/Transaktionsreferenzen in `scripts/export-unity-item-v3.ts`.

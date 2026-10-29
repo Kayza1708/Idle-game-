@@ -3,7 +3,7 @@
 import {BALANCE,equippedItems,hardwareIds,itemTypes,classComputeTerms,
   type GameState,type Item,type ItemFamily,type Rarity,type ComponentId} from './economy';
 import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor,axiomLevel} from './progression';
-import {dataRateScientific} from './economy';
+import {dataRateScientific,creditRateScientific} from './economy';
 import {challengeNetworkLinkAllowed,challengeFamilyBonus} from './challengeStages';
 import {ScientificNumber as S,type ScientificJSON} from './scientificNumber';
 
@@ -47,6 +47,16 @@ export function itemSoftcapV3(x:S,k:number):S{
 export function itemV3Equipped(s:GameState):Item[]{
  if(s.retention.activeRun?.id==='no-items')return[];
  const types=new Set<string>();return equippedItems(s).filter(item=>{if(types.has(item.type))return false;types.add(item.type);return true;});
+}
+/** Pure next manual-tap bonus. Outside the normal tap softcap and crit
+ * multiplier; active temporary production cannot leak through item Compute. */
+export function itemRelayBonusV3(s:GameState,critical:boolean){
+ if(!usesItemV3(s))return S.zero();
+ const item=itemV3Equipped(s).find(i=>i.type==='impulse-relay');if(!item)return S.zero();
+ const count=item.relayTaps??0;if(!Number.isSafeInteger(count)||count<0)throw new RangeError('Invalid relay counter');
+ if((count+1)%c().relay.interval!==0)return S.zero();
+ const regular={...s,overclock:{...s.overclock,activeUntil:0}};
+ return creditRateScientific(regular.hardware,regular.level,regular,regular.savedAt,false).multiplyNumber(c().relay.seconds*itemAbilityStrengthV3(s,item).P*(critical?c().relay.critical:1));
 }
 export const itemV3Has=(s:GameState,id:string)=>itemV3Equipped(s).some(item=>item.type===id);
 /** Deliberately removes all old primary, secondary, tertiary and combination

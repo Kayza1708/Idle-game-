@@ -82,6 +82,15 @@ namespace IdleIntelligence.Core
         }
         public static IEnumerable<ItemInstance> Equipped(GameState s)
         {var seen=new HashSet<string>();foreach(var item in Workshop.Equipped(s))if(seen.Add(item.type))yield return item;}
+        public static ScientificNumber RelayBonus(GameState s,bool critical)
+        {
+            if(!Enabled(s))return ScientificNumber.Zero;
+            var item=Equipped(s).FirstOrDefault(i=>i.type=="impulse-relay");if(item==null)return ScientificNumber.Zero;
+            if(item.relayTaps<0||item.relayTaps>9007199254740991L)throw new FormatException("Invalid relay counter");
+            if((item.relayTaps+1)%(long)C("relay.interval")!=0)return ScientificNumber.Zero;
+            var regular=s.Copy();regular.ActiveUntil=0;
+            return Game.Income(regular,false).Times(C("relay.seconds")*AbilityStrength(s,item)*(critical?C("relay.critical"):1));
+        }
         public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);
         public static bool Has(GameState s,string id)=>Equipped(s).Any(i=>i.type==id);
         public static ScientificNumber BaseFactorScientific(GameState s,string family)
