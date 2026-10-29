@@ -391,7 +391,7 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "82f072b676b4a2bb34803c0934f8be1c14e9288d83303abdf7e4ef369cda2401",
+  "currentSourceHash": "26ea3947788247bedbb082ca017a8310c1b7d36ee9dc6c8c9b1370b20c4378bc",
   "workshopYieldFollowup": {
     "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
     "normalSaveActivation": false,
@@ -682,6 +682,46 @@
       "duration": "5.9410675",
       "result": "Passed",
       "xmlSha256": "9540d1d0409e5aa9f94763547779bc9b0fc814d2fbcbeb426859429dedff7e17"
+    }
+  },
+  "precisionFocusFollowup": {
+    "sourceHash": "26ea3947788247bedbb082ca017a8310c1b7d36ee9dc6c8c9b1370b20c4378bc",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "precisionFocusCases": 120,
+    "actualComponentFlows": 35,
+    "focusedVitest": 4,
+    "vitest": {
+      "files": 165,
+      "tests": 2049,
+      "passed": 2049,
+      "failed": 0,
+      "seconds": 181.73,
+      "log": "/tmp/idle-v3-precision-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Focus weights normalized after1+P, existing quantity loss divided by1+P, paid weights/units snapshot and V3 base-draw preview; no new material family, no V3 save release",
+    "rejectedRuns": [
+      "Three test-first source cases showed absent weight/quantity effects and disconnected V3 preview",
+      "Initial27/28native targeted run: copy-isolation assertion compared native bits to source double; corrected to native original. Separate TS/C# tolerance retained; no production number changed."
+    ],
+    "fullEditMode": {
+      "total": "210",
+      "passed": "210",
+      "failed": "0",
+      "duration": "81.129644",
+      "result": "Passed",
+      "xmlSha256": "118893f432cdae65443241c2365643e52af987be56efdc27d4fae07c14d63aae"
+    },
+    "targetedPlayMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "7.2077753",
+      "result": "Passed",
+      "xmlSha256": "5f8a80415700d740ea67d8e4cc84bde1a81cddec403764e603af5f81267c3414"
     }
   }
 }

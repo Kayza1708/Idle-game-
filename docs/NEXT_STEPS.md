@@ -243,3 +243,6 @@ Tatsächliche Overdrive-Startverträge einschließlich Energiepaar/-trio, manuel
 
 ### 29.10.: Bauplanarchiv-Guard geprüft
 Bekannte unterschiedliche Meisterschaften in TS/native ausgerichtet; unbekannte/geerbte Felder erzeugen keinen Bonus, Original bleibt.2.045Vitest,209vollständigeEditMode,3gezieltePlayMode grün. Weiter mit Fokusgewichtung/Fokusmengenverlust und gültiger Familienausbeute; V3-Dateimigration und normaler Xcode-Playtest bleiben bis zum vollständigen Umbau zurückgestellt.
+
+### 29.10.: Präzisionsfokus geprüft
+Gewichte und Mengenverlust wirken beim tatsächlichen bezahlten Start; gespeicherte Aufträge durch späteres Ausrüsten nicht rückwirkend verbessert.120Startfälle/35Folgen,2.049Vitest,210vollständigeEditMode,5gezieltePlayMode grün. Weiter mit W03-Zielfamilie/zulässigerRare-Garantie sowie gültiger Photon-/Quantenausbeute und deren gespeicherten Verträgen; vollständigesV3 vor Xcode unverändert offen.

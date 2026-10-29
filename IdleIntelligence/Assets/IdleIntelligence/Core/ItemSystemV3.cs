@@ -104,6 +104,9 @@ namespace IdleIntelligence.Core
         {double remaining=Math.Max(0,s.ActiveUntil-s.SavedAt),duration=Enabled(s)&&s.ItemSystemV3.overdrive!=null?s.ActiveUntil-s.ItemSystemV3.overdrive.startedAt:Balance.OverdriveMaxSeconds*1000;return duration<=0?0:Math.Min(1,remaining/duration);}
         public static double BurstBoundary(GameState s)
         {var v=s.ItemSystemV3?.overdrive;return Enabled(s)&&v!=null&&v.burstUntil>s.SavedAt?(v.burstUntil-s.SavedAt)/1000:double.PositiveInfinity;}
+        public static double FocusFactor(GameState s)
+        {if(!Enabled(s))return 1;var item=Equipped(s).FirstOrDefault(i=>i.type=="precision-scanner");return 1+(item!=null?C("focus.coefficient")*AbilityStrength(s,item):0);}
+        public static double FocusQuantity(GameState s)=>Enabled(s)?1-(1-ItemBalance.MaterialFocusQuantity)/FocusFactor(s):ItemBalance.MaterialFocusQuantity;
         public static double HardwarePackageFactor(GameState s)
         {if(!Enabled(s))return 1;var diagnostic=Equipped(s).FirstOrDefault(i=>i.type=="diagnostic-adapter");return(1+(diagnostic!=null?C("diagnostic.coefficient")*AbilityStrength(s,diagnostic):0))*(Has(s,"legacy-controller")&&Has(s,"diagnostic-adapter")?C("combinations.boot.components"):1);}
         public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);

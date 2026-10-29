@@ -818,3 +818,7 @@ Bestehende Spezifikation/zentraler V3-Datenstand: Burst(1+2P) für3s; Energiepaa
 
 ### 29.10.2026 – V3-Diagnoseadapter / Bootstrapping bei Hardware-Meilensteinen
 Vorhandene spezifizierte Werte aus `BALANCE.itemV3`: variable reguläre Paketkomponenten×(1+P), Bootstrappingpaar zusätzlich×1,5, W08 genau einmal. Keine Änderung des Grundpakets, alter Bruchteile oder fester Sondervergaben. Neue Itemboni gelten nicht für die gesonderten Klassenupgradepakete oder allgemeine Zuschüsse. Gemeinsame tatsächliche Vergaben und Wallet-/K-/Restparität über alle15Klassen und6Meilensteine geprüft; keine neue Tuningkonstante.
+
+
+### 29.10.2026 – V3-Präzisionsscanner
+Bestehender spezifizierter Faktor1+Fähigkeits-P aus zentralem `BALANCE.itemV3.focus.coefficient`: Fokusgewicht multiplizieren und danach normieren; bestehender Mengenverlust `(1-materialFocusQuantity)` durch1+P. Tatsächliche verfügbare Tabelle und Menge beim bezahlten Start einfrieren. Keine neue Konstante, keine neue Freischaltung und keine Erhöhung allgemeiner Fundchancen. V3-Vorschau der Basisziehung verwendet denselben Vertrag, alte normale Regeln erhalten.

@@ -305,3 +305,5 @@ Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehe
 - 29.10.: Diagnoseadapter/Bootstrapping an reguläre bezahlte Hardwarepakete gebunden, feste Extras/alte Reste getrennt.360Vergabefälle/32tatsächliche Folgen,2.042Vitest/208EditMode grün. PlayMode10/11, fehlgeschlagene reale Introaufnahme mit Fokusspur erklärt; derselbe Test im tatsächlichen Vordergrund1/1grün. Keine V3-Migrations-/Playerfreigabe.
 
 - 29.10.: Bauplanarchiv zählt nur bekannte eigene Meisterschaftseinträge, ohne fremde Originalfelder zu löschen oder höhere Level mehrfach zu zählen. Sechs gemeinsame echte Ratenfälle,2.045Vitest/209EditMode/3PlayMode grün. VollständigeV3-Dateimigration/Erwerb/Details weiterhin offen.
+
+- 29.10.: Präzisionsscanner an normalisierte verfügbare Fokusgewichte und reduzierten Mengenverlust beim bezahlten Start angeschlossen; V3-Vorschau passend.120Startfälle/35Produktionsfolgen,2.049Vitest/210EditMode/5PlayMode grün. W03-Rare-/Fokusfamilienregel, Familienausbeute, Arbeitsereignisse und vollständigeV3-Migration weiterhin offen.

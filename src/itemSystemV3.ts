@@ -139,6 +139,8 @@ export function itemComputeFactorV3(s:GameState){
 }
 /** Only variable regular paid milestone components; fixed extras and class
  * upgrade packages retain their distinct existing contracts. */
+export function itemFocusFactorV3(s:GameState){if(!usesItemV3(s))return 1;const item=itemV3Equipped(s).find(i=>i.type==='precision-scanner');return 1+(item?c().focus.coefficient*itemAbilityStrengthV3(s,item).P:0);}
+export function itemFocusQuantityV3(s:GameState){return usesItemV3(s)?1-(1-BALANCE.materialFocusQuantity)/itemFocusFactorV3(s):BALANCE.materialFocusQuantity;}
 export function itemHardwarePackageFactorV3(s:GameState){
  if(!usesItemV3(s))return 1;const diagnostic=itemV3Equipped(s).find(i=>i.type==='diagnostic-adapter');return(1+(diagnostic?c().diagnostic.coefficient*itemAbilityStrengthV3(s,diagnostic).P:0))*(itemCombinationV3(s,'bootstrapping').pair?c().combinations.boot.components:1);
 }
