@@ -252,3 +252,6 @@ Bezahlte Faktoren/Mindestfund über Fokuswechsel und Axiomreset erhalten; keine 
 
 ### 29.10.: W04-Levelkosten geprüft
 1.260gemeinsame tatsächliche Quotes/Abbuchungen/Materialbasen, alle vorhandenenTypen und kritischeLevel, alte/neue/no-itemsRegeln;2.060Vitest/212volleEditMode/7PlayMode grün, nach Kostenlesbarkeitskorrektur7PlayMode erneut grün. Weiter mit W07-Serienfertigung: tatsächliche volle Batchkosten und Bezahlsperren in der Oberfläche vereinheitlichen, atomare Fehlfälle und Ergebnisse prüfen. Weitere Familien-/Arbeitsverbraucher und V3-Savemigration vor Xcode weiter offen.
+
+### 29.10.: W07-Batchanzeige und Bedienung geprüft
+Vollpreise, atomareFehlfälle und113echtegespeicherteItems mitReload/Animationsabbruch geprüft;160gemeinsameFälle,2.066Vitest/213EditMode/8PlayMode grün.44Originalbilder,DE/EN320/390/430 selbstgesehen. Weiter mit Photon-/Quanten-Familienausbeute und vollständig eingefrorenen Analyse-Ausbeuteverträgen, anschließend übrigen Arbeits-/Rückgewinnungs-/Provenienzabhängigkeiten. VollständigeV3-Migration/Katalogerwerb/Details vorXcode weiter offen.

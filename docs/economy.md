@@ -828,3 +828,6 @@ W03 verdoppelt ausschließlich die beim bezahlten Analysestart gewählte/verfüg
 
 ### 29.10.2026 – beauftragtes V3-W04
 Neue Item-Levelupgrades mit W04:×0,75 (`BALANCE.prestigeV3.items.W04`) statt alter×0,85; bestehende Material-/Datenkurven und Rundungsreihenfolge erhalten, seltene benötigte Inputs ebenfalls×0,75 und aufrunden. Ohne W04 keine Reduktion. Nur V3; alte Save-Regeln, Fusion, Rezepte, Schmiedestufen und Herstellungskosten unverändert. Ursprüngliche kollidierende Basis-/Seltenmaterial-ID des Zyklusobservatoriums separat dokumentiert, hier nicht durch neue Additionskosten ersetzt.
+
+### 29.10.2026 – W07-Serienfertigung
+Vorhandene sofortige Sammelpreise proExemplar×Menge ohne neue Kostenformel: Meisterschaftsrundung jeExemplar, danach volle Material-/Modul-/Datensummen. Zentrale beauftragte Mengen×3/×10/×100 und Einzelherstellung. Gemeinsame Unity-Quote jetzt auch für sichtbare Preise und Bezahlsperre; keine Teilzahlung, keine neue Warteschlange/Automatik.

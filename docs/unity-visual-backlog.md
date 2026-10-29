@@ -206,3 +206,5 @@ Noch konkrete visuelle Abnahmen: Budgetpause/Resetabsicht; vollständige Axiomen
 - Gezielter funktionaler Darstellungsfehler behoben: V3-Leiste nutzt gespeicherte Dauer statt pauschal30s; dekoratives Raycastziel ausgeschaltet.18echte Game-View-Zustände (Start/Hälfte/Ende, DE/EN320/390/430), sechs repräsentative Bilder selbst angesehen: `media/unity-v3-overdrive/README.md`.
 - Die große Laborfläche und kleine320px-Kopftexte bleiben Punkte der späteren gemeinsamen Dichte-/Lesbarkeitsprüfung. Keine weitere Designrunde und keine neue globale Animationsabnahme in diesem Domainabschnitt.
 - V3-Itemdetails müssen vor Aktivierung tatsächliche neue Wirkungen und gespeicherte Startverträge erklären; heutige Standbilder oder bestandene Tests schließen diesen offenen Verbraucher nicht ab.
+
+- V3-W07-Prüfung29.10.: sichtbare volleKosten/Ergebnisanzahl angeschlossen und beiDE/EN320/390/430 gelesen. Die allgemeine Schmiede-Bestandszeile zeigt im finanziertenMillionenfall noch sehr kleine unformatierte Gesamtsummen; später gemeinsame kompakte Zahlenformatierung/Informationsdichte nachziehen. Keine neueDesignrunde oder fehlendePreisfunktion damit kaschieren.

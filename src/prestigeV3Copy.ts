@@ -18,6 +18,14 @@ const descriptions={W03:{
  pt:'Novas melhorias de nível: materiais e dados ×{upgrade}. Arredondar cada custo para cima. Sem desconto em fusão, receitas ou forja.',
  it:'Nuovi aumenti di livello: materiali e dati ×{upgrade}. Ogni costo è arrotondato per eccesso. Nessuno sconto su fusione, ricette o forgiatura.',
  pl:'Nowe ulepszenia poziomu: materiały i dane ×{upgrade}. Każdy koszt zaokrąglany w górę. Bez zniżki na fuzję, receptury i kucie.',
+},W07:{
+ en:'Instant crafting in batches {batches}. Full price and result count shown before purchase. All items or no payment; one shared result, no queue.',
+ de:'Sofortige Herstellung in Mengen {batches}. Gesamtpreis und Ergebnisanzahl vor Kauf. Alle Items oder keine Zahlung; gemeinsames Ergebnis, keine Warteschlange.',
+ es:'Fabricación instantánea por lotes {batches}. Precio total y cantidad antes de comprar. Todo o ningún pago; resultado conjunto, sin cola.',
+ fr:'Fabrication instantanée par lots {batches}. Prix total et quantité avant achat. Tous les objets ou aucun paiement ; résultat commun, sans file.',
+ pt:'Fabricação instantânea em lotes {batches}. Preço total e quantidade antes da compra. Todos os itens ou nenhum pagamento; resultado conjunto, sem fila.',
+ it:'Creazione istantanea in lotti {batches}. Prezzo totale e quantità prima dell’acquisto. Tutti gli oggetti o nessun pagamento; risultato unico, senza coda.',
+ pl:'Natychmiastowe wytwarzanie partiami {batches}. Pełna cena i liczba przed zakupem. Wszystkie przedmioty albo brak płatności; wspólny wynik, bez kolejki.',
 },C01:{
  en:'Passive component quantity by level: {values}. Replaces the previous bonus; applies only to regular passive finds.',
  de:'Passive Komponentenmenge je Stufe: {values}. Ersetzt den bisherigen Bonus; gilt nur für reguläre passive Funde.',
@@ -63,7 +71,7 @@ export const prestigeV3DescriptionIds=Object.keys(descriptions);
 export function prestigeV3Description(id:string,language:Language){
  if(!Object.hasOwn(descriptions,id))return null;
  const row=descriptions[id as keyof typeof descriptions],values=id==='C01'||id==='C06'?BALANCE.prestigeV3.axioms[id].map(n=>'×'+new Intl.NumberFormat(language).format(n)).join(' / '):'';
- const fmt=new Intl.NumberFormat(language);return row[language].replace('{upgrade}',fmt.format(BALANCE.prestigeV3.items.W04)).replace('{focus}',fmt.format(BALANCE.prestigeV3.items.W03focus)).replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
+ const fmt=new Intl.NumberFormat(language);return row[language].replace('{batches}',BALANCE.prestigeV3.items.W07quantities.map(n=>'×'+fmt.format(n)).join(' / ')).replace('{upgrade}',fmt.format(BALANCE.prestigeV3.items.W04)).replace('{focus}',fmt.format(BALANCE.prestigeV3.items.W03focus)).replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
 }
 
 export const synthesisOutputCopy={

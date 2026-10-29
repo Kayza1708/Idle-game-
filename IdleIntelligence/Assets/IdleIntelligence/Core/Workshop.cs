@@ -157,8 +157,20 @@ namespace IdleIntelligence.Core
             int area=ResearchArea(id);double value=w.researchProgress[area]+1+Device(s,"blueprintProgress");
             if(value>=ItemBalance.BlueprintResearchThreshold){value-=(int)ItemBalance.BlueprintResearchThreshold;int known=Array.FindIndex(ItemBalance.Items,d=>!string.IsNullOrEmpty(d.Role)&&d.Area==new[]{"data","architecture","model","materials","automation"}[area]&&!w.knownBlueprints[Index(d.Id)]&&!w.learned[Index(d.Id)]&&Game.Level(s,"blueprints")>0&&(d.Access=="prestige"?s.Prestige.resets>0:s.Industry.families[d.Access=="server"?2:d.Access=="campus"?3:4]));if(known>=0){w.knownBlueprints[known]=true;LocalJournal.Record(s,"blueprint-discovered",ItemBalance.Items[known].Id);}else w.fragments++;}w.researchProgress[area]=value;w.revision++;
         }
+        public static CraftQuote BatchQuote(GameState state,string type,int quantity)
+        {
+            var single=Quote(state,type);if(single.Components==null)return single;
+            var q=new CraftQuote{Components=single.Components.Select(n=>n*quantity).ToArray(),Modules=single.Modules.Select(n=>n*quantity).ToArray(),Data=single.Data*quantity,Revision=single.Revision,Reason=single.Reason};
+            if(quantity<1||quantity>ItemBalance.MaxCraft)q.Reason="Ungültige Menge";
+            else if(quantity>1&&!PrestigeRules.Has(state,"W07"))q.Reason="Serienfertigung freischalten";
+            else if(!Stock(state.Workshop.nextId+quantity+1))q.Reason="ID-Grenze";
+            else if(state.Data.CompareTo(ScientificNumber.From(q.Data))<0)q.Reason="Zu wenig Daten";
+            else if(q.Components.Where((n,c)=>n>state.Workshop.components[c]).Any())q.Reason="Komponenten fehlen";
+            else if(q.Modules.Where((n,c)=>n>state.Workshop.modules[c]).Any())q.Reason="Module fehlen";
+            q.Allowed=q.Reason==null;return q;
+        }
         public static GameState CraftBatch(GameState state,string type,int quantity)
-        {if(quantity<1||quantity>ItemBalance.MaxCraft||quantity>1&&!PrestigeRules.Has(state,"W07"))return state;var q=Quote(state,type);if(!q.Allowed||state.Data.CompareTo(ScientificNumber.From(q.Data*quantity))<0||q.Components.Where((n,c)=>n*quantity>state.Workshop.components[c]).Any()||q.Modules.Where((n,c)=>n*quantity>state.Workshop.modules[c]).Any())return state;var s=state.Copy();LocalJournal.Record(s,"crafting_queued",type,dataCost:ScientificNumber.From(q.Data).Times(quantity));LocalJournal.Record(s,"crafting_started",type);for(int i=0;i<quantity;i++){if(i>0){s=s.Copy();s.Workshop.nextId--;}var next=Craft(s,type,batchPart:true);if(ReferenceEquals(next,s))return state;s=next;}return s;}
+        {var q=BatchQuote(state,type,quantity);if(!q.Allowed)return state;var s=state.Copy();LocalJournal.Record(s,"crafting_queued",type,dataCost:ScientificNumber.From(q.Data));LocalJournal.Record(s,"crafting_started",type);for(int i=0;i<quantity;i++){if(i>0){s=s.Copy();s.Workshop.nextId--;}var next=Craft(s,type,batchPart:true);if(ReferenceEquals(next,s))return state;s=next;}return s;}
         public static GameState ModuleBatch(GameState state,int n,int quantity)
         {if(n<0||n>=ItemBalance.Modules.Length||quantity<1||quantity>100||state.Prestige.moduleQueue.Length+quantity>100)return state;var s=state;for(int i=0;i<quantity;i++){var saved=s.Prestige.moduleQueue;var unit=s.Copy();unit.Prestige.moduleQueue=Array.Empty<Job>();var next=StartModule(unit,n);if(ReferenceEquals(next,unit))return state;next.Prestige.moduleQueue=saved.Concat(next.Prestige.moduleQueue).ToArray();s=next;}return s;}
         public static GameState CancelModule(GameState state,int index,long expectedRevision=-1)
