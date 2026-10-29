@@ -6,7 +6,7 @@ import {describe,it,expect} from 'vitest';
 import {BALANCE,newGame,buyHardwareClass,hardwareIds,computeRateScientific,creditRateScientific,addCreditsScientific,exactEconomyValue,researchQuote,dataRateScientific,type GameState} from './economy';
 import {ScientificNumber as S} from './scientificNumber';
 import {newItemSystemV3,itemBaseFactorV3,itemAbilityStrengthV3,itemStrengthV3} from './itemSystemV3';
-import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditExponentV3,axiomDiscoveryEligibleV3,discoverAxiomsV3} from './prestigeV3';
+import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditRateV3,axiomDiscoveryEligibleV3,discoverAxiomsV3} from './prestigeV3';
 import {itemAmplifier,discoverProgression,progressionResearchSpeed,integrationLimit,modelCore} from './progression';
 import {createItem,equip} from './inventory';
 import {axiomRewardV2,buyProgressionNode,buyProgressionAxiom,progressionAgent,axiomResetV2} from './progressionReset';
@@ -61,7 +61,7 @@ describe('Joint prestige/item V3 actual consumers (prepared)',()=>{
  });
  it('reaches precisely the new gain/credit exponent contracts',()=>{
   const s={...prepared(['I05','I10']),axiomUpgradeLevels:{...newGame(0).axiomUpgradeLevels,A01:5}};
-  expect(prestigeGainExponentV3(s)).toBeCloseTo(.73,14);expect(prestigeCreditExponentV3(s)).toBeCloseTo(.22,14);
+  expect(prestigeGainExponentV3(s)).toBeCloseTo(.73,14);expect(prestigeCreditRateV3(s)).toBeCloseTo(.22,14);
  });
  it('charges the new F07 price only for new research starts',()=>{
   const s=prepared(),base=researchQuote(s,'materialAnalysis')!.cost;

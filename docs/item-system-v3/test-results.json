@@ -331,5 +331,65 @@
       "xmlSha256": "f4b42891567b8f2df52d53144ddb277d2b3656ef26a79c6ecdc8fee3f5ea2c19",
       "expectedWarning": "BrokenCosmeticConsumerCannotTurnSuccessfulCommitIntoSaveFailure deliberately raises cosmetic failure after successful durable commit"
     }
-  }
+  },
+  "synthesisAndLinearINTFollowup": {
+    "sourceHash": "a29a8c726eac031fac4de23559121dd1446254ec8a67a9bc65814aa9d1b5a115",
+    "normalSaveActivation": false,
+    "productionCases": 91,
+    "actualComponentFlows": 23,
+    "focusedVitest": 31,
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "vitest": {
+      "files": 158,
+      "tests": 2019,
+      "passed": 2019,
+      "failed": 0,
+      "seconds": 328.12,
+      "log": "/tmp/idle-v3-c06-int-full-vitest-awake.log",
+      "temporaryAwakeAssertion": true
+    },
+    "images": [
+      "../media/unity-v3-synthesis/README.md",
+      "../media/unity-v3-linear-int/README.md"
+    ],
+    "targetedEditMode": {
+      "total": "17",
+      "passed": "17",
+      "failed": "0",
+      "duration": "9.9156079",
+      "result": "Passed",
+      "xmlSha256": "5839d09942d97904d14328b764491fd403747c902a7eee1eb115d7840ea3af53"
+    },
+    "fullEditMode": {
+      "total": "199",
+      "passed": "199",
+      "failed": "0",
+      "duration": "130.289582",
+      "result": "Passed",
+      "xmlSha256": "8c2cd6ca068c0a8486ccb3f1aac147c24c25d975ba29eef1b8ea3bc9366bf48a"
+    },
+    "targetedPlayMode": {
+      "total": "12",
+      "passed": "12",
+      "failed": "0",
+      "duration": "61.8940202",
+      "result": "Passed",
+      "xmlSha256": "210c5f45ba81c52282c0a2ea533ce71ead670ebf17de80f8f107f963469e0ea0"
+    },
+    "finalINTMobileUI": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "7.0510262",
+      "result": "Passed",
+      "xmlSha256": "6da3d4747738d0d46fbe33fbbbda371c125197b21e9593c03a34b5b4dd5019d6"
+    },
+    "rejectedRuns": [
+      "16 stale-generator failures before complete regeneration; not accepted",
+      "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
+    ]
+  },
+  "currentSourceHash": "a29a8c726eac031fac4de23559121dd1446254ec8a67a9bc65814aa9d1b5a115"
 }

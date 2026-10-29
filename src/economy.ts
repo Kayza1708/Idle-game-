@@ -883,7 +883,7 @@ export const BALANCE = {
     research:{F06:3,F07:.70,F08perLab:.25,F09:3,F09data:5,F10:5,F10data:5,F10scale:25,F10exponent:.5,queue:6},
     items:{W03focus:2,W04:.75,W05:2,W07quantities:[3,10,100],W08:2,W09:3,W10:3,W10ability:1.15,W10exponent:1.05},
     tap:{S01:2,S02:.10,S03:1.5,S04:2,S05:.10,S06:2,S07:2,S08:3,S09:2,S10:5,S10soft:2},
-    int:{I01:3,I02scale:10,I02exponent:.5,I03scale:25,I03exponent:.5,I04scale:20,I04exponent:.5,I05:.06,I08:5,I09:5,I10gain:.03,I10credits:.06,maxCreditExponent:.22,maxGainExponent:.73},
+    int:{creditPerINT:.10,I01:3,I02scale:10,I02exponent:.5,I03scale:25,I03exponent:.5,I04scale:20,I04exponent:.5,I05:.06,I08:5,I09:5,I10gain:.03,I10credits:.06,maxCreditRate:.22,maxGainExponent:.73},
     discovery:{cycleINT:1000000,distinctNodes:30},
     axioms:{A03:2,A04:1.35,A06:1.20,B03:1.5,B05:3,C01:[2,3,4],C06:[1.5,2,3],D01:2,D02:.85,D03:1.10},
   },

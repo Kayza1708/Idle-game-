@@ -1,8 +1,8 @@
 /** V3 domain implementation. Normal saves remain on their original rules until
  * the complete versioned migration is ready. No clocks, RNG, IO or UI here. */
 import {BALANCE,equippedItems,hardwareIds,itemTypes,classComputeTerms,
-  type GameState,type Item,type ItemFamily,type Rarity} from './economy';
-import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor} from './progression';
+  type GameState,type Item,type ItemFamily,type Rarity,type ComponentId} from './economy';
+import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor,axiomLevel} from './progression';
 import {dataRateScientific} from './economy';
 import {challengeNetworkLinkAllowed,challengeFamilyBonus} from './challengeStages';
 import {ScientificNumber as S,type ScientificJSON} from './scientificNumber';
@@ -19,11 +19,13 @@ export type ItemSystemV3State={
   learningStreak:number;
   lastLearningTrack:'quality'|'efficiency'|null;
   scannerAnalyses:number;
+  synthesisRemainders:Partial<Record<ComponentId,number>>;
+  synthesisContract:{id:string;component:ComponentId;multiplier:number}|null;
   archiveBlueprintRight:boolean;
   axiomDiscovered:boolean;
   axiomDiscoveryAt:number|null;
 };
-export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
+export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,synthesisRemainders:{},synthesisContract:null,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
 export const usesItemV3=(s:GameState)=>s.itemSystemV3?.version===3;
 const c=()=>BALANCE.itemV3;
 const one=()=>S.from(1);
@@ -216,6 +218,7 @@ export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameS
 export function archiveBlueprintRightV3(s:GameState){return usesItemV3(s)&&(s.itemSystemV3!.archiveBlueprintRight||s.insightArchiveBlueprint||s.nodes.includes('I04')||s.progression.known.includes('I04')||(s.learnedRecipes??[]).includes('insight-archive'));}
 
 function validateItemTrainingCountersV3(v:ItemSystemV3State){
+ if(!v.synthesisRemainders||Object.entries(v.synthesisRemainders).some(([id,n])=>!Object.hasOwn(BALANCE.components,id)||!Number.isFinite(n)||n!<0||n!>=1)||v.synthesisContract!==null&&(!v.synthesisContract||!v.synthesisContract.id||!Object.hasOwn(BALANCE.components,v.synthesisContract.component)||!Number.isFinite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new RangeError('Invalid V3 synthesis receipt');
  if(!Number.isSafeInteger(v.scannerAnalyses)||v.scannerAnalyses<0||!Number.isSafeInteger(v.nextTrainingSequence)||v.nextTrainingSequence<1||!Number.isSafeInteger(v.lastCompletedTrainingSequence)||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||!Number.isSafeInteger(v.learningStreak)||v.learningStreak<0||v.learningStreak>c().logic.maxStreak||![null,'quality','efficiency'].includes(v.lastLearningTrack)||![null,'regular','bonus','intro'].includes(v.lastTrainingCompletionCause))throw new RangeError('Invalid V3 training counters');
 }
 /** Serial training IDs are assigned only after the existing start/payment
@@ -245,4 +248,31 @@ export function itemAnalysisFactorV3(s:GameState){
  if(!usesItemV3(s))return one();validateItemTrainingCountersV3(s.itemSystemV3!);
  const item=itemV3Equipped(s).find(i=>i.type==='field-scanner');if(!item)return one();
  const {P}=itemAbilityStrengthV3(s,item);return S.from(c().scanner.base).pow(P).multiply(one().add(itemSoftcapV3(S.from(s.itemSystemV3!.scannerAnalyses),c().scanner.threshold).multiplyNumber(c().scanner.perAnalysis*P)));
+}
+
+/** New paid jobs freeze their yield. Legacy jobs without a V3 receipt retain
+ * their original one-component contract; later node purchases never revalue it. */
+export function itemSynthesisYieldV3(s:GameState){
+ if(!usesItemV3(s))return 1;const level=axiomLevel(s,'C06'),factor=level?BALANCE.prestigeV3.axioms.C06[level-1]:1;
+ if(factor===undefined)throw new RangeError('Invalid C06 level');
+ return factor*(itemCombinationV3(s,'industrial-singularity').pair?c().combinations.industrial.yield:1);
+}
+export function itemSynthesisOutputV3(s:GameState,component:ComponentId){
+ const remainder=s.itemSystemV3?.synthesisRemainders[component]??0;
+ if(!Number.isFinite(remainder)||remainder<0||remainder>=1)throw new RangeError('Invalid synthesis remainder');
+ const total=remainder+itemSynthesisYieldV3(s),amount=Math.floor(total+1e-12);return{amount,remainder:Math.max(0,total-amount),multiplier:itemSynthesisYieldV3(s)};
+}
+export function identifyItemSynthesisV3(s:GameState):GameState{
+ if(!usesItemV3(s)||!s.progression.synthesis)return s;const job=s.progression.synthesis;
+ if(!Object.hasOwn(BALANCE.components,job.component))throw new RangeError('Unknown synthesis component');
+ if(s.itemSystemV3!.synthesisContract)throw new RangeError('Existing paid synthesis receipt');
+ return{...s,itemSystemV3:{...s.itemSystemV3!,synthesisContract:{id:job.id,component:job.component as ComponentId,multiplier:itemSynthesisYieldV3(s)}}};
+}
+export function settleItemSynthesisV3(s:GameState,job:NonNullable<GameState['progression']['synthesis']>){
+ if(!usesItemV3(s)||!s.itemSystemV3!.synthesisContract)return{state:s,amount:1};
+ const v=s.itemSystemV3!,receipt=v.synthesisContract!;
+ if(receipt.id!==job.id||receipt.component!==job.component||!Number.isFinite(receipt.multiplier)||receipt.multiplier<1)throw new RangeError('Mismatched paid synthesis receipt');
+ const remainder=v.synthesisRemainders[receipt.component]??0;if(!Number.isFinite(remainder)||remainder<0||remainder>=1)throw new RangeError('Invalid synthesis remainder');
+ const total=remainder+receipt.multiplier,amount=Math.floor(total+1e-12);
+ return{amount,state:{...s,itemSystemV3:{...v,synthesisContract:null,synthesisRemainders:{...v.synthesisRemainders,[receipt.component]:Math.max(0,total-amount)}}}};
 }

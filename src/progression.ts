@@ -1,4 +1,4 @@
-import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditExponentV3,progressionEffectsV3,discoverAxiomsV3,prestigeResearchActivityV3,prestigeResearchDataV3} from './prestigeV3';
+import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditFactorV3,progressionEffectsV3,discoverAxiomsV3,prestigeResearchActivityV3,prestigeResearchDataV3} from './prestigeV3';
 import {usesItemV3,itemDataFactorV3,itemTrainingStrengthV3,itemWorkFactorV3,itemKnowledgeFactorV3} from './itemSystemV3';
 import { deviceBonus } from "./deviceEffects";
 import {
@@ -410,7 +410,7 @@ export function progressionCreditFactors(
         Math.max(0, axiomLevel(s, "A02") - formula().axiomCreditBoundedLevels),
       ),
     );
-  const a =usesItemV3(s)?prestigeCreditExponentV3(s):
+  const a =
     formula().intCreditExponent +
     (hasProgressionNode(s, "I05") ? formula().intCreditNodeExponent : 0) +
     (hasProgressionNode(s, "I10") ? formula().intCreditNodeExponent : 0);
@@ -418,7 +418,7 @@ export function progressionCreditFactors(
     permanentIncome: s.commerce?.owned.includes('ai_singularity.pass.income') ? BALANCE.commerce.incomeMultiplier : 1,
     baseRevenuePerUser: BALANCE.baseRevenuePerUser,
     quality: q ** (hasProgressionNode(s, "T01") ? (usesItemV3(s)?BALANCE.prestigeV3.training.T01:effectsFor(s).T01) : 1),
-    INT: exactEconomyValue(s, "cycleINTEarned").add(S(1)).pow(a),
+    INT: usesItemV3(s)?prestigeCreditFactorV3(s):exactEconomyValue(s, "cycleINTEarned").add(S(1)).pow(a),
     axioms: ma,
     modelArchitecture: power(research().modelArchitecture, n.modelArchitecture),
     commercialization: power(research().commercialization, n.commercialization),

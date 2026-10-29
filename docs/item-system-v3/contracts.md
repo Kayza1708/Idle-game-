@@ -2,6 +2,8 @@
 
 Dies ist eine Implementierungsinventur, **keine Freigabe**. Normale Spielstände sind noch nicht auf V3 umgestellt. „Rechenpfad“ bedeutet an `Game.Compute/Income/DataRate/WorkSpeed/KnowledgeRate` bzw. die entsprechenden TS-Funktionen angebunden und in isolierten Zuständen geprüft. Es bedeutet nicht, dass Erwerb, neue Zähler, Migration oder UI bereits fertig sind.
 
+Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesondere linearer INT-Einkommensbonus10/16/22%.
+
 ## Itemfähigkeiten
 
 | Nr. | Dauerhafte ID / Name | Tatsächlicher bisheriger V3-Pfad | Noch erforderlicher Vertrag |
@@ -112,3 +114,8 @@ V3-Faktoren×2/×3/×4 tatsächlich in passiver Hardwareproduktion; zentrale sie
 
 ### Feldscanner: reguläre Analyseereignisse
 Run-Zähler steigt am tatsächlichen bezahlten Abschluss bei Ausrüstung, bleibt beim Ablegen bestehen und leert sich an beiden echten Resetarten. Abbruch/doppelte Anzeige/alte Introaufträge/No-items ausgeschlossen. Keine Beschleunigung der Synthese durch den nur für Analysen bestimmten Scannerfaktor.17gemeinsame tatsächliche Produktionsfolgen prüfen auch Ausrüsten während Auftrag, Ablegen vor Abschluss, Ablegen/Wiederanlegen, Zahlung und Resets. Vollständige V3-Speicherung und Details weiterhin offen.
+
+### C06 und linearer INT-Bonus
+Neue bezahlte Synthesen speichern ihren Ausbeutefaktor(1,5/2/3) in einem eindeutig zugeordneten Vertrag. Komponentenweise Bruchteilsreste, Kopierisolation und Erhaltung laufender bezahlter Synthesen an beiden echten Resetarten geprüft; spätere C06-Käufe bewerten nichts rückwirkend. Alte bezahlte Synthesen ohneV3-Beleg behalten Ertrag1. Industrielle Zweierkombination im Faktor vorbereitet; neue Katalogitems/Rezepte weiter offen. Neue sieben Sprachbeschreibungen und wahrer nächster ganzzahliger Syntheseertrag in tatsächlichen Details.
+
+Nutzerergänzung29.10.: Einkommensbonus jetztlinear `1+cycleINTEarned×Satz`, Satz10/16/22%. AusgegebeneINT zählen, normalerPrestige erhältZyklus, Axiomreset leert. I10-INT-Gewinnanteil unverändert. Die ursprüngliche Exponentenforderung ist ausdrücklich ersetzt, siehe amendments.md.91Produktionsreferenzen bis10^1000INT plus23tatsächliche Komponenten-/Resetfolgen vergleichen unter anderem Einkommensfaktor und verdiente/freieINT. V3-Speicherung/Aktivierung weiterhin offen.

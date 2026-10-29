@@ -797,3 +797,9 @@ Vorhandene zentrale Vorgabe×2/×3/×4 ersetzt im experimentellen V3 den alten p
 
 ### Item-V3 Feldscanner
 Zentrale Vorgabe2^P×[1+0,05×P×S(A,25)] als tatsächlicher Analysefaktor; A zählt bezahlte reguläre Abschlüsse bei Ausrüstung im Run. Alte Itemprofile nicht zusätzlich anwenden; W10 nur einmal auf Fähigkeits-P. Analysefaktor wirkt nicht auf Synthese. Keine neuen Werte, unveränderte Kosten und normaleSave64/24-Regeln.
+
+### 29.10.2026 – ausdrücklich bestätigte lineare INT-Einkommensänderung
+Nutzerauftrag ersetzt den dynamischen INT-Einkommensexponenten: `1 + verdiente Zyklus-INT × Satz`. Grundsatz10%, I05 und I10 jeweils+6Prozentpunkte, damit16% mit einem bzw22% mit beiden.10INT→×2,100INT→×11 ohne Upgrades. Kein Zinseszins; ausgegebeneINT zählen weiterhin, nur der Axiomreset leert den Zyklusledger. I10-INT-Gewinnanteil+0,03 und sämtliche Preise bleiben unverändert. Zentral `BALANCE.prestigeV3.int.creditPerINT/I05/I10credits`, keine unabhängigen C#-Werte. Bisherige Saves bleiben bis zur vollständigen Migration auf ihren alten Regeln. Bestätigungsdetails: `item-system-v3/amendments.md`.
+
+### C06 – Industrielle Ausbeute im V3-Vertrag
+Zentrale Vorgaben1,5/2/3 ersetzen den bisherigen C06-Fertigungstempobonus. Nur neue bezahlte Synthesen speichern die tatsächliche Ausbeute beim Start. Kleine Reste werden komponentenweise erhalten; ältere bezahlte Aufträge ohneV3-Beleg liefern weiter ihren ursprünglichen einen Baustein. NormalerPrestige/Axiom behalten bereits bezahlte Synthese samt Resten. Keine geänderten Preise oder zusätzlichen Erstattungen. Industrielle Zweierkombination ist im gemeinsamen Faktor berücksichtigt, benötigt aber weiterhin die noch offenen neuen Katalog-/Rezeptverbraucher.

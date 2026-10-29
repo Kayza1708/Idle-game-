@@ -5,7 +5,7 @@ namespace IdleIntelligence.Runtime
  [DefaultExecutionOrder(10000)]
  public sealed class UiLocalizedText:MonoBehaviour
  {
-  static readonly LocalizedCopy[] Copies=NativeUiCatalog.Copies.Concat(ItemV3Balance.Descriptions).Concat(SettingsCatalog.Copies).Concat(UiSourceCatalog.Copies).ToArray();
+  static readonly LocalizedCopy[] Copies=NativeUiCatalog.Copies.Concat(ItemV3Balance.Descriptions).Concat(ItemV3Balance.Names).Concat(new[]{ItemV3Balance.SynthesisOutput}).Concat(SettingsCatalog.Copies).Concat(UiSourceCatalog.Copies).ToArray();
   static readonly Dictionary<string,LocalizedCopy> Exact=new Dictionary<string,LocalizedCopy>(StringComparer.Ordinal);
   static readonly Dictionary<string,string[]> German=new Dictionary<string,string[]>(StringComparer.Ordinal);
   static readonly Dictionary<string,string[]> Completion=new Dictionary<string,string[]>(StringComparer.Ordinal);

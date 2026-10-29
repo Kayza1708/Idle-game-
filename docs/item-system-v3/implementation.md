@@ -4,6 +4,8 @@ Verbindlicher Auftrag: [unveränderte Spezifikation](specification.txt). Beginn 
 
 Ergänzt durch den verbindlichen [Prestige-/Axiomauftrag](prestige-axiom-specification.txt). Dieser erweitert denselben V3-Vertrag. Die 60/24 bestehenden IDs und Preise bleiben erhalten. K (Komponentenproduktion im Itemauftrag) und K (Hardwareklassen im Prestigeauftrag) erhalten im Code getrennte ausgeschriebene Namen; sie sind keine neue Währung.
 
+Aktuelle ausdrücklich bestätigte Änderungen zur ursprünglichen Spezifikation: [Ergänzungen, einschließlich linearem INT-Einkommen](amendments.md). Diese haben für die betroffenen Regeln Vorrang.
+
 ## Abhängigkeitsgraph vor der Implementierung
 
 ```mermaid
@@ -196,3 +198,20 @@ Die alte gemeinsame Analyse-/Syntheserate hätte den neuen Scannerfaktor irrtüm
 23gezielteVitest, danach vollständige156Dateien/2.011Tests(335,59s); Typecheck/Webbuild(2,19s)/vollständigeGeneratorprüfung grün. UnityCompile/15gezielteEditMode(8,922s), danach197/197vollständigeEditMode(133,690s). Abschließend8/8gezieltePlayMode(50,549s), echte Szene/Abschlussfeedback/Plan-/Reload-UI. Die Warnung „Saved feedback failed“ stammt aus dem ausdrücklich erwarteten Test eines defekten kosmetischen Verbrauchers nach erfolgreichem Speichern; kein unerklärter Laufzeitfehler. Ein TS-Test brauchte eine explizite GameState-Typannotation; ein nach der Trennung ungenutzter Import entfernt. Veraltete Generatorhashes vollständig neu erzeugt und anschließend geprüft. Keine Produktionsregel dafür verändert.
 
 Noch offen: vollständige Dateimigration und verständliche V3-Itemdetails; die zusätzliche Bibliotheks-Bereichszuordnung ist separat in source-inconsistencies.md dokumentiert. Keine V3-/Playerfreigabe und kein neu installierter Commit. Anschließend C06-Ausbeute/Bruchteilsreste und bezahlte Startverträge weiterbearbeiten.
+
+
+## 29.10.2026 – C06-Syntheseverträge und bestätigter linearer INT-Bonus
+
+C06 ersetzt den alten Fertigungstempobonus durch reguläre Syntheseausbeute×1,5/×2/×3. Neue bezahlte Starts halten den Ausbeutefaktor und die tatsächliche Job-/Komponentenzuordnung fest; Restmengen je Komponente bleiben erhalten. Spätere Käufe ändern nur neue Aufträge. Tatsächliche normalePrestige-/Axiomresets erhalten bereits bezahlte Synthese samt Vertrag, alte laufende Jobs ohneV3-Beleg liefern weiterhin ihren einen Baustein. Unbekannte Familien bleiben gesperrt. Kopien besitzen unabhängige Vertrags-/Restdaten. Industrielle Zweierkombination im Faktor vorbereitet, sechs neue Katalogitems/Rezepte weiterhin offen.
+
+Neue C06-Bezeichnung und Effekte aus gemeinsamer sieben Sprachquelle; bestehende Komponentenansicht zeigt den wahren nächsten ganzzahligen Ertrag.22echte Bilder unter `docs/media/unity-v3-synthesis`, DE/EN320/390/430selbstgesehen. Kein Designumbau und keine neue Animationsabnahme. Vorschaurest0,5 ausdrücklich vorbereitet, vollständige V3-Dateispeicherung noch gesperrt.
+
+**Zusätzlicher Nutzerauftrag:** INT-Einkommen abV3 linear `1+verdienteZyklusINT×Satz`, ohne Einkommensexponent oder Zinseszins. Auf ausdrückliche Bestätigung Satz10/16/22% je nachI05/I10. Ausgeben erhält den Bonus, normalerPrestige erhält verdienteINT, Axiomreset leert den Zyklus. I10-Gewinnexponent+0,03 bleibt bestehen. Unveränderte ursprüngliche Spezifikationen historisch erhalten; `amendments.md` ist die verbindliche Ergänzung. Alte64/24-Regeln bis zur vollständigen Migration erhalten.
+
+Gemeinsame Produktionsreferenzen71→91 mit0/1/10/100/10^1000INT, allen vier Knotenkombinationen und tatsächlichem Income-Verbraucher. Komponentenfolgen17→23, darunter wiederholte Synthesen, Preis-/Rest-/Faktorsnapshots und beide echten Resets; jeder Schritt vergleicht auch tatsächlichen Einkommensfaktor und verdiente/freieINT. Zusätzliche tatsächliche I05-Käufe und Resettransaktionen in beiden Domains geprüft. Neue I05-/I10-Texte in echter Unity-Netzansicht:22Originalbilder unter `docs/media/unity-v3-linear-int`, DE/EN320/390/430selbstgesehen; siebenSprachen per tatsächlicher Einstellungsaktion. Die finanzierte Mira-Anzeige im Hintergrund ist keine natürliche V3-Einführungsabnahme.
+
+Prüfungen:31gezielteVitest, vollständige158Dateien/2.019Vitest(328,12s), Typecheck, Webbuild(2,04s) und vollständigeGeneratorparität bestanden. UnityCompile/17gezielteEditMode(9,916s), danach199/199vollständigeEditMode(130,290s),12/12gezieltePlayMode(61,894s), abschließend1/1zusätzliche mobileINT-Detailprüfung(7,051s). Kein neuer vollständigerPlayMode-Lauf behauptet.
+
+Fehlläufe transparent:16Generatorprüfungen waren vor vollständiger Neugenerierung rot. Anschließender breiter Lauf hatte3Zeitüberschreitungen/Workerfehler und Sandbox-Websocketfehler; Mac-Energieprotokoll bestätigt Schlafphasen. Vollständiger Nachlauf mit prozessgebundenerWachhalteanforderung und erforderlichem lokalenTestnetz-Zugriff grün, keine Testzeitlimits erhöht. Ein Test verwendete eine nicht vorhandene ScientificNumber.one-Hilfsmethode; auf die tatsächliche API korrigiert. Frühere Fehlläufe zählen nicht als bestanden.
+
+Keine Freigabe der vollständigenV3-Migration, keine normalen Saves überschrieben, kein neuerPlayer installiert. Nächster unabhängiger Verbrauchervertrag: W08/weitere tatsächliche Materialproduzenten, danach weitere Ereignisse/Kataloge/atomare Migration/Mira/Langzeit- und Loadoutabnahme. Nächster Xcode-Playtest unverändert erst nach vollständigemV3.

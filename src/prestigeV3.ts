@@ -39,7 +39,10 @@ export function prestigeINTWeightV3(s:GameState){
  return result;
 }
 export const prestigeGainExponentV3=(s:GameState)=>BALANCE.progression.formula.intBaseExponent+BALANCE.progression.formula.intAxiomExponent*axiomLevel(s,'A01')+(hasProgressionNode(s,'I10')?c().int.I10gain:0);
-export const prestigeCreditExponentV3=(s:GameState)=>BALANCE.progression.formula.intCreditExponent+(hasProgressionNode(s,'I05')?c().int.I05:0)+(hasProgressionNode(s,'I10')?c().int.I10credits:0);
+export const prestigeCreditRateV3=(s:GameState)=>c().int.creditPerINT+(hasProgressionNode(s,'I05')?c().int.I05:0)+(hasProgressionNode(s,'I10')?c().int.I10credits:0);
+/** User-approved linear stacking. Earned cycle INT includes spent INT; only
+ * the actual axiom reset clears that ledger. No exponential compounding. */
+export const prestigeCreditFactorV3=(s:GameState)=>one().add(exactEconomyValue(s,'cycleINTEarned').multiplyNumber(prestigeCreditRateV3(s)));
 export function axiomDiscoveryEligibleV3(s:GameState){
  return !s.retention.activeRun&&exactEconomyValue(s,'cycleINTEarned').compare(S.from(c().discovery.cycleINT))>=0&&new Set([...s.progression.known,...s.nodes].filter(id=>Object.hasOwn(BALANCE.progression.nodes,id))).size>=c().discovery.distinctNodes;
 }

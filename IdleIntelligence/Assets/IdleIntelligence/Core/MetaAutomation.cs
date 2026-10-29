@@ -3,7 +3,7 @@ namespace IdleIntelligence.Core
 {
  public static class MetaAutomation
  {
-  public static double Fabrication(GameState s)=>PrestigeRules.F(s,"W08")*Math.Pow(1/PrestigeRules.E("C06"),MetaRules.Level(s,"C06"));
+  public static double Fabrication(GameState s)=>PrestigeRules.F(s,"W08")*(ItemSystemV3.Enabled(s)?1:Math.Pow(1/PrestigeRules.E("C06"),MetaRules.Level(s,"C06")));
   public static GameState Rebuild(GameState state){if(MetaRules.Level(state,"B04")==0||state.Meta.rebuild.Length==0)return state;var s=state;foreach(string id in state.Meta.rebuild){if(!state.Prestige.known.Contains(id)||PrestigeRules.Has(s,id))continue;var cost=ScientificNumber.From(PrestigeBalance.Nodes.First(n=>n.Id==id).Cost);if(s.Prestige.Free.CompareTo(cost.Add(ScientificNumber.FromData(s.Meta.intReserve)))<0)break;s=PrestigeRules.Buy(s,id);}return s;}
   public static ScientificNumber Protected(GameState s,bool research=false){var reserve=PrestigeAutomation.ProtectedData(s);if(!research&&PrestigeRules.Has(s,"F05")&&s.Prestige.director){var target=s.Prestige.researchTargets.FirstOrDefault(t=>Game.Level(s,t.id)<t.level);if(target!=null){int i=Game.ResearchIndex(target.id);if(Game.ResearchBlock(s,i)==null||Game.ResearchBlock(s,i)=="Zu wenig Daten"||Game.ResearchBlock(s,i)=="Labor belegt"){var cost=Game.ResearchCost(s,i);if(cost.CompareTo(reserve)>0)reserve=cost;}}}return reserve;}
   public static GameState Analysis(GameState s)=>!s.Prestige.resetIntent&&(MetaRules.Level(s,"C02")>0||PrestigeRules.Has(s,"F03"))&&s.Meta.analysisAuto&&s.Industry.analysisQueue.Length==0&&!s.Workshop.hasAnalysis&&s.Data.CompareTo(ScientificNumber.From(Industry.AnalysisCost(s,ItemBalance.Analyses[s.Meta.analysisRecipe].Cost)).Add(Protected(s)))>=0?MaterialAnalysis.Start(s,s.Meta.analysisRecipe):s;
