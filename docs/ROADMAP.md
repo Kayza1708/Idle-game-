@@ -257,3 +257,29 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 - Audit-Fortsetzung: gemeinsame kompakte Ansichten, 41 siebensprachige Mira-Dialoge und gespeicherte Analysehilfen umgesetzt; gezielter PlayMode 5/5 inklusive 219 Ansichten. Vollregression/Restinhalte/Cloudkonten/Playerabnahme laufen weiter: siehe `unity-audit-followup.md`.
 
 - 28.10.: EditMode170/170 und gezielter UI-/Feedbacklauf9/9; echter Einführungstrainings-Mitschnitt mit Spielton. iCloud-Backup-Grundlage ohne simulierte Erfolge; Entwicklerkonten fehlen. Weitere Inhalts-/Kontextkorrekturen und finale Vollregression laufen. Details: `unity-audit-followup.md`, `unity-platform-cloud.md`.
+
+### 28.10.2026 – gesicherter UI-Zwischenstand vor Item V3
+- [x] Alle 84 INT-/Axiombeschreibungen zentral übersetzt; localegerechte Detailzahlen, kontextbezogene Navigation und kleine echte Item-Claimportraits ergänzt.
+- [x] Unity Compile + 30 EditMode- und 4 PlayMode-Prüfungen bestanden (Bericht: `docs/unity-audit-followup.md`).
+- [ ] Gesamtsprachabnahme und komplette V3-Itemumstellung bleiben eigenständige offene Abnahmen.
+
+
+### 28.10.2026 – gemeinsamer Item-/Prestige-V3-Auftrag in Arbeit
+- [x] Beide vollständigen Auftragstexte und gemeinsamer Berechnungsgraph in `docs/item-system-v3/` gesichert; 60 INT-/24 Axiom-IDs und Preise erhalten.
+- [x] Reale Trainings-/Forschungspläne als gemeinsame grafische Queue: kostenlose Umordnung/Entfernung, veraltete Tickets gesperrt, Save/Reload und bezahlte auslaufende Labore erhalten. Tatsächliche DE/EN-Bilder bei 320/390/430 px liegen in `docs/media/unity-v3-queues/`.
+- [x] Experimentelle Produktions-/Prestigeverbraucher samt generierten TS-/C#-Referenzen und sicherer Schreibsperre für unvollständige V3-Zustände angelegt. Dies ist keine V3-Spielerfreigabe.
+- [x] Sechs neue originale Rastermotive und Prompts dokumentiert; kein Ersatz alter Grafiken. Einbindung und Darstellung noch offen.
+- [ ] Vollständige 42 Fähigkeiten/12 Kombinationen, bezahlte Ereignisverträge/Provenienz, restliche 60/24-Verbraucher, spoilerfreie Mira-Axiomentdeckung, atomare Migration und echte lange Nachherkampagnen abschließen.
+- [ ] Vollständige V3-Save-, Grafik-, Animations- und Geräteabnahme bleibt offen. Normale Web64-/Unity24-Saves werden nicht teilweise umgestellt.
+
+- Geprüfter V3-Zwischenstand: Typecheck, Webbuild und Generatorvergleich bestanden; 1.989 Vitest, 188 EditMode und final 129 PlayMode grün. Aktive/passive unveränderte Baseline bis 30 Tage dokumentiert; 90 Tage, vollständige Migration und Nachherbalance offen. Prüfbericht: `docs/item-system-v3/implementation.md`.
+
+- Editor-Anbindung ergänzt und tatsächlich geprüft: offizielle Pipeline0.9.1-exp.1, Live-eval, Sprite-Capabilities, Console, isoliertes fortlaufendes Play und echte390×846-Aufnahme. Sechs neue Sprites sicher importiert; Katalog/Rezepte/Sockeldarstellung weiterhin offen. Details: `docs/item-system-v3/art/README.md`.
+
+### 29.10.2026 – Archiv-Abhängigkeit im V3-Vertrag
+Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehendes I04-/Legacyrecht, Bauplanforschung und unveränderte bezahlte Herstellung; kein Gratisitem/Ersatzpreis. Elf gemeinsame neue Erwerbs-/Zahlungsfälle; Compile, 9 EditMode, 5 PlayMode und gezielte TS-Fälle grün. Echte Save-Migration und erreichbare V3-Spielerfreigabe ausdrücklich noch offen. Siehe `docs/item-system-v3/contracts.md`.
+
+- 29.10.: Logik-Saat mit tatsächlichen bezahlten Ereignissen, IDs/Ursachen, Ausschlüssen und echten Resetfolgen angebunden. 1.999Vitest, 191vollständige EditMode und9gezielte PlayMode grün. Nächste Verträge: Photon/Drohne/Gradient und weitere Ereignisse; V3-Dateimigration/Spielerfreigabe weiterhin offen. `docs/item-system-v3/implementation.md`.
+
+- 29.10.: Wissenschaftliche Legacy-Itembasis bei tatsächlicher Compute-/Creditsproduktion ohne vorzeitige Double-Konvertierung erhalten;71gemeinsame Produktionsfälle bis10^20000,191EditMode und9gezieltePlayMode grün. Keine Saveaktivierung. Aktive Altbaseline90Tage/149Prestiges; passive90Tage/44Prestiges, Grenzen in baseline-notes.md.
+- Derselbe wissenschaftliche Basisstand: vollständige154Dateien/2.000Vitest grün (323,84s), vollständige Generatorparität und Webbuild/Typecheck bestanden. Noch keine vollständige V3-Freigabe.

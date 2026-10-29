@@ -1,0 +1,44 @@
+[
+  {
+    "id": "fleet-coordinator",
+    "path": "/Users/yannicrogowitz/.codex/generated_images/01a1534b-c494-7d00-bfaf-adbe3adf0ca8/exec-8056eb56-3d25-4e2c-8c94-b1d515a69900.png",
+    "prompt": "Original mobile sci-fi pixel-art equipment inventory sprite for Idle Intelligence: Fleet Coordinator processor module. A compact three-quarter isometric dark gunmetal and ivory industrial control tower with three small tiered cyan signal dishes / linked antenna panels, amber indicator lights and chunky cables, readable as one single piece of lab equipment. Handcrafted high quality pixel art, hard crisp stepped pixel outlines, small carefully shaded clusters, no painterly airbrushing, no vector shapes. Matches detailed retro sci-fi equipment rendered in roughly 180x180 visible pixels; displayed large on canvas but retain visible deliberate pixel grid. Centered single object, full silhouette with generous equal transparent margins, no text, no badges, no frame, no floor, no glow cloud, no other equipment. Transparent background. Original asset, not a copy of another game. Usage: independent raster inventory icon later shown inside existing separately rendered rarity sockets.",
+    "method": "Built-in image_gen; original generated raster; not a third-party art pack",
+    "integration": "candidate, not yet imported or gameplay-approved"
+  },
+  {
+    "id": "gradient-storage",
+    "path": "/Users/yannicrogowitz/.codex/generated_images/01a1534b-c494-7d00-bfaf-adbe3adf0ca8/exec-c0e44d00-c71d-4f83-8a1b-92e42fc694ea.png",
+    "prompt": "Original independent sci-fi pixel-art equipment inventory icon for Idle Intelligence, one compact object in three-quarter isometric view, hard stepped pixel outlines and deliberate small shaded pixel clusters, detailed gunmetal/ivory industrial lab equipment with amber indicators, matches retro 180px inventory equipment. Center entire full silhouette with equal generous transparent margins, roughly square footprint, no frame, no text, no floor or cast shadow, no background, no cloud of glow. Transparent background. A portable training memory vault: squat cylindrical core canister held in an ivory steel cradle, three stacked luminous emerald storage wafers visible through small windows, heavy dark cable returning into the casing. It stores accumulated learning gradients, distinct from a battery.",
+    "method": "Built-in image_gen; original generated raster; not a third-party art pack",
+    "integration": "candidate, not yet imported or gameplay-approved"
+  },
+  {
+    "id": "overdrive-capacitor",
+    "path": "/Users/yannicrogowitz/.codex/generated_images/01a1534b-c494-7d00-bfaf-adbe3adf0ca8/exec-c0d64d09-4686-408f-abc7-013017552812.png",
+    "prompt": "Original independent sci-fi pixel-art equipment inventory icon for Idle Intelligence, one compact object in three-quarter isometric view, hard stepped pixel outlines and deliberate small shaded pixel clusters, detailed gunmetal/ivory industrial lab equipment with amber indicators, matches retro 180px inventory equipment. Center entire full silhouette with equal generous transparent margins, roughly square footprint, no frame, no text, no floor or cast shadow, no background, no cloud of glow. Transparent background. A squat high-power capacitor core: paired thick copper-wound dark steel cylinders linked to a central cyan charge chamber, ceramic insulators, a small amber charge meter without text, sturdy ivory base. Compact silhouette.",
+    "method": "Built-in image_gen; original generated raster; not a third-party art pack",
+    "integration": "candidate, not yet imported or gameplay-approved"
+  },
+  {
+    "id": "synthesis-coordinator",
+    "path": "/Users/yannicrogowitz/.codex/generated_images/01a1534b-c494-7d00-bfaf-adbe3adf0ca8/exec-f9d454a9-0e76-4dad-ac80-020256db2e32.png",
+    "prompt": "Original independent sci-fi pixel-art equipment inventory icon for Idle Intelligence, one compact object in three-quarter isometric view, hard stepped pixel outlines and deliberate small shaded pixel clusters, detailed gunmetal/ivory industrial lab equipment with amber indicators, matches retro 180px inventory equipment. Center entire full silhouette with equal generous transparent margins, roughly square footprint, no frame, no text, no floor or cast shadow, no background, no cloud of glow. Transparent background. A compact precision synthesis control unit: rectangular teal industrial console with an articulated small steel manipulator over three tiny material vials, short pipes and amber indicators, ivory base; one unified piece of laboratory equipment.",
+    "method": "Built-in image_gen; original generated raster; not a third-party art pack",
+    "integration": "candidate, not yet imported or gameplay-approved"
+  },
+  {
+    "id": "singularity-lens",
+    "path": "/Users/yannicrogowitz/.codex/generated_images/01a1534b-c494-7d00-bfaf-adbe3adf0ca8/exec-1a2cee48-a9f9-4da6-b608-d8280fdf37f2.png",
+    "prompt": "Original independent sci-fi pixel-art equipment inventory icon for Idle Intelligence, one compact object in three-quarter isometric view, hard stepped pixel outlines and deliberate small shaded pixel clusters, detailed gunmetal/ivory industrial lab equipment with amber indicators, matches retro 180px inventory equipment. Center entire full silhouette with equal generous transparent margins, roughly square footprint, no frame, no text, no floor or cast shadow, no background, no cloud of glow. Transparent background. A late-game singularity optical instrument: thick dark annular lens held by three gunmetal struts on a low ivory plinth, tiny black central gravitational void rimmed with a crisp violet/cyan crescent, precisely shaded concentric mechanical aperture. No large external glow.",
+    "method": "Built-in image_gen; original generated raster; not a third-party art pack",
+    "integration": "candidate, not yet imported or gameplay-approved"
+  },
+  {
+    "id": "axiom-anchor",
+    "path": "/Users/yannicrogowitz/.codex/generated_images/01a1534b-c494-7d00-bfaf-adbe3adf0ca8/exec-df2c9559-f5be-4a91-88ef-92d5dbb95f7a.png",
+    "prompt": "Original independent sci-fi pixel-art equipment inventory icon for Idle Intelligence, one compact object in three-quarter isometric view, hard stepped pixel outlines and deliberate small shaded pixel clusters, detailed gunmetal/ivory industrial lab equipment with amber indicators, matches retro 180px inventory equipment. Center entire full silhouette with equal generous transparent margins, roughly square footprint, no frame, no text, no floor or cast shadow, no background, no cloud of glow. Transparent background. A compact exotic stabilization core: a levitating faceted golden geometric seed restrained within a squat triangular ivory and gunmetal three-prong mechanical cage, thin magenta links between the prongs, amber base indicators. Distinct from a conventional crystal in a tube.",
+    "method": "Built-in image_gen; original generated raster; not a third-party art pack",
+    "integration": "candidate, not yet imported or gameplay-approved"
+  }
+]

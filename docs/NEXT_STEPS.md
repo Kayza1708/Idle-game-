@@ -193,3 +193,26 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 - Audit-Fortsetzung: gemeinsame kompakte Ansichten, 41 siebensprachige Mira-Dialoge und gespeicherte Analysehilfen umgesetzt; gezielter PlayMode 5/5 inklusive 219 Ansichten. Vollregression/Restinhalte/Cloudkonten/Playerabnahme laufen weiter: siehe `unity-audit-followup.md`.
 
 - 28.10.: EditMode170/170 und gezielter UI-/Feedbacklauf9/9; echter Einführungstrainings-Mitschnitt mit Spielton. iCloud-Backup-Grundlage ohne simulierte Erfolge; Entwicklerkonten fehlen. Weitere Inhalts-/Kontextkorrekturen und finale Vollregression laufen. Details: `unity-audit-followup.md`, `unity-platform-cloud.md`.
+
+### Aktueller Auftrag: Item-System V3 (28.10.2026)
+Verbindliche Spezifikation und offener Abnahmegraph: `docs/item-system-v3/specification.txt` und `docs/item-system-v3/implementation.md`. Vorherige Lokalisierungs-/Feedbackänderungen getrennt sichern. Bestehende Saves noch nicht auf teilweise implementierte V3-Regeln umstellen.
+
+
+### Gemeinsamer Prestige-/Item-V3-Vertrag
+Der zusätzliche Auftrag steht unverändert in `docs/item-system-v3/prestige-axiom-specification.txt`. Fortschritt und konkrete offene Verbraucher: `docs/item-system-v3/implementation.md` und `contracts.md`. Grafische unbezahlte Queues mit echter Planbedienung sind umgesetzt; vorhandene F02-/Operationskapazität bleibt acht. Experimentell sind neue Produktions-/INT-Faktoren, F07/F08/F10, Entdeckungs-/Automationssperren und D/E/T-Produktionsbuchung angebunden. Nicht mit einer abgeschlossenen Spielermigration verwechseln.
+
+Weiter: vollständige Auftragsursachen/Start-Snapshots, Komponentenproduzenten K, Itemprovenienz und Fraktionskonten; alle übrigen Knotenverbraucher, expliziter Archiv-Erwerbsvertrag, sechs Rezepte/Katalogeinbindung (Spriteimport geprüft); danach gemeinsame atomare Migration, Details/Sprachen, spoilerfreie Mira-Führung und erster manueller Axiomreset in echter UI. Arbiträre externe Zeitsplits/numerische Integration und lange Nachher-/Loadoutkampagnen gesondert abnehmen. Baseline läuft auf dem vor Änderungen geladenen Code weiter; nachgewiesen aktiv90Tage/149Prestiges und getrennt passiv90Tage/44Prestiges; Strategiebegrenzung in baseline-notes.md beachten.
+
+Geprüfte Grundlage: 1.989 Vitest, 188 EditMode und final129PlayMode; alle Generatoren synchron. Passivbaseline inzwischen90Tage/44Prestiges, aktives Profil90Tage/149Prestiges. Der folgende Arbeitsschritt ist die vollständige Ereignis-/Erwerbs-/Migrationsanbindung; nicht V3 als abgeschlossen markieren.
+
+- Editor-Anbindung ergänzt und tatsächlich geprüft: offizielle Pipeline0.9.1-exp.1, Live-eval, Sprite-Capabilities, Console, isoliertes fortlaufendes Play und echte390×846-Aufnahme. Sechs neue Sprites sicher importiert; Katalog/Rezepte/Sockeldarstellung weiterhin offen. Details: `docs/item-system-v3/art/README.md`.
+
+### 29.10.2026 – Archiv-Abhängigkeit im V3-Vertrag
+Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehendes I04-/Legacyrecht, Bauplanforschung und unveränderte bezahlte Herstellung; kein Gratisitem/Ersatzpreis. Elf gemeinsame neue Erwerbs-/Zahlungsfälle; Compile, 9 EditMode, 5 PlayMode und gezielte TS-Fälle grün. Echte Save-Migration und erreichbare V3-Spielerfreigabe ausdrücklich noch offen. Siehe `docs/item-system-v3/contracts.md`.
+
+- Baseline: passives vorhandenes Domainprofil bis90Tage/44Prestiges vollständig, ohne Timeout oder Warnung. Grenzen/alte Diagnosekatalogtexte in `docs/item-system-v3/baseline-notes.md` beachten. Für echte V3-Abnahme vollständige Mira-/Rezept-/Modell-/Axiomstrategien, acht Loadouts und maximalen Leerlauf beobachten; aktuelles Profil dafür nicht ausgeben.
+
+- 29.10.: Logik-Saat mit tatsächlichen bezahlten Ereignissen, IDs/Ursachen, Ausschlüssen und echten Resetfolgen angebunden. 1.999Vitest, 191vollständige EditMode und9gezielte PlayMode grün. Nächste Verträge: Photon/Drohne/Gradient und weitere Ereignisse; V3-Dateimigration/Spielerfreigabe weiterhin offen. `docs/item-system-v3/implementation.md`.
+
+- 29.10.: Wissenschaftliche Legacy-Itembasis bei tatsächlicher Compute-/Creditsproduktion ohne vorzeitige Double-Konvertierung erhalten;71gemeinsame Produktionsfälle bis10^20000,191EditMode und9gezieltePlayMode grün. Keine Saveaktivierung. Aktive Altbaseline90Tage/149Prestiges; passive90Tage/44Prestiges, Grenzen in baseline-notes.md.
+- Derselbe wissenschaftliche Basisstand: vollständige154Dateien/2.000Vitest grün (323,84s), vollständige Generatorparität und Webbuild/Typecheck bestanden. Noch keine vollständige V3-Freigabe.

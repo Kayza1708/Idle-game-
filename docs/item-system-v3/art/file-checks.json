@@ -1,0 +1,68 @@
+[
+  {
+    "file": "axiom-anchor.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bitDepth": 8,
+    "colorType": 6,
+    "hasAlphaChannel": true,
+    "sha256": "af59caf0aa4918e0d79b9d28cb6ea077beaf62eba700bb8b5f3077da2826a63d"
+  },
+  {
+    "file": "fleet-coordinator.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bitDepth": 8,
+    "colorType": 6,
+    "hasAlphaChannel": true,
+    "sha256": "62dba17aa9435d032a76a03f3b042c75543ac5daf9d92d81bc4a6ffbf96ab9ca"
+  },
+  {
+    "file": "gradient-storage.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bitDepth": 8,
+    "colorType": 6,
+    "hasAlphaChannel": true,
+    "sha256": "5cf6608406794297b864473cea26a277c7caacccf00b1c982934473ed5733bd0"
+  },
+  {
+    "file": "overdrive-capacitor.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bitDepth": 8,
+    "colorType": 6,
+    "hasAlphaChannel": true,
+    "sha256": "d55e20f2c7c84a0dec4f1fdd56468d863ff05429c5e8688bf78bba3cef09556b"
+  },
+  {
+    "file": "singularity-lens.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bitDepth": 8,
+    "colorType": 6,
+    "hasAlphaChannel": true,
+    "sha256": "26925b715fb0258cf3a698865761cbf122e3c9954a31cb42ca84a77b48153ed9"
+  },
+  {
+    "file": "synthesis-coordinator.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bitDepth": 8,
+    "colorType": 6,
+    "hasAlphaChannel": true,
+    "sha256": "62cb44eec19e97ca12334725139032a0d82b24adc042213029de566b8f31d9e6"
+  }
+]

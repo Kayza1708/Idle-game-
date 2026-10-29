@@ -1,0 +1,73 @@
+{
+  "editor": "6000.3.26f1",
+  "pipeline": "0.9.1-exp.1",
+  "method": "Live script eval_file with ISpriteFrameEditCapability / EditPivot checks",
+  "sprites": [
+    {
+      "id": "fleet-coordinator",
+      "path": "Assets/IdleIntelligence/Art/ItemV3/fleet-coordinator.png",
+      "guid": "87a7af11fcd0f4ad0a96b58117220f29",
+      "spriteRect": "(x:0.00, y:0.00, width:512.00, height:512.00)",
+      "pivot": "(256.00, 256.00)",
+      "pointFilter": true,
+      "pivotCapabilityVerified": true,
+      "sourceBytesPreserved": true,
+      "normalCatalogEnabled": false
+    },
+    {
+      "id": "gradient-storage",
+      "path": "Assets/IdleIntelligence/Art/ItemV3/gradient-storage.png",
+      "guid": "31e891b09868449ca836ab92db5d2b5b",
+      "spriteRect": "(x:0.00, y:0.00, width:512.00, height:512.00)",
+      "pivot": "(256.00, 256.00)",
+      "pointFilter": true,
+      "pivotCapabilityVerified": true,
+      "sourceBytesPreserved": true,
+      "normalCatalogEnabled": false
+    },
+    {
+      "id": "overdrive-capacitor",
+      "path": "Assets/IdleIntelligence/Art/ItemV3/overdrive-capacitor.png",
+      "guid": "8a10fe8d2dc134c4993562881daff97c",
+      "spriteRect": "(x:0.00, y:0.00, width:512.00, height:512.00)",
+      "pivot": "(256.00, 256.00)",
+      "pointFilter": true,
+      "pivotCapabilityVerified": true,
+      "sourceBytesPreserved": true,
+      "normalCatalogEnabled": false
+    },
+    {
+      "id": "synthesis-coordinator",
+      "path": "Assets/IdleIntelligence/Art/ItemV3/synthesis-coordinator.png",
+      "guid": "e18a246154a30415ab721c2a4f6b9e8d",
+      "spriteRect": "(x:0.00, y:0.00, width:512.00, height:512.00)",
+      "pivot": "(256.00, 256.00)",
+      "pointFilter": true,
+      "pivotCapabilityVerified": true,
+      "sourceBytesPreserved": true,
+      "normalCatalogEnabled": false
+    },
+    {
+      "id": "singularity-lens",
+      "path": "Assets/IdleIntelligence/Art/ItemV3/singularity-lens.png",
+      "guid": "7063429af9c6e4e74afc1c77c1fec647",
+      "spriteRect": "(x:0.00, y:0.00, width:512.00, height:512.00)",
+      "pivot": "(256.00, 256.00)",
+      "pointFilter": true,
+      "pivotCapabilityVerified": true,
+      "sourceBytesPreserved": true,
+      "normalCatalogEnabled": false
+    },
+    {
+      "id": "axiom-anchor",
+      "path": "Assets/IdleIntelligence/Art/ItemV3/axiom-anchor.png",
+      "guid": "7d91587ed88084b6e8fc83116d0fc24e",
+      "spriteRect": "(x:0.00, y:0.00, width:512.00, height:512.00)",
+      "pivot": "(256.00, 256.00)",
+      "pointFilter": true,
+      "pivotCapabilityVerified": true,
+      "sourceBytesPreserved": true,
+      "normalCatalogEnabled": false
+    }
+  ]
+}

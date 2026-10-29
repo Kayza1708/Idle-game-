@@ -42,16 +42,41 @@ namespace IdleIntelligence.Tests
             foreach(string language in new[]{"en","es","fr","pt","it","pl"})
                 Assert.That(IdleIntelligence.Core.NativeUiCatalog.Copies.Any(copy=>copy.Values[1]==node.Name&&copy.Values[System.Array.IndexOf(IdleIntelligence.Core.SettingsCatalog.Languages,language)].Length>0),Is.True,node.Id+" "+language);
         }
-        [Test] public void TranslatedHardwareTrainingResearchAndWorkshopDescriptionsRetainNumericConstants()
+        [Test] public void AllPrestigeAndAxiomDescriptionsRetainSourceNumericConstants()
         {
             string[] Numbers(string text)=>System.Text.RegularExpressions.Regex.Matches(text,@"(?<![A-Za-z0-9])[0-9]+(?:[.,][0-9]+)?").Cast<System.Text.RegularExpressions.Match>().Select(m=>decimal.Parse(m.Value.Replace(',','.'),System.Globalization.CultureInfo.InvariantCulture).ToString("G29",System.Globalization.CultureInfo.InvariantCulture)).OrderBy(v=>v).ToArray();
-            foreach(var node in IdleIntelligence.Core.PrestigeBalance.Nodes.Where(n=>n.Branch<4))
+            foreach(var node in IdleIntelligence.Core.PrestigeBalance.Nodes)
             foreach(string language in new[]{"en","es","fr","pt","it","pl"})
             {
                 string text=IdleIntelligence.Core.NativeCopy.Text(node.Description,language);
                 Assert.That(text,Is.Not.EqualTo(node.Description),node.Id+" "+language);
                 CollectionAssert.AreEqual(Numbers(node.Description),Numbers(text),node.Id+" "+language+" must retain all numeric constants");
             }
+            foreach(var node in IdleIntelligence.Core.MetaBalance.Axioms)
+            foreach(string language in new[]{"en","es","fr","pt","it","pl"})
+            {
+                string text=IdleIntelligence.Core.NativeCopy.Text(node.Description,language);
+                Assert.That(text,Is.Not.EqualTo(node.Description),node.Id+" "+language);
+                CollectionAssert.AreEqual(Numbers(node.Description),Numbers(text),node.Id+" "+language);
+            }
+        }
+        [TestCase("de","1,10")][TestCase("en","1.10")][TestCase("fr","1,10")][TestCase("pl","1,10")]
+        public void ResearchSchedulingExplainsCurrentDirectorUnlockRatherThanLegacyLabs(string language,string factor)
+        {
+            var state=IdleIntelligence.Core.Game.New(0);state.Settings.language=language;
+            string text=ResearchCopy.Describe(state,"researchScheduling");
+            Assert.That(text,Does.Contain(factor));Assert.That(text,Does.Not.Contain("labs4"));Assert.That(text,Does.Not.Contain("{NODE}"));Assert.That(text,Does.Not.Contain("{FACTOR}"));
+        }
+        [TestCase("de","2,30")][TestCase("en","2.30")][TestCase("fr","2,30")][TestCase("pl","2,30")]
+        public void ActualSourceItemFixtureUsesLocalizedDecimalsInTheRealDetailRenderer(string language,string expected)
+        {
+            var cases=UnityEngine.JsonUtility.FromJson<DetailCases>(System.IO.File.ReadAllText(System.IO.Path.Combine(UnityEngine.Application.dataPath,"IdleIntelligence/Tests/EditMode/ItemDetailReference.json")));
+            var source=cases.rows.Single(row=>row.name=="uncommon impulse-relay");var state=IdleIntelligence.Runtime.UnityWebImport.Validate(source.transfer);state.Settings.language=language;var item=state.Workshop.inventory.Single(i=>i.id==source.id);
+            Assert.That(ItemDetailsUI.Primary(state,item),Does.Contain("+"+expected+" s"));
+        }
+        [Test]public void KeyedEffectCopyUsesNativeCanonicalTextWhenEnglishSourceSpellingDiffers()
+        {
+            Assert.That(IdleIntelligence.Core.SettingsRules.Text("fr","effect:photonicCompute"),Is.EqualTo("Calcul supplémentaire uniquement pendant le surcadencement actif."));
         }
         [TestCase("de","1.234,5")][TestCase("en","1,234.5")][TestCase("es","1.234,5")][TestCase("fr","1 234,5")][TestCase("pt","1.234,5")][TestCase("it","1.234,5")][TestCase("pl","1 234,5")]
         public void RuntimeNumberGroupingUsesSelectedLocaleWithoutChangingTheSourceFormatter(string language,string expected)

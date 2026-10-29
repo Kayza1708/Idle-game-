@@ -1,0 +1,167 @@
+{
+  "scope": "incomplete joint Item V3 / Prestige V3 implementation; normal saves remain Web64 / Unity24",
+  "sourceHash": "ffde2e6d6e158ea5f7d1b840bce3771b11b9813e069adf89ae743856af7596e6",
+  "tsCSharpPreparedConsumerCases": 62,
+  "queueSourceTransactions": 20,
+  "vitest": {
+    "files": 152,
+    "tests": 1989,
+    "passed": 1989,
+    "failed": 0,
+    "seconds": 331.18,
+    "log": "/tmp/idle-v3-regenerated-vitest.log"
+  },
+  "unityEditMode": {
+    "total": "188",
+    "passed": "188",
+    "failed": "0",
+    "duration": "128.1590548",
+    "result": "Passed"
+  },
+  "unityEditModeXmlSha256": "2872d0dcb5988d3eb366d02243680ce68bcb46025d39121eb3e706fdf3fccf33",
+  "unityPlayMode": {
+    "total": "129",
+    "passed": "129",
+    "failed": "0",
+    "duration": "673.7869994",
+    "result": "Passed",
+    "xmlSha256": "7e9e9c0b8190ddcd3d8f2f594a280529c92d418920ff78fae701a31530220e17"
+  },
+  "typecheck": "passed",
+  "build": "passed; existing web chunk warning",
+  "generationCheck": "passed",
+  "graphics": "22 real Unity queue images, isolated funded state; DE/EN inspected 320/390/430; 6 new generated asset candidates, not in-game proof",
+  "notApproved": [
+    "normal-save V3 activation",
+    "complete 42-item event contracts",
+    "complete 60/24 consumers and texts",
+    "atomic migration",
+    "Mira axiom discovery and preservation UI/clip",
+    "full before/after and loadout balance",
+    "physical-device acceptance"
+  ],
+  "editorPipelineAndArtFollowup": {
+    "pipeline": "0.9.1-exp.1",
+    "liveProof": "art/live-editor-proof.json",
+    "spriteImport": "art/unity-import.json",
+    "normalCatalogEnabled": false,
+    "editMode": {
+      "total": "8",
+      "passed": "8",
+      "failed": "0",
+      "duration": "5.0624912",
+      "result": "Passed",
+      "xmlSha256": "bf7afcd2eef4957f00287da0cb29b1674d1584f72e9504c294d1cdfdb02e9241"
+    },
+    "playMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "31.9765451",
+      "result": "Passed",
+      "xmlSha256": "121ebd26ecb4e681e58baaab856da3ef29e679326dfbb9886ec6d75fbb233465"
+    }
+  },
+  "archiveFollowup": {
+    "sourceHash": "73f9fac1cd007f747229bfd7a3a188720a2b4f64e6cf1d95a8c1f8a342d9c430",
+    "actualSharedArchiveCases": 11,
+    "prepared": true,
+    "normalSaveActivation": false,
+    "vitest": {
+      "files": 153,
+      "tests": 1992,
+      "passed": 1992,
+      "failed": 0,
+      "seconds": 323.03
+    },
+    "actualNativeWebMigration": "pending",
+    "editMode": {
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "duration": "5.4047766",
+      "result": "Passed",
+      "xmlSha256": "c012ed44de3472db5bbf9b064b8ce4b0f24f8fb836e9aa00edbd9440e7ecbc46"
+    },
+    "playMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "23.809244",
+      "result": "Passed",
+      "xmlSha256": "c2c92016fa80e612120f3f7df4d2ecbc916fb69ace669a85f063452451d261b3"
+    }
+  },
+  "learningFollowup": {
+    "sourceHash": "ee7debb60c7f458b2a515db58045066ee9625f5c116ccfde8949bfe347d4617e",
+    "actualSharedLearningFlows": 6,
+    "prepared": true,
+    "normalSaveActivation": false,
+    "vitest": {
+      "files": 154,
+      "tests": 1999,
+      "passed": 1999,
+      "failed": 0,
+      "seconds": 317.34
+    },
+    "v3Persistence": "blocked until complete migration; no V3 file-reload claim",
+    "targetedEditMode": {
+      "total": "11",
+      "passed": "11",
+      "failed": "0",
+      "duration": "5.1499926",
+      "result": "Passed",
+      "xmlSha256": "d5dd06669ec50b5cb96cc5f90b1858099ca4b5351fd13614cf0459946041c0af"
+    },
+    "fullEditMode": {
+      "total": "191",
+      "passed": "191",
+      "failed": "0",
+      "duration": "127.3209907",
+      "result": "Passed",
+      "xmlSha256": "0431760c3630839eeb11a3542cf238506c907dd49c5a13913b76efe9f123181d"
+    },
+    "playMode": {
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "duration": "47.8243537",
+      "result": "Passed",
+      "xmlSha256": "955af75a2c41d8d9c93386d2f2003d86d70e893945bbbbf5ee2334004f4a4471"
+    }
+  },
+  "scientificBaseFollowup": {
+    "sourceHash": "3eb9a154bb8ac61ea476ef3fd921aa2b63ff280e0b1d787bfd0f341ebb4e4ec4",
+    "preparedProductionCases": 71,
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "focusedVitest": 46,
+    "scope": "scientific compute/income base factors only; full V3 save/work migration remains pending",
+    "editMode": {
+      "total": "191",
+      "passed": "191",
+      "failed": "0",
+      "duration": "127.7525347",
+      "result": "Passed",
+      "xmlSha256": "0678d24eb1662f7771a92576a0674882c732a0936d2d578f3fe25cadcaa2f5f9"
+    },
+    "playMode": {
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "duration": "47.290285",
+      "result": "Passed",
+      "xmlSha256": "b11d18e18dc2b2fe1cfea8085f548d610f71594518d0fb5c50a04e445c49ee92"
+    },
+    "discardedPlayModeAttempt": "wrong namespace selected zero; not accepted as evidence; corrected nine-test run passed",
+    "vitest": {
+      "files": 154,
+      "tests": 2000,
+      "passed": 2000,
+      "failed": 0,
+      "seconds": 323.84,
+      "log": "/tmp/idle-v3-scientific-full-vitest.log"
+    }
+  }
+}

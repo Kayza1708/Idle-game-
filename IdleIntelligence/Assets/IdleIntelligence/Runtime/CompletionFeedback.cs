@@ -10,7 +10,7 @@ namespace IdleIntelligence.Runtime
     // Does not advance time, call transactions, grant rewards or request an extra save.
     public sealed class CompletionFeedback:MonoBehaviour
     {
-        GameRuntime game;GameState observed;RectTransform root;CanvasGroup opacity;Text label;Image accent;
+        GameRuntime game;GameState observed;RectTransform root;CanvasGroup opacity;Text label;Image accent;ItemPortrait portrait;Color accentEnd=GameTheme.Enough;
         float started;bool visible;public int Presentations{get;private set;}public string LastText{get;private set;}="";
         string T(string text)=>UiLocalizedText.Translate(text,game.State.Settings.language);
         public void Initialize(GameRuntime runtime){game=runtime;observed=game.State;}
@@ -46,7 +46,9 @@ namespace IdleIntelligence.Runtime
             if(after.Missions.season.xp>before.Missions.season.xp)parts.Add("+"+(after.Missions.season.xp-before.Missions.season.xp)+" XP");
             long components=after.Workshop.components.Select((v,i)=>Math.Max(0,v-before.Workshop.components[i])).Sum();if(components>0)parts.Add("+"+components+" "+T("Komponenten"));
             if(parts.Count==0&&after.Retention.challengeClaims.Length>before.Retention.challengeClaims.Length)parts.Add(T("Challenge abgeschlossen"));
-            if(parts.Count>0)Present(T("Abgeholt")+" · "+string.Join(" · ",parts));
+            var newItems=after.Workshop.inventory.Where(item=>!before.Workshop.inventory.Any(old=>old.id==item.id)).ToArray();
+            if(newItems.Length>0)parts.Add(newItems.Length==1?SettingsRules.Text(after.Settings.language,"item:"+newItems[0].type):"+"+newItems.Length+" "+T("Items"));
+            if(parts.Count>0)Present(T("Abgeholt")+" · "+string.Join(" · ",parts),newItems.FirstOrDefault());
         }
         void Build()
         {
@@ -57,17 +59,20 @@ namespace IdleIntelligence.Runtime
             var line=WorkshopUIFactory.Node("ReceiptAccent",root,typeof(Image));accent=line.GetComponent<Image>();accent.color=GameTheme.Enough;accent.raycastTarget=false;var r=(RectTransform)line.transform;r.anchorMin=Vector2.zero;r.anchorMax=new Vector2(0,1);r.offsetMin=Vector2.zero;r.offsetMax=new Vector2(3,0);
             label=WorkshopUIFactory.Label("ReceiptText",root,"",14,44);Destroy(label.GetComponent<LayoutElement>());WorkshopUIFactory.Fill(label.rectTransform);label.rectTransform.offsetMin=new Vector2(12,6);label.rectTransform.offsetMax=new Vector2(-10,-6);label.raycastTarget=false;label.font=GameTheme.Bold;label.alignment=TextAnchor.MiddleLeft;
         }
-        void Present(string text)
+        void Present(string text,ItemInstance item=null)
         {
-            if(!game.State.Settings.effects||game.State.Workshop.reducedMotion){Show(text,false);return;}Show(text,true);
+            if(!game.State.Settings.effects||game.State.Workshop.reducedMotion){Show(text,false,item);return;}Show(text,true,item);
         }
-        void Show(string text,bool animated)
+        void Show(string text,bool animated,ItemInstance item)
         {
-            if(root==null)Build();LastText=text;label.text=text;var settings=label.GetGenerationSettings(new Vector2(Mathf.Max(120,root.rect.width-22),0));float height=label.cachedTextGeneratorForLayout.GetPreferredHeight(text,settings)/label.pixelsPerUnit;root.sizeDelta=new Vector2(root.sizeDelta.x,Mathf.Clamp(Mathf.Ceil(height)+12,52,100));Presentations++;started=Time.unscaledTime;visible=true;root.gameObject.SetActive(true);opacity.alpha=1;root.localScale=Vector3.one;
+            if(root==null)Build();LastText=text;label.text=text;if(portrait==null&&item!=null){ItemPortrait.Sprites=game.WorkshopPrefab.ItemSprites;portrait=Instantiate(game.WorkshopPrefab.PortraitPrefab,root);portrait.ShowLevel=false;var p=(RectTransform)portrait.transform;p.anchorMin=p.anchorMax=new Vector2(0,.5f);p.pivot=Vector2.one*.5f;p.sizeDelta=Vector2.one*52;p.anchoredPosition=new Vector2(36,0);portrait.Button.interactable=false;}
+            if(portrait!=null){portrait.gameObject.SetActive(item!=null);if(item!=null)portrait.Bind(item);}
+            label.rectTransform.offsetMin=new Vector2(item==null?12:70,6);accentEnd=item==null?GameTheme.Enough:ItemPortrait.RarityColor(item.rarity);accent.color=accentEnd;
+            var settings=label.GetGenerationSettings(new Vector2(Mathf.Max(120,root.rect.width-(item==null?22:80)),0));float height=label.cachedTextGeneratorForLayout.GetPreferredHeight(text,settings)/label.pixelsPerUnit;root.sizeDelta=new Vector2(root.sizeDelta.x,Mathf.Clamp(Mathf.Ceil(height)+12,item==null?52:60,100));Presentations++;started=Time.unscaledTime;visible=true;root.gameObject.SetActive(true);opacity.alpha=1;root.localScale=Vector3.one;
             motion=animated; // Reuses this single visual; rapid results cannot stack objects or block input.
         }
         bool motion;
-        void Update(){if(!visible||root==null)return;float age=Time.unscaledTime-started;if(age>=1.8f){Cancel();return;}if(!motion)return;float enter=Mathf.Clamp01(age/.14f);float leave=Mathf.Clamp01((age-1.5f)/.3f);root.anchoredPosition=new Vector2(0,82-6*(1-enter)*(1-enter));opacity.alpha=enter*(1-leave);accent.color=Color.Lerp(GameTheme.Accent,GameTheme.Enough,Mathf.Clamp01(age/.35f));}
+        void Update(){if(!visible||root==null)return;float age=Time.unscaledTime-started;if(age>=1.8f){Cancel();return;}if(!motion)return;float enter=Mathf.Clamp01(age/.14f);float leave=Mathf.Clamp01((age-1.5f)/.3f);root.anchoredPosition=new Vector2(0,82-6*(1-enter)*(1-enter));opacity.alpha=enter*(1-leave);accent.color=Color.Lerp(GameTheme.Accent,accentEnd,Mathf.Clamp01(age/.35f));}
         void OnApplicationPause(bool paused){if(paused)Cancel();}void OnApplicationFocus(bool focused){if(!focused)Cancel();}
         void OnDestroy(){if(root!=null)Destroy(root.parent.gameObject);}
     }

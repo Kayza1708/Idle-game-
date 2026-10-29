@@ -1,0 +1,1002 @@
+AUFTRAG: ITEM-SYSTEM V3 FÜR IDLE INTELLIGENCE
+
+Implementiere eine vollständige Überarbeitung des Itemsystems mit
+einzigartigen Fähigkeiten, starken sofortigen Verbesserungen,
+langfristiger Skalierung, ausgewählten Exponenten und sinnvollen
+Verbindungen zwischen Hardware, Training, Forschung, KI-Modellen,
+Erkenntnis und Axiomen.
+
+Dies ist ein zusammenhängender Systemumbau, keine Sammlung zusätzlicher
+unabhängiger Prozentboni.
+
+Lies zuerst die geltenden AGENTS.md und relevante Unity-Skills.
+Prüfe den aktuellen Repository-, Branch- und PR-Stand. Erhalte lokale
+Änderungen, Originalgrafiken, bestehende Systeme und Spielstände.
+
+Die tatsächliche aktuelle Implementierung ist maßgeblich. Die unten
+genannten Formeln sind die neue Designspezifikation. Wenn die aktuelle
+Spielstruktur eine ausdrücklich genannte Voraussetzung nicht besitzt,
+dokumentiere die Abweichung und löse sie innerhalb des bestehenden
+Systems, ohne stillschweigend neue Währungen oder Progressionsschranken
+zu erfinden.
+
+Kein selbstständiger Merge und keine Veröffentlichung.
+
+
+A. ZIEL UND VERBINDLICHE DESIGNREGELN
+
+1. Items müssen beim Ausrüsten einen spürbaren Unterschied machen.
+   Viele produktionsorientierte Items beginnen mit ×3 oder ×5.
+   Kleine allgemeine +8-%-Fähigkeiten werden ersetzt.
+
+2. Frühe Items bleiben durch Hardware-/Trainingsskalierung nützlich.
+   Späte Items verknüpfen vorhandene Systeme oder verändern einen
+   klar abgegrenzten Exponenten.
+
+3. Verschiedene Builds bedienen unterschiedliche Ziele:
+   Credits, Compute, Training, Forschung, Materialien,
+   Erkenntnisproduktion, INT und Axiomzyklen.
+
+4. Kein Item darf eine endlose Ressourcen- oder Triggerkette erzeugen.
+
+5. Keine neue Währung und keine zusätzliche tägliche Pflicht.
+   Kein neuer Slot als Voraussetzung für das frühe Itemspiel.
+
+6. Bestehende drei Startslots, weitere reguläre Slots und mögliche
+   Universalslots bleiben nach den aktuellen Freischaltregeln erhalten.
+
+7. Derselbe Itemtyp darf nur einmal gleichzeitig ausgerüstet sein.
+   Inventarkopien sind erlaubt.
+
+8. Einzigartige Fähigkeiten sind bereits auf Common vorhanden.
+   Seltenheit verbessert ihre Stärke. Notwendige Buildfunktionen dürfen
+   nicht ausschließlich durch einen zufälligen Legendary-Drop entstehen.
+
+9. Die bisherigen generischen sekundären und tertiären Itemwirkungen
+   werden durch das unten definierte System ersetzt. Alte und neue
+   Wirkungen nicht gleichzeitig anwenden.
+
+10. Alle Balancekonstanten bleiben in der geltenden zentralen Quelle.
+    Unity erhält reproduzierbar erzeugte Daten und Paritätsfälle.
+    Keine zweite unabhängig gepflegte C#-Balancetabelle.
+
+
+B. ITEMSTÄRKE UND SOFTCAP-HILFSFUNKTIONEN
+
+Behalte zunächst Level 1–69 und die vorhandene Schmiedestufenbegrenzung
+bei. Die folgenden Referenzen rechnen mit Schmiedestufe 0–20.
+
+Seltenheitsfaktoren:
+Common      1,00
+Uncommon    1,10
+Rare        1,20
+Epic        1,32
+Legendary   1,45
+Mythic      1,60
+
+Itemstärke:
+P = rarityFactor
+    × [1 + 0,01 × (itemLevel − 1)]
+    × [1 + 0,02 × forgeLevel]
+
+Exponentstärke:
+Q = sqrt(P)
+
+Referenz:
+Common L1/+0: P = 1, Q = 1.
+Mythic L69/+20: P = 3,7632, Q ≈ 1,9398969045.
+
+Für Werte mit ausdrücklich angegebenem Softcap:
+S(x,k) = x                              für 0 ≤ x ≤ k
+S(x,k) = k + sqrt(k × (x − k))           für x > k
+
+Diese Funktion ist stetig und wächst nach der Schwelle weiter.
+Negative Eingaben werden abgelehnt beziehungsweise aus validierten
+Spielständen ausgeschlossen, nicht heimlich in positive Werte umgewandelt.
+
+Alle großen Bestände, Summen und Potenzen über das bestehende
+ScientificNumber-System berechnen. Keine Umwandlung großer Zahlen
+zu float/double/Number vor Logarithmus oder Potenz.
+
+Berechnung in logarithmischer Darstellung erlauben:
+log10(a^b) = b × log10(a).
+
+Kein Infinity-Clamping auf einen willkürlichen maximalen Kontostand.
+
+
+C. GEMEINSAMER BASISWERT
+
+Jedes ausgerüstete Item besitzt zusätzlich zur einzigartigen Fähigkeit
+genau einen allgemeinen Basiswert:
+
+Prozessor: +10 % × P Compute.
+Kern:     +10 % × P Credits.
+Forschung:+10 % × P Forschungstempo.
+
+Gleiche Basiswertarten additiv innerhalb ihres gemeinsamen Faktors:
+baseComputeFactor = 1 + Summe(Prozessorbasiswerte)
+baseCreditFactor  = 1 + Summe(Kernbasiswerte)
+baseResearchFactor= 1 + Summe(Forschungsbasiswerte)
+
+Vorhandene globale Itemverstärker aus Integration, Prestige und Axiomen
+wirken auf diese Basiswerte.
+
+Sie wirken NICHT automatisch auf:
+- Exponenten,
+- P oder Q,
+- Kombinationen,
+- Triggerhäufigkeit,
+- Rückgewinnungsraten,
+- Arbeitsübertragungen,
+- garantierte zusätzliche Ereignisse.
+
+Bestehende KI-Fähigkeiten zur Verstärkung von Itemboni weiterhin wirksam
+halten, aber eindeutig auf die allgemeinen Basiswerte abbilden und in
+der UI beschreiben. Keine bisher gekaufte Fähigkeit still entfernen.
+
+
+D. EINDEUTIGE ZUSTANDSGRÖSSEN
+
+H: aktuelle Summe aller besessenen Hardwareeinheiten.
+n: aktuelle Anzahl einer bestimmten Hardwareklasse.
+M: aktuelle Summe Qualität + Effizienz + Integration im Run.
+F: Summe aktueller Forschungslevel plus abgeschlossener Einmalforschungen;
+   eine Forschung nicht doppelt zählen.
+D: im aktuellen Run regulär produzierte Daten.
+E: im aktuellen Axiomzyklus selbst erzeugte Erkenntnis.
+U: Summe der Upgradelevel aller erworbenen KI-Modelle.
+Z: abgeschlossene echte Axiomzyklen.
+N: Anzahl aktuell gekaufter unterschiedlicher INT-Knoten.
+T: regulär angerechnete Runminuten innerhalb bestehender Offlinegrenzen.
+K: im aktuellen Axiomzyklus selbst erzeugte Komponenten.
+
+D/E/K sind Produktionszähler, keine aktuellen Walletbestände:
+Ausgeben reduziert sie nicht.
+Handel, Import, Shop, Gutscheine, Rückerstattungen, Zerlegung,
+Rückgewinnung und erneut vergebene Altbestände zählen nicht als
+neue reguläre Produktion.
+
+Für bestehende Saves keine Vergangenheit erfinden.
+Fehlende neue Zähler beginnen konservativ ab Migration;
+bekannte aktuelle Bestände dürfen nicht als Lifetimeproduktion
+umetikettiert werden.
+
+
+E. ALLE BESTEHENDEN ITEMS: NEUE FÄHIGKEITEN
+
+Die folgenden Fähigkeiten ersetzen die bisherigen einzigartigen und
+generischen Nebenwirkungen. Der gemeinsame Basiswert aus C bleibt.
+
+
+E1. PROZESSOREN
+
+1. IMPULSRELAIS
+   Jeder zehnte akzeptierte manuelle Tap vergütet:
+   2 × P Sekunden reguläre passive Credits.
+
+   Ist der auslösende Tap kritisch:
+   Zusatzvergütung ×1,5.
+
+   Referenzrate ohne temporäre Werbung, Shopboosts oder Overdrive.
+   Keine automatisierten oder abgelehnten Eingaben zählen.
+   Triggerstand bleibt am Exemplar gespeichert.
+   Ausrüsten oder Reload setzt ihn nicht zurück.
+
+2. QUANTENCHIP
+   Zusätzlicher globaler Compute-Faktor:
+   3^P × (1 + H/100)^(0,75 × Q).
+
+3. NEURAL-ASIC
+   Zusätzlicher globaler Credit-Faktor:
+   3^P × (1 + M/10)^(0,8 × Q).
+
+4. PHOTONENFELD
+   Jeder regulär abgeschlossene bezahlte Trainingsauftrag gewährt
+   3 × P Sekunden zusätzliche Forschungsarbeit.
+
+   Arbeit entspricht der regulären Forschungsleistung am Ereigniszeitpunkt,
+   ohne weitere ereignisgenerierte Arbeit.
+   Auf belegte Labore verteilen.
+   Bei keinem belegten Labor verfällt dieser Zusatz.
+   Kostenlose Tutorialaufträge lösen ihn nicht aus.
+
+5. INFERENZ-ROUTER
+   Pro aktiver gültiger Hardware-Nachbarschaftsverbindung:
+   +10 % × P globale Compute-Produktion.
+
+   Gemeinsamer Faktor:
+   1 + 0,10 × P × Zahl aktiver Verbindungen.
+
+   Erzeugt keine Verbindung, wenn deren normale Voraussetzungen fehlen.
+
+6. BURST-PROZESSOR
+   Erste drei Sekunden jedes regulär gestarteten Overdrives:
+   zusätzlicher Credit-Faktor 1 + 2 × P.
+
+   Stärke und Zeitfenster beim Overdrive-Start festlegen.
+   Kein erneutes Anfangsfenster durch Ausrüsten, Kanalwechsel oder Reload.
+
+7. LEGACY-CONTROLLER
+   Für jede der ersten drei Hardwareklassen:
+   eigene Klassenproduktion × 5^P × (1 + n/25)^Q.
+
+   Wirkt ausschließlich auf die jeweilige Klasse vor globalen Faktoren.
+
+8. SPARSE-DECODER
+   Drei Klassen mit höchster Produktion vor globalen Itemboni:
+   eigene Produktion × (1 + 1,5 × P).
+
+   Bei höchstens drei aktuell besessenen Klassen:
+   stattdessen × (1 + 3 × P).
+
+   Rangfolge ohne Sparse-, globale Item- und Kombinationsfaktoren bestimmen.
+   Bei Gleichstand stabile Klassenreihenfolge.
+   Kein selbstreferenzielles Neusortieren.
+
+9. PHOTONIK-MATRIX
+   Während Overdrive:
+   Compute und Daten jeweils × (1 + 2 × P).
+
+   Nicht zusätzlich als Revenue-/Dauermultiplikator anwenden.
+
+10. QUANTENKOPPLER
+    Bestehende Begrenzung der bei Hardware-Nachbarschaften angerechneten
+    Einheiten mit (1 + P) multiplizieren.
+
+    Bruchteile gemäß bestehender Klassenformel behandeln.
+    Nur bestehende aktive Verbindungen.
+    Keine zusätzliche neue Nachbarschaftsformel parallel einführen.
+
+11. AXIOMGITTER
+    Axiomgewinn vor Abrundung:
+    × 2^P × (1 + N/10)^(0,35 × Q).
+
+    N zählt unterschiedliche aktuell gekaufte INT-Knoten, maximal
+    tatsächlich vorhandene Kataloggröße.
+    Kein Bonus aus bloß verfügbaren oder früher besessenen Knoten.
+
+    Zusätzlich KEIN Credit-Exponent und KEINE INT-Gewichtung:
+    dieses Item hat exakt diese Axiomrolle.
+
+12. ENTROPIESENKE
+    Zusätzlicher Compute-Faktor:
+    5^P × [1 + log10(1 + E)]^(1,25 × Q).
+
+    E ist selbst erzeugte Erkenntnis im Axiomzyklus.
+    Keine Abwertung durch Ausgeben, kein Hochrechnen alter Saves.
+
+
+E2. KERNE
+
+13. SPEICHERKRISTALL
+    Zusätzlicher Credit-Faktor:
+    3^P × [1 + log10(1 + D)/5]^Q.
+
+14. LOGIK-SAAT
+    Reguläre bezahlte Qualität-/Effizienzabschlüsse bilden eine Lernserie.
+    Bei abwechselndem Track: Serie +1, maximal 10.
+    Bei gleichem Track: Serie auf floor(Serie/2).
+    Integration verändert diese Serie nicht.
+
+    Trainingstempo:
+    × 2^P × (1 + 0,10 × P × Serie).
+
+    Serie ist runbezogen und zählt nur Abschlüsse, bei denen das Item
+    aktiv ausgerüstet war. Unequip löscht sie nicht, erzeugt aber keinen
+    weiteren Fortschritt.
+
+15. TENSOR-KERN
+    Zusätzlicher Compute-Faktor:
+    3^P × (1 + M/25)^Q.
+
+16. DISTILLATIONSMODUL
+    Verbessert einen tatsächlich vorhandenen Softcap des
+    Qualität-/Effizienz-Trainingsnutzens.
+
+    Für dessen vorhandene Potenz a mit 0 < a < 1:
+    a_neu = a + (1 − a) × [0,20Q / (1 + 0,20Q)].
+
+    Andere Trainingsdrosseln und Integration unverändert lassen.
+    Keine neue Drossel einführen.
+
+    Falls der aktuelle Code keinen solchen Potenz-Softcap besitzt:
+    bestehende Softcapfunktion mathematisch äquivalent über ihre
+    Ausgabekurve abmildern. Monotonie und Stetigkeit beweisen.
+    Den konkreten Adapter dokumentieren; kein stiller No-op.
+
+17. CURRICULUM-MODUL
+    Vorhandene Softcap-Schwelle von Qualität und Effizienz:
+    × (1 + 0,5 × P).
+
+    Verschiebt nur die Schwelle.
+    Mit Distillationsmodul kombinierbar: erst Schwelle verschieben,
+    danach die vorhandene Kurve abmildern.
+    Nicht doppelt auf dasselbe Training anwenden.
+
+18. LANGZEITSPEICHER
+    Zusätzlicher passiver Credit-Faktor:
+    2^P × [1 + S(T,240)/30]^(0,5 × Q).
+
+    Offlinezeit zählt nur im regulär angerechneten Umfang.
+    Kein Zuwachs durch verworfene Offlinezeit oder rückwärts gestellte Uhr.
+
+19. KRYOCONTROLLER
+    Dauer neu gestarteter Overdrives:
+    × (1 + 0,5 × P).
+
+    Dauer beim Start speichern.
+    Ab-/Anlegen verlängert laufende Zustände nicht.
+    Kein harter zusätzlicher +100-%-Cap.
+
+20. FERTIGUNGSCONTROLLER
+    Bei erfolgreicher bezahlter Herstellung:
+    Komponentenrückgewinnung = min(0,35; 0,10 × P).
+
+    Nur tatsächlich bezahlte Komponenten, keine Daten/Module/Lernkosten.
+    Bruchteile dauerhaft sammeln.
+    Diese Rückgewinnung mit bestehender Rückgewinnung verrechnen,
+    nicht als unabhängige zweite Materialquelle stapeln.
+    Siehe Materialschutz in I.
+
+21. MODELL-ECHOKERN
+    Regulärer Revenue-Multiplikator des aktiven KI-Modells:
+    modelRevenue^(1 + 0,25 × Q).
+
+    Nur der definierte Modell-Revenuefaktor.
+    Keine Slotzahl, kein Itembasisbonus, kein allgemeiner Creditfaktor.
+    Nicht rekursiv den bereits verstärkten Modellfaktor verwenden.
+    Ohne aktives Modell Faktor 1.
+
+22. MNEMONISCHER ANKER
+    Trainingstempo:
+    × 2^P × (1 + U/10)^(0,75 × Q).
+
+    Jedes echte erworbene Modellupgrade zählt einmal.
+    Unbekannte/gesperrte Modelle nicht als Level 0 mit Bonus mitzählen.
+    Kein alter unverbundener Komponenten-Nebeneffekt bleibt bestehen.
+
+
+E3. FORSCHUNGSITEMS
+
+23. ERKENNTNISARCHIV
+    Gewichtung zukünftiger regulär anrechenbarer Crediteinnahmen:
+    × (1 + 0,50 × P).
+
+    Zum Zeitpunkt des Verdienens erfassen.
+    Keine Neubewertung historischer Einnahmen beim Prestige.
+    Aktuelle V2-Prestigeansprüche und bereits beanspruchte INT respektieren.
+    Erwerbsweg prüfen und vervollständigen: kein unerreichbarer
+    Nullkosten-/Positivkosten-Widerspruch.
+
+24. FELDSCANNER
+    Analysetempo:
+    × 2^P × [1 + 0,05 × P × S(A,25)].
+
+    A = reguläre bezahlte Analyseabschlüsse im Run, während dieses Item
+    aktiv war. Keine Claims, Wiederanzeige oder Tutorialabschlüsse zählen.
+
+25. LABORDROHNE
+    Zusätzliche Forschungsarbeit pro Zeitschritt:
+    min(0,40; 0,10 × P) × reguläre Forschungsarbeit aller belegten Labore.
+
+    An das Labor mit der größten regulären Restlaufzeit übertragen.
+    Bei einem Labor dort anwenden.
+    Kein Übertrag aus bereits übertragener Arbeit.
+    Faire deterministische Behandlung bei Gleichstand.
+
+26. DATENPRISMA
+    Datenproduktion:
+    × 3^P × (1 + F/10)^Q.
+
+27. DIAGNOSEADAPTER
+    Komponenten bezahlter Hardware-Meilensteinpakete:
+    × (1 + P).
+
+    Nur reguläre einmalige Meilensteinvergaben.
+    Bruchteile sammeln; feste Sondervergaben separat ausweisen.
+
+28. VERSUCHSCONTROLLER
+    Nach Forschungsbereichswechsel:
+    min(0,50; 0,15 × P) der Arbeitsanforderung eines neu bezahlten
+    Forschungsauftrags als Anfangsfortschritt.
+
+    Bereich und Anspruch beim Start bestimmen und speichern.
+    Mindestlaufzeit/Arbeitsgrenze gemäß gemeinsamer Startlogik beachten.
+
+29. PRÄZISIONSSCANNER
+    Gewichtung der gewählten Materialfamilie:
+    bisherige Fokusgewichtung × (1 + P).
+
+    Bestehender Mengenabschlag bei Fokus:
+    neuer Abschlag = bisheriger Abschlag / (1 + P).
+
+    Beispiel: bisher 20 % Mengenverlust wird auf P=1 zu 10 %.
+    Keine +100-%-Fundchance; Wahrscheinlichkeiten korrekt normalisieren.
+
+30. RECYCLING-SONDE
+    Pro tatsächlich und unwiderruflich zerlegtem Rare+-Item:
+    +0,25 × P Bauplanfragment-Fortschritt.
+
+    Je volle Einheit ein Fragment; Bruchteile speichern.
+    Ersetzt den bisherigen durch dieses Item erhöhten Zufallswurf.
+    Normale vorhandene Basis-Zerlegefunde getrennt behandeln.
+    Common/Uncommon erzeugen keinen Zusatzfortschritt.
+
+31. BAUPLANARCHIV
+    Forschungstempo:
+    × 2^P × (1 + 0,03 × P × B).
+
+    B = Zahl unterschiedlicher Baupläne mit mindestens Meisterschaft 1.
+    Ein Bauplan zählt nur einmal, nicht einmal pro Meisterschaftsstufe.
+
+32. PROTOKOLLCONTROLLER
+    Mindestdauer regulärer Forschung:
+    max(0,5 Sekunden; bisherige Mindestdauer / (1 + P)).
+
+    Wirkung gilt bei Erstellung des Auftrags.
+    Es ersetzt die vorherige einzigartige Bonuszeit dieses Items.
+    Andere automatische Startboni stammen ausschließlich aus Kombinationen.
+
+33. PHOTONIK-ANALYSATOR
+    Photonische Materialausbeute aus bezahlten Analysen und
+    Hardware-Meilensteinpaketen:
+    × (1 + P).
+
+    Keine Wirkung auf Shop, Handel, Gutscheine oder Rückgewinnung.
+    In V2-Verbrauchern wirklich anwenden.
+
+34. QUANTEN-DIAGNOSEMODUL
+    Entsprechender Ausbeutefaktor für Quantenmaterialien:
+    × (1 + P).
+
+    Gleiche Quellregeln wie Photonik-Analysator.
+
+35. GEHEIMLABOR-RESONATOR
+    Erkenntnisproduktion:
+    × 3^P × [1 + log10(1 + R)/10]^(0,75 × Q).
+
+    R = reguläre Datenproduktion pro Sekunde, gemessen relativ zu
+    1 Dateneinheit/s.
+    Temporäre Ads-/Shop-/Overdrivefaktoren ausgeschlossen.
+    Kein Rückgriff auf bereits aus Erkenntnis erzeugte Zusatzarbeit.
+
+36. ZYKLUS-OBSERVATORIUM
+    Forschungstempo:
+    × 3^P × (1 + Z)^(0,75 × Q).
+
+    Keine harte Begrenzung auf fünf oder 20 Zyklen.
+    Nur echte abgeschlossene Axiomresets zählen.
+
+
+F. SECHS NEUE ITEMS
+
+Neue IDs dauerhaft und eindeutig wählen.
+Originale neue Icons im bestehenden Stil erstellen, Herkunft dokumentieren.
+Keine bestehenden Item-IDs umbenennen.
+
+37. FLOTTENKOORDINATOR
+    Slot: Prozessor.
+    Compute:
+    × 2^P × (1 + 0,15 × P × V).
+    V = Hardwareklassen mit mindestens 100 aktuell besessenen Einheiten.
+
+38. GRADIENTENSPEICHER
+    Slot: Kern.
+    Speichert min(0,40; 0,10 × P) der regulär geleisteten bezahlten
+    Trainingsarbeit für den nächsten Auftrag.
+
+    Nur Arbeit, die während aktiver Ausrüstung entstand.
+    Keine Kopie von Intro-, übertragenen oder Bonusarbeitseinheiten.
+    Ein neuer Auftrag kann durch diesen Übertrag maximal 50 %
+    seiner Arbeitsanforderung erhalten.
+    Restbudget maximal eine reguläre Arbeitsanforderung des zuletzt
+    abgeschlossenen Auftrags; darüber hinaus verfällt Überhang.
+    Keine unbegrenzt lagerbare Zeitarbeit.
+
+39. OVERDRIVE-KONDENSATOR
+    Slot: Kern.
+    Ein regulärer bezahlter Forschungsabschluss gibt 2 × P Ladungspunkte.
+    Bruchteile sammeln.
+    Höchstens eine neue Overdriveaktivierung pro Abschlussereignis.
+    Ladung nur während Ausrüstung erzeugen.
+    Kein Aufladen durch Reload oder erneuten Claim.
+
+40. SYNTHESEKOORDINATOR
+    Slot: Forschung.
+    Synthesetempo:
+    × 2^P × [1 + log10(1 + K)/4]^(0,5 × Q).
+
+    K nur selbst erzeugte Komponenten im Axiomzyklus.
+    Keine Wirkung auf Kauf-/Tauschpreise oder Ressourcenverbrauch.
+
+41. SINGULARITÄTSLINSE
+    Slot: Prozessor.
+    Sehr spätes Axiomitem.
+
+    C = reine reguläre Hardwareproduktion vor sämtlichen Item-,
+    Modell-, Prestige-, Axiom- und temporären Faktoren,
+    geteilt durch 1 Compute/s.
+
+    Zusätzlicher Faktor:
+    max(1,C)^(0,02 × Q).
+
+    Entspricht in diesem klaren Teilbereich einem Exponenten
+    von 1,02 bis ungefähr 1,0388.
+    Kein Potenzieren der Wallet und kein Potenzieren anderer Exponenten.
+    Kombination kann den Zusatzexponenten um 50 % erhöhen.
+
+42. AXIOMANKER
+    Slot: Kern.
+    Nach einem echten Axiomreset:
+    Compute und Training × (1 + 2 × P)
+    für die ersten 30 regulär angerechneten Runminuten.
+
+    Aktivierung nur bei Reset, wenn das Item vor dem Reset ausgerüstet
+    war und nach den regulären Erhaltungsregeln verfügbar bleibt.
+    Stärke als Resetvertrag speichern.
+    An-/Ablegen nach Reset erzeugt keinen neuen Vertrag.
+    Kein erstmaliger Gratisvertrag beim Import eines alten Saves.
+
+
+G. KOMBINATIONEN UND SLOTVERTRÄGLICHKEIT
+
+Kombinationen haben feste Werte, skalieren nicht mit globalen
+Itemverstärkern und zählen nur tatsächlich ausgerüstete Items.
+
+Eine Kombination besitzt einen Zweierbonus und optional eine Ergänzung
+durch ein drittes Item. Der Zweierbonus wird nicht doppelt gerechnet.
+
+1. RECHENVERBUND
+   Quantenchip [Prozessor] + Tensor-Kern [Kern]:
+   Compute ×5.
+   Dazu Inferenz-Router [Prozessor]:
+   Skalierungsexponent des Quantenchips +0,20.
+
+2. BOOTSTRAPPING
+   Legacy-Controller [Prozessor] + Diagnoseadapter [Forschung]:
+   Hardware-Meilensteinpakete ×1,5 Komponenten.
+   Dazu Speicherkristall [Kern]:
+   Credits ×1,5 pro erster Hardwareklasse mit mindestens 250 Einheiten;
+   nur erste drei Klassen, maximal ×3,375.
+
+3. LERNSPIRALE
+   Photonenfeld [Prozessor] + Logik-Saat [Kern]:
+   Training und Forschung ×1,5.
+   Dazu Labordrohne [Forschung]:
+   Zusätzliche Arbeit des Photonenfelds ×2.
+   Übertrag bleibt nicht rekursiv.
+
+4. DESTILLIERTE INTELLIGENZ
+   Neural-ASIC [Prozessor] + Distillationsmodul [Kern]:
+   Credits ×5.
+   Dazu Geheimlabor-Resonator [Forschung]:
+   Für Neural-ASIC/Tensor-Kern zählen Modellupgrades zusätzlich:
+   M_effektiv = M + 2U.
+   Neural-ASIC-Skalierungsexponent zusätzlich +0,15.
+
+5. ENERGIEÜBERSCHUSS
+   Burst-Prozessor [Prozessor] + Kryocontroller [Kern]:
+   Burstfenster fünf statt drei Sekunden;
+   zusätzlicher Credit-Faktor im Burstfenster ×3.
+   Dazu Photonik-Analysator [Forschung]:
+   Daten ×5 während des Burstfensters.
+   Diese Version ist mit den drei Startslotfamilien verträglich.
+
+6. AUTONOMES LABOR
+   Labordrohne [Forschung] + Protokollcontroller [Forschung]:
+   Automatisch bezahlte Forschungsstarts erhalten 5 % Anfangsfortschritt.
+   Dazu Versuchscontroller [Forschung]:
+   Jeder dritte gültige automatische Start weitere 10 %.
+   Bewusst ein später Build für zusätzliche Forschungs-/Universalslots.
+   In der UI diese Slotanforderung erklären.
+
+7. GESCHLOSSENER KREISLAUF
+   Fertigungscontroller [Kern] + Recycling-Sonde [Forschung]:
+   Zusätzlicher Zerlegefragment-Fortschritt ×1,25.
+   Dazu Diagnoseadapter [Forschung]:
+   Reguläre bezahlte Analysen ×1,2 Gesamtmaterial.
+   Rückgewinnungs- und Provenienzregeln bleiben wirksam.
+
+8. PHOTONISCHE ARCHITEKTUR
+   Photonik-Matrix [Prozessor] + Photonik-Analysator [Forschung]:
+   Photonikausbeute aus gültigen Quellen während Overdrive ×2.
+   Dazu Kryocontroller [Kern]:
+   Gleicher Kombinationsausbeutefaktor für bereits freigeschaltete
+   Quantenmaterialien. Keine Freischaltung durch die Kombination.
+
+9. ERKENNTNISSCHLEIFE
+   Geheimlabor-Resonator [Forschung] + Entropiesenke [Prozessor]:
+   Erkenntnis ×3.
+   Dazu Modell-Echokern [Kern]:
+   Erkenntnis zusätzlich × (1 + aktives Modellupgradelevel/10)^0,5.
+
+10. AXIOMGEDÄCHTNIS
+    Axiomgitter [Prozessor] + Zyklus-Observatorium [Forschung]:
+    Axiomgewinn vor Abrundung ×2.
+    Dazu Axiomanker [Kern]:
+    Einmaliger Resetvertrag wird ersetzt durch:
+    Compute/Training ×10 für 15 angerechnete Minuten,
+    anschließend normaler Axiomankerfaktor für weitere 15 Minuten.
+    Kein zusätzliches Stapeln mit dessen erstem Faktor.
+
+11. WISSENSCHAFTLICHE BIBLIOTHEK
+    Bauplanarchiv [Forschung] + Datenprisma [Forschung]:
+    Forschung ×1,5.
+    Dazu Feldscanner [Forschung]:
+    Jeder fünfte bezahlte Analyseabschluss gibt einen zusätzlichen
+    Bauplanfortschrittspunkt im tatsächlich zugehörigen Bereich.
+    Bewusst später Drei-Forschungsslot-Build.
+
+12. INDUSTRIELLE SINGULARITÄT
+    Flottenkoordinator [Prozessor] + Synthesekoordinator [Forschung]:
+    Syntheseausbeute ×1,5.
+    Dazu Singularitätslinse [Prozessor]:
+    Zusatzexponent der Linse ×1,5.
+
+Prüfe jede Kombination gegen tatsächlich erreichbare Slotkonfigurationen.
+Keinen Build als früh spielbar darstellen, der Universalslots benötigt.
+
+Mindestens diese Referenzloadouts nachweisen:
+- frühes Hardwarebuild: Quantenchip / Tensor-Kern / Diagnoseadapter.
+- frühes Lernbuild: Photonenfeld / Logik-Saat / Labordrohne.
+- frühes Overdrivebuild: Burst-Prozessor / Kryocontroller /
+  Photonik-Analysator.
+- Geheimlaborbuild: Entropiesenke / Modell-Echokern /
+  Geheimlabor-Resonator.
+- Axiombuild: Axiomgitter / Axiomanker / Zyklus-Observatorium.
+- reguläres Sechsslotsystem: zwei Prozessoren, zwei Kerne,
+  zwei Forschungsitems.
+- spätes Universalslotsystem separat.
+
+Keine künstliche Änderung von Itemslotfamilien beim Ausrüsten.
+
+
+H. BERECHNUNGSREIHENFOLGE UND RÜCKKOPPLUNGSSCHUTZ
+
+Erstelle einen expliziten Abhängigkeitsgraphen vor Implementierung.
+
+Grundreihenfolge:
+
+1. Validierten Zustand und Ausrüstungssnapshot lesen.
+2. Unverstärkte Hardwareklassenproduktion bestimmen.
+3. Klassenbezogene Itemeffekte und gültige Nachbarschaften.
+4. Compute-Basiswerte, einzigartige Compute-Multiplikatoren,
+   Singularitätslinse auf ihrem ausdrücklich begrenzten C.
+5. Reguläre Compute-/Nutzerberechnung.
+6. Aktiven ursprünglichen KI-Revenuefaktor bestimmen;
+   Modell-Echokern genau einmal anwenden.
+7. Reguläre Creditfaktoren und Credititems.
+8. Zeitlich begrenzte Overdrive-/Boostfaktoren.
+9. Zukünftige anrechenbare Einnahmen und INT-Gewichtung aufzeichnen.
+10. Axiomvorschau aus gültiger INT-Basis, dann Axiomitemfaktoren,
+    dann genau einmal abrunden.
+
+C der Singularitätslinse nie aus der bereits itemverstärkten
+Compute-Produktion ableiten.
+
+D/E/K-Zähler können über Zeit Rückkopplung ermöglichen, aber nicht
+innerhalb derselben Auswertung einen Fixpunkt oder Rekursionsaufruf
+verlangen.
+
+Erkenntnisproduktion verwendet den Zustand am Anfang des
+Simulationsintervalls beziehungsweise eine dokumentierte numerische
+Integration. Sie darf ihre eigene gerade entstehende Erkenntnis
+nicht wiederholt im selben Zeitschritt konsumieren.
+
+Temporäre Bonussekunden und direkte Belohnungen dürfen keine
+neuen regulären Produktionsereignisse erzeugen, wenn dadurch
+derselbe Bonus erneut auslösbar wäre.
+
+
+I. LOGIKLÜCKEN VERBINDLICH SCHLIESSEN
+
+1. AUSRÜSTUNGSWECHSEL
+   Live-Produktionsfaktoren reagieren auf den aktuellen Zustand.
+   Bereits begonnene Verträge wie Forschungsanfangsbonus,
+   Overdrive-Dauer, Materialanalyse und Resetbonus bleiben gespeichert.
+   Vorteile nicht nachträglich neu würfeln oder neu berechnen.
+
+2. ABSCHLUSSEFFEKTE
+   An Start und Abschluss gebundene Effekte klar unterscheiden.
+   Photonenfeld: aktive Ausrüstung beim Abschluss.
+   Materialanalyseausbeute: Snapshot beim bezahlten Start.
+   Overdrive-Dauer/Burst: Snapshot beim Start.
+   Axiomgewinn: Ausrüstung am bestätigten Reset.
+   Rückwirkende Einnahmengewichtung ausgeschlossen.
+
+3. KEINE DOPPELTEN EREIGNISSE
+   Eindeutige gespeicherte Transaktions-/Auftrags-IDs.
+   Reload, Claim, Rückkehrbericht und Animation lösen kein Ereignis erneut aus.
+   Auch bei Appabbruch zwischen Zahlung und Darstellung korrekt bleiben.
+
+4. MATERIALKREISLAUF
+   Pro Exemplar bezahlte Materialbasis und bereits zurückgewonnene
+   Materialien erhalten.
+   Crafting-Rückgewinnung zuerst abziehen.
+   Zerlegung darf insgesamt niemals mehr als 90 % der ursprünglich
+   bezahlten Komponenten zurückgeben, auch mit allen bestehenden Boni.
+   Bestehende niedrigere Grenzen nur im Rahmen der neuen zentralen
+   Balanceentscheidung verändern.
+   Fusion überträgt korrekte Provenienz ihrer drei Eingaben.
+   Shop-/Dropitems ohne bezahlte Craftbasis nicht wie voll bezahlte
+   selbst hergestellte Items behandeln.
+
+5. TRIGGERKETTEN
+   Ereignisursache mitführen: regulär, übertragen, Bonus, Intro,
+   Kauf, Handel, Rückerstattung.
+   Übertragene Arbeit erzeugt keine neue Übertragung desselben Systems.
+   Grenzfälle mehrerer gleichzeitig abgeschlossener Jobs deterministisch lösen.
+
+6. OFFLINE
+   Online- und Offlineberechnung verwenden dieselben Effektfunktionen.
+   Nicht pro angenommenem Frame simulieren.
+   An Overdrive-, Auftrags-, Resetbonus- und sonstigen Zeitgrenzen teilen.
+   Keine fünfsekündige Burstphase pauschal auf acht Stunden anwenden.
+   Bei vielen Triggern mathematisch bündeln, nicht Millionen Schleifen.
+
+7. RESETREGELN
+   Prestige: Runzähler D/T/A/Lernserie zurücksetzen, soweit die
+   bestehenden Regeln keinen ausdrücklich gespeicherten Erhalt vorsehen.
+   Axiomreset: zusätzlich E/K und Zyklusverträge zurücksetzen;
+   reguläre Erhaltungsregeln beachten.
+   Itemlevel, Schmieden und Besitz nach bestehenden Regeln erhalten.
+   Z nur nach erfolgreichem echten Axiomreset erhöhen.
+
+8. CHALLENGES
+   No-items deaktiviert Basiswerte, Fähigkeiten, Kombinationen,
+   Überträge und neue itemabhängige Trigger.
+   Gespeicherte Sonderverträge dürfen das Verbot nicht umgehen.
+   Challengekopien und Hauptspiel strikt getrennt halten.
+
+9. ZAHLEN UND RUNDUNG
+   Materielle Bruchteile mit stabiler, getesteter Restverwaltung.
+   Wallets nicht durch gerundete UI-Werte verändern.
+   Axiome erst nach allen gültigen Faktoren abrunden.
+   Keine exponentielle Berechnung durch Number-Konvertierung beschädigen.
+
+10. SOFTCAPS
+    Keine vorhandene Ausgabe beim Schwellenwechsel nach unten springen lassen.
+    Curriculum + Distillation gemeinsam monoton prüfen.
+    Kein a_neu ≥ 1 durch Rundungs- oder Verstärkerfehler.
+    Keine Wirkung auf nicht dafür spezifizierte Systeme.
+
+11. SPEICHERSTÄNDE
+    Neue Saveversion, Originalkopie, atomare Migration.
+    Unbekannte/beschädigte Zustände nicht überschreiben.
+    Doppelt ausgerüstete Itemtypen aus Altständen deterministisch bereinigen:
+    Exemplar behalten, überschüssige Ausrüstung lösen,
+    kein Item löschen und Änderung mitteilen.
+    IDs, Level, Seltenheit, Sperren, Materialbasis und Rückgewinnung erhalten.
+
+12. HANDEL UND SERVER
+    Handelsdaten übertragen nur Exemplarzustand, keine manipulierbaren
+    bereits berechneten Produktionsboni.
+    Serverseitige Freigaben und Handelslimits erhalten.
+    Persönliche Runzähler nicht an gehandelte Items hängen.
+    Keine neuen Onlineanbieter in diesem Auftrag.
+
+13. GLOBALE ITEMVERSTÄRKER
+    Alle bisherigen Verbraucher inventarisieren.
+    Kein alter Nebenbonus darf versteckt zusätzlich aktiv bleiben.
+    Kein gekaufter Prestige-/Modellbonus still wirkungslos werden.
+    Beschreibung und tatsächlichen neuen Verbraucher gemeinsam migrieren.
+
+
+J. FREISCHALTUNG, ERWERB UND REZEPTE
+
+1. Bestehende Items behalten grundsätzlich ihre vorhandenen Erwerbswege.
+2. Erkenntnisarchiv-Erwerbsproblem ausdrücklich beheben.
+3. Geheimlaboritems erst mit dem vorhandenen Geheimlaborzugang.
+4. Axiomitems erst im vorhandenen Axiomfortschritt.
+5. Neue Items:
+   Flottenkoordinator: nach Erreichen der bestehenden Campusphase.
+   Gradientenspeicher: nach Freischaltung der Trainingsautomation.
+   Overdrive-Kondensator: nach vorhandener Overdrive-/Forschungsautomation.
+   Synthesekoordinator: mit dem bestehenden Synthesesystem.
+   Singularitätslinse: frühestens nach drei echten Axiomzyklen.
+   Axiomanker: nach erstem echten Axiomzyklus.
+
+Keine neue Hardwarekaufvoraussetzung außer den geltenden Creditsregeln.
+
+Für neue Rezepte:
+- Vorhandene Komponenten, Module und Bauplanlogik verwenden.
+- Je neues Rezept ein tatsächlich erreichbares Nachbarrezept
+  derselben Progressionsphase als Kostenreferenz auswählen.
+- Für gleich starke neue Spezialitems 1,25× dessen Material-/Datenkosten.
+- Für Singularitätslinse 2× eines erreichbaren späten Axiomrezepts.
+- Konkrete resultierende Stückzahlen, Datenkosten, Module und
+  Bauplananforderungen vor Abschluss in einer Rezepttabelle ausgeben.
+- Ganzzahlige Materialien aufrunden.
+- Keine dynamischen Rezepte, die sich im laufenden Save mit den
+  Referenzpreisen verändern: Ergebnisse zentral als Balancewerte festlegen.
+- Vorhandene gemeinsame Rezeptbestandteile nicht ohne Prüfung
+  unterschiedlicher Materialien blind übernehmen.
+
+Mindestens ein deterministischer Erwerbsweg pro Item.
+Kein zwingender Gachaerwerb eines notwendigen Buildteils.
+Neue späte Items nicht in frühe Lootpools aufnehmen.
+Sofortherstellung und Sofortfusion erhalten.
+
+
+K. UI UND SPIELERERKLÄRUNG
+
+Jedes Itemdetail zeigt:
+- Basiswert.
+- Einzigartige Fähigkeit in verständlichem Deutsch/Englisch.
+- Tatsächlich aktuellen Multiplikator.
+- Relevante Skalierungsquelle.
+- Vergleich mit dem auszutauschenden Item.
+- Kombinationstag und aktive/fehlende Kombinationsteile.
+- Erweiterte Formel nur aufklappbar.
+
+Beispiel Quantenchip:
+„Hardware-Verbund: Compute ×18,12“
+„Skaliert mit deinen 1.000 Hardwareeinheiten.“
+„Rechenverbund: 2/3 – Compute ×5 aktiv.“
+
+Bei einem Effektcap/Softcap:
+Schwelle und weiteres Wachstum verständlich erklären.
+Nicht trotz wachsendem Itemlevel eine fiktive Verbesserung anzeigen.
+
+Inventar:
+- Vergleich unter identischem Spielzustand.
+- Unterschiede zu aktuell ausgerüstetem Item.
+- Kein pauschaler Powerwert, der inkompatible Ziele falsch vergleicht.
+- Loadout-Presets für Credits/Training/Materialien/Meta nur soweit
+  bestehende Architektur das unterstützt; Kernauftrag nicht daran blockieren.
+
+Neue Tutorialhinweise:
+Mira erklärt Basiswert, Fähigkeit und erste Kombination jeweils
+beim relevanten Ereignis.
+Keine lange Systemerklärung beim ersten Spielstart.
+
+Bestehende gemeinsame Portraits, Slotformen, Seltenheitsfarben,
+Animationen und Touchflächen verwenden.
+Keine neuen technischen IDs im Spielertext.
+Alle vorhandenen Sprachen funktional erhalten; neue Texte zentral pflegen.
+
+
+L. MATHEMATISCHE REFERENZWERTE
+
+Diese Werte automatisiert gegen TS und Unity prüfen.
+
+P(Common L1/+0) = 1.
+P(Mythic L69/+20) = 3,7632.
+Q(Mythic L69/+20) ≈ 1,9398969045.
+
+Quantenchip ohne Kombinationen und ohne allgemeine Slotbasiswerte:
+
+H = 0:
+P=1: ×3
+P=3,7632: etwa ×62,446
+
+H = 100:
+P=1: etwa ×5,045
+P=3,7632: etwa ×171,190
+
+H = 1.000:
+P=1: etwa ×18,120
+P=3,7632: etwa ×2.044,789
+
+H = 10.000:
+P=1: etwa ×95,579
+P=3,7632: etwa ×51.479,619
+
+H = 1.000.000:
+P=1: etwa ×3.000,225
+P=3,7632: etwa ×41.234.107,851
+
+Neural-ASIC P=1:
+M=0: ×3
+M=25: etwa ×8,173
+M=100: etwa ×20,428
+M=1.000: etwa ×120,387
+
+Tensor-Kern P=1:
+M=0: ×3
+M=25: ×6
+M=100: ×15
+M=1.000: ×123
+
+Distillation:
+Bei bisheriger Softcappotenz a=0,5 und Q=1:
+a_neu = 0,5833333333.
+
+Singularitätslinse P=1, ohne Kombination:
+C=10^6: Zusatzfaktor 10^0,12.
+C=10^30: Zusatzfaktor 10^0,6.
+C=10^100: Zusatzfaktor 100.
+C=10^1.000: Zusatzfaktor 10^20.
+
+Referenzwerte mit sinnvoller relativer Toleranz prüfen;
+gerundete Tabellenwerte nicht als exakte interne Konstanten verwenden.
+
+
+M. GESAMTBALANCE WIRKLICH SIMULIEREN
+
+Die obigen Einzelrechnungen sind KEIN Nachweis einer fertigen
+Monatsbalance.
+
+1. Zuerst unveränderte aktuelle Baseline aufzeichnen.
+2. Neue Items unter vergleichbaren Bedingungen simulieren.
+3. Mindestens:
+   - frischer Spieler ohne bezahlte Inhalte
+   - aktiver Tapspieler
+   - passiver Spieler mit regelmäßigen Rückkehrintervallen
+   - Hardwarebuild
+   - Trainingsbuild
+   - Materialbuild
+   - Erkenntnisbuild
+   - Axiombuild
+4. Referenzzeitpunkte:
+   15/30/60 Minuten, 6/24 Stunden, 3/7/30/90 Tage.
+5. Neben Endressourcen erfassen:
+   - Zeit zum ersten Item
+   - erster vollständiger Zweier-/Dreierkombination
+   - erster Prestige
+   - zusätzliche Slots
+   - Geheimlabor
+   - erstes und weitere KI-Modelle
+   - erster und weitere Axiomresets
+   - längste Phase ohne bezahlbare sinnvolle Aktion
+   - Produktionsanteile und stärkste Itemfaktoren
+   - tatsächliche Abstände zwischen Buildleistungen
+6. Keine finanzierten Teststände als natürlichen Fortschritt ausgeben.
+7. Lange Kampagnen und deterministische Transaktionsfälle getrennt halten.
+8. Kosten oder Kernprogression nicht blind um denselben Faktor erhöhen,
+   mit dem Items stärker wurden; sonst verschwindet der beabsichtigte
+   Leistungsgewinn.
+9. Falls ein Build alle anderen Ziele dominiert:
+   Ursache korrigieren, nicht pauschal jedes Item schwächen.
+10. Falls ein Pflichtitem entsteht:
+    deterministischen Erwerb und echte Alternativen sicherstellen.
+11. Gezielte Balancekorrekturen nachweisen und in der zentralen
+    Economy-Dokumentation begründen. Kernresetformeln nicht unbemerkt ändern.
+
+Prüfe alle gültigen Zweier-/Dreierkombinationen systematisch.
+Suche bei repräsentativen Progressionsständen auch automatisiert nach
+stärksten gültigen Loadouts pro Ziel.
+
+Für längere Simulationen nur vielversprechende Loadouts verwenden,
+statt blind jede Kombination 90 Tage laufen zu lassen.
+
+
+N. TESTS UND FERTIGSTELLUNG
+
+Sinnvolle neue Tests:
+- jede der 42 Fähigkeiten im echten Verbraucher
+- aktive/inaktive Voraussetzungen
+- sämtliche Kombinationen und Slotgrenzen
+- große ScientificNumber-Werte
+- Monotonie bei Level, Schmieden und Seltenheit
+- Softcaps an und um die Schwelle
+- Itemwechsel vor/nach Start/Abschluss/Reset
+- schnelle Wiederholung und Reload
+- Verlust/Erhalt von Ausrüstung beim Reset
+- Offlinegleichheit innerhalb definierter numerischer Toleranzen
+- no-items-Challenges
+- Material-/Arbeitsprovenienz und keine rekursiven Trigger
+- Migration echter unterstützter alter Saveversionen
+
+Unity-Compile, passende EditMode-/PlayMode-Tests und
+erforderliche TS-/Build-/Referenzprüfungen ausführen.
+
+Kein separater Testrechner, der die Formeln nur nachbaut:
+Gemeinsame Fixtures müssen die tatsächlichen Spielverbraucher prüfen.
+
+Liefere abschließend:
+1. Vollständigen finalen Katalog aller 42 Items mit Effekten/Formeln.
+2. Konkrete neue Rezepte und Erwerbswege.
+3. Kombinationen und nachgewiesene Slotverträglichkeit.
+4. Berechnungsgraph und geschlossene Exploitpfade.
+5. Baseline-/Nachher-Simulationen mit Zeitpunkten und Buildvergleich.
+6. Save-Migrationsbericht.
+7. Echte Unity-Bilder von Itemvergleich, Kombination und Loadout.
+8. Kurzen echten Clip: Ausrüsten → sichtbarer Produktionssprung →
+   passende kombinierte Aktion.
+9. Tatsächlich bestandene Prüfungen und ausdrücklich offene Grenzen.
+10. Commit und passenden Review-PR; nicht selbst mergen.
+
+Nicht allein deshalb „fertig“ melden, weil 42 Katalogeinträge existieren.
+Alle Fähigkeiten müssen erreichbar, gespeichert, angezeigt und in ihren
+tatsächlichen Spielsystemen wirksam sein.

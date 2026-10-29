@@ -7,6 +7,7 @@ import {researchAccess,researchAreaFor,type ResearchAreaId} from './researchArea
 import {ScientificNumber,type ScientificJSON} from './scientificNumber';
 import { addEvent, addMetrics, newTelemetry, type LocalTelemetry } from './telemetry';
 import { newStory, type StoryState } from './story';
+import {identifyItemTrainingV3,usesItemV3,itemComputeFactorV3,itemCreditFactorV3,itemHardwareClassesV3,type ItemSystemV3State} from './itemSystemV3';
 
 /** All tunable alpha balance lives in this file. Domain modules consume these values. */
 export const lateMetaItemCatalog = {
@@ -822,6 +823,70 @@ export const extendedItemCatalog = {
   ...lateMetaItemCatalog
 } as const;
 export const BALANCE = {
+  // Item-System V3 specification. Not activated for existing saves until the
+  // complete migration and event contracts have passed acceptance.
+  itemV3: {
+    rarityFactors:[1,1.10,1.20,1.32,1.45,1.60],levelMax:69,forgeMax:20,
+    levelStep:.01,forgeStep:.02,baseValue:.10,
+    relay:{interval:10,seconds:2,critical:1.5},
+    quantum:{base:3,hardwareScale:100,exponent:.75},
+    neural:{base:3,trainingScale:10,exponent:.8},
+    photon:{seconds:3},router:{perLink:.10},
+    burst:{seconds:3,coefficient:2},
+    legacy:{classes:3,base:5,countScale:25},
+    sparse:{classes:3,normal:1.5,few:3},photonic:{coefficient:2},
+    coupler:{coefficient:1},
+    link:{previous:25,maximum:10,factor:.1},
+    lattice:{base:2,nodeScale:10,exponent:.35},
+    entropy:{base:5,exponent:1.25},
+    memoryCrystal:{base:3,dataLogScale:5},
+    logic:{base:2,perStreak:.10,maxStreak:10,sameTrackDivisor:2},
+    tensor:{base:3,trainingScale:25},
+    distillation:{strength:.20},curriculum:{threshold:.5},
+    longMemory:{base:2,threshold:240,minuteScale:30,exponent:.5},
+    cryo:{duration:.5},manufacturing:{rate:.10,cap:.35},
+    echo:{exponent:.25},anchorMemory:{base:2,upgradeScale:10,exponent:.75},
+    archive:{weight:.50},scanner:{base:2,perAnalysis:.05,threshold:25},
+    drone:{rate:.10,cap:.40},prism:{base:3,researchScale:10},
+    diagnostic:{coefficient:1},switch:{rate:.15,cap:.50},
+    focus:{coefficient:1},recycling:{fragment:.25},
+    blueprint:{base:2,perBlueprint:.03},protocol:{floor:.5},
+    familyYield:{coefficient:1},
+    resonator:{base:3,dataLogScale:10,exponent:.75},
+    cycle:{base:3,exponent:.75},
+    fleet:{base:2,minimumOwned:100,perClass:.15},
+    gradient:{rate:.10,cap:.40,startCap:.50,budgetRequirements:1},
+    capacitor:{charge:2},synthesis:{base:2,componentLogScale:4,exponent:.5},
+    lens:{exponent:.02,minimumCycles:3},
+    axiomAnchor:{coefficient:2,minutes:30},
+    recovery:{maximumFraction:.90},
+    combinations:{
+      compute:{factor:5,quantumExponent:.20},
+      boot:{components:1.5,creditsPerClass:1.5,threshold:250,classes:3},
+      learning:{speed:1.5,photonWork:2},
+      distilled:{credits:5,upgrades:2,neuralExponent:.15},
+      energy:{seconds:5,credits:3,data:5},
+      autonomous:{start:.05,interval:3,extra:.10},
+      recycling:{fragments:1.25,materials:1.2},
+      photonic:{yield:2},insight:{factor:3,upgradeScale:10,exponent:.5},
+      axiom:{factor:2,firstFactor:10,firstMinutes:15,tailMinutes:15},
+      library:{research:1.5,analysisInterval:5,points:1},
+      industrial:{yield:1.5,lensExponent:1.5},
+    },
+    recipes:{normalMultiplier:1.25,lensMultiplier:2},
+  },
+  // Joint prestige/item V3 target. Existing 64/24 saves retain their rules
+  // until the complete atomic migration is accepted. Node IDs/prices unchanged.
+  prestigeV3:{
+    hardware:{H06:3,H07scale:100,H07exponent:.5,H08perClass:.5,H09:5,H09growth:1.15,H09threshold:500,H10:10,H10exponent:.01},
+    training:{T01:1.20,T02:1.20,integrationBase:1.01,integrationPerfect:1.015,integrationLimit:200,T05:3,T07scale:10,T07exponent:.75,T09:5,T09training:2,queue:2},
+    research:{F06:3,F07:.70,F08perLab:.25,F09:3,F09data:5,F10:5,F10data:5,F10scale:25,F10exponent:.5,queue:6},
+    items:{W03focus:2,W04:.75,W05:2,W07quantities:[3,10,100],W08:2,W09:3,W10:3,W10ability:1.15,W10exponent:1.05},
+    tap:{S01:2,S02:.10,S03:1.5,S04:2,S05:.10,S06:2,S07:2,S08:3,S09:2,S10:5,S10soft:2},
+    int:{I01:3,I02scale:10,I02exponent:.5,I03scale:25,I03exponent:.5,I04scale:20,I04exponent:.5,I05:.06,I08:5,I09:5,I10gain:.03,I10credits:.06,maxCreditExponent:.22,maxGainExponent:.73},
+    discovery:{cycleINT:1000000,distinctNodes:30},
+    axioms:{A03:2,A04:1.35,A06:1.20,B03:1.5,B05:3,C01:[2,3,4],C06:[1.5,2,3],D01:2,D02:.85,D03:1.10},
+  },
   companyTradeDailyLimit: 5,
   lateItemContext:{knowledgeLogCap:6,cycleCap:5,modelCap:5},
  progression:{
@@ -2722,7 +2787,7 @@ export type RepeatableResearchId=keyof typeof BALANCE.repeatableResearch;
 export type ResearchId=ResearchProjectId|RepeatableResearchId;
 export type TrainingTrack='quality'|'efficiency'|'integration';
 export type TrainingCostBasis={resource?:'credits'|'data';targetLevel:number;baseDataCostExact:ScientificJSON;factor:number;bonusTotal:number;sources:Record<string,number>};
-export type ActiveTraining={modelTransferEligible?:boolean;creditCostExact?:ScientificJSON;paymentResource?:'credits'|'data';intro?:true;durationBasis?:{baseDuration:number;alignment:number;modelTransfer:number;runStart:number};costBasis?:TrainingCostBasis;track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;dataCostExact?:ScientificJSON;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
+export type ActiveTraining={jobId?:string;modelTransferEligible?:boolean;creditCostExact?:ScientificJSON;paymentResource?:'credits'|'data';intro?:true;durationBasis?:{baseDuration:number;alignment:number;modelTransfer:number;runStart:number};costBasis?:TrainingCostBasis;track:TrainingTrack;workRequired:number;creditCost:number;dataCost?:number;dataCostExact?:ScientificJSON;startedAt?:number;baseDuration?:number;startingRate?:number;onlineWork?:number;offlineWork?:number};
 export type QueuedTraining={track:TrainingTrack;targetLevel:number};
 export type ResearchStartBasis={progressionVersion?:2;planningFactor?:number;baseDuration:number;sources:Record<string,ScientificJSON>;bonusTotal:ScientificJSON;laborFactor:number;temporaryFactors:{labBoost:number;overclock:number;deviceSwitch?:number};minimumApplied:boolean};
 export type ResearchTarget={id:ResearchId;targetLevel:number};
@@ -2756,6 +2821,8 @@ export type AxiomUpgradeLevels=Record<'axiomResonance'|'axiomAutomation'|'axiomA
 export const axiomUpgradeCost=(id:AxiomUpgradeId)=>id==='axiomResonance'?BALANCE.axiom.resonanceCost:id==='axiomAutomation'||id==='prestigeAgent'?BALANCE.axiom.automationCost:id==='axiomArchive'?BALANCE.axiom.archiveCost:1;
 export type ChallengeSession={main:GameState;anchor:number;report:import('./simulation').AdvanceReport};
 export type GameState = {
+  /** Development V3 state: persistence is explicitly blocked until migration is complete. */
+  itemSystemV3?:ItemSystemV3State;
  integrationLevel:number;
  progression:import('./progression').ProgressionState;
   commerce?:import('./commerce').CommerceState;
@@ -2878,7 +2945,7 @@ export const itemEffectProfile=(i:Item):ItemEffect[]=>{
  return [primary,...(rank>=2?[secondary[i.type]!] :[]),...(rank>=4?[tertiary[i.type]!] :[])];
 };
 export const itemEffectFor=(s:GameState,i:Item,e:ItemEffect)=>{const effects=itemEffectProfile(i);if(!effects.includes(e))return 0;const position=effects.indexOf(e),baseWeight=position===0?1:position===1?.65:.40,prestigeWeight=position===1?(hasNode(s,'analysis6',1)?1.25:1):position===2?(hasNode(s,'analysis7',1)?1.35:1):1;return itemEffect(i)*(s.progression?.version===2?itemAmplifier(s):itemScalingMultiplier(s,i))*baseWeight*prestigeWeight*legacyItemFactor(s,e);};
-export const equippedBonus=(s:GameState,e:ItemEffect)=>s.retention.activeRun?.id==='no-items'?0:equippedItems(s).reduce((n,i)=>n+itemEffectFor(s,i,e),0)*(1+deepPrestigeBonus(s,'manufacturing'));
+export const equippedBonus=(s:GameState,e:ItemEffect)=>usesItemV3(s)?0:s.retention.activeRun?.id==='no-items'?0:equippedItems(s).reduce((n,i)=>n+itemEffectFor(s,i,e),0)*(1+deepPrestigeBonus(s,'manufacturing'));
 /** Ratio against the same-context canonical Common/level-1/forge-0 instance.
  * Shared amplifiers apply equally to both values, never again to the special reward. */
 export function specialItemEffectQuote(s:GameState,item:Item){
@@ -2892,6 +2959,7 @@ export type ItemCombinationId=keyof typeof BALANCE.itemCombinations;
 export type CombinationRequirement={slot:ItemSlot|null;type:ItemTypeId|null;effect:ItemEffect|null;instanceId:string|null;matched:boolean};
 /** Pure equipment-only quote. Legacy effect matching deliberately retains its original semantics. */
 export function itemCombinationQuote(s:GameState,id:ItemCombinationId){
+ if(usesItemV3(s)){const definition=BALANCE.itemCombinations[id];return{id,kind:definition.kind,legacy:definition.legacy,neededItems:[] as CombinationRequirement[],missingEquipment:[] as CombinationRequirement[],active:false,disabled:true,configuredValue:definition.value,contribution:['compute-factor','analysis-components-factor'].includes(definition.kind)?1:0};}
  const definition=BALANCE.itemCombinations[id],neededItems:CombinationRequirement[]='items' in definition?definition.items.map(required=>{
   const item=equippedItems(s).find(i=>i.type===required.type&&itemTypes[i.type].slot===required.slot);
   const matched=!!item&&equipmentSlotUnlocked(s,required.slot);
@@ -2993,8 +3061,9 @@ export function classComputeTerms(s:GameState,id:HardwareId,count=s.hardwareCoun
 export const classCompute=(s:GameState,id:HardwareId,count=s.hardwareCounts[id])=>{const terms=classComputeTerms(s,id,count);return(terms.ownedCompute+terms.linkedCompute)*terms.milestone*terms.classUpgrade*terms.mastery;};
 export const prestigeComputePerClass=(s:GameState)=>hasNode(s,'computeNet3',1)?.30:hasNode(s,'computeNet2',1)?.15:hasNode(s,'computeNet1',1)?.08:0;
 export const classComputeScientific=(s:GameState,id:HardwareId,count=s.hardwareCounts[id])=>ScientificNumber.from(Math.max(0,classCompute(s,id,count)));
-export function computeFactors(s:GameState){if(s.progression?.version===2)return progressionComputeFactors(s);const tier=Math.max(0,Math.max(0,...s.discovered.map(id=>hardwareIds.indexOf(id)))-7);return {deviceCompute:1+deviceBonus(s,'sparse')+deviceBonus(s,'photonicCompute')+deviceBonus(s,'pairs'),itemCombination:itemCombinationQuote(s,'parallel-architecture').contribution,itemAndMilestoneAdditive:1+equippedBonus(s,'compute')+milestoneBonus(s,'compute')+milestoneBonus(s,'synergy'),prestigePerClass:1+prestigeComputePerClass(s)*s.discovered.length,deepPrestige:1+deepPrestigeBonus(s,'compute'),computeOptimization:ScientificNumber.from(1.16).pow(Math.max(0,s.researchLevels.computeOptimization)),hardwareIntegration:ScientificNumber.from(1.12).pow(Math.max(0,s.researchLevels.hardwareIntegration)*tier),parallelArchitecture:ScientificNumber.from(1+BALANCE.repeatableResearch.parallelArchitecture.effectPerLevel).pow(s.researchLevels.parallelArchitecture*s.discovered.length),hardwareCoDesign:ScientificNumber.from(1+BALANCE.repeatableResearch.hardwareCoDesign.effectPerLevel).pow(s.researchLevels.hardwareCoDesign*Math.max(0,s.level)*s.discovered.length),milestoneSynergy:milestoneSynergy(s).compute,legacyInfrastructure:legacyInfrastructureMultiplier(s),hardwareOwnership:hardwareOwnershipSynergyScientific(s),infrastructure:infrastructureSynergyScientific(s),model:modelSynergyScientific(s).pow(.20)};}
-export const computeRateScientific=(_hardware:number,s?:GameState)=>{if(!s)return ScientificNumber.from(Math.max(0,_hardware));let base=ScientificNumber.zero();for(const id of hardwareIds)base=base.add(classComputeScientific(s,id));return scientificProduct(base,...Object.values(computeFactors(s)));};
+function legacyComputeFactors(s:GameState){if(s.progression?.version===2)return progressionComputeFactors(s);const tier=Math.max(0,Math.max(0,...s.discovered.map(id=>hardwareIds.indexOf(id)))-7);return {deviceCompute:1+deviceBonus(s,'sparse')+deviceBonus(s,'photonicCompute')+deviceBonus(s,'pairs'),itemCombination:itemCombinationQuote(s,'parallel-architecture').contribution,itemAndMilestoneAdditive:1+equippedBonus(s,'compute')+milestoneBonus(s,'compute')+milestoneBonus(s,'synergy'),prestigePerClass:1+prestigeComputePerClass(s)*s.discovered.length,deepPrestige:1+deepPrestigeBonus(s,'compute'),computeOptimization:ScientificNumber.from(1.16).pow(Math.max(0,s.researchLevels.computeOptimization)),hardwareIntegration:ScientificNumber.from(1.12).pow(Math.max(0,s.researchLevels.hardwareIntegration)*tier),parallelArchitecture:ScientificNumber.from(1+BALANCE.repeatableResearch.parallelArchitecture.effectPerLevel).pow(s.researchLevels.parallelArchitecture*s.discovered.length),hardwareCoDesign:ScientificNumber.from(1+BALANCE.repeatableResearch.hardwareCoDesign.effectPerLevel).pow(s.researchLevels.hardwareCoDesign*Math.max(0,s.level)*s.discovered.length),milestoneSynergy:milestoneSynergy(s).compute,legacyInfrastructure:legacyInfrastructureMultiplier(s),hardwareOwnership:hardwareOwnershipSynergyScientific(s),infrastructure:infrastructureSynergyScientific(s),model:modelSynergyScientific(s).pow(.20)};}
+export function computeFactors(s:GameState){const base=legacyComputeFactors(usesItemV3(s)?{...s,equipped:{}}:s);return{...base,itemV3:usesItemV3(s)?itemComputeFactorV3(s):ScientificNumber.from(1)};}
+export const computeRateScientific=(_hardware:number,s?:GameState)=>{if(!s)return ScientificNumber.from(Math.max(0,_hardware));let base=ScientificNumber.zero();if(usesItemV3(s)){for(const value of itemHardwareClassesV3(s))base=base.add(value);}else for(const id of hardwareIds)base=base.add(classComputeScientific(s,id));return scientificProduct(base,...Object.values(computeFactors(s)));};
 export const computeRate=(_hardware:number,s?:GameState)=>computeRateScientific(_hardware,s).toNumber(MAX_ECONOMY_VALUE);
 /** Legacy helpers retained for v1 tests/imports and mapped to calculators. */
 export const blockCost=(owned:number,s?:GameState)=>hardwareCost('calculator',owned,s);
@@ -3071,7 +3140,7 @@ export const creditMultiplierFromAxiomsScientific=(s:GameState)=>s.progression?.
 /** Bounded compatibility/display projection; production uses the scientific value. */
 export const creditMultiplierFromAxioms=(s:GameState)=>creditMultiplierFromAxiomsScientific(s).toNumber(MAX_ECONOMY_VALUE);
 export const permanentFactor=creditMultiplierFromINT;
-export function creditFactors(s:GameState,now=s.savedAt,temporary=true){if(s.progression?.version===2)return progressionCreditFactors(s,now,temporary);const architecture=ScientificNumber.from(1+BALANCE.repeatableResearch.modelArchitecture.effectPerLevel).pow(Math.max(0,s.researchLevels.modelArchitecture));const itemCredits=ScientificNumber.from(1+equippedBonus(s,'credits')+itemCombinationBonus(s,'credits')).pow(itemSynergyExponent(s)*milestoneSynergy(s).itemExponent);const commercialization=ScientificNumber.from(1+BALANCE.repeatableResearch.commercialization.effectPerLevel).pow(s.researchLevels.commercialization),userLog=Math.max(0,usersRateScientific(s).log10()),network=ScientificNumber.fromParts(1,Math.max(0,BALANCE.repeatableResearch.networkEffects.effectPerLevel*s.researchLevels.networkEffects*userLog**.8));return {permanentIncome:s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1,baseRevenuePerUser:BALANCE.baseRevenuePerUser,quality:1+(quality(s.qualityLevel)-1)*(1+challengeFamilyBonus(s,'quality-lock')),INT:creditMultiplierFromINT(s),axioms:creditMultiplierFromAxiomsScientific(s),modelArchitecture:architecture,commercialization:commercialization,networkEffects:network,milestoneRevenue:milestoneSynergy(s).revenue,items:itemCredits,hardwareOwnership:hardwareOwnershipCreditMultiplier(s),infrastructure:infrastructureSynergyScientific(s),lifetimeData:dataSynergyScientific(s),model:modelSynergyScientific(s),achievements:achievementSynergyScientific(s),artifacts:artifactSynergyScientific(s),breakthroughs:breakthroughSynergyScientific(s),devicePassive:1+deviceBonus(s,'memory')*(1+challengeFamilyBonus(s,'no-taps')),temporary:temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='credits'?1+deviceBonus(s,'burst'):0):1};}
+export function creditFactors(s:GameState,now=s.savedAt,temporary=true){if(usesItemV3(s))return{...progressionCreditFactors(s,now,temporary),itemV3:itemCreditFactorV3(s)};if(s.progression?.version===2)return progressionCreditFactors(s,now,temporary);const architecture=ScientificNumber.from(1+BALANCE.repeatableResearch.modelArchitecture.effectPerLevel).pow(Math.max(0,s.researchLevels.modelArchitecture));const itemCredits=ScientificNumber.from(1+equippedBonus(s,'credits')+itemCombinationBonus(s,'credits')).pow(itemSynergyExponent(s)*milestoneSynergy(s).itemExponent);const commercialization=ScientificNumber.from(1+BALANCE.repeatableResearch.commercialization.effectPerLevel).pow(s.researchLevels.commercialization),userLog=Math.max(0,usersRateScientific(s).log10()),network=ScientificNumber.fromParts(1,Math.max(0,BALANCE.repeatableResearch.networkEffects.effectPerLevel*s.researchLevels.networkEffects*userLog**.8));return {permanentIncome:s.commerce?.owned.includes('ai_singularity.pass.income')?BALANCE.commerce.incomeMultiplier:1,baseRevenuePerUser:BALANCE.baseRevenuePerUser,quality:1+(quality(s.qualityLevel)-1)*(1+challengeFamilyBonus(s,'quality-lock')),INT:creditMultiplierFromINT(s),axioms:creditMultiplierFromAxiomsScientific(s),modelArchitecture:architecture,commercialization:commercialization,networkEffects:network,milestoneRevenue:milestoneSynergy(s).revenue,items:itemCredits,hardwareOwnership:hardwareOwnershipCreditMultiplier(s),infrastructure:infrastructureSynergyScientific(s),lifetimeData:dataSynergyScientific(s),model:modelSynergyScientific(s),achievements:achievementSynergyScientific(s),artifacts:artifactSynergyScientific(s),breakthroughs:breakthroughSynergyScientific(s),devicePassive:1+deviceBonus(s,'memory')*(1+challengeFamilyBonus(s,'no-taps')),temporary:temporary?1+(s.creditBoostUntil>now?1:0)+(s.overclock.activeUntil>now&&(s.overclock.channel??'credits')==='credits'?1+deviceBonus(s,'burst'):0):1};}
 export const creditRateScientific=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>{if(!s)return ScientificNumber.from(Math.max(0,hardware*BALANCE.baseRevenuePerUser*quality(level)));return scientificProduct(usersRateScientific(s),...Object.values(creditFactors(s,now,temporary)));};
 export const creditRate=(hardware:number,level:number,s?:GameState,now=0,temporary=true)=>creditRateScientific(hardware,level,s,now,temporary).toNumber(MAX_ECONOMY_VALUE);
 export const equipmentSlots=['processor','core','research','processorAux','coreAux','researchAux','universal1','universal2'] as const;
@@ -3128,7 +3197,7 @@ export function trainingPreview(s:GameState,track:TrainingTrack){
  const valid=track==='quality'||track==='efficiency'||track==='integration',level=(track==='quality'?s.qualityLevel:track==='integration'?integrationLevel(s):s.efficiencyLevel)+1,quote=trainingCostQuote(s,track),cost=valid?quote.cost:ScientificNumber.zero(),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'credits'),cost,creditRateScientific(s.hardware,s.level,s)):unavailableAffordability(cost),reason=track==='integration'&&(!hasProgressionNode(s,'T04')||integrationLevel(s)>=integrationLimit(s)||s.retention.activeRun?.id==='no-items')?'challenge-rule':track==='integration'&&exactEconomyValue(s,'data').compare(trainingDataCostScientific(s,track))<0?'data':track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked?'challenge-rule':!ledgerValid?'invalid-resources':!valid?'invalid-track':s.activeTraining?'training-active':!resources.affordable?'credits':null;
  return{...quote,durationBasis:trainingDurationQuote(s,track),track,level,cost,duration:trainingWork(s,track),resources,reason,allowed:reason===null,effect:track==='integration'?integrationBase(s):track==='quality'?effectiveQuality(s,level)/effectiveQuality(s,level-1):effectiveEfficiency(s,level)/effectiveEfficiency(s,level-1)};
 }
-export function startTraining(s:GameState,track:TrainingTrack){if(track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked)return s;const preview=trainingPreview(s,track);if(!preview.allowed)return s;const creditCostExact=preview.cost,creditCost=creditCostExact.toNumber(MAX_ECONOMY_VALUE),dataCostExact=trainingDataCostScientific(s,track),dataCost=dataCostExact.toNumber(),duration=preview.duration;const paid=spendScientificResources(s,creditCostExact,dataCostExact);return addEvent({...paid,intro:{...s.intro,qualityUsed:s.intro.qualityUsed||preview.intro},deviceProgress:{...s.deviceProgress,lastTrack:track},runTrainingStarted:s.runTrainingStarted+1,training:0,activeTraining:{...(s.progression?.version===2?{modelTransferEligible:s.completedResearch.includes('modelTransfer')&&s.runTrainingStarted<BALANCE.researchTransferStarts}:{}),...(preview.intro?{intro:true as const}:{}),track,durationBasis:preview.durationBasis,paymentResource:'credits',creditCostExact:creditCostExact.toJSON(),costBasis:{resource:'credits',targetLevel:preview.targetLevel,baseDataCostExact:preview.baseCost.toJSON(),factor:preview.factor,bonusTotal:preview.bonusTotal,sources:preview.sources},creditCost,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}},'training-start',s.savedAt,{intro:preview.intro,track,baseDataCostExact:preview.baseCost.toScientificString(16),trainingCostFactor:preview.factor,trainingBonusTotal:preview.bonusTotal,trainingBonusSources:JSON.stringify(preview.sources),creditCost,dataCost,level:track==='quality'?s.qualityLevel:track==='integration'?integrationLevel(s):s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactCreditCost:creditCostExact.toScientificString(16),exactDataCost:dataCostExact.toScientificString(16)});}
+export function startTraining(s:GameState,track:TrainingTrack){if(track==='quality'&&activeChallengeRules(s)?.qualityLocked||track==='efficiency'&&activeChallengeRules(s)?.efficiencyLocked)return s;const preview=trainingPreview(s,track);if(!preview.allowed)return s;const creditCostExact=preview.cost,creditCost=creditCostExact.toNumber(MAX_ECONOMY_VALUE),dataCostExact=trainingDataCostScientific(s,track),dataCost=dataCostExact.toNumber(),duration=preview.duration;const paid=spendScientificResources(s,creditCostExact,dataCostExact);const started=identifyItemTrainingV3({...paid,intro:{...s.intro,qualityUsed:s.intro.qualityUsed||preview.intro},deviceProgress:{...s.deviceProgress,lastTrack:track},runTrainingStarted:s.runTrainingStarted+1,training:0,activeTraining:{...(s.progression?.version===2?{modelTransferEligible:s.completedResearch.includes('modelTransfer')&&s.runTrainingStarted<BALANCE.researchTransferStarts}:{}),...(preview.intro?{intro:true as const}:{}),track,durationBasis:preview.durationBasis,paymentResource:'credits',creditCostExact:creditCostExact.toJSON(),costBasis:{resource:'credits',targetLevel:preview.targetLevel,baseDataCostExact:preview.baseCost.toJSON(),factor:preview.factor,bonusTotal:preview.bonusTotal,sources:preview.sources},creditCost,dataCost,dataCostExact:dataCostExact.toJSON(),workRequired:duration,startedAt:s.savedAt,baseDuration:duration,startingRate:1,onlineWork:0,offlineWork:0},lifetime:{...s.lifetime,trainingStarted:s.lifetime.trainingStarted+1}});return addEvent(started,'training-start',s.savedAt,{...(started.activeTraining?.jobId?{jobId:started.activeTraining.jobId}:{}),intro:preview.intro,track,baseDataCostExact:preview.baseCost.toScientificString(16),trainingCostFactor:preview.factor,trainingBonusTotal:preview.bonusTotal,trainingBonusSources:JSON.stringify(preview.sources),creditCost,dataCost,level:track==='quality'?s.qualityLevel:track==='integration'?integrationLevel(s):s.efficiencyLevel,baseDuration:duration,effectiveRate:1,expectedDuration:duration,startedAt:s.savedAt,endsAt:s.savedAt+duration*1000,exactCreditCost:creditCostExact.toScientificString(16),exactDataCost:dataCostExact.toScientificString(16)});}
 /** Availability excludes payment and the active job: queued jobs pay only on start. */
 export function trainingTrackAvailable(s:GameState,track:TrainingTrack){
  if(!(['quality','efficiency','integration'] as string[]).includes(track))return false;
@@ -3213,7 +3282,7 @@ export const researchMissingRequirements=(s:GameState,id:ResearchId)=>(s.progres
 export const researchRequirement=(s:GameState,id:ResearchId)=>researchMissingRequirements(s,id)[0]?.id??null;
 export function researchQuote(s:GameState,id:ResearchId){
  const repeat=isRepeatableResearch(id),known=repeat||Object.hasOwn(BALANCE.researchProjects,id);if(!known)return null;
- const level=repeat?s.researchLevels[id]+1:1,slot=(()=>{const empty=s.researchLabs.findIndex((x,i)=>i<researchLabCount(s)&&x===null);return empty<0&&s.progression?.version===2&&s.researchLabs.length<researchLabCount(s)?s.researchLabs.length:empty;})(),requirements=researchMissingRequirements(s,id),requirement=requirements[0]?.id??null,running=s.researchLabs.find(x=>x?.id===id),done=!repeat&&s.completedResearch.includes(id),intro=id==='dataGeneration'&&introOffer(s,'research'),early=s.progression?.version===2&&repeat&&(BALANCE.seasonV2.earlyResearch.ids as readonly string[]).includes(id)&&level<=BALANCE.seasonV2.earlyResearch.levels,earlyCost=early?BALANCE.seasonV2.earlyResearch.dataCap[level-1]:null,cost=intro?ScientificNumber.zero():s.progression?.version===2?scientificCeil((repeat?ScientificNumber.from(earlyCost!==null?Math.min(BALANCE.progression.research[id].base,earlyCost):BALANCE.progression.research[id].base).multiply(ScientificNumber.from(BALANCE.progression.researchGrowth).pow(level-1)):ScientificNumber.from(BALANCE.progression.projects[id].cost)).multiplyNumber(hasProgressionNode(s,'F07')?.85:1)):repeat?repeatableResearchDataCostScientific(id,level):researchProjectDataCostScientific(id),access=researchAccess(s,id),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),performance=researchPerformanceQuote(s,s.savedAt,id),baseDuration=s.progression?.version===2?(repeat?Math.min(BALANCE.progression.researchCap,early?BALANCE.seasonV2.earlyResearch.seconds[level-1]:BALANCE.progression.research[id].seconds*BALANCE.progression.researchTimeGrowth**(level-1)):BALANCE.progression.projects[id].seconds):repeat?repeatableResearchDuration(id,level):researchDuration(id),rawDuration=baseDuration/performance.laborFactor/performance.temporaryFactors.labBoost/performance.temporaryFactors.overclock/performance.temporaryFactors.deviceSwitch,duration=intro?BALANCE.introResearchSeconds:Math.max(s.progression?.version===2?.001:BALANCE.researchMinimumSeconds,rawDuration),reason=!ledgerValid?'invalid-resources':activeChallengeRules(s)?.alternateResearch&&s.deviceProgress.lastResearchArea===researchAreaFor(id)?'challenge-rule':!access.allowed?'area':requirement?'requirement':done?'completed':running?'running':slot<0?'lab':!resources.affordable?'data':null;
+ const level=repeat?s.researchLevels[id]+1:1,slot=(()=>{const empty=s.researchLabs.findIndex((x,i)=>i<researchLabCount(s)&&x===null);return empty<0&&s.progression?.version===2&&s.researchLabs.length<researchLabCount(s)?s.researchLabs.length:empty;})(),requirements=researchMissingRequirements(s,id),requirement=requirements[0]?.id??null,running=s.researchLabs.find(x=>x?.id===id),done=!repeat&&s.completedResearch.includes(id),intro=id==='dataGeneration'&&introOffer(s,'research'),early=s.progression?.version===2&&repeat&&(BALANCE.seasonV2.earlyResearch.ids as readonly string[]).includes(id)&&level<=BALANCE.seasonV2.earlyResearch.levels,earlyCost=early?BALANCE.seasonV2.earlyResearch.dataCap[level-1]:null,cost=intro?ScientificNumber.zero():s.progression?.version===2?scientificCeil((repeat?ScientificNumber.from(earlyCost!==null?Math.min(BALANCE.progression.research[id].base,earlyCost):BALANCE.progression.research[id].base).multiply(ScientificNumber.from(BALANCE.progression.researchGrowth).pow(level-1)):ScientificNumber.from(BALANCE.progression.projects[id].cost)).multiplyNumber(hasProgressionNode(s,'F07')?(usesItemV3(s)?BALANCE.prestigeV3.research.F07:BALANCE.progression.effects.F07):1)):repeat?repeatableResearchDataCostScientific(id,level):researchProjectDataCostScientific(id),access=researchAccess(s,id),ledgerValid=validEconomyValues(s,['credits','data']),resources=ledgerValid?scientificAffordability(exactEconomyValue(s,'data'),cost,dataRateScientific(s)):unavailableAffordability(cost),performance=researchPerformanceQuote(s,s.savedAt,id),baseDuration=s.progression?.version===2?(repeat?Math.min(BALANCE.progression.researchCap,early?BALANCE.seasonV2.earlyResearch.seconds[level-1]:BALANCE.progression.research[id].seconds*BALANCE.progression.researchTimeGrowth**(level-1)):BALANCE.progression.projects[id].seconds):repeat?repeatableResearchDuration(id,level):researchDuration(id),rawDuration=baseDuration/performance.laborFactor/performance.temporaryFactors.labBoost/performance.temporaryFactors.overclock/performance.temporaryFactors.deviceSwitch,duration=intro?BALANCE.introResearchSeconds:Math.max(s.progression?.version===2?.001:BALANCE.researchMinimumSeconds,rawDuration),reason=!ledgerValid?'invalid-resources':activeChallengeRules(s)?.alternateResearch&&s.deviceProgress.lastResearchArea===researchAreaFor(id)?'challenge-rule':!access.allowed?'area':requirement?'requirement':done?'completed':running?'running':slot<0?'lab':!resources.affordable?'data':null;
  return{id,intro,access,level,slot,requirements,requirement,running,done,cost,resources,baseDuration,...performance,minimumApplied:rawDuration<=BALANCE.researchMinimumSeconds,duration,reason,allowed:reason===null};
 }
 export const researchPreview=researchQuote;

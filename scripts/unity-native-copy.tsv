@@ -568,7 +568,7 @@ Trainingsbeschleuniger|Training accelerator|Acelerador de entrenamiento|Accélé
 Trainingsautopilot|Training autopilot|Piloto de entrenamiento|Pilote d’entraînement|Piloto de treino|Pilota di addestramento|Autopilot treningu
 Lernkurve|Learning curve|Curva de aprendizaje|Courbe d’apprentissage|Curva de aprendizado|Curva di apprendimento|Krzywa uczenia
 Modellarchiv|Model archive|Archivo de modelos|Archive des modèles|Arquivo de modelos|Archivio modelli|Archiwum modeli
-Hochleistungsinferenz|High-performance inference|Inferencia de alto rendimiento|Inférence haute performance|Inferência de alto desempenho|Inferenza ad alte prestazioni|Wydajne wnioskowanie
+Hochleistungsinferenz|Fast inference|Inferencia rápida|Inférence rapide|Inferência rápida|Inferenza rapida|Wydajne wnioskowanie
 Perfekte Integration|Perfect integration|Integración perfecta|Intégration parfaite|Integração perfeita|Integrazione perfetta|Doskonała integracja
 Parallellabor I|Parallel lab I|Laboratorio paralelo I|Laboratoire parallèle I|Laboratório paralelo I|Laboratorio parallelo I|Laboratorium równoległe I
 Parallellabor II|Parallel lab II|Laboratorio paralelo II|Laboratoire parallèle II|Laboratório paralelo II|Laboratorio parallelo II|Laboratorium równoległe II
@@ -580,7 +580,7 @@ Forschungsbeschleuniger|Research accelerator|Acelerador de investigación|Accél
 Datenkompression|Data compression|Compresión de datos|Compression des données|Compressão de dados|Compressione dati|Kompresja danych
 Autonome Wissenschaft|Autonomous science|Ciencia autónoma|Science autonome|Ciência autônoma|Scienza autonoma|Autonomiczna nauka
 Wissenschaftliche Singularität|Scientific singularity|Singularidad científica|Singularité scientifique|Singularidade científica|Singolarità scientifica|Osobliwość naukowa
-Gezielte Materialanalyse|Targeted material analysis|Análisis dirigido|Analyse ciblée des matériaux|Análise direcionada|Analisi mirata|Ukierunkowana analiza
+Gezielte Materialanalyse|Targeted analysis|Análisis dirigido|Analyse ciblée|Análise direcionada|Analisi mirata|Ukierunkowana analiza
 Präzisionsfertigung|Precision crafting|Fabricación de precisión|Fabrication de précision|Fabricação de precisão|Fabbricazione di precisione|Precyzyjne wytwarzanie
 Item-Verstärker|Item amplifier|Amplificador de objetos|Amplificateur d’objets|Amplificador de itens|Amplificatore di oggetti|Wzmacniacz przedmiotów
 Serienfertigung|Serial production|Producción en serie|Production en série|Produção em série|Produzione in serie|Produkcja seryjna
@@ -597,13 +597,13 @@ Overdrive-Verstärker II|Overdrive amplifier II|Amplificador de Overdrive II|Amp
 Overdrive-Speicher|Overdrive reserve|Reserva de Overdrive|Réserve Overdrive|Reserva de Overdrive|Riserva Overdrive|Rezerwa Overdrive
 Impulsnetz|Pulse network|Red de impulsos|Réseau d’impulsions|Rede de pulsos|Rete di impulsi|Sieć impulsów
 Singularitätsimpuls|Singularity pulse|Impulso de singularidad|Impulsion de singularité|Pulso de singularidade|Impulso di singolarità|Impuls osobliwości
-Kommerzialisierung|Commercialization|Comercialización|Commercialisation|Comercialização|Commercializzazione|Komercjalizacja
+Kommerzialisierung|Commercial use|Comercialización|Commercialisation|Comercialização|Commercializzazione|Komercjalizacja
 Meilenstein-Erkenntnis|Milestone insight|Conocimiento de hitos|Savoir des paliers|Conhecimento de marcos|Conoscenza dei traguardi|Wiedza z kamieni milowych
 Modell-Erkenntnis|Model insight|Conocimiento de modelos|Savoir des modèles|Conhecimento de modelos|Conoscenza dei modelli|Wiedza modeli
 Forschungs-Erkenntnis|Research insight|Conocimiento de investigación|Savoir de recherche|Conhecimento de pesquisa|Conoscenza della ricerca|Wiedza z badań
 INT-Rückkopplung|INT feedback|Retroalimentación INT|Rétroaction INT|Realimentação INT|Retroazione INT|Sprzężenie INT
 Prestige-Agent|Prestige agent|Agente de prestigio|Agent de prestige|Agente de prestígio|Agente prestigio|Agent prestiżu
-Relatives Prestige-Ziel|Relative prestige target|Objetivo relativo de prestigio|Objectif relatif de prestige|Meta relativa de prestígio|Obiettivo prestigio relativo|Względny cel prestiżu
+Relatives Prestige-Ziel|Relative target|Objetivo relativo|Cible relative|Meta relativa|Obiettivo relativo|Względny cel
 Erkenntnisverdichter|Insight compressor|Compresor de conocimiento|Compresseur de savoir|Compressor de conhecimento|Compressore di conoscenza|Kompresor wiedzy
 Tiefe Erkenntnis|Deep insight|Conocimiento profundo|Savoir profond|Conhecimento profundo|Conoscenza profonda|Głęboka wiedza
 Rekursive Erkenntnis|Recursive insight|Conocimiento recursivo|Savoir récursif|Conhecimento recursivo|Conoscenza ricorsiva|Wiedza rekurencyjna
@@ -707,3 +707,107 @@ Verteilte Inferenz|Distributed inference|Inferencia distribuida|Inférence distr
 Modelltransfer|Model transfer|Transferencia de modelos|Transfert de modèles|Transferência de modelos|Trasferimento modelli|Transfer modeli
 Materialrecycling|Material recycling|Reciclaje de materiales|Recyclage de matériaux|Reciclagem de materiais|Riciclo materiali|Recykling materiałów
 Forschungsplanung|Research scheduling|Planificación de investigación|Planification de recherche|Planejamento de pesquisa|Pianificazione ricerca|Planowanie badań
+Forschungsgeschwindigkeit ×{FACTOR}. Der Direktor wird über den INT-Knoten „{NODE}“ freigeschaltet.|Research speed ×{FACTOR}. Unlock the director through the INT node “{NODE}”.|Velocidad de investigación ×{FACTOR}. Desbloquea el director mediante el nodo INT «{NODE}».|Vitesse de recherche ×{FACTOR}. Débloquez le directeur via le nœud INT « {NODE} ».|Velocidade de pesquisa ×{FACTOR}. Libere o diretor pelo nó INT “{NODE}”.|Velocità di ricerca ×{FACTOR}. Sblocca il direttore tramite il nodo INT «{NODE}».|Szybkość badań ×{FACTOR}. Odblokuj dyrektora przez węzeł INT „{NODE}”.
+Hardware-Nachbarn|Hardware neighbors|Hardware vecino|Voisins matériels|Vizinhos de hardware|Vicini hardware|Sąsiedni sprzęt
+Overclock-Ertrag|Overclock yield|Ganancia de overclock|Rendement du surcadencement|Ganho de overclock|Resa overclock|Zysk z podkręcania
+Start-Hardware|Starter hardware|Hardware inicial|Matériel initial|Hardware inicial|Hardware iniziale|Sprzęt startowy
+Klassenfokus|Class focus|Enfoque de clases|Spécialisation de classe|Foco de classes|Focus classi|Specjalizacja klas
+Overclock-Compute|Overclock Compute|Cómputo en overclock|Calcul en surcadencement|Computação em overclock|Calcolo in overclock|Moc podczas podkręcania
+Späte Nachbarn|Advanced neighbors|Vecinos avanzados|Voisins avancés|Vizinhos avançados|Vicini avanzati|Zaawansowani sąsiedzi
+Lernpaare|Training pairs|Pares de entrenamiento|Paires d’entraînement|Pares de treino|Coppie di addestramento|Pary treningowe
+Trainingswechsel|Training switch|Cambio de entrenamiento|Changement d’entraînement|Troca de treino|Cambio addestramento|Zmiana treningu
+Laufzeitbonus|Run-time bonus|Bonificación por duración|Bonus de durée|Bônus de duração|Bonus durata|Premia czasu przebiegu
+Overclock-Dauer|Overclock duration|Duración de overclock|Durée du surcadencement|Duração de overclock|Durata overclock|Czas podkręcania
+Materialrückgewinnung|Material recovery|Recuperación de materiales|Récupération de matériaux|Recuperação de materiais|Recupero materiali|Odzysk materiałów
+Hardwarepakete|Hardware packages|Paquetes de hardware|Colis matériels|Pacotes de hardware|Pacchetti hardware|Pakiety sprzętu
+Forschungswechsel|Research switch|Cambio de investigación|Changement de recherche|Troca de pesquisa|Cambio ricerca|Zmiana badań
+Analyse-Fokus|Analysis focus|Enfoque de análisis|Ciblage d’analyse|Foco de análise|Focus analisi|Ukierunkowanie analizy
+Bauplanfragmente|Blueprint fragments|Fragmentos de planos|Fragments de plans|Fragmentos de projetos|Frammenti di progetti|Fragmenty schematów
+Bauplanfortschritt|Blueprint progress|Progreso de planos|Progression des plans|Progresso de projetos|Progressi dei progetti|Postęp schematów
+Photonikfunde|Photonic yield|Hallazgos fotónicos|Rendement photonique|Achados fotônicos|Resa fotonica|Uzysk fotoniczny
+Das passt noch auf den Schreibtisch|Still desk-sized|Aún cabe en el escritorio|Ça tient sur le bureau|Ainda cabe na mesa|Sta ancora sulla scrivania|Jeszcze mieści się na biurku
+Hardware-Imperium|Hardware empire|Imperio de hardware|Empire matériel|Império de hardware|Impero hardware|Imperium sprzętu
+Siliziumzoo|Silicon zoo|Zoo de silicio|Zoo de silicium|Zoológico de silício|Zoo del silicio|Krzemowe zoo
+Mastery-Netz|Mastery network|Red de maestría|Réseau de maîtrise|Rede de maestria|Rete di maestria|Sieć mistrzostwa
+Noch ein Neustart|One more reset|Otro reinicio|Encore un redémarrage|Mais um reinício|Un altro riavvio|Jeszcze jeden restart
+Denken in Großbuchstaben|Thinking in capitals|Pensar en mayúsculas|Penser en capitales|Pensando em maiúsculas|Pensare in maiuscolo|Myślenie wielkimi literami
+Licht im Labor|Lab lights on|Luces en el laboratorio|Lumière au labo|Luzes no laboratório|Luci in laboratorio|Światło w laboratorium
+Peer Review später|Peer review later|Revisión después|Évaluation plus tard|Revisão depois|Revisione più tardi|Recenzja później
+Noch eine Epoche|One more epoch|Otra época|Encore une époque|Mais uma época|Un’altra epoca|Jeszcze jedna epoka
+Mit Absicht gebaut|Built on purpose|Construido a propósito|Construit exprès|Feito de propósito|Costruito apposta|Zbudowane celowo
+Kuriositätenkabinett|Cabinet of curiosities|Gabinete de curiosidades|Cabinet de curiosités|Gabinete de curiosidades|Gabinetto delle curiosità|Gabinet osobliwości
+Finger aus Stahl|Fingers of steel|Dedos de acero|Doigts d’acier|Dedos de aço|Dita d’acciaio|Palce ze stali
+Materialwissenschaft|Material science|Ciencia de materiales|Science des matériaux|Ciência dos materiais|Scienza dei materiali|Materiałoznawstwo
+Kapitalmaschine|Capital machine|Máquina de capital|Machine à capital|Máquina de capital|Macchina del capitale|Maszyna kapitału
+Datensee|Data lake|Lago de datos|Lac de données|Lago de dados|Lago di dati|Jezioro danych
+Nur noch fünf Minuten|Five more minutes|Cinco minutos más|Encore cinq minutes|Mais cinco minutos|Ancora cinque minuti|Jeszcze pięć minut
+Roter Bereich|Redline|Zona roja|Zone rouge|Zona vermelha|Zona rossa|Czerwona strefa
+Signaljäger|Signal hunter|Cazador de señales|Chasseur de signaux|Caçador de sinais|Cacciatore di segnali|Łowca sygnałów
+Drei werden eins|Three become one|Tres se hacen uno|Trois deviennent un|Três viram um|Tre diventano uno|Trzy stają się jednym
+Immer heißer|Hotter still|Aún más caliente|Toujours plus chaud|Cada vez mais quente|Sempre più caldo|Coraz goręcej
+Komponentenatlas|Component atlas|Atlas de componentes|Atlas des composants|Atlas de componentes|Atlante dei componenti|Atlas komponentów
+Bauplanbibliothek|Blueprint library|Biblioteca de planos|Bibliothèque de plans|Biblioteca de projetos|Biblioteca dei progetti|Biblioteka schematów
+Ingenieursportfolio|Engineering portfolio|Portafolio de ingeniería|Portfolio d’ingénierie|Portfólio de engenharia|Portfolio ingegneristico|Portfolio inżynierskie
+Neue Fertigungsverfahren|New manufacturing processes|Nuevos procesos de fabricación|Nouveaux procédés de fabrication|Novos processos de fabricação|Nuovi processi produttivi|Nowe procesy wytwarzania
+Industrielle Fertigung|Industrial manufacturing|Fabricación industrial|Fabrication industrielle|Fabricação industrial|Produzione industriale|Produkcja przemysłowa
+Grenzen der Intelligenz|Limits of intelligence|Límites de inteligencia|Limites de l’intelligence|Limites da inteligência|Limiti dell’intelligenza|Granice inteligencji
+Spezialist|Specialist|Especialista|Spécialiste|Especialista|Specialista|Specjalista
+Hallo, Welt|Hello, world|Hola, mundo|Bonjour, monde|Olá, mundo|Ciao, mondo|Witaj, świecie
+Beide Hände voll|Both hands full|Manos ocupadas|Les mains pleines|Mãos ocupadas|Mani piene|Pełne ręce roboty
+Heureka-ish|Eureka-ish|Casi eureka|Presque eurêka|Quase eureka|Quasi eureka|Prawie eureka
+Glitzert wissenschaftlich|Scientifically shiny|Brillo científico|Éclat scientifique|Brilho científico|Splendore scientifico|Naukowy blask
+Gemischte Signale|Mixed signals|Señales mixtas|Signaux mixtes|Sinais mistos|Segnali misti|Mieszane sygnały
+Stecker passt|It plugs in|Encaja|Ça se branche|Encaixa|Si collega|Pasuje do gniazda
+Keine Kontrollgruppe|No control group|Sin grupo de control|Sans groupe témoin|Sem grupo de controle|Nessun gruppo di controllo|Bez grupy kontrolnej
+Volle Infrastruktur|Full infrastructure|Infraestructura completa|Infrastructure complète|Infraestrutura completa|Infrastruttura completa|Pełna infrastruktura
+Meister aller Maschinen|Master of machines|Maestro de máquinas|Maître des machines|Mestre das máquinas|Maestro delle macchine|Mistrz maszyn
+Die Maschinen kaufen Maschinen|Machines buying machines|Máquinas comprando máquinas|Les machines achètent des machines|Máquinas comprando máquinas|Macchine comprano macchine|Maszyny kupują maszyny
+Kaufe Taschenrechner. Die Karte steigt automatisch zur nächsten Stufe auf.|Buy calculators. The card automatically advances to the next tier.|Compra calculadoras. La tarjeta avanza automáticamente al siguiente nivel.|Achetez des calculatrices. La carte passe automatiquement au palier suivant.|Compre calculadoras. O cartão avança automaticamente ao próximo nível.|Acquista calcolatrici. La scheda passa automaticamente al livello successivo.|Kupuj kalkulatory. Karta automatycznie przechodzi na następny próg.
+Kaufe Hardware-Einheiten über alle Klassen.|Buy hardware units across all classes.|Compra unidades de hardware de todas las clases.|Achetez des unités matérielles de toutes les classes.|Compre unidades de hardware de todas as classes.|Acquista unità hardware di tutte le classi.|Kupuj sprzęt ze wszystkich klas.
+Entdecke Hardwareklassen.|Discover hardware classes.|Descubre clases de hardware.|Découvrez des classes matérielles.|Descubra classes de hardware.|Scopri classi hardware.|Odkrywaj klasy sprzętu.
+Erreiche Hardware-Meilensteine.|Reach hardware milestones.|Alcanza hitos de hardware.|Atteignez des paliers matériels.|Alcance marcos de hardware.|Raggiungi traguardi hardware.|Osiągaj progi sprzętu.
+Führe Prestige-Neustarts durch.|Perform prestige resets.|Realiza reinicios de prestigio.|Effectuez des réinitialisations de prestige.|Faça reinícios de prestígio.|Esegui riavvii di prestigio.|Wykonuj resety prestiżu.
+Verdiene INT insgesamt.|Earn INT in total.|Obtén INT en total.|Gagnez des INT cumulés.|Ganhe INT no total.|Guadagna INT totali.|Zdobywaj łączne INT.
+Sammle Laborarbeitszeit; parallele Labore zählen einzeln.|Accumulate lab work; parallel labs count separately.|Acumula tiempo de laboratorio; los laboratorios paralelos cuentan por separado.|Cumulez du travail de laboratoire ; les labos parallèles comptent séparément.|Acumule trabalho de laboratório; laboratórios paralelos contam separadamente.|Accumula lavoro di laboratorio; i laboratori paralleli contano separatamente.|Gromadź czas pracy laboratoriów; równoległe laboratoria liczą się osobno.
+Schließe Forschungsprojekte ab.|Complete research projects.|Completa proyectos de investigación.|Terminez des projets de recherche.|Conclua projetos de pesquisa.|Completa progetti di ricerca.|Kończ projekty badawcze.
+Schließe Modelltrainings ab.|Complete model trainings.|Completa entrenamientos de modelos.|Terminez des entraînements de modèles.|Conclua treinos de modelos.|Completa addestramenti dei modelli.|Kończ treningi modeli.
+Stelle Items gezielt her.|Craft items intentionally.|Fabrica objetos elegidos.|Fabriquez des objets choisis.|Fabrique itens escolhidos.|Crea oggetti scelti.|Wytwarzaj wybrane przedmioty.
+Entdecke unterschiedliche Itemtypen.|Discover distinct item types.|Descubre tipos de objetos distintos.|Découvrez différents types d’objets.|Descubra tipos distintos de itens.|Scopri diversi tipi di oggetti.|Odkrywaj różne typy przedmiotów.
+Führe vergütete aktive Taps aus.|Perform rewarded active taps.|Realiza toques activos recompensados.|Effectuez des taps actifs rémunérés.|Faça toques ativos recompensados.|Esegui tocchi attivi ricompensati.|Wykonuj nagradzane aktywne dotknięcia.
+Finde Komponenten.|Find components.|Encuentra componentes.|Trouvez des composants.|Encontre componentes.|Trova componenti.|Znajduj komponenty.
+Produziere reguläre Credits.|Produce regular credits.|Produce créditos normales.|Produisez des crédits normaux.|Produza créditos regulares.|Produci crediti normali.|Produkuj zwykłe kredyty.
+Produziere reguläre Daten.|Produce regular data.|Produce datos normales.|Produisez des données normales.|Produza dados regulares.|Produci dati normali.|Produkuj zwykłe dane.
+Sammle aktive Spielzeit.|Accumulate active play time.|Acumula tiempo de juego activo.|Cumulez du temps de jeu actif.|Acumule tempo de jogo ativo.|Accumula tempo di gioco attivo.|Gromadź czas aktywnej gry.
+Aktiviere Overclock.|Activate overclock.|Activa overclock.|Activez le surcadencement.|Ative overclock.|Attiva overclock.|Aktywuj podkręcanie.
+Sammle anklickbare Komponenten-Drops ein.|Claim clickable component drops.|Recoge entregas de componentes tocándolas.|Récupérez les livraisons de composants en les touchant.|Resgate entregas de componentes tocando nelas.|Raccogli le consegne di componenti toccandole.|Odbieraj dostawy komponentów dotknięciem.
+Fusioniere drei gleiche Items zu einer höheren Seltenheit.|Fuse three matching items into a higher rarity.|Fusiona tres objetos iguales para subir de rareza.|Fusionnez trois objets identiques vers une rareté supérieure.|Funda três itens iguais para uma raridade maior.|Fondi tre oggetti uguali in una rarità superiore.|Łącz trzy jednakowe przedmioty w wyższą rzadkość.
+Verbessere Items in der Schmiede.|Upgrade items in the forge.|Mejora objetos en la forja.|Améliorez des objets à la forge.|Melhore itens na forja.|Migliora oggetti nella forgia.|Ulepszaj przedmioty w kuźni.
+Entdecke unterschiedliche Materialtypen.|Discover distinct material types.|Descubre materiales distintos.|Découvrez différents matériaux.|Descubra materiais distintos.|Scopri diversi materiali.|Odkrywaj różne materiały.
+Lerne unterschiedliche Itemrezepte.|Learn distinct item recipes.|Aprende recetas de objetos distintas.|Apprenez différentes recettes d’objets.|Aprenda receitas distintas de itens.|Impara diverse ricette di oggetti.|Poznawaj różne receptury przedmiotów.
+Stelle unterschiedliche Itemtypen selbst her.|Craft distinct item types yourself.|Fabrica tú mismo distintos tipos de objetos.|Fabriquez vous-même différents types d’objets.|Fabrique você mesmo diferentes tipos de itens.|Crea personalmente diversi tipi di oggetti.|Samodzielnie wytwarzaj różne typy przedmiotów.
+Schalte Materialfamilien frei.|Unlock material families.|Desbloquea familias de materiales.|Débloquez des familles de matériaux.|Libere famílias de materiais.|Sblocca famiglie di materiali.|Odblokowuj rodziny materiałów.
+Baue die Veredelung aus und erhöhe die höchste Forge-Stufe eines Items.|Upgrade refining and increase your highest item Forge level.|Mejora el refinado y sube el mayor nivel de forja de un objeto.|Améliorez le raffinage et augmentez le plus haut niveau de forge d’un objet.|Melhore o refino e aumente o maior nível de forja de um item.|Migliora la raffinazione e aumenta il livello di forgia massimo di un oggetto.|Rozwijaj rafinację i zwiększaj najwyższy poziom kuźni przedmiotu.
+Schließe unterschiedliche Challenge-Stufen erstmals ab.|Complete distinct challenge stages for the first time.|Completa por primera vez diferentes etapas de desafíos.|Terminez différentes étapes de défis pour la première fois.|Conclua diferentes etapas de desafios pela primeira vez.|Completa diverse fasi delle sfide per la prima volta.|Po raz pierwszy kończ różne etapy wyzwań.
+Erreiche höhere Stufen in einer Challengefamilie.|Reach higher stages in one challenge family.|Alcanza etapas superiores en una familia de desafíos.|Atteignez des étapes supérieures dans une famille de défis.|Alcance etapas superiores em uma família de desafios.|Raggiungi fasi superiori in una famiglia di sfide.|Osiągaj wyższe etapy jednej rodziny wyzwań.
+Benenne dein KI-Modell.|Name your AI model.|Pon nombre a tu modelo de IA.|Nommez votre modèle d’IA.|Dê nome ao seu modelo de IA.|Dai un nome al modello IA.|Nazwij swój model SI.
+Beschäftige zwei Labore gleichzeitig.|Run two labs simultaneously.|Pon dos laboratorios a trabajar a la vez.|Faites travailler deux labos simultanément.|Use dois laboratórios ao mesmo tempo.|Fai lavorare due laboratori contemporaneamente.|Uruchom dwa laboratoria jednocześnie.
+Schalte einen Forschungsdurchbruch frei.|Unlock a research breakthrough.|Desbloquea un avance de investigación.|Débloquez une percée de recherche.|Libere uma descoberta de pesquisa.|Sblocca una svolta di ricerca.|Odblokuj przełom badawczy.
+Finde mindestens ein seltenes Item.|Find at least one rare item.|Encuentra al menos un objeto raro.|Trouvez au moins un objet rare.|Encontre pelo menos um item raro.|Trova almeno un oggetto raro.|Znajdź co najmniej jeden rzadki przedmiot.
+Erreiche in einem Run Meilensteine in drei Klassen.|Reach milestones in three classes in one run.|Alcanza hitos en tres clases en un ciclo.|Atteignez des paliers dans trois classes en une partie.|Alcance marcos em três classes em um ciclo.|Raggiungi traguardi in tre classi in una partita.|Osiągnij progi trzech klas w jednym przebiegu.
+Rüste eine wirksame Item-Kombination aus.|Equip an effective item combination.|Equipa una combinación eficaz de objetos.|Équipez une combinaison d’objets efficace.|Equipe uma combinação eficaz de itens.|Equipaggia una combinazione efficace di oggetti.|Wyposaż skuteczną kombinację przedmiotów.
+Schließe eine Analyse ab.|Complete an analysis.|Completa un análisis.|Terminez une analyse.|Conclua uma análise.|Completa un’analisi.|Ukończ analizę.
+Entdecke alle 15 Hardwareklassen.|Discover all 15 hardware classes.|Descubre las 15 clases de hardware.|Découvrez les 15 classes matérielles.|Descubra as 15 classes de hardware.|Scopri tutte le 15 classi hardware.|Odkryj wszystkie 15 klas sprzętu.
+Erreiche 500 Einheiten einer Hardwareklasse.|Reach 500 units of a hardware class.|Alcanza 500 unidades de una clase de hardware.|Atteignez 500 unités d’une classe matérielle.|Alcance 500 unidades de uma classe de hardware.|Raggiungi 500 unità di una classe hardware.|Osiągnij 500 sztuk jednej klasy sprzętu.
+Aktiviere einen Hardware-Autobuyer.|Enable a hardware autobuyer.|Activa un comprador automático de hardware.|Activez un acheteur automatique de matériel.|Ative um comprador automático de hardware.|Attiva un acquirente automatico hardware.|Włącz automatycznego kupującego sprzęt.
+Langzeit-Achievements, 6/12/30 Missionen, Hardware-Mastery und der erweiterte INT-Baum sind live.|Long-term achievements, 6/12/30 missions, hardware mastery and the expanded INT tree are live.|Ya están disponibles logros a largo plazo, 6/12/30 misiones, maestría de hardware y el árbol INT ampliado.|Succès à long terme, 6/12/30 missions, maîtrise matérielle et arbre INT étendu sont disponibles.|Conquistas de longo prazo, 6/12/30 missões, maestria de hardware e árvore INT ampliada estão disponíveis.|Sono disponibili obiettivi a lungo termine, 6/12/30 missioni, maestria hardware e albero INT esteso.|Dostępne są długoterminowe osiągnięcia, 6/12/30 misji, mistrzostwo sprzętu i rozszerzone drzewo INT.
+Die erste 30-Tage Neural Season ist gestartet. Erledige Missionen, sammle Season XP und sichere dir das Boot Sequence Core Artifact.|The first 30-day Neural Season has started. Complete missions, collect Season XP and earn the Boot Sequence Core Artifact.|Ha empezado la primera Temporada Neural de 30 días. Completa misiones, reúne XP de temporada y consigue el artefacto de núcleo Boot Sequence.|La première saison neurale de 30 jours a commencé. Terminez des missions, gagnez de l’XP de saison et obtenez l’artefact de noyau Boot Sequence.|A primeira Temporada Neural de 30 dias começou. Conclua missões, ganhe XP de temporada e conquiste o artefato de núcleo Boot Sequence.|È iniziata la prima Stagione neurale di 30 giorni. Completa missioni, raccogli XP stagione e ottieni l’artefatto nucleo Boot Sequence.|Rozpoczął się pierwszy 30-dniowy sezon neuronowy. Kończ misje, zdobywaj XP sezonu i otrzymaj artefakt rdzenia Boot Sequence.
+Als Nächstes|Up next|A continuación|À suivre|A seguir|A seguire|Następnie
+Nach aktivem Training|After current training|Tras el entrenamiento actual|Après l’entraînement actuel|Após o treino atual|Dopo l’allenamento attuale|Po bieżącym treningu
+Alle Labore belegt|All labs busy|Todos los laboratorios ocupados|Tous les labos occupés|Todos os laboratórios ocupados|Tutti i laboratori occupati|Wszystkie laboratoria zajęte
+Reset vorgemerkt|Reset pending|Reinicio pendiente|Réinitialisation en attente|Reinício pendente|Ripristino in attesa|Reset oczekuje
+Labor|Lab|Laboratorio|Labo|Laboratório|Laboratorio|Laboratorium
+belegt|busy|ocupados|occupés|ocupados|occupati|zajęte
+Frei|Available|Libre|Libre|Livre|Libero|Wolne
+Zahlung bei Start|Pay on start|Pago al iniciar|Paiement au départ|Pagar ao iniciar|Pagamento all’avvio|Płatność na starcie
+Abschluss|Finishing|Finalizando|Finalisation|Concluindo|In chiusura|Kończenie
+INT: Forschungs-Erkenntnis freischalten|INT: unlock Research insight|INT: desbloquear Conocimiento de investigación|INT : débloquer Savoir de recherche|INT: desbloquear Conhecimento de pesquisa|INT: sblocca Conoscenza della ricerca|INT: odblokuj Wiedzę z badań

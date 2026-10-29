@@ -35,6 +35,13 @@ namespace IdleIntelligence.PlayTests
             double count=game.State.Lifetime.analysesCompleted;Assert.That(game.Act(s=>{var n=s.Copy();n.Lifetime.analysesCompleted++;return n;}),Is.True);Assert.That(game.Writable,Is.True);
             var saved=new AtomicSaveStore(game.SavePath,new UnitySaveCodec()).Load(game.State.SavedAt);Assert.That(saved.Writable,Is.True);Assert.That(saved.State.Lifetime.analysesCompleted,Is.EqualTo(count+1));field.SetValue(feedback,game);yield return null;
         }
+        [UnityTest]public IEnumerator ResearchAndShopContextsRemainSelectedThroughMenuRoutes()
+        {
+            game.Show("challenges");yield return null;yield return null;Assert.That(game.ResearchTab.GetComponent<Image>().color,Is.EqualTo(GameTheme.Hex("17353F")));
+            game.GetComponent<GameMenu>().Navigate("settings");yield return null;Assert.That(game.ResearchTab.GetComponent<Image>().color,Is.EqualTo(GameTheme.Hex("17353F")));
+            game.Show("seasons");yield return null;yield return null;Assert.That(GameObject.Find("ShopTab").GetComponent<Image>().color,Is.EqualTo(GameTheme.Hex("17353F")));
+            game.GetComponent<GameMenu>().Navigate("storage");yield return null;Assert.That(GameObject.Find("ShopTab").GetComponent<Image>().color,Is.EqualTo(GameTheme.Hex("17353F")));
+        }
         [UnityTest]public IEnumerator RecordActualIntroTrainingCompletionWithoutTimeGrants()
         {
             GameRuntime.SavePathOverride=Path.Combine(Path.GetTempPath(),"idle-completion-fresh-"+Guid.NewGuid(),"save.json");yield return SceneManager.LoadSceneAsync("IdleIntelligence");yield return null;game=UnityEngine.Object.FindFirstObjectByType<GameRuntime>();

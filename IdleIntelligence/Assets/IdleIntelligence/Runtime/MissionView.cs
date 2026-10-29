@@ -8,6 +8,7 @@ namespace IdleIntelligence.Runtime
 {
  public sealed class MissionView:MonoBehaviour
  {
+  string N(double value)=>NumberFormatting.Format(ScientificNumber.From(value),game.State.Settings.numberFormat,game.State.Settings.language);
   GameRuntime game;Transform content;Text header;int kind;string signature="";readonly List<Action> updates=new List<Action>();
   public void Initialize(GameRuntime runtime){game=runtime;header=WorkshopUIFactory.Label("MissionHeader",transform,"",16,84);var nav=WorkshopUIFactory.Horizontal("MissionPeriods",transform).transform;for(int i=0;i<3;i++){int k=i;WorkshopUIFactory.Button("MissionPeriod-"+i,nav,new[]{"Täglich","Wöchentlich","Monatlich"}[i],()=>{kind=k;Build();});}content=WorkshopUIFactory.Vertical("MissionContent",transform).transform;Build();}
   string Signature()=>kind+":"+game.State.Missions.Period(kind).key+":"+string.Join(",",game.State.Missions.boxes.pending.Select(b=>b.id))+":"+game.State.Missions.startPending;
@@ -22,7 +23,7 @@ namespace IdleIntelligence.Runtime
    {
     string id=task.id;var card=Instantiate(game.CardPrefab,content);card.gameObject.name="Mission-"+id;card.Icon.gameObject.SetActive(false);card.Title.text=task.de;card.Title.fontSize=16;card.Detail.fontSize=14;card.GetComponent<LayoutElement>().preferredHeight=180;
     var claimNotice=ClaimNotice.Attach(card.Button.transform);card.Button.onClick.AddListener(()=>game.Act(v=>v.Missions.Period(period).key==key?MissionRules.Claim(v,period,id):v,"claim"));
-    updates.Add(()=>{var state=game.State;var t=state.Missions.Period(period).tasks.FirstOrDefault(v=>v.id==id);if(t==null)return;bool ready=MissionRules.Complete(state,t);card.Detail.text=ScientificNumber.From(MissionRules.Progress(state,t))+" / "+ScientificNumber.From(t.goal)+"\n"+t.reward+" Gems · "+MissionBalance.QuestXP[period]*t.rewardTier+" XP\n"+(t.claimed?"Abgeholt":ready?"Abholen":"Ziel noch offen");card.Button.interactable=game.Writable&&!ChallengeRules.Active(state)&&ready&&!t.claimed;claimNotice.SetActive(card.Button.interactable);});
+    updates.Add(()=>{var state=game.State;var t=state.Missions.Period(period).tasks.FirstOrDefault(v=>v.id==id);if(t==null)return;bool ready=MissionRules.Complete(state,t);card.Detail.text=N(MissionRules.Progress(state,t))+" / "+N(t.goal)+"\n"+t.reward+" Gems · "+MissionBalance.QuestXP[period]*t.rewardTier+" XP\n"+(t.claimed?"Abgeholt":ready?"Abholen":"Ziel noch offen");card.Button.interactable=game.Writable&&!ChallengeRules.Active(state)&&ready&&!t.claimed;claimNotice.SetActive(card.Button.interactable);});
    }
    var bonus=WorkshopUIFactory.Button("MissionBonus",content,"",()=>game.Act(v=>v.Missions.Period(period).key==key?MissionRules.Bonus(v,period):v,"claim"));var bonusNotice=ClaimNotice.Attach(bonus.transform);bonus.GetComponent<LayoutElement>().preferredHeight=78;
    updates.Add(()=>{var current=game.State;var v=current.Missions.Period(period);int done=v.tasks.Count(t=>MissionRules.Complete(current,t));bonus.GetComponentInChildren<Text>().text=v.bonusClaimed?"Periodenbonus abgeholt":"Bonus: "+done+" / "+v.required+" · "+v.bonus+" Gems + "+(period==0?"Bonusbox":"Materialpaket")+" + XP";bonus.interactable=game.Writable&&!ChallengeRules.Active(current)&&!v.bonusClaimed&&v.required>0&&done>=v.required;bonusNotice.SetActive(bonus.interactable);});

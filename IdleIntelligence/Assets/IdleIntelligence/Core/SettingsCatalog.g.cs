@@ -1,5 +1,5 @@
 // Generated from original settings and seven-language source copies (including source fallbacks).
-namespace IdleIntelligence.Core {public static class SettingsCatalog {public const string SourceHash="a5b19d3842f24b14111cf2ad3ca2beb934b91a93ff7f03e65c1f15736c3f6abe";
+namespace IdleIntelligence.Core {public static class SettingsCatalog {public const string SourceHash="ba122aa42ba010cf52bde63b13df9bfb694315dbefda1003b8c5c18d7420b3b6";
 public static readonly string[] Languages={"en","de","es","fr","pt","it","pl"};
 public static readonly string[] LanguageNames={"English","Deutsch","Español","Français","Português","Italiano","Polski"};
 public const double MusicVolume=0.25d,SfxVolume=0.5d;

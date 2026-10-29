@@ -51,3 +51,8 @@ Vollregression, neue Animationen, vollständige Inhaltsabnahme und nativer Kalts
 - Finalen vollständigen Regressionlauf, neuen nativen Player-Kaltstart und verbleibende visuelle Abnahme durchführen. Physisches Gerät und echte Cloud bleiben getrennte Abnahmen.
 
 - Zusätzlich geprüft: 40/60 INT-Knotendetails und 24 Projekt-/Itemeffekttexte nun vollständig in sechs Zielsprachen zusätzlich zu Deutsch. 17/17 Lokalisierungsprüfungen grün; numerische Literale der 40 Knotendetails werden gegen den aktuellen Quelltext geprüft. Die übrigen 20 INT- und 24 Axiomdetailtexte bleiben der nächste Übersetzungsabschnitt.
+
+## Nachprüfung vor Item-System V3, 28.10.2026
+Alle 60 INT- und 24 Axiombeschreibungen besitzen nun zentrale Übersetzungen. Zahlen in Item-/Lern-/Modelldetails verwenden die Spielsprache. Item-Hauptwirkungen haben kurze lokalisierte Rollenlabels; Research-Scheduling erklärt die tatsächlich vorhandene V2-Wirkung und den Forschungsdirektor statt des historischen `labs4`-Texts. Knotendetails lösen bekannte IDs zu Namen auf. Kontextnavigation und kompakte Item-Claimportraits ergänzt.
+
+Tatsächlich geprüft: `/tmp/idle-pre-v3-edit.xml`: 30/30 EditMode, 2,011 s; `/tmp/idle-pre-v3-play-real.xml`: 4/4 PlayMode, 36,691 s, einschließlich Abschlussfeedback, Speicherschutz und Navigationskontext. Ein erster Play-Aufruf verwendete den falschen Namespace und wählte 0 Tests; dieser zählt ausdrücklich nicht als Nachweis und wurde durch den korrekten Lauf ersetzt. Kein neuer nativer Gerätebuild und keine abgeschlossene Gesamtsprachabnahme.

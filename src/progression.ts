@@ -1,3 +1,5 @@
+import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditExponentV3,progressionEffectsV3,discoverAxiomsV3,prestigeResearchActivityV3,prestigeResearchDataV3} from './prestigeV3';
+import {usesItemV3,itemDataFactorV3,itemTrainingStrengthV3,itemWorkFactorV3,itemKnowledgeFactorV3} from './itemSystemV3';
 import { deviceBonus } from "./deviceEffects";
 import {
   BALANCE,
@@ -212,11 +214,11 @@ export const integrationLevel = (s: GameState) =>
     ? ((s as GameState & { integrationLevel?: number }).integrationLevel ?? 0)
     : 0;
 export const integrationBase = (s: GameState) =>
-  hasProgressionNode(s, "T10")
+  usesItemV3(s)?(hasProgressionNode(s,"T10")?BALANCE.prestigeV3.training.integrationPerfect:BALANCE.prestigeV3.training.integrationBase):hasProgressionNode(s, "T10")
     ? BALANCE.progression.integrationPerfect
     : BALANCE.progression.integrationBase;
 export const integrationLimit = (s: GameState) =>
-  BALANCE.progression.integrationLimit + 25 * axiomLevel(s, "A05");
+  (usesItemV3(s)?BALANCE.prestigeV3.training.integrationLimit:BALANCE.progression.integrationLimit) + 25 * axiomLevel(s, "A05");
 export function modelCore(s: GameState) {
   if (!s.progression.active) return 1;
   const coupling = axiomLevel(s, "D05")
@@ -232,23 +234,19 @@ export function modelCore(s: GameState) {
     (BALANCE.progression.modelCore *
       (1 + BALANCE.progression.modelCoreLevel * modelLevel(s)) -
       1) *
-      formula().modelAxiomCore ** axiomLevel(s, "A06") *
-      formula().modelDevelopmentCore ** axiomLevel(s, "D03") *
+      (usesItemV3(s)?BALANCE.prestigeV3.axioms.A06:formula().modelAxiomCore) ** axiomLevel(s, "A06") *
+      (usesItemV3(s)?BALANCE.prestigeV3.axioms.D03:formula().modelDevelopmentCore) ** axiomLevel(s, "D03") *
       coupling * (1 + deviceBonus(s,"modelEcho"))
   );
 }
-export function legacyItemFactor(s: GameState, e: string) {
+export function legacyItemFactorScientific(s: GameState, e: string) {
   return s.progression?.version === 2
-    ? ScientificNumber.fromJSON(
-        s.progression.legacyCycle["item:" + e] ?? { m: 1, e: 0 },
-      )
-        .multiply(
-          ScientificNumber.fromJSON(
-            s.progression.legacyPermanent["item:" + e] ?? { m: 1, e: 0 },
-          ),
-        )
-        .toNumber()
-    : 1;
+    ? ScientificNumber.fromJSON(s.progression.legacyCycle["item:" + e] ?? { m: 1, e: 0 })
+        .multiply(ScientificNumber.fromJSON(s.progression.legacyPermanent["item:" + e] ?? { m: 1, e: 0 }))
+    : ScientificNumber.from(1);
+}
+export function legacyItemFactor(s: GameState, e: string) {
+  return legacyItemFactorScientific(s, e).toNumber();
 }
 export function itemAmplifier(s: GameState) {
   if (s.retention.activeRun?.id === "no-items") return 1;
@@ -258,11 +256,11 @@ export function itemAmplifier(s: GameState) {
       : modelFactor(s, "items");
   return (
     integrationBase(s) ** integrationLevel(s) *
-    (hasProgressionNode(s, "W05") ? effects().W05 : 1) *
-    (hasProgressionNode(s, "W09") ? effects().W09 : 1) *
-    (hasProgressionNode(s, "W10") ? effects().W10 : 1) *
-    effects().A05item ** axiomLevel(s, "A05") *
-    effects().B03 ** axiomLevel(s, "B03") *
+    (hasProgressionNode(s, "W05") ? (usesItemV3(s)?BALANCE.prestigeV3.items.W05:effectsFor(s).W05) : 1) *
+    (hasProgressionNode(s, "W09") ? (usesItemV3(s)?BALANCE.prestigeV3.items.W09:effectsFor(s).W09) : 1) *
+    (hasProgressionNode(s, "W10") ? (usesItemV3(s)?BALANCE.prestigeV3.items.W10:effectsFor(s).W10) : 1) *
+    effectsFor(s).A05item ** axiomLevel(s, "A05") *
+    (usesItemV3(s)?BALANCE.prestigeV3.axioms.B03:effectsFor(s).B03) ** axiomLevel(s, "B03") *
     ki
   );
 }
@@ -287,7 +285,7 @@ export function activeSlotIds(s: GameState): ItemSlot[] {
   return ids;
 }
 const formula = () => BALANCE.progression.formula;
-const effects = () => BALANCE.progression.effects;
+const effectsFor = progressionEffectsV3;
 const research = () => BALANCE.progression.researchEffects;
 const S = (n: number) => ScientificNumber.from(n);
 const power = (b: number, l: number) => S(b).pow(l);
@@ -317,31 +315,31 @@ export function progressionComputeFactors(s: GameState) {
       equippedBonus(s, "compute") +
       milestoneBonus(s, "compute") +
       milestoneBonus(s, "synergy"),
-    prestigePerClass:
-      (hasProgressionNode(s, "H06") ? effects().H06 : 1) *
+    prestigePerClass:usesItemV3(s)?prestigeHardwareFirstV3(s):
+      (hasProgressionNode(s, "H06") ? effectsFor(s).H06 : 1) *
       (hasProgressionNode(s, "H07")
         ? Math.min(
-            effects().H07cap,
+            effectsFor(s).H07cap,
             1 +
-              effects().H07per *
+              effectsFor(s).H07per *
                 hardwareIds.reduce(
                   (v, id) => v + Math.sqrt(s.hardwareCounts[id]),
                   0,
                 ),
           )
         : 1),
-    deepPrestige:
+    deepPrestige:usesItemV3(s)?prestigeHardwareSecondV3(s):
       (hasProgressionNode(s, "H09")
-        ? effects().H09 *
+        ? effectsFor(s).H09 *
           (1 +
             Math.min(
-              effects().H09cap,
-              effects().H09per *
+              effectsFor(s).H09cap,
+              effectsFor(s).H09per *
                 hardwareIds.filter(
-                  (id) => s.hardwareCounts[id] >= effects().H09count,
+                  (id) => s.hardwareCounts[id] >= effectsFor(s).H09count,
                 ).length,
             ))
-        : 1) * (hasProgressionNode(s, "H10") ? effects().H10 : 1),
+        : 1) * (hasProgressionNode(s, "H10") ? effectsFor(s).H10 : 1),
     computeOptimization: power(
       research().computeOptimization,
       n.computeOptimization,
@@ -368,20 +366,20 @@ export function progressionComputeFactors(s: GameState) {
     hardwareOwnership: S(1 + challengeFamilyBonus(s, "no-items")),
     infrastructure: axiomEconomyValue(s, "total")
       .add(S(1))
-      .pow(effects().A03 * axiomLevel(s, "A03")),
+      .pow(effectsFor(s).A03 * axiomLevel(s, "A03")).multiply(usesItemV3(s)?power(BALANCE.prestigeV3.axioms.A03,axiomLevel(s,"A03")):S(1)),
     model: S(modelFactor(s, "compute")),
   };
 }
 export function progressionUserFactors(s: GameState) {
   const l = s.efficiencyLevel,
-    x = trainingStrength(l),
+    x = trainingStrength(l,s),
     eff =
       1 +
       (formula().efficiencyBase ** x - 1) *
         (1 + challengeFamilyBonus(s, "efficiency-lock"));
   return {
     efficiencyPerCompute:
-      eff ** (hasProgressionNode(s, "T02") ? effects().T02 : 1) /
+      eff ** (hasProgressionNode(s, "T02") ? (usesItemV3(s)?BALANCE.prestigeV3.training.T02:effectsFor(s).T02) : 1) /
       BALANCE.computePerUser,
     milestoneUsers: 1 + milestoneBonus(s, "users"),
     userScaling: power(research().userScaling, s.researchLevels.userScaling),
@@ -397,7 +395,7 @@ export function progressionCreditFactors(
   const n = s.researchLevels,
     q =
       1 +
-      (formula().qualityBase ** trainingStrength(s.qualityLevel) - 1) *
+      (formula().qualityBase ** trainingStrength(s.qualityLevel,s) - 1) *
         (1 + challengeFamilyBonus(s, "quality-lock"));
   const ma = axiomEconomyValue(s, "total")
     .add(S(1))
@@ -412,14 +410,14 @@ export function progressionCreditFactors(
         Math.max(0, axiomLevel(s, "A02") - formula().axiomCreditBoundedLevels),
       ),
     );
-  const a =
+  const a =usesItemV3(s)?prestigeCreditExponentV3(s):
     formula().intCreditExponent +
     (hasProgressionNode(s, "I05") ? formula().intCreditNodeExponent : 0) +
     (hasProgressionNode(s, "I10") ? formula().intCreditNodeExponent : 0);
   return {
     permanentIncome: s.commerce?.owned.includes('ai_singularity.pass.income') ? BALANCE.commerce.incomeMultiplier : 1,
     baseRevenuePerUser: BALANCE.baseRevenuePerUser,
-    quality: q ** (hasProgressionNode(s, "T01") ? effects().T01 : 1),
+    quality: q ** (hasProgressionNode(s, "T01") ? (usesItemV3(s)?BALANCE.prestigeV3.training.T01:effectsFor(s).T01) : 1),
     INT: exactEconomyValue(s, "cycleINTEarned").add(S(1)).pow(a),
     axioms: ma,
     modelArchitecture: power(research().modelArchitecture, n.modelArchitecture),
@@ -434,19 +432,19 @@ export function progressionCreditFactors(
     items: S(
       1 + equippedBonus(s, "credits") + itemCombinationBonus(s, "credits"),
     ),
-    hardwareOwnership:
-      (hasProgressionNode(s, "H08") ? 1 + effects().H08 * owned(s) : 1) *
+    hardwareOwnership:usesItemV3(s)?prestigeCreditHardwareV3(s):
+      (hasProgressionNode(s, "H08") ? 1 + effectsFor(s).H08 * owned(s) : 1) *
       (hasProgressionNode(s, "T07")
         ? 1 +
-          effects().T07per *
+          effectsFor(s).T07per *
             Math.min(
-              effects().T07cap,
+              effectsFor(s).T07cap,
               s.qualityLevel + s.efficiencyLevel + integrationLevel(s),
             )
         : 1),
     infrastructure: S(
-      (hasProgressionNode(s, "T09") ? effects().T09 : 1) *
-        (hasProgressionNode(s, "I01") ? effects().I01 : 1),
+      (hasProgressionNode(s, "T09") ? effectsFor(s).T09 : 1) *
+        (hasProgressionNode(s, "I01") ? effectsFor(s).I01 : 1),
     ),
     lifetimeData: S(1),
     model: S(modelCore(s) * modelFactor(s, "revenue")),
@@ -471,10 +469,10 @@ export function progressionDataRate(s: GameState) {
       formula().dataScale *
         (1 + equippedBonus(s, "data") + milestoneBonus(s, "data")) *
         modelFactor(s, "data") *
-        (secondary(s, "K02") ? effects().D06data : 1) *
-        (secondary(s, "K07") ? effects().D06data : 1) *
-        (hasProgressionNode(s, "F09") ? effects().F09data : 1) *
-        (hasProgressionNode(s, "F10") ? effects().F10data : 1),
+        (secondary(s, "K02") ? effectsFor(s).D06data : 1) *
+        (secondary(s, "K07") ? effectsFor(s).D06data : 1) *
+        (hasProgressionNode(s, "F09") ? effectsFor(s).F09data : 1) *
+        (hasProgressionNode(s, "F10") ? effectsFor(s).F10data : 1),
     )
     .multiply(power(research().dataGeneration, n.dataGeneration))
     .multiply(
@@ -496,10 +494,10 @@ export function progressionDataRate(s: GameState) {
             challengeChapterIndex(s.retention.activeRun.stage ?? 1)
           ]
         : 1,
-    );
+    ).multiply(usesItemV3(s)?itemDataFactorV3(s):S(1)).multiply(prestigeResearchDataV3(s));
 }
-export const trainingStrength = (n: number) =>
-  n <= formula().trainingSoftStart
+export const trainingStrength = (n: number,s?:GameState) =>
+  s&&usesItemV3(s)?itemTrainingStrengthV3(s,n):n <= formula().trainingSoftStart
     ? n
     : formula().trainingSoftStart +
       formula().trainingSoftScale *
@@ -520,10 +518,10 @@ export function progressionTrainingRate(s: GameState) {
           : integrationLevel(s);
   const rebuild =
     level < s.progression.trainingRecords[track]
-      ? effects().B05 ** axiomLevel(s, "B05")
+      ? effectsFor(s).B05 ** axiomLevel(s, "B05")
       : 1;
   return (
-    (1 + deviceBonus(s,"modelTraining")) *
+    itemWorkFactorV3(s,false) * (1 + deviceBonus(s,"modelTraining")) *
     computeLog(s) *
     (1 + equippedBonus(s, "training") + milestoneBonus(s, "training")) *
     (1 + itemCombinationQuote(s, "learning-pipeline").contribution) *
@@ -531,31 +529,31 @@ export function progressionTrainingRate(s: GameState) {
     (1 + research().recursiveLearning * s.researchLevels.recursiveLearning) *
     modelFactor(s, "training") *
     Math.sqrt(modelFactor(s, "compute")) *
-    (hasProgressionNode(s, "T05") ? effects().T05 : 1) *
-    (hasProgressionNode(s, "T09") ? effects().T09training : 1) *
+    (hasProgressionNode(s, "T05") ? effectsFor(s).T05 : 1) *
+    (hasProgressionNode(s, "T09") ? effectsFor(s).T09training : 1) *
     (s.completedResearch.includes("alignment") ? 1 / research().alignment : 1) *
     (s.activeTraining?.modelTransferEligible === true
       ? research().modelTransfer
       : 1) *
-    (track === "integration" && secondary(s, "K08") ? effects().D06data : 1) *
+    (track === "integration" && secondary(s, "K08") ? effectsFor(s).D06data : 1) *
     rebuild *
     legacy(s, "training").toNumber()
   );
 }
 export function progressionResearchSpeed(s: GameState) {
   return (
-    (1 + deviceBonus(s,"cycleResearch")) *
+    itemWorkFactorV3(s,true) * prestigeResearchActivityV3(s) * (1 + deviceBonus(s,"cycleResearch")) *
     computeLog(s) *
     (1 + equippedBonus(s, "research") + milestoneBonus(s, "research")) *
     (1 + itemCombinationBonus(s, "research")) *
     (1 + research().autonomousScience * s.researchLevels.autonomousScience) *
     modelFactor(s, "research") *
     Math.sqrt(modelFactor(s, "compute")) *
-    (hasProgressionNode(s, "F06") ? effects().F06 : 1) *
-    (hasProgressionNode(s, "F09") ? effects().F09 : 1) *
-    (hasProgressionNode(s, "F10") ? effects().F10 : 1) *
-    (secondary(s, "K03") ? effects().D06speed : 1) *
-    (secondary(s, "K06") ? effects().D06speed : 1) *
+    (hasProgressionNode(s, "F06") ? effectsFor(s).F06 : 1) *
+    (hasProgressionNode(s, "F09") ? effectsFor(s).F09 : 1) *
+    (hasProgressionNode(s, "F10") ? effectsFor(s).F10 : 1) *
+    (secondary(s, "K03") ? effectsFor(s).D06speed : 1) *
+    (secondary(s, "K06") ? effectsFor(s).D06speed : 1) *
     (s.completedResearch.includes("researchScheduling")
       ? research().researchScheduling
       : 1) *
@@ -564,47 +562,48 @@ export function progressionResearchSpeed(s: GameState) {
   );
 }
 export function progressionINTRate(s: GameState) {
+  if(usesItemV3(s))return prestigeINTWeightV3(s).toNumber();
   return (
     (1 +
       (hasProgressionNode(s, "I02")
         ? Math.min(
-            effects().I02cap,
-            effects().I02per * s.runMilestoneEdges.length,
+            effectsFor(s).I02cap,
+            effectsFor(s).I02per * s.runMilestoneEdges.length,
           )
         : 0) +
       (hasProgressionNode(s, "I03")
-        ? effects().I03per *
+        ? effectsFor(s).I03per *
           Math.min(
-            effects().I03cap,
+            effectsFor(s).I03cap,
             s.qualityLevel + s.efficiencyLevel + integrationLevel(s),
           )
         : 0) +
       (hasProgressionNode(s, "I04")
-        ? effects().I04per *
+        ? effectsFor(s).I04per *
           Math.min(
-            effects().I04cap,
+            effectsFor(s).I04cap,
             Object.values(s.researchLevels).reduce((a, b) => a + b, 0) +
               s.completedResearch.length,
           )
         : 0) +
       Math.min(
-        effects().archiveINTcap,
+        effectsFor(s).archiveINTcap,
         equippedItems(s).reduce(
           (sum, i) =>
             sum +
             (i.type === "insight-archive"
-              ? effects().archiveINT *
+              ? effectsFor(s).archiveINT *
                 (specialItemEffectQuote(s, i)?.scale ?? 0) *
                 itemAmplifier(s)
               : 0),
           0,
         ),
       )) *
-    (hasProgressionNode(s, "I09") ? effects().I09 : 1)
+    (hasProgressionNode(s, "I09") ? effectsFor(s).I09 : 1)
   );
 }
 export const intExponent = (s: GameState) =>
-  formula().intBaseExponent +
+  usesItemV3(s)?prestigeGainExponentV3(s):formula().intBaseExponent +
   formula().intAxiomExponent * axiomLevel(s, "A01") +
   (hasProgressionNode(s, "I10") ? formula().intNodeExponent : 0);
 export function recordINTIncome(
@@ -635,7 +634,7 @@ export function recordINTIncome(
     progression: {
       ...after.progression,
       entitlement: ScientificNumber.fromJSON(before.progression.entitlement)
-        .add(increment.multiplyNumber(progressionINTRate(before)))
+        .add(increment.multiply(usesItemV3(before)?prestigeINTWeightV3(before):S(progressionINTRate(before))))
         .toJSON(),
     },
   };
@@ -711,7 +710,7 @@ export function discoverProgression(s: GameState) {
       gift,
     );
   }
-  return next;
+  return usesItemV3(next)?discoverAxiomsV3(next):next;
 }
 export function knowledgeRate(s: GameState) {
   if (!s.progression.lab || s.retention.activeRun)
@@ -724,13 +723,13 @@ export function knowledgeRate(s: GameState) {
     .sqrt()
     .multiplyNumber(
       BALANCE.progression.knowledgeRate * (1 + deviceBonus(s,"insight")) *
-        (hasProgressionNode(s, "I08") ? effects().I08 : 1),
+        (hasProgressionNode(s, "I08") ? effectsFor(s).I08 : 1),
     )
     .multiply(
       axiomEconomyValue(s, "total")
         .add(S(1))
         .pow(formula().knowledgeAxiomPower * axiomLevel(s, "D01")),
-    );
+    ).multiply(itemKnowledgeFactorV3(s)).multiply(usesItemV3(s)?power(BALANCE.prestigeV3.axioms.D01,axiomLevel(s,"D01")):S(1));
 }
 export const nextModelCost = (s: GameState) =>
   scientificCeil(
@@ -750,7 +749,7 @@ export const nextModelUpgradeCost = (s: GameState, id: ModelId) =>
           s.progression.models[id] ?? 0,
         ),
       )
-      .multiply(power(BALANCE.progression.modelDiscount, axiomLevel(s, "D02"))),
+      .multiply(power((usesItemV3(s)?BALANCE.prestigeV3.axioms.D02:BALANCE.progression.modelDiscount), axiomLevel(s, "D02"))),
   );
 export function developModel(s: GameState) {
   const p = s.progression,
@@ -844,9 +843,9 @@ export function selectModel(s: GameState, id: ModelId | null) {
 }
 export const overdriveFactor = (s: GameState) =>
   formula().overdriveFactor *
-  (hasProgressionNode(s, "S04") ? effects().S04 : 1) *
-  (hasProgressionNode(s, "S09") ? effects().S09 : 1) *
-  (secondary(s, "K01") ? effects().D06overdrive : 1) *
+  (hasProgressionNode(s, "S04") ? effectsFor(s).S04 : 1) *
+  (hasProgressionNode(s, "S09") ? effectsFor(s).S09 : 1) *
+  (secondary(s, "K01") ? effectsFor(s).D06overdrive : 1) *
   (1 + deviceBonus(s, "burst"));
 export function tapQuote(s: GameState, now = s.savedAt, proc = 0) {
   const p = s.progression,
@@ -857,26 +856,26 @@ export function tapQuote(s: GameState, now = s.savedAt, proc = 0) {
   const c = Math.min(
       formula().critCap,
       BALANCE.progression.tapCrit +
-        (hasProgressionNode(s, "S02") ? effects().S02 : 0) +
-        (hasProgressionNode(s, "S05") ? effects().S05 : 0) +
-        (secondary(s, "K04") ? effects().D06crit : 0),
+        (hasProgressionNode(s, "S02") ? effectsFor(s).S02 : 0) +
+        (hasProgressionNode(s, "S05") ? effectsFor(s).S05 : 0) +
+        (secondary(s, "K04") ? effectsFor(s).D06crit : 0),
     ),
     m =
       (BALANCE.progression.tapCritBase +
-        (hasProgressionNode(s, "S03") ? effects().S03 : 0) +
-        (hasProgressionNode(s, "S06") ? effects().S06 : 0)) *
-      effects().A04 ** axiomLevel(s, "A04"),
+        (hasProgressionNode(s, "S03") ? effectsFor(s).S03 : 0) +
+        (hasProgressionNode(s, "S06") ? effectsFor(s).S06 : 0)) *
+      effectsFor(s).A04 ** axiomLevel(s, "A04"),
     x = Math.max(
       1,
       (1 + equippedBonus(s, "tap")) *
         research().tapAmplification ** s.researchLevels.tapAmplification *
-        (hasProgressionNode(s, "S01") ? effects().S01 : 1) *
-        (hasProgressionNode(s, "S08") ? effects().S08 : 1),
+        (hasProgressionNode(s, "S01") ? effectsFor(s).S01 : 1) *
+        (hasProgressionNode(s, "S08") ? effectsFor(s).S08 : 1),
     ),
     q =
       BALANCE.progression.tapBase *
         (1 + Math.log(x)) *
-        (hasProgressionNode(s, "S10") ? effects().S10 : 1) *
+        (hasProgressionNode(s, "S10") ? effectsFor(s).S10 : 1) *
         modelFactor(s, "tap") *
         (1 + BALANCE.progression.tapCombo * combo) +
       proc,
@@ -917,7 +916,7 @@ export function progressionTap(s: GameState, now: number) {
     duration = Math.min(
       BALANCE.progression.overdriveMaxSeconds,
       BALANCE.progression.overdriveSeconds *
-        (hasProgressionNode(s, "S07") ? effects().S07 : 1) *
+        (hasProgressionNode(s, "S07") ? effectsFor(s).S07 : 1) *
         (1 + milestoneBonus(s, "overclock")) *
         (1 + deviceBonus(s, "overclockDuration")),
     );
@@ -1017,14 +1016,14 @@ export function nextTapCredit(
 export const effectiveQuality = (s: GameState, level = s.qualityLevel) =>
   s.progression?.version === 2
     ? (1 +
-        (formula().qualityBase ** trainingStrength(level) - 1) *
+        (formula().qualityBase ** trainingStrength(level,s) - 1) *
           (1 + challengeFamilyBonus(s, "quality-lock"))) **
-      (hasProgressionNode(s, "T01") ? effects().T01 : 1)
+      (hasProgressionNode(s, "T01") ? (usesItemV3(s)?BALANCE.prestigeV3.training.T01:effectsFor(s).T01) : 1)
     : quality(level);
 export const effectiveEfficiency = (s: GameState, level = s.efficiencyLevel) =>
   s.progression?.version === 2
     ? (1 +
-        (formula().efficiencyBase ** trainingStrength(level) - 1) *
+        (formula().efficiencyBase ** trainingStrength(level,s) - 1) *
           (1 + challengeFamilyBonus(s, "efficiency-lock"))) **
-      (hasProgressionNode(s, "T02") ? effects().T02 : 1)
+      (hasProgressionNode(s, "T02") ? (usesItemV3(s)?BALANCE.prestigeV3.training.T02:effectsFor(s).T02) : 1)
     : efficiency(level);

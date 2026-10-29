@@ -1,0 +1,53 @@
+{
+  "editor": "6000.3.26f1",
+  "pipeline": "0.9.1-exp.1",
+  "scope": "isolated fresh save, connection and import verification; not complete V3 gameplay",
+  "scene": {
+    "scene": "IdleIntelligence",
+    "save": "/var/folders/hj/txdyk1cj2sd36krkc8jqbg480000gn/T/idle-v3-live-a521d42318724719a0aa7b824694fba0/save.json",
+    "prepared": false,
+    "frame": 163227
+  },
+  "frameWait": {
+    "state": "met",
+    "met": true,
+    "timedOut": false,
+    "member": "UnityEngine.Time.frameCount",
+    "op": "changed",
+    "value": 163335,
+    "initialValue": 163328,
+    "elapsedMs": 125,
+    "framesObserved": 2
+  },
+  "capture": {
+    "width": 390,
+    "height": 846,
+    "encoding": "png",
+    "bytes": 391602,
+    "source": "screen",
+    "savedPath": "Assets/Builds/ReviewV3/live-pipeline-390.png"
+  },
+  "console": {
+    "entries": [],
+    "cursor": 0,
+    "session": "1606ebce59a5461ea3f311c7436c4181",
+    "returned": 0,
+    "dropped": false,
+    "reset": false,
+    "counts": {
+      "error": 0,
+      "warn": 0,
+      "log": 0
+    },
+    "groundTruth": {
+      "sampledUtc": "2026-10-28T22:49:42.661029Z",
+      "ageMs": 128,
+      "compilationFailed": false,
+      "compiling": false,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "consoleLogs": 0,
+      "seeded": true
+    }
+  }
+}

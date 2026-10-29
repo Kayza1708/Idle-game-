@@ -192,3 +192,12 @@ Weiter offen: abschließende subjektive Bewegungsabnahme auf dem tatsächlich ak
 ## Audit-Fortsetzung · 28.10.2026
 
 Eigene Bootszene, kompakte Nebenansichten, 41 vollständig übersetzte Mira-Dialogkörper, 84 Knotentitel und kurze gespeicherte Abschlussbelege umgesetzt; siehe `unity-audit-followup.md`. Inhaltliche Restübersetzungen, Kontextmarkierung der Navigation und endgültige Geräte-/Kaltstartabnahme bleiben offen. Keine pauschale Kennzeichnung aller Sprachen oder Cloud als fertig.
+
+
+## Gemeinsamer V3-Auftrag – Queuebilder und neue Itemmotive
+
+Grafische Trainings-/Forschungsqueues wurden mit Originalicons, Position/Ziellevel, separatem Zahlungsstatus und 44-Einheiten-Aktionen umgesetzt und in DE/EN bei 320/390/430 px angesehen. [Unveränderte Unity-Aufnahmen und Teststand](media/unity-v3-queues/README.md). Bei Kapazitätsverlust bleiben bezahlte Labore sichtbar, leere unzugängliche Slots nehmen keinen zusätzlichen Platz ein. Keine Neuanlage der Queuekarten pro Tick.
+
+Noch konkrete visuelle Abnahmen: Budgetpause/Resetabsicht; vollständige Axiomentdeckung mit Mira, Erhaltungsvorschau und späterem Zugang; alle V3-Wirkungstexte und Vergleiche. [Sechs neue Itemmotive](item-system-v3/art/README.md) sind erstellt und angesehen, aber noch keine eingebundenen/abgenommenen Unity-Items. Besonders Flottenkoordinator-Silhouette, Alpha-Bounds und kleine Konturen in den gemeinsamen Sockeln prüfen. Keine pauschale Design-/Animationsfertigmeldung.
+
+- Editor-Anbindung ergänzt und tatsächlich geprüft: offizielle Pipeline0.9.1-exp.1, Live-eval, Sprite-Capabilities, Console, isoliertes fortlaufendes Play und echte390×846-Aufnahme. Sechs neue Sprites sicher importiert; Katalog/Rezepte/Sockeldarstellung weiterhin offen. Details: `docs/item-system-v3/art/README.md`.
