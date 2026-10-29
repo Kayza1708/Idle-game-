@@ -1,3 +1,5 @@
+import {advanceTo} from './simulation';
+import {protectedData} from './progressionWork';
 import {describe,it,expect} from 'vitest';
 import {BALANCE,newGame,hardwareIds,computeRateScientific,creditRateScientific,addCreditsScientific,exactEconomyValue,researchQuote,dataRateScientific,type GameState} from './economy';
 import {ScientificNumber as S} from './scientificNumber';
@@ -8,6 +10,21 @@ import {createItem,equip} from './inventory';
 import {axiomRewardV2,buyProgressionNode,buyProgressionAxiom,progressionAgent,axiomResetV2} from './progressionReset';
 const prepared=(nodes:string[]=[]):GameState=>({...newGame(1000,'prepared-prestige-v3'),itemSystemV3:newItemSystemV3(),nodes});
 describe('Joint prestige/item V3 actual consumers (prepared)',()=>{
+ it('only automates integration with an explicit positive target and leaves manual plans first',()=>{
+  const initial=prepared(['T03','T04','T06']);const funded:GameState={...initial,qualityLevel:5,efficiencyLevel:5,credits:1e12,data:1e12,exactEconomy:{...initial.exactEconomy,credits:S.from(1e12).toJSON(),data:S.from(1e12).toJSON()},progression:{...initial.progression,trainingAuto:true}};
+  const run=(s:GameState,active=false)=>advanceTo(s,s.savedAt+1,active,()=>.5).state;
+  expect(protectedData(funded,'research').isZero()).toBe(true);
+  expect(run(funded).activeTraining?.track).toBe('quality');
+  const target={...funded,progression:{...funded.progression,trainingTargets:{quality:0,efficiency:0,integration:2}}};
+  expect(protectedData(target,'research').compare(S.zero())).toBeGreaterThan(0);expect(run(target).activeTraining?.track).toBe('integration');
+  expect(run({...target,integrationLevel:2}).activeTraining?.track).toBe('quality');
+  const manual:GameState={...funded,trainingQueue:[{track:'integration',targetLevel:1}]};expect(protectedData(manual,'research').compare(S.zero())).toBeGreaterThan(0);expect(run(manual).activeTraining?.track).toBe('integration');
+  expect(run({...funded,qualityLevel:7,efficiencyLevel:3}).activeTraining?.track).toBe('efficiency');
+  const done={...funded,progression:{...funded.progression,trainingTargets:{quality:5,efficiency:5,integration:0}}};expect(run(done).activeTraining).toBeNull();
+  expect(run({...funded,itemSystemV3:undefined}).activeTraining?.track).toBe('integration');
+  const online=run(target,true),offline=run(target);expect(online.activeTraining?.track).toEqual(offline.activeTraining?.track);expect(online.activeTraining?.jobId).toEqual(offline.activeTraining?.jobId);expect(online.activeTraining?.creditCostExact).toEqual(offline.activeTraining?.creditCostExact);expect(online.training).toBe(offline.training);expect(online.itemSystemV3).toEqual(offline.itemSystemV3);
+  expect(advanceTo(offline,offline.savedAt,false,()=>.5).state.itemSystemV3).toEqual(offline.itemSystemV3);
+ });
  it('keeps all existing IDs and purchase costs',()=>{
   expect(Object.keys(BALANCE.progression.nodes)).toHaveLength(60);expect(Object.keys(BALANCE.progression.axioms)).toHaveLength(24);
   const s=prepared(),price=BALANCE.progression.nodes.H06.cost;const funded={...s,unspentINT:price,exactEconomy:{...s.exactEconomy,unspentINT:S.from(price).toJSON()}};const bought=buyProgressionNode(funded,'H06');expect(bought.nodes).toContain('H06');expect(exactEconomyValue(bought,'unspentINT').isZero()).toBe(true);expect(buyProgressionNode(bought,'H06')).toBe(bought);

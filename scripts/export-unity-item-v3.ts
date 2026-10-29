@@ -1,7 +1,8 @@
+import {protectedData} from '../src/progressionWork';
 /** Generated balance and actual production-consumer fixtures. No second C# tuning table. */
 import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync} from 'node:fs';
-import {BALANCE,newGame,hardwareIds,computeRateScientific,creditRateScientific,dataRateScientific,startTraining,exactEconomyValue,grantComponents,addData,type GameState,type ItemTypeId,type Item,type Rarity} from '../src/economy';
+import {BALANCE,newGame,hardwareIds,computeRateScientific,creditRateScientific,dataRateScientific,startTraining,exactEconomyValue,grantComponents,addData,type GameState,type ItemTypeId,type Item,type Rarity,type TrainingTrack} from '../src/economy';
 import {newItemSystemV3} from '../src/itemSystemV3';
 import {trainingRate} from '../src/economy';
 import {progressionResearchSpeed,knowledgeRate} from '../src/progression';
@@ -88,7 +89,22 @@ const learningFlows=[
  learningFlow('actual-prestige-keeps-sequence',[...pair('quality'),{action:'prestige'}]),
  learningFlow('actual-axiom-keeps-sequence',[...pair('quality'),{action:'axiom'}]),
 ];
-for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows},null,2)+'\n']]){
+const trainingAutomationCases=[
+ {name:'no-integration-goal',quality:5,efficiency:5,integration:0,target:0},
+ {name:'positive-integration-goal',quality:5,efficiency:5,integration:0,target:2},
+ {name:'integration-goal-reached',quality:5,efficiency:5,integration:2,target:2},
+ {name:'lower-efficiency',quality:7,efficiency:3,integration:0,target:0},
+ {name:'manual-integration-first',quality:5,efficiency:5,integration:0,target:0,manual:'integration' as TrainingTrack},
+ {name:'manual-efficiency-first',quality:3,efficiency:5,integration:0,target:0,manual:'efficiency' as TrainingTrack},
+ {name:'all-explicit-goals-done',quality:5,efficiency:5,integration:0,target:0,done:true},
+ {name:'original-zero-target-preserved',quality:5,efficiency:5,integration:0,target:0,original:true},
+].map(row=>{
+ let state:GameState={...newGame(1000,'prepared-training-automation'),...(row.original?{}:{itemSystemV3:newItemSystemV3()}),nodes:['T03','T04','T06'],qualityLevel:row.quality,efficiencyLevel:row.efficiency,integrationLevel:row.integration,credits:1e12,data:1e12};
+ state={...state,exactEconomy:{...state.exactEconomy,credits:S.from(1e12).toJSON(),data:S.from(1e12).toJSON()},progression:{...state.progression,trainingAuto:true,trainingTargets:{quality:row.done?row.quality:0,efficiency:row.done?row.efficiency:0,integration:row.target}},trainingQueue:row.manual?[{track:row.manual,targetLevel:(row.manual==='integration'?row.integration:row.efficiency)+1}]:[]};
+ const protectedResearch=protectedData(state,'research'),after=advanceTo(state,1001,false,()=>.5).state;
+ return{...row,manual:row.manual??'',original:!!row.original,done:!!row.done,prepared:true,protectedResearch:number(protectedResearch),track:after.activeTraining?.track??'',jobId:after.activeTraining?.jobId??'',creditDebit:number(exactEconomyValue(state,'credits').subtract(exactEconomyValue(after,'credits'))),dataDebit:number(exactEconomyValue(state,'data').subtract(exactEconomyValue(after,'data'))),remainingPlans:after.trainingQueue.length};
+});
+for(const[path,value]of [[root+'Core/ItemV3Balance.g.cs',cs],[root+'Tests/EditMode/ItemV3ReferenceCases.json',JSON.stringify({sourceHash,prepared:true,productionEnabled:false,cases,archiveCases,learningFlows,trainingAutomationCases},null,2)+'\n']]){
  if(process.argv.includes('--check')){if(readFileSync(path,'utf8')!==value)throw Error('Stale V3 export: '+path);}else writeFileSync(path,value);
 }
-console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows (${sourceHash})`);
+console.log(`V3 balance + ${cases.length} actual-consumer + ${archiveCases.length} archive + ${learningFlows.length} actual learning flows + ${trainingAutomationCases.length} automation cases (${sourceHash})`);

@@ -151,3 +151,14 @@ Neun zusätzliche gemeinsame Produktionsfälle prüfen einzelne Prozessor-/Kerni
 Wissenschaftliche-Basis-Nachprüfung: vollständige191/191EditMode (127,753s) und9/9gezieltePlayMode (47,290s), Typecheck/Webbuild und vollständiger Generatorvergleich bestanden. Ein erster falsch qualifizierter PlayMode-Filter wählte null Tests und gilt ausdrücklich nicht als Abnahme; Namespace korrigiert und echte neun Tests wiederholt. Nachweise: `/tmp/idle-v3-scientific-edit.xml`, `/tmp/idle-v3-scientific-play-corrected.xml`.
 
 Vollständiger TS-Lauf für diesen Stand:154Dateien/2.000Tests bestanden,323,84s (`/tmp/idle-v3-scientific-full-vitest.log`). Die Sandbox meldete einen fehlgeschlagenen Vite-Websocket-Listener; Tests wurden vollständig beendet, Exit0, keine fehlgeschlagenen Tests. Kein Netz-/Cloud-Erfolgsnachweis daraus.
+
+
+## 29.10.2026 – T06: ausdrücklich gewünschte Integration
+
+Experimentelle V3-Automation startet Integration nur bei positivem Ziel und bis zum tatsächlichen Ziellevel. Derselbe Vertrag gilt für den dafür geschützten Datenbetrag. Manuelle Pläne bleiben vor der Automation; Nullziel bedeutet für Q/E weiterhin unbegrenzt, für V3-Integration ausschließlich manuell. Niedrigeres Q/E-Level wird bei freier Wahl bevorzugt, Gleichstand stabil Qualität zuerst. Normale Saves behalten ihr bisheriges Nullzielverhalten.
+
+Acht neue gemeinsame echte Start-/Zahlungs-/Reservierungsfälle: kein Integrationsziel, positives Ziel, erfülltes Ziel, niedrigeres Effizienzlevel, manuelle Integration, manueller Effizienzplan, alle endlichen Ziele erfüllt, bisheriger Normalmodus. 25 gezielte Vitest bestanden. Online/Offline vergleichen gleiche Aufträge, Zahlung und Arbeitsmenge; deren naturgemäß unterschiedliche Online-/Offlineprotokollfelder werden nicht fälschlich als vollständige Objektgleichheit erwartet.
+
+Zielbeschriftungen verwenden echte lokalisierte Tracknamen in sieben Sprachen; V3-Integration erklärt „0 = nur manuell“ statt einer falschen Unbegrenzt-Aussage. Vollständige V3-Dateimigration/Spielerfreigabe und weitere Automations-/Übertragsverträge bleiben offen. Laufende Regressionsergebnisse separat nach Abschluss ergänzen.
+
+T06-Abnahme:154Dateien/2.001Vitest,322,14s;193/193vollständigeEditMode,127,329s;10/10PlayMode vor Aufnahmepräzisierung,54,957s. Danach finale tatsächliche Zieleingabe/Reload und elf mobile Sprachbilder1/1,5,863s, mit echten bezahlten Knoten aus isolierter Finanzierung. Sechs DE/EN-Bilder selbst angesehen und alle Eingaben nach Layoutstabilisierung vollständig sichtbar. Falscher Menüweg, ungültiger vorbereiteter Ledger und im Batch nicht unterstütztes EndOfFrame-Warten wurden korrigiert; frühere Fehlläufe sind keine Freigabe. Typecheck/Webbuild/Generatorvergleich grün; zusätzliche Kopie967×7 separat geprüft. `docs/media/unity-v3-training-targets/README.md`. Nutzerentscheidung: vollständigesV3 vor Xcode-Playtest; Voraussetzungen in playtest-gate.md.

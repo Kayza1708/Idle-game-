@@ -7,10 +7,15 @@ namespace IdleIntelligence.Runtime
   static void Toggle(Transform parent,GameRuntime game,string name,string label,bool value,Action<GameState> change,Action refresh){var b=WorkshopUIFactory.Button(name,parent,label+": "+(value?"An":"Aus"),()=>Edit(game,change,refresh));b.interactable=game.Writable;}
   static void Number(Transform parent,GameRuntime game,string name,string label,string value,Action<GameState,string> change,Action refresh)
   {
-   WorkshopUIFactory.Label(name+"Title",parent,label,13,24);var root=WorkshopUIFactory.Node(name,parent,typeof(Image),typeof(InputField));WorkshopUIFactory.Size(root,54);root.GetComponent<Image>().color=new Color(.1f,.2f,.25f);var text=WorkshopUIFactory.Label("Value",root.transform,value,16);UnityEngine.Object.DestroyImmediate(text.GetComponent<LayoutElement>());WorkshopUIFactory.Fill(text.rectTransform);var field=root.GetComponent<InputField>();field.textComponent=text;field.text=value;field.lineType=InputField.LineType.SingleLine;field.interactable=game.Writable;bool modified=false;field.onValueChanged.AddListener(_=>modified=true);field.onEndEdit.AddListener(v=>{if(!modified)return;modified=false;try{Edit(game,s=>change(s,v),refresh);}catch(FormatException){}catch(ArgumentOutOfRangeException){}});
+   WorkshopUIFactory.Label(name+"Title",parent,label,13,name.StartsWith("TrainingTarget",StringComparison.Ordinal)?40:24);var root=WorkshopUIFactory.Node(name,parent,typeof(Image),typeof(InputField));WorkshopUIFactory.Size(root,54);root.GetComponent<Image>().color=new Color(.1f,.2f,.25f);var text=WorkshopUIFactory.Label("Value",root.transform,value,16);UnityEngine.Object.DestroyImmediate(text.GetComponent<LayoutElement>());WorkshopUIFactory.Fill(text.rectTransform);var field=root.GetComponent<InputField>();field.textComponent=text;field.text=value;field.lineType=InputField.LineType.SingleLine;field.interactable=game.Writable;bool modified=false;field.onValueChanged.AddListener(_=>modified=true);field.onEndEdit.AddListener(v=>{if(!modified)return;modified=false;try{Edit(game,s=>change(s,v),refresh);}catch(FormatException){}catch(ArgumentOutOfRangeException){}});
   }
   static string Input(ScientificNumber value){var d=value.ToData();return d.m.ToString("R",CultureInfo.InvariantCulture)+"e"+d.e.ToString(CultureInfo.InvariantCulture);}
   static int Nonnegative(string v){if(!int.TryParse(v,NumberStyles.Integer,CultureInfo.InvariantCulture,out int n)||n<0)throw new FormatException();return n;}
+  public static string TrainingTargetLabel(GameState state,int index)
+  {
+   string source=index==0?"Qualität – Ziellevel (0 = unbegrenzt)":index==1?"Effizienz – Ziellevel (0 = unbegrenzt)":ItemSystemV3.Enabled(state)?"Integration – Ziellevel (0 = nur manuell)":"Integration – Ziellevel (0 = unbegrenzt)";
+   return UiLocalizedText.Translate(source,state.Settings.language);
+  }
   public static void Build(Transform parent,GameRuntime game,string id,Action refresh)
   {
    var s=game.State;var p=s.Prestige;if(!PrestigeRules.Has(s,id))return;
@@ -21,7 +26,7 @@ namespace IdleIntelligence.Runtime
    }
    if(id=="T06")
    {
-    Toggle(parent,game,"TrainingAutopilot","Trainingsautopilot",p.trainingAuto,n=>n.Prestige.trainingAuto=!n.Prestige.trainingAuto,refresh);for(int i=0;i<3;i++){int t=i;Number(parent,game,"TrainingTarget"+i,PrestigeAutomation.Tracks[i]+" Ziellevel (0 = unbegrenzt)",p.trainingTargets[i].ToString(),(n,v)=>n.Prestige.trainingTargets[t]=Nonnegative(v)<=100000?Nonnegative(v):throw new ArgumentOutOfRangeException(),refresh);}
+    Toggle(parent,game,"TrainingAutopilot","Trainingsautopilot",p.trainingAuto,n=>n.Prestige.trainingAuto=!n.Prestige.trainingAuto,refresh);for(int i=0;i<3;i++){int t=i;Number(parent,game,"TrainingTarget"+i,TrainingTargetLabel(s,i),p.trainingTargets[i].ToString(),(n,v)=>n.Prestige.trainingTargets[t]=Nonnegative(v)<=100000?Nonnegative(v):throw new ArgumentOutOfRangeException(),refresh);}
    }
    if(id=="F02"||id=="F03")WorkshopUIFactory.Button("OpenAnalysisPlanning",parent,s.Settings.language=="de"?"Analysen in der Schmiede planen":"Plan analyses in the forge",()=>{var network=UnityEngine.Object.FindFirstObjectByType<PrestigeNetworkView>();network?.CloseDetail();game.Show("items");game.WorkshopView.ChangeMode("components");});
    if(id=="F03")

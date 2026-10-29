@@ -26,7 +26,9 @@ namespace IdleIntelligence.Tests
         public long nextSequence,settledSequence;public NumberData credits,data,creditDebit,dataDebit;
     }
     [Serializable]public sealed class LearningV3Flow{public string name;public bool prepared;public LearningV3Initial initial;public LearningV3Step[] steps;}
-    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;}
+    [Serializable]public sealed class TrainingAutomationV3Case
+    {public string name,manual,track,jobId;public bool original,done,prepared;public int quality,efficiency,integration,target,remainingPlans;public NumberData protectedResearch,creditDebit,dataDebit;}
+    [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;public TrainingAutomationV3Case[] trainingAutomationCases;}
     public sealed class ItemSystemV3Tests
     {
         static ItemV3Cases Cases()=>JsonUtility.FromJson<ItemV3Cases>(File.ReadAllText(Path.Combine(Application.dataPath,"IdleIntelligence/Tests/EditMode/ItemV3ReferenceCases.json")));
@@ -147,6 +149,19 @@ namespace IdleIntelligence.Tests
         {
             Assert.That(Game.New(0).ItemSystemV3,Is.Null);var s=State(Cases().cases[0]);Assert.Throws<NotSupportedException>(()=>StateData.From(s));
             s.ItemSystemV3=null;Assert.That(StateData.From(s),Is.Not.Null);
+        }
+        [Test]public void ActualTrainingAutomationAndReservesMatchSource()
+        {
+            var rows=Cases().trainingAutomationCases;Assert.That(rows.Length,Is.EqualTo(8));foreach(var row in rows){
+                var s=Game.New(1000,"prepared-training-automation");s.Quality=row.quality;s.Efficiency=row.efficiency;s.Workshop.integration=row.integration;s.Workshop.nodes=new[]{"T03","T04","T06"};s.Credits=ScientificNumber.From(1e12);s.Data=ScientificNumber.From(1e12);s.Prestige.trainingAuto=true;s.Prestige.trainingTargets=new[]{row.done?row.quality:0,row.done?row.efficiency:0,row.target};if(!row.original)s.ItemSystemV3=new ItemV3State();
+                if(!string.IsNullOrEmpty(row.manual))s.Prestige.trainingQueue=new[]{new TrainingTarget{track=row.manual,level=(row.manual=="integration"?row.integration:row.efficiency)+1}};
+                Near(PrestigeAutomation.ProtectedData(s),row.protectedResearch,row.name+" protected data");var beforeCredits=s.Credits;var beforeData=s.Data;var after=PrestigeAutomation.StartJobs(s);
+                Assert.That(after.Training?.id??"",Is.EqualTo(row.track),row.name+" track");Assert.That(after.Training?.key??"",Is.EqualTo(row.jobId),row.name+" job receipt");Assert.That(after.Prestige.trainingQueue.Length,Is.EqualTo(row.remainingPlans),row.name+" manual plan count");Near(beforeCredits.Subtract(after.Credits),row.creditDebit,row.name+" paid credits");Near(beforeData.Subtract(after.Data),row.dataDebit,row.name+" paid data");
+            }
+        }
+        [Test]public void AutomationTargetLabelsAreLocalizedAndDescribeTheActiveContract()
+        {
+            var s=Game.New(1000);foreach(var language in new[]{"de","en","es","fr","pt","it","pl"}){s.Settings.language=language;var normal=IdleIntelligence.Runtime.PrestigeSettings.TrainingTargetLabel(s,2);s.ItemSystemV3=new ItemV3State();var explicitOnly=IdleIntelligence.Runtime.PrestigeSettings.TrainingTargetLabel(s,2);Assert.That(explicitOnly,Is.Not.EqualTo(normal),language);Assert.That(explicitOnly,Does.Contain("0 ="),language);Assert.That(explicitOnly,Does.Not.Contain("integration Ziellevel"),language);for(int i=0;i<2;i++)Assert.That(IdleIntelligence.Runtime.PrestigeSettings.TrainingTargetLabel(s,i),Does.Contain("0 ="),language);s.ItemSystemV3=null;}
         }
         [Test]public void StrengthScientificSoftcapAndLensHandleBoundaries()
         {

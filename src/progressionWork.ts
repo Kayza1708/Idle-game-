@@ -1,3 +1,4 @@
+import {usesItemV3} from './itemSystemV3';
 import { addEvent } from "./telemetry";
 import { trainingDataCostScientific } from "./economy";
 import { deviceBonus } from "./deviceEffects";
@@ -185,6 +186,7 @@ export function protectedData(
         hasProgressionNode(s, "T06") &&
         hasProgressionNode(s, "T04") &&
         s.integrationLevel < Math.min(s.qualityLevel, s.efficiencyLevel) &&
+        (!usesItemV3(s) || s.progression.trainingTargets.integration > 0) &&
         (!s.progression.trainingTargets.integration ||
           s.integrationLevel < s.progression.trainingTargets.integration)));
   if (integrationPending) {

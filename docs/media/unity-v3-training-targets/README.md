@@ -1,0 +1,7 @@
+# Tatsächliche T06-Zieloberfläche
+
+Elf unveränderte Unity-Game-View-Bilder: DE/EN320/390/430 und ES/FR/PT/IT/PL390. Letzte bezahlte Fixture aus `/tmp/idle-v3-training-target-ui-paid.xml`:1/1 bestanden,5,863s. Sechs DE/EN-Bilder selbst angesehen. Alle drei Eingaben vollständig innerhalb des Scrollview-Viewports, mindestens44Einheiten hoch; lange Titel vollständig. Knoten sind tatsächlich aus ausdrücklich isolierter Testfinanzierung gekauft. Keine natürliche Freischaltung behauptet.
+
+Integrationziel2 wird über das echte InputField gesetzt, atomar gespeichert und geladen. V3-Nullzielbeschriftung danach ausschließlich als nicht persistierte In-Memory-Vorschau bei gestopptem Tick; normale Saves bleiben auf24. Keine fertige V3-Migration/Reload-Abnahme daraus. PNGs nicht bearbeitet. Kein neues Grafikasset/keine Fremdlizenz/keine Animation geändert.
+
+Erste Fixture hatte ungültiges Entitlement; Speicherschutz wies sie ab. Danach tatsächlicher Prestige-Menüweg, gültiger Ledger und echte bezahlte Knoten. Frühe Größenwechselaufnahmen waren noch nicht stabil; nach regulären Layoutframes erneut erfasst und alle Eingaben auf Sichtbarkeit geprüft. `WaitForEndOfFrame` wird im Batchmodus vom Testframework abgewiesen; durch reguläre Frames ersetzt. Englischer Resttext „Bereits enthalten“ zentral in sieben Sprachen ergänzt. Keine Gesamtgestaltungsabnahme: große deaktivierte Kaufaktion, Umfang der Erklärung und übrige Knotendetails bleiben spätere Gestaltungs-/V3-Textarbeit.

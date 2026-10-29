@@ -784,3 +784,7 @@ Die bestehende Abbildung `researchArchive → I04` begründet das permanente Erw
 
 ### Item-/Prestige-V3: wissenschaftlicher Basisbonus (experimentell)
 Unveränderte Formel des additiven Item-Basisbonus: zentraler Basiswert × rohes P × bestehende globale Verstärker × rechtmäßiger Legacy-Zyklusfaktor × permanenter Legacyfaktor. Die letzten beiden bleiben bis zur tatsächlichen Compute-/Credits-Multiplikation ScientificNumber, auch jenseits des Doublebereichs. Keine neuen Werte, kein zusätzlicher Faktor auf einzigartige Fähigkeiten, keine Aktivierung in normalen Saves. Arbeitsraten und vollständige Rechteübertragung bleiben separate offene Verträge. Gemeinsame Produktionsreferenzen steigen62→71.
+
+
+### Prestige-V3: Integrationsautopilot
+T06 erhält unveränderte Preise und Ziellevel: Integration wird automatisch nur für ein ausdrücklich positives noch unerfülltes Spielerziel gewählt. Geschützte Daten folgen derselben Bedingung; manuell eingereihte Integration bleibt unabhängig davon bedienbar. Q/E-Nullziel bleibt unbegrenzt, niedrigere Level und stabile Gleichstände erhalten. Keine neue Konstante oder Kostenänderung; normale64/24-Spielstände behalten die bisherigen Regeln bis zur vollständigen Migration. Acht tatsächliche TS-/C#-Transaktionen vergleichen Auswahl, Zahlung und Reserve.

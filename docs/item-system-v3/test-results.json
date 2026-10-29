@@ -163,5 +163,46 @@
       "seconds": 323.84,
       "log": "/tmp/idle-v3-scientific-full-vitest.log"
     }
+  },
+  "trainingTargetFollowup": {
+    "sourceHash": "0b6616fcfe35476f8f35747f11bb9ffbd4e9fd81133e808b74af84dafef76ae9",
+    "sharedActualAutomationCases": 8,
+    "vitest": {
+      "files": 154,
+      "tests": 2001,
+      "passed": 2001,
+      "failed": 0,
+      "seconds": 322.14
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed; final additional native-copy row checked separately",
+    "normalSaveActivation": false,
+    "images": "../media/unity-v3-training-targets/README.md",
+    "editMode": {
+      "total": "193",
+      "passed": "193",
+      "failed": "0",
+      "duration": "127.329243",
+      "result": "Passed",
+      "xmlSha256": "fce59bb7d9c7749741db6d1671eb2ea6f0863f513c8577820315a0a976641e6b"
+    },
+    "playModeBeforeCaptureFix": {
+      "total": "10",
+      "passed": "10",
+      "failed": "0",
+      "duration": "54.9571527",
+      "result": "Passed",
+      "xmlSha256": "d4203d1b90633cb0eef39ed090ca7bd9fb61618db4da7b1ca196f7b792547893"
+    },
+    "finalMobileUI": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "5.8631611",
+      "result": "Passed",
+      "xmlSha256": "c138e58029a1bcd5a412609b1d9e8e07dbe7d068d35ca229740c1c08cdba65d8"
+    },
+    "rejectedRuns": "wrong UI route, invalid prepared entitlement and batch-unsupported WaitForEndOfFrame corrected; not counted as passing runs"
   }
 }

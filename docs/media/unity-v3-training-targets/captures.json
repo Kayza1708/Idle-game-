@@ -1,0 +1,73 @@
+{
+  "prepared": true,
+  "kind": "actual Unity Game View; funded node purchases, normal target persistence; V3 flag only in-memory UI preview",
+  "normalSaveMigrated": false,
+  "captures": [
+    {
+      "file": "T06-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "36d9a233161447f9614ec2651af72b420b1c3cb431e1bcbb424ad9d6e7690a77"
+    },
+    {
+      "file": "T06-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "4da3ee7ea03ad5f306392628b82ad3950a638492cbad6c951eaa1d5bce74a6f6"
+    },
+    {
+      "file": "T06-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "551d0aebcfb190478244aac77f89f21cbc6de0b8b25901d5fa8190054538a600"
+    },
+    {
+      "file": "T06-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "59b39c5f31b6100472916aee92d11608af1b7da56aecf0cc4ed83c83d702052a"
+    },
+    {
+      "file": "T06-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "1c4748799a3fa5dd58a8857a635ca7584331ef6c7a478a1287e83a2ce766e177"
+    },
+    {
+      "file": "T06-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "34b3c5496812d6d7ad44d32f478b2b5895209081dc4290ec05a511f11c7b46e2"
+    },
+    {
+      "file": "T06-es-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "dfc862534a9f0e4e2eef872e5fcb1d07d37a107b0e95a6fd588e847c27fa8a60"
+    },
+    {
+      "file": "T06-fr-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "18efa73ec576637252d1e32ebe94a8ff010ee940b0f9a1e2569cf099475df992"
+    },
+    {
+      "file": "T06-it-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "6a65da5bdb32382454bbc625eee29aafaf2db35a9356534a074ff8dac1e0b5ff"
+    },
+    {
+      "file": "T06-pl-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "a4d4c2fac85fe4f8c468a4e5f8f06e5f401793da8151da53ef9d5d0b649b38b3"
+    },
+    {
+      "file": "T06-pt-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "773ed51e720dd7f73cb605d990380b32f323c376c036ac44e9eee7ef8cb1a89d"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "sourceHash": "3eb9a154bb8ac61ea476ef3fd921aa2b63ff280e0b1d787bfd0f341ebb4e4ec4",
+  "sourceHash": "0b6616fcfe35476f8f35747f11bb9ffbd4e9fd81133e808b74af84dafef76ae9",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
@@ -19181,6 +19181,240 @@
           "axioms": 1
         }
       ]
+    }
+  ],
+  "trainingAutomationCases": [
+    {
+      "name": "no-integration-goal",
+      "quality": 5,
+      "efficiency": 5,
+      "integration": 0,
+      "target": 0,
+      "manual": "",
+      "original": false,
+      "done": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "track": "quality",
+      "jobId": "v3-training-1",
+      "creditDebit": {
+        "m": 2.3888,
+        "e": 4,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "remainingPlans": 0
+    },
+    {
+      "name": "positive-integration-goal",
+      "quality": 5,
+      "efficiency": 5,
+      "integration": 0,
+      "target": 2,
+      "manual": "",
+      "original": false,
+      "done": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 1,
+        "e": 2,
+        "terms": null
+      },
+      "track": "integration",
+      "jobId": "v3-training-1",
+      "creditDebit": {
+        "m": 5,
+        "e": 2,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 1,
+        "e": 2,
+        "terms": null
+      },
+      "remainingPlans": 0
+    },
+    {
+      "name": "integration-goal-reached",
+      "quality": 5,
+      "efficiency": 5,
+      "integration": 2,
+      "target": 2,
+      "manual": "",
+      "original": false,
+      "done": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "track": "quality",
+      "jobId": "v3-training-1",
+      "creditDebit": {
+        "m": 2.3888,
+        "e": 4,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "remainingPlans": 0
+    },
+    {
+      "name": "lower-efficiency",
+      "quality": 7,
+      "efficiency": 3,
+      "integration": 0,
+      "target": 0,
+      "manual": "",
+      "original": false,
+      "done": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "track": "efficiency",
+      "jobId": "v3-training-1",
+      "creditDebit": {
+        "m": 4.148,
+        "e": 3,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "remainingPlans": 0
+    },
+    {
+      "name": "manual-integration-first",
+      "quality": 5,
+      "efficiency": 5,
+      "integration": 0,
+      "target": 0,
+      "manual": "integration",
+      "original": false,
+      "done": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 1,
+        "e": 2,
+        "terms": null
+      },
+      "track": "integration",
+      "jobId": "v3-training-1",
+      "creditDebit": {
+        "m": 5,
+        "e": 2,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 1,
+        "e": 2,
+        "terms": null
+      },
+      "remainingPlans": 0
+    },
+    {
+      "name": "manual-efficiency-first",
+      "quality": 3,
+      "efficiency": 5,
+      "integration": 0,
+      "target": 0,
+      "manual": "efficiency",
+      "original": false,
+      "done": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "track": "efficiency",
+      "jobId": "v3-training-1",
+      "creditDebit": {
+        "m": 2.3888,
+        "e": 4,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "remainingPlans": 0
+    },
+    {
+      "name": "all-explicit-goals-done",
+      "quality": 5,
+      "efficiency": 5,
+      "integration": 0,
+      "target": 0,
+      "done": true,
+      "manual": "",
+      "original": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "track": "",
+      "jobId": "",
+      "creditDebit": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "remainingPlans": 0
+    },
+    {
+      "name": "original-zero-target-preserved",
+      "quality": 5,
+      "efficiency": 5,
+      "integration": 0,
+      "target": 0,
+      "original": true,
+      "manual": "",
+      "done": false,
+      "prepared": true,
+      "protectedResearch": {
+        "m": 1,
+        "e": 2,
+        "terms": null
+      },
+      "track": "integration",
+      "jobId": "",
+      "creditDebit": {
+        "m": 5,
+        "e": 2,
+        "terms": null
+      },
+      "dataDebit": {
+        "m": 1,
+        "e": 2,
+        "terms": null
+      },
+      "remainingPlans": 0
     }
   ]
 }
