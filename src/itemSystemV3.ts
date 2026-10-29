@@ -276,3 +276,17 @@ export function settleItemSynthesisV3(s:GameState,job:NonNullable<GameState['pro
  const total=remainder+receipt.multiplier,amount=Math.floor(total+1e-12);
  return{amount,state:{...s,itemSystemV3:{...v,synthesisContract:null,synthesisRemainders:{...v.synthesisRemainders,[receipt.component]:Math.max(0,total-amount)}}}};
 }
+
+/** Challenge shadows use the same rules, but start with their own production,
+ * event and paid-work ledgers. Only actual permanent discovery/recipe rights
+ * and the next technical ID cross the entry boundary. */
+export function itemChallengeStateV3(main:GameState):ItemSystemV3State|undefined{
+ if(!usesItemV3(main))return undefined;const v=main.itemSystemV3!;validateItemTrainingCountersV3(v);
+ return{...newItemSystemV3(),nextTrainingSequence:v.nextTrainingSequence,archiveBlueprintRight:archiveBlueprintRightV3(main),axiomDiscovered:v.axiomDiscovered,axiomDiscoveryAt:v.axiomDiscoveryAt};
+}
+export function restoreItemChallengeV3(main:GameState,shadow:GameState):GameState{
+ if(!usesItemV3(main)||!usesItemV3(shadow))return main;const v=main.itemSystemV3!,other=shadow.itemSystemV3!;validateItemTrainingCountersV3(v);validateItemTrainingCountersV3(other);
+ // Never merge the shadow completion marker: an older paid main job can still
+ // be running. Only issued IDs must stay globally unique across both scopes.
+ return{...main,itemSystemV3:{...v,nextTrainingSequence:Math.max(v.nextTrainingSequence,other.nextTrainingSequence)}};
+}

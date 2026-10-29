@@ -391,7 +391,7 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
+  "currentSourceHash": "874860d4c2447d4fdc9d5d21cc16b024f6f305499034632a349284811a4a9ca2",
   "workshopYieldFollowup": {
     "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
     "normalSaveActivation": false,
@@ -413,7 +413,7 @@
     "rejectedRuns": [
       "first native fixture set entitlement below already-earned cycle INT; fixture corrected, no production formula changed",
       "generator accidentally overlapped own test editor; export stopped and clean generation plus full compile/regression repeated sequentially",
-      "Mac clamshell sleep12:47\u201313:03 caused two Vitest timeouts/worker errors despite idle assertion;26 targeted recovery checks and complete2024-test awake rerun passed without timeout increases"
+      "Mac clamshell sleep12:47–13:03 caused two Vitest timeouts/worker errors despite idle assertion;26 targeted recovery checks and complete2024-test awake rerun passed without timeout increases"
     ],
     "fullEditMode": {
       "total": "199",
@@ -430,6 +430,55 @@
       "duration": "69.9114514",
       "result": "Passed",
       "xmlSha256": "0ec3fa51fbe1a68fd0c398f43f1846d36f47ad14a22a8ec774f26c429a4bf8fc"
+    }
+  },
+  "challengeIsolationFollowup": {
+    "sourceHash": "874860d4c2447d4fdc9d5d21cc16b024f6f305499034632a349284811a4a9ca2",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "actualChallengeFlows": 5,
+    "productionCases": 92,
+    "vitest": {
+      "files": 160,
+      "tests": 2028,
+      "passed": 2028,
+      "failed": 0,
+      "seconds": 180.95,
+      "log": "/tmp/idle-v3-challenge-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Actual V3 challenge entry/return, paid paused main jobs, counter isolation, ID uniqueness, success once, online/offline B05 record boundary; in-memory copies only, no V3 disk reload release",
+    "rejectedRuns": [
+      "Actual factory dropped V3 flag; test-first regression reproduced and corrected",
+      "B05 native consumer retained old x2; correct V3 x3 now uses generated state-aware effect",
+      "JsonUtility fixture null became default object; explicit hasMain discriminator added",
+      "New test active flag accidentally applied to component DTO; compile error corrected"
+    ],
+    "targetedEditMode": {
+      "total": "23",
+      "passed": "23",
+      "failed": "0",
+      "duration": "11.1327731",
+      "result": "Passed",
+      "xmlSha256": "b2d5d1ee66adcf67252eaa0c8babded245c7855e64168d4a9aa1b2c4d54e89bd"
+    },
+    "fullEditMode": {
+      "total": "203",
+      "passed": "203",
+      "failed": "0",
+      "duration": "71.0230107",
+      "result": "Passed",
+      "xmlSha256": "2b0553136bfe0f01ca01e84f34b86687eab3817195b98b0609a0b9e1f7824e8b"
+    },
+    "targetedPlayMode": {
+      "total": "13",
+      "passed": "13",
+      "failed": "0",
+      "duration": "25.7019738",
+      "result": "Passed",
+      "xmlSha256": "821e05dd1d28099b70055d4f2e49a91d9d9b6c364695fd305658a0b98d02b8da"
     }
   }
 }

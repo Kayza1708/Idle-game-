@@ -41,6 +41,16 @@ namespace IdleIntelligence.Core
             if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;
             if(axiom){v.knowledgeProduced=ScientificNumber.Zero;v.componentsProduced=ScientificNumber.Zero;}
         }
+        public static ItemV3State ChallengeState(GameState main)
+        {
+            if(!Enabled(main))return null;Validate(main);var v=main.ItemSystemV3;return new ItemV3State{nextTrainingSequence=v.nextTrainingSequence,archiveBlueprintRight=ArchiveBlueprintRight(main),axiomDiscovered=v.axiomDiscovered,axiomDiscoveryAt=v.axiomDiscoveryAt};
+        }
+        public static void RestoreChallengeSequence(GameState main,GameState shadow)
+        {
+            if(!Enabled(main)||!Enabled(shadow))return;Validate(main);Validate(shadow);main.ItemSystemV3.nextTrainingSequence=Math.Max(main.ItemSystemV3.nextTrainingSequence,shadow.ItemSystemV3.nextTrainingSequence);
+            // Keep the main completion marker and active paid job. A later shadow
+            // completion must not make that older main job unclaimable.
+        }
         // Exact IDs, not economy bounds. No normal-save or item payload changes.
         const long MaxExactSequence=9007199254740991L;
         public static void IdentifyTraining(GameState s)
