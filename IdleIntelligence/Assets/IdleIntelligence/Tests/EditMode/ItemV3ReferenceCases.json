@@ -1,11 +1,12 @@
 {
-  "sourceHash": "ee7debb60c7f458b2a515db58045066ee9625f5c116ccfde8949bfe347d4617e",
+  "sourceHash": "3eb9a154bb8ac61ea476ef3fd921aa2b63ff280e0b1d787bfd0f341ebb4e4ec4",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
     {
       "name": "quantum-0-common",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         0,
         0,
@@ -206,6 +207,7 @@
     {
       "name": "quantum-0-mythic",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         0,
         0,
@@ -406,6 +408,7 @@
     {
       "name": "quantum-100-common",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         100,
         0,
@@ -656,6 +659,7 @@
     {
       "name": "quantum-100-mythic",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         100,
         0,
@@ -838,40 +842,40 @@
       "minutes": 0,
       "noItems": false,
       "compute": {
-        "m": 4.85485975890354,
+        "m": 4.854859758903539,
         "e": 4,
         "terms": [
           {
             "index": -9,
-            "value": 7848000
+            "value": 8924000
           },
           {
             "index": -8,
-            "value": 1735911
+            "value": 867955
           },
           {
             "index": -7,
-            "value": 1114978
+            "value": 2471473
           },
           {
             "index": -6,
-            "value": 1207301
+            "value": 6132903
           },
           {
             "index": -5,
-            "value": 5357403
+            "value": 7010147
           },
           {
             "index": -4,
-            "value": 8837284
+            "value": 4418405
           },
           {
             "index": -3,
-            "value": 2651016
+            "value": 5230243
           },
           {
             "index": -2,
-            "value": 3539837
+            "value": 3539484
           },
           {
             "index": -1,
@@ -889,35 +893,35 @@
         "terms": [
           {
             "index": -9,
-            "value": 9094800
+            "value": 4547400
           },
           {
             "index": -8,
-            "value": 5343480
+            "value": 6671740
           },
           {
             "index": -7,
-            "value": 5005220
+            "value": 3836488
           },
           {
             "index": -6,
-            "value": 2129856
+            "value": 2779419
           },
           {
             "index": -5,
-            "value": 1232494
+            "value": 6963699
           },
           {
             "index": -4,
-            "value": 7930334
+            "value": 6464847
           },
           {
             "index": -3,
-            "value": 3078872
+            "value": 1060828
           },
           {
             "index": -2,
-            "value": 9778780
+            "value": 9778304
           },
           {
             "index": -1,
@@ -930,7 +934,7 @@
         ]
       },
       "data": {
-        "m": 3.7791765314538743,
+        "m": 3.7791765314538734,
         "e": 1,
         "terms": null
       }
@@ -938,6 +942,7 @@
     {
       "name": "quantum-1000-common",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -1180,6 +1185,7 @@
     {
       "name": "quantum-1000-mythic",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -1367,31 +1373,31 @@
         "terms": [
           {
             "index": -8,
-            "value": 2800000
+            "value": 6400000
           },
           {
             "index": -7,
-            "value": 5635041
+            "value": 2817520
           },
           {
             "index": -6,
-            "value": 3113942
+            "value": 179371
           },
           {
             "index": -5,
-            "value": 5424231
+            "value": 962616
           },
           {
             "index": -4,
-            "value": 2871627
+            "value": 6781271
           },
           {
             "index": -3,
-            "value": 1094747
+            "value": 7537891
           },
           {
             "index": -2,
-            "value": 2019393
+            "value": 1923665
           },
           {
             "index": -1,
@@ -1408,36 +1414,36 @@
         ]
       },
       "income": {
-        "m": 1.7786449013915413,
+        "m": 1.778644901391541,
         "e": 7,
         "terms": [
           {
             "index": -8,
-            "value": 7280000
+            "value": 8640000
           },
           {
             "index": -7,
-            "value": 4607305
+            "value": 2303652
           },
           {
             "index": -6,
-            "value": 2703822
+            "value": 6242151
           },
           {
             "index": -5,
-            "value": 1822712
+            "value": 9799531
           },
           {
             "index": -4,
-            "value": 8376697
+            "value": 7654715
           },
           {
             "index": -3,
-            "value": 6977908
+            "value": 7676153
           },
           {
             "index": -2,
-            "value": 1226180
+            "value": 1096948
           },
           {
             "index": -1,
@@ -1462,6 +1468,7 @@
     {
       "name": "quantum-10000-common",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         10000,
         0,
@@ -1704,6 +1711,7 @@
     {
       "name": "quantum-10000-mythic",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         10000,
         0,
@@ -1886,36 +1894,36 @@
       "minutes": 0,
       "noItems": false,
       "compute": {
-        "m": 3.316975547822039,
+        "m": 3.3169755478220386,
         "e": 9,
         "terms": [
           {
             "index": -7,
-            "value": 1618304
+            "value": 5809152
           },
           {
             "index": -6,
-            "value": 676017
+            "value": 658008
           },
           {
             "index": -5,
-            "value": 3463150
+            "value": 6774179
           },
           {
             "index": -4,
-            "value": 87514
+            "value": 4643035
           },
           {
             "index": -3,
-            "value": 5982124
+            "value": 3779290
           },
           {
             "index": -2,
-            "value": 2095132
+            "value": 7994810
           },
           {
             "index": -1,
-            "value": 8220391
+            "value": 8220388
           },
           {
             "index": 0,
@@ -1928,40 +1936,40 @@
         ]
       },
       "income": {
-        "m": 4.477916989559753,
+        "m": 4.477916989559752,
         "e": 9,
         "terms": [
           {
             "index": -8,
-            "value": 4000000
+            "value": 2000000
           },
           {
             "index": -7,
-            "value": 1684710
+            "value": 5842355
           },
           {
             "index": -6,
-            "value": 5912623
+            "value": 7388311
           },
           {
             "index": -5,
-            "value": 3675252
+            "value": 1645141
           },
           {
             "index": -4,
-            "value": 4118144
+            "value": 1268098
           },
           {
             "index": -3,
-            "value": 75867
+            "value": 102042
           },
           {
             "index": -2,
-            "value": 1328429
+            "value": 8792994
           },
           {
             "index": -1,
-            "value": 5597528
+            "value": 5597524
           },
           {
             "index": 0,
@@ -1982,6 +1990,7 @@
     {
       "name": "quantum-1000000-common",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -2224,6 +2233,7 @@
     {
       "name": "quantum-1000000-mythic",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -2406,36 +2416,36 @@
       "minutes": 0,
       "noItems": false,
       "compute": {
-        "m": 2.6568286467548816,
+        "m": 2.656828646754881,
         "e": 14,
         "terms": [
           {
             "index": -7,
-            "value": 8000000
+            "value": 4000000
           },
           {
             "index": -6,
-            "value": 4881868
+            "value": 2440934
           },
           {
             "index": -5,
-            "value": 6793270
+            "value": 100635
           },
           {
             "index": -4,
-            "value": 9068808
+            "value": 9109746
           },
           {
             "index": -3,
-            "value": 5721389
+            "value": 4341081
           },
           {
             "index": -2,
-            "value": 2616533
+            "value": 6771123
           },
           {
             "index": -1,
-            "value": 1560627
+            "value": 1367588
           },
           {
             "index": 0,
@@ -2452,40 +2462,40 @@
         ]
       },
       "income": {
-        "m": 3.58671867311909,
+        "m": 3.5867186731190897,
         "e": 14,
         "terms": [
           {
             "index": -7,
-            "value": 8800000
+            "value": 4400000
           },
           {
             "index": -6,
-            "value": 1590522
+            "value": 5795261
           },
           {
             "index": -5,
-            "value": 7170915
+            "value": 1135857
           },
           {
             "index": -4,
-            "value": 3742891
+            "value": 5798157
           },
           {
             "index": -3,
-            "value": 3223876
+            "value": 6360460
           },
           {
             "index": -2,
-            "value": 8032320
+            "value": 7141016
           },
           {
             "index": -1,
-            "value": 106846
+            "value": 9846244
           },
           {
             "index": 0,
-            "value": 7311909
+            "value": 7311908
           },
           {
             "index": 1,
@@ -2506,6 +2516,7 @@
     {
       "name": "neural-asic-M0",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -2706,6 +2717,7 @@
     {
       "name": "tensor-core-M0",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -2906,6 +2918,7 @@
     {
       "name": "neural-asic-M25",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -3135,6 +3148,7 @@
     {
       "name": "tensor-core-M25",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -3356,6 +3370,7 @@
     {
       "name": "neural-asic-M100",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -3589,6 +3604,7 @@
     {
       "name": "tensor-core-M100",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -3810,6 +3826,7 @@
     {
       "name": "neural-asic-M1000",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -4039,6 +4056,7 @@
     {
       "name": "tensor-core-M1000",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -4273,6 +4291,7 @@
     {
       "name": "memory-crystal-0",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -4465,23 +4484,23 @@
         "terms": [
           {
             "index": -6,
-            "value": 4080000
+            "value": 7040000
           },
           {
             "index": -5,
-            "value": 9719569
+            "value": 9859784
           },
           {
             "index": -4,
-            "value": 8504329
+            "value": 6156804
           },
           {
             "index": -3,
-            "value": 862666
+            "value": 4782277
           },
           {
             "index": -2,
-            "value": 1582452
+            "value": 1578505
           },
           {
             "index": -1,
@@ -4502,6 +4521,7 @@
     {
       "name": "memory-crystal-1e1000",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -4694,31 +4714,31 @@
         "terms": [
           {
             "index": -7,
-            "value": 2290688
+            "value": 1145344
           },
           {
             "index": -6,
-            "value": 8666168
+            "value": 6373084
           },
           {
             "index": -5,
-            "value": 8176479
+            "value": 3346232
           },
           {
             "index": -4,
-            "value": 7712775
+            "value": 2177264
           },
           {
             "index": -3,
-            "value": 9532925
+            "value": 6924756
           },
           {
             "index": -2,
-            "value": 1798744
+            "value": 5871130
           },
           {
             "index": -1,
-            "value": 9447615
+            "value": 9447603
           },
           {
             "index": 0,
@@ -4739,6 +4759,7 @@
     {
       "name": "entropy-sink-0",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -4926,23 +4947,23 @@
         "terms": [
           {
             "index": -6,
-            "value": 4000000
+            "value": 2000000
           },
           {
             "index": -5,
-            "value": 4044646
+            "value": 2022323
           },
           {
             "index": -4,
-            "value": 7693302
+            "value": 7158651
           },
           {
             "index": -3,
-            "value": 6181456
+            "value": 4418921
           },
           {
             "index": -2,
-            "value": 4825088
+            "value": 4805101
           },
           {
             "index": -1,
@@ -4960,23 +4981,23 @@
         "terms": [
           {
             "index": -6,
-            "value": 6400000
+            "value": 3200000
           },
           {
             "index": -5,
-            "value": 2460272
+            "value": 1230136
           },
           {
             "index": -4,
-            "value": 6385958
+            "value": 3164179
           },
           {
             "index": -3,
-            "value": 6344966
+            "value": 9465544
           },
           {
             "index": -2,
-            "value": 513869
+            "value": 486886
           },
           {
             "index": -1,
@@ -4997,6 +5018,7 @@
     {
       "name": "entropy-sink-1e1000",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -5179,36 +5201,36 @@
       "minutes": 0,
       "noItems": false,
       "compute": {
-        "m": 5.1896352741242495,
+        "m": 5.189635274124249,
         "e": 13,
         "terms": [
           {
             "index": -7,
-            "value": 960000
+            "value": 480000
           },
           {
             "index": -6,
-            "value": 8505988
+            "value": 9252994
           },
           {
             "index": -5,
-            "value": 6545395
+            "value": 2344377
           },
           {
             "index": -4,
-            "value": 4439487
+            "value": 7693782
           },
           {
             "index": -3,
-            "value": 8382768
+            "value": 6088633
           },
           {
             "index": -2,
-            "value": 7378010
+            "value": 1341469
           },
           {
             "index": -1,
-            "value": 4941756
+            "value": 4904050
           },
           {
             "index": 0,
@@ -5221,36 +5243,36 @@
         ]
       },
       "income": {
-        "m": 7.006007620067737,
+        "m": 7.006007620067736,
         "e": 13,
         "terms": [
           {
             "index": -7,
-            "value": 9296000
+            "value": 9648000
           },
           {
             "index": -6,
-            "value": 3983083
+            "value": 1991541
           },
           {
             "index": -5,
-            "value": 3336284
+            "value": 164910
           },
           {
             "index": -4,
-            "value": 3993308
+            "value": 5886606
           },
           {
             "index": -3,
-            "value": 6316737
+            "value": 9719655
           },
           {
             "index": -2,
-            "value": 5960314
+            "value": 6810983
           },
           {
             "index": -1,
-            "value": 3671371
+            "value": 3620467
           },
           {
             "index": 0,
@@ -5271,6 +5293,7 @@
     {
       "name": "memory-minutes-0",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -5471,6 +5494,7 @@
     {
       "name": "memory-minutes-239.999",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -5692,6 +5716,7 @@
     {
       "name": "memory-minutes-240",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -5913,6 +5938,7 @@
     {
       "name": "memory-minutes-240.001",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -6134,6 +6160,7 @@
     {
       "name": "memory-minutes-1000000",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -6355,6 +6382,7 @@
     {
       "name": "pair-compute",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -6650,6 +6678,7 @@
     {
       "name": "trio-compute",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -7011,6 +7040,7 @@
     {
       "name": "no-items",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -7264,6 +7294,7 @@
     {
       "name": "data-prism",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -7464,6 +7495,7 @@
     {
       "name": "distilled-pair",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -7717,6 +7749,7 @@
     {
       "name": "node-H06",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -7894,6 +7927,7 @@
     {
       "name": "node-H07",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -8113,6 +8147,7 @@
     {
       "name": "node-H08",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -8290,6 +8325,7 @@
     {
       "name": "node-H09",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -8467,6 +8503,7 @@
     {
       "name": "node-H10",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -8673,6 +8710,7 @@
     {
       "name": "node-T01",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -8850,6 +8888,7 @@
     {
       "name": "node-T02",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -9027,6 +9066,7 @@
     {
       "name": "node-T05",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -9204,6 +9244,7 @@
     {
       "name": "node-T07",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -9389,6 +9430,7 @@
     {
       "name": "node-T09",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -9566,6 +9608,7 @@
     {
       "name": "node-F06",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -9743,6 +9786,7 @@
     {
       "name": "node-F09",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -9920,6 +9964,7 @@
     {
       "name": "node-F10",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -10097,6 +10142,7 @@
     {
       "name": "node-I01",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -10274,6 +10320,7 @@
     {
       "name": "node-I05",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -10451,6 +10498,7 @@
     {
       "name": "node-I08",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -10628,6 +10676,7 @@
     {
       "name": "node-I09",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -10805,6 +10854,7 @@
     {
       "name": "node-I10",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000000,
         0,
@@ -10982,6 +11032,7 @@
     {
       "name": "F08-occupied-0",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -11132,6 +11183,7 @@
     {
       "name": "F08-occupied-1",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -11284,6 +11336,7 @@
     {
       "name": "F08-occupied-2",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -11437,6 +11490,7 @@
     {
       "name": "F08-occupied-4",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -11592,6 +11646,7 @@
     {
       "name": "F08-occupied-6",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -11749,6 +11804,7 @@
     {
       "name": "F10-levels-0",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -11897,6 +11953,7 @@
     {
       "name": "F10-levels-25",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -12078,6 +12135,7 @@
     {
       "name": "F10-levels-100",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -12255,6 +12313,7 @@
     {
       "name": "F10-levels-1000",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -12436,6 +12495,7 @@
     {
       "name": "integration-W05-W09-W10",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -12872,6 +12932,7 @@
     {
       "name": "all-classes-H08-H09-H10",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         1000,
@@ -13161,6 +13222,7 @@
     {
       "name": "axioms-A03-D01",
       "prepared": true,
+      "legacy": "",
       "hardware": [
         1000,
         0,
@@ -13572,6 +13634,2464 @@
       "data": {
         "m": 1.0767283434550436,
         "e": 4,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-quantum-chip-1",
+      "prepared": true,
+      "legacy": "1",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 1.1490985188930225,
+      "researchSpeed": 1.1490985188930225,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "quantum-chip",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "item-1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 9.331382152605045,
+        "e": 4,
+        "terms": [
+          {
+            "index": -4,
+            "value": 4400000
+          },
+          {
+            "index": -3,
+            "value": 47293
+          },
+          {
+            "index": -2,
+            "value": 5044151
+          },
+          {
+            "index": -1,
+            "value": 8215260
+          },
+          {
+            "index": 0,
+            "value": 93313
+          }
+        ]
+      },
+      "income": {
+        "m": 1.2597365906016809,
+        "e": 5,
+        "terms": [
+          {
+            "index": -4,
+            "value": 1440000
+          },
+          {
+            "index": -3,
+            "value": 8563846
+          },
+          {
+            "index": -2,
+            "value": 6809603
+          },
+          {
+            "index": -1,
+            "value": 6590601
+          },
+          {
+            "index": 0,
+            "value": 125973
+          }
+        ]
+      },
+      "data": {
+        "m": 5.413402094195774,
+        "e": 1,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-memory-crystal-1",
+      "prepared": true,
+      "legacy": "1",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 1.110114408391338,
+      "researchSpeed": 1.110114408391338,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "memory-crystal",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "",
+        "item-1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 4.6815268864,
+        "e": 3,
+        "terms": null
+      },
+      "income": {
+        "m": 2.0856202278912,
+        "e": 4,
+        "terms": null
+      },
+      "data": {
+        "m": 1.044030381849422,
+        "e": 1,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-quantum-chip-tensor-core-1",
+      "prepared": true,
+      "legacy": "1",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 1.18438112634985,
+      "researchSpeed": 1.18438112634985,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "quantum-chip",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "item-2",
+          "type": "tensor-core",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "item-1",
+        "item-2",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 1.3997073228907566,
+        "e": 6,
+        "terms": [
+          {
+            "index": -4,
+            "value": 6000000
+          },
+          {
+            "index": -3,
+            "value": 709401
+          },
+          {
+            "index": -2,
+            "value": 5662265
+          },
+          {
+            "index": -1,
+            "value": 3228907
+          },
+          {
+            "index": 0,
+            "value": 1399707
+          }
+        ]
+      },
+      "income": {
+        "m": 2.0785653744927735,
+        "e": 6,
+        "terms": [
+          {
+            "index": -4,
+            "value": 3760000
+          },
+          {
+            "index": -3,
+            "value": 6303461
+          },
+          {
+            "index": -2,
+            "value": 7358463
+          },
+          {
+            "index": -1,
+            "value": 3744927
+          },
+          {
+            "index": 0,
+            "value": 2078565
+          }
+        ]
+      },
+      "data": {
+        "m": 2.4006037440208696,
+        "e": 2,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-quantum-chip-1e1000",
+      "prepared": true,
+      "legacy": "1e1000",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 61.11785659871518,
+      "researchSpeed": 61.11785659871518,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "quantum-chip",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "item-1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 8.483074684186404,
+        "e": 2003,
+        "terms": [
+          {
+            "index": -4,
+            "value": 4000000
+          },
+          {
+            "index": -3,
+            "value": 6406630
+          },
+          {
+            "index": -2,
+            "value": 6403773
+          },
+          {
+            "index": -1,
+            "value": 7468418
+          },
+          {
+            "index": 0,
+            "value": 84830
+          },
+          {
+            "index": 282,
+            "value": 6304000
+          },
+          {
+            "index": 283,
+            "value": 7736406
+          },
+          {
+            "index": 284,
+            "value": 4186403
+          },
+          {
+            "index": 285,
+            "value": 8307468
+          },
+          {
+            "index": 286,
+            "value": 84
+          }
+        ]
+      },
+      "income": {
+        "m": 1.1452150823651643,
+        "e": 2004,
+        "terms": [
+          {
+            "index": -4,
+            "value": 400000
+          },
+          {
+            "index": -3,
+            "value": 4148951
+          },
+          {
+            "index": -2,
+            "value": 1645094
+          },
+          {
+            "index": -1,
+            "value": 5082365
+          },
+          {
+            "index": 0,
+            "value": 114521
+          },
+          {
+            "index": 282,
+            "value": 9510400
+          },
+          {
+            "index": 283,
+            "value": 944148
+          },
+          {
+            "index": 284,
+            "value": 3651645
+          },
+          {
+            "index": 285,
+            "value": 5215082
+          },
+          {
+            "index": 286,
+            "value": 114
+          }
+        ]
+      },
+      "data": {
+        "m": 1.44778579020043,
+        "e": 1101,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-memory-crystal-1e1000",
+      "prepared": true,
+      "legacy": "1e1000",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 1.110114408391338,
+      "researchSpeed": 1.110114408391338,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "memory-crystal",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "",
+        "item-1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 4.6815268864,
+        "e": 3,
+        "terms": null
+      },
+      "income": {
+        "m": 1.896018388992,
+        "e": 2003,
+        "terms": [
+          {
+            "index": -2,
+            "value": 2000000
+          },
+          {
+            "index": -1,
+            "value": 1838899
+          },
+          {
+            "index": 0,
+            "value": 18960
+          },
+          {
+            "index": 284,
+            "value": 8992000
+          },
+          {
+            "index": 285,
+            "value": 9601838
+          },
+          {
+            "index": 286,
+            "value": 18
+          }
+        ]
+      },
+      "data": {
+        "m": 1.044030381849422,
+        "e": 1,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-quantum-chip-tensor-core-1e1000",
+      "prepared": true,
+      "legacy": "1e1000",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 61.15313933648685,
+      "researchSpeed": 61.15313933648685,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "quantum-chip",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "item-2",
+          "type": "tensor-core",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "item-1",
+        "item-2",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 1.2724612026279605,
+        "e": 2005,
+        "terms": [
+          {
+            "index": -3,
+            "value": 6099456
+          },
+          {
+            "index": -2,
+            "value": 6056604
+          },
+          {
+            "index": -1,
+            "value": 2026279
+          },
+          {
+            "index": 0,
+            "value": 1272461
+          },
+          {
+            "index": 282,
+            "value": 4560000
+          },
+          {
+            "index": 283,
+            "value": 6046099
+          },
+          {
+            "index": 284,
+            "value": 2796056
+          },
+          {
+            "index": 285,
+            "value": 4612026
+          },
+          {
+            "index": 286,
+            "value": 1272
+          }
+        ]
+      },
+      "income": {
+        "m": 1.7178226235477467,
+        "e": 4004,
+        "terms": [
+          {
+            "index": -4,
+            "value": 6000000
+          },
+          {
+            "index": -3,
+            "value": 2234265
+          },
+          {
+            "index": -2,
+            "value": 4676416
+          },
+          {
+            "index": -1,
+            "value": 6235477
+          },
+          {
+            "index": 0,
+            "value": 1717822
+          },
+          {
+            "index": 282,
+            "value": 5312000
+          },
+          {
+            "index": 283,
+            "value": 8324468
+          },
+          {
+            "index": 284,
+            "value": 9549352
+          },
+          {
+            "index": 285,
+            "value": 6452470
+          },
+          {
+            "index": 286,
+            "value": 3435
+          },
+          {
+            "index": 568,
+            "value": 2342656
+          },
+          {
+            "index": 569,
+            "value": 6764162
+          },
+          {
+            "index": 570,
+            "value": 2354774
+          },
+          {
+            "index": 571,
+            "value": 7178226
+          },
+          {
+            "index": 572,
+            "value": 1
+          }
+        ]
+      },
+      "data": {
+        "m": 6.420287885544504,
+        "e": 1101,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-quantum-chip-1e10000",
+      "prepared": true,
+      "legacy": "1e10000",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 601.1178565987151,
+      "researchSpeed": 601.1178565987151,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "quantum-chip",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "item-1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 8.483074684186404,
+        "e": 20003,
+        "terms": [
+          {
+            "index": -4,
+            "value": 4000000
+          },
+          {
+            "index": -3,
+            "value": 6406630
+          },
+          {
+            "index": -2,
+            "value": 6403773
+          },
+          {
+            "index": -1,
+            "value": 7468418
+          },
+          {
+            "index": 0,
+            "value": 84830
+          },
+          {
+            "index": 2853,
+            "value": 4000000
+          },
+          {
+            "index": 2854,
+            "value": 6406630
+          },
+          {
+            "index": 2855,
+            "value": 6403773
+          },
+          {
+            "index": 2856,
+            "value": 7468418
+          },
+          {
+            "index": 2857,
+            "value": 84830
+          }
+        ]
+      },
+      "income": {
+        "m": 1.1452150823651643,
+        "e": 20004,
+        "terms": [
+          {
+            "index": -4,
+            "value": 400000
+          },
+          {
+            "index": -3,
+            "value": 4148951
+          },
+          {
+            "index": -2,
+            "value": 1645094
+          },
+          {
+            "index": -1,
+            "value": 5082365
+          },
+          {
+            "index": 0,
+            "value": 114521
+          },
+          {
+            "index": 2853,
+            "value": 400000
+          },
+          {
+            "index": 2854,
+            "value": 4148951
+          },
+          {
+            "index": 2855,
+            "value": 1645094
+          },
+          {
+            "index": 2856,
+            "value": 5082365
+          },
+          {
+            "index": 2857,
+            "value": 114521
+          }
+        ]
+      },
+      "data": {
+        "m": 1.447785790204978,
+        "e": 11001,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-memory-crystal-1e10000",
+      "prepared": true,
+      "legacy": "1e10000",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 1.110114408391338,
+      "researchSpeed": 1.110114408391338,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "memory-crystal",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "",
+        "item-1",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 4.6815268864,
+        "e": 3,
+        "terms": null
+      },
+      "income": {
+        "m": 1.896018388992,
+        "e": 20003,
+        "terms": [
+          {
+            "index": -2,
+            "value": 2000000
+          },
+          {
+            "index": -1,
+            "value": 1838899
+          },
+          {
+            "index": 0,
+            "value": 18960
+          },
+          {
+            "index": 2855,
+            "value": 2000000
+          },
+          {
+            "index": 2856,
+            "value": 1838899
+          },
+          {
+            "index": 2857,
+            "value": 18960
+          }
+        ]
+      },
+      "data": {
+        "m": 1.044030381849422,
+        "e": 1,
+        "terms": null
+      }
+    },
+    {
+      "name": "scientific-base-quantum-chip-tensor-core-1e10000",
+      "prepared": true,
+      "legacy": "1e10000",
+      "hardware": [
+        1000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "research": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "quality": 0,
+      "efficiency": 0,
+      "integration": 0,
+      "nodes": [],
+      "occupied": [],
+      "purchased": 0,
+      "axioms": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "models": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "active": "",
+      "lab": false,
+      "cycle": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "resets": 0,
+      "training": 601.1531393364869,
+      "researchSpeed": 601.1531393364869,
+      "knowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "inventory": [
+        {
+          "id": "item-1",
+          "type": "quantum-chip",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "item-2",
+          "type": "tensor-core",
+          "rarity": 0,
+          "level": 1,
+          "locked": false,
+          "forge": 0,
+          "legacyLevelFactor": 1,
+          "materialBasis": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "recoveryUsed": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "equipped": [
+        "item-1",
+        "item-2",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "regularData": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "regularKnowledge": {
+        "m": 0,
+        "e": 0,
+        "terms": null
+      },
+      "minutes": 0,
+      "noItems": false,
+      "compute": {
+        "m": 1.2724612026279605,
+        "e": 20005,
+        "terms": [
+          {
+            "index": -3,
+            "value": 6099456
+          },
+          {
+            "index": -2,
+            "value": 6056604
+          },
+          {
+            "index": -1,
+            "value": 2026279
+          },
+          {
+            "index": 0,
+            "value": 1272461
+          },
+          {
+            "index": 2854,
+            "value": 6099456
+          },
+          {
+            "index": 2855,
+            "value": 6056604
+          },
+          {
+            "index": 2856,
+            "value": 2026279
+          },
+          {
+            "index": 2857,
+            "value": 1272461
+          }
+        ]
+      },
+      "income": {
+        "m": 1.7178226235477467,
+        "e": 40004,
+        "terms": [
+          {
+            "index": -4,
+            "value": 6000000
+          },
+          {
+            "index": -3,
+            "value": 2234265
+          },
+          {
+            "index": -2,
+            "value": 4676416
+          },
+          {
+            "index": -1,
+            "value": 6235477
+          },
+          {
+            "index": 0,
+            "value": 1717822
+          },
+          {
+            "index": 2853,
+            "value": 2000000
+          },
+          {
+            "index": 2854,
+            "value": 4468531
+          },
+          {
+            "index": 2855,
+            "value": 9352832
+          },
+          {
+            "index": 2856,
+            "value": 2470954
+          },
+          {
+            "index": 2857,
+            "value": 3435645
+          },
+          {
+            "index": 5710,
+            "value": 6000000
+          },
+          {
+            "index": 5711,
+            "value": 2234265
+          },
+          {
+            "index": 5712,
+            "value": 4676416
+          },
+          {
+            "index": 5713,
+            "value": 6235477
+          },
+          {
+            "index": 5714,
+            "value": 1717822
+          }
+        ]
+      },
+      "data": {
+        "m": 6.420287885544504,
+        "e": 11001,
         "terms": null
       }
     }

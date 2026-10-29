@@ -780,3 +780,7 @@ Nur bei explizitem experimentellem V3-Zustand: F07 senkt die Datenkosten **neu**
 ### Erkenntnisarchiv-Erwerb im experimentellen V3-Vertrag (29.10.2026)
 
 Die bestehende Abbildung `researchArchive → I04` begründet das permanente Erwerbsrecht. Aktuell/historisch gekauftes I04 oder erhaltene legitime Rezeptrechte erlauben nach der bestehenden Bauplanforschung ein ausdrückliches Lernen zum bisherigen Nullpreis. Keine Fragmente und kein Item geschenkt; Herstellung weiterhin mit dem bestehenden konkreten Rezept. Kein neuer Fragmentpreis oder Balance-Ersatz. Normale noch nicht migrierte Saves behalten ihre Regeln; tatsächliche Legacy-Übernahme und V3-Migration bleiben offen.
+
+
+### Item-/Prestige-V3: wissenschaftlicher Basisbonus (experimentell)
+Unveränderte Formel des additiven Item-Basisbonus: zentraler Basiswert × rohes P × bestehende globale Verstärker × rechtmäßiger Legacy-Zyklusfaktor × permanenter Legacyfaktor. Die letzten beiden bleiben bis zur tatsächlichen Compute-/Credits-Multiplikation ScientificNumber, auch jenseits des Doublebereichs. Keine neuen Werte, kein zusätzlicher Faktor auf einzigartige Fähigkeiten, keine Aktivierung in normalen Saves. Arbeitsraten und vollständige Rechteübertragung bleiben separate offene Verträge. Gemeinsame Produktionsreferenzen steigen62→71.

@@ -4,7 +4,7 @@ Die JSON-Originale bleiben unverändert und werden vom jeweiligen Lauf atomar er
 
 ## Tatsächlich erfasst
 
-- Aktives bestehendes Profil: bisher bis 30 Tage, 46 Prestiges; 90 Tage laufen noch.
+- Aktives bestehendes Profil: alle neun angeforderten Zeitpunkte bis 90 Tage; 149 Prestiges, `invalid=false`. Der ursprüngliche Gesamtlauf ergänzt danach seine Passivprofile weiter; der getrennte Passivlauf ist bereits vollständig.
 - Passives bestehendes Profil: alle neun angeforderten Zeitpunkte bis 90 Tage; 44 Prestiges, `invalid=false`, kein Timeout und keine Diagnosewarnung.
 - 90 Tage passiv: 7.776.000 geplante Sekunden = 81.000 Sekunden Sitzungen + 7.695.000 Sekunden Abwesenheit. Davon werden 6.426.000 Offline-Sekunden angerechnet und 1.269.000 entsprechend den bestehenden Offlinegrenzen verworfen. Null Taps, 8.100 Entscheidungspunkte; keine manuelle Aktion außerhalb der Sitzungen.
 - Seed1708, vorhandene feste Sitzungs-/Kauf-/Trainingsstrategie, keine Ressourceninjektion und keine echten Anzeigen oder Käufe.

@@ -8,7 +8,7 @@ namespace IdleIntelligence.Tests
 {
     [Serializable]public sealed class ItemV3Case
     {
-        public string name;public bool prepared,noItems;public long[] hardware;public int[] research;
+        public string name,legacy;public bool prepared,noItems;public long[] hardware;public int[] research;
         public int quality,efficiency,integration;public ItemInstance[] inventory;public string[] equipped;
         public NumberData regularData,regularKnowledge,compute,income,data,knowledge,cycle;public double minutes,training,researchSpeed;
         public string[] nodes;public int[] axioms,models;public string active;public bool lab;public int resets,purchased;public int[] occupied;
@@ -37,6 +37,7 @@ namespace IdleIntelligence.Tests
             s.Workshop.nodes=(string[])row.nodes.Clone();s.Meta.axioms=(int[])row.axioms.Clone();s.Meta.models=(int[])row.models.Clone();s.Meta.resets=row.resets;s.Workshop.activeModel=row.active;s.Workshop.activeModelLevel=string.IsNullOrEmpty(row.active)?0:row.models[Array.FindIndex(MetaBalance.Models,m=>m.Id==row.active)];s.Prestige.lab=row.lab;s.Prestige.Cycle=ScientificNumber.FromData(row.cycle);
             s.Upgrades.purchasedLabs=row.purchased;foreach(var slot in row.occupied??Array.Empty<int>()){var job=new Job{id="materialAnalysis",slot=slot,required=999,key="prepared-research-"+slot};if(s.ResearchJob==null)s.ResearchJob=job;else s.Prestige.labs=s.Prestige.labs.Concat(new[]{job}).ToArray();}
             s.ItemSystemV3=new ItemV3State{dataProduced=ScientificNumber.FromData(row.regularData),knowledgeProduced=ScientificNumber.FromData(row.regularKnowledge),runMinutes=row.minutes};
+            if(!string.IsNullOrEmpty(row.legacy)){var n=ScientificNumber.Parse(row.legacy).ToData();s.Legacy.cycle=new[]{new LegacyFactor{key="item:compute",value=n},new LegacyFactor{key="item:credits",value=n}};s.Legacy.permanent=s.Legacy.cycle.Select(f=>f.Copy()).ToArray();}
             if(row.noItems)s.Challenges.Run=new ChallengeRun{id="no-items",stage=1};return s;
         }
         static void Near(ScientificNumber actual,NumberData data,string message)

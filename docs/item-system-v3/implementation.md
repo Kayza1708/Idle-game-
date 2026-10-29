@@ -124,7 +124,7 @@ Das ist ein experimenteller V3-Domainvertrag, keine fertige Save-Migration oder 
 
 ### Baseline-Präzisierung nach vollständigem Passivlauf
 
-Alle neun Passivzeitpunkte bis90Tage sind nun abgeschlossen:44Prestiges, invalid=false, kein Timeout/keine Warnung; geplante, angerechnete und verworfene Zeiten stimmen mit dem bestehenden Schedule überein. [Genaue Grenzen](baseline-notes.md): bestehende Domainstrategie ohne vollständige Mira-/Modell-/Axiom-/Loadoutführung. Alte Legacy-Diagnosekatalogtexte sind keine aktuellen60/24-Kaufregeln. Rohberichte unverändert; keine vollständige V3-/Monatsbalance daraus behaupten. Aktiver90-Tage-Lauf und erweiterte Kampagnen offen.
+Alle neun Passivzeitpunkte bis90Tage sind nun abgeschlossen:44Prestiges, invalid=false, kein Timeout/keine Warnung; geplante, angerechnete und verworfene Zeiten stimmen mit dem bestehenden Schedule überein. [Genaue Grenzen](baseline-notes.md): bestehende Domainstrategie ohne vollständige Mira-/Modell-/Axiom-/Loadoutführung. Alte Legacy-Diagnosekatalogtexte sind keine aktuellen60/24-Kaufregeln. Rohberichte unverändert; keine vollständige V3-/Monatsbalance daraus behaupten. Aktiver90-Tage-Lauf später abgeschlossen (149Prestiges); erweiterte Kampagnen weiter offen.
 
 
 ## 29.10.2026 – Lernserie und eindeutige Trainingsereignisse
@@ -138,3 +138,16 @@ Logik-Saat ist nun an tatsächliche regulär bezahlte aktive Q/E-Abschlüsse ang
 - Tests fanden einen irrtümlichen Reset der neuen ID-Zähler im TS-Resethelfer; korrigiert und über echte Resettransaktionen gegen C# geprüft. Zwei andere Testaufbauten mussten gültige Challenge-Metriken und den wirklichen Intro-Tutorialkontext verwenden; keine Spielregeln dafür geändert.
 
 Die vollständige V3-Dateimigration bleibt offen und der Schreibschutz aktiv. Photonen-/Drohnen-/Gradientüberträge, weitere Ereignisfähigkeiten, vollständige Item-/Knoten-UI und Langkampagnen bleiben konkrete folgende Arbeiten.
+
+
+## 29.10.2026 – Wissenschaftliche permanente Item-Basisfaktoren
+
+Compute- und Credits-Basisboni behalten nun in TS und C# den wissenschaftlichen Faktor aus Legacy-Zyklus- und permanenten Rechten. Keine Umwandlung des Faktors in eine beschränkte normale Zahl vor der tatsächlichen Produktionsmultiplikation. Rohes P/Q und einzigartige Fähigkeiten erhalten diesen Faktor nicht zusätzlich. Normale Regeln verwenden weiterhin den bisherigen Zahlenadapter.
+
+Neun zusätzliche gemeinsame Produktionsfälle prüfen einzelne Prozessor-/Kernitems und kombinierte Ausrüstung mit Legacyfaktoren1,10^1000 und10^10000 je Rechteklasse: Gesamtbasis damit bis10^20000. Unabhängiger Vitest prüft den erwarteten Faktor1+0,1×LegacyCycle×LegacyPermanent, die tatsächliche Produktionsquote und das Entfernen der Ausrüstung. Der erste Testaufbau verwendete irrtümlich das Prozessoritem Neural-ASIC als Kern; auf den echten Kern Speicherkristall korrigiert, keine Slotregel geändert. 46 gezielte Vitest bestanden.
+
+**Grenze:** Arbeitsraten/-anforderungen für Training/Forschung und verbleibende Migrationsrechte sind damit nicht vollständig wissenschaftlich umgebaut. Die bisherigen numerischen Arbeitsadapter, Altimport und alle noch offenen Ereignisverträge bleiben separat offen. Keine V3-Aktivierung, keine Saveversionänderung und keine neue Balancekonstante. Vollständige Regressionsergebnisse werden nach Abschluss ergänzt.
+
+Wissenschaftliche-Basis-Nachprüfung: vollständige191/191EditMode (127,753s) und9/9gezieltePlayMode (47,290s), Typecheck/Webbuild und vollständiger Generatorvergleich bestanden. Ein erster falsch qualifizierter PlayMode-Filter wählte null Tests und gilt ausdrücklich nicht als Abnahme; Namespace korrigiert und echte neun Tests wiederholt. Nachweise: `/tmp/idle-v3-scientific-edit.xml`, `/tmp/idle-v3-scientific-play-corrected.xml`.
+
+Vollständiger TS-Lauf für diesen Stand:154Dateien/2.000Tests bestanden,323,84s (`/tmp/idle-v3-scientific-full-vitest.log`). Die Sandbox meldete einen fehlgeschlagenen Vite-Websocket-Listener; Tests wurden vollständig beendet, Exit0, keine fehlgeschlagenen Tests. Kein Netz-/Cloud-Erfolgsnachweis daraus.

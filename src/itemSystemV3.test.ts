@@ -5,7 +5,7 @@ import {trainingStrength,progressionResearchSpeed,knowledgeRate,computeLog} from
 import {createItem,equip} from './inventory';
 import {serialize} from './storage';
 import {ScientificNumber as S} from './scientificNumber';
-import {newItemSystemV3,itemStrengthV3,itemSoftcapV3,itemLensFactorV3,itemV3Snapshot,itemCombinationsV3,withoutItemV3Equipment,itemBaseFactorV3,itemHardwareClassesV3,itemWorkFactorV3,recordItemProductionV3,resetItemProductionV3} from './itemSystemV3';
+import {newItemSystemV3,itemStrengthV3,itemSoftcapV3,itemLensFactorV3,itemV3Snapshot,itemCombinationsV3,withoutItemV3Equipment,itemBaseFactorV3,itemBaseFactorScientificV3,itemHardwareClassesV3,itemWorkFactorV3,recordItemProductionV3,resetItemProductionV3} from './itemSystemV3';
 const item=(rarity:Item['rarity']='common',level=1,forge=0):Item=>({id:'reference',type:'quantum-chip',rarity,level,forge,locked:false});
 /** Explicit prepared mathematical fixture, not a natural campaign. */
 function prepared(types:ItemTypeId[],H=1000,rarity:Item['rarity']='common',level=1,forge=0):GameState{
@@ -103,6 +103,18 @@ describe('Item V3 actual production consumers (prepared states)',()=>{
   const distill=prepared(['distillation-module']),curriculum=prepared(['curriculum-module']);let both=prepared(['distillation-module','curriculum-module']);both={...both,nodes:['W02']};both=equip(both,both.inventory[1].id,'coreAux');
   for(const s of [distill,curriculum,both]){let previous=0;for(let n=0;n<=1000;n+=.1){const value=trainingStrength(n,s);expect(value).toBeGreaterThanOrEqual(previous-1e-10);expect(value).toBeLessThanOrEqual(n+1e-9);previous=value;}expect(trainingStrength(1000,s)).toBeGreaterThan(trainingStrength(1000,withoutItemV3Equipment(s)));}
   const threshold=75;expect(trainingStrength(threshold,both)).toBe(threshold);expect(trainingStrength(threshold+1e-6,both)-threshold).toBeCloseTo(1e-6,10);
+ });
+ it('keeps huge purchased legacy base factors scientific without amplifying unique abilities',()=>{
+  for(const [type,family,effect] of [['quantum-chip','processor','compute'],['memory-crystal','core','credits']] as const){
+   const s=prepared([type]),legacy=S.fromString('1e1000');
+   const huge={...s,progression:{...s.progression,legacyCycle:{...s.progression.legacyCycle,['item:'+effect]:legacy.toJSON()},legacyPermanent:{...s.progression.legacyPermanent,['item:'+effect]:legacy.toJSON()}}};
+   const expected=S.from(.1).multiply(legacy).multiply(legacy).add(S.from(1));
+   expect(itemBaseFactorScientificV3(huge,family).log10()).toBeCloseTo(expected.log10(),10);
+   const rate=(state:GameState)=>effect==='compute'?computeRateScientific(state.hardware,state):creditRateScientific(state.hardware,state.level,state,0,false);
+   const before=rate(s),after=rate(huge),baseBefore=itemBaseFactorScientificV3(s,family);
+   expect(after.divide(before).log10()).toBeCloseTo(expected.divide(baseBefore).log10(),10);
+   expect(rate(withoutItemV3Equipment(huge)).log10()).toBeCloseTo(rate(withoutItemV3Equipment(s)).log10(),10);
+  }
  });
  it('uses actual learning/research/knowledge consumers, with no-items disabling the entire layer',()=>{
   const learning=prepared(['photonic-array','logic-seed','lab-drone']);expect(itemWorkFactorV3(learning,false)).toBe(3);expect(itemWorkFactorV3(learning,true)).toBeCloseTo(1.65,12);

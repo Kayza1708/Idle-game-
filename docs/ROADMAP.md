@@ -280,3 +280,6 @@ Abschluss27.10.2026:1944Vitest,147EditMode und final113PlayMode grün. Nativer A
 Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehendes I04-/Legacyrecht, Bauplanforschung und unveränderte bezahlte Herstellung; kein Gratisitem/Ersatzpreis. Elf gemeinsame neue Erwerbs-/Zahlungsfälle; Compile, 9 EditMode, 5 PlayMode und gezielte TS-Fälle grün. Echte Save-Migration und erreichbare V3-Spielerfreigabe ausdrücklich noch offen. Siehe `docs/item-system-v3/contracts.md`.
 
 - 29.10.: Logik-Saat mit tatsächlichen bezahlten Ereignissen, IDs/Ursachen, Ausschlüssen und echten Resetfolgen angebunden. 1.999Vitest, 191vollständige EditMode und9gezielte PlayMode grün. Nächste Verträge: Photon/Drohne/Gradient und weitere Ereignisse; V3-Dateimigration/Spielerfreigabe weiterhin offen. `docs/item-system-v3/implementation.md`.
+
+- 29.10.: Wissenschaftliche Legacy-Itembasis bei tatsächlicher Compute-/Creditsproduktion ohne vorzeitige Double-Konvertierung erhalten;71gemeinsame Produktionsfälle bis10^20000,191EditMode und9gezieltePlayMode grün. Keine Saveaktivierung. Aktive Altbaseline90Tage/149Prestiges; passive90Tage/44Prestiges, Grenzen in baseline-notes.md.
+- Derselbe wissenschaftliche Basisstand: vollständige154Dateien/2.000Vitest grün (323,84s), vollständige Generatorparität und Webbuild/Typecheck bestanden. Noch keine vollständige V3-Freigabe.

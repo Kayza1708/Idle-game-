@@ -129,5 +129,39 @@
       "result": "Passed",
       "xmlSha256": "955af75a2c41d8d9c93386d2f2003d86d70e893945bbbbf5ee2334004f4a4471"
     }
+  },
+  "scientificBaseFollowup": {
+    "sourceHash": "3eb9a154bb8ac61ea476ef3fd921aa2b63ff280e0b1d787bfd0f341ebb4e4ec4",
+    "preparedProductionCases": 71,
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "focusedVitest": 46,
+    "scope": "scientific compute/income base factors only; full V3 save/work migration remains pending",
+    "editMode": {
+      "total": "191",
+      "passed": "191",
+      "failed": "0",
+      "duration": "127.7525347",
+      "result": "Passed",
+      "xmlSha256": "0678d24eb1662f7771a92576a0674882c732a0936d2d578f3fe25cadcaa2f5f9"
+    },
+    "playMode": {
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "duration": "47.290285",
+      "result": "Passed",
+      "xmlSha256": "b11d18e18dc2b2fe1cfea8085f548d610f71594518d0fb5c50a04e445c49ee92"
+    },
+    "discardedPlayModeAttempt": "wrong namespace selected zero; not accepted as evidence; corrected nine-test run passed",
+    "vitest": {
+      "files": 154,
+      "tests": 2000,
+      "passed": 2000,
+      "failed": 0,
+      "seconds": 323.84,
+      "log": "/tmp/idle-v3-scientific-full-vitest.log"
+    }
   }
 }

@@ -65,11 +65,12 @@ namespace IdleIntelligence.Core
         {var seen=new HashSet<string>();foreach(var item in Workshop.Equipped(s))if(seen.Add(item.type))yield return item;}
         public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);
         public static bool Has(GameState s,string id)=>Equipped(s).Any(i=>i.type==id);
-        public static double BaseFactor(GameState s,string family)
+        public static ScientificNumber BaseFactorScientific(GameState s,string family)
         {
-            if(!Enabled(s))return 1;string effect=family=="processor"?"compute":family=="core"?"credits":"research";
-            return 1+Equipped(s).Where(i=>Workshop.Definition(i).Family==family).Sum(i=>C("baseValue")*Strength(i)*Workshop.Amplifier(s)*LegacyEffects.Factor(s,"item:"+effect).ToDouble());
+            if(!Enabled(s))return ScientificNumber.One;string effect=family=="processor"?"compute":family=="core"?"credits":"research";
+            return Equipped(s).Where(i=>Workshop.Definition(i).Family==family).Aggregate(ScientificNumber.One,(sum,i)=>sum.Add(LegacyEffects.Factor(s,"item:"+effect).Times(C("baseValue")*Strength(i)*Workshop.Amplifier(s))));
         }
+        public static double BaseFactor(GameState s,string family)=>BaseFactorScientific(s,family).ToDouble();
         public static ScientificNumber HardwareOwned(GameState s)=>s.Hardware.Aggregate(ScientificNumber.Zero,(sum,count)=>sum.Add(ScientificNumber.From(count)));
         public static ScientificNumber TrainingLevels(GameState s)=>ScientificNumber.From(s.Quality).Add(ScientificNumber.From(s.Efficiency)).Add(ScientificNumber.From(s.Workshop.integration));
         public static ScientificNumber ResearchLevels(GameState s)=>s.Research.Aggregate(ScientificNumber.Zero,(sum,level)=>sum.Add(ScientificNumber.From(level)));
@@ -93,7 +94,7 @@ namespace IdleIntelligence.Core
                 if(item.type=="inference-router")result=result.Times(1+C("router.perLink")*AbilityStrength(s,item)*Enumerable.Range(0,s.Hardware.Length).Count(i=>ValidLink(s,i)));
                 if(item.type=="photonic-matrix"&&s.ActiveUntil>s.SavedAt)result=result.Times(1+C("photonic.coefficient")*AbilityStrength(s,item));
             }
-            if(pair)result=result.Times(C("combinations.compute.factor"));return result.Times(BaseFactor(s,"processor"));
+            if(pair)result=result.Times(C("combinations.compute.factor"));return result.Multiply(BaseFactorScientific(s,"processor"));
         }
         public static ScientificNumber CreditFactor(GameState s)
         {
@@ -107,7 +108,7 @@ namespace IdleIntelligence.Core
             }
             if(pair)result=result.Times(C("combinations.distilled.credits"));
             if(Has(s,"legacy-controller")&&Has(s,"diagnostic-adapter")&&Has(s,"memory-crystal"))result=result.Multiply(ScientificNumber.From(C("combinations.boot.creditsPerClass")).Pow(s.Hardware.Take((int)C("combinations.boot.classes")).Count(n=>n>=C("combinations.boot.threshold"))));
-            return result.Times(BaseFactor(s,"core")).Multiply(ModelEcho(s));
+            return result.Multiply(BaseFactorScientific(s,"core")).Multiply(ModelEcho(s));
         }
         public static ScientificNumber DataFactor(GameState s)
         {

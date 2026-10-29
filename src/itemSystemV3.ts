@@ -2,7 +2,7 @@
  * the complete versioned migration is ready. No clocks, RNG, IO or UI here. */
 import {BALANCE,equippedItems,hardwareIds,itemTypes,classComputeTerms,
   type GameState,type Item,type ItemFamily,type Rarity} from './economy';
-import {itemAmplifier,legacyItemFactor,integrationLevel,modelCore,modelFactor} from './progression';
+import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor} from './progression';
 import {dataRateScientific} from './economy';
 import {challengeNetworkLinkAllowed,challengeFamilyBonus} from './challengeStages';
 import {ScientificNumber as S,type ScientificJSON} from './scientificNumber';
@@ -63,14 +63,16 @@ export function itemV3Snapshot(s:GameState){
  const N=new Set(s.nodes.filter(id=>Object.hasOwn(BALANCE.progression.nodes,id))).size;
  return{H,M,F,U,N,Z:s.axiomResetCount,D:S.fromJSON(state.dataProduced),E:S.fromJSON(state.knowledgeProduced),K:S.fromJSON(state.componentsProduced),T:S.from(state.runMinutes)};
 }
-export function itemBaseBonusV3(s:GameState,item:Item,family:ItemFamily){
- if(itemTypes[item.type].slot!==family)return 0;
+export function itemBaseBonusScientificV3(s:GameState,item:Item,family:ItemFamily):S{
+ if(itemTypes[item.type].slot!==family)return S.zero();
  const effect=family==='processor'?'compute':family==='core'?'credits':'research';
- // Old instance legacyLevelFactor is deliberately not P. Global purchased
- // amplifiers apply to this base value only.
- return c().baseValue*itemStrengthV3(item).P*itemAmplifier(s)*legacyItemFactor(s,effect);
+ // Legacy purchased factors stay scientific. They amplify only the additive
+ // base bonus, never raw P/Q or the item's unique ability.
+ return S.from(c().baseValue*itemStrengthV3(item).P*itemAmplifier(s)).multiply(legacyItemFactorScientific(s,effect));
 }
-export function itemBaseFactorV3(s:GameState,family:ItemFamily){return 1+itemV3Equipped(s).reduce((sum,item)=>sum+itemBaseBonusV3(s,item,family),0);}
+export function itemBaseBonusV3(s:GameState,item:Item,family:ItemFamily){return itemBaseBonusScientificV3(s,item,family).toNumber();}
+export function itemBaseFactorScientificV3(s:GameState,family:ItemFamily){return itemV3Equipped(s).reduce((sum,item)=>sum.add(itemBaseBonusScientificV3(s,item,family)),one());}
+export function itemBaseFactorV3(s:GameState,family:ItemFamily){return itemBaseFactorScientificV3(s,family).toNumber();}
 export function itemQuantumFactorV3(hardware:S,item:Item,extraExponent=0,context?:GameState){const {P,Q}=context?itemAbilityStrengthV3(context,item):itemStrengthV3(item);return S.from(c().quantum.base).pow(P).multiply(one().add(hardware.divide(S.from(c().quantum.hardwareScale))).pow(c().quantum.exponent*Q+extraExponent));}
 export function itemNeuralFactorV3(training:S,item:Item,extraExponent=0,context?:GameState){const {P,Q}=context?itemAbilityStrengthV3(context,item):itemStrengthV3(item);return S.from(c().neural.base).pow(P).multiply(one().add(training.divide(S.from(c().neural.trainingScale))).pow(c().neural.exponent*Q+extraExponent));}
 export function itemTensorFactorV3(training:S,item:Item,context?:GameState){const{P,Q}=context?itemAbilityStrengthV3(context,item):itemStrengthV3(item);return S.from(c().tensor.base).pow(P).multiply(one().add(training.divide(S.from(c().tensor.trainingScale))).pow(Q));}
@@ -107,7 +109,7 @@ export function itemComputeFactorV3(s:GameState){
   if(item.type==='photonic-matrix'&&s.overclock.activeUntil>s.savedAt)result=result.multiplyNumber(1+c().photonic.coefficient*itemAbilityStrengthV3(s,item).P);
  }
  if(combo.pair)result=result.multiplyNumber(c().combinations.compute.factor);
- return result.multiplyNumber(itemBaseFactorV3(s,'processor'));
+ return result.multiply(itemBaseFactorScientificV3(s,'processor'));
 }
 export function itemCreditFactorV3(s:GameState){
  const snapshot=itemV3Snapshot(s),distilled=itemCombinationV3(s,'distilled-intelligence');let result=one();
@@ -119,7 +121,7 @@ export function itemCreditFactorV3(s:GameState){
  }
  if(distilled.pair)result=result.multiplyNumber(c().combinations.distilled.credits);
  const boot=itemCombinationV3(s,'bootstrapping');if(boot.complete)result=result.multiply(S.from(c().combinations.boot.creditsPerClass).pow(hardwareIds.slice(0,c().combinations.boot.classes).filter(id=>s.hardwareCounts[id]>=c().combinations.boot.threshold).length));
- return result.multiplyNumber(itemBaseFactorV3(s,'core')).multiply(itemModelEchoV3(s));
+ return result.multiply(itemBaseFactorScientificV3(s,'core')).multiply(itemModelEchoV3(s));
 }
 export function itemModelEchoV3(s:GameState){
  const echo=itemV3Equipped(s).find(i=>i.type==='model-echo-core');if(!echo||!s.progression.active)return one();
@@ -138,7 +140,7 @@ export function itemWorkFactorV3(s:GameState,research:boolean){
  }
  if(itemCombinationV3(s,'learning-spiral').pair)result=result.multiplyNumber(c().combinations.learning.speed);
  if(research&&itemCombinationV3(s,'scientific-library').pair)result=result.multiplyNumber(c().combinations.library.research);
- return result.multiplyNumber(research?itemBaseFactorV3(s,'research'):1).toNumber();
+ return result.multiply(research?itemBaseFactorScientificV3(s,'research'):one()).toNumber();
 }
 export function itemKnowledgeFactorV3(s:GameState){
  if(!usesItemV3(s))return one();let result=one();

@@ -239,18 +239,14 @@ export function modelCore(s: GameState) {
       coupling * (1 + deviceBonus(s,"modelEcho"))
   );
 }
-export function legacyItemFactor(s: GameState, e: string) {
+export function legacyItemFactorScientific(s: GameState, e: string) {
   return s.progression?.version === 2
-    ? ScientificNumber.fromJSON(
-        s.progression.legacyCycle["item:" + e] ?? { m: 1, e: 0 },
-      )
-        .multiply(
-          ScientificNumber.fromJSON(
-            s.progression.legacyPermanent["item:" + e] ?? { m: 1, e: 0 },
-          ),
-        )
-        .toNumber()
-    : 1;
+    ? ScientificNumber.fromJSON(s.progression.legacyCycle["item:" + e] ?? { m: 1, e: 0 })
+        .multiply(ScientificNumber.fromJSON(s.progression.legacyPermanent["item:" + e] ?? { m: 1, e: 0 }))
+    : ScientificNumber.from(1);
+}
+export function legacyItemFactor(s: GameState, e: string) {
+  return legacyItemFactorScientific(s, e).toNumber();
 }
 export function itemAmplifier(s: GameState) {
   if (s.retention.activeRun?.id === "no-items") return 1;
