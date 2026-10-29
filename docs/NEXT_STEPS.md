@@ -255,3 +255,6 @@ Bezahlte Faktoren/Mindestfund über Fokuswechsel und Axiomreset erhalten; keine 
 
 ### 29.10.: W07-Batchanzeige und Bedienung geprüft
 Vollpreise, atomareFehlfälle und113echtegespeicherteItems mitReload/Animationsabbruch geprüft;160gemeinsameFälle,2.066Vitest/213EditMode/8PlayMode grün.44Originalbilder,DE/EN320/390/430 selbstgesehen. Weiter mit Photon-/Quanten-Familienausbeute und vollständig eingefrorenen Analyse-Ausbeuteverträgen, anschließend übrigen Arbeits-/Rückgewinnungs-/Provenienzabhängigkeiten. VollständigeV3-Migration/Katalogerwerb/Details vorXcode weiter offen.
+
+### 29.10.: Familienausbeute und globale Startbedingungen geprüft
+Photon-/Quantenwirkungen, OD-Kombination und K10 sind an reale bezahlteStarts/Pakete gebunden; ursprünglicheHardwaregrundmengen und alte normaleIntegrale erhalten.112Auftragszustände/540Pakete,2.071Vitest/215EditMode/8finalePlayMode grün.11Originalbilder; Darstellungsumbrüche korrigiert. Weiter mit verbleibenden Arbeits-/Rückgewinnungs-/Provenienzverträgen,42er-Katalog und tatsächlichen gemeinsamenV3-Itemdetails, anschließend vollständigerverlustfreierSave-Migration und Gesamtregression/Naturalläufen. Nutzer hat erneut ausdrücklich vollständigesV3vorPlaytest bestätigt; kein Zwischenbuild.

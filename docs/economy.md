@@ -831,3 +831,6 @@ Neue Item-Levelupgrades mit W04:×0,75 (`BALANCE.prestigeV3.items.W04`) statt al
 
 ### 29.10.2026 – W07-Serienfertigung
 Vorhandene sofortige Sammelpreise proExemplar×Menge ohne neue Kostenformel: Meisterschaftsrundung jeExemplar, danach volle Material-/Modul-/Datensummen. Zentrale beauftragte Mengen×3/×10/×100 und Einzelherstellung. Gemeinsame Unity-Quote jetzt auch für sichtbare Preise und Bezahlsperre; keine Teilzahlung, keine neue Warteschlange/Automatik.
+
+### 29.10.2026 – beauftragte V3-Familienausbeute
+Photon-/Quantenitem×(1+P), Photonikarchitektur×2imOverdrive, Trio nur bereits freigeschaltete Quantenfamilie. Nur bezahlteAnalysen/reguläreHardwarepakete; historische Paketgrundmengenfamilien erhalten, neueV2-Familienwirkung getrennt. GPUextra mit Bruchteilen, kein Diagnosefaktor auf dieses festeExtra. Sämtliche neuen Analyse-Ausbeutefaktoren einschließlich bestehendemK10 beim bezahltenStart gespeichert (V3-Spezifikation702); alte normale Auftragsintegrale unverändert. Quellen `BALANCE.itemV3.familyYield`, `.combinations.photonic`, bestehendes `.progression.effects.D06quantity`. Kein neuer Preis oder zusätzlicher Erwerbsweg.

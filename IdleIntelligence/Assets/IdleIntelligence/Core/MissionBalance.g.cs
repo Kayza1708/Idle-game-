@@ -1,6 +1,6 @@
 // Generated from current TypeScript mission/reward contracts.
 namespace IdleIntelligence.Core { public static class MissionBalance {
-public const string SourceHash="4949ebdd2dc981b190aca25c0b09d0080b66cb713b86db17cf31b49031b66aa0",InitialSeasonId="season-01";
+public const string SourceHash="038d49fbab6b2e0b45e228578cd9e641bf84a5f8a4f6274adca20e344839a2f0",InitialSeasonId="season-01";
 public static readonly double[] Counts=new double[]{6d,12d,30d};
 public static readonly double[] Required=new double[]{4d,8d,20d};
 public static readonly double[] TaskGems=new double[]{2d,5d,15d};

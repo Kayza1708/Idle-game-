@@ -109,6 +109,10 @@ namespace IdleIntelligence.Core
         public static double FocusQuantity(GameState s)=>Enabled(s)?1-(1-ItemBalance.MaterialFocusQuantity)/FocusFactor(s):ItemBalance.MaterialFocusQuantity;
         public static double HardwarePackageFactor(GameState s)
         {if(!Enabled(s))return 1;var diagnostic=Equipped(s).FirstOrDefault(i=>i.type=="diagnostic-adapter");return(1+(diagnostic!=null?C("diagnostic.coefficient")*AbilityStrength(s,diagnostic):0))*(Has(s,"legacy-controller")&&Has(s,"diagnostic-adapter")?C("combinations.boot.components"):1);}
+        public static double MaterialFamilyYield(GameState s,int family)
+        {if(!Enabled(s)||family!=2&&family!=4)return 1;var item=Equipped(s).FirstOrDefault(i=>i.type==(family==2?"photonic-analyzer":"quantum-diagnostic-module"));bool pair=Has(s,"photonic-matrix")&&Has(s,"photonic-analyzer"),active=s.ActiveUntil>s.SavedAt;return(1+(item!=null?C("familyYield.coefficient")*AbilityStrength(s,item):0))*(active&&pair&&(family==2||Has(s,"cryocontroller")&&MaterialAnalysis.Access(s,4))?C("combinations.photonic.yield"):1);}
+        public static double MaximumFamilyYield()
+        {double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");return ItemV3Balance.Get("prestige.items.W03focus")*(1+C("familyYield.coefficient")*maxP)*C("combinations.photonic.yield");}
         public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);
         public static bool Has(GameState s,string id)=>Equipped(s).Any(i=>i.type==id);
         public static ScientificNumber BaseFactorScientific(GameState s,string family)

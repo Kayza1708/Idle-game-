@@ -144,6 +144,14 @@ export function itemFocusQuantityV3(s:GameState){return usesItemV3(s)?1-(1-BALAN
 export function itemHardwarePackageFactorV3(s:GameState){
  if(!usesItemV3(s))return 1;const diagnostic=itemV3Equipped(s).find(i=>i.type==='diagnostic-adapter');return(1+(diagnostic?c().diagnostic.coefficient*itemAbilityStrengthV3(s,diagnostic).P:0))*(itemCombinationV3(s,'bootstrapping').pair?c().combinations.boot.components:1);
 }
+/** Family-specific yield for paid analyses/regular hardware packets only.
+ * Quantum architecture requires existing access; no family is unlocked here. */
+export function itemMaterialFamilyYieldV3(s:GameState,family:keyof typeof BALANCE.progression.materials,quantumUnlocked:boolean,at=s.savedAt){
+ if(!usesItemV3(s)||family!=='photonic'&&family!=='quantum')return 1;
+ const type=family==='photonic'?'photonic-analyzer':'quantum-diagnostic-module',item=itemV3Equipped(s).find(i=>i.type===type),combo=itemCombinationV3(s,'photonic-architecture');
+ return(1+(item?c().familyYield.coefficient*itemAbilityStrengthV3(s,item).P:0))*(s.overclock.activeUntil>at&&(family==='photonic'?combo.pair:combo.complete&&quantumUnlocked)?c().combinations.photonic.yield:1);
+}
+export function itemMaximumFamilyYieldV3(){const maxP=Math.max(...c().rarityFactors)*(1+c().levelStep*(c().levelMax-1))*(1+c().forgeStep*c().forgeMax)*BALANCE.prestigeV3.items.W10ability;return BALANCE.prestigeV3.items.W03focus*(1+c().familyYield.coefficient*maxP)*c().combinations.photonic.yield;}
 export function itemCreditFactorV3(s:GameState){
  const snapshot=itemV3Snapshot(s),distilled=itemCombinationV3(s,'distilled-intelligence');let result=one();
  for(const item of itemV3Equipped(s)){

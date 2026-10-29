@@ -847,5 +847,60 @@
     "graphics": "44 actual Unity captures:33 full-price views and11 node details; seven locale assertions. DE/EN320/390/430 batch100 self-inspected plus3/10 and node detail representatives. No physical device/42-item/full V3 migration claim.",
     "scope": "Existing atomic batch rule now shares full native total quote with UI and transaction; original per-exemplar mastery rounding, no new prices or production planner",
     "remaining": "Full42-item acquisition, event/provenance contracts, lossless V3 file migration and very large source craft-counter/native32bit mapping still open"
+  },
+  "latestVerifiedSection": "familyYields",
+  "familyYields": {
+    "sourceHash": "49fd19a97d021a44d34d2469737bd7c76b7a4dc730bee6b11e8b16d73e17a907",
+    "actualAnalysisCases": 112,
+    "actualHardwareCases": 540,
+    "newSourceContracts": 5,
+    "vitest": {
+      "files": 169,
+      "tests": 2071,
+      "passed": 2071,
+      "failed": 0,
+      "seconds": 336.93,
+      "log": "/tmp/idle-v3-family-final-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "215",
+      "passed": "215",
+      "failed": "0",
+      "duration": "202.3396492",
+      "result": "Passed",
+      "xmlSha256": "94150ea0dc08fb8eb62cd0c49e1beaf87ce5a790b1d131db849b63534ad353f4"
+    },
+    "unchangedPlayRetry": {
+      "total": "8",
+      "passed": "8",
+      "failed": "0",
+      "duration": "23.3289406",
+      "result": "Passed",
+      "xmlSha256": "d1018a2f4be8b78c612472ef237b4900f571e635aa9e916423e439fe981d75ef"
+    },
+    "finalReadablePlayMode": {
+      "total": "8",
+      "passed": "8",
+      "failed": "0",
+      "duration": "22.581858",
+      "result": "Passed",
+      "xmlSha256": "7412968456c93fe6f8c73e15f53a3ee66f0933c1d17245ee5ad7f5a039266843"
+    },
+    "typecheck": "passed",
+    "build": "passed;2.29s; existing chunk warning",
+    "generatorCheck": "passed full after completed sequential export",
+    "graphics": "11 actual isolated read-only V3 Unity analysis images. Final DE/EN320/390/430 and FR390 self-inspected; seven locale factor/preview fit assertions. Original normal save byte-identical. No device/42-item/detail/migration claim.",
+    "scope": "Paid-start global and family yields including K10 and photonic architecture; existing normal integral contracts retained; regular hardware family mapping separate from historical base grouping, GPU extra and fractions; no class-upgrade/shop/salvage/synthesis multiplier",
+    "corrections": [
+      "First source expectations omitted existing per-component fractional accounts; corrected to compare whole finds plus fractions, no production rounding change.",
+      "A preview call accidentally referenced a start-only now variable; corrected before final tests.",
+      "New test C# used a var declaration with multiple variables; compile error corrected.",
+      "32/33 initial focused native: legacy source base contract contains ones while actual old family effect is integrated; test now distinguishes stored V3 snapshot from legacy integral and verifies both actual completions.",
+      "First full Source run had5stale generated outputs and1slow W04 test setup timeout. All exports completed before final run; same full level coverage with per-type setup reuse, no timeout increase.",
+      "One mistakenly overlapping own export/EditMode invocation stopped with143and not counted as a verdict; rerun sequentially.",
+      "Initial graphical launch exited138in Burst child compiler/libmonobdwgc native code, no XML verdict. Unchanged retry8/8, no Burst setting/package changed.",
+      "Actual images exposed orphaned factors and clipped redundant units in translated base previews; family/value kept together, V3 duplicate unit suffix removed; final8/8UI regression passed."
+    ],
+    "remaining": "Unified actual V3 item detail formulas, full42-item acquisition/catalog, work/provenance events and lossless V3 file migration still open; no new player installed"
   }
 }

@@ -36,12 +36,12 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 26 | `data-prism` | Daten aus F ohne doppelte Projektzählung | Auftrags-/Reset-/Detailsabnahme |
 | 27 | `diagnostic-adapter` | variable Komponenten regulärer bezahlter Hardware-Meilensteine×(1+P); Bootstrapping/W08 einmal, feste Extras und alte Reste getrennt | vollständige V3-Details/Migration; Klassenupgrade-Erwerbsfrage bleibt separat |
 | 28 | `experiment-controller` | offen | Bereichswechsel am bezahlten Start, gespeicherter Anfangsfortschritt |
-| 29 | `precision-scanner` | normalisierte Fokusgewichte×(1+P), Mengenverlust/(1+P), tatsächlicher bezahlter Start speichert Gewichte/Menge; V3-Vorschau angebunden | vollständige V3-Dateimigration/Details; W03-Zielmenge/Rare-Garantie separat geprüft; weitere Familienausbeute offen |
+| 29 | `precision-scanner` | normalisierte Fokusgewichte×(1+P), Mengenverlust/(1+P), tatsächlicher bezahlter Start speichert Gewichte/Menge; V3-Vorschau angebunden | vollständige V3-Dateimigration/Details; W03 und Photon-/Quantenfamilien samt globalem Startfaktor separat geprüft |
 | 30 | `recycling-probe` | offen | irreversible Rare+-Zerlegung, Fraktionskonto statt zusätzlichem Zufallswurf |
 | 31 | `blueprint-archive` | Forschung aus unterschiedlichen bekannten eigenen Bauplanmeisterschaften≥1; unbekannte/geerbte Schlüssel ausgeschlossen | vollständige Slot-/Erwerbs-/V3-Dateimigrationsabnahme |
 | 32 | `protocol-controller` | offen | neue Mindestdauer bei Erstellung; alte Bonuszeit entfernen |
-| 33 | `photonic-analyzer` | offen | gültige Analyse-/Hardwarequellen, Snapshot und Fraktionen |
-| 34 | `quantum-diagnostic-module` | offen | gleiche Quellregeln, kein Freischalten gesperrter Familien |
+| 33 | `photonic-analyzer` | bezahlte Analyse-/reguläre Hardwarefamilie×(1+P), Overdrive-Paar, Startsnapshot, GPUextra und Fraktionen geprüft | vollständige V3-Itemdetails/Erwerbs-/Dateimigration |
+| 34 | `quantum-diagnostic-module` | entsprechende Quantenfamilie×(1+P); Trio nur mit bereits freigeschalteter Familie, Snapshot/Fraktionen geprüft | vollständige V3-Itemdetails/Erwerbs-/Dateimigration |
 | 35 | `darklab-resonator` | Erkenntnis aus regulärer Datenrate ohne aktiven Overdrive | E-Zähler, Offlineintegration und echte Laborfreischaltung |
 | 36 | `cycle-observatory` | Forschung aus tatsächlicher Resetanzahl ohne alten Zykluscap | mehrere echte Zyklen und Migration |
 | 37 | Flottenkoordinator | noch kein freigegebener Katalogeintrag | Campuszugang, konkretes Rezept, Icon, Computeverbraucher |
