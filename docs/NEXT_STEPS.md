@@ -240,3 +240,6 @@ Tatsächliche Overdrive-Startverträge einschließlich Energiepaar/-trio, manuel
 
 ### 29.10.: Diagnoseadapter / bezahlte Pakete
 360gemeinsame tatsächliche Vergaben plus32Produktionsfolgen,2.042Vitest/208vollständigeEditMode grün. PlayMode10/11 und fokussierter erfolgreicher1/1Intro-Nachlauf getrennt dokumentiert; keine pauschale vollePlayMode-Freigabe. Nächste Verbraucher: gültige Bauplanmeisterschaften, fokussierte Analyse-/Familienausbeute, Rückgewinnung und Arbeitsereignisse. Native Klassenupgrade-/Resetfrage weiterhin separat; normaler Save24 unverändert.
+
+### 29.10.: Bauplanarchiv-Guard geprüft
+Bekannte unterschiedliche Meisterschaften in TS/native ausgerichtet; unbekannte/geerbte Felder erzeugen keinen Bonus, Original bleibt.2.045Vitest,209vollständigeEditMode,3gezieltePlayMode grün. Weiter mit Fokusgewichtung/Fokusmengenverlust und gültiger Familienausbeute; V3-Dateimigration und normaler Xcode-Playtest bleiben bis zum vollständigen Umbau zurückgestellt.

@@ -391,7 +391,7 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "a63177caf7b3c4c45781312274821f0fa7f945ffc171c5a01f2f12cb39abd26b",
+  "currentSourceHash": "82f072b676b4a2bb34803c0934f8be1c14e9288d83303abdf7e4ef369cda2401",
   "workshopYieldFollowup": {
     "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
     "normalSaveActivation": false,
@@ -647,5 +647,41 @@
       "xmlSha256": "0966e5bab8f7254377aff92f52b7b5c12478f13a83c23dd047c183cc424affb2"
     },
     "foregroundTrace": "diagnostics/intro-foreground-trace.txt"
+  },
+  "blueprintArchiveFollowup": {
+    "sourceHash": "82f072b676b4a2bb34803c0934f8be1c14e9288d83303abdf7e4ef369cda2401",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "productionCases": 108,
+    "actualBlueprintMasteryCases": 6,
+    "focusedVitest": 3,
+    "vitest": {
+      "files": 164,
+      "tests": 2045,
+      "passed": 2045,
+      "failed": 0,
+      "seconds": 180.87,
+      "log": "/tmp/idle-v3-blueprint-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Known own blueprint mastery entries only, distinct count not levels; unknown source properties unchanged; native known-array state parity. No V3 disk-import/migration release.",
+    "fullEditMode": {
+      "total": "209",
+      "passed": "209",
+      "failed": "0",
+      "duration": "80.4030847",
+      "result": "Passed",
+      "xmlSha256": "9421f2e8c6f25bb340aeeb39242996d34e88cb6fb1a038c0225416ccb4a91538"
+    },
+    "targetedPlayMode": {
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "duration": "5.9410675",
+      "result": "Passed",
+      "xmlSha256": "9540d1d0409e5aa9f94763547779bc9b0fc814d2fbcbeb426859429dedff7e17"
+    }
   }
 }

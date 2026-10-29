@@ -9,7 +9,7 @@ namespace IdleIntelligence.Tests
     [Serializable]public sealed class ItemV3Case
     {
         public string name,legacy;public bool prepared,noItems;public long[] hardware;public int[] research;
-        public int quality,efficiency,integration;public ItemInstance[] inventory;public string[] equipped;
+        public int quality,efficiency,integration;public int[] mastery;public string[] unknownMastery;public ItemInstance[] inventory;public string[] equipped;
         public NumberData intIncome,regularData,regularKnowledge,compute,income,data,knowledge,cycle;public double minutes,training,researchSpeed;
         public string[] nodes;public int[] axioms,models;public string active;public bool lab;public int resets,purchased;public int[] occupied;
     }
@@ -51,7 +51,7 @@ namespace IdleIntelligence.Tests
         public static GameState State(ItemV3Case row)
         {
             var s=Game.New(1000,"prepared-v3-reference");s.Hardware=(long[])row.hardware.Clone();s.Research=(int[])row.research.Clone();s.Quality=row.quality;s.Efficiency=row.efficiency;s.Workshop.integration=row.integration;
-            s.Workshop.inventory=row.inventory.Select(item=>item.Copy()).ToArray();s.Workshop.equipped=(string[])row.equipped.Clone();
+            s.Workshop.mastery=(int[])row.mastery.Clone();s.Workshop.inventory=row.inventory.Select(item=>item.Copy()).ToArray();s.Workshop.equipped=(string[])row.equipped.Clone();
             s.Workshop.nodes=(string[])row.nodes.Clone();s.Meta.axioms=(int[])row.axioms.Clone();s.Meta.models=(int[])row.models.Clone();s.Meta.resets=row.resets;s.Workshop.activeModel=row.active;s.Workshop.activeModelLevel=string.IsNullOrEmpty(row.active)?0:row.models[Array.FindIndex(MetaBalance.Models,m=>m.Id==row.active)];s.Prestige.lab=row.lab;s.Prestige.Cycle=ScientificNumber.FromData(row.cycle);
             s.Upgrades.purchasedLabs=row.purchased;foreach(var slot in row.occupied??Array.Empty<int>()){var job=new Job{id="materialAnalysis",slot=slot,required=999,key="prepared-research-"+slot};if(s.ResearchJob==null)s.ResearchJob=job;else s.Prestige.labs=s.Prestige.labs.Concat(new[]{job}).ToArray();}
             s.ItemSystemV3=new ItemV3State{dataProduced=ScientificNumber.FromData(row.regularData),knowledgeProduced=ScientificNumber.FromData(row.regularKnowledge),runMinutes=row.minutes};
@@ -252,6 +252,10 @@ namespace IdleIntelligence.Tests
         [Test]public void EveryHardwareMilestonePackageMatchesActualSourceGrant()
         {
             var rows=Cases().hardwarePackageCases;Assert.That(rows.Length,Is.EqualTo(360));foreach(var row in rows){var s=Game.New(1000,"prepared-package-reference");bool maximum=row.mode=="maximum-boot"||row.mode=="no-items";if(row.mode!="normal")s.ItemSystemV3=new ItemV3State();if(maximum)s.Workshop.nodes=new[]{"W08","W10"};s=PreparedHardwareItems(s,maximum);s.Workshop.hardwareRemainders=Enumerable.Repeat(.25,ItemBalance.ComponentIds.Length).ToArray();if(row.mode=="no-items")s.Challenges.Run=new ChallengeRun{id="no-items",stage=1};int hardware=Array.FindIndex(Balance.Hardware,h=>h.Id==row.hardware);s.Hardware[hardware]=row.threshold;Workshop.PaidHardware(s,hardware,row.threshold-1);string c=row.mode+" "+row.hardware+" "+row.threshold;Assert.That(s.Workshop.components,Is.EqualTo(row.components),c+" actual component wallet");Assert.That(s.Workshop.hardwareRemainders,Is.EqualTo(row.remainders).Within(1e-10),c+" fractional remainders");if(s.ItemSystemV3!=null)Near(s.ItemSystemV3.componentsProduced,row.counter,c+" actual K");else Assert.That(row.counter==null||row.counter.m==0,Is.True,c+" normal mode");var paid=(long[])s.Workshop.components.Clone();var counter=s.ItemSystemV3?.componentsProduced;Workshop.PaidHardware(s,hardware,row.threshold-1);Assert.That(s.Workshop.components,Is.EqualTo(paid),c+" duplicate ignored");if(counter!=null)Assert.That(s.ItemSystemV3.componentsProduced,Is.SameAs(counter),c+" no repeated receipt");}
+        }
+        [Test]public void BlueprintArchiveCountsKnownDistinctMasteriesOnly()
+        {
+            var rows=Cases().cases.Where(c=>c.name.StartsWith("blueprint-valid-",StringComparison.Ordinal)).ToArray();Assert.That(rows.Length,Is.EqualTo(6));double Rate(string name)=>Game.WorkSpeed(State(rows.First(c=>c.name=="blueprint-valid-"+name)),true);double baseline=Rate("zero");Assert.That(Rate("one")/baseline,Is.EqualTo(1+ItemV3Balance.Get("blueprint.perBlueprint")).Within(1e-12));Assert.That(Rate("higher-same"),Is.EqualTo(Rate("one")));Assert.That(Rate("two")/baseline,Is.EqualTo(1+2*ItemV3Balance.Get("blueprint.perBlueprint")).Within(1e-12));Assert.That(Rate("unknown-only"),Is.EqualTo(baseline));Assert.That(Rate("mixed"),Is.EqualTo(Rate("one")));Assert.That(rows.First(c=>c.name=="blueprint-valid-mixed").unknownMastery,Is.EquivalentTo(new[]{"foreign-blueprint","toString"}),"Unknown source metadata remains in fixture; this is not a V3 disk-import claim");
         }
         static GameState SharedChallengeMain(ItemV3Case row)
         {

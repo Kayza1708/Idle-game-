@@ -38,7 +38,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 28 | `experiment-controller` | offen | Bereichswechsel am bezahlten Start, gespeicherter Anfangsfortschritt |
 | 29 | `precision-scanner` | offen | normalisierte Fokusgewichte und reduzierter Mengenabschlag am Start |
 | 30 | `recycling-probe` | offen | irreversible Rare+-Zerlegung, Fraktionskonto statt zusätzlichem Zufallswurf |
-| 31 | `blueprint-archive` | Forschung aus unterschiedlichen gemeisterten Bauplänen | unbekannte IDs ausschließen, vollständige Slot-/Erwerbsprüfung |
+| 31 | `blueprint-archive` | Forschung aus unterschiedlichen bekannten eigenen Bauplanmeisterschaften≥1; unbekannte/geerbte Schlüssel ausgeschlossen | vollständige Slot-/Erwerbs-/V3-Dateimigrationsabnahme |
 | 32 | `protocol-controller` | offen | neue Mindestdauer bei Erstellung; alte Bonuszeit entfernen |
 | 33 | `photonic-analyzer` | offen | gültige Analyse-/Hardwarequellen, Snapshot und Fraktionen |
 | 34 | `quantum-diagnostic-module` | offen | gleiche Quellregeln, kein Freischalten gesperrter Familien |

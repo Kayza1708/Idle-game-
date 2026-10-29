@@ -166,7 +166,7 @@ export function itemWorkFactorV3(s:GameState,research:boolean){
   const {P,Q}=itemAbilityStrengthV3(s,item);
   if(!research&&item.type==='logic-seed')result=result.multiply(S.from(c().logic.base).pow(P).multiplyNumber(1+c().logic.perStreak*P*s.itemSystemV3!.learningStreak));
   if(!research&&item.type==='mnemonic-anchor')result=result.multiply(S.from(c().anchorMemory.base).pow(P).multiply(one().add(snapshot.U.divide(S.from(c().anchorMemory.upgradeScale))).pow(c().anchorMemory.exponent*Q)));
-  if(research&&item.type==='blueprint-archive')result=result.multiply(S.from(c().blueprint.base).pow(P).multiplyNumber(1+c().blueprint.perBlueprint*P*Object.values(s.blueprintMastery).filter(level=>level>=1).length));
+  if(research&&item.type==='blueprint-archive')result=result.multiply(S.from(c().blueprint.base).pow(P).multiplyNumber(1+c().blueprint.perBlueprint*P*Object.keys(BALANCE.itemRecipes).filter(id=>Object.hasOwn(s.blueprintMastery,id)&&s.blueprintMastery[id as Item['type']]>=1).length));
   if(research&&item.type==='cycle-observatory')result=result.multiply(S.from(c().cycle.base).pow(P).multiply(S.from(1+snapshot.Z).pow(c().cycle.exponent*Q)));
  }
  if(itemCombinationV3(s,'learning-spiral').pair)result=result.multiplyNumber(c().combinations.learning.speed);

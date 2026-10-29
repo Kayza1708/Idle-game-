@@ -282,3 +282,12 @@ Test-first zwei rote TS-Fälle belegten den fehlenden Effekt. Ein zusätzlicher 
 
 
 Diagnoseadapter-Abnahme:163Dateien/2.042Vitest(192,07s), Typecheck, Webbuild(1,48s), vollständiger Generatorvergleich grün.208/208vollständigeEditMode(78,002s). PlayMode zunächst10/11grün: die echte29s-Introaufnahme verlor nach etwa16Trainingsarbeitseinheiten den App-/Runtimefokus, Zustandszeit blieb stehen. Das ist kein Mechanikfehler: Fokuswiederkehr holte den regulären Fortschritt korrekt nach. Explizite UTC-/Fokus-/Fortschrittsspur ergänzt; kein privater Fokusoverride, keine Zeit-/Ressourceninjektion und keine erhöhte Zeitgrenze. Nach Nutzerbestätigung Unity über echte Titelleiste aktiviert und1/1derselbe frische Aufnahmetest bestanden(31,697s), Abschluss und normaler Save nachgewiesen. Gesamter11er-Lauf nicht pauschal als grün umetikettiert. Fokussierte Spur in diagnostics/intro-foreground-trace.txt. Kein neuer vollständigerPlayMode-/Gerätenachweis oder neuerV3-Clip. Weitere Material-/Arbeitsverbraucher, Katalogerwerb, Details und V3-Dateimigration bleiben offen.
+
+
+## 29.10.2026 – Bauplanarchiv: gültige unterschiedliche Meisterschaften
+
+Der tatsächliche TS-Forschungsverbraucher zählte bislang alle positiven Werte im Meisterschaftsobjekt, einschließlich fremder Importnamen. Er zählt nun ausschließlich eigene Einträge gültiger Rezept-IDs mit Meisterschaft≥1, jeden Bauplan einmal. Höhere Meisterschaft multipliziert diese Anzahl nicht. Originalobjekt und unbekannte Werte bleiben unverändert; keine stillschweigende Löschung oder erfundene Freischaltung.
+
+Sechs zusätzliche gemeinsame tatsächliche Forschungszustände (nun108Produktionsreferenzen) bilden gültige Meisterschaften explizit auf die native bekannte ID-Reihenfolge ab. Fremde Namen bleiben als Referenzmetadaten erhalten; dies ist kein vorweggenommener V3-Dateiimport. Native bekannte Meisterschaftsarrays und Sourceobjekte liefern dieselben Raten. Test-first1,09statt1,03 reproduziert, drei eigenständige Sourceverträge einschließlich geerbter Eigenschaften grün.
+
+Abnahme:164Dateien/2.045Vitest(180,87s), Typecheck, Webbuild(1,51s), vollständiger Generatorvergleich grün.209/209vollständigeEditMode(80,403s),3/3gezieltePlayMode(5,941s): echte Queue-/Speicher-/Importoriginal-/Story-/Reload-Routen. Keine neue visuelle Änderung, keine V3-Dateifreigabe, kein neuerPlayer. Weitere Arbeits-/Analyse-/Materialverbraucher und vollständige42er-Erwerbs-/Detail-/Migrationsabnahme offen.
