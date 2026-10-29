@@ -36,7 +36,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 26 | `data-prism` | Daten aus F ohne doppelte Projektzählung | Auftrags-/Reset-/Detailsabnahme |
 | 27 | `diagnostic-adapter` | variable Komponenten regulärer bezahlter Hardware-Meilensteine×(1+P); Bootstrapping/W08 einmal, feste Extras und alte Reste getrennt | vollständige V3-Details/Migration; Klassenupgrade-Erwerbsfrage bleibt separat |
 | 28 | `experiment-controller` | offen | Bereichswechsel am bezahlten Start, gespeicherter Anfangsfortschritt |
-| 29 | `precision-scanner` | normalisierte Fokusgewichte×(1+P), Mengenverlust/(1+P), tatsächlicher bezahlter Start speichert Gewichte/Menge; V3-Vorschau angebunden | vollständige V3-Dateimigration/Details; W03-Zielmenge/Rare-Garantie und Familienausbeute separat offen |
+| 29 | `precision-scanner` | normalisierte Fokusgewichte×(1+P), Mengenverlust/(1+P), tatsächlicher bezahlter Start speichert Gewichte/Menge; V3-Vorschau angebunden | vollständige V3-Dateimigration/Details; W03-Zielmenge/Rare-Garantie separat geprüft; weitere Familienausbeute offen |
 | 30 | `recycling-probe` | offen | irreversible Rare+-Zerlegung, Fraktionskonto statt zusätzlichem Zufallswurf |
 | 31 | `blueprint-archive` | Forschung aus unterschiedlichen bekannten eigenen Bauplanmeisterschaften≥1; unbekannte/geerbte Schlüssel ausgeschlossen | vollständige Slot-/Erwerbs-/V3-Dateimigrationsabnahme |
 | 32 | `protocol-controller` | offen | neue Mindestdauer bei Erstellung; alte Bonuszeit entfernen |
@@ -82,7 +82,7 @@ Die sechs neuen Namen erhalten ihre endgültigen dauerhaften IDs zusammen mit de
 
 ## Gemeinsame Prestigeabhängigkeiten
 
-Rechenpfade für H06–H10/T07 und zukünftige INT-Gewichte sind vorhanden. F07-Neustartpreis, F08-Aktivitätsfaktor und F10-Forschungsskalierung sind an tatsächliche Verbraucher angeschlossen; W03/W04/W07/W08, Tap-/Overdriveverträge, Automationserklärungen, alle Quell-/Materialverbraucher sowie die vollständigen Modellsekundärfähigkeiten müssen noch einzeln geprüft bzw. ergänzt werden. Einzelne zentral vorhandene neue Werte gelten nicht als fertiger Verbraucher.
+Rechenpfade für H06–H10/T07 und zukünftige INT-Gewichte sind vorhanden. F07-Neustartpreis, F08-Aktivitätsfaktor und F10-Forschungsskalierung sind an tatsächliche Verbraucher angeschlossen; W03/W08 sowie Tap-/Overdrive-Startverträge sind inzwischen separat an echte Verbraucher angeschlossen und geprüft (siehe aktuelle Implementierungsberichte). W04/W07, weitere Automationserklärungen, übrige Quell-/Materialverbraucher sowie die vollständigen Modellsekundärfähigkeiten müssen noch einzeln geprüft bzw. ergänzt werden. Einzelne zentral vorhandene neue Werte gelten nicht als fertiger Verbraucher.
 
 F02 bietet in der tatsächlichen aktuellen Quelle bereits sechs Plätze; die vorhandene Operationsforschung erweitert um zwei auf acht. Die neue Queueoberfläche erhält diese bestehenden Kapazitäten. Sie zeigt echte unbezahlte Pläne und schreibt keine fiktiven Reservierungen.
 

@@ -1,6 +1,6 @@
 // Generated from original commerce product contracts; no storefront prices.
 namespace IdleIntelligence.Core {public static class CommerceBalance {
-public const string SourceHash="5dfea12f0762ba49fd9b0012c78089001b51a4f5135c6cf1c2ad750feece6b7e";
+public const string SourceHash="bbbef7f20aa86e9d49e2a2c3a3622abdd6caeddfc502bda999d77642d47b6217";
 public const double IncomeMultiplier=2d;
 public static readonly CommerceProduct[] Products={
 new CommerceProduct("ai_singularity.season.01","season",true,0,new long[]{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}),

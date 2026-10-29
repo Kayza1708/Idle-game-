@@ -246,3 +246,6 @@ Bekannte unterschiedliche Meisterschaften in TS/native ausgerichtet; unbekannte/
 
 ### 29.10.: Präzisionsfokus geprüft
 Gewichte und Mengenverlust wirken beim tatsächlichen bezahlten Start; gespeicherte Aufträge durch späteres Ausrüsten nicht rückwirkend verbessert.120Startfälle/35Folgen,2.049Vitest,210vollständigeEditMode,5gezieltePlayMode grün. Weiter mit W03-Zielfamilie/zulässigerRare-Garantie sowie gültiger Photon-/Quantenausbeute und deren gespeicherten Verträgen; vollständigesV3 vor Xcode unverändert offen.
+
+### 29.10.: W03-Zielfamilie geprüft
+Bezahlte Faktoren/Mindestfund über Fokuswechsel und Axiomreset erhalten; keine gesperrte Graphengarantie bei neuen V3-Aufträgen.2.055Vitest/211volleEditMode/7PlayMode plus2finaleUIprüfungen,22Bilder; DE/EN320/390/430 selbstgesehen. Weiter mit W04-Levelkosten, gültiger Photon-/Quantenausbeute und deren gespeicherten Verträgen; kein Xcode-Zwischenbuild.

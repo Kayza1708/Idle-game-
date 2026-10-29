@@ -1,5 +1,5 @@
 {
-  "sourceHash": "26ea3947788247bedbb082ca017a8310c1b7d36ee9dc6c8c9b1370b20c4378bc",
+  "sourceHash": "8650e8e61333b3fa29da0d50b8cfab946736727e3b738234ad2a0042b915cf9a",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
@@ -31685,6 +31685,4287 @@
   ],
   "componentFlows": [
     {
+      "name": "W03-locked-rare-not-injected",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 2,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "buy-W03",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "prepare-focus",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 19.200000000000003,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 3.2,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            10,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 3.2,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            10,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W03-unlocked-photonic-rare-and-target",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 2,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "buy-W03",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "research-photonic",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "prepare-focus",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "focus-semiconductor",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            8,
+            10,
+            0,
+            2,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            1,
+            2,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            1,
+            1,
+            3,
+            3,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            3,
+            3,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            8,
+            10,
+            0,
+            2,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1201020,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 8.5,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            33,
+            14,
+            12,
+            6,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            9,
+            10,
+            4,
+            6,
+            0,
+            19,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W03-frontier-fallback-not-graphene",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 2,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "buy-W03",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "research-frontier",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "nanotubes",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 24,
+          "analysisWeights": [
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.5,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.5,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            7,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W03-late-purchase-does-not-change-paid-start",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 2,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "research-photonic",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "prepare-focus",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "buy-W03",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.3,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            5,
+            0,
+            2,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 2.3,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            5,
+            0,
+            2,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1201020,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 6.2,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            40,
+            22,
+            2,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            10,
+            9,
+            3,
+            7,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "W03-paid-terms-survive-axiom-reset",
+      "v3": true,
+      "C01": 0,
+      "C06": 0,
+      "W08": 2,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "buy-W03",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "research-photonic",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "prepare-focus",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1.00000000001,
+            "e": 11,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 9.999999999,
+            "e": 11,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999975,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "axiom",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "graphene",
+          "analysisFamilyFactors": [
+            2,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 23.808,
+          "analysisWeights": [
+            3,
+            3,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 1000,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 1,
+            "e": 3,
+            "terms": null
+          },
+          "analysis": true,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "finish",
+          "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            8,
+            10,
+            0,
+            2,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 1,
+            "e": 3,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "analysisUnits": 0,
+          "analysisWeights": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "at": 601010,
+          "intIncome": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "cycleINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "freeINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "synthesisRemainders": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "synthesisReceipt": "",
+          "synthesisComponent": "",
+          "synthesisMultiplier": 0,
+          "synthesisSpeed": 1,
+          "fabricationSpeed": 1,
+          "scannerAnalyses": 0,
+          "analysisSpeed": 1,
+          "counter": {
+            "m": 4,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            2,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            8,
+            10,
+            0,
+            2,
+            0,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 1,
+            "e": 3,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        }
+      ]
+    },
+    {
       "name": "precision-paid-snapshot-then-unequip",
       "v3": true,
       "C01": 0,
@@ -31694,6 +35975,15 @@
       "steps": [
         {
           "action": "prepare-focus",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -31817,6 +36107,15 @@
         },
         {
           "action": "precision-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -31940,6 +36239,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 21.6,
           "analysisWeights": [
             6,
@@ -32063,6 +36371,15 @@
         },
         {
           "action": "precision-unequip",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 21.6,
           "analysisWeights": [
             6,
@@ -32187,6 +36504,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -32310,6 +36636,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -32433,6 +36768,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 19.200000000000003,
           "analysisWeights": [
             3,
@@ -32557,6 +36901,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -32690,6 +37043,15 @@
       "steps": [
         {
           "action": "prepare-focus",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -32813,6 +37175,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 19.200000000000003,
           "analysisWeights": [
             3,
@@ -32936,6 +37307,15 @@
         },
         {
           "action": "precision-equip",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 19.200000000000003,
           "analysisWeights": [
             3,
@@ -33060,6 +37440,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -33183,6 +37572,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 21.6,
           "analysisWeights": [
             6,
@@ -33307,6 +37705,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -33440,6 +37847,15 @@
       "steps": [
         {
           "action": "prepare-focus",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -33563,6 +37979,15 @@
         },
         {
           "action": "precision-maximum",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -33686,6 +38111,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 23.09904498768695,
           "analysisWeights": [
             15.983040000000003,
@@ -33810,6 +38244,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -33933,6 +38376,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -34066,6 +38518,15 @@
       "steps": [
         {
           "action": "seed-rests",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -34189,6 +38650,15 @@
         },
         {
           "action": "diagnostic-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -34313,6 +38783,15 @@
         {
           "action": "hardware",
           "amount": 25,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -34453,6 +38932,15 @@
         },
         {
           "action": "duplicate-package",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -34594,6 +39082,15 @@
         {
           "action": "hardware",
           "amount": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -34734,6 +39231,15 @@
         },
         {
           "action": "gift",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -34874,6 +39380,15 @@
         },
         {
           "action": "shop",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35014,6 +39529,15 @@
         },
         {
           "action": "diagnostic-unequip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35155,6 +39679,15 @@
         {
           "action": "hardware",
           "amount": 24,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35313,6 +39846,15 @@
       "steps": [
         {
           "action": "boot-maximum",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35436,6 +39978,15 @@
         },
         {
           "action": "seed-rests",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35560,6 +40111,15 @@
         {
           "action": "hardware",
           "amount": 25,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35700,6 +40260,15 @@
         },
         {
           "action": "duplicate-package",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35840,6 +40409,15 @@
         },
         {
           "action": "prestige",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -35964,6 +40542,15 @@
         {
           "action": "hardware",
           "amount": 25,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -36087,6 +40674,15 @@
         },
         {
           "action": "axiom",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -36211,6 +40807,15 @@
         {
           "action": "hardware",
           "amount": 25,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -36344,6 +40949,15 @@
       "steps": [
         {
           "action": "diagnostic-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -36464,6 +41078,15 @@
         {
           "action": "hardware",
           "amount": 25,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -36600,6 +41223,15 @@
         },
         {
           "action": "duplicate-package",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -36746,6 +41378,15 @@
       "steps": [
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -36870,6 +41511,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -36993,6 +41643,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37117,6 +41776,15 @@
         {
           "action": "finish",
           "seconds": 0,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37250,6 +41918,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37374,6 +42051,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37497,6 +42183,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37620,6 +42315,15 @@
         },
         {
           "action": "prestige",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37743,6 +42447,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37867,6 +42580,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -37990,6 +42712,15 @@
         },
         {
           "action": "axiom",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -38124,6 +42855,15 @@
         {
           "action": "hardware",
           "amount": 25,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -38265,6 +43005,15 @@
         {
           "action": "advance",
           "seconds": 7201,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -38430,6 +43179,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -38596,6 +43354,15 @@
         {
           "action": "hardware",
           "amount": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -38771,6 +43538,15 @@
       "steps": [
         {
           "action": "gift",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -38894,6 +43670,15 @@
         },
         {
           "action": "shop",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -39017,6 +43802,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -39140,6 +43934,15 @@
         },
         {
           "action": "cancel",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -39264,6 +44067,15 @@
         {
           "action": "advance",
           "seconds": 60,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -39397,6 +44209,15 @@
       "steps": [
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -39520,6 +44341,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -39644,6 +44474,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -39767,6 +44606,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -39891,6 +44739,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40024,6 +44881,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40148,6 +45014,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40272,6 +45147,15 @@
         {
           "action": "axiom",
           "pending": true,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40395,6 +45279,15 @@
         },
         {
           "action": "axiom",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40528,6 +45421,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40648,6 +45550,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40767,6 +45678,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -40896,6 +45816,15 @@
       "steps": [
         {
           "action": "analysis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -41016,6 +45945,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -41135,6 +46073,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -41265,6 +46212,15 @@
         {
           "action": "hardware",
           "amount": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -41389,6 +46345,15 @@
         {
           "action": "advance",
           "seconds": 10799,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -41529,6 +46494,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -41670,6 +46644,15 @@
         {
           "action": "advance",
           "seconds": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -41821,6 +46804,15 @@
         {
           "action": "hardware",
           "amount": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -41945,6 +46937,15 @@
         {
           "action": "advance",
           "seconds": 10799,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -42085,6 +47086,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -42226,6 +47236,15 @@
         {
           "action": "advance",
           "seconds": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -42377,6 +47396,15 @@
         {
           "action": "hardware",
           "amount": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -42501,6 +47529,15 @@
         {
           "action": "advance",
           "seconds": 10799,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -42641,6 +47678,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -42782,6 +47828,15 @@
         {
           "action": "advance",
           "seconds": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -42932,6 +47987,15 @@
       "steps": [
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -43055,6 +48119,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -43179,6 +48252,15 @@
         {
           "action": "finish",
           "seconds": 300.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -43302,6 +48384,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -43425,6 +48516,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -43549,6 +48649,15 @@
         {
           "action": "finish",
           "seconds": 285.72428571428566,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -43672,6 +48781,15 @@
         },
         {
           "action": "scanner-unequip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -43795,6 +48913,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -43919,6 +49046,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -44042,6 +49178,15 @@
         },
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -44175,6 +49320,15 @@
       "steps": [
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -44298,6 +49452,15 @@
         },
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -44422,6 +49585,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -44545,6 +49717,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -44668,6 +49849,15 @@
         },
         {
           "action": "scanner-unequip",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -44792,6 +49982,15 @@
         {
           "action": "finish",
           "seconds": 285.72428571428566,
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -44915,6 +50114,15 @@
         },
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -45048,6 +50256,15 @@
       "steps": [
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -45171,6 +50388,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -45294,6 +50520,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -45417,6 +50652,15 @@
         },
         {
           "action": "cancel",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -45540,6 +50784,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -45663,6 +50916,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -45787,6 +51049,15 @@
         {
           "action": "finish",
           "seconds": 300.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -45920,6 +51191,15 @@
       "steps": [
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -46043,6 +51323,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -46167,6 +51456,15 @@
         {
           "action": "finish",
           "seconds": 300.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -46290,6 +51588,15 @@
         },
         {
           "action": "prestige",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -46413,6 +51720,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -46537,6 +51853,15 @@
         {
           "action": "finish",
           "seconds": 300.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -46660,6 +51985,15 @@
         },
         {
           "action": "axiom",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -46793,6 +52127,15 @@
       "steps": [
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -46916,6 +52259,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -47040,6 +52392,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -47163,6 +52524,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -47296,6 +52666,15 @@
       "steps": [
         {
           "action": "scanner-equip",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -47415,6 +52794,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -47535,6 +52923,15 @@
         {
           "action": "finish",
           "seconds": 555.5655555555555,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -47654,6 +53051,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -47783,6 +53189,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -47907,6 +53322,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48030,6 +53454,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48153,6 +53586,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48277,6 +53719,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48400,6 +53851,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48524,6 +53984,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48647,6 +54116,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48771,6 +54249,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -48904,6 +54391,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49028,6 +54524,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49151,6 +54656,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49274,6 +54788,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49398,6 +54921,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49521,6 +55053,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49645,6 +55186,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49768,6 +55318,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -49892,6 +55451,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50025,6 +55593,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50149,6 +55726,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50272,6 +55858,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50395,6 +55990,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50519,6 +56123,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50642,6 +56255,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50766,6 +56388,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -50889,6 +56520,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51013,6 +56653,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51146,6 +56795,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51269,6 +56927,15 @@
         },
         {
           "action": "buy-C06",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51393,6 +57060,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51516,6 +57192,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51640,6 +57325,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51773,6 +57467,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -51896,6 +57599,15 @@
         },
         {
           "action": "prestige",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52020,6 +57732,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52143,6 +57864,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52276,6 +58006,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52399,6 +58138,15 @@
         },
         {
           "action": "axiom",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52523,6 +58271,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52646,6 +58403,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52779,6 +58545,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -52902,6 +58677,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -53026,6 +58810,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -53159,6 +58952,15 @@
       "steps": [
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -53278,6 +59080,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -53398,6 +59209,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -53527,6 +59347,15 @@
       "steps": [
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -53651,6 +59480,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -53774,6 +59612,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -53898,6 +59745,15 @@
         {
           "action": "hardware",
           "amount": 25,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -54039,6 +59895,15 @@
         {
           "action": "hardware",
           "amount": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -54189,6 +60054,15 @@
       "steps": [
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -54312,6 +60186,15 @@
         },
         {
           "action": "buy-W08",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -54436,6 +60319,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -54559,6 +60451,15 @@
         },
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -54683,6 +60584,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -54816,6 +60726,15 @@
       "steps": [
         {
           "action": "gift",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -54939,6 +60858,15 @@
         },
         {
           "action": "shop",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -55062,6 +60990,15 @@
         },
         {
           "action": "synthesis",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -55186,6 +61123,15 @@
         {
           "action": "finish",
           "seconds": 60.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -55310,6 +61256,15 @@
         {
           "action": "hardware",
           "amount": 1,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -55434,6 +61389,15 @@
         {
           "action": "advance",
           "seconds": 7201,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -55603,6 +61567,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -55782,6 +61755,15 @@
       "steps": [
         {
           "action": "analysis",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -55905,6 +61887,15 @@
         },
         {
           "action": "prestige",
+          "analysisFamilyVersion": 1,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 24,
           "analysisWeights": [
             1,
@@ -56029,6 +62020,15 @@
         {
           "action": "finish",
           "seconds": 600.01,
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,
@@ -56152,6 +62152,15 @@
         },
         {
           "action": "repeat",
+          "analysisFamilyVersion": 0,
+          "analysisRare": "",
+          "analysisFamilyFactors": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
           "analysisUnits": 0,
           "analysisWeights": [
             0,

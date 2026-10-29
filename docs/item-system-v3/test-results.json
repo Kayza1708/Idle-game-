@@ -723,5 +723,48 @@
       "result": "Passed",
       "xmlSha256": "5f8a80415700d740ea67d8e4cc84bde1a81cddec403764e603af5f81267c3414"
     }
+  },
+  "targetedAnalysisW03": {
+    "sourceHash": "8650e8e61333b3fa29da0d50b8cfab946736727e3b738234ad2a0042b915cf9a",
+    "componentFlows": 40,
+    "newSourceContracts": 6,
+    "vitest": {
+      "files": 166,
+      "tests": 2055,
+      "passed": 2055,
+      "failed": 0,
+      "seconds": 185.57,
+      "log": "/tmp/idle-v3-W03-full-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "211",
+      "passed": "211",
+      "failed": "0",
+      "duration": "80.0833174",
+      "result": "Passed",
+      "xmlSha256": "abb5263d5dea7b206826ca086b120cbd87f7c00dcb24169dc080b7cb07f0f32d"
+    },
+    "targetedPlayMode": {
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "duration": "11.2347504",
+      "result": "Passed",
+      "xmlSha256": "8c98b15058db573dc776582c6046f72c59e2d8a182ce2dae09a18c00e3fbf2ed"
+    },
+    "finalLocalizedUI": {
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "duration": "5.7547191",
+      "result": "Passed",
+      "xmlSha256": "465d223d5248a32aef58db9450b457b0532599bd545e13d60c7d8812ea986608"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning;1.56s",
+    "generatorCheck": "passed full; final wording rechecked targeted",
+    "graphics": "22 actual Unity captures; 6/6 final DE/EN analysis images 320/390/430 self-inspected, node details representative DE/EN; seven locale fit assertions. Financed read-only V3 projection, original normal save unchanged. No device/full migration claim.",
+    "scope": "Only stored W03 family multiplier and already unlocked rare guarantee; legacy paid rights kept; global K10 quantity remains live; Photon/Quantum family items still open",
+    "finalWording": "Base draws/Grundmenge disambiguates quantity from base material family; 2 UI and 6 source cases rerun after wording-only change"
   }
 }

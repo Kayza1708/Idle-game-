@@ -2,7 +2,15 @@ import {itemSynthesisOutputV3} from './itemSystemV3';
 import {BALANCE,type GameState,type ComponentId} from './economy';
 import {type Language} from './i18n';
 /** Presentation only. All numerical values come from the same balance as the consumer. */
-const descriptions={C01:{
+const descriptions={W03:{
+ en:'New paid analyses: selected unlocked focus family ×{focus}. Rare minimum only from an unlocked family; no locked graphene. Start terms stay fixed.',
+ de:'Neue bezahlte Analysen: gewählte freigeschaltete Fokusfamilie ×{focus}. Seltene Mindestkomponente nur aus freigeschalteter Familie; kein gesperrtes Graphen. Startvertrag bleibt fest.',
+ es:'Nuevos análisis pagados: familia de enfoque elegida y desbloqueada ×{focus}. Mínimo raro solo de familias desbloqueadas. Condiciones fijadas al iniciar.',
+ fr:'Nouvelles analyses payées : famille ciblée débloquée ×{focus}. Minimum rare uniquement dans une famille débloquée. Conditions fixées au départ.',
+ pt:'Novas análises pagas: família de foco escolhida e liberada ×{focus}. Mínimo raro apenas de família liberada. Condições fixadas no início.',
+ it:'Nuove analisi pagate: famiglia scelta e sbloccata ×{focus}. Minimo raro solo da famiglie sbloccate. Condizioni fissate alla partenza.',
+ pl:'Nowe płatne analizy: wybrana odblokowana rodzina ×{focus}. Minimum rzadkie tylko z odblokowanej rodziny. Warunki ustalone przy starcie.',
+},C01:{
  en:'Passive component quantity by level: {values}. Replaces the previous bonus; applies only to regular passive finds.',
  de:'Passive Komponentenmenge je Stufe: {values}. Ersetzt den bisherigen Bonus; gilt nur für reguläre passive Funde.',
  es:'Cantidad de componentes pasivos por nivel: {values}. Sustituye la bonificación anterior; solo se aplica a hallazgos pasivos regulares.',
@@ -47,7 +55,7 @@ export const prestigeV3DescriptionIds=Object.keys(descriptions);
 export function prestigeV3Description(id:string,language:Language){
  if(!Object.hasOwn(descriptions,id))return null;
  const row=descriptions[id as keyof typeof descriptions],values=id==='C01'||id==='C06'?BALANCE.prestigeV3.axioms[id].map(n=>'×'+new Intl.NumberFormat(language).format(n)).join(' / '):'';
- const fmt=new Intl.NumberFormat(language);return row[language].replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
+ const fmt=new Intl.NumberFormat(language);return row[language].replace('{focus}',fmt.format(BALANCE.prestigeV3.items.W03focus)).replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
 }
 
 export const synthesisOutputCopy={
@@ -65,3 +73,8 @@ export const prestigeV3Names={W08:{en:'Workshop network',de:'Werkstattverbund',e
 export function prestigeV3Name(id:string,language:Language){return Object.hasOwn(prestigeV3Names,id)?prestigeV3Names[id as keyof typeof prestigeV3Names][language]:null;}
 
 export const analysisYieldLabels={en:'Yield fixed at start',de:'Ausbeute beim Start',es:'Rendimiento fijado al iniciar',fr:'Rendement fixé au départ',pt:'Rendimento fixado no início',it:'Resa fissata all’avvio',pl:'Wydajność ustalona na starcie'} satisfies Record<Language,string>;
+
+export const analysisFamilyCopy={
+ de:['Basis','Halbleiter','Photonik','Frontier','Quanten'],en:['Basic','Semiconductor','Photonic','Frontier','Quantum'],es:['Básicos','Semiconductores','Fotónica','Frontera','Cuántica'],fr:['Base','Semi-conducteurs','Photonique','Frontière','Quantique'],pt:['Básicos','Semicondutores','Fotônica','Fronteira','Quântica'],it:['Base','Semiconduttori','Fotonica','Frontiera','Quantistica'],pl:['Podstawowe','Półprzewodniki','Fotonika','Granica','Kwantowe'],
+} satisfies Record<Language,string[]>;
+export const analysisBaseCopy={de:'Grundmenge',en:'Base draws',es:'Cantidad base',fr:'Quantité de base',pt:'Quantidade base',it:'Quantità base',pl:'Ilość bazowa'} satisfies Record<Language,string>;

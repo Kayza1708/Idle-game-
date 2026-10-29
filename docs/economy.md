@@ -822,3 +822,6 @@ Vorhandene spezifizierte Werte aus `BALANCE.itemV3`: variable reguläre Paketkom
 
 ### 29.10.2026 – V3-Präzisionsscanner
 Bestehender spezifizierter Faktor1+Fähigkeits-P aus zentralem `BALANCE.itemV3.focus.coefficient`: Fokusgewicht multiplizieren und danach normieren; bestehender Mengenverlust `(1-materialFocusQuantity)` durch1+P. Tatsächliche verfügbare Tabelle und Menge beim bezahlten Start einfrieren. Keine neue Konstante, keine neue Freischaltung und keine Erhöhung allgemeiner Fundchancen. V3-Vorschau der Basisziehung verwendet denselben Vertrag, alte normale Regeln erhalten.
+
+### 29.10.2026 – beauftragter V3-W03-Startvertrag
+W03 verdoppelt ausschließlich die beim bezahlten Analysestart gewählte/verfügbare Fokusfamilie. Mindestfund nur aus bereits freigeschalteten seltenen Familien: vorhandene Graphenpräferenz, sonst erste zulässige Komponente der bestehenden Reihenfolge, andernfalls keiner. Keine Freischaltung durch die Garantie. Alte bezahlte Verträge ohne neuen Marker behalten ihre zugesagten Regeln. Faktoren und Kandidat werden beim Start fixiert und beim Abschluss validiert; globaler K10-Mengenverbrauch bleibt separat offen. Normale Regeln unverändert. Quelle bleibt `src/economy.ts` (`prestigeV3.items.W03focus`).
