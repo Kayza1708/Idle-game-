@@ -15,7 +15,7 @@ export function prestigeEffectOverridesV3(){const v=c();return{
  W05:v.items.W05,W09:v.items.W09,W10:v.items.W10,
  S04:v.tap.S04,S07:v.tap.S07,S09:v.tap.S09,
  I01:v.int.I01,I08:v.int.I08,I09:v.int.I09,
- A04:v.axioms.A04,B03:v.axioms.B03,B05:v.axioms.B05,archiveINT:v.axioms.C01[0]-1,
+ A04:v.axioms.A04,B03:v.axioms.B03,B05:v.axioms.B05,
 };}
 export function progressionEffectsV3(s:GameState){return usesItemV3(s)?{...BALANCE.progression.effects,...prestigeEffectOverridesV3()}:BALANCE.progression.effects;}
 export function prestigeHardwareFirstV3(s:GameState){
@@ -63,4 +63,9 @@ export function prestigeResearchActivityV3(s:GameState){
 }
 export function prestigeResearchDataV3(s:GameState){
  return usesItemV3(s)&&hasProgressionNode(s,'F10')?one().add(itemV3Snapshot(s).F.divide(S.from(c().research.F10scale))).pow(c().research.F10exponent):one();
+}
+
+/** Actual passive producer, not the old insight-archive item multiplier. */
+export function prestigePassiveComponentsV3(s:GameState){
+ const level=axiomLevel(s,'C01');if(!level)return 1;const factor=c().axioms.C01[level-1];if(factor===undefined)throw new RangeError('Invalid C01 level');return factor;
 }

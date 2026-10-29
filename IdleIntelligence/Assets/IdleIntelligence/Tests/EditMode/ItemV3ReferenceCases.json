@@ -1,5 +1,5 @@
 {
-  "sourceHash": "1ee8c1a935a2499797a29396f335f744eb5b8c194a9cfb829f72a366199db11c",
+  "sourceHash": "ed0260502f3da62363cb6926205c36ab49beed54b4eb5b2b01ec9bf769cbb6b3",
   "prepared": true,
   "productionEnabled": false,
   "cases": [
@@ -19421,6 +19421,7 @@
     {
       "name": "paid-analysis-once",
       "v3": true,
+      "C01": 0,
       "prepared": true,
       "steps": [
         {
@@ -19464,6 +19465,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": true,
           "synthesis": false,
           "prestiges": 0,
@@ -19511,6 +19522,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -19557,6 +19578,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -19604,6 +19635,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -19614,6 +19655,7 @@
     {
       "name": "paid-synthesis-reset-boundaries",
       "v3": true,
+      "C01": 0,
       "prepared": true,
       "steps": [
         {
@@ -19657,6 +19699,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": true,
           "prestiges": 0,
@@ -19704,6 +19756,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -19750,6 +19812,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -19796,6 +19868,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 2,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 1,
@@ -19842,6 +19924,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 2,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": true,
           "prestiges": 1,
@@ -19889,6 +19981,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 2,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 1,
@@ -19935,6 +20037,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 1,
+            "e": 3,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 1,
@@ -19945,6 +20057,7 @@
     {
       "name": "paid-packages-and-regular-passive",
       "v3": true,
+      "C01": 0,
       "prepared": true,
       "steps": [
         {
@@ -20006,6 +20119,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20013,15 +20136,15 @@
         },
         {
           "action": "advance",
-          "seconds": 180,
-          "at": 181000,
+          "seconds": 7201,
+          "at": 7202000,
           "counter": {
-            "m": 2,
+            "m": 2.2,
             "e": 1,
             "terms": null
           },
           "components": [
-            32,
+            34,
             12,
             0,
             2,
@@ -20043,24 +20166,24 @@
             0
           ],
           "credits": {
-            "m": 1.0000000035110672,
+            "m": 1.0000003113678753,
             "e": 12,
             "terms": [
               {
                 "index": -3,
-                "value": 7500000
+                "value": 3375000
               },
               {
                 "index": -2,
-                "value": -3663390
+                "value": -3661020
               },
               {
                 "index": -1,
-                "value": 671618
+                "value": 8751618
               },
               {
                 "index": 0,
-                "value": 3511
+                "value": 311367
               },
               {
                 "index": 1,
@@ -20069,24 +20192,24 @@
             ]
           },
           "data": {
-            "m": 1.0000000001220848,
+            "m": 1.0000000048840672,
             "e": 12,
             "terms": [
               {
                 "index": -3,
-                "value": 4000000
+                "value": 5300000
               },
               {
                 "index": -2,
-                "value": 8531255
+                "value": 6464278
               },
               {
                 "index": -1,
-                "value": 847213
+                "value": 671038
               },
               {
                 "index": 0,
-                "value": 122
+                "value": 4884
               },
               {
                 "index": 1,
@@ -20095,6 +20218,16 @@
             ]
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20102,14 +20235,14 @@
         },
         {
           "action": "repeat",
-          "at": 181000,
+          "at": 7202000,
           "counter": {
-            "m": 2,
+            "m": 2.2,
             "e": 1,
             "terms": null
           },
           "components": [
-            32,
+            34,
             12,
             0,
             2,
@@ -20131,24 +20264,24 @@
             0
           ],
           "credits": {
-            "m": 1.0000000035110672,
+            "m": 1.0000003113678753,
             "e": 12,
             "terms": [
               {
                 "index": -3,
-                "value": 7500000
+                "value": 3375000
               },
               {
                 "index": -2,
-                "value": -3663390
+                "value": -3661020
               },
               {
                 "index": -1,
-                "value": 671618
+                "value": 8751618
               },
               {
                 "index": 0,
-                "value": 3511
+                "value": 311367
               },
               {
                 "index": 1,
@@ -20157,24 +20290,24 @@
             ]
           },
           "data": {
-            "m": 1.0000000001220848,
+            "m": 1.0000000048840672,
             "e": 12,
             "terms": [
               {
                 "index": -3,
-                "value": 4000000
+                "value": 5300000
               },
               {
                 "index": -2,
-                "value": 8531255
+                "value": 6464278
               },
               {
                 "index": -1,
-                "value": 847213
+                "value": 671038
               },
               {
                 "index": 0,
-                "value": 122
+                "value": 4884
               },
               {
                 "index": 1,
@@ -20183,6 +20316,16 @@
             ]
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20191,14 +20334,14 @@
         {
           "action": "hardware",
           "amount": 1,
-          "at": 181000,
+          "at": 7202000,
           "counter": {
-            "m": 2,
+            "m": 2.2,
             "e": 1,
             "terms": null
           },
           "components": [
-            32,
+            34,
             12,
             0,
             2,
@@ -20220,24 +20363,24 @@
             0
           ],
           "credits": {
-            "m": 1.0000000027511995,
+            "m": 1.0000003106080075,
             "e": 12,
             "terms": [
               {
                 "index": -3,
-                "value": 7500000
+                "value": 3375000
               },
               {
                 "index": -2,
-                "value": -3686145
+                "value": -3683775
               },
               {
                 "index": -1,
-                "value": -8002207
+                "value": 77793
               },
               {
                 "index": 0,
-                "value": 2752
+                "value": 310608
               },
               {
                 "index": 1,
@@ -20246,24 +20389,24 @@
             ]
           },
           "data": {
-            "m": 1.0000000001220848,
+            "m": 1.0000000048840672,
             "e": 12,
             "terms": [
               {
                 "index": -3,
-                "value": 4000000
+                "value": 5300000
               },
               {
                 "index": -2,
-                "value": 8531255
+                "value": 6464278
               },
               {
                 "index": -1,
-                "value": 847213
+                "value": 671038
               },
               {
                 "index": 0,
-                "value": 122
+                "value": 4884
               },
               {
                 "index": 1,
@@ -20272,6 +20415,16 @@
             ]
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20282,6 +20435,7 @@
     {
       "name": "shop-and-gifts-are-not-production",
       "v3": true,
+      "C01": 0,
       "prepared": true,
       "steps": [
         {
@@ -20325,6 +20479,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20371,6 +20535,16 @@
             "terms": null
           },
           "gems": 970,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20417,6 +20591,16 @@
             "terms": null
           },
           "gems": 970,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": true,
           "synthesis": false,
           "prestiges": 0,
@@ -20463,6 +20647,16 @@
             "terms": null
           },
           "gems": 970,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20510,6 +20704,16 @@
             "terms": null
           },
           "gems": 970,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20520,6 +20724,7 @@
     {
       "name": "refused-second-analysis-is-not-paid-twice",
       "v3": true,
+      "C01": 0,
       "prepared": true,
       "steps": [
         {
@@ -20563,6 +20768,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": true,
           "synthesis": false,
           "prestiges": 0,
@@ -20609,6 +20824,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": true,
           "synthesis": false,
           "prestiges": 0,
@@ -20656,6 +20881,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20702,6 +20937,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": true,
           "synthesis": false,
           "prestiges": 0,
@@ -20749,6 +20994,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20757,8 +21012,243 @@
       ]
     },
     {
+      "name": "claimed-pending-and-successive-axiom-budgets",
+      "v3": true,
+      "C01": 0,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "synthesis",
+          "at": 1000,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": true,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "finish",
+          "seconds": 60.01,
+          "at": 61010,
+          "counter": {
+            "m": 1,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "data": {
+            "m": 9.9999999995,
+            "e": 11,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 0
+        },
+        {
+          "action": "axiom",
+          "pending": true,
+          "at": 61010,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 2,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 1.414,
+            "e": 3,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "axiom",
+          "at": 61010,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            32,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 5,
+            "e": 1,
+            "terms": null
+          },
+          "data": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 3,
+            "e": 12,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 1.44,
+            "e": 3,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 2
+        }
+      ]
+    },
+    {
       "name": "normal-first-synthesis-and-starter-gift",
       "v3": false,
+      "C01": 0,
       "prepared": true,
       "steps": [
         {
@@ -20798,6 +21288,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": true,
           "prestiges": 0,
@@ -20841,6 +21341,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20883,6 +21393,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -20893,6 +21413,7 @@
     {
       "name": "normal-analysis-contract-unchanged",
       "v3": false,
+      "C01": 0,
       "prepared": true,
       "steps": [
         {
@@ -20932,6 +21453,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": true,
           "synthesis": false,
           "prestiges": 0,
@@ -20975,6 +21506,16 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
@@ -21017,10 +21558,878 @@
             "terms": null
           },
           "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
           "analysis": false,
           "synthesis": false,
           "prestiges": 0,
           "axioms": 0
+        }
+      ]
+    },
+    {
+      "name": "C01-passive-level-1",
+      "v3": true,
+      "C01": 1,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "hardware",
+          "amount": 1,
+          "at": 1000,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.99999999985,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.98,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "advance",
+          "seconds": 10799,
+          "at": 10800000,
+          "counter": {
+            "m": 4,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            36,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.01460782186365,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2640500
+              },
+              {
+                "index": -1,
+                "value": 6499956
+              },
+              {
+                "index": 0,
+                "value": 7821863
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000010799,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.98,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "repeat",
+          "at": 10800000,
+          "counter": {
+            "m": 4,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            36,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.01460782186365,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2640500
+              },
+              {
+                "index": -1,
+                "value": 6499956
+              },
+              {
+                "index": 0,
+                "value": 7821863
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000010799,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.98,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "advance",
+          "seconds": 1,
+          "at": 10801000,
+          "counter": {
+            "m": 6,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            38,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.014609174565,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2600000
+              },
+              {
+                "index": -1,
+                "value": 9999956
+              },
+              {
+                "index": 0,
+                "value": 9174564
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.00000000108,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.98,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        }
+      ]
+    },
+    {
+      "name": "C01-passive-level-2",
+      "v3": true,
+      "C01": 2,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "hardware",
+          "amount": 1,
+          "at": 1000,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.99999999985,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.92,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "advance",
+          "seconds": 10799,
+          "at": 10800000,
+          "counter": {
+            "m": 6,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            38,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.01460782186365,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2640500
+              },
+              {
+                "index": -1,
+                "value": 6499956
+              },
+              {
+                "index": 0,
+                "value": 7821863
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000010799,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.92,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "repeat",
+          "at": 10800000,
+          "counter": {
+            "m": 6,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            38,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.01460782186365,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2640500
+              },
+              {
+                "index": -1,
+                "value": 6499956
+              },
+              {
+                "index": 0,
+                "value": 7821863
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000010799,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.92,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "advance",
+          "seconds": 1,
+          "at": 10801000,
+          "counter": {
+            "m": 9,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            41,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.014609174565,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2600000
+              },
+              {
+                "index": -1,
+                "value": 9999956
+              },
+              {
+                "index": 0,
+                "value": 9174564
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.00000000108,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.92,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        }
+      ]
+    },
+    {
+      "name": "C01-passive-level-3",
+      "v3": true,
+      "C01": 3,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "hardware",
+          "amount": 1,
+          "at": 1000,
+          "counter": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 9.99999999985,
+            "e": 11,
+            "terms": null
+          },
+          "data": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.74,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "advance",
+          "seconds": 10799,
+          "at": 10800000,
+          "counter": {
+            "m": 8,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            40,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.01460782186365,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2640500
+              },
+              {
+                "index": -1,
+                "value": 6499956
+              },
+              {
+                "index": 0,
+                "value": 7821863
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000010799,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.74,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "repeat",
+          "at": 10800000,
+          "counter": {
+            "m": 8,
+            "e": 0,
+            "terms": null
+          },
+          "components": [
+            40,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.01460782186365,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2640500
+              },
+              {
+                "index": -1,
+                "value": 6499956
+              },
+              {
+                "index": 0,
+                "value": 7821863
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.0000000010799,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.74,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
+        },
+        {
+          "action": "advance",
+          "seconds": 1,
+          "at": 10801000,
+          "counter": {
+            "m": 1.2,
+            "e": 1,
+            "terms": null
+          },
+          "components": [
+            44,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "credits": {
+            "m": 1.014609174565,
+            "e": 12,
+            "terms": [
+              {
+                "index": -2,
+                "value": 2600000
+              },
+              {
+                "index": -1,
+                "value": 9999956
+              },
+              {
+                "index": 0,
+                "value": 9174564
+              },
+              {
+                "index": 1,
+                "value": 101460
+              }
+            ]
+          },
+          "data": {
+            "m": 1.00000000108,
+            "e": 12,
+            "terms": null
+          },
+          "gems": 1000,
+          "totalINT": {
+            "m": 0,
+            "e": 0,
+            "terms": null
+          },
+          "axiomFunds": {
+            "m": 9.74,
+            "e": 2,
+            "terms": null
+          },
+          "analysis": false,
+          "synthesis": false,
+          "prestiges": 0,
+          "axioms": 1
         }
       ]
     }

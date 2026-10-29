@@ -7,6 +7,8 @@ namespace IdleIntelligence.Core
     public static class PrestigeV3
     {
         static double C(string key)=>ItemV3Balance.Get("prestige."+key);
+        public static double PassiveComponents(GameState s)
+        {int level=MetaRules.Level(s,"C01");return level==0?1:ItemV3Balance.C01PassiveFactors[level-1];}
         public static ScientificNumber HardwareFirst(GameState s)
         {
             var value=ScientificNumber.From(PrestigeRules.Has(s,"H06")?C("hardware.H06"):1);

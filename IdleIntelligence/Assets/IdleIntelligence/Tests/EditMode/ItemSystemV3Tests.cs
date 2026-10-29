@@ -28,8 +28,8 @@ namespace IdleIntelligence.Tests
     [Serializable]public sealed class LearningV3Flow{public string name;public bool prepared;public LearningV3Initial initial;public LearningV3Step[] steps;}
     [Serializable]public sealed class TrainingAutomationV3Case
     {public string name,manual,track,jobId;public bool original,done,prepared;public int quality,efficiency,integration,target,remainingPlans;public NumberData protectedResearch,creditDebit,dataDebit;}
-    [Serializable]public sealed class ComponentV3Step{public string action;public int amount,gems,prestiges,axioms;public double seconds,at;public NumberData counter,credits,data;public long[] components;public bool analysis,synthesis;}
-    [Serializable]public sealed class ComponentV3Flow{public string name;public bool v3,prepared;public ComponentV3Step[] steps;}
+    [Serializable]public sealed class ComponentV3Step{public string action;public int amount,gems,prestiges,axioms;public double seconds,at;public NumberData counter,credits,data,axiomFunds,totalINT;public long[] components;public bool analysis,synthesis,pending;}
+    [Serializable]public sealed class ComponentV3Flow{public string name;public bool v3,prepared;public int C01;public ComponentV3Step[] steps;}
     [Serializable]public sealed class ItemV3Cases{public string sourceHash;public bool prepared,productionEnabled;public ItemV3Case[] cases;public ArchiveV3Case[] archiveCases;public LearningV3Flow[] learningFlows;public TrainingAutomationV3Case[] trainingAutomationCases;public ComponentV3Flow[] componentFlows;}
     public sealed class ItemSystemV3Tests
     {
@@ -43,6 +43,10 @@ namespace IdleIntelligence.Tests
             s.ItemSystemV3=new ItemV3State{dataProduced=ScientificNumber.FromData(row.regularData),knowledgeProduced=ScientificNumber.FromData(row.regularKnowledge),runMinutes=row.minutes};
             if(!string.IsNullOrEmpty(row.legacy)){var n=ScientificNumber.Parse(row.legacy).ToData();s.Legacy.cycle=new[]{new LegacyFactor{key="item:compute",value=n},new LegacyFactor{key="item:credits",value=n}};s.Legacy.permanent=s.Legacy.cycle.Select(f=>f.Copy()).ToArray();}
             if(row.noItems)s.Challenges.Run=new ChallengeRun{id="no-items",stage=1};return s;
+        }
+        static GameState FundAxiomReference(GameState state,bool pending=false)
+        {
+            var s=state.Copy();var cycle=ScientificNumber.Parse("1e12");s.Prestige.Total=s.Prestige.Total.Add(cycle.Subtract(s.Prestige.Cycle));s.Prestige.Cycle=cycle;s.Prestige.Free=cycle.Subtract(s.Prestige.Spent);s.Prestige.Entitlement=cycle.Times(pending?2:1);s.Prestige.known=PrestigeBalance.Nodes.Take(30).Select(n=>n.Id).ToArray();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;return s;
         }
         static void Near(ScientificNumber actual,NumberData data,string message)
         {var expected=ScientificNumber.FromData(data);if(expected.IsZero)Assert.That(actual.IsZero,Is.True,message);else Assert.That(actual.Log10(),Is.EqualTo(expected.Log10()).Within(2e-10),message);}
@@ -125,7 +129,7 @@ namespace IdleIntelligence.Tests
                         case "unequip":s=s.Copy();s.Workshop.equipped=new string[ItemBalance.Slots.Length];break;
                         case "equip":s=Workshop.Equip(s,s.Workshop.inventory[0].id);break;
                         case "prestige":s=s.Copy();s.Prestige.Entitlement=ScientificNumber.From(100);s=PrestigeRules.Reset(s);break;
-                        case "axiom":s=s.Copy();s.Prestige.Cycle=s.Prestige.Free=s.Prestige.Total=s.Prestige.Entitlement=ScientificNumber.Parse("1e12");s.Prestige.known=PrestigeBalance.Nodes.Take(30).Select(n=>n.Id).ToArray();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;s=MetaRules.AxiomReset(s);break;
+                        case "axiom":s=MetaRules.AxiomReset(FundAxiomReference(s));break;
                         default:Assert.Fail("Unknown source learning action "+step.action);break;
                     }
                     string at=flow.name+" "+step.action;var v=s.ItemSystemV3;
@@ -167,8 +171,8 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void ActualComponentProductionAndResetFlowsMatchSource()
         {
-            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(7));foreach(var flow in flows){
-                var s=Game.New(1000,"prepared-component-reference");s.Credits=s.Data=ScientificNumber.From(1e12);s.Retention.gems=1000;if(flow.v3)s.ItemSystemV3=new ItemV3State();
+            var flows=Cases().componentFlows;Assert.That(flows.Length,Is.EqualTo(11));foreach(var flow in flows){
+                var s=Game.New(1000,"prepared-component-reference");s.Credits=s.Data=ScientificNumber.From(1e12);s.Retention.gems=1000;if(flow.v3)s.ItemSystemV3=new ItemV3State();if(flow.C01>0){s.Meta.resets=1;s.Meta.total=s.Meta.available=ScientificNumber.From(1000).ToData();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;for(int i=0;i<flow.C01;i++){var before=s;s=MetaRules.Buy(s,"C01");Assert.That(s,Is.Not.SameAs(before),"prepared paid C01 purchase");}}
                 foreach(var step in flow.steps){switch(step.action){
                     case "gift":s=s.Copy();s.Workshop.components[0]+=500;Lifetime.Components(s,0,500);break;
                     case "shop":s=GemShop.Buy(s,"materials-circuits");break;
@@ -178,10 +182,10 @@ namespace IdleIntelligence.Tests
                     case "synthesis":s=Industry.Synthesize(s,0);break;
                     case "advance":case "finish":case "repeat":s=Game.Advance(s,step.at);break;
                     case "prestige":s=s.Copy();s.Prestige.Entitlement=ScientificNumber.From(100);s=PrestigeRules.Reset(s);break;
-                    case "axiom":s=s.Copy();s.Prestige.Cycle=s.Prestige.Free=s.Prestige.Total=s.Prestige.Entitlement=ScientificNumber.Parse("1e12");s.Prestige.known=PrestigeBalance.Nodes.Take(30).Select(n=>n.Id).ToArray();s.ItemSystemV3.axiomDiscovered=true;s.ItemSystemV3.axiomDiscoveryAt=1000;s=MetaRules.AxiomReset(s);break;
+                    case "axiom":s=MetaRules.AxiomReset(FundAxiomReference(s,step.pending));break;
                     default:Assert.Fail("Unknown component action "+step.action);break;
                 }
-                string context=flow.name+" "+step.action;if(flow.v3)Near(s.ItemSystemV3.componentsProduced,step.counter,context+" produced K");else Assert.That(s.ItemSystemV3,Is.Null,context+" legacy flag");Assert.That(s.Workshop.components,Is.EqualTo(step.components),context+" wallet components");Near(s.Credits,step.credits,context+" credits");Near(s.Data,step.data,context+" data");Assert.That(s.Retention.gems,Is.EqualTo(step.gems),context+" gems");Assert.That(s.Workshop.hasAnalysis,Is.EqualTo(step.analysis),context+" analysis");Assert.That(s.Industry.synthesis!=null,Is.EqualTo(step.synthesis),context+" synthesis");Assert.That(s.Prestige.resets,Is.EqualTo(step.prestiges),context+" prestige count");Assert.That(s.Meta.resets,Is.EqualTo(step.axioms),context+" axiom count");
+                string context=flow.name+" "+step.action;if(flow.v3)Near(s.ItemSystemV3.componentsProduced,step.counter,context+" produced K");else Assert.That(s.ItemSystemV3,Is.Null,context+" legacy flag");Assert.That(s.Workshop.components,Is.EqualTo(step.components),context+" wallet components");Near(s.Credits,step.credits,context+" credits");Near(s.Data,step.data,context+" data");Near(ScientificNumber.FromData(s.Meta.available),step.axiomFunds,context+" Axiom funds");Near(s.Prestige.Total,step.totalINT,context+" lifetime INT preserved");Assert.That(s.Retention.gems,Is.EqualTo(step.gems),context+" gems");Assert.That(s.Workshop.hasAnalysis,Is.EqualTo(step.analysis),context+" analysis");Assert.That(s.Industry.synthesis!=null,Is.EqualTo(step.synthesis),context+" synthesis");Assert.That(s.Prestige.resets,Is.EqualTo(step.prestiges),context+" prestige count");Assert.That(s.Meta.resets,Is.EqualTo(step.axioms),context+" axiom count");
                 }
             }
         }
@@ -190,6 +194,11 @@ namespace IdleIntelligence.Tests
             var s=Game.New(1000);s.ItemSystemV3=new ItemV3State{componentsProduced=ScientificNumber.Parse("1e1000")};var copy=s.Copy();Lifetime.Components(copy,0,100,"analysis");Assert.That(copy.ItemSystemV3.componentsProduced.CompareTo(s.ItemSystemV3.componentsProduced),Is.GreaterThan(0));Assert.That(s.ItemSystemV3.componentsProduced.CompareTo(ScientificNumber.Parse("1e1000")),Is.EqualTo(0));
             foreach(string source in new[]{"shop","gift","trade","import","refund","salvage","recovery",null}){var before=copy.ItemSystemV3.componentsProduced;Lifetime.Components(copy,0,3,source);Assert.That(copy.ItemSystemV3.componentsProduced.CompareTo(before),Is.EqualTo(0),source??"unspecified");}
             var regular=Game.New(1000);Lifetime.Components(regular,0,3,"analysis");Assert.That(regular.ItemSystemV3,Is.Null);Assert.Throws<ArgumentOutOfRangeException>(()=>ItemSystemV3.RecordComponents(copy,0,-1,"analysis"));
+        }
+        [Test]public void C01UsesOnlyTheGeneratedCurrentDescriptionAndLevels()
+        {
+            var s=Game.New(1000);string legacy=MetaBalance.Axioms.First(n=>n.Id=="C01").Description;foreach(string language in SettingsCatalog.Languages){Assert.That(IdleIntelligence.Runtime.PrestigeCopy.Describe(s,"C01",legacy,language),Is.EqualTo(IdleIntelligence.Runtime.PrestigeCopy.Describe(legacy,language)));s.ItemSystemV3=new ItemV3State();string copy=IdleIntelligence.Runtime.PrestigeCopy.Describe(s,"C01",legacy,language);Assert.That(copy,Does.Contain("×2 / ×3 / ×4"),language);Assert.That(copy,Does.Not.Contain("{"),language);s.ItemSystemV3=null;}
+            s.ItemSystemV3=new ItemV3State();for(int level=0;level<=3;level++){s.Meta.axioms[Array.FindIndex(MetaBalance.Axioms,n=>n.Id=="C01")]=level;Assert.That(PrestigeV3.PassiveComponents(s),Is.EqualTo(level==0?1:ItemV3Balance.C01PassiveFactors[level-1]));}
         }
         [Test]public void StrengthScientificSoftcapAndLensHandleBoundaries()
         {

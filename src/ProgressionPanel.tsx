@@ -1,3 +1,5 @@
+import {prestigeV3Description} from './prestigeV3Copy';
+import {usesItemV3} from './itemSystemV3';
 import {ProgressionNetwork,type NetworkNode} from './ProgressionNetwork';
 import { synthesisQuote } from "./progressionWork";
 import { useState, useEffect, useRef } from "react";
@@ -186,7 +188,7 @@ export function ProgressionPanel({ s, act }: Props) {
               ×
             </button>
             <h2 id="v2-node-title">{node.name}</h2>
-            <p>{node.effect}</p>
+            <p>{usesItemV3(s)?prestigeV3Description(selected,s.settings.language)??node.effect:node.effect}</p>
             {cost && (
               <p>
                 <ResourceArt id="int" /> {fmt(cost)}{" "}

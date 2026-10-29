@@ -1,7 +1,9 @@
+import {prestigeV3Description} from './prestigeV3Copy';
+import {languages} from './i18n';
 import {advanceTo} from './simulation';
 import {protectedData} from './progressionWork';
 import {describe,it,expect} from 'vitest';
-import {BALANCE,newGame,hardwareIds,computeRateScientific,creditRateScientific,addCreditsScientific,exactEconomyValue,researchQuote,dataRateScientific,type GameState} from './economy';
+import {BALANCE,newGame,buyHardwareClass,hardwareIds,computeRateScientific,creditRateScientific,addCreditsScientific,exactEconomyValue,researchQuote,dataRateScientific,type GameState} from './economy';
 import {ScientificNumber as S} from './scientificNumber';
 import {newItemSystemV3,itemBaseFactorV3,itemAbilityStrengthV3,itemStrengthV3} from './itemSystemV3';
 import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditExponentV3,axiomDiscoveryEligibleV3,discoverAxiomsV3} from './prestigeV3';
@@ -24,6 +26,11 @@ describe('Joint prestige/item V3 actual consumers (prepared)',()=>{
   expect(run({...funded,itemSystemV3:undefined}).activeTraining?.track).toBe('integration');
   const online=run(target,true),offline=run(target);expect(online.activeTraining?.track).toEqual(offline.activeTraining?.track);expect(online.activeTraining?.jobId).toEqual(offline.activeTraining?.jobId);expect(online.activeTraining?.creditCostExact).toEqual(offline.activeTraining?.creditCostExact);expect(online.training).toBe(offline.training);expect(online.itemSystemV3).toEqual(offline.itemSystemV3);
   expect(advanceTo(offline,offline.savedAt,false,()=>.5).state.itemSystemV3).toEqual(offline.itemSystemV3);
+ });
+ it('applies C01 only once at real passive production boundaries and shares seven-language descriptions',()=>{
+  const base=prepared();const rich={...base,credits:1e9,exactEconomy:{...base.exactEconomy,credits:S.from(1e9).toJSON()}};
+  for(const level of [1,2,3]){const s=buyHardwareClass({...rich,axiomUpgradeLevels:{...rich.axiomUpgradeLevels,C01:level}},'calculator',1);const first=advanceTo(s,s.savedAt+(3*BALANCE.passiveCircuitSecondsPerClass-1)*1000,false,()=>.5).state;expect(S.fromJSON(first.itemSystemV3!.componentsProduced).toNumber()).toBe(2*BALANCE.prestigeV3.axioms.C01[level-1]);const last=advanceTo(first,s.savedAt+3*BALANCE.passiveCircuitSecondsPerClass*1000,false,()=>.5).state;expect(S.fromJSON(last.itemSystemV3!.componentsProduced).toNumber()).toBe(3*BALANCE.prestigeV3.axioms.C01[level-1]);expect(advanceTo(last,last.savedAt,false).state.itemSystemV3).toEqual(last.itemSystemV3);}
+  for(const language of languages){expect(prestigeV3Description('C01',language)).toContain('×2 / ×3 / ×4');expect(prestigeV3Description('C01',language)).not.toContain('{');}expect(prestigeV3Description('unknown','en')).toBeNull();
  });
  it('keeps all existing IDs and purchase costs',()=>{
   expect(Object.keys(BALANCE.progression.nodes)).toHaveLength(60);expect(Object.keys(BALANCE.progression.axioms)).toHaveLength(24);

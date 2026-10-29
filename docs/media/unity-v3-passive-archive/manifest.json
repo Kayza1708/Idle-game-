@@ -1,0 +1,46 @@
+[
+  {
+    "file": "C01-de-320.png",
+    "sha256": "c764c625bb951b46fd1e5e29b1f98e8118747b779c7313ee709072571d77b62d"
+  },
+  {
+    "file": "C01-de-390.png",
+    "sha256": "2ff4ffd1387a5ecfcbc03569b6bf5534a910e32367d94300ce000eb28a9538c8"
+  },
+  {
+    "file": "C01-de-430.png",
+    "sha256": "15af8183d07c2cfacf989316a259e89e26df0921f71b77a40ffc01244aad3819"
+  },
+  {
+    "file": "C01-en-320.png",
+    "sha256": "435ca79c8c96ec4be8ad2815274320c1dcdc2e20df3d828d7f6aa56f9ee90112"
+  },
+  {
+    "file": "C01-en-390.png",
+    "sha256": "5e0431b71c51a8e162a6b12b6248aaa25a8e8d37210fee2ec9332642c5a46567"
+  },
+  {
+    "file": "C01-en-430.png",
+    "sha256": "461b6b80c157579386970860cdae1cfc3daab3a3d67d124ce0d86f8beba31ba3"
+  },
+  {
+    "file": "C01-es-390.png",
+    "sha256": "937513b4d3364f0a90caa18ab051d0a1343f94cb1cb5a790c37d66bd41881da0"
+  },
+  {
+    "file": "C01-fr-390.png",
+    "sha256": "883169e07298a03fbcaaa47a8a9a1674024f1f21603fb287983157043cd330f3"
+  },
+  {
+    "file": "C01-it-390.png",
+    "sha256": "785402bf6f0466dc7659430d583c6687e79897c9a1bb4c97e66deff573dd82b0"
+  },
+  {
+    "file": "C01-pl-390.png",
+    "sha256": "254af87e96bb1364e5b12e9b6eb71ce43ffb6bf58a4d0fa38b8ff3c96d339bde"
+  },
+  {
+    "file": "C01-pt-390.png",
+    "sha256": "0759881d9293b90f0edea2dc1cc636ce5534564c74d06c520b543ffcfc29e7cc"
+  }
+]

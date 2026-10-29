@@ -791,3 +791,6 @@ T06 erhält unveränderte Preise und Ziellevel: Integration wird automatisch nur
 
 ### Item-V3: Komponentenproduktionszähler K
 K wächst ausschließlich aus expliziten tatsächlich vergüteten Produktionsbelegen, nicht aus allgemeinem `grantComponents`/`Lifetime.Components`. Gültig sind bezahlte Analyse, Synthese, reguläre passive Hardwarefunde und bezahlte Hardwarepakete; bestehender TS-Klassenkauf separat markiert, native Erwerbslücke dokumentiert. Keine neuen Mengen, Preise oder Faktoren. Starterhilfe, Shop, Handel/Import, Erstattung, Zerlegung/Rückgewinnung und Altbestände bleiben ausgeschlossen. Persönlicher wissenschaftlicher Zähler bleibt bei normalem Prestige erhalten und wird am echten Axiomreset geleert. Alte Saves werden damit noch nicht aktiviert oder rückwirkend befüllt.
+
+### Prestige-V3 C01
+Vorhandene zentrale Vorgabe×2/×3/×4 ersetzt im experimentellen V3 den alten passiven Bonus. Intervall3600s unverändert. Rundung ausschließlich an vorhandener1e-12Bruchteilspräzision stabilisiert; keine häufigeren Funde, keine rückwirkende Produktion. Preis/Resetformeln unverändert. Normale Spielstände nicht aktiviert.

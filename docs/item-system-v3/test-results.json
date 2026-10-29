@@ -243,5 +243,52 @@
       "old isolated synthesis fixture now marks starter gift previously claimed/spent; fresh behavior separately compared to TS",
       "transient V3 presentation fixture now suspends lifecycle callbacks; production save guard unchanged"
     ]
+  },
+  "passiveArchiveFollowup": {
+    "sourceHash": "ed0260502f3da62363cb6926205c36ab49beed54b4eb5b2b01ec9bf769cbb6b3",
+    "normalSaveActivation": false,
+    "sharedComponentFlows": 11,
+    "vitest": {
+      "files": 155,
+      "tests": 2007,
+      "passed": 2007,
+      "seconds": 327.79,
+      "log": "/tmp/idle-v3-C01-full-vitest.log"
+    },
+    "finalFundingFocusedVitest": 26,
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed; final V3 fixtures checked after funding correction",
+    "images": "../media/unity-v3-passive-archive/README.md",
+    "targetedEditMode": {
+      "total": "14",
+      "passed": "14",
+      "failed": "0",
+      "duration": "9.4119118",
+      "result": "Passed",
+      "xmlSha256": "f508b142a66ac9c48009e76ba5baae5d2e33f896315164fc7ebde3a3b2dd65d1"
+    },
+    "targetedPlayMode": {
+      "total": "13",
+      "passed": "13",
+      "failed": "0",
+      "duration": "58.4639958",
+      "result": "Passed",
+      "xmlSha256": "03450a099e40ce82c2b48ec94ae46ee87343b7986a1fc45ce21cd6af9566a2ea"
+    },
+    "finalMobileUI": {
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "duration": "22.2620717",
+      "result": "Passed",
+      "xmlSha256": "95f8aa963291da2c03e2d2a13a3bb25565ab4be8ede3328bc9237065eb6a526b"
+    },
+    "correctedFailures": [
+      "passive fixture previously did not span actual 3600-second find boundary; expanded to real hours",
+      "reference funding omitted claimed entitlement and double-counted pending INT; corrected fixtures, not reset formula",
+      "language preview mutated state directly; now exercises actual Settings action",
+      "single-word detail header wrapped in French; shared flex header corrected"
+    ]
   }
 }

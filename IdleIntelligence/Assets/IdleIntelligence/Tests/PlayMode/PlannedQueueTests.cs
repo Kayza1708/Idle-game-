@@ -47,7 +47,7 @@ namespace IdleIntelligence.PlayTests
             var field=GameObject.Find("TrainingTarget2").GetComponent<UnityEngine.UI.InputField>();field.text="2";field.onEndEdit.Invoke("2");yield return null;Assert.That(game.State.Prestige.trainingTargets[2],Is.EqualTo(2));var saved=new AtomicSaveStore(game.SavePath,new UnitySaveCodec()).Load(game.State.SavedAt);Assert.That(saved.Writable,Is.True);Assert.That(saved.State.Prestige.trainingTargets[2],Is.EqualTo(2));Assert.That(saved.State.ItemSystemV3,Is.Null);
             Debug.Log("PREPARED_T06_UI: isolated normal target edit/reload tested; V3 flags below are an in-memory read-only presentation fixture, not migrated or persisted V3 save proof.");var startedField=typeof(GameRuntime).GetField("started",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);Assert.That(startedField,Is.Not.Null);bool wasStarted=(bool)startedField.GetValue(game);game.enabled=false;startedField.SetValue(game,false);string output="/tmp/idle-v3-training-target-review";Directory.CreateDirectory(output);
             try{
-                game.State.ItemSystemV3=new ItemV3State();foreach(string locale in SettingsCatalog.Languages){game.State.Settings.language=locale;network.OpenNode("T06");yield return null;game.FlushLocalization();foreach(int width in locale=="de"||locale=="en"?new[]{320,390,430}:new[]{390}){
+                game.State.ItemSystemV3=new ItemV3State();foreach(string locale in SettingsCatalog.Languages){game.State.ItemSystemV3=null;startedField.SetValue(game,wasStarted);Assert.That(game.Act(s=>SettingsRules.Change(s,"language",locale)),Is.True,"actual locale action");startedField.SetValue(game,false);game.State.ItemSystemV3=new ItemV3State();network.OpenNode("T06");yield return null;game.FlushLocalization();foreach(int width in locale=="de"||locale=="en"?new[]{320,390,430}:new[]{390}){
 #if UNITY_EDITOR
                     PortraitGameView.Set(width,width==320?694:width==390?846:932);
 #endif
@@ -56,6 +56,18 @@ namespace IdleIntelligence.PlayTests
                 }}
             }finally{game.State.ItemSystemV3=null;game.State.Settings.language="de";startedField.SetValue(game,wasStarted);game.enabled=true;network.CloseDetail();}
             Assert.That(new AtomicSaveStore(game.SavePath,new UnitySaveCodec()).Load(game.State.SavedAt).State.ItemSystemV3,Is.Null);
+        }
+        [UnityTest]public IEnumerator C01DescriptionUsesActualLocalizedV3ValuesAtMobileSizes()
+        {
+            game.Act(s=>{var n=s.Copy();n.Legacy.prepared=true;n.Meta.resets=1;n.Meta.total=n.Meta.available=ScientificNumber.From(10).ToData();return MetaRules.Buy(n,"C01");});Assert.That(game.Writable,Is.True,game.Status.text);Assert.That(MetaRules.Level(game.State,"C01"),Is.EqualTo(1));game.Show("prestige");yield return null;var network=game.PrestigeView;network.SetLayer(true);yield return null;
+            var lifecycle=typeof(GameRuntime).GetField("started",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);Assert.That(lifecycle,Is.Not.Null);bool started=(bool)lifecycle.GetValue(game);game.enabled=false;lifecycle.SetValue(game,false);const string output="/tmp/idle-v3-C01-review";Directory.CreateDirectory(output);
+            Debug.Log("PREPARED_C01_UI: isolated funded normal Axiom purchase; V3 flag only in-memory, lifecycle suspended, no V3 save migration claimed.");
+            try{game.State.ItemSystemV3=new ItemV3State{axiomDiscovered=true,axiomDiscoveryAt=1000};foreach(string locale in SettingsCatalog.Languages){game.State.ItemSystemV3=null;lifecycle.SetValue(game,started);Assert.That(game.Act(s=>SettingsRules.Change(s,"language",locale)),Is.True,"actual locale action");lifecycle.SetValue(game,false);game.State.ItemSystemV3=new ItemV3State{axiomDiscovered=true,axiomDiscoveryAt=1000};network.OpenNode("C01");yield return null;game.FlushLocalization();foreach(int width in locale=="de"||locale=="en"?new[]{320,390,430}:new[]{390}){
+#if UNITY_EDITOR
+                PortraitGameView.Set(width,width==320?694:width==390?846:932);
+#endif
+                yield return null;yield return null;yield return null;yield return null;Canvas.ForceUpdateCanvases();var detail=GameObject.Find("INTDetails");Assert.That(detail,Is.Not.Null);var heading=detail.GetComponentsInChildren<UnityEngine.UI.Text>().First(t=>t.name=="DetailHeading");Assert.That(heading.cachedTextGenerator.lineCount,Is.LessThanOrEqualTo(1),locale+" heading lines");Assert.That(heading.preferredWidth,Is.LessThanOrEqualTo(heading.rectTransform.rect.width+1),locale+" heading width");Assert.That(heading.preferredHeight,Is.LessThanOrEqualTo(heading.rectTransform.rect.height+1),locale+" heading height");var description=detail.GetComponentsInChildren<UnityEngine.UI.Text>().First(t=>t.name=="Description");Assert.That(description.text,Does.Contain("×2 / ×3 / ×4"),locale);Assert.That(description.preferredHeight,Is.LessThanOrEqualTo(description.rectTransform.rect.height+1),locale);Assert.That(description.text,Does.Not.Contain("{"));Assert.That(Screen.width,Is.EqualTo(width));WorkshopTests.Capture(width,Screen.height,output+"/C01-"+locale+"-"+width+".png");
+            }}}finally{game.State.ItemSystemV3=null;game.State.Settings.language="de";lifecycle.SetValue(game,started);game.enabled=true;network.CloseDetail();}
         }
         [UnityTest]public IEnumerator ActualQueueViewsAtMobileSizesAndAllSevenLanguages()
         {
