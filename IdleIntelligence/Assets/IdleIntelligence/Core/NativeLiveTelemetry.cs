@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace IdleIntelligence.Core
 {
@@ -15,6 +16,11 @@ namespace IdleIntelligence.Core
     {
         public NativeTelemetryEvent[] events=Array.Empty<NativeTelemetryEvent>();
     }
+    [Serializable] public sealed class NativeTelemetrySnapshot
+    {
+        public int version=1;
+        public NativeTelemetryEvent[] events=Array.Empty<NativeTelemetryEvent>();
+    }
     public sealed class NativeTelemetryQueue
     {
         public static readonly string[] Allowed={
@@ -24,12 +30,14 @@ namespace IdleIntelligence.Core
             "iap_attempt","iap_verified","season_open","company_open","app_crash"
         };
         readonly List<NativeTelemetryEvent> pending=new List<NativeTelemetryEvent>();
+        static readonly Regex ValidId=new Regex("^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$",RegexOptions.IgnoreCase|RegexOptions.CultureInvariant);
+        public event Action Changed;
         public bool Consent{get;private set;}
         public int Count=>pending.Count;
         public void SetConsent(bool allowed)
         {
             Consent=allowed;
-            if(!allowed)pending.Clear(); // Immediate revocation, no replay.
+            if(!allowed){pending.Clear();Changed?.Invoke();} // Purge persisted receipts on revocation.
         }
         public bool Record(string type,int metric=0)
         {
@@ -38,6 +46,32 @@ namespace IdleIntelligence.Core
             if(pending.Count>=48)pending.RemoveAt(0);
             pending.Add(new NativeTelemetryEvent{id=Guid.NewGuid().ToString("D"),
                 type=type,metric=metric});
+            Changed?.Invoke();
+            return true;
+        }
+
+        // A versioned, bounded, anonymous receipt journal. No account IDs,
+        // device identifiers, free text, raw crashes, currency or IPs.
+        public NativeTelemetrySnapshot Export()
+            =>new NativeTelemetrySnapshot{version=1,
+              events=Consent?pending.Select(e=>new NativeTelemetryEvent{
+                 id=e.id,type=e.type,metric=e.metric}).ToArray():
+                 Array.Empty<NativeTelemetryEvent>()};
+        public bool Restore(NativeTelemetrySnapshot snapshot)
+        {
+            // Fail closed for malformed on-disk data; never load after opt-out.
+            if(!Consent||snapshot==null||snapshot.version!=1||
+               snapshot.events==null||snapshot.events.Length>48)return false;
+            var seen=new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach(var e in snapshot.events){
+                if(e==null||e.id==null||!ValidId.IsMatch(e.id)||
+                   !seen.Add(e.id)||!Allowed.Contains(e.type,StringComparer.Ordinal)||
+                   e.metric<0||e.metric>1000000000)return false;
+            }
+            pending.Clear();
+            pending.AddRange(snapshot.events.Select(e=>new NativeTelemetryEvent{
+                id=e.id,type=e.type,metric=e.metric}));
+            Changed?.Invoke();
             return true;
         }
         public NativeTelemetryEvent[] NextBatch()
@@ -48,7 +82,7 @@ namespace IdleIntelligence.Core
         {
             if(!Consent||ids==null)return;
             var accepted=new HashSet<string>(ids,StringComparer.Ordinal);
-            pending.RemoveAll(e=>accepted.Contains(e.id));
+            if(pending.RemoveAll(e=>accepted.Contains(e.id))>0)Changed?.Invoke();
         }
     }
 
