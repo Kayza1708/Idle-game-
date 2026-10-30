@@ -13,7 +13,7 @@ class Smoke
         Game.Validate(s);
         return s;
     }
-    public static void Main()
+    public static void Main(string[] args)
     {
         // Real native runtime boot: no V2 opt-in or imported save required.
         var fresh=Game.NewV3(1_000,"native-v3-launch",true);
