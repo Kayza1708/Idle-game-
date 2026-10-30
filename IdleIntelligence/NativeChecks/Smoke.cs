@@ -15,6 +15,7 @@ class Smoke
     }
     public static void Main(string[] args)
     {
+        NativeCatalogueManifest.VerifyAtRepositoryRoot(System.IO.Directory.GetCurrentDirectory());
         if(args.Contains("--balance")){V3BalanceProbe.Run();return;}
         // Real native runtime boot: no V2 opt-in or imported save required.
         var fresh=Game.NewV3(1_000,"native-v3-launch",true);
