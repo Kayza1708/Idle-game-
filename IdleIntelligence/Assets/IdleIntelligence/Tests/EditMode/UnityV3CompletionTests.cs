@@ -91,6 +91,34 @@ namespace IdleIntelligence.Tests
             ItemSystemV3.RecordProduction(after,900,ScientificNumber.Zero,ScientificNumber.Zero);
             Assert.That(ItemSystemV3.AxiomAnchorFactor(after),Is.EqualTo(1));
         }
+        [Test]public void OldV24SaveMissingV3OnlyFieldsLoadsWithOriginalOwnership()
+        {
+            string dir=Path.Combine(Path.GetTempPath(),"unity-old-v24-"+Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(dir);
+            try {
+                string file=Path.Combine(dir,"save.json");
+                var state=Game.New(1000,"old-v24-compatibility");
+                state.Workshop.learned[0]=true;
+                var data=StateData.From(state);
+                string payload=UnityEngine.JsonUtility.ToJson(data);
+                // Construct a true v24-style schema, without the newly introduced
+                // V3 receipt fields. The old schema did not serialize these values.
+                payload=System.Text.RegularExpressions.Regex.Replace(
+                    payload,"(,?\\\"itemV3Recorded\\\":false|,?\\\"itemV3\\\":null)","");
+                using(var sha=System.Security.Cryptography.SHA256.Create()){
+                    byte[] hash=sha.ComputeHash(System.Text.Encoding.UTF8.GetBytes(payload));
+                    string digest=BitConverter.ToString(hash).Replace("-","").ToLowerInvariant();
+                    File.WriteAllText(file,UnityEngine.JsonUtility.ToJson(new SaveEnvelope{
+                        format=AtomicSaveStore.Format,version=24,payload=payload,sha256=digest}));
+                }
+                var loaded=new AtomicSaveStore(file,new UnitySaveCodec()).Load(1000);
+                Assert.That(loaded.Writable,Is.True);
+                Assert.That(loaded.State.ItemSystemV3,Is.Null);
+                Assert.That(loaded.State.Workshop.learned.Length,Is.EqualTo(42));
+                Assert.That(loaded.State.Workshop.learned[0],Is.True);
+                Assert.That(Directory.GetFiles(dir,"*.v24-original-*").Length,Is.EqualTo(1));
+            }finally{Directory.Delete(dir,true);}
+        }
         [Test]public void VersionedUnitySavePreservesV3CountersOnReload()
         {
             string dir=Path.Combine(Path.GetTempPath(),"unity-v3-"+Guid.NewGuid().ToString("N"));
