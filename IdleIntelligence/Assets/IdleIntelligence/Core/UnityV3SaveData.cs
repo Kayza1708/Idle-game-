@@ -19,6 +19,7 @@ namespace IdleIntelligence.Core
         public double[] synthesisRemainders;public ItemV3Synthesis synthesisContract;public ItemV3Overdrive overdrive;
         public double gradientStoredWork,gradientAccruedWork,gradientLastRequirement,capacitorFraction,axiomAnchorFactor,axiomAnchorSeconds;
         public string gradientAccruedJob;public string[] capacitorCompletedJobs;
+        public double axiomAnchorFirstSeconds,axiomAnchorFirstFactor;public int libraryAnalyses;public string libraryLastReceipt;
         public static UnityV3SaveData From(ItemV3State v)
         {
             if(v==null)return null;
@@ -35,7 +36,9 @@ namespace IdleIntelligence.Core
                 gradientStoredWork=v.gradientStoredWork,gradientAccruedWork=v.gradientAccruedWork,
                 gradientLastRequirement=v.gradientLastRequirement,gradientAccruedJob=v.gradientAccruedJob,
                 capacitorFraction=v.capacitorFraction,capacitorCompletedJobs=(string[])v.capacitorCompletedJobs.Clone(),
-                axiomAnchorFactor=v.axiomAnchorFactor,axiomAnchorSeconds=v.axiomAnchorSeconds
+                axiomAnchorFactor=v.axiomAnchorFactor,axiomAnchorSeconds=v.axiomAnchorSeconds,
+                axiomAnchorFirstSeconds=v.axiomAnchorFirstSeconds,axiomAnchorFirstFactor=v.axiomAnchorFirstFactor,
+                libraryAnalyses=v.libraryAnalyses,libraryLastReceipt=v.libraryLastReceipt
             };
         }
         public ItemV3State ToState()
@@ -58,7 +61,9 @@ namespace IdleIntelligence.Core
                 gradientStoredWork=gradientStoredWork,gradientAccruedWork=gradientAccruedWork,
                 gradientLastRequirement=gradientLastRequirement,gradientAccruedJob=gradientAccruedJob,
                 capacitorFraction=capacitorFraction,capacitorCompletedJobs=(string[])capacitorCompletedJobs.Clone(),
-                axiomAnchorFactor=axiomAnchorFactor,axiomAnchorSeconds=axiomAnchorSeconds
+                axiomAnchorFactor=axiomAnchorFactor,axiomAnchorSeconds=axiomAnchorSeconds,
+                axiomAnchorFirstSeconds=axiomAnchorFirstSeconds,axiomAnchorFirstFactor=axiomAnchorFirstFactor,
+                libraryAnalyses=libraryAnalyses,libraryLastReceipt=libraryLastReceipt
             };
         }
     }
