@@ -130,3 +130,14 @@ Nächste konkret gefundene Abhängigkeit: beide tatsächlichen Challenge-Einstie
 
 ### Tatsächliche Challenge-Eintritts-/Rückkehrverträge
 V3-Regelkennung über die echten Fabriken erhalten; neuer persönlicher Produktionsscope, dauerhafte Z-Historie/B05-Rekorde und legitime Entdeckungsrechte getrennt. Hauptspieljobs und -zähler bleiben pausiert. Nur monotone nächste Trainingsnummer zurückführen; niemals den Challenge-Abschlussmarker auf einen älteren bezahlten Hauptspieljob anwenden. Neue kopierte Relais haben eigenen Triggerstand0; Hauptitem unverändert. Fünf gemeinsame echte Start-/Arbeits-/Rückkehrfolgen, einschließlich aktiver/offliner Arbeit, Erfolg/Abbruch, doppeltem Claim und bezahlter Hauptspiel-Fortsetzung. Dateimigration und tatsächlicher V3-Reload bleiben separat offen.
+
+
+### 30.10.2026 – V3-Materialkreislauf (Domainprüfung, keine Spielerfreigabe)
+
+Herstellungscontroller und vorhandene Forschungsrückgewinnung werden auf denselben bezahlten Materialbeleg angerechnet: der höhere bestehende Anspruch gilt, keine zweite Auszahlung. Der V3-Itemanteil ist min(35 %, 10 % × P). Daten, Module und Bauplanlernen erstatten nichts. Neue Upgrades/Schmiedestufen fremd erworbener Items schreiben ausschließlich ihre tatsächlich bezahlten Zusatzmaterialien in die Basis; keine erfundenen ursprünglichen Rezeptkosten. Normale Altregeln bleiben unverändert; historische fehlende Materialrechte müssen noch explizit migriert werden.
+
+Unwiderrufliches Zerlegen von Rare+ sammelt bei aktiver Recycling-Sonde 0,25 × P Fragmentfortschritt; das geschlossene Zweiersystem verstärkt nur diesen Zusatzfortschritt um ×1,25. Der ursprüngliche Basiszufallsfund bleibt separat und würfelt nur einmal. Geschützte, ausgerüstete oder bereits entfernte Exemplare und No-items vergeben keinen Zusatzfortschritt. Das vollständige Trio speichert ×1,2 für neue bezahlte Analysen im vorhandenen Startvertrag.
+
+Fusion erhält bezahlte Basis und bereits verrechnete Rückgaben. Zerlegung begrenzt die eigene weitere Materialzuweisung zusätzlich auf 90 % der Basis abzüglich bisheriger Rückgaben; alte globale Bruchteile werden danach addiert. Fragmentbruchteile bleiben durch tatsächliches Prestige/Axiom erhalten und Challenge-Hauptspiel und Shadow bleiben getrennt. Ungültige Konten/Materialbelege und überlaufende Wallets werden vor Verbrauch abgewiesen. Rückgewinnung zählt nicht als regulär selbst produzierte Komponenten K.
+
+31 gemeinsame vorbereitete Transaktionsfolgen plus sieben neue Vitest-Fälle und native Guards; Finanzierung ausdrücklich isoliert. Neue Unity-Tests nach zwei korrigierten Testfehlern 2/2 grün. Vollständige Regression und sichtbare V3-Details noch in Arbeit. V3-Dateischreibschutz bleibt aktiv; kein behaupteter vollständiger Save-Reload oder Xcode-Playernachweis.

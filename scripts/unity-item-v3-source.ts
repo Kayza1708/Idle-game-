@@ -1,0 +1,3 @@
+import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
+export function unityItemV3SourceHash(){const hash=createHash('sha256');for(const p of ['src/economy.ts','src/itemSystemV3.ts','src/progression.ts','src/deviceEffects.ts','src/prestigeV3.ts','src/progressionReset.ts','src/simulation.ts','src/progressionWork.ts','src/blueprints.ts','src/inventory.ts','src/gemShop.ts','src/materialEconomy.ts','src/experiments.ts','src/recovery.ts','src/foundries.ts','src/prestigeV3Copy.ts','src/i18n.ts','src/retention.ts','src/challengeStages.ts'])hash.update(readFileSync(p));return hash.digest('hex');}

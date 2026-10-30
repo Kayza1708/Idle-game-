@@ -19,6 +19,7 @@ export type ItemSystemV3State={
   learningStreak:number;
   lastLearningTrack:'quality'|'efficiency'|null;
   scannerAnalyses:number;
+  recyclingFragmentProgress:number;
   overdrive:{startedAt:number;burstUntil:number;creditFactor:number;dataFactor:number}|null;
   synthesisRemainders:Partial<Record<ComponentId,number>>;
   synthesisContract:{id:string;component:ComponentId;multiplier:number}|null;
@@ -26,7 +27,7 @@ export type ItemSystemV3State={
   axiomDiscovered:boolean;
   axiomDiscoveryAt:number|null;
 };
-export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,overdrive:null,synthesisRemainders:{},synthesisContract:null,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
+export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,recyclingFragmentProgress:0,overdrive:null,synthesisRemainders:{},synthesisContract:null,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
 export const usesItemV3=(s:GameState)=>s.itemSystemV3?.version===3;
 const c=()=>BALANCE.itemV3;
 const one=()=>S.from(1);
@@ -152,6 +153,15 @@ export function itemMaterialFamilyYieldV3(s:GameState,family:keyof typeof BALANC
  return(1+(item?c().familyYield.coefficient*itemAbilityStrengthV3(s,item).P:0))*(s.overclock.activeUntil>at&&(family==='photonic'?combo.pair:combo.complete&&quantumUnlocked)?c().combinations.photonic.yield:1);
 }
 export function itemMaximumFamilyYieldV3(){const maxP=Math.max(...c().rarityFactors)*(1+c().levelStep*(c().levelMax-1))*(1+c().forgeStep*c().forgeMax)*BALANCE.prestigeV3.items.W10ability;return BALANCE.prestigeV3.items.W03focus*(1+c().familyYield.coefficient*maxP)*c().combinations.photonic.yield;}
+/** One combined refund account: the item replaces a lower existing refund,
+ * rather than issuing a second grant for the same paid materials. */
+export function itemCraftRecoveryFractionV3(s:GameState,existing:number){const item=itemV3Equipped(s).find(i=>i.type==='manufacturing-controller');return Math.min(BALANCE.recoveryFraction,Math.max(existing,item?Math.min(c().manufacturing.cap,c().manufacturing.rate*itemAbilityStrengthV3(s,item).P):0));}
+export function itemAnalysisCombinationYieldV3(s:GameState){return usesItemV3(s)&&itemCombinationV3(s,'closed-loop').complete?c().combinations.recycling.materials:1;}
+export function itemSalvageFragmentsV3(s:GameState,item:Item){
+ if(!usesItemV3(s))return{gained:0,remainder:0,progress:0};const remainder=s.itemSystemV3!.recyclingFragmentProgress;if(!Number.isFinite(remainder)||remainder<0||remainder>=1)throw new RangeError('Invalid V3 fragment progress');
+ const probe=itemV3Equipped(s).find(i=>i.type==='recycling-probe'),rare=(Object.keys(BALANCE.rarity) as Rarity[]).indexOf(item.rarity)>=(Object.keys(BALANCE.rarity) as Rarity[]).indexOf('rare'),progress=rare&&probe?c().recycling.fragment*itemAbilityStrengthV3(s,probe).P*(itemCombinationV3(s,'closed-loop').pair?c().combinations.recycling.fragments:1):0;
+ if(progress===0)return{gained:0,remainder,progress};const value=remainder+progress,nearest=Math.round(value),total=Math.abs(value-nearest)<=Number.EPSILON*Math.max(1,value)*16?nearest:value,gained=Math.floor(total);return{gained,remainder:total-gained,progress};
+}
 export function itemCreditFactorV3(s:GameState){
  const snapshot=itemV3Snapshot(s),distilled=itemCombinationV3(s,'distilled-intelligence');let result=one();
  for(const item of itemV3Equipped(s)){
@@ -257,6 +267,7 @@ export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameS
 export function archiveBlueprintRightV3(s:GameState){return usesItemV3(s)&&(s.itemSystemV3!.archiveBlueprintRight||s.insightArchiveBlueprint||s.nodes.includes('I04')||s.progression.known.includes('I04')||(s.learnedRecipes??[]).includes('insight-archive'));}
 
 function validateItemTrainingCountersV3(v:ItemSystemV3State){
+ if(!Number.isFinite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new RangeError('Invalid V3 fragment progress');
  const maxP=Math.max(...c().rarityFactors)*(1+c().levelStep*(c().levelMax-1))*(1+c().forgeStep*c().forgeMax)*BALANCE.prestigeV3.items.W10ability;
  const od=v.overdrive;if(od!==null&&(!od||![od.startedAt,od.burstUntil,od.creditFactor,od.dataFactor].every(Number.isFinite)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>c().combinations.energy.seconds*1000+.001||od.creditFactor<1||od.creditFactor>(1+c().burst.coefficient*maxP)*c().combinations.energy.credits+1e-10||![1,c().combinations.energy.data].includes(od.dataFactor)))throw new RangeError('Invalid V3 overdrive contract');
  if(!v.synthesisRemainders||Object.entries(v.synthesisRemainders).some(([id,n])=>!Object.hasOwn(BALANCE.components,id)||!Number.isFinite(n)||n!<0||n!>=1)||v.synthesisContract!==null&&(!v.synthesisContract||!v.synthesisContract.id||!Object.hasOwn(BALANCE.components,v.synthesisContract.component)||!Number.isFinite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new RangeError('Invalid V3 synthesis receipt');

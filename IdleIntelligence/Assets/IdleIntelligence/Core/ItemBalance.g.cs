@@ -1,6 +1,6 @@
 // Generated from the current TypeScript economy/domain. Do not edit.
 namespace IdleIntelligence.Core { public static class ItemBalance {
-public const string SourceHash="bd778c3e31aa48e1a4c391544bb5fe8377317fb58bec956787b2c1fcbbff8df3";
+public const string SourceHash="8b43de55fea031669c5ced845ff8354b77a593b1199dcd6989cd9575eef080ac";
 public const double MetaKnowledgeLog=6d;
 public const double MetaCycleCount=5d;
 public const double MetaModelCount=5d;

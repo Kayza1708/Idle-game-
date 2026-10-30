@@ -11,7 +11,7 @@ namespace IdleIntelligence.Core
     {
         public int version=3;
         public ScientificNumber dataProduced=ScientificNumber.Zero,knowledgeProduced=ScientificNumber.Zero,componentsProduced=ScientificNumber.Zero;
-        public double runMinutes;
+        public double runMinutes,recyclingFragmentProgress;
         public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak;public long scannerAnalyses;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
         public double[] synthesisRemainders=new double[ItemBalance.ComponentIds.Length];public ItemV3Synthesis synthesisContract;public ItemV3Overdrive overdrive;
         public ItemV3State Copy(){var v=(ItemV3State)MemberwiseClone();v.synthesisRemainders=(double[])synthesisRemainders.Clone();v.synthesisContract=synthesisContract?.Copy();v.overdrive=overdrive?.Copy();return v;}
@@ -23,6 +23,7 @@ namespace IdleIntelligence.Core
         public static void Validate(GameState s)
         {
             var v=s?.ItemSystemV3;if(v==null)return;double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");var od=v.overdrive;if(od!=null&&(!ScientificNumber.Finite(od.startedAt)||!ScientificNumber.Finite(od.burstUntil)||!ScientificNumber.Finite(od.creditFactor)||!ScientificNumber.Finite(od.dataFactor)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>C("combinations.energy.seconds")*1000+.001||od.creditFactor<1||od.creditFactor>(1+C("burst.coefficient")*maxP)*C("combinations.energy.credits")+1e-10||od.dataFactor!=1&&od.dataFactor!=C("combinations.energy.data")))throw new FormatException("Invalid V3 overdrive contract");
+            if(!ScientificNumber.Finite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new FormatException("Invalid V3 fragment progress");
             if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
             if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.scannerAnalyses<0||v.scannerAnalyses>MaxExactSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
         }
@@ -113,6 +114,14 @@ namespace IdleIntelligence.Core
         {if(!Enabled(s)||family!=2&&family!=4)return 1;var item=Equipped(s).FirstOrDefault(i=>i.type==(family==2?"photonic-analyzer":"quantum-diagnostic-module"));bool pair=Has(s,"photonic-matrix")&&Has(s,"photonic-analyzer"),active=s.ActiveUntil>s.SavedAt;return(1+(item!=null?C("familyYield.coefficient")*AbilityStrength(s,item):0))*(active&&pair&&(family==2||Has(s,"cryocontroller")&&MaterialAnalysis.Access(s,4))?C("combinations.photonic.yield"):1);}
         public static double MaximumFamilyYield()
         {double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");return ItemV3Balance.Get("prestige.items.W03focus")*(1+C("familyYield.coefficient")*maxP)*C("combinations.photonic.yield");}
+        public static double CraftRecoveryFraction(GameState s)
+        {double existing=Game.Level(s,"materialRecycling")>0?ItemBalance.ResearchRecycling:0;var item=Equipped(s).FirstOrDefault(i=>i.type=="manufacturing-controller");return Math.Min(ItemBalance.RecoveryFraction,Math.Max(existing,item!=null?Math.Min(C("manufacturing.cap"),C("manufacturing.rate")*AbilityStrength(s,item)):0));}
+        public static double AnalysisCombinationYield(GameState s)=>Enabled(s)&&Has(s,"manufacturing-controller")&&Has(s,"recycling-probe")&&Has(s,"diagnostic-adapter")?C("combinations.recycling.materials"):1;
+        public static double SalvageAllocated(double paid,double used,double rate)=>Math.Min(Math.Max(0,paid-used)*rate,Math.Max(0,paid*C("recovery.maximumFraction")-used));
+        public static (long gained,double remainder,double progress) SalvageFragments(GameState s,ItemInstance item)
+        {
+            if(!Enabled(s))return(0,0,0);double remainder=s.ItemSystemV3.recyclingFragmentProgress;if(!ScientificNumber.Finite(remainder)||remainder<0||remainder>=1)throw new FormatException("Invalid V3 fragment progress");var probe=Equipped(s).FirstOrDefault(i=>i.type=="recycling-probe");double progress=item.rarity>=Array.IndexOf(ItemBalance.Rarities,"rare")&&probe!=null?C("recycling.fragment")*AbilityStrength(s,probe)*(Has(s,"manufacturing-controller")?C("combinations.recycling.fragments"):1):0;if(progress==0)return(0,remainder,0);double value=remainder+progress,nearest=Math.Floor(value+.5);if(Math.Abs(value-nearest)<=2.220446049250313e-16*Math.Max(1,value)*16)value=nearest;long gained=(long)Math.Floor(value);return(gained,value-gained,progress);
+        }
         public static bool ArchiveBlueprintRight(GameState s)=>Enabled(s)&&(s.ItemSystemV3.archiveBlueprintRight||PrestigeRules.Has(s,"I04")||s.Prestige.known.Contains("I04")||s.Workshop.learned[Workshop.Index("insight-archive")]);
         public static bool Has(GameState s,string id)=>Equipped(s).Any(i=>i.type==id);
         public static ScientificNumber BaseFactorScientific(GameState s,string family)

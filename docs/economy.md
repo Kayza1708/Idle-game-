@@ -834,3 +834,7 @@ Vorhandene sofortige Sammelpreise proExemplar×Menge ohne neue Kostenformel: Mei
 
 ### 29.10.2026 – beauftragte V3-Familienausbeute
 Photon-/Quantenitem×(1+P), Photonikarchitektur×2imOverdrive, Trio nur bereits freigeschaltete Quantenfamilie. Nur bezahlteAnalysen/reguläreHardwarepakete; historische Paketgrundmengenfamilien erhalten, neueV2-Familienwirkung getrennt. GPUextra mit Bruchteilen, kein Diagnosefaktor auf dieses festeExtra. Sämtliche neuen Analyse-Ausbeutefaktoren einschließlich bestehendemK10 beim bezahltenStart gespeichert (V3-Spezifikation702); alte normale Auftragsintegrale unverändert. Quellen `BALANCE.itemV3.familyYield`, `.combinations.photonic`, bestehendes `.progression.effects.D06quantity`. Kein neuer Preis oder zusätzlicher Erwerbsweg.
+
+
+### 30.10.2026 – beauftragter V3-Materialkreislauf
+Herstellungscontroller min(0,35; 0,10×P), mit bestehenden Forschungsrückgaben durch Maximum verrechnet. Recycling-Sonde Rare+ 0,25×P Fortschritt, Zweierkombination×1,25 nur Zusatzfortschritt; vollständiges Trio×1,2 neue bezahlte Analysen. Gesamtmaterialrückgewinnung höchstens0,90 der tatsächlich bezahlten Basis einschließlich bereits verwendeter Rückgaben. Vorhandene alte Zerlegeraten0,60/+0,05 proC05/bis0,75 unverändert nach `BALANCE.materialSalvage` zentralisiert. Quellen ausschließlich src/economy.ts; keine neue Kurve oder Zufallsbelohnung. Normale Save-Regeln erhalten.

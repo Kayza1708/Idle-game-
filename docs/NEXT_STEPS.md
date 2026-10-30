@@ -258,3 +258,11 @@ Vollpreise, atomareFehlfälle und113echtegespeicherteItems mitReload/Animationsa
 
 ### 29.10.: Familienausbeute und globale Startbedingungen geprüft
 Photon-/Quantenwirkungen, OD-Kombination und K10 sind an reale bezahlteStarts/Pakete gebunden; ursprünglicheHardwaregrundmengen und alte normaleIntegrale erhalten.112Auftragszustände/540Pakete,2.071Vitest/215EditMode/8finalePlayMode grün.11Originalbilder; Darstellungsumbrüche korrigiert. Weiter mit verbleibenden Arbeits-/Rückgewinnungs-/Provenienzverträgen,42er-Katalog und tatsächlichen gemeinsamenV3-Itemdetails, anschließend vollständigerverlustfreierSave-Migration und Gesamtregression/Naturalläufen. Nutzer hat erneut ausdrücklich vollständigesV3vorPlaytest bestätigt; kein Zwischenbuild.
+
+
+## V3-Materialkreislauf · 30.10.2026 · laufend
+Controller-Rückgabe, deterministische Recyclingfragmente, geschlossenes Trio, bezahlte Provenienz und90%-Grenze in TS/C# implementiert;31gemeinsame vorbereitete Transaktionsfolgen und gezielte Domainprüfung grün. Vollständige Regression läuft. UI-Details/Originalmigration und vollständige42Item-/60INT-/24Axiom-Abnahme bleiben offen. Keine Freigabe/Installation eines Zwischenplayers; Nutzer bestätigt weiterhin vollständigesV3 vor Xcode.
+
+Materialkreislauf-Zwischenstand: vollständige170Dateien/2.078Vitest(346,67s),217/217EditMode(200,946s),Typecheck/Build/Generatorvergleich grün. Passende echte Workshop-PlayMode-Regression läuft noch. Keine neue Spielerfreigabe.
+
+Abschluss Domainabschnitt Materialkreislauf:6/6passendePlayMode(33,623s) zusätzlich grün. Tatsächliche normale Workshop-Transaktionen, Animationstrennung/Abbruch, reduzierte Bewegung, Save/Reload und mobile Kosten-/Analysestatusanzeigen erhalten. Kein neuer Grafik-/Geräte-/V3-Dateinachweis. Gesamtauftrag läuft mit den offenen Forschungsereignissen und der vollständigen Migration weiter.

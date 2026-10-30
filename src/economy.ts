@@ -2456,6 +2456,7 @@ export const BALANCE = {
   craftingPlannerTargets:[1,5,10],
   bonusBoxMaxPending:32,bonusBoxMaxMaterialAmount:1000,
   materialPackages:{base:{cost:40,amount:12},semiconductor:{cost:80,amount:8},photonic:{cost:120,amount:6},frontier:{cost:180,amount:3},quantum:{cost:250,amount:1}},
+  materialSalvage:{base:.6,perC05:.05,cap:.75},
   recoveryFraction:.6,recoveryNumerator:3,recoveryDenominator:5,legacyItemRecovery:{common:2,uncommon:3,rare:5,epic:8,legendary:12,mythic:20},salvageFragmentChance:{common:0,uncommon:0,rare:.05,epic:.10,legendary:.20,mythic:.30},salvageFragmentCap:.6,blueprintDropChance:.01,blueprintResearchThreshold:10,
   forgeItemLimit:20,foundryMaxLevel:5,legacyFoundryLevelMax:10,forgeSpeeds:[1,1.25,1.6,2.1,2.8],forgeLimits:[4,8,12,16,20],forgeMultipliers:[1],forgeCosts:[{circuits:200,copperCoils:40,titaniumBolts:20},{circuits:600,ceramicSubstrates:80,goldContacts:40},{circuits:1800,graphene:120,nanotubes:80,superconductors:30},{circuits:5400,superconductors:150,thermalInterface:80,diamondSubstrates:40},{circuits:16200,neuralCrystals:120,cryogenicResonators:60,quantumCores:30}],forgeBaseSeconds:600,forgeDurationGrowth:1.35,forgeMinimumSeconds:60,forgeFamilyFrom:5,forgeRareFrom:9,forgeBaseMaterialsPerLevel:4,
   extendedItemCap:.6,extendedItemPlanningTime:.1,extendedItemRunTimeCap:3600,extendedItemPairCap:5,

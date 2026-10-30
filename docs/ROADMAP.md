@@ -315,3 +315,11 @@ Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehe
 - 29.10.: W07 verwendet volle Batchquote in Unity-Anzeige und Bezahlsperre; Mengenquelle zentral, W07-Verlust stellt×1wiederher.160gemeinsameTransaktionen,2.066Vitest/213EditMode/8PlayMode grün; echte113Items vorAnimation gespeichert/nachReload erhalten,44Originalbilder. Weitere Familien-/Arbeits-/Migrationsverträge offen.
 
 - 29.10.: Photon-/Quantenfamilien an bezahlteAnalysen/reguläreHardware gebunden; K10/Overdrive/W03 beimStart gespeichert, alteNormalkontrakte erhalten.112Aufträge/540Pakete,2.071Vitest/215volleEditMode/8finalePlayMode grün;11Originalbilder/7Sprachen,DE/EN320/390/430selbstgesehen. Itemdetails/weitereArbeitsereignisse/42erErwerb/V3-Migration bleiben offen.
+
+
+## V3-Materialkreislauf · 30.10.2026 · laufend
+Controller-Rückgabe, deterministische Recyclingfragmente, geschlossenes Trio, bezahlte Provenienz und90%-Grenze in TS/C# implementiert;31gemeinsame vorbereitete Transaktionsfolgen und gezielte Domainprüfung grün. Vollständige Regression läuft. UI-Details/Originalmigration und vollständige42Item-/60INT-/24Axiom-Abnahme bleiben offen. Keine Freigabe/Installation eines Zwischenplayers; Nutzer bestätigt weiterhin vollständigesV3 vor Xcode.
+
+Materialkreislauf-Zwischenstand: vollständige170Dateien/2.078Vitest(346,67s),217/217EditMode(200,946s),Typecheck/Build/Generatorvergleich grün. Passende echte Workshop-PlayMode-Regression läuft noch. Keine neue Spielerfreigabe.
+
+Abschluss Domainabschnitt Materialkreislauf:6/6passendePlayMode(33,623s) zusätzlich grün. Tatsächliche normale Workshop-Transaktionen, Animationstrennung/Abbruch, reduzierte Bewegung, Save/Reload und mobile Kosten-/Analysestatusanzeigen erhalten. Kein neuer Grafik-/Geräte-/V3-Dateinachweis. Gesamtauftrag läuft mit den offenen Forschungsereignissen und der vollständigen Migration weiter.

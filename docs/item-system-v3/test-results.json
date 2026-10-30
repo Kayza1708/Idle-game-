@@ -848,7 +848,7 @@
     "scope": "Existing atomic batch rule now shares full native total quote with UI and transaction; original per-exemplar mastery rounding, no new prices or production planner",
     "remaining": "Full42-item acquisition, event/provenance contracts, lossless V3 file migration and very large source craft-counter/native32bit mapping still open"
   },
-  "latestVerifiedSection": "familyYields",
+  "latestVerifiedSection": "materialCycle",
   "familyYields": {
     "sourceHash": "49fd19a97d021a44d34d2469737bd7c76b7a4dc730bee6b11e8b16d73e17a907",
     "actualAnalysisCases": 112,
@@ -902,5 +902,51 @@
       "Actual images exposed orphaned factors and clipped redundant units in translated base previews; family/value kept together, V3 duplicate unit suffix removed; final8/8UI regression passed."
     ],
     "remaining": "Unified actual V3 item detail formulas, full42-item acquisition/catalog, work/provenance events and lossless V3 file migration still open; no new player installed"
+  },
+  "materialCycle": {
+    "sourceHash": "d5ba4e268ff247fe106d2cf377c98202059f1479a4f7230c3a3d100fe739e768",
+    "preparedFlows": 31,
+    "newSourceTests": 7,
+    "vitest": {
+      "files": 170,
+      "tests": 2078,
+      "passed": 2078,
+      "failed": 0,
+      "seconds": 346.67,
+      "log": "/tmp/idle-v3-cycle-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "217",
+      "passed": "217",
+      "failed": "0",
+      "duration": "200.9455732",
+      "result": "Passed",
+      "xmlSha256": "1ee404a7c4fd12cd82ef44e554567ad8266f77c72fc028613f3fded8bca60083"
+    },
+    "targetedMaterial": {
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "duration": "1.3154835",
+      "result": "Passed",
+      "xmlSha256": "bf9f4bb087e39424cb5c42d58f3f8c3ce9948af9b9eecfbd190f88ea01313d00"
+    },
+    "typecheck": "passed",
+    "build": "passed",
+    "generatorCheck": "passed full sequential export/check",
+    "playMode": {
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "duration": "33.6231399",
+      "result": "Passed",
+      "xmlSha256": "90144e35661eebb3f8039ff37e7d349e986934b1d0d581467c13d1f4da48f0a6",
+      "scope": "Existing real workshop craft/fuse/cancel/reduced motion; normal save/reload and seven-locale/mobile cost/status regression. Not V3 file persistence or new graphics."
+    },
+    "scope": "Single craft refund, deterministic additional salvage fragments, closed-loop paid analysis, original paid basis and90percent cap, preservation through real resets and actual Challenge factories; V3 file writes blocked; UI details still pending",
+    "corrections": [
+      "Initial new test called private Industry.StartForge; corrected to public QueueForge; compile failed run not counted.",
+      "First targeted run34/35: test indexed initially empty foundries; guard corrected to Any, no production change. New material tests then2/2; full217/217."
+    ]
   }
 }
