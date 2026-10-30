@@ -13,5 +13,6 @@
     <Compile Include="V3FreshCampaignChecks.cs" />
     <Compile Include="V3BalanceProbe.cs" />
     <Compile Include="V3CombinationChecks.cs" />
+    <Compile Include="V3ProgressionContracts.cs" />
   </ItemGroup>
 </Project>
