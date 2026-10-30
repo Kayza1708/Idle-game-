@@ -113,3 +113,21 @@ test('D1/D7 cohorts count only consented signup-day sessions after full UTC retu
   assert.ok(!JSON.stringify(report).includes(a.id));
  }finally{sql.close();}
 });
+
+test('D1 season boundaries reject overlap but permit adjacent schedules and preserve old rows',()=>{
+ const {sql}=fixture();
+ try{
+  const add=(id,start,end)=>sql.prepare(
+    'INSERT INTO liveops_seasons(id,label,starts_at,ends_at) VALUES(?,?,?,?)'
+  ).run(id,id,start,end);
+  add('season-a',100,200);
+  add('season-b',200,300); // adjacent [start,end), no overlap
+  assert.throws(()=>add('season-interlaced',199,250),/liveops_season_overlap/);
+  assert.throws(()=>sql.prepare('UPDATE liveops_seasons SET starts_at=? WHERE id=?')
+    .run(199,'season-b'),/liveops_season_overlap/);
+  const saved=sql.prepare('SELECT starts_at,ends_at FROM liveops_seasons WHERE id=?')
+    .get('season-b');
+  assert.deepEqual(saved,{starts_at:200,ends_at:300});
+  assert.equal(sql.prepare('SELECT COUNT(*) AS count FROM liveops_seasons').get().count,2);
+ }finally{sql.close();}
+});
