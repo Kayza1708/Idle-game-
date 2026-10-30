@@ -26,6 +26,7 @@ namespace IdleIntelligence.Runtime
         TaskCompletionSource<RewardProviderResult> pending;
         CancellationTokenRegistration pendingCancellation;
         bool initialized,initializing,loading,wasDisplayed;
+        float nextInitializationAttempt;
         Coroutine closingGrace;
         string currentTransaction;
         public bool Ready => initialized && NativeAdPrivacy.CanInitialize(config)
@@ -54,7 +55,7 @@ namespace IdleIntelligence.Runtime
             privacyType=Find("LevelPlayPrivacySettings");
             TryInitialize();
         }
-        void Update(){if(!initialized&&!initializing)TryInitialize();}
+        void Update(){if(!initialized&&!initializing&&Time.unscaledTime>=nextInitializationAttempt)TryInitialize();}
         void TryInitialize()
         {
             if(initialized||initializing||sdkType==null||rewardType==null||
@@ -83,6 +84,7 @@ namespace IdleIntelligence.Runtime
             catch(Exception error)
             {
                 initializing=false;
+                nextInitializationAttempt=Time.unscaledTime+30f;
                 Debug.LogWarning("Rewarded video SDK unavailable: "+error.GetBaseException().Message);
                 UnsubscribeInit();
             }
@@ -114,6 +116,7 @@ namespace IdleIntelligence.Runtime
         void OnInitSuccess(object ignored)
         {
             initializing=false;
+            UnsubscribeInit();
             try
             {
                 var constructor=rewardType.GetConstructors().FirstOrDefault(c=>{
@@ -147,6 +150,8 @@ namespace IdleIntelligence.Runtime
         void OnInitFailed(object error)
         {
             initializing=false;
+            nextInitializationAttempt=Time.unscaledTime+30f;
+            UnsubscribeInit();
             Debug.LogWarning("LevelPlay initialization failed: "+error);
         }
         bool TryReady()
