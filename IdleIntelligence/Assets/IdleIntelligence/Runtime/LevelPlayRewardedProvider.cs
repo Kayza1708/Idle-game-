@@ -20,12 +20,12 @@ namespace IdleIntelligence.Runtime
         Type sdkType, rewardType, privacyType;
         object rewardedAd;
         EventInfo initSuccess, initFailure, loadedEvent, loadFailedEvent,
-            displayFailedEvent, earnedEvent, closedEvent;
+            displayedEvent,displayFailedEvent, earnedEvent, closedEvent;
         Delegate initSuccessHandler,initFailureHandler,loadedHandler,loadFailedHandler,
-            displayFailedHandler,earnedHandler,closedHandler;
+            displayedHandler,displayFailedHandler,earnedHandler,closedHandler;
         TaskCompletionSource<RewardProviderResult> pending;
         CancellationTokenRegistration pendingCancellation;
-        bool initialized,initializing,loading;
+        bool initialized,initializing,loading,wasDisplayed;
         Coroutine closingGrace;
         string currentTransaction;
         public bool Ready => initialized && NativeAdPrivacy.CanInitialize(config)
@@ -62,10 +62,12 @@ namespace IdleIntelligence.Runtime
             try
             {
                 // Only explicit QA consent or certified CMP consent can reach here.
-                privacyType.GetMethod("SetGDPRConsent",BindingFlags.Public|BindingFlags.Static)
-                    ?.Invoke(null,new object[]{true});
-                privacyType.GetMethod("SetCCPA",BindingFlags.Public|BindingFlags.Static)
-                    ?.Invoke(null,new object[]{true}); // opt out of data sale/sharing
+                (privacyType.GetMethod("SetGDPRConsent",BindingFlags.Public|BindingFlags.Static)
+                    ??throw new MissingMethodException("LevelPlayPrivacySettings.SetGDPRConsent"))
+                    .Invoke(null,new object[]{true});
+                (privacyType.GetMethod("SetCCPA",BindingFlags.Public|BindingFlags.Static)
+                    ??throw new MissingMethodException("LevelPlayPrivacySettings.SetCCPA"))
+                    .Invoke(null,new object[]{true}); // opt out of data sale/sharing
                 // General-audience game; COPPA/age declarations require Store review.
                 initSuccess=Attach(sdkType,null,"OnInitSuccess",nameof(OnInitSuccess),out initSuccessHandler);
                 initFailure=Attach(sdkType,null,"OnInitFailed",nameof(OnInitFailed),out initFailureHandler);
@@ -126,10 +128,11 @@ namespace IdleIntelligence.Runtime
                 rewardedAd=constructor.Invoke(values);
                 loadedEvent=Attach(rewardType,rewardedAd,"OnAdLoaded",nameof(OnLoaded),out loadedHandler);
                 loadFailedEvent=Attach(rewardType,rewardedAd,"OnAdLoadFailed",nameof(OnLoadFailed),out loadFailedHandler);
+                displayedEvent=Attach(rewardType,rewardedAd,"OnAdDisplayed",nameof(OnDisplayed),out displayedHandler);
                 displayFailedEvent=Attach(rewardType,rewardedAd,"OnAdDisplayFailed",nameof(OnDisplayFailed),out displayFailedHandler);
                 earnedEvent=Attach(rewardType,rewardedAd,"OnAdRewarded",nameof(OnRewarded),out earnedHandler);
                 closedEvent=Attach(rewardType,rewardedAd,"OnAdClosed",nameof(OnClosed),out closedHandler);
-                if(earnedEvent==null||closedEvent==null||displayFailedEvent==null)
+                if(earnedEvent==null||closedEvent==null||displayedEvent==null||displayFailedEvent==null)
                     throw new InvalidOperationException("Rewarded callback wiring incomplete");
                 initialized=true;
                 Reload();
@@ -172,10 +175,12 @@ namespace IdleIntelligence.Runtime
             if(closingGrace!=null){StopCoroutine(closingGrace);closingGrace=null;}
             completion.TrySetResult(result);
         }
-        // This callback, and only this callback, is evidence of a rewarded ad.
+        void OnDisplayed(object adInfo){if(pending!=null)wasDisplayed=true;}
+        // The SDK completion callback AND a displayed ad are required. Closing,
+        // loading and readiness alone cannot mint any game currency.
         void OnRewarded(object adInfo,object reward)
         {
-            if(pending!=null&&NativeAdPrivacy.CanInitialize(config))Finish(RewardProviderResult.Success);
+            if(wasDisplayed&&pending!=null&&NativeAdPrivacy.CanInitialize(config))Finish(RewardProviderResult.Success);
         }
         void OnDisplayFailed(object adInfo,object error)
         {
@@ -202,6 +207,7 @@ namespace IdleIntelligence.Runtime
             if(cancellation.IsCancellationRequested)return Task.FromResult(RewardProviderResult.Cancelled);
             if(!Ready||pending!=null||string.IsNullOrEmpty(transaction))
                 return Task.FromResult(RewardProviderResult.Unavailable);
+            wasDisplayed=false;
             pending=new TaskCompletionSource<RewardProviderResult>(TaskCreationOptions.RunContinuationsAsynchronously);
             var request=pending.Task;
             currentTransaction=transaction;
@@ -226,7 +232,7 @@ namespace IdleIntelligence.Runtime
         {
             CancelInvoke();Finish(RewardProviderResult.Cancelled);
             Detach(loadedEvent,rewardedAd,loadedHandler);Detach(loadFailedEvent,rewardedAd,loadFailedHandler);
-            Detach(displayFailedEvent,rewardedAd,displayFailedHandler);Detach(earnedEvent,rewardedAd,earnedHandler);
+            Detach(displayedEvent,rewardedAd,displayedHandler);Detach(displayFailedEvent,rewardedAd,displayFailedHandler);Detach(earnedEvent,rewardedAd,earnedHandler);
             Detach(closedEvent,rewardedAd,closedHandler);UnsubscribeInit();
             try{rewardType?.GetMethod("DestroyAd",Type.EmptyTypes)?.Invoke(rewardedAd,null);}catch{}
         }
