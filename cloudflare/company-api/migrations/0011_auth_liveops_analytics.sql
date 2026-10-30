@@ -1,6 +1,6 @@
 -- Server-only credentials, telemetry and UTC LiveOps controls. Never trust Unity saves.
 CREATE TABLE IF NOT EXISTS account_identities (
-  provider TEXT NOT NULL CHECK(provider IN ('apple','google')),
+  provider TEXT NOT NULL CHECK(provider IN ('apple','google','playgames')),
   subject_hash TEXT NOT NULL CHECK(length(subject_hash)=64),
   player_id TEXT NOT NULL REFERENCES players(id) ON DELETE CASCADE,
   linked_at INTEGER NOT NULL,
