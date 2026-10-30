@@ -95,10 +95,10 @@ namespace IdleIntelligence.Core
         public static GameState Upgrade(GameState original)
         {
             if(original==null)throw new ArgumentNullException(nameof(original));
-            Game.Validate(original);
             if(ItemSystemV3.Enabled(original))return original;
             var next=original.Copy();
             ExpandWorkshopArrays(next.Workshop);
+            Game.Validate(next);
             next.ItemSystemV3=new ItemV3State();
             next.ItemSystemV3.archiveBlueprintRight=
                 PrestigeRules.Has(next,"I04")||next.Prestige.known.Contains("I04")||
