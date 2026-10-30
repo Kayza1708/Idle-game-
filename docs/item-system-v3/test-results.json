@@ -391,7 +391,7 @@
       "3 test timeouts and worker RPC errors during documented Mac sleep phases, plus sandbox Websocket EPERM; full awake unsandboxed rerun passed without extending timeouts"
     ]
   },
-  "currentSourceHash": "dad1a4aba6854b695c2f3ac43cc2a24edad97a420b0fd054de02b34a1cefa167",
+  "currentSourceHash": "26ea3947788247bedbb082ca017a8310c1b7d36ee9dc6c8c9b1370b20c4378bc",
   "workshopYieldFollowup": {
     "sourceHash": "1346735fe363b80f67ba4223d3c73bea5b4c5f1853b4776f3ebd158785f433e9",
     "normalSaveActivation": false,
@@ -529,5 +529,556 @@
       "result": "Passed",
       "xmlSha256": "08a02970b6fec04990b7cd21246a72e01e6478c6f422bc01305cc29e5dce0b53"
     }
+  },
+  "overdriveContractsFollowup": {
+    "sourceHash": "f5b45f81dd894993a8c509b7718ef354c887d7d6efc96d0ded92d28f6e726266",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "productionCases": 102,
+    "actualOverdriveFlows": 8,
+    "actualChallengeFlows": 7,
+    "actualRelayFlows": 7,
+    "focusedVitest": 15,
+    "vitest": {
+      "files": 162,
+      "tests": 2039,
+      "passed": 2039,
+      "failed": 0,
+      "seconds": 177.8,
+      "log": "/tmp/idle-v3-overdrive-full-vitest-final.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Actual start snapshots, burst/energy windows, cryo duration, charged control without tap payment, interval splitting, paused main timer, countdown and bounded contracts; normal saves protected",
+    "images": "../media/unity-v3-overdrive/README.md",
+    "rejectedRuns": [
+      "Three test-first cases exposed absent consumers; one expectation used wrong balance property path and was corrected",
+      "First additional PlayMode launch was not executed because automatic approval review hit a temporary usage limit; after expiry a15-test run passed, before final countdown correction",
+      "Exporter omitted fraction helper import, corrected before final complete generation",
+      "First actual countdown UI run found decorative fill image raycastTarget=true; fixed on the responsible Image; rerun passed"
+    ],
+    "targetedEditModeBeforeFinalCountdown": {
+      "total": "25",
+      "passed": "25",
+      "failed": "0",
+      "duration": "6.1633117",
+      "result": "Passed",
+      "xmlSha256": "43f7db86acc7e6dbe882203a8c3c5f54b68ea4ea9dbbac3cdce390e8fea9ece6"
+    },
+    "mobileCountdownUI": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "3.7371309",
+      "result": "Passed",
+      "xmlSha256": "f7f0d1b9e234f8c884fbe90a4a9ea26b05ba63d3323fb8b753019883a0376dad"
+    },
+    "fullEditMode": {
+      "total": "207",
+      "passed": "207",
+      "failed": "0",
+      "duration": "72.6286634",
+      "result": "Passed",
+      "xmlSha256": "360cdbbf8c23e224b1e870cb2ead17203100436b02cd731677fa67db83240def"
+    },
+    "finalTargetedPlayMode": {
+      "total": "16",
+      "passed": "16",
+      "failed": "0",
+      "duration": "81.7320513",
+      "result": "Passed",
+      "xmlSha256": "ccbba151312e41e41dce03f63741c3d5a97edaa97e0ee779d7a9c07e61217978"
+    }
+  },
+  "diagnosticPackagesFollowup": {
+    "sourceHash": "a63177caf7b3c4c45781312274821f0fa7f945ffc171c5a01f2f12cb39abd26b",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "hardwarePackageCases": 360,
+    "actualComponentFlows": 32,
+    "focusedVitest": 3,
+    "vitest": {
+      "files": 163,
+      "tests": 2042,
+      "passed": 2042,
+      "failed": 0,
+      "seconds": 192.07,
+      "log": "/tmp/idle-v3-diagnostic-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Variable regular paid hardware milestone materials, diagnostic P/boot/W08 once, old remainders/fixed extras/excluded class-upgrade packages; no V3 disk-save release",
+    "rejectedRuns": [
+      "First editor crashed during script-loading Mono task continuation, exit139, no verdict; unchanged retry passed",
+      "PlayMode10/11: actual29s intro capture lost application/runtime focus, foreground ticks paused; trace proved stateAt froze at15.986/20work. Repeat before foreground activation also failed. User kept Unity foreground, titlebar activated via CUA; unchanged real-time recording then passed with quality1/focus true. No timing or production-rule changes."
+    ],
+    "targetedEditMode": {
+      "total": "26",
+      "passed": "26",
+      "failed": "0",
+      "duration": "6.5577065",
+      "result": "Passed",
+      "xmlSha256": "2cca67c713fe4cb477dd237ad51a0e9eb778b52d3850d06024736103111029a8"
+    },
+    "fullEditMode": {
+      "total": "208",
+      "passed": "208",
+      "failed": "0",
+      "duration": "78.0023799",
+      "result": "Passed",
+      "xmlSha256": "4c906e19f1c892015b89861205583069944c2281050f7f3d1474e93bdc28ccc5"
+    },
+    "initialPlayMode": {
+      "total": "11",
+      "passed": "10",
+      "failed": "1",
+      "duration": "77.1795746",
+      "result": "Failed(Child)",
+      "xmlSha256": "b97456d75db09a121e528042b8fee4187776c056567722628cdeef8c72391931"
+    },
+    "finalFocusedIntro": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "31.6965197",
+      "result": "Passed",
+      "xmlSha256": "0966e5bab8f7254377aff92f52b7b5c12478f13a83c23dd047c183cc424affb2"
+    },
+    "foregroundTrace": "diagnostics/intro-foreground-trace.txt"
+  },
+  "blueprintArchiveFollowup": {
+    "sourceHash": "82f072b676b4a2bb34803c0934f8be1c14e9288d83303abdf7e4ef369cda2401",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "productionCases": 108,
+    "actualBlueprintMasteryCases": 6,
+    "focusedVitest": 3,
+    "vitest": {
+      "files": 164,
+      "tests": 2045,
+      "passed": 2045,
+      "failed": 0,
+      "seconds": 180.87,
+      "log": "/tmp/idle-v3-blueprint-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Known own blueprint mastery entries only, distinct count not levels; unknown source properties unchanged; native known-array state parity. No V3 disk-import/migration release.",
+    "fullEditMode": {
+      "total": "209",
+      "passed": "209",
+      "failed": "0",
+      "duration": "80.4030847",
+      "result": "Passed",
+      "xmlSha256": "9421f2e8c6f25bb340aeeb39242996d34e88cb6fb1a038c0225416ccb4a91538"
+    },
+    "targetedPlayMode": {
+      "total": "3",
+      "passed": "3",
+      "failed": "0",
+      "duration": "5.9410675",
+      "result": "Passed",
+      "xmlSha256": "9540d1d0409e5aa9f94763547779bc9b0fc814d2fbcbeb426859429dedff7e17"
+    }
+  },
+  "precisionFocusFollowup": {
+    "sourceHash": "26ea3947788247bedbb082ca017a8310c1b7d36ee9dc6c8c9b1370b20c4378bc",
+    "normalSaveActivation": false,
+    "prepared": true,
+    "precisionFocusCases": 120,
+    "actualComponentFlows": 35,
+    "focusedVitest": 4,
+    "vitest": {
+      "files": 165,
+      "tests": 2049,
+      "passed": 2049,
+      "failed": 0,
+      "seconds": 181.73,
+      "log": "/tmp/idle-v3-precision-full-vitest.log"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning",
+    "generatorCheck": "passed",
+    "scope": "Focus weights normalized after1+P, existing quantity loss divided by1+P, paid weights/units snapshot and V3 base-draw preview; no new material family, no V3 save release",
+    "rejectedRuns": [
+      "Three test-first source cases showed absent weight/quantity effects and disconnected V3 preview",
+      "Initial27/28native targeted run: copy-isolation assertion compared native bits to source double; corrected to native original. Separate TS/C# tolerance retained; no production number changed."
+    ],
+    "fullEditMode": {
+      "total": "210",
+      "passed": "210",
+      "failed": "0",
+      "duration": "81.129644",
+      "result": "Passed",
+      "xmlSha256": "118893f432cdae65443241c2365643e52af987be56efdc27d4fae07c14d63aae"
+    },
+    "targetedPlayMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "7.2077753",
+      "result": "Passed",
+      "xmlSha256": "5f8a80415700d740ea67d8e4cc84bde1a81cddec403764e603af5f81267c3414"
+    }
+  },
+  "targetedAnalysisW03": {
+    "sourceHash": "8650e8e61333b3fa29da0d50b8cfab946736727e3b738234ad2a0042b915cf9a",
+    "componentFlows": 40,
+    "newSourceContracts": 6,
+    "vitest": {
+      "files": 166,
+      "tests": 2055,
+      "passed": 2055,
+      "failed": 0,
+      "seconds": 185.57,
+      "log": "/tmp/idle-v3-W03-full-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "211",
+      "passed": "211",
+      "failed": "0",
+      "duration": "80.0833174",
+      "result": "Passed",
+      "xmlSha256": "abb5263d5dea7b206826ca086b120cbd87f7c00dcb24169dc080b7cb07f0f32d"
+    },
+    "targetedPlayMode": {
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "duration": "11.2347504",
+      "result": "Passed",
+      "xmlSha256": "8c98b15058db573dc776582c6046f72c59e2d8a182ce2dae09a18c00e3fbf2ed"
+    },
+    "finalLocalizedUI": {
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "duration": "5.7547191",
+      "result": "Passed",
+      "xmlSha256": "465d223d5248a32aef58db9450b457b0532599bd545e13d60c7d8812ea986608"
+    },
+    "typecheck": "passed",
+    "build": "passed; existing chunk warning;1.56s",
+    "generatorCheck": "passed full; final wording rechecked targeted",
+    "graphics": "22 actual Unity captures; 6/6 final DE/EN analysis images 320/390/430 self-inspected, node details representative DE/EN; seven locale fit assertions. Financed read-only V3 projection, original normal save unchanged. No device/full migration claim.",
+    "scope": "Only stored W03 family multiplier and already unlocked rare guarantee; legacy paid rights kept; global K10 quantity remains live; Photon/Quantum family items still open",
+    "finalWording": "Base draws/Grundmenge disambiguates quantity from base material family; 2 UI and 6 source cases rerun after wording-only change"
+  },
+  "precisionManufacturingW04": {
+    "sourceHash": "d01a4534fac737912aa76fd8aa7b1d6b7530db1ac8a0dc7b4dd70671bc2b617c",
+    "actualUpgradeCases": 1260,
+    "newSourceContracts": 5,
+    "vitest": {
+      "files": 167,
+      "tests": 2060,
+      "passed": 2060,
+      "failed": 0,
+      "seconds": 187.44,
+      "log": "/tmp/idle-v3-W04-full-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "212",
+      "passed": "212",
+      "failed": "0",
+      "duration": "80.9761722",
+      "result": "Passed",
+      "xmlSha256": "4a093d02fcbd1a62e09d048401907c18c1ffff422be3de945dd4855cb4bb4033"
+    },
+    "initialTargetedPlayMode": {
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "duration": "10.9830284",
+      "result": "Passed",
+      "xmlSha256": "aefaed31ca8e96ba4d0563f8442d9be365eea3fdcac65e5d659d4ebd4e2469ca"
+    },
+    "finalCostLayoutPlayMode": {
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "duration": "10.5659924",
+      "result": "Passed",
+      "xmlSha256": "690f8faf95c5fe1c8df5cc4f68cb398da18e68af58aeb3a82b9f90997faee691"
+    },
+    "typecheck": "passed",
+    "build": "passed;1.53s; existing chunk warning",
+    "generatorCheck": "passed full",
+    "scope": "V3 .75 level-up input factors, actual debit and paid material basis, stale action rejection; old normal .85 preserved; no recipe/fusion/forge discount; 36 current types, not full 42-item release",
+    "graphics": "23 actual Unity pictures; node fit all seven languages, DE/EN320/390/430 funded and missing-input item details; six funded pictures and representative missing/node states self-inspected. In-memory V3 projection, normal original byte-identical.",
+    "correction": "Native images exposed a German number split across lines. Shared CostStrip now selects up to three columns using actual text width at minimum size; final tests require a single line per cost. No price/formatting setting changed.",
+    "knownSourceIssue": "cycle-observatory has same base/rare component ID; existing assignment semantics retained and documented, no invented additive cost rule",
+    "testFirst": "Three source failures reproduced old .85/missing description. Subsequent independent all-type test exposed an existing base/rare key collision in expected assertions; preserved source contract rather than changing costs."
+  },
+  "serialCraftingW07": {
+    "sourceHash": "279aace7c4b1fbcbbdbdf88289008d92318e34107cccaf26fc459a10f7c1b688",
+    "actualBatchCases": 160,
+    "newSourceContracts": 6,
+    "vitest": {
+      "files": 168,
+      "tests": 2066,
+      "passed": 2066,
+      "failed": 0,
+      "seconds": 187.18,
+      "log": "/tmp/idle-v3-W07-full-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "213",
+      "passed": "213",
+      "failed": "0",
+      "duration": "80.7720741",
+      "result": "Passed",
+      "xmlSha256": "eff7005a2f7c6b1fdcd094e4794c6db93ec1cb61d2fe88786b6e6505cb1a1ca3"
+    },
+    "targetedPlayMode": {
+      "total": "8",
+      "passed": "8",
+      "failed": "0",
+      "duration": "17.1470345",
+      "result": "Passed",
+      "xmlSha256": "eb641a099e7fabfdf4a46194c14fd3d475bb5ace7a55e7d6969e566a7edfd0ad"
+    },
+    "typecheck": "passed",
+    "build": "passed;1.57s; existing chunk warning",
+    "generatorCheck": "passed full",
+    "actualUI": "Financed isolated normal save:3/10/100 purchases,113 unique items saved before effect, first shared animation fully completed, later cancellation no rewards; insufficient batch unchanged; loss of W07 falls back to1;113 recovered on real reload",
+    "graphics": "44 actual Unity captures:33 full-price views and11 node details; seven locale assertions. DE/EN320/390/430 batch100 self-inspected plus3/10 and node detail representatives. No physical device/42-item/full V3 migration claim.",
+    "scope": "Existing atomic batch rule now shares full native total quote with UI and transaction; original per-exemplar mastery rounding, no new prices or production planner",
+    "remaining": "Full42-item acquisition, event/provenance contracts, lossless V3 file migration and very large source craft-counter/native32bit mapping still open"
+  },
+  "latestVerifiedSection": "researchStartContracts",
+  "familyYields": {
+    "sourceHash": "49fd19a97d021a44d34d2469737bd7c76b7a4dc730bee6b11e8b16d73e17a907",
+    "actualAnalysisCases": 112,
+    "actualHardwareCases": 540,
+    "newSourceContracts": 5,
+    "vitest": {
+      "files": 169,
+      "tests": 2071,
+      "passed": 2071,
+      "failed": 0,
+      "seconds": 336.93,
+      "log": "/tmp/idle-v3-family-final-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "215",
+      "passed": "215",
+      "failed": "0",
+      "duration": "202.3396492",
+      "result": "Passed",
+      "xmlSha256": "94150ea0dc08fb8eb62cd0c49e1beaf87ce5a790b1d131db849b63534ad353f4"
+    },
+    "unchangedPlayRetry": {
+      "total": "8",
+      "passed": "8",
+      "failed": "0",
+      "duration": "23.3289406",
+      "result": "Passed",
+      "xmlSha256": "d1018a2f4be8b78c612472ef237b4900f571e635aa9e916423e439fe981d75ef"
+    },
+    "finalReadablePlayMode": {
+      "total": "8",
+      "passed": "8",
+      "failed": "0",
+      "duration": "22.581858",
+      "result": "Passed",
+      "xmlSha256": "7412968456c93fe6f8c73e15f53a3ee66f0933c1d17245ee5ad7f5a039266843"
+    },
+    "typecheck": "passed",
+    "build": "passed;2.29s; existing chunk warning",
+    "generatorCheck": "passed full after completed sequential export",
+    "graphics": "11 actual isolated read-only V3 Unity analysis images. Final DE/EN320/390/430 and FR390 self-inspected; seven locale factor/preview fit assertions. Original normal save byte-identical. No device/42-item/detail/migration claim.",
+    "scope": "Paid-start global and family yields including K10 and photonic architecture; existing normal integral contracts retained; regular hardware family mapping separate from historical base grouping, GPU extra and fractions; no class-upgrade/shop/salvage/synthesis multiplier",
+    "corrections": [
+      "First source expectations omitted existing per-component fractional accounts; corrected to compare whole finds plus fractions, no production rounding change.",
+      "A preview call accidentally referenced a start-only now variable; corrected before final tests.",
+      "New test C# used a var declaration with multiple variables; compile error corrected.",
+      "32/33 initial focused native: legacy source base contract contains ones while actual old family effect is integrated; test now distinguishes stored V3 snapshot from legacy integral and verifies both actual completions.",
+      "First full Source run had5stale generated outputs and1slow W04 test setup timeout. All exports completed before final run; same full level coverage with per-type setup reuse, no timeout increase.",
+      "One mistakenly overlapping own export/EditMode invocation stopped with143and not counted as a verdict; rerun sequentially.",
+      "Initial graphical launch exited138in Burst child compiler/libmonobdwgc native code, no XML verdict. Unchanged retry8/8, no Burst setting/package changed.",
+      "Actual images exposed orphaned factors and clipped redundant units in translated base previews; family/value kept together, V3 duplicate unit suffix removed; final8/8UI regression passed."
+    ],
+    "remaining": "Unified actual V3 item detail formulas, full42-item acquisition/catalog, work/provenance events and lossless V3 file migration still open; no new player installed"
+  },
+  "materialCycle": {
+    "sourceHash": "d5ba4e268ff247fe106d2cf377c98202059f1479a4f7230c3a3d100fe739e768",
+    "preparedFlows": 31,
+    "newSourceTests": 7,
+    "vitest": {
+      "files": 170,
+      "tests": 2078,
+      "passed": 2078,
+      "failed": 0,
+      "seconds": 346.67,
+      "log": "/tmp/idle-v3-cycle-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "217",
+      "passed": "217",
+      "failed": "0",
+      "duration": "200.9455732",
+      "result": "Passed",
+      "xmlSha256": "1ee404a7c4fd12cd82ef44e554567ad8266f77c72fc028613f3fded8bca60083"
+    },
+    "targetedMaterial": {
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "duration": "1.3154835",
+      "result": "Passed",
+      "xmlSha256": "bf9f4bb087e39424cb5c42d58f3f8c3ce9948af9b9eecfbd190f88ea01313d00"
+    },
+    "typecheck": "passed",
+    "build": "passed",
+    "generatorCheck": "passed full sequential export/check",
+    "playMode": {
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "duration": "33.6231399",
+      "result": "Passed",
+      "xmlSha256": "90144e35661eebb3f8039ff37e7d349e986934b1d0d581467c13d1f4da48f0a6",
+      "scope": "Existing real workshop craft/fuse/cancel/reduced motion; normal save/reload and seven-locale/mobile cost/status regression. Not V3 file persistence or new graphics."
+    },
+    "scope": "Single craft refund, deterministic additional salvage fragments, closed-loop paid analysis, original paid basis and90percent cap, preservation through real resets and actual Challenge factories; V3 file writes blocked; UI details still pending",
+    "corrections": [
+      "Initial new test called private Industry.StartForge; corrected to public QueueForge; compile failed run not counted.",
+      "First targeted run34/35: test indexed initially empty foundries; guard corrected to Any, no production change. New material tests then2/2; full217/217."
+    ]
+  },
+  "researchWorkEvents": {
+    "sourceHash": "74d931ca36e2efa98c665602431f6971ef5c7cfd3940c31eaaab592a1447d96d",
+    "preparedPaidFlows": 20,
+    "pureAllocations": 25,
+    "newSourceTests": 9,
+    "vitest": {
+      "files": 171,
+      "tests": 2087,
+      "passed": 2087,
+      "failed": 0,
+      "seconds": 338.15,
+      "log": "/tmp/idle-v3-research-vitest.log"
+    },
+    "targetedCombinedEditMode": {
+      "total": "37",
+      "passed": "37",
+      "failed": "0",
+      "duration": "71.6156243",
+      "result": "Passed",
+      "xmlSha256": "1abc9fb2145c8d3d4eef4364a401c97c3276d25859612717372a869c2bbf51ab"
+    },
+    "initialFullEditMode": {
+      "total": "221",
+      "passed": "220",
+      "failed": "1",
+      "duration": "188.6094818",
+      "result": "Failed(Child)",
+      "xmlSha256": "ac612528622ab2ed08b166a21388743bab353d10a6de3e03dda2374b7b384eb7"
+    },
+    "newResearchInvariantsAfterTestFix": {
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "duration": "1.3087336",
+      "result": "Passed",
+      "xmlSha256": "d3f6dfaf02e35fe86e8a5b7d911f23316f60f6ce67b61f23d377038af4f17902"
+    },
+    "typecheck": "passed",
+    "build": "passed",
+    "generatorCheck": "passed full",
+    "scope": "Paid regular training photon work, complete learning spiral, non-recursive lab-drone transfer, deterministic ties and actual first work boundary; normal save rules retained. Prepared references only, V3 writers still reject. No new graphics or complete migration claim.",
+    "corrections": [
+      "First full220/221 failed because the new Intro test left legacyIntro=true while setting the current Mira target. Test flag corrected; production unchanged; new4/4green."
+    ],
+    "finalFullEditMode": {
+      "total": "221",
+      "passed": "221",
+      "failed": "0",
+      "duration": "206.8267902",
+      "result": "Passed",
+      "xmlSha256": "65c69d327869083655e5789bb794d845223b03b96ad2f5d2e6257106eb4f6b58"
+    },
+    "playMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "16.6772655",
+      "result": "Passed",
+      "xmlSha256": "c39f3be36d152a8ef9ac885b62ab2f57baeb545ed4496a590117b9c68439dd4c"
+    }
+  },
+  "researchStartContracts": {
+    "sourceHash": "0597f4194610752a250ed379032267e12d78e073dcdccc5c87ca266055ff741b",
+    "preparedPaidFlows": 32,
+    "newSourceTests": 6,
+    "vitest": {
+      "files": 172,
+      "tests": 2093,
+      "passed": 2093,
+      "failed": 0,
+      "seconds": 337.77,
+      "log": "/tmp/idle-v3-research-start-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "223",
+      "passed": "223",
+      "failed": "0",
+      "duration": "209.4072204",
+      "result": "Passed",
+      "xmlSha256": "7ba082080edc8f4e3e1a3d7be0264b1f071d075b4ca5e4c4515f6f4e00c2102a"
+    },
+    "initialStartEditMode": {
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "duration": "1.4192294",
+      "result": "Passed",
+      "xmlSha256": "2ecb83679f8243ec064e3f11c1056fb3f77359aa0fb9a37f3c1b80ef0fee92d8"
+    },
+    "connectedResearchEditMode": {
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "duration": "2.8367045",
+      "result": "Passed",
+      "xmlSha256": "8b68a8c085a5dd3d7d0b5bb82d072b4e08ec6e43de71e38a0ec5f7517f3675b9"
+    },
+    "firstUi": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "18.309258",
+      "result": "Passed",
+      "xmlSha256": "ac855efea76dde134f58da14fd86d42a1a35379a7b48477a0cd4be4d57e86a7b"
+    },
+    "secondUi": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "29.899965",
+      "result": "Passed",
+      "xmlSha256": "d663488e49f8e359191557f8ec62c9bc289d072556d5dc8da4e3af844378351a"
+    },
+    "finalPlayMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "40.2932259",
+      "result": "Passed",
+      "xmlSha256": "8a0f3cc83cf46b6c56e3e479deed3ef8747a95a64c721d61c3ba158671643fbc"
+    },
+    "typecheck": "passed",
+    "build": "passed;1.95s; existing chunk warning",
+    "generatorCheck": "passed full",
+    "scope": "Snapshot paid initial work/deadline/area/cause, automatic paid counter, genuine Gem skip and both real resets retaining paid jobs; normal contracts retained; three research item details/actual remaining UI. V3 writers blocked.",
+    "graphics": "44 actual unmodified Unity PNGs in docs/media/unity-v3-research-starts; DE/EN320/390/430 and FR390 inspected across changed views. Time-card padding and nonbreaking numeric units corrected after image review; French Unequip fixed in original shared native catalog. Seven-locale fit/normal-save byte equality assertions. Prepared read-only fixture, no V3 file persistence/device/natural acquisition proof.",
+    "corrections": [
+      "First Source skip test passed invented transaction arguments instead of the real expected job and price; corrected to actual public quote, no domain balance change.",
+      "Initial self-inspection found time text too close to card border and English Unequip in French; time padding/alignment and original common native copy completed in all7 languages.",
+      "Second self-inspection found a percent unit stranded by line wrap; numeric units now nonbreaking. No new design round or images postprocessing."
+    ]
   }
 }

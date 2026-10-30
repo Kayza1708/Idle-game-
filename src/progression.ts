@@ -1,5 +1,5 @@
 import {prestigeHardwareFirstV3,prestigeHardwareSecondV3,prestigeCreditHardwareV3,prestigeINTWeightV3,prestigeGainExponentV3,prestigeCreditFactorV3,progressionEffectsV3,discoverAxiomsV3,prestigeResearchActivityV3,prestigeResearchDataV3} from './prestigeV3';
-import {usesItemV3,itemV3Equipped,itemRelayBonusV3,itemDataFactorV3,itemTrainingStrengthV3,itemWorkFactorV3,itemKnowledgeFactorV3} from './itemSystemV3';
+import {usesItemV3,itemOverdriveStartV3,itemBurstFactorV3,itemV3Equipped,itemRelayBonusV3,itemDataFactorV3,itemTrainingStrengthV3,itemWorkFactorV3,itemKnowledgeFactorV3} from './itemSystemV3';
 import { deviceBonus } from "./deviceEffects";
 import {
   BALANCE,
@@ -457,7 +457,7 @@ export function progressionCreditFactors(
       1 + deviceBonus(s, "memory") * (1 + challengeFamilyBonus(s, "no-taps")),
     temporary: temporary
       ? (s.creditBoostUntil > now ? 2 : 1) *
-        (s.overclock.activeUntil > now ? overdriveFactor(s) : 1)
+        (s.overclock.activeUntil > now ? overdriveFactor(s) : 1) * itemBurstFactorV3(s,'credits',now)
       : 1,
   };
 }
@@ -884,6 +884,19 @@ export function tapQuote(s: GameState, now = s.savedAt, proc = 0) {
       (BALANCE.progression.tapSoft + q * (1 + c * (m - 1)));
   return { chance: c, crit: m, seconds, combo };
 }
+function overdriveBaseDuration(s:GameState){return Math.min(
+      BALANCE.progression.overdriveMaxSeconds,
+      BALANCE.progression.overdriveSeconds *
+        (hasProgressionNode(s, "S07") ? effectsFor(s).S07 : 1) *
+        (1 + milestoneBonus(s, "overclock")) *
+        (1 + deviceBonus(s, "overclockDuration")),
+    );}
+/** Charged legacy control uses the same V3 contract; it never creates a tap. */
+export function progressionActivateOverdrive(s:GameState,now:number){
+ if(!usesItemV3(s)||s.retention.activeRun?.id==='no-taps'||!Number.isFinite(now)||now<s.savedAt||!s.overclock.charged||s.overclock.taps<formula().overdriveCharge||now<s.overclock.cooldownUntil)return s;
+ const start=itemOverdriveStartV3(s,now,overdriveBaseDuration(s));
+ return{...s,itemSystemV3:{...s.itemSystemV3!,overdrive:start.contract},overclock:{...s.overclock,taps:0,charged:false,activeUntil:now+start.duration*1000,cooldownUntil:now+BALANCE.progression.overdriveInterval},lifetime:{...s.lifetime,overclocks:s.lifetime.overclocks+1}};
+}
 export function progressionTap(s: GameState, now: number) {
   if (
     s.retention.activeRun?.id === "no-taps" ||
@@ -914,13 +927,8 @@ export function progressionTap(s: GameState, now: number) {
     charge = Math.min(formula().overdriveCharge, s.overclock.taps + 1),
     trigger =
       charge >= formula().overdriveCharge && now >= s.overclock.cooldownUntil,
-    duration = Math.min(
-      BALANCE.progression.overdriveMaxSeconds,
-      BALANCE.progression.overdriveSeconds *
-        (hasProgressionNode(s, "S07") ? effectsFor(s).S07 : 1) *
-        (1 + milestoneBonus(s, "overclock")) *
-        (1 + deviceBonus(s, "overclockDuration")),
-    );
+    duration = overdriveBaseDuration(s);
+  const overdrive=trigger&&usesItemV3(s)?itemOverdriveStartV3(s,now,duration):null;
   p = {
     ...p,
     critRng: rng,
@@ -937,12 +945,13 @@ export function progressionTap(s: GameState, now: number) {
             )
           : s.inventory,
         progression: p,
+        ...(overdrive?{itemSystemV3:{...s.itemSystemV3!,overdrive:overdrive.contract}}:{}),
         overclock: trigger
           ? {
               ...s.overclock,
               taps: 0,
               charged: false,
-              activeUntil: now + duration * 1000,
+              activeUntil: now + (overdrive?.duration??duration) * 1000,
               cooldownUntil: now + BALANCE.progression.overdriveInterval,
             }
           : {

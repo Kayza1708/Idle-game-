@@ -2,7 +2,31 @@ import {itemSynthesisOutputV3} from './itemSystemV3';
 import {BALANCE,type GameState,type ComponentId} from './economy';
 import {type Language} from './i18n';
 /** Presentation only. All numerical values come from the same balance as the consumer. */
-const descriptions={C01:{
+const descriptions={W03:{
+ en:'New paid analyses: selected unlocked focus family ×{focus}. Rare minimum only from an unlocked family; no locked graphene. Start terms stay fixed.',
+ de:'Neue bezahlte Analysen: gewählte freigeschaltete Fokusfamilie ×{focus}. Seltene Mindestkomponente nur aus freigeschalteter Familie; kein gesperrtes Graphen. Startvertrag bleibt fest.',
+ es:'Nuevos análisis pagados: familia de enfoque elegida y desbloqueada ×{focus}. Mínimo raro solo de familias desbloqueadas. Condiciones fijadas al iniciar.',
+ fr:'Nouvelles analyses payées : famille ciblée débloquée ×{focus}. Minimum rare uniquement dans une famille débloquée. Conditions fixées au départ.',
+ pt:'Novas análises pagas: família de foco escolhida e liberada ×{focus}. Mínimo raro apenas de família liberada. Condições fixadas no início.',
+ it:'Nuove analisi pagate: famiglia scelta e sbloccata ×{focus}. Minimo raro solo da famiglie sbloccate. Condizioni fissate alla partenza.',
+ pl:'Nowe płatne analizy: wybrana odblokowana rodzina ×{focus}. Minimum rzadkie tylko z odblokowanej rodziny. Warunki ustalone przy starcie.',
+},W04:{
+ en:'New item level upgrades: material and data costs ×{upgrade}. Round each required input up. No discount on fusion, recipes or forging.',
+ de:'Neue Item-Levelupgrades: Material- und Datenkosten ×{upgrade}. Jeden benötigten Input aufrunden. Kein Rabatt auf Fusion, Rezepte oder Schmiedestufen.',
+ es:'Nuevas mejoras de nivel: materiales y datos ×{upgrade}. Cada insumo se redondea hacia arriba. Sin descuento en fusión, recetas ni forja.',
+ fr:'Nouvelles améliorations de niveau : matériaux et données ×{upgrade}. Chaque coût est arrondi au supérieur. Aucun rabais sur fusion, recettes ou forge.',
+ pt:'Novas melhorias de nível: materiais e dados ×{upgrade}. Arredondar cada custo para cima. Sem desconto em fusão, receitas ou forja.',
+ it:'Nuovi aumenti di livello: materiali e dati ×{upgrade}. Ogni costo è arrotondato per eccesso. Nessuno sconto su fusione, ricette o forgiatura.',
+ pl:'Nowe ulepszenia poziomu: materiały i dane ×{upgrade}. Każdy koszt zaokrąglany w górę. Bez zniżki na fuzję, receptury i kucie.',
+},W07:{
+ en:'Instant crafting in batches {batches}. Full price and result count shown before purchase. All items or no payment; one shared result, no queue.',
+ de:'Sofortige Herstellung in Mengen {batches}. Gesamtpreis und Ergebnisanzahl vor Kauf. Alle Items oder keine Zahlung; gemeinsames Ergebnis, keine Warteschlange.',
+ es:'Fabricación instantánea por lotes {batches}. Precio total y cantidad antes de comprar. Todo o ningún pago; resultado conjunto, sin cola.',
+ fr:'Fabrication instantanée par lots {batches}. Prix total et quantité avant achat. Tous les objets ou aucun paiement ; résultat commun, sans file.',
+ pt:'Fabricação instantânea em lotes {batches}. Preço total e quantidade antes da compra. Todos os itens ou nenhum pagamento; resultado conjunto, sem fila.',
+ it:'Creazione istantanea in lotti {batches}. Prezzo totale e quantità prima dell’acquisto. Tutti gli oggetti o nessun pagamento; risultato unico, senza coda.',
+ pl:'Natychmiastowe wytwarzanie partiami {batches}. Pełna cena i liczba przed zakupem. Wszystkie przedmioty albo brak płatności; wspólny wynik, bez kolejki.',
+},C01:{
  en:'Passive component quantity by level: {values}. Replaces the previous bonus; applies only to regular passive finds.',
  de:'Passive Komponentenmenge je Stufe: {values}. Ersetzt den bisherigen Bonus; gilt nur für reguläre passive Funde.',
  es:'Cantidad de componentes pasivos por nivel: {values}. Sustituye la bonificación anterior; solo se aplica a hallazgos pasivos regulares.',
@@ -47,7 +71,7 @@ export const prestigeV3DescriptionIds=Object.keys(descriptions);
 export function prestigeV3Description(id:string,language:Language){
  if(!Object.hasOwn(descriptions,id))return null;
  const row=descriptions[id as keyof typeof descriptions],values=id==='C01'||id==='C06'?BALANCE.prestigeV3.axioms[id].map(n=>'×'+new Intl.NumberFormat(language).format(n)).join(' / '):'';
- const fmt=new Intl.NumberFormat(language);return row[language].replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
+ const fmt=new Intl.NumberFormat(language);return row[language].replace('{batches}',BALANCE.prestigeV3.items.W07quantities.map(n=>'×'+fmt.format(n)).join(' / ')).replace('{upgrade}',fmt.format(BALANCE.prestigeV3.items.W04)).replace('{focus}',fmt.format(BALANCE.prestigeV3.items.W03focus)).replace('{yield}',fmt.format(BALANCE.prestigeV3.items.W08)).replace('{values}',values).replace('{income}',fmt.format((id==='I10'?BALANCE.prestigeV3.int.I10credits:BALANCE.prestigeV3.int.I05)*100)).replace('{base}',fmt.format(BALANCE.prestigeV3.int.creditPerINT*100)).replace('{gain}',fmt.format(BALANCE.prestigeV3.int.I10gain));
 }
 
 export const synthesisOutputCopy={
@@ -65,3 +89,22 @@ export const prestigeV3Names={W08:{en:'Workshop network',de:'Werkstattverbund',e
 export function prestigeV3Name(id:string,language:Language){return Object.hasOwn(prestigeV3Names,id)?prestigeV3Names[id as keyof typeof prestigeV3Names][language]:null;}
 
 export const analysisYieldLabels={en:'Yield fixed at start',de:'Ausbeute beim Start',es:'Rendimiento fijado al iniciar',fr:'Rendement fixé au départ',pt:'Rendimento fixado no início',it:'Resa fissata all’avvio',pl:'Wydajność ustalona na starcie'} satisfies Record<Language,string>;
+
+export const analysisFamilyCopy={
+ de:['Basis','Halbleiter','Photonik','Frontier','Quanten'],en:['Basic','Semiconductor','Photonic','Frontier','Quantum'],es:['Básicos','Semiconductores','Fotónica','Frontera','Cuántica'],fr:['Base','Semi-conducteurs','Photonique','Frontière','Quantique'],pt:['Básicos','Semicondutores','Fotônica','Fronteira','Quântica'],it:['Base','Semiconduttori','Fotonica','Frontiera','Quantistica'],pl:['Podstawowe','Półprzewodniki','Fotonika','Granica','Kwantowe'],
+} satisfies Record<Language,string[]>;
+export const analysisBaseCopy={de:'Grundmenge',en:'Base draws',es:'Cantidad base',fr:'Quantité de base',pt:'Quantidade base',it:'Quantità base',pl:'Ilość bazowa'} satisfies Record<Language,string>;
+
+/** Shared paid-start and research-device presentation; values come from domain quotes. */
+export const researchStartCopy={
+ start:{de:'Gespeicherter Start: {value} % Arbeit · Mindestdauer {seconds} s',en:'Stored start: {value}% work · minimum {seconds}s',es:'Inicio guardado: {value} % de trabajo · mínimo {seconds} s',fr:'Départ enregistré : {value} % de travail · minimum {seconds} s',pt:'Início salvo: {value}% de trabalho · mínimo {seconds} s',it:'Avvio salvato: {value}% di lavoro · minimo {seconds} s',pl:'Zapisany start: {value}% pracy · minimum {seconds} s'},
+ controller:{de:'Bei Bereichswechsel\n+{value} % Anfangsarbeit',en:'When changing research area\n+{value}% starting work',es:'Al cambiar de área\n+{value} % de trabajo inicial',fr:'Lors d’un changement de domaine\n+{value} % de travail initial',pt:'Ao trocar de área\n+{value}% de trabalho inicial',it:'Al cambio di area\n+{value}% di lavoro iniziale',pl:'Przy zmianie dziedziny\n+{value}% pracy początkowej'},
+ protocol:{de:'Mindestdauer neuer Forschung\n{value} s',en:'Minimum duration for new research\n{value}s',es:'Duración mínima de nueva investigación\n{value} s',fr:'Durée minimale des nouvelles recherches\n{value} s',pt:'Duração mínima de novas pesquisas\n{value} s',it:'Durata minima delle nuove ricerche\n{value} s',pl:'Minimalny czas nowych badań\n{value} s'},
+ drone:{de:'Zusatzarbeit für längste Forschung\n{value} % regulärer Laborarbeit',en:'Extra work for the longest research\n{value}% of regular lab work',es:'Trabajo extra para la investigación más larga\n{value} % del trabajo regular',fr:'Travail supplémentaire pour la recherche la plus longue\n{value} % du travail régulier',pt:'Trabalho extra para a pesquisa mais longa\n{value}% do trabalho regular',it:'Lavoro extra per la ricerca più lunga\n{value}% del lavoro regolare',pl:'Dodatkowa praca dla najdłuższych badań\n{value}% zwykłej pracy laboratorium'},
+ base:{de:'Forschungsgrundbonus: +{value} %',en:'Base research bonus: +{value}%',es:'Bonificación base de investigación: +{value} %',fr:'Bonus de recherche de base : +{value} %',pt:'Bônus básico de pesquisa: +{value}%',it:'Bonus di ricerca base: +{value}%',pl:'Podstawowa premia do badań: +{value}%'},
+ slots:{de:'Autonomes Labor: zwei Forschungs- oder Universalsockel für {pair} % automatischen Anfangsfortschritt. Das vollständige Trio braucht drei; nach jeweils {interval} gültigen automatischen Starts gibt es weitere {third} %.',en:'Autonomous laboratory: two research or universal slots for {pair}% starting work on automatic starts. The full trio needs three; each group of {interval} valid automatic starts adds another {third}%.',es:'Laboratorio autónomo: dos ranuras de investigación o universales para un {pair} % inicial al iniciar automáticamente. El trío necesita tres; cada grupo de {interval} inicios automáticos válidos añade otro {third} %.',fr:'Laboratoire autonome : deux emplacements de recherche ou universels pour {pair} % de travail initial au lancement automatique. Le trio en nécessite trois ; chaque groupe de {interval} lancements automatiques valides ajoute {third} % de plus.',pt:'Laboratório autônomo: dois espaços de pesquisa ou universais para {pair}% de trabalho inicial em inícios automáticos. O trio precisa de três; cada grupo de {interval} inícios automáticos válidos dá mais {third}%.',it:'Laboratorio autonomo: due slot ricerca o universali per il {pair}% di lavoro iniziale negli avvii automatici. Il trio richiede tre slot; ogni gruppo di {interval} avvii automatici validi aggiunge il {third}%.',pl:'Autonomiczne laboratorium: dwa gniazda badawcze lub uniwersalne dają {pair}% pracy początkowej przy automatycznym starcie. Trio wymaga trzech; każda grupa {interval} prawidłowych automatycznych startów daje kolejne {third}%.'},
+ speed:{de:'Forschungstempo',en:'Research speed',es:'Velocidad de investigación',fr:'Vitesse de recherche',pt:'Velocidade de pesquisa',it:'Velocità di ricerca',pl:'Szybkość badań'},
+ minimum:{de:'Mindestdauer',en:'Minimum duration',es:'Duración mínima',fr:'Durée minimale',pt:'Duração mínima',it:'Durata minima',pl:'Minimalny czas'},
+ transfer:{de:'Arbeitsübertrag',en:'Work transfer',es:'Transferencia de trabajo',fr:'Transfert de travail',pt:'Transferência de trabalho',it:'Trasferimento di lavoro',pl:'Przekazanie pracy'},
+ area:{de:'Anfangsarbeit bei Bereichswechsel',en:'Starting work on area change',es:'Trabajo inicial al cambiar de área',fr:'Travail initial au changement de domaine',pt:'Trabalho inicial ao trocar de área',it:'Lavoro iniziale al cambio di area',pl:'Praca początkowa przy zmianie dziedziny'},
+} satisfies Record<string,Record<Language,string>>;

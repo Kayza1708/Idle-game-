@@ -299,3 +299,39 @@ Bestätigten Erwerbsfehler an echten Lern-/Craftverbrauchern korrigiert: bestehe
 - 29.10.: Echte Challenge-Fabriken erhalten V3-Regeln und dauerhafte Z/B05-Historie, isolieren persönliche Zähler und pausierte Hauptspieljobs. Nur technische nächste IDs zurückführen; B05-Verbraucher×3 korrigiert. Fünf gemeinsame Abläufe,2.028Vitest/203EditMode/13PlayMode grün. V3-Dateimigration und vollständige Itemereignisse offen; kein Xcode-Zwischenbuild.
 
 - 29.10.: V3-Impulsrelais vergütet akzeptierte Zehnertaps separat, eigener Crit×1,5/W10einmal, Referenz ohne indirekte temporäre Itemproduktion; Exemplarstand bleibt. Sieben gemeinsame Eingabefolgen,2.033Vitest/205EditMode/11PlayMode grün. V3-Savefreigabe/Details weiter offen; als Nächstes gespeicherte Burst-/Kryostartverträge.
+
+- 29.10.: Burst/Kryo/Energieüberschuss an echte automatische/manuelle Overdrive-Starts mit eingefrorenen Werten, exakten Offlinegrenzen, Reset-/Challengepause angeschlossen. Laborfüllung nutzt gespeicherte Dauer; dekorative Raycasts entfernt.102Produktionsfälle/8Overdrive-/7Challengefolgen,2.039Vitest/207EditMode/16PlayMode grün;18Originalbilder,DE/EN320/390/430repräsentativ selbstgesehen. V3-Savefreigabe/42er-Katalog/Migration offen, kein Xcode-Zwischenbuild.
+
+- 29.10.: Diagnoseadapter/Bootstrapping an reguläre bezahlte Hardwarepakete gebunden, feste Extras/alte Reste getrennt.360Vergabefälle/32tatsächliche Folgen,2.042Vitest/208EditMode grün. PlayMode10/11, fehlgeschlagene reale Introaufnahme mit Fokusspur erklärt; derselbe Test im tatsächlichen Vordergrund1/1grün. Keine V3-Migrations-/Playerfreigabe.
+
+- 29.10.: Bauplanarchiv zählt nur bekannte eigene Meisterschaftseinträge, ohne fremde Originalfelder zu löschen oder höhere Level mehrfach zu zählen. Sechs gemeinsame echte Ratenfälle,2.045Vitest/209EditMode/3PlayMode grün. VollständigeV3-Dateimigration/Erwerb/Details weiterhin offen.
+
+- 29.10.: Präzisionsscanner an normalisierte verfügbare Fokusgewichte und reduzierten Mengenverlust beim bezahlten Start angeschlossen; V3-Vorschau passend.120Startfälle/35Produktionsfolgen,2.049Vitest/210EditMode/5PlayMode grün. W03-Rare-/Fokusfamilienregel, Familienausbeute, Arbeitsereignisse und vollständigeV3-Migration weiterhin offen.
+
+- 29.10.: W03 speichert verfügbare Fokusfamilie×2 und zulässigen seltenen Mindestfund bei Zahlung; alte bezahlte Garantie erhalten, ungültige neue Verträge gesperrt.40gemeinsame Abläufe,2.055Vitest/211volleEditMode/7PlayMode grün; nach Sichtkorrektur2UItests erneut grün,22Originalbilder. V3-Dateimigration und weitere Familien-/Arbeitsverbraucher offen.
+
+- 29.10.: W04 an tatsächlicheV3-Levelkosten×0,75 samt seltenen Inputs/Rundung, Zahlung und Materialbasis angeschlossen.1.260gemeinsame Fälle,2.060Vitest/212volleEditMode/7PlayMode grün. Kostenzeilen nach echten Bildern gegen Zahlenumbrüche korrigiert,7PlayMode erneut grün;23Originalbilder. Alte normaleRegeln erhalten; Zyklusobservatorium-Kostenkollision separat. V3-Gesamtfreigabe offen.
+
+- 29.10.: W07 verwendet volle Batchquote in Unity-Anzeige und Bezahlsperre; Mengenquelle zentral, W07-Verlust stellt×1wiederher.160gemeinsameTransaktionen,2.066Vitest/213EditMode/8PlayMode grün; echte113Items vorAnimation gespeichert/nachReload erhalten,44Originalbilder. Weitere Familien-/Arbeits-/Migrationsverträge offen.
+
+- 29.10.: Photon-/Quantenfamilien an bezahlteAnalysen/reguläreHardware gebunden; K10/Overdrive/W03 beimStart gespeichert, alteNormalkontrakte erhalten.112Aufträge/540Pakete,2.071Vitest/215volleEditMode/8finalePlayMode grün;11Originalbilder/7Sprachen,DE/EN320/390/430selbstgesehen. Itemdetails/weitereArbeitsereignisse/42erErwerb/V3-Migration bleiben offen.
+
+
+## V3-Materialkreislauf · 30.10.2026 · laufend
+Controller-Rückgabe, deterministische Recyclingfragmente, geschlossenes Trio, bezahlte Provenienz und90%-Grenze in TS/C# implementiert;31gemeinsame vorbereitete Transaktionsfolgen und gezielte Domainprüfung grün. Vollständige Regression läuft. UI-Details/Originalmigration und vollständige42Item-/60INT-/24Axiom-Abnahme bleiben offen. Keine Freigabe/Installation eines Zwischenplayers; Nutzer bestätigt weiterhin vollständigesV3 vor Xcode.
+
+Materialkreislauf-Zwischenstand: vollständige170Dateien/2.078Vitest(346,67s),217/217EditMode(200,946s),Typecheck/Build/Generatorvergleich grün. Passende echte Workshop-PlayMode-Regression läuft noch. Keine neue Spielerfreigabe.
+
+Abschluss Domainabschnitt Materialkreislauf:6/6passendePlayMode(33,623s) zusätzlich grün. Tatsächliche normale Workshop-Transaktionen, Animationstrennung/Abbruch, reduzierte Bewegung, Save/Reload und mobile Kosten-/Analysestatusanzeigen erhalten. Kein neuer Grafik-/Geräte-/V3-Dateinachweis. Gesamtauftrag läuft mit den offenen Forschungsereignissen und der vollständigen Migration weiter.
+
+
+## V3-Forschungsarbeit · 30.10.2026 · in Abschlussprüfung
+Photonenfeld, vollständigeLernspirale und Labordrohne im tatsächlichen Arbeits-/Abschlusspfad;20gemeinsame bezahlteFolgen,25Allokationen,9neueSourceprüfungen.2.087Vitest/Typecheck/Build/Generatorvergleich grün; nativegezielteReferenzen37/37, nach Korrektur neuerIntrovorbereitung4/4. Abschließende gemeinsameUnity-/UI-Prüfungen laufen. Übrige Startverträge, wissenschaftlicheArbeit,42Items/60INT/24Axiome und vollständigeverlustfreieSaveaktivierung weiter offen. Erst vollständigesV3, dann Xcode wie erneut bestätigt.
+
+Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(206.8267902s),5/5passendePlayMode(16,677s),2.087Vitest,Typecheck/Build/vollständigerGeneratorvergleich grün. Frühere220/221 wegenIntro-Testvorbereitung getrennt dokumentiert. Keine neue Grafik-/Geräte-/V3-Dateifreigabe. Nächster unabhängiger Abschnitt: eingefrorene Forschungsstartverträge samt Protokollcontroller, Bereichswechsel und automatischem Anfangsfortschritt.
+
+
+## V3-Forschungsstarts · 30.10.2026 · finale UI-Prüfung
+Bezahlte Bereichswechsel-, Protokoll- und automatischeStartverträge einschließlich Queue/Wiederholung/Direktor verbunden.32gemeinsame realeTransaktionsfolgen, beideResets mit laufendemAuftrag;2.093Vitest/223EditMode/Typecheck/Build/Generatorvergleich grün. DreiForschungsitemdetails mit tatsächlichenV3-Werten/siebenSprachen und rotemMindestdauer-Nachteil; finaleUI-Regressionsbilder nach zwei konkretenLesbarkeitskorrekturen laufen. Kein vollständigerV3-Save oderPlayerfreigabe. Danach sechsneueItems/fehlendeEffekte, wissenschaftlicheArbeit und vollständigeErwerbs-/UI-/Save-Migration weiter abarbeiten.
+
+Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beidenletztenUI-Lesbarkeitskorrekturen grün;44unveränderteUnity-PNGs einschließlichManifest in docs/media/unity-v3-research-starts. DE/EN320/390/430 undFR390 selbstgesehen, roteMindestdauererhöhung sichtbar, Einheitenzusammenhalt/Randabstand korrigiert, echtesfranzösischesAblegen. Kein neuesV3-Save/Player/Design-Gesamturteil. Der Gesamtauftrag geht mit sechsneuenItems/fehlendenFähigkeiten, wissenschaftlicherArbeit und vollständigerMigration weiter.

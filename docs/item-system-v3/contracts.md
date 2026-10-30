@@ -13,7 +13,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 3 | `neural-asic` | Credits, M-Snapshot, Distilled-Kombination | gemeinsame Erwerbs-/Loadoutabnahme |
 | 4 | `photonic-array` | Zweier-Lernkombination | bezahlter Trainingsabschluss, Forschungsarbeitsübertrag ohne Rekursion |
 | 5 | `inference-router` | vorhandene gültige Links → globaler Compute | Start-/End-/Challengefälle im vollständigen Lauf |
-| 6 | `burst-processor` | offen | gespeichertes Startfenster, Stärke, Ende und Combovertrag |
+| 6 | `burst-processor` | tatsächlicher Overdrive-Start speichert Stärke/Fenster; Offlinegrenzen, Energiepaar/-trio und pausiertes Challenge-Hauptspiel angebunden | vollständige V3-Dateimigration/Details und natürliche Buildabnahme |
 | 7 | `legacy-controller` | erste drei Klassen vor globalen Faktoren | vollständige Klassen-/Buildsuche |
 | 8 | `sparse-decoder` | stabile Rangfolge vor Sparse/globalen Faktoren | alle Gleichstand-/Slotfälle |
 | 9 | `photonic-matrix` | Compute und Daten bei aktivem Overdrive; kein weiterer direkter Revenuefaktor | zeitgeteilte Offline-/Start-/Wechselfälle |
@@ -26,7 +26,7 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 16 | `distillation-module` | tatsächliche Q/E-Ausgabekurve, logarithmischer Adapter | gemeinsame Schwellen-/Raritäts-/Migrationsabnahme |
 | 17 | `curriculum-module` | Q/E-Schwelle vor Distillation verschoben | Kombination/Reload/Details |
 | 18 | `long-term-memory` | Credits aus T-Snapshot mit weiter wachsendem Softcap | T zählt tatsächliche angerechnete Intervalle innerhalb der Offlinegrenze; vollständige numerische Split-/Wechselabnahme offen |
-| 19 | `cryocontroller` | offen | Dauer am Overdrivestart speichern; alte Kappung nicht zusätzlich anwenden |
+| 19 | `cryocontroller` | tatsächliche Startdauer×(1+0,5P), außerhalb der alten Basiskappung; späteres Ausrüsten/Ablegen verlängert nicht | vollständige V3-Dateimigration/Details und natürliche Buildabnahme |
 | 20 | `manufacturing-controller` | offen | bezahlte Komponenten, Rückgewinnungsreste und Gesamtprovenienz |
 | 21 | `model-echo-core` | ursprünglicher Modellkern × ursprünglicher Revenuefaktor genau einmal potenziert | alle zehn Modelle/Slotwechsel und UI |
 | 22 | `mnemonic-anchor` | Training aus tatsächlichen Modellupgradeleveln | alle Erwerbs-/Reset-/Wechselfälle |
@@ -34,14 +34,14 @@ Bestätigte spätere Regeländerungen: [amendments.md](amendments.md), insbesond
 | 24 | `field-scanner` | tatsächliche bezahlte Analyseabschlüsse bei aktiver Ausrüstung; Live-Tempo mit S(A,25), W10 einmal | vollständige Save-Migration/Details; Bibliotheks-Dreierkombination separat |
 | 25 | `lab-drone` | offen | Zusatzarbeit nur aus regulärer Laborarbeit; größtes Restlabor, stabile Gleichstände |
 | 26 | `data-prism` | Daten aus F ohne doppelte Projektzählung | Auftrags-/Reset-/Detailsabnahme |
-| 27 | `diagnostic-adapter` | offen | nur bezahlte einmalige Hardwarepakete, Restverwaltung |
+| 27 | `diagnostic-adapter` | variable Komponenten regulärer bezahlter Hardware-Meilensteine×(1+P); Bootstrapping/W08 einmal, feste Extras und alte Reste getrennt | vollständige V3-Details/Migration; Klassenupgrade-Erwerbsfrage bleibt separat |
 | 28 | `experiment-controller` | offen | Bereichswechsel am bezahlten Start, gespeicherter Anfangsfortschritt |
-| 29 | `precision-scanner` | offen | normalisierte Fokusgewichte und reduzierter Mengenabschlag am Start |
+| 29 | `precision-scanner` | normalisierte Fokusgewichte×(1+P), Mengenverlust/(1+P), tatsächlicher bezahlter Start speichert Gewichte/Menge; V3-Vorschau angebunden | vollständige V3-Dateimigration/Details; W03 und Photon-/Quantenfamilien samt globalem Startfaktor separat geprüft |
 | 30 | `recycling-probe` | offen | irreversible Rare+-Zerlegung, Fraktionskonto statt zusätzlichem Zufallswurf |
-| 31 | `blueprint-archive` | Forschung aus unterschiedlichen gemeisterten Bauplänen | unbekannte IDs ausschließen, vollständige Slot-/Erwerbsprüfung |
+| 31 | `blueprint-archive` | Forschung aus unterschiedlichen bekannten eigenen Bauplanmeisterschaften≥1; unbekannte/geerbte Schlüssel ausgeschlossen | vollständige Slot-/Erwerbs-/V3-Dateimigrationsabnahme |
 | 32 | `protocol-controller` | offen | neue Mindestdauer bei Erstellung; alte Bonuszeit entfernen |
-| 33 | `photonic-analyzer` | offen | gültige Analyse-/Hardwarequellen, Snapshot und Fraktionen |
-| 34 | `quantum-diagnostic-module` | offen | gleiche Quellregeln, kein Freischalten gesperrter Familien |
+| 33 | `photonic-analyzer` | bezahlte Analyse-/reguläre Hardwarefamilie×(1+P), Overdrive-Paar, Startsnapshot, GPUextra und Fraktionen geprüft | vollständige V3-Itemdetails/Erwerbs-/Dateimigration |
+| 34 | `quantum-diagnostic-module` | entsprechende Quantenfamilie×(1+P); Trio nur mit bereits freigeschalteter Familie, Snapshot/Fraktionen geprüft | vollständige V3-Itemdetails/Erwerbs-/Dateimigration |
 | 35 | `darklab-resonator` | Erkenntnis aus regulärer Datenrate ohne aktiven Overdrive | E-Zähler, Offlineintegration und echte Laborfreischaltung |
 | 36 | `cycle-observatory` | Forschung aus tatsächlicher Resetanzahl ohne alten Zykluscap | mehrere echte Zyklen und Migration |
 | 37 | Flottenkoordinator | noch kein freigegebener Katalogeintrag | Campuszugang, konkretes Rezept, Icon, Computeverbraucher |
@@ -82,7 +82,7 @@ Die sechs neuen Namen erhalten ihre endgültigen dauerhaften IDs zusammen mit de
 
 ## Gemeinsame Prestigeabhängigkeiten
 
-Rechenpfade für H06–H10/T07 und zukünftige INT-Gewichte sind vorhanden. F07-Neustartpreis, F08-Aktivitätsfaktor und F10-Forschungsskalierung sind an tatsächliche Verbraucher angeschlossen; W03/W04/W07/W08, Tap-/Overdriveverträge, Automationserklärungen, alle Quell-/Materialverbraucher sowie die vollständigen Modellsekundärfähigkeiten müssen noch einzeln geprüft bzw. ergänzt werden. Einzelne zentral vorhandene neue Werte gelten nicht als fertiger Verbraucher.
+Rechenpfade für H06–H10/T07 und zukünftige INT-Gewichte sind vorhanden. F07-Neustartpreis, F08-Aktivitätsfaktor und F10-Forschungsskalierung sind an tatsächliche Verbraucher angeschlossen; W03/W08 sowie Tap-/Overdrive-Startverträge sind inzwischen separat an echte Verbraucher angeschlossen und geprüft (siehe aktuelle Implementierungsberichte). W04-Levelkosten sind ebenfalls mit tatsächlichen Abbuchungen und Materialbasis geprüft. W07-Sammelpreise und atomare UI sind mit160Sourcefällen und echten Käufen/Reload geprüft. Weitere Automationserklärungen, übrige Quell-/Materialverbraucher sowie die vollständigen Modellsekundärfähigkeiten müssen noch einzeln geprüft bzw. ergänzt werden. Einzelne zentral vorhandene neue Werte gelten nicht als fertiger Verbraucher.
 
 F02 bietet in der tatsächlichen aktuellen Quelle bereits sechs Plätze; die vorhandene Operationsforschung erweitert um zwei auf acht. Die neue Queueoberfläche erhält diese bestehenden Kapazitäten. Sie zeigt echte unbezahlte Pläne und schreibt keine fiktiven Reservierungen.
 
@@ -130,3 +130,34 @@ Nächste konkret gefundene Abhängigkeit: beide tatsächlichen Challenge-Einstie
 
 ### Tatsächliche Challenge-Eintritts-/Rückkehrverträge
 V3-Regelkennung über die echten Fabriken erhalten; neuer persönlicher Produktionsscope, dauerhafte Z-Historie/B05-Rekorde und legitime Entdeckungsrechte getrennt. Hauptspieljobs und -zähler bleiben pausiert. Nur monotone nächste Trainingsnummer zurückführen; niemals den Challenge-Abschlussmarker auf einen älteren bezahlten Hauptspieljob anwenden. Neue kopierte Relais haben eigenen Triggerstand0; Hauptitem unverändert. Fünf gemeinsame echte Start-/Arbeits-/Rückkehrfolgen, einschließlich aktiver/offliner Arbeit, Erfolg/Abbruch, doppeltem Claim und bezahlter Hauptspiel-Fortsetzung. Dateimigration und tatsächlicher V3-Reload bleiben separat offen.
+
+
+### 30.10.2026 – V3-Materialkreislauf (Domainprüfung, keine Spielerfreigabe)
+
+Herstellungscontroller und vorhandene Forschungsrückgewinnung werden auf denselben bezahlten Materialbeleg angerechnet: der höhere bestehende Anspruch gilt, keine zweite Auszahlung. Der V3-Itemanteil ist min(35 %, 10 % × P). Daten, Module und Bauplanlernen erstatten nichts. Neue Upgrades/Schmiedestufen fremd erworbener Items schreiben ausschließlich ihre tatsächlich bezahlten Zusatzmaterialien in die Basis; keine erfundenen ursprünglichen Rezeptkosten. Normale Altregeln bleiben unverändert; historische fehlende Materialrechte müssen noch explizit migriert werden.
+
+Unwiderrufliches Zerlegen von Rare+ sammelt bei aktiver Recycling-Sonde 0,25 × P Fragmentfortschritt; das geschlossene Zweiersystem verstärkt nur diesen Zusatzfortschritt um ×1,25. Der ursprüngliche Basiszufallsfund bleibt separat und würfelt nur einmal. Geschützte, ausgerüstete oder bereits entfernte Exemplare und No-items vergeben keinen Zusatzfortschritt. Das vollständige Trio speichert ×1,2 für neue bezahlte Analysen im vorhandenen Startvertrag.
+
+Fusion erhält bezahlte Basis und bereits verrechnete Rückgaben. Zerlegung begrenzt die eigene weitere Materialzuweisung zusätzlich auf 90 % der Basis abzüglich bisheriger Rückgaben; alte globale Bruchteile werden danach addiert. Fragmentbruchteile bleiben durch tatsächliches Prestige/Axiom erhalten und Challenge-Hauptspiel und Shadow bleiben getrennt. Ungültige Konten/Materialbelege und überlaufende Wallets werden vor Verbrauch abgewiesen. Rückgewinnung zählt nicht als regulär selbst produzierte Komponenten K.
+
+31 gemeinsame vorbereitete Transaktionsfolgen plus sieben neue Vitest-Fälle und native Guards; Finanzierung ausdrücklich isoliert. Neue Unity-Tests nach zwei korrigierten Testfehlern 2/2 grün. Vollständige Regression und sichtbare V3-Details noch in Arbeit. V3-Dateischreibschutz bleibt aktiv; kein behaupteter vollständiger Save-Reload oder Xcode-Playernachweis.
+
+
+### 30.10.2026 – Photonenfeld/Labordrohne in Prüfung
+Der bestehende monotone bezahlte Trainingsabschlussmarker schützt auch Photonenarbeit. Regulär einschließlich bezahlter Integration, keine Intro-/Gem-Bonus-/No-items-/doppelten oder unbekannten Abschlüsse. Leistung am tatsächlichen Ereigniszeitpunkt für aktuell belegte reguläre Labore; ohne belegten regulären Auftrag kein Guthaben für später. Jedes Labor erhält entsprechend seiner regulären Leistung3×P Sekunden, vollständige Lernspirale verdoppelt diese Arbeit. Unbenutzte Arbeit verfällt und startet keine neue Warteschlangenaktion. Zusatzarbeit separat als eventWork im laufenden Arbeitsvertrag vermerkt; keine neue Material-/Geldbelohnung.
+
+Drohnenübertrag ausschließlich aus der im Intervall neu geleisteten regulären Arbeit, Anteil min(0,40;0,10×P). Längste Restarbeit wird bis zum nächstlängsten Stand reduziert; Gleichstände teilen den Rest gleichmäßig. Bei gemeinsamer regulärer Laborrate r, n Aufträgen, Restarbeiten R und Anteil f ist die erste Abschlussgrenze min(min(R)/r, sum(R)/(n×r×(1+f))). Bis zu dieser Grenze sind entweder die kürzesten regulär fertig oder alle durch Ausgleich gleichzeitig. So wird kein späterer Abschluss nachträglich in einen zu großen Zeitschritt geschoben. Begrenzte Schleife über maximal belegte Labore; kein Ticking pro Arbeitsfragment. Photonen-/übertragene Arbeit erzeugt keinen erneuten Drohnenübertrag.
+
+V3-Forschungsabschluss wird bei vorhandenem Arbeitsvertrag anhand tatsächlich geleisteter Arbeit geprüft; alte normale endsAt-Toleranz bleibt für normale Aufträge unverändert. Source7+2 gezielte Tests grün, darunter40 Zeitstücke, Intro/Bonus/No-items, bezahlteIntegration und ungültiger Ereignisrest.20 gemeinsame vorbereitete bezahlte Folgen plus25 reine Verteilungen werden aktuell nach C# übernommen. Keine native Abnahme oder vollständige Dateimigration daraus ableiten.
+
+
+### 30.10.2026 – eingefrorene bezahlte Forschungsstarts
+Versuchscontroller: Bereich und vorherigen Bereich vor Zahlung/Start bestimmen, min(50%;15%×P) Anfangsarbeit bei tatsächlichem Wechsel fixieren. Protokollcontroller: neue bezahlte Aufträge erhalten **max(0,5s; bisherige V2-Mindestdauer/(1+P))** als unveränderliche Mindestfrist. Die tatsächliche V2-Basis0,001s bleibt gegenüber dem älteren60s-Pfad getrennt; Protokollcontroller ergibt daher aktuell0,5s und kann die Mindestdauer erhöhen. Keine heimliche60s-Basis. Neuere Itemwechsel oderW10 wirken nicht rückwirkend auf die Startwerte.
+
+Autonomes Labor zählt ausschließlich erfolgreiche automatisch bezahlte Starts bei aktivem Paar: Queueausführung, Wiederholung und Direktor sind automatische Ursachen; direkte Starts manuell. Paar5% Anfangsarbeit, vollständigesTrio jederdritte gültige automatischeStart weitere10%. Zähler runbezogen, beimAblegen behalten, bei echtenPrestige-/Axiomresets geleert. Bereichswechsel und diese festen Kombinationsboni addieren sich; keine erfundene allgemeine50%-Forschungskappe. Ungültige oder abgelehnte Starts kosten nichts und zählen nicht. IDs/Counter bleiben im exakt darstellbaren53Bit-Bereich.
+
+Arbeitsfortschritt und Mindestfrist sind getrennt: bereits erfüllte Arbeit wartet ohne Mikrosekunden-Schleife auf die Frist. Challenge-Hauptspielpause verschiebt den gespeicherten Zeitvertrag. Echter bezahlterGem-Skip kann sofort abschließen und dokumentiert die Bonusursache samt expliziter Fristumgehung, ohne den ursprünglichen Zeitvertrag zu löschen. Werbung bleibt im Produktionsanbieter unverfügbar; keine echteAnzeige oder simulierteProduktionsauszahlung hinzugefügt. Alte bezahlte Aufträge ohne Startmarker erhalten keinen nachträglichen Startbonus oder neueFrist.
+
+32gemeinsame vorbereitete tatsächliche Zahlungs-/Queue-/Wiederholungs-/Skip-/Resetfolgen, darunter laufender bezahlter Auftrag über beide echtenResets. SechsneueSourceverträge; vollständige172Dateien/2.093Vitest(337,77s),223/223EditMode(209,407s),Typecheck/Build/Generatorvergleich grün. ErstegezielteNative2/2 und verbundeneForschungsprüfungen6/6grün.
+
+DreiForschungsitemdetails zeigen tatsächlicheV3-Wirkung, Grundbonus, Slotanforderung und echte Produktions-/Arbeitsvergleiche in siebenSprachen. Höhere Mindestdauer rot erhalten. Anzeigen laufenderRestzeit und Vorschau berücksichtigen den neuenVertrag. AndereV3-Itemdetails noch separat offen. EchteUnity-Bilder fürDE/EN320/390/430 und fünfweitereSprachen; rein vorbereitete schreibgeschützteV3-Projektion, kein natürlicher Erwerb oderV3-Datei-Reload. Zwei ersteUI-Läufe1/1grün; nach Sichtprüfung Randabstand/Einheitenumbruch und französischesAblegen korrigiert, finale passendePlayMode läuft. Keine neue Grafik, kein neuerLadescreen, keine Geräte-/Playerfreigabe.

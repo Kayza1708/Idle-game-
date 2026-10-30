@@ -27,16 +27,16 @@ export function researchQueueStatus(s:GameState){
 }
 export function startManualResearchQueue(state:GameState){if(state.progression?.resetIntent)return state;let next=state;if(!researchQueueUnlocked(next))return next;
  const cleaned=next.researchQueue.filter(id=>!researchQuote(next,id)?.done);if(cleaned.length!==next.researchQueue.length)next={...next,researchQueue:cleaned};
- for(let i=0;i<researchLabCount(next);i++){const status=researchQueueStatus(next);if(!status.candidate)break;const started=plannedResearchStart(next,startResearchProject(next,status.candidate));if(started===next)break;next={...started,researchQueue:next.researchQueue.filter(id=>id!==status.candidate)};}return next;
+ for(let i=0;i<researchLabCount(next);i++){const status=researchQueueStatus(next);if(!status.candidate)break;const started=plannedResearchStart(next,startResearchProject(next,status.candidate,'queue'));if(started===next)break;next={...started,researchQueue:next.researchQueue.filter(id=>id!==status.candidate)};}return next;
 }
 /** Shared online/offline scheduler; no upfront cost and every laboratory sees the preceding debit. */
 export function runResearchAutomation(state:GameState){if(state.progression?.resetIntent)return state;let next=startManualResearchQueue(state);if(researchQueueStatus(next).reason==='data')return next;
  const free=next.researchLabs.filter((lab,i)=>i<researchLabCount(next)&&!lab).length;
  for(let i=0;i<free;i++){
-  const director=researchDirectorQuote(next);if(director.candidate){if(next.progression?.version===2&&!automaticCanSpendData(next,director.candidate.quote!.cost,'research'))break;const before=next,started=plannedResearchStart(next,startResearchProject(next,director.candidate.id));if(started===before)break;next={...started,researchDirector:{...started.researchDirector,spent:ScientificNumber.fromJSON(started.researchDirector.spent).add(director.candidate.quote.cost).toJSON()}};continue;}
+  const director=researchDirectorQuote(next);if(director.candidate){if(next.progression?.version===2&&!automaticCanSpendData(next,director.candidate.quote!.cost,'research'))break;const before=next,started=plannedResearchStart(next,startResearchProject(next,director.candidate.id,'automatic'));if(started===before)break;next={...started,researchDirector:{...started.researchDirector,spent:ScientificNumber.fromJSON(started.researchDirector.spent).add(director.candidate.quote.cost).toJSON()}};continue;}
   // An enabled, effective director owns the automatic decision even when blocked.
   if(next.researchDirector.enabled&&researchModifiers(next).director)break;
-  const repeat=researchRepeatQuote(next);if(repeat.reason||!repeat.id)break;if(next.progression?.version===2&&!automaticCanSpendData(next,repeat.quote!.cost,'research'))break;const started=plannedResearchStart(next,startResearchProject(next,repeat.id));if(started===next)break;next=started;
+  const repeat=researchRepeatQuote(next);if(repeat.reason||!repeat.id)break;if(next.progression?.version===2&&!automaticCanSpendData(next,repeat.quote!.cost,'research'))break;const started=plannedResearchStart(next,startResearchProject(next,repeat.id,'automatic'));if(started===next)break;next=started;
  }
  return next;
 }

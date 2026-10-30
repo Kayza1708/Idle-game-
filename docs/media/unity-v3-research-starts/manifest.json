@@ -1,0 +1,275 @@
+{
+  "engine": "6000.3.26f1",
+  "platform": "macOS Unity Editor PlayMode",
+  "prepared": true,
+  "productionEnabled": false,
+  "fileMigration": false,
+  "sourceHash": "0597f4194610752a250ed379032267e12d78e073dcdccc5c87ca266055ff741b",
+  "scope": "Read-only funded V3 projection. Artificially completed work before saved minimum; seven actual locale selections on isolated normal save, which remains byte-identical during projection. No player or physical device proof.",
+  "files": [
+    {
+      "file": "experiment-controller-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "6ab551c8a0216cee2bf21265ebec4f7ad7afa25669fe34fa337e3f6112a85052"
+    },
+    {
+      "file": "experiment-controller-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "3261841be7e0bd70382daa9748b3b7027fee19f50b037de0a76fbe06341398fa"
+    },
+    {
+      "file": "experiment-controller-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "3f9f7bb5451e021f2db27a3080cb520b870ab3e1564f29c9cf466b6e5212f7d9"
+    },
+    {
+      "file": "experiment-controller-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "fd7cc0f80246499acd8b7e70030c0bd9816e550300fe1d7ec82e361633d69e18"
+    },
+    {
+      "file": "experiment-controller-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "38f1694fab1cfb3542dadb287299e890c08d7985668c753aa249067dfe488276"
+    },
+    {
+      "file": "experiment-controller-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "178e62e25568f62c98b921d7f42e64f5e1115fdd8d4553a5138202946f7e9314"
+    },
+    {
+      "file": "experiment-controller-es-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "746a4080a9c671114cb48635e21b7799a3d6d5b353263d65772ff08a7d1c342b"
+    },
+    {
+      "file": "experiment-controller-fr-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "9c98557c54e02f8c8af22899ae22489b21c574e0da784da77318acbd5cb1dd22"
+    },
+    {
+      "file": "experiment-controller-it-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "05e5db0aa44f8da6daaa6a3e2ba9a19bf39b36d40626894a7aa84a70cbd3139c"
+    },
+    {
+      "file": "experiment-controller-pl-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "4aa18aad5fb80a954cc25d5b4615fc3cf5d4251f2863808cd90d28c7c63fa228"
+    },
+    {
+      "file": "experiment-controller-pt-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "d8e7ada1a5840858d9431a8c466d5f6dfb90081f7aa0bacb4a9c7b43acdddd43"
+    },
+    {
+      "file": "lab-drone-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "ed4f061ed8882c1009929ac77d9eb13cf8e1821a9e7fec0f0f842d1d0e0dc67a"
+    },
+    {
+      "file": "lab-drone-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "52a9392269cb99b474f4f4dc0ecc75e8d7105feed6349e9e056c6e770f437ddd"
+    },
+    {
+      "file": "lab-drone-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "b92fad2f9faab20e74292c4314e98d0ae53554eb743f489679aa4bc7d974be8b"
+    },
+    {
+      "file": "lab-drone-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "c0673ec503a5001e086ba68cce35c71b13275bd329f54801a2c8c9f87e680114"
+    },
+    {
+      "file": "lab-drone-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "b725d27930a6f3a08e068cae8effc50e5570f50ff5ce4ac2d3faec6bf499aba7"
+    },
+    {
+      "file": "lab-drone-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "5056f5c82081a2b53e5df09ab9bea9b597e2b0d41710884c337ec00040d37b37"
+    },
+    {
+      "file": "lab-drone-es-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "d1f5ca3e7e0d5c4137c70ee035157fafe05779226cf60dd5b7aaa04add2d987b"
+    },
+    {
+      "file": "lab-drone-fr-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "6956cf7540cfcb6b6c089b933f51a89add2513ac1c54e8949ad634f0e3c95502"
+    },
+    {
+      "file": "lab-drone-it-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "6144245fea7b2559df4bd82a16acc8c484204d78279df0869c7c090aae01aebc"
+    },
+    {
+      "file": "lab-drone-pl-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "f8904d5925c76093f218b5cae3bb17bbfd75259772980bdf54c2c1e41c111060"
+    },
+    {
+      "file": "lab-drone-pt-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "30578f5a6e4850e2821046968025d3818aed4d42ab5400220a5f4c7f5f86f180"
+    },
+    {
+      "file": "protocol-controller-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "73fd3f8a329c121b4db565410a31224b8ef8cbe70d3a392b21aec15b9fc8b67d"
+    },
+    {
+      "file": "protocol-controller-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "b8a25c6352a0e8ed944fcd34fbefb07e275ae35cb4d4d0c7456fccf509a05b13"
+    },
+    {
+      "file": "protocol-controller-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "0f3e384cf86d31ba3077f2ccf13742d298cd7f16a6dd21408d7c3fdea79385af"
+    },
+    {
+      "file": "protocol-controller-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "d20ef5d833ee09231acb1f05f66f8f61163229264bb272832246390e7ba704d8"
+    },
+    {
+      "file": "protocol-controller-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "a868ad916bcb0ca41bd14f9b4280d2a76e9fa22c22501d20d4711a44c320fbad"
+    },
+    {
+      "file": "protocol-controller-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "bfe7369357bd0f00c77ed1c33c39a46c354a260f424c197d56167891423df09b"
+    },
+    {
+      "file": "protocol-controller-es-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "458c0b177c1b01bb5ec2d8c511f06e0fe3c9c2a594ab1e98cc295deffb2680c2"
+    },
+    {
+      "file": "protocol-controller-fr-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "5d765a3415bb4bae3fa04b701b73933c4035bc95b43bcef3df003da5a17e2dd8"
+    },
+    {
+      "file": "protocol-controller-it-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "54bbe1b12e68f684a99bd1274766b619cdbc54412c1f634a520aed9bb2862628"
+    },
+    {
+      "file": "protocol-controller-pl-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "732c122e1ba8f8f64991ee9fe8b2af8acdd75b1841163ff737814e304901f329"
+    },
+    {
+      "file": "protocol-controller-pt-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "719d9e178b9065f0ad119fdaf454b08492b6f359bce83d067a552daa2d404a7c"
+    },
+    {
+      "file": "research-floor-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "f47501a3f0bee1e811b742616aa67f880d0e7c1021882e165dc2b10b7d253a2a"
+    },
+    {
+      "file": "research-floor-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "48453556dc97a1e0c110b4ff77c3f3f7ab6206a9aace0fa761e0808e972b98a6"
+    },
+    {
+      "file": "research-floor-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "30b0ce6f68ed26fb6645e6b00c5c7ace2dc167548052d5d7b7f04bc8f82cd321"
+    },
+    {
+      "file": "research-floor-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "2a4070cce78b1bf6abd2e7988f0085336211e87a19906710a393bc5d095bf20a"
+    },
+    {
+      "file": "research-floor-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "46f93719e9214bb8df4b5aa28945695ca0512cdfebead628b07bc86229cbf720"
+    },
+    {
+      "file": "research-floor-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "9ca818428d283006b70a09fec6024c6e8e74bc093f13f3eeb9294b85282ce53b"
+    },
+    {
+      "file": "research-floor-es-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "8fed22f7723164046f142ac8e6017e306b2e75a06f8b8f33a2ad9709bd8609de"
+    },
+    {
+      "file": "research-floor-fr-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "ba56e4d1f23dc089faa46fbfe28d47121cfd9de2531791f29ddc1fd7ea3f292f"
+    },
+    {
+      "file": "research-floor-it-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "a98ecee15f57f93f312866b9341a1a619d17e6246a0f9da1b570185a032b4898"
+    },
+    {
+      "file": "research-floor-pl-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "0bf2e4e5114143cdb1109234df76debf049bdff4de8584916842f98d7b959d01"
+    },
+    {
+      "file": "research-floor-pt-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "fbeb81d13f8e0aab3e650181d0ae0bec4ae6cb994cbfd5eb9d2beae26b24f047"
+    }
+  ]
+}

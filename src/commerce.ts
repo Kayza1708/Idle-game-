@@ -1,3 +1,4 @@
+import {usesItemV3} from './itemSystemV3';
 import {
   BALANCE,
   addCreditsScientific,
@@ -88,6 +89,10 @@ function skipResearch(s: GameState, job: string, seconds: number) {
         },
       },
     };
+    if(usesItemV3(n)){
+      const updated=n.progression.work[job],finished=updated.done+1e-7>=updated.required;
+      n={...n,progression:{...n.progression,work:{...n.progression.work,[job]:{...updated,eventWork:(work.eventWork??0)+Math.max(0,updated.done-work.done)}}},researchLabs:n.researchLabs.map((j,i)=>i===index&&j&&finished&&j.quoteBasis?.itemV3?{...j,quoteBasis:{...j.quoteBasis,itemV3:{...j.quoteBasis.itemV3,minimumBypassed:true as const,completionCause:'bonus' as const}}}:j)};
+    }
     n = prepareProgressionWork(n);
   } else
     n = {

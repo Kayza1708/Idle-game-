@@ -1,4 +1,5 @@
-import {usesItemV3,identifyItemSynthesisV3,settleItemSynthesisV3} from './itemSystemV3';
+import {validateResearchStartContractV3} from './itemResearchStartV3';
+import {usesItemV3,identifyItemSynthesisV3,settleItemSynthesisV3,applyItemResearchTransferV3,synchronizeItemResearchEndsV3} from './itemSystemV3';
 import { addEvent } from "./telemetry";
 import { trainingDataCostScientific } from "./economy";
 import { deviceBonus } from "./deviceEffects";
@@ -27,6 +28,7 @@ export type WorkContract = {
   done: number;
   speed: number;
   quantityIntegral: number;
+  eventWork?:number;
   familyIntegral?: { photonic: number; quantum: number };
 };
 export const fabricationSpeed = (s: GameState) =>
@@ -34,17 +36,18 @@ export const fabricationSpeed = (s: GameState) =>
   (usesItemV3(s)?1:(1 / BALANCE.progression.effects.C06) ** axiomLevel(s, "C06"));
 export const analysisQuantity = (s: GameState) =>
   secondary(s, "K10") ? BALANCE.progression.effects.D06quantity : 1;
-export function prepareProgressionWork(s: GameState) {
+export function prepareProgressionWork(s: GameState):GameState {
   const work = { ...s.progression.work };
   const live = new Set<string>();
-  function track(id: string, required: number, speed: number) {
+  function track(id: string, required: number, speed: number, minimumUntil=0) {
     live.add(id);
     const saved = work[id] ?? { required, done: 0, speed, quantityIntegral: 0 };
     work[id] = { ...saved, speed };
     return (
-      s.savedAt + Math.max(0, (saved.required - saved.done) / speed) * 1000
+      Math.max(minimumUntil,s.savedAt + Math.max(0, (saved.required - saved.done) / speed) * 1000)
     );
   }
+  for(const lab of s.researchLabs)if(lab?.quoteBasis?.itemV3)validateResearchStartContractV3(lab.quoteBasis.itemV3,lab.startedAt);
   const labs = s.researchLabs.map((j) =>
     !j
       ? null
@@ -63,6 +66,7 @@ export function prepareProgressionWork(s: GameState) {
               ? 1
               : progressionResearchSpeed(s) *
                   (s.labBoostUntil > s.savedAt ? 2 : 1),
+            j.quoteBasis?.itemV3?.minimumBypassed?0:j.quoteBasis?.itemV3?.minimumUntil??0,
           ),
         },
   );
@@ -110,7 +114,7 @@ export function prepareProgressionWork(s: GameState) {
     progression: { ...s.progression, work },
   };
 }
-export function advanceProgressionWork(s: GameState, seconds: number) {
+export function advanceProgressionWork(s: GameState, seconds: number):GameState {
   const p = s.progression,
     work = { ...p.work };
   for (const [id, w] of Object.entries(work)) {
@@ -143,7 +147,7 @@ export function advanceProgressionWork(s: GameState, seconds: number) {
     ...s,
     progression: {
       ...p,
-      work,
+      work:usesItemV3(s)?applyItemResearchTransferV3(s,work):work,
       knowledge: ScientificNumber.fromJSON(p.knowledge)
         .add(knowledgeRate(s).multiplyNumber(seconds))
         .toJSON(),
@@ -173,7 +177,7 @@ export function advanceProgressionWork(s: GameState, seconds: number) {
         },
       };
   }
-  return discoverProgression(advanceFusion(next, seconds));
+  return synchronizeItemResearchEndsV3(discoverProgression(advanceFusion(next, seconds)),s.savedAt+seconds*1000);
 }
 export function protectedData(
   s: GameState,
@@ -308,6 +312,7 @@ export function pauseMain(s: GameState, at: number) {
     ...s,
     savedAt: at,
     runStartedAt: s.runStartedAt + delta,
+    ...(usesItemV3(s)&&s.itemSystemV3?.overdrive&&s.overclock.activeUntil>s.savedAt?{itemSystemV3:{...s.itemSystemV3,overdrive:{...s.itemSystemV3.overdrive,startedAt:s.itemSystemV3.overdrive.startedAt+delta,burstUntil:s.itemSystemV3.overdrive.burstUntil+delta}}}:{}),
     creditBoostUntil: shift(s.creditBoostUntil),
     trainingBoostUntil: shift(s.trainingBoostUntil),
     labBoostUntil: shift(s.labBoostUntil),
@@ -327,7 +332,7 @@ export function pauseMain(s: GameState, at: number) {
       : null,
     researchLabs: s.researchLabs.map((j) =>
       j
-        ? { ...j, startedAt: j.startedAt + delta, endsAt: j.endsAt + delta }
+        ? { ...j, startedAt: j.startedAt + delta, endsAt: j.endsAt + delta,...(j.quoteBasis?.itemV3?{quoteBasis:{...j.quoteBasis,itemV3:{...j.quoteBasis.itemV3,minimumUntil:j.quoteBasis.itemV3.minimumUntil+delta}}}:{}) }
         : null,
     ),
     crafting: {

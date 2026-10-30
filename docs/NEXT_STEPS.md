@@ -234,3 +234,47 @@ Tatsächliche Einstiege/Rückkehr, persönliche Zähler, technische Trainings-ID
 
 ### 29.10.: Tatsächliches Impulsrelais
 Separater Zehnerbonus mit eigenem Critfaktor, Quoten-/Transaktionsparität, Eingabeausschlüssen und erhaltenem Exemplarstand geprüft:2.033Vitest,205vollständigeEditMode,11gezieltePlayMode. Als Nächstes Burst/Kryo und zeitlich begrenzte Kombinationsverträge, anschließend weitere Arbeits-/Materialereignisse. VollständigeV3-Migration,42er-Erwerb,UI und Nachherkampagnen bleiben Playtestvoraussetzung.
+
+### 29.10.: Burst/Kryo und Zeitgrenzen geprüft
+Tatsächliche Overdrive-Startverträge einschließlich Energiepaar/-trio, manuellem Charged-Aufruf ohne Tapauszahlung, Pause bei aktiver/abgelaufener Burstphase und korrekter Laborfüllung abgeschlossen:2.039Vitest,207vollständigeEditMode,16gezieltePlayMode grün. PR157 inzwischen vom Nutzer gemergt; eigener Folge-Draft für diesen Abschnitt. Nächste unabhängige Verträge: Fertigungsrückgewinnung/Materialprovenienz und übrige Analyse-/Hardwarepaketwirkungen. VollständigeV3-Migration/Details/Katalogerwerb/Arbeitsereignisse vor Xcode weiter offen.
+
+### 29.10.: Diagnoseadapter / bezahlte Pakete
+360gemeinsame tatsächliche Vergaben plus32Produktionsfolgen,2.042Vitest/208vollständigeEditMode grün. PlayMode10/11 und fokussierter erfolgreicher1/1Intro-Nachlauf getrennt dokumentiert; keine pauschale vollePlayMode-Freigabe. Nächste Verbraucher: gültige Bauplanmeisterschaften, fokussierte Analyse-/Familienausbeute, Rückgewinnung und Arbeitsereignisse. Native Klassenupgrade-/Resetfrage weiterhin separat; normaler Save24 unverändert.
+
+### 29.10.: Bauplanarchiv-Guard geprüft
+Bekannte unterschiedliche Meisterschaften in TS/native ausgerichtet; unbekannte/geerbte Felder erzeugen keinen Bonus, Original bleibt.2.045Vitest,209vollständigeEditMode,3gezieltePlayMode grün. Weiter mit Fokusgewichtung/Fokusmengenverlust und gültiger Familienausbeute; V3-Dateimigration und normaler Xcode-Playtest bleiben bis zum vollständigen Umbau zurückgestellt.
+
+### 29.10.: Präzisionsfokus geprüft
+Gewichte und Mengenverlust wirken beim tatsächlichen bezahlten Start; gespeicherte Aufträge durch späteres Ausrüsten nicht rückwirkend verbessert.120Startfälle/35Folgen,2.049Vitest,210vollständigeEditMode,5gezieltePlayMode grün. Weiter mit W03-Zielfamilie/zulässigerRare-Garantie sowie gültiger Photon-/Quantenausbeute und deren gespeicherten Verträgen; vollständigesV3 vor Xcode unverändert offen.
+
+### 29.10.: W03-Zielfamilie geprüft
+Bezahlte Faktoren/Mindestfund über Fokuswechsel und Axiomreset erhalten; keine gesperrte Graphengarantie bei neuen V3-Aufträgen.2.055Vitest/211volleEditMode/7PlayMode plus2finaleUIprüfungen,22Bilder; DE/EN320/390/430 selbstgesehen. Weiter mit W04-Levelkosten, gültiger Photon-/Quantenausbeute und deren gespeicherten Verträgen; kein Xcode-Zwischenbuild.
+
+### 29.10.: W04-Levelkosten geprüft
+1.260gemeinsame tatsächliche Quotes/Abbuchungen/Materialbasen, alle vorhandenenTypen und kritischeLevel, alte/neue/no-itemsRegeln;2.060Vitest/212volleEditMode/7PlayMode grün, nach Kostenlesbarkeitskorrektur7PlayMode erneut grün. Weiter mit W07-Serienfertigung: tatsächliche volle Batchkosten und Bezahlsperren in der Oberfläche vereinheitlichen, atomare Fehlfälle und Ergebnisse prüfen. Weitere Familien-/Arbeitsverbraucher und V3-Savemigration vor Xcode weiter offen.
+
+### 29.10.: W07-Batchanzeige und Bedienung geprüft
+Vollpreise, atomareFehlfälle und113echtegespeicherteItems mitReload/Animationsabbruch geprüft;160gemeinsameFälle,2.066Vitest/213EditMode/8PlayMode grün.44Originalbilder,DE/EN320/390/430 selbstgesehen. Weiter mit Photon-/Quanten-Familienausbeute und vollständig eingefrorenen Analyse-Ausbeuteverträgen, anschließend übrigen Arbeits-/Rückgewinnungs-/Provenienzabhängigkeiten. VollständigeV3-Migration/Katalogerwerb/Details vorXcode weiter offen.
+
+### 29.10.: Familienausbeute und globale Startbedingungen geprüft
+Photon-/Quantenwirkungen, OD-Kombination und K10 sind an reale bezahlteStarts/Pakete gebunden; ursprünglicheHardwaregrundmengen und alte normaleIntegrale erhalten.112Auftragszustände/540Pakete,2.071Vitest/215EditMode/8finalePlayMode grün.11Originalbilder; Darstellungsumbrüche korrigiert. Weiter mit verbleibenden Arbeits-/Rückgewinnungs-/Provenienzverträgen,42er-Katalog und tatsächlichen gemeinsamenV3-Itemdetails, anschließend vollständigerverlustfreierSave-Migration und Gesamtregression/Naturalläufen. Nutzer hat erneut ausdrücklich vollständigesV3vorPlaytest bestätigt; kein Zwischenbuild.
+
+
+## V3-Materialkreislauf · 30.10.2026 · laufend
+Controller-Rückgabe, deterministische Recyclingfragmente, geschlossenes Trio, bezahlte Provenienz und90%-Grenze in TS/C# implementiert;31gemeinsame vorbereitete Transaktionsfolgen und gezielte Domainprüfung grün. Vollständige Regression läuft. UI-Details/Originalmigration und vollständige42Item-/60INT-/24Axiom-Abnahme bleiben offen. Keine Freigabe/Installation eines Zwischenplayers; Nutzer bestätigt weiterhin vollständigesV3 vor Xcode.
+
+Materialkreislauf-Zwischenstand: vollständige170Dateien/2.078Vitest(346,67s),217/217EditMode(200,946s),Typecheck/Build/Generatorvergleich grün. Passende echte Workshop-PlayMode-Regression läuft noch. Keine neue Spielerfreigabe.
+
+Abschluss Domainabschnitt Materialkreislauf:6/6passendePlayMode(33,623s) zusätzlich grün. Tatsächliche normale Workshop-Transaktionen, Animationstrennung/Abbruch, reduzierte Bewegung, Save/Reload und mobile Kosten-/Analysestatusanzeigen erhalten. Kein neuer Grafik-/Geräte-/V3-Dateinachweis. Gesamtauftrag läuft mit den offenen Forschungsereignissen und der vollständigen Migration weiter.
+
+
+## V3-Forschungsarbeit · 30.10.2026 · in Abschlussprüfung
+Photonenfeld, vollständigeLernspirale und Labordrohne im tatsächlichen Arbeits-/Abschlusspfad;20gemeinsame bezahlteFolgen,25Allokationen,9neueSourceprüfungen.2.087Vitest/Typecheck/Build/Generatorvergleich grün; nativegezielteReferenzen37/37, nach Korrektur neuerIntrovorbereitung4/4. Abschließende gemeinsameUnity-/UI-Prüfungen laufen. Übrige Startverträge, wissenschaftlicheArbeit,42Items/60INT/24Axiome und vollständigeverlustfreieSaveaktivierung weiter offen. Erst vollständigesV3, dann Xcode wie erneut bestätigt.
+
+Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(206.8267902s),5/5passendePlayMode(16,677s),2.087Vitest,Typecheck/Build/vollständigerGeneratorvergleich grün. Frühere220/221 wegenIntro-Testvorbereitung getrennt dokumentiert. Keine neue Grafik-/Geräte-/V3-Dateifreigabe. Nächster unabhängiger Abschnitt: eingefrorene Forschungsstartverträge samt Protokollcontroller, Bereichswechsel und automatischem Anfangsfortschritt.
+
+
+## V3-Forschungsstarts · 30.10.2026 · finale UI-Prüfung
+Bezahlte Bereichswechsel-, Protokoll- und automatischeStartverträge einschließlich Queue/Wiederholung/Direktor verbunden.32gemeinsame realeTransaktionsfolgen, beideResets mit laufendemAuftrag;2.093Vitest/223EditMode/Typecheck/Build/Generatorvergleich grün. DreiForschungsitemdetails mit tatsächlichenV3-Werten/siebenSprachen und rotemMindestdauer-Nachteil; finaleUI-Regressionsbilder nach zwei konkretenLesbarkeitskorrekturen laufen. Kein vollständigerV3-Save oderPlayerfreigabe. Danach sechsneueItems/fehlendeEffekte, wissenschaftlicheArbeit und vollständigeErwerbs-/UI-/Save-Migration weiter abarbeiten.
+
+Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beidenletztenUI-Lesbarkeitskorrekturen grün;44unveränderteUnity-PNGs einschließlichManifest in docs/media/unity-v3-research-starts. DE/EN320/390/430 undFR390 selbstgesehen, roteMindestdauererhöhung sichtbar, Einheitenzusammenhalt/Randabstand korrigiert, echtesfranzösischesAblegen. Kein neuesV3-Save/Player/Design-Gesamturteil. Der Gesamtauftrag geht mit sechsneuenItems/fehlendenFähigkeiten, wissenschaftlicherArbeit und vollständigerMigration weiter.

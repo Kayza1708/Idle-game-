@@ -810,3 +810,39 @@ Vorhandene zentrale Vorgabe×2 auf bezahlte Analysen und reguläre Hardware-Meil
 
 ### 29.10.2026 – V3-Impulsrelais als separates Tapereignis
 Verbindliche bestehende V3-Spezifikation umgesetzt, keine zusätzlichen Tuningwerte: `BALANCE.itemV3.relay` bleibt Intervall10,2Sekunden×Fähigkeits-P und eigener kritischer Faktor1,5. Auszahlung zusätzlich zum normalen Tap, außerhalb seiner Softcap/normalen Critwirkung; reguläre Referenz ohne temporären Overdrive-/Werbefaktor einschließlich indirekter Overdrive-Itemproduktion. Exemplarstand modulo10; nur akzeptierter manueller Input. W10 genau einmal. Alte normale Spielstände bleiben auf ihren Regeln bis zur vollständigen Migration. Gemeinsame tatsächliche Quoten-/Transaktionsreferenzen in `scripts/export-unity-item-v3.ts`.
+
+
+### 29.10.2026 – V3-Burst-/Kryo-Startvertrag
+Bestehende Spezifikation/zentraler V3-Datenstand: Burst(1+2P) für3s; Energiepaar5s und dieser Faktor×3, Dreierergänzung Daten×5. Kryodauer×(1+0,5P) nach bisheriger Basisdauerberechnung, keine erneute30s-/+100%-Kappung des neuen Faktors. Werte beim tatsächlichen Start einfrieren, an exaktem Fensterende integrieren; alte aktive Zustände ohne Beleg nicht nachträglich verstärken. Kein zusätzlicher Tap oder Reward beim vorhandenen manuellen Charged-Aufruf. Native/TS verwenden dieselben generierten Werte, normale64/24-Regeln bis vollständiger V3-Migration unverändert.
+
+
+### 29.10.2026 – V3-Diagnoseadapter / Bootstrapping bei Hardware-Meilensteinen
+Vorhandene spezifizierte Werte aus `BALANCE.itemV3`: variable reguläre Paketkomponenten×(1+P), Bootstrappingpaar zusätzlich×1,5, W08 genau einmal. Keine Änderung des Grundpakets, alter Bruchteile oder fester Sondervergaben. Neue Itemboni gelten nicht für die gesonderten Klassenupgradepakete oder allgemeine Zuschüsse. Gemeinsame tatsächliche Vergaben und Wallet-/K-/Restparität über alle15Klassen und6Meilensteine geprüft; keine neue Tuningkonstante.
+
+
+### 29.10.2026 – V3-Präzisionsscanner
+Bestehender spezifizierter Faktor1+Fähigkeits-P aus zentralem `BALANCE.itemV3.focus.coefficient`: Fokusgewicht multiplizieren und danach normieren; bestehender Mengenverlust `(1-materialFocusQuantity)` durch1+P. Tatsächliche verfügbare Tabelle und Menge beim bezahlten Start einfrieren. Keine neue Konstante, keine neue Freischaltung und keine Erhöhung allgemeiner Fundchancen. V3-Vorschau der Basisziehung verwendet denselben Vertrag, alte normale Regeln erhalten.
+
+### 29.10.2026 – beauftragter V3-W03-Startvertrag
+W03 verdoppelt ausschließlich die beim bezahlten Analysestart gewählte/verfügbare Fokusfamilie. Mindestfund nur aus bereits freigeschalteten seltenen Familien: vorhandene Graphenpräferenz, sonst erste zulässige Komponente der bestehenden Reihenfolge, andernfalls keiner. Keine Freischaltung durch die Garantie. Alte bezahlte Verträge ohne neuen Marker behalten ihre zugesagten Regeln. Faktoren und Kandidat werden beim Start fixiert und beim Abschluss validiert; globaler K10-Mengenverbrauch bleibt separat offen. Normale Regeln unverändert. Quelle bleibt `src/economy.ts` (`prestigeV3.items.W03focus`).
+
+### 29.10.2026 – beauftragtes V3-W04
+Neue Item-Levelupgrades mit W04:×0,75 (`BALANCE.prestigeV3.items.W04`) statt alter×0,85; bestehende Material-/Datenkurven und Rundungsreihenfolge erhalten, seltene benötigte Inputs ebenfalls×0,75 und aufrunden. Ohne W04 keine Reduktion. Nur V3; alte Save-Regeln, Fusion, Rezepte, Schmiedestufen und Herstellungskosten unverändert. Ursprüngliche kollidierende Basis-/Seltenmaterial-ID des Zyklusobservatoriums separat dokumentiert, hier nicht durch neue Additionskosten ersetzt.
+
+### 29.10.2026 – W07-Serienfertigung
+Vorhandene sofortige Sammelpreise proExemplar×Menge ohne neue Kostenformel: Meisterschaftsrundung jeExemplar, danach volle Material-/Modul-/Datensummen. Zentrale beauftragte Mengen×3/×10/×100 und Einzelherstellung. Gemeinsame Unity-Quote jetzt auch für sichtbare Preise und Bezahlsperre; keine Teilzahlung, keine neue Warteschlange/Automatik.
+
+### 29.10.2026 – beauftragte V3-Familienausbeute
+Photon-/Quantenitem×(1+P), Photonikarchitektur×2imOverdrive, Trio nur bereits freigeschaltete Quantenfamilie. Nur bezahlteAnalysen/reguläreHardwarepakete; historische Paketgrundmengenfamilien erhalten, neueV2-Familienwirkung getrennt. GPUextra mit Bruchteilen, kein Diagnosefaktor auf dieses festeExtra. Sämtliche neuen Analyse-Ausbeutefaktoren einschließlich bestehendemK10 beim bezahltenStart gespeichert (V3-Spezifikation702); alte normale Auftragsintegrale unverändert. Quellen `BALANCE.itemV3.familyYield`, `.combinations.photonic`, bestehendes `.progression.effects.D06quantity`. Kein neuer Preis oder zusätzlicher Erwerbsweg.
+
+
+### 30.10.2026 – beauftragter V3-Materialkreislauf
+Herstellungscontroller min(0,35; 0,10×P), mit bestehenden Forschungsrückgaben durch Maximum verrechnet. Recycling-Sonde Rare+ 0,25×P Fortschritt, Zweierkombination×1,25 nur Zusatzfortschritt; vollständiges Trio×1,2 neue bezahlte Analysen. Gesamtmaterialrückgewinnung höchstens0,90 der tatsächlich bezahlten Basis einschließlich bereits verwendeter Rückgaben. Vorhandene alte Zerlegeraten0,60/+0,05 proC05/bis0,75 unverändert nach `BALANCE.materialSalvage` zentralisiert. Quellen ausschließlich src/economy.ts; keine neue Kurve oder Zufallsbelohnung. Normale Save-Regeln erhalten.
+
+
+### 30.10.2026 – V3-Forschungsarbeitsereignisse in Prüfung
+Photonenfeld3×P Sekunden reguläre aktuelle Laborleistung je belegtem regulärem Labor; vollständige Lernspirale×2. Labordrohne min(40%;10%×P) neu geleisteter regulärer Forschungsarbeit an längste Restarbeiten, faire Gleichstände, keine Rekursion aus Zusatzarbeit. Zentrale vorhandene Spezifikationswerte in `BALANCE.itemV3.photon`, `.drone`, `.combinations.learning`; kein neuer Preis oder numerischer Balancewert. Alte normale Regeln erhalten.
+
+
+### 30.10.2026 – beauftragte V3-Forschungsstartverträge
+Versuchscontroller min(0,50;0,15×P) Anfangsarbeit nach Bereichswechsel. AutonomesPaar5%, vollständigesTrio jederdritte gültige automatischeStart weitere10%, unveränderte Kosten. Vorhandene aktuelle V2-Mindestdauer0,001s nach `BALANCE.itemV3.protocol.minimumBase` zentralisiert; alter60s-Pfad bleibt unverändert. Protokollcontroller max(0,5s;0,001s/(1+P)), aktuell0,5s; bewusst kein stiller Ersatz der tatsächlichenV2-Basis. Initialarbeit additiv, Frist und Arbeitsanspruch beim bezahltenStart gespeichert, keine rückwirkende Neubewertung. Normale Regeln und Preise unverändert; Startursache/53Bit-Zählgrenze sind technische Belege, keine neueWährung oderÖkonomiegrenze.

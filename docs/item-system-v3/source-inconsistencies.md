@@ -17,3 +17,14 @@ Die V3-Vorgabe verlangt jeden fünften bezahlten Analyseabschluss als zusätzlic
 
 ### Präzisierung zum Klassenupgrade-Reset
 Der aktuelle `normalResetV2` und Axiomreset leeren die wirksamen `classUpgrades`, behalten aber `materials.classUpgrades`. `classUpgradePreview` sperrt einen weiteren Kauf auch anhand dieses erhaltenen Materialbelegs. Damit ist die aktive Kaufwirkung nicht einfach ein dauerhaftes Upgrade; bei einem nativen neuen Kaufweg wären diese getrennten Erhaltungsregeln sichtbar zu erklären oder ausdrücklich neu zu entscheiden. Keine still erfundene permanente×2-Wirkung oder wiederholbare Extra-Meilensteinvergabe. Analyse-/W08- und andere unabhängige Verbraucher werden weiterbearbeitet.
+
+## Zyklusobservatorium: gleiche Kosten-ID
+`itemMaterialFamilies[cycle-observatory]` enthält `quantumCores` sowohl als Basis- wie als Seltenmaterial. Das bestehende Source-Kostenobjekt überschreibt bei seltenen Eingaben die Basiszuweisung; Native entspricht dem. W04 übernimmt×0,75/Rundung der tatsächlich geltenden Eingaben, erfindet aber keine zusätzlichen additiven Kosten. Vor vollständiger Katalogfreigabe diese bestehende Kostenkollision ausdrücklich entscheiden; gemeinsame1260Levelkostenreferenzen halten den Befund nachvollziehbar.
+
+
+## Tatsächliche bisherige Forschungs-Mindestdauer im V2-Pfad
+30.10.2026: `researchQuote` nutzt im tatsächlich gespielten Progression-V2-Pfad ausdrücklich0,001s als Mindestdauer, während `BALANCE.researchMinimumSeconds=60` dem älteren Pfad zugeordnet ist. Die bisherige Arbeitsintegration übernimmt diese V2-Zeitgrenze zudem nicht als separate Deadline; Native ResearchWork begrenzt nur die Arbeitsmenge. Deshalb ist60s keine belegte Mindestdauer des aktuellen V2-Spiels.
+
+Für den noch offenen Protokollcontroller muss die beauftragte Formel auf die tatsächlich geltende V2-Basis angewendet werden: max(0,5s;0,001s/(1+P)). Das ergibt aktuell0,5s und kann bei sehr hoher Leistung eine längere Mindestdauer als ohne Item bedeuten. Keine heimliche Ersetzung der V2-Basis durch60s oder neue1s-Basis. Als bezahlten Startvertrag festhalten, Ab-/Anlegen nicht rückwirkend anwenden, tatsächliche Nachteile in Details zeigen. Intro/Skip/Challenge-Pause und vorher durch Zusatzarbeit erfüllte Aufträge müssen ohne Mikrosekunden-Schleifen behandelt werden. Umsetzung/Abnahme dieser Startverträge steht noch aus.
+
+30.10.2026 Fortschritt Mindestdauer: tatsächliche0,001s-Basis nun unverändert zentralisiert, bezahlteV3-Startfrist/Skip-Ausnahme/Challenge-Pause implementiert und TS/C#geprüft. Protokollcontroller0,5s wird in den neuenDetails einschließlich wirklichemrotemNachteil angezeigt. Der historische Unterschied zum60s-Pfad bleibt dokumentiert; keine Ersatzbasis erfunden. V3-Aktivierung/Dateimigration weiterhin offen.

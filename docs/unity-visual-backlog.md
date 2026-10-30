@@ -201,3 +201,10 @@ Grafische Trainings-/Forschungsqueues wurden mit Originalicons, Position/Ziellev
 Noch konkrete visuelle Abnahmen: Budgetpause/Resetabsicht; vollständige Axiomentdeckung mit Mira, Erhaltungsvorschau und späterem Zugang; alle V3-Wirkungstexte und Vergleiche. [Sechs neue Itemmotive](item-system-v3/art/README.md) sind erstellt und angesehen, aber noch keine eingebundenen/abgenommenen Unity-Items. Besonders Flottenkoordinator-Silhouette, Alpha-Bounds und kleine Konturen in den gemeinsamen Sockeln prüfen. Keine pauschale Design-/Animationsfertigmeldung.
 
 - Editor-Anbindung ergänzt und tatsächlich geprüft: offizielle Pipeline0.9.1-exp.1, Live-eval, Sprite-Capabilities, Console, isoliertes fortlaufendes Play und echte390×846-Aufnahme. Sechs neue Sprites sicher importiert; Katalog/Rezepte/Sockeldarstellung weiterhin offen. Details: `docs/item-system-v3/art/README.md`.
+
+## 29.10.2026 – V3-Overdrive-Laufzeitprojektion
+- Gezielter funktionaler Darstellungsfehler behoben: V3-Leiste nutzt gespeicherte Dauer statt pauschal30s; dekoratives Raycastziel ausgeschaltet.18echte Game-View-Zustände (Start/Hälfte/Ende, DE/EN320/390/430), sechs repräsentative Bilder selbst angesehen: `media/unity-v3-overdrive/README.md`.
+- Die große Laborfläche und kleine320px-Kopftexte bleiben Punkte der späteren gemeinsamen Dichte-/Lesbarkeitsprüfung. Keine weitere Designrunde und keine neue globale Animationsabnahme in diesem Domainabschnitt.
+- V3-Itemdetails müssen vor Aktivierung tatsächliche neue Wirkungen und gespeicherte Startverträge erklären; heutige Standbilder oder bestandene Tests schließen diesen offenen Verbraucher nicht ab.
+
+- V3-W07-Prüfung29.10.: sichtbare volleKosten/Ergebnisanzahl angeschlossen und beiDE/EN320/390/430 gelesen. Die allgemeine Schmiede-Bestandszeile zeigt im finanziertenMillionenfall noch sehr kleine unformatierte Gesamtsummen; später gemeinsame kompakte Zahlenformatierung/Informationsdichte nachziehen. Keine neueDesignrunde oder fehlendePreisfunktion damit kaschieren.

@@ -2,9 +2,10 @@
  * the complete versioned migration is ready. No clocks, RNG, IO or UI here. */
 import {BALANCE,equippedItems,hardwareIds,itemTypes,classComputeTerms,
   type GameState,type Item,type ItemFamily,type Rarity,type ComponentId} from './economy';
-import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor,axiomLevel} from './progression';
+import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor,axiomLevel,progressionResearchSpeed} from './progression';
 import {dataRateScientific,creditRateScientific} from './economy';
 import {challengeNetworkLinkAllowed,challengeFamilyBonus} from './challengeStages';
+import type {WorkContract} from './progressionWork';
 import {ScientificNumber as S,type ScientificJSON} from './scientificNumber';
 
 export type ItemSystemV3State={
@@ -19,13 +20,16 @@ export type ItemSystemV3State={
   learningStreak:number;
   lastLearningTrack:'quality'|'efficiency'|null;
   scannerAnalyses:number;
+  recyclingFragmentProgress:number;
+  automaticResearchStarts:number;
+  overdrive:{startedAt:number;burstUntil:number;creditFactor:number;dataFactor:number}|null;
   synthesisRemainders:Partial<Record<ComponentId,number>>;
   synthesisContract:{id:string;component:ComponentId;multiplier:number}|null;
   archiveBlueprintRight:boolean;
   axiomDiscovered:boolean;
   axiomDiscoveryAt:number|null;
 };
-export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,synthesisRemainders:{},synthesisContract:null,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
+export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,recyclingFragmentProgress:0,automaticResearchStarts:0,overdrive:null,synthesisRemainders:{},synthesisContract:null,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
 export const usesItemV3=(s:GameState)=>s.itemSystemV3?.version===3;
 const c=()=>BALANCE.itemV3;
 const one=()=>S.from(1);
@@ -58,6 +62,19 @@ export function itemRelayBonusV3(s:GameState,critical:boolean){
  const regular={...s,overclock:{...s.overclock,activeUntil:0}};
  return creditRateScientific(regular.hardware,regular.level,regular,regular.savedAt,false).multiplyNumber(c().relay.seconds*itemAbilityStrengthV3(s,item).P*(critical?c().relay.critical:1));
 }
+/** Start-only contract. Equipping later never reconstructs a window. */
+export function itemOverdriveStartV3(s:GameState,now:number,baseDuration:number){
+ if(!usesItemV3(s)||!Number.isFinite(now)||now<s.savedAt||!Number.isFinite(baseDuration)||baseDuration<=0)throw new RangeError('Invalid V3 overdrive start');
+ const items=itemV3Equipped(s),burst=items.find(i=>i.type==='burst-processor'),cryo=items.find(i=>i.type==='cryocontroller'),pair=!!burst&&!!cryo,trio=pair&&items.some(i=>i.type==='photonic-analyzer');
+ const duration=baseDuration*(1+(cryo?c().cryo.duration*itemAbilityStrengthV3(s,cryo).P:0));
+ return{duration,contract:{startedAt:now,burstUntil:now+Math.min(duration,pair?c().combinations.energy.seconds:c().burst.seconds)*1000,creditFactor:burst?(1+c().burst.coefficient*itemAbilityStrengthV3(s,burst).P)*(pair?c().combinations.energy.credits:1):1,dataFactor:trio?c().combinations.energy.data:1}};
+}
+export function itemBurstFactorV3(s:GameState,kind:'credits'|'data',now=s.savedAt){
+ const v=s.itemSystemV3?.overdrive;if(!usesItemV3(s)||s.retention.activeRun?.id==='no-items'||!v||now<v.startedAt||now>=v.burstUntil||now>=s.overclock.activeUntil)return 1;
+ return kind==='credits'?v.creditFactor:v.dataFactor;
+}
+export function itemOverdriveFractionV3(s:GameState){const remaining=Math.max(0,s.overclock.activeUntil-s.savedAt),duration=usesItemV3(s)&&s.itemSystemV3?.overdrive?s.overclock.activeUntil-s.itemSystemV3.overdrive.startedAt:BALANCE.progression.overdriveMaxSeconds*1000;return duration<=0?0:Math.min(1,remaining/duration);}
+export function itemBurstBoundaryV3(s:GameState){const v=s.itemSystemV3?.overdrive;return usesItemV3(s)&&v&&v.burstUntil>s.savedAt?(v.burstUntil-s.savedAt)/1000:Infinity;}
 export const itemV3Has=(s:GameState,id:string)=>itemV3Equipped(s).some(item=>item.type===id);
 /** Deliberately removes all old primary, secondary, tertiary and combination
  * contributions while preserving the non-item game state and challenge rules. */
@@ -123,6 +140,30 @@ export function itemComputeFactorV3(s:GameState){
  if(combo.pair)result=result.multiplyNumber(c().combinations.compute.factor);
  return result.multiply(itemBaseFactorScientificV3(s,'processor'));
 }
+/** Only variable regular paid milestone components; fixed extras and class
+ * upgrade packages retain their distinct existing contracts. */
+export function itemFocusFactorV3(s:GameState){if(!usesItemV3(s))return 1;const item=itemV3Equipped(s).find(i=>i.type==='precision-scanner');return 1+(item?c().focus.coefficient*itemAbilityStrengthV3(s,item).P:0);}
+export function itemFocusQuantityV3(s:GameState){return usesItemV3(s)?1-(1-BALANCE.materialFocusQuantity)/itemFocusFactorV3(s):BALANCE.materialFocusQuantity;}
+export function itemHardwarePackageFactorV3(s:GameState){
+ if(!usesItemV3(s))return 1;const diagnostic=itemV3Equipped(s).find(i=>i.type==='diagnostic-adapter');return(1+(diagnostic?c().diagnostic.coefficient*itemAbilityStrengthV3(s,diagnostic).P:0))*(itemCombinationV3(s,'bootstrapping').pair?c().combinations.boot.components:1);
+}
+/** Family-specific yield for paid analyses/regular hardware packets only.
+ * Quantum architecture requires existing access; no family is unlocked here. */
+export function itemMaterialFamilyYieldV3(s:GameState,family:keyof typeof BALANCE.progression.materials,quantumUnlocked:boolean,at=s.savedAt){
+ if(!usesItemV3(s)||family!=='photonic'&&family!=='quantum')return 1;
+ const type=family==='photonic'?'photonic-analyzer':'quantum-diagnostic-module',item=itemV3Equipped(s).find(i=>i.type===type),combo=itemCombinationV3(s,'photonic-architecture');
+ return(1+(item?c().familyYield.coefficient*itemAbilityStrengthV3(s,item).P:0))*(s.overclock.activeUntil>at&&(family==='photonic'?combo.pair:combo.complete&&quantumUnlocked)?c().combinations.photonic.yield:1);
+}
+export function itemMaximumFamilyYieldV3(){const maxP=Math.max(...c().rarityFactors)*(1+c().levelStep*(c().levelMax-1))*(1+c().forgeStep*c().forgeMax)*BALANCE.prestigeV3.items.W10ability;return BALANCE.prestigeV3.items.W03focus*(1+c().familyYield.coefficient*maxP)*c().combinations.photonic.yield;}
+/** One combined refund account: the item replaces a lower existing refund,
+ * rather than issuing a second grant for the same paid materials. */
+export function itemCraftRecoveryFractionV3(s:GameState,existing:number){const item=itemV3Equipped(s).find(i=>i.type==='manufacturing-controller');return Math.min(BALANCE.recoveryFraction,Math.max(existing,item?Math.min(c().manufacturing.cap,c().manufacturing.rate*itemAbilityStrengthV3(s,item).P):0));}
+export function itemAnalysisCombinationYieldV3(s:GameState){return usesItemV3(s)&&itemCombinationV3(s,'closed-loop').complete?c().combinations.recycling.materials:1;}
+export function itemSalvageFragmentsV3(s:GameState,item:Item){
+ if(!usesItemV3(s))return{gained:0,remainder:0,progress:0};const remainder=s.itemSystemV3!.recyclingFragmentProgress;if(!Number.isFinite(remainder)||remainder<0||remainder>=1)throw new RangeError('Invalid V3 fragment progress');
+ const probe=itemV3Equipped(s).find(i=>i.type==='recycling-probe'),rare=(Object.keys(BALANCE.rarity) as Rarity[]).indexOf(item.rarity)>=(Object.keys(BALANCE.rarity) as Rarity[]).indexOf('rare'),progress=rare&&probe?c().recycling.fragment*itemAbilityStrengthV3(s,probe).P*(itemCombinationV3(s,'closed-loop').pair?c().combinations.recycling.fragments:1):0;
+ if(progress===0)return{gained:0,remainder,progress};const value=remainder+progress,nearest=Math.round(value),total=Math.abs(value-nearest)<=Number.EPSILON*Math.max(1,value)*16?nearest:value,gained=Math.floor(total);return{gained,remainder:total-gained,progress};
+}
 export function itemCreditFactorV3(s:GameState){
  const snapshot=itemV3Snapshot(s),distilled=itemCombinationV3(s,'distilled-intelligence');let result=one();
  for(const item of itemV3Equipped(s)){
@@ -147,7 +188,7 @@ export function itemWorkFactorV3(s:GameState,research:boolean){
   const {P,Q}=itemAbilityStrengthV3(s,item);
   if(!research&&item.type==='logic-seed')result=result.multiply(S.from(c().logic.base).pow(P).multiplyNumber(1+c().logic.perStreak*P*s.itemSystemV3!.learningStreak));
   if(!research&&item.type==='mnemonic-anchor')result=result.multiply(S.from(c().anchorMemory.base).pow(P).multiply(one().add(snapshot.U.divide(S.from(c().anchorMemory.upgradeScale))).pow(c().anchorMemory.exponent*Q)));
-  if(research&&item.type==='blueprint-archive')result=result.multiply(S.from(c().blueprint.base).pow(P).multiplyNumber(1+c().blueprint.perBlueprint*P*Object.values(s.blueprintMastery).filter(level=>level>=1).length));
+  if(research&&item.type==='blueprint-archive')result=result.multiply(S.from(c().blueprint.base).pow(P).multiplyNumber(1+c().blueprint.perBlueprint*P*Object.keys(BALANCE.itemRecipes).filter(id=>Object.hasOwn(s.blueprintMastery,id)&&s.blueprintMastery[id as Item['type']]>=1).length));
   if(research&&item.type==='cycle-observatory')result=result.multiply(S.from(c().cycle.base).pow(P).multiply(S.from(1+snapshot.Z).pow(c().cycle.exponent*Q)));
  }
  if(itemCombinationV3(s,'learning-spiral').pair)result=result.multiplyNumber(c().combinations.learning.speed);
@@ -171,7 +212,7 @@ export function itemDataFactorV3(s:GameState){
  const snapshot=itemV3Snapshot(s);let result=one();for(const item of itemV3Equipped(s)){
   if(item.type==='data-prism'){const{P,Q}=itemAbilityStrengthV3(s,item);result=result.multiply(S.from(c().prism.base).pow(P).multiply(one().add(snapshot.F.divide(S.from(c().prism.researchScale))).pow(Q)));}
   if(item.type==='photonic-matrix'&&s.overclock.activeUntil>s.savedAt)result=result.multiplyNumber(1+c().photonic.coefficient*itemAbilityStrengthV3(s,item).P);
- }return result;
+ }return result.multiplyNumber(itemBurstFactorV3(s,'data'));
 }
 function validLink(s:GameState,index:number){return index>0&&s.completedResearch.includes('distributedInference')&&s.hardwareCounts[hardwareIds[index]]>0&&s.hardwareCounts[hardwareIds[index-1]]>=BALANCE.itemV3.link.previous&&challengeNetworkLinkAllowed(s,index);}
 export function activeHardwareLinksV3(s:GameState){return hardwareIds.filter((_,index)=>validLink(s,index)).length;}
@@ -220,7 +261,7 @@ export function recordItemComponentsV3(s:GameState,grant:Partial<GameState['comp
  * knowledge/components survive until the actual axiom-cycle boundary. */
 export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameState{
  if(!usesItemV3(s))return s;const v=s.itemSystemV3!;
- return{...s,itemSystemV3:{...v,dataProduced:S.zero().toJSON(),runMinutes:0,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,...(kind==='axiom'?{knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON()}:{} )}};
+ return{...s,itemSystemV3:{...v,dataProduced:S.zero().toJSON(),runMinutes:0,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,automaticResearchStarts:0,overdrive:null,...(kind==='axiom'?{knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON()}:{} )}};
 }
 
 /** Restores the old researchArchive -> I04 acquisition right. Learning stays an
@@ -228,7 +269,11 @@ export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameS
 export function archiveBlueprintRightV3(s:GameState){return usesItemV3(s)&&(s.itemSystemV3!.archiveBlueprintRight||s.insightArchiveBlueprint||s.nodes.includes('I04')||s.progression.known.includes('I04')||(s.learnedRecipes??[]).includes('insight-archive'));}
 
 function validateItemTrainingCountersV3(v:ItemSystemV3State){
+ if(!Number.isFinite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new RangeError('Invalid V3 fragment progress');
+ const maxP=Math.max(...c().rarityFactors)*(1+c().levelStep*(c().levelMax-1))*(1+c().forgeStep*c().forgeMax)*BALANCE.prestigeV3.items.W10ability;
+ const od=v.overdrive;if(od!==null&&(!od||![od.startedAt,od.burstUntil,od.creditFactor,od.dataFactor].every(Number.isFinite)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>c().combinations.energy.seconds*1000+.001||od.creditFactor<1||od.creditFactor>(1+c().burst.coefficient*maxP)*c().combinations.energy.credits+1e-10||![1,c().combinations.energy.data].includes(od.dataFactor)))throw new RangeError('Invalid V3 overdrive contract');
  if(!v.synthesisRemainders||Object.entries(v.synthesisRemainders).some(([id,n])=>!Object.hasOwn(BALANCE.components,id)||!Number.isFinite(n)||n!<0||n!>=1)||v.synthesisContract!==null&&(!v.synthesisContract||!v.synthesisContract.id||!Object.hasOwn(BALANCE.components,v.synthesisContract.component)||!Number.isFinite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new RangeError('Invalid V3 synthesis receipt');
+ if(!Number.isSafeInteger(v.automaticResearchStarts)||v.automaticResearchStarts<0)throw new RangeError('Invalid automatic research count');
  if(!Number.isSafeInteger(v.scannerAnalyses)||v.scannerAnalyses<0||!Number.isSafeInteger(v.nextTrainingSequence)||v.nextTrainingSequence<1||!Number.isSafeInteger(v.lastCompletedTrainingSequence)||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||!Number.isSafeInteger(v.learningStreak)||v.learningStreak<0||v.learningStreak>c().logic.maxStreak||![null,'quality','efficiency'].includes(v.lastLearningTrack)||![null,'regular','bonus','intro'].includes(v.lastTrainingCompletionCause))throw new RangeError('Invalid V3 training counters');
 }
 /** Serial training IDs are assigned only after the existing start/payment
@@ -249,7 +294,7 @@ export function completeItemTrainingV3(s:GameState,cause:'regular'|'bonus'):Game
   if(!Number.isSafeInteger(learningStreak)||learningStreak<0||learningStreak>c().logic.maxStreak)throw new RangeError('Invalid V3 learning series');
   learningStreak=lastLearningTrack===job.track?Math.floor(learningStreak/c().logic.sameTrackDivisor):Math.min(c().logic.maxStreak,learningStreak+1);lastLearningTrack=job.track;
  }
- return{...s,itemSystemV3:{...v,lastCompletedTrainingSequence:id,lastTrainingCompletionCause:job.intro?'intro':cause,learningStreak,lastLearningTrack}};
+ const next={...s,itemSystemV3:{...v,lastCompletedTrainingSequence:id,lastTrainingCompletionCause:job.intro?'intro' as const:cause,learningStreak,lastLearningTrack}};return cause==='regular'&&!job.intro?grantItemPhotonWorkV3(next):next;
 }
 
 /** Live scanner factor; regular completion increments are booked atomically
@@ -300,3 +345,19 @@ export function restoreItemChallengeV3(main:GameState,shadow:GameState):GameStat
  // be running. Only issued IDs must stay globally unique across both scopes.
  return{...main,itemSystemV3:{...v,nextTrainingSequence:Math.max(v.nextTrainingSequence,other.nextTrainingSequence)}};
 }
+
+/** Shares extra work among the longest remaining jobs. Equal jobs receive equal
+ * shares; no frame-dependent rotating winner and no recursive transfers. */
+export function distributeLongestResearchWorkV3(remaining:number[],budget:number){
+ if(!Number.isFinite(budget)||budget<0||remaining.some(n=>!Number.isFinite(n)||n<0))throw new RangeError('Invalid research work allocation');
+ const result=remaining.map(()=>0),order=remaining.map((_,i)=>i).sort((a,b)=>remaining[b]-remaining[a]||a-b);
+ for(let count=1;count<=order.length&&budget>0;count++){const high=remaining[order[count-1]],low=count<order.length?remaining[order[count]]:0,cost=(high-low)*count,used=Math.min(budget,cost);for(let n=0;n<count;n++)result[order[n]]+=used/count;budget-=used;}return result;
+}
+function regularItemResearchWorkV3(s:GameState){return s.researchLabs.flatMap(lab=>{if(!lab||lab.intro)return[];const id=lab.jobId??`${lab.id}:${lab.startedAt}`,work=s.progression.work[id];if(work&&(!Number.isFinite(work.required)||work.required<=0||!Number.isFinite(work.done)||work.done<0||work.done>work.required+1e-6||!Number.isFinite(work.speed)||work.speed<=0||!Number.isFinite(work.eventWork??0)||(work.eventWork??0)<0||(work.eventWork??0)>work.done+1e-6))throw new RangeError('Invalid research work contract');return work&&work.required>work.done?[{lab,id,work}]:[];});}
+export function itemResearchTransferFractionV3(s:GameState){if(!usesItemV3(s))return 0;const item=itemV3Equipped(s).find(i=>i.type==='lab-drone');return item?Math.min(c().drone.cap,c().drone.rate*itemAbilityStrengthV3(s,item).P):0;}
+/** Exact first completion boundary: base work reduces every residual at the
+ * same speed; extra work water-fills the longest residuals. */
+export function itemResearchBoundaryV3(s:GameState){const fraction=itemResearchTransferFractionV3(s);if(!fraction)return Infinity;const jobs=regularItemResearchWorkV3(s);if(!jobs.length)return Infinity;const remaining=jobs.map(j=>Math.max(0,j.work.required-j.work.done)),speed=jobs[0].work.speed;if(!Number.isFinite(speed)||speed<=0)return Infinity;return Math.min(Math.min(...remaining)/speed,remaining.reduce((a,b)=>a+b,0)/(jobs.length*speed*(1+fraction)));}
+export function applyItemResearchTransferV3(s:GameState,work:Record<string,WorkContract>){const fraction=itemResearchTransferFractionV3(s);if(!fraction)return work;const jobs=regularItemResearchWorkV3(s);if(!jobs.length)return work;const budget=jobs.reduce((sum,j)=>sum+Math.max(0,work[j.id].done-j.work.done),0)*fraction,extra=distributeLongestResearchWorkV3(jobs.map(j=>Math.max(0,work[j.id].required-work[j.id].done)),budget);const result={...work};jobs.forEach((j,i)=>{if(extra[i]>0)result[j.id]={...work[j.id],done:Math.min(work[j.id].required,work[j.id].done+extra[i]),eventWork:(work[j.id].eventWork??0)+extra[i]};});return result;}
+function grantItemPhotonWorkV3(s:GameState){const item=itemV3Equipped(s).find(i=>i.type==='photonic-array'),jobs=regularItemResearchWorkV3(s);if(!item||!jobs.length)return s;const seconds=c().photon.seconds*itemAbilityStrengthV3(s,item).P*(itemCombinationV3(s,'learning-spiral').complete?c().combinations.learning.photonWork:1),speed=progressionResearchSpeed(s)*(s.labBoostUntil>s.savedAt?2:1),work={...s.progression.work};for(const j of jobs){const delta=Math.min(j.work.required-j.work.done,speed*seconds);work[j.id]={...j.work,done:j.work.done+delta,eventWork:(j.work.eventWork??0)+delta};}return synchronizeItemResearchEndsV3({...s,progression:{...s.progression,work}},s.savedAt);}
+export function synchronizeItemResearchEndsV3(s:GameState,at:number){if(!usesItemV3(s))return s;return{...s,researchLabs:s.researchLabs.map(lab=>{if(!lab||lab.intro)return lab;const work=s.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`];return !work?lab:{...lab,endsAt:Math.max(lab.quoteBasis?.itemV3?.minimumBypassed?0:lab.quoteBasis?.itemV3?.minimumUntil??0,at+Math.max(0,work.required-work.done)/work.speed*1000)};})};}

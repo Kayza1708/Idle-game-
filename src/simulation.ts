@@ -1,5 +1,5 @@
 import {prestigePassiveComponentsV3} from './prestigeV3';
-import {usesItemV3,recordItemProductionV3,completeItemTrainingV3} from './itemSystemV3';
+import {itemResearchBoundaryV3,usesItemV3,itemBurstBoundaryV3,recordItemProductionV3,completeItemTrainingV3} from './itemSystemV3';
 import {knowledgeRate} from './progression';
 import {trainingTrackAvailable} from './economy';
 import {balanceProduction,balanceCheckpoint} from './balanceHistory';
@@ -80,7 +80,7 @@ export const startQueuedResearchIfAffordable=startManualResearchQueue;
 
 export function settleResearchCompletions(state:GameState,trace:((step:ResearchCompletionStep)=>void)=()=>{}):GameState {
   state=settleBlueprintResearchReward(state);
-  const finished=state.researchLabs.filter((lab):lab is NonNullable<typeof lab>=>!!lab&&lab.endsAt<=state.savedAt+.1);
+  const finished=state.researchLabs.filter((lab):lab is NonNullable<typeof lab>=>!!lab&&(usesItemV3(state)&&state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`]?state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`].done+1e-7>=state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`].required&&(lab.quoteBasis?.itemV3?.minimumBypassed||(lab.quoteBasis?.itemV3?.minimumUntil??0)<=state.savedAt):lab.endsAt<=state.savedAt+.1));
   if(!finished.length)return state;
   const finishedIds=new Set(finished.map(lab=>lab.id));
   let next:GameState={...state,researchLabs:state.researchLabs.map(lab=>lab&&finishedIds.has(lab.id)?null:lab)};
@@ -127,9 +127,9 @@ function advanceSingle(state:GameState,seconds:number,active=false,rng=Math.rand
     const plannerActive=(next.analysisPlanner.enabled&&automationFeatureUnlocked(next,'analysisPlanner'))||(next.craftingPlanner.enabled&&automationFeatureUnlocked(next,'craftingPlanner')),toPlanner=plannerActive?Math.min(10-next.analysisPlanner.elapsed,10-next.craftingPlanner.elapsed):Infinity,prestigeAgentActive=(hasProgressionNode(next,'I06')&&next.prestigeAgent.enabled||next.progression?.axiomAuto&&axiomLevel(next,'B06')>0||(next.axiomUpgradeLevels.axiomAutomation??0)>0&&next.prestigeAgent.enabled||next.challengeUnlocks.includes('prestige-agent')&&next.prestigeAgent.enabled),toPrestigeAgent=prestigeAgentActive?10-next.prestigeAgent.elapsed:Infinity;
     const toCrafting=next.crafting.active?.endsAt===null?Infinity:next.crafting.active?Math.max(0,(next.crafting.active.endsAt-now)/1000):Infinity;
     const toExperiment=next.experiments.active?Math.max(0,(next.experiments.active.endsAt-now)/1000):Infinity;
-    const toResearch=Math.min(...next.researchLabs.map(lab=>lab?Math.max(0,(lab.endsAt-now)/1000):Infinity));
+    const toResearch=Math.min(itemResearchBoundaryV3(next),...next.researchLabs.map(lab=>lab?Math.max(0,(lab.endsAt-now)/1000):Infinity));
     const toPeriod=next.retention.activeRun||next.challengeSession?Infinity:Math.min(...(['daily','weekly','monthly'] as const).map(kind=>Math.max(0,(next.missions[kind].endsAt-now)/1000)));
-    const toBoost=Math.min(next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
+    const toBoost=Math.min(itemBurstBoundaryV3(next),next.creditBoostUntil>now?(next.creditBoostUntil-now)/1000:Infinity,next.overclock.activeUntil>now?(next.overclock.activeUntil-now)/1000:Infinity,next.overclock.cooldownUntil>now?(next.overclock.cooldownUntil-now)/1000:Infinity);
     // Keep integration boundaries on the persistent timeline. Otherwise an
     // external save/advance split creates a new Euler step and changes rates
     // that depend on resources produced during the preceding step.

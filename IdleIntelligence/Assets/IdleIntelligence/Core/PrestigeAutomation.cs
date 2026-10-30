@@ -46,7 +46,7 @@ namespace IdleIntelligence.Core
             {
                 string candidate=null;
                 foreach(string id in s.Prestige.researchQueue){int n=Game.ResearchIndex(id);if(Balance.Research[n].Project&&s.Research[n]>0||ResearchJobs(s).Any(j=>j.id==id))continue;string block=Game.ResearchBlock(s,n);if(block=="Zu wenig Daten")return s;if(block==null){candidate=id;break;}}
-                if(candidate==null)break;var before=s;s=Game.Research(s,candidate);if(ReferenceEquals(before,s))break;var job=ResearchJobs(s).First(j=>j.id==candidate);job.required=Math.Max(.001,job.required*(1-Workshop.Device(before,"planning")*PrestigeRules.V("planningTime")));s.Prestige.researchQueue=s.Prestige.researchQueue.Where(id=>id!=candidate).ToArray();
+                if(candidate==null)break;var before=s;s=Game.Research(s,candidate,"queue");if(ReferenceEquals(before,s))break;var job=ResearchJobs(s).First(j=>j.id==candidate);job.required=Math.Max(.001,job.required*(1-Workshop.Device(before,"planning")*PrestigeRules.V("planningTime")));s.Prestige.researchQueue=s.Prestige.researchQueue.Where(id=>id!=candidate).ToArray();
             }
             return s;
         }
@@ -63,7 +63,7 @@ namespace IdleIntelligence.Core
                     {int i=Game.ResearchIndex(target.id);var cost=Game.ResearchCost(s,i);bool valid=Game.ResearchBlock(s,i)==null&&p.directorBudgetSet&&cost.CompareTo(ScientificNumber.FromData(p.directorBudget).Subtract(ScientificNumber.FromData(p.directorSpent)))<=0&&cost.CompareTo(s.Data.Times(1-p.directorReservePercent))<=0;if(valid){chosen=i;break;}if(!p.directorAffordable)break;}
                 }
                 else if(p.researchRepeat&&PrestigeRules.Has(s,"F03")){int i=Game.ResearchIndex(p.repeatId);if(i>=0&&!Balance.Research[i].Project&&Game.ResearchBlock(s,i)==null)chosen=i;}
-                if(chosen<0)break;var price=Game.ResearchCost(s,chosen);if(s.Data.CompareTo(price.Add(ProtectedData(s)))<0)break;var before=s;s=Game.Research(s,Balance.Research[chosen].Id);if(ReferenceEquals(s,before))break;
+                if(chosen<0)break;var price=Game.ResearchCost(s,chosen);if(s.Data.CompareTo(price.Add(ProtectedData(s)))<0)break;var before=s;s=Game.Research(s,Balance.Research[chosen].Id,"automatic");if(ReferenceEquals(s,before))break;
                 // Device planning is exclusively an automatic-start modifier in TS.
                 var job=ResearchJobs(s).First(j=>j.id==Balance.Research[chosen].Id);job.required=Math.Max(.001,job.required*(1-Workshop.Device(before,"planning")*PrestigeRules.V("planningTime")));
                 if(p.director&&PrestigeRules.Has(s,"F05"))s.Prestige.directorSpent=ScientificNumber.FromData(p.directorSpent).Add(price).ToData();
