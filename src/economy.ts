@@ -213,6 +213,17 @@ export const lateMetaItemCatalog = {
 } as const;
 export type LateMetaItemId=keyof typeof lateMetaItemCatalog;
 
+/** Six V3-only deterministic craft targets. V2 loot and saves remain untouched. */
+export const newV3ItemCatalog = {
+  "fleet-coordinator": {name:"Flottenkoordinator",en:"Fleet coordinator",slot:"processor",role:"fleet",effect:"fleet",area:"architecture",access:"campus",family:"photonic",cap:0,strength:1,trigger:"Compute ×2^P und je aktiver Hardwareklasse mit mindestens 100 Geräten ×(1+0,15×P×V)",secondary:'compute',tertiary:'research',upgradeBase:"photonicLenses",upgradeRare:"neuralCrystals",recipe:{rarity:'common' as const,name:"Flottenkoordinator-Bauplan",ingredients:{"circuits":75,"copperCoils":18,"photonicLenses":25,"photonicCircuits":13},blueprints:10,data:7500,modules:{"computeBus":2,"dataLattice":2},duration:2400},enTrigger:"Compute scales with owned hardware classes at 100+ units"},
+  "gradient-buffer": {name:"Gradientenspeicher",en:"Gradient buffer",slot:"core",role:"gradient",effect:"gradient",area:"model",access:"training-auto",family:"semiconductor",cap:0,strength:1,trigger:"Überträgt begrenzte selbst erarbeitete Trainingsarbeit auf den nächsten bezahlten Auftrag",secondary:'compute',tertiary:'research',upgradeBase:"siliconWafers",upgradeRare:"superconductors",recipe:{rarity:'common' as const,name:"Gradientenspeicher-Bauplan",ingredients:{"circuits":25,"copperCoils":8,"siliconWafers":10,"ceramicSubstrates":5},blueprints:5,data:1250,modules:{},duration:600},enTrigger:"Stores eligible paid training work for a later job, with strict caps"},
+  "overdrive-capacitor": {name:"Overdrive-Kondensator",en:"Overdrive capacitor",slot:"core",role:"capacitor",effect:"capacitor",area:"automation",access:"overdrive-auto",family:"semiconductor",cap:0,strength:1,trigger:"Ein regulärer bezahlter Forschungsabschluss erzeugt 2×P Overdrive-Ladungspunkte",secondary:'compute',tertiary:'research',upgradeBase:"siliconWafers",upgradeRare:"superconductors",recipe:{rarity:'common' as const,name:"Overdrive-Kondensator-Bauplan",ingredients:{"circuits":25,"copperCoils":8,"siliconWafers":10,"goldContacts":5},blueprints:5,data:1250,modules:{},duration:600},enTrigger:"Paid regular research completions yield 2×P overdrive charge points"},
+  "synthesis-coordinator": {name:"Synthesekoordinator",en:"Synthesis coordinator",slot:"research",role:"synthesis",effect:"synthesis",area:"materials",access:"synthesis",family:"semiconductor",cap:0,strength:1,trigger:"Beschleunigt Synthesearbeit abhängig von selbst produzierten Komponenten des aktuellen Axiomzyklus",secondary:'compute',tertiary:'research',upgradeBase:"siliconWafers",upgradeRare:"superconductors",recipe:{rarity:'common' as const,name:"Synthesekoordinator-Bauplan",ingredients:{"circuits":50,"copperCoils":13,"goldContacts":18,"ceramicSubstrates":9},blueprints:8,data:3000,modules:{"computeBus":2,"dataLattice":2},duration:1200},enTrigger:"Speeds paid synthesis using self-produced components within the axiom cycle"},
+  "singularity-lens": {name:"Singularitätslinse",en:"Singularity lens",slot:"processor",role:"lens",effect:"lens",area:"architecture",access:"axiom-three",family:"quantum",cap:0,strength:1,trigger:"Nach drei echten Axiomzyklen: rohe Hardwareproduktion hoch (0,02×Q)",secondary:'compute',tertiary:'research',upgradeBase:"quantumCores",upgradeRare:"diamondSubstrates",recipe:{rarity:'common' as const,name:"Singularitätslinse-Bauplan",ingredients:{"quantumCores":24,"diamondSubstrates":32,"spintronicDevices":40,"superconductors":48},blueprints:160,data:24000000,modules:{"computeBus":4,"dataLattice":4},duration:3600},enTrigger:"After three actual axiom cycles: raw hardware production to power 0.02×Q"},
+  "axiom-anchor": {name:"Axiomanker",en:"Axiom anchor",slot:"core",role:"axiomAnchor",effect:"axiomAnchor",area:"model",access:"axiom-one",family:"quantum",cap:0,strength:1,trigger:"Echter Axiomreset speichert 30 aktive Runminuten Compute- und Trainingsbonus",secondary:'compute',tertiary:'research',upgradeBase:"neuralCrystals",upgradeRare:"quantumCores",recipe:{rarity:'common' as const,name:"Axiomanker-Bauplan",ingredients:{"neuralCrystals":30,"nanotubes":50,"ceramicCapacitors":75,"diamondSubstrates":20},blueprints:90,data:12500000,modules:{"computeBus":3,"dataLattice":3},duration:3600},enTrigger:"True axiom reset snapshots 30 credited run minutes of compute and training bonus"}
+} as const;
+export type NewV3ItemId=keyof typeof newV3ItemCatalog;
+
 export const extendedItemCatalog = {
   "inference-router": {
     "name": "Inferenz-Router",
@@ -821,7 +832,8 @@ export const extendedItemCatalog = {
     },
     "enTrigger": "Improve quantum material yield from new analyses and paid hardware packages."
   },
-  ...lateMetaItemCatalog
+  ...lateMetaItemCatalog,
+  ...newV3ItemCatalog
 } as const;
 export const BALANCE = {
   // Item-System V3 specification. Not activated for existing saves until the
@@ -2629,7 +2641,13 @@ export const BALANCE = {
     'photonic-array':{base:'photonicLenses',rare:'neuralCrystals'},'logic-seed':{base:'photonicLenses',rare:'neuralCrystals'},'lab-drone':{base:'photonicLenses',rare:'neuralCrystals'},'data-prism':{base:'photonicLenses',rare:'neuralCrystals'},
     'field-scanner':{base:'graphene',rare:'quantumCores'},
     ...({"inference-router":{"base":"siliconWafers","rare":"superconductors"},"burst-processor":{"base":"copperCoils","rare":"superconductors"},"legacy-controller":{"base":"copperCoils","rare":"superconductors"},"sparse-decoder":{"base":"siliconWafers","rare":"superconductors"},"photonic-matrix":{"base":"photonicLenses","rare":"neuralCrystals"},"quantum-coupler":{"base":"quantumCores","rare":"cryogenicResonators"},"distillation-module":{"base":"photonicLenses","rare":"neuralCrystals"},"curriculum-module":{"base":"siliconWafers","rare":"superconductors"},"long-term-memory":{"base":"siliconWafers","rare":"superconductors"},"cryocontroller":{"base":"quantumCores","rare":"cryogenicResonators"},"manufacturing-controller":{"base":"siliconWafers","rare":"superconductors"},"diagnostic-adapter":{"base":"siliconWafers","rare":"superconductors"},"experiment-controller":{"base":"siliconWafers","rare":"superconductors"},"precision-scanner":{"base":"photonicLenses","rare":"neuralCrystals"},"recycling-probe":{"base":"photonicLenses","rare":"neuralCrystals"},"blueprint-archive":{"base":"neuralCrystals","rare":"quantumCores"},"protocol-controller":{"base":"siliconWafers","rare":"superconductors"},"photonic-analyzer":{"base":"photonicLenses","rare":"neuralCrystals"},"quantum-diagnostic-module":{"base":"quantumCores","rare":"cryogenicResonators"}} as const),
-    ...{"darklab-resonator": {"base": "neuralCrystals", "rare": "quantumCores"}, "model-echo-core": {"base": "neuralCrystals", "rare": "quantumCores"}, "axiom-lattice": {"base": "quantumCores", "rare": "neuralCrystals"}, "cycle-observatory": {"base": "quantumCores", "rare": "quantumCores"}, "entropy-sink": {"base": "superconductors", "rare": "quantumCores"}, "mnemonic-anchor": {"base": "neuralCrystals", "rare": "quantumCores"}}
+    ...{"darklab-resonator": {"base": "neuralCrystals", "rare": "quantumCores"}, "model-echo-core": {"base": "neuralCrystals", "rare": "quantumCores"}, "axiom-lattice": {"base": "quantumCores", "rare": "neuralCrystals"}, "cycle-observatory": {"base": "quantumCores", "rare": "quantumCores"}, "entropy-sink": {"base": "superconductors", "rare": "quantumCores"}, "mnemonic-anchor": {"base": "neuralCrystals", "rare": "quantumCores"}},
+    "fleet-coordinator":{base:"photonicLenses",rare:"neuralCrystals"},
+    "gradient-buffer":{base:"siliconWafers",rare:"superconductors"},
+    "overdrive-capacitor":{base:"siliconWafers",rare:"superconductors"},
+    "synthesis-coordinator":{base:"siliconWafers",rare:"superconductors"},
+    "singularity-lens":{base:"quantumCores",rare:"diamondSubstrates"},
+    "axiom-anchor":{base:"neuralCrystals",rare:"quantumCores"}
   },
   itemUpgradeMaterials:{uncommon:{base:4,rare:0},rare:{base:12,rare:0},epic:{base:30,rare:2},legendary:{base:75,rare:8},mythic:{base:180,rare:25}},
   blueprintMasteryCosts:[10,25,60,150],blueprintMasteryFactors:[1,.95,.90,.85,.80],researchFragmentConversionRate:10,
@@ -2661,7 +2679,13 @@ export const BALANCE = {
     'axiom-lattice':lateMetaItemCatalog['axiom-lattice'].recipe,
     'cycle-observatory':lateMetaItemCatalog['cycle-observatory'].recipe,
     'entropy-sink':lateMetaItemCatalog['entropy-sink'].recipe,
-    'mnemonic-anchor':lateMetaItemCatalog['mnemonic-anchor'].recipe
+    'mnemonic-anchor':lateMetaItemCatalog['mnemonic-anchor'].recipe,
+    "fleet-coordinator":newV3ItemCatalog["fleet-coordinator"].recipe,
+    "gradient-buffer":newV3ItemCatalog["gradient-buffer"].recipe,
+    "overdrive-capacitor":newV3ItemCatalog["overdrive-capacitor"].recipe,
+    "synthesis-coordinator":newV3ItemCatalog["synthesis-coordinator"].recipe,
+    "singularity-lens":newV3ItemCatalog["singularity-lens"].recipe,
+    "axiom-anchor":newV3ItemCatalog["axiom-anchor"].recipe
   },
   experimentRewards: {
     hardware: { components: 45, blueprints: 1, research: 0, itemChance: 0 },
@@ -2919,7 +2943,25 @@ export const researchRepeatUnlocked=(s:GameState)=>hasProgressionNode(s,'F03')||
 export const trainingQueueUnlocked=(s:GameState)=>hasProgressionNode(s,'T03')||hasNode(s,'trainingPlan',1)||s.challengeUnlocks.includes('training-queue');
 export const automationFeatureUnlocked=(s:GameState,id:'analysisPlanner'|'craftingPlanner')=>(id==='analysisPlanner'&&hasProgressionNode(s,'F03'))||axiomLevel(s,id==='analysisPlanner'?'C02':'C03')>0||s.axiomUpgrades.includes(id)||s.challengeUnlocks.includes(id==='analysisPlanner'?'analysis-planner':'crafting-planner');
 export const deepPrestigeBonus=(s:GameState,branch:'data'|'compute'|'analysis'|'labs'|'manufacturing')=>{const tiers=branch==='data'?['dataArchive4','dataArchive5','dataArchive6','dataArchive7','dataArchive8']:branch==='compute'?['computeNet4','computeNet5','computeNet6','computeNet7','computeNet8']:branch==='analysis'?['analysis4','analysis5','analysis6','analysis7','analysis8']:branch==='labs'?['labs4','labs6','labs7','labs8']:['manufacturing4','manufacturing6','manufacturing7','manufacturing8'];const values=branch==='data'?[.5,1,1.5,2.5,4]:branch==='compute'?[.25,.5,1,1.5,2.5]:branch==='analysis'?[.25,.5,1,1.5,2.5]:branch==='labs'?[.25,.5,1,2]:[.2,.4,.75,1.25];return tiers.reduce((sum,id,i)=>sum+(hasNode(s,id,1)?values[i]:0),0);};
-export function lateMetaItemUnlocked(s:GameState,id:string){if(!Object.hasOwn(lateMetaItemCatalog,id))return true;const d=lateMetaItemCatalog[id as LateMetaItemId];return s.progression?.lab===true&&(d.access==='axiom'?s.axiomResetCount>0:d.access==='model-set'?Object.values(s.progression.models).filter(v=>v>=0).length>=3:true);}
+/** A deterministic research/recipe gate, not a random-drop entitlement. */
+export function lateMetaItemUnlocked(s:GameState,id:string){
+ if(Object.hasOwn(newV3ItemCatalog,id)){
+  if(!usesItemV3(s)||s.progression?.version!==2)return false;
+  const access=newV3ItemCatalog[id as NewV3ItemId].access;
+  switch(access){
+   case 'campus':return s.discovered.includes('campus')||s.hardwareCounts.campus>0;
+   case 'training-auto':return s.nodes.includes('T06');
+   case 'overdrive-auto':return s.nodes.includes('F03');
+   case 'synthesis':return s.completedResearch.includes('blueprints')&&s.discoveredComponents.length>0;
+   case 'axiom-three':return s.axiomResetCount>=3;
+   case 'axiom-one':return s.axiomResetCount>=1;
+  }
+  return false;
+ }
+ if(!Object.hasOwn(lateMetaItemCatalog,id))return true;
+ const d=lateMetaItemCatalog[id as LateMetaItemId];
+ return s.progression?.lab===true&&(d.access==='axiom'?s.axiomResetCount>0:d.access==='model-set'?Object.values(s.progression.models).filter(v=>v>=0).length>=3:true);
+}
 export const itemTypes:Record<ItemTypeId,{name:string;slot:ItemFamily;effect:ItemEffect}>={
  'impulse-relay':{name:'Impulsrelais',slot:'processor',effect:'relay'},'insight-archive':{name:'Erkenntnisarchiv',slot:'research',effect:'int-yield'},
  'quantum-chip':{name:'Quantenchip',slot:'processor',effect:'compute'},'neural-asic':{name:'Neural-ASIC',slot:'processor',effect:'credits'},'photonic-array':{name:'Photonenfeld',slot:'processor',effect:'training'},

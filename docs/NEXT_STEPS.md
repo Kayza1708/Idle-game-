@@ -278,3 +278,11 @@ Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(2
 Bezahlte Bereichswechsel-, Protokoll- und automatischeStartverträge einschließlich Queue/Wiederholung/Direktor verbunden.32gemeinsame realeTransaktionsfolgen, beideResets mit laufendemAuftrag;2.093Vitest/223EditMode/Typecheck/Build/Generatorvergleich grün. DreiForschungsitemdetails mit tatsächlichenV3-Werten/siebenSprachen und rotemMindestdauer-Nachteil; finaleUI-Regressionsbilder nach zwei konkretenLesbarkeitskorrekturen laufen. Kein vollständigerV3-Save oderPlayerfreigabe. Danach sechsneueItems/fehlendeEffekte, wissenschaftlicheArbeit und vollständigeErwerbs-/UI-/Save-Migration weiter abarbeiten.
 
 Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beidenletztenUI-Lesbarkeitskorrekturen grün;44unveränderteUnity-PNGs einschließlichManifest in docs/media/unity-v3-research-starts. DE/EN320/390/430 undFR390 selbstgesehen, roteMindestdauererhöhung sichtbar, Einheitenzusammenhalt/Randabstand korrigiert, echtesfranzösischesAblegen. Kein neuesV3-Save/Player/Design-Gesamturteil. Der Gesamtauftrag geht mit sechsneuenItems/fehlendenFähigkeiten, wissenschaftlicherArbeit und vollständigerMigration weiter.
+
+
+## 30.10.2026 – V3 Industrieeffekte (Review-PR, keine Spielerfreigabe)
+
+- TypeScript- und C#-Rechenpfade für Flottenkoordinator, Synthesekoordinator und Singularitätslinse ergänzt. Synthesekoordinator nur auf echte geleistete Synthesearbeit und Jobgrenzen; keine Preis- oder Komponenten-Ausbeutemanipulation. Berechnungen im [Prüfbericht](item-system-v3/industrial-consumers.md).
+- Tests: neue vorbereitete Vitest- und native EditMode-Fälle. Native Tests, Generatoraktualisierung und End-to-end-Erwerb noch **nicht** bestätigt.
+- Als Nächstes sind alle sechs zusätzlichen IDs mit Rezepten, erlaubten deterministischen Erwerbswegen, Unity-Portraits und sieben Sprachdetails an die realen Item-/Ausrüstungsverträge anzuschließen; anschließend Gradientenspeicher, Overdrive-Kondensator und Axiomanker in den Ereignis-/Resetverbrauchern fertigstellen.
+- Erst danach vollständige alte und neue Saves einschließlich atomarer Migration, Challenge-Hauptspiel, Legacy und Zählern prüfen, generierte Unity-Referenzen aktualisieren, lange natürliche Buildläufe und native Simulatorprüfung abschließen.

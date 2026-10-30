@@ -1,5 +1,5 @@
 import {prestigeMaterialYieldV3} from './prestigeV3';
-import {usesItemV3,itemMaximumFamilyYieldV3,itemAnalysisCombinationYieldV3,itemV3Has,itemAnalysisFactorV3} from './itemSystemV3';
+import {usesItemV3,itemMaximumFamilyYieldV3,itemAnalysisCombinationYieldV3,itemV3Has,itemAnalysisFactorV3,itemSynthesisSpeedFactorV3} from './itemSystemV3';
 import {choosePhaseModel} from './progressionAutomation';
 import {hasProgressionNode,modelFactor,secondary} from './progression';
 import {automaticCanSpendData,analysisQuantity} from './progressionWork';
@@ -14,8 +14,8 @@ import { addEvent } from './telemetry';
 export const experimentNames:Record<ExperimentId,string>={hardware:'Hardwareanalyse',architecture:'Architekturstudie',artifact:'Artefaktsuche'};
 export function experimentBaseSpeed(s:GameState){if(s.progression?.version===2)return(1+equippedBonus(s,'experiment'))*(1+BALANCE.repeatableResearch.labAutomation.effectPerLevel*s.researchLevels.labAutomation)*modelFactor(s,'analysis')*ScientificNumber.fromJSON(s.progression.legacyCycle.analysis??{m:1,e:0}).multiply(ScientificNumber.fromJSON(s.progression.legacyPermanent.analysis??{m:1,e:0})).toNumber()*(secondary(s,'K05')?BALANCE.progression.effects.D06speed:1);return 1+(hasNode(s,'labLink',1)?.1:0)+(hasNode(s,'labLink',3)?.2:0)+(s.breakthroughs.includes('planning')?.2:0)+equippedBonus(s,'experiment')+deepPrestigeBonus(s,'analysis')+s.researchLevels.labAutomation*BALANCE.repeatableResearch.labAutomation.effectPerLevel;}
 export const experimentSpeed=(s:GameState)=>experimentBaseSpeed(s)*itemAnalysisFactorV3(s).toNumber();
-/** Scanner changes analyses only; synthesis retains its own existing base. */
-export const synthesisSpeed=(s:GameState)=>experimentBaseSpeed(s);
+/** The scanner affects analyses only; V3 synthesis uses its own coordinator multiplier. */
+export const synthesisSpeed=(s:GameState)=>experimentBaseSpeed(s)*itemSynthesisSpeedFactorV3(s);
 export const experimentDuration=(type:ExperimentId,length:ExperimentLength)=>length==='intro'?0:BALANCE.analysisCosts[type][length].duration;
 export function analysisCost(type:ExperimentId,length:Exclude<ExperimentLength,'intro'>){return BALANCE.analysisCosts[type][length]}
 export const analysisRewardFactor=(type:ExperimentId,length:ExperimentLength,s?:GameState)=>length==='short'?(s?.progression?.version===2?BALANCE.progression.analyses[`${type}-short`].units/BALANCE.progression.analyses[`${type}-long`].units:experimentDuration(type,'short')/experimentDuration(type,'long')):1;

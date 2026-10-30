@@ -106,6 +106,23 @@ export function itemQuantumFactorV3(hardware:S,item:Item,extraExponent=0,context
 export function itemNeuralFactorV3(training:S,item:Item,extraExponent=0,context?:GameState){const {P,Q}=context?itemAbilityStrengthV3(context,item):itemStrengthV3(item);return S.from(c().neural.base).pow(P).multiply(one().add(training.divide(S.from(c().neural.trainingScale))).pow(c().neural.exponent*Q+extraExponent));}
 export function itemTensorFactorV3(training:S,item:Item,context?:GameState){const{P,Q}=context?itemAbilityStrengthV3(context,item):itemStrengthV3(item);return S.from(c().tensor.base).pow(P).multiply(one().add(training.divide(S.from(c().tensor.trainingScale))).pow(Q));}
 export function itemLensFactorV3(rawCompute:S,item:Item,combination=false,context?:GameState){const{Q}=context?itemAbilityStrengthV3(context,item):itemStrengthV3(item);return(rawCompute.compare(one())<0?one():rawCompute).pow(c().lens.exponent*Q*(combination?c().combinations.industrial.lensExponent:1));}
+/** Fleet bonus: the V counter counts currently held classes with >=100 units. */
+export function itemFleetFactorV3(s:GameState,item:Item):S{
+ const P=itemAbilityStrengthV3(s,item).P;
+ const owned=hardwareIds.filter(id=>s.hardwareCounts[id]>=c().fleet.minimumOwned).length;
+ return S.from(c().fleet.base).pow(P).multiplyNumber(1+c().fleet.perClass*P*owned);
+}
+/** K counts real self-produced components, not purchases or recycled parts. */
+export function itemSynthesisCoordinatorFactorV3(s:GameState,item:Item):number{
+ const{P,Q}=itemAbilityStrengthV3(s,item),K=S.fromJSON(s.itemSystemV3!.componentsProduced);
+ return Math.pow(c().synthesis.base,P)*Math.pow(1+K.add(one()).log10()/c().synthesis.componentLogScale,c().synthesis.exponent*Q);
+}
+export function itemSynthesisSpeedFactorV3(s:GameState):number{
+ if(!usesItemV3(s))return 1;
+ const item=itemV3Equipped(s).find(i=>String(i.type)==='synthesis-coordinator');
+ return item?itemSynthesisCoordinatorFactorV3(s,item):1;
+}
+
 
 export type ItemV3Combination={id:string;items:readonly string[];pair:boolean;complete:boolean;missing:string[]};
 const combinationItems={
@@ -136,6 +153,9 @@ export function itemComputeFactorV3(s:GameState){
   if(item.type==='entropy-sink'){const{P,Q}=itemAbilityStrengthV3(s,item);result=result.multiply(S.from(c().entropy.base).pow(P).multiply(S.from(1+snapshot.E.add(one()).log10()).pow(c().entropy.exponent*Q)));}
   if(item.type==='inference-router')result=result.multiplyNumber(1+c().router.perLink*itemAbilityStrengthV3(s,item).P*activeHardwareLinksV3(s));
   if(item.type==='photonic-matrix'&&s.overclock.activeUntil>s.savedAt)result=result.multiplyNumber(1+c().photonic.coefficient*itemAbilityStrengthV3(s,item).P);
+  if(String(item.type)==='fleet-coordinator')result=result.multiply(itemFleetFactorV3(s,item));
+  if(String(item.type)==='singularity-lens'&&s.axiomResetCount>=c().lens.minimumCycles)
+   result=result.multiply(itemLensFactorV3(unmodifiedHardwareComputeV3(s),item,itemCombinationV3(s,'industrial-singularity').complete,s));
  }
  if(combo.pair)result=result.multiplyNumber(c().combinations.compute.factor);
  return result.multiply(itemBaseFactorScientificV3(s,'processor'));

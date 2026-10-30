@@ -335,3 +335,15 @@ Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(2
 Bezahlte Bereichswechsel-, Protokoll- und automatischeStartverträge einschließlich Queue/Wiederholung/Direktor verbunden.32gemeinsame realeTransaktionsfolgen, beideResets mit laufendemAuftrag;2.093Vitest/223EditMode/Typecheck/Build/Generatorvergleich grün. DreiForschungsitemdetails mit tatsächlichenV3-Werten/siebenSprachen und rotemMindestdauer-Nachteil; finaleUI-Regressionsbilder nach zwei konkretenLesbarkeitskorrekturen laufen. Kein vollständigerV3-Save oderPlayerfreigabe. Danach sechsneueItems/fehlendeEffekte, wissenschaftlicheArbeit und vollständigeErwerbs-/UI-/Save-Migration weiter abarbeiten.
 
 Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beidenletztenUI-Lesbarkeitskorrekturen grün;44unveränderteUnity-PNGs einschließlichManifest in docs/media/unity-v3-research-starts. DE/EN320/390/430 undFR390 selbstgesehen, roteMindestdauererhöhung sichtbar, Einheitenzusammenhalt/Randabstand korrigiert, echtesfranzösischesAblegen. Kein neuesV3-Save/Player/Design-Gesamturteil. Der Gesamtauftrag geht mit sechsneuenItems/fehlendenFähigkeiten, wissenschaftlicherArbeit und vollständigerMigration weiter.
+
+
+## 30.10.2026 – V3 Industrieverbund (Teilabschnitt)
+
+- [x] Flottenkoordinator (TS/C#): Computeformel und momentane Hundert-Geräte-Klassenzählung in bestehende V3-Produktionspfade eingebunden.
+- [x] Singularitätslinse (TS/C#): rohe reguläre Hardwareproduktion, drei echte Axiomzyklen und vollständiger Dreierverbund als Exponentenquelle in V3-Compute eingebunden.
+- [x] Synthesekoordinator (TS/C#): Synthesetempo auf reale Arbeit und Endzeitgrenze, getrennt von Bezahlung und Ausbeute.
+- [ ] Nativer Unity-Compile, echte EditMode-Tests und TS/C#-Gemeinschaftsfixtures samt neuer Generatorversion erfolgreich geprüft.
+- [ ] Alle 42 Items mit sicheren Rezepten, deterministischem Erwerb, gültigen Slots, UI und vollständigen Spezialfähigkeiten.
+- [ ] Verlustfreie V3-Dateimigration und vollständige reale Balance-/Playerabnahme. **V3 noch nicht freigeben.**
+
+Details: [V3 Industrieeffekte](item-system-v3/industrial-consumers.md).

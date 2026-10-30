@@ -1,0 +1,43 @@
+name: V3 branch generated-source refresh
+on:
+  push:
+    branches:
+      - codex/v3-completion-items-runtime-20261030
+    paths:
+      - .github/workflows/v3-regenerate-branch.yml
+permissions:
+  contents: write
+jobs:
+  regenerate:
+    if: github.repository == 'Kayza1708/Idle-game-'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      # Regenerate only after the complete 42-item source passes typecheck.
+      - name: Generate all Unity reference data from TypeScript
+        run: npm run unity:export
+      - name: Commit generated data to this branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "${GITHUB_REF_NAME}" = "codex/v3-completion-items-runtime-20261030"
+          git add -u
+          git add -A IdleIntelligence/Assets/IdleIntelligence docs
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "No generated changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Regenerate Unity balances and V3 references from 42-item source"
+          git push origin HEAD:refs/heads/codex/v3-completion-items-runtime-20261030

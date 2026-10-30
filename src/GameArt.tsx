@@ -1,8 +1,8 @@
-import {VectorIcon} from './VectorIcon';
+import {VectorIcon,type VectorIconName} from './VectorIcon';
 import {prestigeIcon} from './artIconCatalog';
 import type {CSSProperties} from 'react';
 import {RasterMotif} from './RasterMotif';
-import { type LateMetaItemId, type ComponentId, type HardwareId, type ItemTypeId, type PrestigeUpgradeId } from './economy';
+import { type NewV3ItemId, type LateMetaItemId, type ComponentId, type HardwareId, type ItemTypeId, type PrestigeUpgradeId } from './economy';
 
 type SpriteStyle = CSSProperties & {'--sprite-x': string; '--sprite-y': string};
 type Grid = {columns:number;rows:number};
@@ -17,7 +17,7 @@ export const itemV1Cells:Partial<Record<ItemTypeId,[number,number]>>={'quantum-c
 export const prestigeCells:Partial<Record<PrestigeUpgradeId,[number,number]>>={dataArchive1:[0,0],computeNet1:[1,0],analysis1:[2,0],labs1:[3,0],manufacturing1:[0,1],dataArchive2:[1,1],computeNet2:[2,1],analysis2:[3,1],labs2:[0,2],manufacturing2:[1,2],dataArchive3:[2,2],computeNet3:[3,2],analysis3:[0,3],labs3:[1,3],manufacturing3:[2,3]};
 // Reviewed row-major order of the complete 6 × 5 item rework. Stable IDs, independent of economy ordering.
 export const metaItemCells:Record<LateMetaItemId,[number,number]>={"darklab-resonator":[0,0],"model-echo-core":[1,0],"axiom-lattice":[2,0],"cycle-observatory":[0,1],"entropy-sink":[1,1],"mnemonic-anchor":[2,1]};
-export const itemReworkCells:Record<Exclude<ItemTypeId,LateMetaItemId>,[number,number]>={'impulse-relay':[0,0],'insight-archive':[1,0],'quantum-chip':[2,0],'neural-asic':[3,0],'photonic-array':[4,0],'memory-crystal':[5,0],'logic-seed':[0,1],'tensor-core':[1,1],'field-scanner':[2,1],'lab-drone':[3,1],'data-prism':[4,1],'inference-router':[5,1],'burst-processor':[0,2],'legacy-controller':[1,2],'sparse-decoder':[2,2],'photonic-matrix':[3,2],'quantum-coupler':[4,2],'distillation-module':[5,2],'curriculum-module':[0,3],'long-term-memory':[1,3],'cryocontroller':[2,3],'manufacturing-controller':[3,3],'diagnostic-adapter':[4,3],'experiment-controller':[5,3],'precision-scanner':[0,4],'recycling-probe':[1,4],'blueprint-archive':[2,4],'protocol-controller':[3,4],'photonic-analyzer':[4,4],'quantum-diagnostic-module':[5,4]};
+export const itemReworkCells:Record<Exclude<ItemTypeId,LateMetaItemId|NewV3ItemId>,[number,number]>={'impulse-relay':[0,0],'insight-archive':[1,0],'quantum-chip':[2,0],'neural-asic':[3,0],'photonic-array':[4,0],'memory-crystal':[5,0],'logic-seed':[0,1],'tensor-core':[1,1],'field-scanner':[2,1],'lab-drone':[3,1],'data-prism':[4,1],'inference-router':[5,1],'burst-processor':[0,2],'legacy-controller':[1,2],'sparse-decoder':[2,2],'photonic-matrix':[3,2],'quantum-coupler':[4,2],'distillation-module':[5,2],'curriculum-module':[0,3],'long-term-memory':[1,3],'cryocontroller':[2,3],'manufacturing-controller':[3,3],'diagnostic-adapter':[4,3],'experiment-controller':[5,3],'precision-scanner':[0,4],'recycling-probe':[1,4],'blueprint-archive':[2,4],'protocol-controller':[3,4],'photonic-analyzer':[4,4],'quantum-diagnostic-module':[5,4]};
 export const materialExtensionCells:Partial<Record<ComponentId,[number,number]>>={neuralCrystals:[0,0],ceramicCapacitors:[1,0],ferriteCores:[2,0],goldContacts:[3,0],ceramicSubstrates:[0,1],opticalFibers:[1,1],thermalInterface:[2,1],diamondSubstrates:[3,1],spintronicDevices:[0,2],photonicCircuits:[1,2],cryogenicResonators:[2,2]};
 export type ResourceArtId='credits'|'gems'|'compute'|'int'|'research'|'blueprints'|'components'|'data';
 const resourceCells:Record<ResourceArtId,[number,number]>={credits:[0,0],gems:[1,0],compute:[2,0],int:[3,0],research:[0,1],blueprints:[1,1],components:[2,1],data:[3,1]};
@@ -49,7 +49,7 @@ export function HardwareArt({id}:{id:HardwareId}){const art=hardwareArtGeometry[
 
 /** Reviewed visible bounds, not nominal grid cells: some original motifs cross cell edges.
  * The original atlas is reused unchanged. SVG viewports remove transparent offsets and neighbour fragments. */
-export const itemArtBounds:Record<ItemTypeId,[number,number,number,number]>={
+export const itemArtBounds:Partial<Record<ItemTypeId,[number,number,number,number]>>={
  'impulse-relay':[47,23,164,206],'insight-archive':[291,27,130,197],'quantum-chip':[483,32,182,183],'neural-asic':[716,27,190,197],'photonic-array':[952,59,209,161],'memory-crystal':[1225,19,112,213],
  'logic-seed':[43,264,154,174],'tensor-core':[255,245,197,194],'field-scanner':[488,234,183,214],'lab-drone':[710,266,209,179],'data-prism':[974,247,141,208],'inference-router':[1170,270,192,168],
  'burst-processor':[30,475,190,169],'legacy-controller':[251,461,203,192],'sparse-decoder':[474,475,199,179],'photonic-matrix':[695,459,224,192],'quantum-coupler':[941,494,213,136],'distillation-module':[1182,443,165,219],
@@ -57,7 +57,7 @@ export const itemArtBounds:Record<ItemTypeId,[number,number,number,number]>={
  'precision-scanner':[39,883,165,235],'recycling-probe':[221,898,232,208],'blueprint-archive':[466,896,229,212],'protocol-controller':[704,896,187,214],'photonic-analyzer':[909,914,268,184],'quantum-diagnostic-module':[1203,896,137,214],
  'darklab-resonator':[0,0,512,512],'model-echo-core':[512,0,512,512],'axiom-lattice':[1024,0,512,512],'cycle-observatory':[0,512,512,512],'entropy-sink':[512,512,512,512],'mnemonic-anchor':[1024,512,512,512]
 };
-const itemArtClips:Record<ItemTypeId,string>={
+const itemArtClips:Partial<Record<ItemTypeId,string>>={
  'impulse-relay':'M47,161 61,74 63,71 69,65 92,50 145,24 149,23 155,23 161,25 164,27 169,32 198,84 206,109 207,113 210,168 210,192 207,196 202,201 159,227 155,228 142,228 135,227 131,226 67,207 59,203 56,201 52,197 47,191Z',
  'insight-archive':'M291,155 296,65 299,59 309,49 327,38 339,32 348,29 355,27 369,27 387,31 396,34 400,36 404,39 414,49 417,55 420,164 420,177 419,182 417,189 416,191 412,197 400,209 398,210 390,213 384,215 357,223 339,223 324,215 317,211 311,207 306,203 298,195 294,190 293,188 291,183Z',
  'quantum-chip':'M483,146 483,136 484,133 499,98 500,96 508,84 517,72 520,69 529,61 533,58 564,37 567,35 573,32 577,32 608,43 615,46 621,49 627,53 633,58 646,71 652,81 664,102 664,114 657,136 655,142 648,158 647,160 638,171 626,183 618,190 613,194 580,212 576,214 569,214 551,210 543,208 537,206 525,200 517,195 508,186 500,177 498,174 484,148Z',
@@ -90,7 +90,17 @@ const itemArtClips:Record<ItemTypeId,string>={
  'quantum-diagnostic-module':'M1339,930 1339,1074 1334,1089 1333,1091 1331,1094 1328,1097 1325,1099 1282,1109 1272,1109 1228,1096 1220,1088 1204,1062 1203,967 1203,942 1204,930 1215,911 1223,903 1309,896 1316,896 1323,903 1338,928Z',
  'darklab-resonator':'M0,0h512v512h-512z','model-echo-core':'M512,0h512v512h-512z','axiom-lattice':'M1024,0h512v512h-512z','cycle-observatory':'M0,512h512v512h-512z','entropy-sink':'M512,512h512v512h-512z','mnemonic-anchor':'M1024,512h512v512h-512z'
 };
-export function ItemArt({type}:{type:ItemTypeId}){if(Object.hasOwn(metaItemCells,type))return <RasterMotif className="atlas-sprite item-art item-art-meta" artId={type} bounds={itemArtBounds[type]} clip={itemArtClips[type]} source="/assets/game/meta-items-v1.png" atlasWidth={1536} atlasHeight={1024}/>;return <RasterMotif className="atlas-sprite item-art item-art-rework" artId={type} bounds={itemArtBounds[type]} clip={itemArtClips[type]} source="/assets/game/items-complete-rework-atlas-v1.png" atlasWidth={1374} atlasHeight={1145}/>}
+/** Temporary, deliberately distinct owned vector motifs for V3-only recipes.
+ * These aren't represented by the preexisting 36-item PNG atlases. */
+export const newV3ItemMotifs:Record<NewV3ItemId,VectorIconName>={
+ 'fleet-coordinator':'router','gradient-buffer':'training','overdrive-capacitor':'capacitor',
+ 'synthesis-coordinator':'components','singularity-lens':'gem','axiom-anchor':'prestige'
+};
+export function ItemArt({type}:{type:ItemTypeId}){
+ if(Object.hasOwn(newV3ItemMotifs,type))return <span className="item-art item-v3-vector-art" data-art-id={type} aria-hidden="true"><VectorIcon name={newV3ItemMotifs[type as NewV3ItemId]}/></span>;
+ if(Object.hasOwn(metaItemCells,type))return <RasterMotif className="atlas-sprite item-art item-art-meta" artId={type} bounds={itemArtBounds[type]!} clip={itemArtClips[type]!} source="/assets/game/meta-items-v1.png" atlasWidth={1536} atlasHeight={1024}/>;
+ return <RasterMotif className="atlas-sprite item-art item-art-rework" artId={type} bounds={itemArtBounds[type]!} clip={itemArtClips[type]!} source="/assets/game/items-complete-rework-atlas-v1.png" atlasWidth={1374} atlasHeight={1145}/>;
+}
 
 
 export function PrestigeArt({id}:{id:PrestigeUpgradeId}){const cell=prestigeCells[id];return cell?<span className="atlas-sprite prestige-art" style={cellStyle(cell,{columns:4,rows:4})} aria-hidden="true"/>:<span className="prestige-vector-art prestige-art" data-art-id={id} aria-hidden="true"><VectorIcon name={prestigeIcon(id)}/></span>}
