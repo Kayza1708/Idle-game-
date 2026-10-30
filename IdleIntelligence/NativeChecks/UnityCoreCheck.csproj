@@ -12,5 +12,6 @@
     <Compile Include="Smoke.cs" />
     <Compile Include="V3FreshCampaignChecks.cs" />
     <Compile Include="V3BalanceProbe.cs" />
+    <Compile Include="V3CombinationChecks.cs" />
   </ItemGroup>
 </Project>
