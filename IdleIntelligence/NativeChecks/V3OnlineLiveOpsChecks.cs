@@ -19,6 +19,30 @@ internal static class V3OnlineLiveOpsChecks
         Check(batch.All(e=>e.type=="session_start"||e.type=="prestige"),"no arbitrary data");
         queue.Acknowledge(new[]{batch[0].id});
         Check(queue.Count==1&&queue.NextBatch()[0].id==batch[1].id,"ack idempotent");
+        // A restart cannot silently lose consented offline events or duplicate
+        // acknowledged receipts. No arbitrary JSON or player identifiers enter it.
+        var persisted=queue.Export();
+        Check(persisted.events.Length==1&&persisted.version==1,"bounded native retry snapshot");
+        var restored=new NativeTelemetryQueue();
+        Check(!restored.Restore(persisted),"no import without explicit consent");
+        restored.SetConsent(true);
+        int persistedChanges=0;
+        restored.Changed+=()=>persistedChanges++;
+        Check(restored.Restore(persisted),"valid consented offline receipt restored");
+        Check(restored.NextBatch().Single().id==batch[1].id,"stable receipt survives restart");
+        restored.Acknowledge(new[]{batch[1].id});
+        Check(restored.Count==0&&persistedChanges>=2,"server acknowledgement removes local receipt");
+        var malicious=new NativeTelemetrySnapshot{events=new[]{
+            new NativeTelemetryEvent{id=batch[1].id,type="untrusted_save_json",metric=1}}};
+        Check(!restored.Restore(malicious),"unknown telemetry kind rejected");
+        var duplicates=new NativeTelemetrySnapshot{events=new[]{persisted.events[0],persisted.events[0]}};
+        Check(!restored.Restore(duplicates),"duplicate telemetry receipts rejected");
+        var oversized=new NativeTelemetrySnapshot{events=Enumerable.Range(0,49)
+            .Select(i=>new NativeTelemetryEvent{
+                id=Guid.NewGuid().ToString("D"),type="screen_view",metric=i}).ToArray()};
+        Check(!restored.Restore(oversized),"oversized offline journal is rejected");
+        restored.SetConsent(false);
+        Check(restored.Export().events.Length==0,"revoked consent exports no event data");
         queue.SetConsent(false);
         Check(queue.Count==0&&!queue.Record("ad_reward"),"revocation purges pending events");
 
