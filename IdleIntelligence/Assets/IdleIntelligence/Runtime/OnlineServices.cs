@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.IO;
 using System.Runtime.InteropServices;
 using IdleIntelligence.Core;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace IdleIntelligence.Runtime
         CompanyApiClient api;
         OnlineServicesConfiguration config;
         readonly NativeTelemetryQueue events=new NativeTelemetryQueue();
+        NativeTelemetryJournal journal;
         NativeLiveOpsSnapshot latest;
         float nextLiveOps,nextFlush;
         bool requesting,telemetrySending;
@@ -47,17 +49,23 @@ namespace IdleIntelligence.Runtime
             var endpoint=Configured?config.cloudflareApiUrl.TrimEnd('/'):null;
             api.Configure(endpoint,Configured?NativeCredentialVault.Read():"");
             events.SetConsent(PlayerPrefs.GetInt(ConsentKey,0)==1);
+            journal=new NativeTelemetryJournal(Path.Combine(Application.persistentDataPath,
+                "idle-intelligence-anonymous-telemetry-v1.json"));
+            journal.Restore(events);
+            events.Changed+=PersistTelemetry;
             status=Configured?(Authenticated?"Gesicherte Sitzung geladen":"Onlinekonto nicht verbunden"):
                 "Offline: Cloudflare HTTPS-URL noch nicht eingerichtet";
             if(Authenticated)events.Record("session_start");
             nextFlush=Time.unscaledTime+20f;
             nextLiveOps=Time.unscaledTime+2f;
         }
+        void PersistTelemetry(){journal?.Store(events);}
         public void SetAnalyticsConsent(bool value)
         {
             PlayerPrefs.SetInt(ConsentKey,value?1:0);
             PlayerPrefs.Save();
             events.SetConsent(value);
+            if(!value)journal?.Purge();
             if(value&&Authenticated)events.Record("session_start");
         }
         public void Disconnect()
@@ -240,6 +248,8 @@ namespace IdleIntelligence.Runtime
                 // next session, but never send after consent is withdrawn.
             }));
         }
-        void OnDestroy(){events.SetConsent(false);latest=null;}
+        // Ordinary shutdown preserves opted-in undelivered receipts for a later
+        // offline session. Explicit opt-out/Disconnect deletes them immediately.
+        void OnDestroy(){events.Changed-=PersistTelemetry;latest=null;}
     }
 }
