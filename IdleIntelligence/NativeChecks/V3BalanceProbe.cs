@@ -6,15 +6,15 @@ using System.Globalization;
 using IdleIntelligence.Core;
 
 /// <summary>
-/// A deterministic, paid-only 30-minute native Unity V3 reference playtest.
+/// A deterministic, paid-only 120-minute native Unity V3 reference playtest.
 /// No inventory, currency or research is injected. Its bot is deliberately
 /// simple, NOT an optimized human proxy and NOT an assertion of good balance.
 /// </summary>
 internal static class V3BalanceProbe
 {
     static readonly CultureInfo I=CultureInfo.InvariantCulture;
-    const int Minutes=30;
-    static readonly int[] Snapshots={0,1,3,5,10,15,20,25,30};
+    const int Minutes=120;
+    static readonly int[] Snapshots={0,1,3,5,10,15,20,25,30,45,60,90,120};
     static string Num(ScientificNumber n)=>n.ToString();
     static bool Bought(GameState s,string id,out GameState next)
     {
