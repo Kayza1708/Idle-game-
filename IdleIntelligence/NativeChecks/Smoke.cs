@@ -56,6 +56,33 @@ class Smoke
         Check(Math.Abs(factor-2.6)<1e-7,"fleet counts only current 100-unit classes");
         var save=UnityV3SaveData.From(after.ItemSystemV3).ToState();
         Check(Math.Abs(save.axiomAnchorSeconds-after.ItemSystemV3.axiomAnchorSeconds)<1e-7,"V3 save receipts roundtrip");
+        var gameData=StateData.From(after);
+        var actual=gameData.ToState();
+        Check(actual.ItemSystemV3!=null&&
+            Math.Abs(actual.ItemSystemV3.axiomAnchorSeconds-after.ItemSystemV3.axiomAnchorSeconds)<1e-7,
+            "Unity native MainStateData V3 encoding roundtrip");
+        Check(actual.Workshop.inventory.Length==after.Workshop.inventory.Length,
+            "inventory retained across native DTO boundary");
+
+        var oldChallenge=Game.New(2000,"v3-challenge-old-main");
+        var oldMain=Game.New(1000,"v3-challenge-old-main");
+        Array.Resize(ref oldChallenge.Workshop.learned,36);
+        Array.Resize(ref oldChallenge.Workshop.knownBlueprints,36);
+        Array.Resize(ref oldChallenge.Workshop.mastery,36);
+        Array.Resize(ref oldChallenge.Workshop.crafted,36);
+        Array.Resize(ref oldMain.Workshop.learned,36);
+        Array.Resize(ref oldMain.Workshop.knownBlueprints,36);
+        Array.Resize(ref oldMain.Workshop.mastery,36);
+        Array.Resize(ref oldMain.Workshop.crafted,36);
+        oldMain.Workshop.learned[1]=true;
+        oldChallenge.Challenges.Main=oldMain;
+        var converted=UnityV3Migration.Upgrade(oldChallenge);
+        Check(converted.ItemSystemV3!=null&&converted.Challenges.Main.ItemSystemV3!=null,
+            "challenge state and archived main both carry V3 ledgers");
+        Check(converted.Challenges.Main.Workshop.learned[1]&&converted.Challenges.Main.Workshop.learned.Length==42,
+            "legacy main blueprint rights preserved");
+        Check(oldMain.ItemSystemV3==null&&oldMain.Workshop.learned.Length==36,
+            "original challenge main unchanged");
         Console.WriteLine("UNITY NATIVE V3 CORE SMOKE OK");
     }
 }
