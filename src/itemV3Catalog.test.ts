@@ -1,5 +1,5 @@
 import {describe,expect,it} from 'vitest';
-import {BALANCE,itemTypes,lateMetaItemUnlocked,newV3ItemCatalog,newGame,type GameState,type ItemTypeId} from './economy';
+import {BALANCE,itemTypes,lateMetaItemUnlocked,newV3ItemCatalog,newGame,type GameState} from './economy';
 import {newItemSystemV3} from './itemSystemV3';
 import {blueprintQuote,learnBlueprint} from './blueprints';
 import {randomItem} from './inventory';
