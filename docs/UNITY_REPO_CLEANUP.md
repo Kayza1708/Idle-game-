@@ -64,3 +64,20 @@ Auch bei einem korrekt gemergten LevelPlay-Adapter fehlen bis zur Produktion die
 ## Regressionsprüfung dieser Runde
 
 Ausschließlich Dokumentationsdateien entfernt sowie README und Arbeitsregeln berichtigt; keine C#-, Unity-Asset-, Package- oder Runtimeänderung. Ein nativer Editor-/Player-Test ist **dadurch weder ausgeführt noch ersetzt**. Die allgemeine TS-Game-CI ist bereits vor diesem Cleanup aufgrund der historischen Unity-/TS-Paritätsdifferenzen teilweise fehlgeschlagen. Die Cleanup-Menge muss im GitHub-PR überprüft werden; bei Bedarf einzeln aus der Git-Historie wiederherstellen.
+
+
+## Unity-only-Integrationsprüfung – 30.10.2026
+
+Der native C#-Katalog (`NativeCatalogueManifest.cs`, 25 exakt gehashte Datenblobs) lässt sich in `Unity Native Standalone CI` im **gleichen CI-Checkout nach physischer temporärer Entfernung** von `src/`, `scripts/`, `public/`, Web-Root-`package.json`/`package-lock.json`, Capacitor, tsconfig und Vite-Dateien bauen und mit dem bezahlten 120-Minuten-Profil ausführen. Der Cloudflare-Worker wird im eigenen Workflow ebenfalls nach temporärer Entfernung der Web-Spielquelle inklusive Root-npm-Dateien mit `npm test`, Python-SQLite und lokalem Wrangler-D1 getestet.
+
+Ergebnis: Native C#-Kern- und Worker-Abhängigkeiten sind getrennt prüfbar. **Nicht bewiesen sind:** vollständige TypeScript→Unity-Verhaltensparität aller alten UI/Meta-/Cloud-/Storepfade, echter Unity-Engine-Build, fehlende Web-/Bild-/Font-Source-Asset-Abhängigkeiten des Unity-Editors oder signierte Smartphone-Player.
+
+Weitere konkret offene Migrationskanten:
+- `scripts/prepare-unity-fonts.py` verwendet noch originale WOFF2+Lizenzen in `public/assets/fonts/`. Vor Entfernen von `public/` muss die Quellen-/Lizenz-Provenienz ins Unity-Projekt oder einen Archivstand umgezogen und die Reproduzierbarkeit erneut geprüft werden.
+- Alte `*.g.cs`-Daten sind inzwischen eingefrorene **native C#-Werte**, bleiben aber historische aus TS generierte Dateien. Jede künftige Balance-/Textänderung erfordert ein bewusstes, geprüfte SHA-Katalogupdate statt einen unsichtbaren TS-Reexport.
+- 23 umfangreiche Unity-EditMode-ReferenceCases-JSON-Dateien werden nicht durch das allgemeine native Core-Smoketestsystem ersetzt. Die alten Dateisätze nicht nur zum Reduzieren des Repositorygewichts entfernen.
+- `cloudflare/` ist ein eigenes JS-Worker-/D1-Serverprojekt und gehört zum Produkt. Das Entfernen des TS-Spiels bedeutet **nicht**, den Worker oder sein Node-Paket zu löschen.
+- Android Saved Games und vollständige mobile OAuth-/IAP-/Werbe-SDKs fehlen in verifizierten Gerätebuilds. Ein Backend-Offline-Player und ein grüner .NET Core sind keine Bestätigung ihrer Integration.
+- Servergeprüfte 1.000 INT / Gems / Itemursprung existieren noch nicht; ein unsigniertes lokales Save darf weder das Online-Company-Gate passieren noch ein verkäufliches Online-Item erzeugen.
+
+**Sichere nächste Delete-Stufe:** nur nach auf echtem Unity-Editor erfolgreich gelaufenen EditMode-/PlayMode-Tests und Geräteplayer-Funktionsvergleich, mit vorheriger Git-Tag-Archivierung, Root-Web-Code + alte Browser-/Exporttests in einem eigenen gestaffelten Draft-PR entfernen. Die neuen CI-Proben arbeiten bereits ohne diese Dateien, **ohne sie im aktiven Branch zu löschen**.
