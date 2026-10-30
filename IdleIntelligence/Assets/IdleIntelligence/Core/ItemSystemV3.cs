@@ -12,9 +12,14 @@ namespace IdleIntelligence.Core
         public int version=3;
         public ScientificNumber dataProduced=ScientificNumber.Zero,knowledgeProduced=ScientificNumber.Zero,componentsProduced=ScientificNumber.Zero;
         public double runMinutes,recyclingFragmentProgress;
+        // Native V3 event receipts. These counters belong to the save, never to traded items.
+        public double gradientStoredWork,gradientAccruedWork,gradientLastRequirement;
+        public string gradientAccruedJob;
+        public double capacitorFraction,axiomAnchorFactor=1,axiomAnchorSeconds;
+        public string[] capacitorCompletedJobs=Array.Empty<string>();
         public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak;public long scannerAnalyses,automaticResearchStarts;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
         public double[] synthesisRemainders=new double[ItemBalance.ComponentIds.Length];public ItemV3Synthesis synthesisContract;public ItemV3Overdrive overdrive;
-        public ItemV3State Copy(){var v=(ItemV3State)MemberwiseClone();v.synthesisRemainders=(double[])synthesisRemainders.Clone();v.synthesisContract=synthesisContract?.Copy();v.overdrive=overdrive?.Copy();return v;}
+        public ItemV3State Copy(){var v=(ItemV3State)MemberwiseClone();v.synthesisRemainders=(double[])synthesisRemainders.Clone();v.synthesisContract=synthesisContract?.Copy();v.overdrive=overdrive?.Copy();v.capacitorCompletedJobs=(string[])capacitorCompletedJobs.Clone();return v;}
     }
     public static class ItemSystemV3
     {
@@ -26,12 +31,17 @@ namespace IdleIntelligence.Core
             foreach(var job in PrestigeAutomation.ResearchJobs(s)){if(job.researchStartVersion!=0&&job.researchStartVersion!=3)throw new FormatException("Unknown research start contract");if(job.researchStartVersion==3&&(!new[]{"manual","queue","automatic"}.Contains(job.researchStartCause)||!new[]{"data","architecture","model","materials","automation"}.Contains(job.area)||job.previousArea!=null&&!new[]{"data","architecture","model","materials","automation"}.Contains(job.previousArea)||!ScientificNumber.Finite(job.minimumSeconds)||job.minimumSeconds<C("protocol.minimumBase")||job.minimumSeconds>Math.Max(C("protocol.minimumBase"),C("protocol.floor"))||!ScientificNumber.Finite(job.minimumUntil)||Math.Abs(job.minimumUntil-job.startedAt-job.minimumSeconds*1000)>1e-6||!ScientificNumber.Finite(job.startingFraction)||job.startingFraction<0||job.startingFraction>C("switch.cap")+C("combinations.autonomous.start")+C("combinations.autonomous.extra")+1e-12||job.eventWork+1e-6<job.required*job.startingFraction||job.automaticOrdinal<0||job.automaticOrdinal>MaxExactSequence||job.completionCause!=null&&job.completionCause!="bonus"))throw new FormatException("Invalid V3 research start contract");}
             if(!ScientificNumber.Finite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new FormatException("Invalid V3 fragment progress");
             if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
+            if(v.capacitorCompletedJobs==null||v.capacitorCompletedJobs.Length>4096||v.capacitorCompletedJobs.Any(id=>string.IsNullOrEmpty(id)||id.Length>200)||v.capacitorCompletedJobs.Distinct().Count()!=v.capacitorCompletedJobs.Length||
+                new[]{v.gradientStoredWork,v.gradientAccruedWork,v.gradientLastRequirement,v.capacitorFraction,v.axiomAnchorSeconds,v.axiomAnchorFactor}.Any(n=>!ScientificNumber.Finite(n)||n<0)||
+                v.capacitorFraction>=1||v.axiomAnchorFactor<1||v.axiomAnchorSeconds>C("axiomAnchor.minutes")*60+1e-7||
+                v.gradientAccruedJob!=null&&v.gradientAccruedJob.Length>200||
+                v.gradientStoredWork>v.gradientLastRequirement+1e-7)throw new FormatException("Invalid native V3 event receipts");
             if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.automaticResearchStarts<0||v.automaticResearchStarts>MaxExactSequence||v.scannerAnalyses<0||v.scannerAnalyses>MaxExactSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
         }
         public static void RecordProduction(GameState s,double seconds,ScientificNumber data,ScientificNumber knowledge)
         {
             if(!Enabled(s))return;if(!ScientificNumber.Finite(seconds)||seconds<0)throw new ArgumentOutOfRangeException(nameof(seconds));
-            var v=s.ItemSystemV3;v.dataProduced=v.dataProduced.Add(data);v.knowledgeProduced=v.knowledgeProduced.Add(knowledge);v.runMinutes+=seconds/60;
+            var v=s.ItemSystemV3;v.dataProduced=v.dataProduced.Add(data);v.knowledgeProduced=v.knowledgeProduced.Add(knowledge);v.runMinutes+=seconds/60;v.axiomAnchorSeconds=Math.Max(0,v.axiomAnchorSeconds-seconds);
         }
         public static void RecordComponents(GameState s,int component,long amount,string source)
         {
@@ -41,7 +51,8 @@ namespace IdleIntelligence.Core
         }
         public static void ResetProduction(GameState s,bool axiom=false)
         {
-            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;v.automaticResearchStarts=0;v.overdrive=null;
+            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;v.automaticResearchStarts=0;v.overdrive=null;v.gradientAccruedWork=0;v.gradientAccruedJob=null;v.gradientStoredWork=0;v.gradientLastRequirement=0;v.capacitorFraction=0;v.capacitorCompletedJobs=Array.Empty<string>();
+            if(!axiom){v.axiomAnchorSeconds=0;v.axiomAnchorFactor=1;}
             if(axiom){v.knowledgeProduced=ScientificNumber.Zero;v.componentsProduced=ScientificNumber.Zero;}
         }
         public static ItemV3State ChallengeState(GameState main)
@@ -73,6 +84,72 @@ namespace IdleIntelligence.Core
             if(v.learningStreak<0||v.learningStreak>C("logic.maxStreak"))throw new FormatException("Invalid V3 learning series");
             v.learningStreak=v.lastLearningTrack==job.id?(int)Math.Floor(v.learningStreak/C("logic.sameTrackDivisor")):Math.Min((int)C("logic.maxStreak"),v.learningStreak+1);v.lastLearningTrack=job.id;
         }
+        /** Regular time-only training work, never a gem completion or an intro. */
+        public static void RecordGradientWork(GameState s,double work)
+        {
+            if(!Enabled(s)||s.Training==null||s.Training.intro||work<=0)return;
+            var buffer=Equipped(s).FirstOrDefault(i=>i.type=="gradient-buffer");
+            if(buffer==null)return;
+            var job=s.Training;var v=s.ItemSystemV3;
+            if(!ScientificNumber.Finite(work)||!ScientificNumber.Finite(job.required)||job.required<=0)
+                throw new FormatException("Invalid gradient work");
+            if(v.gradientAccruedJob!=job.key){v.gradientAccruedWork=0;v.gradientAccruedJob=job.key;}
+            double fraction=Math.Min(C("gradient.cap"),C("gradient.rate")*AbilityStrength(s,buffer));
+            v.gradientAccruedWork=Math.Min(job.required,v.gradientAccruedWork+work*fraction);
+        }
+        /** The carry is consumed on exactly the next paid, non-intro start. */
+        public static void ApplyGradientStart(GameState s)
+        {
+            if(!Enabled(s)||s.Training==null||s.Training.intro)return;
+            var v=s.ItemSystemV3;double carry=Math.Min(v.gradientStoredWork,s.Training.required*C("gradient.startCap"));
+            if(!ScientificNumber.Finite(carry)||carry<0)throw new FormatException("Invalid gradient carry");
+            s.Training.done=Math.Min(s.Training.required,s.Training.done+carry);
+            v.gradientStoredWork=0;v.gradientLastRequirement=0;
+        }
+        /** Exactly one new carry per regular completed job; cannot duplicate on claim. */
+        public static void FinishGradientTraining(GameState s,Job completed)
+        {
+            if(!Enabled(s)||completed==null)return;
+            var v=s.ItemSystemV3;
+            if(!completed.intro&&completed.key==v.gradientAccruedJob)
+            {v.gradientLastRequirement=completed.required;v.gradientStoredWork=Math.Min(completed.required,v.gradientAccruedWork);}
+            v.gradientAccruedJob=null;v.gradientAccruedWork=0;
+        }
+        /** Ledger ticket + cap means reloads, late claims and duplicate completions are inert. */
+        public static void CompleteCapacitorResearch(GameState s,Job job)
+        {
+            if(!Enabled(s)||job==null||job.intro||!job.identityRecorded||!job.paidDataRecorded||
+               job.researchStartVersion!=3||job.completionCause=="bonus"||
+               string.IsNullOrEmpty(job.key)||job.key.Length>200||s.ItemSystemV3.capacitorCompletedJobs.Contains(job.key))return;
+            var capacitor=Equipped(s).FirstOrDefault(i=>i.type=="overdrive-capacitor");
+            if(capacitor==null)return;
+            var v=s.ItemSystemV3;
+            if(v.capacitorCompletedJobs.Length>=4096)return;
+            v.capacitorCompletedJobs=v.capacitorCompletedJobs.Concat(new[]{job.key}).ToArray();
+            double amount=C("capacitor.charge")*AbilityStrength(s,capacitor)+v.capacitorFraction;
+            int whole=Math.Max(0,Math.Min((int)C("prestige.training.integrationLimit"),(int)Math.Floor(amount)));
+            v.capacitorFraction=amount-Math.Floor(amount);
+            s.Charge=Math.Min((int)Balance.OverdriveCharge,s.Charge+whole);
+            if(s.Charge>=Balance.OverdriveCharge&&s.SavedAt>=s.CooldownUntil&&
+               !ChallengeRules.Is(s,"no-taps")&&s.ActiveUntil<=s.SavedAt)
+                Game.BeginOverdrive(s,s.SavedAt);
+        }
+        /** Snapshot only on a real axiom reset, after applying retention rules. */
+        public static void CaptureAxiomAnchor(GameState before,GameState after)
+        {
+            if(!Enabled(before)||!Enabled(after))return;
+            var item=Equipped(before).FirstOrDefault(i=>i.type=="axiom-anchor");
+            var v=after.ItemSystemV3;
+            v.axiomAnchorSeconds=0;v.axiomAnchorFactor=1;
+            if(item==null||!Equipped(after).Any(i=>i.id==item.id))return;
+            v.axiomAnchorFactor=1+C("axiomAnchor.coefficient")*AbilityStrength(before,item);
+            v.axiomAnchorSeconds=C("axiomAnchor.minutes")*60;
+        }
+        public static double AxiomAnchorFactor(GameState s)
+            =>Enabled(s)&&s.ItemSystemV3.axiomAnchorSeconds>0?s.ItemSystemV3.axiomAnchorFactor:1;
+        public static double AxiomAnchorBoundary(GameState s)
+            =>Enabled(s)&&s.ItemSystemV3.axiomAnchorSeconds>0?s.ItemSystemV3.axiomAnchorSeconds:double.PositiveInfinity;
+
         public sealed class ResearchStartContract
         {
             public string cause,area,previousArea;public double minimumSeconds,minimumUntil,startingFraction;public long automaticOrdinal;
