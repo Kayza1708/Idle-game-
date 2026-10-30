@@ -112,6 +112,7 @@ class Smoke
             "original challenge main unchanged");
         V3FreshCampaignChecks.Run();
         V3CombinationChecks.Run();
+        V3ProgressionContracts.Run();
         Console.WriteLine("UNITY NATIVE V3 CORE SMOKE OK");
     }
 }
