@@ -15,7 +15,8 @@ namespace IdleIntelligence.Core
         // Native V3 event receipts. These counters belong to the save, never to traded items.
         public double gradientStoredWork,gradientAccruedWork,gradientLastRequirement;
         public string gradientAccruedJob;
-        public double capacitorFraction,axiomAnchorFactor=1,axiomAnchorSeconds;
+        public double capacitorFraction,axiomAnchorFactor=1,axiomAnchorSeconds,axiomAnchorFirstSeconds,axiomAnchorFirstFactor=1;
+        public int libraryAnalyses; public string libraryLastReceipt;
         public string[] capacitorCompletedJobs=Array.Empty<string>();
         public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak;public long scannerAnalyses,automaticResearchStarts;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
         public double[] synthesisRemainders=new double[ItemBalance.ComponentIds.Length];public ItemV3Synthesis synthesisContract;public ItemV3Overdrive overdrive;
@@ -32,7 +33,8 @@ namespace IdleIntelligence.Core
             if(!ScientificNumber.Finite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new FormatException("Invalid V3 fragment progress");
             if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
             if(v.capacitorCompletedJobs==null||v.capacitorCompletedJobs.Length>4096||v.capacitorCompletedJobs.Any(id=>string.IsNullOrEmpty(id)||id.Length>200)||v.capacitorCompletedJobs.Distinct().Count()!=v.capacitorCompletedJobs.Length||
-                new[]{v.gradientStoredWork,v.gradientAccruedWork,v.gradientLastRequirement,v.capacitorFraction,v.axiomAnchorSeconds,v.axiomAnchorFactor}.Any(n=>!ScientificNumber.Finite(n)||n<0)||
+                new[]{v.gradientStoredWork,v.gradientAccruedWork,v.gradientLastRequirement,v.capacitorFraction,v.axiomAnchorSeconds,v.axiomAnchorFactor,v.axiomAnchorFirstSeconds,v.axiomAnchorFirstFactor}.Any(n=>!ScientificNumber.Finite(n)||n<0)||
+                v.axiomAnchorFirstFactor<1||v.axiomAnchorFirstSeconds>v.axiomAnchorSeconds||v.libraryAnalyses<0||v.libraryAnalyses>=5||v.libraryLastReceipt!=null&&v.libraryLastReceipt.Length>200||
                 v.capacitorFraction>=1||v.axiomAnchorFactor<1||v.axiomAnchorSeconds>C("axiomAnchor.minutes")*60+1e-7||
                 v.gradientAccruedJob!=null&&v.gradientAccruedJob.Length>200||
                 v.gradientStoredWork>v.gradientLastRequirement+1e-7)throw new FormatException("Invalid native V3 event receipts");
@@ -41,7 +43,7 @@ namespace IdleIntelligence.Core
         public static void RecordProduction(GameState s,double seconds,ScientificNumber data,ScientificNumber knowledge)
         {
             if(!Enabled(s))return;if(!ScientificNumber.Finite(seconds)||seconds<0)throw new ArgumentOutOfRangeException(nameof(seconds));
-            var v=s.ItemSystemV3;v.dataProduced=v.dataProduced.Add(data);v.knowledgeProduced=v.knowledgeProduced.Add(knowledge);v.runMinutes+=seconds/60;v.axiomAnchorSeconds=Math.Max(0,v.axiomAnchorSeconds-seconds);
+            var v=s.ItemSystemV3;v.dataProduced=v.dataProduced.Add(data);v.knowledgeProduced=v.knowledgeProduced.Add(knowledge);v.runMinutes+=seconds/60;v.axiomAnchorSeconds=Math.Max(0,v.axiomAnchorSeconds-seconds);v.axiomAnchorFirstSeconds=Math.Max(0,v.axiomAnchorFirstSeconds-seconds);
         }
         public static void RecordComponents(GameState s,int component,long amount,string source)
         {
@@ -52,7 +54,7 @@ namespace IdleIntelligence.Core
         public static void ResetProduction(GameState s,bool axiom=false)
         {
             if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;v.automaticResearchStarts=0;v.overdrive=null;v.gradientAccruedWork=0;v.gradientAccruedJob=null;v.gradientStoredWork=0;v.gradientLastRequirement=0;v.capacitorFraction=0;v.capacitorCompletedJobs=Array.Empty<string>();
-            if(!axiom){v.axiomAnchorSeconds=0;v.axiomAnchorFactor=1;}
+            if(!axiom){v.axiomAnchorSeconds=0;v.axiomAnchorFactor=1;v.axiomAnchorFirstSeconds=0;v.axiomAnchorFirstFactor=1;}
             if(axiom){v.knowledgeProduced=ScientificNumber.Zero;v.componentsProduced=ScientificNumber.Zero;}
         }
         public static ItemV3State ChallengeState(GameState main)
@@ -140,15 +142,35 @@ namespace IdleIntelligence.Core
             if(!Enabled(before)||!Enabled(after))return;
             var item=Equipped(before).FirstOrDefault(i=>i.type=="axiom-anchor");
             var v=after.ItemSystemV3;
-            v.axiomAnchorSeconds=0;v.axiomAnchorFactor=1;
+            v.axiomAnchorSeconds=0;v.axiomAnchorFactor=1;v.axiomAnchorFirstSeconds=0;v.axiomAnchorFirstFactor=1;
             if(item==null||!Equipped(after).Any(i=>i.id==item.id))return;
             v.axiomAnchorFactor=1+C("axiomAnchor.coefficient")*AbilityStrength(before,item);
             v.axiomAnchorSeconds=C("axiomAnchor.minutes")*60;
+            if(Has(before,"axiom-lattice")&&Has(before,"cycle-observatory"))
+            {v.axiomAnchorFirstSeconds=C("combinations.axiom.firstMinutes")*60;
+             v.axiomAnchorFirstFactor=C("combinations.axiom.firstFactor");
+             v.axiomAnchorSeconds=(C("combinations.axiom.firstMinutes")+C("combinations.axiom.tailMinutes"))*60;}
+        }
+        /** Scientific library: one paid analysis completion, not a claim or preview. */
+        public static void CompletePaidAnalysis(GameState s,string analysisId,string receipt)
+        {
+            if(!Enabled(s)||string.IsNullOrEmpty(receipt)||receipt.Length>200)return;
+            var v=s.ItemSystemV3;
+            if(v.libraryLastReceipt==receipt||!Has(s,"blueprint-archive")||
+               !Has(s,"data-prism")||!Has(s,"field-scanner"))return;
+            v.libraryLastReceipt=receipt;
+            v.libraryAnalyses++;
+            if(v.libraryAnalyses<5)return;
+            v.libraryAnalyses=0;
+            // Source analysis area, not whichever manual research task runs next.
+            string id=analysisId!=null&&analysisId.StartsWith("architecture",StringComparison.Ordinal)
+                ?"parallelArchitecture":"materialAnalysis";
+            Workshop.ResearchComplete(s,id);
         }
         public static double AxiomAnchorFactor(GameState s)
-            =>Enabled(s)&&s.ItemSystemV3.axiomAnchorSeconds>0?s.ItemSystemV3.axiomAnchorFactor:1;
+            =>Enabled(s)&&s.ItemSystemV3.axiomAnchorSeconds>0?(s.ItemSystemV3.axiomAnchorFirstSeconds>0?s.ItemSystemV3.axiomAnchorFirstFactor:s.ItemSystemV3.axiomAnchorFactor):1;
         public static double AxiomAnchorBoundary(GameState s)
-            =>Enabled(s)&&s.ItemSystemV3.axiomAnchorSeconds>0?s.ItemSystemV3.axiomAnchorSeconds:double.PositiveInfinity;
+            =>Enabled(s)&&s.ItemSystemV3.axiomAnchorSeconds>0?(s.ItemSystemV3.axiomAnchorFirstSeconds>0?Math.Min(s.ItemSystemV3.axiomAnchorFirstSeconds,s.ItemSystemV3.axiomAnchorSeconds):s.ItemSystemV3.axiomAnchorSeconds):double.PositiveInfinity;
 
         public sealed class ResearchStartContract
         {
