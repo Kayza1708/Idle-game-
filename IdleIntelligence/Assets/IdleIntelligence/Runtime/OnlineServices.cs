@@ -150,6 +150,50 @@ namespace IdleIntelligence.Runtime
                 });
             StartCoroutine(operation);
         }
+        /// <summary>
+        /// Only a signed-in Google Play Games Services v11 device may supply a
+        /// single-use server authorization code. The Worker exchanges it using
+        /// a confidential WEB OAuth client secret and calls Games players/me.
+        /// This method does not trust locally reported Google player IDs.
+        /// </summary>
+        public void FinishPlayGamesLogin(string challenge,string serverAuthCode,
+            Action<bool> finished)
+        {
+            if(!Configured||requesting||!IsToken(challenge)||
+               string.IsNullOrEmpty(serverAuthCode)){finished?.Invoke(false);return;}
+            requesting=true;
+            var linking=Authenticated;
+            StartCoroutine(api.PlayGamesLogin(challenge,serverAuthCode,linking,(code,json)=>{
+                requesting=false;
+                if(code<200||code>=300){
+                    status="Google Play Games: Serveridentität nicht bestätigt";
+                    finished?.Invoke(false);return;
+                }
+                if(linking){
+                    status="Play Games sicher mit Konto verknüpft";
+                    finished?.Invoke(true);return;
+                }
+                AccountResponse result;
+                try{result=JsonUtility.FromJson<AccountResponse>(json);}catch{result=null;}
+                if(result==null||!IsToken(result.accessToken)){
+                    status="Play Games: ungültige Serverantwort";
+                    finished?.Invoke(false);return;
+                }
+                var stored=NativeCredentialVault.Store(result.accessToken);
+                api.Configure(config.cloudflareApiUrl.TrimEnd('/'),result.accessToken);
+                status=stored?"Play Games serverseitig bestätigt":
+                    "Play Games verbunden; sichere Sitzungsspeicherung fehlt";
+                events.Record("session_start");
+                finished?.Invoke(true);
+            }));
+        }
+        public void SignInWithPlayGames(Action<bool> finished)
+        {
+            if(game==null||!Configured){finished?.Invoke(false);return;}
+            var provider=GetComponent<NativePlayGamesLogin>()??
+                gameObject.AddComponent<NativePlayGamesLogin>();
+            provider.Begin(this,finished);
+        }
         public void SignInWithApple(Action<bool> finished)
         {
 #if UNITY_IOS && !UNITY_EDITOR
