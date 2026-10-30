@@ -76,6 +76,7 @@ class Smoke
         Array.Resize(ref oldMain.Workshop.crafted,36);
         oldMain.Workshop.learned[1]=true;
         oldChallenge.Challenges.Main=oldMain;
+        oldChallenge.Challenges.Run=new ChallengeRun{id="no-taps",stage=1,runId="unity-v3-old-challenge",catalogVersion=2,startedAt=1000};
         var converted=UnityV3Migration.Upgrade(oldChallenge);
         Check(converted.ItemSystemV3!=null&&converted.Challenges.Main.ItemSystemV3!=null,
             "challenge state and archived main both carry V3 ledgers");
