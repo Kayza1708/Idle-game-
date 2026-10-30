@@ -278,3 +278,10 @@ Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(2
 Bezahlte Bereichswechsel-, Protokoll- und automatischeStartverträge einschließlich Queue/Wiederholung/Direktor verbunden.32gemeinsame realeTransaktionsfolgen, beideResets mit laufendemAuftrag;2.093Vitest/223EditMode/Typecheck/Build/Generatorvergleich grün. DreiForschungsitemdetails mit tatsächlichenV3-Werten/siebenSprachen und rotemMindestdauer-Nachteil; finaleUI-Regressionsbilder nach zwei konkretenLesbarkeitskorrekturen laufen. Kein vollständigerV3-Save oderPlayerfreigabe. Danach sechsneueItems/fehlendeEffekte, wissenschaftlicheArbeit und vollständigeErwerbs-/UI-/Save-Migration weiter abarbeiten.
 
 Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beidenletztenUI-Lesbarkeitskorrekturen grün;44unveränderteUnity-PNGs einschließlichManifest in docs/media/unity-v3-research-starts. DE/EN320/390/430 undFR390 selbstgesehen, roteMindestdauererhöhung sichtbar, Einheitenzusammenhalt/Randabstand korrigiert, echtesfranzösischesAblegen. Kein neuesV3-Save/Player/Design-Gesamturteil. Der Gesamtauftrag geht mit sechsneuenItems/fehlendenFähigkeiten, wissenschaftlicherArbeit und vollständigerMigration weiter.
+
+
+## 30.10.2026 – Isolierter macOS-Balance-Playtest (Draft)
+
+- Neuer optionaler Build-Einstieg `BuildLocalPlayer.BuildBalancePlaytest` und `bash scripts/playtest-macos.sh`. Andere Company-/Product-/Bundle-ID, neuer Buildpfad, wiederhergestellte Editor-PlayerSettings. Kein Import, kein Reset, keine Freischaltung unvollständiger V3-Saves.
+- Anleitung: [Balance-Playtest macOS](balance-playtest-macos.md). Nach GitHub-PR nur Shell-Syntax via CI überprüfbar; Unity-Compile, lokal tatsächlich gestarteter Player, Speicherpfadtrennung und 120-Minuten-Naturspieltest bleiben **offen**.
+- V3-Gesamtauftrag bleibt separat: fehlende 42er-Items, Erwerbs-/Detailverbraucher, atomare Save-Migration und natürliches iPhone-/Lasttest-Profil. Keine V3-Spielerfreigabe durch den V2-Playtest.
