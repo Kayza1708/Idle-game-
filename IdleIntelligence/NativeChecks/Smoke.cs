@@ -15,6 +15,31 @@ class Smoke
     }
     public static void Main()
     {
+        // Real native runtime boot: no V2 opt-in or imported save required.
+        var fresh=Game.NewV3(1_000,"native-v3-launch",true);
+        Check(ItemSystemV3.Enabled(fresh),"fresh Unity V3 active on first frame");
+        Check(fresh.Meta.resets==0&&fresh.Prestige.resets==0&&fresh.Workshop.inventory.Length==0,
+            "clean V3 starts with no legacy progress");
+        Game.Validate(fresh);
+        var bought=Game.Buy(fresh,"calculator");
+        Check(!object.ReferenceEquals(bought,fresh),"V3 first calculator is purchasable");
+        Check(bought.Hardware.Sum()>0&&Game.Compute(bought).CompareTo(ScientificNumber.Zero)>0,
+            "first V3 hardware has actual compute");
+        var produced=Game.Advance(bought,bought.SavedAt+30000,true);
+        Check(produced.SavedAt>bought.SavedAt&&produced.Credits.CompareTo(bought.Credits)>0,
+            "native V3 can run 30 seconds and earn paid credits");
+        Game.Validate(produced);
+        produced=produced.Copy();produced.Credits=ScientificNumber.From(1000000000000d);
+        var trained=Game.Train(produced,"efficiency");
+        Check(trained.Training!=null&&trained.Training.key.StartsWith("v3-training-"),
+            "native training is paid, V3-keyed and starts normally");
+        var trainedNext=Game.Advance(trained,trained.SavedAt+10000,true);
+        Check(trainedNext.Training==null||trainedNext.Training.done>trained.Training.done,
+            "native V3 advances a paid training job");
+        Game.Validate(trainedNext);
+        var freshData=StateData.From(trainedNext).ToState();
+        Check(ItemSystemV3.Enabled(freshData)&&freshData.Hardware.Sum()==trainedNext.Hardware.Sum(),
+            "new V3 state roundtrips with preserved active economy");
         Check(ItemBalance.Items.Length==42,"42 fixed native item entries");
         Check(ItemBalance.OriginalRecipeData.Length==42,"42 native recipe data costs");
         Check(UnityV3Catalog.AddedIds.All(id=>Workshop.Index(id)>=36),"stable 36 original ordinals");
