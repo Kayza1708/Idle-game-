@@ -16,7 +16,7 @@ export function normalizeModerationText(value){
   .replace(/[٠-٩]/g,c=>String(c.charCodeAt(0)-0x660)).replace(/[۰-۹]/g,c=>String(c.charCodeAt(0)-0x6f0))
   .replace(/[0-9@$!|]/g,c=>leet[c]).replace(/[^\p{L}\p{M}]/gu,'');
 }
-const collapsed=(s:string)=>s.replace(/(\p{L})\1+/gu,'$1');
+const collapsed=(s)=>s.replace(/(\p{L})\1+/gu,'$1');
 const dictionary=[...Object.values(termsByLanguage).flat(),...reserved.politicalNames,...reserved.extremismAndThreats];
 const exactTerms=new Set(dictionary.map(normalizeModerationText).filter(Boolean));
 const repeatedTerms=new Set([...exactTerms].filter(t=>[...t].length>=4).map(collapsed));
