@@ -127,7 +127,8 @@ test('D1 season boundaries reject overlap but permit adjacent schedules and pres
     .run(199,'season-b'),/liveops_season_overlap/);
   const saved=sql.prepare('SELECT starts_at,ends_at FROM liveops_seasons WHERE id=?')
     .get('season-b');
-  assert.deepEqual(saved,{starts_at:200,ends_at:300});
+  assert.equal(saved.starts_at,200);
+  assert.equal(saved.ends_at,300);
   assert.equal(sql.prepare('SELECT COUNT(*) AS count FROM liveops_seasons').get().count,2);
  }finally{sql.close();}
 });
