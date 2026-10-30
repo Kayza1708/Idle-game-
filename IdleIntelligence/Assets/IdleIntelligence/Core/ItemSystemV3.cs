@@ -194,6 +194,39 @@ namespace IdleIntelligence.Core
             if(!Enabled(s))return ScientificNumber.One;Validate(s);var item=Equipped(s).FirstOrDefault(i=>i.type=="field-scanner");if(item==null)return ScientificNumber.One;
             double p=AbilityStrength(s,item);return ScientificNumber.From(C("scanner.base")).Pow(p).Multiply(ScientificNumber.One.Add(Softcap(ScientificNumber.From(s.ItemSystemV3.scannerAnalyses),C("scanner.threshold")).Times(C("scanner.perAnalysis")*p)));
         }
+        /** V only counts currently held hardware classes with at least 100 units. */
+        public static ScientificNumber FleetFactor(GameState s,ItemInstance item)
+        {
+            double p=AbilityStrength(s,item);
+            int classes=s.Hardware.Count(n=>n>=C("fleet.minimumOwned"));
+            return ScientificNumber.From(C("fleet.base")).Pow(p).Times(1+C("fleet.perClass")*p*classes);
+        }
+        /** Excludes items, models and global prestige factors from the raw hardware input. */
+        public static ScientificNumber UnmodifiedHardwareCompute(GameState s)
+        {
+            var plain=s.Copy();plain.ItemSystemV3=null;plain.Workshop.equipped=new string[ItemBalance.Slots.Length];
+            var result=ScientificNumber.Zero;
+            for(int i=0;i<plain.Hardware.Length;i++)result=result.Add(Game.HardwareClass(plain,i));
+            return result;
+        }
+        public static ScientificNumber SingularityLensFactor(GameState s,ItemInstance item,bool combined)
+        {
+            var raw=UnmodifiedHardwareCompute(s);
+            double power=C("lens.exponent")*ExponentStrength(s,item)*(combined?C("combinations.industrial.lensExponent"):1);
+            return (raw.CompareTo(ScientificNumber.One)<0?ScientificNumber.One:raw).Pow(power);
+        }
+        public static double SynthesisCoordinatorFactor(GameState s,ItemInstance item)
+        {
+            double p=AbilityStrength(s,item),q=ExponentStrength(s,item);
+            double produced=s.ItemSystemV3.componentsProduced.Add(ScientificNumber.One).Log10();
+            return Math.Pow(C("synthesis.base"),p)*Math.Pow(1+produced/C("synthesis.componentLogScale"),C("synthesis.exponent")*q);
+        }
+        public static double SynthesisWorkFactor(GameState s)
+        {
+            if(!Enabled(s))return 1;
+            var item=Equipped(s).FirstOrDefault(i=>i.type=="synthesis-coordinator");
+            return item==null?1:SynthesisCoordinatorFactor(s,item);
+        }
         public static ScientificNumber ComputeFactor(GameState s)
         {
             if(!Enabled(s))return ScientificNumber.One;Validate(s);var result=ScientificNumber.One;var h=HardwareOwned(s);var m=TrainingLevels(s);
@@ -204,6 +237,8 @@ namespace IdleIntelligence.Core
                 if(item.type=="entropy-sink")result=result.Multiply(ScientificNumber.From(C("entropy.base")).Pow(AbilityStrength(s,item)).Multiply(ScientificNumber.From(1+s.ItemSystemV3.knowledgeProduced.Add(ScientificNumber.One).Log10()).Pow(C("entropy.exponent")*ExponentStrength(s,item))));
                 if(item.type=="inference-router")result=result.Times(1+C("router.perLink")*AbilityStrength(s,item)*Enumerable.Range(0,s.Hardware.Length).Count(i=>ValidLink(s,i)));
                 if(item.type=="photonic-matrix"&&s.ActiveUntil>s.SavedAt)result=result.Times(1+C("photonic.coefficient")*AbilityStrength(s,item));
+                if(item.type=="fleet-coordinator")result=result.Multiply(FleetFactor(s,item));
+                if(item.type=="singularity-lens"&&s.Meta.resets>=C("lens.minimumCycles"))result=result.Multiply(SingularityLensFactor(s,item,Has(s,"fleet-coordinator")&&Has(s,"synthesis-coordinator")));
             }
             if(pair)result=result.Times(C("combinations.compute.factor"));return result.Multiply(BaseFactorScientific(s,"processor"));
         }

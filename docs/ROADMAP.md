@@ -337,10 +337,13 @@ Bezahlte Bereichswechsel-, Protokoll- und automatischeStartverträge einschließ
 Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beidenletztenUI-Lesbarkeitskorrekturen grün;44unveränderteUnity-PNGs einschließlichManifest in docs/media/unity-v3-research-starts. DE/EN320/390/430 undFR390 selbstgesehen, roteMindestdauererhöhung sichtbar, Einheitenzusammenhalt/Randabstand korrigiert, echtesfranzösischesAblegen. Kein neuesV3-Save/Player/Design-Gesamturteil. Der Gesamtauftrag geht mit sechsneuenItems/fehlendenFähigkeiten, wissenschaftlicherArbeit und vollständigerMigration weiter.
 
 
-## 30.10.2026 – Balance-Playtest auf macOS (separater Entwurf)
+## 30.10.2026 – V3 Industrieverbund (Teilabschnitt)
 
-- [x] Opt-in-Einstieg für eigenen macOS-Standalone-Entwicklungsbuild mit getrenntem Spielstand-/Produktnamen implementiert; bestehender `BuildLocalPlayer.Build` unverändert.
-- [x] Einzeiliges Build-/Startskript samt Aufzeichnung von Commit, Log und Buildreport sowie [Testablauf](balance-playtest-macos.md) hinzugefügt.
-- [ ] Unity-C#-Compile und tatsächlicher macOS-Playerstart bestätigt; getrennte Savepfade und Save-Reload nachgewiesen.
-- [ ] Erste 15/30/60/120-Minuten-Balancehistorien aus normalem Gameplay ausgewertet.
-- [ ] V3: 42 Items, vollständige Verbraucher, Erwerbs-/UI-Routen, sichere Migration und physische-/Simulatorabnahme fertig; **hierdurch nicht erledigt**.
+- [x] Flottenkoordinator (TS/C#): Computeformel und momentane Hundert-Geräte-Klassenzählung in bestehende V3-Produktionspfade eingebunden.
+- [x] Singularitätslinse (TS/C#): rohe reguläre Hardwareproduktion, drei echte Axiomzyklen und vollständiger Dreierverbund als Exponentenquelle in V3-Compute eingebunden.
+- [x] Synthesekoordinator (TS/C#): Synthesetempo auf reale Arbeit und Endzeitgrenze, getrennt von Bezahlung und Ausbeute.
+- [ ] Nativer Unity-Compile, echte EditMode-Tests und TS/C#-Gemeinschaftsfixtures samt neuer Generatorversion erfolgreich geprüft.
+- [ ] Alle 42 Items mit sicheren Rezepten, deterministischem Erwerb, gültigen Slots, UI und vollständigen Spezialfähigkeiten.
+- [ ] Verlustfreie V3-Dateimigration und vollständige reale Balance-/Playerabnahme. **V3 noch nicht freigeben.**
+
+Details: [V3 Industrieeffekte](item-system-v3/industrial-consumers.md).
