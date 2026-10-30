@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Runtime.InteropServices;
 using IdleIntelligence.Core;
 using UnityEngine;
 
@@ -25,7 +26,11 @@ namespace IdleIntelligence.Runtime
         NativeLiveOpsSnapshot latest;
         float nextLiveOps,nextFlush;
         bool requesting,telemetrySending;
-        string lastScreen="",status="Offline";
+        string lastScreen="",status="Offline",appleChallenge="";
+        Action<bool> appleResult;
+#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")] static extern void IIRequestAppleIdentity(string receiver,string nonceHash);
+#endif
         public CompanyApiClient Client=>api;
         public bool Configured=>config!=null&&config.Valid;
         public bool Authenticated=>api!=null&&api.HasSession;
@@ -136,6 +141,40 @@ namespace IdleIntelligence.Runtime
                     finished?.Invoke(true);
                 });
             StartCoroutine(operation);
+        }
+        public void SignInWithApple(Action<bool> finished)
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            if(!Configured||requesting||appleResult!=null){finished?.Invoke(false);return;}
+            BeginProviderChallenge("apple",(okay,challenge,nonceHash)=>{
+                if(!okay){status="Apple-Anmeldechallenge konnte nicht erstellt werden";finished?.Invoke(false);return;}
+                appleChallenge=challenge;appleResult=finished;
+                try{IIRequestAppleIdentity(gameObject.name,nonceHash);}
+                catch(Exception){appleChallenge="";appleResult=null;status="Apple Sign-in nicht eingerichtet";finished?.Invoke(false);}
+            });
+#else
+            status="Apple-Anmeldung benötigt einen provisionierten iOS-Gerätebuild";
+            finished?.Invoke(false);
+#endif
+        }
+        [Serializable] sealed class AppleCredential
+        {public string idToken,error;}
+        // Callback from the native AuthorizationServices UI, never from an
+        // unauthenticated Unity gameplay or save import path.
+        public void OnAppleIdentityResult(string resultJson)
+        {
+            var completed=appleResult;appleResult=null;
+            string challenge=appleChallenge;appleChallenge="";
+            AppleCredential credential;
+            try{credential=JsonUtility.FromJson<AppleCredential>(resultJson);}
+            catch{credential=null;}
+            if(completed==null||credential==null||string.IsNullOrEmpty(credential.idToken)||
+               !IsToken(challenge))
+            {
+                status="Apple-Anmeldung abgebrochen oder fehlgeschlagen";
+                completed?.Invoke(false);return;
+            }
+            FinishProviderLogin("apple",challenge,credential.idToken,completed);
         }
         public void RecordScreen(string screen)
         {
