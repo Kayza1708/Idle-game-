@@ -56,6 +56,32 @@ export async function ingestTelemetry({request,db,player,now,reply,ApiError,payl
  }
  return reply({accepted,duplicates,serverTime:now});
 }
+// Account-cohort D1/D7: counted only if telemetry was explicitly enabled
+// on UTC account-creation day. Not an install or full-player retention metric.
+export async function onlineCohortRetention({db,now,days}){
+ const today=Math.floor(now/86400),oldest=(today-Math.min(days,21))*86400;
+ const measure=async offset=>{
+  // The entire return day must have elapsed to avoid partial-day bias.
+  const cutoff=(today-offset)*86400;
+  const result=await db.prepare(
+   'WITH eligible AS ('+
+   ' SELECT p.id AS player_id,CAST(p.created_at/86400 AS INTEGER) AS cohort_day'+
+   ' FROM players p WHERE p.created_at>=? AND p.created_at<?'+
+   " AND EXISTS(SELECT 1 FROM analytics_events e WHERE e.player_id=p.id AND e.event_type='session_start'"+
+   ' AND CAST(e.received_at/86400 AS INTEGER)=CAST(p.created_at/86400 AS INTEGER))'+
+   ') SELECT COUNT(*) AS cohort_players,'+
+   ' COALESCE(SUM(CASE WHEN EXISTS ('+
+   " SELECT 1 FROM analytics_events a WHERE a.player_id=eligible.player_id AND a.event_type='session_start'"+
+   ' AND CAST(a.received_at/86400 AS INTEGER)=eligible.cohort_day+?'+
+   ') THEN 1 ELSE 0 END),0) AS returned_players FROM eligible'
+  ).bind(oldest,cutoff,offset).first();
+  const eligible=Math.max(0,Number(result?.cohort_players||0));
+  const returned=Math.max(0,Number(result?.returned_players||0));
+  return {eligible,returned,rate:eligible?Math.round(10000*returned/eligible)/100:null};
+ };
+ return {day1:await measure(1),day7:await measure(7),
+  definition:'Consenting online accounts active on UTC signup day; return on UTC day +1/+7. Not install retention.'};
+}
 // Explicit admin-only, aggregate-only read. No raw player/session IDs returned.
 export async function adminTelemetry({request,db,now,env,reply,ApiError,digest}){
  if(typeof env.ANALYTICS_ADMIN_TOKEN!=='string'||env.ANALYTICS_ADMIN_TOKEN.length<32)
@@ -67,15 +93,17 @@ export async function adminTelemetry({request,db,now,env,reply,ApiError,digest})
  const url=new URL(request.url),days=Number(url.searchParams.get('days')||7);
  if(!Number.isInteger(days)||days<1||days>30)throw new ApiError(400,'invalid_days');
  const since=now-days*86400;
- const [summary,perType,perDay]=await Promise.all([
+ const [summary,perType,perDay,cohorts]=await Promise.all([
   db.prepare('SELECT COUNT(*) AS events, COUNT(DISTINCT player_id) AS players FROM analytics_events WHERE received_at>=?')
     .bind(since).first(),
   db.prepare('SELECT event_type AS type,COUNT(*) AS count FROM analytics_events WHERE received_at>=? GROUP BY event_type ORDER BY count DESC')
     .bind(since).all(),
   db.prepare('SELECT CAST(received_at/86400 AS INTEGER) AS day,COUNT(DISTINCT player_id) AS active_players FROM analytics_events WHERE event_type=\'session_start\' AND received_at>=? GROUP BY day ORDER BY day')
-    .bind(since).all()
+    .bind(since).all(),
+  onlineCohortRetention({db,now,days})
  ]);
  return reply({windowDays:days,events:summary?.events??0,consentingPlayers:summary?.players??0,
   eventsByType:perType.results,uniqueSessionStartsByUtcDay:perDay.results,
-  retentionNote:'D1/D7 cohort retention requires repeated consented session starts; do not infer retention from total installs.'});
+  onlineAccountCohortRetention:cohorts,
+  retentionNote:'Only consented online-account UTC cohorts. Never label these as total installs or full D1/D7 retention.'});
 }

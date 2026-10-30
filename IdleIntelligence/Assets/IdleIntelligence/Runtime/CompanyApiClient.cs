@@ -52,6 +52,19 @@ namespace IdleIntelligence.Runtime
                 JsonUtility.ToJson(new IdentityLogin{challenge=challenge,idToken=idToken}),completed);
         }
         static IEnumerator Empty(){yield break;}
+        public IEnumerator PlayGamesLogin(string challenge,string authCode,bool link,
+            Action<long,string> completed)
+        {
+            if(string.IsNullOrEmpty(challenge)||string.IsNullOrEmpty(authCode)){
+                completed?.Invoke(400,"Missing Google Play Games authentication code");
+                return Empty();
+            }
+            return Send("POST",link?"/v1/auth/link/playgames":"/v1/auth/playgames",
+                JsonUtility.ToJson(new PlayGamesLoginData{
+                    challenge=challenge,serverAuthCode=authCode}),completed,link);
+        }
+        [Serializable] private sealed class PlayGamesLoginData
+        {public string challenge,serverAuthCode;}
         public IEnumerator RotateSession(Action<long,string> completed)
             =>Send("POST","/v1/session/rotate","{}",completed);
         public IEnumerator SubmitTelemetry(NativeTelemetryBatch batch,Action<long,string> completed)
@@ -285,6 +298,14 @@ namespace IdleIntelligence.Runtime
                 if (requiresSession) request.SetRequestHeader("Authorization", "Bearer " + accessToken);
                 yield return request.SendWebRequest();
                 string body = request.downloadHandler != null ? request.downloadHandler.text : "";
+                // A revoked/expired session is no longer authenticated. Clear
+                // its OS vault copy rather than repeatedly replaying a rejected
+                // bearer or showing a false "connected" indicator in Company UI.
+                if(requiresSession && request.responseCode==401)
+                {
+                    ClearSession();
+                    NativeCredentialVault.Clear();
+                }
                 completed?.Invoke(request.responseCode, body);
             }
         }

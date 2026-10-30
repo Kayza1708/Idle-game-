@@ -22,6 +22,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Prove standalone Worker does not require TypeScript game or web runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/legacy-web"
+          for item in src scripts public package.json package-lock.json index.html; do
+            if [ -e "../../$item" ]; then
+              mv "../../$item" "$RUNNER_TEMP/legacy-web/"
+            fi
+          done
+          test ! -e ../../src
+          test ! -e ../../package.json
       - name: Install Cloudflare Wrangler
         run: npm install --no-audit --no-fund
       - name: Pure Company rules

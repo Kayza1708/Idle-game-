@@ -1,5 +1,6 @@
 import {jwtVerify,createRemoteJWKSet} from 'jose';
 import {normalizeModerationText} from './name-policy.mjs';
+import {verifyPlayGamesCode} from './playgames-auth.mjs';
 
 // Identity credentials are verified against provider JWKS and the configured
 // first-party audience. No local save, name, e-mail or self-reported INT
@@ -47,7 +48,7 @@ async function readRequest(request,ApiError){
  let value;
  try{value=JSON.parse(raw);}catch{throw new ApiError(400,'invalid_json');}
  if(!value||typeof value!=='object'||Array.isArray(value)||
-    Object.keys(value).some(k=>!['challenge','idToken'].includes(k)))
+    Object.keys(value).some(k=>!['challenge','idToken','serverAuthCode'].includes(k)))
   throw new ApiError(400,'invalid_auth_request');
  return value;
 }
@@ -70,7 +71,7 @@ export async function identityRoute({request,path,method,env,db,now,reply,ApiErr
     .bind(hash,now,now+300).run();
   return reply({challenge,nonceHash:await nonceClaim(challenge),expiresAt:now+300},201);
  }
- const route=/^\/v1\/auth\/(apple|google|link\/(apple|google))$/.exec(path);
+ const route=/^\/v1\/auth\/(apple|google|playgames|link\/(apple|google|playgames))$/.exec(path);
  if(method!=='POST'||!route)return null;
  await limited(env,request,ApiError);
  const provider=route[2]||route[1],link=!!route[2];
@@ -84,8 +85,16 @@ export async function identityRoute({request,path,method,env,db,now,reply,ApiErr
  if(!active)throw new ApiError(401,'challenge_expired_or_replayed');
  let identity;
  try{
-  identity=await verifyIdentityToken({provider,idToken:requestData.idToken,
-   expectedNonce:await nonceClaim(requestData.challenge),env,now,verifier});
+  if(provider==='playgames'){
+   if(typeof env.IDENTITY_HASH_PEPPER!=='string'||env.IDENTITY_HASH_PEPPER.length<32)
+    throw new Error('identity_provider_not_configured');
+   const subject=await verifyPlayGamesCode({authCode:requestData.serverAuthCode,env});
+   identity={provider,subjectHash:await nonceDigest(
+    'playgames:'+subject+':'+env.IDENTITY_HASH_PEPPER)};
+  }else{
+   identity=await verifyIdentityToken({provider,idToken:requestData.idToken,
+    expectedNonce:await nonceClaim(requestData.challenge),env,now,verifier});
+  }
  }catch(error){
   if(error.message==='identity_provider_not_configured')
    throw new ApiError(503,'identity_provider_not_configured');

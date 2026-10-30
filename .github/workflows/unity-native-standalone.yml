@@ -1,0 +1,47 @@
+name: Unity Native Standalone CI
+on:
+  pull_request:
+    paths:
+      - 'IdleIntelligence/**'
+      - '.github/workflows/unity-native-standalone.yml'
+  push:
+    branches:
+      - main
+      - codex/unity-liveops-online-native-migration-20261030
+    paths:
+      - 'IdleIntelligence/**'
+      - '.github/workflows/unity-native-standalone.yml'
+jobs:
+  native-data-contracts:
+    name: Native CSharp and frozen catalogues
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Prove Unity core no longer depends on TypeScript, npm or public web assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/legacy-web-sources"
+          for item in src scripts public package.json package-lock.json index.html capacitor.config.json tsconfig.app.json tsconfig.json tsconfig.node.json vite.config.ts vite.campaign.config.ts; do
+            if [ -e "$item" ]; then
+              mv "$item" "$RUNNER_TEMP/legacy-web-sources/"
+            fi
+          done
+          test ! -e src
+          test ! -e package.json
+          dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj --configuration Release
+          echo "Native CSharp catalogue, gameplay and tests pass without the old web client."
+      - name: Verify all committed CSharp catalogue blobs and Unity V3 contracts
+        run: dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj -c Release
+      - name: Deterministic paid-only 120-minute native progression
+        run: dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj -c Release -- --balance
+      - name: Export independent native balancing data
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-native-120-minute-balance
+          path: IdleIntelligence/NativeChecks/out/unity-v3-balance-baseline.csv
+          if-no-files-found: error

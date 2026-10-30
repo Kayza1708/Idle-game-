@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.IO;
 using System.Runtime.InteropServices;
 using IdleIntelligence.Core;
 using UnityEngine;
@@ -23,9 +24,10 @@ namespace IdleIntelligence.Runtime
         CompanyApiClient api;
         OnlineServicesConfiguration config;
         readonly NativeTelemetryQueue events=new NativeTelemetryQueue();
+        NativeTelemetryJournal journal;
         NativeLiveOpsSnapshot latest;
         float nextLiveOps,nextFlush;
-        bool requesting,telemetrySending;
+        bool requesting,telemetrySending,sessionEnded;
         string lastScreen="",status="Offline",appleChallenge="";
         Action<bool> appleResult;
 #if UNITY_IOS && !UNITY_EDITOR
@@ -47,17 +49,23 @@ namespace IdleIntelligence.Runtime
             var endpoint=Configured?config.cloudflareApiUrl.TrimEnd('/'):null;
             api.Configure(endpoint,Configured?NativeCredentialVault.Read():"");
             events.SetConsent(PlayerPrefs.GetInt(ConsentKey,0)==1);
+            journal=new NativeTelemetryJournal(Path.Combine(Application.persistentDataPath,
+                "idle-intelligence-anonymous-telemetry-v1.json"));
+            journal.Restore(events);
+            events.Changed+=PersistTelemetry;
             status=Configured?(Authenticated?"Gesicherte Sitzung geladen":"Onlinekonto nicht verbunden"):
                 "Offline: Cloudflare HTTPS-URL noch nicht eingerichtet";
             if(Authenticated)events.Record("session_start");
             nextFlush=Time.unscaledTime+20f;
             nextLiveOps=Time.unscaledTime+2f;
         }
+        void PersistTelemetry(){journal?.Store(events);}
         public void SetAnalyticsConsent(bool value)
         {
             PlayerPrefs.SetInt(ConsentKey,value?1:0);
             PlayerPrefs.Save();
             events.SetConsent(value);
+            if(!value)journal?.Purge();
             if(value&&Authenticated)events.Record("session_start");
         }
         public void Disconnect()
@@ -142,6 +150,50 @@ namespace IdleIntelligence.Runtime
                 });
             StartCoroutine(operation);
         }
+        /// <summary>
+        /// Only a signed-in Google Play Games Services v11 device may supply a
+        /// single-use server authorization code. The Worker exchanges it using
+        /// a confidential WEB OAuth client secret and calls Games players/me.
+        /// This method does not trust locally reported Google player IDs.
+        /// </summary>
+        public void FinishPlayGamesLogin(string challenge,string serverAuthCode,
+            Action<bool> finished)
+        {
+            if(!Configured||requesting||!IsToken(challenge)||
+               string.IsNullOrEmpty(serverAuthCode)){finished?.Invoke(false);return;}
+            requesting=true;
+            var linking=Authenticated;
+            StartCoroutine(api.PlayGamesLogin(challenge,serverAuthCode,linking,(code,json)=>{
+                requesting=false;
+                if(code<200||code>=300){
+                    status="Google Play Games: Serveridentität nicht bestätigt";
+                    finished?.Invoke(false);return;
+                }
+                if(linking){
+                    status="Play Games sicher mit Konto verknüpft";
+                    finished?.Invoke(true);return;
+                }
+                AccountResponse result;
+                try{result=JsonUtility.FromJson<AccountResponse>(json);}catch{result=null;}
+                if(result==null||!IsToken(result.accessToken)){
+                    status="Play Games: ungültige Serverantwort";
+                    finished?.Invoke(false);return;
+                }
+                var stored=NativeCredentialVault.Store(result.accessToken);
+                api.Configure(config.cloudflareApiUrl.TrimEnd('/'),result.accessToken);
+                status=stored?"Play Games serverseitig bestätigt":
+                    "Play Games verbunden; sichere Sitzungsspeicherung fehlt";
+                events.Record("session_start");
+                finished?.Invoke(true);
+            }));
+        }
+        public void SignInWithPlayGames(Action<bool> finished)
+        {
+            if(game==null||!Configured){finished?.Invoke(false);return;}
+            var provider=GetComponent<NativePlayGamesLogin>()??
+                gameObject.AddComponent<NativePlayGamesLogin>();
+            provider.Begin(this,finished);
+        }
         public void SignInWithApple(Action<bool> finished)
         {
 #if UNITY_IOS && !UNITY_EDITOR
@@ -190,7 +242,7 @@ namespace IdleIntelligence.Runtime
         {
             if(!events.Consent||before==null||after==null||
                 object.ReferenceEquals(before,after))return;
-            if(before.Hardware.Sum()==0&&after.Hardware.Sum()>0)
+            if(before.Lifetime.hardwareBought==0&&after.Lifetime.hardwareBought>0)
                 events.Record("first_purchase");
             if(after.Prestige.resets>before.Prestige.resets)
                 events.Record("prestige",(int)Math.Min(1000000000,after.Prestige.resets));
@@ -240,6 +292,15 @@ namespace IdleIntelligence.Runtime
                 // next session, but never send after consent is withdrawn.
             }));
         }
-        void OnDestroy(){events.SetConsent(false);latest=null;}
+        // End exactly once; an offline session-end event is delivered when the
+        // user next reconnects. Explicit consent withdrawal still erases it.
+        void EndSession()
+        {
+            if(sessionEnded)return;
+            sessionEnded=true;
+            if(events.Consent)events.Record("session_end");
+        }
+        void OnApplicationQuit(){EndSession();}
+        void OnDestroy(){EndSession();events.Changed-=PersistTelemetry;latest=null;}
     }
 }

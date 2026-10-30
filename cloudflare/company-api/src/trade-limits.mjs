@@ -1,5 +1,5 @@
 // The immutable D1 migration enforces this policy in the same statement as escrow.
-// Keep the public quote in sync with BALANCE.companyTradeDailyLimit (contract tested).
+// Match the D1 UTC-day constraint and the independently reviewed server trade policy.
 import {DAILY_TRADE_LIMIT} from './trade-policy.g.mjs';
 export {DAILY_TRADE_LIMIT};
 export async function tradeLimit(db,playerId,now){
