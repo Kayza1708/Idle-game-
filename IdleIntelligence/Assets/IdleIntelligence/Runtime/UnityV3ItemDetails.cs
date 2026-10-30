@@ -94,7 +94,7 @@ namespace IdleIntelligence.Runtime
                     lines.Add(L("Verbleibende anrechenbare Sekunden: ","Remaining credited seconds: ")+Number(s.ItemSystemV3?.axiomAnchorSeconds??0));break;
             }
             foreach(var entry in Combos.Where(k=>k.Value.Contains(item.type))){
-                int owned=entry.Value.Count(ItemSystemV3.Has(s));
+                int owned=entry.Value.Count(id=>ItemSystemV3.Has(s,id));
                 var missing=entry.Value.Where(id=>!ItemSystemV3.Has(s,id)).Select(id=>ItemBalance.Items[Workshop.Index(id)].Name).ToArray();
                 lines.Add("\n<b>"+entry.Key+"</b> · "+owned+"/3");
                 lines.Add(missing.Length==0?L("Vollständiger Build aktiv","Full build active")
