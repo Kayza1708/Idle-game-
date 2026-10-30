@@ -11,5 +11,6 @@
     <Compile Include="../Assets/IdleIntelligence/Core/**/*.cs" />
     <Compile Include="Smoke.cs" />
     <Compile Include="V3FreshCampaignChecks.cs" />
+    <Compile Include="V3BalanceProbe.cs" />
   </ItemGroup>
 </Project>
