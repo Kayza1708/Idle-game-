@@ -57,6 +57,13 @@ namespace IdleIntelligence.Runtime
         public void RecoverSave(string source,string hash){WorkshopView?.Forge.Cancel();PrestigeView?.Cancel();ModelsView?.Cancel();State=store.Recover(source,hash);GetComponent<CompletionFeedback>()?.Rebase(State);Diagnostics=State.Journal.diagnostics.Copy();Diagnostics.Loaded(Now);Diagnostics.recoveries++;Writable=HasReadableState=true;AdvanceOffline(Now);Show("storage");Refresh();}
         public void StartNewCampaign(){if(!Writable||ChallengeRules.Active(State))return;Tick();Save();if(!Writable)return;string directory=Path.Combine(Path.GetDirectoryName(SavePath),"CampaignOriginals");Directory.CreateDirectory(directory);string original=Path.Combine(directory,"previous-campaign-"+Guid.NewGuid().ToString("N")+".json");store.Export(State,original);var fresh=Game.New(Now,Guid.NewGuid().ToString("N"),true);string candidate=Path.Combine(directory,"new-campaign-"+Guid.NewGuid().ToString("N")+".json");store.Export(fresh,candidate);var inspected=store.Inspect(candidate);if(!inspected.Valid)throw new InvalidDataException(inspected.Message);RecoverSave(candidate,inspected.Hash);}
         void TapFromUI(){ScientificNumber gain=ScientificNumber.Zero;bool activated=false;bool accepted=Act(s=>{var next=Game.Tap(s,s.SavedAt);gain=next.Credits.Subtract(s.Credits);activated=next.Overdrives>s.Overdrives;return next;},"tap");if(accepted){TapButton.GetComponent<LabFeedback>()?.Receipt("+"+NumberFormatting.Format(gain,State.Settings.numberFormat,State.Settings.language),activated);Audio?.Play(activated?"unlock":"ui-click");}}
+        /// <summary>Explicit, local-only migration; caller must preserve an independent
+        /// original-file copy before this transaction is submitted.</summary>
+        public bool EnableUnityV3()
+        {
+            if(!Writable||!HasReadableState||ItemSystemV3.Enabled(State))return false;
+            return Act(UnityV3Migration.Upgrade,"unity-v3-migration");
+        }
         public bool Act(Func<GameState,GameState> action,string actionName="action")
         {
             if(!Writable)return false;Audio?.Unlock();Tick();if(!Writable){Refresh();return false;}var before=State;double actionMark=Crash.Ledger.Begin("actions",actionName,Now,State.Meta.resets+":"+State.Prestige.resets);var actionWatch=System.Diagnostics.Stopwatch.StartNew();State=NarrativeBridge.Sync(before,action(State));
