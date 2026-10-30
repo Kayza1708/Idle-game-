@@ -71,7 +71,11 @@ namespace IdleIntelligence.Runtime
                 initFailure=Attach(sdkType,null,"OnInitFailed",nameof(OnInitFailed),out initFailureHandler);
                 if(initSuccess==null||initFailure==null)throw new MissingMethodException("LevelPlay init events unavailable");
                 initializing=true;
-                sdkType.GetMethod("Init",new[]{typeof(string)})?.Invoke(null,new object[]{config.AppKey});
+                var init=sdkType.GetMethods(BindingFlags.Public|BindingFlags.Static)
+                    .FirstOrDefault(m=>m.Name=="Init"&&m.GetParameters().Length==1&&
+                        m.GetParameters()[0].ParameterType==typeof(string));
+                if(init==null)throw new MissingMethodException("LevelPlay.Init(string)");
+                init.Invoke(null,new object[]{config.AppKey});
                 if(!initializing && !initialized)Debug.LogWarning("LevelPlay failed to start");
             }
             catch(Exception error)
@@ -110,7 +114,16 @@ namespace IdleIntelligence.Runtime
             initializing=false;
             try
             {
-                rewardedAd=Activator.CreateInstance(rewardType,new object[]{config.RewardedId});
+                var constructor=rewardType.GetConstructors().FirstOrDefault(c=>{
+                    var args=c.GetParameters();return args.Length>=1&&args[0].ParameterType==typeof(string)&&
+                        args.Skip(1).All(a=>a.IsOptional||!a.ParameterType.IsValueType);
+                });
+                if(constructor==null)throw new MissingMethodException("LevelPlay rewarded constructor");
+                var parameters=constructor.GetParameters();
+                var values=new object[parameters.Length];values[0]=config.RewardedId;
+                for(int i=1;i<values.Length;i++)values[i]=parameters[i].HasDefaultValue?
+                    parameters[i].DefaultValue:null;
+                rewardedAd=constructor.Invoke(values);
                 loadedEvent=Attach(rewardType,rewardedAd,"OnAdLoaded",nameof(OnLoaded),out loadedHandler);
                 loadFailedEvent=Attach(rewardType,rewardedAd,"OnAdLoadFailed",nameof(OnLoadFailed),out loadFailedHandler);
                 displayFailedEvent=Attach(rewardType,rewardedAd,"OnAdDisplayFailed",nameof(OnDisplayFailed),out displayFailedHandler);
@@ -190,20 +203,24 @@ namespace IdleIntelligence.Runtime
             if(!Ready||pending!=null||string.IsNullOrEmpty(transaction))
                 return Task.FromResult(RewardProviderResult.Unavailable);
             pending=new TaskCompletionSource<RewardProviderResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var request=pending.Task;
             currentTransaction=transaction;
             pendingCancellation=cancellation.Register(()=>pending?.TrySetResult(RewardProviderResult.Cancelled));
             try
             {
                 // One rewarded unit for the five domain reward placements; the
                 // pending transaction identifies the exact reward already quoted.
-                rewardType.GetMethod("ShowAd",Type.EmptyTypes)?.Invoke(rewardedAd,null);
+                var show=rewardType.GetMethods().FirstOrDefault(m=>m.Name=="ShowAd" &&
+                    m.GetParameters().Length<=1);
+                if(show==null)throw new MissingMethodException("LevelPlay ShowAd");
+                show.Invoke(rewardedAd,show.GetParameters().Length==0?null:new object[]{null});
             }
             catch(Exception error)
             {
                 Debug.LogWarning("LevelPlay show failed: "+error.GetBaseException().Message);
                 Finish(RewardProviderResult.Failed);
             }
-            return pending?.Task??Task.FromResult(RewardProviderResult.Failed);
+            return request;
         }
         void OnDestroy()
         {
