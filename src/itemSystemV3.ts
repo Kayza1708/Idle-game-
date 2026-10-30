@@ -21,6 +21,7 @@ export type ItemSystemV3State={
   lastLearningTrack:'quality'|'efficiency'|null;
   scannerAnalyses:number;
   recyclingFragmentProgress:number;
+  automaticResearchStarts:number;
   overdrive:{startedAt:number;burstUntil:number;creditFactor:number;dataFactor:number}|null;
   synthesisRemainders:Partial<Record<ComponentId,number>>;
   synthesisContract:{id:string;component:ComponentId;multiplier:number}|null;
@@ -28,7 +29,7 @@ export type ItemSystemV3State={
   axiomDiscovered:boolean;
   axiomDiscoveryAt:number|null;
 };
-export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,recyclingFragmentProgress:0,overdrive:null,synthesisRemainders:{},synthesisContract:null,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
+export function newItemSystemV3():ItemSystemV3State{return{version:3,dataProduced:S.zero().toJSON(),knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON(),runMinutes:0,nextTrainingSequence:1,lastCompletedTrainingSequence:0,lastTrainingCompletionCause:null,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,recyclingFragmentProgress:0,automaticResearchStarts:0,overdrive:null,synthesisRemainders:{},synthesisContract:null,archiveBlueprintRight:false,axiomDiscovered:false,axiomDiscoveryAt:null};}
 export const usesItemV3=(s:GameState)=>s.itemSystemV3?.version===3;
 const c=()=>BALANCE.itemV3;
 const one=()=>S.from(1);
@@ -260,7 +261,7 @@ export function recordItemComponentsV3(s:GameState,grant:Partial<GameState['comp
  * knowledge/components survive until the actual axiom-cycle boundary. */
 export function resetItemProductionV3(s:GameState,kind:'prestige'|'axiom'):GameState{
  if(!usesItemV3(s))return s;const v=s.itemSystemV3!;
- return{...s,itemSystemV3:{...v,dataProduced:S.zero().toJSON(),runMinutes:0,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,overdrive:null,...(kind==='axiom'?{knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON()}:{} )}};
+ return{...s,itemSystemV3:{...v,dataProduced:S.zero().toJSON(),runMinutes:0,learningStreak:0,lastLearningTrack:null,scannerAnalyses:0,automaticResearchStarts:0,overdrive:null,...(kind==='axiom'?{knowledgeProduced:S.zero().toJSON(),componentsProduced:S.zero().toJSON()}:{} )}};
 }
 
 /** Restores the old researchArchive -> I04 acquisition right. Learning stays an
@@ -272,6 +273,7 @@ function validateItemTrainingCountersV3(v:ItemSystemV3State){
  const maxP=Math.max(...c().rarityFactors)*(1+c().levelStep*(c().levelMax-1))*(1+c().forgeStep*c().forgeMax)*BALANCE.prestigeV3.items.W10ability;
  const od=v.overdrive;if(od!==null&&(!od||![od.startedAt,od.burstUntil,od.creditFactor,od.dataFactor].every(Number.isFinite)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>c().combinations.energy.seconds*1000+.001||od.creditFactor<1||od.creditFactor>(1+c().burst.coefficient*maxP)*c().combinations.energy.credits+1e-10||![1,c().combinations.energy.data].includes(od.dataFactor)))throw new RangeError('Invalid V3 overdrive contract');
  if(!v.synthesisRemainders||Object.entries(v.synthesisRemainders).some(([id,n])=>!Object.hasOwn(BALANCE.components,id)||!Number.isFinite(n)||n!<0||n!>=1)||v.synthesisContract!==null&&(!v.synthesisContract||!v.synthesisContract.id||!Object.hasOwn(BALANCE.components,v.synthesisContract.component)||!Number.isFinite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new RangeError('Invalid V3 synthesis receipt');
+ if(!Number.isSafeInteger(v.automaticResearchStarts)||v.automaticResearchStarts<0)throw new RangeError('Invalid automatic research count');
  if(!Number.isSafeInteger(v.scannerAnalyses)||v.scannerAnalyses<0||!Number.isSafeInteger(v.nextTrainingSequence)||v.nextTrainingSequence<1||!Number.isSafeInteger(v.lastCompletedTrainingSequence)||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||!Number.isSafeInteger(v.learningStreak)||v.learningStreak<0||v.learningStreak>c().logic.maxStreak||![null,'quality','efficiency'].includes(v.lastLearningTrack)||![null,'regular','bonus','intro'].includes(v.lastTrainingCompletionCause))throw new RangeError('Invalid V3 training counters');
 }
 /** Serial training IDs are assigned only after the existing start/payment
@@ -358,4 +360,4 @@ export function itemResearchTransferFractionV3(s:GameState){if(!usesItemV3(s))re
 export function itemResearchBoundaryV3(s:GameState){const fraction=itemResearchTransferFractionV3(s);if(!fraction)return Infinity;const jobs=regularItemResearchWorkV3(s);if(!jobs.length)return Infinity;const remaining=jobs.map(j=>Math.max(0,j.work.required-j.work.done)),speed=jobs[0].work.speed;if(!Number.isFinite(speed)||speed<=0)return Infinity;return Math.min(Math.min(...remaining)/speed,remaining.reduce((a,b)=>a+b,0)/(jobs.length*speed*(1+fraction)));}
 export function applyItemResearchTransferV3(s:GameState,work:Record<string,WorkContract>){const fraction=itemResearchTransferFractionV3(s);if(!fraction)return work;const jobs=regularItemResearchWorkV3(s);if(!jobs.length)return work;const budget=jobs.reduce((sum,j)=>sum+Math.max(0,work[j.id].done-j.work.done),0)*fraction,extra=distributeLongestResearchWorkV3(jobs.map(j=>Math.max(0,work[j.id].required-work[j.id].done)),budget);const result={...work};jobs.forEach((j,i)=>{if(extra[i]>0)result[j.id]={...work[j.id],done:Math.min(work[j.id].required,work[j.id].done+extra[i]),eventWork:(work[j.id].eventWork??0)+extra[i]};});return result;}
 function grantItemPhotonWorkV3(s:GameState){const item=itemV3Equipped(s).find(i=>i.type==='photonic-array'),jobs=regularItemResearchWorkV3(s);if(!item||!jobs.length)return s;const seconds=c().photon.seconds*itemAbilityStrengthV3(s,item).P*(itemCombinationV3(s,'learning-spiral').complete?c().combinations.learning.photonWork:1),speed=progressionResearchSpeed(s)*(s.labBoostUntil>s.savedAt?2:1),work={...s.progression.work};for(const j of jobs){const delta=Math.min(j.work.required-j.work.done,speed*seconds);work[j.id]={...j.work,done:j.work.done+delta,eventWork:(j.work.eventWork??0)+delta};}return synchronizeItemResearchEndsV3({...s,progression:{...s.progression,work}},s.savedAt);}
-export function synchronizeItemResearchEndsV3(s:GameState,at:number){if(!usesItemV3(s))return s;return{...s,researchLabs:s.researchLabs.map(lab=>{if(!lab||lab.intro)return lab;const work=s.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`];return !work?lab:{...lab,endsAt:at+Math.max(0,work.required-work.done)/work.speed*1000};})};}
+export function synchronizeItemResearchEndsV3(s:GameState,at:number){if(!usesItemV3(s))return s;return{...s,researchLabs:s.researchLabs.map(lab=>{if(!lab||lab.intro)return lab;const work=s.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`];return !work?lab:{...lab,endsAt:Math.max(lab.quoteBasis?.itemV3?.minimumBypassed?0:lab.quoteBasis?.itemV3?.minimumUntil??0,at+Math.max(0,work.required-work.done)/work.speed*1000)};})};}

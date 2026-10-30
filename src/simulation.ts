@@ -80,7 +80,7 @@ export const startQueuedResearchIfAffordable=startManualResearchQueue;
 
 export function settleResearchCompletions(state:GameState,trace:((step:ResearchCompletionStep)=>void)=()=>{}):GameState {
   state=settleBlueprintResearchReward(state);
-  const finished=state.researchLabs.filter((lab):lab is NonNullable<typeof lab>=>!!lab&&(usesItemV3(state)&&state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`]?state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`].done+1e-7>=state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`].required:lab.endsAt<=state.savedAt+.1));
+  const finished=state.researchLabs.filter((lab):lab is NonNullable<typeof lab>=>!!lab&&(usesItemV3(state)&&state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`]?state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`].done+1e-7>=state.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`].required&&(lab.quoteBasis?.itemV3?.minimumBypassed||(lab.quoteBasis?.itemV3?.minimumUntil??0)<=state.savedAt):lab.endsAt<=state.savedAt+.1));
   if(!finished.length)return state;
   const finishedIds=new Set(finished.map(lab=>lab.id));
   let next:GameState={...state,researchLabs:state.researchLabs.map(lab=>lab&&finishedIds.has(lab.id)?null:lab)};

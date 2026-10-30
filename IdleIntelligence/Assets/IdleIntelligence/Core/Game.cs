@@ -128,10 +128,10 @@ namespace IdleIntelligence.Core
             foreach(var r in Balance.Research[i].Requires)if(Level(s,r.Id)<r.Level)return "Benötigt "+r.Id+" "+r.Level;
             return s.Data.CompareTo(ResearchCost(s,i))<0?"Zu wenig Daten":null;
         }
-        public static GameState Research(GameState state,string id)
+        public static GameState Research(GameState state,string id,string cause="manual")
         {
             var selected=MetaRules.Phase(state,1);int i=ResearchIndex(id);if(ResearchBlock(selected,i)=="Labor belegt")return PrestigeAutomation.QueueResearch(state,id);if(ResearchBlock(selected,i)!=null)return state;
-            var s=selected.Copy();bool intro=id=="dataGeneration"&&IntroResearch(s);var paidData=ResearchCost(s,i);s.Data=s.Data.Subtract(ResearchCost(s,i));s.Workshop.nextId++;s.Workshop.revision++;var job=new Job{startRecorded=true,startedAt=s.SavedAt,id=id,key="research-"+(s.Workshop.nextId-1),identityRecorded=true,slot=AdRewards.FreeLab(s),required=ResearchWork(s,i),intro=intro,paidDataRecorded=true,paidData=paidData.ToData()};if(s.ResearchJob==null)s.ResearchJob=job;else s.Prestige.labs=s.Prestige.labs.Concat(new[]{job}).OrderBy(j=>j.slot).ToArray();s.Lifetime.researchStarted++;s.ResearchUsed|=intro;s.Workshop.lastArea=new[]{"data","architecture","model","materials","automation"}[Workshop.ResearchArea(id)];LocalJournal.Record(s,"research-start",job.key,dataCost:paidData);return Guide(s);
+            if(ItemSystemV3.Enabled(selected)&&(selected.Workshop.nextId<1||selected.Workshop.nextId>=9007199254740991L))return state;var contract=ItemSystemV3.ResearchStartQuote(selected,id,cause);var s=selected.Copy();bool intro=id=="dataGeneration"&&IntroResearch(s);var paidData=ResearchCost(s,i);s.Data=s.Data.Subtract(ResearchCost(s,i));s.Workshop.nextId++;s.Workshop.revision++;var job=new Job{startRecorded=true,startedAt=s.SavedAt,id=id,key="research-"+(s.Workshop.nextId-1),identityRecorded=true,slot=AdRewards.FreeLab(s),required=ResearchWork(s,i),intro=intro,paidDataRecorded=true,paidData=paidData.ToData()};ItemSystemV3.ApplyResearchStart(s,job,contract);if(s.ResearchJob==null)s.ResearchJob=job;else s.Prestige.labs=s.Prestige.labs.Concat(new[]{job}).OrderBy(j=>j.slot).ToArray();s.Lifetime.researchStarted++;s.ResearchUsed|=intro;s.Workshop.lastArea=new[]{"data","architecture","model","materials","automation"}[Workshop.ResearchArea(id)];LocalJournal.Record(s,"research-start",job.key,dataCost:paidData);return Guide(s);
         }
         public static GameState Guide(GameState s)
         {
@@ -146,9 +146,12 @@ namespace IdleIntelligence.Core
         }
         public static void SettleResearch(GameState s)
         {
-                if(s.ResearchJob!=null&&s.ResearchJob.done+1e-7>=s.ResearchJob.required){s.Research[ResearchIndex(s.ResearchJob.id)]++;s.Lifetime.researchCompleted++;LocalJournal.Record(s,"research-complete",s.ResearchJob.key,duration:s.ResearchJob.startRecorded?(s.SavedAt-s.ResearchJob.startedAt)/1000:-1);ChallengeRules.ResearchCompleted(s,s.ResearchJob);if(!s.ResearchJob.intro)Workshop.ResearchComplete(s,s.ResearchJob.id,s.ResearchJob);s.ResearchJob=null;}
-                foreach(var job in s.Prestige.labs.Where(j=>j.done+1e-7>=j.required).ToArray()){s.Research[ResearchIndex(job.id)]++;s.Lifetime.researchCompleted++;LocalJournal.Record(s,"research-complete",job.key,duration:job.startRecorded?(s.SavedAt-job.startedAt)/1000:-1);ChallengeRules.ResearchCompleted(s,job);if(!job.intro)Workshop.ResearchComplete(s,job.id,job);}s.Prestige.labs=s.Prestige.labs.Where(j=>j.done+1e-7<j.required).ToArray();
+                if(s.ResearchJob!=null&&ResearchReady(s,s.ResearchJob)){s.Research[ResearchIndex(s.ResearchJob.id)]++;s.Lifetime.researchCompleted++;LocalJournal.Record(s,"research-complete",s.ResearchJob.key,duration:s.ResearchJob.startRecorded?(s.SavedAt-s.ResearchJob.startedAt)/1000:-1);ChallengeRules.ResearchCompleted(s,s.ResearchJob);if(!s.ResearchJob.intro)Workshop.ResearchComplete(s,s.ResearchJob.id,s.ResearchJob);s.ResearchJob=null;}
+                foreach(var job in s.Prestige.labs.Where(j=>ResearchReady(s,j)).ToArray()){s.Research[ResearchIndex(job.id)]++;s.Lifetime.researchCompleted++;LocalJournal.Record(s,"research-complete",job.key,duration:job.startRecorded?(s.SavedAt-job.startedAt)/1000:-1);ChallengeRules.ResearchCompleted(s,job);if(!job.intro)Workshop.ResearchComplete(s,job.id,job);}s.Prestige.labs=s.Prestige.labs.Where(j=>!ResearchReady(s,j)).ToArray();
         }
+        static bool ResearchReady(GameState s,Job job)=>job.done+1e-7>=job.required&&(job.researchStartVersion!=3||job.minimumBypassed||job.minimumUntil<=s.SavedAt);
+        public static double ResearchRemainingSeconds(GameState s,Job job)=>job==null?0:Math.Max(Math.Max(0,job.required-job.done)/ResearchSpeed(s,job),job.researchStartVersion==3&&!job.minimumBypassed?Math.Max(0,(job.minimumUntil-s.SavedAt)/1000):0);
+        public static double ResearchDuration(GameState s,string id){int i=ResearchIndex(id);if(i<0)return 0;if(id=="dataGeneration"&&IntroResearch(s))return Balance.IntroResearchSeconds;var q=ItemSystemV3.ResearchStartQuote(s,id);return Math.Max(q?.minimumSeconds??0,ResearchWork(s,i)*(1-(q?.startingFraction??0))/ResearchSpeed(s));}
         public static double ResearchSpeed(GameState s,Job job=null)=>job?.intro==true?1:WorkSpeed(s,true)*(s.Upgrades.labBoostUntil>s.SavedAt?GemBalance.ResearchBoostMultiplier:1);
         public static double OfflineLimit(GameState s)=>Math.Min(Balance.MaxOfflineSeconds,Math.Max(s.Upgrades.offlineSeconds,Balance.OfflineSeconds*(1+Bonus(s,"offline")+ChallengeRules.Bonus(s,"no-taps"))));
         public static GameState Advance(GameState state,double now,bool active=false)=>AdvanceInternal(state,now,active,null);
@@ -172,10 +175,10 @@ namespace IdleIntelligence.Core
                 if(researchAutoActive)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("researchAutomationInterval")-s.Prestige.researchAutoSeconds));
                 if(agentActive)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("agentInterval")-s.Prestige.agentSeconds));
                 slice=Math.Min(slice,ItemSystemV3.ResearchBoundary(s));
-                foreach(var job in s.Prestige.labs)slice=Math.Min(slice,Math.Max(0,(job.required-job.done)/ResearchSpeed(s,job)));
+                foreach(var job in s.Prestige.labs)slice=Math.Min(slice,ResearchRemainingSeconds(s,job));
                 if(Workshop.Equipped(s).Any(i=>Workshop.Definition(i).Role=="memory")&&s.SavedAt-s.Workshop.runStartedAt<ItemBalance.MemorySeconds*1000)slice=Math.Min(slice,1);
                 if(s.Training!=null)slice=Math.Min(slice,Math.Max(0,(s.Training.required-s.Training.done)/trainSpeed));
-                if(s.ResearchJob!=null)slice=Math.Min(slice,Math.Max(0,(s.ResearchJob.required-s.ResearchJob.done)/researchSpeed));
+                if(s.ResearchJob!=null)slice=Math.Min(slice,ResearchRemainingSeconds(s,s.ResearchJob));
                 if(s.Legacy.trainingBoostUntil>s.SavedAt)slice=Math.Min(slice,(s.Legacy.trainingBoostUntil-s.SavedAt)/1000);
                 if(s.Ads.creditBoostUntil>s.SavedAt)slice=Math.Min(slice,(s.Ads.creditBoostUntil-s.SavedAt)/1000);
                 if(s.ActiveUntil>s.SavedAt)slice=Math.Min(slice,(s.ActiveUntil-s.SavedAt)/1000);

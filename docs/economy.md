@@ -842,3 +842,7 @@ Herstellungscontroller min(0,35; 0,10×P), mit bestehenden Forschungsrückgaben 
 
 ### 30.10.2026 – V3-Forschungsarbeitsereignisse in Prüfung
 Photonenfeld3×P Sekunden reguläre aktuelle Laborleistung je belegtem regulärem Labor; vollständige Lernspirale×2. Labordrohne min(40%;10%×P) neu geleisteter regulärer Forschungsarbeit an längste Restarbeiten, faire Gleichstände, keine Rekursion aus Zusatzarbeit. Zentrale vorhandene Spezifikationswerte in `BALANCE.itemV3.photon`, `.drone`, `.combinations.learning`; kein neuer Preis oder numerischer Balancewert. Alte normale Regeln erhalten.
+
+
+### 30.10.2026 – beauftragte V3-Forschungsstartverträge
+Versuchscontroller min(0,50;0,15×P) Anfangsarbeit nach Bereichswechsel. AutonomesPaar5%, vollständigesTrio jederdritte gültige automatischeStart weitere10%, unveränderte Kosten. Vorhandene aktuelle V2-Mindestdauer0,001s nach `BALANCE.itemV3.protocol.minimumBase` zentralisiert; alter60s-Pfad bleibt unverändert. Protokollcontroller max(0,5s;0,001s/(1+P)), aktuell0,5s; bewusst kein stiller Ersatz der tatsächlichenV2-Basis. Initialarbeit additiv, Frist und Arbeitsanspruch beim bezahltenStart gespeichert, keine rückwirkende Neubewertung. Normale Regeln und Preise unverändert; Startursache/53Bit-Zählgrenze sind technische Belege, keine neueWährung oderÖkonomiegrenze.

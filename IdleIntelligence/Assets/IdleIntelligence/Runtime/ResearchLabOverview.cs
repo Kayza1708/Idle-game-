@@ -25,12 +25,12 @@ namespace IdleIntelligence.Runtime {
     count=visible;WorkshopUIFactory.Clear(slots);status=new UnityEngine.UI.Text[count];metadata=new UnityEngine.UI.Text[count];time=new UnityEngine.UI.Text[count];progress=new UnityEngine.UI.Image[count];icons=new UnityEngine.UI.Image[count];keys=new string[count];
     int rows=(count+1)/2;var size=slots.GetComponent<UnityEngine.UI.LayoutElement>();size.minHeight=size.preferredHeight=rows*94+Math.Max(0,rows-1)*5;
     for(int i=0;i<count;i++){
-     int slot=i;var card=WorkshopUIFactory.Vertical("LabSlot"+i,slots);var layout=card.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();layout.padding=new RectOffset(6,6,4,4);layout.spacing=2;
+     int slot=i;var card=WorkshopUIFactory.Vertical("LabSlot"+i,slots);var layout=card.GetComponent<UnityEngine.UI.VerticalLayoutGroup>();layout.padding=new RectOffset(6,12,4,4);layout.spacing=2;
      var surface=card.AddComponent<UnityEngine.UI.Image>();GameTheme.SurfaceOn(surface,GameTheme.Surface);var button=card.AddComponent<UnityEngine.UI.Button>();button.onClick.AddListener(()=>{var job=PrestigeAutomation.ResearchJobs(game.State).FirstOrDefault(j=>j.slot==slot);if(job!=null)game.ShowDetails("research",Game.ResearchIndex(job.id));});
      var row=WorkshopUIFactory.Horizontal("LabIdentity",card.transform,26);var art=WorkshopUIFactory.Node("ResearchIcon",row.transform,typeof(UnityEngine.UI.Image),typeof(UnityEngine.UI.LayoutElement));icons[i]=art.GetComponent<UnityEngine.UI.Image>();icons[i].raycastTarget=false;icons[i].preserveAspect=true;var artSize=art.GetComponent<UnityEngine.UI.LayoutElement>();artSize.minWidth=artSize.preferredWidth=24;artSize.flexibleWidth=0;
      metadata[i]=WorkshopUIFactory.Label("LabTarget",row.transform,"",12,24);metadata[i].color=GameTheme.Accent;metadata[i].GetComponent<UnityEngine.UI.LayoutElement>().flexibleWidth=1;
      status[i]=WorkshopUIFactory.Label("ResearchName",card.transform,"",13,36);status[i].font=GameTheme.Bold;
-     time[i]=WorkshopUIFactory.Label("RemainingTime",card.transform,"",12,18);time[i].color=GameTheme.Muted;
+     time[i]=WorkshopUIFactory.Label("RemainingTime",card.transform,"",12,18);time[i].color=GameTheme.Muted;time[i].alignment=TextAnchor.MiddleRight;
      var fill=WorkshopUIFactory.Node("Progress",card.transform,typeof(UnityEngine.UI.Image),typeof(UnityEngine.UI.LayoutElement));fill.GetComponent<UnityEngine.UI.LayoutElement>().ignoreLayout=true;progress[i]=fill.GetComponent<UnityEngine.UI.Image>();progress[i].raycastTarget=false;progress[i].sprite=GameTheme.Rounded;progress[i].type=UnityEngine.UI.Image.Type.Filled;progress[i].fillMethod=UnityEngine.UI.Image.FillMethod.Horizontal;progress[i].color=GameTheme.Accent;var rect=(RectTransform)fill.transform;rect.anchorMin=Vector2.zero;rect.anchorMax=new Vector2(1,0);rect.pivot=Vector2.zero;rect.sizeDelta=new Vector2(0,3);
     }
    }
@@ -38,7 +38,7 @@ namespace IdleIntelligence.Runtime {
     var job=jobs.FirstOrDefault(j=>j.slot==i);var card=status[i].transform.parent;bool active=i<capacity||job!=null;if(card.gameObject.activeSelf!=active)card.gameObject.SetActive(active);
     int level=job==null?0:Game.Level(state,job.id)+1;string key=language+":"+(job?.key??"empty")+":"+level+":"+(i<capacity);
     if(keys[i]!=key){keys[i]=key;status[i].text=job==null?NativeCopy.Text("Frei",language):SettingsRules.Text(language,"research:"+job.id);status[i].color=job==null?GameTheme.Muted:GameTheme.Text;metadata[i].text=NativeCopy.Text("Labor",language)+" "+(i+1)+(job==null?"":" · Lv. "+level);icons[i].sprite=LearningPresentation.Icon(game,false,job?.id??"dataGeneration");}
-    string remaining=job==null?"—":(i>=capacity?NativeCopy.Text("Abschluss",language)+" · ":"")+LearningPresentation.Remaining((job.required-job.done)/(job.intro?1:Game.ResearchSpeed(state,job)),language);if(time[i].text!=remaining)time[i].text=remaining;
+    string remaining=job==null?"—":(i>=capacity?NativeCopy.Text("Abschluss",language)+" · ":"")+LearningPresentation.Remaining(Game.ResearchRemainingSeconds(state,job),language);if(time[i].text!=remaining)time[i].text=remaining;
     progress[i].fillAmount=job==null?0:(float)Math.Min(1,job.done/job.required);
    }
    int shown=Enumerable.Range(0,count).Count(i=>i<capacity||jobs.Any(j=>j.slot==i));float height=((shown+1)/2)*94+Math.Max(0,(shown+1)/2-1)*5;var slotSize=slots.GetComponent<UnityEngine.UI.LayoutElement>();if(slotSize.preferredHeight!=height)slotSize.minHeight=slotSize.preferredHeight=height;

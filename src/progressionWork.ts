@@ -1,3 +1,4 @@
+import {validateResearchStartContractV3} from './itemResearchStartV3';
 import {usesItemV3,identifyItemSynthesisV3,settleItemSynthesisV3,applyItemResearchTransferV3,synchronizeItemResearchEndsV3} from './itemSystemV3';
 import { addEvent } from "./telemetry";
 import { trainingDataCostScientific } from "./economy";
@@ -38,14 +39,15 @@ export const analysisQuantity = (s: GameState) =>
 export function prepareProgressionWork(s: GameState):GameState {
   const work = { ...s.progression.work };
   const live = new Set<string>();
-  function track(id: string, required: number, speed: number) {
+  function track(id: string, required: number, speed: number, minimumUntil=0) {
     live.add(id);
     const saved = work[id] ?? { required, done: 0, speed, quantityIntegral: 0 };
     work[id] = { ...saved, speed };
     return (
-      s.savedAt + Math.max(0, (saved.required - saved.done) / speed) * 1000
+      Math.max(minimumUntil,s.savedAt + Math.max(0, (saved.required - saved.done) / speed) * 1000)
     );
   }
+  for(const lab of s.researchLabs)if(lab?.quoteBasis?.itemV3)validateResearchStartContractV3(lab.quoteBasis.itemV3,lab.startedAt);
   const labs = s.researchLabs.map((j) =>
     !j
       ? null
@@ -64,6 +66,7 @@ export function prepareProgressionWork(s: GameState):GameState {
               ? 1
               : progressionResearchSpeed(s) *
                   (s.labBoostUntil > s.savedAt ? 2 : 1),
+            j.quoteBasis?.itemV3?.minimumBypassed?0:j.quoteBasis?.itemV3?.minimumUntil??0,
           ),
         },
   );
@@ -329,7 +332,7 @@ export function pauseMain(s: GameState, at: number) {
       : null,
     researchLabs: s.researchLabs.map((j) =>
       j
-        ? { ...j, startedAt: j.startedAt + delta, endsAt: j.endsAt + delta }
+        ? { ...j, startedAt: j.startedAt + delta, endsAt: j.endsAt + delta,...(j.quoteBasis?.itemV3?{quoteBasis:{...j.quoteBasis,itemV3:{...j.quoteBasis.itemV3,minimumUntil:j.quoteBasis.itemV3.minimumUntil+delta}}}:{}) }
         : null,
     ),
     crafting: {

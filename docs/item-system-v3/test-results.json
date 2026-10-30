@@ -848,7 +848,7 @@
     "scope": "Existing atomic batch rule now shares full native total quote with UI and transaction; original per-exemplar mastery rounding, no new prices or production planner",
     "remaining": "Full42-item acquisition, event/provenance contracts, lossless V3 file migration and very large source craft-counter/native32bit mapping still open"
   },
-  "latestVerifiedSection": "researchWorkEvents",
+  "latestVerifiedSection": "researchStartContracts",
   "familyYields": {
     "sourceHash": "49fd19a97d021a44d34d2469737bd7c76b7a4dc730bee6b11e8b16d73e17a907",
     "actualAnalysisCases": 112,
@@ -1009,5 +1009,76 @@
       "result": "Passed",
       "xmlSha256": "c39f3be36d152a8ef9ac885b62ab2f57baeb545ed4496a590117b9c68439dd4c"
     }
+  },
+  "researchStartContracts": {
+    "sourceHash": "0597f4194610752a250ed379032267e12d78e073dcdccc5c87ca266055ff741b",
+    "preparedPaidFlows": 32,
+    "newSourceTests": 6,
+    "vitest": {
+      "files": 172,
+      "tests": 2093,
+      "passed": 2093,
+      "failed": 0,
+      "seconds": 337.77,
+      "log": "/tmp/idle-v3-research-start-vitest.log"
+    },
+    "fullEditMode": {
+      "total": "223",
+      "passed": "223",
+      "failed": "0",
+      "duration": "209.4072204",
+      "result": "Passed",
+      "xmlSha256": "7ba082080edc8f4e3e1a3d7be0264b1f071d075b4ca5e4c4515f6f4e00c2102a"
+    },
+    "initialStartEditMode": {
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "duration": "1.4192294",
+      "result": "Passed",
+      "xmlSha256": "2ecb83679f8243ec064e3f11c1056fb3f77359aa0fb9a37f3c1b80ef0fee92d8"
+    },
+    "connectedResearchEditMode": {
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "duration": "2.8367045",
+      "result": "Passed",
+      "xmlSha256": "8b68a8c085a5dd3d7d0b5bb82d072b4e08ec6e43de71e38a0ec5f7517f3675b9"
+    },
+    "firstUi": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "18.309258",
+      "result": "Passed",
+      "xmlSha256": "ac855efea76dde134f58da14fd86d42a1a35379a7b48477a0cd4be4d57e86a7b"
+    },
+    "secondUi": {
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "29.899965",
+      "result": "Passed",
+      "xmlSha256": "d663488e49f8e359191557f8ec62c9bc289d072556d5dc8da4e3af844378351a"
+    },
+    "finalPlayMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "40.2932259",
+      "result": "Passed",
+      "xmlSha256": "8a0f3cc83cf46b6c56e3e479deed3ef8747a95a64c721d61c3ba158671643fbc"
+    },
+    "typecheck": "passed",
+    "build": "passed;1.95s; existing chunk warning",
+    "generatorCheck": "passed full",
+    "scope": "Snapshot paid initial work/deadline/area/cause, automatic paid counter, genuine Gem skip and both real resets retaining paid jobs; normal contracts retained; three research item details/actual remaining UI. V3 writers blocked.",
+    "graphics": "44 actual unmodified Unity PNGs in docs/media/unity-v3-research-starts; DE/EN320/390/430 and FR390 inspected across changed views. Time-card padding and nonbreaking numeric units corrected after image review; French Unequip fixed in original shared native catalog. Seven-locale fit/normal-save byte equality assertions. Prepared read-only fixture, no V3 file persistence/device/natural acquisition proof.",
+    "corrections": [
+      "First Source skip test passed invented transaction arguments instead of the real expected job and price; corrected to actual public quote, no domain balance change.",
+      "Initial self-inspection found time text too close to card border and English Unequip in French; time padding/alignment and original common native copy completed in all7 languages.",
+      "Second self-inspection found a percent unit stranded by line wrap; numeric units now nonbreaking. No new design round or images postprocessing."
+    ]
   }
 }

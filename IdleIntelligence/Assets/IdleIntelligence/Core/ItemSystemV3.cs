@@ -12,7 +12,7 @@ namespace IdleIntelligence.Core
         public int version=3;
         public ScientificNumber dataProduced=ScientificNumber.Zero,knowledgeProduced=ScientificNumber.Zero,componentsProduced=ScientificNumber.Zero;
         public double runMinutes,recyclingFragmentProgress;
-        public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak;public long scannerAnalyses;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
+        public long nextTrainingSequence=1,lastCompletedTrainingSequence;public int learningStreak;public long scannerAnalyses,automaticResearchStarts;public string lastLearningTrack,lastTrainingCompletionCause;public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt=-1;
         public double[] synthesisRemainders=new double[ItemBalance.ComponentIds.Length];public ItemV3Synthesis synthesisContract;public ItemV3Overdrive overdrive;
         public ItemV3State Copy(){var v=(ItemV3State)MemberwiseClone();v.synthesisRemainders=(double[])synthesisRemainders.Clone();v.synthesisContract=synthesisContract?.Copy();v.overdrive=overdrive?.Copy();return v;}
     }
@@ -23,9 +23,10 @@ namespace IdleIntelligence.Core
         public static void Validate(GameState s)
         {
             var v=s?.ItemSystemV3;if(v==null)return;if(PrestigeAutomation.ResearchJobs(s).Any(j=>!ScientificNumber.Finite(j.required)||j.required<=0||!ScientificNumber.Finite(j.done)||j.done<0||j.done>j.required+1e-6||!ScientificNumber.Finite(j.eventWork)||j.eventWork<0||j.eventWork>j.done+1e-6))throw new FormatException("Invalid V3 research work contract");double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");var od=v.overdrive;if(od!=null&&(!ScientificNumber.Finite(od.startedAt)||!ScientificNumber.Finite(od.burstUntil)||!ScientificNumber.Finite(od.creditFactor)||!ScientificNumber.Finite(od.dataFactor)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>C("combinations.energy.seconds")*1000+.001||od.creditFactor<1||od.creditFactor>(1+C("burst.coefficient")*maxP)*C("combinations.energy.credits")+1e-10||od.dataFactor!=1&&od.dataFactor!=C("combinations.energy.data")))throw new FormatException("Invalid V3 overdrive contract");
+            foreach(var job in PrestigeAutomation.ResearchJobs(s)){if(job.researchStartVersion!=0&&job.researchStartVersion!=3)throw new FormatException("Unknown research start contract");if(job.researchStartVersion==3&&(!new[]{"manual","queue","automatic"}.Contains(job.researchStartCause)||!new[]{"data","architecture","model","materials","automation"}.Contains(job.area)||job.previousArea!=null&&!new[]{"data","architecture","model","materials","automation"}.Contains(job.previousArea)||!ScientificNumber.Finite(job.minimumSeconds)||job.minimumSeconds<C("protocol.minimumBase")||job.minimumSeconds>Math.Max(C("protocol.minimumBase"),C("protocol.floor"))||!ScientificNumber.Finite(job.minimumUntil)||Math.Abs(job.minimumUntil-job.startedAt-job.minimumSeconds*1000)>1e-6||!ScientificNumber.Finite(job.startingFraction)||job.startingFraction<0||job.startingFraction>C("switch.cap")+C("combinations.autonomous.start")+C("combinations.autonomous.extra")+1e-12||job.eventWork+1e-6<job.required*job.startingFraction||job.automaticOrdinal<0||job.automaticOrdinal>MaxExactSequence||job.completionCause!=null&&job.completionCause!="bonus"))throw new FormatException("Invalid V3 research start contract");}
             if(!ScientificNumber.Finite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new FormatException("Invalid V3 fragment progress");
             if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
-            if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.scannerAnalyses<0||v.scannerAnalyses>MaxExactSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
+            if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.automaticResearchStarts<0||v.automaticResearchStarts>MaxExactSequence||v.scannerAnalyses<0||v.scannerAnalyses>MaxExactSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
         }
         public static void RecordProduction(GameState s,double seconds,ScientificNumber data,ScientificNumber knowledge)
         {
@@ -40,7 +41,7 @@ namespace IdleIntelligence.Core
         }
         public static void ResetProduction(GameState s,bool axiom=false)
         {
-            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;v.overdrive=null;
+            if(!Enabled(s))return;var v=s.ItemSystemV3;v.dataProduced=ScientificNumber.Zero;v.runMinutes=0;v.learningStreak=0;v.lastLearningTrack=null;v.scannerAnalyses=0;v.automaticResearchStarts=0;v.overdrive=null;
             if(axiom){v.knowledgeProduced=ScientificNumber.Zero;v.componentsProduced=ScientificNumber.Zero;}
         }
         public static ItemV3State ChallengeState(GameState main)
@@ -71,6 +72,18 @@ namespace IdleIntelligence.Core
             if(!regular||job.intro||job.id=="integration"||!Has(s,"logic-seed"))return;
             if(v.learningStreak<0||v.learningStreak>C("logic.maxStreak"))throw new FormatException("Invalid V3 learning series");
             v.learningStreak=v.lastLearningTrack==job.id?(int)Math.Floor(v.learningStreak/C("logic.sameTrackDivisor")):Math.Min((int)C("logic.maxStreak"),v.learningStreak+1);v.lastLearningTrack=job.id;
+        }
+        public sealed class ResearchStartContract
+        {
+            public string cause,area,previousArea;public double minimumSeconds,minimumUntil,startingFraction;public long automaticOrdinal;
+        }
+        public static ResearchStartContract ResearchStartQuote(GameState s,string id,string cause="manual")
+        {
+            if(!Enabled(s))return null;if(!new[]{"manual","queue","automatic"}.Contains(cause))throw new FormatException("Unknown research start cause");Validate(s);string area=new[]{"data","architecture","model","materials","automation"}[Workshop.ResearchArea(id)],previous=string.IsNullOrEmpty(s.Workshop.lastArea)?null:s.Workshop.lastArea;var protocol=Equipped(s).FirstOrDefault(i=>i.type=="protocol-controller");var controller=Equipped(s).FirstOrDefault(i=>i.type=="experiment-controller");bool automatic=cause!="manual"&&protocol!=null&&Has(s,"lab-drone");long count=s.ItemSystemV3.automaticResearchStarts;if(automatic&&count>=MaxExactSequence)throw new FormatException("Automatic research sequence exhausted");long next=count+(automatic?1:0);double minimum=protocol==null?C("protocol.minimumBase"):Math.Max(C("protocol.floor"),C("protocol.minimumBase")/(1+AbilityStrength(s,protocol))),fraction=controller!=null&&previous!=null&&area!=previous?Math.Min(C("switch.cap"),C("switch.rate")*AbilityStrength(s,controller)):0;fraction+=(automatic?C("combinations.autonomous.start"):0)+(automatic&&controller!=null&&next%(long)C("combinations.autonomous.interval")==0?C("combinations.autonomous.extra"):0);return new ResearchStartContract{cause=cause,area=area,previousArea=previous,minimumSeconds=minimum,minimumUntil=s.SavedAt+minimum*1000,startingFraction=fraction,automaticOrdinal=next};
+        }
+        public static void ApplyResearchStart(GameState s,Job job,ResearchStartContract contract)
+        {
+            if(contract==null||job.intro)return;job.researchStartVersion=3;job.researchStartCause=contract.cause;job.area=contract.area;job.previousArea=contract.previousArea;job.minimumSeconds=contract.minimumSeconds;job.minimumUntil=contract.minimumUntil;job.startingFraction=contract.startingFraction;job.automaticOrdinal=contract.automaticOrdinal;job.done=job.required*contract.startingFraction;job.eventWork=job.done;s.ItemSystemV3.automaticResearchStarts=contract.automaticOrdinal;
         }
         public static double[] DistributeLongestResearchWork(double[] remaining,double budget)
         {

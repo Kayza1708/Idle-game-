@@ -24,7 +24,7 @@ namespace IdleIntelligence.Core
     }
     [Serializable] public sealed class Job
     {
-        public string id,key;public double startedAt;public bool startRecorded;public bool identityRecorded;public int slot;public NumberData paidData;public bool paidDataRecorded; public double required,done,eventWork; public bool intro,modelTransferEligible;
+        public string id,key;public double startedAt;public bool startRecorded;public bool identityRecorded;public int slot;public NumberData paidData;public bool paidDataRecorded; public int researchStartVersion;public double minimumUntil,minimumSeconds,startingFraction;public long automaticOrdinal;public string researchStartCause,previousArea,area,completionCause;public bool minimumBypassed;public double required,done,eventWork; public bool intro,modelTransferEligible;
         public Job Copy(){var j=(Job)MemberwiseClone();if(paidDataRecorded)j.paidData=ScientificNumber.FromData(paidData).ToData();else j.paidData=null;return j;}
     }
     public sealed class GameState
