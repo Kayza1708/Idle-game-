@@ -69,7 +69,7 @@ namespace IdleIntelligence.Core
             {w.learned[n]=true;if(w.crafted[n]==0&&!w.inventory.Any(i=>i.type==ItemBalance.Items[n].Id))for(int c=0;c<need.Length;c++)need[c]+=ItemBalance.Items[n].Components[0][c];}
             for(int c=0;c<need.Length;c++){long gift=Math.Max(0,(long)need[c]-w.components[c]);w.components[c]+=gift;Lifetime.Components(s,c,gift);}w.starterGift=true;return Changed(s);
         }
-        public static bool LateAccess(GameState s,ItemDefinition d)=>d.Access!="lab"&&d.Access!="axiom"&&d.Access!="model-set"||s.Prestige.lab&&(d.Access=="axiom"?s.Meta.resets>0:d.Access=="model-set"?s.Meta.models.Count(l=>l>=0)>=3:true);
+        public static bool LateAccess(GameState s,ItemDefinition d)=>UnityV3Catalog.Unlocked(s,d.Id)&&(d.Access!="lab"&&d.Access!="axiom"&&d.Access!="model-set"||s.Prestige.lab&&(d.Access=="axiom"?s.Meta.resets>0:d.Access=="model-set"?s.Meta.models.Count(l=>l>=0)>=3:true));
         public static bool Prerequisite(GameState s,int n)=>(ItemBalance.Items[n].Starter>=0||Game.Level(s,"blueprints")>0)&&LateAccess(s,ItemBalance.Items[n])&&(!ItemSystemV3.Enabled(s)||ItemBalance.Items[n].Id!="insight-archive"||ItemSystemV3.ArchiveBlueprintRight(s));
         public static string LearnBlock(GameState s,int n)
         {
