@@ -1,7 +1,7 @@
 import {privacyRoute} from './privacy.mjs';
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
 import {socialRoute} from './social.mjs';
-import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from '../../../src/namePolicy.ts';
+import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from './name-policy.mjs';
 import {vouchersRoute} from './vouchers.mjs';
 
 // Public read routes deliberately expose no private inventory, gems or session identifiers.
