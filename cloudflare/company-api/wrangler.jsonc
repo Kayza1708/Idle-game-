@@ -28,6 +28,16 @@
       }
     },
     {
+      "name": "AUTH_RATE_LIMIT",
+      "namespace_id": "5004",
+      "simple": { "limit": 10, "period": 60 }
+    },
+    {
+      "name": "TELEMETRY_RATE_LIMIT",
+      "namespace_id": "5005",
+      "simple": { "limit": 8, "period": 60 }
+    },
+    {
       "name": "NAME_CHECK_LIMIT",
       "namespace_id": "5003",
       "simple": {
