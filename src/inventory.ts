@@ -1,5 +1,5 @@
 import {usesItemV3,itemCraftRecoveryFractionV3} from './itemSystemV3';
-import {lateMetaItemUnlocked} from './economy';
+import {lateMetaItemUnlocked,newV3ItemCatalog} from './economy';
 import {automaticCanSpendData} from './progressionWork';
 import {activeSlotIds} from './progression';
 import {automationFeatureUnlocked} from './economy';
@@ -56,7 +56,7 @@ export function createItem(s:GameState,type:ItemTypeId,rarity:Rarity){
  const item:Item={id:`item-${s.nextId}`,type,rarity,level:1,locked:false,relayTaps:type==='impulse-relay'?0:undefined},collectedTypes=s.lifetime.itemTypes.includes(type)?s.lifetime.itemTypes:[...s.lifetime.itemTypes,type];
  return addEvent({...s,nextId:s.nextId+1,inventory:[...s.inventory,item],lifetime:{...s.lifetime,itemTypes:collectedTypes}},'item-create',s.savedAt,{id:item.id,type,rarity});
 }
-export function randomItem(s:GameState,rng=Math.random){const types=(Object.keys(itemTypes) as ItemTypeId[]).filter(type=>type!=='impulse-relay'&&type!=='insight-archive'&&lateMetaItemUnlocked(s,type));return createItem(s,types[Math.floor(rng()*types.length)%types.length],'common');}
+export function randomItem(s:GameState,rng=Math.random){const types=(Object.keys(itemTypes) as ItemTypeId[]).filter(type=>type!=='impulse-relay'&&type!=='insight-archive'&&!Object.hasOwn(newV3ItemCatalog,type)&&lateMetaItemUnlocked(s,type));return createItem(s,types[Math.floor(rng()*types.length)%types.length],'common');}
 const jobDetails=(job:CraftingJob)=>({jobId:job.id,recipe:job.recipeId,quantity:job.quantity,ingredients:JSON.stringify(job.ingredients),duration:job.durationPerUnit*job.quantity,result:job.result.id,startedAt:job.startedAt,endsAt:job.endsAt,completed:job.completed,resultQuantity:0,exactDataCost:ScientificNumber.from(job.ingredients.data).toScientificString(16)});
 function startCraftingJob(s:GameState,job:CraftingJob,startedAt=s.savedAt){const active={...job,startedAt,endsAt:startedAt+job.durationPerUnit*1000};return addEvent({...s,crafting:{...s.crafting,active}},'crafting_started',s.savedAt,jobDetails(active));}
 function enqueuePaid(s:GameState,job:CraftingJob){const queued=addEvent(s,'crafting_queued',s.savedAt,jobDetails(job));return queued.crafting.active?{...queued,crafting:{...queued.crafting,queue:[...queued.crafting.queue,job]}}:startCraftingJob(queued,job);}
