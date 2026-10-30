@@ -10,5 +10,6 @@
   <ItemGroup>
     <Compile Include="../Assets/IdleIntelligence/Core/**/*.cs" />
     <Compile Include="Smoke.cs" />
+    <Compile Include="V3FreshCampaignChecks.cs" />
   </ItemGroup>
 </Project>
