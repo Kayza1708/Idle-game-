@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
-      - name: Simulate paid-only 30-minute Unity V3 fresh progression
+      - name: Simulate paid-only 120-minute Unity V3 fresh progression
         run: dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj --configuration Release -- --balance
       - uses: actions/upload-artifact@v4
         if: always()
