@@ -32,7 +32,7 @@ namespace IdleIntelligence.Core
             foreach(var job in PrestigeAutomation.ResearchJobs(s)){if(job.researchStartVersion!=0&&job.researchStartVersion!=3)throw new FormatException("Unknown research start contract");if(job.researchStartVersion==3&&(!new[]{"manual","queue","automatic"}.Contains(job.researchStartCause)||!new[]{"data","architecture","model","materials","automation"}.Contains(job.area)||job.previousArea!=null&&!new[]{"data","architecture","model","materials","automation"}.Contains(job.previousArea)||!ScientificNumber.Finite(job.minimumSeconds)||job.minimumSeconds<C("protocol.minimumBase")||job.minimumSeconds>Math.Max(C("protocol.minimumBase"),C("protocol.floor"))||!ScientificNumber.Finite(job.minimumUntil)||Math.Abs(job.minimumUntil-job.startedAt-job.minimumSeconds*1000)>1e-6||!ScientificNumber.Finite(job.startingFraction)||job.startingFraction<0||job.startingFraction>C("switch.cap")+C("combinations.autonomous.start")+C("combinations.autonomous.extra")+1e-12||job.eventWork+1e-6<job.required*job.startingFraction||job.automaticOrdinal<0||job.automaticOrdinal>MaxExactSequence||job.completionCause!=null&&job.completionCause!="bonus"))throw new FormatException("Invalid V3 research start contract");}
             if(!ScientificNumber.Finite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new FormatException("Invalid V3 fragment progress");
             if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
-            if(v.capacitorCompletedJobs==null||v.capacitorCompletedJobs.Length>4096||v.capacitorCompletedJobs.Any(id=>string.IsNullOrEmpty(id)||id.Length>200)||v.capacitorCompletedJobs.Distinct().Count()!=v.capacitorCompletedJobs.Length||
+            if(v.capacitorCompletedJobs==null||v.capacitorCompletedJobs.Length>256||v.capacitorCompletedJobs.Any(id=>string.IsNullOrEmpty(id)||id.Length>200)||v.capacitorCompletedJobs.Distinct().Count()!=v.capacitorCompletedJobs.Length||
                 new[]{v.gradientStoredWork,v.gradientAccruedWork,v.gradientLastRequirement,v.capacitorFraction,v.axiomAnchorSeconds,v.axiomAnchorFactor,v.axiomAnchorFirstSeconds,v.axiomAnchorFirstFactor}.Any(n=>!ScientificNumber.Finite(n)||n<0)||
                 v.axiomAnchorFirstFactor<1||v.axiomAnchorFirstSeconds>v.axiomAnchorSeconds||v.libraryAnalyses<0||v.libraryAnalyses>=5||v.libraryLastReceipt!=null&&v.libraryLastReceipt.Length>200||
                 v.capacitorFraction>=1||v.axiomAnchorFactor<1||v.axiomAnchorSeconds>C("axiomAnchor.minutes")*60+1e-7||
@@ -126,10 +126,12 @@ namespace IdleIntelligence.Core
             var capacitor=Equipped(s).FirstOrDefault(i=>i.type=="overdrive-capacitor");
             if(capacitor==null)return;
             var v=s.ItemSystemV3;
-            if(v.capacitorCompletedJobs.Length>=4096)return;
-            v.capacitorCompletedJobs=v.capacitorCompletedJobs.Concat(new[]{job.key}).ToArray();
+            // Paid research jobs disappear from active labs after settlement. Keep a
+            // bounded exact-receipt window for reload/duplicate-callback protection;
+            // never permanently disable the item after thousands of research jobs.
+            v.capacitorCompletedJobs=v.capacitorCompletedJobs.Skip(Math.Max(0,v.capacitorCompletedJobs.Length-255)).Concat(new[]{job.key}).ToArray();
             double amount=C("capacitor.charge")*AbilityStrength(s,capacitor)+v.capacitorFraction;
-            int whole=Math.Max(0,Math.Min((int)C("prestige.training.integrationLimit"),(int)Math.Floor(amount)));
+            int whole=(int)Math.Max(0,Math.Min((double)Balance.OverdriveCharge,Math.Floor(amount)));
             v.capacitorFraction=amount-Math.Floor(amount);
             s.Charge=Math.Min((int)Balance.OverdriveCharge,s.Charge+whole);
             if(s.Charge>=Balance.OverdriveCharge&&s.SavedAt>=s.CooldownUntil&&

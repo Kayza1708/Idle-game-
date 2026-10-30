@@ -18,10 +18,10 @@ namespace IdleIntelligence.Core
     {
         public const int Version=25;
         public const string Format="idle-intelligence-unity-slice";
-        readonly string path;readonly IEnvelopeCodec codec;
+        readonly string path;readonly IEnvelopeCodec codec;readonly bool freshV3;
         bool writable;string diskHash;public IAtomicSaveProfiling Profiling;
         public string PathName=>path;
-        public AtomicSaveStore(string path,IEnvelopeCodec codec) {this.path=path;this.codec=codec;}
+        public AtomicSaveStore(string path,IEnvelopeCodec codec,bool freshV3=false) {this.path=path;this.codec=codec;this.freshV3=freshV3;}
         static string Hash(string payload) {using(var sha=SHA256.Create())return BitConverter.ToString(sha.ComputeHash(Encoding.UTF8.GetBytes(payload))).Replace("-","").ToLowerInvariant();}
         static bool ResearchIdentities(MainStateData d)=>d!=null&&(!d.hasResearchJob||d.researchJob?.identityRecorded==true)&&d.prestige?.labs!=null&&System.Linq.Enumerable.All(d.prestige.labs,j=>j?.identityRecorded==true);
         GameState Read(string filename)=>Read(filename,out _);
@@ -47,7 +47,7 @@ namespace IdleIntelligence.Core
                     diskHash=null;
                     // A crash before the first commit must not destroy its pending payload.
                     if(File.Exists(path+".pending")||File.Exists(path+".backup"))return new SaveLoad{Message="Hauptstand fehlt. Vorhandene Recoverydateien sichern; Speichern gesperrt."};
-                    writable=true;return new SaveLoad{State=Game.New(now,guided:true),Writable=true};
+                    writable=true;return new SaveLoad{State=freshV3?Game.NewV3(now,guided:true):Game.New(now,guided:true),Writable=true};
                 }
                 try {if(new FileInfo(path).Length>32*1024*1024)throw new FormatException("Save too large");var mainBytes=File.ReadAllBytes(path);var s=ReadJson(new UTF8Encoding(false,true).GetString(mainBytes).TrimStart('\uFEFF'),out int loadedVersion);diskHash=BytesHash(mainBytes);if(diskHash!=FileHash(path))throw new IOException("Save changed while loading");if(File.Exists(path+".pending"))return new SaveLoad{State=s,Message="Unterbrochener Schreibvorgang vorhanden; Original und Pendingdatei bleiben erhalten. Speichern gesperrt."};if(loadedVersion<Version){string original=File.ReadAllText(path),copy=path+".v"+loadedVersion+"-original-"+Hash(original);if(!File.Exists(copy))File.Copy(path,copy,false);else if(File.ReadAllText(copy)!=original)throw new IOException("Migrationskopie stimmt nicht überein.");}writable=true;return new SaveLoad{State=s,Writable=true};}
                 catch(NotSupportedException){throw;}

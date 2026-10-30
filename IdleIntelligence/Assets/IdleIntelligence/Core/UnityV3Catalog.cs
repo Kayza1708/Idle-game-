@@ -15,6 +15,22 @@ namespace IdleIntelligence.Core
             "fleet-coordinator","gradient-buffer","overdrive-capacitor",
             "synthesis-coordinator","singularity-lens","axiom-anchor"
         };
+        // Native-only product names: en, de, es, fr, pt, it, pl.
+        static readonly string[] Languages={"en","de","es","fr","pt","it","pl"};
+        static readonly Dictionary<string,string[]> Names=new Dictionary<string,string[]>{
+            {"fleet-coordinator",new[]{"Fleet Coordinator","Flottenkoordinator","Coordinador de flota","Coordinateur de flotte","Coordenador de frota","Coordinatore di flotta","Koordynator floty"}},
+            {"gradient-buffer",new[]{"Gradient Buffer","Gradientenspeicher","Búfer de gradiente","Tampon de gradient","Buffer de gradiente","Buffer del gradiente","Bufor gradientu"}},
+            {"overdrive-capacitor",new[]{"Overdrive Capacitor","Overdrive-Kondensator","Condensador de sobrecarga","Condensateur d'overdrive","Capacitor de sobrecarga","Condensatore overdrive","Kondensator nadbiegu"}},
+            {"synthesis-coordinator",new[]{"Synthesis Coordinator","Synthesekoordinator","Coordinador de síntesis","Coordinateur de synthèse","Coordenador de síntese","Coordinatore di sintesi","Koordynator syntezy"}},
+            {"singularity-lens",new[]{"Singularity Lens","Singularitätslinse","Lente de singularidad","Lentille de singularité","Lente de singularidade","Lente della singolarità","Soczewka osobliwości"}},
+            {"axiom-anchor",new[]{"Axiom Anchor","Axiomanker","Ancla axiomática","Ancre d'axiome","Âncora axiomática","Ancora degli assiomi","Kotwica aksjomatu"}}
+        };
+        public static string LocalizedName(string id,string language)
+        {
+            if(!Names.TryGetValue(id,out var translations))return id;
+            int index=Array.IndexOf(Languages,language);
+            return translations[index<0?0:index];
+        }
         static int Component(string id)
         {
             int index=Array.IndexOf(ItemBalance.ComponentIds,id);

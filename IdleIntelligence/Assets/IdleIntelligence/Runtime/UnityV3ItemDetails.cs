@@ -38,7 +38,7 @@ namespace IdleIntelligence.Runtime
             }
         }
         static string Title(GameState s,ItemInstance item)
-            =>s.Settings.language=="de"?Workshop.Definition(item).Name:English(item.type);
+            =>UnityV3Catalog.LocalizedName(item.type,s.Settings.language);
         public static string Primary(GameState s,ItemInstance item)
         {
             var v=s.ItemSystemV3;double p=ItemSystemV3.AbilityStrength(s,item);

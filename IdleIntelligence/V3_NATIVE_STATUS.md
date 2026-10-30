@@ -1,33 +1,51 @@
-# Idle Intelligence V3 — Unity only
+# Idle Intelligence V3 — nativer Unity-Teststand
 
-**Source:** `IdleIntelligence/` contains the native C# changes. No V3 changes to TypeScript are required by this branch. This remains an **unmerged draft** until native Unity Editor tests and an actual Player test succeed.
+**Wichtig:** [PR #161](https://github.com/Kayza1708/Idle-game-/pull/161) wurde bereits auf einem älteren Commit nach `main` gemergt. Die aktuellen, **danach entstandenen** Arbeiten liegen in [Draft-PR #162](https://github.com/Kayza1708/Idle-game-/pull/162) auf `codex/unity-v3-fresh-playtest-20261030`. Die aktuellen Tests und die 120-Minuten-Messwerte gelten für diesen weiterentwickelten Branch, nicht zwingend für den schon gemergten `main`-Stand.
 
-## Implemented on the native Unity branch
+Alle Spielcodeänderungen dieser Weiterentwicklung liegen in **`IdleIntelligence/` (Unity/C#)**. TypeScript bleibt unverändert.
 
-- 42 item identifiers, with old 36 positions unchanged, native-only six recipes, module/material costs and late-progression gates.
-- Real C# per-event contracts: gradient carry only on regular paid training work; capacitor charge from paid research completions with idempotent receipts; axiom anchor after true axiom reset only.
-- Compute, synthesis and axiom memory combinations: fleet coordinator, raw hardware singularity lens and synthesis work; two-stage 15-minute axiom memory; scientific-library blueprint progress on real fifth analysis completion.
-- Native 32x32 point-filtered sprites for each of the six new items and current-value/combination item-detail descriptions.
-- Explicit opt-in migration from 36 to 42 items, preserving old ordinal ownership, mastered blueprints, paid resources, equipped items and isolated challenge main state. Unity save envelope v25 persists V3 counters; old v24 source is copied before switching.
-- Native Core (without Editor dependencies) compiles and runs smoke assertions using `dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj -c Release`.
+## V3-Start ohne Altspielstand
 
-## What is verified
+Der produktive Unity-Spielstart ruft `Game.NewV3(...)` auf und aktiviert alle V3-Regeln von der ersten Session an. Gespeichert wird unter:
 
-GitHub Action `Unity V3 CSharp core checks` compiles `IdleIntelligence/Assets/IdleIntelligence/Core` and runs direct C# transactions. `UnityV3CompletionTests.cs` additionally defines NUnit tests for the Editor, including old v24 import, save roundtrip, 42 native item types and live combination contracts. These Editor tests **are not claimed as executed** until run in the Unity Test Runner.
+`Application.persistentDataPath/idle-intelligence-unity-v3.json`
 
-## Native Editor and player acceptance on macOS
+Die vorherige Unity-Datei `unity-slice-v1.json` wird dabei **nicht geladen oder überschrieben**. Die Aktion „Neue Kampagne“ startet ebenfalls erneut mit V3. Du brauchst weder eine Datenmigration noch alte Item-/Progressionswerte.
 
-1. Open the `IdleIntelligence` project with the Unity Editor version pinned in `ProjectSettings/ProjectVersion.txt`.
-2. Open **Window → General → Test Runner**, select **EditMode**, and run `UnityV3CompletionTests` and the full suite. Then run the existing PlayMode tests.
-3. Use **Idle Intelligence → V3 → Build macOS Smoke Player** to produce `Builds/V3-Smoke.app`, launch it and test a new profile, all six item details, paid research/training completions, prestige and axiom resets, challenge return and save/reload.
-4. Use **Idle Intelligence → V3 → Build iOS Player** to produce `Builds/V3-iOS`. Open the generated Xcode project, run it on an iPhone or simulator and verify UI, 30-minute credited-duration behavior and storage migration before any store submission.
-5. On a copied **v24** save, use Storage → Preview Unity V3 migration. Confirm that ownership, INT, axioms, paid jobs, equipped IDs and challenge main are unchanged. Only then explicitly opt in. Confirm there is an untouched file in `V3Originals`.
+## Was implementiert ist
 
-The build menu items require an installed licensed Unity editor and relevant platform modules. Their presence alone does **not** establish that any player was built or launched.
+- 42 native Items, sechs neue bezahlte Rezepte, native Freischaltbedingungen und sieben sprachspezifische Namen (`en,de,es,fr,pt,it,pl`).
+- Gradientenspeicher, Overdrive-Kondensator, Axiomanker, Flottenkoordinator, Synthesekoordinator und Singularitätslinse mit Berechnungen im Unity-C#-Gameplay.
+- 12 Itemkombinationen, darunter zeitabhängiger Axiom-Resetvertrag, Forschungstransfer, Synthese-Ausbeute und die fünfte Analyse der Wissenschaftlichen Bibliothek.
+- Native 32×32-Pixelmotive, Inventar-/Bauplan-/Itemdetail-Anzeige, Werte und Ausrüstungsbedingungen.
+- Atomare native Unity-V3-Speicherung (Version 25), ohne dass eine V2-Migration für den Spielstart benötigt wird.
 
-## Release blockers
+## Erfolgreiche native C#-Checks
 
-- **CI type scope:** Core C# smoke is not a substitute for Unity Editor/Runtime UnityEngine compile, EditMode/PlayMode testing, an iOS Xcode build or playtesting.
-- Original Unity generated reference fixtures still describe 36 historical items. The new six are kept separate in a Unity-owned extension. A repo-wide TypeScript export check may flag the intentional native-only table change; do not claim old fixture parity for the new six.
-- Verify the broader 12 combinations and all Prestige/Axiom interactions during Editor/Player tests; current unit contracts do not establish a multi-week natural retention/balance playthrough.
-- Do not merge, update existing production saves automatically, or publish the Player until these gates pass.
+- Neue V3: erster Hardwarekauf, aktive 30 Sekunden Produktion, bezahltes Training und Forschungsstart mit echten Ereignis-IDs.
+- Alle sechs Items: Rezeptbezahlung, Herstellung, Inventarzähler, Wiederherstellung des Zustands.
+- Alle **12 Itemkombinationen**, mit tatsächlich ausgerüsteten, slotkonformen Items und ihren Rechenpfaden.
+- Alle **60 Prestige-Nodes** und **24 Axiome**: native Compute-/Credits-/Daten-/Training-/Forschungsrechenpfade; außerdem zehn KI-Modelle im Katalog.
+- Kein unendlicher Overdrive-Kondensator-Speicher: jüngste 256 Forschungsbelege plus einmalige reguläre Completion.
+- **120-Minuten-Balance-Probe** mit bezahlten Gameplayaktionen ohne Ressourcengeschenke, als CSV in den GitHub-Actions-Artefakten.
+
+Daten, Strategie, Einschränkungen: [V3_BALANCE_BASELINE.md](V3_BALANCE_BASELINE.md). Die erste INT-Freigabe liegt bei der einfachen Botstrategie zwischen Minute 90 und Minute 120.
+
+Diese Prüfungen bauen den echten C#-Core mit .NET. **Das ist kein erfolgreicher Unity-Editor-, PlayMode- oder nativer iOS-Player-Build.**
+
+## Jetzt auf deinem Mac testen
+
+1. In deinem Repository `git fetch origin` und `git switch codex/unity-v3-fresh-playtest-20261030` ausführen (vorher ungespeicherte lokale Änderungen sichern).
+2. Mit **Unity 6000.3.26f1** den Projektordner `IdleIntelligence/` öffnen.
+3. Im Unity-Editor die Szene starten. Dadurch wird ein **frischer V3-Spielstand** unter dem neuen Dateinamen angelegt. Die alte `unity-slice-v1.json` bleibt unangetastet.
+4. Über **Window → General → Test Runner → EditMode** die Testklasse `UnityV3CompletionTests` und anschließend die komplette Testsuite ausführen. PlayMode-Tests separat ausführen.
+5. Über **Idle Intelligence → V3 → Build macOS Smoke Player** den nativen macOS-Testplayer bauen. Hardware, Training, Forschung, Itemmenü, Prestige, Axiome, Boni, Save/Reload und Challenge-Rückkehr prüfen.
+6. Über **Idle Intelligence → V3 → Build iOS Player** den iOS-Player erstellen; das Xcode-Projekt auf iPhone oder Simulator auf Touchbedienung, UI, Performance und Speicherzugriffe testen.
+
+Der tatsächliche Unity-Player-Build erfordert lokal einen lauffähigen Unity-Editor und das passende Buildmodul. Es wird durch das Vorhandensein der Build-Menüs **nicht** behauptet, dass ein solcher Player bereits erstellt wurde.
+
+## Vor einem Release weiter offen
+
+- Tatsächliche Unity-Engine-Kompilierung, EditMode/PlayMode-Suite, macOS/iOS-Testplayer und sichtbare Pixelgrafikabnahme.
+- Menschlicher Langzeit-/Balancingtest: 120 Minuten Script mit eingeschränkter Botstrategie sind keine repräsentative Nutzungsstudie.
+- UI und Prestige-/Axiom-Effekte im realen Unity-Player verifizieren, bevor der Draft-PR gemergt und ein Store-Release erwogen wird.
