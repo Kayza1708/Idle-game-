@@ -51,7 +51,7 @@ export async function ingestTelemetry({request,db,player,now,reply,ApiError,payl
    if(/telemetry_daily_limit/i.test(String(error)))throw new ApiError(429,'telemetry_daily_limit');
    throw error;
   }
-  if(result.meta?.changes)accepted++;
+  if((result.meta?.changes??result.changes??0)>0)accepted++;
   else duplicates++;
  }
  return reply({accepted,duplicates,serverTime:now});
