@@ -347,3 +347,13 @@ Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beiden
 - [ ] Verlustfreie V3-Dateimigration und vollständige reale Balance-/Playerabnahme. **V3 noch nicht freigeben.**
 
 Details: [V3 Industrieeffekte](item-system-v3/industrial-consumers.md).
+
+
+## 30.10.2026 – Unity-only-Repository-Cleanup (Draft-PR #164)
+
+- [x] 118 historische Design-/Screenshot-/Video-/Verifikationsdateien der alten Unity-Designrunden 01–03 aus dem aktuellen Checkout archiviert (15.644.655 Bytes); Spiellogik, verwendete Assets und Unit-/Sourceparitätstests unverändert.
+- [x] Unity-first README/Arbeitsregeln und korrekten Status der bereits gemergten PRs #162/#163 dokumentiert (Werbeänderungen #163 nicht automatisch in `main`).
+- [ ] Native Unity-Engine-/Player-Tests und reale Ads/IAP/Backendintegration vor Release nachweisen; kein Simulator als Device-Freigabe deklarieren.
+- [ ] Die noch TS-basierten 25 generierten C#-Daten und 23 ReferenceCases-JSON-Files (ca. 181,5 MB) durch unabhängig reproduzierbare C#-Daten-/Goldensysteme ersetzen; danach TS-/Capacitor-Altlasten in eigenem PR entfernen. Nicht vorher.
+
+Aktuelle Analyse und freigegebene Löschliste: [Unity Repository Cleanup](UNITY_REPO_CLEANUP.md).
