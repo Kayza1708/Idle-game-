@@ -357,3 +357,17 @@ Details: [V3 Industrieeffekte](item-system-v3/industrial-consumers.md).
 - [ ] Die noch TS-basierten 25 generierten C#-Daten und 23 ReferenceCases-JSON-Files (ca. 181,5 MB) durch unabhängig reproduzierbare C#-Daten-/Goldensysteme ersetzen; danach TS-/Capacitor-Altlasten in eigenem PR entfernen. Nicht vorher.
 
 Aktuelle Analyse und freigegebene Löschliste: [Unity Repository Cleanup](UNITY_REPO_CLEANUP.md).
+
+
+## 30.10.2026 – Native Unity Online-/Analytics-Durability (PR #166)
+- [x] C#-Telemetriequeue mit explizitem Opt-in, validiertem max.-48-Ereignisse-Journal, atomarer Offline-Persistenz und sofortiger Datenlöschung beim Widerruf; ein `session_end` pro Sitzung und `first_purchase` nur bei echtem erstem Lifetime-Kauf.
+- [x] Cloudflare D1/D7 nur für zustimmende Onlinekonto-Kohorten mit vollständigem UTC-Rückkehrfenster; keine Install-/Gesamtspieleretention behauptet. Verifizierte SQLite-Tests für D1-D7-Kohortenselektion.
+- [x] Serverseitiger Ausschluss überlappender UTC-Saisons via D1-Migration 0012 (keine Remote-Ausführung).
+- [x] Google Play Games serverseitiger Einmalcode via Worker und optionaler nativer Unity Android-Adapter nachgetragen; Authentifizierung benötigt offiziell eingebundenen Plugin-/OAuth-Gerätefluss.
+- [x] Ein eigenständiger Unity-C#-Katalog mit 25 eingefrorenen, gehashten Sourceblobs; native CI testet nach temporärer Entfernung aller alten TS/npm/Web-Dateien den Kern und die 120-Minuten-Balance.
+- [ ] Verifizierter Unity-Editor-/PlayMode-/macOS-/iOS-/Android-Player mit echten SDKs, Google-Play-Games-/Apple-Login und gesicherter Konto-/Cloud-Recovery.
+- [ ] Serverautoritärer Nachweis von 1.000 INT, verified Gems/Inventar-/Handelsrechten; bisher sind lokale Spielstände ausdrücklich nicht vertrauenswürdig und können keine Companies freischalten.
+- [ ] Alle 23 großen ReferenceCases-JSON-Fixtures durch geprüfte native Verhaltensparität ersetzen; Unity-Editor und komplette Features abnehmen, bevor der TypeScript-/Capacitor-Client gelöscht wird.
+- [ ] Remote-Cloudflare-Rollout, Datenbank-Backups, 0011/0012-Migration, Consent-/Privacy-Review, Device-Smoke und LiveOps-Operator-Prozess gesondert freigeben.
+
+Prüf- und Setup-Anleitung: [Unity Online Release Gates](../IdleIntelligence/UNITY_ONLINE_RELEASE_GATES.md). Die C#-Unitchecks allein belegen keine vollständige TS→Unity-Migration oder einen Store-Release.
