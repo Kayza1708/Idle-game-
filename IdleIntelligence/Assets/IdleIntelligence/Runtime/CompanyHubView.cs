@@ -88,6 +88,12 @@ namespace IdleIntelligence.Runtime
                       de?"Online-Gastkonto erstellen":"Create online guest account",()=>{
                         game.Online.CreateGuestAccount(ok=>{if(this!=null)ShowGate();});
                       });
+#if UNITY_ANDROID && IDLE_GOOGLE_PLAY_GAMES && !UNITY_EDITOR
+                    WorkshopUIFactory.Button("CompanyConnectPlayGames",content,
+                      de?"Mit Play Games anmelden":"Sign in with Play Games",()=>{
+                        game.Online.SignInWithPlayGames(ok=>{if(this!=null)ShowGate();});
+                      });
+#endif
 #if UNITY_IOS && !UNITY_EDITOR
                     WorkshopUIFactory.Button("CompanyConnectApple",content,
                       de?"Mit Apple verbinden":"Connect with Apple",()=>{
@@ -100,6 +106,12 @@ namespace IdleIntelligence.Runtime
                     WorkshopUIFactory.Label("CompanyAuthState",content,de?
                       "Sitzung verbunden. Company-Zugang und Handel erfordern trotzdem serverseitig geprüfte Berechtigungen.":
                       "Session connected. Company access and trading still require server-verified entitlements.",13,90);
+#if UNITY_ANDROID && IDLE_GOOGLE_PLAY_GAMES && !UNITY_EDITOR
+                    WorkshopUIFactory.Button("CompanyLinkPlayGames",content,
+                      de?"Play Games sicher verknüpfen":"Securely link Play Games",()=>{
+                        game.Online.SignInWithPlayGames(ok=>{if(this!=null)ShowGate();});
+                      });
+#endif
                     WorkshopUIFactory.Button("CompanyDisconnect",content,
                       de?"Online-Konto trennen":"Disconnect online account",()=>{
                         game.Online.Disconnect();ShowGate();
