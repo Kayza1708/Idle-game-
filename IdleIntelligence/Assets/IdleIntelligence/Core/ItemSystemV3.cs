@@ -215,14 +215,17 @@ namespace IdleIntelligence.Core
             double power=C("lens.exponent")*ExponentStrength(s,item)*(combined?C("combinations.industrial.lensExponent"):1);
             return (raw.CompareTo(ScientificNumber.One)<0?ScientificNumber.One:raw).Pow(power);
         }
+        public static double SynthesisCoordinatorFactor(GameState s,ItemInstance item)
+        {
+            double p=AbilityStrength(s,item),q=ExponentStrength(s,item);
+            double produced=s.ItemSystemV3.componentsProduced.Add(ScientificNumber.One).Log10();
+            return Math.Pow(C("synthesis.base"),p)*Math.Pow(1+produced/C("synthesis.componentLogScale"),C("synthesis.exponent")*q);
+        }
         public static double SynthesisWorkFactor(GameState s)
         {
             if(!Enabled(s))return 1;
             var item=Equipped(s).FirstOrDefault(i=>i.type=="synthesis-coordinator");
-            if(item==null)return 1;
-            double p=AbilityStrength(s,item),q=ExponentStrength(s,item);
-            double produced=s.ItemSystemV3.componentsProduced.Add(ScientificNumber.One).Log10();
-            return Math.Pow(C("synthesis.base"),p)*Math.Pow(1+produced/C("synthesis.componentLogScale"),C("synthesis.exponent")*q);
+            return item==null?1:SynthesisCoordinatorFactor(s,item);
         }
         public static ScientificNumber ComputeFactor(GameState s)
         {
