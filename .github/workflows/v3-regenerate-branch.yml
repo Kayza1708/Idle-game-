@@ -21,6 +21,7 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: npm run typecheck
       - name: Generate all Unity reference data from TypeScript
         run: npm run unity:export
       - name: Commit generated data to this branch only
