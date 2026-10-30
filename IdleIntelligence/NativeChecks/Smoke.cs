@@ -109,6 +109,7 @@ class Smoke
             "legacy main blueprint rights preserved");
         Check(oldMain.ItemSystemV3==null&&oldMain.Workshop.learned.Length==36,
             "original challenge main unchanged");
+        V3FreshCampaignChecks.Run();
         Console.WriteLine("UNITY NATIVE V3 CORE SMOKE OK");
     }
 }
