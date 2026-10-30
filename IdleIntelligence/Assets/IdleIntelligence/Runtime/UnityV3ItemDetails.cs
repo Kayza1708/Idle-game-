@@ -99,8 +99,9 @@ namespace IdleIntelligence.Runtime
                 lines.Add("\n<b>"+entry.Key+"</b> · "+owned+"/3");
                 lines.Add(missing.Length==0?L("Vollständiger Build aktiv","Full build active")
                     :L("Fehlt: ","Missing: ")+string.Join(", ",missing));
-                if(owned>=2)lines.Add(L("Zweierbonus aktiv (nur mit erstem und zweitem Teil).",
-                    "Pair bonus active only when first two parts are equipped."));
+                bool pair=ItemSystemV3.Has(s,entry.Value[0])&&ItemSystemV3.Has(s,entry.Value[1]);
+                if(pair)lines.Add(L("Zweierbonus aktiv","Pair bonus active"));
+                else lines.Add(L("Zweierbonus noch gesperrt","Pair bonus still locked"));
             }
             string slot=Workshop.EquipmentSlot(s,item.id,requestedSlot);
             if(slot!=null&&!worn){
