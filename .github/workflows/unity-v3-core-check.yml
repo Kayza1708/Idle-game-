@@ -21,3 +21,20 @@ jobs:
           dotnet-version: '8.0.x'
       - name: Compile the actual Unity CSharp core and run native V3 transactions
         run: dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj --configuration Release
+
+  balance-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Simulate paid-only 30-minute Unity V3 fresh progression
+        run: dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj --configuration Release -- --balance
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unity-v3-fresh-balance-csv
+          path: IdleIntelligence/NativeChecks/out/unity-v3-balance-baseline.csv
+          if-no-files-found: warn
