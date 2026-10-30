@@ -1,3 +1,4 @@
+<!-- Unity-only cleanup: early design 01–03 screenshots and reports archived via Git history, no gameplay assets removed. -->
 # Optische Überarbeitung nach funktionaler Migration
 
 ## Bestandsaudit · 27.10.2026
@@ -9,7 +10,7 @@
 - [ ] Ergebnisfeedback offener Aktionen separat visuell abnehmen; produktive Cloud und physische Geräteprüfung getrennt durchführen.
 
 
-Der erste ausdrücklich beauftragte Designabschnitt ist in `unity-design-01.md` abgegrenzt. Originale Grafiken und uGUI bleiben erhalten; keine Balance-/Saveänderung.
+Der frühe Designabschnitt (01) wurde aus dem aktuellen Arbeitsbaum archiviert; Quellstand, Bilder und Prüfprotokoll bleiben über die Git-Historie abrufbar. Originalgrafiken und uGUI sind weiterhin im Unity-Projekt enthalten.
 
 ## Abschnitt 1 · gemeinsame Grundlage
 
@@ -46,7 +47,7 @@ Forschung, Analysen/Schmiede, Modelle, Shop, Seasons, Profil und Einstellungen e
 
 ## Nachprüfung Abschnitt 1 · 22.10.2026
 
-Die zweite Überarbeitung ist in [unity-design-02.md](unity-design-02.md) dokumentiert: kleine Ecken, zurückhaltender Speicherzugang, einheitliche tatsächliche Itemform auch in Universalslots, Schlossreihe, kompakte Detailaktionen und echter aktueller Ausrüstungsvergleich. Unveränderte Werte/Dopplungen entfernt; reale Nachteile rot. Tapfeedback am Pointer und goldener Overdrive-Kern bleiben rein kosmetisch. Lange deutsche Inventarnamen brechen am vorhandenen Bindestrich. Kein neuer Stilentwurf für übrige Bildschirme.
+Die ältere Überarbeitung 02 (Dokumentation/Bildbelege in der Git-Historie archiviert) brachte: kleine Ecken, zurückhaltender Speicherzugang, einheitliche tatsächliche Itemform auch in Universalslots, Schlossreihe, kompakte Detailaktionen und echter aktueller Ausrüstungsvergleich. Unveränderte Werte/Dopplungen entfernt; reale Nachteile rot. Tapfeedback am Pointer und goldener Overdrive-Kern bleiben rein kosmetisch. Lange deutsche Inventarnamen brechen am vorhandenen Bindestrich. Kein neuer Stilentwurf für übrige Bildschirme.
 
 Offen für spätere Geräte-/Designabnahmen:
 
@@ -57,7 +58,7 @@ Offen für spätere Geräte-/Designabnahmen:
 
 ## Verbindliches Zielbild · Labor/Itemdetails
 
-Aktueller Stand: [unity-design-03.md](unity-design-03.md). Stahlhaut, Gold-/Mintaktionen und gemeinsame Pixelkanten sind echte einzelne Assets; Namen/Zahlen/Kosten/Aktionen bleiben dynamisch. Labor, Hardware und Itemdetails verwenden die neue Grundlage. Original-Seltenheitsfarben und alle Slotformen bleiben erhalten; Animationen sind begrenzt und transaktionsfrei.
+Der frühere Designabschnitt 03 ist in der Git-Historie archiviert. Stahlhaut, Gold-/Mintaktionen und gemeinsame Pixelkanten sind echte einzelne Assets; Namen/Zahlen/Kosten/Aktionen bleiben dynamisch. Labor, Hardware und Itemdetails verwenden die neue Grundlage. Original-Seltenheitsfarben und alle Slotformen bleiben erhalten; Animationen sind begrenzt und transaktionsfrei.
 
 Weitere Forschung/Netze/Schmiede-/Shop-/Season-/Profil-/Einstellungsansichten benötigen weiterhin ihre eigenen Layout-/Dichteprüfungen. Gemeinsam verwendete Styles allein sind keine vollständige Gestaltungsabnahme dieser Bildschirme. Physische Touch-/Notch-/Fontfallbackprüfung, Systemschriftgrößen und native Audio-/Haptikabnahme bleiben offen. Das aktuelle Originalschriftpaar wird beibehalten; eine andere Zielbildschrift ist nicht ohne Lizenz übernommen. Keine dauerhaften Itemstrahlen/Glows; begrenzte Revealpartikel statt dessen.
 

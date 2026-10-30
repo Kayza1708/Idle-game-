@@ -1,6 +1,6 @@
 # Idle Intelligence V3 — nativer Unity-Teststand
 
-**Wichtig:** [PR #161](https://github.com/Kayza1708/Idle-game-/pull/161) wurde bereits auf einem älteren Commit nach `main` gemergt. Die aktuellen, **danach entstandenen** Arbeiten liegen in [Draft-PR #162](https://github.com/Kayza1708/Idle-game-/pull/162) auf `codex/unity-v3-fresh-playtest-20261030`. Die aktuellen Tests und die 120-Minuten-Messwerte gelten für diesen weiterentwickelten Branch, nicht zwingend für den schon gemergten `main`-Stand.
+**Aktueller Stand am 30.10.2026:** Die Unity-PRs [#161](https://github.com/Kayza1708/Idle-game-/pull/161) und [#162](https://github.com/Kayza1708/Idle-game-/pull/162) sind in `main` gemergt; die native Unity-V3 inklusive 120-Minuten-Messung ist dort. [PR #163](https://github.com/Kayza1708/Idle-game-/pull/163) (Rewarded Ads) wurde erst nach dem Merge von #162 in dessen **Featurebranch** gemergt. Die Ads-Änderungen sind deshalb **nicht automatisch in `main` angekommen**. Die Unity-Version in `main` ist für vollständige Store-/Player-Freigabe nicht nachgewiesen.
 
 Alle Spielcodeänderungen dieser Weiterentwicklung liegen in **`IdleIntelligence/` (Unity/C#)**. TypeScript bleibt unverändert.
 
