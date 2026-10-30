@@ -53,7 +53,7 @@ internal static class V3BalanceProbe
     {
         var rates=Game.ViewRates(s);
         return new[]{
-            minute.ToString(I),Num(s.Credits),Num(rates.Credits),
+            minute.ToString(I),Num(s.Credits),Num(rates.Income),
             Num(s.Data),Num(rates.Data),Num(rates.Compute),
             s.Hardware.Sum().ToString(I),s.Hardware.Count(n=>n>0).ToString(I),
             s.Quality.ToString(I),s.Efficiency.ToString(I),
