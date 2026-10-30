@@ -23,6 +23,42 @@ namespace IdleIntelligence.Runtime
             accessToken = bearerToken ?? "";
         }
 
+        // Public UTC LiveOps metadata is read-only; never interpreted as
+        // an entitlement, inventory credit or local item grant.
+        public IEnumerator LiveOps(Action<long,string> completed)
+            =>Send("GET","/v1/liveops",null,completed,false);
+        public IEnumerator AuthChallenge(Action<long,string> completed)
+            =>Send("POST","/v1/auth/challenge","{}",completed,false);
+        public IEnumerator ProviderLogin(string provider,string challenge,string idToken,
+            Action<long,string> completed)
+        {
+            if(provider!="apple"&&provider!="google")
+            {
+                completed?.Invoke(400,"Unsupported provider");
+                return Empty();
+            }
+            return Send("POST","/v1/auth/"+provider,
+                JsonUtility.ToJson(new IdentityLogin{challenge=challenge,idToken=idToken}),completed,false);
+        }
+        public IEnumerator ProviderLink(string provider,string challenge,string idToken,
+            Action<long,string> completed)
+        {
+            if(provider!="apple"&&provider!="google")
+            {
+                completed?.Invoke(400,"Unsupported provider");
+                return Empty();
+            }
+            return Send("POST","/v1/auth/link/"+provider,
+                JsonUtility.ToJson(new IdentityLogin{challenge=challenge,idToken=idToken}),completed);
+        }
+        static IEnumerator Empty(){yield break;}
+        public IEnumerator RotateSession(Action<long,string> completed)
+            =>Send("POST","/v1/session/rotate","{}",completed);
+        public IEnumerator SubmitTelemetry(NativeTelemetryBatch batch,Action<long,string> completed)
+            =>Send("POST","/v1/analytics/events",JsonUtility.ToJson(batch),completed);
+        [Serializable] private sealed class IdentityLogin
+        {public string challenge,idToken;}
+
         public IEnumerator CompanyAccessQuote(Action<long, string> completed)
         {
             return Send("GET", "/v1/company/access", null, completed);

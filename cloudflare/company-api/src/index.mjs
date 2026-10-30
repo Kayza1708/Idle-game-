@@ -1,8 +1,10 @@
 import {privacyRoute} from './privacy.mjs';
 import {MAX_MEMBERS,RESEARCH_NODES,researchBonuses,researchCost,validateCompanyInput,validCompanyId} from './rules.mjs';
 import {socialRoute} from './social.mjs';
-import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from '../../../src/namePolicy.ts';
+import {validateName,validatePlayerName,normalizeModerationText,containsBlockedName} from './name-policy.mjs';
 import {vouchersRoute} from './vouchers.mjs';
+import {identityRoute} from './identity-auth.mjs';
+import {publicLiveOps,ingestTelemetry,adminTelemetry} from './liveops-telemetry.mjs';
 
 // Public read routes deliberately expose no private inventory, gems or session identifiers.
 // This is a guest-account MVP. Apple/Google account linking is required before commercial release.
@@ -133,6 +135,8 @@ export default {
         "DELETE FROM company_invitations WHERE status='pending' AND expires_at<?"
       ).bind(nowSeconds-7*86400).run();
       await env.DB.prepare("DELETE FROM sessions WHERE expires_at<?").bind(nowSeconds-7*86400).run();
+      await env.DB.prepare('DELETE FROM auth_challenges WHERE expires_at<?').bind(nowSeconds-3600).run();
+      await env.DB.prepare('DELETE FROM analytics_events WHERE received_at<?').bind(nowSeconds-30*86400).run();
     };
     ctx.waitUntil(cleanup());
   },
@@ -140,7 +144,13 @@ export default {
     try{
       if(!env.DB)throw new ApiError(503,'database_not_configured');
       const url=new URL(request.url),path=url.pathname,method=request.method,now=time(),db=env.DB;
-      if(method==='GET'&&path==='/v1/health')return reply({ok:true,service:'idle-intelligence-companies',version:1});
+      if(method==='GET'&&path==='/v1/health')return reply({ok:true,service:'idle-intelligence-companies',version:2});
+      if(method==='GET'&&path==='/v1/liveops')return publicLiveOps({db,now,reply});
+      if(method==='GET'&&path==='/v1/admin/analytics')
+        return adminTelemetry({request,db,now,env,reply,ApiError,digest});
+      const verifiedIdentity=await identityRoute({request,path,method,env,db,now,reply,ApiError,
+        newToken,digest,authenticated});
+      if(verifiedIdentity)return verifiedIdentity;
       if(method==='POST'&&path==='/v1/session/guest'){
         if (!env.GUEST_SIGNUP_LIMIT) throw new ApiError(503,'signup_protection_unavailable');
         // Use Cloudflare's edge IP header transiently; do not store it in D1 or application logs.
@@ -203,6 +213,8 @@ export default {
           note:'Preview only; name is reserved only after authenticated PUT /v1/me/name'});
       }
       const player=await authenticated(request,db,now);
+      if(method==='POST'&&path==='/v1/analytics/events')
+        return ingestTelemetry({request,db,player,now,reply,ApiError,payload,env});
       const privacyResponse=await privacyRoute({request,db,player,path,method,now,reply,ApiError,payload});if(privacyResponse)return privacyResponse;
       const voucher=await vouchersRoute({request,db,player,path,method,now,reply,ApiError,payload,requiredMember});
       if(voucher)return voucher;
