@@ -171,6 +171,7 @@ namespace IdleIntelligence.Core
                 if(otherAutoActive)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("hardwareAutoInterval")-s.Prestige.otherAutoSeconds));
                 if(researchAutoActive)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("researchAutomationInterval")-s.Prestige.researchAutoSeconds));
                 if(agentActive)slice=Math.Min(slice,Math.Max(0,PrestigeRules.V("agentInterval")-s.Prestige.agentSeconds));
+                slice=Math.Min(slice,ItemSystemV3.ResearchBoundary(s));
                 foreach(var job in s.Prestige.labs)slice=Math.Min(slice,Math.Max(0,(job.required-job.done)/ResearchSpeed(s,job)));
                 if(Workshop.Equipped(s).Any(i=>Workshop.Definition(i).Role=="memory")&&s.SavedAt-s.Workshop.runStartedAt<ItemBalance.MemorySeconds*1000)slice=Math.Min(slice,1);
                 if(s.Training!=null)slice=Math.Min(slice,Math.Max(0,(s.Training.required-s.Training.done)/trainSpeed));
@@ -182,7 +183,7 @@ namespace IdleIntelligence.Core
                 MaterialAnalysis.Advance(s,slice,false);Industry.Work(s,slice);
                 var produced=Income(s).Times((1+Workshop.Device(s,"memory",s.SavedAt+slice*500)*(1+ChallengeRules.Bonus(s,"no-taps")))/(1+Workshop.Device(s,"memory")*(1+ChallengeRules.Bonus(s,"no-taps")))).Times(slice);var producedData=DataRate(s).Times(slice);var producedKnowledge=PrestigeRules.KnowledgeRate(s).Times(slice);if(capture!=null){capture.Credits=capture.Credits.Add(produced);capture.Data=capture.Data.Add(producedData);capture.Insight=capture.Insight.Add(producedKnowledge);}LocalBalanceHistory.Production(s,slice,active,produced,producedData);Lifetime.Produced(s,produced,producedData);s.Lifetime.labSeconds+=PrestigeAutomation.ResearchJobs(s).Count()*slice;ChallengeRules.Produced(s,produced,producedData);PrestigeRules.Earn(s,produced);s.Prestige.knowledge=ScientificNumber.FromData(s.Prestige.knowledge).Add(producedKnowledge).ToData();s.Data=s.Data.Add(producedData);
                 if(s.Training!=null)s.Training.done+=trainSpeed*slice;
-                if(s.ResearchJob!=null)s.ResearchJob.done+=researchSpeed*slice;foreach(var job in s.Prestige.labs)job.done+=ResearchSpeed(s,job)*slice;
+                if(ItemSystemV3.Enabled(s))ItemSystemV3.AdvanceResearchWork(s,slice);else{if(s.ResearchJob!=null)s.ResearchJob.done+=researchSpeed*slice;foreach(var job in s.Prestige.labs)job.done+=ResearchSpeed(s,job)*slice;}
                 Workshop.Passive(s,slice);if(s.Workshop.hasModuleJob)s.Workshop.moduleJob.done+=slice*MetaAutomation.Fabrication(s);
                 ItemSystemV3.RecordProduction(s,slice,producedData,producedKnowledge);
                 s.SavedAt+=slice*1000;s=MissionRules.Roll(s,s.SavedAt);left-=slice;

@@ -2,9 +2,10 @@
  * the complete versioned migration is ready. No clocks, RNG, IO or UI here. */
 import {BALANCE,equippedItems,hardwareIds,itemTypes,classComputeTerms,
   type GameState,type Item,type ItemFamily,type Rarity,type ComponentId} from './economy';
-import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor,axiomLevel} from './progression';
+import {itemAmplifier,legacyItemFactorScientific,integrationLevel,modelCore,modelFactor,axiomLevel,progressionResearchSpeed} from './progression';
 import {dataRateScientific,creditRateScientific} from './economy';
 import {challengeNetworkLinkAllowed,challengeFamilyBonus} from './challengeStages';
+import type {WorkContract} from './progressionWork';
 import {ScientificNumber as S,type ScientificJSON} from './scientificNumber';
 
 export type ItemSystemV3State={
@@ -291,7 +292,7 @@ export function completeItemTrainingV3(s:GameState,cause:'regular'|'bonus'):Game
   if(!Number.isSafeInteger(learningStreak)||learningStreak<0||learningStreak>c().logic.maxStreak)throw new RangeError('Invalid V3 learning series');
   learningStreak=lastLearningTrack===job.track?Math.floor(learningStreak/c().logic.sameTrackDivisor):Math.min(c().logic.maxStreak,learningStreak+1);lastLearningTrack=job.track;
  }
- return{...s,itemSystemV3:{...v,lastCompletedTrainingSequence:id,lastTrainingCompletionCause:job.intro?'intro':cause,learningStreak,lastLearningTrack}};
+ const next={...s,itemSystemV3:{...v,lastCompletedTrainingSequence:id,lastTrainingCompletionCause:job.intro?'intro' as const:cause,learningStreak,lastLearningTrack}};return cause==='regular'&&!job.intro?grantItemPhotonWorkV3(next):next;
 }
 
 /** Live scanner factor; regular completion increments are booked atomically
@@ -342,3 +343,19 @@ export function restoreItemChallengeV3(main:GameState,shadow:GameState):GameStat
  // be running. Only issued IDs must stay globally unique across both scopes.
  return{...main,itemSystemV3:{...v,nextTrainingSequence:Math.max(v.nextTrainingSequence,other.nextTrainingSequence)}};
 }
+
+/** Shares extra work among the longest remaining jobs. Equal jobs receive equal
+ * shares; no frame-dependent rotating winner and no recursive transfers. */
+export function distributeLongestResearchWorkV3(remaining:number[],budget:number){
+ if(!Number.isFinite(budget)||budget<0||remaining.some(n=>!Number.isFinite(n)||n<0))throw new RangeError('Invalid research work allocation');
+ const result=remaining.map(()=>0),order=remaining.map((_,i)=>i).sort((a,b)=>remaining[b]-remaining[a]||a-b);
+ for(let count=1;count<=order.length&&budget>0;count++){const high=remaining[order[count-1]],low=count<order.length?remaining[order[count]]:0,cost=(high-low)*count,used=Math.min(budget,cost);for(let n=0;n<count;n++)result[order[n]]+=used/count;budget-=used;}return result;
+}
+function regularItemResearchWorkV3(s:GameState){return s.researchLabs.flatMap(lab=>{if(!lab||lab.intro)return[];const id=lab.jobId??`${lab.id}:${lab.startedAt}`,work=s.progression.work[id];if(work&&(!Number.isFinite(work.required)||work.required<=0||!Number.isFinite(work.done)||work.done<0||work.done>work.required+1e-6||!Number.isFinite(work.speed)||work.speed<=0||!Number.isFinite(work.eventWork??0)||(work.eventWork??0)<0||(work.eventWork??0)>work.done+1e-6))throw new RangeError('Invalid research work contract');return work&&work.required>work.done?[{lab,id,work}]:[];});}
+export function itemResearchTransferFractionV3(s:GameState){if(!usesItemV3(s))return 0;const item=itemV3Equipped(s).find(i=>i.type==='lab-drone');return item?Math.min(c().drone.cap,c().drone.rate*itemAbilityStrengthV3(s,item).P):0;}
+/** Exact first completion boundary: base work reduces every residual at the
+ * same speed; extra work water-fills the longest residuals. */
+export function itemResearchBoundaryV3(s:GameState){const fraction=itemResearchTransferFractionV3(s);if(!fraction)return Infinity;const jobs=regularItemResearchWorkV3(s);if(!jobs.length)return Infinity;const remaining=jobs.map(j=>Math.max(0,j.work.required-j.work.done)),speed=jobs[0].work.speed;if(!Number.isFinite(speed)||speed<=0)return Infinity;return Math.min(Math.min(...remaining)/speed,remaining.reduce((a,b)=>a+b,0)/(jobs.length*speed*(1+fraction)));}
+export function applyItemResearchTransferV3(s:GameState,work:Record<string,WorkContract>){const fraction=itemResearchTransferFractionV3(s);if(!fraction)return work;const jobs=regularItemResearchWorkV3(s);if(!jobs.length)return work;const budget=jobs.reduce((sum,j)=>sum+Math.max(0,work[j.id].done-j.work.done),0)*fraction,extra=distributeLongestResearchWorkV3(jobs.map(j=>Math.max(0,work[j.id].required-work[j.id].done)),budget);const result={...work};jobs.forEach((j,i)=>{if(extra[i]>0)result[j.id]={...work[j.id],done:Math.min(work[j.id].required,work[j.id].done+extra[i]),eventWork:(work[j.id].eventWork??0)+extra[i]};});return result;}
+function grantItemPhotonWorkV3(s:GameState){const item=itemV3Equipped(s).find(i=>i.type==='photonic-array'),jobs=regularItemResearchWorkV3(s);if(!item||!jobs.length)return s;const seconds=c().photon.seconds*itemAbilityStrengthV3(s,item).P*(itemCombinationV3(s,'learning-spiral').complete?c().combinations.learning.photonWork:1),speed=progressionResearchSpeed(s)*(s.labBoostUntil>s.savedAt?2:1),work={...s.progression.work};for(const j of jobs){const delta=Math.min(j.work.required-j.work.done,speed*seconds);work[j.id]={...j.work,done:j.work.done+delta,eventWork:(j.work.eventWork??0)+delta};}return synchronizeItemResearchEndsV3({...s,progression:{...s.progression,work}},s.savedAt);}
+export function synchronizeItemResearchEndsV3(s:GameState,at:number){if(!usesItemV3(s))return s;return{...s,researchLabs:s.researchLabs.map(lab=>{if(!lab||lab.intro)return lab;const work=s.progression.work[lab.jobId??`${lab.id}:${lab.startedAt}`];return !work?lab:{...lab,endsAt:at+Math.max(0,work.required-work.done)/work.speed*1000};})};}

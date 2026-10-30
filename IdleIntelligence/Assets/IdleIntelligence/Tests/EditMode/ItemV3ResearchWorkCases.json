@@ -1,0 +1,5952 @@
+{
+  "sourceHash": "74d931ca36e2efa98c665602431f6971ef5c7cfd3940c31eaaab592a1447d96d",
+  "prepared": true,
+  "productionEnabled": false,
+  "flows": [
+    {
+      "mode": "none",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "none",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "photon",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 55.979330000000004,
+              "eventWork": 3.399000000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 55.979330000000004,
+              "eventWork": 3.399000000000001
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "photon",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 55.979330000000004,
+              "eventWork": 3.399000000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 55.979330000000004,
+              "eventWork": 3.399000000000001
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 56.319230000000005,
+              "eventWork": 3.399000000000001
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "drone",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        }
+      ]
+    },
+    {
+      "mode": "drone",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        }
+      ]
+    },
+    {
+      "mode": "maximum",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 17.76747868371619,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 17.76747868371619,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.05825242718,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "advance",
+          "at": 47708.05825242718,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.05825242718,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        }
+      ]
+    },
+    {
+      "mode": "maximum",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 17.76747868371619,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 17.76747868371619,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.05825242718,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "advance",
+          "at": 47708.05825242718,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.05825242718,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            2,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": []
+        }
+      ]
+    },
+    {
+      "mode": "normal",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 43971.16504854368,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 58.890984767999996,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 58.890984767999996,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 44271.16504854368,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 44271.16504854368,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "normal",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 43971.16504854368,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 58.890984767999996,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 58.890984767999996,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 44271.16504854368,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 44271.16504854368,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 59.302127807999995,
+              "eventWork": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "unequipped",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "unequipped",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 47408.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.580330000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 47708.058252427174,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 52.920230000000004,
+              "eventWork": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "pair",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 16476.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 31.399995,
+              "eventWork": 5.0985
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 31.399995,
+              "eventWork": 5.0985
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "pair",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 16476.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 31.399995,
+              "eventWork": 5.0985
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 31.399995,
+              "eventWork": 5.0985
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": -1,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 31.909845,
+              "eventWork": 5.0985
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "trio",
+      "active": false,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 29.177273821420492,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 29.177273821420492,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 16476.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": 8.246708949399311,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 43.04150895,
+              "eventWork": 14.10986445
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 43.04150895,
+              "eventWork": 14.10986445
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": 7.946708949399313,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": 7.946708949399313,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "trio",
+      "active": true,
+      "prepared": true,
+      "steps": [
+        {
+          "action": "initial",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 1,
+            "e": 12,
+            "terms": null
+          },
+          "quality": 1,
+          "training": false,
+          "marker": 0,
+          "boundary": 29.177273821420492,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "training",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 29.177273821420492,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "finish",
+          "at": 16476.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": 8.246708949399311,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 43.04150895,
+              "eventWork": 14.10986445
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 43.04150895,
+              "eventWork": 14.10986445
+            }
+          ]
+        },
+        {
+          "action": "advance",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": 7.946708949399313,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            }
+          ]
+        },
+        {
+          "action": "reload-time",
+          "at": 16776.019417475727,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 2,
+          "training": false,
+          "marker": 1,
+          "boundary": 7.946708949399313,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 43.65842745,
+              "eventWork": 14.16594795
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "active": false,
+      "cause": "regular",
+      "prepared": true,
+      "steps": [
+        {
+          "action": "ready",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "marker",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 1,
+          "boundary": 41.038638004857994,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 3.738900000000001,
+              "eventWork": 3.738900000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 3.738900000000001,
+              "eventWork": 3.738900000000001
+            }
+          ]
+        },
+        {
+          "action": "duplicate",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 1,
+          "boundary": 41.038638004857994,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 3.738900000000001,
+              "eventWork": 3.738900000000001
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 3.738900000000001,
+              "eventWork": 3.738900000000001
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "both",
+      "active": false,
+      "cause": "bonus",
+      "prepared": true,
+      "steps": [
+        {
+          "action": "ready",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 0,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "marker",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 1,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        },
+        {
+          "action": "duplicate",
+          "at": 1000,
+          "data": {
+            "m": 9.99999999778,
+            "e": 11,
+            "terms": null
+          },
+          "credits": {
+            "m": 9.9999999928,
+            "e": 11,
+            "terms": null
+          },
+          "quality": 1,
+          "training": true,
+          "marker": 1,
+          "boundary": 43.76591073213072,
+          "levels": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "jobs": [
+            {
+              "id": "dataGeneration",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            },
+            {
+              "id": "materialAnalysis",
+              "required": 60,
+              "done": 0,
+              "eventWork": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "allocations": [
+    {
+      "remaining": [
+        10,
+        20,
+        20
+      ],
+      "budget": 0,
+      "result": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        20
+      ],
+      "budget": 1,
+      "result": [
+        0,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        20
+      ],
+      "budget": 12,
+      "result": [
+        0,
+        6,
+        6
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        20
+      ],
+      "budget": 40,
+      "result": [
+        6.666666666666667,
+        16.666666666666668,
+        16.666666666666668
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        20
+      ],
+      "budget": 100,
+      "result": [
+        10,
+        20,
+        20
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        30
+      ],
+      "budget": 0,
+      "result": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        30
+      ],
+      "budget": 1,
+      "result": [
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        30
+      ],
+      "budget": 12,
+      "result": [
+        0,
+        1,
+        11
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        30
+      ],
+      "budget": 40,
+      "result": [
+        3.3333333333333335,
+        13.333333333333334,
+        23.333333333333332
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        20,
+        30
+      ],
+      "budget": 100,
+      "result": [
+        10,
+        20,
+        30
+      ]
+    },
+    {
+      "remaining": [
+        1,
+        2
+      ],
+      "budget": 0,
+      "result": [
+        0,
+        0
+      ]
+    },
+    {
+      "remaining": [
+        1,
+        2
+      ],
+      "budget": 1,
+      "result": [
+        0,
+        1
+      ]
+    },
+    {
+      "remaining": [
+        1,
+        2
+      ],
+      "budget": 12,
+      "result": [
+        1,
+        2
+      ]
+    },
+    {
+      "remaining": [
+        1,
+        2
+      ],
+      "budget": 40,
+      "result": [
+        1,
+        2
+      ]
+    },
+    {
+      "remaining": [
+        1,
+        2
+      ],
+      "budget": 100,
+      "result": [
+        1,
+        2
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        10,
+        10
+      ],
+      "budget": 0,
+      "result": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        10,
+        10
+      ],
+      "budget": 1,
+      "result": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        10,
+        10
+      ],
+      "budget": 12,
+      "result": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        10,
+        10
+      ],
+      "budget": 40,
+      "result": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "remaining": [
+        10,
+        10,
+        10
+      ],
+      "budget": 100,
+      "result": [
+        10,
+        10,
+        10
+      ]
+    },
+    {
+      "remaining": [],
+      "budget": 0,
+      "result": []
+    },
+    {
+      "remaining": [],
+      "budget": 1,
+      "result": []
+    },
+    {
+      "remaining": [],
+      "budget": 12,
+      "result": []
+    },
+    {
+      "remaining": [],
+      "budget": 40,
+      "result": []
+    },
+    {
+      "remaining": [],
+      "budget": 100,
+      "result": []
+    }
+  ]
+}

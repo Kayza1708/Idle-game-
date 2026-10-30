@@ -323,3 +323,9 @@ Controller-Rückgabe, deterministische Recyclingfragmente, geschlossenes Trio, b
 Materialkreislauf-Zwischenstand: vollständige170Dateien/2.078Vitest(346,67s),217/217EditMode(200,946s),Typecheck/Build/Generatorvergleich grün. Passende echte Workshop-PlayMode-Regression läuft noch. Keine neue Spielerfreigabe.
 
 Abschluss Domainabschnitt Materialkreislauf:6/6passendePlayMode(33,623s) zusätzlich grün. Tatsächliche normale Workshop-Transaktionen, Animationstrennung/Abbruch, reduzierte Bewegung, Save/Reload und mobile Kosten-/Analysestatusanzeigen erhalten. Kein neuer Grafik-/Geräte-/V3-Dateinachweis. Gesamtauftrag läuft mit den offenen Forschungsereignissen und der vollständigen Migration weiter.
+
+
+## V3-Forschungsarbeit · 30.10.2026 · in Abschlussprüfung
+Photonenfeld, vollständigeLernspirale und Labordrohne im tatsächlichen Arbeits-/Abschlusspfad;20gemeinsame bezahlteFolgen,25Allokationen,9neueSourceprüfungen.2.087Vitest/Typecheck/Build/Generatorvergleich grün; nativegezielteReferenzen37/37, nach Korrektur neuerIntrovorbereitung4/4. Abschließende gemeinsameUnity-/UI-Prüfungen laufen. Übrige Startverträge, wissenschaftlicheArbeit,42Items/60INT/24Axiome und vollständigeverlustfreieSaveaktivierung weiter offen. Erst vollständigesV3, dann Xcode wie erneut bestätigt.
+
+Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(206.8267902s),5/5passendePlayMode(16,677s),2.087Vitest,Typecheck/Build/vollständigerGeneratorvergleich grün. Frühere220/221 wegenIntro-Testvorbereitung getrennt dokumentiert. Keine neue Grafik-/Geräte-/V3-Dateifreigabe. Nächster unabhängiger Abschnitt: eingefrorene Forschungsstartverträge samt Protokollcontroller, Bereichswechsel und automatischem Anfangsfortschritt.

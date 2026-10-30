@@ -848,7 +848,7 @@
     "scope": "Existing atomic batch rule now shares full native total quote with UI and transaction; original per-exemplar mastery rounding, no new prices or production planner",
     "remaining": "Full42-item acquisition, event/provenance contracts, lossless V3 file migration and very large source craft-counter/native32bit mapping still open"
   },
-  "latestVerifiedSection": "materialCycle",
+  "latestVerifiedSection": "researchWorkEvents",
   "familyYields": {
     "sourceHash": "49fd19a97d021a44d34d2469737bd7c76b7a4dc730bee6b11e8b16d73e17a907",
     "actualAnalysisCases": 112,
@@ -948,5 +948,66 @@
       "Initial new test called private Industry.StartForge; corrected to public QueueForge; compile failed run not counted.",
       "First targeted run34/35: test indexed initially empty foundries; guard corrected to Any, no production change. New material tests then2/2; full217/217."
     ]
+  },
+  "researchWorkEvents": {
+    "sourceHash": "74d931ca36e2efa98c665602431f6971ef5c7cfd3940c31eaaab592a1447d96d",
+    "preparedPaidFlows": 20,
+    "pureAllocations": 25,
+    "newSourceTests": 9,
+    "vitest": {
+      "files": 171,
+      "tests": 2087,
+      "passed": 2087,
+      "failed": 0,
+      "seconds": 338.15,
+      "log": "/tmp/idle-v3-research-vitest.log"
+    },
+    "targetedCombinedEditMode": {
+      "total": "37",
+      "passed": "37",
+      "failed": "0",
+      "duration": "71.6156243",
+      "result": "Passed",
+      "xmlSha256": "1abc9fb2145c8d3d4eef4364a401c97c3276d25859612717372a869c2bbf51ab"
+    },
+    "initialFullEditMode": {
+      "total": "221",
+      "passed": "220",
+      "failed": "1",
+      "duration": "188.6094818",
+      "result": "Failed(Child)",
+      "xmlSha256": "ac612528622ab2ed08b166a21388743bab353d10a6de3e03dda2374b7b384eb7"
+    },
+    "newResearchInvariantsAfterTestFix": {
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "duration": "1.3087336",
+      "result": "Passed",
+      "xmlSha256": "d3f6dfaf02e35fe86e8a5b7d911f23316f60f6ce67b61f23d377038af4f17902"
+    },
+    "typecheck": "passed",
+    "build": "passed",
+    "generatorCheck": "passed full",
+    "scope": "Paid regular training photon work, complete learning spiral, non-recursive lab-drone transfer, deterministic ties and actual first work boundary; normal save rules retained. Prepared references only, V3 writers still reject. No new graphics or complete migration claim.",
+    "corrections": [
+      "First full220/221 failed because the new Intro test left legacyIntro=true while setting the current Mira target. Test flag corrected; production unchanged; new4/4green."
+    ],
+    "finalFullEditMode": {
+      "total": "221",
+      "passed": "221",
+      "failed": "0",
+      "duration": "206.8267902",
+      "result": "Passed",
+      "xmlSha256": "65c69d327869083655e5789bb794d845223b03b96ad2f5d2e6257106eb4f6b58"
+    },
+    "playMode": {
+      "total": "5",
+      "passed": "5",
+      "failed": "0",
+      "duration": "16.6772655",
+      "result": "Passed",
+      "xmlSha256": "c39f3be36d152a8ef9ac885b62ab2f57baeb545ed4496a590117b9c68439dd4c"
+    }
   }
 }

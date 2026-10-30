@@ -357,3 +357,15 @@ Fusion erhält bezahlte Basis und bereits verrechnete Rückgaben. Zerlegung begr
 Materialkreislauf-Zwischenstand: vollständige170Dateien/2.078Vitest(346,67s),217/217EditMode(200,946s),Typecheck/Build/Generatorvergleich grün. Passende echte Workshop-PlayMode-Regression läuft noch. Keine neue Spielerfreigabe.
 
 Abschluss Domainabschnitt Materialkreislauf:6/6passendePlayMode(33,623s) zusätzlich grün. Tatsächliche normale Workshop-Transaktionen, Animationstrennung/Abbruch, reduzierte Bewegung, Save/Reload und mobile Kosten-/Analysestatusanzeigen erhalten. Kein neuer Grafik-/Geräte-/V3-Dateinachweis. Gesamtauftrag läuft mit den offenen Forschungsereignissen und der vollständigen Migration weiter.
+
+
+## 30.10.2026 – Photonenarbeit und deterministischer Labordrohnenübertrag
+Reguläre bezahlte Trainingsabschlüsse geben nun bei aktivem Photonenfeld3×P Sekunden aktueller regulärer Forschungsleistung an die belegten regulären Labore; vollständige Lernspirale×2. Kostenlose Einführung, Gem-Bonus, No-items, unbekannte/premature/doppelte Abschlussnummern ausgeschlossen; bezahlte Integration eingeschlossen. Kein Guthaben für später und keine neue Queueaktion aus überschüssiger Arbeit. Der vorhandene Abschlussmarker schützt denselben Effekt ohne unbeschränkte historische Ereignisliste.
+
+Labordrohne überträgt min(40%;10%×P) frisch geleisteter regulärer Laborarbeit. Längste Restarbeiten werden ausgeglichen, Gleichstände gleichmäßig geteilt; kein Übertrag aus Photonen- oder anderem Übertrag. Zusatzarbeit ist im laufenden Arbeitsvertrag separat erfasst. Exakte erste Arbeitsabschlussgrenze im Zeitschritt berücksichtigt; V3-Abschluss prüft geleistete Arbeit statt der alten0,1ms-endsAt-Toleranz. Normale Aufträge behalten ihre Regeln. Rechnerischer Nachweis in contracts.md.
+
+20 gemeinsame vorbereitete bezahlte Start-/Arbeits-/Abschlussfolgen,25 reine Allokationen und9 neueVitest prüfen unter anderem paarweise/vollständigeLernspirale, höchsteStärke,W10,Ablegen,normalenKontrollpfad,online/offline,40Zeitstücke,Integration/Intro/No-items und korrupteArbeitsbelege. Native37/37gezielte Referenztests grün. Erster Voll-EditMode220/221: neuerIntrotest nutzte versehentlich den Legacy- statt Mira-Tutorialmodus; nur Testvorbereitung korrigiert, dann4/4neueForschungsprüfungen grün. Finaler gemeinsamerVolltest/PlayMode noch laufend.
+
+Vollständige171Dateien/2.087Vitest(338,15s),Typecheck,Build undGeneratorvergleich grün. Keine UI-Neugestaltung und kein neuer Geräte-/V3-Dateipersistenznachweis. Protokoll-/Bereichswechsel-/Automatik-Startverträge, wissenschaftlicheExtremarbeit, vollständige42erKatalog-/Erwerbs-/UI-/Dateimigration und Gesamtfreigabe weiterhin offen.
+
+Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(206.8267902s),5/5passendePlayMode(16,677s),2.087Vitest,Typecheck/Build/vollständigerGeneratorvergleich grün. Frühere220/221 wegenIntro-Testvorbereitung getrennt dokumentiert. Keine neue Grafik-/Geräte-/V3-Dateifreigabe. Nächster unabhängiger Abschnitt: eingefrorene Forschungsstartverträge samt Protokollcontroller, Bereichswechsel und automatischem Anfangsfortschritt.

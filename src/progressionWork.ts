@@ -1,4 +1,4 @@
-import {usesItemV3,identifyItemSynthesisV3,settleItemSynthesisV3} from './itemSystemV3';
+import {usesItemV3,identifyItemSynthesisV3,settleItemSynthesisV3,applyItemResearchTransferV3,synchronizeItemResearchEndsV3} from './itemSystemV3';
 import { addEvent } from "./telemetry";
 import { trainingDataCostScientific } from "./economy";
 import { deviceBonus } from "./deviceEffects";
@@ -27,6 +27,7 @@ export type WorkContract = {
   done: number;
   speed: number;
   quantityIntegral: number;
+  eventWork?:number;
   familyIntegral?: { photonic: number; quantum: number };
 };
 export const fabricationSpeed = (s: GameState) =>
@@ -34,7 +35,7 @@ export const fabricationSpeed = (s: GameState) =>
   (usesItemV3(s)?1:(1 / BALANCE.progression.effects.C06) ** axiomLevel(s, "C06"));
 export const analysisQuantity = (s: GameState) =>
   secondary(s, "K10") ? BALANCE.progression.effects.D06quantity : 1;
-export function prepareProgressionWork(s: GameState) {
+export function prepareProgressionWork(s: GameState):GameState {
   const work = { ...s.progression.work };
   const live = new Set<string>();
   function track(id: string, required: number, speed: number) {
@@ -110,7 +111,7 @@ export function prepareProgressionWork(s: GameState) {
     progression: { ...s.progression, work },
   };
 }
-export function advanceProgressionWork(s: GameState, seconds: number) {
+export function advanceProgressionWork(s: GameState, seconds: number):GameState {
   const p = s.progression,
     work = { ...p.work };
   for (const [id, w] of Object.entries(work)) {
@@ -143,7 +144,7 @@ export function advanceProgressionWork(s: GameState, seconds: number) {
     ...s,
     progression: {
       ...p,
-      work,
+      work:usesItemV3(s)?applyItemResearchTransferV3(s,work):work,
       knowledge: ScientificNumber.fromJSON(p.knowledge)
         .add(knowledgeRate(s).multiplyNumber(seconds))
         .toJSON(),
@@ -173,7 +174,7 @@ export function advanceProgressionWork(s: GameState, seconds: number) {
         },
       };
   }
-  return discoverProgression(advanceFusion(next, seconds));
+  return synchronizeItemResearchEndsV3(discoverProgression(advanceFusion(next, seconds)),s.savedAt+seconds*1000);
 }
 export function protectedData(
   s: GameState,

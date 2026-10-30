@@ -22,7 +22,7 @@ namespace IdleIntelligence.Core
         public static bool Enabled(GameState s)=>s.ItemSystemV3?.version==3;
         public static void Validate(GameState s)
         {
-            var v=s?.ItemSystemV3;if(v==null)return;double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");var od=v.overdrive;if(od!=null&&(!ScientificNumber.Finite(od.startedAt)||!ScientificNumber.Finite(od.burstUntil)||!ScientificNumber.Finite(od.creditFactor)||!ScientificNumber.Finite(od.dataFactor)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>C("combinations.energy.seconds")*1000+.001||od.creditFactor<1||od.creditFactor>(1+C("burst.coefficient")*maxP)*C("combinations.energy.credits")+1e-10||od.dataFactor!=1&&od.dataFactor!=C("combinations.energy.data")))throw new FormatException("Invalid V3 overdrive contract");
+            var v=s?.ItemSystemV3;if(v==null)return;if(PrestigeAutomation.ResearchJobs(s).Any(j=>!ScientificNumber.Finite(j.required)||j.required<=0||!ScientificNumber.Finite(j.done)||j.done<0||j.done>j.required+1e-6||!ScientificNumber.Finite(j.eventWork)||j.eventWork<0||j.eventWork>j.done+1e-6))throw new FormatException("Invalid V3 research work contract");double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");var od=v.overdrive;if(od!=null&&(!ScientificNumber.Finite(od.startedAt)||!ScientificNumber.Finite(od.burstUntil)||!ScientificNumber.Finite(od.creditFactor)||!ScientificNumber.Finite(od.dataFactor)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>C("combinations.energy.seconds")*1000+.001||od.creditFactor<1||od.creditFactor>(1+C("burst.coefficient")*maxP)*C("combinations.energy.credits")+1e-10||od.dataFactor!=1&&od.dataFactor!=C("combinations.energy.data")))throw new FormatException("Invalid V3 overdrive contract");
             if(!ScientificNumber.Finite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new FormatException("Invalid V3 fragment progress");
             if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
             if(v.version!=3||v.dataProduced==null||v.knowledgeProduced==null||v.componentsProduced==null||!ScientificNumber.Finite(v.runMinutes)||v.runMinutes<0||v.nextTrainingSequence<1||v.nextTrainingSequence>MaxExactSequence||v.lastCompletedTrainingSequence<0||v.lastCompletedTrainingSequence>=v.nextTrainingSequence||v.scannerAnalyses<0||v.scannerAnalyses>MaxExactSequence||v.learningStreak<0||v.learningStreak>C("logic.maxStreak")||v.lastLearningTrack!=null&&v.lastLearningTrack!="quality"&&v.lastLearningTrack!="efficiency"||v.lastTrainingCompletionCause!=null&&v.lastTrainingCompletionCause!="regular"&&v.lastTrainingCompletionCause!="bonus"&&v.lastTrainingCompletionCause!="intro")throw new FormatException("Invalid V3 production counters");
@@ -67,9 +67,28 @@ namespace IdleIntelligence.Core
             if(!ScientificNumber.Finite(job.required)||job.required<=0||!ScientificNumber.Finite(job.done)||job.done<0||!new[]{"quality","efficiency","integration"}.Contains(job.id)||string.IsNullOrEmpty(job.key)||!job.key.StartsWith(prefix,StringComparison.Ordinal)||!long.TryParse(job.key.Substring(prefix.Length),System.Globalization.NumberStyles.None,System.Globalization.CultureInfo.InvariantCulture,out long id)||id<1||id>=v.nextTrainingSequence||id<=v.lastCompletedTrainingSequence||job.done+1e-7<job.required)return;
             if(job.key!=prefix+id.ToString(System.Globalization.CultureInfo.InvariantCulture))return;
             v.lastCompletedTrainingSequence=id;v.lastTrainingCompletionCause=job.intro?"intro":regular?"regular":"bonus";
+            if(regular&&!job.intro)GrantPhotonWork(s);
             if(!regular||job.intro||job.id=="integration"||!Has(s,"logic-seed"))return;
             if(v.learningStreak<0||v.learningStreak>C("logic.maxStreak"))throw new FormatException("Invalid V3 learning series");
             v.learningStreak=v.lastLearningTrack==job.id?(int)Math.Floor(v.learningStreak/C("logic.sameTrackDivisor")):Math.Min((int)C("logic.maxStreak"),v.learningStreak+1);v.lastLearningTrack=job.id;
+        }
+        public static double[] DistributeLongestResearchWork(double[] remaining,double budget)
+        {
+            if(!ScientificNumber.Finite(budget)||budget<0||remaining.Any(n=>!ScientificNumber.Finite(n)||n<0))throw new FormatException("Invalid research work allocation");var result=new double[remaining.Length];var order=Enumerable.Range(0,remaining.Length).OrderByDescending(i=>remaining[i]).ThenBy(i=>i).ToArray();
+            for(int count=1;count<=order.Length&&budget>0;count++){double high=remaining[order[count-1]],low=count<order.Length?remaining[order[count]]:0,cost=(high-low)*count,used=Math.Min(budget,cost);for(int n=0;n<count;n++)result[order[n]]+=used/count;budget-=used;}return result;
+        }
+        public static double ResearchTransferFraction(GameState s){if(!Enabled(s))return 0;var item=Equipped(s).FirstOrDefault(i=>i.type=="lab-drone");return item==null?0:Math.Min(C("drone.cap"),C("drone.rate")*AbilityStrength(s,item));}
+        public static double ResearchBoundary(GameState s)
+        {
+            double fraction=ResearchTransferFraction(s);if(fraction==0)return double.PositiveInfinity;var jobs=PrestigeAutomation.ResearchJobs(s).Where(j=>!j.intro&&j.required>j.done).ToArray();if(jobs.Length==0)return double.PositiveInfinity;double speed=Game.ResearchSpeed(s,jobs[0]);if(!ScientificNumber.Finite(speed)||speed<=0)return double.PositiveInfinity;var remaining=jobs.Select(j=>Math.Max(0,j.required-j.done)).ToArray();return Math.Min(remaining.Min()/speed,remaining.Sum()/(jobs.Length*speed*(1+fraction)));
+        }
+        public static void AdvanceResearchWork(GameState s,double seconds)
+        {
+            var jobs=PrestigeAutomation.ResearchJobs(s).ToArray();double regular=0;foreach(var job in jobs){double delta=Math.Min(Math.Max(0,job.required-job.done),Game.ResearchSpeed(s,job)*seconds);job.done+=delta;if(!job.intro)regular+=delta;}double fraction=ResearchTransferFraction(s);if(fraction==0)return;var targets=jobs.Where(j=>!j.intro).ToArray();var extra=DistributeLongestResearchWork(targets.Select(j=>Math.Max(0,j.required-j.done)).ToArray(),regular*fraction);for(int n=0;n<targets.Length;n++){targets[n].done=Math.Min(targets[n].required,targets[n].done+extra[n]);targets[n].eventWork+=extra[n];}
+        }
+        static void GrantPhotonWork(GameState s)
+        {
+            var item=Equipped(s).FirstOrDefault(i=>i.type=="photonic-array");if(item==null)return;double seconds=C("photon.seconds")*AbilityStrength(s,item)*(Has(s,"logic-seed")&&Has(s,"lab-drone")?C("combinations.learning.photonWork"):1);foreach(var job in PrestigeAutomation.ResearchJobs(s).Where(j=>!j.intro&&j.required>j.done)){double delta=Math.Min(job.required-job.done,Game.ResearchSpeed(s,job)*seconds);job.done+=delta;job.eventWork+=delta;}
         }
         public static double Strength(ItemInstance item)
         {

@@ -838,3 +838,7 @@ Photon-/Quantenitem×(1+P), Photonikarchitektur×2imOverdrive, Trio nur bereits 
 
 ### 30.10.2026 – beauftragter V3-Materialkreislauf
 Herstellungscontroller min(0,35; 0,10×P), mit bestehenden Forschungsrückgaben durch Maximum verrechnet. Recycling-Sonde Rare+ 0,25×P Fortschritt, Zweierkombination×1,25 nur Zusatzfortschritt; vollständiges Trio×1,2 neue bezahlte Analysen. Gesamtmaterialrückgewinnung höchstens0,90 der tatsächlich bezahlten Basis einschließlich bereits verwendeter Rückgaben. Vorhandene alte Zerlegeraten0,60/+0,05 proC05/bis0,75 unverändert nach `BALANCE.materialSalvage` zentralisiert. Quellen ausschließlich src/economy.ts; keine neue Kurve oder Zufallsbelohnung. Normale Save-Regeln erhalten.
+
+
+### 30.10.2026 – V3-Forschungsarbeitsereignisse in Prüfung
+Photonenfeld3×P Sekunden reguläre aktuelle Laborleistung je belegtem regulärem Labor; vollständige Lernspirale×2. Labordrohne min(40%;10%×P) neu geleisteter regulärer Forschungsarbeit an längste Restarbeiten, faire Gleichstände, keine Rekursion aus Zusatzarbeit. Zentrale vorhandene Spezifikationswerte in `BALANCE.itemV3.photon`, `.drone`, `.combinations.learning`; kein neuer Preis oder numerischer Balancewert. Alte normale Regeln erhalten.
