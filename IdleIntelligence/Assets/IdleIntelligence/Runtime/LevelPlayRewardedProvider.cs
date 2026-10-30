@@ -185,7 +185,14 @@ namespace IdleIntelligence.Runtime
         // loading and readiness alone cannot mint any game currency.
         void OnRewarded(object adInfo,object reward)
         {
-            if(wasDisplayed&&pending!=null&&NativeAdPrivacy.CanInitialize(config))Finish(RewardProviderResult.Success);
+            if(!wasDisplayed||pending==null||!NativeAdPrivacy.CanInitialize(config))return;
+            object amount=reward?.GetType().GetProperty("Amount")?.GetValue(reward);
+            if(amount==null)return;
+            double value;
+            try{value=Convert.ToDouble(amount,System.Globalization.CultureInfo.InvariantCulture);}
+            catch{return;}
+            if(value>0&&!double.IsInfinity(value)&&!double.IsNaN(value))
+                Finish(RewardProviderResult.Success);
         }
         void OnDisplayFailed(object adInfo,object error)
         {
