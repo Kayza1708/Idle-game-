@@ -2572,9 +2572,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -2648,9 +2660,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -277380,9 +277404,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -277456,9 +277492,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -549662,9 +549710,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -549738,9 +549798,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -818540,9 +818612,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -818616,9 +818700,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -820408,9 +820504,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -820484,9 +820592,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -822276,9 +822396,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -822352,9 +822484,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -824144,9 +824288,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -824220,9 +824376,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -833306,9 +833474,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -833382,9 +833562,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -836450,7 +836642,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-4",
-                "type": "curriculum-module",
+                "type": "diagnostic-adapter",
                 "rarity": 1,
                 "level": 1,
                 "forge": 0,
@@ -836820,7 +837012,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -836881,7 +837073,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -837317,7 +837509,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -837378,7 +837570,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -837809,7 +838001,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -837870,7 +838062,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -838296,7 +838488,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -838357,7 +838549,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -838778,7 +838970,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -838839,7 +839031,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -838940,7 +839132,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-5",
-                "type": "long-term-memory",
+                "type": "experiment-controller",
                 "rarity": 2,
                 "level": 1,
                 "forge": 0,
@@ -839310,7 +839502,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -839366,7 +839558,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -839427,8 +839619,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -839839,7 +840031,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -839895,7 +840087,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -839956,8 +840148,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -840048,7 +840240,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-6",
-                "type": "blueprint-archive",
+                "type": "gradient-buffer",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -840418,7 +840610,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -840474,7 +840666,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -840530,7 +840722,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -840591,9 +840783,9 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -840679,7 +840871,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-7",
-                "type": "distillation-module",
+                "type": "manufacturing-controller",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -841049,7 +841241,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -841105,7 +841297,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -841161,7 +841353,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -841217,7 +841409,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -841278,10 +841470,10 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -841361,7 +841553,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-8",
-                "type": "precision-scanner",
+                "type": "quantum-diagnostic-module",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -841731,7 +841923,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -841787,7 +841979,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -841843,7 +842035,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -841899,7 +842091,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -841955,7 +842147,7 @@
             },
             {
               "id": "item-8",
-              "type": "precision-scanner",
+              "type": "quantum-diagnostic-module",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -842016,11 +842208,11 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module",
-            "precision-scanner"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller",
+            "quantum-diagnostic-module"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -842476,9 +842668,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -842552,9 +842756,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -845620,7 +845836,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-4",
-                "type": "curriculum-module",
+                "type": "diagnostic-adapter",
                 "rarity": 1,
                 "level": 1,
                 "forge": 0,
@@ -845990,7 +846206,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -846051,7 +846267,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -846487,7 +846703,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -846548,7 +846764,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -846979,7 +847195,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -847040,7 +847256,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -847466,7 +847682,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -847527,7 +847743,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -847948,7 +848164,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -848009,7 +848225,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -848110,7 +848326,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-5",
-                "type": "long-term-memory",
+                "type": "experiment-controller",
                 "rarity": 2,
                 "level": 1,
                 "forge": 0,
@@ -848480,7 +848696,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -848536,7 +848752,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -848597,8 +848813,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -849009,7 +849225,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -849065,7 +849281,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -849126,8 +849342,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -849218,7 +849434,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-6",
-                "type": "blueprint-archive",
+                "type": "gradient-buffer",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -849588,7 +849804,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -849644,7 +849860,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -849700,7 +849916,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -849761,9 +849977,9 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -849849,7 +850065,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-7",
-                "type": "distillation-module",
+                "type": "manufacturing-controller",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -850219,7 +850435,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -850275,7 +850491,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -850331,7 +850547,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -850387,7 +850603,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -850448,10 +850664,10 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -850531,7 +850747,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-8",
-                "type": "precision-scanner",
+                "type": "quantum-diagnostic-module",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -850901,7 +851117,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -850957,7 +851173,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -851013,7 +851229,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -851069,7 +851285,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -851125,7 +851341,7 @@
             },
             {
               "id": "item-8",
-              "type": "precision-scanner",
+              "type": "quantum-diagnostic-module",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -851186,11 +851402,11 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module",
-            "precision-scanner"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller",
+            "quantum-diagnostic-module"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -851646,9 +851862,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -851722,9 +851950,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -854790,7 +855030,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-4",
-                "type": "curriculum-module",
+                "type": "diagnostic-adapter",
                 "rarity": 1,
                 "level": 1,
                 "forge": 0,
@@ -855160,7 +855400,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -855221,7 +855461,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -855657,7 +855897,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -855718,7 +855958,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -856149,7 +856389,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -856210,7 +856450,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -856636,7 +856876,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -856697,7 +856937,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -857118,7 +857358,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -857179,7 +857419,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -857280,7 +857520,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-5",
-                "type": "long-term-memory",
+                "type": "experiment-controller",
                 "rarity": 2,
                 "level": 1,
                 "forge": 0,
@@ -857650,7 +857890,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -857706,7 +857946,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -857767,8 +858007,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -858179,7 +858419,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -858235,7 +858475,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -858296,8 +858536,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -858388,7 +858628,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-6",
-                "type": "blueprint-archive",
+                "type": "gradient-buffer",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -858758,7 +858998,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -858814,7 +859054,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -858870,7 +859110,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -858931,9 +859171,9 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -859019,7 +859259,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-7",
-                "type": "distillation-module",
+                "type": "manufacturing-controller",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -859389,7 +859629,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -859445,7 +859685,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -859501,7 +859741,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -859557,7 +859797,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -859618,10 +859858,10 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -859701,7 +859941,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-8",
-                "type": "precision-scanner",
+                "type": "quantum-diagnostic-module",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -860071,7 +860311,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -860127,7 +860367,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -860183,7 +860423,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -860239,7 +860479,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -860295,7 +860535,7 @@
             },
             {
               "id": "item-8",
-              "type": "precision-scanner",
+              "type": "quantum-diagnostic-module",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -860356,11 +860596,11 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module",
-            "precision-scanner"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller",
+            "quantum-diagnostic-module"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -860816,9 +861056,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -860892,9 +861144,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -863960,7 +864224,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-4",
-                "type": "curriculum-module",
+                "type": "diagnostic-adapter",
                 "rarity": 1,
                 "level": 1,
                 "forge": 0,
@@ -864330,7 +864594,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -864391,7 +864655,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -864827,7 +865091,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -864888,7 +865152,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -865319,7 +865583,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -865380,7 +865644,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -865806,7 +866070,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -865867,7 +866131,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -866288,7 +866552,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -866349,7 +866613,7 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module"
+            "diagnostic-adapter"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -866450,7 +866714,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-5",
-                "type": "long-term-memory",
+                "type": "experiment-controller",
                 "rarity": 2,
                 "level": 1,
                 "forge": 0,
@@ -866820,7 +867084,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -866876,7 +867140,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -866937,8 +867201,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -867349,7 +867613,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -867405,7 +867669,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -867466,8 +867730,8 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory"
+            "diagnostic-adapter",
+            "experiment-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -867558,7 +867822,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-6",
-                "type": "blueprint-archive",
+                "type": "gradient-buffer",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -867928,7 +868192,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -867984,7 +868248,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -868040,7 +868304,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -868101,9 +868365,9 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -868189,7 +868453,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-7",
-                "type": "distillation-module",
+                "type": "manufacturing-controller",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -868559,7 +868823,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -868615,7 +868879,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -868671,7 +868935,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -868727,7 +868991,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -868788,10 +869052,10 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -868871,7 +869135,7 @@
               "hasItem": true,
               "item": {
                 "id": "item-8",
-                "type": "precision-scanner",
+                "type": "quantum-diagnostic-module",
                 "rarity": 3,
                 "level": 1,
                 "forge": 0,
@@ -869241,7 +869505,7 @@
             },
             {
               "id": "item-4",
-              "type": "curriculum-module",
+              "type": "diagnostic-adapter",
               "rarity": 1,
               "level": 1,
               "forge": 0,
@@ -869297,7 +869561,7 @@
             },
             {
               "id": "item-5",
-              "type": "long-term-memory",
+              "type": "experiment-controller",
               "rarity": 2,
               "level": 1,
               "forge": 0,
@@ -869353,7 +869617,7 @@
             },
             {
               "id": "item-6",
-              "type": "blueprint-archive",
+              "type": "gradient-buffer",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -869409,7 +869673,7 @@
             },
             {
               "id": "item-7",
-              "type": "distillation-module",
+              "type": "manufacturing-controller",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -869465,7 +869729,7 @@
             },
             {
               "id": "item-8",
-              "type": "precision-scanner",
+              "type": "quantum-diagnostic-module",
               "rarity": 3,
               "level": 1,
               "forge": 0,
@@ -869526,11 +869790,11 @@
             "impulse-relay",
             "field-scanner",
             "memory-crystal",
-            "curriculum-module",
-            "long-term-memory",
-            "blueprint-archive",
-            "distillation-module",
-            "precision-scanner"
+            "diagnostic-adapter",
+            "experiment-controller",
+            "gradient-buffer",
+            "manufacturing-controller",
+            "quantum-diagnostic-module"
           ],
           "income": {
             "m": 1.6988345383939716,
@@ -869986,9 +870250,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -870062,9 +870338,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -872115,9 +872403,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -872191,9 +872491,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -874244,9 +874556,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -874320,9 +874644,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -875649,9 +875985,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -875725,9 +876073,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -877054,9 +877414,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -877130,9 +877502,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -878459,9 +878843,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -878535,9 +878931,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -884837,9 +885245,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -884913,9 +885333,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -886064,9 +886496,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -886140,9 +886584,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -887186,9 +887642,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -887262,9 +887730,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
@@ -889249,9 +889729,21 @@
             false,
             false,
             false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false
           ],
           "knownBlueprints": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
             false,
             false,
             false,
@@ -889325,9 +889817,21 @@
             0,
             0,
             0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0
           ],
           "crafted": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
             0,
             0,
             0,
