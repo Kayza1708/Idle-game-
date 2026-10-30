@@ -34,6 +34,11 @@ internal static class V3FreshCampaignChecks
             Game.Validate(s);
         }
         Check(s.Workshop.inventory.Length==6,"all six native V3 items have been crafted");
+        foreach(string language in new[]{"en","de","es","fr","pt","it","pl"}){
+            var names=UnityV3Catalog.AddedIds.Select(id=>UnityV3Catalog.LocalizedName(id,language)).ToArray();
+            Check(names.Length==6&&names.Distinct().Count()==6&&names.All(name=>!string.IsNullOrWhiteSpace(name)),
+                "distinct localized item identities for "+language);
+        }
         var unityRoundtrip=StateData.From(s).ToState();
         Check(unityRoundtrip.Workshop.inventory.Select(i=>i.type).SequenceEqual(UnityV3Catalog.AddedIds),
             "paid V3 recipes persist in original sequence without loss");
