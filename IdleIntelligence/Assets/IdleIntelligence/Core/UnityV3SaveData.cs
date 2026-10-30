@@ -98,9 +98,12 @@ namespace IdleIntelligence.Core
             if(ItemSystemV3.Enabled(original))return original;
             var next=original.Copy();
             ExpandWorkshopArrays(next.Workshop);
+            // Upgrade the independently preserved main snapshot first. Validating an
+            // active challenge before expanding its legacy 36-entry arrays would reject
+            // an otherwise valid old save and leave a half-upgraded preview.
+            if(next.Challenges?.Main!=null)next.Challenges.Main=Upgrade(next.Challenges.Main);
             Game.Validate(next);
             next.ItemSystemV3=new ItemV3State();
-            if(next.Challenges?.Main!=null)next.Challenges.Main=Upgrade(next.Challenges.Main);
             next.ItemSystemV3.archiveBlueprintRight=
                 PrestigeRules.Has(next,"I04")||next.Prestige.known.Contains("I04")||
                 next.Workshop.learned[Workshop.Index("insight-archive")];
