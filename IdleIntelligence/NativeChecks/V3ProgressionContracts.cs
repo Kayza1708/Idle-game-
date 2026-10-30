@@ -23,7 +23,7 @@ internal static class V3ProgressionContracts
         Check(rates.Data.CompareTo(ScientificNumber.Zero)>=0,label+": valid data rate");
         Check(ScientificNumber.Finite(Game.WorkSpeed(s))&&Game.WorkSpeed(s)>0,label+": valid training speed");
         Check(ScientificNumber.Finite(Game.WorkSpeed(s,true))&&Game.WorkSpeed(s,true)>0,label+": valid research speed");
-        Check(PrestigeRules.Weight(s).CompareTo(ScientificNumber.Zero)>0,label+": valid INT weight");
+        Check(ScientificNumber.Finite(PrestigeRules.Weight(s))&&PrestigeRules.Weight(s)>0,label+": valid INT weight");
         Check(MetaRules.CreditFactor(s).CompareTo(ScientificNumber.Zero)>0,label+": valid axiom credit factor");
         Check(Workshop.ActiveSlots(s).Length==8,label+": native equipment layout");
     }
