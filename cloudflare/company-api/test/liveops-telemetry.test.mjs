@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {readFileSync,readdirSync} from 'node:fs';
-import {validateTelemetryBatch,publicLiveOps,ingestTelemetry,adminTelemetry,eventTypes} from '../src/liveops-telemetry.mjs';
+import {validateTelemetryBatch,publicLiveOps,ingestTelemetry,adminTelemetry,eventTypes,onlineCohortRetention} from '../src/liveops-telemetry.mjs';
 import {normalizeModerationText,validateName,containsBlockedName} from '../src/name-policy.mjs';
 const player='11111111-1111-4111-8111-111111111111',now=1793350000;
 const validId=(n)=>'f0000000-0000-4000-8000-'+n.toString().padStart(12,'0');
@@ -76,5 +76,40 @@ test('LiveOps season and non-tracking aggregate dashboard use UTC from server on
   assert.ok(!JSON.stringify(result).includes(player)); // never raw user-level data
   await assert.rejects(adminTelemetry({request:new Request('https://test.invalid/v1/admin/analytics'),
    db,now,env,reply,ApiError,digest}),/admin_auth_required/);
+ }finally{sql.close();}
+});
+
+test('D1/D7 cohorts count only consented signup-day sessions after full UTC return days',async()=>{
+ const {sql,db}=fixture();
+ try{
+  const day=Math.floor(now/86400);
+  const register=(n,age)=>{
+   const id='22222222-2222-4222-8222-'+n.toString().padStart(12,'0');
+   const first=(day-age)*86400+100;
+   sql.prepare('INSERT INTO players(id,display_name,created_at) VALUES(?,?,?)')
+    .run(id,'Cohort-'+n,first);
+   return {id,cohort:day-age};
+  };
+  const a=register(1,10),b=register(2,10),recent=register(3,2),
+    immature=register(4,1),noConsent=register(5,10);
+  let seq=1000;
+  const event=(person,dayOffset)=>{
+   const at=(person.cohort+dayOffset)*86400+200;
+   sql.prepare('INSERT INTO analytics_events(event_id,player_id,event_type,metric,received_at) VALUES(?,?,?,?,?)')
+    .run(validId(seq++),person.id,'session_start',0,at);
+  };
+  event(a,0);event(a,1);event(a,7);
+  event(b,0);event(b,1);
+  event(recent,0);
+  event(immature,0); // next UTC day has not completed
+  event(noConsent,1); // did not opt in on registration day
+  const report=await onlineCohortRetention({db,now,days:21});
+  assert.deepEqual(report.day1,{eligible:3,returned:2,rate:66.67});
+  assert.deepEqual(report.day7,{eligible:2,returned:1,rate:50});
+  assert.ok(report.definition.includes('Not install retention'));
+  const short=await onlineCohortRetention({db,now,days:7});
+  assert.deepEqual(short.day7,{eligible:0,returned:0,rate:null});
+  // No individual user identity is exposed by the aggregate.
+  assert.ok(!JSON.stringify(report).includes(a.id));
  }finally{sql.close();}
 });
