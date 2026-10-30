@@ -6,6 +6,19 @@ namespace IdleIntelligence.Core
     public static class Game
     {
         public static GameState New(double now,string campaign="unassigned",bool guided=false) { var s=new GameState {Legacy=new LegacyState{classUpgradesRecorded=true},LifetimeCreditsExactRecorded=true,LifetimeEligibleExactRecorded=true,LifetimeDataExactRecorded=true,RunCreditsRecorded=true,Story=guided?new StoryState():StoryState.Legacy("tap"),Journal=LocalJournal.New(now,true),Capsules=CapsuleState.New(now),Missions=MissionState.New(now),Retention=RetentionState.New(now),Lifetime=new LifetimeState{initialized=true,since=now},Meta=MetaState.New(now,campaign),Workshop=new WorkshopState{runStartedAt=now},SavedAt=now,Credits=ScientificNumber.From(Balance.StartCredits)};s.Missions.campaign=campaign;Validate(s);return s; }
+        /// <summary>
+        /// Real production entry point for a new native Unity V3 campaign.
+        /// The old Game.New factory intentionally remains a V2 fixture factory:
+        /// historical parity tests use it to compare deterministic V2 contracts.
+        /// Player/runtime startup exclusively uses NewV3 and a separate save name.
+        /// </summary>
+        public static GameState NewV3(double now,string campaign="unassigned",bool guided=false)
+        {
+            var s=New(now,campaign,guided);
+            s.ItemSystemV3=new ItemV3State();
+            Validate(s);
+            return s;
+        }
         public static void Validate(GameState s)
         {
             ItemSystemV3.Validate(s);
