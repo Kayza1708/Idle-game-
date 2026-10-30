@@ -77,6 +77,41 @@ namespace IdleIntelligence.Runtime
             WorkshopUIFactory.Label("CompanySafeAuth",content,
                 game.State.Settings.language!="de"?"Online profiles and trading balances require a verified player identity. No email is required. Unverified local Gems and vouchers cannot be used online.":"Online-Profil und Handelsbestand müssen sicher mit deiner Spieler-ID verknüpft sein. "+
                 "Es werden keine E-Mails benötigt. Ungeprüfte lokale Gems und Tickets sind online nicht verwendbar.",14,120);
+            if(api!=null&&api.IsConfigured&&game.Online!=null)
+            {
+                if(!api.HasSession)
+                {
+                    WorkshopUIFactory.Label("CompanyGuestCaution",content,de?
+                      "Gastkonto: nur serverseitig erzeugte Ranglisten-/Company-Bestände. Lokale Gems, Items und INT werden nicht verifiziert.":
+                      "Guest account: only server-issued rankings and Company assets are trusted; local Gems, Items and INT are not verified.",13,88);
+                    WorkshopUIFactory.Button("CompanyConnectGuest",content,
+                      de?"Online-Gastkonto erstellen":"Create online guest account",()=>{
+                        game.Online.CreateGuestAccount(ok=>{if(this!=null)ShowGate();});
+                      });
+#if UNITY_IOS && !UNITY_EDITOR
+                    WorkshopUIFactory.Button("CompanyConnectApple",content,
+                      de?"Mit Apple verbinden":"Connect with Apple",()=>{
+                        game.Online.SignInWithApple(ok=>{if(this!=null)ShowGate();});
+                      });
+#endif
+                }
+                else
+                {
+                    WorkshopUIFactory.Label("CompanyAuthState",content,de?
+                      "Sitzung verbunden. Company-Zugang und Handel erfordern trotzdem serverseitig geprüfte Berechtigungen.":
+                      "Session connected. Company access and trading still require server-verified entitlements.",13,90);
+                    WorkshopUIFactory.Button("CompanyDisconnect",content,
+                      de?"Online-Konto trennen":"Disconnect online account",()=>{
+                        game.Online.Disconnect();ShowGate();
+                      });
+#if UNITY_IOS && !UNITY_EDITOR
+                    WorkshopUIFactory.Button("CompanyLinkApple",content,
+                      de?"Apple-Konto sicher verknüpfen":"Securely link Apple account",()=>{
+                        game.Online.SignInWithApple(ok=>{if(this!=null)ShowGate();});
+                      });
+#endif
+                }
+            }
             if(api==null||!api.IsConfigured)
                 WorkshopUIFactory.Label("CompanyAccountPending",content,
                     game.State.Settings.language=="de"?"Online-Anbindung noch nicht eingerichtet. Company-Ranglisten und Handel benötigen den verifizierten Serverzugang.":"Online connection is not configured. Company rankings and trading require verified server access.",14,104);
