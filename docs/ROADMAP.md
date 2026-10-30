@@ -335,3 +335,12 @@ Forschungsarbeitsabschnitt abschließend geprüft:221/221vollständigeEditMode(2
 Bezahlte Bereichswechsel-, Protokoll- und automatischeStartverträge einschließlich Queue/Wiederholung/Direktor verbunden.32gemeinsame realeTransaktionsfolgen, beideResets mit laufendemAuftrag;2.093Vitest/223EditMode/Typecheck/Build/Generatorvergleich grün. DreiForschungsitemdetails mit tatsächlichenV3-Werten/siebenSprachen und rotemMindestdauer-Nachteil; finaleUI-Regressionsbilder nach zwei konkretenLesbarkeitskorrekturen laufen. Kein vollständigerV3-Save oderPlayerfreigabe. Danach sechsneueItems/fehlendeEffekte, wissenschaftlicheArbeit und vollständigeErwerbs-/UI-/Save-Migration weiter abarbeiten.
 
 Forschungsstartabschnitt endgültig:5/5passendePlayMode(40,293s) nach den beidenletztenUI-Lesbarkeitskorrekturen grün;44unveränderteUnity-PNGs einschließlichManifest in docs/media/unity-v3-research-starts. DE/EN320/390/430 undFR390 selbstgesehen, roteMindestdauererhöhung sichtbar, Einheitenzusammenhalt/Randabstand korrigiert, echtesfranzösischesAblegen. Kein neuesV3-Save/Player/Design-Gesamturteil. Der Gesamtauftrag geht mit sechsneuenItems/fehlendenFähigkeiten, wissenschaftlicherArbeit und vollständigerMigration weiter.
+
+
+## 30.10.2026 – Balance-Playtest auf macOS (separater Entwurf)
+
+- [x] Opt-in-Einstieg für eigenen macOS-Standalone-Entwicklungsbuild mit getrenntem Spielstand-/Produktnamen implementiert; bestehender `BuildLocalPlayer.Build` unverändert.
+- [x] Einzeiliges Build-/Startskript samt Aufzeichnung von Commit, Log und Buildreport sowie [Testablauf](balance-playtest-macos.md) hinzugefügt.
+- [ ] Unity-C#-Compile und tatsächlicher macOS-Playerstart bestätigt; getrennte Savepfade und Save-Reload nachgewiesen.
+- [ ] Erste 15/30/60/120-Minuten-Balancehistorien aus normalem Gameplay ausgewertet.
+- [ ] V3: 42 Items, vollständige Verbraucher, Erwerbs-/UI-Routen, sichere Migration und physische-/Simulatorabnahme fertig; **hierdurch nicht erledigt**.
