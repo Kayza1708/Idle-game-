@@ -100,6 +100,7 @@ namespace IdleIntelligence.Core
             ExpandWorkshopArrays(next.Workshop);
             Game.Validate(next);
             next.ItemSystemV3=new ItemV3State();
+            if(next.Challenges?.Main!=null)next.Challenges.Main=Upgrade(next.Challenges.Main);
             next.ItemSystemV3.archiveBlueprintRight=
                 PrestigeRules.Has(next,"I04")||next.Prestige.known.Contains("I04")||
                 next.Workshop.learned[Workshop.Index("insight-archive")];
