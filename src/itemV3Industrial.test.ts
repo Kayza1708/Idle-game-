@@ -1,5 +1,5 @@
 import {describe,expect,it} from 'vitest';
-import {BALANCE,hardwareIds,itemTypes,newGame,computeRateScientific,type GameState,type Item,type ItemTypeId} from './economy';
+import {hardwareIds,itemTypes,newGame,computeRateScientific,type GameState,type Item,type ItemTypeId} from './economy';
 import {ScientificNumber as S} from './scientificNumber';
 import {newItemSystemV3,itemFleetFactorV3,itemLensFactorV3,itemSynthesisCoordinatorFactorV3,itemSynthesisSpeedFactorV3,itemComputeFactorV3} from './itemSystemV3';
 import {synthesisSpeed} from './experiments';
