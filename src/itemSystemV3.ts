@@ -119,7 +119,7 @@ export function itemSynthesisCoordinatorFactorV3(s:GameState,item:Item):number{
 }
 export function itemSynthesisSpeedFactorV3(s:GameState):number{
  if(!usesItemV3(s))return 1;
- const item=itemV3Equipped(s).find(i=>i.type==='synthesis-coordinator');
+ const item=itemV3Equipped(s).find(i=>String(i.type)==='synthesis-coordinator');
  return item?itemSynthesisCoordinatorFactorV3(s,item):1;
 }
 
@@ -153,8 +153,8 @@ export function itemComputeFactorV3(s:GameState){
   if(item.type==='entropy-sink'){const{P,Q}=itemAbilityStrengthV3(s,item);result=result.multiply(S.from(c().entropy.base).pow(P).multiply(S.from(1+snapshot.E.add(one()).log10()).pow(c().entropy.exponent*Q)));}
   if(item.type==='inference-router')result=result.multiplyNumber(1+c().router.perLink*itemAbilityStrengthV3(s,item).P*activeHardwareLinksV3(s));
   if(item.type==='photonic-matrix'&&s.overclock.activeUntil>s.savedAt)result=result.multiplyNumber(1+c().photonic.coefficient*itemAbilityStrengthV3(s,item).P);
-  if(item.type==='fleet-coordinator')result=result.multiply(itemFleetFactorV3(s,item));
-  if(item.type==='singularity-lens'&&s.axiomResetCount>=c().lens.minimumCycles)
+  if(String(item.type)==='fleet-coordinator')result=result.multiply(itemFleetFactorV3(s,item));
+  if(String(item.type)==='singularity-lens'&&s.axiomResetCount>=c().lens.minimumCycles)
    result=result.multiply(itemLensFactorV3(unmodifiedHardwareComputeV3(s),item,itemCombinationV3(s,'industrial-singularity').complete,s));
  }
  if(combo.pair)result=result.multiplyNumber(c().combinations.compute.factor);
