@@ -1,0 +1,42 @@
+name: Unity Native Standalone CI
+on:
+  pull_request:
+    paths:
+      - 'IdleIntelligence/**'
+      - '.github/workflows/unity-native-standalone.yml'
+  push:
+    branches:
+      - main
+      - codex/unity-liveops-online-native-migration-20261030
+    paths:
+      - 'IdleIntelligence/**'
+      - '.github/workflows/unity-native-standalone.yml'
+jobs:
+  native-data-contracts:
+    name: Native CSharp and frozen catalogues
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Verify all committed CSharp catalogue blobs and Unity V3 contracts
+        run: dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj -c Release
+      - name: Deterministic paid-only 120-minute native progression
+        run: dotnet run --project IdleIntelligence/NativeChecks/UnityCoreCheck.csproj -c Release -- --balance
+      - name: Export independent native balancing data
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-native-120-minute-balance
+          path: IdleIntelligence/NativeChecks/out/unity-v3-balance-baseline.csv
+          if-no-files-found: error
+  unity-editor-and-devices:
+    name: Unity Editor & device acceptance
+    runs-on: ubuntu-latest
+    if: ${{ false }}
+    steps:
+      - run: |
+          echo 'Intentionally gated: needs provisioned Unity 6000.3.26f1 license'
+          echo 'Run actual Unity Editor EditMode/PlayMode and Mac/iOS/Android builds.'
+          exit 1
