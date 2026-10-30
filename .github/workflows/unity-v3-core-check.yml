@@ -2,7 +2,7 @@ name: Unity V3 CSharp core checks
 on:
   push:
     branches:
-      - codex/unity-v3-fresh-playtest-20261030
+      - codex/unity-v3-ads-ux-playtest-20261030
     paths:
       - 'IdleIntelligence/**'
       - '.github/workflows/unity-v3-core-check.yml'
