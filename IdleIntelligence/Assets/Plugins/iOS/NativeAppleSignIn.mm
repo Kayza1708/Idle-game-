@@ -4,7 +4,7 @@
 
 // Native Apple provider UI. The resulting token must STILL be checked by
 // Cloudflare against Apple's rotating JWKS, configured audience and nonce.
-extern void UnitySendMessage(const char *,const char *,const char *);
+extern "C" void UnitySendMessage(const char *,const char *,const char *);
 @interface IIAppleIdentity : NSObject <ASAuthorizationControllerDelegate,ASAuthorizationControllerPresentationContextProviding>
 @property(nonatomic,copy) NSString *receiver;
 @property(nonatomic,strong) ASAuthorizationController *active;
