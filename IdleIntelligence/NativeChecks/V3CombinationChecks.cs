@@ -87,7 +87,7 @@ internal static class V3CombinationChecks
         // 7. Recycling circuit: ×1.25 extra fragment progress, ×1.2 analysis materials.
         var probe=Equipped("recycling-probe");
         var recycling=Equipped("recycling-probe","manufacturing-controller");
-        var target=new ItemInstance{id="rare-for-recycle",type="quantum-chip",rarity:2,level:1};
+        var target=new ItemInstance{id="rare-for-recycle",type="quantum-chip",rarity=2,level=1};
         var raw=ItemSystemV3.SalvageFragments(probe,target);
         var improved=ItemSystemV3.SalvageFragments(recycling,target);
         Check(raw.progress>0&&Close(improved.progress/raw.progress,1.25),
