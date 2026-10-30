@@ -31,12 +31,3 @@ jobs:
           name: unity-native-120-minute-balance
           path: IdleIntelligence/NativeChecks/out/unity-v3-balance-baseline.csv
           if-no-files-found: error
-  unity-editor-and-devices:
-    name: Unity Editor & device acceptance
-    runs-on: ubuntu-latest
-    if: ${{ false }}
-    steps:
-      - run: |
-          echo 'Intentionally gated: needs provisioned Unity 6000.3.26f1 license'
-          echo 'Run actual Unity Editor EditMode/PlayMode and Mac/iOS/Android builds.'
-          exit 1
