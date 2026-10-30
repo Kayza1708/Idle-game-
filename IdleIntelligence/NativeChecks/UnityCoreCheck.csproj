@@ -14,5 +14,6 @@
     <Compile Include="V3BalanceProbe.cs" />
     <Compile Include="V3CombinationChecks.cs" />
     <Compile Include="V3ProgressionContracts.cs" />
+    <Compile Include="V3OnlineLiveOpsChecks.cs" />
   </ItemGroup>
 </Project>
