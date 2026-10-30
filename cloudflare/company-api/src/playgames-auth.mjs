@@ -3,7 +3,7 @@
 // a locally reported Games ID is NEVER sufficient. This route is separate
 // from Google's OpenID JWT login (different credentials and verification).
 const validCode=v=>typeof v==='string'&&v.length>=10&&v.length<=4096&&
- /^[A-Za-z0-9_.\/~+-]+$/.test(v);
+ /^[A-Za-z0-9_.\/~+-]+$/.test(v)&&!v.includes('..')&&!v.startsWith('/')&&!v.startsWith('.');
 export async function verifyPlayGamesCode({authCode,env,fetcher=fetch}){
  const clientId=env.GOOGLE_PLAY_GAMES_SERVER_CLIENT_ID;
  const clientSecret=env.GOOGLE_PLAY_GAMES_SERVER_CLIENT_SECRET;
