@@ -27,7 +27,7 @@ namespace IdleIntelligence.Runtime
         NativeTelemetryJournal journal;
         NativeLiveOpsSnapshot latest;
         float nextLiveOps,nextFlush;
-        bool requesting,telemetrySending;
+        bool requesting,telemetrySending,sessionEnded;
         string lastScreen="",status="Offline",appleChallenge="";
         Action<bool> appleResult;
 #if UNITY_IOS && !UNITY_EDITOR
@@ -198,7 +198,7 @@ namespace IdleIntelligence.Runtime
         {
             if(!events.Consent||before==null||after==null||
                 object.ReferenceEquals(before,after))return;
-            if(before.Hardware.Sum()==0&&after.Hardware.Sum()>0)
+            if(before.Lifetime.hardwareBought==0&&after.Lifetime.hardwareBought>0)
                 events.Record("first_purchase");
             if(after.Prestige.resets>before.Prestige.resets)
                 events.Record("prestige",(int)Math.Min(1000000000,after.Prestige.resets));
@@ -248,8 +248,15 @@ namespace IdleIntelligence.Runtime
                 // next session, but never send after consent is withdrawn.
             }));
         }
-        // Ordinary shutdown preserves opted-in undelivered receipts for a later
-        // offline session. Explicit opt-out/Disconnect deletes them immediately.
-        void OnDestroy(){events.Changed-=PersistTelemetry;latest=null;}
+        // End exactly once; an offline session-end event is delivered when the
+        // user next reconnects. Explicit consent withdrawal still erases it.
+        void EndSession()
+        {
+            if(sessionEnded)return;
+            sessionEnded=true;
+            if(events.Consent)events.Record("session_end");
+        }
+        void OnApplicationQuit(){EndSession();}
+        void OnDestroy(){EndSession();events.Changed-=PersistTelemetry;latest=null;}
     }
 }
