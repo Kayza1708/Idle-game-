@@ -16,7 +16,7 @@ namespace IdleIntelligence.Runtime
         {
             Item=item?.Copy();string shape=item!=null?Workshop.Definition(item).Family:(family??"research");Frame.Shape=shape;Frame.color=item!=null?RarityColor(item.rarity):new Color(.3f,.45f,.52f);Frame.SetVerticesDirty();
             Art.gameObject.SetActive(item!=null);Caption.text=ShowLevel?(item==null?empty:"Lv. "+item.level+(item.locked?" · ◆":"")):"";
-            if(item!=null){Art.sprite=Sprites[Workshop.Index(item.type)];Art.preserveAspect=true;Art.useSpriteMesh=true;}
+            if(item!=null){int index=Workshop.Index(item.type);Art.sprite=UnityV3Catalog.IsAdded(item.type)?UnityV3PixelArt.Get(item.type):(Sprites!=null&&index>=0&&index<Sprites.Length?Sprites[index]:null);Art.preserveAspect=true;Art.useSpriteMesh=true;}
             if(item==null){Art.rectTransform.anchorMin=Art.rectTransform.anchorMax=new Vector2(.5f,ShowLevel ? .585f : .5f);Art.rectTransform.pivot=new Vector2(.5f,.5f);Art.rectTransform.anchoredPosition=Vector2.zero;}LayoutPortrait();
         }
         // Layout can run during RectMask2D culling: never activate/deactivate or rebind graphics here.
