@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 #if UNITY_ANDROID && IDLE_GOOGLE_PLAY_GAMES
-using System.Collections.Generic;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
 #endif
@@ -33,9 +32,10 @@ namespace IdleIntelligence.Runtime
                         }
                         // No email or profile scope needed: only the one-time
                         // authorization code to check Games Player ID server-side.
+                        // Basic overload avoids optional profile/email scopes
+                        // and returns only the Google one-time server auth code.
                         PlayGamesPlatform.Instance.RequestServerSideAccess(
-                            false,new List<AuthScope>(),response=>{
-                                string authCode=response?.GetAuthCode();
+                            false,authCode=>{
                                 if(string.IsNullOrEmpty(authCode)){
                                     active=false;completed?.Invoke(false);return;
                                 }
