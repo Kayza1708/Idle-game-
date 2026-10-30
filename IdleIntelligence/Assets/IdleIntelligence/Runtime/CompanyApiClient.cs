@@ -298,6 +298,14 @@ namespace IdleIntelligence.Runtime
                 if (requiresSession) request.SetRequestHeader("Authorization", "Bearer " + accessToken);
                 yield return request.SendWebRequest();
                 string body = request.downloadHandler != null ? request.downloadHandler.text : "";
+                // A revoked/expired session is no longer authenticated. Clear
+                // its OS vault copy rather than repeatedly replaying a rejected
+                // bearer or showing a false "connected" indicator in Company UI.
+                if(requiresSession && request.responseCode==401)
+                {
+                    ClearSession();
+                    NativeCredentialVault.Clear();
+                }
                 completed?.Invoke(request.responseCode, body);
             }
         }
