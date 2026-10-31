@@ -25,7 +25,7 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void AllItemTransactionsProfilesAndRaritiesMatchCurrentTypeScript()
         {
-            var cases=Cases();Assert.That(cases.sourceHash,Is.EqualTo(ItemBalance.SourceHash));Assert.That(cases.itemIds.Length,Is.EqualTo(36));Assert.That(cases.cases.Length,Is.GreaterThan(250));
+            var cases=Cases();Assert.That(cases.sourceHash,Is.EqualTo(ItemBalance.SourceHash));Assert.That(cases.itemIds.Length,Is.EqualTo(ItemBalance.Items.Length));Assert.That(cases.cases.Length,Is.GreaterThan(250));
             foreach(var c in cases.cases)
             {
                 var s=State(c);string original=JsonUtility.ToJson(StateData.From(s));GameState result=s;
