@@ -32,6 +32,12 @@ namespace IdleIntelligence.Editor
             if(result.summary.result!=BuildResult.Succeeded)
                 throw new InvalidOperationException("Native Unity V3 "+target+
                     " build failed: "+result.summary.result);
+            // Persist explicit player-build evidence for the batchmode smoke gate.
+            // This file is written only after Unity reports a successful build.
+            File.WriteAllText(full+".report.txt", "Succeeded\n"+
+                "Target: "+target+"\n"+
+                "Size: "+result.summary.totalSize+"\n"+
+                "Duration: "+result.summary.totalTime+"\n");
             Debug.Log("Unity V3 native "+target+" build completed: "+full);
         }
         /// <summary>
@@ -73,7 +79,11 @@ namespace IdleIntelligence.Editor
             =>Build(BuildTarget.iOS,"Builds/V3-iOS");
         [MenuItem("Idle Intelligence/V3/Build macOS Smoke Player")]
         public static void BuildMac()
-            =>Build(BuildTarget.StandaloneOSX,"Builds/V3-Smoke.app");
+        {
+            string output=Environment.GetEnvironmentVariable("IDLE_PLAYER_OUTPUT");
+            Build(BuildTarget.StandaloneOSX,
+                string.IsNullOrWhiteSpace(output)?"Builds/V3-Smoke.app":output);
+        }
     }
 }
 #endif
