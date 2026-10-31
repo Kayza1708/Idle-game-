@@ -35,17 +35,23 @@ run_editor() {
     args+=(-quit)
   fi
   echo "=== $label ==="
-  if ! "$unity" "${args[@]}" "$@"; then
-    echo "$label failed; see $log" >&2
-    tail -n 75 "$log" >&2 || true
-    return 1
-  fi
+  local status=0
+  "$unity" "${args[@]}" "$@" || status=$?
   if grep -E 'error CS[0-9]+:|Scripts have compiler errors|Compilation failed' "$log"; then
     echo "$label contains compiler errors; see $log" >&2
     return 1
   fi
+  if [[ "$label" == "editmode" || "$label" == "playmode" ]]; then
+    # Unity normally exits nonzero when a test fails. Read the report first:
+    # printing the end of the Editor log hides the actual NUnit assertions.
+    verify_xml "$logs/$label.xml" || return 1
+  fi
+  if (( status != 0 )); then
+    echo "$label failed with Unity exit code $status; see $log" >&2
+    tail -n 75 "$log" >&2 || true
+    return "$status"
+  fi
 }
-run_editor compile
 
 verify_xml() {
   local result="$1"
@@ -69,15 +75,32 @@ r = ET.parse(p).getroot()
 failed = int(r.get("failed", "0"))
 total = int(r.get("total", "0"))
 result = r.get("result")
+print(f"Unity {p.stem}: result={result}, total={total}, failed={failed}")
 if failed or total == 0 or result != "Passed":
-    raise SystemExit(f"Unity test suite not green: {p} result={result}, total={total}, failed={failed}")
+    cases = [c for c in r.iter("test-case") if c.get("result") in ("Failed", "Error")]
+    if not cases:
+        cases = [c for c in r.iter("test-suite") if c.get("result") in ("Failed", "Error") and c.find("failure") is not None]
+    for index, case in enumerate(cases[:40], 1):
+        name = case.get("fullname") or case.get("name") or "<unnamed>"
+        print(f"\\nFAIL #{index}: {name}")
+        failure = case.find("failure")
+        if failure is not None:
+            for field in ("message", "stack-trace"):
+                value = failure.findtext(field)
+                if value:
+                    print(f"{field}:\\n{value[:3500]}")
+        reason = case.findtext("reason/message")
+        if reason:
+            print(f"reason: {reason[:1500]}")
+    if len(cases) > 40:
+        print(f"and {len(cases)-40} additional failures; see {p}")
+    raise SystemExit(f"Unity {p.stem} failed; inspect the reports above and {p}")
 print(f"Unity test suite passed: {p}, total={total}")
 PY
 }
+run_editor compile
 run_editor editmode -runTests -testPlatform EditMode -testResults "$logs/editmode.xml"
-verify_xml "$logs/editmode.xml"
 run_editor playmode -runTests -testPlatform PlayMode -testResults "$logs/playmode.xml"
-verify_xml "$logs/playmode.xml"
 
 output="$logs/IdleIntelligence-V3-Smoke.app"
 echo "=== macOS development player ==="
