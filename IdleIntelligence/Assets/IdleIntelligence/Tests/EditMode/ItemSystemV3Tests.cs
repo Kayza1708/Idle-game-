@@ -172,8 +172,21 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void DevelopmentStateCannotSilentlySaveOrAlterExistingNativeState()
         {
-            Assert.That(Game.New(0).ItemSystemV3,Is.Null);var s=State(Cases().cases[0]);Assert.Throws<NotSupportedException>(()=>StateData.From(s));
-            s.ItemSystemV3=null;Assert.That(StateData.From(s),Is.Not.Null);
+            Assert.That(Game.New(0).ItemSystemV3,Is.Null);
+            var s=State(Cases().cases[0]);
+            var before=s.ItemSystemV3.Copy();
+            var native=StateData.From(s);
+            // Native V3 is now the supported save boundary. It must explicitly
+            // mark the version and keep receipts intact instead of silently
+            // downgrading the campaign to legacy V2.
+            Assert.That(native.itemV3Recorded,Is.True);
+            Assert.That(native.itemV3,Is.Not.Null);
+            Assert.That(native.itemV3.version,Is.EqualTo(3));
+            Assert.That(s.ItemSystemV3.version,Is.EqualTo(before.version));
+            s.ItemSystemV3=null;
+            var legacy=StateData.From(s);
+            Assert.That(legacy.itemV3Recorded,Is.False);
+            Assert.That(legacy.itemV3,Is.Null);
         }
         [Test]public void ActualTrainingAutomationAndReservesMatchSource()
         {
