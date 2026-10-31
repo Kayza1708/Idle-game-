@@ -28,8 +28,14 @@ echo "Unity: $unity" >> "$logs/provenance.txt"
 run_editor() {
   local label="$1"; shift
   local log="$logs/$label.log"
+  local args=(-batchmode -projectPath "$project" -logFile "$log")
+  # Unity Test Framework owns the Editor lifecycle when -runTests is used.
+  # Passing -quit exits before the NUnit XML result can be written.
+  if [[ "$label" != "editmode" && "$label" != "playmode" ]]; then
+    args+=(-quit)
+  fi
   echo "=== $label ==="
-  if ! "$unity" -batchmode -quit -projectPath "$project" -logFile "$log" "$@"; then
+  if ! "$unity" "${args[@]}" "$@"; then
     echo "$label failed; see $log" >&2
     tail -n 75 "$log" >&2 || true
     return 1
@@ -42,7 +48,17 @@ run_editor() {
 run_editor compile
 
 verify_xml() {
-  python3 - "$1" <<'PY'
+  local result="$1"
+  if [[ ! -s "$result" ]]; then
+    local name="${result##*/}"
+    local suite="${name%.xml}"
+    echo "Unity returned without a $suite XML test report: $result" >&2
+    echo "Last 100 lines of $suite Editor log:" >&2
+    tail -n 100 "$logs/$suite.log" >&2 || true
+    echo "Check for test discovery, package resolution, licensing or process errors." >&2
+    return 1
+  fi
+  python3 - "$result" <<'PY'
 from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
