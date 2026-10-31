@@ -66,7 +66,7 @@ verify_xml "$logs/playmode.xml"
 output="$logs/IdleIntelligence-V3-Smoke.app"
 echo "=== macOS development player ==="
 if ! IDLE_PLAYER_OUTPUT="$output" "$unity" -batchmode -quit -projectPath "$project" \
-    -executeMethod IdleIntelligence.Editor.BuildLocalPlayer.Build \
+    -executeMethod IdleIntelligence.Editor.UnityV3BuildVerification.BuildMac \
     -logFile "$logs/player-build.log"; then
   echo "Unity macOS player build failed. Log: $logs/player-build.log" >&2
   tail -n 75 "$logs/player-build.log" >&2 || true
