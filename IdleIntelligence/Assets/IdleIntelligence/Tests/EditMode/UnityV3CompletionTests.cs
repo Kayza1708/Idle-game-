@@ -119,6 +119,31 @@ namespace IdleIntelligence.Tests
                 Assert.That(Directory.GetFiles(dir,"*.v24-original-*").Length,Is.EqualTo(1));
             }finally{Directory.Delete(dir,true);}
         }
+        [Test]public void FreshUnityV3EditorSaveCanReloadAdvanceOfflineAndSaveAgain()
+        {
+            string dir=Path.Combine(Path.GetTempPath(),"unity-v3-first-boot-"+Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(dir);
+            try {
+                string file=Path.Combine(dir,"idle-intelligence-unity-v3.json");
+                var store=new AtomicSaveStore(file,new UnitySaveCodec(),freshV3:true);
+                var initial=store.Load(1000);
+                Assert.That(initial.Writable,Is.True,initial.Message);
+                Assert.That(ItemSystemV3.Enabled(initial.State),Is.True);
+                Assert.That(initial.State.Credits.CompareTo(ScientificNumber.From(50)),Is.EqualTo(0));
+                store.Save(initial.State);
+                var reopened=new AtomicSaveStore(file,new UnitySaveCodec(),freshV3:true);
+                var loaded=reopened.Load(1000);
+                Assert.That(loaded.Writable,Is.True,loaded.Message);
+                var after=Game.AdvanceMeasured(loaded.State,loaded.State.SavedAt+60000).State;
+                Assert.DoesNotThrow(()=>Game.Validate(after));
+                Assert.DoesNotThrow(()=>reopened.Save(after));
+                var finished=new AtomicSaveStore(file,new UnitySaveCodec(),freshV3:true).Load(61000);
+                Assert.That(finished.Writable,Is.True,finished.Message);
+                Assert.That(finished.State.ItemSystemV3.synthesisContract,Is.Null);
+                Assert.That(finished.State.ItemSystemV3.synthesisRemainders.Length,
+                    Is.EqualTo(ItemBalance.ComponentIds.Length));
+            } finally {Directory.Delete(dir,true);}
+        }
         [Test]public void VersionedUnitySavePreservesV3CountersOnReload()
         {
             string dir=Path.Combine(Path.GetTempPath(),"unity-v3-"+Guid.NewGuid().ToString("N"));
