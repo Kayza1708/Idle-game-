@@ -17,6 +17,17 @@ namespace IdleIntelligence.Core
         public string lastLearningTrack,lastTrainingCompletionCause;
         public bool archiveBlueprintRight,axiomDiscovered;public double axiomDiscoveryAt;
         public double[] synthesisRemainders;public ItemV3Synthesis synthesisContract;public ItemV3Overdrive overdrive;
+        // Unity JsonUtility may materialize null nested custom classes as empty
+        // instances. Explicit presence flags distinguish a real paid receipt
+        // from a serializer placeholder; older version-25 saves are supported.
+        public bool receiptPresenceRecorded,hasSynthesisContract,hasOverdrive;
+        static bool EmptySynthesis(ItemV3Synthesis value)
+            =>value==null||(string.IsNullOrEmpty(value.id)&&
+                string.IsNullOrEmpty(value.component)&&value.multiplier==0);
+        static bool EmptyOverdrive(ItemV3Overdrive value)
+            =>value==null||(value.startedAt==0&&value.burstUntil==0&&
+                (value.creditFactor==0||value.creditFactor==1)&&
+                (value.dataFactor==0||value.dataFactor==1));
         public double gradientStoredWork,gradientAccruedWork,gradientLastRequirement,capacitorFraction,axiomAnchorFactor,axiomAnchorSeconds;
         public string gradientAccruedJob;public string[] capacitorCompletedJobs;
         public double axiomAnchorFirstSeconds,axiomAnchorFirstFactor;public int libraryAnalyses;public string libraryLastReceipt;
@@ -33,6 +44,8 @@ namespace IdleIntelligence.Core
                 axiomDiscovered=v.axiomDiscovered,axiomDiscoveryAt=v.axiomDiscoveryAt,
                 synthesisRemainders=(double[])v.synthesisRemainders.Clone(),
                 synthesisContract=v.synthesisContract?.Copy(),overdrive=v.overdrive?.Copy(),
+                receiptPresenceRecorded=true,hasSynthesisContract=v.synthesisContract!=null,
+                hasOverdrive=v.overdrive!=null,
                 gradientStoredWork=v.gradientStoredWork,gradientAccruedWork=v.gradientAccruedWork,
                 gradientLastRequirement=v.gradientLastRequirement,gradientAccruedJob=v.gradientAccruedJob,
                 capacitorFraction=v.capacitorFraction,capacitorCompletedJobs=(string[])v.capacitorCompletedJobs.Clone(),
@@ -46,6 +59,15 @@ namespace IdleIntelligence.Core
             if(version!=3||dataProduced==null||knowledgeProduced==null||componentsProduced==null||
                synthesisRemainders==null||synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||
                capacitorCompletedJobs==null)throw new FormatException("Missing native V3 save receipt");
+            if(receiptPresenceRecorded&&
+                (hasSynthesisContract==EmptySynthesis(synthesisContract)||
+                 hasOverdrive==EmptyOverdrive(overdrive)))
+                throw new FormatException("Inconsistent V3 paid receipt presence flags");
+            // For historical v25 payloads with no flags, only the exact inert
+            // Unity-JSON placeholder can become null. Never discard a nonempty
+            // receipt, even when its fields are malformed.
+            var activeSynthesis=EmptySynthesis(synthesisContract)?null:synthesisContract;
+            var activeOverdrive=EmptyOverdrive(overdrive)?null:overdrive;
             return new ItemV3State{
                 version=version,dataProduced=ScientificNumber.FromData(dataProduced),
                 knowledgeProduced=ScientificNumber.FromData(knowledgeProduced),
@@ -57,7 +79,7 @@ namespace IdleIntelligence.Core
                 lastTrainingCompletionCause=lastTrainingCompletionCause,archiveBlueprintRight=archiveBlueprintRight,
                 axiomDiscovered=axiomDiscovered,axiomDiscoveryAt=axiomDiscoveryAt,
                 synthesisRemainders=(double[])synthesisRemainders.Clone(),
-                synthesisContract=synthesisContract?.Copy(),overdrive=overdrive?.Copy(),
+                synthesisContract=activeSynthesis?.Copy(),overdrive=activeOverdrive?.Copy(),
                 gradientStoredWork=gradientStoredWork,gradientAccruedWork=gradientAccruedWork,
                 gradientLastRequirement=gradientLastRequirement,gradientAccruedJob=gradientAccruedJob,
                 capacitorFraction=capacitorFraction,capacitorCompletedJobs=(string[])capacitorCompletedJobs.Clone(),
