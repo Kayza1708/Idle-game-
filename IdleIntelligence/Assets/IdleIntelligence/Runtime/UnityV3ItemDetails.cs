@@ -51,7 +51,7 @@ namespace IdleIntelligence.Runtime
                 case "synthesis-coordinator":value="Synthesis ×"+Number(ItemSystemV3.SynthesisCoordinatorFactor(s,item));break;
                 case "singularity-lens":value="Compute ×"+Number(ItemSystemV3.SingularityLensFactor(s,item,false).ToDouble());break;
                 case "axiom-anchor":value="Compute / training ×"+Number(1+2*p);break;
-                default:value="";
+                default:value="";break;
             }
             return "<b>"+Title(s,item)+"</b>\n<size=24><color=#92EEDC>"+value+"</color></size>";
         }
@@ -109,7 +109,8 @@ namespace IdleIntelligence.Runtime
                 if(!ReferenceEquals(equipped,s)){
                     var before=Game.Compute(s);var after=Game.Compute(equipped);
                     if(before.CompareTo(after)!=0)lines.Add("\nCompute: "+NumberFormatting.Format(before,s.Settings.numberFormat,s.Settings.language)+" → "+NumberFormatting.Format(after,s.Settings.numberFormat,s.Settings.language));
-                    var beforeSpeed=ItemSystemV3.SynthesisWorkFactor(s),afterSpeed=ItemSystemV3.SynthesisWorkFactor(equipped);
+                    var beforeSpeed=ItemSystemV3.SynthesisWorkFactor(s);
+                    var afterSpeed=ItemSystemV3.SynthesisWorkFactor(equipped);
                     if(Math.Abs(beforeSpeed-afterSpeed)>1e-8)lines.Add(L("Synthesetempo: ","Synthesis speed: ")+"×"+Number(beforeSpeed)+" → ×"+Number(afterSpeed));
                 }
             }

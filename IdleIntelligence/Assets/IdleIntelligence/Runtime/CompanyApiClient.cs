@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Text;
+using IdleIntelligence.Core;
 using UnityEngine;
 using UnityEngine.Networking;
 

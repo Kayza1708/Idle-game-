@@ -31,7 +31,23 @@ namespace IdleIntelligence.Core
             var v=s?.ItemSystemV3;if(v==null)return;if(PrestigeAutomation.ResearchJobs(s).Any(j=>!ScientificNumber.Finite(j.required)||j.required<=0||!ScientificNumber.Finite(j.done)||j.done<0||j.done>j.required+1e-6||!ScientificNumber.Finite(j.eventWork)||j.eventWork<0||j.eventWork>j.done+1e-6))throw new FormatException("Invalid V3 research work contract");double maxP=ItemV3Balance.RarityFactors.Max()*(1+C("levelStep")*(C("levelMax")-1))*(1+C("forgeStep")*C("forgeMax"))*ItemV3Balance.Get("prestige.items.W10ability");var od=v.overdrive;if(od!=null&&(!ScientificNumber.Finite(od.startedAt)||!ScientificNumber.Finite(od.burstUntil)||!ScientificNumber.Finite(od.creditFactor)||!ScientificNumber.Finite(od.dataFactor)||od.startedAt<0||od.burstUntil<od.startedAt||od.burstUntil-od.startedAt>C("combinations.energy.seconds")*1000+.001||od.creditFactor<1||od.creditFactor>(1+C("burst.coefficient")*maxP)*C("combinations.energy.credits")+1e-10||od.dataFactor!=1&&od.dataFactor!=C("combinations.energy.data")))throw new FormatException("Invalid V3 overdrive contract");
             foreach(var job in PrestigeAutomation.ResearchJobs(s)){if(job.researchStartVersion!=0&&job.researchStartVersion!=3)throw new FormatException("Unknown research start contract");if(job.researchStartVersion==3&&(!new[]{"manual","queue","automatic"}.Contains(job.researchStartCause)||!new[]{"data","architecture","model","materials","automation"}.Contains(job.area)||job.previousArea!=null&&!new[]{"data","architecture","model","materials","automation"}.Contains(job.previousArea)||!ScientificNumber.Finite(job.minimumSeconds)||job.minimumSeconds<C("protocol.minimumBase")||job.minimumSeconds>Math.Max(C("protocol.minimumBase"),C("protocol.floor"))||!ScientificNumber.Finite(job.minimumUntil)||Math.Abs(job.minimumUntil-job.startedAt-job.minimumSeconds*1000)>1e-6||!ScientificNumber.Finite(job.startingFraction)||job.startingFraction<0||job.startingFraction>C("switch.cap")+C("combinations.autonomous.start")+C("combinations.autonomous.extra")+1e-12||job.eventWork+1e-6<job.required*job.startingFraction||job.automaticOrdinal<0||job.automaticOrdinal>MaxExactSequence||job.completionCause!=null&&job.completionCause!="bonus"))throw new FormatException("Invalid V3 research start contract");}
             if(!ScientificNumber.Finite(v.recyclingFragmentProgress)||v.recyclingFragmentProgress<0||v.recyclingFragmentProgress>=1)throw new FormatException("Invalid V3 fragment progress");
-            if(v.synthesisRemainders==null||v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length||v.synthesisRemainders.Any(n=>!ScientificNumber.Finite(n)||n<0||n>=1)||v.synthesisContract!=null&&(string.IsNullOrEmpty(v.synthesisContract.id)||!ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||!ScientificNumber.Finite(v.synthesisContract.multiplier)||v.synthesisContract.multiplier<1))throw new FormatException("Invalid V3 synthesis receipt");
+            // Report the violated invariant separately. Never drop or repair a paid
+            // synthesis receipt during load or offline advancement.
+            if(v.synthesisRemainders==null)
+                throw new FormatException("Invalid V3 synthesis receipt: missing remainder array");
+            if(v.synthesisRemainders.Length!=ItemBalance.ComponentIds.Length)
+                throw new FormatException("Invalid V3 synthesis receipt: remainder array length "+
+                    v.synthesisRemainders.Length+" expected "+ItemBalance.ComponentIds.Length);
+            for(int i=0;i<v.synthesisRemainders.Length;i++)
+                if(!ScientificNumber.Finite(v.synthesisRemainders[i])||
+                    v.synthesisRemainders[i]<0||v.synthesisRemainders[i]>=1)
+                    throw new FormatException("Invalid V3 synthesis receipt: remainder at index "+i);
+            if(v.synthesisContract!=null &&
+                (string.IsNullOrEmpty(v.synthesisContract.id)||
+                 !ItemBalance.ComponentIds.Contains(v.synthesisContract.component)||
+                 !ScientificNumber.Finite(v.synthesisContract.multiplier)||
+                 v.synthesisContract.multiplier<1))
+                throw new FormatException("Invalid V3 synthesis receipt: malformed active contract");
             if(v.capacitorCompletedJobs==null||v.capacitorCompletedJobs.Length>256||v.capacitorCompletedJobs.Any(id=>string.IsNullOrEmpty(id)||id.Length>200)||v.capacitorCompletedJobs.Distinct().Count()!=v.capacitorCompletedJobs.Length||
                 new[]{v.gradientStoredWork,v.gradientAccruedWork,v.gradientLastRequirement,v.capacitorFraction,v.axiomAnchorSeconds,v.axiomAnchorFactor,v.axiomAnchorFirstSeconds,v.axiomAnchorFirstFactor}.Any(n=>!ScientificNumber.Finite(n)||n<0)||
                 v.axiomAnchorFirstFactor<1||v.axiomAnchorFirstSeconds>v.axiomAnchorSeconds||v.libraryAnalyses<0||v.libraryAnalyses>=5||v.libraryLastReceipt!=null&&v.libraryLastReceipt.Length>200||

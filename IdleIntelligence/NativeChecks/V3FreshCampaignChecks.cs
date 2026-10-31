@@ -57,6 +57,28 @@ internal static class V3FreshCampaignChecks
             (progressed.ResearchJob==null||progressed.ResearchJob.done>paid.ResearchJob.done),
             "native research advances through V3 simulation");
         Game.Validate(progressed);
+
+        // Reproduce the offline startup path with a paid synthesis receipt.
+        // Must preserve receipt/state invariants before and after settlement.
+        var synthesis=Game.NewV3(1000,"native-synthesis-offline",true);
+        string componentId=ItemBalance.ComponentIds[0];
+        synthesis.Industry.hasSynthesis=true;
+        synthesis.Industry.synthesis=new Job{
+            id=componentId,key="synthesis-1",required=1,done=0
+        };
+        synthesis.ItemSystemV3.synthesisContract=new ItemV3Synthesis{
+            id="synthesis-1",component=componentId,multiplier=1
+        };
+        Game.Validate(synthesis);
+        var synthesisAfter=Game.AdvanceMeasured(synthesis,61000).State;
+        Game.Validate(synthesisAfter);
+        Check(synthesisAfter.ItemSystemV3.synthesisRemainders.Length==ItemBalance.ComponentIds.Length,
+            "offline advance preserves V3 synthesis remainder layout");
+        Check(synthesisAfter.Industry.synthesis==null &&
+            synthesisAfter.ItemSystemV3.synthesisContract==null,
+            "paid synthesis settles and clears matching V3 receipt on offline advance");
+        Check(synthesis.ItemSystemV3.synthesisContract!=null,
+            "offline settlement leaves original snapshot unchanged");
         Console.WriteLine("UNITY V3 6-RECIPE CRAFT AND PAID RESEARCH SMOKE OK");
     }
 }

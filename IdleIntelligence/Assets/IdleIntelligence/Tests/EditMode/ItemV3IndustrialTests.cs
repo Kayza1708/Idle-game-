@@ -24,10 +24,10 @@ namespace IdleIntelligence.Tests
         [Test] public void FleetUsesOnlyCurrentHundredUnitHardwareClasses()
         {
             var s=Prepared();
-            Assert.That(ItemSystemV3.FleetFactor(s,Item("fleet-coordinator")).ToNumber(),
+            Assert.That(ItemSystemV3.FleetFactor(s,Item("fleet-coordinator")).ToDouble(),
                 Is.EqualTo(2*(1+.15*2)).Within(1e-10));
             s.Hardware[1]=99;
-            Assert.That(ItemSystemV3.FleetFactor(s,Item("fleet-coordinator")).ToNumber(),
+            Assert.That(ItemSystemV3.FleetFactor(s,Item("fleet-coordinator")).ToDouble(),
                 Is.EqualTo(2*(1+.15)).Within(1e-10));
         }
         [Test] public void SynthesisCoordinatorUsesOnlyDocumentedProductionK()
@@ -45,12 +45,13 @@ namespace IdleIntelligence.Tests
         {
             var s=Prepared();
             var lens=Item("singularity-lens");
-            var raw=ItemSystemV3.UnmodifiedHardwareCompute(s);
-            double expected=Math.Pow(Math.Max(1,raw.ToNumber()),.02);
-            Assert.That(ItemSystemV3.SingularityLensFactor(s,lens,false).ToNumber(),
+            s.Meta.resets=3;
+            var raw=ItemSystemV3.RawHardwareCompute(s);
+            double expected=Math.Pow(Math.Max(1,raw.ToDouble()),.02);
+            Assert.That(ItemSystemV3.SingularityLensFactor(s,lens,false).ToDouble(),
                 Is.EqualTo(expected).Within(1e-8));
-            Assert.That(ItemSystemV3.SingularityLensFactor(s,lens,true).ToNumber(),
-                Is.EqualTo(Math.Pow(Math.Max(1,raw.ToNumber()),.03)).Within(1e-8));
+            Assert.That(ItemSystemV3.SingularityLensFactor(s,lens,true).ToDouble(),
+                Is.EqualTo(Math.Pow(Math.Max(1,raw.ToDouble()),.03)).Within(1e-8));
         }
     }
 }
