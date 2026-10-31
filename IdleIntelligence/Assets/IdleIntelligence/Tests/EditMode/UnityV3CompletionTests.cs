@@ -119,6 +119,42 @@ namespace IdleIntelligence.Tests
                 Assert.That(Directory.GetFiles(dir,"*.v24-original-*").Length,Is.EqualTo(1));
             }finally{Directory.Delete(dir,true);}
         }
+        [Test]public void UnityJsonV2RoundTripDoesNotInventUnmarkedNativeV3()
+        {
+            // Regression: Unity JsonUtility converts a null custom class into a
+            // default object. Most historical V2 parity/save tests must remain
+            // valid without granting any V3 state.
+            var source=Game.New(1000,"unity-v2-null-v3",true);
+            var codec=new UnitySaveCodec();
+            var json=codec.Encode(StateData.From(source));
+            var decoded=codec.Decode(json);
+            Assert.That(decoded.itemV3Recorded,Is.False);
+            Assert.That(decoded.itemV3,Is.Null,
+                "A serializer placeholder is not a paid native V3 payload");
+            var loaded=decoded.ToState();
+            Assert.That(loaded.ItemSystemV3,Is.Null);
+            Assert.That(loaded.Credits.CompareTo(source.Credits),Is.EqualTo(0));
+
+            // Same rule applies to an independently serialized challenge main.
+            var snapshot=StateData.From(source);
+            snapshot.hasChallenge=true;
+            snapshot.challengeMain=MainStateData.FromMain(source);
+            var withChallenge=codec.Decode(codec.Encode(snapshot));
+            Assert.That(withChallenge.itemV3,Is.Null);
+            Assert.That(withChallenge.challengeMain.itemV3,Is.Null);
+        }
+        [Test]public void UnityJsonRejectsRealUnmarkedNativeV3InjectedIntoLegacyState()
+        {
+            var source=Game.New(1000,"unmarked-v3-rejected",true);
+            var injected=StateData.From(source);
+            injected.itemV3=UnityV3SaveData.From(
+                Game.NewV3(1000,"native-v3-snapshot",true).ItemSystemV3);
+            Assert.That(injected.itemV3Recorded,Is.False);
+            var codec=new UnitySaveCodec();
+            string payload=codec.Encode(injected);
+            Assert.Throws<FormatException>(()=>codec.Decode(payload),
+                "V3 data must never be silently accepted or discarded without an explicit marker");
+        }
         [Test]public void FreshUnityV3EditorSaveCanReloadAdvanceOfflineAndSaveAgain()
         {
             string dir=Path.Combine(Path.GetTempPath(),"unity-v3-first-boot-"+Guid.NewGuid().ToString("N"));
