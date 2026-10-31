@@ -28,6 +28,38 @@ namespace IdleIntelligence.Core
             =>value==null||(value.startedAt==0&&value.burstUntil==0&&
                 (value.creditFactor==0||value.creditFactor==1)&&
                 (value.dataFactor==0||value.dataFactor==1));
+        // A JsonUtility null custom-class field may be materialized as a
+        // default empty object, including for fixtures deserialized directly
+        // by JsonUtility (bypassing UnitySaveCodec). This intentionally
+        // conservative check does not waive validation of actual V3 receipts.
+        static bool ZeroNumber(NumberData value)
+            => value==null || (value.m==0 && value.e==0 &&
+                (value.terms==null||value.terms.Length==0));
+        public bool IsUnmarkedNullPlaceholder()
+        {
+            return (version==0||version==3) &&
+                !receiptPresenceRecorded&&!hasSynthesisContract&&!hasOverdrive &&
+                nextTrainingSequence==0&&lastCompletedTrainingSequence==0 &&
+                scannerAnalyses==0&&automaticResearchStarts==0 &&
+                learningStreak==0&&!archiveBlueprintRight&&!axiomDiscovered &&
+                runMinutes==0&&recyclingFragmentProgress==0 &&
+                gradientStoredWork==0&&gradientAccruedWork==0&&
+                gradientLastRequirement==0&&capacitorFraction==0&&
+                axiomAnchorSeconds==0&&axiomAnchorFirstSeconds==0 &&
+                (axiomAnchorFactor==0||axiomAnchorFactor==1) &&
+                (axiomAnchorFirstFactor==0||axiomAnchorFirstFactor==1) &&
+                (axiomDiscoveryAt==0||axiomDiscoveryAt==-1) &&
+                libraryAnalyses==0&&
+                string.IsNullOrEmpty(lastLearningTrack)&&
+                string.IsNullOrEmpty(lastTrainingCompletionCause)&&
+                string.IsNullOrEmpty(gradientAccruedJob)&&
+                string.IsNullOrEmpty(libraryLastReceipt)&&
+                ZeroNumber(dataProduced)&&ZeroNumber(knowledgeProduced)&&
+                ZeroNumber(componentsProduced)&&
+                (synthesisRemainders==null||synthesisRemainders.All(n=>n==0))&&
+                (capacitorCompletedJobs==null||capacitorCompletedJobs.Length==0)&&
+                EmptySynthesis(synthesisContract)&&EmptyOverdrive(overdrive);
+        }
         public double gradientStoredWork,gradientAccruedWork,gradientLastRequirement,capacitorFraction,axiomAnchorFactor,axiomAnchorSeconds;
         public string gradientAccruedJob;public string[] capacitorCompletedJobs;
         public double axiomAnchorFirstSeconds,axiomAnchorFirstFactor;public int libraryAnalyses;public string libraryLastReceipt;
@@ -75,8 +107,8 @@ namespace IdleIntelligence.Core
                 runMinutes=runMinutes,recyclingFragmentProgress=recyclingFragmentProgress,
                 nextTrainingSequence=nextTrainingSequence,lastCompletedTrainingSequence=lastCompletedTrainingSequence,
                 scannerAnalyses=scannerAnalyses,automaticResearchStarts=automaticResearchStarts,
-                learningStreak=learningStreak,lastLearningTrack=lastLearningTrack,
-                lastTrainingCompletionCause=lastTrainingCompletionCause,archiveBlueprintRight=archiveBlueprintRight,
+                learningStreak=learningStreak,lastLearningTrack=string.IsNullOrEmpty(lastLearningTrack)?null:lastLearningTrack,
+                lastTrainingCompletionCause=string.IsNullOrEmpty(lastTrainingCompletionCause)?null:lastTrainingCompletionCause,archiveBlueprintRight=archiveBlueprintRight,
                 axiomDiscovered=axiomDiscovered,axiomDiscoveryAt=axiomDiscoveryAt,
                 synthesisRemainders=(double[])synthesisRemainders.Clone(),
                 synthesisContract=activeSynthesis?.Copy(),overdrive=activeOverdrive?.Copy(),

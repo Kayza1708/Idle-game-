@@ -143,6 +143,39 @@ namespace IdleIntelligence.Tests
             Assert.That(withChallenge.itemV3,Is.Null);
             Assert.That(withChallenge.challengeMain.itemV3,Is.Null);
         }
+        [Test]public void DirectUnityJsonLegacyDtoRestoresWithoutInventedV3()
+        {
+            var old=Game.New(1000,"direct-legacy-v2",true);
+            var json=UnityEngine.JsonUtility.ToJson(StateData.From(old));
+            var dto=UnityEngine.JsonUtility.FromJson<StateData>(json);
+            var actual=dto.ToState();
+            Assert.That(actual.ItemSystemV3,Is.Null);
+            Assert.That(actual.Credits.CompareTo(old.Credits),Is.Zero);
+
+            // A forged nonempty unmarked V3 object is never an inert
+            // JsonUtility placeholder and must remain rejected.
+            dto=UnityEngine.JsonUtility.FromJson<StateData>(json);
+            dto.itemV3=new UnityV3SaveData {
+                nextTrainingSequence=0,
+                gradientStoredWork=5
+            };
+            Assert.Throws<FormatException>(()=>dto.ToState());
+        }
+        [Test]public void UnityJsonNormalizesEmptyOptionalV3ProductionEnums()
+        {
+            var starting=Game.NewV3(1000,"optional-enum-json",true);
+            var encoded=UnityEngine.JsonUtility.ToJson(
+                UnityV3SaveData.From(starting.ItemSystemV3));
+            var decoded=UnityEngine.JsonUtility.FromJson<UnityV3SaveData>(encoded);
+            var restored=decoded.ToState();
+            Assert.That(restored.lastLearningTrack,Is.Null);
+            Assert.That(restored.lastTrainingCompletionCause,Is.Null);
+            starting.ItemSystemV3=restored;
+            Assert.DoesNotThrow(()=>Game.Validate(starting));
+            decoded.lastLearningTrack="invalid-track";
+            starting.ItemSystemV3=decoded.ToState();
+            Assert.Throws<FormatException>(()=>Game.Validate(starting));
+        }
         [Test]public void UnityJsonRejectsRealUnmarkedNativeV3InjectedIntoLegacyState()
         {
             var source=Game.New(1000,"unmarked-v3-rejected",true);

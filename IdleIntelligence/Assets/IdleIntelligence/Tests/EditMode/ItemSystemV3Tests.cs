@@ -172,8 +172,21 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void DevelopmentStateCannotSilentlySaveOrAlterExistingNativeState()
         {
-            Assert.That(Game.New(0).ItemSystemV3,Is.Null);var s=State(Cases().cases[0]);Assert.Throws<NotSupportedException>(()=>StateData.From(s));
-            s.ItemSystemV3=null;Assert.That(StateData.From(s),Is.Not.Null);
+            Assert.That(Game.New(0).ItemSystemV3,Is.Null);
+            var s=State(Cases().cases[0]);
+            var before=s.ItemSystemV3.Copy();
+            var native=StateData.From(s);
+            // Native V3 is now the supported save boundary. It must explicitly
+            // mark the version and keep receipts intact instead of silently
+            // downgrading the campaign to legacy V2.
+            Assert.That(native.itemV3Recorded,Is.True);
+            Assert.That(native.itemV3,Is.Not.Null);
+            Assert.That(native.itemV3.version,Is.EqualTo(3));
+            Assert.That(s.ItemSystemV3.version,Is.EqualTo(before.version));
+            s.ItemSystemV3=null;
+            var legacy=StateData.From(s);
+            Assert.That(legacy.itemV3Recorded,Is.False);
+            Assert.That(legacy.itemV3,Is.Null);
         }
         [Test]public void ActualTrainingAutomationAndReservesMatchSource()
         {
@@ -294,7 +307,7 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void ActualLevelUpgradeQuotesPaymentsAndBasisMatchAllSourceInputs()
         {
-            var rows=Cases().upgradeCases;Assert.That(rows.Length,Is.EqualTo(1260));foreach(var row in rows){var state=Game.New(1000,"prepared-W04-reference");state.Data=ScientificNumber.From(1e15);if(!row.mode.StartsWith("normal"))state.ItemSystemV3=new ItemV3State();if(row.mode.EndsWith("W04"))state.Workshop.nodes=new[]{"W04"};if(row.mode=="no-items-W04")state.Challenges.Run=new ChallengeRun{id="no-items",stage=1};var item=new ItemInstance{id="prepared-item",type=row.type,level=row.level};item.materialBasis[0]=7;state.Workshop.inventory=new[]{item};state.Workshop.components=Enumerable.Repeat(1000000000L,ItemBalance.ComponentIds.Length).ToArray();var quote=Workshop.UpgradeQuote(state,item);string label=row.mode+" "+row.type+" "+row.level;Assert.That(quote.Allowed,Is.EqualTo(row.allowed),label);if(row.allowed){Assert.That(quote.Components,Is.EqualTo(row.costs),label+" per-input rounded quote");Assert.That(quote.Data,Is.EqualTo(row.dataCost),label+" data quote");}var done=Workshop.Upgrade(state,item.id,state.Workshop.revision);Assert.That(done.Workshop.inventory[0].level,Is.EqualTo(row.levelAfter),label);Assert.That(done.Workshop.components,Is.EqualTo(row.componentsAfter),label+" actual wallet");Assert.That(done.Workshop.inventory[0].materialBasis,Is.EqualTo(row.basisAfter),label+" actual paid basis only");Near(done.Data,row.dataAfter,label+" data payment");Assert.That(Workshop.Upgrade(done,item.id,state.Workshop.revision),Is.SameAs(done),label+" stale revision cannot charge twice");Assert.That(row.duplicateRejected,Is.True,label+" source ticket");Assert.That(state.Workshop.inventory[0].level,Is.EqualTo(row.level),label+" original untouched");}
+            var rows=Cases().upgradeCases;Assert.That(rows.Length,Is.EqualTo(ItemBalance.Items.Length*35));foreach(var row in rows){var state=Game.New(1000,"prepared-W04-reference");state.Data=ScientificNumber.From(1e15);if(!row.mode.StartsWith("normal"))state.ItemSystemV3=new ItemV3State();if(row.mode.EndsWith("W04"))state.Workshop.nodes=new[]{"W04"};if(row.mode=="no-items-W04")state.Challenges.Run=new ChallengeRun{id="no-items",stage=1};var item=new ItemInstance{id="prepared-item",type=row.type,level=row.level};item.materialBasis[0]=7;state.Workshop.inventory=new[]{item};state.Workshop.components=Enumerable.Repeat(1000000000L,ItemBalance.ComponentIds.Length).ToArray();var quote=Workshop.UpgradeQuote(state,item);string label=row.mode+" "+row.type+" "+row.level;Assert.That(quote.Allowed,Is.EqualTo(row.allowed),label);if(row.allowed){Assert.That(quote.Components,Is.EqualTo(row.costs),label+" per-input rounded quote");Assert.That(quote.Data,Is.EqualTo(row.dataCost),label+" data quote");}var done=Workshop.Upgrade(state,item.id,state.Workshop.revision);Assert.That(done.Workshop.inventory[0].level,Is.EqualTo(row.levelAfter),label);Assert.That(done.Workshop.components,Is.EqualTo(row.componentsAfter),label+" actual wallet");Assert.That(done.Workshop.inventory[0].materialBasis,Is.EqualTo(row.basisAfter),label+" actual paid basis only");Near(done.Data,row.dataAfter,label+" data payment");Assert.That(Workshop.Upgrade(done,item.id,state.Workshop.revision),Is.SameAs(done),label+" stale revision cannot charge twice");Assert.That(row.duplicateRejected,Is.True,label+" source ticket");Assert.That(state.Workshop.inventory[0].level,Is.EqualTo(row.level),label+" original untouched");}
         }
         [Test]public void PrecisionFocusUsesPaidSnapshotAndNormalizedAvailableTable()
         {
