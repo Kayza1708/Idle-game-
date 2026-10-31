@@ -144,6 +144,51 @@ namespace IdleIntelligence.Tests
                     Is.EqualTo(ItemBalance.ComponentIds.Length));
             } finally {Directory.Delete(dir,true);}
         }
+        [Test]public void UnityJsonDoesNotTurnMissingPaidReceiptsIntoActiveContracts()
+        {
+            var s=Game.NewV3(1000,"unity-json-null-receipts",true);
+            var wire=UnityV3SaveData.From(s.ItemSystemV3);
+            var encoded=UnityEngine.JsonUtility.ToJson(wire);
+            var decoded=UnityEngine.JsonUtility.FromJson<UnityV3SaveData>(encoded);
+            var state=decoded.ToState();
+            Assert.That(state.synthesisContract,Is.Null);
+            Assert.That(state.overdrive,Is.Null);
+            s.ItemSystemV3=state;
+            Assert.DoesNotThrow(()=>Game.Validate(s));
+
+            // A real paid receipt must not be dropped to work around a null
+            // Unity JsonUtility placeholder.
+            string component=ItemBalance.ComponentIds[0];
+            s.Industry.synthesis=new Job{id=component,key="synthesis-1",required=10};
+            s.Industry.hasSynthesis=true;
+            s.ItemSystemV3.synthesisContract=new ItemV3Synthesis{
+                id="synthesis-1",component=component,multiplier=1.5};
+            var active=UnityEngine.JsonUtility.FromJson<UnityV3SaveData>(
+                UnityEngine.JsonUtility.ToJson(UnityV3SaveData.From(s.ItemSystemV3))).ToState();
+            Assert.That(active.synthesisContract,Is.Not.Null);
+            Assert.That(active.synthesisContract.id,Is.EqualTo("synthesis-1"));
+            Assert.That(active.synthesisContract.multiplier,Is.EqualTo(1.5));
+            s.ItemSystemV3=active;
+            Assert.DoesNotThrow(()=>Game.Validate(s));
+
+            var altered=UnityV3SaveData.From(s.ItemSystemV3);
+            altered.hasSynthesisContract=false;
+            Assert.Throws<FormatException>(()=>{altered.ToState();},
+                "Conflicting presence flag must not silently erase a paid receipt.");
+        }
+        [Test]public void OlderV25ReceiptFieldsRemainReadableWithoutInventedOwnership()
+        {
+            var state=Game.NewV3(1000,"older-v25-compatibility",true);
+            var codec=new UnitySaveCodec();
+            string payload=codec.Encode(StateData.From(state));
+            payload=System.Text.RegularExpressions.Regex.Replace(payload,
+                ",?\\\"receiptPresenceRecorded\\\":(?:true|false)|,?\\\"hasSynthesisContract\\\":(?:true|false)|,?\\\"hasOverdrive\\\":(?:true|false)","");
+            var decoded=codec.Decode(payload,25).ToState();
+            Assert.That(decoded.ItemSystemV3,Is.Not.Null);
+            Assert.That(decoded.ItemSystemV3.synthesisContract,Is.Null);
+            Assert.That(decoded.ItemSystemV3.overdrive,Is.Null);
+            Assert.DoesNotThrow(()=>Game.Validate(decoded));
+        }
         [Test]public void VersionedUnitySavePreservesV3CountersOnReload()
         {
             string dir=Path.Combine(Path.GetTempPath(),"unity-v3-"+Guid.NewGuid().ToString("N"));
