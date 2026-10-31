@@ -82,13 +82,13 @@ if failed or total == 0 or result != "Passed":
         cases = [c for c in r.iter("test-suite") if c.get("result") in ("Failed", "Error") and c.find("failure") is not None]
     for index, case in enumerate(cases[:40], 1):
         name = case.get("fullname") or case.get("name") or "<unnamed>"
-        print(f"\\nFAIL #{index}: {name}")
+        print(f"\nFAIL #{index}: {name}")
         failure = case.find("failure")
         if failure is not None:
             for field in ("message", "stack-trace"):
                 value = failure.findtext(field)
                 if value:
-                    print(f"{field}:\\n{value[:3500]}")
+                    print(f"{field}:\n{value[:3500]}")
         reason = case.findtext("reason/message")
         if reason:
             print(f"reason: {reason[:1500]}")
