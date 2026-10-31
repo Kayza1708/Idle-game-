@@ -9,7 +9,8 @@ namespace IdleIntelligence.PlayTests {
   void Lab(bool models=false){game.Act(s=>{var n=s.Copy();n.Prestige.Total=ScientificNumber.From(200000);PrestigeRules.Discover(n);if(models){n.Meta.models[0]=0;n.Meta.models[9]=15;n.Workshop.activeModel="K10";n.Workshop.activeModelLevel=15;n.Workshop.inventory=new[]{new ItemInstance{id="test-a",type="quantum-chip",level=7,rarity=2},new ItemInstance{id="test-b",type="tensor-core",level=3,rarity=3}};n=Workshop.Equip(n,"test-a","universal1");n=Workshop.Equip(n,"test-b","universal2");}return n;});}
   [UnityTest]public IEnumerator AxiomLayerStaysHiddenUntilRealV3Discovery()
   {
-   Click("PrestigeTab");yield return null;
+   // Inspect the actual view without using a tab that is still locked.
+   game.Show("prestige");yield return null;
    Assert.That(GameObject.Find("NetworkLayer"),Is.Null,
        "Axiom layer must not spoil hidden progression before V3 discovery");
    ReadyAxiom();yield return null;
