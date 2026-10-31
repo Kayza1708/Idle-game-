@@ -26,7 +26,21 @@ namespace IdleIntelligence.Tests
         [Test]public void AllItemTransactionsProfilesAndRaritiesMatchCurrentTypeScript()
         {
             var cases=Cases();Assert.That(cases.sourceHash,Is.EqualTo(ItemBalance.SourceHash));Assert.That(cases.itemIds.Length,Is.EqualTo(ItemBalance.Items.Length));Assert.That(cases.cases.Length,Is.GreaterThan(250));
-            foreach(var c in cases.cases)
+            // Historic source-parity fixtures use Game.New (legacy V2). They
+            // cannot authorize one of the six Unity-native-only V3 blueprints:
+            // those have explicit Industry/Prestige/Meta unlock contracts.
+            // Verify that the test actually partitions these source cases;
+            // check native unlock/payment separately below.
+            var nativeCases=cases.cases.Where(c=>UnityV3Catalog.IsAdded(c.id)).ToArray();
+            Assert.That(nativeCases.Length,Is.GreaterThan(0),
+                "The legacy reference dataset must expose native-only item scenarios");
+            foreach(var c in nativeCases){
+                var legacy=State(c);
+                Assert.That(legacy.ItemSystemV3,Is.Null,c.name+" V2 fixture");
+                Assert.That(Workshop.Learn(legacy,c.id),Is.SameAs(legacy),
+                    c.name+" must not grant native V3 blueprint to a legacy run");
+            }
+            foreach(var c in cases.cases.Where(c=>!UnityV3Catalog.IsAdded(c.id)))
             {
                 var s=State(c);string original=JsonUtility.ToJson(StateData.From(s));GameState result=s;
                 switch(c.action){case "module-complete":result=Workshop.StartModule(s,Array.FindIndex(ItemBalance.Modules,m=>m.Id==c.id));result=Game.Advance(result,c.at);break;case "hardware-buy":result=Game.Buy(s,c.id,c.amount);break;case "analysis-complete":result=MaterialAnalysis.Start(s,Array.FindIndex(ItemBalance.Analyses,a=>a.Id==c.id));while(result.SavedAt<c.at)result=Game.Advance(result,Math.Min(c.at,result.SavedAt+28800000));break;case "discover":result=Workshop.Discover(s);break;case "craft":result=Workshop.Craft(s,c.id);break;case "learn":result=Workshop.Learn(s,c.id);break;case "equip":result=Workshop.Equip(s,c.id,string.IsNullOrEmpty(c.slot)?null:c.slot);break;case "unequip":result=Workshop.Unequip(s,c.slot);break;case "fuse":result=Workshop.Fuse(s,c.selection);break;case "lock":result=Workshop.Lock(s,c.id);break;case "upgrade":result=Workshop.Upgrade(s,c.id);break;case "mastery":result=Workshop.Mastery(s,c.id,s.Workshop.mastery[Workshop.Index(c.id)]);break;}
@@ -35,6 +49,38 @@ namespace IdleIntelligence.Tests
                 for(int k=0;k<c.deviceRoles.Length;k++)Assert.That(Workshop.Device(result,c.deviceRoles[k]),Is.EqualTo(c.deviceBonuses[k]).Within(1e-9),c.name+" device "+c.deviceRoles[k]);for(int k=0;k<c.comboIds.Length;k++)Assert.That(Workshop.Combination(result,c.comboIds[k]),Is.EqualTo(c.comboValues[k]).Within(1e-9),c.name+" combo "+c.comboIds[k]);
                 var effects=new[]{"compute","credits","data","training","research","relay","tap","int-yield"};for(int n=0;n<effects.Length;n++)Assert.That(Workshop.Bonus(result,effects[n]),Is.EqualTo(c.bonuses[n]).Within(1e-9),c.name+" effect "+effects[n]);
                 Assert.That(ItemBalance.Slots.Where((slot,i)=>Workshop.ActiveSlots(result)[i]).ToArray(),Is.EqualTo(c.slots),c.name+" slots");Game.Validate(result);
+            }
+        }
+        [Test]public void AllSixUnityNativeV3BlueprintsHonorGatesAndPayFragments()
+        {
+            int blueprintResearch=Game.ResearchIndex("blueprints");
+            foreach(string id in UnityV3Catalog.AddedIds){
+                var blocked=Game.NewV3(1000,"native-gate-"+id,true);
+                blocked.Research[blueprintResearch]=1;
+                blocked.Workshop.fragments=10000000;
+                int itemIndex=Workshop.Index(id);
+                Assert.That(itemIndex,Is.GreaterThanOrEqualTo(UnityV3Catalog.OldItemCount),id);
+                Assert.That(Workshop.Learn(blocked,id),Is.SameAs(blocked),
+                    id+" cannot unlock without its own V3 gate");
+                var unlocked=blocked.Copy();
+                switch(id){
+                    case "fleet-coordinator":unlocked.Industry.discovered[7]=true;break;
+                    case "gradient-buffer":unlocked.Workshop.nodes=new[]{"T06"};break;
+                    case "overdrive-capacitor":unlocked.Workshop.nodes=new[]{"F03"};break;
+                    case "synthesis-coordinator":unlocked.Industry.families[0]=true;break;
+                    case "singularity-lens":unlocked.Meta.resets=3;break;
+                    case "axiom-anchor":unlocked.Meta.resets=1;break;
+                    default:Assert.Fail("Unhandled native item "+id);break;
+                }
+                long fragmentsBefore=unlocked.Workshop.fragments;
+                long price=ItemBalance.Items[itemIndex].BlueprintPrice;
+                var learned=Workshop.Learn(unlocked,id);
+                Assert.That(learned,Is.Not.SameAs(unlocked),id+" gate");
+                Assert.That(learned.Workshop.learned[itemIndex],Is.True,id+" learned");
+                Assert.That(learned.Workshop.fragments,Is.EqualTo(fragmentsBefore-price),
+                    id+" paid blueprint fragments");
+                Assert.That(unlocked.Workshop.learned[itemIndex],Is.False,
+                    id+" original state unchanged");
             }
         }
         static void Near(ScientificNumber a,NumberData b,string name){var expected=ScientificNumber.FromData(b);if(expected.IsZero)Assert.That(a.IsZero,Is.True,name);else Assert.That(a.Log10(),Is.EqualTo(expected.Log10()).Within(2e-11),name);}
