@@ -25,7 +25,7 @@ namespace IdleIntelligence.Tests
         }
         [Test]public void UnknownSaveVersionIsRetainedAndCannotReplaceLocalSave()
         {
-            var original=File.ReadAllBytes(path);string json=Encoding.UTF8.GetString(original).Replace("\"version\":24","\"version\":999");Assert.That(json,Does.Contain("999"));var packed=CloudSnapshotStore.Pack(Encoding.UTF8.GetBytes(json));
+            var original=File.ReadAllBytes(path);string json=Encoding.UTF8.GetString(original).Replace("\"version\":"+AtomicSaveStore.Version,"\"version\":999");Assert.That(json,Does.Contain("999"));var packed=CloudSnapshotStore.Pack(Encoding.UTF8.GetBytes(json));
             Assert.Throws<InvalidDataException>(()=>CloudSnapshotStore.Stage(packed,Path.Combine(dir,"originals"),store));
             Assert.That(Directory.GetFiles(Path.Combine(dir,"originals"),"*.cloud").Length,Is.EqualTo(1));CollectionAssert.AreEqual(original,File.ReadAllBytes(path));
         }
