@@ -188,6 +188,38 @@ namespace IdleIntelligence.Tests
             Assert.Throws<FormatException>(()=>codec.Decode(payload),
                 "V3 data must never be silently accepted or discarded without an explicit marker");
         }
+        [Test]public void V3ResearchReceiptRoundTripsWithRealEpochAndUnityEmptyStrings()
+        {
+            // Real macOS PlayMode saves use modern 13-digit Unix milliseconds;
+            // double cancellation and Unity's null -> empty-string semantics
+            // must not lock a fully paid research start or weaken real tamper checks.
+            var state=Game.NewV3(1793440800123d,"epoch-v3-research",true);
+            state.Data=ScientificNumber.From(1000000000);
+            state.ResearchUsed=true;
+            state.Tutorial="done";
+            var started=Game.Research(state,"dataGeneration");
+            Assert.That(started.ResearchJob,Is.Not.Null);
+            Assert.That(started.ResearchJob.researchStartVersion,Is.EqualTo(3));
+            var codec=new UnitySaveCodec();
+            var loaded=codec.Decode(codec.Encode(StateData.From(started)),
+                AtomicSaveStore.Version).ToState();
+            Assert.That(loaded.ResearchJob,Is.Not.Null);
+            Assert.That(loaded.ResearchJob.researchStartVersion,Is.EqualTo(3));
+            Assert.DoesNotThrow(()=>Game.Validate(loaded));
+
+            var emptyOptional=loaded.Copy();
+            emptyOptional.ResearchJob.previousArea="";
+            emptyOptional.ResearchJob.completionCause="";
+            Assert.DoesNotThrow(()=>Game.Validate(emptyOptional),
+                "Unity empty strings are not forged research receipts");
+
+            var tampered=loaded.Copy();
+            tampered.ResearchJob.previousArea="forged-area";
+            Assert.Throws<FormatException>(()=>Game.Validate(tampered));
+            tampered=loaded.Copy();
+            tampered.ResearchJob.minimumUntil+=5000;
+            Assert.Throws<FormatException>(()=>Game.Validate(tampered));
+        }
         [Test]public void FreshUnityV3EditorSaveCanReloadAdvanceOfflineAndSaveAgain()
         {
             string dir=Path.Combine(Path.GetTempPath(),"unity-v3-first-boot-"+Guid.NewGuid().ToString("N"));
