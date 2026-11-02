@@ -133,7 +133,7 @@ namespace IdleIntelligence.Runtime
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             if(tab=="research"){labsOverview=WorkshopUIFactory.Vertical("ResearchLabs",Content).AddComponent<ResearchLabOverview>();labsOverview.Initialize(this);}
-            if(tab=="training")learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,tab=="training"?"Training":"Forschung",18,tab=="research"?48:34);
+            if(tab=="training"){learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,State.Settings.language=="de"?"Training":"Training",18,52);var close=WorkshopUIFactory.Button("TrainingClose",learningOverview.transform,"×",()=>UserShow("hardware"));var rect=close.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=new Vector2(1,.5f);rect.pivot=new Vector2(1,.5f);rect.sizeDelta=new Vector2(48,48);rect.anchoredPosition=new Vector2(-4,0);var layout=close.GetComponent<LayoutElement>();if(layout!=null)layout.ignoreLayout=true;close.GetComponentInChildren<Text>().fontSize=25;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
             for(int i=0;i<count;i++)
             {
