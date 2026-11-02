@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using IdleIntelligence.Core;
 using IdleIntelligence.Runtime;
 using UnityEngine;
@@ -17,10 +16,18 @@ namespace IdleIntelligence.Editor
         static Texture2D Texture(string name){string path=Root+"Resources/"+name+".png";var t=(TextureImporter)AssetImporter.GetAtPath(path);t.textureType=TextureImporterType.Sprite;t.spriteImportMode=SpriteImportMode.Single;t.textureCompression=TextureImporterCompression.Uncompressed;t.alphaIsTransparency=true;t.SaveAndReimport();return AssetDatabase.LoadAssetAtPath<Texture2D>(path);}
         public static Sprite[] BuildComponentSprites()
         {
-            string source=File.ReadAllText(Path.Combine(Directory.GetParent(Application.dataPath).Parent.FullName,"src/GameArt.tsx"));
-            Dictionary<string,Vector2Int> Cells(string name){var table=Regex.Match(source,@"(?:export )?const "+name+@"[^=]*=\{([^}]+)\}");if(!table.Success)throw new InvalidOperationException("Missing TS art table "+name);return Regex.Matches(table.Groups[1].Value,@"(\w+):\[\s*(\d+)\s*,\s*(\d+)\s*\]").Cast<Match>().ToDictionary(m=>m.Groups[1].Value,m=>new Vector2Int(int.Parse(m.Groups[2].Value),int.Parse(m.Groups[3].Value)));}
-            var basic=Cells("componentCells");var extra=Cells("materialExtensionCells");var baseAtlas=Texture("ComponentAtlas");var extension=Texture("ComponentExtension");var result=new Sprite[ItemBalance.ComponentIds.Length];
-            for(int i=0;i<result.Length;i++){string id=ItemBalance.ComponentIds[i];bool extended=extra.TryGetValue(id,out var cell);if(!extended&&!basic.TryGetValue(id,out cell))throw new InvalidOperationException("Missing original component art "+id);var atlas=extended?extension:baseAtlas;int columns=extended?4:5,rows=extended?3:2;float width=atlas.width/(float)columns,height=atlas.height/(float)rows;var sprite=Sprite.Create(atlas,new Rect(cell.x*width,atlas.height-(cell.y+1)*height,width,height),Vector2.one*.5f,100,0,SpriteMeshType.FullRect);sprite.name=id;result[i]=SaveSprite(sprite,Root+"Art/component-"+id+".asset");}
+            // All 20 material illustrations were migrated into committed
+            // Unity Sprite assets. Rebuilding a prefab never reads the old
+            // TypeScript component-coordinate tables.
+            var result=new Sprite[ItemBalance.ComponentIds.Length];
+            for(int i=0;i<result.Length;i++)
+            {
+                string id=ItemBalance.ComponentIds[i];
+                var sprite=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/component-"+id+".asset");
+                if(sprite==null)
+                    throw new InvalidOperationException("Missing native component art: "+id);
+                result[i]=sprite;
+            }
             return result;
         }
         static GameObject Node(string name,Transform parent,params Type[] types)=>WorkshopUIFactory.Node(name,parent,types);
@@ -28,14 +35,14 @@ namespace IdleIntelligence.Editor
         static ItemPortrait Portrait(Transform parent,ItemPortrait prefab,string name,float x,float y,float size){var p=(ItemPortrait)PrefabUtility.InstantiatePrefab(prefab,parent);p.name=name;At((RectTransform)p.transform,x,y,size,size);return p;}
         public static WorkshopUI Build(ActionCard row)
         {
-            var atlas=Texture("ItemAtlas");var source=File.ReadAllText(Path.GetFullPath("../src/GameArt.tsx"));var sprites=new Sprite[ItemBalance.Items.Length];
-            for(int n=0;n<sprites.Length;n++)
-            {
-                string id=ItemBalance.Items[n].Id;if(MetaItemArtBuilder.IsMeta(id)){sprites[n]=MetaItemArtBuilder.SpriteFor(id);if(sprites[n]==null)throw new System.InvalidOperationException("Run MetaItemArtBuilder.Build before rebuilding workshop");continue;}var match=Regex.Match(source,"['\"]?"+id+"['\"]?:\\[(\\d+),(\\d+),(\\d+),(\\d+)\\]");if(!match.Success)throw new Exception("Missing item art "+id);
-                int x=int.Parse(match.Groups[1].Value),y=int.Parse(match.Groups[2].Value),w=int.Parse(match.Groups[3].Value),h=int.Parse(match.Groups[4].Value);var sprite=Sprite.Create(atlas,new Rect(x,atlas.height-y-h,w,h),new Vector2(.5f,.5f),100);sprite.name=id;
-                var clip=Regex.Match(source,"['\"]"+id+"['\"]:'(M[^']+)'" );if(clip.Success){var nums=Regex.Matches(clip.Groups[1].Value,@"-?\d+(?:\.\d+)?").Cast<Match>().Select(m=>float.Parse(m.Value,System.Globalization.CultureInfo.InvariantCulture)).ToArray();var points=Enumerable.Range(0,nums.Length/2).Select(i=>new Vector2((nums[i*2]-x-w*.5f)/100,(h*.5f-nums[i*2+1]+y)/100)).ToArray();var triangles=Triangulate(points);if(triangles.Length>0)sprite.OverrideGeometry(points,triangles);}
-                sprites[n]=SaveSprite(sprite,Root+"Art/item-"+id+".asset");
-            }
+            // Keep 36 authored original sprites; the six later Unity-native
+            // items have their own distinct runtime icons in UnityV3PixelArt.
+            // Never parse or import artwork from the retired web UI.
+            var sprites=ItemBalance.Items.Take(UnityV3Catalog.OldItemCount)
+                .Select(d=>AssetDatabase.LoadAssetAtPath<Sprite>(
+                    Root+"Art/item-"+d.Id+".asset")).ToArray();
+            if(sprites.Any(sprite=>sprite==null))
+                throw new InvalidOperationException("Missing native legacy item art");
             var components=BuildComponentSprites();
             Texture("Forge");var forgeArt=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Resources/Forge.png");
             var portrait=Node("ItemPortrait",null,typeof(Image),typeof(Button),typeof(ItemPortrait));At((RectTransform)portrait.transform,.5f,.5f,94,94);portrait.GetComponent<Image>().color=new Color(.025f,.06f,.09f,.95f);var view=portrait.GetComponent<ItemPortrait>();view.Button=portrait.GetComponent<Button>();
