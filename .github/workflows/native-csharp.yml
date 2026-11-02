@@ -1,7 +1,7 @@
 name: Idle Intelligence - Native C# Checks
 on:
   push:
-    branches: [unity-only]
+    branches: [main]
     paths: ['Assets/**', 'NativeChecks/**', 'Packages/**', 'ProjectSettings/**', 'scripts/**', '.github/workflows/native-csharp.yml']
   pull_request:
     paths: ['Assets/**', 'NativeChecks/**', 'Packages/**', 'ProjectSettings/**', 'scripts/**', '.github/workflows/native-csharp.yml']
