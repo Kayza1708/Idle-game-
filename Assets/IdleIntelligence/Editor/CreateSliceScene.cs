@@ -38,16 +38,15 @@ namespace IdleIntelligence.Editor
             Directory.CreateDirectory(Root+"Prefabs");Directory.CreateDirectory(Root+"Art");
             var atlasPath=Root+"Resources/HardwareAtlas.png";var importer=(TextureImporter)AssetImporter.GetAtPath(atlasPath);importer.textureType=TextureImporterType.Sprite;importer.spriteImportMode=SpriteImportMode.Single;importer.textureCompression=TextureImporterCompression.Uncompressed;importer.alphaIsTransparency=true;importer.SaveAndReimport();
             var atlas=AssetDatabase.LoadAssetAtPath<Texture2D>(atlasPath);
-            // Source bounds copied from GameArt.tsx by the reproducible export script.
+            // All canonical hardware sprites are committed Unity assets.
+            // Never read TypeScript or rebuild the art from the retired web client.
             var sprites=new Sprite[Balance.Hardware.Length];
-            var source=File.ReadAllText(Path.GetFullPath("../src/GameArt.tsx"));
             for(int i=0;i<sprites.Length;i++)
             {
-                string id=Balance.Hardware[i].Id;var match=System.Text.RegularExpressions.Regex.Match(source,@"\b"+id+@":\{bounds:\[(\d+),(\d+),(\d+),(\d+)\]");
-                if(!match.Success)throw new Exception("Missing art bounds for "+id);
-                int x=int.Parse(match.Groups[1].Value),y=int.Parse(match.Groups[2].Value),w=int.Parse(match.Groups[3].Value),h=int.Parse(match.Groups[4].Value);
-                var sprite=Sprite.Create(atlas,new Rect(x,atlas.height-y-h,w,h),new Vector2(.5f,.5f),100);sprite.name=id;
-                string path=Root+"Art/"+id+".asset";var old=AssetDatabase.LoadAssetAtPath<Sprite>(path);if(old==null)AssetDatabase.CreateAsset(sprite,path);else {EditorUtility.CopySerialized(sprite,old);UnityEngine.Object.DestroyImmediate(sprite);sprite=old;}sprites[i]=sprite;
+                string id=Balance.Hardware[i].Id;
+                var sprite=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Art/"+id+".asset");
+                if(sprite==null)throw new InvalidOperationException("Native hardware art missing: "+id);
+                sprites[i]=sprite;
             }
             var labImporter=(TextureImporter)AssetImporter.GetAtPath(Root+"Resources/Laboratory.png");labImporter.textureType=TextureImporterType.Sprite;labImporter.spriteImportMode=SpriteImportMode.Single;labImporter.textureCompression=TextureImporterCompression.CompressedHQ;labImporter.SaveAndReimport();
             var lab=AssetDatabase.LoadAssetAtPath<Sprite>(Root+"Resources/Laboratory.png");
