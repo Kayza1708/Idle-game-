@@ -2,6 +2,7 @@ using IdleIntelligence.Core;
 namespace IdleIntelligence.Runtime {
  // Visibility consumes existing progression; it never grants or changes unlocks.
  public static class ProgressionVisibility {
+  public static bool Gumball(GameState s)=>s.Prestige.resets>=1;
   public static bool Prestige(GameState s)=>s.Prestige.resets>0||s.Meta.resets>0||!s.Prestige.Total.IsZero||PrestigeRules.Claim(s).CompareTo(ScientificNumber.One)>=0;
   public static bool Axioms(GameState s)=>s.Meta.resets>0||MetaRules.Reward(s).CompareTo(ScientificNumber.One)>=0;
  }

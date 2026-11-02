@@ -20,7 +20,7 @@ namespace IdleIntelligence.Runtime
   {
    if(bar==null)return;
    var image=bar.GetComponent<UnityEngine.UI.Image>()??bar.gameObject.AddComponent<UnityEngine.UI.Image>();image.color=GameTheme.Hex("102331");image.raycastTarget=false;
-   foreach(var button in bar.GetComponentsInChildren<UnityEngine.UI.Button>(true)){GameTheme.CompactAction(button,false);foreach(var text in button.GetComponentsInChildren<UnityEngine.UI.Text>()){text.rectTransform.offsetMin=new Vector2(4,4);text.rectTransform.offsetMax=new Vector2(-4,-4);text.resizeTextForBestFit=false;text.fontSize=button.name=="ZoomOut"||button.name=="ZoomIn"?22:12;}}
+   foreach(var button in bar.GetComponentsInChildren<UnityEngine.UI.Button>(true)){GameTheme.CompactAction(button,false);foreach(var text in button.GetComponentsInChildren<UnityEngine.UI.Text>()){text.rectTransform.offsetMin=new Vector2(4,4);text.rectTransform.offsetMax=new Vector2(-4,-4);if(button.name=="ReducedPrestigeMotion")text.text="FX";text.resizeTextForBestFit=false;text.fontSize=button.name=="ZoomOut"||button.name=="ZoomIn"?22:12;}}
   }
   public static void Apply(PrestigeNetworkView view)
   {

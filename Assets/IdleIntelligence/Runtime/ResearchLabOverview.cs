@@ -11,7 +11,7 @@ namespace IdleIntelligence.Runtime {
   public void ShowArea(int selected){area=selected;if(cards==null)return;for(int i=0;i<cards.Length;i++)cards[i].gameObject.SetActive(Workshop.ResearchArea(Balance.Research[i].Id)==area);for(int i=0;i<groups.Length;i++){groups[i].GetComponentInChildren<UnityEngine.UI.Text>().text=UiLocalizedText.Translate(new[]{"Daten","Hardware","Modelle","Material","Automation"}[i],game.State.Settings.language);groups[i].GetComponentInChildren<UnityEngine.UI.Text>().color=i==area?GameTheme.Accent:GameTheme.Muted;groups[i].GetComponent<UnityEngine.UI.Image>().color=i==area?GameTheme.Hex("17353F"):Color.clear;}}
 
   public void Initialize(GameRuntime runtime){
-   game=runtime;heading=WorkshopUIFactory.Label("ResearchHeading",transform,"",18,30);heading.font=GameTheme.Bold;
+   game=runtime;var bar=WorkshopUIFactory.Horizontal("ResearchHeader",transform,44);heading=WorkshopUIFactory.Label("ResearchHeading",bar.transform,"",16,44);heading.font=GameTheme.Bold;heading.resizeTextForBestFit=true;heading.resizeTextMinSize=12;heading.resizeTextMaxSize=16;var titleSize=heading.GetComponent<UnityEngine.UI.LayoutElement>();titleSize.minWidth=titleSize.preferredWidth=0;titleSize.flexibleWidth=1;var close=WorkshopUIFactory.Button("ResearchClose",bar.transform,"×",()=>game.UserShow("hardware"));var closeSize=close.GetComponent<UnityEngine.UI.LayoutElement>();closeSize.minWidth=closeSize.preferredWidth=44;closeSize.flexibleWidth=0;GameTheme.CompactAction(close,false);
    slots=WorkshopUIFactory.Node("LaboratorySlots",transform,typeof(UnityEngine.UI.GridLayoutGroup),typeof(ItemGrid),typeof(UnityEngine.UI.LayoutElement)).transform;
    var grid=slots.GetComponent<UnityEngine.UI.GridLayoutGroup>();grid.constraint=UnityEngine.UI.GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=2;grid.spacing=new Vector2(5,5);slots.GetComponent<ItemGrid>().Height=94;
    QueueAnchor=WorkshopUIFactory.Vertical("PlannedResearch",transform).transform;Refresh();
@@ -19,7 +19,7 @@ namespace IdleIntelligence.Runtime {
   void Update(){if(game!=null&&Time.unscaledTime>=next){next=Time.unscaledTime+.1f;Refresh();}}
   void Refresh(){
    var state=game.State;string language=state.Settings.language;var jobs=PrestigeAutomation.ResearchJobs(state).ToArray();int capacity=PrestigeAutomation.LabCount(state);
-   int retained=jobs.Count(j=>j.slot>=capacity);string title=NativeCopy.Text("Forschung",language)+" · "+jobs.Count(j=>j.slot<capacity)+" / "+capacity+" "+NativeCopy.Text("belegt",language)+(retained>0?" · "+retained+" "+NativeCopy.Text("Abschluss",language):"");if(heading.text!=title)heading.text=title;
+   int retained=jobs.Count(j=>j.slot>=capacity);string title=NativeCopy.Text("Forschung",language)+" · "+jobs.Count(j=>j.slot<capacity)+"/"+capacity+(retained>0?" · "+retained+" "+NativeCopy.Text("Abschluss",language):"");if(heading.text!=title)heading.text=title;
    int visible=Math.Max(capacity,jobs.Select(j=>j.slot+1).DefaultIfEmpty(0).Max());
    if(count!=visible){
     count=visible;WorkshopUIFactory.Clear(slots);status=new UnityEngine.UI.Text[count];metadata=new UnityEngine.UI.Text[count];time=new UnityEngine.UI.Text[count];progress=new UnityEngine.UI.Image[count];icons=new UnityEngine.UI.Image[count];keys=new string[count];

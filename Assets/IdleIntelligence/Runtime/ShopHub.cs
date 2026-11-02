@@ -23,31 +23,27 @@ namespace IdleIntelligence.Runtime
             game=runtime;
             bool de=game.State.Settings.language=="de";
             heading=WorkshopUIFactory.Label("ShopHeading",transform,"",19,38);
-            AddTabs(new[]{"chests","materials","capsule"},new[]{
-                de?"Truhen":"Chests",de?"Teile":"Materials","Gumball"});
-            AddTabs(new[]{"permanent","packages","odds"},new[]{
-                de?"Upgrades":"Upgrades",de?"Pakete":"Bundles",de?"Chancen":"Odds"});
+            AddTabs(new[]{"chests","materials","permanent","capsule","packages"},new[]{
+                de?"Angebote":"Offers",de?"Komponenten":"Parts","Upgrades","Gumball",de?"Pakete":"Bundles"});
             storefront=WorkshopUIFactory.Vertical("StorefrontProducts",transform).transform;
-            ShowPage("chests");
+            game.Act(Market.Visit);ShowPage("chests");
         }
 
         void AddTabs(string[] ids,string[] labels)
         {
-            var row=WorkshopUIFactory.Horizontal("StoreTabs-"+ids[0],transform,48);
-            var group=row.GetComponent<HorizontalLayoutGroup>();
-            group.spacing=4;
-            group.childForceExpandWidth=true;
+            var row=StorefrontUI.Tabs("StoreTabs",transform);
             for(int i=0;i<ids.Length;i++)
             {
                 string id=ids[i];
-                var button=WorkshopUIFactory.Button("ShopTab-"+id,row.transform,labels[i],
+                if(id=="capsule"&&!ProgressionVisibility.Gumball(game.State))continue;
+                var button=WorkshopUIFactory.Button("ShopTab-"+id,row,labels[i],
                     ()=>ShowPage(id));
                 var size=button.GetComponent<LayoutElement>()??
                     button.gameObject.AddComponent<LayoutElement>();
                 size.minHeight=size.preferredHeight=44;
                 size.minWidth=0;
                 size.flexibleWidth=1;
-                tabs[id]=button;
+                StorefrontUI.Tab(button);tabs[id]=button;
             }
         }
 
@@ -55,6 +51,7 @@ namespace IdleIntelligence.Runtime
 
         public void ShowPage(string selected)
         {
+            if(selected=="capsule"&&!ProgressionVisibility.Gumball(game.State))selected="chests";
             page=selected;
             foreach(var pair in tabs)
             {
@@ -97,6 +94,13 @@ namespace IdleIntelligence.Runtime
                 if(gemPage)gems.OpenPage(selected);
             }
             if(packages!=null)packages.gameObject.SetActive(selected=="packages");
+            Canvas.ForceUpdateCanvases();
+            if(tabs.TryGetValue(page,out var active)){
+                var rail=active.GetComponentInParent<ScrollRect>();rail.StopMovement();
+                var bounds=RectTransformUtility.CalculateRelativeRectTransformBounds(rail.viewport,(RectTransform)active.transform);
+                float shift=bounds.min.x<rail.viewport.rect.xMin?rail.viewport.rect.xMin-bounds.min.x:bounds.max.x>rail.viewport.rect.xMax?rail.viewport.rect.xMax-bounds.max.x:0;
+                rail.content.anchoredPosition+=Vector2.right*shift;
+            }
             var scroll=game.Content.GetComponentInParent<ScrollRect>();
             if(scroll!=null)scroll.verticalNormalizedPosition=1;
         }

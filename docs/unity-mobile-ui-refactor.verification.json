@@ -1,0 +1,762 @@
+{
+  "branch": "codex/mobile-ui-refactor-20261102",
+  "baseCommit": "a019e42d20158b2890f19c98af64aeaa11596377",
+  "editor": "6000.3.26f1",
+  "preparedScreenshots": true,
+  "savePaths": "temporary isolated test directories; no normal player save loaded",
+  "typescript": {
+    "typecheck": "passed",
+    "vitest": {
+      "files": 174,
+      "passed": 2108
+    },
+    "build": "passed"
+  },
+  "tests": {
+    "editMode": {
+      "result": "Passed",
+      "total": "226",
+      "passed": "226",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "201.1691608",
+      "reportSha256": "4a84eaccbde6a5c8b15da2757a09499e5a05e23ba3db51aebc94abe80ca53748"
+    },
+    "firstFullPlayMode": {
+      "result": "Failed(Child)",
+      "total": "148",
+      "passed": "140",
+      "failed": "8",
+      "skipped": "0",
+      "duration": "727.1053936",
+      "reportSha256": "ce74dba45f9681d7173f0936c2ab2b1b4e00455068b32e9a8c482b603c8c4ba1"
+    },
+    "correctedRegressions": {
+      "result": "Passed",
+      "total": "11",
+      "passed": "11",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "116.4778823",
+      "reportSha256": "a7514f5351d9fe75ce327e000dd730ca242a4b25148d090012af959522ea928a"
+    },
+    "bounds": {
+      "result": "Passed",
+      "total": "2",
+      "passed": "2",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "17.2463235",
+      "reportSha256": "02ed415b6fc65a513efacc83877eeacc03d1217ada06a56276bf904e8c39922b"
+    },
+    "shopNavigation": {
+      "result": "Passed",
+      "total": "7",
+      "passed": "7",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "21.9386039",
+      "reportSha256": "b4816ae098aaa528d129ff3fe991d2c11cad1239fa910602f1dacd2fdb792b6c"
+    },
+    "finalFullPlayMode": {
+      "result": "Passed",
+      "total": "148",
+      "passed": "148",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "824.9612155",
+      "reportSha256": "77bb99f4e96e35a00a02711c0cf0f2c7eb503caa319de95521e7a478e8775eeb"
+    },
+    "responsive": {
+      "result": "Passed",
+      "total": "6",
+      "passed": "6",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "28.9869409",
+      "reportSha256": "dd8494f099c1366cb55222cccd659e67f2f9b5ba313c2483c9ec21764c7c991a"
+    },
+    "finalEditMode": {
+      "result": "Passed",
+      "total": "226",
+      "passed": "226",
+      "failed": "0",
+      "skipped": "0",
+      "duration": "240.4466296",
+      "reportSha256": "7a29cdc88f505714e7734f0c6cf4a513d8648d995123a1e3f26950d27e75ab56"
+    },
+    "intermediateFullPlayMode": {
+      "result": "Failed(Child)",
+      "total": "148",
+      "passed": "145",
+      "failed": "3",
+      "skipped": "0",
+      "duration": "810.8902215"
+    }
+  },
+  "sourceSha256": {
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/GameMenu.cs": "fd2a12f543060b169b310f5dc8d813af2e8deacd27fe8dba5d69fe73771c679e",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/GameRuntime.cs": "73816d8ea14b33249a346746f897b779343b3b302d19f408a35097bef5e6c1ca",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/GemFeatureView.cs": "298adbaa91470a2d6f3dbb2963ef280f64e966b13991f27db36a37a8c9258a8e",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/HardwarePresentation.cs": "31b16adad8dd3e0c599927e23cf48c4fd71fce139db67318f886a0a2c9c05dd9",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/LaboratoryView.cs": "984b3c287058322a4b2769800a7a990fcf00597f4605063eaaac4a6c334e1cf5",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/LearningCard.cs": "c301884766db28ed6c995a4c774b45892dd5432b23c9b024899451e0c9a27924",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/MarketView.cs": "286e72e04d32970aba6c24074935ecf138b77fa2e54776875c43626e9cb51f19",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/MobileShell.cs": "a904839e22f38721537125160bcfb98e2ee70239ed9ca169d006eebe71bd9e95",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/MobileCanvasScale.cs": "7ef8264404f626333f66a4e2bbe451f64fd68247ae9e7d054e10da701f8aedfd",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/ModelLinks.cs": "d483b5711e6a4b798f971bce28f2159e7da47dc5ed999fc4a6022a19248b77d7",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/ModelLoadout.cs": "aad7616fe93a71e9b3cb5b53aef7c441cf124a71ff15c8856d8565f8b4ff608d",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/NativeStoreView.cs": "251acd212ac25a443623e6dee60784f8de24ef02002d55c593d8ed52ab7a9b9a",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/ProgressionVisibility.cs": "56138e39081724c4ac58e8dba9ffcb27d2d6b774e999bb40c307c5d9677f26ce",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/ResearchLabOverview.cs": "e08fef1d209097d6b1869464959c3286e2f4626f4681ad0bc3f7bb6c5352a3cd",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/RetentionView.cs": "2203ed0d32bf5a17aecdd77d01aa5a5e5e84bf60414f6b8937c369288fd92fde",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/RewardPresentation.cs": "c0fcfb60d9dcef4281a25759d29706bf37b984509b9821fc04e842a9f3f60b43",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/ShopHub.cs": "4b111965281d370152271fd454130e7e6e9c4449f86520401459a2966994b24e",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/StorefrontUI.cs": "f3dd8ed1329827d3f58b250ccd33cb41715acdce95915f0834dcafb68ef3c47e",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/WorkshopUI.cs": "49d6fba1864137d48a37d2c4e766f7beb9d26cbab6ee08575511a5727a1284e2",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/EconomyDetailView.cs": "0415d7c0f3d5bfac6ae7f510da4723527ee48363544af506b63776264d3439ca",
+    "IdleIntelligence/Assets/IdleIntelligence/Resources/PixelUI/ActionButton.prefab": "b9cfdaefcbe15453b11e23549eac1941a90f9b519d2d7be14fd2fc19bea845ba",
+    "IdleIntelligence/Assets/IdleIntelligence/Resources/PixelUI/ModelLoadout.prefab": "bab9e143f72f61fb3fecdefc6619578a0f2296e5df4a62253567fcfeaef2b3f0",
+    "IdleIntelligence/Assets/IdleIntelligence/Prefabs/WorkshopScreen.prefab": "03d65c26d5480d4e967df1f7d3de5062afedf94ad92d12f20fb8c7fef3455f18",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/MiraCoach.cs": "e77c540575ab47a6d27a345118ec83841bc4f563080d72b84bb33a62cf138bce",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/PrestigeNetworkView.cs": "4da0c823a5d26e633721b3aaec5182ffc086628454e2293a2c10b957f7ab8bf8",
+    "IdleIntelligence/Assets/IdleIntelligence/Runtime/PrestigeNetworkSkin.cs": "394f0f53ea0c3da9a43eb099303e66937695bd6e9978307f24c7393fc5f80079"
+  },
+  "screenshots": [
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/capsule-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "8f3fbd079d3592a544c0f63319886dfd2e3bc029f026483ffe3b8fa3df88cdd5",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/capsule-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "74b013130ad6c666792cadc79d903e1283a8cf0b5fa2e0477b2eb211968234eb",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/capsule-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "abb143e9106e88d8ab2bddc22245fb11b9f4c591f66787a7bfd32ed7ff206121",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/capsule-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "d50f02baa30cc72f3c13f62557720a8a2842b8dc0bcab3e70db0005025df07c4",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/capsule-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "d886e50dbd0bf4a61f1efc7fb0e5433c120c622be960b3393b533271957399c6",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/capsule-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "d047e7d5acf8e280fb90c6cfaca09f0c03c4060a56ba401cab30ca0c254420ba",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/fresh-mira-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "c83d320a59f551bc00efc68b93228bf24c4463ae77a7918aebb9f8026752a87e",
+      "state": "fresh isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/fresh-mira-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "ad4a1402f7a7f0b6365c2f508b894251e0f01ccf9f53eeeca968573f06a82610",
+      "state": "fresh isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/fresh-mira-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "7ec99c451ef09f39a31675538e8acfcdb1fba2d83521ab180ed70a781eb369a2",
+      "state": "fresh isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/fresh-mira-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "85271c3052830492b44b79f78bf78f3a12758ac47f6d64ccf0239bf274572ef4",
+      "state": "fresh isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/fresh-mira-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "27ea291d30a24f6875b4140db435f46a9644cf09c5b246dfd5e6ab27c406ce0d",
+      "state": "fresh isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/fresh-mira-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "ca27301cdac2433f69c8446ae471d377094346980e8a9f760cccb48f5a0be412",
+      "state": "fresh isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/hardware-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "d74eada40363e930e80b8efdeda323129a32b3b3eed5a87b648b98ff29d3b285",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/hardware-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "6fd489ce341f4e9ee997ca017a806a10dccd426c29ea9d8d65268688395c9094",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/hardware-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "16076840bb912eafedce9c37299ede1dee84b3a3f2455449d23e58b043d198f0",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/hardware-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "676a678445915f6e2f6da10949d0f930a82049258ac2bb4f2d6e295f0091190c",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/hardware-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "a7cd1fa5d1a1230948b21cf5f21bf10ebff20e1823ee524a666e81ac667f208c",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/hardware-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "2a2550ef2e670edfc4624d9b5f22891058f11ab25cd58f1baa62ad49d540c749",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/item-detail-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "686b8cfa715b1044d36e559502dbce2c9297708747a03abe72d47de7327b277c",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/item-detail-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "8e8a21ad87bc3b552970b9a42339bf25471b4703f125904c16ba347d5138bf5b",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/item-detail-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "8068cec5940d15b1533e2758b9ca1ffc9f7833ebf8dc02555095ca6dd0a12f1a",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/item-detail-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "6e641ab4d402158f382f653e4386c5a150057154de9c50b7f78aa449a2a56362",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/item-detail-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "2f3e2d47dd9eb0d7fd3db6c19c9b4604d970f721b83f166797970957960e6e90",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/item-detail-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "a70a3a5bd20cddf04772c8bea48ec9b63662e62c00b25c41fbcd45a2d7e53cc1",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/items-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "f1202a745e5a68792a0f6fef9728a847b3895b0490c66d7f41e9e12db1eb84c1",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/items-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "8fc3974f7fb910386bc98a44b458e328d7e14cf71743c7ed9f72fa2a2fdf51b2",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/items-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "2d4849bf7135b1cc2b05b8d82f9e2d7c53ee262cd448bacbbe5fae4f7ce36425",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/items-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "c7b96cddcb530bf3f3c8deb45a8dd41fa468e39841d40337abf3f3a1a56ccfea",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/items-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "7a907f9e8d82741749d0c6a80109c98abe893f2a02af1da090423ff20bd4d34e",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/items-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "a5170d3af7a4571ec054435acb7fcfe53e4f70ff27f9d8e9961fdf3425b134fa",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/materials-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "039bc4a2c41161a4933031da5fdabea0dcc8eb6acf5af1064e710142b0fac58f",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/materials-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "0a1823b4415ec5846f69457b5807d8ae1e6b336910be698406fa531c911579c7",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/materials-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "2fe46139a2289a980349350fe200fc355ef276aaa1a116493ce7bec76ae41d95",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/materials-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "dfaac4caf657696f256ec7eb8fa14c02103179633c960ea9d19c1ad7d96885f6",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/materials-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "0643f5a3f9281b2721b3015d8c8c3b3b23514bcaf9514eea3bd30e1adca22023",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/materials-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "0e832acdb23d0777fef8de8811fb79b44c2524749b05bb2635ec2764cf98358c",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/packages-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "992f4a810514cc69db1920275c2214636cb4bc98b72452bfe2509a6abd25e12f",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/packages-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "23413775fb360acedc85c90f5a44a6e8ea04ae9d0907b20077c191444bcba58c",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/packages-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "4101889cda816b9e3535a641cf9065bbaad6ec622e17be57e627d199a4470c76",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/packages-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "e8391e7492469ab73e2d08b491fe60a32c79844354304a74d4b502f22919480e",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/packages-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "ca3f5f2cc44b473eb767def3a366bb03b0a42897acc4caeefe6578a69feb7a90",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/packages-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "fa27dc817700aac7275d1bc3c8b718278fae955268a0bf4a93cd5d520dad0ada",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/permanent-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "1da045e9ac39c3b853ce66a42526f37015d45289d058511ad84b445e2a2569ea",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/permanent-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "e518d1f12dfa380790e641730653efd94909fe7724a56a04b6aa43d7a0bbb622",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/permanent-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "43e421ad0acfec042dd171100efc28df6eb19e2cb427856af05077e09c3e6500",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/permanent-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "be49e67bb2b45ac4500a1d1c25c05a97596f3f42f40eff6b121542bb71ec6eeb",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/permanent-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "74e971ecb026082f0d5f8695110f0c06046af9ade52e9249cf980458484e12d8",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/permanent-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "4946a5812bb924da182236ffe73c22abbe2561698d6dcf9950cf4ba75327f208",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-axiom-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "0d89946e0b28abccf6eef6772b5b8d92ceee346652009a1f2011704029243245",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-axiom-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "046623e8c95760b1b5547ddf7adfe2a96678847b5e70e771fbbb7921a7173d5b",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-axiom-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "60544ae62b56c3c86286f694f52987e6400ab87a92313f58ead485be1ebadf1e",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-axiom-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "b48b2f5c4f528495e347b8f6a8b624b79d783c82aae1ca94103e30d47272975c",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-axiom-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "3b093aa802a47e9a868c3527771e4abee1416d2df1318ca5eeefbaff40f80fb3",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-axiom-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "2d9123fcbf80aa4024f67dc1ac44b18b75943d55a8919c06cffe764075dc7e65",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-axiom-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "36419e4ab2839454fc79ded17c284e3b0bd92ebdbbe0df3d09e3de8ad263edfd",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-axiom-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "f0ca9267b834fd8a424e83e4fb68ad1128a8554028e63654742789d581068d17",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-axiom-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "4f8ada406780cfbcbe7b4c1418bad508bfa637f855cb67f374a48c1eb9beb33f",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-axiom-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "be765cbccb208285d3c561220df20bd92294155c5bed5fe33e686500da023f8e",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-axiom-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "f22f8b8fd2403e9fb3e389f4f1d3ae3d34faef01a8cc8b327ff8c98d8ffbbbc8",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-axiom-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "9ed967538f77fcbcb8d820c0d1948390675d49c15ef5da49d126ea6e385260b6",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-int-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "7f00ff795c659b25c115f5d1b2eb4a89a4ae859286928bd66b95892be8136c63",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-int-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "31cc7a7135d8d74c64413a563cc72cb0f6ad84f4cf40e70478e2a512f7a9915f",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-int-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "7ed9558037a4929298c0ef6972012881e83867ccbe25896222394af47461c43b",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-int-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "6217630a0863b0df9fae5a11c47c69d33cb69565e76258b7656c438f5b25a2cb",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-int-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "f723ae6ba9b6117ad6786f6ab1c96fa2429fc44e84d0cd997cda07ef6b0b598e",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-detail-int-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "241fd061ac1e91dedcd24094f15fbb553d53f6d95bee852f25faf169f168351d",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-int-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "80f142e8824fdfb286e290a88daf529ef9c0ce82b138b54fff5a412cedb11243",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-int-de-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "bf709c60aa3172c07451199cee8c4e381af66bd8440fe59b6e481978fd90fe00",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-int-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "793453fc91103d455e8fde845f234b94235fa8370b7129f05c945f89515007c7",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-int-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "f1001e328545b9a1d79fd0cfd67d30097d2d6baaad8fb395b24a83913f523373",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-int-en-390.png",
+      "width": 390,
+      "height": 846,
+      "sha256": "f59cee620e7d22bab70350d3cf53c32525f150d25e9a06cec5c07d50944cc0ff",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/prepared-int-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "da621aed1eccbece3cde39a83d47dddb74bf5f637320056b32fedd46d07fd1b1",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/research-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "fa26f24047160b355b1e780731b31262018167ffa690dc6691c61da93c8dbf70",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/research-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "667e5621e2b1bd0a7b4897c51dc645fc66556ee56ba2f5f9dff43325108d1a23",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/research-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "4aaf28e61dc071c0df84e4dc3a4d8bcda9d2a8fedc7c3a14ac50fa0e2862266e",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/research-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "84a8e80d9db533a974bdcc4faf4824410102dcf9b895c08702f7277ba1ffa1fe",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/research-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "d017e2f40b1bf08e965b07783bb69e14fc2796b103898208093812dc7d73d024",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/research-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "94265cf3fe9600bd86c3946163e165e629cdfb716cd598f967d7b7fde182476e",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/shop-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "621b039c5467275606b871a5645ff83f8fdbc6ea9ea1603a459ab989dcea3157",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/shop-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "a4e3b78bd39ef4c90cc193a026d36a6bfb2034813c7f80541c7c94fd80adb629",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/shop-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "190327fbd4ee932857348e7de15103bf45b42b5281812199b261e82a78b6e30c",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/shop-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "1acbbf38ef0dfcab6d55ed076903dc911282992cbff89bf95642fd8fb1719bcf",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/shop-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "6ec7f9b6b31b294f766950b6215fb09b6d5313c618ffdeef96c276fe7b38f5be",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/shop-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "b52f2865a0bd1357aaea7847c8c902dbb9109d242849463b7de041344b94d4cd",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/training-de-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "6626bded7b9de2b83301c0f71fb5cd2fe687d7b5b7c6fa5fe5d5c91f1f016fbe",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/training-de-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "8333999a65882af06950b232060f97ebf64b96031b5216b20ac46eb79a39ae3a",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/training-de-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "91d18376b3379e345252dda36022331565acdd4c1223b916326164f211c14d16",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/training-en-320.png",
+      "width": 320,
+      "height": 694,
+      "sha256": "4848169be10544ca4fbc380016b2c23e84943d6886f9f5a743048e630b5ffa17",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/training-en-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "1ccaad4974f394ccd5e7543dab1b92817575ddebd8a9e620e853c9eb8462ed53",
+      "state": "prepared isolated save"
+    },
+    {
+      "path": "docs/media/unity-mobile-ui-refactor/training-en-430.png",
+      "width": 430,
+      "height": 932,
+      "sha256": "db938ec3df9470c62ea82ab91f38b20248073ccd0410b4a2429db1f89066e722",
+      "state": "prepared isolated save"
+    }
+  ],
+  "coreSourceTreeSha256": "a52527617ab8500a458216b7b44c35c6eb1610d6ea6c4820aa119096940d166f",
+  "runtimeSourceTreeSha256": "80dea836e852c331282092644f8faf730af18b2ef9dcc8f3f4e9c8f17c1c9c08",
+  "testsSourceTreeSha256": "a2e57e3ac1abda88498f921c34aae0e91e1eb6c5809756b6e73a034362d481bc",
+  "verifiedAtUtc": "2026-11-02T11:46:58.952156+00:00",
+  "workingTree": "Contains preserved pre-existing local changes; not a clean committed player build."
+}
