@@ -45,13 +45,13 @@ namespace IdleIntelligence.Editor
         /// candidate in the current Unity Editor persistent directory.
         /// No old V1, Capacitor or other game's save is touched.
         /// </summary>
-        [MenuItem("Idle Intelligence/V3/Archive Editor V3 Save For Fresh Playtest")]
+        [MenuItem("Idle Intelligence/Playtest/Alten Editor-Spielstand archivieren")]
         public static void ArchiveEditorV3Save()
         {
             if(EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 EditorUtility.DisplayDialog("Idle Intelligence",
-                    "Stop Play Mode before archiving the editor's V3 save.", "OK");
+                    "Bitte Play-Modus vor dem Archivieren beenden.", "OK");
                 return;
             }
             string root=Application.persistentDataPath;
@@ -60,29 +60,29 @@ namespace IdleIntelligence.Editor
             string[] files=Directory.GetFiles(root,prefix+"*",SearchOption.TopDirectoryOnly);
             if(files.Length==0)
             {
-                Debug.Log("No editor V3 save exists. The next Play run starts a fresh V3 campaign.");
+                Debug.Log("Kein bisheriger Editor-Spielstand gefunden. Der nächste Play-Lauf beginnt neu.");
                 return;
             }
-            if(!EditorUtility.DisplayDialog("Start fresh V3 playtest?",
+            if(!EditorUtility.DisplayDialog("Neues Spiel starten?",
                 "This archives "+files.Length+" V3 save file(s) into a separate folder. "+
                 "The next Play run starts a fresh campaign. No saves are deleted.\n\n"+
-                root,"Archive V3 saves","Cancel"))return;
-            string archive=Path.Combine(root,"V3EditorSaveArchive",
+                root,"Archivieren","Cancel"))return;
+            string archive=Path.Combine(root,"EditorSaveArchive",
                 DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")+"-"+Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(archive);
             foreach(string file in files)
                 File.Move(file,Path.Combine(archive,Path.GetFileName(file)));
             Debug.Log("V3 editor save files safely archived: "+archive);
         }
-        [MenuItem("Idle Intelligence/V3/Build iOS Player")]
+        [MenuItem("Idle Intelligence/Build/iOS-Xcode-Projekt")]
         public static void BuildIos()
-            =>Build(BuildTarget.iOS,"Builds/V3-iOS");
-        [MenuItem("Idle Intelligence/V3/Build macOS Smoke Player")]
+            =>Build(BuildTarget.iOS,"Builds/IdleIntelligence-iOS");
+        [MenuItem("Idle Intelligence/Build/macOS-App")]
         public static void BuildMac()
         {
             string output=Environment.GetEnvironmentVariable("IDLE_PLAYER_OUTPUT");
             Build(BuildTarget.StandaloneOSX,
-                string.IsNullOrWhiteSpace(output)?"Builds/V3-Smoke.app":output);
+                string.IsNullOrWhiteSpace(output)?"Builds/IdleIntelligence.app":output);
         }
     }
 }
