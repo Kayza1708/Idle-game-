@@ -1,1 +1,0 @@
-export const coreLoopText=(language:string)=>language==='de'?'Die gesamte Hardware bedient Nutzer. Training und Forschung laufen parallel.':'All hardware serves users. Training and research run in parallel.';
