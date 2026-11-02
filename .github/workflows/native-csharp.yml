@@ -1,0 +1,36 @@
+name: Idle Intelligence - Native C# Checks
+on:
+  push:
+    branches: [unity-only]
+    paths: ['Assets/**', 'NativeChecks/**', 'Packages/**', 'ProjectSettings/**', 'scripts/**', '.github/workflows/native-csharp.yml']
+  pull_request:
+    paths: ['Assets/**', 'NativeChecks/**', 'Packages/**', 'ProjectSettings/**', 'scripts/**', '.github/workflows/native-csharp.yml']
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Verify Unity-only project and macOS script syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d Assets/IdleIntelligence
+          test -f Packages/manifest.json
+          test -f ProjectSettings/ProjectVersion.txt
+          test ! -e src
+          test ! -e package.json
+          test ! -e capacitor.config.json
+          test ! -e cloudflare
+          if find . -path './.git' -prune -o -type f \( -name '*.ts' -o -name '*.tsx' \) -print | grep -q .; then
+            echo "Unexpected TypeScript in the standalone Unity project"; exit 1
+          fi
+          bash -n scripts/open-unity-macos.sh
+          bash -n scripts/validate-unity-macos.sh
+      - name: Compile native Unity C# gameplay and run contracts
+        run: dotnet run --project NativeChecks/UnityCoreCheck.csproj --configuration Release
+      - name: Run deterministic native progression simulation
+        run: dotnet run --project NativeChecks/UnityCoreCheck.csproj --configuration Release -- --balance

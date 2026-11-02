@@ -1,0 +1,43 @@
+name: Idle Intelligence - Unity Editor Acceptance
+# The real Unity Editor cannot execute without a licensed Unity seat.
+# Run manually only after UNITY_LICENSE, UNITY_EMAIL, UNITY_PASSWORD are configured.
+on:
+  workflow_dispatch:
+jobs:
+  unity-editor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Unity license secrets
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        shell: bash
+        run: |
+          if [[ -z "$UNITY_LICENSE" || -z "$UNITY_EMAIL" || -z "$UNITY_PASSWORD" ]]; then
+            echo "::error::Unity license secrets missing; this is not a code test failure."
+            exit 1
+          fi
+      - name: Compile and run Unity EditMode and PlayMode
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: .
+          unityVersion: 6000.3.26f1
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          artifactsPath: artifacts/unity-editor
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unity-editor-test-reports
+          path: artifacts/unity-editor
+          if-no-files-found: warn

@@ -1,14 +1,32 @@
-node_modules/
-dist/
-*.tsbuildinfo
-.DS_Store
-*.bak
-*.backup
-package-lock.backup.json
-
-# Local native exports, profiler captures and private save backups
-/Builds/
-
-# Isolated local Worker tooling and Python test bytecode
-/cloudflare/company-api/.wrangler/
-/cloudflare/company-api/test/__pycache__/
+# Generated Unity state; Assets (including .meta), Packages and ProjectSettings stay tracked.
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Bb]uild/
+/[Bb]uilds/
+/[Aa]rtifacts/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/[Tt]est[Rr]esults/
+/.vs/
+/.idea/
+/.vscode/
+/.gradle/
+/*.csproj
+/*.sln
+/*.slnx
+/*.suo
+/*.user
+/*.userprefs
+/*.pidb
+/*.booproj
+/*.unityproj
+/*.apk
+/*.aab
+/*.ipa
+/*.app/
+/*.dmg
+/sysinfo.txt
+/crashlytics-build.properties
