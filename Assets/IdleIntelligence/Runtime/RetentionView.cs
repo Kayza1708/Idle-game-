@@ -159,7 +159,7 @@ namespace IdleIntelligence.Runtime
       card.Detail.text=a.Description+"\n"+claims+" Achievement-Stufen erhalten"+
         (claims==0?" · Bronze ab erster Stufe":claims<4?" · Silber ab 4 Stufen":claims<8?" · Gold ab 8 Stufen":" · Gold freigeschaltet");
     }
-    WorkshopUIFactory.Button("ProfileBackToIdentity",content,"Zurück zum Profil",()=>Show("profile"));
+    GameMenu.SmallClose(content,"ProfileBackToIdentity",()=>Show("profile"));
   }
 
   [Serializable] sealed class NameCheckReply { public bool available; public string name,reason; }
