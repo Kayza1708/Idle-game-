@@ -88,7 +88,7 @@ internal static class V3BalanceProbe
                     " research="+row[10]+" claimableINT="+row[11]);
             }
         }
-        string path=Path.Combine("IdleIntelligence","NativeChecks","out","unity-v3-balance-baseline.csv");
+        string path=Path.Combine("NativeChecks","out","unity-v3-balance-baseline.csv");
         Directory.CreateDirectory(Path.GetDirectoryName(path));
         // Deliberately invariant numbers, one record per snapshot, no source-code revisions.
         File.WriteAllLines(path,records.Select(fields=>string.Join(",",fields)));
