@@ -9,7 +9,7 @@ namespace IdleIntelligence.Runtime
 {
  public sealed class MarketView:MonoBehaviour
  {
-  GameRuntime game;Transform content;Text header,notice;Button video;string page="offers",signature="",transaction="";CancellationTokenSource cancellation;readonly IRewardedVideoProvider provider=new UnavailableRewardedVideoProvider();readonly List<Action> refresh=new List<Action>();
+  GameRuntime game;Transform content;Text header,notice;Button video;string page="offers",signature="",transaction="";GameObject purchaseDialog;CancellationTokenSource cancellation;readonly IRewardedVideoProvider provider=new UnavailableRewardedVideoProvider();readonly List<Action> refresh=new List<Action>();
   public void Initialize(GameRuntime runtime,bool embedded=false){game=runtime;ItemPortrait.Sprites=game.WorkshopPrefab.ItemSprites;header=WorkshopUIFactory.Label("MarketHeader",transform,"",16,72);header.gameObject.SetActive(!embedded);var nav=WorkshopUIFactory.Horizontal("MarketNavigation",transform).transform;nav.gameObject.SetActive(!embedded);WorkshopUIFactory.Button("MarketOffers",nav,"Angebote",()=>ShowPage("offers"));WorkshopUIFactory.Button("MarketMaterials",nav,"Materialien",()=>ShowPage("materials"));notice=WorkshopUIFactory.Label("MarketNotice",transform,"Truhen enthalten Komponenten und manchmal ein Item.",14,48);video=WorkshopUIFactory.Button("MarketVideo",transform,"Video-Truhe · Werbequelle nicht verfügbar",RequestVideo);WorkshopUIFactory.Button("MarketOdds",nav,"Chancen",()=>ShowPage("odds"));content=WorkshopUIFactory.Vertical("MarketContent",transform).transform;Build();}
   public void OpenPage(string value){if(page==value)return;page=value;Build();}void ShowPage(string value){OpenPage(value);Canvas.ForceUpdateCanvases();game.Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=1;}
   string Signature()=>game.State.Rewards.shopRevision+":"+game.State.Market.hasPending+":"+Market.Rotation(game.State).day+":"+page;
@@ -24,7 +24,7 @@ namespace IdleIntelligence.Runtime
    if(s.Market.hasPending){string tx=s.Market.pending.id;WorkshopUIFactory.Button("MarketCancelVideo",content,"Offenen Videoauftrag abbrechen",()=>game.Act(v=>Market.CancelVideo(v,tx)));}
    foreach(var offer in Market.Offers(s).Where(o=>page=="materials"?o.Kind=="material"&&!o.Stock:o.Kind!="material"||o.Stock))
    {
-    string id=offer.Id;var ticket=Market.Quote(s,id).Ticket;string title=offer.Kind=="chest"?(id=="free-common"?"Freie ":"")+offer.Tier+"-Truhe":offer.Kind=="item"?"Tagesitem · "+ItemBalance.Items[Workshop.Index(offer.Item)].Name:(offer.Stock?"Tagesangebot · ":"")+ItemBalance.ComponentNames[offer.Component];var card=Card("MarketOffer-"+id,title,()=>{bool paid=game.Act(v=>Market.Buy(v,ticket),"shop-buy");notice.text=paid?"Kauf gespeichert.":Market.Quote(game.State,id).Reason=="sold"||Market.Quote(game.State,id).Reason=="cooldown"?"Bereits abgeholt. Kein zweiter Kauf.":"Kein weiterer Kauf: Ticket, Bestandsgrenze oder Angebot prüfen.";});
+    string id=offer.Id;var ticket=Market.Quote(s,id).Ticket;string title=offer.Kind=="chest"?(id=="free-common"?"Freie ":"")+offer.Tier+"-Truhe":offer.Kind=="item"?"Tagesitem · "+ItemBalance.Items[Workshop.Index(offer.Item)].Name:(offer.Stock?"Tagesangebot · ":"")+ItemBalance.ComponentNames[offer.Component];var card=Card("MarketOffer-"+id,title,()=>{if(offer.Payment=="free")CommitPurchase(id,ticket);else ConfirmPurchase(id,ticket,title);});
     if(offer.Kind=="chest"){var art=Resources.Load<PresentationArt>("PixelUI/PresentationArt");card.Icon.gameObject.SetActive(true);card.Icon.sprite=art!=null&&art.ChestBody!=null&&art.ChestBody.Length>0?art.ChestBody[0]:null;card.Icon.preserveAspect=true;card.Icon.color=Color.white;}
     if(offer.Kind=="item"){card.Icon.gameObject.SetActive(true);card.Icon.color=Color.clear;var portrait=Instantiate(game.WorkshopPrefab.PortraitPrefab,card.Icon.transform);var r=(RectTransform)portrait.transform;r.anchorMin=r.anchorMax=new Vector2(.5f,.5f);r.sizeDelta=new Vector2(58,58);r.anchoredPosition=Vector2.zero;portrait.Bind(new ItemInstance{type=offer.Item,rarity=offer.Rarity});portrait.Caption.text="";portrait.Button.interactable=false;portrait.Button.targetGraphic.raycastTarget=false;}
     else if(offer.Kind=="material"){card.Icon.gameObject.SetActive(true);card.Icon.sprite=game.WorkshopPrefab.ComponentSprites[offer.Component];card.Icon.preserveAspect=true;}
@@ -33,12 +33,69 @@ namespace IdleIntelligence.Runtime
    if(s.Rewards.hasReceipt){var r=s.Rewards.receipt;var card=Card("MarketReceipt","Ergebnis #"+r.id,()=>{});card.Button.interactable=false;card.Detail.text=r.components.Sum()+" Komponenten"+(r.hasItem?" · "+ItemBalance.Items[Workshop.Index(r.item.type)].Name+" ("+ItemBalance.Rarities[r.item.rarity]+")":"")+(r.voucherGranted?" · +1 Gumball-Gutschein":"")+"\n"+r.cost+" Gems · "+r.payment;}
   }
   static string ChestDescription(string tier,GameState state){var d=SeasonBalance.Chests.First(c=>c.Id==tier);int pool=SeasonRules.Pool(state).Length;string rarity=string.Join(" · ",d.Weights.Select((w,i)=>new{w,i}).Where(x=>x.w>0).Select(x=>SettingsRules.Text(state.Settings.language,"rarity:"+ItemBalance.Rarities[x.i])+" "+(x.w/d.Weights.Sum()*100).ToString("0.##")+" %"));return d.Rolls+" Funde · je "+d.Minimum+"–"+d.Maximum+"\nItemchance "+(d.ItemChance/100d)+" % · Gumball-Gutschein "+(VoucherRules.ChestChance(tier)*100d).ToString("0.##",System.Globalization.CultureInfo.InvariantCulture)+" %\n"+rarity+"\n"+(state.Settings.language=="de"?"Je zugänglichem Itemtyp: ":"Each accessible item type: ")+(pool==0?"0":(d.ItemChance/100d/pool).ToString("0.####"))+" %";}
+  void CommitPurchase(string id,MarketTicket ticket)
+  {
+   bool paid=game.Act(v=>Market.Buy(v,ticket),"shop-buy");
+   var current=Market.Quote(game.State,id);
+   notice.text=paid?"Kauf gespeichert.":current.Reason=="sold"||
+     current.Reason=="cooldown"?"Bereits abgeholt. Kein zweiter Kauf.":
+     "Kauf nicht möglich: Preis, Gems oder Angebot prüfen.";
+  }
+  void ClosePurchase()
+  {
+   if(purchaseDialog==null)return;
+   purchaseDialog.SetActive(false);
+   Destroy(purchaseDialog);
+   purchaseDialog=null;
+  }
+  void ConfirmPurchase(string id,MarketTicket ticket,string title)
+  {
+   ClosePurchase();
+   var quote=Market.Quote(game.State,id);
+   if(!quote.Allowed||quote.Offer==null){notice.text=Reason(quote.Reason);return;}
+   var offer=quote.Offer;
+   var canvas=game.Content.GetComponentInParent<Canvas>();
+   purchaseDialog=Instantiate(game.WorkshopPrefab.DetailRoot,canvas.transform);
+   purchaseDialog.name="ShopPurchaseConfirm";
+   purchaseDialog.SetActive(true);
+   WorkshopUIFactory.Fill((RectTransform)purchaseDialog.transform);
+   purchaseDialog.AddComponent<SafeArea>();
+   var close=purchaseDialog.transform.Find("DetailPanel/CloseItemDetail").
+       GetComponent<Button>();
+   close.onClick.RemoveAllListeners();
+   close.onClick.AddListener(ClosePurchase);
+   close.GetComponentInChildren<Text>().text="×";
+   var scroll=purchaseDialog.GetComponentInChildren<ScrollRect>(true);
+   foreach(Transform child in scroll.content)child.gameObject.SetActive(false);
+   var body=WorkshopUIFactory.Vertical("PurchasePreview",scroll.content);
+   WorkshopUIFactory.Label("PurchaseTitle",body.transform,title,20,68);
+   string details=offer.Kind=="chest"?ChestDescription(offer.Tier,game.State):
+     offer.Kind=="material"?offer.Amount+" × "+
+       ItemBalance.ComponentNames[offer.Component]:
+       ItemBalance.Items[Workshop.Index(offer.Item)].Name;
+   WorkshopUIFactory.Label("PurchaseDetails",body.transform,details,14,
+       offer.Kind=="chest"?190:74);
+   WorkshopUIFactory.Label("PurchasePrice",body.transform,
+       offer.Cost+" Gems  ·  "+game.State.Retention.gems+" vorhanden",17,58);
+   var cancel=WorkshopUIFactory.Button("PurchaseCancel",body.transform,
+       "Abbrechen",ClosePurchase);
+   var confirm=WorkshopUIFactory.Button("PurchaseConfirm",body.transform,
+       "Kaufen · "+offer.Cost+" Gems",()=>{
+         // Market.Buy checks ticket/day/revision/stock/price again atomically.
+         ClosePurchase();
+         CommitPurchase(id,ticket);
+       });
+   GameTheme.ButtonStyle(confirm,true);
+   confirm.interactable=game.Writable&&quote.Allowed;
+   Canvas.ForceUpdateCanvases();
+   scroll.verticalNormalizedPosition=1;
+  }
   async void RequestVideo()
   {
    if(transaction!=""||!Market.VideoQuote(game.State).Allowed)return;if(!game.AcquireRewardRequest())return;string tx="market-video-"+Guid.NewGuid().ToString("N");if(!game.Act(s=>Market.BeginVideo(s,tx)))return;if(PurchaseRules.AdFree(game.State)){game.Act(s=>Market.ClaimAdFree(s,tx),"shop-video");notice.text="Werbefrei-Anspruch gespeichert. Keine Anzeige abgespielt.";return;}transaction=tx;cancellation=new CancellationTokenSource();RewardProviderResult result;
    try{result=await provider.ShowAsync("shopChest",tx,cancellation.Token);}catch(OperationCanceledException){result=RewardProviderResult.Cancelled;}catch{result=RewardProviderResult.Failed;}
    if(game!=null)game.Act(s=>Market.CompleteVideo(s,tx,result.ToString().ToLowerInvariant()),"shop-video");if(this!=null){transaction="";notice.text=result==RewardProviderResult.Unavailable?"Keine Werbequelle verfügbar. Keine Truhe oder Limits verbucht.":result==RewardProviderResult.Cancelled?"Videoauftrag abgebrochen. Keine Belohnung.":result==RewardProviderResult.Failed?"Video fehlgeschlagen. Keine Belohnung.":"Providerergebnis verarbeitet.";cancellation?.Dispose();cancellation=null;}
   }
-  void OnDisable(){cancellation?.Cancel();if(game!=null&&transaction!="")game.Act(s=>Market.CancelVideo(s,transaction));}
+  void OnDisable(){ClosePurchase();cancellation?.Cancel();if(game!=null&&transaction!="")game.Act(s=>Market.CancelVideo(s,transaction));}
  }
 }
