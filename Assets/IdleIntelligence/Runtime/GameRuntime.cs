@@ -89,7 +89,7 @@ namespace IdleIntelligence.Runtime
         public void Show(string selected)
         {
             if(labsOverview!=null){labsOverview.gameObject.SetActive(false);Destroy(labsOverview.gameObject);labsOverview=null;}if(shopHub!=null){shopHub.gameObject.SetActive(false);Destroy(shopHub.gameObject);shopHub=null;}learningOverview=null;foreach(Transform heading in Content)if(heading.name=="LearningOverview"){heading.gameObject.SetActive(false);Destroy(heading.gameObject);}
-            GetComponent<RewardPresentation>()?.Cancel();GetComponent<CompletionFeedback>()?.Cancel();var menuReturn=Content.Find("MenuReturn");if(menuReturn!=null){menuReturn.gameObject.SetActive(false);Destroy(menuReturn.gameObject);}
+            GetComponent<RewardPresentation>()?.Cancel();GetComponent<CompletionFeedback>()?.Cancel();foreach(var returnName in new[]{"MenuReturn","MenuReturnBar"}){var menuReturn=Content.Find(returnName);if(menuReturn!=null){menuReturn.gameObject.SetActive(false);Destroy(menuReturn.gameObject);}}
             if(productionView!=null){productionView.gameObject.SetActive(false);Destroy(productionView.gameObject);productionView=null;}if(economyDetail!=null){economyDetail.gameObject.SetActive(false);Destroy(economyDetail.gameObject);economyDetail=null;}foreach(Transform child in Content)if(child.name.StartsWith("Details-",StringComparison.Ordinal)){child.gameObject.SetActive(false);Destroy(child.gameObject);}
             var oldProduction=Content.Find("ProductionAccess");if(oldProduction!=null){oldProduction.gameObject.SetActive(false);Destroy(oldProduction.gameObject);}
             if(goalView!=null){goalView.gameObject.SetActive(false);Destroy(goalView.gameObject);goalView=null;}var oldGoals=Content.Find("GoalsAccess");if(oldGoals!=null){oldGoals.gameObject.SetActive(false);Destroy(oldGoals.gameObject);}
@@ -133,7 +133,7 @@ namespace IdleIntelligence.Runtime
             if(tab=="prestige"){PrestigeView=Instantiate(PrestigePrefab,Content);PrestigeView.Initialize(this);Refresh();return;}
             if(workshop){WorkshopView=Instantiate(WorkshopPrefab,Content);WorkshopView.Initialize(this);Refresh();return;}
             if(tab=="research"){labsOverview=WorkshopUIFactory.Vertical("ResearchLabs",Content).AddComponent<ResearchLabOverview>();labsOverview.Initialize(this);}
-            if(tab=="training")learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,tab=="training"?"Training":"Forschung",18,tab=="research"?48:34);
+            if(tab=="training"){learningOverview=WorkshopUIFactory.Label("LearningOverview",Content,State.Settings.language=="de"?"Training":"Training",18,52);var close=WorkshopUIFactory.Button("TrainingClose",learningOverview.transform,"×",()=>UserShow("hardware"));var rect=close.GetComponent<RectTransform>();rect.anchorMin=rect.anchorMax=new Vector2(1,.5f);rect.pivot=new Vector2(1,.5f);rect.sizeDelta=new Vector2(48,48);rect.anchoredPosition=new Vector2(-4,0);var layout=close.GetComponent<LayoutElement>();if(layout!=null)layout.ignoreLayout=true;close.GetComponentInChildren<Text>().fontSize=25;}
             int count=tab=="hardware"?Balance.Hardware.Length:tab=="training"?3:Balance.Research.Length;
             for(int i=0;i<count;i++)
             {
