@@ -1,9 +1,27 @@
-using UnityEngine;using UnityEngine.UI;
+using System;using UnityEngine;using UnityEngine.UI;
 namespace IdleIntelligence.Runtime {
  // Reachable routes to existing screens only. No independent game or save state.
  public sealed class GameMenu:MonoBehaviour {
   GameRuntime game;GameObject sheet;public bool IsOpen=>sheet!=null&&sheet.activeSelf;public void Initialize(GameRuntime runtime){game=runtime;}
-  public void Navigate(string route){string previous=game.CurrentTab;string mode=game.WorkshopView?.Mode;float position=game.Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition;Close();game.UserShow(route);var back=WorkshopUIFactory.Button("MenuReturn",game.Content,UiLocalizedText.Translate("Zurück",game.State.Settings.language),()=>{game.UserShow(previous);if(mode!=null&&game.WorkshopView!=null)game.WorkshopView.ChangeMode(mode);Canvas.ForceUpdateCanvases();game.Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=position;});back.transform.SetAsFirstSibling();}
+  public void Navigate(string route){string previous=game.CurrentTab;string mode=game.WorkshopView?.Mode;float position=game.Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition;Close();game.UserShow(route);var bar=SmallClose(game.Content,"MenuReturn",()=>{game.UserShow(previous);if(mode!=null&&game.WorkshopView!=null)game.WorkshopView.ChangeMode(mode);Canvas.ForceUpdateCanvases();game.Content.GetComponentInParent<ScrollRect>().verticalNormalizedPosition=position;});bar.transform.SetAsFirstSibling();}
+  // A compact, accessible 48x48 close affordance instead of a huge back card.
+  // The parent row is kept in the vertical scroll layout.
+  public static GameObject SmallClose(Transform parent,string name,Action close)
+  {
+   var bar=WorkshopUIFactory.Horizontal(name+"Bar",parent,50);
+   var layout=bar.GetComponent<HorizontalLayoutGroup>();
+   layout.childForceExpandWidth=false;
+   layout.childAlignment=TextAnchor.MiddleRight;
+   var fill=WorkshopUIFactory.Node(name+"Spacer",bar.transform,typeof(LayoutElement));
+   fill.GetComponent<LayoutElement>().flexibleWidth=1;
+   var button=WorkshopUIFactory.Button(name,bar.transform,"×",close);
+   var size=button.GetComponent<LayoutElement>()??button.gameObject.AddComponent<LayoutElement>();
+   size.minWidth=size.preferredWidth=size.minHeight=size.preferredHeight=48;
+   size.flexibleWidth=size.flexibleHeight=0;
+   button.GetComponentInChildren<Text>().fontSize=26;
+   button.GetComponentInChildren<Text>().resizeTextMaxSize=26;
+   return bar;
+  }
   public void Close(){if(sheet!=null){sheet.SetActive(false);Destroy(sheet);}sheet=null;}
   void OnDestroy()=>Close();
   public void Open(){Close();sheet=Instantiate(game.WorkshopPrefab.DetailRoot,game.Content.GetComponentInParent<Canvas>().transform);sheet.name="MainMenu";sheet.SetActive(true);WorkshopUIFactory.Fill((RectTransform)sheet.transform);sheet.AddComponent<SafeArea>();var scroll=sheet.GetComponentInChildren<ScrollRect>(true);foreach(Transform child in scroll.content)child.gameObject.SetActive(false);var body=WorkshopUIFactory.Vertical("MenuActions",scroll.content);WorkshopUIFactory.Label("MenuHeading",body.transform,UiLocalizedText.Translate("Menü",game.State.Settings.language),22,42);var close=sheet.transform.Find("DetailPanel/CloseItemDetail").GetComponent<Button>();close.onClick.RemoveAllListeners();close.onClick.AddListener(Close);
