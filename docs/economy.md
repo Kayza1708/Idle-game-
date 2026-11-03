@@ -36,3 +36,7 @@ Neue NUnit-Verträge prüfen alle 42 Rezeptpreise, tatsächliche Abbuchung/Abwei
 Wiederholung der aktuellen bezahlten Simulation auf einem Host mit .NET 8: `dotnet run --project NativeChecks/UnityCoreCheck.csproj -- --balance`. Ausgabe: `NativeChecks/out/unity-v3-balance-current.csv`. Auf diesem Rechner wurde derselbe Quellcode mit dem gebündelten Unity-Mono-Compiler gegen die von Unity kompilierte Core-Assembly ausgeführt. Vorher-Daten stammen aus der unveränderten Core-Assembly vor diesem Balanceauftrag.
 
 Abnahme: **248/248 EditMode**, **3/3 Schmiede-PlayMode**, native Core-Verträge und lokaler macOS-Build erfolgreich. [Prüfmanifest](balance/verification.json). Keine erneute vollständige PlayMode-Suite oder Endgame-Langzeitabnahme für diese Fassung.
+
+## Gemeinsamer GitHub-Stand · 3. November 2026
+
+Der aktuelle Upload mit Balance, zusätzlichen Gesamtprüfungen und nachkorrigierter Kostenanzeige ist in [GitHub-Status](github-status.md) und [Prüfmanifest](github-upload.verification.json) dokumentiert. Historische Prüfzahlen oben bezeichnen ihre jeweiligen Zwischenstände.

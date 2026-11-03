@@ -88,3 +88,7 @@ Die abschließende Korrektur mit kleinen, preisfreien Rand-Links hat den macOS-B
 ## Gemeinsame Bereinigung aller übrigen Seiten
 
 [Aktueller Seitenbericht](all-pages-cleanup.md) und [Prüfmanifest](all-pages-cleanup.verification.json) dokumentieren die gemeinsame Darstellung, 420 mobile Ansichtsprüfungen, den ausgewerteten Gesamtlauf mit gezielter Fehlernachprüfung und den erfolgreichen aktuellen macOS-Build.
+
+## Gemeinsamer GitHub-Stand · 3. November 2026
+
+Der aktuelle Upload mit Balance, zusätzlichen Gesamtprüfungen und nachkorrigierter Kostenanzeige ist in [GitHub-Status](github-status.md) und [Prüfmanifest](github-upload.verification.json) dokumentiert. Historische Prüfzahlen oben bezeichnen ihre jeweiligen Zwischenstände.

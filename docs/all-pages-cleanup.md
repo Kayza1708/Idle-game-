@@ -28,3 +28,7 @@ Geprüft werden seitliche Ränder aktiver Texte und Buttons sowie Mindest-Touchg
 Der vollständige PlayMode-Lauf umfasste **152 Tests: 149 bestanden, 3 fehlgeschlagen**. Die drei Befunde wurden anschließend gezielt korrigiert: einzeilige Netzwerk-Werkzeugtexte, die neue flache Dialogfläche als korrekter Testvertrag und eine stabile Drohnen-Vorbereitung über echte verstrichene Vordergrundzeit. **Alle 8 Tests der anschließenden Nachprüfung sind bestanden**, einschließlich sämtlicher drei zuvor fehlgeschlagenen Fälle. Ein weiterer vollständiger 152er-Lauf wurde danach nicht gestartet.
 
 Der aktuelle **macOS-Build ist erfolgreich** (250.603.015 Bytes). [Prüfmanifest](all-pages-cleanup.verification.json); Roh-XML, Logs und App lokal unter `unity-acceptance/all-pages-cleanup-20261102/`. Die früheren EditMode-Zahlen gelten weiter als historische Belege; Gameplay-/Economy-Dateien wurden hier nicht geändert. Keine Veröffentlichung oder neue SDK-Anbindung.
+
+## Gemeinsamer GitHub-Stand · 3. November 2026
+
+Der aktuelle Upload mit Balance, zusätzlichen Gesamtprüfungen und nachkorrigierter Kostenanzeige ist in [GitHub-Status](github-status.md) und [Prüfmanifest](github-upload.verification.json) dokumentiert. Historische Prüfzahlen oben bezeichnen ihre jeweiligen Zwischenstände.

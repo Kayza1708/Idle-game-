@@ -60,5 +60,5 @@ UI-Überarbeitung auf Unity-only main übertragen. [Prüfbericht](unity-mobile-u
 
 - [x] Aktuelles GitHub-main abgerufen: `ccfb38df`, identisch mit der lokalen Ausgangsbasis. Keine offenen PRs vor dem Upload.
 - [x] Alle fertigen lokalen UI-, Grafik- und Balanceänderungen für einen gemeinsamen Branch zusammengestellt.
-- [ ] Commit/Push und anschließender Abgleich von lokalem und entferntem Commit.
-- [ ] Zusätzlicher vollständiger PlayMode-Lauf und GitHub-CI-Abnahme des hochgeladenen Stands.
+- [x] Gemeinsamer Codecommit `3532142c` gepusht und mit GitHub identisch bestätigt; [PR #177](https://github.com/Kayza1708/Idle-game-/pull/177) erstellt.
+- [x] Zusätzlicher Gesamtlauf ausgewertet: 151/152 bestanden. Gefundenen Preisumbruch korrigiert; 7/7 Nachtests einschließlich erneuter 420er-Matrix bestanden. Native GitHub-CI des ersten Codecommits erfolgreich. [Abschlussbericht](github-status.md).
