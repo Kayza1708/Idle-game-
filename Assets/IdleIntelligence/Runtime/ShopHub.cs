@@ -10,7 +10,7 @@ namespace IdleIntelligence.Runtime
     {
         GameRuntime game;
         Transform storefront;
-        Text heading;
+        Text heading,balance;
         MarketView market;
         GemFeatureView gems;
         NativeStoreView packages;
@@ -20,18 +20,18 @@ namespace IdleIntelligence.Runtime
 
         public void Initialize(GameRuntime runtime)
         {
-            game=runtime;
+            game=runtime;StorefrontUI.FitWidth(transform);
             bool de=game.State.Settings.language=="de";
-            heading=WorkshopUIFactory.Label("ShopHeading",transform,"",19,38);
+            var header=WorkshopUIFactory.Horizontal("ShopHeader",transform,44);StorefrontUI.FitWidth(header.transform);heading=WorkshopUIFactory.Label("ShopHeading",header.transform,"SHOP",19,44);StorefrontUI.FitWidth(heading.transform);balance=StorefrontUI.CurrencyLine(header.transform,44,18);var balanceSize=balance.transform.parent.GetComponent<LayoutElement>();balanceSize.preferredWidth=164;balanceSize.flexibleWidth=0;
             AddTabs(new[]{"chests","materials","permanent","capsule","packages"},new[]{
                 de?"Angebote":"Offers",de?"Komponenten":"Parts","Upgrades","Gumball",de?"Pakete":"Bundles"});
-            storefront=WorkshopUIFactory.Vertical("StorefrontProducts",transform).transform;
+            storefront=WorkshopUIFactory.Vertical("StorefrontProducts",transform).transform;StorefrontUI.FitWidth(storefront);
             game.Act(Market.Visit);ShowPage("chests");
         }
 
         void AddTabs(string[] ids,string[] labels)
         {
-            var row=StorefrontUI.Tabs("StoreTabs",transform);
+            int count=ids.Length-(ProgressionVisibility.Gumball(game.State)?0:1);var row=PresentationLayout.Grid("StoreTabs",transform,count>4?3:2,count,44);StorefrontUI.FitWidth(row);
             for(int i=0;i<ids.Length;i++)
             {
                 string id=ids[i];
@@ -43,11 +43,12 @@ namespace IdleIntelligence.Runtime
                 size.minHeight=size.preferredHeight=44;
                 size.minWidth=0;
                 size.flexibleWidth=1;
-                StorefrontUI.Tab(button);tabs[id]=button;
+                GameTheme.CompactAction(button,false);size.minWidth=size.preferredWidth=0;tabs[id]=button;
             }
         }
 
         public void OpenGumball()=>ShowPage("capsule");
+        public void OpenAdFree(){ShowPage("packages");packages.FocusAdFree();}
 
         public void ShowPage(string selected)
         {
@@ -59,28 +60,26 @@ namespace IdleIntelligence.Runtime
                 if(text!=null)text.color=pair.Key==page?
                     GameTheme.Accent:GameTheme.Muted;
             }
-            if(heading!=null)
-                heading.text=(game.State.Settings.language=="de"?"SHOP":"SHOP")+
-                    "    <color=#39E4F2>◆ "+game.State.Retention.gems+" Gems</color>";
+            RefreshBalance();
 
             bool marketPage=selected=="chests"||selected=="materials"||selected=="odds";
             bool gemPage=selected=="capsule"||selected=="permanent";
             if(marketPage&&market==null)
             {
                 var root=WorkshopUIFactory.Vertical("MarketStorefront",storefront);
-                market=root.AddComponent<MarketView>();
+                StorefrontUI.FitWidth(root.transform);market=root.AddComponent<MarketView>();
                 market.Initialize(game,true);
             }
             if(gemPage&&gems==null)
             {
                 var root=WorkshopUIFactory.Vertical("GumballStorefront",storefront);
-                gems=root.AddComponent<GemFeatureView>();
+                StorefrontUI.FitWidth(root.transform);gems=root.AddComponent<GemFeatureView>();
                 gems.Initialize(game,true);
             }
             if(selected=="packages"&&packages==null)
             {
                 var root=WorkshopUIFactory.Vertical("BundlesStorefront",storefront);
-                packages=root.AddComponent<NativeStoreView>();
+                StorefrontUI.FitWidth(root.transform);packages=root.AddComponent<NativeStoreView>();
                 packages.Initialize(game);
             }
             if(market!=null)
@@ -95,21 +94,15 @@ namespace IdleIntelligence.Runtime
             }
             if(packages!=null)packages.gameObject.SetActive(selected=="packages");
             Canvas.ForceUpdateCanvases();
-            if(tabs.TryGetValue(page,out var active)){
-                var rail=active.GetComponentInParent<ScrollRect>();rail.StopMovement();
-                var bounds=RectTransformUtility.CalculateRelativeRectTransformBounds(rail.viewport,(RectTransform)active.transform);
-                float shift=bounds.min.x<rail.viewport.rect.xMin?rail.viewport.rect.xMin-bounds.min.x:bounds.max.x>rail.viewport.rect.xMax?rail.viewport.rect.xMax-bounds.max.x:0;
-                rail.content.anchoredPosition+=Vector2.right*shift;
-            }
             var scroll=game.Content.GetComponentInParent<ScrollRect>();
             if(scroll!=null)scroll.verticalNormalizedPosition=1;
         }
 
-        void Update()
+        void RefreshBalance()
         {
-            if(heading!=null&&game!=null)
-                heading.text="SHOP   <color=#38F3FF>◆ "+
-                    game.State.Retention.gems+" Gems</color>";
+            if(game==null||balance==null)return;
+            StorefrontUI.Price(balance,StorefrontUI.Gem(game),NumberFormatting.Format(ScientificNumber.From(game.State.Retention.gems),game.State.Settings.numberFormat,game.State.Settings.language)+" Gems",GameTheme.Accent);
         }
+        void Update()=>RefreshBalance();
     }
 }

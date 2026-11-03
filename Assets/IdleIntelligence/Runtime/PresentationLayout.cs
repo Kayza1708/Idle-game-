@@ -8,7 +8,7 @@ namespace IdleIntelligence.Runtime
         {
             var node=WorkshopUIFactory.Node(name,parent,typeof(GridLayoutGroup));
             var grid=node.GetComponent<GridLayoutGroup>();grid.constraint=GridLayoutGroup.Constraint.FixedColumnCount;grid.constraintCount=columns;grid.spacing=new Vector2(4,4);
-            WorkshopUIFactory.Size(node,Mathf.CeilToInt(count/(float)columns)*(height+4)-4);
+            WorkshopUIFactory.Size(node,Mathf.CeilToInt(count/(float)columns)*(height+4)-4);StorefrontUI.FitWidth(node.transform);
             node.AddComponent<ItemGrid>().Height=height;
             return node.transform;
         }

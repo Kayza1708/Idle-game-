@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-02",
+  "unity": "6000.3.26f1",
+  "baseCommit": "ccfb38df",
+  "branch": "codex/unified-v3-art-shop",
+  "reports": {
+    "editmode": {
+      "result": "Passed",
+      "total": "242",
+      "passed": "242",
+      "failed": "0",
+      "duration": "241.3541307",
+      "start-time": "2026-11-02 13:54:03Z",
+      "end-time": "2026-11-02 13:58:04Z",
+      "sha256": "ecfe178d2a8651d7449fbef2d0ad4a60cffefb9749835eb4f3da7bb433e6bab6"
+    },
+    "playmode": {
+      "result": "Passed",
+      "total": "148",
+      "passed": "148",
+      "failed": "0",
+      "duration": "798.4852123",
+      "start-time": "2026-11-02 14:00:38Z",
+      "end-time": "2026-11-02 14:13:57Z",
+      "sha256": "a85caed8459a19cf209413cd4a39cf05388a23ef012f719c7e2719c660046042"
+    },
+    "targetedPlaymode": {
+      "result": "Passed",
+      "total": "16",
+      "passed": "16",
+      "failed": "0",
+      "duration": "53.7426313",
+      "start-time": "2026-11-02 13:52:30Z",
+      "end-time": "2026-11-02 13:53:24Z",
+      "sha256": "43ffc2e2738eeb52b9a6b4cd6b15675813ab5e5afd9456e8281f7a8543e4381d"
+    }
+  },
+  "macOSBuild": [
+    "Succeeded",
+    "Target: StandaloneOSX",
+    "Size: 250596135",
+    "Duration: 00:00:55.1427490"
+  ],
+  "sourceHashes": {
+    "Assets/IdleIntelligence/Runtime/AnalysisOverview.cs": "6200109e4ed0aa86fa71dddd4db36154d54261e25a9ee548994d2592d596bcdd",
+    "Assets/IdleIntelligence/Runtime/MarketView.cs": "0a2411c98b6cacc3f76e3a880b7f68df88755d624d8d3cf1dca4851eabe131b7",
+    "Assets/IdleIntelligence/Runtime/ModelLoadout.cs": "f5a86352f7564387d8d8143f5dba6377be7610c86419f4e255b5d0749a4b1ca6",
+    "Assets/IdleIntelligence/Runtime/StorefrontUI.cs": "e4b85f94b2c7cbe4128dfcc9b74dd10b4cbbcf333fba206c71ff9fecbb17a559",
+    "Assets/IdleIntelligence/Runtime/WorkshopUI.cs": "ee7844d459bd4637ee1530ec79abc8c17e52d7aeadb38b8d2dd3ecb5f524515c",
+    "Assets/IdleIntelligence/Tests/EditMode/ComponentArtContractTests.cs": "205aa918129ecac8820fe656ff14ee88be9a1a77e6c11d339e2110e48908344b",
+    "Assets/IdleIntelligence/Tests/PlayMode/ChestInventoryRefinementTests.cs": "03125cf280d2f1e05fcf94a23e48ad8c24893e8081d61e4f80c2f2409938a464",
+    "Assets/IdleIntelligence/Tests/PlayMode/CleanPresentationTests.cs": "880e11a2d5393690b3851852b39c5049cf3bc74e22db66f09c55f93670a0aa52",
+    "Assets/IdleIntelligence/Tests/PlayMode/DesignReviewTests.cs": "70fff9300502ab7bbc4b730fa78599a785b90c76d16fe0d9de39a4d8b46a3c71",
+    "Assets/IdleIntelligence/Tests/PlayMode/GemUITests.cs": "b44f4197af754332cb3d8f9a1d124acafa2ee1f15100f77ecd56bbc832eb5df0",
+    "Assets/IdleIntelligence/Tests/PlayMode/MarketUITests.cs": "84671b85d5d5a7e598f20ccacf108aee05733bb35ab653a1032e576edc7f737f",
+    "Assets/IdleIntelligence/Tests/PlayMode/MetaVisualSectionTests.cs": "84f3924b12285b8f2459b0215562226ca3ad599b27afafac5bc0af660769d0a5",
+    "Assets/IdleIntelligence/Tests/PlayMode/NavigationFlowTests.cs": "84248d2aef2f53ccb970d3e5db67e1134cb4007c678cf6b9088cd9ec9408f41c",
+    "Assets/IdleIntelligence/Tests/PlayMode/PurchaseUITests.cs": "eb93de68095d32686c5dbed49dfc17a5aef6d6a8004b9046178a599a9c166da1",
+    "Assets/IdleIntelligence/Tests/PlayMode/RewardPresentationTests.cs": "8c1b9c59d14d266e04814dfee2563c729a9012beb7fe3f6494745f0abc02f66a",
+    "Assets/IdleIntelligence/Resources/Artwork/Forge.png": "6f84c6c7d09b6085b45ddf74664bdfe204e5be55d75a10fe8ce9e36cf68eaa3d",
+    "Assets/IdleIntelligence/Resources/Artwork/Forge.png.meta": "acfc53ed50f6f78ed22ccd252d13ac4f26fef39261854a3cdc4a7bd28cb38d6c",
+    "Assets/IdleIntelligence/Tests/PlayMode/UnifiedPresentationTests.cs": "95203255d4c35719ea5241aa64cfc831c7409934a345bf601415919ce73f9393"
+  },
+  "screenshots": {
+    "forge-de-430.png": "7febaf22446dc55da59ee0cc28cb1d223b2297008996019d55eb6bb0c4aac957",
+    "forge-de-390.png": "99523524d59c1efc6a733ac7bc2b9903ab6c29de89894792f8d390fcc6fabf6b",
+    "forge-en-320.png": "394e96bb31cb4d09319c8b1125434c9c0f405105c938f303445e030ee2ecb7bd",
+    "forge-en-390.png": "661eb778cb41c2d9ea817ee0202733c93e390a4d2bb9297f9c0e890cce3a9750",
+    "forge-de-320.png": "36045b0e4f22042164b00140d89943cf21d13577658c5900f92c88167af3039d",
+    "forge-en-430.png": "ef4c92db57e574cc2456ec76687c7d92056adfa5ab325c5b280ae277df08e29c",
+    "shop-en-320.png": "9875d246c57d07706e0e79230afa01afdd61183daa4edeabbd68e2f9c5bb47ff",
+    "shop-de-390.png": "271e21c86eceec7e2aff8d7dd4200f25e9a7287ae87fc27770f703ee2cd072d5",
+    "shop-de-430.png": "32c356189fb959320517df1af704f387f057933e9fa91231cd20bfb66f12f8a8",
+    "shop-en-430.png": "b185ec3b89810261d8c83fe12221176026959a95f42326a7b4d24fb47f91cee7",
+    "shop-de-320.png": "569bca5b37ade42f84001704a83e9b125c36f0de4c4bdd524bdd9daf98df85ad",
+    "shop-en-390.png": "98cd184e9073a7467941da952bda1be78a4581fd6cb3e69ea3ebedf2e53c1c56"
+  },
+  "npm": "typecheck/test/build attempted: ENOENT; Unity-only project has no package.json",
+  "githubUpload": "Blocked by automatic approval review; explicit fresh user authorization required. No new commit, push or PR was performed.",
+  "generatedSettings": "Unity-generated serialization, shader-prefilter and batching metadata archived under local reports/generated-settings and excluded from the proposed source change.",
+  "supersededBy": "shop-gems-fit.verification.json for the follow-up UI scope"
+}

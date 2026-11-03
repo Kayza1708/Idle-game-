@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-02",
+  "unity": "6000.3.26f1",
+  "scope": "Gem currency artwork and shop horizontal fit; follow-up to unified V3",
+  "playmode": {
+    "result": "Passed",
+    "total": "13",
+    "passed": "13",
+    "failed": "0",
+    "duration": "25.6953587"
+  },
+  "coverage": [
+    "DE/EN",
+    "320/390/430 px",
+    "Resize same shop 430→320→390→320",
+    "All five unlocked shop sections; top and bottom",
+    "Actual gem sprites, numeric price readability and horizontal card/tab bounds",
+    "Real market/capsule purchases, failed-save rollback, navigation and unavailable-provider behavior"
+  ],
+  "macOSBuild": [
+    "Succeeded",
+    "Target: StandaloneOSX",
+    "Size: 250597159",
+    "Duration: 00:00:11.2366720"
+  ],
+  "sourceHashes": {
+    "Assets/IdleIntelligence/Runtime/StorefrontUI.cs": "4036719d0d56a862ae8d7a6d1170e12ac12742a5002a47832edcf30890f77bda",
+    "Assets/IdleIntelligence/Runtime/ShopHub.cs": "f346456bfce88e8de4c1eec837a6b2f229b10f7d78eeef27f949a625fb05ae9a",
+    "Assets/IdleIntelligence/Runtime/MarketView.cs": "e45505b20335c57d65fe08afdc49a2ba8685904b4045ee54b227f449120cb8ef",
+    "Assets/IdleIntelligence/Runtime/GemFeatureView.cs": "94d002b84578e38cc03db1a5b4aa8d650720d01d5e0cde4e6f4dfb6b20d078dc",
+    "Assets/IdleIntelligence/Tests/PlayMode/UnifiedPresentationTests.cs": "911a0b069f0efe4b55c7dbb5904edbb58e7dcd6883a50ac8fae9e820a7f9e94c"
+  },
+  "screenshots": {
+    "shop-permanent-en-320.png": "9cb98df7337f6a1e79f09dd71ca3dec7f0e36348c517eb44497151b554f50dec",
+    "shop-chests-bottom-en-320.png": "c3c44bf4a33b51e71faa12ffe7c5f37ab37d8a880d76c0510e08ca23a60f4d41",
+    "shop-chests-bottom-de-390.png": "8a9eaa0541c5ff45281f90155614cf6deca74f832efc15adddbda0436f343cff",
+    "shop-chests-bottom-de-430.png": "4a8bb55ec99be2b44f70fc73863c6a47e738e55ff1b31999b60d3b3aac102a13",
+    "shop-capsule-en-320.png": "1d4d26249f4379a35086b238c9160b627c8224ba3bf6a4e2523a6e77c6e727db",
+    "shop-chests-bottom-en-430.png": "21c84e1b9bce7f44d80200fd62ef3d6740788712d4ae7f57802a4606c1450bae",
+    "shop-chests-bottom-de-320.png": "28bd2e27d1299831ebd82bc34cea94685a07b978a04de6e7d1ba1e188e63845b",
+    "shop-chests-bottom-en-390.png": "8593395ae563a6bd1aec73a22258a0304e05a2cf889c69c28be9151eb6cbb426",
+    "shop-materials-en-320.png": "963c4e46eb0a8b7039ef5a6fc276beb55cbe33eb0682008cb80aa90ea9d9394b",
+    "shop-en-320.png": "5876af0b3785e0486ac21bf1ad9d8e5ba63351090701b90db3099236cac29386",
+    "shop-de-390.png": "895f051d6791882ff23c76ca5aff8a55a7ccf2e97fc11f6ab901ee515701a241",
+    "shop-de-430.png": "0a882b38aa64a337f8327c83495716e0d29fa6478adead2ea8de002a4a8b3407",
+    "shop-packages-de-320.png": "34268a91c697b28ca461d51b4d9c8d0e32bda934cb56b763992d529a70a40fb2",
+    "shop-en-430.png": "ed043d80de21b528b52ec8a0295bdbd76c42f0e63b5ea0af19f3306683c833d7",
+    "shop-de-320.png": "fc825f46f16bbb1e1cc46717c8ac20f19add90ecf19c5ff92ec78c7b965a3265",
+    "shop-en-390.png": "dbb0554de973fc783fec3b075e3199ed63b08770aa0068a89b716795b026503b"
+  },
+  "previousFullSuite": "242 EditMode / 148 PlayMode are historical evidence of the preceding completed task, not a rerun for this follow-up.",
+  "upload": "No new GitHub upload or pull request; prior explicit-approval block remains unchanged.",
+  "followup": "home-gumball.verification.json records the subsequent home-machine addition."
+}

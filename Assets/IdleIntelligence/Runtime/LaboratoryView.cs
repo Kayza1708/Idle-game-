@@ -1,50 +1,36 @@
 using System;using System.Linq;using IdleIntelligence.Core;using UnityEngine;using UnityEngine.UI;
 namespace IdleIntelligence.Runtime {
  public sealed class LaboratoryView:MonoBehaviour {
-  GameRuntime game;public Image ChargeFill,TrainingFill;public Text Production,Model,Training,Floating;public RectTransform Art;public Button Train,ModelButton;LabFeedback feedback;GameState projected;Text tapLabel,trainLabel,badge;Transform guidance;Button[] buyModes;Button gumball;
+  GameRuntime game;public Image ChargeFill,TrainingFill;public Text Production,Model,Training,Floating;public RectTransform Art;public Button Train,ModelButton;LabFeedback feedback;GameState projected;bool projectedWritable;Text tapLabel,trainLabel,badge;Transform guidance;Button[] buyModes;Button gumball,adFree;GameObject gumballDock;
   public void Initialize(GameRuntime runtime){game=runtime;ChargeFill.raycastTarget=false;GameTheme.ButtonStyle(Train,true);var buttonSize=Train.GetComponent<LayoutElement>();buttonSize.minWidth=buttonSize.preferredWidth=104;buttonSize.flexibleWidth=0;buttonSize.minHeight=buttonSize.preferredHeight=44;var modelSize=ModelButton.GetComponent<LayoutElement>();modelSize.minHeight=modelSize.preferredHeight=44;var row=Train.transform.parent.GetComponent<HorizontalLayoutGroup>();row.padding=new RectOffset(6,6,5,5);row.spacing=6;row.childForceExpandHeight=false;row.childControlHeight=true;var height=row.GetComponent<LayoutElement>();height.minHeight=height.preferredHeight=54;Model.resizeTextForBestFit=true;Model.resizeTextMinSize=10;Model.resizeTextMaxSize=12;var heading=transform.Find("HardwareHeading");var controls=WorkshopUIFactory.Horizontal("HardwareControls",transform,44);controls.transform.SetSiblingIndex(heading.GetSiblingIndex());heading.SetParent(controls.transform,false);heading.GetComponent<LayoutElement>().flexibleWidth=1;buyModes=new Button[3];string[] modes={"1","10","max"};for(int i=0;i<3;i++){string mode=modes[i];var b=WorkshopUIFactory.Button("HardwareBuyMode-"+mode,controls.transform,mode=="max"?"MAX":"×"+mode,()=>game.Act(s=>SettingsRules.Change(s,"buy-mode",mode)));var size=b.GetComponent<LayoutElement>();size.minWidth=size.preferredWidth=48;size.minHeight=size.preferredHeight=44;size.flexibleWidth=0;buyModes[i]=b;}tapLabel=game.TapButton.GetComponentInChildren<Text>();trainLabel=Train.GetComponentInChildren<Text>();trainLabel.font=GameTheme.Bold;trainLabel.fontSize=trainLabel.resizeTextMaxSize=13;trainLabel.resizeTextMinSize=11;badge=transform.Find("LaboratoryStage/LabBadge").GetComponent<Text>();guidance=transform.Find("Guidance");var ambient=gameObject.AddComponent<LaboratoryAmbient>();ambient.Initialize(game,(RectTransform)transform.Find("LaboratoryStage"));feedback=game.TapButton.GetComponent<LabFeedback>()??game.TapButton.gameObject.AddComponent<LabFeedback>();feedback.Initialize(Floating);Train.onClick.AddListener(()=>game.UserShow("training"));ModelButton.onClick.AddListener(()=>game.UserShow("training"));AddGumballShortcut();}
   void AddGumballShortcut()
   {
    var stage=transform.Find("LaboratoryStage");
-   if(stage==null||stage.Find("GumballQuick")!=null)return;
-   var button=WorkshopUIFactory.Button("GumballQuick",stage,"GUMBALL",()=>{
-      game.UserShow("shop");
-      game.Content.GetComponentInChildren<ShopHub>()?.OpenGumball();
-   });
-   gumball=button;button.gameObject.SetActive(ProgressionVisibility.Gumball(game.State));
-   var layout=button.GetComponent<LayoutElement>();
-   if(layout!=null)layout.ignoreLayout=true;
-   var rect=button.GetComponent<RectTransform>();
-   rect.anchorMin=rect.anchorMax=new Vector2(1,1);
-   rect.pivot=new Vector2(1,1);
-   rect.anchoredPosition=new Vector2(-10,-10);
-   rect.sizeDelta=new Vector2(60,70);
-   GameTheme.ButtonStyle(button,false);
-   var label=button.GetComponentInChildren<Text>();
-   label.fontSize=9;
-   label.resizeTextMaxSize=9;
-   label.alignment=TextAnchor.LowerCenter;
-   label.rectTransform.anchorMin=new Vector2(0,0);
-   label.rectTransform.anchorMax=new Vector2(1,0);
-   label.rectTransform.sizeDelta=new Vector2(0,20);
-   label.rectTransform.anchoredPosition=Vector2.zero;
+   if(stage==null||gumballDock!=null)return;
+   gumballDock=WorkshopUIFactory.Node("HomeGumballDock",stage,typeof(LayoutElement));gumballDock.GetComponent<LayoutElement>().ignoreLayout=true;
+   var dock=(RectTransform)gumballDock.transform;dock.anchorMin=dock.anchorMax=Vector2.right;dock.pivot=Vector2.right;dock.anchoredPosition=new Vector2(-6,6);dock.sizeDelta=new Vector2(44,52);
+   gumball=HomeShortcut("GumballQuick",dock,"Gumball",()=>{game.UserShow("shop");game.Content.GetComponentInChildren<ShopHub>()?.OpenGumball();});
    var art=Resources.Load<PresentationArt>("PixelUI/PresentationArt");
-   if(art!=null&&art.Machine!=null)
-   {
-     var image=WorkshopUIFactory.Node("GumballArt",button.transform,typeof(Image)).
-         GetComponent<Image>();
-     image.sprite=art.Machine;
-     image.preserveAspect=true;
-     image.raycastTarget=false;
-     var icon=image.rectTransform;
-     icon.anchorMin=icon.anchorMax=new Vector2(.5f,1);
-     icon.pivot=new Vector2(.5f,1);
-     icon.anchoredPosition=new Vector2(0,-4);
-     icon.sizeDelta=new Vector2(47,55);
-   }
-   button.transform.SetAsLastSibling();
+   var machine=WorkshopUIFactory.Node("GumballArt",gumball.transform,typeof(UnityEngine.UI.Image)).GetComponent<UnityEngine.UI.Image>();machine.sprite=art.Machine;machine.preserveAspect=true;machine.raycastTarget=false;
+   var icon=machine.rectTransform;icon.anchorMin=icon.anchorMax=new Vector2(.5f,1);icon.pivot=new Vector2(.5f,1);icon.anchoredPosition=Vector2.zero;icon.sizeDelta=new Vector2(30,36);
+   adFree=HomeShortcut("HomeAdFree",stage,"Werbefrei",()=>{game.UserShow("shop");game.Content.GetComponentInChildren<ShopHub>()?.OpenAdFree();});
+   var left=(RectTransform)adFree.transform;left.anchorMin=left.anchorMax=Vector2.zero;left.pivot=Vector2.zero;left.anchoredPosition=new Vector2(6,6);
+   var glyph=WorkshopUIFactory.Node("AdFreeIcon",adFree.transform,typeof(CompactGlyph)).GetComponent<CompactGlyph>();glyph.Kind=CompactGlyph.Symbol.AdFree;glyph.color=GameTheme.Accent;glyph.raycastTarget=false;glyph.rectTransform.anchorMin=glyph.rectTransform.anchorMax=new Vector2(.5f,1);glyph.rectTransform.pivot=new Vector2(.5f,1);glyph.rectTransform.anchoredPosition=new Vector2(0,-2);glyph.rectTransform.sizeDelta=new Vector2(28,30);
+   RefreshGumball();gumballDock.transform.SetAsLastSibling();adFree.transform.SetAsLastSibling();
   }
+  Button HomeShortcut(string name,Transform parent,string title,Action action)
+  {
+   var button=WorkshopUIFactory.Button(name,parent,title,action);button.GetComponent<LayoutElement>().ignoreLayout=true;var rect=(RectTransform)button.transform;rect.anchorMin=rect.anchorMax=Vector2.zero;rect.pivot=Vector2.zero;rect.anchoredPosition=Vector2.zero;rect.sizeDelta=new Vector2(44,52);
+   button.GetComponent<Image>().sprite=null;button.GetComponent<Image>().color=Color.clear;
+   var label=button.GetComponentInChildren<Text>();label.font=GameTheme.Bold;label.fontSize=label.resizeTextMaxSize=9;label.resizeTextMinSize=8;label.alignment=TextAnchor.LowerCenter;label.rectTransform.anchorMin=Vector2.zero;label.rectTransform.anchorMax=Vector2.right;label.rectTransform.pivot=new Vector2(.5f,0);label.rectTransform.offsetMin=Vector2.zero;label.rectTransform.offsetMax=new Vector2(0,12);
+   return button;
+  }
+  void RefreshGumball()
+  {
+   if(gumballDock==null)return;bool unlocked=ProgressionVisibility.Gumball(game.State);gumballDock.SetActive(unlocked);adFree.gameObject.SetActive(unlocked&&!PurchaseRules.AdFree(game.State));adFree.GetComponentInChildren<Text>().text=game.State.Settings.language=="de"?"Ohne Ads":"No ads";
+  }
+
   void OnEnable(){Canvas.preWillRenderCanvases+=Adapt;Adapt();}void OnDisable(){Canvas.preWillRenderCanvases-=Adapt;}void OnRectTransformDimensionsChange()=>Adapt();void Adapt(){var stage=transform.Find("LaboratoryStage");var canvas=GetComponentInParent<Canvas>();if(stage==null||canvas==null)return;var root=canvas.rootCanvas;var rect=root.renderMode==RenderMode.ScreenSpaceCamera&&root.worldCamera!=null?root.worldCamera.pixelRect:new Rect(0,0,Screen.width,Screen.height);float height=rect.height/Mathf.Max(1,rect.width)<1.9f?180:240;var size=stage.GetComponent<LayoutElement>();if(size!=null&&size.preferredHeight!=height)size.minHeight=size.preferredHeight=height;}
-  void LateUpdate(){if(game?.State==null)return;var s=game.State;if(ReferenceEquals(projected,s))return;projected=s;if(gumball!=null)gumball.gameObject.SetActive(ProgressionVisibility.Gumball(s));for(int i=0;i<buyModes.Length;i++)buyModes[i].GetComponentInChildren<Text>().color=s.Settings.buyMode==(i==0?"1":i==1?"10":"max")?GameTheme.Accent:GameTheme.Muted;bool de=s.Settings.language=="de";string N(ScientificNumber n)=>NumberFormatting.Format(n,s.Settings.numberFormat,s.Settings.language);bool active=s.ActiveUntil>s.SavedAt;ChargeFill.fillAmount=active?(float)ItemSystemV3.OverdriveFraction(s):(float)(s.Charge/Balance.OverdriveCharge);ChargeFill.color=GameTheme.Accent;Production.text="+"+N(game.DisplayIncome)+" /s  ·  +"+N(game.DisplayDataRate)+" "+(de?"Daten":"Data")+" /s";tapLabel.text="";Model.text=(string.IsNullOrEmpty(s.Retention.aiName)?"KI":s.Retention.aiName)+" · Lv. "+s.ModelLevel+"\n"+N(game.DisplayIncome)+" C/s · "+N(game.DisplayDataRate)+" D/s";trainLabel.text=UiLocalizedText.Translate("Trainieren",s.Settings.language).ToUpperInvariant();Training.text=s.Training!=null?UiLocalizedText.Translate("Training",s.Settings.language).ToUpperInvariant()+"\n"+Math.Max(0,(s.Training.required-s.Training.done)/Game.WorkSpeed(s)).ToString("F0",System.Globalization.CultureInfo.GetCultureInfo(game.State.Settings.language))+" s":UiLocalizedText.Translate("Trainieren",s.Settings.language).ToUpperInvariant();if(TrainingFill!=null){TrainingFill.fillAmount=s.Training==null?0:(float)Math.Min(1,s.Training.done/s.Training.required);}bool reduced=s.Workshop.reducedMotion||!s.Settings.effects;Art.localScale=Vector3.one*1.08f;feedback.State(active,reduced,(float)(s.Charge/Balance.OverdriveCharge));badge.text=active?"OVERDRIVE":"LAB / 01";badge.color=GameTheme.Accent;if(guidance!=null)guidance.gameObject.SetActive(s.Guidance.hasPinned||!game.Writable);}
+  void LateUpdate(){if(game?.State==null)return;var s=game.State;if(ReferenceEquals(projected,s)&&projectedWritable==game.Writable)return;projected=s;projectedWritable=game.Writable;RefreshGumball();for(int i=0;i<buyModes.Length;i++)buyModes[i].GetComponentInChildren<Text>().color=s.Settings.buyMode==(i==0?"1":i==1?"10":"max")?GameTheme.Accent:GameTheme.Muted;bool de=s.Settings.language=="de";string N(ScientificNumber n)=>NumberFormatting.Format(n,s.Settings.numberFormat,s.Settings.language);bool active=s.ActiveUntil>s.SavedAt;ChargeFill.fillAmount=active?(float)ItemSystemV3.OverdriveFraction(s):(float)(s.Charge/Balance.OverdriveCharge);ChargeFill.color=GameTheme.Accent;Production.text="+"+N(game.DisplayIncome)+" /s  ·  +"+N(game.DisplayDataRate)+" "+(de?"Daten":"Data")+" /s";tapLabel.text="";Model.text=(string.IsNullOrEmpty(s.Retention.aiName)?"KI":s.Retention.aiName)+" · Lv. "+s.ModelLevel+"\n"+N(game.DisplayIncome)+" C/s · "+N(game.DisplayDataRate)+" D/s";trainLabel.text=UiLocalizedText.Translate("Trainieren",s.Settings.language).ToUpperInvariant();Training.text=s.Training!=null?UiLocalizedText.Translate("Training",s.Settings.language).ToUpperInvariant()+"\n"+Math.Max(0,(s.Training.required-s.Training.done)/Game.WorkSpeed(s)).ToString("F0",System.Globalization.CultureInfo.GetCultureInfo(game.State.Settings.language))+" s":UiLocalizedText.Translate("Trainieren",s.Settings.language).ToUpperInvariant();if(TrainingFill!=null){TrainingFill.fillAmount=s.Training==null?0:(float)Math.Min(1,s.Training.done/s.Training.required);}bool reduced=s.Workshop.reducedMotion||!s.Settings.effects;Art.localScale=Vector3.one*1.08f;feedback.State(active,reduced,(float)(s.Charge/Balance.OverdriveCharge));badge.text=active?"OVERDRIVE":"LAB / 01";badge.color=GameTheme.Accent;if(guidance!=null)guidance.gameObject.SetActive(s.Guidance.hasPinned||!game.Writable);}
  }
 }

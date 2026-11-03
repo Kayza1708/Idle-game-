@@ -24,7 +24,9 @@ Der Editor nutzt weiterhin die bestehende interne native Speicherversion, um Dat
 - Alternativ im Editor: **Idle Intelligence → Build → macOS-App**.
 - Der normale Spieltest direkt im Unity-Editor erfordert **keinen** vorherigen vollständigen Testlauf.
 
-Die letzte tatsächlich auf dem Mac bestätigte Ausgangsbasis hatte **242/242 EditMode** und **138/145 PlayMode** bestanden. Die danach vorgenommenen Testkorrekturen und der endgültige macOS-Playerbuild wurden noch **nicht** durch einen neuen Mac-Lauf bestätigt. Das Repository stellt daher eine **aktuelle spielbare Testbasis**, aber keinen bereits freigegebenen App-Store-Build dar.
+Die aktuelle Zusammenführung und die nativen Prüfbelege sind im [Unity-/V3-Audit](docs/unified-game-audit.md) dokumentiert. Dort stehen auch die verbindliche Projektbasis, der 42-Item-Katalog und die responsive Shop-/Schmiedenansicht. Dies ist ein Entwicklungsstand; es wurde kein App-Store-Release veröffentlicht. Der aktuelle Upload- und Prüfstand steht im [GitHub-Status](docs/github-status.md).
+
+Die aktuelle [Bereinigung aller Seiten und Unterseiten](docs/all-pages-cleanup.md) enthält Vorschauen und den genauen Prüfstand.
 
 ## Technik und Onlinebetrieb
 

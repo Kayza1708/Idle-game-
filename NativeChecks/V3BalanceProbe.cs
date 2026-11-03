@@ -15,7 +15,7 @@ internal static class V3BalanceProbe
     static readonly CultureInfo I=CultureInfo.InvariantCulture;
     const int Minutes=120;
     static readonly int[] Snapshots={0,1,3,5,10,15,20,25,30,45,60,90,120};
-    static string Num(ScientificNumber n)=>n.ToString();
+    static string Num(ScientificNumber n)=>n.ToDouble().ToString("R",I);
     static bool Bought(GameState s,string id,out GameState next)
     {
         next=Game.Buy(s,id);return !object.ReferenceEquals(s,next);
@@ -62,7 +62,7 @@ internal static class V3BalanceProbe
             s.Lifetime.researchCompleted.ToString(I),s.Prestige.resets.ToString(I)
         };
     }
-    public static void Run()
+    public static void Run(string label="current")
     {
         var s=Game.NewV3(1_000,"native-v3-balance-baseline",true);
         var records=new List<string[]>();
@@ -71,7 +71,7 @@ internal static class V3BalanceProbe
             "claimable_int","items","training_finished","research_finished","prestige_resets"};
         records.Add(headers);
         records.Add(Read(s,0));
-        Console.WriteLine("V3 native baseline minute=0 startCredits="+Num(s.Credits));
+        Console.WriteLine("V3 native "+label+" minute=0 startCredits="+Num(s.Credits));
         for(int minute=1;minute<=Minutes;minute++)
         {
             s=Actions(s);
@@ -83,15 +83,15 @@ internal static class V3BalanceProbe
             Game.Validate(s);
             if(Snapshots.Contains(minute)){
                 var row=Read(s,minute);records.Add(row);
-                Console.WriteLine("V3 baseline minute="+minute+" credits/s="+row[2]+
+                Console.WriteLine("V3 "+label+" minute="+minute+" credits/s="+row[2]+
                     " data/s="+row[4]+" hardware="+row[6]+" training="+row[8]+"/"+row[9]+
                     " research="+row[10]+" claimableINT="+row[11]);
             }
         }
-        string path=Path.Combine("NativeChecks","out","unity-v3-balance-baseline.csv");
+        string path=Path.Combine("NativeChecks","out","unity-v3-balance-"+label+".csv");
         Directory.CreateDirectory(Path.GetDirectoryName(path));
         // Deliberately invariant numbers, one record per snapshot, no source-code revisions.
         File.WriteAllLines(path,records.Select(fields=>string.Join(",",fields)));
-        Console.WriteLine("V3 native baseline written: "+path);
+        Console.WriteLine("V3 native "+label+" written: "+path);
     }
 }

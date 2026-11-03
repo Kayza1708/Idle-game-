@@ -37,18 +37,18 @@ namespace IdleIntelligence.Runtime
             node.transform.SetParent(parent,false);
             var rect=(RectTransform)node.transform;
             rect.anchorMin=rect.anchorMax=new Vector2(1,1);
-            rect.pivot=new Vector2(.5f,.5f);
-            rect.anchoredPosition=new Vector2(-8,-7);
-            rect.sizeDelta=new Vector2(21,21);
+            rect.pivot=Vector2.one;
+            rect.anchoredPosition=new Vector2(-4,-4);
+            rect.sizeDelta=new Vector2(14,14);
             var background=node.GetComponent<Image>();
-            background.color=new Color(.93f,.13f,.19f,1);
+            background.sprite=GameTheme.Rounded;background.type=Image.Type.Sliced;background.color=new Color(.93f,.13f,.19f,1);
             background.raycastTarget=false;
             var label=new GameObject("Exclamation",typeof(RectTransform),typeof(Text));
             label.transform.SetParent(node.transform,false);
             var tr=(RectTransform)label.transform;
             tr.anchorMin=Vector2.zero;tr.anchorMax=Vector2.one;tr.offsetMin=tr.offsetMax=Vector2.zero;
             var glyph=label.GetComponent<Text>();
-            glyph.text="!";glyph.font=GameTheme.Body;glyph.fontSize=18;glyph.fontStyle=FontStyle.Bold;
+            glyph.text="!";glyph.font=GameTheme.Body;glyph.fontSize=11;glyph.fontStyle=FontStyle.Bold;
             glyph.color=Color.white;glyph.alignment=TextAnchor.MiddleCenter;glyph.raycastTarget=false;
             node.SetActive(false);return node;
         }

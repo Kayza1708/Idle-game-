@@ -1,0 +1,2113 @@
+{
+  "basis": "ccfb38df",
+  "repository": "Kayza1708/Idle-game-",
+  "date": "2026-11-02",
+  "pullRequests": [
+    {
+      "number": 176,
+      "title": "Unity: kompakter Mobile-Shop und responsive UI",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T12:22:46Z",
+      "headRefName": "codex/mobile-ui-refactor-review-20261102",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/176"
+    },
+    {
+      "number": 175,
+      "title": "feat(unity): real mobile shop, Gumball home shortcut, MAX price and compact navigation",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T09:36:25Z",
+      "headRefName": "codex/unity-shop-and-mobile-ux-20261102",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/175"
+    },
+    {
+      "number": 174,
+      "title": "chore: make Idle Intelligence a single Unity-only project",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T08:42:32Z",
+      "headRefName": "unity-only",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/174"
+    },
+    {
+      "number": 173,
+      "title": "test(unity): resolve last seven PlayMode failures without weakening V3 unlocks",
+      "state": "MERGED",
+      "mergedAt": "2026-11-01T22:18:08Z",
+      "headRefName": "codex/unity-v3-last-seven-playmode-20261031",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/173"
+    },
+    {
+      "number": 172,
+      "title": "fix(unity): V3 research save receipt rejects valid PlayMode state + native art assertions",
+      "state": "MERGED",
+      "mergedAt": "2026-10-31T10:39:11Z",
+      "headRefName": "codex/unity-v3-playmode-save-20261031",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/172"
+    },
+    {
+      "number": 171,
+      "title": "fix(unity): final 3 EditMode regressions from macOS 240-test run",
+      "state": "MERGED",
+      "mergedAt": "2026-10-31T09:54:56Z",
+      "headRefName": "codex/fix-unity-editmode-final-three-20261031",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/171"
+    },
+    {
+      "number": 170,
+      "title": "fix(unity): address remaining 34 Editor EditMode failures from macOS run",
+      "state": "MERGED",
+      "mergedAt": "2026-10-31T09:39:01Z",
+      "headRefName": "codex/fix-unity-editmode-34-failures-20261031",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/170"
+    },
+    {
+      "number": 169,
+      "title": "fix(unity): historical V2 JSON saves deserialize without phantom V3 payload",
+      "state": "MERGED",
+      "mergedAt": "2026-10-31T09:21:10Z",
+      "headRefName": "codex/fix-unity-v2-json-placeholder-20261031",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/169"
+    },
+    {
+      "number": 168,
+      "title": "Fix Unity 6 CLI Test Runner: no -quit and verified macOS smoke build",
+      "state": "MERGED",
+      "mergedAt": "2026-10-31T09:15:24Z",
+      "headRefName": "codex/fix-unity-v3-player-compile-save-20261031",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/168"
+    },
+    {
+      "number": 167,
+      "title": "fix: Unity V3 Editor-Compilerfehler und Save-/Offline-Regressionen",
+      "state": "MERGED",
+      "mergedAt": "2026-10-31T08:59:33Z",
+      "headRefName": "codex/fix-unity-v3-player-compile-save-20261031",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/167"
+    },
+    {
+      "number": 166,
+      "title": "Unity-only Migration: Play Games, Cloudflare-LiveOps, Opt-in-Analytics und TS-freie Native CI",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T16:01:15Z",
+      "headRefName": "codex/unity-analytics-retention-durability-20261030",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/166"
+    },
+    {
+      "number": 165,
+      "title": "Unity-only migration: verifizierte Cloud-Identität, Analytics und LiveOps (WIP)",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T15:22:36Z",
+      "headRefName": "codex/unity-liveops-online-native-migration-20261030",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/165"
+    },
+    {
+      "number": 164,
+      "title": "chore: Unity-first Repository entrümpeln, 118 historische Designbelege archivieren",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T15:01:31Z",
+      "headRefName": "codex/unity-only-repo-cleanup-20261030",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/164"
+    },
+    {
+      "number": 163,
+      "title": "Unity V3: LevelPlay rewarded ads, privacy gating, unified UI and playtest audit",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T14:39:51Z",
+      "headRefName": "codex/unity-v3-ads-ux-playtest-20261030",
+      "baseRefName": "codex/unity-v3-fresh-playtest-20261030",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/163"
+    },
+    {
+      "number": 162,
+      "title": "Unity V3 follow-up: frischer Spielstart, 12 Combos, 60 Nodes, 24 Axiome und Balancing",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T14:39:40Z",
+      "headRefName": "codex/unity-v3-fresh-playtest-20261030",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/162"
+    },
+    {
+      "number": 161,
+      "title": "Unity-only V3: 42 Items, native effects, migration, pixel art and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T13:40:42Z",
+      "headRefName": "codex/unity-only-v3-completion-20261030",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/161"
+    },
+    {
+      "number": 160,
+      "title": "Unity V3: 42er Itemkatalog und neue Industrieeffekte (unvollständiger Draft)",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T13:39:45Z",
+      "headRefName": "codex/v3-completion-items-runtime-20261030",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/160"
+    },
+    {
+      "number": 159,
+      "title": "Balance-Playtest: isolierter macOS-Unity-Spieler mit sicherem Speicherbereich",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T13:39:14Z",
+      "headRefName": "codex/balance-playtest-macos-20261030",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/159"
+    },
+    {
+      "number": 158,
+      "title": "Unity V3: bezahlte Item-, Analyse- und Forschungsverträge",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T12:22:43Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/158"
+    },
+    {
+      "number": 157,
+      "title": "Unity V3: Itemereignisse, Challenge-Isolation und linearer INT-Bonus",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T17:01:48Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/157"
+    },
+    {
+      "number": 156,
+      "title": "Unity: grafische Queues und gemeinsamer V3-Rechenkern – Migration offen",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T05:35:13Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/156"
+    },
+    {
+      "number": 155,
+      "title": "Unity: real startup, compact UI and protected platform-cloud preparation",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T07:20:02Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/155"
+    },
+    {
+      "number": 154,
+      "title": "feat(unity): refine mobile flow, progression and reward feedback",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T06:33:44Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/154"
+    },
+    {
+      "number": 153,
+      "title": "Unity: nativer iPhone-16-Pro-Simulatorplayer, Company-UI und Aktionssounds",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T06:50:29Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/153"
+    },
+    {
+      "number": 152,
+      "title": "Unity: gemeinsame Ergebnisanimationen und präzises Mobile-Feedback",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T22:01:25Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/152"
+    },
+    {
+      "number": 151,
+      "title": "Companies & vouchers: higher drops, verified trading, retro frames and progression gate",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T20:41:32Z",
+      "headRefName": "feature/profile-badge-art-polish",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/151"
+    },
+    {
+      "number": 150,
+      "title": "Profile art: 21 bronze/silver/gold badges, eight frames and clearer Gumball season rewards",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T19:41:32Z",
+      "headRefName": "feature/profile-badge-art-polish",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/150"
+    },
+    {
+      "number": 149,
+      "title": "Gumball-Vouchers: loot, Season Pass, free pulls and new reward art",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T18:52:34Z",
+      "headRefName": "feature/gumball-ticket-rewards",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/149"
+    },
+    {
+      "number": 148,
+      "title": "Companies: private player profiles, leadership, badges and chat-free trading",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T18:13:36Z",
+      "headRefName": "feature/company-profiles-management-no-chat",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/148"
+    },
+    {
+      "number": 147,
+      "title": "Cloudflare Companies: EU D1 setup, rate limits and commercial security plan",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T17:48:05Z",
+      "headRefName": "feature/cloudflare-companies-foundation",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/147"
+    },
+    {
+      "number": 146,
+      "title": "Cloudflare Companies: Worker + D1 + Unity API foundation",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T17:35:30Z",
+      "headRefName": "feature/cloudflare-companies-foundation",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/146"
+    },
+    {
+      "number": 145,
+      "title": "Unity: Fusion inszenieren und Modell, Gems und Menü verbinden",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T16:20:47Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/145"
+    },
+    {
+      "number": 144,
+      "title": "Unity: verbindliche Design- und Animationsregeln",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T13:01:39Z",
+      "headRefName": "codex/unity-visual-quality-rules",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/144"
+    },
+    {
+      "number": 143,
+      "title": "Unity: ruhige Leisten und fünf vollständige Aktionssequenzen",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T12:29:23Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/143"
+    },
+    {
+      "number": 142,
+      "title": "Unity: Pixel-Art-Labor und Itemdetails nach Zielbild",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T11:43:16Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/142"
+    },
+    {
+      "number": 141,
+      "title": "Unity Design 1: Labor, untere Navigation und gemeinsame Itemdarstellung",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T07:36:35Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/141"
+    },
+    {
+      "number": 140,
+      "title": "Unity: verbundener Funktionsabschluss, Save v21 und geprüfter macOS-Player",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T20:28:43Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/140"
+    },
+    {
+      "number": 139,
+      "title": "Unity: persistente Ziele, Rückkehrführung und genaue lokale Historien",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T16:13:44Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/139"
+    },
+    {
+      "number": 138,
+      "title": "Unity: Mira, explizite Save-Übernahme und gemessene Runhistorie",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T13:43:45Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/138"
+    },
+    {
+      "number": 137,
+      "title": "Unity: settings, Mira contracts and guarded save decoding",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T06:20:16Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/137"
+    },
+    {
+      "number": 136,
+      "title": "Unity: Werbeverträge, Forschungsskip und Werbefrei-Verbraucher",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T21:34:37Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/136"
+    },
+    {
+      "number": 135,
+      "title": "Unity: verifizierte Kaufverträge und dauerhafte Rechte",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T06:36:43Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/135"
+    },
+    {
+      "number": 134,
+      "title": "Unity: Gem-Upgrades, Zeitverkürzungen und Gumball",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T06:21:54Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/134"
+    },
+    {
+      "number": 133,
+      "title": "Unity: funktionale Migration – Missionen, Seasons, Drops und Markt",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T06:00:44Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/133"
+    },
+    {
+      "number": 132,
+      "title": "Unity: funktionale Migration – Forschung und Industrie",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T17:52:35Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/132"
+    },
+    {
+      "number": 131,
+      "title": "Unity: Axiome und zehn KI-Modelle mit sicherer Migration",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T13:00:37Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/131"
+    },
+    {
+      "number": 130,
+      "title": "Unity: INT-Prestige, 60-Knoten-Netz und Automation mit Parität",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T12:26:26Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/130"
+    },
+    {
+      "number": 129,
+      "title": "Unity: Items, Inventar und sofortige Schmiede mit Paritätstests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T10:14:35Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/129"
+    },
+    {
+      "number": 128,
+      "title": "Unity: erster spielbarer V2-Abschnitt mit Paritäts- und Save-Tests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T09:10:51Z",
+      "headRefName": "codex/unity-rewrite",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/128"
+    },
+    {
+      "number": 127,
+      "title": "Restore connected prestige network and animate the existing forge",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T09:10:19Z",
+      "headRefName": "codex/prestige-network-forge-motion",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/127"
+    },
+    {
+      "number": 126,
+      "title": "Clean unused files, add loading screen and multilingual name moderation",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T23:05:24Z",
+      "headRefName": "codex/cleanup-loading-name-policy",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/126"
+    },
+    {
+      "number": 125,
+      "title": "Speed up early hardware and research progression",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T22:17:51Z",
+      "headRefName": "codex/early-progression-balance",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/125"
+    },
+    {
+      "number": 124,
+      "title": "Fix zero-credit tap feedback and add shared name validation",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T20:10:32Z",
+      "headRefName": "codex/taps-name-validation",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/124"
+    },
+    {
+      "number": 123,
+      "title": "Integrate approved Idle Intelligence name and app icon",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T19:51:24Z",
+      "headRefName": "codex/idle-intelligence-brand",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/123"
+    },
+    {
+      "number": 122,
+      "title": "Unify original artwork and polish mobile game surfaces",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T15:38:08Z",
+      "headRefName": "codex/cohesive-item-polish",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/122"
+    },
+    {
+      "number": 121,
+      "title": "Instant crafting/fusion, three season passes and cleaner mobile equipment",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T12:17:33Z",
+      "headRefName": "codex/instant-items-seasons",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/121"
+    },
+    {
+      "number": 120,
+      "title": "V2 stabilisieren und Balanceverläufe über mehrere Prestiges erfassen",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T10:21:01Z",
+      "headRefName": "codex/v2-stability-balance-report",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/120"
+    },
+    {
+      "number": 119,
+      "title": "Release-Audit: aktueller Stand, reproduzierte Befunde und V1-Freigabeplan",
+      "state": "MERGED",
+      "mergedAt": "2026-10-17T13:26:17Z",
+      "headRefName": "codex/release-audit-2026-10-17",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/119"
+    },
+    {
+      "number": 118,
+      "title": "Kommerzialisierung: Pakete, dauerhafte Pässe, Werbebelohnungen und Labor-Skips",
+      "state": "MERGED",
+      "mergedAt": "2026-10-17T09:05:10Z",
+      "headRefName": "codex/commercialization-v1",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/118"
+    },
+    {
+      "number": 117,
+      "title": "Implement Prestige/Axiom V2 with KI lab, automation and safe saves",
+      "state": "MERGED",
+      "mergedAt": "2026-10-16T15:42:20Z",
+      "headRefName": "codex/prestige-axiom-v2",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/117"
+    },
+    {
+      "number": 116,
+      "title": "Restore gumball and shop tabs, retire forge levels, add matching pixel art",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T16:08:16Z",
+      "headRefName": "codex/shop-capsule-polish",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/116"
+    },
+    {
+      "number": 115,
+      "title": "Restore shop on main; simplify research queue and fix settings / ZIP export",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T13:19:05Z",
+      "headRefName": "codex/research-menu-export",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/115"
+    },
+    {
+      "number": 114,
+      "title": "Rebuild shop with animated rarity chests, daily offers and durable claims",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T12:31:16Z",
+      "headRefName": "codex/shop-rework",
+      "baseRefName": "codex/immersive-mobile-feedback",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/114"
+    },
+    {
+      "number": 113,
+      "title": "Unify item presentation with full crafting, fusion and chest animation sequences",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T12:30:55Z",
+      "headRefName": "codex/immersive-mobile-feedback",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/113"
+    },
+    {
+      "number": 112,
+      "title": "Unify mobile pixel art and fix prestige, capsule and forge interactions",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T07:30:10Z",
+      "headRefName": "codex/cohesive-mobile-art",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/112"
+    },
+    {
+      "number": 111,
+      "title": "Mobile forge/research follow-up: physical sockets, one refining station and flying drones",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T14:59:31Z",
+      "headRefName": "codex/mobile-forge-research-v2",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/111"
+    },
+    {
+      "number": 110,
+      "title": "Integrate mobile model/forge into main and polish return/capsule UI",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T13:39:22Z",
+      "headRefName": "codex/mobile-return-capsule-polish",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/110"
+    },
+    {
+      "number": 109,
+      "title": "Mobile model and forge: six sockets, instant crafting, levels 1–69 and recycling",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T12:45:14Z",
+      "headRefName": "codex/model-forge-v1",
+      "baseRefName": "codex/progression-motion",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/109"
+    },
+    {
+      "number": 108,
+      "title": "Mobile UI corrections: drone deliveries, visible labs and progression feedback",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T12:45:01Z",
+      "headRefName": "codex/progression-motion",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/108"
+    },
+    {
+      "number": 107,
+      "title": "Mobile reward polish: stacked capsules, jackpots and full-bleed lab",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T07:17:52Z",
+      "headRefName": "codex/reward-presentation",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/107"
+    },
+    {
+      "number": 106,
+      "title": "Polish mobile art, animations and free introductory model/research lessons",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T23:26:48Z",
+      "headRefName": "codex/pixel-polish-onboarding",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/106"
+    },
+    {
+      "number": 105,
+      "title": "Pixel mobile UI, capsule machine, tutorial guidance and prestige Data retention",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T22:41:15Z",
+      "headRefName": "codex/mira-streamlined-ui",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/105"
+    },
+    {
+      "number": 104,
+      "title": "Fix iPhone tutorial/shop layout and unify compact mobile windows",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T19:07:11Z",
+      "headRefName": "codex/mobile-layout-audit",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/104"
+    },
+    {
+      "number": 103,
+      "title": "Square mobile design system and in-layout tutorial",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T16:16:52Z",
+      "headRefName": "codex/square-mobile-design",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/103"
+    },
+    {
+      "number": 102,
+      "title": "Fix tutorial placement, hardware prices and compact collection/shop views",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T15:18:15Z",
+      "headRefName": "codex/mobile-feedback-fixes",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/102"
+    },
+    {
+      "number": 101,
+      "title": "Compact cost chips, recipe views and radial prestige redesign",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T13:28:27Z",
+      "headRefName": "codex/compact-mobile-design",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/101"
+    },
+    {
+      "number": 100,
+      "title": "Overhaul mobile presentation and remove workshop goal clutter",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T12:59:55Z",
+      "headRefName": "codex/mobile-ui-overhaul",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/100"
+    },
+    {
+      "number": 99,
+      "title": "Fix macOS build collisions and scrollable mobile menu",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T12:30:56Z",
+      "headRefName": "codex/mobile-menu-macos-fixes",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/99"
+    },
+    {
+      "number": 98,
+      "title": "Integrate all 30 redesigned items and 11 material illustrations",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T11:30:28Z",
+      "headRefName": "codex/item-material-artwork",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/98"
+    },
+    {
+      "number": 97,
+      "title": "Complete SVG icon coverage and define artwork commission",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T08:59:22Z",
+      "headRefName": "codex/icon-artwork-audit",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/97"
+    },
+    {
+      "number": 96,
+      "title": "Clarify return accounting and route current progression opportunities",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T08:43:46Z",
+      "headRefName": "codex/return-unlock-guidance",
+      "baseRefName": "codex/bonus-box-flow",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/96"
+    },
+    {
+      "number": 95,
+      "title": "Complete daily bonus boxes with persisted exactly-once opening",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T08:43:35Z",
+      "headRefName": "codex/bonus-box-flow",
+      "baseRefName": "codex/build-equipment-integration",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/95"
+    },
+    {
+      "number": 94,
+      "title": "Integrate acquired equipment categories and a paid learning-build entry",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T08:43:21Z",
+      "headRefName": "codex/build-equipment-integration",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/94"
+    },
+    {
+      "number": 93,
+      "title": "Measure passive returns, paid automation and first prestige tradeoffs",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T20:18:35Z",
+      "headRefName": "codex/passive-return-automation-study",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/93"
+    },
+    {
+      "number": 92,
+      "title": "V1: Questkapitel und logarithmische Achievement-Produktion",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T19:45:36Z",
+      "headRefName": "codex/quest-chapters-achievement-curve",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/92"
+    },
+    {
+      "number": 91,
+      "title": "Measure early loadouts, session cadence and quest economy",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T19:12:18Z",
+      "headRefName": "codex/build-quest-progression-study",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/91"
+    },
+    {
+      "number": 90,
+      "title": "V1: Neue Achievements und fortschrittsabhängige Quests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T17:03:21Z",
+      "headRefName": "codex/achievements-quests-v1",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/90"
+    },
+    {
+      "number": 89,
+      "title": "Grant four permanent learning fragments on first paid Blueprints completion",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T16:13:51Z",
+      "headRefName": "codex/first-blueprint-bridge",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/89"
+    },
+    {
+      "number": 88,
+      "title": "Measure natural early progression and specify a bounded blueprint bridge",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T15:42:33Z",
+      "headRefName": "codex/natural-progression-baseline",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/88"
+    },
+    {
+      "number": 87,
+      "title": "Repair regression contracts, research/tutorial locks and diagnostic exports",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T15:13:29Z",
+      "headRefName": "codex/regression-contract-cleanup",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/87"
+    },
+    {
+      "number": 86,
+      "title": "Korrigiere Challenge-Progression, Fusion und seltene Materialboni",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T14:45:55Z",
+      "headRefName": "codex/challenge-progression-recovery-fixes",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/86"
+    },
+    {
+      "number": 85,
+      "title": "Auftrag 5: Material-Grind, 30 Geräte, Schmieden und 690 Challenge-Stufen",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T12:35:17Z",
+      "headRefName": "codex/material-builds-challenges",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/85"
+    },
+    {
+      "number": 84,
+      "title": "Auftrag 4: Itemmaterialien, Bauplan-Meisterschaft und Fragmentausgaben",
+      "state": "MERGED",
+      "mergedAt": "2026-10-11T21:21:48Z",
+      "headRefName": "codex/item-grind-mastery",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/84"
+    },
+    {
+      "number": 83,
+      "title": "Auftrag 3: wissenschaftliche Data-Boni und konsistente Analyseverträge",
+      "state": "MERGED",
+      "mergedAt": "2026-10-11T21:21:36Z",
+      "headRefName": "codex/data-analysis-contracts",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/83"
+    },
+    {
+      "number": 82,
+      "title": "Auftrag 2: Forschung dauerhaft integrieren und regulär automatisieren",
+      "state": "MERGED",
+      "mergedAt": "2026-10-11T21:21:24Z",
+      "headRefName": "codex/research-integration",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/82"
+    },
+    {
+      "number": 81,
+      "title": "Auftrag 1: bestätigte Reset-, Zeit- und Scientific-Bugs reparieren",
+      "state": "MERGED",
+      "mergedAt": "2026-10-11T09:48:36Z",
+      "headRefName": "codex/confirmed-technical-bugs",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/81"
+    },
+    {
+      "number": 80,
+      "title": "Auftrag 9D: drei wirksame Item-Builds",
+      "state": "MERGED",
+      "mergedAt": "2026-10-11T09:47:50Z",
+      "headRefName": "codex/9d-effective-item-builds",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/80"
+    },
+    {
+      "number": 79,
+      "title": "Auftrag 9C: fünf fehlende Itemrezepte ergänzen",
+      "state": "MERGED",
+      "mergedAt": "2026-10-11T07:30:12Z",
+      "headRefName": "codex/9c-complete-item-recipes",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/79"
+    },
+    {
+      "number": 78,
+      "title": "Learn blueprints once and render complete mobile ingredient cards",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T09:13:42Z",
+      "headRefName": "codex/permanent-learned-blueprints",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/78"
+    },
+    {
+      "number": 77,
+      "title": "Make Relay and Archive item improvements effective",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T07:22:51Z",
+      "headRefName": "codex/relay-archive-improvements",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/77"
+    },
+    {
+      "number": 76,
+      "title": "Integrate Server/Farm follow-up and calibrate first three-INT prestige",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T06:58:53Z",
+      "headRefName": "codex/first-prestige-calibration",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/76"
+    },
+    {
+      "number": 75,
+      "title": "Credit-only hardware and coherent Server/Farm savings goals",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T06:26:01Z",
+      "headRefName": "codex/credit-only-hardware-goals",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/75"
+    },
+    {
+      "number": 74,
+      "title": "Unlock existing research areas permanently through prestige purchases",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T05:54:07Z",
+      "headRefName": "codex/permanent-research-areas",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/74"
+    },
+    {
+      "number": 73,
+      "title": "Make existing training bonuses reduce future Data start costs",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T22:08:28Z",
+      "headRefName": "codex/training-data-cost-bonuses",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/73"
+    },
+    {
+      "number": 72,
+      "title": "Unify the core loop around full compute user capacity",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T21:51:14Z",
+      "headRefName": "codex/full-compute-user-capacity",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/72"
+    },
+    {
+      "number": 71,
+      "title": "Expose existing crafting, item improvements and lab queues",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T21:34:53Z",
+      "headRefName": "codex/existing-mechanics-ui",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/71"
+    },
+    {
+      "number": 70,
+      "title": "Share domain previews and scientific balance exports",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T20:56:15Z",
+      "headRefName": "codex/shared-previews-balance-export",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/70"
+    },
+    {
+      "number": 69,
+      "title": "Merge pull request #67 from Kayza1708/codex/isolated-challenge-runs",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T17:50:24Z",
+      "headRefName": "codex/run-start-auto-prestige",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/69"
+    },
+    {
+      "number": 68,
+      "title": "Codex/isolated challenge runs",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T17:44:12Z",
+      "headRefName": "codex/isolated-challenge-runs",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/68"
+    },
+    {
+      "number": 67,
+      "title": "Isolate challenge runs and preserve passive main progress",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T17:49:23Z",
+      "headRefName": "codex/isolated-challenge-runs",
+      "baseRefName": "codex/run-start-auto-prestige",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/67"
+    },
+    {
+      "number": 66,
+      "title": "Fix run start capital and guard automatic prestige",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T17:44:13Z",
+      "headRefName": "codex/run-start-auto-prestige",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/66"
+    },
+    {
+      "number": 65,
+      "title": "Fix atomic crafting reservations and validate save state",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T13:20:21Z",
+      "headRefName": "codex/atomic-crafting-save-validation",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/65"
+    },
+    {
+      "number": 64,
+      "title": "Fix canonical scientific values and hardware purchase debits",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T12:28:05Z",
+      "headRefName": "codex/scientific-number-purchases",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/64"
+    },
+    {
+      "number": 63,
+      "title": "Mobile UX & prestige/economy adjustments: mobile shell, overlays, prestige curve, season rewards, native boundary",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T08:17:37Z",
+      "headRefName": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-ckfogr",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/63"
+    },
+    {
+      "number": 62,
+      "title": "Mobile UI overhaul: compact shell, sheets, prestige/shop polish, and native commerce boundary",
+      "state": "MERGED",
+      "mergedAt": "2026-10-06T07:00:52Z",
+      "headRefName": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-gvsqw8",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/62"
+    },
+    {
+      "number": 61,
+      "title": "Mobile UX: compact shell, mission/preview polish, prestige map pan/zoom, native commerce boundary, and economy UI fixes",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T23:01:01Z",
+      "headRefName": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-vrxsgg",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/61"
+    },
+    {
+      "number": 60,
+      "title": "Mobile UX: compact shell, mission layout, Gem artwork, native commerce boundary, and assorted mobile polish",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T21:39:23Z",
+      "headRefName": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-b2rafr",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/60"
+    },
+    {
+      "number": 59,
+      "title": "Mobile UX/layout pass: game-shell, mission anatomy, gem shop, prestige refactor, styles & tests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T21:00:08Z",
+      "headRefName": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-3iojca",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/59"
+    },
+    {
+      "number": 58,
+      "title": "Mobile UX: redesign game shell, compact action area, mission rows, inline lab unlock and compact shop",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T20:55:26Z",
+      "headRefName": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/58"
+    },
+    {
+      "number": 57,
+      "title": "Mobile-first UI and gameplay telemetry: add compact ResourceBar, mobile screens, prestige map panning, and related balance/test fixes",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T19:46:50Z",
+      "headRefName": "codex/redesign-ai-singularity-interface-for-mobile-8qaso2",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/57"
+    },
+    {
+      "number": 56,
+      "title": "Mobile-first UI overhaul, tap/overclock and prestige fixes, plus expanded tests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T19:41:23Z",
+      "headRefName": "codex/redesign-ai-singularity-interface-for-mobile-dou4py",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/56"
+    },
+    {
+      "number": 55,
+      "title": "Mobile-first UI, active-first gameplay and prestige/map UX overhaul",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T19:21:13Z",
+      "headRefName": "codex/redesign-ai-singularity-interface-for-mobile-6io6ox",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/55"
+    },
+    {
+      "number": 54,
+      "title": "Mobile-first UI overhaul, mobile detail sheet, and active-first tap/economy adjustments",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T17:15:43Z",
+      "headRefName": "codex/redesign-ai-singularity-interface-for-mobile-32qc78",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/54"
+    },
+    {
+      "number": 53,
+      "title": "Mobile-first interface: add ResourceBar, MobileDetailSheet, mobile screens and layout tests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T16:02:04Z",
+      "headRefName": "codex/redesign-ai-singularity-interface-for-mobile-gqsdvj",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/53"
+    },
+    {
+      "number": 52,
+      "title": "Redesign AI Singularity as a mobile-first game UI",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T15:17:56Z",
+      "headRefName": "codex/redesign-ai-singularity-interface-for-mobile",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/52"
+    },
+    {
+      "number": 51,
+      "title": "Fix TypeScript blockers for Capacitor iOS setup",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T12:59:24Z",
+      "headRefName": "codex/fix-typescript/build-blockers-on-main",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/51"
+    },
+    {
+      "number": 50,
+      "title": "Mobile beta, audio/haptics, gem shop and gameplay telemetry/refinements",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T11:52:45Z",
+      "headRefName": "codex/implementiere-mobile-benutzeroberflache-fur-spiel",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/50"
+    },
+    {
+      "number": 49,
+      "title": "Introduce Axiom meta‑prestige, scientific economy, prestige tree UI, tutorial updates and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-10-05T07:05:29Z",
+      "headRefName": "codex/uberarbeite-prestige-baum-darstellung-bpd2z7",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/49"
+    },
+    {
+      "number": 48,
+      "title": "Introduce Axiom second-prestige layer, scientific economy, prestige UX and simulation tooling",
+      "state": "MERGED",
+      "mergedAt": "2026-10-02T08:07:08Z",
+      "headRefName": "codex/uberarbeite-prestige-baum-darstellung",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/48"
+    },
+    {
+      "number": 47,
+      "title": "Add implementation audit and detailed balance reports (Layer‑1/2/3 + INT), update roadmap/next steps",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T18:46:36Z",
+      "headRefName": "codex/uberarbeite-schicht-1-der-economy-iuej3y",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/47"
+    },
+    {
+      "number": 46,
+      "title": "Add Layer-1/2/3 economy calibration docs and machine-readable balance outputs",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T09:33:04Z",
+      "headRefName": "codex/uberarbeite-schicht-1-der-economy-u6d4ja",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/46"
+    },
+    {
+      "number": 45,
+      "title": "Introduce reproducible layer-one/two balance sims, switch to fixed training duration and scientific hardware pricing",
+      "state": "MERGED",
+      "mergedAt": "2026-09-30T12:50:06Z",
+      "headRefName": "codex/uberarbeite-schicht-1-der-economy",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/45"
+    },
+    {
+      "number": 44,
+      "title": "Add five Mira progression story chapters",
+      "state": "MERGED",
+      "mergedAt": "2026-09-30T11:27:07Z",
+      "headRefName": "codex/erganze-mira-story-um-funf-kapitel",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/44"
+    },
+    {
+      "number": 43,
+      "title": "Integrate pixel-art atlases, guided tutorial, return report and UI/simulation polish",
+      "state": "MERGED",
+      "mergedAt": "2026-09-30T07:49:36Z",
+      "headRefName": "codex/integriere-vier-pixel-art-atlanten",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/43"
+    },
+    {
+      "number": 42,
+      "title": "Deterministic balance simulator, research workspace and data-only research flow",
+      "state": "MERGED",
+      "mergedAt": "2026-09-30T06:50:44Z",
+      "headRefName": "codex/uberarbeite-forschungsansicht-und-bedienpfade",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/42"
+    },
+    {
+      "number": 41,
+      "title": "Save coordination, persistent equipment & time-based crafting; analysis/loot UI and component reward plumbing",
+      "state": "MERGED",
+      "mergedAt": "2026-09-29T22:40:11Z",
+      "headRefName": "codex/behebe-speicherprobleme-im-idle-game-zdpx8q",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/41"
+    },
+    {
+      "number": 40,
+      "title": "Introduce SaveCoordinator, migrate component rewards to grantComponents, and wire save/load coordination in App",
+      "state": "MERGED",
+      "mergedAt": "2026-09-29T21:31:53Z",
+      "headRefName": "codex/behebe-speicherprobleme-im-idle-game-8flyf0",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/40"
+    },
+    {
+      "number": 39,
+      "title": "Fix save races without overwriting live progress",
+      "state": "MERGED",
+      "mergedAt": "2026-09-29T21:17:23Z",
+      "headRefName": "codex/behebe-speicherprobleme-im-idle-game",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/39"
+    },
+    {
+      "number": 38,
+      "title": "Stabilize deterministic economy progression",
+      "state": "MERGED",
+      "mergedAt": "2026-09-29T16:10:10Z",
+      "headRefName": "codex/stabilize-and-repair-game-implementation",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/38"
+    },
+    {
+      "number": 37,
+      "title": "Save current game state before stabilization",
+      "state": "MERGED",
+      "mergedAt": "2026-09-29T14:19:26Z",
+      "headRefName": "current-game-backup-2026-09-29",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/37"
+    },
+    {
+      "number": 36,
+      "title": "Redesign quests, season pass, and responsive profile",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T15:23:25Z",
+      "headRefName": "codex/ui-probleme-im-spiel-beheben",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/36"
+    },
+    {
+      "number": 35,
+      "title": "Improve mobile UI season pass and prestige progression",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T15:08:40Z",
+      "headRefName": "ui/mobile-prestige-v27",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/35"
+    },
+    {
+      "number": 34,
+      "title": "Codex/economy completion v19",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T13:55:23Z",
+      "headRefName": "codex/economy-completion-v19",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/34"
+    },
+    {
+      "number": 33,
+      "title": "Codex/economy completion v19",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T12:39:37Z",
+      "headRefName": "codex/economy-completion-v19",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/33"
+    },
+    {
+      "number": 32,
+      "title": "Merge pull request #31 from Kayza1708/main",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T10:52:32Z",
+      "headRefName": "codex/economy-v18-completion",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/32"
+    },
+    {
+      "number": 31,
+      "title": "Merge pull request #30 from Kayza1708/codex/economy-v18-completion",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T10:51:54Z",
+      "headRefName": "main",
+      "baseRefName": "codex/economy-v18-completion",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/31"
+    },
+    {
+      "number": 30,
+      "title": "Expose analysis affordability and exact rewards",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T10:48:55Z",
+      "headRefName": "codex/economy-v18-completion",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/30"
+    },
+    {
+      "number": 29,
+      "title": "Implement data prestige and item economy v18",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T10:38:00Z",
+      "headRefName": "codex/economy-v18-prestige-items",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/29"
+    },
+    {
+      "number": 28,
+      "title": "Fix transactional component analysis starts",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T09:44:45Z",
+      "headRefName": "codex/behebe-nicht-startbare-komponentenanalysen",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/28"
+    },
+    {
+      "number": 27,
+      "title": "Add typed components, repeatable research, component crafting and export/telemetry/save improvements (save v17)",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T09:02:26Z",
+      "headRefName": "codex/prufe-forschung,-komponenten-und-balance-e6d2qx",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/27"
+    },
+    {
+      "number": 26,
+      "title": "Add component system, integrate 3×2 components atlas and export/migration support (SAVE v16)",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T08:32:34Z",
+      "headRefName": "codex/prufe-forschung,-komponenten-und-balance",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/26"
+    },
+    {
+      "number": 25,
+      "title": "Fix infinite loop when the first research project completes",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T05:57:14Z",
+      "headRefName": "codex/behebe-einfrierung-nach-forschungsprojektabschluss",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/25"
+    },
+    {
+      "number": 24,
+      "title": "Add durable saves, crash diagnostics, telemetry snapshots, ZIP export and training/stability fixes",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T21:45:08Z",
+      "headRefName": "codex/stabilitat-und-training-optimieren-qm2kwi",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/24"
+    },
+    {
+      "number": 23,
+      "title": "Add crash diagnostics, robust save/backup flow, telemetry snapshots and local ZIP export; training/simulation and UI integrations",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T20:29:40Z",
+      "headRefName": "codex/stabilitat-und-training-optimieren-tbx6ta",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/23"
+    },
+    {
+      "number": 22,
+      "title": "Add crash diagnostics, transactional saves, telemetry snapshots and ZIP export; stabilize training & simulation",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T20:18:24Z",
+      "headRefName": "codex/stabilitat-und-training-optimieren-mz48oj",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/22"
+    },
+    {
+      "number": 21,
+      "title": "Transactional saves, diagnostics & ZIP export; training/telemetry refactor and prestige UI improvements",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T18:34:23Z",
+      "headRefName": "codex/stabilitat-und-training-optimieren-c4ksuo",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/21"
+    },
+    {
+      "number": 20,
+      "title": "Stabilize long-term training, transactional saves, analysis ZIP export and mobile prestige UI",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T17:19:06Z",
+      "headRefName": "codex/stabilitat-und-training-optimieren",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/20"
+    },
+    {
+      "number": 19,
+      "title": "Introduce INT prestige board (stages 1–3), missions/achievements, gem shop and related save migrations",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T15:01:52Z",
+      "headRefName": "codex/implementiere-neuen-int-prestige-baum-ci47vo",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/19"
+    },
+    {
+      "number": 18,
+      "title": "Spielbaren INT-Prestige-Baum für Stufen 1–3 integrieren",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T14:46:08Z",
+      "headRefName": "codex/implementiere-neuen-int-prestige-baum",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/18"
+    },
+    {
+      "number": 17,
+      "title": "Fix save recovery and improve guided progression",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T14:05:54Z",
+      "headRefName": "codex/update-main-branch-und-fehlerbehebung-implementieren",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/17"
+    },
+    {
+      "number": 16,
+      "title": "Integrate game audio package, add AudioPlayer, settings and migration",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T13:15:04Z",
+      "headRefName": "codex/integriere-audio-paket-in-hauptverzeichnis",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/16"
+    },
+    {
+      "number": 15,
+      "title": "Add persistent research labs, resource animation, training UI improvements and Mira artwork",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T13:08:48Z",
+      "headRefName": "codex/ubernehme-anderungen-in-main-und-aktualisiere-assets",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/15"
+    },
+    {
+      "number": 14,
+      "title": "Add local telemetry, Mira prologue/tutorial, balance report export, art/assets and v9 save migration",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T12:46:04Z",
+      "headRefName": "codex/verschiebe-png-dateien-nach-assets/game-8y0b7x",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/14"
+    },
+    {
+      "number": 13,
+      "title": "Add local telemetry, downloadable balance report, UI/art refresh and telemetry integration",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T12:00:14Z",
+      "headRefName": "codex/verschiebe-png-dateien-nach-assets/game-4vk6kl",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/13"
+    },
+    {
+      "number": 12,
+      "title": "Add pixel-art assets, atlas-based art components, UI style refresh and docs updates",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T10:40:02Z",
+      "headRefName": "codex/verschiebe-png-dateien-nach-assets/game-wbdnqp",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/12"
+    },
+    {
+      "number": 11,
+      "title": "Add game art assets and wire them into game views",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T10:01:07Z",
+      "headRefName": "codex/verschiebe-png-dateien-nach-assets/game",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/11"
+    },
+    {
+      "number": 10,
+      "title": "Phase‑1 Alpha: v7 economy, simulation, UI, tests and documentation",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T08:36:49Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter-bps46z",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/10"
+    },
+    {
+      "number": 9,
+      "title": "Phase‑1 Alpha: core economy v6, simulation, UI, docs and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T07:44:52Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter-roddh2",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/9"
+    },
+    {
+      "number": 8,
+      "title": "Phase‑1 Alpha: core economy, simulation, UI, save migration, docs and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-09-24T07:13:20Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter-swmipq",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/8"
+    },
+    {
+      "number": 7,
+      "title": "Phase‑1 Alpha: core economy, simulation, UI, docs and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-09-23T08:14:12Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter-66bpai",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/7"
+    },
+    {
+      "number": 6,
+      "title": "Phase‑1 Alpha: implement core economy, simulation, UI, storage, docs and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-09-23T07:39:35Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter-s8r9wq",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/6"
+    },
+    {
+      "number": 5,
+      "title": "Phase‑1 Alpha: core economy/simulation, UI, storage migration and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-09-23T07:17:53Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter-5f3xms",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/5"
+    },
+    {
+      "number": 4,
+      "title": "Alpha: playable browser prototype — economy, simulation, UI, storage, and tests",
+      "state": "MERGED",
+      "mergedAt": "2026-09-22T15:03:04Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter-7xj1t3",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/4"
+    },
+    {
+      "number": 3,
+      "title": "feat: expand prototype into connected Alpha — prestige, experiments, items, missions, save v2",
+      "state": "MERGED",
+      "mergedAt": "2026-09-22T14:35:50Z",
+      "headRefName": "codex/entwickle-ai-singularity-alpha-version-weiter",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/3"
+    },
+    {
+      "number": 2,
+      "title": "Add browser prototype, economy/storage core, UI, tests and CI",
+      "state": "MERGED",
+      "mergedAt": "2026-09-22T13:57:35Z",
+      "headRefName": "codex/implementiere-ersten-codex-auftrag-gn8u1r",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/2"
+    },
+    {
+      "number": 1,
+      "title": "Spielbaren AI‑Singularity Browser‑Prototyp hinzufügen",
+      "state": "MERGED",
+      "mergedAt": "2026-09-22T13:15:33Z",
+      "headRefName": "codex/implementiere-ersten-codex-auftrag",
+      "baseRefName": "main",
+      "url": "https://github.com/Kayza1708/Idle-game-/pull/1"
+    }
+  ],
+  "remoteBranches": [
+    {
+      "name": "BACKUP",
+      "sha": "746ebf2b5d265298a7598d52206a4b03a8fc5353"
+    },
+    {
+      "name": "archive/pre-unity-only-cleanup-20261102",
+      "sha": "ea4065c0f93c5dc06cd2a2a743449a91120c7c61"
+    },
+    {
+      "name": "codex/achievements-quests-v1",
+      "sha": "a33aa9ad1c41a7b02a2cda34391bde76a7848bbc"
+    },
+    {
+      "name": "codex/atomic-crafting-save-validation",
+      "sha": "d9c8bb3656becd559e0bc00292c1df1e20097dbd"
+    },
+    {
+      "name": "codex/balance-playtest-macos-20261030",
+      "sha": "7d8a75502df85b3ed5a44e4d1e6023192fb827ac"
+    },
+    {
+      "name": "codex/behebe-einfrierung-nach-forschungsprojektabschluss",
+      "sha": "1539f3c538aa933ef53a99a43b1dcf9100ca6b83"
+    },
+    {
+      "name": "codex/behebe-nicht-startbare-komponentenanalysen",
+      "sha": "c1b80581a841faa26e9c9e969de883df8f3af8c3"
+    },
+    {
+      "name": "codex/behebe-speicherprobleme-im-idle-game",
+      "sha": "8ae59856c920ebeb9dbf2bd003bf1db005440c28"
+    },
+    {
+      "name": "codex/behebe-speicherprobleme-im-idle-game-8flyf0",
+      "sha": "dd5db56215b2df452c08cbd0dc426a977c22dee7"
+    },
+    {
+      "name": "codex/behebe-speicherprobleme-im-idle-game-ald9n3",
+      "sha": "f84516c2ce357893ff0dd743fcd12f4c2868ae73"
+    },
+    {
+      "name": "codex/behebe-speicherprobleme-im-idle-game-zdpx8q",
+      "sha": "c953bbd361881e96cad87018a157f9b9cc23df56"
+    },
+    {
+      "name": "codex/bonus-box-flow",
+      "sha": "96ed5a4a59f0353094175a7b8a265c9c293346dd"
+    },
+    {
+      "name": "codex/build-equipment-integration",
+      "sha": "428c3be6c306dfae9dfed7f6afc99214e40490a6"
+    },
+    {
+      "name": "codex/build-quest-progression-study",
+      "sha": "26b3d6a1b387b510fc4c41e6469ad12286469c40"
+    },
+    {
+      "name": "codex/challenge-progression-recovery-fixes",
+      "sha": "a5cb11a55b3ea1b9dc983d734cd9bb8447f6039d"
+    },
+    {
+      "name": "codex/cleanup-loading-name-policy",
+      "sha": "dc68f0c900019cee47b95afbb44a4f9ba5eb95a6"
+    },
+    {
+      "name": "codex/cohesive-item-polish",
+      "sha": "7b64c0685d6576f4f15419c92df6ca69e43d0691"
+    },
+    {
+      "name": "codex/cohesive-mobile-art",
+      "sha": "f8f8d680decc5c515abf5b4bd010aa019f431d3e"
+    },
+    {
+      "name": "codex/commercialization-v1",
+      "sha": "76eaae31acc2f84265f179029ee31bd49637bf2a"
+    },
+    {
+      "name": "codex/compact-mobile-design",
+      "sha": "6600221a0a33b2f2c30e202d6db8b073763d8c06"
+    },
+    {
+      "name": "codex/confirmed-technical-bugs",
+      "sha": "74afda6caee1a4e2afed8e529813f74cd4d9ca11"
+    },
+    {
+      "name": "codex/credit-only-hardware-goals",
+      "sha": "d7060cc568463d8943599a01a172a208ddd78452"
+    },
+    {
+      "name": "codex/data-analysis-contracts",
+      "sha": "a1fe0a724d8ccfeef9cd5148ef160dc681812230"
+    },
+    {
+      "name": "codex/early-progression-balance",
+      "sha": "b592968c41215f329015dc1a2915ec51880b0b32"
+    },
+    {
+      "name": "codex/economy-completion-v19",
+      "sha": "42f40d14bc54908adfa26cf23128a82577adef57"
+    },
+    {
+      "name": "codex/economy-v18-completion",
+      "sha": "5aa853b9a5c0e692b96f156ad994912a0cca515e"
+    },
+    {
+      "name": "codex/economy-v18-prestige-items",
+      "sha": "642b60a94bca1a8ec22c6a4bbda1f69ec9252167"
+    },
+    {
+      "name": "codex/erganze-mira-story-um-funf-kapitel",
+      "sha": "7851139f8910366aff5d0a3f7c6b498fbb95bfcc"
+    },
+    {
+      "name": "codex/existing-mechanics-ui",
+      "sha": "de33d29c4fbbef66dfbfdd3377bf0a57dc63696e"
+    },
+    {
+      "name": "codex/first-blueprint-bridge",
+      "sha": "27efc397760978cee78f5ab1aebdb7521feafc9f"
+    },
+    {
+      "name": "codex/first-prestige-calibration",
+      "sha": "d9c649cc0c25640c9296e5bfc820edfeb6ae1ae5"
+    },
+    {
+      "name": "codex/fix-typescript/build-blockers-on-main",
+      "sha": "9ccdb27865a1168fc1c94c80344e7aa45811b233"
+    },
+    {
+      "name": "codex/fix-unity-editmode-34-failures-20261031",
+      "sha": "34184cf12d66605f87da1b06ada80d88e4a54066"
+    },
+    {
+      "name": "codex/fix-unity-editmode-final-three-20261031",
+      "sha": "aaa23da40b7c0cf359b027b22e6cbc2047ce8cc1"
+    },
+    {
+      "name": "codex/fix-unity-v2-json-placeholder-20261031",
+      "sha": "34184cf12d66605f87da1b06ada80d88e4a54066"
+    },
+    {
+      "name": "codex/fix-unity-v3-player-compile-save-20261031",
+      "sha": "23f98368225e2c8834bedd664a99b558637b7af9"
+    },
+    {
+      "name": "codex/full-compute-user-capacity",
+      "sha": "d8050b153d685a430de7d63171739840f4121b4a"
+    },
+    {
+      "name": "codex/icon-artwork-audit",
+      "sha": "abf070b4b2b2bada96baf55a24017012542637dd"
+    },
+    {
+      "name": "codex/idle-intelligence-brand",
+      "sha": "d7dde4a45522b08ed27c4939dbfe670d8e459359"
+    },
+    {
+      "name": "codex/immersive-mobile-feedback",
+      "sha": "2d11820fa773380502f579b47c08f186d2ef3d0c"
+    },
+    {
+      "name": "codex/implementiere-mobile-benutzeroberflache-fur-spiel",
+      "sha": "be3edd11949de89cdb224e5d342b55bb2da78c78"
+    },
+    {
+      "name": "codex/instant-items-seasons",
+      "sha": "3518ef774de5edcc6f39e9e130baf25c9da5f145"
+    },
+    {
+      "name": "codex/integriere-vier-pixel-art-atlanten",
+      "sha": "76548d613493517051069ccf5ea3c55325a79c75"
+    },
+    {
+      "name": "codex/isolated-challenge-runs",
+      "sha": "4725b090e84ae29c6db2bee9aedfbf181e5202ea"
+    },
+    {
+      "name": "codex/item-grind-mastery",
+      "sha": "3d42f8cac88be0b6a1ab53d58340c6ab1a63f71c"
+    },
+    {
+      "name": "codex/item-material-artwork",
+      "sha": "816f9989d9c1f35898792c288fe9ef2ad8634034"
+    },
+    {
+      "name": "codex/material-builds-challenges",
+      "sha": "6ba96d6ec135dd4056ccdf03f315272e92b3e368"
+    },
+    {
+      "name": "codex/mira-streamlined-ui",
+      "sha": "4db385f7452b8be07b9d36af675c788fcacd0e2f"
+    },
+    {
+      "name": "codex/mobile-feedback-fixes",
+      "sha": "0dfeed4e756b03cbbd9e2e7c5ecf6329c5321117"
+    },
+    {
+      "name": "codex/mobile-forge-research-v2",
+      "sha": "7018d286ccefd6f5a43604f019661201a4610fdf"
+    },
+    {
+      "name": "codex/mobile-layout-audit",
+      "sha": "1a223bba6df921c4ea92af5c0761261dae4c7ab4"
+    },
+    {
+      "name": "codex/mobile-menu-macos-fixes",
+      "sha": "e71ecfd944a4ac441461772026b30be689c2531a"
+    },
+    {
+      "name": "codex/mobile-return-capsule-polish",
+      "sha": "324ebd63f6697dff4b679d2781662b455a910aba"
+    },
+    {
+      "name": "codex/mobile-ui-overhaul",
+      "sha": "2916b33c4649ee8422c8ad79971d1e9306eb3dce"
+    },
+    {
+      "name": "codex/mobile-ui-refactor-review-20261102",
+      "sha": "041f12aa4d99cfb4fb10cfc35dbdc712ffa7bfb2"
+    },
+    {
+      "name": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity",
+      "sha": "f1b2a0784eb6b4d65ee6e014d1cd88437d20375d"
+    },
+    {
+      "name": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-3iojca",
+      "sha": "77195046815f18c2857cef669555e689f92c7f9c"
+    },
+    {
+      "name": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-b2rafr",
+      "sha": "a75b8fedf5c5fb6e4e5b2f2b42c3608360a369c5"
+    },
+    {
+      "name": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-ckfogr",
+      "sha": "04637d380ef85579179721b475859279f1af6b0a"
+    },
+    {
+      "name": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-gvsqw8",
+      "sha": "36fc4d4e20c862b0a858371d7bdc1f9d6699dbc1"
+    },
+    {
+      "name": "codex/mobile-ux-und-layout-optimierungen-fur-ai-singularity-vrxsgg",
+      "sha": "49d3aa99518920bea610ef48ff4dc19e7488d5b7"
+    },
+    {
+      "name": "codex/model-forge-v1",
+      "sha": "17ce65c90e0c01ee8e4b313d77c68e35b264e5b9"
+    },
+    {
+      "name": "codex/natural-progression-baseline",
+      "sha": "a6304e20e569b16924213ba2b15e5bd01c2acada"
+    },
+    {
+      "name": "codex/passive-return-automation-study",
+      "sha": "505d7e75279da9a4ffa81c46a47e03bb93a647df"
+    },
+    {
+      "name": "codex/permanent-learned-blueprints",
+      "sha": "864a60e788fd21d7b0f7be684ad1d38ed7a30ae2"
+    },
+    {
+      "name": "codex/permanent-research-areas",
+      "sha": "ff840529baa6e35905a643106e100cbf3e43d565"
+    },
+    {
+      "name": "codex/pixel-polish-onboarding",
+      "sha": "8701847c0e384b24fcbfc3e8fb65fc863cec2468"
+    },
+    {
+      "name": "codex/prestige-axiom-v2",
+      "sha": "8753770883029f456955ced4caf4491322eff63c"
+    },
+    {
+      "name": "codex/prestige-network-forge-motion",
+      "sha": "ebaa1185e30e553a184d3ef209f93e8aa308a923"
+    },
+    {
+      "name": "codex/progression-motion",
+      "sha": "27fbe06c9143c5e73061844a12fb23e7013dcb11"
+    },
+    {
+      "name": "codex/prufe-forschung,-komponenten-und-balance",
+      "sha": "f4b7f0bd42505cf11a8b01efab5177a6edb6377f"
+    },
+    {
+      "name": "codex/prufe-forschung,-komponenten-und-balance-e6d2qx",
+      "sha": "08bf678104f3d4759423d30ef4e75de7b08869b3"
+    },
+    {
+      "name": "codex/quest-chapters-achievement-curve",
+      "sha": "20800f101854813b78476558a18cfa4d23404d9e"
+    },
+    {
+      "name": "codex/redesign-ai-singularity-interface-for-mobile",
+      "sha": "e33c7a31933d6c593d81fa11f157ed4da2f6319f"
+    },
+    {
+      "name": "codex/redesign-ai-singularity-interface-for-mobile-6io6ox",
+      "sha": "a06bfc4642a5903fcdc02f9638ea525e4252a6a8"
+    },
+    {
+      "name": "codex/redesign-ai-singularity-interface-for-mobile-8qaso2",
+      "sha": "d23f31adbf14daff3dc84a3c504e5827ba28b582"
+    },
+    {
+      "name": "codex/redesign-ai-singularity-interface-for-mobile-32qc78",
+      "sha": "fca09111beed53c9cda2b54dcf06c8cfc86ff641"
+    },
+    {
+      "name": "codex/redesign-ai-singularity-interface-for-mobile-dou4py",
+      "sha": "e024352c9ddc5d86aaf7799542981993fe817e63"
+    },
+    {
+      "name": "codex/redesign-ai-singularity-interface-for-mobile-gqsdvj",
+      "sha": "194076b921398deabf84d0e2dc6dd1bbe72c2c88"
+    },
+    {
+      "name": "codex/regression-contract-cleanup",
+      "sha": "83a5c0182cb52c1675d416e61f67e355fd6d3c02"
+    },
+    {
+      "name": "codex/relay-archive-improvements",
+      "sha": "b5737613f24939a4bea732188a2cceacacb6e8fa"
+    },
+    {
+      "name": "codex/release-audit-2026-10-17",
+      "sha": "ab0ac39bd59331b9e2ded86e8500bd3ea3c9526e"
+    },
+    {
+      "name": "codex/research-integration",
+      "sha": "d8d5a29605a7e2d92bbe7dc16ba8f1f59c5e24a9"
+    },
+    {
+      "name": "codex/research-menu-export",
+      "sha": "a0b8298c7b93ae28fa7d2cfd981b58d289a60180"
+    },
+    {
+      "name": "codex/return-unlock-guidance",
+      "sha": "f5ca8d68ffeb0df2d32adb48259c3abaf1386c4d"
+    },
+    {
+      "name": "codex/reward-presentation",
+      "sha": "b8fab2172fee0786ed0e052783d197fd7de920b1"
+    },
+    {
+      "name": "codex/run-start-auto-prestige",
+      "sha": "2129f7dfefc3e1287f4ba83f78e2cbff34e134d8"
+    },
+    {
+      "name": "codex/scientific-number-purchases",
+      "sha": "47d706d8197d117098a1911466402d95d7fe95f8"
+    },
+    {
+      "name": "codex/shared-previews-balance-export",
+      "sha": "1d3de7fbb81356fc8bf3c46f122844083a2cec6e"
+    },
+    {
+      "name": "codex/shop-capsule-polish",
+      "sha": "28f14b5aa3d0af93246b3b4ebfabd7bcdcfdaf52"
+    },
+    {
+      "name": "codex/shop-rework",
+      "sha": "0a06848929b9f29548274adfcc3d72f3e35f17f1"
+    },
+    {
+      "name": "codex/square-mobile-design",
+      "sha": "519a088b8c6cebbaa2841147f2058636769fb7c7"
+    },
+    {
+      "name": "codex/stabilitat-und-training-optimieren",
+      "sha": "051cdc4908c00f58a5c38e1541cae4e7ffa676f5"
+    },
+    {
+      "name": "codex/stabilitat-und-training-optimieren-c4ksuo",
+      "sha": "a8066bddbba74570e854347f6da9e22f459b2364"
+    },
+    {
+      "name": "codex/stabilitat-und-training-optimieren-mz48oj",
+      "sha": "5eda44cad722a25b56dfe29649b4f4a680ed7d83"
+    },
+    {
+      "name": "codex/stabilitat-und-training-optimieren-qm2kwi",
+      "sha": "5988b60a50718e8987d976acc1248e4bbada80fc"
+    },
+    {
+      "name": "codex/stabilitat-und-training-optimieren-tbx6ta",
+      "sha": "c3dd0dc794ce0e4dbfbf780cac753580bd2eea65"
+    },
+    {
+      "name": "codex/stabilize-and-repair-game-implementation",
+      "sha": "64e60e73bcc66157efc8b4215433dd69449a2975"
+    },
+    {
+      "name": "codex/taps-name-validation",
+      "sha": "2e6fd8d5de8679ac5c4cb702e9f35549c4cee485"
+    },
+    {
+      "name": "codex/training-data-cost-bonuses",
+      "sha": "6337b10256e0b6db96217e064e8430bc8085e252"
+    },
+    {
+      "name": "codex/uberarbeite-forschungsansicht-und-bedienpfade",
+      "sha": "b1d890a656d09a3bb021dc27f11fdfa7f794e832"
+    },
+    {
+      "name": "codex/uberarbeite-prestige-baum-darstellung",
+      "sha": "44fa9fc9704268282df3fd5a2b00f9567cd9fcef"
+    },
+    {
+      "name": "codex/uberarbeite-prestige-baum-darstellung-bpd2z7",
+      "sha": "e93f5eb3d7d61f4fc120ebd3730306bef9a3b069"
+    },
+    {
+      "name": "codex/uberarbeite-schicht-1-der-economy",
+      "sha": "1f09279b7b283e03c2005776be3a68d522f2b209"
+    },
+    {
+      "name": "codex/uberarbeite-schicht-1-der-economy-iuej3y",
+      "sha": "2aee19541dc550726a83515139ea7110277058ad"
+    },
+    {
+      "name": "codex/uberarbeite-schicht-1-der-economy-u6d4ja",
+      "sha": "f140806e2e585ba1f7f593a8f91cc56797dc67f0"
+    },
+    {
+      "name": "codex/ui-probleme-im-spiel-beheben",
+      "sha": "cce8612a8a92acb99d6df9ad64122f7c6cf70edc"
+    },
+    {
+      "name": "codex/unity-analytics-retention-durability-20261030",
+      "sha": "c6d21eb51fb4d407cfac41a69ac4f82c9f55ea01"
+    },
+    {
+      "name": "codex/unity-liveops-online-native-migration-20261030",
+      "sha": "298a1dbf8af8fff41d1dcd84d2283b3714e8fcd3"
+    },
+    {
+      "name": "codex/unity-only-repo-cleanup-20261030",
+      "sha": "2428658156ae0c20f2d3d6a007e6e236fd9568ae"
+    },
+    {
+      "name": "codex/unity-only-v3-completion-20261030",
+      "sha": "2c8e0af33dae7477492ac22d17e7cdeeaaa05a76"
+    },
+    {
+      "name": "codex/unity-rewrite",
+      "sha": "a019e42d20158b2890f19c98af64aeaa11596377"
+    },
+    {
+      "name": "codex/unity-shop-and-mobile-ux-20261102",
+      "sha": "0ea00ae27f67dd7f978eb6dae9095975a8383ca2"
+    },
+    {
+      "name": "codex/unity-v3-ads-ux-playtest-20261030",
+      "sha": "94dad0832d6087c5cd62ffcff40528ac0a338fa5"
+    },
+    {
+      "name": "codex/unity-v3-fresh-playtest-20261030",
+      "sha": "2c40ed0c4ba471020a66e73f98e62ab84c675d05"
+    },
+    {
+      "name": "codex/unity-v3-last-seven-playmode-20261031",
+      "sha": "f29f8e4b460082fcd7eff0862f9c5b71435f5820"
+    },
+    {
+      "name": "codex/unity-v3-playmode-save-20261031",
+      "sha": "8569c948288cb267b1c1b3aae2fca9027f9bf796"
+    },
+    {
+      "name": "codex/unity-visual-quality-rules",
+      "sha": "8effc8303e895185af32af49069370eecb6f78ba"
+    },
+    {
+      "name": "codex/v2-stability-balance-report",
+      "sha": "3dfeca37e1c5b4df7ae610b11650873803f87e4d"
+    },
+    {
+      "name": "codex/v3-completion-items-runtime-20261030",
+      "sha": "20c46be37b6cfaa91b7111e3b68b187534f90d3b"
+    },
+    {
+      "name": "codex/9c-complete-item-recipes",
+      "sha": "60b06bee74259085ad4b2fc10e94fddb3fce94f4"
+    },
+    {
+      "name": "codex/9d-effective-item-builds",
+      "sha": "436f854e229948e76c97164c4f23b693e7287b54"
+    },
+    {
+      "name": "current-game-backup-2026-09-29",
+      "sha": "1f797f3988815c5909356eb7382ff359472babf5"
+    },
+    {
+      "name": "feature/cloudflare-companies-foundation",
+      "sha": "d6dd7eac1edb4cb20f18dc3adafef638ae680372"
+    },
+    {
+      "name": "feature/company-profiles-management-no-chat",
+      "sha": "b77d00060072e0bec08c440178abe2614b5dee58"
+    },
+    {
+      "name": "feature/gumball-ticket-rewards",
+      "sha": "08d0bd4ae7d7a94d6ba24e995382474ae3ee2f09"
+    },
+    {
+      "name": "feature/profile-badge-art-polish",
+      "sha": "8273f78b371d4eba4805ddf1357ad3876f6935e1"
+    },
+    {
+      "name": "main",
+      "sha": "ccfb38df64aacbb9f4ba050d4bc80e493dd552ad"
+    },
+    {
+      "name": "ui/mobile-prestige-v27",
+      "sha": "09c51d74bb141ef0510988e30f4a3f13e5e9487b"
+    },
+    {
+      "name": "unity-only",
+      "sha": "f1c15319357517d5976328861b27f9022311b991"
+    }
+  ]
+}

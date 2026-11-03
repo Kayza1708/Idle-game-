@@ -124,9 +124,9 @@ namespace IdleIntelligence.Core
         {
             if(i<0||i>=s.Research.Length)throw new ArgumentOutOfRangeException(nameof(i));
             if(Balance.Research[i].Id=="dataGeneration"&&IntroResearch(s))return ScientificNumber.Zero;
-            if(Balance.Research[i].Project)return Ceil(ScientificNumber.From(Balance.Research[i].Cost).Times(PrestigeRules.Has(s,"F07")?PrestigeRules.EFor(s,"F07"):1));
+            if(Balance.Research[i].Project)return Ceil(ScientificNumber.From(Balance.Research[i].Cost).Multiply(EconomyBalance.ResearchFactor(ItemSystemV3.Enabled(s),0)).Times(PrestigeRules.Has(s,"F07")?PrestigeRules.EFor(s,"F07"):1));
             int level=s.Research[i];double basis=Balance.Research[i].Early&&level<Balance.EarlyLevels?Math.Min(Balance.Research[i].Cost,Balance.EarlyDataCap[level]):Balance.Research[i].Cost;
-            return Ceil(ScientificNumber.From(basis).Multiply(ScientificNumber.From(Balance.ResearchGrowth).Pow(level)).Times(PrestigeRules.Has(s,"F07")?PrestigeRules.EFor(s,"F07"):1));
+            return Ceil(ScientificNumber.From(basis).Multiply(ScientificNumber.From(Balance.ResearchGrowth).Pow(level)).Multiply(EconomyBalance.ResearchFactor(ItemSystemV3.Enabled(s),level)).Times(PrestigeRules.Has(s,"F07")?PrestigeRules.EFor(s,"F07"):1));
         }
         public static double ResearchWork(GameState s,int i)
         {

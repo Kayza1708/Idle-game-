@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-02",
+  "unity": "6000.3.26f1",
+  "scope": "Compact home Gumball machine and gem draw button",
+  "playmode": {
+    "result": "Passed",
+    "total": "13",
+    "passed": "13",
+    "failed": "0",
+    "duration": "26.1351609"
+  },
+  "testNames": [
+    "IdleIntelligence.PlayTests.GemUITests.FailedCapsuleSaveRestoresWalletAndReceipt",
+    "IdleIntelligence.PlayTests.GemUITests.PermanentOffersAndCapsulesAreReachableExactlyOnceAndSaved",
+    "IdleIntelligence.PlayTests.GemUITests.UnavailableCapsuleVideoDoesNotSpendQuotaOrGrant",
+    "IdleIntelligence.PlayTests.MarketUITests.FailedMarketSaveRestoresDebitStockAndItemReceipt",
+    "IdleIntelligence.PlayTests.MarketUITests.FreePaidMaterialsAndDailyItemUseAtomicTicketsAndActualPortraits",
+    "IdleIntelligence.PlayTests.MarketUITests.NativeShopfrontMakesChestsMaterialsAndGumballDirectlyReachable",
+    "IdleIntelligence.PlayTests.MarketUITests.UnavailableProviderOffersNoActionAndDoesNotGrantOrConsumeLimits",
+    "IdleIntelligence.PlayTests.NavigationFlowTests.RealRoutesUnlocksResearchAndReload",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.HomeMachineAppearsAfterPrestigeFitsTheActionEdgeAndOpensGumball",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.HomeMachineDrawDebitsOnceSavesAndDoesNotTapTheLaboratory",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.HomeMachineFailedSaveLeavesGemsAndCorruptedOriginalUntouched",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.IllustratedForgeAndBorderlessChestsFitBothLanguagesAndAllWidths",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.ShopCurrencyArtAndProductsStayInsideWhileResizingTheSameShop"
+  ],
+  "macOSBuild": [
+    "Succeeded",
+    "Target: StandaloneOSX",
+    "Size: 250598183",
+    "Duration: 00:00:11.3593200"
+  ],
+  "coverage": [
+    "Hidden before first prestige",
+    "Machine opens actual shop Gumball page",
+    "Price box invokes native capsule transaction without changing home route",
+    "Real button raycasts and unobstructed main action",
+    "Single debit for same-frame repeated invocation",
+    "Read-only/damaged save and zero gems do not grant or spend",
+    "Reduced motion uses static reward receipt",
+    "DE/EN: 320x568, 320x694, 390x846, 430x932"
+  ],
+  "sourceHashes": {
+    "Assets/IdleIntelligence/Runtime/LaboratoryView.cs": "8e02130ae32e4228be05072fda350e6ad27b6344cf3d574b29f2b807e6e6e3a5",
+    "Assets/IdleIntelligence/Runtime/StorefrontUI.cs": "4036719d0d56a862ae8d7a6d1170e12ac12742a5002a47832edcf30890f77bda",
+    "Assets/IdleIntelligence/Tests/PlayMode/UnifiedPresentationTests.cs": "63db48109829cd3f01fa50c4e3c3ade510f678ea814949a9f576b124f47b437d"
+  },
+  "screenshots": {
+    "home-gumball-en-430.png": "ac068e5950ed2a44373e276e8921c055772c19952a37624748cd539c24cd4a14",
+    "home-gumball-en-390.png": "cb609aa9a6a93e020c57040362565c0f4bf032a867ebcaba2f99411ba3770d7a",
+    "home-gumball-de-320.png": "1526b74cb599afbaf8625ae7d91f526c4d3299e55a8165f61bcae8245747ef57",
+    "home-gumball-de-390.png": "ed7fc3360975a3f2064a1f3568376885ca5a83c1ca1414b87617c8ae42f2ed4a",
+    "home-gumball-en-320.png": "c38ba4256362b6777cca5fdce9522a2b6d77f1e7536f591bd729ade39a2fa620",
+    "home-gumball-de-430.png": "3e0f4daced2b09f6d04b98839e25e1e0723c5a05110a9559eaca6a60543a496a",
+    "home-gumball-en-320-short.png": "39aa9bf84753dbe3fe272833cdb415a79ffba57a7a315d154dcb93f917ae333c",
+    "home-gumball-de-320-short.png": "46d2213f089580d7a03c5986bb0f6d3db41fbca232a7deb5247eb44963c6431d"
+  },
+  "limits": "Targeted follow-up validation; earlier full 242 EditMode / 148 PlayMode counts refer to preceding completed work. No publication, push, PR or SDK integration.",
+  "supersededBy": "tiny-home-links.verification.json; the home price box and direct draw were explicitly removed."
+}
