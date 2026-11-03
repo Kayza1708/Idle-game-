@@ -62,3 +62,13 @@ UI-Überarbeitung auf Unity-only main übertragen. [Prüfbericht](unity-mobile-u
 - [x] Alle fertigen lokalen UI-, Grafik- und Balanceänderungen für einen gemeinsamen Branch zusammengestellt.
 - [x] Gemeinsamer Codecommit `3532142c` gepusht und mit GitHub identisch bestätigt; [PR #177](https://github.com/Kayza1708/Idle-game-/pull/177) erstellt.
 - [x] Zusätzlicher Gesamtlauf ausgewertet: 151/152 bestanden. Gefundenen Preisumbruch korrigiert; 7/7 Nachtests einschließlich erneuter 420er-Matrix bestanden. Native GitHub-CI des ersten Codecommits erfolgreich. [Abschlussbericht](github-status.md).
+
+## Release-Vorbereitung · aktueller Auftrag
+
+- Profil, animierte Rahmen und geordnete Speicherwerkzeuge: [Arbeits- und Prüfbericht](release-polish.md).
+- 248/248 EditMode, 25/25 Zieltests, 492 Ansichtsprüfungen, 13/13 Nachtests nach gefundenem Bootfehler und isolierter echter Player-Smoke bestanden. Gesamtlauf davor: 154/155; genaue Einordnung im Bericht.
+- [x] Aktuelle Vorschauen, Bewegungsdemo und visuellen Bewertungsbogen geprüft: [Bericht](release-polish.md).
+- iOS-/Android-Storefreigabe hat konkrete offene Build-, Identitäts-, Anbieter- und Geräte-Gates. Keine Storefreigabe oder SDK-Anbindung behaupten.
+
+- [x] Visueller Kandidat einschließlich finalem normalem macOS-Build (250.620.503 Bytes) und echtem isolierten Player-Smoke nachgewiesen: [Manifest](release-polish.verification.json).
+- [ ] Für iOS/Android zunächst mobile Editor-Module, endgültige App-/Publisher-Identitäten, Anbieteranbindung und Geräteabnahme bearbeiten; kein Store-Release freigegeben.

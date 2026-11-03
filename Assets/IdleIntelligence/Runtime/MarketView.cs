@@ -79,15 +79,19 @@ namespace IdleIntelligence.Runtime
    var scroll=purchaseDialog.GetComponentInChildren<ScrollRect>(true);
    foreach(Transform child in scroll.content)child.gameObject.SetActive(false);
    var body=WorkshopUIFactory.Vertical("PurchasePreview",scroll.content);
-   WorkshopUIFactory.Label("PurchaseTitle",body.transform,title,20,68);
+   WorkshopUIFactory.Label("PurchaseTitle",body.transform,title,20,44);
+   if(offer.Kind=="chest"){
+    var preview=WorkshopUIFactory.Node("PurchaseArtwork",body.transform,typeof(Image));WorkshopUIFactory.Size(preview,68);
+    var image=preview.GetComponent<Image>();image.sprite=StorefrontUI.Chest(Array.FindIndex(SeasonBalance.Chests,c=>c.Id==offer.Tier));image.preserveAspect=true;image.raycastTarget=false;
+   }
    string details=offer.Kind=="chest"?ChestDescription(offer.Tier,game.State):
      offer.Kind=="material"?offer.Amount+" × "+
        ItemBalance.ComponentNames[offer.Component]:
        ItemBalance.Items[Workshop.Index(offer.Item)].Name;
-   WorkshopUIFactory.Label("PurchaseDetails",body.transform,details,14,
-       offer.Kind=="chest"?190:74);
-   WorkshopUIFactory.Label("PurchasePrice",body.transform,
-       offer.Cost+" Gems  ·  "+game.State.Retention.gems+" vorhanden",17,58);
+   var detail=WorkshopUIFactory.Label("PurchaseDetails",body.transform,details.Replace(" %","\u00A0%"),13,44);AdaptiveTextHeight.Attach(detail);
+   var price=StorefrontUI.CurrencyLine(body.transform,44,15);price.name="PurchasePrice";
+   string F(double value)=>NumberFormatting.Format(ScientificNumber.From(value),game.State.Settings.numberFormat,game.State.Settings.language);
+   StorefrontUI.Price(price,StorefrontUI.Gem(game),F(offer.Cost)+" · "+F(game.State.Retention.gems)+(game.State.Settings.language=="de"?" vorhanden":" available"),GameTheme.Text);
    WorkshopUIFactory.Button("PurchaseCancel",body.transform,
        "Abbrechen",ClosePurchase);
    var confirm=WorkshopUIFactory.Button("PurchaseConfirm",body.transform,

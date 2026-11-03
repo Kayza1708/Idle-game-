@@ -28,6 +28,8 @@ Die aktuelle Zusammenführung und die nativen Prüfbelege sind im [Unity-/V3-Aud
 
 Die aktuelle [Bereinigung aller Seiten und Unterseiten](docs/all-pages-cleanup.md) enthält Vorschauen und den genauen Prüfstand.
 
+Die anschließende [Release-Vorbereitung mit Profil und animierten Konturen](docs/release-polish.md) enthält die aktuellen Vorschauen, Prüfbelege und ausdrücklich offenen Voraussetzungen für iOS-/Android-Storebuilds.
+
 ## Technik und Onlinebetrieb
 
 Die Spielmechanik ist C# innerhalb von Unity. `NativeChecks/` enthält eigenständige C#-Tests. Online-Funktionen benötigen gegebenenfalls weiterhin den separat betriebenen Cloudflare-Dienst; der frühere Servercode bleibt in der Git-Historie erhalten, ist aber kein Bestandteil dieses reinen Unity-Spielprojekts.
