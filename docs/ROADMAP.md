@@ -73,3 +73,8 @@ UI-Überarbeitung auf Unity-only main übertragen. [Prüfbericht](unity-mobile-u
 - [ ] Technische Freigabeschranken für Store-Veröffentlichung iOS/Android schließen: [Bestandsaufnahme](release-polish.md).
 
 - [x] Abschließender vollständiger PlayMode-Lauf 154/155 ausgewertet, Boot-Lokalisierung korrigiert und in 13/13 Nachtests einschließlich 492 Ansichten abgesichert. Native Development-Prüfroutine wartet auf tatsächliche Boot-Bereitschaft; echter isolierter Player-Test und finaler normaler macOS-Build erfolgreich.
+
+## Kräftigere Farbanimation · 2026-11-03
+
+- [x] Sichtbarer Cyan–Violett–Pink-Verlauf, umlaufende Energie und pulsierender Profil-Core umgesetzt; reduzierte Bewegung berücksichtigt.
+- [x] 6/6 gezielte PlayMode-Tests, finale Bildprüfung und lokaler macOS-Build erfolgreich. [Animation und Nachweis](vivid-animation.md).

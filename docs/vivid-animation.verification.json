@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-03",
+  "tests": {
+    "result": "Passed",
+    "total": "6",
+    "passed": "6",
+    "failed": "0",
+    "duration": "27.1012437"
+  },
+  "build": {
+    "target": "StandaloneOSX",
+    "result": "Succeeded",
+    "bytes": 250622039
+  },
+  "sha256": {
+    "Assets/IdleIntelligence/Runtime/FlowAccent.cs": "475904a1613f1c4ad7a4bd361de474926c91b653c7f183c4282ff72633e1d2af",
+    "Assets/IdleIntelligence/Runtime/GameTheme.cs": "8ddb59b8d596925c9183b2560c9a826ca8a8e5889c3998283020e2010153a60a",
+    "Assets/IdleIntelligence/Tests/PlayMode/ReleasePresentationTests.cs": "0b80f2b0cddae9e79d09f245691ed0737b473214e0ced1157d347c415ca23018",
+    "docs/media/vivid-animation/profile-aurora.gif": "52f24ade13d7a32e410b0a96962f394e25d4bc40286b4ca5e88b818ad74185dd",
+    "docs/media/vivid-animation/profile-violet.png": "b131cafb479459c28209b371d43c4be9ed716f3d1e6dbeb8fa97c948c601c5f7",
+    "docs/media/vivid-animation/profile-cyan.png": "11c920d291602435f9cacfe35ca522763148df760461f677fe1412b22064da9d"
+  }
+}

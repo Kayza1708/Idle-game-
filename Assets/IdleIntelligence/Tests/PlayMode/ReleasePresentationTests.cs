@@ -32,10 +32,10 @@ namespace IdleIntelligence.PlayTests
         {
             game.Show("profile");yield return null;yield return null;game.enabled=false;
             var frame=GameObject.Find("ProfileFrame").GetComponentInChildren<FlowAccent>();Assert.That(frame.raycastTarget,Is.False);
-            string before=JsonUtility.ToJson(StateData.From(game.State));float phase=frame.Phase;yield return new WaitForSecondsRealtime(.2f);
-            Assert.That(frame.Phase,Is.Not.EqualTo(phase));Assert.That(JsonUtility.ToJson(StateData.From(game.State)),Is.EqualTo(before));
+            string before=JsonUtility.ToJson(StateData.From(game.State));Color originalTint=frame.CurrentTint;float phase=frame.Phase;yield return new WaitForSecondsRealtime(.2f);
+            Assert.That(frame.Phase,Is.Not.EqualTo(phase));Assert.That(frame.CurrentTint,Is.Not.EqualTo(originalTint),"The visible frame must actually change color");Assert.That(JsonUtility.ToJson(StateData.From(game.State)),Is.EqualTo(before));
             int initialFrame=Time.frameCount;Debug.Log("RELEASE_UI_PIPELINE: "+(UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline?.GetType().Name??"Built-in"));
-            for(int i=0;i<18;i++){yield return new WaitForSecondsRealtime(.24f);WorkshopTests.Capture(390,846,Output+"/flow-"+i.ToString("D3")+".png");}
+            for(int i=0;i<30;i++){yield return new WaitForSecondsRealtime(.16f);WorkshopTests.Capture(390,846,Output+"/flow-"+i.ToString("D3")+".png");}
             Assert.That(Time.frameCount,Is.GreaterThan(initialFrame),"The captured UI must be genuinely running");Assert.That(JsonUtility.ToJson(StateData.From(game.State)),Is.EqualTo(before),"The complete moving capture must leave the state unchanged");
             game.State.Workshop.reducedMotion=true;yield return null;yield return null;Canvas.ForceUpdateCanvases();int revision=frame.MeshRevision;yield return new WaitForSecondsRealtime(.15f);
             Assert.That(frame.Phase,Is.Zero);Assert.That(frame.IsAnimating,Is.False);Assert.That(frame.MeshRevision,Is.EqualTo(revision),"Static frame must not dirty the canvas every tick");

@@ -3,6 +3,7 @@ namespace IdleIntelligence.Runtime {
  // Presentation tokens only. Economy and save data never depend on this class.
  public static class GameTheme {
   public static readonly Color Background=Hex("101724"),Surface=Hex("1D2A3B"),Raised=Hex("293B50"),Text=Hex("F0F6FF"),Muted=Hex("A4B7CD"),Accent=Hex("38F3FF"),Gold=Hex("FFC96B"),Enough=Hex("81F4AD"),Missing=Hex("FF929B");
+  public static readonly Color AuroraViolet=Hex("A965FF"),AuroraPink=Hex("FF6AC9");
   public static Font Body=>Resources.Load<Font>("Fonts/IdleBody")??Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");public static Font Bold=>Resources.Load<Font>("Fonts/IdleBold")??Body;public static Font Display=>Resources.Load<Font>("Fonts/IdleDisplay")??Bold;
   public static Color Hex(string value){ColorUtility.TryParseHtmlString("#"+value,out var c);return c;}
   static Sprite rounded;public static Sprite Rounded {get {if(rounded!=null)return rounded;rounded=Resources.Load<Sprite>("ThemeSurface");if(rounded!=null)return rounded;var texture=new Texture2D(32,32,TextureFormat.RGBA32,false);texture.name="UI rounded surface";texture.wrapMode=TextureWrapMode.Clamp;for(int y=0;y<32;y++)for(int x=0;x<32;x++){var point=new Vector2(Mathf.Max(2-x,Mathf.Max(x-29,0)),Mathf.Max(2-y,Mathf.Max(y-29,0)));texture.SetPixel(x,y,new Color(1,1,1,Mathf.Clamp01(2.5f-point.magnitude)));}texture.Apply();rounded=Sprite.Create(texture,new Rect(0,0,32,32),new Vector2(.5f,.5f),100,0,SpriteMeshType.FullRect,new Vector4(4,4,4,4));return rounded;}}

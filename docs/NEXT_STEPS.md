@@ -72,3 +72,8 @@ UI-Überarbeitung auf Unity-only main übertragen. [Prüfbericht](unity-mobile-u
 
 - [x] Visueller Kandidat einschließlich finalem normalem macOS-Build (250.620.503 Bytes) und echtem isolierten Player-Smoke nachgewiesen: [Manifest](release-polish.verification.json).
 - [ ] Für iOS/Android zunächst mobile Editor-Module, endgültige App-/Publisher-Identitäten, Anbieteranbindung und Geräteabnahme bearbeiten; kein Store-Release freigegeben.
+
+## Kräftigere Farbanimation · 2026-11-03
+
+- [x] Sichtbarer Cyan–Violett–Pink-Verlauf, umlaufende Energie und pulsierender Profil-Core umgesetzt; reduzierte Bewegung berücksichtigt.
+- [x] 6/6 gezielte PlayMode-Tests, finale Bildprüfung und lokaler macOS-Build erfolgreich. [Animation und Nachweis](vivid-animation.md).
