@@ -11,7 +11,7 @@ namespace IdleIntelligence.Runtime
         {
             card=GetComponent<ActionCard>();size=GetComponent<LayoutElement>();
             var column=card.Title.transform.parent.GetComponent<VerticalLayoutGroup>();if(column!=null){column.childForceExpandHeight=false;column.spacing=4;}
-            GameTheme.SurfaceOn(GetComponent<Image>(),GameTheme.Surface);
+            var surface=GetComponent<Image>();surface.sprite=null;surface.type=Image.Type.Simple;surface.color=Color.clear;
             card.Title.font=GameTheme.Bold;card.Title.fontSize=15;card.Detail.font=GameTheme.Body;card.Detail.fontSize=13;
             card.Title.alignment=card.Detail.alignment=TextAnchor.UpperLeft;
             AdaptiveTextHeight.Attach(card.Title);AdaptiveTextHeight.Attach(card.Detail);

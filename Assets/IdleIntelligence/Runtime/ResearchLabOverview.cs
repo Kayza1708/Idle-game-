@@ -38,10 +38,10 @@ namespace IdleIntelligence.Runtime {
     var job=jobs.FirstOrDefault(j=>j.slot==i);var card=status[i].transform.parent;bool active=i<capacity||job!=null;if(card.gameObject.activeSelf!=active)card.gameObject.SetActive(active);
     int level=job==null?0:Game.Level(state,job.id)+1;string key=language+":"+(job?.key??"empty")+":"+level+":"+(i<capacity);
     if(keys[i]!=key){keys[i]=key;status[i].text=job==null?NativeCopy.Text("Frei",language):SettingsRules.Text(language,"research:"+job.id);status[i].color=job==null?GameTheme.Muted:GameTheme.Text;metadata[i].text=NativeCopy.Text("Labor",language)+" "+(i+1)+(job==null?"":" · Lv. "+level);icons[i].sprite=LearningPresentation.Icon(game,false,job?.id??"dataGeneration");}
-    string remaining=job==null?"—":(i>=capacity?NativeCopy.Text("Abschluss",language)+" · ":"")+LearningPresentation.Remaining(Game.ResearchRemainingSeconds(state,job),language);if(time[i].text!=remaining)time[i].text=remaining;
+    var statusSize=status[i].GetComponent<UnityEngine.UI.LayoutElement>();statusSize.minHeight=statusSize.preferredHeight=job==null?24:36;time[i].gameObject.SetActive(job!=null);string remaining=job==null?"":(i>=capacity?NativeCopy.Text("Abschluss",language)+" · ":"")+LearningPresentation.Remaining(Game.ResearchRemainingSeconds(state,job),language);if(time[i].text!=remaining)time[i].text=remaining;
     progress[i].fillAmount=job==null?0:(float)Math.Min(1,job.done/job.required);
    }
-   int shown=Enumerable.Range(0,count).Count(i=>i<capacity||jobs.Any(j=>j.slot==i));float height=((shown+1)/2)*94+Math.Max(0,(shown+1)/2-1)*5;var slotSize=slots.GetComponent<UnityEngine.UI.LayoutElement>();if(slotSize.preferredHeight!=height)slotSize.minHeight=slotSize.preferredHeight=height;
+   int shown=Enumerable.Range(0,count).Count(i=>i<capacity||jobs.Any(j=>j.slot==i));float cellHeight=jobs.Length==0?64:94;slots.GetComponent<ItemGrid>().Height=cellHeight;var cells=slots.GetComponent<UnityEngine.UI.GridLayoutGroup>();cells.cellSize=new Vector2(cells.cellSize.x,cellHeight);float height=((shown+1)/2)*cellHeight+Math.Max(0,(shown+1)/2-1)*5;var slotSize=slots.GetComponent<UnityEngine.UI.LayoutElement>();if(slotSize.preferredHeight!=height)slotSize.minHeight=slotSize.preferredHeight=height;
   }
  }
 }

@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-02",
+  "unity": "6000.3.26f1",
+  "scope": "Replace large home machine/draw box with two tiny navigation-only edge links",
+  "playmode": {
+    "result": "Passed",
+    "total": "14",
+    "passed": "14",
+    "failed": "0",
+    "duration": "27.2922556"
+  },
+  "testNames": [
+    "IdleIntelligence.PlayTests.GemUITests.FailedCapsuleSaveRestoresWalletAndReceipt",
+    "IdleIntelligence.PlayTests.GemUITests.PermanentOffersAndCapsulesAreReachableExactlyOnceAndSaved",
+    "IdleIntelligence.PlayTests.GemUITests.UnavailableCapsuleVideoDoesNotSpendQuotaOrGrant",
+    "IdleIntelligence.PlayTests.MarketUITests.FailedMarketSaveRestoresDebitStockAndItemReceipt",
+    "IdleIntelligence.PlayTests.MarketUITests.FreePaidMaterialsAndDailyItemUseAtomicTicketsAndActualPortraits",
+    "IdleIntelligence.PlayTests.MarketUITests.NativeShopfrontMakesChestsMaterialsAndGumballDirectlyReachable",
+    "IdleIntelligence.PlayTests.MarketUITests.UnavailableProviderOffersNoActionAndDoesNotGrantOrConsumeLimits",
+    "IdleIntelligence.PlayTests.NavigationFlowTests.RealRoutesUnlocksResearchAndReload",
+    "IdleIntelligence.PlayTests.PurchaseUITests.FailedVerifiedGrantSaveRollsBackAllConsumablesAndPermanentRights",
+    "IdleIntelligence.PlayTests.PurchaseUITests.UnavailableStoreCatalogDoesNotOfferRestoreOrInventPricesReceiptsOrRights",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.IllustratedForgeAndBorderlessChestsFitBothLanguagesAndAllWidths",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.LeftHomeLinkOpensTheActualAdFreeOfferWithoutInventingPurchaseRights",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.ShopCurrencyArtAndProductsStayInsideWhileResizingTheSameShop",
+    "IdleIntelligence.PlayTests.UnifiedPresentationTests.TinyHomeLinksFitBothEdgesAndNeverDrawOrSpendOnNavigation"
+  ],
+  "macOSBuild": [
+    "Succeeded",
+    "Target: StandaloneOSX",
+    "Size: 250599719",
+    "Duration: 00:00:10.9863060"
+  ],
+  "coverage": [
+    "30x36 machine art inside transparent 44x52 touch region",
+    "No home price or direct draw button",
+    "Left ad-free link focuses actual existing offer",
+    "No gem debit, capsule draw or purchase rights granted by navigation",
+    "Real raycasts; center action remains free",
+    "One-line DE/EN captions at four phone resolutions including 320x568"
+  ],
+  "sourceHashes": {
+    "Assets/IdleIntelligence/Runtime/LaboratoryView.cs": "18f8442f8a33f26c5e2b7a43babadae268275fccca3734ad7c61990a8ce9ec4b",
+    "Assets/IdleIntelligence/Runtime/CompactGlyph.cs": "850ecefcaf5f74cd3ce5ebc868ea807082847cdda13db4f0b9a9b8cb0927667e",
+    "Assets/IdleIntelligence/Runtime/ShopHub.cs": "6b9ab019be24c10de7dcab07e7a166e879ab47d2374ce10b87e13a02c87a2174",
+    "Assets/IdleIntelligence/Runtime/NativeStoreView.cs": "756cc0ab31ea1e0809110205fe9c82a317ceb09573d4344ddf2bcc84c7370f28",
+    "Assets/IdleIntelligence/Tests/PlayMode/UnifiedPresentationTests.cs": "650a654e18d989aee9b70b6e129443137b6125dabbbb50d72a667dda73605ec3"
+  },
+  "screenshots": {
+    "home-tiny-links-de-320-short.png": "81fa4ad77922e5347dd8e46cd28a04e662bed4405aaa2487d4b8ef19b8e22d54",
+    "home-adfree-destination-de-390.png": "b3ed2e3b892e5e48002725f758fbc47ea511c34ad0acf61e02a78310f2d5f881",
+    "home-tiny-links-en-320-short.png": "90113fbe4f6a4d82f166342a8656f6213afc50a818c48c1168a25aefbe125b5d",
+    "home-tiny-links-de-390.png": "647e9299a218092c33888e4f236fc99f8c03dc10dc08e4b59a2218d509d5b1e5",
+    "home-tiny-links-en-320.png": "fb3f6053440498d31f3f6e7b8ae42851411f9fc69bffadc6f2c93925a8b8149b",
+    "home-tiny-links-de-430.png": "3be4d6946ce7b112567c2e42e76441dbb7db556b75213259900f05e805b61130",
+    "home-tiny-links-en-430.png": "5d59ec93a9dfc0ac00b65063fd24097a527217abf8e0c879da4fca391916b0ef",
+    "home-tiny-links-en-390.png": "0653a6b3bdc776b8908de052545d22d068daaf95ed5c9a9ded226c74dc411d3e",
+    "home-tiny-links-de-320.png": "4a240cb67752914394b3468aa97075c6bd6cccf381b4abf48c0647e9d2913750"
+  },
+  "limitations": [
+    "Real-money store adapter/verifier remains unavailable; no SDK integration or fake checkout",
+    "Earlier full test counts are historical; this follow-up validates 14 affected PlayMode tests",
+    "No new commit/push/PR or publication attempted"
+  ]
+}

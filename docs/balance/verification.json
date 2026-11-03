@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-03",
+  "scope": "First native V3 data-cost calibration; no endgame acceptance claimed",
+  "editMode": {
+    "id": "2",
+    "testcasecount": "248",
+    "result": "Passed",
+    "total": "248",
+    "passed": "248",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-03 10:26:07Z",
+    "end-time": "2026-11-03 10:30:05Z",
+    "duration": "238.6560036"
+  },
+  "playMode": {
+    "id": "2",
+    "testcasecount": "3",
+    "result": "Passed",
+    "total": "3",
+    "passed": "3",
+    "failed": "0",
+    "inconclusive": "0",
+    "skipped": "0",
+    "asserts": "0",
+    "engine-version": "3.5.0.0",
+    "clr-version": "4.0.30319.42000",
+    "start-time": "2026-11-03 10:30:34Z",
+    "end-time": "2026-11-03 10:30:52Z",
+    "duration": "17.5569582"
+  },
+  "nativeContracts": [
+    "Six native recipes and paid research",
+    "Twelve item combination contracts",
+    "60 prestige and 24 axiom rate contracts",
+    "Telemetry consent and live-ops UTC contracts"
+  ],
+  "simulation": {
+    "minutes": 120,
+    "snapshots": 13,
+    "seed": "native-v3-balance-baseline",
+    "currencyOrItemsInjected": false,
+    "craftingOrPrestigeBot": false
+  },
+  "sha256": {
+    "Assets/IdleIntelligence/Core/EconomyBalance.cs": "6bf6ca38c14d23bf423d395bff545bfb314fdb92b54c790aa073925a1874c92d",
+    "Assets/IdleIntelligence/Core/Game.cs": "762cc32b27d0845dc5341cde571d62f1d41881fe95f4500ca19e23a2abbaae8b",
+    "Assets/IdleIntelligence/Core/Workshop.cs": "1d2b6080c1304810acae3ce7b3328db0372c6b9940fa81495dda63ca70770b5c",
+    "docs/balance/before.csv": "db5042200317fead65f41b0408c69b90ccec37e6703cf099712fa5fca8cb13b7",
+    "docs/balance/after.csv": "3cb7363391339cea8eb4ff74301b575a8299ebb2790bce326f4b677c250365e1"
+  },
+  "localRawEvidence": "unity-acceptance/balance-20261103",
+  "build": {
+    "result": "Succeeded",
+    "platform": "StandaloneOSX",
+    "localReport": "unity-acceptance/balance-20261103/IdleIntelligence.app.report.txt",
+    "report": "Succeeded\nTarget: StandaloneOSX\nSize: 250603719\nDuration: 00:00:12.9995520\n"
+  }
+}

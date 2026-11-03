@@ -55,7 +55,7 @@ namespace IdleIntelligence.Runtime
                 int index=i;var m=MetaBalance.Models[i];bool owned=s.Meta.models[i]>=0,active=s.Workshop.activeModel==m.Id;
                 var panel=WorkshopUIFactory.Vertical("model-"+m.Id,rows);panel.AddComponent<NaturalPanel>();var layout=panel.GetComponent<VerticalLayoutGroup>();layout.padding=new RectOffset(8,8,6,6);layout.spacing=3;
                 GameTheme.SurfaceOn(panel.AddComponent<Image>(),GameTheme.Surface);panel.GetComponent<Image>().raycastTarget=false;
-                var head=WorkshopUIFactory.Horizontal("ModelHeader",panel.transform,96);head.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight=false;head.GetComponent<HorizontalLayoutGroup>().childAlignment=TextAnchor.MiddleLeft;var art=WorkshopUIFactory.Node("ModelArt",head.transform,typeof(Image));WorkshopUIFactory.Size(art,64);var artSize=art.GetComponent<LayoutElement>();artSize.minWidth=artSize.preferredWidth=64;artSize.flexibleWidth=0;var image=art.GetComponent<Image>();image.sprite=ModelArt;image.preserveAspect=true;image.raycastTarget=false;image.color=owned?Color.white:new Color(1,1,1,.3f);
+                var head=WorkshopUIFactory.Horizontal("ModelHeader",panel.transform,96);head.GetComponent<LayoutElement>().minHeight=64;head.GetComponent<LayoutElement>().preferredHeight=-1;head.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;head.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight=false;head.GetComponent<HorizontalLayoutGroup>().childAlignment=TextAnchor.MiddleLeft;var art=WorkshopUIFactory.Node("ModelArt",head.transform,typeof(Image));WorkshopUIFactory.Size(art,64);var artSize=art.GetComponent<LayoutElement>();artSize.minWidth=artSize.preferredWidth=64;artSize.flexibleWidth=0;var image=art.GetComponent<Image>();image.sprite=ModelArt;image.preserveAspect=true;image.raycastTarget=false;image.color=owned?Color.white:new Color(1,1,1,.3f);
                 var text=WorkshopUIFactory.Vertical("ModelSummary",head.transform);text.AddComponent<LayoutElement>().flexibleWidth=1;
                 var title=Label("ModelTitle",text.transform,T(m.Name)+(active?" · ✓":""),16);title.font=GameTheme.Bold;title.color=active?GameTheme.Accent:GameTheme.Text;
                 Label("ModelLevel",text.transform,owned?"Lv. "+s.Meta.models[i]+" / "+MetaRules.ModelLimit(s):T("Noch unbekannt"),12);
@@ -68,9 +68,9 @@ namespace IdleIntelligence.Runtime
                 }
                 if(owned)
                 {
-                    var actions=WorkshopUIFactory.Horizontal("ModelActions",panel.transform,44);
-                    var choose=WorkshopUIFactory.Button("Select-"+m.Id,actions.transform,active?T("Aktiv"):T("Aktivieren"),()=>game.Act(v=>MetaRules.Select(v,m.Id),"model-select"));choose.interactable=game.Writable&&!ChallengeRules.Active(s)&&!active;GameTheme.CompactAction(choose,false);
-                    upgrades[i]=WorkshopUIFactory.Button("Upgrade-"+m.Id,actions.transform,T("Level erhöhen")+" · "+N(MetaRules.UpgradeCost(s,index))+" "+T("Erkenntnis"),()=>game.Act(v=>MetaRules.Upgrade(v,m.Id),"model-upgrade"));GameTheme.ButtonStyle(upgrades[i],true);
+                    var actions=WorkshopUIFactory.Horizontal("ModelActions",panel.transform,44);actions.GetComponent<HorizontalLayoutGroup>().childForceExpandWidth=false;
+                    var choose=WorkshopUIFactory.Button("Select-"+m.Id,actions.transform,active?T("Aktiv"):T("Aktivieren"),()=>game.Act(v=>MetaRules.Select(v,m.Id),"model-select"));choose.interactable=game.Writable&&!ChallengeRules.Active(s)&&!active;GameTheme.CompactAction(choose,false);var chooseSize=choose.GetComponent<LayoutElement>();chooseSize.minWidth=chooseSize.preferredWidth=88;chooseSize.flexibleWidth=0;
+                    upgrades[i]=WorkshopUIFactory.Button("Upgrade-"+m.Id,actions.transform,T("Level erhöhen")+" · "+N(MetaRules.UpgradeCost(s,index))+" "+T("Erkenntnis"),()=>game.Act(v=>MetaRules.Upgrade(v,m.Id),"model-upgrade"));GameTheme.ButtonStyle(upgrades[i],true);var upgradeSize=upgrades[i].GetComponent<LayoutElement>();upgradeSize.minWidth=44;upgradeSize.preferredWidth=0;upgradeSize.flexibleWidth=1;
                 }
             }
         }

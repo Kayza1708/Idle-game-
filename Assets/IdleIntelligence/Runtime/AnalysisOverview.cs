@@ -8,21 +8,21 @@ namespace IdleIntelligence.Runtime
  // Persistent controls: progress, prices and stock update without recreating the hierarchy.
  public sealed class AnalysisOverview:MonoBehaviour
  {
-  readonly Button[] help=new Button[3];GameObject helpRow;RectTransform progress;GameRuntime game;Text title,status,limit,receipt;Button cancel,repeat,recipe;readonly Button[] starts=new Button[ItemBalance.Analyses.Length],queued=new Button[(int)IndustryBalance.AnalysisQueueCapacity];readonly Text[] yields=new Text[ItemBalance.Analyses.Length/2];readonly Text[] received=new Text[ItemBalance.ComponentIds.Length];GameState observed;float statusWidth=-1;string statusValue;
+  readonly Button[] help=new Button[3];GameObject helpRow;RectTransform progress;GameRuntime game;Text title,status,limit,receipt;Button cancel,repeat,recipe;readonly Button[] starts=new Button[ItemBalance.Analyses.Length],queued=new Button[(int)IndustryBalance.AnalysisQueueCapacity];readonly Text[] yields=new Text[ItemBalance.Analyses.Length/2];readonly Text[] received=new Text[ItemBalance.ComponentIds.Length];GameState observed;
   static void Set(Text text,string value){if(text.text!=value)text.text=value;}
   static string W(string lang,params string[] text){int n=Array.IndexOf(new[]{"de","en","es","fr","pt","it","pl"},lang);return text[Math.Max(0,n)];}
   string T(params string[] text)=>W(game.State.Settings.language,text);
   public void Initialize(WorkshopUI owner,GameRuntime runtime)
   {
    game=runtime;helpRow=WorkshopUIFactory.Horizontal("AnalysisMiraHelp",transform,44);string[] guides={"analysis-queue","analysis-repeat","analysis-budget"};for(int i=0;i<help.Length;i++){string id=guides[i];help[i]=WorkshopUIFactory.Button("AnalysisGuide-"+id,helpRow.transform,"",()=>Run(v=>NarrativeBridge.Action(v,"guide",id)));GameTheme.CompactAction(help[i],false);}title=WorkshopUIFactory.Label("AnalysisTitle",transform,"",18,30);
-   status=WorkshopUIFactory.Label("AnalysisStatus",transform,"",14,52);
+   status=WorkshopUIFactory.Label("AnalysisStatus",transform,"",14,52);status.GetComponent<LayoutElement>().preferredHeight=-1;
    var rail=WorkshopUIFactory.Node("AnalysisProgress",transform,typeof(Image));rail.GetComponent<Image>().color=GameTheme.Raised;rail.GetComponent<Image>().raycastTarget=false;WorkshopUIFactory.Size(rail,6);var fill=WorkshopUIFactory.Node("Fill",rail.transform,typeof(Image));fill.GetComponent<Image>().color=GameTheme.Accent;fill.GetComponent<Image>().raycastTarget=false;progress=(RectTransform)fill.transform;WorkshopUIFactory.Fill(progress);
    cancel=WorkshopUIFactory.Button("CancelAnalysis",transform,"",()=>Run(MaterialAnalysis.Cancel));
    for(int family=0;family<yields.Length;family++)
    {
     int f=family;var card=WorkshopUIFactory.Vertical("AnalysisFamily"+family,transform);var header=WorkshopUIFactory.Horizontal("Heading",card.transform,44);
     var art=WorkshopUIFactory.Node("Art",header.transform,typeof(Image),typeof(LayoutElement));art.GetComponent<Image>().sprite=owner.ComponentSprites[new[]{0,2,9}[family]];art.GetComponent<Image>().preserveAspect=true;art.GetComponent<Image>().raycastTarget=false;var size=art.GetComponent<LayoutElement>();size.minWidth=size.preferredWidth=36;size.flexibleWidth=0;
-    yields[family]=WorkshopUIFactory.Label("AnalysisYield"+family,header.transform,"",13,44);
+    yields[family]=WorkshopUIFactory.Label("AnalysisYield"+family,header.transform,"",13,44);yields[family].GetComponent<LayoutElement>().preferredHeight=-1;
     var actions=WorkshopUIFactory.Horizontal("Durations",card.transform,54);
     for(int length=0;length<2;length++){int n=f*2+length;starts[n]=WorkshopUIFactory.Button("analysis-"+ItemBalance.Analyses[n].Id,actions.transform,"",()=>{Run(v=>v.Workshop.hasAnalysis||v.Industry.synthesis!=null?MaterialAnalysis.Queue(v,n):MaterialAnalysis.Start(v,n));});starts[n].GetComponentInChildren<Text>().fontSize=12;GameTheme.ButtonStyle(starts[n],true);}
    }
@@ -37,7 +37,6 @@ namespace IdleIntelligence.Runtime
   }
   void Run(Func<GameState,GameState> action){game.Act(action);Refresh();}
   void Update()=>Refresh();
-  void LateUpdate(){if(status==null||status.rectTransform.rect.width<=0||statusWidth==status.rectTransform.rect.width&&statusValue==status.text)return;statusWidth=status.rectTransform.rect.width;statusValue=status.text;var size=status.GetComponent<LayoutElement>();float height=Math.Max(52,Mathf.Ceil(status.preferredHeight)+4);if(size.preferredHeight!=height)size.minHeight=size.preferredHeight=height;}
   public void Refresh()
   {
    if(game?.State==null||ReferenceEquals(observed,game.State))return;observed=game.State;var s=game.State;bool queueHelp=PrestigeRules.Has(s,"F02"),repeatHelp=MaterialAnalysis.RepeatUnlocked(s);helpRow.SetActive(queueHelp||repeatHelp);string[] helpWords={"Planung","Wiederholung","Offline"};for(int i=0;i<help.Length;i++){help[i].gameObject.SetActive(i==0?queueHelp:i==1?repeatHelp:queueHelp||repeatHelp);help[i].interactable=game.Writable&&s.Story.open==null;help[i].GetComponentInChildren<Text>().text="Mira · "+UiLocalizedText.Translate(helpWords[i],s.Settings.language);}var w=s.Workshop;string lang=s.Settings.language;string[] names={T("Hardwareanalyse","Hardware analysis","Análisis de hardware","Analyse matérielle","Análise de hardware","Analisi hardware","Analiza sprzętu"),T("Architekturstudie","Architecture study","Estudio de arquitectura","Étude d’architecture","Estudo de arquitetura","Studio di architettura","Badanie architektury"),T("Artefaktsuche","Artifact search","Búsqueda de artefactos","Recherche d’artefacts","Busca de artefatos","Ricerca artefatti","Poszukiwanie artefaktów")};
