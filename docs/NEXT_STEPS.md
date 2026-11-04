@@ -77,3 +77,8 @@ UI-Überarbeitung auf Unity-only main übertragen. [Prüfbericht](unity-mobile-u
 
 - [x] Sichtbarer Cyan–Violett–Pink-Verlauf, umlaufende Energie und pulsierender Profil-Core umgesetzt; reduzierte Bewegung berücksichtigt.
 - [x] 6/6 gezielte PlayMode-Tests, finale Bildprüfung und lokaler macOS-Build erfolgreich. [Animation und Nachweis](vivid-animation.md).
+
+## Animiertes Ringmaterial · 2026-11-04
+
+- [x] Außenring mit eigener fließender violetter Shader-Oberfläche statt Orbit-Linien umgesetzt; Core und Profilname bleiben unverändert.
+- [x] 6/6 gezielte Unity-Tests einschließlich echtem Pixelvergleich und aktueller Bildprüfung bestanden. [Demo und Prüfbericht](dark-matter-ring.md).
