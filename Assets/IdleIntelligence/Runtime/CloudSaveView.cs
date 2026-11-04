@@ -15,8 +15,8 @@ namespace IdleIntelligence.Runtime
         public void Initialize(GameRuntime runtime)
         {
             game=runtime;service=game.GetComponentInChildren<PlatformCloudService>();if(service==null){var root=new GameObject("PlatformCloud");root.transform.SetParent(game.transform);service=root.AddComponent<PlatformCloudService>();}
-            var toggle=WorkshopUIFactory.Button("OpenPlatformCloud",transform,T("Cloud-Backup"),()=>{body.gameObject.SetActive(!body.gameObject.activeSelf);});toggle.transform.SetAsFirstSibling();
-            body=WorkshopUIFactory.Vertical("CloudBackup",transform).transform;body.SetSiblingIndex(1);body.gameObject.SetActive(false);
+            var toggle=WorkshopUIFactory.Button("OpenPlatformCloud",transform,T("Cloud-Backup"),()=>{body.gameObject.SetActive(!body.gameObject.activeSelf);});toggle.transform.SetAsLastSibling();
+            body=WorkshopUIFactory.Vertical("CloudBackup",transform).transform;body.SetAsLastSibling();body.gameObject.SetActive(false);
             Paragraph("CloudHeading","Cloud-Backup").font=GameTheme.Bold;
             Paragraph("CloudExplanation","Apple iCloud auf iOS; Google Play Games auf Android. Lokale Spielstände bleiben unabhängig. Abweichende Stände ausdrücklich wählen, niemals Belohnungen zusammenführen.");
             status=Paragraph("CloudStatus",service.Available?service.Provider:service.Unavailable);

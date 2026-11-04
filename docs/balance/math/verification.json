@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-04",
+  "scope": "Mathematical economy model; inverse recipe pricing, bounded scanner learning, numeric overflow protection",
+  "tests": {
+    "edit-intermediate": {
+      "result": "Passed",
+      "total": "256",
+      "passed": "256",
+      "failed": "0",
+      "duration": "247.8398369"
+    },
+    "edit-final": {
+      "result": "Passed",
+      "total": "257",
+      "passed": "257",
+      "failed": "0",
+      "duration": "240.5312532"
+    },
+    "play-final": {
+      "result": "Passed",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "duration": "25.6340952"
+    }
+  },
+  "native_contracts": "passed against current Unity-compiled Core assembly using bundled Mono",
+  "material_benchmark": {
+    "runs": 9,
+    "samples": [
+      {
+        "item": "darklab-resonator",
+        "seed": "1",
+        "days": "8.65113519883908",
+        "jobs": "342",
+        "data_spent": "10854400",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "darklab-resonator",
+        "seed": "1708",
+        "days": "8.65113519883908",
+        "jobs": "342",
+        "data_spent": "10854400",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "darklab-resonator",
+        "seed": "9157",
+        "days": "8.71534553060263",
+        "jobs": "344",
+        "data_spent": "10950400",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "axiom-anchor",
+        "seed": "1",
+        "days": "10.349174966691496",
+        "jobs": "640",
+        "data_spent": "16608000",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "axiom-anchor",
+        "seed": "1708",
+        "days": "10.316823676048974",
+        "jobs": "638",
+        "data_spent": "16554000",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "axiom-anchor",
+        "seed": "9157",
+        "days": "10.372283031436156",
+        "jobs": "640",
+        "data_spent": "16650000",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "singularity-lens",
+        "seed": "1",
+        "days": "12.058085730806201",
+        "jobs": "534",
+        "data_spent": "25632000",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "singularity-lens",
+        "seed": "1708",
+        "days": "12.018368676439586",
+        "jobs": "532",
+        "data_spent": "25536000",
+        "kind": "prepared_material_only"
+      },
+      {
+        "item": "singularity-lens",
+        "seed": "9157",
+        "days": "12.038227203622894",
+        "jobs": "533",
+        "data_spent": "25584000",
+        "kind": "prepared_material_only"
+      }
+    ],
+    "assumptions": "Prepared legal research/equipment and pre-funded data; zero starting materials. Actual paid start/completion APIs and RNG. Material-slot elapsed time, not a fresh-save campaign or unconditional calendar promise."
+  },
+  "fresh_120_minutes": {
+    "identical_to_previous_balance": true,
+    "claimable_int_at_120": "1"
+  },
+  "build_report": "Succeeded\nTarget: StandaloneOSX\nSize: 250651783\nDuration: 00:00:13.6703480\n",
+  "npm": "Not applicable: Unity-only project has no package.json; previous documented attempts returned ENOENT.",
+  "limits": [
+    "No complete paid multi-axiom campaign",
+    "No guarantee for all seeds, gear sets or offline visit intervals",
+    "No iOS/Android device build"
+  ],
+  "sha256": {
+    ".github/workflows/native-csharp.yml": "75eb2283251ee756497d0a1467dbd7f6196d5650c8a27afdc36dda2ab69d3231",
+    "Assets/IdleIntelligence/Core/EconomyBalance.cs": "f94db7b69c57874233e961a695658cc46592ef0da7804290a2bd974c7b16eb31",
+    "Assets/IdleIntelligence/Core/Game.cs": "14b128012d0dd1e2a57d7d808e520d407766a6ce31f93efdf17e785d82611139",
+    "Assets/IdleIntelligence/Core/ItemSystemV3.cs": "b156182c4608c104def17396d7a0f6fe4d9d98f18b60c104b1a9fefcd69a5466",
+    "Assets/IdleIntelligence/Core/MaterialEffort.cs": "b3f35798ec57f174453a4da88291c4a4ea46bac8bc8b165afbc391d68fbc91ef",
+    "Assets/IdleIntelligence/Runtime/ItemV3ResearchDetails.cs": "b7b7fc1b975a5d3c33d6bab057b884623574b58ba66bc2cb61de3922b417616a",
+    "Assets/IdleIntelligence/Runtime/PolishUiCopy.cs": "7758f4167de128653c445c4360730ebc18b957b71fc148ad3d024b7257f47007",
+    "Assets/IdleIntelligence/Tests/EditMode/EconomyMathTests.cs": "121462482d6e3dec7a9c42a35b59679eb617403765694cc3d92646a16cbb5dcd",
+    "Assets/IdleIntelligence/Tests/EditMode/EconomyBalanceTests.cs": "49cf621e309863d69e70bd7746a4776f167ed976f166a9be791c272908e310ab",
+    "Assets/IdleIntelligence/Tests/EditMode/ItemSystemV3Tests.cs": "938b7bf6baab15d1c499eee726fb549eb5c8eb164acf47244220739ca3f0de56",
+    "Assets/IdleIntelligence/Tests/PlayMode/WorkshopTests.cs": "a4f6908ba1750cb8e5863222620081fdcc808811f43a3b332be7d2f42f3ef021",
+    "NativeChecks/EconomyMathAudit.cs": "afc6726a4934cb2411e41af3639a38c59d8cb2a65be44604aeeac72df3fc2fc1",
+    "NativeChecks/Smoke.cs": "22e17f24a18f5f00e58c0b5f49abc56e6ca5a538554c311bc367bc8ef85a366d",
+    "NativeChecks/UnityCoreCheck.csproj": "f30f263450af5d2b2b058fe6d456b1759f64cd957f8c6512aa31ae929d61e3ac",
+    "docs/balance/math/hardware.csv": "7a0f08ff16690c1fd1fcedbec0a0dd9c4f8a599d568a947c60988473fff88fa7",
+    "docs/balance/math/training.csv": "da32559af7a7c81bb2ad994eac3e83bcfa6d3d55f8c082d9886ffda118fc52e2",
+    "docs/balance/math/seeded-materials.csv": "84b186a3d4fbda5a40e8a779796b711aff18edbecc9ff613695722e824f07012",
+    "docs/balance/math/scanner.csv": "d423835346899b617912fd1348e27c417d95f8241c827137f6aa479c14309499",
+    "docs/balance/math/prestige.csv": "8ec976fd91136ecbc2aae3830a18d85480cd4a07b84ec41d89c854cd5ffd29b8",
+    "docs/balance/math/research.csv": "58920d129a19604a3d5d631a4cdb7415712835c16c48438e83bcb38857765b84",
+    "docs/balance/math/recipe-prices.csv": "4f9b542f86ec4a02e494f5b5db969012e8be9a8d235e80b20254eb7aea40915a",
+    "docs/balance/math/recipes.csv": "37e024c881adf62bb229f83630546f0d119c312ceeedaae8d25083e55276f5f3",
+    "docs/balance/math/fresh-120-minutes.csv": "3cb7363391339cea8eb4ff74301b575a8299ebb2790bce326f4b677c250365e1",
+    "docs/balance/math/exponents.csv": "2bec21169b80051591ab5d38c4896717b33254a290d62e7154180b1c2302ab3a",
+    "docs/media/economy-math/de-320-costs.png": "c58fecd64d97fd03ce91ce4f4e7e5724b1ba59e2fd3549092ea4a81e37fc0b56",
+    "docs/media/economy-math/en-390.png": "36d8135613653a9b216005886cc0293e087826080bc708a2a38e5251e2e59239",
+    "docs/media/economy-math/scanner-cap-de-390.png": "d11ac6448b11b2bc932bc0a2aea3ce88432671283131d33a292b42f7d9590fad"
+  }
+}

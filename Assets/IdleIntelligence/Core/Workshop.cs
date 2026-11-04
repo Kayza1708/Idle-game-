@@ -80,7 +80,7 @@ namespace IdleIntelligence.Core
         {int n=Index(id);if(LearnBlock(state,n)!=null)return state;var s=state.Copy();s.Workshop.fragments-=ItemBalance.Items[n].BlueprintPrice;s.Workshop.learned[n]=true;LocalJournal.Record(s,"blueprint-learn",permanent:true);return Changed(s);}
         public static CraftQuote Quote(GameState s,string type)
         {
-            int n=Index(type);if(n<0)return new CraftQuote{Reason="Unbekannt"};var d=ItemBalance.Items[n];var w=s.Workshop;var q=new CraftQuote{Components=(double[])d.Components[w.mastery[n]].Clone(),Modules=(double[])d.ModuleCosts.Clone(),Data=EconomyBalance.CraftData(ItemSystemV3.Enabled(s),d.Data,d.Starter),Revision=w.revision};
+            int n=Index(type);if(n<0)return new CraftQuote{Reason="Unbekannt"};var d=ItemBalance.Items[n];var w=s.Workshop;var q=new CraftQuote{Components=EconomyBalance.CraftComponents(ItemSystemV3.Enabled(s),d,w.mastery[n]),Modules=(double[])d.ModuleCosts.Clone(),Data=EconomyBalance.CraftData(ItemSystemV3.Enabled(s),d.Data,d.Starter),Revision=w.revision};
             q.Reason=!Prerequisite(s,n)?(d.Access=="axiom"?"Erster Axiomzyklus und Forschung: Baupläne":d.Access=="model-set"?"Drei KI-Modelle im Geheimlabor und Forschung: Baupläne":d.Access=="lab"?"Geheimlabor und Forschung: Baupläne":"Forschung: Baupläne"):!w.learned[n]?"Bauplan lernen":!Stock(w.nextId+2)?"ID-Grenze":s.Data.CompareTo(ScientificNumber.From(q.Data))<0?"Zu wenig Daten":null;
             for(int c=0;c<q.Components.Length;c++)if(q.Reason==null&&w.components[c]<q.Components[c])q.Reason="Fehlt: "+ItemBalance.ComponentNames[c];
             for(int c=0;c<q.Modules.Length;c++)if(q.Reason==null&&w.modules[c]<q.Modules[c])q.Reason="Fehlt: "+ItemBalance.Modules[c].Name;

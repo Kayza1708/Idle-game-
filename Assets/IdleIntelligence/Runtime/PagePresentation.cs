@@ -41,6 +41,7 @@ namespace IdleIntelligence.Runtime
                 if(image.sprite!=GameTheme.Steel||!Page(image.transform)||Network(image.transform))continue;
                 image.sprite=null;image.type=Image.Type.Simple;
                 image.color=image.name.EndsWith("Panel")?GameTheme.Background:image.GetComponent<InputField>()!=null?GameTheme.Raised:Color.clear;
+                if(image.name.EndsWith("Panel"))FlowAccent.Attach(image.transform,game,FlowAccent.Contour.Window,GameTheme.Accent,null,false);
             }
             foreach(var button in GetComponentsInChildren<Button>(true))
             {
@@ -53,6 +54,14 @@ namespace IdleIntelligence.Runtime
             }
             foreach(var card in GetComponentsInChildren<ActionCard>(true))
                 if(Page(card.transform)&&card.GetComponent<LearningCard>()==null)StorefrontUI.FitWidth(card.transform);
+            foreach(var title in GetComponentsInChildren<Text>(true))
+            {
+                if(!Page(title.transform)||Network(title.transform)||title.GetComponentInParent<ActionCard>()!=null||title.fontSize<18||!(title.name.EndsWith("Title")||title.name.EndsWith("Header")))continue;
+                bool covered=true;foreach(char c in title.text)if(!char.IsWhiteSpace(c)&&!GameTheme.Display.HasCharacter(c)){covered=false;break;}
+                if(covered)title.font=GameTheme.Display;
+                title.resizeTextForBestFit=true;title.resizeTextMinSize=12;title.resizeTextMaxSize=title.fontSize;
+                FlowAccent.Attach(title.transform,game,FlowAccent.Contour.Rail,GameTheme.Accent,null,false);
+            }
             generation=PerformanceMarkers.UiNodes;
         }
     }

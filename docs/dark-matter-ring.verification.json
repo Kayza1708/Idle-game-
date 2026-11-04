@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-04",
+  "tests": {
+    "result": "Passed",
+    "total": "6",
+    "passed": "6",
+    "failed": "0",
+    "duration": "26.6818811"
+  },
+  "rendered_checks": {
+    "changed_outer_pixels": ">80",
+    "changed_central_40x40_pixels": 0,
+    "core_scale_color_and_name_color": "unchanged"
+  },
+  "build": {
+    "target": "StandaloneOSX",
+    "result": "Succeeded",
+    "bytes": 250632647
+  },
+  "sha256": {
+    "Assets/IdleIntelligence/Runtime/FlowAccent.cs": "e19c1b85a409b5467b4ee2b037b958d5cb06c1bb12a2761f839cd591d4ab8c3c",
+    "Assets/IdleIntelligence/Tests/PlayMode/ReleasePresentationTests.cs": "5b4338b9ca871c6313842a5630133ab77fd2298af18cc9b68ddf9b940d526931",
+    "Assets/IdleIntelligence/Resources/PixelUI/DarkMatterRing.mat": "c07e06ceff17690b581211da6b6df3971ccfce87f50230ebfe06f8a1491bac7b",
+    "Assets/IdleIntelligence/Resources/PixelUI/DarkMatterRing.shader": "2950814d7718ebad5d7c775832f8a1ed9e82cc407eba053f74cf9be5fe2e0b28",
+    "Assets/IdleIntelligence/Resources/PixelUI/DarkMatterRing.shader.meta": "903fb7318802f3848e7b72565175e8f356ab04dff121a3c78e6d4df73318c1f5",
+    "Assets/IdleIntelligence/Resources/PixelUI/DarkMatterRing.mat.meta": "daa48682452e909b52573111728f039e767742e8a2a1840d06c36e5e0b447e2a",
+    "docs/media/dark-matter-ring/profile.gif": "d71b4308a19dc12088ccc53fa62e42393f67c6481693d06d3a10732f3bfc9e71",
+    "docs/media/dark-matter-ring/profile.png": "f83d61945bd85721be5ac71825cb94d84fa7a57ecfaa70499ab794bf6eeb78e2"
+  }
+}

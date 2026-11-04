@@ -34,3 +34,9 @@ jobs:
         run: dotnet run --project NativeChecks/UnityCoreCheck.csproj --configuration Release
       - name: Run deterministic native progression simulation
         run: dotnet run --project NativeChecks/UnityCoreCheck.csproj --configuration Release -- --balance
+      - name: Audit mathematical economy and seeded material pacing
+        run: dotnet run --project NativeChecks/UnityCoreCheck.csproj --configuration Release -- --math
+      - uses: actions/upload-artifact@v4
+        with:
+          name: economy-math-audit
+          path: NativeChecks/out/math/*.csv

@@ -10,10 +10,10 @@ namespace IdleIntelligence.Runtime
  {
   string N(double value)=>NumberFormatting.Format(ScientificNumber.From(value),game.State.Settings.numberFormat,game.State.Settings.language);
   bool De=>game.State.Settings.language=="de";
-  GameRuntime game;Transform content;Text header;string page="profile";readonly List<Action> refresh=new List<Action>();
+  GameRuntime game;Transform content;Text header;string page="profile";bool editOpen,mailOpen;readonly List<Action> refresh=new List<Action>();
   public void Initialize(GameRuntime runtime)
   {
-   game=runtime;header=WorkshopUIFactory.Label("ProfileWallet",transform,"",17,72);
+   game=runtime;header=WorkshopUIFactory.Label("ProfileWallet",transform,"",14,54);
    var nav=WorkshopUIFactory.Vertical("RetentionNavigation",transform).transform;
    var first=WorkshopUIFactory.Horizontal("RetentionPrimary",nav,48).transform;
    var second=WorkshopUIFactory.Horizontal("RetentionSecondary",nav,48).transform;
@@ -25,15 +25,18 @@ namespace IdleIntelligence.Runtime
    WorkshopUIFactory.Button("ShowStaticChallenges",second,de?"Langzeitziele":"Long-term goals",()=>Show("challenges"));
    content=WorkshopUIFactory.Vertical("RetentionContent",transform).transform;Build();
   }
-  void Show(string next){page=next;Build();}
-  void Update(){if(game==null)return;header.text=game.State.Retention.playerName+"\n"+game.State.Retention.gems+" Gems · "+game.State.Retention.points+" AP · "+game.State.Challenges.Progress.stars+(De?" Sterne":" stars")+(ChallengeRules.Active(game.State)?(De?"\nChallenge-Labor · Hauptspiel pausiert":"\nChallenge lab · main game paused"):"");foreach(var update in refresh)update();}
-  Text Paragraph(string name,string text,int size=14)
-  {var label=WorkshopUIFactory.Label(name,content,text,size,72);label.alignment=TextAnchor.UpperLeft;label.GetComponent<LayoutElement>().preferredHeight=Math.Max(54,label.cachedTextGenerator.GetPreferredHeight(text,label.GetGenerationSettings(new Vector2(Math.Max(220,((RectTransform)transform).rect.width-20),0)))/label.pixelsPerUnit+16);return label;}
+  void Show(string next){page=next;editOpen=mailOpen=false;Build();}
+  void Update(){if(game==null)return;header.text=N(game.State.Retention.gems)+" Gems · "+N(game.State.Retention.points)+" AP · "+N(game.State.Challenges.Progress.stars)+(De?" Sterne":" stars")+(ChallengeRules.Active(game.State)?(De?"\nChallenge-Labor · Hauptspiel pausiert":"\nChallenge lab · main game paused"):"");foreach(var update in refresh)update();}
+  Text Paragraph(string name,string text,int size=14,Transform parent=null)
+  {var label=WorkshopUIFactory.Label(name,parent??content,text,size,72);label.alignment=TextAnchor.UpperLeft;label.GetComponent<LayoutElement>().preferredHeight=Math.Max(54,label.cachedTextGenerator.GetPreferredHeight(text,label.GetGenerationSettings(new Vector2(Math.Max(220,((RectTransform)transform).rect.width-20),0)))/label.pixelsPerUnit+16);return label;}
   ActionCard Card(string name,string title,Action action)
   {var c=Instantiate(game.CardPrefab,content);c.gameObject.name=name;c.Title.text=title;c.Icon.gameObject.SetActive(false);c.GetComponent<LayoutElement>().preferredHeight=180;c.Title.fontSize=16;c.Detail.fontSize=14;c.Button.onClick.AddListener(()=>action());return c;}
   void Build()
   {
    WorkshopUIFactory.Clear(content);refresh.Clear();var s=game.State;
+   string selected=page=="licenses"?"profile":page;
+   string[] tabNames={"ShowProfile","ShowBadges","ShowAchievements","ShowOnboarding","ShowStaticChallenges"};string[] tabPages={"profile","badges","achievements","onboarding","challenges"};
+   for(int n=0;n<tabNames.Length;n++){var tab=GetComponentsInChildren<Button>().FirstOrDefault(b=>b.name==tabNames[n]);if(tab==null)continue;bool active=selected==tabPages[n];tab.GetComponentInChildren<Text>().color=active?GameTheme.Accent:GameTheme.Muted;FlowAccent.Attach(tab.transform,game,FlowAccent.Contour.Rail,GameTheme.Accent,null,false).gameObject.SetActive(active);}
    if(page=="licenses")
    {foreach(string name in new[]{"NameModerationNotice","NameModerationLicense","UnicodeLicense"}){var data=Resources.Load<TextAsset>("Licenses/"+name);if(data==null)throw new InvalidOperationException("Missing shipped license: "+name);int index=0;for(int start=0;start<data.text.Length;start+=2500)Paragraph("License-"+name+"-"+index++,data.text.Substring(start,Math.Min(2500,data.text.Length-start)));}return;}
    if(page=="achievements")
@@ -48,13 +51,18 @@ namespace IdleIntelligence.Runtime
    if(page=="challenges")
    {foreach(var c in RetentionBalance.Challenges){var card=Card("StaticChallenge-"+c.Id,c.Name,()=>{if(game.Act(v=>RetentionRules.StaticChallenge(v,c.Id),"claim"))Build();});var claimNotice=ClaimNotice.Attach(card.Button.transform);refresh.Add(()=>{bool claimed=game.State.Retention.challengeClaims.Contains(c.Id);card.Detail.text=c.Description+"\n"+c.Stars+" Sterne · "+(claimed?"Abgeholt":RetentionRules.StaticReady(game.State,c.Id)?"Abholen":"Ziel noch offen");card.Button.interactable=game.Writable&&RetentionRules.StaticReady(game.State,c.Id);claimNotice.SetActive(card.Button.interactable);});}return;}
    ProfileIdentity(s);
-   Paragraph("ProfileSummary",(De?"Spieler: ":"Player: ")+s.Retention.playerName+"\n"+(De?"KI: ":"AI: ")+(string.IsNullOrEmpty(s.Retention.aiName)?(De?"Noch unbenannt":"Not named yet"):s.Retention.aiName)+"\n"+(De?"Artefakte: ":"Artifacts: ")+s.Retention.artifacts.Length+(De?" · abgeschlossene Seasons: ":" · completed seasons: ")+s.Retention.completedSeasons.Length);
-   WorkshopUIFactory.Button("ShowNameLicenses",content,"Namensfilter · Quellen und Lizenzen",()=>Show("licenses"));
+   ProfileStats(s);
    LocalBadgeShowcase(s);
-   NameInput(false);if(string.IsNullOrEmpty(s.Retention.aiName))NameInput(true);
-   Paragraph("MailboxTitle","POSTFACH",17);if(s.Retention.inbox.Length==0)Paragraph("EmptyMailbox","Keine Nachrichten vorhanden.");
-   foreach(var message in s.Retention.inbox)
-   {Paragraph("Message-"+message.id,message.title+"\n"+message.body);bool read=s.Retention.readMessages.Contains(message.id);var b=WorkshopUIFactory.Button("Read-"+message.id,content,read?"Gelesen":"Als gelesen markieren",()=>{if(game.Act(v=>RetentionRules.ReadMessage(v,message.id)))Build();});b.interactable=game.Writable&&!read;}
+   var edit=WorkshopUIFactory.Button("ProfileEdit",content,De?"Profil bearbeiten":"Edit profile",()=>{editOpen=!editOpen;Build();});
+   edit.GetComponentInChildren<Text>().color=editOpen?GameTheme.Accent:GameTheme.Text;
+   if(editOpen){var fields=WorkshopUIFactory.Vertical("ProfileEditFields",content).transform;NameInput(false,fields);if(string.IsNullOrEmpty(s.Retention.aiName))NameInput(true,fields);}
+   int unread=s.Retention.inbox.Count(message=>!s.Retention.readMessages.Contains(message.id));
+   WorkshopUIFactory.Button("ProfileMailbox",content,(De?"Postfach":"Mailbox")+" · "+unread+(De?" ungelesen":" unread"),()=>{mailOpen=!mailOpen;Build();});
+   if(mailOpen){
+    if(s.Retention.inbox.Length==0)Paragraph("EmptyMailbox",De?"Alles gelesen. Neue Nachrichten findest du hier.":"All caught up. New messages will appear here.");
+    foreach(var message in s.Retention.inbox){Paragraph("Message-"+message.id,message.title+"\n"+message.body);bool read=s.Retention.readMessages.Contains(message.id);var b=WorkshopUIFactory.Button("Read-"+message.id,content,read?(De?"Gelesen":"Read"):(De?"Als gelesen markieren":"Mark as read"),()=>{if(game.Act(v=>RetentionRules.ReadMessage(v,message.id)))Build();});b.interactable=game.Writable&&!read;}
+   }
+   WorkshopUIFactory.Button("ShowNameLicenses",content,De?"Namensregeln & Quellen":"Name policy & credits",()=>Show("licenses"));
   }
 
   // Local Achievement art is intentionally separate from server-verified Company badges.
@@ -77,19 +85,29 @@ namespace IdleIntelligence.Runtime
   static string TierLabel(int tier)=>tier>=3?"Gold":tier==2?"Silber":"Bronze";
   void ProfileIdentity(GameState s)
   {
-    var row=WorkshopUIFactory.Horizontal("ProfileIdentity",content,108);
+    var row=WorkshopUIFactory.Horizontal("ProfileIdentity",content,124);row.GetComponent<HorizontalLayoutGroup>().childForceExpandHeight=false;row.GetComponent<HorizontalLayoutGroup>().childAlignment=TextAnchor.MiddleLeft;
     var holder=WorkshopUIFactory.Node("ProfilePortrait",row.transform,typeof(Image));
-    var icon=holder.GetComponent<Image>();
-    icon.sprite=ProfileBadgeSprite.Get("achievement",1);
-    icon.preserveAspect=true;icon.raycastTarget=false;
-    var layout=holder.AddComponent<LayoutElement>();layout.minWidth=108;layout.preferredWidth=108;layout.preferredHeight=108;
-    var frame=WorkshopUIFactory.Node("ProfileFrame",holder.transform,typeof(Image)).GetComponent<Image>();
-    WorkshopUIFactory.Fill(frame.rectTransform);
-    frame.sprite=ProfileFrameSprite.Get("basic");
-    frame.preserveAspect=true;frame.raycastTarget=false;
-    var label=WorkshopUIFactory.Label("ProfileIdentityText",row.transform,
-      s.Retention.playerName+(De?"\nSpielerprofil · lokal\n":"\nPlayer profile · local\n")+s.Retention.achievementClaims.Length+(De?" erhaltene Achievement-Stufen":" claimed achievement tiers"),16,108);
-    label.alignment=TextAnchor.MiddleLeft;
+    var icon=holder.GetComponent<Image>();icon.color=Color.clear;icon.raycastTarget=false;
+    var layout=holder.AddComponent<LayoutElement>();layout.minWidth=layout.preferredWidth=96;layout.minHeight=layout.preferredHeight=96;layout.flexibleWidth=0;
+    var emblem=WorkshopUIFactory.Node("ProfileEmblem",holder.transform,typeof(Image)).GetComponent<Image>();
+    WorkshopUIFactory.Fill(emblem.rectTransform);emblem.rectTransform.offsetMin=Vector2.one*13;emblem.rectTransform.offsetMax=Vector2.one*-13;
+    emblem.sprite=game.ModelPrefab.ModelArt;emblem.preserveAspect=true;emblem.raycastTarget=false;
+    var frame=WorkshopUIFactory.Node("ProfileFrame",holder.transform,typeof(Image)).GetComponent<Image>();WorkshopUIFactory.Fill(frame.rectTransform);frame.color=Color.clear;frame.raycastTarget=false;
+    FlowAccent.Attach(frame.transform,game,FlowAccent.Contour.Portrait,GameTheme.Accent);
+    var copy=WorkshopUIFactory.Vertical("ProfileIdentityCopy",row.transform).transform;
+    var name=WorkshopUIFactory.Label("ProfileIdentityText",copy,s.Retention.playerName,21,42);name.font=s.Retention.playerName.All(c=>GameTheme.Display.HasCharacter(c))?GameTheme.Display:GameTheme.Bold;name.alignment=TextAnchor.MiddleLeft;name.resizeTextForBestFit=true;name.resizeTextMinSize=14;name.resizeTextMaxSize=21;
+    var identity=WorkshopUIFactory.Label("ProfileIdentityStatus",copy,(De?"LOKALES PROFIL":"LOCAL PROFILE")+"\n"+(string.IsNullOrEmpty(s.Retention.aiName)?(De?"Dein Labor beginnt hier.":"Your lab starts here."):(De?"KI":"AI")+" · "+s.Retention.aiName),12,52);identity.color=GameTheme.Muted;identity.alignment=TextAnchor.MiddleLeft;
+  }
+  void ProfileStats(GameState s)
+  {
+    var row=WorkshopUIFactory.Horizontal("ProfileStats",content,68);
+    var values=new[]{s.Retention.achievementClaims.Length,s.Retention.artifacts.Length,s.Prestige.resets};
+    var titles=De?new[]{"Erfolgsstufen","Artefakte","Prestiges"}:new[]{"Achievements","Artifacts","Prestiges"};
+    for(int i=0;i<3;i++){
+      var column=WorkshopUIFactory.Vertical("ProfileStat-"+i,row.transform).transform;
+      var value=WorkshopUIFactory.Label("StatValue",column,N(values[i]),19,30);value.font=GameTheme.Display;value.color=GameTheme.Accent;value.alignment=TextAnchor.MiddleCenter;
+      var title=WorkshopUIFactory.Label("StatTitle",column,titles[i],11,26);title.color=GameTheme.Muted;title.alignment=TextAnchor.MiddleCenter;title.resizeTextForBestFit=true;title.resizeTextMinSize=10;title.resizeTextMaxSize=11;
+    }
   }
   void LocalBadgeShowcase(GameState s)
   {
@@ -98,7 +116,7 @@ namespace IdleIntelligence.Runtime
       .Where(x=>x.definition!=null&&x.claims>0)
       .OrderByDescending(x=>x.claims).ThenBy(x=>x.id,StringComparer.Ordinal)
       .Take(3).ToArray();
-    var heading=Paragraph("ProfileBadgeShowcaseTitle",De?"ABZEICHEN · persönlicher Schaukasten":"BADGES · personal showcase",16);
+    var heading=Paragraph("ProfileBadgeShowcaseTitle",De?"DEINE ABZEICHEN":"YOUR BADGES",14);
     heading.GetComponent<LayoutElement>().preferredHeight=42;
     if(available.Length==0)
     {
@@ -117,11 +135,11 @@ namespace IdleIntelligence.Runtime
       caption.resizeTextForBestFit=true;caption.resizeTextMinSize=10;caption.resizeTextMaxSize=12;
     }
     WorkshopUIFactory.Button("ProfileOpenAllBadges",content,"Alle Abzeichen ansehen",()=>Show("badges"));
-    Paragraph("ProfileBadgePrivacy","Diese Ansicht verwendet deinen lokalen Spielstand. Öffentliche Company-Badges und frei wählbare Online-Schaukastenplätze benötigen eine überprüfte Konto-Verknüpfung.");
+
   }
   void BadgeLibrary(GameState s)
   {
-    Paragraph("ProfileBadgeIntro","ABZEICHEN · Bronze / Silber / Gold\nEchte lokale Achievement-Stufen werden hier sichtbar. Die Online-Veröffentlichung erfolgt erst nach sicherer Verifizierung.");
+    Paragraph("ProfileBadgeIntro",De?"DEINE ABZEICHEN\nDeine erreichten Erfolgsstufen werden zu Bronze, Silber und Gold.":"YOUR BADGES\nAchievement tiers grow into bronze, silver and gold badges.");
     foreach(string id in ShowcaseIds)
     {
       var a=RetentionBalance.Achievements.FirstOrDefault(x=>x.Id==id);
@@ -140,15 +158,15 @@ namespace IdleIntelligence.Runtime
   }
 
   [Serializable] sealed class NameCheckReply { public bool available; public string name,reason; }
-  void NameInput(bool ai)
+  void NameInput(bool ai,Transform parent)
   {
-   string key=ai?"AIName":"PlayerName";Paragraph(key+"Label",ai?"KI-Name · einmalig wählen":"Spielernamen ändern");
-   var root=WorkshopUIFactory.Node(key+"Input",content,typeof(Image),typeof(InputField));WorkshopUIFactory.Size(root,54);root.GetComponent<Image>().color=new Color(.1f,.2f,.25f);
+   string key=ai?"AIName":"PlayerName";Paragraph(key+"Label",ai?(De?"KI-Name · einmalig wählen":"AI name · choose once"):(De?"Spielernamen ändern":"Change player name"),14,parent);
+   var root=WorkshopUIFactory.Node(key+"Input",parent,typeof(Image),typeof(InputField));WorkshopUIFactory.Size(root,54);root.GetComponent<Image>().color=GameTheme.Raised;
    var text=WorkshopUIFactory.Label("Value",root.transform,"",16);DestroyImmediate(text.GetComponent<LayoutElement>());WorkshopUIFactory.Fill(text.rectTransform);text.rectTransform.offsetMin=new Vector2(10,0);text.rectTransform.offsetMax=new Vector2(-10,0);var input=root.GetComponent<InputField>();input.textComponent=text;input.text=ai?"":game.State.Retention.playerName;input.interactable=game.Writable;
-   var error=Paragraph(key+"Error"," ");
+   var error=Paragraph(key+"Error","",14,parent);error.gameObject.SetActive(false);
    Button button=null;
-   button=WorkshopUIFactory.Button(key+"Save",content,"Namen speichern",()=>{
-      string desired=input.text;var result=NameRules.Validate(desired,ai?NameBalance.AIMaximum:NameBalance.PlayerMaximum);
+   button=WorkshopUIFactory.Button(key+"Save",parent,De?"Namen speichern":"Save name",()=>{
+      error.gameObject.SetActive(true);string desired=input.text;var result=NameRules.Validate(desired,ai?NameBalance.AIMaximum:NameBalance.PlayerMaximum);
       if(!result.Ok){
          error.text=result.Error=="length"?"Bitte wähle einen Namen mit 2 bis "+(ai?NameBalance.AIMaximum:NameBalance.PlayerMaximum)+" Zeichen.":
            result.Error=="characters"?"Bitte verwende nur Buchstaben, Zahlen, Leerzeichen, - oder _.":"Bitte wähle einen anderen Namen.";

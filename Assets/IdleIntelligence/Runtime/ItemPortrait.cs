@@ -14,9 +14,9 @@ namespace IdleIntelligence.Runtime
         public static Color RarityColor(int rarity){ColorUtility.TryParseHtmlString(ItemBalance.RarityColors[Mathf.Clamp(rarity,0,5)],out var c);return c;}
         public void Bind(ItemInstance item,string family=null,string empty="")
         {
-            Item=item?.Copy();string shape=item!=null?Workshop.Definition(item).Family:(family??"research");Frame.Shape=shape;Frame.color=item!=null?RarityColor(item.rarity):new Color(.3f,.45f,.52f);Frame.SetVerticesDirty();
+            var accent=transform.Find("FlowAccent");if(item==null&&accent!=null)accent.gameObject.SetActive(false);Item=item?.Copy();string shape=item!=null?Workshop.Definition(item).Family:(family??"research");Frame.Shape=shape;Frame.color=item!=null?RarityColor(item.rarity):new Color(.3f,.45f,.52f);Frame.SetVerticesDirty();
             Art.gameObject.SetActive(item!=null);Caption.text=ShowLevel?(item==null?empty:"Lv. "+item.level+(item.locked?" · ◆":"")):"";
-            if(item!=null){int index=Workshop.Index(item.type);Art.sprite=UnityV3Catalog.IsAdded(item.type)?UnityV3PixelArt.Get(item.type):(Sprites!=null&&index>=0&&index<Sprites.Length?Sprites[index]:null);Art.preserveAspect=true;Art.useSpriteMesh=true;}
+            if(item!=null){int index=Workshop.Index(item.type);Art.sprite=UnityV3Catalog.IsAdded(item.type)?UnityV3PixelArt.Get(item.type):(Sprites!=null&&index>=0&&index<Sprites.Length?Sprites[index]:null);Art.preserveAspect=true;Art.useSpriteMesh=true;if(name=="DetailPortrait")FlowAccent.Attach(transform,null,FlowAccent.Contour.Portrait,RarityColor(item.rarity));}
             if(item==null){Art.rectTransform.anchorMin=Art.rectTransform.anchorMax=new Vector2(.5f,ShowLevel ? .585f : .5f);Art.rectTransform.pivot=new Vector2(.5f,.5f);Art.rectTransform.anchoredPosition=Vector2.zero;}LayoutPortrait();
         }
         // Layout can run during RectMask2D culling: never activate/deactivate or rebind graphics here.

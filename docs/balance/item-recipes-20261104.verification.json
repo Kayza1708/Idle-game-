@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-04",
+  "recipe_count": 42,
+  "starter_recipes_unchanged": 6,
+  "regular_recipes_rebalanced": 36,
+  "component_type_limit": 5,
+  "tests": {
+    "edit-initial": {
+      "result": "Failed(Child)",
+      "total": "250",
+      "passed": "247",
+      "failed": "3",
+      "duration": "234.3764372"
+    },
+    "edit-corrected": {
+      "result": "Passed",
+      "total": "10",
+      "passed": "10",
+      "failed": "0",
+      "duration": "3.0449037"
+    },
+    "play-accepted": {
+      "result": "Passed",
+      "total": "4",
+      "passed": "4",
+      "failed": "0",
+      "duration": "23.3271462"
+    },
+    "visual-final": {
+      "result": "Passed",
+      "total": "1",
+      "passed": "1",
+      "failed": "0",
+      "duration": "8.5379751"
+    }
+  },
+  "test_note": "Initial full run 247/250. One mastery rounding issue and two historical price assumptions corrected; 10/10 targeted retests. Full 250 not rerun after targeted correction. Final visual retest only changes test setup, not gameplay.",
+  "native_contracts": "passed against current Unity-compiled Core assembly using bundled Mono",
+  "build_report": "Succeeded\nTarget: StandaloneOSX\nSize: 250638791\nDuration: 00:00:11.5783570\n",
+  "long_term_paid_grind_simulation": "not performed",
+  "sha256": {
+    "Assets/IdleIntelligence/Core/EconomyBalance.cs": "71b9811d22462e6d869b54cc2c2cdf2e6ec541613197afbc0a5ff91645499fba",
+    "Assets/IdleIntelligence/Core/Workshop.cs": "8b947b8e267136730b9f9d0f132d44e1740061cf68fee456f9ce295633f0ba44",
+    "Assets/IdleIntelligence/Runtime/ForgeAnimator.cs": "bc6cdb2221f6d41c8fd7c33de8cde9548904dfeda73c1b4408a0c7f6517ada28",
+    "Assets/IdleIntelligence/Runtime/ForgeSequence.cs": "071a84d30f976a70e34e5068859e63f572ce03248d364f315a5998415a717fc1",
+    "Assets/IdleIntelligence/Runtime/CostStrip.cs": "da1c8bde0e9d9fe0177345f65bc5f1333e406c46719eced3d3e8372c07074f8a",
+    "Assets/IdleIntelligence/Tests/EditMode/EconomyBalanceTests.cs": "26a6401aba640bea5afa7e5ee6110fca711a7de874482e08e080f00937ff1ac4",
+    "Assets/IdleIntelligence/Tests/EditMode/ItemSystemV3Tests.cs": "eabd1c0afaa037037fa70ec315130105a3cf42dc4da2f0c4b7e603ad113cf755",
+    "Assets/IdleIntelligence/Tests/PlayMode/WorkshopTests.cs": "59ed551908f2f6c49d3e015dde9a9a248e1093d1cadd379cb8fbe45f23ddd539",
+    "NativeChecks/RecipeCostProbe.cs": "462042bd6e5d8465b14a409333009c4d2b6f88c4be8c3aa1af69ccae9ff89a4e",
+    "NativeChecks/Smoke.cs": "b62215c87b8aebf3bfec72ae5dd060c452d102c2407e88f95d36648181e0c7dd",
+    "NativeChecks/UnityCoreCheck.csproj": "4c12a10e633aaf3d70ec3ac19f6307ad88cf1a0883dd5139a7a17854a700662c",
+    "docs/balance/item-recipes-20261104.csv": "998e559b7d7e0405dc0ccbbb0b55c523ac3364cd167405aef07b7ba38c1d13fa",
+    "docs/media/item-recipes/de-320-costs.png": "c8a214d8910010e77d268e0a1dc09b63ea6392740195bc38f0655f1263901279",
+    "docs/media/item-recipes/en-390.png": "9be41b5e9dd037a147bab30b0dcd4cb8d4d7ee58616d778ad012c404ea8f5694",
+    "docs/media/item-recipes/de-320.png": "f98a852175dad21f3c7ee2c01109d0f749d02ced1349117b2a6d69ca9487afaf",
+    "docs/media/item-recipes/en-390-costs.png": "79396e3e01428a6d659cd37c52c2a86b49e64b7ff0f3d117e3c9896e606a3e5e"
+  }
+}
