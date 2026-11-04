@@ -43,6 +43,36 @@ namespace IdleIntelligence.PlayTests
             for(int i=0;i<40;i++){Capture(390,844,"/tmp/unity-forge-frames/"+(frame++).ToString("D4")+".png");yield return new WaitForSecondsRealtime(.05f);}
             Assert.That(ui.Forge.Result.Item.id,Is.EqualTo(result));Assert.That(ui.Forge.Result.Frame.color,Is.EqualTo(ItemPortrait.RarityColor(1)));Capture(320,568,"/tmp/unity-forge-compact.png");Capture(390,844,"/tmp/unity-forge-portrait.png");Capture(430,932,"/tmp/unity-forge-large.png");ui.ChangeMode("inventory");yield return null;Capture(390,844,"/tmp/unity-inventory.png");ui.OpenItem(result);yield return null;Capture(390,844,"/tmp/unity-item-detail.png");Capture(320,568,"/tmp/unity-item-detail-compact.png");Click("MoreItemActionsToggle");yield return null;var scroll=ui.DetailRoot.GetComponentInChildren<ScrollRect>();Capture(320,568,"/tmp/unity-item-detail-expanded.png");Assert.That(scroll.content.rect.height,Is.GreaterThan(scroll.viewport.rect.height));scroll.verticalNormalizedPosition=0;Capture(320,568,"/tmp/unity-item-detail-compact-bottom.png");
         }
+        [UnityTest]public IEnumerator FiveMaterialRecipesFitMobileAndFusionReturnsToThreeSlots()
+        {
+            game.Act(s=>NarrativeBridge.Action(s,"name","AURA"));
+            game.Act(s=>{var n=NarrativeBridge.Action(NarrativeBridge.Action(s,"name","AURA"),"skip-tutorial");n.Story.enabled=false;n.Story.open=null;n.Story.queue=Array.Empty<string>();n.Data=ScientificNumber.Parse("1e15");n.Meta.resets=3;n.Research[Game.ResearchIndex("blueprints")]=1;n.Workshop.learned=Enumerable.Repeat(true,ItemBalance.Items.Length).ToArray();n.Workshop.components=Enumerable.Repeat(1000000L,ItemBalance.ComponentIds.Length).ToArray();n.Workshop.modules=Enumerable.Repeat(1000000L,ItemBalance.Modules.Length).ToArray();return n;});
+            Directory.CreateDirectory("/tmp/idle-five-materials");
+            foreach(string locale in new[]{"de","en"})foreach(int width in new[]{320,390,430}){
+                game.Act(s=>{var n=SettingsRules.Change(s,"language",locale).Copy();n.Story.open=null;n.Story.queue=Array.Empty<string>();return n;});PortraitGameView.Set(width,width==320?568:width==390?846:932);game.Show("items");yield return null;
+                var ui=game.WorkshopView;ui.SelectRecipe(Workshop.Index("singularity-lens"));yield return null;Canvas.ForceUpdateCanvases();
+                var quote=Workshop.Quote(game.State,"singularity-lens");Assert.AreEqual(5,quote.Components.Count(v=>v>0));Assert.AreEqual(5,ui.Forge.Inputs.Count(p=>p.gameObject.activeSelf));
+                Assert.AreEqual(8,ui.CostView.transform.childCount,"Five components, data and two modules");
+                var bounds=new Vector3[4];((RectTransform)ui.Forge.transform).GetWorldCorners(bounds);
+                foreach(var slot in ui.Forge.Inputs.Where(p=>p.gameObject.activeSelf)){
+                    var corners=new Vector3[4];((RectTransform)slot.transform).GetWorldCorners(corners);
+                    Assert.GreaterOrEqual(corners[0].x,bounds[0].x-1);Assert.LessOrEqual(corners[2].x,bounds[2].x+1);
+                    Assert.GreaterOrEqual(corners[0].y,bounds[0].y-1);Assert.LessOrEqual(corners[2].y,bounds[2].y+1);
+                }
+                var scroll=ui.GetComponentInParent<ScrollRect>();
+                void Focus(RectTransform target){Canvas.ForceUpdateCanvases();var relative=RectTransformUtility.CalculateRelativeRectTransformBounds(scroll.content,target);float distance=scroll.content.rect.yMax-relative.center.y-scroll.viewport.rect.height*.5f;scroll.verticalNormalizedPosition=1-Mathf.Clamp01(distance/Mathf.Max(1,scroll.content.rect.height-scroll.viewport.rect.height));Canvas.ForceUpdateCanvases();}
+                Focus((RectTransform)ui.Forge.transform);
+                Capture(width,width==320?568:width==390?846:932,"/tmp/idle-five-materials/"+locale+"-"+width+".png");
+                Focus((RectTransform)ui.CostView.transform);Capture(width,width==320?568:width==390?846:932,"/tmp/idle-five-materials/"+locale+"-"+width+"-costs.png");
+                Click("CommitForge");Assert.AreEqual(5,ui.Forge.FlightCount);var sequence=ui.Forge.GetComponentInChildren<ForgeSequence>();Assert.IsNotNull(sequence);Assert.AreEqual(5,sequence.Sources.Count(p=>p.gameObject.activeSelf));
+                ((RectTransform)sequence.transform).GetWorldCorners(bounds);
+                foreach(var slot in sequence.Sources.Where(p=>p.gameObject.activeSelf)){var corners=new Vector3[4];((RectTransform)slot.transform).GetWorldCorners(corners);Assert.GreaterOrEqual(corners[0].x,bounds[0].x-1);Assert.LessOrEqual(corners[2].x,bounds[2].x+1);}
+                ui.Forge.Cancel();
+
+                int count=ui.Forge.Inputs.Length;for(int i=0;i<10;i++)ui.Forge.ShowMaterials(quote.Components,1);Assert.AreEqual(count,ui.Forge.Inputs.Length,"Bounded reusable sockets");
+                ui.ChangeMode("fusion");Assert.AreEqual(3,ui.Forge.Inputs.Count(p=>p.gameObject.activeSelf));
+            }
+        }
         public static void Capture(int width,int height,string path)
         {
             UnityEngine.Object.FindFirstObjectByType<GameRuntime>()?.FlushLocalization();foreach(var label in UnityEngine.Object.FindObjectsByType<UiLocalizedText>(FindObjectsSortMode.None))label.RefreshNow();Canvas.ForceUpdateCanvases();foreach(var label in UnityEngine.Object.FindObjectsByType<AdaptiveTextHeight>(FindObjectsSortMode.None))label.RefreshNow();foreach(var card in UnityEngine.Object.FindObjectsByType<CompactActionCard>(FindObjectsSortMode.None))card.RefreshNow();Canvas.ForceUpdateCanvases();var canvas=UnityEngine.Object.FindObjectsByType<Canvas>(FindObjectsSortMode.None).First(c=>c.isRootCanvas);var positions=UnityEngine.Object.FindObjectsByType<ScrollRect>(FindObjectsSortMode.None).Select(s=>new {scroll=s,position=s.verticalNormalizedPosition}).ToArray();var camera=UnityEngine.Object.FindFirstObjectByType<Camera>();var texture=new RenderTexture(width,height,24);camera.targetTexture=texture;canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=camera;canvas.planeDistance=1;Canvas.ForceUpdateCanvases();foreach(var p in positions)p.scroll.verticalNormalizedPosition=p.position;Canvas.ForceUpdateCanvases();camera.Render();if(path.Contains("idle-mainview-review"))MainViewRepairTests.CheckTextGeometry();if(path.Contains("idle-design2-review")||path.Contains("idle-design-review/detail"))DesignReviewTests.CheckItemTouchTargets(camera);if(path.Contains("idle-design-review/labor"))DesignReviewTests.CheckGeometry(width,height,camera,path);if(path.Contains("unity-int"))File.WriteAllLines(path+".layout.txt",UnityEngine.Object.FindObjectsByType<RectTransform>(FindObjectsSortMode.None).Where(r=>new[]{"PrestigeNetwork(Clone)","NetworkViewport","NetworkWorld","Content","Viewport","INTDetails"}.Contains(r.name)).Select(r=>r.name+" rect="+r.rect+" anchored="+r.anchoredPosition+" parent="+r.parent?.name));var prior=RenderTexture.active;RenderTexture.active=texture;var pixels=new Texture2D(width,height,TextureFormat.RGB24,false);pixels.ReadPixels(new Rect(0,0,width,height),0,0);pixels.Apply();File.WriteAllBytes(path,pixels.EncodeToPNG());RenderTexture.active=prior;camera.targetTexture=null;canvas.renderMode=RenderMode.ScreenSpaceOverlay;UnityEngine.Object.Destroy(pixels);UnityEngine.Object.Destroy(texture);

@@ -83,3 +83,10 @@ UI-Überarbeitung auf Unity-only main übertragen. [Prüfbericht](unity-mobile-u
 
 - [x] Außenring mit eigener fließender violetter Shader-Oberfläche statt Orbit-Linien umgesetzt; Core und Profilname bleiben unverändert.
 - [x] 6/6 gezielte Unity-Tests einschließlich echtem Pixelvergleich und aktueller Bildprüfung bestanden. [Demo und Prüfbericht](dark-matter-ring.md).
+
+## Mehrteilige Item-Rezepte und Grind · 2026-11-04
+
+- [x] Alle 42 Rezepte geprüft: sechs Einstiegsrezepte unverändert, 36 reguläre Materialrezepte zentral neu abgestuft; Midgame 4–5 und spätes Spiel fünf verschiedene Komponenten.
+- [x] Mengen deutlich erhöht; Meisterschaft, atomare Abbuchung aller Zutaten, bezahlte Materialbasis und unveränderte Legacy-Rezepte geprüft. [Preise und Einordnung](economy.md#materialrezepte--4-november-2026).
+- [x] Fünf Plätze in Vorschau und Schmiedeanimation passen bei 320/390/430 Pixeln in DE/EN; Fusion bleibt bei drei Itemplätzen.
+- [ ] Tatsächliche Sammeldauer und Endgame-Loadouts über mehrere Prestige-/Axiomzyklen mit bezahlten Quellen langfristig kalibrieren; die Preistabelle ist kein Stundenversprechen.

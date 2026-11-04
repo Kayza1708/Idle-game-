@@ -7,10 +7,22 @@ namespace IdleIntelligence.Runtime {
   readonly List<GameObject> transient=new List<GameObject>();public RectTransform InventoryTarget;public System.Action<string> ImpactSound;ForgeSequence sequence;Coroutine running;ItemInstance receipt;string language="de";int materialCount=-1;public int PresentedCount{get;private set;}=1;
   public void Shorten(){if(sequence!=null)sequence.Shorten=true;}
   public bool IsAnimating=>running!=null;public int FlightCount{get;private set;}
-  public void Cancel(){if(running!=null)StopCoroutine(running);running=null;if(sequence!=null){sequence.gameObject.SetActive(false);}foreach(var g in transient)if(g!=null){g.SetActive(false);Destroy(g);}transient.Clear();FlightCount=0;Flash.color=Color.clear;for(int n=0;n<Inputs.Length;n++)Inputs[n].gameObject.SetActive(materialCount<0||n<materialCount);if(receipt!=null){Result.Bind(receipt);Result.transform.localScale=Vector3.one;Result.gameObject.SetActive(true);Message.text=UiLocalizedText.Translate("Im Inventar",language)+(PresentedCount>1?" ×"+PresentedCount:"")+" · "+SettingsRules.Text(language,"rarity:"+ItemBalance.Rarities[receipt.rarity]);}}
+  public void Cancel(){if(running!=null)StopCoroutine(running);running=null;if(sequence!=null){sequence.gameObject.SetActive(false);}foreach(var g in transient)if(g!=null){g.SetActive(false);Destroy(g);}transient.Clear();FlightCount=0;Flash.color=Color.clear;for(int n=0;n<Inputs.Length;n++)Inputs[n].gameObject.SetActive(materialCount<0?n<3:n<materialCount);if(receipt!=null){Result.Bind(receipt);Result.transform.localScale=Vector3.one;Result.gameObject.SetActive(true);Message.text=UiLocalizedText.Translate("Im Inventar",language)+(PresentedCount>1?" ×"+PresentedCount:"")+" · "+SettingsRules.Text(language,"rarity:"+ItemBalance.Rarities[receipt.rarity]);}}
   public void ClearPresentation(){Cancel();receipt=null;Result.Bind(null);Result.gameObject.SetActive(false);Message.text="";}
-  public void FusionInputs(){materialCount=-1;for(int i=0;i<Inputs.Length;i++){Inputs[i].ShowLevel=false;((RectTransform)Inputs[i].transform).anchoredPosition=new Vector2((i-1)*104,80);Inputs[i].gameObject.SetActive(true);}}
-  public void ShowMaterials(double[] costs,int quantity){var ids=costs.Select((n,i)=>new{n,i}).Where(v=>v.n>0).ToArray();materialCount=ids.Length;for(int n=0;n<Inputs.Length;n++){var p=Inputs[n];p.ShowLevel=true;p.gameObject.SetActive(n<ids.Length);if(n>=ids.Length)continue;((RectTransform)p.transform).anchoredPosition=new Vector2((n-(Mathf.Min(3,ids.Length)-1)*.5f)*104,80);p.Bind(null);p.Art.gameObject.SetActive(true);p.Art.sprite=Components[ids[n].i];p.Art.preserveAspect=true;p.Art.rectTransform.sizeDelta=new Vector2(42,42);p.Caption.text="×"+(ids[n].n*quantity);}}
+  public void FusionInputs(){materialCount=-1;for(int i=0;i<Inputs.Length;i++){Inputs[i].ShowLevel=false;var rect=(RectTransform)Inputs[i].transform;rect.sizeDelta=new Vector2(94,94);rect.anchoredPosition=new Vector2((i-1)*104,80);Inputs[i].gameObject.SetActive(i<3);}}
+  public void ShowMaterials(double[] costs,int quantity){
+   var ids=costs.Select((n,i)=>new{n,i}).Where(v=>v.n>0).ToArray();materialCount=ids.Length;
+   if(Inputs.Length<Mathf.Min(5,ids.Length)){
+    var slots=Inputs.ToList();while(slots.Count<Mathf.Min(5,ids.Length)){var extra=Instantiate(PortraitPrefab,Inputs[0].transform.parent);extra.name="MaterialSocket"+slots.Count;slots.Add(extra);}Inputs=slots.ToArray();
+   }
+   for(int n=0;n<Inputs.Length;n++){
+    var p=Inputs[n];p.ShowLevel=true;p.gameObject.SetActive(n<ids.Length);if(n>=ids.Length)continue;
+    bool compact=ids.Length>3;int row=n/3,rowCount=Mathf.Min(3,ids.Length-row*3);var rect=(RectTransform)p.transform;
+    rect.sizeDelta=compact?new Vector2(68,72):new Vector2(94,94);
+    rect.anchoredPosition=compact?new Vector2((n%3-(rowCount-1)*.5f)*80,92-row*80):new Vector2((n-(ids.Length-1)*.5f)*104,80);
+    p.Bind(null);p.Art.gameObject.SetActive(true);p.Art.sprite=Components[ids[n].i];p.Art.preserveAspect=true;p.Art.rectTransform.sizeDelta=new Vector2(42,42);p.Caption.text="×"+(ids[n].n*quantity);
+   }
+  }
   void OnDisable()=>Cancel();
   public void Play(ItemInstance[] items,int[] componentIds,ItemInstance result,bool reduced,double[] amounts=null,string locale="de",string improvement=null,int quantity=1){int count=IsAnimating&&receipt?.type==result.type&&receipt.rarity==result.rarity?PresentedCount+quantity:quantity;Cancel();PresentedCount=count;language=locale;receipt=result.Copy();Result.Bind(receipt);Result.gameObject.SetActive(reduced);if(reduced){Cancel();return;}Message.text=UiLocalizedText.Translate("Material wird verbunden …",language);running=StartCoroutine(ComposedFusion(items,result,improvement,componentIds,amounts));}
 
