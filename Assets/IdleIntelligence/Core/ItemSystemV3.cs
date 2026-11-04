@@ -309,7 +309,7 @@ namespace IdleIntelligence.Core
         public static ScientificNumber AnalysisFactor(GameState s)
         {
             if(!Enabled(s))return ScientificNumber.One;Validate(s);var item=Equipped(s).FirstOrDefault(i=>i.type=="field-scanner");if(item==null)return ScientificNumber.One;
-            double p=AbilityStrength(s,item);return ScientificNumber.From(C("scanner.base")).Pow(p).Multiply(ScientificNumber.One.Add(Softcap(ScientificNumber.From(s.ItemSystemV3.scannerAnalyses),C("scanner.threshold")).Times(C("scanner.perAnalysis")*p)));
+            double p=AbilityStrength(s,item);return EconomyBalance.ScannerFactor(p,s.ItemSystemV3.scannerAnalyses);
         }
         public static ScientificNumber FleetFactor(GameState s,ItemInstance item)
         {

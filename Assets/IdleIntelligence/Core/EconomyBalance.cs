@@ -14,12 +14,27 @@ namespace IdleIntelligence.Core
 
         // Native recipe inputs, before the five paid mastery discounts. Frozen legacy tables stay untouched.
         public enum RecipeTier { Mid, Advanced, Campus, Frontier, Lab, Axiom, Apex }
-        static readonly double[] RecipeFactors = { 6, 10, 20, 35, 50, 80, 100 };
+        // Product anchors, not empirical laws: early regular recipe 6 active slot-hours;
+        // late recipe 12 active slot-days with the documented reference upgrades.
+        public const double MidRecipeHours=6,ApexRecipeDays=12;
+        public const double LabRecipeDays=ApexRecipeDays*5/7;
+        public const double ScannerLearningCapMultiplier=4;
+        public static double ScannerLearning(double count)=>Math.Min(ItemSystemV3.Softcap(ScientificNumber.From(count),ItemV3Balance.Get("scanner.threshold")).ToDouble(),ItemV3Balance.Get("scanner.threshold")*ScannerLearningCapMultiplier);
+        public static readonly double RecipeEffortExponent=Math.Log(LabRecipeDays*24/MidRecipeHours)/Math.Log(5);
+        public static double ScannerCapCompletions {get {double k=ItemV3Balance.Get("scanner.threshold"),delta=k*(ScannerLearningCapMultiplier-1);return k+delta*delta/k;}}
+        public static ScientificNumber ScannerFactor(double power,long analyses)=>ScientificNumber.From(ItemV3Balance.Get("scanner.base")).Pow(power).Multiply(ScientificNumber.One.Add(ScientificNumber.From(ScannerLearning(analyses)).Times(ItemV3Balance.Get("scanner.perAnalysis")*power)));
+        public const int ReferenceLevelPerTier=5,ReferenceLabLevelsPerTier=2,ReferenceScannerAnalysesPerTier=5;
+        public static double RecipeTargetSeconds(RecipeTier tier,double exponent=-1)=>
+            Math.Min(MidRecipeHours*3600*Math.Pow((int)tier+1,exponent<0?RecipeEffortExponent:exponent),ApexRecipeDays*86400*((int)tier+1)/7);
         static readonly double[] RecipeMastery = { 100, 95, 90, 85, 80 };
         sealed class RecipePlan
         {
             public RecipeTier Tier;
             public double[] Inputs;
+            public double Scale;
+            public MaterialSource[] Sources;
+            public MaterialSource[][] Policies;
+            public MaterialEffortQuote[] UnitPlans;
         }
         static RecipePlan Plan(RecipeTier tier,params object[] pairs)
         {
@@ -69,10 +84,62 @@ namespace IdleIntelligence.Core
         public static double[] CraftComponents(bool nativeV3,ItemDefinition definition,int mastery)
         {
             if(!nativeV3||!Recipes.TryGetValue(definition.Id,out var plan))return (double[])definition.Components[mastery].Clone();
-            double factor=RecipeFactors[(int)plan.Tier];
-            // Integer percentages avoid ceil(480.0000000000001) charging an extra part.
-            return plan.Inputs.Select(amount=>Math.Ceiling(amount*factor*RecipeMastery[mastery]/100)).ToArray();
+            EnsureEffort(plan,definition.Id);
+            // Round the base recipe once; integer percentages keep mastery consistent.
+            return plan.Inputs.Select(amount=>Math.Ceiling(Math.Ceiling(amount*plan.Scale)*RecipeMastery[mastery]/100)).ToArray();
         }
+
+        // Stable reference progress depends on tier/recipe, never the player's wallet or income.
+        public static GameState MaterialReference(RecipeTier tier,int maximumFamily,string first,string second=null)
+        {
+            int t=(int)tier;var s=new GameState{ItemSystemV3=new ItemV3State()};
+            s.Research[Game.ResearchIndex("blueprints")]=1;
+            s.Research[Game.ResearchIndex("materialAnalysis")]=Math.Max(t,maximumFamily>=4?10:maximumFamily>=2?3:0);
+            s.Research[Game.ResearchIndex("blueprintAnalysis")]=maximumFamily>=3?5:3;
+            s.Research[Game.ResearchIndex("labAutomation")]=ReferenceLabLevelsPerTier*t;
+            s.Workshop.nodes=t==0?Array.Empty<string>():new[]{"W03","W06","W08","F03"};
+            s.ItemSystemV3.scannerAnalyses=ReferenceScannerAnalysesPerTier*t;
+            s.ItemSystemV3.componentsProduced=ScientificNumber.From(Math.Pow(10,t));
+            s.Meta.axioms[Array.FindIndex(MetaBalance.Axioms,d=>d.Id=="C06")]=t>=3?1:0;
+            var ids=second==null?new[]{first}:new[]{first,second};
+            s.Workshop.inventory=ids.Select((id,i)=>new ItemInstance{id="reference-"+i,type=id,rarity=Math.Min(3,t/2),level=1+ReferenceLevelPerTier*t}).ToArray();
+            s.Workshop.equipped[2]=s.Workshop.inventory[0].id;if(second!=null)s.Workshop.equipped[5]=s.Workshop.inventory[1].id;
+            return s;
+        }
+        static void EnsureEffort(RecipePlan plan,string id)
+        {
+            if(plan.Scale>0)return;
+            int family=Enumerable.Range(0,plan.Inputs.Length).Where(c=>plan.Inputs[c]>0).Max(MaterialAnalysis.Family);
+            var all=new List<MaterialSource>();
+            string[] equipment={"field-scanner","precision-scanner","photonic-analyzer","quantum-diagnostic-module","synthesis-coordinator"};
+            // Only equipment available earlier than this recipe, never the item being priced.
+            var available=equipment.Where(e=>e!=id&&(e=="field-scanner"||(int)plan.Tier>=1&&(e=="precision-scanner"||e=="synthesis-coordinator")||(int)plan.Tier>=3)).ToArray();
+            for(int a=0;a<available.Length;a++){
+                all.AddRange(MaterialEffort.Sources(MaterialReference(plan.Tier,family,available[a]),available[a]));
+                if((int)plan.Tier==0)continue;
+                for(int b=a+1;b<available.Length;b++)all.AddRange(MaterialEffort.Sources(MaterialReference(plan.Tier,family,available[a],available[b]),available[a]+"+"+available[b]));
+            }
+            plan.Policies=new[]{all.ToArray(),all.Where(s=>!s.Id.Contains("-long:")).ToArray(),all.Where(s=>!s.Id.Contains("-short:")).ToArray()}.Select(s=>MaterialEffort.Prune(plan.Inputs,s)).ToArray();
+            plan.UnitPlans=plan.Policies.Select(s=>MaterialEffort.Quote(plan.Inputs,s)).ToArray();
+            double target=RecipeTargetSeconds(plan.Tier),low=0,high=1;
+            while(PlanSeconds(plan,high)<target)high*=2;
+            for(int step=0;step<64;step++){double middle=(low+high)/2;if(PlanSeconds(plan,middle)<target)low=middle;else high=middle;}
+            plan.Scale=high;int selected=Enumerable.Range(0,plan.Policies.Length).OrderBy(i=>MaterialEffort.LearningSeconds(plan.Policies[i],plan.UnitPlans[i].SourceSeconds,high)).First();plan.Sources=plan.Policies[selected];
+        }
+        static double PlanSeconds(RecipePlan plan,double scale)=>Enumerable.Range(0,plan.Policies.Length).Min(i=>MaterialEffort.LearningSeconds(plan.Policies[i],plan.UnitPlans[i].SourceSeconds,scale));
+        public static double RecipeLearningSeconds(string id,int mastery=0)
+        {
+            var plan=Recipes[id];EnsureEffort(plan,id);var costs=CraftComponents(true,ItemBalance.Items[Workshop.Index(id)],mastery);
+            return plan.Policies.Min(s=>MaterialEffort.LearningSeconds(s,MaterialEffort.Quote(costs,s).SourceSeconds));
+        }
+        public static RecipeTier? TierOf(string id)=>Recipes.TryGetValue(id,out var plan)?plan.Tier:(RecipeTier?)null;
+        public static MaterialEffortQuote RecipeEffort(string id,int mastery=0)
+        {
+            if(!Recipes.TryGetValue(id,out var plan))throw new ArgumentException("No regular recipe");
+            EnsureEffort(plan,id);var d=ItemBalance.Items[Workshop.Index(id)];
+            return MaterialEffort.Quote(CraftComponents(true,d,mastery),plan.Sources);
+        }
+        public static MaterialSource[] RecipeSources(string id){var plan=Recipes[id];EnsureEffort(plan,id);return plan.Sources.Select(s=>new MaterialSource{Id=s.Id,PerSecond=(double[])s.PerSecond.Clone(),DataPerSecond=s.DataPerSecond,JobSeconds=s.JobSeconds,ScannerPower=s.ScannerPower,ScannerCount=s.ScannerCount}).ToArray();}
 
         // Pure quote helpers: no production-dependent prices or state mutation.
         public static ScientificNumber ResearchFactor(bool nativeV3, int level) =>

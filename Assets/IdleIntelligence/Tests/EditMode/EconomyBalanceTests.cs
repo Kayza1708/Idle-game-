@@ -50,7 +50,7 @@ namespace IdleIntelligence.Tests
             var s=Game.NewV3(1000,"five-input-payment",true);const string id="singularity-lens";
             s.Meta.resets=3;s.Research[Game.ResearchIndex("blueprints")]=1;s.Workshop.learned[Workshop.Index(id)]=true;s.Workshop.nodes=new[]{"W07"};
             s.Data=ScientificNumber.Parse("1e15");s.Workshop.modules=Enumerable.Repeat(1000000L,s.Workshop.modules.Length).ToArray();
-            s.Workshop.components=Enumerable.Repeat(1000000L,s.Workshop.components.Length).ToArray();
+            s.Workshop.components=Enumerable.Repeat(1000000000L,s.Workshop.components.Length).ToArray();
             var single=Workshop.Quote(s,id);var batch=Workshop.BatchQuote(s,id,3);Assert.IsTrue(batch.Allowed);Assert.AreEqual(5,single.Components.Count(v=>v>0));
             for(int c=0;c<single.Components.Length;c++)if(single.Components[c]>0){
                 var missing=s.Copy();missing.Workshop.components[c]=(long)single.Components[c]-1;Assert.AreSame(missing,Workshop.Craft(missing,id),"missing ingredient "+c);
@@ -58,7 +58,7 @@ namespace IdleIntelligence.Tests
             }
             var made=Workshop.CraftBatch(s,id,3);Assert.AreEqual(3,made.Workshop.inventory.Length);
             for(int c=0;c<single.Components.Length;c++){Assert.AreEqual(s.Workshop.components[c]-batch.Components[c],made.Workshop.components[c]);Assert.AreEqual(single.Components[c],made.Workshop.inventory[0].materialBasis[c]);}
-            Assert.AreEqual(1000000,s.Workshop.components[9],"input remains pure");Assert.DoesNotThrow(()=>Game.Validate(made));
+            Assert.AreEqual(1000000000,s.Workshop.components[9],"input remains pure");Assert.DoesNotThrow(()=>Game.Validate(made));
         }
         [Test] public void ResearchDebitsExactlyItsQuoteAndRecordsThePaidReceipt()
         {

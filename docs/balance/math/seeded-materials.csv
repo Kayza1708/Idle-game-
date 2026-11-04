@@ -1,0 +1,10 @@
+item,seed,days,jobs,data_spent,kind
+darklab-resonator,1,8.65113519883908,342,10854400,prepared_material_only
+darklab-resonator,1708,8.65113519883908,342,10854400,prepared_material_only
+darklab-resonator,9157,8.71534553060263,344,10950400,prepared_material_only
+axiom-anchor,1,10.349174966691496,640,16608000,prepared_material_only
+axiom-anchor,1708,10.316823676048974,638,16554000,prepared_material_only
+axiom-anchor,9157,10.372283031436156,640,16650000,prepared_material_only
+singularity-lens,1,12.058085730806201,534,25632000,prepared_material_only
+singularity-lens,1708,12.018368676439586,532,25536000,prepared_material_only
+singularity-lens,9157,12.038227203622894,533,25584000,prepared_material_only

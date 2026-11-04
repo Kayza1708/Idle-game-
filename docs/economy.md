@@ -1,5 +1,7 @@
 # Native Unity V3 · Balance-Fassung 2026-11-03
 
+**Aktueller Stand:** Das [mathematische Wirtschaftsmodell](economy-math.md) ersetzt die Materialstaffel des früheren Entwurfs durch aus Beschaffungszeiten abgeleitete Preise. Ziel für spätes Spiel: ungefähr 1–2 Wochen im dokumentierten Referenzmodell. Ältere Zahlen unten sind historische Zwischenstände.
+
 Neue Balance-Anpassungen werden ausschließlich in `Assets/IdleIntelligence/Core/EconomyBalance.cs` gepflegt (vom Nutzer ausdrücklich als Ersatz für die entfallene `src/economy.ts` freigegeben). Bestehende generierte Tabellen bleiben als historische Grundwerte/Legacy-Kompatibilität erhalten. Keine parallele Web-Spielversion.
 
 | Neue Aktion | Änderung gegenüber bisher |

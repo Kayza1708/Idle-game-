@@ -381,7 +381,7 @@ namespace IdleIntelligence.Tests
         [Test]public void ScannerSoftcapCopiesAndNoItemsUseActualAnalysisRateOnly()
         {
             var s=Game.New(1000);s.ItemSystemV3=new ItemV3State();s.Workshop.inventory=new[]{new ItemInstance{id="prepared-scanner",type="field-scanner"}};s=Workshop.Equip(s,"prepared-scanner","research");
-            foreach(long count in new long[]{0,24,25,26,1000000}){s.ItemSystemV3.scannerAnalyses=count;double soft=count<=25?count:25+Math.Sqrt((count-25)*25);Assert.That(MaterialAnalysis.Speed(s),Is.EqualTo(2*(1+.05*soft)).Within(1e-8));Assert.That(MaterialAnalysis.BaseSpeed(s),Is.EqualTo(1));var copy=s.Copy();copy.ItemSystemV3.scannerAnalyses++;Assert.That(s.ItemSystemV3.scannerAnalyses,Is.EqualTo(count));}
+            foreach(long count in new long[]{0,24,25,26,1000000}){s.ItemSystemV3.scannerAnalyses=count;double soft=Math.Min(100,count<=25?count:25+Math.Sqrt((count-25)*25));Assert.That(MaterialAnalysis.Speed(s),Is.EqualTo(2*(1+.05*soft)).Within(1e-8));Assert.That(MaterialAnalysis.BaseSpeed(s),Is.EqualTo(1));var copy=s.Copy();copy.ItemSystemV3.scannerAnalyses++;Assert.That(s.ItemSystemV3.scannerAnalyses,Is.EqualTo(count));}
             s.Challenges.Run=new ChallengeRun{id="no-items",stage=1};Assert.That(MaterialAnalysis.Speed(s),Is.EqualTo(1));s.Challenges.Run=null;
             foreach(bool axiom in new[]{false,true}){var copy=s.Copy();ItemSystemV3.ResetProduction(copy,axiom);Assert.That(copy.ItemSystemV3.scannerAnalyses,Is.Zero);}
             s.ItemSystemV3.scannerAnalyses=-1;Assert.Throws<FormatException>(()=>ItemSystemV3.Validate(s));

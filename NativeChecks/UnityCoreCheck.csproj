@@ -13,6 +13,7 @@
     <Compile Include="V3FreshCampaignChecks.cs" />
     <Compile Include="V3BalanceProbe.cs" />
     <Compile Include="RecipeCostProbe.cs" />
+    <Compile Include="EconomyMathAudit.cs" />
     <Compile Include="V3CombinationChecks.cs" />
     <Compile Include="V3ProgressionContracts.cs" />
     <Compile Include="V3OnlineLiveOpsChecks.cs" />

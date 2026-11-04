@@ -46,7 +46,7 @@ namespace IdleIntelligence.PlayTests
         [UnityTest]public IEnumerator FiveMaterialRecipesFitMobileAndFusionReturnsToThreeSlots()
         {
             game.Act(s=>NarrativeBridge.Action(s,"name","AURA"));
-            game.Act(s=>{var n=NarrativeBridge.Action(NarrativeBridge.Action(s,"name","AURA"),"skip-tutorial");n.Story.enabled=false;n.Story.open=null;n.Story.queue=Array.Empty<string>();n.Data=ScientificNumber.Parse("1e15");n.Meta.resets=3;n.Research[Game.ResearchIndex("blueprints")]=1;n.Workshop.learned=Enumerable.Repeat(true,ItemBalance.Items.Length).ToArray();n.Workshop.components=Enumerable.Repeat(1000000L,ItemBalance.ComponentIds.Length).ToArray();n.Workshop.modules=Enumerable.Repeat(1000000L,ItemBalance.Modules.Length).ToArray();return n;});
+            game.Act(s=>{var n=NarrativeBridge.Action(NarrativeBridge.Action(s,"name","AURA"),"skip-tutorial");n.Story.enabled=false;n.Story.open=null;n.Story.queue=Array.Empty<string>();n.Data=ScientificNumber.Parse("1e15");n.Meta.resets=3;n.Research[Game.ResearchIndex("blueprints")]=1;n.Workshop.learned=Enumerable.Repeat(true,ItemBalance.Items.Length).ToArray();n.Workshop.components=Enumerable.Repeat(1000000000L,ItemBalance.ComponentIds.Length).ToArray();n.Workshop.modules=Enumerable.Repeat(1000000L,ItemBalance.Modules.Length).ToArray();return n;});
             Directory.CreateDirectory("/tmp/idle-five-materials");
             foreach(string locale in new[]{"de","en"})foreach(int width in new[]{320,390,430}){
                 game.Act(s=>{var n=SettingsRules.Change(s,"language",locale).Copy();n.Story.open=null;n.Story.queue=Array.Empty<string>();return n;});PortraitGameView.Set(width,width==320?568:width==390?846:932);game.Show("items");yield return null;
@@ -72,6 +72,11 @@ namespace IdleIntelligence.PlayTests
                 int count=ui.Forge.Inputs.Length;for(int i=0;i<10;i++)ui.Forge.ShowMaterials(quote.Components,1);Assert.AreEqual(count,ui.Forge.Inputs.Length,"Bounded reusable sockets");
                 ui.ChangeMode("fusion");Assert.AreEqual(3,ui.Forge.Inputs.Count(p=>p.gameObject.activeSelf));
             }
+            game.Act(s=>{var n=SettingsRules.Change(s,"language","de").Copy();n.ItemSystemV3.scannerAnalyses=1000;n.Workshop.inventory=n.Workshop.inventory.Concat(new[]{new ItemInstance{id="scanner-proof",type="field-scanner",missingMaterialBasis=true}}).ToArray();return n;});
+            game.Act(s=>{var n=s.Copy();n.Story.open=null;n.Story.queue=Array.Empty<string>();return n;});PortraitGameView.Set(390,846);game.Show("items");yield return null;game.WorkshopView.OpenItem("scanner-proof");yield return null;
+            var scanner=game.State.Workshop.inventory.First(i=>i.id=="scanner-proof");
+            foreach(string language in SettingsCatalog.Languages){var localized=game.State.Copy();localized.Settings.language=language;string text=ItemDetailsUI.Text(localized,scanner);StringAssert.Contains("250",text);Assert.IsFalse(text.Contains("{value}")||text.Contains("{cap}"),language);}
+            Capture(390,846,"/tmp/idle-five-materials/scanner-cap-de-390.png");
         }
         public static void Capture(int width,int height,string path)
         {

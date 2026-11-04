@@ -89,3 +89,11 @@ UI-Überarbeitung auf Unity-only main übertragen. [Prüfbericht](unity-mobile-u
 - [x] Mengen deutlich erhöht; Meisterschaft, atomare Abbuchung aller Zutaten, bezahlte Materialbasis und unveränderte Legacy-Rezepte geprüft. [Preise und Einordnung](economy.md#materialrezepte--4-november-2026).
 - [x] Fünf Plätze in Vorschau und Schmiedeanimation passen bei 320/390/430 Pixeln in DE/EN; Fusion bleibt bei drei Itemplätzen.
 - [ ] Tatsächliche Sammeldauer und Endgame-Loadouts über mehrere Prestige-/Axiomzyklen mit bezahlten Quellen langfristig kalibrieren; die Preistabelle ist kein Stundenversprechen.
+
+## Mathematisches Wirtschaftsmodell · 2026-11-04
+
+- [x] Produktions-, Preis-, Forschungs-, Trainings-, Item- und Prestigeformeln dokumentiert; Hardware-/Forschungs-/Exponenten-Audit reproduzierbar hinterlegt. [Modell](economy-math.md).
+- [x] Freie Materialstaffel durch inverse Kalibrierung aus Quellenoptimierung, Lernkurve und Tier-Zeitziel ersetzt; bis fünf Zutaten, sechs Starterrezepte erhalten.
+- [x] Neun echte Materialbeschaffungsläufe mit drei Seeds und vorfinanzierten Daten: späte Beispiele 8,65–12,06 Tage. Kein vollständiger Kampagnenbeweis; Herkunft der Testmittel ist dokumentiert.
+- [x] Scanner-Lernbonus begrenzt, echte Zähler erhalten; Überlauf bei extremen Trainingsleveln abgesichert. 257/257 finale EditMode-Tests und 4/4 Schmiede-PlayMode-Tests bestanden.
+- [ ] Vollständig bezahlte Kampagnen bis zu mehreren Axiomzyklen, verschiedene Offline-Besuchsrhythmen und maximale Loadouts weiter abnehmen. Material-Referenztests ersetzen diese offene Aufgabe nicht.
